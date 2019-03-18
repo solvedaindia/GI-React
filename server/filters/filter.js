@@ -4,6 +4,10 @@ const cartFilter = require('./cartfilter');
 const profileFilter = require('./profilefilter');
 const wishlistFilter = require('./wishlistfilter');
 
+/**
+ * Filter Data.
+ * @return Filtered Data
+ */
 module.exports.filterData = function filterData(filterType, data) {
   if (filterType === 'espotcontent') {
     return espotFilter.content(data);

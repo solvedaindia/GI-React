@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const usersHandler = require('../../handlers/usershandler');
 const loginHandler = require('../../handlers/loginhandler');
 
 /* Guest User Login */
@@ -33,7 +32,7 @@ router.post('/user', (req, res, next) => {
 
 /* Social Login */
 router.post('/sociallogin', (req, res, next) => {
-  usersHandler.socialLogin(req.body, req.headers, (err, result) => {
+  loginHandler.socialLogin(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

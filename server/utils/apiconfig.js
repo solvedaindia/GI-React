@@ -11,18 +11,20 @@ exports.getEnvHostName = function hostName() {
     apiVersion = `/${process.env.APIVERSION}`;
   }
   const hostname = {};
+  // eslint-disable-next-line default-case
   switch (envName) {
     case 'LOCAL':
-      hostname['secure'] = 'https://localhost:' + port + '/api' + apiVersion + '/secure';
-      hostname['nonsecure'] = 'http://localhost:' + port + '/api' + apiVersion;
+      hostname.secure = `https://localhost:${port}/api${apiVersion}/secure`;
+      hostname.nonsecure = `http://localhost:${port}/api${apiVersion}`;
       break;
   }
-  hostname['endPoint'] = envName;
+  hostname.endPoint = envName;
   return hostname;
-}
+};
 
 function normalizePort(val) {
-  let port = parseInt(val, 10);
+  const port = parseInt(val, 10);
+  // eslint-disable-next-line no-restricted-globals
   if (isNaN(port)) {
     return val;
   }
@@ -31,60 +33,21 @@ function normalizePort(val) {
   }
   return false;
 }
-
-
-/*
-exports.getPort = function(){
-    let port = normalizePort(process.env.PORT || '80');
-    return port;}
-exports.getHostName = function(){
-    let hostName = normalizeHost(process.env.HOST || 'localhost');
-    return hostName;} */
-exports.getEndPoint = function () {
+exports.getEndPoint = function getEndPoint() {
   let endPoint = '';
   if (process.env.WCSENDPOINT) {
     endPoint = process.env.WCSENDPOINT;
   } else {
-    endPoint = "LOCAL";
+    endPoint = 'LOCAL';
   }
-  let endpointConfigURL = {};
+  const endpointConfigURL = {};
+  // eslint-disable-next-line default-case
   switch (endPoint) {
     case 'LOCAL':
-      endpointConfigURL['hostname'] = '192.168.0.39';
-      endpointConfigURL['searchHostname'] = '192.168.0.39:3738';
+      endpointConfigURL.hostname = '192.168.0.39';
+      endpointConfigURL.searchHostname = '192.168.0.39:3738';
       break;
   }
-  endpointConfigURL['endPoint'] = endPoint;
+  endpointConfigURL.endPoint = endPoint;
   return endpointConfigURL;
-}
-/*function normalizePort(val) {
-  let port = parseInt(val, 10);
-  if (isNaN(port)) {
-    return val;}
-  if (port >= 0) {
-    return port;}
-  return false;}
-
-function normalizeEndPoint(val) {
-  let hostName = val;
-  if (isNaN(hostName)) {
-    return val;}
-  if (hostName.length >= 0) {
-    return hostName;}
-  return false;
-}
-
-
-
-exports.getTestHostName = function(version){
-
-    switch(version){
-
-        case "v2":
-                version = 'v2';
-                break;
-        default:
-                version = 'v1';
-    }
-    return 'localhost:8002/api/' + version;
-}*/
+};

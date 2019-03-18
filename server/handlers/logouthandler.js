@@ -1,6 +1,7 @@
 const constants = require('../utils/constants');
-const errorconfig = require('../utils/errorconfig.js');
- const logger = require('../utils/logger.js');
+const headerutil = require('../utils/headerutil.js');
+const errorutils = require('../utils/errorutils.js');
+const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 
 /**
@@ -10,19 +11,17 @@ const origin = require('../utils/origin.js');
  * @throws : notoken or tokenexpired in case of wctokens expired or missing
  */
 module.exports.logout = function logout(headers, callback) {
-  const reqHeader = {
-    WCToken: headers.WCToken,
-    WCTrustedToken: headers.WCTrustedToken,
-  };
+  logger.debug('Call to logout API');
+  const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const originLoginURL = `${constants.login.replace(
     '{{storeId}}',
     headers.storeId,
-  )}/@self`;
+  )}/loginidentity/@self`;
   origin.getResponse(
     'DELETE',
     originLoginURL,
-    reqHeader,
+    reqHeaders,
     null,
     null,
     null,
@@ -32,15 +31,11 @@ module.exports.logout = function logout(headers, callback) {
         if (response.status === 200) {
           callback(null, { message: 'Logout Successful' });
         } else {
-          errorconfig.handleWCSError(response.status, response.body, callback);
+          callback(errorutils.handleWCSError(response));
         }
       } else {
         logger.error('Error while calling logout API', response.status);
-        callback(
-          errorconfig.formatErrorObject(
-            errorconfig.errorlist.error_502.service_invalid_response,
-          ),
-        );
+        callback(errorutils.handleWCSError(response));
       }
     },
   );

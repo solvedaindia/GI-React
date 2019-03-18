@@ -41,12 +41,27 @@ const errorlist = {
     error_key: 'wcs_invalid_response',
     error_message: 'Invalid Response From WCS.',
   },
-  generic: {
-    invalid_params: {
-      status_code: 400,
-      error_key: 'invalid_params',
-      error_message: 'Some params might be missing',
-    },
+  user_exists: {
+    status_code: 400,
+    error_key: 'user_exists',
+    error_message:
+      'EmailID/Mobile Number entered is already registered with us .Please use forgot password link to reset password',
+  },
+  invalid_password_format: {
+    status_code: 400,
+    error_key: 'invalid_password_format',
+    error_message:
+      'Invalid Password. Password should have min 6 characters and atleast 1 number',
+  },
+  otp_incorrect: {
+    status_code: 400,
+    error_key: 'otp_incorrect',
+    error_message: 'OTP entered is Incorrect.',
+  },
+  otp_incorrect_limit_exceed: {
+    status_code: 400,
+    error_key: 'otp_incorrect_limit_exceed',
+    error_message: 'You have exceeded the maximum number of attempts 3.',
   },
   wishlist: {
     listid_missing: {
@@ -76,7 +91,6 @@ module.exports.handleWCSError = function handleWCSError(response) {
     logger.error(`No Error code specify from WCS${JSON.stringify(errBody)}`);
     return errorlist.wcs_invalid_response;
   }
-
   if (statusCode >= 400 && statusCode < 500) {
     if (statusCode === 400) {
       if (
@@ -111,11 +125,10 @@ module.exports.handleWCSError = function handleWCSError(response) {
         };
       }
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
-        return {
-          status_code: 400,
-          error_key: 'otp_incorrect',
-          error_message: errBody.errors[0].errorMessage,
-        };
+        return errorlist.otp_incorrect;
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_OTP_RETRIES') {
+        return errorlist.otp_incorrect_limit_exceed;
       }
       if (
         errBody.errors[0].errorKey ===
@@ -123,12 +136,16 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey ===
           '_ERR_AUTHENTICATION_MINIMUMDIGITS_PASSWORD'
       ) {
-        return {
-          status_code: 400,
-          error_key: 'invalid_password',
-          error_message:
-            'Invalid Password. Password should have min 6 characters and atleast 1 number',
-        };
+        return errorlist.invalid_password_format;
+      }
+      if (
+        errBody.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        errBody.errors[0].errorKey === 'ERROR_USER_EXISTS'
+      ) {
+        return errorlist.user_exists;
+      }
+      if (errBody.errors[0].errorKey === 'CWXBB1012E') {
+        return errorlist.token_expired;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||
@@ -172,25 +189,13 @@ const wcsErrorList = {
     _ERR_AUTHENTICATION_ERROR: {
       status_code: 400,
       error_key: 'invalid_credentials',
-      error_message:
-        'The specified user_id or password are not correct. Verify the information provided and log in again.',
-      // 'LogonId or Password is incorrect',
+      error_message: 'LogonId or Password is incorrect',
     },
     _ERR_PERSON_ACCOUNT_DISABLED: {
       status_code: 400,
       error_key: 'account_locked',
       error_message:
         'Your Account is temporarily locked. Please try again after 15 minutes.',
-    },
-    _ERR_LOGONID_ALREDY_EXIST: {
-      status_code: 400,
-      error_key: 'user_exists',
-      error_message: 'User already exists.',
-    },
-    ERROR_USER_EXISTS: {
-      status_code: 400,
-      error_key: 'user_exists',
-      error_message: 'User already exists.',
     },
     _ERR_GIFTLIST_ITEM_NOT_FOUND: {
       status_code: 400,
@@ -219,7 +224,7 @@ const wcsErrorList = {
     },
     ERROR_MOBILE_EMAIL_INVALID: {
       status_code: 400,
-      error_key: 'ERROR_MOBILE_EMAIL_INVALID',
+      error_key: 'userid_invalid_format',
       error_message: 'Please enter valid Email Id/Mobile number.',
     },
     ERROR_USER_DOES_NOT_EXIST_ON_FORGOT_PASSWORD: {

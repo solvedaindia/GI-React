@@ -1,6 +1,6 @@
 .category{
     height: 69px;
-    padding: 15px 32px;
+    padding-left: 32px;
     display: flex;
     align-items: center;
 }
@@ -9,10 +9,13 @@
     width: 50%;
     display: inline-block;
     .listItems {
-        padding-right: 40px;
+        padding: 28px 40px 28px 0;
         font-size: 12px;
         .action:hover {
             color: #ee4060;
         }
+    }
+    .rightSide{
+        margin-bottom: 0;
     }
 }

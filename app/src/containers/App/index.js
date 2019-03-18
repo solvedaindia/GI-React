@@ -20,7 +20,7 @@ import HeaderContainer from '../HeaderContainer/index';
 import ClpContainer from '../ClpContainer/index';
 import PlpContainer from '../PlpContainer/index';
 import FooterContainer from '../FooterContainer/footer';
-import RegisterNow from '../../components/RegisterComponent/joinUs';
+import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import '../../../public/styles/app.scss';
 //import { accessTokenCookie } from '../../../public/constants/constants';
@@ -52,9 +52,7 @@ export default class App extends React.Component {
     }
     else {
       /* Check if User is logged in or Guest - Hit API accordingly */
-      if (isLoggedIn) {
-
-      }
+      if (isLoggedIn) {}
       else {
         registerGuestUser(this.guestLoginCallback);
       }
@@ -62,10 +60,9 @@ export default class App extends React.Component {
   }
 
   guestLoginCallback(token) {
-    //console.log('API Token: ' + token);
     if (token != '') {
-      this.setState({ accessToken: token });
       getTheAccessToken(token);
+      this.setState({ accessToken: token });
     }
     else { }
   }

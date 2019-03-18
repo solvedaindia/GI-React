@@ -52,7 +52,6 @@ class ForgotPasswordEmailMobile extends React.Component {
             }
         }
 
-        console.log('Avilabeltookens---',accessToken)
         this.setState({
             isValidate: true,
         });
@@ -78,6 +77,7 @@ class ForgotPasswordEmailMobile extends React.Component {
 
     handleInputChange(text) {
         this.setState({
+            error: false,
             inputText: text.target.value,
         });
     }

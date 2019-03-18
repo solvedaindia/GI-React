@@ -1,35 +1,64 @@
-footer .col5 > div:last-child {width: 27%;}
-footer{padding:40px 0; border-top: 1px solid #e1e3e5;}
-footer  h3{font-size: 14px;padding-bottom: 15px;text-transform: uppercase; padding-top: 15px; color: #5f5b5b;}
-footer ul li{padding:5px 0;text-transform: capitalize}
-footer ul li a, .newsletterList{color: #8c8d8e}
-.newSubscribe input{border:1px solid #e1e3e5}
-.newSubscribe{padding-top:15px}
-.newSubscribe button{background: #424b5a;color: #fff; border: none;padding: 10px 15px; border-radius: 0px 4px 4px 0px; text-transform: uppercase;}
-.social-Link {padding-top:40px; text-align: center; width: 100%}
-.social-Link ul li{display: inline-block;}
-.social-Link ul li a{display:block;padding: 10px 13px;}
-.social-Link ul li a i{font-size: 18px;color: #424b5a}
-.floatLeft{ float: left; }
-.form-control.borderRadius, .btn.borderRadius{ border-radius: 0; }
-.text-center{ text-align: center}
-.newsletterForm Form{ color: #454545}
-@media (min-width: 276px) {
-    .newsletterList .form-inline .form-control {
-        display: inline-block;
-        width: auto;
-        vertical-align: middle;
-        width:70%
-    }
 
-    .newsletterList .form-inline button {
-        display: inline-block;
-        width:30%;
-    }
-}
-.newsletterList li form button {
-    background-color: #454545;
-    color: #ffffff;
-    border-radius: 3px;
-}
+@import '../app.scss';
+.footer{
+ background:$colorblue;
+ padding:40px 0;
+ .newsletterList{
+     padding:0 0 15px 0;
+     .form-inline{
+        position: relative;
+     
+     .email_input{
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid $colorwhite;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 45px 0 0;
+        opacity: 0.45;
+        color: $colorwhite;
+        width: 100%;
 
+        &:focus{
+            outline: none;           
+            box-shadow: 0 0 0 0rem rgba(159, 159, 159, 0.2) !important;
+            }
+        
+    }
+    .form-control:focus{box-shadow: 0}
+        .btn-emailsubmit{
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            right: 0;
+            &:focus{
+                outline: none;           
+                box-shadow: 0 0 0 0rem rgba(159, 159, 159, 0.2) !important;
+                }
+        }
+    }
+ }
+ .social-Link{
+     .list{
+         display: inline;        
+     }
+ }
+ .heading{
+     color:$colorwhite;
+     font-family: $font-bold; 
+     opacity: 0.23;
+     margin: 0;
+     padding: 0 0 15px 0;
+     font-size: 22px;
+    }
+ .list{ 
+     color:$colorwhite;line-height: 2;
+     .link{
+         color:$colorwhite;
+         text-decoration: none;
+        }
+ }
+}

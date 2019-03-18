@@ -9,6 +9,9 @@
         border: transparent;
         background: transparent;
         padding: 0 16px;
+        &:focus {
+            outline: none;
+        }
     }
     .searchLogo {
         position: absolute;

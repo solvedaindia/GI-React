@@ -5,6 +5,7 @@ import SearchBar from '../Search/search';
 import HeaderRight from '../HeaderRight/headerRight';
 import { navigationApi, storeId, accessToken } from '../../../public/constants/constants';
 import SubCategoriesData from '../SubCategories/subCategories';
+import WishListCount from '../Wishlist/wishlist';
 
 class Category extends React.Component{
     state = {
@@ -21,7 +22,6 @@ class Category extends React.Component{
                 category: response.data.data.categoryArray,
 				isLoading: false
 			});
-				console.log('@@@@@@@@@@@@@@', response.data.data.categoryArray);
 		})
 		.catch(error => this.setState({ error, isLoading: false }));
     }

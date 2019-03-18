@@ -17,10 +17,10 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
     return;
   }
 
-  const otpGenerationUrl = constants.otp.replace(
+  const otpGenerationUrl = `${constants.otp.replace(
     '{{storeId}}',
     headers.storeId,
-  );
+  )}/generateOtp`;
   const reqHeader = headerutils.getWCSHeaders(headers);
 
   const reqBody = {
@@ -46,7 +46,56 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        logger.error('Error while calling Otp API');
+        logger.debug('Error while calling Generate Otp API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * Validate OTP
+ * @param storeId,access_token
+ * @return 200,OK if get success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.validateOtp = function validateOtp(params, headers, callback) {
+  if (!params.user_id || !params.otp) {
+    logger.debug('Invalid Params');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const otpValidationUrl = `${constants.otp.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/validateOtp`;
+  const reqHeader = headerutils.getWCSHeaders(headers);
+
+  const reqBody = {
+    logonId: params.user_id,
+    OTP: params.otp,
+  };
+  if (params.forgot_password && params.forgot_password === 'true') {
+    reqBody.forgotPassword = true;
+  }
+
+  origin.getResponse(
+    'POST',
+    otpValidationUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const resJson = {
+          message: 'OTP Validation Successfull',
+        };
+        callback(null, resJson);
+      } else {
+        logger.debug('Error while calling Validate Otp API');
         callback(errorutils.handleWCSError(response));
       }
     },

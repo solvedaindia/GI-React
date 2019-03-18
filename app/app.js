@@ -15,31 +15,16 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import FontFaceObserver from 'fontfaceobserver';
 import history from './src/utils/history';
+import './public/styles/fonts/fonts.scss';
 //import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from './src/containers/App';
 
-// Load the favicon and the .htaccess file
-import '!file-loader?name=[name].[ext]!./public/images/favicon.ico';
-import '!file-loader?name=[name].[ext]!./public/fonts/fontawesome-webfont.eot';
-import '!file-loader?name=[name].[ext]!./public/fonts/fontawesome-webfont.ttf';
-import '!file-loader?name=[name].[ext]!./public/fonts/fontawesome-webfont.woff';
-import '!file-loader?name=[name].[ext]!./public/fonts/fontawesome-webfont.woff2';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Bold.eot';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Bold.woff';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Light.eot';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Light.woff';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Reg.eot';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrEavesXLModOT-Reg.woff';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrsEavesXLSerifOT-Bold.eot';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrsEavesXLSerifOT-Bold.woff';
-import '!file-loader?name=[name].[ext]!./public/fonts/MrsEavesXLSerifOT-Reg.eot';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 import './public/styles/slick.min.scss';
 import './public/styles/slick-theme.min.scss';
 import './public/styles/bootstrap.scss';
-import './public/styles/font-awesome.scss';
 
 import configureStore from './configureStore';
 

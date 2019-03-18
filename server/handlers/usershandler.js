@@ -6,8 +6,6 @@ const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const filter = require('../filters/filter');
-// eslint-disable-next-line no-useless-escape
-const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // Email
 
 /**
  * Registeres User in WCS
@@ -18,7 +16,7 @@ const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 module.exports.registerUser = function userRegister(params, headers, callback) {
   logger.debug('User Registration API');
   if (!params.name || !params.user_id || !params.password) {
-    logger.debug('Invalid Params');
+    logger.debug('User Registration:Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -76,110 +74,36 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
 };
 
 /**
- * Social Login
- * @param
- * @returns
- * @throws
- */
-module.exports.socialLogin = function sociallogin(params, headers, callback) {
-  console.log('Call to get social login api');
-  if (
-    !params.firstName ||
-    !params.lastName ||
-    !params.authorizationProvider ||
-    !params.id ||
-    !params.socialToken ||
-    !params.emailId
-  ) {
-    logger.debug('invalid params');
-    callback(errorutils.errorlist.invalid_params);
-    return;
-  }
-
-  const loginHeaders = {
-    'cache-control': 'no-cache',
-    'content-type': 'application/json',
-  };
-
-  const socialLoginBody = {
-    lastName: params.last_name,
-    firstName: params.first_name,
-    nickName: params.first_name,
-    authorizationProvider: params.authorization_provider,
-    id: params.id,
-    accessToken: params.access_token,
-    email: params.email_id,
-  };
-
-  const originLoginURL = constants.sociallogin.replace(
-    '{{storeId}}',
-    headers.store_id,
-  );
-  origin.getResponse(
-    'POST',
-    originLoginURL,
-    loginHeaders,
-    null,
-    socialLoginBody,
-    null,
-    '',
-    response => {
-      if (response) {
-        if (response.status === 201) {
-          const encryptedAccessToken = tokenGenerator.encodeToken(
-            response.body,
-          );
-          const loginResponseBody = {
-            access_token: encryptedAccessToken,
-          };
-          callback(null, loginResponseBody);
-        } else {
-          errorconfig.handleWCSError(response.status, response.body, callback);
-        }
-      } else {
-        logger.error('error in doSocialLogin');
-        callback(errorutils.handleWCSError(response));
-      }
-    }
-  );
-};
-
-/**
  * Change user password
- * @param
+ * @param current_password
+ * @param new_password
  * @returns
- * @throws
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 module.exports.changeUserCredentials = function changeUserCredentials(
   params,
   headers,
   callback,
 ) {
-  logger.debug('Call to change password api');
-  if (!params.newPassword) {
-    callback(errorconfig.formatErrorObject(errorconfig.errorlist['error_400']['no_password']));
+  logger.debug('Call to update password api');
+  if (!params.current_password || !params.new_password) {
+    logger.debug('Change User Credentials : invalid params');
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
-  if (!params.confirmPassword) {
-    callback(errorconfig.formatErrorObject(errorconfig.errorlist['error_400']['no_confirm_password']));
-    return;
-  }
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
 
   const reqBody = {
-    logonPassword: params.newPassword,
-    logonPasswordVerify: params.confirmPassword,
-  };
-
-  const reqHeader = {
-    'Content-Type': 'application/json',
-    WCToken: headers.WCToken,
-    WCTrustedToken: headers.WCTrustedToken,
+    logonPassword: params.new_password,
+    logonPasswordVerify: params.new_password,
   };
 
   const originUserURL = constants.changePassword.replace(
     '{{storeId}}',
-    headers.storeId,
+    headers.store_id,
   );
+
   origin.getResponse(
     'PUT',
     originUserURL,
@@ -193,15 +117,11 @@ module.exports.changeUserCredentials = function changeUserCredentials(
         if (response.status === 200) {
           callback(null, { message: 'Password Change Successfully' });
         } else {
-          errorconfig.handleWCSError(response.status, response.body, callback);
+          callback(errorutils.handleWCSError(response));
         }
       } else {
         logger.error('error in userdetails while change password');
-        callback(
-          errorconfig.formatErrorObject(
-            errorconfig.errorlist['error_502']['service_invalid_response'],
-          ),
-        );
+        callback(errorutils.handleWCSError(response));
       }
     },
   );
@@ -209,9 +129,6 @@ module.exports.changeUserCredentials = function changeUserCredentials(
 
 /**
  * Get user details
- * @param
- * @returns
- * @throws
  */
 module.exports.getUserDetails = function getUserDetails(headers, callback) {
   logger.debug('Call to get userDetails api');
@@ -237,6 +154,9 @@ module.exports.getUserDetails = function getUserDetails(headers, callback) {
   );
 };
 
+/**
+ * This function will return user address
+ */
 module.exports.getUserAddress = function getUserAddress(headers, callback) {
   logger.debug('Call to get user contact api');
 
@@ -288,7 +208,7 @@ module.exports.getGodrejCredit = function getGodrejCredit(headers, callback) {
  * @param otp
  * @param new_password
  * @returns
- * @throws OTPExpired, OTPIncorrect, USE_OLD_PASSWORD, Invalid Params
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 module.exports.forgotPassword = function forgotPassword(
   params,
@@ -309,12 +229,13 @@ module.exports.forgotPassword = function forgotPassword(
   );
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
+  // `${params.user_id}_IBM_${params.otp}`
   const forgotPasswordBody = {
     logonId: params.user_id,
     resetPassword: 'true',
     challengeAnswer: '-',
     state: 'passwdconfirm',
-    xcred_validationCode: `${params.user_id}_IBM_${params.otp}`,
+    xcred_validationCode: params.otp,
     logonPassword: params.new_password,
     xcred_logonPasswordVerify: params.new_password,
   };

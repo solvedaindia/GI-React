@@ -1,41 +1,64 @@
 import React from 'react';
-import Input from '../Input/input';
+import axios from 'axios';
 import SearchLogo from '../../components/SVGs/search';
-import CartLogo from '../../components/SVGs/cart';
-import WishlistLogo from '../../components/SVGs/wishlist';
-import UserLogo from '../../components/SVGs/user';
+import { autoSuggestAPI, storeId, accessToken } from '../../../public/constants/constants';
 import '../../../public/styles/headerContainer/search.scss';
 
-class SearchBar extends React.Component{
-    state = {
-        searchData:{},
-        isLoading: true,
-        errors: null
-    };
+class SearchBar extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            searchData: [],
+        }
+        this.handleClick = this.handleChange.bind(this);
+        this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    }
 
-    // getHeaderLayer2() {
-    //     axios
-	// 	.get(heaerApi2, {headers:headers2})
-	// 	.then(response => {
-	// 		this.setState({
-	// 			layer2Data: response.data.data.categoryArray,
-	// 			isLoading: false
-	// 		});
-	// 			console.log('@@@@@@@@@@@@@@', response.data.data.categoryArray);
-	// 	})
-	// 	.catch(error => this.setState({ error, isLoading: false }));
-    // }
+    handleChange = (event) => {
+        const searchText = event.target.value;
+        this.setState({
+            searchData: []
+        });
 
-    // componentDidMount() {
-    //     this.getHeaderLayer2();
-    // }
+        if (searchText) {
+            axios.get(autoSuggestAPI+searchText, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+                document.addEventListener('click', this.handleOutsideClick, false);
+                this.setState({
+                    searchData: response.data.data.suggestionView[0].entry
+                });
+            }).catch(error => {
+                console.log(error.message);
+            });
+        } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+    }
+
+    handleOutsideClick(e) {
+        if (this.node.contains(e.target)) {
+            return;
+        }
+        this.setState({
+            searchData: []
+        });
+    }
 
     render() {
-        // const { isLoading, layer2Data } = this.state;
+        const searchData = this.state.searchData;
         return (
             <div className='searchBar'>
                 <SearchLogo />
-                <input className='searchInput' type='text' placeholder='search for products' />
+                <input className='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' placeholder='search for products' />
+                <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
+                    <ul>
+                        { searchData.map((item, index) => {
+                            return(
+                                <li key={index}>{item.term}</li>
+                            );
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         );
     }

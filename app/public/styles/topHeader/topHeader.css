@@ -12,8 +12,7 @@ ul.header__topBarIconList li:last-child{margin-right:0px;}
     -webkit-box-align: center;-webkit-align-items: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;
     -webkit-justify-content: center;-ms-flex-pack: center;justify-content: center;color: #FFFFFF;border-radius: 3px; pointer-events: none; padding: 0 3px;font-size: 14px;top: -8px;right: -10px;height: 16px;min-width: 16px;line-height: 16px;}
 	
-	.header-icon-link span.badge-count.bg-color{background-color:#ed7745;}
-	nav{font-family: 'MrEavesXLModOT-Bold';}
+	.header-icon-link span.badge-count.bg-color{background-color:#ed7745;}	
 nav.main-navigation .topnav{position: relative;}
 nav.main-navigation .topnav  li{    color: #000000;float:left;display:block;}
 nav.main-navigation .topnav  li:first-child a{margin-left: 0px;}
@@ -21,17 +20,4 @@ nav.main-navigation .topnav  li a{color: #000000;margin: 0px 21px;display: block
 nav.main-navigation .topnav  li a:hover{text-decoration:none;border-bottom:2px solid #ED7745;color:#ED7745}
 .nav-wrapper{border-bottom:1px solid #eee;}
 
-
-
-/* ----------------- */
-/* .modal-container {
-   position: relative;
-   
-}
-.modal-container .modal, .modal-container .modal-backdrop {
-    position: absolute;
-} */
-
-
-/* ------------------*/
 

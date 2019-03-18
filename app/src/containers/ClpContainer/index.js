@@ -20,7 +20,6 @@ import '../../../public/styles/clpContainer/clpContainer.scss';
 import ClpComponent from '../../components/ClpComponent/index';
 import '../../../public/styles/app.scss';
 
-/* eslint-disable react/prefer-stateless-function */
 export class ClpContainer extends React.Component {
   render() {
     return (

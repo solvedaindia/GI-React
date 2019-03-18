@@ -9,14 +9,14 @@ const Footerlinks = (props) => {
                     val.map((item, childindex) => {
                         return(
                             <div key={childindex}>
-                                <h3>
+                                <h3 className='heading'>
                                     {item.text}
                                 </h3>
                                 <ul>
                                     { item.children.map((litem, i) => {
                                         return (
-                                            <li key={i}>
-                                                <a href={litem.action}>{litem.text}</a>
+                                            <li className='list' key={i}>
+                                                <a className='link' href={litem.action}>{litem.text}</a>
                                             </li>
                                         )})
                                     }

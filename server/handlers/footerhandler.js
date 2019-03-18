@@ -26,7 +26,7 @@ module.exports.getFooterData = function footerData(headers, callback) {
       logger.debug('Footer Data', JSON.stringify(results));
       const resJson = {};
       results.forEach(element => {
-        const espotParserResult = filter.filterData('espotcontent', element);
+        const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration
         if (espotParserResult != null) {
           const keys = Object.keys(espotParserResult);
           keys.forEach(key => {

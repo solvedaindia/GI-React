@@ -6,15 +6,22 @@ const errorUtils = require('../utils/errorutils');
 const espotsHandler = require('./espotshandler');
 const logger = require('../utils/logger.js');
 const filter = require('../filters/filter');
+const headerutil = require('../utils/headerutil');
 
-// const bodyEspots = ['GI_Homebody_Static_Data'];
-
+/**
+ * The function will return CLP Data
+ * @param espot_name
+ * @return CLP data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+/* Get CLP Data from Espots */
 module.exports.getClpData = function getClpData(req, callback) {
   if (!req.query.id || !req.body.espot_name) {
+    logger.debug('Get CLP data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const categoryID = req.query.id;
+  // const categoryID = req.query.id;
   const bodyEspots = req.body.espot_name;
   const reqHeaders = req.headers;
   async.map(
@@ -52,6 +59,7 @@ function transformClpBody(results) {
   });
   return res;
 }
+
 /* const espotName = 'GI_Header_Static_Data';
 function getHeroBanner(headers, catId, callback) {
   espotsHandler.getEspotsData(headers, espotName, (err, response) => {
@@ -135,6 +143,7 @@ module.exports.getCategoryCarousel = function getCategoryCarousel(
   callback,
 ) {
   if (!req.query.id) {
+    logger.debug('Get Category Carousel :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
   }
   const categoryID = req.query.id;
@@ -144,25 +153,26 @@ module.exports.getCategoryCarousel = function getCategoryCarousel(
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      if (result.CatalogGroupView && result.CatalogGroupView.length > 0) {
-        const categoryCarousel = {
-          type: 'categorycarousel',
-          carouselData: [],
-        };
+      const categoryCarousel = {
+        type: 'categorycarousel',
+        carouselData: [],
+      };
+      const catlogGrupView = result.catalogGroupView;
+      if (catlogGrupView && catlogGrupView.length > 0) {
         async.map(
-          result.CatalogGroupView,
+          catlogGrupView,
           (subCategory, cb) => {
-            const subCatData = filter.filterData('categorydetail', subCategory);
+            const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
             productViewByCategoryId(
               reqHeaders,
               subCatData.uniqueID,
               (error, productViewResult) => {
                 if (!error) {
                   subCatData.productCount =
-                    productViewResult.catalogEntryView.length || 0;
+                    productViewResult.catalogEntryView.length || 0; // Product Count
                   cb(null, subCatData);
                 } else {
-                  cb(null);
+                  cb(error);
                 }
               },
             );
@@ -172,26 +182,33 @@ module.exports.getCategoryCarousel = function getCategoryCarousel(
               categoryCarousel.carouselData.push(element);
             });
             if (errors) {
-              callback(err);
+              callback(errors);
               return;
             }
             callback(null, categoryCarousel);
           },
         );
+      } else {
+        callback(null, categoryCarousel);
       }
     }
   });
 };
 
-/* Get sub categories by category id */
-function categoryViewByCategoryId(reqHeaders, categoryID, callback) {
+/**
+ *  Get sub categories by category id
+ */
+function categoryViewByCategoryId(header, categoryID, callback) {
   const originUrl = constants.categoryViewByParentId
-    .replace('{{storeId}}', reqHeaders.storeId)
+    .replace('{{storeId}}', header.storeId)
     .replace('{{categoryId}}', categoryID);
+
+  const reqHeader = headerutil.getWCSHeaders(header);
+
   origin.getResponse(
     originMethod,
     originUrl,
-    null,
+    reqHeader,
     null,
     null,
     null,
@@ -200,21 +217,26 @@ function categoryViewByCategoryId(reqHeaders, categoryID, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        errorUtils.handleWCSError(response);
+        callback(errorUtils.handleWCSError(response));
       }
     },
   );
 }
 
-/* Get Products List by category id */
-function productViewByCategoryId(reqHeaders, categoryID, callback) {
+/**
+ *  Get Products List by category id
+ */
+function productViewByCategoryId(header, categoryID, callback) {
   const originUrl = constants.productViewByCategoryId
-    .replace('{{storeId}}', reqHeaders.storeId)
+    .replace('{{storeId}}', header.storeId)
     .replace('{{categoryId}}', categoryID);
+
+  const reqHeader = headerutil.getWCSHeaders(header);
+
   origin.getResponse(
     originMethod,
     originUrl,
-    null,
+    reqHeader,
     null,
     null,
     null,
@@ -223,7 +245,7 @@ function productViewByCategoryId(reqHeaders, categoryID, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        errorUtils.handleWCSError(response);
+        callback(errorUtils.handleWCSError(response));
       }
     },
   );

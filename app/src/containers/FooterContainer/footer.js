@@ -36,9 +36,9 @@ class FooterContainer extends React.Component {
 
     render() {
         return(
-            <footer>
+            <footer className='footer'>
                 { !this.state.loading ? (
-                    <div>
+                    <>
                         {!this.state.error && this.state.footer.status === 'success' ? (
                             <Footer
                                 links={this.state.footer.data.Footer_Links}
@@ -48,7 +48,7 @@ class FooterContainer extends React.Component {
                         ) : (
                             <Alert className='alert-danger text-center'>Something Went Wrong!</Alert>                
                         )}
-                    </div>
+                    </>
                 ) : (
                     <Alert className='alert-primary text-center'>Footer is loading please wait....</Alert>
                 )}

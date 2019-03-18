@@ -19,9 +19,6 @@ class TrendingCategories extends React.Component {
                         </div>
                     </div>
                 </section>
-
-
-
                 <section className='clpCategories'>
                     <div className='container'>
                         <div className='row'>

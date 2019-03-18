@@ -1,7 +1,7 @@
 
 import React from 'react';
 import axios from 'axios';
-import { generateOTPAPI, storeId, accessToken } from '../../../public/constants/constants';
+import { generateOTPAPI, storeId, accessToken, validateOTPAPI } from '../../../public/constants/constants';
 import { Button, Form, FormGroup, Label, Modal, } from 'react-bootstrap';
 import { validateEmptyObject, validateOTPDigit } from '../../utils/validationManager';
 import '../../../public/styles/forgotpassword/forgototp.scss';
@@ -34,13 +34,33 @@ class ForgotPasswordOTP extends React.Component {
             });
             return;
         }
-        const nextComp = 'ForgotPasswordNewPassword'
-        this.props.handlerPro(nextComp, null, this.state.inputText)
+
+        console.log('OTPPP---',this.state.inputText)
+        let data = {
+            'user_id': this.props.userIdPro,
+            'otp': this.state.inputText,
+            'forgot_password': 'true'
+        }
+        axios.post(validateOTPAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+            const nextComp = 'ForgotPasswordNewPassword'
+            this.props.handlerPro(nextComp, null, this.state.inputText)
+        }).catch(error => {
+            const errorData = error.response.data
+            const errorMessage = errorData.error.error_message
+            this.setState({
+                error: true,
+                errorMessage: errorMessage,
+            });
+        });
+
+
+
     }
 
     handleInputChange(text) {
         this.setState({
             inputText: text.target.value,
+            error: false
         });
     }
 

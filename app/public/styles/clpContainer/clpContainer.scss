@@ -1,3 +1,5 @@
+@import '../app.scss';
+
 /* CLP
 ------------------------*/
 $imgfullwid:100%;
@@ -37,7 +39,7 @@ $imgfullwid:100%;
 
 section.trending-section{
     padding-top: 0;
-    .heading{font-weight: bold;padding-bottom: 30px}
+    .heading{font-family: $font-bold;padding-bottom: 30px}
     .productBox{background: #f2f5f7; padding: 15px 15px 5px; margin-bottom: 15px;position: relative;
 
     .imgBox:hover .overlay-comparequick{opacity: 1}
@@ -81,7 +83,7 @@ section.trending-section{
 --------------------------------*/
 section.livingRoom{
     .padding-bottom{padding:0 0 30px 0}
-    .living-heading{font-weight: bold}
+    .living-heading{font-family:$font-bold }
     .ourcoll-heading{font-weight: normal;font-size: 24px;float: right;    min-height: 96px;}
     .boxImg{
         margin-bottom: 30px;

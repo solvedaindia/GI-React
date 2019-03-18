@@ -1,0 +1,119 @@
+import React from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import '../../../public/styles/registerComponent/registerComponent.scss';
+import { storeId, accessTokenCookie } from '../../../public/constants/constants';
+import Register from './register';
+import RegisterWithEmailMobile from './registerWithEmailMobile';
+import GenerateOtp from './generateOtp';
+import { registerWithEmail, generateOtp, resendOtp, otpConfirmed } from './constants';
+import axios from 'axios';
+
+class RegisterModalData extends React.Component {
+	constructor() {
+		super();
+		this.handleShow = this.handleShow.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+
+		this.state = {
+			show: false,
+			data: null,
+			message: null
+		}
+	}
+
+	/* Handle Modal Close */
+	handleClose() {
+		this.setState({ 
+			show: false,
+			data: null,
+			message: null
+		});
+	}
+
+	/* Handle Modal Show */
+	handleShow() {
+		this.setState({ show: true });
+	}
+
+	/* Handle Components */
+	handleComponent(type, data = null) {
+		let renderComponent = null;
+
+		if (type !== generateOtp) {
+			renderComponent = <RegisterWithEmailMobile componentData={this.handleComponent.bind(this)} registrationType={type} handleApi={this.handleComponetData.bind(this)} userdata={data}/>;
+		
+		} else if(type === generateOtp) {
+			renderComponent = <GenerateOtp componentData={this.handleComponent.bind(this)} userdata={data} registrationType={type} handleApi={this.handleComponetData.bind(this)}/>;
+		
+		} else {
+			renderComponent = <Register componentData={this.handleComponent.bind(this)}/> 
+
+		}
+		this.setState({data: renderComponent});
+	}
+
+	/* Handle Components API Data */
+	handleComponetData(api, data, token, type) {
+		this.setState({ message: null });
+
+		axios.post(api, data, { 'headers': { 'store_id': storeId, 'access_token': token } }).then(response => {
+			
+			if (type === registerWithEmail || type === otpConfirmed) {
+				this.setState({
+					message: 'Registerted successfully!'
+				});
+
+				document.cookie = 'isLoggedIn=true';
+				document.cookie = `${accessTokenCookie}=${response.data.data.access_token}`;
+
+				alert('Registerted successfully!');
+				this.props.history.push('/');
+			} else {
+
+				alert(`OTP - ${response.data.data.otpVal}`);
+				if (type !== resendOtp) {
+					this.handleComponent(generateOtp, data);
+				}
+			}
+		}).catch(error => {
+			const errorData = error.response.data;
+			const errorMessage = errorData.error.error_message;
+			this.setState({
+				message: `Error - ${errorMessage}`
+			});
+		});
+	}
+
+	render () {
+		let data = null;
+		if (this.state.data === null) {
+			data = <Register componentData={this.handleComponent.bind(this)}/>
+		} else {
+			data = this.state.data;
+		}
+
+		let message = null;
+		if (this.state.message) {
+			message = <p className='errormsg'>{this.state.message}</p>
+		}
+
+		return (
+			<div>
+				<Button className='btn-link' onClick={this.handleShow}>
+					Register
+				</Button>
+				<Modal className='modal_register' show={this.state.show} onHide={this.handleClose}>
+					<Modal.Body> 
+						<div className='modal-wrapper'>
+							<Button className="close" onClick={this.handleClose}>X</Button>              
+							{message}
+							{data}              
+						</div>
+					</Modal.Body>
+				</Modal>
+			</div>
+		);
+	}
+}
+
+export default RegisterModalData;

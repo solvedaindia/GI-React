@@ -1,0 +1,7 @@
+.featuredLinksBar{font-family: 'MrEavesXLModOT-Light';}
+.featuredLinksBar {border-bottom: 1px solid #EEE;border-width: 1px 0;padding: 10px 0; color: #000000;}
+.featuredLinksBarContactlinks li,.featuredLinksBarlinkContainer li{float:left;display:block;margin:0 8px;font-size: 14px; font-weight: 600;}
+.featuredLinksBarlinkContainer li  sup{color: #ED7745;}
+.featuredLinksBarContactlinks li a,.featuredLinksBarlinkContainer li a{text-decoration:none; color:#000}
+.featuredLinksBarContactlinks li a:hover,.featuredLinksBarlinkContainer li a:hover{text-decoration:none; color: #ED7745;fill: #ED7745;}
+.featuredLinksBarContactlinks li span.contact-channel-icon{ display: block;width: 20px;height: 20px;margin-right: 5px;float:left;}

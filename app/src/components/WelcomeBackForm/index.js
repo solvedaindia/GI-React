@@ -1,94 +1,120 @@
 import React, { Component } from "react";
-
 /* Import Components */
 import Input from "../Input/input";
 import Button from "../Button/button";
+import { regexEmail, regexMobileNo, validateEmptyObject } from '../../utils/validationManager';
 
 class WelcomeForm extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            user: {
-                name: "",
-                password: "",
-            },
+            userId: '',
+            password: '',
+            errorMessageUserId: null,
+            errorMessagePassword: null
         };
-        this.handleInput = this.handleInput.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-  /* This lifecycle hook gets executed when the component mounts */
+    /* Handle Change */
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
 
-    handlePassword(e) {
-        let value = e.target.value;
-        this.setState(
-        prevState => ({
-            user: {
-            ...prevState.user,
-            password: value
+    /* Handle Validation */
+    handleValidation(obj, errorType) {
+
+        let isValidate = errorType;
+        const input = String(obj.userId);
+        const firstChar = Number(input.charAt(0));
+
+        this.setState({
+            errorMessageUserId: null,
+            errorMessagePassword: null,
+        });
+ 
+        if (!validateEmptyObject(obj.userId)) {
+            this.setState({
+                errorMessageUserId: 'Please enter valid Email Id/Mobile number'
+            });
+            isValidate = false;
+
+        } else if (!input.includes('@') && Number.isInteger(firstChar)) {
+            if (!regexMobileNo.test(obj.userId)) {
+                this.setState({
+                    errorMessage: 'Please enter valid Email Id/Mobile number',
+                });
+                isValidate = false;
             }
-        }),
-        () => console.log(this.state.user)
-        );
-    }
-
-    handleInput(e) {
-        let value = e.target.value;
-        let name = e.target.name;
-        this.setState(
-        prevState => ({
-            user: {
-            ...prevState.user,
-            [name]: value
-            }
-        }),
-        () => console.log(this.state.user)
-        );
-    }
-
-    handleFormSubmit(e) {
-        e.preventDefault();
-        let userData = this.state.user;
-
-        fetch("", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
+            
+        } else if (!regexEmail.test(obj.userId)) {
+            this.setState({
+                errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+            });
+            isValidate = false;
         }
-        }).then(response => {
-        response.json().then(data => {
-            console.log("Successful" + data);
-        });
-        });
+
+        if (!validateEmptyObject(obj.password)) {
+            this.setState({
+                errorMessagePassword: 'Enter a valid password ',
+            });
+            isValidate = false;
+        }
+
+        return isValidate;
+    }
+
+    /* Handle Submit */
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        const isValidate = this.handleValidation(this.state, true);
+
+        if(isValidate === false) {
+            return false;
+        }
+
+        const data = {
+            'user_id': this.state.userId,
+            'password': this.state.password
+        }
+        this.props.handleUserData(data);
+    }
+
+    /* Error Messgae */
+    errorMessage = (message) => {
+        return <p className='error-msg'>{message}</p>
     }
 
     render() {
+        let errorMessageUserId = null;
+        let errorMessagePassword = null;
+        if (this.state.errorMessageUserId) {
+            errorMessageUserId = this.errorMessage(this.state.errorMessageUserId);
+        }
+    
+        if (this.state.errorMessagePassword) {
+            errorMessagePassword = this.errorMessage(this.state.errorMessagePassword);
+        }
         return (
             <form className="container-fluid" onSubmit={this.handleFormSubmit}>
                 <Input
-                    inputType={"text"}
+                    type={"text"}
                     title={"ENTER EMAIL/MOBILE NUMBER"}
-                    name={"name"}
-                    value={this.state.user.name}
+                    name={"userId"}
                     placeholder={"Enter your email or mobile number"}
-                    handleChange={this.handleInput}
+                    onChange={this.handleChange}
                 />
+                {errorMessageUserId}
                 {/* Name or email of the user */}
                 <Input
-                    inputType={"password"}
+                    type={"password"}
                     name={"password"}
                     title={"ENTER PASSWORD"}
-                    value={this.state.user.password}
                     placeholder={"Enter your password"}
-                    handleChange={this.handlePassword}
+                    onChange={this.handleChange}
                 />
+                {errorMessagePassword}
                 {/* Password of the user */}
                 <Button
-                    action={this.handleFormSubmit}
                     type={"primary"}
                     title={"Submit"}
                 />
@@ -97,6 +123,5 @@ class WelcomeForm extends Component {
         );
     }
 }
-
 
 export default WelcomeForm;

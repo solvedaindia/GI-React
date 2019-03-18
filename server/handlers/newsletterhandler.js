@@ -7,8 +7,8 @@ const errorutils = require('../utils/errorutils.js');
 /**
  * Newsletter API
  * @param email_id
- * @returns
- * @throws
+ * @returns 200, ok :- Successfully subscribed
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 module.exports.newsLetterSubscription = function newsLetterSubscription(
   params,
@@ -23,9 +23,8 @@ module.exports.newsLetterSubscription = function newsLetterSubscription(
   }
 
   const reqHeader = headerutil.getWCSHeaders(headers);
-
   const reqBody = {
-    logonId: headers.userId,
+    userId: headers.userId,
     emailId: params.email_id,
   };
 

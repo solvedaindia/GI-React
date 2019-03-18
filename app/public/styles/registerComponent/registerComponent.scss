@@ -1,87 +1,93 @@
-.joinUstitle {
-    font-weight: bolder;
-    font-size: x-large;
-    color: #484b4e;
-    text-align: center;
+
+@import '../app.scss';
+.modal_register {    
+    .modal-dialog{
+        .modal-wrapper{   
+            padding: 0;
+            height: 490px;
+            margin-top: -245px;
+            .form_register{
+            .form-group{ margin:0;
+            .btn-bg{ margin:15px 0 0 0; }
+                .sign_text{
+                    text-align: center;
+                    padding:15px 0 0 0; 
+                    color: #979797;   
+                    .link{ color: #979797;}     
+                }
+                }
+                max-width: 80%;
+                padding: 30px 0 0 0;
+                margin: 0 auto;
+            .heading{
+                text-align: center;
+                font-family:$font-bold;
+                text-transform: capitalize;
+                padding: 0 0 30px 0;
+                margin: 0;
+                color: #424b5a;
+                }
+            
+                .label {
+                    color: #979797;
+                    text-transform: uppercase;
+                    background: transparent;
+                    margin: 0;
+                    display: block;
+                    text-align: left;
+                    padding: 0 0 10px 0;
+                    font-family: $font-light;
+                    font-size: 13px;
+                }
+                .form-control {
+                    box-shadow: none;
+                    height: 40px;
+                    margin: 0 0 28px 0;
+                }
+                .error-msg {
+                    position: absolute;
+                    color: #fd1f3b;
+                    font-weight: normal;
+                    font-size: 12px;
+                    line-height: 13px;
+                    min-height: 25px;
+                    bottom: 0;
+                    width: 100%;
+                    margin:0 0 0 0;
+                }
+                .form-div {
+                    position: relative;
+                }
+                .text_or{text-align: center;margin:15px 0;color: #979797;}
+                .btn-wrapper{
+                    .btn-white{width:49%;}
+                    .btn-fb{
+                        float: right;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 0px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+                        border: none;
+                        padding: 13px 0;
+                    }
+                }
+            }
+
+            .btn-white{   
+                background: #fff;
+                color: #827b7b;
+                border: 1px solid #ccc;
+                padding: 10px 8px;
+                border-radius: 4px;
+                margin:0
+            }
+        .no-padding{ padding:0 0 0 0;
+            .imagebox{
+                height: 490px;    
+                background: url(/fe5bec6a9b234cf1387ce97ef8ab9de3.jpg);
+                background-size: 100% 100%;    
+                width: 100%;
+                border-left:1px solid #ccc;
+            }
+        }
+        }
 }
 
-@media (min-width: 768px)
-{
-    .joinUsModal .modal-dialog {
-        width: 60%;
-        margin: 30px auto;
-    }
-
-    .joinUsModal .btn-wrapper .button.col-md-6 {
-        width:48%;
-    }
-    
-    .joinUsModal .btn-wrapper .button.col-md-6:first-child {
-        margin:0 10px 0 0;
-    }
 }
-
-@media (max-width: 767px)
-{
-    .joinUsVerticalLine .joinUsNow {
-        padding: 16px;
-    }
-
-    .joinUsVerticalLine {
-        display: block;
-    }
-}
-
-.joinUsModal .modal-content {
-    background-color: #f1f5f8
-
-}
-
-.joinUsNow {
-    padding: 40px;
-}
-
-.joinUsNow p, .leftCol, .rightCol {
-    padding: 15px;
-    text-align: center;
-    font-size: 12px;
-}
-
-.joinUsModal Button {
-    border-radius: 0;
-}
-
-.joinUsVerticalLine {
-    border-right: 1px solid #6c757d;
-    position: relative;
-    top: 0;
-  }
-
-.joinUsModal img {
-    width: 100%;
-}
-
-.joinUsModal .modal-body {
-    padding: 0px;
-}
-
-.joinUsModal button {
-    background: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    color: #b1acac;
-}
-
-.joinUsModal p {
-    color: #b1acac;
-}
-
-//Social Login CSS
-.googleLogin {
-    margin-left: 0px; 
-  }
-
-.facebookLogin {
-    margin-left: 100px;
-}
-

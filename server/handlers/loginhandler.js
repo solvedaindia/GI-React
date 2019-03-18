@@ -90,3 +90,72 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
     },
   );
 };
+
+/**
+ * Social Login
+ * @param store_id, access_token, params
+ * @returns
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.socialLogin = function sociallogin(params, headers, callback) {
+  logger.debug('Call to get social login api');
+  if (
+    !params.first_name ||
+    !params.last_name ||
+    !params.auth_provider ||
+    !params.user_id ||
+    !params.access_token ||
+    !params.email_id
+  ) {
+    logger.debug('social login :: invalid params');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const loginHeaders = {
+    'cache-control': 'no-cache',
+    'content-type': 'application/json',
+  };
+
+  const socialLoginBody = {
+    lastName: params.last_name,
+    firstName: params.first_name,
+    nickName: params.first_name,
+    authorizationProvider: params.auth_provider,
+    id: params.email_id,
+    accessToken: params.access_token,
+    email: params.email_id,
+  };
+
+  const originLoginURL = constants.sociallogin.replace(
+    '{{storeId}}',
+    headers.store_id,
+  );
+  origin.getResponse(
+    'POST',
+    originLoginURL,
+    loginHeaders,
+    null,
+    socialLoginBody,
+    null,
+    '',
+    response => {
+      if (response) {
+        if (response.status === 201) {
+          const encryptedAccessToken = tokenGenerator.encodeToken(
+            response.body,
+          );
+          const loginResponseBody = {
+            access_token: encryptedAccessToken,
+          };
+          callback(null, loginResponseBody);
+        } else {
+          callback(errorutils.handleWCSError(response));
+        }
+      } else {
+        logger.debug('error in Social Login');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};

@@ -1,21 +1,21 @@
 import React from 'react';
-import CartLogo from '../../components/SVGs/cart';
-import WishlistLogo from '../../components/SVGs/wishlist';
-import UserLogo from '../../components/SVGs/user';
+import WishListCount from '../../components/Wishlist/wishlist';
+import CartCount from '../Cart/cart';
+import UserAccInfo from '../UserAccInfo/userAccInfo';
+import '../../../public/styles/headerContainer/headerRight.scss';
 
 class SearchBar extends React.Component{
     state = {
-        searchData:{},
         isLoading: true,
         errors: null
     };
     render() {
         return (
-            <div className='rightSide'>
-                <WishlistLogo />
-                <CartLogo />
-                <UserLogo />
-            </div>
+            <ul className='rightSide'>
+                <WishListCount />
+                <CartCount />
+                <UserAccInfo />
+            </ul>
         );
     }
 } 

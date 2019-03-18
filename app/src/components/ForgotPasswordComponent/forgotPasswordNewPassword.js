@@ -63,6 +63,7 @@ class ForgotPasswordNewPassword extends React.Component {
 
     handleInputChange(text) {
         this.setState({
+            error: false,
             inputText: text.target.value,
         });
     }
