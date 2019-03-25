@@ -1,6 +1,0 @@
-FROM ontouchstart/node:0.10.36
-WORKDIR /app
-ADD . /app
-RUN npm install
-EXPOSE 3000
-CMD npm start
