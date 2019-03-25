@@ -3,6 +3,8 @@ const categoryFilter = require('./categoryfilter');
 const cartFilter = require('./cartfilter');
 const profileFilter = require('./profilefilter');
 const wishlistFilter = require('./wishlistfilter');
+const productListFilter = require('./productlistfilter');
+const productDetailFilter = require('./productdetailfilter');
 
 /**
  * Filter Data.
@@ -32,6 +34,27 @@ module.exports.filterData = function filterData(filterType, data) {
   }
   if (filterType === 'wishlist_itemcount') {
     return wishlistFilter.itemcount(data);
+  }
+  if (filterType === 'wishlist_itemlist') {
+    return wishlistFilter.itemlist(data);
+  }
+  if (filterType === 'productlist_facet') {
+    return productListFilter.facetData(data);
+  }
+  if (filterType === 'productlist_list') {
+    return productListFilter.productList(data);
+  }
+  if (filterType === 'productlist_id') {
+    return productListFilter.productIDs(data);
+  }
+  if (filterType === 'productlist_withswatch') {
+    return productListFilter.productListWithSwatch(data);
+  }
+  if (filterType === 'productlist_withoutswatch') {
+    return productListFilter.productListWithoutSwatch(data);
+  }
+  if (filterType === 'productdetail_summary') {
+    return productDetailFilter.productDetailSummary(data);
   }
   return data;
 };

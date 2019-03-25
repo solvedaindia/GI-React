@@ -4,9 +4,9 @@ import '../../../public/styles/homePageStatic.scss';
 import WelcomeBack from '../WelcomeBack/index';
 import { homePageApi, storeId, accessToken } from '../../../public/constants/constants';
 
-class HomePageStatic extends React.Component{
+class HomePageStatic extends React.Component {
     state = {
-        homePageData:{},
+        homePageData: {},
         isLoading: true,
         errors: null
     };
@@ -32,13 +32,13 @@ class HomePageStatic extends React.Component{
         return (
             <div className='homePageStatic'>
                 {!isLoading ? <div dangerouslySetInnerHTML={{ __html: homePageData.content }} />
-                : (
-                    <div>Something Went Wrong</div>
-                )}
+                    : (
+                        <div>Something Went Wrong</div>
+                    )}
                 <WelcomeBack />
             </div>
         );
     }
-}  
+}
 
 export default HomePageStatic;

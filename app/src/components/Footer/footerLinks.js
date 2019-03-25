@@ -8,7 +8,7 @@ const Footerlinks = (props) => {
                 {
                     val.map((item, childindex) => {
                         return(
-                            <div key={childindex}>
+                            <div className='footerlink_wrpper' key={childindex}>
                                 <h3 className='heading'>
                                     {item.text}
                                 </h3>

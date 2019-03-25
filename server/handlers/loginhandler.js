@@ -102,9 +102,9 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
   if (
     !params.first_name ||
     !params.last_name ||
-    !params.auth_provider ||
+    !params.authorization_provider ||
     !params.user_id ||
-    !params.access_token ||
+    !params.social_token ||
     !params.email_id
   ) {
     logger.debug('social login :: invalid params');
@@ -121,9 +121,9 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
     lastName: params.last_name,
     firstName: params.first_name,
     nickName: params.first_name,
-    authorizationProvider: params.auth_provider,
+    authorizationProvider: params.authorization_provider,
     id: params.email_id,
-    accessToken: params.access_token,
+    accessToken: params.social_token,
     email: params.email_id,
   };
 

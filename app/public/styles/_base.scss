@@ -1,0 +1,36 @@
+@import 'variable.scss';
+
+body {
+    font-size: $base;
+    font-family:$font-light;
+    a {
+        color:$colorblack
+    }
+}
+*{
+    margin:0px;
+    padding:0px;
+}
+ul {
+    margin:0px;
+    padding:0px;
+    li {
+        list-style: none;
+    }
+}
+
+p,
+span,
+a,
+li,
+figcaption  {
+    font-family: $font-light;
+}
+
+h1,h2,h3 {
+    font-family: $font-regular;
+}
+
+h4,h5,h6 {
+    font-family: $font-bold;
+}

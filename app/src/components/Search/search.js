@@ -19,18 +19,20 @@ class SearchBar extends React.Component {
         this.setState({
             searchData: []
         });
-
-        if (searchText) {
-            axios.get(autoSuggestAPI+searchText, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
-                document.addEventListener('click', this.handleOutsideClick, false);
-                this.setState({
-                    searchData: response.data.data.suggestionView[0].entry
+        
+        if(searchText.length > 1) {
+            if (searchText) {
+                axios.get(autoSuggestAPI+searchText, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+                    document.addEventListener('click', this.handleOutsideClick, false);
+                    this.setState({
+                        searchData: response.data.data.suggestionView[0].entry
+                    });
+                }).catch(error => {
+                    console.log(error.message);
                 });
-            }).catch(error => {
-                console.log(error.message);
-            });
-        } else {
-            document.removeEventListener('click', this.handleOutsideClick, false);
+            } else {
+                document.removeEventListener('click', this.handleOutsideClick, false);
+            }
         }
     }
 
@@ -50,10 +52,10 @@ class SearchBar extends React.Component {
                 <SearchLogo />
                 <input className='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' placeholder='search for products' />
                 <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
-                    <ul>
+                    <ul className='auto-search'>
                         { searchData.map((item, index) => {
                             return(
-                                <li key={index}>{item.term}</li>
+                                <li className='list' key={index}>{item.term}</li>
                             );
                             })
                         }

@@ -10,11 +10,15 @@ import ProductItem from '../GlobalComponents/productItem/productItem';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
+
+
 /* eslint-disable react/prefer-stateless-function */
 class PlpComponent extends React.Component {
   render() {
+
     return (
       <>
+      
         {/* Need to remove image from Css and put in JSX */}
         {/* <img src={require('../../public/images/product-slider.jpg')} alt='slider' /> */}
         <div className='plp-slider'>
@@ -40,19 +44,23 @@ class PlpComponent extends React.Component {
                 </div>
               </div>
             </div>
+           
             <SubCategories />
+            
           </div>
         </section>
 
         <section className='plpCategories'>
           <div className='container'>
             <div className='row'>
+           
               <ProductItem />
               <ProductItem />
               <ProductItem />
               <ProductItem />
               <ProductItem />
               <ProductItem />
+          
             </div>
           </div>
         </section>

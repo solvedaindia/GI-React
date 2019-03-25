@@ -1,10 +1,12 @@
+const async = require('async');
 const origin = require('../utils/origin');
 const constants = require('../utils/constants');
 const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
 const filter = require('../filters/filter');
-const headerUtils = require('../utils/headerutil');
+const headerUtil = require('../utils/headerutil');
+const productUtil = require('../utils/productutil');
 
 /**
  * This function will return ${urlParam} categories data
@@ -42,11 +44,10 @@ module.exports.getCategories = function getCategories(
  * @param urlParam
  */
 function getCategoriesData(urlParam, headers, callback) {
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
-  const originUrl = constants.TopCategoryHierarchy.replace(
-    '{{storeId}}',
-    headers.storeId,
-  ).replace('{{urlParam}}', urlParam);
+  const reqHeaders = headerUtil.getWCSHeaders(headers);
+  const originUrl = constants.categoryview
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{urlParam}}', urlParam);
   origin.getResponse(
     originMethod,
     originUrl,
@@ -64,7 +65,124 @@ function getCategoriesData(urlParam, headers, callback) {
         return;
       }
       callback(errorUtils.handleWCSError(response));
-      // callback(null, filter.filterData('categorynavigation', response));
     },
   );
 }
+
+/**
+ * This function will return sub categories data
+ * @param categoryID
+ */
+module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
+  if (!req.params.categoryID) {
+    logger.debug('Get Sub Categories Data :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const categoryId = req.params.categoryID;
+  const reqHeaders = req.headers;
+  categoryViewByParentCategoryId(reqHeaders, categoryId, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes');
+      const subCategoryArray = [];
+      const catlogGrupView = result.catalogGroupView;
+      if (catlogGrupView && catlogGrupView.length > 0) {
+        async.map(
+          catlogGrupView,
+          (subCategory, cb) => {
+            const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
+            productUtil.productsByCategoryID(
+              subCatData.uniqueID,
+              reqHeaders,
+              (error, productViewResult) => {
+                if (!error) {
+                  subCatData.productCount =
+                    productViewResult.catalogEntryView.length || 0; // Product Count
+                  subCatData.startPrice = '';
+                  cb(null, subCatData);
+                } else {
+                  cb(error);
+                }
+              },
+            );
+          },
+          (errors, results) => {
+            if (errors) {
+              callback(errors);
+              return;
+            }
+            results.forEach(element => {
+              subCategoryArray.push(element);
+            });
+            callback(null, subCategoryArray);
+          },
+        );
+      } else {
+        callback(null, subCategoryArray);
+      }
+    }
+  });
+};
+
+/**
+ *  Get Category Details
+ */
+module.exports.getCategoryDetails = function getCategoryDetails(req, callback) {
+  if (!req.params.categoryID) {
+    logger.debug('Get Sub Categories Data :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const originUrl = constants.categoryViewByCategoryId
+    .replace('{{storeId}}', req.headers.storeId)
+    .replace('{{categoryId}}', req.params.categoryID);
+
+  const reqHeader = headerUtil.getWCSHeaders(req.headers);
+
+  origin.getResponse(
+    originMethod,
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ *  Get sub categories by category id
+ */
+function categoryViewByParentCategoryId(header, categoryID, callback) {
+  const originUrl = constants.categoryViewByParentId
+    .replace('{{storeId}}', header.storeId)
+    .replace('{{categoryId}}', categoryID);
+
+  const reqHeader = headerUtil.getWCSHeaders(header);
+
+  origin.getResponse(
+    originMethod,
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};

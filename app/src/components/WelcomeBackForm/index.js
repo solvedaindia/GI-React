@@ -95,7 +95,7 @@ class WelcomeForm extends Component {
             errorMessagePassword = this.errorMessage(this.state.errorMessagePassword);
         }
         return (
-            <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+            <form className="loginForm" onSubmit={this.handleFormSubmit}>
                 <Input
                     type={"text"}
                     title={"ENTER EMAIL/MOBILE NUMBER"}

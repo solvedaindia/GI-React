@@ -21,15 +21,20 @@ class HeaderL1 extends React.Component{
 
     getHeaderLayer1() {
         axios
-            .get(heaerApi1, {headers:headers1})
-            .then(response => {
-                this.setState({
-                    layer1Data: response.data.data.Header_Static_Links,
-                    isLoading: false
-                });
-                    // console.log('#############', response.data.data.Header_Static_Links);
-            })
-            .catch(error => this.setState({ error, isLoading: false }));
+        .get(heaerApi1, {headers:headers1})
+        .then(response => {
+            this.setState({
+                layer1Data: response.data.data.Header_Static_Links,
+                isLoading: false
+            });
+                // console.log('#############', response.data.data.Header_Static_Links);
+        })
+        .catch(error => {
+            this.setState({
+                error,
+                isLoading: false
+            });
+        });
     }
 
     componentDidMount() {
@@ -53,7 +58,6 @@ class HeaderL1 extends React.Component{
                 ) : (
                     <div>Something Went Wrong</div>
                 )}
-                {/* <WelcomeBack /> */}
             </ul>
         );
     }

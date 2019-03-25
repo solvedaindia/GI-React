@@ -99,6 +99,7 @@ app.use((req, res, next) => {
 
 // To handle secure API's and check token status
 app.use((req, res, next) => {
+  // console.log('User Agent>>>', req.headers);
   tokenValidation.validateSecureToken(req, res, next);
   next();
   /* if (req.url.indexOf('/secure/') !== -1) {

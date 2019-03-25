@@ -11,7 +11,10 @@ const filter = require('../filters/filter');
  * @return Wishlist Item Count
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.wishlistItemCount = function fetchWishlist(headers, callback) {
+module.exports.wishlistItemCount = function getWishlistItemCount(
+  headers,
+  callback,
+) {
   logger.debug('Entering method wishlisthandler: wishlistItemCount');
 
   getWishlistData(headers, (err, result) => {
@@ -20,6 +23,24 @@ module.exports.wishlistItemCount = function fetchWishlist(headers, callback) {
     } else {
       logger.debug('Got all the origin resposes');
       callback(null, filter.filterData('wishlist_itemcount', result));
+    }
+  });
+};
+
+/**
+ * fetch Wishlist Item List.
+ * @return Wishlist Item List with Wishlist ID
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
+  logger.debug('Entering method wishlisthandler: wishlistItemCount');
+
+  getWishlistData(headers, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes');
+      callback(null, filter.filterData('wishlist_itemlist', result));
     }
   });
 };

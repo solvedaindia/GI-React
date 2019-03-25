@@ -14,9 +14,10 @@ header {
         visibility: hidden;
         opacity: 0;
         position: absolute;
-        top: 83px;
-        left: -15px;
         padding: 8px;
+        top: 70px;
+        max-width: 200px;
+        left: -20px;
         background-color: #fff;
         transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         z-index: 3;

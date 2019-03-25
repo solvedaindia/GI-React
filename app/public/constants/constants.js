@@ -4,7 +4,8 @@ import { validateEmptyObject } from '../../src/utils/validationManager';
 const secureHttp = 'https';
 const port1 = '3001';
 const port2 = '8002';
-const host1 = '192.168.0.57';
+const port3 = '8443';
+const host1 = '192.168.0.39';
 const host = 'localhost';
 export const accessTokenCookie = 'accessToken'
 export let isLoggedIn = false
@@ -54,6 +55,10 @@ export const registartionAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/s
 export const autoSuggestAPI = `${secureHttp}://${host}:${port2}/api/v1/search/autosuggest/`;
 /* User Login API */
 export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/user`;
+/* PLP Sub-Category API */
+export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/11534`;
+/* Footer logo url */
+export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
 
 
 

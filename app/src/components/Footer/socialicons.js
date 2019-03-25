@@ -1,5 +1,4 @@
 import React from 'react';
-import image from '../../../public/images/search.png';
 
 const socialIcon = (props) => {
     const socialHtml = props.name.map((item, index) => {

@@ -12,72 +12,48 @@ import { compose } from 'redux';
 
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
-import makeSelectPlpContainer from '../../selectors/plpContainer/selectors';
-import reducer from '../../reducers/plpContainer/reducer';
+import makeSelectPlpContainer from './selectors';
+import reducer from './reducer';
 import saga from '../../saga/plpContainer/saga';
 import PlpComponent from '../../components/PlpComponent/index';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 import ProductItem from '../../components/GlobalComponents/productItem/productItem';
-import Filter from '../../components/PlpComponent/filter';
+import Filter from '../../components/PlpComponent/Filter/filter';
+import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner'
 import { getReleventReduxState } from '../../utils/utilityManager';
-import * as actionCreators from '../../actions/plpContainer/actions';
+import * as actionCreators from './actions';
+import axios from 'axios';
+import { plpSubCatAPI, storeId, accessToken } from '../../../public/constants/constants';
 
 /* eslint-disable react/prefer-stateless-function */
 export class PlpContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      plpSubCatData:null,
     };
   }
 
+  componentDidMount() {
+    this.fetchSubCategoryData();
+  }
+
+  fetchSubCategoryData() {
+    axios.get(plpSubCatAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+      this.setState({plpSubCatData:response.data.data})
+      
+    }).catch(error => {
+      console.log('PLPSUBError---', error);
+    });
+  }
+
+
   render() {
     return <>
-      {/* Need to remove image from Css and put in JSX */}
-      {/* <img src={require('../../public/images/product-slider.jpg')} alt='slider' /> */}
-      <div className='plp-slider'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12'>
-              <div className='explore-range'>
-                <h3 className='heading'>Explore the range of {this.props.ctr}  <br />Table</h3>
-                <a onClick={this.props.onIncrementCounter} href='#' className='btn-bg'>Shop now </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <section className='tablecarousel'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-12 text-center'>
-              <div className='headingText'>
-                <Filter />
-                <h3 className='heading'>Table - {this.props.updatedFilter}</h3>
-                <p className='total-products'>(38 Product)</p>
-              </div>
-            </div>
-          </div>
-          <SubCategories />
-        </div>
-      </section>
-
-      <section className='plpCategories'>
-        <div className='container'>
-          <div className='row'>
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-          </div>
-        </div>
-      </section>
-
+      <MarketingTextBanner />
+      <SubCategories subCategoryData={this.state.plpSubCatData}/>
     </>;
   }
 }

@@ -1,36 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const categoriesHandler = require('../../handlers/categoryhandler');
-
-router.get('/room', (req, res, next) => {
-  categoriesHandler.productsByCategories(
-    req.url.substring(1),
-    req.headers,
-    req.query,
-    (err, result) => {
-      if (err) {
-        next(err);
-      } else {
-        res.status(200).send(result);
-      }
-    },
-  );
-});
-
-router.get('/product', (req, res, next) => {
-  categoriesHandler.getProductTable(
-    req.url.substring(1),
-    req.headers,
-    req.query,
-    (err, result) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      res.status(200).send(result);
-    },
-  );
-});
+const testJson = require('../../configs/testjson');
 
 router.get('/:keyword', (req, res, next) => {
   categoriesHandler.getCategories(
@@ -47,6 +18,36 @@ router.get('/:keyword', (req, res, next) => {
       });
     },
   );
+});
+
+router.get('/subcategories/:categoryID', (req, res, next) => {
+  res.status(200).send({
+    status: 'success',
+    data: testJson.subcategories,
+  });
+  /*  categoriesHandler.getSubCategories(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  }); */
+});
+
+router.get('/details/:categoryID', (req, res, next) => {
+  categoriesHandler.getCategoryDetails(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
 });
 
 module.exports = router;

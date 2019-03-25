@@ -43,7 +43,9 @@ class FooterContainer extends React.Component {
                             <Footer
                                 links={this.state.footer.data.Footer_Links}
                                 newsletter={this.state.footer.data.Footer_Newsletter_Data}
-                                socialicons={this.state.footer.data.Footer_Social_Data}             
+                                socialicons={this.state.footer.data.Footer_Social_Data}
+                                stores={this.state.footer.data.Footer_StoreLinks}
+                                categories={this.state.footer.data.Footer_Categories}        
                             />
                         ) : (
                             <Alert className='alert-danger text-center'>Something Went Wrong!</Alert>                

@@ -12,6 +12,16 @@ router.get('/page', (req, res, next) => {
   });
 });
 
+router.get('/itemlist', (req, res, next) => {
+  wishlistHandler.wishlistItemList(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send(resultJson(result));
+  });
+});
+
 router.get('/itemcount', (req, res, next) => {
   wishlistHandler.wishlistItemCount(req.headers, (err, result) => {
     if (err) {

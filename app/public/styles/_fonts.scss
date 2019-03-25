@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'CeraGILight';
+    src: url('./fonts/CeraGodrejInterio-Bold.eot');
+    src: url('./fonts/CeraGodrejInterio-Light.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/CeraGodrejInterio-Light.woff2') format('woff2'),
+        url('./fonts/CeraGodrejInterio-Light.woff') format('woff'),
+        url('./fonts/CeraGodrejInterio-Light.ttf') format('truetype'),
+        url('./fonts/CeraGodrejInterio-Light.svg#CeraGodrejInterio-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CeraGIRegular';
+    src: url('./fonts/CeraGodrejInterio-Regular.eot');
+    src: url('./fonts/CeraGodrejInterio-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/CeraGodrejInterio-Regular.woff2') format('woff2'),
+        url('./fonts/CeraGodrejInterio-Regular.woff') format('woff'),
+        url('./fonts/CeraGodrejInterio-Regular.ttf') format('truetype'),
+        url('./fonts/CeraGodrejInterio-Regular.svg#CeraGodrejInterio-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}   
+
+@font-face {
+    font-family: 'CeraGIBold';
+    src: url('./fonts/CeraGodrejInterio-Bold.eot');
+    src: url('./fonts/CeraGodrejInterio-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/CeraGodrejInterio-Bold.woff2') format('woff2'),
+        url('./fonts/CeraGodrejInterio-Bold.woff') format('woff'),
+        url('./fonts/CeraGodrejInterio-Bold.ttf') format('truetype'),
+        url('./fonts/CeraGodrejInterio-Bold.svg#CeraGodrejInterio-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+$font-regular:CeraGIRegular,sans-serif;
+$font-light:CeraGILight,sans-serif;
+$font-bold:CeraGIBold,sans-serif;

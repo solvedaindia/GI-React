@@ -9,12 +9,14 @@ const prodWcsResourceUrl = `https://${HostName}/wcs/resources/store`;
 
 // export the CONSTANT URL
 module.exports = Object.freeze({
-  TopCategoryHierarchy: `${prodSearchResourceUrl}/{{storeId}}/categoryview/{{urlParam}}`,
   espotOriginURL: `${prodWcsResourceUrl}/{{storeId}}/espot`,
   categoryview: `${prodSearchResourceUrl}/{{storeId}}/categoryview/{{urlParam}}`,
   categoryViewByParentId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byParentCategory/{{categoryId}}`,
+  categoryViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byId/{{categoryId}}`,
   productViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?searchSource=E`,
-  productViewById: `${prodWcsResourceUrl}/{{storeId}}/productview/byId/{{productid}}`,
+  productViewByProductId: `${prodSearchResourceUrl}/{{storeId}}/productview/byId/{{productId}}`,
+  productViewByProductIds: `${prodSearchResourceUrl}/{{storeId}}/productview/byIds?{{idQuery}}`,
+  associatedPromotion: `${prodWcsResourceUrl}/{{storeId}}/associated_promotion?qProductId={{productId}}&q=byProduct`,
   login: `${prodWcsResourceUrl}/{{storeId}}`,
   userRegistration: `${prodWcsResourceUrl}/{{storeId}}/person?responseFormat=json&mode=self`,
   userDetails: `${prodWcsResourceUrl}/{{storeId}}/person/@self`,

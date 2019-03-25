@@ -1,0 +1,35 @@
+@import '../variable.scss';
+@import '../base.scss';
+
+.welcomeBack {
+    .modal-dialog {
+        width: 60%;
+    }
+    .loginForm {
+        width: 50%;
+        display: inline-block;
+        padding: $base*4;
+        .form-label {
+            font-size: $base*1.5;
+            color: $colorLightGrey;
+        }
+        .formBtn {
+            width: 100%;
+            background-color: $colorblack;
+            color: $colorwhite;
+            padding: $base;
+            border: transparent;
+            border-radius: $base*0.5;
+        }
+        .error-msg {
+            color: $errorMsg;
+            font-size: $base*1.25;
+        }
+    }
+    .registerHere,
+    .socialLogin {
+        width: 50%;
+        text-align: center;
+        padding: $base*2 $base*4;
+    }
+}

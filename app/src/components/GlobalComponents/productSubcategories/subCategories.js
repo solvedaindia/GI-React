@@ -1,56 +1,75 @@
 import React from 'react';
+import Slider from 'react-slick';
+import SubCatItem from './subCatItem';
+import '../../../../public/styles/plpContainer/plpContainer.scss'
 
+const prevArrow = <img src={require('../../../../public/images/plpAssests/carousel__arrowLeft.svg')} />
+const nextArrow = <img src={require('../../../../public/images/plpAssests/carousel__arrowRight.svg')} />
 class SubCategories extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      subCatItem: null,
+    };
+
+    // this.settings = {
+
+    //     dots: false,
+    //     infinite: true,
+    //     speed: 500,
+    //     slidesToShow: 4,
+    //     slidesToScroll: 4
+
+    // };
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    console.log('PLPSUB componentWillReceiveProps ---', nextProps.subCategoryData);
+
+    const data = nextProps.subCategoryData;
+    if (data) {
+      const itemsArr = data.map((item, index) => {
+        return (
+          <SubCatItem key={index} itemData={item} />
+        );
+      })
+      this.setState({
+        subCatItem: itemsArr,
+      });
+    }
+  }
+
   render() {
+
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      prevArrow: prevArrow,
+      nextArrow: nextArrow,
+    };
+
     return (
-      
+      <section className='tablecarousel'>
+        <div className='container'>
           <div className='row'>
-            <div className='col-xl-3 col-lg-3 col-md-3 col-sm-3'>
-              <div className='featureCarouselbox'>
-                <div className='itemImg'>
-                  <img className='img-fullwidth' src={require('../../../../public/images/product1.jpg')} alt='product' />
-                  <div className='itemtext'>
-                    <p className='innertext'>Dining Tables<br />28 Products</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='col-xl-3 col-lg-3 col-md-3 col-sm-3'>
-              <div className='featureCarouselbox'>
-                <div className='itemImg'>
-                  <img className='img-fullwidth' src={require('../../../../public/images/product1.jpg')} alt='product' />
-                  <div className='itemtext'>
-                    <p className='innertext'>Dining Tables<br />28 Products</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='col-xl-3 col-lg-3 col-md-3 col-sm-3'>
-              <div className='featureCarouselbox'>
-                <div className='itemImg'>
-                  <img className='img-fullwidth' src={require('../../../../public/images/product1.jpg')} alt='product' />
-                  <div className='itemtext'>
-                    <p className='innertext'>Dining Tables<br />28 Products</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='col-xl-3 col-lg-3 col-md-3 col-sm-3'>
-              <div className='featureCarouselbox'>
-                <div className='itemImg'>
-                  <img className='img-fullwidth' src={require('../../../../public/images/product1.jpg')} alt='product' />
-                  <div className='itemtext'>
-                    <p className='innertext'>Dining Tables <br /> 28 Products</p>
-                  </div>
-                </div>
+            <div className='col-md-12 text-center'>
+              <div className='headingText'>
+                <h3 className='heading'>Table</h3>
+                <p className='total-products'>(38 Product)</p>
               </div>
             </div>
           </div>
+          <Slider {...settings}>
+            {this.state.subCatItem}
+          </Slider>
 
-       
+        </div>
+      </section>
+
     )
   }
 }

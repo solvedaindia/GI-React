@@ -1,8 +1,14 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import WelcomeBackForm from '../WelcomeBackForm';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import {facebookAppId, googleClientId } from '../../../public/constants/constants';
+
 import axios from 'axios';
 import { storeId, accessToken, accessTokenCookie, userLoginAPI } from '../../../public/constants/constants';
+
+import '../../../public/styles/login/login.scss';
 
 class WelcomeBack extends React.Component {
 	constructor() {
@@ -55,8 +61,28 @@ class WelcomeBack extends React.Component {
 					<Modal.Header closeButton>
 						<Modal.Title>Welcome Back</Modal.Title>
 					</Modal.Header>
-					<WelcomeBackForm handleUserData={this.handleUserLoginApi.bind(this)}/>
+					<WelcomeBackForm className='loginForm' handleUserData={this.handleUserLoginApi.bind(this)}/>
+					<p className='registerHere'>New to Interio? <span>Register</span></p>
+					<div className='socialLogin'>
+						<GoogleLogin className='btn-white'
+						clientId={googleClientId}                  
+						buttonText='Sign in with Google'
+						cssClass="btn-white"                             
+						onSuccess={this.responseGoogle}
+						onFailure={this.responseGoogle}
+						/>
+						<FacebookLogin 
+						appId={facebookAppId}
+						autoLoad={true}
+						fields="name,email,picture"
+						cssClass="btn-white btn-fb"                 
+						buttonText='Sign in with Facebook'
+						onClick={this.facebookOnClick}
+						callback={this.responseFacebook}
+						/>
+					</div>
 				</Modal>
+				
 			</div>
 		);
 	}
