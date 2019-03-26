@@ -4,6 +4,7 @@ import WelcomeBackForm from '../WelcomeBackForm';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import {facebookAppId, googleClientId } from '../../../public/constants/constants';
+import { onFacebookResponse, onGoogleResponse } from '../../utils/socialLoginHandler';
 
 import axios from 'axios';
 import { storeId, accessToken, accessTokenCookie, userLoginAPI } from '../../../public/constants/constants';
@@ -27,6 +28,58 @@ class WelcomeBack extends React.Component {
   
 	handleShow() {
 	  	this.setState({ show: true, message: null });
+	}
+
+	//Social Login Handlers
+	responseGoogle = (response) => {
+		const profileData = response.profileObj;
+		if (!profileData.email) {
+			alert('SocialLogin - Email Id missing');
+			return;
+		}
+
+		this.setState({
+			firstName: profileData.givenName,
+			lastName: profileData.familyName,
+			authorizationProvider: 'google',
+			userId: response.googleId,
+			socialToken: response.accessToken,
+			emialId: profileData.email
+		})
+
+		onGoogleResponse(this.state, (itemData) => {
+			console.log('GoogleCallback', itemData)
+		})
+	}
+
+	responseFacebook = (response) => {
+
+		if (!response.email) {
+			alert('SocialLogin - Email Id missing');
+			return;
+		}
+
+		// Remove below condition to get auto Facebook login.
+		if (this.state.isFacebookClicked) {
+			const firstName = response.name.substr(0, response.name.indexOf(' '));
+			const lastName = response.name.substr(response.name.indexOf(' ') + 1)
+			this.setState({
+				firstName: firstName,
+				lastName: lastName,
+				authorizationProvider: 'facebook',
+				userId: response.userID,
+				socialToken: response.accessToken,
+				emialId: response.email
+			})
+
+			onFacebookResponse(this.state, (itemData) => {
+				console.log('FacebookCallback', itemData)
+			})
+		}
+	}
+
+	facebookOnClick() {
+		this.setState({ isFacebookClicked: true });
 	}
 
 	/* Handle User Login API */

@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import SubCatItem from './subCatItem';
 import '../../../../public/styles/plpContainer/plpContainer.scss'
 
-const prevArrow = <img src={require('../../../../public/images/plpAssests/carousel__arrowLeft.svg')} />
-const nextArrow = <img src={require('../../../../public/images/plpAssests/carousel__arrowRight.svg')} />
+const prevArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowLeft.svg')} />
+const nextArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowRight.svg')} />
 class SubCategories extends React.Component {
   constructor(props) {
     super(props);
@@ -12,21 +12,22 @@ class SubCategories extends React.Component {
       subCatItem: null,
     };
 
-    // this.settings = {
-
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 4,
-    //     slidesToScroll: 4
-
-    // };
+    this.settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      arrows: true,
+      prevArrow: prevArrowImg,
+      nextArrow: nextArrowImg,
+      // prevArrow,
+      // nextArrow,
+    };
   }
 
 
   componentWillReceiveProps(nextProps) {
-    console.log('PLPSUB componentWillReceiveProps ---', nextProps.subCategoryData);
-
     const data = nextProps.subCategoryData;
     if (data) {
       const itemsArr = data.map((item, index) => {
@@ -41,17 +42,6 @@ class SubCategories extends React.Component {
   }
 
   render() {
-
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      prevArrow: prevArrow,
-      nextArrow: nextArrow,
-    };
-
     return (
       <section className='tablecarousel'>
         <div className='container'>
@@ -63,7 +53,7 @@ class SubCategories extends React.Component {
               </div>
             </div>
           </div>
-          <Slider {...settings}>
+          <Slider {...this.settings}>
             {this.state.subCatItem}
           </Slider>
 

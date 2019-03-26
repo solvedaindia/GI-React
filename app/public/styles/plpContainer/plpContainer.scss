@@ -1,6 +1,6 @@
 /* PLP
 -------------------------------------------*/
-@import '../app.scss';
+@import "../app.scss";
 @import '../base.scss';
 $colorwhite: #fff;
 $imgfullwid: 100%;
@@ -57,7 +57,6 @@ section.tablecarousel {
   }
 }
 
-
 /*------Featured Categories
 -------------------------------------*/
 
@@ -104,9 +103,12 @@ section.tablecarousel {
     padding: 15px 15px 5px;
     margin-bottom: 15px;
     position: relative;
+    /*
+    ** ------ Remove below scss to show swatches on hover ------- **
     .imgBox:hover .overlay-comparequick {
       opacity: 1;
     }
+    */
     .featured-texttop {
       position: absolute;
       top: 10px;
@@ -206,4 +208,27 @@ section.tablecarousel {
 }
 .offerpercent {
   font-style: italic;
+}
+
+/** Descripton */
+.descriptionBanner {
+  background: #f7f8f8;
+  padding: 60px 0;
+
+  .heading {
+    font-family: $font-bold;
+    font-size: 34px;
+    color: #000;
+    margin: 0 0 20px 0;
+  }
+
+  .readMore {
+    text-decoration: underline;
+    color: #000;
+    font-size: 16px;
+    font-family: $font-regular;
+    margin: 24px 0;
+    display: inline-block;
+    cursor: pointer;
+  }
 }

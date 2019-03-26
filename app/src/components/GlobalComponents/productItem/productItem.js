@@ -1,12 +1,18 @@
 import React from 'react';
+import ItemImage from './image';
+import RibbonTag from './ribbonTag';
+import Price from './price';
+import Promotions from './promotion';
 
 class ProductItem extends React.Component {
+
     render() {
+        console.log('myyyyy---', this.props.data);
         return (
             <div className='col-xl-4 col-lg-4 col-md-4 col-sm-6'>
                 <div className='productBox'>
                     <div className='imgBox'>
-                        <img className='img-fullwidth' src={require('../../../../public/images/plp-1.png')} alt='sofa' />
+                        <ItemImage data={this.props.data.imageSrc} />
                         <div className='featurepro-like'>
                             <div className='fa fa-heart-o wishlist'></div>
                         </div>
@@ -26,12 +32,11 @@ class ProductItem extends React.Component {
                         </div>
                     </div>
 
-                    <div className='featured-texttop'>Featured Product</div>
+                    <RibbonTag data={this.props.data.ribbonText}/>
                     <div className='product-text'>
-                        <p className='paragraph'>Fantasia Similine</p>
-                        <p className='price paragraph'>Rs 23,000 <span className='priceno-discount'>26,000</span> <span className='offerpercent'>(30%
-                            off)</span></p>
-                        <p className='paragraph'>Get free chairs with this</p>
+                        <p className='paragraph'>{this.props.data.productName}</p>
+                        <Price actualPrice={this.props.data.actualPrice} offerPrice={this.props.data.offerPrice}/>
+                        <Promotions data={this.props.data.promotionData}/>
                     </div>
                 </div>
             </div>
