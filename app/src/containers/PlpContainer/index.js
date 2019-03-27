@@ -61,7 +61,7 @@ export class PlpContainer extends React.Component {
         this.setState({ plpSubCatData: response.data.data });
       })
       .catch(error => {
-        // console.log('PLPSUBError---', error); 
+        // console.log('PLPSUBError---', error);
       });
   }
 
