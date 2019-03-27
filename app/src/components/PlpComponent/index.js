@@ -5,8 +5,7 @@
  */
 
 import React from 'react';
-import ProductItem from '../GlobalComponents/productItem/productItem';;
-
+import ProductItem from '../GlobalComponents/productItem/productItem';
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -17,27 +16,26 @@ class PlpComponent extends React.Component {
   }
 
   componentDidMount() {
-    console.log('plpcommm---', this.props.plpDataPro)
+    console.log('plpcommm---', this.props.plpDataPro);
     const plpData = this.props.plpDataPro;
     if (plpData) {
-      const item = plpData.map((item, index) => {
-        return (
-          <ProductItem key={index} data={item} />
-        )
-      })
+      const item = plpData.map((item, index) => (
+        <ProductItem key={index} data={item} />
+      ));
       this.setState({ plpItem: item });
     }
-    
   }
 
   render() {
-
     return (
       <>
-        <section className='plpCategories'>
-          <div className='container'>
-            <div className='row'>
-              {this.state.plpItem}
+        <section className="plpCategories">
+          <div className="container">
+            <div className="row no-padding">
+              <ul className="plp-products">
+                {this.state.plpItem}
+                {this.state.plpItem}
+              </ul>
             </div>
           </div>
         </section>
