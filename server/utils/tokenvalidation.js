@@ -38,7 +38,7 @@ exports.validateSecureToken = function validateSecureToken(req, res, next) {
   const headerToken = req.headers.access_token;
   try {
     if (
-      req.url.indexOf('/secure/login/guest') !== -1
+      req.url.indexOf('/token/guest') !== -1
       // req.url.indexOf('/otp/generate') !== -1 ||
       // req.url.indexOf('/footer') !== -1
     ) {

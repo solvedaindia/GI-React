@@ -97,13 +97,13 @@ module.exports.changeUserCredentials = function changeUserCredentials(
   const reqBody = {
     logonPassword: params.new_password,
     logonPasswordVerify: params.new_password,
+    userField1: params.current_password,
   };
 
   const originUserURL = constants.changePassword.replace(
     '{{storeId}}',
     headers.store_id,
   );
-
   origin.getResponse(
     'PUT',
     originUserURL,
@@ -115,7 +115,7 @@ module.exports.changeUserCredentials = function changeUserCredentials(
     response => {
       if (response) {
         if (response.status === 200) {
-          callback(null, { message: 'Password Change Successfully' });
+          callback(null, { message: 'Password Changed Successfully' });
         } else {
           callback(errorutils.handleWCSError(response));
         }

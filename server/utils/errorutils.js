@@ -147,6 +147,20 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'CWXBB1012E') {
         return errorlist.token_expired;
       }
+      if (errBody.errors[0].errorKey === 'TOKEN_VALIDATION_FAIL') {
+        return {
+          status_code: 400,
+          error_key: 'social_token_expired',
+          error_message: 'Social Token Expired',
+        };
+      }
+      if (errBody.errors[0].errorKey === '_ERR_BAD_PARMS') {
+        return {
+          status_code: 400,
+          error_key: 'current_password_incorrect',
+          error_message: 'Your current password is incorrect',
+        };
+      }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||
         errorlist.invalid_params
