@@ -1,7 +1,7 @@
 /* PLP
 -------------------------------------------*/
 @import "../app.scss";
-@import '../base.scss';
+@import "../base.scss";
 $colorwhite: #fff;
 $imgfullwid: 100%;
 
@@ -60,39 +60,48 @@ section.tablecarousel {
 /*------Featured Categories
 -------------------------------------*/
 
-.featureCarouselbox{
-    .slick-prev{left:-20px}
-    .slick-prev{right:-20px}
-    margin: 0 15px 15px 15px; 
-    padding-top: 0;
-    .heading {font-weight:$font-bold;padding: 30px 0 50px 0; margin:0; text-align: center; color: #505d68; }    
-     .Imgbox{    
-         padding: 0 0 10px 0;
-        .imgfullwidth{
-            width:100%
-        }
-  
-     }
-    .itemtext {
-        .text{
-            color:#000;
-        }
-        .leftbox{
-            float: left;
-            .bold{
-                font-family: $font-bold;    
-                font-size: 16px;
-            }
-            .start_price{
-                font-size: 11px;
-                font-style: italic;
-            }
-        }
-        .rightbox{
-            float: right;
-            font-size: 11px;
-        }
-    } 
+.featureCarouselbox {
+  .slick-prev {
+    left: -20px;
+  }
+  .slick-prev {
+    right: -20px;
+  }
+  margin: 0 15px 15px 15px;
+  padding-top: 0;
+  .heading {
+    font-weight: $font-bold;
+    padding: 30px 0 50px 0;
+    margin: 0;
+    text-align: center;
+    color: #505d68;
+  }
+  .Imgbox {
+    padding: 0 0 10px 0;
+    .imgfullwidth {
+      width: 100%;
+    }
+  }
+  .itemtext {
+    .text {
+      color: #000;
+    }
+    .leftbox {
+      float: left;
+      .bold {
+        font-family: $font-bold;
+        font-size: 16px;
+      }
+      .start_price {
+        font-size: 11px;
+        font-style: italic;
+      }
+    }
+    .rightbox {
+      float: right;
+      font-size: 11px;
+    }
+  }
 }
 
 /*------------end-----*/
@@ -223,6 +232,8 @@ section.tablecarousel {
   }
 
   .readMore {
+    background: transparent;
+    border: none;
     text-decoration: underline;
     color: #000;
     font-size: 16px;
@@ -230,5 +241,17 @@ section.tablecarousel {
     margin: 24px 0;
     display: inline-block;
     cursor: pointer;
+    &:focus{
+      outline: none;
+    }
+    &:active{
+      outline: none;
+    }
   }
+}
+
+.description_area .list {
+  color: #767676;
+  margin: 0 0 10px 0;
+  font-size: 14px;
 }
