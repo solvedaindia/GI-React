@@ -88,6 +88,7 @@ export class PlpContainer extends React.Component {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
+        console.log('PLPPriductData---', response.data);
         this.setState({ plpData: response.data.data });
       })
       .catch(error => {

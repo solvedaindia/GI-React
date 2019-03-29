@@ -86,6 +86,17 @@ section.tablecarousel {
 }
 
 .plpCategories {
+  .headingTitle{
+      font-family: $font-bold;
+      font-size: 50px;
+      color: #026dc6;
+      margin: 0;
+  }
+  .headingSubTitle{
+    color: $colorLightGrey;
+    margin: 0 0 15px 0;
+    font-size: 13px;
+  }
  .container{ padding:0 30px;}
  .plp-products{
   .productlist {    
@@ -122,7 +133,7 @@ section.tablecarousel {
         color:#000;
         padding: 8px 20px;
         transform: translate(-50%, -50%);
-        font-family:$font-bold;
+        font-family:$font-light;
         left: 50%;
         top: 50%;       
       }
