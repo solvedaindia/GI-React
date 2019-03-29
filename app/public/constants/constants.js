@@ -67,6 +67,8 @@ export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/lo
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist`;
 /* Footer logo url */
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
+/* PDP API */
+export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

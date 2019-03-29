@@ -27,6 +27,7 @@ import HomePageContainer from '../HomePageContainer/index';
 import HeaderContainer from '../HeaderContainer/index';
 import ClpContainer from '../ClpContainer/index';
 import PlpContainer from '../PlpContainer/index';
+import PdpContainer from '../PdpContainer/pdp';
 import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
