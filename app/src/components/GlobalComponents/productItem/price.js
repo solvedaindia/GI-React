@@ -4,8 +4,10 @@ class Price extends React.Component {
 
     render() {
         return (
-            <p className='price paragraph'>Rs {this.props.offerPrice} <span className='priceno-discount'>{this.props.actualPrice}</span> <span className='offerpercent'>(30%
-                off)</span></p>
+            <>
+            <span className='discount-price'>₹{this.props.offerPrice}</span>{' '}
+            <span className='priceno-discount'>₹{this.props.actualPrice}</span>
+            </>
         );
     }
 }
