@@ -4,6 +4,7 @@ import { registartionAPI, generateOTPAPI, accessToken } from '../../../public/co
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { regexEmail, regexMobileNo, validateEmptyObject, regexPw } from '../../utils/validationManager';
 import { registerWithEmail, registerWithMobileNum } from './constants';
+import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
 
 class RegisterWithEmailMobile extends React.Component {
     constructor(props) {
@@ -150,7 +151,14 @@ class RegisterWithEmailMobile extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col xs={12} md={8}>
+                <Col xs={12} md={5} className='no-padding'>
+                        {/* <div className='imagebox'></div> */}
+                        <div className='Thumbnailbox'>
+                         <img className='imgfullwidth' src={RegisterThumbnailImg}/>
+                        </div>
+                    </Col>
+
+                    <Col xs={12} md={7}>
                         <div className='form_register'>
                             <h3 className='heading'>Join us Now</h3>
                             <div>
@@ -200,9 +208,7 @@ class RegisterWithEmailMobile extends React.Component {
                             </div>
                         </div>
                     </Col>
-                    <Col xs={12} md={4} className='no-padding'>
-                        <div className='imagebox'></div>
-                    </Col>
+                   
                 </Row>
             </div>
         );

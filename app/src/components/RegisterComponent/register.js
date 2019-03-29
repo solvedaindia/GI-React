@@ -1,14 +1,16 @@
 import React from 'react';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col,FormGroup } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { facebookAppId, googleClientId } from '../../../public/constants/constants';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { registerWithEmail, registerWithMobileNum } from './constants';
+import {LogoUrl} from './constants';
 import { onFacebookResponse, onGoogleResponse } from '../../utils/socialLoginHandler';
 
+
 class Register extends React.Component {
-	constructor(props) {
+	constructor(props) {		
 		super(props);
 		this.state = {
 			firstName: null,
@@ -84,10 +86,14 @@ class Register extends React.Component {
 	render() {
 		return (
 			<Row>
-				<Col xs={12} md={8}>
+				<Col xs={12} md={12}>
 					<div className='form_register'>
-						<h3 className='heading'>Join us Now</h3>
-						<div>
+					   <div className='joinUs'>
+					     <img className='logo_width' src={LogoUrl} alt='logo'/>
+					     <h3 className='joinus-heading'>Join us Now</h3>
+					   </div>
+						
+						<div className='inner-joinusform'>
 							<div className='btn-wrapper'>
 								<GoogleLogin className='btn-white'
 									clientId={googleClientId}
@@ -107,15 +113,19 @@ class Register extends React.Component {
 								/>
 							</div>
 							<p className='text_or'>- or -</p>
-							<Button className='btn-white btn-block' ref='email' onClick={this.handleRegisterWithEmail.bind(this)}>Email</Button>
+							<FormGroup>
+							<Button className='btn-bg btn-block' ref='email' onClick={this.handleRegisterWithEmail.bind(this)}>Email</Button>
+							</FormGroup>
 							<p className='text_or'>- or -</p>
-							<Button className='btn-white btn-block' ref='mobile' onClick={this.handleRegisterWithMobile.bind(this)}>Mobile</Button>
+							<FormGroup>
+							<Button className='btn-bg btn-block' ref='mobile' onClick={this.handleRegisterWithMobile.bind(this)}>Mobile</Button>
+							</FormGroup>
 						</div>
 					</div>
 				</Col>
-				<Col xs={12} md={4} className='no-padding'>
+				{/* <Col xs={12} md={4} className='no-padding'>
 					<div className='imagebox'></div>
-				</Col>
+				</Col> */}
 			</Row>
 		);
 	}

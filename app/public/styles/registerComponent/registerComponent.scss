@@ -2,6 +2,7 @@
 @import '../app.scss';
 @import '../base.scss';
 
+
 .modal_register {    
     .modal-dialog{
         .modal-wrapperotp {
@@ -11,15 +12,45 @@
                 height: 294px;
                 margin-top: -147px;
                  .form_register {
-                    max-width: 60%;}
+                    max-width: 60%;
+                
+                }
             }
         }
+
+
+        .modal-wrapperjoinus {           
+            .modal-wrapper{
+                padding: 0;
+                height: 500px;
+                width:470px;
+                margin-top: -250px;
+                margin-left:-235px;
+
+                .joinUs{
+                    background: url(../../images/join-bg.png) no-repeat;    
+                    width: 100%;
+                    text-align: center;
+                    padding:30px 0;
+                    .logo_width{width:150px}
+                    .joinus-heading{color:$colorwhite}
+                  
+                }
+                 .form_register {
+                    max-width: 100%;
+                    padding:0;
+                    .inner-joinusform{padding:20px 50px;}
+                }
+            }
+        }
+
+
         .modal-wrapper{   
             padding: 0;
-            height: 490px;
-            margin-top: -245px;
+            height: 515px;
+            margin-top: -258px;
             .otp_screen{max-width: 70%;margin:0 auto;    color: #979797;}
-            .form_register{
+            .form_register{                
                 .btn-back{    
                     position: absolute;
                     top: 20px;
@@ -30,28 +61,33 @@
                 }
 
             .form-group{ margin:0;
-            .btn-bg{ margin:15px 0 0 0; }
+            .btn-bg{ 
+                     margin:15px 0 0 0; 
+                     background: $black; 
+                     border-radius: 0;
+                    }
                 .sign_text{
                     text-align: center;
                     padding:15px 0 0 0; 
-                    color: #979797;   
-                    .link{ color: #979797;}     
+                    color: $battleship-grey;   
+                    .link{ color:$cerulean-blue;}     
                 }
                 }
                 max-width: 80%;
                 padding: 30px 0 0 0;
                 margin: 0 auto;
             .heading{
-                text-align: center;
+                text-align: left;
                 font-family:$font-bold;
                 text-transform: capitalize;
                 padding: 0 0 30px 0;
                 margin: 0;
-                color: #424b5a;
+                color: $black;
+                font-size: 32px;
                 }
             
                 .label {
-                    color: #979797;
+                    color:$battleship-grey;
                     text-transform: uppercase;
                     background: transparent;
                     margin: 0;
@@ -65,6 +101,7 @@
                     box-shadow: none;
                     height: 40px;
                     margin: 0 0 28px 0;
+                    border:1px solid $light-grey;
                 }
                 .error-msg {
                     position: absolute;
@@ -117,6 +154,11 @@
                 background-size: 100% 100%;    
                 width: 100%;
                 border-left:1px solid #ccc;
+            }
+            .Thumbnailbox{
+                .imgfullwidth{
+                    width:100%;
+                }
             }
         }
         }
