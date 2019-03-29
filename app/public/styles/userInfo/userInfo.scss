@@ -1,0 +1,28 @@
+@import '../variable.scss';
+.user{
+    .welcomeDropDown {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        padding: 8px;
+        top: 99px;
+        max-width: 200px;
+        right: 5px;
+        background-color: $colorwhite;
+        transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        z-index: 3;
+        -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+        -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+        -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+    }
+    &:hover{
+        .welcomeDropDown {
+            visibility: visible;
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}

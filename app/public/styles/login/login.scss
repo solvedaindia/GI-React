@@ -3,11 +3,11 @@
 
 .welcomeBack {
     .modal-dialog {
-        width: 60%;
+        width: 35%;
     }
     .loginForm {
-        width: 50%;
-        display: inline-block;
+        width: 100%;
+        margin: auto;
         padding: $base*4;
         .form-label {
             font-size: $base*1.5;
@@ -28,8 +28,13 @@
     }
     .registerHere,
     .socialLogin {
-        width: 50%;
+        width: 100%;
         text-align: center;
         padding: $base*2 $base*4;
+    }
+    .socialLogin {
+        .appLogin {
+            margin: $base;
+        }
     }
 }

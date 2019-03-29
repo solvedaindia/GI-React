@@ -106,18 +106,17 @@ class WelcomeBack extends React.Component {
 		}
 		return (
 			<div>
-				<Button variant='primary' onClick={this.handleShow}>
-					Click Here
-				</Button>
+				<a variant='primary' onClick={this.handleShow}>
+					Login/Register
+				</a>
+
 				<Modal className='welcomeBack' size='lg' animation={false} show={this.state.show} onHide={this.handleClose}>
 					{message}
 					<Modal.Header closeButton>
 						<Modal.Title>Welcome Back</Modal.Title>
 					</Modal.Header>
-					<WelcomeBackForm className='loginForm' handleUserData={this.handleUserLoginApi.bind(this)}/>
-					<p className='registerHere'>New to Interio? <span>Register</span></p>
 					<div className='socialLogin'>
-						<GoogleLogin className='btn-white'
+						<GoogleLogin className='btn-white appLogin'
 						clientId={googleClientId}                  
 						buttonText='Sign in with Google'
 						cssClass="btn-white"                             
@@ -128,14 +127,15 @@ class WelcomeBack extends React.Component {
 						appId={facebookAppId}
 						autoLoad={true}
 						fields="name,email,picture"
-						cssClass="btn-white btn-fb"                 
+						cssClass="appLogin"                 
 						buttonText='Sign in with Facebook'
 						onClick={this.facebookOnClick}
 						callback={this.responseFacebook}
 						/>
 					</div>
+					<WelcomeBackForm className='loginForm' handleUserData={this.handleUserLoginApi.bind(this)}/>
+					<p className='registerHere'>New to Interio? <span>Register</span></p>
 				</Modal>
-				
 			</div>
 		);
 	}

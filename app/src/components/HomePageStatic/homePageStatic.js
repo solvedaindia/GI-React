@@ -35,7 +35,6 @@ class HomePageStatic extends React.Component {
                     : (
                         <div>Something Went Wrong</div>
                     )}
-                <WelcomeBack />
             </div>
         );
     }

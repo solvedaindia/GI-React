@@ -15,8 +15,8 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.put('/changecredentials', (req, res, next) => {
-  usersHandler.changeUserCredentials(req.body, req.headers, (err, result) => {
+router.put('/changepassword', (req, res, next) => {
+  usersHandler.changeUserPassword(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

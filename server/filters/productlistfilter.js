@@ -118,7 +118,9 @@ module.exports.productListWithoutSwatch = function productListWithoutSwatches(
       if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
         catalogItem.sKUs.forEach(skuData => {
           const itemBean = filter.filterData('productdetail_summary', skuData);
-          itemBean.hasSwatches = false;
+          delete itemBean.primaryColor;
+          delete itemBean.fixedAttributes;
+          // itemBean.hasSwatches = false;
           productArray.push(itemBean); // Push Item Bean Data in Product Array
         });
       }
