@@ -1,14 +1,14 @@
 import { secureHttp, host1, port3 } from '../../../public/constants/constants';
 
-/*Registration With Mobile Num Constant*/
+/* Registration With Mobile Num Constant */
 export const registerWithMobileNum = 'registerWithMobileNum';
-/*Registration With Email Constant*/
+/* Registration With Email Constant */
 export const registerWithEmail = 'registerWithEmail';
-/*Generate OTP Constant*/
+/* Generate OTP Constant */
 export const generateOtp = 'generateOtp';
-/*Resend OTP Constant*/
+/* Resend OTP Constant */
 export const resendOtp = 'resendOtp';
-/* OTP Confirmed Constant*/
+/* OTP Confirmed Constant */
 export const otpConfirmed = 'otpConfirmed';
 /* joinus logo url */
 export const LogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
