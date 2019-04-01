@@ -8,12 +8,19 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
-import axios from 'axios';
-import { guestLoginAPI, storeId, accessToken, accessTokenCookie, isLoggedIn, getTheAccessToken } from '../../../public/constants/constants';
+import {
+  guestLoginAPI,
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  isLoggedIn,
+  getTheAccessToken,
+} from '../../../public/constants/constants';
 
 import HomePageContainer from '../HomePageContainer/index';
 import HeaderContainer from '../HeaderContainer/index';
@@ -23,8 +30,7 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import '../../../public/styles/app.scss';
-//import { accessTokenCookie } from '../../../public/constants/constants';
-
+// import { accessTokenCookie } from '../../../public/constants/constants';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,7 +43,6 @@ export default class App extends React.Component {
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
   }
 
-
   componentDidMount() {
     this.initialLoginHandling();
 
@@ -46,14 +51,13 @@ export default class App extends React.Component {
   }
 
   initialLoginHandling() {
-    let token = getCookie(accessTokenCookie);
+    const token = getCookie(accessTokenCookie);
     if (token != '') {
       this.setState({ accessToken: token });
-    }
-    else {
+    } else {
       /* Check if User is logged-in or Guest */
-      if (isLoggedIn) {}
-      else {
+      if (isLoggedIn) {
+      } else {
         registerGuestUser(this.guestLoginCallback);
       }
     }
@@ -63,8 +67,8 @@ export default class App extends React.Component {
     if (token != '') {
       getTheAccessToken(token);
       this.setState({ accessToken: token });
+    } else {
     }
-    else { }
   }
 
   resize() {
@@ -72,7 +76,6 @@ export default class App extends React.Component {
   }
 
   render() {
-
     if (this.state.accessToken == '') {
       return <LoadingIndicator />;
     }
@@ -88,12 +91,11 @@ export default class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
-          <Route path='/plp' component={PlpContainer} />
-          <Route path='/forgotpassword' component={ForgotpassContainer} />
-          <Route path='/register' component={RegisterNow} />
+          <Route path="/plp" component={PlpContainer} />
+          <Route path="/forgotpassword" component={ForgotpassContainer} />
+          <Route path="/register" component={RegisterNow} />
         </Switch>
         <FooterContainer />
-
       </div>
     );
   }
