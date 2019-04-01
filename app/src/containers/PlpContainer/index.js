@@ -18,6 +18,7 @@ import saga from '../../saga/plpContainer/saga';
 import PlpComponent from '../../components/PlpComponent/index';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
+import { BrowserRouter } from 'react-router-dom';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 // import ProductItem from '../../components/GlobalComponents/productItem/productItem';
@@ -129,10 +130,12 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
+        {/* <BrowserRouter> */}
         {marketingBanner}
         {subCategories}
         {plpProducts}
         <DescriptionBanner />
+        {/* </BrowserRouter> */}
       </>
     );
   }
