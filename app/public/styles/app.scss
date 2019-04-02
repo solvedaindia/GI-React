@@ -2,6 +2,7 @@
 @import 'variable.scss';
 @import 'base.scss';
 
+
 p{ line-height: 24px} 
 h4{font-weight: bold}
 .form-control:focus { 
@@ -44,16 +45,48 @@ h4{font-weight: bold}
 }
 
     /***-------Comman Modal css---------***/
-.modal-backdrop{background-color: rgba(0, 0, 0, 0.7);}
+.modal-backdrop{
+    background-color: rgba(0, 0, 0, 0.7);
+}
 .modal-dialog{
     min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     justify-content: center; 
     .close {
-        position: absolute; right: 20px;z-index: 9;background:transparent;width: 30px;border-radius: 50%;
-        opacity: 1;height: 30px;top: 20px;color:$black;font-family: $font-light;font-size:16px;
-        &:hover{background:transparent;color:$black;}
+        position: absolute; 
+        right: 20px;
+        z-index: 9;
+        background:transparent;
+        width: 24px;
+        border-radius: 50%;
+        opacity: 1;
+        height: 20px;
+        top: 20px;
+        color:$black;
+        font-family: $font-light;
+        font-size:16px;
+        &:hover{
+            background:transparent;
+            color:$black;
+            opacity: 1;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+        &:before, &:after {
+            position: absolute;
+            left: 11px;
+            top:0;
+            content: ' ';
+            height: 20px;
+            width: 2px;
+            background-color:$colorblack;
+        }
     }  
 .modal-wrapper {   
     width: 800px;

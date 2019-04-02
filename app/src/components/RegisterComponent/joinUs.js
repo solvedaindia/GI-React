@@ -1,12 +1,17 @@
 import React from 'react';
 import { Button, Modal, Form, Grid, Row, Col } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
-import { registartionWithEmailAPI, storeId, accessTokenAPI, generateOTPAPI } from '../../../public/constants/constants';
+import axios from 'axios';
+import {
+  registartionWithEmailAPI,
+  storeId,
+  accessTokenAPI,
+  generateOTPAPI,
+} from '../../../public/constants/constants';
 
 import Register from './register';
 import RegisterWithEmail from './registerWithEmail';
 import GenerateOtp from './generateOtp';
-import axios from 'axios';
 
 class JoinUs extends React.Component {
   constructor() {
@@ -16,14 +21,14 @@ class JoinUs extends React.Component {
 
     this.state = {
       show: false,
-      data: null
-    }
+      data: null,
+    };
   }
 
   handleClose() {
-    this.setState({ 
+    this.setState({
       show: false,
-      data: null
+      data: null,
     });
   }
 
@@ -31,64 +36,78 @@ class JoinUs extends React.Component {
     this.setState({ show: true });
   }
 
-  handleComponent(type, data=null) {
+  handleComponent(type, data = null) {
     let renderComponent = null;
     console.log('Tis is ma');
     if (type === 'registerWithEmail' || type === 'registerWithMobileNum') {
-        renderComponent = <RegisterWithEmail
-                            componentData={this.handleComponent.bind(this)} 
-                            registrationType={type} 
-                            handleApi={this.handleComponetData.bind(this)}/>;
-    } else if(type === 'generateOtp') {
-        renderComponent = <GenerateOtp 
-                            componentData={this.handleComponent.bind(this)} 
-                            userdata={data}
-                            registrationType={type} 
-                            handleApi={this.handleComponetData.bind(this)}/>;
+      renderComponent = (
+        <RegisterWithEmail
+          componentData={this.handleComponent.bind(this)}
+          registrationType={type}
+          handleApi={this.handleComponetData.bind(this)}
+        />
+      );
+    } else if (type === 'generateOtp') {
+      renderComponent = (
+        <GenerateOtp
+          componentData={this.handleComponent.bind(this)}
+          userdata={data}
+          registrationType={type}
+          handleApi={this.handleComponetData.bind(this)}
+        />
+      );
     } else {
-        renderComponent = <Register componentData={this.handleComponent.bind(this)}/> 
+      renderComponent = (
+        <Register componentData={this.handleComponent.bind(this)} />
+      );
     }
 
-    this.setState({data: renderComponent});
+    this.setState({ data: renderComponent });
   }
 
   handleComponetData(api, data, token, type) {
     console.log(type, 'joinUs');
     console.log(data);
-    axios.post(api, data, { 'headers': { 'store_id': storeId, 'access_token': token } }).then(response => {
-      if (type === 'registerWithEmail') {
+    axios
+      .post(api, data, { headers: { store_id: storeId, access_token: token } })
+      .then(response => {
+        if (type === 'registerWithEmail') {
           alert('Registerted successfully!');
           document.cookie = response.data.data.access_token;
-      } else {
+        } else {
           alert(`OTP - ${response.data.data.otpVal}`);
           if (type !== 'resendOtp') {
-          this.handleComponent('generateOtp', data);
+            this.handleComponent('generateOtp', data);
           }
-      }
-  
-  }).catch(error => {
-      const errorData = error.response.data;
-      const errorMessage = errorData.error.error_message;
-      alert(`Error - ${errorMessage}`);
-  });
+        }
+      })
+      .catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        alert(`Error - ${errorMessage}`);
+      });
   }
 
-  render () {
+  render() {
     let data = null;
     if (this.state.data === null) {
-        data = <Register componentData={this.handleComponent.bind(this)}/>
+      data = <Register componentData={this.handleComponent.bind(this)} />;
     } else {
-        data = this.state.data;
+      data = this.state.data;
     }
     return (
       <div>
-        <Button className='btn-link' onClick={this.handleShow}>
+        <Button className="btn-link" onClick={this.handleShow}>
           Register
         </Button>
-        <Modal className='joinUsModal' show={this.state.show} onHide={this.handleClose}>
+        <Modal
+          className="joinUsModal"
+          show={this.state.show}
+          onHide={this.handleClose}
+        >
           <Modal.Body>
-              <Button className="close" onClick={this.handleClose}>X</Button>
-              {data}
+            <Button className="close" onClick={this.handleClose} />
+            {data}
           </Modal.Body>
         </Modal>
       </div>
