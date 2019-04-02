@@ -15,8 +15,9 @@ class PlpComponent extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const plpData = this.props.plpDataPro;
+  componentWillReceiveProps(nextProps) {
+    console.log('PLPArr---',nextProps.plpDataPro)
+    const plpData = nextProps.plpDataPro;
     if (plpData) {
       const item = plpData.map((item, index) => (
         <ProductItem key={index} data={item} />
@@ -26,6 +27,7 @@ class PlpComponent extends React.Component {
   }
 
   render() {
+    
     return (
         <section className="plpCategories">
           <div className="container">
