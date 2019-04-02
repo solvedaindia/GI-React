@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { Router, Link, Route } from 'react-router-dom';
 import ProductItem from '../GlobalComponents/productItem/productItem';
 
 class PlpComponent extends React.Component {
@@ -17,7 +16,6 @@ class PlpComponent extends React.Component {
   }
 
   componentDidMount() {
-    console.log('plpcommm---', this.props.plpDataPro);
     const plpData = this.props.plpDataPro;
     if (plpData) {
       const item = plpData.map((item, index) => (
@@ -29,7 +27,6 @@ class PlpComponent extends React.Component {
 
   render() {
     return (
-      <Route>
         <section className="plpCategories">
           <div className="container">
             <div className="row">
@@ -41,7 +38,6 @@ class PlpComponent extends React.Component {
             </div>
           </div>
         </section>
-      </Route>
     );
   }
 }

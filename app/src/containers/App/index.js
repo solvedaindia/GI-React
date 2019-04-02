@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
@@ -88,13 +88,13 @@ export default class App extends React.Component {
         </Helmet>
         <HeaderContainer />
         <ForgotpassContainer />
-        <Switch>
-          <Route exact path="/" component={HomePageContainer} />
-          <Route path="/clp" component={ClpContainer} />
-          <Route path="/plp" component={PlpContainer} />
-          <Route path="/forgotpassword" component={ForgotpassContainer} />
-          <Route path="/register" component={RegisterNow} />
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={HomePageContainer} />
+            <Route path="/clp" component={ClpContainer} />
+            <Route path="/plp" component={PlpContainer} />
+            <Route path="/forgotpassword" component={ForgotpassContainer} />
+            <Route path="/register" component={RegisterNow} />
+          </Switch>
         <FooterContainer />
       </div>
     );

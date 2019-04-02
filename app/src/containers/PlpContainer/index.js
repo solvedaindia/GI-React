@@ -18,7 +18,7 @@ import saga from '../../saga/plpContainer/saga';
 import PlpComponent from '../../components/PlpComponent/index';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Link, NavLink , withRouter} from 'react-router-dom';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 // import ProductItem from '../../components/GlobalComponents/productItem/productItem';
@@ -127,9 +127,10 @@ export class PlpContainer extends React.Component {
         <PlpComponent plpDataPro={this.state.plpData.productList} />
       );
     }
-
+    console.log('Routing--',this.props);
     return (
       <>
+        {/* <h1><Link to='/'>Route Home</Link></h1> */}
         {/* <BrowserRouter> */}
         {marketingBanner}
         {subCategories}

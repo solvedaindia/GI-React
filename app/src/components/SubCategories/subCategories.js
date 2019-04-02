@@ -1,13 +1,16 @@
 import React from 'react';
+import { Route, NavLink, Link } from 'react-router-dom';
 
 const SubCategoriesData = (props) => {
-    return(
+    return (
         <ul className='subCat'>
             {props.subCategoryArray.map((subCategoryData, index) => {
-                return(
+                return (
                     <li className='subCatList' key={`subCat-${index}`}>
                         <a href={subCategoryData.onClickUrl}>
-                            {subCategoryData.categoryName}
+                            <Link to='/plp'>
+                                {subCategoryData.categoryName}
+                            </Link>
                         </a>
                     </li>
                 )
