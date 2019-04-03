@@ -19,7 +19,6 @@ class PdpContainer extends React.Component {
 
     callPdpApi() {
         axios.get(pdpApi, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
-            console.log(response, 'responseresponse');
             this.setState({
                 pdp: response.data,
                 loading: false
@@ -37,8 +36,7 @@ class PdpContainer extends React.Component {
             <div>
             { !this.state.loading &&
                 <PdpComponent
-                    imagesAndVideos={this.state.pdp.data.imagesAndVideos}
-                    featureProduct={this.state.pdp.data.features}
+                    data={this.state.pdp.data}
                 />
             }
             </div>
