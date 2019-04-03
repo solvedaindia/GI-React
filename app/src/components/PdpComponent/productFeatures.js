@@ -2,7 +2,6 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 
 const productFeatures = (props) => {
-    console.log(props, 'propspropsprops');
     return(
         <div>
             <Col md={6} sm={12} xs={12}>
@@ -13,13 +12,12 @@ const productFeatures = (props) => {
             </Col>
             <Col md={6} sm={12} xs={12}>
                 {
-                    props.name.values.map((litem, i) => {
-                        console.log(litem.heading, 'litemlitem');
+                    props.name.values.map((data, i) => {
                         <div key={i}>
                             <h3 className='heading'>
-                                {litem.heading}
+                                {data.heading}
                             </h3>
-                            {litem.description}
+                            {data.description}
                         </div>
                     })
                 }

@@ -2,8 +2,6 @@ import React from 'react';
 import { Col, Button } from 'react-bootstrap';
 
 const productInfo = (props) => {
-    let abc = props.productData.offerPrice;
-    console.log(props.productData.promotionData, 'price');
     return(
         <div>
             <Col md={12} sm={12} xs={12}>
