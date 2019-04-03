@@ -139,8 +139,7 @@ class Forgotpassowrd extends React.Component {
         <Modal show={this.state.modal} onHide={this.toggle}>
           <Modal.Body>
             <div className="modal-wrapper sliderContainer">
-              <Button className="close" onClick={this.toggle}>
-                X
+              <Button className="close" onClick={this.toggle}>              
               </Button>
               <Button
                 onClick={this.backButtonPressed.bind(this)}
