@@ -2,6 +2,19 @@
 @import '../base.scss';
 
 .welcomeBack {
+    .modal-header{
+        background-image: url('../../images/rectangle.png');
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: inherit;
+        .modal-title {
+            text-align: center;
+            font-family: $font-bold;
+            color: $colorwhite;
+            font-size: $base*4.75;
+        }
+    }
     .modal-dialog {
         width: 35%;
     }

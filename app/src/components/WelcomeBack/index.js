@@ -126,7 +126,6 @@ class WelcomeBack extends React.Component {
         <a variant="primary" onClick={this.handleShow}>
           Login/Register
         </a>
-
         <Modal
           className="welcomeBack"
           size="lg"
@@ -157,6 +156,7 @@ class WelcomeBack extends React.Component {
               callback={this.responseFacebook}
             />
           </div>
+          <p className="divider">or</p>
           <WelcomeBackForm
             className="loginForm"
             handleUserData={this.handleUserLoginApi.bind(this)}

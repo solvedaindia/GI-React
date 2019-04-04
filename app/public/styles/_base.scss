@@ -8,16 +8,6 @@ body {
     margin:0px;
     padding:0px;
 }
-#app{
-    a {
-        color:$colorblack;
-        text-decoration: none;
-        &:hover, &:focus {
-            color: #999;
-            text-decoration: none;
-        } 
-    }
-}
 ul {
     margin:0px;
     padding:0px;

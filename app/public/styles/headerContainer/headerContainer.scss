@@ -1,3 +1,5 @@
+@import '../variable.scss';
+
 header {
     height: 100px;
     border-bottom: 1px solid #ddd;
@@ -39,8 +41,8 @@ header {
     }
 }
 .action{
-    text-decoration: none;
-    color: #77787a;
+    color: $battleshipGrey;
+    font-size: $base*1.5;
     text-transform: uppercase;
     &:hover {
         text-decoration: none;
