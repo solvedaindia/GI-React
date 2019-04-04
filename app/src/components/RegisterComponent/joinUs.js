@@ -2,9 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import axios from 'axios';
-import {
-  storeId,
-} from '../../../public/constants/constants';
+import { storeId } from '../../../public/constants/constants';
 
 import Register from './register';
 import RegisterWithEmail from './registerWithEmail';
