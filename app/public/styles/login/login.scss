@@ -2,12 +2,25 @@
 @import '../base.scss';
 
 .welcomeBack {
+    .modal-header{
+        background-image: url('../../images/rectangle.png');
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: inherit;
+        .modal-title {
+            text-align: center;
+            font-family: $font-bold;
+            color: $colorwhite;
+            font-size: $base*4.75;
+        }
+    }
     .modal-dialog {
-        width: 60%;
+        width: 35%;
     }
     .loginForm {
-        width: 50%;
-        display: inline-block;
+        width: 100%;
+        margin: auto;
         padding: $base*4;
         .form-label {
             font-size: $base*1.5;
@@ -28,8 +41,13 @@
     }
     .registerHere,
     .socialLogin {
-        width: 50%;
+        width: 100%;
         text-align: center;
         padding: $base*2 $base*4;
+    }
+    .socialLogin {
+        .appLogin {
+            margin: $base;
+        }
     }
 }

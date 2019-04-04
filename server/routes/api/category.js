@@ -25,7 +25,7 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
     status: 'success',
     data: testJson.subcategories,
   });
-  /*  categoriesHandler.getSubCategories(req, (err, result) => {
+  /* categoriesHandler.getSubCategories(req, (err, result) => {
     if (err) {
       next(err);
       return;

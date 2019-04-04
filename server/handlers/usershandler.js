@@ -1,5 +1,4 @@
 const constants = require('../utils/constants');
-const errorconfig = require('../utils/errorconfig.js');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
@@ -80,14 +79,14 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
  * @returns
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.changeUserCredentials = function changeUserCredentials(
+module.exports.changeUserPassword = function changeUserPassword(
   params,
   headers,
   callback,
 ) {
-  logger.debug('Call to update password api');
+  logger.debug('Call to change password api');
   if (!params.current_password || !params.new_password) {
-    logger.debug('Change User Credentials : invalid params');
+    logger.debug('Change User Password : invalid params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -177,7 +176,7 @@ module.exports.getUserAddress = function getUserAddress(headers, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        errorconfig.handleWCSError(response.status, response.body, callback);
+        callback(errorutils.handleWCSError(response));
       }
     },
   );
