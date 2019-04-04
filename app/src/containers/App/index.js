@@ -8,15 +8,11 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import axios from 'axios';
-import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
+import { Switch, Route } from 'react-router-dom';
+import { registerGuestUser } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
-  guestLoginAPI,
-  storeId,
-  accessToken,
   accessTokenCookie,
   isLoggedIn,
   getTheAccessToken,
@@ -30,7 +26,6 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import '../../../public/styles/app.scss';
-// import { accessTokenCookie } from '../../../public/constants/constants';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -87,7 +82,6 @@ export default class App extends React.Component {
           <meta name="description" content="A Godrej application" />
         </Helmet>
         <HeaderContainer />
-        <ForgotpassContainer />
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />

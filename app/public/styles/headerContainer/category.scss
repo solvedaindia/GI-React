@@ -1,3 +1,5 @@
+@import '../variable.scss';
+
 .category{
     height: 69px;
     padding-left: 32px;
@@ -10,9 +12,22 @@
     display: inline-block;
     .listItems {
         padding: 28px 40px 28px 0;
-        font-size: 12px;
-        .action:hover {
-            color: #ee4060;
+        font-size: $base*1.5;
+        .action{
+            font-size: $base*1.5;
+            color: $battleshipGrey;
+            font-family: $font-regular;
+            &:hover {
+                color: $reddishPink;
+            }
         }
+    }
+}
+.action{
+    font-size: $base*1.5;
+    color: $battleshipGrey;
+    font-family: $font-regular;
+    &:hover {
+        color: $reddishPink;
     }
 }

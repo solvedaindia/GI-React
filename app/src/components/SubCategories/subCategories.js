@@ -6,7 +6,7 @@ const SubCategoriesData = (props) => {
             {props.subCategoryArray.map((subCategoryData, index) => {
                 return(
                     <li className='subCatList' key={`subCat-${index}`}>
-                        <a href={subCategoryData.onClickUrl}>
+                        <a className='subCatLink' href={subCategoryData.onClickUrl}>
                             {subCategoryData.categoryName}
                         </a>
                     </li>

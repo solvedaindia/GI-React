@@ -16,7 +16,7 @@ header {
         visibility: hidden;
         opacity: 0;
         position: absolute;
-        padding: 8px;
+        padding: $base;
         top: 70px;
         max-width: 200px;
         left: -20px;
@@ -30,7 +30,16 @@ header {
         -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         .subCatList {
-            padding: 8px;
+            padding: $base;
+            .subCatLink {
+                font-size: $base*1.5;
+                color: $battleshipGrey;
+                font-family: $font-regular;
+                &:hover {
+                    color: $reddishPink;
+                    text-decoration: none;
+                }
+            }
         }
     }
     &:hover{

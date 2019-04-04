@@ -123,7 +123,7 @@ class WelcomeBack extends React.Component {
     }
     return (
       <div>
-        <a variant="primary" onClick={this.handleShow}>
+        <a className="dropDown" onClick={this.handleShow}>
           Login/Register
         </a>
         <Modal

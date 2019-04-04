@@ -7,7 +7,7 @@
         padding: 8px;
         top: 99px;
         max-width: 200px;
-        right: 5px;
+        right: 99px;
         background-color: $colorwhite;
         transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         z-index: 3;
@@ -17,6 +17,15 @@
         -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        .dropDown {
+            font-size: $base*1.5;
+            color: $battleshipGrey;
+            font-family: $font-regular;
+            &:hover {
+                color: $reddishPink;
+                text-decoration: none;
+            }
+        }
     }
     &:hover{
         .welcomeDropDown {
