@@ -99,7 +99,6 @@ class Register extends React.Component {
               <img className="logo_width" src={LogoUrl} alt="logo" />
               <h3 className="joinus-heading">Join us Now</h3>
             </div>
-
             <div className="inner-joinusform">
               <div className="btn-wrapper">
                 <GoogleLogin

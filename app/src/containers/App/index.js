@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
@@ -20,6 +20,7 @@ import {
   accessTokenCookie,
   isLoggedIn,
   getTheAccessToken,
+  newsletterTokenCookie
 } from '../../../public/constants/constants';
 
 import HomePageContainer from '../HomePageContainer/index';
@@ -29,6 +30,7 @@ import PlpContainer from '../PlpContainer/index';
 import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
+import NewsletterModel from '../../components/NewsletterModel/newsletterModel'
 import '../../../public/styles/app.scss';
 
 export default class App extends React.Component {
@@ -37,6 +39,7 @@ export default class App extends React.Component {
     this.state = {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
+      showNewsLetter: false,
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
@@ -44,7 +47,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.initialLoginHandling();
-
+    this.newsletterPopupHandling();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -62,6 +65,16 @@ export default class App extends React.Component {
     }
   }
 
+  newsletterPopupHandling() {
+    console.log('NewsletterCookie---',getCookie(newsletterTokenCookie));
+    if (getCookie(newsletterTokenCookie)) {
+      this.setState({ showNewsLetter: false });
+    }
+    else {
+      this.setState({ showNewsLetter: true });
+    }
+  }
+
   guestLoginCallback(token) {
     if (token != '') {
       getTheAccessToken(token);
@@ -75,8 +88,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.accessToken == '') {
+    if (this.state.accessToken === '') {
       return <LoadingIndicator />;
+    }
+
+    let newsletterItem;
+    if (this.state.showNewsLetter) {
+      newsletterItem = <NewsletterModel />;
+    } else {
+      newsletterItem = null;
     }
 
     const { isMobile } = this.state;
@@ -85,6 +105,7 @@ export default class App extends React.Component {
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
+        {newsletterItem}
         <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePageContainer} />

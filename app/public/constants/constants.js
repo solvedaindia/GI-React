@@ -8,6 +8,7 @@ export const port3 = '8443';
 export const host1 = '192.168.0.39';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
+export const newsletterTokenCookie = 'newsletterToken';
 export const isLoggedIn = false;
 
 /* Header API */
@@ -59,7 +60,7 @@ export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logi
 /* PLP Sub-Category API */
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* ESPOT data API */
-export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_HERO_BANNER_`;
+export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */

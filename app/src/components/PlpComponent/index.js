@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { Router, Link, Route } from 'react-router-dom';
 import ProductItem from '../GlobalComponents/productItem/productItem';
+import LoadingIndicator from '../../utils/loadingIndicator'
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -16,9 +16,9 @@ class PlpComponent extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log('plpcommm---', this.props.plpDataPro);
-    const plpData = this.props.plpDataPro;
+  componentWillReceiveProps(nextProps) {
+    console.log('PLPArr---',nextProps.plpDataPro)
+    const plpData = nextProps.plpDataPro;
     if (plpData) {
       const item = plpData.map((item, index) => (
         <ProductItem key={index} data={item} />
@@ -29,7 +29,6 @@ class PlpComponent extends React.Component {
 
   render() {
     return (
-      <Route>
         <section className="plpCategories">
           <div className="container">
             <div className="row">
@@ -41,7 +40,6 @@ class PlpComponent extends React.Component {
             </div>
           </div>
         </section>
-      </Route>
     );
   }
 }

@@ -140,9 +140,9 @@ class Forgotpassowrd extends React.Component {
 
     return (
       <>
-        <Button className="btn-bg" onClick={this.toggle}>
-          Forgot Password
-        </Button>
+        <p className="forgotPassword" onClick={this.toggle}>
+          Forgot Password?
+        </p>
         <Modal  show={this.state.modal} onHide={this.toggle} className={this.state.modalClass}>
           <Modal.Body>            
             <div className="modal-wrapper sliderContainer">

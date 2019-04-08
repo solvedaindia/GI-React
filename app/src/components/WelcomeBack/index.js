@@ -5,7 +5,7 @@ import GoogleLogin from 'react-google-login';
 import WhiteLogo from '../SVGs/whiteLogo';
 import axios from 'axios';
 import WelcomeBackForm from '../WelcomeBackForm';
-import JoinUs from '../RegisterComponent/joinUs';
+import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
   facebookAppId,
   googleClientId,
@@ -165,7 +165,7 @@ class WelcomeBack extends React.Component {
 						handleUserData={this.handleUserLoginApi.bind(this)}
 					/>
 					<p className="registerHere">
-						New to Interio? <JoinUs />
+						New to Godrej Interio? <RegisterModalData />
 					</p>
 				</Modal>
 			</div>

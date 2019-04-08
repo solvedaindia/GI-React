@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ribbonTag(data) {
-  console.log('Ribbon---', data);
 
   if (data.data !== '') {
     return (

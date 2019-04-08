@@ -18,7 +18,6 @@ import saga from '../../saga/plpContainer/saga';
 import PlpComponent from '../../components/PlpComponent/index';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
-import { BrowserRouter } from 'react-router-dom';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 // import ProductItem from '../../components/GlobalComponents/productItem/productItem';
@@ -29,141 +28,231 @@ import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/d
 import * as actionCreators from './actions';
 import axios from 'axios';
 import {
-  plpSubCatAPI,
-  plpAPI,
-  espotAPI,
-  storeId,
-  accessToken,
+	plpSubCatAPI,
+	plpAPI,
+	espotAPI,
+	storeId,
+	accessToken,
 } from '../../../public/constants/constants';
 
 const categoryId = '10001';
 export class PlpContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      plpSubCatData: null,
-      marketingTextBannerData: null,
-      plpData: null,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			plpSubCatData: null,
+			marketingTextBannerData: null,
+			plpDescriptionData: null,
+			plpData: [],
+			error: false,
+			hasMore: true,
+			isLoading: false,
+		};
 
-  componentDidMount() {
-    this.fetchSubCategoryData();
-    this.fetchMarketingTextBannerData();
-    this.fetchPLPProductsData();
-  }
+		this.onscroll = this.onscroll.bind(this);
+	}
 
-  fetchSubCategoryData() {
-    axios
-      .get(plpSubCatAPI + categoryId, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
-      .then(response => {
-        this.setState({ plpSubCatData: response.data.data });
-      })
-      .catch(error => {
-        // console.log('PLPSUBError---', error);
-      });
-  }
 
-  fetchMarketingTextBannerData() {
-    axios
-      .get(espotAPI + categoryId, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
-      .then(response => {
-        // console.log('DataMArketing---', response.data);
-        this.setState({ marketingTextBannerData: response.data.data });
-      })
-      .catch(error => {
-        // console.log('PLPBannerrror---', error);s
-      });
-  }
+	componentWillUnmount() {
+		removeEventListener('scroll', this.onscroll);
+	}
 
-  fetchPLPProductsData() {
-    /**
-     * TODO: Node is not accepting any categoryId, this is a static response from Node side
-     */
-    axios
-      .get(plpAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
-      .then(response => {
-        console.log('PLPPriductData---', response.data);
-        this.setState({ plpData: response.data.data });
-      })
-      .catch(error => {
-        // console.log('PLPBannerrror---', error);
-      });
-  }
+	componentDidMount() {
+		addEventListener('scroll', this.onscroll);
 
-  render() {
-    let marketingBanner;
-    if (this.state.marketingTextBannerData != null) {
-      /**
-       * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
-       */
-      marketingBanner = (
-        <MarketingTextBanner
-          bannerDataPro={
-            this.state.marketingTextBannerData.GI_HERO_BANNER_10001_CONTENT
-              .content
-          }
-        />
-      );
-    }
+		this.fetchSubCategoryData();
+		this.fetchMarketingTextBannerData();
+		this.fetchPLPProductsData();
+		this.fetchDescriptionData();
+	}
 
-    let subCategories;
-    if (this.state.plpSubCatData != null) {
-      subCategories = (
-        <SubCategories subCategoryData={this.state.plpSubCatData} />
-      );
-    }
+	fetchSubCategoryData() {
+		axios
+			.get(plpSubCatAPI + categoryId, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				this.setState({ plpSubCatData: response.data.data });
+			})
+			.catch(error => {
+				// console.log('PLPSUBError---', error);
+			});
+	}
 
-    let plpProducts;
-    if (this.state.plpData != null) {
-      this.state.productList += this.state.productList;
-      plpProducts = (
-        <PlpComponent plpDataPro={this.state.plpData.productList} />
-      );
-    }
+	fetchMarketingTextBannerData() {
+		axios
+			.get(espotAPI + 'GI_HERO_BANNER_' + categoryId, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				// console.log('DataMArketing---', response.data);
+				this.setState({ marketingTextBannerData: response.data.data });
+			})
+			.catch(error => {
+				// console.log('PLPBannerrror---', error);s
+			});
+	}
 
-    return (
-      <>
-        {/* <BrowserRouter> */}
-        {marketingBanner}
-        {subCategories}
-        {plpProducts}
-        <DescriptionBanner />
-        {/* </BrowserRouter> */}
-      </>
-    );
-  }
+	fetchPLPProductsData() {
+		console.log('FetchPLPProductData');
+		this.setState({ isLoading: true }, () => {
+			/**
+		 * TODO: Node is not accepting any categoryId, this is a static response from Node side
+		 */
+			axios
+				.get(plpAPI, {
+					headers: { store_id: storeId, access_token: accessToken },
+				})
+				.then(response => {
+					setTimeout(() => {
+						this.setState({ //Just to test the delay
+							plpData: [...response.data.data.productList, ...this.state.plpData],
+							hasMore: (this.state.plpData.length < 60),
+							isLoading: false,
+						})
+					}, 1500);
+					// this.setState({
+					// 	plpData: [...response.data.data.productList, ...this.state.plpData],
+					// 	hasMore: (this.state.plpData.length < 60),
+					// 	isLoading: false,
+					// });
+				})
+				.catch(error => {
+					// console.log('PLPBannerrror---', error);
+					this.setState({
+						error: error.message,
+						isLoading: false,
+					});
+				});
+		});
+	}
+
+	fetchDescriptionData() {
+		axios
+			.get(espotAPI + 'GI_PLP_TABLE_DESCRIPTION', {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				// console.log('DescriptionsData---', response.data.data.GI_PLP_TABLE_DESCRIPTION_CONTENT);
+				this.setState({ plpDescriptionData: response.data.data.GI_PLP_TABLE_DESCRIPTION_CONTENT });
+			})
+			.catch(error => {
+				// console.log('PLPBannerrror---', error);s
+			});
+	}
+
+	onscroll = () => {
+		const {
+			state: {
+				error,
+				isLoading,
+				hasMore,
+			},
+		} = this;
+
+		if (error || isLoading || !hasMore) return;
+		const adjustedHeight = 500
+		if (
+			window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - adjustedHeight
+		) {
+			console.log('Its the End');
+			this.fetchPLPProductsData();
+		}
+	};
+
+	render() {
+		const {
+			error,
+			hasMore,
+			isLoading,
+			plpData,
+			marketingTextBannerData,
+			plpSubCatData,
+		} = this.state;
+
+		let marketingBanner;
+		if (marketingTextBannerData != null) {
+			/**
+			 * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
+			 */
+			marketingBanner = (
+				<MarketingTextBanner
+					bannerDataPro={
+						this.state.marketingTextBannerData.GI_HERO_BANNER_10001_CONTENT
+							.content
+					}
+				/>
+			);
+		}
+
+		let subCategories;
+		if (plpSubCatData != null) {
+			subCategories = (
+				<SubCategories subCategoryData={this.state.plpSubCatData} />
+			);
+		}
+
+		let plpProducts;
+		if (plpData.length != 0) {
+			console.log('INSIDE---');
+			plpProducts = (
+				<PlpComponent plpDataPro={this.state.plpData} />
+			);
+		}
+
+		let descriptionItem;
+		if (this.state.plpDescriptionData != null) {
+			descriptionItem = (
+				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} />
+			);
+		}
+
+		return (
+			<>
+				{marketingBanner}
+				{subCategories}
+				{plpProducts}
+				<hr />
+				{error &&
+					<div style={{ color: '#900' }}>
+						{error}
+					</div>
+				}
+				{isLoading &&
+					<div>Loading...</div>
+				}
+				{!hasMore &&
+					<div>No Data Left!</div>
+				}
+				{descriptionItem}
+			</>
+		);
+	}
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapStateToProps = state => {
-  const stateObj = getReleventReduxState(state, 'plpContainer');
-  return {
-    ctr: stateObj.counter,
-    updatedFilter: stateObj.updateFilter,
-  };
+	const stateObj = getReleventReduxState(state, 'plpContainer');
+	return {
+		ctr: stateObj.counter,
+		updatedFilter: stateObj.updateFilter,
+	};
 };
 
 const mapDispatchToProps = dispatch => ({
-  onIncrementCounter: () => dispatch(actionCreators.increment()),
+	onIncrementCounter: () => dispatch(actionCreators.increment()),
 });
 
 const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+	mapStateToProps,
+	mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'plpContainer', reducer });
 const withSaga = injectSaga({ key: 'plpContainer', saga });
 
 export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
+	withReducer,
+	withSaga,
+	withConnect,
 )(PlpContainer);
