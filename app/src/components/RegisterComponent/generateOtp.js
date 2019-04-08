@@ -5,6 +5,12 @@ import { validateEmptyObject, validateOTPDigit } from '../../utils/validationMan
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
 
+const LeftArrow = (
+    <img className='leftArrow'
+      src={require('../../../public/images/left-arrow.png')}
+    />
+  );
+
 class GenerateOtp extends React.Component {
     constructor() {
         super();
@@ -70,7 +76,7 @@ class GenerateOtp extends React.Component {
                 <h3 className="heading">Enter One Time Password</h3>
                 <Form>
                     <FormGroup>
-                        <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>&lt; Back</Button>
+                        <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
                         <p className='text otp-text text-center'>Enter the verification code that has been OTP sent to your mobile number</p>
                         <div className='form-div clearfix'>
                             <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
@@ -79,7 +85,7 @@ class GenerateOtp extends React.Component {
                         </div>
                     </FormGroup>
                     <FormGroup className='text-center'>
-                        <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register'>Register</Button>
+                        <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>Register</Button>
                     </FormGroup>
                 </Form>
             </div>

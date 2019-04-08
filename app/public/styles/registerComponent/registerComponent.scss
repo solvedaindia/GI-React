@@ -2,36 +2,100 @@
 @import '../app.scss';
 @import '../base.scss';
 
+.modal-wrapperjoinus{
+    .modal-dialog{ 
+        width: 500px;
+        height: 515px;
+        left: 50%;
+        top: 50%;
+        margin-left: -250px;
+        margin-top: -257px;
+        position: absolute;
+        max-width: 100%;
+        .close{
+            top:20px;
+            &:before, &:after {
+                background: $colorwhite;
+            }
+          }
+      }
+}
+.registerEmailMobile{
+    .modal-dialog{ 
+        width: 800px;        
+        height: 515px;
+        left: 50%;
+        top: 50%;
+        margin-left: -400px;
+        margin-top: -257px;
+        position: absolute;
+        max-width: 100%;
+        .close{
+            top:20px;
+            &:before, &:after {
+                background: $black;
+            }
+          }
+      }
+}
+.modal-wrapperotp{
+    .modal-dialog{ 
+        width:500px;
+        height: 292px;
+        left:50%;
+        top:50%;
+        margin-left: -250px;
+        margin-top:-146px;
+        position: absolute;
+        max-width: 100%;
+        .modal-wrapper {
+            padding: 0;
+            
+        }
+        .close{
+            top:32px;
+            &:before, &:after {
+                background: $black;
+            }
+          }
+          .btn-back{    
+                position: absolute;
+                top: 28px;
+                left: 20px;
+                background: transparent;
+                border: none;
+                color: #979797;
+                .leftArrow{
+                    width:10px;
+                  }
+            }
+      }
+}
 .modal_register {    
-    .modal-dialog{
-      width:470px;
+    .modal-dialog{  
         .modal-wrapperotp {           
             .modal-wrapper{
-                padding: 0;
-                height: 294px;
-                margin-top: -147px;
+                padding: 30px 0;                
                  .form_register {
-                    max-width: 62%;
-                
+                     padding:0;
+                    max-width: 80%;                
                 }
             }
         }
 
-        .modal-wrapperjoinus {  
-            .close{
+        .modal-wrapperjoinus {            
+            .close{                
                 &:before, &:after {
                     background:$colorwhite;
+                    color:$colorwhite;
                 }
             }         
             .modal-wrapper{
-                padding: 0;
-                height: 500px;
-                width:470px;
-                margin-top: -250px;
-                margin-left:-235px;
+                padding: 0;              
 
                 .joinUs{
                     background: url(../../images/join-bg.png) no-repeat;    
+                    background-size: cover;
                     width: 100%;
                     text-align: center;
                     padding:30px 0;
@@ -91,25 +155,14 @@
 
 
         .modal-wrapper{   
-            padding: 0;
-            height: 515px;
-            margin-top: -258px;
-            .otp_screen{max-width: 70%;margin:0 auto;    color: #979797;
+            padding: 0;            
+            .otp_screen{max-width: 80%;margin:0 auto;    color: #979797;
                .form_register{
                    .heading{font-size: 18px; text-align: center;}
                }
             
             }
-            .form_register{                
-                .btn-back{    
-                    position: absolute;
-                    top: 20px;
-                    left: 30px;
-                    background: transparent;
-                    border: none;
-                    color: #979797;
-                }
-
+            .form_register{  
             .form-group{ margin:0;
             .btn-bg{ 
                      margin:15px 0 0 0; 
@@ -166,7 +219,7 @@
                 }
                 .error-msg {
                     position: absolute;
-                    color: #fd1f3b;
+                    color:$reddishpink;
                     font-weight: normal;
                     font-size: 12px;
                     line-height: 13px;
@@ -183,6 +236,9 @@
                         right:0;
                         background: transparent;
                         border:none;
+                        color:$ceruleanblue;
+                        font-family: $font-bold;
+                        font-size: 12px;
                     }
                     .btn-register{
                         padding: 5px 70px;

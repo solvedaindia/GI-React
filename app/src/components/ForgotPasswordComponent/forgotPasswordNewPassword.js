@@ -24,7 +24,7 @@ class ForgotPasswordNewPassword extends React.Component {
         if (!validateEmptyObject(this.state.inputText)) {
             this.setState({
                 error: true,
-                errorMessage: 'Pleaes enter New Password',
+                errorMessage: 'Please enter New Password',
             });
             return;
         }
@@ -94,17 +94,18 @@ class ForgotPasswordNewPassword extends React.Component {
         return (
             <div className='rightAnim'>
                 <h3 className="heading">Set New Password</h3>
-                <Form>
-                    <FormGroup>
+                <Form className='modalmin-height'>
+                    <FormGroup className='enternew-password'>
                         <p className='text'>ENTER NEW PASSWORD</p>
                         <div className='form-div clearfix'>
                             <input onChange={this.handleInputChange.bind(this)} type={this.state.inputType} name="text" id="exampleEmail" className='form-control newinputmargin' placeholder="Enter New Password" />
                             {errorItem}
                             <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../public/images/eye.svg')} />}</span>
                         </div>                        
-                        <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>DONE</Button>
+                       
                     </FormGroup>
                 </Form>
+                <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>DONE</Button>
             </div>
         )
     }

@@ -131,12 +131,12 @@ class ForgotPasswordEmailMobile extends React.Component {
     return (
       <div className={animeClass}>
         <h3 className="heading">Forgot password</h3>
-        <Form>
+        <Form className='modalmin-height'>
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
-              Enter Email id/mobile number
+              Email id/mobile number
             </Label>
-            <div className="form-div clearfix">
+            <div className="form-div clearfix div-error">
               <input
                 onKeyPress={this.onpress}
                 onChange={this.handleInputChange.bind(this)}
@@ -155,14 +155,15 @@ class ForgotPasswordEmailMobile extends React.Component {
             <p className="text text-emailotp">
               An OTP will be sent to this email address{' '}
             </p>
-            <Button
+           
+          </FormGroup>
+        </Form>
+        <Button
               onClick={this.proceedBtnPressed.bind(this)}
               className="btn-block btn-bg"
             >
               Proceed
             </Button>
-          </FormGroup>
-        </Form>
       </div>
     );
   }

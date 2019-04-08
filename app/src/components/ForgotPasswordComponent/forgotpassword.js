@@ -11,6 +11,12 @@ import ForgotPasswordEmailMobile from './forgotPasswordEmailMobile';
 import ForgotPasswordOTP from './forgotPasswordOTP';
 import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 
+const LeftArrow = (
+  <img className='leftArrow'
+    src={require('../../../public/images/left-arrow.png')}
+  />
+);
+
 const prevArrowImg = (
   <img
     src={require('../../../public/images/plpAssests/carousel__arrowLeft.svg')}
@@ -25,6 +31,7 @@ class Forgotpassowrd extends React.Component {
       currentItemName: null,
       userId: null,
       otpNo: null,
+      modalClass: 'modal-forgot',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -136,8 +143,8 @@ class Forgotpassowrd extends React.Component {
         <Button className="btn-bg" onClick={this.toggle}>
           Forgot Password
         </Button>
-        <Modal show={this.state.modal} onHide={this.toggle}>
-          <Modal.Body>
+        <Modal  show={this.state.modal} onHide={this.toggle} className={this.state.modalClass}>
+          <Modal.Body>            
             <div className="modal-wrapper sliderContainer">
               <Button className="close" onClick={this.toggle}>              
               </Button>
@@ -145,8 +152,8 @@ class Forgotpassowrd extends React.Component {
                 onClick={this.backButtonPressed.bind(this)}
                 className="btn-back"
               >
-                {' '}
-                Back
+                {LeftArrow}
+                
               </Button>
               <div className="form-center">{item}</div>
             </div>
