@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ProductItem from '../GlobalComponents/productItem/productItem';
+import LoadingIndicator from '../../utils/loadingIndicator'
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class PlpComponent extends React.Component {
   }
 
   render() {
-    
     return (
         <section className="plpCategories">
           <div className="container">

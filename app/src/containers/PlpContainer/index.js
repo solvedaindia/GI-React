@@ -42,8 +42,8 @@ export class PlpContainer extends React.Component {
 		this.state = {
 			plpSubCatData: null,
 			marketingTextBannerData: null,
+			plpDescriptionData: null,
 			plpData: [],
-			//Lazy Load vars
 			error: false,
 			hasMore: true,
 			isLoading: false,
@@ -63,6 +63,7 @@ export class PlpContainer extends React.Component {
 		this.fetchSubCategoryData();
 		this.fetchMarketingTextBannerData();
 		this.fetchPLPProductsData();
+		this.fetchDescriptionData();
 	}
 
 	fetchSubCategoryData() {
@@ -80,7 +81,7 @@ export class PlpContainer extends React.Component {
 
 	fetchMarketingTextBannerData() {
 		axios
-			.get(espotAPI + categoryId, {
+			.get(espotAPI + 'GI_HERO_BANNER_' + categoryId, {
 				headers: { store_id: storeId, access_token: accessToken },
 			})
 			.then(response => {
@@ -104,12 +105,12 @@ export class PlpContainer extends React.Component {
 				})
 				.then(response => {
 					setTimeout(() => {
-						this.setState({
+						this.setState({ //Just to test the delay
 							plpData: [...response.data.data.productList, ...this.state.plpData],
 							hasMore: (this.state.plpData.length < 60),
 							isLoading: false,
 						})
-					}, 2000);
+					}, 1500);
 					// this.setState({
 					// 	plpData: [...response.data.data.productList, ...this.state.plpData],
 					// 	hasMore: (this.state.plpData.length < 60),
@@ -126,6 +127,20 @@ export class PlpContainer extends React.Component {
 		});
 	}
 
+	fetchDescriptionData() {
+		axios
+			.get(espotAPI + 'GI_PLP_TABLE_DESCRIPTION', {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				// console.log('DescriptionsData---', response.data.data.GI_PLP_TABLE_DESCRIPTION_CONTENT);
+				this.setState({ plpDescriptionData: response.data.data.GI_PLP_TABLE_DESCRIPTION_CONTENT });
+			})
+			.catch(error => {
+				// console.log('PLPBannerrror---', error);s
+			});
+	}
+
 	onscroll = () => {
 		const {
 			state: {
@@ -138,7 +153,7 @@ export class PlpContainer extends React.Component {
 		if (error || isLoading || !hasMore) return;
 		const adjustedHeight = 500
 		if (
-			window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight-adjustedHeight
+			window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - adjustedHeight
 		) {
 			console.log('Its the End');
 			this.fetchPLPProductsData();
@@ -185,6 +200,13 @@ export class PlpContainer extends React.Component {
 			);
 		}
 
+		let descriptionItem;
+		if (this.state.plpDescriptionData != null) {
+			descriptionItem = (
+				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} />
+			);
+		}
+
 		return (
 			<>
 				{marketingBanner}
@@ -202,7 +224,7 @@ export class PlpContainer extends React.Component {
 				{!hasMore &&
 					<div>No Data Left!</div>
 				}
-				<DescriptionBanner />
+				{descriptionItem}
 			</>
 		);
 	}

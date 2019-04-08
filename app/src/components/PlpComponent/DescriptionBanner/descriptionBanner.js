@@ -21,7 +21,7 @@ class DescriptionBanner extends React.Component {
   }
 
   componentDidMount() {
-    const trimStr = `${strData.substring(0, limit)}...`;
+    const trimStr = `${this.props.descriptionDataPro.substring(0, limit)}...`;
     this.setState({
       splitData: trimStr,
       finalData: trimStr,
