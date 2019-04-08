@@ -15,16 +15,40 @@
             font-size: $base*4.75;
         }
     }
+    .smallLogo{
+        text-align: center;
+    }
     .modal-dialog {
         width: 35%;
+        .divider {
+            text-align: center;
+            margin: 0;
+        }
     }
     .loginForm {
         width: 100%;
         margin: auto;
-        padding: $base*4;
+        padding: $base*2 $base*4;
         .form-label {
-            font-size: $base*1.5;
-            color: $colorLightGrey;
+            font-size: $base*1.75;
+            color: $battleshipGrey;
+            font-family: $font-light;
+            font-weight: inherit;
+        }
+        .form-control {
+            border-radius: 2px;
+            border: solid 1px $lightGrey;
+            background-color: $colorwhite;
+            display: block;
+            color: #555555;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         }
         .formBtn {
             width: 100%;
@@ -37,6 +61,13 @@
         .error-msg {
             color: $errorMsg;
             font-size: $base*1.25;
+        }
+        .forgotPassword {
+            font-size: $base*1.5;
+            color: $cerulean;
+            text-align: right;
+            font-family: $font-regular;
+            cursor: pointer;
         }
     }
     .registerHere,
