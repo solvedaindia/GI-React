@@ -41,13 +41,13 @@ class RegisterModalData extends React.Component {
   handleComponent(type, data = null) {
     let renderComponent = null;
     this.setState({
-      modalClass: 'modal-wrapperjoinus',
+      modalClass: 'modalJoinus',
     })
 
     if (type !== generateOtp) {
       renderComponent = <RegisterWithEmailMobile componentData={this.handleComponent.bind(this)} registrationType={type} handleApi={this.handleComponetData.bind(this)} userdata={data}/>;
       this.setState({
-        modalClass: '',
+        modalClass: 'registerEmailMobile',
       })
     } else if(type === generateOtp) {
       renderComponent = <GenerateOtp componentData={this.handleComponent.bind(this)} userdata={data} registrationType={type} handleApi={this.handleComponetData.bind(this)}/>;
@@ -108,7 +108,7 @@ class RegisterModalData extends React.Component {
         <Button className='btn-link' onClick={this.handleShow}>
           Register
         </Button>
-        <Modal className='modal_register' show={this.state.show} onHide={this.handleClose}>
+        <Modal className={`modal_register ${this.state.modalClass}`} show={this.state.show} onHide={this.handleClose}>
           <Modal.Body className={this.state.modalClass}>					
             <div className='modal-wrapper'>
               <Button className="close" onClick={this.handleClose}></Button>              
