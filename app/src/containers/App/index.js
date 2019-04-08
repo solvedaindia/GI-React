@@ -8,11 +8,15 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route } from 'react-router-dom';
-import { registerGuestUser } from '../../utils/initialManager';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
+import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
+  guestLoginAPI,
+  storeId,
+  accessToken,
   accessTokenCookie,
   isLoggedIn,
   getTheAccessToken,
