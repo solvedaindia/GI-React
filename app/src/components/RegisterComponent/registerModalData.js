@@ -104,8 +104,8 @@ class RegisterModalData extends React.Component {
     }
 
     return (
-      <div>
-        <Button className='btn-link' onClick={this.handleShow}>
+      <>
+        <Button className='registerNow' onClick={this.handleShow}>
           Register
         </Button>
         <Modal className={`modal_register ${this.state.modalClass}`} show={this.state.show} onHide={this.handleClose}>
@@ -117,7 +117,7 @@ class RegisterModalData extends React.Component {
             </div>
           </Modal.Body>
         </Modal>
-      </div>
+      </>
     );
   }
 }

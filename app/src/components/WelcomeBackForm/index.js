@@ -122,7 +122,7 @@ class WelcomeForm extends Component {
                 <Forgotpassowrd/>
                 <Button
                     type={"primary"}
-                    title={"Submit"}
+                    title={"Login"}
                 />
                 {/*Submit */}
             </form>

@@ -21,6 +21,8 @@ import {
   accessTokenCookie,
   userLoginAPI,
 } from '../../../public/constants/constants';
+import Google from '../../../public/images/google.png';
+import Facebook from '../../../public/images/facebook.png';
 
 import '../../../public/styles/login/login.scss';
 
@@ -47,49 +49,49 @@ class WelcomeBack extends React.Component {
 	responseGoogle = response => {
 		const profileData = response.profileObj;
 		if (!profileData.email) {
-		alert('SocialLogin - Email Id missing');
-		return;
+			alert('SocialLogin - Email Id missing');
+			return;
 		}
 
 		this.setState({
-		firstName: profileData.givenName,
-		lastName: profileData.familyName,
-		authorizationProvider: 'google',
-		userId: response.googleId,
-		socialToken: response.accessToken,
-		emialId: profileData.email,
+			firstName: profileData.givenName,
+			lastName: profileData.familyName,
+			authorizationProvider: 'google',
+			userId: response.googleId,
+			socialToken: response.accessToken,
+			emialId: profileData.email,
 		});
 
 		onGoogleResponse(this.state, itemData => {
-		console.log('GoogleCallback', itemData);
+			console.log('GoogleCallback', itemData);
 		});
 	};
-
+	
 	responseFacebook = response => {
 		if (!response.email) {
-		alert('SocialLogin - Email Id missing');
-		return;
+			alert('SocialLogin - Email Id missing');
+			return;
 		}
 
-		// Remove below condition to get auto Facebook login.
+	// Remove below condition to get auto Facebook login.
 		if (this.state.isFacebookClicked) {
-		const firstName = response.name.substr(0, response.name.indexOf(' '));
-		const lastName = response.name.substr(response.name.indexOf(' ') + 1);
-		this.setState({
+			const firstName = response.name.substr(0, response.name.indexOf(' '));
+			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
+			this.setState({
 			firstName,
 			lastName,
 			authorizationProvider: 'facebook',
 			userId: response.userID,
 			socialToken: response.accessToken,
 			emialId: response.email,
-		});
+			});
 
-		onFacebookResponse(this.state, itemData => {
+			onFacebookResponse(this.state, itemData => {
 			console.log('FacebookCallback', itemData);
-		});
+			});
 		}
 	};
-
+	
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
@@ -142,21 +144,33 @@ class WelcomeBack extends React.Component {
 					</Modal.Header>
 					<div className="socialLogin">
 						<GoogleLogin
-						className="btn-white appLogin"
-						clientId={googleClientId}
-						buttonText="Sign in with Google"
-						cssClass="btn-white"
-						onSuccess={this.responseGoogle}
-						onFailure={this.responseGoogle}
+							clientId={googleClientId}
+							render={renderProps => (
+								<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
+								<span className="icon-img">
+									<img className="icon" src={Google} />
+								</span>
+								<span className="signin-text">Sign in with Google</span>
+								</button>
+							)}
+							onSuccess={this.responseGoogle}
+							onFailure={this.responseGoogle}
 						/>
 						<FacebookLogin
-						appId={facebookAppId}
-						autoLoad
-						fields="name,email,picture"
-						cssClass="appLogin"
-						buttonText="Sign in with Facebook"
-						onClick={this.facebookOnClick}
-						callback={this.responseFacebook}
+							appId={facebookAppId}
+							render={renderProps => (
+								<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
+								<span className="icon-img">
+									<img className="icon" src={Facebook} />
+								</span>
+								<span className="signin-text">Sign in with Facebook</span>
+								</button>
+							)}
+							autoLoad
+							fields="name,email,picture"
+							cssClass="btn-white"
+							onClick={this.facebookOnClick.bind(this)}
+							callback={this.responseFacebook}
 						/>
 					</div>
 					<p className="divider">or</p>
@@ -165,7 +179,7 @@ class WelcomeBack extends React.Component {
 						handleUserData={this.handleUserLoginApi.bind(this)}
 					/>
 					<p className="registerHere">
-						New to Godrej Interio? <RegisterModalData />
+						<span>New to Godrej Interio? </span><RegisterModalData />
 					</p>
 				</Modal>
 			</div>

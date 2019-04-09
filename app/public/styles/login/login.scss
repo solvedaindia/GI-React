@@ -23,6 +23,29 @@
         .divider {
             text-align: center;
             margin: 0;
+            position: relative;
+            &::after{
+                width: 32px;
+                height: 1px;
+                position: absolute;
+                content: '';
+                background: $battleshipGrey;
+                left: 175px;
+                top: 13px;      
+            }
+            &::before{
+                width: 32px;
+                height: 1px;
+                position: absolute;
+                content: '';
+                background: $battleshipGrey;
+                right: 175px;
+                top: 13px; 
+            }
+        }
+        .close {
+            color: $colorwhite;
+            opacity: 1;
         }
     }
     .loginForm {
@@ -52,11 +75,11 @@
         }
         .formBtn {
             width: 100%;
-            background-color: $colorblack;
+            background-color: $ashGrey;
             color: $colorwhite;
             padding: $base;
             border: transparent;
-            border-radius: $base*0.5;
+            border-radius: $base*0.25;
         }
         .error-msg {
             color: $errorMsg;
@@ -70,6 +93,15 @@
             cursor: pointer;
         }
     }
+    .registerNow {
+        border: none;
+        background-color: transparent;
+        font-size: $base*1.5;
+        color: $cerulean;
+        text-align: right;
+        font-family: $font-regular;
+        cursor: pointer;
+}
     .registerHere,
     .socialLogin {
         width: 100%;
@@ -77,6 +109,16 @@
         padding: $base*2 $base*4;
     }
     .socialLogin {
+        .btn-white {
+            width: 49%;
+            margin: 0.5%;
+            padding: $base;
+            border: 1px solid $black;
+            background: none;
+            .icon{
+                width: 12px;
+            }
+        }
         .appLogin {
             margin: $base;
         }
