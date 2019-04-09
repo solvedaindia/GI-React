@@ -1,8 +1,8 @@
 import React from 'react';
 import ImageGallery from 'react-image-gallery';
 import { Player } from 'video-react';
-import './css/image-gallery.scss';
-import './css/video-react.scss';
+import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
+import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 
 class productImagesAndVideos extends React.Component {
     constructor() {
@@ -13,8 +13,8 @@ class productImagesAndVideos extends React.Component {
     }
 
     componentDidMount = () => {
-        this.renderImages(this.props.name.productImages);
-        this.renderVideos(this.props.name.productVideos);
+        this.renderImages(this.props.imagesAndVideos.productImages);
+        this.renderVideos(this.props.imagesAndVideos.productVideos);
     }
 
     /* render Images */
@@ -46,12 +46,15 @@ class productImagesAndVideos extends React.Component {
 
     render() {
         return(
-            <ImageGallery 
-                showFullscreenButton={false}
-                items={this.state.images}
-                showNav={false}
-                showPlayButton={false}
-             />
+            <div>
+                {this.props.ribbonText}
+                <ImageGallery 
+                    showFullscreenButton={false}
+                    items={this.state.images}
+                    showNav={false}
+                    showPlayButton={false}
+                />
+             </div>
         )
     }
 } 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Button } from 'react-bootstrap';
+import EmiInfo from './emiInfo';
 
 const productInfo = (props) => {
     return(
@@ -36,8 +37,7 @@ const productInfo = (props) => {
                     }
                 </div>
                 <div><br/>
-                    Starting from <b>रु{props.productData.emiData}</b> per month
-                    &nbsp;&nbsp;&nbsp;&nbsp; know More
+                    Starting from <b>रु{props.productData.emiData}</b> per month <EmiInfo />
                 </div>
                 <div><br/>
                     <Button className="btn-primary">-</Button>
