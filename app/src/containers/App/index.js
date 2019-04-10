@@ -112,6 +112,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
+          <Route path="/pdp" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
         </Switch>
