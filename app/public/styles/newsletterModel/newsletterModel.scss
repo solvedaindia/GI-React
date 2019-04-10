@@ -1,15 +1,69 @@
 @import "../app.scss";
 @import "../base.scss";
-.newsletter-Wrapper {
-    position: relative;
-    width: 509px;
-    height: 500px;
-    //box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
-    background-color: #ffffff;
-  }
 
-  .Group-6 {
-    width: 366px;
-    height: 502px;
-    object-fit: contain;
+.newsletter-Wrapper{
+  padding: 0;
+   .no-padding {
+    padding: 0 0 0 0;
+}
+.no-margin {
+  margin: 0 0 0 0;
+}
+  .modal-dialog{ 
+    width: 60%;        
+    height: 437px;
+    left: 50%;
+    top: 50%;
+    margin-left: -30%;
+    margin-top: -218.5px;
+    position: absolute;
+    max-width: 100%;
+
+    .Thumbnailbox{
+      .imgfullwidth{
+        width: 100%;
+      }
+    }
+    .close{
+        top:20px;
+        &:before, &:after {
+            background: $black;
+        }
+      }
+
+      .form_newsletter{
+        .email{
+          position: relative;
+          padding: 0 0 32px 0;
+          margin: 0;
+          .error-msg{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color:$reddishpink;
+          }
+        }
+        padding: 88px 40px 0 40px;
+        .form-control {
+          box-shadow: none;
+          height: 40px;
+          margin: 0 0 0px 0;
+          border: 1px solid #dfe0de;
+          border-radius: 0;
+      }
+         .heading {
+          text-align: left;
+          font-family: CeraGIBold, sans-serif;
+          text-transform: capitalize;
+          padding: 0 0 13px 0;
+          margin: 0;
+          color: $black;
+          font-size: 26px;
+      }
+      .signup-text{
+        color:$battleshipGrey;
+        font-size: 12px;
+      }
+      }
   }
+}

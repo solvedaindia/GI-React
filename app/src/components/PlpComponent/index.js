@@ -36,7 +36,7 @@ class PlpComponent extends React.Component {
               <div className="headingSubTitle">(Produts 35)</div>
             </div>
             <div className="row no-padding">
-              <ul className="plp-products">{this.state.plpItem}</ul>
+              <ul className="plp-products grid3">{this.state.plpItem}</ul>
             </div>
           </div>
         </section>
