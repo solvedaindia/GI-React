@@ -100,7 +100,7 @@ class ForgotPasswordNewPassword extends React.Component {
                         <div className='form-div clearfix'>
                             <input onChange={this.handleInputChange.bind(this)} type={this.state.inputType} name="text" id="exampleEmail" className='form-control newinputmargin' placeholder="Enter New Password" />
                             {errorItem}
-                            <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../public/images/eye.svg')} />}</span>
+                            <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../src/components/SVGs/eye.svg')} />}</span>
                         </div>                        
                        
                     </FormGroup>

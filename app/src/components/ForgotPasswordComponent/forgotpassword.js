@@ -19,7 +19,7 @@ const LeftArrow = (
 
 const prevArrowImg = (
   <img
-    src={require('../../../public/images/plpAssests/carousel__arrowLeft.svg')}
+    src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')}
   />
 );
 class Forgotpassowrd extends React.Component {

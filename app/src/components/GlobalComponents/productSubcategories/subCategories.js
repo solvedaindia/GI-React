@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import SubCatItem from './subCatItem';
 import '../../../../public/styles/plpContainer/plpContainer.scss'
 
-const prevArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowLeft.svg')} />
-const nextArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowRight.svg')} />
+const prevArrowImg = <img src={require('../../SVGs/carousel__arrowLeft.svg')} />
+const nextArrowImg = <img src={require('../../SVGs/carousel__arrowRight.svg')} />
 class SubCategories extends React.Component {
   constructor(props) {
     super(props);
