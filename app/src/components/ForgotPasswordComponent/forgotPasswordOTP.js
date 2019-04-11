@@ -123,12 +123,12 @@ class ForgotPasswordOTP extends React.Component {
     return (
       <div className={animeClass}>
         {headingItem}
-        <Form>
+        <Form className='forgototp-mobile modalmin-height'>
           <FormGroup>
-            <p className="text otp-text">
+            <p className="text">
               Enter OTP sent to your mobile number
             </p>
-            <div className="form-div clearfix">
+            <div className="form-div enterotp-msg clearfix">
               <input
                 onChange={this.handleInputChange.bind(this)}
                 type="number"
@@ -147,14 +147,15 @@ class ForgotPasswordOTP extends React.Component {
             </div>
           </FormGroup>
           <FormGroup>
-            <Button
+           
+          </FormGroup>
+        </Form>
+        <Button
               onClick={this.proceedBtnPressed.bind(this)}
               className="btn-block btn-bg"
             >
               Proceed
             </Button>
-          </FormGroup>
-        </Form>
       </div>
     );
   }

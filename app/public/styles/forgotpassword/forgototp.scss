@@ -1,12 +1,24 @@
 @import "../app.scss";
 @import '../base.scss';
-
+.modalmin-height{
+  min-height: 120px;
+}
+.modal-forgot{
+   .modal-dialog{ 
+      .close{          
+          &:before, &:after {
+              background: $black;
+          }
+        }
+  }
+}
 .modal-dialog {
   .modal-wrapper {
     .form-center {
-      .form-group {
-        .margin-none {
-          margin: 0 0 30px 0;
+      .forgototp-mobile{
+      .form-group {      
+        .form-control{
+          margin: 0 0 40px 0;
         }
         .btn-bg{margin:30px 0 0 0}
         .otp-text {
@@ -16,8 +28,8 @@
         }
         .btn-back{    
           position: absolute;
-          top: 20px;
-          left: 30px;
+          top: 28px;
+          left: 20px;
           background: transparent;
           border: none;
           color: #979797;
@@ -27,13 +39,24 @@
           float: right;
           border: none;
           margin: 0 0 0px 0;
-          color: #a9a9a9;
-          position: absolute;
+          color:$ceruleanblue;
+          position: static;
           right: 0;
           bottom: 10px;
+          font-family: $font-bold;
+          font-size:12px;
         }
         .otperrorwidth{width: 80%}
-      }
+        .enterotp-msg{
+          .error-msg{
+            width:70%;
+            float: left;
+            }
+         }  
+       }
+     }
     }
-  }
+   }
 }
+
+

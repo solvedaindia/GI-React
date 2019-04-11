@@ -16,21 +16,23 @@ export class HeaderContainer extends React.Component {
     super(props);
 
     this.state = {
-		headerData: {},
-		isLoading: false,
-		error: null,
+      headerData: {},
+      isLoading: false,
+      error: null,
     };
   }
 
   render() {
     return (
-		<header>
-			<Logo />
-			<div className='navigation'>
-				<HeaderL1/>
-				<HeaderL2/>
-			</div>
-		</header>
+      <header className="appheader">
+        <div className="logo">
+          <Logo />
+        </div>
+        <div className="navigation">
+          <HeaderL1 />
+          <HeaderL2 />
+        </div>
+      </header>
     );
   }
 }

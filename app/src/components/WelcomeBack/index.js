@@ -1,13 +1,28 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import WelcomeBackForm from '../WelcomeBackForm';
+import { Modal } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import {facebookAppId, googleClientId } from '../../../public/constants/constants';
-import { onFacebookResponse, onGoogleResponse } from '../../utils/socialLoginHandler';
-
+import WhiteLogo from '../SVGs/whiteLogo';
 import axios from 'axios';
-import { storeId, accessToken, accessTokenCookie, userLoginAPI } from '../../../public/constants/constants';
+import WelcomeBackForm from '../WelcomeBackForm';
+import RegisterModalData from '../RegisterComponent/registerModalData';
+import {
+  facebookAppId,
+  googleClientId,
+} from '../../../public/constants/constants';
+import {
+  onFacebookResponse,
+  onGoogleResponse,
+} from '../../utils/socialLoginHandler';
+
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  userLoginAPI,
+} from '../../../public/constants/constants';
+import Google from '../../../public/images/google.png';
+import Facebook from '../../../public/images/facebook.png';
 
 import '../../../public/styles/login/login.scss';
 
@@ -17,21 +32,21 @@ class WelcomeBack extends React.Component {
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.state = {
-			show: false,
-			message: null
+		show: false,
+		message: null,
 		};
 	}
-  
+
 	handleClose() {
-	  	this.setState({ show: false, message: null });
-	}
-  
-	handleShow() {
-	  	this.setState({ show: true, message: null });
+		this.setState({ show: false, message: null });
 	}
 
-	//Social Login Handlers
-	responseGoogle = (response) => {
+	handleShow() {
+		this.setState({ show: true, message: null });
+	}
+
+	// Social Login Handlers
+	responseGoogle = response => {
 		const profileData = response.profileObj;
 		if (!profileData.email) {
 			alert('SocialLogin - Email Id missing');
@@ -44,40 +59,39 @@ class WelcomeBack extends React.Component {
 			authorizationProvider: 'google',
 			userId: response.googleId,
 			socialToken: response.accessToken,
-			emialId: profileData.email
-		})
+			emialId: profileData.email,
+		});
 
-		onGoogleResponse(this.state, (itemData) => {
-			console.log('GoogleCallback', itemData)
-		})
-	}
-
-	responseFacebook = (response) => {
-
+		onGoogleResponse(this.state, itemData => {
+			console.log('GoogleCallback', itemData);
+		});
+	};
+	
+	responseFacebook = response => {
 		if (!response.email) {
 			alert('SocialLogin - Email Id missing');
 			return;
 		}
 
-		// Remove below condition to get auto Facebook login.
+	// Remove below condition to get auto Facebook login.
 		if (this.state.isFacebookClicked) {
 			const firstName = response.name.substr(0, response.name.indexOf(' '));
-			const lastName = response.name.substr(response.name.indexOf(' ') + 1)
+			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
 			this.setState({
-				firstName: firstName,
-				lastName: lastName,
-				authorizationProvider: 'facebook',
-				userId: response.userID,
-				socialToken: response.accessToken,
-				emialId: response.email
-			})
+			firstName,
+			lastName,
+			authorizationProvider: 'facebook',
+			userId: response.userID,
+			socialToken: response.accessToken,
+			emialId: response.email,
+			});
 
-			onFacebookResponse(this.state, (itemData) => {
-				console.log('FacebookCallback', itemData)
-			})
+			onFacebookResponse(this.state, itemData => {
+			console.log('FacebookCallback', itemData);
+			});
 		}
-	}
-
+	};
+	
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
@@ -85,57 +99,89 @@ class WelcomeBack extends React.Component {
 	/* Handle User Login API */
 	handleUserLoginApi(data) {
 		this.setState({ message: null });
-		axios.post(userLoginAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+		axios
+		.post(userLoginAPI, data, {
+			headers: { store_id: storeId, access_token: accessToken },
+		})
+		.then(response => {
 			document.cookie = 'isLoggedIn=true';
-			document.cookie = `${accessTokenCookie}=${response.data.data.access_token}`;
+			document.cookie = `${accessTokenCookie}=${
+			response.data.data.access_token
+			}`;
 			alert('Successfully Logged In');
 			this.handleClose();
-		}).catch(error => {
+		})
+		.catch(error => {
 			const errorData = error.response.data;
 			const errorMessage = errorData.error.error_message;
 			this.setState({
-				message: `Error - ${errorMessage}`
+			message: `Error - ${errorMessage}`,
 			});
-		});		
+		});
 	}
-  
+
 	render() {
 		let message = null;
 		if (this.state.message) {
-		  message = <p>{this.state.message}</p>
+		message = <p>{this.state.message}</p>;
 		}
 		return (
 			<div>
-				<Button variant='primary' onClick={this.handleShow}>
-					Click Here
-				</Button>
-				<Modal className='welcomeBack' size='lg' animation={false} show={this.state.show} onHide={this.handleClose}>
+				<a className="dropDown" onClick={this.handleShow}>
+				Login/Register
+				</a>
+				<Modal
+				className="welcomeBack"
+				size="lg"
+				animation={false}
+				show={this.state.show}
+				onHide={this.handleClose}
+				>
 					{message}
 					<Modal.Header closeButton>
+						<div className='smallLogo'><WhiteLogo /></div>
 						<Modal.Title>Welcome Back</Modal.Title>
 					</Modal.Header>
-					<WelcomeBackForm className='loginForm' handleUserData={this.handleUserLoginApi.bind(this)}/>
-					<p className='registerHere'>New to Interio? <span>Register</span></p>
-					<div className='socialLogin'>
-						<GoogleLogin className='btn-white'
-						clientId={googleClientId}                  
-						buttonText='Sign in with Google'
-						cssClass="btn-white"                             
-						onSuccess={this.responseGoogle}
-						onFailure={this.responseGoogle}
+					<div className="socialLogin">
+						<GoogleLogin
+							clientId={googleClientId}
+							render={renderProps => (
+								<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
+								<span className="icon-img">
+									<img className="icon" src={Google} />
+								</span>
+								<span className="signin-text">Sign in with Google</span>
+								</button>
+							)}
+							onSuccess={this.responseGoogle}
+							onFailure={this.responseGoogle}
 						/>
-						<FacebookLogin 
-						appId={facebookAppId}
-						autoLoad={true}
-						fields="name,email,picture"
-						cssClass="btn-white btn-fb"                 
-						buttonText='Sign in with Facebook'
-						onClick={this.facebookOnClick}
-						callback={this.responseFacebook}
+						<FacebookLogin
+							appId={facebookAppId}
+							render={renderProps => (
+								<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
+								<span className="icon-img">
+									<img className="icon" src={Facebook} />
+								</span>
+								<span className="signin-text">Sign in with Facebook</span>
+								</button>
+							)}
+							autoLoad
+							fields="name,email,picture"
+							cssClass="btn-white"
+							onClick={this.facebookOnClick.bind(this)}
+							callback={this.responseFacebook}
 						/>
 					</div>
+					<p className="divider">or</p>
+					<WelcomeBackForm
+						className="loginForm"
+						handleUserData={this.handleUserLoginApi.bind(this)}
+					/>
+					<p className="registerHere">
+						<span>New to Godrej Interio? </span><RegisterModalData />
+					</p>
 				</Modal>
-				
 			</div>
 		);
 	}

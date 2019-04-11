@@ -127,7 +127,7 @@ section.tablecarousel {
       .imgfullwidth{width:100%;}
       .btn-outofStock{ 
         background-color: rgba(255, 255, 255, 0.8);
-        border:0.09rem solid $reddish-pink;
+        border:0.09rem solid $reddishpink;
         position: absolute;
         font-size: 14px;
         color:#000;
@@ -150,7 +150,7 @@ section.tablecarousel {
           position: absolute;
           width: 20px;
           height: 1px;
-          background: $reddish-pink;
+          background: $reddishpink;
           content: '';
           bottom: 0;
           margin: 0 auto;
@@ -174,15 +174,14 @@ section.tablecarousel {
   }
   .priceno-discount {
     text-decoration: line-through;
-    text-decoration-color: $reddish-pink;
+    text-decoration-color: $reddishpink;
     font-family: $font-light;
     padding-left: 15px;
     font-size: 18px;
   }
 }
-
   .emi-text {
-    color: $reddish-pink;
+    color: $reddishpink;
     font-size: 12px;
     line-height: 16px;
     .bold{

@@ -3,8 +3,8 @@ const router = express.Router();
 const pdpHandler = require('../../handlers/pdphandler');
 const productDetail = require('../../configs/pdpjson');
 
-router.get('/', (req, res, next) => {
-  pdpHandler.getPdpData(req, (err, result) => {
+router.get('/productDetails/:productId', (req, res, next) => {
+  pdpHandler.getProductDetails(req, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/productData', (req, res) => {
   res.status(200).send({
     status: 'success',
-    data: productDetail.productData,
+    data: productDetail,
   });
 });
 

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Input from "../Input/input";
 import Button from "../Button/button";
 import { regexEmail, regexMobileNo, validateEmptyObject } from '../../utils/validationManager';
+import Forgotpassowrd from "../ForgotPasswordComponent/forgotpassword";
 
 class WelcomeForm extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class WelcomeForm extends Component {
         this.state = {
             userId: '',
             password: '',
+            shown: true,
             errorMessageUserId: null,
             errorMessagePassword: null
         };
@@ -83,7 +85,10 @@ class WelcomeForm extends Component {
     errorMessage = (message) => {
         return <p className='error-msg'>{message}</p>
     }
-
+    // handleHide = (e) => {
+    //     e.preventDefault();
+        
+    // }
     render() {
         let errorMessageUserId = null;
         let errorMessagePassword = null;
@@ -100,7 +105,7 @@ class WelcomeForm extends Component {
                     type={"text"}
                     title={"ENTER EMAIL/MOBILE NUMBER"}
                     name={"userId"}
-                    placeholder={"Enter your email or mobile number"}
+                    placeholder={""}
                     onChange={this.handleChange}
                 />
                 {errorMessageUserId}
@@ -108,15 +113,16 @@ class WelcomeForm extends Component {
                 <Input
                     type={"password"}
                     name={"password"}
-                    title={"ENTER PASSWORD"}
-                    placeholder={"Enter your password"}
+                    title={"PASSWORD"}
+                    placeholder={""}
                     onChange={this.handleChange}
                 />
                 {errorMessagePassword}
                 {/* Password of the user */}
+                <Forgotpassowrd/>
                 <Button
                     type={"primary"}
-                    title={"Submit"}
+                    title={"Login"}
                 />
                 {/*Submit */}
             </form>

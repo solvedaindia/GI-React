@@ -1,12 +1,12 @@
 import { getCookie } from '../../src/utils/utilityManager';
 import { validateEmptyObject } from '../../src/utils/validationManager';
 
-const secureHttp = 'https';
-const port1 = '3001';
-const port2 = '8002';
-const port3 = '8443';
-const host1 = '192.168.0.39';
-const host = 'localhost';
+export const secureHttp = 'https';
+export const port1 = '3001';
+export const port2 = '8002';
+export const port3 = '8443';
+export const host1 = '192.168.0.39';
+export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const isLoggedIn = false;
@@ -67,6 +67,8 @@ export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/lo
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist`;
 /* Footer logo url */
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
+/* PDP API */
+export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

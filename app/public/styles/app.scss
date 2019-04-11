@@ -1,10 +1,14 @@
 
 @import 'variable.scss';
 @import 'base.scss';
-
 p{ line-height: 24px} 
 h4{font-weight: bold}
-.form-control:focus { color: #495057; background-color: #fff; border-color: #a1aeb7; outline: 0; box-shadow: 0 0 0 0.2rem rgba(159, 159, 159, 0.2) !important;
+.form-control:focus { 
+    color: #495057; 
+    background-color: #fff;
+    border-color: #a1aeb7;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(159, 159, 159, 0.2) !important;
 }
 .slider{ img{width:100%}}
 .img {
@@ -18,15 +22,14 @@ h4{font-weight: bold}
     line-height: 33px;
     border-radius: 4px;   
 }
-.btn-bg{ background: $colorblack;border:none;cursor:pointer;color: #fff;
+.btn-bg{ background: $black;border:none;cursor:pointer;color: #fff;
     padding: 5px 30px;font-size: 14px;text-transform: uppercase; line-height: 33px;
-    border-radius: 4px;
+    border-radius: 0px;
   &:hover{color:#fff;background: $colorblack;}
 }
-
 .errormsg{ 
     position: absolute;
-    color: #fd1f3b;    
+    color: $reddishpink;    
     font-size: 12px;
     line-height: 15px;
     min-height: 15px;
@@ -37,80 +40,101 @@ h4{font-weight: bold}
     font-family:$font-bold;
     text-align: center;
 }
-
-    /***-------Comman form css---------***/
-.modal-backdrop{background-color: rgba(0, 0, 0, 0.7);}
+    /***-------Comman Modal css---------***/
+   
+.modal-backdrop{
+    background-color: rgba(0, 0, 0, 0.7);    
+}
 .modal-dialog{
-    min-height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    .close {
-        position: absolute; right: 20px;z-index: 9;background: #fff;width: 30px;border-radius: 50%;
-        opacity: 1;height: 30px;top: 20px;color: #6d6d6d;font-weight: normal;font-size:16px;
-        &:hover{background:#fff;color: #000}
-    }  
-.modal-wrapper {   
-    width: 800px;
-    height: 348px;
-    padding: 50px 0;
-    font-weight: 600;
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -400px;
-    margin-top: -174px;
-    background: #f1f5f8;     
-    .form-center{
-         margin:0 auto;max-width: 49%; 
-         font-weight: normal;   
-    .text{color:$colorgrey; font-weight: normal;}
-    .error-msg{ 
-         position: absolute;
-        color:#fd1f3b;
-        font-weight: normal;
-        font-size: 12px; 
-        line-height: 13px;
-        min-height: 33px;
-        bottom:-6px;
+    background:$colorwhite;
+    border-radius: 0px;
+    .modal-content {
+        border:none;
+        border-radius: 0px;
+        background-color: transparent;
+        .modal-body{
+            border-radius: 0px;
+            padding:0;    
+            .close {
+                position: absolute; 
+                right: 20px;
+                z-index: 9;
+                background:transparent;
+                width: 24px;
+                border-radius: 50%;
+                opacity: 1;
+                height: 15px;        
+                font-family: $font-light;
+                font-size:16px;
+                &:hover{
+                    background:transparent;
+                    color:$black;
+                    opacity: 1;
+                }
+                &:before {
+                    transform: rotate(45deg);
+                }
+                &:after {
+                    transform: rotate(-45deg);
+                }
+                &:before, &:after {
+                    position: absolute;
+                    left: 11px;
+                    top:0;
+                    content: ' ';
+                    height: 15px;
+                    width: 0.07rem;                
+                }
+            }  
+        .modal-wrapper {  
+            .form-center{
+                margin:0 auto;
+                max-width: 70%; 
+                font-weight: normal;   
+            .text{
+                color:$colorgrey;
+                font-weight: normal;
+                margin:0;
+            }
+            .error-msg{ 
+                position: absolute;
+                color:$reddishpink;
+                font-weight: normal;
+                font-size: 12px; 
+                line-height: 13px;
+                min-height: 33px;
+                bottom:-6px;
+            }
+            .label{
+                color:$battleshipGrey;
+                text-transform: uppercase;
+                background: transparent;
+                margin: 0;
+                display: block;
+                text-align: left;
+                padding: 0 0 10px 0;
+                font-size: 13px;
+            }
+            .heading{
+                text-align: center;
+                font-family: $font-bold;
+                text-transform: capitalize;
+                padding:0 0 30px 0;
+                margin: 0;
+                color: $black;
+                font-size: 18px;
+            }
+            .form-control{box-shadow: none; height:40px;border: 1px solid $lightgrey;}
+            .form-div{position: relative;}
+            input,button{margin:0 0 15px 0}
+            }   
+        }  
     }
-    .label{
-        color:$colorgrey;text-transform: uppercase;
-        background: transparent;
-        margin: 0;
-        display: block;
-        text-align: left;
-        padding: 0 0 10px 0;
-        font-size: 13px;
-    }
-    .heading{
-        text-align: center;
-        font-family: $font-bold;
-        text-transform: capitalize;
-        padding:0 0 30px 0;
-        margin: 0;
-        color: #424b5a;
-    }
-    .form-control{box-shadow: none; height:40px}
-    .form-div{position: relative;}
-    input,button{margin:0 0 15px 0}
-    }   
-}  
+  }
 }
-
-
-@media(max-width: 768px) {
-    .modal-dialog{        
-     .modal-wrapper{width: 500px; margin-left: -250px;}
-   }
-}
-
-  @media(max-width: 580px) {
-    .modal-dialog{ 
-        .modal-wrapper{
-            width: 400px; margin-left: -200px;
-            .form-center{ max-width: 80%;}
-        }        
-     }  
+@media (min-width: 768px) {
+    .modal-dialog {
+      width: 600px;
+      margin: 0px auto;
     }
+}

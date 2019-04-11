@@ -27,12 +27,12 @@ import HomePageContainer from '../HomePageContainer/index';
 import HeaderContainer from '../HeaderContainer/index';
 import ClpContainer from '../ClpContainer/index';
 import PlpContainer from '../PlpContainer/index';
+import PdpContainer from '../PdpContainer/pdp';
 import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel'
 import '../../../public/styles/app.scss';
-// import { accessTokenCookie } from '../../../public/constants/constants';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -108,11 +108,11 @@ export default class App extends React.Component {
         </Helmet>
         {newsletterItem}
         <HeaderContainer />
-        <ForgotpassContainer />
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
+          <Route path="/pdp" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
         </Switch>

@@ -2,34 +2,125 @@
 @import '../base.scss';
 
 .welcomeBack {
+    .modal-header{
+        background-image: url('../../images/rectangle.png');
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: inherit;
+        .modal-title {
+            text-align: center;
+            font-family: $font-bold;
+            color: $colorwhite;
+            font-size: $base*4.75;
+        }
+    }
+    .smallLogo{
+        text-align: center;
+    }
     .modal-dialog {
-        width: 60%;
+        width: 35%;
+        .divider {
+            text-align: center;
+            margin: 0;
+            position: relative;
+            &::after{
+                width: 32px;
+                height: 1px;
+                position: absolute;
+                content: '';
+                background: $battleshipGrey;
+                left: 175px;
+                top: 13px;      
+            }
+            &::before{
+                width: 32px;
+                height: 1px;
+                position: absolute;
+                content: '';
+                background: $battleshipGrey;
+                right: 175px;
+                top: 13px; 
+            }
+        }
+        .close {
+            color: $colorwhite;
+            opacity: 1;
+        }
     }
     .loginForm {
-        width: 50%;
-        display: inline-block;
-        padding: $base*4;
+        width: 100%;
+        margin: auto;
+        padding: $base*2 $base*4;
         .form-label {
-            font-size: $base*1.5;
-            color: $colorLightGrey;
+            font-size: $base*1.75;
+            color: $battleshipGrey;
+            font-family: $font-light;
+            font-weight: inherit;
+        }
+        .form-control {
+            border-radius: 2px;
+            border: solid 1px $lightGrey;
+            background-color: $colorwhite;
+            display: block;
+            color: #555555;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         }
         .formBtn {
             width: 100%;
-            background-color: $colorblack;
+            background-color: $ashGrey;
             color: $colorwhite;
             padding: $base;
             border: transparent;
-            border-radius: $base*0.5;
+            border-radius: $base*0.25;
         }
         .error-msg {
             color: $errorMsg;
             font-size: $base*1.25;
         }
+        .forgotPassword {
+            font-size: $base*1.5;
+            color: $cerulean;
+            text-align: right;
+            font-family: $font-regular;
+            cursor: pointer;
+        }
     }
+    .registerNow {
+        border: none;
+        background-color: transparent;
+        font-size: $base*1.5;
+        color: $cerulean;
+        text-align: right;
+        font-family: $font-regular;
+        cursor: pointer;
+}
     .registerHere,
     .socialLogin {
-        width: 50%;
+        width: 100%;
         text-align: center;
         padding: $base*2 $base*4;
+    }
+    .socialLogin {
+        .btn-white {
+            width: 49%;
+            margin: 0.5%;
+            padding: $base;
+            border: 1px solid $black;
+            background: none;
+            .icon{
+                width: 12px;
+            }
+        }
+        .appLogin {
+            margin: $base;
+        }
     }
 }

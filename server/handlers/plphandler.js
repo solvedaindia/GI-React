@@ -89,7 +89,7 @@ function getPromotionData(headers, facets, productArray, callback) {
           headers,
           (error, promotionData) => {
             if (!error) {
-              product.promotionData = promotionData;
+              product.promotionData = promotionData.associatedPromotions;
               cb(null, product);
             } else {
               cb(error);

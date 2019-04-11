@@ -171,7 +171,7 @@ class Register extends React.Component {
               </Col>
               <Col xs={12} md={4}>
                 <div className='rightColJoinUs'>
-                  <img src={modalImage}/>
+                  <img src={modalImage} alt='Img'/>
                 </div>
               </Col>
             </Row>

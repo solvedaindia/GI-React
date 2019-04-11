@@ -1,27 +1,43 @@
 @import "../app.scss";
 @import '../base.scss';
+.modal-forgot{
+
 .modal-dialog {
+  width:500px;
+  height: 292px;
+  left:50%;
+  top:50%;
+  margin-left: -250px;
+  margin-top:-146px;
+  position: absolute;
+  max-width: 100%;
+  .modal-content{
+
   .modal-wrapper {
+    padding:32px 0;
     .form-center {
-      position: relative;
+      .form-group{
+        margin:0;
+      position: relative;     
       .text {
-        color: $colorgrey;
-        font-weight: normal;
+        color:$black;
+        font-family:$font-light;
       }
       .text-emailotp {
-        margin: 0 0 30px 0;
+        margin: 0 0 0px 0;
       }
       .error-msg {
-        width: 100%;
-        bottom: 5px;
+        width: 100%;        
         margin: 0;
+        position: static;
+        min-height: auto;
       }
 
       .form-control {
-        margin: 0 0 30px 0;
+        margin: 0 0 5px 0;
       }
       .newinputmargin {
-        margin: 0 0 30px 0;
+        margin: 0 0 0px 0;
       }
       .form-div {
         position: relative;
@@ -35,17 +51,34 @@
       }
     }
   }
-}
 
+    .btn-back {
+      background:transparent;
+      border:none;
+      position: absolute;
+      left:20px;
+      top:28px;
+      .leftArrow{
+        width:10px;
+      }
+    }
+    
+    
+  }
+}
+.close{                
+  &:before, &:after {
+      background:$colorwhite;
+      color:$black;
+  }
+} 
+}
+}
 //----------------------------------------------------
 
 .checkmarkImg {
   width: 27px;
 }
-
-// .sliderContainer {
-//   overflow: hidden;
-// }
 
 .valiationPosition {
   position: absolute;
@@ -67,9 +100,8 @@
 }
 
 .rightAnim {
-  position: absolute;
-  display: block;
-  // top: 2em;
+  position: relative;
+  display: block; 
   width: 100%;
   animation-duration: 15s;
   animation-timing-function: ease-in-out;
@@ -78,9 +110,8 @@
 }
 
 .leftAnim {
-  position: absolute;
-  display: block;
-  // top: 2em;
+  position: relative;
+  display: block;  
   width: 100%;
   animation-duration: 15s;
   animation-timing-function: ease-in-out;

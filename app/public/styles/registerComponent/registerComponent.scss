@@ -1,57 +1,209 @@
 
 @import '../app.scss';
 @import '../base.scss';
+@import '../variable';
 
+.modal-wrapperjoinus{
+    .modal-dialog{ 
+        width: 500px;
+        height: 515px;
+        left: 50%;
+        top: 50%;
+        margin-left: -250px;
+        margin-top: -257px;
+        position: absolute;
+        max-width: 100%;
+        .close{
+            top:20px;
+            &:before, &:after {
+                background: $colorwhite;
+            }
+          }
+      }
+}
+.registerEmailMobile{
+    .modal-dialog{ 
+        width: 800px;        
+        height: 515px;
+        left: 50%;
+        top: 50%;
+        margin-left: -400px;
+        margin-top: -257px;
+        position: absolute;
+        max-width: 100%;
+        .close{
+            top:20px;
+            &:before, &:after {
+                background: $black;
+            }
+          }
+      }
+}
+.modal-wrapperotp{
+    .modal-dialog{ 
+        width:500px;
+        height: 292px;
+        left:50%;
+        top:50%;
+        margin-left: -250px;
+        margin-top:-146px;
+        position: absolute;
+        max-width: 100%;
+        .modal-wrapper {
+            padding: 0;
+            
+        }
+        .close{
+            top:32px;
+            &:before, &:after {
+                background: $black;
+            }
+          }
+          .btn-back{    
+                position: absolute;
+                top: 28px;
+                left: 20px;
+                background: transparent;
+                border: none;
+                color: #979797;
+                .leftArrow{
+                    width:10px;
+                  }
+            }
+      }
+}
 .modal_register {    
-    .modal-dialog{
-        .modal-wrapperotp {
-           
+    .modal-dialog{  
+        .modal-wrapperotp {           
             .modal-wrapper{
-                padding: 0;
-                height: 294px;
-                margin-top: -147px;
+                padding: 30px 0;                
                  .form_register {
-                    max-width: 60%;}
+                     padding:0;
+                    max-width: 80%;                
+                }
             }
         }
-        .modal-wrapper{   
-            padding: 0;
-            height: 490px;
-            margin-top: -245px;
-            .otp_screen{max-width: 70%;margin:0 auto;    color: #979797;}
-            .form_register{
-                .btn-back{    
-                    position: absolute;
-                    top: 20px;
-                    left: 30px;
-                    background: transparent;
-                    border: none;
-                    color: #979797;
-                }
 
+        .modal-wrapperjoinus {            
+            .close{                
+                &:before, &:after {
+                    background:$colorwhite;
+                    color:$colorwhite;
+                }
+            }         
+            .modal-wrapper{
+                padding: 0;              
+
+                .joinUs{
+                    background: url(../../images/join-bg.png) no-repeat;    
+                    background-size: cover;
+                    width: 100%;
+                    text-align: center;
+                    padding:30px 0;
+                    .logo_width{width:150px}
+                    .joinus-heading{
+                        font-family: CeraGIBold, sans-serif;
+                        margin: 25px 0 0px 0;
+                        padding: 0;
+                        font-size: 32px;
+                        color:$colorwhite;
+                        text-transform: capitalize;
+                    }
+                  
+                }
+                 .form_register {
+                    max-width: 100%;
+                    padding:0;
+                    .inner-joinusform{padding:40px 50px;
+                    .btn-wrapper{
+                        font-family: $font-bold;
+                        .btn-white{  
+                            width:49%;                           
+                            border:1px solid $black;
+                            border-radius: 0; 
+                            color:$black;   
+                                           
+                            .icon-img{
+                                display: inline-block;
+                                margin:0 6px 0 0;
+                                .icon{
+                                    width:24px;
+                                }
+                               
+                            }
+                            .signin-text{
+                                font-size: 12px;
+                            }
+                        }
+                        .btn-fb{
+                            float: right;
+                        }
+                       
+                    }
+                    }
+                    .already-member{
+                        text-align: center;
+                        margin: 12px 0 0;
+                        color:$black;
+                        .login{
+                            color:$ceruleanblue;
+                            font-family: $font-bold;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .modal-wrapper{   
+            padding: 0;            
+            .otp_screen{max-width: 80%;margin:0 auto;    color: #979797;
+               .form_register{
+                   .heading{font-size: 18px; text-align: center;}
+               }
+            
+            }
+            .form_register{  
             .form-group{ margin:0;
-            .btn-bg{ margin:15px 0 0 0; }
+            .btn-bg{ 
+                     margin:15px 0 0 0; 
+                     background: $black; 
+                     border-radius: 0;
+                     text-transform: capitalize;       
+                    }
                 .sign_text{
                     text-align: center;
                     padding:15px 0 0 0; 
-                    color: #979797;   
-                    .link{ color: #979797;}     
+                    color: $battleshipGrey;   
+                    .link{ 
+                        color:$ceruleanblue;
+                    }     
+                }
+                .have-account{
+                    text-align: center;
+                    margin: 12px 0 0;
+                    color:$black;
+                    .login{
+                        color:$ceruleanblue;
+                        font-family: $font-bold;
+                    }
                 }
                 }
                 max-width: 80%;
                 padding: 30px 0 0 0;
                 margin: 0 auto;
             .heading{
-                text-align: center;
+                text-align: left;
                 font-family:$font-bold;
                 text-transform: capitalize;
                 padding: 0 0 30px 0;
                 margin: 0;
-                color: #424b5a;
+                color: $black;
+                font-size: 32px;
                 }
             
                 .label {
-                    color: #979797;
+                    color:$battleshipGrey;
                     text-transform: uppercase;
                     background: transparent;
                     margin: 0;
@@ -65,10 +217,11 @@
                     box-shadow: none;
                     height: 40px;
                     margin: 0 0 28px 0;
+                    border:1px solid $lightgrey;
                 }
                 .error-msg {
                     position: absolute;
-                    color: #fd1f3b;
+                    color:$reddishpink;
                     font-weight: normal;
                     font-size: 12px;
                     line-height: 13px;
@@ -85,21 +238,44 @@
                         right:0;
                         background: transparent;
                         border:none;
+                        color:$ceruleanblue;
+                        font-family: $font-bold;
+                        font-size: 12px;
                     }
                     .btn-register{
                         padding: 5px 70px;
                     }
                 }
-                .text_or{text-align: center;margin:15px 0;color: #979797;}
-                .btn-wrapper{
-                    .btn-white{width:49%;}
-                    .btn-fb{
-                        float: right;
-                        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 0px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
-                        border: none;
-                        padding: 13px 0;
+                .text_box{
+                    text-align: center;
+                    margin:18px 0;
+                    color:$black;
+                    font-family: $font-light;
+                    .or{
+                        position: relative;
+                        display:inline-block;
+                        text-transform: capitalize;
+                        &::after{
+                            width: 40px;
+                            height: 1px;
+                            position: absolute;
+                            content: '';
+                            background: #000;
+                            left: 21px;
+                            top: 13px;      
+                        }
+                        &::before{
+                            width: 40px;
+                            height: 1px;
+                            position: absolute;
+                            content: '';
+                            background: #000;
+                            right: 21px;
+                            top: 13px; 
+                        }
                     }
                 }
+               
             }
 
             .btn-white{   
@@ -117,6 +293,11 @@
                 background-size: 100% 100%;    
                 width: 100%;
                 border-left:1px solid #ccc;
+            }
+            .Thumbnailbox{
+                .imgfullwidth{
+                    width:100%;
+                }
             }
         }
         }
