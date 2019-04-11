@@ -207,7 +207,6 @@ export class PlpContainer extends React.Component {
 
 		return (
 			<>
-			<Filter/>
 				{marketingBanner}
 				{subCategories}
 				{plpProducts}

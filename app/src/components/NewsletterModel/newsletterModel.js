@@ -37,7 +37,7 @@ class NewsletterModel extends React.Component {
       loading: true,
       error: false,
       errorMessage: null,
-      inputText: null,  
+      inputText: null,
 
       show: true,
     };
@@ -78,15 +78,15 @@ class NewsletterModel extends React.Component {
       'email_id': this.state.inputText,
     }
     axios.post(newsletterAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
-        const data = response.data;
+      const data = response.data;
 
-        let now = new Date();
+      let now = new Date();
       var minutes = 1;
       now.setTime(now.getTime() + (minutes * 60 * 1000));
 
-      document.cookie = `${newsletterTokenCookie  }=${  getCookie(accessTokenCookie)  };path=/;expires=${  now.toGMTString()}`;
+      document.cookie = `${newsletterTokenCookie}=${getCookie(accessTokenCookie)};path=/;expires=${now.toGMTString()}`;
       this.setState({ inputText: '' })
-        alert(`Newsletter Subscription - ${  data.status}`);
+      alert(`Newsletter Subscription - ${data.status}`);
     }).catch(error => {
       console.log('newsError---', error);
     });
@@ -112,12 +112,12 @@ class NewsletterModel extends React.Component {
     }
     return (
       <Modal className='newsletter-Wrapper' show={this.state.modal} onHide={this.toggle}>
-        <Modal.Body>                   
-          <Button className="close" onClick={this.handleClose}></Button>    
+        <Modal.Body>
+          <Button className="close" onClick={this.handleClose}></Button>
           <Row className='no-margin'>
-            <Col xs={12} md={5} className='no-padding'>                        
+            <Col xs={12} md={5} className='no-padding'>
               <div className='Thumbnailbox'>
-                <img className='imgfullwidth' src={NewsletterThumbnailImg}/>
+                <img className='imgfullwidth' src={NewsletterThumbnailImg} />
               </div>
             </Col>
 
@@ -126,21 +126,20 @@ class NewsletterModel extends React.Component {
                 <h3 className="heading">Have you joined our mailing list yet?</h3>
                 <Form>
                   <p className='signup-text'>Sign up to be the first to recieve updates and ongoing offers!</p>
-                  <FormGroup className='email'>                                
+                  <FormGroup className='email'>
                     <input onChange={this.handleInputChange.bind(this)} type={this.state.inputType} name="text" id="exampleEmail" className='form-control newinputmargin' placeholder='Your Email' />
                     {errorItem}
                   </FormGroup>
-                  <FormGroup> 
+                  <FormGroup>
                     <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>Submit</Button>
                   </FormGroup>
                 </Form>
               </div>
             </Col>
           </Row>                      
-            </Col>
-          </Row>
-        </Modal.Body>
-      </Modal>
+            
+        </Modal.Body >
+      </Modal >
     );
   }
 }

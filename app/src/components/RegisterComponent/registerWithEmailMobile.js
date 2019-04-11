@@ -83,7 +83,7 @@ class RegisterWithEmailMobile extends React.Component {
     } else if (
       !regexMobileNo.test(obj.userId) &&
       this.props.registrationType === registerWithMobileNum
-    {
+    ) {
       this.setState({
         errorMessageUserId: 'Please enter valid Mobile number',
       });
@@ -170,9 +170,9 @@ class RegisterWithEmailMobile extends React.Component {
     return (
       <div>
         <Row>
-          <Col xs={12} md={5} className='no-padding'>                        
+          <Col xs={12} md={5} className='no-padding'>
             <div className='Thumbnailbox'>
-              <img className='imgfullwidth' src={RegisterThumbnailImg}/>
+              <img className='imgfullwidth' src={RegisterThumbnailImg} />
             </div>
           </Col>
 
@@ -184,35 +184,35 @@ class RegisterWithEmailMobile extends React.Component {
                   <FormGroup>
                     <div className='form-div clearfix'>
                       <Label>FULL NAME</Label>
-                      <input type='text' name='name' className='form-control' placeholder='Please Enter Full Name' onChange={this.handleChange} value={this.state.name}/>
+                      <input type='text' name='name' className='form-control' placeholder='Please Enter Full Name' onChange={this.handleChange} value={this.state.name} />
                       {errorMessageName}
                     </div>
                   </FormGroup>
                   <FormGroup>
-                    { this.props.registrationType === registerWithEmail ? (
+                    {this.props.registrationType === registerWithEmail ? (
                       <div>
                         <Label className='label'>EMAIL ADDRESS</Label>
                         <div className='form-div clearfix'>
-                          <input type='email' name='userId' className='form-control' placeholder='Please Enter Email Address' onChange={this.handleChange}/>
+                          <input type='email' name='userId' className='form-control' placeholder='Please Enter Email Address' onChange={this.handleChange} />
                           />
                           {errorMessageUserId}
                         </div>
                       </div>
                     ) : (
-                      <div>
-                        <Label className='label'>Mobile Number</Label>
-                        <div className='form-div clearfix'>
-                          <input type='mobile' name='userId' className='form-control' placeholder='Please Enter Mobile Number' onChange={this.handleChange} value={this.state.userId}/> 
-                          {errorMessageUserId}
+                        <div>
+                          <Label className='label'>Mobile Number</Label>
+                          <div className='form-div clearfix'>
+                            <input type='mobile' name='userId' className='form-control' placeholder='Please Enter Mobile Number' onChange={this.handleChange} value={this.state.userId} />
+                            {errorMessageUserId}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
                   </FormGroup>
                   <FormGroup>
                     <div>
                       <Label className='label'>Password</Label>
                       <div className='form-div clearfix'>
-                        <input type={this.state.inputType} name='password' className='form-control' placeholder='Please Enter Your Password' onChange={this.handleChange} value={this.state.password}/>
+                        <input type={this.state.inputType} name='password' className='form-control' placeholder='Please Enter Your Password' onChange={this.handleChange} value={this.state.password} />
                         <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../src/components/SVGs/eye.svg')} />}</span>
                         {errorMessagePassword}
                         <p></p>
@@ -223,11 +223,11 @@ class RegisterWithEmailMobile extends React.Component {
                     <Button onClick={this.handleSubmit} className='btn-block btn-bg'>SIGN UP</Button>
                     <p className='have-account'>Have an account? <a className='login' href='#'>Login</a></p>
                     <p className='sign_text'>By signing up you agree to our <a className='link' href=''>T&C</a> </p>
-                  </p>
-                </FormGroup>
-              </Form>
+                    {/* </p> */}
+                  </FormGroup>
+                </Form>
+              </div>
             </div>
-          </div>
           </Col>
         </Row>
       </div>
