@@ -4,6 +4,7 @@ import Productimageandvideo  from './productImagesAndVideos';
 import ProductInfo  from './productInfo';
 import PdpEspot  from './pdpEspot';
 import ProductDetail  from './productDetail';
+import '../../../public/styles/pdpComponent/pdpComponent.scss';
 
 class PdpComponent extends React.Component {
     render() {
@@ -22,7 +23,7 @@ class PdpComponent extends React.Component {
                 </Row>
                 <Row>
                     <Col md={12} sm={12} xs={12}>
-                        <ProductDetail productDetail={this.props.data.productDetails.image} />
+                        <ProductDetail productDetail={this.props.data.productDetails} />
                     </Col>
                 </Row>
                 <Row>
@@ -30,19 +31,6 @@ class PdpComponent extends React.Component {
                         <PdpEspot PdpEspot={this.props.espot} />
                     </Col>
                 </Row>
-                {/*
-                <Row>
-                    <Col md={12} sm={12} xs={12}>
-                        <ProductFeatures name={this.props.featureProduct} />
-                    </Col>
-                </Row>
-                
-                <Row>
-                    <Col md={12} sm={12} xs={12}>
-                        <ProductImageAndVideoSlider />
-                    </Col>
-                </Row>
-                */}
 	        </Grid>
         );
     }
