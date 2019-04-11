@@ -1,49 +1,49 @@
 import React from 'react';
+import axios from 'axios';
+import '../../../public/styles/homePageStatic.scss';
+import {
+  homePageApi,
+  storeId,
+  accessToken,
+} from '../../../public/constants/constants';
 
-class LivingInspiration extends React.Component {
-  render() {
-    return (
-      <section className='livingRoom'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-6 col-sm-6'>
-              <h3 className='living-heading padding-bottom'>Living Room<br />Inspiration</h3>
-              <div className='boxImg'>
-                <img className='img-fullwidth' src={require('../../../../public/images/1.jpg')} alt='1' />
-              </div>
-            </div>
+class LivingTheme extends React.Component {
+	state = {
+		homePageData: {},
+		isLoading: true,
+		errors: null,
+	};
 
-            <div className='col-md-6 col-sm-6'>
-              <h3 className='ourcoll-heading padding-bottom'>See our Collection of<br />Products here</h3>
-              <div className='boxImg'>
-                <img className='img-fullwidth' src={require('../../../../public/images/2.jpg')} alt='1' />
-              </div>
-            </div>
+	getThemeData() {
+		axios
+			.get(homePageApi, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				this.setState({
+				homePageData: response.data.data.GI_Homepage_Static_Content,
+				isLoading: false,
+				});
+			})
+			.catch(error => this.setState({ error, isLoading: false }));
+	}
 
-            <div className='col-md-6 col-sm-6'>
-              <div className='boxImg'>
-                <img className='img-fullwidth' src={require('../../../../public/images/2.jpg')} alt='1' />
-              </div>
-            </div>
+	componentDidMount() {
+		this.getThemeData();
+	}
 
-            <div className='col-md-6 col-sm-6'>
-              <div className='boxImg'>
-                <img className='img-fullwidth' src={require('../../../../public/images/2.jpg')} alt='1' />
-              </div>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-md-12 col-sm-12'>
-              <div className='text-center'>
-                <a href='#' className='btn-border'>See More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
+	render() {
+		const { isLoading, homePageData } = this.state;
+		return (
+		<div className="homePageStatic">
+			{!isLoading ? (
+			<div dangerouslySetInnerHTML={{ __html: homePageData.content }} />
+			) : (
+			<div>Something Went Wrong</div>
+			)}
+		</div>
+		);
+	}
 }
 
-export default LivingInspiration;
+export default LivingTheme;

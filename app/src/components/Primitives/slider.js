@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import GetImage from './images';
+// import GetImage from './image';
 import BannerData from '../../data/BannerData.json';
 class FullBanner extends React.Component {
     render() {
@@ -19,7 +19,7 @@ class FullBanner extends React.Component {
                         return (
                             <div className='fsBanner'>
                                 <a href={bannerData.onClickUrl} key={index}>
-                                    <GetImage 
+                                    <img 
                                         src={bannerData.src}
                                         alt={bannerData.alt}
                                     />
