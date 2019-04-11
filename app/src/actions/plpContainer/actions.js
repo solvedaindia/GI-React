@@ -25,3 +25,11 @@ export const filter = (value) => {
     val: value
   }
 }
+
+export const adBannerAction = (value) => {
+  console.log('AdBanner adBannerAction',value);
+  return {
+    type: actionTypes.ADBANNERCOUNT,
+    val: value
+  }
+}

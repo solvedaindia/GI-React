@@ -21,7 +21,7 @@ import '../../../public/styles/plpContainer/plpContainer.scss';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 // import ProductItem from '../../components/GlobalComponents/productItem/productItem';
-// import Filter from '../../components/PlpComponent/Filter/filter';
+import Filter from '../../components/PlpComponent/Filter/filter';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 
@@ -94,7 +94,6 @@ export class PlpContainer extends React.Component {
 	}
 
 	fetchPLPProductsData() {
-		console.log('FetchPLPProductData');
 		this.setState({ isLoading: true }, () => {
 			/**
 		 * TODO: Node is not accepting any categoryId, this is a static response from Node side
@@ -194,7 +193,6 @@ export class PlpContainer extends React.Component {
 
 		let plpProducts;
 		if (plpData.length != 0) {
-			console.log('INSIDE---');
 			plpProducts = (
 				<PlpComponent plpDataPro={this.state.plpData} />
 			);
@@ -209,6 +207,7 @@ export class PlpContainer extends React.Component {
 
 		return (
 			<>
+			<Filter/>
 				{marketingBanner}
 				{subCategories}
 				{plpProducts}
