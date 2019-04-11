@@ -181,7 +181,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: 'Featured',
         emiData: '100',
         promotionData: 'Free Accessories',
@@ -229,7 +229,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: 'Bestseller',
         emiData: '400',
         promotionData: 'Free Accessories',
@@ -246,7 +246,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -261,7 +261,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -276,7 +276,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -291,7 +291,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -306,7 +306,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -321,7 +321,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0901.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -336,7 +336,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -351,7 +351,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -366,7 +366,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -381,7 +381,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -396,7 +396,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -411,7 +411,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0904.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-1.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -426,7 +426,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0905.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png',
         ribbonText: '',
         emiData: '',
         inStock: '',
@@ -441,7 +441,7 @@ const testJSON = {
         onClickUrl: '',
         seoUrl: '',
         imageSrc:
-          'https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/men/mcl009_jackets/200x310/mcl009_0905.jpg',
+          'https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png',
         ribbonText: '',
         emiData: '',
         inStock: '',

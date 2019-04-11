@@ -209,7 +209,7 @@ class RegisterWithEmailMobile extends React.Component {
                         <Label className='label'>Password</Label>
                         <div className='form-div clearfix'>
                           <input type={this.state.inputType} name='password' className='form-control' placeholder='Please Enter Your Password' onChange={this.handleChange} value={this.state.password}/>
-                          <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../public/images/eye.svg')} />}</span>
+                          <span onClick={this.showHidePass.bind(this)} className='valiationPosition-NewPassword'>{<img src={require('../../../src/components/SVGs/eye.svg')} />}</span>
                           {errorMessagePassword}
                           <p></p>
                         </div>

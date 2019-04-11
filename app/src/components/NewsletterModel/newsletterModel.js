@@ -6,11 +6,13 @@
 
 import React from 'react';
 import axios from 'axios';
-import { Modal, Button, Form, FormGroup, Label } from 'react-bootstrap';
+import { Row,Col,Modal, Button, Form, FormGroup, Label } from 'react-bootstrap';
 import '../../../public/styles/newsletterModel/newsletterModel.scss';
 import { newsletterAPI, storeId, newsletterTokenCookie, accessToken, accessTokenCookie } from '../../../public/constants/constants';
 import { getCookie } from '../../utils/utilityManager';
 import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
+
+import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.png';
 
 class NewsletterModel extends React.Component {
     constructor(props) {
@@ -21,9 +23,13 @@ class NewsletterModel extends React.Component {
             loading: true,
             error: false,
             errorMessage: null,
-            inputText: null,
+            inputText: null,  
+
+            show: true,
+             
         };
         this.toggle = this.toggle.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -80,6 +86,10 @@ class NewsletterModel extends React.Component {
         });
     }
 
+    handleClose() {
+        this.setState({ show: false });
+      }
+
     render() {
         let errorItem;
         if (this.state.error) {
@@ -88,19 +98,33 @@ class NewsletterModel extends React.Component {
             errorItem = null;
         }
         return (
-            <Modal show={this.state.modal} onHide={this.toggle}>
-                <Modal.Body>
-                    <div className='newsletter-Wrapper'>
+            <Modal className='newsletter-Wrapper' show={this.state.modal} onHide={this.toggle}>
+                <Modal.Body>                   
+                     <Button className="close" onClick={this.handleClose}></Button>    
+                    <Row className='no-margin'>
+                        <Col xs={12} md={5} className='no-padding'>                        
+                            <div className='Thumbnailbox'>
+                                <img className='imgfullwidth' src={NewsletterThumbnailImg}/>
+                            </div>
+                        </Col>
+
+                        <Col xs={12} md={7}>
+                        <div className='form_newsletter'>
                         <h3 className="heading">Have you joined our mailing list yet?</h3>
                         <Form>
-                            <FormGroup>
-                                <p className='text'>Sign up to be the first to recieve updates and ongoing offers!</p>
+                            <p className='signup-text'>Sign up to be the first to recieve updates and ongoing offers!</p>
+                            <FormGroup className='email'>                                
                                 <input onChange={this.handleInputChange.bind(this)} type={this.state.inputType} name="text" id="exampleEmail" className='form-control newinputmargin' placeholder='Your Email' />
                                 {errorItem}
-                                <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>Submit</Button>
+                            </FormGroup>
+                            <FormGroup> 
+                            <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>Submit</Button>
                             </FormGroup>
                         </Form>
-                    </div>
+                        </div>
+                        </Col>
+                    </Row>                      
+                  
                 </Modal.Body>
             </Modal>
         );

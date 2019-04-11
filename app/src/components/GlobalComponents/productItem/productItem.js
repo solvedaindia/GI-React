@@ -7,8 +7,8 @@ import InStock from './inStock';
 
 class ProductItem extends React.Component {
   render() {
-    return (
-        <li className="col-xl-4 col-lg-4 col-md-4 col-sm-6 productlist">
+    return (    
+        <li className="productlist">
           <div className="imgBox">
             <ItemImage data={this.props.data.imageSrc} />
             <InStock isInStock={this.props.data.inStock} />
