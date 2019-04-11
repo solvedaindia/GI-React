@@ -116,7 +116,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       validateImg = (
         <img
           className="checkmarkImg"
-          src={require('../../../public/images/checkmark.svg')}
+          src={require('../../../src/components/SVGs/checkmark.svg')}
         />
       );
     } else {
@@ -131,7 +131,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     return (
       <div className={animeClass}>
         <h3 className="heading">Forgot password</h3>
-        <Form className='modalmin-height'>
+        <Form className="modalmin-height">
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
               Email id/mobile number
@@ -155,15 +155,14 @@ class ForgotPasswordEmailMobile extends React.Component {
             <p className="text text-emailotp">
               An OTP will be sent to this email address{' '}
             </p>
-           
           </FormGroup>
         </Form>
         <Button
-              onClick={this.proceedBtnPressed.bind(this)}
-              className="btn-block btn-bg"
-            >
-              Proceed
-            </Button>
+          onClick={this.proceedBtnPressed.bind(this)}
+          className="btn-block btn-bg"
+        >
+          Proceed
+        </Button>
       </div>
     );
   }

@@ -1,10 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 import SubCatItem from './subCatItem';
-import '../../../../public/styles/plpContainer/plpContainer.scss'
+import '../../../../public/styles/plpContainer/plpContainer.scss';
 
-const prevArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowLeft.svg')} />
-const nextArrowImg = <img src={require('../../../../public/images/plpAssests/carousel__arrowRight.svg')} />
+const prevArrowImg = (
+  <img src={require('../../SVGs/carousel__arrowLeft.svg')} />
+);
+const nextArrowImg = (
+  <img src={require('../../SVGs/carousel__arrowRight.svg')} />
+);
 class SubCategories extends React.Component {
   constructor(props) {
     super(props);
@@ -26,15 +30,12 @@ class SubCategories extends React.Component {
     };
   }
 
-
   componentWillReceiveProps(nextProps) {
     const data = nextProps.subCategoryData;
     if (data) {
-      const itemsArr = data.map((item, index) => {
-        return (
-          <SubCatItem key={index} itemData={item} />
-        );
-      })
+      const itemsArr = data.map((item, index) => (
+        <SubCatItem key={index} itemData={item} />
+      ));
       this.setState({
         subCatItem: itemsArr,
       });
@@ -43,24 +44,20 @@ class SubCategories extends React.Component {
 
   render() {
     return (
-      <section className='tablecarousel'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-12 text-center'>
-              <div className='headingText'>
-                <h3 className='heading'>Table</h3>
-                <p className='total-products'>(38 Product)</p>
+      <section className="tablecarousel">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <div className="headingText">
+                <h3 className="heading">Table</h3>
+                <p className="total-products">(38 Product)</p>
               </div>
             </div>
           </div>
-          <Slider {...this.settings}>
-            {this.state.subCatItem}
-          </Slider>
-
+          <Slider {...this.settings}>{this.state.subCatItem}</Slider>
         </div>
       </section>
-
-    )
+    );
   }
 }
 

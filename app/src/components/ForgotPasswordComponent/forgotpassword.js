@@ -12,15 +12,14 @@ import ForgotPasswordOTP from './forgotPasswordOTP';
 import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 
 const LeftArrow = (
-  <img className='leftArrow'
+  <img
+    className="leftArrow"
     src={require('../../../public/images/left-arrow.png')}
   />
 );
 
 const prevArrowImg = (
-  <img
-    src={require('../../../public/images/plpAssests/carousel__arrowLeft.svg')}
-  />
+  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')} />
 );
 class Forgotpassowrd extends React.Component {
   constructor(props) {
@@ -143,17 +142,19 @@ class Forgotpassowrd extends React.Component {
         <p className="forgotPassword" onClick={this.toggle}>
           Forgot Password?
         </p>
-        <Modal  show={this.state.modal} onHide={this.toggle} className={this.state.modalClass}>
-          <Modal.Body>            
+        <Modal
+          show={this.state.modal}
+          onHide={this.toggle}
+          className={this.state.modalClass}
+        >
+          <Modal.Body>
             <div className="modal-wrapper sliderContainer">
-              <Button className="close" onClick={this.toggle}>              
-              </Button>
+              <Button className="close" onClick={this.toggle} />
               <Button
                 onClick={this.backButtonPressed.bind(this)}
                 className="btn-back"
               >
                 {LeftArrow}
-                
               </Button>
               <div className="form-center">{item}</div>
             </div>

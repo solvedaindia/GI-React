@@ -3,14 +3,13 @@
 @import "../app.scss";
 @import '../base.scss';
 @import '../variable.scss';
-$colorwhite: #fff;
 $imgfullwid: 100%;
 
 .list-style {
   padding: 13px;
   border-radius: 50%;
   display: inline-table;
-  border: 1px solid #fff;
+  border: 1px solid $colorwhite;
   cursor: pointer;
   margin-right: 10px;
 }
@@ -86,10 +85,40 @@ section.tablecarousel {
 }
 
 .plpCategories {
+  .grid3{
+    display: flex;
+    flex-wrap: wrap;
+    .productlist{
+     flex: 0 0 33%;        
+
+      &:nth-child(3n+2){
+        border-left:none;
+        border-right:none
+      }     
+      &:nth-child(n + 4){border-top:none;}  
+      &:last-child{
+        border-right:1px solid $borderLight;
+      }  
+     }
+  }
+  .grid2{
+    display: flex;
+    flex-wrap: wrap;
+    .productlist{
+      flex: 0 0 50%;  
+      &:nth-child(2n+2){
+        border-left:none;        
+      }     
+      &:nth-child(n + 3){border-top:none;}  
+      &:last-child{
+        border-right:1px solid $borderLight;
+      } 
+     }
+  }
   .headingTitle{
       font-family: $font-bold;
       font-size: 50px;
-      color: #026dc6;
+      color:$ceruleanblue;
       margin: 0;
   }
   .headingSubTitle{
@@ -100,37 +129,54 @@ section.tablecarousel {
  .container{ padding:0 30px;}
  .plp-products{
   .productlist {    
-    padding: 20px;    
+    padding: 20px;
     position: relative;
-    border:1px solid $borderLight;
-
-    &:nth-child(3n+2){border-left:none;border-right:none}     
-    &:nth-child(n + 4){border-top:none;}  
-    &:last-child{border-right:1px solid $borderLight;}  
+    border:1px solid $borderLight;  
 
     .featured-box{ 
       position: absolute;
       top:0;
       left:0;
-      background: #000;
-      color: #fff;
+      background:$black;
+      color: $colorwhite;
       padding:2px 10px;
       font-size:12px;
-      .ribbon_star{ float: left;display: block;
-        .star_img{margin: 3px 3px 0 0;}
+      .ribbon_star{ 
+        float: left;
+        display: block;
+        .star_img{
+          margin: 3px 3px 0 0;
+        }
       }
-      .featured-text{float: left;display: block;margin: 2px 0 0 0;}
+      .featured-text{
+        float: left;
+        display: block;
+        margin: 2px 0 0 0;
+      }
     }   
     .imgBox{
       position: relative;
       text-align: center;
-      .imgfullwidth{width:100%;}
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+       .link{
+         display:block;
+       
+      .imgfullwidth{
+        max-width: 100%;        
+        max-height: 168px;
+        display: block;
+        
+      }
+    }
       .btn-outofStock{ 
         background-color: rgba(255, 255, 255, 0.8);
         border:0.09rem solid $reddishpink;
         position: absolute;
         font-size: 14px;
-        color:#000;
+        color:$black;
         padding: 8px 20px;
         transform: translate(-50%, -50%);
         font-family:$font-light;
@@ -142,10 +188,10 @@ section.tablecarousel {
       text-align: center;
       .heading {
         position: relative;
-        font-weight: bold;
+        font-family: $font-bold;
         padding-top: 15px;
-        font-size: 16px;
-        text-transform: capitalize;
+        font-size: 14px;
+        text-transform: capitalize;       
         &:after {
           position: absolute;
           width: 20px;
@@ -160,7 +206,7 @@ section.tablecarousel {
       }
     }
     .text{
-      color: #000000;      
+      color:$black;      
       padding: 5px 0 0 0;
       line-height: 24px;
       margin: 0;
@@ -170,7 +216,7 @@ section.tablecarousel {
     .discount-price {
       font-size: 18px;
       font-family: $font-bold;
-      color: #036cc5;
+      color:$cerulean;
   }
   .priceno-discount {
     text-decoration: line-through;
@@ -184,6 +230,7 @@ section.tablecarousel {
     color: $reddishpink;
     font-size: 12px;
     line-height: 16px;
+    .free-accessories{display:block;}
     .bold{
       font-family: $font-bold;
     }
@@ -200,13 +247,13 @@ section.tablecarousel {
 
 /** Descripton */
 .descriptionBanner {
-  background: #f7f8f8;
+  background: $colorwhite;
   padding: 60px 0;
 
   .heading {
     font-family: $font-bold;
     font-size: 34px;
-    color: #000;
+    color: $black;
     margin: 0 0 20px 0;
   }
 
@@ -214,7 +261,7 @@ section.tablecarousel {
     background: transparent;
     border: none;
     text-decoration: underline;
-    color: #000;
+    color: $black;
     font-size: 16px;
     font-family: $font-regular;
     margin: 24px 0;
