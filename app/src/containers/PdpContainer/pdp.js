@@ -52,14 +52,14 @@ class PdpContainer extends React.Component {
     
     render() {
         return(
-            <div>
+            <>
             { !this.state.pdpLoading && !this.state.espotLoading &&
                 <PdpComponent
                     data={this.state.pdp.data}
                     espot={this.state.pdpEspot}
                 />
             }
-            </div>
+            </>
         )
     }
 }

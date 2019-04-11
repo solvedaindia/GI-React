@@ -4,11 +4,12 @@ import EmiInfo from './emiInfo';
 
 const productInfo = (props) => {
     return(
-        <div>
-            <Col md={12} sm={12} xs={12}>
-                <div>
-                    Product ID: {props.productData.partNumber}
+        <>            
+                <div className='productId'>
+                   <span>Product ID:</span> 
+                   <span>{props.productData.partNumber}</span>
                 </div>
+                
                 <h3 className='heading'>
                     {props.productData.productName}
                 </h3>
@@ -45,8 +46,8 @@ const productInfo = (props) => {
                     <Button className="btn-primary">+</Button>
                     <Button className="btn-primary">Add to Cart</Button>
                 </div>
-            </Col>
-        </div>
+           
+        </>
     );
 }
 

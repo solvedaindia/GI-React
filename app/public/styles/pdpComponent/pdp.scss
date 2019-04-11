@@ -1,0 +1,56 @@
+@import '../variable';
+.galleryArea{
+  .breadcrumblist{
+    padding:13px 0;
+    margin: 0;
+    .list{
+      display: inline-block;
+      color:$battleshipGrey;
+      padding:0 5px 0 0;
+      font-size: 12px;
+     .link{
+       color:$battleshipGrey;
+     }
+    }
+  }
+.gallaryWrapper{
+  position: relative;
+
+    .featured-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background:$black;
+      color:$colorwhite;
+      padding: 2px 10px;
+      font-size: 12px;
+      z-index: 1;
+
+      .ribbon_star {
+        float: left;
+        display: block;
+
+        .star_img {
+          margin: 3px 3px 0 0;
+      }
+    }
+
+    .featured-text {
+      float: left;
+      display: block;
+      margin: 2px 0 0 0;
+  }
+ }
+
+ .GalleryBox{
+ border:1px solid #000;
+ }
+
+ .GallerytextBox{
+   .product{
+     color: red;
+   }
+ }
+}
+
+}
