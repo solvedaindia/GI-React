@@ -8,8 +8,7 @@ class Promotions extends React.Component {
         <span className="free-accessories"> {this.props.data}</span>
       );
     }
-
-    console.log('##################', this.props.data);
+    
     return (
       <p className="emi-text text">
         {promotionItem}

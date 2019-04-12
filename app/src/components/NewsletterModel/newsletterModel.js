@@ -42,7 +42,6 @@ class NewsletterModel extends React.Component {
       show: true,
     };
     this.toggle = this.toggle.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,6 +85,7 @@ class NewsletterModel extends React.Component {
 
       document.cookie = `${newsletterTokenCookie}=${getCookie(accessTokenCookie)};path=/;expires=${now.toGMTString()}`;
       this.setState({ inputText: '' })
+      this.toggle();
       alert(`Newsletter Subscription - ${data.status}`);
     }).catch(error => {
       console.log('newsError---', error);
@@ -99,10 +99,6 @@ class NewsletterModel extends React.Component {
     });
   }
 
-  handleClose() {
-    this.setState({ show: false });
-  }
-
   render() {
     let errorItem;
     if (this.state.error) {
@@ -113,7 +109,7 @@ class NewsletterModel extends React.Component {
     return (
       <Modal className='newsletter-Wrapper' show={this.state.modal} onHide={this.toggle}>
         <Modal.Body>
-          <Button className="close" onClick={this.handleClose}></Button>
+          <Button className="close" onClick={this.toggle}></Button>
           <Row className='no-margin'>
             <Col xs={12} md={5} className='no-padding'>
               <div className='Thumbnailbox'>

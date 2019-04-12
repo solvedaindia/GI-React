@@ -14,7 +14,7 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 // import makeSelectPlpContainer from './selectors';
 import reducer from './reducer';
-import saga from '../../saga/plpContainer/saga';
+import saga from './saga';
 import PlpComponent from '../../components/PlpComponent/index';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
@@ -103,18 +103,11 @@ export class PlpContainer extends React.Component {
 					headers: { store_id: storeId, access_token: accessToken },
 				})
 				.then(response => {
-					setTimeout(() => {
-						this.setState({ //Just to test the delay
-							plpData: [...response.data.data.productList, ...this.state.plpData],
-							hasMore: (this.state.plpData.length < 60),
-							isLoading: false,
-						})
-					}, 1500);
-					// this.setState({
-					// 	plpData: [...response.data.data.productList, ...this.state.plpData],
-					// 	hasMore: (this.state.plpData.length < 60),
-					// 	isLoading: false,
-					// });
+					this.setState({
+						plpData: [...response.data.data.productList, ...this.state.plpData],
+						hasMore: (this.state.plpData.length < 60),
+						isLoading: false,
+					});
 				})
 				.catch(error => {
 					// console.log('PLPBannerrror---', error);

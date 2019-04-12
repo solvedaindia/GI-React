@@ -22,19 +22,10 @@ class PlpComponent extends React.Component {
     const plpData = nextProps.plpDataPro;
     if (plpData) {
       const item = plpData.map((item, index) => {
-        const adBannerItem = '';
-        // console.log('Ad Banner Count Outer ---- ',this.state.adBannerIndex)
-        // if (this.state.adBannerIndex === index) {
-
-        // adBannerItem =
-
-        //   this.setState({adBannerIndex: this.state.adBannerIndex + 12});
-        //   console.log('Ad Banner Count Inner ---- ',this.state.adBannerIndex)
-        // }
         return (
           <>
             <ProductItem key={index} data={item} />
-            {<AdBanner indexPro={index} />}
+            {<AdBanner indexPro={index+1} />}
           </>
         );
       });

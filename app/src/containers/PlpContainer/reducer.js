@@ -8,8 +8,8 @@ import { fromJS } from 'immutable';
 import { DEFAULT_ACTION } from './constants';
 import * as actionTypes from './constants';
 
-export const initialState = {
-  adBannerPos: 0,
+const initialState = {
+  adBannerPos: 12,
   counter: 0,
   updateFilter: null,
 };
@@ -23,7 +23,6 @@ function plpContainerReducer(state = initialState, action) {
         counter: state.counter + 1
       }
       case actionTypes.FILTER:
-      console.log('Filter Reducers',action.val);
       return {
         ...state,
         updateFilter: action.val
@@ -31,7 +30,7 @@ function plpContainerReducer(state = initialState, action) {
       case actionTypes.ADBANNERCOUNT:
       return {
         ...state,
-        updateFilter: action.val + 12
+        adBannerPos: action.val + 12
       }
     default:
       return state;
