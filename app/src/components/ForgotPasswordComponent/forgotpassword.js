@@ -27,24 +27,46 @@ class Forgotpassowrd extends React.Component {
     this.state = {
       modal: false,
       currentItem: null,
-      currentItemName: null,
+      currentItemName: 'ForgotPassword',
       userId: null,
       otpNo: null,
       modalClass: 'modal-forgot',
+      hideBackArrow: false,
     };
 
     this.toggle = this.toggle.bind(this);
     this.handler = this.handler.bind(this);
   }
 
-  handler(itemStr, userId, otpStr) {
+  //* Callback Handler *//
+  handler(itemStr, userId, otpStr, isBack, hideBackArrow) {
     if (userId != null) {
       this.setState({
         userId,
       });
     }
 
-    console.log('ComponentName---', itemStr);
+    if (hideBackArrow) {
+      this.setState({
+        hideBackArrow: true,
+      });
+      return;
+    }
+    else {
+      this.setState({
+        hideBackArrow: false,
+      });
+    }
+
+    if (isBack) {
+      this.setState({
+        currentItemName: itemStr,
+      });
+      this.backButtonPressed();
+      return;
+    }
+
+
     let item;
     if (itemStr == 'ForgotPasswordOTP') {
       item = (
@@ -92,7 +114,7 @@ class Forgotpassowrd extends React.Component {
     let itemStr = this.state.currentItemName;
     let item;
     console.log('ComponentNameBAck---', this.state.currentItemName);
-    if (itemStr == 'ForgotPasswordOTP') {
+    if (itemStr === 'ForgotPasswordOTP') {
       item = (
         <ForgotPasswordEmailMobile
           handlerPro={this.handler.bind(this)}
@@ -100,7 +122,8 @@ class Forgotpassowrd extends React.Component {
           isBack
         />
       );
-    } else if (itemStr == 'ForgotPasswordNewPassword') {
+      itemStr = 'ForgotPassword';
+    } else if (itemStr === 'ForgotPasswordNewPassword') {
       item = (
         <ForgotPasswordOTP
           handlerPro={this.handler.bind(this)}
@@ -110,10 +133,13 @@ class Forgotpassowrd extends React.Component {
         />
       );
       itemStr = 'ForgotPasswordOTP';
-    } else if (itemStr == 'NewPasswordSuccess') {
+    } else if (itemStr === 'NewPasswordSuccess') {
       this.setState({
         modal: false,
       });
+    }
+    else if (itemStr === 'ForgotPassword') {
+      this.toggle();
     }
 
     this.setState({
@@ -154,7 +180,7 @@ class Forgotpassowrd extends React.Component {
                 onClick={this.backButtonPressed.bind(this)}
                 className="btn-back"
               >
-                {LeftArrow}
+              { this.state.hideBackArrow ? null : LeftArrow }
               </Button>
               <div className="form-center">{item}</div>
             </div>

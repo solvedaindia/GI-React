@@ -7,15 +7,16 @@
 import { fromJS } from 'immutable';
 import { DEFAULT_ACTION } from './constants';
 import * as actionTypes from './constants';
+import {fetchReleventSortingValue} from '../../utils/utilityManager'
 
 const initialState = {
   adBannerPos: 12,
+  sortingValue: 0,
   counter: 0,
   updateFilter: null,
 };
 
 function plpContainerReducer(state = initialState, action) {
-  console.log('$$PLP Reducer State$$ ---- ', state, action.type);
   switch (action.type) {
     case actionTypes.INCREMENT:
       return {
@@ -32,9 +33,18 @@ function plpContainerReducer(state = initialState, action) {
         ...state,
         adBannerPos: action.val + 12
       }
+      case actionTypes.SORTING:
+      return {
+        ...state,
+        sortingValue: fetchReleventSortingValue(action.val),
+        adBannerPos: initialState.adBannerPos
+      }
     default:
       return state;
   }
 }
 
 export default plpContainerReducer;
+
+
+

@@ -16,7 +16,7 @@ class ForgotPasswordNewPassword extends React.Component {
       loading: true,
       error: false,
       errorMessage: null,
-      inputText: null,
+      inputText: '',
       isShowPass: false,
       inputType: 'password',
       validationImage: '',
@@ -33,9 +33,17 @@ class ForgotPasswordNewPassword extends React.Component {
     }
 
     if (!regexPw.test(this.state.inputText)) {
+      let errorMsg;
+      if (this.state.inputText.length > 25) {
+        errorMsg = 'Invalid Password. Password should not be more than 25 char'
+      }
+      else {
+        errorMsg = 'Invalid Password. Password should have min 6 characters and atleast 1 number'
+      }
+
       this.setState({
         error: true,
-        errorMessage: 'Invalid password',
+        errorMessage: errorMsg,
       });
       return;
     }

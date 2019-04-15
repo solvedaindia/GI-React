@@ -27,9 +27,15 @@ export const filter = (value) => {
 }
 
 export const adBannerAction = (value) => {
-  console.log('AdBanner adBannerAction',value);
   return {
     type: actionTypes.ADBANNERCOUNT,
+    val: value
+  }
+}
+
+export const sortingAction = (value) => {
+  return {
+    type: actionTypes.SORTING,
     val: value
   }
 }

@@ -22,10 +22,17 @@ class ForgotPasswordOTP extends React.Component {
       error: false,
       errorMessage: null,
       inputText: null,
+      showOTPTxtField: true,
     };
   }
 
   proceedBtnPressed() {
+    if (!this.state.showOTPTxtField) {
+      const nextComp = 'ForgotPasswordOTP';
+      this.props.handlerPro(nextComp, null, this.state.inputText, true);
+      return;
+    }
+
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
@@ -58,10 +65,24 @@ class ForgotPasswordOTP extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        this.setState({
-          error: true,
-          errorMessage,
-        });
+        const errorMsgKey = errorData.error.error_key;
+        console.log('OTP Response----', errorMsgKey);
+        if (errorMsgKey === 'otp_incorrect_limit_exceed') {
+          const nextComp = 'ForgotPasswordOTP';
+          this.props.handlerPro(nextComp, null, null, false, true);
+          this.setState({
+            error: true,
+            errorMessage,
+            showOTPTxtField: false
+          });
+        }
+        else {
+          this.setState({
+            error: true,
+            errorMessage,
+          });
+        }
+
       });
   }
 
@@ -83,6 +104,16 @@ class ForgotPasswordOTP extends React.Component {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
+        const otpCount = response.data.data.otpCount
+        if (otpCount === 3) {
+          const nextComp = 'ForgotPasswordOTP';
+          this.props.handlerPro(nextComp, null, null, false, true);
+          this.setState({
+            showOTPTxtField: false,
+            error: true,
+            errorMessage: 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
+          })
+        }
         const otpValue = response.data.data;
         alert(`OTP - ${otpValue.otpVal}`);
       })
@@ -120,42 +151,57 @@ class ForgotPasswordOTP extends React.Component {
       animeClass = 'rightAnim';
     }
 
+    let inputTxtField = null;
+    let titleOTP = null;
+    if (this.state.showOTPTxtField) {
+      titleOTP = <p className="text">
+        Enter OTP sent to your mobile number
+    </p>
+    }
+
+    if (this.state.showOTPTxtField) {
+      inputTxtField = <input
+        onChange={this.handleInputChange.bind(this)}
+        type="number"
+        name="text"
+        id="exampleEmail"
+        className="form-control margin-none"
+        placeholder="Enter OTP"
+      />
+    }
+
+    let resendBtn = null;
+    if ( this.state.showOTPTxtField) {
+      resendBtn = <Button
+        onClick={this.resendOTP.bind(this)}
+        className="resend-otp"
+      >
+        Resend OTP
+    </Button>
+    }
+
     return (
       <div className={animeClass}>
         {headingItem}
         <Form className='forgototp-mobile modalmin-height'>
           <FormGroup>
-            <p className="text">
-              Enter OTP sent to your mobile number
-            </p>
+            {titleOTP}
             <div className="form-div enterotp-msg clearfix">
-              <input
-                onChange={this.handleInputChange.bind(this)}
-                type="number"
-                name="text"
-                id="exampleEmail"
-                className="form-control margin-none"
-                placeholder="Enter OTP"
-              />
+              {inputTxtField}
               {errorItem}
-              <Button
-                onClick={this.resendOTP.bind(this)}
-                className="resend-otp"
-              >
-                Resend OTP
-              </Button>
+              {resendBtn}
             </div>
           </FormGroup>
           <FormGroup>
-           
+
           </FormGroup>
         </Form>
         <Button
-              onClick={this.proceedBtnPressed.bind(this)}
-              className="btn-block btn-bg"
-            >
-              Proceed
-            </Button>
+          onClick={this.proceedBtnPressed.bind(this)}
+          className="btn-block btn-bg"
+        >
+          {this.state.showOTPTxtField ? 'Proceed' : 'Back'}
+        </Button>
       </div>
     );
   }

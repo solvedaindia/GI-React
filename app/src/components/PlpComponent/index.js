@@ -6,7 +6,8 @@
 
 import React from 'react';
 import ProductItem from '../GlobalComponents/productItem/productItem';
-import AdBanner from './adBanner';
+import AdBanner from './AdBanner/adBanner';
+import Sort from '../../components/PlpComponent/Sorting/sort';
 import LoadingIndicator from '../../utils/loadingIndicator';
 
 class PlpComponent extends React.Component {
@@ -19,13 +20,21 @@ class PlpComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const plpData = nextProps.plpDataPro;
+    this.parsePLPData(nextProps.plpDataPro);
+  }
+
+  componentDidMount() {
+    this.parsePLPData(this.props.plpDataPro);
+  }
+
+  parsePLPData(data) {
+    const plpData = data;
     if (plpData) {
       const item = plpData.map((item, index) => {
         return (
           <>
             <ProductItem key={index} data={item} />
-            {<AdBanner indexPro={index+1} />}
+            {<AdBanner indexPro={index + 1} />}
           </>
         );
       });
@@ -35,17 +44,9 @@ class PlpComponent extends React.Component {
 
   render() {
     return (
-      <section className="plpCategories">
-        <div className="container">
-          <div className="row">
-            <h3 className="headingTitle">Tables</h3>
-            <div className="headingSubTitle">(Produts 35)</div>
-          </div>
-          <div className="row no-padding">
-            <ul className="plp-products grid3">{this.state.plpItem}</ul>
-          </div>
-        </div>
-      </section>
+      <div className="row no-padding">
+        <ul className="plp-products grid3">{this.state.plpItem}</ul>
+      </div>
     );
   }
 }

@@ -24,6 +24,7 @@ import SubCategories from '../../components/GlobalComponents/productSubcategorie
 import Filter from '../../components/PlpComponent/Filter/filter';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
+import Sort from '../../components/PlpComponent/Sorting/sort';
 
 import * as actionCreators from './actions';
 import axios from 'axios';
@@ -35,7 +36,7 @@ import {
 	accessToken,
 } from '../../../public/constants/constants';
 
-const categoryId = '10001';
+const categoryId = '13503';
 export class PlpContainer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -47,6 +48,13 @@ export class PlpContainer extends React.Component {
 			error: false,
 			hasMore: true,
 			isLoading: false,
+			pageNumber: 1,
+			pageSize: 18,
+			categoryDetail: true,
+			sortValue: this.props.sortingValue,
+			isCatDetails: true,
+			categoyDetails: null,
+			productCount: null,
 		};
 
 		this.onscroll = this.onscroll.bind(this);
@@ -58,6 +66,7 @@ export class PlpContainer extends React.Component {
 	}
 
 	componentDidMount() {
+		//console.log('PLP---- componentDidMount');
 		addEventListener('scroll', this.onscroll);
 
 		this.fetchSubCategoryData();
@@ -66,16 +75,30 @@ export class PlpContainer extends React.Component {
 		this.fetchDescriptionData();
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.sortingValue !== this.props.sortingValue) {
+			this.setState({ plpData: [] })
+			this.fetchPLPProductsData();
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		//console.log('PLP---- componentDidUpdate PrevProps--', prevProps + 'This Props', this.props);
+		if (prevProps.specificProperty !== this.props.specificProperty) {
+			// Do whatever you want
+		}
+	}
+
 	fetchSubCategoryData() {
 		axios
 			.get(plpSubCatAPI + categoryId, {
-				headers: { store_id: storeId, access_token: accessToken },
+				headers: { store_id: '10801', access_token: accessToken },
 			})
 			.then(response => {
+				console.log('Subcat Data');
 				this.setState({ plpSubCatData: response.data.data });
 			})
 			.catch(error => {
-				// console.log('PLPSUBError---', error);
 			});
 	}
 
@@ -85,32 +108,41 @@ export class PlpContainer extends React.Component {
 				headers: { store_id: storeId, access_token: accessToken },
 			})
 			.then(response => {
-				// console.log('DataMArketing---', response.data);
 				this.setState({ marketingTextBannerData: response.data.data });
 			})
 			.catch(error => {
-				// console.log('PLPBannerrror---', error);s
 			});
 	}
 
 	fetchPLPProductsData() {
 		this.setState({ isLoading: true }, () => {
 			/**
-		 * TODO: Node is not accepting any categoryId, this is a static response from Node side
+		 * TODO: Category ID is static from Node side.
 		 */
+
+			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&'
+			console.log('PLPURL---', plpURL);
 			axios
-				.get(plpAPI, {
-					headers: { store_id: storeId, access_token: accessToken },
+				.get(plpURL, {
+					headers: { store_id: '10801', access_token: accessToken, 'cat_details': this.state.isCatDetails },
 				})
 				.then(response => {
+					if (this.state.isCatDetails) {
+						this.setState({
+							categoryDetail: response.data.data.categoryDetails,
+							productCount: response.data.data.productCount,
+						})
+					}
+
 					this.setState({
-						plpData: [...response.data.data.productList, ...this.state.plpData],
+						plpData: [...this.state.plpData, ...response.data.data.productList],
 						hasMore: (this.state.plpData.length < 60),
 						isLoading: false,
+						isCatDetails: false,
 					});
 				})
 				.catch(error => {
-					// console.log('PLPBannerrror---', error);
+					//console.log('PLPBannerrror---', error);
 					this.setState({
 						error: error.message,
 						isLoading: false,
@@ -148,11 +180,13 @@ export class PlpContainer extends React.Component {
 			window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - adjustedHeight
 		) {
 			console.log('Its the End');
+			this.setState({ pageNumber: this.state.pageNumber + 1 });
 			this.fetchPLPProductsData();
 		}
 	};
 
 	render() {
+		
 		const {
 			error,
 			hasMore,
@@ -169,10 +203,9 @@ export class PlpContainer extends React.Component {
 			 */
 			marketingBanner = (
 				<MarketingTextBanner
-					bannerDataPro={
-						this.state.marketingTextBannerData.GI_HERO_BANNER_10001_CONTENT
-							.content
-					}
+				// bannerDataPro={
+				// 	this.state.marketingTextBannerData.GI_HERO_BANNER_10001_CONTENT.content
+				// }
 				/>
 			);
 		}
@@ -198,11 +231,35 @@ export class PlpContainer extends React.Component {
 			);
 		}
 
+		let titleItem = null;
+		if (this.state.categoryDetail !== null) {
+			titleItem = (
+				<h3 className="headingTitle">{this.state.categoryDetail.categoryName}</h3>
+			)
+		}
+
+		let productCountItem = null;
+		if (this.state.productCount !== null) {
+			productCountItem = (
+				<div className="headingSubTitle">(Produts {this.state.productCount})</div>
+			)
+		}
+
 		return (
 			<>
 				{marketingBanner}
 				{subCategories}
-				{plpProducts}
+				<section className="plpCategories">
+					<div className="container">
+						<div className="row">
+							{titleItem}
+							{productCountItem}
+							{this.state.isCatDetails ? null : <Sort />}
+						</div>
+						{plpProducts}
+					</div>
+				</section>
+
 				<hr />
 				{error &&
 					<div style={{ color: '#900' }}>
@@ -227,6 +284,8 @@ const mapStateToProps = state => {
 	return {
 		ctr: stateObj.counter,
 		updatedFilter: stateObj.updateFilter,
+		sortingValue: stateObj.sortingValue,
+		reduxTrigger: true,
 	};
 };
 

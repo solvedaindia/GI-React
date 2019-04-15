@@ -34,3 +34,28 @@ export function getReleventReduxState(state, reducerName) {
   )
   return extractedState;
 }
+
+
+/**
+ * Function to get relevent value of the Sorting
+ * @param {*} value 
+  0 - Recommended
+  3 - Low to High
+  4 - High to Low
+  5 - New Arrival
+ */
+export function fetchReleventSortingValue(value) {
+console.log('ttttt',value)
+  if (value === 'Price Low to High') {
+    return 3;
+  }
+  else if (value === 'Price High to Low') {
+    return 4;
+  }
+  else if (value === 'New Arrival') {
+    return 5;
+  }
+  else { // Recommended
+    return 0;
+  }
+}

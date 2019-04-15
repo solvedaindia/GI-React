@@ -10,7 +10,7 @@ class ProductItem extends React.Component {
     return (
       <li className="productlist">
         <div className="imgBox">
-          <ItemImage data={this.props.data.imageSrc} />
+          <ItemImage data={this.props.data.thumbnail} />
           <InStock isInStock={this.props.data.inStock} />
         </div>
         <RibbonTag data={this.props.data.ribbonText} />

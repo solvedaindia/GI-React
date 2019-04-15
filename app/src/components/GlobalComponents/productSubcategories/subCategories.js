@@ -31,7 +31,15 @@ class SubCategories extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const data = nextProps.subCategoryData;
+    this.fetchSubCategoryData(nextProps.subCategoryData);
+  }
+
+  componentDidMount() {
+    this.fetchSubCategoryData(this.props.subCategoryData);
+  }
+
+  fetchSubCategoryData(subCatData) {
+    const data = subCatData
     if (data) {
       const itemsArr = data.map((item, index) => (
         <SubCatItem key={index} itemData={item} />
@@ -43,14 +51,15 @@ class SubCategories extends React.Component {
   }
 
   render() {
+    
     return (
       <section className="tablecarousel">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
               <div className="headingText">
-                <h3 className="heading">Table</h3>
-                <p className="total-products">(38 Product)</p>
+                {/* <h3 className="heading">Table</h3> */}
+                {/* <p className="total-products">(38 Product)</p> */}
               </div>
             </div>
           </div>
