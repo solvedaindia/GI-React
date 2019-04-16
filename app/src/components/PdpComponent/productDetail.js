@@ -23,20 +23,20 @@ class productDetail extends React.Component {
 
 	render () {
         return(
-            <div>
+            <div className='product_details'>
                 <Row>
-                    <Col md={2} sm={12} xs={12}>
-                        <h3 className='heading'>
-                            Product Detail
-                        </h3>
+                    <Col md={12} sm={12} xs={12}>
+                        <h3 className='heading'> Product Detail</h3>
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={5} sm={12} xs={12}>
-                        <img src={this.props.productDetail.imagePath}/>
+                    <Col md={6} sm={12} xs={12}>
+                      <div className='product_img'>
+                        <img className='imgfullwidth' src={this.props.productDetail.imagePath}/>
+                      </div>
                     </Col>
-                    <Col md={5} sm={12} xs={12}>
-                        <div>
+                    <Col md={6} sm={12} xs={12}>
+                        <div className='product_description'>
                             {
                                 this.props.productDetail.description.map((data, index) => {
                                     if (index > 0) {
@@ -44,7 +44,7 @@ class productDetail extends React.Component {
                                     }
                                     return (
                                         <div key={index}>
-                                            <button onClick={() => this.productDetailsTab(index)}>{data.title}</button>
+                                            <a className={'tab tab_'+index} onClick={() => this.productDetailsTab(index)}>{data.title}</a>
                                             <div id={index} className={`tabcontent ${this.dataClass}`}>
                                                 {
                                                     data.values.map((tabData, id) => {

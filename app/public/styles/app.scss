@@ -41,7 +41,12 @@ h4{font-weight: bold}
     text-align: center;
 }
     /***-------Comman Modal css---------***/
-   
+    .modal.in{
+        display: flex !important;
+        flex-direction: column;
+          justify-Content: center;
+          align-Items: center;
+      }
 .modal-backdrop{
     background-color: rgba(0, 0, 0, 0.7);    
 }

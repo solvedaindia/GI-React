@@ -10,18 +10,12 @@
   margin: 0 0 0 0;
 }
   .modal-dialog{ 
-    width: 60%;        
-    height: 437px;
-    left: 50%;
-    top: 50%;
-    margin-left: -30%;
-    margin-top: -218.5px;
-    position: absolute;
-    max-width: 100%;
-
+    width: 62%;  
+    max-width: 800px;     
+   
     .Thumbnailbox{
       .imgfullwidth{
-        width: 100%;
+        width: 100%;        
       }
     }
     .close{

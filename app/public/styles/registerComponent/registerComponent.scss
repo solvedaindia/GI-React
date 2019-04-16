@@ -5,14 +5,9 @@
 
 .modal-wrapperjoinus{
     .modal-dialog{ 
-        width: 500px;
-        height: 515px;
-        left: 50%;
-        top: 50%;
-        margin-left: -250px;
-        margin-top: -257px;
-        position: absolute;
-        max-width: 100%;
+        max-width: 450px;
+        width:36%;
+
         .close{
             top:20px;
             &:before, &:after {
@@ -23,14 +18,9 @@
 }
 .registerEmailMobile{
     .modal-dialog{ 
-        width: 800px;        
-        height: 515px;
-        left: 50%;
-        top: 50%;
-        margin-left: -400px;
-        margin-top: -257px;
-        position: absolute;
-        max-width: 100%;
+        max-width: 800px; 
+        width: 62%;       
+        
         .close{
             top:20px;
             &:before, &:after {
@@ -41,14 +31,9 @@
 }
 .modal-wrapperotp{
     .modal-dialog{ 
-        width:500px;
-        height: 292px;
-        left:50%;
-        top:50%;
-        margin-left: -250px;
-        margin-top:-146px;
-        position: absolute;
-        max-width: 100%;
+        max-width:500px;
+        width: 40%;
+       
         .modal-wrapper {
             padding: 0;
             
