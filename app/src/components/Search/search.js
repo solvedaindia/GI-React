@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
         this.setState({
             searchData: []
         });
-        
+
         if(searchText.length > 1) {
             if (searchText) {
                 axios.get(autoSuggestAPI+searchText, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
@@ -37,12 +37,14 @@ class SearchBar extends React.Component {
     }
 
     handleOutsideClick(e) {
-        if (this.node.contains(e.target)) {
-            return;
+        if(this.state.searchData.length > 0) {
+            if (this.node.contains(e.target)) {
+                return;
+            }
+            this.setState({
+                searchData: []
+            });
         }
-        this.setState({
-            searchData: []
-        });
     }
 
     render() {
@@ -51,16 +53,18 @@ class SearchBar extends React.Component {
             <div className='searchBar'>
                 <SearchLogo />
                 <input className='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' placeholder='search for products' />
-                <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
-                    <ul className='auto-search'>
-                        { searchData.map((item, index) => {
-                            return(
-                                <li className='list' key={index}>{item.term}</li>
-                            );
-                            })
-                        }
-                    </ul>
-                </div>
+                { searchData.length > 0 && 
+                    <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
+                        <ul className='auto-search'>
+                            { searchData.map((item, index) => {
+                                return(
+                                    <li className='list' key={index}>{item.term}</li>
+                                );
+                                })
+                            }
+                        </ul>
+                    </div>
+                }
             </div>
         );
     }
