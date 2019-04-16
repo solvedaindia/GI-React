@@ -40,7 +40,6 @@
       .ribbon_star {
         float: left;
         display: block;
-
         .star_img {
           margin: 3px 3px 0 0;
       }
@@ -56,8 +55,6 @@
  .GalleryBox{
    border:1px solid $black;
  }
-
-
 }
 .GallerytextBox{
     .product{
@@ -65,10 +62,8 @@
         font-weight: 600; 
         .text{
             color:$grey;
-            font-size: 12px; 
-                
-        }
-      
+            font-size: 12px;                 
+        }      
     }
 
     .slimline{
@@ -226,9 +221,8 @@
     padding:0 0 20px 0;
     .heading{
         font-family: $font-bold;
-    }
- .product_img
- {
+       }
+ .product_img{
     .imgfullwidth{
         width:100%;
     }
@@ -261,19 +255,12 @@
 
 }
 
-.modal.in{
-    display: flex !important;
-    flex-direction: column;
-      justify-Content: center;
-      align-Items: center;
-}
 .modal_emiInstallment{ 
     .modal-dialog {
         width:60%;
         max-width: 800px;
         .modal-content{
-        .modal-body{
-       
+        .modal-body{       
         .close{
             top:20px;
             &:before, &:after {
@@ -302,18 +289,14 @@
                         display: inline-block; 
                         width: 1em;
                         margin-left: -1em;
-                    }
-                }
-            }
-          }
-        
-        }
-
-        }
-       
+                       }
+                     }
+                   }
+                }        
+              }
+            }       
+        }    
     }
-    
-}
 
 .dataNotActive {
     display: none;
