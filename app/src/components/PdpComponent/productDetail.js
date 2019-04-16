@@ -4,21 +4,26 @@ import { Row, Col } from 'react-bootstrap';
 class productDetail extends React.Component {
 	constructor() {
 		super();
-        this.dataClass = '';
+		this.dataClass = '';
+		this.activeClass = 'active';
 	}
 
     /* display tab with data */
     productDetailsTab(divId) {
-        let tabcontent = document.getElementsByClassName('tabcontent');
-        let element = document.getElementById(divId);
+		let tabcontent = document.getElementsByClassName('tabcontent');
+		let tabData = document.getElementsByClassName('tabData');
+		let contentElement = document.getElementById(divId);
+		let tabElement = document.getElementById('tab_'+divId);
 
         for (let i = 0; i < tabcontent.length; i++) {
             tabcontent[i].classList.remove('dataNotActive');
-            tabcontent[i].classList.add('dataNotActive');
+			tabcontent[i].classList.add('dataNotActive');
+			tabData[i].classList.remove('active');
         }
         
-        element.classList.remove('dataNotActive');
-        element.classList.remove('dataActive');
+        contentElement.classList.remove('dataNotActive');
+		contentElement.classList.remove('dataActive');
+		tabElement.classList.add('active');
     }
 
 	render () {
@@ -37,6 +42,19 @@ class productDetail extends React.Component {
                     </Col>
                     <Col md={6} sm={12} xs={12}>
                         <div className='product_description'>
+						{
+                                this.props.productDetail.description.map((tabData, index) => {
+									if (index > 0) {
+                                        this.activeClass = '';
+									}
+									
+                                    return (
+                                        // <div key={index}>
+                                            <a key={index} id={`tab_${index}`} className={`tab tabData ${this.activeClass}`} onClick={() => this.productDetailsTab(index)}>{tabData.title}</a>
+                                        // </div>
+                                    );
+                                })
+                            }						
                             {
                                 this.props.productDetail.description.map((data, index) => {
                                     if (index > 0) {
@@ -44,14 +62,13 @@ class productDetail extends React.Component {
                                     }
                                     return (
                                         <div key={index}>
-                                            <a className={'tab tab_'+index} onClick={() => this.productDetailsTab(index)}>{data.title}</a>
                                             <div id={index} className={`tabcontent ${this.dataClass}`}>
                                                 {
-                                                    data.values.map((tabData, id) => {
+                                                    data.values.map((tabContent, id) => {
                                                         return (
                                                             <div key={id}>
-                                                                <b>{tabData.name}</b>
-                                                                <p>{tabData.value}</p>
+                                                                <b>{tabContent.name}</b>
+                                                                <p>{tabContent.value}</p>
                                                             </div>
                                                         );
                                                     }) 
