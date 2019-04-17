@@ -362,5 +362,95 @@ section.tablecarousel {
   position: absolute;
   right: 8px;
   top: 15px;
+}
+
+
+//ImageLoader
+@keyframes fadeInImg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
   
+}
+
+.img-loading {
+  opacity: 0;
+  width: 100%;
+  height: auto;
+}
+
+.img-loaded {
+  animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
+  position: relative;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 0.7s;
+  animation-delay: 0.1s;
+}
+
+//Filter 
+.dropdown_filter {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 1px;
+  max-width: 181px;
+  z-index: 1;
+
+  &__arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -20px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #eee;
+    border-radius: 3px;
+  }
+
+  &__list {
+    // opacity: 0;
+    transition: max-height 0.2s ease-out;
+    // transition: opacity .15s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+    position: absolute;
+    z-index: 1;
+
+    &--active {
+      max-height: 1000px;
+      opacity: 1;
+    }
+  }
+
+  &__list-item {
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    list-style: none;
+    padding: 15px;
+
+    &--active {
+      background: #f4f4f4;
+    }
+
+    &:hover {
+      background: #f4f4f4;
+    }
+  }
+
+  &__toggle {
+    &:hover {
+      background: #fff;
+    }
+
+    background: #fff;
+  }
 }

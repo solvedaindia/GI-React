@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Route, withRouter } from 'react-router-dom';
 import Slider from 'react-slick';
 import SubCatItem from './subCatItem';
 import '../../../../public/styles/plpContainer/plpContainer.scss';
@@ -70,4 +71,5 @@ class SubCategories extends React.Component {
   }
 }
 
-export default SubCategories;
+// export default SubCategories;
+export default withRouter(SubCategories);

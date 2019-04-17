@@ -10,9 +10,10 @@ import * as actionTypes from './constants';
 import {fetchReleventSortingValue} from '../../utils/utilityManager'
 
 const initialState = {
-  adBannerPos: 12,
   sortingValue: 0,
-  counter: 0,
+  adBannerPos: 12,
+  adBannerCurrentIndex: 0,
+  adBannerData:[],
   updateFilter: null,
 };
 
@@ -31,13 +32,20 @@ function plpContainerReducer(state = initialState, action) {
       case actionTypes.ADBANNERCOUNT:
       return {
         ...state,
-        adBannerPos: action.val + 12
+        adBannerPos: action.val + 12,
+        adBannerCurrentIndex: action.showIndex+1
+      }
+      case actionTypes.ADBANNERDATA:
+      return {
+        ...state,
+        adBannerData: action.data
       }
       case actionTypes.SORTING:
       return {
         ...state,
         sortingValue: fetchReleventSortingValue(action.val),
-        adBannerPos: initialState.adBannerPos
+        adBannerPos: initialState.adBannerPos,
+        adBannerCurrentIndex: initialState.adBannerCurrentIndex
       }
     default:
       return state;

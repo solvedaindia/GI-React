@@ -10,3 +10,4 @@ export const INCREMENT = 'INCREMENT';
 export const FILTER = 'FILTER_UPDATE';
 export const ADBANNERCOUNT = 'AD_BANNER_COUNT';
 export const SORTING = 'SORTING_UPDATE';
+export const ADBANNERDATA = 'AD_BANNER_DATA';

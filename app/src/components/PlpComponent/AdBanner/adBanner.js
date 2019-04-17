@@ -16,7 +16,6 @@ class AdBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bannerIndexPos: this.props.bannerPosIndex,
       adBannerItem: null,
     };
   }
@@ -30,11 +29,12 @@ class AdBanner extends React.Component {
   }
 
   initializeAdBanner() {
+    //console.log('In The Ad Banner',this.props);
     if (this.props.indexPro) {
       let bannerItem = null;
-      if (this.props.indexPro === this.props.bannerPosIndex) {
-        bannerItem = bannerImg
-        this.props.onAdBannerIndexUpdate(this.props.indexPro);
+      if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
+        bannerItem = <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+        this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
         this.setState({
           adBannerItem: bannerItem
         });
@@ -54,7 +54,7 @@ class AdBanner extends React.Component {
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => {
   return {
-    onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
+    onAdBannerIndexUpdate: (currentIndex, currentShowIndex) => dispatch(actionCreators.adBannerAction(currentIndex, currentShowIndex)),
   }
 };
 
@@ -62,6 +62,8 @@ const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
   return {
     bannerPosIndex: stateObj.adBannerPos,
+    bannerCurrentIndex: stateObj.adBannerCurrentIndex,
+    bannerData: stateObj.adBannerData,
   }
 };
 

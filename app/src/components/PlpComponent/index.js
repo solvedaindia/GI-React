@@ -5,6 +5,16 @@
  */
 
 import React from 'react';
+//Redux Imports
+import { connect } from 'react-redux';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../../containers/PlpContainer/reducer';
+import saga from '../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../containers/PlpContainer/actions';
+import { getReleventReduxState } from '../../utils/utilityManager';
+
 import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
@@ -20,21 +30,22 @@ class PlpComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.parsePLPData(nextProps.plpDataPro);
+    this.parsePLPData(nextProps, true);
   }
 
   componentDidMount() {
-    this.parsePLPData(this.props.plpDataPro);
+    this.parsePLPData(this.props, false);
   }
 
   parsePLPData(data) {
-    const plpData = data;
-    if (plpData) {
+    if (data) {
+      const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => {
         return (
           <>
             <ProductItem key={index} data={item} />
-            {<AdBanner indexPro={index + 1} />}
+            <AdBanner indexPro={index+1} />
+            {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
           </>
         );
       });
@@ -51,6 +62,33 @@ class PlpComponent extends React.Component {
   }
 }
 
-PlpComponent.propTypes = {};
 
-export default PlpComponent;
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+  return {
+     //onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
+  }
+};
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+    bannerPosIndex: stateObj.adBannerPos,
+    bannerCurrentIndex: stateObj.adBannerCurrentIndex,
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(PlpComponent);
+

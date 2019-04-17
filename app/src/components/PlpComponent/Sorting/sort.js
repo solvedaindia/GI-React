@@ -30,12 +30,28 @@ class Sort extends React.Component {
       options: [recommended, price_L_H, price_H_L, newArrival],
       title: recommended,
     };
+
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   toggleDropdown() {
+    if (!this.state.active) {
+      document.addEventListener('click', this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener('click', this.handleOutsideClick, false);
+    }
+
     this.setState({
       active: !this.state.active
     });
+  }
+
+  handleOutsideClick(e) {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.toggleDropdown();
   }
 
   handleClick(i) {
@@ -54,25 +70,23 @@ class Sort extends React.Component {
       return;
     }
     return this.state.options.map((option, i) => {
-      console.log('optionsss',option);
       return (
         <li
           onClick={evt => this.handleClick(i)}
           key={i}
           className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}
         >
-          <Link to={this.props.match.url+'/'+option}>
+          {/* <Link to={this.props.match.url+'/'+option}> */}
             {option}
-          </Link>
+          {/* </Link> */}
         </li>
       );
     });
   }
 
   render() {
-    console.log('Routtt',this.props.match.url);
     return (
-      <div className="dropdown">
+      <div ref={node => { this.node = node; }} className="dropdown">
         <div
           onClick={() => this.toggleDropdown()}
           className="dropdown__toggle dropdown__list-item"
