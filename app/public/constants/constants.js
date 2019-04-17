@@ -14,6 +14,8 @@ export const isLoggedIn = false;
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
+export const headerStatic = `${secureHttp}://${host}:${port2}/api/v1/header_static_info`;
+
 /* User Context API */
 export const mwApi = `${secureHttp}://${host}:${port1}/api/v1/user-context`;
 /* Categories API */
