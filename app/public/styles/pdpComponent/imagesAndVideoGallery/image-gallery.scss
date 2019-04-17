@@ -336,7 +336,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
 
 .image-gallery-thumbnails {
   overflow: hidden;
-  padding: 5px 0;
+  padding: 15px 0 0 0;
 
   @media (max-width: $ig-screen-sm-min) {
     padding: 3px 0;
@@ -353,7 +353,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
 
 .image-gallery-thumbnail {
   display: inline-block;
-  border: 4px solid transparent;
+  border: 2px solid #ccc;
   transition: border .3s ease-out;
   width: 100px;
 
@@ -363,7 +363,8 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   }
 
   + .image-gallery-thumbnail {
-    margin-left: 2px;
+    margin-left: 10px;
+    border: 2px solid #ccc;
   }
 
   .image-gallery-thumbnail-inner {
@@ -373,10 +374,11 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   img {
     vertical-align: middle;
     width: 100%;
+    height: 70px;
   }
 
   &.active {
-    border: 4px solid $ig-blue;
+    border: 2px solid $ig-blue;
 
     @media (max-width: $ig-screen-sm-min) {
       border: 3px solid $ig-blue;

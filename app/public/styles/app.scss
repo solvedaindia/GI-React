@@ -5,8 +5,8 @@ p{ line-height: 24px}
 h4{font-weight: bold}
 .form-control:focus { 
     color: #495057; 
-    background-color: #fff;
-    border-color: #a1aeb7;
+    background-color:$colorwhite;
+    border-color: $colorgrey;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(159, 159, 159, 0.2) !important;
 }
@@ -22,10 +22,20 @@ h4{font-weight: bold}
     line-height: 33px;
     border-radius: 4px;   
 }
-.btn-bg{ background: $black;border:none;cursor:pointer;color: #fff;
-    padding: 5px 30px;font-size: 14px;text-transform: uppercase; line-height: 33px;
+.btn-bg{ 
+    background: $black;
+    border:none;
+    cursor:pointer;
+    color: $colorwhite;
+    padding: 5px 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 33px;
     border-radius: 0px;
-  &:hover{color:#fff;background: $colorblack;}
+  &:hover{
+      color:$colorwhite;
+      background: $colorblack;
+    }
 }
 .errormsg{ 
     position: absolute;
@@ -41,7 +51,12 @@ h4{font-weight: bold}
     text-align: center;
 }
     /***-------Comman Modal css---------***/
-   
+    .modal.in{
+        display: flex !important;
+        flex-direction: column;
+        justify-Content: center;
+        align-Items: center;
+      }
 .modal-backdrop{
     background-color: rgba(0, 0, 0, 0.7);    
 }
@@ -124,9 +139,17 @@ h4{font-weight: bold}
                 color: $black;
                 font-size: 18px;
             }
-            .form-control{box-shadow: none; height:40px;border: 1px solid $lightgrey;}
-            .form-div{position: relative;}
-            input,button{margin:0 0 15px 0}
+            .form-control{
+                box-shadow: none; 
+                height:40px;
+                border: 1px solid $lightgrey;
+            }
+            .form-div{
+                position: relative;
+            }
+            input,button{
+                margin:0 0 15px 0;
+            }
             }   
         }  
     }

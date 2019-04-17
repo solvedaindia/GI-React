@@ -25,6 +25,7 @@ class HomePageStatic extends React.Component {
           homePageData: response.data.data.GI_Homepage_Static_Content,
           isLoading: false,
         });
+        console.log('@@@@@@@@@@@@@@', response.data);
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
