@@ -1,46 +1,53 @@
 import React from 'react';
 import axios from 'axios';
-import '../../../public/styles/homePageStatic.scss';
-import {
-  homePageApi,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import '../../../../public/styles/clpContainer/clpContainer.scss';
+import themeData from '../../../data/themeData.json';
+// import {
+// 	themeDataAPI,
+//   	storeId,
+//   	accessToken,
+// } from '../../../../public/constants/constants';
 
 class LivingTheme extends React.Component {
 	state = {
-		homePageData: {},
+		themeData: [],
 		isLoading: true,
 		errors: null,
 	};
-
-	getThemeData() {
-		axios
-			.get(homePageApi, {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
-			.then(response => {
-				this.setState({
-				homePageData: response.data.data.GI_Homepage_Static_Content,
-				isLoading: false,
-				});
-			})
-			.catch(error => this.setState({ error, isLoading: false }));
+	contentShowDetails(){
+		console.log('CLICKED');
 	}
+	
+	// getThemeData() {
+	// 	axios
+	// 		.get(themeDataAPI, {
+	// 			headers: { store_id: storeId, access_token: accessToken },
+	// 		})
+	// 		.then(response => {
+	// 			this.setState({
+	// 			themeData: response.data.themeData,
+	// 			isLoading: false,
+	// 			});
+	// 			console.log('#######&&&&&&&', themeData.data.ThemeData);
+	// 		})
+	// 		.catch(error => this.setState({ error, isLoading: false }));
+	// }
 
-	componentDidMount() {
-		this.getThemeData();
-	}
+	// componentDidMount() {
+	// 	this.getThemeData();
+	// }
 
 	render() {
-		const { isLoading, homePageData } = this.state;
 		return (
-		<div className="homePageStatic">
-			{!isLoading ? (
-			<div dangerouslySetInnerHTML={{ __html: homePageData.content }} />
+		<div className="clpTheme">
+			<h3>{ themeData.data.themeData.title}</h3>
+			<p>{ themeData.data.themeData.subTitle}</p>
+			<div dangerouslySetInnerHTML={{ __html: themeData.data.themeData.content }} />
+			{/* {!isLoading ? (
+			<div dangerouslySetInnerHTML={{ __html: homePageData.themeData.data.ThemeData.con }} />
 			) : (
 			<div>Something Went Wrong</div>
-			)}
+			)} */}
 		</div>
 		);
 	}
