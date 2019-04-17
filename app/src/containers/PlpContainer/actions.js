@@ -26,10 +26,20 @@ export const filter = (value) => {
   }
 }
 
-export const adBannerAction = (value) => {
+export const adBannerAction = (value, sIndex) => {
+  // console.log('adBannerAction', actionTypes);
   return {
     type: actionTypes.ADBANNERCOUNT,
-    val: value
+    val: value,
+    showIndex: sIndex
+  }
+}
+
+export const adBannerDataAction = (value) => {
+  console.log('adBannerDataAction', value);
+  return {
+    type: actionTypes.ADBANNERDATA,
+    data: value,
   }
 }
 
