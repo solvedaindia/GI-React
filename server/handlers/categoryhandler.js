@@ -129,17 +129,21 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
 /**
  *  Get Category Details
  */
-module.exports.getCategoryDetails = function getCategoryDetails(req, callback) {
-  if (!req.params.categoryID) {
+module.exports.getCategoryDetails = function getCategoryDetails(
+  headers,
+  categoryID,
+  callback,
+) {
+  if (!categoryID) {
     logger.debug('Get Sub Categories Data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
   const originUrl = constants.categoryViewByCategoryId
-    .replace('{{storeId}}', req.headers.storeId)
-    .replace('{{categoryId}}', req.params.categoryID);
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{categoryId}}', categoryID);
 
-  const reqHeader = headerUtil.getWCSHeaders(req.headers);
+  const reqHeader = headerUtil.getWCSHeaders(headers);
 
   origin.getResponse(
     originMethod,
@@ -151,7 +155,13 @@ module.exports.getCategoryDetails = function getCategoryDetails(req, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(
+          null,
+          filter.filterData(
+            'categorydetail',
+            response.body.catalogGroupView[0],
+          ),
+        );
       } else {
         callback(errorUtils.handleWCSError(response));
       }

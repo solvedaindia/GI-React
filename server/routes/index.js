@@ -13,7 +13,6 @@ router.use('/secure/cart', require('./api/cart'));
 router.use('/secure/wishlist', require('./api/wishlist'));
 router.use('/secure/orders', require('./api/orders'));
 router.use('/secure/token', require('./api/guesttoken'));
-
 /* Non-Secure Routes */
 router.use('/categories', require('./api/category'));
 router.use('/footer', require('./api/footer'));
@@ -26,5 +25,6 @@ router.use('/clp', require('./api/clp'));
 router.use('/plp', require('./api/plp'));
 router.use('/newsletter', require('./api/newsletter'));
 router.use('/pdp', require('./api/pdp'));
+router.use('/storelocator', require('./api/storelocator'));
 
 module.exports = router;

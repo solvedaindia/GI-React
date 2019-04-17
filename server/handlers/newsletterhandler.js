@@ -43,7 +43,7 @@ module.exports.newsLetterSubscription = function newsLetterSubscription(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, { message: 'Successfully Subscribed' });
+        callback(null, { message: 'Thanks for Subscribing' });
       } else {
         logger.error(
           `newsletter error ${JSON.stringify(response.body)}`,

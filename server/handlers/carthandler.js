@@ -75,25 +75,20 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
 
 module.exports.addToCart = function addCart(params, headers, callback) {
   logger.debug('calling cart API to ADD product Items');
-  const error = [];
   const cartBody = {};
   if (!params || !params.orderItem || params.orderItem.length === 0) {
-    error.push(errorutils.errorlist.generic.invalid_params);
-    callback(error);
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
 
   // eslint-disable-next-line no-restricted-syntax
   for (const item of params.orderItem) {
-    if (!item.productId || !item.quantity) {
-      error.push(errorutils.errorlist.generic.invalid_params);
+    if (!item.skuId || !item.quantity) {
+      callback(errorutils.errorlist.invalid_params);
       break;
     }
   }
-  if (error.length > 0) {
-    callback(error);
-    return;
-  }
+
   cartBody.orderItem = params.orderItem;
   const addToCartTaskCMD = [addToCart.bind(null, headers, cartBody)];
 
@@ -152,8 +147,7 @@ module.exports.emptyCart = function emptyCart(headers, callback) {
 module.exports.removeitem = function removeitem(params, headers, callback) {
   const error = [];
   if (!params || !params.orderItemId) {
-    error.push(errorutils.errorlist.generic.invalid_params);
-    callback(error);
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
 
@@ -192,21 +186,16 @@ module.exports.updateitem = function updateitem(params, headers, callback) {
   const error = [];
 
   if (!params || !params.orderItem || params.orderItem.length === 0) {
-    error.push(errorutils.errorlist.generic.invalid_params);
-    callback(error);
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
 
   // eslint-disable-next-line no-restricted-syntax
   for (const item of params.orderItem) {
     if (!item.orderItemId || !item.quantity) {
-      error.push(errorutils.errorlist.generic.invalid_params);
+      callback(errorutils.errorlist.invalid_params);
       break;
     }
-  }
-  if (error.length > 0) {
-    callback(error);
-    return;
   }
   const fetchCartOriginURL = `${constants.cartData.replace(
     '{{storeId}}',

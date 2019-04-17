@@ -63,23 +63,10 @@ const errorlist = {
     error_key: 'otp_incorrect_limit_exceed',
     error_message: 'You have exceeded the maximum number of attempts 3.',
   },
-  wishlist: {
-    listid_missing: {
-      error_key: 'listid_missing',
-      error_message: 'Wishlist ID is Missing',
-    },
-    giftitemid_missing: {
-      error_key: 'giftitemid_missing',
-      error_message: 'Gift Item ID is Missing',
-    },
-    listname_missing: {
-      error_key: 'listname_missing',
-      error_message: 'Wishlist Name is Missing',
-    },
-    productid_missing: {
-      error_key: 'productid_missing',
-      error_message: 'Product ID is Missing',
-    },
+  same_userid_password: {
+    status_code: 400,
+    error_key: 'invalid_password_format',
+    error_message: 'userid and password cannot be same',
   },
 };
 module.exports.errorlist = errorlist;
@@ -127,6 +114,12 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (
+        errBody.errors[0].errorKey ===
+        '_ERR_AUTHENTICATION_USERIDMATCH_PASSWORD'
+      ) {
+        return errorlist.same_userid_password;
+      }
       if (errBody.errors[0].errorKey === 'ERROR_OTP_RETRIES') {
         return errorlist.otp_incorrect_limit_exceed;
       }
@@ -134,7 +127,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey ===
           '_ERR_AUTHENTICATION_MINIMUMLENGTH_PASSWORD' ||
         errBody.errors[0].errorKey ===
-          '_ERR_AUTHENTICATION_MINIMUMDIGITS_PASSWORD'
+          '_ERR_AUTHENTICATION_MINIMUMDIGITS_PASSWORD' ||
+        errBody.errors[0].errorKey ===
+          '_ERR_AUTHENTICATION_MINIMUMLETTERS_PASSWORD'
       ) {
         return errorlist.invalid_password_format;
       }

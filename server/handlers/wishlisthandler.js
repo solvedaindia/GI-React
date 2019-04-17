@@ -33,7 +33,7 @@ module.exports.wishlistItemCount = function getWishlistItemCount(
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
-  logger.debug('Entering method wishlisthandler: wishlistItemCount');
+  logger.debug('Entering method wishlisthandler: wishlistItemList');
 
   getWishlistData(headers, (err, result) => {
     if (err) {
@@ -69,7 +69,8 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
  * @return return total count and names of wishlist
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.fetchlistnames = function fetchlistNames(headers, callback) {
+module.exports.fetchlistnames = fetchlistNames;
+function fetchlistNames(headers, callback) {
   logger.debug('Entering method mylisthandler: Fetch WishList Names');
   getWishlistData(headers, (err, result) => {
     if (err) {
@@ -92,14 +93,14 @@ module.exports.fetchlistnames = function fetchlistNames(headers, callback) {
       callback(null, wishlistNamesJson);
     }
   });
-};
+}
 
 /**
  * Create Wishlist.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.createlist = function createWishlist(headers, body, callback) {
+/* module.exports.createlist = function createWishlist(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Create Wishlist');
   const error = [];
   if (!body.wishlistname) {
@@ -136,34 +137,28 @@ module.exports.createlist = function createWishlist(headers, body, callback) {
       }
     },
   );
-};
+}; */
 
 /**
  * Create Wishlist and Add Item.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.createAndAdd = function createAndAdd(headers, body, callback) {
+module.exports.createAndAdd = createAndAdd;
+function createAndAdd(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Create Wishlist and Add Item');
-  const error = [];
-  if (!body.wishlistname) {
-    error.push(errorutils.errorlist.wishlist.listname_missing);
-  }
-  if (!body.productid) {
-    error.push(errorutils.errorlist.wishlist.productid_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
+  if (!body.wishlistName || !body.productId) {
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
-  const reqHeader = headerutil.getWCSHeaders(headers);
   const createWishListURL = constants.createWishlist.replace(
     '{{storeId}}',
     headers.storeId,
   );
+  const reqHeader = headerutil.getWCSHeaders(headers);
   const reqBody = {
-    descriptionName: body.wishlistname,
-    item: [{ productId: body.productid, quantityRequested: '1' }],
+    descriptionName: body.wishlistName,
+    item: [{ productId: body.productId, quantityRequested: '1' }],
   };
   origin.getResponse(
     'POST',
@@ -178,40 +173,33 @@ module.exports.createAndAdd = function createAndAdd(headers, body, callback) {
         callback(null, response.body);
       } else {
         logger.error('Error while calling Create&Additem api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
+        callback(errorutils.handleWCSError(response));
       }
     },
   );
-};
+}
 
 /**
  * Add Item to a Wishlist.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.addItem = function addItem(headers, body, callback) {
+module.exports.addItem = addItem;
+function addItem(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Add Item');
-  const error = [];
-  if (!body.wishlistid) {
-    error.push(errorutils.errorlist.wishlist.listid_missing);
-  }
-  if (!body.productid) {
-    error.push(errorutils.errorlist.wishlist.productid_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
+  if (!body.wishlistId || !body.productId) {
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
 
   const addItems = `${constants.editWishlist
     .replace('{{storeId}}', headers.storeId)
-    .replace('{{wishlistid}}', body.wishlistid)}?addItem=true`;
+    .replace('{{wishlistid}}', body.wishlistId)}?addItem=true`;
   const reqHeader = headerutil.getWCSHeaders(headers);
   const reqBody = {
     item: [
       {
-        productId: body.productid,
+        productId: body.productId,
         quantityRequested: '1',
       },
     ],
@@ -229,19 +217,18 @@ module.exports.addItem = function addItem(headers, body, callback) {
         callback(null, response.body);
       } else {
         logger.error('Error while calling Add Item api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
+        callback(errorutils.handleWCSError(response));
       }
     },
   );
-};
+}
 
 /**
  * Rename Wishlist.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.rename = function rename(headers, body, callback) {
+/* module.exports.rename = function rename(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Rename Wishlist');
   const error = [];
   if (!body.wishlistid) {
@@ -280,14 +267,14 @@ module.exports.rename = function rename(headers, body, callback) {
       }
     },
   );
-};
+}; */
 
 /**
  * Delete Wishlist.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.deletelist = function deletelist(headers, body, callback) {
+/* module.exports.deletelist = function deletelist(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Delete Wishlist');
   const error = [];
   if (!body.wishlistid) {
@@ -320,7 +307,7 @@ module.exports.deletelist = function deletelist(headers, body, callback) {
       }
     },
   );
-};
+}; */
 
 /**
  * Delete item from Wishlist.
@@ -329,22 +316,16 @@ module.exports.deletelist = function deletelist(headers, body, callback) {
  */
 module.exports.deleteitem = function deleteitem(headers, body, callback) {
   logger.debug('Entering method mylisthandler: Delete Item');
-  const error = [];
-  if (!body.wishlistid) {
-    error.push(errorutils.errorlist.wishlist.listid_missing);
-  }
-  if (!body.giftlistitemid) {
-    error.push(errorutils.errorlist.wishlist.giftitemid_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
+  if (!body.wishlist_id || !body.giftlistitem_id) {
+    callback(errorutils.errorlist.invalid_params);
     return;
   }
-
   const reqHeader = headerutil.getWCSHeaders(headers);
   const deleteItems = `${constants.editWishlist
     .replace('{{storeId}}', headers.storeId)
-    .replace('{{wishlistid}}', body.wishlistid)}?itemId=${body.giftlistitemid}`;
+    .replace('{{wishlistid}}', body.wishlist_id)}?itemId=${
+    body.giftlistitem_id
+  }`;
   origin.getResponse(
     'DELETE',
     deleteItems,
@@ -358,8 +339,7 @@ module.exports.deleteitem = function deleteitem(headers, body, callback) {
         callback(null, response.body);
       } else {
         logger.error('Error while calling Deleteitem api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
+        callback(errorutils.handleWCSError(response));
       }
     },
   );
@@ -394,3 +374,35 @@ function getWishlistData(headers, callback) {
     },
   );
 }
+
+module.exports.addItemInWishlist = function addItemInWishlist(
+  headers,
+  body,
+  callback,
+) {
+  logger.debug('entering add Item method');
+
+  if (!body.product_id) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  fetchlistNames(headers, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      // eslint-disable-next-line prefer-destructuring
+      const wishlistCount = result.wishlistCount;
+      const reqBody = {
+        productId: body.product_id,
+      };
+      if (wishlistCount === 0) {
+        reqBody.wishlistName = `wishlist_${headers.userId}`;
+        createAndAdd(headers, reqBody, callback);
+      } else {
+        reqBody.wishlistId = result.wishlistDetails[0].wishlistId;
+        addItem(headers, reqBody, callback);
+      }
+    }
+  });
+};

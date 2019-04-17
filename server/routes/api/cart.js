@@ -6,7 +6,6 @@ const cartHandler = require('../../handlers/carthandler');
  * fetch cart details
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-
 router.get('/checkout', (req, res, next) => {
   cartHandler.fetchCart(req.headers, (err, result) => {
     if (err) {
@@ -20,6 +19,10 @@ router.get('/checkout', (req, res, next) => {
   });
 });
 
+/**
+ * fetch cart item quantity
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 router.get('/quantity', (req, res, next) => {
   cartHandler.fetchCartQuantity(req.headers, (err, result) => {
     if (err) {
@@ -33,6 +36,10 @@ router.get('/quantity', (req, res, next) => {
   });
 });
 
+/**
+ * fetch MiniCart Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 router.get('/minicart', (req, res, next) => {
   cartHandler.fetchMiniCart(req.headers, (err, result) => {
     if (err) {
@@ -46,13 +53,14 @@ router.get('/minicart', (req, res, next) => {
   });
 });
 
+/**
+ * Add Item to Cart
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 router.post('/add', (req, res, next) => {
   cartHandler.addToCart(req.body, req.headers, (err, result) => {
     if (err) {
-      res.send({
-        status: 'failure',
-        errors: err,
-      });
+      next(err);
       return;
     }
     res.status(200).send({
@@ -71,10 +79,7 @@ router.post('/add', (req, res, next) => {
 router.post('/empty', (req, res, next) => {
   cartHandler.emptyCart(req.headers, (err, result) => {
     if (err) {
-      res.send({
-        status: 'failure',
-        errors: err,
-      });
+      next(err);
       return;
     }
     res.status(200).send({
@@ -93,10 +98,7 @@ router.post('/empty', (req, res, next) => {
 router.post('/remove', (req, res, next) => {
   cartHandler.removeitem(req.body, req.headers, (err, result) => {
     if (err) {
-      res.send({
-        status: 'failure',
-        errors: err,
-      });
+      next(err);
       return;
     }
     res.status(200).send({
@@ -115,10 +117,7 @@ router.post('/remove', (req, res, next) => {
 router.post('/update', (req, res, next) => {
   cartHandler.updateitem(req.body, req.headers, (err, result) => {
     if (err) {
-      res.send({
-        status: 'failure',
-        error: err,
-      });
+      next(err);
       return;
     }
     res.status(200).send({

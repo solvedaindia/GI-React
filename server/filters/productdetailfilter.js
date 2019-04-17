@@ -9,25 +9,27 @@ module.exports.productDetailSummary = function productDetailForPLP(
   productDetailJson.uniqueID = productDetail.uniqueID;
   productDetailJson.productName = productDetail.name;
   productDetailJson.partNumber = productDetail.partNumber;
+  productDetailJson.parentUniqueID = productDetail.parentCatalogEntryID || '';
   if (productDetail.price && productDetail.price.length > 0) {
     productDetail.price.forEach(price => {
       if (price.usage === 'Display') {
-        productDetailJson.actualPrice = price.value;
+        productDetailJson.actualPrice = Number(price.value);
       }
       if (price.usage === 'Offer') {
-        productDetailJson.offerPrice = price.value;
+        productDetailJson.offerPrice = Number(price.value);
       }
     });
   }
   productDetailJson.onClickUrl = '';
   productDetailJson.seoUrl = '';
-  productDetailJson.imageSrc = productDetail.thumbnail || '';
+  productDetailJson.thumbnail = productDetail.thumbnail || '';
   productDetailJson.ribbonText = '';
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
-  const fixedAttributes = getFixedAttributes(productDetail.attributes);
-  productDetailJson.fixedAttributes = fixedAttributes;
-  productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
+  productDetailJson.discount = '';
+  // const fixedAttributes = getFixedAttributes(productDetail.attributes);
+  // productDetailJson.fixedAttributes = fixedAttributes;
+  // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
   return productDetailJson;
 };
 

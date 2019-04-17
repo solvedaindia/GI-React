@@ -17,7 +17,7 @@ const logger = require('./utils/logger.js');
 // const errorHandler = require('errorhandler');
 
 const app = express();
-app.use(compression());
+
 app.use(
   cors({
     origin: '*',
@@ -112,7 +112,7 @@ app.use((req, res, next) => {
 
 // Add routes
 app.use('/api/v1', require('./routes'));
-
+app.use(compression());
 // HTTP error 404 for unhandled routs
 app.use((req, res) => {
   const errorMessage = {
@@ -148,6 +148,29 @@ app.use((err, req, res, next) => {
     // error_response: err.error_code
   });
 });
+
+/* // Generic error handler
+app.use((err, req, res, next) => {
+  logger.error(
+    JSON.stringify({
+      url: req.originalUrl,
+      stackTrace: JSON.stringify(err.stack),
+      status_code: err.status_code,
+      error_message: err.error_message,
+      error_key: err.error_key,
+      req_headers: req.headers,
+    }),
+  );
+  res.status(err.status_code).send({
+    status: 'failure',
+    error: {
+      status_code: err.status_code,
+      error_key: err.error_key,
+      error_message: err.error_message,
+    },
+    // error_response: err.error_code
+  });
+}); */
 
 const options = {
   key: fs.readFileSync('server.key'),

@@ -37,6 +37,10 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
     logonPasswordVerify: params.password,
     x_otp: params.otp || '',
   };
+  /*   if (params.otp) {
+    reqBody.x_otp = params.otp;
+  }
+ */
   if (lastname !== '') {
     reqBody.lastName = lastname;
   }

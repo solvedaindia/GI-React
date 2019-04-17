@@ -9,7 +9,7 @@ router.post('/', (req, res, next) => {
       return;
     }
     res.status(200).send({
-      status:'success',
+      status: 'success',
       data: result,
     });
   });

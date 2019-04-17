@@ -21,11 +21,11 @@ router.get('/:keyword', (req, res, next) => {
 });
 
 router.get('/subcategories/:categoryID', (req, res, next) => {
-  res.status(200).send({
+  /* res.status(200).send({
     status: 'success',
     data: testJson.subcategories,
-  });
-  /* categoriesHandler.getSubCategories(req, (err, result) => {
+  }); */
+  categoriesHandler.getSubCategories(req, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -34,20 +34,24 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
       status: 'success',
       data: result,
     });
-  }); */
+  });
 });
 
 router.get('/details/:categoryID', (req, res, next) => {
-  categoriesHandler.getCategoryDetails(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
+  categoriesHandler.getCategoryDetails(
+    req.headers,
+    req.params.categoryID,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
 });
 
 module.exports = router;

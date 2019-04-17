@@ -8,7 +8,10 @@ router.get('/page', (req, res, next) => {
       next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
 
@@ -18,7 +21,10 @@ router.get('/itemlist', (req, res, next) => {
       next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
 
@@ -28,92 +34,115 @@ router.get('/itemcount', (req, res, next) => {
       next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
 
-router.get('/listnames', (req, res, next) => {
+/* router.get('/listnames', (req, res, next) => {
   wishlistHandler.fetchlistnames(req.headers, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
-});
+}); */
 
-router.post('/create', (req, res, next) => {
+/* router.post('/create', (req, res, next) => {
   wishlistHandler.createlist(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
-});
+}); */
 
-router.post('/rename', (req, res, next) => {
+/* router.post('/rename', (req, res, next) => {
   wishlistHandler.rename(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
-
-router.post('/create_add', (req, res, next) => {
+ */
+/* router.post('/create_add', (req, res, next) => {
   wishlistHandler.createAndAdd(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
-});
+}); */
 
-router.post('/additem', (req, res, next) => {
+/* router.post('/additem', (req, res, next) => {
   wishlistHandler.addItem(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+}); */
+
+router.post('/additem', (req, res, next) => {
+  wishlistHandler.addItemInWishlist(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
 
-router.post('/deletelist', (req, res, next) => {
+/* router.post('/deletelist', (req, res, next) => {
   wishlistHandler.deletelist(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
-});
+}); */
 
 router.post('/deleteitem', (req, res, next) => {
   wishlistHandler.deleteitem(req.headers, req.body, (err, result) => {
     if (err) {
-      res.send(errorJson(err));
+      next(err);
       return;
     }
-    res.status(200).send(resultJson(result));
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
-
-function resultJson(result) {
-  return {
-    status: 'success',
-    data: result,
-  };
-}
-
-function errorJson(err) {
-  return {
-    status: 'failure',
-    error: err,
-  };
-}
 
 module.exports = router;

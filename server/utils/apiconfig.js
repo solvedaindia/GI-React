@@ -44,8 +44,8 @@ exports.getEndPoint = function getEndPoint() {
   // eslint-disable-next-line default-case
   switch (endPoint) {
     case 'LOCAL':
-      endpointConfigURL.hostname = '192.168.0.39';
-      endpointConfigURL.searchHostname = '192.168.0.39:3738';
+      endpointConfigURL.hostname = '192.168.0.36';
+      endpointConfigURL.searchHostname = '192.168.0.36:3738';
       break;
   }
   endpointConfigURL.endPoint = endPoint;

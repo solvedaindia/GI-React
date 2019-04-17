@@ -18,7 +18,8 @@ module.exports.facetData = function getFacetData(facetView) {
           const facetEntry = {
             label: facetValue.label,
             value: facetValue.value,
-            count: facetValue.count,
+            count: Number(facetValue.count),
+            facetImage: facetValue.image || '',
           };
           eachFacetValue.facetValues.push(facetEntry);
         });
