@@ -26,6 +26,8 @@ import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBan
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
 
+// import {Form,FormGroup,For } from 'react-bootstrap';
+
 import * as actionCreators from './actions';
 import axios from 'axios';
 import {
@@ -252,10 +254,17 @@ export class PlpContainer extends React.Component {
 				<section className="plpCategories">
 					<div className="container">
 						<div className="row">
-							{titleItem}
-							{productCountItem}
-							{this.state.isCatDetails ? null : <Sort />}
-						</div>
+						{titleItem}
+						{productCountItem}
+						</div>						
+						<div className="row no-padding">
+							<div className='filterWrapper clearfix'>						
+								
+							<div className='sort'>							   
+								{this.state.isCatDetails ? null : <Sort />}
+							</div>
+							</div>
+					</div>
 						{plpProducts}
 					</div>
 				</section>

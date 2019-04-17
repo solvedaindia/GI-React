@@ -11,11 +11,11 @@ import { getReleventReduxState } from '../../../utils/utilityManager';
 
 import { Link, Route, withRouter } from 'react-router-dom';
 
-const downArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
+const downArrow = (  
+  <img className='dropdownArrow' src={require('../../../components/SVGs/drop-down-arrow-down.svg')} />
 );
 const upArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
+  <img className='dropdownArrow' src={require('../../../components/SVGs/drop-down-arrow-up.svg')} />
 );
 const recommended = 'Recommended';
 const price_L_H = 'Price Low to High';
@@ -59,9 +59,9 @@ class Sort extends React.Component {
         <li
           onClick={evt => this.handleClick(i)}
           key={i}
-          className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}
+          className={"dropdownlist-item list " + (i === this.state.selected ? 'dropdownlist-itemactive' : '')}
         >
-          <Link to={this.props.match.url+'/'+option}>
+          <Link className='link' to={this.props.match.url+'/'+option}>
             {option}
           </Link>
         </li>
@@ -72,16 +72,19 @@ class Sort extends React.Component {
   render() {
     console.log('Routtt',this.props.match.url);
     return (
+      <>
+      <h4 className='heading'>Sort</h4>
       <div className="dropdown">
         <div
           onClick={() => this.toggleDropdown()}
-          className="dropdown__toggle dropdown__list-item"
+          className="dropdowntoggle dropdownlist-item"
         >
           {this.state.title}
           {this.state.active ? downArrow : upArrow}
         </div>
-        <ul className={"dropdown__list " + (this.state.active ? 'dropdown__list--active' : '')}>{this.sortingOptions()}</ul>
+        <ul className={"dropdownlist " + (this.state.active ? 'dropdownlistactive' : '')}>{this.sortingOptions()}</ul>
       </div>
+      </>
     );
   }
 
