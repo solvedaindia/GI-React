@@ -59,6 +59,8 @@ export const autoSuggestAPI = `${secureHttp}://${host}:${port2}/api/v1/search/au
 export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/user`;
 /* PLP Sub-Category API */
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
+/* Sub-Category API */
+export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* ESPOT data API */
 export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
