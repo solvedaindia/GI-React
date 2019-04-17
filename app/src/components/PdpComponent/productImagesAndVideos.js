@@ -8,7 +8,8 @@ class productImagesAndVideos extends React.Component {
     constructor() {
         super();
         this.state = {
-            images: []
+            images: [],
+            video: false
         }
     }
 
@@ -38,12 +39,19 @@ class productImagesAndVideos extends React.Component {
                 <Player
                     autoPlay
                     poster={event.thumbnail}
-                    src={event.videourl}
+                    src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
+                    //src={event.videourl}
                 />
             </div>
           );
     }
 
+    zoomIn()
+    {
+        const btnSubmitTags = document.getElementsByClassName('image-gallery-fullscreen-button');
+        btnSubmitTags[0].click();
+    }
+ 
     render() {
         return(
             <div className='gallaryWrapper'>
@@ -58,12 +66,13 @@ class productImagesAndVideos extends React.Component {
                  
                  </div>
                 <ImageGallery 
-                    showFullscreenButton={false}
+                    showFullscreenButton={true}
                     items={this.state.images}
-                    showNav={false}
+                    showNav={true}
                     showPlayButton={false}
+                    onClick={this.zoomIn.bind(this)}
                 />
-             </div>
+            </div>
         )
     }
 } 
