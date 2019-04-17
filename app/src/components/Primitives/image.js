@@ -1,10 +1,10 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
- 
-const GetImage = ({ src, alt }) => (
+
+const GetImage = ({ props }) => (
     <LazyLoadImage
-        src={src}
-        alt={alt}
+        src={props.src}
+        alt={props.alt}
     />
 );
  
