@@ -36,8 +36,7 @@ class WelcomeBack extends React.Component {
 		this.state = {
 			show: false,
 			message: null,
-			isLoggedIn: false,
-			user: 'Login/Register',
+			loginStatus: 'Login/Register',
 			userType: 'Hello Guest!',
 		};
 	}
@@ -47,8 +46,15 @@ class WelcomeBack extends React.Component {
 	}
 
 	handleShow() {
-		this.setState({ show: true, message: null });
+		if(this.state.loginStatus == 'Login/Register') {
+			this.setState({ show: true, message: null });
+		} else {
+			console.log('Remove the cookie');
+		}
 	}
+	// handleShow() {
+	// 		this.setState({ show: true, message: null });
+	// }
 	
     handleToggle = () => {
 		console.log('CLICKED');
@@ -120,7 +126,7 @@ class WelcomeBack extends React.Component {
 			}`;
 			this.setState({
 				userType: 'Hello User!',
-				user: 'Logout',
+				loginStatus: 'Logout',
 				show: false
             });   
 			alert('Successfully Logged In');
@@ -141,13 +147,13 @@ class WelcomeBack extends React.Component {
 		}
 		return (
 			<div>
-				<ul>
-					<li>
+				<ul className='userList'>
+					<li className='listItem'>
 						<a href='' className="dropDown" >{this.state.userType}</a>
 					</li>
-					<li>
+					<li className='listItem'>
 						<a className="dropDown" onClick={this.handleShow}>
-							{this.state.user}
+							{this.state.loginStatus}
 						</a>
 					</li>
 				</ul>
