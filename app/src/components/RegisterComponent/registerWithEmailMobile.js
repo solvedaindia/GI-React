@@ -193,8 +193,7 @@ class RegisterWithEmailMobile extends React.Component {
                       <div>
                         <Label className='label'>EMAIL ADDRESS</Label>
                         <div className='form-div clearfix'>
-                          <input type='email' name='userId' className='form-control' placeholder='Please Enter Email Address' onChange={this.handleChange} />
-                          />
+                          <input type='email' name='userId' className='form-control' placeholder='Please Enter Email Address' onChange={this.handleChange} />                         
                           {errorMessageUserId}
                         </div>
                       </div>
