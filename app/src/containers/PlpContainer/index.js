@@ -31,310 +31,326 @@ import Sort from '../../components/PlpComponent/Sorting/sort';
 import * as actionCreators from './actions';
 import axios from 'axios';
 import {
-	plpSubCatAPI,
-	plpAPI,
-	espotAPI,
-	storeId,
-	accessToken,
+  plpSubCatAPI,
+  plpAPI,
+  espotAPI,
+  storeId,
+  accessToken,
 } from '../../../public/constants/constants';
 
 let categoryId = '13503';
 export class PlpContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			plpSubCatData: null,
-			marketingTextBannerData: null,
-			plpDescriptionData: null,
-			plpData: [],
-			adBannerData: [],
-			error: false,
-			hasMore: true,
-			isLoading: false,
-			pageNumber: 1,
-			pageSize: 18,
-			categoryDetail: true,
-			sortValue: this.props.sortingValue,
-			isCatDetails: true,
-			categoyDetails: null,
-			productCount: null,
-		};
-		this.myRef = React.createRef();
-		this.onscroll = this.onscroll.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      plpSubCatData: null,
+      marketingTextBannerData: null,
+      plpDescriptionData: null,
+      plpData: [],
+      adBannerData: [],
+      error: false,
+      hasMore: true,
+      isLoading: false,
+      pageNumber: 1,
+      pageSize: 18,
+      categoryDetail: true,
+      sortValue: this.props.sortingValue,
+      isCatDetails: true,
+      categoyDetails: null,
+      productCount: null,
+    };
+    this.myRef = React.createRef();
+    this.onscroll = this.onscroll.bind(this);
+  }
 
-	componentWillUnmount() {
-		removeEventListener('scroll', this.onscroll);
-	}
+  componentWillUnmount() {
+    removeEventListener('scroll', this.onscroll);
+  }
 
-	componentDidMount() {
-		let path = String(this.props.location.pathname);
-		var idStr = path.split('/')[2];
-		if (idStr != undefined) {
-			categoryId = idStr;
-			console.log('PLP Main------', idStr);
-		}
+  componentDidMount() {
+    const path = String(this.props.location.pathname);
+    const idStr = path.split('/')[2];
+    if (idStr != undefined) {
+      categoryId = idStr;
+      console.log('PLP Main------', idStr);
+    }
 
-		addEventListener('scroll', this.onscroll);
+    addEventListener('scroll', this.onscroll);
 
-		this.fetchSubCategoryData();
-		this.fetchMarketingTextBannerData();
-		this.fetchPLPProductsData();
-		this.fetchDescriptionData();
-	}
+    this.fetchSubCategoryData();
+    this.fetchMarketingTextBannerData();
+    this.fetchPLPProductsData();
+    this.fetchDescriptionData();
+  }
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.sortingValue !== this.props.sortingValue) {
-			this.setState({ plpData: [] })
-			this.fetchPLPProductsData();
-		}
-	}
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sortingValue !== this.props.sortingValue) {
+      this.setState({ plpData: [] });
+      this.fetchPLPProductsData();
+    }
+  }
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		//console.log('PLP---- componentDidUpdate PrevProps--', prevProps + 'This Props', this.props);
-		if (prevProps.specificProperty !== this.props.specificProperty) {
-			// Do whatever you want
-		}
-	}
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log('PLP---- componentDidUpdate PrevProps--', prevProps + 'This Props', this.props);
+    if (prevProps.specificProperty !== this.props.specificProperty) {
+      // Do whatever you want
+    }
+  }
 
-	fetchAdBannerData() {
-		axios
-			.get(espotAPI + 'GI_Plp_Sample_AD_Banner', {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
-			.then(response => {
-				this.props.onAdBannerIndexUpdate(response.data.data.GI_PLP_Sample_AD_Banner_Content);
-				this.setState({ adBannerData: response.data.data.GI_PLP_Sample_AD_Banner_Content });
-			})
-			.catch(error => {
-			});
-	}
+  fetchAdBannerData() {
+    axios
+      .get(`${espotAPI}GI_Plp_Sample_AD_Banner`, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        this.props.onAdBannerIndexUpdate(
+          response.data.data.GI_PLP_Sample_AD_Banner_Content,
+        );
+        this.setState({
+          adBannerData: response.data.data.GI_PLP_Sample_AD_Banner_Content,
+        });
+      })
+      .catch(error => {});
+  }
 
-	fetchSubCategoryData() {
-		axios
-			.get(plpSubCatAPI + categoryId, {
-				headers: { store_id: '10801', access_token: accessToken },
-			})
-			.then(response => {
-				console.log('Subcat Data');
-				this.setState({ plpSubCatData: response.data.data });
-			})
-			.catch(error => {
-			});
-	}
+  fetchSubCategoryData() {
+    axios
+      .get(plpSubCatAPI + categoryId, {
+        headers: { store_id: '10801', access_token: accessToken },
+      })
+      .then(response => {
+        console.log('Subcat Data');
+        this.setState({ plpSubCatData: response.data.data });
+      })
+      .catch(error => {});
+  }
 
-	fetchMarketingTextBannerData() {
-		axios
-			.get(espotAPI + 'GI_Plp_Sample_Hero_Banner', {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
-			.then(response => {
-				this.setState({ marketingTextBannerData: response.data.data.GI_PLP_Sample_HeroBanner_Content.bannerList[0].content });
-			})
-			.catch(error => {
-			});
-	}
+  fetchMarketingTextBannerData() {
+    axios
+      .get(`${espotAPI}GI_Plp_Sample_Hero_Banner`, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        this.setState({
+          marketingTextBannerData:
+            response.data.data.GI_PLP_Sample_HeroBanner_Content.bannerList[0]
+              .content,
+        });
+      })
+      .catch(error => {});
+  }
 
-	fetchPLPProductsData() {
-		this.setState({ isLoading: true }, () => {
-			/**
-		 * TODO: Category ID is static from Node side.
-		 */
+  fetchPLPProductsData() {
+    this.setState({ isLoading: true }, () => {
+      /**
+       * TODO: Category ID is static from Node side.
+       */
 
-			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&'
-			console.log('PLPURL---', plpURL);
-			axios
-				.get(plpURL, {
-					headers: { store_id: '10801', access_token: accessToken, 'cat_details': this.state.isCatDetails },
-				})
-				.then(response => {
+      const plpURL =
+        `${plpAPI + categoryId}?` +
+        `pagenumber=${this.state.pageNumber}&` +
+        `pagesize=${this.state.pageSize}&` +
+        `orderby=${this.props.sortingValue}&`;
+      console.log('PLPURL---', plpURL);
+      axios
+        .get(plpURL, {
+          headers: {
+            store_id: '10801',
+            access_token: accessToken,
+            cat_details: this.state.isCatDetails,
+          },
+        })
+        .then(response => {
+          if (this.state.isCatDetails) {
+            this.fetchAdBannerData();
+            this.setState({
+              categoryDetail: response.data.data.categoryDetails,
+              productCount: response.data.data.productCount,
+            });
+          }
 
-					if (this.state.isCatDetails) {
-						this.fetchAdBannerData();
-						this.setState({
-							categoryDetail: response.data.data.categoryDetails,
-							productCount: response.data.data.productCount,
-						})
-					}
+          this.setState({
+            plpData: [...this.state.plpData, ...response.data.data.productList],
+            hasMore:
+              this.state.plpData.length <
+              Number(response.data.data.productCount),
+            isLoading: false,
+            isCatDetails: false,
+          });
+        })
+        .catch(error => {
+          // console.log('PLPBannerrror---', error);
+          this.setState({
+            error: error.message,
+            isLoading: false,
+          });
+        });
+    });
+  }
 
-					this.setState({
-						plpData: [...this.state.plpData, ...response.data.data.productList],
-						hasMore: (this.state.plpData.length < Number(response.data.data.productCount)),
-						isLoading: false,
-						isCatDetails: false,
-					});
-				})
-				.catch(error => {
-					//console.log('PLPBannerrror---', error);
-					this.setState({
-						error: error.message,
-						isLoading: false,
-					});
-				});
-		});
-	}
+  fetchDescriptionData() {
+    axios
+      .get(`${espotAPI}GI_Plp_Description`, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
+        this.setState({
+          plpDescriptionData:
+            response.data.data.GI_PLP_Sample_Description_Content,
+        });
+      })
+      .catch(error => {
+        // console.log('PLPBannerrror---', error);s
+      });
+  }
 
-	fetchDescriptionData() {
-		axios
-			.get(espotAPI + 'GI_Plp_Description', {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
-			.then(response => {
-				// console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
-				this.setState({ plpDescriptionData: response.data.data.GI_PLP_Sample_Description_Content });
-			})
-			.catch(error => {
-				// console.log('PLPBannerrror---', error);s
-			});
-	}
+  onscroll = () => {
+    const {
+      state: { error, isLoading, hasMore },
+    } = this;
 
-	onscroll = () => {
-		const {
-			state: {
-				error,
-				isLoading,
-				hasMore,
-			},
-		} = this;
+    if (error || isLoading || !hasMore) return;
+    const adjustedHeight = 600;
+    const windowHeight =
+      window.innerHeight + document.documentElement.scrollTop;
+    const windowOffsetHeight =
+      document.documentElement.offsetHeight - adjustedHeight;
 
+    if (
+      windowHeight >= windowOffsetHeight &&
+      windowHeight - 300 <= windowOffsetHeight
+    ) {
+      console.log('Its the End');
+      this.setState({ pageNumber: this.state.pageNumber + 1 });
+      this.fetchPLPProductsData();
+    }
+  };
 
-		if (error || isLoading || !hasMore) return;
-		const adjustedHeight = 600
-		const windowHeight = window.innerHeight + document.documentElement.scrollTop;
-		const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight
+  render() {
+    const {
+      error,
+      hasMore,
+      isLoading,
+      plpData,
+      marketingTextBannerData,
+      plpSubCatData,
+      adBannerData,
+    } = this.state;
 
-		if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
-			console.log('Its the End');
-			this.setState({ pageNumber: this.state.pageNumber + 1 });
-			this.fetchPLPProductsData();
-		}
-	};
+    let marketingBanner;
+    if (marketingTextBannerData != null) {
+      /**
+       * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
+       */
+      marketingBanner = (
+        <MarketingTextBanner bannerDataPro={marketingTextBannerData} />
+      );
+    }
 
-	render() {
+    let subCategories;
+    if (plpSubCatData != null) {
+      subCategories = (
+        <SubCategories subCategoryData={this.state.plpSubCatData} />
+      );
+    }
 
-		const {
-			error,
-			hasMore,
-			isLoading,
-			plpData,
-			marketingTextBannerData,
-			plpSubCatData,
-			adBannerData,
-		} = this.state;
+    let plpProducts;
+    if (plpData.length != 0 && adBannerData.length != 0) {
+      plpProducts = (
+        <PlpComponent
+          plpDataPro={this.state.plpData}
+          adBannerDataPro={adBannerData}
+        />
+      );
+    }
 
-		let marketingBanner;
-		if (marketingTextBannerData != null) {
-			/**
-			 * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
-			 */
-			marketingBanner = (
-				<MarketingTextBanner
-					bannerDataPro={marketingTextBannerData}
-				/>
-			);
-		}
+    let descriptionItem;
+    if (this.state.plpDescriptionData != null) {
+      descriptionItem = (
+        <DescriptionBanner
+          descriptionDataPro={this.state.plpDescriptionData}
+          ref={divElement => (this.divElement = divElement)}
+        />
+      );
+    }
 
-		let subCategories;
-		if (plpSubCatData != null) {
-			subCategories = (
-				<SubCategories subCategoryData={this.state.plpSubCatData} />
-			);
-		}
+    let titleItem = null;
+    if (this.state.categoryDetail !== null) {
+      titleItem = (
+        <h3 className="headingTitle">
+          {this.state.categoryDetail.categoryName}
+        </h3>
+      );
+    }
 
-		let plpProducts;
-		if (plpData.length != 0 && adBannerData.length != 0) {
-			plpProducts = (
-				<PlpComponent plpDataPro={this.state.plpData} adBannerDataPro={adBannerData} />
-			);
-		}
+    let productCountItem = null;
+    if (this.state.productCount !== null) {
+      productCountItem = (
+        <div className="headingSubTitle">
+          (Produts {this.state.productCount})
+        </div>
+      );
+    }
 
-		let descriptionItem;
-		if (this.state.plpDescriptionData != null) {
-			descriptionItem = (
-				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} ref={(divElement) => this.divElement = divElement} />
-			);
-		}
+    return (
+      <>
+        {marketingBanner}
+        {subCategories}
+        <section className="plpCategories">
+          <div className="container">
+            <div className="row">
+              {titleItem}
+              {productCountItem}
+            </div>
+            <div className="row no-padding">
+              <div className="filterWrapper clearfix">
+                <div className="sort">
+                  {this.state.isCatDetails ? null : <Sort />}
+                </div>
+              </div>
+            </div>
+            {plpProducts}
+          </div>
+        </section>
 
-		let titleItem = null;
-		if (this.state.categoryDetail !== null) {
-			titleItem = (
-				<h3 className="headingTitle">{this.state.categoryDetail.categoryName}</h3>
-			)
-		}
-
-		let productCountItem = null;
-		if (this.state.productCount !== null) {
-			productCountItem = (
-				<div className="headingSubTitle">(Produts {this.state.productCount})</div>
-			)
-		}
-
-		return (
-			<>
-				{marketingBanner}
-				{subCategories}
-				<section className="plpCategories">
-					<div className="container">
-						<div className="row">
-						{titleItem}
-						{productCountItem}
-						</div>						
-						<div className="row no-padding">
-							<div className='filterWrapper clearfix'>						
-								
-							<div className='sort'>							   
-								{this.state.isCatDetails ? null : <Sort />}
-							</div>
-							</div>
-					</div>
-						{plpProducts}
-					</div>
-				</section>
-
-				<hr />
-				{error &&
-					<div style={{ color: '#900' }}>
-						{error}
-					</div>
-				}
-				{isLoading &&
-					<div>Loading...</div>
-				}
-				{!hasMore &&
-					<div>No Data Left!</div>
-				}
-				{descriptionItem}
-			</>
-		);
-	}
+        <hr />
+        {error && <div style={{ color: '#900' }}>{error}</div>}
+        {isLoading && <div>Loading...</div>}
+        {!hasMore && <div>No Data Left!</div>}
+        {descriptionItem}
+      </>
+    );
+  }
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapStateToProps = state => {
-	const stateObj = getReleventReduxState(state, 'plpContainer');
-	return {
-		ctr: stateObj.counter,
-		updatedFilter: stateObj.updateFilter,
-		sortingValue: stateObj.sortingValue,
-		reduxTrigger: true,
-	};
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+    ctr: stateObj.counter,
+    updatedFilter: stateObj.updateFilter,
+    sortingValue: stateObj.sortingValue,
+    reduxTrigger: true,
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
-	onIncrementCounter: () => dispatch(actionCreators.increment()),
-	onAdBannerIndexUpdate: (adBannerData) => dispatch(actionCreators.adBannerDataAction(adBannerData)),
+  onIncrementCounter: () => dispatch(actionCreators.increment()),
+  onAdBannerIndexUpdate: adBannerData =>
+    dispatch(actionCreators.adBannerDataAction(adBannerData)),
 });
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'plpContainer', reducer });
 const withSaga = injectSaga({ key: 'plpContainer', saga });
 
 export default compose(
-	withReducer,
-	withSaga,
-	withConnect,
+  withReducer,
+  withSaga,
+  withConnect,
 )(PlpContainer);
