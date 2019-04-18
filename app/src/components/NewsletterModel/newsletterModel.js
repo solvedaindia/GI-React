@@ -48,6 +48,14 @@ class NewsletterModel extends React.Component {
 
   }
 
+  componentDidMount () {
+    let now = new Date();
+      var minutes = 1;
+      now.setTime(now.getTime() + (minutes * 60 * 1000));
+
+      document.cookie = `${newsletterTokenCookie}=${null};path=/;expires=${now.toGMTString()}`;
+  }
+
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal,

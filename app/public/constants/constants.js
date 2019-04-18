@@ -40,6 +40,8 @@ export const forgotPasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const guestLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/token/guest`;
 /* Newsletter Subscription API */
 export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/subscribe`;
+/* Newsletter Subscription Status API */
+export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
 /* store Id */
 export const storeId = '10151';
 /* Access Token */

@@ -99,9 +99,9 @@ class ForgotPasswordEmailMobile extends React.Component {
     });
   }
 
-  onpress = e => {
-    e.preventDefault();
-  };
+  // onpress = e => {
+  //   e.preventDefault();
+  // };
 
   render() {
     let errorItem;

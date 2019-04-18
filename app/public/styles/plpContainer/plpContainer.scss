@@ -393,7 +393,7 @@ section.tablecarousel {
 
 //Filter 
 .dropdown_filter {
-  position: absolute;
+  // position: absolute;
   background: #ffffff;
   border: 1px solid #eee;
   border-radius: 1px;
@@ -424,6 +424,9 @@ section.tablecarousel {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
     position: absolute;
     z-index: 1;
+    width: 50%;
+    background: $colorwhite;
+    min-height: 250px;
 
     &--active {
       max-height: 1000px;
@@ -436,6 +439,7 @@ section.tablecarousel {
     cursor: pointer;
     list-style: none;
     padding: 15px;
+    position: relative;
 
     &--active {
       background: #f4f4f4;

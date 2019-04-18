@@ -58,25 +58,32 @@ class Filter extends React.Component {
     // if (!this.state.options) {
     //   return;
     // }
-    return this.state.options.map((option, i) => {
-      return (
-        <li
-          onClick={evt => this.handleClick(i)}
-          key={i}
-          className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}
-        >
-            {option}
-          
-        </li>
-      );
-    });
+    // return this.state.options.map((option, i) => {
+    //   return (
+    //     <li
+    //       onClick={evt => this.handleClick(i)}
+    //       key={i}
+    //       className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}
+    //     >
+    //         {option}
+
+    //     </li>
+    //   );
+    // });
+
+    return (
+      <>
+        <h1>kdfkddk</h1>
+      </>
+
+    )
   }
 
   render() {
     return (
       <div ref={node => { this.node = node; }} className="dropdown_filter">
-        <div className="dropdown__toggle dropdown__list-item"
-        onClick={() => this.toggleDropdown()}
+        <div className="dropdown_filter__toggle dropdown_filter__list-item"
+          onClick={() => this.toggleDropdown()}
         >
           Filter
           {this.state.active ? downArrow : upArrow}

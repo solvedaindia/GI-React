@@ -70,9 +70,9 @@ export class PlpContainer extends React.Component {
 		var idStr = path.split('/')[2];
 		if (idStr != undefined) {
 			categoryId = idStr;
-			console.log('PLP Main------',idStr);
+			console.log('PLP Main------', idStr);
 		}
-		
+
 		addEventListener('scroll', this.onscroll);
 
 		this.fetchSubCategoryData();
@@ -195,13 +195,13 @@ export class PlpContainer extends React.Component {
 			},
 		} = this;
 
-		
+
 		if (error || isLoading || !hasMore) return;
 		const adjustedHeight = 600
 		const windowHeight = window.innerHeight + document.documentElement.scrollTop;
 		const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight
 
-		if (windowHeight >= windowOffsetHeight && windowHeight-300 <= windowOffsetHeight) {
+		if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
 			console.log('Its the End');
 			this.setState({ pageNumber: this.state.pageNumber + 1 });
 			this.fetchPLPProductsData();
@@ -209,7 +209,7 @@ export class PlpContainer extends React.Component {
 	};
 
 	render() {
-		
+
 		const {
 			error,
 			hasMore,
@@ -227,7 +227,7 @@ export class PlpContainer extends React.Component {
 			 */
 			marketingBanner = (
 				<MarketingTextBanner
-				bannerDataPro={marketingTextBannerData}
+					bannerDataPro={marketingTextBannerData}
 				/>
 			);
 		}
@@ -242,14 +242,14 @@ export class PlpContainer extends React.Component {
 		let plpProducts;
 		if (plpData.length != 0 && adBannerData.length != 0) {
 			plpProducts = (
-				<PlpComponent plpDataPro={this.state.plpData} adBannerDataPro={adBannerData}/>
+				<PlpComponent plpDataPro={this.state.plpData} adBannerDataPro={adBannerData} />
 			);
 		}
 
 		let descriptionItem;
 		if (this.state.plpDescriptionData != null) {
 			descriptionItem = (
-				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} ref={ (divElement) => this.divElement = divElement} />
+				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} ref={(divElement) => this.divElement = divElement} />
 			);
 		}
 
@@ -277,6 +277,7 @@ export class PlpContainer extends React.Component {
 							{titleItem}
 							{productCountItem}
 							{this.state.isCatDetails ? null : <Sort />}
+							<Filter />
 						</div>
 						{plpProducts}
 					</div>

@@ -20,7 +20,8 @@ import {
   accessTokenCookie,
   isLoggedIn,
   getTheAccessToken,
-  newsletterTokenCookie
+  newsletterTokenCookie,
+  newsletterStatusAPI,
 } from '../../../public/constants/constants';
 
 import HomePageContainer from '../HomePageContainer/index';
@@ -67,19 +68,35 @@ export default class App extends React.Component {
   }
 
   newsletterPopupHandling() {
-    console.log('NewsletterCookie---',getCookie(newsletterTokenCookie));
-    if (getCookie(newsletterTokenCookie)) {
+    console.log('NewsletterCookie---', getCookie(newsletterTokenCookie));
+    if (getCookie(newsletterTokenCookie) && getCookie(newsletterTokenCookie) != null) {
       this.setState({ showNewsLetter: false });
     }
     else {
-      this.setState({ showNewsLetter: true });
+      //Hit api if NewsletterCookie is null/Empty
+      //If yes -> Don't show the Popup
+      //If No -> Show the Pop UP
+      console.log('In the new')
+      this.getNewsletterSubscriptionStatus();
+      // this.setState({ showNewsLetter: true });
     }
+  }
+
+  getNewsletterSubscriptionStatus() {
+    axios.get(newsletterStatusAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+      console.log('Newsletter status: ', response.data.data.alreadySubscribed);
+      if (!response.data.data.alreadySubscribed) {
+        this.setState({ showNewsLetter: true });
+      }
+    }).catch(error => {
+    });
   }
 
   guestLoginCallback(token) {
     if (token != '') {
       getTheAccessToken(token);
       this.setState({ accessToken: token });
+      this.getNewsletterSubscriptionStatus();
     } else {
     }
   }
