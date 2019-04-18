@@ -165,7 +165,7 @@ class Forgotpassowrd extends React.Component {
 
     return (
       <>
-        <p className="forgotPassword" onClick={this.toggle}>
+        <p onClick={this.toggle}>
           Forgot Password?
         </p>
         <Modal

@@ -2,6 +2,7 @@
 @import '../base.scss';
 
 .welcomeBack {
+    position: relative;
     .modal-header{
         background-image: url('../../images/rectangle.png');
         height: 100%;
@@ -80,18 +81,23 @@
             padding: $base;
             border: transparent;
             border-radius: $base*0.25;
+            margin-top: 16px;
         }
         .error-msg {
             color: $errorMsg;
             font-size: $base*1.25;
         }
-        .forgotPassword {
-            font-size: $base*1.5;
-            color: $cerulean;
-            text-align: right;
-            font-family: $font-regular;
-            cursor: pointer;
-        }
+    }
+    .forgotPassword {
+        font-size: $base*1.5;
+        color: $cerulean;
+        text-align: right;
+        font-family: $font-regular;
+        cursor: pointer;
+        position: absolute;
+        bottom: 104px;
+        right: 32px;
+        font-weight: 600;
     }
     .registerNow {
         border: none;
@@ -101,12 +107,13 @@
         text-align: right;
         font-family: $font-regular;
         cursor: pointer;
-}
+    }
     .registerHere,
     .socialLogin {
         width: 100%;
         text-align: center;
         padding: $base*2 $base*4;
+        margin: 0;
     }
     .socialLogin {
         .btn-white {

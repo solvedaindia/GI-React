@@ -5,6 +5,7 @@ import GoogleLogin from 'react-google-login';
 import WhiteLogo from '../SVGs/whiteLogo';
 import axios from 'axios';
 import WelcomeBackForm from '../WelcomeBackForm';
+import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
   facebookAppId,
@@ -31,9 +32,13 @@ class WelcomeBack extends React.Component {
 		super();
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.handleToggle = this.handleToggle.bind(this);
 		this.state = {
-		show: false,
-		message: null,
+			show: false,
+			message: null,
+			isLoggedIn: false,
+			user: 'Login/Register',
+			userType: 'Hello Guest!',
 		};
 	}
 
@@ -44,6 +49,11 @@ class WelcomeBack extends React.Component {
 	handleShow() {
 		this.setState({ show: true, message: null });
 	}
+	
+    handleToggle = () => {
+		console.log('CLICKED');
+		// this.setState({ show: false, message: null });
+    } 
 
 	// Social Login Handlers
 	responseGoogle = response => {
@@ -78,16 +88,16 @@ class WelcomeBack extends React.Component {
 			const firstName = response.name.substr(0, response.name.indexOf(' '));
 			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
 			this.setState({
-			firstName,
-			lastName,
-			authorizationProvider: 'facebook',
-			userId: response.userID,
-			socialToken: response.accessToken,
-			emialId: response.email,
+				firstName,
+				lastName,
+				authorizationProvider: 'facebook',
+				userId: response.userID,
+				socialToken: response.accessToken,
+				emialId: response.email,
 			});
 
 			onFacebookResponse(this.state, itemData => {
-			console.log('FacebookCallback', itemData);
+				console.log('FacebookCallback', itemData);
 			});
 		}
 	};
@@ -106,10 +116,14 @@ class WelcomeBack extends React.Component {
 		.then(response => {
 			document.cookie = 'isLoggedIn=true';
 			document.cookie = `${accessTokenCookie}=${
-			response.data.data.access_token
+				response.data.data.access_token
 			}`;
+			this.setState({
+				userType: 'Hello User!',
+				user: 'Logout',
+				show: false
+            });   
 			alert('Successfully Logged In');
-			this.handleClose();
 		})
 		.catch(error => {
 			const errorData = error.response.data;
@@ -123,19 +137,26 @@ class WelcomeBack extends React.Component {
 	render() {
 		let message = null;
 		if (this.state.message) {
-		message = <p>{this.state.message}</p>;
+			message = <p>{this.state.message}</p>;
 		}
 		return (
 			<div>
-				<a className="dropDown" onClick={this.handleShow}>
-				Login/Register
-				</a>
+				<ul>
+					<li>
+						<a href='' className="dropDown" >{this.state.userType}</a>
+					</li>
+					<li>
+						<a className="dropDown" onClick={this.handleShow}>
+							{this.state.user}
+						</a>
+					</li>
+				</ul>
 				<Modal
-				className="welcomeBack"
-				size="lg"
-				animation={false}
-				show={this.state.show}
-				onHide={this.handleClose}
+					className="welcomeBack"
+					size="lg"
+					animation={false}
+					show={this.state.show}
+					onHide={this.handleClose}
 				>
 					{message}
 					<Modal.Header closeButton>
@@ -178,6 +199,9 @@ class WelcomeBack extends React.Component {
 						className="loginForm"
 						handleUserData={this.handleUserLoginApi.bind(this)}
 					/>
+					<div className='forgotPassword' onClick={this.handleToggle}>
+                    	<Forgotpassowrd onClick={this.handleToggle}/>
+					</div>
 					<p className="registerHere">
 						<span>New to Godrej Interio? </span><RegisterModalData />
 					</p>

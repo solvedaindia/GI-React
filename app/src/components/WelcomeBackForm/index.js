@@ -119,7 +119,7 @@ class WelcomeForm extends Component {
                 />
                 {errorMessagePassword}
                 {/* Password of the user */}
-                <Forgotpassowrd/>
+                {/* <Forgotpassowrd/> */}
                 <Button
                     type={"primary"}
                     title={"Login"}
