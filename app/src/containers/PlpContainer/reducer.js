@@ -7,14 +7,14 @@
 import { fromJS } from 'immutable';
 import { DEFAULT_ACTION } from './constants';
 import * as actionTypes from './constants';
-import {fetchReleventSortingValue} from '../../utils/utilityManager'
+import {fetchReleventSortingValue, updateFilterMap} from '../../utils/utilityManager'
 
 const initialState = {
   sortingValue: 0,
   adBannerPos: 12,
   adBannerCurrentIndex: 0,
   adBannerData:[],
-  updateFilter: null,
+  updateFilter: new Map(),
 };
 
 function plpContainerReducer(state = initialState, action) {
@@ -27,7 +27,7 @@ function plpContainerReducer(state = initialState, action) {
       case actionTypes.FILTER:
       return {
         ...state,
-        updateFilter: action.val
+        updateFilter: updateFilterMap(action.updatedFilter, action.facetName, state)
       }
       case actionTypes.ADBANNERCOUNT:
       return {

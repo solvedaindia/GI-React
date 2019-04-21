@@ -19,10 +19,11 @@ export const increment = () => {
   }
 }
 
-export const filter = (value) => {
+export const filter = (newUpdatedFilter, newFacetName) => {
   return {
     type: actionTypes.FILTER,
-    val: value
+    updatedFilter: newUpdatedFilter,
+    facetName: newFacetName,
   }
 }
 
@@ -36,7 +37,6 @@ export const adBannerAction = (value, sIndex) => {
 }
 
 export const adBannerDataAction = (value) => {
-  console.log('adBannerDataAction', value);
   return {
     type: actionTypes.ADBANNERDATA,
     data: value,

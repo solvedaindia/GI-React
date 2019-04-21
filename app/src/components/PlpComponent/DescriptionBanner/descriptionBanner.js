@@ -13,7 +13,7 @@ class DescriptionBanner extends React.Component {
     super(props);
     this.state = {
       splitData: null,
-      fullData: strData,
+      fullData: this.props.descriptionDataPro.description,
       finalData: null,
       isReadMore: false,
       readMoreTitle: 'Read More',
@@ -41,7 +41,7 @@ class DescriptionBanner extends React.Component {
       console.log('Show');
       this.setState({
         isReadMore: true,
-        finalData: strData,
+        finalData: this.props.descriptionDataPro.description,
         readMoreTitle: 'Read Less',
       });
     }
