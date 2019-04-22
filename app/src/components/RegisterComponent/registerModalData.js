@@ -7,10 +7,11 @@ import Register from './register';
 import RegisterWithEmailMobile from './registerWithEmailMobile';
 import GenerateOtp from './generateOtp';
 import { registerWithEmail, generateOtp, resendOtp, otpConfirmed } from './constants';
+import WelcomeBack from '../WelcomeBack/index';
 
 class RegisterModalData extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 
@@ -37,6 +38,11 @@ class RegisterModalData extends React.Component {
 		this.setState({ show: true });
 	}
 
+	handleLoginComponent() {
+		this.handleClose();
+		return <WelcomeBack />;
+	}
+
 	/* Handle Components */
 	handleComponent(type, data = null) {
 		let renderComponent = null;
@@ -45,7 +51,7 @@ class RegisterModalData extends React.Component {
 		})
 
 		if (type !== generateOtp) {
-			renderComponent = <RegisterWithEmailMobile componentData={this.handleComponent.bind(this)} registrationType={type} handleApi={this.handleComponetData.bind(this)} userdata={data}/>;
+			renderComponent = <RegisterWithEmailMobile componentData={this.handleComponent.bind(this)} registrationType={type} loginComponentData={this.handleLoginComponent.bind(this)} handleApi={this.handleComponetData.bind(this)} userdata={data}/>;
 			this.setState({
 				modalClass: 'registerEmailMobile',
 			})
@@ -55,7 +61,7 @@ class RegisterModalData extends React.Component {
 				modalClass: 'modal-wrapperotp',
 			})
 		} else {
-			renderComponent = <Register componentData={this.handleComponent.bind(this)}/>
+			renderComponent = <Register componentData={this.handleComponent.bind(this)} loginComponentData={this.handleLoginComponent.bind(this)} />
 		}
 
 		this.setState({data: renderComponent});
@@ -94,7 +100,7 @@ class RegisterModalData extends React.Component {
 	render () {
 		let data = null;
 		if (this.state.data === null && this.state.show === true) {
-			data = <Register componentData={this.handleComponent.bind(this)}/>
+			data = <Register componentData={this.handleComponent.bind(this)} loginComponentData={this.handleLoginComponent.bind(this)} />
 		} else {
 			data = this.state.data;
 		}

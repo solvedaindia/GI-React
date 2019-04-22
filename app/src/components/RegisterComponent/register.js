@@ -28,7 +28,7 @@ class Register extends React.Component {
       socialToken: null,
       emialId: null,
       isFacebookClicked: false,
-    };
+	};
   }
 
   handleRegisterWithEmail() {
@@ -90,6 +90,10 @@ class Register extends React.Component {
     this.setState({ isFacebookClicked: true });
   }
 
+  renderLoginComponent() {
+	this.props.loginComponentData();
+  }
+
   render() {
     return (
       <Row>
@@ -149,7 +153,7 @@ class Register extends React.Component {
               </FormGroup>
               <p className="already-member">
                 Already a member?{' '}
-                <a className="login" href="#">
+                <a className='login' role='button' onClick={this.renderLoginComponent.bind(this)}>
                   Login
                 </a>
               </p>

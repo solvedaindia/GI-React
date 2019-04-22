@@ -145,6 +145,10 @@ class RegisterWithEmailMobile extends React.Component {
     }
   }
 
+  renderLoginComponent() {
+	this.props.loginComponentData();
+  }
+
   render() {
     let errorMessageName = null;
     let errorMessageUserId = null;
@@ -194,7 +198,6 @@ class RegisterWithEmailMobile extends React.Component {
                         <Label className='label'>EMAIL ADDRESS</Label>
                         <div className='form-div clearfix'>
                           <input type='email' name='userId' className='form-control' placeholder='Please Enter Email Address' onChange={this.handleChange} />
-                          />
                           {errorMessageUserId}
                         </div>
                       </div>
@@ -221,7 +224,7 @@ class RegisterWithEmailMobile extends React.Component {
                   </FormGroup>
                   <FormGroup>
                     <Button onClick={this.handleSubmit} className='btn-block btn-bg'>SIGN UP</Button>
-                    <p className='have-account'>Have an account? <a className='login' href='#'>Login</a></p>
+                    <p className='have-account'>Have an account? <a className='login' role='button' onClick={this.renderLoginComponent.bind(this)}>Login</a></p>
                     <p className='sign_text'>By signing up you agree to our <a className='link' href=''>T&C</a> </p>
                     {/* </p> */}
                   </FormGroup>
