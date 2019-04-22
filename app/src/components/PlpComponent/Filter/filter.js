@@ -120,12 +120,13 @@ class Filter extends React.Component {
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
       return (
-        <div className='col-md-4'>
-          {checkboxItem}
-          <li onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
-            {option.label /*+ ' (' + option.count + ')'*/}
-          </li>
-        </div>
+        <li className='list'>
+          {/* {checkboxItem} */}
+          <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
+           <div className='input_box'>{checkboxItem} </div>
+           <div className='label_text'>{option.label /*+ ' (' + option.count + ')'*/}</div>
+          </div>
+        </li>
       );
     });
   }

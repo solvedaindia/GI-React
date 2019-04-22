@@ -333,17 +333,17 @@ section.tablecarousel {
   }
 
   &__list-item {
-    border-bottom: 1px solid #eee;
+    // border-bottom: 1px solid #eee;
     cursor: pointer;
     list-style: none;
     padding: 15px;
 
     &--active {
-      background: #f4f4f4;
+      // background: #f4f4f4;
     }
 
     &:hover {
-      background: #f4f4f4;
+      // background: #f4f4f4;
     }
   }
 
@@ -391,17 +391,16 @@ section.tablecarousel {
 
 //Filter
 .dropdown_filter {
+  position: relative;
   &__filter {
-    float: left;
-    position: relative;
+    float: left;   
     background: #ffffff;
     border: 1px solid #eee;
     border-radius: 1px;
     max-width: 181px;
     z-index: 1;
     width: 50%;
-    background: $colorwhite;
-    // min-height: 250px;
+    background: $colorwhite;    
   }
   &__arrow {
     position: absolute;
@@ -416,33 +415,42 @@ section.tablecarousel {
     border-radius: 3px;
   }
 
-  &__list {
-    width: 71%;
+  &__list {   
     background: white;
     border: 1px solid #eeeeee;
-    top: 599px;
-    // opacity: 0;
+    top: 59px;    
     transition: max-height 0.2s ease-out;
     // transition: opacity .15s ease-out;
     max-height: 0;
     overflow: hidden;
     margin: 0;
-    padding: 0;
-    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+    padding: 0;    
     position: absolute;
     z-index: 1;
+    padding:20px;
 
     &--active {
       max-height: 1000px;
       opacity: 1;
     }
+    .list{
+      display:inline-block;
+      min-width: 15%;
+      .input_box{
+        margin:0 14px 0 0;
+      }
+      .input_box,.label_text{
+        display:inline-block;
+      }
+    }
   }
 
-  &__list-item {
-    border-bottom: 1px solid #eee;
+  &__list-item {   
     cursor: pointer;
     list-style: none;
     padding: 15px;
+    position: relative;
+    display: flex;
 
     &--active {
       background: #f4f4f4;
@@ -474,5 +482,6 @@ section.tablecarousel {
     width: 160px;
     height: 44px;
     background-color: #070707;
+    border:none;
   }
 }
