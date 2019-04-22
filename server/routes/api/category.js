@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const categoriesHandler = require('../../handlers/categoryhandler');
+const categoryUtil = require('../../utils/categoryutil');
 const testJson = require('../../configs/testjson');
 
 router.get('/:keyword', (req, res, next) => {
@@ -38,7 +39,7 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
 });
 
 router.get('/details/:categoryID', (req, res, next) => {
-  categoriesHandler.getCategoryDetails(
+  categoryUtil.getCategoryDetails(
     req.headers,
     req.params.categoryID,
     (err, result) => {

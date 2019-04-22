@@ -27,6 +27,8 @@ function plpContainerReducer(state = initialState, action) {
       case actionTypes.FILTER:
       return {
         ...state,
+        adBannerPos: initialState.adBannerPos,
+        adBannerCurrentIndex: initialState.adBannerCurrentIndex,
         updateFilter: updateFilterMap(action.updatedFilter, action.facetName, state)
       }
       case actionTypes.ADBANNERCOUNT:

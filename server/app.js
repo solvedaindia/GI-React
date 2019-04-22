@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const responseTime = require('response-time');
 const compression = require('compression');
 const StatsD = require('node-statsd');
+const contextService = require('request-context');
+const uniqid = require('uniqid');
 const https = require('https');
 const fs = require('fs');
 const tokenValidation = require('./utils/tokenvalidation');
@@ -43,12 +45,12 @@ app.use(
 );
 
 app.use(bodyParser.json());
-// app.use(helmet.noSniff());
-// app.use(helmet.ieNoOpen());
-// app.use(helmet.xssFilter());
-// app.use(helmet.hidePoweredBy());
+app.use(helmet());
+/* app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
+app.use(helmet.xssFilter());
+app.use(helmet.hidePoweredBy()); */
 
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(responseTime());
 const stats = new StatsD();
 stats.socket.on('error', error => {
@@ -83,6 +85,18 @@ app.use(
 // db instance connection
 // require('./utils/db');
 
+app.use(contextService.middleware('apirequest'));
+
+app.use((req, res, next) => {
+  const reqUniqId = uniqid();
+  req.headers.Request_ID = reqUniqId;
+  contextService.set('apirequest:requestid', reqUniqId);
+  logger.debug(
+    `Request for api :${req.originalUrl} ::: Request ID : ${reqUniqId}`,
+  );
+  next();
+});
+
 app.use((req, res, next) => {
   if (req.headers.store_id) {
     req.headers.storeId = req.headers.store_id;
@@ -92,27 +106,21 @@ app.use((req, res, next) => {
       status: 'failure',
       error: errorUtils.errorlist.storeid_missing,
     };
-    logger.error('HTTP ERROR 400: ', JSON.stringify(errorMessage));
+    logger.error(JSON.stringify(errorMessage));
     res.status(400).send(errorMessage);
   }
 });
 
 // To handle secure API's and check token status
 app.use((req, res, next) => {
-  console.log('User Agent>>>', req.headers['user-agent']);
   tokenValidation.validateSecureToken(req, res, next);
   next();
-  /* if (req.url.indexOf('/secure/') !== -1) {
-    tokenValidation.validateSecureToken(req, res, next);
-    next();
-  } else {
-    next();
-  } */
 });
 
 // Add routes
 app.use('/api/v1', require('./routes'));
 app.use(compression());
+
 // HTTP error 404 for unhandled routs
 app.use((req, res) => {
   const errorMessage = {
@@ -122,12 +130,11 @@ app.use((req, res) => {
     },
   };
   logger.error('HTTP ERROR 404: ', JSON.stringify(errorMessage));
-  res.status(404);
-  res.send(errorMessage);
+  res.status(404).send(errorMessage);
 });
 
 // Generic error handler
-app.use((err, req, res, next) => {
+/* app.use((err, req, res, next) => {
   logger.error(
     JSON.stringify({
       url: req.originalUrl,
@@ -147,9 +154,9 @@ app.use((err, req, res, next) => {
     },
     // error_response: err.error_code
   });
-});
+}); */
 
-/* // Generic error handler
+// Generic error handler
 app.use((err, req, res, next) => {
   logger.error(
     JSON.stringify({
@@ -168,9 +175,8 @@ app.use((err, req, res, next) => {
       error_key: err.error_key,
       error_message: err.error_message,
     },
-    // error_response: err.error_code
   });
-}); */
+});
 
 const options = {
   key: fs.readFileSync('server.key'),

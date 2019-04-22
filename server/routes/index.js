@@ -20,6 +20,7 @@ router.use('/header_static_info', require('./api/header'));
 router.use('/homebody', require('./api/homepage'));
 router.use('/search', require('./api/search'));
 router.use('/espots', require('./api/espots'));
+router.use('/activity', require('./api/activity'));
 router.use('/otp', require('./api/otp'));
 router.use('/clp', require('./api/clp'));
 router.use('/plp', require('./api/plp'));

@@ -20,35 +20,52 @@ class Filter extends React.Component {
     this.state = {
       selected: 0,
       options: ['recommended', 'price_L_H', 'price_H_L', 'newArrival'],
-      facetMap: new Map(),
+      //facetMap: new Map(),
+      facetItem: null,
       facetArr: [],
       checked: false,
     }
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    // this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.onCheckBoxClick = this.onCheckBoxClick.bind(this)
     this.onCancelBtnClick = this.onCancelBtnClick.bind(this)
     this.onApplyBtnClick = this.onApplyBtnClick.bind(this)
   }
 
   toggleDropdown() {
-    // if (!this.state.active) {
-    //   document.addEventListener('click', this.handleOutsideClick, false);
-    // } else {
-    //   document.removeEventListener('click', this.handleOutsideClick, false);
-    // }
+    if (!this.state.active) {
+      document.addEventListener('click', this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener('click', this.handleOutsideClick, false);
+    }
+
+    this.unCkeckAll();
+    [...document.getElementsByClassName('checkboxSelected' + this.props.dataPro.facetName)].map((input) => {
+        input.checked = 'checked';
+    })
+
+    let filteredArr = [];
+    for (const [key, value] of this.props.updatedFilter) {
+      if (key === this.props.dataPro.facetName) {
+        value.map((option, i) => {
+          filteredArr.push(option)
+        })
+      }
+    }
+    //this.setState({facetArr: filteredArr})
 
     this.setState({
-      active: !this.state.active
+      active: !this.state.active,
+      facetArr: filteredArr
     });
   }
 
-  // handleOutsideClick(e) {
-  //   if (this.node.contains(e.target)) {
-  //     return;
-  //   }
-  //   this.toggleDropdown();
-  // }
+  handleOutsideClick(e) {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.toggleDropdown();
+  }
 
 
   onCheckBoxClick(index) {
@@ -66,74 +83,88 @@ class Filter extends React.Component {
         }
       });
     }
+    console.log('Selected --- ',filteredArr);
     this.setState({ facetArr: filteredArr })
   }
 
   onCancelBtnClick() {
-    this.unCkeckAll();
+    
+
     this.toggleDropdown();
   }
 
   unCkeckAll() {
-    [...document.getElementsByClassName('checkbox'+this.props.dataPro.facetName)].map((input) => {
-      console.log('uncheck---', input);
+    [...document.getElementsByClassName('checkbox' + this.props.dataPro.facetName)].map((input) => {
+      // console.log('uncheck---', input);
       if (input.checked) {
-        let fakeInput = {
-          target: {
-            value: input.value,
-            checked: false
-          }
-        }
         input.checked = !input.checked;
-        //this.onFilterChange(fakeInput);
       }
       return null;
     })
   }
 
-  onApplyBtnClick() {
-    console.log('TotalFace---', this.state.facetArr);
-    if (this.state.facetArr.length !== 0) {
-      this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
-    }
-  }
-
-  filterOptions() {
+  componentDidMount() {
     var alreadyAddedFiltersArr = [];
+    let filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
+          filteredArr.push(option)
           alreadyAddedFiltersArr.push(option);
         })
       }
     }
-    console.log('FacetArr----', alreadyAddedFiltersArr);
-    return this.props.dataPro.facetValues.map((option, i) => {
+
+    
+    this.setState({facetArr: filteredArr})
+    this.filterOptions(filteredArr);
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('Filter acomponentWillReceiveProps ----- ', nextProps);
+  }
+
+  onApplyBtnClick() {
+    console.log('TotalFace---', this.state.facetArr);
+    // if (this.state.facetArr.length !== 0) {
+      this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
+    // }
+  }
+
+  filterOptions(alreadyAddedFiltersArr) {
+
+    //return this.props.dataPro.facetValues.map((option, i) => {
+    var item = this.props.dataPro.facetValues.map((option, i) => {
 
       var checkboxItem;
       if (alreadyAddedFiltersArr.includes(option.value)) {
-        checkboxItem = <input onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id="chk" name="scales" />
-        console.log('ITsChecked----');
+        checkboxItem = <input className={'checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id="chk" name="scales" />
+        console.log('ITsChecked----', checkboxItem);
       }
       else {
-        checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
+        checkboxItem = <input className={'checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
       return (
         <div className='col-md-4'>
           {checkboxItem}
           <li onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
-            {option.label /*+ ' (' + option.count + ')'*/}
+            {option.label + ' (' + option.count + ')'}
           </li>
         </div>
       );
     });
+    this.setState({
+      facetItem: item
+    })
   }
 
   render() {
+    console.log('Selected Render --- ',this.state.facetArr);
     return (
       <>
-        <div className="dropdown_filter">
+        <div ref={node => { this.node = node; }} className="dropdown_filter">
           <div className="dropdown_filter__filter">
             <div className="dropdown_filter__toggle dropdown_filter__list-item"
               onClick={() => this.toggleDropdown()}
@@ -144,7 +175,7 @@ class Filter extends React.Component {
 
           </div>
 
-          <ul className={"dropdown_filter__list " + (this.state.active ? 'dropdown_filter__list--active' : '')}>{this.filterOptions()}
+          <ul className={"dropdown_filter__list " + (this.state.active ? 'dropdown_filter__list--active' : '')}>{this.state.facetItem}
             <div className="col-md-offset-4">
               <button onClick={() => this.onCancelBtnClick()} className='dropdown_filter__cancelBtn'>Cancel</button>
               <button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn'>Apply</button>

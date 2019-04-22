@@ -15,10 +15,10 @@ exports.getResponse = function getResponse(
   reqUniqId,
   callback,
 ) {
-  console.log('Origin URL', originURL);
-  console.log('Origin Method', originMethod);
-   console.log('Request Header', reqHeaders);
-   console.log('Request Body', reqBody);
+  logger.debug(`Origin Method:::${originMethod}`);
+  logger.debug(`Origin URL:::${originURL}`);
+  // console.log('Request Header', reqHeaders);
+  // console.log('Request Body', reqBody);
   try {
     const request = unirest(originMethod, originURL).strictSSL(false);
     if (reqHeaders) {
@@ -31,7 +31,7 @@ exports.getResponse = function getResponse(
       request.send();
     }
     request.end(response => {
-      console.log(`Response From Origin::${JSON.stringify(response)}`);
+      // logger.debug(`Response From Origin::${JSON.stringify(response)}`);
       if (response.status >= 200 && response.status < 300) {
         callback(response);
       } else {
@@ -43,7 +43,7 @@ exports.getResponse = function getResponse(
           Status: response.status,
           Body: response.body,
         };
-        logger.debug(`Error from WCS::${responceJSON}`);
+        logger.debug(`Error from WCS::${response}`);
         logger.wcserror(
           JSON.stringify(responceJSON)
             .replace(regexHideID, '"logonId":"*******"')

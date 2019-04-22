@@ -44,6 +44,7 @@ function getCategoryDetails(categoryDetails) {
   catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
+  catData.startPrice = '';
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
