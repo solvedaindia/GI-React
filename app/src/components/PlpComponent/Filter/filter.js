@@ -170,7 +170,7 @@ class Filter extends React.Component {
               onClick={() => this.toggleDropdown()}
             >
               {this.props.dataPro.facetName}
-              {this.state.active ? downArrow : upArrow}
+            {this.state.active ? downArrow : upArrow}
             </div>
 
           </div>
@@ -190,7 +190,6 @@ class Filter extends React.Component {
 
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-
 const mapDispatchToProps = dispatch => {
   return {
     onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),

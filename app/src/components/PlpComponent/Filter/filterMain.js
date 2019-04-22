@@ -24,7 +24,6 @@ class FilterMain extends React.Component {
     console.log('filterr', this.state.filterItem);
     return (
       <>
-      {/* <Filter dataPro={this.props.filterDataPro[1]} /> */}
         {this.state.filterItem}
       </>
     );

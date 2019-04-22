@@ -289,30 +289,38 @@ export class PlpContainer extends React.Component {
 				<section className="plpCategories">
 					<div className="container">
 						<div className="row">
+
 							{titleItem}
 							{productCountItem}
-							{this.state.isCatDetails ? null : <Sort />}
-							{/* {this.state.isCatDetails ? null : <FilterMain filterDataPro={filterData}/>} */}
-							{/* <FilterMain filterDataPro={filterData} /> */}
-							{filterItem}
 						</div>
-						{plpProducts}
+						<div className="row no-padding">
+							<div className='filterWrapper clearfix'>
+								<div className='sort'>
+									{this.state.isCatDetails ? null : <Sort />}
+								</div>
+								{filterItem}
+							</div>
+						</div>
+					{plpProducts}
 					</div>
-				</section>
+			</section>
 
-				<hr />
-				{error &&
-					<div style={{ color: '#900' }}>
-						{error}
-					</div>
-				}
-				{isLoading &&
-					<div>Loading...</div>
-				}
-				{!hasMore &&
-					<div>No Data Left!</div>
-				}
-				{descriptionItem}
+			<hr />
+				{
+			error &&
+			<div style={{ color: '#900' }}>
+				{error}
+			</div>
+		}
+		{
+			isLoading &&
+			<div>Loading...</div>
+		}
+		{
+		!hasMore &&
+			<div>No Data Left!</div>
+		}
+		{ descriptionItem }
 			</>
 		);
 	}

@@ -21,7 +21,7 @@ module.exports.getProductList = function getProductList(req, callback) {
   const categoryID = req.params.categoryId;
   const reqHeader = req.headers;
   const reqQuery = req.query;
-  const catalogID = reqHeader.catalog_id || 10601;
+  const catalogID = reqHeader.catalog_id || '';
 
   const pageSize = Number(reqQuery.pagesize) || 18;
   const pageNumber = Number(reqQuery.pagenumber) || 1;
