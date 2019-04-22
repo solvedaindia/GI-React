@@ -17,13 +17,17 @@ class CartCount extends React.Component{
 		.then(response => {
             var count = response.data.data.wishlistTotalItems;
 			this.setState({
-                CartCount: count == '0' ? '' : (response.data.data.wishlistTotalItems),
+                CartCount: count == '0' ? '1' : (response.data.data.wishlistTotalItems),
 				isLoading: false
             });
 		})
 		.catch(error => this.setState({ error, isLoading: false }));
     }
-
+    handleCartCount() {
+        const token = appCookie.get('isLoggedIn');
+        console.log('Testest',token);
+        appCookie.get('isLoggedIn') ? alert('Take user Cart page') : alert('Please login');
+    }
     componentDidMount() {
         this.getCartCount();
     }
@@ -31,7 +35,7 @@ class CartCount extends React.Component{
     render() {
         const { isLoading, CartCount } = this.state;
         return (
-            <li className='icons'>
+            <li className='icons' onClick={this.handleCartCount}>
                 {!isLoading ? <span className='cartCount'>{CartCount}</span>: (
                     <p className='error'>No Cart Item Found</p>
                 )}
