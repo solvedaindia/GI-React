@@ -56,7 +56,7 @@ exports.validateSecureToken = function validateSecureToken(req, res, next) {
     req.headers.personalizationID = decodedToken.personalizationID;
     return;
   } catch (error) {
-    logger.error('Error In Decrypting access_token');
+    logger.degug('Error In Decrypting access_token');
     next(errorUtils.errorlist.token_invalid);
   }
 };

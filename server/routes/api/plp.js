@@ -3,6 +3,7 @@ const router = express.Router();
 const plphandler = require('../../handlers/plphandler');
 const testjson = require('../../configs/testjson');
 
+/* To Get Product List By Category ID for PLP */
 router.get('/productlist/:categoryId', (req, res, next) => {
   plphandler.getProductList(req, (err, result) => {
     if (err) {
@@ -16,6 +17,7 @@ router.get('/productlist/:categoryId', (req, res, next) => {
   });
 });
 
+/* To Get Static Product List Data */
 router.get('/productlist', (req, res, next) => {
   res.status(200).send({
     status: 'success',

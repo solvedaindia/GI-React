@@ -31,7 +31,7 @@ module.exports.getClpData = function getClpData(req, callback) {
     },
     (err, results) => {
       if (err) {
-        logger.error('Error while calling CLP data');
+        logger.debug('Error while calling CLP data');
         callback(err);
         return;
       }

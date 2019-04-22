@@ -131,7 +131,7 @@ function fetchlistNames(headers, callback) {
       if (response.status === 201 || response.status === 200) {
         callback(null, response.body);
       } else {
-        logger.error('Error while calling CreateWishlist api', response.status);
+        logger.debug('Error while calling CreateWishlist api', response.status);
         error.push(errorutils.handleWCSError(response));
         callback(error);
       }
