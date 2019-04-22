@@ -9,8 +9,9 @@ const headerUtil = require('../utils/headerutil');
 const origin = require('../utils/origin');
 const plpfilter = require('../filters/productlistfilter');
 const pdpfilter = require('../filters/productdetailfilter');
-const categoryHandler = require('../handlers/categoryhandler');
+const categoryUtil = require('../utils/categoryutil');
 
+/* Get Product List with All the Data including Promotion, Category Details */
 module.exports.getProductList = function getProductList(req, callback) {
   if (!req.params.categoryId) {
     logger.debug('Get Category Carousel :: invalid params');
@@ -20,7 +21,7 @@ module.exports.getProductList = function getProductList(req, callback) {
   const categoryID = req.params.categoryId;
   const reqHeader = req.headers;
   const reqQuery = req.query;
-  const catalogID = reqHeader.catalog_id || 10601;
+  const catalogID = reqHeader.catalog_id || '';
 
   const pageSize = Number(reqQuery.pagesize) || 18;
   const pageNumber = Number(reqQuery.pagenumber) || 1;
@@ -77,15 +78,18 @@ module.exports.getProductList = function getProductList(req, callback) {
   });
 };
 
+/* Get Category Details */
 function getCategoryDetails(reqHeader, categoryID, reqUrl, callback) {
   if (reqHeader.cat_details === 'true') {
-    categoryHandler.getCategoryDetails(reqHeader, categoryID, (err, result) => {
+    categoryUtil.getCategoryDetails(reqHeader, categoryID, (err, result) => {
       if (err) {
         callback(err);
       } else if (result.displaySkus === true) {
         callback(null, reqHeader, reqUrl, result, true);
-      } else {
+      } else if (result.displaySkus === false) {
         callback(null, reqHeader, reqUrl, result, false);
+      } else {
+        callback(errorUtils.errorlist.invalid_params);
       }
     });
   }
@@ -197,12 +201,12 @@ function getPromotionData(headers, productListJson, callback) {
     async.map(
       productListJson.productList,
       (product, cb) => {
-        promotionUtil.promotionData(
+        promotionUtil.getPromotionData(
           product.uniqueID,
           headers,
           (error, promotionData) => {
             if (!error) {
-              product.promotionData = promotionData.associatedPromotions;
+              product.promotionData = promotionData;
               cb(null, product);
             } else {
               cb(error);
@@ -218,5 +222,7 @@ function getPromotionData(headers, productListJson, callback) {
         callback(null, productListJson);
       },
     );
+  } else {
+    callback(null, productListJson);
   }
 }

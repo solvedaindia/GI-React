@@ -9,7 +9,7 @@ const prodWcsResourceUrl = `https://${HostName}/wcs/resources/store`;
 
 // export the CONSTANT URL
 module.exports = Object.freeze({
-  espotOriginURL: `${prodWcsResourceUrl}/{{storeId}}/espot`,
+  espotOriginURL: `${prodWcsResourceUrl}/{{storeId}}/espot/{{espotName}}`,
   categoryview: `${prodSearchResourceUrl}/{{storeId}}/categoryview/{{urlParam}}`,
   categoryViewByParentId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byParentCategory/{{categoryId}}`,
   categoryViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byId/{{categoryId}}`,
@@ -34,5 +34,7 @@ module.exports = Object.freeze({
   sociallogin: `${prodWcsResourceUrl}/{{storeId}}/loginidentity/oauth_validate?responseFormat=json`,
   otp: `${prodWcsResourceUrl}/{{storeId}}/GIOtp`,
   forgotPassword: `${prodWcsResourceUrl}/{{storeId}}/person/@self?responseFormat=json`,
-  newsletterSubscription: `${prodWcsResourceUrl}/{{storeId}}/newsletter/savenewsletterdetails`,
+  newsletterSubscription: `${prodWcsResourceUrl}/{{storeId}}/newsletter`,
+  recentlyViewedEvent: `${prodWcsResourceUrl}/{{storeId}}/event`,
+  pdp: `${prodSearchResourceUrl}/{{storeId}}/productview/{{productId}}`,
 });

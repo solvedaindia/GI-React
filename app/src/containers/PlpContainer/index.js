@@ -16,12 +16,12 @@ import injectReducer from '../../utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import PlpComponent from '../../components/PlpComponent/index';
-import { getReleventReduxState } from '../../utils/utilityManager';
+import { getReleventReduxState, resolveTheFilter } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 // import ProductItem from '../../components/GlobalComponents/productItem/productItem';
-import Filter from '../../components/PlpComponent/Filter/filter';
+import FilterMain from '../../components/PlpComponent/Filter/filterMain';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
@@ -53,6 +53,7 @@ export class PlpContainer extends React.Component {
 			pageSize: 18,
 			categoryDetail: true,
 			sortValue: this.props.sortingValue,
+			filterData: [],
 			isCatDetails: true,
 			categoyDetails: null,
 			productCount: null,
@@ -70,9 +71,9 @@ export class PlpContainer extends React.Component {
 		var idStr = path.split('/')[2];
 		if (idStr != undefined) {
 			categoryId = idStr;
-			console.log('PLP Main------',idStr);
+			console.log('PLP Main------', idStr);
 		}
-		
+
 		addEventListener('scroll', this.onscroll);
 
 		this.fetchSubCategoryData();
@@ -84,6 +85,11 @@ export class PlpContainer extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.sortingValue !== this.props.sortingValue) {
 			this.setState({ plpData: [] })
+			this.fetchPLPProductsData();
+		}
+		if (nextProps.updatedFilter !== this.props.updatedFilter) {
+			console.log('Filter Changed ---- ', nextProps.updatedFilter);
+			this.setState({ plpData: [], filterData: [], })
 			this.fetchPLPProductsData();
 		}
 	}
@@ -139,25 +145,26 @@ export class PlpContainer extends React.Component {
 		 * TODO: Category ID is static from Node side.
 		 */
 
-			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&'
+			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&' + this.props.updatedFilter
 			console.log('PLPURL---', plpURL);
 			axios
 				.get(plpURL, {
 					headers: { store_id: '10801', access_token: accessToken, 'cat_details': this.state.isCatDetails },
 				})
 				.then(response => {
-
+					console.log('PLP Response----', response.data);
 					if (this.state.isCatDetails) {
 						this.fetchAdBannerData();
 						this.setState({
 							categoryDetail: response.data.data.categoryDetails,
-							productCount: response.data.data.productCount,
 						})
 					}
 
 					this.setState({
 						plpData: [...this.state.plpData, ...response.data.data.productList],
+						productCount: response.data.data.productCount,
 						hasMore: (this.state.plpData.length < Number(response.data.data.productCount)),
+						filterData: response.data.data.facetData,
 						isLoading: false,
 						isCatDetails: false,
 					});
@@ -195,13 +202,13 @@ export class PlpContainer extends React.Component {
 			},
 		} = this;
 
-		
+
 		if (error || isLoading || !hasMore) return;
 		const adjustedHeight = 600
 		const windowHeight = window.innerHeight + document.documentElement.scrollTop;
 		const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight
 
-		if (windowHeight >= windowOffsetHeight && windowHeight-300 <= windowOffsetHeight) {
+		if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
 			console.log('Its the End');
 			this.setState({ pageNumber: this.state.pageNumber + 1 });
 			this.fetchPLPProductsData();
@@ -209,7 +216,7 @@ export class PlpContainer extends React.Component {
 	};
 
 	render() {
-		
+
 		const {
 			error,
 			hasMore,
@@ -218,6 +225,7 @@ export class PlpContainer extends React.Component {
 			marketingTextBannerData,
 			plpSubCatData,
 			adBannerData,
+			filterData
 		} = this.state;
 
 		let marketingBanner;
@@ -227,7 +235,7 @@ export class PlpContainer extends React.Component {
 			 */
 			marketingBanner = (
 				<MarketingTextBanner
-				bannerDataPro={marketingTextBannerData}
+					bannerDataPro={marketingTextBannerData}
 				/>
 			);
 		}
@@ -242,14 +250,21 @@ export class PlpContainer extends React.Component {
 		let plpProducts;
 		if (plpData.length != 0 && adBannerData.length != 0) {
 			plpProducts = (
-				<PlpComponent plpDataPro={this.state.plpData} adBannerDataPro={adBannerData}/>
+				<PlpComponent plpDataPro={this.state.plpData} adBannerDataPro={adBannerData} />
+			);
+		}
+
+		let filterItem;
+		if (filterData.length != 0) {
+			filterItem = (
+				<FilterMain filterDataPro={filterData} />
 			);
 		}
 
 		let descriptionItem;
 		if (this.state.plpDescriptionData != null) {
 			descriptionItem = (
-				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} ref={ (divElement) => this.divElement = divElement} />
+				<DescriptionBanner descriptionDataPro={this.state.plpDescriptionData} ref={(divElement) => this.divElement = divElement} />
 			);
 		}
 
@@ -274,27 +289,38 @@ export class PlpContainer extends React.Component {
 				<section className="plpCategories">
 					<div className="container">
 						<div className="row">
+
 							{titleItem}
 							{productCountItem}
-							{this.state.isCatDetails ? null : <Sort />}
 						</div>
-						{plpProducts}
+						<div className="row no-padding">
+							<div className='filterWrapper clearfix'>
+								<div className='sort'>
+									{this.state.isCatDetails ? null : <Sort />}
+								</div>
+								{filterItem}
+							</div>
+						</div>
+					{plpProducts}
 					</div>
-				</section>
+			</section>
 
-				<hr />
-				{error &&
-					<div style={{ color: '#900' }}>
-						{error}
-					</div>
-				}
-				{isLoading &&
-					<div>Loading...</div>
-				}
-				{!hasMore &&
-					<div>No Data Left!</div>
-				}
-				{descriptionItem}
+			<hr />
+				{
+			error &&
+			<div style={{ color: '#900' }}>
+				{error}
+			</div>
+		}
+		{
+			isLoading &&
+			<div>Loading...</div>
+		}
+		{
+		!hasMore &&
+			<div>No Data Left!</div>
+		}
+		{ descriptionItem }
 			</>
 		);
 	}
@@ -305,7 +331,7 @@ const mapStateToProps = state => {
 	const stateObj = getReleventReduxState(state, 'plpContainer');
 	return {
 		ctr: stateObj.counter,
-		updatedFilter: stateObj.updateFilter,
+		updatedFilter: resolveTheFilter(stateObj.updateFilter),
 		sortingValue: stateObj.sortingValue,
 		reduxTrigger: true,
 	};

@@ -1,4 +1,5 @@
 
+
 /**
  * Function to Fetch specific data from Cookie store
  * @param {*} cname 
@@ -45,7 +46,7 @@ export function getReleventReduxState(state, reducerName) {
   5 - New Arrival
  */
 export function fetchReleventSortingValue(value) {
-console.log('ttttt',value)
+  console.log('ttttt', value)
   if (value === 'Price Low to High') {
     return 3;
   }
@@ -58,4 +59,40 @@ console.log('ttttt',value)
   else { // Recommended
     return 0;
   }
+}
+
+/**
+ * Function to save the Filter map object
+ * @param {*} updatedFilter
+ * @param {*} facetName 
+ */
+export function updateFilterMap(updatedFilter, facetName, currentFilter) {
+  var filterMap = currentFilter.updateFilter;
+  if (updatedFilter.length === 0) {
+    filterMap.delete(facetName);
+    return filterMap;
+  }
+  filterMap.set(facetName, updatedFilter)
+  return filterMap;
+}
+
+/**
+ * Function to resolve the Filter
+ * @param {*} updatedFilter
+ */
+export function resolveTheFilter(updatedFilter) {
+  var filterURL='';
+  for (const [key, value] of updatedFilter) {
+    filterURL += 'facet=';
+    value.map((option, i) => {
+      filterURL += option
+      if (value.length !== i+1) {
+         filterURL += '+'
+      }
+      
+    })
+    filterURL += '&'
+}
+  console.log('FilterURL---- ', filterURL);
+  return filterURL;
 }

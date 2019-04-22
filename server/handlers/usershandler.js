@@ -123,7 +123,7 @@ module.exports.changeUserPassword = function changeUserPassword(
           callback(errorutils.handleWCSError(response));
         }
       } else {
-        logger.error('error in userdetails while change password');
+        logger.debug('error in userdetails while change password');
         callback(errorutils.handleWCSError(response));
       }
     },
@@ -221,7 +221,7 @@ module.exports.forgotPassword = function forgotPassword(
   logger.debug('Call to Forgot Password API');
 
   if (!params.user_id || !params.otp || !params.new_password) {
-    logger.error('invalid params');
+    logger.debug('invalid params in Forgot Password');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -256,7 +256,7 @@ module.exports.forgotPassword = function forgotPassword(
         if (response.status === 200) {
           callback(null, response.body);
         } else {
-          logger.error('error in forgot password API');
+          logger.debug('error in forgot password API');
           callback(errorutils.handleWCSError(response));
         }
       } else {
