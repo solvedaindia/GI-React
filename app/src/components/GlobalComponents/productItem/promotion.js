@@ -11,7 +11,7 @@ class Promotions extends React.Component {
     
     return (
       <p className="emi-text text">
-        {promotionItem}
+         <span className="free-accessories"> EMI Starting from ₹399 </span> {/* {promotionItem} */}
         <span className="bold">10% Off</span> Free accessories
       </p>
     );

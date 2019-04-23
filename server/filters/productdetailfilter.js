@@ -27,6 +27,7 @@ module.exports.productDetailSummary = function productDetailForPLP(
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
   productDetailJson.discount = '';
+  productDetailJson.shortDescription = productDetail.shortDescription || '';
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);

@@ -68,17 +68,17 @@ export class PlpContainer extends React.Component {
 
 	componentDidMount() {
 		let path = String(this.props.location.pathname);
-			var idStr = path.split('/')[2];
-			if (idStr != undefined && idStr !== categoryId) {
-				
-				categoryId = idStr;
-				// this.setState({
-				// 	filterData: [],
-				// 	plpData: [],
-				// 	isCatDetails: true,
-				// })
-				//this.fetchPLPProductsData();
-			}
+		var idStr = path.split('/')[2];
+		if (idStr != undefined && idStr !== categoryId) {
+
+			categoryId = idStr;
+			// this.setState({
+			// 	filterData: [],
+			// 	plpData: [],
+			// 	isCatDetails: true,
+			// })
+			//this.fetchPLPProductsData();
+		}
 
 		addEventListener('scroll', this.onscroll);
 		console.log('componentDidMount');
@@ -91,20 +91,20 @@ export class PlpContainer extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		//console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
 		// if (nextProps.location.pathname !== this.props.location.pathname) {
-			// console.log('In the locationpath');
+		// console.log('In the locationpath');
 
-			let path = String(nextProps.location.pathname);
-			var idStr = path.split('/')[2];
-			if (idStr != undefined && idStr !== categoryId) {
-				this.props.plpReduxStateReset();
-				categoryId = idStr;
-				// this.setState({
-				// 	filterData: [],
-				// 	plpData: [],
-				// 	isCatDetails: true,
-				// })
-				//this.fetchPLPProductsData();
-			}
+		let path = String(nextProps.location.pathname);
+		var idStr = path.split('/')[2];
+		if (idStr != undefined && idStr !== categoryId) {
+			this.props.plpReduxStateReset();
+			categoryId = idStr;
+			// this.setState({
+			// 	filterData: [],
+			// 	plpData: [],
+			// 	isCatDetails: true,
+			// })
+			//this.fetchPLPProductsData();
+		}
 
 		// }
 		// else {
@@ -116,7 +116,7 @@ export class PlpContainer extends React.Component {
 			this.setState({ plpData: [] })
 			this.fetchPLPProductsData();
 		}
-		 if (nextProps.updatedFilter !== this.props.updatedFilter) {
+		if (nextProps.updatedFilter !== this.props.updatedFilter) {
 			console.log('In the Filter');
 			console.log('Filter Changed ---- ', nextProps.updatedFilter);
 			this.setState({ plpData: [], filterData: [], })
@@ -333,10 +333,13 @@ export class PlpContainer extends React.Component {
 						</div>
 						<div className="row no-padding">
 							<div className='filterWrapper clearfix'>
+								<div className='filter'>
+									{filterItem}
+								</div>
 								<div className='sort'>
 									{this.state.isCatDetails ? null : <Sort />}
 								</div>
-								{filterItem}
+								
 							</div>
 						</div>
 						{plpProducts}

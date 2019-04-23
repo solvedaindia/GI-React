@@ -50,14 +50,14 @@ class FilterMain extends React.Component {
         <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>X</span></button>
       )
     })
-    this.setState({ 
+    this.setState({
       selectedFilters: item,
       appliedFilters: appliedFilltersArr
-     });
+    });
   }
 
   clearTheSelectedFilter(index) {
-    console.log('All Data --',this.props.updatedFilter);
+    console.log('All Data --', this.props.updatedFilter);
     var selectionFacetValue = this.state.appliedFilters[index].value;
     //console.log(this.state.appliedFilters[index]);
 
@@ -70,12 +70,12 @@ class FilterMain extends React.Component {
         items.push(option.value);
         facetItems.push(option);
       })
-      
+
       if (items.includes(selectionFacetValue)) {
         selectedFacetName = key;
         items.filter(function (value, i, arr) {
           if (value != selectionFacetValue) {
-            console.log('returnn -- ',facetItems[i]);
+            console.log('returnn -- ', facetItems[i]);
             selectedFacetValuesArr.push(facetItems[i]);
             //return facetItems[i];
           }
@@ -83,7 +83,7 @@ class FilterMain extends React.Component {
       }
     }
 
-    console.log('Deleted Facet -- ',selectedFacetName, selectedFacetValuesArr);
+    console.log('Deleted Facet -- ', selectedFacetName, selectedFacetValuesArr);
     this.props.onFilterUpdate(selectedFacetValuesArr, selectedFacetName)
 
   }
@@ -92,7 +92,7 @@ class FilterMain extends React.Component {
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
         if (this.state.appliedFilters[index].label === option.label) {
-          console.log('returnmmm',key);
+          console.log('returnmmm', key);
           return key;
         }
       })
@@ -103,9 +103,10 @@ class FilterMain extends React.Component {
     console.log('Filter Main', this.props.updatedFilter);
     return (
       <>
+        <h4 className='heading'>Filter</h4>
         {this.state.filterItem}
         <div className='clearfix'></div>
-        <div >
+        <div className='filter-keywords'>
           {this.state.selectedFilters}
         </div>
       </>
