@@ -10,7 +10,7 @@ const SubCategoriesData = (props) => {
                     routePath = '/plp/12540';
                 }
                 else {
-                    routePath = '/plp';
+                    routePath = '/plp/13506';
                 }
                 return (
                     

@@ -19,11 +19,9 @@ class Image extends React.Component {
     var imageItem;
     if (this.props.data === '') {
       imageItem = <ImageLoader className="imgfullwidth" src={require('../../../../public/images/plpAssests/placeholder-image.png')} alt="sofa" />
-      console.log('Noimage---',this.props.data);
     }
     else {
       imageItem = <ImageLoader className="imgfullwidth" src={'https://192.168.0.36:8443' + this.props.data} alt="sofa" />
-      console.log('image---',this.props.data);
     }
     
     return (

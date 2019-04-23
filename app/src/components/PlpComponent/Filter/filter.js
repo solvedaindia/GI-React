@@ -52,6 +52,7 @@ class Filter extends React.Component {
         })
       }
     }
+    
     //this.setState({facetArr: filteredArr})
 
     this.setState({
@@ -72,13 +73,19 @@ class Filter extends React.Component {
     const selectedFacet = this.props.dataPro.facetValues[index];
 
     let filteredArr = [...this.state.facetArr];
-    if (!this.state.facetArr.includes(selectedFacet.value)) {
-      filteredArr.push(selectedFacet.value)
+    //console.log('FilterArr---',this.state.facetArr);
+    const extFacetArr = this.state.facetArr.map(item => {
+      console.log('exstractedArr --- ',item.value);
+      return item.value;
+    })
+    if (!extFacetArr.includes(selectedFacet.value)) {
+      filteredArr.push(selectedFacet)
       // this.setState({ facetArr: filteredArr })
     }
     else {
       filteredArr = this.state.facetArr.filter(function (value, i, arr) {
-        if (value != selectedFacet.value) {
+        console.log('else value -- ',value, selectedFacet);
+        if (value.value != selectedFacet.value) {
           return value;
         }
       });
@@ -117,13 +124,15 @@ class Filter extends React.Component {
 
     
     this.setState({facetArr: filteredArr})
-    this.filterOptions(filteredArr);
+    const extFacetArr = filteredArr.map(item => {
+      //console.log('exstractedArr --- ',item.value);
+      return item.value;
+      
+    })
+    this.filterOptions(extFacetArr);
   }
 
 
-  componentWillReceiveProps(nextProps) {
-    // console.log('Filter acomponentWillReceiveProps ----- ', nextProps);
-  }
 
   onApplyBtnClick() {
     console.log('TotalFace---', this.state.facetArr);
@@ -133,7 +142,7 @@ class Filter extends React.Component {
   }
 
   filterOptions(alreadyAddedFiltersArr) {
-
+    console.log('Redux Filter -- ',alreadyAddedFiltersArr);
     //return this.props.dataPro.facetValues.map((option, i) => {
     var item = this.props.dataPro.facetValues.map((option, i) => {
 

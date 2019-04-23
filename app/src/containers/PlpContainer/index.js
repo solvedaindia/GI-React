@@ -68,14 +68,20 @@ export class PlpContainer extends React.Component {
 
 	componentDidMount() {
 		let path = String(this.props.location.pathname);
-		var idStr = path.split('/')[2];
-		if (idStr != undefined) {
-			categoryId = idStr;
-			console.log('PLP Main------', idStr);
-		}
+			var idStr = path.split('/')[2];
+			if (idStr != undefined && idStr !== categoryId) {
+				
+				categoryId = idStr;
+				// this.setState({
+				// 	filterData: [],
+				// 	plpData: [],
+				// 	isCatDetails: true,
+				// })
+				//this.fetchPLPProductsData();
+			}
 
 		addEventListener('scroll', this.onscroll);
-
+		console.log('componentDidMount');
 		this.fetchSubCategoryData();
 		this.fetchMarketingTextBannerData();
 		this.fetchPLPProductsData();
@@ -83,11 +89,35 @@ export class PlpContainer extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		//console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
+		// if (nextProps.location.pathname !== this.props.location.pathname) {
+			// console.log('In the locationpath');
+
+			let path = String(nextProps.location.pathname);
+			var idStr = path.split('/')[2];
+			if (idStr != undefined && idStr !== categoryId) {
+				this.props.plpReduxStateReset();
+				categoryId = idStr;
+				// this.setState({
+				// 	filterData: [],
+				// 	plpData: [],
+				// 	isCatDetails: true,
+				// })
+				//this.fetchPLPProductsData();
+			}
+
+		// }
+		// else {
+		// 	this.props.history.push('/cat')
+		// }
+
 		if (nextProps.sortingValue !== this.props.sortingValue) {
+			console.log('In the Sorrting');
 			this.setState({ plpData: [] })
 			this.fetchPLPProductsData();
 		}
-		if (nextProps.updatedFilter !== this.props.updatedFilter) {
+		 if (nextProps.updatedFilter !== this.props.updatedFilter) {
+			console.log('In the Filter');
 			console.log('Filter Changed ---- ', nextProps.updatedFilter);
 			this.setState({ plpData: [], filterData: [], })
 			this.fetchPLPProductsData();
@@ -298,7 +328,6 @@ export class PlpContainer extends React.Component {
 				<section className="plpCategories">
 					<div className="container">
 						<div className="row">
-
 							{titleItem}
 							{productCountItem}
 						</div>
@@ -327,7 +356,7 @@ export class PlpContainer extends React.Component {
 				}
 				{
 					!hasMore &&
-					<div>No Data Left!</div>
+					<div>No Data to display!</div>
 				}
 				{descriptionItem}
 			</>
@@ -349,6 +378,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
 	onIncrementCounter: () => dispatch(actionCreators.increment()),
 	onAdBannerIndexUpdate: (adBannerData) => dispatch(actionCreators.adBannerDataAction(adBannerData)),
+	plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
 });
 
 const withConnect = connect(

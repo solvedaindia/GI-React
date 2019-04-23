@@ -49,3 +49,10 @@ export const sortingAction = (value) => {
     val: value
   }
 }
+
+export const resetPLPReduxState = (value) => {
+  console.log('resetPLPReduxStqte');
+  return {
+    type: actionTypes.RESETPLPREDUXSTATE,
+  }
+}
