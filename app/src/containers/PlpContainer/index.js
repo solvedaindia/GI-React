@@ -69,13 +69,19 @@ export class PlpContainer extends React.Component {
 	componentDidMount() {
 		let path = String(this.props.location.pathname);
 		var idStr = path.split('/')[2];
-		if (idStr != undefined) {
+		if (idStr != undefined && idStr !== categoryId) {
+
 			categoryId = idStr;
-			console.log('PLP Main------', idStr);
+			// this.setState({
+			// 	filterData: [],
+			// 	plpData: [],
+			// 	isCatDetails: true,
+			// })
+			//this.fetchPLPProductsData();
 		}
 
 		addEventListener('scroll', this.onscroll);
-
+		console.log('componentDidMount');
 		this.fetchSubCategoryData();
 		this.fetchMarketingTextBannerData();
 		this.fetchPLPProductsData();
@@ -83,11 +89,35 @@ export class PlpContainer extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		//console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
+		// if (nextProps.location.pathname !== this.props.location.pathname) {
+		// console.log('In the locationpath');
+
+		let path = String(nextProps.location.pathname);
+		var idStr = path.split('/')[2];
+		if (idStr != undefined && idStr !== categoryId) {
+			this.props.plpReduxStateReset();
+			categoryId = idStr;
+			// this.setState({
+			// 	filterData: [],
+			// 	plpData: [],
+			// 	isCatDetails: true,
+			// })
+			//this.fetchPLPProductsData();
+		}
+
+		// }
+		// else {
+		// 	this.props.history.push('/cat')
+		// }
+
 		if (nextProps.sortingValue !== this.props.sortingValue) {
+			console.log('In the Sorrting');
 			this.setState({ plpData: [] })
 			this.fetchPLPProductsData();
 		}
 		if (nextProps.updatedFilter !== this.props.updatedFilter) {
+			console.log('In the Filter');
 			console.log('Filter Changed ---- ', nextProps.updatedFilter);
 			this.setState({ plpData: [], filterData: [], })
 			this.fetchPLPProductsData();
@@ -147,9 +177,18 @@ export class PlpContainer extends React.Component {
 
 			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&' + this.props.updatedFilter
 			console.log('PLPURL---', plpURL);
+			console.log('categorId---', categoryId);
+			var newStoreId = '';
+			if (categoryId === '12540') {
+				newStoreId = '10151'
+			}
+			else {
+				newStoreId = '10801'
+			}
+			console.log('categorId---', categoryId, newStoreId);
 			axios
 				.get(plpURL, {
-					headers: { store_id: '10801', access_token: accessToken, 'cat_details': this.state.isCatDetails },
+					headers: { store_id: newStoreId, access_token: accessToken, 'cat_details': this.state.isCatDetails },
 				})
 				.then(response => {
 					console.log('PLP Response----', response.data);
@@ -291,26 +330,36 @@ export class PlpContainer extends React.Component {
 						<div className="row">
 							{titleItem}
 							{productCountItem}
-							{this.state.isCatDetails ? null : <Sort />}
-							{/* {this.state.isCatDetails ? null : <FilterMain filterDataPro={filterData}/>} */}
-							{/* <FilterMain filterDataPro={filterData} /> */}
-							{filterItem}
+						</div>
+						<div className="row no-padding">
+							<div className='filterWrapper clearfix'>
+								<div className='filter'>
+									{filterItem}
+								</div>
+								<div className='sort'>
+									{this.state.isCatDetails ? null : <Sort />}
+								</div>
+								
+							</div>
 						</div>
 						{plpProducts}
 					</div>
 				</section>
 
 				<hr />
-				{error &&
+				{
+					error &&
 					<div style={{ color: '#900' }}>
 						{error}
 					</div>
 				}
-				{isLoading &&
+				{
+					isLoading &&
 					<div>Loading...</div>
 				}
-				{!hasMore &&
-					<div>No Data Left!</div>
+				{
+					!hasMore &&
+					<div>No Data to display!</div>
 				}
 				{descriptionItem}
 			</>
@@ -332,6 +381,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
 	onIncrementCounter: () => dispatch(actionCreators.increment()),
 	onAdBannerIndexUpdate: (adBannerData) => dispatch(actionCreators.adBannerDataAction(adBannerData)),
+	plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
 });
 
 const withConnect = connect(
