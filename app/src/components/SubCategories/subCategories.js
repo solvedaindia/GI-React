@@ -5,11 +5,9 @@ const SubCategoriesData = (props) => {
     return (
         <ul className='subCat'>
             {props.subCategoryArray.map((subCategoryData, index) => {
-                
                 var routePath = '';
-                if (subCategoryData.categoryName === 'Sofas') {
-                    console.log('SubCat Data-----',subCategoryData);
-                    routePath = '/plp/13506';
+                if (subCategoryData.categoryName === 'Tables') {
+                    routePath = '/plp/12540';
                 }
                 else {
                     routePath = '/plp';

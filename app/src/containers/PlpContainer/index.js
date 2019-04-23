@@ -147,9 +147,18 @@ export class PlpContainer extends React.Component {
 
 			var plpURL = plpAPI + categoryId + '?' + 'pagenumber=' + this.state.pageNumber + '&' + 'pagesize=' + this.state.pageSize + '&' + 'orderby=' + this.props.sortingValue + '&' + this.props.updatedFilter
 			console.log('PLPURL---', plpURL);
+			console.log('categorId---', categoryId);
+			var newStoreId = '';
+			if (categoryId === '12540') {
+				newStoreId = '10151'
+			}
+			else {
+				newStoreId = '10801'
+			}
+			console.log('categorId---', categoryId, newStoreId);
 			axios
 				.get(plpURL, {
-					headers: { store_id: '10801', access_token: accessToken, 'cat_details': this.state.isCatDetails },
+					headers: { store_id: newStoreId, access_token: accessToken, 'cat_details': this.state.isCatDetails },
 				})
 				.then(response => {
 					console.log('PLP Response----', response.data);
@@ -301,26 +310,26 @@ export class PlpContainer extends React.Component {
 								{filterItem}
 							</div>
 						</div>
-					{plpProducts}
+						{plpProducts}
 					</div>
-			</section>
+				</section>
 
-			<hr />
+				<hr />
 				{
-			error &&
-			<div style={{ color: '#900' }}>
-				{error}
-			</div>
-		}
-		{
-			isLoading &&
-			<div>Loading...</div>
-		}
-		{
-		!hasMore &&
-			<div>No Data Left!</div>
-		}
-		{ descriptionItem }
+					error &&
+					<div style={{ color: '#900' }}>
+						{error}
+					</div>
+				}
+				{
+					isLoading &&
+					<div>Loading...</div>
+				}
+				{
+					!hasMore &&
+					<div>No Data Left!</div>
+				}
+				{descriptionItem}
 			</>
 		);
 	}
