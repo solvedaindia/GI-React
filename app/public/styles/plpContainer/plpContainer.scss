@@ -47,6 +47,7 @@ section.tablecarousel {
   }
   .Imgbox {
     padding: 0 0 10px 0;
+    min-height: 174px;
     .imgfullwidth {
       width: 100%;
     }
@@ -83,7 +84,10 @@ section.tablecarousel {
   }
 }
 
-.plpCategories {
+.plpCategories {  
+  .plp-products{
+    padding:64px 0 0 0;
+  }
   .grid3 {
     display: flex;
     flex-wrap: wrap;
@@ -291,6 +295,153 @@ section.tablecarousel {
 //------------------- SORTING -------------------//
 .filterWrapper{
   margin: 0 0 15px 0;  
+  position: relative;
+  .filter{
+    width: 84%;
+    float: left;
+    .heading{
+      font-family: $font-bold;
+      font-size: 14px;
+      padding: 0 0 15px 0px;
+      margin: 0;
+    }
+
+    .dropdown_filter {
+      position: relative;      
+      &__filter {
+        float: left;   
+        background:$colorwhite;
+        border: 1px solid $lightgrey;
+        border-radius: 1px;
+        max-width: 181px;
+        z-index: 1;
+        width: 50%;
+        background: $colorwhite;  
+        
+        &:last-child{
+          border-right: 1px solid $lightgrey;
+        }
+        
+      }
+      &__arrow {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -20px;
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 20px solid #eee;
+        border-radius: 3px;
+      }
+    
+      &__list {   
+        background:$colorwhite;
+        border: 1px solid $lightgrey;
+        top: 51px;    
+        transition: max-height 0.2s ease-out;        
+        max-height: 0;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;    
+        position: absolute;
+        z-index: 1;
+        padding:20px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
+        // opacity: 0;
+        visibility: hidden;
+        .filterbtnWrapper{
+          text-align: center;
+        }
+    
+        &--active {
+          max-height: 1000px;
+          // opacity: 1;
+          visibility: visible;
+        }
+        .list{
+          display:inline-block;
+          max-width: 30%;
+          
+          .input_box{
+            margin:0 5px 0 0;
+            .inputCheck{
+              background-color: #ccc;
+            }
+          }  
+          .label_text{
+            padding: 0 30px 26px 0;
+            color:$battleshipGrey;
+          }        
+          .input_box,.label_text{
+            display:inline-block;
+          }
+          .dropdown__list-item{
+            display: flex;
+          }
+        }
+      }
+    
+      &__list-item {   
+        cursor: pointer;
+        list-style: none;
+        padding: 15px;
+        position: relative;
+        display: flex;
+    
+        &--active {
+          background: #f4f4f4;
+        }
+    
+        &:hover {
+          background: #f4f4f4;
+        }
+
+        .dropdownArrow {
+          width: 11px;
+          height: 11px;
+          position: absolute;
+          right: 14px;
+          top: 21px;          
+        }
+      }
+    
+      &__toggle {
+        &:hover {
+          background:$colorwhite;
+        }
+    
+        background: $colorwhite;
+      }
+    
+      .filterbtnWrapper{
+        padding:30px 0 0 0;
+        .btn{
+          padding:12px 60px;
+          border-radius: 0;
+        }
+      }
+      &__cancelBtn {        
+        border: solid 1px $black;
+        background-color: $colorwhite;
+      }
+    
+      &__applyBtn {
+        margin-left: 15px;
+        color:$colorwhite;       
+        background-color: $black;
+        border: 1px solid $black;
+      }
+    }
+
+
+
+
+
+  }
+  /* Sorting Filter
+  -----------------------------------------***/
   .sort{
     width:15%;    
     float:right;
@@ -397,14 +548,6 @@ section.tablecarousel {
   }
 }
 
-.dropdownArrow {
-  width: 11px;
-  height: 11px;
-  position: absolute;
-  right: 8px;
-  top: 15px;
-}
-
 //ImageLoader
 @keyframes fadeInImg {
   from {
@@ -430,93 +573,6 @@ section.tablecarousel {
   animation-delay: 0.1s;
 }
 
-//Filter
-.dropdown_filter {
-  &__filter {
-    float: left;
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 1px;
-    max-width: 181px;
-    z-index: 1;
-    width: 50%;
-    background: $colorwhite;
-    // min-height: 250px;
-  }
-  &__arrow {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -20px;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid #eee;
-    border-radius: 3px;
-  }
-
-  &__list {
-    width: 71%;
-    background: white;
-    border: 1px solid #eeeeee;
-    top: 665px;
-    // opacity: 0;
-    transition: max-height 0.2s ease-out;
-    // transition: opacity .15s ease-out;
-    max-height: 0;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
-    position: absolute;
-    z-index: 1;
-
-    &--active {
-      max-height: 1000px;
-      opacity: 1;
-    }
-  }
-
-  &__list-item {
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    list-style: none;
-    padding: 15px;
-
-    &--active {
-      background: #f4f4f4;
-    }
-
-    &:hover {
-      background: #f4f4f4;
-    }
-  }
-
-  &__toggle {
-    &:hover {
-      background: #fff;
-    }
-
-    background: #fff;
-  }
-
-  &__cancelBtn {
-    width: 160px;
-    height: 44px;
-    border: solid 1px #000000;
-    background-color: #ffffff;
-  }
-
-  &__applyBtn {
-    margin-left: 15px;
-    color:white;
-    width: 160px;
-    height: 44px;
-    background-color: #070707;
-  }
-}
 
 //Filter Selection
 .filterSelection_btn {

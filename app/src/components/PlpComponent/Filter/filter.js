@@ -143,16 +143,22 @@ class Filter extends React.Component {
         console.log('ITsChecked----', checkboxItem);
       }
       else {
-        checkboxItem = <input className={'checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
+        checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
       return (
-        <div className='col-md-4'>
-          {checkboxItem}
-          <li onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
-            {option.label + ' (' + option.count + ')'}
-          </li>
-        </div>
+        <li className='list'>          
+          <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
+          <div className='input_box'>
+          {checkboxItem}          
+          </div>
+          
+          <div className='label_text'>
+          {option.label + ' (' + option.count + ')'}
+          </div>
+            
+          </div>
+        </li>
       );
     });
     this.setState({
@@ -176,9 +182,9 @@ class Filter extends React.Component {
           </div>
 
           <ul className={"dropdown_filter__list " + (this.state.active ? 'dropdown_filter__list--active' : '')}>{this.state.facetItem}
-            <div className="col-md-offset-4">
-              <button onClick={() => this.onCancelBtnClick()} className='dropdown_filter__cancelBtn'>Cancel</button>
-              <button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn'>Apply</button>
+            <div className="filterbtnWrapper">
+              <button onClick={() => this.onCancelBtnClick()} className='dropdown_filter__cancelBtn btn'>Cancel</button>
+              <button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn btn'>Apply</button>
             </div>
           </ul>
         </div>

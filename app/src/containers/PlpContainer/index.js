@@ -289,16 +289,19 @@ export class PlpContainer extends React.Component {
 				<section className="plpCategories">
 					<div className="container">
 						<div className="row">
-
 							{titleItem}
 							{productCountItem}
 						</div>
 						<div className="row no-padding">
 							<div className='filterWrapper clearfix'>
+							    <div className='filter'>
+								<h4 className='heading'>Filter</h4>
+								{filterItem}
+								</div>
 								<div className='sort'>
 									{this.state.isCatDetails ? null : <Sort />}
 								</div>
-								{filterItem}
+								
 							</div>
 						</div>
 					{plpProducts}
