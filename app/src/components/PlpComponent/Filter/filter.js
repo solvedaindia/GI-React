@@ -147,19 +147,24 @@ class Filter extends React.Component {
     var item = this.props.dataPro.facetValues.map((option, i) => {
 
       var checkboxItem;
+      var customSelectionBoxId;
       if (alreadyAddedFiltersArr.includes(option.value)) {
-        checkboxItem = <input className={'checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id="chk" name="scales" />
+        customSelectionBoxId = 'selected_'+ this.props.dataPro.facetName+i
+        checkboxItem = <input className={'inputCheck checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id={customSelectionBoxId} name="scales" />
         console.log('ITsChecked----', checkboxItem);
       }
       else {
-        checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
+        customSelectionBoxId = this.props.dataPro.facetName+i
+        // checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
+        checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id={customSelectionBoxId} name="scales" />
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
       return (
         <li className='list'>
           <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
             <div className='input_box'>
-              {checkboxItem}
+              {checkboxItem}            
+              <label class="lblCheck" for={customSelectionBoxId}></label>
             </div>
 
             <div className='label_text'>
