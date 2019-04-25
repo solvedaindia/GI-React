@@ -429,6 +429,7 @@ section.tablecarousel {
 
             .inputCheck[type="checkbox"]:checked + .lblCheck {
               background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+              background-size: contain;
               padding-left: 16px;
             }
           }
