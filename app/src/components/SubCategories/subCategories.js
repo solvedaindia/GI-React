@@ -9,6 +9,9 @@ const SubCategoriesData = (props) => {
                 if (subCategoryData.categoryName === 'Tables') {
                     routePath = '/plp/12540';
                 }
+                else if (subCategoryData.categoryName === 'Sofas') {
+                    routePath = '/plp/13502';
+                }
                 else {
                     routePath = '/plp/13506';
                 }

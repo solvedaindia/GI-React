@@ -194,6 +194,8 @@ export class PlpContainer extends React.Component {
 					console.log('PLP Response----', response.data);
 					if (this.state.isCatDetails) {
 						this.fetchAdBannerData();
+						const coloumnValue = response.data.data.categoryDetails.columns
+						this.props.initialValuesUpdate(coloumnValue);
 						this.setState({
 							categoryDetail: response.data.data.categoryDetails,
 						})
@@ -295,6 +297,12 @@ export class PlpContainer extends React.Component {
 
 		let filterItem;
 		if (filterData.length != 0) {
+			// filterData.push(filterData[0])
+			// filterData.push(filterData[1])
+			// filterData.push(filterData[2])
+			// filterData.push(filterData[3])
+			// console.log('FilterData---', filterData);
+
 			filterItem = (
 				<FilterMain filterDataPro={filterData} />
 			);
@@ -339,14 +347,13 @@ export class PlpContainer extends React.Component {
 								<div className='sort'>
 									{this.state.isCatDetails ? null : <Sort />}
 								</div>
-								
 							</div>
 						</div>
 						{plpProducts}
 					</div>
 				</section>
 
-				<hr />
+
 				{
 					error &&
 					<div style={{ color: '#900' }}>
@@ -355,11 +362,15 @@ export class PlpContainer extends React.Component {
 				}
 				{
 					isLoading &&
-					<div>Loading...</div>
+					<div className='lazyloading-Indicator'>
+						<img id="me" className='loadingImg' src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+					</div>
 				}
 				{
 					!hasMore &&
-					<div>No Data to display!</div>
+					<div className='noProductFound'>
+						No Products Found
+					</div>
 				}
 				{descriptionItem}
 			</>
@@ -379,6 +390,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+	initialValuesUpdate: (coloumn) => dispatch(actionCreators.updateInitialValues(coloumn)),
 	onIncrementCounter: () => dispatch(actionCreators.increment()),
 	onAdBannerIndexUpdate: (adBannerData) => dispatch(actionCreators.adBannerDataAction(adBannerData)),
 	plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),

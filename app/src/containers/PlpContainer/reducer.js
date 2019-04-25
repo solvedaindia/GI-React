@@ -12,6 +12,8 @@ import { fetchReleventSortingValue, updateFilterMap } from '../../utils/utilityM
 const initialState = {
   sortingValue: 0,
   adBannerPos: 12,
+  staticAdBannerPos: 0,
+  columnLayout: 2,
   adBannerCurrentIndex: 0,
   adBannerData: [],
   updateFilter: new Map(),
@@ -34,7 +36,7 @@ function plpContainerReducer(state = initialState, action) {
     case actionTypes.ADBANNERCOUNT:
       return {
         ...state,
-        adBannerPos: action.val + 12,
+        adBannerPos: action.val + state.staticAdBannerPos,
         adBannerCurrentIndex: action.showIndex + 1
       }
     case actionTypes.ADBANNERDATA:
@@ -57,6 +59,13 @@ function plpContainerReducer(state = initialState, action) {
         adBannerCurrentIndex: 0,
         adBannerData: [],
         updateFilter: new Map(),
+      }
+    case actionTypes.INITIALUPDATE:
+      return {
+        ...state,
+        staticAdBannerPos: action.bannerPosValue,
+        adBannerPos: action.bannerPosValue,
+        columnLayout: action.coloumnValue,
       }
     default:
       return state;

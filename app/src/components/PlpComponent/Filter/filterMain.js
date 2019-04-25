@@ -11,28 +11,89 @@ import { getReleventReduxState } from '../../../utils/utilityManager';
 
 import Filter from './filter';
 
+{/* <button style="
+    float: left;
+    background: transparent;
+    border: 0;
+    padding: 16px;
+    color: #687ed8;
+">More</button>
+
+float: left;
+background: transparent;
+border: 0;
+padding: 16px;
+color: #687ed8;
+} */}
+
+// - Fewer filters
+// + 3 filters
+
 class FilterMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       filterItem: null,
+      allFilters: [],
+      splitFilters: [],
       selectedFilters: null,
+      filterBtnTitle: null,
       appliedFilters: [],
+      isFilterExpend: false,
     };
 
     this.clearTheSelectedFilter = this.clearTheSelectedFilter.bind(this)
+    this.moreFilterBtnClick = this.moreFilterBtnClick.bind(this)
   }
 
   componentDidMount() {
     if (this.props.filterDataPro) {
-      const item = this.props.filterDataPro.map((item, index) => {
+      const allItems = this.props.filterDataPro.map((item, index) => {
         return (
           <Filter key={index} dataPro={item} />
         )
       })
-      this.setState({ filterItem: item });
+
+      var splitItems = [];
+      var leftOverFilterCount;
+      if (this.props.filterDataPro.length > 4) {
+        splitItems = allItems.slice(0, 4);
+        leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
+        //const btn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{leftOverFilterCount}</button>
+        //splitItems.push(btn)
+      }
+      else {
+        splitItems = allItems;
+      }
+
+      this.setState({ 
+        allFilters: allItems,
+        splitFilters: splitItems,
+        filterItem: splitItems,
+        filterBtnTitle: leftOverFilterCount
+       });
     }
     this.fetchAllAppliedFilters();
+  }
+
+  moreFilterBtnClick() {
+    console.log('isFilter--',this.state.isFilterExpend);
+    var ssss = this.state.filterBtnTitle
+    var data;
+    if ( this.state.isFilterExpend) {
+      ssss = `+ ${this.state.allFilters.length - this.state.splitFilters.length} Filters`   //'+ ' + this.state.allFilters.length - this.state.splitFilters.length + ' Filters';
+      data = this.state.splitFilters
+    }
+    else {
+      ssss = '- Fewer filters';
+      data = this.state.allFilters
+    }
+    
+    this.setState({ 
+      filterItem: data,
+      filterBtnTitle: ssss,
+      isFilterExpend: !this.state.isFilterExpend,
+     });
   }
 
   fetchAllAppliedFilters() {
@@ -100,11 +161,17 @@ class FilterMain extends React.Component {
   }
 
   render() {
-    console.log('Filter Main', this.props.updatedFilter);
+    console.log('Filter Main Title---', this.state.filterBtnTitle);
+    var moreFilterBtn = null;
+    if (this.props.filterDataPro.length > 4) {
+      moreFilterBtn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{this.state.filterBtnTitle}</button>
+    }
+  
     return (
       <>
         <h4 className='heading'>Filter</h4>
         {this.state.filterItem}
+        {moreFilterBtn}
         <div className='clearfix'></div>
         <div className='filter-keywords'>
           {this.state.selectedFilters}

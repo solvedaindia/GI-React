@@ -84,9 +84,9 @@ section.tablecarousel {
   }
 }
 
-.plpCategories {  
-  .plp-products{
-    padding:64px 0 0 0;
+.plpCategories {
+  .plp-products {
+    padding: 64px 0 60px 0;
   }
   .grid3 {
     display: flex;
@@ -212,20 +212,19 @@ section.tablecarousel {
             left: 0;
             right: 0;
           }
-          .name,.description{
+          .name,
+          .description {
             display: block;
           }
-          .name{
-            font-family:$font-bold;
+          .name {
+            font-family: $font-bold;
           }
-          .description{
+          .description {
             font-family: $font-light;
             font-size: 11px;
           }
         }
-        
 
-        
         .text {
           color: $black;
           padding: 5px 0 0 0;
@@ -265,7 +264,7 @@ section.tablecarousel {
 
 /** Descripton */
 .descriptionBanner {
-  background: $colorwhite;
+  background: $greybg;
   padding: 60px 0;
 
   .heading {
@@ -306,36 +305,48 @@ section.tablecarousel {
 }
 
 //------------------- SORTING -------------------//
-.filterWrapper{
-  margin: 0 0 15px 0;  
-  
+.filterWrapper {
+  margin: 0 0 15px 0;
+
   position: relative;
-  .filter{
+  .filter {
     width: 84%;
     float: left;
-    .heading{
+    .heading {
       font-family: $font-bold;
       font-size: 14px;
       padding: 0 0 15px 0px;
       margin: 0;
     }
+    .moreFilterBtn {
+      float: left;
+      background: transparent;
+      border: 0;
+      padding: 16px;
+      color: $greyish;
+      text-decoration: underline;
+      font-size: 14px;
+      font-family: $font-light;
+      &:focus {
+        outline: 0;
+      }
+    }
 
     .dropdown_filter {
-      position: relative;      
+      position: relative;
       &__filter {
-        float: left;   
-        background:$colorwhite;
+        float: left;
+        background: $colorwhite;
         border: 1px solid $lightgrey;
         border-radius: 1px;
         max-width: 181px;
         z-index: 1;
         width: 50%;
-        background: $colorwhite;  
+        background: $colorwhite;
 
-        &:last-child{
+        &:last-child {
           border-right: 1px solid $lightgrey;
         }
-
       }
       &__arrow {
         position: absolute;
@@ -350,22 +361,22 @@ section.tablecarousel {
         border-radius: 3px;
       }
 
-      &__list {   
-        background:$colorwhite;
+      &__list {
+        background: $colorwhite;
         border: 1px solid $lightgrey;
-        top: 51px;    
-        transition: max-height 0.2s ease-out;        
+        top: 51px;
+        transition: max-height 0.2s ease-out;
         max-height: 0;
         overflow: hidden;
         margin: 0;
-        padding: 0;    
+        padding: 0;
         position: absolute;
         z-index: 1;
-        padding:20px;
+        padding: 20px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
         // opacity: 0;
         visibility: hidden;
-        .filterbtnWrapper{
+        .filterbtnWrapper {
           text-align: center;
         }
 
@@ -374,30 +385,69 @@ section.tablecarousel {
           // opacity: 1;
           visibility: visible;
         }
-        .list{
-          display:inline-block;
-          max-width: 30%;
+        .list {
+          display: inline-block;
 
-          .input_box{
-            margin:0 5px 0 0;
-            .inputCheck{
-              background-color: #ccc;
+          .input_box {
+            margin: 0 15px 0 0;
+
+            .inputCheck[type="checkbox"] {
+              display: none;
             }
-          }  
-          .label_text{
-            padding: 0 30px 26px 0;
-            color:$battleshipGrey;
-          }        
-          .input_box,.label_text{
-            display:inline-block;
+
+            /* Input Checkbox Radio
+            -----------------------------*/
+            .lblradio {
+              position: relative;
+              .circle {
+                border-radius: 50%;
+                width: 100%;
+              }
+            }
+
+            .inputCheck[type="checkbox"] + .lblradio {
+              display: block;
+              height: 22px;
+              width: 22px;
+            }
+            .inputCheck[type="checkbox"]:checked + .lblradio {
+              .circle {
+                border: 2px solid $black;
+                padding: 2px;
+              }
+            }
+
+            /* Input Checkbox Squere
+            -----------------------------*/
+            .inputCheck[type="checkbox"] + .lblCheck {
+              background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
+              display: inline;
+              min-height: 16px;
+              padding-left: 16px;
+              background-size: contain;
+            }
+
+            .inputCheck[type="checkbox"]:checked + .lblCheck {
+              background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+              padding-left: 16px;
+            }
           }
-          .dropdown__list-item{
+          .label_text {
+            padding: 0 30px 26px 0;
+            color: $battleshipGrey;
+          }
+          .input_box,
+          .label_text {
+            display: inline-block;
+          }
+          .dropdown__list-item {
             display: flex;
+            min-width: 160px;
           }
         }
       }
 
-      &__list-item {   
+      &__list-item {
         cursor: pointer;
         list-style: none;
         padding: 15px;
@@ -417,64 +467,59 @@ section.tablecarousel {
           height: 11px;
           position: absolute;
           right: 14px;
-          top: 21px;          
+          top: 21px;
         }
       }
 
       &__toggle {
         &:hover {
-          background:$colorwhite;
+          background: $colorwhite;
         }
 
         background: $colorwhite;
       }
 
-      .filterbtnWrapper{
-        padding:30px 0 0 0;
-        .btn{
-          padding:12px 60px;
+      .filterbtnWrapper {
+        padding: 30px 0 0 0;
+        .btn {
+          padding: 12px 60px;
           border-radius: 0;
         }
       }
-      &__cancelBtn {        
+      &__cancelBtn {
         border: solid 1px $black;
         background-color: $colorwhite;
       }
 
       &__applyBtn {
         margin-left: 15px;
-        color:$colorwhite;       
+        color: $colorwhite;
         background-color: $black;
         border: 1px solid $black;
       }
     }
-
-
-
-
-
   }
   /* Sorting Filter
   -----------------------------------------***/
 
-  .sort{
-    width:15%;    
-    float:right;
-    .heading{
+  .sort {
+    width: 15%;
+    float: right;
+    .heading {
       font-family: $font-bold;
       font-size: 14px;
       padding: 0 0 15px 15px;
       margin: 0;
     }
 
-    .dropdown {   
-        position: relative;
-        background: $colorwhite;        
-        z-index: 1;
-        right: 0;
-        width: 100%;
-      
-      .dropdowntoggle{
+    .dropdown {
+      position: relative;
+      background: $colorwhite;
+      z-index: 1;
+      right: 0;
+      width: 100%;
+
+      .dropdowntoggle {
         border: 1px solid $lightGrey;
 
         .dropdownArrow {
@@ -482,19 +527,18 @@ section.tablecarousel {
           height: 11px;
           position: absolute;
           right: 14px;
-          top: 19px;          
+          top: 19px;
         }
-
       }
       .dropdownlist {
         border: 1px solid $lightGrey;
         border-top: none;
         top: 51px;
-      } 
-      .dropdownlist.dropdownlistactive{
-        top:52px;
-      }    
-      
+      }
+      .dropdownlist.dropdownlistactive {
+        top: 52px;
+      }
+
       &arrow {
         position: absolute;
         left: 50%;
@@ -507,9 +551,9 @@ section.tablecarousel {
         border-bottom: 20px solid rgb(168, 27, 27);
         border-radius: 3px;
       }
-      
-      &list {        
-        transition: max-height 0.2s ease-out;          
+
+      &list {
+        transition: max-height 0.2s ease-out;
         max-height: 0;
         overflow: hidden;
         margin: 0;
@@ -518,51 +562,46 @@ section.tablecarousel {
         position: absolute;
         z-index: 1;
         width: 100%;
-        
-    
+
         &active {
           max-height: 1000px;
           opacity: 1;
         }
-        .link{
-          color:$battleshipGrey;
+        .link {
+          color: $battleshipGrey;
           text-decoration: none;
-          &:hover{
-            color:$cerulean;
+          &:hover {
+            color: $cerulean;
             font-weight: 600;
           }
         }
       }
-      
+
       &list-item {
         border-bottom: 1px solid $lightGrey;
         cursor: pointer;
         list-style: none;
         padding: 15px;
         background: $colorwhite;
-        color:$battleshipGrey;
+        color: $battleshipGrey;
         font-weight: 600;
-    
-        &active {           
-          color:$ceruleanblue;
-        }      
-        
-        
-      }
-      
-      &toggle {
-        color:$greyish;
-        &:hover {
-          background:$colorwhite;
+
+        &active {
+          color: $ceruleanblue;
         }
-    
-        background:$colorwhite;
+      }
+
+      &toggle {
+        color: $greyish;
+        &:hover {
+          background: $colorwhite;
+        }
+
+        background: $colorwhite;
       }
     }
-   
   }
 }
-
 
 //ImageLoader
 @keyframes fadeInImg {
@@ -605,8 +644,8 @@ section.tablecarousel {
   border: none;
   min-width: 100px;
   cursor: default;
-  &:focus{
-    border:none;
+  &:focus {
+    border: none;
     outline: 0;
   }
 }
@@ -625,3 +664,31 @@ section.tablecarousel {
   cursor: pointer;
 }
 
+//Lazy loading Indicator
+.lazyloading-Indicator {
+  text-align: center;
+  padding: 0 0 60px 0;
+
+  .loadingImg {
+    animation: leaves 1s ease-in-out infinite alternate;
+    -webkit-animation: leaves 1s ease-in-out infinite alternate;
+    width: 65px;
+    height: 65px;
+  }
+
+  @keyframes leaves {
+    0% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+.noProductFound {
+  text-align: center;
+  font-size: 16px;
+  padding: 0 0 15px 0;
+  color: #737272;
+}

@@ -94,7 +94,7 @@ class Sort extends React.Component {
             className="dropdowntoggle dropdownlist-item"
           >
             {this.state.title}
-            {this.state.active ? downArrow : upArrow}
+            {this.state.active ? upArrow : downArrow}
           </div>
           <ul className={"dropdownlist " + (this.state.active ? 'dropdownlistactive' : '')}>{this.sortingOptions()}</ul>
         </div>
