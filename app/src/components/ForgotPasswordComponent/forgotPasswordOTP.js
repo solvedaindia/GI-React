@@ -23,6 +23,7 @@ class ForgotPasswordOTP extends React.Component {
       errorMessage: null,
       inputText: null,
       showOTPTxtField: true,
+      errorClass: 'forgototp-mobile modalmin-height',
     };
   }
 
@@ -73,7 +74,8 @@ class ForgotPasswordOTP extends React.Component {
           this.setState({
             error: true,
             errorMessage,
-            showOTPTxtField: false
+            showOTPTxtField: false,
+            errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           });
         }
         else {
@@ -112,6 +114,7 @@ class ForgotPasswordOTP extends React.Component {
             showOTPTxtField: false,
             error: true,
             errorMessage: 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
+            errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           })
         }
         const otpValue = response.data.data;
@@ -183,7 +186,7 @@ class ForgotPasswordOTP extends React.Component {
     return (
       <div className={animeClass}>
         {headingItem}
-        <Form className='forgototp-mobile modalmin-height'>
+        <Form className={this.state.errorClass}>
           <FormGroup>
             {titleOTP}
             <div className="form-div enterotp-msg clearfix">

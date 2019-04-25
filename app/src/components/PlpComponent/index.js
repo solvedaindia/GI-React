@@ -44,7 +44,7 @@ class PlpComponent extends React.Component {
         return (
           <>
             <ProductItem key={index} data={item} />
-            <AdBanner indexPro={index+1} />
+            <AdBanner indexPro={index + 1} />
             {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
           </>
         );
@@ -54,9 +54,18 @@ class PlpComponent extends React.Component {
   }
 
   render() {
+
+    var coloumnLayout;
+    if (this.props.coloumnLayout === 3) {
+      coloumnLayout = 'plp-products grid3';
+    }
+    else {
+      coloumnLayout = 'plp-products grid2';
+    }
+
     return (
       <div className="row no-padding">
-        <ul className="plp-products grid3">{this.state.plpItem}</ul>
+        <ul className={coloumnLayout}>{this.state.plpItem}</ul>
       </div>
     );
   }
@@ -66,7 +75,7 @@ class PlpComponent extends React.Component {
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => {
   return {
-     //onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
+    //onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
   }
 };
 
@@ -75,6 +84,7 @@ const mapStateToProps = state => {
   return {
     bannerPosIndex: stateObj.adBannerPos,
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
+    coloumnLayout: stateObj.columnLayout,
   }
 };
 

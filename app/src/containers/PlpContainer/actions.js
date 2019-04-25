@@ -49,3 +49,24 @@ export const sortingAction = (value) => {
     val: value
   }
 }
+
+export const resetPLPReduxState = (value) => {
+  return {
+    type: actionTypes.RESETPLPREDUXSTATE,
+  }
+}
+
+export const updateInitialValues = (coloumn) => {
+  var bannerPos;
+  if (coloumn === 3) {
+    bannerPos = 12;
+  } else {
+    bannerPos = 8;
+  }
+
+  return {
+    type: actionTypes.INITIALUPDATE,
+    coloumnValue: coloumn,
+    bannerPosValue: bannerPos,
+  }
+}

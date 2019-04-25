@@ -3,7 +3,24 @@ const errorUtils = require('../utils/errorutils');
 const logger = require('../utils/logger.js');
 const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
+const pdpfilter = require('../filters/productdetailfilter');
 
+const associatedPromo = [
+  {
+    code: 'AmountOff_PromotionName-10000051',
+    endDate: '9999-12-31 23:59:59.999',
+    description: null,
+    associatePromotionId: '30051',
+    startDate: '2019-04-18 00:00:00.0',
+  },
+  {
+    code: 'PecentageOff_CatalogEntry-10000055',
+    endDate: '9999-12-31 23:59:59.999',
+    description: null,
+    associatePromotionId: '30055',
+    startDate: '2019-04-18 00:00:00.0',
+  },
+];
 /**
  * Function for PLP Data
  * @param
@@ -21,33 +38,31 @@ module.exports.getProductDetails = function getProductDetails(req, callback) {
   const reqHeaders = req.headers;
   const productID = req.params.productId;
 
-  // callback(null, transformJSON(prodDetails));
-  async.parallel(
-    [
-      productDetails.bind(null, reqHeaders, productID),
-      // promotionDetails.bind(null, reqHeaders, productID),
-    ],
-    (err, result) => {
-      if (err) {
-        callback(errorUtils.handleWCSError(err));
-      } else {
-        logger.debug('Got all the origin resposes for Product Detail');
-        callback(null, transformJSON(result));
-      }
-    },
-  );
-};
-
-/** Product Details */
-function productDetails(header, productID, callback) {
-  productUtil.productByProductID(productID, header, (err, result) => {
+  productUtil.productByProductID(productID, reqHeaders, (err, result) => {
     if (err) {
-      callback(err);
+      callback(errorUtils.handleWCSError(err));
     } else {
-      callback(null, result);
+      logger.debug('Got all the origin resposes for Product Detail');
+      callback(null, productSummaryJson(result));
     }
   });
-}
+
+  // callback(null, transformJSON(prodDetails));
+  // async.parallel(
+  //   [
+  //     productDetails.bind(null, reqHeaders, productID),
+  //     // promotionDetails.bind(null, reqHeaders, productID),
+  //   ],
+  //   (err, result) => {
+  //     if (err) {
+  //       callback(errorUtils.handleWCSError(err));
+  //     } else {
+  //       logger.debug('Got all the origin resposes for Product Detail');
+  //       callback(null, transformJSON(result));
+  //     }
+  //   },
+  // );
+};
 
 /** Promotions Details */
 function promotionDetails(header, ProductID, callback) {
@@ -60,40 +75,16 @@ function promotionDetails(header, ProductID, callback) {
   });
 }
 
-function transformJSON(bodyData) {
-  const transformPDPJSON = {};
-  const productData = productSummary(bodyData[0].catalogEntryView[0]);
-  transformPDPJSON.productData = productData;
-  return transformPDPJSON;
-}
-
-function productSummary(productData) {
+function productSummaryJson(bodyData) {
   const productDataSummary = {};
+  const productData = bodyData.catalogEntryView[0];
   productDataSummary.uniqueID = productData.uniqueID;
-  productDataSummary.productName = productData.name;
-  productDataSummary.partNumber = productData.partNumber;
-  productDataSummary.parentCatalogEntryID = productData.parentCatalogEntryID;
-  productDataSummary.defaultQuantity = '1';
-  if (productData.price && productData.price.length > 0) {
-    productData.price.forEach(price => {
-      if (price.usage === 'Display') {
-        productDataSummary.actualPrice = price.value;
-      }
-      if (price.usage === 'Offer') {
-        productDataSummary.offerPrice = price.value;
-      }
-    });
-  }
   const attributes = getAttributes(productData.attributes);
-  productDataSummary.percentOff = getDiscount(attributes);
-  productDataSummary.attachments = getAttachments(productData.attachments);
   productDataSummary.defAttributes = getDefAttributes(attributes);
   productDataSummary.productDetails = {};
   if (attributes.descriptive && attributes.descriptive.length > 0) {
     attributes.descriptive.forEach(descriptive => {
-      if (descriptive.storeDisplay === true) {
-        productDataSummary.ribbonText = descriptive.values[0].value;
-      } else if (descriptive.identifier === 'productDetail') {
+      if (descriptive.identifier === 'productDetail') {
         productDataSummary.productDetails = getProductDetails(
           descriptive.values[0],
           productData.attachments,
@@ -106,7 +97,7 @@ function productSummary(productData) {
     const features = productData.sKUs[0].UserData[0].x_auxDescription1;
     try {
       const jsonParse = JSON.parse(features);
-      productDataSummary.features = jsonParse.Features;
+      productDataSummary.productFeatures = jsonParse.Features;
     } catch (err) {
       logger.error();
       productDataSummary.features = [];
@@ -121,9 +112,7 @@ function productSummary(productData) {
  * This function will return product images and videos
  */
 function getAttachments(attachments) {
-  const productAttachment = {};
-  const productImages = [];
-  const productVideos = [];
+  const productAttachment = [];
   let i;
   let j;
   for (i = 0; i < attachments.length; i++) {
@@ -133,11 +122,11 @@ function getAttachments(attachments) {
           attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
           attachments[j].name === attachments[i].name
         ) {
-          const productImageJson = {};
-          productImageJson.name = attachments[i].name;
-          productImageJson.imagePath = attachments[i].attachmentAssetPath;
-          productImageJson.thumbnailPath = attachments[j].attachmentAssetPath;
-          productImages.push(productImageJson);
+          productAttachment.push({
+            type: 'image',
+            fullImagePath: attachments[i].attachmentAssetPath,
+            thumbnailPath: attachments[j].attachmentAssetPath,
+          });
           break;
         }
       }
@@ -145,16 +134,13 @@ function getAttachments(attachments) {
       attachments[i].usage === 'IMAGES' &&
       attachments[i].name !== 'productDetailImage'
     ) {
-      const productVideoJson = {};
-      productVideoJson.name = attachments[i].name;
-      productVideoJson.path = `${attachments[i].attachmentAssetPath}/${
-        attachments[i].image
-      }`;
-      productVideos.push(productVideoJson);
+      productAttachment.push({
+        type: 'video',
+        name: attachments[i].name,
+        path: `${attachments[i].attachmentAssetPath}/${attachments[i].image}`,
+      });
     }
   }
-  productAttachment.productImages = productImages;
-  productAttachment.productVideos = productVideos;
   return productAttachment;
 }
 
@@ -166,23 +152,24 @@ function getDefAttributes(attributes) {
   const defAttributes = [];
   attributes.defining.forEach(attribute => {
     if (attribute.identifier === 'colorSwatch') {
-      const colorSwatchJSON = {};
       const colorValues = [];
-      attribute.values.forEach(value => {
-        colorValues.push(value);
+      attribute.values.forEach(element => {
+        colorValues.push({
+          name: element.value,
+          facetImage: element.image1path || '',
+          colorCode: element.colorCode || '',
+        });
       });
-      colorSwatchJSON.name = attribute.name;
-      colorSwatchJSON.values = colorValues;
-      defAttributes.push(colorSwatchJSON);
+      defAttributes.push({ name: attribute.name, values: colorValues });
     } else if (attribute.identifier === 'materialSwatch') {
-      const materialSwatchJSON = {};
       const materialValues = [];
-      attribute.values.forEach(value => {
-        materialValues.push(value);
+      attribute.values.forEach(element => {
+        materialValues.push({
+          name: element.value,
+          facetImage: element.image1path || '',
+        });
       });
-      materialSwatchJSON.name = attribute.name;
-      materialSwatchJSON.values = materialValues;
-      defAttributes.push(materialSwatchJSON);
+      defAttributes.push({ name: attribute.name, values: materialValues });
     }
   });
   return defAttributes;
@@ -201,25 +188,34 @@ function getSkuData(bodyData) {
       skuDataJson.productName = sku.name;
       skuDataJson.partNumber = sku.partNumber;
       skuDataJson.parentCatalogEntryID = sku.parentCatalogEntryID;
-      skuDataJson.defaultQuantity = '1';
-      skuDataJson.emiData = sku.x_field1_i;
+      skuDataJson.emiData = Number(sku.x_field1_i) || '';
+      skuDataJson.fullImagePath = sku.fullImage || '';
+      skuDataJson.thumbImagePath = sku.thumbnail || '';
       if (sku.price && sku.price.length > 0) {
         sku.price.forEach(price => {
           if (price.usage === 'Display') {
-            skuDataJson.actualPrice = price.value;
+            skuDataJson.actualPrice = Number(price.value);
           }
           if (price.usage === 'Offer') {
-            skuDataJson.offerPrice = price.value;
+            skuDataJson.offerPrice = Number(price.value);
           }
         });
       }
       const attributes = getAttributes(sku.attributes);
-      skuDataJson.percentOff = getDiscount(attributes);
+      if (attributes.descriptive && attributes.descriptive.length > 0) {
+        attributes.descriptive.forEach(descriptive => {
+          if (descriptive.storeDisplay === true) {
+            skuDataJson.ribbonText = descriptive.values[0].value;
+          }
+        });
+      }
+      skuDataJson.discount = getDiscount(attributes);
       skuDataJson.defAttributes = getDefAttributes(attributes);
       skuDataJson.attachments = getAttachments(sku.attachments);
-      const similarProducts = getSimilarProductsData(bodyData);
-      skuDataJson.similarProducts = similarProducts.similarProductsData || '';
-      skuDataJson.combosYouMayLike = similarProducts.combosYouLikeData || '';
+      skuDataJson.promotions = associatedPromo || '';
+      // const similarProducts = getSimilarProductsData(bodyData);
+      // skuDataJson.similarProducts = similarProducts.similarProducts || '';
+      // skuDataJson.combosYouMayLike = similarProducts.combosYouMayLike || '';
       skuData.push(skuDataJson);
     });
   }
@@ -347,18 +343,17 @@ function getPurchaseGuide(purchaseGuideData) {
   const purchaseGuide = [];
   if (purchaseGuideData && purchaseGuideData.length > 0) {
     purchaseGuideData.forEach(element => {
-      if (element.usage === 'MEDIA') {
-        if (element.name.includes('purchaseGuideTab')) {
-          const purchaseGuideObject = {};
-          let innerList = [];
-          innerList = element.name.split(':');
-          purchaseGuideObject.tab = innerList[0] || '';
-          purchaseGuideObject.title = innerList[1] || '';
-          purchaseGuideObject.imagePath = `${element.attachmentAssetPath}/${
-            element.image
-          }`;
-          purchaseGuide.push(purchaseGuideObject);
-        }
+      if (
+        element.usage === 'MEDIA' &&
+        element.name.includes('purchaseGuideTab')
+      ) {
+        let innerList = [];
+        innerList = element.name.split(':');
+        purchaseGuide.push({
+          title: innerList[1] || '',
+          thumbImagePath: `${element.attachmentAssetPath}/${element.image}`,
+          path: '',
+        });
       }
     });
   }
@@ -369,18 +364,23 @@ function getPurchaseGuide(purchaseGuideData) {
  * Function to return similar products data for itembean
  */
 function getSimilarProductsData(bodyData) {
-  const similarProducts = [];
-  const similarProductsData = {};
-  const combosYouLikeData = {};
+  const mercAssociations = {};
   bodyData.merchandisingAssociations.forEach(element => {
     if (element.associationType === 'X-SELL') {
-      //similarProducts = getSkuData(bodyData.merchandisingAssociations);
-      console.log(element.associationType);
+      const similarProductsData = [];
+      element.sKUs.forEach(sku => {
+        similarProductsData.push(pdpfilter.productDetailSummary(sku));
+      });
+      // const similarProductsData = getSkuData(element, 'false');
+      mercAssociations.similarProducts = similarProductsData;
     } else if (element.associationType === 'UPSELL') {
-      console.log(element.associationType);
+      const combosYouLikeData = [];
+      element.sKUs.forEach(sku => {
+        combosYouLikeData.push(pdpfilter.productDetailSummary(sku));
+      });
+      // const combosYouLikeData = getSkuData(element, 'false');
+      mercAssociations.combosYouMayLike = combosYouLikeData;
     }
   });
-  similarProducts.push(similarProductsData);
-  similarProducts.push(combosYouLikeData);
-  return similarProducts;
+  return mercAssociations;
 }
