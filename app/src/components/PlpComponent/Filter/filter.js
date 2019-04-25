@@ -14,6 +14,7 @@ const downArrow = (
 const upArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
 );
+
 class Filter extends React.Component {
   constructor() {
     super();
@@ -144,27 +145,46 @@ class Filter extends React.Component {
   filterOptions(alreadyAddedFiltersArr) {
     console.log('Redux Filter -- ', alreadyAddedFiltersArr);
     //return this.props.dataPro.facetValues.map((option, i) => {
+
+
+
+
     var item = this.props.dataPro.facetValues.map((option, i) => {
 
       var checkboxItem;
       var customSelectionBoxId;
       if (alreadyAddedFiltersArr.includes(option.value)) {
-        customSelectionBoxId = 'selected_'+ this.props.dataPro.facetName+i
+        customSelectionBoxId = 'selected_' + this.props.dataPro.facetName + i
         checkboxItem = <input className={'inputCheck checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id={customSelectionBoxId} name="scales" />
         console.log('ITsChecked----', checkboxItem);
       }
       else {
-        customSelectionBoxId = this.props.dataPro.facetName+i
+        customSelectionBoxId = this.props.dataPro.facetName + i
         // checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
         checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id={customSelectionBoxId} name="scales" />
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
+
+      var checkItem;
+      if (option.facetImage !== "") {
+        const checkNew = (<img className='circle' src={'https://192.168.0.36:8443' + option.facetImage} />);
+        checkItem = <label class="lblradio" for={customSelectionBoxId}>
+          {checkNew}
+        </label>
+      }
+      else {
+        checkItem = <label class="lblCheck" for={customSelectionBoxId}></label>
+      }
+
+
+      
+
       return (
         <li className='list'>
           <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
             <div className='input_box'>
-              {checkboxItem}            
-              <label class="lblCheck" for={customSelectionBoxId}></label>
+              {checkboxItem}   
+              {checkItem}
             </div>
 
             <div className='label_text'>
