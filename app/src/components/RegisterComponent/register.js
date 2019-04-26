@@ -90,6 +90,10 @@ class Register extends React.Component {
     this.setState({ isFacebookClicked: true });
   }
 
+  renderLoginComponent() {
+    this.props.loginComponentData();
+  }
+
   render() {
     return (
       <Row>
@@ -102,40 +106,52 @@ class Register extends React.Component {
             <div className="inner-joinusform">
               <div className="btn-wrapper">
                 <GoogleLogin
-					clientId={googleClientId}
-					render={renderProps => (
-						<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
-						<span className="icon-img">
-							<img className="icon" src={Google} />
-						</span>
-						<span className="signin-text">Sign in with Google</span>
-						</button>
-					)}
-					onSuccess={this.responseGoogle}
-					onFailure={this.responseGoogle}
+                  clientId={googleClientId}
+                  render={renderProps => (
+                    <button
+                      className="btn-white"
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <span className="icon-img">
+                        <img className="icon" src={Google} />
+                      </span>
+                      <span className="signin-text">Sign in with Google</span>
+                    </button>
+                  )}
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
                 />
                 <FacebookLogin
-					appId={facebookAppId}
-					render={renderProps => (
-						<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
-						<span className="icon-img">
-							<img className="icon" src={Facebook} />
-						</span>
-						<span className="signin-text">Sign in with Facebook</span>
-						</button>
-					)}
-					autoLoad
-					fields="name,email,picture"
-					cssClass="btn-white"
-					onClick={this.facebookOnClick.bind(this)}
-					callback={this.responseFacebook}
+                  appId={facebookAppId}
+                  render={renderProps => (
+                    <button
+                      className="btn-white btn-fb"
+                      onClick={renderProps.onClick}
+                      isdisabled={renderProps.disabled}
+                    >
+                      <span className="icon-img">
+                        <img className="icon" src={Facebook} />
+                      </span>
+                      <span className="signin-text">Sign in with Facebook</span>
+                    </button>
+                  )}
+                  autoLoad
+                  fields="name,email,picture"
+                  cssClass="btn-white"
+                  onClick={this.facebookOnClick.bind(this)}
+                  callback={this.responseFacebook}
                 />
               </div>
               <p className="text_box">
                 <span className="or">or</span>
               </p>
               <FormGroup>
-                <Button className="btn-bg btn-block" ref="email"  onClick={this.handleRegisterWithEmail.bind(this)}>
+                <Button
+                  className="btn-bg btn-block"
+                  ref="email"
+                  onClick={this.handleRegisterWithEmail.bind(this)}
+                >
                   Email
                 </Button>
               </FormGroup>
@@ -143,13 +159,21 @@ class Register extends React.Component {
                 <span className="or">or</span>
               </p>
               <FormGroup>
-                <Button className="btn-bg btn-block" ref="mobile" onClick={this.handleRegisterWithMobile.bind(this)}>
+                <Button
+                  className="btn-bg btn-block"
+                  ref="mobile"
+                  onClick={this.handleRegisterWithMobile.bind(this)}
+                >
                   Mobile
                 </Button>
               </FormGroup>
               <p className="already-member">
                 Already a member?{' '}
-                <a className="login" href="#">
+                <a
+                  className="login"
+                  role="button"
+                  onClick={this.renderLoginComponent.bind(this)}
+                >
                   Login
                 </a>
               </p>

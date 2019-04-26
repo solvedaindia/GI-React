@@ -4,11 +4,15 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import WhiteLogo from '../SVGs/whiteLogo';
 import axios from 'axios';
+import appCookie from '../../utils/cookie';
+
 import WelcomeBackForm from '../WelcomeBackForm';
+import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
-	facebookAppId,
-	googleClientId,
+  facebookAppId,
+  googleClientId,
+  isLoggedIn,
 } from '../../../public/constants/constants';
 import {
 	onFacebookResponse,
@@ -16,10 +20,13 @@ import {
 } from '../../utils/socialLoginHandler';
 
 import {
-	storeId,
-	accessToken,
-	accessTokenCookie,
-	userLoginAPI,
+	getCookie
+} from '../../utils/utilityManager';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  userLoginAPI,
 } from '../../../public/constants/constants';
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
@@ -34,6 +41,8 @@ class WelcomeBack extends React.Component {
 		this.state = {
 			show: false,
 			message: null,
+			loginStatus: 'Login/Register',
+			userType: 'Hello Guest!',
 		};
 	}
 
@@ -42,9 +51,12 @@ class WelcomeBack extends React.Component {
 	}
 
 	handleShow() {
-		this.setState({ show: true, message: null });
+		if(this.state.loginStatus == 'Login/Register') {
+			this.setState({ show: true, message: null });
+		} else {
+			console.log('Remove the cookie');
+		}
 	}
-
 	// Social Login Handlers
 	responseGoogle = response => {
 		const profileData = response.profileObj;
@@ -89,7 +101,6 @@ class WelcomeBack extends React.Component {
 			});
 
 			onFacebookResponse(this.state, itemData => {
-				this.handleClose();
 				console.log('FacebookCallback', itemData);
 			});
 		}
@@ -98,31 +109,47 @@ class WelcomeBack extends React.Component {
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
-
 	/* Handle User Login API */
 	handleUserLoginApi(data) {
 		this.setState({ message: null });
 		axios
-			.post(userLoginAPI, data, {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
-			.then(response => {
-				document.cookie = 'isLoggedIn=true';
-				document.cookie = `${accessTokenCookie}=${
-					response.data.data.access_token
-					}`;
-				alert('Successfully Logged In');
-				this.handleClose();
-			})
-			.catch(error => {
-				const errorData = error.response.data;
-				const errorMessage = errorData.error.error_message;
-				this.setState({
-					message: `Error - ${errorMessage}`,
-				});
+		.post(userLoginAPI, data, {
+			headers: { store_id: storeId, access_token: accessToken },
+		})
+		.then(response => {
+			appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+			document.cookie = `${accessTokenCookie}=${
+				response.data.data.access_token
+			}`;
+			this.setState({
+                loginStatus: 'Logout',
+				userType: 'Hello User!',
+				show: false
+            }) ;
+			// alert('Successfully Logged In');
+		})
+		.catch(error => {
+			const errorData = error.response.data;
+			const errorMessage = errorData.error.error_message;
+			this.setState({
+			message: `Error - ${errorMessage}`,
 			});
 	}
-
+	showLoginStatus() {
+		let getLoginCookie = appCookie.get('isLoggedIn');
+		if (getLoginCookie) {
+			this.state.userType = 'Hello User!',
+			this.state.loginStatus = 'Logout'
+		}
+		else {
+			this.state.userType = 'Hello Gues!',
+			this.state.loginStatus = 'Login/Register'
+		}
+	}
+	componentDidMount() {
+		this.handleUserLoginApi();
+		this.showLoginStatus();
+	}
 	render() {
 		let message = null;
 		if (this.state.message) {
@@ -130,9 +157,18 @@ class WelcomeBack extends React.Component {
 		}
 		return (
 			<div>
-				<a className="dropDown" onClick={this.handleShow}>
-					Login/Register
-				</a>
+				<ul className='userList'>
+					<li className='listItem'>
+						<a href='' className="dropDown" >
+							{this.state.userType}
+						</a>
+					</li>
+					<li className='listItem'>
+						<a className="dropDown" onClick={this.handleShow}>
+							{this.state.loginStatus}
+						</a>
+					</li>
+				</ul>
 				<Modal
 					className="welcomeBack"
 					size="lg"
@@ -181,6 +217,9 @@ class WelcomeBack extends React.Component {
 						className="loginForm"
 						handleUserData={this.handleUserLoginApi.bind(this)}
 					/>
+					<div className='forgotPassword' onClick={this.handleToggle}>
+                    	<Forgotpassowrd onClick={this.handleToggle}/>
+					</div>
 					<p className="registerHere">
 						<span>New to Godrej Interio? </span><RegisterModalData />
 					</p>

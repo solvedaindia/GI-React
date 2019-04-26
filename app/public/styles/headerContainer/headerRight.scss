@@ -1,7 +1,18 @@
+@import '../variable';
+
 .rightSide {
     margin-bottom: 0;
     .icons {
         display: inline-block;
         cursor: pointer;
+        position: relative;
+        .wishListCount {
+            position: absolute;
+            top: 5px;
+            right: 18px;
+            font-size: $base*1.25;
+            color: $reddishpink;
+            font-family: $font-bold
+        }
     }
 }

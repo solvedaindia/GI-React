@@ -52,11 +52,10 @@ class Forgotpassowrd extends React.Component {
       });
       return;
     }
-    else {
-      this.setState({
-        hideBackArrow: false,
-      });
-    }
+
+    this.setState({
+      hideBackArrow: false,
+    });
 
     if (isBack) {
       this.setState({
@@ -65,7 +64,6 @@ class Forgotpassowrd extends React.Component {
       this.backButtonPressed();
       return;
     }
-
 
     let item;
     if (itemStr == 'ForgotPasswordOTP') {
@@ -137,8 +135,7 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
-    }
-    else if (itemStr === 'ForgotPassword') {
+    } else if (itemStr === 'ForgotPassword') {
       this.toggle();
     }
 
@@ -165,9 +162,7 @@ class Forgotpassowrd extends React.Component {
 
     return (
       <>
-        <p className="forgotPassword" onClick={this.toggle}>
-          Forgot Password?
-        </p>
+        <p onClick={this.toggle}>Forgot Password?</p>
         <Modal
           show={this.state.modal}
           onHide={this.toggle}
@@ -180,7 +175,7 @@ class Forgotpassowrd extends React.Component {
                 onClick={this.backButtonPressed.bind(this)}
                 className="btn-back"
               >
-              { this.state.hideBackArrow ? null : LeftArrow }
+                {this.state.hideBackArrow ? null : LeftArrow}
               </Button>
               <div className="form-center">{item}</div>
             </div>

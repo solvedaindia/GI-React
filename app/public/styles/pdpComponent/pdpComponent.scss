@@ -215,6 +215,19 @@
     }
     
   }
+
+  .keywordsList{
+      text-align: center;
+      padding: 40px 0 40px 0;
+      .list{
+        display: inline-block;
+        border: solid 1px #017b6b;        
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-right: 1%;
+        min-width: 188px;
+      }
+  }
 }
 
 .product_details{
@@ -301,4 +314,12 @@
 }
 .dataActive {
     display: block;
+}
+.attributeList {
+    display: inline-block;
+    padding: 0 7px 0 0;
+}
+.soldbyDealers {
+    font-size: 10px;
+    padding: 0 0 10px 0;
 }

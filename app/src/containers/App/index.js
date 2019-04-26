@@ -32,7 +32,7 @@ import PdpContainer from '../PdpContainer/pdp';
 import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
-import NewsletterModel from '../../components/NewsletterModel/newsletterModel'
+import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import '../../../public/styles/app.scss';
 
 export default class App extends React.Component {
@@ -69,28 +69,37 @@ export default class App extends React.Component {
 
   newsletterPopupHandling() {
     console.log('NewsletterCookie---', getCookie(newsletterTokenCookie));
-    if (getCookie(newsletterTokenCookie) && getCookie(newsletterTokenCookie) != null) {
+    if (
+      getCookie(newsletterTokenCookie) &&
+      getCookie(newsletterTokenCookie) != null
+    ) {
       this.setState({ showNewsLetter: false });
-    }
-    else {
-      //this.setState({ showNewsLetter: true });
-      //Hit api if NewsletterCookie is null/Empty
-      //If yes -> Don't show the Popup
-      //If No -> Show the Pop UP
-      console.log('In the new')
+    } else {
+      // this.setState({ showNewsLetter: true });
+      // Hit api if NewsletterCookie is null/Empty
+      // If yes -> Don't show the Popup
+      // If No -> Show the Pop UP
+      console.log('In the new');
       this.getNewsletterSubscriptionStatus();
       // this.setState({ showNewsLetter: true });
     }
   }
 
   getNewsletterSubscriptionStatus() {
-    axios.get(newsletterStatusAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
-      console.log('Newsletter status: ', response.data.data.alreadySubscribed);
-      if (!response.data.data.alreadySubscribed) {
-        this.setState({ showNewsLetter: true });
-      }
-    }).catch(error => {
-    });
+    axios
+      .get(newsletterStatusAPI, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        console.log(
+          'Newsletter status: ',
+          response.data.data.alreadySubscribed,
+        );
+        if (!response.data.data.alreadySubscribed) {
+          this.setState({ showNewsLetter: true });
+        }
+      })
+      .catch(error => {});
   }
 
   guestLoginCallback(token) {
@@ -130,7 +139,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
-          <Route path="/pdp" component={PdpContainer} />
+          <Route path="/pdp/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
         </Switch>

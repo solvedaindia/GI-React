@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {
   pdpApi,
+  pdpApi2,
   espotAPI,
   storeId,
   accessToken,
@@ -26,8 +27,9 @@ class PdpContainer extends React.Component {
   }
 
   callPdpApi() {
+    const productId = 'TEST_PDP';
     axios
-      .get(pdpApi, {
+      .get(pdpApi2 + productId, {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
@@ -45,7 +47,7 @@ class PdpContainer extends React.Component {
   }
 
   callPdpEspotApi() {
-    const APIType = 'GI_PDP_OUR_PROMISES';
+    const APIType = 'GI_PDP_Sample_Espot1';
     const espotPdpApi = espotAPI + APIType;
     axios
       .get(espotPdpApi, {
@@ -72,9 +74,10 @@ class PdpContainer extends React.Component {
           !this.state.espotLoading && (
             <PdpComponent
               data={this.state.pdp.data}
+              skuId={this.props.match.params}
               espot={this.state.pdpEspot}
             />
-          )}
+        )}
       </div>
     );
   }
