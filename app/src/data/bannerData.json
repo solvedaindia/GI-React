@@ -1,23 +1,23 @@
 [
   {
-    "type":"heroBanner",
+    "type": "heroBanner",
     "title": "",
     "bannerList": [
       {
         "type": "image",
-        "src": "https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
+        "src": "https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
         "onClickUrl": "",
         "alt": "img1"
       },
       {
         "type": "image",
-        "src": "https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
+        "src": "https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
         "onClickUrl": "",
         "alt": "img2"
       },
       {
         "type": "image",
-        "src": "https://192.168.0.39:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
+        "src": "https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/bannerhomepage.png",
         "onClickUrl": "",
         "alt": "img3"
       }

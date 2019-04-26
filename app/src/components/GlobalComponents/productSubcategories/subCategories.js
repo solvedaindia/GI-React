@@ -1,75 +1,43 @@
 import React from 'react';
-import { Link, Route, withRouter } from 'react-router-dom';
-import Slider from 'react-slick';
-import SubCatItem from './subCatItem';
-import '../../../../public/styles/plpContainer/plpContainer.scss';
-
-const prevArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowLeft.svg')} />
-);
-const nextArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowRight.svg')} />
-);
-class SubCategories extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      subCatItem: null,
-    };
-
-    this.settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      arrows: true,
-      prevArrow: prevArrowImg,
-      nextArrow: nextArrowImg,
-      // prevArrow,
-      // nextArrow,
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.fetchSubCategoryData(nextProps.subCategoryData);
-  }
-
-  componentDidMount() {
-    this.fetchSubCategoryData(this.props.subCategoryData);
-  }
-
-  fetchSubCategoryData(subCatData) {
-    const data = subCatData
-    if (data) {
-      const itemsArr = data.map((item, index) => (
-        <SubCatItem key={index} itemData={item} />
-      ));
-      this.setState({
-        subCatItem: itemsArr,
-      });
+import axios from 'axios';
+import { subCatAPI, storeId, accessToken } from '../../../../public/constants/constants';
+export class SubCategory extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        subCatData: null,
+        isLoading: false,
+        error: null,
+        };
     }
-  }
-
-  render() {
     
-    return (
-      <section className="tablecarousel">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <div className="headingText">
-                {/* <h3 className="heading">Table</h3> */}
-                {/* <p className="total-products">(38 Product)</p> */}
-              </div>
-            </div>
-          </div>
-          <Slider {...this.settings}>{this.state.subCatItem}</Slider>
-        </div>
-      </section>
-    );
-  }
+    getPageLayout() {
+        axios.get(subCatAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        .then(response => {
+            this.setState({
+                subCatData: response.data.data,
+                isLoading: false
+            });
+            console.log('HomepageData', response.data.data);
+        })
+        .catch(error => {
+            this.setState({
+                error,
+                isLoading: false
+            });
+        });
+    }
+    componentDidMount() {
+        this.getPageLayout();
+    }
+
+    render() {
+		<p>Some Sub Cat</p>
+        const {subCatData} = this.state;
+        return !!subCatData && (subCatData.map((subCatListData, i)=>{
+           <p>Some Text</p>
+        }));        
+    }
 }
 
-// export default SubCategories;
-export default withRouter(SubCategories);
+export default SubCategory;

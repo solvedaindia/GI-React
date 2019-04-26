@@ -1,0 +1,56 @@
+@import '../variable';
+@import '../base';
+.bestSeller {
+    width: 83.33%;
+    margin: $base*4 auto;
+    .subCatImg {
+        width: 100%;
+    }
+    .slick-next:before, 
+    .slick-prev:before {
+        font-size: 20px;
+        line-height: 1;
+        opacity: .75;
+        color: $black;
+    }
+    .bsDetails {
+        text-align: center;
+        padding: 0 $base*3;
+        .prodtitle {
+            font-size: $base*2.5;
+            font-family: $font-regular;
+            color: $black; 
+        }
+        .discPrice {
+            font-size: $base*3;
+            color: $cerulean;
+            font-family: $font-bold;
+            padding: $base;
+        }
+        .actualPrice {
+            font-size: $base*3;
+            color: $black;
+            font-family: $font-regular;
+            padding: $base;
+            text-decoration: line-through;
+        }
+        .emi {
+            color: $reddishPink;
+            font-size: $base*1.5;
+            margin: 0;
+            .emiPrice {
+                font-family: $font-bold;
+                padding: $base*0.5;
+            }
+        }
+        .emiOffer {
+            color: $reddishPink;
+            font-size: $base*1.5;
+            margin: 0;
+            .emiOfferDisc {
+                font-family: $font-bold;
+                padding: $base*0.5;
+            }
+        }
+    }
+}

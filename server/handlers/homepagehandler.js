@@ -23,7 +23,6 @@ module.exports.getBodyData = function getHomeBody(headers, callback) {
         return;
       }
       logger.debug('Got all the origin resposes');
-      logger.debug('HomeBody Data>', JSON.stringify(results));
       const resJson = {};
       results.forEach(element => {
         const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration

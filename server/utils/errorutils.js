@@ -68,6 +68,11 @@ const errorlist = {
     error_key: 'invalid_password_format',
     error_message: 'userid and password cannot be same',
   },
+  userid_invalid_format: {
+    status_code: 400,
+    error_key: 'userid_invalid_format',
+    error_message: 'Please enter valid Email Id/Mobile number.',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -114,6 +119,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (errBody.errors[0].errorKey === '_ERR_MISSING_CMD_PARAMETER') {
+        return errorlist.invalid_params;
+      }
       if (
         errBody.errors[0].errorKey ===
         '_ERR_AUTHENTICATION_USERIDMATCH_PASSWORD'
@@ -155,6 +163,12 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'current_password_incorrect',
           error_message: 'Your current password is incorrect',
         };
+      }
+      if (
+        errBody.errors[0].errorKey === 'ERR_USER_INVALID_FORMAT' ||
+        errBody.errors[0].errorKey === 'ERROR_MOBILE_EMAIL_INVALID'
+      ) {
+        return errorlist.userid_invalid_format;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||
@@ -225,16 +239,6 @@ const wcsErrorList = {
       status_code: 400,
       error_key: '_ERR_GIFTLIST_ITEM_CATALOGENTRY_INVALID',
       error_message: 'Product Catentry details invalid',
-    },
-    _ERR_MISSING_CMD_PARAMETER: {
-      status_code: 400,
-      error_key: '_ERR_MISSING_CMD_PARAMETER',
-      error_message: 'There was a missing parameter: q.',
-    },
-    ERROR_MOBILE_EMAIL_INVALID: {
-      status_code: 400,
-      error_key: 'userid_invalid_format',
-      error_message: 'Please enter valid Email Id/Mobile number.',
     },
     ERROR_USER_DOES_NOT_EXIST_ON_FORGOT_PASSWORD: {
       status_code: 400,

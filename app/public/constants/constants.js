@@ -10,7 +10,7 @@ export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const isLoggedIn = false;
-
+export const catID = '13503';
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
@@ -30,6 +30,8 @@ export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart
 export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
 export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
+/* Homepage Layout API */
+export const homePageLayoutAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Layout`;
 /* Footer API */
 export const footerApi = `${secureHttp}://${host}:${port2}/api/v1/footer`;
 /* Generate OTP API */
@@ -61,6 +63,14 @@ export const autoSuggestAPI = `${secureHttp}://${host}:${port2}/api/v1/search/au
 export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/user`;
 /* PLP Sub-Category API */
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
+/* Sub-Category API */
+export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
+/* Featured Category */
+export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
+/* Recently Viewed API */
+export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
+/* Best Seller */
+export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
 /* ESPOT data API */
 export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */

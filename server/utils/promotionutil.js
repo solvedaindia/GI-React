@@ -5,11 +5,9 @@ const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
 const headerutil = require('./headerutil');
 
-module.exports.promotionData = function getPromotionData(
-  productID,
-  headers,
-  callback,
-) {
+/* Get Promotion Data Based on Product/SKU ID */
+module.exports.getPromotionData = getPromotionData;
+function getPromotionData(productID, headers, callback) {
   if (!productID) {
     logger.debug('Get Promotion Data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
@@ -31,10 +29,11 @@ module.exports.promotionData = function getPromotionData(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, response.body.associatedPromotions);
       } else {
+        logger.debug('Error While Calling Promotion API');
         callback(errorUtils.handleWCSError(response));
       }
     },
   );
-};
+}

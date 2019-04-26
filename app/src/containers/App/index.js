@@ -23,7 +23,8 @@ import {
   newsletterTokenCookie
 } from '../../../public/constants/constants';
 
-import HomePageContainer from '../HomePageContainer/index';
+// import HomePageContainer from '../HomePageContainer/index';
+import HomePageContainer from '../HomePageContainer/homepage';
 import HeaderContainer from '../HeaderContainer/index';
 import ClpContainer from '../ClpContainer/index';
 import PlpContainer from '../PlpContainer/index';

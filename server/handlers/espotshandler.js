@@ -13,10 +13,9 @@ const headerUtils = require('../utils/headerutil');
  */
 exports.getEspotsData = function espotData(headers, espotName, callback) {
   const reqHeaders = headerUtils.getWCSHeaders(headers);
-  const espotURL = `${constants.espotOriginURL.replace(
-    '{{storeId}}',
-    headers.storeId,
-  )}/${espotName}?responseFormat=json`;
+  const espotURL = `${constants.espotOriginURL
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{espotName}}', espotName)}`;
   origin.getResponse(
     originMethod,
     espotURL,
@@ -29,7 +28,7 @@ exports.getEspotsData = function espotData(headers, espotName, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        logger.error('Error while calling Espot API');
+        logger.debug('Error while calling Espot API');
         callback(errorutils.handleWCSError(response));
       }
     },

@@ -43,23 +43,21 @@ module.exports.productsByCategoryID = function getProductByCategoryID(
 };
 
 module.exports.productByProductID = function getproductDetailsByProductID(
-  ProductID,
+  productID,
   headers,
   callback,
 ) {
-  logger.debug('Inside Product details by id method');
-  if (!ProductID) {
+  if (!productID) {
     logger.debug('Get Product Detail By Product ID :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const originUrl = constants.pdp
+  const originUrl = constants.productViewByProductId
     .replace('{{storeId}}', headers.storeId)
-    .replace('{{productId}}', ProductID);
+    .replace('{{productId}}', productID);
 
-  // const originUrl =
-  //   'https://192.168.0.36:3738/search/resources/store/10151/productview/TEST_PDP';
   const reqHeader = headerutil.getWCSHeaders(headers);
+
   origin.getResponse(
     originMethod,
     originUrl,
@@ -182,25 +180,16 @@ function getPromotionData(headers, productIDs, callback) {
 
 /* Merge Product Details and Promotion Data */
 function transformJson(result) {
-  const productListArray = result[0];
+  const productList = result[0];
   const promotionJson = result[1];
-  productListArray.forEach(product => {
-    const productPromotion = promotionJson.filter(
-      promotion => promotion.uniqueID === product.uniqueID,
-    );
-    // eslint-disable-next-line no-param-reassign
-    product.promotionData = productPromotion[0].promotionData;
-    /* for (let index = 0; index < promotionJson.length; index += 1) {
+  productList.forEach(product => {
+    for (let index = 0; index < promotionJson.length; index += 1) {
       if (product.uniqueID === promotionJson[index].uniqueID) {
         // eslint-disable-next-line no-param-reassign
         product.promotionData = promotionJson[index].promotionData;
         break;
       }
-    } */
+    }
   });
-  const resJson = {
-    productCount: productListArray.length,
-    productList: productListArray,
-  };
-  return resJson;
+  return productList;
 }

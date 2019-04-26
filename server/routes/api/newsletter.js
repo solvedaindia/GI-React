@@ -19,4 +19,17 @@ router.post('/subscribe', (req, res, next) => {
   );
 });
 
+router.get('/status', (req, res, next) => {
+  newsletterHandler.getSubscriptionStatus(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

@@ -8,6 +8,9 @@ const filter = require('../filters/filter');
 const headerUtil = require('../utils/headerutil');
 const productUtil = require('../utils/productutil');
 
+const topCategories = '@top';
+const categoryNavigation = '@top?depthAndLimit=25,0';
+
 /**
  * This function will return ${urlParam} categories data
  * @param urlParam
@@ -23,15 +26,14 @@ module.exports.getCategories = function getCategories(
 
   switch (urlParam) {
     case 'top':
-      getCategoriesData('@top', headers, callback); // To Get only TOP Categories
+      getCategoriesData(topCategories, headers, callback); // To Get only TOP Categories
       break;
 
     case 'navigation':
-      getCategoriesData('@top?depthAndLimit=25,0', headers, callback); // To Get Category Navigation Data
+      getCategoriesData(categoryNavigation, headers, callback); // To Get Category Navigation Data
       break;
 
     default:
-      // default through error as no target found
       logger.error(
         `Get Categories :${errorUtils.errorlist.resource_not_found}`,
       );
@@ -100,7 +102,6 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
                 if (!error) {
                   subCatData.productCount =
                     productViewResult.catalogEntryView.length || 0; // Product Count
-                  subCatData.startPrice = '';
                   cb(null, subCatData);
                 } else {
                   cb(error);
@@ -127,49 +128,6 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
 };
 
 /**
- *  Get Category Details
- */
-module.exports.getCategoryDetails = function getCategoryDetails(
-  headers,
-  categoryID,
-  callback,
-) {
-  if (!categoryID) {
-    logger.debug('Get Sub Categories Data :: invalid params');
-    callback(errorUtils.errorlist.invalid_params);
-    return;
-  }
-  const originUrl = constants.categoryViewByCategoryId
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{categoryId}}', categoryID);
-
-  const reqHeader = headerUtil.getWCSHeaders(headers);
-
-  origin.getResponse(
-    originMethod,
-    originUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(
-          null,
-          filter.filterData(
-            'categorydetail',
-            response.body.catalogGroupView[0],
-          ),
-        );
-      } else {
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
-};
-
-/**
  *  Get sub categories by category id
  */
 function categoryViewByParentCategoryId(header, categoryID, callback) {
@@ -191,8 +149,9 @@ function categoryViewByParentCategoryId(header, categoryID, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
+        logger.debug('Error While Calling Category View by Parent Category ID');
         callback(errorUtils.handleWCSError(response));
       }
     },
   );
-};
+}

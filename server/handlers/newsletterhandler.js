@@ -28,10 +28,10 @@ module.exports.newsLetterSubscription = function newsLetterSubscription(
     emailId: params.email_id,
   };
 
-  const originUserUrl = constants.newsletterSubscription.replace(
+  const originUserUrl = `${constants.newsletterSubscription.replace(
     '{{storeId}}',
     headers.storeId,
-  );
+  )}/savenewsletterdetails`;
 
   origin.getResponse(
     'POST',
@@ -50,6 +50,46 @@ module.exports.newsLetterSubscription = function newsLetterSubscription(
           'Error',
           null,
         );
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * Newsletter Subscription Status API
+ * @param access_token
+ * @returns 200,
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getSubscriptionStatus = function getSubscriptionStatus(
+  headers,
+  callback,
+) {
+  logger.debug('Call to News Letter Subscription Status');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const originUserUrl = `${constants.newsletterSubscription.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/getnewslettersubdetails/${headers.userId}`;
+
+  origin.getResponse(
+    'GET',
+    originUserUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        const responseMessage = {
+          alreadySubscribed: response.body.response_msg,
+        };
+        callback(null, responseMessage);
+      } else {
+        logger.debug('Error While Hitting Newsletter Subscription Status API');
         callback(errorutils.handleWCSError(response));
       }
     },
