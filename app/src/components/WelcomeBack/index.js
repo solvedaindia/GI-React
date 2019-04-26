@@ -15,8 +15,8 @@ import {
   isLoggedIn,
 } from '../../../public/constants/constants';
 import {
-	onFacebookResponse,
-	onGoogleResponse,
+  onFacebookResponse,
+  onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
 import {
@@ -75,19 +75,17 @@ class WelcomeBack extends React.Component {
 		});
 
 		onGoogleResponse(this.state, itemData => {
-			this.handleClose();
 			console.log('GoogleCallback', itemData);
-
 		});
 	};
-
+	
 	responseFacebook = response => {
 		if (!response.email) {
 			alert('SocialLogin - Email Id missing');
 			return;
 		}
 
-		// Remove below condition to get auto Facebook login.
+	// Remove below condition to get auto Facebook login.
 		if (this.state.isFacebookClicked) {
 			const firstName = response.name.substr(0, response.name.indexOf(' '));
 			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
@@ -105,7 +103,7 @@ class WelcomeBack extends React.Component {
 			});
 		}
 	};
-
+	
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
@@ -134,6 +132,7 @@ class WelcomeBack extends React.Component {
 			this.setState({
 			message: `Error - ${errorMessage}`,
 			});
+		});
 	}
 	showLoginStatus() {
 		let getLoginCookie = appCookie.get('isLoggedIn');
@@ -185,11 +184,11 @@ class WelcomeBack extends React.Component {
 						<GoogleLogin
 							clientId={googleClientId}
 							render={renderProps => (
-								<button className="btn-white" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-									<span className="icon-img">
-										<img className="icon" src={Google} />
-									</span>
-									<span className="signin-text">Sign in with Google</span>
+								<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
+								<span className="icon-img">
+									<img className="icon" src={Google} />
+								</span>
+								<span className="signin-text">Sign in with Google</span>
 								</button>
 							)}
 							onSuccess={this.responseGoogle}
@@ -199,10 +198,10 @@ class WelcomeBack extends React.Component {
 							appId={facebookAppId}
 							render={renderProps => (
 								<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
-									<span className="icon-img">
-										<img className="icon" src={Facebook} />
-									</span>
-									<span className="signin-text">Sign in with Facebook</span>
+								<span className="icon-img">
+									<img className="icon" src={Facebook} />
+								</span>
+								<span className="signin-text">Sign in with Facebook</span>
 								</button>
 							)}
 							autoLoad
