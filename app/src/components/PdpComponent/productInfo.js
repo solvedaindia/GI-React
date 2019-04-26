@@ -1,61 +1,96 @@
 import React from 'react';
 import { Col, Button } from 'react-bootstrap';
 import EmiInfo from './emiInfo';
+import ProductDefAttriutes  from './productdefAttributes';
 
-const productInfo = (props) => {
-    return(
+class productInfo extends React.Component {
+    constructor() {
+        super();
+    }
+
+    toggleOffers() {
+        var x = document.getElementById('offers');
+        if (x.style.display === 'none') {
+          x.style.display = 'block';
+        } else {
+          x.style.display = 'none';
+        }
+    }
+
+    render() {
+        let emidata = this.props.productData.emiData;
+
+        if (emidata === '') {
+            emidata = 599;
+        }
+        
+     return(
         <>            
                 <div className='product'>
                    <span className='text'>Product ID:</span> 
-                   <span className='text'>{props.productData.partNumber}</span>
+                   <span className='text'>{this.props.productData.partNumber}</span>
                 </div>
-                
                 <div className='slimline'>
                 <h4 className='heading'>
-                    {props.productData.productName}
+                    {this.props.productData.productName}
                 </h4>
+                    {this.props.productData.shortDescription}<br/>
+                    <div className='soldbyDealers'>sold by RMZ furniture Dealers</div>
                 </div>
+                <ProductDefAttriutes defAttributes={this.props.defAttributes}/>
                 <div className='price'>
-                    <span className='actualprice text'>&#8377;{props.productData.actualPrice}</span>
-                    <span className='offerprice text'>&#8377;{props.productData.offerPrice}</span>
+                    <span className='actualprice text'>&#8377;{this.props.productData.actualPrice}</span>
+                    <span className='offerprice text'>&#8377;{this.props.productData.offerPrice}</span>
                 </div>
                 <div className='shippingCharge'>
-                    Shipping Charges:<span className='bold'>&#8377;{props.productData.shipingCharges}</span>
+                    Shipping Charges: <span className='bold'> &#8377;450 {/*this.props.productData.shipingCharges*/}
+                    </span>
                 </div>
                 <div className='accessories-offer'>
                     <div className='offerbg text'> % </div>
-                    <div className='discount-off text'>{props.productData.discount} OFF </div>
-                    <div className='text'> &  free accessories</div>
+                    <div className='discount-off text'>{this.props.productData.discount} </div>
                 </div>
+                <a role='button' onClick={this.toggleOffers.bind(this)}>View Offer</a>
+                <div id='offers'>
                  <ul className='cashoffer-wrapper'>
                     {
-                        props.productData.promotionData.map((promotion, i) => {
+                        this.props.productData.promotions.map((promotion, i) => {
                             return(
                                 <li className='list' key={i}>                                 
-                                    <h4 className='heading'>{promotion.heading} </h4>
-                                    {promotion.description} <a className='link' href={promotion.tcUrl}>{promotion.tcText}</a>                                  
+                                    <h4 className='heading'>{promotion.name} </h4>
+                                    {promotion.description} <a className='link' href={promotion.name}>{promotion.name}</a>                                  
                                 </li>
                             )
                         })
                     }
                     </ul>
+                </div>
                 
                 <div className='starting-emitext'>
                     <div className='offerbg text'> <span className='emitext'>EMI</span></div>
                     <div className='text'>Starting from </div>
-                    <div className='text bold'>रु{props.productData.emiData} </div>                   
+                    <div className='text bold'>रु {emidata} </div>                   
                     <div className='text'>per month</div>
                     <div className='text emiinfo'><EmiInfo /></div>
                 </div>
+                <div className='zip'>
+                    <input className='btn' type='text' readOnly value='56632' />&nbsp;&nbsp;
+                    <a role='button'>Edit</a><br/>
+                    <span className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</span>
+                </div>
+                <div className='soldbyDealers'>
+                    Experience this product at <a role='button'>Vikroli Store (1.5 K.M away)</a>
+                </div>
                 <div className='addCart'>
                     <Button className="btn">-</Button>
-                    <input className='btn' type='text' readOnly value={props.productData.defaultQuantity} />
+                    <input className='btn' type='text' readOnly value='1' />
                     <Button className="btn">+</Button>
                     <Button className="btn addcartbtn">Add to Cart</Button>
                 </div>
            
         </>
     );
+                }
 }
 
 export default productInfo;

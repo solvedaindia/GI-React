@@ -73,6 +73,12 @@ export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist/`
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
+/* PDP API */
+export const pdpApi2 = `${secureHttp}://${host}:${port2}/api/v1/pdp/productDetails/`;
+
+export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
+export const store = 'wcsstore';
+export const catalog = 'SolvedaCommerceCatalogAssetStore';
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

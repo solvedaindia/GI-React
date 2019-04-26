@@ -3,6 +3,7 @@ import ImageGallery from 'react-image-gallery';
 import { Player } from 'video-react';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
+import { newMachineUrl, store, catalog} from '../../../public/constants/constants';
 
 class productImagesAndVideos extends React.Component {
     constructor() {
@@ -13,8 +14,9 @@ class productImagesAndVideos extends React.Component {
     }
 
     componentDidMount = () => {
-        this.renderImages(this.props.imagesAndVideos.productImages);
-        this.renderVideos(this.props.imagesAndVideos.productVideos);
+        this.filterImagesAndVideos(this.props.imagesAndVideos);
+        //this.renderImages(this.props.imagesAndVideos.productImages);
+        //this.renderVideos(this.props.imagesAndVideos.productVideos);
     }
 
     /* render Images */
@@ -28,6 +30,22 @@ class productImagesAndVideos extends React.Component {
     renderVideos = (allVideos) => {
         allVideos.map((video) => {
             this.state.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': video.thumbnail, 'videourl': video.videoSrc});
+        });
+    }
+
+    /* render Videos */
+    filterImagesAndVideos = (imagesAndVideos) => {
+        imagesAndVideos.map((data, i) => {
+            if (data.type === 'image') {
+                if (i === 0) {
+                const fullImagePath = newMachineUrl+'/'+store+'/'+catalog+'/'+data.fullImagePath;
+                const thumbnailPath = newMachineUrl+'/'+store+'/'+catalog+'/'+data.thumbnailPath;
+                //this.state.images.push({'original': '/dfa2d48071fbc8a710760e9590f6290d.png' , 'thumbnail': '/dfa2d48071fbc8a710760e9590f6290d.png' });
+                this.state.images.push({'original': fullImagePath , 'thumbnail': fullImagePath });
+                }
+            } else {
+                this.state.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': data.thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+            }
         });
     }
 
