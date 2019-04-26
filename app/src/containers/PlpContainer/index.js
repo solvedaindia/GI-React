@@ -297,11 +297,11 @@ export class PlpContainer extends React.Component {
 
 		let filterItem;
 		if (filterData.length != 0) {
-			// filterData.push(filterData[0])
-			// filterData.push(filterData[1])
-			// filterData.push(filterData[2])
-			// filterData.push(filterData[3])
-			// console.log('FilterData---', filterData);
+			filterData.push(filterData[0])
+			filterData.push(filterData[1])
+			filterData.push(filterData[2])
+			filterData.push(filterData[3])
+			console.log('FilterData---', filterData);
 
 			filterItem = (
 				<FilterMain filterDataPro={filterData} />
