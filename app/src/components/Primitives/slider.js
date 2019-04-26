@@ -16,13 +16,13 @@ class FullBanner extends React.Component {
     return (
       <div className="fsBanner">
         <Slider {...settings}>
-          {BannerData.map(BannerlistData =>
-            BannerlistData.bannerList.map((bannerData, index) => (
-              <a href={bannerData.onClickUrl} key={index}>
-                <img src={bannerData.src} alt={bannerData.alt} />
-              </a>
-              </a>
-          )}
+          	{BannerData.map(BannerlistData =>
+				BannerlistData.bannerList.map((bannerData, index) => (
+				<a href={bannerData.onClickUrl} key={index}>
+					<img src={bannerData.src} alt={bannerData.alt} />
+				</a>
+				)
+          	))}
         </Slider>
       </div>
     );
