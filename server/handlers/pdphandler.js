@@ -417,7 +417,7 @@ function getSimilarProductsData(bodyData) {
 
 function getSkuDataV2(headers, bodyData) {
   logger.debug('inside getSkuDataV2 method');
-  let skuData = [];
+  const skuData = [];
   const skuDataJson = {};
   bodyData.sKUs.map(sku => {
     logger.debug('inside asyncMap method');

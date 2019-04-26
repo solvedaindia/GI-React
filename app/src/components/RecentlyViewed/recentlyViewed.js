@@ -1,50 +1,58 @@
 import React from 'react';
-import axios from "axios";
+import axios from 'axios';
 import Slider from 'react-slick';
-import { recentlyViewedAPI, storeId, accessToken } from '../../../public/constants/constants';
+import {
+  recentlyViewedAPI,
+  storeId,
+  accessToken,
+} from '../../../public/constants/constants';
 
-import '../../../public/styles/bestSeller/bestSeller.scss'
-class RecentlyViewed extends React.Component{
-    state = {
-        recentlyViewedData:null,
-        isLoading: true,
-        errors: null
-    };
+import '../../../public/styles/bestSeller/bestSeller.scss';
+class RecentlyViewed extends React.Component {
+  state = {
+    recentlyViewedData: null,
+    isLoading: true,
+    errors: null,
+  };
 
-    getRecentlyViewed() {
-        axios.get(recentlyViewedAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
-        .then(response => {
-            this.setState({
-                recentlyViewedData: response.data.data,
-                isLoading: false
-            });
-            console.log('Recently Viewed', response.data.data);
-        })
-        .catch(error => {
-            this.setState({
-                error,
-                isLoading: false
-            });
-            console.log('ERROR');
+  getRecentlyViewed() {
+    axios
+      .get(recentlyViewedAPI, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        this.setState({
+          recentlyViewedData: response.data.data,
+          isLoading: false,
         });
-    }
-    componentDidMount() {
-        this.getRecentlyViewed();
-    }
+        console.log('Recently Viewed', response.data.data);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('ERROR');
+      });
+  }
 
-    render() {
-        // const { recentlyViewedData } = this.state;
-        // const settings = {
-        //     dots: false,
-        //     infinite: true,
-        //     speed: 500,
-        //     slidesToShow: 3,
-        //     slidesToScroll: 1
-        // }; 
-        return(
-            <div className='bestSeller'>
-                <h1 className='title'>Recently Viewed</h1>
-                {/* <Slider {...settings}>
+  componentDidMount() {
+    this.getRecentlyViewed();
+  }
+
+  render() {
+    // const { recentlyViewedData } = this.state;
+    // const settings = {
+    //     dots: false,
+    //     infinite: true,
+    //     speed: 500,
+    //     slidesToShow: 3,
+    //     slidesToScroll: 1
+    // };
+    return (
+      <div className="bestSeller">
+        <h1 className="title">Recently Viewed</h1>
+        {/* <Slider {...settings}>
                     {!!recentlyViewedData && recentlyViewedData.map((rcItemData, index) =>{
                         return (
                             <figure>
@@ -71,9 +79,9 @@ class RecentlyViewed extends React.Component{
                         );
                     })}
                 </Slider> */}
-            </div>
-        )
-    }
-}  
+      </div>
+    );
+  }
+}
 
 export default RecentlyViewed;
