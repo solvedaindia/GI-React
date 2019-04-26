@@ -28,7 +28,7 @@ class productImagesAndVideos extends React.Component {
       allImages.map((images) => {
         this.state.images.push({'original': images.imageSrc, 'thumbnail': images.thumbnail});
       });
-    });
+    
   };
 
   /* render Videos */
@@ -36,7 +36,7 @@ class productImagesAndVideos extends React.Component {
       allVideos.map((video) => {
         this.state.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': video.thumbnail, 'videourl': video.videoSrc});
       });
-    });
+    
   };
 
   /* render Videos */
@@ -53,7 +53,7 @@ class productImagesAndVideos extends React.Component {
           this.state.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': data.thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
         }
       }
-    });
+    );
   };
 
   /* render video player */

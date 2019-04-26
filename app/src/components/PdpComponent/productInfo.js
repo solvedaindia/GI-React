@@ -41,7 +41,7 @@ class productInfo extends React.Component {
         <div className="price">
                   <span className='actualprice text'>&#8377;{this.props.productData.actualPrice}</span>
                   <span className='offerprice text'>&#8377;{this.props.productData.offerPrice}</span>
-          </span>
+          
         </div>
         <div className="shippingCharge">
           Shipping Charges:{' '}
@@ -54,7 +54,7 @@ class productInfo extends React.Component {
                   <div className='offerbg text'> % </div>
                   <div className='discount-off text'>{this.props.productData.discount} </div>
           </div>
-        </div>
+        
         <a role="button" onClick={this.toggleOffers.bind(this)}>
           View Offer
         </a>
@@ -77,12 +77,12 @@ class productInfo extends React.Component {
                   <div className='text'>per month</div>
                   <div className='text emiinfo'><EmiInfo /></div>
           </div>
-        </div>
+    
         <div className="zip">
                   <input className='btn' type='text' readOnly value='56632' />&nbsp;&nbsp;
                   <a role='button'>Edit</a><br/>
                   <span className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</span>
-          </span>
+          
         </div>
         <div className="soldbyDealers">
           Experience this product at{' '}

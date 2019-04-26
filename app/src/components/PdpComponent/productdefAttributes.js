@@ -39,7 +39,6 @@ class productDefAttribute extends React.Component {
                       <li className='attributeList' key={index}>
                         <input type='radio' name={data.name} />{colorType}
                       </li>
-                  </li>
                 );
                   })
                 }

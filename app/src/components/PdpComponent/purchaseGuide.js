@@ -1,13 +1,14 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
 
-const purchaseGuide = props => (
-  // console.log(props, '----');
-  (
-    <div>
-            
-    </div>
-  )
+const espot = props => {
+  const espot = props.espot.GI_PDP_Sample_Content;
+  let renderData;
+  if (espot.type === 'content') {
+    renderData = <div dangerouslySetInnerHTML={{ __html: espot.content }} />;
+  } else {
+    renderData = <img href={espot.content} />;
+  }
+  return <div>{renderData}</div>;
+};
 
-
-export default purchaseGuide;
+export default espot;

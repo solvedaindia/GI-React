@@ -11,7 +11,7 @@ const productKeywords = props => (
             <li className='list' key={i}>
               {keywords}
             </li>
-          ))   
+          ))} 
         </ul>
       </Col>
     }
