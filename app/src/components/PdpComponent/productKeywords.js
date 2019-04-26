@@ -2,6 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 
 const productKeywords = (props) => {
+    
     return(
         <div>
            { <Col md={12} sm={12} xs={12}>
@@ -25,5 +26,4 @@ const productKeywords = (props) => {
         </div>
     );
 }
-
 export default productKeywords;
