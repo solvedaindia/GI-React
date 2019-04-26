@@ -96,15 +96,18 @@ export class PlpContainer extends React.Component {
 		let path = String(nextProps.location.pathname);
 		var idStr = path.split('/')[2];
 		if (idStr != undefined && idStr !== categoryId) {
-			this.props.plpReduxStateReset();
-			categoryId = idStr;
+			//this.props.plpReduxStateReset();
+			//categoryId = idStr;
 			// this.setState({
+			// 	pageNumber: 1,
 			// 	filterData: [],
 			// 	plpData: [],
 			// 	isCatDetails: true,
 			// })
-			//this.fetchPLPProductsData();
+			// this.fetchSubCategoryData();
+			// this.fetchPLPProductsData();
 		}
+		
 
 		// }
 		// else {
@@ -113,13 +116,20 @@ export class PlpContainer extends React.Component {
 
 		if (nextProps.sortingValue !== this.props.sortingValue) {
 			console.log('In the Sorrting');
-			this.setState({ plpData: [] })
+			this.setState({ 
+				plpData: [],
+				pageNumber: 1,
+			})
 			this.fetchPLPProductsData();
 		}
 		if (nextProps.updatedFilter !== this.props.updatedFilter) {
 			console.log('In the Filter');
 			console.log('Filter Changed ---- ', nextProps.updatedFilter);
-			this.setState({ plpData: [], filterData: [], })
+			this.setState({ 
+				plpData: [], 
+				filterData: [], 
+				pageNumber: 1,
+			})
 			this.fetchPLPProductsData();
 		}
 	}

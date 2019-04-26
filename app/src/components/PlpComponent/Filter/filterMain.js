@@ -161,7 +161,6 @@ class FilterMain extends React.Component {
   }
 
   render() {
-    console.log('Filter Main Title---', this.state.filterBtnTitle);
     var moreFilterBtn = null;
     if (this.props.filterDataPro.length > 4) {
       moreFilterBtn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{this.state.filterBtnTitle}</button>

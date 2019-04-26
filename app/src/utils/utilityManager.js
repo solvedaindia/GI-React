@@ -81,7 +81,6 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
  * @param {*} updatedFilter
  */
 export function resolveTheFilter(updatedFilter) {
-  console.log('Utility ResovleTheFilter ---- ',updatedFilter);
   var filterURL='';
   for (const [key, value] of updatedFilter) {
     filterURL += 'facet=';
@@ -94,6 +93,5 @@ export function resolveTheFilter(updatedFilter) {
     })
     filterURL += '&'
 }
-  console.log('FilterURL---- ', filterURL);
   return filterURL;
 }

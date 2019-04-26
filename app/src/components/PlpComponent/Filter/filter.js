@@ -142,7 +142,7 @@ class Filter extends React.Component {
   }
 
   filterOptions(alreadyAddedFiltersArr) {
-    console.log('Redux Filter -- ', alreadyAddedFiltersArr);
+    
     //return this.props.dataPro.facetValues.map((option, i) => {
     var item = this.props.dataPro.facetValues.map((option, i) => {
 
@@ -163,16 +163,16 @@ class Filter extends React.Component {
       var checkItem;
       if (option.facetImage !== "") {
         const checkNew = (<img className='circle' src={'https://192.168.0.36:8443' + option.facetImage} />);
-        checkItem = <label class="lblradio" for={customSelectionBoxId}>
+        checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
           {checkNew}
         </label>
       }
       else {
-        checkItem = <label class="lblCheck" for={customSelectionBoxId}></label>
+        checkItem = <label className="lblCheck" htmlFor={customSelectionBoxId}></label>
       }
 
       return (
-        <li className='list'>
+        <li key={i} className='list'>
           <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
             <div className='input_box'>
             {checkboxItem}   
@@ -193,7 +193,6 @@ class Filter extends React.Component {
   }
 
   render() {
-    console.log('Selected Render --- ', this.state.facetArr);
     return (
       <>
         <div ref={node => { this.node = node; }} className="dropdown_filter">

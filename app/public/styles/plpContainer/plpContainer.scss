@@ -333,16 +333,17 @@ section.tablecarousel {
     }
 
     .dropdown_filter {
-      position: relative;
+      position: static;
+      display: block;
+      float: left;
+      min-width: 200px;
+
       &__filter {
-        float: left;
         background: $colorwhite;
         border: 1px solid $lightgrey;
-        border-radius: 1px;
-        max-width: 181px;
-        z-index: 1;
-        width: 50%;
-        background: $colorwhite;
+        border-radius: 1px;        
+        z-index: 1;       
+        background: $colorwhite; 
 
         &:last-child {
           border-right: 1px solid $lightgrey;
@@ -364,7 +365,6 @@ section.tablecarousel {
       &__list {
         background: $colorwhite;
         border: 1px solid $lightgrey;
-        top: 51px;
         transition: max-height 0.2s ease-out;
         max-height: 0;
         overflow: hidden;
@@ -376,6 +376,8 @@ section.tablecarousel {
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
         // opacity: 0;
         visibility: hidden;
+        max-width: 84%;
+        left:0;
         .filterbtnWrapper {
           text-align: center;
         }

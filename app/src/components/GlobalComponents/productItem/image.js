@@ -15,7 +15,6 @@ import ImageLoader from '../../../utils/imageLoader';
 class Image extends React.Component {
 
   render() {
-
     var imageItem;
     if (this.props.data === '') {
       imageItem = <ImageLoader className="imgfullwidth" src={require('../../../../public/images/plpAssests/placeholder-image.png')} alt="sofa" />
@@ -25,7 +24,7 @@ class Image extends React.Component {
     }
     
     return (
-      <Link className="link" to="/pdp">
+      <Link className="link" to={`/pdp/22542`}>
         <LazyLoad debounce={false}>
           {imageItem}
         </LazyLoad>

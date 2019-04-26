@@ -7,19 +7,19 @@ import axios from 'axios';
 import WelcomeBackForm from '../WelcomeBackForm';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
-  facebookAppId,
-  googleClientId,
+	facebookAppId,
+	googleClientId,
 } from '../../../public/constants/constants';
 import {
-  onFacebookResponse,
-  onGoogleResponse,
+	onFacebookResponse,
+	onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
 import {
-  storeId,
-  accessToken,
-  accessTokenCookie,
-  userLoginAPI,
+	storeId,
+	accessToken,
+	accessTokenCookie,
+	userLoginAPI,
 } from '../../../public/constants/constants';
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
@@ -32,8 +32,8 @@ class WelcomeBack extends React.Component {
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.state = {
-		show: false,
-		message: null,
+			show: false,
+			message: null,
 		};
 	}
 
@@ -63,35 +63,38 @@ class WelcomeBack extends React.Component {
 		});
 
 		onGoogleResponse(this.state, itemData => {
+			this.handleClose();
 			console.log('GoogleCallback', itemData);
+
 		});
 	};
-	
+
 	responseFacebook = response => {
 		if (!response.email) {
 			alert('SocialLogin - Email Id missing');
 			return;
 		}
 
-	// Remove below condition to get auto Facebook login.
+		// Remove below condition to get auto Facebook login.
 		if (this.state.isFacebookClicked) {
 			const firstName = response.name.substr(0, response.name.indexOf(' '));
 			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
 			this.setState({
-			firstName,
-			lastName,
-			authorizationProvider: 'facebook',
-			userId: response.userID,
-			socialToken: response.accessToken,
-			emialId: response.email,
+				firstName,
+				lastName,
+				authorizationProvider: 'facebook',
+				userId: response.userID,
+				socialToken: response.accessToken,
+				emialId: response.email,
 			});
 
 			onFacebookResponse(this.state, itemData => {
-			console.log('FacebookCallback', itemData);
+				this.handleClose();
+				console.log('FacebookCallback', itemData);
 			});
 		}
 	};
-	
+
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
@@ -100,42 +103,42 @@ class WelcomeBack extends React.Component {
 	handleUserLoginApi(data) {
 		this.setState({ message: null });
 		axios
-		.post(userLoginAPI, data, {
-			headers: { store_id: storeId, access_token: accessToken },
-		})
-		.then(response => {
-			document.cookie = 'isLoggedIn=true';
-			document.cookie = `${accessTokenCookie}=${
-			response.data.data.access_token
-			}`;
-			alert('Successfully Logged In');
-			this.handleClose();
-		})
-		.catch(error => {
-			const errorData = error.response.data;
-			const errorMessage = errorData.error.error_message;
-			this.setState({
-			message: `Error - ${errorMessage}`,
+			.post(userLoginAPI, data, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				document.cookie = 'isLoggedIn=true';
+				document.cookie = `${accessTokenCookie}=${
+					response.data.data.access_token
+					}`;
+				alert('Successfully Logged In');
+				this.handleClose();
+			})
+			.catch(error => {
+				const errorData = error.response.data;
+				const errorMessage = errorData.error.error_message;
+				this.setState({
+					message: `Error - ${errorMessage}`,
+				});
 			});
-		});
 	}
 
 	render() {
 		let message = null;
 		if (this.state.message) {
-		message = <p>{this.state.message}</p>;
+			message = <p>{this.state.message}</p>;
 		}
 		return (
 			<div>
 				<a className="dropDown" onClick={this.handleShow}>
-				Login/Register
+					Login/Register
 				</a>
 				<Modal
-				className="welcomeBack"
-				size="lg"
-				animation={false}
-				show={this.state.show}
-				onHide={this.handleClose}
+					className="welcomeBack"
+					size="lg"
+					animation={false}
+					show={this.state.show}
+					onHide={this.handleClose}
 				>
 					{message}
 					<Modal.Header closeButton>
@@ -146,11 +149,11 @@ class WelcomeBack extends React.Component {
 						<GoogleLogin
 							clientId={googleClientId}
 							render={renderProps => (
-								<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
-								<span className="icon-img">
-									<img className="icon" src={Google} />
-								</span>
-								<span className="signin-text">Sign in with Google</span>
+								<button className="btn-white" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+									<span className="icon-img">
+										<img className="icon" src={Google} />
+									</span>
+									<span className="signin-text">Sign in with Google</span>
 								</button>
 							)}
 							onSuccess={this.responseGoogle}
@@ -160,10 +163,10 @@ class WelcomeBack extends React.Component {
 							appId={facebookAppId}
 							render={renderProps => (
 								<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
-								<span className="icon-img">
-									<img className="icon" src={Facebook} />
-								</span>
-								<span className="signin-text">Sign in with Facebook</span>
+									<span className="icon-img">
+										<img className="icon" src={Facebook} />
+									</span>
+									<span className="signin-text">Sign in with Facebook</span>
 								</button>
 							)}
 							autoLoad

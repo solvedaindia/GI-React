@@ -89,7 +89,7 @@ class NewsletterModel extends React.Component {
       const data = response.data;
 
       let now = new Date();
-      var minutes = 1;
+      var minutes = 21600; // -> 21600 minuts equals to 15 days
       now.setTime(now.getTime() + (minutes * 60 * 1000));
 
       document.cookie = `${newsletterTokenCookie}=${getCookie(accessTokenCookie)};path=/;expires=${now.toGMTString()}`;
