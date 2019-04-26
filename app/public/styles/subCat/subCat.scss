@@ -1,0 +1,45 @@
+@import '../variable';
+@import '../base';
+.subCat {
+    width: 83.33%;
+    margin: $base*4 auto;
+    .subCatImg {
+        width: 100%;
+    }
+    .slick-next,
+    .slick-prev {
+        top: unset;
+        bottom: -30%;
+    }
+    .slick-next:before, 
+    .slick-prev:before {
+        font-size: 20px;
+        line-height: 1;
+        opacity: .75;
+        color: $black;
+    }
+    .slick-prev {
+        right: 20px;
+        left: auto;
+    }
+    .slick-next {
+        right: -15px;
+    }
+    .catDetails {
+        padding: 0 $base*3;
+        .catItem {
+            font-size: $base*2;
+            font-family: $font-bold;
+            color: $black; 
+        }
+        .itemCount{
+            font-size: 11px;
+            color: $black;
+            float: right;
+        }
+        .starting {
+            font-style: italic;
+            font-size: 11px;
+        }
+    }
+}

@@ -3,7 +3,7 @@ const espots = {
   footer: ['GI_Footer_Static_Data'],
   homebody: ['GI_Homepage_Static_Data'],
   recentlyViewed: 'RecViewed_CatEntries',
-  bestSeller: 'BEST_SELLER_ESPOT',
+  bestSeller: 'GI_HOMEPAGE_BESTSELLERS',
   featuredCategories: 'GI_HOMEPAGE_FEATURED_CATEGORIES',
 };
 

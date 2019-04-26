@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 // import GetImage from './image';
 import BannerData from '../../data/BannerData.json';
+import '../../../public/styles/slider.scss';
+
 class FullBanner extends React.Component {
     render() {
         const settings = {
@@ -12,19 +14,17 @@ class FullBanner extends React.Component {
             slidesToScroll: 1
         };
         return (
-        <div>
+        <div className='fsBanner'>
             <Slider {...settings}>
                 {BannerData.map((BannerlistData)=>{
                     return BannerlistData.bannerList.map((bannerData, index)=>{
                         return (
-                            <div className='fsBanner'>
-                                <a href={bannerData.onClickUrl} key={index}>
-                                    <img 
-                                        src={bannerData.src}
-                                        alt={bannerData.alt}
-                                    />
-                                </a>
-                            </div>
+                            <a href={bannerData.onClickUrl} key={index}>
+                                <img 
+                                    src={bannerData.src}
+                                    alt={bannerData.alt}
+                                />
+                            </a>
                         )
                     })
                 })}

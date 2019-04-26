@@ -182,9 +182,9 @@ function getPromotionData(headers, productIDs, callback) {
 
 /* Merge Product Details and Promotion Data */
 function transformJson(result) {
-  const productList = result[0];
+  const productListArray = result[0];
   const promotionJson = result[1];
-  productList.forEach(product => {
+  productListArray.forEach(product => {
     const productPromotion = promotionJson.filter(
       promotion => promotion.uniqueID === product.uniqueID,
     );
@@ -198,5 +198,9 @@ function transformJson(result) {
       }
     } */
   });
-  return productList;
+  const resJson = {
+    productCount: productListArray.length,
+    productList: productListArray,
+  };
+  return resJson;
 }

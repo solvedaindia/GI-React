@@ -14,12 +14,12 @@ const espotNames = require('../configs/espotnames');
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 exports.getRecentlyViewedProduct = function getRecentlyViewedProduct(
-  headers,
+  req,
   callback,
 ) {
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
+  const reqHeaders = headerUtils.getWCSHeaders(req.headers);
   const activityUrl = `${constants.espotOriginURL
-    .replace('{{storeId}}', headers.storeId)
+    .replace('{{storeId}}', req.headers.storeId)
     .replace('{{espotName}}', espotNames.recentlyViewed)}`;
   origin.getResponse(
     'GET',
@@ -48,14 +48,14 @@ exports.getRecentlyViewedProduct = function getRecentlyViewedProduct(
           });
           productUtil.productByProductIDs(
             recentlyViewedProductIDs,
-            headers,
+            req.headers,
             (err, result) => {
               if (err) {
                 callback(err);
                 return;
               }
-              recentlyViewedProducts.productCount = result.length;
-              recentlyViewedProducts.productList = result;
+              recentlyViewedProducts.productCount = result.productCount;
+              recentlyViewedProducts.productList = result.productList;
               callback(null, recentlyViewedProducts);
             },
           );
@@ -122,23 +122,18 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
  * @return Best Seller Product List
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-exports.getBestSellerProducts = function getBestSellerProducts(
-  headers,
-  categoryID,
-  callback,
-) {
+exports.getBestSellerProducts = getBestSellerProducts;
+function getBestSellerProducts(req, callback) {
+  /* const categoryID = req.params.categoryId;
   if (!categoryID) {
     callback(errorutils.errorlist.invalid_params);
     return;
-  }
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
-  /* const bestSellerUrl = `${constants.espotOriginURL
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{espotName}}', bestSellerActivity)}/category/16013`;
-   */
-  const bestSellerUrl = `https://192.168.0.39/wcs/resources/store/10151/espot/${
-    espotNames.bestSeller
-  }/category/${categoryID}`;
+  } */
+  const reqHeaders = headerUtils.getWCSHeaders(req.headers);
+  const bestSellerUrl = `${constants.espotOriginURL
+    .replace('{{storeId}}', req.headers.storeId)
+    .replace('{{espotName}}', espotNames.bestSeller)}`;
+
   origin.getResponse(
     'GET',
     bestSellerUrl,
@@ -149,9 +144,106 @@ exports.getBestSellerProducts = function getBestSellerProducts(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        const productListJSON = {
+          title: '',
+          productCount: 0,
+          productList: [],
+        };
+        if (
+          response.body.MarketingSpotData[0].baseMarketingSpotActivityData &&
+          response.body.MarketingSpotData[0].baseMarketingSpotActivityData
+            .length > 0
+        ) {
+          productListJSON.title = 'Best Selling Products';
+          const productIds = [];
+          const activityJSON =
+            response.body.MarketingSpotData[0].baseMarketingSpotActivityData;
+          activityJSON.forEach(product => {
+            productIds.push(product.productId);
+          });
+          productUtil.productByProductIDs(
+            productIds,
+            req.headers,
+            (err, result) => {
+              if (err) {
+                callback(err);
+                return;
+              }
+              productListJSON.productCount = result.productCount;
+              productListJSON.productList = result.productList;
+              callback(null, productListJSON);
+            },
+          );
+        } else {
+          callback(null, productListJSON);
+        }
       } else {
         logger.debug('Error while calling Best Seller Activity');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Get Product Recommendation Data
+ * @param storeId,access_token
+ * @return Product Recommendation
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+exports.getRecommendedProducts = function getRecommendedProducts(
+  req,
+  callback,
+) {
+  const reqHeaders = headerUtils.getWCSHeaders(req.headers);
+  const activityUrl = `${constants.espotOriginURL
+    .replace('{{storeId}}', req.headers.storeId)
+    .replace('{{espotName}}', espotNames.recentlyViewed)}`;
+  origin.getResponse(
+    'GET',
+    activityUrl,
+    reqHeaders,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const productListJSON = {
+          title: '',
+          productCount: 0,
+          productList: [],
+        };
+        if (
+          response.body.MarketingSpotData[0].baseMarketingSpotActivityData &&
+          response.body.MarketingSpotData[0].baseMarketingSpotActivityData
+            .length > 0
+        ) {
+          productListJSON.title = 'Recently Viewed Products';
+          const productIds = [];
+          const activityJSON =
+            response.body.MarketingSpotData[0].baseMarketingSpotActivityData;
+          activityJSON.forEach(product => {
+            productIds.push(product.productId);
+          });
+          productUtil.productByProductIDs(
+            productIds,
+            req.headers,
+            (err, result) => {
+              if (err) {
+                callback(err);
+                return;
+              }
+              productListJSON.productCount = result.productCount;
+              productListJSON.productList = result.productList;
+              callback(null, productListJSON);
+            },
+          );
+        } else {
+          getBestSellerProducts(req, callback);
+        }
+      } else {
+        logger.debug('Error while calling Recently Viewed Activity');
         callback(errorutils.handleWCSError(response));
       }
     },
