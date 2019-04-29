@@ -27,7 +27,8 @@ module.exports.getProductList = function getProductList(req, callback) {
   const pageNumber = Number(reqQuery.pagenumber) || 1;
   const orderBy = Number(reqQuery.orderby) || 0;
   const currency = 'USD';
-  let queryUrl = `pageSize=${pageSize}&pageNumber=${pageNumber}&orderBy=${orderBy}&currency=${currency}`;
+
+  let queryUrl = `pageSize=${pageSize}&pageNumber=${pageNumber}&orderBy=${orderBy}&currency=${currency}&catalogId=${catalogID}`;
   let facetUrl = '';
   if (reqQuery.facet) {
     const differentFacetArray = encodeURIComponent(req.query.facet).split(
@@ -43,31 +44,18 @@ module.exports.getProductList = function getProductList(req, callback) {
     queryUrl += `${facetUrl}`;
   }
 
-  const reqUrl = constants.allSKUByCategoryId
-    .replace('{{storeId}}', reqHeader.storeId)
-    .replace('{{categoryId}}', categoryID)
-    .replace('{{queryUrl}}', queryUrl)
-    .replace('{{catalogID}}', catalogID);
-
-  let plpTask = [];
+  let plpTask = [
+    productList.bind(null, reqHeader, categoryID, queryUrl, null),
+    getPromotionData,
+  ];
 
   if (reqHeader.cat_details === 'true') {
     plpTask = [
-      getCategoryDetails.bind(null, reqHeader, categoryID, reqUrl),
+      getCategoryDetails.bind(null, reqHeader, categoryID, queryUrl),
       productList,
       getPromotionData,
     ];
-  } else if (reqHeader.sku_display === 'false') {
-    callback(null, {});
-    return;
-    // plpTask = [productList.bind(null, reqHeader, reqUrl)];
-  } else {
-    plpTask = [
-      productList.bind(null, reqHeader, reqUrl, null, true),
-      getPromotionData,
-    ];
   }
-
   async.waterfall(plpTask, (err, result) => {
     if (err) {
       callback(err);
@@ -79,32 +67,39 @@ module.exports.getProductList = function getProductList(req, callback) {
 };
 
 /* Get Category Details */
-function getCategoryDetails(reqHeader, categoryID, reqUrl, callback) {
-  if (reqHeader.cat_details === 'true') {
-    categoryUtil.getCategoryDetails(reqHeader, categoryID, (err, result) => {
-      if (err) {
-        callback(err);
-      } else if (result.displaySkus === true) {
-        callback(null, reqHeader, reqUrl, result, true);
-      } else if (result.displaySkus === false) {
-        callback(null, reqHeader, reqUrl, result, false);
-      } else {
-        callback(errorUtils.errorlist.invalid_params);
-      }
-    });
-  }
+function getCategoryDetails(headers, categoryID, queryUrl, callback) {
+  categoryUtil.getCategoryDetails(headers, categoryID, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    const categoryDetail = result;
+    const reqHeaders = headers;
+    if (reqHeaders.displaySkus === true) {
+      reqHeaders.sku_display = true;
+    }
+    if (reqHeaders.displaySkus === false) {
+      reqHeaders.sku_display = false;
+    }
+    callback(null, reqHeaders, categoryID, queryUrl, categoryDetail);
+  });
 }
 
 /**
  *  Get Products List
  */
-function productList(headers, reqUrl, categoryDetails, skuFlag, callback) {
-  let plpUrl = '';
-  if (skuFlag === true) {
-    plpUrl = `${reqUrl}&searchType=${101}`;
-  } else {
-    plpUrl = `${reqUrl}&searchType=${1}`;
+function productList(headers, categoryID, queryUrl, categoryDetails, callback) {
+  let searchType = 101;
+  if (headers.sku_display === false) {
+    searchType = 101;
   }
+
+  const plpUrl = constants.allSKUByCategoryId
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{categoryId}}', categoryID)
+    .replace('{{queryUrl}}', queryUrl)
+    .replace('{{searchType}}', searchType);
+
   const reqHeader = headerUtil.getWCSHeaders(headers);
   origin.getResponse(
     'GET',
@@ -118,6 +113,9 @@ function productList(headers, reqUrl, categoryDetails, skuFlag, callback) {
       if (response.status === 200) {
         const productListJson = {
           categoryDetails: {},
+          productCount: 0,
+          facetData: [],
+          productList: [],
         };
         if (categoryDetails) {
           productListJson.categoryDetails = categoryDetails;
@@ -126,18 +124,7 @@ function productList(headers, reqUrl, categoryDetails, skuFlag, callback) {
         productListJson.facetData = plpfilter.facetData(
           response.body.facetView,
         );
-
-        const productListArray = [];
-        if (
-          response.body.catalogEntryView &&
-          response.body.catalogEntryView.length > 0
-        ) {
-          const catalogArray = response.body.catalogEntryView;
-          catalogArray.forEach(product => {
-            productListArray.push(pdpfilter.productDetailSummary(product));
-          });
-        }
-        productListJson.productList = productListArray;
+        productListJson.productList = response.body.catalogEntryView;
         callback(null, headers, productListJson);
       } else {
         callback(errorUtils.handleWCSError(response));
@@ -196,18 +183,18 @@ function getProductDetails(headers, facets, uniqueIDs, callback) {
  *  Get Promotion Data
  */
 function getPromotionData(headers, productListJson, callback) {
-  //  const productArray = productListJson.productList;
   if (productListJson.productList && productListJson.productList.length > 0) {
     async.map(
       productListJson.productList,
       (product, cb) => {
+        const productDetail = pdpfilter.productDetailSummary(product); // Filter Product Details
         promotionUtil.getPromotionData(
-          product.uniqueID,
+          productDetail.uniqueID,
           headers,
           (error, promotionData) => {
             if (!error) {
-              product.promotionData = promotionData;
-              cb(null, product);
+              productDetail.promotionData = promotionData; // Add Promotion Data to Product Details
+              cb(null, productDetail);
             } else {
               cb(error);
             }
@@ -219,6 +206,7 @@ function getPromotionData(headers, productListJson, callback) {
           callback(errors);
           return;
         }
+        productListJson.productList = results;
         callback(null, productListJson);
       },
     );

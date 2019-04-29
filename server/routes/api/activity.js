@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const activityHandler = require('../../handlers/activityhandler');
+const espotNames = require('../../configs/espotnames');
 
 /* Add Product to Recently Viewed */
 router.post('/recentlyviewed/:productID', (req, res, next) => {
@@ -22,7 +23,43 @@ router.post('/recentlyviewed/:productID', (req, res, next) => {
 
 /* Get Recently Viewed Products */
 router.get('/recentlyviewed', (req, res, next) => {
-  activityHandler.getRecentlyViewedProduct(req.headers, (err, result) => {
+  activityHandler.getRecommendedProducts(
+    req.headers,
+    espotNames.recentlyViewed,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
+});
+
+/* Get Recommended Products */
+router.get('/recommendedproduct/:activityName', (req, res, next) => {
+  activityHandler.getRecommendedProducts(
+    req.headers,
+    req.params.activityName,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
+});
+
+/* Get Best Seller Products By Category */
+router.get('/bestseller', (req, res, next) => {
+  activityHandler.getBestSellerProducts(req, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -34,11 +71,11 @@ router.get('/recentlyviewed', (req, res, next) => {
   });
 });
 
-/* Get Best Seller Products By Category */
-router.get('/bestseller/bycategory/:categoryID', (req, res, next) => {
-  activityHandler.getBestSellerProducts(
+/* Get Recommended Category */
+router.get('/recommendedcategory/:activityName', (req, res, next) => {
+  activityHandler.getRecommendedCategories(
     req.headers,
-    req.params.categoryID,
+    req.params.activityName,
     (err, result) => {
       if (err) {
         next(err);
@@ -54,16 +91,20 @@ router.get('/bestseller/bycategory/:categoryID', (req, res, next) => {
 
 /* Get Featured Categories Data */
 router.get('/featuredcategories', (req, res, next) => {
-  activityHandler.getFeaturedCategories(req.headers, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
+  activityHandler.getRecommendedCategories(
+    req.headers,
+    espotNames.featuredCategories,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
 });
 
 module.exports = router;

@@ -2,73 +2,10 @@ const logger = require('../utils/logger.js');
 const origin = require('../utils/origin');
 const constants = require('../utils/constants');
 const errorutils = require('../utils/errorutils.js');
-const headerUtils = require('../utils/headerutil');
 const productUtil = require('../utils/productutil');
 const categoryUtil = require('../utils/categoryutil');
 const espotNames = require('../configs/espotnames');
-
-/**
- * Get data from WCS Activity
- * @param storeId,access_token
- * @return Activity Response
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-exports.getRecentlyViewedProduct = function getRecentlyViewedProduct(
-  headers,
-  callback,
-) {
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
-  const activityUrl = `${constants.espotOriginURL
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{espotName}}', espotNames.recentlyViewed)}`;
-  origin.getResponse(
-    'GET',
-    activityUrl,
-    reqHeaders,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        const recentlyViewedProducts = {
-          productCount: 0,
-          productList: [],
-        };
-        if (
-          response.body.MarketingSpotData[0].baseMarketingSpotActivityData &&
-          response.body.MarketingSpotData[0].baseMarketingSpotActivityData
-            .length > 0
-        ) {
-          const recentlyViewedProductIDs = [];
-          const recentlyViewedJSON =
-            response.body.MarketingSpotData[0].baseMarketingSpotActivityData;
-          recentlyViewedJSON.forEach(recentlyViewedProduct => {
-            recentlyViewedProductIDs.push(recentlyViewedProduct.productId);
-          });
-          productUtil.productByProductIDs(
-            recentlyViewedProductIDs,
-            headers,
-            (err, result) => {
-              if (err) {
-                callback(err);
-                return;
-              }
-              recentlyViewedProducts.productCount = result.length;
-              recentlyViewedProducts.productList = result;
-              callback(null, recentlyViewedProducts);
-            },
-          );
-        } else {
-          callback(null, recentlyViewedProducts);
-        }
-      } else {
-        logger.debug('Error while calling Recently Viewed Activity');
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-};
+const espotHandler = require('./espotshandler');
 
 /**
  * Add Product to Recently Viewed
@@ -117,103 +54,133 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
 };
 
 /**
- * Get Best Seller Products Data By Category
+ * Get Recommended Product Data from WCS Activity
  * @param storeId,access_token
- * @return Best Seller Product List
+ * @return Activity Response
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-exports.getBestSellerProducts = function getBestSellerProducts(
-  headers,
-  categoryID,
-  callback,
-) {
-  if (!categoryID) {
+exports.getRecommendedProducts = getRecommendedProducts;
+function getRecommendedProducts(headers, activityName, callback) {
+  if (!activityName) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
-  /* const bestSellerUrl = `${constants.espotOriginURL
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{espotName}}', bestSellerActivity)}/category/16013`;
-   */
-  const bestSellerUrl = `https://192.168.0.39/wcs/resources/store/10151/espot/${
-    espotNames.bestSeller
-  }/category/${categoryID}`;
-  origin.getResponse(
-    'GET',
-    bestSellerUrl,
-    reqHeaders,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body);
+  espotHandler.getEspotsData(headers, activityName, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    const recommendedProduct = {
+      productCount: 0,
+      productList: [],
+    };
+    if (
+      result.MarketingSpotData[0].baseMarketingSpotActivityData &&
+      result.MarketingSpotData[0].baseMarketingSpotActivityData.length > 0
+    ) {
+      const productIds = [];
+      const resJson = result.MarketingSpotData[0].baseMarketingSpotActivityData;
+      resJson.forEach(product => {
+        productIds.push(product.productId);
+      });
+      productUtil.productByProductIDs(productIds, headers, (error, results) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+        recommendedProduct.productCount = results.productCount;
+        recommendedProduct.productList = results.productList;
+        callback(null, recommendedProduct);
+      });
+    } else {
+      callback(null, recommendedProduct);
+    }
+  });
+}
+
+/**
+ * Get Best Seller Products for Homepage
+ * @return Recently Viewed Products if Exists else return Best Seller
+ */
+exports.getBestSellerProducts = function getBestSeller(req, callback) {
+  getRecommendedProducts(
+    req.headers,
+    espotNames.recentlyViewed,
+    (err1, result1) => {
+      const resJSON = {
+        title: '',
+        productCount: 0,
+        productList: [],
+      };
+      if (err1) {
+        callback(err1);
+        return;
+      }
+      if (result1.productCount === 0) {
+        getRecommendedProducts(
+          req.headers,
+          espotNames.bestSeller,
+          (err2, result2) => {
+            if (err2) {
+              callback(err2);
+              return;
+            }
+            resJSON.title = 'Best Selling Products';
+            resJSON.productCount = result2.productCount;
+            resJSON.productList = result2.productList;
+            callback(null, resJSON);
+          },
+        );
       } else {
-        logger.debug('Error while calling Best Seller Activity');
-        callback(errorutils.handleWCSError(response));
+        resJSON.title = 'Recently Viewed Products';
+        resJSON.productCount = result1.productCount;
+        resJSON.productList = result1.productList;
+        callback(null, resJSON);
       }
     },
   );
 };
 
 /**
- * Get Featured Categories
+ * Get Category Recommendation Data
  * @param storeId,access_token
  * @return Activity Response
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-exports.getFeaturedCategories = function getFeaturedCategories(
+exports.getRecommendedCategories = function getRecommendedCategories(
   headers,
+  activityName,
   callback,
 ) {
-  const reqHeaders = headerUtils.getWCSHeaders(headers);
-  const featuredCategoryUrl = `${constants.espotOriginURL
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{espotName}}', espotNames.featuredCategories)}`;
-
-  origin.getResponse(
-    'GET',
-    featuredCategoryUrl,
-    reqHeaders,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        let categoryList = [];
-        if (
-          response.body.MarketingSpotData[0].baseMarketingSpotActivityData &&
-          response.body.MarketingSpotData[0].baseMarketingSpotActivityData
-            .length > 0
-        ) {
-          const categoryIDs = [];
-          const categoryJSON =
-            response.body.MarketingSpotData[0].baseMarketingSpotActivityData;
-          categoryJSON.forEach(category => {
-            categoryIDs.push(category.categoryId);
-          });
-          categoryUtil.categoryListByIDs(
-            categoryIDs,
-            headers,
-            (err, result) => {
-              if (err) {
-                callback(err);
-                return;
-              }
-              categoryList = result;
-              callback(null, categoryList);
-            },
-          );
-        } else {
-          callback(null, categoryList);
+  if (!activityName) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  espotHandler.getEspotsData(headers, activityName, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    let categoryList = [];
+    if (
+      result.MarketingSpotData[0].baseMarketingSpotActivityData &&
+      result.MarketingSpotData[0].baseMarketingSpotActivityData.length > 0
+    ) {
+      const categoryIDs = [];
+      const catJson = result.MarketingSpotData[0].baseMarketingSpotActivityData;
+      catJson.forEach(category => {
+        categoryIDs.push(category.categoryId);
+      });
+      categoryUtil.categoryListByIDs(categoryIDs, headers, (error, results) => {
+        if (error) {
+          callback(error);
+          return;
         }
-      } else {
-        logger.debug('Error while calling Featured Category Activity API');
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
+        categoryList = results;
+        callback(null, categoryList);
+      });
+    } else {
+      callback(null, categoryList);
+    }
+  });
 };

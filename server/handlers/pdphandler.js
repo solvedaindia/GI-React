@@ -7,18 +7,17 @@ const pdpfilter = require('../filters/productdetailfilter');
 
 const associatedPromo = [
   {
-    code: 'AmountOff_PromotionName-10000051',
-    endDate: '9999-12-31 23:59:59.999',
+    name: 'Free accessories',
     description: null,
-    associatePromotionId: '30051',
-    startDate: '2019-04-18 00:00:00.0',
   },
   {
-    code: 'PecentageOff_CatalogEntry-10000055',
-    endDate: '9999-12-31 23:59:59.999',
-    description: null,
-    associatePromotionId: '30055',
-    startDate: '2019-04-18 00:00:00.0',
+    name: 'Cashback Offer',
+    description:
+      'Get 10% cashback upto Rs 500 on Purchases on 1499. For limited period only.',
+  },
+  {
+    name: 'Coupon Offer',
+    description: 'Use coupon FIRSTBUY and get 599 off.',
   },
 ];
 /**
@@ -43,7 +42,7 @@ module.exports.getProductDetails = function getProductDetails(req, callback) {
       callback(errorUtils.handleWCSError(err));
     } else {
       logger.debug('Got all the origin resposes for Product Detail');
-      callback(null, productSummaryJson(result));
+      callback(null, productSummaryJson(reqHeaders, result));
     }
   });
 
@@ -64,6 +63,29 @@ module.exports.getProductDetails = function getProductDetails(req, callback) {
   // );
 };
 
+module.exports.getAssociatedProducts = function associatedProducts(
+  req,
+  callback,
+) {
+  logger.debug('Inside the Associated Products data Method');
+  if (!req.params.skuId) {
+    logger.debug('GET PDP Data :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+
+  const reqHeaders = req.headers;
+  const skuID = req.params.skuId;
+
+  productUtil.productByProductID(skuID, reqHeaders, (err, result) => {
+    if (err) {
+      callback(errorUtils.handleWCSError(err));
+    } else {
+      logger.debug('Got all the origin resposes for Product Detail');
+      callback(null, result);
+    }
+  });
+};
+
 /** Promotions Details */
 function promotionDetails(header, ProductID, callback) {
   promotionUtil.promotionData(ProductID, header, (err, result) => {
@@ -75,10 +97,11 @@ function promotionDetails(header, ProductID, callback) {
   });
 }
 
-function productSummaryJson(bodyData) {
+function productSummaryJson(headers, bodyData) {
   const productDataSummary = {};
   const productData = bodyData.catalogEntryView[0];
   productDataSummary.uniqueID = productData.uniqueID;
+  productDataSummary.type = 'product';
   const attributes = getAttributes(productData.attributes);
   productDataSummary.defAttributes = getDefAttributes(attributes);
   productDataSummary.productDetails = {};
@@ -94,6 +117,7 @@ function productSummaryJson(bodyData) {
   }
   if (productData.sKUs && productData.sKUs.length > 0) {
     productDataSummary.skuData = getSkuData(productData);
+    // productDataSummary.skuData = getSkuDataV2(headers, productData);
     const features = productData.sKUs[0].UserData[0].x_auxDescription1;
     try {
       const jsonParse = JSON.parse(features);
@@ -137,7 +161,12 @@ function getAttachments(attachments) {
       productAttachment.push({
         type: 'video',
         name: attachments[i].name,
-        path: `${attachments[i].attachmentAssetPath}/${attachments[i].image}`,
+        thumbnailPath: `${attachments[i].attachmentAssetPath}/${
+          attachments[i].image
+        }`,
+        videoPath: `${attachments[i].attachmentAssetPath}/${
+          attachments[i].image
+        }`,
       });
     }
   }
@@ -191,6 +220,7 @@ function getSkuData(bodyData) {
       skuDataJson.emiData = Number(sku.x_field1_i) || '';
       skuDataJson.fullImagePath = sku.fullImage || '';
       skuDataJson.thumbImagePath = sku.thumbnail || '';
+      skuDataJson.shortDescription = sku.shortDescription || '';
       if (sku.price && sku.price.length > 0) {
         sku.price.forEach(price => {
           if (price.usage === 'Display') {
@@ -213,9 +243,9 @@ function getSkuData(bodyData) {
       skuDataJson.defAttributes = getDefAttributes(attributes);
       skuDataJson.attachments = getAttachments(sku.attachments);
       skuDataJson.promotions = associatedPromo || '';
-      // const similarProducts = getSimilarProductsData(bodyData);
-      // skuDataJson.similarProducts = similarProducts.similarProducts || '';
-      // skuDataJson.combosYouMayLike = similarProducts.combosYouMayLike || '';
+      const similarProducts = getSimilarProductsData(bodyData);
+      skuDataJson.similarProducts = similarProducts.similarProducts || '';
+      skuDataJson.combos = similarProducts.combosYouMayLike || '';
       skuData.push(skuDataJson);
     });
   }
@@ -383,4 +413,30 @@ function getSimilarProductsData(bodyData) {
     }
   });
   return mercAssociations;
+}
+
+function getSkuDataV2(headers, bodyData) {
+  logger.debug('inside getSkuDataV2 method');
+  let skuData = [];
+  const skuDataJson = {};
+  bodyData.sKUs.map(sku => {
+    logger.debug('inside asyncMap method');
+    skuDataJson.uniqueID = sku.uniqueID;
+    promotionUtil.getPromotionData(
+      sku.uniqueID,
+      headers,
+      (error, promotionData) => {
+        console.log(`>>>>1212121212121>>>>>${JSON.stringify(promotionData)}`);
+        console.log(`>>>>12121$$$$$$$$21212121>>>>>${JSON.stringify(error)}`);
+        if (!error) {
+          skuDataJson.promotionData = promotionData;
+        }
+        skuDataJson.promotionData = '';
+      },
+    );
+    skuData.push(skuDataJson);
+    console.log(`>>>>121212#######1212121>>>>>${JSON.stringify(skuData)}`);
+  });
+  console.log(`>>>>>2222@@@@@@@22222>>>>>>>${skuData.length}`);
+  return skuData;
 }

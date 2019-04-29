@@ -147,8 +147,8 @@ export class PlpContainer extends React.Component {
 				headers: { store_id: storeId, access_token: accessToken },
 			})
 			.then(response => {
-				this.props.onAdBannerIndexUpdate(response.data.data.GI_PLP_Sample_AD_Banner_Content);
-				this.setState({ adBannerData: response.data.data.GI_PLP_Sample_AD_Banner_Content });
+				this.props.onAdBannerIndexUpdate(response.data.data);
+				this.setState({ adBannerData: response.data.data });
 			})
 			.catch(error => {
 			});
@@ -173,7 +173,7 @@ export class PlpContainer extends React.Component {
 				headers: { store_id: storeId, access_token: accessToken },
 			})
 			.then(response => {
-				this.setState({ marketingTextBannerData: response.data.data.GI_PLP_Sample_HeroBanner_Content.bannerList[0].content });
+				this.setState({ marketingTextBannerData: response.data.data.bannerList[0].content });
 			})
 			.catch(error => {
 			});
@@ -237,7 +237,7 @@ export class PlpContainer extends React.Component {
 			})
 			.then(response => {
 				// console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
-				this.setState({ plpDescriptionData: response.data.data.GI_PLP_Sample_Description_Content });
+				this.setState({ plpDescriptionData: response.data.data });
 			})
 			.catch(error => {
 				// console.log('PLPBannerrror---', error);s
