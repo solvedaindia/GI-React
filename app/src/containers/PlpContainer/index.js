@@ -160,7 +160,7 @@ export class PlpContainer extends React.Component {
 				headers: { store_id: '10801', access_token: accessToken },
 			})
 			.then(response => {
-				console.log('Subcat Data');
+				console.log('Subcat Data', response.data);
 				this.setState({ plpSubCatData: response.data.data });
 			})
 			.catch(error => {
@@ -293,6 +293,7 @@ export class PlpContainer extends React.Component {
 
 		let subCategories;
 		if (plpSubCatData != null) {
+			console.log('the subc Ategor ---',plpSubCatData)
 			subCategories = (
 				<SubCategories subCategoryData={this.state.plpSubCatData} />
 			);
