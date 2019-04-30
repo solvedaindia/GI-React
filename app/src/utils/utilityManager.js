@@ -1,15 +1,18 @@
-
+import {
+  wishlistDataCookie,
+  wishlistIdCookie,
+} from '../../public/constants/constants';
 
 /**
  * Function to Fetch specific data from Cookie store
- * @param {*} cname 
+ * @param {*} cname
  */
 export function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
+  const name = `${cname}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
     }
@@ -17,13 +20,13 @@ export function getCookie(cname) {
       return c.substring(name.length, c.length);
     }
   }
-  return "";
+  return '';
 }
 
 /**
  * Function to get relevent state of the reducer
- * @param {*} state 
- * @param {*} reducerName 
+ * @param {*} state
+ * @param {*} reducerName
  */
 export function getReleventReduxState(state, reducerName) {
   let extractedState;
@@ -31,11 +34,9 @@ export function getReleventReduxState(state, reducerName) {
     if (result[0] === reducerName) {
       extractedState = result[1];
     }
-  }
-  )
+  });
   return extractedState;
 }
-
 
 /**
  * Function to get relevent value of the Sorting
@@ -46,33 +47,32 @@ export function getReleventReduxState(state, reducerName) {
   5 - New Arrival
  */
 export function fetchReleventSortingValue(value) {
-  console.log('ttttt', value)
+  console.log('ttttt', value);
   if (value === 'Price Low to High') {
     return 3;
   }
-  else if (value === 'Price High to Low') {
+  if (value === 'Price High to Low') {
     return 4;
   }
-  else if (value === 'New Arrival') {
+  if (value === 'New Arrival') {
     return 5;
   }
-  else { // Recommended
-    return 0;
-  }
+  // Recommended
+  return 0;
 }
 
 /**
  * Function to save the Filter map object
  * @param {*} updatedFilter
- * @param {*} facetName 
+ * @param {*} facetName
  */
 export function updateFilterMap(updatedFilter, facetName, currentFilter) {
-  var filterMap = currentFilter.updateFilter;
+  const filterMap = currentFilter.updateFilter;
   if (updatedFilter.length === 0) {
     filterMap.delete(facetName);
     return filterMap;
   }
-  filterMap.set(facetName, updatedFilter)
+  filterMap.set(facetName, updatedFilter);
   return filterMap;
 }
 
@@ -81,17 +81,57 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
  * @param {*} updatedFilter
  */
 export function resolveTheFilter(updatedFilter) {
-  var filterURL='';
+  let filterURL = '';
   for (const [key, value] of updatedFilter) {
     filterURL += 'facet=';
     value.map((option, i) => {
-      filterURL += option.value
-      if (value.length !== i+1) {
-         filterURL += '+'
+      filterURL += option.value;
+      if (value.length !== i + 1) {
+        filterURL += '+';
       }
-      
-    })
-    filterURL += '&'
-}
+    });
+    filterURL += '&';
+  }
   return filterURL;
 }
+
+/** -----------------------------------------------------------------------
+ * Function to resolve the Filter
+ * @param {*} wishlist_Data
+ */
+export function resolveTheWishlistData(wishlist_Data) {
+  const wishlistId = wishlist_Data.wishlistItemArray[0].wishlistID;
+  const wishlistArr = wishlist_Data.wishlistItemArray[0].wishlistItemList;
+
+  const json_str = JSON.stringify(wishlistArr);
+  document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
+  document.cookie = `${wishlistIdCookie}=${wishlistId};path=/;expires=''`;
+}
+
+export function getOnlyWishlistUniqueIds() {
+  const wishliArrStr = getCookie(wishlistDataCookie);
+  console.log('dd -- ', wishliArrStr);
+  // if (wishliArrStr === null) {
+  //   return;
+  // }
+  const wishlistArr = JSON.parse(wishliArrStr);
+
+  const wishlistUniqueIdArr = wishlistArr.map(item => item.uniqueID);
+  return wishlistUniqueIdArr;
+}
+
+export function getCorrespondingGiftlistId(uniqueID) {
+  const wishliArrStr = getCookie(wishlistDataCookie);
+  const wishlistArr = JSON.parse(wishliArrStr);
+  console.log('wishlitttt-----', wishlistArr);
+  let giftlistId = '';
+  wishlistArr.map(item => {
+    if (item.uniqueID === uniqueID) {
+      giftlistId = item.giftListItemID;
+    }
+  });
+  console.log('giftIdddd-----', giftlistId);
+  return giftlistId;
+}
+
+/* ----------------------------------------------------------------------- */
