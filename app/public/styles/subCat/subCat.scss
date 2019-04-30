@@ -2,7 +2,7 @@
 @import '../base';
 .subCat {
     width: 83.33%;
-    margin: $base*4 auto;
+    margin: $base*15 auto 0;
     .subCatImg {
         width: 100%;
     }
@@ -24,6 +24,12 @@
     }
     .slick-next {
         right: -15px;
+    }
+    .slick-track {
+        margin: auto;
+    }
+    .slick-track .slick-slide.slick-cloned {
+        display: none;
     }
     .catDetails {
         padding: 0 $base*3;

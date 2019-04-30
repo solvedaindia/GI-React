@@ -16,10 +16,10 @@ export class HomapegeLayout extends React.Component {
         axios.get(homePageLayoutAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
         .then(response => {
             this.setState({
-                homepageLayout: response.data.data.GI_Homepage_Layout_Content,
+                homepageLayout: response.data.data,
                 isLoading: false
             });
-            console.log('HomepageData Layout', response.data.data.GI_Homepage_Layout_Content);
+            console.log('HomepageData Layout', response.data.data);
         })
         .catch(error => {
             this.setState({

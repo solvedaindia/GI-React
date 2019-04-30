@@ -14,7 +14,7 @@ module.exports = Object.freeze({
   categoryViewByParentId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byParentCategory/{{categoryId}}`,
   categoryViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byId/{{categoryId}}`,
   productViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?searchSource=E`,
-  allSKUByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&catalogId={{catalogID}}&searchSource=E&responseFormat=json&profileName=IBM_findProductsByCategory`,
+  allSKUByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&searchType={{searchType}}&searchSource=E&responseFormat=json&profileName=IBM_findProductsByCategory`,
   productViewByProductId: `${prodSearchResourceUrl}/{{storeId}}/productview/byId/{{productId}}?profileName=IBM_findProductByIds_Details`,
   productViewByProductIds: `${prodSearchResourceUrl}/{{storeId}}/productview/byIds?{{idQuery}}?profileName=IBM_findProductByIds_Details`,
   associatedPromotion: `${prodWcsResourceUrl}/{{storeId}}/associated_promotion?qProductId={{productId}}&q=byProduct`,
@@ -37,4 +37,5 @@ module.exports = Object.freeze({
   newsletterSubscription: `${prodWcsResourceUrl}/{{storeId}}/newsletter`,
   recentlyViewedEvent: `${prodWcsResourceUrl}/{{storeId}}/event`,
   pdp: `${prodSearchResourceUrl}/{{storeId}}/productview/{{productId}}`,
+  getPincode: `${prodWcsResourceUrl}/{{storeId}}/pincode/getpincode/{{userID}}`,
 });

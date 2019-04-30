@@ -8,7 +8,7 @@ import SubCategoriesData from '../SubCategories/subCategories';
 
 class Category extends React.Component{
     state = {
-        category:{},
+        category:null,
         isLoading: true,
         errors: null
     };
@@ -34,8 +34,7 @@ class Category extends React.Component{
         return (
             <div className='category'>
                 <ul className='categoryList'>
-                    {!isLoading ? (
-                        category.map((categoryData, index) => {
+                    {!!category && category.map((categoryData, index) => {
                             return (
                                 <li className='listItems' key={`category-${index}`}>
 									<a className='action' href={categoryData.onClickUrl}>
@@ -47,9 +46,7 @@ class Category extends React.Component{
 								</li>
                             );
                         })
-                    ) : (
-                        <p className='error'>No Category Found</p>
-                    )}
+                    }
                 </ul>
                 <SearchBar />
                 <HeaderRight />

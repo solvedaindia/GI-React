@@ -2,7 +2,7 @@
 @import '../base';
 .bestSeller {
     width: 83.33%;
-    margin: $base*4 auto;
+    margin: $base*15 auto 0;
     .subCatImg {
         width: 100%;
     }
@@ -12,6 +12,20 @@
         line-height: 1;
         opacity: .75;
         color: $black;
+    }
+    .slick-prev::before {
+        content: "←";
+    }
+    .slick-next::before, 
+    [dir="rtl"] .slick-prev::before {
+        content: "→";
+    }
+    .slick-slide div {
+        margin: $base;
+        position: relative;
+        .subCatImg {
+            background-color: #f7f8f8;
+        }
     }
     .bsDetails {
         text-align: center;

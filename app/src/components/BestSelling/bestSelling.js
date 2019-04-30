@@ -25,7 +25,7 @@ class BestSeller extends React.Component{
                 error,
                 isLoading: false
             });
-            console.log('ERROR');
+            console.log('Best Seller ERROR');
         });
     }
     componentDidMount() {
@@ -52,8 +52,8 @@ class BestSeller extends React.Component{
                 <Slider {...settings}>
                     {!!bestSellerData && bestSellerData.map((sellerItemData, index) =>{
                         return (
-                            <figure>
-                                <a href={sellerItemData.onClickUrl} key={index}>
+                            <figure key={index} className='bsSlides'>
+                                <a href={sellerItemData.onClickUrl}>
                                     <img 
                                         className='subCatImg'
                                         src='https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png' 
@@ -62,7 +62,7 @@ class BestSeller extends React.Component{
                                     {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
                                 </a>
                                 <figcaption className='bsDetails'>
-                                    <h2 className='prodtitle'>Meraki</h2>
+                                    <h2 className='prodtitle'>{sellerItemData.productName}</h2>
                                     <span className='discPrice'>Rs.24,700</span>
                                     <span className='actualPrice'>Rs.27,000</span>
                                     <p className='emi'>EMI Starting From

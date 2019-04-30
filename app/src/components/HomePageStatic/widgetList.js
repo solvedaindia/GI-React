@@ -4,6 +4,8 @@ import BestSeller from '../BestSelling/bestSelling';
 import Recently from '../../components/RecentlyViewed/recentlyViewed';
 // import ReadMore from '../../components/GlobalComponents/readMore';
 import SubCategory from '../../components/GlobalComponents/subCategory';
+import Content from '../Primitives/content';
+import ReadMore from '../GlobalComponents/readMore';
 export default function WidgetList({ componentType, ...rest }) {
 
     switch (componentType) {
@@ -13,7 +15,7 @@ export default function WidgetList({ componentType, ...rest }) {
             );
         case 'mini_track_order':
             return (
-                <p>Mini cart will come</p>
+                ''
             );
         case 'best_selling':
             return (
@@ -28,13 +30,17 @@ export default function WidgetList({ componentType, ...rest }) {
                 <SubCategory {...rest} />
             );
         case 'content':
-        
+            return (
+                <Content {...rest} />
+            );
         case 'recommendation':
-        
+            return (
+                ''
+            )
         case 'read_more':
-            // return (
-            //     <ReadMore {...rest} />
-            // )
+            return (
+                <ReadMore {...rest} />
+            )
         default:
         return null;
     }
