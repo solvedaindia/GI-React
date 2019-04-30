@@ -66,7 +66,7 @@ class PlpComponent extends React.Component {
     return (
       <div className="row no-padding">
         <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      </div>
+      </div> 
     );
   }
 }

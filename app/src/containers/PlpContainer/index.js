@@ -339,6 +339,7 @@ export class PlpContainer extends React.Component {
 							{titleItem}
 							{productCountItem}
 						</div>
+
 						<div className="row no-padding">
 							<div className='filterWrapper clearfix'>
 								<div className='filter'>
@@ -349,6 +350,8 @@ export class PlpContainer extends React.Component {
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className='container2'>						
 						{plpProducts}
 					</div>
 				</section>
