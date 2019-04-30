@@ -107,7 +107,7 @@ export class PlpContainer extends React.Component {
 			// this.fetchSubCategoryData();
 			// this.fetchPLPProductsData();
 		}
-		
+
 
 		// }
 		// else {
@@ -116,7 +116,7 @@ export class PlpContainer extends React.Component {
 
 		if (nextProps.sortingValue !== this.props.sortingValue) {
 			console.log('In the Sorrting');
-			this.setState({ 
+			this.setState({
 				plpData: [],
 				pageNumber: 1,
 			})
@@ -125,9 +125,9 @@ export class PlpContainer extends React.Component {
 		if (nextProps.updatedFilter !== this.props.updatedFilter) {
 			console.log('In the Filter');
 			console.log('Filter Changed ---- ', nextProps.updatedFilter);
-			this.setState({ 
-				plpData: [], 
-				filterData: [], 
+			this.setState({
+				plpData: [],
+				filterData: [],
 				pageNumber: 1,
 			})
 			this.fetchPLPProductsData();
@@ -359,8 +359,12 @@ export class PlpContainer extends React.Component {
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className="container2">
 						{plpProducts}
 					</div>
+
+
 				</section>
 
 

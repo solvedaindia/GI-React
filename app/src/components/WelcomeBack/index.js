@@ -10,23 +10,23 @@ import WelcomeBackForm from '../WelcomeBackForm';
 import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
-  facebookAppId,
-  googleClientId,
-  isLoggedIn,
+	facebookAppId,
+	googleClientId,
+	isLoggedIn,
 } from '../../../public/constants/constants';
 import {
-  onFacebookResponse,
-  onGoogleResponse,
+	onFacebookResponse,
+	onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
 import {
 	getCookie
 } from '../../utils/utilityManager';
 import {
-  storeId,
-  accessToken,
-  accessTokenCookie,
-  userLoginAPI,
+	storeId,
+	accessToken,
+	accessTokenCookie,
+	userLoginAPI,
 } from '../../../public/constants/constants';
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
@@ -78,14 +78,14 @@ class WelcomeBack extends React.Component {
 			console.log('GoogleCallback', itemData);
 		});
 	};
-	
+
 	responseFacebook = response => {
 		if (!response.email) {
 			alert('SocialLogin - Email Id missing');
 			return;
 		}
 
-	// Remove below condition to get auto Facebook login.
+		// Remove below condition to get auto Facebook login.
 		if (this.state.isFacebookClicked) {
 			const firstName = response.name.substr(0, response.name.indexOf(' '));
 			const lastName = response.name.substr(response.name.indexOf(' ') + 1);
@@ -103,7 +103,7 @@ class WelcomeBack extends React.Component {
 			});
 		}
 	};
-	
+
 	facebookOnClick() {
 		this.setState({ isFacebookClicked: true });
 	}
@@ -111,38 +111,39 @@ class WelcomeBack extends React.Component {
 	handleUserLoginApi(data) {
 		this.setState({ message: null });
 		axios
-		.post(userLoginAPI, data, {
-			headers: { store_id: storeId, access_token: accessToken },
-		})
-		.then(response => {
-			appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-			document.cookie = `${accessTokenCookie}=${
-				response.data.data.access_token
-			}`;
-			this.setState({
-                loginStatus: 'Logout',
-				userType: 'Hello User!',
-				show: false
-            }) ;
-			// alert('Successfully Logged In');
-		})
-		.catch(error => {
-			const errorData = error.response.data;
-			const errorMessage = errorData.error.error_message;
-			this.setState({
-			message: `Error - ${errorMessage}`,
+			.post(userLoginAPI, data, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+				window.location.reload();
+				appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+				document.cookie = `${accessTokenCookie}=${
+					response.data.data.access_token
+					};path=/;expires=''`;
+				this.setState({
+					loginStatus: 'Logout',
+					userType: 'Hello User!',
+					show: false
+				}) ;
+				// alert('Successfully Logged In');
+			})
+			.catch(error => {
+				const errorData = error.response.data;
+				const errorMessage = errorData.error.error_message;
+				this.setState({
+					message: `Error - ${errorMessage}`,
+				});
 			});
-		});
 	}
 	showLoginStatus() {
 		let getLoginCookie = appCookie.get('isLoggedIn');
 		if (getLoginCookie) {
 			this.state.userType = 'Hello User!',
-			this.state.loginStatus = 'Logout'
+				this.state.loginStatus = 'Logout'
 		}
 		else {
 			this.state.userType = 'Hello Gues!',
-			this.state.loginStatus = 'Login/Register'
+				this.state.loginStatus = 'Login/Register'
 		}
 	}
 	componentDidMount() {
@@ -185,10 +186,10 @@ class WelcomeBack extends React.Component {
 							clientId={googleClientId}
 							render={renderProps => (
 								<button className="btn-white" onClick={renderProps.onClick}  disabled={renderProps.disabled}>
-								<span className="icon-img">
-									<img className="icon" src={Google} />
-								</span>
-								<span className="signin-text">Sign in with Google</span>
+									<span className="icon-img">
+										<img className="icon" src={Google} />
+									</span>
+									<span className="signin-text">Sign in with Google</span>
 								</button>
 							)}
 							onSuccess={this.responseGoogle}
@@ -198,10 +199,10 @@ class WelcomeBack extends React.Component {
 							appId={facebookAppId}
 							render={renderProps => (
 								<button className="btn-white btn-fb" onClick={renderProps.onClick} isdisabled={renderProps.disabled}>
-								<span className="icon-img">
-									<img className="icon" src={Facebook} />
-								</span>
-								<span className="signin-text">Sign in with Facebook</span>
+									<span className="icon-img">
+										<img className="icon" src={Facebook} />
+									</span>
+									<span className="signin-text">Sign in with Facebook</span>
 								</button>
 							)}
 							autoLoad
@@ -217,7 +218,7 @@ class WelcomeBack extends React.Component {
 						handleUserData={this.handleUserLoginApi.bind(this)}
 					/>
 					<div className='forgotPassword' onClick={this.handleToggle}>
-                    	<Forgotpassowrd onClick={this.handleToggle}/>
+						<Forgotpassowrd onClick={this.handleToggle}/>
 					</div>
 					<p className="registerHere">
 						<span>New to Godrej Interio? </span><RegisterModalData />

@@ -13,7 +13,7 @@ import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../utils/utilityManager';
+import { getReleventReduxState, getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 
 import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
@@ -39,19 +39,70 @@ class PlpComponent extends React.Component {
 
   parsePLPData(data) {
     if (data) {
+      const wishlistArr = getOnlyWishlistUniqueIds();
       const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => {
         return (
           <>
-            <ProductItem key={index} data={item} />
+            <ProductItem key={index} data={item} isInWishlist={wishlistArr.includes(item.uniqueID)} />
             <AdBanner indexPro={index + 1} />
             {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
           </>
         );
       });
+      // this.initialize(plpData);
       this.setState({ plpItem: item });
     }
   }
+
+  /*
+  initialize(plpData) {
+    var coloumnLayout;
+    if (this.props.coloumnLayout === 3) {
+      coloumnLayout = 'plp-products grid3';
+    }
+    else {
+      coloumnLayout = 'plp-products grid2';
+    }
+
+
+    var reduxValue = this.props.bannerPosIndex
+    var ddd = [];
+    var actualItem = [];
+    plpData.forEach(function (item, index) {
+      console.log('end===',ddd);
+      //console.log('mmmm===',actualItem);
+      if (index+1 === reduxValue) {
+        ddd.push(<ProductItem key={index} data={item} />);
+       
+        actualItem.push(
+          <>
+            <ul className={coloumnLayout}>{ddd}</ul>
+            <AdBanner key={'banner'+index} indexPro={index+1} />
+          </>
+        )
+        
+        ddd = [];
+        
+      }
+      else {
+        ddd.push(<ProductItem key={index} data={item} />);
+      }
+
+
+    })
+    actualItem.push(
+      <>
+        <ul className={coloumnLayout}>{ddd}</ul>
+        
+      </>
+    )
+
+    this.setState({ plpItem: actualItem });
+
+  }
+*/
+
 
   render() {
 
@@ -64,9 +115,10 @@ class PlpComponent extends React.Component {
     }
 
     return (
-      <div className="row no-padding">
+      // <div className="row no-padding">
         <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      </div>
+      // </div>
+      // 
     );
   }
 }

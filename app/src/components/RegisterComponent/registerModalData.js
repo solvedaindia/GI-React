@@ -110,7 +110,7 @@ class RegisterModalData extends React.Component {
           document.cookie = 'isLoggedIn=true';
           document.cookie = `${accessTokenCookie}=${
             response.data.data.access_token
-          }`;
+          };path=/;expires=''`;
           this.handleClose();
         } else {
           alert(`OTP - ${response.data.data.otpVal}`);

@@ -8,9 +8,10 @@ import Wishlist from './wishlist';
 
 class ProductItem extends React.Component {
   render() {
+    
     return (
       <li className="productlist">
-        <Wishlist />
+        <Wishlist uniqueId={this.props.data.uniqueID} isInWishlistPro={this.props.isInWishlist} />
         <div className="imgBox">
           <ItemImage data={this.props.data.thumbnail} uniqueId={this.props.data.uniqueID} />
           <InStock isInStock={this.props.data.inStock} />

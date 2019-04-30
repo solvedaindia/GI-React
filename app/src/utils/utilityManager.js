@@ -1,4 +1,4 @@
-
+import { wishlistDataCookie, wishlistIdCookie } from '../../public/constants/constants'
 
 /**
  * Function to Fetch specific data from Cookie store
@@ -81,17 +81,60 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
  * @param {*} updatedFilter
  */
 export function resolveTheFilter(updatedFilter) {
-  var filterURL='';
+  var filterURL = '';
   for (const [key, value] of updatedFilter) {
     filterURL += 'facet=';
     value.map((option, i) => {
       filterURL += option.value
-      if (value.length !== i+1) {
-         filterURL += '+'
+      if (value.length !== i + 1) {
+        filterURL += '+'
       }
-      
+
     })
     filterURL += '&'
-}
+  }
   return filterURL;
 }
+
+/** -----------------------------------------------------------------------
+ * Function to resolve the Filter
+ * @param {*} wishlist_Data
+ */
+export function resolveTheWishlistData(wishlist_Data) {
+  const wishlistId = wishlist_Data.wishlistItemArray[0].wishlistID;
+  const wishlistArr = wishlist_Data.wishlistItemArray[0].wishlistItemList;
+
+  var json_str = JSON.stringify(wishlistArr);
+  document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
+  document.cookie = `${wishlistIdCookie}=${wishlistId};path=/;expires=''`;
+}
+
+export function getOnlyWishlistUniqueIds() {
+  var wishliArrStr = getCookie(wishlistDataCookie);
+  console.log('dd -- ',wishliArrStr)
+  // if (wishliArrStr === null) {
+  //   return;
+  // }
+  var wishlistArr = JSON.parse(wishliArrStr);
+  
+  const wishlistUniqueIdArr = wishlistArr.map(item => {
+    return item.uniqueID;
+  })
+  return wishlistUniqueIdArr
+}
+
+export function getCorrespondingGiftlistId(uniqueID) {
+  var wishliArrStr = getCookie(wishlistDataCookie);
+  var wishlistArr = JSON.parse(wishliArrStr);
+  console.log('wishlitttt-----',wishlistArr);
+  var giftlistId = '';
+  wishlistArr.map(item => {
+    if (item.uniqueID === uniqueID) {
+      giftlistId = item.giftListItemID;
+    }
+  })
+  console.log('giftIdddd-----',giftlistId);
+  return giftlistId
+}
+
+/* ----------------------------------------------------------------------- */

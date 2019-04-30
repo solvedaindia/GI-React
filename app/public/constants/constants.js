@@ -9,6 +9,8 @@ export const host1 = '192.168.0.36';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
+export const wishlistDataCookie = 'wishlistData';
+export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 
 /* Header API */
@@ -24,6 +26,10 @@ export const catApi = `${secureHttp}://${host}:${port1}/api/v1/categories/@top`;
 export const navigationApi = `${secureHttp}://${host}:${port2}/api/v1/categories/navigation`;
 /* Wishlist Count API */
 export const wishListCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/itemcount`;
+/* Add to Wishlist API */
+export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/additem`;
+/* Remove from Wishlist API */
+export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */

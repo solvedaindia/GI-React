@@ -7,6 +7,7 @@ import {
 } from '../../../public/constants/constants';
 import WishlistLogo from '../SVGs/wishlist';
 import appCookie from '../../utils/cookie';
+import { resolveTheWishlistData } from '../../utils/utilityManager'
 
 class wishListCount extends React.Component {
   state = {
@@ -21,6 +22,7 @@ class wishListCount extends React.Component {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
+        resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
         this.setState({
           wishListCount:

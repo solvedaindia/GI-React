@@ -87,6 +87,8 @@ section.tablecarousel {
 .plpCategories {
   .plp-products {
     padding: 64px 0 60px 0;
+    width: 1140px;
+    margin: 0 auto;
   }
   .grid3 {
     display: flex;
@@ -169,6 +171,10 @@ section.tablecarousel {
         top: 17px;
         background: transparent;
         border: none;
+        z-index: 1;
+        &:focus {
+          outline: none;
+        }
       }
       .imgBox {
         position: relative;
@@ -378,7 +384,7 @@ section.tablecarousel {
         margin: 0;
         padding: 0;
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         padding: 20px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
         // opacity: 0;
@@ -525,7 +531,7 @@ section.tablecarousel {
     .dropdown {
       position: relative;
       background: $colorwhite;
-      z-index: 1;
+      z-index: 2;
       right: 0;
       width: 100%;
 
