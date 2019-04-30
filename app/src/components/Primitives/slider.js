@@ -1,32 +1,68 @@
 import React from 'react';
+import axios from 'axios';
 import Slider from 'react-slick';
-// import GetImage from './image';
 import BannerData from '../../data/BannerData.json';
 import '../../../public/styles/slider.scss';
+// import '../../../public/styles/slickCustom.scss';
+import {heroSliderAPI, storeId, accessToken} from '../../../public/constants/constants';
 
 class FullBanner extends React.Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-    return (
-      <div className="fsBanner">
-        <Slider {...settings}>
-          	{BannerData.map(BannerlistData =>
-				BannerlistData.bannerList.map((bannerData, index) => (
-				<a href={bannerData.onClickUrl} key={index}>
-					<img src={bannerData.src} alt={bannerData.alt} />
-				</a>
-				)
-          	))}
-        </Slider>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+        heroSlider: null,
+        isLoading: false,
+        error: null,
+        };
+    }
+    
+    getSliderData() {
+        axios.get(heroSliderAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        .then(response => {
+            this.setState({
+                heroSlider: response.data.data.bannerList,
+                isLoading: false
+            });
+            console.log('Slider Data', response.data.data.bannerList);
+        })
+        .catch(error => {
+            this.setState({
+                error,
+                isLoading: false
+            });
+            console.log('SLider Data Error');
+        });
+    }
+    componentDidMount() {
+        this.getSliderData();
+    }
+
+    render() {
+        const {heroSlider} = this.state;
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+        return(
+            <div className='fsBanner'>
+                <Slider {...settings}>
+                    {!!heroSlider && (heroSlider.map((sliderData, index)=> {
+                        return (
+                            <a href={sliderData.onClickUrl} key={index}>
+                                <img 
+                                    src={sliderData.imageSrc}
+                                    alt={sliderData.alt}
+                                />
+                            </a>
+                        )
+                    } ))}
+                </Slider>
+            </div>
+        )
+    }
 }
 
 export default FullBanner;

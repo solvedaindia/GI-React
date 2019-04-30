@@ -1,0 +1,12 @@
+@import 'variable.scss';
+
+.readMore {
+    background-color: $iceBlue;
+    width: 100%;
+    .rmDetails {
+        .rmTitle {
+            font-size: $base*4.25;
+            font-family: $font-regular;
+        }
+    } 
+}
