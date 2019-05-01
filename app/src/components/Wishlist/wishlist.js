@@ -7,7 +7,7 @@ import {
 } from '../../../public/constants/constants';
 import WishlistLogo from '../SVGs/wishlist';
 import appCookie from '../../utils/cookie';
-import { resolveTheWishlistData } from '../../utils/utilityManager'
+import { resolveTheWishlistData } from '../../utils/utilityManager';
 
 class wishListCount extends React.Component {
   state = {

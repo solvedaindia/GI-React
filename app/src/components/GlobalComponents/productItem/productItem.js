@@ -8,20 +8,28 @@ import Wishlist from './wishlist';
 
 class ProductItem extends React.Component {
   render() {
-    
     return (
       <li className="productlist">
-        <Wishlist uniqueId={this.props.data.uniqueID} isInWishlistPro={this.props.isInWishlist} />
+        <Wishlist
+          uniqueId={this.props.data.uniqueID}
+          isInWishlistPro={this.props.isInWishlist}
+        />
         <div className="imgBox">
-          <ItemImage data={this.props.data.thumbnail} uniqueId={this.props.data.uniqueID} />
+          <ItemImage
+            data={this.props.data.thumbnail}
+            uniqueId={this.props.data.uniqueID}
+          />
           <InStock isInStock={this.props.data.inStock} />
         </div>
         <RibbonTag data={this.props.data.ribbonText} />
         <div className="product-text">
           <p className="heading text">
-            <span className='name'>{this.props.data.productName} </span>
-            {this.props.data.shortDescription ? <span className='description'>({this.props.data.shortDescription})</span> : null}
-
+            <span className="name">{this.props.data.productName} </span>
+            {this.props.data.shortDescription ? (
+              <span className="description">
+                ({this.props.data.shortDescription})
+              </span>
+            ) : null}
           </p>
           {/* <p className="heading-description text">(Description)</p> */}
           <p className="price text">

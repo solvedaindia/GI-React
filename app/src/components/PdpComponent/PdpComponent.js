@@ -4,7 +4,7 @@ import Productimageandvideo from './productImagesAndVideos';
 import ProductInfo from './productInfo';
 import PdpEspot from './pdpEspot';
 import ProductFeatures from './productFeatures';
-import PurchaseGuide from './purchaseGuide';
+// import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarProducts from './similarProducts';
@@ -80,11 +80,11 @@ class PdpComponent extends React.Component {
             <ProductFeatures productFeature={this.props.data.productFeatures} />
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col md={12} sm={12} xs={12}>
             <PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col md={12} sm={12} xs={12}>
             <ProductDetail productDetail={this.props.data.productDetails} />
