@@ -46,7 +46,7 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      alert('Please Login');
+      //alert('Please Login');
     }
   }
 

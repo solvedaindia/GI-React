@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
@@ -37,7 +37,7 @@ class WelcomeBack extends React.Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.state = {
-      show: false,
+      show: true,
       message: null,
       loginStatus: 'Login/Register',
       userType: 'Hello Guest!',
@@ -45,6 +45,8 @@ class WelcomeBack extends React.Component {
   }
 
   handleClose() {
+    console.log('welocme Cloase');
+    this.props.resetCallbackPro();
     this.setState({ show: false, message: null });
   }
 
@@ -119,7 +121,7 @@ class WelcomeBack extends React.Component {
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         document.cookie = `${accessTokenCookie}=${
           response.data.data.access_token
-        };path=/;expires=''`;
+          };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -152,6 +154,18 @@ class WelcomeBack extends React.Component {
     this.showLoginStatus();
   }
 
+  clickedOnForgotPassword() {
+    this.props.callbackPro(true);
+    this.setState({ show: false, message: null });
+    //this.handleClose();
+  }
+
+  clickedOnRegister() {
+    this.props.callbackPro(false);
+    this.setState({ show: false, message: null });
+    //this.handleClose();
+  }
+
   render() {
     let message = null;
     if (this.state.message) {
@@ -159,7 +173,7 @@ class WelcomeBack extends React.Component {
     }
     return (
       <div>
-        <ul className="userList">
+        {/* <ul className="userList">
           <li className="listItem">
             <a href="" className="dropDown">
               {this.state.userType}
@@ -170,7 +184,7 @@ class WelcomeBack extends React.Component {
               {this.state.loginStatus}
             </a>
           </li>
-        </ul>
+        </ul> */}
         <Modal
           className="welcomeBack"
           size="lg"
@@ -229,12 +243,15 @@ class WelcomeBack extends React.Component {
             className="loginForm"
             handleUserData={this.handleUserLoginApi.bind(this)}
           />
-          <div className="forgotPassword" onClick={this.handleToggle}>
-            <Forgotpassowrd onClick={this.handleToggle} />
+          <div className="forgotPassword">
+            <p onClick={this.clickedOnForgotPassword.bind(this)}>Forgot Password?</p>
           </div>
           <p className="registerHere">
             <span>New to Godrej Interio? </span>
-            <RegisterModalData />
+            <Button className="registerNow" onClick={this.clickedOnRegister.bind(this)}>
+              Register
+        </Button>
+            {/* <RegisterModalData /> */}
           </p>
         </Modal>
       </div>

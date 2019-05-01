@@ -32,6 +32,7 @@ class Forgotpassowrd extends React.Component {
       otpNo: null,
       modalClass: 'modal-forgot',
       hideBackArrow: false,
+      isFirstBackPressed: false,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -97,6 +98,10 @@ class Forgotpassowrd extends React.Component {
   }
 
   toggle() {
+    if (this.state.modal) {
+      this.props.resetCallbackPro();
+    }
+
     this.setState(prevState => ({
       modal: !prevState.modal,
     }));
@@ -136,7 +141,11 @@ class Forgotpassowrd extends React.Component {
         modal: false,
       });
     } else if (itemStr === 'ForgotPassword') {
-      this.toggle();
+      this.props.callbackForgotPro();
+      this.setState({
+        modal: false,
+      });
+      //this.toggle();
     }
 
     this.setState({
@@ -145,6 +154,10 @@ class Forgotpassowrd extends React.Component {
     });
 
     console.log('Back');
+  }
+
+  componentDidMount() {
+    this.toggle();
   }
 
   render() {
@@ -162,7 +175,7 @@ class Forgotpassowrd extends React.Component {
 
     return (
       <>
-        <p onClick={this.toggle}>Forgot Password?</p>
+        {/* <p onClick={this.toggle}>Forgot Password?</p> */}
         <Modal
           show={this.state.modal}
           onHide={this.toggle}
