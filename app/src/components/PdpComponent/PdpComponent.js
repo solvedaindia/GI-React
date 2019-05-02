@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col,Grid } from 'react-bootstrap';
 import Productimageandvideo from './productImagesAndVideos';
 import ProductInfo from './productInfo';
 import PdpEspot from './pdpEspot';
@@ -74,41 +74,35 @@ class PdpComponent extends React.Component {
                             <ProductDefAttriutes defAttributes={this.props.data.defAttributes} />
                         </div>
                         </Col>
-                    </Row> */}
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <ProductFeatures productFeature={this.props.data.productFeatures} />
-          </Col>
-        </Row>
-        {/* <Row>
-          <Col md={12} sm={12} xs={12}>
-            <PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
-          </Col>
-        </Row> */}
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <ProductDetail productDetail={this.props.data.productDetails} />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <ProductKeywords productKeywords={this.props.data.keywords} />
-          </Col>
-        </Row>
-        <Row>
-          {!isLoading ? (
-            <SimilarProducts
-              similarProducts={this.state.skuData.similarProducts}
-            />
-          ) : (
-            <div> Data is Loading..</div>
-          )}
-        </Row>
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <PdpEspot espot={this.props.espot.data} />
-          </Col>
-        </Row>
+                    </Row> */}         
+         <Grid>
+          <Row>           
+              <ProductFeatures productFeature={this.props.data.productFeatures} />            
+          </Row>
+          {/* <Row>
+            <Col md={12} sm={12} xs={12}>
+              <PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
+            </Col>
+          </Row> */}
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <ProductDetail productDetail={this.props.data.productDetails} />
+            </Col>
+          </Row>
+          <Row>            
+              <ProductKeywords productKeywords={this.props.data.keywords} />            
+          </Row>
+          <Row>
+            {!isLoading ? (
+              <SimilarProducts
+                similarProducts={this.state.skuData.similarProducts}
+              />
+            ) : (
+              <div> Data is Loading..</div>
+            )}
+          </Row>          
+        </Grid>        
+          <PdpEspot espot={this.props.espot.data} />   
       </div>
     );
   }

@@ -24,8 +24,9 @@ class similarProducts extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='similarProduct-Wrapper'>
         <h4 className="heading text-center">similarProducts</h4>
+        <ul className='similarProducts'>
         {this.props.similarProducts.map((data, index) => {
           let emiData = data.emiData;
           if (emiData === '') {
@@ -34,31 +35,30 @@ class similarProducts extends React.Component {
           const imgUrl =
             'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
           return (
-            <div className="col-md-4" key={index}>
-              <div key={index}>
-                <img src={imgUrl} />
+            
+            <li className="productlist" key={index}>
+              <div className='imgBox' key={index}>
+                <img src={imgUrl}  alt='Img'/>
               </div>
-              <div className="text-center">
-                <b>{data.productName}</b>
-                <br />
-                <div className="price">
-                  <span className="actualprice text">
-                    &#8377;
-                    {data.actualPrice}
-                  </span>
-                  <span className="offerprice text">
-                    &#8377;
-                    {data.offerPrice}
-                  </span>
-                </div>
-                <br />
-                EMI Starting from {emiData}
-                <br />
-                10% Off on this product
+              <div className="product-text">
+                <p className='heading text'>{data.productName}</p>
+                
+                <p className="price text">
+                  <span className="discount-price">&#8377;{data.actualPrice}</span>
+                  <span className="priceno-discount">&#8377;{data.offerPrice}</span>
+                </p>
+               <p className='emi-text text'>
+                 <span className='free-accessories'>EMI Starting from <span className='bold'>{emiData}</span></span>
+                
+                <span className='bold'>10% Off </span> on this product
+               </p>
+               
               </div>
-            </div>
+            </li>
+           
           );
         })}
+         </ul>
       </div>
     );
   }

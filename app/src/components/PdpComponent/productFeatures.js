@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col,Row } from 'react-bootstrap';
 
 class productFeatures extends React.Component {
   constructor() {
@@ -22,10 +22,22 @@ class productFeatures extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Col md={6} sm={12} xs={12}>
-          <h3 className="heading">Features</h3>
+    return (      
+      <Col md={12} sm={12} xs={12}>
+      <div className='PdpFeatures'>
+      <div className='featureVertical-tab'>
+      <Row>
+        <Col md={12} sm={12} xs={12}>
+          <div className='headingBox'>
+           <h3 className="heading">Features</h3>
+          </div>
+          
+        </Col>
+      </Row>
+      <div className='row'>       
+        <Col md={6} sm={12} xs={12}> 
+         <div className='featureImgbox'>        
+            
           {this.props.productFeature.map((imagePath, index) => {
             this.dataClass = '';
             if (index > 0) {
@@ -50,18 +62,24 @@ class productFeatures extends React.Component {
               </div>
             );
           })}
+          </div>     
         </Col>
         <Col md={6} sm={12} xs={12}>
+         <ul className='verticalTab'>
           {this.props.productFeature.map((featureData, i) => (
-            <div key={i}>
-              <a role="button" onClick={this.showFeatureImage.bind(this, i)}>
+            <li className='list' key={i}>
+              <a className='link' role="button" onClick={this.showFeatureImage.bind(this, i)}>
                 <h3 className="heading">{featureData.name}</h3>
                 {featureData.description}
               </a>
-            </div>
+            </li>
           ))}
+          </ul>
         </Col>
       </div>
+      </div>
+      </div>
+    </Col>    
     );
   }
 }
