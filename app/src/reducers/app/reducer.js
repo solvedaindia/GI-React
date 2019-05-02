@@ -12,7 +12,7 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from '../../constants/app/constants';
+import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, WISH_LIST_COUNT } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -22,6 +22,7 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  wishlistCount: 0,
 });
 
 function appReducer(state = initialState, action) {
@@ -38,6 +39,10 @@ function appReducer(state = initialState, action) {
         .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
+    case WISH_LIST_COUNT:
+      return state
+        .set('loading', false)
+        .set('wishlistCount', action.count);
     default:
       return state;
   }

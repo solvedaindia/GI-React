@@ -20,6 +20,7 @@ class UserAccInfo extends React.Component {
     showForgotPassword: false,
     showRegister: false,
     loginLogoutBtnItem: null,
+    isFromWishlist: false,
   };
 
 
@@ -54,10 +55,12 @@ class UserAccInfo extends React.Component {
   }
 
   forgotPasswordCallback() {
+
     this.setState({
       showLoginRegisterMain: true,
       showForgotPassword: false
     })
+
   }
 
   registerCallback() {
@@ -69,7 +72,7 @@ class UserAccInfo extends React.Component {
 
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
-    console.log('dkddd',getLoginCookie);
+    console.log('dkddd', getLoginCookie);
     if (getCookie('isLoggedIn') === 'true') {
       (this.state.userType = <a className="dropDown">Hello User!</a>),
         (this.state.loginStatus = <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Logout</a>);
@@ -100,28 +103,50 @@ class UserAccInfo extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Did Mount -- ',this.props.fromWishlistPro);
+    this.fromWishlist(this.props.fromWishlistPro);
     this.showLoginStatus();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log( 'Recive Porps -- ',nextProps.fromWishlistPro);
+    this.fromWishlist(nextProps.fromWishlistPro);
+  }
+
+  fromWishlist(data) {
+    if (data) {
+      this.setState({
+        showLoginRegisterMain: true,
+        isFromWishlist: true,
+      })
+    }
+  }
+
   render() {
+    console.log('back to login from forgot password', this.state);
+
+    var userLogoItem = null;
+    var dropdownItem = null;
+    if (!this.state.isFromWishlist) {
+      userLogoItem = <UserLogo />
+      dropdownItem = <ul className="userList">
+        <li className="listItem">
+          {this.state.userType}
+        </li>
+        <li className="listItem">
+          {this.state.loginStatus}
+        </li>
+      </ul>
+    }
+
+
+
+
     return (
       <li className="user icons">
-        <UserLogo />
+        {userLogoItem}
         <ul className="welcomeDropDown">
-          <ul className="userList">
-            <li className="listItem">
-              {this.state.userType}
-              {/* <a href="" className="dropDown">
-                {this.state.userType}
-              </a> */}
-            </li>
-            <li className="listItem">
-              {this.state.loginStatus}
-              {/* <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>
-                {this.state.loginStatus}
-              </a> */}
-            </li>
-          </ul>
+          {dropdownItem}
           {this.state.showLoginRegisterMain ? <WelcomeBack callbackPro={this.welcomeBackCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
           {this.state.showForgotPassword ? <ForgotPassword callbackForgotPro={this.forgotPasswordCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
           {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
@@ -130,5 +155,8 @@ class UserAccInfo extends React.Component {
     );
   }
 }
+
+
+
 
 export default UserAccInfo;

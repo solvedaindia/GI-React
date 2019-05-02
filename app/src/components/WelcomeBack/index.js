@@ -151,6 +151,7 @@ class WelcomeBack extends React.Component {
 
   componentDidMount() {
     //this.handleUserLoginApi();
+    console.log('in the Login main pop up');
     this.showLoginStatus();
   }
 
