@@ -150,7 +150,7 @@ class WelcomeBack extends React.Component {
   }
 
   componentDidMount() {
-    this.handleUserLoginApi();
+    //this.handleUserLoginApi();
     this.showLoginStatus();
   }
 

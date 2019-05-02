@@ -48,6 +48,8 @@ export const validateOTPAPI = `${secureHttp}://${host}:${port2}/api/v1/otp/valid
 export const forgotPasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/forgotpassword`;
 /* Guest Login API */
 export const guestLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/token/guest`;
+/* Logout API */
+export const logoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logout`;
 /* Newsletter Subscription API */
 export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/subscribe`;
 /* Newsletter Subscription Status API */

@@ -1,10 +1,13 @@
 import React from 'react';
+import axios from 'axios';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import '../../../public/styles/userInfo/userInfo.scss';
 import appCookie from '../../utils/cookie';
+import { getCookie } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
+import { storeId, accessToken, logoutAPI, accessTokenCookie, wishlistDataCookie, wishlistIdCookie } from '../../../public/constants/constants';
 
 class UserAccInfo extends React.Component {
   state = {
@@ -16,13 +19,14 @@ class UserAccInfo extends React.Component {
     showLoginRegisterMain: false,
     showForgotPassword: false,
     showRegister: false,
+    loginLogoutBtnItem: null,
   };
 
 
 
   resetLoginValues() {
     console.log('resetLoginValues')
-    this.setState({ 
+    this.setState({
       showLoginRegisterMain: false,
       showForgotPassword: false,
       showRegister: false
@@ -35,24 +39,21 @@ class UserAccInfo extends React.Component {
 
   welcomeBackCallback(fromForgot) { //Only to manage show and hide state
     if (fromForgot) {
-      console.log('From Forgot');
       this.setState({
         showForgotPassword: true,
         showLoginRegisterMain: false
       })
     }
     else {
-      console.log('From Register');
       this.setState({
         showRegister: true,
         showLoginRegisterMain: false
       })
     }
-    
+
   }
 
   forgotPasswordCallback() {
-    console.log('forgott --', this.state);
     this.setState({
       showLoginRegisterMain: true,
       showForgotPassword: false
@@ -68,13 +69,34 @@ class UserAccInfo extends React.Component {
 
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
-    if (getLoginCookie) {
-      (this.state.userType = 'Hello User!'),
-        (this.state.loginStatus = 'Logout');
+    console.log('dkddd',getLoginCookie);
+    if (getCookie('isLoggedIn') === 'true') {
+      (this.state.userType = <a className="dropDown">Hello User!</a>),
+        (this.state.loginStatus = <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Logout</a>);
     } else {
-      (this.state.userType = 'Hello Guest!'),
-        (this.state.loginStatus = 'Login/Register');
+      (this.state.userType = <a className="dropDown">Hello Guest!</a>),
+        (this.state.loginStatus = <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}> Login/Register</a>);
     }
+  }
+
+  onLogoutClick() {
+    let data = {
+      'email_id': this.state.inputText,
+    }
+    axios.post(logoutAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+      if (response.data.status === 'success') {
+        //Reset all the user Cookies
+        document.cookie = `${accessTokenCookie}=;path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */
+        const json_str = JSON.stringify([]);
+        document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
+        document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
+        appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
+        window.location.reload();
+      }
+      // alert('Newsletter Subscription - ' + data.status);
+    }).catch(error => {
+      console.log('newsError---', error);
+    });
   }
 
   componentDidMount() {
@@ -88,14 +110,16 @@ class UserAccInfo extends React.Component {
         <ul className="welcomeDropDown">
           <ul className="userList">
             <li className="listItem">
-              <a href="" className="dropDown">
               {this.state.userType}
-            </a>
+              {/* <a href="" className="dropDown">
+                {this.state.userType}
+              </a> */}
             </li>
             <li className="listItem">
-              <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>
+              {this.state.loginStatus}
+              {/* <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>
                 {this.state.loginStatus}
-            </a>
+              </a> */}
             </li>
           </ul>
           {this.state.showLoginRegisterMain ? <WelcomeBack callbackPro={this.welcomeBackCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}

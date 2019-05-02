@@ -15,6 +15,7 @@ import {
   removeFromWishlist,
   wishlistIdCookie,
 } from '../../../../public/constants/constants';
+import UserAccInfo from '../../UserAccInfo/userAccInfo';
 
 const wishlistAddedImg = (
   <img
@@ -31,6 +32,7 @@ class Wishlist extends React.Component {
     super(props);
     this.state = {
       wishlistCurrentImage: wishListRemovedImg,
+      isWelcomeBack: false
     };
   }
 
@@ -46,7 +48,8 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      //alert('Please Login');
+      alert('Please Login');
+      //this.setState({isWelcomeBack: true});
     }
   }
 
@@ -65,6 +68,7 @@ class Wishlist extends React.Component {
       .catch(error => {
         console.log('newsError---', error);
       });
+      
   }
 
   removeFromWishlistAPI() {
@@ -103,6 +107,7 @@ class Wishlist extends React.Component {
         >
           {this.state.wishlistCurrentImage}
         </button>
+        {/* {this.state.isWelcomeBack ? <UserAccInfo /> : null} */}
       </>
     );
   }
