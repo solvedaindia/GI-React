@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const espotsHandler = require('../../handlers/espotshandler');
-const filter = require('../../filters/filter');
+const espotFilter = require('../../filters/espotfilter');
 
 router.get('/:espotName', (req, res, next) => {
   espotsHandler.getEspotsData(
@@ -12,7 +12,7 @@ router.get('/:espotName', (req, res, next) => {
         next(err);
         return;
       }
-      const resJson = filter.filterData('espotcontent', result) || {};
+      const resJson = espotFilter.espotContent(result) || {};
       res.status(200).send({
         status: 'success',
         data: resJson,

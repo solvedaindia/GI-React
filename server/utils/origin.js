@@ -17,8 +17,8 @@ exports.getResponse = function getResponse(
 ) {
   logger.debug(`Origin Method:::${originMethod}`);
   logger.debug(`Origin URL:::${originURL}`);
-  // console.log('Request Header', reqHeaders);
-  // console.log('Request Body', reqBody);
+  // logger.debug('Request Header:::', reqHeaders);
+  // logger.debug('Request Body:::', reqBody);
   try {
     const request = unirest(originMethod, originURL).strictSSL(false);
     if (reqHeaders) {

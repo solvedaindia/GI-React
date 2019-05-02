@@ -382,7 +382,7 @@ module.exports.addItemInWishlist = function addItemInWishlist(
 ) {
   logger.debug('entering add Item method');
 
-  if (!body.product_id) {
+  if (!body.sku_id) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -394,7 +394,7 @@ module.exports.addItemInWishlist = function addItemInWishlist(
       // eslint-disable-next-line prefer-destructuring
       const wishlistCount = result.wishlistCount;
       const reqBody = {
-        productId: body.product_id,
+        productId: body.sku_id,
       };
       if (wishlistCount === 0) {
         reqBody.wishlistName = `wishlist_${headers.userId}`;

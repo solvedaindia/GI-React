@@ -27,7 +27,7 @@ class PdpContainer extends React.Component {
   }
 
   callPdpApi() {
-    const productId = 'TEST_PDP';
+    const productId = 'TEST_PDP';   
     axios
       .get(pdpApi2 + productId, {
         headers: { store_id: storeId, access_token: accessToken },
@@ -48,7 +48,7 @@ class PdpContainer extends React.Component {
 
   callPdpEspotApi() {
     const APIType = 'GI_PDP_Sample_Espot1';
-    const espotPdpApi = espotAPI + APIType;
+    const espotPdpApi = espotAPI + APIType;    
     axios
       .get(espotPdpApi, {
         headers: { store_id: storeId, access_token: accessToken },
@@ -75,7 +75,7 @@ class PdpContainer extends React.Component {
             <PdpComponent
               data={this.state.pdp.data}
               skuId={this.props.match.params}
-              espot={this.state.pdpEspot}
+              espot={this.state.pdpEspot}              
             />
         )}
       </div>

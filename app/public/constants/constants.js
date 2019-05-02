@@ -9,6 +9,8 @@ export const host1 = '192.168.0.36';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
+export const wishlistDataCookie = 'wishlistData';
+export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
 /* Header API */
@@ -24,6 +26,10 @@ export const catApi = `${secureHttp}://${host}:${port1}/api/v1/categories/@top`;
 export const navigationApi = `${secureHttp}://${host}:${port2}/api/v1/categories/navigation`;
 /* Wishlist Count API */
 export const wishListCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/itemcount`;
+/* Add to Wishlist API */
+export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/additem`;
+/* Remove from Wishlist API */
+export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */
@@ -42,6 +48,8 @@ export const validateOTPAPI = `${secureHttp}://${host}:${port2}/api/v1/otp/valid
 export const forgotPasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/forgotpassword`;
 /* Guest Login API */
 export const guestLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/token/guest`;
+/* Logout API */
+export const logoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logout`;
 /* Newsletter Subscription API */
 export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/subscribe`;
 /* Newsletter Subscription Status API */
@@ -67,6 +75,8 @@ export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logi
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* Sub-Category API */
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
+/* Hero Banner Slider*/
+export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
 /* Featured Category */
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
 /* Recently Viewed API */

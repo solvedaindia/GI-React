@@ -1,0 +1,7 @@
+{  
+  "type":"read_more",
+  "title":"//Title of Section",
+  "description":"//Description",
+  "webCharLimit":1043,
+  "mobileCharLimit":561
+}

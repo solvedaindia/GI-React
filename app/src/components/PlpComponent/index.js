@@ -5,19 +5,22 @@
  */
 
 import React from 'react';
-//Redux Imports
+// Redux Imports
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
-import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../utils/utilityManager';
+import {
+  getReleventReduxState,
+  getOnlyWishlistUniqueIds,
+} from '../../utils/utilityManager';
 
 import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
-import Sort from '../../components/PlpComponent/Sorting/sort';
+import Sort from './Sorting/sort';
 import LoadingIndicator from '../../utils/loadingIndicator';
 
 class PlpComponent extends React.Component {
@@ -39,22 +42,26 @@ class PlpComponent extends React.Component {
 
   parsePLPData(data) {
     if (data) {
+      const wishlistArr = getOnlyWishlistUniqueIds();
       const plpData = data.plpDataPro;
-      const item = plpData.map((item, index) => {
-        return (
-          <>
-            <ProductItem key={index} data={item} />
-            <AdBanner indexPro={index + 1} />
-            {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
-          </>
-        );
-      });
+      const item = plpData.map((item, index) => (
+        <>
+          <ProductItem
+            key={index}
+            data={item}
+            isInWishlist={wishlistArr.includes(item.uniqueID)}
+          />
+          <AdBanner indexPro={index + 1} />
+          {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
+        </>
+      ));
+      // this.initialize(plpData);
       this.setState({ plpItem: item });
     }
   }
 
-  render() {
-
+  /*
+  initialize(plpData) {
     var coloumnLayout;
     if (this.props.coloumnLayout === 3) {
       coloumnLayout = 'plp-products grid3';
@@ -63,21 +70,65 @@ class PlpComponent extends React.Component {
       coloumnLayout = 'plp-products grid2';
     }
 
+
+    var reduxValue = this.props.bannerPosIndex
+    var ddd = [];
+    var actualItem = [];
+    plpData.forEach(function (item, index) {
+      console.log('end===',ddd);
+      //console.log('mmmm===',actualItem);
+      if (index+1 === reduxValue) {
+        ddd.push(<ProductItem key={index} data={item} />);
+       
+        actualItem.push(
+          <>
+            <ul className={coloumnLayout}>{ddd}</ul>
+            <AdBanner key={'banner'+index} indexPro={index+1} />
+          </>
+        )
+        
+        ddd = [];
+        
+      }
+      else {
+        ddd.push(<ProductItem key={index} data={item} />);
+      }
+
+
+    })
+    actualItem.push(
+      <>
+        <ul className={coloumnLayout}>{ddd}</ul>
+        
+      </>
+    )
+
+    this.setState({ plpItem: actualItem });
+
+  }
+*/
+
+  render() {
+    let coloumnLayout;
+    if (this.props.coloumnLayout === 3) {
+      coloumnLayout = 'plp-products grid3';
+    } else {
+      coloumnLayout = 'plp-products grid2';
+    }
+
     return (
-      <div className="row no-padding">
-        <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      </div>
+      // <div className="row no-padding">
+      <ul className={coloumnLayout}>{this.state.plpItem}</ul>
+      // </div>
+      //
     );
   }
 }
 
-
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => {
-  return {
-    //onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  // onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
+});
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
@@ -85,7 +136,7 @@ const mapStateToProps = state => {
     bannerPosIndex: stateObj.adBannerPos,
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
     coloumnLayout: stateObj.columnLayout,
-  }
+  };
 };
 
 const withConnect = connect(
@@ -101,4 +152,3 @@ export default compose(
   withSaga,
   withConnect,
 )(PlpComponent);
-

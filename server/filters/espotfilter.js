@@ -26,3 +26,29 @@ module.exports.content = function espotContentFilter(espotBody) {
   }
   return null;
 };
+
+/**
+ * Filter Espot Data.
+ * @return Marketing Text as JSON Object
+ */
+module.exports.espotContent = function espotContentFilter(espotBody) {
+  let resJson = {};
+  if (
+    espotBody.MarketingSpotData[0] &&
+    espotBody.MarketingSpotData[0].baseMarketingSpotActivityData &&
+    espotBody.MarketingSpotData[0].baseMarketingSpotActivityData.length > 0
+  ) {
+    try {
+      resJson = JSON.parse(
+        espotBody.MarketingSpotData[0].baseMarketingSpotActivityData[0]
+          .marketingContentDescription[0].marketingText,
+      );
+    } catch (err) {
+      resJson =
+        espotBody.MarketingSpotData[0].baseMarketingSpotActivityData[0]
+          .marketingContentDescription[0].marketingText;
+    }
+    return resJson;
+  }
+  return null;
+};

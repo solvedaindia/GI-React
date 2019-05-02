@@ -1,78 +1,81 @@
 import React from 'react';
-import { Row, Grid, Col } from 'react-bootstrap';
-const data =
-  "<ul class='description_area'><li class='list'>Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel culiboard 80 years back to being a vibrant, innovative brand with a diverse liortfolio – it’s been a brilliant, exciting journey for us.</li><li class='list'>We love bringing alive your dream sliace. We emlihasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you.</li><li class='list'> True to the Godrej mission to conserve the environment, we design liroducts, set uli lirocesses and use raw materials that are eco-friendly to do our bit to lireserve natural resources.</li><li class='list'> We offer our customers home and office furniture, along with solutions for laboratories, hosliitals and healthcare establishments, education and training institutes, shiliyards and navy, auditoriums and stadiums. We are liresent across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets.</li><li class='list'>Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - liart of the Godrej Grouli, one of India’s largest engineering and consumer liroduct groulis.</li></ul>";
-const strData =
-  'Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel culiboard 80 years back to being a vibrant, innovative brand with a diverse liortfolio – it’s been a brilliant, exciting journey for us. <p /> We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you. <p />True to the Godrej mission to conserve the environment, we design products, set up processes and use raw materials that are eco-friendly to do our bit to preserve natural resources.<p />We offer our customers home and office furniture, along with solutions for laboratories, hospitals and healthcare establishments, education and training institutes, shipyards and navy, auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets.<p />Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s largest engineering and consumer product groups.';
-const limit = 501;
+import axios from 'axios';
+import {
+	espotAPI,
+	storeId,
+	accessToken,
+} from '../../../public/constants/constants';
+import '../../../public/styles/readMore.scss';
+
+// const strData =
+//   'Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel culiboard 80 years back to being a vibrant, innovative brand with a diverse liortfolio – it’s been a brilliant, exciting journey for us. <p /> We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you. <p />True to the Godrej mission to conserve the environment, we design products, set up processes and use raw materials that are eco-friendly to do our bit to preserve natural resources.<p />We offer our customers home and office furniture, along with solutions for laboratories, hospitals and healthcare establishments, education and training institutes, shipyards and navy, auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets.<p />Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s largest engineering and consumer product groups.';
 class ReadMore extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      splitData: null,
-      fullData: strData,
-      finalData: null,
-      isReadMore: false,
-      readMoreTitle: 'Read More',
-    };
-  }
-
-  componentDidMount() {
-    const charLimit = this.props.descriptionDataPro.webCharLimit;
-    const trimStr = `${this.props.descriptionDataPro.description.substring(
-      0,
-      charLimit,
-    )}...`;
-    this.setState({
-      splitData: trimStr,
-      finalData: trimStr,
-    });
-  }
-
-  readMoreClicked() {
-    if (this.state.isReadMore) {
-      console.log('Hide');
-      this.setState({
-        isReadMore: false,
-        finalData: this.state.splitData,
-        readMoreTitle: 'Read More',
-      });
-    } else {
-      console.log('Show');
-      this.setState({
-        isReadMore: true,
-        finalData: strData,
-        readMoreTitle: 'Read Less',
-      });
+    constructor(props) {
+        super(props);
+        this.state = {
+            espotName: this.props.espotName,
+            readMoreData: null,
+            splitData: null,
+            fullData: '',
+            finalData: null,
+            isReadMore: false,
+            readMoreTitle: 'Read More',
+            isLoading: false,
+            error: null
+        };
     }
-  }
+    getReadMoreData() {
+		axios
+			.get(espotAPI + this.props.espotName, {
+				headers: { store_id: storeId, access_token: accessToken },
+			})
+			.then(response => {
+                this.setState({
+                    readMoreData: response.data.data,
+                    isLoading: false
+                });
+                console.log('#####Read More Data######', response.data.data);
+            })
+			.catch(error => {
+                this.setState({
+                    error,
+                    isLoading: false
+                });
+                console.log('@@@@@Espot Data Error');
+            });
+	}
+    componentDidMount() {
+       this.getReadMoreData();
+    }
 
-  render() {
-    return (
-      <div className="ReadMore">
-        <Grid>
-          <Row>
-            <Col md={12}>
-              <h3 className="heading">Tables</h3>
+    // readMoreClicked() {
+    //     if (this.state.isReadMore) {
+    //     console.log('Hide');
+    //     this.setState({
+    //         isReadMore: false,
+    //         finalData: this.state.splitData,
+    //         readMoreTitle: 'Read More',
+    //     });
+    //     } else {
+    //     console.log('Show');
+    //     this.setState({
+    //         isReadMore: true,
+    //         finalData: strData,
+    //         readMoreTitle: 'Read Less',
+    //     });
+    //     }
+    // }
 
-              <ul className="description_area">
-                <div
-                  dangerouslySetInnerHTML={{ __html: this.state.finalData }}
-                />
-                {/* <text className='list'>{this.state.finalData}</text> */}
-              </ul>
-              <button
-                onClick={this.readMoreClicked.bind(this)}
-                className="readMore"
-              >
-                {this.state.readMoreTitle}
-              </button>
-            </Col>
-          </Row>
-        </Grid>
-      </div>
-    );
-  }
+    render() {
+        const { readMoreData } = this.state;
+        return !!readMoreData && (
+            <div className='readMore'>
+                <div className='rmDetails'>
+                    <h1 className='rmTitle'>{readMoreData.title}</h1>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default ReadMore;
