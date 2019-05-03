@@ -14,17 +14,27 @@
     .slick-next:before, 
     .slick-prev:before {
         font-size: 20px;
-        line-height: 1;
-        opacity: .75;
-        color: $black;
+    }
+    .slick-slide div {
+        margin: $base;
+        position: relative;
+        .subCatImg {
+            background-color: #f7f8f8;
+            padding: $base*2;
+        }
     }
     .slick-prev {
-        right: 20px;
-        left: auto;
+        left: unset;
+        right: 25px;
     }
-    .slick-next {
-        right: -15px;
+    .slick-next,
+    .slick-prev {
+        top: unset;
+        bottom: -20%;
     }
+    // .slick-next {
+    //     right: -15px;
+    // }
     .slick-track {
         margin: auto;
     }
@@ -32,7 +42,7 @@
         display: none;
     }
     .catDetails {
-        padding: 0 $base*3;
+        padding: $base*1.5 0;
         .catItem {
             font-size: $base*2;
             font-family: $font-bold;

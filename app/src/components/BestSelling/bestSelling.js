@@ -6,14 +6,15 @@ import {
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
+import '../../../public/styles/bestSeller/bestSeller.scss'
+import '../../../public/styles/slickCustom.scss';
 
-import '../../../public/styles/bestSeller/bestSeller.scss';
-class BestSeller extends React.Component {
-  state = {
-    bestSellerData: null,
-    isLoading: true,
-    errors: null,
-  };
+class BestSeller extends React.Component{
+    state = {
+        bestSellerData:null,
+        isLoading: true,
+        errors: null
+    };
 
     getBestSellerData() {
         axios.get(bestSellerAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
