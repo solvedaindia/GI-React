@@ -53,11 +53,10 @@ class productInfo extends React.Component {
         <div className="accessories-offer">
                   <div className='offerbg text'> % </div>
                   <div className='discount-off text'>{this.props.productData.discount} </div>
+                  <a className='text viewOffer' role="button" onClick={this.toggleOffers.bind(this)}>View Offer</a>
           </div>
         
-        <a role="button" onClick={this.toggleOffers.bind(this)}>
-          View Offer
-        </a>
+        
         <div id="offers">
                   <ul className='cashoffer-wrapper'>
             {this.props.productData.promotions.map((promotion, i) => (
@@ -78,16 +77,22 @@ class productInfo extends React.Component {
                   <div className='text emiinfo'><EmiInfo /></div>
           </div>
     
-        <div className="zip">
-                  <input className='btn' type='text' readOnly value='56632' />&nbsp;&nbsp;
-                  <a role='button'>Edit</a><br/>
-                  <span className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</span>
+       
+          <div className='pincode'>
+            <div className='PincodeTextdata clearfix'>
+              <input className='pincodeVal' type='text' readOnly value='56632' />
+              <a className='pincodeEdit' role='button'>Edit</a>
+            </div>              
+            <div className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</div>
+          </div>
+          <div className='clearfix'></div>
           
-        </div>
-        <div className="soldbyDealers">
+        
+        <div className="ExperienceProduct">
           Experience this product at{' '}
-          <a role="button">Vikroli Store (1.5 K.M away)</a>
+          <a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
         </div>
+
         <div className="addCart">
           <Button className="btn">-</Button>
                   <input className='btn' type='text' readOnly value='1' />

@@ -1,12 +1,13 @@
 import React from 'react';
 
 const espot = props => {
-  const espot = props.espot.GI_PDP_Sample_Content;
+  const espotData = props.espot;
+  
   let renderData;
-  if (espot.type === 'content') {
-    renderData = <div dangerouslySetInnerHTML={{ __html: espot.content }} />;
+  if (espotData.type === 'content') {
+    renderData = <div dangerouslySetInnerHTML={{ __html: espotData.content }} />;
   } else {
-    renderData = <img href={espot.content} />;
+    renderData = <img href={espotData.content} />;
   }
   return <div>{renderData}</div>;
 };
