@@ -5,6 +5,7 @@ import SearchBar from '../Search/search';
 import HeaderRight from '../HeaderRight/headerRight';
 import { navigationApi, storeId, accessToken } from '../../../public/constants/constants';
 import SubCategoriesData from '../SubCategories/subCategories';
+import SubCatImg from '../SubCategories/subCatImg';
 
 class Category extends React.Component{
     state = {
@@ -21,6 +22,7 @@ class Category extends React.Component{
                 category: response.data.data.categoryArray,
 				isLoading: false
             });
+            console.log('Category Navigation Data', response.data.data);
 		})
 		.catch(error => this.setState({ error, isLoading: false }));
     }
@@ -30,7 +32,7 @@ class Category extends React.Component{
     }
 
     render() {
-        const { isLoading, category = [] } = this.state;
+        const { category = [] } = this.state;
         return (
             <div className='category'>
                 <ul className='categoryList'>
@@ -43,6 +45,9 @@ class Category extends React.Component{
                                     {!!categoryData.subCategoryArray && <SubCategoriesData
                                         subCategoryArray={categoryData.subCategoryArray}
                                     />}
+                                    {/* {!!categoryData.subCategoryArray && <SubCatImg
+                                        subCategoryArray={categoryData.subCategoryArray}
+                                    />} */}
 								</li>
                             );
                         })

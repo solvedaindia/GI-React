@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import { bestSellerAPI, storeId, accessToken } from '../../../public/constants/constants';
 
 import '../../../public/styles/bestSeller/bestSeller.scss'
+import '../../../public/styles/slickCustom.scss';
+
 class BestSeller extends React.Component{
     state = {
         bestSellerData:null,

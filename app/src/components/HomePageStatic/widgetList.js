@@ -39,7 +39,7 @@ export default function WidgetList({ componentType, ...rest }) {
             )
         case 'read_more':
             return (
-                <ReadMore {...rest} />
+                ''
             )
         default:
         return null;
