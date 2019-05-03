@@ -22,4 +22,22 @@
         background-color: rgba(255, 255, 255, 0.54);
         background: transparent;
     }
+    .slick-dots li button:before {
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        content: 'â€¢';
+        text-align: center;
+        opacity: .75;
+        color: #fff
+    }
+    .slick-dots li.slick-active button:before {
+        opacity: 1;
+        color: #fff;
+       
+    }
 }
