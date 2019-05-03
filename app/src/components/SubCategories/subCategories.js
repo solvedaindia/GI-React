@@ -11,9 +11,9 @@ const SubCategoriesData = (props) => {
                         {/* <a href={subCategoryData.onClickUrl}> */}
                             {subCategoryData.categoryName}
                         {/* </a> */}
-                        <div className='subCatImage'>
+                        {/* <div className='subCatImage'>
                             <img src='https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/solution-banner.png' className='subCatImg' alt='Sub Cat Img' />
-                        </div>
+                        </div> */}
                         </Link>
                     </li>
                 )
