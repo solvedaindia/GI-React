@@ -3,7 +3,6 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import BannerData from '../../data/BannerData.json';
 import '../../../public/styles/slider.scss';
-import '../../../public/styles/slickCustom.scss';
 import {heroSliderAPI, storeId, accessToken} from '../../../public/constants/constants';
 
 class FullBanner extends React.Component {
