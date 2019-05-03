@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import {
   wishListCountApi,
   storeId,
@@ -7,13 +8,16 @@ import {
 } from '../../../public/constants/constants';
 import WishlistLogo from '../SVGs/wishlist';
 import appCookie from '../../utils/cookie';
-import { resolveTheWishlistData } from '../../utils/utilityManager';
+import { resolveTheWishlistData, getCookie, getReleventReduxState } from '../../utils/utilityManager';
+import UserAccInfo from '../UserAccInfo/userAccInfo';
+
 
 class wishListCount extends React.Component {
   state = {
     wishListCount: '',
     isLoading: true,
     errors: null,
+    isWelcomeBack: false
   };
 
   getWishListCount() {
@@ -34,11 +38,25 @@ class wishListCount extends React.Component {
   }
 
   handleWLCount() {
-    const token = appCookie.get('isLoggedIn');
-    console.log('Testest', token);
-    appCookie.get('isLoggedIn')
-      ? alert('Take user to wishlist page')
-      : alert('Please login');
+    if (getCookie('isLoggedIn') === 'true') {
+      alert('Take user to wishlist page')
+    } else {
+
+      this.setState({ isWelcomeBack: true });
+    }
+
+    // const token = appCookie.get('isLoggedIn');
+    // console.log('Testest', token);
+    // appCookie.get('isLoggedIn')
+    //   ? alert('Take user to wishlist page')
+    //   : this.setState({isWelcomeBack: true})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Wishlist -- componentWillReceiveProps -- ',nextProps.wishlistUpdatedCount)
+    this.setState({
+      wishListCount: nextProps.wishlistUpdatedCount,
+    });
   }
 
   componentDidMount() {
@@ -48,16 +66,32 @@ class wishListCount extends React.Component {
   render() {
     const { isLoading, wishListCount } = this.state;
     return (
-      <li className="icons" onClick={this.handleWLCount}>
-        {!isLoading ? (
-          <span className="wishListCount">{wishListCount}</span>
-        ) : (
-          <p className="error">No Category Found</p>
-        )}
-        <WishlistLogo />
-      </li>
+      <>
+        <li className="icons" onClick={this.handleWLCount.bind(this)}>
+          {!isLoading ? (
+            <span className="wishListCount">{wishListCount}</span>
+          ) : (
+              <p className="error">No Category Found</p>
+            )}
+          <WishlistLogo />
+
+        </li>
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true} /> : null}
+      </>
     );
   }
 }
 
-export default wishListCount;
+function mapStateToProps(state) {
+  const stateObj = getReleventReduxState(state, 'global');
+  const wishlistCount = getReleventReduxState(stateObj, 'wishlistCount')
+  console.log('Its Globale',wishlistCount);
+  return {
+    wishlistUpdatedCount: wishlistCount
+  };
+}
+
+
+export default connect(mapStateToProps)(wishListCount);
+
+//export default wishListCount;

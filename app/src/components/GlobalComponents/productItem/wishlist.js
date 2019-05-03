@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { updatetWishListCount } from '../../../actions/app/actions';
 import {
   getCookie,
   getCorrespondingGiftlistId,
@@ -15,6 +17,7 @@ import {
   removeFromWishlist,
   wishlistIdCookie,
 } from '../../../../public/constants/constants';
+import UserAccInfo from '../../UserAccInfo/userAccInfo';
 
 const wishlistAddedImg = (
   <img
@@ -31,6 +34,7 @@ class Wishlist extends React.Component {
     super(props);
     this.state = {
       wishlistCurrentImage: wishListRemovedImg,
+      isWelcomeBack: false
     };
   }
 
@@ -46,7 +50,8 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      alert('Please Login');
+      //alert('Please Login');
+      this.setState({isWelcomeBack: true});
     }
   }
 
@@ -60,11 +65,12 @@ class Wishlist extends React.Component {
       })
       .then(response => {
         this.setState({ wishlistCurrentImage: wishlistAddedImg });
-        getUpdatedWishlist();
+        getUpdatedWishlist(this);
       })
       .catch(error => {
         console.log('newsError---', error);
       });
+      
   }
 
   removeFromWishlistAPI() {
@@ -79,11 +85,16 @@ class Wishlist extends React.Component {
       .then(response => {
         console.log('Add wishlit --- ', response.data);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });
-        getUpdatedWishlist();
+        getUpdatedWishlist(this);
+        //this.props.updatetWishListCount(6);
       })
       .catch(error => {
         console.log('newsError---', error);
       });
+  }
+
+  componentWillReceiveProps() {
+    this.setState({isWelcomeBack: false});
   }
 
   componentDidMount() {
@@ -103,9 +114,18 @@ class Wishlist extends React.Component {
         >
           {this.state.wishlistCurrentImage}
         </button>
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true}/> : null}
       </>
     );
   }
 }
 
-export default Wishlist;
+function mapStateToProps(state) {
+  
+  return {
+    //default: state.default
+  };
+}
+
+export default connect(mapStateToProps, { updatetWishListCount })(Wishlist);
+//export default Wishlist;

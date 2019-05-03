@@ -29,7 +29,6 @@ class ForgotPasswordEmailMobile extends React.Component {
 
   componentDidMount() {
     this.setState({ inputText: this.props.userIdPro });
-    console.log('dddddddd');
   }
 
   proceedBtnPressed(e) {

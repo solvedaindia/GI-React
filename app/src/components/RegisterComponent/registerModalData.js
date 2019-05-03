@@ -33,6 +33,7 @@ class RegisterModalData extends React.Component {
 
   /* Handle Modal Close */
   handleClose() {
+    this.props.resetCallbackPro();
     this.setState({
       show: false,
       data: null,
@@ -47,7 +48,15 @@ class RegisterModalData extends React.Component {
   }
 
   handleLoginComponent() {
-    this.handleClose();
+    console.log('back to login');
+    this.props.callbackRegisterPro();
+    this.setState({
+      show: false,
+      data: null,
+      message: null,
+      modalClass: 'modal-wrapperjoinus',
+    });
+    // this.handleClose();
     return <WelcomeBack />;
   }
 
@@ -128,7 +137,13 @@ class RegisterModalData extends React.Component {
       });
   }
 
+  componentDidMount() {
+    console.log('registerrrrrr----')
+    this.setState({ show: true });
+  }
+
   render() {
+    console.log('registerrrrrr----')
     let data = null;
     if (this.state.data === null && this.state.show === true) {
       data = (
@@ -148,9 +163,9 @@ class RegisterModalData extends React.Component {
 
     return (
       <>
-        <Button className="registerNow" onClick={this.handleShow}>
+        {/* <Button className="registerNow" onClick={this.handleShow}>
           Register
-        </Button>
+        </Button> */}
         <Modal
           className={`modal_register ${this.state.modalClass}`}
           show={this.state.show}
