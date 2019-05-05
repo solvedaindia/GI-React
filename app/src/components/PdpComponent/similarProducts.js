@@ -24,8 +24,17 @@ class similarProducts extends React.Component {
 
   render() {
     return (
-      <div className='similarProduct-Wrapper'>
-        <h4 className="heading text-center">similarProducts</h4>
+      <div className='similarProduct-Wrapper'>        
+        <ul className='similarProduct_Tabs'>
+          <li className='list active'>
+           <a className='link' href='#'>Similar Products</a>
+          </li>
+
+          <li className='list'>
+           <a className='link'  href='#'>Combos You May Like</a>
+          </li>
+        </ul>
+        <div className='clearfix'></div>
         <ul className='similarProducts'>
         {this.props.similarProducts.map((data, index) => {
           let emiData = data.emiData;
