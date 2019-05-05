@@ -126,13 +126,13 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: 50px;
+    font-size: 56px;
     color: $ceruleanblue;
     margin: 0;
   }
   .headingSubTitle {
-    color: $colorLightGrey;
-    margin: 0 0 15px 0;
+    color: $greyBorder;
+    margin: 0 0 27px 0;
     font-size: 13px;
   }
   .container {
@@ -211,7 +211,7 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: 14px;
+          font-size: 18px;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -247,7 +247,7 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: 18px;
+            font-size: 24px;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -449,8 +449,9 @@ section.tablecarousel {
             }
           }
           .label_text {
-            padding: 0 30px 26px 0;
+            padding: 0 30px 22px 0;
             color: $battleshipGrey;
+            font-size: 12px;
           }
           .input_box,
           .label_text {
@@ -469,6 +470,8 @@ section.tablecarousel {
         padding: 15px;
         position: relative;
         display: flex;
+        color:$greyish;
+        font-weight: 600;
 
         &--active {
           background: #f4f4f4;
@@ -601,6 +604,7 @@ section.tablecarousel {
         background: $colorwhite;
         color: $battleshipGrey;
         font-weight: 600;
+        font-size: 14px;
 
         &active {
           color: $ceruleanblue;

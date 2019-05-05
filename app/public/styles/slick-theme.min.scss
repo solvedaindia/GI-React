@@ -47,13 +47,15 @@
 .slick-next.slick-disabled:before, .slick-prev.slick-disabled:before {
     opacity: .25
 }
-
-.slick-next:before, .slick-prev:before {
-    font-size: 20px;
-    line-height: 1;
-    opacity: .75;
-    color: #fff
+.slick-dots li.slick-active {
+    background: transparent;
 }
+// .slick-next:before, .slick-prev:before {
+//     font-size: 20px;
+//     line-height: 1;
+//     opacity: .75;
+//     color: #fff
+// }
 
 .slick-prev {
     z-index: 100;
@@ -150,15 +152,15 @@
     height: 20px;
     content: 'â€¢';
     text-align: center;
-    opacity: .25;
-    color: #000
+    opacity: .75;
+    color: #fff
 }
 
 .slick-dots li.slick-active button:before {
-    opacity: .75;
-    color: #000;
+    opacity: 1;
+    color: #fff;
    
 }
-.slick-dots li.slick-active{ background: #ED7745;}
+// .slick-dots li.slick-active{ background: #ED7745;}
 
 /*# sourceMappingURL=slick-theme.min.css.map */

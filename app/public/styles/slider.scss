@@ -8,4 +8,36 @@
     .slick-dots {
         bottom: 12px;
     }
+    .slick-next:before, 
+    .slick-prev:before {
+        font-size: 32px;
+        line-height: unset;
+        opacity: unset;
+        color: unset;
+    }
+    .slick-dots li {
+        width: 12px;
+        height: 12px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+        background-color: rgba(255, 255, 255, 0.54);
+        background: transparent;
+    }
+    .slick-dots li button:before {
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        content: 'â€¢';
+        text-align: center;
+        opacity: .75;
+        color: #fff
+    }
+    .slick-dots li.slick-active button:before {
+        opacity: 1;
+        color: #fff;
+       
+    }
 }
