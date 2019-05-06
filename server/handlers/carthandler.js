@@ -5,9 +5,11 @@ const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils');
 const filter = require('../filters/filter');
+const cartFilter = require('../filters/cartfilter');
+const productUtil = require('../utils/productutil');
 
 /**
- * fetch Cart Details.
+ * Fetch Mini Cart Details.
  * @return return minicart Data
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
@@ -16,15 +18,31 @@ module.exports.fetchMiniCart = function fetchCartMain(headers, callback) {
   const miniCartUrl = `${constants.cartData.replace(
     '{{storeId}}',
     headers.storeId,
-  )}/@self?profileName=IBM_Summary`;
-  const fetchMiniCartData = [getCartData.bind(null, miniCartUrl, headers)];
-
-  async.waterfall(fetchMiniCartData, (err, results) => {
-    if (err) {
-      callback(err);
+  )}/@self?profileName=IBM_Details`;
+  getCartData(miniCartUrl, headers, (error, res) => {
+    if (error) {
+      callback(error);
+      return;
+    }
+    const miniCartJson = {
+      miniCartData: [],
+    };
+    if (res.orderItem && res.orderItem.length > 0) {
+      const productIDs = [];
+      res.orderItem.forEach(item => {
+        productIDs.push(item.productId);
+      });
+      productUtil.productByProductIDs(productIDs, headers, (err, result) => {
+        if (err) {
+          callback(err);
+          return;
+        }
+        const productListArray = result.productList;
+        miniCartJson.miniCartData = cartFilter.minicart(res, productListArray);
+        callback(null, miniCartJson);
+      });
     } else {
-      logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('minicart', results));
+      callback(null, miniCartJson);
     }
   });
 };
@@ -75,22 +93,27 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
 
 module.exports.addToCart = function addCart(params, headers, callback) {
   logger.debug('calling cart API to ADD product Items');
-  const cartBody = {};
   if (!params || !params.orderItem || params.orderItem.length === 0) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
+  const reqBody = {
+    orderItem: [],
+  };
 
   // eslint-disable-next-line no-restricted-syntax
   for (const item of params.orderItem) {
-    if (!item.skuId || !item.quantity) {
+    if (!item.sku_id || !item.quantity) {
       callback(errorutils.errorlist.invalid_params);
-      break;
+      return;
     }
+    const orderItemJSON = {
+      productId: item.sku_id,
+      quantity: item.quantity,
+    };
+    reqBody.orderItem.push(orderItemJSON);
   }
-
-  cartBody.orderItem = params.orderItem;
-  const addToCartTaskCMD = [addToCart.bind(null, headers, cartBody)];
+  const addToCartTaskCMD = [addToCart.bind(null, headers, reqBody)];
 
   async.waterfall(addToCartTaskCMD, (err, results) => {
     if (err) {
