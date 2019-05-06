@@ -1,9 +1,10 @@
 @import '../app.scss';
+@import '../variable';
 .searchBar {
     width: 30%;
     display: inline-block;
     position: relative;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $battleshipGrey;
    .search-icon{margin:0}
     .searchInput {
         width: 100%;
@@ -27,19 +28,44 @@
 
     #autoSuggestDiv{
         position: absolute;
-        top: 54px;
+        top: 53px;
         width: 100%;
-        background: #fff;
+        background:$colorwhite;
         z-index: 9;
         left: 0;
+        box-shadow: 0 24px 24px -10px rgba(66, 75, 90, 0.47);
 
         .auto-search{
-            padding:10px 20px;
+            padding: 16px 0 16px 0;
 
             .list{
-               padding:8px 0px;
-               cursor: pointer;
-               
+                padding:0px;
+                .link{
+                    display: block;
+                    padding: 7px 20px;
+                    text-decoration: none;
+                    color:$black;
+                    font-family: $font-regular;
+                    font-size: 12px;
+ 
+                    &:hover{
+                        background:$paleGrey;
+                    }
+                }
+                &:first-child{
+                    .link{
+                        display: block;
+                        padding: 7px 20px;
+                        text-decoration: none;
+                        color:$black;
+                        font-family: $font-bold;
+     
+                        &:hover{
+                            background:transparent;
+                        }
+                    }
+                }
+
             }
         }
         
