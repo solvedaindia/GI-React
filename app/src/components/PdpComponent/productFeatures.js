@@ -7,9 +7,17 @@ class productFeatures extends React.Component {
     this.dataClass = '';
     this.state = {
       hide: '',
+      selectedTabId:0
     };
   }
 
+  isActive=(id)=> {
+    return this.state.selectedTabId === id;
+  }
+
+  setActiveTab = (selectedTabId)=> {
+    this.setState({ selectedTabId });
+  }
   /* show feature images */
   showFeatureImage(divId) {
     const featureImages = document.getElementsByClassName('featureImages');
@@ -67,7 +75,8 @@ class productFeatures extends React.Component {
         <Col md={6} sm={12} xs={12}>
          <ul className='verticalTab'>
           {this.props.productFeature.map((featureData, i) => (
-            <li className='list' key={i}>
+            <li className={ this.isActive(i) ? 'list active':'list' } key={i}
+            onClick={() => this.setActiveTab(i) }>
               <a className='link' role="button" onClick={this.showFeatureImage.bind(this, i)}>
                 <h3 className="heading">{featureData.name}</h3>
                 {featureData.description}
