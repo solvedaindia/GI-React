@@ -74,7 +74,7 @@ function fetchlistNames(headers, callback) {
   logger.debug('Entering method mylisthandler: Fetch WishList Names');
   getWishlistData(headers, (err, result) => {
     if (err) {
-      callback(err);
+      callback(errorutils.handleWCSError(err));
     } else {
       const wishlistNamesJson = {
         wishlistCount: 0,
@@ -389,7 +389,8 @@ module.exports.addItemInWishlist = function addItemInWishlist(
 
   fetchlistNames(headers, (err, result) => {
     if (err) {
-      callback(err);
+      logger.error('Error in Fetch List Names');
+      callback(errorutils.handleWCSError(err));
     } else {
       // eslint-disable-next-line prefer-destructuring
       const wishlistCount = result.wishlistCount;

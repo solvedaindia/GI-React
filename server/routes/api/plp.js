@@ -4,8 +4,22 @@ const plphandler = require('../../handlers/plphandler');
 const testjson = require('../../configs/testjson');
 
 /* To Get Product List By Category ID for PLP */
-router.get('/productlist/:categoryId', (req, res, next) => {
-  plphandler.getProductList(req, (err, result) => {
+router.get('/bycategory/:categoryId', (req, res, next) => {
+  plphandler.getProductsByCategory(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/* To Get Product List By Serach Term for PLP */
+router.get('/bysearchterm/:searchterm', (req, res, next) => {
+  plphandler.getProductsBySearchTerm(req, (err, result) => {
     if (err) {
       next(err);
       return;

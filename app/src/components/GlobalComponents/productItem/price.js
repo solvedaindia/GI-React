@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 
 class Price extends React.Component {
   render() {
+    console.log('Priceee --- ',this.props)
     const offerPrice = parseFloat(this.props.offerPrice);
     const actualPrice = parseFloat(this.props.actualPrice);
     let crossPriceItem;

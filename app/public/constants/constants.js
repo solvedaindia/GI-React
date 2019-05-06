@@ -88,7 +88,7 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
-export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist/`;
+export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
 /* Footer logo url */
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
 /* PDP API */

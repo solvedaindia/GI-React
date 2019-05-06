@@ -4,6 +4,8 @@ const origin = require('../utils/origin.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
+// const pincodeutil = require('../utils/pincodeutil');
+const userHandler = require('./usershandler');
 
 /**
  * Get Guest Token from WCS
@@ -83,7 +85,18 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
         const loginResponseBody = {
           access_token: encryptedAccessToken,
         };
-        callback(null, loginResponseBody);
+        const userDetailHeader = headers;
+        userDetailHeader.profile = 'summary';
+        userDetailHeader.WCToken = response.body.WCToken;
+        userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
+        userHandler.getUserDetails(userDetailHeader, (err, result) => {
+          if (err) {
+            loginResponseBody.userDetails = {};
+          } else {
+            loginResponseBody.userDetails = result;
+          }
+          callback(null, loginResponseBody);
+        });
       } else {
         callback(errorutils.handleWCSError(response));
       }
