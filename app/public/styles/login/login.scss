@@ -123,7 +123,8 @@
             border: 1px solid $black;
             background: none;
             .icon{
-                width: 12px;
+                width: $base*3;
+                margin: 0 $base;
             }
         }
         .appLogin {
