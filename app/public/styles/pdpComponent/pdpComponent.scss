@@ -383,11 +383,15 @@
     border: 1px solid $lightblueGrey;
     border-bottom: none;
     min-height: 300px;
+    .tab:first-child{
+        margin: 0 49px 0 18px; 
+    }
      .tab{       
          padding: 0px 5px 2px 5px;
          color:$battleshipGrey;
          text-decoration: none;
-         margin: 0 20px;         
+         text-decoration: none;         
+         margin: 0 49px 0 0;      
      }
      .tab_1{
         left: 145px;
@@ -423,7 +427,7 @@
 
   .keywordsList{
     text-align: center;
-    padding: 0px 0 40px 0;
+    padding: 0px 0 0px 0;
     .list{
       display: inline-block;
       border: solid 1px $greenDark;    
@@ -438,7 +442,33 @@
 }
 
 .similarProduct-Wrapper{
-    padding:0 0 100px 0;
+    padding: 79px 0 100px 0;
+    .similarProduct_Tabs{
+        text-align: center;
+        padding: 0 0 44px 0;
+       .list.active{
+         border-bottom: 1px solid $cerulean;
+         font-weight: 600;
+
+         .link{
+             color:$black;
+         }
+        }
+        .list{           
+            display: inline-block;
+            font-size: 16px;
+            padding: 0 18px 0 0;
+            border-bottom:1px solid $lightblueGrey;
+
+            .link{
+                text-decoration: none;
+                color:$battleshipGrey;
+                display: block;  
+                padding: 0px 19px 3px 0;
+
+            }
+        }
+    }
 .similarProducts{
     display: flex;
     flex-wrap: wrap;
