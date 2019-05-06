@@ -32,9 +32,6 @@ export class HeaderContainer extends React.Component {
           <HeaderL1 />
           <HeaderL2 />
         </div>
-        <div className='subCatImage'>
-            <img src='https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/solution-banner.png' className='subCatImg' alt='Sub Cat Img' />
-        </div>
       </header>
     );
   }

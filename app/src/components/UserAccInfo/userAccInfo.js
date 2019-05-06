@@ -74,10 +74,10 @@ class UserAccInfo extends React.Component {
     const getLoginCookie = appCookie.get('isLoggedIn');
     console.log('dkddd', getLoginCookie);
     if (getCookie('isLoggedIn') === 'true') {
-      (this.state.userType = <a className="dropDown">Hello User!</a>),
-        (this.state.loginStatus = <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Logout</a>);
+		(this.state.userType = <><li className="listItem"><a className="dropDown">Hello User!</a></li><li className="listItem"><a className="dropDown">My Profile</a></li><li className="listItem"><a className="dropDown">My Orders</a></li><li className="listItem"><a className="dropDown">Manage Addresses</a></li><li className="listItem"><a className="dropDown">Godrej Credit</a></li><li className="listItem"><a className="dropDown">Gift Credit</a></li><li className="listItem"><a className="dropDown">Notifications</a></li></>),
+    	(this.state.loginStatus = <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Sign Out</a>);
     } else {
-      (this.state.userType = <a className="dropDown">Hello Guest!</a>),
+      (this.state.userType = <li className="listItem"><a className="dropDown">Hello Guest!</a></li>),
         (this.state.loginStatus = <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}> Login/Register</a>);
     }
   }
@@ -130,26 +130,22 @@ class UserAccInfo extends React.Component {
     if (!this.state.isFromWishlist) {
       userLogoItem = <UserLogo />
       dropdownItem = <ul className="userList">
-        <li className="listItem">
+        {/* <li className="listItem"> */}
           {this.state.userType}
-        </li>
+        {/* </li> */}
         <li className="listItem">
           {this.state.loginStatus}
         </li>
       </ul>
     }
-
-
-
-
     return (
       <li className="user icons">
         {userLogoItem}
         <ul className="welcomeDropDown">
-          {dropdownItem}
-          {this.state.showLoginRegisterMain ? <WelcomeBack callbackPro={this.welcomeBackCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
-          {this.state.showForgotPassword ? <ForgotPassword callbackForgotPro={this.forgotPasswordCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
-          {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
+			{dropdownItem}
+			{this.state.showLoginRegisterMain ? <WelcomeBack callbackPro={this.welcomeBackCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
+			{this.state.showForgotPassword ? <ForgotPassword callbackForgotPro={this.forgotPasswordCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
+			{this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)} resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
         </ul>
       </li>
     );
