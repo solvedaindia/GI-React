@@ -161,7 +161,8 @@ class Filter extends React.Component {
       }
 
       var checkItem;
-      if (option.facetImage !== "") {
+      // if (option.facetImage !== "") { //this condition to display all the images in any facet.
+        if (this.props.dataPro.facetName === 'Color') { //Show images only in colors facet
         const checkNew = (<img className='circle' src={'https://192.168.0.36:8443' + option.facetImage} />);
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
           {checkNew}

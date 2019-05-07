@@ -28,7 +28,6 @@ import {
 } from '../../../public/constants/constants';
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
-
 import '../../../public/styles/login/login.scss';
 
 class WelcomeBack extends React.Component {
@@ -219,24 +218,24 @@ class WelcomeBack extends React.Component {
               onFailure={this.responseGoogle}
             />
             <FacebookLogin
-              appId={facebookAppId}
-              render={renderProps => (
-                <button
-                  className="btn-white btn-fb"
-                  onClick={renderProps.onClick}
-                  isdisabled={renderProps.disabled}
-                >
-                  <span className="icon-img">
-                    <img className="icon" src={Facebook} />
-                  </span>
-                  <span className="signin-text">Sign in with Facebook</span>
-                </button>
-              )}
-              autoLoad
-              fields="name,email,picture"
-              cssClass="btn-white"
-              onClick={this.facebookOnClick.bind(this)}
-              callback={this.responseFacebook}
+				appId={facebookAppId}
+				render={renderProps => (
+				<button
+					className="btn-white btn-fb"
+					onClick={renderProps.onClick}
+					isdisabled={renderProps.disabled}
+				>
+					<span className="icon-img">
+						<img className="icon" src={Facebook} />
+					</span>
+					<span className="signin-text">Sign in with Facebook</span>
+				</button>
+				)}
+				autoLoad
+				fields="name,email,picture"
+				cssClass="btn-white"
+				onClick={this.facebookOnClick.bind(this)}
+				callback={this.responseFacebook}
             />
           </div>
           <p className="divider">or</p>
