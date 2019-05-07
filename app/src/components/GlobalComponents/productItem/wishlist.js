@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import apiManager from '../../../utils/apiManager';
 import { connect } from 'react-redux';
 import { updatetWishListCount } from '../../../actions/app/actions';
 import {
@@ -59,10 +59,8 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
-    axios
-      .post(addToWishlist, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(addToWishlist, data)
       .then(response => {
         this.setState({ wishlistCurrentImage: wishlistAddedImg });
         getUpdatedWishlist(this);
@@ -78,10 +76,8 @@ class Wishlist extends React.Component {
       wishlist_id: getCookie(wishlistIdCookie),
       giftlistitem_id: getCorrespondingGiftlistId(this.props.uniqueId),
     };
-    axios
-      .post(removeFromWishlist, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(removeFromWishlist, data)
       .then(response => {
         console.log('Add wishlit --- ', response.data);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });

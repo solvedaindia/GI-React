@@ -1,20 +1,9 @@
 
 import axios from 'axios';
-
-import { Url } from 'url';
 import {
-  plpSubCatAPI,
-  plpAPI,
-  espotAPI,
   storeId,
   accessToken,
 } from '../../public/constants/constants';
-// import store from '../store/index';
-
-/**
- * Create a new Axios client instance
- * @see https://github.com/mzabriskie/axios#creating-an-instance
- */
 const getClient = (baseUrl = null) => {
 
   const options = {
@@ -27,13 +16,11 @@ const getClient = (baseUrl = null) => {
 
 
   const client = axios.create(options);
-
   // Add a request interceptor
   client.interceptors.request.use(
     requestConfig => requestConfig,
     (requestError) => {
       Raven.captureException(requestError);
-
       return Promise.reject(requestError);
     },
   );
@@ -110,6 +97,7 @@ export default {
 
 
 export function expireAccessTokenHandling() {
+  //alert('Token Expired');
   console.log('it in token expire');
 }
 

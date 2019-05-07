@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 
@@ -111,10 +111,8 @@ class WelcomeBack extends React.Component {
   /* Handle User Login API */
   handleUserLoginApi(data) {
     this.setState({ message: null });
-    axios
-      .post(userLoginAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(userLoginAPI, data)
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);

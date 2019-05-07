@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import '../../../public/styles/headerContainer/category.scss';
 import {
   cartCountApi,
@@ -16,10 +16,8 @@ class CartCount extends React.Component {
   };
 
   getCartCount() {
-    axios
-      .get(cartCountApi, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(cartCountApi)
       .then(response => {
         const count = response.data.data.wishlistTotalItems;
         this.setState({

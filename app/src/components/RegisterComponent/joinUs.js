@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { storeId } from '../../../public/constants/constants';
 
 import Register from './register';
@@ -63,8 +63,8 @@ class JoinUs extends React.Component {
 	handleComponetData(api, data, token, type) {
 		console.log(type, 'joinUs');
 		console.log(data);
-		axios
-		.post(api, data, { headers: { store_id: storeId, access_token: token } })
+		apiManager
+		.post(api, data)
 		.then(response => {
 			if (type === 'registerWithEmail') {
 			alert('Registerted successfully!');

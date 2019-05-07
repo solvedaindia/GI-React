@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { Button, Form, FormGroup } from 'react-bootstrap';
 import {
   forgotPasswordAPI,
@@ -55,10 +55,8 @@ class ForgotPasswordNewPassword extends React.Component {
       otp: this.props.otpPro,
       new_password: this.state.inputText,
     };
-    axios
-      .post(forgotPasswordAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(forgotPasswordAPI, data)
       .then(response => {
         const passData = response.data.data;
         alert('Password changed successfully!');

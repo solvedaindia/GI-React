@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from "axios";
+import apiManager from '../../utils/apiManager';
 import { espotAPI, storeId, accessToken } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 import '../../../public/styles/homePageStatic.scss';
@@ -17,7 +17,7 @@ class EspotContent extends React.Component{
     }
     
     getEspotData() {
-        axios.get(espotAPI + this.state.espotName, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(espotAPI + this.state.espotName)
         .then(response => {
             this.setState({
                 pageLayoutEspot: response.data.data,

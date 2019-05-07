@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import SearchLogo from '../../components/SVGs/search';
 import { autoSuggestAPI, storeId, accessToken } from '../../../public/constants/constants';
 import '../../../public/styles/headerContainer/search.scss';
@@ -22,7 +22,7 @@ class SearchBar extends React.Component {
 
         if(searchText.length > 1) {
             if (searchText) {
-                axios.get(autoSuggestAPI+searchText, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+                apiManager.get(autoSuggestAPI+searchText).then(response => {
                     document.addEventListener('click', this.handleOutsideClick, false);
                     this.setState({
                         searchData: response.data.data.suggestionView[0].entry

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import {
   Row,
   Col,
@@ -85,7 +85,7 @@ class NewsletterModel extends React.Component {
     let data = {
       'email_id': this.state.inputText,
     }
-    axios.post(newsletterAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+    apiManager.post(newsletterAPI, data).then(response => {
       const data = response.data;
 
       let now = new Date();

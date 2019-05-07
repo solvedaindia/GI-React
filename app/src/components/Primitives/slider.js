@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
 import BannerData from '../../data/BannerData.json';
 import '../../../public/styles/slider.scss';
@@ -16,7 +16,7 @@ class FullBanner extends React.Component {
     }
     
     getSliderData() {
-        axios.get(heroSliderAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(heroSliderAPI)
         .then(response => {
             this.setState({
                 heroSlider: response.data.data.bannerList,

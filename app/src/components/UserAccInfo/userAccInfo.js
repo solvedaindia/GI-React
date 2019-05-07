@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
@@ -86,7 +86,7 @@ class UserAccInfo extends React.Component {
     let data = {
       'email_id': this.state.inputText,
     }
-    axios.post(logoutAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+    apiManager.post(logoutAPI, data).then(response => {
       if (response.data.status === 'success') {
         //Reset all the user Cookies
         document.cookie = `${accessTokenCookie}=;path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */

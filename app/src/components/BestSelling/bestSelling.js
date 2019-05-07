@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
 import {
   bestSellerAPI,
@@ -17,7 +17,7 @@ class BestSeller extends React.Component{
     };
 
     getBestSellerData() {
-        axios.get(bestSellerAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(bestSellerAPI)
         .then(response => {
             this.setState({
                 bestSellerData: response.data.data.productList,

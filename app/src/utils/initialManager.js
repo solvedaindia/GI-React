@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from './apiManager';
 import { connect } from 'react-redux';
 import { updatetWishListCount } from '../actions/app/actions';
 import {
@@ -13,10 +13,8 @@ import {
 import { resolveTheWishlistData } from './utilityManager';
 
 export function registerGuestUser(callback) {
-  axios
-    .post(guestLoginAPI, '', {
-      headers: { store_id: storeId, access_token: accessToken },
-    })
+  apiManager
+    .post(guestLoginAPI, '')
     .then(response => {
       const guestData = response.data.data;
       const guestToken = guestData.access_token;
@@ -33,10 +31,8 @@ export function registerGuestUser(callback) {
 
 export function getUpdatedWishlist(wishlist) {
   console.log('getUpdatedWishlist');
-  axios
-    .get(wishListCountApi, {
-      headers: { store_id: storeId, access_token: accessToken },
-    })
+  apiManager
+    .get(wishListCountApi)
     .then(response => {
       resolveTheWishlistData(response.data.data);
       const wishlistCount = response.data.data.wishlistItemArray[0].wishlistItemList.length

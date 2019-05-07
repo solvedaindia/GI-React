@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/clpContainer/clpContainer.scss';
 import themeData from '../../../data/themeData.json';
 // import {
@@ -19,10 +19,8 @@ class LivingTheme extends React.Component {
 	}
 	
 	// getThemeData() {
-	// 	axios
-	// 		.get(themeDataAPI, {
-	// 			headers: { store_id: storeId, access_token: accessToken },
-	// 		})
+	// 	apiManager
+	// 		.get(themeDataAPI)
 	// 		.then(response => {
 	// 			this.setState({
 	// 			themeData: response.data.themeData,

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { Button, Form, FormGroup, Label, Modal } from 'react-bootstrap';
 import {
   generateOTPAPI,
@@ -55,10 +55,8 @@ class ForgotPasswordOTP extends React.Component {
       otp: this.state.inputText,
       forgot_password: 'true',
     };
-    axios
-      .post(validateOTPAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(validateOTPAPI, data)
       .then(response => {
         const nextComp = 'ForgotPasswordNewPassword';
         this.props.handlerPro(nextComp, null, this.state.inputText);
@@ -101,10 +99,8 @@ class ForgotPasswordOTP extends React.Component {
       resend: 'true',
       forgot_password: 'true',
     };
-    axios
-      .post(generateOTPAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(generateOTPAPI, data)
       .then(response => {
         const otpCount = response.data.data.otpCount
         if (otpCount === 3) {

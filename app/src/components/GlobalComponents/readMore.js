@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import {
 	espotAPI,
 	storeId,
@@ -25,10 +25,8 @@ class ReadMore extends React.Component {
         };
     }
     getReadMoreData() {
-		axios
-			.get(espotAPI + this.props.espotName, {
-				headers: { store_id: storeId, access_token: accessToken },
-			})
+		apiManager
+			.get(espotAPI + this.props.espotName)
 			.then(response => {
                 this.setState({
                     readMoreData: response.data.data,

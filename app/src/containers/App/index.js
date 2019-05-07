@@ -9,7 +9,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
@@ -92,10 +92,8 @@ export default class App extends React.Component {
   }
 
   getNewsletterSubscriptionStatus() {
-    axios
-      .get(newsletterStatusAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(newsletterStatusAPI)
       .then(response => {
         console.log(
           'Newsletter status: ',

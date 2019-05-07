@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from "axios";
+import apiManager from '../../utils/apiManager';
 import '../../../public/styles/headerContainer/category.scss';
 import SearchBar from '../Search/search';
 import HeaderRight from '../HeaderRight/headerRight';
@@ -15,8 +15,8 @@ class Category extends React.Component{
     };
 
     getHeaderLayer2() {
-        axios
-		.get(navigationApi, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager
+		.get(navigationApi)
 		.then(response => {
 			this.setState({
                 category: response.data.data.categoryArray,

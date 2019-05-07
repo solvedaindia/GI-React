@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { connect } from 'react-redux';
 import {
   wishListCountApi,
@@ -21,10 +21,8 @@ class wishListCount extends React.Component {
   };
 
   getWishListCount() {
-    axios
-      .get(wishListCountApi, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(wishListCountApi)
       .then(response => {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
