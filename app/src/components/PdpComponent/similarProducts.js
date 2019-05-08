@@ -7,10 +7,9 @@ class similarProducts extends React.Component {
     super();
     this.dataClass = '';
     this.state = {
-      hide: '',
+      hide: '',        
     };
   }
-
   /* show feature images */
   showFeatureImage(divId) {
     const featureImages = document.getElementsByClassName('featureImages');
@@ -22,18 +21,22 @@ class similarProducts extends React.Component {
     contentElement.classList.remove('dataNotActive');
   }
 
+  renderProducts(renderId) {  
+    document.getElementById('similarProducts').classList.add('dataNotActive');
+    document.getElementById('similarCombos').classList.add('dataNotActive');
+    document.getElementById(renderId).classList.remove('dataNotActive');   
+
+  }
+  
   render() {
     return (
       <div className='similarProduct-Wrapper'>
-        <ul className='similarProduct_Tabs'>
-          <li className='list active'>
-           <a className='link' href='#'>Similar Products</a>
-          </li>
-
-          <li className='list'>
-           <a className='link'  href='#'>Combos You May Like</a>
-          </li>
+        <ul className="similarProduct_Tabs">
+         <li className='list active' onClick={() => this.renderProducts('similarProducts') }><a className='link' href='javascript:void(0)'>Similar Products</a></li>
+         <li className='list' onClick={() => this.renderProducts('similarCombos') }><a className='link' href='javascript:void(0)'>Combos You May Like</a></li>
         </ul>
+
+        <div id='similarProducts'>
         <ul className='similarProducts'>
         {this.props.similarProducts.map((data, index) => {
           let emiData = data.emiData;
@@ -67,6 +70,11 @@ class similarProducts extends React.Component {
           );
         })}
          </ul>
+         </div>
+
+         <div className='dataNotActive' id='similarCombos'>         
+           <h4>Combos Data</h4>
+        </div>
       </div>
     );
   }

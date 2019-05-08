@@ -446,6 +446,11 @@
     .similarProduct_Tabs{
         text-align: center;
         padding: 0 0 44px 0;
+        .list:last-child{
+            .link{
+                padding:0 0 3px 0;
+            }
+        }
        .list.active{
          border-bottom: 1px solid $cerulean;
          font-weight: 600;
@@ -457,7 +462,7 @@
         .list{           
             display: inline-block;
             font-size: 16px;
-            padding: 0 18px 0 0;
+            padding: 0 0px 0 0;
             border-bottom:1px solid $lightblueGrey;
 
             .link{
@@ -468,6 +473,7 @@
 
             }
         }
+        
     }
 .similarProducts{
     display: flex;
@@ -475,6 +481,7 @@
     .productlist {        
         position: relative; 
         margin: 0 30px 0 0;
+        min-width: 260px;
         .imgBox {
           position: relative;
           text-align: center;
