@@ -3,7 +3,12 @@ import axios from 'axios';
 import {
   storeId,
   accessToken,
+  accessTokenCookie,
 } from '../../public/constants/constants';
+import { getCookie } from './utilityManager';
+import { resetTheCookiesAndData } from './initialManager';
+const isTokenExpire = false;
+
 const getClient = (baseUrl = null) => {
 
   const options = {
@@ -13,6 +18,8 @@ const getClient = (baseUrl = null) => {
       store_id: storeId
     }
   };
+
+
 
 
   const client = axios.create(options);
@@ -29,13 +36,16 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     (error) => {
-      console.log('the Error --- ',error.response);
+      console.log('the Error --- ', error.response);
       if (error.response.status >= 500) {
         Raven.captureException(error);
       }
       else if (error.response.data.error.error_key === 'token_expired') {
+        //theCount += 1;
+        //isTokenExpire = true;
+        console.log('THIS THE COUNT ---- ', isTokenExpire);
         expireAccessTokenHandling();
-        
+
       }
       return Promise.reject(error);
     },
@@ -75,7 +85,7 @@ export default {
   },
 
   post(url, data = {}, conf = {}) {
-    console.log('POST DATA -- ',data, url)
+    console.log('POST DATA -- ', data, url)
     return getClient().post(url, data, conf)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
@@ -97,7 +107,13 @@ export default {
 
 
 export function expireAccessTokenHandling() {
-  //alert('Token Expired');
-  console.log('it in token expire');
+  
+  
+  if (getCookie(accessTokenCookie) != '') {
+    console.log('Token has expired', getCookie(accessTokenCookie));
+    alert('Please relogin, your session has expired.')
+    resetTheCookiesAndData();
+  }
+  
 }
 

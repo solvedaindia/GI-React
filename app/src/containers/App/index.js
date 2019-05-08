@@ -50,10 +50,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    client.get('/users').then((response) => {
-      console.log('Its success from API MANAGER');
-    });
-
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     window.addEventListener('resize', this.resize);
