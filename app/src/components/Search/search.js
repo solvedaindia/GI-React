@@ -12,10 +12,19 @@ class SearchBar extends React.Component {
         }
         this.handleClick = this.handleChange.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
+        this.clearFields= this.clearFields.bind(this);
+        this.showButton= this.showButton.bind(this);
     }
 
     handleChange = (event) => {
         const searchText = event.target.value;
+        console.log(searchText,'####')
+        if (event.target.value === '') {            
+            var crossbtn=document.getElementById('clearField');
+            crossbtn.style.display='none'
+        }
+
+
         this.setState({
             searchData: []
         });
@@ -34,6 +43,7 @@ class SearchBar extends React.Component {
                 document.removeEventListener('click', this.handleOutsideClick, false);
             }
         }
+      
     }
 
     handleOutsideClick(e) {
@@ -47,12 +57,22 @@ class SearchBar extends React.Component {
         }
     }
 
+    clearFields(e){         
+        var inputVal= document.getElementById("searchInput").value='';      
+    }
+
+    showButton(e){ 
+        var crossbtn = document.getElementById('clearField');
+        crossbtn.style.display='block'
+    }
+
     render() {
         const searchData = this.state.searchData;
         return (
             <div className='searchBar'>
-                <SearchLogo />                
-                <input className='searchInput' id='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='search for products' />
+                <SearchLogo />              
+                <input className='searchInput' id='searchInput' onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='search for products' />
+                <a className='clearField' id='clearField' role='button' onClick={this.clearFields}>X</a>
                 { searchData.length > 0 && 
                     <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
                         <ul className='auto-search'>
