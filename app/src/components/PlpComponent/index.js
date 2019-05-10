@@ -143,8 +143,7 @@ const mapStateToProps = state => {
     bannerPosIndex: stateObj.adBannerPos,
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
     coloumnLayout: stateObj.columnLayout,
-    compData: stateObj.compWidgetData
-
+    compData: stateObj.compWidgetData,
   };
 };
 

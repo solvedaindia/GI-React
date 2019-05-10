@@ -10,7 +10,7 @@ import * as actionTypes from './constants';
 import {
   fetchReleventSortingValue,
   updateFilterMap,
-  checkCompareWidget
+  checkCompareWidget,
 } from '../../utils/utilityManager';
 
 const initialState = {
@@ -22,7 +22,7 @@ const initialState = {
   adBannerData: [],
   updateFilter: new Map(),
   compWidgetData: [],
-  compCategories: []
+  compCategories: [],
 };
 
 function plpContainerReducer(state = initialState, action) {
@@ -86,7 +86,10 @@ function plpContainerReducer(state = initialState, action) {
     case actionTypes.REMOVEPRODUCT:
       return {
         ...state,
-        compWidgetData: checkCompareWidget(state.compWidgetData, action.payload.id),
+        compWidgetData: checkCompareWidget(
+          state.compWidgetData,
+          action.payload.id,
+        ),
       };
     default:
       return state;

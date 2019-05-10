@@ -58,13 +58,10 @@ class FullBanner extends React.Component {
         <Slider {...settings}>
           {!!heroSlider &&
             heroSlider.map((sliderData, index) => (
-            <a href={sliderData.onClickUrl} key={index}>
-              <img 
-                src={sliderData.imageSrc}
-                alt={sliderData.alt}
-              />
+              <a href={sliderData.onClickUrl} key={index}>
+                <img src={sliderData.imageSrc} alt={sliderData.alt} />
               </a>
-          ) )}
+            ))}
         </Slider>
       </div>
     );

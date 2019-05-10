@@ -63,14 +63,14 @@ export const updateInitialValues = coloumn => {
 export const AddProduct = product => ({
   type: actionTypes.ADDPRODUCT,
   payload: {
-    product: product
+    product,
   },
 });
 
 export const RemoveProduct = id => ({
   type: actionTypes.REMOVEPRODUCT,
   payload: {
-    id: id
+    id,
   },
 });
 
