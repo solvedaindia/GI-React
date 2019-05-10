@@ -40,6 +40,11 @@ class PlpComponent extends React.Component {
     this.parsePLPData(this.props, false);
   }
 
+  handleAddProduct = product => {
+    console.log('frd', 'handle add product called');
+    this.props.addProduct(product);
+  };
+
   parsePLPData(data) {
     if (data) {
       const wishlistArr = getOnlyWishlistUniqueIds();
@@ -50,6 +55,7 @@ class PlpComponent extends React.Component {
             key={index}
             data={item}
             isInWishlist={wishlistArr.includes(item.uniqueID)}
+            addProduct={this.handleAddProduct}
           />
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
@@ -127,6 +133,7 @@ class PlpComponent extends React.Component {
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => ({
+  addProduct: product => dispatch(actionCreators.AddProduct(product)),
   // onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
 });
 

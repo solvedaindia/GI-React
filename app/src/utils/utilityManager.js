@@ -134,8 +134,11 @@ export function getCorrespondingGiftlistId(uniqueID) {
 
 /* ----------------------------------------------------------------------- */
 
-
 export function trimTheSentence(title, charLimit) {
   const trimStr = `${title.substring(0, charLimit)}...`;
   return trimStr;
+}
+
+export function checkCompareWidget(compWidget, id) {
+  const data = compWidget.find(prd => prd.id == product.id);
 }

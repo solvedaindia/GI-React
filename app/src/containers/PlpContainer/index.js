@@ -30,6 +30,7 @@ import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/d
 import Sort from '../../components/PlpComponent/Sorting/sort';
 
 import * as actionCreators from './actions';
+import CompContainer from './compWidget';
 import axios from 'axios';
 import {
   plpSubCatAPI,
@@ -388,6 +389,7 @@ export class PlpContainer extends React.Component {
         )}
         {!hasMore && <div className="noProductFound">No Products Found</div>}
         {descriptionItem}
+        <CompContainer />
       </>
     );
   }

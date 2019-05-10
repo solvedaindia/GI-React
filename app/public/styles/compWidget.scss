@@ -1,0 +1,24 @@
+.comp {
+    position: fixed;
+    bottom: 10px;
+    margin-left: 90px !important;
+    height: auto;
+    background: white;
+    z-index: 2;
+}
+.cItem {
+    width: 300px;
+    float: left;
+    background: #f7f7f7;
+    margin: 10px;
+}
+
+.cImage {
+    height: 60px;
+    display: inline;
+}
+
+.cContent {
+    display: inline;
+    position: absolute;
+}
