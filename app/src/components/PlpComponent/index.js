@@ -41,7 +41,6 @@ class PlpComponent extends React.Component {
   }
 
   handleAddProduct = product => {
-    console.log('frd', 'handle add product called');
     this.props.addProduct(product);
   };
 
@@ -56,6 +55,7 @@ class PlpComponent extends React.Component {
             data={item}
             isInWishlist={wishlistArr.includes(item.uniqueID)}
             addProduct={this.handleAddProduct}
+            compData={this.props.compData}
           />
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
@@ -143,6 +143,8 @@ const mapStateToProps = state => {
     bannerPosIndex: stateObj.adBannerPos,
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
     coloumnLayout: stateObj.columnLayout,
+    compData: stateObj.compWidgetData
+
   };
 };
 

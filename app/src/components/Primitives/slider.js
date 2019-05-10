@@ -64,7 +64,7 @@ class FullBanner extends React.Component {
                 alt={sliderData.alt}
               />
               </a>
-          ) ))}
+          ) )}
         </Slider>
       </div>
     );

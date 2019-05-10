@@ -140,5 +140,10 @@ export function trimTheSentence(title, charLimit) {
 }
 
 export function checkCompareWidget(compWidget, id) {
-  const data = compWidget.find(prd => prd.id == product.id);
+  const data = compWidget.find(prd => prd.id == id);
+  if(data) {
+    return compWidget.filter(prd => prd.id != id)
+  } else {
+    return compWidget;
+  }
 }
