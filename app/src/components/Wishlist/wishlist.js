@@ -27,8 +27,7 @@ class wishListCount extends React.Component {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
         this.setState({
-          wishListCount:
-            count == '0' ? '1' : response.data.data.wishlistTotalItems,
+          wishListCount: response.data.data.wishlistTotalItems,
           isLoading: false,
         });
       })
@@ -63,11 +62,17 @@ class wishListCount extends React.Component {
 
   render() {
     const { isLoading, wishListCount } = this.state;
+    console.log('wwwwwww-----',wishListCount)
+    var wishlistItem = null;
+    if (wishListCount != 0 && wishListCount != undefined) {
+      wishlistItem = <span className="wishListCount">{wishListCount}</span>
+    }
+
     return (
       <>
         <li className="icons" onClick={this.handleWLCount.bind(this)}>
           {!isLoading ? (
-            <span className="wishListCount">{wishListCount}</span>
+            wishlistItem
           ) : (
               <p className="error">No Category Found</p>
             )}

@@ -20,8 +20,6 @@ const getClient = (baseUrl = null) => {
   };
 
 
-
-
   const client = axios.create(options);
   // Add a request interceptor
   client.interceptors.request.use(
@@ -37,16 +35,20 @@ const getClient = (baseUrl = null) => {
     response => response,
     (error) => {
       console.log('the Error --- ', error.response);
-      if (error.response.status >= 500) {
-        Raven.captureException(error);
-      }
-      else if (error.response.data.error.error_key === 'token_expired') {
+      // if (error.response.status >= 500) {
+      //   //Raven.captureException(error);
+      // }
+      if (error.response.data.error.error_key === 'token_expired') {
         //theCount += 1;
         //isTokenExpire = true;
         console.log('THIS THE COUNT ---- ', isTokenExpire);
         expireAccessTokenHandling();
 
       }
+      // else if (error.response.data.error.error_key === 'wcs_invalid_response') {
+      //   console.log('WXS down');
+      //   alert(error.response.data.error.error_message);
+      // }
       return Promise.reject(error);
     },
   );
