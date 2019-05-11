@@ -34,6 +34,7 @@ class Wishlist extends React.Component {
     super(props);
     this.state = {
       wishlistCurrentImage: wishListRemovedImg,
+      wishlistPopup: null,
       isWelcomeBack: false
     };
   }
@@ -51,7 +52,7 @@ class Wishlist extends React.Component {
     } else {
       // Show login Pop up
       //alert('Please Login');
-      this.setState({isWelcomeBack: true});
+      this.setState({ isWelcomeBack: true});
     }
   }
 
@@ -64,13 +65,15 @@ class Wishlist extends React.Component {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
-        this.setState({ wishlistCurrentImage: wishlistAddedImg });
+        this.setState({
+          wishlistCurrentImage: wishlistAddedImg,
+          wishlistPopup: this.wishlistPopupItem()
+        });
         getUpdatedWishlist(this);
       })
       .catch(error => {
         console.log('newsError---', error);
       });
-      
   }
 
   removeFromWishlistAPI() {
@@ -94,7 +97,7 @@ class Wishlist extends React.Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({isWelcomeBack: false});
+    this.setState({ isWelcomeBack: false });
   }
 
   componentDidMount() {
@@ -105,23 +108,39 @@ class Wishlist extends React.Component {
     });
   }
 
+  wishlistPopupItem() {
+    setTimeout(()=>{
+      this.setState({
+        wishlistPopup: null
+      });
+    }, 4000);
+    return (
+      <div className='addedToWishlist'>
+        <span className='textStyle'>Product Added to Wishlist</span>
+        <button className='viewTextStyle'>View</button>
+      </div>
+    )
+    
+  }
+
   render() {
     return (
       <>
+        {this.state.wishlistPopup}
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
         >
           {this.state.wishlistCurrentImage}
         </button>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true}/> : null}
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true} /> : null}
       </>
     );
   }
 }
 
 function mapStateToProps(state) {
-  
+
   return {
     //default: state.default
   };
