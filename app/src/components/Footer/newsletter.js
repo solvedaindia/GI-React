@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { storeId, accessToken, newsletterAPI } from '../../../public/constants/constants';
 import { validateEmptyObject, regexEmail } from '../../utils/validationManager';
 import Socialicon  from './socialicons';
@@ -22,7 +22,7 @@ class newsletter extends React.Component {
 		let data = {
 			'email_id': this.state.inputText,
 		}
-		axios.post(newsletterAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+		apiManager.post(newsletterAPI, data).then(response => {
 			const data = response.data;
 			this.setState({inputText: ''})
 			alert('Newsletter Subscription - ' + data.status);

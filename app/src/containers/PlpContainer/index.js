@@ -30,8 +30,7 @@ import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/d
 import Sort from '../../components/PlpComponent/Sorting/sort';
 
 import * as actionCreators from './actions';
-import CompContainer from './compWidget';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import {
   plpSubCatAPI,
   plpAPI,
@@ -144,10 +143,8 @@ export class PlpContainer extends React.Component {
   }
 
   fetchAdBannerData() {
-    axios
-      .get(`${espotAPI}GI_Plp_Sample_AD_Banner`, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
       .then(response => {
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
@@ -156,9 +153,9 @@ export class PlpContainer extends React.Component {
   }
 
   fetchSubCategoryData() {
-    axios
+    apiManager
       .get(plpSubCatAPI + categoryId, {
-        headers: { store_id: '10801', access_token: accessToken },
+        headers: { store_id: '10801' },
       })
       .then(response => {
         console.log('Subcat Data', response.data);
@@ -168,10 +165,8 @@ export class PlpContainer extends React.Component {
   }
 
   fetchMarketingTextBannerData() {
-    axios
-      .get(`${espotAPI}GI_Plp_Sample_Hero_Banner`, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(`${espotAPI}GI_Plp_Sample_Hero_Banner`)
       .then(response => {
         this.setState({
           marketingTextBannerData: response.data.data.bannerList[0].content,
@@ -200,12 +195,12 @@ export class PlpContainer extends React.Component {
         newStoreId = '10801';
       }
       console.log('categorId---', categoryId, newStoreId);
-      axios
+      apiManager
         .get(plpURL, {
           headers: {
             store_id: newStoreId,
-            access_token: accessToken,
             cat_details: this.state.isCatDetails,
+            catalog_id: '10601',
           },
         })
         .then(response => {
@@ -241,10 +236,8 @@ export class PlpContainer extends React.Component {
   }
 
   fetchDescriptionData() {
-    axios
-      .get(`${espotAPI}GI_Plp_Description`, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(`${espotAPI}GI_Plp_Description`)
       .then(response => {
         // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
         this.setState({ plpDescriptionData: response.data.data });

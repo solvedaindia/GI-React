@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
@@ -8,6 +8,7 @@ import appCookie from '../../utils/cookie';
 import { getCookie } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { storeId, accessToken, logoutAPI, accessTokenCookie, wishlistDataCookie, wishlistIdCookie } from '../../../public/constants/constants';
+import { logoutTheUser } from '../../utils/initialManager';
 
 class UserAccInfo extends React.Component {
   state = {
@@ -83,23 +84,7 @@ class UserAccInfo extends React.Component {
   }
 
   onLogoutClick() {
-    let data = {
-      'email_id': this.state.inputText,
-    }
-    axios.post(logoutAPI, data, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
-      if (response.data.status === 'success') {
-        //Reset all the user Cookies
-        document.cookie = `${accessTokenCookie}=;path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */
-        const json_str = JSON.stringify([]);
-        document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
-        document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
-        appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
-        window.location.reload();
-      }
-      // alert('Newsletter Subscription - ' + data.status);
-    }).catch(error => {
-      console.log('newsError---', error);
-    });
+    logoutTheUser();
   }
 
   componentDidMount() {

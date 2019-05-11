@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
 import {
   recentlyViewedAPI,
@@ -16,10 +16,8 @@ class RecentlyViewed extends React.Component {
   };
 
   getRecentlyViewed() {
-    axios
-      .get(recentlyViewedAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(recentlyViewedAPI)
       .then(response => {
         this.setState({
           recentlyViewedData: response.data.data,

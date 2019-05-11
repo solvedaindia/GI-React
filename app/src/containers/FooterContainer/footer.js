@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { footerApi, storeId, accessToken } from '../../../public/constants/constants';
 import Footer from '../../components/Footer/footer';
 import '../../../public/styles/footerContainer/footerContainer.scss';
@@ -21,7 +21,7 @@ class FooterContainer extends React.Component {
     }
 
     callFooterApi() {
-            axios.get(footerApi, { 'headers': { 'store_id': storeId, 'access_token': accessToken } }).then(response => {
+            apiManager.get(footerApi).then(response => {
                 this.setState({
                     footer: response.data,
                     loading: false

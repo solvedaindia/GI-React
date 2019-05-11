@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
 import { featuredCatAPI, storeId, accessToken, catID } from '../../../public/constants/constants';
 import '../.././../public/styles/subCat/subCat.scss';
@@ -15,7 +15,7 @@ export class SubCategory extends React.Component {
     }
     
     getSubCategories() {
-        axios.get(featuredCatAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(featuredCatAPI)
         .then(response => {
             this.setState({
                 subCatData: response.data.data,

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from "axios";
+import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/headerContainer/headerL1.scss';
 import { headerStatic, storeId, accessToken } from '../../../../public/constants/constants';
 
@@ -11,7 +11,7 @@ class HeaderL1 extends React.Component{
     };
 
     getHeaderLayer1() {
-        axios.get(headerStatic, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(headerStatic)
         .then(response => {
             this.setState({
                 layer1Data: response.data.data.Header_Static_Links,

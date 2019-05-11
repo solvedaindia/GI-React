@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { Button, Modal, Form, FormGroup, Row, Col, Label, Alert } from 'react-bootstrap';
 import modalImage from '../../../public/images/impact.jpg';
 import { registartionWithEmailAPI, storeId, accessTokenAPI, generateOTPAPI } from '../../../public/constants/constants';
@@ -92,7 +92,7 @@ class Register extends React.Component {
         password: this.state.password
     }
 
-    axios.post(accessTokenAPI, data, { 'headers': { 'store_id': storeId } }).then(token => {
+    apiManager.post(accessTokenAPI, data).then(token => {
         
         if (this.props.registrationType === 'registerWithEmail') {
             this.props.handleApi(registartionWithEmailAPI, data, token.data.data.access_token, this.props.registrationType);
