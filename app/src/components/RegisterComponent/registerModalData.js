@@ -138,12 +138,12 @@ class RegisterModalData extends React.Component {
   }
 
   componentDidMount() {
-    console.log('registerrrrrr----')
+    console.log('registerrrrrr----');
     this.setState({ show: true });
   }
 
   render() {
-    console.log('registerrrrrr----')
+    console.log('registerrrrrr----');
     let data = null;
     if (this.state.data === null && this.state.show === true) {
       data = (

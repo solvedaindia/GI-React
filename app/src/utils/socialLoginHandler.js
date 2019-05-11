@@ -1,4 +1,4 @@
-import apiManager from '../utils/apiManager';
+import apiManager from './apiManager';
 import {
   socialLoginAPI,
   accessToken,

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import apiManager from '../../utils/apiManager';
 import {
   Row,
   Col,
@@ -15,6 +14,7 @@ import {
   FormGroup,
   Label,
 } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 import '../../../public/styles/newsletterModel/newsletterModel.scss';
 import {
   newsletterAPI,
@@ -44,18 +44,15 @@ class NewsletterModel extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {}
 
+  componentDidMount() {
+    const now = new Date();
+    const minutes = 21600; // -> 21600 minuts equals to 15 days
+    now.setTime(now.getTime() + minutes * 60 * 1000);
+
+    document.cookie = `${newsletterTokenCookie}=${null};path=/;expires=${now.toGMTString()}`;
   }
-
-  componentDidMount () {
-    let now = new Date();
-      var minutes = 21600; // -> 21600 minuts equals to 15 days
-      now.setTime(now.getTime() + (minutes * 60 * 1000));
-
-      document.cookie = `${newsletterTokenCookie}=${null};path=/;expires=${now.toGMTString()}`;
-  }
-
 
   toggle() {
     this.setState(prevState => ({
@@ -77,28 +74,33 @@ class NewsletterModel extends React.Component {
         error: true,
         errorMessage: 'Invalid Email address',
       });
-      return
+      return;
     }
 
-    this.setState({ error: false })
+    this.setState({ error: false });
 
-    let data = {
-      'email_id': this.state.inputText,
-    }
-    apiManager.post(newsletterAPI, data).then(response => {
-      const data = response.data;
+    const data = {
+      email_id: this.state.inputText,
+    };
+    apiManager
+      .post(newsletterAPI, data)
+      .then(response => {
+        const data = response.data;
 
-      let now = new Date();
-      var minutes = 21600; // -> 21600 minuts equals to 15 days
-      now.setTime(now.getTime() + (minutes * 60 * 1000));
+        const now = new Date();
+        const minutes = 21600; // -> 21600 minuts equals to 15 days
+        now.setTime(now.getTime() + minutes * 60 * 1000);
 
-      document.cookie = `${newsletterTokenCookie}=${getCookie(accessTokenCookie)};path=/;expires=${now.toGMTString()}`;
-      this.setState({ inputText: '' })
-      this.toggle();
-      alert(`Newsletter Subscription - ${data.status}`);
-    }).catch(error => {
-      console.log('newsError---', error);
-    });
+        document.cookie = `${newsletterTokenCookie}=${getCookie(
+          accessTokenCookie,
+        )};path=/;expires=${now.toGMTString()}`;
+        this.setState({ inputText: '' });
+        this.toggle();
+        alert(`Newsletter Subscription - ${data.status}`);
+      })
+      .catch(error => {
+        console.log('newsError---', error);
+      });
   }
 
   handleInputChange(text) {
@@ -111,40 +113,60 @@ class NewsletterModel extends React.Component {
   render() {
     let errorItem;
     if (this.state.error) {
-      errorItem = <p className='error-msg'>{this.state.errorMessage}</p>
+      errorItem = <p className="error-msg">{this.state.errorMessage}</p>;
     } else {
       errorItem = null;
     }
     return (
-      <Modal className='newsletter-Wrapper' show={this.state.modal} onHide={this.toggle}>
+      <Modal
+        className="newsletter-Wrapper"
+        show={this.state.modal}
+        onHide={this.toggle}
+      >
         <Modal.Body>
-          <Button className="close" onClick={this.toggle}></Button>
-          <Row className='no-margin'>
-            <Col xs={12} md={5} className='no-padding'>
-              <div className='Thumbnailbox'>
-                <img className='imgfullwidth' src={NewsletterThumbnailImg} />
+          <Button className="close" onClick={this.toggle} />
+          <Row className="no-margin">
+            <Col xs={12} md={5} className="no-padding">
+              <div className="Thumbnailbox">
+                <img className="imgfullwidth" src={NewsletterThumbnailImg} />
               </div>
             </Col>
 
             <Col xs={12} md={7}>
-              <div className='form_newsletter'>
-                <h3 className="heading">Have you joined our mailing list yet?</h3>
+              <div className="form_newsletter">
+                <h3 className="heading">
+                  Have you joined our mailing list yet?
+                </h3>
                 <Form>
-                  <p className='signup-text'>Sign up to be the first to recieve updates and ongoing offers!</p>
-                  <FormGroup className='email'>
-                    <input onChange={this.handleInputChange.bind(this)} type={this.state.inputType} name="text" id="exampleEmail" className='form-control newinputmargin' placeholder='Your Email' />
+                  <p className="signup-text">
+                    Sign up to be the first to recieve updates and ongoing
+                    offers!
+                  </p>
+                  <FormGroup className="email">
+                    <input
+                      onChange={this.handleInputChange.bind(this)}
+                      type={this.state.inputType}
+                      name="text"
+                      id="exampleEmail"
+                      className="form-control newinputmargin"
+                      placeholder="Your Email"
+                    />
                     {errorItem}
                   </FormGroup>
                   <FormGroup>
-                    <Button onClick={this.doneBtnPressed.bind(this)} className='btn-block btn-bg'>Submit</Button>
+                    <Button
+                      onClick={this.doneBtnPressed.bind(this)}
+                      className="btn-block btn-bg"
+                    >
+                      Submit
+                    </Button>
                   </FormGroup>
                 </Form>
               </div>
             </Col>
-          </Row>                      
-            
-        </Modal.Body >
-      </Modal >
+          </Row>
+        </Modal.Body>
+      </Modal>
     );
   }
 }

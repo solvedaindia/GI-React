@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apiManager from '../../../utils/apiManager';
 import { connect } from 'react-redux';
+import apiManager from '../../../utils/apiManager';
 import { updatetWishListCount } from '../../../actions/app/actions';
 import {
   getCookie,
@@ -35,7 +35,7 @@ class Wishlist extends React.Component {
     this.state = {
       wishlistCurrentImage: wishListRemovedImg,
       wishlistPopup: null,
-      isWelcomeBack: false
+      isWelcomeBack: false,
     };
   }
 
@@ -51,8 +51,8 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      //alert('Please Login');
-      this.setState({ isWelcomeBack: true});
+      // alert('Please Login');
+      this.setState({ isWelcomeBack: true });
     }
   }
 
@@ -65,7 +65,7 @@ class Wishlist extends React.Component {
       .then(response => {
         this.setState({
           wishlistCurrentImage: wishlistAddedImg,
-          wishlistPopup: this.wishlistPopupItem()
+          wishlistPopup: this.wishlistPopupItem(),
         });
         getUpdatedWishlist(this);
       })
@@ -85,7 +85,7 @@ class Wishlist extends React.Component {
         console.log('Add wishlit --- ', response.data);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });
         getUpdatedWishlist(this);
-        //this.props.updatetWishListCount(6);
+        // this.props.updatetWishListCount(6);
       })
       .catch(error => {
         console.log('newsError---', error);
@@ -105,18 +105,17 @@ class Wishlist extends React.Component {
   }
 
   wishlistPopupItem() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        wishlistPopup: null
+        wishlistPopup: null,
       });
     }, 4000);
     return (
-      <div className='addedToWishlist'>
-        <span className='textStyle'>Product Added to Wishlist</span>
-        <button className='viewTextStyle'>View</button>
+      <div className="addedToWishlist">
+        <span className="textStyle">Product Added to Wishlist</span>
+        <button className="viewTextStyle">View</button>
       </div>
-    )
-    
+    );
   }
 
   render() {
@@ -129,18 +128,20 @@ class Wishlist extends React.Component {
         >
           {this.state.wishlistCurrentImage}
         </button>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true} /> : null}
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
     );
   }
 }
 
 function mapStateToProps(state) {
-
   return {
-    //default: state.default
+    // default: state.default
   };
 }
 
-export default connect(mapStateToProps, { updatetWishListCount })(Wishlist);
-//export default Wishlist;
+export default connect(
+  mapStateToProps,
+  { updatetWishListCount },
+)(Wishlist);
+// export default Wishlist;

@@ -1,59 +1,58 @@
 import React from 'react';
-import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
+import apiManager from '../../utils/apiManager';
 import {
   bestSellerAPI,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
-import '../../../public/styles/bestSeller/bestSeller.scss'
+import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 
-class BestSeller extends React.Component{
-    state = {
-        bestSellerData:null,
-        isLoading: true,
-        errors: null
-    };
+class BestSeller extends React.Component {
+  state = {
+      bestSellerData:null,
+      isLoading: true,
+      errors: null,
+  };
 
-    getBestSellerData() {
-        apiManager.get(bestSellerAPI)
-        .then(response => {
-            this.setState({
-                bestSellerData: response.data.data.productList,
-                isLoading: false
-            });
-            console.log('BestSellerData#########', response.data.data.productList);
-        })
-        .catch(error => {
-            this.setState({
-                error,
-                isLoading: false
-            });
-            console.log('Best Seller ERROR');
+  getBestSellerData() {
+      apiManager.get(bestSellerAPI)
+      .then(response => {
+        this.setState({
+          bestSellerData: response.data.data.productList,
+            isLoading: false,
         });
-        console.log('ERROR');
-  	}
+        console.log('BestSellerData#########', response.data.data.productList);
+      })
+      .catch(error => {
+          this.setState({
+            error,
+            isLoading: false,
+        });
+        console.log('Best Seller ERROR');
+      });
+    console.log('ERROR');
+  }
 
-	componentDidMount() {
-		this.getBestSellerData();
-	}
+  componentDidMount() {
+    this.getBestSellerData();
+  }
 
-  	render() {
-		const { bestSellerData } = this.state;
-		const settings = {
-		dots: false,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		};
-		return (
-			<div className="bestSeller">
-				<h1 className="title">Best Selling Items</h1>
-				<Slider {...settings}>
-					{!!bestSellerData && bestSellerData.map((sellerItemData, index) =>{
-						return (
+  render() {
+    const { bestSellerData } = this.state;
+    const settings = {
+      dots: false,
+        infinite: true,
+      speed: 500,
+        slidesToShow: 3,
+      slidesToScroll: 1,
+      };
+      return (
+      <div className="bestSeller">
+          <h1 className="title">Best Selling Items</h1>
+          <Slider {...settings}>
+            {!!bestSellerData && bestSellerData.map((sellerItemData, index) =>(
 							<figure key={index} className='bsSlides'>
 								<a href={sellerItemData.onClickUrl}>
 									<img 
@@ -76,12 +75,12 @@ class BestSeller extends React.Component{
 									</p>
 								</figcaption>
 							</figure>
-						);
-					})}
-				</Slider>
-			</div>
-		)
+						))}
+        </Slider>
+        </div>
+      )
     }
-}  
+  }
+}
 
 export default BestSeller;

@@ -27,7 +27,7 @@ class PdpContainer extends React.Component {
   }
 
   callPdpApi() {
-    const productId = 'TEST_PDP';   
+    const productId = 'TEST_PDP';
     apiManager
       .get(pdpApi2 + productId)
       .then(response => {
@@ -46,7 +46,7 @@ class PdpContainer extends React.Component {
 
   callPdpEspotApi() {
     const APIType = 'GI_PDP_Sample_Espot1';
-    const espotPdpApi = espotAPI + APIType;    
+    const espotPdpApi = espotAPI + APIType;
     apiManager
       .get(espotPdpApi)
       .then(response => {

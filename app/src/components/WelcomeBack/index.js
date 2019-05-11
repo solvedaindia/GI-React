@@ -118,7 +118,7 @@ class WelcomeBack extends React.Component {
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         document.cookie = `${accessTokenCookie}=${
           response.data.data.access_token
-          };path=/;expires=''`;
+        };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -147,7 +147,7 @@ class WelcomeBack extends React.Component {
   }
 
   componentDidMount() {
-    //this.handleUserLoginApi();
+    // this.handleUserLoginApi();
     console.log('in the Login main pop up');
     this.showLoginStatus();
   }
@@ -155,13 +155,13 @@ class WelcomeBack extends React.Component {
   clickedOnForgotPassword() {
     this.props.callbackPro(true);
     this.setState({ show: false, message: null });
-    //this.handleClose();
+    // this.handleClose();
   }
 
   clickedOnRegister() {
     this.props.callbackPro(false);
     this.setState({ show: false, message: null });
-    //this.handleClose();
+    // this.handleClose();
   }
 
   render() {
@@ -216,24 +216,24 @@ class WelcomeBack extends React.Component {
               onFailure={this.responseGoogle}
             />
             <FacebookLogin
-				appId={facebookAppId}
-				render={renderProps => (
-				<button
-					className="btn-white btn-fb"
-					onClick={renderProps.onClick}
-					isdisabled={renderProps.disabled}
-				>
-					<span className="icon-img">
-						<img className="icon" src={Facebook} />
-					</span>
-					<span className="signin-text">Sign in with Facebook</span>
-				</button>
-				)}
-				autoLoad
-				fields="name,email,picture"
-				cssClass="btn-white"
-				onClick={this.facebookOnClick.bind(this)}
-				callback={this.responseFacebook}
+              appId={facebookAppId}
+              render={renderProps => (
+                <button
+                  className="btn-white btn-fb"
+                  onClick={renderProps.onClick}
+                  isdisabled={renderProps.disabled}
+                >
+                  <span className="icon-img">
+                    <img className="icon" src={Facebook} />
+                  </span>
+                  <span className="signin-text">Sign in with Facebook</span>
+                </button>
+              )}
+              autoLoad
+              fields="name,email,picture"
+              cssClass="btn-white"
+              onClick={this.facebookOnClick.bind(this)}
+              callback={this.responseFacebook}
             />
           </div>
           <p className="divider">or</p>
@@ -242,13 +242,18 @@ class WelcomeBack extends React.Component {
             handleUserData={this.handleUserLoginApi.bind(this)}
           />
           <div className="forgotPassword">
-            <p onClick={this.clickedOnForgotPassword.bind(this)}>Forgot Password?</p>
+            <p onClick={this.clickedOnForgotPassword.bind(this)}>
+              Forgot Password?
+            </p>
           </div>
           <p className="registerHere">
             <span>New to Godrej Interio? </span>
-            <Button className="registerNow" onClick={this.clickedOnRegister.bind(this)}>
+            <Button
+              className="registerNow"
+              onClick={this.clickedOnRegister.bind(this)}
+            >
               Register
-        </Button>
+            </Button>
             {/* <RegisterModalData /> */}
           </p>
         </Modal>
