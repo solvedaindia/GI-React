@@ -382,7 +382,7 @@ export class PlpContainer extends React.Component {
         )}
         {!hasMore && <div className="noProductFound">No Products Found</div>}
         {descriptionItem}
-        <CompContainer />
+        {/* <CompContainer /> */}
       </>
     );
   }

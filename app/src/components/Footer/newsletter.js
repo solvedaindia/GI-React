@@ -55,7 +55,7 @@ class newsletter extends React.Component {
             <li className="list" key={index}>
               {newsletterDesc.text}
             </li>
-          }
+          ))}
           <li>
             <Form inline>
               <FormControl

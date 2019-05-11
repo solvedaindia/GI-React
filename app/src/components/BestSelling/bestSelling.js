@@ -81,6 +81,5 @@ class BestSeller extends React.Component {
       )
     }
   }
-}
 
 export default BestSeller;

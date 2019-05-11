@@ -174,7 +174,7 @@ class ForgotPasswordOTP extends React.Component {
         <Button onClick={this.resendOTP.bind(this)} className="resend-otp">
           Resend OTP
       </Button>
-    }
+      )}
 
     return (
       <div className={animeClass}>

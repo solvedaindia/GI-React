@@ -20,69 +20,71 @@ class SearchBar extends React.Component {
 
   handleChange = event => {
     const searchText = event.target.value;
-      this.setState({
-        searchData: [],
+    this.setState({
+      searchData: [],
     });
 
-      if(searchText.length > 1) {
-        if (searchText) {
-          apiManager.get(autoSuggestAPI+searchText).then(response => {
-            document.addEventListener('click', this.handleOutsideClick, false);
-            this.setState({
-              searchData: response.data.data.suggestionView[0].entry,
-            });
-          }).catch(error => {
-            console.log(error.message);
+    if (searchText.length > 1) {
+      if (searchText) {
+        apiManager.get(autoSuggestAPI + searchText).then(response => {
+          document.addEventListener('click', this.handleOutsideClick, false);
+          this.setState({
+            searchData: response.data.data.suggestionView[0].entry,
           });
+        }).catch(error => {
+          console.log(error.message);
+        });
       } else {
         document.removeEventListener('click', this.handleOutsideClick, false);
-        }
+      }
     }
   };
 
   handleOutsideClick(e) {
-      if(this.state.searchData.length > 0) {
+    if (this.state.searchData.length > 0) {
       if (this.node.contains(e.target)) {
         return;
       }
       this.setState({
-          searchData: [],
-        });
+        searchData: [],
+      });
     }
   }
 
   render() {
     const searchData = this.state.searchData;
-      return (
-        <div className='searchBar'>
-          <SearchLogo />                
-          <input className='searchInput' id='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='search for products' />
-          { searchData.length > 0 && 
-          <div
-            id="autoSuggestDiv"
-            ref={node => {
-              this.node = node;
-            }}
-                      <ul className='auto-search'>
+    return (
+      <div className='searchBar'>
+        <SearchLogo />
+        <input className='searchInput' id='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='search for products' />
+        {searchData.length > 0 &&
+          <div id="autoSuggestDiv" ref={node => { this.node = node; }}>
+            <ul className='auto-search'>
               <li className="list">
                 <a className="link" href="#">
                   Suggestions
                 </a>
-                        { searchData.map((item, index) => {    
-                          const searchItem = document.getElementById("searchInput").value;
-                          if (index < 6) {
-                            return(
-                              <li className='list' key={index}><a className='link' href='#'><strong>{ item.term.substr(0, searchItem.length) }</strong>{item.term.substr(searchItem.length)}</a></li>
-                            );
-                          }
-                        })
-                        }
+                {searchData.map((item, index) => {
+                  const searchItem = document.getElementById("searchInput").value;
+                  if (index < 6) {
+                    return (
+                      <li className='list' key={index}><a className='link' href='#'><strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length)}</a></li>
+                    );
+                  }
+                })
+                }
+              </li>
             </ul>
           </div>
-          }
-        </div>
+        }
+      </div>
     );
+
   }
+
+
+
+
 }
 
 export default SearchBar;
