@@ -65,7 +65,7 @@ class ProductItem extends React.Component {
           </div>
         </div>
         <div className="hoverBox">
-          <button className="btn-bg" onClick={this.handleClick}>
+          <button className="btn-compare" onClick={this.handleClick}>
             Add to compare
           </button>
         </div>
