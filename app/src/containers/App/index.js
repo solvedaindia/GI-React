@@ -35,6 +35,7 @@ import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import '../../../public/styles/app.scss';
+import client from '../../utils/apiManager';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,6 +50,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    client.get('/users').then((response) => {
+      console.log('Its success from API MANAGER');
+    });
+
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     window.addEventListener('resize', this.resize);

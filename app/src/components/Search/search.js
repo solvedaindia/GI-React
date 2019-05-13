@@ -51,15 +51,19 @@ class SearchBar extends React.Component {
         const searchData = this.state.searchData;
         return (
             <div className='searchBar'>
-                <SearchLogo />
-                <input className='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' placeholder='search for products' />
+                <SearchLogo />                
+                <input className='searchInput' id='searchInput' onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='search for products' />
                 { searchData.length > 0 && 
                     <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
                         <ul className='auto-search'>
-                            { searchData.map((item, index) => {
-                                return(
-                                    <li className='list' key={index}>{item.term}</li>
-                                );
+                        <li className='list'><a className='link' href='#'>Suggestions</a></li>
+                            { searchData.map((item, index) => {    
+                                const searchItem = document.getElementById("searchInput").value;
+                                if (index < 6) {
+                                    return(
+                                        <li className='list' key={index}><a className='link' href='#'><strong>{ item.term.substr(0, searchItem.length) }</strong>{item.term.substr(searchItem.length)}</a></li>
+                                    );
+                                }
                                 })
                             }
                         </ul>

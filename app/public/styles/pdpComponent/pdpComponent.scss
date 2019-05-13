@@ -217,7 +217,7 @@
     }
     
         .pincode{
-            width:50%;
+            width:55%;
             float:left;
             border:1px solid $lightGrey;
             background: $colorwhite;
@@ -240,6 +240,7 @@
                     float:right;
                     font-family: $font-bold;
                     font-size: 14px;
+                    padding: 5px 0 0 0;
                 }
             }
             .soldbyDealers {
@@ -387,7 +388,8 @@
          padding: 0px 5px 2px 5px;
          color:$battleshipGrey;
          text-decoration: none;
-         margin: 0 20px;         
+        //  margin: 0 20px;        
+         margin: 0 5px;  
      }
      .tab_1{
         left: 145px;

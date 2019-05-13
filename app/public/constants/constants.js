@@ -13,6 +13,9 @@ export const wishlistDataCookie = 'wishlistData';
 export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
+export const productTitleCharLimit = 35;
+export const productDescriptionCharLimit = 25;
+
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
@@ -88,7 +91,7 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
-export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist/`;
+export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
 /* Footer logo url */
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
 /* PDP API */

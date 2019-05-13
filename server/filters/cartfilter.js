@@ -1,10 +1,33 @@
 /**
- * Filter Mini Cart Data.
+ * Merge Cart Data and Produc List
  * @return Mini Cart JSON Data
  */
-module.exports.minicart = function getMinicart(cartData) {
-  return cartData;
+module.exports.minicart = function getMinicart(cartData, productList) {
+  const miniCartData = [];
+  cartData.orderItem.forEach(cartItem => {
+    const itemJson = getCartItemDetail(cartItem); // Get Order Item Details
+    for (let index = 0; index < productList.length; index += 1) {
+      if (itemJson.uniqueID === productList[index].uniqueID) {
+        Object.assign(itemJson, productList[index]);
+        break;
+      }
+    }
+    miniCartData.push(itemJson);
+  });
+  return miniCartData;
 };
+
+function getCartItemDetail(OrderItem) {
+  const orderItemJSON = {
+    uniqueID: OrderItem.productId,
+    quantity: Number(OrderItem.quantity),
+    shippingCharges: OrderItem.shippingCharge,
+    orderItemId: OrderItem.orderItemId,
+    // unitPrice: OrderItem.unitPrice,
+    // orderItemPrice: OrderItem.orderItemPrice,
+  };
+  return orderItemJSON;
+}
 
 /**
  * Filter Cart Data.

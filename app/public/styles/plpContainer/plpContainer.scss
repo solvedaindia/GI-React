@@ -143,6 +143,39 @@ section.tablecarousel {
       padding: 20px;
       position: relative;
       border: 1px solid $borderLight;
+      .hoverBox{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(3, 108, 197, 0.38);
+        top: 0;
+        left: 0;
+        opacity:0;
+        -webkit-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+      
+
+        .btn-compare{
+          background: $colorwhite;
+          color:$ashGrey;
+          padding:12px 45px;
+          text-align: center;
+          font-size: 14px;
+          border:none;
+          font-family: $font-bold;
+          width: 200px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -22px;
+          margin-left: -100px;
+          position: absolute;
+        }
+      }
+      &:hover .hoverBox{
+       opacity: 1;
+      }
 
       .featured-box {
         position: absolute;

@@ -13,51 +13,40 @@ export function defaultAction() {
   };
 }
 
-export const increment = () => {
-  return {
-    type: actionTypes.INCREMENT
-  }
-}
+export const increment = () => ({
+  type: actionTypes.INCREMENT,
+});
 
-export const filter = (newUpdatedFilter, newFacetName) => {
-  return {
-    type: actionTypes.FILTER,
-    updatedFilter: newUpdatedFilter,
-    facetName: newFacetName,
-  }
-}
+export const filter = (newUpdatedFilter, newFacetName) => ({
+  type: actionTypes.FILTER,
+  updatedFilter: newUpdatedFilter,
+  facetName: newFacetName,
+});
 
-export const adBannerAction = (value, sIndex) => {
+export const adBannerAction = (value, sIndex) =>
   // console.log('adBannerAction', actionTypes);
-  return {
+  ({
     type: actionTypes.ADBANNERCOUNT,
     val: value,
-    showIndex: sIndex
-  }
-}
+    showIndex: sIndex,
+  });
 
-export const adBannerDataAction = (value) => {
-  return {
-    type: actionTypes.ADBANNERDATA,
-    data: value,
-  }
-}
+export const adBannerDataAction = value => ({
+  type: actionTypes.ADBANNERDATA,
+  data: value,
+});
 
-export const sortingAction = (value) => {
-  return {
-    type: actionTypes.SORTING,
-    val: value
-  }
-}
+export const sortingAction = value => ({
+  type: actionTypes.SORTING,
+  val: value,
+});
 
-export const resetPLPReduxState = (value) => {
-  return {
-    type: actionTypes.RESETPLPREDUXSTATE,
-  }
-}
+export const resetPLPReduxState = value => ({
+  type: actionTypes.RESETPLPREDUXSTATE,
+});
 
-export const updateInitialValues = (coloumn) => {
-  var bannerPos;
+export const updateInitialValues = coloumn => {
+  let bannerPos;
   if (coloumn === 3) {
     bannerPos = 12;
   } else {
@@ -68,5 +57,23 @@ export const updateInitialValues = (coloumn) => {
     type: actionTypes.INITIALUPDATE,
     coloumnValue: coloumn,
     bannerPosValue: bannerPos,
-  }
-}
+  };
+};
+
+export const AddProduct = product => ({
+  type: actionTypes.ADDPRODUCT,
+  payload: {
+    product,
+  },
+});
+
+export const RemoveProduct = id => ({
+  type: actionTypes.REMOVEPRODUCT,
+  payload: {
+    id,
+  },
+});
+
+export const RemoveAll = () => ({
+  type: actionTypes.REMOVEALL,
+});
