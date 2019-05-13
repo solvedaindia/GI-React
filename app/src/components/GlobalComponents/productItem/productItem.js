@@ -6,6 +6,8 @@ import Promotions from './promotion';
 import InStock from './inStock';
 import Wishlist from './wishlist';
 import Title from './title';
+import { addToCart } from '../../../../public/constants/constants';
+import apiManager from '../../../utils/apiManager';
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -33,7 +35,28 @@ class ProductItem extends React.Component {
     }
   };
 
+  moveToCartClicked = () => {
+    const data = {
+      "orderItem": [
+        {
+          "sku_id": this.props.data.uniqueID,
+          "quantity": "1"
+        }
+      ]
+    }
+    console.log('Move To Cart Clicked  ----  ',data);
+    
+    apiManager.post(addToCart, data)
+      .then(response => {
+        console.log('Add to cart Data ---- ', response.data);
+      })
+      .catch(error => {
+        console.log('AddToCart Error---', error);
+      });
+  }
+
   render() {
+    console.log('isFromWishlist  ----  ', this.props.isfromWishlistPro)
     return (
       <li className="productlist">
         <div className="prdListData">
@@ -65,9 +88,12 @@ class ProductItem extends React.Component {
           </div>
         </div>
         <div className="hoverBox">
-          <button className="btn-compare" onClick={this.handleClick}>
+          {this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
+              Move To Cart
+          </button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
             Add to compare
-          </button>
+          </button>}
+
         </div>
       </li>
     );

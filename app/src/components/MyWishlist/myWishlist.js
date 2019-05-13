@@ -66,12 +66,15 @@ class MyWishlist extends React.Component {
       <div className='myWishlist'>
         <h3 className='headingTitle'>My Wishlist</h3>
         <section className="plpCategories">
-          <PlpComponent plpDataPro={this.state.wishlistData} />
+          <PlpComponent
+            plpDataPro={this.state.wishlistData}
+            isFromWishlistPro={true}
+          />
         </section>
         {/* <EmptyWishlist/> */}
       </div>
 
-      
+
     );
   }
 

@@ -98,6 +98,8 @@ export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejI
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
 export const pdpApi2 = `${secureHttp}://${host}:${port2}/api/v1/pdp/productDetails/`;
+/* Add To Cart API */
+export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/add`;
 
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
