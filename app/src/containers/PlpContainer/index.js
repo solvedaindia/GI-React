@@ -70,6 +70,7 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Query String Routing ------- ',this.props);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
@@ -189,10 +190,12 @@ export class PlpContainer extends React.Component {
       console.log('PLPURL---', plpURL);
       console.log('categorId---', categoryId);
       let newStoreId = '';
+      let newCategoryId = '';
       if (categoryId === '12540') {
         newStoreId = '10151';
       } else {
         newStoreId = '10801';
+        newCategoryId = '10601';
       }
       console.log('categorId---', categoryId, newStoreId);
       apiManager
@@ -200,7 +203,7 @@ export class PlpContainer extends React.Component {
           headers: {
             store_id: newStoreId,
             cat_details: this.state.isCatDetails,
-            catalog_id: '10601',
+            catalog_id: newCategoryId,
           },
         })
         .then(response => {

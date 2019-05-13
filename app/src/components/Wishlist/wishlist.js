@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
   wishListCountApi,
@@ -14,6 +15,7 @@ import {
   getReleventReduxState,
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
+import MyWishlist from '../MyWishlist/myWishlist';
 
 class wishListCount extends React.Component {
   state = {
@@ -40,7 +42,7 @@ class wishListCount extends React.Component {
 
   handleWLCount() {
     if (getCookie('isLoggedIn') === 'true') {
-      alert('Take user to wishlist page');
+      
     } else {
       this.setState({ isWelcomeBack: true });
     }
@@ -71,12 +73,10 @@ class wishListCount extends React.Component {
     return (
       <>
         <li className="icons" onClick={this.handleWLCount.bind(this)}>
-          {!isLoading ? (
-            <span className="wishListCount">{wishListCount}</span>
-          ) : (
-            <p className="error">No Category Found</p>
-          )}
-          <WishlistLogo />
+          {!isLoading ? (<span className="wishListCount">{wishListCount}</span>) : (<p className="error">No Category Found</p>)}
+           
+          <Link to='/wishlist'><WishlistLogo /></Link>
+          
         </li>
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
