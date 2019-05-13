@@ -105,7 +105,7 @@ class CartCount extends React.Component {
               i === this.state.selected ? '' : ''
             }`}
           >
-            <MinicartItem />
+            <MinicartItem dataPro={option} />
             {/* {option} */}
           </div>
         </>

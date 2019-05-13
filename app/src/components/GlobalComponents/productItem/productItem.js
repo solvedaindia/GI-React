@@ -37,26 +37,27 @@ class ProductItem extends React.Component {
 
   moveToCartClicked = () => {
     const data = {
-      "orderItem": [
+      orderItem: [
         {
-          "sku_id": this.props.data.uniqueID,
-          "quantity": "1"
-        }
-      ]
-    }
-    console.log('Move To Cart Clicked  ----  ',data);
-    
-    apiManager.post(addToCart, data)
+          sku_id: this.props.data.uniqueID,
+          quantity: '1',
+        },
+      ],
+    };
+    console.log('Move To Cart Clicked  ----  ', data);
+
+    apiManager
+      .post(addToCart, data)
       .then(response => {
         console.log('Add to cart Data ---- ', response.data);
       })
       .catch(error => {
         console.log('AddToCart Error---', error);
       });
-  }
+  };
 
   render() {
-    console.log('isFromWishlist  ----  ', this.props.isfromWishlistPro)
+    console.log('isFromWishlist  ----  ', this.props.isfromWishlistPro);
     return (
       <li className="productlist">
         <div className="prdListData">
@@ -64,18 +65,18 @@ class ProductItem extends React.Component {
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
           />
-          <div className="imgBox">
-            <ItemImage
-              data={this.props.data.thumbnail}
-              uniqueId={this.props.data.uniqueID}
-            />
-            <InStock isInStock={this.props.data.inStock} />
-          </div>
-          <RibbonTag data={this.props.data.ribbonText} />
-          <div className="product-text">
-            <Title
-              titlePro={this.props.data.productName}
-              descriptionPro={this.props.data.shortDescription}
+          <InStock isInStock={this.props.data.inStock} />
+        </div>
+        <RibbonTag data={this.props.data.ribbonText} />
+        <div className="product-text">
+          <Title
+            titlePro={this.props.data.productName}
+            descriptionPro={this.props.data.shortDescription}
+          />
+          <p className="price text">
+            <Price
+              actualPrice={this.props.data.actualPrice}
+              offerPrice={this.props.data.offerPrice}
             />
             {/* <p className="heading-description text">(Description)</p> */}
             <p className="price text">
@@ -85,15 +86,21 @@ class ProductItem extends React.Component {
               />
             </p>
             <Promotions data={this.props.data.promotionData} />
-          </div>
+          </p>
         </div>
         <div className="hoverBox">
-          {this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
+          {this.props.isfromWishlistPro ? (
+            <button className="btn-compare" onClick={this.moveToCartClicked}>
               Move To Cart
-          </button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
-            Add to compare
-          </button>}
-
+            </button>
+          ) : (
+            <button
+              className="btn-compare"
+              onClick={this.handleClick.bind(this)}
+            >
+              Add to compare
+            </button>
+          )}
         </div>
       </li>
     );
