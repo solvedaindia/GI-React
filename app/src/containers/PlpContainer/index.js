@@ -200,7 +200,7 @@ export class PlpContainer extends React.Component {
           headers: {
             store_id: newStoreId,
             cat_details: this.state.isCatDetails,
-            //catalog_id: '10601',
+            catalog_id: '10601',
           },
         })
         .then(response => {

@@ -99,7 +99,7 @@ class CartCount extends React.Component {
               key={i}
               className={"dropdown__list-item" + (i === this.state.selected ? '' : '')}
             >
-              <MinicartItem />
+              <MinicartItem dataPro={option}/>
               {/* {option} */}
             </div>
           </>

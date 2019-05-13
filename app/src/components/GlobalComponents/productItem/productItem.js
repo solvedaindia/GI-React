@@ -24,8 +24,7 @@ class ProductItem extends React.Component {
         </div>
         <RibbonTag data={this.props.data.ribbonText} />
         <div className="product-text">
-          <Title titlePro={this.props.data.productName} descriptionPro={this.props.data.shortDescription}/>
-          {/* <p className="heading-description text">(Description)</p> */}
+          <Title titlePro={this.props.data.productName} descriptionPro={this.props.data.shortDescription} />
           <p className="price text">
             <Price
               actualPrice={this.props.data.actualPrice}
