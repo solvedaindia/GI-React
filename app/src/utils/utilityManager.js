@@ -123,15 +123,19 @@ export function getOnlyWishlistUniqueIds() {
 export function getCorrespondingGiftlistId(uniqueID) {
   const wishliArrStr = getCookie(wishlistDataCookie);
   const wishlistArr = JSON.parse(wishliArrStr);
-  console.log('wishlitttt-----', wishlistArr);
   let giftlistId = '';
   wishlistArr.map(item => {
     if (item.uniqueID === uniqueID) {
       giftlistId = item.giftListItemID;
     }
   });
-  console.log('giftIdddd-----', giftlistId);
   return giftlistId;
 }
 
 /* ----------------------------------------------------------------------- */
+
+
+export function trimTheSentence(title, charLimit) {
+  const trimStr = `${title.substring(0, charLimit)}...`;
+  return trimStr;
+}

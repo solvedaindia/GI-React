@@ -135,10 +135,10 @@ function getProductListByIDs(headers, productIDs, callback) {
           response.body.catalogEntryView &&
           response.body.catalogEntryView.length > 0
         ) {
-          response.body.catalogEntryView.forEach(product => {
+          /*  response.body.catalogEntryView.forEach(product => {
             productList.push(productDetailFilter.productDetailSummary(product));
-          });
-          callback(null, productList);
+          }); */
+          callback(null, response.body.catalogEntryView);
         } else {
           callback(null, productList);
         }
@@ -184,23 +184,21 @@ function getPromotionData(headers, productIDs, callback) {
 function transformJson(result) {
   const productListArray = result[0];
   const promotionJson = result[1];
+  const productListing = [];
+
   productListArray.forEach(product => {
+    let productDetail = {};
     const productPromotion = promotionJson.filter(
       promotion => promotion.uniqueID === product.uniqueID,
     );
     // eslint-disable-next-line no-param-reassign
     product.promotionData = productPromotion[0].promotionData;
-    /* for (let index = 0; index < promotionJson.length; index += 1) {
-      if (product.uniqueID === promotionJson[index].uniqueID) {
-        // eslint-disable-next-line no-param-reassign
-        product.promotionData = promotionJson[index].promotionData;
-        break;
-      }
-    } */
+    productDetail = productDetailFilter.productDetailSummary(product);
+    productListing.push(productDetail);
   });
   const resJson = {
-    productCount: productListArray.length,
-    productList: productListArray,
+    productCount: productListing.length,
+    productList: productListing,
   };
   return resJson;
 }

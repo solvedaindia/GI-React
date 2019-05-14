@@ -28,6 +28,12 @@ module.exports.productDetailSummary = function productDetailForPLP(
   productDetailJson.inStock = '';
   productDetailJson.discount = '';
   productDetailJson.shortDescription = productDetail.shortDescription || '';
+  productDetailJson.promotionData = null;
+  if (productDetail.promotionData && productDetail.promotionData.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    productDetailJson.promotionData = productDetail.promotionData[0];
+  }
+
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);

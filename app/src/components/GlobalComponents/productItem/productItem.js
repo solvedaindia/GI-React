@@ -5,6 +5,7 @@ import Price from './price';
 import Promotions from './promotion';
 import InStock from './inStock';
 import Wishlist from './wishlist';
+import Title from './title'
 
 class ProductItem extends React.Component {
   render() {
@@ -23,14 +24,7 @@ class ProductItem extends React.Component {
         </div>
         <RibbonTag data={this.props.data.ribbonText} />
         <div className="product-text">
-          <p className="heading text">
-            <span className="name">{this.props.data.productName} </span>
-            {this.props.data.shortDescription ? (
-              <span className="description">
-                ({this.props.data.shortDescription})
-              </span>
-            ) : null}
-          </p>
+          <Title titlePro={this.props.data.productName} descriptionPro={this.props.data.shortDescription}/>
           {/* <p className="heading-description text">(Description)</p> */}
           <p className="price text">
             <Price

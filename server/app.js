@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,6 +12,7 @@ const fs = require('fs');
 const tokenValidation = require('./utils/tokenvalidation');
 const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
+const storeInfo = require('./utils/storeinfo');
 
 // const csrf = require('csurf');
 // const session = require('express-session');
@@ -97,9 +97,40 @@ app.use((req, res, next) => {
   next();
 });
 
+/* To get StoreId and CatalogID on basis of Store identifier */
+/* app.use((req, res, next) => {
+  const storeIdentifier = req.headers.store_id;
+  if (storeIdentifier) {
+    if (global[storeIdentifier] && global[storeIdentifier].storeID) {
+      req.headers.storeId = global[storeIdentifier].storeID;
+      req.headers.catalogId = global[storeIdentifier].catalogID;
+      next();
+    } else {
+      storeInfo.getStoreDetails(req.headers, (error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          global[storeIdentifier] = result;
+          req.headers.storeId = global[storeIdentifier].storeID;
+          req.headers.catalogId = global[storeIdentifier].catalogID;
+          next();
+        }
+      });
+    }
+  } else {
+    const errorMessage = {
+      status: 'failure',
+      error: errorUtils.errorlist.storeid_missing,
+    };
+    logger.error(JSON.stringify(errorMessage));
+    res.status(400).send(errorMessage);
+  }
+}); */
+
 app.use((req, res, next) => {
   if (req.headers.store_id) {
     req.headers.storeId = req.headers.store_id;
+    req.headers.catalogId = req.headers.catalog_id || 10051;
     next();
   } else {
     const errorMessage = {

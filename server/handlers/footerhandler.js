@@ -3,7 +3,9 @@ const espotsHandler = require('./espotshandler');
 const logger = require('../utils/logger.js');
 const espots = require('../configs/espotnames');
 const filter = require('../filters/filter');
+const espotFilter = require('../filters/espotfilter');
 const footerEspot = espots.footer;
+const footerEspot1 = espots.footer1;
 
 /**
  * Get Footer data from WCS Espots
@@ -13,7 +15,7 @@ const footerEspot = espots.footer;
  */
 module.exports.getFooterData = function footerData(headers, callback) {
   async.map(
-    footerEspot,
+    footerEspot1,
     (espotName, cb) => {
       espotsHandler.getEspotsData(headers, espotName, cb);
     },
@@ -22,18 +24,21 @@ module.exports.getFooterData = function footerData(headers, callback) {
         callback(err);
         return;
       }
+
       logger.debug('Got all the origin resposes');
-      const resJson = {};
-      results.forEach(element => {
+      const resJson = {
+        Footer_Links: espotFilter.espotContent(results[0]) || '',
+        Footer_Social_Data: espotFilter.espotContent(results[1]) || '',
+        Footer_Newsletter_Data: espotFilter.espotContent(results[2]) || '',
+        Footer_StoreLinks: espotFilter.espotContent(results[3]) || '',
+        Footer_Categories: espotFilter.espotContent(results[4]) || '',
+      };
+      /* results.forEach(element => {
         const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration
         if (espotParserResult != null) {
           Object.assign(resJson, espotParserResult);
-          /*  const keys = Object.keys(espotParserResult);
-          keys.forEach(key => {
-            resJson[key] = espotParserResult[key];
-          }); */
         }
-      });
+      }); */
       callback(null, resJson);
     },
   );
