@@ -3,10 +3,7 @@ import EmptyWishlist from './emptyWishlist';
 import '../../../public/styles/myWishlist/myWishlist.scss';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 import PlpComponent from '../PlpComponent/index';
-import {
-  plpAPI,
-
-} from '../../../public/constants/constants';
+import { plpAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 
 class MyWishlist extends React.Component {
@@ -28,7 +25,7 @@ class MyWishlist extends React.Component {
        */
 
       const plpURL =
-        `${plpAPI + '12540'}?` +
+        `${`${plpAPI}12540`}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
@@ -44,37 +41,34 @@ class MyWishlist extends React.Component {
           headers: {
             store_id: '10151',
             cat_details: false,
-
           },
         })
         .then(response => {
           console.log('PLP Response----', response.data);
           this.setState({
-            wishlistData: response.data.data.productList
-          })
+            wishlistData: response.data.data.productList,
+          });
         })
         .catch(error => {
           // console.log('PLPBannerrror---', error);
-
-
         });
     });
   }
 
   render() {
     return (
-      <div className='myWishlist'>
-        <h3 className='headingTitle'>My Wishlist</h3>
+      <div className="myWishlist">
+        <h3 className="headingTitle">My Wishlist</h3>
         <section className="plpCategories">
-          <PlpComponent plpDataPro={this.state.wishlistData} />
+          <PlpComponent
+            plpDataPro={this.state.wishlistData}
+            isFromWishlistPro
+          />
         </section>
         {/* <EmptyWishlist/> */}
       </div>
-
-      
     );
   }
-
 }
 
 export default MyWishlist;

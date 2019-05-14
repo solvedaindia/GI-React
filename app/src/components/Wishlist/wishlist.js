@@ -32,8 +32,7 @@ class wishListCount extends React.Component {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
         this.setState({
-          wishListCount:
-            count == '0' ? '1' : response.data.data.wishlistTotalItems,
+          wishListCount: response.data.data.wishlistTotalItems,
           isLoading: false,
         });
       })
@@ -42,7 +41,6 @@ class wishListCount extends React.Component {
 
   handleWLCount() {
     if (getCookie('isLoggedIn') === 'true') {
-      
     } else {
       this.setState({ isWelcomeBack: true });
     }
@@ -70,13 +68,27 @@ class wishListCount extends React.Component {
 
   render() {
     const { isLoading, wishListCount } = this.state;
+    console.log('wwwwwww-----', wishListCount);
+    let wishlistItem = null;
+    let wishlistLogo = <WishlistLogo />;
+    if (wishListCount != 0 && wishListCount != undefined) {
+      wishlistItem = <span className="wishListCount">{wishListCount}</span>;
+      wishlistLogo = (
+        <Link to="/wishlist">
+          <WishlistLogo />
+        </Link>
+      );
+    }
+
     return (
       <>
         <li className="icons" onClick={this.handleWLCount.bind(this)}>
-          {!isLoading ? (<span className="wishListCount">{wishListCount}</span>) : (<p className="error">No Category Found</p>)}
-           
-          <Link to='/wishlist'><WishlistLogo /></Link>
-          
+          {!isLoading ? (
+            wishlistItem
+          ) : (
+            <p className="error">No Category Found</p>
+          )}
+          {wishlistLogo}
         </li>
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
