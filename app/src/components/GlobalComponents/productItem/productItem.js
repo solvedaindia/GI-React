@@ -10,7 +10,7 @@ import Title from './title';
 class ProductItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {};    
   }
 
   handleClick = () => {
@@ -37,10 +37,10 @@ class ProductItem extends React.Component {
     return (
       <li className="productlist">
         <div className="prdListData">
-          <Wishlist
+          {/* <Wishlist
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
-          />
+          /> */}
           <div className="imgBox">
             <ItemImage
               data={this.props.data.thumbnail}
@@ -65,6 +65,10 @@ class ProductItem extends React.Component {
           </div>
         </div>
         <div className="hoverBox">
+        <Wishlist
+            uniqueId={this.props.data.uniqueID}
+            isInWishlistPro={this.props.isInWishlist}
+          />
           <button className="btn-compare" onClick={this.handleClick}>
             Add to compare
           </button>
