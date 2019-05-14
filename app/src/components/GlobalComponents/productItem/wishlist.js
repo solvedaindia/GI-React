@@ -92,8 +92,13 @@ class Wishlist extends React.Component {
       });
   }
 
-  componentWillReceiveProps() {
-    this.setState({ isWelcomeBack: false });
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      isWelcomeBack: false,
+      wishlistCurrentImage: this.props.isInWishlistPro
+        ? wishlistAddedImg
+        : wishListRemovedImg,
+    });
   }
 
   componentDidMount() {
@@ -113,9 +118,13 @@ class Wishlist extends React.Component {
     return (
       <div className="addedToWishlist">
         <span className="textStyle">Product Added to Wishlist</span>
-        <button className="viewTextStyle">View</button>
+        <button onClick={this.redirectToWishlistPage} className="viewTextStyle">View</button>
       </div>
     );
+  }
+
+  redirectToWishlistPage = () => {
+    this.props.history.push('/wishlist')
   }
 
   render() {

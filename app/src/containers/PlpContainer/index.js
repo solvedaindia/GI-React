@@ -309,6 +309,7 @@ export class PlpContainer extends React.Component {
         <PlpComponent
           plpDataPro={this.state.plpData}
           adBannerDataPro={adBannerData}
+          history={this.props.history}
         />
       );
     }

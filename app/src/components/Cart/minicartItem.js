@@ -22,7 +22,6 @@ class MinicartItem extends React.Component {
   }
 
   render() {
-    console.log('MiniCart data --- ', this.props.dataPro);
     return (
       <>
         <div className="minicartList">

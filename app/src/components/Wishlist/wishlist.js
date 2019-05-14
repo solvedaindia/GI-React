@@ -68,7 +68,6 @@ class wishListCount extends React.Component {
 
   render() {
     const { isLoading, wishListCount } = this.state;
-    console.log('wwwwwww-----', wishListCount);
     let wishlistItem = null;
     let wishlistLogo = <WishlistLogo />;
     if (wishListCount != 0 && wishListCount != undefined) {
