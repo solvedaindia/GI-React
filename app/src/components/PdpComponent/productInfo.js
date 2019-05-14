@@ -18,26 +18,15 @@ class productInfo extends React.Component {
   }
 
   render() {
+	  //console.log(this.props.productData, 'skuData---');
+	  //defAttributes
     let emidata = this.props.productData.emiData;
 
     if (emidata === '') {
       emidata = 599;
     }
-
     return(
       <>
-        <div className="product">
-                  <span className='text'>Product ID:</span> 
-                  <span className='text'>{this.props.productData.partNumber}</span>
-        </div>
-        <div className="slimline">
-                  <h4 className='heading'>
-                    {this.props.productData.productName}
-                  </h4>
-                  {this.props.productData.shortDescription}<br/>
-                  <div className='soldbyDealers'>sold by RMZ furniture Dealers</div>
-        </div>
-        <ProductDefAttriutes defAttributes={this.props.defAttributes} />
         <div className="price">
                   <span className='actualprice text'>&#8377;{this.props.productData.actualPrice}</span>
                   <span className='offerprice text'>&#8377;{this.props.productData.offerPrice}</span>
