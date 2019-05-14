@@ -65,11 +65,10 @@ class ProductItem extends React.Component {
     return (
       <li className="productlist">
         <div className="prdListData">
-          <Wishlist
+          {/* <Wishlist
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
-            history={this.props.history}
-          />
+          /> */}
           <div className="imgBox">
             <ItemImage
               data={this.props.data.thumbnail}
@@ -94,12 +93,14 @@ class ProductItem extends React.Component {
           </div>
         </div>
         <div className="hoverBox">
-          {this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
-              Move To Cart
-          </button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
+          <Wishlist
+            uniqueId={this.props.data.uniqueID}
+            isInWishlistPro={this.props.isInWishlist}
+            history={this.props.history}
+          />
+          <button className="btn-compare" onClick={this.handleClick}>
             Add to compare
-          </button>}
-
+          </button>
         </div>
       </li>
     );

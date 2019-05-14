@@ -58,13 +58,15 @@ class MyWishlist extends React.Component {
   render() {
 
     const wishlistItem = <>
-      <h3 className='headingTitle'>My Wishlist</h3>
-      <section className="plpCategories">
-        <PlpComponent
-          plpDataPro={this.state.wishlistData}
-          isFromWishlistPro={true}
-        />
-      </section>
+      <div className='container'>
+        <h3 className="heading">My Wishlist</h3>
+        <section className="plpCategories">
+          <PlpComponent
+            plpDataPro={this.state.wishlistData}
+            isFromWishlistPro
+          />
+        </section>
+      </div>
     </>
 
     const loadingIndicator = <div className="lazyloading-Indicator">
@@ -74,16 +76,15 @@ class MyWishlist extends React.Component {
         src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
       />
     </div>
-    
+
     return (
-      <>
+      <div className="myWishlist">
         {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
           {this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
         </div>}
-      </>
+      </div>
     );
   }
-
 }
 
 function mapStateToProps(state) {

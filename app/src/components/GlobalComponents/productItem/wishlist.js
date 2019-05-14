@@ -116,14 +116,15 @@ class Wishlist extends React.Component {
       });
     }, 4000);
     return (
-      <div className="addedToWishlist">
-        <span className="textStyle">Product Added to Wishlist</span>
-        <button onClick={this.redirectToWishlistPage} className="viewTextStyle">View</button>
+      <div className="addedToWishlist clearfix">
+        <span className="wishlist-text">Product Added to Wishlist</span>
+        <button onClick={() => this.redirectToWishlistPage()} className="view-btn">View</button>
       </div>
     );
   }
 
   redirectToWishlistPage = () => {
+    console.log('its view veiw view veiw')
     this.props.history.push('/wishlist')
   }
 
