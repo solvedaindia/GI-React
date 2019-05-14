@@ -58,13 +58,16 @@ class MyWishlist extends React.Component {
   render() {
     return (
       <div className="myWishlist">
-        <h3 className="headingTitle">My Wishlist</h3>
+       <div className='container'>
+        <h3 className="heading">My Wishlist</h3>
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}
             isFromWishlistPro
           />
         </section>
+        {/* <EmptyWishlist/> */}
+        </div>
         {/* <EmptyWishlist/> */}
       </div>
     );

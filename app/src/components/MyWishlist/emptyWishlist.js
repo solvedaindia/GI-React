@@ -12,8 +12,8 @@ class EmptyWishlist extends React.Component {
   render() {
     return (
       <div className='emptyWishlist'>
-        <h1 className='emptyText1'>Your Wishlist is empty </h1>
-        <h1 className='emptyText2'>Start addinng items to your wishlist</h1>
+        <div className='heading-Wishlist'>Your Wishlist is empty </div>
+        <div className='subtext'>Start addinng items to your wishlist</div>
       </div>
     )
   }
