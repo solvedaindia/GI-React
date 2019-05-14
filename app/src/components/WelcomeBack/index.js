@@ -119,9 +119,7 @@ class WelcomeBack extends React.Component {
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-        document.cookie = `${accessTokenCookie}=${
-          response.data.data.access_token
-          };path=/;expires=''`;
+        appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
