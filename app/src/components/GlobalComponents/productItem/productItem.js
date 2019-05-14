@@ -15,15 +15,15 @@ class ProductItem extends React.Component {
   }
 
   handleClick() {
-      let product = {
-        title: this.props.data.productName,
-        thumbnail: this.props.data.thumbnail,
-        id: this.props.data.uniqueID,
-        actualPrice: this.props.data.actualPrice,
-        offerPrice: this.props.data.offerPrice,
-      };
-      this.props.addProduct(product);
-  };
+    const product = {
+      title: this.props.data.productName,
+      thumbnail: this.props.data.thumbnail,
+      id: this.props.data.uniqueID,
+      actualPrice: this.props.data.actualPrice,
+      offerPrice: this.props.data.offerPrice,
+    };
+    this.props.addProduct(product);
+  }
 
   render() {
     return (

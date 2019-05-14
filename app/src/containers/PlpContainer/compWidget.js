@@ -22,7 +22,11 @@ export class CompContainer extends React.Component {
 
   buildData() {
     console.log('frd in compwidget', this.props);
-    var addDiv = <li className="list"><h4>Add Product</h4></li>
+    const addDiv = (
+      <li className="list">
+        <h4>Add Product</h4>
+      </li>
+    );
     const data = [];
     if (this.props.compData.length > 0) {
       this.props.compData.forEach(element => {
@@ -32,15 +36,15 @@ export class CompContainer extends React.Component {
       });
     }
 
-    if(data.length == 1) {
+    if (data.length == 1) {
       data.push(addDiv);
       data.push(addDiv);
     }
-    if(data.length == 2) {
+    if (data.length == 2) {
       data.push(addDiv);
     }
     return data;
-  };
+  }
 
   clearAll() {
     this.props.removeAll();
@@ -48,21 +52,24 @@ export class CompContainer extends React.Component {
 
   render() {
     return (
-      <div className='compareProductwrap'>
+      <div className="compareProductwrap">
         <div className="container">
-         <div className='row'>
-          <div className='col-md-12'>
-            <ul className='compareProducts'>{this.buildData()}
-              {this.props.compData.length > 0 ? <li className="list">
-              <button className="btn-large">Compare {this.props.compData.length}/3
-              </button>
-              <button className="btn-large" onClick={this.clearAll}>
-                Clear All
-              </button>
-              </li> : ''}
-            </ul>
+          <div className="row">
+            <div className="col-md-12">
+              <ul className="compareProducts">
+                {this.buildData()}
+                {this.props.compData.length > 0 ? <li className="list">
+                    <button className="btn-large">
+                      Compare {this.props.compData.length}
+                      /3
+                    </button>
+                    <button className="btn-large" onClick={this.clearAll}>
+                      Clear All
+                    </button>
+                  </li> : ""}
+              </ul>
+            </div>
           </div>
-         </div>
         </div>
       </div>
     );
@@ -77,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   removeProduct: id => dispatch(actionCreators.RemoveProduct(id)),
-  removeAll: () => dispatch(actionCreators.RemoveAll())
+  removeAll: () => dispatch(actionCreators.RemoveAll()),
 });
 
 const withConnect = connect(

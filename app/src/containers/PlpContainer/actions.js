@@ -75,5 +75,5 @@ export const RemoveProduct = id => ({
 });
 
 export const RemoveAll = () => ({
-  type: actionTypes.REMOVEALL
+  type: actionTypes.REMOVEALL,
 });

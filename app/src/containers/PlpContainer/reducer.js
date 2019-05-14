@@ -94,8 +94,8 @@ function plpContainerReducer(state = initialState, action) {
     case actionTypes.REMOVEALL:
       return {
         ...state,
-        compWidgetData: []
-      }
+        compWidgetData: [],
+      };
     default:
       return state;
   }
