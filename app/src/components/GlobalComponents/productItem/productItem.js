@@ -10,19 +10,12 @@ import Title from './title';
 class ProductItem extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {};
   }
 
-  handleClick = () => {
-    const compPrd = this.props.compData.find(
-      prd => prd.id == this.props.data.uniqueID,
-    );
-    if (compPrd) {
-      alert(
-        'Product alreday added in compare. Please select different prodcut',
-      );
-    } else {
-      const product = {
+  handleClick() {
+      let product = {
         title: this.props.data.productName,
         thumbnail: this.props.data.thumbnail,
         id: this.props.data.uniqueID,
@@ -30,7 +23,6 @@ class ProductItem extends React.Component {
         offerPrice: this.props.data.offerPrice,
       };
       this.props.addProduct(product);
-    }
   };
 
   render() {

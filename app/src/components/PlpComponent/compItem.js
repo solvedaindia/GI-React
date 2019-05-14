@@ -9,7 +9,6 @@ function CompItem(props) {
   function handleRemove() {
     props.remove(props.product.id)
   }
-  console.log('frd', props); 
   return <li className='list'>
       <div className="imgBox">
       <img className="imgfullwidth" src={`https://192.168.0.36:8443${props.product.thumbnail}`} />
@@ -18,7 +17,7 @@ function CompItem(props) {
       <div className='textBox'>      
         <h4 className='productName'>{props.product.title} </h4>
           <Price
-          actualPrice={props.product.actualPrice}
+            actualPrice={props.product.actualPrice}
             offerPrice={props.product.offerPrice}
           />
          

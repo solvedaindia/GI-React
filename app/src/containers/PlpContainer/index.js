@@ -312,6 +312,7 @@ export class PlpContainer extends React.Component {
         <PlpComponent
           plpDataPro={this.state.plpData}
           adBannerDataPro={adBannerData}
+          catId={this.state.categoryDetail.uniqueID}
         />
       );
     }

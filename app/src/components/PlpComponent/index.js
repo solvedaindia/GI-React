@@ -41,7 +41,18 @@ class PlpComponent extends React.Component {
   }
 
   handleAddProduct = product => {
-    this.props.addProduct(product);
+    var compPrd = this.props.compData.find(prd => prd.id == product.id)
+    var compCat = this.props.compData.find(prd => prd.catId == this.props.catId)
+    if(compPrd) {
+      alert("Product alreday added in Compare tray. Please add another product");
+    } else if(this.props.compData.length == 3) {
+      alert ("You can add upto 3 products. Please remove a product to add another");
+    } else if (this.props.compData.length > 0 && !compCat){
+      alert("Please select same category products");
+    } else {
+      product.catId = this.props.catId;
+      this.props.addProduct(product);
+    }
   };
 
   parsePLPData(data) {
@@ -55,7 +66,6 @@ class PlpComponent extends React.Component {
             data={item}
             isInWishlist={wishlistArr.includes(item.uniqueID)}
             addProduct={this.handleAddProduct}
-            compData={this.props.compData}
           />
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
@@ -144,6 +154,7 @@ const mapStateToProps = state => {
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
     coloumnLayout: stateObj.columnLayout,
     compData: stateObj.compWidgetData,
+    compCategories: stateObj.compCategories
   };
 };
 
