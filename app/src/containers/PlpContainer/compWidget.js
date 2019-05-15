@@ -58,7 +58,8 @@ export class CompContainer extends React.Component {
 
   render() {
     return (
-      <div className="compareProductwrap">
+    <div>
+      {this.props.compData.length > 0 ? <div className="compareProductwrap">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -77,7 +78,8 @@ export class CompContainer extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </div> : ""}
+    </div>
     );
   }
 }
