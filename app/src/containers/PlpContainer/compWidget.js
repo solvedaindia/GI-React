@@ -12,6 +12,9 @@ import reducer from './reducer';
 import saga from './saga';
 import * as actionCreators from './actions';
 import CompItem from '../../components/PlpComponent/compItem';
+
+import plus from '../../../public/images/plusIcon.svg';
+
 export class CompContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +27,10 @@ export class CompContainer extends React.Component {
     console.log('frd in compwidget', this.props);
     const addDiv = (
       <li className="list">
-        <h4>Add Product</h4>
+        <div className='addproduct-box'>
+          <button className='add-icon'><img src={plus}/></button>
+          <div className='addproduct-text'>Add Product</div>
+        </div>
       </li>
     );
     const data = [];
@@ -59,11 +65,11 @@ export class CompContainer extends React.Component {
               <ul className="compareProducts">
                 {this.buildData()}
                 {this.props.compData.length > 0 ? <li className="list">
-                    <button className="btn-large">
+                    <button className="btn-compare">
                       Compare {this.props.compData.length}
                       /3
                     </button>
-                    <button className="btn-large" onClick={this.clearAll}>
+                    <button className="btn-clearall" onClick={this.clearAll}>
                       Clear All
                     </button>
                   </li> : ""}

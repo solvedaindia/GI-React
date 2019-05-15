@@ -15,14 +15,51 @@
         margin:0;
         .list{
             background: $greybg;
-            width: 23.34%;
-            display: inline-block;
+            width: 23.34%;            
             padding: 5px;
             margin: 0 25px 0 0;
             position: relative;
+            display: block;
+            float: left;
+            min-height: 87px;
+            max-height: 87px;
+
+            .btn-compare{
+                background:$black;
+                border:none;
+                color:$colorwhite;
+                width:80%;
+                margin:0 auto;
+                padding:12px 0;
+                font-size: 14px;
+
+            }
+            .btn-clearall{
+                background: transparent;
+                border:none;
+                margin:17px 0 0 0;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .addproduct-box{
+                text-align: center;
+                padding: 14px;
+                .add-icon{
+                   background: transparent;
+                   border:none;
+                }
+                .addproduct-text{
+                   color:$black;
+                   font-weight: 600;
+                   padding:15px 0 0 0;
+                }
+            }
 
             &:last-child{
                 margin: 0 0px 0 0;
+                text-align: center;
+                background: transparent;
             }
             .imgBox{
                 width:30%;
@@ -67,6 +104,7 @@
                 }
                 
             } 
+            
         }
    }
 
