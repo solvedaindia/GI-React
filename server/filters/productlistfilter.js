@@ -4,7 +4,7 @@ const filter = require('./filter');
  * Filter Product List Data.
  * @return Product List with Facet Data
  */
-module.exports.facetData = function getFacetData(facetView) {
+module.exports.facetData = function getFacetData(facetView, catalogID) {
   const facetViewData = facetView;
   const facetData = [];
   if (facetViewData && facetViewData.length > 0) {
@@ -21,6 +21,14 @@ module.exports.facetData = function getFacetData(facetView) {
             count: Number(facetValue.count),
             facetImage: facetValue.image || '',
           };
+          if (facet.value === 'parentCatgroup_id_search') {
+            facetEntry.value = `${facet.value}:${catalogID}_${
+              facetValue.value
+            }`;
+          } else {
+            facetEntry.value = facetValue.value;
+          }
+
           eachFacetValue.facetValues.push(facetEntry);
         });
       }

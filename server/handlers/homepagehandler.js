@@ -3,6 +3,7 @@ const espotsHandler = require('./espotshandler');
 const logger = require('../utils/logger.js');
 const espots = require('../configs/espotnames');
 const filter = require('../filters/filter');
+const espotFilter = require('../filters/espotfilter');
 const homebodyEspot = espots.homebody;
 
 /**
@@ -23,8 +24,10 @@ module.exports.getBodyData = function getHomeBody(headers, callback) {
         return;
       }
       logger.debug('Got all the origin resposes');
-      const resJson = {};
-      results.forEach(element => {
+      const resJson = {
+        GI_Homepage_Static_Content: espotFilter.espotContent(results[0]) || '',
+      };
+      /* results.forEach(element => {
         const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration
         if (espotParserResult != null) {
           const keys = Object.keys(espotParserResult);
@@ -32,7 +35,7 @@ module.exports.getBodyData = function getHomeBody(headers, callback) {
             resJson[key] = espotParserResult[key];
           });
         }
-      });
+      }); */
       callback(null, resJson);
     },
   );

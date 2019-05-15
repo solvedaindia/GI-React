@@ -11,6 +11,12 @@ const errorlist = {
     error_key: 'token_invalid',
     error_message: 'Access Token is Invalid.Please enter a valid Access Token.',
   },
+  store_invalid: {
+    status_code: 401,
+    error_key: 'store_invalid',
+    error_message:
+      'Store Identifier is Invalid.Please enter a valid Store Identifier.',
+  },
   token_expired: {
     status_code: 401,
     error_key: 'token_expired',

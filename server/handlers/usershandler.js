@@ -4,7 +4,7 @@ const origin = require('../utils/origin.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-const filter = require('../filters/filter');
+const profileFilter = require('../filters/profilefilter');
 
 /**
  * Registeres User in WCS
@@ -36,6 +36,7 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
     logonPassword: params.password,
     logonPasswordVerify: params.password,
     x_otp: params.otp || '',
+    zipCode: params.pincode || '122001',
   };
   /*   if (params.otp) {
     reqBody.x_otp = params.otp;
@@ -62,6 +63,11 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
         const accessToken = tokenGenerator.encodeToken(response.body);
         const signupResponseBody = {
           access_token: accessToken,
+          userDetails: {
+            firstName: reqBody.firstName,
+            lastName: reqBody.lastName,
+            pincode: reqBody.zipCode,
+          },
         };
         callback(null, signupResponseBody);
       } else {
@@ -149,7 +155,11 @@ module.exports.getUserDetails = function getUserDetails(headers, callback) {
     '',
     response => {
       if (response.status === 200) {
-        callback(null, filter.filterData('userinfo', response.body));
+        if (headers.profile === 'summary') {
+          callback(null, profileFilter.userInfoSummary(response.body));
+          return;
+        }
+        callback(null, profileFilter.userInfoDetails(response.body));
       } else {
         callback(errorutils.handleWCSError(response));
       }

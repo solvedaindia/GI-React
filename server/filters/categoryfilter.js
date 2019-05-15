@@ -37,14 +37,18 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail = categoryDetails.thumbnail || '';
-  catData.fullImage = categoryDetails.fullImage || '';
+  catData.thumbnail =
+    categoryDetails.thumbnail ||
+    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catthumbnail.png';
+  catData.fullImage =
+    categoryDetails.fullImage ||
+    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catfullimage.png';
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
-  catData.startPrice = '';
+  catData.startPrice = 2499;
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
