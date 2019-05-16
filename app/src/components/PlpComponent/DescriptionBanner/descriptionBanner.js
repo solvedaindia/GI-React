@@ -53,13 +53,12 @@ class DescriptionBanner extends React.Component {
         <Grid>
           <Row>
             <Col md={12}>
-              <h3 className="heading">Tables</h3>
-
+              <h1 className="heading">Tables</h1>
               <ul className="description_area">
-                <div
-                  dangerouslySetInnerHTML={{ __html: this.state.finalData }}
-                />
+                <div>
+                <p dangerouslySetInnerHTML={{ __html: this.state.finalData }}/>               
                 {/* <text className='list'>{this.state.finalData}</text> */}
+                </div>
               </ul>
               <button
                 onClick={this.readMoreClicked.bind(this)}

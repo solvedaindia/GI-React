@@ -7,7 +7,7 @@ const subCatItem = ({ itemData }) => (
             <SubCatImage imageData={itemData.thumbnail} uniqueIdPro={itemData.uniqueID} />
             <div className="itemtext">
                 <div className="leftbox">
-                    <div className="bold">{itemData.categoryName}</div>
+                    <h2 className="bold">{itemData.categoryName}</h2>
                     <div className='start_price'>Starting from ₹ {itemData.startPrice}</div>
                 </div>
                 <div className="rightbox">{itemData.productCount} Products</div>
