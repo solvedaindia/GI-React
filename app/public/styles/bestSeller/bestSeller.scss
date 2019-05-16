@@ -2,29 +2,32 @@
 @import '../base';
 .bestSeller {
     width: 83.33%;
-    margin: $base*15 auto 0;
+    margin: $base*15 auto;
     .subCatImg {
         width: 100%;
     }
     .slick-next:before, 
     .slick-prev:before {
-        font-size: 20px;
-        line-height: 1;
-        opacity: .75;
-        color: $black;
+        font-size: 32px;
+        line-height: unset;
+        opacity: unset;
+        color: unset;
     }
-    .slick-prev::before {
-        content: "←";
+    .slick-prev {
+        left: unset;
+        right: 25px;
     }
-    .slick-next::before, 
-    [dir="rtl"] .slick-prev::before {
-        content: "→";
+    .slick-next,
+    .slick-prev {
+        top: unset;
+        bottom: -20%;
     }
     .slick-slide div {
         margin: $base;
         position: relative;
         .subCatImg {
             background-color: #f7f8f8;
+            padding: $base*2;
         }
     }
     .bsDetails {

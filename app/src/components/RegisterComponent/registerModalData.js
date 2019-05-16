@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import {
   storeId,
   accessTokenCookie,
@@ -108,8 +108,8 @@ class RegisterModalData extends React.Component {
   handleComponetData(api, data, token, type) {
     this.setState({ message: null });
 
-    axios
-      .post(api, data, { headers: { store_id: storeId, access_token: token } })
+    apiManager
+      .post(api, data)
       .then(response => {
         if (type === registerWithEmail || type === otpConfirmed) {
           this.setState({
@@ -138,12 +138,12 @@ class RegisterModalData extends React.Component {
   }
 
   componentDidMount() {
-    console.log('registerrrrrr----')
+    console.log('registerrrrrr----');
     this.setState({ show: true });
   }
 
   render() {
-    console.log('registerrrrrr----')
+    console.log('registerrrrrr----');
     let data = null;
     if (this.state.data === null && this.state.show === true) {
       data = (

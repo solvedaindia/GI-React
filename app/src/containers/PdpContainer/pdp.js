@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import {
   pdpApi,
   pdpApi2,
@@ -7,7 +7,7 @@ import {
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
-import PdpComponent from '../../components/PdpComponent/pdpComponent';
+import PdpComponent from '../../components/PdpComponent/PdpComponent';
 
 class PdpContainer extends React.Component {
   constructor() {
@@ -27,11 +27,9 @@ class PdpContainer extends React.Component {
   }
 
   callPdpApi() {
-    const productId = 'TEST_PDP';   
-    axios
-      .get(pdpApi2 + productId, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    const productId = 'TEST_PDP';
+    apiManager
+      .get(pdpApi2 + productId)
       .then(response => {
         this.setState({
           pdp: response.data,
@@ -48,11 +46,9 @@ class PdpContainer extends React.Component {
 
   callPdpEspotApi() {
     const APIType = 'GI_PDP_Sample_Espot1';
-    const espotPdpApi = espotAPI + APIType;    
-    axios
-      .get(espotPdpApi, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    const espotPdpApi = espotAPI + APIType;
+    apiManager
+      .get(espotPdpApi)
       .then(response => {
         this.setState({
           pdpEspot: response.data,
@@ -75,7 +71,7 @@ class PdpContainer extends React.Component {
             <PdpComponent
               data={this.state.pdp.data}
               skuId={this.props.match.params}
-              espot={this.state.pdpEspot}              
+              espot={this.state.pdpEspot}
             />
         )}
       </div>

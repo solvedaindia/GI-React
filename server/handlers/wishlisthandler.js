@@ -5,6 +5,9 @@ const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const filter = require('../filters/filter');
+const productUtil = require('../utils/productutil');
+const wishlistFilter = require('../filters/wishlistfilter');
+const wishlistName = 'My Wishlist';
 
 /**
  * fetch Wishlist Item Count.
@@ -53,13 +56,62 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
 module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
   logger.debug('Entering method mylisthandler: fetchWishlist');
 
-  const wishlistDetails = [getWishlistData.bind(null, headers)];
-  async.waterfall(wishlistDetails, (err, results) => {
+  getWishlistData(headers, (err, res) => {
     if (err) {
       callback(err);
+      return;
+    }
+    const wishlistJson = {
+      wishlistID: '',
+      wishlistName: '',
+      wishlistItemCount: 0,
+      wishlistData: [],
+    };
+    const productIDs = [];
+    if (res.GiftList && res.GiftList.length > 0) {
+      wishlistJson.wishlistID = res.GiftList[0].uniqueID;
+      wishlistJson.wishlistName = res.GiftList[0].descriptionName;
+      if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
+        wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
+        res.GiftList[0].item.forEach(listItem => {
+          productIDs.push(listItem.productId);
+        });
+
+        productUtil.productByProductIDs(
+          productIDs,
+          headers,
+          (error, result) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+            const productListArray = result.productList;
+            productListArray.forEach(productDetail => {
+              for (
+                let index = 0;
+                index < res.GiftList[0].item.length;
+                index += 1
+              ) {
+                if (
+                  productDetail.uniqueID ===
+                  res.GiftList[0].item[index].productId
+                ) {
+                  // eslint-disable-next-line no-param-reassign
+                  productDetail.giftListItemID =
+                    res.GiftList[0].item[index].giftListItemID;
+                  break;
+                }
+              }
+            });
+            wishlistJson.wishlistData = productListArray;
+            callback(null, wishlistJson);
+          },
+        );
+      } else {
+        callback(null, wishlistJson);
+      }
     } else {
-      logger.debug('Got all the origin resposes');
-      callback(null, results);
+      callback(null, wishlistJson);
     }
   });
 };
@@ -74,7 +126,7 @@ function fetchlistNames(headers, callback) {
   logger.debug('Entering method mylisthandler: Fetch WishList Names');
   getWishlistData(headers, (err, result) => {
     if (err) {
-      callback(err);
+      callback(errorutils.handleWCSError(err));
     } else {
       const wishlistNamesJson = {
         wishlistCount: 0,
@@ -389,7 +441,8 @@ module.exports.addItemInWishlist = function addItemInWishlist(
 
   fetchlistNames(headers, (err, result) => {
     if (err) {
-      callback(err);
+      logger.error('Error in Fetch List Names');
+      callback(errorutils.handleWCSError(err));
     } else {
       // eslint-disable-next-line prefer-destructuring
       const wishlistCount = result.wishlistCount;
@@ -397,7 +450,8 @@ module.exports.addItemInWishlist = function addItemInWishlist(
         productId: body.sku_id,
       };
       if (wishlistCount === 0) {
-        reqBody.wishlistName = `wishlist_${headers.userId}`;
+        //reqBody.wishlistName = `wishlist_${headers.userId}`;
+        reqBody.wishlistName = wishlistName;
         createAndAdd(headers, reqBody, callback);
       } else {
         reqBody.wishlistId = result.wishlistDetails[0].wishlistId;

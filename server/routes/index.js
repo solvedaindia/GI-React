@@ -23,7 +23,7 @@ router.use('/espots', require('./api/espots'));
 router.use('/activity', require('./api/activity'));
 router.use('/otp', require('./api/otp'));
 router.use('/clp', require('./api/clp'));
-router.use('/plp', require('./api/plp'));
+router.use('/productlist', require('./api/plp'));
 router.use('/newsletter', require('./api/newsletter'));
 router.use('/pdp', require('./api/pdp'));
 router.use('/storelocator', require('./api/storelocator'));

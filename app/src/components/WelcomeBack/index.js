@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 
@@ -28,7 +28,6 @@ import {
 } from '../../../public/constants/constants';
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
-
 import '../../../public/styles/login/login.scss';
 
 class WelcomeBack extends React.Component {
@@ -112,16 +111,14 @@ class WelcomeBack extends React.Component {
   /* Handle User Login API */
   handleUserLoginApi(data) {
     this.setState({ message: null });
-    axios
-      .post(userLoginAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(userLoginAPI, data)
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         document.cookie = `${accessTokenCookie}=${
           response.data.data.access_token
-          };path=/;expires=''`;
+        };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -150,7 +147,7 @@ class WelcomeBack extends React.Component {
   }
 
   componentDidMount() {
-    //this.handleUserLoginApi();
+    // this.handleUserLoginApi();
     console.log('in the Login main pop up');
     this.showLoginStatus();
   }
@@ -158,13 +155,13 @@ class WelcomeBack extends React.Component {
   clickedOnForgotPassword() {
     this.props.callbackPro(true);
     this.setState({ show: false, message: null });
-    //this.handleClose();
+    // this.handleClose();
   }
 
   clickedOnRegister() {
     this.props.callbackPro(false);
     this.setState({ show: false, message: null });
-    //this.handleClose();
+    // this.handleClose();
   }
 
   render() {
@@ -245,13 +242,18 @@ class WelcomeBack extends React.Component {
             handleUserData={this.handleUserLoginApi.bind(this)}
           />
           <div className="forgotPassword">
-            <p onClick={this.clickedOnForgotPassword.bind(this)}>Forgot Password?</p>
+            <p onClick={this.clickedOnForgotPassword.bind(this)}>
+              Forgot Password?
+            </p>
           </div>
           <p className="registerHere">
             <span>New to Godrej Interio? </span>
-            <Button className="registerNow" onClick={this.clickedOnRegister.bind(this)}>
+            <Button
+              className="registerNow"
+              onClick={this.clickedOnRegister.bind(this)}
+            >
               Register
-        </Button>
+            </Button>
             {/* <RegisterModalData /> */}
           </p>
         </Modal>

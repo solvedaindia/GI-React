@@ -13,6 +13,9 @@ export const wishlistDataCookie = 'wishlistData';
 export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
+export const productTitleCharLimit = 35;
+export const productDescriptionCharLimit = 25;
+
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
@@ -75,7 +78,7 @@ export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logi
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* Sub-Category API */
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
-/* Hero Banner Slider*/
+/* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
 /* Featured Category */
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
@@ -88,13 +91,19 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
-export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/plp/productlist/`;
+export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
 /* Footer logo url */
 export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
 export const pdpApi2 = `${secureHttp}://${host}:${port2}/api/v1/pdp/productDetails/`;
+/* Add To Cart API */
+export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/add`;
+/* Minicart API */
+export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/minicart`;
+/* MyWishlist API */
+export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
 
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';

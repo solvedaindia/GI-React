@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
+import apiManager from '../../../utils/apiManager';
 import { updatetWishListCount } from '../../../actions/app/actions';
 import {
   getCookie,
@@ -34,7 +34,8 @@ class Wishlist extends React.Component {
     super(props);
     this.state = {
       wishlistCurrentImage: wishListRemovedImg,
-      isWelcomeBack: false
+      wishlistPopup: null,
+      isWelcomeBack: false,
     };
   }
 
@@ -50,8 +51,8 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      //alert('Please Login');
-      this.setState({isWelcomeBack: true});
+      // alert('Please Login');
+      this.setState({ isWelcomeBack: true });
     }
   }
 
@@ -59,18 +60,18 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
-    axios
-      .post(addToWishlist, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(addToWishlist, data)
       .then(response => {
-        this.setState({ wishlistCurrentImage: wishlistAddedImg });
+        this.setState({
+          wishlistCurrentImage: wishlistAddedImg,
+          wishlistPopup: this.wishlistPopupItem(),
+        });
         getUpdatedWishlist(this);
       })
       .catch(error => {
         console.log('newsError---', error);
       });
-      
   }
 
   removeFromWishlistAPI() {
@@ -78,23 +79,26 @@ class Wishlist extends React.Component {
       wishlist_id: getCookie(wishlistIdCookie),
       giftlistitem_id: getCorrespondingGiftlistId(this.props.uniqueId),
     };
-    axios
-      .post(removeFromWishlist, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(removeFromWishlist, data)
       .then(response => {
         console.log('Add wishlit --- ', response.data);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });
         getUpdatedWishlist(this);
-        //this.props.updatetWishListCount(6);
+        // this.props.updatetWishListCount(6);
       })
       .catch(error => {
         console.log('newsError---', error);
       });
   }
 
-  componentWillReceiveProps() {
-    this.setState({isWelcomeBack: false});
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      isWelcomeBack: false,
+      wishlistCurrentImage: this.props.isInWishlistPro
+        ? wishlistAddedImg
+        : wishListRemovedImg,
+    });
   }
 
   componentDidMount() {
@@ -105,27 +109,49 @@ class Wishlist extends React.Component {
     });
   }
 
+  wishlistPopupItem() {
+    setTimeout(() => {
+      this.setState({
+        wishlistPopup: null,
+      });
+    }, 4000);
+    return (
+      <div className="addedToWishlist clearfix">
+        <span className="wishlist-text">Product Added to Wishlist</span>
+        <button onClick={() => this.redirectToWishlistPage()} className="view-btn">View</button>
+      </div>
+    );
+  }
+
+  redirectToWishlistPage = () => {
+    console.log('its view veiw view veiw')
+    this.props.history.push('/wishlist')
+  }
+
   render() {
     return (
       <>
+        {this.state.wishlistPopup}
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
         >
           {this.state.wishlistCurrentImage}
         </button>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro={true}/> : null}
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
     );
   }
 }
 
 function mapStateToProps(state) {
-  
   return {
-    //default: state.default
+    // default: state.default
   };
 }
 
-export default connect(mapStateToProps, { updatetWishListCount })(Wishlist);
-//export default Wishlist;
+export default connect(
+  mapStateToProps,
+  { updatetWishListCount },
+)(Wishlist);
+// export default Wishlist;

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import WidgetList from './widgetList';
 import {
   homePageLayoutAPI,
@@ -17,10 +17,8 @@ export class HomapegeLayout extends React.Component {
   }
 
   getPageLayout() {
-    axios
-      .get(homePageLayoutAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(homePageLayoutAPI)
       .then(response => {
         this.setState({
           homepageLayout: response.data.data.GI_Homepage_Layout_Content,

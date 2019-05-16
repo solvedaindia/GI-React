@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiManager from './apiManager';
 import {
   socialLoginAPI,
   accessToken,
@@ -25,10 +25,8 @@ function socialLoginAPIHandler(socialData, callback) {
     email_id: socialData.emialId,
   };
 
-  axios
-    .post(socialLoginAPI, data, {
-      headers: { store_id: storeId, access_token: accessToken },
-    })
+  apiManager
+    .post(socialLoginAPI, data)
     .then(response => {
       document.cookie = 'isLoggedIn=true';
       document.cookie = `${accessTokenCookie}=${

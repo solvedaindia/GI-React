@@ -11,6 +11,12 @@ const errorlist = {
     error_key: 'token_invalid',
     error_message: 'Access Token is Invalid.Please enter a valid Access Token.',
   },
+  store_invalid: {
+    status_code: 401,
+    error_key: 'store_invalid',
+    error_message:
+      'Store Identifier is Invalid.Please enter a valid Store Identifier.',
+  },
   token_expired: {
     status_code: 401,
     error_key: 'token_expired',
@@ -92,7 +98,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
-        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION'
+        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
       ) {
         return {
           status_code: 400,
