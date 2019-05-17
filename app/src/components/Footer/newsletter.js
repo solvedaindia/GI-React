@@ -39,12 +39,12 @@ class newsletter extends React.Component {
 
 	render() {
 		const newsletterHtml = <Col md={12} sm={12} className='newsletter_section'>
-			<h3 className='heading news_heading'>{this.props.name.text}</h3>
+			<h6 className='heading news_heading'>{this.props.name.text}</h6>
 			<ul className='newsletterList'>
 				{
 				this.props.name.children.map((newsletterDesc, index) => {
 					return (
-					<li className='list' key={index}>{newsletterDesc.text}</li>
+					<li className='list' key={index}><h6 className='newsletter-heading'>{newsletterDesc.text}</h6></li>
 					);
 				})
 				}
