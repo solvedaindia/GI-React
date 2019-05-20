@@ -3,8 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import apiManager from '../../utils/apiManager';
 import {
-  storeId,
-  accessTokenCookie,
+  accessTokenCookie
 } from '../../../public/constants/constants';
 import Register from './register';
 import RegisterWithEmailMobile from './registerWithEmailMobile';
@@ -15,6 +14,7 @@ import {
   resendOtp,
   otpConfirmed,
 } from './constants';
+import appCookie from '../../utils/cookie';
 import WelcomeBack from '../WelcomeBack/index';
 
 class RegisterModalData extends React.Component {
@@ -116,11 +116,11 @@ class RegisterModalData extends React.Component {
             message: 'Registerted successfully!',
           });
 
-          document.cookie = 'isLoggedIn=true';
-          document.cookie = `${accessTokenCookie}=${
-            response.data.data.access_token
-          };path=/;expires=''`;
+          appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+
           this.handleClose();
+          window.location.reload();
         } else {
           alert(`OTP - ${response.data.data.otpVal}`);
           if (type !== resendOtp) {
@@ -138,12 +138,10 @@ class RegisterModalData extends React.Component {
   }
 
   componentDidMount() {
-    console.log('registerrrrrr----');
     this.setState({ show: true });
   }
 
   render() {
-    console.log('registerrrrrr----');
     let data = null;
     if (this.state.data === null && this.state.show === true) {
       data = (

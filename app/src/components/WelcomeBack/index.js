@@ -7,19 +7,15 @@ import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 
 import WelcomeBackForm from '../WelcomeBackForm';
-import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
-import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
   facebookAppId,
-  googleClientId,
-  isLoggedIn,
+  googleClientId
 } from '../../../public/constants/constants';
 import {
   onFacebookResponse,
   onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
-import { getCookie } from '../../utils/utilityManager';
 import {
   storeId,
   accessToken,
@@ -163,9 +159,7 @@ class WelcomeBack extends React.Component {
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-        document.cookie = `${accessTokenCookie}=${
-          response.data.data.access_token
-        };path=/;expires=''`;
+        appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
