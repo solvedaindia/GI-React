@@ -15,7 +15,7 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART } from '../../constants/app/constants';
+ import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG } from '../../constants/app/constants';
 
 
 /**
@@ -60,6 +60,7 @@ export function repoLoadingError(error) {
 }
 
 export function updatetWishListCount(count) {
+  console.log('its in the update wihslit action',count);
   return {
     type: WISH_LIST_COUNT,
     count,
@@ -71,5 +72,13 @@ export function updatetMinicart(count) {
   return {
     type: UPDATE_MINICART,
     count,
+  };
+}
+
+export function resetRemoveFromWishlistFlag(flag) {
+  console.log('resetRemoveFromWishlistFlag---',flag)
+  return {
+    type: RESET_REMOVEWISHLISTFLAG,
+    flag,
   };
 }
