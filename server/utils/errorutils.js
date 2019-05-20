@@ -98,7 +98,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
-        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION'
+        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
       ) {
         return {
           status_code: 400,

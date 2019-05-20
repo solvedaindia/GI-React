@@ -165,7 +165,7 @@ class WelcomeBack extends React.Component {
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         document.cookie = `${accessTokenCookie}=${
           response.data.data.access_token
-          };path=/;expires=''`;
+        };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -223,7 +223,7 @@ class WelcomeBack extends React.Component {
 			{message}
 			<Modal.Header closeButton>
 				<div className="smallLogo">
-				<WhiteLogo />
+					<WhiteLogo />
 				</div>
 				<Modal.Title>Welcome Back</Modal.Title>
 			</Modal.Header>

@@ -1,6 +1,6 @@
 import React from 'react';
-import apiManager from '../../utils/apiManager';
 import { Button, Form, FormGroup, Label } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 import {
   generateOTPAPI,
   storeId,

@@ -1,6 +1,6 @@
 import React from 'react';
-import apiManager from '../../utils/apiManager';
 import Slider from 'react-slick';
+import apiManager from '../../utils/apiManager';
 import {
   recentlyViewedAPI,
   storeId,

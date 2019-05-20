@@ -143,6 +143,43 @@ section.tablecarousel {
       padding: 20px;
       position: relative;
       border: 1px solid $borderLight;
+      .hoverBox{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(3, 108, 197, 0.38);
+        top: 0;
+        left: 0;
+        opacity:0;
+        -webkit-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+        padding: 20px;
+      
+
+        .btn-compare{
+          background: $colorwhite;
+          color:$ashGrey;
+          padding:12px 45px;
+          text-align: center;
+          font-size: 14px;
+          border:none;
+          font-family: $font-bold;
+          width: 200px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -22px;
+          margin-left: -100px;
+          position: absolute;
+        }
+      }
+      &:hover .hoverBox{
+       opacity: 1;
+      }
+      &:hover .wishlistBtn{
+        opacity:1;
+      }
 
       .featured-box {
         position: absolute;
@@ -172,6 +209,7 @@ section.tablecarousel {
         background: transparent;
         border: none;
         z-index: 1;
+        opacity: 0;
         &:focus {
           outline: none;
         }
@@ -355,9 +393,9 @@ section.tablecarousel {
       &__filter {
         background: $colorwhite;
         border: 1px solid $lightgrey;
-        border-radius: 1px;        
-        z-index: 1;       
-        background: $colorwhite; 
+        border-radius: 1px;
+        z-index: 1;
+        background: $colorwhite;
 
         &:last-child {
           border-right: 1px solid $lightgrey;
@@ -708,4 +746,49 @@ section.tablecarousel {
   font-size: 16px;
   padding: 0 0 15px 0;
   color: #737272;
+}
+
+//-------- Wishlist -------
+.addedToWishlist { 
+  backdrop-filter: blur(10px);
+  background:$black;
+  animation: wishlistPopupAnimation 0.5s ease-in-out 0s forwards;
+  padding: 16px 17px 16px 20px;
+  margin: 24px 0 0 0;
+  width: 80%;
+  position: absolute;
+  right: 20px;
+
+  .wishlist-text, 
+  .view-btn{
+    font-size: 12px;
+    color: $colorwhite;
+  }
+  .wishlist-text {    
+    float:left;
+    display: block;
+  }
+
+  .view-btn {       
+    float:right;
+    background: transparent;
+    border:none; 
+    &:focus{
+      outline: none;
+    }  
+  }
+}
+
+@keyframes wishlistPopupAnimation {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 0.84;
+    -webkit-transform: none;
+    transform: none;
+  }
 }

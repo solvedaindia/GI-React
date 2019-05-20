@@ -79,7 +79,7 @@ export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logi
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* Sub-Category API */
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
-/* Hero Banner Slider*/
+/* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
 /* Featured Category */
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
@@ -99,6 +99,12 @@ export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejI
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
 export const pdpApi2 = `${secureHttp}://${host}:${port2}/api/v1/pdp/productDetails/`;
+/* Add To Cart API */
+export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/add`;
+/* Minicart API */
+export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/minicart`;
+/* MyWishlist API */
+export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
 
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';

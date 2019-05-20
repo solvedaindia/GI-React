@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import {
 	storeId,
@@ -105,4 +104,3 @@ export function expireAccessTokenHandling() {
 		resetTheCookiesAndData();
 	}
 }
-
