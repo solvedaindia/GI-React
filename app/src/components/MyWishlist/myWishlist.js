@@ -12,6 +12,7 @@ import {
 import { getReleventReduxState } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
 import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
+import BestSeller from '../BestSelling/bestSelling';
 
 class MyWishlist extends React.Component {
   constructor(props) {
@@ -104,8 +105,9 @@ class MyWishlist extends React.Component {
       <div className="myWishlist">
       {this.state.wishlistPopup}
         {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
-          {this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
+          {this.state.wishlistData.length != 0 ? wishlistItem : <><EmptyWishlist /><BestSeller/></>}
         </div>}
+        
       </div>
     );
   }
