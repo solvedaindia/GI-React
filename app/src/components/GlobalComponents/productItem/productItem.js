@@ -6,11 +6,16 @@ import Promotions from './promotion';
 import InStock from './inStock';
 import Wishlist from './wishlist';
 import Title from './title';
-import { addToCart } from '../../../../public/constants/constants';
+import { addToCart, removeFromWishlist, wishlistIdCookie } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
-import { updatetMinicart } from '../../../actions/app/actions';
+import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../../actions/app/actions';
 import { connect } from 'react-redux';
-import { getUpdatedMinicartCount } from '../../../utils/initialManager';
+import { getUpdatedMinicartCount, getUpdatedWishlist, removeFromWishlistGlobalAPI } from '../../../utils/initialManager';
+import {
+  getCookie,
+  getCorrespondingGiftlistId,
+  getOnlyWishlistUniqueIds,
+} from '../../../utils/utilityManager';
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -48,11 +53,13 @@ class ProductItem extends React.Component {
       ]
     }
     console.log('Move To Cart Clicked  ----  ',data);
-    
+
     apiManager.post(addToCart, data)
       .then(response => {
         console.log('Add to cart Data ---- ', response.data);
         getUpdatedMinicartCount(this)
+        //this.removeFromWishlistAPI();
+        removeFromWishlistGlobalAPI(this.props.data.uniqueID, this);
         //this.props.updatetMinicart();
       })
       .catch(error => {
@@ -60,15 +67,31 @@ class ProductItem extends React.Component {
       });
   }
 
+  // removeFromWishlistAPI() {
+  //   const data = {
+  //     wishlist_id: getCookie(wishlistIdCookie),
+  //     giftlistitem_id: getCorrespondingGiftlistId(this.props.data.uniqueID),
+  //   };
+  //   console.log('removeFromWishlistAPI', data);
+  //   apiManager
+  //     .post(removeFromWishlist, data)
+  //     .then(response => {
+  //       console.log('Add wishlit --- ', response.data);
+  //       getUpdatedWishlist(this);
+  //       this.props.resetRemoveFromWishlistFlag(true);
+  //       // this.props.updatetWishListCount(6);
+  //     })
+  //     .catch(error => {
+  //       console.log('newsError---', error);
+  //     });
+  // }
+
+
   render() {
     console.log('isFromWishlist  ----  ', this.props)
     return (
       <li className="productlist">
         <div className="prdListData">
-          {/* <Wishlist
-            uniqueId={this.props.data.uniqueID}
-            isInWishlistPro={this.props.isInWishlist}
-          /> */}
           <div className="imgBox">
             <ItemImage
               data={this.props.data.thumbnail}
@@ -96,11 +119,14 @@ class ProductItem extends React.Component {
           <Wishlist
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
+            isFromWishlistPro={this.props.isfromWishlistPro}
             history={this.props.history}
           />
-          <button className="btn-compare" onClick={this.handleClick}>
-            Add to compare
-          </button>
+          {this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
+            Move To Cart
+          </button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
+              Add to compare
+          </button>}
         </div>
       </li>
     );
@@ -115,6 +141,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updatetMinicart },
+  { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
 )(ProductItem);
 // export default ProductItem;

@@ -11,6 +11,7 @@ import {
 } from '../../../public/constants/constants';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
+import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 
 class MyWishlist extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class MyWishlist extends React.Component {
     this.state = {
       isLoading: false,
       wishlistData: [],
+      wishlistPopup: null,
     };
   }
 
@@ -30,6 +32,27 @@ class MyWishlist extends React.Component {
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
       this.fetchMyWishlistData();
     }
+    if (nextProps.removeWishlistFlag) {
+      console.log('Show The Popup Rmove from Wishlist',nextProps.removeWishlistFlag,this.props.removeWishlistFlag );
+      this.setState({
+        wishlistPopup: this.wishlistPopupItem(),
+      })
+      this.props.resetRemoveFromWishlistFlag(false);
+    }
+  }
+
+  wishlistPopupItem() {
+    setTimeout(() => {
+      this.setState({
+        wishlistPopup: null,
+      });
+    }, 2000);
+    return (
+      <div className="removeFromWishlist clearfix">
+        <span className="wishlist-text">Product Added to Wishlist</span>
+        <button onClick={() => this.redirectToWishlistPage()} className="view-btn">View</button>
+      </div>
+    );
   }
 
   fetchMyWishlistData() {
@@ -63,7 +86,7 @@ class MyWishlist extends React.Component {
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}
-            isFromWishlistPro
+            isFromWishlistPro={true}
           />
         </section>
       </div>
@@ -79,6 +102,7 @@ class MyWishlist extends React.Component {
 
     return (
       <div className="myWishlist">
+      {this.state.wishlistPopup}
         {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
           	{this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
         </div>}
@@ -90,10 +114,14 @@ class MyWishlist extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const wishlistCount = getReleventReduxState(stateObj, 'wishlistCount');
-  console.log('Its Globale MyWishlist', wishlistCount);
+  const removeFlag = getReleventReduxState(stateObj, 'removeWishlistFlag');
+  console.log('Its Globale MyWishlist', removeFlag);
   return {
     wishlistUpdatedCount: wishlistCount,
+    removeWishlistFlag: removeFlag,
   };
 }
 
-export default connect(mapStateToProps)(MyWishlist);
+export default connect(mapStateToProps,
+  {resetRemoveFromWishlistFlag},)
+(MyWishlist);
