@@ -45,9 +45,6 @@ class Category extends React.Component{
                                     {!!categoryData.subCategoryArray && <SubCategoriesData
                                         subCategoryArray={categoryData.subCategoryArray}
                                     />}
-                                    {/* {!!categoryData.subCategoryArray && <SubCatImg
-                                        subCategoryArray={categoryData.subCategoryArray}
-                                    />} */}
 								</li>
                             );
                         })

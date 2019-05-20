@@ -5,31 +5,25 @@ import {
 	storeId,
 	accessToken,
 } from '../../../public/constants/constants';
+import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
-
-// const strData =
-//   'Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel culiboard 80 years back to being a vibrant, innovative brand with a diverse liortfolio – it’s been a brilliant, exciting journey for us. <p /> We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you. <p />True to the Godrej mission to conserve the environment, we design products, set up processes and use raw materials that are eco-friendly to do our bit to preserve natural resources.<p />We offer our customers home and office furniture, along with solutions for laboratories, hospitals and healthcare establishments, education and training institutes, shipyards and navy, auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets.<p />Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s largest engineering and consumer product groups.';
 class ReadMore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            espotName: this.props.espotName,
-            readMoreData: null,
-            splitData: null,
-            fullData: '',
-            finalData: null,
-            isReadMore: false,
-            readMoreTitle: 'Read More',
-            isLoading: false,
-            error: null
+            readableData: null,
+            error: false,
+            hasMore: true,
+            isLoading: false
         };
     }
+    
     getReadMoreData() {
 		apiManager
-			.get(espotAPI + this.props.espotName)
+			.get(espotAPI + 'GI_Homepage_About_Godrej')
 			.then(response => {
                 this.setState({
-                    readMoreData: response.data.data,
+                    readableData: response.data.data,
                     isLoading: false
                 });
                 console.log('#####Read More Data######', response.data.data);
@@ -45,32 +39,18 @@ class ReadMore extends React.Component {
     componentDidMount() {
        this.getReadMoreData();
     }
-
-    // readMoreClicked() {
-    //     if (this.state.isReadMore) {
-    //     console.log('Hide');
-    //     this.setState({
-    //         isReadMore: false,
-    //         finalData: this.state.splitData,
-    //         readMoreTitle: 'Read More',
-    //     });
-    //     } else {
-    //     console.log('Show');
-    //     this.setState({
-    //         isReadMore: true,
-    //         finalData: strData,
-    //         readMoreTitle: 'Read Less',
-    //     });
-    //     }
-    // }
-
     render() {
-        const { readMoreData } = this.state;
-        return !!readMoreData && (
+        const { readableData } = this.state;
+        return !!readableData && (
             <div className='readMore'>
-                <div className='rmDetails'>
-                    <h1 className='rmTitle'>{readMoreData.title}</h1>
-                </div>
+                {/* <div className='rmDetails'>
+                    <h1 className='rmTitle'>{readableData.title}</h1>
+                    <p>{readableData.description}</p>
+                </div> */}
+                <DescriptionBanner
+                    descriptionDataPro={this.state.readableData}
+                    ref={divElement => (this.divElement = divElement)}
+                />
             </div>
         );
     }
