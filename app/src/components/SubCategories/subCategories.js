@@ -30,12 +30,14 @@ class SubCategoriesArray extends React.Component {
     }
     render() {
         const { subCatImg } = this.state;
+        const catClass = this.props.subCategoryArray.length > 6 ? 'catLongList' : 'catList';
         return (
             <div className='catNav' ref={this.setRef} >
                 {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
                     <img src={subCatImg} className='subCatImg' alt='Sub Cat Img' />
                 </div>}
-                <ul className='catList'>
+                
+                <ul className={catClass}>
                     {this.props.subCategoryArray.map((subCategoryData, index) => {
                         var routePath = '';
                         if (subCategoryData.categoryName === 'Tables') {
@@ -49,7 +51,7 @@ class SubCategoriesArray extends React.Component {
                         }
                         return (
                             <li className='subCatList' key={`subCat-${index}`} onMouseOver={this.handleMouseOver.bind(this, subCategoryData)} onMouseOut={this.handleMouseOut.bind(this)}>
-                            <Link to={routePath} className='subCatLink'>
+                            <Link to={routePath} className='links'>
                                 {/* <a href={subCategoryData.onClickUrl}> */}
                                     {subCategoryData.categoryName}
                                 {/* </a> */}
@@ -64,36 +66,3 @@ class SubCategoriesArray extends React.Component {
 }
 
 export default SubCategoriesArray;
-// const SubCategoriesData = (props) => {
-//     return (
-//         <div className='test'>
-//             <div className='subCatImage'>
-//                 <img src={subCategoryData.fullImage} className='subCatImg' alt='Sub Cat Img' />
-//             </div>
-//             <ul className='catNav'>
-//                 {props.subCategoryArray.map((subCategoryData, index) => {
-//                     var routePath = '';
-//                     if (subCategoryData.categoryName === 'Tables') {
-//                         routePath = '/plp/12540';
-//                     }
-//                     else if (subCategoryData.categoryName === 'Sofas') {
-//                         routePath = '/plp/13502';
-//                     }
-//                     else {
-//                         routePath = '/plp/13506';
-//                     }
-//                     return (
-//                         <li className='subCatList' key={`subCat-${index}`} onMouseOver={this.handleMouseOver.bind(this, subCategoryData)}>
-//                         <Link to={routePath} className='subCatLink'>
-//                             {/* <a href={subCategoryData.onClickUrl}> */}
-//                                 {subCategoryData.categoryName}
-//                             {/* </a> */}
-//                             </Link>
-//                         </li>
-//                     )
-//                 })}
-//             </ul>
-//         </div>
-//     );
-// }
-

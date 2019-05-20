@@ -35,33 +35,30 @@ class Category extends React.Component {
     this.getHeaderLayer2();
   }
 
-  render() {
-    const { category = [] } = this.state;
-    return (
-      <div className="category">
-        <ul className="categoryList">
-          {!!category &&
-            category.map((categoryData, index) => (
-              <li className="listItems" key={`category-${index}`}>
-                <a className="action" href={categoryData.onClickUrl}>
-                  {categoryData.categoryName}
-                </a>
-                {!!categoryData.subCategoryArray && (
-                  <SubCategoriesData
-                    subCategoryArray={categoryData.subCategoryArray}
-                  />
-                )}
-                {/* {!!categoryData.subCategoryArray && <SubCatImg
+    render() {
+        const { category = [] } = this.state;
+        return (
+            <div className='category'>
+                <ul className='categoryList'>
+                    {!!category && category.map((categoryData, index) => {
+                            return (
+                                <li className='listItems' key={`category-${index}`}>
+									<a className='action' href={categoryData.onClickUrl}>
+										{categoryData.categoryName}
+									</a>
+                                    {!!categoryData.subCategoryArray && <SubCategoriesData
                                         subCategoryArray={categoryData.subCategoryArray}
-                                    />} */}
-              </li>
-            ))}
-        </ul>
-        <SearchBar />
-        <HeaderRight />
-      </div>
-    );
-  }
-}
+                                    />}
+								</li>
+                            );
+                        })
+                    }
+                </ul>
+                <SearchBar />
+                <HeaderRight />
+            </div>
+        );
+    }
+}  
 
 export default Category;

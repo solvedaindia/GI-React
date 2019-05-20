@@ -244,7 +244,10 @@ export class PlpContainer extends React.Component {
       .get(`${espotAPI}GI_Plp_Description`)
       .then(response => {
         // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
-        this.setState({ plpDescriptionData: response.data.data });
+		this.setState({ plpDescriptionData: response.data.data },
+			console.log('@@@@@Read More@@@@', response.data.data)
+		);
+		
       })
       .catch(error => {
         // console.log('PLPBannerrror---', error);s
