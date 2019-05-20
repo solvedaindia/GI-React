@@ -40,4 +40,8 @@ module.exports = Object.freeze({
   pdp: `${prodSearchResourceUrl}/{{storeId}}/productview/{{productId}}`,
   getPincode: `${prodWcsResourceUrl}/{{storeId}}/pincode/getpincode/{{userID}}`,
   storeDetails: `${prodWcsResourceUrl}/0/adminLookup?q=findByStoreIdentifier&storeIdentifier={{storeIdentifier}}`,
+  emiData: `${prodWcsResourceUrl}/{{storeId}}/emilcalculation/getallbankemidetails/{{sellingprice}}`,
+  minimumEmiValue: `${prodWcsResourceUrl}/{{storeId}}/emilcalculation/getminimumemidetails/{{sellingprice}}`,
+  associatedMultiplePromotion: `${prodWcsResourceUrl}/{{storeId}}/associated_promotion?qProductId={{productId}}&q=byProduct&qIncludeChildItems=true&profileName=IBM_catalogEntryDetailed`,
+  getCityAndState: `${prodWcsResourceUrl}/{{storeId}}/pincode/getCityState/{{pincode}}`,
 });

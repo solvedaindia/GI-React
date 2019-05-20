@@ -107,8 +107,6 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
             callback(null, wishlistJson);
           },
         );
-      } else {
-        callback(null, wishlistJson);
       }
     } else {
       callback(null, wishlistJson);

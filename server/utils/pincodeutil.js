@@ -1,5 +1,6 @@
 const origin = require('./origin');
 const constants = require('./constants');
+const headerutil = require('./headerutil');
 const originMethod = 'GET';
 const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
@@ -38,3 +39,37 @@ function getPincode(headers, userID, callback) {
     },
   );
 }
+
+module.exports.getCityAndState = function getStateAndCity(
+  pinCode,
+  headers,
+  callback,
+) {
+  if (!pinCode) {
+    logger.debug('GET City&State :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+
+  const originUrl = constants.getCityAndState
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', pinCode);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};

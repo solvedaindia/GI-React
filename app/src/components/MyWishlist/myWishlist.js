@@ -80,7 +80,7 @@ class MyWishlist extends React.Component {
     return (
       <div className="myWishlist">
         {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
-          {this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
+          	{this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
         </div>}
       </div>
     );
