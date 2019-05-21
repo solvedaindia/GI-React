@@ -73,6 +73,10 @@ class UserAccInfo extends React.Component {
     });
   }
 
+  onMyProfileClick = () => {
+    console.log('onMyProfileClick -- ', this)
+  }
+
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
     console.log('dkddd', getLoginCookie);
@@ -83,7 +87,7 @@ class UserAccInfo extends React.Component {
             <a className="dropDown">Hello User!</a>
           </li>
           <li className="listItem">
-            <a className="dropDown">My Profile</a>
+            <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
           </li>
           <li className="listItem">
             <a className="dropDown">My Orders</a>
@@ -102,11 +106,11 @@ class UserAccInfo extends React.Component {
           </li>
         </>
       )),
-      (this.state.loginStatus = (
-        <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
+        (this.state.loginStatus = (
+          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
             Sign Out
         </a>
-      ));
+        ));
     } else {
       (this.state.userType = (
         <li className="listItem">
@@ -114,14 +118,14 @@ class UserAccInfo extends React.Component {
         </li>
       )),
         (this.state.loginStatus = (
-        <a
-          className="dropDown"
-          onClick={this.onLoginRegisterClick.bind(this)}
-        >
-          {' '}
+          <a
+            className="dropDown"
+            onClick={this.onLoginRegisterClick.bind(this)}
+          >
+            {' '}
             Login/Register
         </a>
-      ));
+        ));
     }
   }
 

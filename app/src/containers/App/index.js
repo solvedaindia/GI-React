@@ -37,6 +37,7 @@ import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
+import MyAccount from '../../containers/MyAccountContainer/index';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -144,6 +145,7 @@ export default class App extends React.Component {
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
           <Route path="/wishlist" component={MyWishlist} />
+          <Route path="/myAccount" component={MyAccount} />
         </Switch>
         <FooterContainer />
       </div>
