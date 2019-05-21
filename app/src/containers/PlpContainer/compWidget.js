@@ -14,6 +14,7 @@ import * as actionCreators from './actions';
 import CompItem from '../../components/PlpComponent/compItem';
 
 import plus from '../../../public/images/plusIcon.svg';
+import { Route, NavLink, Link } from 'react-router-dom';
 
 export class CompContainer extends React.Component {
   constructor(props) {
@@ -66,10 +67,10 @@ export class CompContainer extends React.Component {
               <ul className="compareProducts">
                 {this.buildData()}
                 {this.props.compData.length > 0 ? <li className="list">
-                    <button className="btn-compare">
+                    <Link to="/compare" className="btn-compare">
                       Compare {this.props.compData.length}
                       /3
-                    </button>
+                    </Link>
                     <button className="btn-clearall" onClick={this.clearAll}>
                       Clear All
                     </button>

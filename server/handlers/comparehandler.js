@@ -14,7 +14,7 @@ module.exports.getCompareData = function getCompareData(req, callback) {
     }
     console.log(req.query, "this is query");
     const reqHeaders = req.headers;
-    const ids = JSON.parse(req.query.ids);
+    const ids = req.query.ids.split(',');
   
     compareUtil.getCompareProducts(reqHeaders, ids, (err, result) => {
       if (err) {

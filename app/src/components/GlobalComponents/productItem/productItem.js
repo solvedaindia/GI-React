@@ -18,7 +18,7 @@ class ProductItem extends React.Component {
     const product = {
       title: this.props.data.productName,
       thumbnail: this.props.data.thumbnail,
-      id: this.props.data.uniqueID,
+      id: this.props.data.parentUniqueID,
       actualPrice: this.props.data.actualPrice,
       offerPrice: this.props.data.offerPrice,
     };

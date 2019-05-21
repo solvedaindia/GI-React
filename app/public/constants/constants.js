@@ -99,6 +99,8 @@ export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
 export const pdpApi2 = `${secureHttp}://${host}:${port2}/api/v1/pdp/productDetails/`;
 
+/* Compare API */
+export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 export const catalog = 'SolvedaCommerceCatalogAssetStore';

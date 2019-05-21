@@ -34,6 +34,7 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
+import CompareContainer from '../comparePageContainer/index'
 import '../../../public/styles/app.scss';
 import client from '../../utils/apiManager';
 
@@ -148,6 +149,7 @@ export default class App extends React.Component {
           <Route path="/pdp/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
+          <Route path="/compare" component={CompareContainer} />
         </Switch>
         <FooterContainer />
       </div>
