@@ -22,7 +22,6 @@ export class ComparePageContainer extends React.Component {
     }
 
     componentDidMount() {
-      console.log(this.props, "these are props on compare page");
       this.callCompareApi();
     }
 
@@ -34,16 +33,31 @@ export class ComparePageContainer extends React.Component {
       axios.get(`${compareAPI}?ids=${ids}`, {
         headers: { store_id: '10151', access_token: accessToken }
       }).then(response => {
-        console.log(response.data, "response--")
         this.setState({data: response.data.data});
       }).catch(error => {
         console.log(error);
       })
     }
 
-    renderPrd() {
-      console.log(this.state, "state data in compcontainer")
-      return <CompPrd product={this.state.data[0].sKUs[0]}/>
+    renderPrd = () => {
+      console.log(this.props.compWidgetData, "frd---")
+      var prds = [];
+      this.state.data.forEach(data => {
+        var sku1 = data.sKUs.find(sKU => {
+          return sKU.uniqueID == this.props.compWidgetData[0].skuId;
+        });
+        if(sku1) {
+          console.log("sky1 found frd");
+          prds.push(sku1)
+        }
+        var sku2 = data.sKUs.find(sku => {
+          return sku.uniqueID == this.props.compWidgetData[1].skuId;
+        })
+        if(sku2) {
+          prds.push(sku2)
+        } 
+      })
+      return <CompPrd data={prds}/>
     }
 
     render() {

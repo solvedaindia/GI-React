@@ -5,31 +5,29 @@ import '../../../public/styles/compWidget.scss';
 
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
+import TopContainer from './topContainer'
 
-function CompPrd(props) {
-    console.log(props, "props in comp prd");
-  return (
-    <div className="col-md-4">
-      <div>
-        <img style={{width: '65%'}}
-          src={`https://192.168.0.36:8443${props.product.thumbnail}`}
-        />
-      </div>
+class CompPrd extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
 
-      <div className="textBox">
-        <h4 className="productName">{props.product.name} </h4>
-        <p>(With Locker, Mirror, OHU & Drawer) (Ivory Red Finish)</p>
-        <Price
-          actualPrice='20000'
-          offerPrice={props.product.price[1].value}
-        />
-        <p>EMI Starting from 399</p>
-        <hr/>
-        <button>Remove</button>
-        <Link to="#">View Product</Link>
-      </div>
-    </div>
-  );
+      }
+    }
+    renderProducts = () => {
+      var prds = [];
+      this.props.data.map(element => {
+        prds.push(<TopContainer product={element} />)
+      });
+      return prds;
+    }
+    render() {
+      return (
+        <div>
+          {this.renderProducts()}
+        </div>
+      );
+    }
 }
 
 export default CompPrd;
