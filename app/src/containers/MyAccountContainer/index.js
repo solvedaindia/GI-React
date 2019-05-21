@@ -39,21 +39,18 @@ export class MyAccountContainer extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="col-sm-6">
-          <h3>Left Tabs</h3>
-          <hr />
-          <div className="col-xs-3">
-
-            <ul className="nav nav-tabs tabs-left sideways">
-              <li className="active"><a href="#home-v" data-toggle="tab">Home</a></li>
+      <div class="container">
+        <div className="row">
+           <div className="col-xs-12 col-sm-3 col-md-3 myac-left-nav">
+            <ul className="nav nav-tabs">
+              <li><a href="#home-v" data-toggle="tab">Home</a></li>
               <li><a href="#profile-v" data-toggle="tab">Profile</a></li>
               <li><a href="#messages-v" data-toggle="tab">Messages</a></li>
               <li><a href="#settings-v" data-toggle="tab">Settings</a></li>
             </ul>
           </div>
 
-          <div className="col-xs-9">
+          <div className="col-xs-12 col-sm-9 col-md-9">
 
             <div className="tab-content">
               <div className="tab-pane active" id="home-v">home tab</div>
@@ -62,13 +59,8 @@ export class MyAccountContainer extends React.Component {
               <div className="tab-pane" id="settings-v">Settings Tab.</div>
             </div>
           </div>
-
-          <div className="clearfix"></div>
-
         </div>
-
-
-      </>
+        </div>
     );
   }
 }
