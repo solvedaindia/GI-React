@@ -105,6 +105,8 @@ export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ad
 export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/minicart`;
 /* MyWishlist API */
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
+/* Change Password API */
+export const changePasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/changepassword`;
 
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';

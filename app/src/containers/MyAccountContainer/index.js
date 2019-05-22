@@ -26,6 +26,7 @@ import {
   plpSubCatAPI,
 } from '../../../public/constants/constants';
 import '../../../public/styles/myAccount/myAccount.scss';
+import ChangePassword from '../../components/MyAccountComponents/ChangePassword/changePassword';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {
@@ -43,20 +44,27 @@ export class MyAccountContainer extends React.Component {
         <div className="row">
            <div className="col-xs-12 col-sm-3 col-md-3 myac-left-nav">
             <ul className="nav nav-tabs">
-              <li><a href="#home-v" data-toggle="tab">Home</a></li>
-              <li><a href="#profile-v" data-toggle="tab">Profile</a></li>
-              <li><a href="#messages-v" data-toggle="tab">Messages</a></li>
-              <li><a href="#settings-v" data-toggle="tab">Settings</a></li>
+              <li><a href="#profile-v" data-toggle="tab">My Profile</a></li>
+              <li><a href="#changePassword-v" data-toggle="tab">Change Password</a></li>
+              <li><a href="#myOrder-v" data-toggle="tab">My Orders</a></li>
+              <li><a href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
+              <li><a href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
+              <li><a href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
+              <li><a href="#notifications-v" data-toggle="tab">Notifications</a></li>
+              <li><a href="#customercare-v" data-toggle="tab">Customer Care</a></li>
             </ul>
           </div>
 
           <div className="col-xs-12 col-sm-9 col-md-9">
-
             <div className="tab-content">
-              <div className="tab-pane active" id="home-v">home tab</div>
-              <div className="tab-pane" id="profile-v">Profile Tab.</div>
-              <div className="tab-pane" id="messages-v">Messages Tab.</div>
-              <div className="tab-pane" id="settings-v">Settings Tab.</div>
+              <div className="tab-pane active" id="profile-v">Profile tab</div>
+              <div className="tab-pane" id="changePassword-v"><ChangePassword/></div>
+              <div className="tab-pane" id="myOrder-v">My Order Tab.</div>
+              <div className="tab-pane" id="manageAddresses-v">Manage Adress Tab.</div>
+              <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
+              <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>
+              <div className="tab-pane" id="notifications-v">Notifications Tab.</div>
+              <div className="tab-pane" id="customercare-v">Customer Care Tab.</div>
             </div>
           </div>
         </div>
