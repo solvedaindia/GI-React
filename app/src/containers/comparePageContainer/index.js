@@ -8,6 +8,7 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import { compareAPI, storeId, accessToken } from '../../../public/constants/constants';
+import Link from 'react-router-dom/Link';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
@@ -64,8 +65,13 @@ export class ComparePageContainer extends React.Component {
       console.log(this.state.data);
       return (
         <div className="container">
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-12">
+            <Link to="#" className="back-btn">Go Back</Link>
+            </div>
+          </div>
           <h2>Compare Products {this.state.data.length}/3</h2>
-          {this.state.data ? this.renderPrd() : ''}
+          <div className="row compare-product-list">{this.state.data ? this.renderPrd() : ''}</div>
         </div>
       )
     }

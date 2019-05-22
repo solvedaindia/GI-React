@@ -110,3 +110,105 @@
 
 }
 
+.compare-product-list{
+    margin-bottom: 20px;
+    .comp-list-item{
+        padding:0px;
+        border-width: 1px 1px 1px 1px;
+        border-style: solid;
+        border-color: $borderLight $borderLight $borderLight $colorwhite;
+       
+        &:first-child{border-left: 1px solid $borderLight}
+        &:hover{
+            border: 1px solid $ceruleanblue;
+        }
+        .img-box{
+            padding:20px;
+            text-align: center;
+
+            img{
+                max-width: 100%;
+                max-height: 168px;
+            }
+        }
+        .remove-box{
+            border-top:1px solid $borderLight;
+            border-bottom:1px solid $borderLight;
+            padding: 10px;
+            text-align: center;
+
+            .remove-btn, .view-product-btn{
+                border:0px; 
+                background: none;
+                margin: 0px 20px;
+                font-size: 12px;
+                outline: 0;
+            }
+            .remove-btn{
+                color: $colorgrey;
+            }
+            .view-product-btn{
+                color: $ceruleanblue;                
+            }
+        }
+        .product-desc{
+            padding: 20px;
+            text-align: center;
+            .product-name{
+                font-family: $font-bold;
+                padding-top: 15px;
+                font-size: 14px;
+                text-transform: capitalize;
+            }
+            .description-text {
+                font-family: $font-light;
+                font-size: 11px;
+              }
+              .discount-price {
+                font-size: 18px;
+                font-family: $font-bold;
+                color: $cerulean;
+              }
+              .priceno-discount {
+                text-decoration: line-through;
+                text-decoration-color: $reddishpink;
+                font-family: $font-light;
+                padding-left: 15px;
+                font-size: 18px;
+              }
+            .discount-price{
+                padding-right: 10px;
+            }
+            .priceno-discount{
+                padding-left: 10px;
+            }
+            .emi-desc{
+                color: $reddishpink;
+                font-size: 12px;
+            }
+        }
+        .product-attr{
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            ul{
+                margin: auto;
+                li{
+                    float: left;
+                    padding: 5px 10px;
+                    a{
+                        display: inline-block; 
+                        width:30px; 
+                        height: 30px; 
+                        border-radius: 100%;
+                        border: 1px solid $borderLight;
+                    }
+                }
+            }
+        }
+        .back-btn:after {
+            content: "←";
+        }
+    }
+}
+
