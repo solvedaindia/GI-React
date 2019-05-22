@@ -41,14 +41,12 @@ export class ComparePageContainer extends React.Component {
     }
 
     renderPrd = () => {
-      console.log(this.props.compWidgetData, "frd---")
       var prds = [];
       this.state.data.forEach(data => {
         var sku1 = data.sKUs.find(sKU => {
-          return sKU.uniqueID == this.props.compWidgetData[0].skuId;
+          return sKU.uniqueID == this.props.compWidgetData[2].skuId;
         });
         if(sku1) {
-          console.log("sky1 found frd");
           prds.push(sku1)
         }
         var sku2 = data.sKUs.find(sku => {
@@ -56,13 +54,20 @@ export class ComparePageContainer extends React.Component {
         })
         if(sku2) {
           prds.push(sku2)
+        }
+        if(this.props.compWidgetData.length > 2) {
+          var sku3 = data.sKUs.find(sku => {
+            return sku.uniqueID == this.props.compWidgetData[0].skuId
+          })
+          if(sku3) {
+            prds.push(sku3);
+          }
         } 
       })
       return <CompPrd data={prds}/>
     }
 
     render() {
-      console.log(this.state.data);
       return (
         <div className="container">
           <div className="row">
