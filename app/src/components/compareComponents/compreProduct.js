@@ -15,9 +15,10 @@ class CompPrd extends React.Component {
       }
     }
     renderProducts = () => {
+      console.log(this.props, "this is remove function")
       var prds = [];
       this.props.data.map(element => {
-        prds.push(<TopContainer product={element} />)
+        prds.push(<TopContainer product={element} remove={this.props.remove} count={this.props.data.length} />)
       });
       return prds;
     }
@@ -77,9 +78,11 @@ class CompPrd extends React.Component {
     renderSpecs = () => {
       var specs = [];
       this.props.data[0].attributes.map((att, index) => {
-        var second_att = this.props.data[1].attributes.find(s_att => {
-          return s_att.uniqueID == att.uniqueID
-        })
+        if(this.props.data.length > 1) {
+          var second_att = this.props.data[1].attributes.find(s_att => {
+            return s_att.uniqueID == att.uniqueID
+          })
+        }
         if(this.props.data.length > 2) {
           var third_att = this.props.data[2].attributes.find(t_att => {
             return t_att.uniqueID == att.uniqueID
@@ -92,10 +95,10 @@ class CompPrd extends React.Component {
             </div>
  
             <div className="col-md-4">
-              {second_att ? <p>{second_att.value}</p> : 'NA'}
+              {this.props.data.length > 1 ? second_att ? <p>{second_att.value}</p> : 'NA' : ''}
             </div>
             <div className="col-md-2">
-              {third_att ? <p>{third_att.value}</p> : 'NA'}
+              {this.props.data.length > 2 ? third_att ? <p>{third_att.value}</p> : 'NA' : ''}
             </div>
           </div>
         )

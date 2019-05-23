@@ -5,10 +5,19 @@ import '../../../public/styles/compWidget.scss';
 
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
+import { RemoveProduct } from '../../containers/PlpContainer/actions';
 
 function TopContainer(props) {
-    console.log(props, "props in comp prd");
-    
+    console.log(props, "props in top container");
+
+    function removePrd() {
+      console.log("remove prd called");
+      if(props.count == 2) {
+        alert("Cannot remove Product. Need atleast two products to compare");
+      } else {
+        props.remove(props.product.uniqueID)
+      }
+    }
   return (
     <div className="col-md-4 comp-list-item">
     <div className="img-box">
@@ -26,7 +35,7 @@ function TopContainer(props) {
     </div> 
 
     <div className="remove-box">
-      <button className="remove-btn">Remove</button>
+      <button className="remove-btn" onClick={removePrd}>Remove</button>
       <Link to="#" className="view-product-btn">View Product</Link>
     </div> 
 

@@ -21,6 +21,7 @@ export class CompContainer extends React.Component {
     super(props);
     this.buildData = this.buildData.bind(this);
     this.clearAll = this.clearAll.bind(this);
+    this.handleGoToCompare = this.handleGoToCompare.bind(this);
     this.state = {};
   }
 
@@ -38,7 +39,7 @@ export class CompContainer extends React.Component {
     if (this.props.compData.length > 0) {
       this.props.compData.forEach(element => {
         data.push(
-          <CompItem product={element} remove={this.props.removeProduct} />,
+          <CompItem product={element} remove={this.props.removeProduct} />
         );
       });
     }
@@ -53,6 +54,12 @@ export class CompContainer extends React.Component {
     return data;
   }
 
+  handleGoToCompare(e) { 
+      if(this.props.compData.length < 2) {
+        e.preventDefault();
+        alert('Please add at least two products to compare');
+      }
+  }
   clearAll() {
     this.props.removeAll();
   }
@@ -67,7 +74,7 @@ export class CompContainer extends React.Component {
               <ul className="compareProducts">
                 {this.buildData()}
                 {this.props.compData.length > 0 ? <li className="list">
-                    <Link to="/compare" className="btn-compare">
+                    <Link to="/compare" className="btn-compare" onClick={(e) => this.handleGoToCompare(e)}>
                       Compare {this.props.compData.length}
                       /3
                     </Link>
