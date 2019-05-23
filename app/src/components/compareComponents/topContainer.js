@@ -36,7 +36,7 @@ function TopContainer(props) {
 
     <div className="remove-box">
       <button className="remove-btn" onClick={removePrd}>Remove</button>
-      <Link to="#" className="view-product-btn">View Product</Link>
+      <Link to={`/pdp/${props.product.uniqueID}`} className="view-product-btn">View Product</Link>
     </div> 
 
     <div className="product-attr">
