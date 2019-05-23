@@ -72,7 +72,7 @@ class productDefAttribute extends React.Component {
 									name = value.name;
 								}
 								
-								radioButtonHtml = <div style={colorStyle} className={circle}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches)}{name}</div>
+								radioButtonHtml = <div style={colorStyle} className={circle}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches)}</div>
 
 								return(
 									<li className='attributeList' key={index}>

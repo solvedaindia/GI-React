@@ -1,11 +1,8 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  pdpApi,
   pdpApi2,
-  espotAPI,
-  storeId,
-  accessToken,
+  espotAPI
 } from '../../../public/constants/constants';
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
 
@@ -74,7 +71,7 @@ class PdpContainer extends React.Component {
               data={this.state.pdp.data}
               skuId={this.props.match.params}
               espot={this.state.pdpEspot}
-              historyData={this.props.history}   
+              historyData={this.props.history}
             />
         )}
       </div>

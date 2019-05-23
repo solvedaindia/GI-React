@@ -1,10 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
+
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import {
-	bankEmiApi,
-	storeId,
-	accessToken,
+	bankEmiApi
   } from '../../../public/constants/constants';
 
 class EmiInfo extends React.Component {
@@ -35,9 +34,8 @@ class EmiInfo extends React.Component {
 	}
 
 	callBankEmiApi() {
-		axios.get(bankEmiApi + this.props.price, {
-			headers: { store_id: storeId, access_token: accessToken },
-		}).then(response => {
+		apiManager.get(bankEmiApi + this.props.price)
+		.then(response => {
 			this.setState({
 				bankDetails: response.data,
 			  	loading: false,
