@@ -29,22 +29,22 @@ class CompPrd extends React.Component {
       var Depth = [];
       this.props.data.map((elem, index) => {
         weights.push(
-            <div className="col-md-4">
-              {index == 0 ? <p>Weight<span>80 cm</span></p> : <p>80 cm</p>}
+            <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4' : "col-md-2"}>
+              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">80 cm</span></div> : <p>80 cm</p>}
             </div>)
         heights.push(
-          <div className="col-md-4">
-              {index == 0 ? <p>Height<span>120 cm</span></p> : <p>120 cm</p>}
+          <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4' : "col-md-2"}>
+              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">120 cm</span></div> : <p>120 cm</p>}
             </div>)
         Depth.push(
-          <div className="col-md-4">
-              {index == 0 ? <p>Depth<span>100 cm</span></p> : <p>100 cm</p>}
+          <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4' : "col-md-2"}>
+              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">100 cm</span></div> : <p>100 cm</p>}
             </div>)
       })
 
-      dims.push(<li className="container">{weights}</li>)
-      dims.push(<li className="container">{heights}</li>)
-      dims.push(<li className="container">{Depth}</li>)
+      dims.push(<div className="row">{weights}</div>)
+      dims.push(<div className="row">{heights}</div>)
+      dims.push(<div className="row">{Depth}</div>)
 
       return dims;
     }
@@ -52,13 +52,13 @@ class CompPrd extends React.Component {
     renderImages = () => {
       var images = [];
       this.props.data.map(elem => {
-        images.push(<div className="col-md-4 comp-list-item">
-        <div className="img-box">  
-        <img src={`https://192.168.0.36:8443${elem.thumbnail}`} />
-        </div>
-      </div>)
+        images.push(
+          <div className="col-md-4 comp-list-item">
+              <div className="img-box">  
+              <img src={`https://192.168.0.36:8443${elem.thumbnail}`} />
+              </div>
+        </div>)
       })
-
       return images;
     }
 
@@ -66,7 +66,7 @@ class CompPrd extends React.Component {
       var payments = [];
       this.props.data.map(elem => {
         payments.push(
-          <div className="col-md-4">
+          <div className="col-md-4 comp-cod-option text-center">
             <h4>COD available</h4>
           </div>
         )
@@ -86,17 +86,18 @@ class CompPrd extends React.Component {
           })
         }
         specs.push(
-          <li className="container">
-            <div className="col-md-4">
-              <p>{att.name} <span>{att.value}</span></p>
+          <div className="row specifec-detail">
+            <div className="col-md-6 attr-details">
+              <span className="col-md-5">{att.name}</span> <span className="col-md-7">{att.value}</span>
             </div>
+ 
             <div className="col-md-4">
               {second_att ? <p>{second_att.value}</p> : 'NA'}
             </div>
-            <div className="col-md-4">
+            <div className="col-md-2">
               {third_att ? <p>{third_att.value}</p> : 'NA'}
             </div>
-          </li>
+          </div>
         )
       });
       return specs;
@@ -111,18 +112,18 @@ class CompPrd extends React.Component {
     }
     render() {
       return (
-        <div>
-          {this.renderProducts()}
+        <div className="compare-product-list">
+          <div className="row">{this.renderProducts()}</div>
           <h2>Delivery</h2>
-          {this.renderDelivery()}
+          <div className="row prod-delivery-slot">{this.renderDelivery()}</div>
           <h2>Dimensions</h2>
-          {this.renderImages()}
-          <ul>{this.renderDims()}</ul>
+          <div className="row">{this.renderImages()}</div>
+          <div className="dims-detail">{this.renderDims()}</div>
 
           <h2>Specifications</h2>
-          <ul>{this.renderSpecs()}</ul>
+          {this.renderSpecs()}
           <h2>Payment</h2>
-          {this.renderPayment()}
+          <div className="row">{this.renderPayment()}</div>
         </div>
       );
     }

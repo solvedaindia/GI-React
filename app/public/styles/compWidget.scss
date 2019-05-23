@@ -210,5 +210,32 @@
             content: "←";
         }
     }
+    .prod-delivery-slot{
+        background: $greybg;
+        padding: 17px 37px;
+    }
+    .dims-detail{
+        
+        &:nth-child(odd){background: $greybg}
+        .row:odd{background: $greybg}
+        .row:even{background: $colorwhite}
+        .attr-dims{
+            width:47%;
+        }
+    }
+    .specifec-detail{
+        .attr-details{
+            width:47%;
+        }
+    }
+    
+    .comp-cod-option{
+        padding: 20px;
+        border-width: 1px 1px 1px 1px;
+        border-style: solid;
+        border-color: $borderLight $borderLight $borderLight $colorwhite;
+       
+        &:first-child{border-left: 1px solid $borderLight}
+    }
 }
 

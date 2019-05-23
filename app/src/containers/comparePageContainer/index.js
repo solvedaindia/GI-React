@@ -76,7 +76,7 @@ export class ComparePageContainer extends React.Component {
             </div>
           </div>
           <h2>Compare Products {this.state.data.length}/3</h2>
-          <div className="row compare-product-list">{this.state.data ? this.renderPrd() : ''}</div>
+          {this.state.data ? this.renderPrd() : ''}
         </div>
       )
     }
