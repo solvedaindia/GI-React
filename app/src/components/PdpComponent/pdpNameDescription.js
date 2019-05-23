@@ -11,7 +11,6 @@ const pdpNameDescription = (props) => {
                     {props.productData.productName}
                 </h4>
                     {props.productData.shortDescription}<br/>
-                <div className='soldbyDealers'>sold by RMZ furniture Dealers</div>
             </div>
         </>    
     );

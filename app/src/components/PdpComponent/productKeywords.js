@@ -9,9 +9,11 @@ const productKeywords = props => (
         <h3 className="heading">More Items You May Like</h3>
         <ul className="keywordsList">
           {props.productKeywords.map((keywords, i) => (
-            <li className='list' key={i}>
+            <a href='#' key={i}>
+            <li className='list'>
               {keywords}
             </li>
+            </a>
           ))} 
         </ul>
         </div>

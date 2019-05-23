@@ -4,78 +4,128 @@ import ImageGallery from 'react-image-gallery';
 import { Player, BigPlayButton } from 'video-react';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
+import {
+	newMachineUrl,
+  	store,
+  	catalog,
+} from '../../../public/constants/constants';
 
 class purchaseGuide extends React.Component {
 	constructor() {
 		super();
-		this.videos = []
-		this.state = {
-			hide: '',
-		};
+		this.imagesAndVideos = []
+    	this.activeClass = '';
 	}
 
-		/* render Videos */
-		filterImagesAndVideos = videos => {
-
-			videos.map((data) => {
-				this.videos.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': data.thumbImagePath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+	/* render Videos */
+	filterImagesAndVideos = imagesAndVideos => {	
+		this.imagesAndVideos = [];	
+		imagesAndVideos.map((data) => {
+			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbImagePath}`;
+			const path = `${newMachineUrl}/${store}/${catalog}/${data.path}`;
+			
+			if (data.type === 'image') {
+				this.imagesAndVideos.push({'original': Path , 'thumbnail': thumbnailPath });
+			} else {
+				this.imagesAndVideos.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': path});
 			}
-			);
-		};
+		});
+	};
 
-			/* render video player */
+	/* display tab with data */
+	productDetailsTab(divId) {
+		const tabcontent = document.getElementsByClassName('purchaseGuideTabContent');
+		//const tabData = document.getElementsByClassName('purchaseGuideTabData');
+		const contentElement = document.getElementById(`purchaseGuidecontent_${divId}`);
+		const tabElement = document.getElementById(`purchaseGuideTab_${divId}`);
+
+		for (let i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].classList.remove('dataActive');
+			tabcontent[i].classList.remove('dataNotActive');
+			tabcontent[i].classList.add('dataNotActive');
+		}
+		contentElement.classList.remove('dataNotActive');
+		contentElement.classList.remove('dataActive');
+		contentElement.classList.add('dataActive');
+		tabElement.classList.add('active');
+	}
+
+	/* render video player */
 	renderVideoPlayer(event) {
 		return (
 			<div className='video-wrapper'>
-			    <Player src={event.videourl}>
-      				<BigPlayButton position="center" />
-    			</Player>
+				<Player src={event.videourl}>
+					<BigPlayButton position="center" />
+				</Player>
 			</div>
 		);
 	}
 
+	/* render tab data */
+	renderTabData() {
+		return(
+				this.props.purchaseGuide.map((tabData, index) => {
+				this.activeClass = 'active';
+				if (index > 0) {
+					this.activeClass = '';
+				}
+
+				return (
+					<a
+						key={index}
+						id={`purchaseGuideTab_${index}`}
+						className={`purchaseGuideTab purchaseGuideTabData ${this.activeClass}`}
+						onClick={() => this.productDetailsTab(index)}
+					>
+						{tabData.title}
+					</a>
+				);
+			})
+		);
+	}
+
+	/* render tab content */
+	renderTabContent() {
+		return(
+			this.props.purchaseGuide.map((contentData, index) => {
+				if (index > 0) {
+					this.activeClass = 'dataNotActive';
+				}
+				this.filterImagesAndVideos(contentData.values);
+				return (
+					<div 
+						id={`purchaseGuidecontent_${index}`}
+						className={`purchaseGuideTabContent ${this.activeClass}`} key={index}>
+						<ImageGallery 
+							showFullscreenButton={false}
+							items={this.imagesAndVideos}
+							showNav={true}
+							showPlayButton={false}
+						/>
+					</div>
+				);
+			})
+		);
+	}
+
 	render() {
-		this.videos = [];
-
-		this.filterImagesAndVideos(this.props.purchaseGuide);
-	return (      
-		<div>
-		<Row>
-          <Col md={12} sm={12} xs={12}>
-            <h3 className="heading">Purchase Guide</h3>
-          </Col>
-        </Row>
-		<Row>
-		<Col md={6} sm={12} xs={12}>
-            <div className="product_description">
-              {this.props.purchaseGuide.map((tabData, index) => {
-                this.activeClass = 'active';
-                if (index > 0) {
-                  this.activeClass = '';
-                }
-
-                return (
-                  <a
-                    key={index}
-                    id={`tab_${index}`}
-                    className={`tab tabData ${this.activeClass}`}
-                    onClick={() => this.productDetailsTab(index)}
-                  >
-                    {tabData.title}
-                  </a>
-                );
-              })}
-					<ImageGallery 
-								  showFullscreenButton={false}
-								  items={this.videos}
-								  showNav={true}
-								  showPlayButton={false}
-							  />
-            </div>
-          </Col>
-			</Row>
-		</div>
-	);
+		return (      
+			<>
+				<Row>
+					<Col md={12} sm={12} xs={12}>
+						<h3 className="heading">Purchase Guide</h3>
+					</Col>
+				</Row>
+				<Row>
+					<Col md={6} sm={12} xs={12}>
+						<div className="purchaseGuide_description">
+							{this.renderTabData()}
+							{this.renderTabContent()}
+						</div>
+					</Col>
+				</Row>
+			</>
+		);
 	}
 }
 

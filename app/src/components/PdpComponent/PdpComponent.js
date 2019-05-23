@@ -9,7 +9,7 @@ import ProductFeatures from './productFeatures';
 import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
-import SimilarProducts from './similarProducts';
+import SimilarCombosProducts from './similarAndCombosProducts';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 
@@ -56,7 +56,7 @@ class PdpComponent extends React.Component {
 			})
 		});
 
-		await this.setState({
+		this.setState({
 			selectedSku: skuDataArr,
 			isLoading: false,
 			skuData: resolvedSkuData,
@@ -79,8 +79,8 @@ class PdpComponent extends React.Component {
 		   });
 		   productSkuData = swatches;
 		}
-		this.props.historyData.push('/pdp/'+swatches[0].uniqueID);
 		this.getResolveSkuData(swatches[0].uniqueID);
+		this.props.historyData.push('/pdp/'+swatches[0].uniqueID);
 	}
 
 	/* handle selected swatches */
@@ -97,14 +97,14 @@ class PdpComponent extends React.Component {
 	render() {
 		const { isLoading } = this.state;
 		return (
-			<div className="galleryArea">
+			<div id="testData" className="galleryArea">
 				{!isLoading ? (
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">
 								<Productimageandvideo
 									imagesAndVideos={this.state.skuData.attachments}
-									ribbonText={this.state.skuData.ribbonText}
+									ribbonText={this.state.skuData.ribbon}
 									activeData={false}
 								/>
 							</div>
@@ -150,7 +150,10 @@ class PdpComponent extends React.Component {
 					</Row>
 					<Row>
 						{!isLoading ? (
-							<SimilarProducts similarProducts={this.state.skuData.similarProducts}/>
+							<SimilarCombosProducts 
+								similarProducts={this.state.skuData.similarProducts}
+								combos={this.state.skuData.combos}
+							/>
 						) : (
 							<div> Data is Loading..</div>
 						)}

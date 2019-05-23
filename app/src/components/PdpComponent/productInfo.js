@@ -28,9 +28,9 @@ class productInfo extends React.Component {
     return(
       <>
         <div className="price">
-                  <span className='actualprice text'>&#8377;{this.props.productData.actualPrice}</span>
-                  <span className='offerprice text'>&#8377;{this.props.productData.offerPrice}</span>
-          
+                <span className='offerprice text'>&#8377;{this.props.productData.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+                  <span className='actualprice text'>&#8377;{this.props.productData.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+                  
         </div>
         <div className="shippingCharge">
           Shipping Charges:{' '}
@@ -41,7 +41,7 @@ class productInfo extends React.Component {
         </div>
         <div className="accessories-offer">
                   <div className='offerbg text'> % </div>
-                  <div className='discount-off text'>{this.props.productData.discount} </div>
+                  <div className='discount-off text'>{this.props.productData.discount}% OFF & free accessories </div>
                   <a className='text viewOffer' role="button" onClick={this.toggleOffers.bind(this)}>View Offer</a>
           </div>
         
@@ -63,7 +63,7 @@ class productInfo extends React.Component {
                   <div className='text'>Starting from </div>
                   <div className='text bold'>रु {emidata} </div>                   
                   <div className='text'>per month</div>
-                  <div className='text emiinfo'><EmiInfo /></div>
+                  <div className='text emiinfo'><EmiInfo price={this.props.productData.offerPrice}/></div>
           </div>
     
        

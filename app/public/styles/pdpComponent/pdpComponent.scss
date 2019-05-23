@@ -117,15 +117,15 @@
         align-items: center;
         }       
         .actualprice{
+            color:$grey;
+            font-size: 18px;                 
+            text-decoration: line-through;
+            text-decoration-color:$reddishpink;
+        }
+        .offerprice{
             color:$cerulean;
             font-size:28px;
             margin:0 10px 0 0;
-        }
-        .offerprice{
-          color:$grey;
-          font-size: 18px;                 
-          text-decoration: line-through;
-          text-decoration-color:$reddishpink;
         }
     }
     .shippingCharge{
@@ -595,4 +595,29 @@
 {
     visibility: hidden;
 }
+.galleryArea .gallaryWrapper .image-gallery-slides {
+    max-height: unset;
+}
+
+.bankEmiList li {
+    display: inline-block;
+    padding: 8px;
+    width: 20%;
+    text-align: center;
+}
+
+.emiPlans a {
+    padding: 20px;
+    width: 20%;
+    text-align: center;
+}
+// POC for RGB
+.circle {
+    display: inline-block;
+    padding: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 25px;
+}
+
 

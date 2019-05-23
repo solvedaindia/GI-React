@@ -8,95 +8,85 @@ import {
   store,
   catalog,
 } from '../../../public/constants/constants';
-import { nbind } from 'q';
 
 class productImagesAndVideos extends React.Component {
 	constructor() {
 		super();
 		this.images = []
 		this.state = {
-			activeData: false
+			activeData: false,
+			gallery: null
 		}
 	}
 
 	componentDidMount() {
 		let contentElement = document.getElementsByClassName('image-gallery-thumbnails-container');
 		contentElement[0].classList.add('active');
-		let leftNav = document.getElementsByClassName('image-gallery-left-nav');
-		let rightNav = document.getElementsByClassName('image-gallery-right-nav');
-		leftNav[0].classList.add('dataNotActive');
-		rightNav[0].classList.add('dataNotActive');
+
+		this.setState({
+			gallery: <ImageGallery 
+			showFullscreenButton={true}
+			items={this.images}
+			showNav={false}
+			showPlayButton={false}
+			onClick={this.handleClick.bind(this)}
+		/>
+		})
 	}
 
 	componentWillReceiveProps() {
 		const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
-		
 		this.hideThumnailsOnFullScreen(fullscreenButton[0].classList.contains('active'));
 	}
 
-	async hideThumnailsOnFullScreen(isFullScreen) { //alert();
-		console.log(this.state.activeData, 'this.state.activeDatathis.state.activeData=='+isFullScreen);
-		//alert(isFullScreen, 'isFullScreen')
+	async hideThumnailsOnFullScreen(isFullScreen) { 
 		let thumbnailsContainer = document.getElementsByClassName('image-gallery-thumbnails-container');
-		let leftNav = document.getElementsByClassName('image-gallery-left-nav');
-		let rightNav = document.getElementsByClassName('image-gallery-right-nav');
 		
 		if (this.state.activeData === false && isFullScreen === true) {
+			this.filterImagesAndVideos(this.props.imagesAndVideos);
 			thumbnailsContainer[0].classList.remove('active');
 			thumbnailsContainer[0].classList.add('dataNotActive');
-			leftNav[0].classList.remove('dataNotActive');
-			leftNav[0].classList.add('active');
-			rightNav[0].classList.remove('dataNotActive');
-			rightNav[0].classList.add('active');
-		
-			await this.setState({
-				activeData: true
+
+			 this.setState({
+				activeData: true,
+				gallery: <ImageGallery 
+				showFullscreenButton={true}
+				items={this.images}
+				showNav={true}
+				showPlayButton={false}
+				onClick={this.handleClick.bind(this)}
+			/>
 			});
+
 		} else {
+			this.filterImagesAndVideos(this.props.imagesAndVideos);
 			thumbnailsContainer[0].classList.remove('dataNotActive');
 			thumbnailsContainer[0].classList.add('active');
-		
-			leftNav[0].classList.remove('active');
-			leftNav[0].classList.add('dataNotActive');
-			rightNav[0].classList.remove('active');
-			rightNav[0].classList.add('dataNotActive');
-			await this.setState({
-				activeData: false
+
+			 this.setState({
+				activeData: false,
+				gallery: <ImageGallery 
+				showFullscreenButton={true}
+				items={this.images}
+				showNav={false}
+				showPlayButton={false}
+				onClick={this.handleClick.bind(this)}
+			/>
 			});
 		}
 
 	}
 
-	/* render Images */
-	renderImages = allImages => {
-		allImages.map((images) => {
-			//this.images.push({'original': images.imageSrc, 'thumbnail': images.thumbnail});
-			const tt = images.imageSrc + '<a role="button">Hey</a>';
-			this.images.push({'renderItem': tt, 'thumbnail': images.thumbnail});
-		});
-		
-	};
-
 	/* render Videos */
-	renderVideos = allVideos => {
-		allVideos.map((video) => {
-			this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': video.thumbnail, 'videourl': video.videoSrc});
-		});
-		
-	};
-
-	/* render Videos */
-	filterImagesAndVideos = imagesAndVideos => { 
+	filterImagesAndVideos = (imagesAndVideos) => {
+		this.images = [];
 		imagesAndVideos.map((data, i) => {
+			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbnailPath}`;
 		if (data.type === 'image') {
-			if (i === 0) {
 				const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${data.fullImagePath}`;
-				const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbnailPath}`;
-			// this.state.images.push({'original': '/dfa2d48071fbc8a710760e9590f6290d.png' , 'thumbnail': '/dfa2d48071fbc8a710760e9590f6290d.png' });
-			this.images.push({'original': fullImagePath , 'thumbnail': fullImagePath });
-			}
+				this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
 		} else {
-			this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': data.thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+			this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
 			}
 		}
 		);
@@ -133,13 +123,15 @@ class productImagesAndVideos extends React.Component {
 			if(currWidth == 100) return false;
 			slides[i].children[0].children[0].style.width = (currWidth - 300) + "px";
 		   }
-		   //e.target.classList.contains('video-react-icon-fullscreen')
 		}
 	}
 
-	async handleClick(e) {
+	async handleClick(e) { 
+
+		 
 		if (e.target.nodeName === 'IMG' || e.target.classList.contains('video-react-icon-fullscreen') === true) {
-    		const btnSubmitTags = document.getElementsByClassName('image-gallery-fullscreen-button');
+			console.log('chal be', this.props.ribbonText);
+			const btnSubmitTags = document.getElementsByClassName('image-gallery-fullscreen-button');
 			btnSubmitTags[0].click();
 		} else if (e.target.nodeName === 'VIDEO') {
 			const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
@@ -156,9 +148,7 @@ class productImagesAndVideos extends React.Component {
 	}
 
 	render() {
-		this.images = [];
 		this.filterImagesAndVideos(this.props.imagesAndVideos);
-			// Create a new element
 		return(
 			<div className='gallaryWrapper'>
 				<div className='featured-box'>
@@ -170,15 +160,9 @@ class productImagesAndVideos extends React.Component {
 					</span>
 					<span className='featured-text'>{this.props.ribbonText}</span>
 				</div>
-				<ImageGallery 
-					showFullscreenButton={true}
-					items={this.images}
-					showNav={true}
-					showPlayButton={false}
-					onClick={this.handleClick.bind(this)}
-				/>
-				<button onClick={this.zoomin}>+</button>
-				<button onClick={this.zoomout}>-</button>
+				{this.state.gallery}
+				{/* <button onClick={this.zoomin}>+</button>
+				<button onClick={this.zoomout}>-</button> */}
 			</div>
 		)
 		

@@ -1,5 +1,10 @@
 import React from 'react';
 import { Col,Row } from 'react-bootstrap';
+import {
+	newMachineUrl,
+	store,
+  	catalog,
+} from '../../../public/constants/constants';
 
 class productFeatures extends React.Component {
   constructor() {
@@ -44,21 +49,15 @@ class productFeatures extends React.Component {
               this.dataClass = 'dataNotActive';
             }
 
-            let imgPath = '';
-            if (index % 2 === 0) {
-              imgPath =
-                'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
-            } else {
-              imgPath =
-                'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
-            }
+            const fullImagePath = `${newMachineUrl}/${store}/${catalog}${imagePath.imagePath}`;
+
             return (
               <div
                 id={`featureImage_${index}`}
                 key={index}
                 className={`featureImages ${this.dataClass}`}
               >
-                <img src={imgPath} />
+                <img src={fullImagePath} />
               </div>
             );
           })}
@@ -69,7 +68,7 @@ class productFeatures extends React.Component {
           {this.props.productFeature.map((featureData, i) => (
             <li className='list' key={i}>
               <a className='link' role="button" onClick={this.showFeatureImage.bind(this, i)}>
-                <h3 className="heading">{featureData.name}</h3>
+                <h3 className="heading">{featureData.title}</h3>
                 {featureData.description}
               </a>
             </li>

@@ -15,7 +15,7 @@ class productDefAttribute extends React.Component {
 	}
 
 	/* get radio button html */
-	getRadioButtonHtml(radioName, radioValue, isChecked, count, selectedSwatches) { 
+	getRadioButtonHtml(radioName, radioValue, isChecked, count, selectedSwatches) {
 		let radioButtonHtml;
 		let isDisabled = false;
 		
@@ -23,7 +23,7 @@ class productDefAttribute extends React.Component {
 			isDisabled = true;
 		}
 		
-		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName}  id={`radio`+count} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={isChecked}/>
+		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')}  id={`radio`+count} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={isChecked}/>
 		return radioButtonHtml;
 	}
 
@@ -50,6 +50,10 @@ class productDefAttribute extends React.Component {
 								let radioButtonHtml;
 								let name = '';
 								let imgUrl = '';
+								let colorStyle = {
+									display: "block"
+								}
+								let circle = 'display:block';
 			
 								if (this.props.selectedAttribute[i].values[0].name === value.name) {
 									checkedType = true;
@@ -57,14 +61,18 @@ class productDefAttribute extends React.Component {
 								
 								if (value.colorCode) {
 									name = value.colorCode;
+									circle = 'circle';
+									colorStyle = {
+										backgroundColor: `rgb${name}`
+									};
 								} else if(value.facetImage) {
-									imgUrl = newMachineUrl+value.facetImage;
+									imgUrl = value.facetImage;
 									name = <img src={imgUrl} />; 
 								} else {
 									name = value.name;
 								}
 								
-								radioButtonHtml = <div>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches)}{name}</div>
+								radioButtonHtml = <div style={colorStyle} className={circle}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches)}{name}</div>
 
 								return(
 									<li className='attributeList' key={index}>
@@ -82,6 +90,7 @@ class productDefAttribute extends React.Component {
 	render() {
 		const selectedSwatches = this.getSelectedSwatches();
 		const makeRadioButton = this.makeRadioButton(selectedSwatches);
+
 		return (
 			<div>
 				{makeRadioButton}
