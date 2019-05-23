@@ -68,7 +68,7 @@ export function updatetWishListCount(count) {
 }
 
 export function updatetMinicart(count) {
-  console.log('Its updated MiniCart')
+  console.log('Its updated MiniCart', count)
   return {
     type: UPDATE_MINICART,
     count,

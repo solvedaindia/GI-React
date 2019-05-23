@@ -55,6 +55,7 @@ export function getUpdatedMinicartCount(minicart) {
   .get(cartCountApi)
   .then(response => {
     const count = response.data.data.cartTotalQuantity;
+    console.log('mini coun --- ',count);
     minicart.props.updatetMinicart(count);
     //return count;
   })

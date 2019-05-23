@@ -2,6 +2,8 @@ import React from 'react';
 import { Col, Button } from 'react-bootstrap';
 import EmiInfo from './emiInfo';
 import ProductDefAttriutes from './productdefAttributes';
+import AddToCart from './addToCart';
+
 
 class productInfo extends React.Component {
   constructor() {
@@ -93,12 +95,7 @@ class productInfo extends React.Component {
           <a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
         </div>
 
-        <div className="addCart">
-          <Button className="btn">-</Button>
-                  <input className='btn' type='text' readOnly value='1' />
-          <Button className="btn">+</Button>
-                  <Button className="btn addcartbtn">Add to Cart</Button>
-        </div>
+        <AddToCart />
       </>
     );
   }
