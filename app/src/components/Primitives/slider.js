@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import Slider from 'react-slick';
+import apiManager from '../../utils/apiManager';
 // import BannerData from '../../data/BannerData.json';
 import '../../../public/styles/slider.scss';
 import {
@@ -20,10 +20,8 @@ class FullBanner extends React.Component {
   }
 
   getSliderData() {
-    axios
-      .get(heroSliderAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(heroSliderAPI)
       .then(response => {
         this.setState({
           heroSlider: response.data.data.bannerList,
@@ -38,6 +36,7 @@ class FullBanner extends React.Component {
         });
         console.log('SLider Data Error');
       });
+    console.log('SLider Data Error');
   }
 
   componentDidMount() {

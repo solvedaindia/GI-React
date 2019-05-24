@@ -9,7 +9,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
@@ -35,7 +35,9 @@ import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import CompareContainer from '../comparePageContainer/index'
+import CheckoutContainer from '../checkoutContainer/index'
 import '../../../public/styles/app.scss';
+import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 
 export default class App extends React.Component {
@@ -51,10 +53,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    client.get('/users').then((response) => {
-      console.log('Its success from API MANAGER');
-    });
-
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     window.addEventListener('resize', this.resize);
@@ -93,10 +91,8 @@ export default class App extends React.Component {
   }
 
   getNewsletterSubscriptionStatus() {
-    axios
-      .get(newsletterStatusAPI, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(newsletterStatusAPI)
       .then(response => {
         console.log(
           'Newsletter status: ',
@@ -150,6 +146,8 @@ export default class App extends React.Component {
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
           <Route path="/compare" component={CompareContainer} />
+          <Route path="/wishlist" component={MyWishlist} />
+          <Route path="/checkout" component={CheckoutContainer} />
         </Switch>
         <FooterContainer />
       </div>

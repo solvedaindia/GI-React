@@ -9,9 +9,9 @@ const Footerlinks = (props) => {
                     val.map((item, childindex) => {
                         return(
                             <div className='footerlink_wrpper' key={childindex}>
-                                <h3 className='heading'>
+                                <h5 className='heading'>
                                     {item.text}
-                                </h3>
+                                </h5>
                                 <ul>
                                     { item.children.map((litem, i) => {
                                         return (

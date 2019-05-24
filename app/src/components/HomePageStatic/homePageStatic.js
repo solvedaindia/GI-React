@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import '../../../public/styles/homePageStatic.scss';
 import WelcomeBack from '../WelcomeBack/index';
 import {
@@ -16,10 +16,8 @@ class HomePageStatic extends React.Component {
   };
 
   getHomePageData() {
-    axios
-      .get(homePageApi, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .get(homePageApi)
       .then(response => {
         this.setState({
           homePageData: response.data.data.GI_Homepage_Static_Content,

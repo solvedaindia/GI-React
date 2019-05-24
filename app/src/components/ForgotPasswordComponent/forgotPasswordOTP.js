@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { Button, Form, FormGroup, Label, Modal } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 import {
   generateOTPAPI,
   storeId,
@@ -55,10 +55,8 @@ class ForgotPasswordOTP extends React.Component {
       otp: this.state.inputText,
       forgot_password: 'true',
     };
-    axios
-      .post(validateOTPAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(validateOTPAPI, data)
       .then(response => {
         const nextComp = 'ForgotPasswordNewPassword';
         this.props.handlerPro(nextComp, null, this.state.inputText);
@@ -77,14 +75,12 @@ class ForgotPasswordOTP extends React.Component {
             showOTPTxtField: false,
             errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           });
-        }
-        else {
+        } else {
           this.setState({
             error: true,
             errorMessage,
           });
         }
-
       });
   }
 
@@ -101,21 +97,20 @@ class ForgotPasswordOTP extends React.Component {
       resend: 'true',
       forgot_password: 'true',
     };
-    axios
-      .post(generateOTPAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(generateOTPAPI, data)
       .then(response => {
-        const otpCount = response.data.data.otpCount
+        const otpCount = response.data.data.otpCount;
         if (otpCount === 3) {
           const nextComp = 'ForgotPasswordOTP';
           this.props.handlerPro(nextComp, null, null, false, true);
           this.setState({
             showOTPTxtField: false,
             error: true,
-            errorMessage: 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
+            errorMessage:
+              'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
             errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
-          })
+          });
         }
         const otpValue = response.data.data;
         alert(`OTP - ${otpValue.otpVal}`);
@@ -157,31 +152,29 @@ class ForgotPasswordOTP extends React.Component {
     let inputTxtField = null;
     let titleOTP = null;
     if (this.state.showOTPTxtField) {
-      titleOTP = <p className="text">
-        Enter OTP sent to your mobile number
-    </p>
+      titleOTP = <p className="text">Enter OTP sent to your mobile number</p>;
     }
 
     if (this.state.showOTPTxtField) {
-      inputTxtField = <input
-        onChange={this.handleInputChange.bind(this)}
-        type="number"
-        name="text"
-        id="exampleEmail"
-        className="form-control margin-none"
-        placeholder="Enter OTP"
-      />
+      inputTxtField = (
+        <input
+          onChange={this.handleInputChange.bind(this)}
+          type="number"
+          name="text"
+          id="exampleEmail"
+          className="form-control margin-none"
+          placeholder="Enter OTP"
+        />
+      );
     }
 
     let resendBtn = null;
-    if ( this.state.showOTPTxtField) {
-      resendBtn = <Button
-        onClick={this.resendOTP.bind(this)}
-        className="resend-otp"
-      >
-        Resend OTP
-    </Button>
-    }
+    if (this.state.showOTPTxtField) {
+      resendBtn = (
+        <Button onClick={this.resendOTP.bind(this)} className="resend-otp">
+          Resend OTP
+      </Button>
+      )}
 
     return (
       <div className={animeClass}>
@@ -195,9 +188,7 @@ class ForgotPasswordOTP extends React.Component {
               {resendBtn}
             </div>
           </FormGroup>
-          <FormGroup>
-
-          </FormGroup>
+          <FormGroup />
         </Form>
         <Button
           onClick={this.proceedBtnPressed.bind(this)}

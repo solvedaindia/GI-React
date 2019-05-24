@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { Button, Form, FormGroup } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 import {
   forgotPasswordAPI,
   storeId,
@@ -35,10 +35,10 @@ class ForgotPasswordNewPassword extends React.Component {
     if (!regexPw.test(this.state.inputText)) {
       let errorMsg;
       if (this.state.inputText.length > 25) {
-        errorMsg = 'Invalid Password. Password should not be more than 25 char'
-      }
-      else {
-        errorMsg = 'Invalid Password. Password should have min 6 characters and atleast 1 number'
+        errorMsg = 'Invalid Password. Password should not be more than 25 char';
+      } else {
+        errorMsg =
+          'Invalid Password. Password should have min 6 characters and atleast 1 number';
       }
 
       this.setState({
@@ -55,10 +55,8 @@ class ForgotPasswordNewPassword extends React.Component {
       otp: this.props.otpPro,
       new_password: this.state.inputText,
     };
-    axios
-      .post(forgotPasswordAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(forgotPasswordAPI, data)
       .then(response => {
         const passData = response.data.data;
         alert('Password changed successfully!');

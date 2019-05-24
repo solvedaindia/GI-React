@@ -8,11 +8,21 @@
         position: relative;
         .wishListCount {
             position: absolute;
-            top: 5px;
-            right: 18px;
+            top: -6px;
+            right: 0;
+            background:$reddishPink;
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            color: $colorwhite;
+            border-radius: 50%;
             font-size: $base*1.25;
-            color: $reddishpink;
-            font-family: $font-bold
+            font-weight: bold;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: $font-bold;
         }
     }
 }

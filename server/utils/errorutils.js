@@ -98,7 +98,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
-        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION'
+        errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
       ) {
         return {
           status_code: 400,
@@ -176,6 +177,20 @@ module.exports.handleWCSError = function handleWCSError(response) {
       ) {
         return errorlist.userid_invalid_format;
       }
+      if (errBody.errors[0].errorKey === 'ERR_NO_DATA_FOUND') {
+        return {
+          status_code: 400,
+          error_key: 'minimum_amount_for_emi',
+          error_message: 'Minimum amount to avail the EMI is INR 1500.',
+        };
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_PINCODE_DOES_NOT_EXIST') {
+        return {
+          status_code: 400,
+          error_key: 'invalid_pincode',
+          error_message: 'Not a valid pincode',
+        };
+      }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||
         errorlist.invalid_params
@@ -202,13 +217,14 @@ module.exports.handleWCSError = function handleWCSError(response) {
         error_message: errBody || '',
       };
     }
+    if (statusCode === 403) {
+      return {
+        status_code: 403,
+        error_key: errBody.errors[0].errorKey,
+        error_message: errBody.errors[0].errorMessage || '',
+      };
+    }
     return errorlist.invalid_params;
-  }
-  if (statusCode === 500) {
-    return (
-      wcsErrorList.error_500[errBody.errors[0].errorKey] ||
-      errorlist.invalid_params
-    );
   }
   return errorlist.wcs_invalid_response;
 };

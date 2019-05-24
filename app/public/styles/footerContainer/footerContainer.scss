@@ -4,6 +4,9 @@
 .footer{
  background:$colorblue;
  padding:70px 0;
+ .rightPadding {
+     padding-right:7%;
+ }
  .footerlink_wrpper{padding:0 0 20px 0}
  .logo_white{
      padding:0 15px 40px 15px;
@@ -16,7 +19,7 @@
  .newsletterList{
      padding:0 0 15px 0;
      li:first-child{
-        padding: 20px 0;
+        padding: 0 0 20px 0;
         font-style: italic;
         line-height: 0;
       
@@ -72,16 +75,22 @@
      opacity: 0.23;
      margin: 0;
      padding: 0 0 15px 0;
-     font-size: 22px;
+     font-size: 34px;
     }
     .news_heading{
         opacity: 1;
-        max-width: 183px;
-        padding: 0 0 30px 0;
-        line-height: 28px;
+        max-width: 78%;
+        padding: 0 0 33px 0;
+        line-height: 28px;  
+        font-size: 40px;
+        line-height: 44px;
     }
  .list{ 
-     color:$colorwhite;line-height: 2;
+     color:$colorwhite;
+     line-height: 2;
+     .newsletter-heading{
+         font-size: 28px;
+     }
      .link{
          color:$colorwhite;
          text-decoration: none;
@@ -90,17 +99,17 @@
  }
 
  .store_area{
-     
+    
      .list{
          display: inline-block;
          line-height: 12px;
+         
       .link{
         display: block;
         padding: 0 5px 0 0;
         border-right: 1px solid #dcd9d9;
         margin: 0 5px 13px 0;
-       
-         
+        
       }
        &:last-child { 
            .link{border-right: none; }
@@ -109,5 +118,26 @@
  }
  .categories_section{
      padding-left:40px;
+    }
+
+    .categoriestext{
+        margin:0;
+        padding:0;
+        font-size: 12px;
+        display: inline-block;
+        line-height: 12px;
+
+        .link{
+            display: block;
+            padding: 0 5px 0 0;
+            border-right: 1px solid #dcd9d9;
+            margin: 0 5px 13px 0;
+            
+          }
+          &:last-child{
+            .link{
+                border-right: none;
+            }
+          }
     }
 }

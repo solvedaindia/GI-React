@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { Button, Form, FormGroup, Label } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 import {
   generateOTPAPI,
   storeId,
@@ -71,10 +71,8 @@ class ForgotPasswordEmailMobile extends React.Component {
       user_id: this.state.inputText,
       forgot_password: 'true',
     };
-    axios
-      .post(generateOTPAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
+    apiManager
+      .post(generateOTPAPI, data)
       .then(response => {
         const otpValue = response.data.data;
         alert(`OTP - ${otpValue.otpVal}`);
