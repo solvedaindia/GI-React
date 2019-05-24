@@ -41,6 +41,10 @@ export class ComparePageContainer extends React.Component {
       })
     }
 
+    goBack = () => {
+      this.props.history.goBack();
+    }
+
     renderPrd = () => {
       var prds = [];
       var reverse_data = this.state.data.reverse();
@@ -76,7 +80,7 @@ export class ComparePageContainer extends React.Component {
         <div className="container compare-product">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 back-btn-box">
-            <Link to="#" className="back-btn">Go Back</Link>
+            <button to="#" className="back-btn" onClick={this.goBack}>Go Back</button>
             </div>
           </div>
           <div className="row"><h2 className="heading">Compare Products {this.state.data.length}/3</h2></div>

@@ -23,7 +23,13 @@ export class CheckoutContainer extends React.Component {
     render() {
       return (
         <div className="container">
-          <h2>This is checkout container</h2>
+          <h2>Checkout</h2>
+          <div className="col-md-8">
+            <h4>Left column</h4>
+          </div>
+          <div className="col-md-4">
+            <h4>Right column</h4>
+          </div>
         </div>
       )
     }
