@@ -1,10 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
-
 import { Button, Modal, Row, Col } from 'react-bootstrap';
-import {
-	bankEmiApi
-  } from '../../../public/constants/constants';
+import { bankEmiApi} from '../../../public/constants/constants';
 
 class EmiInfo extends React.Component {
 	constructor() {
@@ -33,19 +30,15 @@ class EmiInfo extends React.Component {
 		this.setState({ show: true });
 	}
 
+	/* call bank emi api */
 	callBankEmiApi() {
-		apiManager.get(bankEmiApi + this.props.price)
-		.then(response => {
+		apiManager.get(bankEmiApi + this.props.price).then(response => {
 			this.setState({
 				bankDetails: response.data,
 			  	loading: false,
 			});
 		}).catch(error => {
-			this.setState({
-			  	error: error.message,
-			  	loading: false,
-			});
-			console.log('Error =>', this.state.error);
+			console.log('Emi Info Error---', error);
 		});
 	}
 

@@ -55,7 +55,7 @@ class productImagesAndVideos extends React.Component {
 				showNav={true}
 				showPlayButton={false}
 				onClick={this.handleClick.bind(this)}
-			/>
+				/>
 			});
 
 		} else {
@@ -71,7 +71,7 @@ class productImagesAndVideos extends React.Component {
 				showNav={false}
 				showPlayButton={false}
 				onClick={this.handleClick.bind(this)}
-			/>
+				/>
 			});
 		}
 
@@ -103,34 +103,31 @@ class productImagesAndVideos extends React.Component {
 		);
 	}	
 
-	 zoomin(){
+	zoomin() {
+		var slides = document.getElementsByClassName("image-gallery-slide");
+			for(var i = 0; i < slides.length; i++)
+			{
+				if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
+					let currWidth = slides[i].children[0].children[0].clientWidth;
+					slides[i].children[0].children[0].style.width = (currWidth + 100) + "px";
+				}
+			}
+	}
+	
+	zoomout() {
 		var slides = document.getElementsByClassName("image-gallery-slide");
 		for(var i = 0; i < slides.length; i++)
 		{
-		   if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
-			let currWidth = slides[i].children[0].children[0].clientWidth;
-			slides[i].children[0].children[0].style.width = (currWidth + 100) + "px";
-		   }
-		   
-		}
-    }
-     zoomout(){
-		var slides = document.getElementsByClassName("image-gallery-slide");
-		for(var i = 0; i < slides.length; i++)
-		{
-		   if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
-			let currWidth = slides[i].children[0].children[0].clientWidth;
-			if(currWidth == 100) return false;
-			slides[i].children[0].children[0].style.width = (currWidth - 300) + "px";
-		   }
+			if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
+				let currWidth = slides[i].children[0].children[0].clientWidth;
+				if(currWidth == 100) return false;
+				slides[i].children[0].children[0].style.width = (currWidth - 300) + "px";
+			}
 		}
 	}
 
 	async handleClick(e) { 
-
-		 
 		if (e.target.nodeName === 'IMG' || e.target.classList.contains('video-react-icon-fullscreen') === true) {
-			console.log('chal be', this.props.ribbonText);
 			const btnSubmitTags = document.getElementsByClassName('image-gallery-fullscreen-button');
 			btnSubmitTags[0].click();
 		} else if (e.target.nodeName === 'VIDEO') {
@@ -152,7 +149,7 @@ class productImagesAndVideos extends React.Component {
 		return(
 			<div className='gallaryWrapper'>
 				<div className='featured-box'>
-					<span className="ribbon_star">
+					<span className='ribbon_star'>
 						<svg className="star_img" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
 						<path fill="#FFF" fillRule="evenodd" d="M7.021 11.073l4.339 2.282-.829-4.832L14.042 5.1l-4.851-.705L7.02 0l-2.17 4.396L0 5.1l3.51 3.422-.828 4.832z">
 						</path>

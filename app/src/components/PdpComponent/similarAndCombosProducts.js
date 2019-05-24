@@ -32,8 +32,8 @@ class SimilarCombosProducts extends React.Component {
 						<p className='heading text'>{data.productName}</p>
 				
 						<p className="price text">
-							<span className="discount-price">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-							<span className="priceno-discount">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							<span className="discount-price">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							<span className="priceno-discount">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
 						</p>
 						<p className='emi-text text'>
 							<span className='free-accessories'>EMI Starting from <span className='bold'>{data.emiData}</span></span>

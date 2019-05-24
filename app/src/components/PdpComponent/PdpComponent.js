@@ -48,7 +48,6 @@ class PdpComponent extends React.Component {
 	async getActualResolvedData(data, resolvedSkuData) {
 
 		const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
-		console.log('selectedValue===>>', data);
 		let skuDataArr = [];
 		data.map(skuLevelData => {
 			skuLevelData.defAttributes.map((attributeValue) => {
