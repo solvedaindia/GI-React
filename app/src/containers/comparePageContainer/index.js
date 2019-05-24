@@ -73,13 +73,13 @@ export class ComparePageContainer extends React.Component {
 
     render() {
       return (
-        <div className="container">
+        <div className="container compare-product">
           <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12">
+            <div className="col-xs-12 col-sm-12 col-md-12 back-btn-box">
             <Link to="#" className="back-btn">Go Back</Link>
             </div>
           </div>
-          <h2>Compare Products {this.state.data.length}/3</h2>
+          <div className="row"><h2 className="heading">Compare Products {this.state.data.length}/3</h2></div>
           {this.state.data ? this.renderPrd() : ''}
         </div>
       )
