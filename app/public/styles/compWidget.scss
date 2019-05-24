@@ -127,9 +127,9 @@
             padding:0px;
             border-width: 1px 1px 1px 1px;
             border-style: solid;
-            border-color: $borderLight $borderLight $borderLight $colorwhite;
+            border-color: $borderLight $borderLight $borderLight;
         
-            &:first-child{border-left: 1px solid $borderLight}
+            &:first-child{border-right: 1px solid $borderLight}
             &:hover{
                 border: 1px solid $ceruleanblue;
             }
@@ -217,9 +217,7 @@
                     }
                 }
             }
-            .back-btn:after {
-                content: "←";
-            }
+            
         }
         .prod-delivery-slot{
             background: $greybg;
