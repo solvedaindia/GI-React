@@ -10,7 +10,7 @@ function DelContainer(props) {
     
   return (
     <div className="col-md-4">
-        <h4>Delivery Between: <span>6th Jan - 10th Jan</span></h4>
+        Delivery Between: <strong>6th Jan - 10th Jan</strong>
     </div>
   );
 }
