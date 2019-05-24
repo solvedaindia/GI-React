@@ -69,7 +69,7 @@ class CartCount extends React.Component {
       true,
     );
     this.fetchMinicartDetails();
-    
+
     //this.getCartCount();
     getUpdatedMinicartCount(this)
     // this.setState({
@@ -87,7 +87,7 @@ class CartCount extends React.Component {
         isLoading: false,
       });
     }
-    
+
   }
 
   fetchMinicartDetails() {
@@ -123,7 +123,7 @@ class CartCount extends React.Component {
             key={i}
             className={`dropdown__list-item${
               i === this.state.selected ? '' : ''
-            }`}
+              }`}
           >
             <MinicartItem dataPro={option} />
             {/* {option} */}
@@ -144,7 +144,7 @@ class CartCount extends React.Component {
         <div
           className={`dropdown__list ${
             this.state.active ? 'dropdown__list--active' : ''
-          }`}
+            }`}
         >
           <>
             <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}

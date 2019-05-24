@@ -1,37 +1,65 @@
 @import "../variable.scss";
 
-
 .myWishlist {
-  padding:60px 0 0 0;
+  padding: 60px 0 0 0;
   .plpCategories {
-    .plp-products{
+    .plp-products {
       padding: 40px 0 60px 0;
     }
   }
-  
+
   .heading {
-    font-family:$font-bold;
+    font-family: $font-bold;
     font-size: 30px;
-    color:$cerulean;
-    margin:0;
-    
+    color: $cerulean;
+    margin: 0;
   }
 
   .emptyWishlist {
-    padding:30px 0 80px 0;
-    text-align: center;     
-    .heading-Wishlist {         
+    padding: 30px 0 80px 0;
+    text-align: center;
+    .heading-Wishlist {
       opacity: 0.45;
       font-size: 30px;
-      color:$black;
-      margin:0;
-      padding:0 0 12px 0;
+      color: $black;
+      margin: 0;
+      padding: 0 0 12px 0;
     }
-  
-    .subtext {    
-      font-size: 20px;        
-      color:$black;
-      margin:0;
+
+    .subtext {
+      font-size: 20px;
+      color: $black;
+      margin: 0;
+    }
+  }
+}
+
+//-------- Remove Wishlist -------
+.removeFromWishlist {
+  background: #000;
+  animation: wishlistPopupAnimation 0.5s ease-in-out 0s forwards;
+  padding: 16px 17px 16px 20px;
+  margin: -45px 205px 0 0;
+  width: 261px;
+  position: absolute;
+  right: 20px;
+
+  .wishlist-text,
+  .view-btn {
+    font-size: 12px;
+    color: $colorwhite;
+  }
+  .wishlist-text {
+    float: left;
+    display: block;
+  }
+
+  .view-btn {
+    float: right;
+    background: transparent;
+    border: none;
+    &:focus {
+      outline: none;
     }
   }
 }
