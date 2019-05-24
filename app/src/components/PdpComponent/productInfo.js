@@ -21,10 +21,11 @@ class productInfo extends React.Component {
 	  //console.log(this.props.productData, 'skuData---');
 	  //defAttributes
     let emidata = this.props.productData.emiData;
+    console.log(emidata, 'emidataemidataemidataemidata')
 
-    if (emidata === '') {
+    //if (emidata) {
       emidata = 599;
-    }
+    //}
     return(
       <>
         <div className="price">
