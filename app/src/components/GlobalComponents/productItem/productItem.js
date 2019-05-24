@@ -11,6 +11,7 @@ import apiManager from '../../../utils/apiManager';
 import { updatetMinicart } from '../../../actions/app/actions';
 import { connect } from 'react-redux';
 import { getUpdatedMinicartCount } from '../../../utils/initialManager';
+import Link from 'react-router-dom/Link';
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class ProductItem extends React.Component {
     this.state = {};
   }
 
-  handleClick() {
+  handleClick(e) {
+    e.preventDefault();
     const product = {
       title: this.props.data.productName,
       thumbnail: this.props.data.thumbnail,
@@ -85,16 +87,16 @@ class ProductItem extends React.Component {
             <Promotions data={this.props.data.promotionData} />
           </div>
         </div>
-        <div className="hoverBox">
+        <Link to={`/pdp/${this.props.data.uniqueID}`} className="hoverBox">
           <Wishlist
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
             history={this.props.history}
           />
-          <button className="btn-compare" onClick={this.handleClick}>
+          <button className="btn-compare" onClick={(e) => this.handleClick(e)}>
             Add to compare
           </button>
-        </div>
+        </Link>
       </li>
     );
   }
