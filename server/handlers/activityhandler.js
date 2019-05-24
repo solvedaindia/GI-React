@@ -65,6 +65,9 @@ function getRecommendedProducts(headers, activityName, callback) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
+  if (headers.category_id) {
+    activityName = `${activityName}/category/${headers.category_id}`;
+  }
   espotHandler.getEspotsData(headers, activityName, (err, result) => {
     if (err) {
       callback(err);

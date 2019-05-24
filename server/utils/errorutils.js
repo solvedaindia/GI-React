@@ -79,6 +79,11 @@ const errorlist = {
     error_key: 'userid_invalid_format',
     error_message: 'Please enter valid Email Id/Mobile number.',
   },
+  invalid_promocode: {
+    status_code: 400,
+    error_key: 'invalid_promocode',
+    error_message: 'Promo Code is Invalid',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -99,7 +104,10 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
         errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
-        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
+        errBody.errors[0].errorKey === '_ERR_GENERIC' ||
+        errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
+        errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY'
       ) {
         return {
           status_code: 400,
@@ -125,6 +133,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
+      }
+      if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_INVALID') {
+        return errorlist.invalid_promocode;
       }
       if (errBody.errors[0].errorKey === '_ERR_MISSING_CMD_PARAMETER') {
         return errorlist.invalid_params;

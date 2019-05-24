@@ -73,3 +73,36 @@ module.exports.getCityAndState = function getStateAndCity(
     },
   );
 };
+
+/* To Update Pincode in User's Self Address */
+module.exports.setDefaultPincode = updateDefaultPincode;
+function updateDefaultPincode(headers, pincode, callback) {
+  logger.debug('Call to update Default Pincode');
+  const pincodeUpdateURL = `${constants.updateDefaultPincode.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}`;
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  const reqBody = {
+    updatedZipcodeValue: pincode,
+    userId: headers.userId,
+  };
+
+  origin.getResponse(
+    'PUT',
+    pincodeUpdateURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, 'success');
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}

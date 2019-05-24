@@ -101,7 +101,7 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
               (error, productViewResult) => {
                 if (!error) {
                   subCatData.productCount =
-                    productViewResult.catalogEntryView.length || 0; // Product Count
+                    productViewResult.recordSetTotal || 0; // Product Count
                   cb(null, subCatData);
                 } else {
                   cb(error);

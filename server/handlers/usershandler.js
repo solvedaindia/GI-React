@@ -5,6 +5,13 @@ const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const profileFilter = require('../filters/profilefilter');
+const pincodeUtil = require('../utils/pincodeutil');
+
+const addressLength = {
+  field1: 100,
+  field2: 50,
+  field3: 50,
+};
 
 /**
  * Registeres User in WCS
@@ -188,7 +195,276 @@ module.exports.getUserAddress = function getUserAddress(headers, callback) {
     '',
     response => {
       if (response.status === 200) {
+        const resJson = {
+          addressList: [],
+        };
+        if (response.body.contact && response.body.contact.length > 0) {
+          response.body.contact.forEach(addressElement => {
+            resJson.addressList.push(profileFilter.userAddress(addressElement));
+          });
+        }
+        callback(null, resJson);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * This function will Delete User Address by Nick Name
+ */
+module.exports.deleteAddress = function deleteUserAddress(req, callback) {
+  logger.debug('Call to Delete User Address API');
+
+  if (!req.params.nickname) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const nickName = req.params.nickname;
+
+  const origindetailURL = `${constants.userContact.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  )}/${nickName}`;
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+  origin.getResponse(
+    'DELETE',
+    origindetailURL,
+    reqHeader,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
         callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * This function will Create User Address
+ */
+module.exports.createAddress = function createAddress(headers, body, callback) {
+  logger.debug('Call to Create User Address');
+
+  if (
+    !body.name ||
+    !body.pincode ||
+    !body.phone_number ||
+    !body.address ||
+    //body.address.length >
+    //  addressLength.field1 + addressLength.field2 + addressLength.field3 ||
+    !body.city ||
+    !body.state ||
+    !body.default
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqParams = body;
+
+  const origindetailURL = `${constants.userContact.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}`;
+
+  let firstname = '';
+  let lastname = '';
+  if (reqParams.name.indexOf(' ') > 0) {
+    firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
+    lastname = reqParams.name.substring(reqParams.name.indexOf(' ') + 1).trim();
+  } else {
+    firstname = reqParams.name;
+  }
+  const addressNickName = `${headers.userId}_${Date.now()}`;
+  const reqBody = {
+    contact: [
+      {
+        firstName: firstname,
+        lastName: lastname,
+        zipCode: reqParams.pincode,
+        phone1: reqParams.phone_number,
+        email1: reqParams.email_id,
+        addressLine: [],
+        city: reqParams.city,
+        state: reqParams.state,
+        primary: 'false',
+        nickName: addressNickName,
+      },
+    ],
+    userId: headers.userId,
+  };
+  if (reqParams.default === 'true') {
+    reqBody.contact[0].primary = 'true';
+  }
+  reqBody.contact[0].addressLine.push(reqParams.address);
+  /* const addressField1 = reqParams.address.substring(0, addressLength.field1);
+  const addressField2 =
+    reqParams.address.substring(
+      addressLength.field1,
+      addressLength.field1 + addressLength.field2,
+    ) || '';
+  const addressField3 =
+    reqParams.address.substring(
+      addressLength.field1 + addressLength.field2,
+      addressLength.field1 + addressLength.field2 + addressLength.field3,
+    ) || '';
+  reqBody.contact[0].addressLine.push(
+    addressField1,
+    addressField2,
+    addressField3,
+  ); */
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'POST',
+    origindetailURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200 || response.status === 201) {
+        const resJson = {
+          addressID: response.body.addressId,
+          nickName: addressNickName,
+        };
+        if (body.default && body.pincode && body.default === 'true') {
+          pincodeUtil.setDefaultPincode(headers, body.pincode, (err, res) => {
+            if (err) {
+              resJson.defaultPincodeUpdated = false;
+            } else {
+              resJson.defaultPincodeUpdated = true;
+            }
+            callback(null, resJson);
+          });
+        } else {
+          callback(null, resJson);
+        }
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * This function will Update User Address using Nick Name
+ */
+module.exports.updateAddress = function updateAddress(req, callback) {
+  logger.debug('Call to Update User Address');
+
+  if (!req.params.nickname) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const reqParams = req.body;
+  if (
+    !reqParams.name ||
+    !reqParams.pincode ||
+    !reqParams.phone_number ||
+    !reqParams.address ||
+    // reqParams.address.length >
+    //  addressLength.field1 + addressLength.field2 + addressLength.field3 ||
+    !reqParams.city ||
+    !reqParams.state ||
+    !reqParams.default
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const addressNickName = req.params.nickname;
+
+  const origindetailURL = `${constants.userContact.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  )}/${addressNickName}`;
+
+  const reqBody = {
+    zipCode: reqParams.pincode,
+    phone1: reqParams.phone_number,
+    email1: reqParams.email_id || '',
+    city: reqParams.city,
+    state: reqParams.state,
+    primary: reqParams.default,
+  };
+
+  if (reqParams.address) {
+    reqBody.addressLine = [];
+    reqBody.addressLine.push(reqParams.address);
+    /* const addressField1 = reqParams.address.substring(0, addressLength.field1);
+    const addressField2 =
+      reqParams.address.substring(
+        addressLength.field1,
+        addressLength.field1 + addressLength.field2,
+      ) || '';
+    const addressField3 =
+      reqParams.address.substring(
+        addressLength.field1 + addressLength.field2,
+        addressLength.field1 + addressLength.field2 + addressLength.field3,
+      ) || '';
+    reqBody.addressLine.push(addressField1, addressField2, addressField3); */
+  }
+  if (reqParams.name) {
+    let firstname = '';
+    let lastname = '';
+    if (reqParams.name.indexOf(' ') > 0) {
+      firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
+      lastname = reqParams.name
+        .substring(reqParams.name.indexOf(' ') + 1)
+        .trim();
+    } else {
+      firstname = reqParams.name;
+    }
+    reqBody.firstName = firstname;
+    reqBody.lastName = lastname;
+  }
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+
+  origin.getResponse(
+    'PUT',
+    origindetailURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200 || response.status === 201) {
+        const resJson = {
+          addressID: response.body.addressId,
+          nickName: addressNickName,
+        };
+        if (
+          reqParams.default &&
+          reqParams.pincode &&
+          reqParams.default === 'true'
+        ) {
+          pincodeUtil.setDefaultPincode(
+            req.headers,
+            reqParams.pincode,
+            (err, res) => {
+              if (err) {
+                resJson.defaultPincodeUpdated = false;
+              } else {
+                resJson.defaultPincodeUpdated = true;
+              }
+              callback(null, resJson);
+            },
+          );
+        } else {
+          callback(null, resJson);
+        }
       } else {
         callback(errorutils.handleWCSError(response));
       }

@@ -25,7 +25,7 @@ module.exports.wishlistItemCount = function getWishlistItemCount(
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemcount', result));
+      callback(null, wishlistFilter.itemcount(result));
     }
   });
 };
@@ -43,7 +43,7 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemlist', result));
+      callback(null, wishlistFilter.itemlist(result));
     }
   });
 };
@@ -107,6 +107,8 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
             callback(null, wishlistJson);
           },
         );
+      } else {
+        callback(null, wishlistJson);
       }
     } else {
       callback(null, wishlistJson);

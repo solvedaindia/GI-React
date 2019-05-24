@@ -77,6 +77,8 @@ class WelcomeBack extends React.Component {
 		emialId: profileData.email,
 		});
 
+		console.log(this.state);
+		return
 		onGoogleResponse(this.state, itemData => {
 		console.log('GoogleCallback', itemData);
 		});

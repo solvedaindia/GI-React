@@ -157,7 +157,9 @@ app.use((req, res) => {
   const errorMessage = {
     status: 'failure',
     error: {
-      message: `Requested resource not found:${req.originalUrl}`,
+      status_code: 404,
+      error_key: 'Resource_Not_Found',
+      error_message: `Requested resource not found:${req.originalUrl}`,
     },
   };
   logger.error('HTTP ERROR 404: ', JSON.stringify(errorMessage));
