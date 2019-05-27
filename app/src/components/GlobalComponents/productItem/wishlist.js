@@ -60,6 +60,7 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
+
     apiManager
       .post(addToWishlist, data)
       .then(response => {

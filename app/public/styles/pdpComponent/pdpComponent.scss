@@ -87,6 +87,16 @@
      }
   }
 .GallerytextBox{
+    .wishListDiv{
+        .wishlistBtn {
+            position: absolute;
+            background: transparent;
+            border: none;
+        }
+        .user {
+            opacity: 0;
+        }
+    }
     .product{
         padding:0 0 5px 0px;      
         font-weight: 600; 
@@ -178,6 +188,13 @@
             .link{
                 color:$cerulean;
                 font-family: $font-bold;
+            }
+            .btn-termsCondition {
+                background: transparent;
+                border: 0;
+                color:$cerulean;
+                font-family: $font-bold;
+                font-size: 12px;      
             }
         }
     }

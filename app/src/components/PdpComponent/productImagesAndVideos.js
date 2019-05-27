@@ -17,6 +17,7 @@ class productImagesAndVideos extends React.Component {
 			activeData: false,
 			gallery: null
 		}
+		this.isZoomScreen = false;
 	}
 
 	componentDidMount() {
@@ -43,11 +44,12 @@ class productImagesAndVideos extends React.Component {
 		let thumbnailsContainer = document.getElementsByClassName('image-gallery-thumbnails-container');
 		
 		if (this.state.activeData === false && isFullScreen === true) {
-			this.filterImagesAndVideos(this.props.imagesAndVideos);
+			this.isZoomScreen = true;
+			this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
+			
 			thumbnailsContainer[0].classList.remove('active');
 			thumbnailsContainer[0].classList.add('dataNotActive');
-
-			 this.setState({
+			  this.setState({
 				activeData: true,
 				gallery: <ImageGallery 
 				showFullscreenButton={true}
@@ -59,7 +61,8 @@ class productImagesAndVideos extends React.Component {
 			});
 
 		} else {
-			this.filterImagesAndVideos(this.props.imagesAndVideos);
+			this.isZoomScreen = false;
+			this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
 			thumbnailsContainer[0].classList.remove('dataNotActive');
 			thumbnailsContainer[0].classList.add('active');
 
@@ -78,12 +81,19 @@ class productImagesAndVideos extends React.Component {
 	}
 
 	/* render Videos */
-	filterImagesAndVideos = (imagesAndVideos) => {
+	filterImagesAndVideos = (imagesAndVideos, screenType) => {
+		let imagePath;
 		this.images = [];
-		imagesAndVideos.map((data, i) => {
+		
+		imagesAndVideos.map((data) => {
+			if (screenType) {
+				imagePath = data.fullScreenImagePath;
+			} else {
+				imagePath = data.fullImagePath;
+			}
 			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbnailPath}`;
 		if (data.type === 'image') {
-				const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${data.fullImagePath}`;
+				const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${imagePath}`;
 				this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
 		} else {
 			this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
@@ -104,8 +114,8 @@ class productImagesAndVideos extends React.Component {
 	}	
 
 	zoomin() {
-		var slides = document.getElementsByClassName("image-gallery-slide");
-			for(var i = 0; i < slides.length; i++)
+		let slides = document.getElementsByClassName("image-gallery-slide");
+			for(let i = 0; i < slides.length; i++)
 			{
 				if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
 					let currWidth = slides[i].children[0].children[0].clientWidth;
@@ -115,7 +125,7 @@ class productImagesAndVideos extends React.Component {
 	}
 	
 	zoomout() {
-		var slides = document.getElementsByClassName("image-gallery-slide");
+		let slides = document.getElementsByClassName("image-gallery-slide");
 		for(var i = 0; i < slides.length; i++)
 		{
 			if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
@@ -133,11 +143,11 @@ class productImagesAndVideos extends React.Component {
 		} else if (e.target.nodeName === 'VIDEO') {
 			const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
 			if (fullscreenButton[0].classList.contains('active')) {
-				await this.setState({
+				this.setState({
 					activeData: true
 				});
 			} else {
-				await this.setState({
+				this.setState({
 					activeData: false
 				});
 			}
@@ -145,10 +155,14 @@ class productImagesAndVideos extends React.Component {
 	}
 
 	render() {
-		this.filterImagesAndVideos(this.props.imagesAndVideos);
+		this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
+		let featuredClass;
+		if (this.props.ribbonText) {
+			featuredClass = 'featured-box';
+		}
 		return(
 			<div className='gallaryWrapper'>
-				<div className='featured-box'>
+				<div className={featuredClass}>
 					<span className='ribbon_star'>
 						<svg className="star_img" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
 						<path fill="#FFF" fillRule="evenodd" d="M7.021 11.073l4.339 2.282-.829-4.832L14.042 5.1l-4.851-.705L7.02 0l-2.17 4.396L0 5.1l3.51 3.422-.828 4.832z">
@@ -162,7 +176,6 @@ class productImagesAndVideos extends React.Component {
 				<button onClick={this.zoomout}>-</button> */}
 			</div>
 		)
-		
 
 	}
 }

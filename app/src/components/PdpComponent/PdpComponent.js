@@ -10,6 +10,7 @@ import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
+import Wishlist from '../GlobalComponents/productItem/wishlist';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 
@@ -88,7 +89,7 @@ class PdpComponent extends React.Component {
 	handleSelectedSwatches(count) {
 		let selectedSwatches = new Array();
 		for (let i = 0; i < count + 1; i++) {
-			const name = document.getElementById('radio' + i).getAttribute('name');
+			const name = document.getElementsByClassName('radio' + i)[0].getAttribute('name');
 			const getValue = document.querySelector('input[name = '+name+']:checked').value;
 			selectedSwatches.push(getValue);
 		}
@@ -97,8 +98,9 @@ class PdpComponent extends React.Component {
 
 	render() {
 		const { isLoading } = this.state;
+
 		return (
-			<div id="testData" className="galleryArea">
+			<div className="galleryArea">
 				{!isLoading ? (
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
@@ -112,6 +114,7 @@ class PdpComponent extends React.Component {
 						</Col>
 						<Col md={4} sm={12} xs={12}>
 							<div className="GallerytextBox">
+								<div className="wishListDiv">WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID}/></div>
 								<ProductNameDescription
 									productData={this.state.skuData}
 								/>

@@ -11,11 +11,10 @@ class addToCartComponent extends React.Component {
 		alert('added to cart');
 		const data = {
 			"orderItem": [
-			{
-				//"sku_id": this.props.data.uniqueID,
-				"sku_id": "22952",
-				"quantity": "1"
-			}
+				{
+					"sku_id": this.props.skuId,
+					"quantity": document.getElementById('quantity').value
+				}
 			]
 		}
 
@@ -26,20 +25,23 @@ class addToCartComponent extends React.Component {
 		});
 	}
 
-	// incrementQuantity = () => { alert();
-	//     let quantity = document.getElementById('quantity');
-	//     let getVal = quantity.value;
-	//     quantity.value = getVal+1;
-	// }
+	productQuantity = (type) => {
+		let quantity = document.getElementById('quantity').value;
+		if (type === false && quantity > 1) {
+			document.getElementById('quantity').value = Number(quantity)-Number(1);
+		} else if (type === true) {
+			document.getElementById('quantity').value = Number(quantity)+Number(1);
+		}
+	}
 
 
 	render() {
 		return(
 			<>
 				<div className="addCart">
-					<Button className="btn" onClick={this.decrementQuantity}>-</Button>
+					<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
 					<input className='btn' id='quantity' type='text' readOnly value='1' />
-					<Button className="btn" onClick={this.incrementQuantity}>+</Button>
+					<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
 					<Button className="btn addcartbtn" onClick={this.moveToCartClicked}>Add to Cart</Button>
 				</div>
 			</>

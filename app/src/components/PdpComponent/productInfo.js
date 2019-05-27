@@ -1,5 +1,6 @@
 import React from 'react';
 import EmiInfo from './emiInfo';
+import TermsAndCondition from './termsAndCondition';
 import AddToCart from './addToCart';
 
 class productInfo extends React.Component {
@@ -42,7 +43,7 @@ class productInfo extends React.Component {
 					{this.props.productData.promotions.map((promotion, i) => (
 						<li className='list' key={i}>                                 
 							<h4 className='heading'>{promotion.name} </h4>
-							{promotion.description} <a className='link' href={promotion.name}>{promotion.name}</a>                                  
+							{promotion.description} <TermsAndCondition/>                                  
 						</li>
 						))
 					}
@@ -67,7 +68,7 @@ class productInfo extends React.Component {
 				Experience this product at{' '}
 				<a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
 			</div>
-			<AddToCart />
+			<AddToCart skuId={this.props.productData.uniqueID} />
 			</>
 		);
 	}
