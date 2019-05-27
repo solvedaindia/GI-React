@@ -24,7 +24,9 @@ class productInfo extends React.Component {
 			<>
 			<div className="price">
 				<span className='offerprice text'>&#8377;{this.props.productData.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-				<span className='actualprice text'>&#8377;{this.props.productData.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+				{ this.props.productData.offerPrice < this.props.productData.actualPrice && (
+					<span className='actualprice text'>&#8377;{this.props.productData.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+				)}
 			</div>
 			<div className="shippingCharge">
 				Shipping Charges:{' '}

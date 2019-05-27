@@ -1,20 +1,19 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
-import { newMachineUrl } from '../../../public/constants/constants';
 
 class SimilarCombosProducts extends React.Component {
 	constructor() {
 		super();
-		this.dataClass = '';
 	}
 
 	/* hide and show produts */
 	productsType(activeType, deActiveType) {
 		const activeEle = document.getElementById(`${activeType}`);
+		document.getElementById(`${activeType}Head`).classList.add('active');
 		activeEle.classList.remove('dataNotActive');
 		activeEle.classList.add('dataActive');
 
 		const deActiveEle = document.getElementById(`${deActiveType}`);
+		document.getElementById(`${deActiveType}Head`).classList.remove('active');
 		deActiveEle.classList.remove('dataActive');
 		deActiveEle.classList.add('dataNotActive');
 	}
@@ -33,7 +32,9 @@ class SimilarCombosProducts extends React.Component {
 				
 						<p className="price text">
 							<span className="discount-price">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							{ data.offerPrice < data.actualPrice && (
 							<span className="priceno-discount">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							)}
 						</p>
 						<p className='emi-text text'>
 							<span className='free-accessories'>EMI Starting from <span className='bold'>{data.emiData}</span></span>
@@ -58,8 +59,10 @@ class SimilarCombosProducts extends React.Component {
 						<p className='heading text'>{data.productName}</p>
 				
 						<p className="price text">
-							<span className="discount-price">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-							<span className="priceno-discount">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							<span className="discount-price">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							{ data.offerPrice < data.actualPrice && (
+							<span className="priceno-discount">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+							)}
 						</p>
 						<p className='emi-text text'>
 							<span className='free-accessories'>EMI Starting from <span className='bold'>{data.emiData}</span></span>
@@ -74,7 +77,7 @@ class SimilarCombosProducts extends React.Component {
 	render() {
 		return (
 			<div className='similarProduct-Wrapper'>
-				<h4 className="heading text-center"><a role='button' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>&nbsp;&nbsp;&nbsp;<a role='button' onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a></h4>
+				<h4 className="heading text-center"><a role='button' id='similarHead' className='active' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>&nbsp;&nbsp;&nbsp;<a role='button' id='combosHead' onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a></h4>
 				<div id='similar' className='dataActive'>
 					<ul className='similarProducts'>
 						{this.getSimilarProducts()}

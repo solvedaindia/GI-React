@@ -11,8 +11,14 @@ import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
+import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
+const shareImg = (
+	<img
+	  src={require('../../../public/images/share.svg')}
+	/>
+  );
 
 class PdpComponent extends React.Component {
 	constructor() {
@@ -98,6 +104,7 @@ class PdpComponent extends React.Component {
 
 	render() {
 		const { isLoading } = this.state;
+		const wishlistArr = getOnlyWishlistUniqueIds();
 
 		return (
 			<div className="galleryArea">
@@ -114,7 +121,8 @@ class PdpComponent extends React.Component {
 						</Col>
 						<Col md={4} sm={12} xs={12}>
 							<div className="GallerytextBox">
-								<div className="wishListDiv">WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID}/></div>
+								<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
+								<div className='shareDiv'>SHARE {shareImg}</div>
 								<ProductNameDescription
 									productData={this.state.skuData}
 								/>
