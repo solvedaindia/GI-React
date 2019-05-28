@@ -88,7 +88,7 @@ class ProductItem extends React.Component {
 
 
   render() {
-    console.log('isFromWishlist  ----  ', this.props)
+    console.log('isFromWishlist  ----  ', this.props);
     return (
       <li className="productlist">
         <div className="prdListData">

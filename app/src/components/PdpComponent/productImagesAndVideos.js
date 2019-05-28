@@ -23,19 +23,9 @@ class productImagesAndVideos extends React.Component {
 	componentDidMount() {
 		let contentElement = document.getElementsByClassName('image-gallery-thumbnails-container');
 		contentElement[0].classList.add('active');
-
-		this.setState({
-			gallery: <ImageGallery 
-			showFullscreenButton={true}
-			items={this.images}
-			showNav={false}
-			showPlayButton={false}
-			onClick={this.handleClick.bind(this)}
-		/>
-		})
 	}
 
-	componentWillReceiveProps() {
+	componentWillReceiveProps(nextProps) {
 		const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
 		this.hideThumnailsOnFullScreen(fullscreenButton[0].classList.contains('active'));
 	}
@@ -45,36 +35,20 @@ class productImagesAndVideos extends React.Component {
 		
 		if (this.state.activeData === false && isFullScreen === true) {
 			this.isZoomScreen = true;
-			this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
-			
+
 			thumbnailsContainer[0].classList.remove('active');
 			thumbnailsContainer[0].classList.add('dataNotActive');
 			  this.setState({
 				activeData: true,
-				gallery: <ImageGallery 
-				showFullscreenButton={true}
-				items={this.images}
-				showNav={true}
-				showPlayButton={false}
-				onClick={this.handleClick.bind(this)}
-				/>
 			});
 
 		} else {
 			this.isZoomScreen = false;
-			this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
 			thumbnailsContainer[0].classList.remove('dataNotActive');
 			thumbnailsContainer[0].classList.add('active');
 
 			 this.setState({
 				activeData: false,
-				gallery: <ImageGallery 
-				showFullscreenButton={true}
-				items={this.images}
-				showNav={false}
-				showPlayButton={false}
-				onClick={this.handleClick.bind(this)}
-				/>
 			});
 		}
 
@@ -92,13 +66,13 @@ class productImagesAndVideos extends React.Component {
 				imagePath = data.fullImagePath;
 			}
 			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbnailPath}`;
-		if (data.type === 'image') {
-				const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${imagePath}`;
-				this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
-		} else {
-			this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+			if (data.type === 'image') {
+					const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${imagePath}`;
+					this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
+			} else {
+				this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+				}
 			}
-		}
 		);
 	};
 
@@ -160,6 +134,7 @@ class productImagesAndVideos extends React.Component {
 		if (this.props.ribbonText) {
 			featuredClass = 'featured-box';
 		}
+
 		return(
 			<div className='gallaryWrapper'>
 				<div className={featuredClass}>
@@ -171,7 +146,15 @@ class productImagesAndVideos extends React.Component {
 					</span>
 					<span className='featured-text'>{this.props.ribbonText}</span>
 				</div>
-				{this.state.gallery}
+				
+				<ImageGallery 
+					showFullscreenButton={true}
+					items={this.images}
+					showNav={this.state.activeData}
+					showPlayButton={false}
+					onClick={this.handleClick.bind(this)}
+				/>
+				
 				{/* <button onClick={this.zoomin}>+</button>
 				<button onClick={this.zoomout}>-</button> */}
 			</div>

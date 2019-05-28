@@ -10,6 +10,7 @@ import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
+import SocialMedia from './socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 
@@ -105,7 +106,7 @@ class PdpComponent extends React.Component {
 	render() {
 		const { isLoading } = this.state;
 		const wishlistArr = getOnlyWishlistUniqueIds();
-
+		
 		return (
 			<div className="galleryArea">
 				{!isLoading ? (
@@ -122,7 +123,9 @@ class PdpComponent extends React.Component {
 						<Col md={4} sm={12} xs={12}>
 							<div className="GallerytextBox">
 								<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
-								<div className='shareDiv'>SHARE {shareImg}</div>
+								<div className='shareDiv'>SHARE {shareImg}
+								<SocialMedia/>
+								</div>
 								<ProductNameDescription
 									productData={this.state.skuData}
 								/>

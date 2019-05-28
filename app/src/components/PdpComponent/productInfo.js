@@ -19,6 +19,7 @@ class productInfo extends React.Component {
 
 	render() {
 		let emidata = this.props.productData.emiData;
+		console.log('this.props.productData.offerPrice=>>', this.props.productData.offerPrice);
 		emidata = 599;
 		return (
 			<>
@@ -51,6 +52,7 @@ class productInfo extends React.Component {
 					}
 				</ul>
 			</div>
+			{ this.props.productData.offerPrice <= 1500 && (
 			<div className="starting-emitext">
 				<div className='offerbg text'> <span className='emitext'>EMI</span></div>
 				<div className='text'>Starting from </div>
@@ -58,6 +60,7 @@ class productInfo extends React.Component {
 				<div className='text'>per month</div>
 				<div className='text emiinfo'><EmiInfo price={this.props.productData.offerPrice}/></div>
 			</div>
+			)}
 			<div className='pincode'>
 				<div className='PincodeTextdata clearfix'>
 					<input className='pincodeVal' type='text' readOnly value='56632' />

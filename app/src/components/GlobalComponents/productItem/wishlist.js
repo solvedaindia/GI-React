@@ -101,9 +101,15 @@ class Wishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // this.setState({
+    //   isWelcomeBack: false,
+    //   wishlistCurrentImage: this.props.isInWishlistPro
+    //     ? wishlistAddedImg
+    //     : wishListRemovedImg,
+    // });
     this.setState({
       isWelcomeBack: false,
-      wishlistCurrentImage: this.props.isInWishlistPro
+      wishlistCurrentImage: nextProps.isInWishlistPro
         ? wishlistAddedImg
         : wishListRemovedImg,
     });
