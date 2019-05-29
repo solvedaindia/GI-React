@@ -1,17 +1,16 @@
 import React from 'react';
+import { Row, Col,Grid } from 'react-bootstrap';
 const pdpNameDescription = (props) => {
     return (
         <>
-            <div className="product">
-                <span className='text'>Product ID:</span> 
-                <span className='text'>{props.productData.partNumber}</span>
-            </div>
-            <div className="slimline">
+            <Row>
+            <Col md={12} sm={12} xs={12} className="slimline">
                 <h4 className='heading'>
                     {props.productData.productName}
                 </h4>
                     {props.productData.shortDescription}<br/>
-            </div>
+            </Col>
+            </Row>
         </>    
     );
 };

@@ -143,6 +143,20 @@ class PdpComponent extends React.Component {
 								<div className='shareDiv'>SHARE {shareImg}
 								<SocialMedia/>
 								</div>
+								<Row>
+									<Col md={12} sm={12} xs={12}>
+										<Col md={6} sm={12} xs={12} className="product">
+											<span className='text'>Product ID:</span> 
+											<span className='text'>{this.state.skuData.partNumber}</span>
+										</Col>
+										<Col md={6} sm={12} xs={12} className="product-share">
+											<div className='share'>SHARE </div>
+											<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
+										</Col>
+									</Col>
+								</Row>	
+
+								
 								<ProductNameDescription
 									productData={this.state.skuData}
 								/>
@@ -169,7 +183,7 @@ class PdpComponent extends React.Component {
 						<ProductFeatures productFeature={this.props.data.productFeatures} />            
 					</Row>
 					<Row>
-						<Col md={12} sm={12} xs={12}>
+						<Col md={12} sm={12} xs={12} className="purchase-guide-box">
 							<PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
 						</Col>
 					</Row>

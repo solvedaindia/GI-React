@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 // import '../../../public/styles/slickCustom.scss';
 
+import { Row, Col } from 'react-bootstrap';
 class SimilarCombosProducts extends React.Component {
 	constructor() {
 		super();
@@ -87,20 +88,24 @@ class SimilarCombosProducts extends React.Component {
 			slidesToScroll: 1,
 		};
 		return (
-			<div className='similarProduct-Wrapper'>
-				<h4 className="heading text-center"><a role='button' id='similarHead' className='active' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>&nbsp;&nbsp;&nbsp;<a role='button' id='combosHead' onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a></h4>
-				
-				<div id='similar' className='dataActive'>
-					<ul className='similarProducts'>
-						{this.getSimilarProducts()}
-					</ul>
-				</div>
-				<div id='combos' className='dataNotActive'>
-					<ul className='similarProducts'>					
-						{this.getComobosProducts()}
-					</ul>
-				</div>
-			</div>
+			<Col  md={12} sm={12} xs={12} className='similarProduct-Wrapper'>
+				<Row>
+					<Col md={12} sm={12} xs={12} className="similar-pro-tab text-center">
+						<a role='button' id='similarHead' className='tabs active' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>
+						<a role='button' id='combosHead' className="tabs" onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a>
+					</Col>
+					<Col md={12} sm={12} xs={12} id='similar' className='dataActive'>
+						<ul className='similarProducts'>
+							{this.getSimilarProducts()}
+						</ul>
+					</Col>
+					<Col md={12} sm={12} xs={12}id='combos' className='dataNotActive'>
+						<ul className='similarProducts'>					
+							{this.getComobosProducts()}
+						</ul>
+					</Col>
+				</Row>
+			</Col>
 		);
 	}
 }

@@ -35,7 +35,7 @@ class purchaseGuide extends React.Component {
 	/* display tab with data */
 	productDetailsTab(divId) {
 		const tabcontent = document.getElementsByClassName('purchaseGuideTabContent');
-		//const tabData = document.getElementsByClassName('purchaseGuideTabData');
+		const tabData = document.getElementsByClassName('purchaseGuideTab');
 		const contentElement = document.getElementById(`purchaseGuidecontent_${divId}`);
 		const tabElement = document.getElementById(`purchaseGuideTab_${divId}`);
 
@@ -43,6 +43,8 @@ class purchaseGuide extends React.Component {
 			tabcontent[i].classList.remove('dataActive');
 			tabcontent[i].classList.remove('dataNotActive');
 			tabcontent[i].classList.add('dataNotActive');
+			tabData[i].classList.remove('active');
+			
 		}
 		contentElement.classList.remove('dataNotActive');
 		contentElement.classList.remove('dataActive');
@@ -71,14 +73,13 @@ class purchaseGuide extends React.Component {
 				}
 
 				return (
-					<a
+					<li id={`purchaseGuideTab_${index}`}
+					className={`purchaseGuideTab purchaseGuideTabData ${this.activeClass}`}><a
 						key={index}
-						id={`purchaseGuideTab_${index}`}
-						className={`purchaseGuideTab purchaseGuideTabData ${this.activeClass}`}
 						onClick={() => this.productDetailsTab(index)}
 					>
 						{tabData.title}
-					</a>
+					</a></li>
 				);
 			})
 		);
@@ -117,11 +118,13 @@ class purchaseGuide extends React.Component {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={6} sm={12} xs={12}>
-						<div className="purchaseGuide_description">
-							{this.renderTabData()}
-							{this.renderTabContent()}
-						</div>
+					<Col md={12} sm={12} xs={12} className="purchaseGuide_description">
+					<Row>
+							<Col md={12} sm={12} xs={12} className="tab-nav-container">
+								<ul>{this.renderTabData()}</ul>
+							</Col>
+							<Col md={12} sm={12} xs={12} className="tab-content">{this.renderTabContent()}</Col>
+					</Row>
 					</Col>
 				</Row>
 			</>

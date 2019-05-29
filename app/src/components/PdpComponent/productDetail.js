@@ -40,14 +40,14 @@ class productDetail extends React.Component {
 				}
 
 				return (
-					<a
+					<li id={`tab_${index}`}
+					className={`tab tabData ${this.activeClass}`}><a
 						key={index}
-						id={`tab_${index}`}
-						className={`tab tabData ${this.activeClass}`}
 						onClick={() => this.productDetailsTab(index)}
 					>
 						{tabData.title}
 					</a>
+					</li>
 				);
 			})
 		);
@@ -92,7 +92,7 @@ class productDetail extends React.Component {
 			<div className="product_details">
 				<Row>
 					<Col md={12} sm={12} xs={12}>
-						<h3 className="heading"> Product Detail</h3>
+						<h3 className="heading"> Product Details</h3>
 					</Col>
 				</Row>
 				<Row>
@@ -101,11 +101,15 @@ class productDetail extends React.Component {
 							<img className="imgfullwidth" src={imagePath}/>
 						</div>
 					</Col>
-					<Col md={6} sm={12} xs={12}>
-						<div className="product_description">
-							{this.renderTabData()}
-							{this.renderTabContent()}
-						</div>
+					<Col md={6} sm={12} xs={12} className="product_description">
+						<Row>
+							<Col md={12} sm={12} xs={12} className="prod-desc-tab">
+								<ul>{this.renderTabData()} </ul>
+							</Col>
+							<Col md={12} sm={12} xs={12} className="prod-desc-tab-details">
+								{this.renderTabContent()}
+							</Col>
+						</Row>
 					</Col>
 				</Row>
 			</div>

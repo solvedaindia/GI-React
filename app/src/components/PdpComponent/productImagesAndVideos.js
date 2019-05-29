@@ -130,7 +130,7 @@ class productImagesAndVideos extends React.Component {
 
 	render() {
 		this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
-		let featuredClass;
+		let featuredClass = 'hide';
 		if (this.props.ribbonText) {
 			featuredClass = 'featured-box';
 		}
