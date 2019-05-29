@@ -1,4 +1,6 @@
 import React from 'react';
+import Slider from 'react-slick';
+// import '../../../public/styles/slickCustom.scss';
 
 class SimilarCombosProducts extends React.Component {
 	constructor() {
@@ -19,6 +21,7 @@ class SimilarCombosProducts extends React.Component {
 	}
 
 	getSimilarProducts() {
+		
 		return(this.props.similarProducts.map((data, index) => {
 			const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
 			
@@ -44,6 +47,7 @@ class SimilarCombosProducts extends React.Component {
 				</li>
 			);
 		}));
+		
 	}
 
 	getComobosProducts() {
@@ -75,9 +79,17 @@ class SimilarCombosProducts extends React.Component {
 	}
 
 	render() {
+		const settings = {
+			dots: false,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+		};
 		return (
 			<div className='similarProduct-Wrapper'>
 				<h4 className="heading text-center"><a role='button' id='similarHead' className='active' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>&nbsp;&nbsp;&nbsp;<a role='button' id='combosHead' onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a></h4>
+				
 				<div id='similar' className='dataActive'>
 					<ul className='similarProducts'>
 						{this.getSimilarProducts()}

@@ -9,11 +9,16 @@ import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } fr
 class addToCartComponent extends React.Component {
 	moveToCartClicked = () => {
 		alert('added to cart');
+		let quantity = '1';
+		if (!this.props.sticky) {
+			quantity = document.getElementById('quantity').value;
+		}
+		
 		const data = {
 			"orderItem": [
 				{
 					"sku_id": this.props.skuId,
-					"quantity": document.getElementById('quantity').value
+					"quantity": quantity
 				}
 			]
 		}
@@ -39,9 +44,13 @@ class addToCartComponent extends React.Component {
 		return(
 			<>
 				<div className="addCart">
-					<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
-					<input className='btn' id='quantity' type='text' readOnly value='1' />
-					<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
+					{ !this.props.sticky && (
+					<>
+						<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
+						<input className='btn' id='quantity' type='text' readOnly value='1' />
+						<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
+					</>
+					)}
 					<Button className="btn addcartbtn" onClick={this.moveToCartClicked}>Add to Cart</Button>
 				</div>
 			</>

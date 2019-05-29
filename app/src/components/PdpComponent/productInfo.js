@@ -19,7 +19,6 @@ class productInfo extends React.Component {
 
 	render() {
 		let emidata = this.props.productData.emiData;
-		console.log('this.props.productData.offerPrice=>>', this.props.productData.offerPrice);
 		emidata = 599;
 		return (
 			<>
@@ -73,7 +72,7 @@ class productInfo extends React.Component {
 				Experience this product at{' '}
 				<a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
 			</div>
-			<AddToCart skuId={this.props.productData.uniqueID} />
+			<AddToCart skuId={this.props.productData.uniqueID} sticky={false} />
 			</>
 		);
 	}

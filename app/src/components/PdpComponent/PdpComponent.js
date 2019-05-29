@@ -13,6 +13,8 @@ import SimilarCombosProducts from './similarAndCombosProducts';
 import SocialMedia from './socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
+import AddToCart from './addToCart';
+
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = (
@@ -106,10 +108,25 @@ class PdpComponent extends React.Component {
 	render() {
 		const { isLoading } = this.state;
 		const wishlistArr = getOnlyWishlistUniqueIds();
-		
+
 		return (
 			<div className="galleryArea">
 				{!isLoading ? (
+					<>
+					<Row>
+						<Col md={7} sm={12} xs={12}>
+							<div className="product">
+								<span className='text'>Product ID:</span> 
+								<span className='text'>{this.state.skuData.partNumber}</span>
+								<h4 className='heading'>
+									{this.state.skuData.productName}
+								</h4>
+							</div>
+						</Col>
+						<Col md={4} sm={12} xs={12}>
+							<AddToCart skuId={this.state.skuData.uniqueID} sticky={true} />
+						</Col>
+					</Row>
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">
@@ -143,6 +160,7 @@ class PdpComponent extends React.Component {
 							</div>
 						</Col>
 					</Row>
+					</>
 				) : (
 					<div> Data is Loading..</div>
 				)}    
