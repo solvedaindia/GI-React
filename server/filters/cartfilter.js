@@ -12,6 +12,9 @@ module.exports.minicart = function getMinicart(cartData, productList) {
         break;
       }
     }
+    delete itemJson.ribbonText;
+    delete itemJson.emiData;
+    delete itemJson.inStock;
     miniCartData.push(itemJson);
   });
   return miniCartData;

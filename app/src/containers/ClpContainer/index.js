@@ -9,6 +9,7 @@ import FullBanner from '../../components/Primitives/slider';
 import LivingTheme from '../../components/ClpComponent/subComponents/livingInspiration';
 import SubCategory from '../../components/GlobalComponents/subCategory';
 import BestSeller from '../../components/BestSelling/bestSelling';
+import ReadMore from '../../components/GlobalComponents/readMore';
 
 export class HeaderContainer extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export class HeaderContainer extends React.Component {
 			<SubCategory />
 			<LivingTheme />
 			<BestSeller />
+			<ReadMore />
         </div>
       </section>
     );

@@ -8,15 +8,11 @@ const Categories = (props) => {
                 <h3 className='heading'>
                     {props.name.text}
                 </h3>
-                <ul className='store_area'>
-                    { props.name.children.map((links, i) => {
-                        return (
-                            <li className='list' key={i}>
-                                <a className='link' href={links.action}>{links.text} </a>
-                            </li>
-                        )})
-                    }
-                </ul>
+                { props.name.children.map((links, i) => {
+                    return (
+                        <h4 className='categoriestext list'><a className='link ' href={links.action}>{links.text}</a></h4>
+                    )})
+                }
             </div>
         </Col>
     );

@@ -17,7 +17,7 @@ const initialState = {
   sortingValue: 0,
   adBannerPos: 12,
   staticAdBannerPos: 0,
-  columnLayout: 2,
+  columnLayout: 3,
   adBannerCurrentIndex: 0,
   adBannerData: [],
   updateFilter: new Map(),

@@ -37,9 +37,9 @@ export class CompContainer extends React.Component {
     );
     const data = [];
     if (this.props.compData.length > 0) {
-      this.props.compData.forEach(element => {
+      this.props.compData.forEach((element, index) => {
         data.push(
-          <CompItem product={element} remove={this.props.removeProduct} />
+          <CompItem key={index} product={element} remove={this.props.removeProduct} />
         );
       });
     }

@@ -1,10 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import {
   homePageLayoutAPI,
-  storeId,
-  accessToken,
+  ipDataApi
 } from '../../../public/constants/constants';
 export class HomapegeLayout extends React.Component {
     constructor(props) {
@@ -13,11 +12,28 @@ export class HomapegeLayout extends React.Component {
         homepageLayout: null,
         isLoading: false,
         error: null,
+        ipData: null
         };
     }
     
+    getIPData() {
+        apiManager.get(ipDataApi, {'headers': { 'Accept': 'application/json'} })
+        .then( response => {
+            this.setState({
+                ipData: response.data,
+                isLoading: false
+            })
+            console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+        })
+        .catch(error => {
+            this.setState({
+                error,
+                isLoading: false
+            });
+        });
+    }
     getPageLayout() {
-        axios.get(homePageLayoutAPI, { 'headers': { 'store_id': storeId, 'access_token': accessToken } })
+        apiManager.get(homePageLayoutAPI)
         .then(response => {
             this.setState({
                 homepageLayout: response.data.data,
@@ -34,19 +50,20 @@ export class HomapegeLayout extends React.Component {
   	}
 
 	componentDidMount() {
+        this.getIPData();
 		this.getPageLayout();
 	}
 
 	render() {
 		const { homepageLayout } = this.state;
 		return (
-		!!homepageLayout && homepageLayout.map((widget, i) => (
-			<WidgetList
-			{...widget}
-			key={`${widget.title}_widget_${i}`}
-			index={`${widget.title}_widget_${i}`}
-			/>
-		))
+            !!homepageLayout && homepageLayout.map((widget, i) => (
+                <WidgetList
+                {...widget}
+                key={`${widget.title}_widget_${i}`}
+                index={`${widget.title}_widget_${i}`}
+                />
+            ))
 		);
 	}
 }

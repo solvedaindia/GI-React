@@ -1,10 +1,12 @@
-import axios from 'axios';
+import apiManager from './apiManager';
 import {
   socialLoginAPI,
   accessToken,
   storeId,
   accessTokenCookie,
 } from '../../public/constants/constants';
+import appCookie from './cookie';
+
 
 export function onFacebookResponse(socialData, callback) {
   console.log('Facebook---', socialData);
@@ -25,15 +27,12 @@ function socialLoginAPIHandler(socialData, callback) {
     email_id: socialData.emialId,
   };
 
-  axios
-    .post(socialLoginAPI, data, {
-      headers: { store_id: storeId, access_token: accessToken },
-    })
+  apiManager
+    .post(socialLoginAPI, data)
     .then(response => {
-      document.cookie = 'isLoggedIn=true';
-      document.cookie = `${accessTokenCookie}=${
-        response.data.data.access_token
-      }`;
+      appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+      appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+      window.location.reload();
       callback('Success');
       console.log('socialData---', response.data.data.access_token);
     })

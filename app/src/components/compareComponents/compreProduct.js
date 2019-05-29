@@ -17,8 +17,8 @@ class CompPrd extends React.Component {
     renderProducts = () => {
       console.log(this.props, "this is remove function")
       var prds = [];
-      this.props.data.map(element => {
-        prds.push(<TopContainer product={element} remove={this.props.remove} count={this.props.data.length} />)
+      this.props.data.map((element, index) => {
+        prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} />)
       });
       return prds;
     }
