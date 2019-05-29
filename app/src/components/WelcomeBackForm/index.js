@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 /* Import Components */
-import Input from '../Input/input';
+import Input from '../Primitives/input';
 import Button from '../Button/button';
 import {
   regexEmail,

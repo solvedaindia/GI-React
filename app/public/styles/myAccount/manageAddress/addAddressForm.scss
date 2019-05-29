@@ -1,0 +1,47 @@
+@import "../../app.scss";
+@import "../../base.scss";
+@import "../../variable.scss";
+
+.addAddressContainer {
+  width: 857px;
+  height: 660px;
+  border-radius: 2px;
+  border: solid 1px #d1d1d2;
+  background-color: rgba(238, 237, 237, 0.09);
+  margin: 12px 0 0 10px;
+  border-style: dashed;
+
+  .cancelBtn {
+    /* vertical-align: text-bottom; */
+    position: relative;
+    /* right: 9px; */
+    top: -30px;
+    left: 822px;
+    width: 25px;
+    background: transparent;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .actionBtnWrapper {
+    padding: 5px 0 0 0;
+    .btn {
+      padding: 12px 60px;
+      border-radius: 0;
+    }
+    &__cancelBtn {
+      border: solid 1px $black;
+      background-color: $colorwhite;
+    }
+
+    &__applyBtn {
+      margin-left: 15px;
+      color: $colorwhite;
+      background-color: $black;
+      border: 1px solid $black;
+    }
+  }
+  
+}

@@ -107,6 +107,16 @@ export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
 /* Change Password API */
 export const changePasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/changepassword`;
+/* Get City State API */
+export const cityStateAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
+/* Add Address API */
+export const addAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/add`;
+/* Get Address List API */
+export const getAddressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+/* Delete Address API */
+export const deleteAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/delete/`;
+/* Update/SetAsDefault Address API */
+export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/update/`;
 
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';

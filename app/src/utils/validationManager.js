@@ -12,7 +12,8 @@ export const regexPw = /^(?=.*?[0-9]).{6,25}$/;
 export const regexPwNo = /\d/;
 /* Whether String contains a Character or Not */
 export const regexPwChar = /[a-zA-Z]/;
-
+/* Whether Pincode numeric and 6 digits */
+export const regexPincode = /^\d{6}$/;
 
 
 /********* Functions ********/

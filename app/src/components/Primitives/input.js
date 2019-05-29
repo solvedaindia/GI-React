@@ -15,6 +15,7 @@ const Input = props => {
             value={props.value}
             onChange={props.handleChange}
             placeholder={props.placeholder}
+            onBlur={props.focusOut}
             {...props}
         />
     </div>

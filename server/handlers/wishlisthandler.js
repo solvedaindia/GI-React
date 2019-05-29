@@ -1,12 +1,11 @@
-const async = require('async');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-const filter = require('../filters/filter');
 const productUtil = require('../utils/productutil');
 const wishlistFilter = require('../filters/wishlistfilter');
+
 const wishlistName = 'My Wishlist';
 
 /**
@@ -25,7 +24,7 @@ module.exports.wishlistItemCount = function getWishlistItemCount(
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemcount', result));
+      callback(null, wishlistFilter.itemcount(result));
     }
   });
 };
@@ -43,7 +42,7 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemlist', result));
+      callback(null, wishlistFilter.itemlist(result));
     }
   });
 };
@@ -107,6 +106,8 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
             callback(null, wishlistJson);
           },
         );
+      } else {
+        callback(null, wishlistJson);
       }
     } else {
       callback(null, wishlistJson);
@@ -448,7 +449,6 @@ module.exports.addItemInWishlist = function addItemInWishlist(
         productId: body.sku_id,
       };
       if (wishlistCount === 0) {
-        //reqBody.wishlistName = `wishlist_${headers.userId}`;
         reqBody.wishlistName = wishlistName;
         createAndAdd(headers, reqBody, callback);
       } else {

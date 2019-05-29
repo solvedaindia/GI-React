@@ -1,13 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const cartHandler = require('../../handlers/carthandler');
+const promotionUtil = require('../../utils/promotionutil');
 
 /**
  * fetch cart details
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-router.get('/checkout', (req, res, next) => {
+router.get('/page', (req, res, next) => {
   cartHandler.fetchCart(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * fetch cart order summary
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+router.get('/ordersummary', (req, res, next) => {
+  cartHandler.cartOrderSummary(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -116,6 +134,44 @@ router.post('/remove', (req, res, next) => {
  */
 router.post('/update', (req, res, next) => {
   cartHandler.updateitem(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Apply Promocode to Cart
+ * @param access_token,storeId
+ * @return 200,OK Applying the Promotion Successfully
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/applypromotion', (req, res, next) => {
+  promotionUtil.applyCartPromotion(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Remove Promocode from Cart
+ * @param access_token,storeId
+ * @return 200,OK Removed the Promotion Successfully
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/removepromotion/:promoCode', (req, res, next) => {
+  promotionUtil.removeCartPromotion(req.headers, req.params, (err, result) => {
     if (err) {
       next(err);
       return;

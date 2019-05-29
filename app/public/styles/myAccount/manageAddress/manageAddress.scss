@@ -1,0 +1,30 @@
+@import './addAddressForm.scss';
+@import './addressItem.scss';
+
+.manageAddressContainer {
+  width: 900px;
+}
+
+.itemList li {
+  display: inline-block;
+  padding: 10px;
+}
+
+.addNewAddress {
+  width: 217px;
+  height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #036cc5;
+  text-align: left;
+  margin: 10px 0 0 10px;
+  background: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

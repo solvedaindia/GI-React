@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 /* Import Components */
-import Input from "../components/Input";
+import Input from "../../components/Primitives/input";
 import Button from "../components/Button";
 
 class FormContainer extends Component {

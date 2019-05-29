@@ -1,0 +1,60 @@
+@import "../../variable.scss";
+
+.addressItem {
+  width: 272px;
+  height: 162px;
+  border-radius: 2px;
+  border: solid 1px #d1d1d2;
+  background-color: rgba(247, 248, 248, 0.5);
+
+  .defaultAddress {
+    font-family: $font-bold;
+    width: 100px;
+    height: 14px;
+    //font-family: CeraGodrejInterio;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    margin: 16px 0 0 10px;
+  }
+
+  .addressText {
+    width: 245px;
+    height: 57px;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.58;
+    letter-spacing: normal;
+    color: #000000;
+    margin: 12px 0 0 10px;
+  }
+
+  .commandBtns {
+    height: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #036cc5;
+    margin: 30px 0 0 10px;
+    background: transparent;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .seperator {
+    width: 2px;
+    height: 10px;
+    border: solid 1px #000000;
+  }
+}

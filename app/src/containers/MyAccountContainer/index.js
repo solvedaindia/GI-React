@@ -27,6 +27,8 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/myAccount/myAccount.scss';
 import ChangePassword from '../../components/MyAccountComponents/ChangePassword/changePassword';
+import MyProfile from '../../components/MyAccountComponents/MyProfile/myProfile';
+import ManageAddress from '../../components/MyAccountComponents/ManageAddress/manageAddress';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {
@@ -57,10 +59,10 @@ export class MyAccountContainer extends React.Component {
 
           <div className="col-xs-12 col-sm-9 col-md-9">
             <div className="tab-content">
-              <div className="tab-pane active" id="profile-v">Profile tab</div>
-              <div className="tab-pane" id="changePassword-v"><ChangePassword/></div>
+              <div className="tab-pane active" id="profile-v"> <MyProfile /></div>
+              <div className="tab-pane" id="changePassword-v"><ChangePassword /></div>
               <div className="tab-pane" id="myOrder-v">My Order Tab.</div>
-              <div className="tab-pane" id="manageAddresses-v">Manage Adress Tab.</div>
+              <div className="tab-pane" id="manageAddresses-v"><ManageAddress /></div>
               <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
               <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>
               <div className="tab-pane" id="notifications-v">Notifications Tab.</div>
