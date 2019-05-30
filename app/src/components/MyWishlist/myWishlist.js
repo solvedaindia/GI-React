@@ -4,11 +4,7 @@ import EmptyWishlist from './emptyWishlist';
 import '../../../public/styles/myWishlist/myWishlist.scss';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 import PlpComponent from '../PlpComponent/index';
-import {
-  plpAPI,
-  myWishlistAPI
-
-} from '../../../public/constants/constants';
+import { plpAPI, myWishlistAPI } from '../../../public/constants/constants';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
 
@@ -26,7 +22,11 @@ class MyWishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps.wishlistUpdatedCount + '  this Porps ', this.props.wishlistUpdatedCount)
+    console.log(
+      'nextProps',
+      `${nextProps.wishlistUpdatedCount}  this Porps `,
+      this.props.wishlistUpdatedCount,
+    );
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
       this.fetchMyWishlistData();
     }
@@ -38,11 +38,14 @@ class MyWishlist extends React.Component {
       .get(myWishlistAPI, {})
       .then(response => {
         console.log('PLP Response----', response.data);
-        console.log('Wishlist ITem Count --- ', response.data.data.wishlistItemCount)
+        console.log(
+          'Wishlist ITem Count --- ',
+          response.data.data.wishlistItemCount,
+        );
         this.setState({
           wishlistData: response.data.data.wishlistData,
-          isLoading: true
-        })
+          isLoading: true,
+        });
       })
       .catch(error => {
         console.log('PLPBannerrror---', error);
@@ -50,38 +53,47 @@ class MyWishlist extends React.Component {
           error: error.message,
           isLoading: false,
         });
-
       });
-
   }
 
   render() {
+    const wishlistItem = (
+      <>
+        <div className="container">
+          <h3 className="heading">My Wishlist</h3>
+          <section className="plpCategories">
+            <PlpComponent
+              plpDataPro={this.state.wishlistData}
+              isFromWishlistPro
+            />
+          </section>
+        </div>
+      </>
+    );
 
-    const wishlistItem = <>
-      <div className='container'>
-        <h3 className="heading">My Wishlist</h3>
-        <section className="plpCategories">
-          <PlpComponent
-            plpDataPro={this.state.wishlistData}
-            isFromWishlistPro
-          />
-        </section>
+    const loadingIndicator = (
+      <div className="lazyloading-Indicator">
+        <img
+          id="me"
+          className="loadingImg"
+          src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+        />
       </div>
-    </>
-
-    const loadingIndicator = <div className="lazyloading-Indicator">
-      <img
-        id="me"
-        className="loadingImg"
-        src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-      />
-    </div>
+    );
 
     return (
       <div className="myWishlist">
-        {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
-          	{this.state.wishlistData.length != 0 ? wishlistItem : <EmptyWishlist />}
-        </div>}
+        {!this.state.isLoading ? (
+          loadingIndicator
+        ) : (
+          <div className="myWishlist">
+            {this.state.wishlistData.length != 0 ? (
+              wishlistItem
+            ) : (
+              <EmptyWishlist />
+            )}
+          </div>
+        )}
       </div>
     );
   }

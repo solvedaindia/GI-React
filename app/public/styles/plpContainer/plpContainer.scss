@@ -126,21 +126,21 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: 50px;
+    font-size: 56px;
     color: $ceruleanblue;
     margin: 0;
   }
   .headingSubTitle {
     color: $colorLightGrey;
     margin: 0 0 15px 0;
-    font-size: 13px;
+    font-size: 14px;
   }
   .container {
     padding: 0 30px;
   }
   .plp-products {
     .productlist {
-      padding: 20px;
+      padding: 0 0 16px 0;
       position: relative;
       border: 1px solid $borderLight;
       .hoverBox{
@@ -225,8 +225,8 @@ section.tablecarousel {
           display: block;
 
           .imgfullwidth {
-            max-width: 100%;
-            max-height: 168px;
+            width: 100%;
+            // max-height: 168px;
             display: block;
           }
         }
@@ -249,7 +249,7 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: 14px;
+          font-size: 18px;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -285,7 +285,7 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: 18px;
+            font-size: 24px;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -490,6 +490,7 @@ section.tablecarousel {
           .label_text {
             padding: 0 30px 26px 0;
             color: $battleshipGrey;
+            font-size: 12px;
           }
           .input_box,
           .label_text {

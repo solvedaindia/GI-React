@@ -9,7 +9,7 @@ import appCookie from '../../utils/cookie';
 import WelcomeBackForm from '../WelcomeBackForm';
 import {
   facebookAppId,
-  googleClientId
+  googleClientId,
 } from '../../../public/constants/constants';
 import {
   onFacebookResponse,
@@ -27,139 +27,103 @@ import Facebook from '../../../public/images/facebook.png';
 import '../../../public/styles/login/login.scss';
 
 class WelcomeBack extends React.Component {
-	constructor() {
-		super();
-		this.handleShow = this.handleShow.bind(this);
-		this.handleClose = this.handleClose.bind(this);
-		this.state = {
-			show: true,
-			message: null,
-			firstName: null,
-			lastName: null,
-			authorizationProvider: null,
-			userId: null,
-			socialToken: null,
-			emialId: null,
-			loginStatus: 'Login/Register',
-			userType: 'Hello Guest!',
-			isFacebookClicked: false
-		};
-	}
+  constructor() {
+    super();
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.state = {
+      show: true,
+      message: null,
+      firstName: null,
+      lastName: null,
+      authorizationProvider: null,
+      userId: null,
+      socialToken: null,
+      emialId: null,
+      loginStatus: 'Login/Register',
+      userType: 'Hello Guest!',
+      isFacebookClicked: false,
+    };
+  }
 
-	handleClose() {
-		console.log('welocme Cloase');
-		this.props.resetCallbackPro();
-		this.setState({ show: false, message: null });
-	}
+  handleClose() {
+    console.log('welocme Cloase');
+    this.props.resetCallbackPro();
+    this.setState({ show: false, message: null });
+  }
 
-	handleShow() {
-		if (this.state.loginStatus == 'Login/Register') {
-		this.setState({ show: true, message: null });
-		} else {
-		console.log('Remove the cookie');
-		}
-	}
+  handleShow() {
+    if (this.state.loginStatus == 'Login/Register') {
+      this.setState({ show: true, message: null });
+    } else {
+      console.log('Remove the cookie');
+    }
+  }
 
-	// Social Login Handlers
-	responseGoogle = response => {
-		const profileData = response.profileObj;
-		if (!profileData.email) {
-		alert('SocialLogin - Email Id missing');
-		return;
-		}
+  // Social Login Handlers
+  responseGoogle = response => {
+    const profileData = response.profileObj;
+    if (!profileData.email) {
+      alert('SocialLogin - Email Id missing');
+      return;
+    }
 
-		this.setState({
-		firstName: profileData.givenName,
-		lastName: profileData.familyName,
-		authorizationProvider: 'google',
-		userId: response.googleId,
-		socialToken: response.accessToken,
-		emialId: profileData.email,
-		});
+    this.setState({
+      firstName: profileData.givenName,
+      lastName: profileData.familyName,
+      authorizationProvider: 'google',
+      userId: response.googleId,
+      socialToken: response.accessToken,
+      emialId: profileData.email,
+    });
 
-		onGoogleResponse(this.state, itemData => {
-		console.log('GoogleCallback', itemData);
-		});
-	};
+    onGoogleResponse(this.state, itemData => {
+      console.log('GoogleCallback', itemData);
+    });
+  };
 
-	responseFacebook = response => {
-		if (!response.email) {
-		  alert('SocialLogin - Email Id missing');
-		  return;
-		}
-	
-		// Remove below condition to get auto Facebook login.
-		if (this.state.isFacebookClicked) {
-		  const firstName = response.name.substr(0, response.name.indexOf(' '));
-		  const lastName = response.name.substr(response.name.indexOf(' ') + 1);
-		  this.setState({
-			firstName,
-			lastName,
-			authorizationProvider: 'facebook',
-			userId: response.userID,
-			socialToken: response.accessToken,
-			emialId: response.email,
-		  });
-	
-		  onFacebookResponse(this.state, itemData => {
-			console.log('FacebookCallback', itemData);
-		  });
-		}
-	  };
+  responseFacebook = response => {
+    if (!response.email) {
+      alert('SocialLogin - Email Id missing');
+      return;
+    }
 
-	facebookOnClick() {
-		this.setState({ isFacebookClicked: true });
-	}
+    // Remove below condition to get auto Facebook login.
+    if (this.state.isFacebookClicked) {
+      const firstName = response.name.substr(0, response.name.indexOf(' '));
+      const lastName = response.name.substr(response.name.indexOf(' ') + 1);
+      this.setState({
+        firstName,
+        lastName,
+        authorizationProvider: 'facebook',
+        userId: response.userID,
+        socialToken: response.accessToken,
+        emialId: response.email,
+      });
 
-	/* Handle User Login API */
-	handleUserLoginApi(data) {
-		this.setState({ message: null });
-		axios
-		.post(userLoginAPI, data, {
-			headers: { store_id: storeId, access_token: accessToken },
-		})
-		.then(response => {
-			window.location.reload();
-			appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-			document.cookie = `${accessTokenCookie}=${
-			response.data.data.access_token
-			};path=/;expires=''`;
-			this.setState({
-			loginStatus: 'Logout',
-			userType: 'Hello User!',
-			show: false,
-			});
-			// alert('Successfully Logged In');
-		})
-		.catch(error => {
-			const errorData = error.response.data;
-			const errorMessage = errorData.error.error_message;
-			this.setState({
-			message: `Error - ${errorMessage}`,
-			});
-		});
-	}
+      onFacebookResponse(this.state, itemData => {
+        console.log('FacebookCallback', itemData);
+      });
+    }
+  };
 
-	showLoginStatus() {
-		const getLoginCookie = appCookie.get('isLoggedIn');
-		if (getLoginCookie) {
-		(this.state.userType = 'Hello User!'),
-			(this.state.loginStatus = 'Logout');
-		} else {
-		(this.state.userType = 'Hello Gues!'),
-			(this.state.loginStatus = 'Login/Register');
-		}
-	}
+  facebookOnClick() {
+    this.setState({ isFacebookClicked: true });
+  }
 
   /* Handle User Login API */
   handleUserLoginApi(data) {
     this.setState({ message: null });
-    apiManager
-      .post(userLoginAPI, data)
+    axios
+      .post(userLoginAPI, data, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-        appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+        document.cookie = `${accessTokenCookie}=${
+          response.data.data.access_token
+        };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -176,26 +140,66 @@ class WelcomeBack extends React.Component {
       });
   }
 
-	clickedOnForgotPassword() {
-		this.props.callbackPro(true);
-		this.setState({ show: false, message: null });
-		//this.handleClose();
-	}
+  showLoginStatus() {
+    const getLoginCookie = appCookie.get('isLoggedIn');
+    if (getLoginCookie) {
+      (this.state.userType = 'Hello User!'),
+        (this.state.loginStatus = 'Logout');
+    } else {
+      (this.state.userType = 'Hello Gues!'),
+      (this.state.loginStatus = 'Login/Register');
+    }
+  }
 
-	clickedOnRegister() {
-		this.props.callbackPro(false);
-		this.setState({ show: false, message: null });
-		//this.handleClose();
-	}
+  /* Handle User Login API */
+  handleUserLoginApi(data) {
+    this.setState({ message: null });
+    apiManager
+      .post(userLoginAPI, data)
+      .then(response => {
+        window.location.reload();
+        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set(
+          `${accessTokenCookie}=${
+            response.data.data.access_token
+          };path=/;expires=''`,
+        );
+        this.setState({
+          loginStatus: 'Logout',
+          userType: 'Hello User!',
+          show: false,
+        });
+        // alert('Successfully Logged In');
+      })
+      .catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        this.setState({
+          message: `Error - ${errorMessage}`,
+        });
+      });
+  }
 
-	render() {
-		let message = null;
-		if (this.state.message) {
-		message = <p>{this.state.message}</p>;
-		}
-		return (
-		<div>
-			{/* <ul className="userList">
+  clickedOnForgotPassword() {
+    this.props.callbackPro(true);
+    this.setState({ show: false, message: null });
+    // this.handleClose();
+  }
+
+  clickedOnRegister() {
+    this.props.callbackPro(false);
+    this.setState({ show: false, message: null });
+    // this.handleClose();
+  }
+
+  render() {
+    let message = null;
+    if (this.state.message) {
+      message = <p>{this.state.message}</p>;
+    }
+    return (
+      <div>
+        {/* <ul className="userList">
 			<li className="listItem">
 				<a href="" className="dropDown">
 				{this.state.userType}

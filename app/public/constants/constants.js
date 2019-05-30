@@ -110,7 +110,7 @@ export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
-export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const catalog = 'GodrejInterioSAS';
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

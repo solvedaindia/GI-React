@@ -57,8 +57,6 @@ module.exports.productByProductID = function getproductDetailsByProductID(
     .replace('{{storeId}}', headers.storeId)
     .replace('{{productId}}', ProductID);
 
-  // const originUrl =
-  //   'https://192.168.0.36:3738/search/resources/store/10151/productview/TEST_PDP';
   const reqHeader = headerutil.getWCSHeaders(headers);
   origin.getResponse(
     originMethod,
@@ -95,10 +93,13 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
     return;
   }
 
-  const productListTask = [
+  let productListTask = [
     getProductListByIDs.bind(null, headers, productIDs),
     getPromotionData.bind(null, headers, productIDs),
   ];
+  if (headers.promotionData === 'false') {
+    productListTask = [getProductListByIDs.bind(null, headers, productIDs)];
+  }
   async.parallel(productListTask, (err, result) => {
     if (err) {
       callback(err);
@@ -108,6 +109,7 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
   });
 };
 
+module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';
   if (productIDs && productIDs.length > 0) {
@@ -152,6 +154,17 @@ function getProductListByIDs(headers, productIDs, callback) {
 /* Get Promotion Data for All The Products */
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
+  /*   promotionUtil.getMultiplePromotionData(
+    productIDs,
+    headers,
+    (error, promotion) => {
+      if (!error) {
+        callback(null, promotion);
+      } else {
+        callback(error);
+      }
+    },
+  ); */
   async.map(
     productIDs,
     (productId, cb) => {
@@ -186,16 +199,25 @@ function transformJson(result) {
   const promotionJson = result[1];
   const productListing = [];
 
-  productListArray.forEach(product => {
-    let productDetail = {};
-    const productPromotion = promotionJson.filter(
-      promotion => promotion.uniqueID === product.uniqueID,
-    );
-    // eslint-disable-next-line no-param-reassign
-    product.promotionData = productPromotion[0].promotionData;
-    productDetail = productDetailFilter.productDetailSummary(product);
-    productListing.push(productDetail);
-  });
+  if (!promotionJson) {
+    productListArray.forEach(product => {
+      let productDetail = {};
+      productDetail = productDetailFilter.productDetailSummary(product);
+      productListing.push(productDetail);
+    });
+  } else {
+    productListArray.forEach(product => {
+      let productDetail = {};
+      const productPromotion = promotionJson.filter(
+        promotion => promotion.uniqueID === product.uniqueID,
+      );
+      // eslint-disable-next-line no-param-reassign
+      product.promotionData = productPromotion[0].promotionData;
+      productDetail = productDetailFilter.productDetailSummary(product);
+      productListing.push(productDetail);
+    });
+  }
+
   const resJson = {
     productCount: productListing.length,
     productList: productListing,
@@ -203,4 +225,34 @@ function transformJson(result) {
   return resJson;
 }
 
-module.exports.getProductListByIDs = getProductListByIDs;
+/**  
+Find Inventory
+* @param: {pincode:'User Pincode',partNumber:'Part Number',quantity:'Quantity'}
+* @return Inventory Details
+*/
+module.exports.findInventory = findInventory;
+function findInventory(headers, reqParams, callback) {
+  const findInventoryUrl = constants.findInvertory
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{partNumber}}', reqParams.partNumber)
+    .replace('{{pinCode}}', reqParams.pincode)
+    .replace('{{quantity}}', reqParams.quantity);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'GET',
+    findInventoryUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body.InventoryAvailability[0]);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}

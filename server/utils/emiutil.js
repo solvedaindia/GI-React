@@ -34,7 +34,7 @@ module.exports.emiDataBySellingPrice = function getEmiDataBySellingPrice(
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        callback(response);
+        callback(errorUtils.handleWCSError(response));
       }
     },
   );
