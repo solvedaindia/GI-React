@@ -19,7 +19,6 @@ class productInfo extends React.Component {
 
 	render() {
 		let emidata = this.props.productData.emiData;
-		emidata = 599;
 		return (
 			<>
 			<div className="price">
@@ -51,7 +50,7 @@ class productInfo extends React.Component {
 					}
 				</ul>
 			</div>
-			{ this.props.productData.offerPrice <= 1500 && (
+			{ this.props.productData.offerPrice >= 1500 && (
 			<div className="starting-emitext">
 				<div className='offerbg text'> <span className='emitext'>EMI</span></div>
 				<div className='text'>Starting from </div>

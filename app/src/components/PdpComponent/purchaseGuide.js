@@ -74,8 +74,7 @@ class purchaseGuide extends React.Component {
 
 				return (
 					<li id={`purchaseGuideTab_${index}`}
-					className={`purchaseGuideTab purchaseGuideTabData ${this.activeClass}`}><a
-						key={index}
+					className={`purchaseGuideTab purchaseGuideTabData ${this.activeClass}`} key={index}><a
 						onClick={() => this.productDetailsTab(index)}
 					>
 						{tabData.title}

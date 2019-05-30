@@ -41,8 +41,7 @@ class productDetail extends React.Component {
 
 				return (
 					<li id={`tab_${index}`}
-					className={`tab tabData ${this.activeClass}`}><a
-						key={index}
+					className={`tab tabData ${this.activeClass}`} key={index}><a
 						onClick={() => this.productDetailsTab(index)}
 					>
 						{tabData.title}

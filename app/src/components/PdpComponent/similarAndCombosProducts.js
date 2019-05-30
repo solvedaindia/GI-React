@@ -1,6 +1,11 @@
 import React from 'react';
 import Slider from 'react-slick';
 // import '../../../public/styles/slickCustom.scss';
+import {
+	newMachineUrl,
+  	store,
+  	catalog,
+} from '../../../public/constants/constants';
 
 import { Row, Col } from 'react-bootstrap';
 class SimilarCombosProducts extends React.Component {
@@ -24,8 +29,9 @@ class SimilarCombosProducts extends React.Component {
 	getSimilarProducts() {
 		
 		return(this.props.similarProducts.map((data, index) => {
-			const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
-			if(index < 3) {
+			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
+			//const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
+			//if(index < 3) {
 			return (
 				<li className="productlist" key={index}>
 					<div className='imgBox' key={index}>
@@ -47,15 +53,16 @@ class SimilarCombosProducts extends React.Component {
 					</div>
 				</li>
 			);
-							}
+							//}
 		}));
 		
 	}
 
 	getComobosProducts() {
 		return(this.props.combos.map((data, index) => {
-			if(index < 3) {
-			const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
+			//if(index < 3) {
+			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
+			//const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
 			
 			return (
 				<li className="productlist" key={index}>
@@ -73,12 +80,15 @@ class SimilarCombosProducts extends React.Component {
 						</p>
 						<p className='emi-text text'>
 							<span className='free-accessories'>EMI Starting from <span className='bold'>{data.emiData}</span></span>
-							<span className='bold'>{data.discount}% Off </span> on this product
+							{ data.discount && (
+								<><span className='bold'>{data.discount}% Off </span> on this product</>
+							)}
+							
 						</p>
 					</div>
 				</li>
 			);
-							}
+							//}
 		}));
 	}
 
@@ -90,6 +100,7 @@ class SimilarCombosProducts extends React.Component {
 			slidesToShow: 3,
 			slidesToScroll: 1,
 		};
+
 		return (
 			<Col  md={12} sm={12} xs={12} className='similarProduct-Wrapper'>
 				<Row>
@@ -98,17 +109,45 @@ class SimilarCombosProducts extends React.Component {
 						<a role='button' id='combosHead' className="tabs" onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a>
 					</Col>
 					<Col md={12} sm={12} xs={12} id='similar' className='dataActive'>
+					
 						<ul className='similarProducts'>
 							{this.getSimilarProducts()}
 						</ul>
+					
 					</Col>
 					<Col md={12} sm={12} xs={12}id='combos' className='dataNotActive'>
+					
 						<ul className='similarProducts'>					
 							{this.getComobosProducts()}
 						</ul>
+					
 					</Col>
 				</Row>
 			</Col>
+			//      <div>
+			// 	 <h2> Single Item</h2>
+			// 	 <Slider {...settings}>
+			// 	   <div>
+			// 		 <h3>1</h3>
+			// 	   </div>
+			// 	   <div>
+			// 		 <h3>2</h3>
+			// 	   </div>
+			// 	   <div>
+			// 		 <h3>3</h3>
+			// 	   </div>
+			// 	   <div>
+			// 		 <h3>4</h3>
+			// 	   </div>
+			// 	   <div>
+			// 		 <h3>5</h3>
+			// 	   </div>
+			// 	   <div>
+			// 		 <h3>6</h3>
+			// 	   </div>
+			// 	 </Slider>
+			//    </div>
+
 		);
 	}
 }

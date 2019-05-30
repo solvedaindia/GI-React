@@ -44,9 +44,9 @@ class productDefAttribute extends React.Component {
 				let valueName = data.name;
 				
 				return (
-					<>
-					<div className='att-val-name' key={i}><b>{valueName} </b></div>
-						<ul key={i}>
+					<div key={i}>
+					<div className='att-val-name'><b>{valueName} </b></div>
+						<ul>
 							{
 								data.values.map((value, index) => {
 									let checkedType = false;
@@ -90,7 +90,7 @@ class productDefAttribute extends React.Component {
 
 							}
 						</ul>
-						</>
+						</div>
 				)
 			})
 		);

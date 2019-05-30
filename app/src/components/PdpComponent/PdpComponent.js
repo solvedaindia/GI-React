@@ -98,7 +98,7 @@ class PdpComponent extends React.Component {
 	handleSelectedSwatches(count) {
 		let selectedSwatches = new Array();
 		for (let i = 0; i < count + 1; i++) {
-			const name = document.getElementsByClassName('radio' + i)[0].getAttribute('name');
+			const name = document.getElementsByClassName('radio' + count)[0].getAttribute('name');
 			const getValue = document.querySelector('input[name = '+name+']:checked').value;
 			selectedSwatches.push(getValue);
 		}
@@ -150,9 +150,7 @@ class PdpComponent extends React.Component {
 											<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
 										</Col>
 									</Col>
-								</Row>	
-
-								
+								</Row>
 								<ProductNameDescription
 									productData={this.state.skuData}
 								/>
