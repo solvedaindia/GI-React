@@ -113,7 +113,7 @@ class PdpComponent extends React.Component {
 			<div className="galleryArea">
 				{!isLoading ? (
 					<>
-					<Row>
+					{/* <Row>
 						<Col md={7} sm={12} xs={12}>
 							<div className="product">
 								<span className='text'>Product ID:</span> 
@@ -126,7 +126,7 @@ class PdpComponent extends React.Component {
 						<Col md={4} sm={12} xs={12}>
 							<AddToCart skuId={this.state.skuData.uniqueID} sticky={true} />
 						</Col>
-					</Row>
+					</Row> */}
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">
@@ -139,10 +139,6 @@ class PdpComponent extends React.Component {
 						</Col>
 						<Col md={4} sm={12} xs={12}>
 							<div className="GallerytextBox">
-								<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
-								<div className='shareDiv'>SHARE {shareImg}
-								<SocialMedia/>
-								</div>
 								<Row>
 									<Col md={12} sm={12} xs={12}>
 										<Col md={6} sm={12} xs={12} className="product">
@@ -150,7 +146,7 @@ class PdpComponent extends React.Component {
 											<span className='text'>{this.state.skuData.partNumber}</span>
 										</Col>
 										<Col md={6} sm={12} xs={12} className="product-share">
-											<div className='share'>SHARE </div>
+											<div className='share'>SHARE <div className='share-btn'>{shareImg}</div><SocialMedia/></div>
 											<div className='wishListDiv'>WISHLIST <Wishlist uniqueId={this.state.skuData.uniqueID} isInWishlistPro={wishlistArr.includes(this.state.skuData.uniqueID)}/></div>
 										</Col>
 									</Col>

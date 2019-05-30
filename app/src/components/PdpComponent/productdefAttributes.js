@@ -41,9 +41,12 @@ class productDefAttribute extends React.Component {
 	makeRadioButton(selectedSwatches) {
 		return (
 			this.props.defAttributes.map((data, i) => {
+				let valueName = data.name;
+				
 				return (
-					<div key={i}><b>{data.name}</b>
-						<ul>
+					<>
+					<div className='att-val-name' key={i}><b>{valueName} </b></div>
+						<ul key={i}>
 							{
 								data.values.map((value, index) => {
 									let checkedType = false;
@@ -72,15 +75,22 @@ class productDefAttribute extends React.Component {
 									}
 
 									radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={circle}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index)}{name}</label>
+									let isDisabled = '';
+		
+									if(i > 0 && selectedSwatches.indexOf(value.name) === -1) {
+										isDisabled = 'disabled-attr';
+									}
 									return (
-										<li className='attributeList' key={index}>
+										<li className={`attributeList ${isDisabled}`}  key={index}>
 											{radioButtonHtml}
 										</li>
 									);
 								})
+								
+
 							}
 						</ul>
-					</div>
+						</>
 				)
 			})
 		);
@@ -91,7 +101,7 @@ class productDefAttribute extends React.Component {
 		let attributeHtml = this.makeRadioButton(selectedSwatches);
 
 		return (
-			<div>
+			<div className="attr-details-box">
 				{attributeHtml}
 			</div>
 		);

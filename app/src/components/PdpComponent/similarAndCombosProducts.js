@@ -25,7 +25,7 @@ class SimilarCombosProducts extends React.Component {
 		
 		return(this.props.similarProducts.map((data, index) => {
 			const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
-			
+			if(index < 3) {
 			return (
 				<li className="productlist" key={index}>
 					<div className='imgBox' key={index}>
@@ -47,12 +47,14 @@ class SimilarCombosProducts extends React.Component {
 					</div>
 				</li>
 			);
+							}
 		}));
 		
 	}
 
 	getComobosProducts() {
 		return(this.props.combos.map((data, index) => {
+			if(index < 3) {
 			const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
 			
 			return (
@@ -76,6 +78,7 @@ class SimilarCombosProducts extends React.Component {
 					</div>
 				</li>
 			);
+							}
 		}));
 	}
 

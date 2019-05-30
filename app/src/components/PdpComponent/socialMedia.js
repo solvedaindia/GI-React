@@ -25,7 +25,7 @@ class SocialMedia extends React.Component {
 		const title = 'Hello This is Demo';
 
 		return (
-			<>			
+			<>			<div className='social-icon-share'>
 								<FacebookShareButton
 									url={shareUrl}
 									quote={title}
@@ -58,6 +58,7 @@ class SocialMedia extends React.Component {
 									size={32}
 									round />
 								</EmailShareButton>Mail
+                                </div>
 
 
 			</>
