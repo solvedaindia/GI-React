@@ -1,11 +1,11 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
-
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import WelcomeBackForm from '../WelcomeBackForm';
 import {
   facebookAppId,
