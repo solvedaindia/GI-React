@@ -68,7 +68,7 @@ class SimilarCombosProducts extends React.Component {
 			slidesToShow: 4,
 			slidesToScroll: 1,
 			prevArrow: prevArrowImg,
-            nextArrow: nextArrowImg,
+			nextArrow: nextArrowImg,
 		};
 
 		return (

@@ -61,7 +61,7 @@ class productInfo extends React.Component {
 			)}
 			<div className='pincode'>
 				<div className='PincodeTextdata clearfix'>
-					<input className='pincodeVal' type='text' readOnly value='56632' />
+					<input className='pincodeVal' type='text' readOnly value='400079' />
 					<a className='pincodeEdit' role='button'>Edit</a>
 				</div>              
 				<div className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</div>
