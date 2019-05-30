@@ -62,7 +62,7 @@ class productFeatures extends React.Component {
 												key={index}
 												className={`featureImages ${this.dataClass}`}
 											>
-												<img src={fullImagePath} />
+												<img src={fullImagePath} className='imgfullwidth' />
 											</div>
 										);
 									})}

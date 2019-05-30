@@ -29,14 +29,13 @@ class SimilarCombosProducts extends React.Component {
 	}
 
 	getSimilarCombosProducts(props) {
-		
 		return(props.map((data, index) => {
 			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
 
 			return (
-				<div className='similarProducts'>
-				<div className="productlist" key={index}>
-					<div className='imgBox' key={index}>
+				<div className='similarProducts' key={index}>
+				<div className="productlist">
+					<div className='imgBox'>
 						<img className='imgfullwidth' src={imgUrl}  alt='Img'/>
 					</div>
 					<div className="product-text">
