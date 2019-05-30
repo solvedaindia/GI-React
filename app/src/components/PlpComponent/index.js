@@ -56,6 +56,8 @@ class PlpComponent extends React.Component {
             isInWishlist={wishlistArr.includes(item.uniqueID)}
             addProduct={this.handleAddProduct}
             compData={this.props.compData}
+            isfromWishlistPro={this.props.isFromWishlistPro}
+            history={this.props.history}
           />
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}

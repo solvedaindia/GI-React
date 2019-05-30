@@ -1,5 +1,6 @@
 const origin = require('./origin');
 const constants = require('./constants');
+const headerutil = require('./headerutil');
 const originMethod = 'GET';
 const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
@@ -33,6 +34,113 @@ function getPincode(headers, userID, callback) {
         };
         callback(null, pincodeRes);
       } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Get City and State on the basis of Pincode
+ */
+module.exports.getCityAndState = function getStateAndCity(
+  pinCode,
+  headers,
+  callback,
+) {
+  if (!pinCode) {
+    logger.debug('GET City&State :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+
+  const originUrl = constants.getCityAndState
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', pinCode);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/* To Update Pincode in User's Self Address */
+module.exports.setDefaultPincode = updateDefaultPincode;
+function updateDefaultPincode(headers, pincode, callback) {
+  logger.debug('Call to update Default Pincode');
+  const pincodeUpdateURL = `${constants.updateDefaultPincode.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}`;
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  const reqBody = {
+    updatedZipcodeValue: pincode,
+    userId: headers.userId,
+  };
+
+  origin.getResponse(
+    'PUT',
+    pincodeUpdateURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, 'success');
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Function to return Pincode is serviceable or not
+ */
+module.exports.getPincodeServiceability = pincodeServiceability;
+function pincodeServiceability(headers, pincode, callback) {
+  logger.debug('Call to Get Pincode Serviceablity API');
+  const originUrl = constants.pincodeServiceablity
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', pincode);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const resJSON = {
+          serviceable: false,
+        };
+        if (response.body.serviceAbilityFlag === true) {
+          resJSON.serviceable = true;
+        }
+        callback(null, resJSON);
+      } else {
+        logger.debug('Error While Checking Pincode Serviceability');
         callback(errorUtils.handleWCSError(response));
       }
     },

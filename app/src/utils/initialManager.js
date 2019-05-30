@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import apiManager from './apiManager';
-import { updatetWishListCount } from '../actions/app/actions';
+import { updatetWishListCount, updatetMinicart } from '../actions/app/actions';
 import { getCookie } from './utilityManager';
 import appCookie from './cookie';
 import {
@@ -13,6 +13,7 @@ import {
   wishlistIdCookie,
   wishListCountApi,
   logoutAPI,
+  cartCountApi,
 } from '../../public/constants/constants';
 import { resolveTheWishlistData } from './utilityManager';
 
@@ -45,6 +46,19 @@ export function getUpdatedWishlist(wishlist) {
       wishlist.props.updatetWishListCount(wishlistCount);
     })
     .catch(error => {});
+}
+
+export function getUpdatedMinicartCount(minicart) {
+  apiManager
+    .get(cartCountApi)
+    .then(response => {
+      const count = response.data.data.cartTotalQuantity;
+      minicart.props.updatetMinicart(count);
+      // return count;
+    })
+    .catch(error => {
+      // return null;
+    });
 }
 
 export function logoutTheUser() {

@@ -35,6 +35,7 @@ import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import '../../../public/styles/app.scss';
+import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 
 export default class App extends React.Component {
@@ -142,6 +143,7 @@ export default class App extends React.Component {
           <Route path="/pdp/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
+          <Route path="/wishlist" component={MyWishlist} />
         </Switch>
         <FooterContainer />
       </div>

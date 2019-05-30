@@ -3,8 +3,7 @@ import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import {
   homePageLayoutAPI,
-  storeId,
-  accessToken,
+  ipDataApi,
 } from '../../../public/constants/constants';
 export class HomapegeLayout extends React.Component {
   constructor(props) {
@@ -13,7 +12,26 @@ export class HomapegeLayout extends React.Component {
       homepageLayout: null,
       isLoading: false,
       error: null,
+      ipData: null,
     };
+  }
+
+  getIPData() {
+    apiManager
+      .get(ipDataApi, { headers: { Accept: 'application/json' } })
+      .then(response => {
+        this.setState({
+          ipData: response.data,
+          isLoading: false,
+        });
+        console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+      });
   }
 
   getPageLayout() {
@@ -35,6 +53,7 @@ export class HomapegeLayout extends React.Component {
   }
 
   componentDidMount() {
+    this.getIPData();
     this.getPageLayout();
   }
 

@@ -1,11 +1,7 @@
 import React from 'react';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
-import {
-  storeId,
-  accessToken,
-  newsletterAPI,
-} from '../../../public/constants/constants';
+import { newsletterAPI } from '../../../public/constants/constants';
 import { validateEmptyObject, regexEmail } from '../../utils/validationManager';
 import Socialicon from './socialicons';
 
@@ -49,11 +45,11 @@ class newsletter extends React.Component {
   render() {
     const newsletterHtml = (
       <Col md={12} sm={12} className="newsletter_section">
-        <h3 className="heading news_heading">{this.props.name.text}</h3>
+        <h6 className="heading news_heading">{this.props.name.text}</h6>
         <ul className="newsletterList">
           {this.props.name.children.map((newsletterDesc, index) => (
             <li className="list" key={index}>
-              {newsletterDesc.text}
+              <h6 className="newsletter-heading">{newsletterDesc.text}</h6>
             </li>
           ))}
           <li>

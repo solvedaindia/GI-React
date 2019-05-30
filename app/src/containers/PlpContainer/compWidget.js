@@ -33,9 +33,13 @@ export class CompContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="container comp">
-          <ul>{this.buildData()}</ul>
+      <div className="compareProductwrap">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <ul className="compareProducts">{this.buildData()}</ul>
+            </div>
+          </div>
         </div>
       </div>
     );

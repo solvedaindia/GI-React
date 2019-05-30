@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
   wishListCountApi,
@@ -14,6 +15,7 @@ import {
   getReleventReduxState,
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
+import MyWishlist from '../MyWishlist/myWishlist';
 
 class wishListCount extends React.Component {
   state = {
@@ -30,8 +32,7 @@ class wishListCount extends React.Component {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
         this.setState({
-          wishListCount:
-            count == '0' ? '1' : response.data.data.wishlistTotalItems,
+          wishListCount: response.data.data.wishlistTotalItems,
           isLoading: false,
         });
       })
@@ -40,7 +41,6 @@ class wishListCount extends React.Component {
 
   handleWLCount() {
     if (getCookie('isLoggedIn') === 'true') {
-      alert('Take user to wishlist page');
     } else {
       this.setState({ isWelcomeBack: true });
     }
@@ -68,15 +68,26 @@ class wishListCount extends React.Component {
 
   render() {
     const { isLoading, wishListCount } = this.state;
+    let wishlistItem = null;
+    let wishlistLogo = <WishlistLogo />;
+    if (wishListCount != 0 && wishListCount != undefined) {
+      wishlistItem = <span className="wishListCount">{wishListCount}</span>;
+      wishlistLogo = (
+        <Link to="/wishlist">
+          <WishlistLogo />
+        </Link>
+      );
+    }
+
     return (
       <>
         <li className="icons" onClick={this.handleWLCount.bind(this)}>
           {!isLoading ? (
-            <span className="wishListCount">{wishListCount}</span>
+            wishlistItem
           ) : (
             <p className="error">No Category Found</p>
           )}
-          <WishlistLogo />
+          {wishlistLogo}
         </li>
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>

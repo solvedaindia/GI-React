@@ -140,9 +140,46 @@ section.tablecarousel {
   }
   .plp-products {
     .productlist {
-      padding: 20px;
+      padding: 0 0 16px 0;
       position: relative;
       border: 1px solid $borderLight;
+      .hoverBox{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(3, 108, 197, 0.38);
+        top: 0;
+        left: 0;
+        opacity:0;
+        -webkit-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+        padding: 20px;
+      
+
+        .btn-compare{
+          background: $colorwhite;
+          color:$ashGrey;
+          padding:12px 45px;
+          text-align: center;
+          font-size: 14px;
+          border:none;
+          font-family: $font-bold;
+          width: 200px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -22px;
+          margin-left: -100px;
+          position: absolute;
+        }
+      }
+      &:hover .hoverBox{
+       opacity: 1;
+      }
+      &:hover .wishlistBtn{
+        opacity:1;
+      }
 
       .featured-box {
         position: absolute;
@@ -172,6 +209,7 @@ section.tablecarousel {
         background: transparent;
         border: none;
         z-index: 1;
+        opacity: 0;
         &:focus {
           outline: none;
         }
@@ -187,8 +225,8 @@ section.tablecarousel {
           display: block;
 
           .imgfullwidth {
-            max-width: 100%;
-            max-height: 168px;
+            width: 100%;
+            // max-height: 168px;
             display: block;
           }
         }
@@ -294,6 +332,7 @@ section.tablecarousel {
     color: $black;
     font-size: 16px;
     font-family: $font-regular;
+    text-align: left;
     margin: 24px 0;
     display: inline-block;
     cursor: pointer;
@@ -710,20 +749,33 @@ section.tablecarousel {
 }
 
 //-------- Wishlist -------
-.addedToWishlist {
-  height: 50px;
+.addedToWishlist { 
   backdrop-filter: blur(10px);
-  background-color: #181818;
+  background:$black;
   animation: wishlistPopupAnimation 0.5s ease-in-out 0s forwards;
+  padding: 16px 17px 16px 20px;
+  margin: 24px 0 0 0;
+  width: 80%;
+  position: absolute;
+  right: 20px;
 
-  .textStyle {
+  .wishlist-text, 
+  .view-btn{
     font-size: 12px;
-    color: #ffffff;
+    color: $colorwhite;
+  }
+  .wishlist-text {    
+    float:left;
+    display: block;
   }
 
-  .viewTextStyle {
-    margin-left: 86%;
-    margin: 13px 1px 15px 150px;
+  .view-btn {       
+    float:right;
+    background: transparent;
+    border:none; 
+    &:focus{
+      outline: none;
+    }  
   }
 }
 

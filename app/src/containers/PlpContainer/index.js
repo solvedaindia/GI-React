@@ -30,6 +30,7 @@ import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/d
 import Sort from '../../components/PlpComponent/Sorting/sort';
 
 import * as actionCreators from './actions';
+import CompContainer from './compWidget';
 import apiManager from '../../utils/apiManager';
 import {
   plpSubCatAPI,
@@ -70,6 +71,7 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Query String Routing ------- ', this.props);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
@@ -240,7 +242,10 @@ export class PlpContainer extends React.Component {
       .get(`${espotAPI}GI_Plp_Description`)
       .then(response => {
         // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
-        this.setState({ plpDescriptionData: response.data.data });
+        this.setState(
+          { plpDescriptionData: response.data.data },
+          console.log('@@@@@Read More@@@@', response.data.data),
+        );
       })
       .catch(error => {
         // console.log('PLPBannerrror---', error);s
@@ -305,6 +310,7 @@ export class PlpContainer extends React.Component {
         <PlpComponent
           plpDataPro={this.state.plpData}
           adBannerDataPro={adBannerData}
+          history={this.props.history}
         />
       );
     }
@@ -382,7 +388,7 @@ export class PlpContainer extends React.Component {
         )}
         {!hasMore && <div className="noProductFound">No Products Found</div>}
         {descriptionItem}
-        {/* <CompContainer /> */}
+        <CompContainer />
       </>
     );
   }

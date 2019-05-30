@@ -15,8 +15,13 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT } from '../../constants/app/constants';
-
+import {
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+  WISH_LIST_COUNT,
+  UPDATE_MINICART,
+} from '../../constants/app/constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -60,9 +65,16 @@ export function repoLoadingError(error) {
 }
 
 export function updatetWishListCount(count) {
-  console.log('Its updated wihlist',count)
   return {
     type: WISH_LIST_COUNT,
+    count,
+  };
+}
+
+export function updatetMinicart(count) {
+  console.log('Its updated MiniCart');
+  return {
+    type: UPDATE_MINICART,
     count,
   };
 }

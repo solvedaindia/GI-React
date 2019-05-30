@@ -28,8 +28,47 @@ router.put('/changepassword', (req, res, next) => {
   });
 });
 
-router.get('/addresses', (req, res, next) => {
+router.get('/address/list', (req, res, next) => {
   usersHandler.getUserAddress(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/address/delete/:nickname', (req, res, next) => {
+  usersHandler.deleteAddress(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/address/add', (req, res, next) => {
+  usersHandler.createAddress(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/address/update/:nickname', (req, res, next) => {
+  usersHandler.updateAddress(req, (err, result) => {
     if (err) {
       next(err);
       return;

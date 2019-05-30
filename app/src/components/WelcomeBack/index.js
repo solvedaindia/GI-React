@@ -7,19 +7,15 @@ import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 
 import WelcomeBackForm from '../WelcomeBackForm';
-import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
-import RegisterModalData from '../RegisterComponent/registerModalData';
 import {
   facebookAppId,
   googleClientId,
-  isLoggedIn,
 } from '../../../public/constants/constants';
 import {
   onFacebookResponse,
   onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
-import { getCookie } from '../../utils/utilityManager';
 import {
   storeId,
   accessToken,
@@ -38,8 +34,15 @@ class WelcomeBack extends React.Component {
     this.state = {
       show: true,
       message: null,
+      firstName: null,
+      lastName: null,
+      authorizationProvider: null,
+      userId: null,
+      socialToken: null,
+      emialId: null,
       loginStatus: 'Login/Register',
       userType: 'Hello Guest!',
+      isFacebookClicked: false,
     };
   }
 
@@ -111,8 +114,10 @@ class WelcomeBack extends React.Component {
   /* Handle User Login API */
   handleUserLoginApi(data) {
     this.setState({ message: null });
-    apiManager
-      .post(userLoginAPI, data)
+    axios
+      .post(userLoginAPI, data, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
       .then(response => {
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
@@ -142,14 +147,37 @@ class WelcomeBack extends React.Component {
         (this.state.loginStatus = 'Logout');
     } else {
       (this.state.userType = 'Hello Gues!'),
-        (this.state.loginStatus = 'Login/Register');
+      (this.state.loginStatus = 'Login/Register');
     }
   }
 
-  componentDidMount() {
-    // this.handleUserLoginApi();
-    console.log('in the Login main pop up');
-    this.showLoginStatus();
+  /* Handle User Login API */
+  handleUserLoginApi(data) {
+    this.setState({ message: null });
+    apiManager
+      .post(userLoginAPI, data)
+      .then(response => {
+        window.location.reload();
+        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set(
+          `${accessTokenCookie}=${
+            response.data.data.access_token
+          };path=/;expires=''`,
+        );
+        this.setState({
+          loginStatus: 'Logout',
+          userType: 'Hello User!',
+          show: false,
+        });
+        // alert('Successfully Logged In');
+      })
+      .catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        this.setState({
+          message: `Error - ${errorMessage}`,
+        });
+      });
   }
 
   clickedOnForgotPassword() {
@@ -172,17 +200,17 @@ class WelcomeBack extends React.Component {
     return (
       <div>
         {/* <ul className="userList">
-          <li className="listItem">
-            <a href="" className="dropDown">
-              {this.state.userType}
-            </a>
-          </li>
-          <li className="listItem">
-            <a className="dropDown" onClick={this.handleShow}>
-              {this.state.loginStatus}
-            </a>
-          </li>
-        </ul> */}
+			<li className="listItem">
+				<a href="" className="dropDown">
+				{this.state.userType}
+				</a>
+			</li>
+			<li className="listItem">
+				<a className="dropDown" onClick={this.handleShow}>
+				{this.state.loginStatus}
+				</a>
+			</li>
+			</ul> */}
         <Modal
           className="welcomeBack"
           size="lg"

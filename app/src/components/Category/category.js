@@ -42,20 +42,16 @@ class Category extends React.Component {
         <ul className="categoryList">
           {!!category &&
             category.map((categoryData, index) => (
-              <li className="listItems" key={`category-${index}`}>
-                <a className="action" href={categoryData.onClickUrl}>
+              <li className='listItems' key={`category-${index}`}>
+                <a className='action' href={categoryData.onClickUrl}>
                   {categoryData.categoryName}
                 </a>
-                {!!categoryData.subCategoryArray && (
-                  <SubCategoriesData
-                    subCategoryArray={categoryData.subCategoryArray}
-                  />
-                )}
-                {/* {!!categoryData.subCategoryArray && <SubCatImg
-                                        subCategoryArray={categoryData.subCategoryArray}
-                                    />} */}
+                {!!categoryData.subCategoryArray && <SubCategoriesData
+                  subCategoryArray={categoryData.subCategoryArray}
+                />}
               </li>
-            ))}
+            )
+            )}
         </ul>
         <SearchBar />
         <HeaderRight />

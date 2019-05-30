@@ -1,6 +1,6 @@
 const jwt = require('jwt-simple');
 const crypto = require('crypto-js');
-const secretKey = 'kMk0Fx61ONmocvic9GfIg2W97MsoOcSa';
+const secretKey = 'bQeThWmZq4t6w9z$C&F)J@NcRfUjXn2r';
 const errorUtils = require('./errorutils');
 const logger = require('./logger');
 // HS256 secrets are typically 128-bit random strings, for example hex-encoded:

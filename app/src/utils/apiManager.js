@@ -43,10 +43,8 @@ const getClient = (baseUrl = null) => {
       return Promise.reject(error);
     },
   );
-
   return client;
 };
-
 /**
  * Base HTTP Client
  */
@@ -102,7 +100,6 @@ export default {
       .catch(error => Promise.reject(error));
   },
 };
-
 export function expireAccessTokenHandling() {
   if (getCookie(accessTokenCookie) != '') {
     console.log('Token has expired', getCookie(accessTokenCookie));
