@@ -11,32 +11,27 @@ import apiManager from '../../../utils/apiManager';
 import { updatetMinicart } from '../../../actions/app/actions';
 import { connect } from 'react-redux';
 import { getUpdatedMinicartCount } from '../../../utils/initialManager';
+import Link from 'react-router-dom/Link';
 
 class ProductItem extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {};
   }
 
-  handleClick = () => {
-    const compPrd = this.props.compData.find(
-      prd => prd.id == this.props.data.uniqueID,
-    );
-    if (compPrd) {
-      alert(
-        'Product alreday added in compare. Please select different prodcut',
-      );
-    } else {
-      const product = {
-        title: this.props.data.productName,
-        thumbnail: this.props.data.thumbnail,
-        id: this.props.data.uniqueID,
-        actualPrice: this.props.data.actualPrice,
-        offerPrice: this.props.data.offerPrice,
-      };
-      this.props.addProduct(product);
-    }
-  };
+  handleClick(e) {
+    e.preventDefault();
+    const product = {
+      title: this.props.data.productName,
+      thumbnail: this.props.data.thumbnail,
+      skuId: this.props.data.uniqueID,
+      id: this.props.data.parentUniqueID,
+      actualPrice: this.props.data.actualPrice,
+      offerPrice: this.props.data.offerPrice,
+    };
+    this.props.addProduct(product);
+  }
 
   moveToCartClicked = () => {
     const data = {
@@ -92,16 +87,16 @@ class ProductItem extends React.Component {
             <Promotions data={this.props.data.promotionData} />
           </div>
         </div>
-        <div className="hoverBox">
+        <Link to={`/pdp/${this.props.data.uniqueID}`} className="hoverBox">
           <Wishlist
             uniqueId={this.props.data.uniqueID}
             isInWishlistPro={this.props.isInWishlist}
             history={this.props.history}
           />
-          <button className="btn-compare" onClick={this.handleClick}>
+          <button className="btn-compare" onClick={(e) => this.handleClick(e)}>
             Add to compare
           </button>
-        </div>
+        </Link>
       </li>
     );
   }

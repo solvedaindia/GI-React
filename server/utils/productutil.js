@@ -202,3 +202,5 @@ function transformJson(result) {
   };
   return resJson;
 }
+
+module.exports.getProductListByIDs = getProductListByIDs;
