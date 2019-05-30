@@ -9,7 +9,6 @@ function CompItem(props) {
   function handleRemove() {
     props.remove(props.product.id);
   }
-  console.log('frd', props);
   return (
     <li className="list">
       <div className="imgBox">

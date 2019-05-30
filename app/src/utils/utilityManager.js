@@ -143,6 +143,11 @@ export function checkCompareWidget(compWidget, id) {
   const data = compWidget.find(prd => prd.id == id);
   if (data) {
     return compWidget.filter(prd => prd.id != id);
+  } else {
+    const skuData = compWidget.find(prd => prd.skuId == id);
+    if(skuData) {
+      return compWidget.filter(prd => prd.skuId != id);
+    }
   }
   return compWidget;
 }

@@ -106,6 +106,8 @@ export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/
 /* MyWishlist API */
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
 
+/* Compare API */
+export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 export const catalog = 'GodrejInterioSAS';
