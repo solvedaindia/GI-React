@@ -127,9 +127,9 @@
             padding:0px;
             border-width: 1px 1px 1px 1px;
             border-style: solid;
-            border-color: $borderLight $borderLight $borderLight;
+            border-color: $borderLight $colorwhite $borderLight $borderLight;
         
-            &:first-child{border-right: 1px solid $borderLight}
+            &:last-child{border-right: 1px solid $borderLight}
             &:hover{
                 border: 1px solid $ceruleanblue;
             }
@@ -265,6 +265,10 @@
             color: $black;
             font-family: $font-regular;
         }
+    }
+    .back-btn{
+        background: none;
+        border:0px;
     }
 }
 

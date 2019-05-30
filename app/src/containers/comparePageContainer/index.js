@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Row, Col,Grid } from 'react-bootstrap';
 
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
@@ -78,12 +79,12 @@ export class ComparePageContainer extends React.Component {
     render() {
       return (
         <div className="container compare-product">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 back-btn-box">
+          <Row>
+            <Col xs={12} sm={12} md={12} className="back-btn-box">
             <button to="#" className="back-btn" onClick={this.goBack}>Go Back</button>
-            </div>
-          </div>
-          <div className="row"><h2 className="heading">Compare Products {this.state.data.length}/3</h2></div>
+            </Col>
+          </Row>
+          <Row><h2 className="heading">Compare Products {this.state.data.length}/3</h2></Row>
           {this.state.data ? this.renderPrd() : ''}
         </div>
       )
