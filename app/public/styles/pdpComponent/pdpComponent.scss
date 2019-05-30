@@ -118,7 +118,26 @@
             .social-icon-share{
                 visibility: hidden;
                 position: absolute;
-                
+                z-index: 1;
+                min-width: 120px;;
+                &:hover{ 
+                    .social-icon-share{
+                     visibility:visible;
+                    }
+                }
+                li{
+                    float: left;
+                    margin: 4px 0px;
+                    width: 100%;
+
+                    .SocialMediaShareButton { 
+                        float: left;
+                    }
+                    .social-icon-text{
+                        margin: 5px 0px 0px 15px;
+                        float: left;
+                    }
+                }
             }
             &:hover{
                 .social-icon-share{
