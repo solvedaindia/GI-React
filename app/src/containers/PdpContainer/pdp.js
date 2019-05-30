@@ -20,14 +20,11 @@ class PdpContainer extends React.Component {
 
 	componentDidMount() {
 		this.callPdpApi();
-    	this.callPdpEspotApi();
+		this.callPdpEspotApi();
   	}
 
 	callPdpApi() {
-		//const productId = 22951;
-		const productId = 23477;
-		
-		//const productId = 'PROD00001';
+		const productId = this.props.match.params.productId
 		apiManager.get(pdpApi2 + productId)
 		.then(response => {
 			//console.log('=====>PDP', JSON.stringify(response.data));
@@ -60,7 +57,7 @@ class PdpContainer extends React.Component {
 			{!this.state.pdpLoading && !this.state.espotLoading && (
 				<PdpComponent
 					data={this.state.pdp.data}
-					skuId={this.props.match.params}
+					matchParams={this.props.match.params}
 					espot={this.state.pdpEspot}
 					historyData={this.props.history}
 				/>

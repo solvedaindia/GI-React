@@ -140,7 +140,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
-          <Route path="/pdp/:skuId" component={PdpContainer} />
+          <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
           <Route path="/wishlist" component={MyWishlist} />

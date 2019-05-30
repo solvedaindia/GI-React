@@ -44,7 +44,7 @@ class PdpComponent extends React.Component {
 		if (resolvedSkuId) {
 			skuId = resolvedSkuId;
 		} else {
-			skuId = this.props.skuId.skuId;
+			skuId = this.props.matchParams.skuId;
 		}
 
 		this.props.data.skuData.map(skuLevelData => {
@@ -91,7 +91,7 @@ class PdpComponent extends React.Component {
 		   productSkuData = swatches;
 		}
 		this.getResolveSkuData(swatches[0].uniqueID);
-		this.props.historyData.push('/pdp/'+swatches[0].uniqueID);
+		this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+swatches[0].uniqueID);
 	}
 
 	/* handle selected swatches */

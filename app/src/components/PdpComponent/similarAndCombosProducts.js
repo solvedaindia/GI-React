@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-// import '../../../public/styles/slickCustom.scss';
 import {
 	newMachineUrl,
   	store,
@@ -8,6 +7,9 @@ import {
 } from '../../../public/constants/constants';
 
 import { Row, Col } from 'react-bootstrap';
+
+const prevArrowImg = <img src={`${newMachineUrl}/${store}/${catalog}/images/godrejInterio/LeftArrow.svg`} />
+const nextArrowImg = <img src={`${newMachineUrl}/${store}/${catalog}/images/godrejInterio/RightArrow.svg`} />
 class SimilarCombosProducts extends React.Component {
 	constructor() {
 		super();
@@ -26,16 +28,16 @@ class SimilarCombosProducts extends React.Component {
 		deActiveEle.classList.add('dataNotActive');
 	}
 
-	getSimilarProducts() {
+	getSimilarCombosProducts(props) {
 		
-		return(this.props.similarProducts.map((data, index) => {
+		return(props.map((data, index) => {
 			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
-			//const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
-			//if(index < 3) {
+
 			return (
-				<li className="productlist" key={index}>
+				<div className='similarProducts'>
+				<div className="productlist" key={index}>
 					<div className='imgBox' key={index}>
-						<img src={imgUrl}  alt='Img'/>
+						<img className='imgfullwidth' src={imgUrl}  alt='Img'/>
 					</div>
 					<div className="product-text">
 						<p className='heading text'>{data.productName}</p>
@@ -51,54 +53,23 @@ class SimilarCombosProducts extends React.Component {
 							<span className='bold'>{data.discount}% Off </span> on this product
 						</p>
 					</div>
-				</li>
+				</div>
+				</div>
 			);
-							//}
 		}));
 		
 	}
 
-	getComobosProducts() {
-		return(this.props.combos.map((data, index) => {
-			//if(index < 3) {
-			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
-			//const imgUrl = 'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
-			
-			return (
-				<li className="productlist" key={index}>
-					<div className='imgBox' key={index}>
-						<img src={imgUrl}  alt='Img'/>
-					</div>
-					<div className="product-text">
-						<p className='heading text'>{data.productName}</p>
-				
-						<p className="price text">
-							<span className="discount-price">&#8377;{data.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-							{ data.offerPrice < data.actualPrice && (
-							<span className="priceno-discount">&#8377;{data.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-							)}
-						</p>
-						<p className='emi-text text'>
-							<span className='free-accessories'>EMI Starting from <span className='bold'>{data.emiData}</span></span>
-							{ data.discount && (
-								<><span className='bold'>{data.discount}% Off </span> on this product</>
-							)}
-							
-						</p>
-					</div>
-				</li>
-			);
-							//}
-		}));
-	}
 
 	render() {
 		const settings = {
 			dots: false,
 			infinite: true,
 			speed: 500,
-			slidesToShow: 3,
+			slidesToShow: 4,
 			slidesToScroll: 1,
+			prevArrow: prevArrowImg,
+            nextArrow: nextArrowImg,
 		};
 
 		return (
@@ -108,46 +79,19 @@ class SimilarCombosProducts extends React.Component {
 						<a role='button' id='similarHead' className='tabs active' onClick={this.productsType.bind(this, 'similar', 'combos')}>Similar Products</a>
 						<a role='button' id='combosHead' className="tabs" onClick={this.productsType.bind(this, 'combos', 'similar')}>Combos You May Like</a>
 					</Col>
+
 					<Col md={12} sm={12} xs={12} id='similar' className='dataActive'>
-					
-						<ul className='similarProducts'>
-							{this.getSimilarProducts()}
-						</ul>
-					
+						<Slider {...settings}>
+							{this.getSimilarCombosProducts(this.props.similarProducts)}
+						</Slider>
 					</Col>
 					<Col md={12} sm={12} xs={12}id='combos' className='dataNotActive'>
-					
-						<ul className='similarProducts'>					
-							{this.getComobosProducts()}
-						</ul>
-					
+						<Slider {...settings}>
+							{this.getSimilarCombosProducts(this.props.combos)}
+						</Slider>
 					</Col>
 				</Row>
 			</Col>
-			//      <div>
-			// 	 <h2> Single Item</h2>
-			// 	 <Slider {...settings}>
-			// 	   <div>
-			// 		 <h3>1</h3>
-			// 	   </div>
-			// 	   <div>
-			// 		 <h3>2</h3>
-			// 	   </div>
-			// 	   <div>
-			// 		 <h3>3</h3>
-			// 	   </div>
-			// 	   <div>
-			// 		 <h3>4</h3>
-			// 	   </div>
-			// 	   <div>
-			// 		 <h3>5</h3>
-			// 	   </div>
-			// 	   <div>
-			// 		 <h3>6</h3>
-			// 	   </div>
-			// 	 </Slider>
-			//    </div>
-
 		);
 	}
 }
