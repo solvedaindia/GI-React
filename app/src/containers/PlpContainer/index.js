@@ -155,9 +155,10 @@ export class PlpContainer extends React.Component {
   }
 
   fetchSubCategoryData() {
+    
     apiManager
       .get(plpSubCatAPI + categoryId, {
-        headers: { store_id: '10801' },
+        headers: {  },
       })
       .then(response => {
         console.log('Subcat Data', response.data);

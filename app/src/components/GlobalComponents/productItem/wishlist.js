@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import apiManager from '../../../utils/apiManager';
-import { updatetWishListCount } from '../../../actions/app/actions';
+import { updatetWishListCount, resetRemoveFromWishlistFlag } from '../../../actions/app/actions';
 import {
   getCookie,
   getCorrespondingGiftlistId,
@@ -75,6 +75,8 @@ class Wishlist extends React.Component {
   }
 
   removeFromWishlistAPI() {
+    // console.log('isFromWishlistDDDD --- ',this.props.isFromWishlistPro);
+    // return;
     const data = {
       wishlist_id: getCookie(wishlistIdCookie),
       giftlistitem_id: getCorrespondingGiftlistId(this.props.uniqueId),
@@ -82,9 +84,14 @@ class Wishlist extends React.Component {
     apiManager
       .post(removeFromWishlist, data)
       .then(response => {
-        console.log('Add wishlit --- ', response.data);
+        console.log('Add wishlit --- ', this.props);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });
         getUpdatedWishlist(this);
+        
+        if (this.props.isFromWishlistPro === true) {
+          this.props.resetRemoveFromWishlistFlag(true)
+        }
+        
         // this.props.updatetWishListCount(6);
       })
       .catch(error => {
@@ -110,11 +117,11 @@ class Wishlist extends React.Component {
   }
 
   wishlistPopupItem() {
-    setTimeout(() => {
-      this.setState({
-        wishlistPopup: null,
-      });
-    }, 4000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     wishlistPopup: null,
+    //   });
+    // }, 2000);
     return (
       <div className="addedToWishlist clearfix">
         <span className="wishlist-text">Product Added to Wishlist</span>
@@ -157,6 +164,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updatetWishListCount },
+  { updatetWishListCount, resetRemoveFromWishlistFlag},
 )(Wishlist);
 // export default Wishlist;
