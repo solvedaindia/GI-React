@@ -15,7 +15,7 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART } from '../../constants/app/constants';
+ import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, MY_PROFILE } from '../../constants/app/constants';
 
 
 /**
@@ -73,3 +73,12 @@ export function updatetMinicart(count) {
     count,
   };
 }
+
+export function updateMyProfile(username) {
+  console.log('Its UpdateMyProfile --- ',username);
+  return {
+    type: MY_PROFILE,
+    username,
+  };
+}
+

@@ -12,7 +12,7 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART } from '../../constants/app/constants';
+import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, MY_PROFILE } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -24,6 +24,7 @@ const initialState = fromJS({
   },
   wishlistCount: 0,
   minicartCount: 0,
+  userName: '',
 });
 
 function appReducer(state = initialState, action) {
@@ -48,6 +49,10 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('minicartCount', action.count);
+    case MY_PROFILE:
+      return state
+        .set('loading', false)
+        .set('userName', action.username);
     default:
       return state;
   }

@@ -190,21 +190,21 @@ export class PlpContainer extends React.Component {
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
       console.log('PLPURL---', plpURL);
       console.log('categorId---', categoryId);
-      let newStoreId = '';
-      let newCategoryId = '';
-      if (categoryId === '12540') {
-        newStoreId = '10151';
-      } else {
-        newStoreId = '10801';
-        newCategoryId = '10601';
-      }
-      console.log('categorId---', categoryId, newStoreId);
+      // let newStoreId = '';
+      // let newCategoryId = '';
+      // if (categoryId === '12540') {
+      //   newStoreId = '10151';
+      // } else {
+      //   newStoreId = '10801';
+      //   newCategoryId = '10601';
+      // }
+      // console.log('categorId---', categoryId, newStoreId);
       apiManager
         .get(plpURL, {
           headers: {
-            store_id: newStoreId,
+            // store_id: newStoreId,
             cat_details: this.state.isCatDetails,
-            catalog_id: newCategoryId,
+            // catalog_id: newCategoryId,
           },
         })
         .then(response => {

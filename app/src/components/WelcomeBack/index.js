@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateMyProfile } from '../../actions/app/actions';
+
 import { Modal, Button } from 'react-bootstrap';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
@@ -157,6 +160,7 @@ class WelcomeBack extends React.Component {
     apiManager
       .post(userLoginAPI, data)
       .then(response => {
+				this.props.updateMyProfile('Deepak');
         window.location.reload();
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
@@ -281,4 +285,15 @@ class WelcomeBack extends React.Component {
 	}
 }
 
-export default WelcomeBack;
+function mapStateToProps(state) {
+  return {
+    // default: state.default
+  };
+}
+
+
+//export default WelcomeBack;
+export default connect(
+  mapStateToProps,
+  { updateMyProfile },
+)(WelcomeBack);
