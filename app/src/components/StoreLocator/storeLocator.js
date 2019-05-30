@@ -1,29 +1,27 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
-import WidgetList from '../../components/HomePageStatic/widgetList';
 import {
-  homePageLayoutAPI,
-  ipDataApi
+    storeAPI,
 } from '../../../public/constants/constants';
-export class HomapegeLayout extends React.Component {
+export class StoreLocator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            homepageLayout: null,
+            storeData: null,
             isLoading: false,
             error: null,
             ipData: null
         };
     }
     
-    getIPData() {
-        apiManager.get(ipDataApi, {'headers': { 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*'} })
+    getStoreData() {
+        apiManager.get(storeAPI)
         .then( response => {
             this.setState({
-                ipData: response.data,
+                storeData: response.data.data,
                 isLoading: false
             })
-            console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+            console.log('@@@@ Store Locator Data @@@@@', response.data);
         })
         .catch(error => {
             this.setState({
@@ -32,26 +30,10 @@ export class HomapegeLayout extends React.Component {
             });
         });
     }
-    getPageLayout() {
-        apiManager.get(homePageLayoutAPI)
-        .then(response => {
-            this.setState({
-                homepageLayout: response.data.data,
-                isLoading: false
-            });
-            console.log('HomepageData Layout', response.data.data);
-        })
-        .catch(error => {
-            this.setState({
-                error,
-                isLoading: false
-            });
-        });
-  	}
+    
 
 	componentDidMount() {
-        this.getIPData();
-		this.getPageLayout();
+		this.getStoreData();
 	}
 
 	render() {
@@ -70,4 +52,4 @@ export class HomapegeLayout extends React.Component {
 	}
 }
 
-export default HomapegeLayout;
+export default StoreLocator;

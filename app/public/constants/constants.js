@@ -42,6 +42,8 @@ export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-sugg
 export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
 /* Homepage Layout API */
 export const homePageLayoutAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Layout`;
+/* Store API */
+export const storeAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bycoordinates`;
 /* Footer API */
 export const footerApi = `${secureHttp}://${host}:${port2}/api/v1/footer`;
 /* Generate OTP API */

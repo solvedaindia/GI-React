@@ -195,18 +195,6 @@ class WelcomeBack extends React.Component {
 		}
 		return (
 		<div>
-			{/* <ul className="userList">
-			<li className="listItem">
-				<a href="" className="dropDown">
-				{this.state.userType}
-				</a>
-			</li>
-			<li className="listItem">
-				<a className="dropDown" onClick={this.handleShow}>
-				{this.state.loginStatus}
-				</a>
-			</li>
-			</ul> */}
 			<Modal
 			className="welcomeBack"
 			size="lg"

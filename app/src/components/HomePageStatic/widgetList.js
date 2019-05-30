@@ -5,6 +5,7 @@ import Recently from '../RecentlyViewed/recentlyViewed';
 import SubCategory from '../../components/GlobalComponents/subCategory';
 import Content from '../Primitives/content';
 import ReadMore from '../GlobalComponents/readMore';
+import ExStore from '../ExStore/exStore.js';
 
 export default function WidgetList({ componentType, ...rest }) {
     switch (componentType) {
@@ -14,7 +15,7 @@ export default function WidgetList({ componentType, ...rest }) {
             );
         case 'mini_track_order':
             return (
-                ''
+                <ExStore {...rest} />
             );
         case 'best_selling':
             return (

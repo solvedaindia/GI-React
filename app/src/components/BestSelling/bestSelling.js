@@ -50,7 +50,7 @@ class BestSeller extends React.Component {
       };
       return (
       <div className="bestSeller">
-          <h1 className="title">Best Selling Items</h1>
+          <h1 className="title">Best Selling Products</h1>
           <Slider {...settings}>
             {!!bestSellerData && bestSellerData.map((sellerItemData, index) =>(
 							<figure key={index} className='bsSlides'>
