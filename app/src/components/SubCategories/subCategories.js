@@ -37,16 +37,17 @@ class SubCategoriesArray extends React.Component {
                 </div>}
                 <ul className='catList'>
                     {this.props.subCategoryArray.map((subCategoryData, index) => {
-                        var routePath = '';
-                        if (subCategoryData.categoryName === 'Tables') {
-                            routePath = '/plp/12540';
-                        }
-                        else if (subCategoryData.categoryName === 'Sofas') {
-                            routePath = '/plp/13502';
-                        }
-                        else {
-                            routePath = '/plp/13506';
-                        }
+                        console.log('idddd --- ',subCategoryData)
+                        var routePath = '/plp/'+subCategoryData.uniqueID;
+                        // if (subCategoryData.categoryName === 'Tables') {
+                        //     routePath = '/plp/12540';
+                        // }
+                        // else if (subCategoryData.categoryName === 'Sofas') {
+                        //     routePath = '/plp/13502';
+                        // }
+                        // else {
+                        //     routePath = '/plp/13506';
+                        // }
                         return (
                             <li className='subCatList' key={`subCat-${index}`} onMouseOver={this.handleMouseOver.bind(this, subCategoryData)} onMouseOut={this.handleMouseOut.bind(this)}>
                             <Link to={routePath} className='subCatLink'>
