@@ -7,8 +7,14 @@ import { addToCart } from '../../../public/constants/constants';
 import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 
 class addToCartComponent extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			addToCartPopup: null,
+		};
+	}
+
 	moveToCartClicked = () => {
-		alert('added to cart');
 		let quantity = '1';
 		if (!this.props.sticky) {
 			quantity = document.getElementById('quantity').value;
@@ -25,9 +31,26 @@ class addToCartComponent extends React.Component {
 
 		apiManager.post(addToCart, data).then(() => {
 			getUpdatedMinicartCount(this)
+			this.setState({
+				addToCartPopup: this.addToCartPopupItem()
+			});
+			
 		}).catch(error => {
 			console.log('AddToCart Error---', error);
 		});
+	}
+
+	addToCartPopupItem() {
+		setTimeout(() => {
+			this.setState({
+				addToCartPopup: null,
+			});
+		}, 2000);
+		return (
+			<div className="addedToWishlist clearfix">
+				<span className="wishlist-text">Product Added to Cart</span>
+			</div>
+		);
 	}
 
 	productQuantity = (type) => {
@@ -43,6 +66,7 @@ class addToCartComponent extends React.Component {
 	render() {
 		return(
 			<>
+				{this.state.addToCartPopup}
 				<div className="addCart">
 					{ !this.props.sticky && (
 					<>
