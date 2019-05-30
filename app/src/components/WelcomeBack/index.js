@@ -242,23 +242,23 @@ class WelcomeBack extends React.Component {
 				<FacebookLogin
 					appId={facebookAppId}
 					render={renderProps => (
-					<button
+						<button
 						className="btn-white btn-fb"
 						onClick={renderProps.onClick}
 						isdisabled={renderProps.disabled}
-					>
+						>
 						<span className="icon-img">
 							<img className="icon" src={Facebook} />
 						</span>
 						<span className="signin-text">Sign in with Facebook</span>
-					</button>
+						</button>
 					)}
 					autoLoad
 					fields="name,email,picture"
 					cssClass="btn-white"
 					onClick={this.facebookOnClick.bind(this)}
 					callback={this.responseFacebook}
-				/>
+                />
 			</div>
 			<p className="divider">or</p>
 			<WelcomeBackForm
