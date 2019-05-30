@@ -128,7 +128,8 @@
     "warning": "4.0.2",
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "~1.7.2",
-    "yarn": "^1.12.3"
+    "yarn": "^1.12.3",
+    "react-share": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
