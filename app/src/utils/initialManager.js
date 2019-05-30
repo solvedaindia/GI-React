@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import apiManager from './apiManager';
-import { updatetWishListCount, updatetMinicart } from '../actions/app/actions';
-import { getCookie } from './utilityManager';
+import { updatetWishListCount, updatetMinicart, resetRemoveFromWishlistFlag } from '../actions/app/actions';
+import { getCookie, getCorrespondingGiftlistId } from './utilityManager';
 import appCookie from './cookie';
 import {
   guestLoginAPI,
@@ -14,6 +14,7 @@ import {
   wishListCountApi,
   logoutAPI,
   cartCountApi,
+  removeFromWishlist
 } from '../../public/constants/constants';
 import { resolveTheWishlistData } from './utilityManager';
 
@@ -44,6 +45,7 @@ export function getUpdatedWishlist(wishlist) {
         response.data.data.wishlistItemArray[0].wishlistItemList.length;
       console.log('Wishlist Count --- ', wishlistCount);
       wishlist.props.updatetWishListCount(wishlistCount);
+      // wishlist.props.resetRemoveFromWishlistFlag(true)
     })
     .catch(error => {});
 }
@@ -83,4 +85,24 @@ export function resetTheCookiesAndData() {
   document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
   appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
   window.location.reload(); // In case you don't reload the page, make this use as guest user.
+}
+
+export function removeFromWishlistGlobalAPI(uniqueId, reference) {
+  const data = {
+    wishlist_id: getCookie(wishlistIdCookie),
+    giftlistitem_id: getCorrespondingGiftlistId(uniqueId),
+  };
+  console.log('removeFromWishlistAPI', data);
+  apiManager
+    .post(removeFromWishlist, data)
+    .then(response => {
+      console.log('Add wishlit --- ', response.data);
+      //this.setState({ wishlistCurrentImage: wishListRemovedImg });
+      getUpdatedWishlist(reference);
+      reference.props.resetRemoveFromWishlistFlag(true);
+      // this.props.updatetWishListCount(6);
+    })
+    .catch(error => {
+      console.log('newsError---', error);
+    });
 }

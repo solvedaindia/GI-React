@@ -34,6 +34,31 @@ class ProductItem extends React.Component {
 		};
 		this.props.addProduct(product);
 	  }
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {};
+	// }
+
+	// handleClick = () => {
+	// 	const compPrd = this.props.compData.find(
+	// 		prd => prd.id == this.props.data.uniqueID,
+	// 	);
+	// 	if (compPrd) {
+	// 		alert(
+	// 			'Product alreday added in compare. Please select different prodcut',
+	// 		);
+	// 	} else {
+	// 		const product = {
+	// 			title: this.props.data.productName,
+	// 			thumbnail: this.props.data.thumbnail,
+	// 			id: this.props.data.uniqueID,
+	// 			actualPrice: this.props.data.actualPrice,
+	// 			offerPrice: this.props.data.offerPrice,
+	// 		};
+	// 		this.props.addProduct(product);
+	// 	}
+	// };
+
 	moveToCartClicked = () => {
 		const data = {
 			orderItem: [
@@ -97,18 +122,17 @@ class ProductItem extends React.Component {
 				</div>
 				<Link className="link" to={routePath}>
 					<div className="hoverBox">
-						
+						<Wishlist
+							uniqueId={this.props.data.uniqueID}
+							isInWishlistPro={this.props.isInWishlist}
+							history={this.props.history}
+						/>
 						<button className="btn-compare" onClick={this.handleClick}>
 							Add to compare
-						</button>
+			</button>
 					</div>
-					
 				</Link>
-				<Wishlist
-					uniqueId={this.props.data.uniqueID}
-					isInWishlistPro={this.props.isInWishlist}
-					history={this.props.history}
-				/>
+
 			</li>
 		);
 	}
