@@ -19,10 +19,10 @@ class SocialMedia extends React.Component {
 
 	render () {
 		// demo
-        //const shareUrl = window.location.href;
-        const shareUrl =    'https://www.google.com';
+        const shareUrl = window.location.href;
+        //const shareUrl =    'https://www.google.com';
 
-		const title = 'Hello This is Demo';
+		const title = 'Welcome to the Godrej';
 
 		return (
 			<>			<div className='social-icon-share'>
