@@ -2,6 +2,7 @@ import React from 'react';
 import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
+import { Row, Col,Grid } from 'react-bootstrap';
 
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
@@ -30,22 +31,22 @@ class CompPrd extends React.Component {
       var Depth = [];
       this.props.data.map((elem, index) => {
         weights.push(
-            <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+            <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
               {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">80 cm</span></div> : <p>80 cm</p>}
-            </div>)
+            </Col>)
         heights.push(
-          <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+          <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
               {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">120 cm</span></div> : <p>120 cm</p>}
-            </div>)
+            </Col>)
         Depth.push(
-          <div className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+          <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
               {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">100 cm</span></div> : <p>100 cm</p>}
-            </div>)
+            </Col>)
       })
 
-      dims.push(<div className="row">{weights}</div>)
-      dims.push(<div className="row">{heights}</div>)
-      dims.push(<div className="row">{Depth}</div>)
+      dims.push(<Row>{weights}</Row>)
+      dims.push(<Row>{heights}</Row>)
+      dims.push(<Row>{Depth}</Row>)
 
       return dims;
     }
@@ -54,11 +55,11 @@ class CompPrd extends React.Component {
       var images = [];
       this.props.data.map(elem => {
         images.push(
-          <div className="col-md-4 comp-list-item">
+          <Col xs={12} sm={4} md={4}  className="comp-list-item">
               <div className="img-box">  
               <img src={`https://192.168.0.36:8443${elem.thumbnail}`} />
               </div>
-        </div>)
+        </Col>)
       })
       return images;
     }
@@ -67,9 +68,9 @@ class CompPrd extends React.Component {
       var payments = [];
       this.props.data.map(elem => {
         payments.push(
-          <div className="col-md-4 comp-cod-option text-center">
+          <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
             <h4>COD available</h4>
-          </div>
+          </Col>
         )
       });
       return payments;
@@ -89,18 +90,18 @@ class CompPrd extends React.Component {
           })
         }
         specs.push(
-          <div className="row specifec-detail">
-            <div className="col-md-6 attr-details">
+          <Row className='specifec-detail'>
+            <Col xs={12} sm={4} md={6} className='attr-details'>
               <span className="col-md-5">{att.name}</span> <span className="col-md-7">{att.value}</span>
-            </div>
+            </Col>
  
-            <div className="col-md-4 attr-desc">
+            <Col xs={12} sm={4} md={4} className='attr-desc'>
               {this.props.data.length > 1 ? second_att ? <p>{second_att.value}</p> : 'NA' : ''}
-            </div>
-            <div className="col-md-2 attr-desc">
+            </Col>
+            <Col xs={12} sm={4} md={2} className='attr-desc'>
               {this.props.data.length > 2 ? third_att ? <p>{third_att.value}</p> : 'NA' : ''}
-            </div>
-          </div>
+            </Col>
+          </Row>
         )
       });
       return specs;
@@ -116,25 +117,25 @@ class CompPrd extends React.Component {
     render() {
       return (
         <div className="compare-product-list">
-          <div className="row">{this.renderProducts()}</div>
+          <Row>{this.renderProducts()}</Row>
          
-          <div className="row"><h2 className="title-text">Delivery</h2></div>
-          <div className="row prod-delivery-slot">
+          <Row><h2 className="title-text">Delivery</h2></Row>
+          <Row className="prod-delivery-slot">
             {this.renderDelivery()}
-          </div>
+          </Row>
 
-          <div className="row">
+          <Row>
             <h2 className="title-text">Dimensions</h2>
-            {this.renderImages()}</div>
+            {this.renderImages()}</Row>
           <div className="dims-detail">{this.renderDims()}</div>
 
-          <div className="row"><h2 className="title-text">Specifications</h2></div>
+          <Row><h2 className="title-text">Specifications</h2></Row>
           {this.renderSpecs()}
           
-          <div className="row">
+          <Row>
             <h2 className="title-text">Payment</h2>
             {this.renderPayment()}
-          </div>
+          </Row>
         </div>
       );
     }
