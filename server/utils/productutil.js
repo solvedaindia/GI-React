@@ -225,34 +225,4 @@ function transformJson(result) {
   return resJson;
 }
 
-/**  
-Find Inventory
-* @param: {pincode:'User Pincode',partNumber:'Part Number',quantity:'Quantity'}
-* @return Inventory Details
-*/
-module.exports.findInventory = findInventory;
-function findInventory(headers, reqParams, callback) {
-  const findInventoryUrl = constants.findInvertory
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{partNumber}}', reqParams.partNumber)
-    .replace('{{pinCode}}', reqParams.pincode)
-    .replace('{{quantity}}', reqParams.quantity);
-
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  origin.getResponse(
-    'GET',
-    findInventoryUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body.InventoryAvailability[0]);
-      } else {
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
-}
+module.exports.getProductListByIDs = getProductListByIDs;

@@ -114,6 +114,10 @@
             position: relative;
             .share-btn{
                 display: inline;
+                img{
+                    width:17px;
+                    height: 17px;
+                }
             }
             .social-icon-share{
                 visibility: hidden;
@@ -364,7 +368,10 @@
     }
 
     .attr-details-box{
-        padding-top: 10px;
+        padding-top: 15px;
+        .att-val-name{
+            padding-bottom: 10px;
+        }
     }
     
   }
@@ -807,7 +814,8 @@
     padding: 0 7px 0 0;
     label{
         cursor: pointer;
-        border: 2px solid $colorwhite;
+        border: 3px solid $colorwhite;
+        border-radius: 100%;
         
         &:hover{
             box-shadow: 0px 0px 0px 1px #b38602;
@@ -852,8 +860,8 @@
 .circle {
     display: inline-block;
     padding: 10px;
-    width: 36px;
-    height: 36px;
+    width: 39px;
+    height: 39px;
     border-radius: 25px;
 }
 

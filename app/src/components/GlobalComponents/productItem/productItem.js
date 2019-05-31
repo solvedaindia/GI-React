@@ -9,11 +9,15 @@ import Promotions from './promotion';
 import InStock from './inStock';
 import Wishlist from './wishlist';
 import Title from './title';
-import { addToCart } from '../../../../public/constants/constants';
+import { addToCart, removeFromWishlist, wishlistIdCookie } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
-import { updatetMinicart } from '../../../actions/app/actions';
-import { getUpdatedMinicartCount } from '../../../utils/initialManager';
-// import Link from 'react-router-dom/Link';
+import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../../actions/app/actions';
+import { getUpdatedMinicartCount, getUpdatedWishlist, removeFromWishlistGlobalAPI } from '../../../utils/initialManager';
+import {
+	getCookie,
+	getCorrespondingGiftlistId,
+	getOnlyWishlistUniqueIds,
+} from '../../../utils/utilityManager';
 
 class ProductItem extends React.Component {
 	constructor(props) {
@@ -34,6 +38,23 @@ class ProductItem extends React.Component {
 		};
 		this.props.addProduct(product);
 	  }
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {};
+	// }
+
+	handleClick(e) {
+		e.preventDefault();
+		const product = {
+			title: this.props.data.productName,
+			thumbnail: this.props.data.thumbnail,
+			skuId: this.props.data.uniqueID,
+			id: this.props.data.parentUniqueID,
+			actualPrice: this.props.data.actualPrice,
+			offerPrice: this.props.data.offerPrice,
+		};
+		this.props.addProduct(product);
+	}
 	// constructor(props) {
 	// 	super(props);
 	// 	this.state = {};
@@ -117,21 +138,25 @@ class ProductItem extends React.Component {
 							promoData={this.props.data.promotionData}
 							discount={this.props.data.discount}
 							emi={this.props.data.emiData} />
-						
+
 					</div>
 				</div>
 				<Link className="link" to={routePath}>
-					<div className="hoverBox">
-						<Wishlist
-							uniqueId={this.props.data.uniqueID}
-							isInWishlistPro={this.props.isInWishlist}
-							history={this.props.history}
-						/>
-						<button className="btn-compare" onClick={this.handleClick}>
-							Add to compare
-			</button>
-					</div>
+				<div className="hoverBox">
+
+						{this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
+							Move To Cart
+						</button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
+								Add to compare
+						</button>}
+						
+				</div>
 				</Link>
+				<Wishlist
+						uniqueId={this.props.data.uniqueID}
+						isInWishlistPro={this.props.isInWishlist}
+						history={this.props.history}
+						/>
 
 			</li>
 		);
@@ -145,7 +170,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-	mapStateToProps,
-	{ updatetMinicart },
+  mapStateToProps,
+  { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
 )(ProductItem);
 // export default ProductItem;

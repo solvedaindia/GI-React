@@ -17,12 +17,17 @@ class productDefAttribute extends React.Component {
 	getRadioButtonHtml(radioName, radioValue, isChecked, count, selectedSwatches, index) {
 		let radioButtonHtml;
 		let isDisabled = false;
+		let selectedCircle = '';
+
+		if (isChecked) {
+			selectedCircle = 'selectedCircle';
+		}
 		
 		if(count > 0 && selectedSwatches.indexOf(radioValue) === -1) {
-			isDisabled = true;
+			//isDisabled = true;
 		}
-		const tt = count+''+index;
-		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')}  className={`radio` + count} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={isChecked}/>
+
+		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')}  className={`radio${count} ${selectedCircle}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={isChecked}/>;
 		return radioButtonHtml;
 	}
 
@@ -37,15 +42,27 @@ class productDefAttribute extends React.Component {
 		return selectedSwatches;
 	}
 
+	getSelectedAllSwatches(selectedSwatches) {
+		let arrayData = new Array();
+		this.props.defAttributes.map((data, i) => {
+			data.values.map((value, index) => {
+				if (selectedSwatches.indexOf(value.name) !== -1) {
+					arrayData.push(value.name);
+				}
+			})
+		})
+		return arrayData;
+	}
+
 	/* make radio button */
-	makeRadioButton(selectedSwatches) {
+	makeRadioButton(selectedSwatches, getActualSwatchesName) {
 		return (
 			this.props.defAttributes.map((data, i) => {
 				let valueName = data.name;
-				
+
 				return (
 					<div key={i}>
-					<div className='att-val-name'><b>{valueName} </b></div>
+					<div className='att-val-name'><b>{valueName}:  {getActualSwatchesName[i]}</b><span id={`ColorName${i}`}></span></div>
 						<ul>
 							{
 								data.values.map((value, index) => {
@@ -57,7 +74,7 @@ class productDefAttribute extends React.Component {
 										display: "block"
 									}
 									let circle = 'display:block';
-									
+
 									if (this.props.selectedAttribute[i].values[0].name === value.name) {
 										checkedType = true;
 									}
@@ -67,6 +84,7 @@ class productDefAttribute extends React.Component {
 										colorStyle = {
 											backgroundColor: `rgb${value.colorCode}`
 										};
+
 									} else if(value.facetImage) {
 										imgUrl = value.facetImage;
 										name = <img src={imgUrl} />; 
@@ -78,7 +96,7 @@ class productDefAttribute extends React.Component {
 									let isDisabled = '';
 		
 									if(i > 0 && selectedSwatches.indexOf(value.name) === -1) {
-										isDisabled = 'disabled-attr';
+										//isDisabled = 'disabled-attr';
 									}
 									return (
 										<li className={`attributeList ${isDisabled}`}  key={index}>
@@ -98,7 +116,8 @@ class productDefAttribute extends React.Component {
 
 	render() {
 		const selectedSwatches = this.getSelectedSwatches();
-		let attributeHtml = this.makeRadioButton(selectedSwatches);
+		const getActualSwatchesName = this.getSelectedAllSwatches(selectedSwatches);
+		let attributeHtml = this.makeRadioButton(selectedSwatches, getActualSwatchesName);
 
 		return (
 			<div className="attr-details-box">

@@ -2,7 +2,7 @@ import React from 'react';
 import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
-import {newMachineUrl, store, catalog} from '../../../public/constants/constants';
+import {newMachineUrl, store, catalog} from '../../../public/constants/constants'
 import close from '../../../public/images/close.svg';
 
 function CompItem(props) {
