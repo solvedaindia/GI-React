@@ -1,5 +1,6 @@
 import React from 'react';
 import Price from '../GlobalComponents/productItem/price';
+import {newMachineUrl, store, catalog} from '../../../public/constants/constants'
 
 class MinicartItem extends React.Component {
   state = {};
@@ -28,7 +29,7 @@ class MinicartItem extends React.Component {
           <div className="imgBox">
             {/* <img src={require('../../../public/images/miniItem1.png')} className="imgfullwidth" /> */}
             <img
-              src={`https://192.168.0.36:8443${this.props.dataPro.thumbnail}`}
+              src={`${newMachineUrl}/${store}/${catalog}/${this.props.dataPro.thumbnail}`} //{`https://192.168.0.36:8443${this.props.dataPro.thumbnail}`}
               className="imgfullwidth"
             />
           </div>
