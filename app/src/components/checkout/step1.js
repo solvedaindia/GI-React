@@ -81,7 +81,7 @@ export class Step1Component extends React.Component {
         isValidate = false;
       }
   
-      if (!validateEmptyObject(obj.password) && this.state.has_pass) {
+      if (!validateEmptyObject(obj.password) && this.state.has_pass && this.state.password) {
         this.setState({
           errorMessagePassword: 'Enter a valid password ',
         });
@@ -105,7 +105,7 @@ export class Step1Component extends React.Component {
       if (isValidate === false) {
         return false;
       }
-      // this.props.handleUserData(data);
+      this.props.login(data);
     };
 
     

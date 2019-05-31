@@ -13,6 +13,14 @@ import { Step2Component } from './step2';
 import { Step3Component } from './step3';
 import { OrderSummaryComponent } from './orderSummary'
 import loadable from 'loadable-components';
+import appCookie from '../../utils/cookie';
+import apiManager from '../../utils/apiManager';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  userLoginAPI,
+} from '../../../public/constants/constants';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
@@ -22,9 +30,12 @@ export class CheckoutComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+          message: null,
           has_pass: false,
           same_bill: true,
           step: 1,
+          loginStatus: 'Login/Register',
+			    userType: 'Hello Guest!',
           showGift: false,
           loggedIn: false
         }
@@ -49,6 +60,34 @@ export class CheckoutComponent extends React.Component {
           has_pass: false
         })
       }
+    }
+
+    handleUserLoginApi = (data) => {
+      this.setState({ message: null });
+      axios
+      .post(userLoginAPI, data, {
+        headers: { store_id: storeId, access_token: accessToken },
+      })
+      .then(response => {
+        window.location.reload();
+        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+        document.cookie = `${accessTokenCookie}=${
+        response.data.data.access_token
+        };path=/;expires=''`;
+        this.setState({
+        loginStatus: 'Logout',
+        userType: 'Hello User!',
+        show: false,
+        });
+        // alert('Successfully Logged In');
+      })
+      .catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        this.setState({
+        message: `Error - ${errorMessage}`,
+        });
+      });
     }
 
     handleChange = () => {
@@ -91,7 +130,7 @@ export class CheckoutComponent extends React.Component {
         } else if(this.state.step == 2) {
             return <Step2Component proceed={this.handleProceed} back={this.handleChange} />
         } else {
-            return <Step1Component proceed={this.handleProceed} />
+            return <Step1Component proceed={this.handleProceed} login={this.handleUserLoginApi} />
         }
     }
 
