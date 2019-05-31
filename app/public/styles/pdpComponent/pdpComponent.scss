@@ -85,6 +85,27 @@
      .GalleryBox{ 
          border:1px solid $black; 
      }
+
+     .image-gallery{
+         .fullscreen{
+            .image-gallery-left-nav {
+                left: 160px;
+            }
+            .image-gallery-right-nav {
+                right: 160px;
+            }
+            .image-gallery-left-nav, .image-gallery-right-nav{
+                top: 50%;
+                transform: translateY(-50%);
+                background:$colorwhite;
+                border-radius: 50%;
+                width: 45px;
+                height: 45px;
+                padding:0;
+                font-size: unset;
+            }
+         }
+     }
   }
 
 .GallerytextBox{
