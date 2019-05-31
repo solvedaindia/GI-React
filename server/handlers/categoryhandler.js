@@ -47,9 +47,11 @@ module.exports.getCategories = function getCategories(
  */
 function getCategoriesData(urlParam, headers, callback) {
   const reqHeaders = headerUtil.getWCSHeaders(headers);
+
   const originUrl = constants.categoryview
     .replace('{{storeId}}', headers.storeId)
     .replace('{{urlParam}}', urlParam);
+
   origin.getResponse(
     originMethod,
     originUrl,
@@ -101,7 +103,7 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
               (error, productViewResult) => {
                 if (!error) {
                   subCatData.productCount =
-                    productViewResult.catalogEntryView.length || 0; // Product Count
+                    productViewResult.recordSetTotal || 0; // Product Count
                   cb(null, subCatData);
                 } else {
                   cb(error);

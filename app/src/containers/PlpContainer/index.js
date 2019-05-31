@@ -71,7 +71,7 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Query String Routing ------- ',this.props);
+    console.log('Query String Routing ------- ', this.props);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
@@ -155,9 +155,10 @@ export class PlpContainer extends React.Component {
   }
 
   fetchSubCategoryData() {
+    
     apiManager
       .get(plpSubCatAPI + categoryId, {
-        headers: { store_id: '10801' },
+        headers: {  },
       })
       .then(response => {
         console.log('Subcat Data', response.data);
@@ -190,21 +191,19 @@ export class PlpContainer extends React.Component {
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
       console.log('PLPURL---', plpURL);
       console.log('categorId---', categoryId);
-      let newStoreId = '';
-      let newCategoryId = '';
-      if (categoryId === '12540') {
-        newStoreId = '10151';
-      } else {
-        newStoreId = '10801';
-        newCategoryId = '10601';
-      }
-      console.log('categorId---', categoryId, newStoreId);
+      // let newStoreId = '';
+      // if (categoryId === '12540') {
+      //   newStoreId = '10151';
+      // } else {
+      //   newStoreId = '10801';
+      // }
+      // console.log('categorId---', categoryId, newStoreId);
       apiManager
         .get(plpURL, {
           headers: {
-            store_id: newStoreId,
+            // store_id: newStoreId,
             cat_details: this.state.isCatDetails,
-            catalog_id: newCategoryId,
+            // catalog_id: '10601',
           },
         })
         .then(response => {
@@ -244,10 +243,10 @@ export class PlpContainer extends React.Component {
       .get(`${espotAPI}GI_Plp_Description`)
       .then(response => {
         // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
-		this.setState({ plpDescriptionData: response.data.data },
-			console.log('@@@@@Read More@@@@', response.data.data)
-		);
-		
+        this.setState(
+          { plpDescriptionData: response.data.data },
+          console.log('@@@@@Read More@@@@', response.data.data),
+        );
       })
       .catch(error => {
         // console.log('PLPBannerrror---', error);s

@@ -28,8 +28,8 @@ router.use('/productlist', require('./api/plp'));
 router.use('/newsletter', require('./api/newsletter'));
 router.use('/pdp', require('./api/pdp'));
 router.use('/storelocator', require('./api/storelocator'));
-router.use('/compare', require('./api/compare'));
 router.use('/emi', require('./api/emi'));
 router.use('/pincode', require('./api/pincode'));
+router.use('/compare', require('./api/compare'));
 
 module.exports = router;

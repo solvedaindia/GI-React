@@ -35,6 +35,7 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
+        logger.debug('Error While fetching Store Details By Location API');
         callback(errorUtils.handleWCSError(response));
       }
     },
@@ -78,6 +79,7 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
       if (response.status === 200) {
         callback(null, response.body);
       } else {
+        logger.debug('Error While fetching Store Details By Coordinates API');
         callback(errorUtils.handleWCSError(response));
       }
     },

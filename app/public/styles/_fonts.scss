@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'CeraGILight';
-    src: url('./fonts/CeraGodrejInterio-Bold.eot');
+    src: url('./fonts/CeraGodrejInterio-Light.eot');
     src: url('./fonts/CeraGodrejInterio-Light.eot?#iefix') format('embedded-opentype'),
         url('./fonts/CeraGodrejInterio-Light.woff2') format('woff2'),
         url('./fonts/CeraGodrejInterio-Light.woff') format('woff'),
@@ -9,7 +9,17 @@
     font-weight: 300;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'CeraGILight';
+    src: url('./fonts/CeraGodrejInterio-Medium.eot');
+    src: url('./fonts/CeraGodrejInterio-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/CeraGodrejInterio-Medium.woff2') format('woff2'),
+        url('./fonts/CeraGodrejInterio-Medium.woff') format('woff'),
+        url('./fonts/CeraGodrejInterio-Medium.ttf') format('truetype'),
+        url('./fonts/CeraGodrejInterio-Medium.svg#CeraGodrejInterio-Light') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
 @font-face {
     font-family: 'CeraGIRegular';
     src: url('./fonts/CeraGodrejInterio-Regular.eot');
@@ -35,5 +45,6 @@
 }
 
 $font-regular:CeraGIRegular,sans-serif;
+$font-regular:CeraGIMedium,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;

@@ -4,7 +4,6 @@ const origin = require('../utils/origin.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-// const pincodeutil = require('../utils/pincodeutil');
 const userHandler = require('./usershandler');
 
 /**
@@ -94,6 +93,7 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
             loginResponseBody.userDetails = {};
           } else {
             loginResponseBody.userDetails = result;
+            delete loginResponseBody.userDetails.logonID;
           }
           callback(null, loginResponseBody);
         });

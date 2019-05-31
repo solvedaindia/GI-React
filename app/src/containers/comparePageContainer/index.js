@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Row, Col,Grid } from 'react-bootstrap';
-
+import apiManger from '../../utils/apiManager';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
@@ -33,8 +33,8 @@ export class ComparePageContainer extends React.Component {
       this.props.compWidgetData.forEach(element => {
         ids.push(element.id);
       });
-      axios.get(`${compareAPI}?ids=${ids}`, {
-        headers: { store_id: '10151', access_token: accessToken }
+      apiManger.get(`${compareAPI}?ids=${ids}`, {
+        headers: { }
       }).then(response => {
         this.setState({data: response.data.data});
       }).catch(error => {
