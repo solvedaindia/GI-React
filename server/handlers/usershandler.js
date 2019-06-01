@@ -12,6 +12,8 @@ const addressLength = {
   field2: 50,
   field3: 50,
 };
+const defaultPincode = '122001';
+const passwordChangeMessage = 'Password Changed Successfully';
 
 /**
  * Registeres User in WCS
@@ -43,7 +45,7 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
     logonPassword: params.password,
     logonPasswordVerify: params.password,
     x_otp: params.otp || '',
-    zipCode: params.pincode || '122001',
+    zipCode: params.pincode || defaultPincode,
   };
   /*   if (params.otp) {
     reqBody.x_otp = params.otp;
@@ -129,12 +131,8 @@ module.exports.changeUserPassword = function changeUserPassword(
     null,
     '',
     response => {
-      if (response) {
-        if (response.status === 200) {
-          callback(null, { message: 'Password Changed Successfully' });
-        } else {
-          callback(errorutils.handleWCSError(response));
-        }
+      if (response.status === 200) {
+        callback(null, { message: passwordChangeMessage });
       } else {
         logger.debug('error in userdetails while change password');
         callback(errorutils.handleWCSError(response));
@@ -258,7 +256,7 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
     !body.pincode ||
     !body.phone_number ||
     !body.address ||
-    //body.address.length >
+    // body.address.length >
     //  addressLength.field1 + addressLength.field2 + addressLength.field3 ||
     !body.city ||
     !body.state ||

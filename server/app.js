@@ -14,6 +14,14 @@ const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
 
+const port = process.env.PORT || '8002';
+
+global.storeDetails = {};
+
+// Cron JOB
+
+// require('./utils/cronjobs').startStoreInfoCron();
+
 // const csrf = require('csurf');
 // const session = require('express-session');
 // const errorHandler = require('errorhandler');
@@ -101,18 +109,22 @@ app.use((req, res, next) => {
 /* app.use((req, res, next) => {
   const storeIdentifier = req.headers.store_id;
   if (storeIdentifier) {
-    if (global[storeIdentifier] && global[storeIdentifier].storeID) {
-      req.headers.storeId = global[storeIdentifier].storeID;
-      req.headers.catalogId = global[storeIdentifier].catalogID;
+    if (
+      global.storeDetails[storeIdentifier] &&
+      global.storeDetails[storeIdentifier].storeID
+    ) {
+      req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+      req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
       next();
     } else {
       storeInfo.getStoreDetails(req.headers, (error, result) => {
         if (error) {
           next(error);
         } else {
-          global[storeIdentifier] = result;
-          req.headers.storeId = global[storeIdentifier].storeID;
-          req.headers.catalogId = global[storeIdentifier].catalogID;
+          global.storeDetails[storeIdentifier] = result;
+          req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+          req.headers.catalogId =
+            global.storeDetails[storeIdentifier].catalogID;
           next();
         }
       });
@@ -167,29 +179,6 @@ app.use((req, res) => {
 });
 
 // Generic error handler
-/* app.use((err, req, res, next) => {
-  logger.error(
-    JSON.stringify({
-      url: req.originalUrl,
-      stackTrace: JSON.stringify(err.stack),
-      status_code: err.status || err.status_code,
-      error_message: err.message || err.error_message,
-      error_key: err.error_code || err.error_key,
-      req_headers: req.headers,
-    }),
-  );
-  res.status(err.status || err.status_code).send({
-    status: 'failure',
-    error: {
-      status_code: err.status || err.status_code,
-      error_key: err.error_code || err.error_key,
-      error_message: err.message || err.error_message,
-    },
-    // error_response: err.error_code
-  });
-}); */
-
-// Generic error handler
 app.use((err, req, res, next) => {
   logger.error(
     JSON.stringify({
@@ -218,7 +207,7 @@ const options = {
 
 // app.listen(8001, () => console.log('Server started on http://localhost:8001'));
 
-https
-  .createServer(options, app)
-  // eslint-disable-next-line no-console
-  .listen(8002, () => console.log('Server started on https://localhost:8002'));
+const server = https.createServer(options, app);
+server.listen(port, () =>
+  logger.info(`Server started on https://localhost:${port}`),
+);

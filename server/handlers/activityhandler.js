@@ -7,6 +7,9 @@ const categoryUtil = require('../utils/categoryutil');
 const espotNames = require('../configs/espotnames');
 const espotHandler = require('./espotshandler');
 
+const bestSellingTitle = 'Best Selling Products';
+const recentlyViewedTitle = 'Recently Viewed Products';
+
 /**
  * Add Product to Recently Viewed
  * @param storeId,access_token
@@ -31,9 +34,11 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
     productId: productID,
     personalizationID: headers.personalizationID,
   };
+
   const reqHeader = {
     'content-type': 'application/json',
   };
+
   origin.getResponse(
     'POST',
     originUrl,
@@ -65,9 +70,11 @@ function getRecommendedProducts(headers, activityName, callback) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
+
   if (headers.category_id) {
     activityName = `${activityName}/category/${headers.category_id}`;
   }
+
   espotHandler.getEspotsData(headers, activityName, (err, result) => {
     if (err) {
       callback(err);
@@ -128,14 +135,14 @@ exports.getBestSellerProducts = function getBestSeller(req, callback) {
               callback(err2);
               return;
             }
-            resJSON.title = 'Best Selling Products';
+            resJSON.title = bestSellingTitle;
             resJSON.productCount = result2.productCount;
             resJSON.productList = result2.productList;
             callback(null, resJSON);
           },
         );
       } else {
-        resJSON.title = 'Recently Viewed Products';
+        resJSON.title = recentlyViewedTitle;
         resJSON.productCount = result1.productCount;
         resJSON.productList = result1.productList;
         callback(null, resJSON);

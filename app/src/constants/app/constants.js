@@ -18,5 +18,7 @@ export const UPDATE_MINICART = 'App/UPDATE_MINICART';
 export const RESET_REMOVEWISHLISTFLAG = 'App/RESET_REMOVEWISHLISTFLAG';
 
 export const LOAD_FOOTER_DATA = 'app/FooterContainer/LOAD_FOOTER_DATA';
-export const LOAD_FOOTER_DATA_SUCcESS = 'app/FooterContainer/LOAD_FOOTER_DATA_SUCcESS';
-export const LOAD_FOOTER_DATA_FAILURE = 'app/FooterContainer/LOAD_FOOTER_DATA_FAILURE';
+export const LOAD_FOOTER_DATA_SUCcESS =
+  'app/FooterContainer/LOAD_FOOTER_DATA_SUCcESS';
+export const LOAD_FOOTER_DATA_FAILURE =
+  'app/FooterContainer/LOAD_FOOTER_DATA_FAILURE';

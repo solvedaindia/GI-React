@@ -47,9 +47,11 @@ module.exports.getCategories = function getCategories(
  */
 function getCategoriesData(urlParam, headers, callback) {
   const reqHeaders = headerUtil.getWCSHeaders(headers);
+
   const originUrl = constants.categoryview
     .replace('{{storeId}}', headers.storeId)
     .replace('{{urlParam}}', urlParam);
+
   origin.getResponse(
     originMethod,
     originUrl,

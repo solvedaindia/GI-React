@@ -4,6 +4,8 @@ const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
 const headerutils = require('../utils/headerutil');
 
+const otpValidateSuccess = 'OTP Validation Successfull';
+
 /**
  * Generate OTP for Registartion,forgot password
  * @param storeId,access_token
@@ -91,7 +93,7 @@ module.exports.validateOtp = function validateOtp(params, headers, callback) {
     response => {
       if (response.status === 200) {
         const resJson = {
-          message: 'OTP Validation Successfull',
+          message: otpValidateSuccess,
         };
         callback(null, resJson);
       } else {

@@ -44,6 +44,7 @@ function getKeywordSuggestion(headers, searchTerm, callback) {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
+        logger.debug('Error in Calling Auto Keyword Suggestion');
         callback(errorUtils.handleWCSError(response));
       }
     },

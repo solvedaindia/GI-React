@@ -1,12 +1,11 @@
-const async = require('async');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-const filter = require('../filters/filter');
 const productUtil = require('../utils/productutil');
 const wishlistFilter = require('../filters/wishlistfilter');
+
 const wishlistName = 'My Wishlist';
 
 /**
@@ -450,7 +449,6 @@ module.exports.addItemInWishlist = function addItemInWishlist(
         productId: body.sku_id,
       };
       if (wishlistCount === 0) {
-        //reqBody.wishlistName = `wishlist_${headers.userId}`;
         reqBody.wishlistName = wishlistName;
         createAndAdd(headers, reqBody, callback);
       } else {

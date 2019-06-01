@@ -30,5 +30,6 @@ router.use('/pdp', require('./api/pdp'));
 router.use('/storelocator', require('./api/storelocator'));
 router.use('/emi', require('./api/emi'));
 router.use('/pincode', require('./api/pincode'));
+router.use('/compare', require('./api/compare'));
 
 module.exports = router;

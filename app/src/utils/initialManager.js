@@ -52,15 +52,15 @@ export function getUpdatedWishlist(wishlist) {
 
 export function getUpdatedMinicartCount(minicart) {
   apiManager
-  .get(cartCountApi)
-  .then(response => {
-    const count = response.data.data.cartTotalQuantity;
-    minicart.props.updatetMinicart(count);
-    //return count;
-  })
-  .catch(error => {
-    //return null;
-  });
+    .get(cartCountApi)
+    .then(response => {
+      const count = response.data.data.cartTotalQuantity;
+      minicart.props.updatetMinicart(count);
+      // return count;
+    })
+    .catch(error => {
+      // return null;
+    });
 }
 
 export function logoutTheUser() {

@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import apiManager from '../../utils/apiManager';
 import appCookie from '../../utils/cookie';
-import { connect } from 'react-redux';
 import '../../../public/styles/headerContainer/category.scss';
 import {
   cartCountApi,
@@ -81,13 +81,12 @@ class CartCount extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.updatedMinicartCount != this.props.updatedMinicartCount) {
       this.fetchMinicartDetails();
-      //this.getCartCount();
+      // this.getCartCount();
       this.setState({
         CartCount: nextProps.updatedMinicartCount,
         isLoading: false,
       });
     }
-
   }
 
   fetchMinicartDetails() {
@@ -183,7 +182,7 @@ function mapStateToProps(state) {
   const minicartCount = getReleventReduxState(stateObj, 'minicartCount');
   console.log('Its Globale Minicart', minicartCount);
   return {
-    updatedMinicartCount: minicartCount
+    updatedMinicartCount: minicartCount,
   };
 }
 

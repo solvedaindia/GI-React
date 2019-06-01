@@ -40,6 +40,9 @@ function getPincode(headers, userID, callback) {
   );
 }
 
+/**
+ * Get City and State on the basis of Pincode
+ */
 module.exports.getCityAndState = function getStateAndCity(
   pinCode,
   headers,
@@ -101,6 +104,43 @@ function updateDefaultPincode(headers, pincode, callback) {
       if (response.status === 200) {
         callback(null, 'success');
       } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Function to return Pincode is serviceable or not
+ */
+module.exports.getPincodeServiceability = pincodeServiceability;
+function pincodeServiceability(headers, pincode, callback) {
+  logger.debug('Call to Get Pincode Serviceablity API');
+  const originUrl = constants.pincodeServiceablity
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', pincode);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const resJSON = {
+          serviceable: false,
+        };
+        if (response.body.serviceAbilityFlag === true) {
+          resJSON.serviceable = true;
+        }
+        callback(null, resJSON);
+      } else {
+        logger.debug('Error While Checking Pincode Serviceability');
         callback(errorUtils.handleWCSError(response));
       }
     },

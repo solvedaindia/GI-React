@@ -64,8 +64,10 @@ class BestSeller extends React.Component {
 								</a>
 								<figcaption className='bsDetails'>
 									<h2 className='prodtitle'>{sellerItemData.productName}</h2>
-									<span className='discPrice'>Rs.24,700</span>
-									<span className='actualPrice'>Rs.27,000</span>
+									<h2 className='peiceDeatils'>
+										<span className='discPrice'>Rs.24,700</span>
+										<span className='actualPrice'>Rs.27,000</span>
+									</h2>
 									<p className='emi'>EMI Starting From
 										<span className='emiPrice'>Rs.399</span>
 									</p>

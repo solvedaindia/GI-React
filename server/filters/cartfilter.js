@@ -79,7 +79,7 @@ function mergeOrderItemandProduct(orderItemList, productList) {
       } else {
         itemJson.inventoryStatus = 'available';
         itemJson.deliveryDate =
-          itemJson.inventoryDetails.availabilityDateTime || null;
+          itemJson.inventoryDetails.deliveryDateTime || null;
       }
     }
 
@@ -122,15 +122,17 @@ module.exports.quantity = function getQuantity(cartData) {
  */
 module.exports.getCartData = function cart(cartData, productList) {
   const cartDetails = {
-    orderID: cartData.orderId,
-    totalProductPrice: parseFloat(cartData.totalProductPrice),
-    totalShippingCharge: parseFloat(cartData.totalShippingCharge),
-    totalShippingTax: parseFloat(cartData.totalShippingTax),
-    productDiscount: 0,
-    orderDiscount: 0,
-    totalDiscount: Math.abs(cartData.totalAdjustment),
-    totalSalesTax: parseFloat(cartData.totalSalesTax),
-    grandTotal: parseFloat(cartData.grandTotal),
+    orderSummary: {
+      orderID: cartData.orderId,
+      totalProductPrice: parseFloat(cartData.totalProductPrice),
+      totalShippingCharge: parseFloat(cartData.totalShippingCharge),
+      totalShippingTax: parseFloat(cartData.totalShippingTax),
+      productDiscount: 0,
+      orderDiscount: 0,
+      totalDiscount: Math.abs(cartData.totalAdjustment),
+      totalSalesTax: parseFloat(cartData.totalSalesTax),
+      grandTotal: parseFloat(cartData.grandTotal),
+    },
     cartTotalItems: cartData.orderItem.length,
     cartItems: mergeOrderItemandProduct(cartData.orderItem, productList)
       .orderItemList,
@@ -139,10 +141,10 @@ module.exports.getCartData = function cart(cartData, productList) {
   if (cartData.adjustment && cartData.adjustment.length > 0) {
     cartData.adjustment.forEach(adjustment => {
       if (adjustment.displayLevel === 'OrderItem') {
-        cartDetails.productDiscount = Math.abs(adjustment.amount);
+        cartDetails.orderSummary.productDiscount = Math.abs(adjustment.amount);
       }
       if (adjustment.displayLevel === 'Order') {
-        cartDetails.orderDiscount = Math.abs(adjustment.amount);
+        cartDetails.orderSummary.orderDiscount = Math.abs(adjustment.amount);
       }
     });
   }

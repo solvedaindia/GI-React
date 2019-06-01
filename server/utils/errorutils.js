@@ -107,7 +107,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
         errBody.errors[0].errorKey === '_ERR_GENERIC' ||
         errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
-        errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY'
+        errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
+        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED'
       ) {
         return {
           status_code: 400,

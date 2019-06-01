@@ -66,7 +66,7 @@ function applyPromoCode(headers, body, callback) {
     null,
     null,
     response => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         callback(null, response.body);
       } else {
         logger.debug('Error While Calling Apply Promo Code API');
@@ -214,7 +214,7 @@ module.exports.getPromoCode = function getPromoCodeById(
   callback,
 ) {
   if (!promotionId) {
-    logger.debug('GET City&State :: Invalid Params');
+    logger.debug('Get Promo Code :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
   }
 
@@ -235,6 +235,60 @@ module.exports.getPromoCode = function getPromoCodeById(
     response => {
       if (response.status === 200) {
         callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * Get promotions for multiple product ids
+ * @input ProductIDs Array
+ */
+module.exports.getMultiplePromotionData = function getMultiplePromotionData(
+  productIds,
+  headers,
+  callback,
+) {
+  if (!productIds) {
+    logger.debug('Get getMultiplePromotionData :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+  let productIdQuery = '';
+  productIds.forEach(productId => {
+    productIdQuery += productId;
+    productIdQuery += ',';
+  });
+
+  const originUrl = constants.promotionByIDs
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{productIDs}}', productIdQuery);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const promotionData = [];
+        productIds.forEach(productId => {
+          const promotion = {
+            uniqueID: productId,
+            promotionData: null,
+          };
+          if (productId in response.body) {
+            promotion.promotionData = response.body[productId];
+          }
+          promotionData.push(promotion);
+        });
+        callback(null, promotionData);
       } else {
         callback(errorUtils.handleWCSError(response));
       }

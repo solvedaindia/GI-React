@@ -10,7 +10,7 @@ const Categories = (props) => {
                 </h3>
                 { props.name.children.map((links, i) => {
                     return (
-                        <h4 className='categoriestext list'><a className='link ' href={links.action}>{links.text}</a></h4>
+                        <h4 className='categoriestext list' key={i}><a className='link ' href={links.action}>{links.text}</a></h4>
                     )})
                 }
             </div>

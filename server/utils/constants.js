@@ -50,4 +50,7 @@ module.exports = Object.freeze({
   findInvertory: `${prodWcsResourceUrl}/{{storeId}}/inventory/byPartNumber/{{partNumber}}?zipCode={{pinCode}}&quantity={{quantity}}&onlineStoreName=GodrejInterioESite`,
   getPromotionsList: `${prodWcsResourceUrl}/{{storeId}}/promotion?q=all`,
   getPromoCode: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/getpromocode/{{promotionId}}`,
+  pincodeServiceablity: `${prodWcsResourceUrl}/{{storeId}}/pincode/getServiceAbility/{{pincode}}`,
+  saveGSTIN: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
+  promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
 });
