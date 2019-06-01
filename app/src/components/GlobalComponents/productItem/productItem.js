@@ -155,6 +155,7 @@ class ProductItem extends React.Component {
 				<Wishlist
 						uniqueId={this.props.data.uniqueID}
 						isInWishlistPro={this.props.isInWishlist}
+						isFromWishlistPro={this.props.isfromWishlistPro}
 						history={this.props.history}
 						/>
 
