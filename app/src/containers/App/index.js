@@ -34,6 +34,8 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
+import CompareContainer from '../comparePageContainer/index'
+import CheckoutContainer from '../checkoutContainer/index'
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
@@ -140,10 +142,12 @@ export default class App extends React.Component {
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
-          <Route path="/pdp/:skuId" component={PdpContainer} />
+          <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
+          <Route path="/compare" component={CompareContainer} />
           <Route path="/wishlist" component={MyWishlist} />
+          <Route path="/checkout" component={CheckoutContainer} />
         </Switch>
         <FooterContainer />
       </div>

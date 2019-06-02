@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from '../Primitives/slider';
 import BestSeller from '../BestSelling/bestSelling';
 import Recently from '../RecentlyViewed/recentlyViewed';
-import SubCategory from '../../components/GlobalComponents/subCategory';
+import SubCategory from '../GlobalComponents/subCategory';
 import Content from '../Primitives/content';
 import ReadMore from '../GlobalComponents/readMore';
 import ExStore from '../ExStore/exStore.js';

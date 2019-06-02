@@ -15,7 +15,10 @@ export const LOAD_REPOS_ERROR = 'App/LOAD_REPOS_ERROR';
 export const API_URL = 'http://localhost:8002/api/v1';
 export const WISH_LIST_COUNT = 'App/WISH_LIST_COUNT';
 export const UPDATE_MINICART = 'App/UPDATE_MINICART';
+export const RESET_REMOVEWISHLISTFLAG = 'App/RESET_REMOVEWISHLISTFLAG';
 
 export const LOAD_FOOTER_DATA = 'app/FooterContainer/LOAD_FOOTER_DATA';
-export const LOAD_FOOTER_DATA_SUCcESS = 'app/FooterContainer/LOAD_FOOTER_DATA_SUCcESS';
-export const LOAD_FOOTER_DATA_FAILURE = 'app/FooterContainer/LOAD_FOOTER_DATA_FAILURE';
+export const LOAD_FOOTER_DATA_SUCcESS =
+  'app/FooterContainer/LOAD_FOOTER_DATA_SUCcESS';
+export const LOAD_FOOTER_DATA_FAILURE =
+  'app/FooterContainer/LOAD_FOOTER_DATA_FAILURE';

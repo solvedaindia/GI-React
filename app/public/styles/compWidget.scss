@@ -15,14 +15,51 @@
         margin:0;
         .list{
             background: $greybg;
-            width: 23.34%;
-            display: inline-block;
+            width: 23.34%;            
             padding: 5px;
             margin: 0 25px 0 0;
             position: relative;
+            display: block;
+            float: left;
+            min-height: 87px;
+            max-height: 87px;
+
+            .btn-compare{
+                background:$black;
+                border:none;
+                color:$colorwhite;
+                width:80%;
+                margin:0 auto;
+                padding:12px 0;
+                font-size: 14px;
+                display: block;
+            }
+            .btn-clearall{
+                background: transparent;
+                border:none;
+                margin:17px 0 0 0;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .addproduct-box{
+                text-align: center;
+                padding: 14px;
+                .add-icon{
+                   background: transparent;
+                   border:none;
+                }
+                .addproduct-text{
+                   color:$black;
+                   font-weight: 600;
+                   padding:15px 0 0 0;
+                }
+            }
 
             &:last-child{
                 margin: 0 0px 0 0;
+                text-align: center;
+                background: transparent;
             }
             .imgBox{
                 width:30%;
@@ -67,8 +104,171 @@
                 }
                 
             } 
+            
         }
    }
 
+}
+
+.compare-product{
+    .heading{
+        font-size: 30px;
+        line-height: 32px;
+        color: $cerulean;
+        font-family: $font-bold;
+    }
+    .back-btn-box{
+        font-size: 16px;
+        padding: 16px 0px;
+    }
+    .compare-product-list{
+        margin-bottom: 20px;
+        .comp-list-item{
+            padding:0px;
+            border-width: 1px 1px 1px 1px;
+            border-style: solid;
+            border-color: $borderLight $colorwhite $borderLight $borderLight;
+        
+            &:last-child{border-right: 1px solid $borderLight}
+            &:hover{
+                border: 1px solid $ceruleanblue;
+            }
+            .img-box{
+                padding:20px;
+                text-align: center;
+
+                img{
+                    max-width: 100%;
+                    max-height: 168px;
+                }
+            }
+            .remove-box{
+                border-top:1px solid $borderLight;
+                border-bottom:1px solid $borderLight;
+                padding: 10px;
+                text-align: center;
+
+                .remove-btn, .view-product-btn{
+                    border:0px; 
+                    background: none;
+                    margin: 0px 20px;
+                    font-size: 12px;
+                    outline: 0;
+                }
+                .remove-btn{
+                    color: $colorgrey;
+                }
+                .view-product-btn{
+                    color: $ceruleanblue;                
+                }
+            }
+            .product-desc{
+                padding: 20px;
+                text-align: center;
+                .product-name{
+                    font-family: $font-bold;
+                    padding-top: 15px;
+                    font-size: 14px;
+                    text-transform: capitalize;
+                }
+                .description-text {
+                    font-family: $font-light;
+                    font-size: 11px;
+                }
+                .discount-price {
+                    font-size: 18px;
+                    font-family: $font-bold;
+                    color: $cerulean;
+                }
+                .priceno-discount {
+                    text-decoration: line-through;
+                    text-decoration-color: $reddishpink;
+                    font-family: $font-light;
+                    padding-left: 15px;
+                    font-size: 18px;
+                }
+                .discount-price{
+                    padding-right: 10px;
+                }
+                .priceno-discount{
+                    padding-left: 10px;
+                }
+                .emi-desc{
+                    color: $reddishpink;
+                    font-size: 12px;
+                }
+            }
+            .product-attr{
+                padding: 20px;
+                text-align: center;
+                display: flex;
+                ul{
+                    margin: auto;
+                    li{
+                        float: left;
+                        padding: 5px 10px;
+                        a{
+                            display: inline-block; 
+                            width:30px; 
+                            height: 30px; 
+                            border-radius: 100%;
+                            border: 1px solid $borderLight;
+                        }
+                    }
+                }
+            }
+            
+        }
+        .prod-delivery-slot{
+            background: $greybg;
+            padding: 17px 37px;
+        }
+        .dims-detail{
+            
+            .row:nth-child(odd){background: $greybg}
+            .attr-dims{
+                width:47%;
+                padding: 8px 5px;
+            }
+            .attr-desc{ 
+                padding: 8px 5px;
+                p{
+                    margin: 0px;
+                }
+            }
+            
+        }
+        .specifec-detail{
+
+            &:nth-child(odd){background: $greybg}
+            .attr-details{
+                width:47%;
+                padding: 8px 5px;
+            }
+            .attr-desc{ 
+                padding: 8px 5px;
+            }
+            p{margin: 0px;}
+        }
+        
+        .comp-cod-option{
+            padding: 20px;
+            border-width: 1px 1px 1px 1px;
+            border-style: solid;
+            border-color: $borderLight $colorwhite $borderLight $borderLight;
+        
+            &:last-child{border-right: 1px solid $borderLight}
+        }
+        .title-text{
+            font-size: 30px;
+            line-height: 32px;
+            color: $black;
+            font-family: $font-regular;
+        }
+    }
+    .back-btn{
+        background: none;
+        border:0px;
+    }
 }
 

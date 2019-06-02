@@ -16,7 +16,8 @@
         .action{
             font-size: $base*1.5;
             color: $battleshipGrey;
-            font-family: $font-regular;
+            font-family: $font-medium;
+            font-weight: 500;
             &:hover {
                 color: $reddishPink;
             }
