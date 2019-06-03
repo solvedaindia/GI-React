@@ -12,6 +12,7 @@ import {
 import CartLogo from '../SVGs/cart';
 import { getUpdatedMinicartCount } from '../../utils/initialManager';
 import MinicartItem from './minicartItem';
+import EmptyMinicart from './emptyMinicart';
 import ReactDOM from 'react-dom';
 import '../../../public/styles/minicart.scss';
 import { getReleventReduxState } from '../../utils/utilityManager';
@@ -134,11 +135,12 @@ class CartCount extends React.Component {
 
   render() {
     const { isLoading, CartCount } = this.state;
-    console.log('minicart recive props', CartCount);
+    console.log('minicart recive props', CartCount, this.state.minicartData);
     let cartCountItem = null;
     let minicartDropdownItem = null;
     if (CartCount != 0 && CartCount != undefined) {
       cartCountItem = <span className="cartCount">{CartCount}</span>;
+    }
       minicartDropdownItem = (
         <div
           className={`dropdown__list ${
@@ -146,12 +148,14 @@ class CartCount extends React.Component {
             }`}
         >
           <>
-            <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-            <button className="checkout-btn">Checkout</button>
+          {CartCount != 0 && CartCount != undefined ? <><div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+            <button className="checkout-btn">Checkout</button></> : <EmptyMinicart />}
+          {/* <EmptyMinicart /> */}
+            
           </>
         </div>
       );
-    }
+    
 
     return (
       <li className="icons mini-cart" onClick={this.handleCartCount}>
