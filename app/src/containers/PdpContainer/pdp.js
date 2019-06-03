@@ -5,6 +5,7 @@ import {
   	espotAPI
 } from '../../../public/constants/constants';
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
+import appCookie from '../../utils/cookie';
 
 class PdpContainer extends React.Component {
 	constructor() {
@@ -27,11 +28,15 @@ class PdpContainer extends React.Component {
 		const productId = this.props.match.params.productId
 		apiManager.get(pdpApi2 + productId)
 		.then(response => {
-			//console.log('=====>PDP', JSON.stringify(response.data));
+			//console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
 			this.setState({
 			pdp: response.data,
 			pdpLoading: false,
 			});
+
+			if (appCookie.get('isPDPAddToCart') === null) {
+				appCookie.set('isPDPAddToCart', false, 365 * 24 * 60 * 60 * 1000);
+			}
 		})
 		.catch(error => {
 			console.log('PDP API Error =>', error);
