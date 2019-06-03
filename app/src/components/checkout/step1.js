@@ -8,6 +8,9 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
+import RegisterModalData from '../RegisterComponent/registerModalData';
+import WelcomeBack from '../WelcomeBack/index';
+import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import {
   regexEmail,
   regexMobileNo,
@@ -26,6 +29,9 @@ export class Step1Component extends React.Component {
           password: '',
           errorMessageUserId: null,
           errorMessagePassword: null,
+          showLoginRegisterMain: false,
+          showForgotPassword: false,
+          showRegister: false,
         }
     }
 
@@ -108,6 +114,50 @@ export class Step1Component extends React.Component {
       this.props.login(data);
     };
 
+    welcomeBackCallback(fromForgot) {
+      // Only to manage show and hide state
+      if (fromForgot) {
+        this.setState({
+          showForgotPassword: true,
+          showLoginRegisterMain: false,
+        });
+      } else {
+        this.setState({
+          showRegister: true,
+          showLoginRegisterMain: false,
+        });
+      }
+    }
+  
+    forgotPasswordCallback() {
+      this.setState({
+        showLoginRegisterMain: true,
+        showForgotPassword: false,
+      });
+    }
+
+    openModal = () => {
+      this.setState({
+        showRegister: true
+      })
+    }
+
+    registerCallback() {
+      this.setState({
+        showLoginRegisterMain: true,
+        showRegister: false,
+      });
+    }
+
+    resetLoginValues() {
+      console.log('resetLoginValues');
+      this.setState({
+        showLoginRegisterMain: false,
+        showForgotPassword: false,
+        showRegister: false,
+      });
+    }
+
     
 
     errorMessage = message => <p className="error-msg">{message}</p>;
@@ -149,6 +199,21 @@ export class Step1Component extends React.Component {
                           <input type="checkbox" name="has_pass" onChange={this.handleHasPass} />
                           <label htmlFor="has_pass" style={{marginLeft: "10px"}}>I have a password</label>
                         </div>
+                        <a onClick={this.openModal}>Open Modal</a>
+                        {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)}
+                                                resetCallbackPro={this.resetLoginValues.bind(this)}/> : '' }
+                        {this.state.showLoginRegisterMain ? (
+                          <WelcomeBack
+                            callbackPro={this.welcomeBackCallback.bind(this)}
+                            resetCallbackPro={this.resetLoginValues.bind(this)}
+                          />
+                        ) : null}
+                        {this.state.showForgotPassword ? (
+                          <ForgotPassword
+                            callbackForgotPro={this.forgotPasswordCallback.bind(this)}
+                            resetCallbackPro={this.resetLoginValues.bind(this)}
+                          />
+                        ) : null}
                       </div>
                     </div>
 

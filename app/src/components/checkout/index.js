@@ -62,7 +62,7 @@ export class CheckoutComponent extends React.Component {
       }
     }
 
-    handleUserLoginApi = (data) => {
+    handleUserLoginApi(data) {
       this.setState({ message: null });
       axios
       .post(userLoginAPI, data, {
@@ -130,7 +130,7 @@ export class CheckoutComponent extends React.Component {
         } else if(this.state.step == 2) {
             return <Step2Component proceed={this.handleProceed} back={this.handleChange} />
         } else {
-            return <Step1Component proceed={this.handleProceed} login={this.handleUserLoginApi} />
+            return <Step1Component proceed={this.handleProceed} login={this.handleUserLoginApi.bind(this)} />
         }
     }
 

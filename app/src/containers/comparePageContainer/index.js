@@ -37,6 +37,7 @@ export class ComparePageContainer extends React.Component {
         headers: { }
       }).then(response => {
         this.setState({data: response.data.data});
+        console.log(response.data.data, 'data from api')
       }).catch(error => {
         console.log(error);
       })
@@ -54,6 +55,7 @@ export class ComparePageContainer extends React.Component {
           return sKU.uniqueID == this.props.compWidgetData[0].skuId;
         });
         if(sku1) {
+          sku1.parentProductId = data.uniqueID;
           prds.push(sku1)
         }
         if(this.props.compWidgetData.length > 1) {
@@ -61,6 +63,7 @@ export class ComparePageContainer extends React.Component {
             return sku.uniqueID == this.props.compWidgetData[1].skuId;
           })
           if(sku2) {
+            sku2.parentProductId = data.uniqueID;
             prds.push(sku2)
           }
         }
@@ -69,10 +72,12 @@ export class ComparePageContainer extends React.Component {
             return sku.uniqueID == this.props.compWidgetData[2].skuId
           })
           if(sku3) {
+            sku3.parentProductId = data.uniqueID;
             prds.push(sku3);
           }
         } 
       })
+      console.log(prds, 'this is prds ')
       return <CompPrd data={prds} remove={this.props.removeProduct} />
     }
 
