@@ -99,7 +99,7 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
       console.log('Add wishlit --- ', response.data);
       //this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
-      reference.props.resetRemoveFromWishlistFlag(true);
+      //reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
       // this.props.updatetWishListCount(6);
     })
     .catch(error => {

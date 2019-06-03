@@ -50,8 +50,7 @@ class MyWishlist extends React.Component {
     }, 2000);
     return (
       <div className="removeFromWishlist clearfix">
-        <span className="wishlist-text">Product Added to Wishlist</span>
-        <button onClick={() => this.redirectToWishlistPage()} className="view-btn">View</button>
+        <span className="wishlist-text">Product removed from Wishlist</span>
       </div>
     );
   }
