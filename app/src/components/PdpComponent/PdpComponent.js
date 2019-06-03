@@ -14,6 +14,8 @@ import SocialMedia from './socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import AddToCart from './addToCart';
+import Price from './price';
+import appCookie from '../../utils/cookie';
 
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
@@ -108,25 +110,33 @@ class PdpComponent extends React.Component {
 	render() {
 		const { isLoading } = this.state;
 		const wishlistArr = getOnlyWishlistUniqueIds();
-
+		const isAddToCart = appCookie.get('isPDPAddToCart');
 		return (
 			<div className="galleryArea">
 				{!isLoading ? (
 					<>
-					{/* <Row>
-						<Col md={7} sm={12} xs={12}>
-							<div className="product">
-								<span className='text'>Product ID:</span> 
-								<span className='text'>{this.state.skuData.partNumber}</span>
-								<h4 className='heading'>
-									{this.state.skuData.productName}
-								</h4>
-							</div>
-						</Col>
-						<Col md={4} sm={12} xs={12}>
-							<AddToCart skuId={this.state.skuData.uniqueID} sticky={true} />
-						</Col>
-					</Row> */}
+					{ isAddToCart !== 'true' &&
+						<Row>
+							<Col md={7} sm={12} xs={12}>
+								<div className="product">
+									<span className='text'>Product ID:</span> 
+									<span className='text'>{this.state.skuData.partNumber}</span>
+									<h4 className='heading'>
+										{this.state.skuData.productName}
+									</h4>
+								</div>
+							</Col>
+							<Col md={4} sm={12} xs={12}>
+								<Price priceData={this.state.skuData}/>
+									<div className="accessories-offer">
+										<div className='offerbg text'> % </div>
+										<div className='discount-off text'>{this.state.skuData.discount}% OFF & free accessories </div>
+									</div>
+								<AddToCart skuId={this.state.skuData.uniqueID} sticky={true} />
+								
+							</Col>
+						</Row>
+					}
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">

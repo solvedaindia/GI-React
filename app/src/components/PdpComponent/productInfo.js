@@ -2,6 +2,7 @@ import React from 'react';
 import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import AddToCart from './addToCart';
+import Price from './price';
 
 class productInfo extends React.Component {
 	constructor() {
@@ -21,12 +22,7 @@ class productInfo extends React.Component {
 		let emidata = this.props.productData.emiData;
 		return (
 			<>
-			<div className="price">
-				<span className='offerprice text'>&#8377;{this.props.productData.offerPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-				{ this.props.productData.offerPrice < this.props.productData.actualPrice && (
-					<span className='actualprice text'>&#8377;{this.props.productData.actualPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-				)}
-			</div>
+			<Price priceData={this.props.productData}/>
 			<div className="shippingCharge">
 				Shipping Charges:{' '}
 				<span className="bold">

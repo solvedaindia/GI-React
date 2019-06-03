@@ -5,6 +5,7 @@ import apiManager from '../../utils/apiManager';
 import { getUpdatedMinicartCount } from '../../utils/initialManager';
 import { addToCart } from '../../../public/constants/constants';
 import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../actions/app/actions';
+import appCookie from '../../utils/cookie';
 
 class addToCartComponent extends React.Component {
 	constructor(props) {
@@ -15,6 +16,8 @@ class addToCartComponent extends React.Component {
 	}
 
 	moveToCartClicked = () => {
+		const isPDPAddToCart = appCookie.get('isPDPAddToCart');
+		
 		let quantity = '1';
 		if (!this.props.sticky) {
 			quantity = document.getElementById('quantity').value;
@@ -34,7 +37,11 @@ class addToCartComponent extends React.Component {
 			this.setState({
 				addToCartPopup: this.addToCartPopupItem()
 			});
-			
+			if (isPDPAddToCart === 'false') {
+				appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
+				window.location.reload();
+			} 
+
 		}).catch(error => {
 			console.log('AddToCart Error---', error);
 		});
