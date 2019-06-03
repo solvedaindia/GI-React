@@ -12,6 +12,8 @@ const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
 const cartCalculateOrder = '1';
 
+const cartProfileName = 'IBM_Details';
+
 /**
  * Fetch Mini Cart Details.
  * @return return minicart Data
@@ -402,7 +404,6 @@ function getcartPageProductDetails(cartData, headers, callback) {
       reqParamArray.push(reqParam);
       productIDs.push(item.productId);
     });
-
     const productListTask = [
       productUtil.productByProductIDs.bind(null, productIDs, headers),
       getInventoryDetails.bind(null, headers, reqParamArray),
