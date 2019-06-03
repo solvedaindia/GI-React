@@ -107,6 +107,8 @@ export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
 /* PDP API */
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
+/* User Detail API */
+export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

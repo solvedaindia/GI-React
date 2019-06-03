@@ -65,11 +65,13 @@ export default class App extends React.Component {
       this.setState({ accessToken: token });
     } else {
       /* Check if User is logged-in or Guest */
-      if (isLoggedIn) {
-      } else {
+      // if (isLoggedIn) {
+      // } else {
         registerGuestUser(this.guestLoginCallback);
-      }
+      //}
     }
+
+    
   }
 
   newsletterPopupHandling() {
