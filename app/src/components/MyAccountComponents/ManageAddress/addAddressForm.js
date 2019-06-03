@@ -48,10 +48,6 @@ class AddAddressForm extends React.Component {
   }
 
   onSavebuttonClick(event) {
-
-  }
-
-  onSavebuttonClick(event) {
     event.preventDefault();
 
     if (!validateFullName(this.state.inputText_name)) {
@@ -185,8 +181,17 @@ class AddAddressForm extends React.Component {
     apiManager.post(APIURL, data)
       .then(response => {
         console.log('Add Address Response ---- ', response.data);
-        this.props.onCancel();
         this.props.onUpdateActivity();
+        this.props.onCancel({
+          "name": '',
+          "phoneNumber": '',
+          "emailId": '',
+          "pincode": '',
+          "address": '',
+          "city": '',
+          "state": '',
+          "isDefault": String(false),
+        })
       })
       .catch(error => {
         console.log('Add Address Error---', error);
@@ -221,25 +226,25 @@ class AddAddressForm extends React.Component {
     if (this.props.editAddressDataPro.nickName !== undefined) {
       this.props.onCancel({
         "name": '',
-        "phone_number": '',
-        "email_id": '',
+        "phoneNumber": '',
+        "emailId": '',
         "pincode": '',
         "address": '',
         "city": '',
         "state": '',
-        "default": String(false),
+        "isDefault": String(false),
       })
     }
     else {
       this.props.onCancel({
         "name": this.state.inputText_name,
-        "phone_number": this.state.inputText_number,
-        "email_id": this.state.inputText_email,
+        "phoneNumber": this.state.inputText_number,
+        "emailId": this.state.inputText_email,
         "pincode": this.state.inputText_pincode,
         "address": this.state.inputText_address,
         "city": this.state.inputText_city,
         "state": this.state.inputText_state,
-        "default": String(this.state.isSetAsDefault),
+        "isDefault": String(this.state.isSetAsDefault),
       })
     }
     
