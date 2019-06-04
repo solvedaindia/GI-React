@@ -42,18 +42,20 @@ export class MyAccountContainer extends React.Component {
 
   render() {
     return (
-      <div class="container">
+     <div className='MyAccount'>
+      <div className="container">
         <div className="row">
            <div className="col-xs-12 col-sm-3 col-md-3 myac-left-nav">
             <ul className="nav nav-tabs">
-              <li><a href="#profile-v" data-toggle="tab">My Profile</a></li>
-              <li><a href="#changePassword-v" data-toggle="tab">Change Password</a></li>
-              <li><a href="#myOrder-v" data-toggle="tab">My Orders</a></li>
-              <li><a href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
-              <li><a href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
-              <li><a href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
-              <li><a href="#notifications-v" data-toggle="tab">Notifications</a></li>
-              <li><a href="#customercare-v" data-toggle="tab">Customer Care</a></li>
+              <h4 className='username'>Hello Jonathan!</h4>
+              <li className='list'><a className='link active' href="#profile-v" data-toggle="tab">My Profile</a></li>
+              <li className='list'><a className='link' href="#changePassword-v" data-toggle="tab">Change Password</a></li>
+              <li className='list'><a className='link' href="#myOrder-v" data-toggle="tab">My Orders</a></li>
+              <li className='list'><a className='link' href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
+              <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
+              <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
+              <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li>
+              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li>
             </ul>
           </div>
 
@@ -71,6 +73,7 @@ export class MyAccountContainer extends React.Component {
           </div>
         </div>
         </div>
+       </div>
     );
   }
 }

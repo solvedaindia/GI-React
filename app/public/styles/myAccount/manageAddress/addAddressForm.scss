@@ -3,21 +3,24 @@
 @import "../../variable.scss";
 
 .addAddressContainer {
-  width: 857px;
-  height: 660px;
+  width: 97%;
   border-radius: 2px;
   border: solid 1px #d1d1d2;
   background-color: rgba(238, 237, 237, 0.09);
-  margin: 12px 0 0 10px;
+  padding: 21px 30px 21px 26px;
   border-style: dashed;
+  margin:26px 0 0 0;
+  position: relative;
 
-  .cancelBtn {
-    /* vertical-align: text-bottom; */
-    position: relative;
-    /* right: 9px; */
-    top: -30px;
-    left: 822px;
-    width: 25px;
+  .heading{
+    font-size: 16px;
+    font-family:$font-bold;
+    margin: 0 0 23px 0;
+  }
+  .cancelBtn {    
+    position: absolute;   
+    top: 28px;
+    right: 30px;   
     background: transparent;
     border: none;
     &:focus {
@@ -26,21 +29,33 @@
   }
 
   .actionBtnWrapper {
-    padding: 5px 0 0 0;
-    .btn {
-      padding: 12px 60px;
-      border-radius: 0;
-    }
-    &__cancelBtn {
+    padding: 39px 0 46px 0;    
+    .btn-cancel {
       border: solid 1px $black;
       background-color: $colorwhite;
     }
-
-    &__applyBtn {
-      margin-left: 15px;
+    .btn-save {
+      border: solid 1px $black;
+      background-color: $colorwhite;
+      background: $black;
       color: $colorwhite;
-      background-color: $black;
-      border: 1px solid $black;
+      margin: 0 0 0 23px;
+    }
+
+   
+  }
+
+  .defaultOption{
+    .defaultCheckbox,
+    .defaultlbl{
+      float: left;
+    }
+
+    .defaultlbl{
+      font-weight: normal;
+      padding: 0 0 0 14px;
+      margin: 0;
+      font-size: 12px;
     }
   }
   

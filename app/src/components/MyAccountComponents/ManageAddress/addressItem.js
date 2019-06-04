@@ -53,12 +53,17 @@ class AddressItem extends React.Component {
     return (
       <div className='addressItem'>
         {this.props.addressData.isDefault ? <label className='defaultAddress'>Default Address :</label> : null}
-        <label className='addressText'>{this.props.addressData.address}<p/>{this.props.addressData.city}<p/>{this.props.addressData.state},{this.props.addressData.pincode}</label>
-        <button className='commandBtns' onClick={this.deleteBtnClicked.bind(this)}>Delete</button>
-        <span className=''> |</span>
-        <button className='commandBtns' onClick={this.editBtnClicked.bind(this)}>Edit</button>
-        <span className=''> |</span>
-        <button className='commandBtns' onClick={this.setAsDefafultBtnClicked.bind(this)}>Set as Default</button>
+        <label className='addressText'>
+          {this.props.addressData.address}
+          {this.props.addressData.city}
+          {this.props.addressData.state},{this.props.addressData.pincode}
+        </label>
+        
+        <ul className='modifyAddress'>
+          <li className='listitem' onClick={this.deleteBtnClicked.bind(this)}>Delete</li>         
+          <li className='listitem' onClick={this.editBtnClicked.bind(this)}>Edit</li>          
+          <li className='listitem' onClick={this.setAsDefafultBtnClicked.bind(this)}>Set as Default</li>
+        </ul>
       </div>
     );
   }

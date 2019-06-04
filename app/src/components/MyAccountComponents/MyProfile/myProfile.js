@@ -102,21 +102,21 @@ console.log('itt --- ',this.state.inputText_email)
   render() {
 
     return (
-      <form className='myProfileContainer'>
+      <form className='form-BgContainer'>
         <div className="form-div clearfix div-error">
           <Input inputType={'text'} title={'Full Name'} name={'name'} id={'fullName'} placeholder={'Enter your name'} value={this.state.inputText_name} handleChange={this.handleInput} />
-          {this.state.error_name ? <p className="error-msg">{this.state.errorMessage_name}</p> : null}
+          {this.state.error_name ? <div className="error-msg">{this.state.errorMessage_name}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
           <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
-          {this.state.error_number ? <p className="error-msg">{this.state.errorMessage_number}</p> : null}
+          {this.state.error_number ? <div className="error-msg">{this.state.errorMessage_number}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
           <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
-          {this.state.error_email ? <p className="error-msg">{this.state.errorMessage_email}</p> : null}
+          {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
         </div>
 
-        <button onClick={this.onSavebuttonClick.bind(this)} className='actionBtnWrapper__applyBtn btn'>Save</button>
+        <button onClick={this.onSavebuttonClick.bind(this)} className='btn-apply btn'>Save</button>
       </form>
     );
   }

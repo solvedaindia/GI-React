@@ -11,6 +11,7 @@ import {
   getReleventReduxState,
 } from '../../../utils/utilityManager';
 import '../../../../public/styles/myAccount/changePassword.scss';
+// import '../../../../public/styles/myAccount/myAccountBase.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 
 class ChangePassword extends React.Component {
@@ -141,19 +142,21 @@ class ChangePassword extends React.Component {
 
     let errorItemCurrent = null;
     if (this.state.errorCurrent) {
-      errorItemCurrent = <p className="error-msg">{this.state.errorMessage}</p>;
+      errorItemCurrent = <div className="error-msg">{this.state.errorMessage}</div>;
     }
 
     let errorItemNew = null;
     if (this.state.errorNew) {
-      errorItemNew = <p className="error-msg">{this.state.errorMessage}</p>;
+      errorItemNew = <div className="error-msg">{this.state.errorMessage}</div>;
     }
 
     return (
-      <div className='changePasswordContainer'>
-        <h6>Current Password</h6>
-        <div className="form-div clearfix div-error">
-          <input
+      <div className='form-BgContainer changePasswordContainer'>
+       <div className='form-div clearfix'>
+        <div className='form-group'>
+        <label className="form-label">Current Password</label>
+        <div className='currentPassword'>
+        <input
             onChange={this.handleInputChange.bind(this)}
             type={this.state.inputType}
             name="text"
@@ -162,18 +165,22 @@ class ChangePassword extends React.Component {
             placeholder="Enter Current Password"
             value={this.state.inputTextCurrent}
           />
-          {errorItemCurrent}
+          
           <span
             onClick={this.showHidePass.bind(this)}
             className="valiationPosition-NewPassword"
           >
             {<img src={require('../../SVGs/eye.svg')} />}
           </span>
+          </div>
+        </div>
+        {errorItemCurrent}
         </div>
 
-        <h6>New Password</h6>
-        <div className="form-div clearfix div-error">
-          <input
+        <div className='form-div clearfix'>
+        <div className='form-group'>
+        <label className="form-label">New Password</label>
+        <input
             // onKeyPress={this.onpress}
             onChange={this.handleInputChange.bind(this)}
             type="password"
@@ -183,13 +190,14 @@ class ChangePassword extends React.Component {
             placeholder="Enter New Password"
             value={this.state.inputTextNew}
           />
-          {errorItemNew}
+          
         </div>
+        {errorItemNew}
+       </div>
+
         <button
           onClick={this.saveBtnPressed.bind(this)}
-          className="btn-block btn-bg"
-        >
-          Save
+          className='btn-apply btn'>Save
         </button>
       </div>
     );
