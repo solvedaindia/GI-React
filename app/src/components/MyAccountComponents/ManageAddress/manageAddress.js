@@ -67,7 +67,7 @@ class ManageAddress extends React.Component {
     if (listData) {
       const item = listData.map((data) => {
         return (
-          <li>
+          <li className='list'>
             <AddressItem
               addressData={data}
               onUpdateActivity={this.getAddressListAPI.bind(this)}
@@ -85,9 +85,10 @@ class ManageAddress extends React.Component {
 
     return (
       <div className='manageAddressContainer'>
-        <ul className='itemList li'>
+        <ul className='itemList'>
           {this.state.addressListItem}
         </ul>
+        <div className='clearfix'></div>
         {this.state.isAddAddress ? <AddAddressForm
           onCancel={this.addNewAddressBtnClicked.bind(this)}
           onUpdateActivity={this.getAddressListAPI.bind(this)}

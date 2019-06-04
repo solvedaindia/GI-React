@@ -251,45 +251,78 @@ class AddAddressForm extends React.Component {
   }
 
   render() {
-    console.log('The Data --- ', this.props.editAddressDataPro.nickName)
+    console.log('The Data --- ', this.props.editAddressDataPro.nickName);
     return (
-      <form className='addAddressContainer'>
-        <h4>Add New Address</h4>
+      <div className='form-BgContainer addAddressContainer'>
+        <h4 className='heading'>Add New Address</h4>
         <button className='cancelBtn' onClick={this.closeAddNewAddress.bind(this)}>X</button>
-        <div className="form-div clearfix div-error">
-          <Input inputType={'text'} title={'Full Name'} name={'name'} id={'fullName'} placeholder={'Enter your name'} value={this.state.inputText_name} handleChange={this.handleInput} />
-          {this.state.error_name ? <p className="error-msg">{this.state.errorMessage_name}</p> : null}
+        <div className='row'>
+          <div className='col-md-6'>
+              <div className='form-div clearfix div-error'>
+                <Input inputType={'text'} title={'Full Name'} name={'name'} id={'fullName'} placeholder={'Enter your name'} value={this.state.inputText_name} handleChange={this.handleInput} />
+                {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
+              </div>
+          </div>
+
+          <div className='col-md-6'>
+            <div className='form-div clearfix div-error'>
+              <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
+              {this.state.error_number ? <div className='error-msg'>{this.state.errorMessage_number}</div> : null}
+            </div>
+          </div>
+        
+
+        <div className='col-md-6'>
+          <div className='form-div clearfix div-error'>
+            <Input inputType={'email'} title={'Email ID (Optional)'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
+            {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
+          </div>
         </div>
-        <div className="form-div clearfix div-error">
-          <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
-          {this.state.error_number ? <p className="error-msg">{this.state.errorMessage_number}</p> : null}
+
+        <div className='col-md-6'>
+          <div className='form-div clearfix div-error'>
+            <Input inputType={'number'} title={'Pincode'} name={'name'} id={'pincode'} placeholder={'Enter Pincode'} value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
+            {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div> : null}
+          </div>
         </div>
-        <div className="form-div clearfix div-error">
-          <Input inputType={'email'} title={'Email ID (Optional)'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
-          {this.state.error_email ? <p className="error-msg">{this.state.errorMessage_email}</p> : null}
-        </div>
-        <div className="form-div clearfix div-error">
-          <Input inputType={'number'} title={'Pincode'} name={'name'} id={'pincode'} placeholder={'Enter Pincode'} value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
-          {this.state.error_pincode ? <p className="error-msg">{this.state.errorMessage_pincode}</p> : null}
-        </div>
-        <div className="form-div clearfix div-error">
-          <Input inputType={'text'} title={'Address'} name={'name'} id={'address'} placeholder={'Enter Address'} value={this.state.inputText_address} handleChange={this.handleInput} />
-          {this.state.error_address ? <p className="error-msg">{this.state.errorMessaget_address}</p> : null}
-        </div>
-        <div className="form-div clearfix div-error">
+
+        <div className='col-md-12'>
+          <div className='form-div clearfix div-error'>
+            <Input inputType={'text'} title={'Address'} name={'name'} id={'address'} placeholder={'Enter Address'} value={this.state.inputText_address} handleChange={this.handleInput} />
+            {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+          </div>
+       </div>
+
+       <div className='col-md-6'>
+        <div className='form-div clearfix div-error'>
           <Input inputType={'text'} title={'City/District'} name={'name'} id={'cityDistrict'} placeholder={'Enter City/District'} value={this.state.inputText_city} handleChange={this.handleInput} />
-          {this.state.error_city ? <p className="error-msg">{this.state.errorMessage_city}</p> : null}
+          {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
         </div>
-        <div className="form-div clearfix div-error">
+      </div>
+
+      <div className='col-md-6'>
+        <div className='form-div clearfix div-error'>
           <Input inputType={'text'} title={'State'} name={'name'} id={'state'} placeholder={'Enter State'} value={this.state.inputText_state} handleChange={this.handleInput} />
-          {this.state.error_state ? <p className="error-msg">{this.state.errorMessage_state}</p> : null}
+          {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
         </div>
-        <input type='checkbox' title={'State'} name={'name'} id={'checkbox'} defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
-        <div className="actionBtnWrapper">
-          <button onClick={this.closeAddNewAddress.bind(this)} className='actionBtnWrapper__cancelBtn btn'>Cancel</button>
-          <button onClick={this.onSavebuttonClick.bind(this)} className='actionBtnWrapper__applyBtn btn'>Save</button>
         </div>
-      </form>
+        
+        <div className='col-md-6'>
+         <div className='defaultOption'>
+          <input className='defaultCheckbox' type='checkbox' title={'State'} name={'name'} id={'checkbox'} defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+          <label className='defaultlbl'>Make this default address</label>
+        </div>
+        </div>
+        <div className='clearfix'></div>
+
+        <div className='col-md-12'>
+        <div className='actionBtnWrapper'>
+          <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
+          <button onClick={this.onSavebuttonClick.bind(this)} className='btn-save btn'>Save</button>
+        </div>
+        </div>
+      </div>
+      </div>
     );
   }
 }

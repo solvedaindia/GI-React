@@ -2,27 +2,3 @@
 @import "../base.scss";
 @import "../variable.scss";
 
-.myProfileContainer {
-  width: 486px;
-  height: 398px;
-  background-color: #f7f8f8;
-
-  .actionBtnWrapper {
-    padding: 5px 0 0 0;
-    .btn {
-      padding: 12px 60px;
-      border-radius: 0;
-    }
-    &__cancelBtn {
-      border: solid 1px $black;
-      background-color: $colorwhite;
-    }
-
-    &__applyBtn {
-      margin-left: 15px;
-      color: $colorwhite;
-      background-color: $black;
-      border: 1px solid $black;
-    }
-  }
-}
