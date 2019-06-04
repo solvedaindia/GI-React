@@ -45,7 +45,7 @@ export class MyAccountContainer extends React.Component {
      <div className='MyAccount'>
       <div className="container">
         <div className="row">
-           <div className="col-xs-12 col-sm-3 col-md-3 myac-left-nav">
+           <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
             <ul className="nav nav-tabs">
               <h4 className='username'>Hello Jonathan!</h4>
               <li className='list'><a className='link active' href="#profile-v" data-toggle="tab">My Profile</a></li>

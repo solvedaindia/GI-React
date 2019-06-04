@@ -122,6 +122,7 @@ console.log('itt --- ',this.state.inputText_email)
         </div>
 
         <button onClick={this.onSavebuttonClick.bind(this)} className='btn-apply btn'>Save</button>
+        <div className='noteMsg'><span className='bold'>Note:</span> Changing your mobile number and Email ID, will also cause your primary login ID to change</div>
       </form>
     );
   }
