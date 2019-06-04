@@ -36,6 +36,8 @@ class MyProfile extends React.Component {
       errorMessage_name: '',
       errorMessage_number: '',
       errorMessage_email: '',
+
+      noteItem: null,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -101,6 +103,9 @@ console.log('itt --- ',this.state.inputText_email)
 
   focusIn() {
     console.log('Focus In');
+    this.setState({
+      noteItem: <div className='noteMsg'><span className='bold'>Note:</span> Changing your mobile number and Email ID, will also cause your primary login ID to change</div>
+    })
   }
 
 
@@ -113,16 +118,16 @@ console.log('itt --- ',this.state.inputText_email)
           {this.state.error_name ? <div className="error-msg">{this.state.errorMessage_name}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
-          <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} focusIn={this.focusIn} />
+          <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} focusIn={this.focusIn.bind(this)} />
           {this.state.error_number ? <div className="error-msg">{this.state.errorMessage_number}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
-          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} focusIn={this.focusIn}/>
+          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} focusIn={this.focusIn.bind(this)}/>
           {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
         </div>
 
         <button onClick={this.onSavebuttonClick.bind(this)} className='btn-apply btn'>Save</button>
-        <div className='noteMsg'><span className='bold'>Note:</span> Changing your mobile number and Email ID, will also cause your primary login ID to change</div>
+        {this.state.noteItem}
       </form>
     );
   }

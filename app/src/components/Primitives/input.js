@@ -1,7 +1,6 @@
 import React from "react";
 
 const Input = props => {
-  //console.log(props.value);
   return (
     <div className="form-group">
         <label htmlFor={props.name} className="form-label">
