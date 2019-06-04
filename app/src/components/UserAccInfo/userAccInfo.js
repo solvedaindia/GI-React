@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Route, NavLink } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
@@ -106,15 +107,24 @@ class UserAccInfo extends React.Component {
           </li> */}
 
           <li className="listItem">
-            <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
+            <Link className='link' to={'/myAccount/myProfile'}>
+              <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
+            </Link>
+
           </li>
           <li className="listItem">
-            <a className="dropDown">My Orders</a>
+            <Link className='link' to={'/myAccount/myorders'}>
+              <a className="dropDown">My Orders</a>
+            </Link>
+
           </li>
           <li className="listItem">
-            <a className="dropDown">Manage Addresses</a>
+            <Link className='link' to={'/myAccount/address'}>
+              <a className="dropDown">Manage Addresses</a>
+            </Link>
+
           </li>
-          <li className="listItem">
+          {/* <li className="listItem">
             <a className="dropDown">Godrej Credit</a>
           </li>
           <li className="listItem">
@@ -122,7 +132,7 @@ class UserAccInfo extends React.Component {
           </li>
           <li className="listItem">
             <a className="dropDown">Notifications</a>
-          </li>
+          </li> */}
         </>
       )),
         (this.state.loginStatus = (

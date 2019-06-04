@@ -52,10 +52,10 @@ export class MyAccountContainer extends React.Component {
               <li className='list'><a className='link' href="#changePassword-v" data-toggle="tab">Change Password</a></li>
               <li className='list'><a className='link' href="#myOrder-v" data-toggle="tab">My Orders</a></li>
               <li className='list'><a className='link' href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
-              <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
+              {/* <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
               <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
               <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li>
-              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li>
+              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li> */}
             </ul>
           </div>
 
@@ -65,10 +65,10 @@ export class MyAccountContainer extends React.Component {
               <div className="tab-pane" id="changePassword-v"><ChangePassword /></div>
               <div className="tab-pane" id="myOrder-v">My Order Tab.</div>
               <div className="tab-pane" id="manageAddresses-v"><ManageAddress /></div>
-              <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
+              {/* <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
               <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>
               <div className="tab-pane" id="notifications-v">Notifications Tab.</div>
-              <div className="tab-pane" id="customercare-v">Customer Care Tab.</div>
+              <div className="tab-pane" id="customercare-v">Customer Care Tab.</div> */}
             </div>
           </div>
         </div>
