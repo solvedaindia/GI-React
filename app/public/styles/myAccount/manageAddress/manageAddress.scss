@@ -20,7 +20,7 @@
     }
 
     .addressItem {
-      padding:10px 16px;
+      padding:16px 10px;
       height: 162px;
       border-radius: 2px;
       border: solid 1px $lightblueGrey;
@@ -52,6 +52,7 @@
         background: transparent;
         border: none;
         border-right:1px solid $black;
+        cursor: pointer;
         &:first-child{
           padding: 0 8px 0 0;
         }
