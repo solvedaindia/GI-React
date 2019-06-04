@@ -99,6 +99,11 @@ console.log('itt --- ',this.state.inputText_email)
     }
   }
 
+  focusIn() {
+    console.log('Focus In');
+  }
+
+
   render() {
 
     return (
@@ -108,11 +113,11 @@ console.log('itt --- ',this.state.inputText_email)
           {this.state.error_name ? <div className="error-msg">{this.state.errorMessage_name}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
-          <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
+          <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} focusIn={this.focusIn} />
           {this.state.error_number ? <div className="error-msg">{this.state.errorMessage_number}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
-          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
+          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} focusIn={this.focusIn}/>
           {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
         </div>
 
