@@ -241,3 +241,57 @@ module.exports.getPromoCode = function getPromoCodeById(
     },
   );
 };
+
+/**
+ * Get promotions for multiple product ids
+ * @input ProductIDs Array
+ */
+module.exports.getMultiplePromotionData = function getMultiplePromotionData(
+  productIds,
+  headers,
+  callback,
+) {
+  if (!productIds) {
+    logger.debug('Get getMultiplePromotionData :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+  let productIdQuery = '';
+  productIds.forEach(productId => {
+    productIdQuery += productId;
+    productIdQuery += ',';
+  });
+
+  const originUrl = constants.promotionByIDs
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{productIDs}}', productIdQuery);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const promotionData = [];
+        productIds.forEach(productId => {
+          const promotion = {
+            uniqueID: productId,
+            promotionData: null,
+          };
+          if (productId in response.body) {
+            promotion.promotionData = response.body[productId];
+          }
+          promotionData.push(promotion);
+        });
+        callback(null, promotionData);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};

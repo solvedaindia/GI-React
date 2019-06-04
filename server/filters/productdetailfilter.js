@@ -23,22 +23,71 @@ function productDetailForPLP(productDetail) {
   }
   productDetailJson.onClickUrl = '';
   productDetailJson.seoUrl = '';
-  productDetailJson.thumbnail = productDetail.thumbnail || '';
-  productDetailJson.ribbonText = '';
-  productDetailJson.emiData = '';
-  productDetailJson.inStock = '';
-  productDetailJson.discount = '';
-  productDetailJson.shortDescription = productDetail.shortDescription || '';
-  productDetailJson.promotionData = null;
-  if (productDetail.promotionData && productDetail.promotionData.length > 0) {
-    // eslint-disable-next-line prefer-destructuring
-    productDetailJson.promotionData = productDetail.promotionData[0].code;
+  // productDetailJson.thumbnail = productDetail.thumbnail || '';
+  if (productDetail.thumbnail) {
+    productDetailJson.thumbnail = productDetail.thumbnail.substring(
+      productDetail.thumbnail.indexOf('/images'),
+      productDetail.thumbnail.length,
+    );
+  } else {
+    productDetailJson.thumbnail = '';
   }
 
+  productDetailJson.emiData = '';
+  productDetailJson.inStock = '';
+  productDetailJson.shortDescription = productDetail.shortDescription || '';
+  productDetailJson.promotionData = getSummaryPromotion(
+    productDetail.promotionData,
+  );
+  const attribute = getAttributes(productDetail.attributes);
+  productDetailJson.discount = getDiscount(attribute) || '';
+  if (productDetail.UserData && productDetail.UserData.length > 0) {
+    productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
+  }
+  if (productDetailJson.discount > 0) {
+    // eslint-disable-next-line radix
+    productDetailJson.actualPrice = parseInt(
+      (productDetailJson.offerPrice * 100) /
+        (100 - Number(productDetailJson.discount)),
+    );
+  }
+
+  productDetailJson.ribbonText = getRibbonText(attribute) || '';
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
   return productDetailJson;
+}
+
+module.exports.getSummaryPromotion = getSummaryPromotion;
+function getSummaryPromotion(promotionData) {
+  let resPromotionData = '';
+  if (promotionData && promotionData.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    resPromotionData = promotionData[0].code.split('-')[0];
+  }
+  return resPromotionData;
+}
+
+module.exports.getSwatchData = getSwatchData;
+function getSwatchData(productAttribueArray) {
+  const swatchColor = [];
+  if (productAttribueArray && productAttribueArray.length > 0) {
+    const colorFacetArray = productAttribueArray.filter(
+      eachAttribute => eachAttribute.identifier === 'fc',
+    );
+    if (colorFacetArray && colorFacetArray.length > 0) {
+      colorFacetArray[0].values.forEach(color => {
+        const tempJSON = {
+          name: color.value,
+          colorCode: color.image1,
+          identifier: color.identifier,
+        };
+        swatchColor.push(tempJSON);
+      });
+    }
+  }
+  return swatchColor;
 }
 
 function getFixedAttributes(productAttribute) {
@@ -58,21 +107,6 @@ function getFixedAttributes(productAttribute) {
       });
   }
   return fixedAttribute;
-}
-
-function getPrimaryColor(productAttribueArray) {
-  let primaryColor = {};
-  if (productAttribueArray && productAttribueArray.length > 0) {
-    primaryColor = productAttribueArray
-      .filter(eachAttribute => eachAttribute.identifier === 'PrimaryColor')
-      .map(eachAttribute => {
-        const attributeDetail = {};
-        attributeDetail.name = eachAttribute.name;
-        attributeDetail.value = eachAttribute.values[0].value;
-        return attributeDetail;
-      });
-  }
-  return primaryColor;
 }
 
 /**
@@ -95,82 +129,10 @@ const associatedPromo = [
   },
 ];
 
-const purchaseGuide = [
-  {
-    title: 'Product Videos',
-    values: [
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_1.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_1.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_2_1.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_5.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_1.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_1.mp4',
-      },
-    ],
-  },
-  {
-    title: 'Test Videos',
-    values: [
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_2.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_2.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_2_2.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_6.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_2.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_2.mp4',
-      },
-    ],
-  },
-  {
-    title: 'Comfort Meter',
-    values: [
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_3.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_3.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_2_3.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_7.mp4',
-      },
-      {
-        type: 'video',
-        thumbImagePath:
-          '/images/godrejInterio/pdp/sofa/productDetail/video/thumbnail/thumbnail_1_3.png',
-        path: '/images/godrejInterio/pdp/sofa/productDetail/video/video_3.mp4',
-      },
-    ],
-  },
-];
-
 module.exports.productDataSummary = productDataForPDP;
 function productDataForPDP(bodyData) {
   const productDataSummary = {};
-  if (bodyData.length > 0) {
+  if (bodyData[0].catalogEntryView.length > 0) {
     const productData = bodyData[0].catalogEntryView[0];
     productDataSummary.uniqueID = productData.uniqueID;
     productDataSummary.type = 'product';
@@ -195,46 +157,48 @@ function productDataForPDP(bodyData) {
  */
 function getAttachments(attachments) {
   const productAttachment = [];
-  for (let i = 0; i < attachments.length; i++) {
-    const obj = {};
-    if (
-      attachments[i].usage === 'ANGLEIMAGES_FULLIMAGE' &&
-      !attachments[i].name.includes('OVERLAY')
-    ) {
-      for (let j = 0; j < attachments.length; j++) {
-        const lastChar = attachments[i].name[attachments[i].name.length - 1];
-        if (
-          attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
-          attachments[j].name.includes(lastChar)
-        ) {
-          obj.type = 'image';
-          obj.fullImagePath = attachments[i].attachmentAssetPath;
-          obj.thumbnailPath = attachments[j].attachmentAssetPath;
+  if (attachments.length > 0) {
+    for (let i = 0; i < attachments.length; i++) {
+      const obj = {};
+      if (
+        attachments[i].usage === 'ANGLEIMAGES_FULLIMAGE' &&
+        !attachments[i].name.includes('OVERLAY')
+      ) {
+        for (let j = 0; j < attachments.length; j++) {
+          const lastChar = attachments[i].name[attachments[i].name.length - 1];
+          if (
+            attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
+            attachments[j].name.includes(lastChar)
+          ) {
+            obj.type = 'image';
+            obj.fullImagePath = attachments[i].attachmentAssetPath;
+            obj.thumbnailPath = attachments[j].attachmentAssetPath;
+          }
+          if (
+            attachments[j].usage === 'ANGLEIMAGES_FULLIMAGE' &&
+            attachments[j].name.includes(lastChar)
+          ) {
+            obj.fullScreenImagePath = attachments[j].attachmentAssetPath;
+          }
         }
-        if (
-          attachments[j].usage === 'ANGLEIMAGES_FULLIMAGE' &&
-          attachments[j].name.includes(lastChar)
-        ) {
-          obj.fullScreenImagePath = attachments[j].attachmentAssetPath;
-        }
-      }
-      productAttachment.push(obj);
-    } else if (
-      attachments[i].usage === 'MEDIA' &&
-      !attachments[i].name.includes('purchaseGuide')
-    ) {
-      for (let j = 1; j < attachments.length; j++) {
-        const lastChar = attachments[i].name[attachments[i].name.length - 1];
-        if (
-          attachments[j].usage === 'THUMBNAIL' &&
-          attachments[j].name.includes(lastChar)
-        ) {
-          productAttachment.push({
-            type: 'video',
-            thumbnailPath: attachments[j].attachmentAssetPath,
-            videoPath: attachments[i].attachmentAssetPath,
-          });
-          break;
+        productAttachment.push(obj);
+      } else if (
+        attachments[i].usage === 'MEDIA' &&
+        !attachments[i].name.includes('purchaseGuide')
+      ) {
+        for (let j = 1; j < attachments.length; j++) {
+          const lastChar = attachments[i].name[attachments[i].name.length - 1];
+          if (
+            attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
+            attachments[j].name.includes(lastChar)
+          ) {
+            productAttachment.push({
+              type: 'video',
+              thumbnailPath: attachments[j].attachmentAssetPath,
+              videoPath: attachments[i].attachmentAssetPath,
+            });
+            break;
+          }
         }
       }
     }
@@ -249,24 +213,26 @@ function getAttachments(attachments) {
 function getDefAttributes(attributes) {
   const defAttributes = [];
   const matchColors = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
-  attributes.defining.forEach(attribute => {
-    const attributeJson = {
-      name: attribute.name,
-      values: [],
-    };
-    attribute.values.forEach(attributeValue => {
-      const match = matchColors.exec(attributeValue.image1);
-      const attributeValueJSON = {};
-      attributeValueJSON.name = attributeValue.value;
-      if (match !== null) {
-        attributeValueJSON.colorCode = attributeValue.image1;
-      } else {
-        attributeValueJSON.facetImage = attributeValue.image1path;
-      }
-      attributeJson.values.push(attributeValueJSON);
+  if (attributes.defining && attributes.defining.length > 0) {
+    attributes.defining.forEach(attribute => {
+      const attributeJson = {
+        name: attribute.name,
+        values: [],
+      };
+      attribute.values.forEach(attributeValue => {
+        const match = matchColors.exec(attributeValue.image1);
+        const attributeValueJSON = {};
+        attributeValueJSON.name = attributeValue.value;
+        if (match !== null) {
+          attributeValueJSON.colorCode = attributeValue.image1 || '';
+        } else {
+          attributeValueJSON.facetImage = attributeValue.image1path || '';
+        }
+        attributeJson.values.push(attributeValueJSON);
+      });
+      defAttributes.push(attributeJson);
     });
-    defAttributes.push(attributeJson);
-  });
+  }
   return defAttributes;
 }
 
@@ -279,26 +245,32 @@ function getSkuData(bodyData) {
   if (bodyData.sKUs && bodyData.sKUs.length > 0) {
     bodyData.sKUs.forEach(sku => {
       const skuDataJson = {};
-      skuDataJson.uniqueID = sku.uniqueID;
-      skuDataJson.productName = sku.name;
-      skuDataJson.partNumber = sku.partNumber;
-      skuDataJson.parentCatalogEntryID = sku.parentCatalogEntryID;
+      let actualPrice;
+      let offerPrice;
+      skuDataJson.uniqueID = sku.uniqueID || '';
+      skuDataJson.productName = sku.name || '';
+      skuDataJson.partNumber = sku.partNumber || '';
+      skuDataJson.parentCatalogEntryID = sku.parentCatalogEntryID || '';
       if (sku.UserData && sku.UserData.length > 0) {
         skuDataJson.emiData = Number(sku.UserData[0].x_field1_i);
+      } else {
+        skuDataJson.emiData = '';
       }
-      skuDataJson.fullImagePath = sku.fullImage || '';
-      skuDataJson.thumbImagePath = sku.thumbnail || '';
+      skuDataJson.fullImagePath = getImagePath(sku.fullImage);
+      skuDataJson.thumbImagePath = getImagePath(sku.thumbnail);
       skuDataJson.shortDescription = sku.shortDescription || '';
       if (sku.price && sku.price.length > 0) {
         sku.price.forEach(price => {
           if (price.usage === 'Display') {
-            skuDataJson.actualPrice = Number(price.value);
+            actualPrice = Number(price.value) || '';
           }
           if (price.usage === 'Offer') {
-            skuDataJson.offerPrice = Number(price.value);
+            offerPrice = Number(price.value) || '';
           }
         });
       }
+      skuDataJson.actualPrice = actualPrice || '';
+      skuDataJson.offerPrice = offerPrice || '';
       const attributes = getAttributes(sku.attributes);
       skuDataJson.ribbon = getRibbonText(attributes) || '';
       skuDataJson.discount = getDiscount(attributes);
@@ -331,8 +303,6 @@ function getDiscount(attributes) {
         discount = descriptive.values[0].value;
       }
     });
-  } else {
-    discount = '';
   }
   return discount;
 }
@@ -348,6 +318,8 @@ function getRibbonText(attributes) {
         ribbonText = descriptive.values[0].value;
       }
     });
+  } else {
+    ribbonText = '';
   }
   return ribbonText;
 }
@@ -358,19 +330,21 @@ function getRibbonText(attributes) {
  */
 function getProductDetails(attributes, productAttachments) {
   const productDetailsJSON = {};
+  const productDetailsList = [];
   if (productAttachments && productAttachments.length > 0) {
     productAttachments.forEach(attachment => {
       if (
         attachment.usage === 'IMAGES' &&
         attachment.name === 'productDetailImage'
       ) {
-        productDetailsJSON.imagePath = attachment.attachmentAssetPath || '';
+        productDetailsJSON.imagePath = attachment.attachmentAssetPath;
       }
     });
+  } else {
+    productDetailsJSON.imagePath = '';
   }
 
   if (attributes.descriptive && attributes.descriptive.length > 0) {
-    const productDetailsList = [];
     const specificationValues = [];
     const tempArray = [];
     attributes.descriptive.forEach(attr => {
@@ -392,7 +366,7 @@ function getProductDetails(attributes, productAttachments) {
       }
     });
     productDetailsList.push({
-      title: 'Specificactions',
+      title: 'Specifications',
       values: specificationValues || '',
     });
 
@@ -402,8 +376,8 @@ function getProductDetails(attributes, productAttachments) {
         values: element.value || '',
       });
     });
-    productDetailsJSON.description = productDetailsList;
   }
+  productDetailsJSON.description = productDetailsList;
   return productDetailsJSON;
 }
 
@@ -555,23 +529,22 @@ function mergeImagesAndVideos(imageArray, videoArray) {
  */
 function getSimilarProductsData(bodyData) {
   const mercAssociations = {};
-  if (bodyData.merchandisingAssociations)
+  const similarProductsData = [];
+  const combosYouLikeData = [];
+  if (
+    bodyData.merchandisingAssociations &&
+    bodyData.merchandisingAssociations.length > 0
+  ) {
     bodyData.merchandisingAssociations.forEach(element => {
       if (element.associationType === 'X-SELL') {
-        const similarProductsData = [];
-        element.sKUs.forEach(sku => {
-          similarProductsData.push(productDetailForPLP1(sku));
-        });
-        mercAssociations.similarProducts = similarProductsData;
+        similarProductsData.push(mercAssociationsDataForPDP(element));
       } else if (element.associationType === 'UPSELL') {
-        const combosYouLikeData = [];
-        element.sKUs.forEach(sku => {
-          combosYouLikeData.push(productDetailForPLP1(sku));
-        });
-        // const combosYouLikeData = getSkuData(element, 'false');
-        mercAssociations.combosYouMayLike = combosYouLikeData;
+        combosYouLikeData.push(mercAssociationsDataForPDP(element));
       }
     });
+  }
+  mercAssociations.similarProducts = similarProductsData;
+  mercAssociations.combosYouMayLike = combosYouLikeData;
   return mercAssociations;
 }
 
@@ -628,40 +601,47 @@ function getProductFeatures(attributes) {
   return featuresJson;
 }
 
-function productDetailForPLP1(productDetail) {
+function mercAssociationsDataForPDP(productDetail) {
   const productDetailJson = {};
-  productDetailJson.uniqueID = productDetail.uniqueID;
-  productDetailJson.productName = productDetail.name;
-  productDetailJson.partNumber = productDetail.partNumber;
+  let actualPrice;
+  let offerPrice;
+  productDetailJson.uniqueID = productDetail.uniqueID || '';
+  productDetailJson.productName = productDetail.name || '';
+  productDetailJson.partNumber = productDetail.partNumber || '';
   if (productDetail.price && productDetail.price.length > 0) {
     productDetail.price.forEach(price => {
       if (price.usage === 'Display') {
-        productDetailJson.actualPrice = Number(price.value);
+        actualPrice = Number(price.value);
       }
       if (price.usage === 'Offer') {
-        productDetailJson.offerPrice = Number(price.value);
+        offerPrice = Number(price.value);
       }
     });
   }
+  productDetailJson.actualPrice = actualPrice || '';
+  productDetailJson.offerPrice = offerPrice || '';
   productDetailJson.onClickUrl = '';
   productDetailJson.seoUrl = '';
-  productDetailJson.thumbnail = productDetail.thumbnail || '';
+  productDetailJson.thumbnail = getImagePath(productDetail.thumbnail);
   const attributes = getAttributes(productDetail.attributes);
   productDetailJson.ribbonText = getRibbonText(attributes);
-  productDetailJson.emiData = productDetail.UserData[0].x_field1_i;
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
+  } else {
+    productDetailJson.emiData = 999;
   }
   productDetailJson.inStock = '';
-  if (attributes.defining && attributes.defining.length > 0) {
-    attributes.defining.forEach(defining => {
-      if (defining.name === 'percentOff') {
-        productDetailJson.discount = defining.values[0].value;
-      }
-    });
-  }
+  productDetailJson.discount = getDiscount(attributes) || '';
   productDetailJson.shortDescription = productDetail.shortDescription || '';
   // eslint-disable-next-line prefer-destructuring
-  productDetailJson.promotionData = associatedPromo[0].name;
+  productDetailJson.promotionData = associatedPromo[0].name || '';
   return productDetailJson;
+}
+
+function getImagePath(imagePath) {
+  const arr = imagePath.split('//');
+  if (arr.length > 0) {
+    return `/${arr[1]}`;
+  }
+  return imagePath;
 }

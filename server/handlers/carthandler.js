@@ -6,6 +6,7 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils');
 const cartFilter = require('../filters/cartfilter');
 const productUtil = require('../utils/productutil');
+const promotionUtil = require('../utils/promotionutil');
 
 const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
@@ -503,3 +504,56 @@ function getEmptyRecord() {
   };
   return cartJson;
 }
+
+/**
+ * Function to return Promo codes
+ * @return return Promocodes Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
+  const reqHeaders = req.headers;
+  promotionUtil.getPromotionsList(reqHeaders, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Get all origin response : getPromoCodes');
+      const promoData = [];
+      const promotions = result.Promotion;
+      if (promotions && promotions.length > 0) {
+        async.map(
+          promotions,
+          (promotion, cb) => {
+            promotionUtil.getPromoCode(
+              promotion.promotionId,
+              reqHeaders,
+              (error, promotionData) => {
+                if (!error) {
+                  cb(null, promotionData);
+                } else {
+                  cb(null, null); // ignore if promocode is not found against promotionId
+                }
+              },
+            );
+          },
+          (errors, results) => {
+            if (errors) {
+              callback(errors);
+              return;
+            }
+            results.forEach(element => {
+              if (element !== null) {
+                promoData.push({
+                  promocode: element.promoCode,
+                  description: element.description,
+                });
+              }
+            });
+            callback(null, promoData);
+          },
+        );
+      } else {
+        callback(null, promoData);
+      }
+    }
+  });
+};

@@ -109,6 +109,7 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
   });
 };
 
+module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';
   if (productIDs && productIDs.length > 0) {
@@ -153,6 +154,17 @@ function getProductListByIDs(headers, productIDs, callback) {
 /* Get Promotion Data for All The Products */
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
+  /*   promotionUtil.getMultiplePromotionData(
+    productIDs,
+    headers,
+    (error, promotion) => {
+      if (!error) {
+        callback(null, promotion);
+      } else {
+        callback(error);
+      }
+    },
+  ); */
   async.map(
     productIDs,
     (productId, cb) => {

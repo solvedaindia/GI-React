@@ -117,10 +117,17 @@ export const getAddressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const deleteAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/delete/`;
 /* Update/SetAsDefault Address API */
 export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/update/`;
+/* PDP API */
+export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
+/* User Detail API */
+export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
 
+/* Compare API */
+export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
-export const catalog = 'SolvedaCommerceCatalogAssetStore';
+//export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const catalog = 'GodrejInterioSAS';
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

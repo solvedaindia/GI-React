@@ -2,9 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import apiManager from '../../utils/apiManager';
-import {
-  accessTokenCookie
-} from '../../../public/constants/constants';
+import { accessTokenCookie } from '../../../public/constants/constants';
 import Register from './register';
 import RegisterWithEmailMobile from './registerWithEmailMobile';
 import GenerateOtp from './generateOtp';
@@ -117,7 +115,11 @@ class RegisterModalData extends React.Component {
           });
 
           appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-          appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+          appCookie.set(
+            `${accessTokenCookie}=${
+              response.data.data.access_token
+            };path=/;expires=''`,
+          );
 
           this.handleClose();
           window.location.reload();

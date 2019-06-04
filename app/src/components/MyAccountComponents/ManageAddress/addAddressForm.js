@@ -271,7 +271,6 @@ class AddAddressForm extends React.Component {
             </div>
           </div>
         
-
         <div className='col-md-6'>
           <div className='form-div clearfix div-error'>
             <Input inputType={'email'} title={'Email ID (Optional)'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />

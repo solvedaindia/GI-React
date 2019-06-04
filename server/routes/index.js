@@ -13,6 +13,7 @@ router.use('/secure/cart', require('./api/cart'));
 router.use('/secure/wishlist', require('./api/wishlist'));
 router.use('/secure/orders', require('./api/orders'));
 router.use('/secure/token', require('./api/guesttoken'));
+router.use('/secure/checkout', require('./api/checkout'));
 
 /* Non-Secure Routes */
 router.use('/categories', require('./api/category'));

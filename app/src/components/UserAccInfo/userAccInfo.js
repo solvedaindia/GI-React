@@ -14,6 +14,7 @@ import {
   accessTokenCookie,
   wishlistDataCookie,
   wishlistIdCookie,
+  userDetailAPI
 } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
 
@@ -29,6 +30,8 @@ class UserAccInfo extends React.Component {
     showRegister: false,
     loginLogoutBtnItem: null,
     isFromWishlist: false,
+    userName: null,
+    logonId: null,
   };
 
   resetLoginValues() {
@@ -73,19 +76,35 @@ class UserAccInfo extends React.Component {
     });
   }
 
-  onMyProfileClick = () => {
-    console.log('onMyProfileClick -- ', this)
+  getUserDetails() {
+    apiManager.get(userDetailAPI, {
+      headers: { profile: 'summary' },
+    })
+      .then(response => {
+        console.log('userDetail --- ', response.data.data.firstName);
+        this.setState({
+          userName: response.data.data.firstName,
+          logonId: response.data.data.logonID
+        })
+        this.showLoginStatus();
+      })
+      .catch(error => {
+        // return null;
+      });
+
+
   }
 
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
-    console.log('dkddd', getLoginCookie);
+    console.log('my Name', this.state.userName);
     if (getCookie('isLoggedIn') === 'true') {
       (this.state.userType = (
         <>
-          <li className="listItem">
-            <a className="dropDown">Hello User!</a>
-          </li>
+          {/* <li className="listItem">
+            <a className="dropDown">{this.state.userName}!</a>
+          </li> */}
+
           <li className="listItem">
             <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
           </li>
@@ -136,7 +155,11 @@ class UserAccInfo extends React.Component {
   componentDidMount() {
     console.log('Did Mount -- ', this.props.fromWishlistPro);
     this.fromWishlist(this.props.fromWishlistPro);
+    if (getCookie('isLoggedIn') === 'true') {
+      this.getUserDetails();
+    }
     this.showLoginStatus();
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -163,6 +186,9 @@ class UserAccInfo extends React.Component {
       dropdownItem = (
         <ul className="userList">
           {/* <li className="listItem"> */}
+          {this.state.userName !== null && getCookie('isLoggedIn') === 'true' ? <li className="listItem">
+            <a className="dropDown">{this.state.userName}!</a>
+          </li> : null}
           {this.state.userType}
           {/* </li> */}
           <li className="listItem">{this.state.loginStatus}</li>

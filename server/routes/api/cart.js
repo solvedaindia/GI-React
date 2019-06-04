@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cartHandler = require('../../handlers/carthandler');
 const promotionUtil = require('../../utils/promotionutil');
+const checkoutHandler = require('../../handlers/checkouthandler');
 
 /**
  * fetch cart details
@@ -172,6 +173,25 @@ router.post('/applypromotion', (req, res, next) => {
  */
 router.post('/removepromotion/:promoCode', (req, res, next) => {
   promotionUtil.removeCartPromotion(req.headers, req.params, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Public Promotions
+ * @param access_token,storeId
+ * @return 200, return promocode data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/promocode', (req, res, next) => {
+  checkoutHandler.getPromoCodes(req, (err, result) => {
     if (err) {
       next(err);
       return;

@@ -22,8 +22,9 @@
             font-size: $base*1.5;
             color: $battleshipGrey;
             font-family: $font-regular;
+            padding: 10px 0 10px $base*4;
+            font-family: $font-medium;
             &:hover {
-                color: $reddishPink;
                 text-decoration: none;
             }
         }
@@ -33,7 +34,7 @@
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
-                    color: #000;
+                    color: $ceruleanblue;
                 }
             }
         }

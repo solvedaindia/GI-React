@@ -29,13 +29,13 @@ export class HeaderContainer extends React.Component {
     return (
       <header className="appheader">
         <div className="logo">
-          	<Link to='/'>
-			  	<Logo />
-			</Link>
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
         <div className="navigation">
-			<HeaderL1 />
-			<HeaderL2 />
+          <HeaderL1 />
+          <HeaderL2 />
         </div>
       </header>
     );

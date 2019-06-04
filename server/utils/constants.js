@@ -51,4 +51,9 @@ module.exports = Object.freeze({
   getPromotionsList: `${prodWcsResourceUrl}/{{storeId}}/promotion?q=all`,
   getPromoCode: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/getpromocode/{{promotionId}}`,
   pincodeServiceablity: `${prodWcsResourceUrl}/{{storeId}}/pincode/getServiceAbility/{{pincode}}`,
+  saveGSTIN: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
+  promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
+  setSocialLoginPassword: `${prodWcsResourceUrl}/{{storeId}}/person/@self?responseFormat=json&action=updateUserRegistration`,
+  shippingCharge: `${prodWcsResourceUrl}/{{storeId}}/GIShipCharge/getShippingCharge?pinCode={{pincode}}&uniqueId={{uniqueId}}`,
+  userInfo: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{userId}}`,
 });

@@ -102,7 +102,7 @@ class WelcomeForm extends Component {
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
         <Input
           type="text"
-          title="ENTER EMAIL/MOBILE NUMBER"
+          title="Email ID/Mobile Number"
           name="userId"
           placeholder=""
           onChange={this.handleChange}
@@ -112,7 +112,7 @@ class WelcomeForm extends Component {
         <Input
           type="password"
           name="password"
-          title="PASSWORD"
+          title="Password"
           placeholder=""
           onChange={this.handleChange}
         />

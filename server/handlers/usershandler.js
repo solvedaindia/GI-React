@@ -549,3 +549,54 @@ module.exports.forgotPassword = function forgotPassword(
     },
   );
 };
+
+/**
+ * Set Password (Social Login) API
+ * @param
+ * @param
+ * @returns
+ * @throws
+ */
+module.exports.setSocialPassword = function setPasswordForSocialLogin(
+  params,
+  headers,
+  callback,
+) {
+  logger.debug('call to set password (Social Login) API');
+
+  if (!params.user_id && !params.new_password) {
+    logger.debug('invalid params in set password API');
+    callback(errorutils.errorlist.invalid_params);
+  }
+
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const reqBody = {
+    logonPassword: params.new_password,
+    logonPasswordVerify: params.new_password,
+    userField1: params.user_id,
+    sociallogin: 'true',
+  };
+
+  const originUrl = constants.setSocialLoginPassword.replace(
+    '{{storeId}}',
+    headers.store_id,
+  );
+
+  origin.getResponse(
+    'PUT',
+    originUrl,
+    reqHeaders,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        logger.debug('set password (Social Login) API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};

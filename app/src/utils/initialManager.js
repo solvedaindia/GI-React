@@ -52,15 +52,15 @@ export function getUpdatedWishlist(wishlist) {
 
 export function getUpdatedMinicartCount(minicart) {
   apiManager
-  .get(cartCountApi)
-  .then(response => {
-    const count = response.data.data.cartTotalQuantity;
-    minicart.props.updatetMinicart(count);
-    //return count;
-  })
-  .catch(error => {
-    //return null;
-  });
+    .get(cartCountApi)
+    .then(response => {
+      const count = response.data.data.cartTotalQuantity;
+      minicart.props.updatetMinicart(count);
+      // return count;
+    })
+    .catch(error => {
+      // return null;
+    });
 }
 
 export function logoutTheUser() {
@@ -99,7 +99,7 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
       console.log('Add wishlit --- ', response.data);
       //this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
-      reference.props.resetRemoveFromWishlistFlag(true);
+      //reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
       // this.props.updatetWishListCount(6);
     })
     .catch(error => {

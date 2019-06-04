@@ -39,7 +39,7 @@ module.exports.getProductDetails = function getProductDetailsData(
   async.parallel(
     [
       productDetails.bind(null, reqHeaders, productID),
-      promotionDetails.bind(null, reqHeaders, productID),
+      // promotionDetails.bind(null, reqHeaders, productID),
     ],
     (err, result) => {
       if (err) {

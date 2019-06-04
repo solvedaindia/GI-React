@@ -79,7 +79,7 @@ function mergeOrderItemandProduct(orderItemList, productList) {
       } else {
         itemJson.inventoryStatus = 'available';
         itemJson.deliveryDate =
-          itemJson.inventoryDetails.availabilityDateTime || null;
+          itemJson.inventoryDetails.deliveryDateTime || null;
       }
     }
 

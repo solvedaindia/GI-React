@@ -60,6 +60,7 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
+
     apiManager
       .post(addToWishlist, data)
       .then(response => {
@@ -100,9 +101,15 @@ class Wishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // this.setState({
+    //   isWelcomeBack: false,
+    //   wishlistCurrentImage: this.props.isInWishlistPro
+    //     ? wishlistAddedImg
+    //     : wishListRemovedImg,
+    // });
     this.setState({
       isWelcomeBack: false,
-      wishlistCurrentImage: this.props.isInWishlistPro
+      wishlistCurrentImage: nextProps.isInWishlistPro
         ? wishlistAddedImg
         : wishListRemovedImg,
     });
@@ -125,15 +132,20 @@ class Wishlist extends React.Component {
     return (
       <div className="addedToWishlist clearfix">
         <span className="wishlist-text">Product Added to Wishlist</span>
-        <button onClick={() => this.redirectToWishlistPage()} className="view-btn">View</button>
+        <button
+          onClick={() => this.redirectToWishlistPage()}
+          className="view-btn"
+        >
+          View
+        </button>
       </div>
     );
   }
 
   redirectToWishlistPage = () => {
-    console.log('its view veiw view veiw')
-    this.props.history.push('/wishlist')
-  }
+    console.log('its view veiw view veiw');
+    this.props.history.push('/wishlist');
+  };
 
   render() {
     return (

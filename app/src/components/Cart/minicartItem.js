@@ -2,7 +2,9 @@ import React from 'react';
 import Price from '../GlobalComponents/productItem/price';
 
 class MinicartItem extends React.Component {
-  state = {};
+  state = {
+    isFreeItem: this.props.dataPro.freeGift,
+  };
 
   minicartPrice() {
     const offerPrice = parseFloat(this.props.dataPro.offerPrice);
@@ -21,7 +23,27 @@ class MinicartItem extends React.Component {
     );
   }
 
+  shippingCharegeHandler() {
+    const sCharge = Math.round(this.props.dataPro.shippingCharges)
+
+    return (
+
+      <>
+        {sCharge !== 0 ? <span className="shipping-charge">
+          SHIPPING CHARGES
+        <br />
+          <span className="textval">
+            {sCharge}
+          </span>
+        </span> : null}
+
+      </>
+
+    )
+  }
+
   render() {
+    console.log('MiniCart ITEM --- ', this.state.isFreeItem);
     return (
       <>
         <div className="minicartList">
@@ -38,25 +60,20 @@ class MinicartItem extends React.Component {
             <p className="description">
               ({this.props.dataPro.shortDescription})
             </p>
-            {this.minicartPrice()}
-            <p className="free-accessories">
+            {this.state.isFreeItem ? <p className="price"><span className="discount-price">Free</span></p> : this.minicartPrice()}
+            {this.state.isFreeItem ? null : <p className="free-accessories">
               {' '}
               <span className="bold">10% Off</span>
               free accessories
-            </p>
+            </p>}
+
             <p className="quantity-shipping clearfix">
               <span className="quantity">
                 Quantity
                 <br />
                 <span className="textval">{this.props.dataPro.quantity}</span>
               </span>
-              <span className="shipping-charge">
-                SHIPPING CHARGES
-                <br />
-                <span className="textval">
-                  {Math.round(this.props.dataPro.shippingCharges)}
-                </span>
-              </span>
+              {this.shippingCharegeHandler()}
             </p>
           </div>
         </div>

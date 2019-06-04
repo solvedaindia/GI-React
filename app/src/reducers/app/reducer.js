@@ -43,9 +43,7 @@ function appReducer(state = initialState, action) {
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
     case WISH_LIST_COUNT:
-      return state
-        .set('loading', false)
-        .set('wishlistCount', action.count);
+      return state.set('loading', false).set('wishlistCount', action.count);
     case UPDATE_MINICART:
       return state
         .set('loading', false)

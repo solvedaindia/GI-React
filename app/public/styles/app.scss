@@ -1,6 +1,10 @@
 
 @import 'variable.scss';
 @import 'base.scss';
+#app {
+    max-width: 1440px;
+    margin: auto;
+}
 p{ line-height: 24px} 
 h4{font-weight: bold}
 .form-control:focus { 
@@ -9,6 +13,9 @@ h4{font-weight: bold}
     border-color: $colorgrey;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(159, 159, 159, 0.2) !important;
+}
+.slick-slide img {
+    width: 100%;
 }
 .slider{ img{width:100%}}
 .img {
