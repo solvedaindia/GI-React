@@ -82,15 +82,15 @@ export class MyAccountContainer extends React.Component {
 
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-// function mapStateToProps(state) {
-//   console.log('MyAccount MapStatetoprops --- ', state);
-//   const stateObj = getReleventReduxState(state, 'global');
-//   const updatedUsername = getReleventReduxState(stateObj, 'userName');
+function mapStateToProps(state) {
+  console.log('MyAccount MapStatetoprops --- ', state);
+  const stateObj = getReleventReduxState(state, 'global');
+  const updatedUsername = getReleventReduxState(stateObj, 'userName');
 
-//   return {
-//     username: updatedUsername
-//   };
-// };
+  return {
+    username: updatedUsername
+  };
+};
 
 // const mapDispatchToProps = dispatch => ({
 
