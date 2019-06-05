@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link, Route, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateUserProfile } from '../../actions/app/actions';
+import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
@@ -8,15 +10,7 @@ import '../../../public/styles/userInfo/userInfo.scss';
 import appCookie from '../../utils/cookie';
 import { getCookie } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
-import {
-  storeId,
-  accessToken,
-  logoutAPI,
-  accessTokenCookie,
-  wishlistDataCookie,
-  wishlistIdCookie,
-  userDetailAPI
-} from '../../../public/constants/constants';
+import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
 
 class UserAccInfo extends React.Component {
@@ -87,6 +81,7 @@ class UserAccInfo extends React.Component {
           userName: response.data.data.firstName,
           logonId: response.data.data.logonID
         })
+        this.props.updateUserProfile(response.data.data.firstName)
         this.showLoginStatus();
       })
       .catch(error => {
@@ -107,19 +102,21 @@ class UserAccInfo extends React.Component {
           </li> */}
 
           <li className="listItem">
-            <Link className='link' to={'/myAccount/myProfile'}>
+            <Link to={{ pathname: '/myAccount', state: { from: 'myprofile' } }}>
               <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
             </Link>
 
           </li>
           <li className="listItem">
-            <Link className='link' to={'/myAccount/myorders'}>
+            <Link to={{
+              pathname: '/myAccount', state: { from: 'myorder' }
+            }}>
               <a className="dropDown">My Orders</a>
             </Link>
 
           </li>
           <li className="listItem">
-            <Link className='link' to={'/myAccount/address'}>
+            <Link to={{ pathname: '/myAccount', state: { from: 'address' } }}>
               <a className="dropDown">Manage Addresses</a>
             </Link>
 
@@ -234,4 +231,14 @@ class UserAccInfo extends React.Component {
   }
 }
 
-export default UserAccInfo;
+function mapStateToProps(state) {
+	return {
+		// default: state.default
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	{ updateUserProfile },
+)(UserAccInfo);
+// export default UserAccInfo;

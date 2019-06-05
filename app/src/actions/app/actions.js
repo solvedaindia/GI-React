@@ -15,7 +15,7 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG } from '../../constants/app/constants';
+ import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG, UPDATE_PROFILE } from '../../constants/app/constants';
 
 
 /**
@@ -80,5 +80,14 @@ export function resetRemoveFromWishlistFlag(flag) {
   return {
     type: RESET_REMOVEWISHLISTFLAG,
     flag,
+  };
+}
+
+export function updateUserProfile(userName, logonId) {
+  console.log('updateUserProfile---',userName, logonId)
+  return {
+    type: UPDATE_PROFILE,
+    userName,
+    logonId,
   };
 }

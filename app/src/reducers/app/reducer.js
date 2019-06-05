@@ -12,7 +12,7 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG } from '../../constants/app/constants';
+import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG, UPDATE_PROFILE } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -25,10 +25,12 @@ const initialState = fromJS({
   wishlistCount: 0,
   minicartCount: 0,
   removeWishlistFlag: false,
+  userName: null,
+  // logonId: null,
 });
 
 function appReducer(state = initialState, action) {
-  console.log('in The Reducer ---',action.type)
+  console.log('in The Reducer ---', action.type)
   switch (action.type) {
     case LOAD_REPOS:
       return state
@@ -49,10 +51,16 @@ function appReducer(state = initialState, action) {
         .set('loading', false)
         .set('minicartCount', action.count);
     case RESET_REMOVEWISHLISTFLAG:
-    
+
       return state
         .set('loading', false)
         .set('removeWishlistFlag', action.flag);
+    case UPDATE_PROFILE:
+    console.log('In The UPdate Profile  ####',action.userName)
+      return state
+        .set('loading', false)
+        .set('userName', action.userName);
+        // .set('logonId', action.logonId);
     default:
       return state;
   }
