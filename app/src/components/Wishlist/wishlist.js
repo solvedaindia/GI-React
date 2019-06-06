@@ -68,11 +68,11 @@ class wishListCount extends React.Component {
 
   render() {
     const token = appCookie.get('isLoggedIn');
-    
+    console.log('From Sishlit --- ',token);
     const { isLoading, wishListCount } = this.state;
     let wishlistItem = null;
     let wishlistLogo = <WishlistLogo />;
-    if (token) {
+    if (token === 'true') {
       if (wishListCount != 0 && wishListCount != undefined) {
         wishlistItem = <span className="wishListCount">{wishListCount}</span>;
         

@@ -81,8 +81,9 @@ class UserAccInfo extends React.Component {
           userName: response.data.data.firstName,
           logonId: response.data.data.logonID
         })
-        this.props.updateUserProfile(response.data.data.firstName)
         this.showLoginStatus();
+        this.props.updateUserProfile(response.data.data.firstName)
+
       })
       .catch(error => {
         // return null;
@@ -133,25 +134,23 @@ class UserAccInfo extends React.Component {
         </>
       )),
         (this.state.loginStatus = (
-          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
-            Sign Out
-        </a>
+          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Sign Out</a>
         ));
     } else {
-      (this.state.userType = (
-        <li className="listItem">
+      this.setState({
+        userType: <li className="listItem">
           <a className="dropDown">Hello Guest!</a>
-        </li>
-      )),
-        (this.state.loginStatus = (
-          <a
-            className="dropDown"
-            onClick={this.onLoginRegisterClick.bind(this)}
-          >
-            {' '}
-            Login/Register
-        </a>
-        ));
+        </li>,
+        loginStatus: <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
+      })
+        // (this.state.userType = (
+        //   <li className="listItem">
+        //     <a className="dropDown">Hello Guest!</a>
+        //   </li>
+        // )),
+        // (this.state.loginStatus = (
+        //   <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
+        // ));
     }
   }
 
@@ -232,13 +231,13 @@ class UserAccInfo extends React.Component {
 }
 
 function mapStateToProps(state) {
-	return {
-		// default: state.default
-	};
+  return {
+    // default: state.default
+  };
 }
 
 export default connect(
-	mapStateToProps,
-	{ updateUserProfile },
+  mapStateToProps,
+  { updateUserProfile },
 )(UserAccInfo);
 // export default UserAccInfo;
