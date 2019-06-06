@@ -9,7 +9,7 @@
    .list{
      width:31%;
      float: left;
-     margin: 0px 16px 15px 0;
+     margin: 0px 16px 26px 0;
      position: relative;
      &:last-child{
       margin-right:0
@@ -19,6 +19,10 @@
       bottom: 16px;
     }
 
+    .addressItem.defaultAddress{
+      background-color: rgba(99, 176, 225, 0.07);
+      border:1px solid $ceruleanblueborder;
+    }
     .addressItem {
       padding:16px 10px;
       height: 162px;
@@ -28,7 +32,7 @@
     
       .defaultAddress {
         font-family: $font-bold;      
-        font-size: 12px;
+        font-size:  $base*1.5;
         font-weight: bold;   
         color:$black;
         margin: 0 0 12px 0;
@@ -36,7 +40,7 @@
       }
     
       .addressText {   
-        font-size: 12px;     
+        font-size: $base*1.5;     
         color: $black;   
         line-height: 1.58;
         margin: 0;
@@ -45,9 +49,9 @@
     
       .listitem {   
         display: inline;
-        font-size: 12px;
+        font-size:  $base*1.5;
         font-family: $font-bold;
-        color: #036cc5;
+        color: $cerulean;
         padding: 0px 10px;
         background: transparent;
         border: none;
@@ -72,10 +76,10 @@
   
   }
   .addNewAddress { 
-    font-size: 14px;
-    font-family: 500;  
-    color: #036cc5;  
-    margin: 10px 0 0 10px;
+    font-size:  $base*1.75;
+    font-family: $font-bold;  
+    color: $cerulean;  
+    margin: 0;
     background: transparent;
     border: none;
     &:focus {

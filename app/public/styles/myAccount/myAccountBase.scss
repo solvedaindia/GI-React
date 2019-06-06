@@ -3,7 +3,7 @@
 .form-BgContainer {
     width: 70%;
     float: left;    
-    background-color: #f7f8f8;
+    background-color:$greybg;
     padding:25px 25px 32px 25px;
   .form-div{
     position: relative; 
@@ -12,11 +12,11 @@
       bottom: 0;
       color:$errorMsg;
       margin:0;
-      font-size: 12px;
+      font-size:  $base*1.5;
     }
     .form-group{ 
       .form-label{
-        font-size:14px;
+        font-size: $base*1.75;
         color:$battleshipGrey;
       }
       .form-control{
@@ -26,7 +26,7 @@
         box-shadow: none;
         margin:0 0 20px 0;
         color:rgba(0, 0, 0, 0.87);
-        font-size: 16px;
+        font-size:  $base*2;
         font-weight: bold;
         padding: 17px 21px;
       }
@@ -49,7 +49,7 @@
     .btn-apply{
       background:rgba(7,7,7,0.5);
       color:$colorwhite;
-      font-size: 14px;
+      font-size:  $base*1.75;
       padding: 12px 84px;
       border-radius: 0;
       margin:16px 0 16px 0;
@@ -60,7 +60,7 @@
     }
 
     .noteMsg{
-      font-size: 12px;
+      font-size:  $base*1.5;
       line-height: 1.5;
       .bold{
         font-weight: 500;

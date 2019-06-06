@@ -5,15 +5,15 @@
 .addAddressContainer {
   width: 97%;
   border-radius: 2px;
-  border: solid 1px #d1d1d2;
+  border: solid 1px $lightblueGrey;
   background-color: rgba(238, 237, 237, 0.09);
   padding: 21px 30px 21px 26px;
   border-style: dashed;
-  margin:26px 0 0 0;
+  margin:0 0 0 0;
   position: relative;
 
-  .heading{
-    font-size: 16px;
+  .heading{   
+    font-size: $base*2;
     font-family:$font-bold;
     margin: 0 0 23px 0;
   }
@@ -55,7 +55,7 @@
       font-weight: normal;
       padding: 0 0 0 14px;
       margin: 0;
-      font-size: 12px;
+      font-size: $base*1.5;
     }
   }
   
