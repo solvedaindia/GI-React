@@ -65,6 +65,10 @@
       background: $black;
       color: $colorwhite;
       margin: 0 0 0 23px;
+      &:hover{
+        color:$colorwhite;
+        background:$black;
+      }
     }   
   }
 

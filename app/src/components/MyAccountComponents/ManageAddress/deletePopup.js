@@ -8,7 +8,7 @@ class DeletePopup extends React.Component {
     super(props);
     this.state = {
       modal: true,
-      modalClass: 'modal-forgot',
+      modalClass: 'delete-modal',
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -27,12 +27,17 @@ class DeletePopup extends React.Component {
 
   render() {
     return (
-      <Modal show={this.state.modal} onHide={this.toggle} className={this.state.modalClass} >
+      <Modal show={this.state.modal} onHide={this.toggle} className={this.state.modalClass} >       
         <Modal.Body>
-          <h3 className="heading">Are you sure you want delete the address?</h3>
-          <Button className="close" onClick={this.toggle} />
-          <Button className="btn-block btn-bg" onClick={this.toggle}>Cancel</Button>
-          <Button className="btn-block btn-bg" onClick={this.onDelete.bind(this)}>Proceed</Button>
+          <div className='modalwrapper'>
+            <Button className="cancelBtn" onClick={this.toggle} />
+              <h3 className="heading">Are you sure you want delete the address?</h3>       
+
+              <div className='actionBtnWrapper'>
+                <Button className="btn-cancel btn" onClick={this.toggle}>Cancel</Button>
+                <Button className="btn-save btn" onClick={this.onDelete.bind(this)}>Proceed</Button>
+              </div>
+              </div>
         </Modal.Body>
       </Modal>
     );
