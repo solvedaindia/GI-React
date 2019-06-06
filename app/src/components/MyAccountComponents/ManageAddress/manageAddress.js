@@ -82,7 +82,6 @@ class ManageAddress extends React.Component {
   }
 
   render() {
-
     return (
       <div className='manageAddressContainer'>
         <ul className='itemList'>

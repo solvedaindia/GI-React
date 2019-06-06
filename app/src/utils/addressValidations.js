@@ -30,7 +30,8 @@ export function validateMobileNo(data) {
  * Should be 10 digit and all numeric
  */
 export function validateEmailId(data) {
-  if (regexEmail.test(data) || data === '') {
+  console.log('Validate Email- ---- ',data);
+  if (regexEmail.test(data) || data === '' || data === undefined) {
     return true;
   }
   return false

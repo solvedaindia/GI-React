@@ -85,3 +85,9 @@
     }
   }
   
+  .close{                
+    &:before, &:after {
+        background:$colorwhite;
+        color:$black;
+    }
+  } 
