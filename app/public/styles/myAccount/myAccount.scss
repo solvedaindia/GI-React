@@ -5,8 +5,8 @@
 
   .username{
     padding:0 0 32px 32px;
-    color:$colorwhite;
-    font-size: 20px;
+    color:$colorwhite;   
+    font-size: $base*2.5;
     margin:0;
   }
 }
@@ -21,7 +21,16 @@
         border:0px;
         padding:13px 13px 13px 32px;
         font-family: $font-regular;
-        &:hover,
+        &:hover{
+          background:transparent;
+          color:$colorwhite;
+          border-radius: 0px;  
+          border: 0px;              
+          color:$colorwhite;
+          margin:0;
+          border:none;
+          outline: 0;    
+        }        
         &:focus{
               background:rgba(238,248,254,0.2) ;
               color:$colorwhite;
@@ -34,13 +43,13 @@
         }        
       }
       .link.active{        
-          background:#3c79a1;        
+          background:$ceruleanblueLight;        
       }
       }
       .list.active{
-        background:#3c79a1;
+        background:$ceruleanblueLight;
         .link{
-          background: #3c79a1; 
+          background: $ceruleanblueLight; 
           color:$colorwhite;
           border-radius: 0px;  
           border: 0px;          
@@ -48,29 +57,3 @@
       }
     }
 }
-
-
-.tabs-left {
-  border-bottom: none;
-  border-right: 1px solid #ddd;
-}
-
-.tabs-left>li {
- margin:0px;
-}
-
-// .tabs-left>li.active>a,
-// .tabs-left>li.active>a:hover,
-// .tabs-left>li.active>a:focus {
-//   border-bottom-color: #ddd;
-//   border-right-color: transparent;
-//   background:#f90;
-//   border:none;
-//   border-radius:0px;
-//   margin:0px;
-// }
-// .nav-tabs>li>a:hover {
-//     /* margin-right: 2px; */
-//     line-height: 1.42857143;
-//     border: 1px solid transparent;
-// }
