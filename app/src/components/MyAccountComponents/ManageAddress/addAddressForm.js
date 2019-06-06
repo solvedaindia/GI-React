@@ -255,7 +255,7 @@ class AddAddressForm extends React.Component {
     return (
       <div className='form-BgContainer addAddressContainer'>
         <h4 className='heading'>Add New Address</h4>
-        <button className='cancelBtn' onClick={this.closeAddNewAddress.bind(this)}>X</button>
+        <button className='cancelBtn' onClick={this.closeAddNewAddress.bind(this)}></button>
         <div className='row'>
           <div className='col-md-6'>
               <div className='form-div clearfix div-error'>
@@ -308,7 +308,10 @@ class AddAddressForm extends React.Component {
         
         <div className='col-md-6'>
          <div className='defaultOption'>
-          <input className='defaultCheckbox' type='checkbox' title={'State'} name={'name'} id={'checkbox'} defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+         <div className='input_box'>
+          <input className='defaultCheckbox inputCheck' type='checkbox' title={'State'} name={'name'} id={'checkbox'} defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+          <label class="lblCheck" for="checkbox"></label>
+          </div>
           <label className='defaultlbl'>Make this default address</label>
         </div>
         </div>
