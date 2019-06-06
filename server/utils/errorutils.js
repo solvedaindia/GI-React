@@ -84,6 +84,12 @@ const errorlist = {
     error_key: 'invalid_promocode',
     error_message: 'Promo Code is Invalid',
   },
+  user_does_not_exists: {
+    status_code: 400,
+    error_key: 'user_does_not_exist',
+    error_message:
+      'This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -202,6 +208,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'invalid_pincode',
           error_message: 'Not a valid pincode',
         };
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
+        return errorlist.user_does_not_exists;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||

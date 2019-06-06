@@ -56,6 +56,7 @@ function getItemOrderDetail(OrderItem) {
 
 module.exports.mergeOrderItem = mergeOrderItemandProduct;
 function mergeOrderItemandProduct(orderItemList, productList) {
+  console.log('productList>>>',JSON.stringify(productList));
   const orderItemJson = {
     cartTotalQuantity: 0,
     cartTotalItems: 0,
@@ -70,16 +71,6 @@ function mergeOrderItemandProduct(orderItemList, productList) {
       if (itemJson.uniqueID === productList[index].uniqueID) {
         Object.assign(itemJson, productList[index]);
         break;
-      }
-    }
-
-    if (itemJson.inventoryDetails) {
-      if (itemJson.inventoryDetails.inventoryStatus === 'Unavailable') {
-        itemJson.inventoryStatus = 'unavailable';
-      } else {
-        itemJson.inventoryStatus = 'available';
-        itemJson.deliveryDate =
-          itemJson.inventoryDetails.deliveryDateTime || null;
       }
     }
 

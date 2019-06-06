@@ -30,7 +30,7 @@ module.exports = Object.freeze({
   mylistFetch: `${prodWcsResourceUrl}/{{storeId}}/wishlist/@self`,
   createWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist`,
   editWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{wishlistid}}`,
-  changePassword: `${prodWcsResourceUrl}/{{storeId}}/person/@self?action=updateUserRegistration&responseFormat=json`,
+  updateProfile: `${prodWcsResourceUrl}/{{storeId}}/person/@self?action=updateUserRegistration&responseFormat=json`,
   userContact: `${prodWcsResourceUrl}/{{storeId}}/person/@self/contact`,
   sociallogin: `${prodWcsResourceUrl}/{{storeId}}/loginidentity/oauth_validate?responseFormat=json`,
   otp: `${prodWcsResourceUrl}/{{storeId}}/GIOtp`,
@@ -55,5 +55,5 @@ module.exports = Object.freeze({
   promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
   setSocialLoginPassword: `${prodWcsResourceUrl}/{{storeId}}/person/@self?responseFormat=json&action=updateUserRegistration`,
   shippingCharge: `${prodWcsResourceUrl}/{{storeId}}/GIShipCharge/getShippingCharge?pinCode={{pincode}}&uniqueId={{uniqueId}}`,
-  userInfo: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{userId}}`,
+  userInfo: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
 });

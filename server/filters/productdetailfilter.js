@@ -639,9 +639,11 @@ function mercAssociationsDataForPDP(productDetail) {
 }
 
 function getImagePath(imagePath) {
-  const arr = imagePath.split('//');
-  if (arr.length > 0) {
-    return `/${arr[1]}`;
+  if (imagePath) {
+    const arr = imagePath.split('//');
+    if (arr.length > 0) {
+      return `/${arr[1]}`;
+    }
   }
   return imagePath;
 }

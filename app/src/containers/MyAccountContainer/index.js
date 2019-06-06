@@ -24,6 +24,7 @@ import '../../../public/styles/myAccount/myAccount.scss';
 import ChangePassword from '../../components/MyAccountComponents/ChangePassword/changePassword';
 import MyProfile from '../../components/MyAccountComponents/MyProfile/myProfile';
 import ManageAddress from '../../components/MyAccountComponents/ManageAddress/manageAddress';
+import MyOrder from '../../components/MyAccountComponents/MyOrder/myOrder';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ export class MyAccountContainer extends React.Component {
               <div className="tab-content">
                 <div className={`tab-pane ${redirectedFrom === 'myprofile' ? 'active' : ''}`} id="profile-v"> <MyProfile /></div>
                 <div className={`tab-pane ${redirectedFrom === 'password' ? 'active' : ''}`} id="changePassword-v"><ChangePassword /></div>
-                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v">My Order Tab.</div>
+                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v"><MyOrder/></div>
                 <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v"><ManageAddress /></div>
                 {/* <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
               <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>

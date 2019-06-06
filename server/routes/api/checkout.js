@@ -15,8 +15,8 @@ router.post('/savegstin', (req, res, next) => {
   });
 });
 
-router.get('/userinfo', (req, res, next) => {
-  checkoutHandler.getUserInfo(req, (err, result) => {
+router.post('/userinfo', (req, res, next) => {
+  checkoutHandler.userInfo(req, (err, result) => {
     if (err) {
       next(err);
       return;

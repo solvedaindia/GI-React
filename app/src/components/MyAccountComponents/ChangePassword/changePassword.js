@@ -13,6 +13,7 @@ import {
 import '../../../../public/styles/myAccount/changePassword.scss';
 // import '../../../../public/styles/myAccount/myAccountBase.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
+import Input from '../../Primitives/input';
 
 class ChangePassword extends React.Component {
   state = {
@@ -154,9 +155,10 @@ class ChangePassword extends React.Component {
       <div className='form-BgContainer changePasswordContainer'>
        <div className='form-div clearfix'>
         <div className='form-group'>
-        <label className="form-label">Current Password</label>
+        {/* <label className="form-label">Current Password</label> */}
         <div className='currentPassword'>
-        <input
+        <Input className="form-control newinputmargin" inputType={this.state.inputType} title={'Current Password'} name={'text'} id={'current'} placeholder={'Enter Current Password'} value={this.state.inputTextCurrent} handleChange={this.handleInputChange.bind(this)} />
+        {/* <Input
             onChange={this.handleInputChange.bind(this)}
             type={this.state.inputType}
             name="text"
@@ -164,7 +166,7 @@ class ChangePassword extends React.Component {
             className="form-control newinputmargin"
             placeholder="Enter Current Password"
             value={this.state.inputTextCurrent}
-          />
+          /> */}
           
           <span
             onClick={this.showHidePass.bind(this)}
@@ -179,8 +181,9 @@ class ChangePassword extends React.Component {
 
         <div className='form-div clearfix'>
         <div className='form-group'>
-        <label className="form-label">New Password</label>
-        <input
+        {/* <label className="form-label">New Password</label> */}
+        <Input className="form-control" inputType='password' title={'New Password'} name={'email'} id={'new'} placeholder={'Enter New Password'} value={this.state.inputTextNew} handleChange={this.handleInputChange.bind(this)} />
+        {/* <Input
             // onKeyPress={this.onpress}
             onChange={this.handleInputChange.bind(this)}
             type="password"
@@ -189,7 +192,7 @@ class ChangePassword extends React.Component {
             className="form-control"
             placeholder="Enter New Password"
             value={this.state.inputTextNew}
-          />
+          /> */}
           
         </div>
         {errorItemNew}

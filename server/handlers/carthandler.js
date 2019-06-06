@@ -7,6 +7,7 @@ const errorutils = require('../utils/errorutils');
 const cartFilter = require('../filters/cartfilter');
 const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
+const pincodeUtil = require('../utils/pincodeutil');
 
 const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
@@ -416,10 +417,14 @@ function getcartPageProductDetails(cartData, headers, callback) {
         productListArray.forEach(product => {
           for (let index = 0; index < result[1].length; index += 1) {
             if (
-              product.uniqueID === result[1][index].inventoryDetails.productId
+              product.uniqueID === result[1][index].inventoryDetails.uniqueID
             ) {
               // eslint-disable-next-line no-param-reassign
-              product.inventoryDetails = result[1][index].inventoryDetails;
+              product.inventoryStatus =
+                result[1][index].inventoryDetails.inventoryStatus;
+              // eslint-disable-next-line no-param-reassign
+              product.deliveryDate =
+                result[1][index].inventoryDetails.deliveryDate;
               break;
             }
           }
@@ -436,7 +441,7 @@ function getInventoryDetails(headers, reqParamArray, callback) {
   async.map(
     reqParamArray,
     (reqParam, cb) => {
-      productUtil.findInventory(headers, reqParam, (error, result) => {
+      pincodeUtil.findInventory(headers, reqParam, (error, result) => {
         if (!error) {
           // eslint-disable-next-line no-param-reassign
           reqParam.inventoryDetails = result;

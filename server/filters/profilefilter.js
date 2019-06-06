@@ -17,7 +17,28 @@ module.exports.userInfoSummary = function getSummaryUserProfile(profileData) {
  * @return User Profile JSON Data
  */
 module.exports.userInfoDetails = function getDetailedUserProfile(profileData) {
-  return profileData;
+  const regexMobileNo = /^\d{10}$/; // Mobile Number
+  const userDetails = {};
+  userDetails.name = profileData.firstName;
+  if (profileData.lastName && profileData.lastName !== '') {
+    userDetails.name = `${userDetails.name} ${profileData.lastName}`;
+  }
+  if (regexMobileNo.test(profileData.logonId)) {
+    userDetails.mobileNo = profileData.logonId;
+    userDetails.emailID = profileData.x_userField1 || '';
+    userDetails.logonId = 'mobile';
+    userDetails.userField1 = 'email';
+  } else {
+    userDetails.emailID = profileData.logonId;
+    userDetails.mobileNo = profileData.x_userField1 || '';
+    userDetails.logonId = 'email';
+    userDetails.userField1 = 'mobile';
+  }
+  userDetails.field3 = 0;
+  if (profileData.x_userField3 === '1') {
+    userDetails.field3 = 1;
+  }
+  return userDetails;
 };
 
 /**

@@ -49,11 +49,11 @@ module.exports.storeGSTINValue = function storeGSTINValueInDB(req, callback) {
 };
 
 /**
- * Function to return userInfo
+ * Function to return userInfo (status of un-registered/registered users using Mobile/Email)
  */
 module.exports.userInfo = function getUserInfo(req, callback) {
   logger.debug('Inside User Info API');
-  if (!req.params.logonId) {
+  if (!req.body.logon_id) {
     logger.debug('Invalid Params : user info API');
     callback(errorUtils.errorlist.invalid_params);
     return;
@@ -62,7 +62,7 @@ module.exports.userInfo = function getUserInfo(req, callback) {
   const reqHeader = headerutil.getWCSHeaders(req.headers);
   const originUrl = constants.userInfo
     .replace('{{storeId}}', req.headers.storeId)
-    .replace('{{logonId}}', req.params.logonId);
+    .replace('{{logonId}}', req.body.logon_id);
 
   origin.getResponse(
     'GET',

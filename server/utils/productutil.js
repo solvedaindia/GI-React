@@ -212,8 +212,11 @@ function transformJson(result) {
         promotion => promotion.uniqueID === product.uniqueID,
       );
       // eslint-disable-next-line no-param-reassign
-      product.promotionData = productPromotion[0].promotionData;
+      // product.promotionData = productPromotion[0].promotionData;
       productDetail = productDetailFilter.productDetailSummary(product);
+      productDetail.promotionData = productDetailFilter.getSummaryPromotion(
+        productPromotion[0].promotionData,
+      );
       productListing.push(productDetail);
     });
   }
@@ -223,36 +226,4 @@ function transformJson(result) {
     productList: productListing,
   };
   return resJson;
-}
-
-/**  
-Find Inventory
-* @param: {pincode:'User Pincode',partNumber:'Part Number',quantity:'Quantity'}
-* @return Inventory Details
-*/
-module.exports.findInventory = findInventory;
-function findInventory(headers, reqParams, callback) {
-  const findInventoryUrl = constants.findInvertory
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{partNumber}}', reqParams.partNumber)
-    .replace('{{pinCode}}', reqParams.pincode)
-    .replace('{{quantity}}', reqParams.quantity);
-
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  origin.getResponse(
-    'GET',
-    findInventoryUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body.InventoryAvailability[0]);
-      } else {
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
 }
