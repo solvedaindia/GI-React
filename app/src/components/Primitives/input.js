@@ -2,10 +2,7 @@ import React from "react";
 
 const Input = props => {
   return (
-    <div className="form-group">
-        <label htmlFor={props.name} className="form-label">
-            {props.title}
-        </label>
+    <div className="form-group">        
         <input
             className="form-control"
             id={props.name}
@@ -18,6 +15,9 @@ const Input = props => {
             onFocus={props.focusIn}
             {...props}
         />
+        <label htmlFor={props.name} className="form-label">
+            {props.title}
+        </label>
     </div>
   );
 };
