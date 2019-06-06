@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import {
-  changePasswordAPI
+  userDetailAPI
 } from '../../../../public/constants/constants';
 import {
   resolveTheWishlistData,
@@ -19,7 +19,7 @@ import {
   validateMobileNo,
   validateEmailId,
 } from '../../../utils/addressValidations';
-import {  } from '../../../../public/constants/constants';
+import { } from '../../../../public/constants/constants';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -38,14 +38,37 @@ class MyProfile extends React.Component {
       errorMessage_email: '',
 
       noteItem: null,
+      userResponse: null,
     };
 
     this.handleInput = this.handleInput.bind(this);
   }
 
+  componentDidMount() {
+    this.getProfileDetails();
+  }
+
+  getProfileDetails() {
+    apiManager.get(userDetailAPI)
+      .then(response => {
+        this.setState({
+          inputText_name: response.data.data.name,
+          inputText_email: response.data.data.emailID,
+          inputText_number: response.data.data.mobileNo,
+          userResponse: response.data.data,
+        })
+
+      })
+      .catch(error => {
+        // return null;
+      });
+
+
+  }
+
   onSavebuttonClick(event) {
     event.preventDefault();
-console.log('itt --- ',this.state.inputText_email)
+    console.log('itt --- ', this.state.inputText_email)
     if (!validateFullName(this.state.inputText_name)) {
       this.setState({
         error_name: true,
@@ -122,7 +145,7 @@ console.log('itt --- ',this.state.inputText_email)
           {this.state.error_number ? <div className="error-msg">{this.state.errorMessage_number}</div> : null}
         </div>
         <div className="form-div clearfix div-error">
-          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} focusIn={this.focusIn.bind(this)}/>
+          <Input inputType={'email'} title={'Email ID'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} focusIn={this.focusIn.bind(this)} />
           {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
         </div>
 
