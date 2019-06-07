@@ -14,10 +14,9 @@ class OrderSummery extends React.Component {
 
   render() {
     return (
-      <div className='orderSummery'>
-      <div className={'collapsible' + (true? ' active': '')}>
-        <h2>Order Summery</h2>
-        </div>
+      <div >
+        
+      
       </div>
     );
   }

@@ -29,7 +29,12 @@ class OrderItem extends React.Component {
           <button onClick={this.collapseExpendClicked.bind(this)}>{this.state.expendCollapseText}</button>
         </div>
         <div className='itemBox'>
-          {this.state.isExpend ? <OrderSummery /> : null}
+          {/* {this.state.isExpend ? <div className={`orderSummery ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
+            <OrderSummery />
+          </div> : null} */}
+          <div className={`orderSummery ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
+            <OrderSummery />
+          </div>
           <OrderProduct />
           <OrderProduct />
         </div>

@@ -1,16 +1,14 @@
-
 .myOrder {
-
   .tabBar {
-      width: 847px;
-      height: 70px;
-      background-color: #036cc5;
+    width: 847px;
+    height: 70px;
+    background-color: #036cc5;
   }
 
   .itemBox {
-      width: 847px;
-      //height: 882px;
-      border: solid 1px #e4eaee;
+    width: 847px;
+    //height: 882px;
+    border: solid 1px #e4eaee;
   }
 
   .orderProduct {
@@ -19,7 +17,16 @@
 
   .orderSummery {
     background-color: blueviolet;
-    height: 250px;
+    min-height: 50px;
   }
-  
+
+  .heightActive {
+    min-height: 250px;
+    -webkit-transition: min-height 0.4s;
+  }
+
+  .heightInActive {
+    min-height: 0px;
+    -webkit-transition: min-height 0.4s;
+  }
 }
