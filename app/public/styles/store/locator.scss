@@ -1,0 +1,43 @@
+@import '../variable';
+
+
+.storeLocator {
+    @include container-width;
+    text-align: center;
+    .title {
+        margin: $base*8 0 $base*6.25 0;
+    }
+    .mapContainer {
+        width: 50%;
+        height: 500px;
+    }
+    .pc-field {
+        width: 44%;
+        padding: 8px;
+    }
+    .pc-btn {
+        background-color: $ashGrey;
+        color: $colorwhite;
+        padding: $base*1.125;
+        border: 1px solid $ashGrey;
+        width: 22%;
+    }
+    .storeTypes {
+        width: 66.4%;
+        margin: 44px auto;
+        .storeTypeItem{
+            width: 23%;
+            display: inline-block;
+            border: 1px solid #ddd;
+            margin: 1%;
+            .typeList {
+                width: 51%;
+                margin: auto;
+            }
+            .storeImg {
+                width: 100%;
+            }
+        }
+
+    }
+}

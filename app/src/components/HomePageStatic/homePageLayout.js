@@ -3,8 +3,6 @@ import apiManager from '../../utils/apiManager';
 import WidgetList from './widgetList';
 import {
   homePageLayoutAPI,
-  storeId,
-  accessToken,
 } from '../../../public/constants/constants';
 export class HomapegeLayout extends React.Component {
   constructor(props) {

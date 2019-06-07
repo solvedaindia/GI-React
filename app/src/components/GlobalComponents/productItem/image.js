@@ -20,6 +20,7 @@ class Image extends React.Component {
         <ImageLoader
           className="imgfullwidth"
           src={`${newMachineUrl}/${store}/${catalog}/${this.props.data}`}
+          // src={`http://192.168.0.57/imagestore${this.props.data}`}
           // src={`https://192.168.0.36:8443${this.props.data}`}
           alt="sofa"
         />

@@ -39,6 +39,7 @@ import CheckoutContainer from '../checkoutContainer/index'
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
+import StoreLocator from '../../components/StoreLocator/storeLocator';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -148,6 +149,7 @@ export default class App extends React.Component {
           <Route path="/compare" component={CompareContainer} />
           <Route path="/wishlist" component={MyWishlist} />
           <Route path="/checkout" component={CheckoutContainer} />
+          <Route path="/storelocator" component={StoreLocator} />
         </Switch>
         <FooterContainer />
       </div>

@@ -64,6 +64,11 @@ class BestSeller extends React.Component {
 									src={`${newMachineUrl}/${store}/${catalog}${sellerItemData.thumbnail}`}
 									alt={sellerItemData.uniqueID}
 								/>
+								{/* <img 
+									className='subCatImg'
+									src={`http://192.168.0.57/imagestore/${sellerItemData.thumbnail}`}
+									alt={sellerItemData.uniqueID}
+								/> */}
 							</a>
 							<figcaption className='bsDetails'>
 								<h2 className='prodtitle'>{sellerItemData.productName}</h2>

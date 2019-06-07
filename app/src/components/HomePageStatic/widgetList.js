@@ -15,7 +15,7 @@ export default function WidgetList({ componentType, ...rest }) {
             );
         case 'mini_track_order':
             return (
-                <ExStore {...rest} />
+                ''
             );
         case 'best_selling':
             return (
@@ -36,7 +36,11 @@ export default function WidgetList({ componentType, ...rest }) {
         case 'recommendation':
             return (
                 ''
-            )
+            );
+        case 'experience_store':
+            return (
+                <ExStore {...rest} />
+            );
         case 'read_more':
             return (
                 <ReadMore />

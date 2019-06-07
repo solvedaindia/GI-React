@@ -22,7 +22,6 @@ $greenDark:#017b6b;
 $greenLight:#00b5a4;
 $paleGrey:#eef8fe;
 $greyDark:#222222;
-
 $greylightColor:#505d68;
 
 /*--Border Variable
@@ -37,3 +36,8 @@ $font-regular:CeraGIRegular,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;
 $font-medium:CeraGIMedium,sans-serif; 
+
+@mixin container-width {
+    width: 83.33%;
+    margin: auto;
+}
