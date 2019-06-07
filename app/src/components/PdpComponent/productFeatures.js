@@ -1,9 +1,7 @@
 import React from 'react';
 import { Col,Row } from 'react-bootstrap';
 import {
-	newMachineUrl,
-	store,
-  	catalog,
+		imagePrefix,
 } from '../../../public/constants/constants';
 
 class productFeatures extends React.Component {
@@ -50,7 +48,7 @@ class productFeatures extends React.Component {
 							<Col md={6} sm={12} xs={12}> 
 								<div className='featureImgbox'>
 									{this.props.productFeature.map((imagePath, index) => {
-										const fullImagePath = `${newMachineUrl}/${store}/${catalog}${imagePath.imagePath}`;
+										const fullImagePath = `${imagePrefix}${imagePath.imagePath}`;
 										this.dataClass = '';
 										if (index > 0) {
 											this.dataClass = 'dataNotActive';

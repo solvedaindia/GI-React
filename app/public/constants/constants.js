@@ -5,7 +5,7 @@ export const secureHttp = 'https';
 export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
-export const host1 = '192.168.0.36';
+export const host1 = '192.168.0.57';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -93,8 +93,7 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
-/* Footer logo url */
-export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
+
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
@@ -114,6 +113,11 @@ export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
+export const imageStore = 'imagestore';
+export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+
+/* Footer logo url */
+export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

@@ -4,6 +4,7 @@ import {
   newMachineUrl,
   store,
   catalog,
+  imagePrefix
 } from '../../../public/constants/constants';
 
 class productDetail extends React.Component {
@@ -83,9 +84,7 @@ class productDetail extends React.Component {
   }
 
   render() {
-    const imagePath = `${newMachineUrl}/${store}/${catalog}${
-      this.props.productDetail.imagePath
-    }`;
+    const imagePath = `${imagePrefix}${this.props.productDetail.imagePath}`;
     return (
       <div className="product_details">
         <Row>

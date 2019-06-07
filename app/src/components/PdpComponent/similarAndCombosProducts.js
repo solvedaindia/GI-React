@@ -3,13 +3,14 @@ import Slider from 'react-slick';
 import {
 	newMachineUrl,
   	store,
-  	catalog,
+		catalog,
+		imagePrefix
 } from '../../../public/constants/constants';
 
 import { Row, Col } from 'react-bootstrap';
 
-const prevArrowImg = <img src={`${newMachineUrl}/${store}/${catalog}/images/godrejInterio/LeftArrow.svg`} />
-const nextArrowImg = <img src={`${newMachineUrl}/${store}/${catalog}/images/godrejInterio/RightArrow.svg`} />
+const prevArrowImg = <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} />
+const nextArrowImg = <img src={`${imagePrefix}/images/godrejInterio/RightArrow.svg`} />
 class SimilarCombosProducts extends React.Component {
 	constructor() {
 		super();
@@ -30,7 +31,7 @@ class SimilarCombosProducts extends React.Component {
 
 	getSimilarCombosProducts(props) {
 		return(props.map((data, index) => {
-			const imgUrl = `${newMachineUrl}/${store}/${catalog}/${data.thumbnail}`;
+			const imgUrl = `${imagePrefix}${data.thumbnail}`;
 
 			return (
 				<div className='similarProducts' key={index}>

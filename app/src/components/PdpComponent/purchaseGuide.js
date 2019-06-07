@@ -7,7 +7,8 @@ import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.sc
 import {
 	newMachineUrl,
   	store,
-  	catalog,
+		catalog,
+		imagePrefix
 } from '../../../public/constants/constants';
 
 class purchaseGuide extends React.Component {
@@ -21,8 +22,8 @@ class purchaseGuide extends React.Component {
 	filterImagesAndVideos = imagesAndVideos => {	
 		this.imagesAndVideos = [];	
 		imagesAndVideos.map((data) => {
-			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbImagePath}`;
-			const path = `${newMachineUrl}/${store}/${catalog}/${data.path}`;
+			const thumbnailPath = `${imagePrefix}${data.thumbImagePath}`;
+			const path = `${imagePrefix}${data.path}`;
 			
 			if (data.type === 'image') {
 				this.imagesAndVideos.push({'original': Path , 'thumbnail': thumbnailPath });

@@ -4,9 +4,7 @@ import { Player, BigPlayButton } from 'video-react';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import {
-  newMachineUrl,
-  store,
-  catalog,
+	imagePrefix,
 } from '../../../public/constants/constants';
 
 class productImagesAndVideos extends React.Component {
@@ -65,9 +63,9 @@ class productImagesAndVideos extends React.Component {
 			} else {
 				imagePath = data.fullImagePath;
 			}
-			const thumbnailPath = `${newMachineUrl}/${store}/${catalog}/${data.thumbnailPath}`;
+			const thumbnailPath = `${imagePrefix}${data.thumbnailPath}`;
 			if (data.type === 'image') {
-					const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${imagePath}`;
+					const fullImagePath = `${imagePrefix}${imagePath}`;
 					this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
 			} else {
 				this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});

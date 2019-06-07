@@ -3,6 +3,7 @@ import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
 import { Row, Col,Grid } from 'react-bootstrap';
+import {newMachineUrl, store, catalog, imagePrefix} from '../../../public/constants/constants'
 
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
