@@ -1,4 +1,7 @@
 @import './variable';
+.up{
+    transform: translateY(0%);
+}
 .compareProductwrap{
     background:$colorwhite;
     position: fixed;
@@ -9,6 +12,9 @@
     box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
     padding: 16px 0;
     z-index: 99;
+
+    // transform: translateY(122%);
+    // transition: .4s ease-in-out;
 
     .compareProducts{
         padding:0;
