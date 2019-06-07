@@ -106,6 +106,7 @@ class WelcomeForm extends Component {
           name="userId"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation={true}
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
@@ -115,6 +116,7 @@ class WelcomeForm extends Component {
           title="Password"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation={true}
         />
         {errorMessagePassword}
         {/* Password of the user */}

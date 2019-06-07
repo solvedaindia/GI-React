@@ -2,7 +2,10 @@ import React from "react";
 
 const Input = props => {
   return (
-    <div className="form-group">        
+    <div className="form-group">   
+    {props.hideAnimation ? <label htmlFor={props.name} className="form-label">
+            {props.title}
+        </label> : null}     
         <input
             className="form-control"
             id={props.name}
@@ -15,9 +18,9 @@ const Input = props => {
             onFocus={props.focusIn}
             {...props}
         />
-        <label htmlFor={props.name} className="form-label">
+        {props.hideAnimation ? null : <label htmlFor={props.name} className="form-label">
             {props.title}
-        </label>
+        </label>} 
     </div>
   );
 };
