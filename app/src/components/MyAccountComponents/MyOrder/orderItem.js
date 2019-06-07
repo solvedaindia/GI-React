@@ -3,22 +3,37 @@ import apiManager from '../../../utils/apiManager';
 import {
   changePasswordAPI
 } from '../../../../public/constants/constants';
-import '../../../../public/styles/myAccount/myProfile.scss';
+import OrderProduct from './orderProduct';
+import OrderSummery from './orderSummery';
 
 class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isExpend: false,
+      expendCollapseText: 'Expend'
     };
   }
 
-  render() {
+  collapseExpendClicked() {
+    this.setState({
+      isExpend: !this.state.isExpend,
+      expendCollapseText: !this.state.isExpend ? 'Collapse' : 'Expend'
+    })
+  }
 
+  render() {
     return (
-      <div>
-        
-      </div>
+      <>
+        <div className='tabBar'>
+          <button onClick={this.collapseExpendClicked.bind(this)}>{this.state.expendCollapseText}</button>
+        </div>
+        <div className='itemBox'>
+          {this.state.isExpend ? <OrderSummery /> : null}
+          <OrderProduct />
+          <OrderProduct />
+        </div>
+      </>
     );
   }
 }

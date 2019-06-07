@@ -1,7 +1,24 @@
 
 .myOrder {
 
+  .tabBar {
+      width: 847px;
+      height: 70px;
+      background-color: #036cc5;
+  }
 
+  .itemBox {
+      width: 847px;
+      //height: 882px;
+      border: solid 1px #e4eaee;
+  }
 
+  .orderProduct {
+    background-color: aquamarine;
+  }
+
+  .orderSummery {
+    background-color: blueviolet;
+  }
   
 }
