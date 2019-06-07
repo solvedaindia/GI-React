@@ -33,7 +33,9 @@ class productFeatures extends React.Component {
 	}
 
   render() {
-		return (  
+		return (
+			<>
+			{this.props.productFeatureData.productFeatures &&
 			<Col md={12} sm={12} xs={12}>
 				<div className='PdpFeatures'>
 					<div className='featureVertical-tab'>
@@ -47,7 +49,7 @@ class productFeatures extends React.Component {
 						<div className='row'>       
 							<Col md={6} sm={12} xs={12}> 
 								<div className='featureImgbox'>
-									{this.props.productFeature.map((imagePath, index) => {
+									{this.props.productFeatureData.productFeatures.map((imagePath, index) => {
 										const fullImagePath = `${imagePrefix}${imagePath.imagePath}`;
 										this.dataClass = '';
 										if (index > 0) {
@@ -68,7 +70,7 @@ class productFeatures extends React.Component {
 							</Col>
 							<Col md={6} sm={12} xs={12}>
 								<ul className='verticalTab'>
-									{this.props.productFeature.map((featureData, i) => (
+									{this.props.productFeatureData.productFeatures.map((featureData, i) => (
 										<li className={ this.isActive(i) ? 'list active':'list' } key={i}
             onClick={() => this.setActiveTab(i) }>
 											<a className='link' role="button" onClick={this.showFeatureImage.bind(this, i)}>
@@ -82,7 +84,9 @@ class productFeatures extends React.Component {
 						</div>
 					</div>
 				</div>
-			</Col>    
+			</Col>
+			}
+			</>   
 		);
   	}
 }

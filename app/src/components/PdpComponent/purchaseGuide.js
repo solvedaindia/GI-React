@@ -67,7 +67,7 @@ class purchaseGuide extends React.Component {
 	/* render tab data */
 	renderTabData() {
 		return(
-				this.props.purchaseGuide.map((tabData, index) => {
+				this.props.purchaseGuide.purchaseGuide.map((tabData, index) => {
 				this.activeClass = 'active';
 				if (index > 0) {
 					this.activeClass = '';
@@ -88,7 +88,7 @@ class purchaseGuide extends React.Component {
 	/* render tab content */
 	renderTabContent() {
 		return(
-			this.props.purchaseGuide.map((contentData, index) => {
+			this.props.purchaseGuide.purchaseGuide.map((contentData, index) => {
 				if (index > 0) {
 					this.activeClass = 'dataNotActive';
 				}
@@ -112,21 +112,25 @@ class purchaseGuide extends React.Component {
 	render() {
 		return (      
 			<>
-				<Row>
-					<Col md={12} sm={12} xs={12}>
-						<h3 className="heading">Purchase Guide</h3>
-					</Col>
-				</Row>
-				<Row>
-					<Col md={12} sm={12} xs={12} className="purchaseGuide_description">
-					<Row>
-							<Col md={12} sm={12} xs={12} className="tab-nav-container">
-								<ul>{this.renderTabData()}</ul>
+				{this.props.purchaseGuide.purchaseGuide &&
+					<>
+						<Row>
+							<Col md={12} sm={12} xs={12}>
+								<h3 className="heading">Purchase Guide</h3>
 							</Col>
-							<Col md={12} sm={12} xs={12} className="tab-content">{this.renderTabContent()}</Col>
-					</Row>
-					</Col>
-				</Row>
+						</Row>
+						<Row>
+							<Col md={12} sm={12} xs={12} className="purchaseGuide_description">
+							<Row>
+									<Col md={12} sm={12} xs={12} className="tab-nav-container">
+										<ul>{this.renderTabData()}</ul>
+									</Col>
+									<Col md={12} sm={12} xs={12} className="tab-content">{this.renderTabContent()}</Col>
+							</Row>
+							</Col>
+						</Row>
+					</>
+				}
 			</>
 		);
 	}

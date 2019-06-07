@@ -71,8 +71,9 @@ class SimilarCombosProducts extends React.Component {
 			prevArrow: prevArrowImg,
 			nextArrow: nextArrowImg,
 		};
-
 		return (
+			<>
+			{ this.props.similarCombosProducts.combos && this.props.similarCombosProducts.similarProducts &&
 			<Col  md={12} sm={12} xs={12} className='similarProduct-Wrapper'>
 				<Row>
 					<Col md={12} sm={12} xs={12} className="similar-pro-tab text-center">
@@ -82,16 +83,18 @@ class SimilarCombosProducts extends React.Component {
 
 					<Col md={12} sm={12} xs={12} id='similar' className='dataActive'>
 						<Slider {...settings}>
-							{this.getSimilarCombosProducts(this.props.similarProducts)}
+							{this.getSimilarCombosProducts(this.props.similarCombosProducts.similarProducts)}
 						</Slider>
 					</Col>
 					<Col md={12} sm={12} xs={12}id='combos' className='dataNotActive'>
 						<Slider {...settings}>
-							{this.getSimilarCombosProducts(this.props.combos)}
+							{this.getSimilarCombosProducts(this.props.similarCombosProducts.combos)}
 						</Slider>
 					</Col>
 				</Row>
 			</Col>
+			}
+			</>
 		);
 	}
 }

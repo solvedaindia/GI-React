@@ -127,9 +127,9 @@ class productImagesAndVideos extends React.Component {
 	}
 
 	render() {
-		this.filterImagesAndVideos(this.props.imagesAndVideos, this.isZoomScreen);
+		this.filterImagesAndVideos(this.props.skuData.attachments, this.isZoomScreen);
 		let featuredClass = 'hide';
-		if (this.props.ribbonText) {
+		if (this.props.skuData.ribbon) {
 			featuredClass = 'featured-box';
 		}
 
@@ -142,7 +142,9 @@ class productImagesAndVideos extends React.Component {
 						</path>
 						</svg>
 					</span>
-					<span className='featured-text'>{this.props.ribbonText}</span>
+					{this.props.skuData.ribbon &&
+						<span className='featured-text'>{this.props.skuData.ribbon}</span>
+					}
 				</div>
 				
 				<ImageGallery 
