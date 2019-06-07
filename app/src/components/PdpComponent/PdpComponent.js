@@ -10,13 +10,16 @@ import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
-import SocialMedia from './socialMedia';
+import SocialMedia from '../../utils/socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import AddToCart from './addToCart';
 import Price from './price';
 import appCookie from '../../utils/cookie';
-
+import apiManager from '../../utils/apiManager';
+import {
+	pinCodeAPI
+} from '../../../public/constants/constants';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = (
@@ -32,7 +35,8 @@ class PdpComponent extends React.Component {
 			skuData: {},
 			isLoading: true,
 			selectedSku: {},
-			dataVal: ''
+			dataVal: '',
+			pincodeData: ''
 		};
 	}
 
@@ -57,7 +61,7 @@ class PdpComponent extends React.Component {
 	}
 	
 	/* get actual resolve data  */
-	async getActualResolvedData(data, resolvedSkuData) {
+	getActualResolvedData(data, resolvedSkuData) {
 
 		const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
 		let skuDataArr = [];
@@ -69,18 +73,14 @@ class PdpComponent extends React.Component {
 			})
 		});
 
-		this.setState({
-			selectedSku: skuDataArr,
-			isLoading: false,
-			skuData: resolvedSkuData,
-		});
+		this.callPinCodeAPI(skuDataArr, resolvedSkuData);
 	}
 
 	/* handle swatches */
-	async handleSwatches(count) {
+	handleSwatches(count) {
 		let swatches = new Array();
 		let productSkuData = this.props.data.skuData;
-		const selectedSwatches = await this.handleSelectedSwatches(count);
+		const selectedSwatches = this.handleSelectedSwatches(count);
 		for(let j = 0 ; j < selectedSwatches.length; j++) {
 			swatches = new Array();
 			productSkuData.map(skuLevelData => {
@@ -93,7 +93,7 @@ class PdpComponent extends React.Component {
 		   productSkuData = swatches;
 		}
 		this.getResolveSkuData(swatches[0].uniqueID);
-		this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+swatches[0].uniqueID);
+		//this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+swatches[0].uniqueID);
 	}
 
 	/* handle selected swatches */
@@ -105,6 +105,36 @@ class PdpComponent extends React.Component {
 			selectedSwatches.push(getValue);
 		}
 		return selectedSwatches;
+	}
+
+	callPinCodeAPI(skuDataArr, resolvedSkuData) {
+		const params = {
+			//pincode: '400079',
+			pincode: '110043',
+			sku_partNumber: resolvedSkuData.partNumber,
+			quantity: 1,
+			sku_id: resolvedSkuData.uniqueID
+		}
+		
+		apiManager.post(pinCodeAPI, params)
+		.then(response => {
+			this.setState({
+				selectedSku: skuDataArr,
+				isLoading: false,
+				skuData: resolvedSkuData,
+				pincodeData: response.data.data
+			});
+			this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+resolvedSkuData.uniqueID);
+		})
+		.catch(error => {
+			console.log('PDP Pin Code API Error =>', error);
+		});
+	
+	}
+
+	handleAddtocart() {
+		this.getResolveSkuData();
+		window.scrollTo(0, 0);
 	}
 
 	render() {
@@ -132,7 +162,12 @@ class PdpComponent extends React.Component {
 										<div className='offerbg text'> % </div>
 										<div className='discount-off text'>{this.state.skuData.discount}% OFF & free accessories </div>
 									</div>
-								<AddToCart skuId={this.state.skuData.uniqueID} sticky={true} />
+								<AddToCart 
+									skuData={this.state.skuData}
+									sticky={true}
+									pinCodeData={this.state.pincodeData}
+									handleAddtocart={this.handleAddtocart.bind(this)} 
+								/>
 								
 							</Col>
 						</Row>
@@ -141,8 +176,7 @@ class PdpComponent extends React.Component {
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">
 								<Productimageandvideo
-									imagesAndVideos={this.state.skuData.attachments}
-									ribbonText={this.state.skuData.ribbon}
+									skuData={this.state.skuData}
 									activeData={false}
 								/>
 							</div>
@@ -173,7 +207,13 @@ class PdpComponent extends React.Component {
 								<ProductInfo
 									productData={this.state.skuData}
 									defAttributes={this.props.data.defAttributes}
-									PdpEspot={this.props.espot.data}
+									pinCodeData={this.state.pincodeData}
+								/>
+								<AddToCart 
+									skuData={this.state.skuData}
+									sticky={false} 
+									pinCodeData={this.state.pincodeData}
+									handleAddtocart={this.handleAddtocart.bind(this)}
 								/>
 							</div>
 						</Col>
@@ -184,33 +224,32 @@ class PdpComponent extends React.Component {
 				)}    
 				<Grid>
 					<Row>           
-						<ProductFeatures productFeature={this.props.data.productFeatures} />            
+						<ProductFeatures productFeatureData={this.props.data} />            
 					</Row>
 					<Row>
 						<Col md={12} sm={12} xs={12} className="purchase-guide-box">
-							<PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
+							<PurchaseGuide purchaseGuide={this.props.data} />
 						</Col>
 					</Row>
 					<Row>
 						<Col md={12} sm={12} xs={12}>
-							<ProductDetail productDetail={this.props.data.productDetails} />
+							<ProductDetail productDetail={this.props.data} />
 						</Col>
 					</Row>
 					<Row>            
-						<ProductKeywords productKeywords={this.props.data.keywords} />            
+						<ProductKeywords productKeywords={this.props.data} />            
 					</Row>
 					<Row>
 						{!isLoading ? (
 							<SimilarCombosProducts 
-								similarProducts={this.state.skuData.similarProducts}
-								combos={this.state.skuData.combos}
+								similarCombosProducts={this.state.skuData}
 							/>
 						) : (
 							<div> Data is Loading..</div>
 						)}
 					</Row>
 				</Grid>        
-				<PdpEspot espot={this.props.espot.data} />   
+				<PdpEspot espot={this.props.espot} />
 			</div>
 		);
 	}

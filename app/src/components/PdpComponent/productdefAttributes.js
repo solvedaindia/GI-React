@@ -3,10 +3,6 @@ import React from 'react';
 class productDefAttribute extends React.Component {
 	constructor() {
 		super();
-		this.state = {
-			data: null,
-			isLoading: true,
-		}
 	}
 
 	handleOptionChange(count) {

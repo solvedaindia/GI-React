@@ -30,8 +30,8 @@ class PdpContainer extends React.Component {
 		.then(response => {
 			//console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
 			this.setState({
-			pdp: response.data,
-			pdpLoading: false,
+				pdp: response.data,
+				pdpLoading: false
 			});
 
 			if (appCookie.get('isPDPAddToCart') === null) {
@@ -60,12 +60,14 @@ class PdpContainer extends React.Component {
 	return (
     	<div>
 			{!this.state.pdpLoading && !this.state.espotLoading && (
+				<>
 				<PdpComponent
 					data={this.state.pdp.data}
 					matchParams={this.props.match.params}
 					espot={this.state.pdpEspot}
 					historyData={this.props.history}
 				/>
+				</>
 			)}
     	</div>
     );
