@@ -13,6 +13,7 @@ import { getReleventReduxState } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
 import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
+import ShareLogo from '../SVGs/shareIcon';
 
 class MyWishlist extends React.Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class MyWishlist extends React.Component {
     const wishlistItem = <>
       <div className='container'>
         <h3 className="heading">My Wishlist</h3>
+        <ShareLogo/>
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}
