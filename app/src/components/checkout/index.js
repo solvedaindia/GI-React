@@ -20,6 +20,8 @@ import {
   accessToken,
   accessTokenCookie,
   userLoginAPI,
+  addressListAPI,
+  userDataAPI
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -34,20 +36,60 @@ export class CheckoutComponent extends React.Component {
           has_pass: false,
           same_bill: true,
           step: 1,
+          logon_by: '',
+          loggedIn: false,
           loginStatus: 'Login/Register',
 			    userType: 'Hello Guest!',
           showGift: false,
-          loggedIn: false
+          loggedIn: false,
+          addressList: null,
         }
     }
 
     componentDidMount() {
-        var coke = document.cookie;
-        if(coke.isLoggedIn == true) {
-            this.setState({
-                loggedIn: true
+        var coke = appCookie.get('isLoggedIn')
+        console.log(coke, 'coke in did mount');
+        if(coke == 'true') {
+            this.callprofileAPI()
+              .then((data) => {
+              this.setState({
+                step: 2,
+                loggedIn: true,
+                logon_by: data.logonId
+            })
+            }).catch(error => {
+              throw new Error(error);
             })
         }
+    }
+
+    callprofileAPI = () => {
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
+        let url = addressListAPI;
+        axios.get(userDataAPI, {
+          headers: { store_id: storeId, access_token: token }
+        }).then(response => {
+          console.log(response, 'profile response')
+          resolve(response.data.data);
+        }).catch(error => {
+          reject(error);
+        })
+      })
+    }
+
+    callAddressAPI = () => {
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
+        let url = addressListAPI;
+        axios.get(addressListAPI, {
+          headers: { store_id: storeId, access_token: token }
+        }).then(response => {
+          resolve(response.data.data);
+        }).catch(error => {
+          reject(error);
+        })
+      })
     }
 
     handleHasPass = () => {
@@ -79,6 +121,7 @@ export class CheckoutComponent extends React.Component {
         userType: 'Hello User!',
         show: false,
         });
+        
         // alert('Successfully Logged In');
       })
       .catch(error => {
@@ -126,13 +169,30 @@ export class CheckoutComponent extends React.Component {
 
     handleStep = () => {
         if(this.state.step == 3) {
-            return <Step3Component back={this.handleChange} backtoMobile={this.handleChangeMobile} />             
+            return <Step3Component 
+                    back={this.handleChange} 
+                    backtoMobile={this.handleChangeMobile} />             
         } else if(this.state.step == 2) {
-            return <Step2Component proceed={this.handleProceed} back={this.handleChange} />
+            return <Step2Component 
+                    proceed={this.handleProceed} 
+                    back={this.handleChange} 
+                    isLoggedIn={this.state.loggedIn} 
+                    logonBy={this.state.logon_by} />
         } else {
-            return <Step1Component proceed={this.handleProceed} login={this.handleUserLoginApi.bind(this)} />
+            return <Step1Component 
+                    proceed={this.handleProceed}
+                    login={this.handleUserLoginApi.bind(this)} 
+                    proceedToSecond={this.proceedToSecond}
+                    logonBy={this.state.logon_by} />
         }
     }
+
+    proceedToSecond = (uid) => {
+      this.setState({
+        logon_by: uid,
+        step: 2
+      })
+    } 
 
     handleProceed = () => {
       if(this.state.step == 1) {

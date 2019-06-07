@@ -22,7 +22,9 @@ export class CompContainer extends React.Component {
     this.buildData = this.buildData.bind(this);
     this.clearAll = this.clearAll.bind(this);
     this.handleGoToCompare = this.handleGoToCompare.bind(this);
-    this.state = {};
+    this.state = {
+      showCompare: true
+    };
   }
 
   buildData() {
@@ -54,6 +56,18 @@ export class CompContainer extends React.Component {
     return data;
   }
 
+  showHideCompare = () => {
+    if(this.state.showCompare == true) {
+      this.setState({
+        showCompare: false
+      })
+    } else {
+      this.setState({
+        showCompare: true
+      })
+    }
+  }
+
   handleGoToCompare(e) { 
       if(this.props.compData.length < 2) {
         e.preventDefault();
@@ -67,7 +81,7 @@ export class CompContainer extends React.Component {
   render() {
     return (
     <div>
-      {this.props.compData.length > 0 ? <div className="compareProductwrap">
+      {this.props.compData.length > 0 && this.state.showCompare ? <div className="compareProductwrap">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -81,12 +95,17 @@ export class CompContainer extends React.Component {
                     <button className="btn-clearall" onClick={this.clearAll}>
                       Clear All
                     </button>
+                    <button onClick={this.showHideCompare}>
+                      hide
+                    </button>
                   </li> : ""}
               </ul>
             </div>
           </div>
         </div>
-      </div> : ""}
+      </div> : <button onClick={this.showHideCompare} className="compareProductwrap">
+                      show
+                    </button>}
     </div>
     );
   }

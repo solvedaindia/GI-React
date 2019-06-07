@@ -8,6 +8,15 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
+import appCookie from '../../utils/cookie';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  userLoginAPI,
+  addressListAPI,
+  userDataAPI
+} from '../../../public/constants/constants';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
@@ -19,12 +28,57 @@ export class Step2Component extends React.Component {
           has_pass: false,
           same_bill: true,
           step: 1,
-          showGift: false
+          showGift: false,
+          addressList: null,
+          saved_add: 'active_add',
+          new_add: null
         }
+    }
+
+    componentDidMount() {
+      if(this.props.isLoggedIn) {
+        this.callAddressAPI()
+          .then((data) => {
+            this.setState({
+              addressList: data
+            })
+          })
+      }
+    }
+
+    callAddressAPI = () => {
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
+        axios.get(addressListAPI, {
+          headers: { store_id: storeId, access_token: token }
+        }).then(response => {
+          resolve(response.data.data);
+        }).catch(error => {
+          reject(error);
+        })
+      })
     }
 
     handleChangeMobile = () => {
       this.props.back();
+    }
+
+    getUserAddress = () => {
+      
+    }
+
+    newAddActive = () => {
+      this.setState({
+        saved_add: null,
+        new_add: 'active_add'
+      })
+    }
+
+    savedAddActive = () => {
+      this.setState({
+        saved_add: 'active_add',
+        new_add: null
+      })
     }
 
     handleSameBill = () => {
@@ -56,12 +110,12 @@ export class Step2Component extends React.Component {
                   <div className="col-md-9" style={{display: "table-cell", float: "none"}}>
                     <div className="row">
                       <div className="col-md-7">
-                        <h4 style={{fontWeight: "bold"}}>783-347-3248</h4>
+                        <h4 style={{fontWeight: "bold"}}>{this.props.logonBy}</h4>
                       </div>
-                      <div className="col-md-5">
+                      {!this.props.isLoggedIn ? <div className="col-md-5">
                         <button onClick={this.handleChangeMobile} className="btn btn-large"
                           style={{width: '100%', background: 'black', color: 'white', fontWeight: 'bold', padding: '10px'}}>Change</button>
-                      </div>
+                      </div> : '' }
                     </div>
                   </div>
                 </div>
@@ -71,10 +125,19 @@ export class Step2Component extends React.Component {
               </div>
               <div className="row" style={{display: "table", width: '100%'}}>
                 <div style={{display: "table-row"}}>
-                  <div className="col-md-3" style={{display: "table-cell", float: "none", background:"#eeeded"}}>
+                  <div className="col-md-3" style={{display: "table-cell", float: "none", background:"#eeeded", paddingRight: '0px'}}>
                     <h4 style={{marginTop: "30px", fontWeight: "bold"}}>Ship To</h4>
+                    {this.props.isLoggedIn ? <div>
+                      <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
+                        <h4 style={{fontWeight: 'bold'}}>Saved Address</h4>
+                      </div>
+                      <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
+                        <h4 style={{fontWeight: 'bold'}}>New Address</h4>
+                      </div>
+                    </div> : ''}
                   </div>
                   <div className="col-md-9" style={{display: "table-cell", float: "none", padding: '20px'}}>
+                    {!this.props.isLoggedIn || this.state.new_add ? <div>
                     <div className="row">
                       <div className="col-md-6 form-group">
                         <label htmlFor="name">Full Name</label>
@@ -111,6 +174,7 @@ export class Step2Component extends React.Component {
                         <input type="text" name="state" className="form-control" />
                       </div>
                     </div>
+                    </div> : ''}
                     <div className="row">
                       <div className="col-md-12">
                         <input type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />

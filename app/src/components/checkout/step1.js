@@ -11,6 +11,7 @@ import Link from 'react-router-dom/Link';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
+import Input from '../Input/input'
 import {
   regexEmail,
   regexMobileNo,
@@ -25,8 +26,9 @@ export class Step1Component extends React.Component {
         super(props);
         this.state = {
           has_pass: false,
-          userId: '',
+          userId: props.logonBy,
           password: '',
+          logonBy: '',
           errorMessageUserId: null,
           errorMessagePassword: null,
           showLoginRegisterMain: false,
@@ -34,6 +36,14 @@ export class Step1Component extends React.Component {
           showRegister: false,
         }
     }
+
+    // componentDidMount() {
+    //   if(this.props.logonBy) {
+    //     this.setState({
+          
+    //     })
+    //   }
+    // }
 
     handleChange = e => {
       console.log(e.target.name, e.target.value, "name and vlaue")
@@ -50,10 +60,6 @@ export class Step1Component extends React.Component {
           has_pass: false
         })
       }
-    }
-
-    handleProceed = () => {
-      this.props.proceed();
     }
 
     handleValidation(obj, errorType) {
@@ -86,8 +92,7 @@ export class Step1Component extends React.Component {
         });
         isValidate = false;
       }
-  
-      if (!validateEmptyObject(obj.password) && this.state.has_pass && this.state.password) {
+      if (!validateEmptyObject(obj.password) && this.state.has_pass) {
         this.setState({
           errorMessagePassword: 'Enter a valid password ',
         });
@@ -111,9 +116,24 @@ export class Step1Component extends React.Component {
       if (isValidate === false) {
         return false;
       }
-      this.props.login(data);
+      const loginData = {
+        user_id: uId,
+        password: pass
+      }
+      if(this.state.has_pass) {
+        this.props.login(loginData);
+      } else {
+        this.props.proceedToSecond(uId);
+      }
     };
-
+    
+    CheckProceed = () => {
+      if(this.state.has_pass) {
+        this.handleFormSubmit();
+      } else {
+        this.handleProceed();
+      }
+    }
     welcomeBackCallback(fromForgot) {
       // Only to manage show and hide state
       if (fromForgot) {
@@ -188,10 +208,17 @@ export class Step1Component extends React.Component {
                       <div className="col-md-12">
                         <div className="form-group">
                           <label htmlFor="mobile">Mobile Number/Email Address</label>
-                          <input type="text" name="userId" id="userId" className="form-control"
-                            onChange={this.handleChange} />
+                          <input type="text" name="userId" id="userId" value={this.state.userId} className="form-control"
+                            onChange={e => this.handleChange(e)} />
                           {errorMessageUserId}
                         </div>
+                        {/* <Input
+                          title="Mobile Number/Email Address"
+                          name='userId'
+                          inputType="text"
+                          value={this.props.logonBy ? this.props.logonBy : null}
+                          onChange={this.handleChange}
+                         /> */}
                         {this.state.has_pass ?<div className='form-group'><label htmlFor="pass">Password</label> <input
                             type="text" name="password" id="password" onChange={this.handleChange}
                             className="form-control" style={{marginTop: "10px"}} />{errorMessagePassword}</div> : ''}

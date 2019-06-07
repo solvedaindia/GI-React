@@ -66,7 +66,7 @@ export let accessToken = getTheAccessToken();
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
 export const googleClientId =
-  '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -108,6 +108,12 @@ export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 /* PDP API */
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
 
+/* Address List API */
+export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+
+/* User data API */
+export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
+
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
@@ -117,9 +123,9 @@ export const catalog = 'GodrejInterioSAS';
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-  console.log('constantToke -----', tokenPro);
-  if (validateEmptyObject(tokenPro)) {
-    return (accessToken = tokenPro);
-  }
-  return (accessToken = getCookie(accessTokenCookie));
+    console.log('constantToke -----', tokenPro);
+    if (validateEmptyObject(tokenPro)) {
+        return (accessToken = tokenPro);
+    }
+    return (accessToken = getCookie(accessTokenCookie));
 }
