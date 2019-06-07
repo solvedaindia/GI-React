@@ -3,231 +3,93 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import apiManager from '../../utils/apiManager';
 import { getUpdatedMinicartCount } from '../../utils/initialManager';
-import {
-  addToCart,
-  findinventoryAPI,
-} from '../../../public/constants/constants';
-import {
-  updatetMinicart,
-  updatetWishListCount,
-  resetRemoveFromWishlistFlag,
-} from '../../actions/app/actions';
-import appCookie from '../../utils/cookie';
+import { addToCart } from '../../../public/constants/constants';
+import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 
 class addToCartComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      addToCartPopup: null,
-      loading: true,
-    };
-    this.quantity = 1;
-    this.quantityErrorMessage = false;
-    this.deliveryTime = '';
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			addToCartPopup: null,
+		};
+	}
 
-  componentWillReceiveProps() {
-    this.quantity = 1;
-    this.quantityErrorMessage = false;
-    this.deliveryTime = '';
-  }
+	moveToCartClicked = () => {
+		let quantity = '1';
+		if (!this.props.sticky) {
+			quantity = document.getElementById('quantity').value;
+		}
+		
+		const data = {
+			"orderItem": [
+				{
+					"sku_id": this.props.skuId,
+					"quantity": quantity
+				}
+			]
+		}
 
-  /* render delivery message */
-  renderdeliveryMessage(props) {
-    if (!props.pincodeServiceable) {
-      return (
-        <div className="pincodeNotServiceable">Pincode is not serviceable</div>
-      );
-    }
-    if (this.deliveryTime === '') {
-      this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
-      // {props.deliveryDateAndTime}
-    }
-    return <div className="soldbyDealers">{this.deliveryTime}</div>;
-  }
+		apiManager.post(addToCart, data).then(() => {
+			getUpdatedMinicartCount(this)
+			this.setState({
+				addToCartPopup: this.addToCartPopupItem()
+			});
+			
+		}).catch(error => {
+			console.log('AddToCart Error---', error);
+		});
+	}
 
-  /* find inventory of the product */
-  findInventory = () => {
-    console.log('this.propsthis.props=>>', this.props);
-    let pincode = '110043';
-    let quantity = 1;
-    if (document.getElementById('quantity')) {
-      quantity = document.getElementById('quantity').value;
-    }
-    if (document.getElementById('pincodeVal')) {
-      pincode = document.getElementById('pincodeVal').value;
-    }
+	addToCartPopupItem() {
+		setTimeout(() => {
+			this.setState({
+				addToCartPopup: null,
+			});
+		}, 2000);
+		return (
+			<div className="addedToWishlist clearfix">
+				<span className="wishlist-text">Product Added to Cart</span>
+			</div>
+		);
+	}
 
-    const data = {
-      params: {
-        partNumber: this.props.skuData.partNumber,
-        quantity,
-      },
-    };
+	productQuantity = (type) => {
+		let quantity = document.getElementById('quantity').value;
+		if (type === false && quantity > 1) {
+			document.getElementById('quantity').value = Number(quantity)-Number(1);
+		} else if (type === true) {
+			document.getElementById('quantity').value = Number(quantity)+Number(1);
+		}
+	}
 
-    apiManager
-      .get(findinventoryAPI + pincode, data)
-      .then(response => {
-        this.moveToCartClicked(response.data);
-      })
-      .catch(error => {
-        console.log('findInventory API Error =>', error);
-      });
-  };
 
-  /* move to cart */
-  moveToCartClicked = inventory => {
-    if (inventory.data.inventoryStatus === 'unavailable') {
-      this.quantityErrorMessage = true;
-      this.quantity = document.getElementById('quantity').value;
-      this.setState({
-        loading: false,
-      });
-    } else {
-      const isPDPAddToCart = appCookie.get('isPDPAddToCart');
-      let quantity = '1';
-      if (!this.props.sticky) {
-        quantity = document.getElementById('quantity').value;
-      }
-
-      const data = {
-        orderItem: [
-          {
-            sku_id: this.props.skuData.uniqueID,
-            quantity,
-          },
-        ],
-      };
-
-      apiManager
-        .post(addToCart, data)
-        .then(() => {
-          getUpdatedMinicartCount(this);
-          this.deliveryTime = inventory.data.deliveryDate;
-          this.setState({
-            addToCartPopup: this.addToCartPopupItem(),
-            loading: false,
-          });
-
-          if (isPDPAddToCart === 'false') {
-            appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
-            this.props.handleAddtocart();
-          }
-        })
-        .catch(error => {
-          console.log('AddToCart Error---', error);
-        });
-    }
-  };
-
-  /* add to cart pop */
-  addToCartPopupItem() {
-    setTimeout(() => {
-      this.setState({
-        addToCartPopup: null,
-      });
-    }, 2000);
-    return (
-      <div className="addedToWishlist clearfix">
-        <span className="wishlist-text">Product Added to Cart</span>
-      </div>
-    );
-  }
-
-  /* product quantity increase and decrease */
-  productQuantity = type => {
-    const quantity = document.getElementById('quantity').value;
-    if (type === false && quantity > 1) {
-      document.getElementById('quantity').value = Number(quantity) - Number(1);
-    } else if (type === true) {
-      document.getElementById('quantity').value = Number(quantity) + Number(1);
-    }
-  };
-
-  notifyMe() {
-    alert('Notify me api call');
-  }
-
-  /* render buttons */
-  renderButton(props, quantity) {
-    if(!props.pincodeServiceable) {
-      return <Button className="btn addcartbtn" onClick={this.moveToCartClicked} disabled>Add to Cart</Button>
-    } if (props.inventoryStatus === 'unavailable!' && quantity === 1) {
-      return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
-    } 
-    return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
-    );
-  }
-
-  render() {
-    return (
-      <>
-        {!this.props.sticky && (
-          <>
-            <div className="pincode">
-              <div className="PincodeTextdata clearfix">
-                <input
-                  className="pincodeVal"
-                  id="pincodeVal"
-                  type="text"
-                  readOnly
-                  value="400079"
-                />
-                <a className="pincodeEdit" role="button">
-                  Edit
-                </a>
-              </div>
-              {this.renderdeliveryMessage(this.props.pinCodeData)}
-            </div>
-            <div className="clearfix" />
-            <div className="ExperienceProduct">
-              Experience this product at{' '}
-              <a className="bold" role="button">
-                Vikroli Store (1.5 K.M away)
-              </a>
-            </div>
-          </>
-        )}
-        {this.state.addToCartPopup}
-        <div className="addCart">
-          {!this.props.sticky && (
-            <>
-              <Button
-                className="btn"
-                onClick={() => this.productQuantity(false)}
-              >
-                -
-              </Button>
-              <input
-                className="btn"
-                id="quantity"
-                type="text"
-                readOnly
-                value={this.quantity}
-              />
-              <Button
-                className="btn"
-                onClick={() => this.productQuantity(true)}
-              >
-                +
-              </Button>
-            </>
-          )}
-          {this.renderButton(this.props.pinCodeData, this.quantity)}
-          {this.quantityErrorMessage && <div>Quantity is not available</div>}
-        </div>
-      </>
-    );
-  }
+	render() {
+		return(
+			<>
+				{this.state.addToCartPopup}
+				<div className="addCart">
+					{ !this.props.sticky && (
+					<>
+						<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
+						<input className='btn' id='quantity' type='text' readOnly value='1' />
+						<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
+					</>
+					)}
+					<Button className="btn addcartbtn" onClick={this.moveToCartClicked}>Add to Cart</Button>
+				</div>
+			</>
+		);
+	}
 }
 
 function mapStateToProps(state) {
-  return {
-    // default: state.default
-  };
+    return {
+      // default: state.default
+    };
 }
 
 export default connect(
-  mapStateToProps,
-  { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
-)(addToCartComponent);
+    mapStateToProps,
+    { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
+  )(addToCartComponent);
+
