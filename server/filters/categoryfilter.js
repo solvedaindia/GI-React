@@ -37,12 +37,28 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail =
-    categoryDetails.thumbnail ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catthumbnail.png';
-  catData.fullImage =
-    categoryDetails.fullImage ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catfullimage.png';
+  // catData.thumbnail =
+  //   categoryDetails.thumbnail ||
+  //   'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
+  //
+
+  if (categoryDetails.thumbnail) {
+    catData.thumbnail = `${categoryDetails.thumbnail.substring(
+      categoryDetails.thumbnail.indexOf('/images'),
+      categoryDetails.thumbnail.length,
+    )}`;
+  } else {
+    catData.thumbnail =
+      '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
+  }
+  if (categoryDetails.fullImage) {
+    catData.fullImage = `${categoryDetails.fullImage.substring(
+      categoryDetails.fullImage.indexOf('/images'),
+      categoryDetails.fullImage.length,
+    )}`;
+  } else {
+    catData.fullImage = '/images/godrejInterio/catfullimage.pngss';
+  }
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';

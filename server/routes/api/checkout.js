@@ -2,8 +2,21 @@ const express = require('express');
 const router = express.Router();
 const checkoutHandler = require('../../handlers/checkouthandler');
 
-router.post('/saveGSTIN', (req, res, next) => {
+router.post('/savegstin', (req, res, next) => {
   checkoutHandler.storeGSTINValue(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/userinfo', (req, res, next) => {
+  checkoutHandler.userInfo(req, (err, result) => {
     if (err) {
       next(err);
       return;

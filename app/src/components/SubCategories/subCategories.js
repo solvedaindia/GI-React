@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, NavLink, Link } from 'react-router-dom';
-
+import {
+	imagePrefix
+} from '../../../public/constants/constants';
 class SubCategoriesArray extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +36,7 @@ class SubCategoriesArray extends React.Component {
         return (
             <div className='catNav' ref={this.setRef} >
                 {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
-                    <img src={subCatImg} className='subCatImg' alt='Sub Cat Img' />
+                    <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
                 </div>}
                 
                 <ul className={catClass}>

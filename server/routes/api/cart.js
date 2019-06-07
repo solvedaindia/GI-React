@@ -191,7 +191,7 @@ router.post('/removepromotion/:promoCode', (req, res, next) => {
  * @throws contexterror,badreqerror if storeid or access_token is invalid or null
  */
 router.get('/promocode', (req, res, next) => {
-  checkoutHandler.getPromoCodes(req, (err, result) => {
+  cartHandler.getPromoCodes(req, (err, result) => {
     if (err) {
       next(err);
       return;

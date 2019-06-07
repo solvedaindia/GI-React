@@ -84,6 +84,18 @@ const errorlist = {
     error_key: 'invalid_promocode',
     error_message: 'Promo Code is Invalid',
   },
+  user_does_not_exists: {
+    status_code: 400,
+    error_key: 'user_does_not_exist',
+    error_message:
+      'This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account',
+  },
+  mobile_exists: {
+    status_code: 400,
+    error_key: 'mobile_exists',
+    error_message:
+      'This mobile number is already associated with another Godrej Interio account. Please use a different mobile number.',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -135,6 +147,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (errBody.errors[0].errorKey === 'ERROR_UPDATING_MOBILE') {
+        return errorlist.mobile_exists;
+      }
       if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_INVALID') {
         return errorlist.invalid_promocode;
       }
@@ -162,6 +177,7 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (
         errBody.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        errBody.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST' ||
         errBody.errors[0].errorKey === 'ERROR_USER_EXISTS'
       ) {
         return errorlist.user_exists;
@@ -202,6 +218,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'invalid_pincode',
           error_message: 'Not a valid pincode',
         };
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
+        return errorlist.user_does_not_exists;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||

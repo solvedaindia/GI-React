@@ -2,10 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import {
-  bestSellerAPI,
-  newMachineUrl,
-  store,
-  catalog,
+	bestSellerAPI,
+	imagePrefix
+  
 } from '../../../public/constants/constants';
 
 import '../../../public/styles/bestSeller/bestSeller.scss';
@@ -61,7 +60,7 @@ class BestSeller extends React.Component {
 							<a href={sellerItemData.onClickUrl}>
 								<img 
 									className='subCatImg'
-									src={`${newMachineUrl}/${store}/${catalog}${sellerItemData.thumbnail}`}
+									src={`${imagePrefix}${sellerItemData.thumbnail}`}
 									alt={sellerItemData.uniqueID}
 								/>
 							</a>

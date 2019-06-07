@@ -85,15 +85,26 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
           access_token: encryptedAccessToken,
         };
         const userDetailHeader = headers;
-        userDetailHeader.profile = 'summary';
+        // userDetailHeader.profile = 'summary';
         userDetailHeader.WCToken = response.body.WCToken;
         userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
         userHandler.getUserDetails(userDetailHeader, (err, result) => {
-          if (err) {
-            loginResponseBody.userDetails = {};
-          } else {
-            loginResponseBody.userDetails = result;
-            delete loginResponseBody.userDetails.logonID;
+          loginResponseBody.userDetails = {};
+          if (!err) {
+            let firstname = '';
+            let lastname = '';
+            if (result.name.indexOf(' ') > 0) {
+              firstname = result.name.substr(0, result.name.indexOf(' '));
+              lastname = result.name
+                .substring(result.name.indexOf(' ') + 1)
+                .trim();
+            } else {
+              firstname = params.name;
+            }
+            loginResponseBody.userDetails.firstName = firstname;
+            loginResponseBody.userDetails.lastName = lastname;
+            loginResponseBody.userDetails.pincode = result.pincode;
+            // delete loginResponseBody.userDetails.logonID;
           }
           callback(null, loginResponseBody);
         });
