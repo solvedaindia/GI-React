@@ -1,7 +1,54 @@
 @import './variable';
+.btnCompare{
+    position: fixed;
+    right: 23px;
+    bottom: 150px;
+    background: #fff;
+    border: 1px solid #000;
+    padding: 2px;
+}
+// .compareProductwrap.open{
+//     transform: translateY(0%);
+//     transition: 5s ease-in-out;
+// }
+// .compareProductwrap.openclose{
+//     transform: translateY(20%);
+//     transition: 5s ease-in-out;
+// }
+.animationDIV{
+    transition: all 2s ease-in-out;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    transform: translateY(0%);
+    animation: createDiv 2s ease-in-out alternate;
+    -moz-animation: createDiv 2s ease-in-out alternate;
+    -webkit-animation: createDiv 2s ease-in-out alternate;
+    position: fixed;
+    bottom: -1000px;
+    width: 100%;
+    
+
+}
+.animationDIV.open{
+    bottom: -20px;
+}
+    @keyframes createDiv {
+       0%{
+           transform: translateY(100%);
+           opacity: 0;
+        }
+        100%{
+           transform: translateY(0%);
+           opacity: 1;
+           bottom: 0;
+        }
+        
+    }
+
+ 
 .compareProductwrap{
     background:$colorwhite;
-    position: fixed;
+    // position: fixed;
     bottom: 0px;
     margin-right: auto;
     margin-left: auto;
@@ -9,6 +56,14 @@
     box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
     padding: 16px 0;
     z-index: 99;
+    transform: translateY(0%);
+    
+     transition: all 4s ease-in-out;
+     -webkit-transition: all 4s ease-in-out;
+     -moz-transition: all 4s ease-in-out;
+    
+
+
 
     .compareProducts{
         padding:0;

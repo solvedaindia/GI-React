@@ -23,7 +23,8 @@ export class CompContainer extends React.Component {
     this.clearAll = this.clearAll.bind(this);
     this.handleGoToCompare = this.handleGoToCompare.bind(this);
     this.state = {
-      showCompare: true
+      showCompare: true,
+      modalClass: 'open1'
     };
   }
 
@@ -59,16 +60,25 @@ export class CompContainer extends React.Component {
   showHideCompare = () => {
     if(this.state.showCompare == true) {
       this.setState({
-        showCompare: false
+        showCompare: false,
+        modalClass: 'open',
       })
     } else {
       this.setState({
-        showCompare: true
+        showCompare: true,
+        modalClass: '',
       })
     }
   }
 
   handleGoToCompare(e) { 
+    // var element = document.getElementById("change");
+    // element.classList.toggle("open");
+    // this.setState({
+    //   showCompare: false,
+    //   modalClass: 'open',
+    // })
+
       if(this.props.compData.length < 2) {
         e.preventDefault();
         alert('Please add at least two products to compare');
@@ -79,9 +89,14 @@ export class CompContainer extends React.Component {
   }
 
   render() {
+    // alert(this.state.modalClass)
     return (
-    <div>
-      {this.props.compData.length > 0 && this.state.showCompare ? <div className="compareProductwrap">
+      <>
+      <button className='btnCompare' onClick={this.showHideCompare}> hide </button>
+      <button onClick={this.showHideCompare} className="btnCompare"> show</button>
+    <div  className={`animationDIV ${this.state.modalClass}`} id='change'>
+      {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
+      <div  className='compareProductwrap'>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -95,18 +110,22 @@ export class CompContainer extends React.Component {
                     <button className="btn-clearall" onClick={this.clearAll}>
                       Clear All
                     </button>
-                    <button onClick={this.showHideCompare}>
+                    {/* <button className='btnCompare' onClick={this.showHideCompare}>
                       hide
-                    </button>
+                    </button> */}
                   </li> : ""}
               </ul>
             </div>
           </div>
         </div>
-      </div> : <button onClick={this.showHideCompare} className="compareProductwrap">
-                      show
-                    </button>}
+      </div> :
+      {/* // : <button onClick={this.showHideCompare} className="btnCompare">
+      //                 show
+      //               </button> */}
+      {/* 'uyu' */}
+    {/* } */}
     </div>
+    </>
     );
   }
 }
