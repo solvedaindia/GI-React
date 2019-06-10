@@ -14,7 +14,7 @@ import SocialMedia from './socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import AddToCart from './addToCart';
-
+import axios from 'axios';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = (
@@ -30,12 +30,14 @@ class PdpComponent extends React.Component {
 			skuData: {},
 			isLoading: true,
 			selectedSku: {},
-			dataVal: ''
+			dataVal: '',
+			image3D: null
 		};
 	}
 
 	componentDidMount() {
 		this.getResolveSkuData();
+		this.check3DApi('56121403SD00013', 1);
 	}
 
 	/* get sku resolved data */
@@ -53,7 +55,28 @@ class PdpComponent extends React.Component {
 			}
 		});
 	}
-	
+	/* 3D Animation POC */
+	check3DApi(item_id, flag) { 
+    	//insert user details here  
+		var username = "3d@godrejinterio.com";
+		var password = "godrej@123";
+		var API_KEY = "AH44GH67";
+		var item_id = '56121403SD00013';
+		axios({
+			type: "GET",
+			url: "http://disha3d.com/API/API.php",
+			params: {'user': username, 'password': password, 'API_KEY': API_KEY, 'prodid': item_id}
+		})
+		.then(response => {
+			console.log('@@@@Its a 3D Test API React@@@@', response.data);
+			this.setState({
+				image3D: response.data,
+			});
+		})
+		.catch((err) => {
+			console.log('@@@ Jquery dependent 3D Error @@@', err);
+		})
+	} 
 	/* get actual resolve data  */
 	async getActualResolvedData(data, resolvedSkuData) {
 
@@ -106,7 +129,7 @@ class PdpComponent extends React.Component {
 	}
 
 	render() {
-		const { isLoading } = this.state;
+		const { isLoading, image3D } = this.state;
 		const wishlistArr = getOnlyWishlistUniqueIds();
 
 		return (
@@ -176,6 +199,9 @@ class PdpComponent extends React.Component {
 					<Row>           
 						<ProductFeatures productFeature={this.props.data.productFeatures} />            
 					</Row>
+					<div className='3D'>
+						<iframe id="3diframe" src={image3D} width="100%" height="580" frameBorder="0" allowFullScreen/>
+					</div>
 					<Row>
 						<Col md={12} sm={12} xs={12} className="purchase-guide-box">
 							<PurchaseGuide purchaseGuide={this.props.data.purchaseGuide} />
