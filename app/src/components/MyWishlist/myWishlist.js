@@ -1,4 +1,4 @@
-    import React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import EmptyWishlist from './emptyWishlist';
 import '../../../public/styles/myWishlist/myWishlist.scss';
@@ -14,6 +14,7 @@ import apiManager from '../../utils/apiManager';
 import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
 import ShareLogo from '../SVGs/shareIcon';
+import SocialMedia from '../../utils/socialMedia';
 
 class MyWishlist extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class MyWishlist extends React.Component {
       isLoading: false,
       wishlistData: [],
       wishlistPopup: null,
+      showSocialShare: false,
     };
   }
 
@@ -35,7 +37,7 @@ class MyWishlist extends React.Component {
       this.fetchMyWishlistData();
     }
     if (nextProps.removeWishlistFlag) {
-      console.log('Show The Popup Rmove from Wishlist',nextProps.removeWishlistFlag,this.props.removeWishlistFlag );
+      console.log('Show The Popup Rmove from Wishlist', nextProps.removeWishlistFlag, this.props.removeWishlistFlag);
       this.setState({
         wishlistPopup: this.wishlistPopupItem(),
       })
@@ -79,12 +81,24 @@ class MyWishlist extends React.Component {
 
   }
 
+  onShareClick() {
+    this.setState({
+      showSocialShare: !this.state.showSocialShare
+    })
+  }
+
   render() {
 
     const wishlistItem = <>
       <div className='container'>
-        <h3 className="heading">My Wishlist</h3>
-        <ShareLogo/>
+        <div className='shaire-headerwrp'>
+          <h3 className="heading">My Wishlist</h3>
+          <button className='shire-btn' onClick={this.onShareClick.bind(this)}><ShareLogo />
+          {this.state.showSocialShare ? <SocialMedia /> : null}
+          </button>
+          
+        </div>
+        
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}
@@ -104,11 +118,11 @@ class MyWishlist extends React.Component {
 
     return (
       <div className="myWishlist">
-      {this.state.wishlistPopup}
+        {this.state.wishlistPopup}
         {!this.state.isLoading ? loadingIndicator : <div className='myWishlist'>
-          {this.state.wishlistData.length != 0 ? wishlistItem : <><EmptyWishlist /><BestSeller/></>}
+          {this.state.wishlistData.length != 0 ? wishlistItem : <><EmptyWishlist /><BestSeller /></>}
         </div>}
-        
+
       </div>
     );
   }
@@ -126,5 +140,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  {resetRemoveFromWishlistFlag},)
-(MyWishlist);
+  { resetRemoveFromWishlistFlag })
+  (MyWishlist);

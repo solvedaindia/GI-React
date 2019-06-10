@@ -8,6 +8,61 @@
     }
   }
 
+  .shaire-headerwrp{
+    position: relative;
+    
+    .heading{
+      padding-right:28px;
+    }
+    .heading,
+    .shire-btn{
+      float: left;
+    }
+    .shire-btn{
+      background: transparent;
+      border:none;
+      position: relative;
+      .icon{
+        margin:0;
+      }
+      .social-icon-text,
+        .icon{
+         display: inline;
+         
+        }
+      &:focus{
+        outline: none;
+      }
+    }
+
+    .social-icon-share{
+      position: absolute;
+      top: 40px;
+      z-index: 9;
+      right:0;
+      .socialwrapper{
+        .list{
+          display: inline;
+          .icon{
+            svg{
+              margin:0;
+            }
+          }
+          .icon{
+            display: inline-block;
+          }
+          .social-icon-text{
+            display: inline-block;
+            
+          }
+          
+        }
+      }
+    }
+  }
+
+  
+
   .heading {
     font-family: $font-bold;
     font-size: 30px;
@@ -63,3 +118,5 @@
     }
   }
 }
+
+

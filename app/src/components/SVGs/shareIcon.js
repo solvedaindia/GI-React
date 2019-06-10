@@ -3,7 +3,7 @@ import React from 'react';
 const ShareIcon = () => {
     return (
       
-      <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns>
+      <svg className='icon' width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns>
           
           <title>014D89F6-6F85-4D3A-9226-DDEE059BDE93</title>
           <desc>Created with sketchtool.</desc>
