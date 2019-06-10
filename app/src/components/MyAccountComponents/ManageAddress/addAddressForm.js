@@ -266,42 +266,42 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType={'number'} title={'Phone Number'} name={'name'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
+              <Input inputType={'number'} title={'Phone Number'} name={'number'} id={'phoneNumber'} placeholder={'Enter Number'} value={this.state.inputText_number} handleChange={this.handleInput} />
               {this.state.error_number ? <div className='error-msg'>{this.state.errorMessage_number}</div> : null}
             </div>
           </div>
         
         <div className='col-md-6'>
           <div className='form-div clearfix div-error'>
-            <Input inputType={'email'} title={'Email ID (Optional)'} name={'name'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
+            <Input inputType={'email'} title={'Email ID (Optional)'} name={'email'} id={'emailId'} placeholder={'Enter EmailId'} value={this.state.inputText_email} handleChange={this.handleInput} />
             {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
           </div>
         </div>
 
         <div className='col-md-6'>
           <div className='form-div clearfix div-error'>
-            <Input inputType={'number'} title={'Pincode'} name={'name'} id={'pincode'} placeholder={'Enter Pincode'} value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
+            <Input inputType={'number'} title={'Pincode'} name={'pincode'} id={'pincode'} placeholder={'Enter Pincode'} value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
             {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div> : null}
           </div>
         </div>
 
         <div className='col-md-12'>
           <div className='form-div clearfix div-error'>
-            <Input inputType={'text'} title={'Address'} name={'name'} id={'address'} placeholder={'Enter Address'} value={this.state.inputText_address} handleChange={this.handleInput} />
+            <Input inputType={'text'} title={'Address'} name={'address'} id={'address'} placeholder={'Enter Address'} value={this.state.inputText_address} handleChange={this.handleInput} />
             {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
           </div>
        </div>
 
        <div className='col-md-6'>
         <div className='form-div clearfix div-error'>
-          <Input inputType={'text'} title={'City/District'} name={'name'} id={'cityDistrict'} placeholder={'Enter City/District'} value={this.state.inputText_city} handleChange={this.handleInput} />
+          <Input inputType={'text'} title={'City/District'} name={'city'} id={'cityDistrict'} placeholder={'Enter City/District'} value={this.state.inputText_city} handleChange={this.handleInput} />
           {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
         </div>
       </div>
 
       <div className='col-md-6'>
         <div className='form-div clearfix div-error'>
-          <Input inputType={'text'} title={'State'} name={'name'} id={'state'} placeholder={'Enter State'} value={this.state.inputText_state} handleChange={this.handleInput} />
+          <Input inputType={'text'} title={'State'} name={'state'} id={'state'} placeholder={'Enter State'} value={this.state.inputText_state} handleChange={this.handleInput} />
           {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
         </div>
         </div>

@@ -18,6 +18,7 @@ class MyOrder extends React.Component {
     return (
       <div className='myOrder'>
         <OrderItem/>
+        <OrderItem/>
       </div>
     );
   }

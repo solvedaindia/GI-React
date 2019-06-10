@@ -118,7 +118,8 @@
       }
     }
     .modal-dialog{    
-     width: 35%;  
+      width: 50%;
+      max-width: 592px;
     
       .modal-content{
         box-shadow: none;

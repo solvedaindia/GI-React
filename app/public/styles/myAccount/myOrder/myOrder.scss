@@ -1,32 +1,283 @@
+@import "../../variable";
+
 .myOrder {
   .tabBar {
     width: 847px;
-    height: 70px;
+    padding: 20px;
     background-color: #036cc5;
+    position: relative;
+
+    .heading {
+      margin: 0;
+      float: left;
+      display: block;
+      .list {
+        display: block;
+        float: left;
+        color: #fff;
+        padding: 0 36px 0 0;
+        line-height: 20px;
+        .heading-top,
+        .heading-sub {
+          display: block;
+        }
+        .heading-top {
+          font-size: 12px;
+          font-family: $font-regular;
+        }
+        .heading-sub {
+          font-size: 14px;
+          font-family: $font-bold;
+        }
+      }
+    }
+    .btn-collapse {
+      border: none;
+      background: transparent;
+      color: #fff;
+      position: absolute;
+      right: 20px;
+      top: 26px;
+      &:focus {
+        outline: none;
+      }
+    }
   }
 
   .itemBox {
-    width: 847px;
-    //height: 882px;
-    border: solid 1px #e4eaee;
-  }
+    border: solid 1px $greyborder;
+    padding: 26px 30px;
+    margin: 0 0 16px 0;
+    .orderProduct {
+      border-bottom: solid 1px $greyborder;
+      padding: 0px 0 29px 0;
+      .orderbtn {
+        width: 25%;
+        float: right;
+        .btn-cancel {
+          margin: 0 0 16px 0;
+        }
+        .btn-borderwhite {
+          width: 100%;
+          font-size: 14px;
+          font-family: $font-bold;
+          &:hover {
+            background: $black;
+            color: $colorwhite;
+          }
+        }
+      }
+      .orderimgbox {
+        width: 50%;
+        float: left;
+        .imgBox {
+          float: left;
+          display: block;
+          width: 35%;
+          border: 1px solid #efeeed;
+          .imgfullwidth {
+            width: 100%;
+          }
+        }
 
-  .orderProduct {
-    background-color: aquamarine;
+        .product-text {
+          float: left;
+          display: block;
+          width: 65%;
+          padding: 0 0 0 12px;
+
+          .heading {
+            color: $black;
+            font-family: $font-bold;
+            font-size: 16px;
+            margin: 0;
+          }
+          .description {
+            margin: 0;
+            font-size: 10px;
+            color: $greyLight;
+          }
+          .price {
+            margin: 0;
+            .discount-price {
+              font-size: 20px;
+              color: $cerulean;
+              font-family: $font-bold;
+            }
+            .priceno-discount {
+              font-size: 16px;
+              color: $greylightColor;
+              font-family: $font-light;
+              text-decoration: line-through;
+              text-decoration-color: $reddishpink;
+              padding: 0 0 0 10px;
+            }
+          }
+
+          .quantity-shipping {
+            color: $battleshipGrey;
+            font-size: 10px;
+            margin: 0;
+            .quantity {
+              padding: 0 16px 0 0;
+              display: block;
+              width: 25%;
+              float: left;
+              .textval {
+                color: $black;
+                font-size: 18px;
+              }
+            }
+            .shipping-charge {
+              float: left;
+              display: block;
+              .textval {
+                color: $black;
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   .orderSummery {
-    background-color: blueviolet;
-    min-height: 50px;
+    // background-color: blueviolet;
+    // min-height: 50px;
   }
 
   .heightActive {
-    min-height: 250px;
-    -webkit-transition: min-height 0.4s;
+    height: 150px;
+    overflow: hidden;
+    -webkit-transition: height 0.4s;
   }
 
   .heightInActive {
-    min-height: 0px;
-    -webkit-transition: min-height 0.4s;
+    height: 0px;
+    overflow: hidden;
+    -webkit-transition: height 0.4s;
+  }
+
+  .summerydata {
+    .orderList {
+      width: 33.3%;
+      display: block;
+      float: left;
+    }
+  }
+  .paymentmethod {
+    padding: 0 20px 0 10px;
+  }
+}
+
+//--------- Order Status ---------//
+.orderStauts {
+  ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+  }
+
+  ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+  }
+
+  // ol.progtrckr[data-progtrckr-steps="2"] li {
+  //   width: 49%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="3"] li {
+  //   width: 33%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="4"] li {
+  //   width: 24%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="5"] li {
+  //   width: 10%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="6"] li {
+  //   width: 16%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="7"] li {
+  //   width: 14%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="8"] li {
+  //   width: 12%;
+  // }
+  // ol.progtrckr[data-progtrckr-steps="9"] li {
+  //   width: 11%;
+  // }
+
+  ol.progtrckr li.progtrckr-done {
+    color: black;
+    position: relative;
+    min-width: 100px;;
+    // border-bottom: 4px solid yellowgreen;
+  }
+  ol.progtrckr li.progtrckr-todo {
+    color:#fff;
+    position: relative;
+    // border-bottom: 4px solid silver;
+
+    &:before{
+      
+        content: "\2713";
+        background-color: #ccc;
+        // color: white;
+        // background-color: #ccc;
+        height: 30px;
+        width: 30px;
+        line-height: 2.2em;
+        border: none;
+        border-radius: 2.2em;
+        position: absolute;
+        bottom: 37px;
+      
+    }
+
+    .statusText{
+      // display: block;
+      // font-size: 10px;
+      border-bottom: 4px solid #ccc;
+    }
+  }
+
+  ol.progtrckr li:after {
+    content: "\00a0\00a0";
+  }
+  ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+  }
+  ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 30px;
+    width: 30px;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+    position: absolute;
+    bottom: 37px;
+  }
+  ol.progtrckr li.progtrckr-todo:before {
+    // content: "\039F";
+    // color: silver;
+    // background-color: white;
+    // font-size: 2.2em;
+    // bottom: -1.2em;
+  }
+
+  .statusText{
+    display: block;
+    font-size: 10px;
+    border-bottom: 4px solid yellowgreen;
   }
 }
