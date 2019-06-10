@@ -22,6 +22,10 @@ class OrderItem extends React.Component {
     })
   }
 
+  proceedToTrackOrder() {
+    this.props.renderSelectionPro();
+  }
+
   render() {
     return (
       <>
@@ -32,7 +36,7 @@ class OrderItem extends React.Component {
             <li className='list'><span className='heading-top'>Status</span> <span className='heading-sub'>Partially Shipped</span></li>
             <li className='list'><span className='heading-top'>Total</span> <span className='heading-sub'>₹60,000</span></li>
           </ul>
-          <button className='btn-collapse' onClick={this.collapseExpendClicked.bind(this)}>Order Details {this.state.expendCollapseText}</button>
+          <button className='btn-collapse' onClick={this.collapseExpendClicked.bind(this)}>Order Details{this.state.expendCollapseText}</button>
         </div>
         <div className='itemBox'>
           {/* {this.state.isExpend ? <div className={`orderSummery ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
@@ -41,8 +45,8 @@ class OrderItem extends React.Component {
           <div className={`orderSummery  clearfix ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
             <OrderSummery />
           </div>
-          <OrderProduct />
-         
+          <OrderProduct proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}/>
+
         </div>
       </>
     );

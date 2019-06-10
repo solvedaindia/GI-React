@@ -76,13 +76,13 @@ class UserAccInfo extends React.Component {
       headers: { profile: 'summary' },
     })
       .then(response => {
-        console.log('userDetail --- ', response.data.data.firstName);
+        console.log('userDetail --- ', response.data.data.name);
         this.setState({
-          userName: response.data.data.firstName,
+          userName: response.data.data.name,
           logonId: response.data.data.logonID
         })
         this.showLoginStatus();
-        this.props.updateUserProfile(response.data.data.firstName)
+        this.props.updateUserProfile(response.data.data.name)
 
       })
       .catch(error => {

@@ -41,6 +41,7 @@ export class MyAccountContainer extends React.Component {
 
 
   render() {
+    
     console.log('In My Account ---- ', this.props.location);
     const redirectedFrom = this.props.location.state.from;
 
@@ -66,7 +67,7 @@ export class MyAccountContainer extends React.Component {
               <div className="tab-content">
                 <div className={`tab-pane ${redirectedFrom === 'myprofile' ? 'active' : ''}`} id="profile-v"> <MyProfile /></div>
                 <div className={`tab-pane ${redirectedFrom === 'password' ? 'active' : ''}`} id="changePassword-v"><ChangePassword /></div>
-                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v"><MyOrder/></div>
+                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v"><MyOrder orderRendeStatusPro={false}/></div>
                 <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v"><ManageAddress /></div>
                 {/* <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
               <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>

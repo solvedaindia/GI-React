@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import {
   changePasswordAPI
 } from '../../../../public/constants/constants';
+
 
 class ProductOrder extends React.Component {
   constructor(props) {
@@ -10,6 +12,10 @@ class ProductOrder extends React.Component {
     this.state = {
 
     };
+  }
+
+  onTrackOrderClick() {
+
   }
 
   render() {
@@ -36,7 +42,7 @@ class ProductOrder extends React.Component {
 
           <div className='orderbtn'>
             <button className='btn-borderwhite btn-cancel'>Cancel Order</button>
-            <button className='btn-borderwhite'>Track My Order</button>
+            <button className='btn-borderwhite' onClick={this.props.proceedToTrackOrderPro}>Track My Order</button>
           </div>
 
           <div className='orderStauts'>

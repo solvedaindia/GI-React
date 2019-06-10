@@ -1,0 +1,15 @@
+@import "../variable";
+
+.trackMyOrder {
+
+  .backBtn {
+    border: none;
+    background: transparent;
+  }
+
+  .bottomDivider {
+    border-bottom: solid 1px $greyborder;
+    padding: 0px 0 11px 0;
+  }
+  
+}

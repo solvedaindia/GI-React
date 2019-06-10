@@ -40,6 +40,7 @@ import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import MyAccount from '../../containers/MyAccountContainer/index';
+import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -152,6 +153,7 @@ export default class App extends React.Component {
           <Route path="/wishlist" component={MyWishlist} />
           <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
+          <Route path="/guestTrackOrder" component={GuestTrackOrder} />
         </Switch>
         <FooterContainer />
       </div>
