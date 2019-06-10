@@ -7,10 +7,6 @@
     .title {
         margin: $base*8 0 $base*6.25 0;
     }
-    .mapContainer {
-        width: 50%;
-        height: 500px;
-    }
     .pc-field {
         width: 44%;
         padding: 8px;
@@ -40,4 +36,13 @@
         }
 
     }
+}
+.storeList {
+    width: 30%;
+    background-color: $greybg; 
+}
+
+.mapContainer {
+    width: 50%;
+    height: 500px;
 }

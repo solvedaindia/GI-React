@@ -7,65 +7,65 @@ import {
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
 import axios from 'axios';
 
-// function load3d(item_id,flag)
-// { 
-// 	//insert user details here	
-// var username = "3d@godrejinterio.com";
-// var password = "godrej@123";
-// var API_KEY = "AH44GH67";
-// var item_id = '56121403SD00013';
-// $.ajax({
-// 	type: "GET",
-// 	url: "http://disha3d.com/API/API.php",
-// 	data: {'user': username,'password': password,'API_KEY': API_KEY,'prodid': item_id,},
-// 	success :  function(resp)
-// 		{	
-// 			 //Handling custom errors
-// 			if(resp == 0)
-// 			{
-// 				//Model does not exists								
-// 			}
-// 			else if
-// 			(resp == 2)
-// 			{
-// 				//Username and password incorrect
-// 			}
-// 			else if(resp == 3)
-// 			{
-// 				//API_KEY incorrect
-// 			}
-// 			else if(resp == '00')
-// 			{
-// 				// Request does not exist
-// 			}
-// 			//MODEL EXISTS!
-// 			else{
+function load3d(item_id,flag)
+{ 
+	//insert user details here	
+var username = "3d@godrejinterio.com";
+var password = "godrej@123";
+var API_KEY = "AH44GH67";
+var item_id = '56121403SD00013';
+$.ajax({
+	type: "GET",
+	url: "http://disha3d.com/API/API.php",
+	data: {'user': username,'password': password,'API_KEY': API_KEY,'prodid': item_id,},
+	success :  function(resp)
+		{	
+			 //Handling custom errors
+			if(resp == 0)
+			{
+				//Model does not exists								
+			}
+			else if
+			(resp == 2)
+			{
+				//Username and password incorrect
+			}
+			else if(resp == 3)
+			{
+				//API_KEY incorrect
+			}
+			else if(resp == '00')
+			{
+				// Request does not exist
+			}
+			//MODEL EXISTS!
+			else{
 					
-// 			//REFER TO NOTE 1 OF INTEGRATION DOCUMENT
-// 				if(flag==1)
-// 				{
-// 					//GENERATE BUTTONS
-// 					$(/* --Selector for button division-- */).html('<img src="--Button Image Source--"   onclick="load3d('+item_id+',2)" > ');
-// 				}
-// 				else if(flag==2)
-// 				{
-// 					//Display 3D Model
-// 					$(/* --Selector for <IFRAME>-- */).html('<iframe id="3diframe" src="'+resp+'" width="600" height="480" frameBorder="0" allowfullscreen/>');										
-// 			 	}
+			//REFER TO NOTE 1 OF INTEGRATION DOCUMENT
+				if(flag==1)
+				{
+					//GENERATE BUTTONS
+					$(/* --Selector for button division-- */).html('<img src="--Button Image Source--"   onclick="load3d('+item_id+',2)" > ');
+				}
+				else if(flag==2)
+				{
+					//Display 3D Model
+					$(/* --Selector for <IFRAME>-- */).html('<iframe id="3diframe" src="'+resp+'" width="600" height="480" frameBorder="0" allowfullscreen/>');										
+			 	}
 									
-// 				else
-// 				{
-// 					alert('not defined');
-// 				}
-// 			}
-// 		console.log('@@@ Jquery dependent 3D response @@@',resp);
-// 	}
-// });
-// }
+				else
+				{
+					alert('not defined');
+				}
+			}
+		console.log('@@@ Jquery dependent 3D response @@@',resp);
+	}
+});
+}
 
-// $(document).ready(function(){
-// 	load3d('56121403SD00013',1);
-// });
+$(document).ready(function(){
+	load3d('56121403SD00013',1);
+});
  
 
 class PdpContainer extends React.Component {
@@ -84,7 +84,7 @@ class PdpContainer extends React.Component {
 	componentDidMount() {
 		this.callPdpApi();
 		this.callPdpEspotApi();
-		this.check3DApi();
+		this.check3DApi('56121403SD00013', 1);
   	}
 
 	callPdpApi() {
@@ -113,30 +113,29 @@ class PdpContainer extends React.Component {
 			console.log('PDP Espot API Error =>', error);
 		});
 	}
-	check3DApi = () => {
-		;(async () => {
-			await axios({
-			  url: 'http://disha3d.com/API/API.php',
-			  method: 'get',
-			  data: {'user': '3d@godrejinterio.com','password': 'godrej@123','API_KEY': 'AH44GH67','prodid': '56121403SD00013'}
-			})
-			.then(response => {
-				console.log('@@@@Its a 3D Test API@@@@', response);
-				this.setState({
-					image3D: response,
-				});
-			})
-			.catch(error => {
-				console.log('@@@@Its a 3D Test API@@@@ - Failure', error);
+	check3DApi(arg1, arg2) {
+		axios({
+			url: 'http://disha3d.com/API/API.php',
+			method: 'get',
+			data: {'user': '3d@godrejinterio.com','password': 'godrej@123','API_KEY': 'AH44GH67','prodid': '56121403SD00013'}
+		})
+		.then(response => {
+			console.log('@@@@Its a 3D Test API@@@@', response);
+			this.setState({
+				image3D: response,
 			});
-		})()
+		})
+		.catch(error => {
+			console.log('@@@@Its a 3D Test API@@@@ - Failure', error);
+		});
 	}
+
 	render() {
 	const { image3D } = this.state;
 	return (
 		<div>
 			<div className='3D'>
-				<iframe id="3diframe" src={image3D} width="600" height="480" frameBorder="0" allowfullscreen/>
+				<iframe id="3diframe" src={image3D} width="600" height="480" frameBorder="0" allowFullScreen/>
 			</div>
 			{!this.state.pdpLoading && !this.state.espotLoading && (
 				<PdpComponent

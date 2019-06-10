@@ -15,6 +15,7 @@ export const isLoggedIn = false;
 export const catID = '13503';
 export const productTitleCharLimit = 35;
 export const productDescriptionCharLimit = 25;
+export const LOS_ANGELES_CENTER =  [13.10127, 80.2873];
 
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
@@ -44,6 +45,8 @@ export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
 export const homePageLayoutAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Layout`;
 /* Store API */
 export const storeAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bycoordinates`;
+/* Store API City*/
+export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bylocation`;
 /* Footer API */
 export const footerApi = `${secureHttp}://${host}:${port2}/api/v1/footer`;
 /* Generate OTP API */
