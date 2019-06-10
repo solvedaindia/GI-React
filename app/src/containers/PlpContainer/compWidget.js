@@ -24,7 +24,7 @@ export class CompContainer extends React.Component {
     this.handleGoToCompare = this.handleGoToCompare.bind(this);
     this.state = {
       showCompare: true,
-      modalClass: 'open1'
+      modalClass: 'open'
     };
   }
 
@@ -57,16 +57,22 @@ export class CompContainer extends React.Component {
     return data;
   }
 
-  showHideCompare = () => {
-    if(this.state.showCompare == true) {
+  componentWillReceiveProps(newProps) {
+    if(newProps.compData.length > this.props.compData.length) {
       this.setState({
-        showCompare: false,
-        modalClass: 'open',
+        modalClass: 'open'
+      })
+    }
+  }
+
+  showHideCompare = () => {
+    if(this.state.modalClass == 'open') {
+      this.setState({
+        modalClass: '',
       })
     } else {
       this.setState({
-        showCompare: true,
-        modalClass: '',
+        modalClass: 'open',
       })
     }
   }
@@ -92,9 +98,9 @@ export class CompContainer extends React.Component {
     // alert(this.state.modalClass)
     return (
       <>
-      <button className='btnCompare' onClick={this.showHideCompare}> hide </button>
-      <button onClick={this.showHideCompare} className="btnCompare"> show</button>
-    <div  className={`animationDIV ${this.state.modalClass}`} id='change'>
+      {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <button className='btnCompare' onClick={this.showHideCompare}> hide </button> :
+    <button onClick={this.showHideCompare} className="btnCompare"> show</button> : ''}
+    {this.props.compData.length > 0 ? <div  className={`animationDIV ${this.state.modalClass}`} id='change'>
       {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
       <div  className='compareProductwrap'>
         <div className="container">
@@ -124,7 +130,7 @@ export class CompContainer extends React.Component {
       //               </button> */}
       {/* 'uyu' */}
     {/* } */}
-    </div>
+    </div> : ''}
     </>
     );
   }
