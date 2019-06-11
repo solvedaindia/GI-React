@@ -22,7 +22,10 @@ import {
   getTheAccessToken,
   newsletterTokenCookie,
   newsletterStatusAPI,
+  ipDataApi
 } from '../../../public/constants/constants';
+import appCookie from '../../utils/cookie';
+
 
 // import HomePageContainer from '../HomePageContainer/index';
 import HomePageContainer from '../HomePageContainer/homepage';
@@ -57,6 +60,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
+    this.getPincodeData();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -89,6 +93,21 @@ export default class App extends React.Component {
       console.log('In the new');
       this.getNewsletterSubscriptionStatus();
       // this.setState({ showNewsLetter: true });
+    }
+  }
+
+  getPincodeData() {
+    if (appCookie.get('pincode') === null) {
+      apiManager
+        .get(ipDataApi, { headers: { Accept: 'application/json' } })
+        .then(response => { 
+          appCookie.set('pincode',  response.data, 365 * 24 * 60 * 60 * 1000);
+          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+        })
+        .catch(error => { 
+          appCookie.set('pincode',  '400079', 365 * 24 * 60 * 60 * 1000)
+          console.log('Pincode APi Error=>> '+ error )
+        });
     }
   }
 

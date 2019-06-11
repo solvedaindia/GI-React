@@ -3,43 +3,116 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import apiManager from '../../utils/apiManager';
 import { getUpdatedMinicartCount } from '../../utils/initialManager';
-import { addToCart } from '../../../public/constants/constants';
+import { addToCart, findinventoryAPI } from '../../../public/constants/constants';
 import { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag } from '../../actions/app/actions';
+import appCookie from '../../utils/cookie';
 
 class addToCartComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			addToCartPopup: null,
+			loading: true,
+			pincodeVal: appCookie.get('pincode')
 		};
+		this.quantity = 1;
+		this.quantityErrorMessage = false;
+		this.deliveryTime = '';
 	}
 
-	moveToCartClicked = () => {
-		let quantity = '1';
-		if (!this.props.sticky) {
+	componentWillReceiveProps() {
+		this.quantity = 1;
+		this.quantityErrorMessage = false;
+		this.deliveryTime = '';
+	}
+
+	/* render delivery message */
+	renderdeliveryMessage(props) {
+		if (!props.pincodeServiceable) {
+			let errorMsg = 'Pincode is not serviceable';
+			if(props.error) {
+				errorMsg = props.error;
+			}
+			return <div className='pincodeNotServiceable'>{errorMsg}</div>
+		} else {
+			if (this.deliveryTime === '') {
+				if (props.deliveryDateAndTime) {
+					this.deliveryTime = props.deliveryDateAndTime;
+				} else {
+					this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
+				}
+			}
+			return <div className='soldbyDealers'>{this.deliveryTime}</div>
+		}
+	}
+
+	/* find inventory of the product */
+	findInventory = () => {
+		console.log('this.propsthis.props=>>',this.props)
+		const pincode = appCookie.get('pincode');
+		let quantity = 1;
+		if (document.getElementById('quantity')) {
 			quantity = document.getElementById('quantity').value;
 		}
 		
-		const data = {
-			"orderItem": [
-				{
-					"sku_id": this.props.skuId,
-					"quantity": quantity
-				}
-			]
+		const data =  {
+			params: {
+				"partNumber": this.props.skuData.partNumber,
+				"quantity": quantity
+			}
 		}
-
-		apiManager.post(addToCart, data).then(() => {
-			getUpdatedMinicartCount(this)
-			this.setState({
-				addToCartPopup: this.addToCartPopupItem()
-			});
-			
+		
+		apiManager.get(findinventoryAPI + pincode, data).then(response => {
+			this.moveToCartClicked(response.data);
 		}).catch(error => {
-			console.log('AddToCart Error---', error);
+			console.log('findInventory API Error =>', error);
 		});
 	}
 
+	/* move to cart */
+	moveToCartClicked = (inventory) => {
+		if (inventory.data.inventoryStatus === 'unavailable') {
+			this.quantityErrorMessage = true;
+			this.quantity = document.getElementById('quantity').value;
+			this.setState({
+				loading: false,
+			});
+		} else { 
+			const isPDPAddToCart = appCookie.get('isPDPAddToCart');
+			let quantity = '1';
+			if (!this.props.sticky) {
+				quantity = document.getElementById('quantity').value;
+			}
+			
+			const data = {
+				"orderItem": [
+					{
+						"sku_id": this.props.skuData.uniqueID,
+						"quantity": quantity
+					}
+				]
+			}
+
+			apiManager.post(addToCart, data).then(() => {
+				getUpdatedMinicartCount(this)
+				this.deliveryTime = inventory.data.deliveryDate;
+				this.setState({
+					addToCartPopup: this.addToCartPopupItem(),
+					loading: false
+				});
+
+				if (isPDPAddToCart === 'false') {
+					appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
+					this.props.handleAddtocart(false);
+				}
+
+			}).catch(error => {
+				console.log('AddToCart Error---', error);
+			});
+		}
+	}
+
+	/* add to cart pop */
 	addToCartPopupItem() {
 		setTimeout(() => {
 			this.setState({
@@ -53,6 +126,7 @@ class addToCartComponent extends React.Component {
 		);
 	}
 
+	/* product quantity increase and decrease */
 	productQuantity = (type) => {
 		let quantity = document.getElementById('quantity').value;
 		if (type === false && quantity > 1) {
@@ -62,20 +136,63 @@ class addToCartComponent extends React.Component {
 		}
 	}
 
+	notifyMe() {
+		alert('Notify me api call');
+	}
+
+	updatePincode(props) {
+		const pincode = document.getElementById('pincodeVal').value;
+		appCookie.set('pincode',  pincode, 365 * 24 * 60 * 60 * 1000);
+		this.quantity = 1;
+		props.handleAddtocart(true);
+	}
+
+	handleChange = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	/* render buttons */
+	renderButton(props, quantity) {
+		if(!props.pincodeServiceable) {
+			return <Button className="btn addcartbtn" disabled={true}>Add to Cart</Button>
+		} else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
+			return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
+		} else {
+			return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+		}
+	}
 
 	render() {
 		return(
 			<>
+				{ !this.props.sticky && (
+					<>
+						<div className='pincode'>
+							<div className='PincodeTextdata clearfix'>
+								<input className='pincodeVal' name='pincodeVal' id='pincodeVal' type='text' onChange={this.handleChange} value={this.state.pincodeVal} />
+								<a className='pincodeEdit' id='edit' role='button' onClick={this.updatePincode.bind(this, this.props)}>Edit</a>
+							</div>
+							{this.renderdeliveryMessage(this.props.pinCodeData)}
+						</div>
+						<div className='clearfix'></div>
+						<div className="ExperienceProduct">Experience this product at{' '}
+							<a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
+						</div>
+					</>
+				)}
 				{this.state.addToCartPopup}
 				<div className="addCart">
 					{ !this.props.sticky && (
-					<>
-						<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
-						<input className='btn' id='quantity' type='text' readOnly value='1' />
-						<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
-					</>
+						<>
+							<Button className="btn" onClick={() => this.productQuantity(false)}>-</Button>
+							<input className='btn' id='quantity' type='text' readOnly value={this.quantity} />
+							<Button className="btn" onClick={() => this.productQuantity(true)}>+</Button>
+						</>
 					)}
-					<Button className="btn addcartbtn" onClick={this.moveToCartClicked}>Add to Cart</Button>
+						{this.renderButton(this.props.pinCodeData, this.quantity)}
+						{ this.quantityErrorMessage &&
+							<div>Quantity is not available</div>
+						}
 				</div>
 			</>
 		);
