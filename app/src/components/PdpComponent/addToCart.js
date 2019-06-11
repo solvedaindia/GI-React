@@ -12,7 +12,8 @@ class addToCartComponent extends React.Component {
 		super(props);
 		this.state = {
 			addToCartPopup: null,
-			loading: true
+			loading: true,
+			pincodeVal: appCookie.get('pincode')
 		};
 		this.quantity = 1;
 		this.quantityErrorMessage = false;
@@ -28,7 +29,11 @@ class addToCartComponent extends React.Component {
 	/* render delivery message */
 	renderdeliveryMessage(props) {
 		if (!props.pincodeServiceable) {
-			return <div className='pincodeNotServiceable'>Pincode is not serviceable</div>
+			let errorMsg = 'Pincode is not serviceable';
+			if(props.error) {
+				errorMsg = props.error;
+			}
+			return <div className='pincodeNotServiceable'>{errorMsg}</div>
 		} else {
 			if (this.deliveryTime === '') {
 				this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
@@ -41,13 +46,10 @@ class addToCartComponent extends React.Component {
 	/* find inventory of the product */
 	findInventory = () => {
 		console.log('this.propsthis.props=>>',this.props)
-		let pincode = '110043';
+		const pincode = appCookie.get('pincode');
 		let quantity = 1;
 		if (document.getElementById('quantity')) {
 			quantity = document.getElementById('quantity').value;
-		}
-		if (document.getElementById('pincodeVal')) {
-			pincode = document.getElementById('pincodeVal').value;
 		}
 		
 		const data =  {
@@ -56,7 +58,7 @@ class addToCartComponent extends React.Component {
 				"quantity": quantity
 			}
 		}
-
+		
 		apiManager.get(findinventoryAPI + pincode, data).then(response => {
 			this.moveToCartClicked(response.data);
 		}).catch(error => {
@@ -98,7 +100,7 @@ class addToCartComponent extends React.Component {
 
 				if (isPDPAddToCart === 'false') {
 					appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
-					this.props.handleAddtocart();
+					this.props.handleAddtocart(false);
 				}
 
 			}).catch(error => {
@@ -135,11 +137,23 @@ class addToCartComponent extends React.Component {
 		alert('Notify me api call');
 	}
 
+	updatePincode(props) {
+		const pincode = document.getElementById('pincodeVal').value;
+		appCookie.set('pincode',  pincode, 365 * 24 * 60 * 60 * 1000);
+		this.quantity = 1;
+		props.handleAddtocart(true);
+	}
+
+	handleChange = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
 	/* render buttons */
 	renderButton(props, quantity) {
+		console.log('render button=>>', props);
 		if(!props.pincodeServiceable) {
-			return <Button className="btn addcartbtn" onClick={this.moveToCartClicked} disabled={true}>Add to Cart</Button>
-		} else if (props.inventoryStatus === 'unavailable!' && quantity === 1) {
+			return <Button className="btn addcartbtn" disabled={true}>Add to Cart</Button>
+		} else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
 			return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
 		} else {
 			return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
@@ -153,8 +167,8 @@ class addToCartComponent extends React.Component {
 					<>
 						<div className='pincode'>
 							<div className='PincodeTextdata clearfix'>
-								<input className='pincodeVal' id='pincodeVal' type='text' readOnly value='400079' />
-								<a className='pincodeEdit' role='button'>Edit</a>
+								<input className='pincodeVal' name='pincodeVal' id='pincodeVal' type='text' onChange={this.handleChange} value={this.state.pincodeVal} />
+								<a className='pincodeEdit' id='edit' role='button' onClick={this.updatePincode.bind(this, this.props)}>Edit</a>
 							</div>
 							{this.renderdeliveryMessage(this.props.pinCodeData)}
 						</div>

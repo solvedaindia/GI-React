@@ -93,7 +93,6 @@ class PdpComponent extends React.Component {
 		   productSkuData = swatches;
 		}
 		this.getResolveSkuData(swatches[0].uniqueID);
-		//this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+swatches[0].uniqueID);
 	}
 
 	/* handle selected swatches */
@@ -109,8 +108,7 @@ class PdpComponent extends React.Component {
 
 	callPinCodeAPI(skuDataArr, resolvedSkuData) {
 		const params = {
-			//pincode: '400079',
-			pincode: '110043',
+			pincode: appCookie.get('pincode'),
 			sku_partNumber: resolvedSkuData.partNumber,
 			quantity: 1,
 			sku_id: resolvedSkuData.uniqueID
@@ -124,17 +122,32 @@ class PdpComponent extends React.Component {
 				skuData: resolvedSkuData,
 				pincodeData: response.data.data
 			});
-			this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+resolvedSkuData.uniqueID);
 		})
 		.catch(error => {
 			console.log('PDP Pin Code API Error =>', error);
+			const defaultPincodeData = {
+				pincodeServiceable: false, 
+				inventoryStatus: "unavailable",
+				shippingCharge: 0,
+				error: 'Not a valid pincode'
+			}
+			this.setState({
+				selectedSku: skuDataArr,
+				isLoading: false,
+				skuData: resolvedSkuData,
+				pincodeData: defaultPincodeData
+			});
 		});
+		this.props.historyData.push('/pdp/'+this.props.matchParams.productId+'/'+resolvedSkuData.uniqueID);
+
 	
 	}
 
-	handleAddtocart() {
+	handleAddtocart(ispincode) {
 		this.getResolveSkuData();
-		window.scrollTo(0, 0);
+		if (!ispincode) {
+			window.scrollTo(0, 0);
+		}
 	}
 
 	render() {
