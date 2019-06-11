@@ -146,3 +146,96 @@ function pincodeServiceability(headers, pincode, callback) {
     },
   );
 }
+
+/**  
+Find Inventory
+* @param: {pincode:'User Pincode',partNumber:'Part Number',quantity:'Quantity'}
+* @return Inventory Details
+*/
+module.exports.findInventory = findInventory;
+function findInventory(headers, reqParams, callback) {
+  logger.debug('Inside the Find Inventory API');
+  if (!reqParams.pincode || !reqParams.partNumber || !reqParams.quantity) {
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const findInventoryUrl = constants.findInvertory
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{partNumber}}', reqParams.partNumber)
+    .replace('{{pinCode}}', reqParams.pincode)
+    .replace('{{quantity}}', reqParams.quantity);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'GET',
+    findInventoryUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const inventoryResponse = {
+          uniqueID: null,
+          inventoryStatus: 'unavailable',
+          deliveryDate: null,
+        };
+        if (
+          response.body.InventoryAvailability &&
+          response.body.InventoryAvailability.length > 0
+        ) {
+          inventoryResponse.uniqueID =
+            response.body.InventoryAvailability[0].productId;
+          if (
+            response.body.InventoryAvailability[0].inventoryStatus ===
+              'Available' &&
+            Number(response.body.InventoryAvailability[0].availableQuantity) >
+              Number(reqParams.quantity)
+          ) {
+            inventoryResponse.inventoryStatus = 'available';
+            inventoryResponse.deliveryDate =
+              response.body.InventoryAvailability[0].availabilityDateTime;
+          }
+        }
+        callback(null, inventoryResponse);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Function to return Shipping charge
+ * @param {@pincode, @skuid}
+ * @return shipping charge
+ */
+module.exports.getShippingCharge = getShippingCharge;
+function getShippingCharge(headers, reqParams, callback) {
+  logger.debug('Inside the shipping charge API');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const originUrl = constants.shippingCharge
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', reqParams.pincode)
+    .replace('{{uniqueId}}', reqParams.skuId);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}

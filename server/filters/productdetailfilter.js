@@ -35,22 +35,59 @@ function productDetailForPLP(productDetail) {
 
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
-  // productDetailJson.discount = '';
   productDetailJson.shortDescription = productDetail.shortDescription || '';
-  productDetailJson.promotionData = '';
-  if (productDetail.promotionData && productDetail.promotionData.length > 0) {
-    productDetailJson.promotionData = productDetail.promotionData[0].code.split('-')[0];
-  }
+  productDetailJson.promotionData = getSummaryPromotion(
+    productDetail.promotionData,
+  );
   const attribute = getAttributes(productDetail.attributes);
   productDetailJson.discount = getDiscount(attribute) || '';
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
   }
+  if (productDetailJson.discount > 0) {
+    // eslint-disable-next-line radix
+    productDetailJson.actualPrice = parseInt(
+      (productDetailJson.offerPrice * 100) /
+        (100 - Number(productDetailJson.discount)),
+    );
+  }
+
   productDetailJson.ribbonText = getRibbonText(attribute) || '';
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
   return productDetailJson;
+}
+
+module.exports.getSummaryPromotion = getSummaryPromotion;
+function getSummaryPromotion(promotionData) {
+  let resPromotionData = '';
+  if (promotionData && promotionData.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    resPromotionData = promotionData[0].code.split('-')[0];
+  }
+  return resPromotionData;
+}
+
+module.exports.getSwatchData = getSwatchData;
+function getSwatchData(productAttribueArray) {
+  const swatchColor = [];
+  if (productAttribueArray && productAttribueArray.length > 0) {
+    const colorFacetArray = productAttribueArray.filter(
+      eachAttribute => eachAttribute.identifier === 'fc',
+    );
+    if (colorFacetArray && colorFacetArray.length > 0) {
+      colorFacetArray[0].values.forEach(color => {
+        const tempJSON = {
+          name: color.value,
+          colorCode: color.image1,
+          identifier: color.identifier,
+        };
+        swatchColor.push(tempJSON);
+      });
+    }
+  }
+  return swatchColor;
 }
 
 function getFixedAttributes(productAttribute) {
@@ -70,24 +107,6 @@ function getFixedAttributes(productAttribute) {
       });
   }
   return fixedAttribute;
-}
-
-module.exports.getSwatchData = getPrimaryColor;
-function getPrimaryColor(productAttribueArray) {
-  const swatchColor = [];
-  if (productAttribueArray && productAttribueArray.length > 0) {
-    const colorFacetArray = productAttribueArray.filter(
-      eachAttribute => eachAttribute.identifier === 'fc',
-    );
-    colorFacetArray[0].values.forEach(color => {
-      const tempJSON = {
-        name: color.value,
-        colorCode: color.image1,
-      };
-      swatchColor.push(tempJSON);
-    });
-  }
-  return swatchColor;
 }
 
 /**
@@ -347,7 +366,7 @@ function getProductDetails(attributes, productAttachments) {
       }
     });
     productDetailsList.push({
-      title: 'Specificactions',
+      title: 'Specifications',
       values: specificationValues || '',
     });
 
@@ -609,7 +628,7 @@ function mercAssociationsDataForPDP(productDetail) {
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
   } else {
-    productDetailJson.emiData = '';
+    productDetailJson.emiData = 999;
   }
   productDetailJson.inStock = '';
   productDetailJson.discount = getDiscount(attributes) || '';
@@ -620,9 +639,11 @@ function mercAssociationsDataForPDP(productDetail) {
 }
 
 function getImagePath(imagePath) {
-  const arr = imagePath.split('//');
-  if (arr.length > 0) {
-    return `/${arr[1]}`;
+  if (imagePath) {
+    const arr = imagePath.split('//');
+    if (arr.length > 0) {
+      return `/${arr[1]}`;
+    }
   }
   return imagePath;
 }

@@ -71,8 +71,8 @@ class CartCount extends React.Component {
     );
     this.fetchMinicartDetails();
 
-    //this.getCartCount();
-    getUpdatedMinicartCount(this)
+    // this.getCartCount();
+    getUpdatedMinicartCount(this);
     // this.setState({
     //   CartCount: this.props.updatedMinicartCount,
     // });
@@ -123,7 +123,7 @@ class CartCount extends React.Component {
             key={i}
             className={`dropdown__list-item${
               i === this.state.selected ? '' : ''
-              }`}
+            }`}
           >
             <MinicartItem dataPro={option} />
             {/* {option} */}
@@ -141,21 +141,25 @@ class CartCount extends React.Component {
     if (CartCount != 0 && CartCount != undefined) {
       cartCountItem = <span className="cartCount">{CartCount}</span>;
     }
-      minicartDropdownItem = (
-        <div
-          className={`dropdown__list ${
-            this.state.active ? 'dropdown__list--active' : ''
-            }`}
-        >
-          <>
-          {CartCount != 0 && CartCount != undefined ? <><div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-            <button className="checkout-btn">Checkout</button></> : <EmptyMinicart />}
+    minicartDropdownItem = (
+      <div
+        className={`dropdown__list ${
+          this.state.active ? 'dropdown__list--active' : ''
+        }`}
+      >
+        <>
+          {CartCount != 0 && CartCount != undefined ? (
+            <>
+              <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+              <button className="checkout-btn">Checkout</button>
+            </>
+          ) : (
+            <EmptyMinicart />
+          )}
           {/* <EmptyMinicart /> */}
-            
-          </>
-        </div>
-      );
-    
+        </>
+      </div>
+    );
 
     return (
       <li className="icons mini-cart" onClick={this.handleCartCount}>
@@ -172,7 +176,7 @@ class CartCount extends React.Component {
             className="dropdown__toggle dropdown__list-item icons_border"
           >
             <CartLogo />
-            <i className="fa fa-angle-down" aria-hidden="true" />
+            {/* <i className="fa fa-angle-down" aria-hidden="true" /> */}
           </div>
           {minicartDropdownItem}
         </div>

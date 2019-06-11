@@ -34,11 +34,13 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
-import CompareContainer from '../comparePageContainer/index'
-import CheckoutContainer from '../checkoutContainer/index'
+import CompareContainer from '../comparePageContainer/index';
+import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
+import MyAccount from '../MyAccountContainer/index';
+import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -67,11 +69,9 @@ export default class App extends React.Component {
       /* Check if User is logged-in or Guest */
       // if (isLoggedIn) {
       // } else {
-        registerGuestUser(this.guestLoginCallback);
-      //}
+      registerGuestUser(this.guestLoginCallback);
+      // }
     }
-
-    
   }
 
   newsletterPopupHandling() {
@@ -149,7 +149,9 @@ export default class App extends React.Component {
           <Route path="/register" component={RegisterNow} />
           <Route path="/compare" component={CompareContainer} />
           <Route path="/wishlist" component={MyWishlist} />
+          <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
+          <Route path="/guestTrackOrder" component={GuestTrackOrder} />
         </Switch>
         <FooterContainer />
       </div>

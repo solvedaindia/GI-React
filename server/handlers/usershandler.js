@@ -7,11 +7,6 @@ const errorutils = require('../utils/errorutils.js');
 const profileFilter = require('../filters/profilefilter');
 const pincodeUtil = require('../utils/pincodeutil');
 
-const addressLength = {
-  field1: 100,
-  field2: 50,
-  field3: 50,
-};
 const defaultPincode = '122001';
 const passwordChangeMessage = 'Password Changed Successfully';
 
@@ -115,10 +110,10 @@ module.exports.changeUserPassword = function changeUserPassword(
   const reqBody = {
     logonPassword: params.new_password,
     logonPasswordVerify: params.new_password,
-    userField1: params.current_password,
+    userField2: params.current_password,
   };
 
-  const originUserURL = constants.changePassword.replace(
+  const originUserURL = constants.updateProfile.replace(
     '{{storeId}}',
     headers.store_id,
   );
@@ -165,6 +160,61 @@ module.exports.getUserDetails = function getUserDetails(headers, callback) {
           return;
         }
         callback(null, profileFilter.userInfoDetails(response.body));
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * Update User Details
+ */
+module.exports.updateUserDetails = function updateUserDetails(
+  params,
+  headers,
+  callback,
+) {
+  logger.debug('Call to Update User Details');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  let firstname = '';
+  let lastname = '';
+  const reqBody = {};
+
+  if (params.name) {
+    if (params.name.indexOf(' ') > 0) {
+      firstname = params.name.substr(0, params.name.indexOf(' '));
+      lastname = params.name.substring(params.name.indexOf(' ') + 1).trim();
+    } else {
+      firstname = params.name;
+    }
+    reqBody.firstName = firstname;
+    reqBody.lastName = lastname;
+  }
+
+  if (params.field1) {
+    reqBody.userField1 = params.field1;
+  }
+  if (params.logonid) {
+    reqBody.logonId = params.logonid;
+  }
+
+  const originUrl = constants.updateProfile.replace(
+    '{{storeId}}',
+    headers.store_id,
+  );
+  origin.getResponse(
+    'PUT',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
       } else {
         callback(errorutils.handleWCSError(response));
       }
@@ -256,8 +306,6 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
     !body.pincode ||
     !body.phone_number ||
     !body.address ||
-    // body.address.length >
-    //  addressLength.field1 + addressLength.field2 + addressLength.field3 ||
     !body.city ||
     !body.state ||
     !body.default
@@ -303,23 +351,6 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
     reqBody.contact[0].primary = 'true';
   }
   reqBody.contact[0].addressLine.push(reqParams.address);
-  /* const addressField1 = reqParams.address.substring(0, addressLength.field1);
-  const addressField2 =
-    reqParams.address.substring(
-      addressLength.field1,
-      addressLength.field1 + addressLength.field2,
-    ) || '';
-  const addressField3 =
-    reqParams.address.substring(
-      addressLength.field1 + addressLength.field2,
-      addressLength.field1 + addressLength.field2 + addressLength.field3,
-    ) || '';
-  reqBody.contact[0].addressLine.push(
-    addressField1,
-    addressField2,
-    addressField3,
-  ); */
-
   const reqHeader = headerutil.getWCSHeaders(headers);
 
   origin.getResponse(
@@ -371,8 +402,6 @@ module.exports.updateAddress = function updateAddress(req, callback) {
     !reqParams.pincode ||
     !reqParams.phone_number ||
     !reqParams.address ||
-    // reqParams.address.length >
-    //  addressLength.field1 + addressLength.field2 + addressLength.field3 ||
     !reqParams.city ||
     !reqParams.state ||
     !reqParams.default
@@ -399,18 +428,6 @@ module.exports.updateAddress = function updateAddress(req, callback) {
   if (reqParams.address) {
     reqBody.addressLine = [];
     reqBody.addressLine.push(reqParams.address);
-    /* const addressField1 = reqParams.address.substring(0, addressLength.field1);
-    const addressField2 =
-      reqParams.address.substring(
-        addressLength.field1,
-        addressLength.field1 + addressLength.field2,
-      ) || '';
-    const addressField3 =
-      reqParams.address.substring(
-        addressLength.field1 + addressLength.field2,
-        addressLength.field1 + addressLength.field2 + addressLength.field3,
-      ) || '';
-    reqBody.addressLine.push(addressField1, addressField2, addressField3); */
   }
   if (reqParams.name) {
     let firstname = '';
@@ -545,6 +562,58 @@ module.exports.forgotPassword = function forgotPassword(
         }
       } else {
         callback(errorutils.wcsErrorList.wcs_invalid_response);
+      }
+    },
+  );
+};
+
+/**
+ * Set Password (Social Login) API
+ * @param
+ * @param
+ * @returns
+ * @throws
+ */
+module.exports.setSocialPassword = function setPasswordForSocialLogin(
+  params,
+  headers,
+  callback,
+) {
+  logger.debug('call to set password (Social Login) API');
+
+  if (!params.new_password) {
+    logger.debug('invalid params in set password API');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const reqBody = {
+    logonPassword: params.new_password,
+    logonPasswordVerify: params.new_password,
+    userField1: headers.userId,
+    sociallogin: 'true',
+  };
+
+  const originUrl = constants.setSocialLoginPassword.replace(
+    '{{storeId}}',
+    headers.store_id,
+  );
+
+  origin.getResponse(
+    'PUT',
+    originUrl,
+    reqHeaders,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        logger.debug('set password (Social Login) API');
+        callback(errorutils.handleWCSError(response));
       }
     },
   );

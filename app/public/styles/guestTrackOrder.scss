@@ -1,0 +1,47 @@
+@import './variable';
+
+.guestTrackOrder {
+  width: 35%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 104px 0;
+
+  .helloGuestMsg {
+    width: 435px;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+  }
+
+  .orderIdField {
+    width: 460px;
+    height: 64px;
+    border-radius: 2px;
+    border: solid 1px #dfe0de;
+    text-align: center;
+    margin: 80px 0 0px 0;
+  }
+
+  .submitBtn {
+    width: 200px;
+    height: 46px;
+    background-color: #070707;
+    color: #ffffff;
+    margin: 52px 0 0 0;
+  }
+
+  .error-msg{
+    width:80%;
+    margin:0 auto;
+    float:none;
+    text-align: center;
+    color: $reddishPink;
+  }
+
+}

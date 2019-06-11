@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 /* Import Components */
-import Input from '../Input/input';
+import Input from '../Primitives/input';
 import Button from '../Button/button';
 import {
   regexEmail,
@@ -106,6 +106,7 @@ class WelcomeForm extends Component {
           name="userId"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
@@ -115,6 +116,7 @@ class WelcomeForm extends Component {
           title="Password"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
         {errorMessagePassword}
         {/* Password of the user */}

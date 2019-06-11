@@ -15,8 +15,15 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART, RESET_REMOVEWISHLISTFLAG } from '../../constants/app/constants';
-
+import {
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+  WISH_LIST_COUNT,
+  UPDATE_MINICART,
+  RESET_REMOVEWISHLISTFLAG,
+  UPDATE_PROFILE,
+} from '../../constants/app/constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -60,7 +67,7 @@ export function repoLoadingError(error) {
 }
 
 export function updatetWishListCount(count) {
-  console.log('its in the update wihslit action',count);
+  console.log('its in the update wihslit action', count);
   return {
     type: WISH_LIST_COUNT,
     count,
@@ -76,9 +83,18 @@ export function updatetMinicart(count) {
 }
 
 export function resetRemoveFromWishlistFlag(flag) {
-  console.log('resetRemoveFromWishlistFlag---',flag)
+  console.log('resetRemoveFromWishlistFlag---', flag);
   return {
     type: RESET_REMOVEWISHLISTFLAG,
     flag,
+  };
+}
+
+export function updateUserProfile(userName, logonId) {
+  console.log('updateUserProfile---', userName, logonId);
+  return {
+    type: UPDATE_PROFILE,
+    userName,
+    logonId,
   };
 }

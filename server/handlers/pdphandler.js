@@ -39,7 +39,7 @@ module.exports.getProductDetails = function getProductDetailsData(
   async.parallel(
     [
       productDetails.bind(null, reqHeaders, productID),
-      promotionDetails.bind(null, reqHeaders, productID),
+      // promotionDetails.bind(null, reqHeaders, productID),
     ],
     (err, result) => {
       if (err) {
@@ -63,7 +63,12 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
   callback,
 ) {
   logger.debug('Inside the GET PINCODE SERVICEABILITY API Method');
-  if (!req.body.pincode && !req.body.sku_partNumber && !req.body.quantity) {
+  if (
+    !req.body.pincode ||
+    !req.body.sku_partNumber ||
+    !req.body.quantity ||
+    !req.body.sku_id
+  ) {
     logger.debug('GET PDP Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
   }
@@ -73,6 +78,7 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
     pincode: req.body.pincode,
     partNumber: req.body.sku_partNumber,
     quantity: req.body.quantity,
+    skuId: req.body.sku_id,
   };
 
   pincodeUtil.getPincodeServiceability(
@@ -80,25 +86,26 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
     reqBody.pincode,
     (err, result) => {
       if (err) {
-        callback(errorUtils.handleWCSError(err));
+        callback(err);
       } else {
         logger.debug('Got all the origin resposes From Pincode Serviceability');
-        // callback(null, result);
-        if (result.serviceAbilityFlag === true) {
-          // async.parallel(
-          //   [findInventory.bind(null, reqHeaders, reqBody)],
-          //   // eslint-disable-next-line no-shadow
-          //   (err, result) => {
-          //     if (err) {
-          //       callback(errorUtils.handleWCSError(err));
-          //     } else {
-          //       logger.debug(
-          //         'Got all the origin resposes From Find Inventory API',
-          //       );
-          //       callback(null, result);
-          //     }
-          //   },
-          // );
+        const serviceability = result.serviceable;
+        if (serviceability === true) {
+          async.parallel(
+            [
+              findInventory.bind(null, reqHeaders, reqBody),
+              getShippingCharge.bind(null, reqHeaders, reqBody),
+            ],
+            (err, result) => {
+              if (err) {
+                callback(errorUtils.handleWCSError(err));
+              } else {
+                callback(null, transformJson(result, serviceability));
+              }
+            },
+          );
+        } else {
+          callback(null, transformJson('', serviceability));
         }
       }
     },
@@ -143,7 +150,7 @@ function productDetails(header, productID, callback) {
 function promotionDetails(header, ProductID, callback) {
   promotionUtil.getMultiplePromotions(ProductID, header, (err, result) => {
     if (err) {
-      callback(err);
+      callback(null);
     } else {
       callback(null, result);
     }
@@ -152,11 +159,142 @@ function promotionDetails(header, ProductID, callback) {
 
 /** Find Inventory */
 function findInventory(header, reqParams, callback) {
-  productUtil.findInventory(header, reqParams, (err, result) => {
+  pincodeUtil.findInventory(header, reqParams, (err, result) => {
     if (err) {
       callback(err);
     } else {
       callback(null, result);
     }
   });
+}
+
+/**
+ * SKU Details Summary by Product ID and Swatch Color Identifier
+ */
+module.exports.getProductDetailByColor = function getProductDetailByColor(
+  req,
+  callback,
+) {
+  if (!req.params.productId || !req.query.coloridentifier) {
+    logger.debug('GET SKU Details by Color :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeaders = req.headers;
+  const productID = req.params.productId;
+  const colorIdentifier = req.query.coloridentifier;
+  let resJSON = {};
+
+  productUtil.productByProductID(productID, reqHeaders, (err, result) => {
+    if (err) {
+      callback(errorUtils.handleWCSError(err));
+    } else if (result.catalogEntryView && result.catalogEntryView.length > 0) {
+      const skuArray = result.catalogEntryView[0].sKUs;
+      const skuDetail = [];
+      if (skuArray && skuArray.length > 0) {
+        skuArray.forEach(sku => {
+          const attributeArray = sku.attributes;
+          attributeArray.forEach(attribute => {
+            if (attribute.identifier === 'fc') {
+              if (attribute.values[0].identifier === colorIdentifier) {
+                skuDetail.push(sku);
+              }
+            }
+          });
+        });
+      }
+      if (skuDetail.length > 0) {
+        promotionUtil.getPromotionData(
+          skuDetail[0].uniqueID,
+          reqHeaders,
+          (error, promotionResult) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+            resJSON = pdpfilter.productDetailSummary(skuDetail[0]);
+            const swatchColor = pdpfilter.getSwatchData(
+              skuDetail[0].attributes,
+            );
+            if (swatchColor && swatchColor.length > 0) {
+              resJSON.swatchColor = swatchColor[0].name;
+            }
+            resJSON.promotionData = pdpfilter.getSummaryPromotion(
+              promotionResult,
+            );
+            callback(null, resJSON);
+          },
+        );
+      } else {
+        callback(null, resJSON);
+      }
+    } else {
+      callback(null, resJSON);
+    }
+  });
+};
+
+/**
+ * Product Details Summary
+ */
+module.exports.getProductDetailSummary = function getProductDetailSummary(
+  req,
+  callback,
+) {
+  if (!req.params.skuId) {
+    logger.debug('GET SKU Details by Color :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeaders = req.headers;
+  const productID = req.params.skuId;
+
+  let resJSON = {};
+  const productDetailTask = [
+    productUtil.productByProductID.bind(null, productID, reqHeaders),
+    promotionUtil.getPromotionData.bind(null, productID, reqHeaders),
+  ];
+
+  async.parallel(productDetailTask, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    logger.debug('Got all the origin resposes for SKU Detail Summary');
+    if (result[0].catalogEntryView && result[0].catalogEntryView.length > 0) {
+      resJSON = pdpfilter.productDetailSummary(result[0].catalogEntryView[0]);
+      resJSON.promotionData = pdpfilter.getSummaryPromotion(result[1]);
+    }
+
+    callback(null, resJSON);
+  });
+};
+
+/** Get Shipping Charge */
+function getShippingCharge(header, reqParams, callback) {
+  pincodeUtil.getShippingCharge(header, reqParams, (err, result) => {
+    if (err) {
+      callback(null, 'Sipping charge not found');
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+function transformJson(result, serviceability) {
+  const pincodeData = {};
+  pincodeData.pincodeServiceable = serviceability;
+  if (result && result.length > 1) {
+    pincodeData.inventoryStatus = result[0].inventoryStatus;
+    pincodeData.deliveryDateAndTime = result[0].deliveryDate;
+    /*   if (result[0].inventoryStatus !== 'Unavailable') {
+      pincodeData.deliveryDateAndTime = '';
+    } else {
+      pincodeData.deliveryDateAndTime = '';
+    } */
+    pincodeData.shippingCharge = result[1].ShipCharge || '';
+  }
+  return pincodeData;
 }
