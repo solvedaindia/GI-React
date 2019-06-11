@@ -125,14 +125,12 @@ class Register extends React.Component {
     let errorMessageName; let errorMessageEmail; let errorMessagePassword;
     if (this.state.errorMessageName) {
       errorMessageName = <p className='error-msg'>{this.state.errorMessageName}</p>
-      );
     } else {
       errorMessageName = null;
     }
 
     if (this.state.errorMessageEmail) {
       errorMessageEmail = <p className='error-msg'>{this.state.errorMessageEmail}</p>
-      );
     } else {
       errorMessageEmail = null;
     }
