@@ -11,7 +11,7 @@ export class AboutUs extends React.Component {
     const img2 = require('../../../public/images/interior.jpg')
     const img3 = require('../../../public/images/product1.jpg')
     const img4 = require('../../../public/images/cellphone.jpg')
-    const img5 = require('../../../public/image/teach.jpg')
+    const img5 = require('../../../public/images/teach.jpg')
 
 
     this.state = {
