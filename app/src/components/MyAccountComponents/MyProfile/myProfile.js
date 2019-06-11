@@ -18,7 +18,7 @@ import {
   validateFullName,
   validateMobileNo,
   validateEmailId,
-} from '../../../utils/addressValidations';
+} from '../../../utils/validationManager';
 import { } from '../../../../public/constants/constants';
 
 class MyProfile extends React.Component {

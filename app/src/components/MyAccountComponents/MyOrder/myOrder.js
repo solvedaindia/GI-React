@@ -5,13 +5,14 @@ import {
 } from '../../../../public/constants/constants';
 import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
 import OrderItem from './orderItem';
-import TrackOrder from './trackOrder';
+import TrackOrder from './TrackMyOrder/trackOrder';
 
 class MyOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTrackOrder: this.props.orderRendeStatusPro,
+      isTrackOrder: false,
+      isGuestTrackOrder: this.props.isGuestTrackOrderPro
     };
     //this.renderSelection = this.renderSelection.bind(this)
   }
@@ -24,14 +25,17 @@ class MyOrder extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log('in the Track order --- ',this.state.isTrackOrder);
+    console.log('in the Track order --- ', this.state.isTrackOrder);
   }
 
   render() {
     return (
       <div className='myOrder'>
-        {this.state.isTrackOrder ? <TrackOrder renderSelectionPro={this.renderSelection.bind(this)}/> : <OrderItem renderSelectionPro={this.renderSelection.bind(this)} />}
-
+        {this.state.isTrackOrder ? <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} /> :
+          <OrderItem
+            renderSelectionPro={this.renderSelection.bind(this)}
+            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+          />}
       </div>
     );
   }

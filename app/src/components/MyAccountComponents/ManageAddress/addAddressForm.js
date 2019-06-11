@@ -8,7 +8,7 @@ import {
   validateAddress,
   validateCityDistrict,
   validateState
-} from '../../../utils/addressValidations';
+} from '../../../utils/validationManager';
 import { cityStateAPI, addAddressAPI, updateAddressAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import { string } from 'prop-types';

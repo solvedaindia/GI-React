@@ -41,33 +41,35 @@ export class MyAccountContainer extends React.Component {
 
 
   render() {
-    
+
     console.log('In My Account ---- ', this.props.location);
     const redirectedFrom = this.props.location.state.from;
+    const navigationBar = (
+      <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
+        <ul className="nav nav-tabs">
+          {this.props.username !== null ? <h4 className='username'>{this.props.username}!</h4> : null}
+          <li className='list'><a className={`link ${redirectedFrom === 'myprofile' ? 'active' : ''}`} href="#profile-v" data-toggle="tab">My Profile</a></li>
+          <li className='list'><a className={`link ${redirectedFrom === 'password' ? 'active' : ''}`} href="#changePassword-v" data-toggle="tab">Change Password</a></li>
+          <li className='list'><a className={`link ${redirectedFrom === 'myorder' ? 'active' : ''}`} href="#myOrder-v" data-toggle="tab">My Orders</a></li>
+          <li className='list'><a className={`link ${redirectedFrom === 'address' ? 'active' : ''}`} href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
+          {/* <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
+              <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
+              <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li>
+              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li> */}
+        </ul>
+      </div>
+    )
 
     return (
       <div className='MyAccount'>
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
-              <ul className="nav nav-tabs">
-                {this.props.username !== null ? <h4 className='username'>{this.props.username}!</h4> : null}
-                <li className='list'><a className={`link ${redirectedFrom === 'myprofile' ? 'active' : ''}`} href="#profile-v" data-toggle="tab">My Profile</a></li>
-                <li className='list'><a className={`link ${redirectedFrom === 'password' ? 'active' : ''}`} href="#changePassword-v" data-toggle="tab">Change Password</a></li>
-                <li className='list'><a className={`link ${redirectedFrom === 'myorder' ? 'active' : ''}`} href="#myOrder-v" data-toggle="tab">My Orders</a></li>
-                <li className='list'><a className={`link ${redirectedFrom === 'address' ? 'active' : ''}`} href="#manageAddresses-v" data-toggle="tab">Manage Addresses</a></li>
-                {/* <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
-              <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
-              <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li>
-              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li> */}
-              </ul>
-            </div>
-
-            <div className="col-xs-12 col-sm-9 col-md-9">
+            {this.props.location.state.isGuestTrackOrder ? null : navigationBar}
+            <div className={this.props.location.state.isGuestTrackOrder ? `col-xs-12 col-sm-12 col-md-12` : `col-xs-12 col-sm-9 col-md-9`}>
               <div className="tab-content">
                 <div className={`tab-pane ${redirectedFrom === 'myprofile' ? 'active' : ''}`} id="profile-v"> <MyProfile /></div>
                 <div className={`tab-pane ${redirectedFrom === 'password' ? 'active' : ''}`} id="changePassword-v"><ChangePassword /></div>
-                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v"><MyOrder orderRendeStatusPro={false}/></div>
+                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v"><MyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /></div>
                 <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v"><ManageAddress /></div>
                 {/* <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
               <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>

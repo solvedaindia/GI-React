@@ -176,7 +176,7 @@ class CartCount extends React.Component {
             className="dropdown__toggle dropdown__list-item icons_border"
           >
             <CartLogo />
-            <i className="fa fa-angle-down" aria-hidden="true" />
+            {/* <i className="fa fa-angle-down" aria-hidden="true" /> */}
           </div>
           {minicartDropdownItem}
         </div>

@@ -109,9 +109,7 @@ class UserAccInfo extends React.Component {
 
           </li>
           <li className="listItem">
-            <Link to={{
-              pathname: '/myAccount', state: { from: 'myorder' }
-            }}>
+            <Link to={{pathname: '/myAccount', state: { from: 'myorder' }}}>
               <a className="dropDown">My Orders</a>
             </Link>
 
@@ -138,7 +136,7 @@ class UserAccInfo extends React.Component {
         ));
     } else {
       this.setState({
-        userType: <li className="listItem">
+        userType: <li className="listItemUnSelected">
           <a className="dropDown">Hello Guest!</a>
         </li>,
         loginStatus: <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
@@ -192,7 +190,7 @@ class UserAccInfo extends React.Component {
       dropdownItem = (
         <ul className="userList">
           {/* <li className="listItem"> */}
-          {this.state.userName !== null && getCookie('isLoggedIn') === 'true' ? <li className="listItem">
+          {this.state.userName !== null && getCookie('isLoggedIn') === 'true' ? <li className="listItemUnSelected">
             <a className="dropDown">{this.state.userName}!</a>
           </li> : null}
           {this.state.userType}
