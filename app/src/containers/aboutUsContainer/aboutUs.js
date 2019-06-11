@@ -7,17 +7,51 @@ import  '../../../public/styles/about-us/AboutUs.scss'
 export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
+    const img1 = require('../../../public/images/Bailbrook-House.jpg')
+    const img2 = require('../../../public/images/interior.jpg')
+    const img3 = require('../../../public/images/product1.jpg')
+    const img4 = require('../../../public/images/cellphone.jpg')
+    const img5 = require('../../../public/image/teach.jpg')
+
+
     this.state = {
-      homepageLayout: null,
-      isLoading: false,
-      error: null,
-      ipData: null,
+      index: 0,
+      imgList: [img1, img2, img3, img4, img5]
+      // homepageLayout: null,
+      // isLoading: false,
+      // error: null,
+      // ipData: null,
     };
   }
 
   componentDidMount() {}
 
-  onHandleClick = () => {};
+  onHandleClickFirst= () => {
+    if (this.state.index === 0 || this.state.index === 2 || this.state.index === 3 ){
+      this.setState({index:1})
+    } 
+  };
+  onHandleClickSecond(){
+    if (this.state.index === 0 || this.state.index === 1 || this.state.index === 3 || this.state.index === 4){
+      this.setState({index:2})
+    } 
+  }
+  onHandleClickThird(){
+    if (this.state.index === 0 || this.state.index === 1 || this.state.index === 2 || this.state.index === 4){
+      this.setState({index:3})
+    }
+  }
+  onHandleClickFourth(){
+    if (this.state.index === 1 || this.state.index === 2 || this.state.index === 3 || this.state.index === 4){
+      this.setState({index:0})
+    }
+  }
+  onHandleClickFifth(){
+    if (this.state.index === 1 || this.state.index === 2 || this.state.index === 0){
+      this.setState({index:4})
+    }
+  }
+
 
   render() {
     return (
@@ -52,7 +86,7 @@ export class AboutUs extends React.Component {
               <h1 className="Header-Copy-5">Our Process</h1>
               <img
                 className="rawpixel-983726-unsplash"
-                src={require('../../../public/images/96134077-rawpixel-983726-unsplash.jpg')}
+                src={this.state.imgList[this.state.index]}
                 alt="Initial Ideation"
               />
             </div>
@@ -72,13 +106,12 @@ export class AboutUs extends React.Component {
             </div>
           </div>
           <div>
-            {/* <button onClick={this.handleclick} className="Position-Copy-2">1</button> */}
-            <button className="Position-Copy">1</button>
+            <button className="Position-Copy" onClick={this.onHandleClickFifth.bind(this)}>1</button>
 
-            <button className="Position-Copy-2">2</button>
-            <button className="Position-Copy-2">3</button>
-            <button className="Position-Copy-2">4</button>
-            <button className="Position-Copy-2">5</button>
+            <button onClick={this.onHandleClickSecond.bind(this)} className="Position-Copy-2">2</button>
+            <button onClick={this.onHandleClickThird.bind(this)} className="Position-Copy-2">3</button>
+            <button onClick={this.onHandleClickFourth.bind(this)} className="Position-Copy-2">4</button>
+            <button onClick={this.onHandleClickFirst.bind(this)} className="Position-Copy-2">5</button>
           </div>
           <h1 className="Header-Copy-4">Green Initiatives</h1>
           <div className="container">
