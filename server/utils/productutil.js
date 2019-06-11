@@ -212,8 +212,11 @@ function transformJson(result) {
         promotion => promotion.uniqueID === product.uniqueID,
       );
       // eslint-disable-next-line no-param-reassign
-      product.promotionData = productPromotion[0].promotionData;
+      // product.promotionData = productPromotion[0].promotionData;
       productDetail = productDetailFilter.productDetailSummary(product);
+      productDetail.promotionData = productDetailFilter.getSummaryPromotion(
+        productPromotion[0].promotionData,
+      );
       productListing.push(productDetail);
     });
   }
@@ -224,5 +227,3 @@ function transformJson(result) {
   };
   return resJson;
 }
-
-module.exports.getProductListByIDs = getProductListByIDs;

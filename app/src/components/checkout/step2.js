@@ -15,7 +15,8 @@ import {
   accessTokenCookie,
   userLoginAPI,
   addressListAPI,
-  userDataAPI
+  userDataAPI,
+  PinToCityAPI
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -31,7 +32,10 @@ export class Step2Component extends React.Component {
           showGift: false,
           addressList: null,
           saved_add: 'active_add',
-          new_add: null
+          new_add: null,
+          pin: '',
+          city: '',
+          state: ''
         }
     }
 
@@ -80,6 +84,35 @@ export class Step2Component extends React.Component {
         new_add: null
       })
     }
+
+    callPinApi = (val) => {
+      let token = appCookie.get('accessToken')
+        axios.get(`${PinToCityAPI}${val}`, {
+          headers: { store_id: storeId, access_token: token }
+        }).then(response => {
+          console.log(response.data.data, "pin response");
+          this.setState({
+            city: response.data.data.city,
+            state: response.data.data.state
+          })
+        }).catch(error => {
+          throw new Error(error);
+        })
+    }
+
+    pinChange = (e) => {
+      console.log(e.target.value, 'pin obj')
+      if (e.target.value.length > 6) {
+        return false;
+      } else {
+        if (e.target.value.length === 6) {
+          this.callPinApi(e.target.value)
+        }
+        this.setState({
+          pin: e.target.value
+        });
+        }
+      }
 
     handleSameBill = () => {
       if(this.state.same_bill == false) {
@@ -151,7 +184,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 form-group">
                         <label htmlFor="pin">Pin Code</label>
-                        <input type="number" name="pin" className="form-control" />
+                        <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e => this.pinChange(e)} />
                       </div>
                       <div className="col-md-6 form-group">
                         <label htmlFor="email">Email</label>
@@ -167,11 +200,11 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 form-group">
                         <label htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" />
+                        <input type="text" name="city" className="form-control" value={this.state.city} />
                       </div>
                       <div className="col-md-6 form-group">
                         <label htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" />
+                        <input type="text" name="state" className="form-control" value={this.state.state} />
                       </div>
                     </div>
                     </div> : ''}

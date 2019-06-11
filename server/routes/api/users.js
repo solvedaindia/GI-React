@@ -15,6 +15,19 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/', (req, res, next) => {
+  usersHandler.updateUserDetails(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 router.put('/changepassword', (req, res, next) => {
   usersHandler.changeUserPassword(req.body, req.headers, (err, result) => {
     if (err) {
@@ -126,6 +139,19 @@ router.post('/forgotpassword', (req, res) => {
         status: 'failure',
         error: err,
       });
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/sociallogin/setpassword', (req, res, next) => {
+  usersHandler.setSocialPassword(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
       return;
     }
     res.status(200).send({

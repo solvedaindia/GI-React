@@ -118,6 +118,7 @@ export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
+export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 
