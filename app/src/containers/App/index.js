@@ -39,7 +39,7 @@ import CheckoutContainer from '../checkoutContainer/index'
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
-import AboutUsContainer from '../aboutUsContainer/aboutUs';
+import AboutUsContainer from '../aboutUsContainer/index';
 
 export default class App extends React.Component {
   constructor(props) {

@@ -1,8 +1,11 @@
 import React from 'react';
+import MediaPress from '../../components/aboutUs/mediaPress';
+
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/about-us/AboutUs.scss'
+
 
 export class AboutUs extends React.Component {
   constructor(props) {
@@ -52,12 +55,14 @@ export class AboutUs extends React.Component {
     }
   }
 
+  
+
 
   render() {
     return (
       <div className="container">
         <div className="About-Us">
-          <h1 className="about-Us">About-Us</h1>
+          <h1 className="abouts-Us">About-Us</h1>
           <div className="row">
             <div className="col-md-4">
               <p className="Godrej-Interio-is-In">
@@ -146,7 +151,7 @@ export class AboutUs extends React.Component {
             <div className="container">
               <div className="Mask">
                 <h1 className="headerIn">Careers</h1>
-                <p1 className="Your-information-is">
+                <p1 className="Your-information-is" >
                   Your information is secure and encrypted, consectetur
                   <br /> adipisicing elit, sed do eiusmod tempor incididunt ut{' '}
                   <br />
@@ -157,23 +162,11 @@ export class AboutUs extends React.Component {
               </div>
             </div>
           </div>
-          <div className="container">
-            <h1 className="Header-Copy-2">Media/Press</h1>
-            <h2 className="Wed-love-to-hear-from-you-Copy ">Latest News</h2>
-            <hr className="hr" />
-          </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <img
-                  className="michael-d"
-                  src={require('../../../public/images/Bailbrook-House.jpg')}
-                  alt="rectangle"
-                />
-              </div>
-              <div className="col-md-6" />
-            </div>
-          </div>
+           
+           {/*--media/press section--*/} 
+            <MediaPress/>
+
+         
         </div>
       </div>
     );

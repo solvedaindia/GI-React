@@ -6,7 +6,7 @@
   height: 3555px;
   background-color: #ffffff;
 }
-.about-Us {
+.abouts-Us {
   width: 129px;
   height: 36px;
   font-family: CeraGodrejInterio;
@@ -144,24 +144,8 @@
   width: 18px;@import '../variable';
   @import '../base';
   
-  .About-Us {
-    width: 1440px;
-    height: 3555px;
-    background-color: #ffffff;
-  }
-  .about-Us {
-    width: 129px;
-    height: 36px;
-    font-family: CeraGodrejInterio;
-    font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
-  }
-  
+ 
+ 
     .Godrej-Interio-is-In {
       width: 751px;
       height: 260px;
@@ -295,18 +279,7 @@
     letter-spacing: normal;
     color: #000000;
   }
-  .Position-Copy-2 {
-    width: 18px;
-    height: 31px;
-    font-family: CeraGodrejInterio;
-    font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    color: var(--light-blue-grey);
-  }
+ 
   .Header-Copy-4 {
     width: 231px;
     height: 36px;
@@ -333,7 +306,7 @@
     width: 263px;
     height: 263px;
   }
-  title {
+  .title {
     width: 417.3px;
     height: 28px;
     font-family: CeraGodrejInterio;
@@ -417,18 +390,10 @@
     letter-spacing: normal;
     color: var(--battleship-grey);
   }
-  hr { 
-    display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-  }
+ 
   .michael-d {
-    width: 556px;
-    height: 371px;
+    width: 555px;
+    height: 370px;
   }
   
   height: 31px;
@@ -453,18 +418,7 @@
   letter-spacing: normal;
   color: var(--light-blue-grey);
 }
-.Header-Copy-4 {
-  width: 231px;
-  height: 36px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-}
+
 .Rectangle-Copy-3 {
   width: 149px;
   height: 354px;
@@ -534,23 +488,8 @@ title {
   text-align: center;
   color: #ffffff;
 }
-.Rectangle1 {
-  width: 158px;
-  height: 37.8px;
-  background-color: #ffffff;
-}
-.Header-Copy-2 {
-  width: 179px;
-  height: 36px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-}
+
+
 .Wed-love-to-hear-from-you-Copy {
   width: 121px;
   height: 30px;
@@ -571,8 +510,4 @@ hr {
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-}
-.michael-d {
-  width: 556px;
-  height: 371px;
 }
