@@ -27,7 +27,7 @@ export class AboutUs extends React.Component {
   componentDidMount() {}
 
   onHandleClickFirst= () => {
-    if (this.state.index === 0 || this.state.index === 2 || this.state.index === 3 ){
+    if (this.state.index === 0 || this.state.index === 2 || this.state.index === 3 || this.state.index === 4){
       this.setState({index:1})
     } 
   };
