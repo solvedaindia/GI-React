@@ -55,7 +55,8 @@ export class HomapegeLayout extends React.Component {
 	}
 
 	render() {
-		const { homepageLayout } = this.state;
+        const { homepageLayout } = this.state;
+        console.log('homepagelayliut',homepageLayout)
 		return (
             !!homepageLayout && homepageLayout.map((widget, i) => (
                 <WidgetList

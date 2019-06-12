@@ -40,6 +40,8 @@ import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
+import Inspiration from '../InspirationCont/index';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -150,6 +152,8 @@ export default class App extends React.Component {
           <Route path="/compare" component={CompareContainer} />
           <Route path="/wishlist" component={MyWishlist} />
           <Route path="/checkout" component={CheckoutContainer} />
+          <Route path="/inspiration" component={Inspiration} />
+
         </Switch>
         <FooterContainer />
       </div>
