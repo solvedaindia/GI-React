@@ -107,7 +107,7 @@ export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 /* Bank EMI API */
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
 /* Pincode API */
-export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productserviceability`;
+export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
 

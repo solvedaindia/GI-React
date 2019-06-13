@@ -107,14 +107,15 @@ class PdpComponent extends React.Component {
 	}
 
 	callPinCodeAPI(skuDataArr, resolvedSkuData) {
-		const params = {
-			pincode: appCookie.get('pincode'),
-			sku_partNumber: resolvedSkuData.partNumber,
-			quantity: 1,
-			sku_id: resolvedSkuData.uniqueID
+		const dataParams =  {
+			params: {
+				"partnumber": resolvedSkuData.partNumber,
+				"quantity": 1,
+				"uniqueid": resolvedSkuData.uniqueID
+			}
 		}
 		
-		apiManager.post(pinCodeAPI, params)
+		apiManager.get(pinCodeAPI+appCookie.get('pincode'), dataParams)
 		.then(response => {
 			this.setState({
 				selectedSku: skuDataArr,
@@ -233,7 +234,7 @@ class PdpComponent extends React.Component {
 					</Row>
 					</>
 				) : (
-					<div> Data is Loading..</div>
+					<div></div>
 				)}    
 				<Grid>
 					<Row>           
@@ -258,7 +259,7 @@ class PdpComponent extends React.Component {
 								similarCombosProducts={this.state.skuData}
 							/>
 						) : (
-							<div> Data is Loading..</div>
+							<div></div>
 						)}
 					</Row>
 				</Grid>        

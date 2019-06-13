@@ -36,8 +36,11 @@ class addToCartComponent extends React.Component {
 			return <div className='pincodeNotServiceable'>{errorMsg}</div>
 		} else {
 			if (this.deliveryTime === '') {
-				this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
-				//{props.deliveryDateAndTime}
+				if (props.deliveryDateAndTime) {
+					this.deliveryTime = props.deliveryDateAndTime;
+				} else {
+					this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
+				}
 			}
 			return <div className='soldbyDealers'>{this.deliveryTime}</div>
 		}

@@ -35,7 +35,7 @@ class productFeatures extends React.Component {
   render() {
 		return (
 			<>
-			{this.props.productFeatureData.productFeatures &&
+			{this.props.productFeatureData.productFeatures.length > 0 &&
 			<Col md={12} sm={12} xs={12}>
 				<div className='PdpFeatures'>
 					<div className='featureVertical-tab'>
