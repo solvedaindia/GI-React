@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Row, Col, Label } from 'react-bootstrap';
 import {
   registartionAPI,
   generateOTPAPI,
-  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import {
@@ -11,6 +10,8 @@ import {
   regexMobileNo,
   validateEmptyObject,
   regexPw,
+  validateFullName,
+  regexName
 } from '../../utils/validationManager';
 import {
   registerWithEmail,
@@ -32,7 +33,8 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
-    };
+	};
+	this.callbackFunc = this.callbackFunc.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +42,8 @@ class RegisterWithEmailMobile extends React.Component {
       this.setState({
         name: this.props.userdata.name,
         userId: this.props.userdata.user_id,
-        password: this.props.userdata.password,
+		//password: this.props.userdata.password,
+		password: ''
       });
     }
   }
@@ -65,7 +68,12 @@ class RegisterWithEmailMobile extends React.Component {
         errorMessageName: 'This field is required',
       });
       isValidate = false;
-    }
+	} else if (!validateFullName(obj.name) || !(regexName.test(obj.name))) {
+		this.setState({
+		  errorMessageName: 'Please enter a valid Name. It should not exceed 100 characters',
+		});
+		isValidate = false;
+	}
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
@@ -95,13 +103,19 @@ class RegisterWithEmailMobile extends React.Component {
         errorMessagePassword: 'The field is required',
       });
       isValidate = false;
-    } else if (!regexPw.test(obj.password)) {
+    } else if (!regexPw.test(obj.password) && obj.password.length < 25) {
       this.setState({
         errorMessagePassword:
           'Invalid Password. Password should have min 6 characters and atleast 1 number',
       });
       isValidate = false;
-    }
+    } else if ((!regexPw.test(obj.password) && obj.password.length > 24) || obj.password.length > 25) {
+		this.setState({
+		  errorMessagePassword:
+			'Invalid Password. Password should have max 25 characters and atleast 1 number',
+		});
+		isValidate = false;
+	  }
     return isValidate;
   }
 
@@ -124,15 +138,15 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.handleApi(
         registartionAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		this.props.registrationType,
+		this.callbackFunc
       );
     } else {
       this.props.handleApi(
         generateOTPAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		this.props.registrationType,
+		this.callbackFunc
       );
     }
   };
@@ -154,6 +168,13 @@ class RegisterWithEmailMobile extends React.Component {
       });
     }
   }
+
+  callbackFunc(errorMsg) {
+	this.setState({
+	 	errorMessageUserId: errorMsg
+	 });
+  }
+
 
   renderLoginComponent() {
     this.props.loginComponentData();

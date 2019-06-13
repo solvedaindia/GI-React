@@ -18,7 +18,10 @@ class WelcomeForm extends Component {
       shown: true,
       errorMessageUserId: null,
       errorMessagePassword: null,
+      isShowPass: false,
+      inputType: 'password',
     };
+    this.showHidePass = this.showHidePass.bind(this);
   }
 
   /* Handle Change */
@@ -82,6 +85,21 @@ class WelcomeForm extends Component {
     this.props.handleUserData(data);
   };
 
+    /* Show Hide Password */
+    showHidePass() {
+      if (this.state.isShowPass) {
+        this.setState({
+          isShowPass: false,
+          inputType: 'password',
+        });
+      } else {
+        this.setState({
+          isShowPass: true,
+          inputType: 'text',
+        });
+      }
+    }
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -110,14 +128,35 @@ class WelcomeForm extends Component {
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
+
+        <div className='password-field'>
         <Input
-          type="password"
+          type={this.state.inputType}
           name="password"
           title="Password"
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
         />
+       <span
+            onClick={this.showHidePass}
+            className="valiationPosition-NewPassword"
+          >
+            {
+              <img
+                src={require('../../../src/components/SVGs/eye.svg')}
+              />
+            }
+          </span>
+        </div>
+        {/* <Input
+          type={this.state.inputType}
+          name="password"
+          title="Password"
+          placeholder=""
+          onChange={this.handleChange}
+        /> */}
+        
         {errorMessagePassword}
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
