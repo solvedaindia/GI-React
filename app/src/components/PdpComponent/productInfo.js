@@ -18,7 +18,11 @@ class productInfo extends React.Component {
 	}
 
 	render() {
-		let emidata = this.props.productData.emiData;
+		let emiValue = false;
+		if (this.props.productData.emiData) {
+			emiValue = true;
+		}
+
 		return (
 			<>
 			<div className="price">
@@ -50,11 +54,11 @@ class productInfo extends React.Component {
 					}
 				</ul>
 			</div>
-			{ this.props.productData.offerPrice >= 1500 && (
+			{ this.props.productData.emiData && this.props.productData.offerPrice >= 1500 && (
 			<div className="starting-emitext">
 				<div className='offerbg text'> <span className='emitext'>EMI</span></div>
 				<div className='text'>Starting from </div>
-				<div className='text bold'>रु {emidata} </div>                   
+				<div className='text bold'>रु {this.props.productData.emiData} </div>                   
 				<div className='text'>per month</div>
 				<div className='text emiinfo'><EmiInfo price={this.props.productData.offerPrice}/></div>
 			</div>

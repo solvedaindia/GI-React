@@ -70,7 +70,8 @@ class productImagesAndVideos extends React.Component {
 					const fullImagePath = `${newMachineUrl}/${store}/${catalog}/${imagePath}`;
 					this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
 			} else {
-				this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'});
+				const videoUrl = `${newMachineUrl}/${store}/${catalog}/${data.videoPath}`;
+				this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': videoUrl});
 				}
 			}
 		);

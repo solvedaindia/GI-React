@@ -121,6 +121,10 @@ export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
 /* User Detail API */
 export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
+/* Pincode API */
+export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
+/* Find Inventory API */
+export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
