@@ -153,7 +153,6 @@ class addToCartComponent extends React.Component {
 
 	/* render buttons */
 	renderButton(props, quantity) {
-		console.log('render button=>>', props);
 		if(!props.pincodeServiceable) {
 			return <Button className="btn addcartbtn" disabled={true}>Add to Cart</Button>
 		} else if (props.inventoryStatus === 'unavailable' && quantity === 1) {

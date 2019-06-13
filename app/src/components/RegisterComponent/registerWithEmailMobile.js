@@ -19,6 +19,7 @@ import {
   registerWithMobileNumText,
 } from './constants';
 import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
+import appCookie from '../../utils/cookie';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -118,6 +119,7 @@ class RegisterWithEmailMobile extends React.Component {
       name: this.state.name,
       user_id: this.state.userId,
       password: this.state.password,
+      pincode: appCookie.get('pincode')
     };
 
     if (this.props.registrationType === registerWithEmail) {

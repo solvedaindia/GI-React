@@ -159,7 +159,7 @@ class PdpComponent extends React.Component {
 			<div className="galleryArea">
 				{!isLoading ? (
 					<>
-					{ isAddToCart !== 'true' &&
+					{ isAddToCart === 'true1' &&
 						<Row>
 							<Col md={7} sm={12} xs={12}>
 								<div className="product">
