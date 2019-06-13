@@ -72,7 +72,7 @@ class SimilarCombosProducts extends React.Component {
 		};
 		return (
 			<>
-			{ this.props.similarCombosProducts.combos && this.props.similarCombosProducts.similarProducts &&
+			{ this.props.similarCombosProducts.combos.length > 0 && this.props.similarCombosProducts.similarProducts.length > 0 &&
 			<Col  md={12} sm={12} xs={12} className='similarProduct-Wrapper'>
 				<Row>
 					<Col md={12} sm={12} xs={12} className="similar-pro-tab text-center">

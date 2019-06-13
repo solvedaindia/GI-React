@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap';
 
 const productKeywords = props => (
 	<>
-		{props.productKeywords.keywords && 
+		{props.productKeywords.keywords.length > 0 && 
 			<Col md={12} sm={12} xs={12}>
 				<div className='moreKeyword'>
 					<h3 className="heading">More Items You May Like</h3>

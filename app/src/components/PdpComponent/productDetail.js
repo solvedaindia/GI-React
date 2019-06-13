@@ -85,7 +85,7 @@ class productDetail extends React.Component {
 	render() {
 		return (
 			<>
-				{this.props.productDetail.productDetails &&
+				{this.props.productDetail.productDetails.description.length > 0 &&
 				<div className="product_details">
 					<Row>
 						<Col md={12} sm={12} xs={12}>
