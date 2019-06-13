@@ -28,7 +28,7 @@ export class Inspiration extends React.Component {
                       src={require('../../../public/images/product-slider.jpg')}
                       alt="rectangle"
                     />
-                    <p1 className="headerText">Lookbook of the Year 2018</p1>
+                    <div className="headerText">Lookbook of the Year 2018</div>
                     </div>
                     <InsCrousel />
                     <div className="container">
