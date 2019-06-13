@@ -209,14 +209,32 @@ export class CheckoutComponent extends React.Component {
 
     render() {
       return (
-        <div className="container" style={{marginBottom: '100px'}}>
-          <div className="row">
-            <h2 style={{fontWeight: "bold"}}>Checkout</h2>
-            {this.handleStep()}
-            <div className="col-md-4">
-              <OrderSummaryComponent />
+        <div className='checkout'>
+        <div className="container">
+          <div className='row'>
+          <div className='col-md-8'>
+            <h3 className='heading'>Checkout</h3>
+          </div>
+
+          <div className='col-md-4'>
+            <div className='summaryHeading'>
+              {/* <h4 className='headingOrder'>Order Summary</h4> */}
             </div>
           </div>
+          </div>
+
+          <div className="row">      
+           <div className='col-md-12'>
+            {/* <h3 className='heading'>Checkout</h3> */}
+            <div className='row'>
+              {this.handleStep()}
+              {/* <div className="col-md-4"> */}
+                <OrderSummaryComponent />
+              {/* </div>  */}
+            </div>
+            </div>    
+          </div>
+        </div>
         </div>
       )
     }

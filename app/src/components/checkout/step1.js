@@ -193,21 +193,22 @@ export class Step1Component extends React.Component {
         errorMessagePassword = this.errorMessage(this.state.errorMessagePassword);
       }
       return (
-            <div className="col-md-8">
-              <div className="row">
-                <hr style={{marginBottom: "0px"}} className="hr_line" />
-              </div>
-              <div className="row" style={{display: "table", width: '100%'}}>
-                <div style={{display: "table-row"}}>
-                  <div style={{background:"#eeeded", display: "table-cell", float: "none"}} className="col-md-3">
-                    <h4 style={{marginTop: "30px", fontWeight: "bold"}}>Mobile or Email</h4>
-                  </div>
-                  <div className="col-md-9" style={{display: "table-cell", float: "none", paddingBottom: "20px"}}>
-                    <p>Your Shipping and payment details will be assocaited with this number</p>
+            <div className="col-md-8 checkout_wrapper"> 
+               <div className='listRow clearfix'>
+                 <div className='stepActive'>
+                  <div className='stepBg'>1</div>
+                 </div>
+                 
+                 <div className='leftBox bgGrey'>
+                    <div className='heading-label'>Mobile or Email</div>
+                 </div>
+
+                  <div className="rightBox" id='rightHeight'>
+                    <div className='shipping-text'>Your Shipping and payment details will be assocaited with this number</div>
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          <label htmlFor="mobile">Mobile Number/Email Address</label>
+                          <label className='from-label' htmlFor="mobile">Mobile Number/Email Address</label>
                           <input type="text" name="userId" id="userId" value={this.state.userId} className="form-control"
                             onChange={e => this.handleChange(e)} />
                           {errorMessageUserId}
@@ -219,12 +220,12 @@ export class Step1Component extends React.Component {
                           value={this.props.logonBy ? this.props.logonBy : null}
                           onChange={this.handleChange}
                          /> */}
-                        {this.state.has_pass ?<div className='form-group'><label htmlFor="pass">Password</label> <input
+                        {this.state.has_pass ?<div className='form-group'><label className='from-label' htmlFor="pass">Password</label> <input
                             type="text" name="password" id="password" onChange={this.handleChange}
-                            className="form-control" style={{marginTop: "10px"}} />{errorMessagePassword}</div> : ''}
-                        <div style={{marginTop: '10px'}}>
-                          <input type="checkbox" name="has_pass" onChange={this.handleHasPass} />
-                          <label htmlFor="has_pass" style={{marginLeft: "10px"}}>I have a password</label>
+                            className="form-control"/>{errorMessagePassword}</div> : ''}
+                        <div className='havePassword'>
+                          <input className='checkBox' type="checkbox" name="has_pass" onChange={this.handleHasPass} />
+                          <label className='form-label' htmlFor="has_pass">I have a password</label>
                         </div>
                         <a onClick={this.openModal}>Open Modal</a>
                         {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)}
@@ -244,39 +245,35 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    <button
-                      style={{width: '100%', background: 'black', color: 'white', fontWeight: 'bold', padding: '10px'}}
-                      className="btn btn-large" onClick={this.handleFormSubmit}>Proceed to checkout</button>
+                    <button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed to checkout</button>
                   </div>
+            
+              
+                </div>
+              <div className="listRow clearfix" disabled="disabled">
+                 <div className='stepActive'>
+                  <div className='stepbgNone'>2</div>
+                 </div>
+                <div className="leftBox">
+                  <div className='heading-label'>Ship To</div>
+                </div>
+                <div className="rightBox">                 
+                <div className='heading-label'>Add your shipping address</div>              
                 </div>
               </div>
-              <div className="row">
-                <hr style={{marginTop: "0px"}} className="hr_line" />
-              </div>
-              <div className="row">
-                <div className="col-md-3">
-                  <h4>Ship To</h4>
+              
+              <div className="listRow clearfix" disabled="disabled">
+                 <div className='stepActive'>
+                   <div className='stepbgNone'>3</div>
+                 </div>
+                <div className="leftBox">
+                <div className='heading-label'>Pay Byf</div>
                 </div>
-                <div className="col-md-9">
-                  <h5>
-                    Add your shipping address
-                  </h5>
-                </div>
-              </div>
-              <div className="row">
-                <hr className="hr_line" />
-              </div>
-              <div className="row">
-                <div className="col-md-3">
-                  <h4>Pay By</h4>
-                </div>
-                <div className="col-md-9">
-                  <h5>Choose a payment method</h5>
+                <div className="rightBox">
+                <div className='heading-label'>Choose a payment method</div>
                 </div>
               </div>
-              <div className="row">
-                <hr className="hr_line" />
-              </div>
+             
             </div>
       )
     }

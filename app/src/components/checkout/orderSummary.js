@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../public/styles/checkout.scss';
 
+import EMI from '../../../public/images/emi.svg';
 export class OrderSummaryComponent extends React.Component {
     constructor(props){
         super(props);
@@ -15,58 +16,47 @@ export class OrderSummaryComponent extends React.Component {
 
     render() {
       return (
-            <div className="row">
-              <h4 style={{fontWeight: "bold"}}>Order Summary</h4>
-              <div className="col-md-9">
-                <h5 style={{fontWeight: 'bold'}}>Cart Total</h5>
+            <div className='col-md-4 col-sm-12 col-xs-12 orderSummary'>
+              <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
+              <div className='listRow clearfix'>
+                <div className='lefttext-box'>Cart Total</div>
+                <div className='righttext-box'>&#8377;25000</div>
               </div>
-              <div className="col-md-3">
-                <h5 style={{fontWeight: 'bold', float: 'right'}}>&#8377;25000</h5>
+
+              <div className='listRow clearfix'>
+                <div className='lefttext-box'>Product Discount</div>
+                <div className='righttext-box'>- &#8377;500</div>
               </div>
-              <div className="col-md-9">
-                <h5 style={{fontWeight: 'bold'}}>Product Discount</h5>
+
+              <div className='listRow clearfix'>
+                <div className='lefttext-box'>Order Discount</div>
+                <div className='righttext-box'>- &#8377;500</div>
               </div>
-              <div className="col-md-3">
-                <h5 style={{fontWeight: 'bold', float: 'right'}}>- &#8377;500</h5>
+
+              <div className='listRow clearfix'>
+                <div className='lefttext-box'>Shipping</div>
+                <div className='righttext-box'>Free</div>
               </div>
-              <div className="col-md-9">
-                <h5 style={{fontWeight: 'bold'}}>Order Discount</h5>
+
+              <div className='freeshipping'>Free shipping on cart total above &#8377;5000  </div>
+              <div className='startEmi clearfix'>
+                <div className='emi-icon'><img src={EMI} alt='EMI'/></div>
+                <div className='emitext'> Starting from &#8377;999 per month</div>
+                <div className='knowmore'>Know More</div>
               </div>
-              <div className="col-md-3">
-                <h5 style={{fontWeight: 'bold', float: 'right'}}>- &#8377;500</h5>
+             
+             <div className='totalBox clearfix'>
+                <div className='totaltext'><span className='label-text'>Total</span><br/>
+                <div className='savetext'><span className='save-label'>You saved</span> <span className='saving-amount'>&#8377;2500</span></div>
+                </div>
+                <div className='totalAmount'>&#8377;24,000</div>
+             </div>              
+              
+              <div className="payBtn">
+                <button className="btn-block btn-blackbg">Pay &#8377;24,000</button>
               </div>
-              <div className="col-md-9">
-                <h5 style={{fontWeight: 'bold'}}>Shipping</h5>
-              </div>
-              <div className="col-md-3">
-                <h5 style={{fontWeight: 'bold', float: 'right'}}>Free</h5>
-              </div>
-              <div className="col-md-12">
-                <p style={{fontSize: "12px"}}>Free shipping on cart total above &#8377;5000</p>
-                <hr style={{marginTop: '10px', marginBottom: '10px'}} />
-              </div>
-              <div className="col-md-8">
-                <h5 style={{fontWeight: 'bold'}}>EMI Starting from &#8377;999 per month</h5>
-              </div>
-              <div className="col-md-4">
-                <h5 style={{fontWeight: 'bold', color: '#036cc5', float: 'right'}}>Know More</h5>
-              </div>
-              <div className="col-md-12">
-                <hr style={{marginTop: '10px', marginBottom: '0px'}} />
-              </div>
-              <div className="col-md-8">
-                <h3 style={{fontWeight: 'bold', color: '#036cc5'}}>Total</h3>
-              </div>
-              <div className="col-md-4">
-                <h3 style={{fontWeight: 'bold', color: '#036cc5', float: 'right'}}>&#8377;24,000</h3>
-              </div>
-              <div className="col-md-12">
-                <p style={{fontSize: '12px'}}>You saved <span style={{color: '#00b5a4', fontWeight: "bold"}}>&#8377;2500</span></p>
-              </div>
-              <div className="col-md-12"><button className="btn btn-large"
-                  style={{width: '100%', background: 'black', color: 'white'}}>Pay &#8377;24,000</button></div>
-              <div className="col-md-12" style={{marginLeft: "135px", marginTop: '20px'}}>
-                <p style={{fontSize:"12px"}}>Secure Checkout</p>
+              <div className="SecureCheckout">
+                Secure Checkout
               </div>
             </div>
       )

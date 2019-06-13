@@ -16,6 +16,10 @@ import CompItem from '../../components/PlpComponent/compItem';
 import plus from '../../../public/images/plusIcon.svg';
 import { Route, NavLink, Link } from 'react-router-dom';
 
+import DownArrow from '../../../public/images/down-arrow.svg';
+import UpArrow from '../../../public/images/up-arrow.svg';
+
+
 export class CompContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -98,8 +102,8 @@ export class CompContainer extends React.Component {
     // alert(this.state.modalClass)
     return (
       <>
-      {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <button className='btnCompare' onClick={this.showHideCompare}> hide </button> :
-    <button onClick={this.showHideCompare} className="btnCompare"> show</button> : ''}
+      {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow'/> </button> </div>:
+    <div className='compare'><button onClick={this.showHideCompare} className="btnCompare"> <img className='arrow' src={UpArrow} alt='upArrow'/></button><div className='clearfix'></div> <div className='comparelebal'>Compare</div></div> : ''}
     {this.props.compData.length > 0 ? <div  className={`animationDIV ${this.state.modalClass}`} id='change'>
       {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
       <div  className='compareProductwrap'>
