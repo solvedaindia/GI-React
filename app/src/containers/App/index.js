@@ -41,6 +41,8 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
+import Kitchens from '../KitchensContainer/index';
+
 
 
 export default class App extends React.Component {
@@ -153,6 +155,8 @@ export default class App extends React.Component {
           <Route path="/wishlist" component={MyWishlist} />
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/inspiration" component={Inspiration} />
+          <Route path="/kitchens" component={Kitchens} />
+
 
         </Switch>
         <FooterContainer />
