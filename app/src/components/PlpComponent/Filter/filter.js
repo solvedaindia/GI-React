@@ -7,6 +7,7 @@ import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
+import { imagePrefix } from '../../../../public/constants/constants';
 
 const downArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
@@ -142,7 +143,7 @@ class Filter extends React.Component {
   }
 
   filterOptions(alreadyAddedFiltersArr) {
-    
+
     //return this.props.dataPro.facetValues.map((option, i) => {
     var item = this.props.dataPro.facetValues.map((option, i) => {
 
@@ -162,8 +163,23 @@ class Filter extends React.Component {
 
       var checkItem;
       // if (option.facetImage !== "") { //this condition to display all the images in any facet.
-        if (this.props.dataPro.facetName === 'Color') { //Show images only in colors facet
-        const checkNew = (<img className='circle' src={'https://192.168.0.36:8443' + option.facetImage} />);
+      if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //Show images only in colors facet
+
+        let colorStyle = {
+          display: "block",
+        }
+        let imgUrl = null;
+        let colorRGBClass;
+        if (option.colorCode) {
+          colorRGBClass = 'circleRGB'
+          colorStyle = { backgroundColor: `rgb${option.colorCode}` };
+        }
+        else {
+          colorRGBClass = 'circle'
+          imgUrl = `${imagePrefix}${option.facetImage}`;
+        }
+
+        const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
           {checkNew}
         </label>
@@ -176,7 +192,7 @@ class Filter extends React.Component {
         <li key={i} className='list'>
           <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
             <div className='input_box'>
-            {checkboxItem}   
+              {checkboxItem}
               {checkItem}
             </div>
 

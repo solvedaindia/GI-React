@@ -48,7 +48,7 @@ class CompPrd extends React.Component {
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
             {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">80 cm</span></div> : <p>80 cm</p>}
           </Col>)
-      );
+      // );
       heights.push(
         <Col
           className={
@@ -57,10 +57,10 @@ class CompPrd extends React.Component {
               : index == 1
                 ? 'col-md-4 attr-desc'
                 : 'col-md-2 attr-desc'
-          }
+          }>
             {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">120 cm</span></div> : <p>120 cm</p>}
           </Col>)
-      );
+      // );
       Depth.push(
         <Col
           className={
@@ -69,10 +69,10 @@ class CompPrd extends React.Component {
               : index == 1
                 ? 'col-md-4 attr-desc'
                 : 'col-md-2 attr-desc'
-          }
+          }>
             {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">100 cm</span></div> : <p>100 cm</p>}
           </Col>)
-      );
+      // );
     });
 
     dims.push(<Row>{weights}</Row>);

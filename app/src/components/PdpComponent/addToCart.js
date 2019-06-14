@@ -170,7 +170,7 @@ class addToCartComponent extends React.Component {
       return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
     } 
     return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
-    );
+    
   }
 
   render() {
