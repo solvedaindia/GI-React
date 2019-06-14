@@ -108,6 +108,11 @@ const errorlist = {
       'This Mobile Number already exists',
     ],
   },
+  order_not_found: {
+    status_code: 400,
+    error_key: 'order_not_found',
+    error_message: 'An order with reference to this orderId does not exist',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -233,6 +238,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
         return errorlist.user_does_not_exists;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND') {
+        return errorlist.order_not_found;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||

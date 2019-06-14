@@ -120,7 +120,7 @@ class MyProfile extends React.Component {
           inputLogoId: response.data.data.logonID,
           userResponse: response.data.data,
         });
-        this.findLogoId();
+        this.props.myProfileCallbackPro(response.data.data.name, response.data.data.field3);
       })
       .catch(error => {
         // return null;
@@ -155,14 +155,6 @@ class MyProfile extends React.Component {
       else {
         this.state.dataLoad.field1 = this.state.inputText_number
       }
-
-
-      // if (this.state.logonId === this.state.inputText_email) {
-      //   this.state.dataLoad.logonid = this.state.inputText_email
-      // }
-      // else {
-      //   this.state.dataLoad.field1 = this.state.inputText_email
-      // }
     }
 
     if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
@@ -175,13 +167,6 @@ class MyProfile extends React.Component {
       else {
         this.state.dataLoad.logonid = this.state.inputText_email
       }
-
-      // if (this.state.logonId === this.state.inputText_number) {
-      //   this.state.dataLoad.logonid = this.state.inputText_number
-      // }
-      // else {
-      //   this.state.dataLoad.field1 = this.state.inputText_number
-      // }
     }
 
     apiManager.post(userDetailValidateAPI, this.state.dataLoad)
@@ -221,10 +206,6 @@ class MyProfile extends React.Component {
   }
 
   enteredOTPCallback(otpText) {
-    console.log('Enter OTP --- ', otpText);
-    // this.setState({
-    //   enteredOTP: otpText,
-    // })
     this.state.enteredOTP = otpText
     this.updateUserDetail();
   }
@@ -248,6 +229,7 @@ class MyProfile extends React.Component {
           });
         }, 2000);
         this.setState({
+          dataLoad: {},
           noteItem: (
             <div className="noteMsg">
               <span className="successMsg">Profile Updated!</span>
@@ -272,23 +254,6 @@ class MyProfile extends React.Component {
         });
         //alert(error.response.data.error.error_message)
       });
-  }
-
-  findLogoId() {
-    if (regexEmail.test(this.state.inputText)) {
-      // LogonId is Email
-      this.setState({
-        logonID: this.state.inputText_email,
-        field1: this.state.inputText_number
-      })
-    }
-    else {
-      // LogonId is Mobile Number
-      this.setState({
-        logonID: this.state.inputText_number,
-        field1: this.state.inputText_email
-      })
-    }
   }
 
   handleInput(value) {

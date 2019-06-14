@@ -10,6 +10,7 @@ const otpHandler = require('./otphandler');
 
 const defaultPincode = '122001';
 const passwordChangeMessage = 'Password Changed Successfully';
+const socialPasswordMessage = 'Password Successfully Reset';
 
 /**
  * Registeres User in WCS
@@ -69,8 +70,7 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
         const signupResponseBody = {
           access_token: accessToken,
           userDetails: {
-            firstName: reqBody.firstName,
-            lastName: reqBody.lastName,
+            name: reqBody.firstName,
             pincode: reqBody.zipCode,
           },
         };
@@ -390,9 +390,23 @@ module.exports.getUserAddress = function getUserAddress(headers, callback) {
         const resJson = {
           addressList: [],
         };
-        if (response.body.contact && response.body.contact.length > 0) {
-          response.body.contact.forEach(addressElement => {
-            resJson.addressList.push(profileFilter.userAddress(addressElement));
+        const addressList = response.body.contact;
+        if (addressList && addressList.length > 0) {
+          addressList.forEach((addressElement, i) => {
+            const filteredAddress = profileFilter.userAddress(addressElement);
+            if (filteredAddress.isDefault === true) {
+              resJson.addressList.push(filteredAddress);
+              addressList.splice(i, 1);
+            }
+          });
+          addressList.sort(
+            (a, b) =>
+              parseInt(b.nickName.split('_')[1], 10) -
+              parseInt(a.nickName.split('_')[1], 10),
+          );
+          addressList.forEach(addressElement => {
+            const filteredAddress = profileFilter.userAddress(addressElement);
+            resJson.addressList.push(filteredAddress);
           });
         }
         callback(null, resJson);
@@ -735,11 +749,11 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
   const reqBody = {
     logonPassword: params.new_password,
     logonPasswordVerify: params.new_password,
-    userField1: headers.userId,
+    userField1: null,
     sociallogin: 'true',
   };
 
-  const originUrl = constants.setSocialLoginPassword.replace(
+  const originUrl = constants.updateProfile.replace(
     '{{storeId}}',
     headers.store_id,
   );
@@ -754,7 +768,7 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, { message: socialPasswordMessage });
       } else {
         logger.debug('set password (Social Login) API');
         callback(errorutils.handleWCSError(response));
