@@ -59,26 +59,26 @@ module.exports.getProductDetails = function getProductDetailsData(
  * @throws
  */
 module.exports.getPincodeServiceability = function getPincodeServiceability(
-  req,
+  reqHeaders,
+  reqParams,
   callback,
 ) {
   logger.debug('Inside the GET PINCODE SERVICEABILITY API Method');
   if (
-    !req.body.pincode ||
-    !req.body.sku_partNumber ||
-    !req.body.quantity ||
-    !req.body.sku_id
+    !reqParams.pincode ||
+    !reqParams.partnumber ||
+    !reqParams.quantity ||
+    !reqParams.uniqueid
   ) {
     logger.debug('GET PDP Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
   }
 
-  const reqHeaders = req.headers;
   const reqBody = {
-    pincode: req.body.pincode,
-    partNumber: req.body.sku_partNumber,
-    quantity: req.body.quantity,
-    skuId: req.body.sku_id,
+    pincode: reqParams.pincode,
+    partNumber: reqParams.partnumber,
+    quantity: reqParams.quantity,
+    skuId: reqParams.uniqueid,
   };
 
   pincodeUtil.getPincodeServiceability(
@@ -96,6 +96,7 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
               findInventory.bind(null, reqHeaders, reqBody),
               getShippingCharge.bind(null, reqHeaders, reqBody),
             ],
+            // eslint-disable-next-line no-shadow
             (err, result) => {
               if (err) {
                 callback(errorUtils.handleWCSError(err));

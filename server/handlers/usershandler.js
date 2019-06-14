@@ -155,10 +155,10 @@ module.exports.getUserDetails = function getUserDetails(headers, callback) {
     '',
     response => {
       if (response.status === 200) {
-        if (headers.profile === 'summary') {
+        /* if (headers.profile === 'summary') {
           callback(null, profileFilter.userInfoSummary(response.body));
           return;
-        }
+        } */
         callback(null, profileFilter.userInfoDetails(response.body));
       } else {
         callback(errorutils.handleWCSError(response));
@@ -175,14 +175,18 @@ module.exports.updateUserDetails = function updateUserDetails(
   headers,
   callback,
 ) {
+  if (!params.name && !params.field1 && !params.logonid) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
   logger.debug('Call to Update User Details');
 
   const reqHeader = headerutil.getWCSHeaders(headers);
-  let firstname = '';
-  let lastname = '';
   const reqBody = {};
 
   if (params.name) {
+    let firstname = '';
+    let lastname = '';
     if (params.name.indexOf(' ') > 0) {
       firstname = params.name.substr(0, params.name.indexOf(' '));
       lastname = params.name.substring(params.name.indexOf(' ') + 1).trim();

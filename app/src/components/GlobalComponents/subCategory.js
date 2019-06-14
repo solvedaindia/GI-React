@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import {
   featuredCatAPI,
-  storeId,
+  imagePrefix,
   accessToken,
   catID,
 } from '../../../public/constants/constants';
@@ -61,7 +61,8 @@ export class SubCategory extends React.Component {
                 <a href={subCatListData.onClickUrl} key={index}>
                   <img
                     className="subCatImg"
-                    src="https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png"
+                    src={`${imagePrefix}${subCatListData.thumbnail}`}
+                    // src={subCatListData.thumbnail}
                     alt={subCatListData.categoryName}
                   />
                   {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}

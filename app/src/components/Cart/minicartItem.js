@@ -1,6 +1,6 @@
 import React from 'react';
 import Price from '../GlobalComponents/productItem/price';
-import {newMachineUrl, store, catalog} from '../../../public/constants/constants'
+import { imagePrefix } from '../../../public/constants/constants';
 
 class MinicartItem extends React.Component {
   state = {
@@ -25,22 +25,19 @@ class MinicartItem extends React.Component {
   }
 
   shippingCharegeHandler() {
-    const sCharge = Math.round(this.props.dataPro.shippingCharges)
+    const sCharge = Math.round(this.props.dataPro.shippingCharges);
 
     return (
-
       <>
-        {sCharge !== 0 ? <span className="shipping-charge">
-          SHIPPING CHARGES
-        <br />
-          <span className="textval">
-            {sCharge}
+        {sCharge !== 0 ? (
+          <span className="shipping-charge">
+            SHIPPING CHARGES
+            <br />
+            <span className="textval">{sCharge}</span>
           </span>
-        </span> : null}
-
+        ) : null}
       </>
-
-    )
+    );
   }
 
   render() {
@@ -51,7 +48,7 @@ class MinicartItem extends React.Component {
           <div className="imgBox">
             {/* <img src={require('../../../public/images/miniItem1.png')} className="imgfullwidth" /> */}
             <img
-              src={`${newMachineUrl}/${store}/${catalog}/${this.props.dataPro.thumbnail}`} //{`https://192.168.0.36:8443${this.props.dataPro.thumbnail}`}
+              src={`${imagePrefix}${this.props.dataPro.thumbnail}`}
               className="imgfullwidth"
             />
           </div>
@@ -61,12 +58,20 @@ class MinicartItem extends React.Component {
             <p className="description">
               ({this.props.dataPro.shortDescription})
             </p>
-            {this.state.isFreeItem ? <p className="price"><span className="discount-price">Free</span></p> : this.minicartPrice()}
-            {this.state.isFreeItem ? null : <p className="free-accessories">
-              {' '}
-              <span className="bold">10% Off</span>
-              free accessories
-            </p>}
+            {this.state.isFreeItem ? (
+              <p className="price">
+                <span className="discount-price">Free</span>
+              </p>
+            ) : (
+              this.minicartPrice()
+            )}
+            {this.state.isFreeItem ? null : (
+              <p className="free-accessories">
+                {' '}
+                <span className="bold">10% Off</span>
+                free accessories
+              </p>
+            )}
 
             <p className="quantity-shipping clearfix">
               <span className="quantity">

@@ -41,14 +41,9 @@ router.get('/skudetails/:skuId', (req, res, next) => {
   });
 });
 
-// router.get('/productData', (req, res) => {
-//   res.status(200).send({
-//     status: 'success',
-//     data: productDetail,
-//   });
-// });
-router.post('/productserviceability', (req, res, next) => {
-  pdpHandler.getPincodeServiceability(req, (err, result) => {
+router.get('/productavailability/:pincode', (req, res, next) => {
+  req.query.pincode = req.params.pincode;
+  pdpHandler.getPincodeServiceability(req.headers, req.query, (err, result) => {
     if (err) {
       next(err);
       return;

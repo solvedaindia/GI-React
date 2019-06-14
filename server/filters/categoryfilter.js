@@ -43,18 +43,22 @@ function getCategoryDetails(categoryDetails) {
   //
 
   if (categoryDetails.thumbnail) {
-    catData.thumbnail = `https://192.168.0.36:8443/wcsstore/GodrejInterioSAS${categoryDetails.thumbnail.substring(
+    catData.thumbnail = `${categoryDetails.thumbnail.substring(
       categoryDetails.thumbnail.indexOf('/images'),
       categoryDetails.thumbnail.length,
     )}`;
   } else {
     catData.thumbnail =
-      'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
+      '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
   }
-
-  catData.fullImage =
-    categoryDetails.fullImage ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catfullimage.png';
+  if (categoryDetails.fullImage) {
+    catData.fullImage = `${categoryDetails.fullImage.substring(
+      categoryDetails.fullImage.indexOf('/images'),
+      categoryDetails.fullImage.length,
+    )}`;
+  } else {
+    catData.fullImage = '/images/godrejInterio/catfullimage.pngss';
+  }
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
