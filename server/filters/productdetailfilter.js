@@ -1,4 +1,5 @@
 const sortJsonArray = require('sort-json-array');
+const imagefilter = require('./imagefilter');
 
 /**
  * Filter Product Details Data.
@@ -23,15 +24,9 @@ function productDetailForPLP(productDetail) {
   }
   productDetailJson.onClickUrl = '';
   productDetailJson.seoUrl = '';
-  // productDetailJson.thumbnail = productDetail.thumbnail || '';
-  if (productDetail.thumbnail) {
-    productDetailJson.thumbnail = productDetail.thumbnail.substring(
-      productDetail.thumbnail.indexOf('/images'),
-      productDetail.thumbnail.length,
-    );
-  } else {
-    productDetailJson.thumbnail = '';
-  }
+  productDetailJson.thumbnail = imagefilter.getImagePath(
+    productDetail.thumbnail,
+  );
 
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
@@ -39,8 +34,9 @@ function productDetailForPLP(productDetail) {
   productDetailJson.promotionData = getSummaryPromotion(
     productDetail.promotionData,
   );
-  const attribute = getAttributes(productDetail.attributes);
-  productDetailJson.discount = getDiscount(attribute) || '';
+  const productAttribute = getProductAttributes(productDetail.attributes);
+  productDetailJson.discount = productAttribute.discount;
+  productDetailJson.ribbonText = productAttribute.ribbonText;
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
   }
@@ -51,8 +47,10 @@ function productDetailForPLP(productDetail) {
         (100 - Number(productDetailJson.discount)),
     );
   }
-
-  productDetailJson.ribbonText = getRibbonText(attribute) || '';
+  productDetailJson.pageTitle = productDetail.seo_prop_pageTitle || '';
+  productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
+  productDetailJson.metaDescription =
+    productDetail.seo_prop_metaDescription || '';
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
@@ -88,6 +86,22 @@ function getSwatchData(productAttribueArray) {
     }
   }
   return swatchColor;
+}
+
+function getProductAttributes(attributes) {
+  const productAttribute = {
+    ribbonText: '',
+    discount: '',
+  };
+  attributes.forEach(attribute => {
+    if (attribute.identifier === 'percentOff') {
+      productAttribute.discount = attribute.values[0].value;
+    }
+    if (attribute.identifier === 'Ribbon') {
+      productAttribute.ribbonText = attribute.values[0].value;
+    }
+  });
+  return productAttribute;
 }
 
 function getFixedAttributes(productAttribute) {

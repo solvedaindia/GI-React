@@ -31,6 +31,7 @@ module.exports = Object.freeze({
   createWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist`,
   editWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{wishlistid}}`,
   updateProfile: `${prodWcsResourceUrl}/{{storeId}}/person/@self?action=updateUserRegistration&responseFormat=json`,
+  validateProfile: `${prodWcsResourceUrl}/{{storeId}}/userUpdate/validator`,
   userContact: `${prodWcsResourceUrl}/{{storeId}}/person/@self/contact`,
   sociallogin: `${prodWcsResourceUrl}/{{storeId}}/loginidentity/oauth_validate?responseFormat=json`,
   otp: `${prodWcsResourceUrl}/{{storeId}}/GIOtp`,

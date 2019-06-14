@@ -56,7 +56,6 @@ function getItemOrderDetail(OrderItem) {
 
 module.exports.mergeOrderItem = mergeOrderItemandProduct;
 function mergeOrderItemandProduct(orderItemList, productList) {
-  console.log('productList>>>', JSON.stringify(productList));
   const orderItemJson = {
     cartTotalQuantity: 0,
     cartTotalItems: 0,
@@ -78,7 +77,7 @@ function mergeOrderItemandProduct(orderItemList, productList) {
     delete itemJson.ribbonText;
     delete itemJson.emiData;
     delete itemJson.inStock;
-    delete itemJson.inventoryDetails;
+    // delete itemJson.inventoryDetails;
     /*  if (itemJson.freeGift === true) {
       delete itemJson.actualPrice;
       delete itemJson.offerPrice;

@@ -26,15 +26,14 @@ module.exports.userInfoDetails = function getDetailedUserProfile(profileData) {
   if (regexMobileNo.test(profileData.logonId)) {
     userDetails.mobileNo = profileData.logonId;
     userDetails.emailID = profileData.x_userField1 || '';
-    userDetails.logonId = 'mobile';
-    userDetails.userField1 = 'email';
   } else {
     userDetails.emailID = profileData.logonId;
     userDetails.mobileNo = profileData.x_userField1 || '';
-    userDetails.logonId = 'email';
-    userDetails.userField1 = 'mobile';
   }
+  userDetails.logonID = profileData.logonId;
+  userDetails.pincode = profileData.zipCode;
   userDetails.field3 = 0;
+
   if (profileData.x_userField3 === '1') {
     userDetails.field3 = 1;
   }

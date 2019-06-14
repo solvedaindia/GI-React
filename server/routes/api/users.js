@@ -15,7 +15,20 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/validate', (req, res, next) => {
+  usersHandler.validateUserDetails(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/update', (req, res, next) => {
   usersHandler.updateUserDetails(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);

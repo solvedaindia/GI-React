@@ -90,6 +90,24 @@ const errorlist = {
     error_message:
       'This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account',
   },
+  mobile_exists: {
+    status_code: 400,
+    error_key: 'mobile_exists',
+    error_message: 'This Mobile Number already exists',
+  },
+  email_exists: {
+    status_code: 400,
+    error_key: 'email_exists',
+    error_message: 'This Email Address already exists',
+  },
+  email_mobile_exists: {
+    status_code: 400,
+    error_key: 'email_mobile_exists',
+    error_message: [
+      'This Email Address already exists',
+      'This Mobile Number already exists',
+    ],
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -141,6 +159,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (errBody.errors[0].errorKey === 'ERROR_UPDATING_MOBILE') {
+        return errorlist.mobile_exists;
+      }
       if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_INVALID') {
         return errorlist.invalid_promocode;
       }
@@ -168,6 +189,7 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (
         errBody.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        errBody.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST' ||
         errBody.errors[0].errorKey === 'ERROR_USER_EXISTS'
       ) {
         return errorlist.user_exists;
