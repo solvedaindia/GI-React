@@ -68,7 +68,7 @@ class productImagesAndVideos extends React.Component {
 					const fullImagePath = `${imagePrefix}${imagePath}`;
 					this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
 			} else {
-				const videoUrl = `${newMachineUrl}/${store}/${catalog}/${data.videoPath}`;
+				const videoUrl = `${imagePrefix}${data.videoPath}`;
 				this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': videoUrl});
 				}
 			}
