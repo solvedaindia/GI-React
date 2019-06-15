@@ -66,9 +66,13 @@ function plpContainerReducer(state = initialState, action) {
       return {
         sortingValue: 0,
         adBannerPos: 12,
+        staticAdBannerPos: 0,
+        columnLayout: 3,
         adBannerCurrentIndex: 0,
         adBannerData: [],
         updateFilter: new Map(),
+        compWidgetData: [],
+        compCategories: [],
       };
     case actionTypes.INITIALUPDATE:
       return {

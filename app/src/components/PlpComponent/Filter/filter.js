@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
@@ -15,6 +16,8 @@ const downArrow = (
 const upArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
 );
+
+
 class Filter extends React.Component {
   constructor() {
     super();
@@ -92,6 +95,9 @@ class Filter extends React.Component {
       });
     }
     console.log('Selected --- ', filteredArr);
+    var params = new URLSearchParams(this.props.location.search);
+    
+
     this.setState({ facetArr: filteredArr })
   }
 
@@ -112,6 +118,8 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
+    
+    console.log('Zebraa MIN --- ',this.props.location)
     var alreadyAddedFiltersArr = [];
     let filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
@@ -136,7 +144,7 @@ class Filter extends React.Component {
 
 
   onApplyBtnClick() {
-    console.log('TotalFace---', this.state.facetArr);
+    console.log('TotalFace---', this.state.facetArr[0].value);
     // if (this.state.facetArr.length !== 0) {
     this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
     // }
@@ -226,7 +234,7 @@ class Filter extends React.Component {
           <ul className={"dropdown_filter__list " + (this.state.active ? 'dropdown_filter__list--active' : '')}>{this.state.facetItem}
             <div className="filterbtnWrapper">
               <button onClick={() => this.onCancelBtnClick()} className='dropdown_filter__cancelBtn btn'>Cancel</button>
-              <button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn btn'>Apply</button>
+              <Link to={{ search: `filter=${''}` }}><button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn btn'>Apply</button></Link>
             </div>
           </ul>
         </div>
@@ -263,6 +271,7 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
+  withRouter,
 )(Filter);
 
 

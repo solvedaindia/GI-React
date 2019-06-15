@@ -1,6 +1,7 @@
 import React from 'react';
 //Redux
 import { connect } from 'react-redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';

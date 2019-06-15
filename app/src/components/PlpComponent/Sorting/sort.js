@@ -7,7 +7,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
+import { getReleventReduxState, fetchReleventSortingValue } from '../../../utils/utilityManager';
 
 import { Link, Route, withRouter } from 'react-router-dom';
 
@@ -76,9 +76,9 @@ class Sort extends React.Component {
           key={i}
           className={"dropdownlist-item list " + (i === this.state.selected ? 'dropdownlist-itemactive' : '')}
         >
-          {/* <Link to={this.props.match.url+'/'+option}> */}
-          {option}
-          {/* </Link> */}
+          <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}>
+            {option}
+          </Link>
         </li>
       );
     });

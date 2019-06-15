@@ -40,7 +40,7 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 
-let categoryId = '13503';
+let categoryId;
 export class PlpContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -72,20 +72,17 @@ export class PlpContainer extends React.Component {
 
   componentDidMount() {
     console.log('Query String Routing ------- ', this.props);
-    const path = String(this.props.location.pathname);
-    const idStr = path.split('/')[2];
-    if (idStr != undefined && idStr !== categoryId) {
-      categoryId = idStr;
-      // this.setState({
-      // 	filterData: [],
-      // 	plpData: [],
-      // 	isCatDetails: true,
-      // })
-      // this.fetchPLPProductsData();
-    }
+    this.props.plpReduxStateReset();
+    var catId = this.props.location.pathname.split('=').pop();
+    // categoryId = this.props.location.state.categoryId;
+    categoryId = catId;
+
+    const params = new URLSearchParams(this.props.location.search);
+    const foo = params.get('sort'); // bar
+    const foo1 = params.get('filter'); // bar
+    console.log('Search Parma --- ',foo,foo1 );
 
     addEventListener('scroll', this.onscroll);
-    console.log('componentDidMount');
     this.fetchSubCategoryData();
     this.fetchMarketingTextBannerData();
     this.fetchPLPProductsData();
@@ -93,24 +90,55 @@ export class PlpContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
-    // if (nextProps.location.pathname !== this.props.location.pathname) {
-    // console.log('In the locationpath');
+    // console.log('Query String Routing Receive ------- ', nextProps);
 
-    const path = String(nextProps.location.pathname);
-    const idStr = path.split('/')[2];
-    if (idStr != undefined && idStr !== categoryId) {
-      // this.props.plpReduxStateReset();
-      // categoryId = idStr;
-      // this.setState({
-      // 	pageNumber: 1,
-      // 	filterData: [],
-      // 	plpData: [],
-      // 	isCatDetails: true,
-      // })
-      // this.fetchSubCategoryData();
-      // this.fetchPLPProductsData();
+    console.log('Query String componentWillReceiveProps', nextProps.location, this.props.location);
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+
+      var catId = nextProps.location.pathname.split('=').pop();
+      console.log('In the locationpath -- ', nextProps.location, catId);
+      this.props.plpReduxStateReset();
+      // categoryId = nextProps.location.state.categoryId; //From Rout State
+      categoryId = catId; //From URL
+      this.setState({
+        plpSubCatData: null,
+        marketingTextBannerData: null,
+        plpDescriptionData: null,
+        plpData: [],
+        adBannerData: [],
+        error: false,
+        hasMore: true,
+        isLoading: false,
+        pageNumber: 1,
+        pageSize: 18,
+        categoryDetail: true,
+        sortValue: this.props.sortingValue,
+        filterData: [],
+        isCatDetails: true,
+        categoyDetails: null,
+        productCount: null,
+      });
+      this.fetchSubCategoryData();
+      this.fetchMarketingTextBannerData();
+      this.fetchPLPProductsData();
+      this.fetchDescriptionData();
+      return;
     }
+
+    // const path = String(nextProps.location.pathname);
+    // const idStr = path.split('/')[2];
+    // if (idStr != undefined && idStr !== categoryId) {
+    // this.props.plpReduxStateReset();
+    // categoryId = idStr;
+    // this.setState({
+    // 	pageNumber: 1,
+    // 	filterData: [],
+    // 	plpData: [],
+    // 	isCatDetails: true,
+    // })
+    // this.fetchSubCategoryData();
+    // this.fetchPLPProductsData();
+    //}
 
     // }
     // else {
@@ -151,20 +179,20 @@ export class PlpContainer extends React.Component {
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchSubCategoryData() {
-    
+
     apiManager
       .get(plpSubCatAPI + categoryId, {
-        headers: {  },
+        headers: {},
       })
       .then(response => {
         console.log('Subcat Data', response.data);
         this.setState({ plpSubCatData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchMarketingTextBannerData() {
@@ -175,7 +203,7 @@ export class PlpContainer extends React.Component {
           marketingTextBannerData: response.data.data.bannerList[0].content,
         });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchPLPProductsData() {
@@ -191,19 +219,11 @@ export class PlpContainer extends React.Component {
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
       console.log('PLPURL---', plpURL);
       console.log('categorId---', categoryId);
-      // let newStoreId = '';
-      // if (categoryId === '12540') {
-      //   newStoreId = '10151';
-      // } else {
-      //   newStoreId = '10801';
-      // }
-      // console.log('categorId---', categoryId, newStoreId);
+
       apiManager
         .get(plpURL, {
           headers: {
-            // store_id: newStoreId,
             cat_details: this.state.isCatDetails,
-            // catalog_id: '10601',
           },
         })
         .then(response => {
@@ -276,6 +296,7 @@ export class PlpContainer extends React.Component {
   };
 
   render() {
+
     const {
       error,
       hasMore,

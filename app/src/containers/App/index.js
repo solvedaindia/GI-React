@@ -161,7 +161,7 @@ export default class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/clp" component={ClpContainer} />
-          <Route path="/plp" component={PlpContainer} />
+          <Route path="/furniture:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
