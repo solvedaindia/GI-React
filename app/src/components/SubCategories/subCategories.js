@@ -37,10 +37,8 @@ class SubCategoriesArray extends React.Component {
     const catClass = this.props.subCategoryArray.length > 6 ? 'catLongList' : 'catList';
     return (
       <div className='catNav' ref={this.setRef} >
-        {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
-          <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
-        </div>}
-          </div>
+        {!!subCatImg && <div className='subCatImage' style={this.compLeft}> <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' /></div>}
+          
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
             var routePath = `/plp/${subCategoryData.uniqueID}`;
