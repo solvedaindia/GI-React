@@ -5,6 +5,9 @@ const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
 const pincodeUtil = require('../utils/pincodeutil');
 const pdpfilter = require('../filters/productdetailfilter');
+const headerutil = require('../utils/headerutil.js');
+const constants = require('../utils/constants');
+const origin = require('../utils/origin.js');
 
 /**
  * Function for PLP Data
@@ -271,6 +274,49 @@ module.exports.getProductDetailSummary = function getProductDetailSummary(
 
     callback(null, resJSON);
   });
+};
+
+/**
+ * Notify Me API
+ */
+module.exports.setProductNotification = function productStockNotification(
+  req,
+  callback,
+) {
+  logger.debug('Inside the Notify Me API ');
+  if (!req.body.email_id || !req.body.part_number || !req.body.pincode) {
+    logger.debug('Notify Me API :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+  const reqBody = {
+    emailId: req.body.email_id,
+    partNumber: req.body.part_number,
+    pinCode: req.body.pincode,
+  };
+  const originUrl = constants.notifyMe.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+  origin.getResponse(
+    'POST',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        logger.debug('Error While calling Notify ME API');
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
 };
 
 /** Get Shipping Charge */

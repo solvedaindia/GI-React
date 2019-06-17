@@ -1,5 +1,4 @@
-const testJSON = require('../configs/testjson');
-
+const imagefilter = require('./imagefilter');
 /**
  * Filter Category Navigation Data.
  * @return Category Navigation Data
@@ -24,7 +23,6 @@ function getCatNavData(categoryData) {
     });
   }
   return categoryArray;
-  // return testJSON.categoryNavigation;
 }
 
 /**
@@ -37,28 +35,12 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  // catData.thumbnail =
-  //   categoryDetails.thumbnail ||
-  //   'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
-  //
-
-  if (categoryDetails.thumbnail) {
-    catData.thumbnail = `${categoryDetails.thumbnail.substring(
-      categoryDetails.thumbnail.indexOf('/images'),
-      categoryDetails.thumbnail.length,
-    )}`;
-  } else {
-    catData.thumbnail =
-      '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
-  }
-  if (categoryDetails.fullImage) {
-    catData.fullImage = `${categoryDetails.fullImage.substring(
-      categoryDetails.fullImage.indexOf('/images'),
-      categoryDetails.fullImage.length,
-    )}`;
-  } else {
-    catData.fullImage = '/images/godrejInterio/catfullimage.pngss';
-  }
+  catData.thumbnail =
+    imagefilter.getImagePath(categoryDetails.thumbnail) ||
+    '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
+  catData.fullImage =
+    imagefilter.getImagePath(categoryDetails.fullImage) ||
+    '/images/godrejInterio/catfullimage.png';
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
@@ -68,5 +50,8 @@ function getCategoryDetails(categoryDetails) {
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
+  catData.pageTitle = categoryDetails.seo_prop_pageTitle || '';
+  catData.imageAltText = categoryDetails.seo_prop_imageAltText || '';
+  catData.metaDescription = categoryDetails.seo_prop_metaDescription || '';
   return catData;
 }

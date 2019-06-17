@@ -90,11 +90,10 @@ export function resetRemoveFromWishlistFlag(flag) {
   };
 }
 
-export function updateUserProfile(userName, logonId) {
-  console.log('updateUserProfile---', userName, logonId);
+export function updateUserProfile(userName) {
+  console.log('updateUserProfile---', userName);
   return {
     type: UPDATE_PROFILE,
     userName,
-    logonId,
   };
 }

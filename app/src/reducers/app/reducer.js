@@ -34,7 +34,7 @@ const initialState = fromJS({
   minicartCount: 0,
   removeWishlistFlag: false,
   userName: null,
-  // logonId: null,
+
 });
 
 function appReducer(state = initialState, action) {
@@ -59,9 +59,7 @@ function appReducer(state = initialState, action) {
     case RESET_REMOVEWISHLISTFLAG:
       return state.set('loading', false).set('removeWishlistFlag', action.flag);
     case UPDATE_PROFILE:
-      console.log('In The UPdate Profile  ####', action.userName);
       return state.set('loading', false).set('userName', action.userName);
-    // .set('logonId', action.logonId);
     default:
       return state;
   }

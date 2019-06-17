@@ -1,5 +1,6 @@
 const filter = require('./filter');
-
+const imageFilter = require('./imagefilter');
+const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 /**
  * Filter Product List Data.
  * @return Product List with Facet Data
@@ -27,9 +28,9 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
         facet.entry.forEach(facetValue => {
           const facetEntry = {
             label: facetValue.label,
-            value: facetValue.value,
+            // value: facetValue.value,
             count: Number(facetValue.count),
-            facetImage: facetValue.image || '',
+            // facetImage: facetValue.image || '',
           };
           if (facet.value === 'parentCatgroup_id_search') {
             facetEntry.value = `${facet.value}:${catalogID}_${
@@ -37,6 +38,18 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
             }`;
           } else {
             facetEntry.value = facetValue.value;
+          }
+          if (facetValue.image) {
+            const facetImageArray = facetValue.image.split('/');
+            const facetImageArrayLength = facetImageArray.length;
+            if (rbgRegex.test(facetImageArray[facetImageArrayLength - 1])) {
+              facetEntry.colorCode =
+                facetImageArray[facetImageArray.length - 1];
+            } else {
+              facetEntry.facetImage = imageFilter.getImagePath(
+                facetValue.image,
+              );
+            }
           }
 
           eachFacetValue.facetValues.push(facetEntry);
