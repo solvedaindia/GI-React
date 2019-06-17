@@ -55,7 +55,7 @@ class GenerateOtp extends React.Component {
     resendOTP() {
         let data = {
             'user_id': this.props.userdata.user_id,
-            'resend': true
+            'resend': 'true'
         }
         this.props.handleApi(generateOTPAPI, data, resendOtp, this.callbackFunc);
     }
@@ -77,8 +77,7 @@ class GenerateOtp extends React.Component {
         let isErrorExist = false;
         if (this.state.errorMessage && this.state.errorMessage.includes("maximum")) {
             isErrorExist = this.state.errorMessage.includes("maximum");
-        } 
-        
+        }
         
         if (this.state.error) {
             errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>

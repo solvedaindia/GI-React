@@ -116,7 +116,7 @@ class RegisterModalData extends React.Component {
           this.handleClose();
           window.location.reload();
         } else {
-          if (type === resendOtp && response.data.data.otpCount === 3) {
+          if (type === resendOtp && response.data.data.otpCount > 3) {
             callbackFunc('OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)');
             return;
           } 
