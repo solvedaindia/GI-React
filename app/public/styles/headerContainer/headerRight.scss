@@ -3,9 +3,19 @@
 .rightSide {
     margin-bottom: 0;
     .icons {
+        &:first-child{
+            margin:0;
+        }
+        &:last-child{
+            margin-right:0;
+        }
         display: inline-block;
         cursor: pointer;
         position: relative;
+        margin: 0 8px 0 8px;
+        svg{
+            margin: 0;
+        }
         .wishListCount {
             position: absolute;
             top: -6px;
