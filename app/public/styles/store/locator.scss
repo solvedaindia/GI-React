@@ -37,12 +37,20 @@
 
     }
 }
-.storeList {
-    width: 30%;
-    background-color: $greybg; 
-}
-
-.mapContainer {
-    width: 50%;
-    height: 500px;
+.storeDetails {
+    width: 91.63%;
+    margin-left: 8.37%; 
+    .storeList {
+        width: 30%;
+        background-color: $greybg; 
+        border: 1px solid #ccc;
+    }
+    .mapContainer {
+        width: 70%;
+        height: 500px;
+    }
+    .storeList,
+    .mapContainer {
+        display: inline-block;
+    }
 }

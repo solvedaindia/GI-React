@@ -82,7 +82,7 @@ class StoreLocator extends React.Component {
                 storeData: response.data.data,
                 isLoading: false
             })
-            console.log('@@@@ Store Locator Data @@@@@', response.data.data);
+            console.log('@@@@ Store Locator Data Whole@@@@@', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -99,7 +99,7 @@ class StoreLocator extends React.Component {
                 storeData: response.data.data,
                 isLoading: false
             })
-            console.log('@@@@ Store Locator Data @@@@@', response.data.data);
+            console.log('@@@@ Store Locator Data City@@@@@', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -158,17 +158,51 @@ class StoreLocator extends React.Component {
                         </ul>
                     </div>
                 </div>
-                <div className='storeList'>
+                <div className="storeDetails">
+                    <h1 className='title'>One stop destination for your furniture</h1>
+                    <div className='storeList'>
                         
+                        {<div className='detailCard'>
+                            {!!storeData && storeData.PhysicalStore.map((physicalData) => {
+                                return <p className='test'>{physicalData.city}</p>
+                            }
+                        )}
+                        </div>  }
+                        
+                    </div>
+                    <div className='mapContainer'>
+                        <WrappedMap
+                            googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&callback=initMap`}
+                            loadingElement = {<div style = {{height: '100%'}} />}
+                            containerElement={<div style = {{height: '100%'}}/>}
+                            mapElement={<div style = {{height: '100%'}}/>}
+                        />
+                    </div>
                 </div>
-                <div className='mapContainer'>
-                    <WrappedMap
-                        googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&callback=initMap`}
-                        loadingElement = {<div style = {{height: '100%'}} />}
-                        containerElement={<div style = {{height: '100%'}}/>}
-                        mapElement={<div style = {{height: '100%'}}/>}
-                    />
-                </div>
+                {/* { !!storeData && storeData.map((storedetailData, index) => {
+                    return (
+                        <div className="storeDetails">
+                            <h1 className='title'>One stop destination for your furniture</h1>
+                            <div className='storeList'>
+                                <div className='detailCard' id={index}>
+                                    {storedetailData.country}
+                                </div>
+                            </div>
+                            <div className='mapContainer'>
+                                <WrappedMap
+                                    googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&callback=initMap`}
+                                    loadingElement = {<div style = {{height: '100%'}} />}
+                                    containerElement={<div style = {{height: '100%'}}/>}
+                                    mapElement={<div style = {{height: '100%'}}/>}
+                                />
+                            </div>
+                        </div>
+                    )
+                })
+                    
+                } */}
+                
+                
             </Fragment>
 		);
 	}
