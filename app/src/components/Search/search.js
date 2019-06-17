@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, NavLink, Link, withRouter } from 'react-router-dom';
+
 import apiManager from '../../utils/apiManager';
 import SearchLogo from "../SVGs/search";
 import {
@@ -51,6 +53,28 @@ class SearchBar extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const wage = document.getElementById('searchInput');
+    wage.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        this.validate(e);
+      }
+    });
+  }
+
+  validate(e) {
+    const text = e.target.value;
+    console.log('dd -- ', this.props);
+    this.props.history.push({ pathname: '/search', search: `keyword=${text}` })
+  }
+
+  onSearchResultClick() {
+
+  }
+
+
+
+
   render() {
     const searchData = this.state.searchData;
     return (
@@ -68,7 +92,11 @@ class SearchBar extends React.Component {
                   const searchItem = document.getElementById("searchInput").value;
                   if (index < 6) {
                     return (
-                      <li className='list' key={index}><a className='link' href='#'><strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length)}</a></li>
+                      <li className='list' key={index}>
+                        <Link className='link' to={{ pathname: '/search', search: `keyword=${item.term}` }}>
+                          <strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length)}
+                        </Link>
+                      </li>
                     );
                   }
                 })
@@ -87,4 +115,5 @@ class SearchBar extends React.Component {
 
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);
+//export default SearchBar;

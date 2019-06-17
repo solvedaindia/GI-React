@@ -62,7 +62,7 @@ class PlpComponent extends React.Component {
   };
 
   parsePLPData(data) {
-    console.log('isFromWishlist ---- ',this.props.isfromWishlistPro);
+    console.log('isFromWishlist ---- ',data);
     
     if (data) {
       const wishlistArr = getOnlyWishlistUniqueIds();

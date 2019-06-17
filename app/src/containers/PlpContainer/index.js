@@ -28,6 +28,7 @@ import FilterMain from '../../components/PlpComponent/Filter/filterMain';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
+import BestSeller from '../../components/BestSelling/bestSelling';
 
 import * as actionCreators from './actions';
 import CompContainer from './compWidget';
@@ -36,6 +37,7 @@ import {
   plpSubCatAPI,
   plpAPI,
   espotAPI,
+  searchPageAPI,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
@@ -61,9 +63,15 @@ export class PlpContainer extends React.Component {
       isCatDetails: true,
       categoyDetails: null,
       productCount: null,
+      //Search Vars
+      isFromSearch: this.props.location.pathname,
+      searchKeyword: this.props.location.search,
+      emptySearchItem: null,
+      showBestSeller: null,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
+    this.onSearchNoResut = this.onSearchNoResut.bind(this);
   }
 
   componentWillUnmount() {
@@ -71,7 +79,7 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Query String Routing ------- ', this.props);
+    console.log('Query String Routing ------- ', this.state.searchKeyword);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
@@ -85,18 +93,28 @@ export class PlpContainer extends React.Component {
     }
 
     addEventListener('scroll', this.onscroll);
-    console.log('componentDidMount');
-    this.fetchSubCategoryData();
-    this.fetchMarketingTextBannerData();
+
+
     this.fetchPLPProductsData();
-    this.fetchDescriptionData();
+
+    if (!this.state.isFromSearch.includes('/search')) {
+      this.fetchSubCategoryData();
+      this.fetchMarketingTextBannerData();
+      this.fetchDescriptionData();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     // console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
     // if (nextProps.location.pathname !== this.props.location.pathname) {
     // console.log('In the locationpath');
+    // this.setState({
+    //   isFromSearch: nextProps.location.pathname,
+    //   searchKeyword: nextProps.location.search,
+    // })
 
+    //this.state.isFromSearch = nextProps.location.pathname;
+    console.log('Query String Routing Recive Props ------- ', nextProps);
     const path = String(nextProps.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
@@ -135,6 +153,23 @@ export class PlpContainer extends React.Component {
       });
       this.fetchPLPProductsData();
     }
+
+    console.log('will Recive in the search --- ', nextProps.location.search, this.props.location.search)
+    if (nextProps.location.pathname.includes('/search')) {
+      if (nextProps.location.search !== this.props.location.search) {
+        this.setState({
+          plpData: [],
+          filterData: [],
+          pageNumber: 1,
+          isFromSearch: nextProps.location.pathname,
+          searchKeyword: nextProps.location.search,
+          showBestSeller: false,
+        });
+        this.fetchPLPProductsData();
+      }
+
+    }
+
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -148,23 +183,24 @@ export class PlpContainer extends React.Component {
     apiManager
       .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
       .then(response => {
+        console.log('Adbanerrrr -- ', response.data)
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchSubCategoryData() {
-    
+
     apiManager
       .get(plpSubCatAPI + categoryId, {
-        headers: {  },
+        headers: {},
       })
       .then(response => {
         console.log('Subcat Data', response.data);
         this.setState({ plpSubCatData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchMarketingTextBannerData() {
@@ -175,7 +211,7 @@ export class PlpContainer extends React.Component {
           marketingTextBannerData: response.data.data.bannerList[0].content,
         });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchPLPProductsData() {
@@ -183,21 +219,22 @@ export class PlpContainer extends React.Component {
       /**
        * TODO: Category ID is static from Node side.
        */
+      var urlMaking = plpAPI + categoryId;
+      var searchText = null;
+      if (this.state.isFromSearch.includes('/search')) {
+        const params = new URLSearchParams(this.state.searchKeyword);
+        const keywoard = params.get('keyword');
+        searchText = keywoard;
+        urlMaking = searchPageAPI + keywoard;
+      }
 
-      const plpURL =
-        `${plpAPI + categoryId}?` +
+      var plpURL =
+        `${urlMaking}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
       console.log('PLPURL---', plpURL);
-      console.log('categorId---', categoryId);
-      // let newStoreId = '';
-      // if (categoryId === '12540') {
-      //   newStoreId = '10151';
-      // } else {
-      //   newStoreId = '10801';
-      // }
-      // console.log('categorId---', categoryId, newStoreId);
+
       apiManager
         .get(plpURL, {
           headers: {
@@ -208,7 +245,22 @@ export class PlpContainer extends React.Component {
         })
         .then(response => {
           console.log('PLP Response----', response.data);
-          if (this.state.isCatDetails) {
+
+          if (this.state.isFromSearch.includes('/search')) {
+            if (response.data.data.spellCheck) {
+              this.setState({
+                emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck)
+              })
+            }
+            else if (response.data.data.productList.length === 0) {
+              this.setState({
+                showBestSeller: true,
+              })
+            }
+
+          }
+
+          if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
             this.fetchAdBannerData();
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
@@ -229,7 +281,6 @@ export class PlpContainer extends React.Component {
           });
         })
         .catch(error => {
-          // console.log('PLPBannerrror---', error);
           this.setState({
             error: error.message,
             isLoading: false,
@@ -251,6 +302,49 @@ export class PlpContainer extends React.Component {
       .catch(error => {
         // console.log('PLPBannerrror---', error);s
       });
+  }
+
+  onSearchNoResut(searchText, spellCheckArr) {
+    console.log('ddddd -- ', spellCheckArr);
+    if (spellCheckArr) {
+      if (spellCheckArr && spellCheckArr.length !== 0) {
+        this.setState({
+          searchKeyword: `keyword=${spellCheckArr[0]}`,
+        })
+        this.fetchPLPProductsData();
+      }
+      else {
+        //Show Best Seller component
+      }
+
+      return (
+        <div>
+          <label>No results found for “{searchText}”</label>
+          <div>
+            <label>Did you mean: </label>
+            <div>
+              {spellCheckArr.map(item => {
+                return (
+                  <button onClick={() => this.onSpellCheckClick(item)}>{item}</button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+  }
+
+  onSpellCheckClick(spellText) {
+    this.props.history.push({ pathname: '/search', search: `keyword=${spellText}` })
+    this.setState({
+      searchKeyword: `keyword=${spellText}`,
+      plpData: [],
+      filterData: [],
+      pageNumber: 1,
+    })
+    this.fetchPLPProductsData();
   }
 
   onscroll = () => {
@@ -306,15 +400,16 @@ export class PlpContainer extends React.Component {
     }
 
     let plpProducts;
-    if (plpData.length != 0 && adBannerData.length != 0) {
-      plpProducts = (
-        <PlpComponent
-          plpDataPro={this.state.plpData}
-          adBannerDataPro={adBannerData}
-          catId={this.state.categoryDetail.uniqueID}
-          history={this.props.history}
-        />
-      );
+    if (plpData.length != 0) {
+      if (adBannerData.length != 0 || this.state.isFromSearch.includes('/search'))
+        plpProducts = (
+          <PlpComponent
+            plpDataPro={this.state.plpData}
+            adBannerDataPro={adBannerData}
+            catId={this.state.categoryDetail.uniqueID}
+            history={this.props.history}
+          />
+        );
     }
 
     let filterItem;
@@ -346,9 +441,16 @@ export class PlpContainer extends React.Component {
         </h3>
       );
     }
+    const params = new URLSearchParams(this.state.searchKeyword);
+    const keywoard = params.get('keyword');
+    if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
+      titleItem = (
+        <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
+      );
+    }
 
     let productCountItem = null;
-    if (this.state.productCount !== null) {
+    if (this.state.productCount !== null && plpData.length != 0) {
       productCountItem = (
         <div className="headingSubTitle">
           (Produts {this.state.productCount})
@@ -357,7 +459,13 @@ export class PlpContainer extends React.Component {
     }
 
     return (
+
       <>
+        {this.state.emptySearchItem !== null ? this.state.emptySearchItem : null}
+        {this.state.showBestSeller ? <><div>
+          <label>No results found for “{keywoard}”</label>
+          <BestSeller />
+        </div></> : null}
         {marketingBanner}
         {subCategories}
         <section className="plpCategories">
@@ -370,7 +478,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {this.state.isCatDetails ? null : <Sort />}
+                  {plpData.length === 0 ? null : <Sort />}
                 </div>
               </div>
             </div>
@@ -388,7 +496,7 @@ export class PlpContainer extends React.Component {
             />
           </div>
         )}
-        {!hasMore && <div className="noProductFound">No Products Found</div>}
+        {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
         {descriptionItem}
         <CompContainer />
       </>
