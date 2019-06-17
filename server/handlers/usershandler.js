@@ -6,9 +6,11 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const profileFilter = require('../filters/profilefilter');
 const pincodeUtil = require('../utils/pincodeutil');
+const otpHandler = require('./otphandler');
 
 const defaultPincode = '122001';
 const passwordChangeMessage = 'Password Changed Successfully';
+const socialPasswordMessage = 'Password Successfully Reset';
 
 /**
  * Registeres User in WCS
@@ -18,7 +20,7 @@ const passwordChangeMessage = 'Password Changed Successfully';
  */
 module.exports.registerUser = function userRegister(params, headers, callback) {
   logger.debug('User Registration API');
-  if (!params.name || !params.user_id || !params.password) {
+  if (!params.name || !params.user_id || !params.password || !params.pincode) {
     logger.debug('User Registration:Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
@@ -26,16 +28,16 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
 
   const reqHeader = headerutil.getWCSHeaders(headers);
 
-  let firstname = '';
+  /*  let firstname = '';
   let lastname = '';
   if (params.name.indexOf(' ') > 0) {
     firstname = params.name.substr(0, params.name.indexOf(' '));
     lastname = params.name.substring(params.name.indexOf(' ') + 1).trim();
   } else {
     firstname = params.name;
-  }
+  } */
   const reqBody = {
-    firstName: firstname,
+    firstName: params.name,
     logonId: params.user_id,
     logonPassword: params.password,
     logonPasswordVerify: params.password,
@@ -46,9 +48,9 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
     reqBody.x_otp = params.otp;
   }
  */
-  if (lastname !== '') {
+  /* if (lastname !== '') {
     reqBody.lastName = lastname;
-  }
+  } */
   const originUserUrl = constants.userRegistration.replace(
     '{{storeId}}',
     headers.storeId,
@@ -68,8 +70,7 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
         const signupResponseBody = {
           access_token: accessToken,
           userDetails: {
-            firstName: reqBody.firstName,
-            lastName: reqBody.lastName,
+            name: reqBody.firstName,
             pincode: reqBody.zipCode,
           },
         };
@@ -115,7 +116,7 @@ module.exports.changeUserPassword = function changeUserPassword(
 
   const originUserURL = constants.updateProfile.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   origin.getResponse(
     'PUT',
@@ -175,16 +176,19 @@ module.exports.updateUserDetails = function updateUserDetails(
   headers,
   callback,
 ) {
-  if (!params.name && !params.field1 && !params.logonid) {
+  if (
+    // (!params.name && !params.field1 && !params.logonid) ||
+    !params.validateotp ||
+    (params.validateotp !== 'false' && params.validateotp !== 'true')
+  ) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
   logger.debug('Call to Update User Details');
 
-  const reqHeader = headerutil.getWCSHeaders(headers);
   const reqBody = {};
 
-  if (params.name) {
+  /*  if (params.name) {
     let firstname = '';
     let lastname = '';
     if (params.name.indexOf(' ') > 0) {
@@ -195,15 +199,52 @@ module.exports.updateUserDetails = function updateUserDetails(
     }
     reqBody.firstName = firstname;
     reqBody.lastName = lastname;
+  } */
+
+  if (params.name) {
+    reqBody.firstName = params.name;
   }
 
-  if (params.field1) {
+  if (params.field1 || params.field1 === '') {
     reqBody.userField1 = params.field1;
   }
   if (params.logonid) {
     reqBody.logonId = params.logonid;
   }
 
+  if (params.validateotp === 'false') {
+    updateProfile(reqBody, headers, callback);
+  } else {
+    if (!params.otp) {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+    const validateOtpBody = {
+      user_id: '',
+      otp: params.otp,
+    };
+    const regexMobileNo = /^\d{10}$/; // Mobile Number
+
+    if (regexMobileNo.test(params.logonid)) {
+      validateOtpBody.user_id = params.logonid;
+    } else if (regexMobileNo.test(params.field1)) {
+      validateOtpBody.user_id = params.field1;
+    } else {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+    otpHandler.validateOtp(validateOtpBody, headers, (error, result) => {
+      if (error) {
+        callback(error);
+        return;
+      }
+      updateProfile(reqBody, headers, callback);
+    });
+  }
+};
+
+function updateProfile(reqBody, headers, callback) {
+  const reqHeader = headerutil.getWCSHeaders(headers);
   const originUrl = constants.updateProfile.replace(
     '{{storeId}}',
     headers.store_id,
@@ -219,6 +260,105 @@ module.exports.updateUserDetails = function updateUserDetails(
     response => {
       if (response.status === 200) {
         callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Validate User Details
+ */
+module.exports.validateUserDetails = function validateUserDetails(
+  params,
+  headers,
+  callback,
+) {
+  if (!params.field1 && !params.logonid) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  logger.debug('Call to Update User Details');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const reqBody = {};
+
+  if (params.field1) {
+    reqBody.userField1 = params.field1;
+  }
+  if (params.logonid) {
+    reqBody.logonId = params.logonid;
+  }
+
+  const originUrl = constants.validateProfile.replace(
+    '{{storeId}}',
+    headers.store_id,
+  );
+  origin.getResponse(
+    'POST',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      const regexMobileNo = /^\d{10}$/; // Mobile Number
+      if (response.status === 200) {
+        const otpBody = {
+          user_id: '',
+        };
+        let otpGenration = false;
+        if (regexMobileNo.test(params.logonid)) {
+          otpBody.user_id = params.logonid;
+          otpGenration = true;
+        } else if (regexMobileNo.test(params.field1)) {
+          otpBody.user_id = params.field1;
+          otpGenration = true;
+        }
+        if (otpGenration === true) {
+          otpHandler.generateOtp(otpBody, headers, (error, result) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+            const res = {
+              message: 'Validation Successful',
+              optSent: true,
+              otpValue: result.otpVal,
+            };
+            callback(null, res);
+          });
+        } else {
+          const res = {
+            message: 'Validation Successful',
+            optSent: false,
+          };
+          callback(null, res);
+        }
+      } else if (response.body.errors && response.body.errors.length > 0) {
+        if (response.body.errors[0].errorKey === 'ERROR_USER_EXISTS') {
+          if (response.body.errors[0].errorParameters.length === 1) {
+            if (response.body.errors[0].errorParameters[0] === 'logonId') {
+              if (regexMobileNo.test(params.logonid)) {
+                callback(errorutils.errorlist.mobile_exists);
+              } else {
+                callback(errorutils.errorlist.email_exists);
+              }
+            } else if (
+              response.body.errors[0].errorParameters[0] === 'userField1'
+            ) {
+              if (regexMobileNo.test(params.field1)) {
+                callback(errorutils.errorlist.mobile_exists);
+              } else {
+                callback(errorutils.errorlist.email_exists);
+              }
+            }
+          } else if (response.body.errors[0].errorParameters.length === 2) {
+            callback(errorutils.errorlist.email_mobile_exists);
+          }
+        }
       } else {
         callback(errorutils.handleWCSError(response));
       }
@@ -250,9 +390,23 @@ module.exports.getUserAddress = function getUserAddress(headers, callback) {
         const resJson = {
           addressList: [],
         };
-        if (response.body.contact && response.body.contact.length > 0) {
-          response.body.contact.forEach(addressElement => {
-            resJson.addressList.push(profileFilter.userAddress(addressElement));
+        const addressList = response.body.contact;
+        if (addressList && addressList.length > 0) {
+          addressList.forEach((addressElement, i) => {
+            const filteredAddress = profileFilter.userAddress(addressElement);
+            if (filteredAddress.isDefault === true) {
+              resJson.addressList.push(filteredAddress);
+              addressList.splice(i, 1);
+            }
+          });
+          addressList.sort(
+            (a, b) =>
+              parseInt(b.nickName.split('_')[1], 10) -
+              parseInt(a.nickName.split('_')[1], 10),
+          );
+          addressList.forEach(addressElement => {
+            const filteredAddress = profileFilter.userAddress(addressElement);
+            resJson.addressList.push(filteredAddress);
           });
         }
         callback(null, resJson);
@@ -325,20 +479,20 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
     headers.storeId,
   )}`;
 
-  let firstname = '';
+  /*   let firstname = '';
   let lastname = '';
   if (reqParams.name.indexOf(' ') > 0) {
     firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
     lastname = reqParams.name.substring(reqParams.name.indexOf(' ') + 1).trim();
   } else {
     firstname = reqParams.name;
-  }
+  } */
   const addressNickName = `${headers.userId}_${Date.now()}`;
   const reqBody = {
     contact: [
       {
-        firstName: firstname,
-        lastName: lastname,
+        firstName: reqParams.name,
+        //  lastName: lastname,
         zipCode: reqParams.pincode,
         phone1: reqParams.phone_number,
         email1: reqParams.email_id,
@@ -434,7 +588,7 @@ module.exports.updateAddress = function updateAddress(req, callback) {
     reqBody.addressLine.push(reqParams.address);
   }
   if (reqParams.name) {
-    let firstname = '';
+    /* let firstname = '';
     let lastname = '';
     if (reqParams.name.indexOf(' ') > 0) {
       firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
@@ -443,9 +597,9 @@ module.exports.updateAddress = function updateAddress(req, callback) {
         .trim();
     } else {
       firstname = reqParams.name;
-    }
-    reqBody.firstName = firstname;
-    reqBody.lastName = lastname;
+    } */
+    reqBody.firstName = reqParams.name;
+    // reqBody.lastName = lastname;
   }
 
   const reqHeader = headerutil.getWCSHeaders(req.headers);
@@ -595,11 +749,11 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
   const reqBody = {
     logonPassword: params.new_password,
     logonPasswordVerify: params.new_password,
-    userField1: headers.userId,
+    userField1: null,
     sociallogin: 'true',
   };
 
-  const originUrl = constants.setSocialLoginPassword.replace(
+  const originUrl = constants.updateProfile.replace(
     '{{storeId}}',
     headers.store_id,
   );
@@ -614,7 +768,7 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, { message: socialPasswordMessage });
       } else {
         logger.debug('set password (Social Login) API');
         callback(errorutils.handleWCSError(response));

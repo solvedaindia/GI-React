@@ -55,4 +55,17 @@ router.get('/productavailability/:pincode', (req, res, next) => {
   });
 });
 
+router.post('/notifyme', (req, res, next) => {
+  pdpHandler.setProductNotification(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;
