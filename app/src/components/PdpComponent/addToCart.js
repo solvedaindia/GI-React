@@ -48,6 +48,8 @@ class addToCartComponent extends React.Component {
 
 	/* find inventory of the product */
 	findInventory = () => {
+		var header = document.getElementById("header");
+		header.classList.remove("sticky");
 		console.log('this.propsthis.props=>>',this.props)
 		const pincode = appCookie.get('pincode');
 		let quantity = 1;

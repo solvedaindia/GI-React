@@ -59,6 +59,7 @@ header {
         columns: 3;
         column-gap: $base*2.5;
         padding: $base*4;
+        min-width: 480px;
     }
 }
 .action{

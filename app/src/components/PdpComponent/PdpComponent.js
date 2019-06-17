@@ -28,6 +28,8 @@ const shareImg = (
 	/>
   );
 
+
+
 class PdpComponent extends React.Component {
 	constructor() {
 		super();
@@ -42,6 +44,8 @@ class PdpComponent extends React.Component {
 
 	componentDidMount() {
 		this.getResolveSkuData();
+		window.addEventListener('scroll', this.handleScroll);
+		
 	}
 
 	/* get sku resolved data */
@@ -150,16 +154,79 @@ class PdpComponent extends React.Component {
 			window.scrollTo(0, 0);
 		}
 	}
+//Scroll start
+	handleScroll() {
+		var header = document.getElementById("Pdpstickybar");
+    var sticky = header.offsetTop;		
+		if (window.pageYOffset > sticky) {
+			header.classList.add("sticky");
+		  } else {
+			header.classList.remove("sticky");
+		  }
+			header.style.display='block';
+
+		  // header 
+		  var header = document.getElementById("header");
+		  var sticky = header.offsetTop;		
+		  if (window.pageYOffset > sticky) {
+			  header.classList.add("sticky");
+			} 			
+			else {
+			  header.classList.remove("sticky");
+			}
+	}
+	//end
 
 	render() {
 		const { isLoading } = this.state;
 		const wishlistArr = getOnlyWishlistUniqueIds();
 		const isAddToCart = appCookie.get('isPDPAddToCart');
 		return (
+			<>
+			{!isLoading  &&
+			<>
+				{ isAddToCart !== 'true' &&
+			<div className='Pdpstickybar clearfix' id='Pdpstickybar'>			  
+			    <div className='pdpstickyItem'>				   
+					<div className="product slideUpPrice">
+                       <div className='productId'>
+						 <span className='text'>Product ID:</span> 
+						 <span className='text'>{this.state.skuData.partNumber}</span>
+						</div>
+
+						<h4 className='heading'>
+							{this.state.skuData.productName}
+						</h4>
+						<div className='lockerText'>Locker, Mirror, OHU & Drawer in Royal Ivory Colour</div>
+					</div>
+					
+					<div className='cartofferprice-wrap'>
+					<div className='PriceofferCart'>
+					   <div className='divpriceOffer slideUpPriceoffer'>
+							<Price priceData={this.state.skuData}/>
+							<div className="accessories-offer">							
+								<span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories
+							</div>
+						</div>
+						<div className='addtoCart slideUpCart'>
+							<AddToCart 
+								skuData={this.state.skuData}
+								sticky={true}
+								pinCodeData={this.state.pincodeData}
+								handleAddtocart={this.handleAddtocart.bind(this)} 
+							/>
+						</div>
+					</div>
+					</div>
+			    </div>
+			</div>
+				}
+			</>
+			}
 			<div className="galleryArea">
 				{!isLoading ? (
 					<>
-					{ isAddToCart === 'true1' &&
+					{/* { isAddToCart !== 'true' &&
 						<Row>
 							<Col md={7} sm={12} xs={12}>
 								<div className="product">
@@ -185,7 +252,7 @@ class PdpComponent extends React.Component {
 								
 							</Col>
 						</Row>
-					}
+					} */}
 					<Row className="no-margin">
 						<Col className="no-paddingLeft" md={7} sm={12} xs={12}>
 							<div className="GalleryBox">
@@ -265,6 +332,7 @@ class PdpComponent extends React.Component {
 				</Grid>        
 				<PdpEspot espot={this.props.espot} />
 			</div>
+			</>
 		);
 	}
 }
