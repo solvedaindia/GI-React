@@ -30,7 +30,7 @@ export class Step1Component extends React.Component {
           password: '',
           logonBy: '',
           errorMessageUserId: null,
-          errorMessagePassword: null,
+          errorMessagePassword: props.msg,
           showLoginRegisterMain: false,
           showForgotPassword: false,
           showRegister: false,
@@ -184,7 +184,7 @@ export class Step1Component extends React.Component {
 
     render() {
       let errorMessageUserId = null;
-      let errorMessagePassword = null;
+      let errorMessagePassword = this.props.msg;
       if (this.state.errorMessageUserId) {
         errorMessageUserId = this.errorMessage(this.state.errorMessageUserId);
       }
@@ -227,7 +227,6 @@ export class Step1Component extends React.Component {
                           <input className='checkBox' type="checkbox" name="has_pass" onChange={this.handleHasPass} />
                           <label className='form-label' htmlFor="has_pass">I have a password</label>
                         </div>
-                        <a onClick={this.openModal}>Open Modal</a>
                         {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)}
                                                 resetCallbackPro={this.resetLoginValues.bind(this)}/> : '' }
                         {this.state.showLoginRegisterMain ? (

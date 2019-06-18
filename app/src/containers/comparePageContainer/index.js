@@ -56,6 +56,7 @@ export class ComparePageContainer extends React.Component {
         });
         if(sku1) {
           sku1.parentProductId = data.uniqueID;
+          sku1.specs = data.attributes
           prds.push(sku1)
         }
         if(this.props.compWidgetData.length > 1) {
@@ -64,6 +65,7 @@ export class ComparePageContainer extends React.Component {
           })
           if(sku2) {
             sku2.parentProductId = data.uniqueID;
+            sku2.specs = data.attributes
             prds.push(sku2)
           }
         }
@@ -73,6 +75,7 @@ export class ComparePageContainer extends React.Component {
           })
           if(sku3) {
             sku3.parentProductId = data.uniqueID;
+            sku3.specs = data.attributes
             prds.push(sku3);
           }
         } 

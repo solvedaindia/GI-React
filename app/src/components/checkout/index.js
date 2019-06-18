@@ -21,7 +21,8 @@ import {
   accessTokenCookie,
   userLoginAPI,
   addressListAPI,
-  userDataAPI
+  userDataAPI,
+  UserVerifyAPI
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -55,7 +56,7 @@ export class CheckoutComponent extends React.Component {
               this.setState({
                 step: 2,
                 loggedIn: true,
-                logon_by: data.logonId
+                logon_by: data.logonID
             })
             }).catch(error => {
               throw new Error(error);
@@ -78,19 +79,19 @@ export class CheckoutComponent extends React.Component {
       })
     }
 
-    callAddressAPI = () => {
-      return new Promise((resolve, reject) => {
-        let token = appCookie.get('accessToken')
-        let url = addressListAPI;
-        axios.get(addressListAPI, {
-          headers: { store_id: storeId, access_token: token }
-        }).then(response => {
-          resolve(response.data.data);
-        }).catch(error => {
-          reject(error);
-        })
-      })
-    }
+    // callAddressAPI = () => {
+    //   return new Promise((resolve, reject) => {
+    //     let token = appCookie.get('accessToken')
+    //     let url = addressListAPI;
+    //     axios.get(addressListAPI, {
+    //       headers: { store_id: storeId, access_token: token }
+    //     }).then(response => {
+    //       resolve(response.data.data);
+    //     }).catch(error => {
+    //       reject(error);
+    //     })
+    //   })
+    // }
 
     handleHasPass = () => {
       if(this.state.has_pass == false) {
@@ -104,23 +105,55 @@ export class CheckoutComponent extends React.Component {
       }
     }
 
-    handleUserLoginApi(data) {
-      this.setState({ message: null });
-      axios
-      .post(userLoginAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
-      .then(response => {
-        window.location.reload();
-        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-        document.cookie = `${accessTokenCookie}=${
-        response.data.data.access_token
-        };path=/;expires=''`;
-        this.setState({
-        loginStatus: 'Logout',
-        userType: 'Hello User!',
-        show: false,
+
+    handleUserLogin(data) {
+      
+      this.checkUserExist(data)
+        .then(this.CallLoginApi)
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+    checkUserExist = (data) => {
+      return new Promise((resolve, reject) => {
+        var obj = {
+          logon_id: data.user_id
+        } 
+        axios.post(UserVerifyAPI, obj, {
+          headers: { store_id: storeId, access_token: accessToken },
+        }).then(response => {
+          
+         resolve(data);
+        }).catch(error => {
+          console.log(error, "this is in catch block");
+          // const errorData = error.response.data;
+          // const errorMessage = errorData.error.error_message;
+          this.setState({
+          message: `This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account`,
         });
+          reject(error);
+        })
+      })
+    }
+
+    CallLoginApi(data) {
+        this.setState({ message: null });
+        axios
+        .post(userLoginAPI, data, {
+          headers: { store_id: storeId, access_token: accessToken },
+        })
+        .then(response => {
+          window.location.reload();
+          appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+          document.cookie = `${accessTokenCookie}=${
+          response.data.data.access_token
+          };path=/;expires=''`;
+          this.setState({
+            loginStatus: 'Logout',
+            userType: 'Hello User!',
+            show: false
+          });
         
         // alert('Successfully Logged In');
       })
@@ -175,15 +208,16 @@ export class CheckoutComponent extends React.Component {
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
-                    back={this.handleChange} 
+                    back={this.handleChange}
                     isLoggedIn={this.state.loggedIn} 
                     logonBy={this.state.logon_by} />
         } else {
             return <Step1Component 
                     proceed={this.handleProceed}
-                    login={this.handleUserLoginApi.bind(this)} 
+                    login={this.handleUserLogin.bind(this)} 
                     proceedToSecond={this.proceedToSecond}
-                    logonBy={this.state.logon_by} />
+                    logonBy={this.state.logon_by}
+                    msg={this.state.message} />
         }
     }
 
@@ -208,6 +242,7 @@ export class CheckoutComponent extends React.Component {
     }
 
     render() {
+      console.log('this is step', this.state.step)
       return (
         <div className='checkout'>
         <div className="container">

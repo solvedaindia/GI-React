@@ -30,17 +30,26 @@ class CompPrd extends React.Component {
       var heights = [];
       var Depth = [];
       this.props.data.map((elem, index) => {
+        var wt = elem.attributes.find((att) => {
+          return att.uniqueID == "7000000000000001002"
+        })
+        var ht = elem.attributes.find((att) => {
+          return att.uniqueID == "7000000000000001011"
+        })
+        var dp = elem.attributes.find((att) => {
+          return att.uniqueID == "7000000000000001012"
+        })
         weights.push(
             <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">80 cm</span></div> : <p>80 cm</p>}
+              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">{wt && wt.values[0] ? wt.values[0].value : 'NA'}</span></div> : <p>{wt && wt.values[0] ? wt.values[0].value : 'NA'}</p>}
             </Col>)
         heights.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">120 cm</span></div> : <p>120 cm</p>}
+              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">{ht && ht.values[0] ? ht.values[0].value : 'NA'}</span></div> : <p>{ht && ht.values[0] ? ht.values[0].value : 'NA'}</p>}
             </Col>)
         Depth.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">100 cm</span></div> : <p>100 cm</p>}
+              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">{dp && dp.values[0] ? dp.values[0].value : 'NA'}</span></div> : <p>{dp && dp.values[0] ? dp.values[0].value : 'NA'}</p>}
             </Col>)
       })
 
@@ -78,14 +87,14 @@ class CompPrd extends React.Component {
 
     renderSpecs = () => {
       var specs = [];
-      this.props.data[0].attributes.map((att, index) => {
+      this.props.data[0].specs.map((att, index) => {
         if(this.props.data.length > 1) {
-          var second_att = this.props.data[1].attributes.find(s_att => {
+          var second_att = this.props.data[1].specs.find(s_att => {
             return s_att.uniqueID == att.uniqueID
           })
         }
         if(this.props.data.length > 2) {
-          var third_att = this.props.data[2].attributes.find(t_att => {
+          var third_att = this.props.data[2].specs.find(t_att => {
             return t_att.uniqueID == att.uniqueID
           })
         }

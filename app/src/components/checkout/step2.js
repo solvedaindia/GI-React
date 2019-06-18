@@ -27,6 +27,8 @@ export class Step2Component extends React.Component {
         super(props);
         this.state = {
           has_pass: false,
+          phone: '',
+          email: '',
           same_bill: true,
           step: 1,
           showGift: false,
@@ -47,6 +49,15 @@ export class Step2Component extends React.Component {
               addressList: data
             })
           })
+      }
+      if(this.props.logonBy && this.props.logonBy.includes('@')) {
+        this.setState({
+          email: this.props.logonBy
+        })
+      } else {
+        this.setState({
+          phone: this.props.logonBy
+        })
       }
     }
 
@@ -114,6 +125,18 @@ export class Step2Component extends React.Component {
         }
       }
 
+      phoneChange = (e) => {
+        this.setState({
+          phone: e.target.value
+        })
+      }
+
+      mailChange = (e) => {
+        this.setState({
+          email: e.target.value
+        })
+      }
+
     handleSameBill = () => {
       if(this.state.same_bill == false) {
         this.setState({
@@ -179,7 +202,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6 form-group">
                         <label className="from-label" htmlFor="phone">Phone Number</label>
-                        <input type="text" name="phone" className="form-control" />
+                        <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e => this.phoneChange(e)} />
                       </div>
                     </div>
                     <div className="row">
@@ -189,7 +212,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6 form-group">
                         <label  className="from-label" htmlFor="email">Email</label>
-                        <input type="text" name="email" className="form-control" />
+                        <input type="text" name="email" className="form-control" value={this.state.email} onChange={e => this.mailChange(e)} />
                       </div>
                     </div>
                     <div className="row">
