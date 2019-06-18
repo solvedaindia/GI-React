@@ -12,7 +12,7 @@ const FooterComponent = props => (
       <Col md={7} sm={12} xs={12} className="rightPadding">
         <Row>
           <div className="logo_white">
-            <img className="logo_width" src={footerLogoUrl} alt="logo" />
+            <a href='/'><img className="logo_width" src={footerLogoUrl} alt="logo" /></a>
           </div>
           <Footerlinks name={props.links} />
         </Row>

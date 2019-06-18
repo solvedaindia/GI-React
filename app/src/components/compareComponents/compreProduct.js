@@ -140,4 +140,5 @@ class CompPrd extends React.Component {
       );
     }
 }
+
 export default CompPrd;
