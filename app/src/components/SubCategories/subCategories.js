@@ -40,19 +40,9 @@ class SubCategoriesArray extends React.Component {
         {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
           <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
         </div>}
-          </div>
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
             var routePath = `/plp/${subCategoryData.uniqueID}`;
-            // if (subCategoryData.categoryName === 'Tables') {
-            //     routePath = '/plp/12540';
-            // }
-            // else if (subCategoryData.categoryName === 'Sofas') {
-            //     routePath = '/plp/13502';
-            // }
-            // else {
-            //     routePath = '/plp/13506';
-            // }
             return (
               <li className='subCatList' key={`subCat-${index}`} onMouseOver={this.handleMouseOver.bind(this, subCategoryData)} onMouseOut={this.handleMouseOut.bind(this)}>
                 <Link to={routePath} className='links'>

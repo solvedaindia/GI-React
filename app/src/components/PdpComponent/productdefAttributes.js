@@ -87,7 +87,6 @@ class productDefAttribute extends React.Component {
                     selectedCircle = 'selectedCircle';
               }
                   radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index)}{name}</label>
-              );
               let isDisabled = '';
 
                   if(i > 0 && selectedSwatches.indexOf(value.name) === -1) {
