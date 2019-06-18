@@ -178,18 +178,22 @@ class Filter extends React.Component {
         }
         let imgUrl = null;
         let colorRGBClass;
+        let customCheckItem;
         if (option.colorCode) {
           colorRGBClass = 'circleRGB'
           colorStyle = { backgroundColor: `rgb${option.colorCode}` };
+          customCheckItem = <div className='circlebox'><span class={colorRGBClass} style={colorStyle}></span></div>
         }
         else {
           colorRGBClass = 'circle'
           imgUrl = `${imagePrefix}${option.facetImage}`;
+          console.log('Facet Faet ---- ',imgUrl, option)
+          customCheckItem = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         }
 
-        const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
+       // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
-          {checkNew}
+          {customCheckItem}
         </label>
       }
       else {

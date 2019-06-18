@@ -388,7 +388,7 @@ section.tablecarousel {
       position: static;
       display: block;
       float: left;
-      min-width: 200px;
+      min-width: 23%;
 
       &__filter {
         background: $colorwhite;
@@ -440,9 +440,11 @@ section.tablecarousel {
           visibility: visible;
         }
         .list {
-          display: inline-block;
+          // display: inline-block;
+          display: block;
+          float:left;
 
-          .input_box {
+           .input_box {
             margin: 0 15px 0 0;
 
             .inputCheck[type="checkbox"] {
@@ -455,15 +457,30 @@ section.tablecarousel {
               position: relative;
               .circle {
                 border-radius: 50%;
-                width: 100%;
-              }
-              .circleRGB {
-                // border: 2px solid $black;
-                padding: 2px;
                 height: 22px;
-                border-radius: 50%;
-                width: 100%;
+                width: 22px;
+                padding: 2px;               
+                
               }
+              .circlebox{
+                height: 28px;
+                width: 28px;
+                background:$colorwhite;
+                border:2px solid $colorwhite;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 100%;
+                padding:2px;
+                
+              .circleRGB {                
+                border-radius: 50%;                
+                height: 20px;
+                width: 20px;
+                padding: 2px;  
+                display: block;  
+              }
+            }
             }
 
             .inputCheck[type="checkbox"] + .lblradio {
@@ -476,6 +493,12 @@ section.tablecarousel {
                 border: 2px solid $black;
                 padding: 2px;
               }
+             
+              .circlebox{
+                border:2px solid $black;
+                padding: 2px;
+              }              
+              
             }
 
             /* Input Checkbox Squere
