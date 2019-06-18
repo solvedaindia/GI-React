@@ -68,6 +68,7 @@ export class PlpContainer extends React.Component {
       searchKeyword: this.props.location.search,
       emptySearchItem: null,
       showBestSeller: null,
+      newSearchTrigger: false,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
@@ -164,6 +165,7 @@ export class PlpContainer extends React.Component {
           isFromSearch: nextProps.location.pathname,
           searchKeyword: nextProps.location.search,
           showBestSeller: false,
+          newSearchTrigger: true,
         });
         this.fetchPLPProductsData();
       }
@@ -247,16 +249,31 @@ export class PlpContainer extends React.Component {
           console.log('PLP Response----', response.data);
 
           if (this.state.isFromSearch.includes('/search')) {
-            if (response.data.data.spellCheck) {
+            console.log('is is is --- ',this.state.newSearchTrigger);
+            if (this.state.newSearchTrigger && response.data.data.productList.length !== 0) {
               this.setState({
-                emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck)
+                emptySearchItem: null,
+                showBestSeller: false,
+                newSearchTrigger: false
               })
             }
-            else if (response.data.data.productList.length === 0) {
-              this.setState({
-                showBestSeller: true,
-              })
+            else {
+              if (response.data.data.spellCheck) {
+                this.setState({
+                  emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
+                  showBestSeller: false,
+                  newSearchTrigger: false,
+                })
+              }
+              else if (response.data.data.productList.length === 0) {
+                this.setState({
+                  showBestSeller: true,
+                  emptySearchItem: null,
+                  newSearchTrigger: false
+                })
+              }
             }
+
 
           }
 
@@ -445,7 +462,7 @@ export class PlpContainer extends React.Component {
     const keywoard = params.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
       titleItem = (
-        <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
+        <h3 className="headingTitleFlat">Results for <span className='headingTitleSearch'>{keywoard}</span></h3>
       );
     }
 
