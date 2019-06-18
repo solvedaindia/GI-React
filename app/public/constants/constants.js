@@ -104,8 +104,22 @@ export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ad
 export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/minicart`;
 /* MyWishlist API */
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
-/* Bank EMI API */
+/* Change Password API */
+export const changePasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/changepassword`;
+/* Get City State API */
+export const cityStateAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
+/* Add Address API */
+export const addAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/add`;
+/* Get Address List API */
+export const getAddressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+/* Delete Address API */
+export const deleteAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/delete/`;
+/* Update/SetAsDefault Address API */
+export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/update/`;
+/* PDP API */
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
+/* User Detail API */
+export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
 /* Pincode API */
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
@@ -115,7 +129,7 @@ export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
-//export const catalog = 'SolvedaCommerceCatalogAssetStore';
+// export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;

@@ -25,6 +25,7 @@ export class HeaderContainer extends React.Component {
   }
 
   render() {
+    console.log('dmdmdmdmdmdmd -- ', this.props);
     return (
       <header className="appheader">
         <div className="logo">

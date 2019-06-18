@@ -12,6 +12,7 @@ import {
 import CartLogo from '../SVGs/cart';
 import { getUpdatedMinicartCount } from '../../utils/initialManager';
 import MinicartItem from './minicartItem';
+import EmptyMinicart from './emptyMinicart';
 import ReactDOM from 'react-dom';
 import '../../../public/styles/minicart.scss';
 import { getReleventReduxState } from '../../utils/utilityManager';
@@ -70,8 +71,8 @@ class CartCount extends React.Component {
     );
     this.fetchMinicartDetails();
 
-    //this.getCartCount();
-    getUpdatedMinicartCount(this)
+    // this.getCartCount();
+    getUpdatedMinicartCount(this);
     // this.setState({
     //   CartCount: this.props.updatedMinicartCount,
     // });
@@ -122,7 +123,7 @@ class CartCount extends React.Component {
             key={i}
             className={`dropdown__list-item${
               i === this.state.selected ? '' : ''
-              }`}
+            }`}
           >
             <MinicartItem dataPro={option} />
             {/* {option} */}
@@ -134,24 +135,31 @@ class CartCount extends React.Component {
 
   render() {
     const { isLoading, CartCount } = this.state;
-    console.log('minicart recive props', CartCount);
+    console.log('minicart recive props', CartCount, this.state.minicartData);
     let cartCountItem = null;
     let minicartDropdownItem = null;
     if (CartCount != 0 && CartCount != undefined) {
       cartCountItem = <span className="cartCount">{CartCount}</span>;
-      minicartDropdownItem = (
-        <div
-          className={`dropdown__list ${
-            this.state.active ? 'dropdown__list--active' : ''
-            }`}
-        >
-          <>
-            <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-            <button className="checkout-btn">Checkout</button>
-          </>
-        </div>
-      );
     }
+    minicartDropdownItem = (
+      <div
+        className={`dropdown__list ${
+          this.state.active ? 'dropdown__list--active' : ''
+        }`}
+      >
+        <>
+          {CartCount != 0 && CartCount != undefined ? (
+            <>
+              <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+              <button className="checkout-btn">Checkout</button>
+            </>
+          ) : (
+            <EmptyMinicart />
+          )}
+          {/* <EmptyMinicart /> */}
+        </>
+      </div>
+    );
 
     return (
       <li className="icons mini-cart" onClick={this.handleCartCount}>
@@ -168,7 +176,7 @@ class CartCount extends React.Component {
             className="dropdown__toggle dropdown__list-item icons_border"
           >
             <CartLogo />
-            <i className="fa fa-angle-down" aria-hidden="true" />
+            {/* <i className="fa fa-angle-down" aria-hidden="true" /> */}
           </div>
           {minicartDropdownItem}
         </div>

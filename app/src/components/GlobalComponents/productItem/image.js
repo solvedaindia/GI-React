@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 import ImageLoader from '../../../utils/imageLoader';
-import {newMachineUrl, store, catalog, imagePrefix} from '../../../../public/constants/constants'
+import {
+  newMachineUrl,
+  store,
+  catalog,
+  imagePrefix,
+} from '../../../../public/constants/constants';
 
 class Image extends React.Component {
   render() {
@@ -25,10 +30,15 @@ class Image extends React.Component {
         />
       );
     }
-    var routePath = '/pdp/'+this.props.parentUniqueId+'/'+this.props.uniqueId;
+    const routePath = `/pdp/${this.props.parentUniqueId}/${
+      this.props.uniqueId
+    }`;
     return (
-        <LazyLoad className='imgBox' debounce={false}><Link className="link" to={routePath}>{imageItem}</Link></LazyLoad>
-      
+      <LazyLoad className="imgBox" debounce={false}>
+        <Link className="link" to={routePath}>
+          {imageItem}
+        </Link>
+      </LazyLoad>
     );
   }
 }

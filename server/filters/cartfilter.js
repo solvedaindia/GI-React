@@ -56,7 +56,7 @@ function getItemOrderDetail(OrderItem) {
 
 module.exports.mergeOrderItem = mergeOrderItemandProduct;
 function mergeOrderItemandProduct(orderItemList, productList) {
-  console.log('productList>>>',JSON.stringify(productList));
+  console.log('productList>>>', JSON.stringify(productList));
   const orderItemJson = {
     cartTotalQuantity: 0,
     cartTotalItems: 0,

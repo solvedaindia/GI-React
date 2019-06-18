@@ -110,25 +110,25 @@ class productDefAttribute extends React.Component {
 								})
 								
 
-							}
-						</ul>
-						</div>
-				)
-			})
-		);
-	}
+              }
+          </ul>
+        </div>
+        )
+      })
+    );
+  }
 
-	render() {
-		const selectedSwatches = this.getSelectedSwatches();
-		const getActualSwatchesName = this.getSelectedAllSwatches(selectedSwatches);
-		let attributeHtml = this.makeRadioButton(selectedSwatches, getActualSwatchesName);
+  render() {
+    const selectedSwatches = this.getSelectedSwatches();
+    const getActualSwatchesName = this.getSelectedAllSwatches(selectedSwatches);
+    let attributeHtml = this.makeRadioButton(selectedSwatches, getActualSwatchesName);
 
-		return (
-			<div className="attr-details-box">
-				{attributeHtml}
-			</div>
-		);
-	}
+    return (
+      <div className="attr-details-box">
+        {attributeHtml}
+      </div>
+    );
+  }
 }
 
 export default productDefAttribute;
