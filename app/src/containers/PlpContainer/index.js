@@ -249,7 +249,6 @@ export class PlpContainer extends React.Component {
           console.log('PLP Response----', response.data);
 
           if (this.state.isFromSearch.includes('/search')) {
-            console.log('is is is --- ',this.state.newSearchTrigger);
             if (this.state.newSearchTrigger && response.data.data.productList.length !== 0) {
               this.setState({
                 emptySearchItem: null,
@@ -265,7 +264,7 @@ export class PlpContainer extends React.Component {
                   newSearchTrigger: false,
                 })
               }
-              else if (response.data.data.productList.length === 0) {
+              else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
                 this.setState({
                   showBestSeller: true,
                   emptySearchItem: null,
@@ -335,14 +334,14 @@ export class PlpContainer extends React.Component {
       }
 
       return (
-        <div>
-          <label>No results found for “{searchText}”</label>
-          <div>
-            <label>Did you mean: </label>
-            <div>
+        <div className='noResultfound'>
+          <div className='label-noresult'>No results found for “{searchText}”</div>
+          <div className='product-serchGuide'>
+            <div className='label-text'>Did you mean: </div>
+            <div className='serchlist-button'>
               {spellCheckArr.map(item => {
                 return (
-                  <button onClick={() => this.onSpellCheckClick(item)}>{item}</button>
+                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button> 
                 )
               })}
             </div>
@@ -461,8 +460,11 @@ export class PlpContainer extends React.Component {
     const params = new URLSearchParams(this.state.searchKeyword);
     const keywoard = params.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
-      titleItem = (
-        <h3 className="headingTitleFlat">Results for <span className='headingTitleSearch'>{keywoard}</span></h3>
+      titleItem = (      
+         <div className='searchresult'>
+           <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
+         </div>
+      
       );
     }
 
@@ -480,8 +482,15 @@ export class PlpContainer extends React.Component {
       <>
         {this.state.emptySearchItem !== null ? this.state.emptySearchItem : null}
         {this.state.showBestSeller ? <><div>
-          <label>No results found for “{keywoard}”</label>
+
+          <div className='noResultfound'>
+            <div className='label-noresult'>
+            No results found for “{keywoard}”
+            </div>
+          </div>
+          <div className='Search-bestseller container'>
           <BestSeller />
+          </div>
         </div></> : null}
         {marketingBanner}
         {subCategories}
