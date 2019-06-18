@@ -4,6 +4,7 @@ import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
+import KitchenHall from '../../components/KitchensComp/KitchenHall';
 
 
 
@@ -85,6 +86,7 @@ index: 0
         </div>
        </div>
        <AlwaysRemember />
+       <KitchenHall />
 
             </div>
         )

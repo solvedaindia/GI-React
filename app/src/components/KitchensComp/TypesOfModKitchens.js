@@ -19,9 +19,9 @@ class TypesOFkitchens extends React.Component {
 
   render() {
     return (
-        <div className="container">
+        <div>
         <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
-
+<p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
         <div className="row">
             <div className="col-md-6">
             <img
