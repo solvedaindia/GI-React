@@ -40,10 +40,16 @@ class SubCategoriesArray extends React.Component {
         {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
           <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
         </div>}
-          </div>
+          
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
-            var routePath = `/plp/${subCategoryData.uniqueID}`;
+            var routePath;
+            if (this.props.categoryNamePro === 'Rooms') {
+              routePath = `/clp/${subCategoryData.uniqueID}`;
+            }
+            else {
+              routePath = `/plp/${subCategoryData.uniqueID}`;
+            }
             // if (subCategoryData.categoryName === 'Tables') {
             //     routePath = '/plp/12540';
             // }
