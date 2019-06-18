@@ -87,12 +87,18 @@ module.exports.fetchCartQuantity = function fetchCartMain(headers, callback) {
  */
 module.exports.cartOrderSummary = function cartOrderSummary(headers, callback) {
   logger.debug('calling cart API to fetch Cart Order Summary');
-  getCartData(headers, (err, results) => {
+  getCartData(headers, (err, result) => {
     if (err) {
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, results);
+      const cartSummary = {
+        orderSummary: {},
+      };
+      if (result.orderItem && result.orderItem.length > 0) {
+        cartSummary.orderSummary = cartFilter.getOrderSummary(result);
+      }
+      callback(null, cartSummary);
     }
   });
 };
@@ -424,7 +430,7 @@ function getcartPageProductDetails(cartData, headers, callback) {
                 result[1][index].inventoryDetails.inventoryStatus;
               // eslint-disable-next-line no-param-reassign
               product.deliveryDate =
-                result[1][index].inventoryDetails.deliveryDate;
+                result[1][index].inventoryDetails.deliveryDate || '';
               break;
             }
           }
@@ -467,6 +473,8 @@ function getInventoryDetails(headers, reqParamArray, callback) {
 
 /* Merge Cart Data and Product Details to Get MiniCart Data */
 function mergeMiniCart(cartData, productList, headers, callback) {
+  // callback(null, cartFilter.minicart(cartData, productList));
+
   const minicartJson = {
     orderID: '',
     cartTotalQuantity: 0,
@@ -492,13 +500,24 @@ function mergeMiniCart(cartData, productList, headers, callback) {
 
 /* Merge Cart Data and Product Details to Get Cart Page Data */
 function mergeCartData(cartData, productList, headers, callback) {
-  let cartDetails = {};
+  const cartDetails = {
+    orderSummary: {},
+    cartTotalItems: 0,
+    cartItems: [],
+  };
   if (
     cartData.orderItem &&
     cartData.orderItem.length > 0 &&
     productList.length > 0
   ) {
-    cartDetails = cartFilter.getCartData(cartData, productList);
+    cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
+    const mergedCartData = cartFilter.mergeOrderItem(
+      cartData.orderItem,
+      productList,
+    );
+    cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
+    cartDetails.cartItems = mergedCartData.orderItemList;
+    cartDetails.actualCartData = cartData;
   }
   callback(null, cartDetails);
 }

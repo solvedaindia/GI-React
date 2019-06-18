@@ -91,7 +91,7 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
         userHandler.getUserDetails(userDetailHeader, (err, result) => {
           loginResponseBody.userDetails = {};
           if (!err) {
-            let firstname = '';
+            /*  let firstname = '';
             let lastname = '';
             if (result.name.indexOf(' ') > 0) {
               firstname = result.name.substr(0, result.name.indexOf(' '));
@@ -100,9 +100,9 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
                 .trim();
             } else {
               firstname = params.name;
-            }
-            loginResponseBody.userDetails.firstName = firstname;
-            loginResponseBody.userDetails.lastName = lastname;
+            } */
+            loginResponseBody.userDetails.name = result.name;
+            // loginResponseBody.userDetails.lastName = lastname;
             loginResponseBody.userDetails.pincode = result.pincode;
             // delete loginResponseBody.userDetails.logonID;
           }

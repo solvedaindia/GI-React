@@ -88,13 +88,30 @@ const errorlist = {
     status_code: 400,
     error_key: 'user_does_not_exist',
     error_message:
-      'This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account',
+      'This account does not exist. Enter a valid mobile number or email address to proceed or create a new GI account',
   },
   mobile_exists: {
     status_code: 400,
     error_key: 'mobile_exists',
-    error_message:
-      'This mobile number is already associated with another Godrej Interio account. Please use a different mobile number.',
+    error_message: 'This Mobile Number already exists',
+  },
+  email_exists: {
+    status_code: 400,
+    error_key: 'email_exists',
+    error_message: 'This Email Address already exists',
+  },
+  email_mobile_exists: {
+    status_code: 400,
+    error_key: 'email_mobile_exists',
+    error_message: [
+      'This Email Address already exists',
+      'This Mobile Number already exists',
+    ],
+  },
+  order_not_found: {
+    status_code: 400,
+    error_key: 'order_not_found',
+    error_message: 'An order with reference to this orderId does not exist',
   },
 };
 module.exports.errorlist = errorlist;
@@ -221,6 +238,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
         return errorlist.user_does_not_exists;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND') {
+        return errorlist.order_not_found;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||

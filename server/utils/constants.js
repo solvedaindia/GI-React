@@ -31,6 +31,7 @@ module.exports = Object.freeze({
   createWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist`,
   editWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{wishlistid}}`,
   updateProfile: `${prodWcsResourceUrl}/{{storeId}}/person/@self?action=updateUserRegistration&responseFormat=json`,
+  validateProfile: `${prodWcsResourceUrl}/{{storeId}}/userUpdate/validator`,
   userContact: `${prodWcsResourceUrl}/{{storeId}}/person/@self/contact`,
   sociallogin: `${prodWcsResourceUrl}/{{storeId}}/loginidentity/oauth_validate?responseFormat=json`,
   otp: `${prodWcsResourceUrl}/{{storeId}}/GIOtp`,
@@ -53,7 +54,8 @@ module.exports = Object.freeze({
   pincodeServiceablity: `${prodWcsResourceUrl}/{{storeId}}/pincode/getServiceAbility/{{pincode}}`,
   saveGSTIN: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
   promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
-  setSocialLoginPassword: `${prodWcsResourceUrl}/{{storeId}}/person/@self?responseFormat=json&action=updateUserRegistration`,
   shippingCharge: `${prodWcsResourceUrl}/{{storeId}}/GIShipCharge/getShippingCharge?pinCode={{pincode}}&uniqueId={{uniqueId}}`,
-  userInfo: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
+  userStatus: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
+  reserveInventory: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/precheckout`,
+  notifyMe: `${prodWcsResourceUrl}/{{storeId}}/GINotifyUser/saveUserAndProductDetails`,
 });
