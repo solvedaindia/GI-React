@@ -59,7 +59,7 @@ export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter
 /* Newsletter Subscription Status API */
 export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
 /* store Id */
-export const storeId = '10151';
+export const storeId = 'GodrejInterioESite';
 /* Access Token */
 export let accessToken = getTheAccessToken();
 /* Facebook AppId */
@@ -124,6 +124,11 @@ export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/use
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* User Detail Validate API */
+export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
+/* User Detail Update API */
+export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
+
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

@@ -25,11 +25,23 @@ import MyOrder from '../../components/MyAccountComponents/MyOrder/myOrder';
 export class MyAccountContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      profileName: null,
+      changePasswordTag: null,
+    };
+    this.myProfileCallback = this.myProfileCallback.bind(this);
   }
 
   componentWillReceiveProps(nextProp) {
     console.log('In My Account Next Props ---- ', this.props.location);
+  }
+
+  myProfileCallback(userName, passwordTag) {
+    console.log('myProfileCallback ---- ', userName, passwordTag)
+    this.setState({
+      profileName: userName,
+      changePasswordTag: passwordTag
+    })
   }
 
   render() {
@@ -38,14 +50,15 @@ export class MyAccountContainer extends React.Component {
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
         <ul className="nav nav-tabs">
-          {this.props.username !== null ? (
+          {this.state.profileName !== null ? <h4 className="username">{this.state.profileName}!</h4> : null}
+          {/* {this.props.username !== null ? (
             <h4 className="username">{this.props.username}!</h4>
-          ) : null}
+          ) : null} */}
           <li className="list">
             <a
               className={`link ${
                 redirectedFrom === 'myprofile' ? 'active' : ''
-              }`}
+                }`}
               href="#profile-v"
               data-toggle="tab"
             >
@@ -56,7 +69,7 @@ export class MyAccountContainer extends React.Component {
             <a
               className={`link ${
                 redirectedFrom === 'password' ? 'active' : ''
-              }`}
+                }`}
               href="#changePassword-v"
               data-toggle="tab"
             >
@@ -105,24 +118,24 @@ export class MyAccountContainer extends React.Component {
                 <div
                   className={`tab-pane ${
                     redirectedFrom === 'myprofile' ? 'active' : ''
-                  }`}
+                    }`}
                   id="profile-v"
                 >
                   {' '}
-                  <MyProfile />
+                  <MyProfile myProfileCallbackPro={this.myProfileCallback} />
                 </div>
                 <div
                   className={`tab-pane ${
                     redirectedFrom === 'password' ? 'active' : ''
-                  }`}
+                    }`}
                   id="changePassword-v"
                 >
-                  <ChangePassword />
+                  <ChangePassword changePasswordTagPro={this.state.changePasswordTag}/>
                 </div>
                 <div
                   className={`tab-pane ${
                     redirectedFrom === 'myorder' ? 'active' : ''
-                  }`}
+                    }`}
                   id="myOrder-v"
                 >
                   <MyOrder
@@ -134,7 +147,7 @@ export class MyAccountContainer extends React.Component {
                 <div
                   className={`tab-pane ${
                     redirectedFrom === 'address' ? 'active' : ''
-                  }`}
+                    }`}
                   id="manageAddresses-v"
                 >
                   <ManageAddress />

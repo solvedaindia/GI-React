@@ -14,20 +14,23 @@ import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
 
 class UserAccInfo extends React.Component {
-  state = {
-    isLoggedIn: '',
-    isLoading: true,
-    errors: null,
-    loginStatus: 'Login/Register',
-    userType: 'Hello Guest!',
-    showLoginRegisterMain: false,
-    showForgotPassword: false,
-    showRegister: false,
-    loginLogoutBtnItem: null,
-    isFromWishlist: false,
-    userName: null,
-    logonId: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: '',
+      isLoading: true,
+      errors: null,
+      loginStatus: 'Login/Register',
+      userType: 'Hello Guest!',
+      showLoginRegisterMain: false,
+      showForgotPassword: false,
+      showRegister: false,
+      loginLogoutBtnItem: null,
+      isFromWishlist: false,
+      userName: null,
+      logonId: null,
+    };
+  }
 
   resetLoginValues() {
     console.log('resetLoginValues');
@@ -109,7 +112,7 @@ class UserAccInfo extends React.Component {
 
           </li>
           <li className="listItem">
-            <Link to={{pathname: '/myAccount', state: { from: 'myorder' }}}>
+            <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
               <a className="dropDown">My Orders</a>
             </Link>
 
@@ -141,14 +144,14 @@ class UserAccInfo extends React.Component {
         </li>,
         loginStatus: <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
       })
-        // (this.state.userType = (
-        //   <li className="listItem">
-        //     <a className="dropDown">Hello Guest!</a>
-        //   </li>
-        // )),
-        // (this.state.loginStatus = (
-        //   <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
-        // ));
+      // (this.state.userType = (
+      //   <li className="listItem">
+      //     <a className="dropDown">Hello Guest!</a>
+      //   </li>
+      // )),
+      // (this.state.loginStatus = (
+      //   <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
+      // ));
     }
   }
 
@@ -234,8 +237,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { updateUserProfile },
-)(UserAccInfo);
-// export default UserAccInfo;
+// commenting below is because componentWillRecivePops not getting called
+// export default connect(
+//   mapStateToProps,
+//   { updateUserProfile },
+// )(UserAccInfo);
+export default UserAccInfo;

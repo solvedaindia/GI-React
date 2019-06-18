@@ -24,6 +24,14 @@ class ChangePassword extends React.Component {
     errorNew: false,
   };
 
+  componentDidMount() {
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+  }
+
   showHidePass() {
     if (this.state.isShowPass) {
       this.setState({
@@ -149,8 +157,9 @@ class ChangePassword extends React.Component {
       errorItemNew = <div className="error-msg">{this.state.errorMessage}</div>;
     }
 
-    return (
-      <div className="form-BgContainer changePasswordContainer">
+    var oldPasswordItem;
+    if (this.props.changePasswordTagPro === 0) {
+      oldPasswordItem = (
         <div className="form-div clearfix">
           <div className="form-group">
             {/* <label className="form-label">Current Password</label> */}
@@ -165,16 +174,6 @@ class ChangePassword extends React.Component {
                 value={this.state.inputTextCurrent}
                 handleChange={this.handleInputChange.bind(this)}
               />
-              {/* <Input
-            onChange={this.handleInputChange.bind(this)}
-            type={this.state.inputType}
-            name="text"
-            id="current"
-            className="form-control newinputmargin"
-            placeholder="Enter Current Password"
-            value={this.state.inputTextCurrent}
-          /> */}
-
               <span
                 onClick={this.showHidePass.bind(this)}
                 className="valiationPosition-NewPassword"
@@ -185,6 +184,13 @@ class ChangePassword extends React.Component {
           </div>
           {errorItemCurrent}
         </div>
+      )
+    }
+
+    return (
+      <div className="form-BgContainer changePasswordContainer">
+
+        {oldPasswordItem}
 
         <div className="form-div clearfix">
           <div className="form-group">
@@ -199,16 +205,6 @@ class ChangePassword extends React.Component {
               value={this.state.inputTextNew}
               handleChange={this.handleInputChange.bind(this)}
             />
-            {/* <Input
-            // onKeyPress={this.onpress}
-            onChange={this.handleInputChange.bind(this)}
-            type="password"
-            name="email"
-            id="new"
-            className="form-control"
-            placeholder="Enter New Password"
-            value={this.state.inputTextNew}
-          /> */}
           </div>
           {errorItemNew}
         </div>

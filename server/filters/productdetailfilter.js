@@ -1,4 +1,5 @@
 const sortJsonArray = require('sort-json-array');
+const imagefilter = require('./imagefilter');
 
 /**
  * Filter Product Details Data.
@@ -23,15 +24,9 @@ function productDetailForPLP(productDetail) {
   }
   productDetailJson.onClickUrl = '';
   productDetailJson.seoUrl = '';
-  // productDetailJson.thumbnail = productDetail.thumbnail || '';
-  if (productDetail.thumbnail) {
-    productDetailJson.thumbnail = productDetail.thumbnail.substring(
-      productDetail.thumbnail.indexOf('/images'),
-      productDetail.thumbnail.length,
-    );
-  } else {
-    productDetailJson.thumbnail = '';
-  }
+  productDetailJson.thumbnail = imagefilter.getImagePath(
+    productDetail.thumbnail,
+  );
 
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
@@ -39,8 +34,9 @@ function productDetailForPLP(productDetail) {
   productDetailJson.promotionData = getSummaryPromotion(
     productDetail.promotionData,
   );
-  const attribute = getAttributes(productDetail.attributes);
-  productDetailJson.discount = getDiscount(attribute) || '';
+  const productAttribute = getProductAttributes(productDetail.attributes);
+  productDetailJson.discount = productAttribute.discount;
+  productDetailJson.ribbonText = productAttribute.ribbonText;
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
   }
@@ -51,8 +47,10 @@ function productDetailForPLP(productDetail) {
         (100 - Number(productDetailJson.discount)),
     );
   }
-
-  productDetailJson.ribbonText = getRibbonText(attribute) || '';
+  productDetailJson.pageTitle = productDetail.seo_prop_pageTitle || '';
+  productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
+  productDetailJson.metaDescription =
+    productDetail.seo_prop_metaDescription || '';
   // const fixedAttributes = getFixedAttributes(productDetail.attributes);
   // productDetailJson.fixedAttributes = fixedAttributes;
   // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
@@ -90,23 +88,20 @@ function getSwatchData(productAttribueArray) {
   return swatchColor;
 }
 
-function getFixedAttributes(productAttribute) {
-  const fixedAttribute = {};
-  if (productAttribute && productAttribute.length > 0) {
-    productAttribute
-      .filter(
-        attribute =>
-          attribute.usage === 'Defining' &&
-          attribute.identifier !== 'defaultSKU' &&
-          attribute.identifier !== 'PrimaryColor',
-      )
-      .map(eachAttribute => {
-        fixedAttribute[eachAttribute.identifier] =
-          eachAttribute.values[0].value;
-        return true;
-      });
-  }
-  return fixedAttribute;
+function getProductAttributes(attributes) {
+  const productAttribute = {
+    ribbonText: '',
+    discount: '',
+  };
+  attributes.forEach(attribute => {
+    if (attribute.identifier === 'percentOff') {
+      productAttribute.discount = attribute.values[0].value;
+    }
+    if (attribute.identifier === 'Ribbon') {
+      productAttribute.ribbonText = attribute.values[0].value;
+    }
+  });
+  return productAttribute;
 }
 
 /**
@@ -129,35 +124,39 @@ const associatedPromo = [
   },
 ];
 
+/**
+ * Return Filter Product Data for PDP
+ */
 module.exports.productDataSummary = productDataForPDP;
 function productDataForPDP(bodyData) {
   const productDataSummary = {};
-  if (bodyData[0].catalogEntryView.length > 0) {
+  if (bodyData.length > 0 && bodyData[0].catalogEntryView.length > 0) {
     const productData = bodyData[0].catalogEntryView[0];
-    productDataSummary.uniqueID = productData.uniqueID;
+    productDataSummary.uniqueID = productData.uniqueID || '';
     productDataSummary.type = 'product';
-    const attributes = getAttributes(productData.attributes);
+    const attributes = getAttributes(productData);
     productDataSummary.defAttributes = getDefAttributes(attributes);
     productDataSummary.skuData = getSkuData(productData);
     productDataSummary.productDetails = getProductDetails(
       attributes,
-      productData.attachments,
+      productData,
     );
     productDataSummary.productFeatures = getProductFeatures(attributes);
-    productDataSummary.purchaseGuide = getPurchaseGuide(
-      productData.attachments,
-    );
+    productDataSummary.purchaseGuide = getPurchaseGuide(productData);
     productDataSummary.keywords = getKeywords(productData.keyword);
   }
   return productDataSummary;
 }
 
-/** *
- * This function will return product images and videos
+/**
+ * Function to return product images and videos
+ * @param {*} productData
  */
-function getAttachments(attachments) {
+function getAttachments(productData) {
   const productAttachment = [];
-  if (attachments.length > 0) {
+  if (productData.attachments && productData.attachments.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    const attachments = productData.attachments;
     for (let i = 0; i < attachments.length; i++) {
       const obj = {};
       if (
@@ -224,9 +223,11 @@ function getDefAttributes(attributes) {
         const attributeValueJSON = {};
         attributeValueJSON.name = attributeValue.value;
         if (match !== null) {
-          attributeValueJSON.colorCode = attributeValue.image1 || '';
+          attributeValueJSON.colorCode =
+            imagefilter.getImagePath(attributeValue.image1) || '';
         } else {
-          attributeValueJSON.facetImage = attributeValue.image1path || '';
+          attributeValueJSON.facetImage =
+            imagefilter.getImagePath(attributeValue.image1path) || '';
         }
         attributeJson.values.push(attributeValueJSON);
       });
@@ -245,8 +246,11 @@ function getSkuData(bodyData) {
   if (bodyData.sKUs && bodyData.sKUs.length > 0) {
     bodyData.sKUs.forEach(sku => {
       const skuDataJson = {};
-      let actualPrice;
-      let offerPrice;
+      const productPrice = getProductPrice(sku);
+      const attributes = getAttributes(sku);
+      const descriptiveAttributes = getDescriptiveAttibutes(attributes);
+      const attachment = getAttachments(sku);
+      const similarProducts = getSimilarProductsData(bodyData);
       skuDataJson.uniqueID = sku.uniqueID || '';
       skuDataJson.productName = sku.name || '';
       skuDataJson.partNumber = sku.partNumber || '';
@@ -256,33 +260,16 @@ function getSkuData(bodyData) {
       } else {
         skuDataJson.emiData = '';
       }
-      skuDataJson.fullImagePath = getImagePath(sku.fullImage);
-      skuDataJson.thumbImagePath = getImagePath(sku.thumbnail);
+      skuDataJson.fullImagePath = imagefilter.getImagePath(sku.fullImage);
+      skuDataJson.thumbImagePath = imagefilter.getImagePath(sku.thumbnail);
       skuDataJson.shortDescription = sku.shortDescription || '';
-      if (sku.price && sku.price.length > 0) {
-        sku.price.forEach(price => {
-          if (price.usage === 'Display') {
-            actualPrice = Number(price.value) || '';
-          }
-          if (price.usage === 'Offer') {
-            offerPrice = Number(price.value) || '';
-          }
-        });
-      }
-      skuDataJson.actualPrice = actualPrice || '';
-      skuDataJson.offerPrice = offerPrice || '';
-      const attributes = getAttributes(sku.attributes);
-      skuDataJson.ribbon = getRibbonText(attributes) || '';
-      skuDataJson.discount = getDiscount(attributes);
+      skuDataJson.actualPrice = productPrice.actualPrice || '';
+      skuDataJson.offerPrice = productPrice.offerPrice || '';
+      skuDataJson.ribbon = descriptiveAttributes.ribbonText || '';
+      skuDataJson.discount = descriptiveAttributes.discount || '';
       skuDataJson.defAttributes = getDefAttributes(attributes);
-      try {
-        const attachment = getAttachments(sku.attachments);
-        skuDataJson.attachments = attachment;
-      } catch (err) {
-        skuDataJson.attachments = '';
-      }
+      skuDataJson.attachments = attachment || '';
       skuDataJson.promotions = associatedPromo || '';
-      const similarProducts = getSimilarProductsData(bodyData);
       skuDataJson.similarProducts = similarProducts.similarProducts || '';
       skuDataJson.combos = similarProducts.combosYouMayLike || '';
       skuData.push(skuDataJson);
@@ -292,47 +279,14 @@ function getSkuData(bodyData) {
 }
 
 /**
- * Function to return dicount for Productbean and Itembean
- * @param {*} attributes
- */
-function getDiscount(attributes) {
-  let discount;
-  if (attributes.descriptive && attributes.descriptive.length > 0) {
-    attributes.descriptive.forEach(descriptive => {
-      if (descriptive.name === 'percentOff') {
-        discount = descriptive.values[0].value;
-      }
-    });
-  }
-  return discount;
-}
-
-/**
- * Function to return ribbon text
- */
-function getRibbonText(attributes) {
-  let ribbonText;
-  if (attributes.descriptive && attributes.descriptive.length > 0) {
-    attributes.descriptive.forEach(descriptive => {
-      if (descriptive.name === 'Ribbon') {
-        ribbonText = descriptive.values[0].value;
-      }
-    });
-  } else {
-    ribbonText = '';
-  }
-  return ribbonText;
-}
-
-/**
  * Function to return product details for Productbean
  * @param {*} productDetailsAttributes;
  */
-function getProductDetails(attributes, productAttachments) {
+function getProductDetails(attributes, productData) {
   const productDetailsJSON = {};
   const productDetailsList = [];
-  if (productAttachments && productAttachments.length > 0) {
-    productAttachments.forEach(attachment => {
+  if (productData.attachments && productData.attachments.length > 0) {
+    productData.attachments.forEach(attachment => {
       if (
         attachment.usage === 'IMAGES' &&
         attachment.name === 'productDetailImage'
@@ -385,12 +339,12 @@ function getProductDetails(attributes, productAttachments) {
  * Function to return defining and descriptive attributes for Productbean and Itembean
  * @param {*} productAttribute;
  */
-function getAttributes(productAttribute) {
+function getAttributes(productData) {
   const attributes = {};
   const defining = [];
   const descriptive = [];
-  if (productAttribute && productAttribute.length > 0) {
-    productAttribute.forEach(attribute => {
+  if (productData.attributes && productData.attributes.length > 0) {
+    productData.attributes.forEach(attribute => {
       if (attribute.usage === 'Defining') {
         defining.push(attribute);
       }
@@ -404,20 +358,23 @@ function getAttributes(productAttribute) {
   return attributes;
 }
 
-/** *
- * Function to return keywords for Productbean
+/**
+ * Function to return keywords
+ * @param {*} bodyData
  */
 function getKeywords(bodyData) {
-  const keywords = [];
-  const keywordArray = bodyData.split(',');
-  keywordArray.forEach(keyword => {
-    keywords.push(keyword);
-  });
-  return keywords;
+  let keywordArray = [];
+  try {
+    keywordArray = bodyData.split(',');
+    return keywordArray;
+  } catch (err) {
+    return keywordArray;
+  }
 }
 
-/** *
+/**
  * Function to return purchase guide data for Productbean
+ * @param {*} purchaseGuideData
  */
 function getPurchaseGuide(purchaseGuideData) {
   // eslint-disable-next-line no-shadow
@@ -441,75 +398,78 @@ function getPurchaseGuide(purchaseGuideData) {
   const productVideos = [];
   const comfortImages = [];
   const comfortVideos = [];
-  purchaseGuideData.forEach(element => {
-    if (element.name.includes('purchaseGuide')) {
-      const nameArray = element.name.split(':');
-      if (nameArray[1] === 'ProductVideos') {
-        if (element.usage === 'THUMBNAIL') {
-          const temp = {
-            type: 'video',
-            seq: nameArray[2],
-            thumbImagePath: element.attachmentAssetPath,
-          };
-          productImages.push(temp);
-        }
-        if (element.usage === 'MEDIA') {
-          const temp = {
-            seq: nameArray[2],
-            path: element.attachmentAssetPath,
-          };
-          productVideos.push(temp);
-        }
-      }
-      if (nameArray[1] === 'TestVideos') {
-        if (element.usage === 'THUMBNAIL') {
-          const temp = {
-            type: 'video',
-            seq: nameArray[2],
-            thumbImagePath: element.attachmentAssetPath,
-          };
-          testImages.push(temp);
-        }
-        if (element.usage === 'MEDIA') {
-          const temp = {
-            seq: nameArray[2],
-            path: element.attachmentAssetPath,
-          };
-          testVideos.push(temp);
-        }
-      }
-      if (nameArray[1] === 'ComfortMeter') {
-        if (element.usage === 'THUMBNAIL') {
-          const temp = {
-            type: 'video',
-            seq: nameArray[2],
-            thumbImagePath: element.attachmentAssetPath,
-          };
-          comfortImages.push(temp);
-        }
-        if (element.usage === 'MEDIA') {
-          const temp = {
-            seq: nameArray[2],
-            path: element.attachmentAssetPath,
-          };
-          comfortVideos.push(temp);
-        }
-      }
-    }
-  });
 
-  purchaseGuide[0].values = mergeImagesAndVideos(
-    sortJsonArray(productImages, 'seq'),
-    productVideos,
-  );
-  purchaseGuide[1].values = mergeImagesAndVideos(
-    sortJsonArray(testImages, 'seq'),
-    testVideos,
-  );
-  purchaseGuide[2].values = mergeImagesAndVideos(
-    sortJsonArray(comfortImages, 'seq'),
-    comfortVideos,
-  );
+  if (purchaseGuide.attachments && purchaseGuide.attachments.length > 0) {
+    purchaseGuideData.forEach(element => {
+      if (element.name.includes('purchaseGuide')) {
+        const nameArray = element.name.split(':');
+        if (nameArray[1] === 'ProductVideos') {
+          if (element.usage === 'THUMBNAIL') {
+            const temp = {
+              type: 'video',
+              seq: nameArray[2],
+              thumbImagePath: element.attachmentAssetPath,
+            };
+            productImages.push(temp);
+          }
+          if (element.usage === 'MEDIA') {
+            const temp = {
+              seq: nameArray[2],
+              path: element.attachmentAssetPath,
+            };
+            productVideos.push(temp);
+          }
+        }
+        if (nameArray[1] === 'TestVideos') {
+          if (element.usage === 'THUMBNAIL') {
+            const temp = {
+              type: 'video',
+              seq: nameArray[2],
+              thumbImagePath: element.attachmentAssetPath,
+            };
+            testImages.push(temp);
+          }
+          if (element.usage === 'MEDIA') {
+            const temp = {
+              seq: nameArray[2],
+              path: element.attachmentAssetPath,
+            };
+            testVideos.push(temp);
+          }
+        }
+        if (nameArray[1] === 'ComfortMeter') {
+          if (element.usage === 'THUMBNAIL') {
+            const temp = {
+              type: 'video',
+              seq: nameArray[2],
+              thumbImagePath: element.attachmentAssetPath,
+            };
+            comfortImages.push(temp);
+          }
+          if (element.usage === 'MEDIA') {
+            const temp = {
+              seq: nameArray[2],
+              path: element.attachmentAssetPath,
+            };
+            comfortVideos.push(temp);
+          }
+        }
+      }
+    });
+
+    purchaseGuide[0].values = mergeImagesAndVideos(
+      sortJsonArray(productImages, 'seq'),
+      productVideos,
+    );
+    purchaseGuide[1].values = mergeImagesAndVideos(
+      sortJsonArray(testImages, 'seq'),
+      testVideos,
+    );
+    purchaseGuide[2].values = mergeImagesAndVideos(
+      sortJsonArray(comfortImages, 'seq'),
+      comfortVideos,
+    );
+  }
   return purchaseGuide;
 }
 
@@ -524,8 +484,10 @@ function mergeImagesAndVideos(imageArray, videoArray) {
   });
   return imageArray;
 }
+
 /**
- * Function to return similar products data for itembean
+ * Function to return Mercendising Associations Data
+ * @param {*} bodyData
  */
 function getSimilarProductsData(bodyData) {
   const mercAssociations = {};
@@ -550,64 +512,115 @@ function getSimilarProductsData(bodyData) {
 
 /**
  * Function to return Product Features
+ * @param {*} attributes
  */
 function getProductFeatures(attributes) {
   const featuresDummy = [];
   const featuresJson = [];
-  attributes.descriptive.forEach(attr => {
-    if (attr.associatedKeyword === 'Features') {
-      featuresDummy.push(attr);
-    }
-  });
-
-  if (featuresDummy && featuresDummy.length > 0) {
-    const featureHeading = [];
-    const featureDesc = [];
-    const featureImage = [];
-
-    featuresDummy.forEach(element => {
-      if (element.name.includes('Feature') && !element.name.includes('Image')) {
-        featureHeading.push(element);
-      }
-      if (element.name.includes('Description')) {
-        featureDesc.push(element);
-      }
-      if (element.name.includes('Image')) {
-        featureImage.push(element);
+  if (attributes.descriptive && attributes.descriptive.length > 0) {
+    attributes.descriptive.forEach(attr => {
+      if (attr.associatedKeyword === 'Features') {
+        featuresDummy.push(attr);
       }
     });
+  }
 
-    featureHeading.forEach(head => {
-      const elementList = head.name.split(' ');
-      const featuresData = {};
-      featuresData.title = head.values[0].value;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const desc of featureDesc) {
-        if (desc.name.includes(elementList[1])) {
-          featuresData.description = desc.values[0].value;
-          break;
-        }
+  if (featuresDummy && featuresDummy.length > 0) {
+    featuresDummy.forEach(element => {
+      if (element.name.includes('Feature') && !element.name.includes('Image')) {
+        const featuresData = {
+          title: '',
+          description: '',
+          imagePath: '',
+        };
+        const elementList = element.name.split(' ');
+        featuresData.title = element.values[0].value;
+        featuresDummy.forEach(ele => {
+          if (
+            ele.name.includes(elementList[1]) &&
+            ele.name.includes('Description')
+          ) {
+            featuresData.description = ele.values[0].value;
+          }
+
+          if (
+            ele.name.includes(elementList[1]) &&
+            element.name.includes('Image')
+          ) {
+            featuresData.imagePath = ele.values[0].value;
+          }
+        });
+        featuresJson.push(featuresData);
       }
-      // eslint-disable-next-line no-restricted-syntax
-      for (const image of featureImage) {
-        if (image.name.includes(elementList[1])) {
-          featuresData.imagePath = image.values[0].value;
-          break;
-        }
-      }
-      featuresJson.push(featuresData);
     });
   }
   return featuresJson;
 }
 
+/**
+ * Function to return Mercendising Associations Data for PDP
+ * @param {*} productDetail
+ */
 function mercAssociationsDataForPDP(productDetail) {
   const productDetailJson = {};
-  let actualPrice;
-  let offerPrice;
+  const attributes = getAttributes(productDetail);
+  const descriptiveAttributes = getDescriptiveAttibutes(attributes);
+  const productPrice = getProductPrice(productDetail);
   productDetailJson.uniqueID = productDetail.uniqueID || '';
   productDetailJson.productName = productDetail.name || '';
   productDetailJson.partNumber = productDetail.partNumber || '';
+  productDetailJson.actualPrice = productPrice.actualPrice || '';
+  productDetailJson.offerPrice = productPrice.offerPrice || '';
+  productDetailJson.onClickUrl = '';
+  productDetailJson.seoUrl = '';
+  productDetailJson.thumbnail = imagefilter.getImagePath(
+    productDetail.thumbnail,
+  );
+  productDetailJson.ribbon = descriptiveAttributes.ribbonText || '';
+  productDetailJson.discount = descriptiveAttributes.discount || '';
+  if (productDetail.UserData && productDetail.UserData.length > 0) {
+    productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
+  } else {
+    productDetailJson.emiData = 999;
+  }
+  productDetailJson.inStock = '';
+  productDetailJson.shortDescription = productDetail.shortDescription || '';
+  // eslint-disable-next-line prefer-destructuring
+  productDetailJson.promotionData = associatedPromo[0].name || '';
+  return productDetailJson;
+}
+
+/**
+ * Function will return Disocunt and PercentOff from descriptive attribute
+ * @param {*} attributes
+ */
+function getDescriptiveAttibutes(attributes) {
+  const descriptiveAttributes = {};
+  let discount;
+  let ribbonText;
+  if (attributes.descriptive && attributes.descriptive.length > 0) {
+    attributes.descriptive.forEach(descriptive => {
+      if (descriptive.name === 'percentOff') {
+        discount = descriptive.values[0].value;
+      }
+      if (descriptive.name === 'Ribbon') {
+        ribbonText = descriptive.values[0].value;
+      }
+    });
+  }
+  descriptiveAttributes.discount = discount;
+  descriptiveAttributes.ribbonText = ribbonText;
+  return descriptiveAttributes;
+}
+
+/**
+ * Function return Actual Price and Offer Price from Product Prices
+ * @param {*} productDetail
+ */
+function getProductPrice(productDetail) {
+  const productPrice = {};
+  let actualPrice;
+  let offerPrice;
   if (productDetail.price && productDetail.price.length > 0) {
     productDetail.price.forEach(price => {
       if (price.usage === 'Display') {
@@ -618,32 +631,7 @@ function mercAssociationsDataForPDP(productDetail) {
       }
     });
   }
-  productDetailJson.actualPrice = actualPrice || '';
-  productDetailJson.offerPrice = offerPrice || '';
-  productDetailJson.onClickUrl = '';
-  productDetailJson.seoUrl = '';
-  productDetailJson.thumbnail = getImagePath(productDetail.thumbnail);
-  const attributes = getAttributes(productDetail.attributes);
-  productDetailJson.ribbonText = getRibbonText(attributes);
-  if (productDetail.UserData && productDetail.UserData.length > 0) {
-    productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
-  } else {
-    productDetailJson.emiData = 999;
-  }
-  productDetailJson.inStock = '';
-  productDetailJson.discount = getDiscount(attributes) || '';
-  productDetailJson.shortDescription = productDetail.shortDescription || '';
-  // eslint-disable-next-line prefer-destructuring
-  productDetailJson.promotionData = associatedPromo[0].name || '';
-  return productDetailJson;
-}
-
-function getImagePath(imagePath) {
-  if (imagePath) {
-    const arr = imagePath.split('//');
-    if (arr.length > 0) {
-      return `/${arr[1]}`;
-    }
-  }
-  return imagePath;
+  productPrice.actualPrice = actualPrice;
+  productPrice.offerPrice = offerPrice;
+  return productPrice;
 }
