@@ -120,7 +120,7 @@ export class CheckoutComponent extends React.Component {
         var obj = {
           logon_id: data.user_id
         } 
-        axios.post(UserVerifyAPI, obj, {
+        axios.get(UserVerifyAPI, obj, {
           headers: { store_id: storeId, access_token: accessToken },
         }).then(response => {
           
@@ -242,7 +242,6 @@ export class CheckoutComponent extends React.Component {
     }
 
     render() {
-      console.log('this is step', this.state.step)
       return (
         <div className='checkout'>
         <div className="container">

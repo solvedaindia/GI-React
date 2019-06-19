@@ -183,7 +183,7 @@ export class Step2Component extends React.Component {
                   <div className='stepBg'>2</div>
                  </div>           
                   <div className="leftBox bgGrey">
-                    <div class="heading-label">Ship To</div>
+                    <div className="heading-label">Ship To</div>
                     {this.props.isLoggedIn ? <div className='verticalTab'>
                       <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                         <div>Saved Address</div>

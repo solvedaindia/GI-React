@@ -48,6 +48,7 @@ class Category extends React.Component {
                 </a>
                 {!!categoryData.subCategoryArray && <SubCategoriesData
                   subCategoryArray={categoryData.subCategoryArray}
+                  categoryNamePro={categoryData.categoryIdentifier}
                 />}
               </li>
             )

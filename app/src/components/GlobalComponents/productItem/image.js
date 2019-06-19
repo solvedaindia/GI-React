@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 import ImageLoader from '../../../utils/imageLoader';
-import {newMachineUrl, store, catalog} from '../../../../public/constants/constants'
+import {
+  newMachineUrl,
+  store,
+  catalog,
+  imagePrefix,
+} from '../../../../public/constants/constants';
 
 class Image extends React.Component {
   render() {
@@ -19,16 +24,21 @@ class Image extends React.Component {
       imageItem = (
         <ImageLoader
           className="imgfullwidth"
-          src={`${newMachineUrl}/${store}/${catalog}/${this.props.data}`}
+          src={`${imagePrefix}${this.props.data}`}
           // src={`https://192.168.0.36:8443${this.props.data}`}
           alt="sofa"
         />
       );
     }
-    var routePath = '/pdp/'+this.props.parentUniqueId+'/'+this.props.uniqueId;
+    const routePath = `/pdp/${this.props.parentUniqueId}/${
+      this.props.uniqueId
+    }`;
     return (
-        <LazyLoad className='imgBox' debounce={false}><Link className="link" to={routePath}>{imageItem}</Link></LazyLoad>
-      
+      <LazyLoad className="imgBox" debounce={false}>
+        <Link className="link" to={routePath}>
+          {imageItem}
+        </Link>
+      </LazyLoad>
     );
   }
 }

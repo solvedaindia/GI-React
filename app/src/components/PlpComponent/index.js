@@ -137,7 +137,7 @@ class PlpComponent extends React.Component {
 
   render() {
     let coloumnLayout;
-    if (this.props.coloumnLayout === 3) {
+    if (this.props.coloumnLayout === 3 || this.props.isFromWishlistPro === true) {
       coloumnLayout = 'plp-products grid3';
     } else {
       coloumnLayout = 'plp-products grid2';

@@ -306,7 +306,6 @@
             }
         }
     }
-    
         .pincode{
             width:55%;
             float:left;
@@ -339,6 +338,12 @@
                 padding: 5px 0px 5px 19px;
                 background: $greybg;
                 color:$greyish;                
+            }
+            .pincodeNotServiceable {
+                font-size: 10px;
+                padding: 5px 0px 5px 19px;
+                background: $greybg;
+                color:$reddishPink;                
             }
         }
 
@@ -845,7 +850,11 @@
     .selectedCircle{
         box-shadow: 0px 0px 0px 1px #b38602;
     }
-    input[type="radio"]{
+    // input[type="radio"]{
+    //     visibility: hidden;
+    //     position: absolute;
+    // }
+    input.hideRadio[type="radio"]{
         visibility: hidden;
         position: absolute;
     }

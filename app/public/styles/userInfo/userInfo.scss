@@ -28,13 +28,28 @@
                 text-decoration: none;
             }
         }
-
+       
         .listItem {
+            &:first-child{
+                &:hover{
+                    cursor:default;                    
+                }
+            }
             padding: $base*1.25;
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
                     color: $ceruleanblue;
+                }
+            }
+        }
+        .listItemUnSelected {
+            padding: $base*1.25;
+            &:hover {
+                background-color: transparent; 
+                cursor: default;
+                .dropDown {
+                    color: #77787a;
                 }
             }
         }

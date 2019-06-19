@@ -11,7 +11,7 @@ import Link from 'react-router-dom/Link';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
-import Input from '../Input/input'
+import Input from '../Primitives/input'
 import {
   regexEmail,
   regexMobileNo,

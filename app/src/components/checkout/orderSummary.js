@@ -1,6 +1,13 @@
 import React from 'react';
 import '../../../public/styles/checkout.scss';
-
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  OrderSummaryAPI
+} from '../../../public/constants/constants';
+import appCookie from '../../utils/cookie';
+import axios from 'axios';
 import EMI from '../../../public/images/emi.svg';
 export class OrderSummaryComponent extends React.Component {
     constructor(props){
@@ -11,7 +18,19 @@ export class OrderSummaryComponent extends React.Component {
     }
 
     componentDidMount() {
-        
+        this.callOrderSummaryAPI();
+    }
+
+    callOrderSummaryAPI = () => {
+      let token = appCookie.get('accessToken');
+      axios.get(OrderSummaryAPI, {
+        headers: { store_id: storeId, access_token: token }
+      }).then(response => {
+        console.log(response, 'order Summary response');
+      }).catch(error => {
+        console.log(err, "order summary error")
+        reject(error);
+      })
     }
 
     render() {

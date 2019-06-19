@@ -24,24 +24,7 @@ class ProductItem extends React.Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.state = {};
-	  }
-	
-	  handleClick(e) {
-		e.preventDefault();
-		const product = {
-		  title: this.props.data.productName,
-		  thumbnail: this.props.data.thumbnail,
-		  skuId: this.props.data.uniqueID,
-		  id: this.props.data.parentUniqueID,
-		  actualPrice: this.props.data.actualPrice,
-		  offerPrice: this.props.data.offerPrice,
-		};
-		this.props.addProduct(product);
-	  }
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {};
-	// }
+	}
 
 	handleClick(e) {
 		e.preventDefault();
@@ -80,7 +63,9 @@ class ProductItem extends React.Component {
 	// 	}
 	// };
 
-	moveToCartClicked = () => {
+	moveToCartClicked = (e) => {
+		e.preventDefault();
+
 		const data = {
 			orderItem: [
 				{
@@ -97,6 +82,7 @@ class ProductItem extends React.Component {
 				console.log('Add to cart Data ---- ', response.data);
 				getUpdatedMinicartCount(this);
 				// this.props.updatetMinicart();
+				removeFromWishlistGlobalAPI(this.props.data.uniqueID, this);
 			})
 			.catch(error => {
 				console.log('AddToCart Error---', error);
@@ -142,21 +128,20 @@ class ProductItem extends React.Component {
 					</div>
 				</div>
 				<Link className="link" to={routePath}>
-				<div className="hoverBox">
+					<div className="hoverBox">
 
-						{this.props.isfromWishlistPro ? <button className="btn-compare" onClick={this.moveToCartClicked}>
-							Move To Cart
-						</button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>
-								Add to compare
-						</button>}
-						
-				</div>
+						{this.props.isfromWishlistPro ?
+							<button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>Move To Cart</button> :
+							<button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
+
+					</div>
 				</Link>
 				<Wishlist
-						uniqueId={this.props.data.uniqueID}
-						isInWishlistPro={this.props.isInWishlist}
-						history={this.props.history}
-						/>
+					uniqueId={this.props.data.uniqueID}
+					isInWishlistPro={this.props.isInWishlist}
+					isFromWishlistPro={this.props.isfromWishlistPro}
+					history={this.props.history}
+				/>
 
 			</li>
 		);
@@ -170,7 +155,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-  mapStateToProps,
-  { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
+	mapStateToProps,
+	{ updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
 )(ProductItem);
 // export default ProductItem;

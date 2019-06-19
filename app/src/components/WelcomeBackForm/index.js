@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 /* Import Components */
-import Input from '../Input/input';
+import Input from '../Primitives/input';
 import Button from '../Button/button';
 import {
   regexEmail,
@@ -18,7 +18,10 @@ class WelcomeForm extends Component {
       shown: true,
       errorMessageUserId: null,
       errorMessagePassword: null,
+      isShowPass: false,
+      inputType: 'password',
     };
+    this.showHidePass=this.showHidePass.bind(this);
   }
 
   /* Handle Change */
@@ -82,6 +85,21 @@ class WelcomeForm extends Component {
     this.props.handleUserData(data);
   };
 
+  /* Show Hide Password */
+  showHidePass() {
+    if (this.state.isShowPass) {
+      this.setState({
+        isShowPass: false,
+        inputType: 'password',
+      });
+    } else {
+      this.setState({
+        isShowPass: true,
+        inputType: 'text',
+      });
+    }
+  }
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -106,16 +124,33 @@ class WelcomeForm extends Component {
           name="userId"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
+
+        <div className='password-field'>
         <Input
-          type="password"
+          type={this.state.inputType}
           name="password"
           title="Password"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
+       <span
+            onClick={this.showHidePass}
+            className="valiationPosition-NewPassword"
+          >
+            {
+              <img
+                src={require('../../../src/components/SVGs/eye.svg')}
+              />
+            }
+          </span>
+        </div>
+
+        
         {errorMessagePassword}
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
