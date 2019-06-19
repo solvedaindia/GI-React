@@ -126,6 +126,11 @@ export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productav
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
 /* Search Page API */
 export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
+/* User Detail Validate API */
+export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
+/* User Detail Update API */
+export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
+
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

@@ -2,12 +2,9 @@ import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
   footerApi,
-  storeId,
-  accessToken,
 } from '../../../public/constants/constants';
 import Footer from '../../components/Footer/footer';
 import '../../../public/styles/footerContainer/footerContainer.scss';
-import { Alert } from 'react-bootstrap';
 
 class FooterContainer extends React.Component {
   constructor() {
@@ -43,10 +40,10 @@ class FooterContainer extends React.Component {
 
   render() {
     return (
-      <footer className="footer">
-        {!this.state.loading ? (
-          <>
-            {!this.state.error && this.state.footer.status === 'success' ? (
+      <>
+        {!this.state.loading &&
+          <footer className="footer">
+            {!this.state.error && this.state.footer.status === 'success' &&
               <Footer
                 links={this.state.footer.data.Footer_Links}
                 newsletter={this.state.footer.data.Footer_Newsletter_Data}
@@ -54,18 +51,10 @@ class FooterContainer extends React.Component {
                 stores={this.state.footer.data.Footer_StoreLinks}
                 categories={this.state.footer.data.Footer_Categories}
               />
-            ) : (
-              <Alert className="alert-danger text-center">
-                Something Went Wrong!
-              </Alert>
-            )}
-          </>
-        ) : (
-          <Alert className="alert-primary text-center">
-            Footer is loading please wait....
-          </Alert>
-        )}
-      </footer>
+            }
+          </footer>
+        }
+      </>
     );
   }
 }

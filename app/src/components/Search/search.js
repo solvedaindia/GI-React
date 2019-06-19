@@ -4,9 +4,7 @@ import { Route, NavLink, Link, withRouter } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import SearchLogo from '../SVGs/search';
 import {
-  autoSuggestAPI,
-  storeId,
-  accessToken,
+  autoSuggestAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/headerContainer/search.scss';
 

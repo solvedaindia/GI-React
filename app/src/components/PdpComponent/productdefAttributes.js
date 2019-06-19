@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+	imagePrefix,
+} from '../../../public/constants/constants';
 
 class productDefAttribute extends React.Component {
   constructor() {
