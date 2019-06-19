@@ -43,6 +43,7 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -170,6 +171,7 @@ export default class App extends React.Component {
           <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
+          <Route path="/search" component={PlpContainer} />
         </Switch>
         <FooterContainer />
       </div>

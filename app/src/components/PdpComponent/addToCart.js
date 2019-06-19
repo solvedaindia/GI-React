@@ -164,13 +164,29 @@ class addToCartComponent extends React.Component {
 
   /* render buttons */
   renderButton(props, quantity) {
-    if(!props.pincodeServiceable) {
-      return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
-    } if (props.inventoryStatus === 'unavailable' && quantity === 1) {
-      return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
-    } 
-    return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
-    
+    if (!props.pincodeServiceable) {
+      return (
+        <Button className="btn addcartbtn" disabled>
+          Add to Cart
+        </Button>
+      );
+    }
+    if (props.inventoryStatus === 'unavailable' && quantity === 1) {
+      return (
+        <Button className="btn addcartbtn" onClick={this.notifyMe}>
+          Notify Me
+        </Button>
+      );
+    }
+    return (
+      <Button
+        className="btn addcartbtn"
+        onClick={this.findInventory}
+        disabled={false}
+      >
+        Add to Cart
+      </Button>
+    );
   }
 
   render() {

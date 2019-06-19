@@ -11,8 +11,8 @@ class SubCategoriesArray extends React.Component {
     this.setRef = this.setRef.bind(this);
   }
 
-  setRef(ref){
-    this.ref=ref;
+  setRef(ref) {
+    this.ref = ref;
   }
 
   handleMouseOver(subCategoryData) {
@@ -24,36 +24,57 @@ class SubCategoriesArray extends React.Component {
   handleMouseOut() {
     this.setState({
       subCatImg: null,
-    })
+    });
   }
 
   componentDidMount() {
     const rect = this.ref.getBoundingClientRect();
-    this.compLeft = {left: -1*rect.left};
+    this.compLeft = { left: -1 * rect.left };
   }
 
   render() {
     const { subCatImg } = this.state;
-    const catClass = this.props.subCategoryArray.length > 6 ? 'catLongList' : 'catList';
+    const catClass =
+      this.props.subCategoryArray.length > 6 ? 'catLongList' : 'catList';
     return (
-      <div className='catNav' ref={this.setRef} >
-        {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
-          <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
-        </div>}
-          
+      <div className="catNav" ref={this.setRef}>
+        {!!subCatImg && (
+          <div className="subCatImage" style={this.compLeft}>
+            {' '}
+            <img
+              src={`${imagePrefix}${subCatImg}`}
+              className="subCatImg"
+              alt="Sub Cat Img"
+            />
+          </div>
+        )}
+
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
-            var routePath = `/furniture-${subCategoryData.categoryName.split(' ').join('-')}/catId=${subCategoryData.uniqueID}`;
+            const routePath = `/furniture-${subCategoryData.categoryName
+              .split(' ')
+              .join('-')}/catId=${subCategoryData.uniqueID}`;
             return (
-              <li className='subCatList' key={`subCat-${index}`} onMouseOver={this.handleMouseOver.bind(this, subCategoryData)} onMouseOut={this.handleMouseOut.bind(this)}>
-                <Link to={{ pathname: routePath, state: { categoryId: subCategoryData.uniqueID } }} className='links'>
-                {/* <Link to={routePath} className='links'> */}
+              <li
+                className="subCatList"
+                key={`subCat-${index}`}
+                onMouseOver={this.handleMouseOver.bind(this, subCategoryData)}
+                onMouseOut={this.handleMouseOut.bind(this)}
+              >
+                <Link
+                  to={{
+                    pathname: routePath,
+                    state: { categoryId: subCategoryData.uniqueID },
+                  }}
+                  className="links"
+                >
+                  {/* <Link to={routePath} className='links'> */}
                   {/* <a href={subCategoryData.onClickUrl}> */}
                   {subCategoryData.categoryName}
                   {/* </a> */}
                 </Link>
               </li>
-            )
+            );
           })}
         </ul>
       </div>

@@ -28,6 +28,7 @@ import FilterMain from '../../components/PlpComponent/Filter/filterMain';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
+import BestSeller from '../../components/BestSelling/bestSelling';
 
 import * as actionCreators from './actions';
 import CompContainer from './compWidget';
@@ -36,6 +37,7 @@ import {
   plpSubCatAPI,
   plpAPI,
   espotAPI,
+  searchPageAPI,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
@@ -61,9 +63,16 @@ export class PlpContainer extends React.Component {
       isCatDetails: true,
       categoyDetails: null,
       productCount: null,
+      // Search Vars
+      isFromSearch: this.props.location.pathname,
+      searchKeyword: this.props.location.search,
+      emptySearchItem: null,
+      showBestSeller: null,
+      newSearchTrigger: false,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
+    this.onSearchNoResut = this.onSearchNoResut.bind(this);
   }
 
   componentWillUnmount() {
@@ -71,58 +80,54 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Query String Routing ------- ', this.props);
-    this.props.plpReduxStateReset();
-    var catId = this.props.location.pathname.split('=').pop();
-    // categoryId = this.props.location.state.categoryId;
-    categoryId = catId;
-
-    const params = new URLSearchParams(this.props.location.search);
-    const foo = params.get('sort'); // bar
-    const foo1 = params.get('filter'); // bar
-    console.log('Search Parma --- ',foo,foo1 );
+    console.log('Query String Routing ------- ', this.state.searchKeyword);
+    const path = String(this.props.location.pathname);
+    const idStr = path.split('/')[2];
+    if (idStr != undefined && idStr !== categoryId) {
+      categoryId = idStr;
+      // this.setState({
+      // 	filterData: [],
+      // 	plpData: [],
+      // 	isCatDetails: true,
+      // })
+      // this.fetchPLPProductsData();
+    }
 
     addEventListener('scroll', this.onscroll);
-    this.fetchSubCategoryData();
-    this.fetchMarketingTextBannerData();
+
     this.fetchPLPProductsData();
-    this.fetchDescriptionData();
+
+    if (!this.state.isFromSearch.includes('/search')) {
+      this.fetchSubCategoryData();
+      this.fetchMarketingTextBannerData();
+      this.fetchDescriptionData();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('Query String Routing Receive ------- ', nextProps);
+    // console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
+    // if (nextProps.location.pathname !== this.props.location.pathname) {
+    // console.log('In the locationpath');
+    // this.setState({
+    //   isFromSearch: nextProps.location.pathname,
+    //   searchKeyword: nextProps.location.search,
+    // })
 
-    console.log('Query String componentWillReceiveProps', nextProps.location, this.props.location);
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-
-      var catId = nextProps.location.pathname.split('=').pop();
-      console.log('In the locationpath -- ', nextProps.location, catId);
-      this.props.plpReduxStateReset();
-      // categoryId = nextProps.location.state.categoryId; //From Rout State
-      categoryId = catId; //From URL
-      this.setState({
-        plpSubCatData: null,
-        marketingTextBannerData: null,
-        plpDescriptionData: null,
-        plpData: [],
-        adBannerData: [],
-        error: false,
-        hasMore: true,
-        isLoading: false,
-        pageNumber: 1,
-        pageSize: 18,
-        categoryDetail: true,
-        sortValue: this.props.sortingValue,
-        filterData: [],
-        isCatDetails: true,
-        categoyDetails: null,
-        productCount: null,
-      });
-      this.fetchSubCategoryData();
-      this.fetchMarketingTextBannerData();
-      this.fetchPLPProductsData();
-      this.fetchDescriptionData();
-      return;
+    // this.state.isFromSearch = nextProps.location.pathname;
+    console.log('Query String Routing Recive Props ------- ', nextProps);
+    const path = String(nextProps.location.pathname);
+    const idStr = path.split('/')[2];
+    if (idStr != undefined && idStr !== categoryId) {
+      // this.props.plpReduxStateReset();
+      // categoryId = idStr;
+      // this.setState({
+      // 	pageNumber: 1,
+      // 	filterData: [],
+      // 	plpData: [],
+      // 	isCatDetails: true,
+      // })
+      // this.fetchSubCategoryData();
+      // this.fetchPLPProductsData();
     }
 
     // const path = String(nextProps.location.pathname);
@@ -138,7 +143,7 @@ export class PlpContainer extends React.Component {
     // })
     // this.fetchSubCategoryData();
     // this.fetchPLPProductsData();
-    //}
+    // }
 
     // }
     // else {
@@ -163,6 +168,26 @@ export class PlpContainer extends React.Component {
       });
       this.fetchPLPProductsData();
     }
+
+    console.log(
+      'will Recive in the search --- ',
+      nextProps.location.search,
+      this.props.location.search,
+    );
+    if (nextProps.location.pathname.includes('/search')) {
+      if (nextProps.location.search !== this.props.location.search) {
+        this.setState({
+          plpData: [],
+          filterData: [],
+          pageNumber: 1,
+          isFromSearch: nextProps.location.pathname,
+          searchKeyword: nextProps.location.search,
+          showBestSeller: false,
+          newSearchTrigger: true,
+        });
+        this.fetchPLPProductsData();
+      }
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -176,14 +201,14 @@ export class PlpContainer extends React.Component {
     apiManager
       .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
       .then(response => {
+        console.log('Adbanerrrr -- ', response.data);
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
-      .catch(error => { });
+      .catch(error => {});
   }
 
   fetchSubCategoryData() {
-
     apiManager
       .get(plpSubCatAPI + categoryId, {
         headers: {},
@@ -192,7 +217,7 @@ export class PlpContainer extends React.Component {
         console.log('Subcat Data', response.data);
         this.setState({ plpSubCatData: response.data.data });
       })
-      .catch(error => { });
+      .catch(error => {});
   }
 
   fetchMarketingTextBannerData() {
@@ -203,7 +228,7 @@ export class PlpContainer extends React.Component {
           marketingTextBannerData: response.data.data.bannerList[0].content,
         });
       })
-      .catch(error => { });
+      .catch(error => {});
   }
 
   fetchPLPProductsData() {
@@ -211,14 +236,21 @@ export class PlpContainer extends React.Component {
       /**
        * TODO: Category ID is static from Node side.
        */
+      let urlMaking = plpAPI + categoryId;
+      let searchText = null;
+      if (this.state.isFromSearch.includes('/search')) {
+        const params = new URLSearchParams(this.state.searchKeyword);
+        const keywoard = params.get('keyword');
+        searchText = keywoard;
+        urlMaking = searchPageAPI + keywoard;
+      }
 
-      const plpURL =
-        `${plpAPI + categoryId}?` +
+      let plpURL =
+        `${urlMaking}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
         `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
       console.log('PLPURL---', plpURL);
-      console.log('categorId---', categoryId);
 
       apiManager
         .get(plpURL, {
@@ -228,7 +260,37 @@ export class PlpContainer extends React.Component {
         })
         .then(response => {
           console.log('PLP Response----', response.data);
-          if (this.state.isCatDetails) {
+
+          if (this.state.isFromSearch.includes('/search')) {
+            if (
+              this.state.newSearchTrigger &&
+              response.data.data.productList.length !== 0
+            ) {
+              this.setState({
+                emptySearchItem: null,
+                showBestSeller: false,
+                newSearchTrigger: false,
+              });
+            } else if (response.data.data.spellCheck) {
+                this.setState({
+                  emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
+                  showBestSeller: false,
+                  newSearchTrigger: false,
+                })
+              }
+              else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
+                this.setState({
+                  showBestSeller: true,
+                  emptySearchItem: null,
+                  newSearchTrigger: false
+                })
+              }
+          }
+
+          if (
+            this.state.isCatDetails &&
+            !this.state.isFromSearch.includes('/search')
+          ) {
             this.fetchAdBannerData();
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
@@ -249,7 +311,6 @@ export class PlpContainer extends React.Component {
           });
         })
         .catch(error => {
-          // console.log('PLPBannerrror---', error);
           this.setState({
             error: error.message,
             isLoading: false,
@@ -271,6 +332,50 @@ export class PlpContainer extends React.Component {
       .catch(error => {
         // console.log('PLPBannerrror---', error);s
       });
+  }
+
+  onSearchNoResut(searchText, spellCheckArr) {
+    console.log('ddddd -- ', spellCheckArr);
+    if (spellCheckArr) {
+      if (spellCheckArr && spellCheckArr.length !== 0) {
+        this.setState({
+          searchKeyword: `keyword=${spellCheckArr[0]}`,
+        });
+        this.fetchPLPProductsData();
+      } else {
+        // Show Best Seller component
+      }
+
+      return (
+        <div className="noResultfound">
+          <div className="label-noresult">
+            No results found for “{searchText}”
+          </div>
+          <div className="product-serchGuide">
+            <div className="label-text">Did you mean: </div>
+            <div className="serchlist-button">
+              {spellCheckArr.map(item => (
+                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button> 
+                ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  onSpellCheckClick(spellText) {
+    this.props.history.push({
+      pathname: '/search',
+      search: `keyword=${spellText}`,
+    });
+    this.setState({
+      searchKeyword: `keyword=${spellText}`,
+      plpData: [],
+      filterData: [],
+      pageNumber: 1,
+    });
+    this.fetchPLPProductsData();
   }
 
   onscroll = () => {
@@ -296,7 +401,6 @@ export class PlpContainer extends React.Component {
   };
 
   render() {
-
     const {
       error,
       hasMore,
@@ -327,15 +431,19 @@ export class PlpContainer extends React.Component {
     }
 
     let plpProducts;
-    if (plpData.length != 0 && adBannerData.length != 0) {
-      plpProducts = (
-        <PlpComponent
-          plpDataPro={this.state.plpData}
-          adBannerDataPro={adBannerData}
-          catId={this.state.categoryDetail.uniqueID}
-          history={this.props.history}
-        />
-      );
+    if (plpData.length != 0) {
+      if (
+        adBannerData.length != 0 ||
+        this.state.isFromSearch.includes('/search')
+      )
+        plpProducts = (
+          <PlpComponent
+            plpDataPro={this.state.plpData}
+            adBannerDataPro={adBannerData}
+            catId={this.state.categoryDetail.uniqueID}
+            history={this.props.history}
+          />
+        );
     }
 
     let filterItem;
@@ -367,9 +475,19 @@ export class PlpContainer extends React.Component {
         </h3>
       );
     }
+    const params = new URLSearchParams(this.state.searchKeyword);
+    const keywoard = params.get('keyword');
+    if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
+      titleItem = (
+        <div className='searchresult'>
+          <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
+        </div>
+        </div>
+      );
+    }
 
     let productCountItem = null;
-    if (this.state.productCount !== null) {
+    if (this.state.productCount !== null && plpData.length != 0) {
       productCountItem = (
         <div className="headingSubTitle">
           (Produts {this.state.productCount})
@@ -379,6 +497,23 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
+        {this.state.emptySearchItem !== null
+          ? this.state.emptySearchItem
+          : null}
+        {this.state.showBestSeller ? (
+          <>
+            <div>
+              <div className="noResultfound">
+                <div className="label-noresult">
+                  No results found for “{keywoard}”
+                </div>
+              </div>
+              <div className="Search-bestseller container">
+            <BestSeller />
+              </div>
+            </div>
+          </>
+        ) : null}
         {marketingBanner}
         {subCategories}
         <section className="plpCategories">
@@ -391,7 +526,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {this.state.isCatDetails ? null : <Sort />}
+                  {plpData.length === 0 ? null : <Sort />}
                 </div>
               </div>
             </div>
@@ -409,7 +544,9 @@ export class PlpContainer extends React.Component {
             />
           </div>
         )}
-        {!hasMore && <div className="noProductFound">No Products Found</div>}
+        {!hasMore && !this.state.isFromSearch.includes('/search') ? (
+          <div className="noProductFound">No Products Found</div>
+        ) : null}
         {descriptionItem}
         <CompContainer />
       </>

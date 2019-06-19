@@ -26,6 +26,51 @@ section.tablecarousel {
   }
 }
 
+/*----Search
+------------------*/
+.noResultfound{
+    text-align: center;
+    padding: 60px 0 0 0;
+    .label-noresult{
+      color:$greyBorder;
+      font-size: $base*3.75;
+      padding:0 0 16px 0;
+      line-height: 30px;
+      margin:0;      
+    }
+    .product-serchGuide{
+        .label-text,
+        .serchlist-button
+        {
+          display: inline;
+          font-size: $base*2.5;
+          line-height: 20px;
+        }
+        .label-text{
+          color:$black;
+        }
+        .searchitem-button{
+          color:$cerulean;
+          background: transparent;
+          border:none;
+          margin:0 5px 0 0;
+        }
+    }
+  }
+
+  .Search-bestseller{
+    .bestSeller{
+      width: auto;
+      margin: 80px auto;
+      .title{
+        text-align: left;
+        color:$cerulean;
+        font-size: $base*3.75;
+        margin: 0 0 44px 0;
+        font-family: $font-bold; 
+      }
+    }
+  }
 /*------Featured Categories
 -------------------------------------*/
 
@@ -60,16 +105,16 @@ section.tablecarousel {
       float: left;
       .bold {
         font-family: $font-bold;
-        font-size: 16px;
+        font-size: $base*2;
       }
       .start_price {
-        font-size: 11px;
+        font-size: $base*1.375;
         font-style: italic;
       }
     }
     .rightbox {
       float: right;
-      font-size: 11px;
+      font-size: $base*1.375;
     }
   }
 }
@@ -126,14 +171,31 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: 56px;
+    font-size: $base*7;
     color: $ceruleanblue;
     margin: 0;
   }
+  .searchresult{
+    .headingTitleFlat {
+      font-family: $font-regular;
+      font-size: $base*3.75;
+      color: $black;
+      margin: 0;
+      padding:73px 0 16px 0;
+    }
+    .headingTitleSearch {
+      font-family: $font-bold;
+      font-size: $base*3.75;
+      color: $ceruleanblue;
+      margin: 0;
+    }
+  }
+ 
+  
   .headingSubTitle {
-    color: $colorLightGrey;
-    margin: 0 0 15px 0;
-    font-size: 14px;
+    color: $greyBorder;
+    padding: 0 0 32px 0;
+    font-size: $base*2.25;
   }
   .container {
     padding: 0 30px;
@@ -162,7 +224,7 @@ section.tablecarousel {
           color:$ashGrey;
           padding:12px 45px;
           text-align: center;
-          font-size: 14px;
+          font-size: $base*1.75;
           border:none;
           font-family: $font-bold;
           width: 200px;
@@ -188,7 +250,7 @@ section.tablecarousel {
         background: $black;
         color: $colorwhite;
         padding: 2px 10px;
-        font-size: 12px;
+        font-size: $base*1.5;
         .ribbon_star {
           float: left;
           display: block;
@@ -234,7 +296,7 @@ section.tablecarousel {
           background-color: rgba(255, 255, 255, 0.8);
           border: 0.09rem solid $reddishpink;
           position: absolute;
-          font-size: 14px;
+          font-size: $base*1.75;
           color: $black;
           padding: 8px 20px;
           transform: translate(-50%, -50%);
@@ -249,7 +311,7 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: 18px;
+          font-size: $base*2.25;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -272,7 +334,7 @@ section.tablecarousel {
           }
           .description {
             font-family: $font-light;
-            font-size: 11px;
+            font-size: $base*1.375;
           }
         }
 
@@ -285,7 +347,7 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: 24px;
+            font-size: $base*3;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -294,12 +356,12 @@ section.tablecarousel {
             text-decoration-color: $reddishpink;
             font-family: $font-light;
             padding-left: 15px;
-            font-size: 18px;
+            font-size: $base*2.25;
           }
         }
         .emi-text {
           color: $reddishpink;
-          font-size: 12px;
+          font-size: $base*1.5;
           line-height: 16px;
           .free-accessories {
             display: block;
@@ -320,7 +382,7 @@ section.tablecarousel {
 
   .heading {
     font-family: $font-bold;
-    font-size: 34px;
+    font-size: $base*4.25;
     color: $black;
     margin: 0 0 20px 0;
   }
@@ -330,7 +392,7 @@ section.tablecarousel {
     border: none;
     text-decoration: underline;
     color: $black;
-    font-size: 16px;
+    font-size: $base*2;
     font-family: $font-regular;
     text-align: left;
     margin: 24px 0;
@@ -348,7 +410,7 @@ section.tablecarousel {
 .description_area .list {
   color: #767676;
   margin: 0 0 10px 0;
-  font-size: 14px;
+  font-size: $base*1.75;
 }
 
 .adBannerWidth {
@@ -366,7 +428,7 @@ section.tablecarousel {
     float: left;
     .heading {
       font-family: $font-bold;
-      font-size: 14px;
+      font-size: $base*1.75;
       padding: 0 0 15px 0px;
       margin: 0;
     }
@@ -377,7 +439,7 @@ section.tablecarousel {
       padding: 16px;
       color: $greyish;
       text-decoration: underline;
-      font-size: 14px;
+      font-size: $base*1.75;
       font-family: $font-light;
       &:focus {
         outline: 0;
@@ -520,7 +582,7 @@ section.tablecarousel {
           .label_text {
             padding: 0 30px 26px 0;
             color: $battleshipGrey;
-            font-size: 12px;
+            font-size: $base*1.5;
             min-width: 170px;
           }
           .input_box,
@@ -594,7 +656,7 @@ section.tablecarousel {
     float: right;
     .heading {
       font-family: $font-bold;
-      font-size: 14px;
+      font-size: $base*1.75;
       padding: 0 0 15px 15px;
       margin: 0;
     }
@@ -747,7 +809,7 @@ section.tablecarousel {
   right: -5px;
   border-radius: 50%;
   border: 1px solid #d1d1d2;
-  font-size: 12px;
+  font-size: $base*1.5;
   cursor: pointer;
 }
 
@@ -775,9 +837,9 @@ section.tablecarousel {
 
 .noProductFound {
   text-align: center;
-  font-size: 16px;
+  font-size: $base*2;
   padding: 0 0 15px 0;
-  color: #737272;
+  color:$greycolor;
 }
 
 //-------- Wishlist -------
@@ -794,7 +856,7 @@ section.tablecarousel {
 
   .wishlist-text, 
   .view-btn{
-    font-size: 12px;
+    font-size: $base*1.5;
     color: $colorwhite;
   }
   .wishlist-text {    
