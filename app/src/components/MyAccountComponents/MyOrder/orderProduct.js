@@ -49,8 +49,19 @@ class ProductOrder extends React.Component {
               Track My Order
             </button>
           </div>
+          <div className='clearfix'></div>
+          <div class="trackorder-wrap">
+            <ul class="track-bar">
+              <li class="list visited first">Ordered</li>    
+              <li class="list previous visited">Packed</li>    
+              <li class="list active">Shipping</li>    
+              <li class="list next">Delivery</li>    
+              <li class="list last">Installation</li>       
+            </ul>
+          </div>
 
-          <div className="orderStauts">
+
+          {/* <div className="orderStauts">
             <ol className="progtrckr" data-progtrckr-steps="5">
               <li className="progtrckr-done">
                 <span className="statusText">Order Processing</span>
@@ -68,7 +79,7 @@ class ProductOrder extends React.Component {
                 <span className="statusText">Delivered</span>
               </li>
             </ol>
-          </div>
+          </div> */}
         </div>
       </>
     );

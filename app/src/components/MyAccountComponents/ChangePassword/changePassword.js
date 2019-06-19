@@ -160,8 +160,7 @@ class ChangePassword extends React.Component {
     var oldPasswordItem;
     if (this.props.changePasswordTagPro === 0) {
       oldPasswordItem = (
-        <div className="form-div clearfix">
-          <div className="form-group">
+        <div className="form-div clearfix">          
             {/* <label className="form-label">Current Password</label> */}
             <div className="currentPassword">
               <Input
@@ -180,8 +179,7 @@ class ChangePassword extends React.Component {
               >
                 {<img src={require('../../SVGs/eye.svg')} />}
               </span>
-            </div>
-          </div>
+            </div>          
           {errorItemCurrent}
         </div>
       )
