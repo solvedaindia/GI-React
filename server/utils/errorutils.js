@@ -79,6 +79,40 @@ const errorlist = {
     error_key: 'userid_invalid_format',
     error_message: 'Please enter valid Email Id/Mobile number.',
   },
+  invalid_promocode: {
+    status_code: 400,
+    error_key: 'invalid_promocode',
+    error_message: 'Promo Code is Invalid',
+  },
+  user_does_not_exists: {
+    status_code: 400,
+    error_key: 'user_does_not_exist',
+    error_message:
+      'This account does not exist. Enter a valid mobile number or email address to proceed or create a new GI account',
+  },
+  mobile_exists: {
+    status_code: 400,
+    error_key: 'mobile_exists',
+    error_message: 'This Mobile Number already exists',
+  },
+  email_exists: {
+    status_code: 400,
+    error_key: 'email_exists',
+    error_message: 'This Email Address already exists',
+  },
+  email_mobile_exists: {
+    status_code: 400,
+    error_key: 'email_mobile_exists',
+    error_message: [
+      'This Email Address already exists',
+      'This Mobile Number already exists',
+    ],
+  },
+  order_not_found: {
+    status_code: 400,
+    error_key: 'order_not_found',
+    error_message: 'An order with reference to this orderId does not exist',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -99,7 +133,11 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
         errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
-        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
+        errBody.errors[0].errorKey === '_ERR_GENERIC' ||
+        errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
+        errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
+        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED'
       ) {
         return {
           status_code: 400,
@@ -126,6 +164,12 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (errBody.errors[0].errorKey === 'ERROR_UPDATING_MOBILE') {
+        return errorlist.mobile_exists;
+      }
+      if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_INVALID') {
+        return errorlist.invalid_promocode;
+      }
       if (errBody.errors[0].errorKey === '_ERR_MISSING_CMD_PARAMETER') {
         return errorlist.invalid_params;
       }
@@ -150,6 +194,7 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (
         errBody.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        errBody.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST' ||
         errBody.errors[0].errorKey === 'ERROR_USER_EXISTS'
       ) {
         return errorlist.user_exists;
@@ -190,6 +235,12 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'invalid_pincode',
           error_message: 'Not a valid pincode',
         };
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
+        return errorlist.user_does_not_exists;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND') {
+        return errorlist.order_not_found;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||

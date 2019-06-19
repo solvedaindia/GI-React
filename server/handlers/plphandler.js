@@ -135,6 +135,33 @@ function getCategoryDetails(headers, categoryID, productListUrl, callback) {
 }
 
 /**
+ *  Get Products Details
+ */
+/* function getProductDetails(headers, facets, uniqueIDs, callback) {
+  const hasSwatches = false;
+  productUtil.getProductListByIDs(uniqueIDs, headers, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      let productArray = [];
+      if (hasSwatches === true) {
+        productArray = filter.filterData(
+          'productlist_withswatch',
+          result.catalogEntryView,
+        );
+      }
+      if (hasSwatches === false) {
+        productArray = filter.filterData(
+          'productlist_withoutswatch',
+          result.catalogEntryView,
+        );
+      }
+      callback(null, headers, facets, productArray);
+    }
+  });
+} */
+
+/**
  *  Get Products List
  */
 function getProductList(headers, productListUrl, categoryDetail, callback) {

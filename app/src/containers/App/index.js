@@ -22,7 +22,9 @@ import {
   getTheAccessToken,
   newsletterTokenCookie,
   newsletterStatusAPI,
+  ipDataApi,
 } from '../../../public/constants/constants';
+import appCookie from '../../utils/cookie';
 
 // import HomePageContainer from '../HomePageContainer/index';
 import HomePageContainer from '../HomePageContainer/homepage';
@@ -34,16 +36,21 @@ import FooterContainer from '../FooterContainer/footer';
 import RegisterNow from '../../components/RegisterComponent/registerModalData';
 import ForgotpassContainer from '../ForgotPasswordContainer/forgotpassword';
 import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
-import CompareContainer from '../comparePageContainer/index'
-import CheckoutContainer from '../checkoutContainer/index'
+import CompareContainer from '../comparePageContainer/index';
+import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
+<<<<<<< HEAD
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/index';
 
 
+=======
+import MyAccount from '../MyAccountContainer/index';
+import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+>>>>>>> ceb8864564063fb42d898048717c6f070c5c7f9b
 
 export default class App extends React.Component {
   constructor(props) {
@@ -60,6 +67,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
+    this.getPincodeData();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -70,10 +78,10 @@ export default class App extends React.Component {
       this.setState({ accessToken: token });
     } else {
       /* Check if User is logged-in or Guest */
-      if (isLoggedIn) {
-      } else {
-        registerGuestUser(this.guestLoginCallback);
-      }
+      // if (isLoggedIn) {
+      // } else {
+      registerGuestUser(this.guestLoginCallback);
+      // }
     }
   }
 
@@ -92,6 +100,21 @@ export default class App extends React.Component {
       console.log('In the new');
       this.getNewsletterSubscriptionStatus();
       // this.setState({ showNewsLetter: true });
+    }
+  }
+
+  getPincodeData() {
+    if (appCookie.get('pincode') === null) {
+      apiManager
+        .get(ipDataApi, { headers: { Accept: 'application/json' } })
+        .then(response => {
+          appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
+          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+        })
+        .catch(error => {
+          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+          console.log(`Pincode APi Error=>> ${error}`);
+        });
     }
   }
 
@@ -148,16 +171,16 @@ export default class App extends React.Component {
           <Route exact path="/about-us" component={AboutUsContainer} />
           <Route path="/clp" component={ClpContainer} />
           <Route path="/plp" component={PlpContainer} />
-          <Route path="/pdp/:skuId" component={PdpContainer} />
+          <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
           <Route path="/compare" component={CompareContainer} />
           <Route path="/wishlist" component={MyWishlist} />
+          <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
-
-
+          <Route path="/guestTrackOrder" component={GuestTrackOrder} />
         </Switch>
         <FooterContainer />
       </div>

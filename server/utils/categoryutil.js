@@ -124,7 +124,7 @@ function getProductCount(headers, categoryIDs, callback) {
           if (!error) {
             const productCount = {
               categoryID: categoryId,
-              productCount: productList.catalogEntryView.length,
+              productCount: productList.recordSetTotal,
             };
             cb(null, productCount);
           } else {

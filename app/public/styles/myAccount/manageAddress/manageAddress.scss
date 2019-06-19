@@ -1,0 +1,93 @@
+@import './addAddressForm.scss';
+
+.manageAddressContainer {
+  width: 100%;
+  .itemList {    
+    margin: 0;
+    max-height: 354px;
+    overflow: auto;
+   .list{
+     width:31%;
+     float: left;
+     margin: 0px 16px 26px 0;
+     position: relative;
+     &:last-child{
+      margin-right:0
+    }
+    .modifyAddress{
+      position: absolute;
+      bottom: 16px;
+    }
+
+    .addressItem.defaultAddress{
+      background-color: rgba(99, 176, 225, 0.07);
+      border:1px solid $ceruleanblueborder;
+    }
+    .addressItem {
+      padding:16px 10px;
+      height: 162px;
+      border-radius: 2px;
+      border: solid 1px $lightblueGrey;
+      background-color: rgba(247, 248, 248, 0.5);
+    
+      .defaultAddress {
+        font-family: $font-bold;      
+        font-size:  $base*1.5;
+        font-weight: bold;   
+        color:$black;
+        margin: 0 0 12px 0;
+       
+      }
+    
+      .addressText {   
+        font-size: $base*1.5;     
+        color: $black;   
+        line-height: 1.58;
+        margin: 0;
+        font-weight: normal;
+      }
+    
+      .listitem {   
+        display: inline;
+        font-size:  $base*1.5;
+        font-family: $font-bold;
+        color: $cerulean;
+        padding: 0px 10px;
+        background: transparent;
+        border: none;
+        border-right:1px solid $black;
+        cursor: pointer;
+        &:first-child{
+          padding: 0 8px 0 0;
+        }
+        &:last-child{
+          padding: 0 0px 0 8px;
+          border-right: none;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    
+
+   }
+  
+  }
+  .addNewAddress { 
+    font-size:  $base*1.75;
+    font-family: $font-bold;  
+    color: $cerulean;  
+    margin: 0;
+    background: transparent;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+
+
+

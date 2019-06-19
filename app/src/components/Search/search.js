@@ -2,9 +2,7 @@ import React from 'react';
 import apiManager from '../../utils/apiManager';
 import SearchLogo from "../SVGs/search";
 import {
-  autoSuggestAPI,
-  storeId,
-  accessToken,
+  autoSuggestAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/headerContainer/search.scss';
 

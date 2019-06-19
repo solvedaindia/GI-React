@@ -1,5 +1,4 @@
-const testJSON = require('../configs/testjson');
-
+const imagefilter = require('./imagefilter');
 /**
  * Filter Category Navigation Data.
  * @return Category Navigation Data
@@ -24,7 +23,6 @@ function getCatNavData(categoryData) {
     });
   }
   return categoryArray;
-  // return testJSON.categoryNavigation;
 }
 
 /**
@@ -38,11 +36,11 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
   catData.thumbnail =
-    categoryDetails.thumbnail ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catthumbnail.png';
+    imagefilter.getImagePath(categoryDetails.thumbnail) ||
+    '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
   catData.fullImage =
-    categoryDetails.fullImage ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catfullimage.png';
+    imagefilter.getImagePath(categoryDetails.fullImage) ||
+    '/images/godrejInterio/catfullimage.png';
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
@@ -52,5 +50,8 @@ function getCategoryDetails(categoryDetails) {
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
+  catData.pageTitle = categoryDetails.seo_prop_pageTitle || '';
+  catData.imageAltText = categoryDetails.seo_prop_imageAltText || '';
+  catData.metaDescription = categoryDetails.seo_prop_metaDescription || '';
   return catData;
 }

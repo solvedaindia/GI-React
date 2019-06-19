@@ -1,5 +1,6 @@
 const filter = require('./filter');
-
+const imageFilter = require('./imagefilter');
+const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 /**
  * Filter Product List Data.
  * @return Product List with Facet Data
@@ -13,13 +14,23 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
         facetName: facet.name,
         facetValues: [],
       };
+      if (facet.name === 'ParentCatalogGroup') {
+        eachFacetValue.facetName = 'Category';
+      }
+      if (facet.name === 'OfferPrice_INR') {
+        eachFacetValue.facetName = 'Price';
+      }
+      if (facet.name === 'percentOff') {
+        eachFacetValue.facetName = 'Discount';
+      }
+
       if (facet.entry && facet.entry.length > 0) {
         facet.entry.forEach(facetValue => {
           const facetEntry = {
             label: facetValue.label,
-            value: facetValue.value,
+            // value: facetValue.value,
             count: Number(facetValue.count),
-            facetImage: facetValue.image || '',
+            // facetImage: facetValue.image || '',
           };
           if (facet.value === 'parentCatgroup_id_search') {
             facetEntry.value = `${facet.value}:${catalogID}_${
@@ -27,6 +38,18 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
             }`;
           } else {
             facetEntry.value = facetValue.value;
+          }
+          if (facetValue.image) {
+            const facetImageArray = facetValue.image.split('/');
+            const facetImageArrayLength = facetImageArray.length;
+            if (rbgRegex.test(facetImageArray[facetImageArrayLength - 1])) {
+              facetEntry.colorCode =
+                facetImageArray[facetImageArray.length - 1];
+            } else {
+              facetEntry.facetImage = imageFilter.getImagePath(
+                facetValue.image,
+              );
+            }
           }
 
           eachFacetValue.facetValues.push(facetEntry);
@@ -116,30 +139,55 @@ module.exports.productListWithSwatch = function productListWithSwatches(
 
 /**
  * Filter Product List Data.
- * @return Product List without Swatches Data
+ * @return Product List with Swatches Data Included
  */
-module.exports.productListWithoutSwatch = function productListWithoutSwatches(
+module.exports.productListWithSwatchData = function productListWithSwatchData(
   catalogEntryView,
 ) {
   const productArray = []; // Product List
   if (catalogEntryView && catalogEntryView.length > 0) {
     catalogEntryView.forEach(catalogItem => {
+      const skuDetail = {
+        defaultSkuDetail: {},
+        swatchesData: [],
+      };
       if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
-        catalogItem.sKUs.forEach(skuData => {
-          const itemBean = filter.filterData('productdetail_summary', skuData);
-          delete itemBean.primaryColor;
-          delete itemBean.fixedAttributes;
-          // itemBean.hasSwatches = false;
-          productArray.push(itemBean); // Push Item Bean Data in Product Array
-        });
+        const skuArray = catalogItem.sKUs;
+        skuDetail.defaultSkuDetail = getDefaultSKUData(skuArray);
       }
+      productArray.push(skuDetail);
     });
   }
   return productArray;
 };
 
+/**
+ * Filter Product List Data.
+ * @return Product List without Swatches Data
+ */
+module.exports.productListWithoutSwatch = function productListWithoutSwatches(
+  catalogEntryView,
+) {
+  let productArray = []; // Product List
+  if (catalogEntryView && catalogEntryView.length > 0) {
+    // catalogEntryView.forEach(catalogItem => {
+    //   if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
+    //     catalogItem.sKUs.forEach(skuData => {
+    //       const itemBean = filter.filterData('productdetail_summary', skuData);
+    //       delete itemBean.primaryColor;
+    //       delete itemBean.fixedAttributes;
+    //       // itemBean.hasSwatches = false;
+    //       productArray.push(itemBean); // Push Item Bean Data in Product Array
+    //     });
+    //   }
+    // });
+    productArray = catalogEntryView;
+  }
+  return productArray;
+};
+
 function getDefaultSKUData(skuArray) {
-  let defaultSKU = skuArray[0];
+  const defaultSKU = skuArray[0];
   /*  for (let i = 0; i < skuArray.length; i += 1) {
           let temp = false;
           for (let j = 0; j < skuArray[i].attributes.length; j += 1) {
@@ -157,7 +205,7 @@ function getDefaultSKUData(skuArray) {
             break;
           }
         } */
-  skuArray.forEach(skuData => {
+  /* skuArray.forEach(skuData => {
     skuData.attributes.forEach(attributeData => {
       if (
         attributeData.identifier === 'defaultSKU' &&
@@ -166,7 +214,7 @@ function getDefaultSKUData(skuArray) {
         defaultSKU = skuData;
       }
     });
-  });
+  }); */
   return defaultSKU;
 }
 

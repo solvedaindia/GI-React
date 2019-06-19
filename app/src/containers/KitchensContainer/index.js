@@ -104,21 +104,15 @@ index: 0
        
                     
                     <div class="container">
-                    
+                    <div class="container">
 
   <img className="Fullhalf" src={require('../../../public/images/sm4.jpg')} alt="Snow"/>
-
+  <div></div>
+ </div>
   <img  className="Group-24" src={require('../../../public/images/arrowimg.png')} alt="Snows"/>
 </div>
 
-<div class="container">
-                    
 
-                    <img className="reactang" src={require('../../../public/images/behindForm.png')} alt="Snow"/>
-                  
-<div className="Form-bakground">
-  </div>                  
-</div>
 
 
 
