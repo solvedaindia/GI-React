@@ -5,6 +5,8 @@ import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/KitchenHall';
+import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
+import WhatGoes from '../../components/KitchensComp/WhatGoes';
 
 
 
@@ -74,12 +76,9 @@ index: 0
        <div className="container">
            <p1 className="What-goes-into-a-Godr">What goes into a Godrej Kitchen</p1>
         {/* <InsCrousel/> */}
+               <WhatGoes />
+
         <div>
-        <img
-                      className="goesOnKitchen"
-                      src={require('../../../public/images/sl11.png')}
-                      alt="rectangle"
-                    />
                     <h2 className="Name-Copy">Behind the Scenes Description</h2>
                     <p4 className="This-project-require">This project required a huge amount of hours but  sit amet, consectetur adipisicing elit, sed do <br/>eiusmod tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p4>
 
@@ -87,7 +86,47 @@ index: 0
        </div>
        <AlwaysRemember />
        <KitchenHall />
+       <div className="container">
+       <div className="col-md-12">
+       <div className="row-md-6">
 
+       <div className="container">
+       <div className="Blacks">
+         <div className="container">
+         <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
+       <WhyPeopleLove />
+       <h1 className="Naming">Alvin Simon</h1>
+       </div>
+       </div>
+       </div>
+       </div>
+       <div className="row-md-6">
+       
+                    
+                    <div class="container">
+                    
+
+  <img className="Fullhalf" src={require('../../../public/images/sm4.jpg')} alt="Snow"/>
+
+  <img  className="Group-24" src={require('../../../public/images/arrowimg.png')} alt="Snows"/>
+</div>
+
+<div class="container">
+                    
+
+                    <img className="reactang" src={require('../../../public/images/behindForm.png')} alt="Snow"/>
+                  
+<div className="Form-bakground">
+  </div>                  
+</div>
+
+
+
+
+       
+       </div>
+       </div>
+       </div>
             </div>
         )
     }

@@ -374,3 +374,78 @@ react-slideshow-container {
   letter-spacing: normal;
   color: var(--greyish-brown);
 }
+.Blacks {
+  width: 1440px;
+  height: 436px;
+  background-color: #9EE4D9
+}
+.CrousParagraph {
+  width: 900px;
+  height: 103px;
+  font-family: CeraGodrejInterio;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.crousHead {
+  width: 437px;
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.Naming {
+  width: 88px;
+  height: 24px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: black;
+  text-align: center;
+  
+}
+.Fullhalf {
+  width: 1440px;
+  height: 600px;
+  background-color: rgba(20,20,20, .5);
+  opacity: 0.5;
+}
+.Group-24 {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Form-bakground{
+  width: 944px;
+  height: 657px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
+  background-color: #ffffff;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.reactang {
+  width: 1440px;
+  height: 810px;
+}
