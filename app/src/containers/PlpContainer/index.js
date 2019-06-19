@@ -63,7 +63,7 @@ export class PlpContainer extends React.Component {
       isCatDetails: true,
       categoyDetails: null,
       productCount: null,
-      // Search Vars
+      //Search Vars
       isFromSearch: this.props.location.pathname,
       searchKeyword: this.props.location.search,
       emptySearchItem: null,
@@ -95,6 +95,7 @@ export class PlpContainer extends React.Component {
 
     addEventListener('scroll', this.onscroll);
 
+
     this.fetchPLPProductsData();
 
     if (!this.state.isFromSearch.includes('/search')) {
@@ -113,7 +114,7 @@ export class PlpContainer extends React.Component {
     //   searchKeyword: nextProps.location.search,
     // })
 
-    // this.state.isFromSearch = nextProps.location.pathname;
+    //this.state.isFromSearch = nextProps.location.pathname;
     console.log('Query String Routing Recive Props ------- ', nextProps);
     const path = String(nextProps.location.pathname);
     const idStr = path.split('/')[2];
@@ -143,7 +144,7 @@ export class PlpContainer extends React.Component {
     // })
     // this.fetchSubCategoryData();
     // this.fetchPLPProductsData();
-    // }
+    //}
 
     // }
     // else {
@@ -169,11 +170,7 @@ export class PlpContainer extends React.Component {
       this.fetchPLPProductsData();
     }
 
-    console.log(
-      'will Recive in the search --- ',
-      nextProps.location.search,
-      this.props.location.search,
-    );
+    console.log('will Recive in the search --- ', nextProps.location.search, this.props.location.search)
     if (nextProps.location.pathname.includes('/search')) {
       if (nextProps.location.search !== this.props.location.search) {
         this.setState({
@@ -187,7 +184,9 @@ export class PlpContainer extends React.Component {
         });
         this.fetchPLPProductsData();
       }
+
     }
+
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -201,14 +200,15 @@ export class PlpContainer extends React.Component {
     apiManager
       .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
       .then(response => {
-        console.log('Adbanerrrr -- ', response.data);
+        console.log('Adbanerrrr -- ', response.data)
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchSubCategoryData() {
+
     apiManager
       .get(plpSubCatAPI + categoryId, {
         headers: {},
@@ -217,7 +217,7 @@ export class PlpContainer extends React.Component {
         console.log('Subcat Data', response.data);
         this.setState({ plpSubCatData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchMarketingTextBannerData() {
@@ -228,7 +228,7 @@ export class PlpContainer extends React.Component {
           marketingTextBannerData: response.data.data.bannerList[0].content,
         });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchPLPProductsData() {
@@ -236,8 +236,8 @@ export class PlpContainer extends React.Component {
       /**
        * TODO: Category ID is static from Node side.
        */
-      let urlMaking = plpAPI + categoryId;
-      let searchText = null;
+      var urlMaking = plpAPI + categoryId;
+      var searchText = null;
       if (this.state.isFromSearch.includes('/search')) {
         const params = new URLSearchParams(this.state.searchKeyword);
         const keywoard = params.get('keyword');
@@ -245,7 +245,7 @@ export class PlpContainer extends React.Component {
         urlMaking = searchPageAPI + keywoard;
       }
 
-      let plpURL =
+      var plpURL =
         `${urlMaking}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
@@ -262,16 +262,15 @@ export class PlpContainer extends React.Component {
           console.log('PLP Response----', response.data);
 
           if (this.state.isFromSearch.includes('/search')) {
-            if (
-              this.state.newSearchTrigger &&
-              response.data.data.productList.length !== 0
-            ) {
+            if (this.state.newSearchTrigger && response.data.data.productList.length !== 0) {
               this.setState({
                 emptySearchItem: null,
                 showBestSeller: false,
-                newSearchTrigger: false,
-              });
-            } else if (response.data.data.spellCheck) {
+                newSearchTrigger: false
+              })
+            }
+            else {
+              if (response.data.data.spellCheck) {
                 this.setState({
                   emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
                   showBestSeller: false,
@@ -285,12 +284,12 @@ export class PlpContainer extends React.Component {
                   newSearchTrigger: false
                 })
               }
+            }
+
+
           }
 
-          if (
-            this.state.isCatDetails &&
-            !this.state.isFromSearch.includes('/search')
-          ) {
+          if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
             this.fetchAdBannerData();
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
@@ -340,41 +339,40 @@ export class PlpContainer extends React.Component {
       if (spellCheckArr && spellCheckArr.length !== 0) {
         this.setState({
           searchKeyword: `keyword=${spellCheckArr[0]}`,
-        });
+        })
         this.fetchPLPProductsData();
-      } else {
-        // Show Best Seller component
+      }
+      else {
+        //Show Best Seller component
       }
 
       return (
-        <div className="noResultfound">
-          <div className="label-noresult">
-            No results found for “{searchText}”
-          </div>
-          <div className="product-serchGuide">
-            <div className="label-text">Did you mean: </div>
-            <div className="serchlist-button">
-              {spellCheckArr.map(item => (
+        <div className='noResultfound'>
+          <div className='label-noresult'>No results found for “{searchText}”</div>
+          <div className='product-serchGuide'>
+            <div className='label-text'>Did you mean: </div>
+            <div className='serchlist-button'>
+              {spellCheckArr.map(item => {
+                return (
                   <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button> 
-                ))}
+                )
+              })}
             </div>
           </div>
         </div>
-      );
+      )
     }
+
   }
 
   onSpellCheckClick(spellText) {
-    this.props.history.push({
-      pathname: '/search',
-      search: `keyword=${spellText}`,
-    });
+    this.props.history.push({ pathname: '/search', search: `keyword=${spellText}` })
     this.setState({
       searchKeyword: `keyword=${spellText}`,
       plpData: [],
       filterData: [],
       pageNumber: 1,
-    });
+    })
     this.fetchPLPProductsData();
   }
 
@@ -401,6 +399,7 @@ export class PlpContainer extends React.Component {
   };
 
   render() {
+
     const {
       error,
       hasMore,
@@ -432,10 +431,7 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-      if (
-        adBannerData.length != 0 ||
-        this.state.isFromSearch.includes('/search')
-      )
+      if (adBannerData.length != 0 || this.state.isFromSearch.includes('/search'))
         plpProducts = (
           <PlpComponent
             plpDataPro={this.state.plpData}
@@ -478,11 +474,11 @@ export class PlpContainer extends React.Component {
     const params = new URLSearchParams(this.state.searchKeyword);
     const keywoard = params.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
-      titleItem = (
-        <div className='searchresult'>
-          <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
-        </div>
-        </div>
+      titleItem = (      
+         <div className='searchresult'>
+           <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
+         </div>
+      
       );
     }
 
@@ -496,24 +492,20 @@ export class PlpContainer extends React.Component {
     }
 
     return (
+
       <>
-        {this.state.emptySearchItem !== null
-          ? this.state.emptySearchItem
-          : null}
-        {this.state.showBestSeller ? (
-          <>
-            <div>
-              <div className="noResultfound">
-                <div className="label-noresult">
-                  No results found for “{keywoard}”
-                </div>
-              </div>
-              <div className="Search-bestseller container">
-            <BestSeller />
-              </div>
+        {this.state.emptySearchItem !== null ? this.state.emptySearchItem : null}
+        {this.state.showBestSeller ? <><div>
+
+          <div className='noResultfound'>
+            <div className='label-noresult'>
+            No results found for “{keywoard}”
             </div>
-          </>
-        ) : null}
+          </div>
+          <div className='Search-bestseller container'>
+          <BestSeller />
+          </div>
+        </div></> : null}
         {marketingBanner}
         {subCategories}
         <section className="plpCategories">
@@ -544,9 +536,7 @@ export class PlpContainer extends React.Component {
             />
           </div>
         )}
-        {!hasMore && !this.state.isFromSearch.includes('/search') ? (
-          <div className="noProductFound">No Products Found</div>
-        ) : null}
+        {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
         {descriptionItem}
         <CompContainer />
       </>
