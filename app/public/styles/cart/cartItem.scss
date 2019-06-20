@@ -1,0 +1,5 @@
+@import '../variable';
+
+.cartDetails {
+    @include container-width;
+}

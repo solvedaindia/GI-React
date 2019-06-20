@@ -6,10 +6,22 @@ import {
 
 /**
  * Function to get current URL hostname and port
- * @param {*} cname
+ * @param {*}
  */
 export function getLocation(){
   return window.location.hostname;
+}
+
+/**
+ * Function to get current URL hostname and port
+ * @param {*} pin
+*/
+export function validatePIN(pin) {
+  if (/^(\d{4}|\d{6})$/.test(pin)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 /**
  * Function to Fetch specific data from Cookie store
