@@ -18,10 +18,6 @@ class productInfo extends React.Component {
   }
 
   render() {
-    let emiValue = false;
-    if (this.props.productData.emiData) {
-      emiValue = true;
-    }
 
     return (
       <>

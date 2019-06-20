@@ -200,7 +200,7 @@ class PdpComponent extends React.Component {
                   <Row>
                     <Col md={12} sm={12} xs={12}>
                       <Col md={6} sm={12} xs={12} className="product">
-                        <span className="text">Product ID:</span>
+                        <span className="text">Product ID: </span>
                         <span className="text">
                           {this.state.skuData.partNumber}
                         </span>

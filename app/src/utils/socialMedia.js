@@ -17,34 +17,52 @@ class SocialMedia extends React.Component {
     return (
       <div className="social-icon-share">
         <ul>
-          <li>
+          <li className='list'>
             <FacebookShareButton url={shareUrl} quote={title}>
-              <FacebookIcon size={26} round />
+            <div className='iconImg'>
+            	<FacebookIcon size={26} round />
+            </div>
+			<div className='labelText'>
+				<span className="social-icon-text"> Facebook</span>
+			</div>
             </FacebookShareButton>
-            <span className="social-icon-text"> Facebook</span>
+            
           </li>
-          <li>
+          <li className='list'>
             <WhatsappShareButton
               url={shareUrl}
               title={title}
               separator=":: "
-              className="Demo__some-network__share-button"
             >
-              <WhatsappIcon size={26} round />
+            <div className='iconImg'>
+            	<WhatsappIcon size={26} className='icons' round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Whatsapp</span>
+            </div>
             </WhatsappShareButton>
-            <span className="social-icon-text">Whatsapp</span>
+            
           </li>
-          <li>
+          <li className='list'>
             <TwitterShareButton url={shareUrl} title={title}>
-              <TwitterIcon size={26} round />
+            <div className='iconImg'>
+            	<TwitterIcon size={26} round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Twitter</span>
+            </div>    
             </TwitterShareButton>
-            <span className="social-icon-text">Twitter</span>
+            
           </li>
-          <li>
+          <li className='list'>
             <EmailShareButton url={shareUrl} title={title}>
-              <EmailIcon size={26} round />
+            <div className='iconImg'>
+            	<EmailIcon size={26} round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Mail</span>
+            </div>    
             </EmailShareButton>
-            <span className="social-icon-text">Mail</span>
           </li>
         </ul>
       </div>

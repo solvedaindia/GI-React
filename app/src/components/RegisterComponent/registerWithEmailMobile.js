@@ -172,9 +172,16 @@ class RegisterWithEmailMobile extends React.Component {
   }
 
   callbackFunc(errorMsg) {
+  if (errorMsg === 'userid and password cannot be same') {
 	this.setState({
-	 	errorMessageUserId: errorMsg
-	 });
+		errorMessagePassword: errorMsg
+	});
+
+  } else {
+	this.setState({
+		errorMessageUserId: errorMsg
+	});
+  }
   }
 
 

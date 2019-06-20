@@ -150,10 +150,14 @@
                      visibility:visible;
                     }
                 }
-                li{
+                .list{
                     float: left;
                     margin: 4px 0px;
                     width: 100%;
+                    .iconImg,
+                    .labelText{
+                        float:left;
+                    }
 
                     .SocialMediaShareButton { 
                         float: left;
