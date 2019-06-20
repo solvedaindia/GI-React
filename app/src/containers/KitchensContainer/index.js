@@ -7,7 +7,7 @@ import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/KitchenHall';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
-
+import HeroBanner from '../../components/ClpComponent/subComponents/heroBanner'
 
 
 export default class Kitchens extends React.Component {
@@ -42,11 +42,8 @@ index: 0
     render(){
         return (
             <div className="Kitchen-1">
-        <img
-                      className="Rectangle"
-                      src={require('../../../public/images/kitch1.jpg')}
-                      alt="rectangle"
-                    />
+       <HeroBanner />
+
                    <div className="text-block">
                    
                     <h4 className="header">Interio Kitchens</h4>
@@ -89,38 +86,35 @@ index: 0
        <div className="container">
        <div className="col-md-12">
        <div className="row-md-6">
-
-       <div className="container">
-       <div className="Blacks">
-         <div className="container">
-         <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
-       <WhyPeopleLove />
-       <h1 className="Naming">Alvin Simon</h1>
-       </div>
-       </div>
-       </div>
+        <div className="container">
+        <div className="Blacks">
+          <div className="container">
+          <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
+        <WhyPeopleLove />
+        <h1 className="Naming">Alvin Simon</h1>
+        </div>
+        </div>
+        </div>
        </div>
        <div className="row-md-6">
        
                     
                     <div class="container">
-                    <div class="container">
 
   <img className="Fullhalf" src={require('../../../public/images/sm4.jpg')} alt="Snow"/>
   <div></div>
- </div>
+
   <img  className="Group-24" src={require('../../../public/images/arrowimg.png')} alt="Snows"/>
 </div>
-
-
-
-
-
-
-       
+</div>
        </div>
        </div>
-       </div>
+       <div className="container">
+  <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow"/>
+ <div className="Form-bakground">
+   
+   </div>  
+</div>
             </div>
         )
     }
