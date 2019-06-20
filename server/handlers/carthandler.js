@@ -517,7 +517,7 @@ function mergeCartData(cartData, productList, headers, callback) {
     );
     cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
     cartDetails.cartItems = mergedCartData.orderItemList;
-    cartDetails.actualCartData = cartData;
+    // cartDetails.actualCartData = cartData;
   }
   callback(null, cartDetails);
 }
@@ -581,3 +581,52 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
     }
   });
 };
+
+module.exports.addAddress = addAddress;
+function addAddress(headers, params, callback) {
+  logger.debug('Adding Address To Cart');
+  if (
+    !params ||
+    !params.orderItem ||
+    params.orderItem.length === 0 ||
+    !params.addressId ||
+    !params.shipModeId
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of params.orderItem) {
+    if (!item.orderItemId || !item.shipModeId || !item.addressId) {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+  }
+  const reqBody = params;
+  reqBody.shipAsComplete = '1';
+
+  const addAddressCart = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/@self/shipping_info`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'PUT',
+    addAddressCart,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        callback(null, response.body, reqHeader);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}

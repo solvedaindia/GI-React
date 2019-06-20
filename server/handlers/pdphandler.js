@@ -9,51 +9,103 @@ const headerutil = require('../utils/headerutil.js');
 const constants = require('../utils/constants');
 const origin = require('../utils/origin.js');
 
+const notifyMessage = 'We’ll notify you when this product is back in stock';
+
 /**
  * Function for PLP Data
  * @param
  * @returns
  * @throws
  */
-module.exports.getProductDetails = function getProductDetailsData(
+/* module.exports.getProductDetails = function getProductDetailsData(
   req,
   callback,
 ) {
   logger.debug('Inside the GET PDP Data Method');
-  if (!req.params.productId) {
+  if (!req.params.skuId) {
     logger.debug('GET PDP Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
 
   const reqHeaders = req.headers;
-  const productID = req.params.productId;
+  const skuID = req.params.skuId;
 
-  // productUtil.productByProductID(productID, reqHeaders, (err, result) => {
-  //   if (err) {
-  //     callback(errorUtils.handleWCSError(err));
-  //   } else {
-  //     logger.debug('Got all the origin resposes for Product Detail');
-  //     callback(null, productSummaryJson(reqHeaders, result));
-  //   }
-  // });
-
-  // callback(null, transformJSON(prodDetails));
-  async.parallel(
-    [
-      productDetails.bind(null, reqHeaders, productID),
-      // promotionDetails.bind(null, reqHeaders, productID),
-    ],
-    (err, result) => {
-      if (err) {
-        callback(errorUtils.handleWCSError(err));
+  productUtil.productByProductID(skuID, reqHeaders, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes From PDP API');
+      if (result.catalogEntryView.length > 0) {
+        const productId = result.catalogEntryView[0].parentCatalogEntryID;
+        productUtil.productByProductID(
+          productId,
+          reqHeaders,
+          (error, results) => {
+            if (error) {
+              callback(error);
+            } else {
+              callback(null, pdpfilter.productDataSummary(results));
+            }
+          },
+        );
       } else {
-        logger.debug('Got all the origin resposes for Product Detail');
-        callback(null, pdpfilter.productDataSummary(result));
+        callback(null, '');
+      }
+    }
+  });
+}; */
+
+module.exports.getProductDetails = function getProductDetailsData(
+  req,
+  callback,
+) {
+  logger.debug('Inside the GET PDP Data Method');
+  if (!req.params.skuId) {
+    logger.debug('GET PDP Data :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  productUtil.productByProductID(
+    req.params.skuId,
+    req.headers,
+    (error, results) => {
+      if (error) {
+        callback(error);
+      } else {
+        callback(null, pdpfilter.productDataSummary(results));
       }
     },
   );
 };
+
+// module.exports.getProductDetails = getProductDetailsData;
+// function getProductDetailsData(req, callback) {
+//   logger.debug('Inside the GET PDP Data Method');
+//   if (!req.params.productId) {
+//     logger.debug('GET PDP Data :: Invalid Params');
+//     callback(errorUtils.errorlist.invalid_params);
+//     return;
+//   }
+
+//   const reqHeaders = req.headers;
+//   const productID = req.params.productId;
+//   async.parallel(
+//     [
+//       productDetails.bind(null, reqHeaders, productID),
+//       // promotionDetails.bind(null, reqHeaders, productID),
+//     ],
+//     (err, result) => {
+//       if (err) {
+//         callback(errorUtils.handleWCSError(err));
+//       } else {
+//         logger.debug('Got all the origin resposes for Product Detail');
+//         callback(null, pdpfilter.productDataSummary(result));
+//       }
+//     },
+//   );
+// }
 
 /**
  * Function for pincode service ability
@@ -98,6 +150,7 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
             [
               findInventory.bind(null, reqHeaders, reqBody),
               getShippingCharge.bind(null, reqHeaders, reqBody),
+              getExperienceStore.bind(null, reqHeaders, reqBody),
             ],
             // eslint-disable-next-line no-shadow
             (err, result) => {
@@ -310,7 +363,7 @@ module.exports.setProductNotification = function productStockNotification(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, { message: notifyMessage });
       } else {
         logger.debug('Error While calling Notify ME API');
         callback(errorUtils.handleWCSError(response));
@@ -330,17 +383,24 @@ function getShippingCharge(header, reqParams, callback) {
   });
 }
 
+/** Get Experience store name */
+function getExperienceStore(header, reqParams, callback) {
+  pincodeUtil.experienceStore(header, reqParams, (err, result) => {
+    if (err) {
+      callback(null, 'Store not found');
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
 function transformJson(result, serviceability) {
   const pincodeData = {};
+  console.log(`>>>121212>>>>>>${JSON.stringify(result)}`);
   pincodeData.pincodeServiceable = serviceability;
   if (result && result.length > 1) {
     pincodeData.inventoryStatus = result[0].inventoryStatus;
     pincodeData.deliveryDateAndTime = result[0].deliveryDate;
-    /*   if (result[0].inventoryStatus !== 'Unavailable') {
-      pincodeData.deliveryDateAndTime = '';
-    } else {
-      pincodeData.deliveryDateAndTime = '';
-    } */
     pincodeData.shippingCharge = result[1].ShipCharge || '';
   }
   return pincodeData;

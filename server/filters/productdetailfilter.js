@@ -130,8 +130,8 @@ const associatedPromo = [
 module.exports.productDataSummary = productDataForPDP;
 function productDataForPDP(bodyData) {
   const productDataSummary = {};
-  if (bodyData.length > 0 && bodyData[0].catalogEntryView.length > 0) {
-    const productData = bodyData[0].catalogEntryView[0];
+  if (bodyData.catalogEntryView.length > 0) {
+    const productData = bodyData.catalogEntryView[0];
     productDataSummary.uniqueID = productData.uniqueID || '';
     productDataSummary.type = 'product';
     const attributes = getAttributes(productData);
@@ -223,8 +223,7 @@ function getDefAttributes(attributes) {
         const attributeValueJSON = {};
         attributeValueJSON.name = attributeValue.value;
         if (match !== null) {
-          attributeValueJSON.colorCode =
-            imagefilter.getImagePath(attributeValue.image1) || '';
+          attributeValueJSON.colorCode = attributeValue.image1 || '';
         } else {
           attributeValueJSON.facetImage =
             imagefilter.getImagePath(attributeValue.image1path) || '';

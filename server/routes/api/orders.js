@@ -2,15 +2,29 @@ const express = require('express');
 const router = express.Router();
 const ordersHandler = require('../../handlers/ordershandler');
 
-router.get('/', (req, res, next) => {
-  ordersHandler.getOrdersList(req.query, req.headers, (err, result) => {
+router.get('/list', (req, res, next) => {
+  ordersHandler.getOrdersList(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
     }
     res.status(200).send({
       status: 'success',
-      data: result
+      data: result,
+    });
+  });
+});
+
+router.get('/detail/byId/:orderId', (req, res, next) => {
+  const id = req.params.orderId;
+  ordersHandler.getOrderbyId(req.headers, id, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
     });
   });
 });

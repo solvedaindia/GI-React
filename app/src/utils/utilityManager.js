@@ -3,6 +3,14 @@ import {
   wishlistIdCookie,
 } from '../../public/constants/constants';
 
+
+/**
+ * Function to get current URL hostname and port
+ * @param {*} cname
+ */
+export function getLocation(){
+  return window.location.hostname;
+}
 /**
  * Function to Fetch specific data from Cookie store
  * @param {*} cname

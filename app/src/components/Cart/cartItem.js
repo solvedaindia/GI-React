@@ -36,9 +36,9 @@ class CartItem extends React.Component {
         return (
             !!cartData && !!cartData.cartItems.length
             ? 
-            <div className='cartItems'>
-                Filled Cart
-            </div> 
+            <section className='cartDetails'>
+                <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span></h2>
+            </section> 
             : <EmptyCart />
         )
     }
