@@ -6,9 +6,15 @@ import {
 class productDefAttribute extends React.Component {
 	constructor() {
 		super();
+		this.state ={
+			selectedOption: ''
+		}
 	}
 
-	handleOptionChange(count) {
+	handleOptionChange(count, e) {
+		this.setState({
+			selectedOption: e.target.value
+		});
 		this.props.handleOptionData(count);
 	}
 
@@ -17,6 +23,7 @@ class productDefAttribute extends React.Component {
 		let radioButtonHtml;
 		let isDisabled = false;
 		let radioButton = 'hideRadio';
+		let radioChecked;
 		if (isRadio) {
 			radioButton = 'showRadio';
 		}
@@ -25,7 +32,13 @@ class productDefAttribute extends React.Component {
 			//isDisabled = true;
 		}
 
-		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')}  className={`radio${count} ${radioButton}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={isChecked}/>;
+		if (this.state.selectedOption === '') {
+			radioChecked = isChecked;
+		} else  {
+			radioChecked = this.state.selectedOption === radioValue;
+		}
+
+		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')}  className={`radio${count} ${radioButton}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this, count)} checked={radioChecked}/>;
 		return radioButtonHtml;
 	}
 
@@ -108,8 +121,6 @@ class productDefAttribute extends React.Component {
 										</li>
 									);
 								})
-								
-
               }
           </ul>
         </div>

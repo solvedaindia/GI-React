@@ -137,7 +137,7 @@ class PdpComponent extends React.Component {
         });
       });
     this.props.historyData.push(
-      `/pdp/${this.props.matchParams.productId}/${resolvedSkuData.uniqueID}`,
+      `/pdp/furniture-${resolvedSkuData.productName.toLowerCase().replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
     );
   }
 
