@@ -9,6 +9,9 @@ import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import appCookie from '../../utils/cookie';
+import PinChangePopup from './pinChangeModal'
+import { Button, Modal } from 'react-bootstrap';
+import Input from '../Primitives/input'
 import {
   storeId,
   accessToken,
@@ -37,7 +40,8 @@ export class Step2Component extends React.Component {
           new_add: null,
           pin: '',
           city: '',
-          state: ''
+          state: '',
+          pinPop: false
         }
     }
 
@@ -45,9 +49,11 @@ export class Step2Component extends React.Component {
       if(this.props.isLoggedIn) {
         this.callAddressAPI()
           .then((data) => {
-            this.setState({
-              addressList: data
-            })
+            if(data.length > 0) {
+              this.setState({
+                addressList: data
+              })
+            }
           })
       }
       if(this.props.logonBy && this.props.logonBy.includes('@')) {
@@ -67,7 +73,8 @@ export class Step2Component extends React.Component {
         axios.get(addressListAPI, {
           headers: { store_id: storeId, access_token: token }
         }).then(response => {
-          resolve(response.data.data);
+          console.log(response.data.data, "address list reponse")
+          resolve(response.data.data.addressList);
         }).catch(error => {
           reject(error);
         })
@@ -90,14 +97,19 @@ export class Step2Component extends React.Component {
     }
 
     savedAddActive = () => {
+    if(this.state.addressList) {
       this.setState({
         saved_add: 'active_add',
         new_add: null
       })
+    }  
     }
 
     callPinApi = (val) => {
       let token = appCookie.get('accessToken')
+      let defPin = appCookie.get('pincode');
+      console.log(defPin, "this is defpin")
+      if(val == defPin) {
         axios.get(`${PinToCityAPI}${val}`, {
           headers: { store_id: storeId, access_token: token }
         }).then(response => {
@@ -109,6 +121,12 @@ export class Step2Component extends React.Component {
         }).catch(error => {
           throw new Error(error);
         })
+      } else {
+        console.log("in else  statement")
+        this.setState({
+          pinPop: true
+        })
+      }
     }
 
     pinChange = (e) => {
@@ -123,6 +141,12 @@ export class Step2Component extends React.Component {
           pin: e.target.value
         });
         }
+      }
+
+      cancelPinPop = () => {
+        this.setState({
+          pinPop: false
+        })
       }
 
       phoneChange = (e) => {
@@ -149,70 +173,91 @@ export class Step2Component extends React.Component {
       }
     }
 
+    renderAddressList = () => {
+      if(this.state.addressList && this.state.addressList.length > 0) {
+        var list = [];
+        this.state.addressList.forEach((add) => {
+          list.push(
+            <div className="col-md-6">
+              <div class="radio">
+                <label><input type="radio" name="optradio" checked />{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</label>
+              </div>
+            </div>
+            )
+        });
+        return <div className="row">{list}</div>;
+      }
+    }
+
     handleProceed = () => {
       this.props.proceed();
     }
 
     render() {
       return (
+          
             <div className="col-md-8 checkout_wrapper">
-             
-              <div className='listRow clearfix'> 
+              {this.state.pinPop ? <PinChangePopup cancel={this.cancelPinPop} /> :'' }
+              <div className='listRow clearfix'>
                 <div className='stepActive'>
-                  <div className='checkmark'></div>    
-                </div> 
+                  <div className='checkmark'></div>
+                </div>
 
-                  <div className="labeltext-box">
-                    <h4 className="heading-label">Mobile or Email</h4>
-                  </div>
+                <div className="labeltext-box">
+                  <h4 className="heading-label">Mobile or Email</h4>
+                </div>
 
-                  <div className="email-box">
-                    <h4 className='heading-label'>{this.props.logonBy}</h4>
-                  </div>
+                <div className="email-box">
+                  <h4 className='heading-label'>{this.props.logonBy}</h4>
+                </div>
 
-                  <div className="action-button"> 
-                      {!this.props.isLoggedIn ? 
-                        <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
-                      : '' }                    
-                  </div>
-               
+                <div className="action-button">
+                  {!this.props.isLoggedIn ?
+                  <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
+                  : '' }
+                </div>
+
               </div>
-              
-              <div className="listRow clearfix"> 
-                 <div className='stepActive'>
+
+              <div className="listRow clearfix">
+                <div className='stepActive'>
                   <div className='stepBg'>2</div>
-                 </div>           
-                  <div className="leftBox bgGrey">
-                    <div className="heading-label">Ship To</div>
-                    {this.props.isLoggedIn ? <div className='verticalTab'>
-                      <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
-                        <div>Saved Address</div>
-                      </div>
-                      <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
-                        <div>New Address</div>
-                      </div>
-                    </div> : ''}
-                  </div>
-                  <div className="rightBox">
-                    {!this.props.isLoggedIn || this.state.new_add ? <div>
+                </div>
+                <div className="leftBox bgGrey">
+                  <div className="heading-label">Ship To</div>
+                  {this.props.isLoggedIn ? <div className='verticalTab'>
+                    <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
+                      <div style={!this.state.addressList ? {color: 'grey'} : {color:'black'} }>Saved Address</div>
+                    </div>
+                    <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
+                      <div>New Address</div>
+                    </div>
+                  </div> : ''}
+                </div>
+                <div className="rightBox">
+                  {!this.props.isLoggedIn || this.state.new_add ? <div>
                     <div className="row">
-                      <div className="col-md-6 form-group">
-                        <label className="from-label" htmlFor="name">Full Name</label>
-                        <input type="text" name="name" className="form-control" />
-                      </div>
-                      <div className="col-md-6 form-group">
+                      <div className="col-md-6">
+                        <div className="form-div clearfix div-error"><Input inputType="text" title="Full Name" id="name" name="name" /></div>
+                        {/* <label className="from-label" htmlFor="name">Full Name</label>
+                        <input type="text" name="name" className="form-control" /> */}
+                      </div> 
+                      <div className="col-md-6">
                         <label className="from-label" htmlFor="phone">Phone Number</label>
-                        <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e => this.phoneChange(e)} />
+                        <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e=>
+                        this.phoneChange(e)} />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6 form-group">
                         <label className='form-label' htmlFor="pin">Pin Code</label>
-                        <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e => this.pinChange(e)} />
+                        <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e=>
+                        this.pinChange(e)} />
                       </div>
                       <div className="col-md-6 form-group">
-                        <label  className="from-label" htmlFor="email">Email</label>
-                        <input type="text" name="email" className="form-control" value={this.state.email} onChange={e => this.mailChange(e)} />
+                        <label className="from-label" htmlFor="email">Email</label>
+                        <input type="text" name="email" className="form-control" value={this.state.email} onChange={e=>
+                        this.mailChange(e)} />
                       </div>
                     </div>
                     <div className="row">
@@ -231,7 +276,7 @@ export class Step2Component extends React.Component {
                         <input type="text" name="state" className="form-control" value={this.state.state} />
                       </div>
                     </div>
-                    </div> : ''}
+                    </div> : this.renderAddressList()}
                     <div className="row">
                       <div className="col-md-12">
                         <div className='bill-address clearfix'>

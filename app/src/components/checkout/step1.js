@@ -34,6 +34,8 @@ export class Step1Component extends React.Component {
           showLoginRegisterMain: false,
           showForgotPassword: false,
           showRegister: false,
+          inputType: 'password',
+          isShowPass: false,
         }
     }
 
@@ -156,6 +158,20 @@ export class Step1Component extends React.Component {
       });
     }
 
+    showHidePass = () => {
+      if (this.state.isShowPass) {
+        this.setState({
+          isShowPass: false,
+          inputType: 'password',
+        });
+      } else {
+        this.setState({
+          isShowPass: true,
+          inputType: 'text',
+        });
+      }
+    }
+
     openModal = () => {
       this.setState({
         showRegister: true
@@ -208,9 +224,18 @@ export class Step1Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          <label className='from-label' htmlFor="mobile">Mobile Number/Email Address</label>
+                          {/* <label className='from-label' htmlFor="mobile">Mobile Number/Email Address</label>
                           <input type="text" name="userId" id="userId" value={this.state.userId} className="form-control"
-                            onChange={e => this.handleChange(e)} />
+                            onChange={e => this.handleChange(e)} /> */}
+                            <Input
+                              type="text"
+                              name="userId"
+                              title="Email ID/Mobile Number"
+                              placeholder=""
+                              onChange={e => this.handleChange(e)}
+                              value={this.state.userId}
+                              hideAnimation
+                            />
                           {errorMessageUserId}
                         </div>
                         {/* <Input
@@ -220,9 +245,27 @@ export class Step1Component extends React.Component {
                           value={this.props.logonBy ? this.props.logonBy : null}
                           onChange={this.handleChange}
                          /> */}
-                        {this.state.has_pass ?<div className='form-group'><label className='from-label' htmlFor="pass">Password</label> <input
-                            type="text" name="password" id="password" onChange={this.handleChange}
-                            className="form-control"/>{errorMessagePassword}</div> : ''}
+                        {this.state.has_pass ?<div>
+                            <div className='password-field'>
+                            <Input
+                              type={this.state.inputType}
+                              name="password"
+                              title="Password"
+                              placeholder=""
+                              onChange={this.handleChange}
+                              hideAnimation
+                            />
+                          <span
+                                onClick={this.showHidePass}
+                                className="valiationPosition-NewPassword"
+                              >
+                                {
+                                  <img
+                                    src={require('../SVGs/eye.svg')}
+                                  />
+                                }
+                              </span>
+                            </div>{errorMessagePassword}</div> : ''}
                         <div className='havePassword'>
                           <input className='checkBox' type="checkbox" name="has_pass" onChange={this.handleHasPass} />
                           <label className='form-label' htmlFor="has_pass">I have a password</label>

@@ -263,7 +263,7 @@ export class CheckoutComponent extends React.Component {
             <div className='row'>
               {this.handleStep()}
               {/* <div className="col-md-4"> */}
-                <OrderSummaryComponent />
+                <OrderSummaryComponent isLoggedIn={this.state.loggedIn} />
               {/* </div>  */}
             </div>
             </div>    
