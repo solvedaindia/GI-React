@@ -6,6 +6,7 @@ const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
 const headerutil = require('./headerutil');
 const productUtil = require('./productutil');
+const minEMI = require('./emiutil').getMinimumEmiValue;
 
 module.exports.getCompareProducts = function getCompareProducts(headers, productIDs, callback) {
 
@@ -23,14 +24,10 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                     var minemi_promises = [];
                     element.sKUs.forEach(sku => {
                         minemi_promises.push(new Promise((resolve, reject) => {
-                            var selPriceObj = sku.price.find((obj) => {
-                                return obj.description = "I"
-                            })
+                            var selPriceObj = sku.price[1];
                             if (selPriceObj.value) {
-                                console.log(selPriceObj, headers, "this is selling price object")
                                 minEMI(selPriceObj.value, headers, (err, data) => {
                                     if (err) {
-                                        sku.minimumEMI = err;
                                         resolve();
                                     } else {
                                         sku.minimumEMI = data.minEMIValue;
@@ -38,6 +35,7 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                                     }
                                 })
                             } else {
+                                console.log("no selling price object found")
                                 resolve();
                             }
                         }))
