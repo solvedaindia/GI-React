@@ -315,7 +315,7 @@ export class Step2Component extends React.Component {
                       {/* <label htmlFor="fullname">Full Name</label>
                       <input type="text" name="fullname" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="fullname" id="fullname" name="fullname"/>
+                           <Input inputType="text" title="Full Name" id="fullname" name="fullname"/>
                          </div>
                     </div>
                     <div className="col-md-6">
@@ -349,13 +349,19 @@ export class Step2Component extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6 form-group">
-                        <label htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" />
+                      <div className="col-md-6">
+                        {/* <label htmlFor="city">City/District</label>
+                        <input type="text" name="city" className="form-control" /> */}
+                        <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="City/District" name="city"/>
+                       </div>
                       </div>
-                      <div className="col-md-6 form-group">
-                        <label htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" />
+                      <div className="col-md-6">
+                        {/* <label htmlFor="state">State</label>
+                        <input type="text" name="state" className="form-control" /> */}
+                        <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="State" name="city"/>
+                       </div>
                       </div>
                     </div>
                     </div> : ''}
@@ -369,9 +375,12 @@ export class Step2Component extends React.Component {
                     </div>
 
                     <div className="row">
-                      <div className="col-md-12 form-group">
-                        <label htmlFor="gst">GSTIN (Optional)</label>
-                        <input type="text" name="gst" className="form-control" />                        
+                      <div className="col-md-12">
+                        {/* <label htmlFor="gst">GSTIN (Optional)</label>
+                        <input type="text" name="gst" className="form-control" />                         */}
+                        <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="GSTIN (Optional)" name="city"/>
+                       </div>
                       </div>
                     </div>
 

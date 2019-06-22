@@ -234,7 +234,6 @@ export class Step1Component extends React.Component {
                               placeholder=""
                               onChange={e => this.handleChange(e)}
                               value={this.state.userId}
-                              hideAnimation
                             />
                           {errorMessageUserId}
                         </div>
@@ -253,7 +252,6 @@ export class Step1Component extends React.Component {
                               title="Password"
                               placeholder=""
                               onChange={this.handleChange}
-                              hideAnimation
                             />
                           <span
                                 onClick={this.showHidePass}

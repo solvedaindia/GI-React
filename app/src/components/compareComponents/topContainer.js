@@ -27,9 +27,9 @@ function TopContainer(props) {
 
     <div className='product-desc'>
       <h4 className='product-name'>{props.product.name} </h4>
-      <p className='description-text'>(With Locker, Mirror, OHU & Drawer) (Ivory Red Finish)</p>
+      <p className='description-text'>{props.product.shortDescription}</p>
       {props.product.price[1].value ? <Price
-        actualPrice='20000'
+        actualPrice={props.product.price[0].value}
         offerPrice={props.product.price[1].value}
       /> : 0}
       <p className='emi-desc'>EMI Starting from {props.product.minimumEMI ? props.product.minimumEMI : 0}</p>

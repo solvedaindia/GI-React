@@ -7,6 +7,7 @@ const logger = require('./logger.js');
 const headerutil = require('./headerutil');
 const productUtil = require('./productutil');
 const minEMI = require('./emiutil').getMinimumEmiValue;
+const SwatchesData = require('../filters/productdetailfilter').getSwatchData
 
 module.exports.getCompareProducts = function getCompareProducts(headers, productIDs, callback) {
 
@@ -22,6 +23,7 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                 att_promises.push(new Promise((resolve, reject) => {
                     var skus = [];
                     var minemi_promises = [];
+                    var swatches = [];
                     element.sKUs.forEach(sku => {
                         minemi_promises.push(new Promise((resolve, reject) => {
                             var selPriceObj = sku.price[1];
@@ -30,6 +32,8 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                                     if (err) {
                                         resolve();
                                     } else {
+                                        var swatch = SwatchesData(sku.attributes)
+                                        swatches.push(swatch[0]);
                                         sku.minimumEMI = data.minEMIValue;
                                         resolve();
                                     }
@@ -42,7 +46,8 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                     });
 
                     Promise.all(minemi_promises).then(() => {
-                        element.attributes = getComparableAttributes(element.attributes)
+                        element.swatches = swatches;
+                        element.attributes = getComparableAttributes(element.attributes);
                         data.push(element);
                         resolve();
                     }).catch((err) => {

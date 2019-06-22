@@ -12,7 +12,7 @@ class CompPrd extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-
+        payment: true
       }
     }
     renderProducts = () => {
@@ -75,14 +75,25 @@ class CompPrd extends React.Component {
 
     renderPayment = () => {
       var payments = [];
+      var emis = [];
       this.props.data.map(elem => {
-        payments.push(
-          <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
-            <h4>COD available</h4>
-          </Col>
-        )
+        if(elem.minimumEMI) {
+          emis.push(elem.minimumEMI);
+          payments.push(
+            <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
+              <h4>EMI available</h4>
+            </Col>
+          )
+        }
       });
-      return payments;
+      if(emis.length > 0) {
+        return payments;
+      } else {
+        this.setState({
+          payment: false
+        });
+        return '';
+      }
     }
 
     renderSpecs = () => {
@@ -141,10 +152,10 @@ class CompPrd extends React.Component {
           <Row><h2 className="title-text">Specifications</h2></Row>
           {this.renderSpecs()}
           
-          <Row>
+          {this.state.payment ? <Row>
             <h2 className="title-text">Payment</h2>
             {this.renderPayment()}
-          </Row>
+          </Row> : ''}
         </div>
       );
     }
