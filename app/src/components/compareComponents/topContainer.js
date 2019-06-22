@@ -28,11 +28,11 @@ function TopContainer(props) {
     <div className='product-desc'>
       <h4 className='product-name'>{props.product.name} </h4>
       <p className='description-text'>(With Locker, Mirror, OHU & Drawer) (Ivory Red Finish)</p>
-      <Price
+      {props.product.price[1].value ? <Price
         actualPrice='20000'
         offerPrice={props.product.price[1].value}
-      />
-      <p className='emi-desc'>EMI Starting from 399</p>
+      /> : 0}
+      <p className='emi-desc'>EMI Starting from {props.product.minimumEMI ? props.product.minimumEMI : 0}</p>
     </div> 
 
     <div className='remove-box'>
