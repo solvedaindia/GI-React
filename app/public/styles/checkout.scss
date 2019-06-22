@@ -46,10 +46,13 @@ div[disabled=disabled] {
     .checkout_wrapper{
         .bgGrey{
             background: $borderLight;
-            min-height: 292px;
+            
         }
         .inactive{
             opacity: 0.5;
+        }
+        .bgfull{
+            display: flex;
         }
         .listRow{
             border-bottom:1px solid $greyLightborder;
@@ -263,12 +266,30 @@ div[disabled=disabled] {
                   color:$black;
                 }
             }
-            .from-label{
-                color: $battleshipGrey;
+            .form-group{
+                position: relative;
+                padding: 17px 0 0 0;
+                .form-control{
+                    border:1px solid $lightGrey;
+                    margin: 5px 0 20px 0;
+                    &:focus{
+                        border: 1px solid $black !important;
+                        box-shadow: none !important;
+                    }
+                    &:focus ~ {          
+                        .form-label{
+                         color:$cerulean !important;
+                      }
+                    }
+                }
+                .form-label{
+                    color: $battleshipGrey;
+                    position: absolute;
+                    top: 0;
+                }
             }
-            .form-control{
-                border:1px solid $lightGrey;
-            }
+            
+           
 
             .bill-address{                
                 padding:9px 0 20px 0;

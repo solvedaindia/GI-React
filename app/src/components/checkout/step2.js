@@ -219,7 +219,7 @@ export class Step2Component extends React.Component {
 
               </div>
 
-              <div className="listRow clearfix">
+              <div className="listRow bgfull clearfix">
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
@@ -238,42 +238,63 @@ export class Step2Component extends React.Component {
                   {!this.props.isLoggedIn || this.state.new_add ? <div>
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-div clearfix div-error"><Input inputType="text" title="Full Name" id="name" name="name" /></div>
+                        <div className="form-div clearfix div-error">
+                          <Input inputType="text" title="Full Name" id="name" name="name" />                        
+                        </div>
                         {/* <label className="from-label" htmlFor="name">Full Name</label>
                         <input type="text" name="name" className="form-control" /> */}
                       </div> 
                       <div className="col-md-6">
-                        <label className="from-label" htmlFor="phone">Phone Number</label>
+                        {/* <label className="from-label" htmlFor="phone">Phone Number</label>
                         <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e=>
-                        this.phoneChange(e)} />
+                        this.phoneChange(e)} /> */}
+
+                        <div className="form-div clearfix div-error">
+                          <Input inputType="text" title="Phone Number"  name="phone" value={this.state.phone} onChange={e=> this.phoneChange(e)} />
+                        </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6 form-group">
-                        <label className='form-label' htmlFor="pin">Pin Code</label>
+                      <div className="col-md-6">
+                        {/* <label className='form-label' htmlFor="pin">Pin Code</label>
                         <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e=>
-                        this.pinChange(e)} />
+                        this.pinChange(e)} /> */}
+                        <div className="form-div clearfix div-error">
+                          <Input inputType="number" title="Pin Code" name="pin" value={this.state.pin} onChange={e=> this.pinChange(e)}/>
+                        </div>
                       </div>
-                      <div className="col-md-6 form-group">
-                        <label className="from-label" htmlFor="email">Email</label>
+                      <div className="col-md-6">
+                        {/* <label className="from-label" htmlFor="email">Email</label>
                         <input type="text" name="email" className="form-control" value={this.state.email} onChange={e=>
-                        this.mailChange(e)} />
+                        this.mailChange(e)} /> */}
+                        <div className="form-div clearfix div-error">
+                          <Input inputType="text" title="Email" id="email" name="Email" value={this.state.email} onChange={e=> this.mailChange(e)} />    
+                        </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-12 form-group">
-                        <label className="from-label" htmlFor="address">Address</label>
-                        <textarea type="text" name="address" className="form-control" />
+                      <div className="col-md-12">
+                        {/* <label className="from-label" htmlFor="address">Address</label>
+                        <textarea type="text" name="address" className="form-control" /> */}
+                         <div className="form-div clearfix div-error">
+                            <Input inputType="text" title="Address" id="address" name="address" />
+                         </div>
                         </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6 form-group">
-                        <label  className="from-label" htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" value={this.state.city} />
+                      <div className="col-md-6">
+                        {/* <label  className="from-label" htmlFor="city">City/District</label>
+                        <input type="text" name="city" className="form-control" value={this.state.city} /> */}
+                         <div className="form-div clearfix div-error">
+                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.city} />
+                         </div>
                       </div>
-                      <div className="col-md-6 form-group">
-                        <label  className="from-label" htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" value={this.state.state} />
+                      <div className="col-md-6">
+                        {/* <label  className="from-label" htmlFor="state">State</label>
+                        <input type="text" name="state" className="form-control" value={this.state.state} /> */}
+                         <div className="form-div clearfix div-error">
+                           <Input inputType="text" title="State" id="state" name="state" value={this.state.state} />
+                         </div>
                       </div>
                     </div>
                     </div> : this.renderAddressList()}
@@ -290,27 +311,39 @@ export class Step2Component extends React.Component {
                       <div className="col-md-12"><h4>Enter a billing address</h4></div>
                     </div>
                     <div className="row">
-                    <div className="col-md-6 form-group">
-                      <label htmlFor="fullname">Full Name</label>
-                      <input type="text" name="fullname" className="form-control" />
+                    <div className="col-md-6">
+                      {/* <label htmlFor="fullname">Full Name</label>
+                      <input type="text" name="fullname" className="form-control" /> */}
+                        <div className="form-div clearfix div-error">
+                           <Input inputType="text" title="fullname" id="fullname" name="fullname"/>
+                         </div>
                     </div>
-                    <div className="col-md-6 form-group">
-                      <label htmlFor="phone">Phone Number</label>
-                      <input type="text" name="phone" className="form-control" />
-                    </div>
-                    </div>
-                    <div className="row">
-                    <div className="col-md-6 form-group">
-                      <label htmlFor="pin">Pin Code</label>
-                      <input type="text" name="pin" className="form-control" />
-                    </div>
-                    <div className="col-md-6 form-group">
-                      <label htmlFor="email">Email</label>
-                      <input type="text" name="email" className="form-control" />
+                    <div className="col-md-6">
+                      {/* <label htmlFor="phone">Phone Number</label>
+                      <input type="text" name="phone" className="form-control" /> */}
+                       <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="Phone Number" id="phone" name="phone"/>
+                       </div>
                     </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-12 form-group">
+                    <div className="col-md-6">
+                      {/* <label htmlFor="pin">Pin Code</label>
+                      <input type="text" name="pin" className="form-control" /> */}
+                       <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="Pin Code" id="pin" name="pincode"/>
+                       </div>
+                    </div>
+                    <div className="col-md-6">
+                      {/* <label htmlFor="email">Email</label>
+                      <input type="text" name="email" className="form-control" /> */}
+                      <div className="form-div clearfix div-error">
+                         <Input inputType="text" title="Email" id="email" name="email"/>
+                       </div>
+                    </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-12">
                         <label htmlFor="address">Address</label>
                         <textarea type="text" name="address" className="form-control" />
                         </div>

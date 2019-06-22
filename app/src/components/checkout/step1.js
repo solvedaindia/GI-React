@@ -210,7 +210,7 @@ export class Step1Component extends React.Component {
       }
       return (
             <div className="col-md-8 checkout_wrapper"> 
-               <div className='listRow clearfix'>
+               <div className='listRow bgfull clearfix'>
                  <div className='stepActive'>
                   <div className='stepBg'>1</div>
                  </div>
