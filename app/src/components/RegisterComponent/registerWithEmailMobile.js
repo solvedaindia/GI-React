@@ -34,6 +34,7 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
+      isActive: 'hideData'
 	};
 	this.callbackFunc = this.callbackFunc.bind(this);
   }
@@ -51,7 +52,13 @@ class RegisterWithEmailMobile extends React.Component {
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass});
   };
 
   /* Handle Validation */
@@ -278,6 +285,7 @@ class RegisterWithEmailMobile extends React.Component {
                         <input
                           type={this.state.inputType}
                           name="password"
+                          id="password"
                           className="form-control"
                           placeholder="Please Enter Your Password"
                           onChange={this.handleChange}
@@ -285,7 +293,7 @@ class RegisterWithEmailMobile extends React.Component {
                         />
                         <span
                           onClick={this.showHidePass.bind(this)}
-                          className="valiationPosition-NewPassword"
+                          className={`valiationPosition-NewPassword ${this.state.isActive}`}
                         >
                           {
                             <img

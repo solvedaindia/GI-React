@@ -6,15 +6,21 @@ import Price from './price';
 class productInfo extends React.Component {
   constructor() {
     super();
+    this.state = {
+      isActive: 'dataNotActive'
+    }
   }
 
   toggleOffers() {
-    const offers = document.getElementById('offers');
-    if (offers.style.display === 'none') {
-      offers.style.display = 'block';
+	let activeClass;
+    if (this.state.isActive === 'dataNotActive') {
+		activeClass = 'dataActive';
     } else {
-      offers.style.display = 'none';
-    }
+		activeClass = 'dataNotActive';
+	}
+    this.setState({
+      isActive: activeClass
+    })
   }
 
   render() {
@@ -42,7 +48,7 @@ class productInfo extends React.Component {
             View Offer
           </a>
         </div>
-        <div id="offers">
+        <div id="offers" className={this.state.isActive}>
           <ul className="cashoffer-wrapper">
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>

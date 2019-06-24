@@ -136,6 +136,7 @@ class PdpComponent extends React.Component {
           pincodeData: defaultPincodeData,
         });
       });
+
     this.props.historyData.push(
       `/pdp/furniture-${resolvedSkuData.productName.toLowerCase().replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
     );
@@ -147,7 +148,7 @@ class PdpComponent extends React.Component {
       window.scrollTo(0, 0);
     }
   }
-
+ 
   render() {
     const { isLoading } = this.state;
     const wishlistArr = getOnlyWishlistUniqueIds();
@@ -160,7 +161,7 @@ class PdpComponent extends React.Component {
               <Row>
                 <Col md={7} sm={12} xs={12}>
                   <div className="product">
-                    <span className="text">Product ID:</span>
+                    <span className="text">Product ID: </span>
                     <span className="text">
                       {this.state.skuData.partNumber}
                     </span>

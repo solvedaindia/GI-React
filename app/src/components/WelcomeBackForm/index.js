@@ -35,7 +35,6 @@ class WelcomeForm extends Component {
     let isValidate = errorType;
     const input = String(obj.userId);
     const firstChar = Number(input.charAt(0));
-
     this.setState({
       errorMessageUserId: null,
       errorMessagePassword: null,
@@ -88,7 +87,7 @@ class WelcomeForm extends Component {
 
   callbackFunc(res) {
     this.setState({
-      errorMessageUserId: res,
+      errorMessagePassword: res,
     });
     isValidate = false;
   }
