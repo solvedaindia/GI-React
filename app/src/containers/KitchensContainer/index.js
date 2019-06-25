@@ -4,7 +4,7 @@ import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
-import KitchenHall from '../../components/KitchensComp/KitchenHall';
+import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 
@@ -83,7 +83,7 @@ index: 0
                        <p4 className="This-project-require">This project required a huge amount of hours but  sit amet, consectetur adipisicing elit, sed do <br/>eiusmod tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p4>
    
            </div>
-          </div>
+          </div>sahir.engg@gmail.com
           <AlwaysRemember />
           <KitchenHall />
           <div className="container">

@@ -4,7 +4,7 @@ import MediaPress from '../../components/aboutUs/mediaPress';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
-import  '../../../public/styles/about-us/AboutUs.scss'
+import  '../../../public/styles/about-us/aboutUs.scss'
 
 
 export class AboutUs extends React.Component {
