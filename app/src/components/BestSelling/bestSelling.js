@@ -8,6 +8,7 @@ import {
 
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
+import { resendOtp } from '../RegisterComponent/constants';
 
 class BestSeller extends React.Component {
   state = {
@@ -21,12 +22,11 @@ class BestSeller extends React.Component {
     apiManager
       .get(bestSellerAPI)
       .then(response => {
+        const {data} = response || {}
         this.setState({
-          bestSellerData: response.data.data.productList,
-          title: response.data.data.productList,
+          bestSellerData: data && data.data.productList,
           isLoading: false,
         });
-        console.log('BestSellerData#########', response.data.data);
       })
       .catch(error => {
         this.setState({

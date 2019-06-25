@@ -18,24 +18,23 @@ class ReadMore extends React.Component {
     };
   }
 
-  getReadMoreData() {
+  	getReadMoreData() {
     apiManager
-      .get(`${espotAPI}GI_Homepage_About_Godrej`)
-      .then(response => {
-        this.setState({
-          readableData: response.data.data,
-          isLoading: false,
-        });
-        console.log('#####Read More Data######', response.data.data);
-      })
-      .catch(error => {
-        this.setState({
-          error,
-          isLoading: false,
-        });
-        console.log('@@@@@Espot Data Error');
-      });
-  }
+      	.get(`${espotAPI}GI_Homepage_About_Godrej`)
+		.then(response => {
+			const {data} = response || {};
+			this.setState({
+				readableData: data && data.data,
+			});
+		})
+		.catch(error => {
+			this.setState({
+			error,
+			isLoading: false,
+			});
+			console.log('@@@@@Espot Data Error', error);
+		});
+  	}
 
   componentDidMount() {
     this.getReadMoreData();
