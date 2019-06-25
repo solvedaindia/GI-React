@@ -43,8 +43,8 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import EmptyCart from '../../components/Cart/emptyCart';
-import CartItem from '../../components/Cart/cartItem';
+import CartDetail from '../CartContainer/cartContainer';
+// import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -172,7 +172,7 @@ export default class App extends React.Component {
           <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
-          <Route path="/cart" component={CartItem} />
+          <Route path="/cart" component={CartDetail} />
         </Switch>
         <FooterContainer />
       </div>

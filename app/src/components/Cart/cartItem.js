@@ -2,6 +2,7 @@ import React from 'React';
 import { cartDetailAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import EmptyCart from './emptyCart';
+import Pincode from './pincode';
 import '../../../public/styles/cart/cartItem.scss';
 
 class CartItem extends React.Component {
@@ -38,9 +39,7 @@ class CartItem extends React.Component {
         return (
             !!cartData && !!cartData.cartItems.length
             ? 
-            <section className='cartDetails'>
-                <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
-                </h2>
+            <section className='cartItem'>
                 
             </section> 
             : <EmptyCart />

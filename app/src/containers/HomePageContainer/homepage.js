@@ -38,9 +38,10 @@ export class HomapegeLayout extends React.Component {
     apiManager
       .get(homePageLayoutAPI)
       .then(response => {
+		const {data} = response || {};
         this.setState({
-          homepageLayout: response.data.data,
-          isLoading: false,
+			homepageLayout: data && data.data,
+			isLoading: false,
         });
         console.log('HomepageData Layout', response.data.data);
       })
@@ -60,14 +61,14 @@ export class HomapegeLayout extends React.Component {
   render() {
     const { homepageLayout } = this.state;
     return (
-      !!homepageLayout &&
-      homepageLayout.map((widget, i) => (
-        <WidgetList
-          {...widget}
-          key={`${widget.title}_widget_${i}`}
-          index={`${widget.title}_widget_${i}`}
-        />
-      ))
+		!!homepageLayout &&
+		homepageLayout.map((widget, i) => (
+			<WidgetList
+				{...widget}
+				key={`${widget.title}_widget_${i}`}
+				index={`${widget.title}_widget_${i}`}
+			/>
+		))
     );
   }
 }

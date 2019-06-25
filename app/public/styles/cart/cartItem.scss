@@ -2,4 +2,118 @@
 
 .cartDetails {
     @include container-width;
+    margin: $base*6.5 auto;
+    .cartItem {
+        width: 64%;
+        display: inline-block;
+        margin-right: 2%;
+    }
+    .cartHeadDetails {
+        margin: 1% 0;
+        padding: 1% 0;
+        border-bottom: 1px solid $ashGrey;
+        .title {
+            text-align: left;
+            width: 76.5%;
+            display: inline-block;
+            margin: 0;
+            font-family: $font-bold;
+        }
+        .cartCount {
+            font-size: $base*3;
+            color: $battleshipGrey;
+            margin-left: $base*3; 
+        }
+    }
+    .cartItem {
+        .prodList {
+            min-height: 195px;
+            height: auto;
+            border: 1px solid $borderLight;
+            border-bottom: none;
+            position: relative;
+            &:last-child {
+                border-bottom: 1px solid $borderLight;
+            }
+            .prodImg {
+                width: 29%;
+                min-height: 195px;
+                display: inline-block;
+                border-right: 1px solid $borderLight;
+            }
+            .prodDetails {
+                width: 71%;
+                display: inline-block;
+                vertical-align: top;
+                padding: 0 $base*1.5;
+                .prodTitle {
+                    font-size: $base*2;
+                    margin: $base*1.5 0 0;
+                }
+                .subTitle {
+                    color: $greyLight;
+                    font-size: $base*1.37;
+                    margin-bottom: $base*1.5;
+                }
+                .qytLabel {
+                    display: block;
+                    font-size: $base*1.25;
+                    color: $greyLight;
+                    font-family: $font-regular;
+                }
+                .qytList {
+                    width: 67px;
+                }
+                .dlvBy {
+                    margin: $base*2.25;
+                    font-size: $base*1.25;
+                    color: $battleshipGrey;
+                }
+                .date {
+                    font-size: $base*1.25;
+                    color: $black;
+                }
+                .price,
+                .shipping {
+                    position: absolute;
+                    right: $base*1.5;
+                }
+                .price {
+                    color: $cerulean;
+                    font-family: $font-bold;
+                    top: $base*1.5;
+
+                }
+                .shipping {
+                    color: $battleshipGrey;
+                    font-size: $base*1.5;
+                    top: $base*3.75;
+                }
+            }
+        }
+    }
+    .orderSummary {
+        width: 31%;
+        display: inline-block;
+        vertical-align: top;
+        color: $black;
+        margin: 1% 0 0 3%;
+        padding: 1% 0;
+        .promotion {
+            .promoHead {
+                font-size: $base*2;
+                color: $battleshipGrey;
+                border-bottom: 1px solid $black; 
+                margin: $base 0; 
+                text-align: left;
+                padding-bottom: $base;
+            }
+        }
+        .title {
+            text-align: left;
+            font-size: $base*2.25;
+            font-family: $font-bold;
+            margin: $base*3.75 auto;
+        }
+    }
 }

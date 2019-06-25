@@ -36,6 +36,10 @@ export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
 /* Cart Detail API */
 export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
+/* Cart Update API*/ 
+export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
+/* Cart Item Delet API*/
+export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}api/v1/secure/cart/remove`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */
