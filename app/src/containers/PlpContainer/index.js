@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -24,7 +23,6 @@ import {
 import '../../../public/styles/plpContainer/plpContainer.scss';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
-// import ProductItem from '../../components/GlobalComponents/productItem/productItem';
 import FilterMain from '../../components/PlpComponent/Filter/filterMain';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
@@ -85,28 +83,18 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Query String Routing ------- ', this.state.searchKeyword);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
-    console.log('catIDD --- ', idStr)
     if (idStr != undefined && idStr !== categoryId) {
       categoryId = idStr;
-      // this.setState({
-      // 	filterData: [],
-      // 	plpData: [],
-      // 	isCatDetails: true,
-      // })
-      // this.fetchPLPProductsData();
     }
 
     const params = new URLSearchParams(this.props.location.search);
-    const foo = params.get('sort'); // bar
-    const filterAtt = params.get('filter'); // bar
+    const filterAtt = params.get('filter');
     var filterRoutingURL = '';
     var sortingRoutingURL = '';
     var onlyFilter = [];
     for (let p of params) {
-      console.log('Tick', decodeURI(p[1]))
       if (p[0] === 'filter') {
         // filterRoutingURL += `${p[0]}=${p[1]}&`
         filterRoutingURL += `${p[1]}&`
@@ -117,14 +105,7 @@ export class PlpContainer extends React.Component {
       }
     }
     filterRoutingURL = filterRoutingURL.replace(' ', '+')
-    console.log('URL Routing --- ', filterRoutingURL);
-    console.log('URL Sorting --- ', sortingRoutingURL);
-    console.log([...params.keys()])
-    console.log([...params.values()])
-    console.log('Browser Filters --- ', [...params.entries()])
-    console.log('Search Parma --- ', filterAtt, onlyFilter);
     const vingg = new URLSearchParams(filterAtt);
-    console.log('Search mixxxx --- ', vingg.getAll('facet'));
 
     this.setState({
       plpFilter: filterRoutingURL,
@@ -143,66 +124,11 @@ export class PlpContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('componentWillReceiveProps', nextProps.location.pathname, this.props.location.pathname);
-    // if (nextProps.location.pathname !== this.props.location.pathname) {
-    // console.log('In the locationpath');
-    // this.setState({
-    //   isFromSearch: nextProps.location.pathname,
-    //   searchKeyword: nextProps.location.search,
-    // })
-
-    //this.state.isFromSearch = nextProps.location.pathname;
-    console.log('Query String Routing Recive Props ------- ', nextProps);
-    const path = String(nextProps.location.pathname);
-    const idStr = path.split('/')[2];
-    if (idStr != undefined && idStr !== categoryId) {
-      // this.props.plpReduxStateReset();
-      // categoryId = idStr;
-      // this.setState({
-      // 	pageNumber: 1,
-      // 	filterData: [],
-      // 	plpData: [],
-      // 	isCatDetails: true,
-      // })
-      // this.fetchSubCategoryData();
-      // this.fetchPLPProductsData();
-    }
-
-    // const path = String(nextProps.location.pathname);
-    // const idStr = path.split('/')[2];
-    // if (idStr != undefined && idStr !== categoryId) {
-    // this.props.plpReduxStateReset();
-    // categoryId = idStr;
-    // this.setState({
-    // 	pageNumber: 1,
-    // 	filterData: [],
-    // 	plpData: [],
-    // 	isCatDetails: true,
-    // })
-    // this.fetchSubCategoryData();
-    // this.fetchPLPProductsData();
-    //}
-
-    // }
-    // else {
-    // 	this.props.history.push('/cat')
-    // }
 
     var params = new URLSearchParams(this.props.location.search);
     if (nextProps.sortingValue !== this.props.sortingValue) {
-      console.log('In the Sorrting');
-      var sortingAppend = params += `&sort=${nextProps.sortingValue}`
-
       var params1 = new URLSearchParams(this.props.location.search);
-      // var alreadySelectedFilter;
-      // if (params1.has('facet')) {
-      //   params1.delete('sort')
-      //   alreadySelectedFilter = params
-
-      //   console.log('alreaddddd -- ',alreadySelectedFilter);
-      // }
-
-
+      
       params1.set(`sort`, `${nextProps.sortingValue}`)
       var finalMap = params1.toString()
       this.props.history.push({ /*pathname: '/search',*/ search: finalMap })
@@ -214,29 +140,13 @@ export class PlpContainer extends React.Component {
       this.fetchPLPProductsData();
     }
     if (nextProps.updatedFilter !== this.props.updatedFilter) {
-      console.log('In the Filter');
-      console.log('Filter Changed ---- ', nextProps.updatedFilter);
-
-
-      var filterAppend = `&${encodeURI(nextProps.updatedFilter)}`
       var params2 = new URLSearchParams(this.props.location.search);
-      // if (params2.has('sort')) {
-      //   console.log('has The Sort --- ',params2.get('sort'))
-      //   // params2.set(`sort`, `${params2.get('sort')}`)
-      //   filterAppend += `&sort=${params2.get('sort')}`
-
-      //   params2.set(`sort`, `${params2.get('sort')}`)
-
-      // }
-
       if (nextProps.updatedFilter === '') {
         params2.delete('filter');
       }
       else {
         params2.set(`filter`, `${encodeURI(nextProps.updatedFilter)}`)
       }
-
-
       this.props.history.push({ /*pathname: '/search',*/ search: params2.toString()/*`${filterAppend}`*/ })
       this.setState({
         plpData: [],
@@ -251,7 +161,6 @@ export class PlpContainer extends React.Component {
 
     if (nextProps.location.pathname.includes('/search')) {
       if (nextProps.location.search !== this.props.location.search) { //If New search entered 
-        console.log('Seeeeeee', nextProps.location.search);
         this.setState({
           marketingTextBannerData: null,
           plpSubCatData: null,
@@ -268,22 +177,13 @@ export class PlpContainer extends React.Component {
         this.fetchPLPProductsData();
       }
       else {
-        console.log('Seeeee 33322222',nextProps.location.search, this.props.search);
-        // Should be on same page
-        //
-        //this.props.plpReduxStateReset();
       }
     }
     else {
       if (nextProps.location.pathname !== this.props.location.pathname) {
         const nextPath = String(nextProps.location.pathname);
         const nextIdStr = nextPath.split('/')[2];
-
-        // const thisPath = String(this.props.location.pathname);
-        // const thisIdStr = thisPath.split('/')[2];
-
-        //if (nextIdStr !== thisIdStr) {
-        console.log('mimimimi --- ', nextIdStr)
+        
         if (nextIdStr != undefined && nextIdStr !== categoryId) {
           categoryId = nextIdStr
           this.resetStateVars();
@@ -292,7 +192,6 @@ export class PlpContainer extends React.Component {
           this.fetchMarketingTextBannerData();
           this.fetchDescriptionData();
         }
-        // }
       }
     }
 
@@ -328,18 +227,10 @@ export class PlpContainer extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('PLP---- componentDidUpdate PrevProps--', prevProps + 'This Props', this.props);
-    if (prevProps.specificProperty !== this.props.specificProperty) {
-      // Do whatever you want
-    }
-  }
-
   fetchAdBannerData() {
     apiManager
       .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
       .then(response => {
-        console.log('Adbanerrrr -- ', response.data)
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
@@ -353,7 +244,6 @@ export class PlpContainer extends React.Component {
         headers: {},
       })
       .then(response => {
-        console.log('Subcat Data', response.data);
         this.setState({ plpSubCatData: response.data.data });
       })
       .catch(error => { });
@@ -372,9 +262,6 @@ export class PlpContainer extends React.Component {
 
   fetchPLPProductsData(isFromScroll) {
     this.setState({ isLoading: true }, () => {
-      /**
-       * TODO: Category ID is static from Node side.
-       */
       var urlMaking = plpAPI + categoryId;
       var searchText = null;
       if (this.state.isFromSearch.includes('/search')) {
@@ -400,8 +287,6 @@ export class PlpContainer extends React.Component {
         })
         .then(response => {
           console.log('PLP Response----', response.data);
-
-          console.log('bigbgg -- ', this.state.browserFilters);
           if (this.state.browserFilters.length !== 0) {
             this.resolveBrowserFilters(response.data.data.facetData, this.state.browserFilters);
           }
@@ -416,7 +301,6 @@ export class PlpContainer extends React.Component {
             }
             else {
               if (response.data.data.spellCheck.length !== 0) {
-                console.log('spell checkkk --- ',response.data.data.spellCheck)
                 this.setState({
                   emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
                   showBestSeller: false,
@@ -431,15 +315,12 @@ export class PlpContainer extends React.Component {
                 })
               }
             }
-
-
           }
 
           if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
             this.fetchAdBannerData();
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
-            console.log('disssss --- ',response.data.data.categoryDetails.displaySkus)
             this.setState({
               categoryDetail: response.data.data.categoryDetails,
               displaySkus: response.data.data.categoryDetails.displaySkus,
@@ -473,21 +354,14 @@ export class PlpContainer extends React.Component {
 
     var finalBrowserFilter = new Map();
     for (let i = 0; i < browserFilters.length; i++) {
-      // if (browserFilters[i][0] === 'facet') {
       var reduxFilter = []
       var name;
-      console.log('Twink --- ', browserFilters[i]);
       const facetValue = browserFilters[i]
       var splitFacet = facetValue.split(' ') //If more than 1 filter applied from the same Facet
-      console.log('misss === ', splitFacet);
       filterResponse.map((facetItem, index) => {
-        console.log('browser Filter Item -- ', facetItem)
-
         facetItem.facetValues.map((innerItem, index) => {
-          console.log('browser Filter Item innerr -- ', innerItem)
           if (splitFacet.includes(innerItem.value.replace('+', '%2B')) /*innerItem.value === facetValue*/) {
             name = facetItem.facetName
-            console.log('its Matched --- ', facetValue);
             innerItem.value = innerItem.value.replace('+', '%2B')
             reduxFilter.push(innerItem);
           }
@@ -495,22 +369,16 @@ export class PlpContainer extends React.Component {
       }) //facetItem ended
 
       finalBrowserFilter.set(name, reduxFilter);
-      // }
     }
-
-    console.log('masterrr --- ', finalBrowserFilter)
     this.props.onBrowserFilterUpdate(finalBrowserFilter)
-
   }
 
   fetchDescriptionData() {
     apiManager
       .get(`${espotAPI}GI_Plp_Description`)
       .then(response => {
-        // console.log('DescriptionsData---', response.data.data.GI_PLP_Sample_Description_Content);
         this.setState(
           { plpDescriptionData: response.data.data },
-          console.log('@@@@@Read More@@@@', response.data.data),
         );
       })
       .catch(error => {
@@ -519,7 +387,6 @@ export class PlpContainer extends React.Component {
   }
 
   onSearchNoResut(searchText, spellCheckArr) {
-    console.log('ddddd -- ', spellCheckArr);
     if (spellCheckArr) {
       if (spellCheckArr && spellCheckArr.length !== 0) {
         this.setState({
@@ -577,7 +444,6 @@ export class PlpContainer extends React.Component {
       windowHeight >= windowOffsetHeight &&
       windowHeight - 300 <= windowOffsetHeight
     ) {
-      console.log('Its the End');
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }
@@ -608,7 +474,6 @@ export class PlpContainer extends React.Component {
 
     let subCategories;
     if (plpSubCatData != null) {
-      console.log('the subc Ategor ---', plpSubCatData);
       subCategories = (
         <SubCategories subCategoryData={this.state.plpSubCatData} />
       );

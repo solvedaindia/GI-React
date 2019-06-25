@@ -41,30 +41,6 @@ class ProductItem extends React.Component {
 		};
 		this.props.addProduct(product);
 	}
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {};
-	// }
-
-	// handleClick = () => {
-	// 	const compPrd = this.props.compData.find(
-	// 		prd => prd.id == this.props.data.uniqueID,
-	// 	);
-	// 	if (compPrd) {
-	// 		alert(
-	// 			'Product alreday added in compare. Please select different prodcut',
-	// 		);
-	// 	} else {
-	// 		const product = {
-	// 			title: this.props.data.productName,
-	// 			thumbnail: this.props.data.thumbnail,
-	// 			id: this.props.data.uniqueID,
-	// 			actualPrice: this.props.data.actualPrice,
-	// 			offerPrice: this.props.data.offerPrice,
-	// 		};
-	// 		this.props.addProduct(product);
-	// 	}
-	// };
 
 	moveToCartClicked = (e) => {
 		e.preventDefault();
@@ -94,26 +70,7 @@ class ProductItem extends React.Component {
 
 	onSwatchChange(e,selectedSwatch) {
 		e.preventDefault();
-		console.log('Selected Swatch ---- ', selectedSwatch)
-
-		// var selectedItem;
-		// for (const item of this.props.skuList) {
-		// 	if (item.swatchColor === selectedSwatch) {
-		// 		console.log('ite there --- ',item.swatchColor)
-		// 		return item;
-		// 	}
-		// }
-
-		
-		// const selectedItem = this.props.skuList.map(item => {
-		// 	if (item.swatchColor === selectedSwatch) {
-		// 		console.log('ite there --- ',item.swatchColor)
-		// 		return item;
-		// 	}
-			
-		// })
 		const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
-		console.log('mmmmmakeee ---- ',selectedItem);
 		this.setState({
 			data: selectedItem
 		})
@@ -125,25 +82,18 @@ class ProductItem extends React.Component {
 		return (
 			<li className="productlist">
 				<div className="prdListData">
-					{/* <Wishlist
-					uniqueId={this.props.data.uniqueID}
-					isInWishlistPro={this.props.isInWishlist}
-				/> */}
-					{/* <div className="imgBox"> */}
 					<ItemImage
 						data={this.state.data.thumbnail}
 						uniqueId={this.state.data.uniqueID}
 						parentUniqueId={this.state.data.parentUniqueID}
 					/>
 					<InStock isInStock={this.state.data.inStock} />
-					{/* </div> */}
 					<RibbonTag data={this.state.data.ribbonText} />
 					<div className="product-text">
 						<Title
 							titlePro={this.state.data.productName}
 							descriptionPro={this.state.data.shortDescription}
 						/>
-						{/* <p className="heading-description text">(Description)</p> */}
 						<p className="price text">
 							<Price
 								actualPrice={this.state.data.actualPrice}
