@@ -43,6 +43,11 @@ function plpContainerReducer(state = initialState, action) {
           state,
         ),
       };
+    case actionTypes.BROWSERFILTER:
+      return {
+        ...state,
+        updateFilter: action.browserFilter,
+      };
     case actionTypes.ADBANNERCOUNT:
       return {
         ...state,

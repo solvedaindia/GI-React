@@ -1,4 +1,14 @@
 import React from 'react';
+//Redux Imports
+import { connect } from 'react-redux';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../../containers/PlpContainer/reducer';
+import saga from '../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../containers/PlpContainer/actions';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
+
 import { Route, NavLink, Link, withRouter } from 'react-router-dom';
 
 import apiManager from '../../utils/apiManager';
@@ -58,18 +68,27 @@ class SearchBar extends React.Component {
     const wage = document.getElementById('searchInput');
     wage.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
-        this.validate(e);
+        this.onSearchResultClick(e);
       }
     });
   }
 
-  validate(e) {
+  onSearchResultClick(e) {
+    this.props.plpReduxStateReset();
     const text = e.target.value;
     console.log('dd -- ', this.props);
     this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+    this.setState({
+      searchData: [],
+    });
   }
 
-  onSearchResultClick() {}
+  onLinkNavigation = () => {
+    this.props.plpReduxStateReset();
+    this.setState({
+      searchData: [],
+    });
+  }
 
   render() {
     const searchData = this.state.searchData;
@@ -103,17 +122,8 @@ class SearchBar extends React.Component {
                   if (index < 6) {
                     return (
                       <li className="list" key={index}>
-                        <Link
-                          className="link"
-                          to={{
-                            pathname: '/search',
-                            search: `keyword=${item.term}`,
-                          }}
-                        >
-                          <strong>
-                            {item.term.substr(0, searchItem.length)}
-                          </strong>
-                          {item.term.substr(searchItem.length)}
+                        <Link className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${item.term}`, }} >
+                          <strong> {item.term.substr(0, searchItem.length)} </strong> {item.term.substr(searchItem.length)}
                         </Link>
                       </li>
                     );
@@ -128,5 +138,34 @@ class SearchBar extends React.Component {
   }
 }
 
-export default withRouter(SearchBar);
+//export default withRouter(SearchBar);
 // export default SearchBar;
+
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+  return {
+    plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  }
+};
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+  withRouter,
+)(SearchBar);

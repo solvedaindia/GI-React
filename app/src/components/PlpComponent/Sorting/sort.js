@@ -7,7 +7,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue } from '../../../utils/utilityManager';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
 
 import { Link, Route, withRouter } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ class Sort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected: 0,
+      selected: this.props.sortingIndexPro === '' ? 0 : this.props.sortingIndexPro,
       options: [recommended, price_L_H, price_H_L, newArrival],
       title: recommended,
     };
@@ -69,22 +69,25 @@ class Sort extends React.Component {
     if (!this.state.options) {
       return;
     }
+    //console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
     return this.state.options.map((option, i) => {
+      
       return (
         <li
           onClick={evt => this.handleClick(i)}
           key={i}
-          className={"dropdownlist-item list " + (i === this.state.selected ? 'dropdownlist-itemactive' : '')}
+          className={"dropdownlist-item list " + (option === fetchReleventSortingValueByIndex(this.state.selected) ? 'dropdownlist-itemactive' : '')}
         >
-          <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}>
+          {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
             {option}
-          </Link>
+          {/* </Link> */}
         </li>
       );
     });
   }
 
   render() {
+    
     return (
       <>
         <h4 className='heading'>Sort</h4>
@@ -93,7 +96,7 @@ class Sort extends React.Component {
             onClick={() => this.toggleDropdown()}
             className="dropdowntoggle dropdownlist-item"
           >
-            {this.state.title}
+            {fetchReleventSortingValueByIndex(this.state.selected)}
             {this.state.active ? upArrow : downArrow}
           </div>
           <ul className={"dropdownlist " + (this.state.active ? 'dropdownlistactive' : '')}>{this.sortingOptions()}</ul>

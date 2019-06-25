@@ -1,5 +1,8 @@
 const sortJsonArray = require('sort-json-array');
 const imagefilter = require('./imagefilter');
+// const swatchIdentifier = 'swatchcolor';
+const swatchIdentifier = 'sc';
+const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 
 /**
  * Filter Product Details Data.
@@ -51,9 +54,6 @@ function productDetailForPLP(productDetail) {
   productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
   productDetailJson.metaDescription =
     productDetail.seo_prop_metaDescription || '';
-  // const fixedAttributes = getFixedAttributes(productDetail.attributes);
-  // productDetailJson.fixedAttributes = fixedAttributes;
-  // productDetailJson.primaryColor = getPrimaryColor(productDetail.attributes);
   return productDetailJson;
 }
 
@@ -61,8 +61,13 @@ module.exports.getSummaryPromotion = getSummaryPromotion;
 function getSummaryPromotion(promotionData) {
   let resPromotionData = '';
   if (promotionData && promotionData.length > 0) {
-    // eslint-disable-next-line prefer-destructuring
-    resPromotionData = promotionData[0].code.split('-')[0];
+    if (promotionData[0].code) {
+      // eslint-disable-next-line prefer-destructuring
+      resPromotionData = promotionData[0].code.split('-')[0];
+    } else if (promotionData[0].name) {
+      // eslint-disable-next-line prefer-destructuring
+      resPromotionData = promotionData[0].name.split('-')[0];
+    }
   }
   return resPromotionData;
 }
@@ -71,18 +76,21 @@ module.exports.getSwatchData = getSwatchData;
 function getSwatchData(productAttribueArray) {
   const swatchColor = [];
   if (productAttribueArray && productAttribueArray.length > 0) {
-    const colorFacetArray = productAttribueArray.filter(
-      eachAttribute => eachAttribute.identifier === 'fc',
-    );
-    if (colorFacetArray && colorFacetArray.length > 0) {
-      colorFacetArray[0].values.forEach(color => {
-        const tempJSON = {
-          name: color.value,
-          colorCode: color.image1,
-          identifier: color.identifier,
-        };
-        swatchColor.push(tempJSON);
-      });
+    for (let index = 0; index < productAttribueArray.length; index += 1) {
+      if (productAttribueArray[index].identifier === swatchIdentifier) {
+        productAttribueArray[index].values.forEach(color => {
+          const tempJSON = {
+            name: color.value,
+          };
+          if (rbgRegex.test(color.image1)) {
+            tempJSON.colorCode = color.image1;
+          } else {
+            tempJSON.facetImage = imagefilter.getImagePath(color.image1path);
+          }
+          swatchColor.push(tempJSON);
+        });
+        break;
+      }
     }
   }
   return swatchColor;
@@ -102,6 +110,22 @@ function getProductAttributes(attributes) {
     }
   });
   return productAttribute;
+}
+
+module.exports.getFixedAttribute = getFixedAttributes;
+function getFixedAttributes(productAttribute) {
+  const fixedAttribute = {};
+  if (productAttribute && productAttribute.length > 0) {
+    productAttribute.forEach(attribute => {
+      if (
+        attribute.usage === 'Defining' &&
+        attribute.identifier !== swatchIdentifier
+      ) {
+        fixedAttribute[attribute.identifier] = attribute.values[0].value;
+      }
+    });
+  }
+  return fixedAttribute;
 }
 
 /**
@@ -130,8 +154,8 @@ const associatedPromo = [
 module.exports.productDataSummary = productDataForPDP;
 function productDataForPDP(bodyData) {
   const productDataSummary = {};
-  if (bodyData.length > 0 && bodyData[0].catalogEntryView.length > 0) {
-    const productData = bodyData[0].catalogEntryView[0];
+  if (bodyData.catalogEntryView.length > 0) {
+    const productData = bodyData.catalogEntryView[0];
     productDataSummary.uniqueID = productData.uniqueID || '';
     productDataSummary.type = 'product';
     const attributes = getAttributes(productData);
@@ -223,8 +247,7 @@ function getDefAttributes(attributes) {
         const attributeValueJSON = {};
         attributeValueJSON.name = attributeValue.value;
         if (match !== null) {
-          attributeValueJSON.colorCode =
-            imagefilter.getImagePath(attributeValue.image1) || '';
+          attributeValueJSON.colorCode = attributeValue.image1 || '';
         } else {
           attributeValueJSON.facetImage =
             imagefilter.getImagePath(attributeValue.image1path) || '';

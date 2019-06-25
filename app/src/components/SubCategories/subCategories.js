@@ -1,5 +1,16 @@
 import React from 'react';
-import { Route, NavLink, Link } from 'react-router-dom';
+//Redux Imports
+import { connect } from 'react-redux';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../../containers/PlpContainer/reducer';
+import saga from '../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../containers/PlpContainer/actions';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
+
+
+import { Route, NavLink, Link, withRouter } from 'react-router-dom';
 import { imagePrefix } from '../../../public/constants/constants';
 class SubCategoriesArray extends React.Component {
   constructor(props) {
@@ -32,6 +43,10 @@ class SubCategoriesArray extends React.Component {
     this.compLeft = { left: -1 * rect.left };
   }
 
+  onLinkNavigation = () => {
+    this.props.plpReduxStateReset();
+  }
+
   render() {
     const { subCatImg } = this.state;
     const catClass =
@@ -41,7 +56,7 @@ class SubCategoriesArray extends React.Component {
         {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
           <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
         </div>}
-          
+
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
             //const routePath = `/furniture-${subCategoryData.categoryName.split(' ').join('-')}/catId=${subCategoryData.uniqueID}`;
@@ -50,17 +65,8 @@ class SubCategoriesArray extends React.Component {
               routePath = `/clp/${subCategoryData.uniqueID}`;
             }
             else {
-              routePath = `/furniture-${subCategoryData.categoryName.split(' ').join('-')}/catId=${subCategoryData.uniqueID}`;
+              routePath = `/furniture-${subCategoryData.categoryName.split(' ').join('-')}/${subCategoryData.uniqueID}`;
             }
-            // if (subCategoryData.categoryName === 'Tables') {
-            //     routePath = '/plp/12540';
-            // }
-            // else if (subCategoryData.categoryName === 'Sofas') {
-            //     routePath = '/plp/13502';
-            // }
-            // else {
-            //     routePath = '/plp/13506';
-            // }
             return (
               <li
                 className="subCatList"
@@ -68,17 +74,8 @@ class SubCategoriesArray extends React.Component {
                 onMouseOver={this.handleMouseOver.bind(this, subCategoryData)}
                 onMouseOut={this.handleMouseOut.bind(this)}
               >
-                <Link
-                  to={{
-                    pathname: routePath,
-                    state: { categoryId: subCategoryData.uniqueID },
-                  }}
-                  className="links"
-                >
-                  {/* <Link to={routePath} className='links'> */}
-                  {/* <a href={subCategoryData.onClickUrl}> */}
+                <Link to={{ pathname: routePath, state: { categoryId: subCategoryData.uniqueID }, }} className="links" onClick={this.onLinkNavigation} >
                   {subCategoryData.categoryName}
-                  {/* </a> */}
                 </Link>
               </li>
             );
@@ -89,4 +86,34 @@ class SubCategoriesArray extends React.Component {
   }
 }
 
-export default SubCategoriesArray;
+//export default SubCategoriesArray;
+
+
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+  return {
+    plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  }
+};
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+  withRouter,
+)(SubCategoriesArray);

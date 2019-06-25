@@ -79,7 +79,7 @@ function getOrderSummary(cartData) {
       parseFloat(cartData.totalShippingTax),
     netAmount: parseFloat(cartData.grandTotal),
   };
-  orderSummary.saving = orderSummary.totalAmount - orderSummary.netAmount;
+
   if (cartData.adjustment && cartData.adjustment.length > 0) {
     cartData.adjustment.forEach(adjustment => {
       if (adjustment.displayLevel === 'OrderItem') {
@@ -90,5 +90,7 @@ function getOrderSummary(cartData) {
       }
     });
   }
+  orderSummary.saving =
+    orderSummary.orderDiscount + orderSummary.productDiscount;
   return orderSummary;
 }

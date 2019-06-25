@@ -96,7 +96,7 @@ class Filter extends React.Component {
     }
     console.log('Selected --- ', filteredArr);
     var params = new URLSearchParams(this.props.location.search);
-    
+
 
     this.setState({ facetArr: filteredArr })
   }
@@ -118,8 +118,8 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    
-    console.log('Zebraa MIN --- ',this.props.location)
+
+
     var alreadyAddedFiltersArr = [];
     let filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
@@ -144,7 +144,16 @@ class Filter extends React.Component {
 
 
   onApplyBtnClick() {
-    console.log('TotalFace---', this.state.facetArr[0].value);
+    this.state.facetArr.map(item => {
+      item.value = item.value.replace('+', '%2B')
+    })
+    
+    // var ddd = this.state.facetArr[0]
+    // var facetName = ddd.value;
+    // facetName = facetName.replace('+', '%2B')
+     console.log('TotalFace---', this.state.facetArr);
+    // ddd.value = facetName
+    // console.log('TotalFacemakeee---', ddd);
     // if (this.state.facetArr.length !== 0) {
     this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
     // }
@@ -157,6 +166,7 @@ class Filter extends React.Component {
 
       var checkboxItem;
       var customSelectionBoxId;
+      console.log('Momentt --- ', alreadyAddedFiltersArr);
       if (alreadyAddedFiltersArr.includes(option.value)) {
         customSelectionBoxId = 'selected_' + this.props.dataPro.facetName + i
         checkboxItem = <input className={'inputCheck checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id={customSelectionBoxId} name="scales" />
@@ -187,11 +197,11 @@ class Filter extends React.Component {
         else {
           colorRGBClass = 'circle'
           imgUrl = `${imagePrefix}${option.facetImage}`;
-          console.log('Facet Faet ---- ',imgUrl, option)
-          customCheckItem = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
+          console.log('Facet Faet ---- ', imgUrl, option)
+          customCheckItem = <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
         }
 
-       // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
+        // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
           {customCheckItem}
         </label>
@@ -238,7 +248,7 @@ class Filter extends React.Component {
           <ul className={"dropdown_filter__list " + (this.state.active ? 'dropdown_filter__list--active' : '')}>{this.state.facetItem}
             <div className="filterbtnWrapper">
               <button onClick={() => this.onCancelBtnClick()} className='dropdown_filter__cancelBtn btn'>Cancel</button>
-              <Link to={{ search: `filter=${''}` }}><button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn btn'>Apply</button></Link>
+              <button onClick={() => this.onApplyBtnClick()} className='dropdown_filter__applyBtn btn'>Apply</button>
             </div>
           </ul>
         </div>
@@ -258,6 +268,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
+  console.log('Zebraa MIN --- ', stateObj.updateFilter)
   return {
     updatedFilter: stateObj.updateFilter
   }

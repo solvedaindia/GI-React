@@ -19,6 +19,7 @@ import PlpComponent from '../../components/PlpComponent/index';
 import {
   getReleventReduxState,
   resolveTheFilter,
+  resolveBrowserFilters,
 } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 
@@ -38,9 +39,8 @@ import {
   plpAPI,
   espotAPI,
   searchPageAPI,
-  storeId,
-  accessToken,
 } from '../../../public/constants/constants';
+import { stringify } from 'querystring';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -63,12 +63,17 @@ export class PlpContainer extends React.Component {
       isCatDetails: true,
       categoyDetails: null,
       productCount: null,
+      plpFilter: '',
+      plpSorting: '',
+      displaySkus: true,
       //Search Vars
       isFromSearch: this.props.location.pathname,
       searchKeyword: this.props.location.search,
       emptySearchItem: null,
       showBestSeller: null,
       newSearchTrigger: false,
+      //Browser Routing Vars
+      browserFilters: [],
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
@@ -83,6 +88,7 @@ export class PlpContainer extends React.Component {
     console.log('Query String Routing ------- ', this.state.searchKeyword);
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
+    console.log('catIDD --- ', idStr)
     if (idStr != undefined && idStr !== categoryId) {
       categoryId = idStr;
       // this.setState({
@@ -93,11 +99,42 @@ export class PlpContainer extends React.Component {
       // this.fetchPLPProductsData();
     }
 
+    const params = new URLSearchParams(this.props.location.search);
+    const foo = params.get('sort'); // bar
+    const filterAtt = params.get('filter'); // bar
+    var filterRoutingURL = '';
+    var sortingRoutingURL = '';
+    var onlyFilter = [];
+    for (let p of params) {
+      console.log('Tick', decodeURI(p[1]))
+      if (p[0] === 'filter') {
+        // filterRoutingURL += `${p[0]}=${p[1]}&`
+        filterRoutingURL += `${p[1]}&`
+        onlyFilter[p[1]];
+      }
+      else if (p[0] === 'sort') {
+        sortingRoutingURL = p[1];
+      }
+    }
+    filterRoutingURL = filterRoutingURL.replace(' ', '+')
+    console.log('URL Routing --- ', filterRoutingURL);
+    console.log('URL Sorting --- ', sortingRoutingURL);
+    console.log([...params.keys()])
+    console.log([...params.values()])
+    console.log('Browser Filters --- ', [...params.entries()])
+    console.log('Search Parma --- ', filterAtt, onlyFilter);
+    const vingg = new URLSearchParams(filterAtt);
+    console.log('Search mixxxx --- ', vingg.getAll('facet'));
+
+    this.setState({
+      plpFilter: filterRoutingURL,
+      plpSorting: sortingRoutingURL,
+      browserFilters: vingg.getAll('facet'),
+    })
+
+
     addEventListener('scroll', this.onscroll);
-
-
     this.fetchPLPProductsData();
-
     if (!this.state.isFromSearch.includes('/search')) {
       this.fetchSubCategoryData();
       this.fetchMarketingTextBannerData();
@@ -151,32 +188,78 @@ export class PlpContainer extends React.Component {
     // 	this.props.history.push('/cat')
     // }
 
+    var params = new URLSearchParams(this.props.location.search);
     if (nextProps.sortingValue !== this.props.sortingValue) {
       console.log('In the Sorrting');
+      var sortingAppend = params += `&sort=${nextProps.sortingValue}`
+
+      var params1 = new URLSearchParams(this.props.location.search);
+      // var alreadySelectedFilter;
+      // if (params1.has('facet')) {
+      //   params1.delete('sort')
+      //   alreadySelectedFilter = params
+
+      //   console.log('alreaddddd -- ',alreadySelectedFilter);
+      // }
+
+
+      params1.set(`sort`, `${nextProps.sortingValue}`)
+      var finalMap = params1.toString()
+      this.props.history.push({ /*pathname: '/search',*/ search: finalMap })
       this.setState({
         plpData: [],
         pageNumber: 1,
+        plpSorting: nextProps.sortingValue
       });
       this.fetchPLPProductsData();
     }
     if (nextProps.updatedFilter !== this.props.updatedFilter) {
       console.log('In the Filter');
       console.log('Filter Changed ---- ', nextProps.updatedFilter);
+
+
+      var filterAppend = `&${encodeURI(nextProps.updatedFilter)}`
+      var params2 = new URLSearchParams(this.props.location.search);
+      // if (params2.has('sort')) {
+      //   console.log('has The Sort --- ',params2.get('sort'))
+      //   // params2.set(`sort`, `${params2.get('sort')}`)
+      //   filterAppend += `&sort=${params2.get('sort')}`
+
+      //   params2.set(`sort`, `${params2.get('sort')}`)
+
+      // }
+
+      if (nextProps.updatedFilter === '') {
+        params2.delete('filter');
+      }
+      else {
+        params2.set(`filter`, `${encodeURI(nextProps.updatedFilter)}`)
+      }
+
+
+      this.props.history.push({ /*pathname: '/search',*/ search: params2.toString()/*`${filterAppend}`*/ })
       this.setState({
         plpData: [],
         filterData: [],
         pageNumber: 1,
+        plpFilter: nextProps.updatedFilter
       });
       this.fetchPLPProductsData();
     }
 
-    console.log('will Recive in the search --- ', nextProps.location.search, this.props.location.search)
+
+
     if (nextProps.location.pathname.includes('/search')) {
-      if (nextProps.location.search !== this.props.location.search) {
+      if (nextProps.location.search !== this.props.location.search) { //If New search entered 
+        console.log('Seeeeeee', nextProps.location.search);
         this.setState({
+          marketingTextBannerData: null,
+          plpSubCatData: null,
           plpData: [],
           filterData: [],
           pageNumber: 1,
+          plpDescriptionData: null,
+          categoryDetail: true,
           isFromSearch: nextProps.location.pathname,
           searchKeyword: nextProps.location.search,
           showBestSeller: false,
@@ -184,9 +267,65 @@ export class PlpContainer extends React.Component {
         });
         this.fetchPLPProductsData();
       }
+      else {
+        console.log('Seeeee 33322222',nextProps.location.search, this.props.search);
+        // Should be on same page
+        //
+        //this.props.plpReduxStateReset();
+      }
+    }
+    else {
+      if (nextProps.location.pathname !== this.props.location.pathname) {
+        const nextPath = String(nextProps.location.pathname);
+        const nextIdStr = nextPath.split('/')[2];
 
+        // const thisPath = String(this.props.location.pathname);
+        // const thisIdStr = thisPath.split('/')[2];
+
+        //if (nextIdStr !== thisIdStr) {
+        console.log('mimimimi --- ', nextIdStr)
+        if (nextIdStr != undefined && nextIdStr !== categoryId) {
+          categoryId = nextIdStr
+          this.resetStateVars();
+          this.fetchPLPProductsData();
+          this.fetchSubCategoryData();
+          this.fetchMarketingTextBannerData();
+          this.fetchDescriptionData();
+        }
+        // }
+      }
     }
 
+  }
+
+  resetStateVars() {
+    // this.props.plpReduxStateReset();
+    this.setState({
+      plpSubCatData: null,
+      marketingTextBannerData: null,
+      plpDescriptionData: null,
+      plpData: [],
+      adBannerData: [],
+      error: false,
+      hasMore: true,
+      isLoading: false,
+      pageNumber: 1,
+      pageSize: 18,
+      categoryDetail: true,
+      sortValue: this.props.sortingValue,
+      filterData: [],
+      isCatDetails: true,
+      categoyDetails: null,
+      productCount: null,
+      plpFilter: '',
+      plpSorting: '',
+      isFromSearch: '',
+      searchKeyword: '',
+      emptySearchItem: null,
+      showBestSeller: null,
+      newSearchTrigger: false,
+      browserFilters: [],
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -231,7 +370,7 @@ export class PlpContainer extends React.Component {
       .catch(error => { });
   }
 
-  fetchPLPProductsData() {
+  fetchPLPProductsData(isFromScroll) {
     this.setState({ isLoading: true }, () => {
       /**
        * TODO: Category ID is static from Node side.
@@ -249,17 +388,23 @@ export class PlpContainer extends React.Component {
         `${urlMaking}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
-        `orderby=${this.props.sortingValue}&${this.props.updatedFilter}`;
+        `orderby=${this.state.plpSorting}&${this.state.plpFilter}`;
       console.log('PLPURL---', plpURL);
 
       apiManager
         .get(plpURL, {
           headers: {
             cat_details: this.state.isCatDetails,
+            sku_display: String(this.state.displaySkus)
           },
         })
         .then(response => {
           console.log('PLP Response----', response.data);
+
+          console.log('bigbgg -- ', this.state.browserFilters);
+          if (this.state.browserFilters.length !== 0) {
+            this.resolveBrowserFilters(response.data.data.facetData, this.state.browserFilters);
+          }
 
           if (this.state.isFromSearch.includes('/search')) {
             if (this.state.newSearchTrigger && response.data.data.productList.length !== 0) {
@@ -270,7 +415,8 @@ export class PlpContainer extends React.Component {
               })
             }
             else {
-              if (response.data.data.spellCheck) {
+              if (response.data.data.spellCheck.length !== 0) {
+                console.log('spell checkkk --- ',response.data.data.spellCheck)
                 this.setState({
                   emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
                   showBestSeller: false,
@@ -293,13 +439,15 @@ export class PlpContainer extends React.Component {
             this.fetchAdBannerData();
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
+            console.log('disssss --- ',response.data.data.categoryDetails.displaySkus)
             this.setState({
               categoryDetail: response.data.data.categoryDetails,
+              displaySkus: response.data.data.categoryDetails.displaySkus,
             });
           }
 
           this.setState({
-            plpData: [...this.state.plpData, ...response.data.data.productList],
+            plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
             hasMore:
               this.state.plpData.length <
@@ -307,7 +455,10 @@ export class PlpContainer extends React.Component {
             filterData: response.data.data.facetData,
             isLoading: false,
             isCatDetails: false,
+            browserFilters: [],
           });
+
+
         })
         .catch(error => {
           this.setState({
@@ -316,6 +467,40 @@ export class PlpContainer extends React.Component {
           });
         });
     });
+  }
+
+  resolveBrowserFilters(filterResponse, browserFilters) {
+
+    var finalBrowserFilter = new Map();
+    for (let i = 0; i < browserFilters.length; i++) {
+      // if (browserFilters[i][0] === 'facet') {
+      var reduxFilter = []
+      var name;
+      console.log('Twink --- ', browserFilters[i]);
+      const facetValue = browserFilters[i]
+      var splitFacet = facetValue.split(' ') //If more than 1 filter applied from the same Facet
+      console.log('misss === ', splitFacet);
+      filterResponse.map((facetItem, index) => {
+        console.log('browser Filter Item -- ', facetItem)
+
+        facetItem.facetValues.map((innerItem, index) => {
+          console.log('browser Filter Item innerr -- ', innerItem)
+          if (splitFacet.includes(innerItem.value.replace('+', '%2B')) /*innerItem.value === facetValue*/) {
+            name = facetItem.facetName
+            console.log('its Matched --- ', facetValue);
+            innerItem.value = innerItem.value.replace('+', '%2B')
+            reduxFilter.push(innerItem);
+          }
+        }) //innerItem ended
+      }) //facetItem ended
+
+      finalBrowserFilter.set(name, reduxFilter);
+      // }
+    }
+
+    console.log('masterrr --- ', finalBrowserFilter)
+    this.props.onBrowserFilterUpdate(finalBrowserFilter)
+
   }
 
   fetchDescriptionData() {
@@ -354,7 +539,7 @@ export class PlpContainer extends React.Component {
             <div className='serchlist-button'>
               {spellCheckArr.map(item => {
                 return (
-                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button> 
+                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
                 )
               })}
             </div>
@@ -394,7 +579,7 @@ export class PlpContainer extends React.Component {
     ) {
       console.log('Its the End');
       this.setState({ pageNumber: this.state.pageNumber + 1 });
-      this.fetchPLPProductsData();
+      this.fetchPLPProductsData(true);
     }
   };
 
@@ -438,18 +623,14 @@ export class PlpContainer extends React.Component {
             adBannerDataPro={adBannerData}
             catId={this.state.categoryDetail.uniqueID}
             history={this.props.history}
+            isSearchPathPro={this.props.location.pathname}
+            showSkuPro={!this.state.isFromSearch.includes('/search') ? this.state.categoryDetail.displaySkus : true}
           />
         );
     }
 
     let filterItem;
     if (filterData.length != 0) {
-      // filterData.push(filterData[0])
-      // filterData.push(filterData[1])
-      // filterData.push(filterData[2])
-      // filterData.push(filterData[3])
-      // console.log('FilterData---', filterData);
-
       filterItem = <FilterMain filterDataPro={filterData} />;
     }
 
@@ -474,11 +655,11 @@ export class PlpContainer extends React.Component {
     const params = new URLSearchParams(this.state.searchKeyword);
     const keywoard = params.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
-      titleItem = (      
-         <div className='searchresult'>
-           <h3 className="headingTitleFlat">Resulst for <span className='headingTitleSearch'>{keywoard}</span></h3>
-         </div>
-      
+      titleItem = (
+        <div className='searchresult'>
+          <h3 className="headingTitleFlat">Results for <span className='headingTitleSearch'>{keywoard}</span></h3>
+        </div>
+
       );
     }
 
@@ -499,11 +680,11 @@ export class PlpContainer extends React.Component {
 
           <div className='noResultfound'>
             <div className='label-noresult'>
-            No results found for “{keywoard}”
+              No results found for “{keywoard}”
             </div>
           </div>
           <div className='Search-bestseller container'>
-          <BestSeller />
+            <BestSeller />
           </div>
         </div></> : null}
         {marketingBanner}
@@ -518,7 +699,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {plpData.length === 0 ? null : <Sort />}
+                  {plpData.length === 0 ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
                 </div>
               </div>
             </div>
@@ -562,6 +743,8 @@ const mapDispatchToProps = dispatch => ({
   onAdBannerIndexUpdate: adBannerData =>
     dispatch(actionCreators.adBannerDataAction(adBannerData)),
   plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
+  onBrowserFilterUpdate: (browserFilter) => dispatch(actionCreators.browserFilter(browserFilter)),
 });
 
 const withConnect = connect(

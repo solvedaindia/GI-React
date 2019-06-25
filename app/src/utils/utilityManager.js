@@ -2,6 +2,7 @@ import {
   wishlistDataCookie,
   wishlistIdCookie,
 } from '../../public/constants/constants';
+// import { utimes } from 'fs';
 
 /**
  * Function to Fetch specific data from Cookie store
@@ -61,12 +62,28 @@ export function fetchReleventSortingValue(value) {
   return 0;
 }
 
+export function fetchReleventSortingValueByIndex(index) {
+  console.log('it index --- ',index);
+  if (parseInt(index) === 3) {
+    return 'Price Low to High';
+  }
+  if (parseInt(index) === 4) {
+    return 'Price High to Low';
+  }
+  if (parseInt(index) === 5) {
+    return 'New Arrival';
+  }
+  return 'Recommended';
+}
+
+
 /**
  * Function to save the Filter map object
  * @param {*} updatedFilter
  * @param {*} facetName
  */
 export function updateFilterMap(updatedFilter, facetName, currentFilter) {
+  console.log('it it --- ',updatedFilter, facetName, currentFilter)
   const filterMap = currentFilter.updateFilter;
   if (updatedFilter.length === 0) {
     filterMap.delete(facetName);
@@ -74,6 +91,48 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
   }
   filterMap.set(facetName, updatedFilter);
   return filterMap;
+}
+
+/**
+ * Function to sort the Browsing Filters
+ * @param {*} filterResponse
+ * @param {*} facetName
+ */
+export function resolveBrowserFilters(filterResponse, browserFilters) {
+  var finalBrowserFilter = [];
+  for (let i = 0; i < browserFilters.length; i++) {
+    if (browserFilters[i][0] === 'facet') {
+      var reduxFilter = []
+
+      const facetValue = browserFilters[i][1]
+      console.log('misss === ', facetValue);
+      filterResponse.map((facetItem, index) => {
+        console.log('browser Filter Item -- ', facetItem)
+        const name = facetItem.facetName;
+
+        facetItem.facetValues.map((innerItem, index) => {
+          console.log('browser Filter Item innerr -- ', innerItem)
+          if (innerItem.value === facetValue) {
+            console.log('its Matched --- ',facetValue);
+            reduxFilter.push(innerItem);
+          }
+        }) //innerItem ended
+      }) //facetItem ended
+
+      
+    }
+  }
+
+
+
+
+
+
+
+
+  //0: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
+  //1: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
+  //Returns abaove array
 }
 
 /**
@@ -145,7 +204,7 @@ export function checkCompareWidget(compWidget, id) {
     return compWidget.filter(prd => prd.id != id);
   } else {
     const skuData = compWidget.find(prd => prd.skuId == id);
-    if(skuData) {
+    if (skuData) {
       return compWidget.filter(prd => prd.skuId != id);
     }
   }

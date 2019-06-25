@@ -58,4 +58,8 @@ module.exports = Object.freeze({
   userStatus: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
   reserveInventory: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/precheckout`,
   notifyMe: `${prodWcsResourceUrl}/{{storeId}}/GINotifyUser/saveUserAndProductDetails`,
+  ordersList: `${prodWcsResourceUrl}/{{storeId}}/order/@history`,
+  orderDetail: `${prodWcsResourceUrl}/{{storeId}}/order/{{orderId}}`,
+  checksum: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/checksum`,
+  experienceStore: `${prodWcsResourceUrl}/{{storeId}}/GIStore/findStore?pincode={{pincode}}&partNumber={{partNumber}}`,
 });
