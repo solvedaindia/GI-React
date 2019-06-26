@@ -45,6 +45,7 @@ import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/index';
 import InspirationDetails from '../InspirationDetailsContainer/index';
+import WardrobesContainer from '../wardrobesContainer/index';
 
 
 
@@ -181,6 +182,8 @@ export default class App extends React.Component {
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/lookbook" component={InspirationDetails} />
+          <Route path="/wardrobes" component={WardrobesContainer} />
+
 
         </Switch>
         <FooterContainer />

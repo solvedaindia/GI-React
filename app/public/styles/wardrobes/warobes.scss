@@ -1,0 +1,629 @@
+@import '../variable';
+@import '../base';
+
+
+.Kitchen-1 {
+    width: 1440px;
+    height: 7775px;
+    background-color: #ffffff;
+  }
+  .Rectangle {
+    width: 100%;
+    height: auto;
+    background-image: linear-gradient(276deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+  .container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .butt {
+    width: 150px;
+    height: 30px;
+    background-color: #070707;
+  }
+  .header {
+    width: 411px;
+    height: 60px;
+    font-family: CeraGodrejInterio;
+    font-size: 56px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+    color: #0f0c0c;
+  }
+  
+  .header .text-style-1 {
+    font-weight: normal;
+    color: #f9f9f9;
+  }
+  .types-kitchens {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .Types-of-Modular-Kit {
+    width: 371px;
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .Steel-Chef {
+    width: 97px;
+    height: 24px;
+    font-family: CeraGodrejInterio;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  .buttonExp {
+    width: 166px;
+    height: 46px;
+    background-color: #070707;
+  }
+  .bannerkitchen {
+    width: 1140px;
+    height: 410px;
+    background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+
+  .-easy-steps-to-your {
+    width: 497px;
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .Delivery-Installation {
+    width: 162px;
+    height: 108px;
+    object-fit: contain;
+    
+    
+  }
+  .Delivery-Installation2 {
+    width: 135px;
+    height: 144px;
+    object-fit: contain;
+    
+    
+  }
+  .Delivery-Installation3 {
+    width: 135px;
+    height: 135px;
+    object-fit: contain;
+    
+    
+  }
+  .Delivery-Installation4 {
+    width: 158px;
+    height: 104px;
+    object-fit: contain;
+    
+    
+  }
+  /*--css for stepper--*/
+  .body {
+    margin-top:40px;
+}
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+      width: 885px;
+      height: 1px;
+      border: solid 2px var(--light-blue-grey);
+    
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    // z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+/*--stepper css over--*/
+
+.Ovals{
+  width: 48px;
+  height: 48px;
+  background-color: #026dc6;
+}
+.Mask {
+  width: 799px;
+  height: 300px;
+  object-fit: contain;
+}
+.Backgrounding {
+  width: 735px;
+  height: 300px;
+  background-color: #00b5a4;
+}
+.Image-gallery {
+  width: 415px;
+  height: 98px;
+  font-family: CeraGodrejInterio;
+  font-size: 42px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.Image-gallery .text-style-1 {
+  font-weight: normal;
+}
+.What-goes-into-a-Godr {
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+/*---slideshow--*/
+react-slideshow-container {
+   display: flex;
+     align-items: center;
+}
+.react-slideshow-fade-wrapper {
+     width: 100%;
+     overflow: hidden;
+}
+.react-slideshow-wrapper.slide {
+     width: 100%;
+     overflow: hidden;
+}
+.react-slideshow-zoom-wrapper {
+     width: 100%;
+     overflow: hidden
+}
+.goesOnKitchen {
+  width: 1000px;
+  height: 563px;
+  object-fit: contain;
+}
+.Name-Copy {
+  width: 288px;
+  height: 22px;
+  font-family: CeraGodrejInterio;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.This-project-require {
+  width: 751px;
+  height: 60px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: black
+}
+.Rectangle-Copy-4 {
+  width: 540px;
+  height: 450px;
+  background-color: #2e93c2;
+  
+}
+.Image-gallery2 {
+  width: 361px;
+  height: 108px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.The-Work-Triangle {
+  width: 171px;
+  height: 28px;
+  font-family: CeraGodrejInterio;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.ParagraphSmall {
+  width: 297px;
+  height: 104px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.Blacks {
+  margin-right: 50px;
+  width: 1440px;
+  height: 600px;
+  background-color: rgb(0, 204, 255);
+}
+.Group-60 {
+  width: 653px;
+  height: 416px;
+  object-fit: contain;
+}
+.button_rect {
+  width: 124px;
+  height: 35px;
+  border-radius: 23.5px;
+  border: solid 1px var(--battleship-grey);
+  background-color: #ffffff;
+}
+.rectbut1 {
+  width: 124px;
+  height: 35px;
+  border-radius: 23.5px;
+  background-color:blue
+}
+.kitchenhallsize {
+  width: 358px;
+  height: 244px;
+  object-fit: contain;
+  text-align: center;
+
+}
+.Paragraphhall {
+  width: 555px;
+  height: 43px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color:black
+}
+.Kitchen-Hall-Of-Fame {
+  width: 297px;
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.crousdiv {
+  width: 458px;
+  height: 46px;
+  background-color: var(--ice-blue);
+}
+.Paragraph-Copy-13 {
+  width: 140px;
+  height: 22px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  color: var(--greyish-brown);
+}
+.Blacks {
+  width: 1440px;
+  height: 436px;
+  background-color: #9EE4D9
+}
+.CrousParagraph {
+  width: 900px;
+  height: 103px;
+  font-family: CeraGodrejInterio;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.crousHead {
+  width: 437px;
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.Naming {
+  height: 24px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: black;
+  text-align: center;
+  
+}
+.Fullhalf {
+  width: 1440px;
+  height: 600px;
+  background-color: rgba(20,20,20, .5);
+  opacity: 0.5;
+}
+.Group-24 {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Form-bakground{
+  width: 944px;
+  height: 600px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
+  background-color: #ffffff;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.reactang {
+  width: 1200px;
+  height: 810px;
+  margin-top: 50px;
+  margin-right: 50px;
+}
+.Book-a-consultation {
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.Answer {
+  width: 534px;
+  height: 17px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #767676;
+}
+.promises {
+  width: 1440px;
+  height: 421px;
+  background-color: rgb(33, 33, 204);
+  margin-top: 50px
+}
+.Our-Promises {
+  height: 67px;
+  font-family: CeraGodrejInterio;
+  font-size: 56px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #f9f9f9;
+}
+.frequesntly {
+  width: 1240px;
+  height: 621px;
+  background-color:#3b4c96;
+  margin-top: 50px;
+  
+  margin-left: 50px;
+}
+.Frequently-Asked-Que {
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.text-block {
+  position: absolute;
+  top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(255, 255, 255, .4);
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.bigSofa {
+  margin-top:50px;
+  width: 1140px;
+  height: 345px;
+  object-fit: contain;
+}
+.aboutgodrej {
+  margin-top: 50px;
+  width: 1440px;
+  height: 471px;
+  background-color: rgb(126, 126, 175)
+}
+.About-Godrej-Interio {
+  height: 41px;
+  font-family: CeraGodrejInterio;
+  font-size: 34px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+.Godrej-Interio-is-In {
+  width: 1140px;
+  height: 206px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: white;
+  margin-left: 40px;
+}
+.Read-More {
+  width: 81px;
+  height: 19px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+.Benefits-of-Modular {
+    width: 438px;
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .Combined-Shape {
+    width: 54px;
+    height: 74px;
+    background-color: whitesmoke
+  }
+  title {
+   
+    height: 40px;
+    font-family: CeraGodrejInterio;
+    font-size: 7px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #767676;
+  }
+  .crouselBAckground {
+    width: 1440px;
+    height: 1023px;
+    background-color: var(--ice-blue);
+  }
+  .Types-of-Modular-War {
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .Rectangleaa {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+  }

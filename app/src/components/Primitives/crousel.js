@@ -28,7 +28,7 @@ export default class Inscrousel extends Component {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 5,
+      slidesToShow: 3,
       slidesToScroll: 3
     };
     return (
