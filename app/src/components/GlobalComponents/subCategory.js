@@ -23,8 +23,9 @@ export class SubCategory extends React.Component {
     apiManager
       .get(featuredCatAPI)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          subCatData: response.data.data,
+          subCatData: data && data.data,
           isLoading: false,
         });
         console.log('Featured Category Data', response.data.data);

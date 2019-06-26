@@ -64,7 +64,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
-    this.getPincodeData();
+    // this.getPincodeData();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -100,20 +100,20 @@ export default class App extends React.Component {
     }
   }
 
-  getPincodeData() {
-    if (appCookie.get('pincode') === null) {
-      apiManager
-        .get(ipDataApi, { headers: { Accept: 'application/json' } })
-        .then(response => {
-          appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
-          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-        })
-        .catch(error => {
-          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-          console.log(`Pincode APi Error=>> ${error}`);
-        });
-    }
-  }
+  // getPincodeData() {
+  //   if (appCookie.get('pincode') === null) {
+  //     apiManager
+  //       .get(ipDataApi, { headers: { Accept: 'application/json' } })
+  //       .then(response => {
+  //         appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
+  //         console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+  //       })
+  //       .catch(error => {
+  //         appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+  //         console.log(`Pincode APi Error=>> ${error}`);
+  //       });
+  //   }
+  // }
 
   getNewsletterSubscriptionStatus() {
     apiManager
