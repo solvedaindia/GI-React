@@ -44,6 +44,8 @@ import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/index';
+import InspirationDetails from '../InspirationDetailsContainer/index';
+
 
 
 import MyAccount from '../MyAccountContainer/index';
@@ -178,6 +180,8 @@ export default class App extends React.Component {
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
+          <Route path="/lookbook" component={InspirationDetails} />
+
         </Switch>
         <FooterContainer />
       </div>
