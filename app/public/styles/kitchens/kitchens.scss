@@ -6,7 +6,7 @@
 
 .Kitchen-1 {
     width: 1440px;
-    height: 9575px;
+    height: 7775px;
     background-color: #ffffff;
   }
   .Rectangle {
@@ -199,7 +199,6 @@
   font-weight: normal;
 }
 .What-goes-into-a-Godr {
-  width: 466px;
   height: 36px;
   font-family: CeraGodrejInterio;
   font-size: 30px;
@@ -302,6 +301,7 @@ react-slideshow-container {
   color: #ffffff;
 }
 .Blacks {
+  margin-right: 50px;
   width: 1440px;
   height: 600px;
   background-color: rgb(0, 204, 255);
@@ -325,8 +325,8 @@ react-slideshow-container {
   background-color:blue
 }
 .kitchenhallsize {
-  width: 458px;
-  height: 344px;
+  width: 358px;
+  height: 244px;
   object-fit: contain;
   text-align: center;
 
@@ -406,7 +406,6 @@ react-slideshow-container {
   color: #000000;
 }
 .Naming {
-  width: 88px;
   height: 24px;
   font-family: CeraGodrejInterio;
   font-size: 16px;
@@ -446,6 +445,129 @@ react-slideshow-container {
   transform: translate(-50%, -50%);
 }
 .reactang {
-  width: 1440px;
+  width: 1200px;
   height: 810px;
+  margin-top: 50px;
+  margin-right: 50px;
+}
+.Book-a-consultation {
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.Answer {
+  width: 534px;
+  height: 17px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #767676;
+}
+.promises {
+  width: 1440px;
+  height: 421px;
+  background-color: rgb(33, 33, 204);
+  margin-top: 50px
+}
+.Our-Promises {
+  height: 67px;
+  font-family: CeraGodrejInterio;
+  font-size: 56px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #f9f9f9;
+}
+.frequesntly {
+  width: 1240px;
+  height: 621px;
+  background-color:#3b4c96;
+  margin-top: 50px;
+  
+  margin-left: 50px;
+}
+.Frequently-Asked-Que {
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.text-block {
+  position: absolute;
+  top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(255, 255, 255, .4);
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.bigSofa {
+  margin-top:50px;
+  width: 1140px;
+  height: 345px;
+  object-fit: contain;
+}
+.aboutgodrej {
+  margin-top: 50px;
+  width: 1440px;
+  height: 471px;
+  background-color: rgb(126, 126, 175)
+}
+.About-Godrej-Interio {
+  height: 41px;
+  font-family: CeraGodrejInterio;
+  font-size: 34px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+.Godrej-Interio-is-In {
+  width: 1140px;
+  height: 206px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: white;
+  margin-left: 40px;
+}
+.Read-More {
+  width: 81px;
+  height: 19px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
 }
