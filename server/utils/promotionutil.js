@@ -141,7 +141,7 @@ function getMultiplePromotions(productID, headers, callback) {
   );
 }
 
-module.exports.getPublicPromotions = getPublicPromotions;
+/* module.exports.getPublicPromotions = getPublicPromotions;
 function getPublicPromotions(productID, headers, callback) {
   if (!productID) {
     logger.debug('Get Public Promotion Data :: invalid params');
@@ -171,7 +171,7 @@ function getPublicPromotions(productID, headers, callback) {
       }
     },
   );
-}
+} */
 
 /**
  * Get PromotionID List
@@ -277,6 +277,7 @@ module.exports.getMultiplePromotionData = function getMultiplePromotionData(
     null,
     response => {
       if (response.status === 200) {
+        const multiplePromotionData = response.body;
         const promotionData = [];
         productIds.forEach(productId => {
           const promotion = {
@@ -288,7 +289,7 @@ module.exports.getMultiplePromotionData = function getMultiplePromotionData(
           }
           promotionData.push(promotion);
         });
-        callback(null, promotionData);
+        callback(null, multiplePromotionData);
       } else {
         callback(errorUtils.handleWCSError(response));
       }

@@ -103,6 +103,7 @@ class MyWishlist extends React.Component {
           <PlpComponent
             plpDataPro={this.state.wishlistData}
             isFromWishlistPro={true}
+            showSkuPro={true}
           />
         </section>
       </div>

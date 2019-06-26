@@ -23,45 +23,24 @@ class ProductItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
-		this.state = {};
+		this.onSwatchChange = this.onSwatchChange.bind(this)
+		this.state = {
+			data: this.props.dataPro
+		};
 	}
 
 	handleClick(e) {
 		e.preventDefault();
 		const product = {
-			title: this.props.data.productName,
-			thumbnail: this.props.data.thumbnail,
-			skuId: this.props.data.uniqueID,
-			id: this.props.data.parentUniqueID,
-			actualPrice: this.props.data.actualPrice,
-			offerPrice: this.props.data.offerPrice,
+			title: this.state.data.productName,
+			thumbnail: this.state.data.thumbnail,
+			skuId: this.state.data.uniqueID,
+			id: this.state.data.parentUniqueID,
+			actualPrice: this.state.data.actualPrice,
+			offerPrice: this.state.data.offerPrice,
 		};
 		this.props.addProduct(product);
 	}
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {};
-	// }
-
-	// handleClick = () => {
-	// 	const compPrd = this.props.compData.find(
-	// 		prd => prd.id == this.props.data.uniqueID,
-	// 	);
-	// 	if (compPrd) {
-	// 		alert(
-	// 			'Product alreday added in compare. Please select different prodcut',
-	// 		);
-	// 	} else {
-	// 		const product = {
-	// 			title: this.props.data.productName,
-	// 			thumbnail: this.props.data.thumbnail,
-	// 			id: this.props.data.uniqueID,
-	// 			actualPrice: this.props.data.actualPrice,
-	// 			offerPrice: this.props.data.offerPrice,
-	// 		};
-	// 		this.props.addProduct(product);
-	// 	}
-	// };
 
 	moveToCartClicked = (e) => {
 		e.preventDefault();
@@ -69,7 +48,7 @@ class ProductItem extends React.Component {
 		const data = {
 			orderItem: [
 				{
-					sku_id: this.props.data.uniqueID,
+					sku_id: this.state.data.uniqueID,
 					quantity: '1',
 				},
 			],
@@ -82,48 +61,49 @@ class ProductItem extends React.Component {
 				console.log('Add to cart Data ---- ', response.data);
 				getUpdatedMinicartCount(this);
 				// this.props.updatetMinicart();
-				removeFromWishlistGlobalAPI(this.props.data.uniqueID, this);
+				removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
 			})
 			.catch(error => {
 				console.log('AddToCart Error---', error);
 			});
 	};
 
+	onSwatchChange(e,selectedSwatch) {
+		e.preventDefault();
+		const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
+		this.setState({
+			data: selectedItem
+		})
+	}
+
 	render() {
 		console.log('isFromWishlist  ----  ', this.props);
-		var routePath = '/pdp/' + this.props.data.parentUniqueID + '/' + this.props.data.uniqueID;
+		var routePath = '/pdp/' + this.state.data.parentUniqueID + '/' + this.state.data.uniqueID;
 		return (
 			<li className="productlist">
 				<div className="prdListData">
-					{/* <Wishlist
-					uniqueId={this.props.data.uniqueID}
-					isInWishlistPro={this.props.isInWishlist}
-				/> */}
-					{/* <div className="imgBox"> */}
 					<ItemImage
-						data={this.props.data.thumbnail}
-						uniqueId={this.props.data.uniqueID}
-						parentUniqueId={this.props.data.parentUniqueID}
+						data={this.state.data.thumbnail}
+						uniqueId={this.state.data.uniqueID}
+						parentUniqueId={this.state.data.parentUniqueID}
 					/>
-					<InStock isInStock={this.props.data.inStock} />
-					{/* </div> */}
-					<RibbonTag data={this.props.data.ribbonText} />
+					<InStock isInStock={this.state.data.inStock} />
+					<RibbonTag data={this.state.data.ribbonText} />
 					<div className="product-text">
 						<Title
-							titlePro={this.props.data.productName}
-							descriptionPro={this.props.data.shortDescription}
+							titlePro={this.state.data.productName}
+							descriptionPro={this.state.data.shortDescription}
 						/>
-						{/* <p className="heading-description text">(Description)</p> */}
 						<p className="price text">
 							<Price
-								actualPrice={this.props.data.actualPrice}
-								offerPrice={this.props.data.offerPrice}
+								actualPrice={this.state.data.actualPrice}
+								offerPrice={this.state.data.offerPrice}
 							/>
 						</p>
 						<Promotions
-							promoData={this.props.data.promotionData}
-							discount={this.props.data.discount}
-							emi={this.props.data.emiData} />
+							promoData={this.state.data.promotionData}
+							discount={this.state.data.discount}
+							emi={this.state.data.emiData} />
 
 					</div>
 				</div>
@@ -132,12 +112,28 @@ class ProductItem extends React.Component {
 
 						{this.props.isfromWishlistPro ?
 							<button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>Move To Cart</button> :
-							<button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
+							this.props.isSearchPathPro.includes('/search') ? '' : <button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
+
+						{this.props.isColorSwatchPro && this.props.swatchList.length > 1  ? <div class="inner-overlay">
+							<ul class="colortheme clearfix">
+								{this.props.swatchList.map(item => {
+									var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+									return (
+										<li onClick={(e) => this.onSwatchChange(e, item.name)}  class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+											<span className='swatches-circle' style={colorStyle}></span>
+										</li>
+									)
+
+								})}
+							</ul>
+						</div> : null}
+
+
 
 					</div>
 				</Link>
 				<Wishlist
-					uniqueId={this.props.data.uniqueID}
+					uniqueId={this.state.data.uniqueID}
 					isInWishlistPro={this.props.isInWishlist}
 					isFromWishlistPro={this.props.isfromWishlistPro}
 					history={this.props.history}

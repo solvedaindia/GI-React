@@ -124,6 +124,8 @@ export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/use
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Search Page API */
+export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
 /* User Detail Validate API */
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
