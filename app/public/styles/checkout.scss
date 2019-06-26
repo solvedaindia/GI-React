@@ -4,433 +4,414 @@
 div[disabled=disabled] {
     pointer-events: none;
     opacity: 0.4;
-  }
-  :disabled {
+}
+
+ :disabled {
     pointer-events: none;
     opacity: 0.4;
-  }
-.checkout{
-    padding:56px 0 100px 0;
-    .form-control{
+}
+
+.checkout {
+    padding: 56px 0 100px 0;
+    .form-control {
         border-radius: 2px;
         box-shadow: none;
         height: 54px;
     }
-    
-    .btn-blackbg{
-        background:$black;
-        padding:12px 0;
+    .btn-blackbg {
+        background: $black;
+        padding: 12px 0;
         text-align: center;
-        color:$colorwhite;
-        border:none;
+        color: $colorwhite;
+        border: none;
     }
-    .heading{
+    .heading {
         padding: 0 0 13px 0;
         margin: 0;
         font-size: $base*3.75;
         font-weight: bold;
-        color:$black;
-        border-bottom:1px solid $greyLightborder;
+        color: $black;
+        border-bottom: 1px solid $greyLightborder;
     }
-    .summaryHeading{
-        .headingOrder{
-            font-size:$base*2.25;
-            color:$black;
+    .summaryHeading {
+        .headingOrder {
+            font-size: $base*2.25;
+            color: $black;
             padding: 0px 0 32px 0;
             font-weight: bold;
             margin: 0;
         }
     }
-    
-
-    .checkout_wrapper{
-        .bgGrey{
+    .checkout_wrapper {
+        .bgGrey {
             background: $borderLight;
-            
         }
-        .inactive{
+        .inactive {
             opacity: 0.5;
         }
-        .bgfull{
+        .bgfull {
             display: flex;
         }
-        .listRow{
-            border-bottom:1px solid $greyLightborder;
+        .listRow {
+            border-bottom: 1px solid $greyLightborder;
             position: relative;
-
-        .stepActive{
-            .stepBg{
-                position: absolute;
-                width: 34px;
-                height: 34px;
-                background: $black;
-                padding: 5px;
-                border-radius: 50%;
-                color: $colorwhite;
-                text-align: center;
-                left: -34px;
-                top: 22px;
-                font-size: $base*2;
-            }
-
-            .stepbgNone{
-                position: absolute;
-                width: 34px;
-                height: 34px;
-                background: transparent;
-                padding: 5px;
-                border-radius: 50%;
-                color: $lightblueGrey;
-                text-align: center;
-                left: -34px;
-                top: 22px;
-                font-size: $base*2;
-            }
-
-            .checkmark{
-                position: absolute;
-                width: 34px;
-                height: 34px;               
-                padding: 5px;                
-                color: $colorwhite;
-                text-align: center;
-                left: -34px;
-                top: 22px;
-                font-size: $base*2;
-
-                &:after{
-                content: '';
-                display: block;
-                width: 7px;
-                height: 16px;
-                border: solid $black;
-                border-width: 0 1px 1px 0;
-                transform: rotate(45deg);
-                position: absolute;
-                left: 13px;
-                top: 10px;
+            .stepActive {
+                .stepBg {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    background: $black;
+                    padding: 5px;
+                    border-radius: 50%;
+                    color: $colorwhite;
+                    text-align: center;
+                    left: -34px;
+                    top: 22px;
+                    font-size: $base*2;
+                }
+                .stepbgNone {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    background: transparent;
+                    padding: 5px;
+                    border-radius: 50%;
+                    color: $lightblueGrey;
+                    text-align: center;
+                    left: -34px;
+                    top: 22px;
+                    font-size: $base*2;
+                }
+                .checkmark {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    padding: 5px;
+                    color: $colorwhite;
+                    text-align: center;
+                    left: -34px;
+                    top: 22px;
+                    font-size: $base*2;
+                    &:after {
+                        content: '';
+                        display: block;
+                        width: 7px;
+                        height: 16px;
+                        border: solid $black;
+                        border-width: 0 1px 1px 0;
+                        transform: rotate(45deg);
+                        position: absolute;
+                        left: 13px;
+                        top: 10px;
+                    }
                 }
             }
-           
-        }
-       
-
-            .labeltext-box{
-                width:30%;
+            .labeltext-box {
+                width: 30%;
                 float: left;
-                .heading-label{
+                .heading-label {
                     font-size: $base*2.25;
-                    margin:0;
-                    padding:30px 0;
+                    margin: 0;
+                    padding: 30px 0;
                     font-weight: bold;
                 }
             }
-            .email-box{
+            .email-box {
                 float: left;
-                width:48%;
+                width: 48%;
                 padding: 0 34px 0 0;
-                .heading-label{
+                .heading-label {
                     font-size: $base*2.25;
-                    margin:0;
-                    padding:30px 0;
+                    margin: 0;
+                    padding: 30px 0;
                     font-weight: bold;
                 }
             }
-
-            .paybytext{
+            .paybytext {
                 float: left;
-                width:70%;
-                padding:19px 0 0 0;
-
-                .labelInput-greybg{
+                width: 70%;
+                padding: 19px 0 0 0;
+                .labelInput-greybg {
                     padding: 18px 0 18px 28px;
                     margin: 0 0 20px 0;
                     background: $greybg;
-                    .pricetext{
+                    .pricetext {
                         color: $cerulean;
                     }
-                    .inputCheck{
-                        margin:5px 16px 0 0;                        
+                    .inputCheck {
+                        margin: 5px 16px 0 0;
                     }
-                    .form-label{
+                    .form-label {
                         font-size: 14px;
-                        color:$black;
+                        color: $black;
                     }
                     .inputCheck,
-                    .form-label{
-                       float: left;
+                    .form-label {
+                        float: left;
                     }
-                    .giftCard{
+                    .giftCard {
                         padding: 0 31px 0 28px;
                         width: 100%;
                         .giftcard-input,
-                        .applybtn{
+                        .applybtn {
                             float: left;
                         }
-                        .giftcard-input{
-                          width:70%;
-                          .form-control{
-                              height: 45px;
-                              border-right: none;
-                              border:1px solid $borderLight;
-                              color:$lightblueGrey;
-                          }
+                        .giftcard-input {
+                            width: 70%;
+                            .form-control {
+                                height: 45px;
+                                border-right: none;
+                                border: 1px solid $borderLight;
+                                color: $lightblueGrey;
+                            }
                         }
-                        .applybtn{
-                            width:30%;
+                        .applybtn {
+                            width: 30%;
                         }
                     }
                 }
-                .paymentMethod{
-                    padding:20px 0 0 19px;
-                    .heading{
+                .paymentMethod {
+                    padding: 20px 0 0 19px;
+                    .heading {
                         font-size: $base*2.25;
-                        color:$black;
-                        padding:0 0 24px 0;
-                        border:none;
+                        color: $black;
+                        padding: 0 0 24px 0;
+                        border: none;
                     }
-
-                    .pay_radio{
-                        padding:0 0 26px 0;
+                    .pay_radio {
+                        padding: 0 0 26px 0;
                         .inputRadio,
-                        .form-label
-                        {
-                          display: inline;
+                        .form-label {
+                            display: inline;
                         }
-                        .inputRadio{
-                            margin:0 15px 0 0;
+                        .inputRadio {
+                            margin: 0 15px 0 0;
                         }
-                        .form-label{
-                           font-size:16px;
-                           font-weight: normal;
-                           color:$black;
+                        .form-label {
+                            font-size: 16px;
+                            font-weight: normal;
+                            color: $black;
                         }
                     }
-                    
                 }
             }
-            .action-button{
+            .action-button {
                 float: left;
-                width:22%;
-                padding:18px 0;
+                width: 22%;
+                padding: 18px 0;
             }
-        .leftBox{
-            width:30%;
-            float: left;
-            padding:25px 0px 0 13px;
-
-            .heading-label{
-                font-size: $base*2.25;
-                font-weight: bold;
-            }
-
-            .verticalTab{
-                padding:16px 0 0 0;
-            .add_tab{
-              font-size: 18px;
-              color: $black;
-              font-weight: bold;
-              padding:22px 0 22px 15px;
-              cursor: pointer;
-            }
-            .add_tab.active_add{
-              background: $colorwhite;
-             
-            }
-        }
-        }
-
-        .rightBox{
-            width:70%;
-            float: left;
-            padding: 22px 0 25px 27px;
-            .heading-label{
-                font-size: $base*2.25;
-            }
-            .shipping-text{
-                font-size: $base*2;
-                color:$battleshipGrey;
-                padding:0 59px 24px 0;
-            }
-            .havePassword{
-                .checkBox,
-                .form-label{
-                    display: inline;
+            .leftBox {
+                width: 30%;
+                float: left;
+                padding: 25px 0px 0 13px;
+                .heading-label {
+                    font-size: $base*2.25;
+                    font-weight: bold;
                 }
-                .checkBox{
-                  margin:0 14px 0 0;
-                }
-                .form-label{
-                  font-size: 13px;
-                  font-weight: normal;
-                  color:$black;
-                }
-            }
-            .form-group{
-                position: relative;
-                padding: 17px 0 0 0;
-                .form-control{
-                    border:1px solid $lightGrey;
-                    margin: 5px 0 20px 0;
-                    &:focus{
-                        border: 1px solid $black !important;
-                        box-shadow: none !important;
+                .verticalTab {
+                    padding: 16px 0 0 0;
+                    .add_tab {
+                        font-size: 18px;
+                        color: $black;
+                        font-weight: bold;
+                        padding: 22px 0 22px 15px;
+                        cursor: pointer;
                     }
-                    &:focus ~ {          
-                        .form-label{
-                         color:$cerulean !important;
-                      }
+                    .add_tab.active_add {
+                        background: $colorwhite;
                     }
                 }
-                .form-label{
+            }
+            .rightBox {
+                width: 70%;
+                float: left;
+                padding: 22px 0 25px 27px;
+                .heading-label {
+                    font-size: $base*2.25;
+                }
+                .shipping-text {
+                    font-size: $base*2;
                     color: $battleshipGrey;
-                    position: absolute;
-                    top: 0;
+                    padding: 0 59px 24px 0;
                 }
-            }
-            
-           
-
-            .bill-address{                
-                padding:9px 0 20px 0;
-                border-bottom: 1px solid $lightGrey;
-                .checkbox,
-                .label-billing{
-                    float:left;
+                .havePassword {
+                    .checkBox,
+                    .form-label {
+                        display: inline;
+                    }
+                    .checkBox {
+                        margin: 0 14px 0 0;
+                    }
+                    .form-label {
+                        font-size: 13px;
+                        font-weight: normal;
+                        color: $black;
+                    }
                 }
-                .checkbox{
-                    margin-right:12px;
+                .form-group {
+                    position: relative;
+                    padding: 17px 0 0 0;
+                    .form-control {
+                        border: 1px solid $lightGrey;
+                        margin: 5px 0 20px 0;
+                        &:focus {
+                            border: 1px solid $black !important;
+                            box-shadow: none !important;
+                        }
+                        &:focus~ {
+                            .form-label {
+                                color: $cerulean !important;
+                            }
+                        }
+                    }
+                    .form-label {
+                        color: $battleshipGrey;
+                        position: absolute;
+                        top: 0;
+                    }
                 }
-                .label-billing{
-                  color:$greyDark;
-                  font-size: 16px;
+                .bill-address {
+                    padding: 9px 0 20px 0;
+                    border-bottom: 1px solid $lightGrey;
+                    .checkbox,
+                    .label-billing {
+                        float: left;
+                    }
+                    .checkbox {
+                        margin-right: 12px;
+                    }
+                    .label-billing {
+                        color: $greyDark;
+                        font-size: 16px;
+                    }
                 }
-            }
-            .bussinessNote{
-                .buying{
-                  padding: 21px 0 14px 0;
-                  font-size: 16px;
-                  color:$greyDark;
-                  font-weight: bold;
-                }
-                .noteGstin{
-                    color:$battleshipGrey;
-                    font-size: 12px;
-                    line-height: 18px;
-                    padding:0 0 22px 0;
-                    .bold{
-                       font-weight: bold;
+                .bussinessNote {
+                    .buying {
+                        padding: 21px 0 14px 0;
+                        font-size: 16px;
+                        color: $greyDark;
+                        font-weight: bold;
+                    }
+                    .noteGstin {
+                        color: $battleshipGrey;
+                        font-size: 12px;
+                        line-height: 18px;
+                        padding: 0 0 22px 0;
+                        .bold {
+                            font-weight: bold;
+                        }
                     }
                 }
             }
         }
+        &:last-child.listRow {
+            border-bottom: 1px solid $borderLight;
+        }
     }
-    &:last-child.listRow{
-        border-bottom: 1px solid $borderLight;
-    }
-    }
-
-    .orderSummary{
-        padding:0 0 32px 37px;
+    .orderSummary {
+        padding: 0 0 32px 37px;
         margin-top: -28px;
-        .heading{
-            font-size:$base*2.25;
-            color:$black;
+        .heading {
+            font-size: $base*2.25;
+            color: $black;
             padding: 0 0 32px 0;
         }
-        .listRow{
-            padding:0 0 20px 0;
+        .listRow {
+            padding: 0 0 20px 0;
             .lefttext-box,
-            .righttext-box
-            {
-               color: $black;
-               font-size: $base*1.75;
-               font-weight: bold;
+            .righttext-box {
+                color: $black;
+                font-size: $base*1.75;
+                font-weight: bold;
             }
-            .lefttext-box{
-              float: left;
+            .lefttext-box {
+                float: left;
             }
-            .righttext-box{
-              float: right;
-            }           
+            .righttext-box {
+                float: right;
+            }
         }
-        .freeshipping{
-            color:$battleshipGrey;
+        .freeshipping {
+            color: $battleshipGrey;
             font-size: $base*1.5;
             padding: 0 0 20px 0;
         }
-        .startEmi{
-            
-            border:1px solid $greyLightborder;
+        .startEmi {
+            border: 1px solid $greyLightborder;
             border-left: 0;
             border-right: 0;
             padding: 19px 0;
-            .emitext,.knowmore{
-              font-size: $base*1.75;
-              font-family: $font-bold;
+            .emitext,
+            .knowmore {
+                font-size: $base*1.75;
+                font-family: $font-bold;
             }
-            .emi-icon{
+            .emi-icon {
                 float: left;
                 padding: 0 8px 0 0;
             }
-            .emitext{
-               float: left;
-               color:$black;
-              
-            }
-            .knowmore{
-                float:right;
-                color:$cerulean;
-            }
-        }
-        .totalBox{
-            padding:16px 0 32px;
-            .totaltext{
+            .emitext {
                 float: left;
-                .label-text{
-                color:$cerulean;
-                font-size: $base*3;
-                font-weight: bold;
-                }
-                .savetext{
-                    .save-label,
-                    .saving-amount{
-                      font-size: $base*1.375;
-                    }
-                    .save-label{
-                     color: $battleshipGrey;
-                    }
-                    .saving-amount{
-                     color:$greenLight;
-                    }
-                }
+                color: $black;
             }
-            .totalAmount{
+            .knowmore {
                 float: right;
-                color:$cerulean;
-                font-size: $base*3;
-                font-weight: bold;
-                
+                color: $cerulean;
             }
         }
-        .SecureCheckout{
-          text-align: center;
-          padding:24px 0 0 0;
+        .totalBox {
+            padding: 16px 0 32px;
+            .totaltext {
+                float: left;
+                .label-text {
+                    color: $cerulean;
+                    font-size: $base*3;
+                    font-weight: bold;
+                }
+                .savetext {
+                    .save-label,
+                    .saving-amount {
+                        font-size: $base*1.375;
+                    }
+                    .save-label {
+                        color: $battleshipGrey;
+                    }
+                    .saving-amount {
+                        color: $greenLight;
+                    }
+                }
+            }
+            .totalAmount {
+                float: right;
+                color: $cerulean;
+                font-size: $base*3;
+                font-weight: bold;
+            }
+        }
+        .SecureCheckout {
+            text-align: center;
+            padding: 24px 0 0 0;
         }
     }
+}
+
+.dropdown-menu {
+    height: 160px;
+    overflow-y: scroll;
+    z-index: 0 !important;
+}
+
+.dropdown-menu .divider {
+    margin: 3px 0 !important;
 }
 
 // .hr_line {
 //     width: 94.3%;
 // }
-
-
-
 // .add_tab {
 //     padding: 10px;
 //     cursor: pointer
 // }
-
 // .active_add {
 //     background: white
 // }

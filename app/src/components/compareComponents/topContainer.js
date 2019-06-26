@@ -10,13 +10,33 @@ import { RemoveProduct } from '../../containers/PlpContainer/actions';
 
 function TopContainer(props) {
     console.log(props, "props in top container");
-
+     
     function removePrd() {
       console.log("remove prd called");
       if(props.count == 2) {
         alert("Cannot remove Product. Need atleast two products to compare");
       } else {
         props.remove(props.product.uniqueID)
+      }
+    }
+
+    function renderSwatches() {
+      console.log("render swatches called")
+      if(props.product.swatches && props.product.swatches.length > 0) {
+
+        var swatches = [];
+        props.product.swatches.forEach((swatch) => {
+          if(swatch.colorCode) {
+            swatches.push(<li><a href="#" style={{background: `${swatch.colorCode}`}}></a></li>)
+          } else if(swatch.facetImage) {
+            swatches.push(<li><a href="#"><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
+          } else {
+            swatches.push(<li><a href="#">{swatch.name}</a></li>)
+          }
+        });
+        return swatches;
+      } else {
+        console.log("no swatches found")
       }
     }
   return (
@@ -42,10 +62,7 @@ function TopContainer(props) {
 
     <div className='product-attr'>
     <ul>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
+        {renderSwatches()}
       </ul>
     </div>
   </Col>

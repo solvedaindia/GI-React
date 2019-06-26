@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import '../../../public/styles/checkout.scss';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import {
@@ -16,7 +17,9 @@ export class Step3Component extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          showGift: false
+          showGift: false,
+          showBanks: false,
+          showWallets: false
         }
     }
 
@@ -53,6 +56,73 @@ export class Step3Component extends React.Component {
         this.setState({
           same_bill: false
         })
+      }
+    }
+
+    showBanks = () => {
+      if(this.state.showBanks) {
+        this.setState({
+          showBanks: false
+        })
+      } else {
+        this.setState({
+          showBanks: true
+        })
+      }
+    }
+    renderBanks = () => {
+      if(this.state.showBanks) {
+        return <DropdownButton
+                  bsSize="large"
+                  title="Select a Bank"
+                  id="dropdown-size-large"
+                >
+                  <MenuItem eventKey="1">State Bank of India</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="2">ICICI Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="3">Catholic Syrian Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="4">Bank of Baroda</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="5">HDFC Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="6">Kotak Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="7">Syndicate Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="8">Allahbad Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="9">Punjab National Bank</MenuItem>
+                </DropdownButton>
+      }
+    }
+
+    renderWallets = () => {
+      if(this.state.showWallets) {
+        return <DropdownButton
+                  bsSize="large"
+                  title="Select a Bank"
+                  id="dropdown-size-large"
+                >
+                  <MenuItem eventKey="1">State Bank of India</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="2">ICICI Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="3">Catholic Syrian Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="4">Bank of Baroda</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="5">HDFC Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="6">Kotak Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="7">Syndicate Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="8">Allahbad Bank</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="9">Punjab National Bank</MenuItem>
+                </DropdownButton>
       }
     }
 
@@ -143,9 +213,11 @@ export class Step3Component extends React.Component {
                       </div>
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
+                        <input className='inputRadio' type="radio" name="optradio" onChange={this.showBanks} />
                         <label className='form-label'>Netbanking</label>
                       </div>
+
+                      {this.renderBanks()}
 
                       <div className="pay_radio">                        
                         <input className='inputRadio' type="radio" name="optradio" />
@@ -164,14 +236,9 @@ export class Step3Component extends React.Component {
 
                       <div className="pay_radio">                        
                         <input className='inputRadio' type="radio" name="optradio" />
-                        <label className='form-label'>Paytm</label>
+                        <label className='form-label'>Wallets</label>
                       </div>
-
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
-                        <label className='form-label'>Mobikwik</label>
-                      </div>
-                      
+                      {this.renderWallets()}
                     
                     </div>
 

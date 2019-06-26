@@ -196,8 +196,14 @@ export class Step1Component extends React.Component {
 
     
 
-    errorMessage = message => <p className="error-msg">{message}</p>;
-
+    errorMessage = message => {
+     if(message === 'user verify err') {
+       return <p className="error-msg">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</p>
+     } else {
+      console.log("user error found")
+      return  <p className="error-msg">{message}</p>;
+     }
+    }
     render() {
       let errorMessageUserId = null;
       let errorMessagePassword = this.props.msg;
@@ -205,9 +211,14 @@ export class Step1Component extends React.Component {
         errorMessageUserId = this.errorMessage(this.state.errorMessageUserId);
       }
   
-      if (this.state.errorMessagePassword) {
-        errorMessagePassword = this.errorMessage(this.state.errorMessagePassword);
+      if (this.props.msg && this.props.msg !== "user verify err") {
+        errorMessagePassword = this.errorMessage(this.props.msg);
       }
+
+      if(this.props.msg == "user verify err") {
+        errorMessagePassword = this.errorMessage(this.props.msg);
+      }
+
       return (
             <div className="col-md-8 checkout_wrapper"> 
                <div className='listRow bgfull clearfix'>

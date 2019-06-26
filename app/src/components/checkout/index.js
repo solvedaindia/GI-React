@@ -120,7 +120,7 @@ export class CheckoutComponent extends React.Component {
         var obj = {
           logon_id: data.user_id
         } 
-        axios.get(UserVerifyAPI, obj, {
+        axios.get(`${UserVerifyAPI}${data.user_id}`, {
           headers: { store_id: storeId, access_token: accessToken },
         }).then(response => {
           
@@ -130,14 +130,14 @@ export class CheckoutComponent extends React.Component {
           // const errorData = error.response.data;
           // const errorMessage = errorData.error.error_message;
           this.setState({
-          message: `This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account`,
+          message: 'user verify err',
         });
           reject(error);
         })
       })
     }
 
-    CallLoginApi(data) {
+    CallLoginApi = (data) => {
         this.setState({ message: null });
         axios
         .post(userLoginAPI, data, {

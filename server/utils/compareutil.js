@@ -32,20 +32,33 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                                     if (err) {
                                         resolve();
                                     } else {
-                                        var swatch = SwatchesData(sku.attributes)
+                                        var swatch = SwatchesData(sku.attributes);
+                                        var seatObj = sku.attributes.find((att) => {
+                                            return att.uniqueID == "7000000000000010201";
+                                        });
+                                        if (seatObj && seatObj[0]) {
+                                            swatch[0].size = seatObj.values[0].value;
+                                            swatch[0].uid = sku.uniqueID;
+                                        }
                                         swatches.push(swatch[0]);
                                         sku.minimumEMI = data.minEMIValue;
+                                        // delete sku.attributes;
+                                        delete sku.attachments;
+                                        delete sku.longDescription;
                                         resolve();
                                     }
                                 })
                             } else {
-                                console.log("no selling price object found")
+                                console.log("no selling price object found");
                                 resolve();
                             }
                         }))
                     });
 
                     Promise.all(minemi_promises).then(() => {
+                        delete element.longDescription;
+                        delete element.price;
+                        element.swatch = SwatchesData(element.attributes);
                         element.swatches = swatches;
                         element.attributes = getComparableAttributes(element.attributes);
                         data.push(element);
@@ -58,7 +71,7 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
             Promise.all(att_promises).then(() => {
                 callback(null, data);
             }).catch((err) => {
-                callback(null, data)
+                callback(null, data);
             })
         }
     })
