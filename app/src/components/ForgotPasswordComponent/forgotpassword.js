@@ -99,7 +99,9 @@ class Forgotpassowrd extends React.Component {
 
   toggle() {
     if (this.state.modal) {
-      this.props.resetCallbackPro();
+      if (this.props.resetCallbackPro) {
+        this.props.resetCallbackPro();
+      }
     }
 
     this.setState(prevState => ({

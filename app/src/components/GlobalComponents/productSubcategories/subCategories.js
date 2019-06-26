@@ -19,7 +19,7 @@ class SubCategories extends React.Component {
 
     this.settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
@@ -40,6 +40,7 @@ class SubCategories extends React.Component {
   }
 
   fetchSubCategoryData(subCatData) {
+    
     const data = subCatData
     if (data) {
       const itemsArr = data.map((item, index) => (
@@ -52,7 +53,7 @@ class SubCategories extends React.Component {
   }
 
   render() {
-    
+    console.log('dkdkddk -- ',this.state.subCatItem)
     return (
       <section className="tablecarousel">
         <div className="container">

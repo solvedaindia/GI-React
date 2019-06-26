@@ -4,7 +4,6 @@ const origin = require('../utils/origin.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-// const pincodeutil = require('../utils/pincodeutil');
 const userHandler = require('./usershandler');
 
 /**
@@ -86,14 +85,26 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
           access_token: encryptedAccessToken,
         };
         const userDetailHeader = headers;
-        userDetailHeader.profile = 'summary';
+        // userDetailHeader.profile = 'summary';
         userDetailHeader.WCToken = response.body.WCToken;
         userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
         userHandler.getUserDetails(userDetailHeader, (err, result) => {
-          if (err) {
-            loginResponseBody.userDetails = {};
-          } else {
-            loginResponseBody.userDetails = result;
+          loginResponseBody.userDetails = {};
+          if (!err) {
+            /*  let firstname = '';
+            let lastname = '';
+            if (result.name.indexOf(' ') > 0) {
+              firstname = result.name.substr(0, result.name.indexOf(' '));
+              lastname = result.name
+                .substring(result.name.indexOf(' ') + 1)
+                .trim();
+            } else {
+              firstname = params.name;
+            } */
+            loginResponseBody.userDetails.name = result.name;
+            // loginResponseBody.userDetails.lastName = lastname;
+            loginResponseBody.userDetails.pincode = result.pincode;
+            // delete loginResponseBody.userDetails.logonID;
           }
           callback(null, loginResponseBody);
         });

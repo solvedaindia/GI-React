@@ -2,7 +2,7 @@ import React from 'react';
 import { productTitleCharLimit, productDescriptionCharLimit } from '../../../../public/constants/constants';
 import { trimTheSentence } from '../../../utils/utilityManager';
 
-class Promotions extends React.Component {
+class Title extends React.Component {
   render() {
     return (
       <p className="heading text">
@@ -17,4 +17,4 @@ class Promotions extends React.Component {
   }
 }
 
-export default Promotions;
+export default Title;

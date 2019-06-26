@@ -22,7 +22,7 @@ header {
             .links {
                 font-size: $base*1.75;
                 color: $battleshipGrey;
-                font-family: $font-regular;
+                font-family: $font-medium;
                 &:hover {
                     color: $ceruleanblue;
                     text-decoration: none;
@@ -63,7 +63,8 @@ header {
 }
 .action{
     color: $battleshipGrey;
-    font-size: $base*1.5;
+    font-family: $font-medium;
+    font-size: $base*1.25;
     text-transform: uppercase;
     &:hover {
         text-decoration: none;

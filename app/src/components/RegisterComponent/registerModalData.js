@@ -2,9 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import apiManager from '../../utils/apiManager';
-import {
-  accessTokenCookie
-} from '../../../public/constants/constants';
+import { accessTokenCookie } from '../../../public/constants/constants';
 import Register from './register';
 import RegisterWithEmailMobile from './registerWithEmailMobile';
 import GenerateOtp from './generateOtp';
@@ -26,7 +24,6 @@ class RegisterModalData extends React.Component {
     this.state = {
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     };
   }
@@ -37,7 +34,6 @@ class RegisterModalData extends React.Component {
     this.setState({
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     });
   }
@@ -53,7 +49,6 @@ class RegisterModalData extends React.Component {
     this.setState({
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     });
     // this.handleClose();
@@ -105,23 +100,26 @@ class RegisterModalData extends React.Component {
   }
 
   /* Handle Components API Data */
-  handleComponetData(api, data, token, type) {
-    this.setState({ message: null });
-
+  handleComponetData(api, data, type, callbackFunc) {
     apiManager
       .post(api, data)
       .then(response => {
         if (type === registerWithEmail || type === otpConfirmed) {
-          this.setState({
-            message: 'Registerted successfully!',
-          });
 
           appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-          appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+          appCookie.set(
+            `${accessTokenCookie}=${
+              response.data.data.access_token
+            };path=/;expires=''`,
+          );
 
           this.handleClose();
           window.location.reload();
         } else {
+          if (type === resendOtp && response.data.data.otpCount > 3) {
+            callbackFunc('OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)');
+            return;
+          } 
           alert(`OTP - ${response.data.data.otpVal}`);
           if (type !== resendOtp) {
             this.handleComponent(generateOtp, data);
@@ -131,10 +129,9 @@ class RegisterModalData extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        this.setState({
-          message: `Error - ${errorMessage}`,
-        });
+        callbackFunc(errorMessage);
       });
+      
   }
 
   componentDidMount() {
@@ -154,11 +151,6 @@ class RegisterModalData extends React.Component {
       data = this.state.data;
     }
 
-    let message = null;
-    if (this.state.message) {
-      message = <p className="errormsg">{this.state.message}</p>;
-    }
-
     return (
       <>
         {/* <Button className="registerNow" onClick={this.handleShow}>
@@ -172,7 +164,6 @@ class RegisterModalData extends React.Component {
           <Modal.Body className={this.state.modalClass}>
             <div className="modal-wrapper">
               <Button className="close" onClick={this.handleClose} />
-              {message}
               {data}
             </div>
           </Modal.Body>

@@ -16,9 +16,9 @@ export class HeaderContainer extends React.Component {
     super(props);
 
     this.state = {
-		clpData: {},
-		isLoading: false,
-		error: null,
+      clpData: {},
+      isLoading: false,
+      error: null,
     };
   }
 
@@ -26,11 +26,11 @@ export class HeaderContainer extends React.Component {
     return (
       <section className="clpBase">
         <div className="slider">
-          	<FullBanner />
-			<SubCategory />
-			<LivingTheme />
-			<BestSeller />
-			<ReadMore />
+          <FullBanner />
+          <SubCategory />
+          <LivingTheme />
+          <BestSeller />
+          <ReadMore />
         </div>
       </section>
     );
