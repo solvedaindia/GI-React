@@ -8,6 +8,7 @@ import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
+import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 
 
 
@@ -42,12 +43,11 @@ index: 0
 
     render(){
         return (
-           <div>
+           
              <div className="Kitchen-1">
-               <img className="Rectangle" src={require('../../../public/images/kitch1.jpg')} alt="rectangle" />
+               <KitchenBanner />
                <div className="text-block">
-
-                 <h4 className="header">Interio Kitchens</h4>
+ <h4 className="header">Interio Kitchens</h4>
                  <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
                    the home you've always wanted</p2> <br />
                  <button className="butt">Book A Consultation</button>
@@ -159,7 +159,7 @@ index: 0
 
                <div></div>
              </div>
-           </div>
+          
         )
     }
 }
