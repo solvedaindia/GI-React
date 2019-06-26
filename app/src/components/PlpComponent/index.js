@@ -91,6 +91,7 @@ class PlpComponent extends React.Component {
             isfromWishlistPro={this.props.isFromWishlistPro}
             history={this.props.history}
             isSearchPathPro={this.props.isSearchPathPro}
+            swatchList={[]}
           /> }
           
           <AdBanner indexPro={index + 1} />

@@ -128,7 +128,7 @@ export class PlpContainer extends React.Component {
     var params = new URLSearchParams(this.props.location.search);
     if (nextProps.sortingValue !== this.props.sortingValue) {
       var params1 = new URLSearchParams(this.props.location.search);
-      
+
       params1.set(`sort`, `${nextProps.sortingValue}`)
       var finalMap = params1.toString()
       this.props.history.push({ /*pathname: '/search',*/ search: finalMap })
@@ -183,7 +183,7 @@ export class PlpContainer extends React.Component {
       if (nextProps.location.pathname !== this.props.location.pathname) {
         const nextPath = String(nextProps.location.pathname);
         const nextIdStr = nextPath.split('/')[2];
-        
+
         if (nextIdStr != undefined && nextIdStr !== categoryId) {
           categoryId = nextIdStr
           this.resetStateVars();
@@ -326,13 +326,11 @@ export class PlpContainer extends React.Component {
               displaySkus: response.data.data.categoryDetails.displaySkus,
             });
           }
-
+          console.log('mixmatchh --- ', response.data.data.productCount, this.state.pageNumber);
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
-            hasMore:
-              this.state.plpData.length <
-              Number(response.data.data.productCount),
+            hasMore: /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), //Now only show on 0 Products and disable it for lazyload
             filterData: response.data.data.facetData,
             isLoading: false,
             isCatDetails: false,
@@ -432,7 +430,7 @@ export class PlpContainer extends React.Component {
     const {
       state: { error, isLoading, hasMore },
     } = this;
-
+    console.log('is Has more --- ', hasMore)
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
     const windowHeight =
@@ -582,7 +580,10 @@ export class PlpContainer extends React.Component {
             />
           </div>
         )}
-        {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
+        {/* Show only when get zero products from Filter */}
+        {/* {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null} */}
+        {this.state.productCount === 0 && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
+        
         {descriptionItem}
         <CompContainer />
       </>

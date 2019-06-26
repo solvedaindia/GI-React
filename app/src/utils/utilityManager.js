@@ -73,7 +73,7 @@ export function fetchReleventSortingValueByIndex(index) {
   if (parseInt(index) === 5) {
     return 'New Arrival';
   }
-  return 'Recommended';
+  return 'Interio Recommends';
 }
 
 

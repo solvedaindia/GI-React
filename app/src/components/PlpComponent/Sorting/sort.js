@@ -17,7 +17,7 @@ const downArrow = (
 const upArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
 );
-const recommended = 'Recommended';
+const recommended = 'Interio Recommends';
 const price_L_H = 'Price Low to High';
 const price_H_L = 'Price High to Low';
 const newArrival = 'New Arrival';
@@ -27,7 +27,7 @@ class Sort extends React.Component {
     this.state = {
       currentSelection: recommended,
       selected: this.props.sortingIndexPro === '' ? 0 : this.props.sortingIndexPro,
-      options: [recommended, price_L_H, price_H_L, newArrival],
+      options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
     };
 
