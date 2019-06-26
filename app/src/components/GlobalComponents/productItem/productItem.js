@@ -25,7 +25,9 @@ class ProductItem extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.onSwatchChange = this.onSwatchChange.bind(this)
 		this.state = {
-			data: this.props.dataPro
+			data: this.props.dataPro,
+			colorSwatchSplit: this.props.swatchList.length > 4 ? this.props.swatchList.slice(0, 4) : [],
+			colorSwatchFull: this.props.swatchList
 		};
 	}
 
@@ -68,7 +70,7 @@ class ProductItem extends React.Component {
 			});
 	};
 
-	onSwatchChange(e,selectedSwatch) {
+	onSwatchChange(e, selectedSwatch) {
 		e.preventDefault();
 		const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
 		this.setState({
@@ -76,9 +78,18 @@ class ProductItem extends React.Component {
 		})
 	}
 
+	showAllSwatchColors = (e) => {
+		e.preventDefault();
+		this.setState({
+			colorSwatchSplit: [],
+		})
+	}
+
 	render() {
-		console.log('isFromWishlist  ----  ', this.props);
-		var routePath = '/pdp/' + this.state.data.parentUniqueID + '/' + this.state.data.uniqueID;
+		console.log('Color Swatch Split  ----  ', this.state.colorSwatchSplit, this.state.colorSwatchFull, );
+		var productname = String(this.state.data.productName).toLowerCase()
+		var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.state.data.uniqueID}`
+
 		return (
 			<li className="productlist">
 				<div className="prdListData">
@@ -112,19 +123,33 @@ class ProductItem extends React.Component {
 
 						{this.props.isfromWishlistPro ?
 							<button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>Move To Cart</button> :
-							this.props.isSearchPathPro.includes('/search') ? '' : <button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
+							<button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
 
-						{this.props.isColorSwatchPro && this.props.swatchList.length > 1  ? <div class="inner-overlay">
+						{this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div class="inner-overlay">
 							<ul class="colortheme clearfix">
-								{this.props.swatchList.map(item => {
-									var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
-									return (
-										<li onClick={(e) => this.onSwatchChange(e, item.name)}  class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-											<span className='swatches-circle' style={colorStyle}></span>
-										</li>
-									)
 
-								})}
+								{this.state.colorSwatchSplit.length !== 0 ? 
+									this.state.colorSwatchSplit.map(item => {
+										var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+										return (
+											<li onClick={(e) => this.onSwatchChange(e, item.name)} class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+												<span className='swatches-circle' style={colorStyle}></span>
+											</li>
+										)
+	
+									}) : 
+									this.state.colorSwatchFull.map(item => {
+										var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+										return (
+											<li onClick={(e) => this.onSwatchChange(e, item.name)} class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+												<span className='swatches-circle' style={colorStyle}></span>
+											</li>
+										)
+	
+									}) }
+								
+									{this.state.colorSwatchSplit.length !== 0 ? <button onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length}</button> : null }
+
 							</ul>
 						</div> : null}
 

@@ -99,7 +99,6 @@ class FilterMain extends React.Component {
 
   fetchAllAppliedFilters() {
     var appliedFilltersArr = [];
-    var item
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
         console.log('Applied Filters -- ', key + ' ---- Value', option);

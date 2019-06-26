@@ -51,8 +51,9 @@ class MinicartItem extends React.Component {
       );
     }
 
-    var routePath = '/pdp/' + this.props.dataPro.parentUniqueID + '/' + this.props.dataPro.uniqueID;
-
+    //var routePath = '/pdp/' + this.props.dataPro.parentUniqueID + '/' + this.props.dataPro.uniqueID;
+    var productname = String(this.props.dataPro.productName).toLowerCase()
+		var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.props.dataPro.uniqueID}`
     return (
       <>
         <div className="minicartList">

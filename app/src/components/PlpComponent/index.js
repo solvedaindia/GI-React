@@ -68,7 +68,6 @@ class PlpComponent extends React.Component {
       const wishlistArr = getOnlyWishlistUniqueIds();
       const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => (
-        
         <>
         {!this.props.showSkuPro ? <ProductItem //Swatch level
             key={index}
@@ -159,7 +158,7 @@ class PlpComponent extends React.Component {
     else {
       coloumnLayout = 'plp-products grid2';
     }
-    coloumnLayout = 'plp-products grid3';
+  
     return (
       // <div className="row no-padding">
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>
