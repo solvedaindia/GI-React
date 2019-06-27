@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import  '../../../public/styles/wardrobes/warobes.scss'
-import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
-import KitchenHall from '../../components/KitchensComp/kitchenHall';
+import WardrobesHAll from '../../components/wardrobesComponent/wardrobeHall.js';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
 import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
-
+import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
 
 
 export default class WardrobesContainer extends React.Component {
@@ -97,33 +96,33 @@ index: 0
               <div className="crouselBAckground">
                   <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                   <WardrobesTypes/>
-              </div>
+                  
+               {/* <KitchenHall /> */}
               
-              
-               <KitchenHall />
-               <div className="container">
-                 <div className="col-md-12">
-                   <div className="row-md-6">
-                     <div className="container">
-                       <div className="Blacks">
-                         <div className="container">
-                           <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
-                           <WhyPeopleLove />
-                           <h1 className="Naming">Alvin Simon</h1>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                   <div className="row-md-6">
-
-
-                     <div class="container">
-
-                       <BeforeAfter />
-                     </div>
-                   </div>
-                 </div>
                </div>
+               <div className="container">
+                  
+              <div className="row">
+              <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
+<p1 className="Choose-from-a-vast-r ">Choose from a vast range of acessories. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore<br/> et dolore magna aliquat enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p1>
+                <div className="col-md-6">
+                <h1 className="Accessories">Accessories</h1>
+<p1 className="Choose-from-a-vast-r-Copy ">Choose from a vast range of acessories. Consectetur adipisicing elit,<br/> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br/>  enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br/>  sit amet, consectetur adipisicing elit.<br/> </p1>
+                 
+<ul className="moved">
+  <li className="Materials-and-Finish">Materials and Finishes</li>
+  <li className="Materials-and-Finish">Element</li>
+  <li className="Materials-and-Finish">Add-ones</li>
+
+</ul>
+                </div>
+                <div className="col-md-6">
+<WhatGoesward/>
+
+                </div>
+              </div>
+              </div>
+              <WardrobesHAll/>
                <div className="container">
                  <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                  <div className="Form-bakground">
@@ -152,7 +151,7 @@ index: 0
 
                </div>
                <div className="aboutgodrej">
-                 <h className="About-Godrej-Interio ">Interio Kitchens</h><br /><br />
+                 <h className="About-Godrej-Interio ">Modular Wardrobes</h><br /><br />
                  <p1 className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
