@@ -101,7 +101,7 @@ class CartCount extends React.Component {
       });
   }
 
-  toggleDropdown() {
+  toggleDropdown = () => {
     console.log('toggleDropdown');
     this.setState({
       active: !this.state.active,
@@ -125,7 +125,7 @@ class CartCount extends React.Component {
               i === this.state.selected ? '' : ''
             }`}
           >
-            <MinicartItem dataPro={option} />
+            <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
             {/* {option} */}
           </div>
         </>

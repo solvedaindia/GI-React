@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
@@ -7,6 +8,7 @@ import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
+import { imagePrefix } from '../../../../public/constants/constants';
 
 const downArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
@@ -14,6 +16,8 @@ const downArrow = (
 const upArrow = (
   <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
 );
+
+
 class Filter extends React.Component {
   constructor() {
     super();
@@ -91,6 +95,9 @@ class Filter extends React.Component {
       });
     }
     console.log('Selected --- ', filteredArr);
+    var params = new URLSearchParams(this.props.location.search);
+
+
     this.setState({ facetArr: filteredArr })
   }
 
@@ -111,6 +118,8 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
+
+
     var alreadyAddedFiltersArr = [];
     let filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
@@ -135,19 +144,29 @@ class Filter extends React.Component {
 
 
   onApplyBtnClick() {
-    console.log('TotalFace---', this.state.facetArr);
+    this.state.facetArr.map(item => {
+      item.value = item.value.replace('+', '%2B')
+    })
+    
+    // var ddd = this.state.facetArr[0]
+    // var facetName = ddd.value;
+    // facetName = facetName.replace('+', '%2B')
+     console.log('TotalFace---', this.state.facetArr);
+    // ddd.value = facetName
+    // console.log('TotalFacemakeee---', ddd);
     // if (this.state.facetArr.length !== 0) {
     this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
     // }
   }
 
   filterOptions(alreadyAddedFiltersArr) {
-    
+
     //return this.props.dataPro.facetValues.map((option, i) => {
     var item = this.props.dataPro.facetValues.map((option, i) => {
 
       var checkboxItem;
       var customSelectionBoxId;
+      console.log('Momentt --- ', alreadyAddedFiltersArr);
       if (alreadyAddedFiltersArr.includes(option.value)) {
         customSelectionBoxId = 'selected_' + this.props.dataPro.facetName + i
         checkboxItem = <input className={'inputCheck checkboxSelected' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id={customSelectionBoxId} name="scales" />
@@ -162,10 +181,29 @@ class Filter extends React.Component {
 
       var checkItem;
       // if (option.facetImage !== "") { //this condition to display all the images in any facet.
-        if (this.props.dataPro.facetName === 'Color') { //Show images only in colors facet
-        const checkNew = (<img className='circle' src={'https://192.168.0.36:8443' + option.facetImage} />);
+      if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //Show images only in colors facet
+
+        let colorStyle = {
+          display: "block",
+        }
+        let imgUrl = null;
+        let colorRGBClass;
+        let customCheckItem;
+        if (option.colorCode) {
+          colorRGBClass = 'circleRGB'
+          colorStyle = { backgroundColor: `rgb${option.colorCode}` };
+          customCheckItem = <div className='circlebox'><span class={colorRGBClass} style={colorStyle}></span></div>
+        }
+        else {
+          colorRGBClass = 'circle'
+          imgUrl = `${imagePrefix}${option.facetImage}`;
+          console.log('Facet Faet ---- ', imgUrl, option)
+          customCheckItem = <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
+        }
+
+        // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
-          {checkNew}
+          {customCheckItem}
         </label>
       }
       else {
@@ -176,7 +214,7 @@ class Filter extends React.Component {
         <li key={i} className='list'>
           <div onClick={evt => this.handleClick(i)} key={i} className={"dropdown__list-item " + (i === this.state.selected ? 'dropdown__list-item--active' : '')}>
             <div className='input_box'>
-            {checkboxItem}   
+              {checkboxItem}
               {checkItem}
             </div>
 
@@ -230,6 +268,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
+  console.log('Zebraa MIN --- ', stateObj.updateFilter)
   return {
     updatedFilter: stateObj.updateFilter
   }
@@ -247,6 +286,7 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
+  withRouter,
 )(Filter);
 
 

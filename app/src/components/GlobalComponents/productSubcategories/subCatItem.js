@@ -4,7 +4,7 @@ import SubCatImage from './subCatImage';
 const subCatItem = ({ itemData }) => (
     <>
         <div className="featureCarouselbox clearfix">
-            <SubCatImage imageData={itemData.thumbnail} uniqueIdPro={itemData.uniqueID} />
+            <SubCatImage imageData={itemData.thumbnail} uniqueIdPro={itemData.uniqueID} categoryNamePro={itemData.categoryName} />
             <div className="itemtext">
                 <div className="leftbox">
                     <div className="bold">{itemData.categoryName}</div>
