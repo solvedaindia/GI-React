@@ -14,7 +14,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
   const initiateBDPaymentURL = `${constants.initiateBDPayment.replace(
     '{{storeId}}',
     headers.storeId,
-  )}?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}&BankID=${query.BankID}`;
+  )}?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}&BankID=${query.BankID}&paymentMode=${query.paymentMode}`;
 
   origin.getResponse(
     'GET',
@@ -64,10 +64,33 @@ module.exports.verifyBDPayment = function verifyBDPayment(
     '',
     response => {
       if (response.status === 200) {
+        const resBody = {
+          paymentStatus: '',
+          orderPlaced: '',
+        };
         if (response.body.response.paymentStatus === 'success') {
-
+          const orderIdObj = {
+            orderId: response.body.orderId,
+          };
+          checkout.checkout(headers, orderIdObj, (err, result) => {
+            if (err) {
+              resBody.paymentStatus = response.body.response.paymentStatus;
+              resBody.orderPlaced = false;
+              resBody.checkoutError = err;
+              callback(null, resBody);
+              return;
+            }
+            resBody.paymentStatus = response.body.response.paymentStatus;
+            resBody.orderPlaced = true;
+            resBody.orderID = result.orderID;
+            callback(null, resBody);
+          });
+        } else {
+          resBody.paymentStatus = response.body.response.paymentStatus;
+          resBody.orderPlaced = false;
+          callback(null, resBody);
         }
-        callback(null, response.body.response);
+        // callback(null, response);
       } else {
         callback(errorutils.handleWCSError(response));
       }

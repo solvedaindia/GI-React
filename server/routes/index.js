@@ -15,6 +15,7 @@ router.use('/secure/orders', require('./api/orders'));
 router.use('/secure/token', require('./api/guesttoken'));
 router.use('/secure/checkout', require('./api/checkout'));
 router.use('/secure/payment', require('./api/payment'));
+router.use('/secure/bank', require('./api/bank'));
 
 /* Non-Secure Routes */
 router.use('/categories', require('./api/category'));

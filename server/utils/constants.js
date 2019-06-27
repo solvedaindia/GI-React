@@ -67,4 +67,5 @@ module.exports = Object.freeze({
   experienceStore: `${prodWcsResourceUrl}/{{storeId}}/GIStore/findStore?pincode={{pincode}}&partNumber={{partNumber}}`,
   invoiceDetails: `${prodWcsResourceUrl}/{{storeId}}/giInvoice/getInvoiceDetails?invoiceNum={{invoiceNo}}`,
   storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/pincodesearch1/physicalidentifier/{{gi_storeId}}`,
+  getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
 });

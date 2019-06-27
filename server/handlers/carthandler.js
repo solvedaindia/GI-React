@@ -14,7 +14,6 @@ const cartCalculationUsage = '-1,-2,-4,-5,-7';
 const cartCalculationUsageAddAddress = '-2,-4,-7';
 const cartCalculateOrder = '1';
 
-
 /**
  * Fetch Mini Cart Details.
  * @return return minicart Data
@@ -116,7 +115,7 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-
+  /* eslint no-param-reassign: "error" */
   headers.promotionData = 'false';
   const fetchCartData = [
     getCartData.bind(null, headers),
@@ -681,7 +680,6 @@ function checkout(headers, params, callback) {
   const reqBody = {
     orderId: params.orderId,
   };
-
   const checkoutURL = `${constants.cartData.replace(
     '{{storeId}}',
     headers.storeId,
