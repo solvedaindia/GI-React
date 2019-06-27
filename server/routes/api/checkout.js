@@ -28,17 +28,4 @@ router.get('/userstatus/:logonId', (req, res, next) => {
   });
 });
 
-router.post('/reserveinventory', (req, res, next) => {
-  checkoutHandler.reserveInventory(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
-});
-
 module.exports = router;

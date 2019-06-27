@@ -29,4 +29,17 @@ router.get('/detail/byId/:orderId', (req, res, next) => {
   });
 });
 
+router.get('/invoice/:invoiceNo', (req, res, next) => {
+  ordersHandler.getInvoiceDetails(req.headers, req.params, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

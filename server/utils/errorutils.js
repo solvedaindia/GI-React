@@ -138,7 +138,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
         errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
         errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED' ||
-        errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS'
+        errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS' || 
+        errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE'
       ) {
         return {
           status_code: 400,

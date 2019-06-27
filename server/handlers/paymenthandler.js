@@ -2,22 +2,23 @@ const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
+const checkout = require('../handlers/carthandler');
 
-module.exports.createChecksum = function createChecksum(
+module.exports.initiateBDPayment = function initiateBDPayment(
   query,
   headers,
   callback,
 ) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
-  const createChecksumURL = `${constants.checksum.replace(
+  const initiateBDPaymentURL = `${constants.initiateBDPayment.replace(
     '{{storeId}}',
     headers.storeId,
-  )}?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}`;
+  )}?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}&BankID=${query.BankID}`;
 
   origin.getResponse(
     'GET',
-    createChecksumURL,
+    initiateBDPaymentURL,
     reqHeaders,
     null,
     null,
@@ -25,7 +26,7 @@ module.exports.createChecksum = function createChecksum(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response);
+        callback(null, response.body);
       } else {
         callback(errorutils.handleWCSError(response));
       }
@@ -33,37 +34,40 @@ module.exports.createChecksum = function createChecksum(
   );
 };
 
-module.exports.verifyChecksum = function verifyChecksum(
+module.exports.verifyBDPayment = function verifyBDPayment(
   params,
   headers,
   callback,
 ) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
-  const verifyChecksumURL = `${constants.checksum.replace(
+  const verifyBDPaymentURL = `${constants.verifyBDPayment.replace(
     '{{storeId}}',
     headers.storeId,
   )}`;
 
-  const verifyChecksumBody = {
-    orderId: params.orderid,
+  const verifyBDPaymentBody = {
+    orderId: params.orderId,
     email: params.email,
-    paymethodId: params.paymethodid,
+    payMethodId: params.payMethodId,
     amount: params.amount,
-    customInfo: params.custominfo,
+    customInfo: params.customInfo,
   };
 
   origin.getResponse(
     'POST',
-    verifyChecksumURL,
+    verifyBDPaymentURL,
     reqHeaders,
     null,
-    verifyChecksumBody,
+    verifyBDPaymentBody,
     null,
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response);
+        if (response.body.response.paymentStatus === 'success') {
+
+        }
+        callback(null, response.body.response);
       } else {
         callback(errorutils.handleWCSError(response));
       }

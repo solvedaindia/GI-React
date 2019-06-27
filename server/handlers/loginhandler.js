@@ -58,7 +58,7 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
     return;
   }
 
-  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const reqHeaders = headerutil.getWCSHeaders(headers)
 
   const loginBody = {
     logonId: params.user_id,
@@ -136,10 +136,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
     return;
   }
 
-  const loginHeaders = {
-    'cache-control': 'no-cache',
-    'content-type': 'application/json',
-  };
+  const loginHeaders = headerutil.getWCSHeaders(headers);
 
   const socialLoginBody = {
     lastName: params.last_name,
@@ -153,7 +150,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
 
   const originLoginURL = constants.sociallogin.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   origin.getResponse(
     'POST',

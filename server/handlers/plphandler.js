@@ -47,10 +47,10 @@ module.exports.getProductsByCategory = function getProductsByCategory(
       if (categoryDetail.displaySkus === false) {
         reqHeader.sku_display = 'false';
       }
-      productList(reqHeader, categoryID, queryUrl, plpResponse, callback);
+      plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
     });
   } else {
-    productList(reqHeader, categoryID, queryUrl, plpResponse, callback);
+    plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
   }
 };
 
@@ -82,7 +82,7 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   productListUrl += `&searchType=101`;
 
   const plpTask = [
-    getProductList.bind(null, reqHeader, productListUrl, searchResponse),
+    getAllSKUProductList.bind(null, reqHeader, productListUrl, searchResponse),
     getSkuPromotionData,
   ];
 
@@ -96,7 +96,7 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   });
 };
 
-function productList(headers, categoryID, queryUrl, plpResponse, callback) {
+function plpProductList(headers, categoryID, queryUrl, plpResponse, callback) {
   let productListUrl = constants.allSKUByCategoryId
     .replace('{{storeId}}', headers.storeId)
     .replace('{{categoryId}}', categoryID)
@@ -107,12 +107,12 @@ function productList(headers, categoryID, queryUrl, plpResponse, callback) {
   }
   productListUrl += `&searchType=${searchType}`;
   let plpTask = [
-    getProductList.bind(null, headers, productListUrl, plpResponse),
+    getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
     getSkuPromotionData,
   ];
   if (headers.sku_display === 'false') {
     plpTask = [
-      getProductList.bind(null, headers, productListUrl, plpResponse),
+      getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
       getSKUList,
     ];
   }
@@ -158,7 +158,12 @@ function getQueryUrl(req) {
 /**
  *  Get Products List
  */
-function getProductList(headers, productListUrl, productListRes, callback) {
+function getAllSKUProductList(
+  headers,
+  productListUrl,
+  productListRes,
+  callback,
+) {
   const reqHeader = headerUtil.getWCSHeaders(headers);
   origin.getResponse(
     'GET',
@@ -263,10 +268,15 @@ function getDefaultSKU(skuArray) {
   return skuArray[0];
 }
 
+/* Filter the SKU's with Swatch Data from list of all SKu's */
 function getFilteredSKUs(productsList, callback) {
   const productListArray = [];
   productsList.forEach(product => {
-    if (product.sKUs && product.sKUs.length > 0) {
+    if (
+      product.catalogEntryTypeCode === 'ProductBean' &&
+      product.sKUs &&
+      product.sKUs.length > 0
+    ) {
       const productDetail = {
         skuList: [],
         swatchesData: pdpfilter.getSwatchData(product.attributes),
@@ -315,10 +325,25 @@ function getFilteredSKUs(productsList, callback) {
       }
       productListArray.push(productDetail);
     }
+    if (
+      product.catalogEntryTypeCode === 'PackageBean' &&
+      product.components &&
+      product.components.length > 0
+    ) {
+      const productDetail = {
+        skuList: [],
+        swatchesData: [],
+      };
+      const skuJSON = pdpfilter.productDetailSummary(product);
+      skuJSON.parentUniqueID = product.uniqueID;
+      productDetail.skuList.push(skuJSON);
+      productListArray.push(productDetail);
+    }
   });
   callback(null, productListArray);
 }
 
+/* Get Promotions of All SKU's in a product */
 function getProductPromotion(headers, productsList, callback) {
   const skuIds = [];
   productsList.forEach(product => {
@@ -337,6 +362,7 @@ function getProductPromotion(headers, productsList, callback) {
   });
 }
 
+/* Merge the Promotion Data and SKU's with Swatches */
 function mergeSwatchandPromotion(productsList, promotionData) {
   productsList.forEach(skus => {
     if (skus.skuList && skus.skuList.length > 0) {
@@ -350,29 +376,3 @@ function mergeSwatchandPromotion(productsList, promotionData) {
   });
   return productsList;
 }
-
-/* function getSKUWithSwatches(productList) {
-  const productArray = []; // Product List
-  if (productList && productList.length > 0) {
-    productList.forEach(catalogItem => {
-      const skuDetail = {
-        defaultSKU: {},
-        swatchesData: pdpfilter.getSwatchData(catalogItem.attributes),
-      };
-      if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
-        skuDetail.skuLength = catalogItem.sKUs.length;
-        const skuArray = catalogItem.sKUs;
-        const defaultSKU = pdpfilter.productDetailSummary(skuArray[0]);
-        defaultSKU.parentUniqueID = catalogItem.uniqueID;
-        const swatchColor = pdpfilter.getSwatchData(skuArray[0].attributes);
-        if (swatchColor && swatchColor.length > 0) {
-          defaultSKU.swatchColor = swatchColor[0].name;
-        }
-
-        skuDetail.defaultSKU = defaultSKU;
-      }
-      productArray.push(skuDetail);
-    });
-  }
-  return productArray;
-} */
