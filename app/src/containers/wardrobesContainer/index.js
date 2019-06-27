@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/wardrobes/warobes.scss'
 import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
@@ -56,6 +56,7 @@ index: 0
 
                <div>
                    <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
+                   <div className="container">
                    <div className="row">
                        <div className="col-md-1">
                        <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
@@ -89,6 +90,7 @@ index: 0
 
                        </div>
 
+                   </div>
                    </div>
                </div>
               
