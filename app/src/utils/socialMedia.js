@@ -12,8 +12,12 @@ import {
 
 class SocialMedia extends React.Component {
   render() {
-    const shareUrl = window.location.href;
-    const title = 'Welcome to the Godrej';
+	const shareUrl = window.location.href;
+	let title = 'Welcome to Godrej';
+	if (this.props.productName) {
+		title = `Found this amazing [${this.props.productName}] on Godrej Interio! Check it Out.`;
+	}
+    
     return (
       <div className="social-icon-share">
         <ul>
@@ -32,7 +36,6 @@ class SocialMedia extends React.Component {
             <WhatsappShareButton
               url={shareUrl}
               title={title}
-              separator=":: "
             >
             <div className='iconImg'>
             	<WhatsappIcon size={26} className='icons' round />
@@ -50,12 +53,12 @@ class SocialMedia extends React.Component {
             </div>
             <div className='labelText'>
             	<span className="social-icon-text">Twitter</span>
-            </div>    
+            </div>
             </TwitterShareButton>
             
           </li>
           <li className='list'>
-            <EmailShareButton url={shareUrl} title={title}>
+            <EmailShareButton url={title+' '+shareUrl}>
             <div className='iconImg'>
             	<EmailIcon size={26} round />
             </div>

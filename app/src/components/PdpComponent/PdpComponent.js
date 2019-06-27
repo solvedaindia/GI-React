@@ -209,7 +209,7 @@ class PdpComponent extends React.Component {
                       <Col md={6} sm={12} xs={12} className="product-share">
                         <div className="share">
                           SHARE <div className="share-btn">{shareImg}</div>
-                          <SocialMedia />
+                          <SocialMedia productName={this.state.skuData.productName}/>
                         </div>
                         <div className="wishListDiv">
                           WISHLIST{' '}

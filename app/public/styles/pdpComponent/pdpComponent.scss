@@ -388,6 +388,18 @@
             width:60%;
             font-family: $font-regular;
         }
+        .notifybtn{
+            background:$black;
+            border:1px solid $black;
+            color:$colorwhite;
+            width:60%;
+            font-family: $font-regular;
+        }
+        .notifyMeText {
+            float: left;
+            min-height: 51px;
+            border: 1px solid #dfe0de;
+        }
     }
 
     .starting-emitext{
@@ -832,6 +844,76 @@
             }       
         }    
     }
+
+    .modal_notify{ 
+        .modal-dialog {
+            width: 44%;
+            max-width: 600px;            
+            .modal-content{
+            .modal-body{    
+                padding:26px; 
+                .close{
+                    top:20px;
+                    &:before, &:after {
+                        background: $black;
+                        top: 8px;
+                    }
+                  }
+                .innerNotify{  
+                    width:74%;
+                    margin:0 auto;            
+                        .heading{
+                            margin:0 0 53px 0;
+                            color:$black;
+                            font-family: $font-bold;
+                            font-size: 18px;
+                            text-align: center;
+                        }  
+                        .form-group{
+                            .form-div{
+                                position: relative;
+                                padding: 0 0 20px 0;
+                            .form-control{
+                                height: 54px;
+                                border-radius: 2px;
+                                box-shadow: none;
+                            }
+                            .error-msg{
+                                position: absolute;
+                                bottom: 0px;
+                                font-size: $base*1.5;
+                                color:$reddishPink;
+                                line-height: 12px;
+
+                            }
+                            .success-msg{
+                                color:$battleshipGrey;
+                                font-size:$base*1.5;    
+                            }
+                        }
+                        }
+                        .label{
+                            color: $battleshipGrey;
+                            text-transform: capitalize;
+                            background: transparent;
+                            margin: 0;
+                            display: block;
+                            text-align: left;
+                            padding: 0 0 10px 0;
+                            font-family: $font-medium;
+                            font-size: 14px;
+                            font-weight: normal;
+                        }   
+                        .Submit-form{
+                            max-width: 200px;
+                            margin:0 auto;
+                        }            
+                    }
+                 }                  
+               }       
+            }
+
+        }
 
 .dataNotActive {
     display: none;

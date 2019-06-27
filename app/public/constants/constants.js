@@ -124,6 +124,8 @@ export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/use
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Notify Me API */
+export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

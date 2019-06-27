@@ -12,11 +12,12 @@ import {
   updatetWishListCount,
   resetRemoveFromWishlistFlag,
 } from '../../actions/app/actions';
+import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
-    super(props);
+	super(props);
     this.state = {
       addToCartPopup: null,
       loading: true,
@@ -147,10 +148,6 @@ class addToCartComponent extends React.Component {
     }
   };
 
-  notifyMe() {
-    alert('Notify me api call');
-  }
-
   updatePincode(props) {
     const pincode = document.getElementById('pincodeVal').value;
     appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
@@ -166,8 +163,8 @@ class addToCartComponent extends React.Component {
   renderButton(props, quantity) {
     if(!props.pincodeServiceable) {
       return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
-    } if (props.inventoryStatus === 'unavailable' && quantity === 1) {
-      return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
+    } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
+      return <NotifyMe partNumber={this.props.skuData.partNumber} />
     } 
     return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
@@ -209,7 +206,7 @@ class addToCartComponent extends React.Component {
         )}
         {this.state.addToCartPopup}
         <div className="addCart">
-          {!this.props.sticky && (
+          {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
             <>
               <Button
                 className="btn"
