@@ -235,12 +235,12 @@ section.tablecarousel {
 
         ul.colortheme {
           text-align: center;
-          width: 300px;
+          width: 218px;
           height: 44px;
           left: 50%;
           top: 50%;
-          margin-top: -22px;
-          margin-left: -150px;
+          margin-top: -75px;
+          margin-left: -109px;
           position: absolute;
           .list{
             // padding: 2px;
@@ -248,7 +248,7 @@ section.tablecarousel {
             display: inline-table;
             border: 2px solid #fff;
             cursor: pointer;
-            margin-right: 10px;
+            margin: 0 10px 8px 0;
             text-align: center;
             .swatches-circle{
               display: block;
@@ -263,6 +263,13 @@ section.tablecarousel {
           .active{
             border: 2px solid $black;
             padding: 2px;
+          }
+          .moreSwatch{
+            border: none;
+            background: transparent;
+            color:$colorwhite;
+            position: absolute;
+            top: 6px;
           }
         }
         
