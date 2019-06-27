@@ -143,6 +143,7 @@ export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
 export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
+export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';

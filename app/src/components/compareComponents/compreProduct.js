@@ -30,26 +30,17 @@ class CompPrd extends React.Component {
       var heights = [];
       var Depth = [];
       this.props.data.map((elem, index) => {
-        var wt = elem.attributes.find((att) => {
-          return att.uniqueID == "7000000000000001002"
-        })
-        var ht = elem.attributes.find((att) => {
-          return att.uniqueID == "7000000000000001011"
-        })
-        var dp = elem.attributes.find((att) => {
-          return att.uniqueID == "7000000000000001012"
-        })
         weights.push(
             <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">{wt && wt.values[0] ? wt.values[0].value : 'NA'}</span></div> : <p>{wt && wt.values[0] ? wt.values[0].value : 'NA'}</p>}
+              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">{elem.weight}</span></div> : <p>{elem.weight}</p>}
             </Col>)
         heights.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">{ht && ht.values[0] ? ht.values[0].value : 'NA'}</span></div> : <p>{ht && ht.values[0] ? ht.values[0].value : 'NA'}</p>}
+              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">{elem.height}</span></div> : <p>{elem.height}</p>}
             </Col>)
         Depth.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">{dp && dp.values[0] ? dp.values[0].value : 'NA'}</span></div> : <p>{dp && dp.values[0] ? dp.values[0].value : 'NA'}</p>}
+              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">{elem.depth}</span></div> : <p>{elem.depth}</p>}
             </Col>)
       })
 

@@ -32,19 +32,40 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                                     if (err) {
                                         resolve();
                                     } else {
-                                        var swatch = SwatchesData(sku.attributes);
-                                        var seatObj = sku.attributes.find((att) => {
-                                            return att.uniqueID == "7000000000000010201";
-                                        });
-                                        if (seatObj && seatObj[0]) {
-                                            swatch[0].size = seatObj.values[0].value;
-                                            swatch[0].uid = sku.uniqueID;
-                                        }
-                                        swatches.push(swatch[0]);
+                                        // var swatch = SwatchesData(sku.attributes);
+                                        // var seatObj = sku.attributes.find((att) => {
+                                        //     return att.uniqueID == "7000000000000010201";
+                                        // });
+                                        // if (seatObj && seatObj[0]) {
+                                        //     swatch[0].size = seatObj.values[0].value;
+                                        //     swatch[0].uid = sku.uniqueID;
+                                        // }
+                                        // swatches.push(swatch[0]);
+                                        var wt = sku.attributes.find((att) => {
+                                            return att.uniqueID == "7000000000000001002"
+                                        })
+                                        var ht = sku.attributes.find((att) => {
+                                            return att.uniqueID == "7000000000000001011"
+                                        })
+                                        var dp = sku.attributes.find((att) => {
+                                            return att.uniqueID == "7000000000000001012"
+                                        })
+
+                                        sku.weight = wt && wt.values[0] ? wt.values[0].value : 'NA';
+                                        sku.height = ht && ht.values[0] ? ht.values[0].value : 'NA';
+                                        sku.depth = dp && dp.values[0] ? dp.values[0].value : 'NA';
                                         sku.minimumEMI = data.minEMIValue;
-                                        // delete sku.attributes;
+                                        delete sku.attributes;
                                         delete sku.attachments;
                                         delete sku.longDescription;
+                                        delete sku.hasSingleSKU;
+                                        delete sku.resourceId;
+                                        delete sku.partNumber;
+                                        delete sku.catalogEntryTypeCode;
+                                        delete sku.buyable;
+                                        delete sku.masterCategoryId;
+                                        delete sku.storeID;
+                                        delete sku.parentCatalogGroupID;
                                         resolve();
                                     }
                                 })
@@ -58,8 +79,20 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
                     Promise.all(minemi_promises).then(() => {
                         delete element.longDescription;
                         delete element.price;
-                        element.swatch = SwatchesData(element.attributes);
-                        element.swatches = swatches;
+                        delete element.hasSingleSKU;
+                        delete element.resourceId;
+                        delete element.partNumber;
+                        delete element.shortDescription;
+                        delete element.catalogEntryTypeCode;
+                        delete element.buyable;
+                        delete element.masterCategoryId;
+                        delete element.storeID;
+                        delete element.name;
+                        delete element.parentCatalogGroupID;
+                        delete element.numberOfSKUs;
+                        delete element.singleSKUCatalogEntryID;
+
+                        element.swatches = SwatchesData(element.attributes);
                         element.attributes = getComparableAttributes(element.attributes);
                         data.push(element);
                         resolve();
