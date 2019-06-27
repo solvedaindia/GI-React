@@ -1,35 +1,54 @@
-/**
- * Merge Cart Data and Produc List
- * @return Mini Cart JSON Data
- */
-module.exports.minicart = function getMinicart(cartData, productList) {
-  const miniCartData = [];
-  cartData.orderItem.forEach(cartItem => {
-    const itemJson = getCartItemDetail(cartItem); // Get Order Item Details
-    for (let index = 0; index < productList.length; index += 1) {
-      if (itemJson.uniqueID === productList[index].uniqueID) {
-        Object.assign(itemJson, productList[index]);
-        break;
-      }
-    }
-    delete itemJson.ribbonText;
-    delete itemJson.emiData;
-    delete itemJson.inStock;
-    miniCartData.push(itemJson);
-  });
-  return miniCartData;
-};
-
-function getCartItemDetail(OrderItem) {
+function getItemOrderDetail(OrderItem) {
   const orderItemJSON = {
     uniqueID: OrderItem.productId,
     quantity: Number(OrderItem.quantity),
-    shippingCharges: OrderItem.shippingCharge,
+    shippingCharges: parseFloat(OrderItem.shippingCharge),
     orderItemId: OrderItem.orderItemId,
-    // unitPrice: OrderItem.unitPrice,
-    // orderItemPrice: OrderItem.orderItemPrice,
+    freeGift: false,
+    // actualPrice: parseFloat(OrderItem.xitem_field2) || '',
+    offerPrice: parseFloat(OrderItem.unitPrice) || '',
   };
+  if (OrderItem.freeGift === 'true') {
+    orderItemJSON.freeGift = true;
+  }
   return orderItemJSON;
+}
+
+module.exports.mergeOrderItem = mergeOrderItemandProduct;
+function mergeOrderItemandProduct(orderItemList, productList) {
+  const orderItemJson = {
+    cartTotalQuantity: 0,
+    cartTotalItems: 0,
+    orderItemList: [],
+  };
+
+  orderItemJson.cartTotalItems = orderItemList.length;
+  orderItemList.forEach(cartItem => {
+    const itemJson = getItemOrderDetail(cartItem); // Get Order Item Details
+    orderItemJson.cartTotalQuantity += itemJson.quantity;
+    for (let index = 0; index < productList.length; index += 1) {
+      if (itemJson.uniqueID === productList[index].uniqueID) {
+        const productData = productList[index];
+        /* Remove Non Required Fields from Product JSON */
+        delete productData.actualPrice;
+        delete productData.offerPrice;
+        delete productData.ribbonText;
+        delete productData.emiData;
+        delete productData.inStock;
+        Object.assign(itemJson, productData);
+        break;
+      }
+    }
+    /*  if (itemJson.freeGift === true) {
+        delete itemJson.actualPrice;
+        delete itemJson.offerPrice;
+        delete itemJson.discount;
+        delete itemJson.promotionData;
+      } */
+    orderItemJson.orderItemList.push(itemJson);
+  });
+
+  return orderItemJson;
 }
 
 /**
@@ -48,10 +67,28 @@ module.exports.quantity = function getQuantity(cartData) {
   return cartQuantity;
 };
 
-/**
- * Filter Cart Data.
- * @return Cart JSON Data
- */
-module.exports.cart = function cart(cartData) {
-  return cartData;
-};
+module.exports.getOrderSummary = getOrderSummary;
+function getOrderSummary(cartData) {
+  const orderSummary = {
+    orderID: cartData.orderId,
+    totalAmount: parseFloat(cartData.totalProductPrice),
+    productDiscount: '',
+    orderDiscount: '',
+    shippingCharges:
+      parseFloat(cartData.totalShippingCharge) +
+      parseFloat(cartData.totalShippingTax),
+    netAmount: parseFloat(cartData.grandTotal),
+  };
+  orderSummary.saving = orderSummary.totalAmount - orderSummary.netAmount;
+  if (cartData.adjustment && cartData.adjustment.length > 0) {
+    cartData.adjustment.forEach(adjustment => {
+      if (adjustment.displayLevel === 'OrderItem') {
+        orderSummary.productDiscount = Math.abs(adjustment.amount);
+      }
+      if (adjustment.displayLevel === 'Order') {
+        orderSummary.orderDiscount = Math.abs(adjustment.amount);
+      }
+    });
+  }
+  return orderSummary;
+}

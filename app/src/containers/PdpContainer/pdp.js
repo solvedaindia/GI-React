@@ -1,13 +1,8 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
-import {
-  pdpApi,
-  pdpApi2,
-  espotAPI,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import { pdpApi2, espotAPI } from '../../../public/constants/constants';
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
+import appCookie from '../../utils/cookie';
 
 class PdpContainer extends React.Component {
   constructor() {
@@ -27,20 +22,22 @@ class PdpContainer extends React.Component {
   }
 
   callPdpApi() {
-    const productId = 'TEST_PDP';
+    const productId = this.props.match.params.productId;
     apiManager
       .get(pdpApi2 + productId)
       .then(response => {
+        // console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
         this.setState({
           pdp: response.data,
           pdpLoading: false,
         });
+
+        if (appCookie.get('isPDPAddToCart') === null) {
+          appCookie.set('isPDPAddToCart', false, 365 * 24 * 60 * 60 * 1000);
+        }
       })
       .catch(error => {
-        this.setState({
-          pdpError: error.message,
-          pdpLoading: false,
-        });
+        console.log('PDP API Error =>', error);
       });
   }
 
@@ -56,10 +53,7 @@ class PdpContainer extends React.Component {
         });
       })
       .catch(error => {
-        this.setState({
-          espotError: error.message,
-          espotLoading: false,
-        });
+        console.log('PDP Espot API Error =>', error);
       });
   }
 
@@ -68,12 +62,15 @@ class PdpContainer extends React.Component {
       <div>
         {!this.state.pdpLoading &&
           !this.state.espotLoading && (
-            <PdpComponent
-              data={this.state.pdp.data}
-              skuId={this.props.match.params}
-              espot={this.state.pdpEspot}
-            />
-        )}
+            <>
+              <PdpComponent
+                data={this.state.pdp.data}
+                matchParams={this.props.match.params}
+                espot={this.state.pdpEspot}
+                historyData={this.props.history}
+              />
+            </>
+          )}
       </div>
     );
   }
