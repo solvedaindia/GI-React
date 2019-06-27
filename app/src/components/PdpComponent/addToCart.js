@@ -14,6 +14,7 @@ import {
 } from '../../actions/app/actions';
 import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
+import ExperienceStore from './experienceStore';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -170,7 +171,14 @@ class addToCartComponent extends React.Component {
   }
 
   render() {
-    return (
+	let storeText = 'Store';
+
+	if (this.props.pinCodeData.experienceStore) {
+		if (this.props.pinCodeData.experienceStore.length > 2) {
+			storeText = 'Stores';
+		}
+	}
+	  return (
       <>
         {!this.props.sticky && (
           <>
@@ -196,13 +204,10 @@ class addToCartComponent extends React.Component {
               {this.renderdeliveryMessage(this.props.pinCodeData)}
             </div>
             <div className="clearfix" />
-            <div className="ExperienceProduct">
-              Experience this product at{' '}
-              <a className="bold" role="button">
-                Vikroli Store (1.5 K.M away)
-              </a>
-            </div>
-          </>
+			{ this.props.pinCodeData.experienceStore &&
+				<ExperienceStore experienceStore={this.props.pinCodeData.experienceStore} storeText={storeText}/>
+			}
+			</>
         )}
         {this.state.addToCartPopup}
         <div className="addCart">

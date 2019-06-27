@@ -28,6 +28,7 @@ class productInfo extends React.Component {
     return (
       <>
         <Price priceData={this.props.productData} />
+        {this.props.pinCodeData.shippingCharge &&
         <div className="shippingCharge">
           Shipping Charges:{' '}
           <span className="bold">
@@ -35,6 +36,7 @@ class productInfo extends React.Component {
             {this.props.pinCodeData.shippingCharge}
           </span>
         </div>
+        }
         <div className="accessories-offer">
           <div className="offerbg text"> % </div>
           <div className="discount-off text">
