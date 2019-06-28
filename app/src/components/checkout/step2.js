@@ -178,10 +178,16 @@ export class Step2Component extends React.Component {
         var list = [];
         this.state.addressList.forEach((add) => {
           list.push(
-            <div className="col-md-6">
-              <div class="radio">
-                <label><input type="radio" name="optradio" checked />{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</label>
-              </div>
+            <div className="col-md-12">
+              <ul class="saveAddress">
+                <li className='list'>
+                  <div className='inputBox'>
+                     <input type="radio" name="optradio"  checked />
+                  </div>
+                 
+                  <div className='addressText'>{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
+                </li>
+              </ul>
             </div>
             )
         });
@@ -219,7 +225,7 @@ export class Step2Component extends React.Component {
 
               </div>
 
-              <div className="listRow bgfull clearfix">
+              <div className="listRow bgfullflex clearfix">
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
@@ -237,7 +243,7 @@ export class Step2Component extends React.Component {
                 <div className="rightBox">
                   {!this.props.isLoggedIn || this.state.new_add ? <div>
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="Full Name" id="name" name="name" />                        
                         </div>
@@ -255,7 +261,7 @@ export class Step2Component extends React.Component {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-6 colpaddingRight">
                         {/* <label className='form-label' htmlFor="pin">Pin Code</label>
                         <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e=>
                         this.pinChange(e)} /> */}
@@ -282,7 +288,7 @@ export class Step2Component extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-6 colpaddingRight">
                         {/* <label  className="from-label" htmlFor="city">City/District</label>
                         <input type="text" name="city" className="form-control" value={this.state.city} /> */}
                          <div className="form-div clearfix div-error">
@@ -300,9 +306,12 @@ export class Step2Component extends React.Component {
                     </div> : this.renderAddressList()}
                     <div className="row">
                       <div className="col-md-12">
-                        <div className='bill-address clearfix'>
-                          <input className='checkbox' type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
-                          <label className='label-billing' htmlFor="billing">Billing address same as shipping address</label>
+                        <div className='bill-address customCheckbox clearfix'>
+                        <div className='input_box'>
+                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
+                          <label className="lblCheck" htmlFor="checkbox"></label>
+                         </div>
+                          <label className='label-billing defaultlbl' htmlFor="billing">Billing address same as shipping address</label>
                         </div>
                       </div>
                     </div>
@@ -311,7 +320,7 @@ export class Step2Component extends React.Component {
                       <div className="col-md-12"><h4>Enter a billing address</h4></div>
                     </div>
                     <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 colpaddingRight">
                       {/* <label htmlFor="fullname">Full Name</label>
                       <input type="text" name="fullname" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
@@ -327,7 +336,7 @@ export class Step2Component extends React.Component {
                     </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 colpaddingRight">
                       {/* <label htmlFor="pin">Pin Code</label>
                       <input type="text" name="pin" className="form-control" /> */}
                        <div className="form-div clearfix div-error">
@@ -344,12 +353,17 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <label htmlFor="address">Address</label>
-                        <textarea type="text" name="address" className="form-control" />
+                         <div className="form-div clearfix div-error">
+                           <div className="form-group">                           
+                           <textarea type="text" name="address" className="form-control" />
+                           <label className="form-label" htmlFor="address">Address</label>
+                           </div>
+                          </div>
+                        
                         </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-6 colpaddingRight">
                         {/* <label htmlFor="city">City/District</label>
                         <input type="text" name="city" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
@@ -386,7 +400,7 @@ export class Step2Component extends React.Component {
 
                     <div className='row'>
                      <div className='col-md-12 form-group'>
-                     <button className="btn-blackbg btn-block" onClick={this.handleProceed}>Continue</button>
+                     <button className="btn-blackbg btn-block continueMargin" onClick={this.handleProceed}>Continue</button>
                      </div>                    
                     </div>
 

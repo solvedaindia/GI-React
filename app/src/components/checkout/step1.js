@@ -198,10 +198,10 @@ export class Step1Component extends React.Component {
 
     errorMessage = message => {
      if(message === 'user verify err') {
-       return <p className="error-msg">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</p>
+       return <div className="error-msg">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
      } else {
       console.log("user error found")
-      return  <p className="error-msg">{message}</p>;
+      return  <div className="error-msg">{message}</div>;
      }
     }
     render() {
@@ -221,7 +221,7 @@ export class Step1Component extends React.Component {
 
       return (
             <div className="col-md-8 checkout_wrapper"> 
-               <div className='listRow bgfull clearfix'>
+               <div className='listRow bgfullflex clearfix'>
                  <div className='stepActive'>
                   <div className='stepBg'>1</div>
                  </div>
@@ -234,7 +234,8 @@ export class Step1Component extends React.Component {
                     <div className='shipping-text'>Your Shipping and payment details will be assocaited with this number</div>
                     <div className="row">
                       <div className="col-md-12">
-                        <div className="form-group">
+                        <div>
+                          <div className='form-div clearfix div-error'>
                           {/* <label className='from-label' htmlFor="mobile">Mobile Number/Email Address</label>
                           <input type="text" name="userId" id="userId" value={this.state.userId} className="form-control"
                             onChange={e => this.handleChange(e)} /> */}
@@ -247,6 +248,7 @@ export class Step1Component extends React.Component {
                               value={this.state.userId}
                             />
                           {errorMessageUserId}
+                          </div>
                         </div>
                         {/* <Input
                           title="Mobile Number/Email Address"
@@ -255,7 +257,7 @@ export class Step1Component extends React.Component {
                           value={this.props.logonBy ? this.props.logonBy : null}
                           onChange={this.handleChange}
                          /> */}
-                        {this.state.has_pass ?<div>
+                        {this.state.has_pass ? <div className='form-div clearfix div-error'><div>
                             <div className='password-field'>
                             <Input
                               type={this.state.inputType}
@@ -274,10 +276,13 @@ export class Step1Component extends React.Component {
                                   />
                                 }
                               </span>
-                            </div>{errorMessagePassword}</div> : ''}
-                        <div className='havePassword'>
-                          <input className='checkBox' type="checkbox" name="has_pass" onChange={this.handleHasPass} />
-                          <label className='form-label' htmlFor="has_pass">I have a password</label>
+                            </div>{errorMessagePassword}</div></div> : ''}
+                        <div className='havePassword customCheckbox clearfix'>
+                          <div className='input_box'>
+                            <input className='checkBox inputCheck' id="checkbox" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
+                            <label className="lblCheck" htmlFor="checkbox"></label>
+                          </div>
+                          <label className='form-label defaultlbl' htmlFor="has_pass">I have a password</label>
                         </div>
                         {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)}
                                                 resetCallbackPro={this.resetLoginValues.bind(this)}/> : '' }
@@ -301,7 +306,7 @@ export class Step1Component extends React.Component {
             
               
                 </div>
-              <div className="listRow clearfix" disabled="disabled">
+              <div className="listRow disableddiv clearfix" disabled="disabled">
                  <div className='stepActive'>
                   <div className='stepbgNone'>2</div>
                  </div>
@@ -313,7 +318,7 @@ export class Step1Component extends React.Component {
                 </div>
               </div>
               
-              <div className="listRow clearfix" disabled="disabled">
+              <div className="listRow disableddiv clearfix" disabled="disabled">
                  <div className='stepActive'>
                    <div className='stepbgNone'>3</div>
                  </div>

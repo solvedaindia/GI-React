@@ -158,12 +158,14 @@ export class Step3Component extends React.Component {
                   </div>         
               </div>
 
-              <div className='listRow clearfix'>
+              <div className='listRow bgfullflex clearfix'>
                   <div className='stepActive'>
                     <div className='checkmark'></div>    
                   </div> 
-                  <div className="labeltext-box">
-                    <h4 className="heading-label">Ship to</h4>
+                  <div className="labeltext-box leftBox shiptoBg">
+                    <div className="bgGrey">
+                      <h4 className="heading-label">Ship to</h4>
+                    </div>
                   </div>
 
                   <div className="email-box"> 
@@ -186,13 +188,21 @@ export class Step3Component extends React.Component {
                   </div>
 
                   <div className="paybytext">
-                    <div className='labelInput-greybg clearfix'>
-                      <input className='inputCheck' type="checkbox" name="redeem" />
-                      <label className='form-label' htmlFor="redeem">Godrej Credit <br/><span className='pricetext'>500 Credit used in this order</span></label>
+                    <div className='labelInput-greybg customCheckbox clearfix'>
+                    <div class="input_box">
+                      <input className='inputCheck' type="checkbox" id="checkbox" name="redeem" />
+                      <label class="lblCheck defaultlbl" for="checkbox"></label>
+                    </div>
+                     
+                    <label className='form-label' htmlFor="redeem">Godrej Credit <div className="clearfix"></div><span className='pricetext'>500 Credit used in this order</span></label>
                     </div>
 
-                    <div className='labelInput-greybg clearfix'>
-                      <input className='inputCheck' type="checkbox" name="redeem" onChange={this.showGiftCard}/>
+                    <div className='labelInput-greybg customCheckbox clearfix'>
+                    <div class="input_box">                      
+                      <input className='inputCheck' id="checkboxRedeem" type="checkbox" name="redeem" onChange={this.showGiftCard}/>
+                      <label class="lblCheck defaultlbl" for="checkboxRedeem"></label>
+                    </div>
+                      
                       <label className='form-label' htmlFor="redeem">Redeem Gift Card</label>
                       <div className='clearfix'></div>
                       {this.state.showGift ? <div className="giftCard">

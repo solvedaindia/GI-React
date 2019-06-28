@@ -76,7 +76,7 @@ export class OrderSummaryComponent extends React.Component {
              </div>              
               
               <div className="payBtn">
-                <button className="btn-block btn-blackbg">Pay &#8377;{this.state.data.netAmount}</button>
+                <button className="btn-block btn-blackbg disableddiv">Pay &#8377;{this.state.data.netAmount}</button>
               </div>
               <div className="SecureCheckout">
                 Secure Checkout
