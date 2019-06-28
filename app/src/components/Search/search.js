@@ -26,10 +26,16 @@ class SearchBar extends React.Component {
     };
     this.handleClick = this.handleChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.clearFields= this.clearFields.bind(this);
+    this.showButton= this.showButton.bind(this);
   }
 
   handleChange = event => {
     const searchText = event.target.value;
+    if (event.target.value === '') {            
+      var crossbtn=document.getElementById('clearField');
+      crossbtn.style.display='none';
+  }
     this.setState({
       searchData: [],
     });
