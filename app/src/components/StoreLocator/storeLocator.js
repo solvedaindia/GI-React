@@ -115,7 +115,10 @@ class StoreLocator extends React.Component {
 	}
 
 	render() {
-		const { storeData } = this.state;
+        const { storeData } = this.state;
+        if (storeData) {
+            console.log('storeDatastoreData@@=>>', storeData)
+        }
 		return (
             !!storeData &&
             <Fragment>
@@ -163,7 +166,7 @@ class StoreLocator extends React.Component {
                     <div className='storeList'>
                         
                         {<div className='detailCard'>
-                            {!!storeData && storeData.PhysicalStore.map((physicalData) => {
+                            {!!storeData && storeData.map((physicalData) => {
                                 return <p className='test'>{physicalData.city}</p>
                             }
                         )}
