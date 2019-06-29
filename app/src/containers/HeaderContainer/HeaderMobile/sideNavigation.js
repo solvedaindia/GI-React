@@ -3,6 +3,8 @@ import apiManager from '../../../utils/apiManager';
 import { getCookie } from '../../../utils/utilityManager';
 import { navigationApi, userDetailAPI } from '../../../../public/constants/constants';
 import { logoutTheUser } from '../../../utils/initialManager';
+import UserAccInfo from '../../../components/UserAccInfo/userAccInfo';
+import { Link } from 'react-router-dom';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 
 export class HeaderMobile extends React.Component {
@@ -15,6 +17,7 @@ export class HeaderMobile extends React.Component {
       navigationItem: null,
       userName: 'Hello',
       logonId: null,
+      showLoginPopUp: false,
     };
   }
 
@@ -56,13 +59,6 @@ export class HeaderMobile extends React.Component {
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
-  onOverlayClick() {
-    console.log('On Overlay --- ', this.state.showNav);
-    this.setState({
-      showNav: false,
-    })
-  }
-
   onMenuClick() {
     console.log('On menuclick --- ', this.state.showNav);
     this.setState({
@@ -72,17 +68,31 @@ export class HeaderMobile extends React.Component {
 
   onCategoryClick(subCat, catName) {
     if (subCat.length !== 0) {
+
       this.setState({
         navigationItem: (
           <div className='rightAnim'>
             <div className='topMenu'>
               <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt'>{`< ${catName}`}</label>
             </div>
-
             <ul>
-              {!!subCat && subCat.map((subCatData, index) => (
-                <li onClick={() => this.onSubcategoryClick()} className='navTxt'>{subCatData.categoryName}</li>
-              ))}
+              {!!subCat && subCat.map((subCatData, index) => {
+                var routePath;
+                var subcatName = String(subCatData.categoryName).toLowerCase()
+                if (catName === 'Rooms') {
+                  routePath = `/rooms-${subcatName.split(' ').join('-')}/${subCatData.uniqueID}`;
+                }
+                else {
+                  routePath = `/furniture-${subcatName.split(' ').join('-')}/${subCatData.uniqueID}`;
+                }
+
+                return (
+                  <Link to={{ pathname: routePath, state: { categoryId: subCatData.uniqueID }, }} className="links" onClick={this.onOverlayClick.bind(this)} >
+                    <li onClick={() => this.onSubcategoryClick()} className='navTxt'>{subCatData.categoryName}</li>
+                  </Link>
+
+                )
+              })}
             </ul>
           </div>
         )
@@ -96,6 +106,21 @@ export class HeaderMobile extends React.Component {
     })
   }
 
+  onLinkNavigation(pageText) {
+    this.props.pageNavigationRenderPro(pageText);
+    this.setState({
+      ishowNav: false,
+    });
+  }
+
+  onOverlayClick() {
+    console.log('On Overlay --- ', this.state.showNav);
+    this.setState({
+      showNav: false,
+    })
+    this.props.pageNavigationRenderPro('My Profile');
+  }
+
   onSubcategoryClick() {
 
   }
@@ -105,18 +130,50 @@ export class HeaderMobile extends React.Component {
   }
 
   onSignInClick() {
+    this.setState({
+      showNav: false,
+      showLoginPopUp: true,
+    })
+  }
 
+  onMyAccountClick() {
+    this.setState({
+      navigationItem: (
+        <div className='rightAnim'>
+          <div className='topMenu'>
+            <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt'>{`< My Account`}</label>
+          </div>
+          {/* onClick={this.updatePincode.bind(this, this.props)} */}
+          <ul>
+            <Link to={{ pathname: '/myAccount', state: { from: 'myprofile' } }} onClick={() => this.onLinkNavigation('My Profile')}>
+              <li className='navTxt'>My Profile</li>
+            </Link>
+            <Link to={{ pathname: '/myAccount', state: { from: 'password' } }} onClick={() => this.onLinkNavigation('Change Password')}>
+              <li onClick={this.onOverlayClick.bind(this)} className='navTxt'>Change Password</li>
+            </Link>
+            <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }} onClick={() => this.onLinkNavigation('My Orders')}>
+              <li className='navTxt'>My Orders</li>
+            </Link>
+            <Link to={{ pathname: '/myAccount', state: { from: 'address' } }} onClick={() => this.onLinkNavigation('Manage Address')}>
+              <li className='navTxt'>Manage Address</li>
+            </Link>
+          </ul>
+        </div>
+      )
+    })
   }
 
   render() {
     const { category = [], showNav } = this.state;
 
     var loginLogoutItem;
+    var myAccountItem = null;
     if (getCookie('isLoggedIn') === 'true') {
       loginLogoutItem = <button onClick={this.onSignOutClick} className='signoutBtn'>Sign Out</button>
+      myAccountItem = <li onClick={this.onMyAccountClick.bind(this)} className='navTxt'>My Account<span className='arrow'>></span></li>
     }
     else {
-      loginLogoutItem = <button onClick={this.onSignInClick} className='loginBtn'>Log In/ Register</button>
+      loginLogoutItem = <button onClick={this.onSignInClick.bind(this)} className='loginBtn'>Log In/ Register</button>
     }
 
     var navItem;
@@ -127,14 +184,17 @@ export class HeaderMobile extends React.Component {
             <label className='usernameTxt'>{this.state.userName}!</label>
             {loginLogoutItem}
           </div>
-
           <ul>
             {!!category && category.map((categoryData, index) => (
               <li onClick={() => this.onCategoryClick(categoryData.subCategoryArray, categoryData.categoryName)} className='navTxt'>{categoryData.categoryName}{categoryData.subCategoryArray.length > 1 ? <span className='arrow'>></span> : null}</li>
             ))}
+            {myAccountItem}
             <li className='navTxt'>For Businesses</li>
             <li className='navTxt'>Locate Store</li>
-            <li className='navTxt'>Track Order</li>
+            <Link onClick={this.onOverlayClick.bind(this)} to="/guestTrackOrder">
+              <li className='navTxt'>Track Order</li>
+            </Link>
+
             <li className='navTxt'>Support</li>
           </ul>
         </div>
@@ -147,18 +207,21 @@ export class HeaderMobile extends React.Component {
 
 
     return (
-      <div className='sideNavigation'>
-        <label>
-          <input type="checkbox" checked={showNav ? "checked" : ''} />
-          <div onClick={this.onMenuClick.bind(this)} className="handler"><img src={require('../../../../public/images/RWD Assets/menu.svg')} alt="my image" /></div>
-          <div onClick={this.onOverlayClick.bind(this)} className="overlay"></div>
-          <nav>
-            <div className='topMenuOverlap' />
-            {navItem}
-          </nav>
+      <>
+        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro /> : null}
+        <div className='sideNavigation'>
+          <label>
+            <input type="checkbox" checked={showNav ? "checked" : ''} />
+            <div onClick={this.onMenuClick.bind(this)} className="handler"><img src={require('../../../../public/images/RWD Assets/menu.svg')} alt="my image" /></div>
+            <div onClick={this.onOverlayClick.bind(this)} className="overlay"></div>
+            <nav>
+              <div className='topMenuOverlap' />
+              {navItem}
+            </nav>
 
-        </label>
-      </div>
+          </label>
+        </div>
+      </>
     );
   }
 }
