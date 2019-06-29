@@ -5,8 +5,7 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import {
   heroSliderAPI,
-  storeId,
-  accessToken,
+  espotPrefix
 } from '../../../public/constants/constants';
 
 class FullBanner extends React.Component {
@@ -53,13 +52,14 @@ class FullBanner extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
     };
+    
     return (
       <div className="fsBanner">
         <Slider {...settings}>
           {!!heroSlider &&
             heroSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img src={sliderData.imageSrc} alt={sliderData.alt} />
+                <img src={espotPrefix+sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}
         </Slider>

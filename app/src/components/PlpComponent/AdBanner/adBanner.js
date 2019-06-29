@@ -8,6 +8,8 @@ import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
+import { espotPrefix } from '../../../../public/constants/constants';
+
 
 import { Link, Route } from 'react-router-dom';
 
@@ -33,7 +35,7 @@ class AdBanner extends React.Component {
     if (this.props.indexPro) {
       let bannerItem = null;
       if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
-        bannerItem = <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+        bannerItem = <img className='adBannerWidth' src={espotPrefix+this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
         this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
         this.setState({
           adBannerItem: bannerItem

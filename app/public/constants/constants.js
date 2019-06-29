@@ -143,6 +143,9 @@ export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
 
+/* Espot Images Url */
+export const espotPrefix = `${secureHttp}://${location.host}/${imageStore}`;
+
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;
 
