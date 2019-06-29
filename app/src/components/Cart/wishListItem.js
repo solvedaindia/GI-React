@@ -4,7 +4,7 @@ import {
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 
-class CartUpdate extends React.Component {
+class WishListItem extends React.Component {
     constructor(props) {
 		super(props);
 		this.state = {
@@ -33,8 +33,8 @@ class CartUpdate extends React.Component {
             this.setState({
                 quantity: qty,
                 isLoading: false,
-			});
-			this.props.getCartDetails()
+						});
+						this.props.getCartDetails()
             console.log('@@@@ Cart Update @@@', response.data.data);
         })
         .catch(error => {
@@ -59,4 +59,4 @@ class CartUpdate extends React.Component {
     }
   }
   
-  export default CartUpdate;
+  export default WishListItem;

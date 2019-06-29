@@ -3,36 +3,27 @@ import {
 	cartDeleteItemAPI
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import DeleteLogo from '../SVGs/deleteIcon';
 
-class CartDeleteItem extends React.Component {
+class DeleteCartItem extends React.Component {
     constructor(props) {
 		super(props);
-		this.state = {
-			orderItemId: props.orderItemId
-		};
-      this.handleChange = this.handleChange.bind(this);
+      	this.handleChange = this.handleChange.bind(this);
     }
   
-    handleChange(event) {
+    handleChange() {
 	//   this.setState({quantity: event.target.value});
-	  this.handleCartItemDelete(event.target.value);
+	  this.handleDeleteItem();
 	}
-	handleCartItemDelete(qty) {
+	handleDeleteItem() {
 		const data = {  
-			orderItem:[
-				{  
-					orderItemId: this.state.orderItemId
-				}
-			]
+			orderItemId: this.props.orderItemId
 		}
 		apiManager
         .post(cartDeleteItemAPI, data)
         .then(response => {
-            this.setState({
-                quantity: qty,
-                isLoading: false,
-            });
-            console.log('@@@@ Cart Item Delete @@@', response.data.data);
+			this.props.getCartDetails()
+            console.log('@@@@ Cart Update @@@', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -43,11 +34,11 @@ class CartDeleteItem extends React.Component {
 	}
     render() {
       return (
-        <form className='cartQty' >
-			
+        <form className='delCartItem' onClick={this.handleChange}>
+			<DeleteLogo width={16} height={16}/>
         </form>
       );
     }
   }
   
-  export default CartDeleteItem;
+  export default DeleteCartItem;

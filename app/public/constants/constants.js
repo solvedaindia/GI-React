@@ -39,7 +39,7 @@ export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/ca
 /* Cart Update API*/ 
 export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
 /* Cart Item Delet API*/
-export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}api/v1/secure/cart/remove`;
+export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */

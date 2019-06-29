@@ -171,3 +171,7 @@ export function checkCompareWidget(compWidget, id) {
   }
   return compWidget;
 }
+
+export function is(val, type) {
+  return Object.prototype.toString.call(val) === `[object ${type}]`
+}
