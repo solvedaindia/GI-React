@@ -91,8 +91,6 @@ class UserAccInfo extends React.Component {
       .catch(error => {
         // return null;
       });
-
-
   }
 
   showLoginStatus() {

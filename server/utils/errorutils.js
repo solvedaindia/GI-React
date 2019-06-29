@@ -88,7 +88,7 @@ const errorlist = {
     status_code: 400,
     error_key: 'user_does_not_exist',
     error_message:
-      'This account does not exist. Enter a valid mobile number or email address to proceed or <create> a new GI account',
+      'This account does not exist. Enter a valid mobile number or email address to proceed or create a new GI account',
   },
   mobile_exists: {
     status_code: 400,
@@ -137,7 +137,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_GENERIC' ||
         errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
         errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
-        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED'
+        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED' ||
+        errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS'
       ) {
         return {
           status_code: 400,

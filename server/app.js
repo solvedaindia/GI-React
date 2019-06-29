@@ -19,8 +19,7 @@ const port = process.env.PORT || '8002';
 global.storeDetails = {};
 
 // Cron JOB
-
-// require('./utils/cronjobs').startStoreInfoCron();
+require('./utils/cronjobs').startStoreInfoCron();
 
 // const csrf = require('csurf');
 // const session = require('express-session');
@@ -106,7 +105,7 @@ app.use((req, res, next) => {
 });
 
 /* To get StoreId and CatalogID on basis of Store identifier */
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   const storeIdentifier = req.headers.store_id;
   if (storeIdentifier) {
     if (
@@ -137,9 +136,9 @@ app.use((req, res, next) => {
     logger.error(JSON.stringify(errorMessage));
     res.status(400).send(errorMessage);
   }
-}); */
+});
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   if (req.headers.store_id) {
     req.headers.storeId = req.headers.store_id;
     req.headers.catalogId = req.headers.catalog_id || 10051;
@@ -152,7 +151,7 @@ app.use((req, res, next) => {
     logger.error(JSON.stringify(errorMessage));
     res.status(400).send(errorMessage);
   }
-});
+}); */
 
 // To handle secure API's and check token status
 app.use((req, res, next) => {
@@ -205,7 +204,9 @@ const options = {
   cert: fs.readFileSync('server.cert'),
 };
 
-// app.listen(8001, () => console.log('Server started on http://localhost:8001'));
+/* app.listen(port, () =>
+  logger.info(`Server started on http://localhost:${port}`),
+); */
 
 const server = https.createServer(options, app);
 server.listen(port, () =>

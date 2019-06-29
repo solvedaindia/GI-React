@@ -16,22 +16,23 @@ class HeaderL1 extends React.Component {
     errors: null,
   };
 
-  getHeaderLayer1() {
-    apiManager
-      .get(headerStatic)
-      .then(response => {
-        this.setState({
-          layer1Data: response.data.data.Header_Static_Links,
-          isLoading: false,
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error,
-          isLoading: false,
-        });
-      });
-  }
+	getHeaderLayer1() {
+	apiManager
+		.get(headerStatic)
+		.then(response => {
+			const {data} = response || {};
+			this.setState({
+			layer1Data: data && data.data.Header_Static_Links,
+			isLoading: false,
+			});
+		})
+		.catch(error => {
+			this.setState({
+			error,
+			isLoading: false,
+			});
+		});
+	}
 
   componentDidMount() {
     this.getHeaderLayer1();

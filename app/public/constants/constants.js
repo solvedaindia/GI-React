@@ -5,7 +5,7 @@ export const secureHttp = 'https';
 export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
-export const host1 = '192.168.0.36';
+export const host1 = '192.168.0.57';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -59,7 +59,7 @@ export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter
 /* Newsletter Subscription Status API */
 export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
 /* store Id */
-export const storeId = '10151';
+export const storeId = 'GodrejInterioESite';
 /* Access Token */
 export let accessToken = getTheAccessToken();
 /* Facebook AppId */
@@ -93,8 +93,7 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
-/* Footer logo url */
-export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
+
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
@@ -121,11 +120,19 @@ export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
 /* User Detail API */
 export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
+/* Pincode API */
+export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
+/* Find Inventory API */
+export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Search Page API */
+export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
 /* User Detail Validate API */
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
 export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
 
+/* Notify Me API */
+export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
@@ -133,6 +140,11 @@ export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 // export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
+export const imageStore = 'imagestore';
+export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+
+/* Footer logo url */
+export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {

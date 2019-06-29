@@ -203,4 +203,42 @@ router.get('/promocode', (req, res, next) => {
   });
 });
 
+/**
+ * Add Address t0 Cart
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/addaddress', (req, res, next) => {
+  cartHandler.addAddress(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Shipping Modes
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/shipmodes', (req, res, next) => {
+  cartHandler.getShipModes(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

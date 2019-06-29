@@ -3,10 +3,12 @@ import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
 import { Row, Col,Grid } from 'react-bootstrap';
-
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
 import { RemoveProduct } from '../../containers/PlpContainer/actions';
+import {
+  imagePrefix
+} from '../../../public/constants/constants';
 
 function TopContainer(props) {
     console.log(props, "props in top container");
@@ -22,7 +24,7 @@ function TopContainer(props) {
   return (
     <Col xs={12} sm={4} md={4} className='comp-list-item'>
     <div className='img-box'>
-      <img src={`https://192.168.0.36:8443${props.product.thumbnail}`} />
+      <img src={`${imagePrefix}${props.product.thumbnail}`} />
     </div>
 
     <div className='product-desc'>

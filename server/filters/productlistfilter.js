@@ -153,7 +153,7 @@ module.exports.productListWithSwatchData = function productListWithSwatchData(
       };
       if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
         const skuArray = catalogItem.sKUs;
-        skuDetail.defaultSkuDetail = getDefaultSKUData(skuArray);
+        skuDetail.defaultSkuDetail = getDefaultSKU(skuArray);
       }
       productArray.push(skuDetail);
     });
@@ -186,7 +186,8 @@ module.exports.productListWithoutSwatch = function productListWithoutSwatches(
   return productArray;
 };
 
-function getDefaultSKUData(skuArray) {
+module.exports.getDefaultSKU = getDefaultSKU;
+function getDefaultSKU(skuArray) {
   const defaultSKU = skuArray[0];
   /*  for (let i = 0; i < skuArray.length; i += 1) {
           let temp = false;

@@ -87,12 +87,18 @@ module.exports.fetchCartQuantity = function fetchCartMain(headers, callback) {
  */
 module.exports.cartOrderSummary = function cartOrderSummary(headers, callback) {
   logger.debug('calling cart API to fetch Cart Order Summary');
-  getCartData(headers, (err, results) => {
+  getCartData(headers, (err, result) => {
     if (err) {
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, results);
+      const cartSummary = {
+        orderSummary: {},
+      };
+      if (result.orderItem && result.orderItem.length > 0) {
+        cartSummary.orderSummary = cartFilter.getOrderSummary(result);
+      }
+      callback(null, cartSummary);
     }
   });
 };
@@ -424,7 +430,7 @@ function getcartPageProductDetails(cartData, headers, callback) {
                 result[1][index].inventoryDetails.inventoryStatus;
               // eslint-disable-next-line no-param-reassign
               product.deliveryDate =
-                result[1][index].inventoryDetails.deliveryDate;
+                result[1][index].inventoryDetails.deliveryDate || '';
               break;
             }
           }
@@ -467,6 +473,8 @@ function getInventoryDetails(headers, reqParamArray, callback) {
 
 /* Merge Cart Data and Product Details to Get MiniCart Data */
 function mergeMiniCart(cartData, productList, headers, callback) {
+  // callback(null, cartFilter.minicart(cartData, productList));
+
   const minicartJson = {
     orderID: '',
     cartTotalQuantity: 0,
@@ -492,13 +500,24 @@ function mergeMiniCart(cartData, productList, headers, callback) {
 
 /* Merge Cart Data and Product Details to Get Cart Page Data */
 function mergeCartData(cartData, productList, headers, callback) {
-  let cartDetails = {};
+  const cartDetails = {
+    orderSummary: {},
+    cartTotalItems: 0,
+    cartItems: [],
+  };
   if (
     cartData.orderItem &&
     cartData.orderItem.length > 0 &&
     productList.length > 0
   ) {
-    cartDetails = cartFilter.getCartData(cartData, productList);
+    cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
+    const mergedCartData = cartFilter.mergeOrderItem(
+      cartData.orderItem,
+      productList,
+    );
+    cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
+    cartDetails.cartItems = mergedCartData.orderItemList;
+    // cartDetails.actualCartData = cartData;
   }
   callback(null, cartDetails);
 }
@@ -562,3 +581,97 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
     }
   });
 };
+
+module.exports.addAddress = addAddress;
+function addAddress(headers, params, callback) {
+  logger.debug('Adding Address To Cart');
+  if (
+    !params ||
+    !params.orderItem ||
+    params.orderItem.length === 0 ||
+    !params.addressId ||
+    !params.shipModeId
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of params.orderItem) {
+    if (!item.orderItemId || !item.shipModeId || !item.addressId) {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+  }
+  const reqBody = params;
+  reqBody.shipAsComplete = '1';
+
+  const addAddressCart = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/@self/shipping_info`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'PUT',
+    addAddressCart,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        callback(null, response.body, reqHeader);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+module.exports.getShipModes = getShipModes;
+function getShipModes(headers, callback) {
+  logger.debug('Get Shipmodes');
+
+  // const reqHeader = headerutil.getWCSHeaders(headers);
+  const originUrl = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/shipping_modes`;
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    null,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const shippingModes = {
+          shipModes: [],
+        };
+        if (
+          response.body.usableShippingMode &&
+          response.body.usableShippingMode.length > 0
+        ) {
+          response.body.usableShippingMode.forEach(shipMode => {
+            const shipJson = {
+              shipModeId: shipMode.shipModeId,
+              shipModeCode: shipMode.shipModeCode || '',
+              shipModeDescription: shipMode.shipModeDescription || '',
+            };
+            shippingModes.shipModes.push(shipJson);
+          });
+        }
+        callback(null, shippingModes);
+      } else {
+        logger.debug('Error While calling Shipping Modes API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}

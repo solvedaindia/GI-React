@@ -22,11 +22,11 @@ class Category extends React.Component {
     apiManager
       .get(navigationApi)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          category: response.data.data.categoryArray,
+          category: data && data.data.categoryArray,
           isLoading: false,
         });
-        console.log('Category Navigation Data', response.data.data);
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
@@ -48,6 +48,7 @@ class Category extends React.Component {
                 </a>
                 {!!categoryData.subCategoryArray && <SubCategoriesData
                   subCategoryArray={categoryData.subCategoryArray}
+                  categoryNamePro={categoryData.categoryIdentifier}
                 />}
               </li>
             )

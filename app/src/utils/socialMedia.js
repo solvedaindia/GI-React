@@ -1,55 +1,76 @@
 import React from 'react';
 import {
-	FacebookIcon,
-	EmailShareButton,
-	FacebookShareButton,
-    EmailIcon,
-    WhatsappShareButton,
-    WhatsappIcon,
-    TwitterShareButton,
-    TwitterIcon
-  } from 'react-share';
+  FacebookIcon,
+  EmailShareButton,
+  FacebookShareButton,
+  EmailIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from 'react-share';
 
 class SocialMedia extends React.Component {
-	render () {
-		const shareUrl = window.location.href;
-    	const title = 'Welcome to the Godrej';
-		return (
-			<div className='social-icon-share'>
-				<ul className='socialwrapper'>
-					<li className='list'>						
-						<FacebookShareButton className='icon' url={shareUrl} quote={title}>
-							<FacebookIcon size={26} round />
-						</FacebookShareButton>
-						<span className='social-icon-text'> Facebook</span>
-					</li>
-					<li className='list'>
-						<WhatsappShareButton className='icon'
-							url={shareUrl}
-							title={title}
-							separator=":: "
-							className="Demo__some-network__share-button"
-						>
-							<WhatsappIcon size={26} round />
-						</WhatsappShareButton>
-						<span className='social-icon-text'>Whatsapp</span>
-					</li>
-					<li className='list'>
-						<TwitterShareButton className='icon' url={shareUrl} title={title}>
-							<TwitterIcon size={26} round />
-						</TwitterShareButton>
-						<span className='social-icon-text'>Twitter</span>
-					</li>
-					<li className='list'>
-						<EmailShareButton className='icon' url={shareUrl} title={title}>
-							<EmailIcon size={26} round />
-						</EmailShareButton>
-						<span className='social-icon-text'>Mail</span>
-					</li>
-				</ul>
-			</div>
-		);
+  render() {
+	const shareUrl = window.location.href;
+	let title = 'Welcome to Godrej';
+	if (this.props.productName) {
+		title = `Found this amazing [${this.props.productName}] on Godrej Interio! Check it Out.`;
 	}
+    
+    return (
+      <div className="social-icon-share">
+        <ul>
+          <li className='list'>
+            <FacebookShareButton url={shareUrl} quote={title}>
+            <div className='iconImg'>
+            	<FacebookIcon size={26} round />
+            </div>
+			<div className='labelText'>
+				<span className="social-icon-text"> Facebook</span>
+			</div>
+            </FacebookShareButton>
+            
+          </li>
+          <li className='list'>
+            <WhatsappShareButton
+              url={shareUrl}
+              title={title}
+            >
+            <div className='iconImg'>
+            	<WhatsappIcon size={26} className='icons' round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Whatsapp</span>
+            </div>
+            </WhatsappShareButton>
+            
+          </li>
+          <li className='list'>
+            <TwitterShareButton url={shareUrl} title={title}>
+            <div className='iconImg'>
+            	<TwitterIcon size={26} round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Twitter</span>
+            </div>
+            </TwitterShareButton>
+            
+          </li>
+          <li className='list'>
+            <EmailShareButton url={title+' '+shareUrl}>
+            <div className='iconImg'>
+            	<EmailIcon size={26} round />
+            </div>
+            <div className='labelText'>
+            	<span className="social-icon-text">Mail</span>
+            </div>    
+            </EmailShareButton>
+          </li>
+        </ul>
+      </div>
+    );
+  }
 }
 
 export default SocialMedia;

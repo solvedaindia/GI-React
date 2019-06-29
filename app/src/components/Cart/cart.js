@@ -26,7 +26,7 @@ class CartCount extends React.Component {
       isLoading: true,
       errors: null,
       options: ['Apple'],
-      minicartData: [],
+      minicartData: null,
     };
   }
 
@@ -45,12 +45,11 @@ class CartCount extends React.Component {
     apiManager
       .get(cartCountApi)
       .then(response => {
-        const count = response.data.data.cartTotalQuantity;
+        const count = response || {};
         this.setState({
-          CartCount: response.data.data.cartTotalQuantity,
-          // active: response.data.data.cartTotalQuantity != 0 ? true : ,
+          CartCount: data && data.data.cartTotalQuantity,
           isLoading: false,
-        });
+		});
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
@@ -93,15 +92,16 @@ class CartCount extends React.Component {
   fetchMinicartDetails() {
     apiManager
       .get(minicartAPI)
-      .then(response => {
-        this.setState({ minicartData: response.data.data.miniCartData });
-      })
+      	.then(response => {
+		  	const {data} = response || {}
+        	this.setState({ minicartData: data && data.data.miniCartData });
+	  	})
       .catch(error => {
         console.log('miniCart Error ---', error);
       });
   }
 
-  toggleDropdown() {
+  toggleDropdown = () => {
     console.log('toggleDropdown');
     this.setState({
       active: !this.state.active,
@@ -125,7 +125,7 @@ class CartCount extends React.Component {
               i === this.state.selected ? '' : ''
             }`}
           >
-            <MinicartItem dataPro={option} />
+            <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
             {/* {option} */}
           </div>
         </>
@@ -156,13 +156,12 @@ class CartCount extends React.Component {
           ) : (
             <EmptyMinicart />
           )}
-          {/* <EmptyMinicart /> */}
         </>
       </div>
     );
 
     return (
-      <li className="icons mini-cart" onClick={this.handleCartCount}>
+      <li className="icons mini-cart" onClick={this.handleCartCount} >
         {/* {!isLoading ? (
           cartCountItem
         ) : (
@@ -176,7 +175,6 @@ class CartCount extends React.Component {
             className="dropdown__toggle dropdown__list-item icons_border"
           >
             <CartLogo />
-            {/* <i className="fa fa-angle-down" aria-hidden="true" /> */}
           </div>
           {minicartDropdownItem}
         </div>

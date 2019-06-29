@@ -55,7 +55,11 @@ module.exports = Object.freeze({
   saveGSTIN: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
   promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
   shippingCharge: `${prodWcsResourceUrl}/{{storeId}}/GIShipCharge/getShippingCharge?pinCode={{pincode}}&uniqueId={{uniqueId}}`,
-  userInfo: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
+  userStatus: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
   reserveInventory: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/precheckout`,
   notifyMe: `${prodWcsResourceUrl}/{{storeId}}/GINotifyUser/saveUserAndProductDetails`,
+  ordersList: `${prodWcsResourceUrl}/{{storeId}}/order/@history`,
+  orderDetail: `${prodWcsResourceUrl}/{{storeId}}/order/{{orderId}}`,
+  checksum: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/checksum`,
+  experienceStore: `${prodWcsResourceUrl}/{{storeId}}/GIStore/findStore?pincode={{pincode}}&partNumber={{partNumber}}`,
 });

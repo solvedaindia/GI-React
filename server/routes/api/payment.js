@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const ordersHandler = require('../../handlers/ordershandler');
+const paymentHandler = require('../../handlers/paymenthandler.js');
 
-router.get('/list', (req, res, next) => {
-  ordersHandler.getOrdersList(req.headers, (err, result) => {
+router.get('/createchecksum', (req, res, next) => {
+  paymentHandler.createChecksum(req.query, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -15,9 +15,8 @@ router.get('/list', (req, res, next) => {
   });
 });
 
-router.get('/detail/byId/:orderId', (req, res, next) => {
-  const id = req.params.orderId;
-  ordersHandler.getOrderbyId(req.headers, id, (err, result) => {
+router.post('/verifychecksum', (req, res, next) => {
+  paymentHandler.verifyChecksum(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

@@ -177,7 +177,7 @@ module.exports.updateUserDetails = function updateUserDetails(
   callback,
 ) {
   if (
-    (!params.name && !params.field1 && !params.logonid) ||
+    // (!params.name && !params.field1 && !params.logonid) ||
     !params.validateotp ||
     (params.validateotp !== 'false' && params.validateotp !== 'true')
   ) {
@@ -205,7 +205,7 @@ module.exports.updateUserDetails = function updateUserDetails(
     reqBody.firstName = params.name;
   }
 
-  if (params.field1) {
+  if (params.field1 || params.field1 === '') {
     reqBody.userField1 = params.field1;
   }
   if (params.logonid) {

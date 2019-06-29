@@ -239,3 +239,36 @@ function getShippingCharge(headers, reqParams, callback) {
     },
   );
 }
+
+/**
+ * Function to return Experience at our store
+ * @param {@pincode, @partNumber}
+ * @return store name
+ */
+module.exports.experienceStore = getExperienceStore;
+function getExperienceStore(headers, reqParams, callback) {
+  logger.debug('Inside the experience store API');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const originUrl = constants.experienceStore
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{pincode}}', reqParams.pincode)
+    .replace('{{partNumber}}', reqParams.partNumber);
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}

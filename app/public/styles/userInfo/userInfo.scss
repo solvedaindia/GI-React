@@ -1,4 +1,13 @@
 @import '../variable.scss';
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 .user{
     .welcomeDropDown {
         visibility: hidden;
@@ -28,8 +37,13 @@
                 text-decoration: none;
             }
         }
-
+       
         .listItem {
+            &:first-child{
+                &:hover{
+                    cursor:default;                    
+                }
+            }
             padding: $base*1.25;
             &:hover {
                 background-color: #87ceeb6b; 
@@ -54,6 +68,7 @@
             visibility: visible;
             opacity: 1;
             cursor: pointer;
+            animation: fade 1.6s;
         }
     }
 }
