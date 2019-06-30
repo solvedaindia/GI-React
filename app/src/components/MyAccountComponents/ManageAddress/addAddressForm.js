@@ -52,8 +52,7 @@ class AddAddressForm extends React.Component {
     if (!validateFullName(this.state.inputText_name)) {
       this.setState({
         error_name: true,
-        errorMessage_name:
-          'Please enter a valid Name. It should not exceed 100 characters',
+        errorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
       });
       return;
     }
@@ -219,7 +218,7 @@ class AddAddressForm extends React.Component {
         address: '',
         city: '',
         state: '',
-        isDefault: String(false),
+        isDefault: false,
       });
     } else {
       this.props.onCancel({
@@ -230,7 +229,7 @@ class AddAddressForm extends React.Component {
         address: this.state.inputText_address,
         city: this.state.inputText_city,
         state: this.state.inputText_state,
-        isDefault: String(this.state.isSetAsDefault),
+        isDefault: false //String(this.state.isSetAsDefault), //commented for GI-951
       });
     }
   }
