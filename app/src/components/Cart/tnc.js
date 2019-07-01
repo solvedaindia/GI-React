@@ -25,7 +25,7 @@ class TermsAndCondition extends React.Component {
 	render () {
 		return (
 			<>
-				{/* <a className='emiDetails'  onClick={this.handleShow}>T&C Apply</a> */}
+				<a className='emiDetails'  onClick={this.handleShow}>Know More</a>
 				<Modal className='modal_emiInstallment' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>

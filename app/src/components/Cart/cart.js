@@ -54,14 +54,6 @@ class CartCount extends React.Component {
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
-  handleCartCount() {
-    const token = appCookie.get('isLoggedIn');
-    console.log('Testest', token);
-    appCookie.get('isLoggedIn')
-      ? '' // alert('Take user Cart page')
-      : alert('Please login');
-  }
-
   componentDidMount() {
     document.addEventListener(
       'click',
@@ -141,27 +133,28 @@ class CartCount extends React.Component {
     if (CartCount != 0 && CartCount != undefined) {
       cartCountItem = <span className="cartCount">{CartCount}</span>;
     }
-    minicartDropdownItem = (
-      <div
-        className={`dropdown__list ${
-          this.state.active ? 'dropdown__list--active' : ''
-        }`}
-      >
-        <>
-          {CartCount != 0 && CartCount != undefined ? (
-            <>
-              <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-              <button className="checkout-btn">Checkout</button>
-            </>
-          ) : (
-            <EmptyMinicart />
-          )}
-        </>
-      </div>
-    );
+	minicartDropdownItem = (
+		<div
+		className={`dropdown__list ${
+			this.state.active ? 'dropdown__list--active' : ''
+		}`}
+		>
+		<>
+			{CartCount != 0 && CartCount != undefined ? (
+			<>
+			<div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+			<a href='/cart'><button className="checkout-btn">Checkout</button></a>
+			</>
+			) : (
+			<EmptyMinicart />
+			)}
+			{/* <EmptyMinicart /> */}
+		</>
+		</div>
+	);
 
     return (
-      <li className="icons mini-cart" onClick={this.handleCartCount} >
+      <li className="icons mini-cart">
         {/* {!isLoading ? (
           cartCountItem
         ) : (
@@ -174,7 +167,7 @@ class CartCount extends React.Component {
             onClick={() => this.toggleDropdown()}
             className="dropdown__toggle dropdown__list-item icons_border"
           >
-            <CartLogo />
+            <CartLogo width={24} height={24}/>
           </div>
           {minicartDropdownItem}
         </div>

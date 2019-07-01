@@ -1,3 +1,4 @@
+const async = require('async');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
@@ -54,8 +55,20 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
  */
 module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
   logger.debug('Entering method mylisthandler: fetchWishlist');
+  const fetchWishlistData = [
+    getWishlistData.bind(null, headers),
+    getWishlistProductList,
+  ];
+  async.waterfall(fetchWishlistData, (err, results) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes');
+      callback(null, results);
+    }
+  });
 
-  getWishlistData(headers, (err, res) => {
+  /* getWishlistData(headers, (err, res) => {
     if (err) {
       callback(err);
       return;
@@ -64,12 +77,14 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
       wishlistID: '',
       wishlistName: '',
       wishlistItemCount: 0,
+      externalIdentifier: '',
       wishlistData: [],
     };
     const productIDs = [];
     if (res.GiftList && res.GiftList.length > 0) {
       wishlistJson.wishlistID = res.GiftList[0].uniqueID;
       wishlistJson.wishlistName = res.GiftList[0].descriptionName;
+      wishlistJson.externalIdentifier = res.GiftList[0].externalIdentifier;
       if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
         wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
         res.GiftList[0].item.forEach(listItem => {
@@ -111,6 +126,32 @@ module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
       }
     } else {
       callback(null, wishlistJson);
+    }
+  }); */
+};
+
+/**
+ * fetch External Wishlist details.
+ * @return External Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getExternalWishlist = function getExternalWishlist(
+  headers,
+  params,
+  query,
+  callback,
+) {
+  logger.debug('Entering method mylisthandler: Fetch External Wishlist');
+  const fetchWishlistData = [
+    getExternalWishlistData.bind(null, headers, params, query),
+    getWishlistProductList,
+  ];
+  async.waterfall(fetchWishlistData, (err, results) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes');
+      callback(null, results);
     }
   });
 };
@@ -412,12 +453,12 @@ function getWishlistData(headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, response.body, headers);
       } else if (response.status === 404) {
         const wishAllList = {
           wishlistTotalItems: 0,
         };
-        callback(null, wishAllList);
+        callback(null, wishAllList, headers);
       } else {
         logger.error('Error while calling wishList api.', response.status);
         callback(errorutils.handleWCSError(response));
@@ -426,6 +467,91 @@ function getWishlistData(headers, callback) {
   );
 }
 
+function getExternalWishlistData(headers, params, query, callback) {
+  if (!params.externalId || !query.accesskey) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const ExternalWishListURL = `${constants.externalWishlist
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{externalID}}', params.externalId)
+    .replace('{{guestAccessKey}}', query.accesskey)}`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'GET',
+    ExternalWishListURL,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body, headers);
+      } else if (response.status === 404) {
+        const wishAllList = {
+          wishlistTotalItems: 0,
+        };
+        callback(null, wishAllList, headers);
+      } else {
+        logger.error('Error while calling wishList api.', response.status);
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+function getWishlistProductList(res, headers, callback) {
+  const wishlistJson = {
+    wishlistID: '',
+    wishlistName: '',
+    wishlistItemCount: 0,
+    externalIdentifier: '',
+    guestAccessKey: '',
+    wishlistData: [],
+  };
+  const productIDs = [];
+  if (res.GiftList && res.GiftList.length > 0) {
+    wishlistJson.wishlistID = res.GiftList[0].uniqueID;
+    wishlistJson.wishlistName = res.GiftList[0].descriptionName;
+    wishlistJson.guestAccessKey = res.GiftList[0].guestAccessKey;
+    wishlistJson.externalIdentifier = res.GiftList[0].externalIdentifier || '';
+    if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
+      wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
+      res.GiftList[0].item.forEach(listItem => {
+        productIDs.push(listItem.productId);
+      });
+
+      productUtil.productByProductIDs(productIDs, headers, (error, result) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+        const productListArray = result.productList;
+        productListArray.forEach(productDetail => {
+          for (let index = 0; index < res.GiftList[0].item.length; index += 1) {
+            if (
+              productDetail.uniqueID === res.GiftList[0].item[index].productId
+            ) {
+              // eslint-disable-next-line no-param-reassign
+              productDetail.giftListItemID =
+                res.GiftList[0].item[index].giftListItemID;
+              break;
+            }
+          }
+        });
+        wishlistJson.wishlistData = productListArray;
+        callback(null, wishlistJson);
+      });
+    } else {
+      callback(null, wishlistJson);
+    }
+  } else {
+    callback(null, wishlistJson);
+  }
+}
 module.exports.addItemInWishlist = function addItemInWishlist(
   headers,
   body,
@@ -457,4 +583,72 @@ module.exports.addItemInWishlist = function addItemInWishlist(
       }
     }
   });
+};
+
+/**
+ * Share Wishlist.
+ * @return response from WCS
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.shareWishlist = function shareWishlist(
+  headers,
+  body,
+  params,
+  callback,
+) {
+  const externalID = params.externalId;
+
+  logger.debug('Entering method share wishlist');
+  if (
+    !externalID ||
+    !body.senderName ||
+    !body.senderEmail ||
+    !body.recipientName ||
+    !body.recipientEmail ||
+    !body.message
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const reqBody = {
+    announcement: [
+      {
+        senderName: body.senderName,
+        senderEmailAddress: body.senderEmail,
+        emailRecipient: [
+          {
+            recipientName: body.recipientName,
+            recipientEmail: body.recipientEmail,
+          },
+        ],
+        message: body.message,
+      },
+    ],
+  };
+
+  const shareWishlistURL = `${constants.shareWishlist
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{externalID}}', externalID)}`;
+  origin.getResponse(
+    'POST',
+    shareWishlistURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    null,
+    response => {
+      if (response.status === 201 || response.status === 200) {
+        if (response.body.emailSent === 'Success') {
+          callback(null, response.body);
+        } else if (response.body.emailSent === 'Payload_Error') {
+          callback(errorutils.errorlist.ERROR_IN_EMAIL_SEND);
+        }
+      } else {
+        logger.debug('Error while calling share wishlist api');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
 };
