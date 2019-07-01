@@ -159,7 +159,6 @@ class PlpComponent extends React.Component {
     else {
       coloumnLayout = 'plp-products grid2';
     }
-  
     return (
       // <div className="row no-padding">
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>

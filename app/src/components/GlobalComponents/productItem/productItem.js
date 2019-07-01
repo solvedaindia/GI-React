@@ -27,7 +27,8 @@ class ProductItem extends React.Component {
 		this.state = {
 			data: this.props.dataPro,
 			colorSwatchSplit: this.props.swatchList.length > 4 ? this.props.swatchList.slice(0, 4) : [],
-			colorSwatchFull: this.props.swatchList
+			colorSwatchFull: this.props.swatchList,
+			swatchActiveClass: 'colortheme-Wrapper'
 		};
 	}
 
@@ -81,7 +82,8 @@ class ProductItem extends React.Component {
 	showAllSwatchColors = (e) => {
 		e.preventDefault();
 		this.setState({
-			colorSwatchSplit: [],
+			colorSwatchSplit: [],//colorthemeNomore
+			swatchActiveClass: 'colorthemeNomore'
 		})
 	}
 
@@ -134,6 +136,7 @@ class ProductItem extends React.Component {
 							<button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
 
 						{this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div class="inner-overlay">
+							<div className={`${this.state.swatchActiveClass}`}>
 							<ul class="colortheme clearfix">
 
 								{/* {this.state.colorSwatchSplit.length !== 0 ? 
@@ -165,9 +168,11 @@ class ProductItem extends React.Component {
 	
 									}) }
 								
-									{this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null }
+									{/* {this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null } */}
 
 							</ul>
+							{this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null }
+							</div>
 						</div> : null}
 
 
