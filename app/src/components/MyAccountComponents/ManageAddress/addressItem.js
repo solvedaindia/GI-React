@@ -84,8 +84,9 @@ class AddressItem extends React.Component {
           ) : null}
           <label className="addressText">
             {this.props.addressData.address}
-            {this.props.addressData.city}
-            {this.props.addressData.state},{this.props.addressData.pincode}
+            {/* {this.props.addressData.city} */}
+            <div>{this.props.addressData.state},{` ${this.props.addressData.pincode}`}</div>
+            
           </label>
 
           <ul className="modifyAddress">

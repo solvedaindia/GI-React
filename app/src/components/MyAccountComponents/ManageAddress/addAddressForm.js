@@ -49,55 +49,68 @@ class AddAddressForm extends React.Component {
   onSavebuttonClick(event) {
     event.preventDefault();
 
+    var isProceed = true;
     if (!validateFullName(this.state.inputText_name)) {
+      isProceed = false;
       this.setState({
         error_name: true,
-        errorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
+        errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
       });
-      return;
+      // return;
     }
     if (!validateMobileNo(this.state.inputText_number)) {
+      isProceed = false;
       this.setState({
         error_number: true,
-        errorMessage_number: 'Please enter valid mobile number.',
+        errorMessage_number: !this.state.inputText_number ? 'This is a required field' : 'Please enter valid mobile number.',
       });
-      return;
+      // return;
     }
     if (!validateEmailId(this.state.inputText_email)) {
+      isProceed = false;
       this.setState({
         error_email: true,
-        errorMessage_email: 'Please enter valid Email ID.',
+        errorMessage_email: !this.state.inputText_email ? 'This is a required field' : 'Please enter valid Email ID.',
       });
-      return;
+      // return;
     }
     if (!validatePindcode(this.state.inputText_pincode)) {
+      isProceed = false;
       this.setState({
         error_pincode: true,
-        errorMessage_pincode: 'Please enter valid Pincode.',
+        errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
       });
-      return;
+      // return;
     }
     if (!validateAddress(this.state.inputText_address)) {
+      isProceed = false;
       this.setState({
         error_address: true,
-        errorMessaget_address: 'Please enter valid Address.',
+        errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
       });
-      return;
+      // return;
     }
     if (!validateCityDistrict(this.state.inputText_city)) {
+      isProceed = false;
       this.setState({
         error_city: true,
-        errorMessage_city: 'Please enter valid City/District.',
+        errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
       });
-      return;
+      // return;
     }
     if (!validateState(this.state.inputText_state)) {
+      isProceed = false;
       this.setState({
         error_state: true,
-        errorMessage_state: 'Please enter valid State.',
+        errorMessage_state: !this.state.inputText_state ? 'This is a required field' : 'Please enter valid State.',
       });
+      // return;
+    }
+
+    if (!isProceed) {
       return;
     }
+
     this.addAddress();
   }
 
@@ -199,7 +212,7 @@ class AddAddressForm extends React.Component {
           inputText_state: response.data.data.state,
         });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   onSetAsDefaultChange() {
@@ -304,26 +317,26 @@ class AddAddressForm extends React.Component {
               {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
             </div>
           </div>
-          </div>
-          <div className='col-md-6'>
-            <div className='defaultOption'>
-              <div className='input_box'>
-                <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
-                <label className="lblCheck" htmlFor="checkbox"></label>
-              </div>
-              <label className='defaultlbl'>Make this default address</label>
+        </div>
+        <div className='col-md-6'>
+          <div className='defaultOption'>
+            <div className='input_box'>
+              <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+              <label className="lblCheck" htmlFor="checkbox"></label>
             </div>
+            <label className='defaultlbl'>Make this default address</label>
           </div>
-          <div className='clearfix'></div>
+        </div>
+        <div className='clearfix'></div>
 
-          <div className='col-md-12'>
-            <div className='actionBtnWrapper'>
-              <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
-              <button onClick={this.onSavebuttonClick.bind(this)} className='btn-save btn'>Save</button>
-            </div>
+        <div className='col-md-12'>
+          <div className='actionBtnWrapper'>
+            <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
+            <button onClick={this.onSavebuttonClick.bind(this)} className='btn-save btn'>Save</button>
           </div>
-          </div>
-        
+        </div>
+      </div>
+
     );
   }
 }
