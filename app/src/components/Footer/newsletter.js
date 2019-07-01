@@ -81,9 +81,10 @@ class newsletter extends React.Component {
             </Form>
           </li>
         </ul>
-        <ul className="social-Link clearfix">
+        {this.props.isFromMobile ? null : <ul className="social-Link clearfix">
           <Socialicon name={this.props.socialicon} />
-        </ul>
+        </ul>}
+        
       </Col>
     );
     return <>{newsletterHtml}</>;
