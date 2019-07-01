@@ -28,4 +28,17 @@ router.get('/userstatus/:logonId', (req, res, next) => {
   });
 });
 
+router.get('/banklist', (req, res, next) => {
+  checkoutHandler.bankList(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

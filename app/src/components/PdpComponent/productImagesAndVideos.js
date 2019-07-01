@@ -8,26 +8,34 @@ import { imagePrefix } from '../../../public/constants/constants';
 class productImagesAndVideos extends React.Component {
   constructor() {
     super();
-    this.images = []
+    this.images = [];
     this.state = {
       activeData: false,
       gallery: null,
-    }
+    };
     this.isZoomScreen = false;
   }
 
   componentDidMount() {
-    let contentElement = document.getElementsByClassName('image-gallery-thumbnails-container');
+    const contentElement = document.getElementsByClassName(
+      'image-gallery-thumbnails-container',
+    );
     contentElement[0].classList.add('active');
   }
 
   componentWillReceiveProps(nextProps) {
-    const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
-    this.hideThumnailsOnFullScreen(fullscreenButton[0].classList.contains('active'));
+    const fullscreenButton = document.getElementsByClassName(
+      'image-gallery-fullscreen-button',
+    );
+    this.hideThumnailsOnFullScreen(
+      fullscreenButton[0].classList.contains('active'),
+    );
   }
 
-  async hideThumnailsOnFullScreen(isFullScreen) { 
-    let thumbnailsContainer = document.getElementsByClassName('image-gallery-thumbnails-container');
+  async hideThumnailsOnFullScreen(isFullScreen) {
+    const thumbnailsContainer = document.getElementsByClassName(
+      'image-gallery-thumbnails-container',
+    );
 
     if (this.state.activeData === false && isFullScreen === true) {
       this.isZoomScreen = true;
@@ -50,74 +58,88 @@ class productImagesAndVideos extends React.Component {
 
   /* render Videos */
   filterImagesAndVideos = (imagesAndVideos, screenType) => {
-	  let imagePath;
-	  this.images = [];
+    let imagePath;
+    this.images = [];
 
-	  imagesAndVideos.map((data) => {
-	    if (screenType) {
+    imagesAndVideos.map(data => {
+      if (screenType) {
         imagePath = data.fullScreenImagePath;
       } else {
-	      imagePath = data.fullImagePath;
+        imagePath = data.fullImagePath;
       }
-	    const thumbnailPath = `${imagePrefix}${data.thumbnailPath}`;
+      const thumbnailPath = `${imagePrefix}${data.thumbnailPath}`;
       if (data.type === 'image') {
         const fullImagePath = `${imagePrefix}${imagePath}`;
-	      this.images.push({'original': fullImagePath , 'thumbnail': thumbnailPath });
+        this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
       } else {
         const videoUrl = `${imagePrefix}${data.videoPath}`;
-	      this.images.push({'renderItem': this.renderVideoPlayer.bind(this) , 'thumbnail': thumbnailPath, 'videourl': videoUrl});
-	    }
-	  }
-	  );
+        this.images.push({
+          renderItem: this.renderVideoPlayer.bind(this),
+          thumbnail: thumbnailPath,
+          videourl: videoUrl,
+        });
+      }
+    });
   };
 
   /* render video player */
   renderVideoPlayer(event) {
-	  return (
-	    <div className='video-wrapper'>
+    return (
+      <div className="video-wrapper">
         <Player src={event.videourl}>
           <BigPlayButton position="center" />
         </Player>
       </div>
-	  );
+    );
   }
 
   zoomin() {
-	  let slides = document.getElementsByClassName("image-gallery-slide");
-	  for(let i = 0; i < slides.length; i++)
-	  {
-	    if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
-	      let currWidth = slides[i].children[0].children[0].clientWidth;
-	      slides[i].children[0].children[0].style.width = `${currWidth + 100  }px`;
-	    }
-	  }
+    const slides = document.getElementsByClassName('image-gallery-slide');
+    for (let i = 0; i < slides.length; i++) {
+      if (
+        slides[i].classList.contains('center') &&
+        slides[i].children[0].classList.contains('image-gallery-image')
+      ) {
+        const currWidth = slides[i].children[0].children[0].clientWidth;
+        slides[i].children[0].children[0].style.width = `${currWidth + 100}px`;
+      }
+    }
   }
 
   zoomout() {
-	  let slides = document.getElementsByClassName("image-gallery-slide");
-	  for(let i = 0; i < slides.length; i++)
-	  {
-	    if(slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
-	      let currWidth = slides[i].children[0].children[0].clientWidth;
-	      if(currWidth == 100) return false;
-	      slides[i].children[0].children[0].style.width = `${currWidth - 300  }px`;
+    const slides = document.getElementsByClassName('image-gallery-slide');
+    for (let i = 0; i < slides.length; i++) {
+      if (
+        slides[i].classList.contains('center') &&
+        slides[i].children[0].classList.contains('image-gallery-image')
+      ) {
+        const currWidth = slides[i].children[0].children[0].clientWidth;
+        if (currWidth == 100) return false;
+        slides[i].children[0].children[0].style.width = `${currWidth - 300}px`;
       }
-	  }
+    }
   }
 
   async handleClick(e) {
-	  if (e.target.nodeName === 'IMG' || e.target.classList.contains('video-react-icon-fullscreen') === true) {
-	    const btnSubmitTags = document.getElementsByClassName('image-gallery-fullscreen-button');
-	    btnSubmitTags[0].click();
+    if (
+      e.target.nodeName === 'IMG' ||
+      e.target.classList.contains('video-react-icon-fullscreen') === true
+    ) {
+      const btnSubmitTags = document.getElementsByClassName(
+        'image-gallery-fullscreen-button',
+      );
+      btnSubmitTags[0].click();
     } else if (e.target.nodeName === 'VIDEO') {
-	    const fullscreenButton = document.getElementsByClassName('image-gallery-fullscreen-button');
+      const fullscreenButton = document.getElementsByClassName(
+        'image-gallery-fullscreen-button',
+      );
       if (fullscreenButton[0].classList.contains('active')) {
-	      this.setState({
-	        activeData: true,
-        });
-	    } else {
         this.setState({
-	        activeData: false,
+          activeData: true,
+        });
+      } else {
+        this.setState({
+          activeData: false,
         });
       }
     }
@@ -126,12 +148,12 @@ class productImagesAndVideos extends React.Component {
   render() {
 	  this.filterImagesAndVideos(this.props.skuData.attachments, this.isZoomScreen);
 	  let featuredClass = 'hide';
-    if (this.props.skuData.ribbon) {
+    if (this.props.skuData.ribbonText) {
 	    featuredClass = 'featured-box';
 	  }
 
-	  return(
-	    <div className='gallaryWrapper'>
+    return (
+      <div className="gallaryWrapper">
         <div className={featuredClass}>
 	        <span className='ribbon_star'>
 	          <svg className="star_img" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
@@ -139,24 +161,24 @@ class productImagesAndVideos extends React.Component {
 	            </path>
 	          </svg>
 	        </span>
-	        {this.props.skuData.ribbon &&
-            <span className="featured-text">{this.props.skuData.ribbon}</span>
+	        {this.props.skuData.ribbonText &&
+            <span className="featured-text">{this.props.skuData.ribbonText}</span>
 			}
           )
         </div>
 
-	      <ImageGallery 
-	        showFullscreenButton
+        <ImageGallery
+          showFullscreenButton
           items={this.images}
-	        showNav={this.state.activeData}
-	        showPlayButton={false}
-	        onClick={this.handleClick.bind(this)}
+          showNav={this.state.activeData}
+          showPlayButton={false}
+          onClick={this.handleClick.bind(this)}
         />
 
         {/* <button onClick={this.zoomin}>+</button>
 				<button onClick={this.zoomout}>-</button> */}
       </div>
-	  )
+    );
   }
 }
 

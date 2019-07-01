@@ -82,3 +82,33 @@ module.exports.userstatus = function getUserStatus(req, callback) {
     },
   );
 };
+
+module.exports.bankList = function bankList(headers, callback) {
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+
+  const getBankListURL = `${constants.getBankList.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}`;
+
+  origin.getResponse(
+    'GET',
+    getBankListURL,
+    reqHeaders,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        const resJson = {
+          bankList: [],
+        };
+        resJson.bankList = response.body.BankList;
+        callback(null, resJson);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};

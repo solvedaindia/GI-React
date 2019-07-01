@@ -32,11 +32,15 @@ router.get('/bycoordinates', (req, res, next) => {
   });
 });
 
-router.get('/byId/:gi_storeId', (req, res, next) => {
-  const id = req.params.gi_storeId;
+router.get('/byId', (req, res, next) => {
+  const idArray = [];
+  idArray.push(req.query.id);
+  // eslint-disable-next-line no-console
+  console.log(idArray, 'request params');
+  // const id = req.params.gi_storeId;
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
-    id,
+    idArray,
     (err, result) => {
       if (err) {
         next(err);

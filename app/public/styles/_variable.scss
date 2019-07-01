@@ -22,10 +22,11 @@ $greenDark:#017b6b;
 $greenLight:#00b5a4;
 $paleGrey:#eef8fe;
 $greyDark:#222222;
-
+$darkAshGrey: #979797;
 $greylightColor:#505d68;
 $ceruleanblueLight:#3c79a1;
 $greyborder:#e4eaee;
+$greycolor:#737272;
 
 /*--Border Variable
 -------------------------------**/
@@ -41,3 +42,10 @@ $font-regular:CeraGIRegular,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;
 $font-medium:CeraGIMedium,sans-serif; 
+
+
+// Mixins 
+
+@mixin container-width {
+    width: 83.33%;
+}

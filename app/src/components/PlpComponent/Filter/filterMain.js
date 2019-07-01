@@ -1,6 +1,7 @@
 import React from 'react';
 //Redux
 import { connect } from 'react-redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
@@ -98,7 +99,6 @@ class FilterMain extends React.Component {
 
   fetchAllAppliedFilters() {
     var appliedFilltersArr = [];
-    var item
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
         console.log('Applied Filters -- ', key + ' ---- Value', option);

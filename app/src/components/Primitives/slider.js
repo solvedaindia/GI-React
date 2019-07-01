@@ -23,11 +23,12 @@ class FullBanner extends React.Component {
     apiManager
       .get(heroSliderAPI)
       .then(response => {
+        const {data} = response || {}
         this.setState({
-          heroSlider: response.data.data.bannerList,
+          heroSlider: data && data.data.bannerList,
           isLoading: false,
         });
-        console.log('Slider Data', response.data.data.bannerList);
+        console.log('Slider Data', data.data.bannerList);
       })
       .catch(error => {
         this.setState({

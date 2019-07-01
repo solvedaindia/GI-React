@@ -5,9 +5,10 @@ import {
   bestSellerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-
+import {is} from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
+import { resendOtp } from '../RegisterComponent/constants';
 
 class BestSeller extends React.Component {
   state = {
@@ -21,12 +22,12 @@ class BestSeller extends React.Component {
     apiManager
       .get(bestSellerAPI)
       .then(response => {
+		const { data } = response || {};
+		const bsData = data && data.data;
         this.setState({
-          bestSellerData: response.data.data.productList,
-          title: response.data.data.productList,
-          isLoading: false,
+			bestSellerData: is(bsData, 'Object') && bsData,
+			isLoading: false,
         });
-        console.log('BestSellerData#########', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -53,10 +54,9 @@ class BestSeller extends React.Component {
     };
     return (
       <div className="bestSeller">
-        <h1 className="title">Best Selling Items</h1>
+        <h1 className="title">Best Selling Products</h1>
         <Slider {...settings}>
-          {!!bestSellerData &&
-            bestSellerData.map((sellerItemData, index) => (
+		{!!bestSellerData && bestSellerData.productList.map((sellerItemData, index) => (
               <figure key={index} className="bsSlides">
                 <a href={sellerItemData.onClickUrl}>
                   <img

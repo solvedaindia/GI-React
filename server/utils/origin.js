@@ -18,7 +18,7 @@ exports.getResponse = function getResponse(
   logger.debug(`Origin Method:::${originMethod}`);
   logger.debug(`Origin URL:::${originURL}`);
   // logger.debug('Request Header:::', reqHeaders);
-  // logger.debug('Request Body:::', reqBody);
+  // logger.debug('Request Body:::', JSON.stringify(reqBody));
   try {
     const request = unirest(originMethod, originURL).strictSSL(false);
     if (reqHeaders) {
@@ -31,7 +31,7 @@ exports.getResponse = function getResponse(
       request.send();
     }
     request.end(response => {
-      logger.debug(`Response From Origin::${JSON.stringify(response)}`);
+      // logger.debug(`Response From Origin::${JSON.stringify(response)}`);
       if (response.status >= 200 && response.status < 300) {
         callback(response);
       } else {

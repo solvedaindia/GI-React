@@ -13,40 +13,6 @@ const activityHandler = require('../handlers/activityhandler');
 
 const notifyMessage = 'We’ll notify you when this product is back in stock';
 
-// eslint-disable-next-line no-sparse-arrays
-const experienceStore = {
-  storeList: [
-    {
-      DistanceFromShipToAddress: '11.4',
-      AddressLine1: '',
-      Description: 'MUM-FORT STORE',
-      DistanceUOM: 'MILE',
-      State: '',
-      ZipCode: '',
-      NodeType: 'Store',
-      IsAvailable: 'Y',
-      Country: '',
-      storeName: '',
-      ShipNode: 'ZNF26S',
-      City: '',
-    },
-    {
-      DistanceFromShipToAddress: '6.6',
-      AddressLine1: '',
-      Description: 'MUM-VIKHROLI PL 9 STORE',
-      DistanceUOM: 'MILE',
-      State: '',
-      ZipCode: '',
-      NodeType: 'Store',
-      IsAvailable: 'Y',
-      Country: '',
-      storeName: '',
-      ShipNode: 'ZNF2CS',
-      City: '',
-    },
-  ],
-};
-
 /**
  * Function for PDP Data
  * @param {skuId}
@@ -74,20 +40,24 @@ module.exports.getProductDetails = function getProductDetailsData(
     } else {
       logger.debug('Got all the origin resposes From PDP API');
       if (result.catalogEntryView.length > 0) {
-        const productId = result.catalogEntryView[0].parentCatalogEntryID;
-        const taskList = [
-          productDetails.bind(null, reqHeaders, productId),
-          productListByIDs,
-          promotionDetails,
-          mergePDPData,
-        ];
-        async.waterfall(taskList, (er, res) => {
-          if (er) {
-            callback(er);
-          } else {
-            callback(null, res);
-          }
-        });
+        if (result.catalogEntryView[0].catalogEntryTypeCode === 'ProductBean') {
+          callback(null, {});
+        } else {
+          const productId = result.catalogEntryView[0].parentCatalogEntryID;
+          const taskList = [
+            productDetails.bind(null, reqHeaders, productId),
+            productListByIDs,
+            promotionDetails,
+            mergePDPData,
+          ];
+          async.waterfall(taskList, (er, res) => {
+            if (er) {
+              callback(er);
+            } else {
+              callback(null, res);
+            }
+          });
+        }
       } else {
         callback(null, {});
       }
@@ -479,8 +449,8 @@ function transformJson(result, serviceability) {
   const pincodeData = {};
   pincodeData.pincodeServiceable = serviceability;
   if (result && result.length > 0) {
-    pincodeData.inventoryStatus = result[0].inventoryStatus;
-    pincodeData.deliveryDateAndTime = result[0].deliveryDate;
+    pincodeData.inventoryStatus = result[0].inventoryStatus || '';
+    pincodeData.deliveryDateAndTime = result[0].deliveryDate || '';
     pincodeData.shippingCharge = result[1].ShipCharge || '';
     pincodeData.experienceStore = transformExperienceStore(result[2]);
     // pincodeData.experienceStore = transformExperienceStore(experienceStore);
@@ -581,60 +551,16 @@ function transformExperienceStore(bodyData) {
       'des',
     );
     bodyData.storeList.forEach(store => {
-      experienceStore.push({
-        distanceFromShipToAddress: store.DistanceFromShipToAddress,
-        name: store.Description,
-        address: store.AddressLine1,
-        distanceMode: store.DistanceUOM,
-        city: store.City,
-        state: store.State,
-        country: store.Country,
-        zipcode: store.ZipCode,
-        availablilty: store.IsAvailable,
-      });
+      if (store.IsAvailable === 'Y') {
+        experienceStore.push({
+          distanceFromShipToAddress: store.DistanceFromShipToAddress,
+          name: store.Description,
+          address: store.AddressLine1,
+          distanceMode: store.DistanceUOM,
+          availablilty: store.IsAvailable,
+        });
+      }
     });
   }
   return experienceStore;
 }
-
-/**
- * Function for Kit Data
- * @param {*} bodyData
- */
-// function transformKitData(bodyData) {
-//   const kitDataSummary = {
-//     uniqueID: '',
-//     type: 'kit',
-//     defAttributes: [],
-//     kitData: [],
-//     productDetails: [],
-//     productFeatures: [],
-//     purchaseGuide: [],
-//     keywords: [],
-//   };
-
-//   if (bodyData) {
-//     const attributes = pdpfilter.getAttributes(bodyData);
-//     const productPrice = pdpfilter.getProductPrice(bodyData);
-//     kitDataSummary.uniqueID = bodyData.uniqueID;
-//     kitDataSummary.partNumber = bodyData.partNumber;
-//     kitDataSummary.productName = bodyData.name;
-//     kitDataSummary.shortDescription = bodyData.shortDescription;
-//     kitDataSummary.actualPrice = productPrice.actualPrice;
-//     kitDataSummary.offerPrice = productPrice.offerPrice;
-//     kitDataSummary.ribbon = bodyData.ribbonText || '';
-//     kitDataSummary.discount = bodyData.discount || '';
-//     kitDataSummary.emiData = bodyData.emi || '';
-//     kitDataSummary.promotions = [];
-//     kitDataSummary.defAttributes = pdpfilter.getDefAttributes(attributes);
-//     kitDataSummary.kitData = bodyData.components || [];
-//     kitDataSummary.productDetails = pdpfilter.getProductDetails(
-//       attributes.descriptive,
-//       bodyData,
-//     );
-//     kitDataSummary.productFeatures = pdpfilter.getProductFeatures(attributes);
-//     kitDataSummary.purchaseGuide = pdpfilter.getPurchaseGuide(bodyData);
-//     kitDataSummary.keywords = pdpfilter.getKeywords(bodyData.keyword);
-//   }
-//   return kitDataSummary;
-// }

@@ -5,9 +5,6 @@ import { Player, BigPlayButton } from 'video-react';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -124,7 +121,7 @@ class purchaseGuide extends React.Component {
           <>
             <Row>
               <Col md={12} sm={12} xs={12}>
-                <h3 className="heading">Purchase Guide</h3>
+                <h2 className="heading">Purchase Guide</h2>
               </Col>
             </Row>
             <Row>

@@ -1,3 +1,4 @@
+const async = require('async');
 const origin = require('../utils/origin');
 const constants = require('../utils/constants');
 const originMethod = 'GET';
@@ -39,6 +40,7 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
 
         values.forEach(element => {
           const storeDataObject = {};
+          storeDataObject.type = [];
 
           storeDataObject.latitude = element.latitude;
           storeDataObject.longitude = element.longitude;
@@ -46,7 +48,7 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
           storeDataObject.telephone = element.telephone1.trim();
           storeDataObject.city = element.city;
           storeDataObject.pinCode = element.postalCode.trim();
-          // storeDataObject.storeName = element.storeName;
+          storeDataObject.storeName = element.storeName;
 
           element.Description.forEach(storename => {
             storeDataObject.storeName = storename.displayStoreName.trim();
@@ -54,10 +56,8 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
 
           element.Attribute.forEach(storeinfo => {
             if (storeinfo.name === 'Type') {
-              storeDataObject.type = storeinfo.displayValue;
-            } else if (storeinfo.name === 'StoreHours') {
-              storeDataObject.storeHours = storeinfo.displayValue;
-            } else if (storeinfo.name === 'Ownership') {
+              storeDataObject.type.push(storeinfo.displayValue);
+            } else if (storeinfo.name === 'OwnerShip') {
               storeDataObject.ownership = storeinfo.displayValue;
             } else if (storeinfo.displayName === 'Label') {
               storeDataObject.ribbonText = storeinfo.displayValue;
@@ -66,7 +66,8 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
             }
           });
 
-          storeDataObject.address = `${element.addressLine.join(',')}`;
+          storeDataObject.address1 = `${element.addressLine[0]}`;
+          storeDataObject.address2 = `${element.addressLine[1]}`;
 
           storeDataArray.push(storeDataObject);
         });
@@ -99,8 +100,11 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
     .replace('{{longitude}}', req.query.longitude);
   // .replace('{{giStoreType}}', req.query.type);
 
+  const radius = 25;
   if (req.query.radius) {
     originUrl += `&radius=${req.query.radius}`;
+  } else {
+    originUrl += `&radius=${radius}`;
   }
 
   const reqHeader = headerUtil.getWCSHeaders(header);
@@ -114,13 +118,14 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
     null,
     null,
     response => {
-      if (response.status === 200) {
+      if (response.status === 200 && response.body) {
         const values = response.body.PhysicalStore;
 
         const storeDataArray = [];
 
         values.forEach(element => {
           const storeDataObject = {};
+          storeDataObject.type = [];
 
           storeDataObject.latitude = element.latitude;
           storeDataObject.longitude = element.longitude;
@@ -136,10 +141,8 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
 
           element.Attribute.forEach(storeinfo => {
             if (storeinfo.name === 'Type') {
-              storeDataObject.type = storeinfo.displayValue;
-            } else if (storeinfo.name === 'StoreHours') {
-              storeDataObject.storeHours = storeinfo.displayValue;
-            } else if (storeinfo.name === 'Ownership') {
+              storeDataObject.type.push(storeinfo.displayValue);
+            } else if (storeinfo.name === 'OwnerShip') {
               storeDataObject.ownership = storeinfo.displayValue;
             } else if (storeinfo.displayName === 'Label') {
               storeDataObject.ribbonText = storeinfo.displayValue;
@@ -148,7 +151,8 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
             }
           });
 
-          storeDataObject.address = `${element.addressLine.join(',')}`;
+          storeDataObject.address1 = `${element.addressLine[0]}`;
+          storeDataObject.address2 = `${element.addressLine[1]}`;
 
           storeDataArray.push(storeDataObject);
         });
@@ -166,41 +170,57 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
   giStoreId,
   callback,
 ) {
+  // eslint-disable-next-line no-console
+  console.log('in handler....', giStoreId.length);
   const reqHeaders = headerUtil.getWCSHeaders(headers);
+  const storeDetailsArr = [];
+  const resultsArr = [];
+  async.map(
+    giStoreId,
+    (storeID, cb) => {
+      const PhysicalStoreUrl = `${constants.storeLocatorByPhysicalIdentifier
+        .replace('{{storeId}}', headers.storeId)
+        .replace('{{gi_storeId}}', storeID)}`;
 
-  const PhysicalStoreUrl = `${constants.storeLocatorByPhysicalIdentifier
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{gi_storeId}}', giStoreId)}`;
+      origin.getResponse(
+        'GET',
+        PhysicalStoreUrl,
+        reqHeaders,
+        null,
+        null,
+        null,
+        null,
+        response => {
+          if (response.status === 200) {
+            const storeDetailsObj = {};
+            // storeDetailsObj.type = [];
+            storeDetailsObj.latitude = response.body.latitude;
+            storeDetailsObj.longitude = response.body.longitude;
+            storeDetailsObj.telephone = response.body.phone.trim();
+            storeDetailsObj.storeName = response.body.storeName;
+            storeDetailsObj.city = response.body.city;
+            storeDetailsObj.type = response.body.displayvalue;
+            storeDetailsObj.address1 = response.body.address1;
+            storeDetailsObj.address2 = response.body.address2;
+            storeDetailsObj.pinCode = response.body.zipcode.trim();
+            storeDetailsObj.ownership = response.body.value2;
+            storeDetailsObj.uniqueID = response.body.stloc_id;
 
-  origin.getResponse(
-    'GET',
-    PhysicalStoreUrl,
-    reqHeaders,
-    null,
-    null,
-    null,
-    '',
-    response => {
-      if (response.status === 200) {
-        const storedetailsObj = {};
-
-        storedetailsObj.latitude = response.body.latitude;
-        storedetailsObj.longitude = response.body.longitude;
-        storedetailsObj.telephone = response.body.phone;
-        // storedetailsObj.storeName = response.body.storeName;
-        storedetailsObj.city = response.body.city;
-        storedetailsObj.storeHours = response.body.value1;
-        storedetailsObj.type = response.body.displayvalue;
-        storedetailsObj.address1 = response.body.address1;
-        storedetailsObj.address2 = response.body.address2;
-        storedetailsObj.pinCode = response.body.zipcode;
-        storedetailsObj.ownership = response.body.value2;
-        storedetailsObj.uniqueID = response.body.stloc_id;
-
-        callback(null, storedetailsObj);
-      } else {
-        callback(errorUtils.handleWCSError(response));
+            storeDetailsArr.push(storeDetailsObj);
+            cb(null, storeDetailsArr);
+          } else {
+            cb(errorUtils.handleWCSError(response));
+          }
+        },
+      );
+    },
+    (errors, results) => {
+      if (errors) {
+        callback(errors);
+        return;
       }
+      resultsArr.push(results);
+      callback(null, storeDetailsArr);
     },
   );
 };
