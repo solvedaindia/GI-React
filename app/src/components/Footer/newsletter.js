@@ -45,13 +45,14 @@ class newsletter extends React.Component {
   render() {
     const newsletterHtml = (
       <Col md={12} sm={12} className="newsletter_section">
-        <h6 className="heading news_heading">{this.props.name.text}</h6>
+        {this.props.isFromMobile ? null : <h6 className="heading news_heading">{this.props.name.text}</h6> }
         <ul className="newsletterList">
-          {this.props.name.children.map((newsletterDesc, index) => (
+          {this.props.name.children.map((newsletterDesc, index) => {
+            console.log('NEwsletter --- ',newsletterDesc);
             <li className="list" key={index}>
               <h6 className="newsletter-heading">{newsletterDesc.text}</h6>
             </li>
-          ))}
+          })}
           <li>
             <Form inline>
               <FormControl
