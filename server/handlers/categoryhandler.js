@@ -7,6 +7,8 @@ const errorUtils = require('../utils/errorutils');
 const filter = require('../filters/filter');
 const headerUtil = require('../utils/headerutil');
 const productUtil = require('../utils/productutil');
+const categoryUtil = require('../utils/categoryutil');
+const categoryFilter = require('../filters/categoryfilter');
 
 const topCategories = '@top';
 const categoryNavigation = '@top?depthAndLimit=25,0';
@@ -47,9 +49,11 @@ module.exports.getCategories = function getCategories(
  */
 function getCategoriesData(urlParam, headers, callback) {
   const reqHeaders = headerUtil.getWCSHeaders(headers);
+
   const originUrl = constants.categoryview
     .replace('{{storeId}}', headers.storeId)
     .replace('{{urlParam}}', urlParam);
+
   origin.getResponse(
     originMethod,
     originUrl,
@@ -89,9 +93,37 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
     } else {
       logger.debug('Got all the origin resposes');
       const subCategoryArray = [];
+      const categoryIDs = [];
       const catlogGrupView = result.catalogGroupView;
       if (catlogGrupView && catlogGrupView.length > 0) {
-        async.map(
+        catlogGrupView.forEach(category => {
+          categoryIDs.push(category.uniqueID);
+        });
+        categoryUtil.getCategoryProductCountPrice(
+          reqHeaders,
+          categoryIDs,
+          (error, res) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+            catlogGrupView.forEach(category => {
+              const subCatData = categoryFilter.categoryDetails(category);
+              subCatData.productCount = '';
+              subCatData.startPrice = '';
+              if (res[subCatData.uniqueID]) {
+                subCatData.productCount =
+                  res[subCatData.uniqueID].productCount || '';
+                subCatData.startPrice =
+                  res[subCatData.uniqueID].startPrice || '';
+              }
+              subCategoryArray.push(subCatData);
+            });
+            callback(null, subCategoryArray);
+          },
+        );
+
+        /* async.map(
           catlogGrupView,
           (subCategory, cb) => {
             const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
@@ -101,7 +133,7 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
               (error, productViewResult) => {
                 if (!error) {
                   subCatData.productCount =
-                    productViewResult.catalogEntryView.length || 0; // Product Count
+                    productViewResult.recordSetTotal || 0; // Product Count
                   cb(null, subCatData);
                 } else {
                   cb(error);
@@ -119,7 +151,7 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
             });
             callback(null, subCategoryArray);
           },
-        );
+        ); */
       } else {
         callback(null, subCategoryArray);
       }

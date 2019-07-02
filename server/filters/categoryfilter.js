@@ -1,5 +1,4 @@
-const testJSON = require('../configs/testjson');
-
+const imagefilter = require('./imagefilter');
 /**
  * Filter Category Navigation Data.
  * @return Category Navigation Data
@@ -24,7 +23,6 @@ function getCatNavData(categoryData) {
     });
   }
   return categoryArray;
-  // return testJSON.categoryNavigation;
 }
 
 /**
@@ -37,20 +35,20 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail =
-    categoryDetails.thumbnail ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catthumbnail.png';
-  catData.fullImage =
-    categoryDetails.fullImage ||
-    'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/catfullimage.png';
+  catData.thumbnail = imagefilter.getImagePath(categoryDetails.thumbnail);
+  catData.fullImage = imagefilter.getImagePath(categoryDetails.fullImage);
+
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
-  catData.startPrice = 2499;
+  // catData.startPrice = 2499;
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
+  catData.pageTitle = categoryDetails.seo_prop_pageTitle || '';
+  catData.imageAltText = categoryDetails.seo_prop_imageAltText || '';
+  catData.metaDescription = categoryDetails.seo_prop_metaDescription || '';
   return catData;
 }

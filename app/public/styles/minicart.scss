@@ -16,7 +16,7 @@
   .cartCount {
     position: absolute;
     top: -6px;
-    right: 0;
+    right: -6px;
     background: $reddishPink;
     width: 16px;
     height: 16px;
@@ -159,4 +159,29 @@
       background: transparent;
     }
   }
+}
+
+// ----- Empty Minicart ------
+.emptyCart {
+ text-align: center;
+ padding: 30px 40px;
+ .heading{
+   margin:0;   
+   color:$black;
+   font-size: 22px;
+}
+.subheading{
+  margin:0;   
+  color: $battleshipGrey;
+  font-size: 14px;
+  padding:8px 0 0 0;
+}
+
+.emptyCartIcon {
+  width: 25%;
+  
+  
+  
+}
+
 }

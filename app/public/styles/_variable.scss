@@ -21,8 +21,12 @@ $greyLight:#767676;
 $greenDark:#017b6b;
 $greenLight:#00b5a4;
 $paleGrey:#eef8fe;
-
+$greyDark:#222222;
+$darkAshGrey: #979797;
 $greylightColor:#505d68;
+$ceruleanblueLight:#3c79a1;
+$greyborder:#e4eaee;
+$greycolor:#737272;
 
 /*--Border Variable
 -------------------------------**/
@@ -30,8 +34,18 @@ $borderLight:#eeeded;
 $battleshipGrey: #77787a;
 $lightblueGrey:#d1d1d2;
 $greyBorder:#888a8d;
+$greyLightborder:#979797;
+$ceruleanblueborder:#63b0e1;
 /*---Font variables
 --------------------------------**/
 $font-regular:CeraGIRegular,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;
+$font-medium:CeraGIMedium,sans-serif; 
+
+
+// Mixins 
+
+@mixin container-width {
+    width: 83.33%;
+}

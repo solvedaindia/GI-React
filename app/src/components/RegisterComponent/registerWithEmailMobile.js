@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Row, Col, Label } from 'react-bootstrap';
 import {
   registartionAPI,
   generateOTPAPI,
-  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import {
@@ -11,6 +10,8 @@ import {
   regexMobileNo,
   validateEmptyObject,
   regexPw,
+  validateFullName,
+  regexName
 } from '../../utils/validationManager';
 import {
   registerWithEmail,
@@ -19,6 +20,7 @@ import {
   registerWithMobileNumText,
 } from './constants';
 import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
+import appCookie from '../../utils/cookie';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -32,7 +34,9 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
-    };
+      isActive: 'hideData'
+	};
+	this.callbackFunc = this.callbackFunc.bind(this);
   }
 
   componentDidMount() {
@@ -40,14 +44,21 @@ class RegisterWithEmailMobile extends React.Component {
       this.setState({
         name: this.props.userdata.name,
         userId: this.props.userdata.user_id,
-        password: this.props.userdata.password,
+		//password: this.props.userdata.password,
+		password: ''
       });
     }
   }
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass});
   };
 
   /* Handle Validation */
@@ -65,7 +76,12 @@ class RegisterWithEmailMobile extends React.Component {
         errorMessageName: 'This field is required',
       });
       isValidate = false;
-    }
+	} else if (!validateFullName(obj.name) || !(regexName.test(obj.name))) {
+		this.setState({
+		  errorMessageName: 'Please enter a valid Name. It should not exceed 100 characters',
+		});
+		isValidate = false;
+	}
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
@@ -95,13 +111,19 @@ class RegisterWithEmailMobile extends React.Component {
         errorMessagePassword: 'The field is required',
       });
       isValidate = false;
-    } else if (!regexPw.test(obj.password)) {
+    } else if (!regexPw.test(obj.password) && obj.password.length < 25) {
       this.setState({
         errorMessagePassword:
           'Invalid Password. Password should have min 6 characters and atleast 1 number',
       });
       isValidate = false;
-    }
+    } else if ((!regexPw.test(obj.password) && obj.password.length > 24) || obj.password.length > 25) {
+		this.setState({
+		  errorMessagePassword:
+			'Invalid Password. Password should have max 25 characters and atleast 1 number',
+		});
+		isValidate = false;
+	  }
     return isValidate;
   }
 
@@ -118,21 +140,22 @@ class RegisterWithEmailMobile extends React.Component {
       name: this.state.name,
       user_id: this.state.userId,
       password: this.state.password,
+      pincode: appCookie.get('pincode'),
     };
 
     if (this.props.registrationType === registerWithEmail) {
       this.props.handleApi(
         registartionAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		this.props.registrationType,
+		this.callbackFunc
       );
     } else {
       this.props.handleApi(
         generateOTPAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		this.props.registrationType,
+		this.callbackFunc
       );
     }
   };
@@ -154,6 +177,20 @@ class RegisterWithEmailMobile extends React.Component {
       });
     }
   }
+
+  callbackFunc(errorMsg) {
+  if (errorMsg === 'userid and password cannot be same') {
+	this.setState({
+		errorMessagePassword: errorMsg
+	});
+
+  } else {
+	this.setState({
+		errorMessageUserId: errorMsg
+	});
+  }
+  }
+
 
   renderLoginComponent() {
     this.props.loginComponentData();
@@ -248,6 +285,7 @@ class RegisterWithEmailMobile extends React.Component {
                         <input
                           type={this.state.inputType}
                           name="password"
+                          id="password"
                           className="form-control"
                           placeholder="Please Enter Your Password"
                           onChange={this.handleChange}
@@ -255,7 +293,7 @@ class RegisterWithEmailMobile extends React.Component {
                         />
                         <span
                           onClick={this.showHidePass.bind(this)}
-                          className="valiationPosition-NewPassword"
+                          className={`valiationPosition-NewPassword ${this.state.isActive}`}
                         >
                           {
                             <img

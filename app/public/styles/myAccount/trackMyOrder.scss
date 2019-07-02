@@ -1,0 +1,107 @@
+@import "../variable";
+
+.trackMyOrder {
+
+  .backBtn {
+    border: none;
+    background: transparent;
+  }
+
+  .bottomDivider {
+    border-bottom: solid 1px $greyborder;
+    padding: 0px 0 11px 0;
+  }
+}
+
+.orderProduct {
+  border-bottom: solid 1px $greyborder;
+  padding: 0px 0 29px 0;
+  .orderbtn {
+    width: 25%;
+    float: right;
+    .btn-cancel {
+      margin: 0 0 16px 0;
+    }
+    .btn-borderwhite {
+      width: 100%;
+      font-size: 14px;
+      font-family: $font-bold;
+      &:hover {
+        background: $black;
+        color: $colorwhite;
+      }
+    }
+  }
+  .orderimgbox {
+    width: 50%;
+    float: left;
+    .imgBox {
+      float: left;
+      display: block;
+      width: 35%;
+      border: 1px solid #efeeed;
+      .imgfullwidth {
+        width: 100%;
+      }
+    }
+
+    .product-text {
+      float: left;
+      display: block;
+      width: 65%;
+      padding: 0 0 0 12px;
+
+      .heading {
+        color: $black;
+        font-family: $font-bold;
+        font-size: 16px;
+        margin: 0;
+      }
+      .description {
+        margin: 0;
+        font-size: 10px;
+        color: $greyLight;
+      }
+      .price {
+        margin: 0;
+        .discount-price {
+          font-size: 20px;
+          color: $cerulean;
+          font-family: $font-bold;
+        }
+        .priceno-discount {
+          font-size: 16px;
+          color: $greylightColor;
+          font-family: $font-light;
+          text-decoration: line-through;
+          text-decoration-color: $reddishpink;
+          padding: 0 0 0 10px;
+        }
+      }
+
+      .quantity-shipping {
+        color: $battleshipGrey;
+        font-size: 10px;
+        margin: 0;
+        .quantity {
+          padding: 0 16px 0 0;
+          display: block;
+          width: 25%;
+          float: left;
+          .textval {
+            color: $black;
+            font-size: 18px;
+          }
+        }
+        .shipping-charge {
+          float: left;
+          display: block;
+          .textval {
+            color: $black;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

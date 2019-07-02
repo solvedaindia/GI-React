@@ -5,7 +5,7 @@ export const secureHttp = 'https';
 export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
-export const host1 = '192.168.0.36';
+export const host1 = '192.168.0.57';
 export const host = 'localhost';
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -34,6 +34,12 @@ export const wishListCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/
 export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/additem`;
 /* Remove from Wishlist API */
 export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
+/* Cart Detail API */
+export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
+/* Cart Update API*/ 
+export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
+/* Cart Item Delet API*/
+export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */
@@ -59,14 +65,14 @@ export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter
 /* Newsletter Subscription Status API */
 export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
 /* store Id */
-export const storeId = '10151';
+export const storeId = 'GodrejInterioESite';
 /* Access Token */
 export let accessToken = getTheAccessToken();
 /* Facebook AppId */
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
 export const googleClientId =
-  '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -93,8 +99,7 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
-/* Footer logo url */
-export const footerLogoUrl = `${secureHttp}://${host1}:${port3}/wcsstore/GodrejInterioSAS/images/godrejInterio/logo-white.svg`;
+
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
 /* PDP API */
@@ -105,16 +110,63 @@ export const addToCart = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ad
 export const minicartAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/minicart`;
 /* MyWishlist API */
 export const myWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/page`;
+/* Change Password API */
+export const changePasswordAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/changepassword`;
+/* Get City State API */
+export const cityStateAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
+/* Add Address API */
+export const addAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/add`;
+/* Get Address List API */
+export const getAddressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+/* Delete Address API */
+export const deleteAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/delete/`;
+/* Update/SetAsDefault Address API */
+export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/update/`;
+/* PDP API */
+export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
+/* User Detail API */
+export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
+/* Pincode API */
+export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
+/* Find Inventory API */
+export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Search Page API */
+export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
+/* User Detail Validate API */
+export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
+/* User Detail Update API */
+export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
 
+/* Notify Me API */
+export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
+
+/* Address List API */
+export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+
+/* User data API */
+export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
+
+/* Compare API */
+export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
 export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
-export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
+export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
+export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
+export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
+//export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const catalog = 'GodrejInterioSAS';
+export const imageStore = 'imagestore';
+export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+
+/* Footer logo url */
+export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-  console.log('constantToke -----', tokenPro);
-  if (validateEmptyObject(tokenPro)) {
-    return (accessToken = tokenPro);
-  }
-  return (accessToken = getCookie(accessTokenCookie));
+    console.log('constantToke -----', tokenPro);
+    if (validateEmptyObject(tokenPro)) {
+        return (accessToken = tokenPro);
+    }
+    return (accessToken = getCookie(accessTokenCookie));
 }

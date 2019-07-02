@@ -1,94 +1,322 @@
 const async = require('async');
+const sortJsonArray = require('sort-json-array');
 const errorUtils = require('../utils/errorutils');
 const logger = require('../utils/logger.js');
 const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
+const pincodeUtil = require('../utils/pincodeutil');
 const pdpfilter = require('../filters/productdetailfilter');
+const headerutil = require('../utils/headerutil.js');
+const constants = require('../utils/constants');
+const origin = require('../utils/origin.js');
+const activityHandler = require('../handlers/activityhandler');
 
-const associatedPromo = [
-  {
-    name: 'Free accessories',
-    description: null,
-  },
-  {
-    name: 'Cashback Offer',
-    description:
-      'Get 10% cashback upto Rs 500 on Purchases on 1499. For limited period only.',
-  },
-  {
-    name: 'Coupon Offer',
-    description: 'Use coupon FIRSTBUY and get 599 off.',
-  },
-];
+const notifyMessage = 'We’ll notify you when this product is back in stock';
+
 /**
- * Function for PLP Data
- * @param
- * @returns
- * @throws
+ * Function for PDP Data
+ * @param {skuId}
+ * @returns 200, will return Product Data for PDP
+ * @throws ontexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.getProductDetails = function getProductDetails(req, callback) {
+module.exports.getProductDetails = function getProductDetailsData(
+  req,
+  callback,
+) {
   logger.debug('Inside the GET PDP Data Method');
-  if (!req.params.productId) {
+  if (!req.params.skuId) {
     logger.debug('GET PDP Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
 
   const reqHeaders = req.headers;
-  const productID = req.params.productId;
+  const skuID = req.params.skuId;
 
-  productUtil.productByProductID(productID, reqHeaders, (err, result) => {
+  activityHandler.addRecentlyViewedProduct(reqHeaders, skuID);
+  productUtil.productByProductID(skuID, reqHeaders, (err, result) => {
     if (err) {
-      callback(errorUtils.handleWCSError(err));
+      callback(err);
     } else {
-      logger.debug('Got all the origin resposes for Product Detail');
-      callback(null, productSummaryJson(reqHeaders, result));
+      logger.debug('Got all the origin resposes From PDP API');
+      if (result.catalogEntryView.length > 0) {
+        if (result.catalogEntryView[0].catalogEntryTypeCode === 'ProductBean') {
+          callback(null, {});
+        } else {
+          const productId = result.catalogEntryView[0].parentCatalogEntryID;
+          const taskList = [
+            productDetails.bind(null, reqHeaders, productId),
+            productListByIDs,
+            promotionDetails,
+            mergePDPData,
+          ];
+          async.waterfall(taskList, (er, res) => {
+            if (er) {
+              callback(er);
+            } else {
+              callback(null, res);
+            }
+          });
+        }
+      } else {
+        callback(null, {});
+      }
     }
   });
-
-  // callback(null, transformJSON(prodDetails));
-  // async.parallel(
-  //   [
-  //     productDetails.bind(null, reqHeaders, productID),
-  //     // promotionDetails.bind(null, reqHeaders, productID),
-  //   ],
-  //   (err, result) => {
-  //     if (err) {
-  //       callback(errorUtils.handleWCSError(err));
-  //     } else {
-  //       logger.debug('Got all the origin resposes for Product Detail');
-  //       callback(null, transformJSON(result));
-  //     }
-  //   },
-  // );
 };
 
-module.exports.getAssociatedProducts = function associatedProducts(
-  req,
+/**
+ * Function for pincode service ability
+ * @param {pincode, partNumber, quantity, uniqueId}
+ * @returns 200, will return pincode servicability, delivery data and experience at store data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getPincodeServiceability = function getPincodeServiceability(
+  reqHeaders,
+  reqParams,
   callback,
 ) {
-  logger.debug('Inside the Associated Products data Method');
-  if (!req.params.skuId) {
+  logger.debug('Inside the GET PINCODE SERVICEABILITY API Method');
+  if (
+    !reqParams.pincode ||
+    !reqParams.partnumber ||
+    !reqParams.quantity ||
+    !reqParams.uniqueid
+  ) {
     logger.debug('GET PDP Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
   }
 
-  const reqHeaders = req.headers;
-  const skuID = req.params.skuId;
+  const reqBody = {
+    pincode: reqParams.pincode,
+    partNumber: reqParams.partnumber,
+    quantity: reqParams.quantity,
+    skuId: reqParams.uniqueid,
+  };
 
-  productUtil.productByProductID(skuID, reqHeaders, (err, result) => {
+  pincodeUtil.getPincodeServiceability(
+    reqHeaders,
+    reqBody.pincode,
+    (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        logger.debug('Got all the origin resposes From Pincode Serviceability');
+        const serviceability = result.serviceable;
+        if (serviceability === true) {
+          async.parallel(
+            [
+              findInventory.bind(null, reqHeaders, reqBody),
+              getShippingCharge.bind(null, reqHeaders, reqBody),
+              getExperienceStore.bind(null, reqHeaders, reqBody),
+            ],
+            // eslint-disable-next-line no-shadow
+            (err, result) => {
+              if (err) {
+                callback(errorUtils.handleWCSError(err));
+              } else {
+                callback(null, transformJson(result, serviceability));
+              }
+            },
+          );
+        } else {
+          callback(null, transformJson('', serviceability));
+        }
+      }
+    },
+  );
+};
+
+/**
+ * SKU Details Summary by Product ID and Swatch Color Identifier
+ */
+module.exports.getProductDetailByColor = function getProductDetailByColor(
+  req,
+  callback,
+) {
+  if (!req.params.productId || !req.query.coloridentifier) {
+    logger.debug('GET SKU Details by Color :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeaders = req.headers;
+  const productID = req.params.productId;
+  const colorIdentifier = req.query.coloridentifier;
+  let resJSON = {};
+
+  productUtil.productByProductID(productID, reqHeaders, (err, result) => {
     if (err) {
       callback(errorUtils.handleWCSError(err));
+    } else if (result.catalogEntryView && result.catalogEntryView.length > 0) {
+      const skuArray = result.catalogEntryView[0].sKUs;
+      const skuDetail = [];
+      if (skuArray && skuArray.length > 0) {
+        skuArray.forEach(sku => {
+          const attributeArray = sku.attributes;
+          attributeArray.forEach(attribute => {
+            if (attribute.identifier === 'fc') {
+              if (attribute.values[0].identifier === colorIdentifier) {
+                skuDetail.push(sku);
+              }
+            }
+          });
+        });
+      }
+      if (skuDetail.length > 0) {
+        promotionUtil.getPromotionData(
+          skuDetail[0].uniqueID,
+          reqHeaders,
+          (error, promotionResult) => {
+            if (error) {
+              callback(error);
+              return;
+            }
+            resJSON = pdpfilter.productDetailSummary(skuDetail[0]);
+            const swatchColor = pdpfilter.getSwatchData(
+              skuDetail[0].attributes,
+            );
+            if (swatchColor && swatchColor.length > 0) {
+              resJSON.swatchColor = swatchColor[0].name;
+            }
+            resJSON.promotionData = pdpfilter.getSummaryPromotion(
+              promotionResult,
+            );
+            callback(null, resJSON);
+          },
+        );
+      } else {
+        callback(null, resJSON);
+      }
     } else {
-      logger.debug('Got all the origin resposes for Product Detail');
-      callback(null, result);
+      callback(null, resJSON);
     }
   });
 };
 
-/** Promotions Details */
-function promotionDetails(header, ProductID, callback) {
-  promotionUtil.promotionData(ProductID, header, (err, result) => {
+/**
+ * Product Details Summary
+ */
+module.exports.getProductDetailSummary = function getProductDetailSummary(
+  req,
+  callback,
+) {
+  if (!req.params.skuId) {
+    logger.debug('GET SKU Details by Color :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeaders = req.headers;
+  const productID = req.params.skuId;
+
+  let resJSON = {};
+  const productDetailTask = [
+    productUtil.productByProductID.bind(null, productID, reqHeaders),
+    promotionUtil.getPromotionData.bind(null, productID, reqHeaders),
+  ];
+
+  async.parallel(productDetailTask, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    logger.debug('Got all the origin resposes for SKU Detail Summary');
+    if (result[0].catalogEntryView && result[0].catalogEntryView.length > 0) {
+      resJSON = pdpfilter.productDetailSummary(result[0].catalogEntryView[0]);
+      resJSON.promotionData = pdpfilter.getSummaryPromotion(result[1]);
+    }
+
+    callback(null, resJSON);
+  });
+};
+
+/**
+ * Function for Notify Me API
+ * @returns 200, will return a notification when the product is back in stock
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.setProductNotification = function productStockNotification(
+  req,
+  callback,
+) {
+  logger.debug('Inside the Notify Me API ');
+  if (!req.body.email_id || !req.body.part_number || !req.body.pincode) {
+    logger.debug('Notify Me API :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+  const reqBody = {
+    emailId: req.body.email_id,
+    partNumber: req.body.part_number,
+    pinCode: req.body.pincode,
+  };
+  const originUrl = constants.notifyMe.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+  origin.getResponse(
+    'POST',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, { message: notifyMessage });
+      } else {
+        logger.debug('Error While calling Notify ME API');
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * This Function will return shipping cahrge
+ * @param {*} header
+ * @param {*} reqParams
+ * @param {*} callback
+ */
+function getShippingCharge(header, reqParams, callback) {
+  pincodeUtil.getShippingCharge(header, reqParams, (err, result) => {
+    if (err) {
+      callback(null, 'Sipping charge not found');
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+/**
+ * Function for Experience Store
+ * @param {*} header
+ * @param {*} reqParams
+ * @param {*} callback
+ * @returns this function will return experience store data
+ */
+function getExperienceStore(header, reqParams, callback) {
+  pincodeUtil.experienceStore(header, reqParams, (err, result) => {
+    if (err) {
+      callback(null, 'Store not found');
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+/**
+ * This function will return inventory status
+ * @param {*} header
+ * @param {*} reqParams
+ * @param {*} callback
+ */
+function findInventory(header, reqParams, callback) {
+  pincodeUtil.findInventory(header, reqParams, (err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -97,155 +325,170 @@ function promotionDetails(header, ProductID, callback) {
   });
 }
 
-function productSummaryJson(headers, bodyData) {
-  const productDataSummary = {};
-  const productData = bodyData.catalogEntryView[0];
-  productDataSummary.uniqueID = productData.uniqueID;
-  productDataSummary.type = 'product';
-  const attributes = getAttributes(productData.attributes);
-  productDataSummary.defAttributes = getDefAttributes(attributes);
-  productDataSummary.productDetails = {};
-  if (attributes.descriptive && attributes.descriptive.length > 0) {
-    attributes.descriptive.forEach(descriptive => {
-      if (descriptive.identifier === 'productDetail') {
-        productDataSummary.productDetails = getProductDetails(
-          descriptive.values[0],
-          productData.attachments,
-        );
-      }
-    });
-  }
-  if (productData.sKUs && productData.sKUs.length > 0) {
-    productDataSummary.skuData = getSkuData(productData);
-    // productDataSummary.skuData = getSkuDataV2(headers, productData);
-    const features = productData.sKUs[0].UserData[0].x_auxDescription1;
-    try {
-      const jsonParse = JSON.parse(features);
-      productDataSummary.productFeatures = jsonParse.Features;
-    } catch (err) {
-      logger.error();
-      productDataSummary.features = [];
-    }
-  }
-  productDataSummary.purchaseGuide = getPurchaseGuide(productData.attachments);
-  productDataSummary.keywords = getKeywords(productData.keyword);
-  return productDataSummary;
-}
-
-/** *
- * This function will return product images and videos
- */
-function getAttachments(attachments) {
-  const productAttachment = [];
-  let i;
-  let j;
-  for (i = 0; i < attachments.length; i++) {
-    if (attachments[i].usage === 'ANGLEIMAGES_FULLIMAGE') {
-      for (j = 1; j < attachments.length; j++) {
-        if (
-          attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
-          attachments[j].name === attachments[i].name
-        ) {
-          productAttachment.push({
-            type: 'image',
-            fullImagePath: attachments[i].attachmentAssetPath,
-            thumbnailPath: attachments[j].attachmentAssetPath,
-          });
-          break;
-        }
-      }
-    } else if (
-      attachments[i].usage === 'IMAGES' &&
-      attachments[i].name !== 'productDetailImage'
-    ) {
-      productAttachment.push({
-        type: 'video',
-        name: attachments[i].name,
-        thumbnailPath: `${attachments[i].attachmentAssetPath}/${
-          attachments[i].image
-        }`,
-        videoPath: `${attachments[i].attachmentAssetPath}/${
-          attachments[i].image
-        }`,
-      });
-    }
-  }
-  return productAttachment;
-}
-
 /**
- * Function to return defining attributes for Itembean and productbean
- * @param {*} attributes
+ * This function will return product data
+ * @param {*} header
+ * @param {*} productID
+ * @param {*} callback
  */
-function getDefAttributes(attributes) {
-  const defAttributes = [];
-  attributes.defining.forEach(attribute => {
-    if (attribute.identifier === 'colorSwatch') {
-      const colorValues = [];
-      attribute.values.forEach(element => {
-        colorValues.push({
-          name: element.value,
-          facetImage: element.image1path || '',
-          colorCode: element.colorCode || '',
-        });
-      });
-      defAttributes.push({ name: attribute.name, values: colorValues });
-    } else if (attribute.identifier === 'materialSwatch') {
-      const materialValues = [];
-      attribute.values.forEach(element => {
-        materialValues.push({
-          name: element.value,
-          facetImage: element.image1path || '',
-        });
-      });
-      defAttributes.push({ name: attribute.name, values: materialValues });
+function productDetails(header, productID, callback) {
+  productUtil.productByProductID(productID, header, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, header, result);
     }
   });
-  return defAttributes;
 }
 
 /**
- * Function to return SKU data for PDP
- * @param {*} bodyData
+ * This function will return product data on the basis of ProductIds
+ * @param {*} header
+ * @param {*} productData
+ * @param {*} callback
  */
-function getSkuData(bodyData) {
+function productListByIDs(header, productData, callback) {
+  const skuIds = [];
+  if (productData.catalogEntryView.length > 0) {
+    if (
+      productData.catalogEntryView[0].sKUs &&
+      productData.catalogEntryView[0].sKUs.length > 0
+    ) {
+      productData.catalogEntryView[0].sKUs.forEach(sku => {
+        if (skuIds.indexOf(sku.uniqueID) === -1) {
+          skuIds.push(sku.uniqueID);
+        }
+      });
+    }
+  }
+  productUtil.getProductListByIDs(header, skuIds, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      if (result.length > 0) {
+        result.forEach(sku => {
+          if (sku.merchandisingAssociations.length > 0) {
+            sku.merchandisingAssociations.forEach(element => {
+              if (skuIds.indexOf(element.uniqueID) === -1) {
+                skuIds.push(element.uniqueID);
+              }
+            });
+          }
+        });
+      }
+      callback(null, header, productData, result, skuIds);
+    }
+  });
+}
+
+/**
+ * Function for Promotions Details
+ * @param {*} header
+ * @param {*} productData
+ * @param {*} skuData
+ * @param {*} skuIds
+ * @param {*} callback
+ */
+function promotionDetails(header, productData, skuData, skuIds, callback) {
+  promotionUtil.getMultiplePromotionData(skuIds, header, (err, result) => {
+    if (err) {
+      callback(null, productData, skuData, '');
+    } else {
+      callback(null, productData, skuData, result);
+    }
+  });
+}
+
+/**
+ * Function for merging PDP data
+ * @param {*} prodData
+ * @param {*} skuData
+ * @param {*} promoData
+ * @param {*} callback
+ * @return this function will merge productData, skuData and promoData and return PDP data
+ */
+function mergePDPData(prodData, skuData, promoData, callback) {
+  const productDataSummary = {
+    uniqueID: '',
+    type: 'product',
+    defAttributes: [],
+    skuData: [],
+    productDetails: [],
+    productFeatures: [],
+    purchaseGuide: [],
+    keywords: [],
+  };
+
+  if (prodData.catalogEntryView.length > 0) {
+    const productData = prodData.catalogEntryView[0];
+    productDataSummary.uniqueID = productData.uniqueID;
+    const attributes = pdpfilter.getAttributes(productData);
+    productDataSummary.defAttributes = pdpfilter.getDefAttributes(
+      attributes.defining,
+    );
+    productDataSummary.skuData = getSkuData(skuData, promoData);
+    productDataSummary.productDetails = pdpfilter.getProductDetails(
+      attributes,
+      productData,
+    );
+    productDataSummary.productFeatures = pdpfilter.getProductFeatures(
+      attributes,
+    );
+    productDataSummary.purchaseGuide = pdpfilter.getPurchaseGuide(productData);
+    productDataSummary.keywords = pdpfilter.getKeywords(productData.keyword);
+  }
+  callback(null, productDataSummary);
+}
+
+/**
+ * Function for transforming JSON strcuture for Pincode Serviceability API
+ * @param {*} result
+ * @param {*} serviceability
+ */
+function transformJson(result, serviceability) {
+  const pincodeData = {};
+  pincodeData.pincodeServiceable = serviceability;
+  if (result && result.length > 0) {
+    pincodeData.inventoryStatus = result[0].inventoryStatus || '';
+    pincodeData.deliveryDateAndTime = result[0].deliveryDate || '';
+    pincodeData.shippingCharge = result[1].ShipCharge || '';
+    pincodeData.experienceStore = transformExperienceStore(result[2]);
+    // pincodeData.experienceStore = transformExperienceStore(experienceStore);
+  }
+  return pincodeData;
+}
+
+/**
+ * Function for SKU Data
+ * @param {*} bodyData
+ * @param {*} promotions
+ */
+function getSkuData(bodyData, promotions) {
   const skuData = [];
-  if (bodyData.sKUs && bodyData.sKUs.length > 0) {
-    bodyData.sKUs.forEach(sku => {
-      const skuDataJson = {};
-      skuDataJson.uniqueID = sku.uniqueID;
-      skuDataJson.productName = sku.name;
-      skuDataJson.partNumber = sku.partNumber;
-      skuDataJson.parentCatalogEntryID = sku.parentCatalogEntryID;
-      skuDataJson.emiData = Number(sku.x_field1_i) || '';
-      skuDataJson.fullImagePath = sku.fullImage || '';
-      skuDataJson.thumbImagePath = sku.thumbnail || '';
-      skuDataJson.shortDescription = sku.shortDescription || '';
-      if (sku.price && sku.price.length > 0) {
-        sku.price.forEach(price => {
-          if (price.usage === 'Display') {
-            skuDataJson.actualPrice = Number(price.value);
-          }
-          if (price.usage === 'Offer') {
-            skuDataJson.offerPrice = Number(price.value);
-          }
+  if (bodyData && bodyData.length > 0) {
+    bodyData.forEach(sku => {
+      const skuDataJson = pdpfilter.productDetailSummary(sku);
+      delete skuDataJson.promotionData;
+      const attachment = pdpfilter.getAttachments(sku);
+      const attributes = pdpfilter.getAttributes(sku);
+      const mercAssociations = getMercAssociationsData(sku, promotions);
+      skuDataJson.defAttributes = pdpfilter.getDefAttributes(
+        attributes.defining,
+      );
+      skuDataJson.attachments = attachment || '';
+      const associatedPromo = [];
+      if (promotions[sku.uniqueID]) {
+        promotions[sku.uniqueID].forEach(promo => {
+          associatedPromo.push({
+            name: promo.name,
+            description: promo.description || '',
+            promocode: promo.promoCode,
+          });
         });
       }
-      const attributes = getAttributes(sku.attributes);
-      if (attributes.descriptive && attributes.descriptive.length > 0) {
-        attributes.descriptive.forEach(descriptive => {
-          if (descriptive.storeDisplay === true) {
-            skuDataJson.ribbonText = descriptive.values[0].value;
-          }
-        });
-      }
-      skuDataJson.discount = getDiscount(attributes);
-      skuDataJson.defAttributes = getDefAttributes(attributes);
-      skuDataJson.attachments = getAttachments(sku.attachments);
-      skuDataJson.promotions = associatedPromo || '';
-      const similarProducts = getSimilarProductsData(bodyData);
-      skuDataJson.similarProducts = similarProducts.similarProducts || '';
-      skuDataJson.combos = similarProducts.combosYouMayLike || '';
+      skuDataJson.promotions = associatedPromo;
+      skuDataJson.similarProducts = mercAssociations.similarProducts;
+      skuDataJson.combos = mercAssociations.combosYouMayLike;
       skuData.push(skuDataJson);
     });
   }
@@ -253,190 +496,71 @@ function getSkuData(bodyData) {
 }
 
 /**
- * Function to return dicount for Productbean and Itembean
- * @param {*} attributes
+ * Function for Merchendising Associations data
+ * @param {*} bodyData
+ * @param {*} promotions
  */
-function getDiscount(attributes) {
-  let discount;
-  if (attributes.defining && attributes.defining.length > 0) {
-    attributes.defining.forEach(defining => {
-      if (defining.identifier === 'percentOff') {
-        discount = defining.values[0].value;
+function getMercAssociationsData(bodyData, promotions) {
+  const mercAssociations = {};
+  const similarProductsData = [];
+  const combosYouLikeData = [];
+  if (
+    bodyData.merchandisingAssociations &&
+    bodyData.merchandisingAssociations.length > 0
+  ) {
+    bodyData.merchandisingAssociations.forEach(sku => {
+      // eslint-disable-next-line no-param-reassign
+      // sku.promotionData = promotions[sku.uniqueID];
+      if (sku.associationType === 'X-SELL') {
+        const similarProducts = pdpfilter.productDetailSummary(sku);
+        similarProducts.promotionData = pdpfilter.getSummaryPromotion(
+          promotions[sku.uniqueID],
+        );
+        similarProductsData.push(similarProducts);
+      } else if (sku.associationType === 'UPSELL') {
+        const combosData = pdpfilter.productDetailSummary(sku);
+        combosData.promotionData = pdpfilter.getSummaryPromotion(
+          promotions[sku.uniqueID],
+        );
+        combosYouLikeData.push(combosData);
       }
     });
   }
-  return discount;
+  mercAssociations.similarProducts = similarProductsData;
+  mercAssociations.combosYouMayLike = combosYouLikeData;
+  return mercAssociations;
 }
 
 /**
- * Function to return product details for Productbean
- * @param {*} productDetailsAttributes;
+ * Function for JSON Experience Store Data
+ * @param {*} bodyData
  */
-function getProductDetails(productDetailsValues, productAttachments) {
-  const productDetailsJSON = {};
-  if (productAttachments && productAttachments.length > 0) {
-    productAttachments.forEach(attachment => {
-      if (
-        attachment.usage === 'IMAGES' &&
-        attachment.name === 'productDetailImage'
-      ) {
-        productDetailsJSON.imagePath = `${attachment.attachmentAssetPath}/${
-          attachment.image
-        }`;
-      }
-    });
-  }
-
-  if (productDetailsValues) {
-    const productDetailsList = [];
-    const value = productDetailsValues.value;
-    try {
-      const jsonParse = JSON.parse(value);
-      jsonParse.ProductDetails.forEach(element => {
-        const productDetailsJson = {};
-        const productDataList = [];
-        const innerList = element.description.split(',');
-        for (let i = 0; i < innerList.length; i++) {
-          const valueList = innerList[i].split(':');
-          const prodJson = {};
-          prodJson.name = valueList[0];
-          prodJson.value = valueList[1];
-          productDataList.push(prodJson);
-        }
-        productDetailsJson.title = element.name;
-        productDetailsJson.values = productDataList;
-        productDetailsList.push(productDetailsJson);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-
-    // productDetailsValues.forEach(product => {
-    //   const productDetailObject = {};
-    //   let innerList = [];
-    //   const valuesList = [];
-    //   innerList = product.value.split(':');
-    //   for (let i = 1; i < innerList.length; i += 2) {
-    //     const valuesObject = {};
-    //     valuesObject.name = innerList[i];
-    //     valuesObject.value = innerList[i + 1] || '';
-    //     valuesList.push(valuesObject);
-    //   }
-    //   productDetailObject.title = innerList[0] || '';
-    //   productDetailObject.values = valuesList;
-    //   productDetailsList.push(productDetailObject);
-    // });
-    productDetailsJSON.description = productDetailsList;
-  }
-  return productDetailsJSON;
-}
-
-/**
- * Function to return defining and descriptive attributes for Productbean and Itembean
- * @param {*} productAttribute;
- */
-function getAttributes(productAttribute) {
-  const attributes = {};
-  const defining = [];
-  const descriptive = [];
-  if (productAttribute && productAttribute.length > 0) {
-    productAttribute.forEach(attribute => {
-      if (attribute.usage === 'Defining') {
-        defining.push(attribute);
-      }
-      if (attribute.usage === 'Descriptive') {
-        descriptive.push(attribute);
-      }
-    });
-  }
-  attributes.defining = defining;
-  attributes.descriptive = descriptive;
-  return attributes;
-}
-
-/** *
- * Function to return keywords for Productbean
- */
-function getKeywords(bodyData) {
-  const keywords = [];
-  const keywordArray = bodyData.split(',');
-  keywordArray.forEach(keyword => {
-    keywords.push(keyword);
-  });
-  return keywords;
-}
-
-/** *
- * Function to return purchase guide data for Productbean
- */
-function getPurchaseGuide(purchaseGuideData) {
-  const purchaseGuide = [];
-  if (purchaseGuideData && purchaseGuideData.length > 0) {
-    purchaseGuideData.forEach(element => {
-      if (
-        element.usage === 'MEDIA' &&
-        element.name.includes('purchaseGuideTab')
-      ) {
-        let innerList = [];
-        innerList = element.name.split(':');
-        purchaseGuide.push({
-          title: innerList[1] || '',
-          thumbImagePath: `${element.attachmentAssetPath}/${element.image}`,
-          path: '',
+function transformExperienceStore(bodyData) {
+  // eslint-disable-next-line no-shadow
+  const experienceStore = [];
+  if (bodyData.storeList) {
+    bodyData.storeList.sort(
+      (a, b) =>
+        parseInt(b.DistanceFromShipToAddress, 10) -
+        parseInt(a.DistanceFromShipToAddress, 10),
+    );
+    // eslint-disable-next-line no-param-reassign
+    bodyData.storeList = sortJsonArray(
+      bodyData.storeList,
+      'DistanceFromShipToAddress',
+      'des',
+    );
+    bodyData.storeList.forEach(store => {
+      if (store.IsAvailable === 'Y') {
+        experienceStore.push({
+          distanceFromShipToAddress: store.DistanceFromShipToAddress,
+          name: store.Description,
+          address: store.AddressLine1,
+          distanceMode: store.DistanceUOM,
+          availablilty: store.IsAvailable,
         });
       }
     });
   }
-  return purchaseGuide;
-}
-
-/**
- * Function to return similar products data for itembean
- */
-function getSimilarProductsData(bodyData) {
-  const mercAssociations = {};
-  bodyData.merchandisingAssociations.forEach(element => {
-    if (element.associationType === 'X-SELL') {
-      const similarProductsData = [];
-      element.sKUs.forEach(sku => {
-        similarProductsData.push(pdpfilter.productDetailSummary(sku));
-      });
-      // const similarProductsData = getSkuData(element, 'false');
-      mercAssociations.similarProducts = similarProductsData;
-    } else if (element.associationType === 'UPSELL') {
-      const combosYouLikeData = [];
-      element.sKUs.forEach(sku => {
-        combosYouLikeData.push(pdpfilter.productDetailSummary(sku));
-      });
-      // const combosYouLikeData = getSkuData(element, 'false');
-      mercAssociations.combosYouMayLike = combosYouLikeData;
-    }
-  });
-  return mercAssociations;
-}
-
-function getSkuDataV2(headers, bodyData) {
-  logger.debug('inside getSkuDataV2 method');
-  let skuData = [];
-  const skuDataJson = {};
-  bodyData.sKUs.map(sku => {
-    logger.debug('inside asyncMap method');
-    skuDataJson.uniqueID = sku.uniqueID;
-    promotionUtil.getPromotionData(
-      sku.uniqueID,
-      headers,
-      (error, promotionData) => {
-        console.log(`>>>>1212121212121>>>>>${JSON.stringify(promotionData)}`);
-        console.log(`>>>>12121$$$$$$$$21212121>>>>>${JSON.stringify(error)}`);
-        if (!error) {
-          skuDataJson.promotionData = promotionData;
-        }
-        skuDataJson.promotionData = '';
-      },
-    );
-    skuData.push(skuDataJson);
-    console.log(`>>>>121212#######1212121>>>>>${JSON.stringify(skuData)}`);
-  });
-  console.log(`>>>>>2222@@@@@@@22222>>>>>>>${skuData.length}`);
-  return skuData;
+  return experienceStore;
 }

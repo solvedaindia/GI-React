@@ -15,7 +15,7 @@ router.get('/page', (req, res, next) => {
   });
 });
 
-router.get('/itemlist', (req, res, next) => {
+/* router.get('/itemlist', (req, res, next) => {
   wishlistHandler.wishlistItemList(req.headers, (err, result) => {
     if (err) {
       next(err);
@@ -26,7 +26,7 @@ router.get('/itemlist', (req, res, next) => {
       data: result,
     });
   });
-});
+}); */
 
 router.get('/itemcount', (req, res, next) => {
   wishlistHandler.wishlistItemCount(req.headers, (err, result) => {
@@ -143,6 +143,42 @@ router.post('/deleteitem', (req, res, next) => {
       data: result,
     });
   });
+});
+
+router.post('/share/:externalId', (req, res, next) => {
+  wishlistHandler.shareWishlist(
+    req.headers,
+    req.body,
+    req.params,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
+});
+
+router.get('/externalpage/:externalId', (req, res, next) => {
+  wishlistHandler.getExternalWishlist(
+    req.headers,
+    req.params,
+    req.query,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
 });
 
 module.exports = router;

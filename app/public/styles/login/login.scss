@@ -87,6 +87,19 @@
             color: $errorMsg;
             font-size: $base*1.25;
         }
+
+        .password-field{
+            position: relative;
+            .valiationPosition-NewPassword {
+                position: absolute;
+                right: 15px;
+                top: 28px;
+                width: 25px;
+                z-index: 999999;
+            }
+        }
+        
+
     }
     .forgotPassword {
         font-size: $base*1.5;
@@ -122,6 +135,7 @@
             padding: $base;
             border: 1px solid $black;
             background: none;
+            font-size: $base*1.5;
             .icon{
                 width: $base*3;
                 margin: 0 $base;

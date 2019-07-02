@@ -23,14 +23,11 @@ class EspotContent extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          pageLayoutEspot: response.data.data,
+          pageLayoutEspot: data && data.data,
           isLoading: false,
         });
-        console.log(
-          '##########Homepage Layout espot##########',
-          response.data.data,
-        );
       })
       .catch(error => {
         this.setState({
@@ -47,13 +44,14 @@ class EspotContent extends React.Component {
 
   render() {
     const { pageLayoutEspot, index } = this.state;
+    if(!pageLayoutEspot) return null;
     return (
-      !!pageLayoutEspot && (
-        <div className="espotContent" id={index}>
-          <h1 className="title">{pageLayoutEspot.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
-        </div>
-      )
+		!!pageLayoutEspot && (
+			<div className="espotContent" id={index}>
+				<h1 className="title">{pageLayoutEspot.title}</h1>
+				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+			</div>
+		)
     );
   }
 }

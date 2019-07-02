@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 /* Import Components */
-import Input from '../Input/input';
+import Input from '../Primitives/input';
 import Button from '../Button/button';
 import {
   regexEmail,
@@ -18,7 +18,11 @@ class WelcomeForm extends Component {
       shown: true,
       errorMessageUserId: null,
       errorMessagePassword: null,
+      isShowPass: false,
+      inputType: 'password',
     };
+    this.showHidePass=this.showHidePass.bind(this);
+    this.callbackFunc=this.callbackFunc.bind(this);
   }
 
   /* Handle Change */
@@ -31,7 +35,6 @@ class WelcomeForm extends Component {
     let isValidate = errorType;
     const input = String(obj.userId);
     const firstChar = Number(input.charAt(0));
-
     this.setState({
       errorMessageUserId: null,
       errorMessagePassword: null,
@@ -79,8 +82,30 @@ class WelcomeForm extends Component {
       user_id: this.state.userId,
       password: this.state.password,
     };
-    this.props.handleUserData(data);
+    this.props.handleUserData(data, this.callbackFunc);
   };
+
+  callbackFunc(res) {
+    this.setState({
+      errorMessagePassword: res,
+    });
+    isValidate = false;
+  }
+
+  /* Show Hide Password */
+  showHidePass() {
+    if (this.state.isShowPass) {
+      this.setState({
+        isShowPass: false,
+        inputType: 'password',
+      });
+    } else {
+      this.setState({
+        isShowPass: true,
+        inputType: 'text',
+      });
+    }
+  }
 
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
@@ -102,20 +127,37 @@ class WelcomeForm extends Component {
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
         <Input
           type="text"
-          title="ENTER EMAIL/MOBILE NUMBER"
+          title="Email ID/Mobile Number"
           name="userId"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
+
+        <div className='password-field'>
         <Input
-          type="password"
+          type={this.state.inputType}
           name="password"
-          title="PASSWORD"
+          title="Password"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
+       <span
+            onClick={this.showHidePass}
+            className="valiationPosition-NewPassword"
+          >
+            {
+              <img
+                src={require('../../../src/components/SVGs/eye.svg')}
+              />
+            }
+          </span>
+        </div>
+
+        
         {errorMessagePassword}
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}

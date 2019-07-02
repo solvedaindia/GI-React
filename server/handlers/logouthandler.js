@@ -4,6 +4,8 @@ const errorutils = require('../utils/errorutils.js');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
 
+const logoutSuccessMessage = 'Logout Successful';
+
 /**
  * call to logout API
  * @param headers : wctoken and wctrustedtoken
@@ -18,6 +20,7 @@ module.exports.logout = function logout(headers, callback) {
     '{{storeId}}',
     headers.storeId,
   )}/loginidentity/@self`;
+
   origin.getResponse(
     'DELETE',
     originLoginURL,
@@ -27,12 +30,8 @@ module.exports.logout = function logout(headers, callback) {
     null,
     '',
     response => {
-      if (response) {
-        if (response.status === 200) {
-          callback(null, { message: 'Logout Successful' });
-        } else {
-          callback(errorutils.handleWCSError(response));
-        }
+      if (response.status === 200) {
+        callback(null, { message: logoutSuccessMessage });
       } else {
         logger.error('Error while calling logout API', response.status);
         callback(errorutils.handleWCSError(response));
