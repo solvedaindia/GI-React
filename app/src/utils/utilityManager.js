@@ -4,6 +4,26 @@ import {
 } from '../../public/constants/constants';
 // import { utimes } from 'fs';
 
+
+/**
+ * Function to get current URL hostname and port
+ * @param {*}
+ */
+export function getLocation(){
+  return window.location.hostname;
+}
+
+/**
+ * Function to get current URL hostname and port
+ * @param {*} pin
+*/
+export function validatePIN(pin) {
+  if (/^(\d{4}|\d{6})$/.test(pin)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 /**
  * Function to Fetch specific data from Cookie store
  * @param {*} cname
@@ -209,4 +229,8 @@ export function checkCompareWidget(compWidget, id) {
     }
   }
   return compWidget;
+}
+
+export function is(val, type) {
+  return Object.prototype.toString.call(val) === `[object ${type}]`
 }

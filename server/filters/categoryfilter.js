@@ -35,18 +35,15 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail =
-    imagefilter.getImagePath(categoryDetails.thumbnail) ||
-    '/images/godrejInterio/pdp/sampleImages/56101502SD00541/56101502SD00541_546x307_01.png';
-  catData.fullImage =
-    imagefilter.getImagePath(categoryDetails.fullImage) ||
-    '/images/godrejInterio/catfullimage.png';
+  catData.thumbnail = imagefilter.getImagePath(categoryDetails.thumbnail);
+  catData.fullImage = imagefilter.getImagePath(categoryDetails.fullImage);
+
   catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
-  catData.startPrice = 2499;
+  // catData.startPrice = 2499;
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }

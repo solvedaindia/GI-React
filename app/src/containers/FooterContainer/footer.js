@@ -25,8 +25,9 @@ class FooterContainer extends React.Component {
     apiManager
       .get(footerApi)
       .then(response => {
+		  const {data} = response || {};
         this.setState({
-          footer: response.data,
+          footer: data && data,
           loading: false,
         });
       })

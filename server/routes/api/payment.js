@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const paymentHandler = require('../../handlers/paymenthandler.js');
 
-router.get('/createchecksum', (req, res, next) => {
-  paymentHandler.createChecksum(req.query, req.headers, (err, result) => {
+router.get('/initiateBDPayment', (req, res, next) => {
+  paymentHandler.initiateBDPayment(req.query, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -15,8 +15,8 @@ router.get('/createchecksum', (req, res, next) => {
   });
 });
 
-router.post('/verifychecksum', (req, res, next) => {
-  paymentHandler.verifyChecksum(req.body, req.headers, (err, result) => {
+router.post('/verifyBDPayment', (req, res, next) => {
+  paymentHandler.verifyBDPayment(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

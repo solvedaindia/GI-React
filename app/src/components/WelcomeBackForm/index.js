@@ -22,6 +22,7 @@ class WelcomeForm extends Component {
       inputType: 'password',
     };
     this.showHidePass=this.showHidePass.bind(this);
+    this.callbackFunc=this.callbackFunc.bind(this);
   }
 
   /* Handle Change */
@@ -34,7 +35,6 @@ class WelcomeForm extends Component {
     let isValidate = errorType;
     const input = String(obj.userId);
     const firstChar = Number(input.charAt(0));
-
     this.setState({
       errorMessageUserId: null,
       errorMessagePassword: null,
@@ -82,8 +82,15 @@ class WelcomeForm extends Component {
       user_id: this.state.userId,
       password: this.state.password,
     };
-    this.props.handleUserData(data);
+    this.props.handleUserData(data, this.callbackFunc);
   };
+
+  callbackFunc(res) {
+    this.setState({
+      errorMessagePassword: res,
+    });
+    isValidate = false;
+  }
 
   /* Show Hide Password */
   showHidePass() {

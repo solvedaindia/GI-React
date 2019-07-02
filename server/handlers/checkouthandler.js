@@ -83,39 +83,30 @@ module.exports.userstatus = function getUserStatus(req, callback) {
   );
 };
 
-/**
- * Function for reserve inventory API
- */
-module.exports.reserveInventory = function setReserveInventory(req, callback) {
-  logger.debug('Inside Reserve Inventory API');
-  if (!req.body.order_id) {
-    logger.debug('Invalid Params : Reserve Inventory API');
-    callback(errorUtils.errorlist.invalid_params);
-    return;
-  }
+module.exports.bankList = function bankList(headers, callback) {
+  const reqHeaders = headerutil.getWCSHeaders(headers);
 
-  const reqHeader = headerutil.getWCSHeaders(req.headers);
-  const reqBody = {
-    orderId: req.body.order_id,
-  };
-  const originUrl = constants.reserveInventory.replace(
+  const getBankListURL = `${constants.getBankList.replace(
     '{{storeId}}',
-    req.headers.storeId,
-  );
+    headers.storeId,
+  )}`;
 
   origin.getResponse(
-    'PUT',
-    originUrl,
-    reqHeader,
+    'GET',
+    getBankListURL,
+    reqHeaders,
     null,
-    reqBody,
+    null,
     null,
     '',
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        const resJson = {
+          bankList: [],
+        };
+        resJson.bankList = response.body.BankList;
+        callback(null, resJson);
       } else {
-        logger.debug('Error While Set Reserve Inventory API');
         callback(errorUtils.handleWCSError(response));
       }
     },
