@@ -16,8 +16,8 @@ import CartUpdate from '../../components/Cart/updateCart';
 import '../../../public/styles/cart/cartItem.scss';
 import EMILogo from '../../components/SVGs/emiIcon';
 import TermsAndCondition from '../../components/Cart/tnc';
-import DeleteLogo from '../../components/SVGs/deleteIcon';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
+import MoveToWishList from '../../components/Cart/moveToWishList';
 
 class CartDetail extends React.Component {
     constructor(props){
@@ -55,6 +55,10 @@ class CartDetail extends React.Component {
                                         orderItemId={itemData.orderItemId}
                                         getCartDetails={this.props.getCartDetails}
                                     />}
+                                    <MoveToWishList
+                                        orderItemId={itemData.orderItemId}
+                                        getCartDetails={this.props.getCartDetails}
+                                    />
                                     {!itemData.freeGift &&
                                     <DeleteCartItem
                                         orderItemId={itemData.orderItemId}

@@ -90,10 +90,16 @@
                     font-size: $base*1.5;
                     top: $base*3.75;
                 }
-                .delCartItem {
+                .delCartItem,
+                .moveItem {
                     position: absolute;
                     bottom: 0;
+                }
+                .delCartItem {
                     right: $base;
+                }
+                .moveItem {
+                    right: $base*4;
                 }
             }
         }
