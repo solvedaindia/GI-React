@@ -510,9 +510,9 @@ export class PlpContainer extends React.Component {
     let titleItem = null;
     if (this.state.categoryDetail !== null) {
       titleItem = (
-        <h3 className="headingTitle">
+        <h1 className="headingTitle">
           {this.state.categoryDetail.categoryName}
-        </h3>
+        </h1>
       );
     }
     const params = new URLSearchParams(this.state.searchKeyword);

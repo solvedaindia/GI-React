@@ -173,6 +173,7 @@ section.tablecarousel {
     font-size: $base * 7;
     color: $ceruleanblue;
     margin: 0;
+    line-height: $base*7;
   }
   .searchresult {
     .headingTitleFlat {
@@ -382,6 +383,9 @@ section.tablecarousel {
           }
           .name {
             font-family: $font-bold;
+            font-size: $base*2.25;
+            line-height: 18px;
+            margin:0;
           }
           .description {
             font-family: $font-light;
