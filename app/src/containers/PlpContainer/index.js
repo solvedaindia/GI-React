@@ -300,7 +300,7 @@ export class PlpContainer extends React.Component {
               })
             }
             else {
-              if (response.data.data.spellCheck.length !== 0) {
+              if (response.data.data.spellCheck.length !== 0 && response.data.data.productList.length === 0) {
                 this.setState({
                   emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
                   showBestSeller: false,
@@ -438,10 +438,8 @@ export class PlpContainer extends React.Component {
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
-    if (
-      windowHeight >= windowOffsetHeight &&
-      windowHeight - 300 <= windowOffsetHeight
-    ) {
+    if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
+      console.log('On scroll call --- ',this.state.plpData)
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }
