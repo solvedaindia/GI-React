@@ -326,16 +326,20 @@ export class PlpContainer extends React.Component {
               displaySkus: response.data.data.categoryDetails.displaySkus,
             });
           }
-          console.log('mixmatchh --- ', response.data.data.productCount, this.state.pageNumber);
+          
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
-            hasMore: /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), //Now only show on 0 Products and disable it for lazyload
+            //hasMore: /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), //Now only show on 0 Products and disable it for lazyload
             filterData: response.data.data.facetData,
             isLoading: false,
             isCatDetails: false,
             browserFilters: [],
           });
+          console.log('mixmatchh --- ', this.state.plpData.length, Number(response.data.data.productCount));
+          this.setState({
+            hasMore: /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), //Now only show on 0 Products and disable it for lazyload
+          })
 
 
         })
