@@ -11,12 +11,13 @@ import Img1 from '../../../public/images/store/furniture-stores-black.png';
 import Img2 from '../../../public/images/store/mattress-stores-grey.png';
 import Img3 from '../../../public/images/store/kitchen-galleries-grey.png';
 import Img4 from '../../../public/images/store/b-2-b-experience-stores-grey.png';
+import MapData from "./map";
 
 function Map(){
     return (
         <GoogleMap
             defaultZoom={10}
-            defaultCenter={{lat: 13.10127, lng: 80.2873}}
+            defaultCenter={{lat: 28.36552, lng: 79.41523}}
         />
     );
 }
@@ -28,7 +29,7 @@ class StoreLocator extends React.Component {
         super(props);
         this.state = {
             storeData: null,
-            isLoading: false,
+            isLoading: true,
             ipData: null,
             testLat: '13.10127',
             testLong: '80.2873',
@@ -36,11 +37,11 @@ class StoreLocator extends React.Component {
             error: null,
             ipData: null
         };
+        
     }
 
     handleStoreType(storeType) {
         this.setState({
-
             storeType
         }, 
         () => this.handleStoreSearch())
@@ -50,41 +51,33 @@ class StoreLocator extends React.Component {
             var val = this.inputRef.value;
             if(!val) return;
             if(NUMB_REG.test(val)) {
-                //pincode section
+                this.getStoreDataByPincode(val);
             }
             else {
                 this.getSToreDataByCity(val);
             }
         }
     }
-    getIPData() {
-		apiManager
-		.get(ipDataApi, { headers: { Accept: 'application/json' } })
-		.then(response => {
-			this.setState({
-			ipData: response.data,
-			isLoading: false,
-			});
-			console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-		})
-		.catch(error => {
-			this.setState({
-			error,
-			isLoading: false,
-			});
-		});
-    }
     
-    getStoreData() {
-        apiManager.get(`${storeAPI}?latitude=${this.state.testLat}&longitude=${this.state.testLong}&type=${this.state.storeType}`)
+    getStoreData(lat, long) {
+        const data = {
+            params: {
+                latitude: lat,
+                longitude: long
+            },
+          };
+          
+        apiManager.get(`${storeAPI}`, data)
         .then( response => {
+            console.log('@@##$$%%%response=>>', response);
             this.setState({
-                storeData: response.data.data,
+                storeData: response.data,
                 isLoading: false
             })
             console.log('@@@@ Store Locator Data Whole@@@@@', response.data.data);
         })
         .catch(error => {
+            console.log()
             this.setState({
                 error,
                 isLoading: false
@@ -93,10 +86,16 @@ class StoreLocator extends React.Component {
     }
 
     getSToreDataByCity(city) {
-        apiManager.get(`${storeCityAPI}?cityname=${city}&type=${this.state.storeType}`)
+        const data = {
+            params: {
+                cityname: city,
+            },
+          };
+        apiManager.get(`${storeCityAPI}`, data)
         .then( response => {
+            //console.log('response.data.dataresponse.data.data=>>@@', response)
             this.setState({
-                storeData: response.data.data,
+                storeData: response.data,
                 isLoading: false
             })
             console.log('@@@@ Store Locator Data City@@@@@', response.data.data);
@@ -108,19 +107,55 @@ class StoreLocator extends React.Component {
             });
         });
     }
+
+    getStoreDataByPincode() {
+        this.getLatAndLong();
+    }
+
+    getLatAndLong() {
+        // apiManager.get(`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&address=400079`)
+        // .then( response => {
+        //     console.log('@@##$$', response);
+        //     this.setState({
+        //         storeData: response.data.data,
+        //         isLoading: false
+        //     })
+        //     console.log('@@@@ Store Locator Data Whole@@@@@', response.data.data);
+        // })
+        // .catch(error => {
+        //     this.setState({
+        //         error,
+        //         isLoading: false
+        //     });
+        // });
+        // Geocode.setApiKey("AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4");
+        // // Get latidude & longitude from address.
+        // Geocode.fromAddress("400079").then(
+        //     response => {
+        //     const { lat, lng } = response.results[0].geometry.location;
+        //     console.log(lat, lng + '@@@@@@@');
+        //     },
+        //     error => {
+        //     console.log(error);
+        //     }
+        // );
+ 
+        const lat = 1.337130;
+        const long = 103.736900;
+        this.getStoreData(lat, long);
+
+    }
     
 	componentDidMount() {
-        this.getStoreData();
-        this.getIPData();
-	}
+        this.getStoreData(this.state.testLat, this.state.testLong);
+    }
+    
 
-	render() {
+	render() { 
         const { storeData } = this.state;
-        if (storeData) {
-            console.log('storeDatastoreData@@=>>', storeData)
-        }
+
 		return (
-            !!storeData &&
+            //!!storeData &&
             <Fragment>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
@@ -128,6 +163,14 @@ class StoreLocator extends React.Component {
                         <input type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
                         <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>Find Stores</button>
                     </div>
+                    { !storeData &&
+                    <div className='storeTypes'>
+                        <h2>No stores within this pincode</h2>
+                        <span>Please try another city or pincode</span>
+                    </div>
+                    }
+                    { storeData &&
+                    
                     <div className='storeTypes'>
                         <ul className='typeList'>
                             <li className='storeTypeItem' onClick={this.handleStoreType.bind(this,'GIS')}>
@@ -160,52 +203,44 @@ class StoreLocator extends React.Component {
                             </li>
                         </ul>
                     </div>
+                    }
                 </div>
-                <div className="storeDetails">
+                { storeData &&
+                <div className="storeDetails clearfix">
+                
                     <h1 className='title'>One stop destination for your furniture</h1>
                     <div className='storeList'>
                         
                         {<div className='detailCard'>
-                            {!!storeData && storeData.map((physicalData) => {
-                                return <p className='test'>{physicalData.city}</p>
+                            {!!storeData && storeData.data.map((physicalData) => {
+                                return(
+                                    <>
+                                        <div className='storeListItem'>
+                                            <p>{physicalData.ribbonText}</p>
+                                            <p><h2>{physicalData.storeName}</h2></p>
+                                            <p>{physicalData.address1}, {physicalData.city} - {physicalData.pinCode}</p>
+                                            <p>{physicalData.telephone}</p>
+                                            <a href=''>Get Directions</a>
+                                        </div>
+                                    </>
+                                );
                             }
                         )}
                         </div>  }
                         
+                        
                     </div>
-                    <div className='mapContainer'>
+                    <div className='mapContainer' id='mapContainer'>
                         <WrappedMap
-                            googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&callback=initMap`}
+                            googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M&callback=initMap`}
                             loadingElement = {<div style = {{height: '100%'}} />}
                             containerElement={<div style = {{height: '100%'}}/>}
                             mapElement={<div style = {{height: '100%'}}/>}
                         />
-                    </div>
+                        {/* <MapData storeData={this.state.storeData}/> */}
+                    </div>                    
                 </div>
-                {/* { !!storeData && storeData.map((storedetailData, index) => {
-                    return (
-                        <div className="storeDetails">
-                            <h1 className='title'>One stop destination for your furniture</h1>
-                            <div className='storeList'>
-                                <div className='detailCard' id={index}>
-                                    {storedetailData.country}
-                                </div>
-                            </div>
-                            <div className='mapContainer'>
-                                <WrappedMap
-                                    googleMapURL = {`https://maps.googleapis.com/maps/api/js?key=AIzaSyDjWQfWqoY8qDkWk8aH6Zveb_qE6HaRFg4&callback=initMap`}
-                                    loadingElement = {<div style = {{height: '100%'}} />}
-                                    containerElement={<div style = {{height: '100%'}}/>}
-                                    mapElement={<div style = {{height: '100%'}}/>}
-                                />
-                            </div>
-                        </div>
-                    )
-                })
-                    
-                } */}
-                
-                
+                }
             </Fragment>
 		);
 	}

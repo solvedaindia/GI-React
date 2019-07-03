@@ -41,9 +41,18 @@
     width: 91.63%;
     margin-left: 8.37%; 
     .storeList {
-        width: 30%;
-        background-color: $greybg; 
-        border: 1px solid #ccc;
+        width: 28%;
+        height: 472px;
+        overflow: auto;
+        margin: 0 19px 0 0;
+        .storeListItem{
+            background-color: $colorwhite; 
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+            margin:0 0 15px 0;
+            padding: 24px;
+            width: 92%;
+        }
     }
     .mapContainer {
         width: 70%;
@@ -51,6 +60,7 @@
     }
     .storeList,
     .mapContainer {
-        display: inline-block;
+        display: block;
+        float: left;
     }
 }
