@@ -7,6 +7,7 @@ import BestSeller from '../../components/BestSelling/bestSelling';
 import ReadMore from '../../components/GlobalComponents/readMore';
 import  '../../../public/styles/Inspiration/inspiration.scss'
 import InsCrousel from '../../components/Primitives/crousel'
+import InspirationBanner from '../../components/InspirationComp/inspirationBanner'
 
 
 export class Inspiration extends React.Component {
@@ -23,13 +24,16 @@ export class Inspiration extends React.Component {
   render() {
     return (
       <div className="container">
-       <div> <img 
-                      className="Rectangle"
-                      src={require('../../../public/images/product-slider.jpg')}
-                      alt="rectangle"
-                    />
+       <div> <InspirationBanner />
+       
                     </div>
                     <InsCrousel />
+                    <div className="text-block">
+ <h4 className="headered">Interio Kitchens</h4>
+                 <p2>Lookbook of the Year 2018<br />
+                   the home you've always wanted</p2> <br />
+                 <button className="butt">View</button>
+               </div>
                     <div className="container">
                       <div className="row">
                         <div className="col-md-6">

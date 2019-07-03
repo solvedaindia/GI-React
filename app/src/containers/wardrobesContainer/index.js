@@ -59,33 +59,33 @@ index: 0
                    <div className="row">
                        <div className="col-md-1">
                        <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
-<h3 className="title">modular</h3>
+<h3 className="titlesss">modular</h3>
                        </div>
                        <div className="col-md-1">
                        <img className="Combined-Shape" src={require('../../../public/images/ic2.png')} alt="rectangle" />
-                       <h3 className="title">modular</h3>
+                       <h3 className="titlesss">modular</h3>
 
                        </div>
                        <div className="col-md-1">
                        <img className="Combined-Shape" src={require('../../../public/images/ic3.png')} alt="rectangle" />
-                       <h3 className="title">modular</h3>
+                       <h3 className="titlesss">modular</h3>
 
                        </div>
                        <div className="col-md-1">
                        <img className="Combined-Shape" src={require('../../../public/images/ic4.png')} alt="rectangle" />
-                       <h3 className="title">modular</h3>
+                       <h3 className="titlesss">modular</h3>
 
                        </div>
                    </div>
                    <div className="row">
                        <div className="col-md-2">
                        <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
-                       <h3 className="title">modular</h3>
+                       <h3 className="titlesss">modular</h3>
 
                        </div>
                        <div className="col-md-2">
                        <img className="Combined-Shape" src={require('../../../public/images/ic6.png')} alt="rectangle" />
-                       <h3 className="title">modular</h3>
+                       <h3 className="titlesss">modular</h3>
 
                        </div>
 

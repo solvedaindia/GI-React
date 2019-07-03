@@ -183,6 +183,23 @@
     color: #000000;
   }
   .Bitmap {
-  width: 250px;
+  width: 350px;
   height: 660px;
+}
+.headered {
+  width: 699px;
+  height: 128px;
+  font-family: CeraGodrejInterio;
+  font-size: 56px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  color: black
+}
+
+header .text-style-1 {
+  font-weight: bold;
+  color: #ffffff;
 }
