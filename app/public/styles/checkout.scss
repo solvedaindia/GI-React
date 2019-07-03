@@ -5,12 +5,13 @@
     pointer-events: none;
     opacity: 0.4;
 }
-.checkout{
-    padding:56px 0 100px 0;
-    .container{
-        width:85%;
+
+.checkout {
+    padding: 56px 0 100px 0;
+    .container {
+        width: 85%;
     }
-    .form-control{
+    .form-control {
         border-radius: 2px;
         box-shadow: none;
         height: 54px;
@@ -46,54 +47,50 @@
         .inactive {
             opacity: 0.5;
         }
-        .bgfullflex{
+        .bgfullflex {
             display: flex;
         }
-        
-        .listRow{
-            border-bottom:1px solid $greyLightborder;
+        .listRow {
+            border-bottom: 1px solid $greyLightborder;
             position: relative;
-                .stepActive{
-                    .stepBg{
-                        position: absolute;
-                        width: 34px;
-                        height: 34px;
-                        background: $black;
-                        padding: 5px;
-                        border-radius: 50%;
-                        color: $colorwhite;
-                        text-align: center;
-                        left: -40px;
-                        top: 22px;
-                        font-size: $base*2;
-                    }
-
-                    .stepbgNone{
-                        position: absolute;
-                        width: 34px;
-                        height: 34px;
-                        background: transparent;
-                        padding: 5px;
-                        border-radius: 50%;
-                        color: $lightblueGrey;
-                        text-align: center;
-                        left: -34px;
-                        top: 22px;
-                        font-size: $base*2;
-                    }
-
-                    .checkmark{
-                        position: absolute;
-                        width: 34px;
-                        height: 34px;               
-                        padding: 5px;                
-                        color: $colorwhite;
-                        text-align: center;
-                        left: -40px;
-                        top: 22px;
-                        font-size: $base*2;
-
-                        &:after{
+            .stepActive {
+                .stepBg {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    background: $black;
+                    padding: 5px;
+                    border-radius: 50%;
+                    color: $colorwhite;
+                    text-align: center;
+                    left: -40px;
+                    top: 22px;
+                    font-size: $base*2;
+                }
+                .stepbgNone {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    background: transparent;
+                    padding: 5px;
+                    border-radius: 50%;
+                    color: $lightblueGrey;
+                    text-align: center;
+                    left: -34px;
+                    top: 22px;
+                    font-size: $base*2;
+                }
+                .checkmark {
+                    position: absolute;
+                    width: 34px;
+                    height: 34px;
+                    padding: 5px;
+                    color: $colorwhite;
+                    text-align: center;
+                    left: -40px;
+                    top: 22px;
+                    font-size: $base*2;
+                    &:after {
                         content: '';
                         display: block;
                         width: 7px;
@@ -104,9 +101,9 @@
                         position: absolute;
                         left: 13px;
                         top: 10px;
-                        }
                     }
                 }
+            }
             .labeltext-box {
                 width: 30%;
                 float: left;
@@ -142,16 +139,15 @@
                         color: $cerulean;
                         line-height: 24px;
                     }
-                    
-                    .inputCheck{
-                        margin:5px 16px 0 0;                        
+                    .inputCheck {
+                        margin: 5px 16px 0 0;
                     }
                     .form-label {
                         font-size: 14px;
-                        color:$black;
+                        color: $black;
                         padding: 0 0 0 16px;
                         line-height: 14px;
-                        margin:0;
+                        margin: 0;
                     }
                     .inputCheck,
                     .form-label {
@@ -205,168 +201,157 @@
             }
             .action-button {
                 float: left;
-                width:22%;
-                padding:18px 0;
+                width: 22%;
+                padding: 18px 0;
             }
-        .leftBox{
-            width:30%;
-            float: left;
-            padding:25px 0px 0 13px;
-
-            .heading-label{
-                font-size: $base*2.25;
-                font-weight: bold;
-            }
-
-            .verticalTab{
-                padding:16px 0 0 0;
-            .add_tab{
-              font-size: 18px;
-              color: $black;
-              font-weight: bold;
-              padding:22px 0 22px 15px;
-              cursor: pointer;
-            }
-            .add_tab.active_add{
-              background: $colorwhite;
-             
-            }
-        }
-        }
-        .shiptoBg{
-            padding: 0px 0px 0 0px;
-            display: flex;
-            .bgGrey{
-                width:90%;
-                padding: 0 0 0 13px;                
-
-            }
-        }
-
-        .customCheckbox{
-            .inputCheck[type="checkbox"] {
-                display: none;
-            }
-            /* Input Checkbox Squere
-              -----------------------------*/
-              .inputCheck[type="checkbox"] + .lblCheck {
-                // background: url("../../../images/plpAssests/unchecked.jpg") left top no-repeat;    
-                background: url("../images/plpAssests/unchecked.jpg") left top no-repeat;     
-                display: inline;
-                min-height: 16px;
-                padding-left: 11px;
-                background-size: contain;
-              }
-          
-              .inputCheck[type="checkbox"]:checked + .lblCheck {
-                background: url("../images/plpAssests/checked.jpg") left top no-repeat;
-                background-size: contain;
-                padding-left: 11px;
-              }
-              .input_box,
-            .defaultlbl{
-            float: left;
-            }
-        }
-        .rightBox{
-            width:70%;
-            float: left;
-            padding: 22px 0 25px 27px;
-
-            .heading-label{
-                font-size: $base*2.25;
-            }
-            .shipping-text{
-                font-size: $base*2;
-                color:$battleshipGrey;
-                padding:0 59px 24px 0;
-            }
-            .havePassword{
-                padding: 0 0 26px 7px;               
-                
-                .checkBox{
-                  margin:0 14px 0 0;
+            .leftBox {
+                width: 30%;
+                float: left;
+                padding: 25px 0px 0 13px;
+                .heading-label {
+                    font-size: $base*2.25;
+                    font-weight: bold;
                 }
-                .form-label{
-                  font-size: 13px;
-                  font-weight: normal;
-                  color:$black;
-                  line-height: 13px;
-                  padding: 0 0 0 14px;
-                }
-            }
-            .password-field{
-                .valiationPosition-NewPassword{
-                    top: 36px;
-                }
-            }
-            .form-div{
-                position: relative;
-            .form-group{
-                position: relative;
-                padding: 17px 0 0 0;
-                .form-control{
-                    border:1px solid $lightGrey;
-                    margin: 5px 0 20px 0;
-                    &:focus{
-                        border: 1px solid $black !important;
-                        box-shadow: none !important;
-                    }
-                    &:focus~ {
-                        .form-label {
-                            color: $cerulean !important;
-                        }
+                .verticalTab {
+                    padding: 16px 0 0 0;
+                    .add_tab {
+                        font-size: 18px;
+                        color: $black;
+                        font-weight: bold;
+                        padding: 22px 0 22px 15px;
+                        cursor: pointer;
                     }
                     .add_tab.active_add {
                         background: $colorwhite;
                     }
                 }
-                .form-label{
-                    color: $battleshipGrey;
-                    position: absolute;
-                    top: 0;
-                    // bottom: 8px;
+            }
+            .shiptoBg {
+                padding: 0px 0px 0 0px;
+                display: flex;
+                .bgGrey {
+                    width: 90%;
+                    padding: 0 0 0 13px;
                 }
-                
             }
-            .error-msg{
-                color:$reddishPink;
-                position: absolute;
-                bottom: 5px;
-                font-size: $base*1.5;
-                line-height: 12px;
-                font-weight: normal;
+            .customCheckbox {
+                .inputCheck[type="checkbox"] {
+                    display: none;
+                }
+                /* Input Checkbox Squere
+              -----------------------------*/
+                .inputCheck[type="checkbox"]+.lblCheck {
+                    // background: url("../../../images/plpAssests/unchecked.jpg") left top no-repeat;    
+                    background: url("../images/plpAssests/unchecked.jpg") left top no-repeat;
+                    display: inline;
+                    min-height: 16px;
+                    padding-left: 11px;
+                    background-size: contain;
+                }
+                .inputCheck[type="checkbox"]:checked+.lblCheck {
+                    background: url("../images/plpAssests/checked.jpg") left top no-repeat;
+                    background-size: contain;
+                    padding-left: 11px;
+                }
+                .input_box,
+                .defaultlbl {
+                    float: left;
+                }
             }
-        }
-           
-
-            .bill-address{                
-                padding:9px 0 20px 0;
-                border-bottom: 1px solid $lightGrey;
-                .checkbox,
-                .label-billing{
-                    float:left;
+            .rightBox {
+                width: 70%;
+                float: left;
+                padding: 22px 0 25px 27px;
+                .heading-label {
+                    font-size: $base*2.25;
                 }
                 .shipping-text {
                     font-size: $base*2;
                     color: $battleshipGrey;
                     padding: 0 59px 24px 0;
                 }
-                .label-billing{
-                  color:$greyDark;
-                  font-size: 16px;
-                  padding: 0 0 0 14px;
-                  line-height: 16px;
-                  font-family: $font-medium;
-                  margin: 0;
+                .havePassword {
+                    padding: 0 0 26px 7px;
+                    .checkBox {
+                        margin: 0 14px 0 0;
+                    }
+                    .form-label {
+                        font-size: 13px;
+                        font-weight: normal;
+                        color: $black;
+                        line-height: 13px;
+                        padding: 0 0 0 14px;
+                    }
                 }
-            }
-            .bussinessNote{
+                .password-field {
+                    .valiationPosition-NewPassword {
+                        top: 36px;
+                    }
+                }
+                .form-div {
+                    position: relative;
+                    .form-group {
+                        position: relative;
+                        padding: 17px 0 0 0;
+                        .form-control {
+                            border: 1px solid $lightGrey;
+                            margin: 5px 0 20px 0;
+                            &:focus {
+                                border: 1px solid $black !important;
+                                box-shadow: none !important;
+                            }
+                            &:focus~ {
+                                .form-label {
+                                    color: $cerulean !important;
+                                }
+                            }
+                            .add_tab.active_add {
+                                background: $colorwhite;
+                            }
+                        }
+                        .form-label {
+                            color: $battleshipGrey;
+                            position: absolute;
+                            top: 0;
+                            // bottom: 8px;
+                        }
+                    }
+                    .error-msg {
+                        color: $reddishPink;
+                        position: absolute;
+                        bottom: 5px;
+                        font-size: $base*1.5;
+                        line-height: 12px;
+                        font-weight: normal;
+                    }
+                }
+                .bill-address {
+                    padding: 9px 0 20px 0;
+                    border-bottom: 1px solid $lightGrey;
+                    .checkbox,
+                    .label-billing {
+                        float: left;
+                    }
+                    .shipping-text {
+                        font-size: $base*2;
+                        color: $battleshipGrey;
+                        padding: 0 59px 24px 0;
+                    }
+                    .label-billing {
+                        color: $greyDark;
+                        font-size: 16px;
+                        padding: 0 0 0 14px;
+                        line-height: 16px;
+                        font-family: $font-medium;
+                        margin: 0;
+                    }
+                }
+                .bussinessNote {
                     .buying {
                         padding: 21px 0 14px 0;
                         font-size: 16px;
-                        color:$greyDark;                 
-                        margin:0;
+                        color: $greyDark;
+                        margin: 0;
                         font-family: $font-medium;
                     }
                     .noteGstin {
@@ -378,51 +363,46 @@
                             font-weight: bold;
                         }
                     }
-                
-            }
-            .continueMargin{
-                margin: 4px 0 0 0;
-            }
-            .colpaddingRight{
-                padding-right:3px;
-            }
-            .saveAddress{
-                .list{                    
-                    background:rgba(247, 248, 248, 0.5);
-                    border:1px solid $lightblueGrey;
-                    padding: 15px 8px 15px 8px;
-                    font-size: $base*1.625;
-                    min-height: 130px;
-                    width: 48.5%;
-                    display: inline-block;
-                    margin: 0 8px 12px 0;
-                    border-radius: 2px;
-                    &:nth-child(2){
-                        margin-right:0;
-                    }
-                    .inputBox,
-                    .addressText
-                    {
-                       display: block;
-                       float: left;
-                    }
-                    .inputBox{
-                        width:10%;
-                        
-                    }
-                    .addressText
-                    {
-                        width:90%;
+                }
+                .continueMargin {
+                    margin: 4px 0 0 0;
+                }
+                .colpaddingRight {
+                    padding-right: 3px;
+                }
+                .saveAddress {
+                    .list {
+                        background: rgba(247, 248, 248, 0.5);
+                        border: 1px solid $lightblueGrey;
+                        padding: 15px 8px 15px 8px;
+                        font-size: $base*1.625;
+                        min-height: 130px;
+                        // width: 48.5%;
+                        display: inline-block;
+                        margin: 0 8px 12px 0;
+                        border-radius: 2px;
+                        &:nth-child(2) {
+                            margin-right: 0;
+                        }
+                        .inputBox,
+                        .addressText {
+                            display: block;
+                            float: left;
+                        }
+                        .inputBox {
+                            width: 10%;
+                        }
+                        .addressText {
+                            width: 90%;
+                        }
                     }
                 }
             }
-        }
-        &:last-child.listRow {
-            border-bottom: 1px solid $borderLight;
+            &:last-child.listRow {
+                border-bottom: 1px solid $borderLight;
+            }
         }
     }
-}
-    
     .orderSummary {
         padding: 0 0 32px 37px;
         margin-top: -28px;
@@ -519,4 +499,3 @@
 .dropdown-menu .divider {
     margin: 3px 0 !important;
 }
-
