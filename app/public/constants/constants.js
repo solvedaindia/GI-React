@@ -34,6 +34,12 @@ export const wishListCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/
 export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/additem`;
 /* Remove from Wishlist API */
 export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
+/* Cart Detail API */
+export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
+/* Cart Update API*/ 
+export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
+/* Cart Item Delet API*/
+export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */
@@ -124,11 +130,15 @@ export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/use
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Search Page API */
+export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
 /* User Detail Validate API */
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
 export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
 
+/* Notify Me API */
+export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 
 /* Address List API */
 export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;

@@ -43,6 +43,9 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
+import CartDetail from '../CartContainer/cartContainer';
+// import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -160,8 +163,8 @@ export default class App extends React.Component {
         <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-          <Route path="/clp" component={ClpContainer} />
-          <Route path="/plp" component={PlpContainer} />
+          <Route path="/rooms:id" component={ClpContainer} />
+          <Route path="/furniture:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
@@ -170,6 +173,8 @@ export default class App extends React.Component {
           <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
+          <Route path="/search" component={PlpContainer} />
+          <Route path="/cart" component={CartDetail} />
         </Switch>
         <FooterContainer />
       </div>

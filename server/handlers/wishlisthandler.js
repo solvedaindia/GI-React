@@ -468,7 +468,6 @@ function getWishlistData(headers, callback) {
 }
 
 function getExternalWishlistData(headers, params, query, callback) {
-  console.log(params);
   if (!params.externalId || !query.accesskey) {
     callback(errorutils.errorlist.invalid_params);
     return;
@@ -510,12 +509,14 @@ function getWishlistProductList(res, headers, callback) {
     wishlistName: '',
     wishlistItemCount: 0,
     externalIdentifier: '',
+    guestAccessKey: '',
     wishlistData: [],
   };
   const productIDs = [];
   if (res.GiftList && res.GiftList.length > 0) {
     wishlistJson.wishlistID = res.GiftList[0].uniqueID;
     wishlistJson.wishlistName = res.GiftList[0].descriptionName;
+    wishlistJson.guestAccessKey = res.GiftList[0].guestAccessKey;
     wishlistJson.externalIdentifier = res.GiftList[0].externalIdentifier || '';
     if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
       wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
@@ -639,7 +640,11 @@ module.exports.shareWishlist = function shareWishlist(
     null,
     response => {
       if (response.status === 201 || response.status === 200) {
-        callback(null, response.body);
+        if (response.body.emailSent === 'Success') {
+          callback(null, response.body);
+        } else if (response.body.emailSent === 'Payload_Error') {
+          callback(errorutils.errorlist.ERROR_IN_EMAIL_SEND);
+        }
       } else {
         logger.debug('Error while calling share wishlist api');
         callback(errorutils.handleWCSError(response));

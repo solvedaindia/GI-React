@@ -19,11 +19,12 @@ class RecentlyViewed extends React.Component {
     apiManager
       .get(recentlyViewedAPI)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          recentlyViewedData: response.data.data,
+          recentlyViewedData: data && data.data,
           isLoading: false,
         });
-        console.log('Recently Viewed', response.data.data);
+        console.log('Recently Viewed', data.data);
       })
       .catch(error => {
         this.setState({

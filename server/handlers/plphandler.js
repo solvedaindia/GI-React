@@ -198,7 +198,30 @@ function getAllSKUProductList(
  */
 function getSkuPromotionData(headers, productListJson, callback) {
   if (productListJson.productList && productListJson.productList.length > 0) {
-    async.map(
+    const skuIds = [];
+    productListJson.productList.forEach(product => {
+      skuIds.push(product.uniqueID);
+    });
+
+    promotionUtil.getMultiplePromotionData(skuIds, headers, (err, res) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      const productListArray = [];
+      productListJson.productList.forEach(product => {
+        const productDetail = pdpfilter.productDetailSummary(product);
+        productDetail.promotionData = pdpfilter.getSummaryPromotion(
+          res[productDetail.uniqueID],
+        );
+        productListArray.push(productDetail);
+      });
+      // eslint-disable-next-line no-param-reassign
+      productListJson.productList = productListArray;
+      callback(null, productListJson);
+    });
+
+    /* async.map(
       productListJson.productList,
       (product, cb) => {
         let productDetail = product;
@@ -226,7 +249,7 @@ function getSkuPromotionData(headers, productListJson, callback) {
         productListJson.productList = results;
         callback(null, productListJson);
       },
-    );
+    ); */
   } else {
     callback(null, productListJson);
   }

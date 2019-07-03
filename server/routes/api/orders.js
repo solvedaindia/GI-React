@@ -15,7 +15,7 @@ router.get('/list', (req, res, next) => {
   });
 });
 
-router.get('/detail/byId/:orderId', (req, res, next) => {
+router.get('/details/:orderId', (req, res, next) => {
   const id = req.params.orderId;
   ordersHandler.getOrderbyId(req.headers, id, (err, result) => {
     if (err) {

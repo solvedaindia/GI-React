@@ -26,7 +26,7 @@ class CartCount extends React.Component {
       isLoading: true,
       errors: null,
       options: ['Apple'],
-      minicartData: [],
+      minicartData: null,
     };
   }
 
@@ -45,22 +45,13 @@ class CartCount extends React.Component {
     apiManager
       .get(cartCountApi)
       .then(response => {
-        const count = response.data.data.cartTotalQuantity;
+        const count = response || {};
         this.setState({
-          CartCount: response.data.data.cartTotalQuantity,
-          // active: response.data.data.cartTotalQuantity != 0 ? true : ,
+          CartCount: data && data.data.cartTotalQuantity,
           isLoading: false,
-        });
+		});
       })
       .catch(error => this.setState({ error, isLoading: false }));
-  }
-
-  handleCartCount() {
-    const token = appCookie.get('isLoggedIn');
-    console.log('Testest', token);
-    appCookie.get('isLoggedIn')
-      ? '' // alert('Take user Cart page')
-      : alert('Please login');
   }
 
   componentDidMount() {
@@ -93,15 +84,16 @@ class CartCount extends React.Component {
   fetchMinicartDetails() {
     apiManager
       .get(minicartAPI)
-      .then(response => {
-        this.setState({ minicartData: response.data.data.miniCartData });
-      })
+      	.then(response => {
+		  	const {data} = response || {}
+        	this.setState({ minicartData: data && data.data.miniCartData });
+	  	})
       .catch(error => {
         console.log('miniCart Error ---', error);
       });
   }
 
-  toggleDropdown() {
+  toggleDropdown = () => {
     console.log('toggleDropdown');
     this.setState({
       active: !this.state.active,
@@ -125,7 +117,7 @@ class CartCount extends React.Component {
               i === this.state.selected ? '' : ''
             }`}
           >
-            <MinicartItem dataPro={option} />
+            <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
             {/* {option} */}
           </div>
         </>
@@ -141,28 +133,28 @@ class CartCount extends React.Component {
     if (CartCount != 0 && CartCount != undefined) {
       cartCountItem = <span className="cartCount">{CartCount}</span>;
     }
-    minicartDropdownItem = (
-      <div
-        className={`dropdown__list ${
-          this.state.active ? 'dropdown__list--active' : ''
-        }`}
-      >
-        <>
-          {CartCount != 0 && CartCount != undefined ? (
-            <>
-              <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-              <button className="checkout-btn">Checkout</button>
-            </>
-          ) : (
-            <EmptyMinicart />
-          )}
-          {/* <EmptyMinicart /> */}
-        </>
-      </div>
-    );
+	minicartDropdownItem = (
+		<div
+		className={`dropdown__list ${
+			this.state.active ? 'dropdown__list--active' : ''
+		}`}
+		>
+		<>
+			{CartCount != 0 && CartCount != undefined ? (
+			<>
+			<div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+			<a href='/cart'><button className="checkout-btn">Checkout</button></a>
+			</>
+			) : (
+			<EmptyMinicart />
+			)}
+			{/* <EmptyMinicart /> */}
+		</>
+		</div>
+	);
 
     return (
-      <li className="icons mini-cart" onClick={this.handleCartCount}>
+      <li className="icons mini-cart">
         {/* {!isLoading ? (
           cartCountItem
         ) : (
@@ -175,8 +167,7 @@ class CartCount extends React.Component {
             onClick={() => this.toggleDropdown()}
             className="dropdown__toggle dropdown__list-item icons_border"
           >
-            <CartLogo />
-            {/* <i className="fa fa-angle-down" aria-hidden="true" /> */}
+            <CartLogo width={24} height={24}/>
           </div>
           {minicartDropdownItem}
         </div>

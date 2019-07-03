@@ -11,7 +11,7 @@ const productKeywords = props => (
             {props.productKeywords.keywords.map((keywords, index) => {
               if (index < 5) {
                 return (
-                  <a href="#" key={index}>
+                  <a href={`/search?keyword=${keywords}`} key={index}>
                     <li className="list">{keywords}</li>
                   </a>
                 );

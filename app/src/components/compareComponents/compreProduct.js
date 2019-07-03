@@ -3,7 +3,9 @@ import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
 import { Row, Col,Grid } from 'react-bootstrap';
-
+import {
+  imagePrefix
+} from '../../../public/constants/constants';
 import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
 import TopContainer from './topContainer'
@@ -57,7 +59,7 @@ class CompPrd extends React.Component {
         images.push(
           <Col xs={12} sm={4} md={4}  className="comp-list-item">
               <div className="img-box">  
-              <img src={`https://192.168.0.36:8443${elem.thumbnail}`} />
+              <img src={`${imagePrefix}${elem.thumbnail}`} />
               </div>
         </Col>)
       })

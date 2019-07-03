@@ -29,7 +29,7 @@ class newsletter extends React.Component {
       .then(response => {
         const data = response.data;
         this.setState({ inputText: '' });
-        alert(`Newsletter Subscription - ${data.status}`);
+        alert(`Thanks for Subscribing`);
       })
       .catch(error => {
         console.log('newsError---', error);

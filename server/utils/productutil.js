@@ -152,7 +152,7 @@ function getProductListByIDs(headers, productIDs, callback) {
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
   let promotionObject = {};
-/*   promotionUtil.getMultiplePromotionData(
+    promotionUtil.getMultiplePromotionData(
     productIDs,
     headers,
     (error, promotion) => {
@@ -163,8 +163,8 @@ function getPromotionData(headers, productIDs, callback) {
         callback(error);
       }
     },
-  ); */
-  async.map(
+  );
+  /* async.map(
     productIDs,
     (productId, cb) => {
       promotionUtil.getPromotionData(productId, headers, (error, promotion) => {
@@ -190,7 +190,7 @@ function getPromotionData(headers, productIDs, callback) {
       });
       callback(null, promotionObject);
     },
-  );
+  ); */
 }
 
 /* Merge Product Details and Promotion Data */
