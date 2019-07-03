@@ -33,17 +33,18 @@ class MediaPress extends React.Component {
     render() {
         return (
              <div className="container">
-                <h1 className="Header-Copy-2">Media/Press</h1>
+                <h1 className="HeaderCopy3">Media/Press</h1>
                 <hr className="hr" />
 
             <h2 className="Wed-love-to-hear-from-you-Copy ">Latest News</h2>
             <div className="row">
               <div className="col-md-6">
                 <img
-                  className="michael-d"
+                  className="michaelSplash"
                   src={require('../../../public/images/Bailbrook-House.jpg')}
                   alt="Rectangle"
                 />
+                <h2 className="Post-title">Impact Of Extrinsic Motivation On Intrinsic Motivation</h2>
               </div>
             </div>
           </div> 

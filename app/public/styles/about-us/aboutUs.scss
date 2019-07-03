@@ -3,7 +3,7 @@
 
 .About-Us {
   width: 1440px;
-  height: 3555px;
+  height: 2100px;
   background-color: #ffffff;
 }
 .abouts-Us {
@@ -18,24 +18,20 @@
   letter-spacing: normal;
   color: #000000;
 }
+.GodrejInterio {
+  width: 751px;
+  height: 260px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #000000;
+}
 
-  .Godrej-Interio-is-In {
-    width: 751px;
-    height: 260px;
-    font-family: CeraGodrejInterio;
-    font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.43;
-    letter-spacing: normal;
-    color: #000000;
-  }
-  .Oval {
-    width: 89px;
-    height: 89px;
-    background-color: var(--ice-blue);
-  }
+ 
   .Post-title {
     width: 60px;
     height: 31px;
@@ -73,12 +69,7 @@
     color: #000000;
   }
 
-  
-  .Oval {
-    width: 89px;
-    height: 89px;
-    background-color: var(--ice-blue);
-  }
+
   .Path-4 {
     width: 27.5px;
     height: 18.6px;
@@ -136,28 +127,13 @@
   letter-spacing: normal;
   color: #000000;
 }
-.rawpixel-983726-unsplash {
-  width: 556px;
-  height: 371px;
-}
+
 .Position-Copy {
   width: 18px;@import '../variable';
   @import '../base';
   
  
  
-    .Godrej-Interio-is-In {
-      width: 751px;
-      height: 260px;
-      font-family: CeraGodrejInterio;
-      font-size: 14px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.43;
-      letter-spacing: normal;
-      color: #000000;
-    }
     .Oval {
       width: 89px;
       height: 89px;
@@ -201,11 +177,7 @@
     }
   
     
-    .Oval {
-      width: 89px;
-      height: 89px;
-      background-color: var(--ice-blue);
-    }
+  
     .Path-4 {
       width: 27.5px;
       height: 18.6px;
@@ -263,10 +235,7 @@
     letter-spacing: normal;
     color: #000000;
   }
-  .rawpixel-983726-unsplash {
-    width: 556px;
-    height: 371px;
-  }
+  
   .Position-Copy {
     width: 18px;
     height: 31px;
@@ -330,11 +299,7 @@
     letter-spacing: normal;
     color: #000000;
   }
-  .Mask {
-    width: 1141px;
-    height: 369px;
-    background-color: rgba(1, 123, 107, 0.73);
-  }
+ 
   .headerIn {
     width: 542px;
     height: 64px;
@@ -366,7 +331,7 @@
     height: 37.8px;
     background-color: #ffffff;
   }
-  .Header-Copy-2 {
+  .HeaderCopy3 {
     width: 179px;
     height: 36px;
     font-family: CeraGodrejInterio;
@@ -388,7 +353,7 @@
     font-stretch: normal;
     line-height: 1.43;
     letter-spacing: normal;
-    color: var(--battleship-grey);
+    color:black;
   }
  
   .michael-d {
@@ -475,34 +440,11 @@ title {
   text-align: center;
   color: #ffffff;
 }
-.Your-information-is {
-  width: 475px;
-  height: 72px;
-  font-family: CeraGodrejInterio;
-  font-size: 18px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.33;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
-}
 
 
-.Wed-love-to-hear-from-you-Copy {
-  width: 121px;
-  height: 30px;
-  font-family: CeraGodrejInterio;
-  font-size: 21px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: var(--battleship-grey);
-}
-hr { 
+
+
+.hr { 
   display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -510,4 +452,30 @@ hr {
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
+}
+.rawpixel-983726-unsplash {
+  width: 556px;
+  height: 371px;
+}
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.michaelSplash {
+  width: 456px;
+  height: 271px;
+}
+.Post-title {
+  width: 555px;
+  height: 31px;
+  font-family: CeraGodrejInterio;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.72;
+  letter-spacing: normal;
+  color: #000000;
 }

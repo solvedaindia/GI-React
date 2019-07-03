@@ -5,21 +5,18 @@ import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/about-us/aboutUs.scss'
+import OurProcess from '../../components/aboutUs/ourProcess';
 
 
 export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
-    const img1 = require('../../../public/images/Bailbrook-House.jpg')
-    const img2 = require('../../../public/images/interior.jpg')
-    const img3 = require('../../../public/images/product1.jpg')
-    const img4 = require('../../../public/images/cellphone.jpg')
-    const img5 = require('../../../public/images/teach.jpg')
+   
 
 
     this.state = {
       index: 0,
-      imgList: [img1, img2, img3, img4, img5]
+      // imgList: [img1, img2, img3, img4, img5]
       // homepageLayout: null,
       // isLoading: false,
       // error: null,
@@ -27,45 +24,19 @@ export class AboutUs extends React.Component {
     };
   }
 
-  componentDidMount() {}
-
-  onHandleClickFirst= () => {
-    if (this.state.index === 0 || this.state.index === 2 || this.state.index === 3 || this.state.index === 4){
-      this.setState({index:1})
-    } 
-  };
-  onHandleClickSecond(){
-    if (this.state.index === 0 || this.state.index === 1 || this.state.index === 3 || this.state.index === 4){
-      this.setState({index:2})
-    } 
-  }
-  onHandleClickThird(){
-    if (this.state.index === 0 || this.state.index === 1 || this.state.index === 2 || this.state.index === 4){
-      this.setState({index:3})
-    }
-  }
-  onHandleClickFourth(){
-    if (this.state.index === 1 || this.state.index === 2 || this.state.index === 3 || this.state.index === 4){
-      this.setState({index:0})
-    }
-  }
-  onHandleClickFifth(){
-    if (this.state.index === 1 || this.state.index === 2 || this.state.index === 0){
-      this.setState({index:4})
-    }
-  }
+  
 
   
 
 
   render() {
     return (
-      <div className="container">
+     
         <div className="About-Us">
           <h1 className="abouts-Us">About-Us</h1>
           <div className="row">
             <div className="col-md-4">
-              <p className="Godrej-Interio-is-In">
+              <p className="GodrejInterio">
                 Godrej Interio is India’s largest furniture brand. From
                 manufacturing the humble Storwel cupboard 80 years back to being
                 a vibrant, innovative brand with a diverse portfolio – it’s been
@@ -89,11 +60,8 @@ export class AboutUs extends React.Component {
           <div className="row">
             <div className="col-md-6">
               <h1 className="Header-Copy-5">Our Process</h1>
-              <img
-                className="rawpixel-983726-unsplash"
-                src={this.state.imgList[this.state.index]}
-                alt="Initial Ideation"
-              />
+              <OurProcess/>
+            
             </div>
             <div className="col-md-6">
               <h2 className="Name">Initial Ideation</h2>
@@ -110,14 +78,7 @@ export class AboutUs extends React.Component {
               </p>
             </div>
           </div>
-          <div>
-            <button className="Position-Copy" onClick={this.onHandleClickFifth.bind(this)}>1</button>
-
-            <button onClick={this.onHandleClickSecond.bind(this)} className="Position-Copy-2">2</button>
-            <button onClick={this.onHandleClickThird.bind(this)} className="Position-Copy-2">3</button>
-            <button onClick={this.onHandleClickFourth.bind(this)} className="Position-Copy-2">4</button>
-            <button onClick={this.onHandleClickFirst.bind(this)} className="Position-Copy-2">5</button>
-          </div>
+         
           <h1 className="Header-Copy-4">Green Initiatives</h1>
           <div className="container">
             <div className="row">
@@ -148,7 +109,7 @@ export class AboutUs extends React.Component {
             </div>
           </div>
           <div>
-            <div className="container">
+            {/* <div className="container"> */}
               <div className="Mask">
                 <h1 className="headerIn">Careers</h1>
                 <p1 className="Your-information-is" >
@@ -159,15 +120,19 @@ export class AboutUs extends React.Component {
                   <br />
                 </p1>
                 <button className="Rectangle1">See More</button>
-              </div>
+              {/* </div> */}
             </div>
           </div>
            
            {/*--media/press section--*/} 
-            <MediaPress/>
+           <div className="row">
+             <div className="col-md-6">            <MediaPress/>
+</div>
+             <div className="col-md-6"></div>
+
+           </div>
 
          
-        </div>
       </div>
     );
   }
