@@ -1,14 +1,74 @@
 @import './variable';
-.compareProductwrap{
-    background:$colorwhite;
+.compare{
+    box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
     position: fixed;
+    right: 30px;
+    bottom: 52px;
+    padding: 8px;
+    background:$colorwhite;   
+    text-align: center;
+    z-index: 99;
+    transition: all 1.5s ease-in-out;
+.btnCompare{    
+    background:$colorwhite;
+    border: 1px solid $black;
+    padding: 5px 8px;
+    transition: all 1.5s ease-in-out;
+    .arrow{
+        width:14px;
+    }
+    &:focus{
+        outline: none;
+    }
+}
+.comparelebal{
+    font-size: $base*1.75;
+    color:$black;
+    font-weight: bold;
+}
+}
+
+.animationDIV{
+    transition: all 1.5s ease-in-out;
+    -webkit-transition: all 1.5s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    transform: translateY(0%);
+    animation: createDiv 1.5s ease-in-out alternate;
+    -moz-animation: createDiv 1.5s ease-in-out alternate;
+    -webkit-animation: createDiv 1.5s ease-in-out alternate;
+    position: fixed;
+    bottom: -1000px;
+    width: 100%;   
+    z-index: 9;
+
+}
+.animationDIV.open{
+    bottom: -20px;
+}
+    @keyframes createDiv {
+       0%{
+           transform: translateY(100%);
+           opacity: 0;
+           
+        }
+        100%{
+           transform: translateY(0%);
+           opacity: 1;
+           bottom: 0;
+        }
+        
+    }
+
+ 
+.compareProductwrap{
+    background:$colorwhite;   
     bottom: 0px;
     margin-right: auto;
     margin-left: auto;
     width:100%;
     box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
     padding: 16px 0;
-    z-index: 99;
+   
 
     .compareProducts{
         padding:0;
@@ -31,14 +91,14 @@
                 width:80%;
                 margin:0 auto;
                 padding:12px 0;
-                font-size: 14px;
+                font-size: $base*1.75;
                 display: block;
             }
             .btn-clearall{
                 background: transparent;
                 border:none;
                 margin:17px 0 0 0;
-                font-size: 14px;
+                font-size: $base*1.75;
                 font-weight: 600;
             }
 
@@ -80,7 +140,7 @@
                 padding:0 0 0 12px;
                 
                 .productName{
-                    font-size: 12px;
+                    font-size: $base*1.5;
                     color:$black;
                     font-family: $font-bold;
                     margin:0;
@@ -88,7 +148,7 @@
                     min-height: 40px;
                 }
                 .discount-price{
-                    font-size: 16px;
+                    font-size: $base*2;
                     font-family: $font-bold;
                     color:$cerulean;
                 }
@@ -112,13 +172,13 @@
 
 .compare-product{
     .heading{
-        font-size: 30px;
+        font-size: $base*3.75;
         line-height: 32px;
         color: $cerulean;
         font-family: $font-bold;
     }
     .back-btn-box{
-        font-size: 16px;
+        font-size: $base*2;
         padding: 16px 0px;
     }
     .compare-product-list{
@@ -152,7 +212,7 @@
                     border:0px; 
                     background: none;
                     margin: 0px 20px;
-                    font-size: 12px;
+                    font-size: $base*1.5;
                     outline: 0;
                 }
                 .remove-btn{
@@ -168,7 +228,7 @@
                 .product-name{
                     font-family: $font-bold;
                     padding-top: 15px;
-                    font-size: 14px;
+                    font-size: $base*1.75;
                     text-transform: capitalize;
                 }
                 .description-text {
@@ -176,7 +236,7 @@
                     font-size: 11px;
                 }
                 .discount-price {
-                    font-size: 18px;
+                    font-size: $base*2.25;
                     font-family: $font-bold;
                     color: $cerulean;
                 }
@@ -185,7 +245,7 @@
                     text-decoration-color: $reddishpink;
                     font-family: $font-light;
                     padding-left: 15px;
-                    font-size: 18px;
+                    font-size:$base*2.25;
                 }
                 .discount-price{
                     padding-right: 10px;
@@ -195,7 +255,7 @@
                 }
                 .emi-desc{
                     color: $reddishpink;
-                    font-size: 12px;
+                    font-size: $base*1.5;
                 }
             }
             .product-attr{

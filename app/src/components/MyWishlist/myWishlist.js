@@ -59,19 +59,20 @@ class MyWishlist extends React.Component {
   }
 
   fetchMyWishlistData() {
-    console.log('fetchMyWishlistData Called');
     apiManager
       .get(myWishlistAPI, {})
       .then(response => {
-        console.log('PLP Response----', response.data);
-        console.log('Wishlist ITem Count --- ', response.data.data.wishlistItemCount)
+        console.log('Wishlist Response----', response.data);
+        this.setState({
+          wishlistData: [],
+        })
         this.setState({
           wishlistData: response.data.data.wishlistData,
           isLoading: true
         })
       })
       .catch(error => {
-        console.log('PLPBannerrror---', error);
+        console.log('Wishlist rrror---', error);
         this.setState({
           error: error.message,
           isLoading: false,
@@ -94,11 +95,11 @@ class MyWishlist extends React.Component {
         <div className='shaire-headerwrp'>
           <h3 className="heading">My Wishlist</h3>
           <button className='shire-btn' onClick={this.onShareClick.bind(this)}><ShareLogo />
-          {this.state.showSocialShare ? <SocialMedia /> : null}
+            {this.state.showSocialShare ? <SocialMedia /> : null}
           </button>
-          
+
         </div>
-        
+
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}

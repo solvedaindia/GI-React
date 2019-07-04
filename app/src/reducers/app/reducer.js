@@ -20,6 +20,7 @@ import {
   UPDATE_MINICART,
   RESET_REMOVEWISHLISTFLAG,
   UPDATE_PROFILE,
+  GET_CART_FETCHED
 } from '../../constants/app/constants';
 
 // The initial state of the App
@@ -35,10 +36,12 @@ const initialState = fromJS({
   removeWishlistFlag: false,
   userName: null,
 
+  // cart: null
+  // logonId: null,
 });
 
 function appReducer(state = initialState, action) {
-  console.log('in The Reducer ---', action.type);
+  console.log('in The Reducer ---', action.type, action.payload);
   switch (action.type) {
     case LOAD_REPOS:
       return state
@@ -60,6 +63,9 @@ function appReducer(state = initialState, action) {
       return state.set('loading', false).set('removeWishlistFlag', action.flag);
     case UPDATE_PROFILE:
       return state.set('loading', false).set('userName', action.userName);
+    // .set('logonId', action.logonId);
+    // case GET_CART_FETCHED:
+    //   return state.set('cart', action.payload);
     default:
       return state;
   }
