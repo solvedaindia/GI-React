@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { cartDetailAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import EmptyCart from './emptyCart';
