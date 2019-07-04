@@ -157,7 +157,6 @@ index: 0
                  <br /><button className="Read-More ">Read More</button>
                </div>
 
-               <div></div>
              </div>
           
         )

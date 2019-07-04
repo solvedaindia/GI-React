@@ -104,7 +104,6 @@
   color: #000000;
 }
 .Position {
-  width: 371px;
   height: 31px;
   font-family: CeraGodrejInterio;
   font-size: 21px;
@@ -113,7 +112,7 @@
   font-stretch: normal;
   line-height: 1.43;
   letter-spacing: normal;
-  color: var(--battleship-grey);
+  color: black;
 }
 .Biography {
   width: 556px;
@@ -482,3 +481,29 @@ title {
 /*.....privacy and policy....*/
 
 
+.privpol {
+  width: 529px;
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.Godrej-Interio-is-Ins {
+  width: 1140px;
+  height: 206px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color:$reddishpink;
+  color: #000000
+}
