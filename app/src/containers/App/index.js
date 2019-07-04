@@ -44,7 +44,7 @@ import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 import SearchContainer from '../Search Container/searchContainer';
-import CartDetail from '../CartContainer/cartContainer';
+// import CartDetail from '../CartContainer/cartContainer';
 // import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
@@ -174,7 +174,7 @@ export default class App extends React.Component {
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
-          <Route path="/cart" component={CartDetail} />
+          {/* <Route path="/cart" component={CartDetail} /> */}
         </Switch>
         <FooterContainer />
       </div>

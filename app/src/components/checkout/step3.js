@@ -8,7 +8,14 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import axios from 'axios';
+import appCookie from '../../utils/cookie';
 import Link from 'react-router-dom/Link';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  BankListAPI
+} from '../../../public/constants/constants';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
@@ -72,29 +79,42 @@ export class Step3Component extends React.Component {
     }
     renderBanks = () => {
       if(this.state.showBanks) {
+        var menuItems = [];
+        let token = appCookie.get('accessToken');
+        axios.get(BankListAPI, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then((response) => {
+          console.log(response, "this is bank list response")
+          var bankdata = response.data.data.bankList;
+          bankdata.forEach((item, index) => {
+            menuItems.push(<div><MenuItem eventKey={index+1}>{item.bankName}</MenuItem>
+            <MenuItem divider /></div>)
+          })
+        }).catch((err) => {
+          console.log(err);
+        })
         return <DropdownButton
                   bsSize="large"
                   title="Select a Bank"
                   id="dropdown-size-large"
                 >
-                  <MenuItem eventKey="1">State Bank of India</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="2">ICICI Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="3">Catholic Syrian Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">Bank of Baroda</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="5">HDFC Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="6">Kotak Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="7">Syndicate Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="8">Allahbad Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="9">Punjab National Bank</MenuItem>
+                  {menuItems}
                 </DropdownButton>
+      }
+    }
+
+    showWallets = () => {
+      if(this.state.showBanks) {
+        this.setState({
+          showBanks: false
+        })
+      } else {
+        this.setState({
+          showBanks: true
+        })
       }
     }
 
@@ -105,23 +125,12 @@ export class Step3Component extends React.Component {
                   title="Select a Bank"
                   id="dropdown-size-large"
                 >
-                  <MenuItem eventKey="1">State Bank of India</MenuItem>
+                  <MenuItem eventKey="1">Paytm</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="2">ICICI Bank</MenuItem>
+                  <MenuItem eventKey="2">Mobikwik</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="3">Catholic Syrian Bank</MenuItem>
+                  <MenuItem eventKey="3">PhonePE</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="4">Bank of Baroda</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="5">HDFC Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="6">Kotak Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="7">Syndicate Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="8">Allahbad Bank</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="9">Punjab National Bank</MenuItem>
                 </DropdownButton>
       }
     }
@@ -153,9 +162,9 @@ export class Step3Component extends React.Component {
                      <h4 className='heading-label'>783-347-3248</h4>                     
                   </div>   
 
-                  <div className="action-button">
+                  {!this.props.isLoggedIn ? <div className="action-button">
                      <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
-                  </div>         
+                    </div>: ''}         
               </div>
 
               <div className='listRow bgfullflex clearfix'>
@@ -169,7 +178,7 @@ export class Step3Component extends React.Component {
                   </div>
 
                   <div className="email-box"> 
-                    <h4 className='heading-label'>#321, Oceanus freesia enclave, E block, 7th cross, Bellandur Bangalore, 560099</h4>
+                    <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
                   </div>
 
                   <div className="action-button">
@@ -246,7 +255,7 @@ export class Step3Component extends React.Component {
 
                       <div className="pay_radio">                        
                         <input className='inputRadio' type="radio" name="optradio" />
-                        <label className='form-label'>Wallets</label>
+                        <label className='form-label' onChange={this.showWallets}>Wallets</label>
                       </div>
                       {this.renderWallets()}
                     

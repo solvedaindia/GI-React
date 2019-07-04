@@ -22,7 +22,8 @@ import {
   userLoginAPI,
   addressListAPI,
   userDataAPI,
-  UserVerifyAPI
+  UserVerifyAPI,
+  OrderSummaryAPI
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -44,11 +45,14 @@ export class CheckoutComponent extends React.Component {
           showGift: false,
           loggedIn: false,
           addressList: null,
+          orderSummaryData: '',
+          ship_add: ''
         }
     }
 
     componentDidMount() {
-        var coke = appCookie.get('isLoggedIn')
+        var coke = appCookie.get('isLoggedIn');
+        this.callOrderSummaryAPI();
         console.log(coke, 'coke in did mount');
         if(coke == 'true') {
             this.callprofileAPI()
@@ -200,21 +204,46 @@ export class CheckoutComponent extends React.Component {
       })
     }
 
+    callOrderSummaryAPI = () => {
+      console.log(this.props.isLoggedIn, "logged in order summary")
+      let token = appCookie.get('accessToken');
+      axios.get(OrderSummaryAPI, {
+        headers: { store_id: storeId, access_token: token }
+      }).then(response => {
+        console.log(response, 'order Summary response');
+        this.setState({
+          orderSummaryData: response.data.data.orderSummary
+        })
+      }).catch(error => {
+        console.log(err, "order summary error");
+      })
+    }
+
+    handleAddress = (address) => {
+      this.setState({
+        ship_add: address
+      })
+    }
+
     handleStep = () => {
         if(this.state.step == 3) {
             return <Step3Component 
-                    back={this.handleChange} 
-                    backtoMobile={this.handleChangeMobile} />             
+                    back={this.handleChange}
+                    backtoMobile={this.handleChangeMobile} 
+                    address={this.state.ship_add}
+                    isLoggedIn={this.state.loggedIn} />
+                                 
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
                     back={this.handleChange}
                     isLoggedIn={this.state.loggedIn} 
-                    logonBy={this.state.logon_by} />
+                    logonBy={this.state.logon_by} 
+                    handleAddress={this.handleAddress} />
         } else {
             return <Step1Component 
                     proceed={this.handleProceed}
-                    login={this.handleUserLogin.bind(this)} 
+                    login={this.handleUserLogin.bind(this)}
                     proceedToSecond={this.proceedToSecond}
                     logonBy={this.state.logon_by}
                     msg={this.state.message} />
@@ -263,7 +292,7 @@ export class CheckoutComponent extends React.Component {
             <div className='row'>
               {this.handleStep()}
               {/* <div className="col-md-4"> */}
-                <OrderSummaryComponent isLoggedIn={this.state.loggedIn} />
+                <OrderSummaryComponent isLoggedIn={this.state.loggedIn} orderData={this.state.orderSummaryData} />
               {/* </div>  */}
             </div>
             </div>    

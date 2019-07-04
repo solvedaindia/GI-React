@@ -34,6 +34,7 @@ router.get('/bycoordinates', (req, res, next) => {
 });
 
 router.get('/byId', (req, res, next) => {
+<<<<<<< Updated upstream
   // let idArray = [];
   const url1 = req.originalUrl;
   const parsedUrl = url.parse(url1, true);
@@ -44,6 +45,14 @@ router.get('/byId', (req, res, next) => {
   // } else {
   //   idArray.push(req.query.id);
   // }
+=======
+  let idArray = [];
+  if (req.query.id instanceof Array) {
+    idArray = req.query.id;
+  } else {
+    idArray.push(req.query.id);
+  }
+>>>>>>> Stashed changes
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
     ids,

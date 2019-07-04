@@ -70,6 +70,10 @@ module.exports = Object.freeze({
   verifyBDPayment: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/updatePIAndVerifyCheckSum`,
   experienceStore: `${prodWcsResourceUrl}/{{storeId}}/GIStore/findStore?pincode={{pincode}}&partNumber={{partNumber}}`,
   invoiceDetails: `${prodWcsResourceUrl}/{{storeId}}/giInvoice/getInvoiceDetails?invoiceNum={{invoiceNo}}`,
+<<<<<<< Updated upstream
   storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreIds?{{queryParams}}&responseFormat=json`,
+=======
+  storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreId/{{unique_id}}?responseFormat=json`,
+>>>>>>> Stashed changes
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
 });

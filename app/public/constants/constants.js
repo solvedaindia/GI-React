@@ -35,9 +35,9 @@ export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 /* Remove from Wishlist API */
 export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
 /* Cart Detail API */
-export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
-/* Cart Update API*/ 
-export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
+export const cartDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
+/* Cart Update API*/
+export const cartUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
 /* Cart Item Delet API*/
 export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
 /* Cart Count API */
@@ -155,6 +155,8 @@ export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/che
 export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
 export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
 export const AddAddressToCardAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/addaddress`;
+export const PreCheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/precheckout`;
+export const BankListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/banklist`;
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';

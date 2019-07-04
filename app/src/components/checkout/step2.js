@@ -37,7 +37,9 @@ import {
   userDataAPI,
   PinToCityAPI,
   addAddressAPI,
-  AddAddressToCardAPI
+  AddAddressToCardAPI,
+  minicartAPI,
+  PreCheckoutAPI
 } from '../../../public/constants/constants';
 import {
   getReleventReduxState
@@ -467,7 +469,60 @@ export class Step2Component extends React.Component {
 
     addAddressToCart = () => {
       return new Promise((resolve, reject) => {
-        
+        let token = appCookie.get('accessToken');
+        axios.get(minicartAPI, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then((response) => {
+          var miniCartData  = response.data.data.miniCartData
+          console.log(miniCartData, "this is minicart data")
+          var data = [];
+          miniCartData.forEach((item) => {
+            if(item.freeGift != true) {
+              var obj = {
+                "orderItemId": `${item.orderItemId}`,
+                "shipModeId": "11251",
+                "addressId": `${this.state.ship_add_id}`
+              }
+              data.push(obj);
+            }
+          });
+          var body = {
+            "orderItem": data,
+            "shipModeId": "11251",
+            "addressId": `${this.state.bill_add_id}`
+          };
+          axios.post(AddAddressToCardAPI, body, {
+            headers: {
+              store_id: storeId,
+              access_token: token
+            }
+          }).then((res) => {
+            console.log(response, "add address to cart response");
+            var reqdata = {
+              order_id: response.data.data.orderId
+            }
+            axios.post(PreCheckoutAPI, reqdata, {
+              headers: {
+                store_id: storeId,
+                access_token: token
+              }
+            }).then((resp) => {
+              console.log(resp, "precheckout response");
+            }).catch((err) => {
+              console.log(err, "precheckout err");
+              resolve()
+            })
+            resolve();
+          }).catch((err) => {
+            console.log(body, err,  "add address to cart response");
+            resolve();
+          })
+        }).catch((err) => {
+          reject(err);
+        })
       })
     }
 
@@ -489,6 +544,11 @@ export class Step2Component extends React.Component {
         })
         console.log(this.state.ship_add_id, this.state.bill_add_id, "shipping and billing address id")
       }
+
+      this.addAddressToCart().then(() => {
+        this.props.handleAddress(selected_address);
+        this.props.proceed();
+      })
 
     }
 
