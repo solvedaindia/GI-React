@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const paymentHandler = require('../../handlers/paymenthandler.js');
 
-router.get('/initiateBDPayment', (req, res, next) => {
-  paymentHandler.initiateBDPayment(req.query, req.headers, (err, result) => {
+router.post('/initiateBDPayment', (req, res, next) => {
+  paymentHandler.initiateBDPayment(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
