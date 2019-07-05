@@ -70,7 +70,7 @@ export class HeaderSearch extends React.Component {
     const searchData = this.state.searchData;
     return (
       <>
-        <div className='rightAnim'>
+        <div className='searchBackBtn'>
           <button onClick={this.onBackBtn.bind(this)} className='menuBtn'><img className='logoImg' src={require('../../../../public/images/LeftArrow.svg')} /></button>
           <input id="searchInput" className='searchField' placeholder='Search for Rooms, Products, etc ' value={this.state.inputText} onChange={this.handleInputChange.bind(this)} type='text' />
           {this.state.inputText !== '' ?

@@ -7,6 +7,7 @@ import '../../../../public/styles/RWDStyle/mobileHeader.scss';
 import SideNavigation from './sideNavigation';
 import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
+import { Row, Col,Grid } from 'react-bootstrap';
 export class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
@@ -19,31 +20,46 @@ export class HeaderMobile extends React.Component {
 
   defaultRender() {
     return (
-      <div className='leftAnim'>
-        <SideNavigation pageNavigationRenderPro={this.pageNavigationRender} />
-        <button className='menuBtn'></button>
-        <Link to="/">
-          <button ><img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} /></button>
-        </Link>
-
-        <ul className='rightSideMobile'>
-          <WishListCount />
-          <CartCount />
-          <button onClick={this.onSearchClick.bind(this)} className='searchBtn' ><img src={require('../../../../public/images/RWD Assets/search.svg')} alt="my image" onClick={this.myfunction} /></button>
-        </ul>
-      </div>
+      <Row>
+      <Col xs={12} md={12} className='leftAnim'>
+        <div className='mobSideNav'>
+          <SideNavigation pageNavigationRenderPro={this.pageNavigationRender} />
+          </div>
+          <div className='mob-logo'>
+          <Link to="/">
+          <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} />
+          </Link>
+          </div>
+          
+          <ul className='mob-mini-nav'>
+            <WishListCount />
+            <CartCount />
+            <li className='searchIcon'><button onClick={this.onSearchClick.bind(this)} className='searchBtn' ><img src={require('../../../../public/images/RWD Assets/search.svg')} alt="my image" onClick={this.myfunction} /></button></li>
+          </ul>
+      </Col>
+      </Row>
     )
   }
 
   pageNavigationRender = (pageName) => {
     var item = (
-      <div className='leftAnim'>
-        <button onClick={this.headerCallback.bind(this)} className='menuBtn'><img className='logoImg' src={require('../../../../public/images/LeftArrow.svg')} /></button>
-        <Link to="/">
-          <button ><img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} /></button>
-        </Link>
-        <label className='navigationTitle'>{pageName}</label>
-      </div>
+      <Row>
+      <Col xs={12} md={12} className='backToCategory'>
+        <div className='backToCatBtn'>
+          <button onClick={this.headerCallback.bind(this)} className='menuBtn'><img className='logoImg' src={require('../../../../public/images/LeftArrow.svg')} /></button>
+          </div>
+          <div className='back-mob-logo'>
+          <Link to="/">
+          <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} />
+          </Link>
+          </div>
+          <ul className='mob-mini-profile-nav'>
+            <li>
+                 <span className='navigationTitle'>{pageName}</span>
+            </li>
+            </ul>
+        </Col>
+        </Row>
     )
     this.setState({
       headerRenderItem: item

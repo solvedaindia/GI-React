@@ -71,9 +71,9 @@ export class HeaderMobile extends React.Component {
 
       this.setState({
         navigationItem: (
-          <div className='rightAnim'>
+          <div className='searchBackBtn'>
             <div className='topMenu'>
-              <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt'>{`< ${catName}`}</label>
+              <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt catNavHeader'><img className='back-nav' src={require('../../../../public/images/nav_back.svg')} />{` ${catName}`}</label>
             </div>
             <ul>
               {!!subCat && subCat.map((subCatData, index) => {
@@ -139,9 +139,9 @@ export class HeaderMobile extends React.Component {
   onMyAccountClick() {
     this.setState({
       navigationItem: (
-        <div className='rightAnim'>
+        <div className='searchBackBtn'>
           <div className='topMenu'>
-            <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt'>{`< My Account`}</label>
+            <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt catNavHeader'><img className='back-nav' src={require('../../../../public/images/nav_back.svg')} />{` My Account`}</label>
           </div>
           {/* onClick={this.updatePincode.bind(this, this.props)} */}
           <ul>
@@ -186,7 +186,7 @@ export class HeaderMobile extends React.Component {
           </div>
           <ul>
             {!!category && category.map((categoryData, index) => (
-              <li onClick={() => this.onCategoryClick(categoryData.subCategoryArray, categoryData.categoryName)} className='navTxt'>{categoryData.categoryName}{categoryData.subCategoryArray.length > 1 ? <span className='arrow'>></span> : null}</li>
+              <li onClick={() => this.onCategoryClick(categoryData.subCategoryArray, categoryData.categoryName)} className='navTxt'>{categoryData.categoryName}{categoryData.subCategoryArray.length > 1 ? <span className='arrow'><img src={require('../../../../public/images/nav_next.svg')} /></span> : null}</li>
             ))}
             {myAccountItem}
             <li className='navTxt'>For Businesses</li>
@@ -212,7 +212,7 @@ export class HeaderMobile extends React.Component {
         <div className='sideNavigation'>
           <label>
             <input type="checkbox" checked={showNav ? "checked" : ''} />
-            <div onClick={this.onMenuClick.bind(this)} className="handler"><img src={require('../../../../public/images/RWD Assets/menu.svg')} alt="my image" /></div>
+            <div onClick={this.onMenuClick.bind(this)} className="handler"><img className='nav-bar-img' src={require('../../../../public/images/RWD Assets/menu.svg')} alt="my image" /></div>
             <div onClick={this.onOverlayClick.bind(this)} className="overlay"></div>
             <nav>
               <div className='topMenuOverlap' />

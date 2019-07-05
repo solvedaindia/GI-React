@@ -170,7 +170,7 @@ class ForgotPasswordOTP extends React.Component {
     if (this.props.isBack) {
       animeClass = 'leftAnim';
     } else {
-      animeClass = 'rightAnim';
+      animeClass = 'searchBackBtn';
     }
 
     let inputTxtField = null;

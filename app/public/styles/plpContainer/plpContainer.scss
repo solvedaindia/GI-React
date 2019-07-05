@@ -426,37 +426,7 @@ section.tablecarousel {
   }
 }
 
-/** Descripton */
-.descriptionBanner {
-  background: $greybg;
-  padding: 60px 0;
 
-  .heading {
-    font-family: $font-bold;
-    font-size: $base * 4.25;
-    color: $black;
-    margin: 0 0 20px 0;
-  }
-
-  .readMore {
-    background: transparent;
-    border: none;
-    text-decoration: underline;
-    color: $black;
-    font-size: $base * 2;
-    font-family: $font-regular;
-    text-align: left;
-    margin: 24px 0;
-    display: inline-block;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-    &:active {
-      outline: none;
-    }
-  }
-}
 
 .description_area .list {
   color: #767676;
@@ -935,4 +905,146 @@ section.tablecarousel {
     -webkit-transform: none;
     transform: none;
   }
+}
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+      /** Descripton */
+      .descriptionBanner {
+        background: $greybg;
+        padding: 60px 0;
+
+        .heading {
+          font-family: $font-bold;
+          font-size: $base * 4.25;
+          color: $black;
+          margin: 0 0 20px 0;
+        }
+
+        .readMore {
+          background: transparent;
+          border: none;
+          text-decoration: underline;
+          color: $black;
+          font-size: $base * 2;
+          font-family: $font-regular;
+          text-align: left;
+          margin: 24px 0;
+          display: inline-block;
+          cursor: pointer;
+          &:focus {
+            outline: none;
+          }
+          &:active {
+            outline: none;
+          }
+        }
+      }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){
+    /** Descripton */
+    .descriptionBanner {
+      background: $greybg;
+      padding: 60px 0;
+
+      .heading {
+        font-family: $font-bold;
+        font-size: $base * 2.5;
+        color: $black;
+        margin: 0 0 20px 0;
+      }
+      .description_area{
+        p{
+          color:$greyLight;
+          font-size: 12px;
+          font-family: $font-regular;
+          line-height: 18px;
+        }
+      }
+      .readMore {
+        background: transparent;
+        border: none;
+        text-decoration: underline;
+        color: $black;
+        font-size: $base * 2;
+        font-family: $font-regular;
+        text-align: left;
+        margin: 24px 0;
+        display: inline-block;
+        cursor: pointer;
+        &:focus {
+          outline: none;
+        }
+        &:active {
+          outline: none;
+        }
+      }
+    }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
 }
