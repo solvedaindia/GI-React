@@ -635,3 +635,73 @@ title {
       
   }
 }
+
+// .faqHeader {
+//   font-size: 27px;
+//   margin: 20px;
+// }
+
+// .panel-heading [data-toggle="collapse"]:after {
+//   font-family: 'Glyphicons Halflings';
+//   content: "e072"; /* "play" icon */
+//   float: right;
+//   color: #F58723;
+//   font-size: 18px;
+//   line-height: 22px;
+//   /* rotate "play" icon from > (right arrow) to down arrow */
+//   -webkit-transform: rotate(-90deg);
+//   -moz-transform: rotate(-90deg);
+//   -ms-transform: rotate(-90deg);
+//   -o-transform: rotate(-90deg);
+//   transform: rotate(-90deg);
+// }
+
+// .panel-heading [data-toggle="collapse"].collapsed:after {
+//   /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+//   -webkit-transform: rotate(90deg);
+//   -moz-transform: rotate(90deg);
+//   -ms-transform: rotate(90deg);
+//   -o-transform: rotate(90deg);
+//   transform: rotate(90deg);
+//   color: #454444;
+// }
+.faqhead {
+  height: 18px;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.uldiv{
+  width:263px;
+  height:41px;
+  background-color: #eef8fe
+}
+.uldivlight{
+  width:263px;
+  height:41px;
+  background-color:white;
+}
+.MyOd {
+  margin-right: 837px;
+  margin-top: 40px;
+  height: 28px;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.panel-body{
+  margin-top: -2px;
+  color: #000000
+}
