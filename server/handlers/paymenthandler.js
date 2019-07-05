@@ -3,29 +3,86 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const checkout = require('../handlers/carthandler');
+const logger = require('../utils/logger.js');
 
 module.exports.initiateBDPayment = function initiateBDPayment(
-  query,
+  params,
   headers,
   callback,
 ) {
+  if (
+    !params.orderId ||
+    (!params.email && !params.mobile) ||
+    !params.payMethodId ||
+    !params.amount ||
+    !params.callbackUrl ||
+    !params.paymentMode ||
+    !params.billing_address_id
+  ) {
+    logger.debug('Registered User Login:::Invalid Params');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  if (
+    params.paymentMode === 'Net Banking' ||
+    params.paymentMode === 'PayTM' ||
+    params.paymentMode === 'UPI' ||
+    params.paymentMode === 'PhonePe'
+  ) {
+    if (!params.BankID) {
+      logger.debug('Initiate Payment:::Invalid Params');
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+  }
+  const initiateBDPaymentBody = {
+    orderId: params.orderId,
+    email: params.email,
+    payMethodId: params.payMethodId,
+    amount: params.amount,
+    mobile: params.mobile,
+    callbackUrl: params.callbackUrl,
+    BankID: params.BankID,
+    paymentMode: params.paymentMode,
+    billing_address_id: params.billing_address_id,
+  };
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const initiateBDPaymentURL = `${constants.initiateBDPayment.replace(
     '{{storeId}}',
     headers.storeId,
-  )}?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}&BankID=${query.BankID}&paymentMode=${query.paymentMode}`;
+  )}`;
+  // ?orderId=${query.orderId}&email=${query.email}&payMethodId=${query.payMethodId}&amount=${query.amount}&mobile=${query.mobile}&callbackUrl=${query.callbackUrl}&BankID=${query.BankID}&paymentMode=${query.paymentMode}`;
 
   origin.getResponse(
-    'GET',
+    'POST',
     initiateBDPaymentURL,
     reqHeaders,
     null,
-    null,
+    initiateBDPaymentBody,
     null,
     '',
     response => {
       if (response.status === 200) {
+        // const customInfoData =
+        //   'GODREJUAT|50334070111|U1230001002269|1|00000001.00|123|NA|01|INR|DIRECT|NA|NA|.00|27-06-2019 12:32:08|0300|NA|NA|NA|NA|NA|NA|NA|NA|NA|NA|64299DD1CC760969D4EB467B1EAE2D8CC6B7897B24B82FE4CF22EB2C9C7EE3FF';
+        // const reqBody = {
+        //   orderId: response.body.orderId,
+        //   email: response.body.email,
+        //   payMethodId: response.body.payMethodId,
+        //   amount: response.body.amount,
+        //   customInfo: customInfoData,
+        //   billing_address_id: response.body.billing_address_id,
+        // };
+
+        // this.verifyBDPayment(reqBody, headers, (err, result) => {
+        //   if (err) {
+        //     callback(err);
+        //   } else {
+        //     callback(null, result);
+        //   }
+        // });
         callback(null, response.body);
       } else {
         callback(errorutils.handleWCSError(response));
@@ -39,6 +96,17 @@ module.exports.verifyBDPayment = function verifyBDPayment(
   headers,
   callback,
 ) {
+  if (
+    !params.orderId ||
+    !params.payMethodId ||
+    !params.amount ||
+    !params.customInfo ||
+    !params.billing_address_id
+  ) {
+    logger.debug('Verify Payment:::Invalid Params');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const verifyBDPaymentURL = `${constants.verifyBDPayment.replace(
@@ -52,6 +120,7 @@ module.exports.verifyBDPayment = function verifyBDPayment(
     payMethodId: params.payMethodId,
     amount: params.amount,
     customInfo: params.customInfo,
+    billing_address_id: params.billing_address_id,
   };
 
   origin.getResponse(

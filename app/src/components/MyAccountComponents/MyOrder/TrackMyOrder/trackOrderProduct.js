@@ -11,6 +11,8 @@ class TrackOrderProduct extends React.Component {
   }
 
   render() {
+    
+    const productData = this.props.prodctDataPro;
     return (
       <>
         <div className="clearfix" />

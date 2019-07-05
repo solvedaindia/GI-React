@@ -136,15 +136,15 @@ export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlis
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
 export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
-
 /* Notify Me API */
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
-
 /* Address List API */
 export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
-
 /* User data API */
 export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
+/* Order List API */
+export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/list`;
+
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

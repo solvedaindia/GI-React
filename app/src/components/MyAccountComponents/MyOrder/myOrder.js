@@ -1,6 +1,6 @@
 import React from 'react';
 import apiManager from '../../../utils/apiManager';
-import { changePasswordAPI } from '../../../../public/constants/constants';
+import { orderListAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
 import OrderItem from './orderItem';
 import TrackOrder from './TrackMyOrder/trackOrder';
@@ -11,8 +11,28 @@ class MyOrder extends React.Component {
     this.state = {
       isTrackOrder: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
+      orderListData: [],
+      isLoading: true,
     };
     // this.renderSelection = this.renderSelection.bind(this)
+  }
+
+  componentDidMount() {
+    this.getOrderList();
+  }
+
+  getOrderList() {
+    apiManager.get(orderListAPI)
+      .then(response => {
+        console.log('OrderList Response --- ', response.data);
+        this.setState({
+          orderListData: response.data.data.orderList,
+          isLoading: false,
+        })
+      })
+      .catch(error => {
+        // return null;
+      });
   }
 
   renderSelection() {
@@ -27,16 +47,22 @@ class MyOrder extends React.Component {
   }
 
   render() {
+
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
           <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} />
-        ) : (
-          <OrderItem
-            renderSelectionPro={this.renderSelection.bind(this)}
-            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
-          />
-        )}
+        ) :
+          this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
+            return (
+              <OrderItem
+                renderSelectionPro={this.renderSelection.bind(this)}
+                isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+                orderItemData={data}
+              />
+            )
+          }) : this.state.isLoading ? null : <div className='noOrder'>No Orders to Show</div> 
+        }
       </div>
     );
   }
