@@ -47,6 +47,8 @@ import Kitchens from '../KitchensContainer/index';
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
+import HelpSupport from '../serviceSupportContainer/index';
+
 
 
 
@@ -191,6 +193,7 @@ export default class App extends React.Component {
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy_policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
+          <Route path="/support" component={HelpSupport} />
 
 
 

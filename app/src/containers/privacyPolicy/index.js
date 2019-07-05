@@ -16,7 +16,7 @@ export class PrivacyPolicy extends React.Component {
 
   render() {
     return (
-      <div className="About-Us">
+      <div className="privacyPol">
         <h1 className="privpol">Privacy Policy</h1>
         <div className="container">
 
