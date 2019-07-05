@@ -46,7 +46,7 @@ index: 0
            
              <div className="Kitchen-1">
                <KitchenBanner />
-               <div className="text-block">
+               <div className="text-blocks">
  <h4 className="header">Interio Kitchens</h4>
                  <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
                    the home you've always wanted</p2> <br />
