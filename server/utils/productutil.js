@@ -137,9 +137,6 @@ function getProductListByIDs(headers, productIDs, callback) {
           response.body.catalogEntryView &&
           response.body.catalogEntryView.length > 0
         ) {
-          /*  response.body.catalogEntryView.forEach(product => {
-            productList.push(productDetailFilter.productDetailSummary(product));
-          }); */
           callback(null, response.body.catalogEntryView);
         } else {
           callback(null, productList);
@@ -154,18 +151,20 @@ function getProductListByIDs(headers, productIDs, callback) {
 /* Get Promotion Data for All The Products */
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
-  /*   promotionUtil.getMultiplePromotionData(
+  let promotionObject = {};
+    promotionUtil.getMultiplePromotionData(
     productIDs,
     headers,
     (error, promotion) => {
       if (!error) {
-        callback(null, promotion);
+        promotionObject = promotion;
+        callback(null, promotionObject);
       } else {
         callback(error);
       }
     },
-  ); */
-  async.map(
+  );
+  /* async.map(
     productIDs,
     (productId, cb) => {
       promotionUtil.getPromotionData(productId, headers, (error, promotion) => {
@@ -186,11 +185,12 @@ function getPromotionData(headers, productIDs, callback) {
         return;
       }
       results.forEach(result => {
+        promotionObject[result.uniqueID] = result.promotionData;
         promotionArray.push(result);
       });
-      callback(null, promotionArray);
+      callback(null, promotionObject);
     },
-  );
+  ); */
 }
 
 /* Merge Product Details and Promotion Data */
@@ -206,7 +206,7 @@ function transformJson(result) {
       productListing.push(productDetail);
     });
   } else {
-    productListArray.forEach(product => {
+    /* productListArray.forEach(product => {
       let productDetail = {};
       const productPromotion = promotionJson.filter(
         promotion => promotion.uniqueID === product.uniqueID,
@@ -216,6 +216,14 @@ function transformJson(result) {
       productDetail = productDetailFilter.productDetailSummary(product);
       productDetail.promotionData = productDetailFilter.getSummaryPromotion(
         productPromotion[0].promotionData,
+      );
+      productListing.push(productDetail);
+    }); */
+    productListArray.forEach(product => {
+      let productDetail = {};
+      productDetail = productDetailFilter.productDetailSummary(product);
+      productDetail.promotionData = productDetailFilter.getSummaryPromotion(
+        promotionJson[productDetail.uniqueID],
       );
       productListing.push(productDetail);
     });

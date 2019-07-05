@@ -111,35 +111,6 @@ class WelcomeBack extends React.Component {
     this.setState({ isFacebookClicked: true });
   }
 
-  /* Handle User Login API */
-  handleUserLoginApi(data) {
-    this.setState({ message: null });
-    axios
-      .post(userLoginAPI, data, {
-        headers: { store_id: storeId, access_token: accessToken },
-      })
-      .then(response => {
-        window.location.reload();
-        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-        document.cookie = `${accessTokenCookie}=${
-          response.data.data.access_token
-        };path=/;expires=''`;
-        this.setState({
-          loginStatus: 'Logout',
-          userType: 'Hello User!',
-          show: false,
-        });
-        // alert('Successfully Logged In');
-      })
-      .catch(error => {
-        const errorData = error.response.data;
-        const errorMessage = errorData.error.error_message;
-        this.setState({
-          message: `Error - ${errorMessage}`,
-        });
-      });
-  }
-
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
     if (getLoginCookie) {
@@ -152,7 +123,7 @@ class WelcomeBack extends React.Component {
   }
 
   /* Handle User Login API */
-  handleUserLoginApi(data) {
+  handleUserLoginApi(data, callbackFunc) {
     this.setState({ message: null });
     apiManager
       .post(userLoginAPI, data)
@@ -174,9 +145,10 @@ class WelcomeBack extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        this.setState({
-          message: `Error - ${errorMessage}`,
-        });
+        // this.setState({
+        //   message: `Error - ${errorMessage}`,
+        // });
+        callbackFunc(errorMessage);
       });
   }
 

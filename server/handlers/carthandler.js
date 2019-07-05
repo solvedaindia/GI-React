@@ -11,6 +11,7 @@ const pincodeUtil = require('../utils/pincodeutil');
 
 const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
+const cartCalculationUsageAddAddress = '-2,-4,-7';
 const cartCalculateOrder = '1';
 
 /**
@@ -114,7 +115,7 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-
+  /* eslint no-param-reassign: "error" */
   headers.promotionData = 'false';
   const fetchCartData = [
     getCartData.bind(null, headers),
@@ -316,33 +317,6 @@ module.exports.updateitem = function updateitem(params, headers, callback) {
   );
 };
 
-/* function addToCart(headers, cartBody, callback) {
-  const addToCartOriginURL = constants.cartData.replace(
-    '{{storeId}}',
-    headers.storeId,
-  );
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  origin.getResponse(
-    'POST',
-    addToCartOriginURL,
-    reqHeader,
-    null,
-    cartBody,
-    null,
-    '',
-    response => {
-      if (response.status === 201) {
-        logger.debug(
-          `successfully added to cart for${JSON.stringify(cartBody)}`,
-        );
-        callback(null, response.body, reqHeader);
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-} */
-
 function getCartData(headers, callback) {
   const cartUrl = `${constants.cartData.replace(
     '{{storeId}}',
@@ -517,7 +491,7 @@ function mergeCartData(cartData, productList, headers, callback) {
     );
     cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
     cartDetails.cartItems = mergedCartData.orderItemList;
-    cartDetails.actualCartData = cartData;
+    // cartDetails.actualCartData = cartData;
   }
   callback(null, cartDetails);
 }
@@ -580,4 +554,195 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
       }
     }
   });
+};
+
+/**
+ * Add Address to cart items
+ * @param access_token,storeId,addressID
+ * @return 200,OK with adding item to Cart
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.addAddress = addAddress;
+function addAddress(headers, params, callback) {
+  logger.debug('Adding Address To Cart');
+  if (
+    !params ||
+    !params.orderItem ||
+    params.orderItem.length === 0 ||
+    !params.addressId ||
+    !params.shipModeId
+  ) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of params.orderItem) {
+    if (!item.orderItemId || !item.shipModeId || !item.addressId) {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
+  }
+  const reqBody = params;
+  reqBody.shipAsComplete = '1';
+  reqBody.x_calculationUsage = cartCalculationUsageAddAddress;
+
+  const addAddressCart = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/@self/shipping_info`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'PUT',
+    addAddressCart,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Get Ship Modes List
+ * @param access_token,storeId,addressID
+ * @return 200,OK with fetching all shipmodes
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.getShipModes = getShipModes;
+function getShipModes(headers, callback) {
+  logger.debug('Get Shipmodes');
+
+  // const reqHeader = headerutil.getWCSHeaders(headers);
+  const originUrl = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/shipping_modes`;
+
+  origin.getResponse(
+    'GET',
+    originUrl,
+    null,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const shippingModes = {
+          shipModes: [],
+        };
+        if (
+          response.body.usableShippingMode &&
+          response.body.usableShippingMode.length > 0
+        ) {
+          response.body.usableShippingMode.forEach(shipMode => {
+            const shipJson = {
+              shipModeId: shipMode.shipModeId,
+              shipModeCode: shipMode.shipModeCode || '',
+              shipModeDescription: shipMode.shipModeDescription || '',
+            };
+            shippingModes.shipModes.push(shipJson);
+          });
+        }
+        callback(null, shippingModes);
+      } else {
+        logger.debug('Error While calling Shipping Modes API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Checkout Cart
+ * @param access_token,storeId,addressID
+ * @return 200,OK with Checkout
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.checkout = checkout;
+function checkout(headers, params, callback) {
+  logger.debug('Adding Address To Cart');
+  if (!params || !params.orderId) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqBody = {
+    orderId: params.orderId,
+  };
+  const checkoutURL = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/@self/checkout`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'POST',
+    checkoutURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 201 || response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Pre Checkout Cart
+ * @param access_token,storeId,addressID
+ * @return 200,OK with inventory details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.precheckout = function precheckout(req, callback) {
+  logger.debug('Inside Reserve Inventory API');
+  if (!req.body.order_id) {
+    logger.debug('Invalid Params : Reserve Inventory API');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+  const reqBody = {
+    orderId: req.body.order_id,
+  };
+  const originUrl = constants.reserveInventory.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+
+  origin.getResponse(
+    'PUT',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        logger.debug('Error While Set Reserve Inventory API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
 };

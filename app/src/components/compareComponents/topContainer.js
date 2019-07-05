@@ -12,13 +12,33 @@ import {
 
 function TopContainer(props) {
     console.log(props, "props in top container");
-
+     
     function removePrd() {
       console.log("remove prd called");
       if(props.count == 2) {
         alert("Cannot remove Product. Need atleast two products to compare");
       } else {
         props.remove(props.product.uniqueID)
+      }
+    }
+
+    function renderSwatches() {
+      console.log("render swatches called")
+      if(props.product.swatches && props.product.swatches.length > 0) {
+
+        var swatches = [];
+        props.product.swatches.forEach((swatch) => {
+          if(swatch.colorCode) {
+            swatches.push(<li><a href="#" style={{background: `${swatch.colorCode}`}}></a></li>)
+          } else if(swatch.facetImage) {
+            swatches.push(<li><a href="#"><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
+          } else {
+            swatches.push(<li><a href="#">{swatch.name}</a></li>)
+          }
+        });
+        return swatches;
+      } else {
+        console.log("no swatches found")
       }
     }
   return (
@@ -29,25 +49,22 @@ function TopContainer(props) {
 
     <div className='product-desc'>
       <h4 className='product-name'>{props.product.name} </h4>
-      <p className='description-text'>(With Locker, Mirror, OHU & Drawer) (Ivory Red Finish)</p>
-      <Price
-        actualPrice='20000'
+      <p className='description-text'>{props.product.shortDescription}</p>
+      {props.product.price[1].value ? <Price
+        actualPrice={props.product.price[0].value}
         offerPrice={props.product.price[1].value}
-      />
-      <p className='emi-desc'>EMI Starting from 399</p>
+      /> : 0}
+      <p className='emi-desc'>EMI Starting from {props.product.minimumEMI ? props.product.minimumEMI : 0}</p>
     </div> 
 
     <div className='remove-box'>
       <button className='remove-btn' onClick={removePrd}>Remove</button>
-      <Link to={`/pdp/${props.product.uniqueID}`} className='view-product-btn'>View Product</Link>
+      <Link to={`/pdp/${props.product.parentProductId}/${props.product.uniqueID}`} className='view-product-btn'>View Product</Link>
     </div> 
 
     <div className='product-attr'>
     <ul>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
+        {renderSwatches()}
       </ul>
     </div>
   </Col>

@@ -53,6 +53,9 @@ import privacyPolicy from '../privacyPolicy/index';
 
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
+import CartDetail from '../CartContainer/cartContainer';
+// import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,7 +72,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
-    // this.getPincodeData();
+    this.getPincodeData();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -105,20 +108,20 @@ export default class App extends React.Component {
     }
   }
 
-  // getPincodeData() {
-  //   if (appCookie.get('pincode') === null) {
-  //     apiManager
-  //       .get(ipDataApi, { headers: { Accept: 'application/json' } })
-  //       .then(response => {
-  //         appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
-  //         console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-  //       })
-  //       .catch(error => {
-  //         appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-  //         console.log(`Pincode APi Error=>> ${error}`);
-  //       });
-  //   }
-  // }
+  getPincodeData() {
+    if (appCookie.get('pincode') === null) {
+      apiManager
+        .get(ipDataApi, { headers: { Accept: 'application/json' } })
+        .then(response => {
+          appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
+          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+        })
+        .catch(error => {
+          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+          console.log(`Pincode APi Error=>> ${error}`);
+        });
+    }
+  }
 
   getNewsletterSubscriptionStatus() {
     apiManager
@@ -170,9 +173,8 @@ export default class App extends React.Component {
         <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-          <Route exact path="/about-us" component={AboutUsContainer} />
-          <Route path="/clp" component={ClpContainer} />
-          <Route path="/plp" component={PlpContainer} />
+          <Route path="/rooms:id" component={ClpContainer} />
+          <Route path="/furniture:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
@@ -183,9 +185,12 @@ export default class App extends React.Component {
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
+          <Route path="/search" component={PlpContainer} />
+          <Route path="/cart" component={CartDetail} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy_policy" component={privacyPolicy} />
+
 
 
         </Switch>

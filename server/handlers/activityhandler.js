@@ -49,10 +49,11 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        logger.debug('Added to recently viewed');
+        // callback(null, response.body);
       } else {
         logger.debug('Error while Calling Add to Recently Viewed');
-        callback(errorutils.handleWCSError(response));
+        // callback(errorutils.handleWCSError(response));
       }
     },
   );

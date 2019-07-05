@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const cartHandler = require('../../handlers/carthandler');
 const promotionUtil = require('../../utils/promotionutil');
-const checkoutHandler = require('../../handlers/checkouthandler');
 
 /**
  * fetch cart details
@@ -192,6 +191,82 @@ router.post('/removepromotion/:promoCode', (req, res, next) => {
  */
 router.get('/promocode', (req, res, next) => {
   cartHandler.getPromoCodes(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Add Address t0 Cart
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/addaddress', (req, res, next) => {
+  cartHandler.addAddress(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Shipping Modes
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/shipmodes', (req, res, next) => {
+  cartHandler.getShipModes(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Checkout Cart
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/checkout', (req, res, next) => {
+  cartHandler.checkout(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Reserve Inventory API
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/precheckout', (req, res, next) => {
+  cartHandler.precheckout(req, (err, result) => {
     if (err) {
       next(err);
       return;

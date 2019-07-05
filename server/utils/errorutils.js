@@ -113,6 +113,11 @@ const errorlist = {
     error_key: 'order_not_found',
     error_message: 'An order with reference to this orderId does not exist',
   },
+  ERROR_IN_EMAIL_SEND: {
+    status_code: 400,
+    error_key: 'ERROR_IN_EMAIL_SEND',
+    error_message: 'Error in sending mail to recipient.',
+  },
 };
 module.exports.errorlist = errorlist;
 
@@ -137,7 +142,11 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_GENERIC' ||
         errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
         errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
-        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED'
+        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED' ||
+        errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS' ||
+        errBody.errors[0].errorKey === '_ERR_INVALID_ADDR' ||
+        errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE' ||
+        errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT'
       ) {
         return {
           status_code: 400,
@@ -163,6 +172,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_IN_EMAIL_SEND') {
+        return errorlist.ERROR_IN_EMAIL_SEND;
       }
       if (errBody.errors[0].errorKey === 'ERROR_UPDATING_MOBILE') {
         return errorlist.mobile_exists;

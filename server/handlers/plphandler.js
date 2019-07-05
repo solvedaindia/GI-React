@@ -1,4 +1,5 @@
 const async = require('async');
+const equal = require('deep-equal');
 const errorUtils = require('../utils/errorutils');
 const logger = require('../utils/logger.js');
 const promotionUtil = require('../utils/promotionutil');
@@ -9,6 +10,7 @@ const plpfilter = require('../filters/productlistfilter');
 const pdpfilter = require('../filters/productdetailfilter');
 const categoryUtil = require('../utils/categoryutil');
 const plpconfig = require('../configs/plpconfig');
+const productUtil = require('../utils/productutil');
 
 /* Get Product List By Category ID with All the Data including Promotion, Category Details */
 module.exports.getProductsByCategory = function getProductsByCategory(
@@ -25,31 +27,31 @@ module.exports.getProductsByCategory = function getProductsByCategory(
 
   const queryUrl = getQueryUrl(req);
 
-  const productListUrl = constants.allSKUByCategoryId
-    .replace('{{storeId}}', reqHeader.storeId)
-    .replace('{{categoryId}}', categoryID)
-    .replace('{{queryUrl}}', queryUrl);
-
-  let plpTask = [
-    getProductList.bind(null, reqHeader, productListUrl, null),
-    getPromotionData,
-  ];
-
+  const plpResponse = {
+    productCount: 0,
+    facetData: [],
+    productList: [],
+    categoryDetails: {},
+  };
   if (reqHeader.cat_details === 'true') {
-    plpTask = [
-      getCategoryDetails.bind(null, reqHeader, categoryID, productListUrl),
-      getProductList,
-      getPromotionData,
-    ];
+    categoryUtil.getCategoryDetails(reqHeader, categoryID, (err, result) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      const categoryDetail = result;
+      plpResponse.categoryDetails = categoryDetail;
+      if (categoryDetail.displaySkus === true) {
+        reqHeader.sku_display = 'true';
+      }
+      if (categoryDetail.displaySkus === false) {
+        reqHeader.sku_display = 'false';
+      }
+      plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
+    });
+  } else {
+    plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
   }
-  async.waterfall(plpTask, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      logger.debug('Got all the resposes for Product List By Category');
-      callback(null, result);
-    }
-  });
 };
 
 /* Get Product List By Search Term with All the Data including Promotion Data */
@@ -66,14 +68,22 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   const reqHeader = req.headers;
   const queryUrl = getQueryUrl(req);
 
-  const productListUrl = constants.searchByTerm
+  const searchResponse = {
+    productCount: 0,
+    facetData: [],
+    productList: [],
+    spellCheck: [],
+  };
+
+  let productListUrl = constants.searchByTerm
     .replace('{{storeId}}', reqHeader.storeId)
     .replace('{{searchTerm}}', req.params.searchterm)
     .replace('{{queryUrl}}', queryUrl);
+  productListUrl += `&searchType=101`;
 
   const plpTask = [
-    getProductList.bind(null, reqHeader, productListUrl, null),
-    getPromotionData,
+    getAllSKUProductList.bind(null, reqHeader, productListUrl, searchResponse),
+    getSkuPromotionData,
   ];
 
   async.waterfall(plpTask, (err, result) => {
@@ -85,6 +95,36 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
     }
   });
 };
+
+function plpProductList(headers, categoryID, queryUrl, plpResponse, callback) {
+  let productListUrl = constants.allSKUByCategoryId
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{categoryId}}', categoryID)
+    .replace('{{queryUrl}}', queryUrl);
+  let searchType = 101;
+  if (headers.sku_display === 'false') {
+    searchType = 1;
+  }
+  productListUrl += `&searchType=${searchType}`;
+  let plpTask = [
+    getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
+    getSkuPromotionData,
+  ];
+  if (headers.sku_display === 'false') {
+    plpTask = [
+      getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
+      getSKUList,
+    ];
+  }
+  async.waterfall(plpTask, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the resposes for Product List By Category');
+      callback(null, result);
+    }
+  });
+}
 
 /* Create Query Url for Product List */
 function getQueryUrl(req) {
@@ -115,64 +155,15 @@ function getQueryUrl(req) {
   return queryUrl;
 }
 
-/* Get Category Details */
-function getCategoryDetails(headers, categoryID, productListUrl, callback) {
-  categoryUtil.getCategoryDetails(headers, categoryID, (err, result) => {
-    if (err) {
-      callback(err);
-      return;
-    }
-    const categoryDetail = result;
-    const reqHeaders = headers;
-    if (categoryDetail.displaySkus === true) {
-      reqHeaders.sku_display = true;
-    }
-    if (categoryDetail.displaySkus === false) {
-      reqHeaders.sku_display = false;
-    }
-    callback(null, reqHeaders, productListUrl, categoryDetail);
-  });
-}
-
-/**
- *  Get Products Details
- */
-/* function getProductDetails(headers, facets, uniqueIDs, callback) {
-  const hasSwatches = false;
-  productUtil.getProductListByIDs(uniqueIDs, headers, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      let productArray = [];
-      if (hasSwatches === true) {
-        productArray = filter.filterData(
-          'productlist_withswatch',
-          result.catalogEntryView,
-        );
-      }
-      if (hasSwatches === false) {
-        productArray = filter.filterData(
-          'productlist_withoutswatch',
-          result.catalogEntryView,
-        );
-      }
-      callback(null, headers, facets, productArray);
-    }
-  });
-} */
-
 /**
  *  Get Products List
  */
-function getProductList(headers, productListUrl, categoryDetail, callback) {
-  let searchType = 101;
-  if (headers.sku_display === false) {
-    searchType = 101;
-  }
-
-  // eslint-disable-next-line no-param-reassign
-  productListUrl += `&searchType=${searchType}`;
-
+function getAllSKUProductList(
+  headers,
+  productListUrl,
+  productListRes,
+  callback,
+) {
   const reqHeader = headerUtil.getWCSHeaders(headers);
   origin.getResponse(
     'GET',
@@ -184,20 +175,10 @@ function getProductList(headers, productListUrl, categoryDetail, callback) {
     null,
     response => {
       if (response.status === 200) {
-        const productListJson = {
-          productCount: 0,
-          facetData: [],
-          productList: [],
-        };
-
-        if (categoryDetail) {
-          productListJson.categoryDetails = categoryDetail;
-        }
-
+        const productListJson = productListRes;
         if (response.body.metaData.spellcheck) {
           productListJson.spellCheck = response.body.metaData.spellcheck;
         }
-
         productListJson.productCount = response.body.recordSetTotal;
         productListJson.facetData = plpfilter.facetData(
           response.body.facetView,
@@ -215,9 +196,32 @@ function getProductList(headers, productListUrl, categoryDetail, callback) {
 /**
  *  Get Promotion Data
  */
-function getPromotionData(headers, productListJson, callback) {
+function getSkuPromotionData(headers, productListJson, callback) {
   if (productListJson.productList && productListJson.productList.length > 0) {
-    async.map(
+    const skuIds = [];
+    productListJson.productList.forEach(product => {
+      skuIds.push(product.uniqueID);
+    });
+
+    promotionUtil.getMultiplePromotionData(skuIds, headers, (err, res) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      const productListArray = [];
+      productListJson.productList.forEach(product => {
+        const productDetail = pdpfilter.productDetailSummary(product);
+        productDetail.promotionData = pdpfilter.getSummaryPromotion(
+          res[productDetail.uniqueID],
+        );
+        productListArray.push(productDetail);
+      });
+      // eslint-disable-next-line no-param-reassign
+      productListJson.productList = productListArray;
+      callback(null, productListJson);
+    });
+
+    /* async.map(
       productListJson.productList,
       (product, cb) => {
         let productDetail = product;
@@ -226,8 +230,10 @@ function getPromotionData(headers, productListJson, callback) {
           headers,
           (error, promotionData) => {
             if (!error) {
-              productDetail.promotionData = promotionData; // Add Promotion Data to Product Details
               productDetail = pdpfilter.productDetailSummary(productDetail); // Filter Product Details
+              productDetail.promotionData = pdpfilter.getSummaryPromotion(
+                promotionData,
+              ); // Add Promotion Data to Product Details
               cb(null, productDetail);
             } else {
               cb(error);
@@ -243,8 +249,153 @@ function getPromotionData(headers, productListJson, callback) {
         productListJson.productList = results;
         callback(null, productListJson);
       },
-    );
+    ); */
   } else {
     callback(null, productListJson);
   }
+}
+
+function getSKUList(headers, productListJson, callback) {
+  const responseJSON = productListJson;
+  const productIDs = [];
+  const productsList = responseJSON.productList;
+  responseJSON.productList = [];
+  if (productsList && productsList.length > 0) {
+    productsList.forEach(product => {
+      productIDs.push(product.uniqueID);
+    });
+    productUtil.getProductListByIDs(headers, productIDs, (err, result) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      const productListTask = [
+        getFilteredSKUs.bind(null, result),
+        getProductPromotion.bind(null, headers, result),
+      ];
+      async.parallel(productListTask, (error, res) => {
+        if (error) {
+          callback(error);
+        } else {
+          responseJSON.productList = mergeSwatchandPromotion(res[0], res[1]);
+          callback(null, responseJSON);
+        }
+      });
+    });
+  } else {
+    callback(null, responseJSON);
+  }
+}
+
+function getDefaultSKU(skuArray) {
+  return skuArray[0];
+}
+
+/* Filter the SKU's with Swatch Data from list of all SKu's */
+function getFilteredSKUs(productsList, callback) {
+  const productListArray = [];
+  productsList.forEach(product => {
+    if (
+      product.catalogEntryTypeCode === 'ProductBean' &&
+      product.sKUs &&
+      product.sKUs.length > 0
+    ) {
+      const productDetail = {
+        skuList: [],
+        swatchesData: pdpfilter.getSwatchData(product.attributes),
+      };
+      const defaultSKU = getDefaultSKU(product.sKUs);
+      const fixedAttributes = pdpfilter.getFixedAttribute(
+        defaultSKU.attributes,
+      );
+      if (
+        productDetail.swatchesData &&
+        productDetail.swatchesData.length === 0
+      ) {
+        const temp = pdpfilter.productDetailSummary(defaultSKU);
+        temp.parentUniqueID = product.uniqueID;
+        temp.swatchColor = '';
+        productDetail.skuList.push(temp);
+      } else {
+        productDetail.swatchesData.forEach(swatch => {
+          let skuJSON = {};
+          for (let index = 0; index < product.sKUs.length; index += 1) {
+            const swatchColor = pdpfilter.getSwatchData(
+              product.sKUs[index].attributes,
+            );
+            let skuSwatchColor = '';
+            if (swatchColor && swatchColor.length > 0) {
+              skuSwatchColor = swatchColor[0].name;
+            }
+            if (swatch.name === skuSwatchColor) {
+              const skuFixedAttributes = pdpfilter.getFixedAttribute(
+                product.sKUs[index].attributes,
+              );
+              if (equal(fixedAttributes, skuFixedAttributes)) {
+                skuJSON = pdpfilter.productDetailSummary(product.sKUs[index]);
+                skuJSON.swatchColor = skuSwatchColor;
+                skuJSON.parentUniqueID = product.uniqueID;
+                break;
+              } else if (Object.entries(skuJSON).length === 0) {
+                skuJSON = pdpfilter.productDetailSummary(product.sKUs[index]);
+                skuJSON.swatchColor = skuSwatchColor;
+                skuJSON.parentUniqueID = product.uniqueID;
+              }
+            }
+          }
+          productDetail.skuList.push(skuJSON);
+        });
+      }
+      productListArray.push(productDetail);
+    }
+    if (
+      product.catalogEntryTypeCode === 'PackageBean' &&
+      product.components &&
+      product.components.length > 0
+    ) {
+      const productDetail = {
+        skuList: [],
+        swatchesData: [],
+      };
+      const skuJSON = pdpfilter.productDetailSummary(product);
+      skuJSON.parentUniqueID = product.uniqueID;
+      productDetail.skuList.push(skuJSON);
+      productListArray.push(productDetail);
+    }
+  });
+  callback(null, productListArray);
+}
+
+/* Get Promotions of All SKU's in a product */
+function getProductPromotion(headers, productsList, callback) {
+  const skuIds = [];
+  productsList.forEach(product => {
+    if (product.sKUs && product.sKUs.length > 0) {
+      product.sKUs.forEach(sku => {
+        skuIds.push(sku.uniqueID);
+      });
+    }
+  });
+  promotionUtil.getMultiplePromotionData(skuIds, headers, (err, res) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, res);
+  });
+}
+
+/* Merge the Promotion Data and SKU's with Swatches */
+function mergeSwatchandPromotion(productsList, promotionData) {
+  productsList.forEach(skus => {
+    if (skus.skuList && skus.skuList.length > 0) {
+      skus.skuList.forEach(sku => {
+        // eslint-disable-next-line no-param-reassign
+        sku.promotionData = pdpfilter.getSummaryPromotion(
+          promotionData[sku.uniqueID],
+        );
+      });
+    }
+  });
+  return productsList;
 }

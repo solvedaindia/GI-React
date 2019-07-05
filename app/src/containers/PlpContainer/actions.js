@@ -23,6 +23,11 @@ export const filter = (newUpdatedFilter, newFacetName) => ({
   facetName: newFacetName,
 });
 
+export const browserFilter = (browserFilterData) => ({
+  type: actionTypes.BROWSERFILTER,
+  browserFilter: browserFilterData,
+});
+
 export const adBannerAction = (value, sIndex) =>
   // console.log('adBannerAction', actionTypes);
   ({

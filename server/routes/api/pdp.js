@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pdpHandler = require('../../handlers/pdphandler');
 
-router.get('/productDetails/:productId', (req, res, next) => {
+router.get('/productDetails/:skuId', (req, res, next) => {
   pdpHandler.getProductDetails(req, (err, result) => {
     if (err) {
       next(err);
