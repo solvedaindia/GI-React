@@ -208,14 +208,15 @@ class PdpComponent extends React.Component {
                           SHARE <div className="share-btn">{shareImg}</div>
                           <SocialMedia productName={this.state.skuData.productName}/>
                         </div>
-                        <div className="wishListDiv">
-                          WISHLIST{' '}
+                        <div className="wishListDiv wishListDropdown">
+                          WISHLIST{' '}                       
                           <Wishlist
                             uniqueId={this.state.skuData.uniqueID}
                             isInWishlistPro={wishlistArr.includes(
                               this.state.skuData.uniqueID,
                             )}
-                          />
+                            history={this.props.historyData}
+                          />                          
                         </div>
                       </Col>
                     </Col>

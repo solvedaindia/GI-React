@@ -16,6 +16,7 @@ import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
 
+
 class addToCartComponent extends React.Component {
   constructor(props) {
 	super(props);
@@ -127,11 +128,11 @@ class addToCartComponent extends React.Component {
 
   /* add to cart pop */
   addToCartPopupItem() {
-    setTimeout(() => {
-      this.setState({
-        addToCartPopup: null,
-      });
-    }, 2000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     addToCartPopup: null,
+    //   });
+    // }, 2000);
     return (
       <div className="addedToWishlist clearfix">
         <span className="wishlist-text">Product Added to Cart</span>

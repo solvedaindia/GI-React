@@ -104,8 +104,57 @@
                 padding:0;
                 font-size: unset;
             }
+            .image-gallery-image{
+                text-align: center;
+                min-height: 100vh;
+                max-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img{
+                    transition: all .5s;
+                    -moz-transition: all .5s;
+                    -webkit-transition: all .5s;
+                    -o-transition: all .5s;
+                    -ms-transition: all .5s;
+                    max-width: 2000px;
+                    min-width: 700px;
+                }
+
+            }
+         }
+         .zoomImage{
+            bottom: 75px;
+            width: 84px;
+            position: absolute;            
+            margin-left: -42px;            
+            z-index: 9;
+            left: 50%;
+             .zoomButton{
+                border: none;
+                padding: 5px;
+                background:$colorwhite;
+                font-size: 19px;
+                border-radius: 50%;              
+                width: 32px;
+                height: 32px;
+                display: inline-block;
+                position: relative;               
+                line-height: 19px;
+                &:focus{
+                    outline: none;
+                }
+    
+             }
+             .zoomOut{
+                 margin:0 0 0 20px;
+             }
+             
          }
      }
+
+    
   }
 
 .GallerytextBox{
@@ -125,6 +174,15 @@
             }
             .user {
                 opacity: 0;
+            }
+        }
+        .wishListDiv.wishListDropdown{
+            position: relative;
+            .addedToWishlist {
+                min-width: 240px;
+                right: 0;
+                top: 0;
+                z-index: 9999;
             }
         }
         .share{
@@ -922,6 +980,12 @@
 .dataActive {
     display: block;
 }
+// .defattributes{
+//     .attributeList{
+//         border:1px solid $lightGrey;
+//         margin:0 18px 10px 0;
+//     }
+// }
 .attributeList {
     display: inline-block;
     padding: 0 7px 0 0;

@@ -5,6 +5,9 @@ import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import { imagePrefix } from '../../../public/constants/constants';
 
+import zoomin from '../../components/SVGs/zoomIn.svg';
+import zoomout from '../../components/SVGs/zoomOut.svg';
+
 class productImagesAndVideos extends React.Component {
   constructor() {
     super();
@@ -37,7 +40,7 @@ class productImagesAndVideos extends React.Component {
       'image-gallery-thumbnails-container',
     );
 
-    if (this.state.activeData === false && isFullScreen === true) {
+    if (this.state.activeData === false && isFullScreen === true) { 
       this.isZoomScreen = true;
 
       thumbnailsContainer[0].classList.remove('active');
@@ -45,7 +48,7 @@ class productImagesAndVideos extends React.Component {
       this.setState({
         activeData: true,
       });
-    } else {
+    } else { 
       this.isZoomScreen = false;
       thumbnailsContainer[0].classList.remove('dataNotActive');
       thumbnailsContainer[0].classList.add('active');
@@ -166,7 +169,10 @@ class productImagesAndVideos extends React.Component {
 			}
           )
         </div>
-
+        <div className="zoomImage">
+          <button className="zoomButton" onClick={this.zoomin}><img src={zoomin} alt={zoomin}/></button>
+			  	<button className="zoomButton zoomOut" onClick={this.zoomout}><img src={zoomout} alt={zoomout}/></button>
+       </div>
         <ImageGallery
           showFullscreenButton
           items={this.images}
@@ -174,9 +180,7 @@ class productImagesAndVideos extends React.Component {
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
         />
-
-        {/* <button onClick={this.zoomin}>+</button>
-				<button onClick={this.zoomout}>-</button> */}
+      
       </div>
     );
   }
