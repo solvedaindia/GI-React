@@ -118,7 +118,7 @@ export class HeaderMobile extends React.Component {
     this.setState({
       showNav: false,
     })
-    this.props.pageNavigationRenderPro('My Profile');
+    // this.props.pageNavigationRenderPro('My Profile');
   }
 
   onSubcategoryClick() {
@@ -170,7 +170,7 @@ export class HeaderMobile extends React.Component {
     var myAccountItem = null;
     if (getCookie('isLoggedIn') === 'true') {
       loginLogoutItem = <button onClick={this.onSignOutClick} className='signoutBtn'>Sign Out</button>
-      myAccountItem = <li onClick={this.onMyAccountClick.bind(this)} className='navTxt'>My Account<span className='arrow'>></span></li>
+      myAccountItem = <li onClick={this.onMyAccountClick.bind(this)} className='navTxt'>My Account<span className='arrow'><img src={require('../../../../public/images/nav_next.svg')} /></span></li>
     }
     else {
       loginLogoutItem = <button onClick={this.onSignInClick.bind(this)} className='loginBtn'>Log In/ Register</button>

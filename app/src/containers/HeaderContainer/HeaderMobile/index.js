@@ -42,6 +42,7 @@ export class HeaderMobile extends React.Component {
   }
 
   pageNavigationRender = (pageName) => {
+    console.log('Page Render ---- ',pageName);
     var item = (
       <Row>
       <Col xs={12} md={12} className='backToCategory'>
