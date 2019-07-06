@@ -2,6 +2,8 @@ import {
   wishlistDataCookie,
   wishlistIdCookie,
 } from '../../public/constants/constants';
+import LightHeader from '../components/HeaderComponent/headerL1/lightHeader';
+import HeaderContainer from '../containers/HeaderContainer';
 // import { utimes } from 'fs';
 
 
@@ -9,9 +11,7 @@ import {
  * Function to get current URL hostname and port
  * @param {*}
  */
-export function getLocation(){
-  return window.location.hostname;
-}
+
 
 /**
  * Function to get current URL hostname and port

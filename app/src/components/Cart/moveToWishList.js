@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {
 	addToWishlist
 } from '../../../public/constants/constants';

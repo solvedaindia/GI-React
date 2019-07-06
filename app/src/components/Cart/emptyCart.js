@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import CartLogo from '../SVGs/cart';
 import '../../../public/styles/cart/emptyCart.scss';
 import InstallLogo from '../SVGs/installLogo';

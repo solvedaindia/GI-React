@@ -193,7 +193,7 @@ class WelcomeBack extends React.Component {
 			{message}
 			<Modal.Header closeButton>
 				<div className="smallLogo">
-					<WhiteLogo />
+					<WhiteLogo width="171" height="33"/>
 				</div>
 				<Modal.Title>Welcome Back</Modal.Title>
 			</Modal.Header>
