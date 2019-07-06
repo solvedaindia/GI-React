@@ -13,8 +13,9 @@ class MyOrder extends React.Component {
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
       isLoading: true,
+      updatedTrackOrderData: null,
     };
-    // this.renderSelection = this.renderSelection.bind(this)
+    this.renderSelection = this.renderSelection.bind(this)
   }
 
   componentDidMount() {
@@ -31,14 +32,17 @@ class MyOrder extends React.Component {
         })
       })
       .catch(error => {
-        // return null;
+        this.setState({
+          isLoading: false,
+        })
       });
   }
 
-  renderSelection() {
-    console.log('back tro rnder seldelt');
+  renderSelection(trackOrderData) {
+    console.log('back tro rnder seldelt', trackOrderData);
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
+      updatedTrackOrderData: trackOrderData
     });
   }
 
@@ -47,11 +51,11 @@ class MyOrder extends React.Component {
   }
 
   render() {
-
+    console.log('is Show TrackOrder --- ', this.state.isTrackOrder)
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} />
+          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
         ) :
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
             return (
@@ -61,7 +65,7 @@ class MyOrder extends React.Component {
                 orderItemData={data}
               />
             )
-          }) : this.state.isLoading ? null : <div className='noOrder'>No Orders to Show</div> 
+          }) : this.state.isLoading ? null : <div className='noOrder'>No Orders to Show</div>
         }
       </div>
     );

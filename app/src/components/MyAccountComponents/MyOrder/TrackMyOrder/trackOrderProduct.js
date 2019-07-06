@@ -17,25 +17,22 @@ class TrackOrderProduct extends React.Component {
       <>
         <div className="clearfix" />
         <div className="orderProduct clearfix">
-          <div className="orderimgbox clearfix">
+        <div className="orderimgbox clearfix">
             <div className="imgBox">
-              <img
-                src={require('../../../../../public/images/miniItem1.png')}
-                className="imgfullwidth"
-              />
+              <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
 
             <div className="product-text">
-              <p className="heading">Slimline 3 Door Steel Almirah</p>
-              <p className="description">(With Locker, Mirror, OHU & Drawer)</p>
+              <p className="heading">{productData.productName}</p>
+              <p className="description">({productData.shortDescription})</p>
               <p className="price">
-                <span className="discount-price">₹24,700</span>
+                <span className="discount-price">₹{productData.offerPrice}</span>
               </p>
               <p className="quantity-shipping clearfix">
                 <span className="quantity">
                   Quantity
                   <br />
-                  <span className="textval">5</span>
+                  <span className="textval">{productData.quantity}</span>
                 </span>
               </p>
             </div>

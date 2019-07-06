@@ -10,20 +10,20 @@ class ProductOrder extends React.Component {
   }
 
   onTrackOrderClick() {
-
+    this.props.proceedToTrackOrderPro(this.props.allDataPro);
   }
 
   render() {
 
     const productData = this.props.prodctDataPro;
-    console.log('order Product --- ', productData)
+    console.log('order Product --- ', this.props.allDataPro)
     return (
       <>
         <div className="clearfix" />
         <div className="orderProduct clearfix">
           <div className="orderimgbox clearfix">
             <div className="imgBox">
-              <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} onError={require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+              <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
 
             <div className="product-text">
@@ -44,9 +44,12 @@ class ProductOrder extends React.Component {
 
           <div className="orderbtn">
             <button className="btn-borderwhite btn-cancel">Cancel Order</button>
-            {productData.shipmentData.length > 2 ? <button className="btn-borderwhite" onClick={this.props.proceedToTrackOrderPro} >
+            {/* {productData.shipmentData.length > 2 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
-            </button> : null}
+            </button> : null} */}
+            <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+              Track My Order
+            </button>
 
           </div>
           <div className='clearfix'></div>

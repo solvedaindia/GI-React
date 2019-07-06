@@ -20,8 +20,9 @@ class OrderItem extends React.Component {
     });
   }
 
-  proceedToTrackOrder() {
-    this.props.renderSelectionPro();
+  proceedToTrackOrder(trackOrderData) {
+    console.log('TackORderData --- ',trackOrderData);
+    this.props.renderSelectionPro(trackOrderData);
   }
 
   render() {
@@ -72,6 +73,7 @@ class OrderItem extends React.Component {
               <OrderProduct
                 proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
                 prodctDataPro={data}
+                allDataPro={this.props.orderItemData}
               />
             )
           })}
