@@ -137,12 +137,13 @@ export class MyAccountContainer extends React.Component {
                     redirectedFrom === 'myorder' ? 'active' : ''
                     }`}
                   id="myOrder-v"
-                >
+                >                  
                   <MyOrder
                     isGuestTrackOrderPro={
                       this.props.location.state.isGuestTrackOrder
                     }
                   />
+                  
                 </div>
                 <div
                   className={`tab-pane ${
