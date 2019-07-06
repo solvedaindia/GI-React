@@ -33,10 +33,10 @@ class MediaPress extends React.Component {
     render() {
         return (
              <div className="container">
-                <h1 className="HeaderCopy3">Media/Press</h1>
+                <h1 className="HeaderCopy33">Media/Press</h1>
                 <hr className="hr" />
 
-            <h2 className="Wed-love-to-hear-from-you-Copy ">Latest News</h2>
+            <h2 className="Wed-love-to-hear-from-you-Copys ">Latest News</h2>
             <div className="row">
               <div className="col-md-6">
                 <img
