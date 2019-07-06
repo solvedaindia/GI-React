@@ -1,0 +1,88 @@
+@import "../app.scss";
+@import "../base.scss";
+@import "../variable.scss";
+
+.rwdSortFilter {
+  height: 40px;
+  text-align: center;
+
+  background: #fff;
+  position: fixed;
+  bottom: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
+  padding: 16px 0;
+  z-index: 99;
+  position: sticky;
+  position: -webkit-sticky;
+  bottom: 0;
+
+  .rwdSortBtn {
+    background-color: yellow;
+    width: 50%;
+    float: left;
+    border: 0px;
+    margin-top: -16px;
+    height: inherit;
+  }
+
+  .rwdFilterBtn {
+    background-color: green;
+    width: 50%;
+    float: right;
+    border: 0px;
+    margin-top: -16px;
+    height: inherit;
+  }
+}
+
+.sortOutterCont {
+    height: 100%;
+    width: 100%;
+    background-color: #0000006e;
+    position: fixed;
+    bottom: 0px;
+    z-index: 100;
+
+    .sortInnerCont {
+      height: 370px;
+      width: 100%;
+      background-color: white;
+      position: fixed;
+      bottom: 0px;
+
+      .sortTxt {
+        color: #4a90e2;
+        float: left;
+        width: 20%;
+        text-align: left;
+        margin: 15px;
+      }
+
+      .sortCancelBtn {
+        color: black;
+        float: left;
+        width: 19%;
+        margin: 15px;
+      }
+
+      .sortLi {
+        padding: 30px;
+        text-align: left;
+        color: #070707;
+        font-size: 14px;
+      }
+
+      .active {
+        background-color: #f7f8f8;
+
+        .sortSelectionImg {
+          margin: 0px 195px;
+        }
+      }
+      
+    }
+    
+  }

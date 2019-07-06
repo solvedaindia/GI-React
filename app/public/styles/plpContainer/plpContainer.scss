@@ -3,6 +3,8 @@
 @import "../app.scss";
 @import "../base.scss";
 @import "../variable.scss";
+@import './rwdPLPContainer.scss';
+
 $imgfullwid: 100%;
 
 .list-style {
@@ -1012,61 +1014,6 @@ section.tablecarousel {
   }
 }
 
-.rwdSortFilter {
-  height: 40px;
-  text-align: center;
-
-  background: #fff;
-  position: fixed;
-  bottom: 0px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
-  padding: 16px 0;
-  z-index: 99;
-  position: sticky;
-  position: -webkit-sticky;
-  bottom: 0;
-
-  .rwdSortBtn {
-    background-color: yellow;
-    width: 50%;
-    float: left;
-    border: 0px;
-    margin-top: -16px;
-    height: inherit;
-  }
-
-  
-
-  .rwdFilterBtn {
-    background-color: green;
-    width: 50%;
-    float: right;
-    border: 0px;
-    margin-top: -16px;
-    height: inherit;
-  }
-}
-
-.outterCont {
-    height: 100%;
-    width: 100%;
-    background-color: #0000006e;
-    position: fixed;
-    bottom: 0px;
-
-    .innerCont {
-      height: 400px;
-      width: 100%;
-      background-color: white;
-      position: fixed;
-      bottom: 0px;
-      
-    }
-    
-  }
 
 
 /* 

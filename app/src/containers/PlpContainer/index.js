@@ -73,6 +73,9 @@ export class PlpContainer extends React.Component {
       newSearchTrigger: false,
       //Browser Routing Vars
       browserFilters: [],
+
+      //RWD Vars
+      isMobile: window.innerWidth <= 760,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
@@ -563,7 +566,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {plpData.length === 0 ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
+                  {plpData.length === 0 || this.state.isMobile ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
                 </div>
               </div>
             </div>
@@ -590,16 +593,10 @@ export class PlpContainer extends React.Component {
 
 
 
-        <div className='outterCont'>
-          <div className='innerCont'>
-
-
-          </div>
-        </div>
-        <div className='rwdSortFilter'>
-          <RWDSort />
+       {this.state.isMobile && plpData.length !== 0 ? <div className='rwdSortFilter'>
+          <RWDSort sortingIndexPro={this.state.plpSorting}/>
           <button className='rwdFilterBtn'>Filter</button>
-        </div>
+        </div> : null}
       </>
     );
   }

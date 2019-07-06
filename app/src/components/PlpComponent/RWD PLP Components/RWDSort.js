@@ -27,21 +27,62 @@ class RWDSort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected: this.props.sortingIndexPro === '' ? 0 : this.props.sortingIndexPro,
+      selected: this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
+      isShowSortOptions: false,
     };
   }
 
   showSortOptions() {
+    this.setState({
+      isShowSortOptions: !this.state.isShowSortOptions,
+    })
+  }
 
+  handleClick(i) {
+    console.log('yes handle click -- ', i)
+    if (i !== this.state.selected) {
+      this.setState({
+        selected: i,
+        title: this.state.options[i],
+      });
+      this.props.updateSortingValue(this.state.options[i]);
+    }
+    // this.toggleDropdown();
   }
 
   render() {
+    console.log('what Sort Value --- ',this.props.sortingIndexPro);
     return (
       <>
-       
         <button className='rwdSortBtn' onClick={evt => this.showSortOptions()}>Sort</button>
+
+        {this.state.isShowSortOptions ?
+          <div onClick={evt => this.showSortOptions()} className='sortOutterCont'>
+            <div className='sortInnerCont'>
+              <div>
+                <label className='sortTxt'>Sort</label>
+                <button onClick={evt => this.showSortOptions()} className='sortCancelBtn'>Cancel</button>
+              </div>
+              <div className='clearfix' />
+              <div>
+                <ul>
+                  {this.state.options.map((option, i) => {
+                    return (
+                      <li onClick={evt => this.handleClick(i)} key={i} className={`sortLi${option === fetchReleventSortingValueByIndex(this.state.selected) ? ' active' : ''}`} >
+                        {option}
+                        {option === fetchReleventSortingValueByIndex(this.state.selected) ? <img className='sortSelectionImg' src={require('../../../../public/images/sortSelection.svg')} /> : ''}
+                      </li>
+                    )
+                  })
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+          : null}
+
       </>
     );
   }
