@@ -39,6 +39,7 @@ import {
   searchPageAPI,
 } from '../../../public/constants/constants';
 import { stringify } from 'querystring';
+import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -583,9 +584,22 @@ export class PlpContainer extends React.Component {
         {/* Show only when get zero products from Filter */}
         {/* {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null} */}
         {this.state.productCount === 0 && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
-        
+
         {descriptionItem}
         <CompContainer />
+
+
+
+        <div className='outterCont'>
+          <div className='innerCont'>
+
+
+          </div>
+        </div>
+        <div className='rwdSortFilter'>
+          <RWDSort />
+          <button className='rwdFilterBtn'>Filter</button>
+        </div>
       </>
     );
   }
