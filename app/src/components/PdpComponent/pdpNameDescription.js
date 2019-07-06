@@ -8,7 +8,7 @@ const pdpNameDescription = (props) => {
                 <h1 className='heading'>
                     {props.productData.productName}
                 </h1>
-                    {props.productData.shortDescription}<br/>
+                <div className="materialType"> {props.productData.shortDescription}</div>
             </Col>
             </Row>
         </>    

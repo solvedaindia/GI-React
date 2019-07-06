@@ -29,7 +29,7 @@ class productDefAttribute extends React.Component {
 		}
 				
 		if(count > 0 && selectedSwatches.indexOf(radioValue) === -1) {
-			//isDisabled = true;
+			isDisabled = true;
 		}
 
 		if (this.state.selectedOption === '') {
@@ -61,8 +61,8 @@ class productDefAttribute extends React.Component {
 
 				return (
 					<div key={i}>
-					<div className='att-val-name'><b>{valueName}:  {this.props.selectedAttribute[i].values[0].name}</b><span id={`ColorName${i}`}></span></div>
-						<ul>
+					<div className='att-val-name'><span className="attributeName">{valueName}:</span><span className="attributeVal">  {this.props.selectedAttribute[i].values[0].name}</span><span id={`ColorName${i}`}></span></div>
+						<ul className="clearfix">
 							{
 								data.values.map((value, index) => {
 									let checkedType = false;
@@ -101,7 +101,7 @@ class productDefAttribute extends React.Component {
 									let isDisabled = '';
 		
 									if(i > 0 && selectedSwatches.indexOf(value.name) === -1) {
-										//isDisabled = 'disabled-attr';
+										isDisabled = 'disabled-attr';
 									}
 									return (
 										<li className={`attributeList ${isDisabled}`}  key={index}>
@@ -111,6 +111,7 @@ class productDefAttribute extends React.Component {
 								})
               }
           </ul>
+		  <div className="clearfix"></div>
         </div>
         )
       })

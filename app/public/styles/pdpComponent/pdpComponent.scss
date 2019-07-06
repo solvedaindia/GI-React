@@ -118,8 +118,8 @@
                     -webkit-transition: all .5s;
                     -o-transition: all .5s;
                     -ms-transition: all .5s;
-                    max-width: 2000px;
-                    min-width: 700px;
+                    max-width: 2500px;
+                    min-width: 780px;
                 }
 
             }
@@ -164,7 +164,9 @@
         }
         .wishListDiv{
             font-size: 10px;
+            line-height: 10px;
             color: $greyish;
+            font-family: $font-medium;
             .wishlistBtn {
                 border: none;
                 background: none;
@@ -188,9 +190,11 @@
         .share{
             font-size: 10px;
             margin-left: 12px;
+            line-height: 10px;
             color: $greyish;
             cursor: pointer;
             position: relative;
+            font-family: $font-medium;
             .share-btn{
                 display: inline;
                 img{
@@ -234,11 +238,14 @@
         }
     }
     .product{
-        padding:0 0 5px 0px;      
-        font-weight: 600; 
+        padding:0 0 5px 0px; 
+        font-family: $font-medium;     
+        line-height: 12px;
+        // font-weight: 600; 
         .text{
             color:$grey;
-            font-size: 12px;                 
+            font-size: 12px;    
+            font-family: $font-medium;             
         }      
     }
 
@@ -248,7 +255,12 @@
         color:$ashGrey;
         font-family: $font-bold;
         font-size:30px;
-        padding:0 0 5px 0px;      
+        line-height: 30px;
+        padding:15px 0 5px 0px;      
+     }
+     .materialType{
+         color:$greyish;
+         font-size:$base*2.25;
      }
     }
 
@@ -303,6 +315,13 @@
            font-size: 12px;
            color:$cerulean;
            text-decoration: none;
+           .upArrow{
+            padding: 0 0 0 12px;
+            opacity: 0.54;
+           }
+           .downArrow{
+               transform: rotate(-90deg);
+           }
        }
     }
 
@@ -375,10 +394,16 @@
             background: $colorwhite;
             .PincodeTextdata{
                 padding: 11px 19px;
+                display: flex;
                 .pincodeVal,.pincodeEdit{
                     display: block;
                     
                 }
+                .mapflag{
+                    float: left;
+                    width:18px;
+                    margin:0 14px 0 0;
+                    }
                 .pincodeVal{
                     float:left;
                     width: 70%;
@@ -391,8 +416,9 @@
                     color:$ceruleanblue;
                     float:right;
                     font-family: $font-bold;
-                    font-size: 14px;
-                    padding: 5px 0 0 0;
+                    font-size: 12px;
+                    padding: 0px 0 0 0;
+                    line-height: 24px;
                 }
             }
             .soldbyDealers {
@@ -470,8 +496,27 @@
 
     .attr-details-box{
         padding-top: 15px;
+        border-bottom: 1px solid $borderLight;
+        margin: 0 0 16px 0;
         .att-val-name{
             padding-bottom: 10px;
+            font-family: $font-medium;
+            line-height: 12px;
+            
+            .attributeName{
+              font-size: 10px;
+              font-family: $font-medium;
+              font-weight: bold;
+              text-transform: uppercase;
+              color:$ashGrey;
+              
+            }
+            .attributeVal{
+                font-size: 12px;
+                font-family: $font-medium;
+                font-weight: bold;
+                color:$black;
+            }
         }
     }
     
@@ -987,7 +1032,8 @@
 //     }
 // }
 .attributeList {
-    display: inline-block;
+    display: block;
+    float: left;
     padding: 0 7px 0 0;
     label{
         cursor: pointer;
@@ -1049,4 +1095,17 @@
     border-radius: 25px;
 }
 
+.poductAdded{ 
+    position: fixed;
+    width: 220px;
+    right: 135px;
+    top: 76px;
+    z-index: 99;
+}
 
+
+
+
+*:fullscreen, *:-webkit-full-screen, *:-moz-full-screen {
+    background-color: rgba(255,255,255,0) !important;
+}
