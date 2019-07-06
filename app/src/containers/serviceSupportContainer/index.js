@@ -116,6 +116,21 @@ export default class HelpSupport extends React.Component {
 
 
 </div>
+<div className="chat"><br/>
+<div className="row">
+  <div className="col-md-6">  <h4 className="chattext">Live Chat </h4>
+</div>
+  <div className="col-md-6">
+  <img
+                  className="chatIcon"
+                  src={require('../../../public/images/chat.png')}
+                  alt="Rectangle"
+                />
+  </div>
+
+</div>
+  
+  </div>
               </div>
 
             </div>
