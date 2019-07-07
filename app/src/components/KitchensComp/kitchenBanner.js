@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/kitchens/kitchens.scss'
+const prevArrowImg = (
+  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
+);
+const nextArrowImg = (
+  <img src={require('../SVGs/carousel__arrowRight.svg')} />
+);
 export default class KitchenBanner extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="bannerkitchen" src={require('../../../public/images/kitch1.jpg')} alt="rectangle"/>
-    const img2 = <img className="bannerkitchen" src={require('../../../public/images/kitch1.jpg')} alt="rectangle"/>
-    const img3 = <img className="bannerkitchen" src={require('../../../public/images/kitch1.jpg')} alt="rectangle"/>
+    const img1 = <img className="bann" src="http://www.metrointeriordecorators.in/img/kitchen/kitchen-banner.jpg" alt="rectangle"/>
+    const img2 = <img className="bann" src="http://www.metrointeriordecorators.in/img/kitchen/kitchen-banner.jpg" alt="rectangle"/>
+    const img3 = <img className="bann" src="http://www.metrointeriordecorators.in/img/kitchen/kitchen-banner.jpg" alt="rectangle"/>
     
 
     this.state = {
@@ -25,11 +31,13 @@ export default class KitchenBanner extends Component {
 
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 2
+      slidesToScroll: 2,
+      prevArrow: prevArrowImg,
+      nextArrow: nextArrowImg
     };
     return (
         <div>
