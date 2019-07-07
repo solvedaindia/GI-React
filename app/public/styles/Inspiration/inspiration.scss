@@ -75,9 +75,10 @@
     object-fit: contain;
   }
   .text-block {
+    
     position: absolute;
-    top: 50%;
-  left: 50%;
+    top: 51%;
+  left: 43%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, .4);
     color: white;
@@ -183,8 +184,8 @@
     color: #000000;
   }
   .Bitmap {
-  width: 350px;
-  height: 660px;
+  width: 564px;
+  height: 640px;
 }
 .headered {
   width: 699px;
@@ -202,4 +203,57 @@
 .headered .text-style-1 {
   font-weight: bold;
   color: black
+}
+.leftArrow {
+  margin-left:-47px;
+  font-size: 0;
+  line-height: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  transform: translate(0,-50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: 0;
+  background: 0 0;
+}
+.text-blocker {
+    width: 407px;
+    height: 185px;
+  position: absolute;
+  top: 57%;
+left: 78%;
+transform: translate(-50%, -50%);
+background-color: white;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.headerpart {
+  font-family: CeraGodrejInterio;
+  font-size: 18px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.07;
+  letter-spacing: normal;
+  color: #0f0c0c;
+}
+.prices {
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: bold;
+
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.07;
+  letter-spacing: normal;
+  color: #0f0c0c;
+}
+.stoolimg{
+  margin-top: 27px;
+  width: 139px;
+  height: 120px;
 }

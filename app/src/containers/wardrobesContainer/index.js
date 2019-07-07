@@ -45,14 +45,16 @@ index: 0
         return (
            
              <div className="Kitchen-11">
+                              <div className="container">
+
                <WardrobeBanner />
-               <div className="text-blocks">
+               <div className="text-block">
                  <h4 className="header">Modular Wardrobe Ardra</h4>
                  <p2 className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br/> tempor incididunt ut labore et dolore magna aliqua. <br />
                    the home you've always wanted</p2> <br />
                  <button className="butt">Book A Consultation</button>
                </div>
-
+               </div>
                <div>
                    <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
                    <div className="container">

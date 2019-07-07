@@ -45,12 +45,14 @@ index: 0
         return (
            
              <div className="Kitchen-1">
+               <div className="container">
                <KitchenBanner />
-               <div className="text-blocks">
+               <div className="text-block">
  <h4 className="header">Interio Kitchens</h4>
                  <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
                    the home you've always wanted</p2> <br />
                  <button className="butt">Book A Consultation</button>
+               </div>
                </div>
 
                <TypesOFkitchens />
