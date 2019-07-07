@@ -6,7 +6,8 @@ class PromoField extends React.Component {
         super(props);
         this.state = {
             orderID : this.props.orderID,
-            promoCode: ''
+            promoCode: '',
+            error: null
         }
         this.handlePromoCode = this.handlePromoCode.bind(this);
         this.applyPromoCode = this.applyPromoCode.bind(this);
@@ -18,13 +19,14 @@ class PromoField extends React.Component {
         if(!this.state.promoCode) return;
         const data = {  
             orderId: this.state.orderID,
-            promoCode: this.state.promoCode
+            promoCode: this.state.promoCode,
         }
         apiManager
         .post(cartApplyPromoAPI, data)
         .then(response => {
             this.setState({
-                promoCode: response.data.data
+                promoCode: response.data.data,
+                error: null
             });
             this.props.getCartDetails();
             console.log('Promotion Data', response.data.data);
@@ -37,10 +39,14 @@ class PromoField extends React.Component {
         });
     }
     render() {
+        const { error } = this.state;
         return (
         <div className='promoField'>
             <input type='text' className='promoInput' value={this.state.promoCode} onChange={this.handlePromoCode}></input>
             <button className='applyBtn' onClick={this.applyPromoCode}>Apply</button>
+            {!!error && <div className='promoError'>
+                This promo code is not valid.
+            </div>}
         </div>
         )
     }

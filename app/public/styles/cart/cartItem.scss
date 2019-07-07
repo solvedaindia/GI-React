@@ -208,10 +208,19 @@
                 margin: 0;
                 border-top: 1px solid $darkAshGrey;
                 border-bottom: 1px solid $darkAshGrey;
-            }
-            .emiDetails {
-                margin-left: 11%;
-                text-decoration: none;
+                position: relative;
+                .emiLogo {
+                    position: absolute;
+                    left: 0;
+                }
+                .emiMsg {
+                    margin: 0 $base*5 0;
+                }
+                .emiDetails {
+                    top: 20px;
+                    right: 0;
+                    position: absolute;
+                }
             }
             .totalAmt {
                 margin: $base*2 0;
@@ -233,4 +242,52 @@
             }
         }
     }
+}
+.viewAllPopUp {
+    .modal-dialog {
+        width: 50%;
+        height: auto;
+    }
+    .heading {
+        font-size: $base*2.5;
+        color: $black;
+        font-family: $font-bold;
+        padding: $base*4 0; 
+        text-align: center;
+        margin: 0;
+    }
+    .promoList {
+        margin: 0;
+        padding: 0 $base*4;
+        .promoListItem {
+            border-bottom: 1px solid $borderLight;
+            position: relative;
+            &:last-child {
+                border-bottom: none; 
+            } 
+            .promoCode,
+            .promoDesc {
+                margin: 0;
+                padding: $base 0;
+            }
+            .promoCode {
+                font-size: $base*2.25;
+                color: $black;
+                font-family: $font-bold;
+            }
+            .promoDesc {
+                font-size: $base*2;
+                color: $battleshipGrey;
+                font-family: $font-regular;
+            }
+            .applyPromo {
+                position: absolute;
+                color: $cerulean;
+                font-size: $base*2;
+                right: $base*4;
+                top: $base;
+            }
+        }
+    }
+    
 }

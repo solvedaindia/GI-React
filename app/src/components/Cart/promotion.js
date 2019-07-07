@@ -1,13 +1,16 @@
 import React from 'react';
-import { cartGetPromoAPI } from '../../../public/constants/constants';
+import { cartGetPromoAPI, cartApplyPromoAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import ViewAllPromo from './viewAllPromo';
 
 class GetCartPromo extends React.Component {
 	constructor(props) {
 	super(props);
 	this.state = {
 			promo: null,
-			isLoading: false
+			isLoading: false,
+			viewAll: false,
+			error: null
 		};
 	}
 	componentDidMount() {
@@ -30,20 +33,52 @@ class GetCartPromo extends React.Component {
 			});
 		});
 	}
+	applyPromoCode(promoCode) {
+        const data = {  
+            orderId: this.props.orderID,
+            promoCode: promoCode
+        }
+        apiManager
+        .post(cartApplyPromoAPI, data)
+        .then(response => {
+            this.setState({
+				promoCode: response.data.data,
+				error: null
+            });
+            this.props.getCartDetails();
+            console.log('Promotion Data', response.data.data);
+        })
+        .catch(error => {
+            this.setState({
+            error,
+            isLoading: false,
+            });
+        });
+	}
 	
 	render(){
-		const { promo } = this.state
+		const { promo, error } = this.state
 		return (
-			<ul className='promoList'>
-				{!!promo && promo.map((sellerItemData, index) => (
-					<li className='promoListItem' key={index}>
-						<p className='promoCode'>{sellerItemData.promocode}</p>
-						<p className='promoDesc'>{sellerItemData.description}</p>
-						<span className='applyPromo'>Apply</span>
-					</li>
-				))
-				} 
-			</ul>
+			<div className='promo'>
+				{!!error && <div className='promoError'>
+					This promo code is not valid.
+				</div>}
+				<ul className='promoList'>
+					{!!promo && promo.slice(0,3).map((sellerItemData, index) => (
+						<li className='promoListItem' key={index}>
+							<p className='promoCode'>{sellerItemData.promocode}</p>
+							<p className='promoDesc'>{sellerItemData.description}</p>
+							<span className='applyPromo' onClick={this.applyPromoCode.bind(this, sellerItemData.promocode)}>Apply</span>
+						</li>
+					))
+					} 
+				</ul>
+				<ViewAllPromo
+					orderID={this.props.orderID}
+					getCartDetails={this.props.getCartDetails}
+					promo={promo}
+				/>
+			</div>
 		);
 	}
 }

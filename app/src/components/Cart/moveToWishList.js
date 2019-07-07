@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-	addToWishlist
+	addToWishlist,
+	cartDeleteItemAPI
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import MoveToWishListLogo from '../SVGs/moveToWishlistIcon';
@@ -8,45 +9,47 @@ import MoveToWishListLogo from '../SVGs/moveToWishlistIcon';
 class MoveToWishList extends React.Component {
     constructor(props) {
 		super(props);
-		this.state = {
-			uniqueID: props.uniqueID
-		};
-      this.handleChange = this.handleChange.bind(this);
+      this.handleMoveToWishList = this.handleMoveToWishList.bind(this);
     }
   
-    handleChange(event) {
-	  this.handleMoveToWishList();
+	removeFromCart() {
+		const data = {  
+			orderItemId: this.props.orderItemId
+		}
+		apiManager
+		.post(cartDeleteItemAPI, data)
+		.then(() => {
+			this.props.getCartDetails()
+		})
+		.catch(error => {
+			this.setState({
+			error,
+			isLoading: false,
+			});
+		});
 	}
 	handleMoveToWishList() {
 		const data = {
-			uniqueID: this.props.uniqueId,
+			sku_id: this.props.uniqueID,
     	};
 		apiManager
 		.post(addToWishlist, data)
 		.then(response => {
-			this.props.getCartDetails()
+			this.removeFromCart();
             console.log('@@@@ Cart Wishlist @@@', response.data.data);
         })
-        // .then(response => {
-        //     this.setState({
-        //         quantity: qty,
-        //         isLoading: false,
-		// 	});
-		// 	this.props.getCartDetails()
-        //     console.log('@@@@ Cart Wishlist @@@', response.data.data);
-        // })
         .catch(error => {
             this.setState({
             error,
             isLoading: false,
             });
-        });
+		});
 	}
     render() {
       return (
-        <form className='moveItem' onClick={this.handleChange}>
+        <div className='moveItem' onClick={this.handleMoveToWishList}>
 			<MoveToWishListLogo width={19} height={16}/>
-        </form>
+        </div>
       );
     }
   }

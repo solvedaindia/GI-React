@@ -66,6 +66,7 @@ class CartDetail extends React.Component {
                                         getCartDetails={this.props.getCartDetails}
                                     />}
                                     <MoveToWishList
+                                        uniqueID={itemData.uniqueID}
                                         orderItemId={itemData.orderItemId}
                                         getCartDetails={this.props.getCartDetails}
                                     />
@@ -91,7 +92,10 @@ class CartDetail extends React.Component {
                         orderID = {cartData.orderSummary.orderID}
                         getCartDetails={this.props.getCartDetails}
                         />}
-                        <GetCartPromo />
+                        <GetCartPromo
+                            orderID = {cartData.orderSummary.orderID}
+                            getCartDetails={this.props.getCartDetails}
+                        />
                     </div>
                     <h2 className='title'>Order Summary</h2>
                     <div className='summary'>
@@ -124,7 +128,7 @@ class CartDetail extends React.Component {
                         </p>
                         }
                         <p className='emiInfo'>
-                            <span className='emiMsg'><EMILogo width={23} height={23} />Starting from ₹999 per month</span>
+                            <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
                             <TermsAndCondition />
                         </p>
                         <p className='totalAmt'>
