@@ -145,6 +145,8 @@ export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/us
 
 /* User data API */
 export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
+/* Share Wishlist API */
+export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

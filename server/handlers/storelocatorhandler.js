@@ -55,7 +55,7 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
           });
 
           element.Attribute.forEach(storeinfo => {
-            if (storeinfo.name === 'Type') {
+            if (storeinfo.displayName === 'Type') {
               storeDataObject.type.push(storeinfo.displayValue);
             } else if (storeinfo.name === 'OwnerShip') {
               storeDataObject.ownership = storeinfo.displayValue;
@@ -71,7 +71,7 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
 
           storeDataArray.push(storeDataObject);
         });
-        callback(null, storeDataArray);
+        callback(null, response);
       } else {
         logger.debug('Error While fetching Store Details By Location API');
         callback(errorUtils.handleWCSError(response));
@@ -140,7 +140,7 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
           });
 
           element.Attribute.forEach(storeinfo => {
-            if (storeinfo.name === 'Type') {
+            if (storeinfo.displayName === 'Type') {
               storeDataObject.type.push(storeinfo.displayValue);
             } else if (storeinfo.name === 'OwnerShip') {
               storeDataObject.ownership = storeinfo.displayValue;
@@ -191,22 +191,24 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
         null,
         null,
         response => {
+          const storeDetailsObj = {};
           if (response.status === 200) {
-            const storeDetailsObj = {};
-            // storeDetailsObj.type = [];
-            storeDetailsObj.latitude = response.body.latitude;
-            storeDetailsObj.longitude = response.body.longitude;
-            storeDetailsObj.telephone = response.body.phone.trim();
-            storeDetailsObj.storeName = response.body.storeName;
-            storeDetailsObj.city = response.body.city;
-            storeDetailsObj.type = response.body.displayvalue;
-            storeDetailsObj.address1 = response.body.address1;
-            storeDetailsObj.address2 = response.body.address2;
-            storeDetailsObj.pinCode = response.body.zipcode.trim();
-            storeDetailsObj.ownership = response.body.value2;
-            storeDetailsObj.uniqueID = response.body.stloc_id;
+            if (Object.keys(response.body).length !== 0) {
+              // storeDetailsObj.type = [];
+              storeDetailsObj.latitude = response.body.latitude;
+              storeDetailsObj.longitude = response.body.longitude;
+              storeDetailsObj.telephone = response.body.phone.trim();
+              storeDetailsObj.storeName = response.body.storeName;
+              storeDetailsObj.city = response.body.city;
+              storeDetailsObj.type = response.body.displayvalue;
+              storeDetailsObj.address1 = response.body.address1;
+              storeDetailsObj.address2 = response.body.address2;
+              storeDetailsObj.pinCode = response.body.zipcode.trim();
+              storeDetailsObj.ownership = response.body.value2;
+              storeDetailsObj.uniqueID = response.body.stloc_id;
 
-            storeDetailsArr.push(storeDetailsObj);
+              storeDetailsArr.push(storeDetailsObj);
+            }
             cb(null, storeDetailsArr);
           } else {
             cb(errorUtils.handleWCSError(response));
@@ -220,6 +222,7 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
         return;
       }
       resultsArr.push(results);
+      // console.log(results, 'results..........');
       callback(null, storeDetailsArr);
     },
   );

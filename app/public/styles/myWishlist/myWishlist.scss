@@ -10,6 +10,54 @@
 
   .shaire-headerwrp{
     position: relative;
+
+    .share{
+      font-size: 10px;
+      margin-left: 12px;
+      color: $greyish;
+      cursor: pointer;
+      position: relative;
+      .share-btn{
+          display: inline;
+          img{
+              width:17px;
+              height: 17px;
+          }
+      }
+      .social-icon-share{
+          visibility: hidden;
+          position: absolute;
+          z-index: 1;
+          min-width: 120px;;
+          &:hover{ 
+              .social-icon-share{
+               visibility:visible;
+              }
+          }
+          .list{
+              float: left;
+              margin: 4px 0px;
+              width: 100%;
+              .iconImg,
+              .labelText{
+                  float:left;
+              }
+
+              .SocialMediaShareButton { 
+                  float: left;
+              }
+              .social-icon-text{
+                  margin: 5px 0px 0px 15px;
+                  float: left;
+              }
+          }
+      }
+      &:hover{
+          .social-icon-share{
+              visibility:visible;
+          }
+      }
+  }
     
     .heading{
       padding-right:28px;

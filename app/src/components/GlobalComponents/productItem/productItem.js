@@ -130,7 +130,7 @@ class ProductItem extends React.Component {
 					<div className="hoverBox">
 
 						{this.props.isfromWishlistPro ?
-							<button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>Move To Cart</button> :
+							<button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>{this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
 							<button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
 
 						{this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div class="inner-overlay">
