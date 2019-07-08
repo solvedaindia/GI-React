@@ -94,7 +94,7 @@ class RWDSort extends React.Component {
                       {option === fetchReleventSortingValueByIndex(this.state.selected) ? <img className='sortSelectionImg' src={require('../../../../public/images/sortSelection.svg')} /> : ''}
                     </li>
                   ))
-                  )}
+                  }
                 </ul>
               </div>
             </div>

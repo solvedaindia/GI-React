@@ -614,12 +614,12 @@ export class PlpContainer extends React.Component {
         {descriptionItem}
         <CompContainer />
 
-        {this.state.isMobile && plpData.length !== 0 ? (
+        {this.state.isMobile && plpData.length !== 0 ? 
           <div className="rwdSortFilter">
          <RWDSort sortingIndexPro={this.state.plpSorting}/>
          <RWDFilterMain filterDataPro={filterData}/>
           </div>
-       </div> : null}
+        : null}
       </>
     );
   }

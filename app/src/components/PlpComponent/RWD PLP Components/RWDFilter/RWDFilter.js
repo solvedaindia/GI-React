@@ -163,7 +163,7 @@ class RWDFilter extends React.Component {
 
   filterOptions(alreadyAddedFiltersArr) {
     // return this.props.dataPro.facetValues.map((option, i) => {
-    const item = this.props.dataPro.facetValues.map((option, i) => (
+    const item = this.props.dataPro.facetValues.map((option, i) => 
     // var checkboxItem;
     // var customSelectionBoxId;
     // console.log('Momentt --- ', alreadyAddedFiltersArr);

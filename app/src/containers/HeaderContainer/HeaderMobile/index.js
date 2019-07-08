@@ -29,7 +29,6 @@ export class HeaderMobile extends React.Component {
             <Link to="/">
               <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} />
             </Link>
-            </Link>
           </div>
 
           <ul className="mob-mini-nav">
