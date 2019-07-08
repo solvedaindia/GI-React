@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/wardrobes/warobes.scss'
+
 export default class WrdrobesTypes extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ export default class WrdrobesTypes extends Component {
 
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,

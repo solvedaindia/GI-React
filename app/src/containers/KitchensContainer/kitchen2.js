@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import  '../../../public/styles/wardrobes/warobes.scss'
+import  '../../../public/styles/kitchens/kitchens.scss'
+import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
-import WardrobesHAll from '../../components/wardrobesComponent/wardrobeHall.js';
+import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
-import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
-import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
-import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
+import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 
 
-export default class WardrobesContainer extends React.Component {
+
+export default class Kitchens extends React.Component {
     constructor(props){
         super(props);
         const scatchImg1 =  require('../../../public/images/scatch1.png')
@@ -44,94 +44,72 @@ index: 0
     render(){
         return (
            
-             <div className="Kitchen-11">
-                              <div className="container">
-
-               <WardrobeBanner />
+             <div className="Kitchen-1">
+               <div className="container">
+               <KitchenBanner />
                <div className="text-block">
-                 <h4 className="header">Modular Wardrobe Ardra</h4>
-                 <p2 className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br/> tempor incididunt ut labore et dolore magna aliqua. <br />
+ <h4 className="header">Interio Kitchens</h4>
+                 <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
                    the home you've always wanted</p2> <br />
                  <button className="butt">Book A Consultation</button>
                </div>
                </div>
+
+               <TypesOFkitchens />
                <div className="container">
-                   <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
-                   <div className="container">
-                   <div className="row">
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
-<h3 className="titlesss">modular</h3>
-                       </div>
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic2.png')} alt="rectangle" />
-                       <h3 className="titlesss">modular</h3>
-
-                       </div>
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic3.png')} alt="rectangle" />
-                       <h3 className="titlesss">modular</h3>
-
-                       </div>
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic4.png')} alt="rectangle" />
-                       <h3 className="titlesss">modular</h3>
-
-                       </div>
-                   </div>
-                   <div className="row">
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
-                       <h3 className="titlesss">modular</h3>
-
-                       </div>
-                       <div className="col-sm-2">
-                       <img className="Combined-Shape" src={require('../../../public/images/ic6.png')} alt="rectangle" />
-                       <h3 className="titlesss">modular</h3>
-
-                       </div>
-
-                   </div>
-                   </div>
+                 <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
+                 \
+                 <DreamKitchens />
                </div>
-              <br/>
-              <br/>
-              <br/>
-              <div className="crouselBAckground">
-                  <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
-                  <WardrobesTypes/>
-                  
-               {/* <KitchenHall /> */}
-              
+               <div className="row">
+                 <div className="col-md-6">
+                   <div className="Backgrounding">
+                     <h1 className="Image-gallery  .text-style-1">10 space-saving kitchen layouts</h1>
+                   </div>
+                 </div>
+                 <div className="col-md-6">
+                   <img className="Mask" src={require('../../../public/images/mask@3x.png')} alt="rectangle" />
+                 </div>
                </div>
-               <br/>
-               <br/>
-
-               <br/>
-
                <div className="container">
-                  
-              <div className="row">
-              <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
-<p1 className="Choose-from-a-vast-r ">Choose from a vast range of acessories. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore<br/> et dolore magna aliquat enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p1>
-                <div className="col-md-6">
-                <h1 className="Accessories">Accessories</h1>
-<p1 className="Choose-from-a-vast-r-Copy ">Choose from a vast range of acessories. Consectetur adipisicing elit,<br/> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br/>  enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br/>  sit amet, consectetur adipisicing elit.<br/> </p1>
-                 
-<ul className="moved">
-  <li className="Materials-and-Finish">Materials and Finishes</li><br/>
-  <li className="Materials-and-Finish">Element</li><br/>
-  <li className="Materials-and-Finish">Add-ones</li>
+                 <p1 className="What-goes-into-a-Godr">What goes into a Godrej Kitchen</p1>
+                 {/*
+                 <InsCrousel /> */}
+                 <WhatGoes />
 
-</ul>
-                </div>
-                <div className="col-md-6">
-<WhatGoesward/>
+                 <div>
+                   <h2 className="Name-Copy">Behind the Scenes Description</h2>
+                   <p4 className="This-project-require">This project required a huge amount of hours but sit amet,
+                     consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
+                     aliquat enim ad minim.</p4>
 
-                </div>
-              </div>
-              </div>
-              <WardrobesHAll/>
+                 </div>
+               </div>
+               <AlwaysRemember />
+               <KitchenHall />
+               <div className="container">
+                 <div className="col-md-12">
+                   <div className="row-md-6">
+                     <div className="container">
+                       <div className="Blacks">
+                         <div className="container">
+                           <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
+                           <WhyPeopleLove />
+                           <h1 className="Naming">Alvin Simon</h1>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <div className="row-md-6">
+
+
+                     <div class="container">
+
+                       <BeforeAfter />
+                     </div>
+                   </div>
+                 </div>
+               </div>
                <div className="container">
                  <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                  <div className="Form-bakground">
@@ -160,7 +138,7 @@ index: 0
 
                </div>
                <div className="aboutgodrej">
-                 <h className="About-Godrej-Interio ">Modular Wardrobes</h><br /><br />
+                 <h className="About-Godrej-Interio ">Interio Kitchens</h><br /><br />
                  <p1 className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
@@ -181,7 +159,6 @@ index: 0
                  <br /><button className="Read-More ">Read More</button>
                </div>
 
-               <div></div>
              </div>
           
         )

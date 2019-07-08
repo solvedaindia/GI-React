@@ -44,6 +44,8 @@ import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/index';
+import SteelChefKitchen from '../KitchensContainer/kitchen2';
+
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
@@ -194,6 +196,8 @@ export default class App extends React.Component {
           <Route path="/privacy_policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
+          <Route path="/kitchen2" component={SteelChefKitchen} />
+
 
 
 
