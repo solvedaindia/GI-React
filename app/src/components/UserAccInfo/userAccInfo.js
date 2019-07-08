@@ -132,36 +132,29 @@ class UserAccInfo extends React.Component {
           </li> */}
         </>
       )),
-      (this.state.loginStatus = (
-        <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
+        (this.state.loginStatus = (
+          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
             Sign Out
           </a>
-      ));
+        ));
     } else {
       this.setState({
-        userType: (
+        userType: 
           <li className="listItemUnSelected">
             <a className="dropDown">Hello Guest!</a>
           </li>
-        ),
-        loginStatus: (
+        ,
+        loginStatus: 
           <a
             className="dropDown"
             onClick={this.onLoginRegisterClick.bind(this)}
           >
             {' '}
             Login/Register
-          </a>,
-        ),
+          </a>
+        
       });
-      // (this.state.userType = (
-      //   <li className="listItem">
-      //     <a className="dropDown">Hello Guest!</a>
-      //   </li>
-      // )),
-      // (this.state.loginStatus = (
-      //   <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
-      // ));
+      
     }
   }
 
@@ -203,11 +196,11 @@ class UserAccInfo extends React.Component {
         <ul className="userList">
           {/* <li className="listItem"> */}
           {this.state.userName !== null &&
-          getCookie('isLoggedIn') === 'true' ? (
-            <li className="listItemUnSelected">
-              <a className="dropDown">{this.state.userName}!</a>
-            </li>
-          ) : null}
+            getCookie('isLoggedIn') === 'true' ? (
+              <li className="listItemUnSelected">
+                <a className="dropDown">{this.state.userName}!</a>
+              </li>
+            ) : null}
           {this.state.userType}
           {/* </li> */}
           <li className="listItem">{this.state.loginStatus}</li>

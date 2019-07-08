@@ -69,21 +69,21 @@ class PlpComponent extends React.Component {
       const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => (
         <>
-          {!this.props.showSkuPro ? (
+          {!this.props.showSkuPro ? 
             <ProductItem // Swatch level
               key={index}
-          dataPro={item.skuList[0]}
-          isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
-          addProduct={this.handleAddProduct}
+              dataPro={item.skuList[0]}
+              isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
+              addProduct={this.handleAddProduct}
               compData={this.props.compData}
               isfromWishlistPro={this.props.isFromWishlistPro}
-          history={this.props.history}
+              history={this.props.history}
               isSearchPathPro={this.props.isSearchPathPro}
-          isColorSwatchPro
+              isColorSwatchPro
               skuList={item.skuList}
               swatchList={item.swatchesData}
               isShareWishlistPro={this.props.isShareWishlistPro}
-        /> : 
+            /> :
             <ProductItem // Sku level
               key={index}
               dataPro={item}
@@ -96,8 +96,7 @@ class PlpComponent extends React.Component {
               swatchList={[]}
               isShareWishlistPro={this.props.isShareWishlistPro}
             />
-          )}
-
+          }
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
         </>

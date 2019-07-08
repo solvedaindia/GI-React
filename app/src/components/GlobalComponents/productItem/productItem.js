@@ -139,8 +139,8 @@ class ProductItem extends React.Component {
 	      </div>
 	      <Link className="link" to={routePath}>
 	        <div className="hoverBox">
-            {this.props.isfromWishlistPro ? (
-	            <button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}>{this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
+            {this.props.isfromWishlistPro ? 
+	            <button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
 	            <button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
 
 	          {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">

@@ -78,7 +78,7 @@ export class HeaderMobile extends React.Component {
   onSearchClick() {
     this.setState({
       headerRenderItem: (
-        <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />,
+        <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />
       ),
     });
   }

@@ -20,7 +20,7 @@ import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
 
 class CartDetail extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       showReply: false,
@@ -31,87 +31,87 @@ class CartDetail extends React.Component {
     this.props.getCartDetails();
   }
 
-  handleOnClick(e){
+  handleOnClick(e) {
     e.preventDefault();
-    this.setState({showReply: !this.state.showReply})
+    this.setState({ showReply: !this.state.showReply })
   }
- 
+
   render() {
     const { cartData } = this.props;
-    if(!cartData) return null;
+    if (!cartData) return null;
     return (
       !!cartData.cartItems.length
-        ? 
+        ?
         <section className='cartDetails'>
           <div className='cartItem'>
             <div className='cartHeadDetails'>
               <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
               </h2>
-            <Pincode />
-          </div>
+              <Pincode />
+            </div>
             <ul className='cartItemList'>
-            {cartData.cartItems.map((itemData, index) => (
-                            <li className='prodList' key={`${index}-pro`}>
-                                <figure className='prodImg'>
-                                    <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index}/>
-                                </figure>
-                                <div className='prodDetails'>
-                                    <h3 className='prodTitle'>{itemData.productName}</h3>
-                                    <p className='subTitle'>({itemData.shortDescription})</p>
-                                    {!itemData.freeGift &&
-                                    <CartUpdate
-                                        quantity={itemData.quantity}
-                                        orderItemId={itemData.orderItemId}
-                                        getCartDetails={this.props.getCartDetails}
-                                    />}
-                                    <MoveToWishList
-                                        uniqueID={itemData.uniqueID}
-                                        orderItemId={itemData.orderItemId}
-                                        getCartDetails={this.props.getCartDetails}
-                                    />
-                                    {!itemData.freeGift &&
-                                    <DeleteCartItem
-                                        orderItemId={itemData.orderItemId}
-                                        getCartDetails={this.props.getCartDetails}
-                                    />}
-                                    <p className='delBy'>DELIVERY BY:</p>
-                                    <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
-                                    <span className='price'>₹{itemData.offerPrice}</span>
-                                    <span className='shipping'>Shipping charge ₹300</span>
-                                </div>
-                            </li>
-                        ))}
-          </ul>
+              {cartData.cartItems.map((itemData, index) => (
+                <li className='prodList' key={`${index}-pro`}>
+                  <figure className='prodImg'>
+                    <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
+                  </figure>
+                  <div className='prodDetails'>
+                    <h3 className='prodTitle'>{itemData.productName}</h3>
+                    <p className='subTitle'>({itemData.shortDescription})</p>
+                    {!itemData.freeGift &&
+                      <CartUpdate
+                        quantity={itemData.quantity}
+                        orderItemId={itemData.orderItemId}
+                        getCartDetails={this.props.getCartDetails}
+                      />}
+                    <MoveToWishList
+                      uniqueID={itemData.uniqueID}
+                      orderItemId={itemData.orderItemId}
+                      getCartDetails={this.props.getCartDetails}
+                    />
+                    {!itemData.freeGift &&
+                      <DeleteCartItem
+                        orderItemId={itemData.orderItemId}
+                        getCartDetails={this.props.getCartDetails}
+                      />}
+                    <p className='delBy'>DELIVERY BY:</p>
+                    <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
+                    <span className='price'>₹{itemData.offerPrice}</span>
+                    <span className='shipping'>Shipping charge ₹300</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className='orderSummary'>
             <div className='promotion'>
               <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
-              {this.state.showReply && <PromoField 
-                orderID = {cartData.orderSummary.orderID}
+              {this.state.showReply && <PromoField
+                orderID={cartData.orderSummary.orderID}
                 getCartDetails={this.props.getCartDetails}
               />}
               <GetCartPromo
-                orderID = {cartData.orderSummary.orderID}
+                orderID={cartData.orderSummary.orderID}
                 getCartDetails={this.props.getCartDetails}
               />
             </div>
             <h2 className='title'>Order Summary</h2>
             <div className='summary'>
               <p className='cartTotal'>
-                <span className='info'>Cart Total</span> 
+                <span className='info'>Cart Total</span>
                 <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
-            </p>
+              </p>
               {!!cartData.orderSummary.productDiscount &&
-              <p className="prodDisc">
-                              <span className='info'>Product Discount</span>
-                              <span className='val'> ₹{cartData.orderSummary.productDiscount}</span>
-                </span>
+                <p className="prodDisc">
+                  <span className='info'>Product Discount</span>
+                  <span className='val'> ₹{cartData.orderSummary.productDiscount}</span>
+                </p>
               }
               {!!cartData.orderSummary.orderDiscount &&
-                        <p className='orderDisc'>
-                          <span className='info'>Order Discount</span>
-                          <span className='val'>-₹{cartData.orderSummary.orderDiscount}</span>
-                </span>
+                <p className='orderDisc'>
+                  <span className='info'>Order Discount</span>
+                  <span className='val'>-₹{cartData.orderSummary.orderDiscount}</span>
+                </p>
               }
               {!!cartData.orderSummary.shippingCharges == '0' ?
                 <p className='shipping'>
@@ -135,10 +135,9 @@ class CartDetail extends React.Component {
                 <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
               </p>
               <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>
-
             </div>
-        </div>
-        </section> 
+          </div>
+        </section>
         : <EmptyCart />
     )
   }
@@ -146,8 +145,8 @@ class CartDetail extends React.Component {
 
 const withConnect = connect(
   (state) => ({
-            cartData: getReleventReduxState(state, 'cart')
-        }),
+    cartData: getReleventReduxState(state, 'cart')
+  }),
   {
     getCartDetails,
   }
