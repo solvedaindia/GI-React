@@ -60,8 +60,8 @@ class BestSeller extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true
-          }
+            dots: true,
+          },
         },
         {
           breakpoint: 600,
@@ -69,7 +69,7 @@ class BestSeller extends React.Component {
             slidesToShow: 2,
             slidesToScroll: 2,
             dots: true,
-          }
+          },
         },
         {
           breakpoint: 480,
@@ -77,9 +77,9 @@ class BestSeller extends React.Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
     return (
       <div className="bestSeller">

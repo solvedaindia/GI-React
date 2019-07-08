@@ -23,7 +23,7 @@ export class SubCategory extends React.Component {
     apiManager
       .get(featuredCatAPI)
       .then(response => {
-        const {data} = response || {};
+        const { data } = response || {};
         this.setState({
           subCatData: data && data.data,
           isLoading: false,
@@ -58,8 +58,8 @@ export class SubCategory extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true
-          }
+            dots: true,
+          },
         },
         {
           breakpoint: 600,
@@ -67,7 +67,7 @@ export class SubCategory extends React.Component {
             slidesToShow: 2,
             slidesToScroll: 2,
             dots: true,
-          }
+          },
         },
         {
           breakpoint: 480,
@@ -75,9 +75,9 @@ export class SubCategory extends React.Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
     return (
       <div className="subCat">
