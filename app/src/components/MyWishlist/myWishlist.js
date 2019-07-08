@@ -6,16 +6,19 @@ import '../../../public/styles/plpContainer/plpContainer.scss';
 import PlpComponent from '../PlpComponent/index';
 import {
   plpAPI,
-  myWishlistAPI
-
+  myWishlistAPI,
+  shareWishlistAPI
 } from '../../../public/constants/constants';
-import { getReleventReduxState } from '../../utils/utilityManager';
+import { getReleventReduxState, getCookie } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
 import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
 import ShareLogo from '../SVGs/shareIcon';
 import SocialMedia from '../../utils/socialMedia';
+import CryptoJS from 'crypto-js';
 
+const encryptKey = 'GIk';
+const seperateStr = '~~';
 class MyWishlist extends React.Component {
   constructor(props) {
     super(props);
@@ -24,11 +27,26 @@ class MyWishlist extends React.Component {
       wishlistData: [],
       wishlistPopup: null,
       showSocialShare: false,
+      wishlistAPIURL: myWishlistAPI,
+      //Sharing
+      guestAccessKey: null,
+      externalIdentifier: null,
+      sharingURL: null,
+      userNameS: null,
+      isShareWishlist: false,
     };
   }
 
   componentDidMount() {
-    this.fetchMyWishlistData();
+
+    if (this.props.location.search !== '') {
+      console.log('mixxx xxx --- ', this.props);
+      this.decryptSharingURL(this.props.location.search);
+    }
+    else {
+      this.fetchMyWishlistData(myWishlistAPI);
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,20 +76,25 @@ class MyWishlist extends React.Component {
     );
   }
 
-  fetchMyWishlistData() {
-    console.log('fetchMyWishlistData Called');
+  fetchMyWishlistData(APIURL) {
+    console.log('makeeee -- ',APIURL)
     apiManager
-      .get(myWishlistAPI, {})
+      .get(APIURL, {})
       .then(response => {
-        console.log('PLP Response----', response.data);
-        console.log('Wishlist ITem Count --- ', response.data.data.wishlistItemCount)
+        console.log('Wishlist Response----', response.data);
+        this.setState({
+          wishlistData: [],
+        })
         this.setState({
           wishlistData: response.data.data.wishlistData,
+          guestAccessKey: response.data.data.guestAccessKey,
+          externalIdentifier: response.data.data.externalIdentifier,
           isLoading: true
         })
+        this.shareURLFormation()
       })
       .catch(error => {
-        console.log('PLPBannerrror---', error);
+        console.log('Wishlist rrror---', error);
         this.setState({
           error: error.message,
           isLoading: false,
@@ -79,6 +102,37 @@ class MyWishlist extends React.Component {
 
       });
 
+  }
+
+  shareURLFormation() {
+    var shareURL = `${window.location.href}?`
+    var parmaURL = `${getCookie('name')}${seperateStr}${this.state.guestAccessKey}${seperateStr}${this.state.externalIdentifier}`
+
+    // Encrypt
+    var ciphertext = CryptoJS.AES.encrypt(parmaURL, encryptKey).toString();
+    console.log('its encryptt --- ', ciphertext);
+    this.setState({
+      sharingURL: shareURL + ciphertext
+    })
+  }
+
+  decryptSharingURL(urlStr) {
+    var finalStr = String(urlStr);
+    finalStr = finalStr.substring(1);
+    var bytes = CryptoJS.AES.decrypt(finalStr, encryptKey);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    var dataArr = originalText.split(seperateStr);
+    console.log('miiccccc --- ', dataArr)
+
+    var finalURl = `${shareWishlistAPI}${dataArr[2]}?accesskey=${dataArr[1]}`
+    console.log('fecthsssss --- ', finalURl)
+    this.setState({
+      isShareWishlist: true,
+      userNameS: dataArr[0],
+      wishlistAPIURL: finalURl
+    })
+    this.fetchMyWishlistData(finalURl);
   }
 
   onShareClick() {
@@ -92,18 +146,19 @@ class MyWishlist extends React.Component {
     const wishlistItem = <>
       <div className='container'>
         <div className='shaire-headerwrp'>
-          <h3 className="heading">My Wishlist</h3>
-          <button className='shire-btn' onClick={this.onShareClick.bind(this)}><ShareLogo />
-          {this.state.showSocialShare ? <SocialMedia /> : null}
-          </button>
-          
+          <h3 className="heading">{this.state.isShareWishlist ? `${this.state.userNameS}'s wishlist` : `My Wishlist`}</h3>
+          {this.state.isShareWishlist ? null : <button className='shire-btn' onClick={this.onShareClick.bind(this)}><ShareLogo />
+            {this.state.showSocialShare ? <SocialMedia fromWislistPro={true} sharingURLPro={this.state.sharingURL} /> : null}
+          </button>}
+
         </div>
-        
+
         <section className="plpCategories">
           <PlpComponent
             plpDataPro={this.state.wishlistData}
             isFromWishlistPro={true}
             showSkuPro={true}
+            isShareWishlistPro={this.state.isShareWishlist}
           />
         </section>
       </div>

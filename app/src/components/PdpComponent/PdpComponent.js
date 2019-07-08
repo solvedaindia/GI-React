@@ -92,11 +92,8 @@ class PdpComponent extends React.Component {
   handleSelectedSwatches(count) {
     const selectedSwatches = new Array();
     for (let i = 0; i < count + 1; i++) {
-      const name = document
-        .getElementsByClassName(`radio${count}`)[0]
-        .getAttribute('name');
-      const getValue = document.querySelector(`input[name = ${name}]:checked`)
-        .value;
+      const name = document.getElementsByClassName(`radio${i}`)[0].getAttribute('name');
+      const getValue = document.querySelector(`input[name = ${name}]:checked`).value;
       selectedSwatches.push(getValue);
     }
     return selectedSwatches;
