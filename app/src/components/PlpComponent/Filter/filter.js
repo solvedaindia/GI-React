@@ -118,7 +118,7 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-
+    console.log('dddmdmd -- ',this.props.updatedFilter)
 
     var alreadyAddedFiltersArr = [];
     let filteredArr = [...this.state.facetArr];

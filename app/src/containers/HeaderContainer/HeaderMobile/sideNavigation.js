@@ -74,12 +74,9 @@ export class HeaderMobile extends React.Component {
     if (subCat.length !== 0) {
       this.setState({
         navigationItem: (
-          <div className="rightAnim">
-            <div className="topMenu">
-              <label
-                onClick={this.onNavigationBackCick.bind(this)}
-                className="usernameTxt"
-              >{`< ${catName}`}</label>
+          <div className='searchBackBtn'>
+            <div className='topMenu'>
+              <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt catNavHeader'><img className='back-nav' src={require('../../../../public/images/nav_back.svg')} />{` ${catName}`}</label>
             </div>
             <ul>
               {!!subCat &&
@@ -140,8 +137,8 @@ export class HeaderMobile extends React.Component {
     console.log('On Overlay --- ', this.state.showNav);
     this.setState({
       showNav: false,
-    });
-    this.props.pageNavigationRenderPro('My Profile');
+    })
+    // this.props.pageNavigationRenderPro('My Profile');
   }
 
   onSubcategoryClick() {}
@@ -160,12 +157,9 @@ export class HeaderMobile extends React.Component {
   onMyAccountClick() {
     this.setState({
       navigationItem: (
-        <div className="rightAnim">
-          <div className="topMenu">
-            <label
-              onClick={this.onNavigationBackCick.bind(this)}
-              className="usernameTxt"
-            >{`< My Account`}</label>
+        <div className='searchBackBtn'>
+          <div className='topMenu'>
+            <label onClick={this.onNavigationBackCick.bind(this)} className='usernameTxt catNavHeader'><img className='back-nav' src={require('../../../../public/images/nav_back.svg')} />{` My Account`}</label>
           </div>
           {/* onClick={this.updatePincode.bind(this, this.props)} */}
           <ul>
@@ -207,23 +201,11 @@ export class HeaderMobile extends React.Component {
     let loginLogoutItem;
     let myAccountItem = null;
     if (getCookie('isLoggedIn') === 'true') {
-      loginLogoutItem = (
-        <button onClick={this.onSignOutClick} className="signoutBtn">
-          Sign Out
-        </button>
-      );
-      myAccountItem = (
-        <li onClick={this.onMyAccountClick.bind(this)} className="navTxt">
-          My Account
-          <span className="arrow">></span>
-        </li>
-      );
-    } else {
-      loginLogoutItem = (
-        <button onClick={this.onSignInClick.bind(this)} className="loginBtn">
-          Log In/ Register
-        </button>
-      );
+      loginLogoutItem = <button onClick={this.onSignOutClick} className='signoutBtn'>Sign Out</button>
+      myAccountItem = <li onClick={this.onMyAccountClick.bind(this)} className='navTxt'>My Account<span className='arrow'><img src={require('../../../../public/images/nav_next.svg')} /></span></li>
+    }
+    else {
+      loginLogoutItem = <button onClick={this.onSignInClick.bind(this)} className='loginBtn'>Log In/ Register</button>
     }
 
     let navItem;
@@ -235,23 +217,9 @@ export class HeaderMobile extends React.Component {
             {loginLogoutItem}
           </div>
           <ul>
-            {!!category &&
-              category.map((categoryData, index) => (
-                <li
-                  onClick={() =>
-                    this.onCategoryClick(
-                      categoryData.subCategoryArray,
-                      categoryData.categoryName,
-                    )
-                  }
-                  className="navTxt"
-                >
-                  {categoryData.categoryName}
-                  {categoryData.subCategoryArray.length > 1 ? (
-                    <span className="arrow">></span>
-                  ) : null}
-                </li>
-              ))}
+            {!!category && category.map((categoryData, index) => (
+              <li onClick={() => this.onCategoryClick(categoryData.subCategoryArray, categoryData.categoryName)} className='navTxt'>{categoryData.categoryName}{categoryData.subCategoryArray.length > 1 ? <span className='arrow'><img src={require('../../../../public/images/nav_next.svg')} /></span> : null}</li>
+            ))}
             {myAccountItem}
             <li className="navTxt">For Businesses</li>
             <li className="navTxt">Locate Store</li>
@@ -275,14 +243,9 @@ export class HeaderMobile extends React.Component {
         {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro /> : null}
         <div className="sideNavigation">
           <label>
-            <input type="checkbox" checked={showNav ? 'checked' : ''} />
-            <div onClick={this.onMenuClick.bind(this)} className="handler">
-              <img
-                src={require('../../../../public/images/RWD Assets/menu.svg')}
-                alt="my image"
-              />
-            </div>
-            <div onClick={this.onOverlayClick.bind(this)} className="overlay" />
+            <input type="checkbox" checked={showNav ? "checked" : ''} />
+            <div onClick={this.onMenuClick.bind(this)} className="handler"><img className='nav-bar-img' src={require('../../../../public/images/RWD Assets/menu.svg')} alt="my image" /></div>
+            <div onClick={this.onOverlayClick.bind(this)} className="overlay"></div>
             <nav>
               <div className="topMenuOverlap" />
               {navItem}

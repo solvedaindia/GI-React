@@ -39,6 +39,8 @@ import {
   searchPageAPI,
 } from '../../../public/constants/constants';
 import { stringify } from 'querystring';
+import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
+import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -72,6 +74,9 @@ export class PlpContainer extends React.Component {
       newSearchTrigger: false,
       //Browser Routing Vars
       browserFilters: [],
+
+      //RWD Vars
+      isMobile: window.innerWidth <= 760,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);
@@ -493,7 +498,7 @@ export class PlpContainer extends React.Component {
     }
 
     let filterItem;
-    if (filterData.length != 0) {
+    if (filterData.length != 0  && !this.state.isMobile) {
       filterItem = <FilterMain filterDataPro={filterData} />;
     }
 
@@ -562,7 +567,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {plpData.length === 0 ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
+                  {plpData.length === 0 || this.state.isMobile ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
                 </div>
               </div>
             </div>
@@ -583,9 +588,17 @@ export class PlpContainer extends React.Component {
         {/* Show only when get zero products from Filter */}
         {/* {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null} */}
         {this.state.productCount === 0 && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null}
-        
+
         {descriptionItem}
         <CompContainer />
+
+
+
+       {this.state.isMobile && plpData.length !== 0 ? <div className='rwdSortFilter'>
+          <RWDSort sortingIndexPro={this.state.plpSorting}/>
+          <RWDFilterMain filterDataPro={filterData}/>
+          
+        </div> : null}
       </>
     );
   }

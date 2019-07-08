@@ -1,3 +1,4 @@
+
 import React from 'react';
 //Redux Imports
 import { connect } from 'react-redux';
@@ -21,7 +22,7 @@ const recommended = 'Interio Recommends';
 const price_L_H = 'Price Low to High';
 const price_H_L = 'Price High to Low';
 const newArrival = 'New Arrival';
-class Sort extends React.Component {
+class RWDSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,32 +30,18 @@ class Sort extends React.Component {
       selected: this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
+      isShowSortOptions: false,
     };
-
-    this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  toggleDropdown() {
-    if (!this.state.active) {
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener('click', this.handleOutsideClick, false);
-    }
-
+  showSortOptions() {
     this.setState({
-      active: !this.state.active
-    });
-  }
-
-  handleOutsideClick(e) {
-    if (this.node.contains(e.target)) {
-      return;
-    }
-    this.toggleDropdown();
+      isShowSortOptions: !this.state.isShowSortOptions,
+    })
   }
 
   handleClick(i) {
+    console.log('yes handle click -- ', i)
     if (i !== this.state.selected) {
       this.setState({
         selected: i,
@@ -62,45 +49,40 @@ class Sort extends React.Component {
       });
       this.props.updateSortingValue(this.state.options[i]);
     }
-    this.toggleDropdown();
-  }
-
-  sortingOptions() {
-    if (!this.state.options) {
-      return;
-    }
-    //console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
-    return this.state.options.map((option, i) => {
-      
-      return (
-        <li
-          onClick={evt => this.handleClick(i)}
-          key={i}
-          className={"dropdownlist-item list " + (option === fetchReleventSortingValueByIndex(this.state.selected) ? 'dropdownlist-itemactive' : '')}
-        >
-          {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
-            {option}
-          {/* </Link> */}
-        </li>
-      );
-    });
+    // this.toggleDropdown();
   }
 
   render() {
-    
+    console.log('what Sort Value --- ',this.props.sortingIndexPro);
     return (
       <>
-        <h4 className='heading'>Sort</h4>
-        <div ref={node => { this.node = node; }} className="dropdown">
-          <div
-            onClick={() => this.toggleDropdown()}
-            className="dropdowntoggle dropdownlist-item"
-          >
-            {fetchReleventSortingValueByIndex(this.state.selected)}
-            {this.state.active ? upArrow : downArrow}
+        <button className='rwdSortBtn' onClick={evt => this.showSortOptions()}>Sort</button>
+
+        {this.state.isShowSortOptions ?
+          <div onClick={evt => this.showSortOptions()} className='sortOutterCont'>
+            <div className='sortInnerCont'>
+              <div>
+                <label className='sortTxt'>Sort</label>
+                <button onClick={evt => this.showSortOptions()} className='sortCancelBtn'>Cancel</button>
+              </div>
+              <div className='clearfix' />
+              <div>
+                <ul>
+                  {this.state.options.map((option, i) => {
+                    return (
+                      <li onClick={evt => this.handleClick(i)} key={i} className={`sortLi${option === fetchReleventSortingValueByIndex(this.state.selected) ? ' active' : ''}`} >
+                        {option}
+                        {option === fetchReleventSortingValueByIndex(this.state.selected) ? <img className='sortSelectionImg' src={require('../../../../public/images/sortSelection.svg')} /> : ''}
+                      </li>
+                    )
+                  })
+                  }
+                </ul>
+              </div>
+            </div>
           </div>
-          <ul className={"dropdownlist " + (this.state.active ? 'dropdownlistactive' : '')}>{this.sortingOptions()}</ul>
-        </div>
+          : null}
+
       </>
     );
   }
@@ -134,6 +116,6 @@ export default compose(
   withSaga,
   withConnect,
   withRouter,
-)(Sort);
+)(RWDSort);
 
 

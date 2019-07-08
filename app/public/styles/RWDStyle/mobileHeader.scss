@@ -3,46 +3,75 @@
 
 .mobileHeader {
   width: 100%;
-  height: 70px;
-
-  .menuBtn {
-    width: 24px;
-    height: 24px;
-    margin: 20px;
+  height: auto;
+  position: relative;
+  z-index: 9;
+  .mobSideNav, .mob-logo{
+    float: left;
   }
-
-  .navigationTitle {
-    width: 40%;
-    margin: 20px;
-  }
-
-  .logoImg {
-    width: 24px;
-    height: 24px;
-    //margin: 20px;
-  }
-
-  .searchField {
-    font-size: 12px;
-    caret-color: #036cc5;
-    width: 72%;
-    height: 30px;
-
-    &:focus {
-      outline: none;
+  .backToCategory{
+    .backToCatBtn, .back-mob-logo, .mob-mini-profile-nav{
+      float:left;
     }
-    &::placeholder {
-      color: #d1d1d2;
-      opacity: 1;
+    .backToCatBtn{
+      padding: 8px 15px 20px 10px;
+    }
+    .back-mob-logo{margin-top: 6px;}
+    .mob-mini-profile-nav{
+      margin-bottom: 0px;
+      margin-top: 10px;
     }
   }
 
-  .rightSideMobile {
-    margin: -39px 12px -5px 75%;
+    .menuBtn {
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: 0px;
+    }
+
+    .navigationTitle {
+      width: 100%;
+      margin: 1px 10px 0px 20px;
+      display: inline-block;
+      font-size: 18px;
+    }
+
+    .logoImg {
+      width: 24px;
+      height: 24px;
+      margin-top: 10px;
+    }
+
+    .searchField {
+      font-size: 12px;
+      caret-color: #036cc5;
+      width: 80%;
+      height: 30px;
+
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        color: #d1d1d2;
+        opacity: 1;
+      }
+  }
+
+  .mob-mini-nav{
+    float: right;
+    margin:8px 10px 0px 0px;
+   
     .searchBtn {
-      position: absolute;
+     background: none;
+     border: 0px;
+    }
+    .searchIcon{
+      display: inline;
     }
     .icons {
+      float:left;
+
       &:first-child {
         margin: 0;
       }
@@ -77,7 +106,7 @@
     }
   }
 
-  .rightAnim {
+  .searchBackBtn {
     position: relative;
     display: block;
     width: 100%;
@@ -85,6 +114,23 @@
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-name: anim-Right;
+    padding: 7px 15px;
+
+    button{
+      background: none;
+      border: 0px;
+      outline: 0;
+    }
+    .menuBtn{
+      margin-right: 10px;
+
+      .logoImg{
+        margin:0px;
+      }
+    }
+    .searchField{
+      border:0px;
+    }
   }
 
   .leftAnim {
@@ -124,10 +170,6 @@
   }
 
   .searchBarHeader {
-    // width: 30%;
-    // display: inline-block;
-    // position: relative;
-    // border-bottom: 1px solid $battleshipGrey;
     .search-icon {
       margin: 0;
     }
@@ -153,7 +195,7 @@
 
     #autoSuggestDiv {
       position: fixed;
-      top: 70px;
+      top: 51px;
       width: 100%;
       height: 100%;
       background: white;
