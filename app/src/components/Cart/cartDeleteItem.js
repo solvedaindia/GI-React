@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {
 	cartDeleteItemAPI
 } from '../../../public/constants/constants';
@@ -23,7 +23,7 @@ class DeleteCartItem extends React.Component {
         .post(cartDeleteItemAPI, data)
         .then(response => {
 			this.props.getCartDetails()
-            console.log('@@@@ Cart Update @@@', response.data.data);
+            console.log('@@@@ Cart Delete @@@', response.data.data);
         })
         .catch(error => {
             this.setState({

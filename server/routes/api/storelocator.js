@@ -34,16 +34,17 @@ router.get('/bycoordinates', (req, res, next) => {
 });
 
 router.get('/byId', (req, res, next) => {
-  // let idArray = [];
-  const url1 = req.originalUrl;
-  const parsedUrl = url.parse(url1, true);
-  const ids = parsedUrl.search.slice(1);
-  console.log(ids, 'query params....');
-  // if (req.query.id instanceof Array) {
-  //   idArray = req.query;
-  // } else {
-  //   idArray.push(req.query.id);
-  // }
+  console.log(Object.keys(req.query).length);
+  let idArray = [];
+  // console.log(req.query, 'idd length........');
+  if (req.query.id instanceof Array) {
+    idArray = req.query.id;
+  } else {
+    idArray.push(req.query.id);
+  }
+  // eslint-disable-next-line no-console
+  // console.log(idArray, 'request params');
+  // const id = req.params.gi_storeId;
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
     ids,

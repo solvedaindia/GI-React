@@ -12,7 +12,7 @@ import { resendOtp } from '../RegisterComponent/constants';
 
 class BestSeller extends React.Component {
   state = {
-    bestSellerData: null,
+    bestSellerData: {},
     title: null,
     isLoading: true,
     errors: null,
@@ -25,7 +25,7 @@ class BestSeller extends React.Component {
 		const { data } = response || {};
 		const bsData = data && data.data;
         this.setState({
-			bestSellerData: is(bsData, 'Object') && bsData,
+			bestSellerData: (is(bsData, 'Object') && bsData) || {},
 			isLoading: false,
         });
       })
@@ -44,7 +44,7 @@ class BestSeller extends React.Component {
   }
 
   render() {
-    const { bestSellerData } = this.state;
+    const { bestSellerData: {productList = [], title = ''} } = this.state;
     const settings = {
       dots: false,
       infinite: true,
@@ -54,9 +54,9 @@ class BestSeller extends React.Component {
     };
     return (
       <div className="bestSeller">
-        <h1 className="title">Best Selling Products</h1>
+        <h1 className="title">{title}</h1>
         <Slider {...settings}>
-		{!!bestSellerData && bestSellerData.productList.map((sellerItemData, index) => (
+		{is(productList, 'Array') && productList.map((sellerItemData, index) => (
               <figure key={index} className="bsSlides">
                 <a href={sellerItemData.onClickUrl}>
                   <img

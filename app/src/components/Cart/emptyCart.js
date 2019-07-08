@@ -1,6 +1,7 @@
-import React from 'React';
+import React from 'react';
 import CartLogo from '../SVGs/cart';
 import '../../../public/styles/cart/emptyCart.scss';
+import { isMobile } from '../../utils/utilityManager';
 import InstallLogo from '../SVGs/installLogo';
 import ExchangeLogo from '../SVGs/exchangeLogo';
 import DeliveryLogo from '../SVGs/deliveryLogo';
@@ -13,7 +14,7 @@ class EmptyCart extends React.Component {
             <div className='emptyCart'>
                 <h2 className='title'><span className='cartBold'>Cart</span> is empty :( </h2>
                 <div className='shopNow'>
-					<CartLogo width={254} height={254} />
+				{!isMobile ? <CartLogo width={254} height={254} /> : <CartLogo width={68} height={68} /> }
 					<h2 className='shopHeadLine'>There’s nothing in here</h2>
 					<p className='info'>You haven’t added any items to your yet </p>
 					<a className='btn shopBtn'>Shop Now</a>

@@ -40,11 +40,10 @@ import CompareContainer from '../comparePageContainer/index';
 import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
-import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import SearchContainer from '../Search Container/searchContainer';
 import CartDetail from '../CartContainer/cartContainer';
+import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
@@ -159,8 +158,9 @@ export default class App extends React.Component {
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
-        {newsletterItem}
-        <HeaderContainer />
+		{newsletterItem}
+		{window.location.pathname === '/cart' ? <LightHeader /> : <HeaderContainer />}
+		{/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/rooms:id" component={ClpContainer} />

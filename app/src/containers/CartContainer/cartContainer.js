@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import injectSaga from '../../utils/injectSaga';
@@ -13,19 +13,29 @@ import {
 import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
-import '../../../public/styles/cart/cartItem.scss';
 import EMILogo from '../../components/SVGs/emiIcon';
 import TermsAndCondition from '../../components/Cart/tnc';
-import DeleteLogo from '../../components/SVGs/deleteIcon';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
+import MoveToWishList from '../../components/Cart/moveToWishList';
+import '../../../public/styles/cart/cartItem.scss';
+import GetCartPromo from '../../components/Cart/promotion';
+import PromoField from '../../components/Cart/applyPromo';
 
 class CartDetail extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            showReply: false
+        }
     }
+
     componentDidMount() {
         this.props.getCartDetails();
     }
+    handleOnClick(e){
+        e.preventDefault();
+        this.setState({showReply: !this.state.showReply})
+    } 
     render() {
         const { cartData } = this.props;
         if(!cartData) return null;
@@ -42,7 +52,7 @@ class CartDetail extends React.Component {
                     <ul className='cartItemList'>
                     {cartData.cartItems.map((itemData, index) => {
                         return (
-                            <li className='prodList'>
+                            <li className='prodList' key={`${index}-pro`}>
                                 <figure className='prodImg'>
                                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index}/>
                                 </figure>
@@ -55,6 +65,11 @@ class CartDetail extends React.Component {
                                         orderItemId={itemData.orderItemId}
                                         getCartDetails={this.props.getCartDetails}
                                     />}
+                                    <MoveToWishList
+                                        uniqueID={itemData.uniqueID}
+                                        orderItemId={itemData.orderItemId}
+                                        getCartDetails={this.props.getCartDetails}
+                                    />
                                     {!itemData.freeGift &&
                                     <DeleteCartItem
                                         orderItemId={itemData.orderItemId}
@@ -62,7 +77,7 @@ class CartDetail extends React.Component {
                                     />}
                                     <p className='delBy'>DELIVERY BY:</p>
                                     <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
-                                    <span className='price'>₹{itemData.offerPrice*itemData.quantity}</span>
+                                    <span className='price'>₹{itemData.offerPrice}</span>
                                     <span className='shipping'>Shipping charge ₹300</span>
                                 </div>
                             </li>
@@ -72,13 +87,21 @@ class CartDetail extends React.Component {
                 </div>
                 <div className='orderSummary'>
                     <div className='promotion'>
-                        <h3 className='promoHead'>Got a promo code?</h3>
+                        <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
+                        {this.state.showReply && <PromoField 
+                        orderID = {cartData.orderSummary.orderID}
+                        getCartDetails={this.props.getCartDetails}
+                        />}
+                        <GetCartPromo
+                            orderID = {cartData.orderSummary.orderID}
+                            getCartDetails={this.props.getCartDetails}
+                        />
                     </div>
                     <h2 className='title'>Order Summary</h2>
                     <div className='summary'>
                         <p className='cartTotal'>
                             <span className='info'>Cart Total</span> 
-                            <span className='val'> ₹{cartData.orderSummary.totalAmount}</span>
+                            <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
                         </p>
                         {!!cartData.orderSummary.productDiscount &&
                             <p className='prodDisc'>
@@ -105,12 +128,12 @@ class CartDetail extends React.Component {
                         </p>
                         }
                         <p className='emiInfo'>
-                            <span className='emiMsg'><EMILogo width={23} height={23} />Starting from ₹999 per month</span>
+                            <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
                             <TermsAndCondition />
                         </p>
                         <p className='totalAmt'>
                             <span className='totalPrice'>Total</span>
-                            <span className='val'>₹{cartData.orderSummary.netAmount}</span>
+                            <span className='val'>₹{cartData.orderSummary.totalAmount}</span>
                             <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
                         </p>
                         <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>

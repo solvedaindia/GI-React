@@ -6,7 +6,8 @@ export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
 export const host1 = '192.168.0.57';
-export const host = 'localhost';
+// export const host = 'localhost';
+export const host = window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const wishlistDataCookie = 'wishlistData';
@@ -40,6 +41,10 @@ export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/ca
 export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
 /* Cart Item Delet API*/
 export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
+/* Cart Get Promotion API */
+export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/promocode`;
+/* Cart Apply Promotion API */
+export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/applypromotion`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Auto Suggest API */
@@ -145,6 +150,8 @@ export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users
 /* Order List API */
 export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/list`;
 
+/* Share Wishlist API */
+export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;

@@ -1,0 +1,22 @@
+@import "../app.scss";
+
+.footerMobile {
+  background: $colorblue;
+  // padding: 70px 0;
+
+  .logo_white {
+    padding: 0 15px 40px 15px;
+    .logo_width {
+      width: 250px;
+    }
+  }
+
+  .social-Link{
+    .list{
+        display: inline;   
+        padding: 0 10px 0 0;     
+    }
+}
+
+
+}

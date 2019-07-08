@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {
 	cartUpdateAPI
 } from '../../../public/constants/constants';
@@ -34,7 +34,7 @@ class CartUpdate extends React.Component {
                 quantity: qty,
                 isLoading: false,
 			});
-			this.props.getCartDetails()
+			this.props.getCartDetails();
             console.log('@@@@ Cart Update @@@', response.data.data);
         })
         .catch(error => {
