@@ -2,6 +2,8 @@ import {
   wishlistDataCookie,
   wishlistIdCookie,
 } from '../../public/constants/constants';
+import LightHeader from '../components/HeaderComponent/headerL1/lightHeader';
+import HeaderContainer from '../containers/HeaderContainer';
 // import { utimes } from 'fs';
 
 
@@ -9,9 +11,7 @@ import {
  * Function to get current URL hostname and port
  * @param {*}
  */
-export function getLocation(){
-  return window.location.hostname;
-}
+
 
 /**
  * Function to get current URL hostname and port
@@ -23,6 +23,14 @@ export function validatePIN(pin) {
   } else {
     return false;
   }
+}
+
+/**
+ * Function will pick the browser width * 
+ */
+
+export function isMobile() {
+  return $(window).width() < 768;
 }
 /**
  * Function to Fetch specific data from Cookie store
