@@ -39,50 +39,235 @@
 }
 
 .sortOutterCont {
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #0000006e;
+  position: fixed;
+  bottom: 0px;
+  z-index: 100;
+
+  .sortInnerCont {
+    height: 370px;
     width: 100%;
-    background-color: #0000006e;
+    background-color: white;
     position: fixed;
     bottom: 0px;
-    z-index: 100;
 
-    .sortInnerCont {
-      height: 370px;
+    .sortTxt {
+      color: #4a90e2;
+      float: left;
+      width: 20%;
+      text-align: left;
+      margin: 15px;
+    }
+
+    .sortCancelBtn {
+      color: black;
+      float: left;
+      width: 19%;
+      margin: 15px;
+    }
+
+    .sortLi {
+      padding: 30px;
+      text-align: left;
+      color: #070707;
+      font-size: 14px;
+    }
+
+    .active {
+      background-color: #f7f8f8;
+
+      .sortSelectionImg {
+        margin: 0px 195px;
+      }
+    }
+  }
+}
+
+.filterOutterCont {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  z-index: 100;
+
+  .filterHeader {
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    bottom: 34%;
+
+    .filterTxt {
+      color: #036cc5;
+      font-size: 14px;
+      float: left;
+      width: 20%;
+      text-align: left;
+      margin: 21px;
+    }
+
+    &::after {
+      content: " ";
+      position: absolute;
+      height: 1px;
+      background: #d1d1d2;
+      left: 0px;
       width: 100%;
-      background-color: white;
-      position: fixed;
       bottom: 0px;
+    }
+  }
 
-      .sortTxt {
-        color: #4a90e2;
-        float: left;
-        width: 20%;
-        text-align: left;
-        margin: 15px;
+  .filterFooter {
+    &::before {
+      content: " ";
+      position: absolute;
+      height: 1px;
+      background: #d1d1d2;
+      left: 0px;
+      width: 100%;
+      top: 0px;
+    }
+
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    .cancelBtn {
+      color: black;
+      font-size: 14px;
+      float: left;
+      width: 18%;
+      text-align: center;
+      margin: 0px;
+      height: inherit;
+      background-color: white;
+    }
+
+    .applyBtn {
+      color: white;
+      font-size: 14px;
+      float: left;
+      width: 19%;
+      text-align: center;
+      margin: 0px;
+      background-color: black;
+      height: inherit;
+    }
+  }
+
+  .mainFilter {
+    height: 31.3%;
+    width: 15%;
+    position: fixed;
+    bottom: 2.7%;
+    background-color: #f7f8f8;
+
+    .facetList {
+      padding: 20px;
+      //background-color: antiquewhite;
+      text-align: left;
+
+      // &::after {
+      //   content: " ";
+      //   position: absolute;
+      //   height: 1px;
+      //   background: red;
+      //   left: 0px;
+      //   width: 100%;
+      //   //bottom: 0px;
+      // }
+    }
+  }
+
+  .filterFacetName {
+    height: 31.3%;
+    width: 22%;
+    position: fixed;
+    bottom: 2.7%;
+    right: 63%;
+    background-color: white;
+
+    .facetList {
+      padding: 20px;
+      //background-color: antiquewhite;
+      text-align: left;
+
+      // &::after {
+      //   content: " ";
+      //   position: absolute;
+      //   height: 1px;
+      //   background: red;
+      //   left: 0px;
+      //   width: 100%;
+      //   //bottom: 0px;
+      // }
+    }
+
+    /* Input Checkbox Radio
+            -----------------------------*/
+    .lblradio {
+      position: relative;
+      .circle {
+        border-radius: 50%;
+        height: 22px;
+        width: 22px;
+        padding: 2px;
       }
+      .circlebox {
+        height: 28px;
+        width: 28px;
+        background: $colorwhite;
+        border: 2px solid $colorwhite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        padding: 2px;
 
-      .sortCancelBtn {
-        color: black;
-        float: left;
-        width: 19%;
-        margin: 15px;
-      }
-
-      .sortLi {
-        padding: 30px;
-        text-align: left;
-        color: #070707;
-        font-size: 14px;
-      }
-
-      .active {
-        background-color: #f7f8f8;
-
-        .sortSelectionImg {
-          margin: 0px 195px;
+        .circleRGB {
+          border-radius: 50%;
+          height: 20px;
+          width: 20px;
+          padding: 2px;
+          display: block;
         }
       }
-      
     }
-    
+
+    .inputCheck[type="checkbox"] + .lblradio {
+      display: block;
+      height: 22px;
+      width: 22px;
+    }
+    .inputCheck[type="checkbox"]:checked + .lblradio {
+      .circle {
+        border: 2px solid $black;
+        padding: 2px;
+      }
+
+      .circlebox {
+        border: 2px solid $black;
+        padding: 2px;
+      }
+    }
+
+    /* Input Checkbox Squere
+            -----------------------------*/
+    .inputCheck[type="checkbox"] + .lblCheck {
+      background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
+      display: inline;
+      min-height: 16px;
+      padding-left: 16px;
+      background-size: contain;
+    }
+
+    .inputCheck[type="checkbox"]:checked + .lblCheck {
+      background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+      background-size: contain;
+      padding-left: 16px;
+    }
   }
+}

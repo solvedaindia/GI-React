@@ -40,6 +40,7 @@ import {
 } from '../../../public/constants/constants';
 import { stringify } from 'querystring';
 import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
+import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -497,7 +498,7 @@ export class PlpContainer extends React.Component {
     }
 
     let filterItem;
-    if (filterData.length != 0) {
+    if (filterData.length != 0  && !this.state.isMobile) {
       filterItem = <FilterMain filterDataPro={filterData} />;
     }
 
@@ -595,7 +596,8 @@ export class PlpContainer extends React.Component {
 
        {this.state.isMobile && plpData.length !== 0 ? <div className='rwdSortFilter'>
           <RWDSort sortingIndexPro={this.state.plpSorting}/>
-          <button className='rwdFilterBtn'>Filter</button>
+          <RWDFilterMain filterDataPro={filterData}/>
+          
         </div> : null}
       </>
     );
