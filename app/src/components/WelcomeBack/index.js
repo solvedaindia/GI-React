@@ -2,10 +2,10 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 // import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import WelcomeBackForm from '../WelcomeBackForm';
 import {
   facebookAppId,
@@ -183,78 +183,83 @@ class WelcomeBack extends React.Component {
 				</a>
 			</li>
 			</ul> */}
-			<Modal
-			className="welcomeBack"
-			size="lg"
-			animation={false}
-			show={this.state.show}
-			onHide={this.handleClose}
-			>
-			{message}
-			<Modal.Header closeButton>
-				<div className="smallLogo">
-					<WhiteLogo width="171" height="33"/>
-				</div>
-				<Modal.Title>Welcome Back</Modal.Title>
-			</Modal.Header>
-			<div className="socialLogin">
-				<GoogleLogin
-				clientId={googleClientId}
-				render={renderProps => (
-					<button
-					className="btn-white"
-					onClick={renderProps.onClick}
-					disabled={renderProps.disabled}
-					>
-					<span className="icon-img">
-						<img className="icon" src={Google} />
-					</span>
-					<span className="signin-text">Sign in with Google</span>
-					</button>
-				)}
-				onSuccess={this.responseGoogle}
-				onFailure={this.responseGoogle}
-				/>
-				<FacebookLogin
-					appId={facebookAppId}
-					render={renderProps => (
-						<button
-						className="btn-white btn-fb"
-						onClick={renderProps.onClick}
-						isdisabled={renderProps.disabled}
-						>
-						<span className="icon-img">
-							<img className="icon" src={Facebook} />
-						</span>
-						<span className="signin-text">Sign in with Facebook</span>
-						</button>
-					)}
-					autoLoad
-					fields="name,email,picture"
-					cssClass="btn-white"
-					onClick={this.facebookOnClick.bind(this)}
-					callback={this.responseFacebook}
-                />
-			</div>
-			<p className="divider">or</p>
-			<WelcomeBackForm
-				className="loginForm"
-				handleUserData={this.handleUserLoginApi.bind(this)}
-			/>
-			<div className="forgotPassword">
-				<p onClick={this.clickedOnForgotPassword.bind(this)}>Forgot Password?</p>
-			</div>
-			<p className="registerHere">
-				<span>New to Godrej Interio? </span>
-				<Button className="registerNow" onClick={this.clickedOnRegister.bind(this)}>
-				Register
-				</Button>
-				{/* <RegisterModalData /> */}
-			</p>
-			</Modal>
-		</div>
-		);
-	}
+        <Modal
+          className="welcomeBack"
+          size="lg"
+          animation={false}
+          show={this.state.show}
+          onHide={this.handleClose}
+        >
+          {message}
+          <Modal.Header closeButton>
+            <div className="smallLogo">
+              <WhiteLogo width="171" height="33" />
+            </div>
+            <Modal.Title>Welcome Back</Modal.Title>
+          </Modal.Header>
+          <div className="socialLogin">
+            <GoogleLogin
+              clientId={googleClientId}
+              render={renderProps => (
+                <button
+                  className="btn-white"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <span className="icon-img">
+                    <img className="icon" src={Google} />
+                  </span>
+                  <span className="signin-text">Sign in with Google</span>
+                </button>
+              )}
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+            />
+            <FacebookLogin
+              appId={facebookAppId}
+              render={renderProps => (
+                <button
+                  className="btn-white btn-fb"
+                  onClick={renderProps.onClick}
+                  isdisabled={renderProps.disabled}
+                >
+                  <span className="icon-img">
+                    <img className="icon" src={Facebook} />
+                  </span>
+                  <span className="signin-text">Sign in with Facebook</span>
+                </button>
+              )}
+              autoLoad
+              fields="name,email,picture"
+              cssClass="btn-white"
+              onClick={this.facebookOnClick.bind(this)}
+              callback={this.responseFacebook}
+            />
+          </div>
+          <p className="divider">or</p>
+          <WelcomeBackForm
+            className="loginForm"
+            handleUserData={this.handleUserLoginApi.bind(this)}
+          />
+          <div className="forgotPassword">
+            <p onClick={this.clickedOnForgotPassword.bind(this)}>
+              Forgot Password?
+            </p>
+          </div>
+          <p className="registerHere">
+            <span>New to Godrej Interio? </span>
+            <Button
+              className="registerNow"
+              onClick={this.clickedOnRegister.bind(this)}
+            >
+              Register
+            </Button>
+            {/* <RegisterModalData /> */}
+          </p>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 export default WelcomeBack;

@@ -7,9 +7,7 @@ import { getReleventReduxState } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
 import { getCartDetails } from './action';
-import {
-    imagePrefix
-} from '../../../public/constants/constants';
+import { imagePrefix } from '../../../public/constants/constants';
 import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
@@ -22,36 +20,37 @@ import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
 
 class CartDetail extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            showReply: false
-        }
+  constructor(props){
+    super(props);
+    this.state = {
+      showReply: false,
     }
+  }
 
-    componentDidMount() {
-        this.props.getCartDetails();
-    }
-    handleOnClick(e){
-        e.preventDefault();
-        this.setState({showReply: !this.state.showReply})
-    } 
-    render() {
-        const { cartData } = this.props;
-        if(!cartData) return null;
-        return (
-            !!cartData.cartItems.length
-            ? 
-            <section className='cartDetails'>
-                <div className='cartItem'>
-                    <div className='cartHeadDetails'>
-                        <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
-                        </h2>
-                        <Pincode />
-                    </div>
-                    <ul className='cartItemList'>
-                    {cartData.cartItems.map((itemData, index) => {
-                        return (
+  componentDidMount() {
+    this.props.getCartDetails();
+  }
+
+  handleOnClick(e){
+    e.preventDefault();
+    this.setState({showReply: !this.state.showReply})
+  }
+ 
+  render() {
+    const { cartData } = this.props;
+    if(!cartData) return null;
+    return (
+      !!cartData.cartItems.length
+        ? 
+        <section className='cartDetails'>
+          <div className='cartItem'>
+            <div className='cartHeadDetails'>
+              <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
+              </h2>
+            <Pincode />
+          </div>
+            <ul className='cartItemList'>
+            {cartData.cartItems.map((itemData, index) => (
                             <li className='prodList' key={`${index}-pro`}>
                                 <figure className='prodImg'>
                                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index}/>
@@ -81,88 +80,84 @@ class CartDetail extends React.Component {
                                     <span className='shipping'>Shipping charge ₹300</span>
                                 </div>
                             </li>
-                        )
-                    })}
-                    </ul>
-                </div>
-                <div className='orderSummary'>
-                    <div className='promotion'>
-                        <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
-                        {this.state.showReply && <PromoField 
-                        orderID = {cartData.orderSummary.orderID}
-                        getCartDetails={this.props.getCartDetails}
-                        />}
-                        <GetCartPromo
-                            orderID = {cartData.orderSummary.orderID}
-                            getCartDetails={this.props.getCartDetails}
-                        />
-                    </div>
-                    <h2 className='title'>Order Summary</h2>
-                    <div className='summary'>
-                        <p className='cartTotal'>
-                            <span className='info'>Cart Total</span> 
-                            <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
-                        </p>
-                        {!!cartData.orderSummary.productDiscount &&
-                            <p className='prodDisc'>
-                                <span className='info'>Product Discount</span>
-                                <span className='val'> ₹{cartData.orderSummary.productDiscount}</span>
-                            </p>
-                        }
-                        {!!cartData.orderSummary.orderDiscount &&
+                        ))}
+          </ul>
+          </div>
+          <div className='orderSummary'>
+            <div className='promotion'>
+              <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
+              {this.state.showReply && <PromoField 
+                orderID = {cartData.orderSummary.orderID}
+                getCartDetails={this.props.getCartDetails}
+              />}
+              <GetCartPromo
+                orderID = {cartData.orderSummary.orderID}
+                getCartDetails={this.props.getCartDetails}
+              />
+            </div>
+            <h2 className='title'>Order Summary</h2>
+            <div className='summary'>
+              <p className='cartTotal'>
+                <span className='info'>Cart Total</span> 
+                <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
+            </p>
+              {!!cartData.orderSummary.productDiscount &&
+              <p className="prodDisc">
+                              <span className='info'>Product Discount</span>
+                              <span className='val'> ₹{cartData.orderSummary.productDiscount}</span>
+                </span>
+              }
+              {!!cartData.orderSummary.orderDiscount &&
                         <p className='orderDisc'>
-                            <span className='info'>Order Discount</span>
-                            <span className='val'>-₹{cartData.orderSummary.orderDiscount}</span>
-                        </p>
-                        }
-                        {!!cartData.orderSummary.shippingCharges == '0' ?
-                        <p className='shipping'>
-                            <span className='info'>Shipping</span>
-                            <span className='val'>Free</span>
-                            <span className='shippingMsg'>Free shipping on cart total above ₹5000</span>
-                        </p>
-                        :
-                        <p className='shipping'>
-                            <span className='info'>Shipping</span>
-                            <span className='val'>-₹{cartData.orderSummary.shippingCharges}</span>
-                        </p>
-                        }
-                        <p className='emiInfo'>
-                            <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
-                            <TermsAndCondition />
-                        </p>
-                        <p className='totalAmt'>
-                            <span className='totalPrice'>Total</span>
-                            <span className='val'>₹{cartData.orderSummary.totalAmount}</span>
-                            <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
-                        </p>
-                        <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>
+                          <span className='info'>Order Discount</span>
+                          <span className='val'>-₹{cartData.orderSummary.orderDiscount}</span>
+                </span>
+              }
+              {!!cartData.orderSummary.shippingCharges == '0' ?
+                <p className='shipping'>
+                  <span className='info'>Shipping</span>
+                  <span className='val'>Free</span>
+                  <span className='shippingMsg'>Free shipping on cart total above ₹5000</span>
+                </p>
+                :
+                <p className='shipping'>
+                  <span className='info'>Shipping</span>
+                  <span className='val'>-₹{cartData.orderSummary.shippingCharges}</span>
+                </p>
+              }
+              <p className='emiInfo'>
+                <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
+                <TermsAndCondition />
+              </p>
+              <p className='totalAmt'>
+                <span className='totalPrice'>Total</span>
+                <span className='val'>₹{cartData.orderSummary.totalAmount}</span>
+                <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
+              </p>
+              <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>
 
-                    </div>
-
-                </div>
-            </section> 
-            : <EmptyCart />
-        )
-    }
+            </div>
+        </div>
+        </section> 
+        : <EmptyCart />
+    )
+  }
 }
 
 const withConnect = connect(
-    (state) => {
-        return {
+  (state) => ({
             cartData: getReleventReduxState(state, 'cart')
-        };
-    },
-    {
-        getCartDetails
-    }
-)
+        }),
+  {
+    getCartDetails,
+  }
+);
 
 const withReducer = injectReducer({ key: 'cart', reducer });
 const withSaga = injectSaga({ key: 'cartContainer', saga });
 
 export default compose(
-    withReducer,
-    withSaga,
-    withConnect,
-  )(CartDetail);
+  withReducer,
+  withSaga,
+  withConnect,
+)(CartDetail);

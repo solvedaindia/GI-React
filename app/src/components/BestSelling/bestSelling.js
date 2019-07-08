@@ -5,7 +5,7 @@ import {
   bestSellerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import {is} from '../../utils/utilityManager';
+import { is } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
@@ -22,11 +22,11 @@ class BestSeller extends React.Component {
     apiManager
       .get(bestSellerAPI)
       .then(response => {
-		const { data } = response || {};
-		const bsData = data && data.data;
+        const { data } = response || {};
+        const bsData = data && data.data;
         this.setState({
-			bestSellerData: (is(bsData, 'Object') && bsData) || {},
-			isLoading: false,
+          bestSellerData: (is(bsData, 'Object') && bsData) || {},
+          isLoading: false,
         });
       })
       .catch(error => {
@@ -44,7 +44,9 @@ class BestSeller extends React.Component {
   }
 
   render() {
-    const { bestSellerData: {productList = [], title = ''} } = this.state;
+    const {
+      bestSellerData: { productList = [], title = '' },
+    } = this.state;
     const settings = {
       dots: false,
       infinite: true,
@@ -56,7 +58,8 @@ class BestSeller extends React.Component {
       <div className="bestSeller">
         <h1 className="title">{title}</h1>
         <Slider {...settings}>
-		{is(productList, 'Array') && productList.map((sellerItemData, index) => (
+          {is(productList, 'Array') &&
+            productList.map((sellerItemData, index) => (
               <figure key={index} className="bsSlides">
                 <a href={sellerItemData.onClickUrl}>
                   <img

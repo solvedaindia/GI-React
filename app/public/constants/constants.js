@@ -36,10 +36,11 @@ export const addToWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wis
 /* Remove from Wishlist API */
 export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/deleteitem`;
 /* Cart Detail API */
-export const cartDetailAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
-/* Cart Update API*/ 
-export const cartUpdateAPI =  `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
-/* Cart Item Delet API*/
+export const cartDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
+/* Cart Update API */
+
+export const cartUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
+/* Cart Item Delet API */
 export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
 /* Cart Get Promotion API */
 export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/promocode`;
@@ -77,7 +78,7 @@ export let accessToken = getTheAccessToken();
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
 export const googleClientId =
-    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+  '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -161,7 +162,7 @@ export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/cit
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
 export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
 export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
-//export const catalog = 'SolvedaCommerceCatalogAssetStore';
+// export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
@@ -171,9 +172,9 @@ export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-    console.log('constantToke -----', tokenPro);
-    if (validateEmptyObject(tokenPro)) {
-        return (accessToken = tokenPro);
-    }
-    return (accessToken = getCookie(accessTokenCookie));
+  console.log('constantToke -----', tokenPro);
+  if (validateEmptyObject(tokenPro)) {
+    return (accessToken = tokenPro);
+  }
+  return (accessToken = getCookie(accessTokenCookie));
 }

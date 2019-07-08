@@ -158,9 +158,13 @@ export default class App extends React.Component {
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
-		{newsletterItem}
-		{window.location.pathname === '/cart' ? <LightHeader /> : <HeaderContainer />}
-		{/* <HeaderContainer /> */}
+        {newsletterItem}
+        {window.location.pathname === '/cart' ? (
+          <LightHeader />
+        ) : (
+          <HeaderContainer />
+        )}
+        {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/rooms:id" component={ClpContainer} />

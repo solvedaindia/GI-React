@@ -1,7 +1,7 @@
 import React from 'react';
-import Accordion from './Accordion'
-// import '../../../../public/styles/footerContainer/accordian.scss'
 import { Col } from 'react-bootstrap';
+import Accordion from './Accordion';
+// import '../../../../public/styles/footerContainer/accordian.scss'
 
 const FooterLinkAccordian = props => {
   const footerLinksData = props.name.map((val, index) => (
@@ -9,7 +9,14 @@ const FooterLinkAccordian = props => {
       <Accordion>
         {val.map((item, childindex) => (
           <div className="accor footerlink_wrpper">
-            <h5 className="head heading">{item.text}<span className='plusIcon'><img src={require('../../../../public/images/plusIconWhite.svg')} /></span></h5>
+            <h5 className="head heading">
+              {item.text}
+              <span className="plusIcon">
+                <img
+                  src={require('../../../../public/images/plusIconWhite.svg')}
+                />
+              </span>
+            </h5>
             <div className="body">
               <ul>
                 {item.children.map((litem, i) => (
@@ -22,7 +29,6 @@ const FooterLinkAccordian = props => {
               </ul>
             </div>
           </div>
-
         ))}
       </Accordion>
     </Col>
