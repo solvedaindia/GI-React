@@ -10,6 +10,7 @@ import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
 import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
 import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
+import ConsultationForm from '../../components/Primitives/ConsultForm'
 
 
 export default class WardrobesContainer extends React.Component {
@@ -53,6 +54,7 @@ index: 0
                  <p2 className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br/> tempor incididunt ut labore et dolore magna aliqua. <br />
                    the home you've always wanted</p2> <br />
                  <button className="butt">Book A Consultation</button>
+                 
                </div>
                </div>
                <div className="container">
@@ -132,20 +134,91 @@ index: 0
               </div>
               </div>
               <WardrobesHAll/>
+              <br/>
+              <br/><br/>
                <div className="container">
                  <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                  <div className="Form-bakground">
                    <h2 className="Book-a-consultation">Book a consultation</h2>
                    <p4 className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                      tempor. </p4>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <ConsultationForm/>
                  </div>
 
                </div>
-               <div className="promises">
-                 <h className="Our-Promises">Our promises</h>
-               </div>
+              
                <div className="frequesntly">
-                 <h className="Frequently-Asked-Que">Frequently asked questions</h>
+                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br/><br/><br/><br/><br/><br/>
+                 <div className="panel-group" id="accordion">
+    
+       
+                 <div className="panel panel-default">
+        <div className="panel-heading">
+            <h4 className="panel-title">
+                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">What do I need to start my project?</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" className="panel-collapse collapse">
+            <div className="panel-body">
+                Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
+            </div>
+        </div>
+    </div>
+    <div className="panel panel-default">
+        <div className="panel-heading">
+            <h4 className="panel-title">
+                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">What warranty does Godrej Interio have for its products?</a>
+            </h4>
+        </div>
+        <div id="collapseThree" className="panel-collapse collapse">
+            <div className="panel-body">
+               I want to customize one of your products, can I do that?:
+                <ul>
+                    <li>Register an account</li>
+                    <li>Activate your account</li>
+                    <li>Go to the <strong>Themes</strong> section and upload your theme</li>
+                    <li>The next step is the approval step, which usually takes about 72 hours.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div className="panel panel-default">
+        <div className="panel-heading">
+            <h4 className="panel-title">
+                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Want to customize one of your products, can I do that?</a>
+            </h4>
+        </div>
+        <div id="collapseFive" className="panel-collapse collapse">
+            <div className="panel-body">
+                Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
+                <br />
+            </div>
+        </div>
+    </div>
+    <div className="panel panel-default">
+        <div className="panel-heading">
+            <h4 className="panel-title">
+                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Are there any delivery charges or installation charges?</a>
+            </h4>
+        </div>
+        <div id="collapseSix" className="panel-collapse collapse">
+            <div className="panel-body">
+                There are a number of reasons why you should join us:
+                <ul>
+                    <li>A great 70% flat rate for your items.</li>
+                    <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
+                    <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {/* <div className="faqHeader">Sellers</div> */}
+   
+</div>
                </div>
                <div className="container">
                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
