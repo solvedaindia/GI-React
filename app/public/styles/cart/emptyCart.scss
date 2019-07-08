@@ -8,8 +8,10 @@
         display: inline-block;
     }
     .emptyCart {
-        width: 59%;
-        margin-right: 1%;
+        width: 58%;
+        margin-right: 2%;
+        vertical-align: top;
+        padding: 0;
         .title {
             text-align: left;
             border-bottom: 1px solid $darkAshGrey;
@@ -81,6 +83,25 @@
         .shopInfo {
             display: block;
             width: 100%;
+        }
+        .emptyCart {
+            .title {
+                text-align: center;
+            }
+        }
+        .shopInfo {
+            .shopTitle {
+                text-align: center;
+                margin-top: $base*6;
+            }
+            .detailCard {
+                width: 33%;
+                display: inline-block;
+                border-radius: unset;
+                .cardInfo {
+                    display: none;
+                }
+            }
         }
     }   
 }
