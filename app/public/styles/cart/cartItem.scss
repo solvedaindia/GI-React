@@ -291,3 +291,47 @@
     }
     
 }
+
+@media (min-width: 320px) and (max-width: 767px){
+    .cartDetails {
+        width: 100%;
+        margin: $base*2 auto;
+        .cartItem,
+        .orderSummary {
+            width: 100%;
+            display: block;
+            margin: 0;
+        }
+        .orderSummary {
+            padding: $base*2;
+        }
+        .cartItem {
+            .cartItemList {
+                padding: $base*2;
+            }
+        }
+        .cartHeadDetails{
+            .pincodeField {
+                width: 98%;
+                margin: auto 1%;
+            }
+            .title {
+                text-align: center;
+                padding: $base;
+                width: 100%;
+            }
+        }
+    }
+    .viewAllPopUp {
+        .modal-dialog {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .modal_emiInstallment {
+        .modal-dialog {
+            width: 100%;
+            margin: auto;
+        }
+    }
+}
