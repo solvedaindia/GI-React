@@ -73,7 +73,7 @@ class FilterMain extends React.Component {
       this.setState({ 
         allFilters: allItems,
         splitFilters: splitItems,
-        filterItem: splitItems,
+        filterItem: this.props.isFromRWD ? allItems : splitItems,
         filterBtnTitle: leftOverFilterCount
        });
     }
