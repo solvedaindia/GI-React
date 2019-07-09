@@ -66,6 +66,17 @@ class PdpComponent extends React.Component {
       });
     });
 
+    const defaultPincodeData = {
+      pincodeServiceable: null,
+    };
+
+    this.setState({
+      selectedSku: skuDataArr,
+      isLoading: false,
+      skuData: resolvedSkuData,
+      pincodeData: defaultPincodeData
+    });
+
     this.callPinCodeAPI(skuDataArr, resolvedSkuData);
   }
 
@@ -115,9 +126,7 @@ class PdpComponent extends React.Component {
       .get(pinCodeAPI + appCookie.get('pincode'), dataParams)
       .then(response => {
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: response.data.data,
         });
       })
@@ -130,9 +139,7 @@ class PdpComponent extends React.Component {
           error: 'Not a valid pincode',
         };
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: defaultPincodeData,
         });
       });

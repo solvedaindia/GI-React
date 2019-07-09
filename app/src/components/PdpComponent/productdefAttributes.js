@@ -27,7 +27,7 @@ class productDefAttribute extends React.Component {
 		}
 
 		if (count > 0 && selectedSwatches.indexOf(radioValue) === -1) {
-			// isDisabled = true;
+			isDisabled = true;
 		}
 
 		if (this.state.selectedOption === '') {
@@ -97,7 +97,7 @@ class productDefAttribute extends React.Component {
 									let isDisabled = '';
 
 									if (i > 0 && selectedSwatches.indexOf(value.name) === -1) {
-										// isDisabled = 'disabled-attr';
+										isDisabled = 'disabled-attr';
 									}
 									return (
 										<li className={`attributeList ${isDisabled}`} key={index}>
