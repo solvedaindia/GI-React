@@ -292,7 +292,6 @@
     
 }
 .deletItem {
-    
     .modal-body {
         padding: $base*6;
         .close {
@@ -332,7 +331,6 @@
                 color: $colorwhite;  
             }
         }
-        
     }
 }
 
@@ -390,6 +388,21 @@
         .modal-dialog {
             width: 100%;
             margin: auto;
+        }
+    }
+    .deletItem {
+        .modal-dialog {
+            width: 100%;
+        }
+        .del_modal {
+            padding: $base*3;
+            .userAction {
+                .delete,
+                .wishList {
+                    width: 50%;
+                    margin: 0;
+                }
+            }
         }
     }
 }
