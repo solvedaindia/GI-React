@@ -247,7 +247,7 @@ function updateProfile(reqBody, headers, callback) {
   const reqHeader = headerutil.getWCSHeaders(headers);
   const originUrl = constants.updateProfile.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   origin.getResponse(
     'PUT',
@@ -293,7 +293,7 @@ module.exports.validateUserDetails = function validateUserDetails(
 
   const originUrl = constants.validateProfile.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   origin.getResponse(
     'POST',
@@ -687,7 +687,7 @@ module.exports.forgotPassword = function forgotPassword(
 
   const originUserUrl = constants.forgotPassword.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
@@ -755,7 +755,7 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
 
   const originUrl = constants.updateProfile.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
 
   origin.getResponse(

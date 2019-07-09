@@ -64,11 +64,12 @@ module.exports = Object.freeze({
   notifyMe: `${prodWcsResourceUrl}/{{storeId}}/GINotifyUser/saveUserAndProductDetails`,
   ordersList: `${prodWcsResourceUrl}/{{storeId}}/order/@history`,
   orderDetail: `${prodWcsResourceUrl}/{{storeId}}/order/{{orderId}}`,
+  ongoingOrders: `${prodWcsResourceUrl}/{{storeId}}/GIOrderStatus/trackOrder`,
   orderDetailOMS: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/findOrderById/{{orderId}}?responseFormat=json`,
   initiateBDPayment: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/checksum`,
   verifyBDPayment: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/updatePIAndVerifyCheckSum`,
   experienceStore: `${prodWcsResourceUrl}/{{storeId}}/GIStore/findStore?pincode={{pincode}}&partNumber={{partNumber}}`,
   invoiceDetails: `${prodWcsResourceUrl}/{{storeId}}/giInvoice/getInvoiceDetails?invoiceNum={{invoiceNo}}`,
-  storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/pincodesearch1/physicalidentifier/{{gi_storeId}}`,
+  storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreIds?{{queryParams}}&responseFormat=json`,
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
 });

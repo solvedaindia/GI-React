@@ -20,31 +20,34 @@ class OrderItem extends React.Component {
     });
   }
 
-  proceedToTrackOrder() {
-    this.props.renderSelectionPro();
+  proceedToTrackOrder(trackOrderData) {
+    console.log('TackORderData --- ',trackOrderData);
+    this.props.renderSelectionPro(trackOrderData);
   }
 
   render() {
-    console.log('isGuestTrack----', this.props.isGuestTrackOrderPro);
+    console.log('isGuestTrack----', this.props.orderItemData);
+    const orderData = this.props.orderItemData;
+
     return (
       <>
         <div className="tabBar clearfix">
           <ul className="heading clearfix">
             <li className="list">
               <span className="heading-top">Order ID</span>{' '}
-              <span className="heading-sub">1102400467</span>
+              <span className="heading-sub">{orderData.orderID}</span>
             </li>
             <li className="list">
               <span className="heading-top">Ordered on</span>{' '}
-              <span className="heading-sub">Fri, 21 Dec 2018</span>
+              <span className="heading-sub">{orderData.orderDate}</span>
             </li>
             <li className="list">
               <span className="heading-top">Status</span>{' '}
-              <span className="heading-sub">Partially Shipped</span>
+              <span className="heading-sub">{orderData.orderStatus}</span>
             </li>
             <li className="list">
               <span className="heading-top">Total</span>{' '}
-              <span className="heading-sub">₹60,000</span>
+              <span className="heading-sub">₹{orderData.orderSummary.netAmount}</span>
             </li>
           </ul>
           <button
@@ -59,16 +62,21 @@ class OrderItem extends React.Component {
           {/* {this.state.isExpend ? <div className={`orderSummery ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
             <OrderSummery />
           </div> : null} */}
-          <div
-            className={`orderSummery  clearfix ${
-              this.state.isExpend ? `heightActive` : `heightInActive`
-            }`}
-          >
-            <OrderSummery />
+          <div className={`orderSummery  clearfix ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
+            <OrderSummery summeryDataro={orderData.orderSummary}
+              addressDataPro={orderData.address}
+              paymentMethodPro={orderData.paymentMethod}
+              invoiceDataPro={orderData.invoices} />
           </div>
-          <OrderProduct
-            proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
-          />
+          {orderData.orderItems.map((data, key) => {
+            return (
+              <OrderProduct
+                proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
+                prodctDataPro={data}
+                allDataPro={this.props.orderItemData}
+              />
+            )
+          })}
         </div>
       </>
     );

@@ -1,21 +1,30 @@
 import React from 'react';
-//Redux Imports
+// Redux Imports
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
-import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
-
-import { Link, Route, withRouter } from 'react-router-dom';
+import {
+  getReleventReduxState,
+  fetchReleventSortingValue,
+  fetchReleventSortingValueByIndex,
+} from '../../../utils/utilityManager';
 
 const downArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
+  />
 );
 const upArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
+  />
 );
 const recommended = 'Interio Recommends';
 const price_L_H = 'Price Low to High';
@@ -26,7 +35,8 @@ class Sort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected: this.props.sortingIndexPro === '' ? 0 : this.props.sortingIndexPro,
+      selected:
+        this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
     };
@@ -43,7 +53,7 @@ class Sort extends React.Component {
     }
 
     this.setState({
-      active: !this.state.active
+      active: !this.state.active,
     });
   }
 
@@ -69,29 +79,34 @@ class Sort extends React.Component {
     if (!this.state.options) {
       return;
     }
-    //console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
-    return this.state.options.map((option, i) => {
-      
-      return (
-        <li
-          onClick={evt => this.handleClick(i)}
-          key={i}
-          className={"dropdownlist-item list " + (option === fetchReleventSortingValueByIndex(this.state.selected) ? 'dropdownlist-itemactive' : '')}
-        >
-          {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
-            {option}
-          {/* </Link> */}
-        </li>
-      );
-    });
+    // console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
+    return this.state.options.map((option, i) => (
+      <li
+        onClick={evt => this.handleClick(i)}
+        key={i}
+        className={`dropdownlist-item list ${
+          option === fetchReleventSortingValueByIndex(this.state.selected)
+            ? 'dropdownlist-itemactive'
+            : ''
+        }`}
+      >
+        {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
+        {option}
+        {/* </Link> */}
+      </li>
+    ));
   }
 
   render() {
-    
     return (
       <>
-        <h4 className='heading'>Sort</h4>
-        <div ref={node => { this.node = node; }} className="dropdown">
+        <h4 className="heading">Sort</h4>
+        <div
+          ref={node => {
+            this.node = node;
+          }}
+          className="dropdown"
+        >
           <div
             onClick={() => this.toggleDropdown()}
             className="dropdowntoggle dropdownlist-item"
@@ -99,26 +114,27 @@ class Sort extends React.Component {
             {fetchReleventSortingValueByIndex(this.state.selected)}
             {this.state.active ? upArrow : downArrow}
           </div>
-          <ul className={"dropdownlist " + (this.state.active ? 'dropdownlistactive' : '')}>{this.sortingOptions()}</ul>
+          <ul
+            className={`dropdownlist ${
+              this.state.active ? 'dropdownlistactive' : ''
+            }`}
+          >
+            {this.sortingOptions()}
+          </ul>
         </div>
       </>
     );
   }
-
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => {
-  return {
-    updateSortingValue: (value) => dispatch(actionCreators.sortingAction(value)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  updateSortingValue: value => dispatch(actionCreators.sortingAction(value)),
+});
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  return {
-
-  }
+  return {};
 };
 
 const withConnect = connect(
@@ -135,5 +151,3 @@ export default compose(
   withConnect,
   withRouter,
 )(Sort);
-
-
