@@ -59,7 +59,8 @@ export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter
 /* Newsletter Subscription Status API */
 export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
 /* store Id */
-export const storeId = '10151';
+// export const storeId = '10151';
+export const storeId = 'GodrejInterioESite';
 /* Access Token */
 export let accessToken = getTheAccessToken();
 /* Facebook AppId */

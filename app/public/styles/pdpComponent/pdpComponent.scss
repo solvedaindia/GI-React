@@ -3,11 +3,25 @@
 
 /* our-promises
 -----------------------------------*/
+.slideup, .slidedown {
+    max-height: 0;            
+    overflow-y: hidden;
+    -webkit-transition: max-height 100s ease-in-out;
+    -moz-transition: max-height 100s ease-in-out;
+    -o-transition: max-height 100s ease-in-out;
+    transition: max-height 100s ease-in-out;
+    animation-delay: 200ms;
+    
+}
+.slidedown {            
+    max-height: 75px ;                    
+}    
+
 /*-----slideUpPrice*/
-.sticky .slideUpPrice {
-    animation: slideup1 1000ms;  
+ .slideUpPrice {
+    animation: slideup1 100ms;  
     animation-duration: .9s;
-    animation-delay: 1000ms; 
+    animation-delay: 100ms; 
   }
   
   @keyframes slideup1 {
@@ -22,35 +36,48 @@
   }
 
 
-/*-----slideUpPriceoffer*/
-.sticky .slideUpPriceoffer {
-    animation: slideup2 3000ms;   
+// /*-----slideUpPriceoffer*/
+.slideUpPriceoffer {
+    animation: slideup2 100ms;  
     animation-duration: .9s;
-    animation-delay: 2000ms; 
+    animation-delay: 100ms; 
+    
   }
+
+  .divpriceOffer{
+    //   height:76px;
+    overflow: hidden;
+    padding: 10px 0;
+    background: #f7f8f8;
+    }
   
   @keyframes slideup2 {
-    0% { transform:translateY(20px); }
-    100% { transform:translateY(0px); }
+    0% {
+        transform:translateY(20px);
+         visibility: hidden;
+        }
+   100% { 
+       transform:translateY(0px);
+       visibility: visible; 
+   }
   }
 
   /*-----slideUpCart--*/
-  .sticky .slideUpCart {
-    animation: slideup3 9000ms;   
+  .slideUpCart {
+    animation: slideup3 100ms;  
     animation-duration: .9s;
-    animation-delay: 3000ms;    
+    animation-delay: 100ms;  
   }
   
   @keyframes slideup3 {
-    0% { 
-        transform:translateY(5px);   
-        
-    }
-    
-    100% { 
-        transform:translateY(0px);
-        
+    0% {
+        transform:translateY(20px);
+         visibility: hidden;
         }
+   100% { 
+       transform:translateY(0px);
+       visibility: visible; 
+   }
   }
 
 
@@ -75,7 +102,7 @@
     position: fixed;
     top: 0px;
     width: 100%;
-    animation: smoothScroll 1s forwards;
+    animation: smoothScroll 3s forwards;
     z-index: 4;    
     
   }
@@ -983,31 +1010,22 @@
 
 /*--------Sticky Pdp
 ---------------------------------*/
-.Pdpstickybar.sticky{
- .pdpstickyItem{
-  .product{
-    //   opacity: 1;
-  }
- }
-}
 .Pdpstickybar{    
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.19);
     padding:0;
     background: $greybg;
-    -webkit-transition: all 0.5s ease;
+    overflow: hidden;
+    -webkit-transition: all .5s ease;
     -moz-transition: position 10s;
     -ms-transition: position 10s;
     -o-transition: position 10s;
-    transition: all 0.5s ease;
-    display: none;
-  
-    // z-index: 9;
+    transition: all .5s ease;
+    
     .pdpstickyItem{
     .product{
         width:50%;        
         padding: 2px 0 0 5%;
-        float: left;
-        // opacity: 0;
+        float: left;       
         
         .productId{
             .text{
@@ -1063,7 +1081,7 @@
         .addCart{
            .addcartbtn{
                background: $black;
-               padding: 27px 57px;
+               padding: 27px 100px;
                text-align: center;               
                color:$colorwhite;
                border-radius: 0;

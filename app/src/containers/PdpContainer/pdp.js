@@ -25,7 +25,8 @@ class PdpContainer extends React.Component {
   	}
 
 	callPdpApi() {
-		const productId = this.props.match.params.productId
+		// const productId = this.props.match.params.productId
+		const productId = this.props.match.params.skuId
 		apiManager.get(pdpApi2 + productId)
 		.then(response => {
 			//console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));

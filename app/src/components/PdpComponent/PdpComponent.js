@@ -45,6 +45,7 @@ class PdpComponent extends React.Component {
 	componentDidMount() {
 		this.getResolveSkuData();
 		window.addEventListener('scroll', this.handleScroll);
+		// window.onscroll = function() {this.handleScroll()};
 		
 	}
 
@@ -155,25 +156,80 @@ class PdpComponent extends React.Component {
 		}
 	}
 //Scroll start
-	handleScroll() {
-		var header = document.getElementById("Pdpstickybar");
-    var sticky = header.offsetTop;		
-		if (window.pageYOffset > sticky) {
-			header.classList.add("sticky");
-		  } else {
-			header.classList.remove("sticky");
-		  }
-			header.style.display='block';
+	handleScroll() {	
+		var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
+	   var box1=163;
+	   //var box2=266;
+	   //var box3=616;
+	   // var box1 = document.getElementById("box1").offsetTop;
+	    var box2 = document.getElementById("priceId").offsetTop;
+	    var box3 = document.getElementById("box3").offsetTop;
+		var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+		var scrollbox1;
+		// console.log('headeroffset', headeroffset);
+		// console.log('scrollTop', scrollTop);		
+		// console.log('box1', box1);
+		// console.log('box2', box2);
 
-		  // header 
-		  var header = document.getElementById("header");
-		  var sticky = header.offsetTop;		
-		  if (window.pageYOffset > sticky) {
-			  header.classList.add("sticky");
-			} 			
-			else {
-			  header.classList.remove("sticky");
-			}
+		var scrollbox1=box1-scrollTop;
+		var scrollbox2=box2-scrollTop;
+		var scrollbox3=box3-scrollTop;
+	
+		console.log('scrollbox1', scrollbox1);
+		if(scrollbox1<= headeroffset){
+			document.getElementById("Pdpstickybar").classList.add('slidedown');			
+			setTimeout(() => {			
+			document.getElementById("topdiv1").classList.add('slideUpPrice');
+			document.getElementById("topdiv1").style.cssText = "opacity: 1;";			
+		}, 100);
+		}
+		
+		if(scrollbox1> headeroffset){			
+			setTimeout(() => {	
+			document.getElementById("Pdpstickybar").classList.remove('slidedown');
+			document.getElementById("topdiv1").classList.remove('slideUpPrice');	
+			document.getElementById("topdiv1").style.cssText = "opacity: 0;"
+			document.getElementById("box1").style.cssText = "opacity: 1;";	
+		}, 10);
+		}
+
+		/*------BOX2
+		-------------------*/
+		if(scrollbox2<= headeroffset){	
+			setTimeout(() => {	
+			document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
+			document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+		}, 0);
+		}
+		
+		if(scrollbox2> headeroffset){		
+			document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
+			document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
+		}
+
+		/*------BOX3
+		-------------------*/
+		if(scrollbox3<= headeroffset){	
+			document.getElementById("topdiv3").classList.add('slideUpCart');
+			document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+		}
+		
+		if(scrollbox3> headeroffset){		
+			document.getElementById("topdiv3").classList.remove('slideUpCart');
+			document.getElementById("topdiv3").style.cssText = "opacity: 0;"					
+		}
+
+		// header 
+		var header = document.getElementById("header");
+		var sticky = header.offsetTop;		
+		if (window.pageYOffset > sticky) 
+		{
+			header.classList.add("sticky");
+		} 			
+		else {
+			header.classList.remove("sticky");
+		}
 	}
 	//end
 
@@ -185,10 +241,10 @@ class PdpComponent extends React.Component {
 			<>
 			{!isLoading  &&
 			<>
-				{ isAddToCart !== 'true' &&
-			<div className='Pdpstickybar clearfix' id='Pdpstickybar'>			  
-			    <div className='pdpstickyItem'>				   
-					<div className="product slideUpPrice">
+				{ isAddToCart !== 'true' &&			
+			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
+			    <div className='pdpstickyItem clearfix'>				   
+					<div className="product" id="topdiv1" style={{opacity: '0'}}>
                        <div className='productId'>
 						 <span className='text'>Product ID:</span> 
 						 <span className='text'>{this.state.skuData.partNumber}</span>
@@ -202,13 +258,13 @@ class PdpComponent extends React.Component {
 					
 					<div className='cartofferprice-wrap'>
 					<div className='PriceofferCart'>
-					   <div className='divpriceOffer slideUpPriceoffer'>
-							<Price priceData={this.state.skuData}/>
+					   <div className='divpriceOffer' id="topdiv2">
+							<Price priceData={this.state.skuData} sticky={true}/>
 							<div className="accessories-offer">							
 								<span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories
 							</div>
 						</div>
-						<div className='addtoCart slideUpCart'>
+						<div className='addtoCart' id="topdiv3">
 							<AddToCart 
 								skuData={this.state.skuData}
 								sticky={true}
