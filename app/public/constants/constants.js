@@ -136,7 +136,14 @@ export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlis
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
 export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
-
+/* Store API */
+export const storeAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bycoordinates`;
+/* Store API City*/
+export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bylocation`;
+/* Store BY ID*/
+export const storeById = `${secureHttp}://${host}:${port2}/api/v1/storelocator/byId`;
+/* Google Map Key */
+export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
 /* Notify Me API */
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const StoreLinks = (props) => {
     return(
@@ -12,7 +13,10 @@ const StoreLinks = (props) => {
                     { props.name.children.map((links, i) => {
                         return (
                             <li className='list' key={i}>
-                                <a className='link' href={links.action}>{links.text} </a>
+                                <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
+                                    {links.text}
+                                </Link>
+                                {/* <a className='link' href={links.action}> </a> */}
                                
                             </li>
                         )})

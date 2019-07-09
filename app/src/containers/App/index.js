@@ -45,6 +45,8 @@ import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 import SearchContainer from '../Search Container/searchContainer';
 import CartDetail from '../CartContainer/cartContainer';
+import StoreLocator from '../../components/StoreLocator/storeLocator';
+import Directions from '../../components/StoreLocator/index';
 // import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
@@ -175,6 +177,9 @@ export default class App extends React.Component {
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
           <Route path="/cart" component={CartDetail} />
+          <Route path="/storelocator" component={StoreLocator} />
+          <Route path="/direction" component={Directions} />
+          
         </Switch>
         <FooterContainer />
       </div>
