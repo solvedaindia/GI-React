@@ -25,199 +25,187 @@ class FaqAnswers extends React.Component {
   render() {
     return (
         <div className="container">
-<br />
-<br />
-<br />
-<br />
-<h3 className="MyOd">My Orders</h3>
-<div className="panel-group" id="accordion">
-    <div className="faqHeader">General questions</div>
-    {/* <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Do you ship to my city and location?</a>
-            </h4>
-        </div>
-        <div id="collapseOne" className="panel-collapse collapse in">
-            <div className="panel-body">
-            We deliver in the following place currently<br/><h3  className="panel-body">Tamil Nadu</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Andhra Pradesh</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Karnataka</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Andhra Pradesh</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Tamil Nadu</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
+          <br />
+          <br />
+          <br />
+          <br />
+          <h3 className="MyOd">My Orders</h3>
+          <div className="panel-group" id="accordion">
+            <div className="faqHeader">General questions</div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseOne">How do I become a registered member of Godrej Interio ?</a>
+                </h4>
+              </div>
+              <div id="collapseOne" className="panel-collapse collapse in">
+                <div className="panel-body">
+                Click on the 'Register' link on the top right-hand side of every page on Godrej Interio . This will open a window where you need to: fill in your basic details, choose a password for your account, and click on the 'Sign Up' button to complete your registration!
+                </div>
+              </div>
             </div>
-        </div>
-    </div> */}
-        <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Do you ship to my city and location?</a>
-            </h4>
-        </div>
-        <div id="collapseOne" className="panel-collapse collapse in">
-            <div className="panel-body">
-            We deliver in the following place currently<br/><h3  className="panel-body">Tamil Nadu</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Andhra Pradesh</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Karnataka</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Andhra Pradesh</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
-            <br/><h3  className="panel-body">Tamil Nadu</h3><br/><p className="panel-body">Aanamalai, Agra, Ahmedabad, Alappuzha, Aler, Alibaug, Alwar, Ambarnath, Amtala, Anand, Anikorai, Ankleshwar, Arnala, Asansol, Athikunna, Athipalli, Aurangabad, Avanshi, Badlapur, Bahadurgarh, Bangalore, Bangarpet, Bawal, Bellevue, Bharuch, Bhiwadi, Bhongir,</p>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseTen">What are the benefits to registering with Godrej Interio ?</a>
+                </h4>
+              </div>
+              <div id="collapseTen" className="panel-collapse collapse">
+                <div className="panel-body">
+                Discount coupns details if any
+                </div>
+              </div>
             </div>
-        </div>
-</div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">What is the estimated delivery time?</a>
-            </h4>
-        </div>
-        <div id="collapseTen" className="panel-collapse collapse">
-            <div className="panel-body">
-               Two to five working days. 
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseTen">How do I change my account password?</a>
+                </h4>
+              </div>
+              <div id="collapseTen" className="panel-collapse collapse">
+                <div className="panel-body">
+                To change your password, login and choose the My Profile options under your Account name. Here you can change your password by entering your current password and the new password.
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">What is the estimated delivery time?</a>
-            </h4>
-        </div>
-        <div id="collapseTen" className="panel-collapse collapse">
-            <div className="panel-body">
-               Two to five working days. 
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseEleven">My password is not working, how do I Sign- In?</a>
+                </h4>
+              </div>
+              <div id="collapseEleven" className="panel-collapse collapse">
+                <div className="panel-body">
+                If you are not able to login using your password, try resetting your password.
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">How do I track my order status?</a>
-            </h4>
-        </div>
-        <div id="collapseEleven" className="panel-collapse collapse">
-            <div className="panel-body">
-                All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
-            </div>
-        </div>
-    </div>
 
-    <div className="faqHeader">Sellers</div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Is there a first time customer discount?</a>
-            </h4>
-        </div>
-        <div id="collapseTwo" className="panel-collapse collapse">
-            <div className="panel-body">
-                Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
+            <div className="faqHeader">Sellers</div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseTwo">I have forgotten my password. How do I login to my account?</a>
+                </h4>
+              </div>
+              <div id="collapseTwo" className="panel-collapse collapse">
+                <div className="panel-body">
+                Click on 'Login' link on the top right hand side of the page. This will open a window where you will see a 'Forgot Password?' link. Provide your registered email address and we will email you instructions for getting a new password.
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">What warranty does Godrej Interio have for its products?</a>
-            </h4>
-        </div>
-        <div id="collapseThree" className="panel-collapse collapse">
-            <div className="panel-body">
-               I want to customize one of your products, can I do that?:
-                <ul>
-                    <li>Register an account</li>
-                    <li>Activate your account</li>
-                    <li>Go to the <strong>Themes</strong> section and upload your theme</li>
-                    <li>The next step is the approval step, which usually takes about 72 hours.</li>
-                </ul>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseThree">I am not able to find the Godrej Interio newsletter or emails in my inbox.</a>
+                </h4>
+              </div>
+              <div id="collapseThree" className="panel-collapse collapse">
+                <div className="panel-body">
+                Sometimes, our newsletter may go in the junk or spam box of your email. If you find the newsletters from Godrej Interio  in junk/spam box, please mark them as 'not spam' and add the sender to your contact. If you are using Gmail, our emails may also be under the Promotions or Updates tab. In such a case, just drag the email to the Primary tab.
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Want to customize one of your products, can I do that?</a>
-            </h4>
-        </div>
-        <div id="collapseFive" className="panel-collapse collapse">
-            <div className="panel-body">
-                Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
-                <br />
-            </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Are there any delivery charges or installation charges?</a>
-            </h4>
-        </div>
-        <div id="collapseSix" className="panel-collapse collapse">
-            <div className="panel-body">
-                There are a number of reasons why you should join us:
-                <ul>
-                    <li>A great 70% flat rate for your items.</li>
-                    <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                    <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
-            </h4>
-        </div>
-        <div id="collapseEight" className="panel-collapse collapse">
-            <div className="panel-body">
-                The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment. 
-            </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
-            </h4>
-        </div>
-        <div id="collapseNine" className="panel-collapse collapse">
-            <div className="panel-body">
-                Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
-                The minimum amount of your balance should be at least 70 USD. 
-            </div>
-        </div>
-    </div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseFive">How do I track the progress of an order?
+                    </a>
+                </h4>
+              </div>
+              <div id="collapseFive" className="panel-collapse collapse">
+                <div className="panel-body">
+                Once your order has been shipped, you will receive an email and an SMS notification with details of the order. You can track the shipment by clicking on the link provided in the email.
 
-    <div className="faqHeader">Buyers</div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a>
-            </h4>
-        </div>
-        <div id="collapseFour" className="panel-collapse collapse">
-            <div className="panel-body">
-                Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live preview. 
-                Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                <br />
-                Once the transaction is complete, you gain full access to the purchased product. 
+You can also track your order by visiting www.Godrej Interio .com and clicking on the Track Your Order link located in the upper right-hand corner of the website. From there, you can either login, or type in your order information to get tracking.
+                  <br />
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div className="panel panel-default">
-        <div className="panel-heading">
-            <h4 className="panel-title">
-                <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
-            </h4>
-        </div>
-        <div id="collapseSeven" className="panel-collapse collapse">
-            <div className="panel-body">
-                Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures its smooth operation.
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseSix">What is the meaning of the different tracking status flags?</a>
+                </h4>
+              </div>
+              <div id="collapseSix" className="panel-collapse collapse">
+                <div className="panel-body">
+                In Transit: Your package is on the way to the destination.
+
+Delivered: Your item has been delivered.
+
+Returned to Origin (RTO): Your item has been returned to the Godrej Interio  warehouse.
+                </div>
+              </div>
             </div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseEight">How do I track the progress of an order??</a>
+                </h4>
+              </div>
+              <div id="collapseEight" className="panel-collapse collapse">
+                <div className="panel-body">
+                Once your order has been shipped, you will receive an email and an SMS notification with details of the order. You can track the shipment by clicking on the link provided in the email.
+
+You can also track your order by visiting www.Godrej Interio .com and clicking on the Track Your Order link located in the upper right-hand corner of the website. From there, you can either login, or type in your order information to get tracking.
+                </div>
+              </div>
+            </div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseNine">What happens after the order gets shipped? Does it directly get delivered?</a>
+                </h4>
+              </div>
+              <div id="collapseNine" className="panel-collapse collapse">
+                <div className="panel-body">
+                Often items are procured from various vendors across the country and sometimes have to be transported from far-flung parts of your own city or neighbouring areas. In such cases, the item gets shipped from the vendor to our warehouse and then to you. We send regular email updates about the whereabouts of your order to keep you informed of where your item is in the shipping process.
+                </div>
+              </div>
+            </div>
+
+            <div className="faqHeader">Buyers</div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseFour">What does it mean when my item has reached my state or city?</a>
+                </h4>
+              </div>
+              <div id="collapseFour" className="panel-collapse collapse">
+                <div className="panel-body">
+                If you receive an email telling you that your item has reached your state or city, it is because it was shipped from a distant location and has one more step to go before it reaches you. Before you know it, it will be out to get delivered.
+                  <br />
+                  Once the transaction is complete, you gain full access to the purchased product.
+                </div>
+              </div>
+            </div>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h4 className="panel-title">
+                  <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseSeven">I am unable to track my order after receiving the tracking number (AWB)?</a>
+                </h4>
+              </div>
+              <div id="collapseSeven" className="panel-collapse collapse">
+                <div className="panel-body">
+                Godrej Interio  generates and sends the tracking number (AWB Number) as soon as our courier partners collect the package from the warehouse. However, the courier partners may take between 24 to 48 hours to update the tracking details on their website and hence, your order may not be tracked during this period. If your package was recently shipped, try using the AWB number after 24 hours.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-</div>
     );
   }
 }

@@ -99,7 +99,7 @@ index: 0
               <br/>
               <br/>
               <br/>
-              <div className="crouselBAckground">
+              <div className="crouselBAckgrounding"><br/>
                   <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                   <WardrobesTypes/>
                   
@@ -157,7 +157,7 @@ index: 0
        
                  <div className="panel panel-default">
         <div className="panel-heading">
-            <h4 className="panel-title">
+            <h4 >
                 <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">What do I need to start my project?</a>
             </h4>
         </div>
@@ -169,7 +169,7 @@ index: 0
     </div>
     <div className="panel panel-default">
         <div className="panel-heading">
-            <h4 className="panel-title">
+            <h4>
                 <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">What warranty does Godrej Interio have for its products?</a>
             </h4>
         </div>
@@ -187,7 +187,7 @@ index: 0
     </div>
     <div className="panel panel-default">
         <div className="panel-heading">
-            <h4 className="panel-title">
+            <h4>
                 <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Want to customize one of your products, can I do that?</a>
             </h4>
         </div>
@@ -200,14 +200,18 @@ index: 0
     </div>
     <div className="panel panel-default">
         <div className="panel-heading">
-            <h4 className="panel-title">
+            <h4>
                 <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Are there any delivery charges or installation charges?</a>
             </h4>
+            <br></br>
         </div>
         <div id="collapseSix" className="panel-collapse collapse">
             <div className="panel-body">
                 There are a number of reasons why you should join us:
                 <ul>
+                    <li>A great 70% flat rate for your items.</li>
+                    <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
+                    <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
                     <li>A great 70% flat rate for your items.</li>
                     <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
                     <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
@@ -222,13 +226,13 @@ index: 0
                </div>
                <div className="container">
                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
-                 <div class="text-block">
-                   <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
-                     alt="rectangle" />
-                   <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
-                   <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
+                 <div class="text-blocks">
+                   <h1 className="Image-gallery-Copy-3">Our store</h1>
+                   <h4 className="Image-gallery-Copy-3 ">Experience our store facilities</h4>
+                   <p2 className="A-one-stop-shop-inte">Experience our wardrobe at <span className="spanish">Vikroli Godrej Store (1.6 km away)</span><br/>
+You can find more stores around you.<br />
                      the home you've always wanted</p2> <br />
-                   <button className="seeMore">Know More</button>
+                   <button className="seeMored">Find More Stores</button>
                  </div>
 
                </div>
@@ -251,7 +255,8 @@ index: 0
 
                    Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
                    India’s largest engineering and consumer product groups.</p1>
-                 <br /><button className="Read-More ">Read More</button>
+                 <br /><br/><br /><br/><br /><br/><br /><br/>
+                 <button className="Read-More">Read More</button>
                </div>
 
                <div></div>

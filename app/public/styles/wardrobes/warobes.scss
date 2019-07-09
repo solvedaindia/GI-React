@@ -4,7 +4,7 @@
 
 .Kitchen-11 {
     width: 1440px;
-    height: 7350px;
+    height: 6878px;
     background-color: #ffffff;
   }
   .Rectangle {
@@ -511,8 +511,10 @@ react-slideshow-container {
 }
 
 .text-blocks {
+  height: 261px;
+  width: 540px;
   position: absolute;
-  top: 93%;
+  top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 background-color: rgba(255, 255, 255, .4);
@@ -530,13 +532,14 @@ background-color: rgba(255, 255, 255, .4);
   margin-top: 50px;
   width: 1440px;
   height: 471px;
-  background-color: rgb(126, 126, 175)
+  background-color:#F5F5F5;	
 }
 .About-Godrej-Interio {
+  margin-left: 583px;
   height: 41px;
   font-family: CeraGodrejInterio;
   font-size: 34px;
-  font-weight: 500;
+  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -544,20 +547,20 @@ background-color: rgba(255, 255, 255, .4);
   color: #000000;
 }
 .Godrej-Interio-is-In {
-  width: 1140px;
   height: 206px;
   font-family: CeraGodrejInterio;
-  font-size: 14px;
+  font-size: 19px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: white;
+  color:black;
   margin-left: 40px;
 }
 .Read-More {
-  width: 81px;
+  // width: 81px;
+  margin-left: 307px;
   height: 19px;
   font-family: CeraGodrejInterio;
   font-size: 16px;
@@ -601,7 +604,12 @@ background-color: rgba(255, 255, 255, .4);
   .crouselBAckground {
     width: 1440px;
     height: 1023x;
-    background-color:rgb(183, 183, 236)
+    background-color:#f7f8f8
+  }
+  .crouselBAckgrounding {
+    width: 1440px;
+    height: 1023px;
+    background-color:#f7f8f8
   }
   .Types-of-Modular-War {
     height: 36px;
@@ -696,7 +704,7 @@ background-color: rgba(255, 255, 255, .4);
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -711,3 +719,20 @@ background-color: rgba(255, 255, 255, .4);
     text-align: center;
   
   }
+  .spanish {
+    color: #036cc5;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+.A-one-stop-shop-inte{
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+.seeMored {
+  width: 200px;
+  height: 46px;
+  background-color: #070707;
+}

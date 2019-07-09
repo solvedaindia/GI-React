@@ -2,11 +2,15 @@ import React from 'react';
 import MediaPress from '../../components/aboutUs/mediaPress';
 
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
-import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/about-us/aboutUs.scss'
 import OurProcess from '../../components/aboutUs/ourProcess';
-
+import apiManager from '../../utils/apiManager';
+import {
+  espotAPI,
+  storeId,
+  accessToken,
+} from '../../../public/constants/constants';
 
 export class AboutUs extends React.Component {
   constructor(props) {
@@ -16,15 +20,35 @@ export class AboutUs extends React.Component {
 
     this.state = {
       index: 0,
-      // imgList: [img1, img2, img3, img4, img5]
-      // homepageLayout: null,
-      // isLoading: false,
-      // error: null,
-      // ipData: null,
+      espotName: ""
     };
   }
 
-  
+  getEspotData() {
+    console.log('test=', espotAPI + this.state.espotName);
+    apiManager
+      .get(espotAPI + "TestApi")
+      .then(response => {
+        console.log("our response", response.data.data)
+        const {data} = response || {};
+        this.setState({
+          pageLayoutEspot: data && data.data,
+          isLoading: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('about-us ERROR');
+      });
+  }
+
+  componentDidMount() {
+    this.getEspotData();
+  }
+
 
   
 
