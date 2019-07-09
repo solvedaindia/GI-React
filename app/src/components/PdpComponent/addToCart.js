@@ -56,6 +56,10 @@ class addToCartComponent extends React.Component {
 
   /* find inventory of the product */
   findInventory = () => {
+    setTimeout(() => {	
+      var header = document.getElementById("header");
+      header.classList.remove("sticky");
+    }, 2000);
     console.log('this.propsthis.props=>>', this.props);
     const pincode = appCookie.get('pincode');
     let quantity = 1;
@@ -162,12 +166,17 @@ class addToCartComponent extends React.Component {
 
   /* render buttons */
   renderButton(props, quantity) {
+    let btnId = 'stickyBox';
+		if(!this.props.sticky) {
+			btnId = 'box3';
+    }
+    
     if(!props.pincodeServiceable) {
       return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
       return <NotifyMe partNumber={this.props.skuData.partNumber} />
     } 
-    return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+    return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
 
   render() {

@@ -22,6 +22,8 @@ import { pinCodeAPI } from '../../../public/constants/constants';
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = <img src={require('../../../public/images/share.svg')} />;
 
+
+
 class PdpComponent extends React.Component {
   constructor() {
     super();
@@ -34,9 +36,10 @@ class PdpComponent extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getResolveSkuData();
-  }
+	componentDidMount() {
+		this.getResolveSkuData();
+		window.addEventListener('scroll', this.handleScroll);		
+	}
 
   /* get sku resolved data */
   getResolveSkuData(resolvedSkuId = null) {
@@ -145,16 +148,134 @@ class PdpComponent extends React.Component {
       window.scrollTo(0, 0);
     }
   }
- 
+ //Scroll start
+ handleScroll() {	
+  var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
+   var box1=163;
+   //var box2=266;
+   //var box3=616;
+   // var box1 = document.getElementById("box1").offsetTop;
+    var box2 = document.getElementById("priceId").offsetTop;
+    var box3 = document.getElementById("box3").offsetTop;
+  var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+  var scrollbox1;
+  // console.log('headeroffset', headeroffset);
+  // console.log('scrollTop', scrollTop);		
+  // console.log('box1', box1);
+  // console.log('box2', box2);
+
+  var scrollbox1=box1-scrollTop;
+  var scrollbox2=box2-scrollTop;
+  var scrollbox3=box3-scrollTop;
+
+  console.log('scrollbox1', scrollbox1);
+  if(scrollbox1<= headeroffset){
+    document.getElementById("Pdpstickybar").classList.add('slidedown');			
+    setTimeout(() => {			
+    document.getElementById("topdiv1").classList.add('slideUpPrice');
+    document.getElementById("topdiv1").style.cssText = "opacity: 1;";			
+  }, 100);
+  }
+  
+  if(scrollbox1> headeroffset){			
+    setTimeout(() => {	
+    document.getElementById("Pdpstickybar").classList.remove('slidedown');
+    document.getElementById("topdiv1").classList.remove('slideUpPrice');	
+    document.getElementById("topdiv1").style.cssText = "opacity: 0;"
+    document.getElementById("box1").style.cssText = "opacity: 1;";	
+  }, 10);
+  }
+
+  /*------BOX2
+  -------------------*/
+  if(scrollbox2<= headeroffset){	
+    setTimeout(() => {	
+    document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
+    document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+  }, 0);
+  }
+  
+  if(scrollbox2> headeroffset){		
+    document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
+    document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
+  }
+
+  /*------BOX3
+  -------------------*/
+  if(scrollbox3<= headeroffset){	
+    document.getElementById("topdiv3").classList.add('slideUpCart');
+    document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+  }
+  
+  if(scrollbox3> headeroffset){		
+    document.getElementById("topdiv3").classList.remove('slideUpCart');
+    document.getElementById("topdiv3").style.cssText = "opacity: 0;"					
+  }
+
+  // header 
+  var header = document.getElementById("header");
+  var sticky = header.offsetTop;		
+  if (window.pageYOffset > sticky) 
+  {
+    header.classList.add("sticky");
+  } 			
+  else {
+    header.classList.remove("sticky");
+  }
+}
+//end
   render() {
     const { isLoading } = this.state;
     const wishlistArr = getOnlyWishlistUniqueIds();
     const isAddToCart = appCookie.get('isPDPAddToCart');
     return (
+
+      <>
+			{!isLoading  &&
+			<>
+				{ isAddToCart !== 'true' &&			
+			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
+			    <div className='pdpstickyItem clearfix'>				   
+					<div className="product" id="topdiv1" style={{opacity: '0'}}>
+                       <div className='productId'>
+						 <span className='text'>Product ID:</span> 
+						 <span className='text'>{this.state.skuData.partNumber}</span>
+						</div>
+
+						<h4 className='heading'>
+							{this.state.skuData.productName}
+						</h4>
+						<div className='lockerText'>Locker, Mirror, OHU & Drawer in Royal Ivory Colour</div>
+					</div>
+					
+					<div className='cartofferprice-wrap'>
+					<div className='PriceofferCart'>
+					   <div className='divpriceOffer' id="topdiv2">
+							<Price priceData={this.state.skuData} sticky={true}/>
+							<div className="accessories-offer">							
+								<span><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories</span>
+							</div>
+						</div>
+						<div className='addtoCart' id="topdiv3">
+							<AddToCart 
+								skuData={this.state.skuData}
+								sticky={true}
+								pinCodeData={this.state.pincodeData}
+								handleAddtocart={this.handleAddtocart.bind(this)} 
+							/>
+						</div>
+					</div>
+					</div>
+			    </div>
+			</div>
+				}
+			</>
+			}
       <div className="galleryArea">
         {!isLoading ? (
           <>
-            {isAddToCart === 'true1' && (
+            {/* {isAddToCart === 'true1' && (
               <Row>
                 <Col md={7} sm={12} xs={12}>
                   <div className="product">
@@ -183,7 +304,8 @@ class PdpComponent extends React.Component {
                   />
                 </Col>
               </Row>
-            )}
+            )
+            } */}
             <Row className="no-margin">
               <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
@@ -274,6 +396,7 @@ class PdpComponent extends React.Component {
         </Grid>
         <PdpEspot espot={this.props.espot} />
       </div>
+      </>
     );
   }
 }
