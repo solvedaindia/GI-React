@@ -356,7 +356,6 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: $base * 2.25;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -392,7 +391,6 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: $base * 3;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -958,6 +956,18 @@ section.tablecarousel {
     .plp-products {
       padding: 64px 0 60px 0;
       width: 1140px;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2.25;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 3;
+            }
+          }
+        } 
+      } 
     }
     .headingTitle{
       font-size: $base * 7;
@@ -1028,6 +1038,18 @@ section.tablecarousel {
   .plpCategories {
     .plp-products {
       padding: 0px 0 60px 0;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 2.25;
+            }
+          }
+        } 
+      } 
     }
     .headingTitle{
       font-size: $base * 3;
