@@ -56,14 +56,14 @@ class RWDSort extends React.Component {
     console.log('what Sort Value --- ',this.props.sortingIndexPro);
     return (
       <>
-        <button className='rwdSortBtn' onClick={evt => this.showSortOptions()}>Sort</button>
+        <button className='sortBy' onClick={evt => this.showSortOptions()}><img className='sortbyicon' src={require('../../../../public/images/sort.svg')} /> Sort</button>
 
         {this.state.isShowSortOptions ?
           <div onClick={evt => this.showSortOptions()} className='sortOutterCont'>
             <div className='sortInnerCont'>
               <div>
                 <label className='sortTxt'>Sort</label>
-                <button onClick={evt => this.showSortOptions()} className='sortCancelBtn'>Cancel</button>
+                <button onClick={evt => this.showSortOptions()} className='sortCancelBtn'><img className='sortByCloseIcon' src={require('../../../../public/images/close.svg')} /></button>
               </div>
               <div className='clearfix' />
               <div>

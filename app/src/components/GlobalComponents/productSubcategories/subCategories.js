@@ -28,6 +28,38 @@ class SubCategories extends React.Component {
       nextArrow: nextArrowImg,
       // prevArrow,
       // nextArrow,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+          },
+        },
+      ],
     };
   }
 
@@ -40,8 +72,7 @@ class SubCategories extends React.Component {
   }
 
   fetchSubCategoryData(subCatData) {
-    
-    const data = subCatData
+    const data = subCatData;
     if (data) {
       const itemsArr = data.map((item, index) => (
         <SubCatItem key={index} itemData={item} />
@@ -53,7 +84,7 @@ class SubCategories extends React.Component {
   }
 
   render() {
-    console.log('dkdkddk -- ',this.state.subCatItem)
+    console.log('dkdkddk -- ', this.state.subCatItem);
     return (
       <section className="tablecarousel">
         <div className="container">
