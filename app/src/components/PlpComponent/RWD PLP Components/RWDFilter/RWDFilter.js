@@ -1,23 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import injectSaga from '../../../../utils/injectSaga';
 import injectReducer from '../../../../utils/injectReducer';
 import reducer from '../../../../containers/PlpContainer/reducer';
 import saga from '../../../../containers/PlpContainer/saga';
-import { compose } from 'redux';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
 import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDFilterCore from './RWDFilterCore';
 
 const downArrow = (
-  <img className='dropdownArrow' src={require('../../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
+  />
 );
 const upArrow = (
-  <img className='dropdownArrow' src={require('../../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
+  />
 );
-
 
 class RWDFilter extends React.Component {
   constructor() {
@@ -25,7 +30,7 @@ class RWDFilter extends React.Component {
     this.state = {
       selected: 0,
       options: ['recommended', 'price_L_H', 'price_H_L', 'newArrival'],
-      //facetMap: new Map(),
+      // facetMap: new Map(),
       facetItem: null,
       facetArr: [],
       checked: false,
@@ -106,7 +111,6 @@ class RWDFilter extends React.Component {
 
   // onCancelBtnClick() {
 
-
   //   this.toggleDropdown();
   // }
 
@@ -132,7 +136,7 @@ class RWDFilter extends React.Component {
     //   return item.value;
 
     // })
-    //this.filterOptions();
+    // this.filterOptions();
   }
 
 
@@ -291,7 +295,7 @@ class RWDFilter extends React.Component {
 
     return (
       <>
-        <div className='mainFilter'>
+        <div className="mainFilter">
           <ul>
             {this.props.dataPro.map((item, index) => {
               return (
@@ -308,25 +312,21 @@ class RWDFilter extends React.Component {
         
 
       </>
-    )
+    );
   }
-
 }
 
-
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => {
-  return {
-    onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
+});
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  console.log('Zebraa MIN --- ', stateObj.updateFilter)
+  console.log('Zebraa MIN --- ', stateObj.updateFilter);
   return {
-    updatedFilter: stateObj.updateFilter
-  }
+    updatedFilter: stateObj.updateFilter,
+  };
 };
 
 const withConnect = connect(

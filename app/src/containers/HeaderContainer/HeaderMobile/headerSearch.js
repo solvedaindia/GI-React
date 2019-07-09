@@ -11,7 +11,7 @@ export class HeaderSearch extends React.Component {
     this.state = {
       inputText: '',
       searchData: [],
-    }
+    };
   }
 
   onBackBtn() {
@@ -25,12 +25,10 @@ export class HeaderSearch extends React.Component {
     });
   }
 
-  onSearchClick() {
-
-  }
+  onSearchClick() {}
 
   onLinkNavigation(searchTxt) {
-    //this.props.plpReduxStateReset();
+    // this.props.plpReduxStateReset();
     this.setState({
       inputText: searchTxt,
       searchData: [],
@@ -52,7 +50,6 @@ export class HeaderSearch extends React.Component {
         apiManager
           .get(autoSuggestAPI + searchText)
           .then(response => {
-
             this.setState({
               searchData: response.data.data.suggestionView[0].entry,
             });
@@ -61,7 +58,6 @@ export class HeaderSearch extends React.Component {
             console.log(error.message);
           });
       } else {
-
       }
     }
   }
@@ -70,15 +66,35 @@ export class HeaderSearch extends React.Component {
     const searchData = this.state.searchData;
     return (
       <>
-        <div className='searchBackBtn'>
-          <button onClick={this.onBackBtn.bind(this)} className='menuBtn'><img className='logoImg' src={require('../../../../public/images/LeftArrow.svg')} /></button>
-          <input id="searchInput" className='searchField' placeholder='Search for Rooms, Products, etc ' value={this.state.inputText} onChange={this.handleInputChange.bind(this)} type='text' />
-          {this.state.inputText !== '' ?
-            <button onClick={this.onClearClick.bind(this)}><img src={require('../../../../public/images/close.svg')} /></button> :
-            <button onClick={this.onSearchClick.bind(this)}><img src={require('../../../../public/images/RWD Assets/search.svg')} /></button>}
+        <div className="searchBackBtn">
+          <button onClick={this.onBackBtn.bind(this)} className="menuBtn">
+            <img
+              className="logoImg"
+              src={require('../../../../public/images/LeftArrow.svg')}
+            />
+          </button>
+          <input
+            id="searchInput"
+            className="searchField"
+            placeholder="Search for Rooms, Products, etc "
+            value={this.state.inputText}
+            onChange={this.handleInputChange.bind(this)}
+            type="text"
+          />
+          {this.state.inputText !== '' ? (
+            <button onClick={this.onClearClick.bind(this)}>
+              <img src={require('../../../../public/images/close.svg')} />
+            </button>
+          ) : (
+            <button onClick={this.onSearchClick.bind(this)}>
+              <img
+                src={require('../../../../public/images/RWD Assets/search.svg')}
+              />
+            </button>
+          )}
         </div>
 
-        <div className='searchBarHeader'>
+        <div className="searchBarHeader">
           {searchData.length > 0 && (
             <div
               id="autoSuggestDiv"
@@ -90,15 +106,26 @@ export class HeaderSearch extends React.Component {
                 <li className="list">
                   <a className="link" href="#">
                     Suggestions
-                </a>
+                  </a>
                   {searchData.map((item, index) => {
                     const searchItem = document.getElementById('searchInput')
                       .value;
                     if (index < 6) {
                       return (
                         <li className="list" key={index}>
-                          <Link className="link" to={{ pathname: '/search', search: `keyword=${item.term}`, }} onClick={() => this.onLinkNavigation(item.term)}>
-                            <strong> {item.term.substr(0, searchItem.length)} </strong> {item.term.substr(searchItem.length)}
+                          <Link
+                            className="link"
+                            to={{
+                              pathname: '/search',
+                              search: `keyword=${item.term}`,
+                            }}
+                            onClick={() => this.onLinkNavigation(item.term)}
+                          >
+                            <strong>
+                              {' '}
+                              {item.term.substr(0, searchItem.length)}{' '}
+                            </strong>{' '}
+                            {item.term.substr(searchItem.length)}
                           </Link>
                         </li>
                       );
@@ -109,7 +136,6 @@ export class HeaderSearch extends React.Component {
             </div>
           )}
         </div>
-
       </>
     );
   }

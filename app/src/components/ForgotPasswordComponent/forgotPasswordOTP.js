@@ -141,7 +141,7 @@ class ForgotPasswordOTP extends React.Component {
       });
       return;
     }
-    
+
     this.props.enteredOTPCallbackPro(this.state.inputText);
     this.props.cancelOTPPro();
   }
@@ -179,9 +179,13 @@ class ForgotPasswordOTP extends React.Component {
       titleOTP = <p className="text">Enter OTP sent to your mobile number</p>;
     }
     if (this.props.isFromMyProfilePro) {
-      titleOTP = <p className='myProfile-Subtitle'>Enter the verification code that has been OTP sent to your mobile number</p>
+      titleOTP = (
+        <p className="myProfile-Subtitle">
+          Enter the verification code that has been OTP sent to your mobile
+          number
+        </p>
+      );
     }
-    
 
     if (this.state.showOTPTxtField) {
       inputTxtField = (
@@ -201,20 +205,33 @@ class ForgotPasswordOTP extends React.Component {
       resendBtn = (
         <Button onClick={this.resendOTP.bind(this)} className="resend-otp">
           Resend OTP
+        </Button>
+      );
+    }
+
+    let finalBtn = (
+      <Button
+        onClick={this.proceedBtnPressed.bind(this)}
+        className="btn-block btn-bg"
+      >
+        {this.state.showOTPTxtField ? 'Proceed' : 'Back'}
       </Button>
-      )
-    }
-
-    let finalBtn = <Button onClick={this.proceedBtnPressed.bind(this)} className="btn-block btn-bg">
-      {this.state.showOTPTxtField ? 'Proceed' : 'Back'}
-    </Button>;
+    );
     if (this.props.isFromMyProfilePro) {
-      finalBtn = <div className="myProfile-btn">
-        <button className="btn-borderwhite" onClick={this.props.cancelOTPPro}>Cancel</button>
-        <button className="btn-borderwhite btn-submit" onClick={this.onOTPSubmit.bind(this)} >Submit</button>
-      </div>
+      finalBtn = (
+        <div className="myProfile-btn">
+          <button className="btn-borderwhite" onClick={this.props.cancelOTPPro}>
+            Cancel
+          </button>
+          <button
+            className="btn-borderwhite btn-submit"
+            onClick={this.onOTPSubmit.bind(this)}
+          >
+            Submit
+          </button>
+        </div>
+      );
     }
-
 
     return (
       <div className={animeClass}>
@@ -222,7 +239,11 @@ class ForgotPasswordOTP extends React.Component {
         <Form className={this.state.errorClass}>
           <FormGroup>
             {titleOTP}
-            {this.props.isFromMyProfilePro ? <label className='myProfile-otplabel'>OTP (Sent to xxxxx x{this.props.myProfileNumberPro})</label> : null}
+            {this.props.isFromMyProfilePro ? (
+              <label className="myProfile-otplabel">
+                OTP (Sent to xxxxx x{this.props.myProfileNumberPro})
+              </label>
+            ) : null}
             <div className="form-div enterotp-msg clearfix">
               {inputTxtField}
               {errorItem}

@@ -1,0 +1,337 @@
+@import '../variable';
+
+.cartDetails {
+    @include container-width;
+    margin: $base*6.5 auto;
+    .cartItem {
+        width: 64%;
+        display: inline-block;
+        margin-right: 2%;
+    }
+    .cartHeadDetails {
+        margin: 0;
+        padding: 0 0 $base*2;
+        border-bottom: 1px solid $darkAshGrey;
+        .title {
+            text-align: left;
+            width: 60%;
+            display: inline-block;
+            margin: 0;
+            font-family: $font-bold;
+        }
+        .cartCount {
+            font-size: $base*3;
+            color: $battleshipGrey;
+            margin-left: $base*3; 
+        }
+        .pincodeField {
+            position: relative;
+            width: 40%;
+            display: inline-block;
+            border: 1px solid $borderLight;
+            padding: $base;
+            .pinLogo {
+                position: absolute;
+            }
+            .pincodeEdit {
+                position: absolute;
+                top: $base;
+                right: $base*2;
+            }
+            .pincodeVal{
+                margin-left: $base*4;
+                border: transparent;
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+    .cartItem {
+        .prodList {
+            min-height: 195px;
+            height: auto;
+            border: 1px solid $borderLight;
+            border-bottom: none;
+            position: relative;
+            &:last-child {
+                border-bottom: 1px solid $borderLight;
+            }
+            .prodImg {
+                width: 29%;
+                min-height: 195px;
+                display: inline-block;
+                border-right: 1px solid $borderLight;
+            }
+            .prodDetails {
+                width: 71%;
+                display: inline-block;
+                vertical-align: top;
+                padding: 0 $base*1.5;
+                position: relative;
+                .prodTitle {
+                    font-size: $base*2;
+                    margin: $base*1.5 0 0;
+                }
+                .subTitle {
+                    color: $greyLight;
+                    font-size: $base*1.37;
+                    margin-bottom: $base*1.5;
+                }
+                .qytLabel {
+                    display: block;
+                    font-size: $base*1.25;
+                    color: $greyLight;
+                    font-family: $font-regular;
+                }
+                .qytList {
+                    width: 67px;
+                }
+                .dlvBy {
+                    margin: $base*2.25;
+                    font-size: $base*1.25;
+                    color: $battleshipGrey;
+                }
+                .date {
+                    font-size: $base*1.25;
+                    color: $black;
+                }
+                .price,
+                .shipping {
+                    position: absolute;
+                    right: $base*1.5;
+                }
+                .price {
+                    color: $cerulean;
+                    font-family: $font-bold;
+                    top: $base*1.5;
+
+                }
+                .shipping {
+                    color: $battleshipGrey;
+                    font-size: $base*1.5;
+                    top: $base*3.75;
+                }
+                .delCartItem,
+                .moveItem {
+                    position: absolute;
+                    bottom: 0;
+                }
+                .delCartItem {
+                    right: $base;
+                }
+                .moveItem {
+                    right: $base*4;
+                }
+            }
+        }
+    }
+    .orderSummary {
+        width: 33%;
+        display: inline-block;
+        vertical-align: top;
+        color: $black;
+        margin-left: 1%;
+        .promotion {
+            margin: 0;
+            padding: 0 0 $base*2;
+            border-bottom: 1px solid $darkAshGrey; 
+            .promoListItem {
+                position: relative;
+                border-bottom: 1px solid $borderLight; 
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+            .promoHead {
+                font-size: $base*2;
+                color: $battleshipGrey;
+                margin-bottom: $base; 
+                text-align: left;
+            }
+            .promoMsg {
+                font-size: $base*2;
+                color: $battleshipGrey;
+                
+            }
+            .promoCode {
+                font-size: $base*2.25;
+                color: $black;
+                font-family: $font-bold;
+                margin: $base*2 0 0 0;
+            }
+            .promoDesc {
+                font-size: $base*1.75;
+                color: $battleshipGrey;
+            }
+            .applyPromo {
+                position: absolute;
+                right: 0;
+                top: 0;
+                color: $cerulean;
+                font-size: $base*2;
+            }
+            .promoField {
+                .promoInput {
+                    width: 63%;
+                }
+                .applyBtn {
+                    width: 37%;
+                    background-color: $ashGrey;
+                    color: $colorwhite;
+                    border: 2px solid $ashGrey;
+                }
+                .promoInput,
+                .applyBtn {
+                    padding: $base;
+                }
+            }
+        }
+        .title {
+            text-align: left;
+            font-size: $base*2.25;
+            font-family: $font-bold;
+            margin: $base*3.75 auto;
+        }
+        .summary {
+            .val {
+                float: right;
+                overflow: hidden;
+            }
+            .shippingMsg {
+                display: block;
+                color: $battleshipGrey;
+                font-size: $base*1.5;
+            }
+            .emiInfo {
+                padding: 20px 0;
+                margin: 0;
+                border-top: 1px solid $darkAshGrey;
+                border-bottom: 1px solid $darkAshGrey;
+                position: relative;
+                .emiLogo {
+                    position: absolute;
+                    left: 0;
+                }
+                .emiMsg {
+                    margin: 0 $base*5 0;
+                }
+                .emiDetails {
+                    top: 20px;
+                    right: 0;
+                    position: absolute;
+                }
+            }
+            .totalAmt {
+                margin: $base*2 0;
+                .totalPrice {
+                    display: inline-block;
+                    font-size: $base*3;
+                    color: $cerulean;
+                    font-family: $font-bold;
+                }
+                .savingText {
+                    display: block;
+                }
+            }
+            .btnCheckout {
+                width: 100%;
+                background-color: $ashGrey;
+                color: $colorwhite;
+                margin-top: $base*4; 
+            }
+        }
+    }
+}
+.viewAllPopUp {
+    .modal-dialog {
+        width: 50%;
+        height: auto;
+    }
+    .heading {
+        font-size: $base*2.5;
+        color: $black;
+        font-family: $font-bold;
+        padding: $base*4 0; 
+        text-align: center;
+        margin: 0;
+    }
+    .promoList {
+        margin: 0;
+        padding: 0 $base*4;
+        .promoListItem {
+            border-bottom: 1px solid $borderLight;
+            position: relative;
+            &:last-child {
+                border-bottom: none; 
+            } 
+            .promoCode,
+            .promoDesc {
+                margin: 0;
+                padding: $base 0;
+            }
+            .promoCode {
+                font-size: $base*2.25;
+                color: $black;
+                font-family: $font-bold;
+            }
+            .promoDesc {
+                font-size: $base*2;
+                color: $battleshipGrey;
+                font-family: $font-regular;
+            }
+            .applyPromo {
+                position: absolute;
+                color: $cerulean;
+                font-size: $base*2;
+                right: $base*4;
+                top: $base;
+            }
+        }
+    }
+    
+}
+
+@media (min-width: 320px) and (max-width: 767px){
+    .cartDetails {
+        width: 100%;
+        margin: $base*2 auto;
+        .cartItem,
+        .orderSummary {
+            width: 100%;
+            display: block;
+            margin: 0;
+        }
+        .orderSummary {
+            padding: $base*2;
+        }
+        .cartItem {
+            .cartItemList {
+                padding: $base*2;
+            }
+        }
+        .cartHeadDetails{
+            .pincodeField {
+                width: 98%;
+                margin: auto 1%;
+            }
+            .title {
+                text-align: center;
+                padding: $base;
+                width: 100%;
+            }
+        }
+    }
+    .viewAllPopUp {
+        .modal-dialog {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .modal_emiInstallment {
+        .modal-dialog {
+            width: 100%;
+            margin: auto;
+        }
+    }
+}

@@ -6,26 +6,29 @@ import Price from './price';
 class productInfo extends React.Component {
   constructor() {
     super();
+    this.state = {
+      isActive: 'dataNotActive'
+    }
   }
 
   toggleOffers() {
-    const offers = document.getElementById('offers');
-    if (offers.style.display === 'none') {
-      offers.style.display = 'block';
+	let activeClass;
+    if (this.state.isActive === 'dataNotActive') {
+		activeClass = 'dataActive';
     } else {
-      offers.style.display = 'none';
-    }
+		activeClass = 'dataNotActive';
+	}
+    this.setState({
+      isActive: activeClass
+    })
   }
 
   render() {
-    let emiValue = false;
-    if (this.props.productData.emiData) {
-      emiValue = true;
-    }
 
     return (
       <>
         <Price priceData={this.props.productData} />
+        {this.props.pinCodeData.shippingCharge &&
         <div className="shippingCharge">
           Shipping Charges:{' '}
           <span className="bold">
@@ -33,6 +36,9 @@ class productInfo extends React.Component {
             {this.props.pinCodeData.shippingCharge}
           </span>
         </div>
+        }
+        { this.props.productData.promotions.length > 0 &&
+        <>
         <div className="accessories-offer">
           <div className="offerbg text"> % </div>
           <div className="discount-off text">
@@ -46,7 +52,7 @@ class productInfo extends React.Component {
             View Offer
           </a>
         </div>
-        <div id="offers">
+        <div id="offers" className={this.state.isActive}>
           <ul className="cashoffer-wrapper">
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>
@@ -56,6 +62,8 @@ class productInfo extends React.Component {
             ))}
           </ul>
         </div>
+        </>
+        }
         {this.props.productData.emiData &&
           this.props.productData.offerPrice >= 1500 && (
           <div className="starting-emitext">

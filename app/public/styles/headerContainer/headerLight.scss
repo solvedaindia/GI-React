@@ -1,0 +1,9 @@
+@import '../variable';
+
+.lighHeader {
+    background-color: $headerLight;
+    padding: $base*1.5;
+    .logo {
+        margin-left: 7%;
+    }
+}

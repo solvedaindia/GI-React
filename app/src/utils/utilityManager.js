@@ -2,8 +2,33 @@ import {
   wishlistDataCookie,
   wishlistIdCookie,
 } from '../../public/constants/constants';
+import LightHeader from '../components/HeaderComponent/headerL1/lightHeader';
+import HeaderContainer from '../containers/HeaderContainer';
 // import { utimes } from 'fs';
 
+/**
+ * Function to get current URL hostname and port
+ * @param {*}
+ */
+
+/**
+ * Function to get current URL hostname and port
+ * @param {*} pin
+ */
+export function validatePIN(pin) {
+  if (/^(\d{4}|\d{6})$/.test(pin)) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Function will pick the browser width *
+ */
+
+export function isMobile() {
+  return $(window).width() < 768;
+}
 /**
  * Function to Fetch specific data from Cookie store
  * @param {*} cname
@@ -63,7 +88,7 @@ export function fetchReleventSortingValue(value) {
 }
 
 export function fetchReleventSortingValueByIndex(index) {
-  console.log('it index --- ',index);
+  console.log('it index --- ', index);
   if (parseInt(index) === 3) {
     return 'Price Low to High';
   }
@@ -76,14 +101,13 @@ export function fetchReleventSortingValueByIndex(index) {
   return 'Interio Recommends';
 }
 
-
 /**
  * Function to save the Filter map object
  * @param {*} updatedFilter
  * @param {*} facetName
  */
 export function updateFilterMap(updatedFilter, facetName, currentFilter) {
-  console.log('it it --- ',updatedFilter, facetName, currentFilter)
+  console.log('it it --- ', updatedFilter, facetName, currentFilter);
   const filterMap = currentFilter.updateFilter;
   if (updatedFilter.length === 0) {
     filterMap.delete(facetName);
@@ -99,40 +123,31 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
  * @param {*} facetName
  */
 export function resolveBrowserFilters(filterResponse, browserFilters) {
-  var finalBrowserFilter = [];
+  const finalBrowserFilter = [];
   for (let i = 0; i < browserFilters.length; i++) {
     if (browserFilters[i][0] === 'facet') {
-      var reduxFilter = []
+      var reduxFilter = [];
 
-      const facetValue = browserFilters[i][1]
+      const facetValue = browserFilters[i][1];
       console.log('misss === ', facetValue);
       filterResponse.map((facetItem, index) => {
-        console.log('browser Filter Item -- ', facetItem)
+        console.log('browser Filter Item -- ', facetItem);
         const name = facetItem.facetName;
 
         facetItem.facetValues.map((innerItem, index) => {
-          console.log('browser Filter Item innerr -- ', innerItem)
+          console.log('browser Filter Item innerr -- ', innerItem);
           if (innerItem.value === facetValue) {
-            console.log('its Matched --- ',facetValue);
+            console.log('its Matched --- ', facetValue);
             reduxFilter.push(innerItem);
           }
-        }) //innerItem ended
-      }) //facetItem ended
-
-      
+        }); // innerItem ended
+      }); // facetItem ended
     }
   }
 
-
-
-
-
-
-
-
-  //0: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
-  //1: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
-  //Returns abaove array
+  // 0: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
+  // 1: {label: "Sofa Cum Beds", count: 5, value: "parentCatgroup_id_search:10051_13019"}
+  // Returns abaove array
 }
 
 /**
@@ -202,11 +217,15 @@ export function checkCompareWidget(compWidget, id) {
   const data = compWidget.find(prd => prd.id == id);
   if (data) {
     return compWidget.filter(prd => prd.id != id);
-  } else {
-    const skuData = compWidget.find(prd => prd.skuId == id);
-    if (skuData) {
-      return compWidget.filter(prd => prd.skuId != id);
-    }
   }
+  const skuData = compWidget.find(prd => prd.skuId == id);
+  if (skuData) {
+    return compWidget.filter(prd => prd.skuId != id);
+  }
+
   return compWidget;
+}
+
+export function is(val, type) {
+  return Object.prototype.toString.call(val) === `[object ${type}]`;
 }

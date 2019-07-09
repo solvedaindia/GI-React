@@ -94,7 +94,7 @@ class productDetail extends React.Component {
           <div className="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
-                <h3 className="heading"> Product Details</h3>
+                <h2 className="heading"> Product Details</h2>
               </Col>
             </Row>
             <Row>

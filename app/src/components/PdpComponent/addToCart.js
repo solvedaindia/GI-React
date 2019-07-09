@@ -12,11 +12,13 @@ import {
   updatetWishListCount,
   resetRemoveFromWishlistFlag,
 } from '../../actions/app/actions';
+import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
+import ExperienceStore from './experienceStore';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
-    super(props);
+	super(props);
     this.state = {
       addToCartPopup: null,
       loading: true,
@@ -35,7 +37,7 @@ class addToCartComponent extends React.Component {
 
   /* render delivery message */
   renderdeliveryMessage(props) {
-    if (!props.pincodeServiceable) {
+    if (props.pincodeServiceable === false) {
       let errorMsg = 'Pincode is not serviceable';
       if (props.error) {
         errorMsg = props.error;
@@ -45,8 +47,6 @@ class addToCartComponent extends React.Component {
     if (this.deliveryTime === '') {
       if (props.deliveryDateAndTime) {
         this.deliveryTime = props.deliveryDateAndTime;
-      } else {
-        this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
       }
     }
     return <div className="soldbyDealers">{this.deliveryTime}</div>;
@@ -147,10 +147,6 @@ class addToCartComponent extends React.Component {
     }
   };
 
-  notifyMe() {
-    alert('Notify me api call');
-  }
-
   updatePincode(props) {
     const pincode = document.getElementById('pincodeVal').value;
     appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
@@ -166,14 +162,21 @@ class addToCartComponent extends React.Component {
   renderButton(props, quantity) {
     if(!props.pincodeServiceable) {
       return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
-    } if (props.inventoryStatus === 'unavailable' && quantity === 1) {
-      return <Button className="btn addcartbtn" onClick={this.notifyMe}>Notify Me</Button>
+    } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
+      return <NotifyMe partNumber={this.props.skuData.partNumber} />
     } 
     return <Button className="btn addcartbtn" onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
 
   render() {
-    return (
+	let storeText = 'Store';
+
+	if (this.props.pinCodeData.experienceStore) {
+		if (this.props.pinCodeData.experienceStore.length > 2) {
+			storeText = 'Stores';
+		}
+	}
+	  return (
       <>
         {!this.props.sticky && (
           <>
@@ -199,17 +202,14 @@ class addToCartComponent extends React.Component {
               {this.renderdeliveryMessage(this.props.pinCodeData)}
             </div>
             <div className="clearfix" />
-            <div className="ExperienceProduct">
-              Experience this product at{' '}
-              <a className="bold" role="button">
-                Vikroli Store (1.5 K.M away)
-              </a>
-            </div>
-          </>
+			{ this.props.pinCodeData.experienceStore &&
+				<ExperienceStore experienceStore={this.props.pinCodeData.experienceStore} storeText={storeText}/>
+			}
+			</>
         )}
         {this.state.addToCartPopup}
         <div className="addCart">
-          {!this.props.sticky && (
+          {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
             <>
               <Button
                 className="btn"

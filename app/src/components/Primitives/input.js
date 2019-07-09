@@ -16,6 +16,7 @@ const Input = props => (
       placeholder={props.placeholder}
       onBlur={props.focusOut}
       onFocus={props.focusIn}
+      onPaste={props.onPaste}
       {...props}
     />
     {props.hideAnimation ? null : <label htmlFor={props.name} className="form-label">

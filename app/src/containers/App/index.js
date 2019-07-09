@@ -40,10 +40,11 @@ import CompareContainer from '../comparePageContainer/index';
 import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
-import client from '../../utils/apiManager';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import SearchContainer from '../Search Container/searchContainer';
+import CartDetail from '../CartContainer/cartContainer';
+import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
+// import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
-    // this.getPincodeData();
+    this.getPincodeData();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -96,20 +97,20 @@ export default class App extends React.Component {
     }
   }
 
-  // getPincodeData() {
-  //   if (appCookie.get('pincode') === null) {
-  //     apiManager
-  //       .get(ipDataApi, { headers: { Accept: 'application/json' } })
-  //       .then(response => {
-  //         appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
-  //         console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-  //       })
-  //       .catch(error => {
-  //         appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-  //         console.log(`Pincode APi Error=>> ${error}`);
-  //       });
-  //   }
-  // }
+  getPincodeData() {
+    if (appCookie.get('pincode') === null) {
+      apiManager
+        .get(ipDataApi, { headers: { Accept: 'application/json' } })
+        .then(response => {
+          appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
+          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+        })
+        .catch(error => {
+          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+          console.log(`Pincode APi Error=>> ${error}`);
+        });
+    }
+  }
 
   getNewsletterSubscriptionStatus() {
     apiManager
@@ -158,7 +159,12 @@ export default class App extends React.Component {
           <meta name="description" content="A Godrej application" />
         </Helmet>
         {newsletterItem}
-        <HeaderContainer />
+        {window.location.pathname === '/cart' ? (
+          <LightHeader />
+        ) : (
+          <HeaderContainer />
+        )}
+        {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/rooms:id" component={ClpContainer} />
@@ -172,6 +178,7 @@ export default class App extends React.Component {
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
+          <Route path="/cart" component={CartDetail} />
         </Switch>
         <FooterContainer />
       </div>

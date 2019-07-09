@@ -14,7 +14,7 @@ class CompPrd extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-
+        payment: true
       }
     }
     renderProducts = () => {
@@ -34,15 +34,15 @@ class CompPrd extends React.Component {
       this.props.data.map((elem, index) => {
         weights.push(
             <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">80 cm</span></div> : <p>80 cm</p>}
+              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">{elem.weight}</span></div> : <p>{elem.weight}</p>}
             </Col>)
         heights.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">120 cm</span></div> : <p>120 cm</p>}
+              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">{elem.height}</span></div> : <p>{elem.height}</p>}
             </Col>)
         Depth.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">100 cm</span></div> : <p>100 cm</p>}
+              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">{elem.depth}</span></div> : <p>{elem.depth}</p>}
             </Col>)
       })
 
@@ -68,26 +68,37 @@ class CompPrd extends React.Component {
 
     renderPayment = () => {
       var payments = [];
+      var emis = [];
       this.props.data.map(elem => {
-        payments.push(
-          <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
-            <h4>COD available</h4>
-          </Col>
-        )
+        if(elem.minimumEMI) {
+          emis.push(elem.minimumEMI);
+          payments.push(
+            <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
+              <h4>EMI available</h4>
+            </Col>
+          )
+        }
       });
-      return payments;
+      if(emis.length > 0) {
+        return payments;
+      } else {
+        this.setState({
+          payment: false
+        });
+        return '';
+      }
     }
 
     renderSpecs = () => {
       var specs = [];
-      this.props.data[0].attributes.map((att, index) => {
+      this.props.data[0].specs.map((att, index) => {
         if(this.props.data.length > 1) {
-          var second_att = this.props.data[1].attributes.find(s_att => {
+          var second_att = this.props.data[1].specs.find(s_att => {
             return s_att.uniqueID == att.uniqueID
           })
         }
         if(this.props.data.length > 2) {
-          var third_att = this.props.data[2].attributes.find(t_att => {
+          var third_att = this.props.data[2].specs.find(t_att => {
             return t_att.uniqueID == att.uniqueID
           })
         }
@@ -134,10 +145,10 @@ class CompPrd extends React.Component {
           <Row><h2 className="title-text">Specifications</h2></Row>
           {this.renderSpecs()}
           
-          <Row>
+          {this.state.payment ? <Row>
             <h2 className="title-text">Payment</h2>
             {this.renderPayment()}
-          </Row>
+          </Row> : ''}
         </div>
       );
     }

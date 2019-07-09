@@ -145,4 +145,40 @@ router.post('/deleteitem', (req, res, next) => {
   });
 });
 
+router.post('/share/:externalId', (req, res, next) => {
+  wishlistHandler.shareWishlist(
+    req.headers,
+    req.body,
+    req.params,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
+});
+
+router.get('/externalpage/:externalId', (req, res, next) => {
+  wishlistHandler.getExternalWishlist(
+    req.headers,
+    req.params,
+    req.query,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
+});
+
 module.exports = router;

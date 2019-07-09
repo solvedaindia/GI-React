@@ -28,8 +28,8 @@ router.get('/userstatus/:logonId', (req, res, next) => {
   });
 });
 
-router.post('/reserveinventory', (req, res, next) => {
-  checkoutHandler.reserveInventory(req, (err, result) => {
+router.get('/banklist', (req, res, next) => {
+  checkoutHandler.bankList(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

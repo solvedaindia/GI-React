@@ -25,6 +25,19 @@
         text-align: center;
         pointer-events: none;
     }
+    .clearField {
+        position: absolute;
+        top: 2px;
+        right: 7px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        font-size: 18px;
+        text-decoration: none;
+        color:$black;    
+        display: none;
+       
+    }
 
     #autoSuggestDiv{
         position: absolute;
@@ -40,6 +53,11 @@
 
             .list{
                 padding:0px;
+                &:first-child{
+                    .link{
+                        cursor: default;
+                    }
+                }
                 .link{
                     display: block;
                     padding: 7px 20px;

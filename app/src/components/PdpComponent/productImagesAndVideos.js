@@ -5,6 +5,7 @@ import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import { imagePrefix } from '../../../public/constants/constants';
 
+
 class productImagesAndVideos extends React.Component {
   constructor() {
     super();
@@ -61,24 +62,25 @@ class productImagesAndVideos extends React.Component {
     let imagePath;
     this.images = [];
 
-    imagesAndVideos.map(data => {
+    imagesAndVideos.thumbnailImages.map((data, index) => {
       if (screenType) {
-        imagePath = data.fullScreenImagePath;
+        imagePath = imagesAndVideos.zoomImages[index].imagePath;
       } else {
-        imagePath = data.fullImagePath;
+        imagePath = imagesAndVideos.mainImages[index].imagePath;
       }
-      const thumbnailPath = `${imagePrefix}${data.thumbnailPath}`;
-      if (data.type === 'image') {
-        const fullImagePath = `${imagePrefix}${imagePath}`;
-        this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
-      } else {
-        const videoUrl = `${imagePrefix}${data.videoPath}`;
-        this.images.push({
-          renderItem: this.renderVideoPlayer.bind(this),
-          thumbnail: thumbnailPath,
-          videourl: videoUrl,
-        });
-      }
+      
+      const thumbnailPath = `${imagePrefix}${data.imagePath}`;
+        if (data.type === 'video') {
+          const videoUrl = `${imagePrefix}${data.videoPath}`;
+          this.images.push({
+            renderItem: this.renderVideoPlayer.bind(this),
+            thumbnail: thumbnailPath,
+            videourl: videoUrl,
+          });  
+        } else {
+          const fullImagePath = `${imagePrefix}${imagePath}`;
+          this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
+        }
     });
   };
 
@@ -146,46 +148,36 @@ class productImagesAndVideos extends React.Component {
   }
 
   render() {
-    this.filterImagesAndVideos(
-      this.props.skuData.attachments,
-      this.isZoomScreen,
-    );
-    let featuredClass = 'hide';
-    if (this.props.skuData.ribbon) {
-      featuredClass = 'featured-box';
-    }
+	  this.filterImagesAndVideos(this.props.skuData.attachments, this.isZoomScreen);
+	  let featuredClass = 'hide';
+    if (this.props.skuData.ribbonText) {
+	    featuredClass = 'featured-box';
+	  }
 
     return (
       <div className="gallaryWrapper">
         <div className={featuredClass}>
-          <span className="ribbon_star">
-            <svg
-              className="star_img"
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-            >
-              <path
-                fill="#FFF"
-                fillRule="evenodd"
-                d="M7.021 11.073l4.339 2.282-.829-4.832L14.042 5.1l-4.851-.705L7.02 0l-2.17 4.396L0 5.1l3.51 3.422-.828 4.832z"
-              />
-            </svg>
-          </span>
-          {this.props.skuData.ribbon && (
-            <span className="featured-text">{this.props.skuData.ribbon}</span>
-          )}
+	        <span className='ribbon_star'>
+	          <svg className="star_img" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+	            <path fill="#FFF" fillRule="evenodd" d="M7.021 11.073l4.339 2.282-.829-4.832L14.042 5.1l-4.851-.705L7.02 0l-2.17 4.396L0 5.1l3.51 3.422-.828 4.832z">
+	            </path>
+	          </svg>
+	        </span>
+	        {this.props.skuData.ribbonText &&
+            <span className="featured-text">{this.props.skuData.ribbonText}</span>
+			}
           )
         </div>
-
+        
         <ImageGallery
           showFullscreenButton
           items={this.images}
           showNav={this.state.activeData}
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
+          lazyLoad={true}
         />
+        
 
         {/* <button onClick={this.zoomin}>+</button>
 				<button onClick={this.zoomout}>-</button> */}

@@ -1,22 +1,31 @@
-
 import React from 'react';
-//Redux Imports
+// Redux Imports
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
-import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
+import {
+  getReleventReduxState,
+  fetchReleventSortingValue,
+  fetchReleventSortingValueByIndex,
+} from '../../../utils/utilityManager';
 
-import { Link, Route, withRouter } from 'react-router-dom';
 
 const downArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
+  />
 );
 const upArrow = (
-  <img className='dropdownArrow' src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} />
+  <img
+    className="dropdownArrow"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
+  />
 );
 const recommended = 'Interio Recommends';
 const price_L_H = 'Price Low to High';
@@ -27,7 +36,8 @@ class RWDSort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected: this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
+      selected:
+        this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
       isShowSortOptions: false,
@@ -37,11 +47,11 @@ class RWDSort extends React.Component {
   showSortOptions() {
     this.setState({
       isShowSortOptions: !this.state.isShowSortOptions,
-    })
+    });
   }
 
   handleClick(i) {
-    console.log('yes handle click -- ', i)
+    console.log('yes handle click -- ', i);
     if (i !== this.state.selected) {
       this.setState({
         selected: i,
@@ -53,7 +63,7 @@ class RWDSort extends React.Component {
   }
 
   render() {
-    console.log('what Sort Value --- ',this.props.sortingIndexPro);
+    console.log('what Sort Value --- ', this.props.sortingIndexPro);
     return (
       <>
         <button className='sortBy' onClick={evt => this.showSortOptions()}><img className='sortbyicon' src={require('../../../../public/images/sort.svg')} /> Sort</button>
@@ -65,42 +75,34 @@ class RWDSort extends React.Component {
                 <label className='sortTxt'>Sort</label>
                 <button onClick={evt => this.showSortOptions()} className='sortCancelBtn'><img className='sortByCloseIcon' src={require('../../../../public/images/close.svg')} /></button>
               </div>
-              <div className='clearfix' />
+              <div className="clearfix" />
               <div>
                 <ul>
-                  {this.state.options.map((option, i) => {
-                    return (
-                      <li onClick={evt => this.handleClick(i)} key={i} className={`sortLi${option === fetchReleventSortingValueByIndex(this.state.selected) ? ' active' : ''}`} >
-                        {option}
-                        {option === fetchReleventSortingValueByIndex(this.state.selected) ? <img className='sortSelectionImg' src={require('../../../../public/images/sortSelection.svg')} /> : ''}
-                      </li>
-                    )
-                  })
+                  {this.state.options.map((option, i) => (
+                    <li onClick={evt => this.handleClick(i)} key={i} className={`sortLi${option === fetchReleventSortingValueByIndex(this.state.selected) ? ' active' : ''}`} >
+                      {option}
+                      {option === fetchReleventSortingValueByIndex(this.state.selected) ? <img className='sortSelectionImg' src={require('../../../../public/images/sortSelection.svg')} /> : ''}
+                    </li>
+                  ))
                   }
                 </ul>
               </div>
             </div>
           </div>
-          : null}
-
+         : null}
       </>
     );
   }
-
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => {
-  return {
-    updateSortingValue: (value) => dispatch(actionCreators.sortingAction(value)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  updateSortingValue: (value) => dispatch(actionCreators.sortingAction(value)),
+});
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  return {
-
-  }
+  return {};
 };
 
 const withConnect = connect(
@@ -117,5 +119,3 @@ export default compose(
   withConnect,
   withRouter,
 )(RWDSort);
-
-

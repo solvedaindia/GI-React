@@ -60,7 +60,6 @@ function plpContainerReducer(state = initialState, action) {
         adBannerData: action.data,
       };
     case actionTypes.SORTING:
-      
       return {
         ...state,
         sortingValue: fetchReleventSortingValue(action.val),

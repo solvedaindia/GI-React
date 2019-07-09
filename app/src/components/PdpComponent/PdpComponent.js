@@ -66,6 +66,17 @@ class PdpComponent extends React.Component {
       });
     });
 
+    const defaultPincodeData = {
+      pincodeServiceable: null,
+    };
+
+    this.setState({
+      selectedSku: skuDataArr,
+      isLoading: false,
+      skuData: resolvedSkuData,
+      pincodeData: defaultPincodeData
+    });
+
     this.callPinCodeAPI(skuDataArr, resolvedSkuData);
   }
 
@@ -93,7 +104,7 @@ class PdpComponent extends React.Component {
     const selectedSwatches = new Array();
     for (let i = 0; i < count + 1; i++) {
       const name = document
-        .getElementsByClassName(`radio${count}`)[0]
+        .getElementsByClassName(`radio${i}`)[0]
         .getAttribute('name');
       const getValue = document.querySelector(`input[name = ${name}]:checked`)
         .value;
@@ -115,9 +126,7 @@ class PdpComponent extends React.Component {
       .get(pinCodeAPI + appCookie.get('pincode'), dataParams)
       .then(response => {
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: response.data.data,
         });
       })
@@ -130,14 +139,15 @@ class PdpComponent extends React.Component {
           error: 'Not a valid pincode',
         };
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: defaultPincodeData,
         });
       });
+
     this.props.historyData.push(
-      `/pdp/${this.props.matchParams.productId}/${resolvedSkuData.uniqueID}`,
+      `/pdp/furniture-${resolvedSkuData.productName
+        .toLowerCase()
+        .replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
     );
   }
 
@@ -160,7 +170,7 @@ class PdpComponent extends React.Component {
               <Row>
                 <Col md={7} sm={12} xs={12}>
                   <div className="product">
-                    <span className="text">Product ID:</span>
+                    <span className="text">Product ID: </span>
                     <span className="text">
                       {this.state.skuData.partNumber}
                     </span>
@@ -200,7 +210,7 @@ class PdpComponent extends React.Component {
                   <Row>
                     <Col md={12} sm={12} xs={12}>
                       <Col md={6} sm={12} xs={12} className="product">
-                        <span className="text">Product ID:</span>
+                        <span className="text">Product ID: </span>
                         <span className="text">
                           {this.state.skuData.partNumber}
                         </span>
@@ -208,7 +218,9 @@ class PdpComponent extends React.Component {
                       <Col md={6} sm={12} xs={12} className="product-share">
                         <div className="share">
                           SHARE <div className="share-btn">{shareImg}</div>
-                          <SocialMedia />
+                          <SocialMedia
+                            productName={this.state.skuData.productName}
+                          />
                         </div>
                         <div className="wishListDiv">
                           WISHLIST{' '}

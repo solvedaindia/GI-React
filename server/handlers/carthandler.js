@@ -9,8 +9,11 @@ const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
 const pincodeUtil = require('../utils/pincodeutil');
 
+const productDetailFilter = require('../filters/productdetailfilter');
+
 const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
+const cartCalculationUsageAddAddress = '-2,-4,-7';
 const cartCalculateOrder = '1';
 
 /**
@@ -34,33 +37,6 @@ module.exports.fetchMiniCart = function fetchCartMain(headers, callback) {
       callback(null, results);
     }
   });
-
-  /*  getCartData(headers, (error, res) => {
-    if (error) {
-      callback(error);
-      return;
-    }
-    const miniCartJson = {
-      miniCartData: [],
-    };
-    if (res.orderItem && res.orderItem.length > 0) {
-      const productIDs = [];
-      res.orderItem.forEach(item => {
-        productIDs.push(item.productId);
-      });
-      productUtil.productByProductIDs(productIDs, headers, (err, result) => {
-        if (err) {
-          callback(err);
-          return;
-        }
-        const productListArray = result.productList;
-        miniCartJson.miniCartData = cartFilter.minicart(res, productListArray);
-        callback(null, miniCartJson);
-      });
-    } else {
-      callback(null, miniCartJson);
-    }
-  }); */
 };
 
 /**
@@ -114,13 +90,7 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-
-  headers.promotionData = 'false';
-  const fetchCartData = [
-    getCartData.bind(null, headers),
-    getcartPageProductDetails,
-    mergeCartData,
-  ];
+  const fetchCartData = [getCartData.bind(null, headers), getCompleteCartData];
 
   // const fetchCartData = [getCartData.bind(null, headers)];
   async.waterfall(fetchCartData, (err, results) => {
@@ -316,33 +286,6 @@ module.exports.updateitem = function updateitem(params, headers, callback) {
   );
 };
 
-/* function addToCart(headers, cartBody, callback) {
-  const addToCartOriginURL = constants.cartData.replace(
-    '{{storeId}}',
-    headers.storeId,
-  );
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  origin.getResponse(
-    'POST',
-    addToCartOriginURL,
-    reqHeader,
-    null,
-    cartBody,
-    null,
-    '',
-    response => {
-      if (response.status === 201) {
-        logger.debug(
-          `successfully added to cart for${JSON.stringify(cartBody)}`,
-        );
-        callback(null, response.body, reqHeader);
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-} */
-
 function getCartData(headers, callback) {
   const cartUrl = `${constants.cartData.replace(
     '{{storeId}}',
@@ -392,85 +335,6 @@ function getMiniCartProductDetails(cartData, headers, callback) {
     callback(null, cartData, productListArray, headers);
   }
 }
-
-/* Get Product Details for Cart Page with Inventory Details */
-function getcartPageProductDetails(cartData, headers, callback) {
-  let productListArray = [];
-
-  if (cartData.orderItem && cartData.orderItem.length > 0) {
-    const productIDs = []; // Params to Find Product Details
-    const reqParamArray = []; // Params to Find Inventory Details
-    cartData.orderItem.forEach(item => {
-      const reqParam = {
-        pincode: headers.pincode,
-        partNumber: item.partNumber,
-        quantity: Number(item.quantity),
-      };
-      reqParamArray.push(reqParam);
-      productIDs.push(item.productId);
-    });
-
-    const productListTask = [
-      productUtil.productByProductIDs.bind(null, productIDs, headers),
-      getInventoryDetails.bind(null, headers, reqParamArray),
-    ];
-
-    async.parallel(productListTask, (err, result) => {
-      if (err) {
-        callback(err);
-      } else {
-        productListArray = result[0].productList;
-        productListArray.forEach(product => {
-          for (let index = 0; index < result[1].length; index += 1) {
-            if (
-              product.uniqueID === result[1][index].inventoryDetails.uniqueID
-            ) {
-              // eslint-disable-next-line no-param-reassign
-              product.inventoryStatus =
-                result[1][index].inventoryDetails.inventoryStatus;
-              // eslint-disable-next-line no-param-reassign
-              product.deliveryDate =
-                result[1][index].inventoryDetails.deliveryDate || '';
-              break;
-            }
-          }
-        });
-        callback(null, cartData, productListArray, headers);
-      }
-    });
-  } else {
-    callback(null, cartData, productListArray, headers);
-  }
-}
-
-function getInventoryDetails(headers, reqParamArray, callback) {
-  async.map(
-    reqParamArray,
-    (reqParam, cb) => {
-      pincodeUtil.findInventory(headers, reqParam, (error, result) => {
-        if (!error) {
-          // eslint-disable-next-line no-param-reassign
-          reqParam.inventoryDetails = result;
-          cb(null, reqParam);
-        } else {
-          cb(error);
-        }
-      });
-    },
-    (errors, results) => {
-      if (errors) {
-        callback(errors);
-        return;
-      }
-      const inventoryDetail = [];
-      results.forEach(element => {
-        inventoryDetail.push(element);
-      });
-      callback(null, inventoryDetail);
-    },
-  );
-}
-
 /* Merge Cart Data and Product Details to Get MiniCart Data */
 function mergeMiniCart(cartData, productList, headers, callback) {
   // callback(null, cartFilter.minicart(cartData, productList));
@@ -498,28 +362,92 @@ function mergeMiniCart(cartData, productList, headers, callback) {
   callback(null, minicartJson);
 }
 
+/* Get Product Details for Cart Page with Inventory Details */
+function getcartPageProductDetails(headers, orderItemArray, callback) {
+  const productListArray = [];
+
+  if (orderItemArray && orderItemArray.length > 0) {
+    const productIDs = []; // Params to Find Product Details
+    const reqParamArray = []; // Params to Find Inventory Details
+    orderItemArray.forEach(item => {
+      const reqParam = {
+        pincode: headers.pincode,
+        partNumber: item.partNumber,
+        quantity: Number(item.quantity),
+      };
+      reqParamArray.push(reqParam);
+      productIDs.push(item.productId);
+    });
+
+    const productListTask = [
+      productUtil.getProductListByIDs.bind(null, headers, productIDs),
+      pincodeUtil.getMultipleInventoryData.bind(null, headers, reqParamArray),
+    ];
+
+    async.parallel(productListTask, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        const productList = result[0];
+        const inventoryArray = result[1];
+        productList.forEach(product => {
+          const productDetail = productDetailFilter.productDetailSummary(
+            product,
+          );
+          for (let index = 0; index < inventoryArray.length; index += 1) {
+            if (
+              productDetail.uniqueID ===
+              inventoryArray[index].inventoryDetails.uniqueID
+            ) {
+              // eslint-disable-next-line no-param-reassign
+              productDetail.inventoryStatus =
+                inventoryArray[index].inventoryDetails.inventoryStatus;
+              // eslint-disable-next-line no-param-reassign
+              productDetail.deliveryDate =
+                inventoryArray[index].inventoryDetails.deliveryDate || '';
+              productListArray.push(productDetail);
+              break;
+            }
+          }
+        });
+        callback(null, productListArray);
+      }
+    });
+  } else {
+    callback(null, productListArray);
+  }
+}
+
 /* Merge Cart Data and Product Details to Get Cart Page Data */
-function mergeCartData(cartData, productList, headers, callback) {
+function getCompleteCartData(cartData, headers, callback) {
   const cartDetails = {
     orderSummary: {},
     cartTotalItems: 0,
     cartItems: [],
   };
-  if (
-    cartData.orderItem &&
-    cartData.orderItem.length > 0 &&
-    productList.length > 0
-  ) {
-    cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
-    const mergedCartData = cartFilter.mergeOrderItem(
+  cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
+  if (cartData.orderItem && cartData.orderItem.length > 0) {
+    getcartPageProductDetails(
+      headers,
       cartData.orderItem,
-      productList,
+      (error, productList) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+
+        const mergedCartData = cartFilter.mergeOrderItem(
+          cartData.orderItem,
+          productList,
+        );
+        cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
+        cartDetails.cartItems = mergedCartData.orderItemList;
+        callback(null, cartDetails);
+      },
     );
-    cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
-    cartDetails.cartItems = mergedCartData.orderItemList;
-    // cartDetails.actualCartData = cartData;
+  } else {
+    callback(null, cartDetails);
   }
-  callback(null, cartDetails);
 }
 
 function getEmptyRecord() {
@@ -582,6 +510,12 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
   });
 };
 
+/**
+ * Add Address to cart items
+ * @param access_token,storeId,addressID
+ * @return 200,OK with adding item to Cart
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
 module.exports.addAddress = addAddress;
 function addAddress(headers, params, callback) {
   logger.debug('Adding Address To Cart');
@@ -605,6 +539,7 @@ function addAddress(headers, params, callback) {
   }
   const reqBody = params;
   reqBody.shipAsComplete = '1';
+  reqBody.x_calculationUsage = cartCalculationUsageAddAddress;
 
   const addAddressCart = `${constants.cartData.replace(
     '{{storeId}}',
@@ -623,7 +558,7 @@ function addAddress(headers, params, callback) {
     response => {
       if (response.status === 200) {
         logger.debug('Got all the origin resposes');
-        callback(null, response.body, reqHeader);
+        callback(null, response.body);
       } else {
         callback(errorutils.handleWCSError(response));
       }
@@ -631,6 +566,12 @@ function addAddress(headers, params, callback) {
   );
 }
 
+/**
+ * Get Ship Modes List
+ * @param access_token,storeId,addressID
+ * @return 200,OK with fetching all shipmodes
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
 module.exports.getShipModes = getShipModes;
 function getShipModes(headers, callback) {
   logger.debug('Get Shipmodes');
@@ -670,6 +611,90 @@ function getShipModes(headers, callback) {
         callback(null, shippingModes);
       } else {
         logger.debug('Error While calling Shipping Modes API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Pre Checkout Cart
+ * @param access_token,storeId,addressID
+ * @return 200,OK with inventory details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.precheckout = function precheckout(req, callback) {
+  logger.debug('Inside Reserve Inventory API');
+  if (!req.body.order_id) {
+    logger.debug('Invalid Params : Reserve Inventory API');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqHeader = headerutil.getWCSHeaders(req.headers);
+  const reqBody = {
+    orderId: req.body.order_id,
+  };
+  const originUrl = constants.reserveInventory.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+
+  origin.getResponse(
+    'PUT',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        logger.debug('Error While Set Reserve Inventory API');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * Checkout Cart
+ * @param access_token,storeId,addressID
+ * @return 200,OK with Checkout
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.checkout = checkout;
+function checkout(headers, params, callback) {
+  logger.debug('Adding Address To Cart');
+  if (!params || !params.orderId) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const reqBody = {
+    orderId: params.orderId,
+  };
+  const checkoutURL = `${constants.cartData.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/@self/checkout`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'POST',
+    checkoutURL,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 201 || response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        callback(null, response.body);
+      } else {
         callback(errorutils.handleWCSError(response));
       }
     },
