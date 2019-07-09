@@ -41,7 +41,7 @@ class CartDetail extends React.Component {
     const { cartData } = this.props;
     if (!cartData) return null;
     return (
-      !!cartData.cartItems.length
+      !!cartData.cartItems && !!cart.cartItems.length
         ?
         <section className='cartDetails'>
           <div className='cartItem'>
