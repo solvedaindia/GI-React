@@ -2,39 +2,37 @@
 @import "../base.scss";
 @import "../variable.scss";
 
-.rwdSortFilter {
-  height: 40px;
+.sortfilter {
   text-align: center;
-
   background: #fff;
   position: fixed;
-  bottom: 0px;
-  margin-right: auto;
-  margin-left: auto;
   width: 100%;
-  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
-  padding: 16px 0;
+  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.32);
   z-index: 99;
-  position: sticky;
-  position: -webkit-sticky;
   bottom: 0;
 
-  .rwdSortBtn {
-    background-color: yellow;
+  .sortBy {
+    background-color:$colorwhite;
     width: 50%;
     float: left;
     border: 0px;
-    margin-top: -16px;
-    height: inherit;
+    padding: 15px 0px;
+    font-size: $base*2;
+    .sortbyicon{
+      width:$base*2;
+    }
   }
 
-  .rwdFilterBtn {
-    background-color: green;
+  .filterBy {
+    background-color:$colorwhite;
     width: 50%;
     float: right;
     border: 0px;
-    margin-top: -16px;
-    height: inherit;
+    padding: 15px 0px;
+    font-size: $base*2;
+    .filterbyicon{
+      width:17px;
+    }
   }
 }
 
@@ -43,33 +41,36 @@
   width: 100%;
   background-color: #0000006e;
   position: fixed;
-  bottom: 0px;
+  bottom: 53px;
   z-index: 100;
 
   .sortInnerCont {
-    height: 370px;
+    height: 260px;
     width: 100%;
     background-color: white;
-    position: fixed;
+    position: absolute;
     bottom: 0px;
 
     .sortTxt {
       color: #4a90e2;
       float: left;
-      width: 20%;
-      text-align: left;
-      margin: 15px;
+      margin: 15px 0px 15px 20px;
     }
 
     .sortCancelBtn {
-      color: black;
-      float: left;
-      width: 19%;
-      margin: 15px;
+      color: $black;
+      float: right;
+      background: none;
+      border: 0px;
+      margin: 15px 22px 0px 0px ;
+      font-size: 14px;
+      .sortByCloseIcon{
+        width: 15px;
+      }
     }
 
     .sortLi {
-      padding: 30px;
+      padding: 15px 20px 15px 20px;
       text-align: left;
       color: #070707;
       font-size: 14px;
@@ -79,7 +80,8 @@
       background-color: #f7f8f8;
 
       .sortSelectionImg {
-        margin: 0px 195px;
+        margin: 0px;
+        float: right;
       }
     }
   }

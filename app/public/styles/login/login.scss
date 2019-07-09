@@ -13,7 +13,6 @@
             text-align: center;
             font-family: $font-bold;
             color: $colorwhite;
-            font-size: $base*4.75;
         }
     }
     .smallLogo{
@@ -31,7 +30,6 @@
                 position: absolute;
                 content: '';
                 background: $battleshipGrey;
-                left: 175px;
                 top: 13px;      
             }
             &::before{
@@ -40,7 +38,6 @@
                 position: absolute;
                 content: '';
                 background: $battleshipGrey;
-                right: 175px;
                 top: 13px; 
             }
         }
@@ -125,19 +122,15 @@
     .socialLogin {
         width: 100%;
         text-align: center;
-        padding: $base*2 $base*4;
         margin: 0;
     }
     .socialLogin {
         .btn-white {
             width: 49%;
             margin: 0.5%;
-            padding: $base;
             border: 1px solid $black;
             background: none;
-            font-size: $base*1.5;
             .icon{
-                width: $base*3;
                 margin: 0 $base;
             }
         }
@@ -147,3 +140,151 @@
     }
     
 }
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .welcomeBack {
+            .modal-title {
+                font-size: $base*4.75;
+            }
+
+            .socialLogin{
+                padding: $base*2 $base*4;
+                .btn-white{
+                    padding: $base;
+                    font-size: $base*1.5;
+                    .icon{
+                        width: $base*3;
+                    }
+                }
+            }
+            
+            .modal-dialog {
+               
+                .divider {
+                    &::after{
+                        margin-left: -70px;     
+                    }
+                    &::before{
+                        margin-left:40px;
+                    }
+                }
+            }
+        }
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .welcomeBack {
+        .modal-header{
+            padding: 50px 0px 30px 0px;
+            .close{
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+        }
+        .modal-title {
+            font-size: $base*3;
+        }
+        .smallLogo{
+           
+            svg{
+                max-width: 100px;
+            }
+        }
+        .socialLogin{
+            padding:$base*3 $base*2 $base*2 $base*4;
+            .btn-white{
+                padding: $base 4px $base 4px;
+                font-size: $base*1.25;
+                .icon{
+                    width: $base*1.75;
+                }
+            }
+        } 
+        .modal-dialog{
+            .modal-content{
+                min-height: 640px;
+            }
+            .forgotPassword{
+                bottom:201px;
+            }
+               
+            .divider {
+                &::after{
+                    margin-left: -70px;     
+                }
+                &::before{
+                    margin-left:40px;
+                }
+            }
+        }
+        
+    }
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

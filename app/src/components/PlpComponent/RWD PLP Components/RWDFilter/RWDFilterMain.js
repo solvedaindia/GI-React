@@ -1,19 +1,20 @@
 import React from 'react';
-//Redux
+// Redux
 import { connect } from 'react-redux';
 import { Link, Route, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import injectSaga from '../../../../utils/injectSaga';
 import injectReducer from '../../../../utils/injectReducer';
 import reducer from '../../../../containers/PlpContainer/reducer';
 import saga from '../../../../containers/PlpContainer/saga';
-import { compose } from 'redux';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
 import RWDFilter from './RWDFilter';
 
-//import Filter from './filter';
+// import Filter from './filter';
 
-{/* <button style="
+{
+  /* <button style="
     float: left;
     background: transparent;
     border: 0;
@@ -26,7 +27,8 @@ background: transparent;
 border: 0;
 padding: 16px;
 color: #687ed8;
-} */}
+} */
+}
 
 // - Fewer filters
 // + 3 filters
@@ -43,7 +45,7 @@ class RWDFilterMain extends React.Component {
       appliedFilters: [],
       isFilterExpend: false,
 
-      //RWD Vars
+      // RWD Vars
       isShowFilterOptions: false,
     };
 
@@ -54,7 +56,7 @@ class RWDFilterMain extends React.Component {
   showFilterOptions() {
     this.setState({
       isShowFilterOptions: !this.state.isShowFilterOptions,
-    })
+    });
   }
 
   componentDidMount() {
@@ -64,7 +66,6 @@ class RWDFilterMain extends React.Component {
     //       <RWDFilter key={index} dataPro={item} />
     //     )
     //   })
-
     //   var splitItems = [];
     //   var leftOverFilterCount;
     //   if (this.props.filterDataPro.length > 4) {
@@ -76,7 +77,6 @@ class RWDFilterMain extends React.Component {
     //   else {
     //     splitItems = allItems;
     //   }
-
     //   this.setState({
     //     allFilters: allItems,
     //     splitFilters: splitItems,
@@ -100,7 +100,7 @@ class RWDFilterMain extends React.Component {
     //   data = this.state.allFilters
     // }
 
-    // this.setState({ 
+    // this.setState({
     //   filterItem: data,
     //   filterBtnTitle: ssss,
     //   isFilterExpend: !this.state.isFilterExpend,
@@ -171,14 +171,19 @@ class RWDFilterMain extends React.Component {
   // }
 
   render() {
-
     return (
       <>
-        <button onClick={evt => this.showFilterOptions()} className='rwdFilterBtn'>Filter</button>
-        {this.state.isShowFilterOptions ?
-          <div className='filterOutterCont'>
-            <div className='filterHeader'>
-              <label className='filterTxt'>Filters</label>
+        <button onClick={evt => this.showFilterOptions()} className="filterBy">
+          <img
+            className="filterbyicon"
+            src={require('../../../../../public/images/filter_icon.png')}
+          />{' '}
+          Filter
+        </button>
+        {this.state.isShowFilterOptions ? (
+          <div className="filterOutterCont">
+            <div className="filterHeader">
+              <label className="filterTxt">Filters</label>
             </div>
 
             {/* {this.props.filterDataPro.map((item, index) => {
@@ -202,31 +207,28 @@ class RWDFilterMain extends React.Component {
 
             <RWDFilter dataPro={this.props.filterDataPro} />
 
-
-            <div className='filterFooter'>
-              <button className='cancelBtn'>Cancel</button>
-              <button className='applyBtn'>Apply</button>
+            <div className="filterFooter">
+              <button className="cancelBtn">Cancel</button>
+              <button className="applyBtn">Apply</button>
             </div>
           </div>
-          : null}
+        ) : null}
       </>
     );
   }
 }
 
-
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => {
-  return {
-    onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  onFilterUpdate: (updatedArr, facetName) =>
+    dispatch(actionCreators.filter(updatedArr, facetName)),
+});
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
   return {
-    updatedFilter: stateObj.updateFilter
-  }
+    updatedFilter: stateObj.updateFilter,
+  };
 };
 
 const withConnect = connect(
@@ -242,4 +244,3 @@ export default compose(
   withSaga,
   withConnect,
 )(RWDFilterMain);
-
