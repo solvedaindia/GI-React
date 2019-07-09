@@ -10,6 +10,8 @@ import { compose } from 'redux';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
 import RWDFilter from './RWDFilter';
+import '../../../../../public/styles/plpContainer/plpContainer.scss';
+import FilterMain from '../../../../components/PlpComponent/Filter/filterMain';
 
 //import Filter from './filter';
 
@@ -58,33 +60,33 @@ class RWDFilterMain extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.props.filterDataPro) {
-    //   const allItems = this.props.filterDataPro.map((item, index) => {
-    //     return (
-    //       <RWDFilter key={index} dataPro={item} />
-    //     )
-    //   })
+    if (this.props.filterDataPro) {
+      const allItems = this.props.filterDataPro.map((item, index) => {
+        return (
+          <RWDFilter key={index} dataPro={item} />
+        )
+      })
 
-    //   var splitItems = [];
-    //   var leftOverFilterCount;
-    //   if (this.props.filterDataPro.length > 4) {
-    //     splitItems = allItems.slice(0, 4);
-    //     leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
-    //     //const btn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{leftOverFilterCount}</button>
-    //     //splitItems.push(btn)
-    //   }
-    //   else {
-    //     splitItems = allItems;
-    //   }
+      var splitItems = [];
+      var leftOverFilterCount;
+      if (this.props.filterDataPro.length > 4) {
+        splitItems = allItems.slice(0, 4);
+        leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
+        //const btn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{leftOverFilterCount}</button>
+        //splitItems.push(btn)
+      }
+      else {
+        splitItems = allItems;
+      }
 
-    //   this.setState({
-    //     allFilters: allItems,
-    //     splitFilters: splitItems,
-    //     filterItem: splitItems,
-    //     filterBtnTitle: leftOverFilterCount
-    //   });
-    // }
-    // this.fetchAllAppliedFilters();
+      this.setState({
+        allFilters: allItems,
+        splitFilters: splitItems,
+        filterItem: splitItems,
+        filterBtnTitle: leftOverFilterCount
+      });
+    }
+    //this.fetchAllAppliedFilters();
   }
 
   moreFilterBtnClick() {
@@ -170,43 +172,28 @@ class RWDFilterMain extends React.Component {
   //   }
   // }
 
+  filterCallback() {
+    console.log('filter Callback');
+    this.setState({
+      isShowFilterOptions: !this.state.isShowFilterOptions
+    })
+  }
+
   render() {
 
     return (
       <>
+        {/* {this.state.filterItem} */}
+
         <button onClick={evt => this.showFilterOptions()} className='rwdFilterBtn'>Filter</button>
         {this.state.isShowFilterOptions ?
           <div className='filterOutterCont'>
             <div className='filterHeader'>
               <label className='filterTxt'>Filters</label>
             </div>
-
-            {/* {this.props.filterDataPro.map((item, index) => {
-              console.log('bidddd 000 ', item);
-              return (
-                
-              )
-            })} */}
-            {/* <div className='mainFilter'>
-              <ul>
-                {this.props.filterDataPro.map((item, index) => {
-                  return (
-                    
-                      <RWDFilter key={index} dataPro={item} />
-                    
-                  )
-                })
-                }
-              </ul>
-            </div> */}
-
-            <RWDFilter dataPro={this.props.filterDataPro} />
-
-
-            <div className='filterFooter'>
-              <button className='cancelBtn'>Cancel</button>
-              <button className='applyBtn'>Apply</button>
-            </div>
+            {/* {this.state.filterItem} */}
+            {/* <RWDFilter dataPro={this.props.filterDataPro} /> */}
+            <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
           </div>
           : null}
       </>

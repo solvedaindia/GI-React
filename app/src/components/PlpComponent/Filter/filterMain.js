@@ -41,6 +41,9 @@ class FilterMain extends React.Component {
       filterBtnTitle: null,
       appliedFilters: [],
       isFilterExpend: false,
+
+      //RWD Vars
+      isMobile: window.innerWidth <= 760,
     };
 
     this.clearTheSelectedFilter = this.clearTheSelectedFilter.bind(this)
@@ -51,7 +54,7 @@ class FilterMain extends React.Component {
     if (this.props.filterDataPro) {
       const allItems = this.props.filterDataPro.map((item, index) => {
         return (
-          <Filter key={index} dataPro={item} />
+          <Filter rwdFilterCallbackPro={this.props.rwdFilterCallback} isFromRWD={this.props.isFromRWD} key={index} dataPro={item} />
         )
       })
 
@@ -168,7 +171,8 @@ class FilterMain extends React.Component {
   
     return (
       <>
-        <h4 className='heading'>Filter</h4>
+      {this.props.isFromRWD ? null : <h4 className='heading'>Filter</h4> }
+        
         {this.state.filterItem}
         {moreFilterBtn}
         <div className='clearfix'></div>
