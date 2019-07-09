@@ -291,11 +291,55 @@
     }
     
 }
+.deletItem {
+    
+    .modal-body {
+        padding: $base*6;
+        .close {
+            color: $black;
+        }
+    }
+    .del_modal {
+        .heading,
+        .itemDelInfo {
+            text-align: center;
+            font-size: $base*2.5;
+            font-family: $font-bold;
+        }
+        .heading {
+            color: $black;
+        }
+        .itemDelInfo {
+            color: $cerulean;
+        }
+        .userAction {
+            text-align: center;
+            .delete,
+            .wishList {
+                width: 30%;
+                border-radius: unset;
+                margin: 0 1%;
+                text-align: center;
+            }
+            .wishList {
+                border: 1px solid $black;
+                color: $black;
+                background-color: $colorwhite; 
+            }
+            .delete {
+                border: 1px solid $black;
+                background-color: $ashGrey;
+                color: $colorwhite;  
+            }
+        }
+        
+    }
+}
 
 @media (min-width: 320px) and (max-width: 767px){
     .cartDetails {
         width: 100%;
-        margin: $base*2 auto;
+        margin: 0 auto ;
         .cartItem,
         .orderSummary {
             width: 100%;
@@ -311,14 +355,28 @@
             }
         }
         .cartHeadDetails{
+            border-bottom: none;
             .pincodeField {
                 width: 98%;
                 margin: auto 1%;
             }
+            .title,
+            .cartCount {
+                color: $colorwhite;
+                font-size: $base*2;
+            }
             .title {
                 text-align: center;
                 padding: $base;
-                width: 100%;
+                width: 50%;
+                position: fixed;
+                top: $base;
+                z-index: 2;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .cartCount {
+                margin: 0;
             }
         }
     }
