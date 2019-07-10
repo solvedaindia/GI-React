@@ -40,7 +40,8 @@ import {
   addAddressAPI,
   AddAddressToCardAPI,
   minicartAPI,
-  PreCheckoutAPI
+  PreCheckoutAPI,
+  SaveGSTAPI
 } from '../../../public/constants/constants';
 import {
   getReleventReduxState
@@ -70,6 +71,7 @@ export class Step2Component extends React.Component {
         ship_add_id: '',
         bill_add_id: '',
         orderId: '',
+        defaultAddress: 'false',
         pinPop: false,
         error_name: false,
         error_number: false,
@@ -192,10 +194,6 @@ export class Step2Component extends React.Component {
 
     handleChangeMobile = () => {
       this.props.back();
-    }
-
-    getUserAddress = () => {
-
     }
 
     newAddActive = () => {
@@ -426,7 +424,7 @@ export class Step2Component extends React.Component {
           city: this.state.inputText_city,
           state: this.state.inputText_state,
           address: this.state.inputText_address,
-          default: true,
+          default: this.state.defaultAddress,
           phone_number: this.state.phone,
           email_id: this.state.email
         };
@@ -497,6 +495,32 @@ export class Step2Component extends React.Component {
       })
     }
 
+    saveGST = (orderId) => {
+      return new Promise((resolve, reject) => {
+        if(this.state.inputText_gst !== '' && this.state.inputText_gst.length == 15) {
+          let token = appCookie.get('accessToken');
+          var data = {
+            order_id: orderId,
+            gst_number: this.state.inputText_gst
+          }
+          axios.post(SaveGSTAPI, data, {
+            headers: {
+              store_id: storeId,
+              access_token: token
+            }
+          }).then((res) => {
+            console.log(res, "gst response")
+            resolve();
+          }).catch((err) => {
+            console.log(err, 'gst error');
+            reject();
+          })
+        } else {
+          resolve();
+        }
+      })
+    }
+
     addAddressToCart = () => {
       return new Promise((resolve, reject) => {
         let token = appCookie.get('accessToken');
@@ -541,7 +565,12 @@ export class Step2Component extends React.Component {
               }
             }).then((resp) => {
               console.log(resp, "precheckout response");
-              resolve(resp.data.data.orderId);
+              this.saveGST(resp.data.data.orderId)
+                  .then(() => {
+                    resolve(resp.data.data.orderId);
+                  }).catch((err) => {
+                    reject();
+                  })
             }).catch((err) => {
               console.log(err, "precheckout err");
               resolve()
@@ -589,11 +618,8 @@ export class Step2Component extends React.Component {
       event.preventDefault();
       var selected_address = this.state.addressList[this.state.selected_add];
       var localPIN = appCookie.get('pincode');
-      if (selected_address.pincode !== localPIN) {
-        this.setState({
-          pinPop: true
-        })
-        return;
+      if(this.state.same_bill == true) {
+        error_gst: false
       }
       if (this.state.same_bill == false) {
         this.setState({
@@ -604,6 +630,7 @@ export class Step2Component extends React.Component {
           berror_address: false,
           berror_city: false,
           berror_state: false,
+          error_gst: false
         });
 
         if (!validateFullName(this.state.binputText_name)) {
@@ -660,6 +687,19 @@ export class Step2Component extends React.Component {
 
 
       }
+      if (!validateGST(this.state.inputText_gst)) {
+        this.setState({
+          error_gst: true,
+          errorMessage_gst: 'Please enter valid GST Number.',
+        });
+        return;
+      }
+      if (selected_address.pincode !== localPIN) {
+        this.setState({
+          pinPop: true
+        })
+        return;
+      }
       this.handleloginContinue()
       console.log(selected_address, 'this is selected address')
     }
@@ -677,7 +717,7 @@ export class Step2Component extends React.Component {
         error_address: false,
         error_city: false,
         error_state: false,
-
+        error_gst: false,
         berror_name: false,
         berror_number: false,
         berror_email: false,
@@ -735,13 +775,6 @@ export class Step2Component extends React.Component {
         });
         return;
       }
-      if (!validateGST(this.state.inputText_gst)) {
-        this.setState({
-          error_gst: true,
-          errorMessage_gst: 'Please enter valid GST Number.',
-        });
-        return;
-      }
       if (this.state.same_bill == false) {
         if (!validateFullName(this.state.binputText_name)) {
           console.log(this.state.binputText_name, "this is input name")
@@ -795,10 +828,29 @@ export class Step2Component extends React.Component {
           return;
         }
       }
+      if (!validateGST(this.state.inputText_gst)) {
+        this.setState({
+          error_gst: true,
+          errorMessage_gst: 'Please enter valid GST Number.',
+        });
+        return;
+      }
       if (this.props.isLoggedIn) {
         this.callAddress();
       } else {
         this.checkPIN()
+      }
+    }
+
+    handleDefaultAddress = () => {
+      if(this.state.defaultAddress == true) {
+        this.setState({
+          defaultAddress: 'false'
+        })
+      } else {
+        this.setState({
+          defaultAddress: true
+        })
       }
     }
 
@@ -1039,7 +1091,7 @@ export class Step2Component extends React.Component {
                   <div className="row">
                       <div className="col-md-12">
                         <div>
-                          <input className='checkbox' type="checkbox" name="billing" />
+                          <input className='checkbox' type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
                           <label className='label-billing' htmlFor="billing">Make this the default address</label>
                         </div>
                       </div>

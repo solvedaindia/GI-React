@@ -39,10 +39,10 @@ export const validateOTPDigit = input => {
 };
 
 export const validateGST = input => {
-    if (input.length < 15) {
-        return false;
+    if (input === '' || input === undefined) {
+        return true;
     }
-    if (regexGST.test(input) || input === '' || input === undefined) {
+    if (regexGST.test(input) && input.length === 15) {
         return true;
     }
     return false;

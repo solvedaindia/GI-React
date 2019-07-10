@@ -17,6 +17,8 @@ import appCookie from '../../utils/cookie';
 import queryString from 'query-string';
 import apiManager from '../../utils/apiManager';
 import failPop from './failPop'
+import { Redirect } from 'react-router-dom'
+
 import {
   storeId,
   accessToken,
@@ -55,7 +57,8 @@ export class CheckoutComponent extends React.Component {
           pay: false,
           BankID: '',
           paymentMode: '',
-          failPop: false
+          failPop: false,
+          redirect: false
         }
     }
 
@@ -226,6 +229,12 @@ export class CheckoutComponent extends React.Component {
         headers: { store_id: storeId, access_token: token }
       }).then(response => {
         console.log(response, 'order Summary response');
+        if(!response.data.data.orderSummary.netAmount) {
+          this.setState({
+            redirect: true
+          })
+          return;
+        }
         this.setState({
           orderSummaryData: response.data.data.orderSummary
         })
@@ -347,6 +356,9 @@ export class CheckoutComponent extends React.Component {
     }
 
     render() {
+      if (this.state.redirect) {
+        return <Redirect to='/cart'/>;
+      }
       return (
         <div className='checkout'>
         <div className="container">

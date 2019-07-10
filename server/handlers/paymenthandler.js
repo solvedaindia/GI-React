@@ -10,33 +10,18 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     headers,
     callback,
 ) {
-    // if (
-    //   !params.orderId ||
-    //   !params.email ||
-    //   !params.payMethodId ||
-    //   !params.amount ||
-    //   !params.mobile ||
-    //   !params.callbackUrl ||
-    //   !params.BankID ||
-    //   !params.paymentMode ||
-    //   !params.billing_address_id
-    // ) {
-    //   logger.debug('Registered User Login:::Invalid Params');
-    //   callback(errorutils.errorlist.invalid_params);
-    //   return;
-    // }
-    const initiateBDPaymentBody = {
-        orderId: params.orderId,
-        email: params.email,
-        payMethodId: params.payMethodId,
-        amount: params.amount,
-        mobile: params.mobile,
-        callbackUrl: params.callbackUrl,
-        BankID: params.BankID,
-        paymentMode: params.paymentMode,
-        billing_address_id: params.billing_address_id,
-    };
-    const reqHeaders = headerutil.getWCSHeaders(headers);
+    if (!params.orderId ||
+        (!params.email && !params.mobile) ||
+        !params.payMethodId ||
+        !params.amount ||
+        !params.callbackUrl ||
+        !params.paymentMode ||
+        !params.billing_address_id
+    ) {
+        logger.debug('Registered User Login:::Invalid Params');
+        callback(errorutils.errorlist.invalid_params);
+        return;
+    }
 
     if (
         params.paymentMode === 'NET_BANKING' ||
