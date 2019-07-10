@@ -38,7 +38,7 @@ export default class WrdrobesTypes extends Component {
         <div>
       <div className="container">
 
-        <p3 className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p3>
+        <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
         </div>
 
         <Slider {...settings}>

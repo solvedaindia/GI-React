@@ -37,7 +37,7 @@ export default class KitchenHall extends Component {
         <div>
       <div className="container">
         <h2 className="Kitchen-Hall-Of-Fame">Kitchen Hall Of Fame</h2>
-        <p3 className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p3>
+        <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
         </div>
 
         <Slider {...settings}>

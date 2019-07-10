@@ -1,79 +1,92 @@
-import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import React from 'react';
+import { render } from 'react-dom';
+import Form from 'react-bootstrap-form';
+import Input from '../Primitives/consultFormInput'
+import '../../../public/styles/wardrobes/warobes.scss'
 
-const FormPage = () => {
-  return (
-    <MDBContainer>
-        <div className="row">
-            <div className="col-md-6 ">
-            <MDBRow>
-        <MDBCol md="6">
-          <form>
-            <p className="h5 text-center mb-4">Sign up</p>
-            <div className="grey-text">
-              <MDBInput
-                label="Your name"
-                icon="user"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <MDBInput
-                label="Your email"
-                icon="envelope"
-                group
-                type="email"
-                validate
-                error="wrong"
-                success="right"
-              />
-             
-            </div>
-            
-          </form>
-        </MDBCol>
-      </MDBRow>
-            </div>
-            <div className="col-md-6">
-            <MDBRow>
-        <MDBCol md="6">
-          <form>
-            <p className="h5 text-center mb-4">Sign up</p>
-            <div className="grey-text">
-              <MDBInput
-                label="Your name"
-                icon="user"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <MDBInput
-                label="Your email"
-                icon="envelope"
-                group
-                type="email"
-                validate
-                error="wrong"
-                success="right"
-              />
-            
-            </div>
-            <div className="text-center">
-              <MDBBtn color="primary">Register</MDBBtn>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
-            </div>
 
-    
-      </div>
-    </MDBContainer>
-  );
-};
 
-export default FormPage;
+
+class ConsultForm extends React.Component {
+  state = {
+    category: null,
+    isLoading: true,
+    errors: null,
+  };
+
+ /* getHeaderLayer2() {
+    apiManager
+      .get(navigationApi)
+      .then(response => {
+        this.setState({
+          category: response.data.data.categoryArray,
+          isLoading: false,
+        });
+        console.log('Category Navigation Data', response.data.data);
+      })
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
+
+  componentDidMount() {
+    this.getHeaderLayer2();
+  }*/
+
+    render() {
+        return (
+         <div>
+           <div className="row">
+             <div className="col-md-6 ">
+
+               <input className="form-controlerLeft" id="name" name="name" type="text"/>
+
+             </div>
+             <div className="col-md-6">
+
+
+               <div className="">
+                 <input className="form-controler" id="name" style={{marginLeft:'20'}} name="name" type="text"/> </div>
+             </div>
+           </div><br/><br/>
+
+
+           <div className="row">
+             <div className="col-md-6 ">
+                 <select className="form-controlerLeft">
+                   <option value="Select an option">Select an option</option>
+                   <option value="Select an option">Select an option</option>
+                   <option value="Select an option">Select an option</option>
+                   <option value="Select an option">Select an option</option>
+                 </select>
+
+             </div>
+             <div className="col-md-6">
+
+
+               <div className="">
+               <label className="form-labeled" htmlFor="address">Name</label>
+
+                 <input className="form-controler" id="name" name="name" type="text"/> </div>
+             </div>
+           </div><br/><br/><br/>
+           <div className="row">
+             <div className="col-md-12">
+
+               <div className="form-div clearfix div-error">
+                 <div className="">
+                   <input className="form-controlered" id="name" name="name" type="text"/> </div>
+               </div>
+               <div className='row'>
+                     <div className='col-md-12 form-group'>
+                     <button className="">Send</button>
+                     </div>                    
+                    </div>
+
+             </div>
+           </div>
+
+         </div>
+        );
+    }
+}  
+
+export default ConsultForm;

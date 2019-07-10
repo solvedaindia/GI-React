@@ -49,8 +49,8 @@ return (
     <WardrobeBanner />
     <div className="text-blocks">
       <h4 className="bannerTexts">Steel Chef</h4>
-      <p2 className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-        eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. </p2><br /><br />
+      <p className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. </p><br /><br />
       <button className="butt">
         <p className="buttontex">Book A Consultation</p>
       </button>
@@ -407,17 +407,17 @@ return (
     <div className="text-blocks">
       <h1 className="Image-gallery-Copy-3">Our store</h1>
       <h4 className="Image-gallery-Copy-3 ">Experience our store facilities</h4>
-      <p2 className="A-one-stop-shop-inte">Experience our wardrobe at <span className="spanish">Vikroli Godrej Store
+      <p className="A-one-stop-shop-inte">Experience our wardrobe at <span className="spanish">Vikroli Godrej Store
           (1.6 km away)</span><br />
         You can find more stores around you.<br />
-        the home you've always wanted</p2> <br />
+        the home you've always wanted</p> <br />
       <button className="seeMored">Find More Stores</button>
     </div>
 
   </div>
   <div className="aboutgodrej">
     <h className="About-Godrej-Interio ">Modular Wardrobes</h><br /><br />
-    <p1 className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
+    <p className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
       manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
       diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
 
@@ -433,7 +433,7 @@ return (
       and through 800 dealer outlets.<br />
 
       Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
-      India’s largest engineering and consumer product groups.</p1>
+      India’s largest engineering and consumer product groups.</p>
     <br /><br /><br /><br /><br /><br /><br /><br />
     <button className="Read-More">Read More</button>
   </div>
