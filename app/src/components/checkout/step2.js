@@ -47,6 +47,7 @@ import {
 import {
   EROFS
 } from 'constants';
+import { replace } from 'connected-react-router';
 
 export class Step2Component extends React.Component {
     constructor(props) {
@@ -67,6 +68,7 @@ export class Step2Component extends React.Component {
         state: '',
         ship_add_id: '',
         bill_add_id: '',
+        orderId: '',
         pinPop: false,
         error_name: false,
         error_number: false,
@@ -383,7 +385,20 @@ export class Step2Component extends React.Component {
               new_add: null
             })
           } else {
-            this.handleProceed()
+            this.addAddressToCart()
+              .then((orderId) => {
+                console.log(orderId, "this is order id")
+                var selected_add = {
+                  address: this.state.inputText_address,
+                  city: this.state.inputText_city,
+                  state: this.state.inputText_state,
+                  pincode: this.state.inputText_pincode,
+                  orderId: orderId,
+                  billAddId: this.state.bill_add_id
+                }
+                this.props.handleAddress(selected_add);
+                this.handleProceed()
+              })
           }
         }).catch((err) => {
           throw new Error(err);
@@ -420,6 +435,7 @@ export class Step2Component extends React.Component {
                   bill_add_id: billAddId
                 })
               })
+              resolve();
           } else {
             if (!this.props.isLoggedIn && this.state.same_bill == true) {
               this.setState({
@@ -438,6 +454,7 @@ export class Step2Component extends React.Component {
 
     saveBillAdd = () => {
       return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
         var bdata = {
           name: this.state.binputText_name,
           pincode: this.state.binputText_pincode,
@@ -502,7 +519,7 @@ export class Step2Component extends React.Component {
           }).then((res) => {
             console.log(response, "add address to cart response");
             var reqdata = {
-              order_id: response.data.data.orderId
+              order_id: response.data.data.orderID
             }
             axios.post(PreCheckoutAPI, reqdata, {
               headers: {
@@ -511,11 +528,11 @@ export class Step2Component extends React.Component {
               }
             }).then((resp) => {
               console.log(resp, "precheckout response");
+              resolve(resp.data.data.orderId);
             }).catch((err) => {
               console.log(err, "precheckout err");
               resolve()
             })
-            resolve();
           }).catch((err) => {
             console.log(body, err,  "add address to cart response");
             resolve();
@@ -545,7 +562,10 @@ export class Step2Component extends React.Component {
         console.log(this.state.ship_add_id, this.state.bill_add_id, "shipping and billing address id")
       }
 
-      this.addAddressToCart().then(() => {
+      this.addAddressToCart().then((orderId) => {
+        console.log(orderId, "this is order id")
+        selected_address.orderId = orderId;
+        selected_address.billAddId = this.state.bill_add_id;
         this.props.handleAddress(selected_address);
         this.props.proceed();
       })
@@ -755,7 +775,7 @@ export class Step2Component extends React.Component {
           return;
         }
       }
-      if (this.isLoggedIn) {
+      if (this.props.isLoggedIn) {
         this.callAddress();
       } else {
         this.checkPIN()
@@ -768,7 +788,7 @@ export class Step2Component extends React.Component {
         this.state.addressList.forEach((add, index) => {
           list.push(
             <div className="col-md-6">
-              <ul class="saveAddress">
+              <ul className="saveAddress">
                 <li className='list' onClick={this.handleAddressChange.bind(this, index)} style={{cursor: "pointer"}}>
                   <div className='inputBox'>
                      <input type="radio" name="optradio" value={index}  checked={this.state.selected_add == index} />
@@ -848,14 +868,8 @@ export class Step2Component extends React.Component {
                           {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> :
                           null}
                         </div>
-                        {/* <label className="from-label" htmlFor="name">Full Name</label>
-                        <input type="text" name="name" className="form-control" /> */}
                       </div>
                       <div className="col-md-6 colpaddingRight">
-                        {/* <label className="from-label" htmlFor="phone">Phone Number</label>
-                        <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e=>
-                        this.phoneChange(e)} /> */}
-
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
                             onChange={e=> this.phoneChange(e)} />
@@ -869,9 +883,6 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
-                        {/* <label className='form-label' htmlFor="pin">Pin Code</label>
-                        <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e=>
-                        this.pinChange(e)} /> */}
                         <div className="form-div clearfix div-error">
                           <Input inputType="number" title="Pin Code" name="pin" value={this.state.inputText_pincode}
                             handleChange={this.handleInput} />
@@ -880,9 +891,6 @@ export class Step2Component extends React.Component {
                         </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label className="from-label" htmlFor="email">Email</label>
-                        <input type="text" name="email" className="form-control" value={this.state.email} onChange={e=>
-                        this.mailChange(e)} /> */}
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="Email (Optional)" id="email" name="Email"
                             value={this.state.email} onChange={e=> this.mailChange(e)} />
@@ -893,8 +901,6 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        {/* <label className="from-label" htmlFor="address">Address</label>
-                        <textarea type="text" name="address" className="form-control" /> */}
                          <div className="form-div clearfix div-error">
                             <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
                             {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
@@ -903,16 +909,12 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        {/* <label  className="from-label" htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" value={this.state.city} /> */}
                          <div className="form-div clearfix div-error">
                            <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} handleChange={this.handleInput} />
                            {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                          </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label  className="from-label" htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" value={this.state.state} /> */}
                          <div className="form-div clearfix div-error">
                            <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} />
                            {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
@@ -939,16 +941,12 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
-                      {/* <label htmlFor="fullname">Full Name</label>
-                      <input type="text" name="fullname" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
                            <Input inputType="text" title="Full Name" id="bname" name="bname" handleChange={this.handleInput}/>
                            {this.state.berror_name ? <div className='error-msg'>{this.state.berrorMessage_name}</div> : null}
                          </div>
                     </div>
                     <div className="col-md-6">
-                      {/* <label htmlFor="phone">Phone Number</label>
-                      <input type="text" name="phone" className="form-control" /> */}
                        <div className="form-div clearfix div-error">
                          <Input inputType="text" title="Phone Number" id="bphone" name="bphone" handleChange={this.handleInput} />
                          {this.state.berror_number ? (
@@ -961,16 +959,12 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
-                      {/* <label htmlFor="pin">Pin Code</label>
-                      <input type="text" name="pin" className="form-control" /> */}
                        <div className="form-div clearfix div-error">
                          <Input inputType="text" title="Pin Code" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
                          {this.state.berror_pincode ? <div className='error-msg'>{this.state.berrorMessage_pincode}</div> : null}
                        </div>
                     </div>
                     <div className="col-md-6">
-                      {/* <label htmlFor="email">Email</label>
-                      <input type="text" name="email" className="form-control" /> */}
                       <div className="form-div clearfix div-error">
                          <Input inputType="text" title="Email (Optional)" id="bemail" name="bemail" handleChange={this.handleInput} />
                          {this.state.berror_email ? <div className="error-msg">{this.state.berrorMessage_email}</div> : null}
@@ -987,16 +981,12 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
-                        {/* <label htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
                          <Input inputType="text" title="City/District" name="bcity" id="bcity" value={this.state.binputText_city} handleChange={this.handleInput} />
                          {this.state.berror_city ? <div className='error-msg'>{this.state.berrorMessage_city}</div> : null}
                        </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
                          <Input inputType="text" title="State" name="bstate" value={this.state.binputText_state} id="bstate" />
                          {this.state.berror_state ? <div className='error-msg'>{this.state.berrorMessage_state}</div> : null}
@@ -1012,17 +1002,13 @@ export class Step2Component extends React.Component {
                         :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
                      </div>
                     </div>
-
                     <div className="row">
                       <div className="col-md-12">
-                        {/* <label htmlFor="gst">GSTIN (Optional)</label>
-                        <input type="text" name="gst" className="form-control" />                         */}
                         <div className="form-div clearfix div-error">
                          <Input inputType="text" title="GSTIN (Optional)" name="city"/>
                        </div>
                       </div>
                     </div>
-
                     <div className='row'>
                      <div className='col-md-12 form-group'>
                      <button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Continue</button>
@@ -1046,23 +1032,19 @@ export class Step2Component extends React.Component {
                         </div>
                     </div>
                   </div>}
-                    
-                  </div>
-                
+                </div>
               </div>
-              
               <div className="listRow clearfix">
-                 <div className='stepActive'>
+                <div className='stepActive'>
                   <div className='stepbgNone'>3</div>
-                 </div>
+                </div>
                 <div className="leftBox">
-                <div className='heading-label'>Pay By</div>
+                  <div className='heading-label'>Pay By</div>
                 </div>
                 <div className="rightBox">
-                <div className='heading-label'>Choose a payment method</div>
+                  <div className='heading-label'>Choose a payment method</div>
                 </div>
               </div>
-              
             </div>
       )
     }

@@ -26,8 +26,52 @@ export class Step3Component extends React.Component {
         this.state = {
           showGift: false,
           showBanks: false,
-          showWallets: false
+          showWallets: false,
+          banks: '',
+          wallets: '',
+          bankId: '',
+          paymentModeId: '',
+          CODCheck: false,
+          EMICheck: false,
+          creditCheck: false,
+          UPICheck: false,
+          walletCheck: false,
+          netBankCheck: false
         }
+    }
+
+    componentDidMount() {
+      this.callBankDataAPI();
+    }
+
+    callBankDataAPI = () => {
+      let token = appCookie.get('accessToken');
+        axios.get(BankListAPI, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then((response) => {
+          console.log(response, "this is bank list response")
+          var bankdata = response.data.data.bankList;
+          var banks = [];
+          var wallets = [];
+          bankdata.forEach((elem) => {
+            if(elem.Type == "Bank") {
+              banks.push(elem)
+            }
+            if(elem.Type == "Wallet") {
+              wallets.push(elem);
+            }
+          })
+
+          this.setState({
+            banks: banks,
+            wallets: wallets
+          })
+        }).catch((err) => {
+          console.log(err);
+        })
     }
 
     handleHasPass = () => {
@@ -73,28 +117,26 @@ export class Step3Component extends React.Component {
         })
       } else {
         this.setState({
-          showBanks: true
+          showBanks: true,
+          showWallets: false
         })
       }
     }
+
+    checkBanks(index) {
+      var bank = this.state.banks[index]
+      var data = {
+        BankID: bank.bankID,
+        paymentMode: 'NET_BANKING'
+      }
+      this.props.enalblePay(data);
+    }
     renderBanks = () => {
-      if(this.state.showBanks) {
+      if(this.state.netBankCheck) {
         var menuItems = [];
-        let token = appCookie.get('accessToken');
-        axios.get(BankListAPI, {
-          headers: {
-            store_id: storeId,
-            access_token: token
-          }
-        }).then((response) => {
-          console.log(response, "this is bank list response")
-          var bankdata = response.data.data.bankList;
-          bankdata.forEach((item, index) => {
-            menuItems.push(<div><MenuItem eventKey={index+1}>{item.bankName}</MenuItem>
-            <MenuItem divider /></div>)
-          })
-        }).catch((err) => {
-          console.log(err);
+        this.state.banks.forEach((item, index) => {
+          menuItems.push(<div><MenuItem key={index} onClick={this.checkBanks.bind(this, index)} eventKey={index+1}>{item.bankName}</MenuItem>
+          <MenuItem divider /></div>)
         })
         return <DropdownButton
                   bsSize="large"
@@ -107,34 +149,116 @@ export class Step3Component extends React.Component {
     }
 
     showWallets = () => {
-      if(this.state.showBanks) {
+      console.log("show walledts call")
+      if(this.state.showWallets) {
         this.setState({
-          showBanks: false
+          showWallets: false
         })
       } else {
         this.setState({
-          showBanks: true
+          showWallets: true,
+          showBanks: false
+        })
+      }
+    }
+
+    handleOptionChange(event) {
+      this.setState({
+        CODCheck: false,
+        EMICheck: false,
+        creditCheck: false,
+        UPICheck: false,
+        walletCheck: false,
+        netBankCheck: false
+      })
+      // if(event.target.name == "credit" || event.target.name == "UPI" || event.target.name == "EMI") {
+      //   this.props.enalblePay();
+      // } else {
+      //   this.props.disablePay();
+      // }
+      if(event.target.name == "credit") {
+        this.props.enalblePay({paymentMode: 'CREDIT_CARD'});
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'CREDIT_CARD',
+          creditCheck: true
+        })
+      }
+      if(event.target.name == "netBank") {
+        this.props.disablePay();
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'NET_BANKING',
+          netBankCheck: true
+        })
+      }
+      if(event.target.name == 'COD') {
+        this.props.disablePay();
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'COD',
+          CODCheck: true
+        })
+      }
+      if(event.target.name == 'UPI') {
+        this.props.enalblePay({paymentMode: 'UPI'});
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'UPI',
+          UPICheck: true
+        })
+      }
+      if(event.target.name == 'EMI') {
+        this.props.enalblePay({paymentMode: 'CC_EMI'});
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'CC_EMI',
+          EMICheck: true
+        })
+      }
+      if(event.target.name == 'wallet') {
+        this.props.disablePay();
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'EMI',
+          walletCheck: true
         })
       }
     }
 
     renderWallets = () => {
-      if(this.state.showWallets) {
+      if(this.state.walletCheck) {
+        console.log("rendering show wallets")
+        var menuItems = [];
+        this.state.wallets.forEach((item, index) => {
+          menuItems.push(<div><MenuItem eventKey={index+1} key={index} onClick={this.checkWallet.bind(this, index)}>{item.bankName}</MenuItem>
+            <MenuItem divider /></div>)
+        })
         return <DropdownButton
                   bsSize="large"
-                  title="Select a Bank"
+                  title="Select a Wallet"
                   id="dropdown-size-large"
                 >
-                  <MenuItem eventKey="1">Paytm</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="2">Mobikwik</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="3">PhonePE</MenuItem>
-                  <MenuItem divider />
+                  {menuItems}
                 </DropdownButton>
       }
     }
+    
+    checkWallet(index) {
+      var wallet = this.state.wallets[index];
+      var data = {
+        BankID: wallet.bankID,
+        paymentMode: ''
+      }
+      console.log(wallet, "this is selected wallet");
 
+    }
     showGiftCard = () => {
         if(this.state.showGift == true) {
           this.setState({
@@ -159,7 +283,7 @@ export class Step3Component extends React.Component {
                   </div>
 
                   <div className="email-box">                  
-                     <h4 className='heading-label'>783-347-3248</h4>                     
+                     <h4 className='heading-label'>{this.props.logonBy}</h4>                     
                   </div>   
 
                   {!this.props.isLoggedIn ? <div className="action-button">
@@ -200,7 +324,7 @@ export class Step3Component extends React.Component {
                     <div className='labelInput-greybg customCheckbox clearfix'>
                     <div class="input_box">
                       <input className='inputCheck' type="checkbox" id="checkbox" name="redeem" />
-                      <label class="lblCheck defaultlbl" for="checkbox"></label>
+                      <label class="lblCheck defaultlbl" htmlFor="checkbox"></label>
                     </div>
                      
                     <label className='form-label' htmlFor="redeem">Godrej Credit <div className="clearfix"></div><span className='pricetext'>500 Credit used in this order</span></label>
@@ -209,7 +333,7 @@ export class Step3Component extends React.Component {
                     <div className='labelInput-greybg customCheckbox clearfix'>
                     <div class="input_box">                      
                       <input className='inputCheck' id="checkboxRedeem" type="checkbox" name="redeem" onChange={this.showGiftCard}/>
-                      <label class="lblCheck defaultlbl" for="checkboxRedeem"></label>
+                      <label class="lblCheck defaultlbl" htmlFor="checkboxRedeem"></label>
                     </div>
                       
                       <label className='form-label' htmlFor="redeem">Redeem Gift Card</label>
@@ -225,37 +349,37 @@ export class Step3Component extends React.Component {
                     </div>
  
                    <div className='paymentMethod'>
-                    <h4 className='heading'>Select Payment Method</h4>                    
+                    <h4 className='heading'>Select Payment Method</h4>                   
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
+                        <input className='inputRadio' type="radio" name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
                         <label className='form-label'>Credit Card/Debit Card</label>
                       </div>
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" onChange={this.showBanks} />
+                        <input className='inputRadio' type="radio" name="netBank" checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
                         <label className='form-label'>Netbanking</label>
                       </div>
 
                       {this.renderBanks()}
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
+                        <input name="cod" className='inputRadio' type="radio" name="COD" checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
                         <label className='form-label'>Cash on Delivery</label>
                       </div>
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
+                        <input className='inputRadio' type="radio" name="UPI" checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
                         <label className='form-label'>UPI Payment</label>
                       </div>
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
+                        <input className='inputRadio' type="radio" name="EMI" checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
                         <label className='form-label'>EMI</label>
                       </div>
 
                       <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="optradio" />
-                        <label className='form-label' onChange={this.showWallets}>Wallets</label>
+                        <input className='inputRadio' type="radio" name="wallet" checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
+                        <label className='form-label'>Wallets</label>
                       </div>
                       {this.renderWallets()}
                     

@@ -23,7 +23,7 @@ export class OrderSummaryComponent extends React.Component {
               <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
               <div className='listRow clearfix'>
                 <div className='lefttext-box'>Cart Total</div>
-                <div className='righttext-box'>&#8377;{this.props.orderData.totalAmount}</div>
+                <div className='righttext-box'>&#8377;{this.props.orderData.netAmount}</div>
               </div>
 
               <div className='listRow clearfix'>
@@ -56,7 +56,7 @@ export class OrderSummaryComponent extends React.Component {
              </div>              
               
               <div className="payBtn">
-                <button className="btn-block btn-blackbg disableddiv">Pay &#8377;{this.props.orderData.netAmount}</button>
+                <button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>Pay &#8377;{this.props.orderData.netAmount}</button>
               </div>
               <div className="SecureCheckout">
                 Secure Checkout
