@@ -9,20 +9,11 @@ class FaqAnswers extends React.Component {
         super(props);
         
         this.state = {
-            // imgList: [scatchImg1,scatchImg2,scatchImg3],
-// index: 0
+           
         }
     }
 
-  
-        
-        
-     
-      
-    
-  
-
-  render() {
+render() {
     return (
         <div className="container">
           <br />

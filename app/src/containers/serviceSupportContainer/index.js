@@ -49,9 +49,7 @@ export default class HelpSupport extends React.Component {
                 <button className="uldivlight">My Order Queries</button>
               </li>
               <li>
-                <button className="uldivlight">Cancellations and Returns</button>
-
-              </li>
+                <button className="uldivlight">Cancellations and Returns</button></li>
               <li>
                 <button className="uldivlight">Gift Cards</button>
 
@@ -63,80 +61,51 @@ export default class HelpSupport extends React.Component {
             </ul>
           </div>
           <div className="col-md-10">
-            <FaqAnswers /><br/><br/><br/>
+            <FaqAnswers /><br /><br /><br />
             <hr className="hr" />
             <h1 className="Header-Copy-4">Contact Customer Care</h1>
             <div className="row">
               <div className="col-md-6">
-<h4 className="enquiry">Enquiries</h4>
-<div className="row">
-  <div className="col-sm-4">
-  <img
-                  className="emailus"
-                  src={require('../../../public/images/emailus.png')}
-                  alt="Rectangle"
-                />
-                <h4 className="contactus">Email</h4>
-                <h4 className="emailsmall">talktous@godrej.com</h4>
+                <h4 className="enquiry">Enquiries</h4>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+                    <h4 className="contactus">Email</h4>
+                    <h4 className="emailsmall">talktous@godrej.com</h4>
 
-  </div>
-  <div className="col-sm-4"></div>
-  <img
-                  className="emailus"
-                  src={require('../../../public/images/1034131.svg')}
-                  alt="Rectangle"
-                />
-                                <h4 className="contactus">Contact-Us</h4>
-                                <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
-
-
-</div>
+                  </div>
+                  <div className="col-sm-4"></div>
+                  <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+                  <h4 className="contactus">Contact-Us</h4>
+                  <h4 className="emailsmall">+91 8654123547<br />+91 6325415873</h4>
+                </div>
               </div>
               <div className="col-md-6">
-              <h4 className="enquiry">After Sales Services</h4>
-<div className="row">
-  <div className="col-sm-4">
-  <img
-                  className="emailus"
-                  src={require('../../../public/images/emailus.png')}
-                  alt="Rectangle"
-                />
-                <h4 className="contactus">Email</h4>
-                <h4 className="emailsmall">talktous@godrej.com</h4>
-
-  </div>
-  <div className="col-sm-4"></div>
-  <img
-                  className="emailus"
-                  src={require('../../../public/images/1034131.svg')}
-                  alt="Rectangle"
-                />
-                                <h4 className="contactus">Contact-Us</h4>
-                                <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
-
-
-</div>
-<div className="chat"><br/>
-<div className="row">
-  <div className="col-md-6">  <h4 className="chattext">Live Chat </h4>
-</div>
-  <div className="col-md-6">
-  <img
-                  className="chatIcon"
-                  src={require('../../../public/images/chat.png')}
-                  alt="Rectangle"
-                />
-  </div>
-
-</div>
-  
-  </div>
+                <h4 className="enquiry">After Sales Services</h4>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+                    <h4 className="contactus">Email</h4>
+                    <h4 className="emailsmall">talktous@godrej.com</h4>
+                  </div>
+                  <div className="col-sm-4"></div>
+                  <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+                  <h4 className="contactus">Contact-Us</h4>
+                  <h4 className="emailsmall">+91 8654123547<br />+91 6325415873</h4>
+                </div>
+                <button className="chat"><br />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h4 className="chattext">Live Chat </h4>
+                    </div>
+                    <div className="col-md-6">
+                      <img className="chatIcon" src={require('../../../public/images/chat.png')} alt="Rectangle" />
+                    </div>
+                  </div>
+                </button>
               </div>
-
             </div>
-
           </div>
-
         </div>
       </div>
     );

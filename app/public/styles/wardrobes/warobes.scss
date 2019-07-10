@@ -18,9 +18,9 @@
     color: white;
   }
   .butt {
-    width: 150px;
-    height: 30px;
-    background-color: #070707;
+    width: 263px;;
+    height: 46px;
+    background-color: white;
   }
   .header {
     width: 411px;
@@ -74,14 +74,14 @@
     height: 46px;
     background-color: #070707;
   }
-  .bannerkitchen {
+  .bannerkitchenss {
     width: 1440px;
     height: 410px;
     background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
   }
   .bann {
     width: 1440px;
-    height: 410px;
+    height: 625px;
     background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
   }
 
@@ -514,10 +514,9 @@ react-slideshow-container {
   height: 261px;
   width: 540px;
   position: absolute;
-  top: 50%;
-left: 50%;
+  top: 63%;
+left: 25%;
 transform: translate(-50%, -50%);
-background-color: rgba(255, 255, 255, .4);
   color: white;
   padding-left: 20px;
   padding-right: 20px;
@@ -616,6 +615,18 @@ background-color: rgba(255, 255, 255, .4);
     font-family: CeraGodrejInterio;
     font-size: 30px;
     font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  .Types-of-Modular-Ward {
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -726,7 +737,7 @@ background-color: rgba(255, 255, 255, .4);
     text-align: center;
 }
 .A-one-stop-shop-inte{
-  color: black;
+  color: white;
   font-weight: bold;
   font-size: 16px;
   text-align: center;
@@ -736,3 +747,49 @@ background-color: rgba(255, 255, 255, .4);
   height: 46px;
   background-color: #070707;
 }
+/*....kitchen....*/
+.bannerTexts {
+  width: 411px;
+  height: 60px;
+  font-family: CeraGodrejInterio;
+  font-size: 56px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.07;
+  letter-spacing: normal;
+  color:white;
+}
+.buttontex{
+  color:#070707;
+  width:135px;
+  height:17px;
+  font-size:14px;
+  text-align: center;
+}
+.This-project-requirement {
+  // width: 751px;
+  height: 60px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: black
+}
+
+
+  .colorsKitchen{
+    margin-right: 20px;
+    height: 166px;
+    width:166px;;
+  }
+  .namingconv {
+    height:17px;
+    text-align: center;
+    font-size:14px;
+    color: black;
+  }
