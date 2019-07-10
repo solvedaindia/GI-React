@@ -26,7 +26,8 @@ import {
   validatePindcode,
   validateAddress,
   validateCityDistrict,
-  validateState
+  validateState,
+  validateGST
 } from '../../utils/validationManager';
 import {
   storeId,
@@ -77,6 +78,7 @@ export class Step2Component extends React.Component {
         error_address: false,
         error_city: false,
         error_state: false,
+        error_gst: false,
 
         errorMessage_name: '',
         errorMessage_number: '',
@@ -85,6 +87,7 @@ export class Step2Component extends React.Component {
         errorMessaget_address: '',
         errorMessage_city: '',
         errorMessage_state: '',
+        errorMessage_gst: '',
         inputText_name: '',
         inputText_number: '',
         inputText_email: '',
@@ -92,6 +95,7 @@ export class Step2Component extends React.Component {
         inputText_address: '',
         inputText_city: '',
         inputText_state: '',
+        inputText_gst: '',
 
         berror_name: false,
         berror_number: false,
@@ -287,6 +291,7 @@ export class Step2Component extends React.Component {
         error_address: false,
         error_city: false,
         error_state: false,
+        error_gst: false,
         berror_name: false,
         berror_number: false,
         berror_email: false,
@@ -328,6 +333,14 @@ export class Step2Component extends React.Component {
           return this.setState({
             inputText_state: value.target.value,
           });
+        case 'gst':
+          if(value.target.value.length <= 15) {
+            return this.setState({
+              inputText_gst: value.target.value,
+            });
+          } else {
+            return false;
+          }
         case 'bname':
           return this.setState({
             binputText_name: value.target.value,
@@ -722,6 +735,13 @@ export class Step2Component extends React.Component {
         });
         return;
       }
+      if (!validateGST(this.state.inputText_gst)) {
+        this.setState({
+          error_gst: true,
+          errorMessage_gst: 'Please enter valid GST Number.',
+        });
+        return;
+      }
       if (this.state.same_bill == false) {
         if (!validateFullName(this.state.binputText_name)) {
           console.log(this.state.binputText_name, "this is input name")
@@ -1005,7 +1025,8 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="GSTIN (Optional)" name="city"/>
+                         <Input inputType="text" title="GSTIN (Optional)" value={this.state.inputText_gst} name="gst" handleChange={this.handleInput} />
+                         {this.state.error_gst ? <div className='error-msg'>{this.state.errorMessage_gst}</div> : null}
                        </div>
                       </div>
                     </div>

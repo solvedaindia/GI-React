@@ -4,7 +4,8 @@ import {
   storeId,
   accessToken,
   accessTokenCookie,
-  OrderSummaryAPI
+  OrderSummaryAPI,
+  minEMIAPI
 } from '../../../public/constants/constants';
 import appCookie from '../../utils/cookie';
 import axios from 'axios';
@@ -13,11 +14,31 @@ export class OrderSummaryComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          
+          minEMI: false
         }
     }
 
+    // componentDidMount() {
+    //   this.callEMI()
+    // }
+    callEMI = () => {
+        let token = appCookie.get('accessToken');
+      axios.get(`${minEMIAPI}/${this.props.orderData.netAmount}`, {
+        headers: { store_id: storeId, access_token: token }
+      }).then((res) => {
+        this.setState({
+          minEMI: res.data.data.minEMIValue
+        })
+        console.log(res, 'emi reposnse')
+      }).catch((err) => {
+        console.log('min emi error', err)
+      })
+    }
+
     render() {
+      if(this.state.minEMI == false) {
+        this.callEMI()
+      }
       return (
             <div className='col-md-4 col-sm-12 col-xs-12 orderSummary'>
               <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
@@ -44,7 +65,7 @@ export class OrderSummaryComponent extends React.Component {
               <div className='freeshipping'>Free shipping on cart total above &#8377;5000  </div>
               <div className='startEmi clearfix'>
                 <div className='emi-icon'><img src={EMI} alt='EMI'/></div>
-                <div className='emitext'> Starting from &#8377;999 per month</div>
+                <div className='emitext'> Starting from &#8377;{this.state.minEMI} per month</div>
                 <div className='knowmore'>Know More</div>
               </div>
              

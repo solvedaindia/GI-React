@@ -253,9 +253,10 @@ export class Step3Component extends React.Component {
     checkWallet(index) {
       var wallet = this.state.wallets[index];
       var data = {
-        BankID: wallet.bankID,
-        paymentMode: ''
-      }
+        BankID: '123',
+        paymentMode: wallet.bankID
+      };
+      this.props.enalblePay(data);
       console.log(wallet, "this is selected wallet");
 
     }

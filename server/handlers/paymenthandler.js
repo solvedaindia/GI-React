@@ -26,7 +26,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     if (
         params.paymentMode === 'NET_BANKING' ||
         params.paymentMode === 'PAYTM' ||
-        params.paymentMode === 'UPI' ||
+        // params.paymentMode === 'UPI' ||
         params.paymentMode === 'PHONEPE'
     ) {
         if (!params.BankID) {

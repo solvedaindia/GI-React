@@ -248,9 +248,12 @@ export class CheckoutComponent extends React.Component {
         amount: this.state.orderSummaryData.netAmount,
         billing_address_id: this.state.ship_add.billAddId,
         callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
-        BankID: '123',
+        BankID: this.state.BankID,
         paymentMode: this.state.paymentMode
       };
+      if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+        body.BankID = '123'
+      }
       let token = appCookie.get('accessToken');
       axios.post(CreateCheckSumAPI, body, {
         headers: { store_id: storeId, access_token: token }
@@ -258,8 +261,8 @@ export class CheckoutComponent extends React.Component {
         console.log(response, "checksum response")
         var res = response.data.data.response;
         var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=CREDIT`;
-        if(this.state.paymentMode == "NET_BANKING") {
-          url = `https://uat.billdesk.com/pgidsk/PGIMerchantRequestHandler?hidRequestId=PGIME1000&hidOperation=ME100&msg=${res.msg}`;
+        if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+          url = `${res.transactionUrl}&msg=${res.msg}`;;
           //  axios.post(url, {}, {
 
           //   }).then((redirect) => {

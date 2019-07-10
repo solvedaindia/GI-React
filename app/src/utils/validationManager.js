@@ -14,27 +14,39 @@ export const regexPwChar = /[a-zA-Z]/;
 /* Whether Pincode numeric and 6 digits */
 export const regexPincode = /^\d{6}$/;
 /* Whether string contains special character or not */
-export const regexName = /^[A-Za-z ]+$/
+export const regexName = /^[A-Za-z ]+$/;
+
+export const regexGST = /^[a-zA-Z0-9]+$/;
 
 /** ******* Functions ******* */
 /* Validate empty object */
 export const validateEmptyObject = input => {
-  if (input === null || input === undefined || input === '') {
-    return false;
-  }
+    if (input === null || input === undefined || input === '') {
+        return false;
+    }
 
-  return true;
+    return true;
 };
 
 /* Validate OTP digits */
 export const validateOTPDigit = input => {
-  const restrictionDigits = 4;
-  if (String(input).length == restrictionDigits) {
-    return true;
-  }
+    const restrictionDigits = 4;
+    if (String(input).length == restrictionDigits) {
+        return true;
+    }
 
-  return false;
+    return false;
 };
+
+export const validateGST = input => {
+    if (input.length < 15) {
+        return false;
+    }
+    if (regexGST.test(input) || input === '' || input === undefined) {
+        return true;
+    }
+    return false;
+}
 
 /** -----------------------------------------------------------------------
  * Validate FullName
@@ -42,10 +54,10 @@ export const validateOTPDigit = input => {
  * Should be less then 100 characters
  */
 export function validateFullName(data) {
-  if (data.length <= 100 && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (data.length <= 100 && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -54,10 +66,10 @@ export function validateFullName(data) {
  * Should be 10 characters and all numeric
  */
 export function validateMobileNo(data) {
-  if (regexMobileNo.test(data) && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (regexMobileNo.test(data) && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -66,11 +78,11 @@ export function validateMobileNo(data) {
  * Should be 10 digit and all numeric
  */
 export function validateEmailId(data) {
-  console.log('Validate Email- ---- ', data);
-  if (regexEmail.test(data) || data === '' || data === undefined) {
-    return true;
-  }
-  return false;
+    console.log('Validate Email- ---- ', data);
+    if (regexEmail.test(data) || data === '' || data === undefined) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -79,10 +91,10 @@ export function validateEmailId(data) {
  * Should be 6 Digit and all numeric
  */
 export function validatePindcode(data) {
-  if (regexPincode.test(data) && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (regexPincode.test(data) && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -91,10 +103,10 @@ export function validatePindcode(data) {
  * Should be 200 character limit
  */
 export function validateAddress(data) {
-  if (data.length <= 200 && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (data.length <= 200 && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -103,10 +115,10 @@ export function validateAddress(data) {
  * Should be 128 character limit
  */
 export function validateCityDistrict(data) {
-  if (data.length <= 128 && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (data.length <= 128 && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
 
 /** -----------------------------------------------------------------------
@@ -115,8 +127,8 @@ export function validateCityDistrict(data) {
  * Should be 128 character limit
  */
 export function validateState(data) {
-  if (data.length <= 128 && validateEmptyObject(data)) {
-    return true;
-  }
-  return false;
+    if (data.length <= 128 && validateEmptyObject(data)) {
+        return true;
+    }
+    return false;
 }
