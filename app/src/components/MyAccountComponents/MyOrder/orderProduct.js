@@ -43,13 +43,13 @@ class ProductOrder extends React.Component {
           </div>
 
           <div className="orderbtn">
-            <button className="btn-borderwhite btn-cancel">Cancel Order</button>
-            {/* {productData.shipmentData.length > 2 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase 1 as Per BRD */}
+            {productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
-            </button> : null} */}
-            <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            </button> : null}
+            {/* <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
-            </button>
+            </button> */}
 
           </div>
           <div className='clearfix'></div>

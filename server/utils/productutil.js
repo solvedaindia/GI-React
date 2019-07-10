@@ -76,6 +76,40 @@ module.exports.productByProductID = function getproductDetailsByProductID(
   );
 };
 
+module.exports.productDetailByPartNumber = function productDetailByPartNumber(
+  partNumber,
+  headers,
+  callback,
+) {
+  logger.debug('Inside Product details by id method');
+  if (!partNumber) {
+    logger.debug('Get Product Detail By Product ID :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const originUrl = constants.productViewByPartNumber
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{partNumber}}', partNumber);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    originMethod,
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
 /**
  * Get ProductView By IDS
  * @param storeId,access_token,Product ID Array
