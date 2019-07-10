@@ -197,23 +197,33 @@ function getOrderProductList(headers, orderItemArray, callback) {
       } else {
         const productList = result[0];
         const inventoryArray = result[1];
-        productList.forEach(product => {
-          const productDetail = productDetailFilter.productDetailSummary(
-            product,
-          );
-          for (let index = 0; index < inventoryArray.length; index += 1) {
-            if (
-              productDetail.uniqueID ===
-              inventoryArray[index].inventoryDetails.uniqueID
-            ) {
-              // eslint-disable-next-line no-param-reassign
-              productDetail.deliveryDate =
-                inventoryArray[index].inventoryDetails.deliveryDate || '';
-              productListArray.push(productDetail);
-              break;
+        /* When Product Details Not Found */
+        if (productList.length === 0) {
+          inventoryArray.forEach(inventory => {
+            const productDetail = {};
+            productDetail.deliveryDate =
+              inventory.inventoryDetails.deliveryDate || '';
+            productListArray.push(productDetail);
+          });
+        } else {
+          productList.forEach(product => {
+            const productDetail = productDetailFilter.productDetailSummary(
+              product,
+            );
+            for (let index = 0; index < inventoryArray.length; index += 1) {
+              if (
+                productDetail.uniqueID ===
+                inventoryArray[index].inventoryDetails.uniqueID
+              ) {
+                // eslint-disable-next-line no-param-reassign
+                productDetail.deliveryDate =
+                  inventoryArray[index].inventoryDetails.deliveryDate || '';
+                productListArray.push(productDetail);
+                break;
+              }
             }
-          }
-        });
+          });
+        }
         callback(null, productListArray);
       }
     });
@@ -235,10 +245,11 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
     orderItems: [],
     orderSummary: {},
     transferredToOMS: false,
+    // actualData: wcsOrderDetails,
   };
   orderDetails.orderID = orderData.orderId;
   orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
-  orderDetails.orderDate = orderData.placedDate;
+  orderDetails.orderDate = orderFilter.getFormattedDate(orderData.placedDate);
   if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
     orderDetails.paymentMethod = orderData.paymentInstruction[0].payMethodId;
   }
@@ -336,7 +347,9 @@ function getOMSOrderDetails(headers, orderID, callback) {
           const omsOrderDetail = response.body.result.order;
           resJson.orderID = omsOrderDetail.orderId;
           resJson.orderTotal = omsOrderDetail.orderTotal;
-          resJson.orderDate = omsOrderDetail.orderDate;
+          resJson.orderDate = orderFilter.getFormattedDate(
+            omsOrderDetail.orderDate,
+          );
           resJson.orderStatus = omsOrderDetail.orderStatus;
           resJson.paymentMethod = omsOrderDetail.paymentMethod;
           if (omsOrderDetail.invoices && omsOrderDetail.invoices.length > 0) {
@@ -381,9 +394,21 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
-                        productDetail.orderItemStatus = orderItem.status;
-                        // productDetail.shipmentData = orderItem.shipments;
+                        // productDetail.orderItemStatus = orderItem.status;
                         productDetail.shipmentData = [];
+                        if (
+                          orderItem.shipments &&
+                          orderItem.shipments.length > 0
+                        ) {
+                          orderItem.shipments.forEach(shipment => {
+                            productDetail.shipmentData.push(
+                              orderFilter.getShipmentDetails(
+                                shipment,
+                                productDetail,
+                              ),
+                            );
+                          });
+                        }
                         resJson.orderItems.push(productDetail);
                         break;
                       }

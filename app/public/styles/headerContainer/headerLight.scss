@@ -1,0 +1,21 @@
+@import '../variable';
+
+.lighHeader {
+    background-color: $headerLight;
+    padding: $base*1.5;
+    .logo {
+        margin-left: 7%;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .lighHeader {
+        width: 100%;
+        position: fixed;
+        padding: $base*1.5;
+        z-index: 2;
+        .logo {
+            margin-left: 0; 
+        }
+    }
+}

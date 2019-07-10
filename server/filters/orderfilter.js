@@ -64,3 +64,72 @@ function getOMSOrderAddress(address) {
   addressJSON.addressID = address.addressID || '';
   return addressJSON;
 }
+
+module.exports.getShipmentDetails = getShipmentDetails;
+function getShipmentDetails(shipment) {
+  const shipmentDetails = {
+    status: shipment.status,
+    quantity: shipment.shipQty,
+    shipmentKey: shipment.shipmentKey,
+    createdDate: getFormattedDate(shipment.createdDate),
+    expectedShipmentDate: getFormattedDate(shipment.expectedShipmentDate),
+    shippedDate: getFormattedDate(shipment.shippedDate),
+    packedDate: getFormattedDate(shipment.packedDate),
+    expectedDeliveryDate: getFormattedDate(shipment.expectedDeliveryDate),
+    deliveryDate: getFormattedDate(shipment.deliveryDate),
+    installationReqDate: getFormattedDate(shipment.extnInstallationReqDate),
+    techAssignDate: getFormattedDate(shipment.extnTechnicianAssignedDate),
+    expectedInstallationDate: getFormattedDate(
+      shipment.extnTechnicianAssignedDate,
+    ),
+    installationInProgressDate: getFormattedDate(
+      shipment.extnInstallationInProgressDate,
+    ),
+    installationCompleteDate: getFormattedDate(
+      shipment.extnInstallationCompleteDate,
+    ),
+    installationDate: getFormattedDate(shipment.installationDate),
+    invoiceNo: shipment.extnInvoiceNo,
+    statusLine: shipment.statusLine,
+  };
+  return shipmentDetails;
+}
+
+module.exports.getFormattedDate = getFormattedDate;
+function getFormattedDate(inputDate) {
+  let formattedDate = '';
+  if (inputDate) {
+    const newDate = new Date(inputDate);
+    const date = newDate.getDate();
+    const month = monthNames[newDate.getMonth()];
+    const year = newDate.getFullYear();
+    const day = dayNames[newDate.getDay()];
+    formattedDate = `${day},${date} ${month} ${year}`;
+  }
+  return formattedDate;
+}
+
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const dayNames = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];

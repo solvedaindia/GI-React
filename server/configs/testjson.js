@@ -11,120 +11,117 @@ const testJSON = {
 
             catentryId: '17508',
 
-            partNumber: '56101515SD00298',
+            partNumber: 'Test002',
 
             shipments: [
               {
                 statusDate: '2019-07-01T15:27:13+05:30',
-
-                expectedShipmentDate: '2019-07-01T15:26:20+05:30',
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
+                extnTechnicianName: null,
+                extnTechnicianAssignedDate: null,
+                extnServiceRequestNo: null,
+                statusLine: 'Created,Packed,Shipped,Delivered,Installed',
                 expectedDeliveryDate: '2019-07-01T15:26:20+05:30',
-
+                extnSmartNetDivision: null,
                 installationDate: null,
-
                 shipmentKey: null,
-
+                extnInvoiceNo: null,
+                expectedShipmentDate: '2019-07-01T15:26:20+05:30',
+                createdDate: '2019-07-01T15:23:12+05:30',
+                extnTechnicianID: null,
+                extnInstallationReqDate: null,
+                extnSmartNetCompanyNo: null,
+                extnInstallationInProgressDate: null,
                 shipQty: '1',
-
+                extnInstallationCompleteDate: null,
                 deliveryDate: null,
-
                 shippedDate: null,
-
                 statusCode: '3200.1000',
-
                 status: 'Created',
-
                 packedDate: null,
-              },
-
-              {
+                },
+                {
                 statusDate: '2019-07-02T09:11:40+05:30',
-
-                expectedShipmentDate: null,
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
+                extnTechnicianName: '',
+                extnTechnicianAssignedDate: null,
+                extnServiceRequestNo: '',
+                statusLine: 'Created,Packed,Shipped,Delivered,Installed',
                 expectedDeliveryDate: null,
-
+                extnSmartNetDivision: '',
                 installationDate: null,
-
                 shipmentKey: '2019070209113920857652',
-
-                shipQty: '1',
-
-                deliveryDate: null,
-
-                shippedDate: '2019-04-26T11:27:24+05:30',
-
-                statusCode: '1400',
-
-                status: 'Shipped',
-
-                packedDate: null,
-              },
-
-              {
-                statusDate: '2019-07-02T11:35:12+05:30',
-
+                extnInvoiceNo: '31I_1000021421',
                 expectedShipmentDate: null,
-
                 createdDate: '2019-07-01T15:23:12+05:30',
-
-                expectedDeliveryDate: null,
-
-                installationDate: '2019-03-08T16:58:31+05:30',
-
-                shipmentKey: '2019070210350920859293',
-
+                extnTechnicianID: '',
+                extnInstallationReqDate: null,
+                extnSmartNetCompanyNo: '',
+                extnInstallationInProgressDate: null,
                 shipQty: '1',
-
+                extnInstallationCompleteDate: null,
                 deliveryDate: null,
-
                 shippedDate: '2019-04-26T11:27:24+05:30',
-
-                statusCode: '1400.6000',
-
-                status: 'Delivered',
-
+                statusCode: '1400',
+                status: 'Shipped',
                 packedDate: null,
-              },
-
+                },
+                {
+                statusDate: '2019-07-02T11:35:12+05:30',
+                extnTechnicianName: '',
+                extnTechnicianAssignedDate: null,
+                extnServiceRequestNo: '108695',
+                statusLine: 'Created,Packed,Shipped,Delivered,Installed',
+                expectedDeliveryDate: null,
+                extnSmartNetDivision: 'INTERIO',
+                installationDate: '2019-03-08T16:58:31+05:30',
+                shipmentKey: '2019070210350920859293',
+                extnInvoiceNo: '31I_1000021422',
+                expectedShipmentDate: null,
+                createdDate: '2019-07-01T15:23:12+05:30',
+                extnTechnicianID: '',
+                extnInstallationReqDate: '2019-03-08T16:58:31+05:30',
+                extnSmartNetCompanyNo: '239',
+                extnInstallationInProgressDate: null,
+                shipQty: '1',
+                extnInstallationCompleteDate: null,
+                deliveryDate: '2019-07-02T10:12:00+05:30',
+                shippedDate: '2019-04-26T11:27:24+05:30',
+                statusCode: '1400.6000',
+                status: 'Delivered',
+                packedDate: null,
+                },
               {
                 statusDate: '2019-07-02T11:59:16+05:30',
-
-                expectedShipmentDate: null,
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
+                extnTechnicianName: 'Yatin',
+                extnTechnicianAssignedDate: '2018-03-08T16:58:31+05:30',
+                extnServiceRequestNo: '108695',
+                statusLine: 'Created,Packed,Shipped,Delivered,Installed',
                 expectedDeliveryDate: null,
-
-                installationDate: null,
-
+                extnSmartNetDivision: 'INTERIO',
+                installationDate: '2019-03-08T16:58:31+05:30',
                 shipmentKey: '2019070210361520859304',
-
+                extnInvoiceNo: '31I_1000021423',
+                expectedShipmentDate: null,
+                createdDate: '2019-07-01T15:23:12+05:30',
+                extnTechnicianID: 'Batra',
+                extnInstallationReqDate: '2019-03-08T16:58:31+05:30',
+                extnSmartNetCompanyNo: '239',
+                extnInstallationInProgressDate: '2019-03-08T16:58:31+05:30',
                 shipQty: '2',
-
-                deliveryDate: null,
-
+                extnInstallationCompleteDate: '2019-03-08T16:58:31+05:30',
+                deliveryDate: '2019-07-02T10:12:00+05:30',
                 shippedDate: '2019-04-26T11:27:24+05:30',
-
                 statusCode: '1400.7000',
-
                 status: 'Installed',
-
                 packedDate: null,
               },
             ],
 
-            status: 'Partially Installed',
+            status: 'Partially Partially Delivered',
           },
           {
             unitPrice: '390.00',
 
-            quantity: '5',
+            quantity: '1',
 
             catentryId: '17506',
 
@@ -132,106 +129,28 @@ const testJSON = {
 
             shipments: [
               {
-                statusDate: '2019-07-01T15:27:13+05:30',
-
-                expectedShipmentDate: '2019-07-01T15:26:20+05:30',
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
-                expectedDeliveryDate: '2019-07-01T15:26:20+05:30',
-
-                installationDate: null,
-
-                shipmentKey: null,
-
-                shipQty: '1',
-
-                deliveryDate: null,
-
-                shippedDate: null,
-
-                statusCode: '3200.1000',
-
-                status: 'Created',
-
-                packedDate: null,
-              },
-
-              {
-                statusDate: '2019-07-02T09:11:40+05:30',
-
-                expectedShipmentDate: null,
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
-                expectedDeliveryDate: null,
-
-                installationDate: null,
-
-                shipmentKey: '2019070209113920857652',
-
-                shipQty: '1',
-
-                deliveryDate: null,
-
-                shippedDate: '2019-04-26T11:27:24+05:30',
-
-                statusCode: '1400',
-
-                status: 'Shipped',
-
-                packedDate: null,
-              },
-
-              {
-                statusDate: '2019-07-02T11:35:12+05:30',
-
-                expectedShipmentDate: null,
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
-                expectedDeliveryDate: null,
-
-                installationDate: '2019-03-08T16:58:31+05:30',
-
-                shipmentKey: '2019070210350920859293',
-
-                shipQty: '1',
-
-                deliveryDate: null,
-
-                shippedDate: '2019-04-26T11:27:24+05:30',
-
-                statusCode: '1400.6000',
-
-                status: 'Delivered',
-
-                packedDate: null,
-              },
-
-              {
                 statusDate: '2019-07-02T11:59:16+05:30',
-
-                expectedShipmentDate: null,
-
-                createdDate: '2019-07-01T15:23:12+05:30',
-
+                extnTechnicianName: 'Yatin',
+                extnTechnicianAssignedDate: '2018-03-08T16:58:31+05:30',
+                extnServiceRequestNo: '108695',
+                statusLine: 'Created,Packed,Shipped,Delivered,Installed',
                 expectedDeliveryDate: null,
-
-                installationDate: null,
-
+                extnSmartNetDivision: 'INTERIO',
+                installationDate: '2019-03-08T16:58:31+05:30',
                 shipmentKey: '2019070210361520859304',
-
-                shipQty: '2',
-
-                deliveryDate: null,
-
+                extnInvoiceNo: '31I_1000021423',
+                expectedShipmentDate: null,
+                createdDate: '2019-07-01T15:23:12+05:30',
+                extnTechnicianID: 'Batra',
+                extnInstallationReqDate: '2019-03-08T16:58:31+05:30',
+                extnSmartNetCompanyNo: '239',
+                extnInstallationInProgressDate: '2019-03-08T16:58:31+05:30',
+                shipQty: '1',
+                extnInstallationCompleteDate: '2019-03-08T16:58:31+05:30',
+                deliveryDate: '2019-07-02T10:12:00+05:30',
                 shippedDate: '2019-04-26T11:27:24+05:30',
-
                 statusCode: '1400.7000',
-
                 status: 'Installed',
-
                 packedDate: null,
               },
             ],

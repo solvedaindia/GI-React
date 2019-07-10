@@ -17,9 +17,13 @@ module.exports.getImagePath = function getImagePath(imagePath) {
  * Filter Images for PDP
  * @return images attachment
  */
-module.exports.getAttachments = getAttachments;
-function getAttachments(productData) {
-  const productAttachment = {};
+module.exports.getProductImages = getProductImages;
+function getProductImages(productData) {
+  const productAttachment = {
+    thumbnailImages: [],
+    mainImages: [],
+    zoomImages: [],
+  };
   if (productData.attachments && productData.attachments.length > 0) {
     const thumbnailImages = [];
     const mainImages = [];

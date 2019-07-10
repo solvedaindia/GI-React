@@ -6,6 +6,8 @@ const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
 const pincodeUtil = require('../utils/pincodeutil');
 const pdpfilter = require('../filters/productdetailfilter');
+const imagefilter = require('../filters/imagefilter');
+const kitfilter = require('../filters/kitfilter');
 const headerutil = require('../utils/headerutil.js');
 const constants = require('../utils/constants');
 const origin = require('../utils/origin.js');
@@ -42,6 +44,26 @@ module.exports.getProductDetails = function getProductDetailsData(
       if (result.catalogEntryView.length > 0) {
         if (result.catalogEntryView[0].catalogEntryTypeCode === 'ProductBean') {
           callback(null, {});
+        } else if (
+          result.catalogEntryView[0].catalogEntryTypeCode === 'PackageBean'
+        ) {
+          const kitIds = getKitIds(result);
+          const taskList = [
+            kitDetailsByIds.bind(null, reqHeaders, result, kitIds),
+            promotionDetails,
+            transformKitData,
+          ];
+          async.waterfall(taskList, (er, res) => {
+            if (er) {
+              callback(er);
+            } else {
+              callback(null, res);
+            }
+          });
+        } else if (
+          result.catalogEntryView[0].catalogEntryTypeCode === 'BundleBean'
+        ) {
+          callback(null, result.catalogEntryView[0]);
         } else {
           const productId = result.catalogEntryView[0].parentCatalogEntryID;
           const taskList = [
@@ -453,7 +475,6 @@ function transformJson(result, serviceability) {
     pincodeData.deliveryDateAndTime = result[0].deliveryDate || '';
     pincodeData.shippingCharge = result[1].ShipCharge || '';
     pincodeData.experienceStore = transformExperienceStore(result[2]);
-    // pincodeData.experienceStore = transformExperienceStore(experienceStore);
   }
   return pincodeData;
 }
@@ -469,7 +490,7 @@ function getSkuData(bodyData, promotions) {
     bodyData.forEach(sku => {
       const skuDataJson = pdpfilter.productDetailSummary(sku);
       delete skuDataJson.promotionData;
-      const attachment = pdpfilter.getAttachments(sku);
+      const attachment = imagefilter.getProductImages(sku);
       const attributes = pdpfilter.getAttributes(sku);
       const mercAssociations = getMercAssociationsData(sku, promotions);
       skuDataJson.defAttributes = pdpfilter.getDefAttributes(
@@ -553,6 +574,7 @@ function transformExperienceStore(bodyData) {
     bodyData.storeList.forEach(store => {
       if (store.IsAvailable === 'Y') {
         experienceStore.push({
+          storeId: store.STLOC_ID || '',
           distanceFromShipToAddress: store.DistanceFromShipToAddress,
           name: store.Description,
           address: store.AddressLine1,
@@ -563,4 +585,77 @@ function transformExperienceStore(bodyData) {
     });
   }
   return experienceStore;
+}
+
+/**
+ * Function for returning Kits
+ * @param {*} bodyData
+ */
+function getKitIds(bodyData) {
+  const kitIds = [];
+  if (bodyData.catalogEntryView.length > 0) {
+    kitIds.push(bodyData.catalogEntryView[0].uniqueID);
+    if (
+      bodyData.catalogEntryView[0].merchandisingAssociations &&
+      bodyData.catalogEntryView[0].merchandisingAssociations.length > 0
+    ) {
+      bodyData.catalogEntryView[0].merchandisingAssociations.forEach(
+        element => {
+          if (
+            kitIds.indexOf(element.uniqueID) === -1 &&
+            element.associationType === 'REPLACEMENT'
+          ) {
+            kitIds.push(element.uniqueID);
+          }
+        },
+      );
+    }
+  }
+  return kitIds;
+}
+
+/**
+ * This function will return kit data using kit Ids
+ */
+function kitDetailsByIds(header, kitData, kitIds, callback) {
+  productUtil.getProductListByIDs(header, kitIds, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, header, kitData, result, kitIds);
+    }
+  });
+}
+
+/**
+ * Function for transforming Kit Data Json
+ * @param {*} bodyData
+ */
+function transformKitData(kitData, subKitData, promoData, callback) {
+  const kitDataSummary = {
+    type: 'kit',
+    swatchAttibutes: [],
+    kitData: [],
+  };
+
+  if (subKitData.length > 0) {
+    subKitData.forEach(bodyData => {
+      const attributes = pdpfilter.getAttributes(bodyData);
+      const mercAssociations = getMercAssociationsData(bodyData, promoData);
+      kitDataSummary.swatchAttibutes.push(
+        kitfilter.getSwatchAttibute(bodyData),
+      );
+      const kitDataJSON = kitfilter.getKitSummary(bodyData, promoData);
+      kitDataJSON.attachments = [];
+      kitDataJSON.productDetails = pdpfilter.getProductDetails(
+        attributes,
+        bodyData,
+      );
+      kitDataJSON.productFeatures = pdpfilter.getProductFeatures(attributes);
+      kitDataJSON.similarProducts = mercAssociations.similarProducts;
+      kitDataJSON.combos = mercAssociations.combosYouMayLike;
+      kitDataSummary.kitData.push(kitDataJSON);
+    });
+  }
+  callback(null, kitDataSummary);
 }

@@ -1,5 +1,12 @@
+@import "variable.scss";
 /*----New home body style---*/
-.explore-room .explore{width:80%;margin:0 auto;display:flex;-webkit-display:flex;-moz-display:flex;-ms-display:flex;justify-content:space-around}.explore-room .explore .list{flex:0 0 20%;-webkit-flex:0 0 20%;-moz-flex:0 0 20%;-ms-flex:0 0 20%;text-align:center;-webkit-transition:all .4s linear;transition:all .4s linear}.explore-room .explore .list .link{display:block;font-weight:bold;text-decoration:none}.explore-room .explore .list .imgfullwidth{width:100%;height:69px}.explore-room .explore .list .imgfullwidth.hover{display:none}.explore-room .explore .list:hover .imgfullwidth.hover{display:block}.explore-room .explore .list:hover .imgfullwidth.unhover{display:none}.explore-room .explore .list .imgfullwidth{display:block}.explore-room .explore .list .textarea{padding:31px 0 0 0;display:block;font-size:18px;color:#4a4a4a}
+.explore-room .explore .list .link{display:block;font-weight:bold;text-decoration:none}
+.explore-room .explore .list .imgfullwidth{width:100%;height:69px}
+.explore-room .explore .list .imgfullwidth.hover{display:none}
+.explore-room .explore .list:hover .imgfullwidth.hover{display:block}
+.explore-room .explore .list:hover .imgfullwidth.unhover{display:none}
+.explore-room .explore .list .imgfullwidth{display:block}
+.explore-room .explore .list .textarea{padding:31px 0 0 0;display:block;font-size:18px;color:#4a4a4a}
 
 
 /*-----recently-viewed-----*/
@@ -28,7 +35,7 @@
 .ourstore .ourstoreImgbox .imgfullwidth{width:100%}
 .ourstore .store-textbox{background:#f7f8f8;padding:20px;text-align: center}
 .ourstore .btn-bg{  background: #070707;color: #fff; padding: 0px 40px; border-style: none;margin:18px 0 0 0}
-.ourstore .store-textbox{position: absolute; top: 50%; left: 26%; width: 540px; height: 220px; margin-top: -110px; margin-left: -270px;}
+
 .ourstore .store-textbox .heading{font-weight: bold;margin: 10px 0;}
 .ourstore .store-textbox .text{margin:5px 0 0 0}
 .ourstore .store-textbox .text .bold{color:#036cc5;font-weight: bold;}
@@ -56,8 +63,8 @@
 /*our-promises
 ------------------------------------------*/
 .our-promises{ background: #036cc5;position: relative;}
-.our-promises .heading { font-weight: bold; font-size: 48px; padding-bottom: 30px;  color:#fff;    margin-top: 0;}
-.our-promises .Promise-boxtext .sub-heading{color:#fff;font-size: 16px;font-weight: bold;text-transform: capitalize;    margin: 10px 0;}
+.our-promises .heading { font-weight: bold;  padding-bottom: 30px;  color:#fff;    margin-top: 0;}
+.our-promises .Promise-boxtext .sub-heading{color:#fff;text-transform: capitalize;    margin: 10px 0;}
 .our-promises .Promise-boxtext .text{color: #fff;}
 .our-promises .product-bg{position: absolute; right: 0; width: 350px; top: -80px;}
 .our-promises .product-bg .imgfullwidth{width:100%}
@@ -74,3 +81,216 @@
 .featureCategories .leftbox .bold{font-weight: bold}
 .featureCategories .rightbox{float: right;}
 .featureCategories .featureCarouselbox  .itemtext .text{color:#000;}
+
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .explore-room{
+            .explore{
+                width:80%;margin:0 auto;display:flex;-webkit-display:flex;-moz-display:flex;-ms-display:flex;justify-content:space-around;
+                .list{flex:0 0 20%;-webkit-flex:0 0 20%;-moz-flex:0 0 20%;-ms-flex:0 0 20%;text-align:center;-webkit-transition:all .4s linear;transition:all .4s linear}
+              }
+        } 
+        .oursolutions{
+          .store-textbox{position: absolute; top: 50%; left: 26%; width: 540px; height: 220px; margin-top: -110px; margin-left: -270px;}
+        } 
+        .our-promises{
+            .heading{
+                font-size: 48px;
+            }
+            .Promise-boxtext {
+                .sub-heading{font-size: 16px;font-weight: bold;}
+            }
+        }
+
+
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .espotContent{
+    .explore-room{
+        .explore{
+            width:100%;
+            margin:0 auto;
+            display:inline-block;
+            -webkit-display:initial;
+            -moz-display:initial;
+            -ms-display:initial;
+            justify-content:space-around;
+            text-align: center;
+
+            .list{flex:initial;
+              -webkit-flex:initial;
+              -moz-flex:initial;
+              -ms-flex:initial;
+              text-align:center;
+              -webkit-transition:all .4s linear;
+              transition:all .4s linear; 
+              width: 33.333%; 
+              display: inline-block;
+              margin-bottom: 20px;
+              .textarea{
+                font-size: 12px;
+                padding: 12px 0 0 0;
+                font-family: $font-regular;
+                font-weight: normal;
+              }
+              .imgfullwidth{
+                  height: 45px;
+              }
+            }
+          }
+    } 
+  }
+
+    .oursolutions{
+      .container{
+      padding: 0px;
+
+      .store-textbox{
+        position: static; 
+        top:initial; 
+        left: initial; 
+        width: 100%; 
+        height: initial; 
+        margin-top: 0px; 
+        margin-left: 0px; 
+        max-width:600px;
+        float:left;
+        .heading{
+          float: right;
+          width: 60%;
+          margin-bottom: 10px;
+          font-size:14px;
+        }
+        .btn-bg{
+          float: right;
+          margin-top: 0px;
+        }
+        .text{display: none;}
+        .logous{
+          float: left;
+          width: 40%;
+          min-height: 35px;
+          position: relative;
+
+            img{
+              max-width: 80px;
+              margin-top: 16px;
+              text-align: left;
+              float: left;
+              position: absolute;
+              left: 0px;
+            }
+          }
+      }
+      .ourstoreImgbox{height: initial; padding:20px 20px  20px 0px; float: left; width:100%;}
+    }
+    } 
+
+     /* Our Promises */
+    .our-promises{
+        .ourpromises-heading{
+            .heading{
+                font-size: 20px;
+                text-align:center;
+            }
+            .Promise-boxtext {
+                .sub-heading{font-size: 14px;}
+            }
+        }
+        .product-bg{display: none}
+        
+        .Promise-boxtext {
+            .text{
+                display: none;
+            }
+            
+        }
+        .col-md-9{
+            .col-md-4.col-sm-4{
+                width:33.333%; 
+                float:left;
+                .Promise-boxtext{
+                    text-align: center;
+                    .sub-heading{
+                      font-family: $font-regular;
+                      font-weight: normal;
+                      font-size:12px;
+                    }
+                }
+            }
+        }
+    }
+    .fsBanner{
+      padding-bottom:15px;
+    }
+
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

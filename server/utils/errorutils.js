@@ -147,7 +147,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_INVALID_ADDR' ||
         errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE' ||
         errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT' ||
-        errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION'
+        errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION' ||
+        errBody.errors[0].errorKey === '_ERR_ORDER_UNLOCKED'
       ) {
         return {
           status_code: 400,
@@ -212,7 +213,10 @@ module.exports.handleWCSError = function handleWCSError(response) {
       ) {
         return errorlist.user_exists;
       }
-      if (errBody.errors[0].errorKey === 'CWXBB1012E') {
+      if (
+        errBody.errors[0].errorKey === 'CWXBB1012E' ||
+        errBody.errors[0].errorKey === 'CWXBB1011E'
+      ) {
         return errorlist.token_expired;
       }
       if (errBody.errors[0].errorKey === 'TOKEN_VALIDATION_FAIL') {

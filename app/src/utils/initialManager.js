@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import apiManager from './apiManager';
-import { updatetWishListCount, updatetMinicart, resetRemoveFromWishlistFlag } from '../actions/app/actions';
+import {
+  updatetWishListCount,
+  updatetMinicart,
+  resetRemoveFromWishlistFlag,
+} from '../actions/app/actions';
 import { getCookie, getCorrespondingGiftlistId } from './utilityManager';
 import appCookie from './cookie';
 import {
@@ -14,7 +18,7 @@ import {
   wishListCountApi,
   logoutAPI,
   cartCountApi,
-  removeFromWishlist
+  removeFromWishlist,
 } from '../../public/constants/constants';
 import { resolveTheWishlistData } from './utilityManager';
 
@@ -83,6 +87,7 @@ export function resetTheCookiesAndData() {
   const json_str = JSON.stringify([]);
   document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
   document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
+  document.cookie = `name=;path=/;expires=''`;
   appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
   window.location.reload(); // In case you don't reload the page, make this use as guest user.
 }
@@ -97,9 +102,9 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
     .post(removeFromWishlist, data)
     .then(response => {
       console.log('Add wishlit --- ', response.data);
-      //this.setState({ wishlistCurrentImage: wishListRemovedImg });
+      // this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
-      //reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
+      // reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
       // this.props.updatetWishListCount(6);
     })
     .catch(error => {

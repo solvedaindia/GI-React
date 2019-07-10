@@ -54,7 +54,7 @@ export const validateGST = input => {
  * Should be less then 100 characters
  */
 export function validateFullName(data) {
-    if (data.length <= 100 && validateEmptyObject(data)) {
+    if (data.length <= 100 && validateEmptyObject(data) && (regexName.test(data))) {
         return true;
     }
     return false;

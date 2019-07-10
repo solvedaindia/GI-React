@@ -136,7 +136,6 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
  *  Parse the Store Data function
  */
 function storeDataParsing(storeData, parsedStoreData) {
-  const resBody = {};
   if (storeData !== 0 && storeData !== undefined && storeData !== null) {
     storeData.forEach(element => {
       const storeDataObject = {};

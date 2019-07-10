@@ -5,14 +5,14 @@ import {
   bestSellerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import {is} from '../../utils/utilityManager';
+import { is } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
 
 class BestSeller extends React.Component {
   state = {
-    bestSellerData: null,
+    bestSellerData: {},
     title: null,
     isLoading: true,
     errors: null,
@@ -22,11 +22,11 @@ class BestSeller extends React.Component {
     apiManager
       .get(bestSellerAPI)
       .then(response => {
-		const { data } = response || {};
-		const bsData = data && data.data;
+        const { data } = response || {};
+        const bsData = data && data.data;
         this.setState({
-			bestSellerData: is(bsData, 'Object') && bsData,
-			isLoading: false,
+          bestSellerData: (is(bsData, 'Object') && bsData) || {},
+          isLoading: false,
         });
       })
       .catch(error => {
@@ -44,19 +44,49 @@ class BestSeller extends React.Component {
   }
 
   render() {
-    const { bestSellerData } = this.state;
+    const {
+      bestSellerData: { productList = [], title = '' },
+    } = this.state;
     const settings = {
       dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+          },
+        },
+      ],
     };
     return (
       <div className="bestSeller">
-        <h1 className="title">Best Selling Products</h1>
+        <h1 className="title">{title}</h1>
         <Slider {...settings}>
-		{!!bestSellerData && bestSellerData.productList.map((sellerItemData, index) => (
+          {is(productList, 'Array') &&
+            productList.map((sellerItemData, index) => (
               <figure key={index} className="bsSlides">
                 <a href={sellerItemData.onClickUrl}>
                   <img

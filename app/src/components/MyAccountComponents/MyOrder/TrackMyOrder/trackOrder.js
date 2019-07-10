@@ -12,7 +12,10 @@ class TrackOrder extends React.Component {
   }
 
   render() {
+    console.log('In the Track Order -- ', this.props.trackOrderDataPro)
+
     return (
+
       <div className="trackMyOrder">
         <div className="bottomDivider">
           <button
@@ -20,7 +23,9 @@ class TrackOrder extends React.Component {
             onClick={this.props.renderSelectionPro}
           >{`< Back`}</button>
         </div>
-        <TrackOrderProduct />
+        <TrackOrderProduct
+          prodctDataPro={this.props.trackOrderDataPro}
+        />
       </div>
     );
   }
