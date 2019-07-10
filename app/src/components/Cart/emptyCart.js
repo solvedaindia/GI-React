@@ -16,7 +16,7 @@ class EmptyCart extends React.Component {
             <span className="cartBold">Cart</span> is empty :({' '}
           </h2>
           <div className="shopNow">
-            {!isMobile ? <CartLogo width={254} height={254} />
+            {!isMobile() ? <CartLogo width={254} height={254} />
              : 
               <CartLogo width={68} height={68} />
             }

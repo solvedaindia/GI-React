@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import { getReleventReduxState } from '../../utils/utilityManager';
+import { isMobile } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
 import { getCartDetails } from './action';
@@ -40,13 +41,14 @@ class CartDetail extends React.Component {
     const { cartData } = this.props;
     if (!cartData) return null;
     return (
-      !!cartData.cartItems.length
+      !!cartData.cartItems && !!cart.cartItems.length
         ?
         <section className='cartDetails'>
           <div className='cartItem'>
             <div className='cartHeadDetails'>
-              <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
-              </h2>
+                {!isMobile() ? <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
+                </h2> : <h2 className='title'>Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span>
+                </h2> }
               <Pincode />
             </div>
             <ul className='cartItemList'>
@@ -72,6 +74,8 @@ class CartDetail extends React.Component {
                     {!itemData.freeGift &&
                       <DeleteCartItem
                         orderItemId={itemData.orderItemId}
+                        uniqueID={itemData.uniqueID}
+                        productName = {itemData.productName}
                         getCartDetails={this.props.getCartDetails}
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
