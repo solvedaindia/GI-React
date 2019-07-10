@@ -397,6 +397,11 @@
     .deletItem {
         .modal-dialog {
             width: 100%;
+            .modal-content {
+                .modal-body {
+                    padding: 0;
+                }
+            }
         }
         .del_modal {
             padding: $base*3;
