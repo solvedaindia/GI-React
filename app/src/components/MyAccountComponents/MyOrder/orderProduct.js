@@ -32,13 +32,18 @@ class ProductOrder extends React.Component {
               <p className="price">
                 <span className="discount-price">₹{productData.offerPrice}</span>
               </p>
-              <p className="quantity-shipping clearfix">
-                <span className="quantity">
-                  Quantity
-                  <br />
+              <div className="quantity-shipping clearfix">
+                <div className="quantity">
+                  <span className="heading">Quantity</span> 
                   <span className="textval">{productData.quantity}</span>
-                </span>
-              </p>
+                </div>
+                <div className="delivery quantity">
+                  <span className="heading">Delivery on</span> 
+                  <span className="textval">31 Dec 2019</span>
+
+                </div>
+            
+              </div>
             </div>
           </div>
 
