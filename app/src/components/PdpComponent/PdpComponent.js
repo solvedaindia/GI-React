@@ -160,29 +160,23 @@ class PdpComponent extends React.Component {
       window.scrollTo(0, 0);
     }
   }
- //Scroll start
+ // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
-   var box1=163;
-   //var box2=266;
-   //var box3=616;
-   // var box1 = document.getElementById("box1").offsetTop;
-    var box2 = document.getElementById("priceId").offsetTop;
-    var box3 = document.getElementById("box3").offsetTop;
+  var box1=163;
+  var box2 = document.getElementById("priceId").offsetTop;
+  var box3 = document.getElementById("box3").offsetTop;
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
   var scrollbox1;
-  // console.log('headeroffset', headeroffset);
-  // console.log('scrollTop', scrollTop);		
-  // console.log('box1', box1);
-  // console.log('box2', box2);
+
 
   var scrollbox1=box1-scrollTop;
   var scrollbox2=box2-scrollTop;
   var scrollbox3=box3-scrollTop;
 
-  console.log('scrollbox1', scrollbox1);
-  if(scrollbox1<= headeroffset){
+  
+  if(scrollbox1 <= headeroffset){
     document.getElementById("Pdpstickybar").classList.add('slidedown');			
     setTimeout(() => {			
     document.getElementById("topdiv1").classList.add('slideUpPrice');
@@ -190,7 +184,7 @@ class PdpComponent extends React.Component {
   }, 100);
   }
   
-  if(scrollbox1> headeroffset){			
+  if(scrollbox1 > headeroffset){			
     setTimeout(() => {	
     document.getElementById("Pdpstickybar").classList.remove('slidedown');
     document.getElementById("topdiv1").classList.remove('slideUpPrice');	
@@ -201,14 +195,14 @@ class PdpComponent extends React.Component {
 
   /*------BOX2
   -------------------*/
-  if(scrollbox2<= headeroffset){	
+  if(scrollbox2 <= headeroffset){	
     setTimeout(() => {	
     document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
     document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
   }, 0);
   }
   
-  if(scrollbox2> headeroffset){		
+  if(scrollbox2 > headeroffset){		
     document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
     document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
   }
@@ -236,7 +230,7 @@ class PdpComponent extends React.Component {
     header.classList.remove("sticky");
   }
 }
-//end
+// handleScroll function End
   render() {
     const { isLoading } = this.state;
     const wishlistArr = getOnlyWishlistUniqueIds();
@@ -286,38 +280,7 @@ class PdpComponent extends React.Component {
 			}
       <div className="galleryArea">
         {!isLoading ? (
-          <>
-            {/* {isAddToCart === 'true1' && (
-              <Row>
-                <Col md={7} sm={12} xs={12}>
-                  <div className="product">
-                    <span className="text">Product ID: </span>
-                    <span className="text">
-                      {this.state.skuData.partNumber}
-                    </span>
-                    <h4 className="heading">
-                      {this.state.skuData.productName}
-                    </h4>
-                  </div>
-                </Col>
-                <Col md={4} sm={12} xs={12}>
-                  <Price priceData={this.state.skuData} />
-                  <div className="accessories-offer">
-                    <div className="offerbg text"> % </div>
-                    <div className="discount-off text">
-                      {this.state.skuData.discount}% OFF & free accessories{' '}
-                    </div>
-                  </div>
-                  <AddToCart
-                    skuData={this.state.skuData}
-                    sticky
-                    pinCodeData={this.state.pincodeData}
-                    handleAddtocart={this.handleAddtocart.bind(this)}
-                  />
-                </Col>
-              </Row>
-            )
-            } */}
+          <>            
             <Row className="no-margin">
               <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
