@@ -1,0 +1,167 @@
+@import "../app.scss";
+@import "../base.scss";
+@import "../variable.scss";
+
+.sideNavigation {
+  
+  .handler {
+    text-align: center;
+    font-size: 24px;
+    float: left;
+    min-width: 60px;
+    .nav-bar-img{
+      margin-top: 4px;
+    }
+  }
+  input {
+    display: none;
+  }
+  nav {
+    transform: translateX(-100%);
+    transition: transform 150ms ease-out;
+    background:$colorwhite;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 9999;
+    top:0px;
+    width: 75%;
+    .searchBackBtn{padding: 0px;}
+  }
+  ul {
+    padding: 0px 0;
+    margin: 0;
+  }
+  ul li {
+    display: block;
+    margin: 0;
+    padding: 16px 16px;
+  }
+  .overlay {
+    opacity: 0;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    will-change: opacity;
+    transition: opacity 150ms ease;
+    pointer-events: none;
+  }
+  input:checked + .handler {
+    display: none;
+  }
+  input:checked + .handler + .overlay {
+    opacity: 0.3;
+    pointer-events: auto;
+  }
+  input:checked + .handler + .overlay + nav {
+    transform: translateX(0);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  body {
+    background: #eaeaea;
+  }
+
+
+  .topMenu {
+    background-color: #026dc6;
+    width: 100%;
+    height: 72px;
+  }
+
+  .topMenuOverlap {
+    position: absolute;
+    background-color: #026dc6;
+    width: 100%;
+    height: 72px;
+  }
+
+  .usernameTxt {
+    color:$colorwhite;
+    font-size: 16px;
+    margin: 25px;
+    font-family: $font-light;
+    &.catNavHeader{
+      width: 120px;
+    }
+    .back-nav{
+      max-width: 15px;
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: -2px;
+    }
+  }
+
+  .loginBtn {
+    border: 1px solid $colorwhite;
+    background-color: transparent;
+    color: white;
+    padding: 7px 9px;
+    font-size: 12px;
+    margin: 20px 20px 0px 0px;
+    float: right;
+  }
+
+  .signoutBtn {
+    color:$colorwhite;
+    padding: 7px 8px;
+    font-size: 12px;
+    margin: 20px 20px 0px 0px;
+    float: right;
+    background: none;
+    border: 1px solid $colorwhite;
+  }
+
+  .navTxt {
+    border-bottom: 1px solid #d1d1d2;
+    font-size: 12px;
+    font-family: $font-light;
+    color: black
+  }
+
+  .arrow {
+    float: right;
+    width: 14px;
+  }
+
+  
+  .backToCategory {
+    position: relative;
+    display: block;  
+    width: 100%;
+    animation-duration: 15s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-name: anim-Left;
+  }
+  
+  @keyframes anim-Right {
+    0%,
+    1.3% {
+      right: -100%;
+      opacity: 0;
+    }
+    1.3%,
+    100% {
+      right: 0%;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes anim-Left {
+    0%,
+    1.3% {
+      left: -100%;
+      opacity: 0;
+    }
+    1.3%,
+    100% {
+      left: 0%;
+      opacity: 1;
+    }
+  }
+
+ 
+}

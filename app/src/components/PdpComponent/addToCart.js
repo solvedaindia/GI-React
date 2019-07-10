@@ -37,7 +37,7 @@ class addToCartComponent extends React.Component {
 
   /* render delivery message */
   renderdeliveryMessage(props) {
-    if (!props.pincodeServiceable) {
+    if (props.pincodeServiceable === false) {
       let errorMsg = 'Pincode is not serviceable';
       if (props.error) {
         errorMsg = props.error;
@@ -47,8 +47,6 @@ class addToCartComponent extends React.Component {
     if (this.deliveryTime === '') {
       if (props.deliveryDateAndTime) {
         this.deliveryTime = props.deliveryDateAndTime;
-      } else {
-        this.deliveryTime = 'Delivery between 6th Jan to 10 Jan';
       }
     }
     return <div className="soldbyDealers">{this.deliveryTime}</div>;

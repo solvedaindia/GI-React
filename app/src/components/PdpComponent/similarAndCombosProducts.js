@@ -2,9 +2,6 @@ import React from 'react';
 import Slider from 'react-slick';
 import { Row, Col } from 'react-bootstrap';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -78,7 +75,7 @@ class SimilarCombosProducts extends React.Component {
   render() {
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,

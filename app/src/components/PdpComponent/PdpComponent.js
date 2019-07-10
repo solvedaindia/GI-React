@@ -69,6 +69,17 @@ class PdpComponent extends React.Component {
       });
     });
 
+    const defaultPincodeData = {
+      pincodeServiceable: null,
+    };
+
+    this.setState({
+      selectedSku: skuDataArr,
+      isLoading: false,
+      skuData: resolvedSkuData,
+      pincodeData: defaultPincodeData
+    });
+
     this.callPinCodeAPI(skuDataArr, resolvedSkuData);
   }
 
@@ -95,8 +106,11 @@ class PdpComponent extends React.Component {
   handleSelectedSwatches(count) {
     const selectedSwatches = new Array();
     for (let i = 0; i < count + 1; i++) {
-      const name = document.getElementsByClassName(`radio${i}`)[0].getAttribute('name');
-      const getValue = document.querySelector(`input[name = ${name}]:checked`).value;
+      const name = document
+        .getElementsByClassName(`radio${i}`)[0]
+        .getAttribute('name');
+      const getValue = document.querySelector(`input[name = ${name}]:checked`)
+        .value;
       selectedSwatches.push(getValue);
     }
     return selectedSwatches;
@@ -115,9 +129,7 @@ class PdpComponent extends React.Component {
       .get(pinCodeAPI + appCookie.get('pincode'), dataParams)
       .then(response => {
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: response.data.data,
         });
       })
@@ -130,15 +142,15 @@ class PdpComponent extends React.Component {
           error: 'Not a valid pincode',
         };
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: defaultPincodeData,
         });
       });
 
     this.props.historyData.push(
-      `/pdp/furniture-${resolvedSkuData.productName.toLowerCase().replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
+      `/pdp/furniture-${resolvedSkuData.productName
+        .toLowerCase()
+        .replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
     );
   }
 
@@ -328,7 +340,9 @@ class PdpComponent extends React.Component {
                       <Col md={6} sm={12} xs={12} className="product-share">
                         <div className="share">
                           SHARE <div className="share-btn">{shareImg}</div>
-                          <SocialMedia productName={this.state.skuData.productName}/>
+                          <SocialMedia
+                            productName={this.state.skuData.productName}
+                          />
                         </div>
                         <div className="wishListDiv">
                           WISHLIST{' '}

@@ -3,6 +3,8 @@
 @import "../app.scss";
 @import "../base.scss";
 @import "../variable.scss";
+@import './rwdPLPContainer.scss';
+
 $imgfullwid: 100%;
 
 .list-style {
@@ -130,13 +132,9 @@ section.tablecarousel {
 
 .plpCategories {
   .plp-products {
-    padding: 64px 0 60px 0;
-    width: 1140px;
     margin: 0 auto;
   }
   .grid3 {
-    display: flex;
-    flex-wrap: wrap;
     .productlist {
       flex: 0 0 33.33%;
 
@@ -170,7 +168,6 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: $base * 7;
     color: $ceruleanblue;
     margin: 0;
   }
@@ -192,7 +189,6 @@ section.tablecarousel {
 
   .headingSubTitle {
     color: $greyBorder;
-    padding: 0 0 32px 0;
     font-size: $base * 2.25;
   }
   .container {
@@ -242,7 +238,7 @@ section.tablecarousel {
           margin-top: -75px;
           margin-left: -109px;
           position: absolute;
-          .list{
+          .list {
             // padding: 2px;
             border-radius: 50%;
             display: inline-table;
@@ -250,29 +246,27 @@ section.tablecarousel {
             cursor: pointer;
             margin: 0 10px 8px 0;
             text-align: center;
-            .swatches-circle{
+            .swatches-circle {
               display: block;
               padding: 5px;
               width: 24px;
               height: 24px;
               border-radius: 100%;
             }
-  
           }
-          
-          .active{
+
+          .active {
             border: 2px solid $black;
             padding: 2px;
           }
-          .moreSwatch{
+          .moreSwatch {
             border: none;
             background: transparent;
-            color:$colorwhite;
+            color: $colorwhite;
             position: absolute;
             top: 6px;
           }
         }
-        
 
         .yellow {
           background: #f5a623;
@@ -362,7 +356,6 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: $base * 2.25;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -398,7 +391,6 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: $base * 3;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -422,38 +414,6 @@ section.tablecarousel {
           }
         }
       }
-    }
-  }
-}
-
-/** Descripton */
-.descriptionBanner {
-  background: $greybg;
-  padding: 60px 0;
-
-  .heading {
-    font-family: $font-bold;
-    font-size: $base * 4.25;
-    color: $black;
-    margin: 0 0 20px 0;
-  }
-
-  .readMore {
-    background: transparent;
-    border: none;
-    text-decoration: underline;
-    color: $black;
-    font-size: $base * 2;
-    font-family: $font-regular;
-    text-align: left;
-    margin: 24px 0;
-    display: inline-block;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-    &:active {
-      outline: none;
     }
   }
 }
@@ -935,4 +895,183 @@ section.tablecarousel {
     -webkit-transform: none;
     transform: none;
   }
+}
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  //CSS
+}
+
+/* 
+  #Global Screen Chhange for Screen max 768
+  */
+@media screen and (min-width: 768px) {
+  /** Descripton */
+  .descriptionBanner {
+    background: $greybg;
+    padding: 60px 0;
+
+    .heading {
+      font-family: $font-bold;
+      font-size: $base * 4.25;
+      color: $black;
+      margin: 0 0 20px 0;
+    }
+
+    .readMore {
+      background: transparent;
+      border: none;
+      text-decoration: underline;
+      color: $black;
+      font-size: $base * 2;
+      font-family: $font-regular;
+      text-align: left;
+      margin: 24px 0;
+      display: inline-block;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      &:active {
+        outline: none;
+      }
+    }
+  }
+
+
+  .plpCategories {
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      padding: 64px 0 60px 0;
+      width: 1140px;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2.25;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 3;
+            }
+          }
+        } 
+      } 
+    }
+    .headingTitle{
+      font-size: $base * 7;
+    }
+    .headingSubTitle{
+      padding: 0 0 32px 0;
+    }
+  }
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px) {
+  /** Descripton */
+  .descriptionBanner {
+    background: $greybg;
+    padding: 60px 0;
+
+    .heading {
+      font-family: $font-bold;
+      font-size: $base * 2.5;
+      color: $black;
+      margin: 0 0 20px 0;
+    }
+    .description_area {
+      p {
+        color: $greyLight;
+        font-size: 12px;
+        font-family: $font-regular;
+        line-height: 18px;
+      }
+    }
+    .readMore {
+      background: transparent;
+      border: none;
+      text-decoration: underline;
+      color: $black;
+      font-size: $base * 2;
+      font-family: $font-regular;
+      text-align: left;
+      margin: 24px 0;
+      display: inline-block;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      &:active {
+        outline: none;
+      }
+    }
+  }
+
+  .plpCategories {
+    .plp-products {
+      padding: 0px 0 60px 0;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 2.25;
+            }
+          }
+        } 
+      } 
+    }
+    .headingTitle{
+      font-size: $base * 3;
+      margin-top: 10px;
+    }
+    .headingSubTitle{
+      padding: 0px;
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
 }

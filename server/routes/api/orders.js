@@ -42,4 +42,17 @@ router.get('/invoice/:invoiceNo', (req, res, next) => {
   });
 });
 
+router.get('/current', (req, res, next) => {
+  ordersHandler.getOngoingOrders(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

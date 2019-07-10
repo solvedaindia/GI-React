@@ -22,6 +22,7 @@ class ChangePassword extends React.Component {
     inputTextNew: '',
     errorCurrent: false,
     errorNew: false,
+    newPasswordPasteTxt: null,
   };
 
   componentDidMount() {
@@ -52,7 +53,7 @@ class ChangePassword extends React.Component {
     if (!validateEmptyObject(this.state.inputTextCurrent)) {
       this.setState({
         errorCurrent: true,
-        errorMessage: 'Please enter the Password',
+        errorMessage: this.state.inputTextCurrent === '' ? 'The field is required' : 'Please enter the Password',
       });
       return;
     }
@@ -77,7 +78,7 @@ class ChangePassword extends React.Component {
     if (!validateEmptyObject(this.state.inputTextNew)) {
       this.setState({
         errorNew: true,
-        errorMessage: 'Please enter the Password',
+        errorMessage: this.state.inputTextNew === '' ? 'The field is required' : 'Please enter the Password',
       });
       return;
     }
@@ -133,13 +134,26 @@ class ChangePassword extends React.Component {
       this.setState({
         errorCurrent: false,
         errorNew: false,
-        inputTextNew: value.target.value,
+        inputTextNew: this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value,
+        newPasswordPasteTxt: null,
       });
     } else {
       this.setState({
         errorCurrent: false,
         errorNew: false,
         inputTextCurrent: value.target.value,
+      });
+    }
+  }
+
+  onPasteText(value) {
+    
+    if (value.target.id === 'new') {
+      console.log('onPasge --- ',value.clipboardData.getData('text'))
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        newPasswordPasteTxt: value.clipboardData.getData('text'),
       });
     }
   }
@@ -161,26 +175,22 @@ class ChangePassword extends React.Component {
     if (this.props.changePasswordTagPro === 0) {
       oldPasswordItem = (
         <div className="form-div clearfix">
-          <div className="form-group">
-            {/* <label className="form-label">Current Password</label> */}
-            <div className="currentPassword">
-              <Input
-                className="form-control newinputmargin"
-                inputType={this.state.inputType}
-                title="Current Password"
-                name="text"
-                id="current"
-                placeholder="Enter Current Password"
-                value={this.state.inputTextCurrent}
-                handleChange={this.handleInputChange.bind(this)}
-              />
-              <span
-                onClick={this.showHidePass.bind(this)}
-                className="valiationPosition-NewPassword"
-              >
-                {<img src={require('../../SVGs/eye.svg')} />}
-              </span>
-            </div>
+          {/* <label className="form-label">Current Password</label> */}
+          <div className="currentPassword">
+            <Input
+              className="form-control newinputmargin"
+              inputType={this.state.inputType}
+              title="Current Password"
+              name="text"
+              id="current"
+              placeholder="Enter Current Password"
+              value={this.state.inputTextCurrent}
+              handleChange={this.handleInputChange.bind(this)}
+            />
+            {this.state.inputTextCurrent !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword" >
+              {<img src={require('../../SVGs/eye.svg')} />}
+            </span> : null}
+            
           </div>
           {errorItemCurrent}
         </div>
@@ -197,13 +207,14 @@ class ChangePassword extends React.Component {
             {/* <label className="form-label">New Password</label> */}
             <Input
               className="form-control"
-              inputType="password"
+              inputType="text"
               title="New Password"
               name="email"
               id="new"
               placeholder="Enter New Password"
               value={this.state.inputTextNew}
               handleChange={this.handleInputChange.bind(this)}
+              onPaste={this.onPasteText.bind(this)}
             />
           </div>
           {errorItemNew}

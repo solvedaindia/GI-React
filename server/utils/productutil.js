@@ -112,11 +112,14 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
 module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';
-  if (productIDs && productIDs.length > 0) {
-    productIDs.forEach(productID => {
-      id += `id=${productID}&`;
-    });
+  let productList = [];
+  if (!productIDs || productIDs.length === 0) {
+    callback(null, productList);
+    return;
   }
+  productIDs.forEach(productID => {
+    id += `id=${productID}&`;
+  });
   const originUrl = constants.productViewByProductIds
     .replace('{{storeId}}', headers.storeId)
     .replace('{{idQuery}}', id);
@@ -132,15 +135,13 @@ function getProductListByIDs(headers, productIDs, callback) {
     null,
     response => {
       if (response.status === 200) {
-        const productList = [];
         if (
           response.body.catalogEntryView &&
           response.body.catalogEntryView.length > 0
         ) {
-          callback(null, response.body.catalogEntryView);
-        } else {
-          callback(null, productList);
+          productList = response.body.catalogEntryView;
         }
+        callback(null, productList);
       } else {
         callback(errorUtils.handleWCSError(response));
       }
@@ -152,7 +153,7 @@ function getProductListByIDs(headers, productIDs, callback) {
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
   let promotionObject = {};
-    promotionUtil.getMultiplePromotionData(
+  promotionUtil.getMultiplePromotionData(
     productIDs,
     headers,
     (error, promotion) => {
