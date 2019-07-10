@@ -5,6 +5,7 @@ import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import { imagePrefix } from '../../../public/constants/constants';
 
+
 class productImagesAndVideos extends React.Component {
   constructor() {
     super();
@@ -61,24 +62,25 @@ class productImagesAndVideos extends React.Component {
     let imagePath;
     this.images = [];
 
-    imagesAndVideos.map(data => {
+    imagesAndVideos.thumbnailImages.map((data, index) => {
       if (screenType) {
-        imagePath = data.fullScreenImagePath;
+        imagePath = imagesAndVideos.zoomImages[index].imagePath;
       } else {
-        imagePath = data.fullImagePath;
+        imagePath = imagesAndVideos.mainImages[index].imagePath;
       }
-      const thumbnailPath = `${imagePrefix}${data.thumbnailPath}`;
-      if (data.type === 'image') {
-        const fullImagePath = `${imagePrefix}${imagePath}`;
-        this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
-      } else {
-        const videoUrl = `${imagePrefix}${data.videoPath}`;
-        this.images.push({
-          renderItem: this.renderVideoPlayer.bind(this),
-          thumbnail: thumbnailPath,
-          videourl: videoUrl,
-        });
-      }
+      
+      const thumbnailPath = `${imagePrefix}${data.imagePath}`;
+        if (data.type === 'video') {
+          const videoUrl = `${imagePrefix}${data.videoPath}`;
+          this.images.push({
+            renderItem: this.renderVideoPlayer.bind(this),
+            thumbnail: thumbnailPath,
+            videourl: videoUrl,
+          });  
+        } else {
+          const fullImagePath = `${imagePrefix}${imagePath}`;
+          this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
+        }
     });
   };
 
@@ -166,14 +168,16 @@ class productImagesAndVideos extends React.Component {
 			}
           )
         </div>
-
+        
         <ImageGallery
           showFullscreenButton
           items={this.images}
           showNav={this.state.activeData}
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
+          lazyLoad={true}
         />
+        
 
         {/* <button onClick={this.zoomin}>+</button>
 				<button onClick={this.zoomout}>-</button> */}
