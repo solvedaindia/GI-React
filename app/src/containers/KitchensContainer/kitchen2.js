@@ -41,6 +41,9 @@ if (this.state.index === 1 || this.state.index === 2){
 this.setState({index:0})
 }
 }
+componentDidMount(){
+  
+}
 
 render(){
 return (
