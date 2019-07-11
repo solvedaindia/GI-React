@@ -31,7 +31,7 @@ export class HeaderContainer extends React.Component {
     }
 
     return (
-      <header className="appheader">
+      <header className="appheader" id='header'>
         <div className="logo">
           <Link to="/">
             <Logo />
