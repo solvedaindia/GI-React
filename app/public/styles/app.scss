@@ -167,19 +167,6 @@ h4{font-weight: bold}
     }
   }
 }
-@media (min-width: 768px) {
-    .modal-dialog {
-      width: 600px;
-      margin: 0px auto;
-    }
-}
-@media (min-width: 320px) and (max-width:767px) {
-    #app {
-        max-width: 100%;
-        margin: auto;
-        overflow: hidden;
-    }
-}
 
 .slick-next:before, 
 .slick-prev:before {
@@ -187,6 +174,12 @@ h4{font-weight: bold}
     line-height: unset;
     opacity: unset;
     color: unset;
+}
+.hideData {
+  display: none;
+}
+.showData {
+  display: block;
 }
 
 
@@ -213,7 +206,12 @@ h4{font-weight: bold}
     #Global Screen Chhange for Screen max 768
     */
     @media screen and (min-width: 768px){
-        .modal.in{
+      .modal-dialog {
+        width: 600px;
+        margin: 0px auto;
+      }
+        
+      .modal.in{
             display: flex !important;
           }
 
@@ -275,9 +273,3 @@ h4{font-weight: bold}
     
     
   }
-.hideData {
-    display: none;
-}
-.showData {
-    display: block;
-}

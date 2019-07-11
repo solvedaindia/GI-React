@@ -332,3 +332,14 @@
     }
 }
 
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .compare, .animationDIV.open{
+        display: none;
+    }
+  }
+
+
+

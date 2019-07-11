@@ -197,7 +197,9 @@ class RWDFilterMain extends React.Component {
             </div>
             {/* {this.state.filterItem} */}
             {/* <RWDFilter dataPro={this.props.filterDataPro} /> */}
-            <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
+            <div className='filter-data'>
+              <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
+             </div>
           </div>
           : null}
         
