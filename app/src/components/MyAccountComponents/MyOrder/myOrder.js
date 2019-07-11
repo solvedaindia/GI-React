@@ -14,6 +14,8 @@ class MyOrder extends React.Component {
       orderListData: [],
       isLoading: true,
       updatedTrackOrderData: null,
+      isOnGoingOrderShown: false,
+      isPastOrdeShown: false,
     };
     this.renderSelection = this.renderSelection.bind(this)
   }
@@ -54,7 +56,8 @@ class MyOrder extends React.Component {
     console.log('is Show TrackOrder --- ', this.state.isTrackOrder)
     return (
       <div className="myOrder">
-        <div className="ongoingOrder">Ongoing Orders</div>
+        
+        {this.state.isTrackOrder ? null : <div className="ongoingOrder">Ongoing Orders</div> }
         {this.state.isTrackOrder ? (
           <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
         ) :
