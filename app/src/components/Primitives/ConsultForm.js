@@ -36,35 +36,72 @@ class ConsultForm extends React.Component {
          <div>
            <div className="row">
              <div className="col-md-6 ">
-               <label className="form-labeled" htmlFor="name">Full Name</label>
-               <input className="form-controlerLeft" id="name" name="name" type="text" />
+             <div  className="form-div clearfix div-error">
+               <div className="form-group">
+                <label className="form-labeled" htmlFor="name">Full Name</label>
+                <input className="form-control" id="name" name="name" type="text" />
+               </div>
+              </div>
+
              </div>
              <div className="col-md-6">
-               <label className="form-labeled" htmlFor="email">Email</label>
-               <input className="form-controler" id="email" style={{marginLeft:'20'}} name="email" type="email" />
+              <div  className="form-div clearfix div-error">
+               <div className="form-group">
+                  <label className="form-labeled" htmlFor="email">Email</label>
+                  <input className="form-control" id="email"  name="email" type="email" />
+                </div>
+              </div>
+
+              
              </div>
            </div>
-           <br /><br />
+
+          
            <div className="row">
              <div className="col-md-6 ">
-               <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-               <select className="form-controlerLeft">
-                 <option value="Select an option">Select an option</option>
-                 <option value="Select an option">Select an option</option>
-                 <option value="Select an option">Select an option</option>
-                 <option value="Select an option">Select an option</option>
-               </select>
+             <div  className="form-div clearfix div-error">
+                <div className="form-group">
+                  <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
+                  <select className="form-control">
+                    <option value="Select an option">Select an option</option>
+                    <option value="Select an option">Select an option</option>
+                    <option value="Select an option">Select an option</option>
+                    <option value="Select an option">Select an option</option>
+                  </select>
+                </div>
+             </div>              
              </div>
-             <div className="col-md-6"> <label className="form-labeled" htmlFor="number">Mobile Number</label>
-               <input className="form-controllering" id="number" name="number" type="number" /> </div>
-           </div><br /><br /><br />
-           <div className="row">
-             <label className="form-labeled" htmlFor="massage">Massage</label>
-
-             <input className="form-controlered" id="massage" name="massage" type="text" />
+             
+             <div className="col-md-6"> 
+             <div  className="form-div clearfix div-error">
+                <div className="form-group">
+                  <label className="form-labeled" htmlFor="number">Mobile Number</label>
+                  <input className="form-control" id="number" name="number" type="number" />
+               </div>
+              </div>
+            </div>
            </div>
+
+
+           <div className="row">
+           <div className="col-md-12"> 
+           <div  className="form-div clearfix div-error">
+              <div className="form-group">
+                <label className="form-labeled" htmlFor="massage">Massage</label>
+                <input className="form-control" id="massage" name="massage" type="text" />
+              </div>
+           </div>
+          </div>
+           </div>
+
            <div className='row'>
-             <button className="send-div">Send</button>
+           <div className="col-md-12">
+           <div  className="form-div clearfix div-error">
+            <div className="form-group">
+              <button className="send-div">Send</button>
+            </div>
+             </div>
+             </div>
            </div>
          </div>
         );

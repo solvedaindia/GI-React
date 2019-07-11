@@ -430,15 +430,30 @@ react-slideshow-container {
   transform: translate(-50%, -50%);
 }
 .Form-bakground{
-  width: 944px;
-  height: 600px;
+  width: 944px;  
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
   background-color: #ffffff;
-  object-fit: contain;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding:60px 119px;
+  .form-div{
+    .form-group{
+      .form-labeled{
+         color:$battleshipGrey;
+         display: block;
+         font-size:14px;
+         font-family: $font-medium;
+         text-align: left;
+         font-weight: normal;
+      }
+      .form-control{
+        border:1px solid $lightGrey;
+        border-radius: 0;
+        box-shadow: none;
+        height:54px;
+      }
+    }
+  }
+  
+  
 }
 .reactang {
   width: 1200px;
@@ -794,13 +809,7 @@ transform: translate(-50%, -50%);
     font-size:14px;
     color: black;
   }
-  .form-labeled {
-    font-size: 14px;
-    color:black;
-    padding: 0 0 0 16px;
-    line-height: 14px;
-    margin:0;
-}
+  
 .form-controler{
   display: block;
   width: 338px;
@@ -828,20 +837,7 @@ transform: translate(-50%, -50%);
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.form-controlerLeft{
-  margin-left:80px;
-  display: block;
-  width: 338px;
-  height: 54px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+
 .form-controlered{
   margin-left: 123px;
   display: block;
@@ -858,10 +854,14 @@ transform: translate(-50%, -50%);
 }
 
 
-.send-div{
-  margin-left:273px;
-  margin-top:33px;
+.send-div{  
   width:338px;
   height:44px;
   background-color: #070707;
+  border:none;
+  float: right;
+  margin:25px 0 0 0;
+  &:focus{
+    outline: none;
+  }
 }
