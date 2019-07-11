@@ -79,7 +79,7 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
     .replace('{{storeId}}', reqHeader.storeId)
     .replace('{{searchTerm}}', req.params.searchterm)
     .replace('{{queryUrl}}', queryUrl);
-  productListUrl += `&searchType=101`;
+  productListUrl += `&searchType=${plpconfig.searchPageSearchType}`;
 
   const plpTask = [
     getAllSKUProductList.bind(null, reqHeader, productListUrl, searchResponse),
@@ -101,9 +101,9 @@ function plpProductList(headers, categoryID, queryUrl, plpResponse, callback) {
     .replace('{{storeId}}', headers.storeId)
     .replace('{{categoryId}}', categoryID)
     .replace('{{queryUrl}}', queryUrl);
-  let searchType = 101;
+  let searchType = plpconfig.allSKUSearchType;
   if (headers.sku_display === 'false') {
-    searchType = 1;
+    searchType = plpconfig.productSearchType;
   }
   productListUrl += `&searchType=${searchType}`;
   let plpTask = [
@@ -398,4 +398,32 @@ function mergeSwatchandPromotion(productsList, promotionData) {
     }
   });
   return productsList;
+}
+
+module.exports.productListByIds = productListByIDs;
+function productListByIDs(header, query, callback) {
+  if (!query.id) {
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const productIDs = [];
+  const reqHeader = header;
+  reqHeader.promotionData = 'false';
+  if (Array.isArray(query.id)) {
+    query.id.forEach(id => {
+      productIDs.push(id);
+    });
+  } else {
+    productIDs.push(query.id);
+  }
+  if (query.includepromotion === 'true') {
+    reqHeader.promotionData = true;
+  }
+  productUtil.productByProductIDs(productIDs, reqHeader, (err, res) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, res);
+  });
 }

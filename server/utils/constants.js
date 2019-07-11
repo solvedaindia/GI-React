@@ -19,6 +19,7 @@ module.exports = Object.freeze({
   allSKUByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&searchSource=E&responseFormat=json&profileName=IBM_findProductsByCategory`,
   productViewByProductId: `${prodSearchResourceUrl}/{{storeId}}/productview/byId/{{productId}}?profileName=IBM_findProductByIds_Details`,
   productViewByProductIds: `${prodSearchResourceUrl}/{{storeId}}/productview/byIds?{{idQuery}}?profileName=IBM_findProductByIds_Details`,
+  productViewByPartNumber: `${prodSearchResourceUrl}/{{storeId}}/productview/{{partNumber}}`,
   associatedPromotion: `${prodWcsResourceUrl}/{{storeId}}/associated_promotion?qProductId={{productId}}&q=byProduct`,
   storeLocatorByLocation: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byLocation?responseFormat=json&city={{cityName}}&siteLevelStoreSearch=false`,
   storeLocatorByCoordinates: `${prodWcsResourceUrl}/{{storeId}}/storelocator/latitude/{{latitude}}/longitude/{{longitude}}?responseFormat=json&siteLevelStoreSearch=false`,
@@ -56,7 +57,7 @@ module.exports = Object.freeze({
   getPromotionsList: `${prodWcsResourceUrl}/{{storeId}}/promotion?q=all`,
   getPromoCode: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/getpromocode/{{promotionId}}`,
   pincodeServiceablity: `${prodWcsResourceUrl}/{{storeId}}/pincode/getServiceAbility/{{pincode}}`,
-  saveGSTIN: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
+  saveOrderExtAttr: `${prodWcsResourceUrl}/{{storeId}}/orderExt/saveOrderExtAttribute`,
   promotionByIDs: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/fetchPromotionData?catEntryIds={{productIDs}}`,
   shippingCharge: `${prodWcsResourceUrl}/{{storeId}}/GIShipCharge/getShippingCharge?pinCode={{pincode}}&uniqueId={{uniqueId}}`,
   userStatus: `${prodWcsResourceUrl}/{{storeId}}/usermanagement/getuserstatus/{{logonId}}`,
@@ -72,4 +73,5 @@ module.exports = Object.freeze({
   invoiceDetails: `${prodWcsResourceUrl}/{{storeId}}/giInvoice/getInvoiceDetails?invoiceNum={{invoiceNo}}`,
   storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreIds?{{queryParams}}&responseFormat=json`,
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
+  bookConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/booking`,
 });

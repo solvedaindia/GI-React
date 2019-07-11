@@ -78,7 +78,7 @@ export let accessToken = getTheAccessToken();
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
 export const googleClientId =
-  '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -161,8 +161,15 @@ export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
 export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
-export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
-// export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/initiateBDPayment`;
+export const AddAddressToCardAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/addaddress`;
+export const PreCheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/precheckout`;
+export const BankListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/banklist`;
+export const OrderDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/details`;
+export const CheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/checkout`;
+export const minEMIAPI = `${secureHttp}://${host}:${port2}/api/v1/emi/minimumemivalue`;
+export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/savegstin`;
+//export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
@@ -172,9 +179,9 @@ export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-  console.log('constantToke -----', tokenPro);
-  if (validateEmptyObject(tokenPro)) {
-    return (accessToken = tokenPro);
-  }
-  return (accessToken = getCookie(accessTokenCookie));
+    console.log('constantToke -----', tokenPro);
+    if (validateEmptyObject(tokenPro)) {
+        return (accessToken = tokenPro);
+    }
+    return (accessToken = getCookie(accessTokenCookie));
 }

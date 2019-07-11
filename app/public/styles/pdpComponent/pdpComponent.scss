@@ -3,6 +3,119 @@
 
 /* our-promises
 -----------------------------------*/
+.slideup, .slidedown {
+    max-height: 0;            
+    overflow-y: hidden;
+    -webkit-transition: max-height 100s ease-in-out;
+    -moz-transition: max-height 100s ease-in-out;
+    -o-transition: max-height 100s ease-in-out;
+    transition: max-height 100s ease-in-out;
+    animation-delay: 200ms;
+    
+}
+.slidedown {            
+    max-height: 75px ;                    
+}    
+
+/*-----slideUpPrice*/
+ .slideUpPrice {
+    animation: slideup1 100ms;  
+    animation-duration: .9s;
+    animation-delay: 100ms; 
+  }
+  
+  @keyframes slideup1 {
+    0% {
+         transform:translateY(20px);
+          visibility: hidden;
+         }
+    100% { 
+        transform:translateY(0px);
+        visibility: visible; 
+    }
+  }
+
+
+// /*-----slideUpPriceoffer*/
+.slideUpPriceoffer {
+    animation: slideup2 100ms;  
+    animation-duration: .9s;
+    animation-delay: 100ms; 
+    
+  }
+
+  .divpriceOffer{
+    //   height:76px;
+    overflow: hidden;
+    padding: 10px 0;
+    background: #f7f8f8;
+    }
+  
+  @keyframes slideup2 {
+    0% {
+        transform:translateY(20px);
+         visibility: hidden;
+        }
+   100% { 
+       transform:translateY(0px);
+       visibility: visible; 
+   }
+  }
+
+  /*-----slideUpCart--*/
+  .slideUpCart {
+    animation: slideup3 100ms;  
+    animation-duration: .9s;
+    animation-delay: 100ms;  
+  }
+  
+  @keyframes slideup3 {
+    0% {
+        transform:translateY(20px);
+         visibility: hidden;
+        }
+   100% { 
+       transform:translateY(0px);
+       visibility: visible; 
+   }
+  }
+
+
+.appheader{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: position 10s;
+    -ms-transition: position 10s;
+    -o-transition: position 10s;
+    transition: all 0.5s ease;   
+    background: $colorwhite;
+
+}
+.appheader.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    animation: none;
+    background: #f7f8f8;
+    z-index: 9;
+}
+.sticky {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    animation: smoothScroll 3s forwards;
+    z-index: 4;    
+    
+  }
+  @keyframes smoothScroll {
+	0% {
+        transform: translateY(80px); 
+	}
+	100% {
+        transform: translateY(100px); 
+	}
+}
+
+
 .our-promises{
     padding: 40px 0;
     background:$cerulean;
@@ -984,5 +1097,106 @@
     height: 39px;
     border-radius: 25px;
 }
+
+
+/*--------Sticky Pdp
+---------------------------------*/
+.Pdpstickybar{    
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.19);
+    padding:0;
+    background: $greybg;
+    overflow: hidden;
+    -webkit-transition: all .5s ease;
+    -moz-transition: position 10s;
+    -ms-transition: position 10s;
+    -o-transition: position 10s;
+    transition: all .5s ease;
+    
+    .pdpstickyItem{
+    .product{
+        width:50%;        
+        padding: 2px 0 0 5%;
+        float: left;       
+        
+        .productId{
+            .text{
+                font-size:10px;
+                color:$grey;
+                font-family: $font-regular;
+            }
+        }
+        .heading{
+            font-size: 18px;
+            color:$ashGrey;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+        }
+        .lockerText{
+            font-size:12px;
+            color:$greyish;
+        }
+    }
+.cartofferprice-wrap{
+    
+    .PriceofferCart{
+        display: flex;
+        align-items: center;        
+        float: right;  
+             
+        .price{
+            padding: 0 16px 0 0;
+            .discount-price{
+               font-size: 28px;
+               padding: 0 10px 0 0;
+               .priceText{
+                   margin:0;
+               }
+            }
+            .offerprice{
+                .priceText{
+                   margin:0;
+                   color:$cerulean;
+                   font-family: $font-bold;
+                   font-size: $base*3.5;
+                }
+            }
+            .priceno-discount{
+                font-size: 18px;
+                color: $grey;
+                text-decoration: line-through;
+                text-decoration-color: $reddishPink;
+             }
+        }
+        .price,
+        .accessories-offer,
+        .discount-off
+        {
+           display: block;
+           float: left;
+        }
+        .accessories-offer{
+            color:$reddishpink;
+            font-size: 14px;
+            padding: 0 40px 0 0;
+            font-family: $font-regular;
+            .bold{
+                font-family: $font-bold;
+            }
+        }
+        .addCart{
+           .addcartbtn{
+               background: $black;
+               padding: 27px 100px;
+               text-align: center;               
+               color:$colorwhite;
+               border-radius: 0;
+               font-size: $base*1.75;
+           }
+        }
+    }
+}
+}
+} 
 
 
