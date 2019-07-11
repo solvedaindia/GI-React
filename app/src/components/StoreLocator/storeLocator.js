@@ -1,13 +1,8 @@
 import React, { Fragment } from 'react';
 import apiManager from '../../utils/apiManager';
-import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
+import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps";
 import { Link } from 'react-router-dom';
-import {
-    storeAPI,
-    storeCityAPI,
-    storeById,
-    mapKey
-} from '../../../public/constants/constants';
+import { storeAPI, storeCityAPI, storeById, mapKey } from '../../../public/constants/constants';
 import '../../../public/styles/store/locator.scss';
 import Img1 from '../../../public/images/store/furniture-stores-black.png';
 import Img2 from '../../../public/images/store/mattress-stores-grey.png';
@@ -17,20 +12,20 @@ import orangeIcon from '../../../public/images/store/orangeIcon.svg';
 import blueIcon from '../../../public/images/store/blueIcon.svg';
 import phoneIcon from '../../../public/images/store/phoneIcon.svg';
 import starIcon from '../../../public/images/store/starIcon.svg';
-
+import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
-
 const NUMB_REG = /^\d+$/;
 
 class StoreLocator extends React.Component {
     constructor(props) {
+        super();
         super(props);
         this.state = {
             storeData: null,
             isLoading: true,
-            testLat: '13.10127',
-            testLong: '80.2873',
-            error: null,
+            defaultLat: '',
+            defaultLng: '',
+            isError: false,
             searchStoreType: null,
             allstoreData: null,
             isOpen: false,
@@ -39,28 +34,63 @@ class StoreLocator extends React.Component {
         
     }
 
-    handleToggleOpen = (index) => {
+    componentDidMount() { 
+        if (this.props.history.location.state) {
+            if (this.props.history.location.state.storeId) { 
+                this.getLatAndLong(this.props.history.location.state.storeId);
+            } else if (this.props.history.location.state.storeName){ 
+                this.getLatAndLong(this.props.history.location.state.storeName);
+            } else if (this.props.history.location.state.pincode) {
+                this.getLatAndLong(this.props.history.location.state.pincode);
+            } else {
+                this.getLatAndLong(appCookie.get('pincode'));
+            }
+        }
+        window.scrollTo(0, 0);
+    }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.history.location.state) {
+            if (nextProps.history.location.state.storeId) { 
+                this.getLatAndLong(nextProps.history.location.state.storeId);
+            } else if (nextProps.history.location.state.storeName){ 
+                this.getLatAndLong(nextProps.history.location.state.storeName);
+            } else if (nextProps.history.location.state.pincode) {
+                this.getLatAndLong(nextProps.history.location.state.pincode);
+            } else {
+                this.getLatAndLong(appCookie.get('pincode'));
+            }
+            this.removeActiveClassFromFilter();
+            window.scrollTo(0, 0);
+        }
+    }
+
+    /* handle toggle */
+    handleToggleOpen = (index) => {
         this.setState({
             isOpen: true,
             Infokey: index
         });
     }
 
+    /* remove active class from filter */
+    removeActiveClassFromFilter() {
+        let activeFilter = document.getElementsByClassName("active");
+        while (activeFilter.length)
+        activeFilter[0].classList.remove("active");
+    }
+
+    /* handle store type filter */
     handleStoreType(storeType, id) {
         let filterArr = new Array;
         let obj;
-        let activeFilter = document.getElementsByClassName("active");
-        while (activeFilter.length)
-        activeFilter[0].classList.remove("active");        
+        this.removeActiveClassFromFilter();
         document.getElementById(id).classList.add("active");
-
 
         for(let i = 0; i < this.state.allstoreData.data.length; i++) {
             if (this.state.allstoreData.data[i].type.indexOf(storeType) !== -1) {
                 filterArr.push(this.state.allstoreData.data[i]);
             }
-            
         }
         
         if (filterArr.length > 0) {
@@ -74,70 +104,93 @@ class StoreLocator extends React.Component {
         });
     }
 
+    /* handle store search */
     handleStoreSearch() {
+        this.removeActiveClassFromFilter();
         if(this.inputRef) {
-            var val = this.inputRef.value;
+            const val = this.inputRef.value;
             if(!val) return;
             if(NUMB_REG.test(val)) {
-                this.getLatAndLong(val);
+                this.props.history.push({
+                    state: { pincode: val }
+                })
+            } else {
+                this.props.history.push({
+                    state: { storeName: val }
+                })
             }
-            else {
-                this.getSToreDataByCity(val);
-            }
+            this.getLatAndLong(val);
         }
     }
     
-    getStoreData(lat, long) { 
+    /* get data from pincode */
+    getStoreDataFromPincode(lat, lng) { 
         const data = {
             params: {
                 latitude: lat,
-                longitude: long
+                longitude: lng
             },
-          };
+        };
+        let output = null
           
-        apiManager.get(`${storeAPI}`, data)
-        .then( response => {
-            this.setState({
-                storeData: response.data,
-                allstoreData: response.data,
-                isLoading: false,
+        apiManager.get(`${storeAPI}`, data).then( response => {
+            if (response.data.data.length > 0) {
+                output = response.data;
+            }
 
-            })
-        })
-        .catch(error => {
-            console.log()
             this.setState({
-                error,
-                isLoading: false
+                storeData: output,
+                allstoreData: output,
+                isLoading: false,
+                searchStoreType: 'pincode',
+                defaultLat: lat,
+                defaultLng: lng,
+                isOpen: false,
+                isError: false
+            });
+        }).catch(error => {
+            console.log('Error=>', error.response);
+            this.setState({
+                storeData: null,
+                isError: true,
+                isLoading: false,
+                isError: true
             });
         });
     }
 
-    getSToreDataByCity(city) {
+    /* get data from city name */
+    getSToreDataByCity(latVal, lngVal, city) {
         const data = {
             params: {
                 cityname: city,
             },
-          };
-        apiManager.get(`${storeCityAPI}`, data)
-        .then( response => {
+        };
+        apiManager.get(`${storeCityAPI}`, data).then( response => {
             this.setState({
                 storeData: response.data,
                 allstoreData: response.data,
-                isLoading: false
+                isLoading: false,
+                defaultLat: latVal,
+                defaultLng: lngVal,
+                isOpen: false,
+                isError: false
             })
            
         })
         .catch(error => {
+            console.log('Error=>', error.response);
             this.setState({
                 storeData: null,
                 isLoading: false,
-                searchStoreType: 'city'
+                searchStoreType: 'city',
+                isError: true
             });
         });
     }
 
-    getSToreDataById(id) {
+    /* get data from store id */
+    getSToreDataById(latVal, lngVal, id) {
         let storeId = '';
         for(let i = 0 ; i < id.length; i++) {
             if (i === 0) {
@@ -145,116 +198,113 @@ class StoreLocator extends React.Component {
             } else {
                 storeId += `&physicalStoreId=${id[i]}`;
             }
-
         }
 
-        apiManager.get(`${storeById+storeId}`)
-        .then( response => {
-            console.log('responseresponse=>>>>@@##$$$$',response.data)
+        apiManager.get(`${storeById+storeId}`).then( response => {
             this.setState({
                 storeData: response.data,
                 allstoreData: response.data,
-                isLoading: false
+                isLoading: false,
+                defaultLat: latVal,
+                defaultLng: lngVal,
+                isOpen: false,
+                isError: false
             })
-        })
-        .catch(error => {
-            console.log('=>>>####', error.response)
+        }).catch(error => {
+            console.log('Error=>', error.response)
             this.setState({
                 storeData: null,
                 isLoading: false,
-                searchStoreType: 'storeId'
+                searchStoreType: 'storeId',
+                isError: true
             });
         });
     }
 
-
-    getStoreDataByPincode(lat, lng) {
-        this.getStoreData(lat, lng);
-    }
-
-    getLatAndLong(getdata) {
+    /* get lat and long */
+    getLatAndLong(getdata) { 
         Geocode.setApiKey(mapKey);
-        Geocode.fromAddress(getdata).then(
-            response => { 
+        Geocode.fromAddress(getdata).then(response => { 
             const { lat, lng } = response.results[0].geometry.location;
-            this.getStoreData(lat, lng);
-            },
-            error => { 
-                this.getStoreData(this.state.testLat, this.state.testLong);
-            console.log('Error=>>###', error);
+            
+            if (this.props.history.location.state.storeName){ 
+                this.getSToreDataByCity(lat, lng, getdata);
+            } else if (this.props.history.location.state.storeId) {
+                this.getSToreDataById(lat, lng, getdata);
+            } else {
+                this.getStoreDataFromPincode(lat, lng);
+            }
+        },error => { 
+                console.log('Error=>>', error);
+                this.setState({
+                    storeData: null,
+                    isLoading: false,
+                    searchStoreType: '',
+                    isError: true
+                });
+                
             }
         );
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.location.state) {
-            if (nextProps.location.state.storeName !== this.props.location.state.storeName) {
-                this.getSToreDataByCity(nextProps.location.state.storeName);
-            } 
-            window.scrollTo(0, 0);
-        }
-    }
-    
-	componentDidMount() { 
-        if (this.props.location.state) {
-            if (this.props.location.state.storeId) { 
-                this.getSToreDataById(this.props.location.state.storeId);
-            } else if (this.props.location.state.storeName){ 
-                this.getSToreDataByCity(this.props.location.state.storeName);
-            } else if (this.props.location.state.pincode) {
-                this.getLatAndLong(this.props.location.state.pincode);
-            }
-        }
-        window.scrollTo(0, 0);
-    }
-
+    /* create Map */
     createMap(storeData) {
-
         return (
             <GoogleMap
                 defaultZoom={10}
-                defaultCenter={{lat: parseFloat(storeData[0].latitude), lng: parseFloat(storeData[0].longitude)}}  
+                defaultCenter={{lat: parseFloat(this.state.defaultLat), lng: parseFloat(this.state.defaultLng)}}  
             >
-            {/* <MarkerData storeData={storeData} /> */}
-            {
-                storeData.map((item, index) => {
+                {storeData.map((item, index) => {
                     let iconType = orangeIcon;
                     if(item.ownership === 'Godrej Interio Store') {
                         iconType = blueIcon;
                     }
-                    
                     return(
-                        <>
-                            <Marker 
-                                key={index} onClick={() => this.handleToggleOpen(index)} 
+                        <div key={index}>
+                            <Marker
+                                // onClick={() => this.handleToggleOpen(index)} 
                                 position={{lat: parseFloat(item.latitude), lng: parseFloat(item.longitude)}} 
                                 icon={{
                                     url: iconType,
-                                }} >
-                                { this.state.Infokey === index && this.state.isOpen &&
-                                <InfoWindow onCloseClick={() => this.handleToggleClose}>
-                                    <div>
-                                        <h4>{item.storeName}</h4>
-{/*                         
-                                        <p>
-                                        98G Albe Dr Newark, DE 19702 <br />
-                                        302-293-8627
-                                        </p> */}
-                                    </div>
-                                </InfoWindow>
-                            }
-                        
+                                }}
+                            >
+                                {/* { this.state.Infokey === index && this.state.isOpen &&
+                                    <InfoWindow onCloseClick={() => this.handleToggleClose}>
+                                        <div>
+                                            <h4>{item.storeName}</h4>
+                                        </div>
+                                    </InfoWindow>
+                                } */}
                             </Marker>
-                        </>
+                        </div>
                     )
                 })
-            }
+                }
             </GoogleMap>
         );
     }
 
+    /* get radius */
+    toRadius(Value) {
+        return Value * Math.PI / 180;
+    }
+
+    /* get distance from lat and long */
+    getDistance(lat1, lon1, lat2, lon2) {
+        const inKm = 6371; // km
+        const dLat = this.toRadius(lat2-lat1);
+        const dLon = this.toRadius(lon2-lon1);
+        const getLat1 = this.toRadius(lat1);
+        const getLat2 = this.toRadius(lat2);
+
+        let getValueInKm = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(getLat1) * Math.cos(getLat2); 
+        getValueInKm = 2 * Math.atan2(Math.sqrt(getValueInKm), Math.sqrt(1-getValueInKm)); 
+        getValueInKm = inKm * getValueInKm;
+        return getValueInKm.toFixed(1);
+    }
+ 
+
 	render() { 
-        
         const { storeData, searchStoreType } = this.state;
         let WrappedMap;
         let showFilter = false;
@@ -275,96 +325,92 @@ class StoreLocator extends React.Component {
                     </div>
 
                     { showFilter &&
-                    
-                    <div className='storeTypes'>
-                        <ul className='typeList'>
-                            <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture Stores', 'home')}>
-                                <figure className='typeList'><img src={Img1} className='storeImg'/></figure>
-                                <figcaption className="storetext">
-                                    Home Furniture Stores
-                                </figcaption>
-                            </li>
-                            <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattress Stores', 'mattress')}>
-                                <figure className='typeList' ><img src={Img2} className='storeImg'/>
-                                    
-                                </figure>
-                                <figcaption className="storetext">
-                                    Mattress Stores
-                                </figcaption>
-                            </li>
-                            <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchen Gallery', 'kitchen')}>
-                                <figure className='typeList'><img src={Img3} className='storeImg'/>
-                                </figure>
-                                <figcaption className="storetext">
-                                    Kitchen Galleries
-                                </figcaption>
-                            </li>
-                            <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'B2B Experience Stores', 'b2b')}>
-                                <figure className='typeList'><img src={Img4} className='storeImg'/>
-                                </figure>
-                                <figcaption className="storetext">
-                                    B2B Experience Stores
-                                </figcaption>
-                            </li>
-                        </ul>
-                    </div>
+                        <div className='storeTypes'>
+                            <ul className='typeList'>
+                                <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture Stores', 'home')}>
+                                    <figure className='typeList'><img src={Img1} className='storeImg'/></figure>
+                                    <figcaption className="storetext">
+                                        Home Furniture Stores
+                                    </figcaption>
+                                </li>
+                                <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattress Stores', 'mattress')}>
+                                    <figure className='typeList' ><img src={Img2} className='storeImg'/></figure>
+                                    <figcaption className="storetext">
+                                        Mattress Stores
+                                    </figcaption>
+                                </li>
+                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchen Gallery', 'kitchen')}>
+                                    <figure className='typeList'><img src={Img3} className='storeImg'/></figure>
+                                    <figcaption className="storetext">
+                                        Kitchen Galleries
+                                    </figcaption>
+                                </li>
+                                <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'B2B Experience Stores', 'b2b')}>
+                                    <figure className='typeList'><img src={Img4} className='storeImg'/></figure>
+                                    <figcaption className="storetext">
+                                        B2B Experience Stores
+                                    </figcaption>
+                                </li>
+                            </ul>
+                        </div>
                     }
                     { !storeData &&
                     <div className='storeTypes'>
                         <h2>No stores within this {this.state.searchStoreType}</h2>
                         <>
-                        { !showFilter &&
-                        <span>Please try another city or pincode</span>
-                        }
+                            { !showFilter &&
+                                <span>Please try another city or pincode</span>
+                            }
                         </>
                     </div>
                     }
                 </div>
                 
                 <div className="clearfix"></div>
-                { storeData &&                
-                <div className="storeDetails clearfix">
-                
-                    <h1 className='headingtitle'>One stop destination for your furniture</h1>
-                    <div className='storeList'>
-                        
-                        {<div className='detailCard' id='detailCardSection'>
-                            {!!storeData && storeData.data.map((physicalData) => {
-                                return(
-                                    <>
-                                        <div className='storeListItem'>
-                                            { physicalData.ribbonText &&
-                                            <div className="modular_wardrobe">
-                                                <img className='icons' src={starIcon} alt="star"/>
-                                                <div className='ribbonText'>{physicalData.ribbonText}</div>
+                    { storeData &&                
+                        <div className="storeDetails clearfix">
+                            <h1 className='headingtitle'>One stop destination for your furniture</h1>
+                            <div className='storeList'>
+                                {<div className='detailCard' id='detailCardSection'>
+                                    {!!storeData && storeData.data.map((physicalData, index) => {
+                                        const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, physicalData.latitude, physicalData.longitude);
+                                        return(
+                                            <div key={index}>
+                                                <div className='storeListItem'>
+                                                    { physicalData.ribbonText &&
+                                                    <div className="modular_wardrobe">
+                                                        <img className='icons' src={starIcon} alt="star"/>
+                                                        <div className='ribbonText'>{physicalData.ribbonText}</div>
+                                                    </div>
+                                                    }
+                                                    <div className="Storewrapper">
+                                                        <h2 className="storeName">{physicalData.storeName}</h2>
+                                                        { this.props.history.location.state.pincode && 
+                                                        <>
+                                                            <div className="distance">{data} Km</div>
+                                                        </>
+                                                        }
+                                                    </div>
+                                                    <p>{physicalData.address1} {physicalData.address2} {physicalData.address3}, {physicalData.city} - {physicalData.pinCode}</p>
+                                                    <div className="phoneDetails">
+                                                        <img className="phoneicon" src={phoneIcon} alt="phone"/>
+                                                        <div className="PhoneNo">{physicalData.telephone}</div>
+                                                    </div>
+                                                    <div className="direction_dealerwrp">
+                                                        <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                            Get Directions
+                                                        </Link>
+                                                        <div className="dealer">
+                                                            <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            }
-                                            <div className="Storewrapper">
-                                             <h2 className="storeName">{physicalData.storeName}</h2>
-                                             {/* <div className="distance">2.5 km </div> */}
-                                            </div>
-                                            
-                                            <p>{physicalData.address1} {physicalData.address2} {physicalData.address3}, {physicalData.city} - {physicalData.pinCode}</p>
-                                            <div className="phoneDetails">
-                                              <img className="phoneicon" src={phoneIcon} alt="phone"/>
-                                              <div className="PhoneNo">{physicalData.telephone}</div>
-                                              </div>
-                                            <div className="direction_dealerwrp">
-                                                <Link className="getDirection" target='_blank' to={{ pathname: '/direction', state: { latAndLng: 'getLatAndLong' } }}>
-                                                    Get Directions
-                                                </Link>
-                                                <div className="dealer">
-                                                  <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
-                                                  </div>
-                                            </div>
-                                        </div>
-                                    </>
-                                );
-                            }
-                        )}
-                        </div>  }
-                        
-                        
+                                        );
+                                    }
+                                )}
+                            </div>
+                        }
                     </div>
                     { storeData &&
                     <div className='mapContainer' id='mapContainer'>

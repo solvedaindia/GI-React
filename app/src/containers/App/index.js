@@ -182,7 +182,7 @@ export default class App extends React.Component {
           <Route path="/search" component={PlpContainer} />
           <Route path="/cart" component={CartDetail} />
           <Route path="/storelocator" component={StoreLocator} />
-          <Route path="/direction" component={Directions} />
+          <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           
         </Switch>
         <FooterContainer />

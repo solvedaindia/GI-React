@@ -149,7 +149,8 @@ export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocato
 /* Store BY ID*/
 export const storeById = `${secureHttp}://${host}:${port2}/api/v1/storelocator/byId`;
 /* Google Map Key */
-export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
+//export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
+export const mapKey = 'AIzaSyBsrzy8y4BCLnpnqZ_MN0F6yTSIAa8Bg-I';
 /* Notify Me API */
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 /* Address List API */
