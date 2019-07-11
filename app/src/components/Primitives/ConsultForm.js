@@ -36,54 +36,36 @@ class ConsultForm extends React.Component {
          <div>
            <div className="row">
              <div className="col-md-6 ">
-
-               <input className="form-controlerLeft" id="name" name="name" type="text"/>
-
+               <label className="form-labeled" htmlFor="name">Full Name</label>
+               <input className="form-controlerLeft" id="name" name="name" type="text" />
              </div>
              <div className="col-md-6">
-
-
-               <div className="">
-                 <input className="form-controler" id="name" style={{marginLeft:'20'}} name="name" type="text"/> </div>
-             </div>
-           </div><br/><br/>
-
-
-           <div className="row">
-             <div className="col-md-6 ">
-                 <select className="form-controlerLeft">
-                   <option value="Select an option">Select an option</option>
-                   <option value="Select an option">Select an option</option>
-                   <option value="Select an option">Select an option</option>
-                   <option value="Select an option">Select an option</option>
-                 </select>
-
-             </div>
-             <div className="col-md-6">
-
-
-               <div className="">
-               <label className="form-labeled" htmlFor="address">Name</label>
-
-                 <input className="form-controler" id="name" name="name" type="text"/> </div>
-             </div>
-           </div><br/><br/><br/>
-           <div className="row">
-             <div className="col-md-12">
-
-               <div className="form-div clearfix div-error">
-                 <div className="">
-                   <input className="form-controlered" id="name" name="name" type="text"/> </div>
-               </div>
-               <div className='row'>
-                     <div className='col-md-12 form-group'>
-                     <button className="">Send</button>
-                     </div>                    
-                    </div>
-
+               <label className="form-labeled" htmlFor="email">Email</label>
+               <input className="form-controler" id="email" style={{marginLeft:'20'}} name="email" type="email" />
              </div>
            </div>
+           <br /><br />
+           <div className="row">
+             <div className="col-md-6 ">
+               <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
+               <select className="form-controlerLeft">
+                 <option value="Select an option">Select an option</option>
+                 <option value="Select an option">Select an option</option>
+                 <option value="Select an option">Select an option</option>
+                 <option value="Select an option">Select an option</option>
+               </select>
+             </div>
+             <div className="col-md-6"> <label className="form-labeled" htmlFor="number">Mobile Number</label>
+               <input className="form-controllering" id="number" name="number" type="number" /> </div>
+           </div><br /><br /><br />
+           <div className="row">
+             <label className="form-labeled" htmlFor="massage">Massage</label>
 
+             <input className="form-controlered" id="massage" name="massage" type="text" />
+           </div>
+           <div className='row'>
+             <button className="send-div">Send</button>
+           </div>
          </div>
         );
     }

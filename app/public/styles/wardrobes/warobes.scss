@@ -814,6 +814,20 @@ transform: translate(-50%, -50%);
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.form-controllering{
+  margin-top: 1px;
+  display: block;
+  width: 338px;
+  height: 54px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .form-controlerLeft{
   margin-left:80px;
   display: block;
@@ -829,7 +843,7 @@ transform: translate(-50%, -50%);
   border-radius: 4px;
 }
 .form-controlered{
-  margin-left: 47px;
+  margin-left: 123px;
   display: block;
   width: 660px;
   height: 108px;
@@ -841,4 +855,13 @@ transform: translate(-50%, -50%);
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+
+.send-div{
+  margin-left:273px;
+  margin-top:33px;
+  width:338px;
+  height:44px;
+  background-color: #070707;
 }
