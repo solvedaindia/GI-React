@@ -45,7 +45,7 @@ this.setState({index:0})
 render(){
 return (
 <div className="Kitchen-11">
-  <div className="container">
+  <div className="container1">
     <WardrobeBanner />
     <div className="text-blocks">
       <h4 className="bannerTexts">Steel Chef</h4>
@@ -99,6 +99,8 @@ return (
     <h1 className="Types-of-Modular-War">Configuration</h1>
     <WardrobesTypes />
   </div><br /><br />
+
+<div className="container">
   <h1 className="Types-of-Modular-Ward">Your Kitchen, your way</h1>
   <p className="This-project-requirement">Choose from a vast range of acessories. Consectetur adipisicing elit, sed do
     eiusmod tempor incididunt ut labore<br /> et dolore magna aliquat enim ad minim veniam, quis nostrud exercitation
@@ -115,7 +117,8 @@ return (
       </ul>
     </div>
     <div className="col-md-10">
-    <div className="col-sm-2">
+      <div className="row colFive">
+      <div className="col-sm-2">
          <div className="colorsKitchen" style={{background:'#664857'  }}></div>
          <h4 className="namingconv">Mystic Purple</h4>
       </div>
@@ -130,18 +133,45 @@ return (
       <div className="col-sm-2">
          <div className="colorsKitchen" style={{background:'#592a2a'  }}></div>
          <h4 className="namingconv">Russet</h4>
-      </div>      <div className="col-sm-2">
+      </div>     
+      <div className="col-sm-2">
          <div className="colorsKitchen" style={{background:'#ef7f2e'  }}></div>
          <h4 className="namingconv">Plain Orange</h4>
       </div>
-  </div><br/>
-  </div><br />
-  <br /><br />
+      <div className="col-md-10">
+      <div className="row colFive">
+      <div className="col-sm-2">
+         <div className="colorsKitchen" style={{background:'#664857'  }}></div>
+         <h4 className="namingconv">Mystic Purple</h4>
+      </div>
+      <div className="col-sm-2">
+         <div className="colorsKitchen" style={{background:'#a92631'  }}></div>
+         <h4 className="namingconv">Valentia Red</h4>
+      </div>
+      <div className="col-sm-2">
+         <div className="colorsKitchen" style={{background:'#f8faf0'  }}></div>
+         <h4 className="namingconv">Shell White</h4>
+      </div>
+      <div className="col-sm-2">
+         <div className="colorsKitchen" style={{background:'#592a2a'  }}></div>
+         <h4 className="namingconv">Russet</h4>
+      </div>     
+      <div className="col-sm-2">
+         <div className="colorsKitchen" style={{background:'#ef7f2e'  }}></div>
+         <h4 className="namingconv">Plain Orange</h4>
+      </div>
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  
   <div className="row">
     <div className="col-md-2">
     </div>
     <div className="col-md-10">
-    <div className="col-sm-2">
+      <div className="col-sm-2">
          <div className="colorsKitchen" style={{background:'#e77467'  }}></div>
          <h4 className="namingconv">Adventure Range</h4>
       </div>
@@ -162,14 +192,6 @@ return (
          <h4 className="namingconv">Silicon Silver</h4>
       </div>
 
-    </div><br/>
-   
-  </div><br/><br/><br/>
-  <div className="row">
-    <div className="col-md-2">
-     
-    </div>
-    <div className="col-md-10">
       <div className="col-sm-2">
          <div className="colorsKitchen" style={{background:'#a92631'  }}></div>
          <h4 className="namingconv">Red Floral</h4>
@@ -179,9 +201,18 @@ return (
          <h4 className="namingconv">Dark Wood</h4>
       </div>
 
-    </div><br/>
+  
+    </div>
    
-  </div><br/><br/><br/>
+  </div>
+  
+    
+
+   
+  
+ </div>
+
+<div className="container">
   <div className="row">
     <div className="col-md-2">
       <h3 className="faqhead">Accessories</h3>
@@ -192,6 +223,7 @@ return (
        </ul>
     </div>
     <div className="col-md-10">
+    <div className="row colFive">
     <div  className="col-sm-2 colorsKitchen">
     <img className="colorsKitchen" src={require('../../../public/images/st11.png')} alt="rectangle" />
     <h4 className="namingconv" >Cooking Kit</h4>
@@ -217,9 +249,11 @@ return (
       <h4 className="namingconv" >Bottle Pull Out Kit</h4>
 
       </div>
-  </div><br/>
-  </div><br />
-  <br /><br />
+    </div>
+  </div>
+  </div>
+ </div>
+  
   <div className="row">
     <div className="col-md-2">
     </div>
@@ -304,6 +338,7 @@ return (
     </div><br/>
    
   </div><br/><br/><br/>
+  
   <div className="container">
     <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
     <div className="Form-bakground">
@@ -437,8 +472,6 @@ return (
     <br /><br /><br /><br /><br /><br /><br /><br />
     <button className="Read-More">Read More</button>
   </div>
-
-  <div></div>
 </div>
 )
 }

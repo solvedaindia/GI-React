@@ -57,8 +57,8 @@ import HelpSupport from '../serviceSupportContainer/index';
 
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import SearchContainer from '../Search Container/searchContainer';
 import CartDetail from '../CartContainer/cartContainer';
+import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 
 export default class App extends React.Component {
@@ -174,7 +174,12 @@ export default class App extends React.Component {
           <meta name="description" content="A Godrej application" />
         </Helmet>
         {newsletterItem}
-        <HeaderContainer />
+        {window.location.pathname === '/cart' ? (
+          <LightHeader />
+        ) : (
+          <HeaderContainer />
+        )}
+        {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/rooms:id" component={ClpContainer} />

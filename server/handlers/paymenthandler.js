@@ -85,6 +85,17 @@ module.exports.verifyBDPayment = function verifyBDPayment(
   headers,
   callback,
 ) {
+  if (
+    !params.orderId ||
+    !params.payMethodId ||
+    !params.amount ||
+    !params.customInfo ||
+    !params.billing_address_id
+  ) {
+    logger.debug('Verify Payment:::Invalid Params');
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const verifyBDPaymentURL = `${constants.verifyBDPayment.replace(

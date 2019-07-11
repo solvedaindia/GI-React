@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const url = require('url');
 const storeLocatorHandler = require('../../handlers/storelocatorhandler');
 
 router.get('/bylocation', (req, res, next) => {
@@ -46,7 +47,7 @@ router.get('/byId', (req, res, next) => {
   // const id = req.params.gi_storeId;
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
-    idArray,
+    ids,
     (err, result) => {
       if (err) {
         next(err);

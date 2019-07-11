@@ -69,6 +69,10 @@
         color:$colorwhite;
         background:$black;
       }
+      &:focus{
+        color:$colorwhite;
+        outline: none;
+      }
     }   
   }
 

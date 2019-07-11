@@ -146,7 +146,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS' ||
         errBody.errors[0].errorKey === '_ERR_INVALID_ADDR' ||
         errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE' ||
-        errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT'
+        errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT' ||
+        errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION'
       ) {
         return {
           status_code: 400,

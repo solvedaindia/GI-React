@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import apiManager from './apiManager';
-import { updatetWishListCount, updatetMinicart, resetRemoveFromWishlistFlag } from '../actions/app/actions';
+import {
+  updatetWishListCount,
+  updatetMinicart,
+  resetRemoveFromWishlistFlag,
+} from '../actions/app/actions';
 import { getCookie, getCorrespondingGiftlistId } from './utilityManager';
 import appCookie from './cookie';
 import {
@@ -14,7 +18,7 @@ import {
   wishListCountApi,
   logoutAPI,
   cartCountApi,
-  removeFromWishlist
+  removeFromWishlist,
 } from '../../public/constants/constants';
 import { resolveTheWishlistData } from './utilityManager';
 
@@ -98,9 +102,9 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
     .post(removeFromWishlist, data)
     .then(response => {
       console.log('Add wishlit --- ', response.data);
-      //this.setState({ wishlistCurrentImage: wishListRemovedImg });
+      // this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
-      //reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
+      // reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
       // this.props.updatetWishListCount(6);
     })
     .catch(error => {
