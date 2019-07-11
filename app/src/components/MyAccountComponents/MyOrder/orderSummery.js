@@ -47,7 +47,7 @@ class OrderSummery extends React.Component {
 
             <div className="summaryDetails clearfix">
               <div className="leftText">Product Discount</div>
-              <div className="rightText">- ₹{summeryData.productDiscount}</div>
+              <div className="rightText">{summeryData.productDiscount === 0 ? null : '-' } ₹{summeryData.productDiscount}</div>
             </div>
             <div className="summaryDetails clearfix">
               <div className="leftText">Order Discount</div>
