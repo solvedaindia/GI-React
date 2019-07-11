@@ -36,9 +36,8 @@ class StoreLocator extends React.Component {
 
     componentDidMount() { 
         if (this.props.history.location.state) {
-            if (this.props.history.location.state.storeId) { 
-                this.getLatAndLong(this.props.history.location.state.storeId);
-            } else if (this.props.history.location.state.storeName){ 
+            console.log('props', this.props.history.location.state);
+            if (this.props.history.location.state.storeName){ 
                 this.getLatAndLong(this.props.history.location.state.storeName);
             } else if (this.props.history.location.state.pincode) {
                 this.getLatAndLong(this.props.history.location.state.pincode);
@@ -51,9 +50,7 @@ class StoreLocator extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.history.location.state) {
-            if (nextProps.history.location.state.storeId) { 
-                this.getLatAndLong(nextProps.history.location.state.storeId);
-            } else if (nextProps.history.location.state.storeName){ 
+            if (nextProps.history.location.state.storeName){ 
                 this.getLatAndLong(nextProps.history.location.state.storeName);
             } else if (nextProps.history.location.state.pincode) {
                 this.getLatAndLong(nextProps.history.location.state.pincode);
@@ -230,7 +227,7 @@ class StoreLocator extends React.Component {
             if (this.props.history.location.state.storeName){ 
                 this.getSToreDataByCity(lat, lng, getdata);
             } else if (this.props.history.location.state.storeId) {
-                this.getSToreDataById(lat, lng, getdata);
+                this.getSToreDataById(lat, lng, this.props.history.location.state.storeId);
             } else {
                 this.getStoreDataFromPincode(lat, lng);
             }
@@ -374,9 +371,13 @@ class StoreLocator extends React.Component {
                                 {<div className='detailCard' id='detailCardSection'>
                                     {!!storeData && storeData.data.map((physicalData, index) => {
                                         const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, physicalData.latitude, physicalData.longitude);
+                                        let ribbonClass = '';
+                                        if (physicalData.ribbonText) {
+                                            ribbonClass = 'ribbon';
+                                        }
                                         return(
                                             <div key={index}>
-                                                <div className='storeListItem'>
+                                                <div className={`storeListItem ${ribbonClass}`}>
                                                     { physicalData.ribbonText &&
                                                     <div className="modular_wardrobe">
                                                         <img className='icons' src={starIcon} alt="star"/>

@@ -69,13 +69,18 @@
             height: 400px;
             overflow: auto;
             padding: 0 12px 0 0;
+            .storeListItem.ribbon{
+              .Storewrapper{
+                  padding-top:23px;
+              }
+            }
         .storeListItem{
             position: relative;
             background-color: $colorwhite; 
             border: 1px solid #ccc;
             box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
             margin:0 0 15px 0;
-            padding: 24px;
+            padding: 25px 24px;
             width: 100%;
             .modular_wardrobe{
                 position: absolute;
@@ -93,7 +98,7 @@
                 }
             }
             .Storewrapper{
-                margin: 40px 0 7px 0;
+                margin: 0px 0 7px 0;
                 .storeName,.distance{display: inline-block}
                 .storeName{
                   width:80%;
@@ -124,11 +129,14 @@
                 }
             }
             .direction_dealerwrp{
+                display: flex;
                 .getDirection{
                     color:$cerulean;
                     font-size: $base*2;
                     width: 50%;
                     line-height: 16px;
+                    text-decoration: underline;
+                    font-family: $font-medium;
                 }
                 .getDirection,.dealer{display: inline-block;}
                 .dealer{                   
