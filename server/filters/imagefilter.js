@@ -19,7 +19,11 @@ module.exports.getImagePath = function getImagePath(imagePath) {
  */
 module.exports.getProductImages = getProductImages;
 function getProductImages(productData) {
-  const productAttachment = {};
+  const productAttachment = {
+    thumbnailImages: [],
+    mainImages: [],
+    zoomImages: [],
+  };
   if (productData.attachments && productData.attachments.length > 0) {
     const thumbnailImages = [];
     const mainImages = [];

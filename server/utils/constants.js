@@ -73,4 +73,5 @@ module.exports = Object.freeze({
   invoiceDetails: `${prodWcsResourceUrl}/{{storeId}}/giInvoice/getInvoiceDetails?invoiceNum={{invoiceNo}}`,
   storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreIds?{{queryParams}}&responseFormat=json`,
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
+  bookConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/booking`,
 });

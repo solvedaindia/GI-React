@@ -102,7 +102,7 @@ module.exports.productDetailByPartNumber = function productDetailByPartNumber(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, response.body.catalogEntryView[0]);
       } else {
         callback(errorUtils.handleWCSError(response));
       }
