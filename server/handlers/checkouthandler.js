@@ -25,7 +25,7 @@ module.exports.storeGSTINValue = function storeGSTINValueInDB(req, callback) {
     ],
   };
 
-  const originUrl = constants.saveGSTIN.replace(
+  const originUrl = constants.saveOrderExtAttr.replace(
     '{{storeId}}',
     req.headers.storeId,
   );
@@ -108,6 +108,49 @@ module.exports.bankList = function bankList(headers, callback) {
         callback(null, resJson);
       } else {
         callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
+/**
+ * function to store Discount in DB during the checkout process
+ */
+module.exports.storeDiscount = function storeDiscount(headers, orderSummary) {
+  logger.debug('Inside store Discount value in WCS DB');
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const reqBody = {
+    orderId: orderSummary.orderID,
+    orderAttributes: [
+      {
+        attrName: 'productDiscount',
+        attrValue: orderSummary.productDiscount,
+      },
+      {
+        attrName: 'orderDiscount',
+        attrValue: orderSummary.orderDiscount,
+      },
+    ],
+  };
+
+  const originUrl = constants.saveOrderExtAttr.replace(
+    '{{storeId}}',
+    headers.storeId,
+  );
+  origin.getResponse(
+    'POST',
+    originUrl,
+    reqHeader,
+    null,
+    reqBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        logger.debug('Discount Saved in WCS DB');
+      } else {
+        logger.errory('Error While saving Discount in DB');
       }
     },
   );

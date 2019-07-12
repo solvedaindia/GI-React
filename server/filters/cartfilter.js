@@ -79,14 +79,20 @@ function getOrderSummary(cartData) {
       parseFloat(cartData.totalShippingTax),
     netAmount: parseFloat(cartData.grandTotal),
   };
-
+  let merchandizingDiscount = 0;
   if (
     cartData.orderExtendAttribute &&
     cartData.orderExtendAttribute.length > 0
   ) {
     cartData.orderExtendAttribute.forEach(attribute => {
-      if (attribute.attributeName === 'ORDERTOTAL_MRP') {
+      if (
+        attribute.attributeName === 'ORDERTOTAL_MRP' &&
+        attribute.attributeValue !== '0.0'
+      ) {
         orderSummary.totalAmount = parseFloat(attribute.attributeValue);
+        merchandizingDiscount =
+          parseFloat(orderSummary.totalAmount) -
+          parseFloat(cartData.totalProductPrice);
       }
     });
   }
@@ -102,8 +108,7 @@ function getOrderSummary(cartData) {
     });
   }
 
-  let merchandizingDiscount = 0;
-  cartData.orderItem.forEach(item => {
+  /*   cartData.orderItem.forEach(item => {
     const itemOfferPriceTotal = parseFloat(item.orderItemPrice);
     let itemListPriceTotal = 0;
     if (
@@ -118,11 +123,15 @@ function getOrderSummary(cartData) {
     }
     const priceDifference = itemListPriceTotal - itemOfferPriceTotal;
     merchandizingDiscount += priceDifference;
-  });
+  }); */
+  // console.log('merchandizingDiscount>>>',merchandizingDiscount);
   orderSummary.productDiscount += merchandizingDiscount;
+  orderSummary.orderDiscount = parseFloat(orderSummary.orderDiscount);
+  orderSummary.productDiscount = parseFloat(orderSummary.productDiscount);
 
   orderSummary.saving =
-    orderSummary.orderDiscount + orderSummary.productDiscount;
+    parseFloat(orderSummary.orderDiscount) +
+    parseFloat(orderSummary.productDiscount);
   orderSummary.addressID = cartData.orderItem[0].addressId || '';
 
   return orderSummary;
