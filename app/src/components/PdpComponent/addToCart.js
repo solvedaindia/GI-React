@@ -15,6 +15,7 @@ import {
 import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
+import { isMobile } from '../../utils/utilityManager';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -55,8 +56,10 @@ class addToCartComponent extends React.Component {
   /* find inventory of the product */
   findInventory = () => {
     setTimeout(() => {	
-      var header = document.getElementById("header");
-      header.classList.remove("sticky");
+      let header = document.getElementById("header");
+      if(header) {
+        header.classList.remove("sticky");
+      }
     }, 2000);
     console.log('this.propsthis.props=>>', this.props);
     const pincode = appCookie.get('pincode');
@@ -184,10 +187,10 @@ class addToCartComponent extends React.Component {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
 			storeText = 'Stores';
 		}
-	}
+  }
 	  return (
       <>
-        {!this.props.sticky && (
+        {!this.props.sticky && !this.props.isMobile && (
           <>
             <div className="pincode">
               <div className="PincodeTextdata clearfix">
@@ -218,6 +221,8 @@ class addToCartComponent extends React.Component {
         )}
         {this.state.addToCartPopup}
         <div className="addCart">
+          { !this.props.isMobile && (
+          <>
           {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
             <>
               <Button
@@ -241,7 +246,9 @@ class addToCartComponent extends React.Component {
               </Button>
             </>
           )}
-          {this.renderButton(this.props.pinCodeData, this.quantity)}
+          </>
+          )}
+          { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.quantity)}
           {this.quantityErrorMessage && <div>Quantity is not available</div>}
         </div>
       </>
