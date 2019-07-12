@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Form from 'react-bootstrap-form';
+// import Form from 'react-bootstrap-form';
 import Input from '../Primitives/consultFormInput'
 import '../../../public/styles/wardrobes/warobes.scss'
 import {
@@ -21,13 +21,13 @@ import apiManager from '../../utils/apiManager';
 
 class ConsultForm extends React.Component {
   constructor() {
-    super(props);
+    super();
     this.initialState = {
       name: "",
       email:"",
       mobileNumber:"",
       dropDownValue: "",
-      message: ""
+      message: "",
      };
      this.state = this.initialState
   }
@@ -39,39 +39,39 @@ class ConsultForm extends React.Component {
 
 //       this.callConsultApi();
 //   };
-handleChange  = event => {
-  const {name, value} = event.target; //gets info from Form
- 
+handleChange  = e => {
+  //e.preventDefault()
+  const {name, value} = e.target; //gets info from Form
  
   this.setState({
-    [name] : value,
-   
-
-  })
-//   if(this.state.email){
-//     this.setState({
-//       [email] : value,
-//     })}
-//     if(this.state.mobileNumber){
-//       this.setState({
-//         [mobileNumber] : value,
-//       })}
-//       if(this.state.dropDownValue){
-//         this.setState({
-//           [dropDownValue] : value
-//         })
-//  }
-//  if(this.state.message){
-//   this.setState({
-//     [message] : value
-//   })
+    [name] : value
+   })
+//alert(value);
+   //this.setState({'dropDownValue':value})
+   //this.setState(selectValue:e.target.value});
+//   if (e.target.id === 'name') {
+//     this.setState({ name: e.target.value });
+// } else if (e.target.id === 'email') {
+//     this.setState({ email: e.target.value });
+// } else if (e.target.id === 'mobileNumber') {
+//     this.setState({ mobileNumber: e.target.value });
+// } else if (e.target.id === 'dropDownValue') {
+//     this.setState({ dropDownValue: e.target.value});
+//     console.log(e.target.value);
+// }else if (e.target.id === 'message') {
+//   this.setState({ message: e.target.value});
+//   console.log(e.target.value);
 // }
+
+console.log('check', this.state);
+//this.callConsultApi()
 }
  
 
 
-submitForm = () => {
-  this.props.handleChange(this.state);
+submitForm = (e) => {
+//console.log('target',)
+  this.handleChange(e);
   this.setState(this.initialState);
 }
 
@@ -107,7 +107,7 @@ submitForm = () => {
 
     render() {
       const{name, email,mobileNumber,message, dropDownValue} = this.state
-      console.log('form values', name, email,mobileNumber)
+      console.log('test=>', this.state)
         return (
           <form>
             <div>
@@ -134,8 +134,10 @@ submitForm = () => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-                      <select className="form-control">
-                        <option value={dropDownValue} onChange={this.handleChange} >Select an option</option>
+                      <select   name="dropDownValue" onChange={this.handleChange} className="form-control">
+                      <option>Select an option</option>
+
+                        <option>Selected option</option>
                        
                       </select>
                     </div>
@@ -146,7 +148,7 @@ submitForm = () => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="number">Mobile Number</label>
-                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="number" name="number" type="number" required/>
+                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="mobileNumber" name="mobileNumber" type="number" required/>
                     </div>
                   </div>
                 </div>
@@ -156,7 +158,7 @@ submitForm = () => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="massage">Massage</label>
-                      <input className="form-control"  onChange={this.handleChange} value={message}  id="massage" name="massage" type="text" required/>
+                      <input className="form-control"  onChange={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                     </div>
                   </div>
                 </div>
@@ -165,7 +167,7 @@ submitForm = () => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <button type="submit" onSubmit={this.submitForm} className="btn btn-primary send-div">Send</button>
+                      <button type="button" onClick={this.submitForm} className="btn btn-primary send-div">Send</button>
                     </div>
                   </div>
                 </div>
