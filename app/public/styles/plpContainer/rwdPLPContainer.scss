@@ -115,6 +115,15 @@
       margin: 21px;
     }
 
+    .clearTxt {
+      color: black;
+      font-size: 14px;
+      float: right;
+      width: 20%;
+      text-align: left;
+      margin: 21px;
+    }
+
     &::after {
       content: " ";
       position: absolute;
@@ -321,6 +330,7 @@
             max-height: 400px;
             visibility: visible;
             overflow: scroll;
+            background: white;
           }
           .list {
             // display: inline-block;
@@ -422,6 +432,12 @@
           position: relative;
           display: flex;
           font-size: 12px;
+          
+          .selectedFacet {
+            color: #036cc5;
+            margin: -17px 0px 0px 12px;
+            font-size: 22px;
+          }
   
           &--active {
             background: #f4f4f4;
@@ -569,8 +585,10 @@
   
         &toggle {
           color: $greyish;
+          
           &:hover {
             background: $colorwhite;
+            
           }
   
           background: $colorwhite;

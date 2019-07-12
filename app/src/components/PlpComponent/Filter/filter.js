@@ -9,6 +9,7 @@ import saga from '../../../containers/PlpContainer/saga';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
 import { imagePrefix } from '../../../../public/constants/constants';
+import { runInThisContext } from 'vm';
 
 const downArrow = (
   <img
@@ -35,6 +36,7 @@ class Filter extends React.Component {
       checked: false,
       //RWD Vars
       isMobile: window.innerWidth <= 760,
+      isRWDFilterSelected: false,
     }
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -43,10 +45,14 @@ class Filter extends React.Component {
     this.onApplyBtnClick = this.onApplyBtnClick.bind(this);
   }
 
-  toggleDropdown() {
-    // if (this.props.isFromRWD && !this.state.active) {
-    //   return;
+  toggleDropdown(ismmm) {
+    console.log('ismmm -- ',ismmm);
+    // if (this.props.isFromRWD && this.state.active) {
+    //   // this.props.resetAllPro();
+
+    //   //return;
     // }
+    
 
     if (!this.state.active) {
       document.addEventListener('click', this.handleOutsideClick, false);
@@ -138,7 +144,7 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    console.log('dddmdmd -- ', this.props.updatedFilter);
+    console.log('dddmdmd -- ', this.props.indexPro);
 
     const alreadyAddedFiltersArr = [];
     const filteredArr = [...this.state.facetArr];
@@ -151,8 +157,11 @@ class Filter extends React.Component {
         });
       }
     }
-
-    this.setState({ facetArr: filteredArr });
+    console.log('maksss -- ',alreadyAddedFiltersArr);
+    this.setState({ 
+      facetArr: filteredArr,
+      active: this.props.indexPro === 0 && this.props.isFromRWD ? !this.state.active : false
+     });
     const extFacetArr = filteredArr.map(
       item =>
         // console.log('exstractedArr --- ',item.value);
@@ -182,6 +191,7 @@ class Filter extends React.Component {
 
   filterOptions(alreadyAddedFiltersArr) {
     // return this.props.dataPro.facetValues.map((option, i) => {
+      var isRWDFacetSelecte = false;
     const item = this.props.dataPro.facetValues.map((option, i) => {
       let checkboxItem;
       let customSelectionBoxId;
@@ -199,7 +209,9 @@ class Filter extends React.Component {
             id={customSelectionBoxId}
             name="scales"
           />
+          
         );
+        //isRWDFacetSelecte = true;
         console.log('ITsChecked----', checkboxItem);
       } else {
         customSelectionBoxId = this.props.dataPro.facetName + i;
@@ -262,7 +274,7 @@ class Filter extends React.Component {
       return (
         <li key={i} className="list">
           <div
-            onClick={evt => this.handleClick(i)}
+            // onClick={evt => this.handleClick(i)}
             key={i}
             className={`dropdown__list-item ${
               i === this.state.selected ? 'dropdown__list-item--active' : ''
@@ -282,6 +294,7 @@ class Filter extends React.Component {
     });
     this.setState({
       facetItem: item,
+      isRWDFilterSelected: isRWDFacetSelecte,
     });
   }
 
@@ -295,13 +308,10 @@ class Filter extends React.Component {
           className="dropdown_filter"
         >
           <div className="dropdown_filter__filter">
-            <div
-              className="dropdown_filter__toggle dropdown_filter__list-item"
-              onClick={() => this.toggleDropdown()}
-            >
+            <div className="dropdown_filter__toggle dropdown_filter__list-item" onClick={this.props.isFromRWD ? this.state.active ? null : () => this.toggleDropdown(true) : () => this.toggleDropdown(true) }>
               {this.props.dataPro.facetName}
+              {this.props.isFromRWD ? this.state.isRWDFilterSelected ? <div className='selectedFacet'>•</div> : null : null }
               {this.props.isFromRWD ? null : this.state.active ? upArrow : downArrow}
-              
             </div>
           </div>
 

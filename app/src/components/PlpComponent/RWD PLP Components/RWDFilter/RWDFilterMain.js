@@ -179,6 +179,10 @@ class RWDFilterMain extends React.Component {
     })
   }
 
+  onClearAllclick() {
+    this.props.onClearAllRWDFilter();
+  }
+
   render() {
     return (
       <>
@@ -189,20 +193,21 @@ class RWDFilterMain extends React.Component {
           />{' '}
           Filter
         </button>
-        
+
         {this.state.isShowFilterOptions ?
           <div className='filterOutterCont'>
             <div className='filterHeader'>
               <label className='filterTxt'>Filters</label>
+              <label onClick={this.onClearAllclick.bind(this)} className='clearTxt'>Clear All</label>
             </div>
             {/* {this.state.filterItem} */}
             {/* <RWDFilter dataPro={this.props.filterDataPro} /> */}
             <div className='filter-data'>
               <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
-             </div>
+            </div>
           </div>
           : null}
-        
+
       </>
     );
   }
@@ -210,8 +215,8 @@ class RWDFilterMain extends React.Component {
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => ({
-  onFilterUpdate: (updatedArr, facetName) =>
-    dispatch(actionCreators.filter(updatedArr, facetName)),
+  onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
+  onClearAllRWDFilter: () => dispatch(actionCreators.clearAllRWDFilters()),
 });
 
 const mapStateToProps = state => {

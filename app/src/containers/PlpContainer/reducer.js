@@ -48,6 +48,11 @@ function plpContainerReducer(state = initialState, action) {
         ...state,
         updateFilter: action.browserFilter,
       };
+    case actionTypes.CLEARALLFILTER:
+      return {
+        ...state,
+        updateFilter: new Map(),
+      };
     case actionTypes.ADBANNERCOUNT:
       return {
         ...state,
