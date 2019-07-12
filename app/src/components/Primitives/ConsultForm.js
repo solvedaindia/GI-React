@@ -3,107 +3,175 @@ import { render } from 'react-dom';
 import Form from 'react-bootstrap-form';
 import Input from '../Primitives/consultFormInput'
 import '../../../public/styles/wardrobes/warobes.scss'
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+  userLoginAPI,
+  consultFormApi,
+  userDataAPI,
+  PinToCityAPI
+} from '../../../public/constants/constants';
+import axios from 'axios';
+import apiManager from '../../utils/apiManager';
+
 
 
 
 
 class ConsultForm extends React.Component {
-  state = {
-    category: null,
-    isLoading: true,
-    errors: null,
-  };
-
- /* getHeaderLayer2() {
-    apiManager
-      .get(navigationApi)
-      .then(response => {
-        this.setState({
-          category: response.data.data.categoryArray,
-          isLoading: false,
-        });
-        console.log('Category Navigation Data', response.data.data);
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
+  constructor() {
+    super(props);
+    this.initialState = {
+      name: "",
+      email:"",
+      mobileNumber:"",
+      dropDownValue: "",
+      message: ""
+     };
+     this.state = this.initialState
   }
+ 
+//  handleSubmit = e => {
+//     e.preventDefault();
+    
+//     const data = new FormData(e.target.value);
 
-  componentDidMount() {
-    this.getHeaderLayer2();
-  }*/
+//       this.callConsultApi();
+//   };
+handleChange  = event => {
+  const {name, value} = event.target; //gets info from Form
+ 
+ 
+  this.setState({
+    [name] : value,
+   
+
+  })
+//   if(this.state.email){
+//     this.setState({
+//       [email] : value,
+//     })}
+//     if(this.state.mobileNumber){
+//       this.setState({
+//         [mobileNumber] : value,
+//       })}
+//       if(this.state.dropDownValue){
+//         this.setState({
+//           [dropDownValue] : value
+//         })
+//  }
+//  if(this.state.message){
+//   this.setState({
+//     [message] : value
+//   })
+// }
+}
+ 
+
+
+submitForm = () => {
+  this.props.handleChange(this.state);
+  this.setState(this.initialState);
+}
+
+ 
+  callConsultApi = () => {
+    
+		
+      const data = {
+        name:this.state.name,
+        mobileNumber:this.state.mobileNumber,
+        email:this.state.email,
+        dropDownValue:this.state.dropDownValue,
+        message:this.state.message,
+       
+        }
+		apiManager.post(consultFormApi, data).then((res) => {
+			console.log('aaaaa', res);
+			this.setState({
+        name: res.data.name,
+        mobileNumber: res.data.mobileNumber,
+        email: res.data.email,
+        dropDownValue: res.data.dropDownValue,
+        message:res.data.message
+        
+			});
+		}).catch(error => {
+			this.setState({
+       error: error
+			});
+			console.log('Notify API Error---', error.response.data.error.error_message);
+		});
+	}
 
     render() {
+      const{name, email,mobileNumber,message, dropDownValue} = this.state
+      console.log('form values', name, email,mobileNumber)
         return (
-         <div>
-           <div className="row">
-             <div className="col-md-6 ">
-             <div  className="form-div clearfix div-error">
-               <div className="form-group">
-                <label className="form-labeled" htmlFor="name">Full Name</label>
-                <input className="form-control" id="name" name="name" type="text" />
-               </div>
-              </div>
-
-             </div>
-             <div className="col-md-6">
-              <div  className="form-div clearfix div-error">
-               <div className="form-group">
-                  <label className="form-labeled" htmlFor="email">Email</label>
-                  <input className="form-control" id="email"  name="email" type="email" />
+          <form>
+            <div>
+              <div className="row">
+                <div className="col-md-6 ">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <label className="form-labeled" htmlFor="name">Full Name</label>
+                      <input  onChange={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <label className="form-labeled" htmlFor="email">Email</label>
+                      <input  onChange={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              
-             </div>
-           </div>
-
-          
-           <div className="row">
-             <div className="col-md-6 ">
-             <div  className="form-div clearfix div-error">
-                <div className="form-group">
-                  <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-                  <select className="form-control">
-                    <option value="Select an option">Select an option</option>
-                    <option value="Select an option">Select an option</option>
-                    <option value="Select an option">Select an option</option>
-                    <option value="Select an option">Select an option</option>
-                  </select>
+              <div className="row">
+                <div className="col-md-6 ">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
+                      <select className="form-control">
+                        <option value={dropDownValue} onChange={this.handleChange} >Select an option</option>
+                       
+                      </select>
+                    </div>
+                  </div>
                 </div>
-             </div>              
-             </div>
-             
-             <div className="col-md-6"> 
-             <div  className="form-div clearfix div-error">
-                <div className="form-group">
-                  <label className="form-labeled" htmlFor="number">Mobile Number</label>
-                  <input className="form-control" id="number" name="number" type="number" />
-               </div>
+
+                <div className="col-md-6">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <label className="form-labeled" htmlFor="number">Mobile Number</label>
+                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="number" name="number" type="number" required/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <label className="form-labeled" htmlFor="massage">Massage</label>
+                      <input className="form-control"  onChange={this.handleChange} value={message}  id="massage" name="massage" type="text" required/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='row'>
+                <div className="col-md-12">
+                  <div className="form-div clearfix div-error">
+                    <div className="form-group">
+                      <button type="submit" onSubmit={this.submitForm} className="btn btn-primary send-div">Send</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-           </div>
-
-
-           <div className="row">
-           <div className="col-md-12"> 
-           <div  className="form-div clearfix div-error">
-              <div className="form-group">
-                <label className="form-labeled" htmlFor="massage">Massage</label>
-                <input className="form-control" id="massage" name="massage" type="text" />
-              </div>
-           </div>
-          </div>
-           </div>
-
-           <div className='row'>
-           <div className="col-md-12">
-           <div  className="form-div clearfix div-error">
-            <div className="form-group">
-              <button className="send-div">Send</button>
-            </div>
-             </div>
-             </div>
-           </div>
-         </div>
+          </form>
         );
     }
 }  

@@ -103,7 +103,7 @@ index: 0
                    <div className="row-md-6">
 
 
-                     <div class="container">
+                     <div className="container">
 
                        <BeforeAfter />
                      </div>
@@ -127,7 +127,7 @@ index: 0
                </div>
                <div className="container">
                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
-                 <div class="text-block">
+                 <div className="text-block">
                    <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
                      alt="rectangle" />
                    <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>

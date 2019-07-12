@@ -226,7 +226,7 @@ index: 0
                </div>
                <div className="container">
                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
-                 <div class="text-blocks">
+                 <div className="text-blocks">
                    <h1 className="Image-gallery-Copy-3">Our store</h1>
                    <h4 className="Image-gallery-Copy-3 ">Experience our store facilities</h4>
                    <p2 className="A-one-stop-shop-inte">Experience our wardrobe at <span className="spanish">Vikroli Godrej Store (1.6 km away)</span><br/>

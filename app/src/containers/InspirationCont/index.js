@@ -30,8 +30,8 @@ export class Inspiration extends React.Component {
                     <InsCrousel />
                     <div className="text-block">
  <h4 className="headered">Interio Kitchens</h4>
-                 <p2>Lookbook of the Year 2018<br />
-                   the home you've always wanted</p2> <br />
+                 <p>Lookbook of the Year 2018<br />
+                   the home you've always wanted</p> <br />
                  <button className="butt">View</button>
                </div>
                     <div className="container">
@@ -43,7 +43,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                         </div>
                         <div className="col-md-6">
                         <img vspace="50"
@@ -52,7 +52,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                       <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                         </div>
 
                       </div>
@@ -64,7 +64,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                       </div>
                       <div className="col-md-6">
                       <img vspace="50"
@@ -73,7 +73,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                       </div>
 
 
@@ -86,7 +86,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                         </div>
                       <div className="col-md-6">
                       <img vspace="50"
@@ -95,7 +95,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                       </div>
                       </div>
                       
@@ -108,7 +108,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                       </div>
                       <div className="col-md-6">
                       <img vspace="50"
@@ -117,7 +117,7 @@ export class Inspiration extends React.Component {
                       alt="rectangle"
                     />
                      <h4 className="Summer-Spark">Summer Spark</h4>
-                    <p1 className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p1>
+                    <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
                       </div>
 
                       </div>
@@ -127,7 +127,7 @@ export class Inspiration extends React.Component {
                       src={require('../../../public/images/inspi9.jpg')}
                       alt="rectangle"
                     />
-                   <div class="text-block">
+                   <div className="text-block">
                    <img
                       className="UUs-with-tagline-1"
                       src={require('../../../public/images/u-us-with-tagline-1.jpg')}
