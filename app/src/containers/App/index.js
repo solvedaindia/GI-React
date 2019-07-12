@@ -45,6 +45,7 @@ import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrde
 import CartDetail from '../CartContainer/cartContainer';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
+import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -179,6 +180,7 @@ export default class App extends React.Component {
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
           <Route path="/cart" component={CartDetail} />
+          <Route path="/invoice" component={Invoice} />
         </Switch>
         <FooterContainer />
       </div>

@@ -38,7 +38,6 @@ export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secur
 /* Cart Detail API */
 export const cartDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
 /* Cart Update API */
-
 export const cartUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
 /* Cart Item Delet API */
 export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
@@ -48,6 +47,8 @@ export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/c
 export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/applypromotion`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
+/* Invoice API */
+export const invoicAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/invoice/{invoiceNo}`;
 /* Auto Suggest API */
 export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
