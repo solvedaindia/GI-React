@@ -11,8 +11,8 @@ class BeforeAfter extends Component {
       <BeforeAfterSlider
         before={before}
         after={after}
-        width={1440}
-        height={600}
+        width={1140}
+        height={410}
       />
     )
   }
