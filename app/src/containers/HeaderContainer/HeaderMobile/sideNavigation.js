@@ -9,6 +9,7 @@ import {
 } from '../../../../public/constants/constants';
 import { logoutTheUser } from '../../../utils/initialManager';
 import UserAccInfo from '../../../components/UserAccInfo/userAccInfo';
+import WelcomeBack from '../../../components/WelcomeBack/index';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 
 export class HeaderMobile extends React.Component {
@@ -228,9 +229,18 @@ export class HeaderMobile extends React.Component {
             >
               <li className="navTxt">Manage Address</li>
             </Link>
+            <Link to={{ pathname: '/support' }} onClick={() => this.onLinkNavigation('Customer Care')}>
+              <li className="navTxt">Customer Care</li>
+            </Link>
           </ul>
         </div>
       ),
+    });
+  }
+
+  resetLoginValues() {
+    this.setState({
+      showLoginPopUp: false,
     });
   }
 
@@ -321,7 +331,7 @@ export class HeaderMobile extends React.Component {
 
     return (
       <>
-        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.showLoginPopUp ? <WelcomeBack resetCallbackPro={this.resetLoginValues.bind(this)}/>/*<UserAccInfo fromWishlistPro />*/ : null}
         <div className="sideNavigation">
           <label>
             <input type="checkbox" checked={showNav ? 'checked' : ''} />
