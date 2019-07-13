@@ -9,6 +9,7 @@ import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
+import ConsultationForm from '../../components/Primitives/ConsultForm'
 
 
 
@@ -114,8 +115,12 @@ index: 0
                  <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                  <div className="Form-bakground">
                    <h2 className="Book-a-consultation">Book a consultation</h2>
-                   <p4 className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                     tempor. </p4>
+                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                     tempor. </p>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <ConsultationForm/>
                  </div>
 
                </div>
