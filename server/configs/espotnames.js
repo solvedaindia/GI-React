@@ -9,6 +9,9 @@ const espots = {
     'GI_Footer_Category_Data',
   ],
   homebody: ['GI_Homepage_Static_Data'],
+  homepage: {
+    recommendedProducts: 'GI_HOMEPAGE_PRODUCT_RECOMMENDATION',
+  },
   recentlyViewed: 'RecViewed_CatEntries',
   bestSeller: 'GI_HOMEPAGE_BESTSELLERS',
   featuredCategories: 'GI_HOMEPAGE_FEATURED_CATEGORIES',
