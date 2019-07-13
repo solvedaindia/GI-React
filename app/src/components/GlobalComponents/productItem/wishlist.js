@@ -129,8 +129,12 @@ class Wishlist extends React.Component {
         wishlistPopup: null,
       });
     }, 2000);
+    let pdpWishlist = '';
+    if (this.props.isPDP) {
+      pdpWishlist = 'pdpWishlist';
+    }
     return (
-      <div className="addedToWishlist clearfix">
+      <div className={`addedToWishlist clearfix ${pdpWishlist}`}>
         <span className="wishlist-text">Product Added to Wishlist</span>
         <button
           onClick={() => this.redirectToWishlistPage()}
@@ -150,12 +154,18 @@ class Wishlist extends React.Component {
   render() {
     return (
       <>
-        {this.state.wishlistPopup}
+        { !this.props.isPDP &&
+          this.state.wishlistPopup
+        }
+        
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
         >
           {this.state.wishlistCurrentImage}
+          { this.props.isPDP &&
+            this.state.wishlistPopup
+          }
         </button>
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>

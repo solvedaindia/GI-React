@@ -69,14 +69,14 @@ class EmiInfo extends React.Component {
 				}
 
 				return (
-					<a
+					<td
 						key={index}
 						id={`bankTab_${index}`}
 						className={`bankTab bankTabData ${this.activeClass}`}
 						onClick={() => this.EmiDetailsTab(index)}
 					>
 						{tabData.bankName}
-					</a>
+					</td>
 				);
 			})
 		);
@@ -93,22 +93,23 @@ class EmiInfo extends React.Component {
 				}
 
 				let displayContent = '';
-				displayContent = data.emiDetails.map((tabContent, id) => (
-					<ul className='bankEmiList' key={id}>
-						<li>{tabContent.tenure}</li>
-						<li>{tabContent.emiValue}</li>
-						<li>{tabContent.interestAmount}%</li>
-						<li>{tabContent.totalAmount}</li>
-					</ul>
+				displayContent = data.emiDetails.map((tabContent, id) => (					
+					 <tr key={id}>						
+							<td>{tabContent.tenure}</td>
+							<td>{tabContent.emiValue}</td>
+							<td>{tabContent.interestAmount}%</td>
+							<td>{tabContent.totalAmount}</td>
+					</tr>	
 				));
 
-				return (
-					<div key={index}
+				return (					
+					<td colSpan={4} key={index}
 						id={`bankContent_${index}`}
 						className={`bankTabcontent ${this.dataClass}`}
-					>
-						{displayContent}
-					</div>
+					>						
+						<table className="emiPlans table table-striped" width="100%">{displayContent}</table>
+					</td>
+					
 				);
 			})
 		);
@@ -131,16 +132,32 @@ class EmiInfo extends React.Component {
 										<li className='list'>For payments done using credit and debit cards, to make this a No Cost EMI offer, the interest amount will be discounted from the price of your order. Your card will be charged for the item price minus the discounted interest. The total amount you will pay to the bank (excluding GST) will be equal to the price of the item. The bank will charge GST on the interest amount. For payments done using Amazon Pay EMI, the price will not be discounted upfront. Instead, you will not be charged any interest for a No Cost EMI offer.</li>
 									</ul>
 								{!this.state.loading && (
-										<div className="emiPlans">
-											{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}
-											<ul className='bankEmiList'>
-												<li><b>PLANS</b></li>
-												<li><b>EMI</b></li>
-												<li><b>ANNUAL INTEREST</b></li>
-												<li><b>TOTAL COST</b></li>
-											</ul>
+										<table width="100%" className="emiPlans table table-striped">
+											<tr className="tabHeading">
+												<td colSpan="4">
+													<table className="tableHeading table" width="100%">
+														<tr>
+														{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}
+														</tr>
+													</table>
+												</td>
+											   
+											</tr>
+											<tr className="spacing">
+												<td className="seprater" colSpan="4">&nbsp;</td>
+											</tr>
+											
+											<tr className='bankEmiList'>
+												<td>PLANS</td>
+												<td>EMI</td>
+												<td>ANNUAL INTEREST</td>
+												<td>TOTAL COST</td>
+											</tr>
+											
+											<tr className="banklistdata">
 											{this.renderTabContent(this.state.bankDetails.data.bankEMIDetails)}
-									</div>
+									        </tr>
+									</table>
 								)}
 								</div>
 							</Col>

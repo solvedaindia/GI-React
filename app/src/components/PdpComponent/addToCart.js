@@ -16,6 +16,8 @@ import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
 
+import Mapflag from '../../components/SVGs/mapflag.svg';
+
 class addToCartComponent extends React.Component {
   constructor(props) {
 	super(props);
@@ -135,8 +137,14 @@ class addToCartComponent extends React.Component {
       });
     }, 2000);
     return (
-      <div className="addedToWishlist clearfix">
+      <div className="addedToWishlist dropdownwishlist clearfix">
         <span className="wishlist-text">Product Added to Cart</span>
+        <button
+          onClick={() => this.props.history.push('/cart')()}
+          className="view-btn"
+        >
+          View
+        </button>
       </div>
     );
   }
@@ -191,6 +199,7 @@ class addToCartComponent extends React.Component {
           <>
             <div className="pincode">
               <div className="PincodeTextdata clearfix">
+               <img className="mapflag" src={Mapflag} alt="Mapflag"/>
                 <input
                   className="pincodeVal"
                   name="pincodeVal"

@@ -58,8 +58,8 @@ class productDefAttribute extends React.Component {
 				let valueName = data.name;
 				return (
 					<div key={i}>
-						<div className='att-val-name'><b>{valueName}:  {this.props.selectedAttribute[i].values[0].name}</b><span id={`ColorName${i}`}></span></div>
-						<ul>
+						<div className='att-val-name'><span className="attributeName">{valueName}:</span>  <span className="attributeVal">{this.props.selectedAttribute[i].values[0].name}</span><span id={`ColorName${i}`}></span></div>
+						<ul className="clearfix">
 							{
 								data.values.map((value, index) => {
 									let checkedType = false;
@@ -71,6 +71,7 @@ class productDefAttribute extends React.Component {
 									}
 									let circle = 'display:block';
 									let isRadio = false;
+									let boxClass = '';
 
 									if (this.props.selectedAttribute[i].values[0].name === value.name) {
 										checkedType = true;
@@ -88,6 +89,10 @@ class productDefAttribute extends React.Component {
 										name = value.name;
 										isRadio = true;
 									}
+
+									if (isRadio === true) {
+										boxClass = 'boxClass';
+									}
 									let selectedCircle = '';
 
 									if (checkedType && !isRadio) {
@@ -100,13 +105,14 @@ class productDefAttribute extends React.Component {
 										isDisabled = 'disabled-attr';
 									}
 									return (
-										<li className={`attributeList ${isDisabled}`} key={index}>
+										<li className={`attributeList ${boxClass} ${isDisabled}`} key={index}>
 											{radioButtonHtml}
 										</li>
 									);
 								})
 							}
             			</ul>
+						<div className="clearfix"></div>
 					</div>
 				);
 			})

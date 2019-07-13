@@ -217,6 +217,23 @@
                 padding:0;
                 font-size: unset;
             }
+            .image-gallery-image{
+                text-align: center;
+                min-height: 100vh;
+                max-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                    transition: all .5s;
+                    -moz-transition: all .5s;
+                    -webkit-transition: all .5s;
+                    -o-transition: all .5s;
+                    -ms-transition: all .5s;
+                    max-width: 2500px;
+                    min-width: 780px;
+                }
+            }
          }
      }
   }
@@ -228,10 +245,13 @@
         }
         .wishListDiv{
             font-size: 10px;
+            line-height: 10px;
             color: $greyish;
+            font-family: $font-medium;
             .wishlistBtn {
                 border: none;
                 background: none;
+                position: relative;
                 img{
                     width: 17px;
                 }
@@ -244,6 +264,8 @@
             font-size: 10px;
             margin-left: 12px;
             color: $greyish;
+            line-height: 10px;
+            font-family: $font-medium;
             cursor: pointer;
             position: relative;
             .share-btn{
@@ -289,11 +311,14 @@
         }
     }
     .product{
-        padding:0 0 5px 0px;      
-        font-weight: 600; 
+        padding:0 0 5px 0px; 
+        font-family: $font-medium;     
+        line-height: 12px;
         .text{
             color:$grey;
-            font-size: 12px;                 
+            font-size: 12px;   
+            font-size: 12px;    
+            font-family: $font-medium;                   
         }      
     }
 
@@ -303,8 +328,14 @@
         color:$ashGrey;
         font-family: $font-bold;
         font-size:30px;
-        padding:0 0 5px 0px;      
+        line-height: 30px;
+        padding:15px 0 5px 0px;         
      }
+     .materialType{
+        color:$greyish;
+        font-size:$base*2.25;
+        line-height: $base*2.25;
+      }
     }
 
     .price{
@@ -325,7 +356,7 @@
         }
         .offerprice{
             color:$cerulean;
-            font-size:28px;
+            font-size:30px;
             margin:0 10px 0 0;
         }
     }
@@ -354,10 +385,18 @@
        }
        .viewOffer{
            float:right;
-           font-family:$font-bold;
+           font-family:$font-medium;
            font-size: 12px;
            color:$cerulean;
            text-decoration: none;
+           .upArrow{
+            padding: 0 0 0 12px;
+            opacity: 0.54;
+            width: 22px;
+           }
+           .downArrow{
+               transform: rotate(-90deg);
+           }
        }
     }
 
@@ -430,23 +469,31 @@
             background: $colorwhite;
             .PincodeTextdata{
                 padding: 11px 19px;
+                display: flex;
                 .pincodeVal,.pincodeEdit{
                     display: block;
                     
                 }
+                .mapflag{
+                    float: left;
+                    width:18px;
+                    margin:0 14px 0 0;
+                    }
                 .pincodeVal{
                     float:left;
                     width: 70%;
                     border: none;
                     color:$black;
                     font-size: 18px;
+                    padding: 0px 0 0 0;
                     font-family: $font-bold;
+                    line-height: 24px;
                 }
                 .pincodeEdit{
                     color:$ceruleanblue;
                     float:right;
                     font-family: $font-bold;
-                    font-size: 14px;
+                    font-size: 12px;
                     padding: 5px 0 0 0;
                 }
             }
@@ -525,11 +572,70 @@
 
     .attr-details-box{
         padding-top: 15px;
+        border-bottom: 1px solid $borderLight;
+        margin: 0 0 16px 0;
+        .boxClass{   
+            label{
+                border:transparent;
+                line-height: 12px;
+                margin: 0;
+                box-shadow:none;
+
+                border:1px solid $lightGrey;
+                margin: 0 18px 0 0;
+                font-size: 12px;
+                color:$battleshipGrey;
+                padding: 14px 17px;
+                font-weight: normal;
+                font-family: $font-medium;
+                border-radius: 0;
+                &:hover{                    
+                    box-shadow:none;
+                }
+            }
+            
+            input[type="radio"]{
+                margin:0;
+                float: left;
+                visibility: hidden;
+                height: 0;
+                width: 0;
+
+            }
+        }
+        .active{
+            border:none;
+            label{
+                border:1px solid $black;
+                color:$black;
+            }            
+        }
         .att-val-name{
             padding-bottom: 10px;
+            font-family: $font-medium;
+            line-height: 12px;
+
+            .attributeName{
+                font-size: 10px;
+                font-family: $font-medium;
+                font-weight: bold;
+                text-transform: uppercase;
+                color:$ashGrey;
+  
+              }
+              .attributeVal{
+                  font-size: 12px;
+                  font-family: $font-medium;
+                  font-weight: bold;
+                  color:$black;
+              }
         }
     }
-    
+    .dropdownwishlist{
+        top: -64px;
+        right: 10%;
+      }
+      
   }
 
 
@@ -572,6 +678,7 @@
                         font-size: 14px;
                         color:$greyLight;
                         display: block;
+                        font-family: $font-regular;                        
                         .heading{
                             font-size: 20px;
                             color:$black;
@@ -579,6 +686,7 @@
                             padding:0;
                             text-transform: capitalize;
                             padding: 0 0 5px 0;
+                            font-family: $font-medium;
                         }
                     }
                     &:hover{
@@ -679,6 +787,15 @@
         }
     }
 }
+
+
+.addedToWishlist.pdpWishlist{
+    min-width: 250px;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 3;
+  }
 
 /* Product_details
 -----------------------------*/
@@ -930,6 +1047,7 @@
             }
           }
           .emi_modal{
+              width:100%;
             padding: 30px;
             .heading{
                 margin:0 0 16px 0;
@@ -938,7 +1056,7 @@
                 font-size: 18px;
             }
             .emi_list{
-                padding:0 0 0 20px;
+                padding:0 0 25px 20px;
                 .list{
                     font-size: 12px;
                     padding: 0 0 2px 0;
@@ -1036,7 +1154,8 @@
     display: block;
 }
 .attributeList {
-    display: inline-block;
+    display: block;
+    float: left;
     padding: 0 7px 0 0;
     label{
         cursor: pointer;
@@ -1083,6 +1202,50 @@
     width: 20%;
     text-align: center;
 }
+.bankEmiList{background-color: rgba(0, 0, 0, 0.11) !important;}
+.emiPlans{
+    text-align: center;
+}
+.emiPlans>tr:nth-of-type(even) {
+    background-color: rgba(238, 237, 237, 0.3);
+}
+.emiPlans tr>td{
+    width: 25%;
+}
+.emiPlans tr>td,th{
+    font-family: $font-medium;
+    color:$greyDark;
+    padding:9px 0;
+    font-size: 14px;
+}
+.tabHeading{
+    border-bottom: 2px solid $lightgrey;
+    border-collapse:separate;
+    border-spacing:0 5px;
+    td{
+        padding:0 !important;
+        margin:0 0 5px 0 !important;
+        
+    }
+    
+    .tableHeading{
+        width:88%;
+        margin:0 auto;
+    }
+}
+.spacing{
+    background-color: transparent !important;
+    .seprater{padding: 0px 0}
+}
+.emiPlans tr>td.active{
+        border-bottom: 2px solid $cerulean;
+        font-weight: bold;
+    }
+.banklistdata > td{
+    
+        padding:0 !important;
+    
+}
 
 .emiPlans a {
     padding: 20px;
@@ -1115,7 +1278,7 @@
     .pdpstickyItem{
     .product{
         width:50%;        
-        padding: 2px 0 0 5%;
+        padding: 2px 0 7px 5%;
         float: left;       
         
         .productId{
@@ -1154,6 +1317,10 @@
                }
             }
             .offerprice{
+                margin:0;
+                color:$cerulean;
+                font-family: $font-bold;
+                font-size:28px;
                 .priceText{
                    margin:0;
                    color:$cerulean;
@@ -1187,7 +1354,7 @@
         .addCart{
            .addcartbtn{
                background: $black;
-               padding: 27px 100px;
+               padding: 22px 100px;
                text-align: center;               
                color:$colorwhite;
                border-radius: 0;

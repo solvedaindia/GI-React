@@ -3,23 +3,36 @@ import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import Price from './price';
 
+import Uparrow from '../../components/SVGs/upArrow.svg';
+import DownArrow from '../../components/SVGs/downArrow.svg';
+
 class productInfo extends React.Component {
   constructor() {
     super();
     this.state = {
-      isActive: 'dataNotActive'
+      isActive: 'dataNotActive',
+      imageArrowSrc: DownArrow,
+      imageArrowAlt: 'DownArrow'
     }
   }
 
   toggleOffers() {
-	let activeClass;
+    let activeClass;
+    let imgSrc;
+    let imgAlt;
     if (this.state.isActive === 'dataNotActive') {
-		activeClass = 'dataActive';
+    activeClass = 'dataActive';
+    imgSrc = Uparrow;
+    imgAlt = 'Uparrow';
     } else {
-		activeClass = 'dataNotActive';
+      activeClass = 'dataNotActive';
+      imgSrc = DownArrow;
+      imgAlt = 'DownArrow';
 	}
     this.setState({
-      isActive: activeClass
+      isActive: activeClass,
+      imageArrowSrc: imgSrc,
+      imageArrowAlt: imgAlt
     })
   }
 
@@ -40,16 +53,21 @@ class productInfo extends React.Component {
         { this.props.productData.promotions.length > 0 &&
         <>
         <div className="accessories-offer">
+        { this.props.productData.discount > 2 &&
+        <>
           <div className="offerbg text"> % </div>
           <div className="discount-off text">
             {this.props.productData.discount}% OFF & free accessories{' '}
           </div>
+          </>
+        }
           <a
             className="text viewOffer"
             role="button"
             onClick={this.toggleOffers.bind(this)}
           >
-            View Offer
+           <span className="">View Offer</span>
+           <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
         </div>
         <div id="offers" className={this.state.isActive}>

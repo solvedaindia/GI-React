@@ -268,7 +268,8 @@ class PdpComponent extends React.Component {
 								skuData={this.state.skuData}
 								sticky={true}
 								pinCodeData={this.state.pincodeData}
-								handleAddtocart={this.handleAddtocart.bind(this)} 
+                handleAddtocart={this.handleAddtocart.bind(this)}
+                history={this.props.historyData}
 							/>
 						</div>
 					</div>
@@ -314,6 +315,8 @@ class PdpComponent extends React.Component {
                             isInWishlistPro={wishlistArr.includes(
                               this.state.skuData.uniqueID,
                             )}
+                            isPDP={true}
+                            history={this.props.historyData}
                           />
                         </div>
                       </Col>
@@ -336,6 +339,7 @@ class PdpComponent extends React.Component {
                     sticky={false}
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
+                    history={this.props.historyData}
                   />
                 </div>
               </Col>
