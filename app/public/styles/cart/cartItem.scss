@@ -391,10 +391,13 @@
             }
         }
         .cartHeadDetails{
+            margin-top: $base*7; 
             border-bottom: none;
             .pincodeField {
-                width: 98%;
-                margin: auto 1%;
+                width: 100%;
+                margin: auto;
+                border: none;
+                border-bottom: 1px solid $borderLight;  
             }
             .title,
             .cartCount {
