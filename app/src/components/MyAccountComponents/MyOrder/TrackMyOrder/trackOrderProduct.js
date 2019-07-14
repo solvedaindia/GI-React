@@ -58,7 +58,8 @@ class TrackOrderProduct extends React.Component {
     return (
       <>
         <div className="clearfix" />
-        <div className="orderProduct clearfix">
+         <div className="itemBox">
+           <div className="orderProduct clearfix">
           <div className="orderimgbox clearfix">
             <div className="imgBox">
               <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
@@ -70,21 +71,24 @@ class TrackOrderProduct extends React.Component {
               <p className="price">
                 <span className="discount-price">₹{productData.offerPrice}</span>
               </p>
-              <p className="quantity-shipping clearfix">
-                <span className="quantity">
-                  Quantity
-                  <br />
+              <div className="quantity-shipping clearfix">
+                <div className="quantity">
+                  <span className="heading">Quantity</span>
                   <span className="textval">{this.props.shipmentDataPro.quantity}</span>
-                </span>
-              </p>
-              <div className="delivery quantity">
+                </div>
+
+                <div className="delivery quantity">
                 <span className="heading">{this.state.dsNameTag}</span>
                 <span className="textval">{this.state.dsDateTag}</span>
+                </div>
+
               </div>
             </div>
           </div>
+          <div className="clearfix"></div>
           <OrderStatusBar shipmentDataPro={this.props.shipmentDataPro} customClassPro='trackorder-wrap' />
         </div>
+         </div>
       </>
     );
   }

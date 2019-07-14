@@ -170,9 +170,7 @@
                 
               }
             }
-            .delivery{
-
-            }
+           
             .shipping-charge {
               float: left;
               display: block;
@@ -186,7 +184,42 @@
       }
     }
   }
-
+// Back Order css
+  .trackMyOrder{
+    .backBtn{
+      color:$battleshipGrey;
+      font-size:12px;
+      font-family: $font-medium;
+    }
+     .itemBox{
+       margin:0;
+       border:none;
+       padding:0;
+       .orderimgbox{
+         margin: 0 0 0px 0;       
+        }
+        .orderProduct {
+          padding: 31px 0 40px 0;
+      .trackorder-wrap{
+        width:100%;
+        position: static;
+        margin: 36px 0 0 auto;
+        .track-bar{
+          position: relative;
+          width:98%;
+          .list{
+            .status{
+              font-size: 14px;
+            }
+            .deliveryDate{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+     }
+  }
   .orderSummery {
     // background-color: blueviolet;
     // min-height: 50px;
