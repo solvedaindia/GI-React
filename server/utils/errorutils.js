@@ -4,7 +4,9 @@ const errorlist = {
   invalid_params: {
     status_code: 400,
     error_key: 'invalid_params',
-    error_message: 'Some params might be missing or invalid.',
+    // error_message: 'Some params might be missing or invalid.',
+    error_message:
+      'One or more entries made are incorrect or require field(s) have been left empty',
   },
   token_invalid: {
     status_code: 401,
@@ -100,6 +102,17 @@ const errorlist = {
     error_key: 'email_exists',
     error_message: 'This Email Address already exists',
   },
+  invalid_credentials: {
+    status_code: 400,
+    error_key: 'invalid_credentials',
+    error_message: 'LogonId or Password is incorrect',
+  },
+  account_locked: {
+    status_code: 400,
+    error_key: 'account_locked',
+    error_message:
+      'Your Account is temporarily locked. Please try again after 15 minutes.',
+  },
   email_mobile_exists: {
     status_code: 400,
     error_key: 'email_mobile_exists',
@@ -186,6 +199,12 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === '_ERR_MISSING_CMD_PARAMETER') {
         return errorlist.invalid_params;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_AUTHENTICATION_ERROR') {
+        return errorlist.invalid_credentials;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_PERSON_ACCOUNT_DISABLED') {
+        return errorlist.account_locked;
       }
       if (
         errBody.errors[0].errorKey ===
@@ -299,17 +318,6 @@ module.exports.handleWCSError = function handleWCSError(response) {
 
 const wcsErrorList = {
   error_400: {
-    _ERR_AUTHENTICATION_ERROR: {
-      status_code: 400,
-      error_key: 'invalid_credentials',
-      error_message: 'LogonId or Password is incorrect',
-    },
-    _ERR_PERSON_ACCOUNT_DISABLED: {
-      status_code: 400,
-      error_key: 'account_locked',
-      error_message:
-        'Your Account is temporarily locked. Please try again after 15 minutes.',
-    },
     _ERR_GIFTLIST_ITEM_NOT_FOUND: {
       status_code: 400,
       error_key: '_ERR_GIFTLIST_ITEM_NOT_FOUND',

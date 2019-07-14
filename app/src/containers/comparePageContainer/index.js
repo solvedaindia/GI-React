@@ -20,7 +20,8 @@ export class ComparePageContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          data: ''
+          data: '',
+          prds: null
         }
     }
 
@@ -36,8 +37,10 @@ export class ComparePageContainer extends React.Component {
       apiManger.get(`${compareAPI}?ids=${ids}`, {
         headers: { }
       }).then(response => {
-        this.setState({data: response.data.data});
+        
+        this.setState({data: response.data.data.reverse()});
         console.log(response.data.data, 'data from api')
+        this.renderPrd();
       }).catch(error => {
         console.log(error);
       })
@@ -49,7 +52,7 @@ export class ComparePageContainer extends React.Component {
 
     renderPrd = () => {
       var prds = [];
-      var reverse_data = this.state.data.reverse();
+      var reverse_data = this.state.data;
       reverse_data.forEach(data => {
         var sku1 = data.sKUs.find(sKU => {
           return sKU.uniqueID == this.props.compWidgetData[0].skuId;
@@ -83,8 +86,9 @@ export class ComparePageContainer extends React.Component {
           }
         } 
       })
-      console.log(prds, 'this is prds ')
-      return <CompPrd data={prds} remove={this.props.removeProduct} />
+      this.setState({
+        prds: prds
+      })
     }
 
     render() {
@@ -96,7 +100,7 @@ export class ComparePageContainer extends React.Component {
             </Col>
           </Row>
           <Row><h2 className="heading">Compare Products {this.state.data.length}/3</h2></Row>
-          {this.state.data ? this.renderPrd() : ''}
+          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} /> : ''}
         </div>
       )
     }

@@ -1,0 +1,168 @@
+@import '../variable';
+
+
+.storeLocator {
+    // @include container-width;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    .title {
+        margin: $base*8 0 $base*6.25 0;
+    }
+    .pc-field {
+        width: 36%;
+        padding: 8px;
+    }
+    .pc-btn {
+        background-color: $ashGrey;
+        color: $colorwhite;
+        padding: $base*1.125;
+        border: 1px solid $ashGrey;
+        width: 22%;
+    }
+    .storeTypes {
+        // width: 66.4%;
+        // margin: 44px auto;
+        padding: 40px 0 0 0;
+        .typeList{
+
+        display: flex;
+        justify-content: center;
+        
+        .active{
+            border:1px solid $black !important;
+        }
+        .storeTypeItem{
+            width: 13%;
+            display: block;
+            border: 1px solid #ddd;
+            margin: 1%;
+            min-height: 130px;
+            float: left;
+            .typeList {
+                width: 51%;
+                margin: auto;
+            }
+            .storeImg {
+                width: 100%;
+            }
+        }
+    }
+
+    }
+}
+.storeDetails {
+    width: 91.63%;
+    margin-left: 8.37%; 
+    .headingtitle{
+        font-size:$base*3.75;
+        color:$black;
+        padding:0 0 24px 0;
+        font-family: $font-medium;
+    }
+    .storeList {
+        width: 35%;       
+        margin: 0 19px 0 0;
+        background: #f7f8f8;
+        padding: 25px;
+        .detailCard{
+            height: 400px;
+            overflow: auto;
+            padding: 0 12px 0 0;
+            .storeListItem.ribbon{
+              .Storewrapper{
+                  padding-top:23px;
+              }
+            }
+        .storeListItem{
+            position: relative;
+            background-color: $colorwhite; 
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+            margin:0 0 15px 0;
+            padding: 25px 24px;
+            width: 100%;
+            .modular_wardrobe{
+                position: absolute;
+                top:8px;
+                background:$black;
+                color:$colorwhite;
+                left: 0;
+                padding: 5px 10px;
+                font-size: 12px;
+                .icons{
+                    margin:0 5px 0 0;
+                }
+                .icons,.ribbonText {
+                 display: inline-block;
+                }
+            }
+            .Storewrapper{
+                margin: 0px 0 7px 0;
+                .storeName,.distance{display: inline-block}
+                .storeName{
+                  width:80%;
+                  margin:0;
+                  font-family: $font-medium;
+                  color:$black;
+                }
+                .distance{
+                  color:$greenLight;
+                  font-size:14px;
+                  font-family: $font-medium;
+                  width:20%;
+                }
+            }
+            .phoneDetails{
+                padding: 0 0 20px 0;
+                .phoneicon{
+                    width: 14px;
+                    margin:0 17px 0 0;
+                }
+                .phoneicon,.PhoneNo{
+                   display: inline-block;
+                }
+                .PhoneNo{
+                    font-size: 14px;
+                    color:$black;
+                    font-family: $font-regular;
+                }
+            }
+            .direction_dealerwrp{
+                display: flex;
+                .getDirection{
+                    color:$cerulean;
+                    font-size: $base*2;
+                    width: 50%;
+                    line-height: 16px;
+                    text-decoration: underline;
+                    font-family: $font-medium;
+                }
+                .getDirection,.dealer{display: inline-block;}
+                .dealer{                   
+                    font-size: $base*1.5;
+                    width: 50%;
+                    color:$black;
+                    .dealertext{text-align: right}
+                    .mapicon{
+                        width: 14px;
+                        margin: 0 5px 0 0;
+                    }
+                }
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+    }
+    }
+    .mapContainer {
+        width: 63%;
+        height: 500px;
+    }
+    .storeList,
+    .mapContainer {
+        display: block;
+        float: left;
+    }
+}

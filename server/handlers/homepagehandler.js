@@ -102,11 +102,23 @@ module.exports.getRecommendedProducts = function getRecommendedProducts(
                   productDetail.promotionData = productDetailFilter.getSummaryPromotion(
                     promotionData[productDetail.uniqueID],
                   );
+                  for (
+                    let index = 0;
+                    index < espotRes.recommendationArray.length;
+                    index += 1
+                  ) {
+                    if (
+                      espotRes.recommendationArray[index].partNumber ===
+                      productDetail.partNumber
+                    ) {
+                      Object.assign(
+                        productDetail,
+                        espotRes.recommendationArray[index],
+                      );
+                      break;
+                    }
+                  }
                   productListing.push(productDetail);
-                });
-                productListing.forEach((product, index) => {
-                  product.imagePath =
-                    espotRes.recommendationArray[index].imagePath;
                 });
                 resJson.recommendationArray = productListing;
                 callback(null, resJson);
