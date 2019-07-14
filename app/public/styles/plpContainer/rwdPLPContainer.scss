@@ -2,39 +2,37 @@
 @import "../base.scss";
 @import "../variable.scss";
 
-.rwdSortFilter {
-  height: 40px;
+.sortfilter {
   text-align: center;
-
   background: #fff;
   position: fixed;
-  bottom: 0px;
-  margin-right: auto;
-  margin-left: auto;
   width: 100%;
-  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.16);
-  padding: 16px 0;
+  box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.32);
   z-index: 99;
-  position: sticky;
-  position: -webkit-sticky;
   bottom: 0;
 
-  .rwdSortBtn {
-    background-color: yellow;
+  .sortBy {
+    background-color:$colorwhite;
     width: 50%;
     float: left;
     border: 0px;
-    margin-top: -16px;
-    height: inherit;
+    padding: 15px 0px;
+    font-size: $base*2;
+    .sortbyicon{
+      width:$base*2;
+    }
   }
 
-  .rwdFilterBtn {
-    background-color: green;
+  .filterBy {
+    background-color:$colorwhite;
     width: 50%;
     float: right;
     border: 0px;
-    margin-top: -16px;
-    height: inherit;
+    padding: 15px 0px;
+    font-size: $base*2;
+    .filterbyicon{
+      width:17px;
+    }
   }
 }
 
@@ -43,33 +41,36 @@
   width: 100%;
   background-color: #0000006e;
   position: fixed;
-  bottom: 0px;
+  bottom: 53px;
   z-index: 100;
 
   .sortInnerCont {
-    height: 370px;
+    height: 260px;
     width: 100%;
     background-color: white;
-    position: fixed;
+    position: absolute;
     bottom: 0px;
 
     .sortTxt {
       color: #4a90e2;
       float: left;
-      width: 20%;
-      text-align: left;
-      margin: 15px;
+      margin: 15px 0px 15px 20px;
     }
 
     .sortCancelBtn {
-      color: black;
-      float: left;
-      width: 19%;
-      margin: 15px;
+      color: $black;
+      float: right;
+      background: none;
+      border: 0px;
+      margin: 15px 22px 0px 0px ;
+      font-size: 14px;
+      .sortByCloseIcon{
+        width: 15px;
+      }
     }
 
     .sortLi {
-      padding: 30px;
+      padding: 15px 20px 15px 20px;
       text-align: left;
       color: #070707;
       font-size: 14px;
@@ -79,7 +80,8 @@
       background-color: #f7f8f8;
 
       .sortSelectionImg {
-        margin: 0px 195px;
+        margin: 0px;
+        float: right;
       }
     }
   }
@@ -192,82 +194,426 @@
 
     .facetList {
       padding: 20px;
-      //background-color: antiquewhite;
       text-align: left;
-
-      // &::after {
-      //   content: " ";
-      //   position: absolute;
-      //   height: 1px;
-      //   background: red;
-      //   left: 0px;
-      //   width: 100%;
-      //   //bottom: 0px;
-      // }
+      display: inline-block;
     }
 
-    /* Input Checkbox Radio
-            -----------------------------*/
-    .lblradio {
-      position: relative;
-      .circle {
-        border-radius: 50%;
+    .input_box {
+      margin: 0 15px 0 0;
+
+      .inputCheck[type="checkbox"] {
+        display: none;
+      }
+
+      /* Input Checkbox Radio
+      -----------------------------*/
+      .lblradio {
+        position: relative;
+        .circle {
+          border-radius: 50%;
+          height: 22px;
+          width: 22px;
+          padding: 2px;
+        }
+        .circlebox {
+          height: 28px;
+          width: 28px;
+          background: $colorwhite;
+          border: 2px solid $colorwhite;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100%;
+          padding: 2px;
+
+          .circleRGB {
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            padding: 2px;
+            display: block;
+          }
+        }
+      }
+
+      .inputCheck[type="checkbox"] + .lblradio {
+        display: block;
         height: 22px;
         width: 22px;
-        padding: 2px;
       }
-      .circlebox {
-        height: 28px;
-        width: 28px;
-        background: $colorwhite;
-        border: 2px solid $colorwhite;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 100%;
-        padding: 2px;
-
-        .circleRGB {
-          border-radius: 50%;
-          height: 20px;
-          width: 20px;
+      .inputCheck[type="checkbox"]:checked + .lblradio {
+        .circle {
+          border: 2px solid $black;
           padding: 2px;
-          display: block;
+        }
+
+        .circlebox {
+          border: 2px solid $black;
+          padding: 2px;
+        }
+      }
+
+      /* Input Checkbox Squere
+      -----------------------------*/
+      .inputCheck[type="checkbox"] + .lblCheck {
+        background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
+        display: inline;
+        min-height: 16px;
+        padding-left: 16px;
+        background-size: contain;
+      }
+
+      .inputCheck[type="checkbox"]:checked + .lblCheck {
+        background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+        background-size: contain;
+        padding-left: 16px;
+      }
+    }
+  }
+
+
+
+
+
+  // .filterWrapper {
+  //   margin: 0 0 15px 0;
+  
+  //   position: relative;
+  //   .filter {
+  //     width: 80%;
+  //     float: left;
+  //     .heading {
+  //       font-family: $font-bold;
+  //       font-size: $base * 1.75;
+  //       padding: 0 0 15px 0px;
+  //       margin: 0;
+  //     }
+  //     .moreFilterBtn {
+  //       float: left;
+  //       background: transparent;
+  //       border: 0;
+  //       padding: 16px;
+  //       color: $greyish;
+  //       text-decoration: underline;
+  //       font-size: $base * 1.75;
+  //       font-family: $font-light;
+  //       &:focus {
+  //         outline: 0;
+  //       }
+  //     }
+  
+      .dropdown_filter {
+        position: static;
+        display: block;
+        //float: left;
+        //min-width: 23%;
+        width: 135px;
+  
+        &__filter {
+          background: $colorwhite;
+          border: 1px solid $lightgrey;
+          border-radius: 1px;
+          z-index: 1;
+          background: $colorwhite;
+  
+          &:last-child {
+            border-right: 1px solid $lightgrey;
+          }
+        }
+        &__arrow {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -20px;
+          width: 0;
+          height: 0;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-bottom: 20px solid #eee;
+          border-radius: 3px;
+        }
+  
+        &__list {
+          background: #fff;
+          /* border: 1px solid #dfe0de; */
+          /* transition: max-height 0.2s ease-out; */
+          max-height: 15px;
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          z-index: 2;
+          padding: 20px;
+          /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14); */
+          visibility: hidden;
+          max-width: 35%;
+          height: 100%;
+          left: 1px;
+          top: 0;
+          background: transparent;
+          z-index: -1;
+
+          .filterbtnWrapper {
+            text-align: center;
+          }
+  
+          &--active {
+            max-height: 1000px;
+            // opacity: 1;
+            visibility: visible;
+          }
+          .list {
+            // display: inline-block;
+            display: block;
+            float: right;
+  
+            .input_box {
+              margin: 0 15px 0 0;
+  
+              .inputCheck[type="checkbox"] {
+                display: none;
+              }
+  
+              /* Input Checkbox Radio
+              -----------------------------*/
+              .lblradio {
+                position: relative;
+                .circle {
+                  border-radius: 50%;
+                  height: 22px;
+                  width: 22px;
+                  padding: 2px;
+                }
+                .circlebox {
+                  height: 28px;
+                  width: 28px;
+                  background: $colorwhite;
+                  border: 2px solid $colorwhite;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 100%;
+                  padding: 2px;
+  
+                  .circleRGB {
+                    border-radius: 50%;
+                    height: 20px;
+                    width: 20px;
+                    padding: 2px;
+                    display: block;
+                  }
+                }
+              }
+  
+              .inputCheck[type="checkbox"] + .lblradio {
+                display: block;
+                height: 22px;
+                width: 22px;
+              }
+              .inputCheck[type="checkbox"]:checked + .lblradio {
+                .circle {
+                  border: 2px solid $black;
+                  padding: 2px;
+                }
+  
+                .circlebox {
+                  border: 2px solid $black;
+                  padding: 2px;
+                }
+              }
+  
+              /* Input Checkbox Squere
+              -----------------------------*/
+              .inputCheck[type="checkbox"] + .lblCheck {
+                background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
+                display: inline;
+                min-height: 16px;
+                padding-left: 16px;
+                background-size: contain;
+              }
+  
+              .inputCheck[type="checkbox"]:checked + .lblCheck {
+                background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+                background-size: contain;
+                padding-left: 16px;
+              }
+            }
+            .label_text {
+              padding: 0 30px 26px 0;
+              color: $battleshipGrey;
+              font-size: $base * 1.5;
+              min-width: 170px;
+            }
+            .input_box,
+            .label_text {
+              display: inline-block;
+            }
+            .dropdown__list-item {
+              display: flex;
+              min-width: 160px;
+            }
+          }
+        }
+  
+        &__list-item {
+          cursor: pointer;
+          list-style: none;
+          padding: 15px;
+          position: relative;
+          display: flex;
+  
+          &--active {
+            background: #f4f4f4;
+          }
+  
+          &:hover {
+            background: #f4f4f4;
+          }
+  
+          .dropdownArrow {
+            width: 11px;
+            height: 11px;
+            position: absolute;
+            right: 14px;
+            top: 21px;
+          }
+        }
+  
+        &__toggle {
+          &:hover {
+            background: $colorwhite;
+          }
+  
+          background: $colorwhite;
+        }
+  
+        .filterbtnWrapper {
+          padding: 30px 0 0 0;
+          .btn {
+            padding: 12px 60px;
+            border-radius: 0;
+          }
+        }
+        &__cancelBtn {
+          border: solid 1px $black;
+          background-color: $colorwhite;
+        }
+  
+        &__applyBtn {
+          margin-left: 15px;
+          color: $colorwhite;
+          background-color: $black;
+          border: 1px solid $black;
         }
       }
     }
-
-    .inputCheck[type="checkbox"] + .lblradio {
-      display: block;
-      height: 22px;
-      width: 22px;
-    }
-    .inputCheck[type="checkbox"]:checked + .lblradio {
-      .circle {
-        border: 2px solid $black;
-        padding: 2px;
+    /* Sorting Filter
+    -----------------------------------------***/
+  
+    .sort {
+      width: 17%;
+      float: right;
+      .heading {
+        font-family: $font-bold;
+        font-size: $base * 1.75;
+        padding: 0 0 15px 15px;
+        margin: 0;
       }
-
-      .circlebox {
-        border: 2px solid $black;
-        padding: 2px;
-      }
-    }
-
-    /* Input Checkbox Squere
-            -----------------------------*/
-    .inputCheck[type="checkbox"] + .lblCheck {
-      background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
-      display: inline;
-      min-height: 16px;
-      padding-left: 16px;
-      background-size: contain;
-    }
-
-    .inputCheck[type="checkbox"]:checked + .lblCheck {
-      background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
-      background-size: contain;
-      padding-left: 16px;
-    }
+  
+      .dropdown {
+        position: relative;
+        background: $colorwhite;
+        z-index: 2;
+        right: 0;
+        width: 100%;
+  
+        .dropdowntoggle {
+          border: 1px solid $lightGrey;
+  
+          .dropdownArrow {
+            width: 11px;
+            height: 11px;
+            position: absolute;
+            right: 14px;
+            top: 19px;
+          }
+        }
+        .dropdownlist {
+          border: 1px solid $lightGrey;
+          border-top: none;
+          top: 51px;
+        }
+        .dropdownlist.dropdownlistactive {
+          top: 52px;
+        }
+  
+        &arrow {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: -20px;
+          width: 0;
+          height: 0;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-bottom: 20px solid rgb(168, 27, 27);
+          border-radius: 3px;
+        }
+  
+        &list {
+          transition: max-height 0.2s ease-out;
+          max-height: 0;
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+          position: absolute;
+          z-index: 1;
+          width: 100%;
+  
+          &active {
+            max-height: 1000px;
+            opacity: 1;
+          }
+          .link {
+            color: $battleshipGrey;
+            text-decoration: none;
+            &:hover {
+              color: $cerulean;
+              font-weight: 600;
+            }
+          }
+        }
+  
+        &list-item {
+          border-bottom: 1px solid $lightGrey;
+          cursor: pointer;
+          list-style: none;
+          padding: 15px;
+          background: $colorwhite;
+          color: $battleshipGrey;
+          font-weight: 600;
+  
+          &active {
+            color: $ceruleanblue;
+          }
+        }
+  
+        &toggle {
+          color: $greyish;
+          &:hover {
+            background: $colorwhite;
+          }
+  
+          background: $colorwhite;
+        }
+     // }
+    //}
   }
+
 }
+
+
+
+
+

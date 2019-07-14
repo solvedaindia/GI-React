@@ -27,8 +27,8 @@ function productDetailForPLP(productDetail) {
       }
     });
   }
-  productDetailJson.onClickUrl = '';
-  productDetailJson.seoUrl = '';
+  // productDetailJson.onClickUrl = '';
+  // productDetailJson.seoUrl = '';
   productDetailJson.thumbnail = imagefilter.getImagePath(
     productDetail.thumbnail,
   );

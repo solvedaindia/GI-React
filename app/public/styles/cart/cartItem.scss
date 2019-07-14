@@ -292,10 +292,14 @@
     
 }
 .deletItem {
-    .modal-body {
-        padding: $base*6;
-        .close {
-            color: $black;
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                padding: $base*6;
+                .close {
+                    color: $black;
+                }
+            }
         }
     }
     .del_modal {
@@ -320,12 +324,12 @@
                 margin: 0 1%;
                 text-align: center;
             }
-            .wishList {
+            .delete {
                 border: 1px solid $black;
                 color: $black;
                 background-color: $colorwhite; 
             }
-            .delete {
+            .wishList {
                 border: 1px solid $black;
                 background-color: $ashGrey;
                 color: $colorwhite;  
@@ -348,8 +352,42 @@
             padding: $base*2;
         }
         .cartItem {
+            .prodDetails {
+                .delCartItem,
+                .moveItem {
+                    top: $base*2;
+                }
+            }
+            .prodList {
+                border: none;
+                margin-bottom: $base*2;
+                background-color: $colorwhite;
+                .quantityPrice {
+                    border-top: 1px solid $borderLight;
+                    .qytList {
+                        border: none;
+                    }
+                    .cartQty,
+                    .price {
+                        width: 50%;
+                        display: inline-block;
+                        text-align: center;
+                        padding: $base;
+                    }
+                    .price {
+                        margin: 0;
+                        color: $cerulean;
+                        font-family: $font-bold;
+                    } 
+                    .price {
+                        border-left: 1px solid $borderLight; 
+                    }
+                }
+                
+            }
             .cartItemList {
-                padding: $base*2;
+                padding: 0;
+                background-color: $greybg;
             }
         }
         .cartHeadDetails{
@@ -393,6 +431,11 @@
     .deletItem {
         .modal-dialog {
             width: 100%;
+            .modal-content {
+                .modal-body {
+                    padding: 0;
+                }
+            }
         }
         .del_modal {
             padding: $base*3;

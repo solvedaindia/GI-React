@@ -33,7 +33,9 @@ class Filter extends React.Component {
       facetItem: null,
       facetArr: [],
       checked: false,
-    };
+      //RWD Vars
+      isMobile: window.innerWidth <= 760,
+    }
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.onCheckBoxClick = this.onCheckBoxClick.bind(this);
@@ -42,6 +44,10 @@ class Filter extends React.Component {
   }
 
   toggleDropdown() {
+    // if (this.props.isFromRWD && !this.state.active) {
+    //   return;
+    // }
+
     if (!this.state.active) {
       document.addEventListener('click', this.handleOutsideClick, false);
     } else {
@@ -73,11 +79,13 @@ class Filter extends React.Component {
       facetArr: filteredArr,
     });
   }
+  
 
   handleOutsideClick(e) {
     if (this.node.contains(e.target)) {
       return;
     }
+    console.log('handleOutsideClick')
     this.toggleDropdown();
   }
 
@@ -109,6 +117,10 @@ class Filter extends React.Component {
 
   onCancelBtnClick() {
     this.toggleDropdown();
+    if (this.props.isFromRWD) {
+      this.props.rwdFilterCallbackPro();
+    }
+    
   }
 
   unCkeckAll() {
@@ -131,6 +143,7 @@ class Filter extends React.Component {
     const alreadyAddedFiltersArr = [];
     const filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
+      console.log('kkkeyy --- ',key);
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
           filteredArr.push(option);
@@ -287,7 +300,8 @@ class Filter extends React.Component {
               onClick={() => this.toggleDropdown()}
             >
               {this.props.dataPro.facetName}
-              {this.state.active ? upArrow : downArrow}
+              {this.props.isFromRWD ? null : this.state.active ? upArrow : downArrow}
+              
             </div>
           </div>
 

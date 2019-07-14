@@ -10,6 +10,8 @@ import saga from '../../../../containers/PlpContainer/saga';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
 import RWDFilter from './RWDFilter';
+import '../../../../../public/styles/plpContainer/plpContainer.scss';
+import FilterMain from '../../../../components/PlpComponent/Filter/filterMain';
 
 // import Filter from './filter';
 
@@ -170,48 +172,35 @@ class RWDFilterMain extends React.Component {
   //   }
   // }
 
+  filterCallback() {
+    console.log('filter Callback');
+    this.setState({
+      isShowFilterOptions: !this.state.isShowFilterOptions
+    })
+  }
+
   render() {
     return (
       <>
-        <button
-          onClick={evt => this.showFilterOptions()}
-          className="rwdFilterBtn"
-        >
+        <button onClick={evt => this.showFilterOptions()} className="filterBy">
+          <img
+            className="filterbyicon"
+            src={require('../../../../../public/images/filter_icon.png')}
+          />{' '}
           Filter
         </button>
-        {this.state.isShowFilterOptions ? (
-          <div className="filterOutterCont">
-            <div className="filterHeader">
-              <label className="filterTxt">Filters</label>
+        
+        {this.state.isShowFilterOptions ?
+          <div className='filterOutterCont'>
+            <div className='filterHeader'>
+              <label className='filterTxt'>Filters</label>
             </div>
-
-            {/* {this.props.filterDataPro.map((item, index) => {
-              console.log('bidddd 000 ', item);
-              return (
-                
-              )
-            })} */}
-            {/* <div className='mainFilter'>
-              <ul>
-                {this.props.filterDataPro.map((item, index) => {
-                  return (
-                    
-                      <RWDFilter key={index} dataPro={item} />
-                    
-                  )
-                })
-                }
-              </ul>
-            </div> */}
-
-            <RWDFilter dataPro={this.props.filterDataPro} />
-
-            <div className="filterFooter">
-              <button className="cancelBtn">Cancel</button>
-              <button className="applyBtn">Apply</button>
-            </div>
+            {/* {this.state.filterItem} */}
+            {/* <RWDFilter dataPro={this.props.filterDataPro} /> */}
+            <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
           </div>
-        ) : null}
+          : null}
+        
       </>
     );
   }

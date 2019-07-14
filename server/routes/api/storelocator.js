@@ -34,20 +34,12 @@ router.get('/bycoordinates', (req, res, next) => {
 });
 
 router.get('/byId', (req, res, next) => {
-  console.log(Object.keys(req.query).length);
-  let idArray = [];
-  // console.log(req.query, 'idd length........');
-  if (req.query.id instanceof Array) {
-    idArray = req.query.id;
-  } else {
-    idArray.push(req.query.id);
-  }
-  // eslint-disable-next-line no-console
-  // console.log(idArray, 'request params');
-  // const id = req.params.gi_storeId;
+  const physicalStoreIdUrl = req.originalUrl;
+  const physicalStoreIdQuery = url.parse(physicalStoreIdUrl, true);
+  const physicalStoreId = physicalStoreIdQuery.search.slice(1);
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
-    ids,
+    physicalStoreId,
     (err, result) => {
       if (err) {
         next(err);

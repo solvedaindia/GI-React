@@ -8,6 +8,7 @@ const cartFilter = require('../filters/cartfilter');
 const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
 const pincodeUtil = require('../utils/pincodeutil');
+const checkoutHandler = require('./checkouthandler');
 
 const productDetailFilter = require('../filters/productdetailfilter');
 
@@ -73,6 +74,7 @@ module.exports.cartOrderSummary = function cartOrderSummary(headers, callback) {
       };
       if (result.orderItem && result.orderItem.length > 0) {
         cartSummary.orderSummary = cartFilter.getOrderSummary(result);
+        checkoutHandler.storeDiscount(headers, cartSummary.orderSummary);
       }
       callback(null, cartSummary);
     }
@@ -424,6 +426,8 @@ function getCompleteCartData(cartData, headers, callback) {
     orderSummary: {},
     cartTotalItems: 0,
     cartItems: [],
+    promotionCode: [],
+    // actualCartData: cartData,
   };
   cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
   if (cartData.orderItem && cartData.orderItem.length > 0) {
@@ -442,6 +446,13 @@ function getCompleteCartData(cartData, headers, callback) {
         );
         cartDetails.cartTotalItems = mergedCartData.cartTotalItems;
         cartDetails.cartItems = mergedCartData.orderItemList;
+
+        if (cartData.promotionCode && cartData.promotionCode.length > 0) {
+          cartData.promotionCode.forEach(promotion => {
+            cartDetails.promotionCode.push(promotion.code);
+          });
+        }
+
         callback(null, cartDetails);
       },
     );

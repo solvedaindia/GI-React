@@ -132,13 +132,9 @@ section.tablecarousel {
 
 .plpCategories {
   .plp-products {
-    padding: 64px 0 60px 0;
-    width: 1140px;
     margin: 0 auto;
   }
   .grid3 {
-    display: flex;
-    flex-wrap: wrap;
     .productlist {
       flex: 0 0 33.33%;
 
@@ -172,7 +168,6 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: $base * 7;
     color: $ceruleanblue;
     margin: 0;
   }
@@ -194,7 +189,6 @@ section.tablecarousel {
 
   .headingSubTitle {
     color: $greyBorder;
-    padding: 0 0 32px 0;
     font-size: $base * 2.25;
   }
   .container {
@@ -362,7 +356,6 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: $base * 2.25;
           text-transform: capitalize;
           &:after {
             position: absolute;
@@ -398,7 +391,6 @@ section.tablecarousel {
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: $base * 3;
             font-family: $font-bold;
             color: $cerulean;
           }
@@ -954,6 +946,36 @@ section.tablecarousel {
       }
     }
   }
+
+
+  .plpCategories {
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      padding: 64px 0 60px 0;
+      width: 1140px;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2.25;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 3;
+            }
+          }
+        } 
+      } 
+    }
+    .headingTitle{
+      font-size: $base * 7;
+    }
+    .headingSubTitle{
+      padding: 0 0 32px 0;
+    }
+  }
 }
 
 /* 
@@ -1010,6 +1032,31 @@ section.tablecarousel {
       &:active {
         outline: none;
       }
+    }
+  }
+
+  .plpCategories {
+    .plp-products {
+      padding: 0px 0 60px 0;
+      .productlist{
+        .product-text{
+          .heading{
+            font-size: $base * 2;
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 2.25;
+            }
+          }
+        } 
+      } 
+    }
+    .headingTitle{
+      font-size: $base * 3;
+      margin-top: 10px;
+    }
+    .headingSubTitle{
+      padding: 0px;
     }
   }
 }
