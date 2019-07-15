@@ -4,13 +4,7 @@ import { render } from 'react-dom';
 import Input from '../Primitives/consultFormInput'
 import '../../../public/styles/wardrobes/warobes.scss'
 import {
-  storeId,
-  accessToken,
-  accessTokenCookie,
-  userLoginAPI,
-  consultFormApi,
-  userDataAPI,
-  PinToCityAPI
+  consultFormApi
 } from '../../../public/constants/constants';
 import axios from 'axios';
 import apiManager from '../../utils/apiManager';
@@ -40,39 +34,29 @@ class ConsultForm extends React.Component {
 //       this.callConsultApi();
 //   };
 handleChange  = e => {
-  //e.preventDefault()
+  // const name = this.state.name
   const {name, value} = e.target; //gets info from Form
+  console.log('data', e.target)
  
   this.setState({
+    
     [name] : value
    })
+   console.log("name checks", [name])
 //alert(value);
-   //this.setState({'dropDownValue':value})
-   //this.setState(selectValue:e.target.value});
-//   if (e.target.id === 'name') {
-//     this.setState({ name: e.target.value });
-// } else if (e.target.id === 'email') {
-//     this.setState({ email: e.target.value });
-// } else if (e.target.id === 'mobileNumber') {
-//     this.setState({ mobileNumber: e.target.value });
-// } else if (e.target.id === 'dropDownValue') {
-//     this.setState({ dropDownValue: e.target.value});
-//     console.log(e.target.value);
-// }else if (e.target.id === 'message') {
-//   this.setState({ message: e.target.value});
-//   console.log(e.target.value);
-// }
+ 
+// return console.log('check', this.state);
+// this.callConsultApi()
 
-console.log('check', this.state);
-//this.callConsultApi()
 }
  
 
 
 submitForm = (e) => {
-//console.log('target',)
   this.handleChange(e);
   this.setState(this.initialState);
+  console.log('sta')
+  this.callConsultApi();
 }
 
  
@@ -116,7 +100,7 @@ submitForm = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="name">Full Name</label>
-                      <input  onChange={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required />
+                      <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required />
                     </div>
                   </div>
                 </div>
@@ -124,7 +108,7 @@ submitForm = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="email">Email</label>
-                      <input  onChange={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
+                      <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
                     </div>
                   </div>
                 </div>
@@ -134,10 +118,10 @@ submitForm = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-                      <select   name="dropDownValue" onChange={this.handleChange} className="form-control">
-                      <option>Select an option</option>
+                      <select   name="dropDownValue" value={dropDownValue} onChange={this.handleChange} className="form-control">
+                      <option value='null'>Select an option</option>
 
-                        <option>Selected option</option>
+                        <option value='dataa'>Selected option</option>
                        
                       </select>
                     </div>
@@ -158,7 +142,7 @@ submitForm = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="massage">Massage</label>
-                      <input className="form-control"  onChange={this.handleChange} value={message}  id="message" name="message" type="text" required/>
+                      <input className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                     </div>
                   </div>
                 </div>
