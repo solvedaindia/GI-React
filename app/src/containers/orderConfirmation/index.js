@@ -63,7 +63,6 @@ export default class OrderConformation extends React.Component {
                 showPop: false
             })
         }, 4000);
-        setTimeout(() => {
             let token = appCookie.get('accessToken');
             var url = `${OrderDetailAPI}/${id}`
             axios.get(url, {
@@ -76,7 +75,6 @@ export default class OrderConformation extends React.Component {
             }).catch((err) => {
                 console.log(err, "order error")
             })
-        }, 1000)
         
     }
 

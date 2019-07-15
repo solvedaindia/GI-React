@@ -21,13 +21,13 @@ class CompPrd extends React.Component {
       console.log(this.props, "this is remove function")
       var prds = [];
       this.props.data.map((element, index) => {
-        prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} />)
+        prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
       });
       return prds;
     }
 
-    handleSwatch = (name, key) => {
-      console.log(name, key, "swatch data")
+    handleSwatch = (id, index, name) => {
+      this.props.swatchHandle(id, index, name);
     }
 
     renderDims = () => {

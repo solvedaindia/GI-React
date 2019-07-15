@@ -10,30 +10,29 @@ import {
   imagePrefix
 } from '../../../public/constants/constants';
 
-function TopContainer(props) {
-    console.log(props, "props in top container");
+class TopContainer extends React.Component {
+    constructor(props) {
+      super(props);
+    }
      
-    function removePrd() {
+    removePrd() {
       console.log("remove prd called");
-      if(props.count == 2) {
+      if(this.props.count == 2) {
         alert("Cannot remove Product. Need atleast two products to compare");
       } else {
-        props.remove(props.product.uniqueID)
+        this.props.remove(this.props.product.uniqueID)
       }
     }
 
-    function handleSwatch(name) {
-      console.log(props.product.key, "swatch key", name)
-    }
-
-    function renderSwatches() {
+    renderSwatches() {
       console.log("render swatches called")
-      if(props.product.swatches && props.product.swatches.length > 0) {
-          console.log(props.product.swatches, "swatches data")
+      if(this.props.product.swatches && this.props.product.swatches.length > 0) {
+          console.log(this.props.product.swatches, "swatches data")
         var swatches = [];
-        props.product.swatches.forEach((swatch) => {
+        this.props.product.swatches.forEach((swatch) => {
+          console.log(swatch, 'swatch')
           if(swatch.colorCode) {
-            swatches.push(<li onClick={props.handleSwatch(swatch.name, props.key)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
+            swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
           } else if(swatch.facetImage) {
             swatches.push(<li><a><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
           } else {
@@ -45,34 +44,37 @@ function TopContainer(props) {
         console.log("no swatches found")
       }
     }
-  return (
-    <Col xs={12} sm={4} md={4} className='comp-list-item'>
-    <div className='img-box'>
-      <img src={`${imagePrefix}${props.product.thumbnail}`} />
-    </div>
 
-    <div className='product-desc'>
-      <h4 className='product-name'>{props.product.name} </h4>
-      <p className='description-text'>{props.product.shortDescription}</p>
-      {props.product.price[1].value ? <Price
-        actualPrice={props.product.price[0].value}
-        offerPrice={props.product.price[1].value}
-      /> : 0}
-      <p className='emi-desc'>EMI Starting from {props.product.minimumEMI ? props.product.minimumEMI : 0}</p>
-    </div> 
-
-    <div className='remove-box'>
-      <button className='remove-btn' onClick={removePrd}>Remove</button>
-      <Link to={`/pdp/${props.product.parentProductId}/${props.product.uniqueID}`} className='view-product-btn'>View Product</Link>
-    </div> 
-
-    <div className='product-attr'>
-    <ul>
-        {renderSwatches()}
-      </ul>
-    </div>
-  </Col>
-  );
+    render() {
+      return (
+        <Col xs={12} sm={4} md={4} className='comp-list-item'>
+        <div className='img-box'>
+          <img src={`${imagePrefix}${this.props.product.thumbnail}`} />
+        </div>
+    
+        <div className='product-desc'>
+          <h4 className='product-name'>{this.props.product.name} </h4>
+          <p className='description-text'>{this.props.product.shortDescription}</p>
+          {this.props.product.price[1].value ? <Price
+            actualPrice={this.props.product.price[0].value}
+            offerPrice={this.props.product.price[1].value}
+          /> : 0}
+          <p className='emi-desc'>EMI Starting from {this.props.product.minimumEMI ? this.props.product.minimumEMI : 0}</p>
+        </div> 
+    
+        <div className='remove-box'>
+          <button className='remove-btn' onClick={this.removePrd}>Remove</button>
+          <Link to={`/pdp/${this.props.product.parentProductId}/${this.props.product.uniqueID}`} className='view-product-btn'>View Product</Link>
+        </div> 
+    
+        <div className='product-attr'>
+        <ul>
+            {this.renderSwatches()}
+          </ul>
+        </div>
+      </Col>
+      );
+    }
 }
 
 export default TopContainer;
