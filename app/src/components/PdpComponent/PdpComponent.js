@@ -80,7 +80,7 @@ class PdpComponent extends React.Component {
       pincodeData: defaultPincodeData
     });
 
-    this.callPinCodeAPI(skuDataArr, resolvedSkuData);
+    this.callPinCodeAPI(resolvedSkuData);
   }
 
   /* handle swatches */
@@ -116,7 +116,7 @@ class PdpComponent extends React.Component {
     return selectedSwatches;
   }
 
-  callPinCodeAPI(skuDataArr, resolvedSkuData) {
+  callPinCodeAPI(resolvedSkuData) {
     const dataParams = {
       params: {
         partnumber: resolvedSkuData.partNumber,
@@ -164,6 +164,7 @@ class PdpComponent extends React.Component {
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
   var box1=163;
+  if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
   var box3 = document.getElementById("box3").offsetTop;
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
@@ -228,6 +229,7 @@ class PdpComponent extends React.Component {
   } 			
   else {
     header.classList.remove("sticky");
+  }
   }
 }
 // handleScroll function End

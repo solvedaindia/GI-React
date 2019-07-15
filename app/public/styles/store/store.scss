@@ -1,0 +1,53 @@
+@import '../app.scss';
+@import '../base.scss';
+@import '../variable';
+
+.exStore {
+    width: 83.33%;
+    margin: $base*15 auto;
+    position: relative;
+    img {
+        width: 100%;
+    }
+    .content {
+        position: absolute;
+        width: 50%;
+        padding: $base*2;
+        text-align: center;
+        background: $colorwhite;
+        top: $base*7.75;
+        left: $base*4;
+        .subTitle {
+            font-size: $base*2.25;
+            margin: $base*1.5 0 0 0;
+        }
+        .title {
+            font-size: $base*3.75;
+            font-weight: 300;
+            margin: $base*1.25 0 $base*2.25;
+        }
+        .place,
+        .dist {
+            color: $ceruleanblue;
+        }
+        .place {
+            font-weight: 500;
+        }
+        .details {
+            font-size: $base*2;
+            margin: 0; 
+        }
+        .btn-flat {
+            font-size: $base*1.75;
+            width: 200px;
+            height: 46px;
+            font-weight: 500;
+            text-align: center;
+            color: $colorwhite;
+            margin: $base*3.87 0 $base*1.5 0;
+            background-color: #070707;
+            border: none;
+  
+        }
+    }
+}

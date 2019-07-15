@@ -22,18 +22,22 @@ function TopContainer(props) {
       }
     }
 
+    function handleSwatch(name) {
+      console.log(props.product.key, "swatch key", name)
+    }
+
     function renderSwatches() {
       console.log("render swatches called")
       if(props.product.swatches && props.product.swatches.length > 0) {
-
+          console.log(props.product.swatches, "swatches data")
         var swatches = [];
         props.product.swatches.forEach((swatch) => {
           if(swatch.colorCode) {
-            swatches.push(<li><a href="#" style={{background: `${swatch.colorCode}`}}></a></li>)
+            swatches.push(<li onClick={props.handleSwatch(swatch.name, props.key)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
           } else if(swatch.facetImage) {
-            swatches.push(<li><a href="#"><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
+            swatches.push(<li><a><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
           } else {
-            swatches.push(<li><a href="#">{swatch.name}</a></li>)
+            swatches.push(<li><a>{swatch.name}</a></li>)
           }
         });
         return swatches;
