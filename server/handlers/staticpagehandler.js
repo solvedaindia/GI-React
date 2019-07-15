@@ -67,7 +67,7 @@ module.exports.bookConsultant = function bookConsultant(
 module.exports.getConsultant = function getConsultant(headers, callback) {
   const reqHeaders = headerUtil.getWCSHeaders(headers);
 
-  const getConsultantUrl = `${constants.storeLocatorByPhysicalIdentifier.replace(
+  const getConsultantUrl = `${constants.getConsultant.replace(
     '{{storeId}}',
     headers.storeId,
   )}`;
@@ -82,7 +82,7 @@ module.exports.getConsultant = function getConsultant(headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response);
+        callback(null, response.body);
       } else {
         callback(errorUtils.handleWCSError(response));
       }

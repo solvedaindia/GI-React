@@ -15,7 +15,7 @@ router.post('/bookconsultation', (req, res, next) => {
   });
 });
 
-router.get('/getConsultant', (req, res, next) => {
+router.get('/getconsultation', (req, res, next) => {
   bookConsultantHandler.getConsultant(req.headers, (err, result) => {
     if (err) {
       next(err);

@@ -15,14 +15,20 @@ const orderFilter = require('../filters/orderfilter');
 const sampleOrderDetails = require('../configs/testjson').orderDetails;
 
 module.exports.getOrdersList = getOrdersList;
-function getOrdersList(headers, callback) {
+function getOrdersList(headers, query, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
-
+  let pageSize = 1;
+  let pageNumber = 1;
+  if (query.pagesize) {
+    pageSize = query.pagesize;
+  }
+  if (query.pagenumber) {
+    pageNumber = query.pagenumber;
+  }
   const orderListURL = `${constants.ordersList.replace(
     '{{storeId}}',
     headers.storeId,
-  )}`;
-
+  )}?pageNumber=${pageNumber}&pageSize=${pageSize}`;
   origin.getResponse(
     'GET',
     orderListURL,
@@ -34,6 +40,8 @@ function getOrdersList(headers, callback) {
     response => {
       if (response.status === 200) {
         const orderResponse = {
+          // currentOrderList: [],
+          // pastOrderList: [],
           orderList: [],
         };
         if (response.body.Order && response.body.Order.length > 0) {
@@ -55,6 +63,13 @@ function getOrdersList(headers, callback) {
                 return;
               }
               orderResponse.orderList = results;
+              // results.forEach(order => {
+              //   if (order.orderStatus === 'completed') {
+              //     orderResponse.pastOrderList.push(order);
+              //   } else {
+              //     orderResponse.currentOrderList.push(order);
+              //   }
+              // });
               callback(null, orderResponse);
             },
           );
