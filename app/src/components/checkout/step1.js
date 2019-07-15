@@ -12,6 +12,7 @@ import RegisterModalData from '../RegisterComponent/registerModalData';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import Input from '../Primitives/input'
+import {isMobile} from '../../utils/utilityManager';
 import {
   regexEmail,
   regexMobileNo,
@@ -306,30 +307,30 @@ export class Step1Component extends React.Component {
             
               
                 </div>
-              <div className="listRow disableddiv clearfix" disabled="disabled">
+                {!isMobile() ?  <><div className='listRow disableddiv clearfix' disabled='disabled'>
                  <div className='stepActive'>
                   <div className='stepbgNone'>2</div>
                  </div>
-                <div className="leftBox">
+                <div className='leftBox'>
                   <div className='heading-label'>Ship To</div>
                 </div>
-                <div className="rightBox">                 
+                <div className='rightBox'>                 
                 <div className='heading-label'>Add your shipping address</div>              
                 </div>
               </div>
               
-              <div className="listRow disableddiv clearfix" disabled="disabled">
+              <div className='listRow disableddiv clearfix' disabled='disabled'>
                  <div className='stepActive'>
                    <div className='stepbgNone'>3</div>
                  </div>
-                <div className="leftBox">
+                <div className='leftBox'>
                 <div className='heading-label'>Pay Byf</div>
                 </div>
-                <div className="rightBox">
+                <div className='rightBox'>
                 <div className='heading-label'>Choose a payment method</div>
                 </div>
-              </div>
-             
+              </div></>: ''}
+               
             </div>
       )
     }
