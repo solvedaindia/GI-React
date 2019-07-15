@@ -152,20 +152,21 @@ class Filter extends React.Component {
       console.log('kkkeyy --- ',key);
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
+          console.log('otttt -- ',option);
           filteredArr.push(option);
           alreadyAddedFiltersArr.push(option);
         });
       }
     }
     console.log('maksss -- ',alreadyAddedFiltersArr);
-    this.setState({ 
+    this.setState({
       facetArr: filteredArr,
       active: this.props.indexPro === 0 && this.props.isFromRWD ? !this.state.active : false
      });
     const extFacetArr = filteredArr.map(
       item =>
         // console.log('exstractedArr --- ',item.value);
-        item.value,
+        item.value.replace('%2B', '+'),
     );
     this.filterOptions(extFacetArr);
   }
@@ -211,8 +212,8 @@ class Filter extends React.Component {
           />
           
         );
-        //isRWDFacetSelecte = true;
-        console.log('ITsChecked----', checkboxItem);
+        isRWDFacetSelecte = true;
+        console.log('ITsChecked----', option.value);
       } else {
         customSelectionBoxId = this.props.dataPro.facetName + i;
         // checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
@@ -224,7 +225,8 @@ class Filter extends React.Component {
             id={customSelectionBoxId}
             name="scales"
           />
-        );
+        );console.log('ITsChecked Not----', option.value);
+
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
 
