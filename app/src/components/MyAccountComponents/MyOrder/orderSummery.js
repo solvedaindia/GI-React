@@ -20,9 +20,9 @@ class OrderSummery extends React.Component {
     return (
       <div className="summerydata">
         <div className="orderList">
-          <h4>Delivery Address</h4>
-          <p>{addressData.name}</p>
-          <p>{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
+          <h4 className="heading">Delivery Address</h4>
+          <p className="subheading">{addressData.name}</p>
+          <p className="address">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
           <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
@@ -33,13 +33,13 @@ class OrderSummery extends React.Component {
         </div>
 
         <div className="orderList paymentmethod">
-          <h4>Payment Method</h4>
-          <p>{this.props.paymentMethodPro}</p>
+          <h4 className="heading">Payment Method</h4>
+          <p className="subheading">{this.props.paymentMethodPro}</p>
 
         </div>
         <div className="orderList">
           <div className="orderSummary">
-            <h4>Order Summary</h4>
+            <h4 className="heading">Order Summary</h4>
             <div className="summaryDetails clearfix">
               <div className="leftText">Cart Total</div>
               <div className="rightText">₹{summeryData.netAmount}</div>
@@ -47,7 +47,7 @@ class OrderSummery extends React.Component {
 
             <div className="summaryDetails clearfix">
               <div className="leftText">Product Discount</div>
-              <div className="rightText">- ₹{summeryData.productDiscount}</div>
+              <div className="rightText">{summeryData.productDiscount === 0 ? null : '-' } ₹{summeryData.productDiscount}</div>
             </div>
             <div className="summaryDetails clearfix">
               <div className="leftText">Order Discount</div>
@@ -57,7 +57,7 @@ class OrderSummery extends React.Component {
               <div className="leftText">Shipping</div>
               <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
             </div>
-
+            <div className="divider"></div>
             <div className="summaryDetails subTotaltext clearfix">
               <div className="leftText">Total</div>
               <div className="rightText">₹{summeryData.totalAmount}</div>

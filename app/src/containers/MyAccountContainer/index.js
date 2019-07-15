@@ -1,6 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -44,8 +45,12 @@ export class MyAccountContainer extends React.Component {
     })
   }
 
+  onCustomerCareClick() {
+    this.props.history.push('/support');
+  }
+
   render() {
-    console.log('In My Account ---- ', this.props.location);
+    console.log('In My Account ---- ', this.props);
     const redirectedFrom = this.props.location.state.from;
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
@@ -95,9 +100,11 @@ export class MyAccountContainer extends React.Component {
             </a>
           </li>
           {/* <li className='list'><a className='link' href="#godrejCredit-v" data-toggle="tab">Godrej Credit</a></li>
-              <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
-              <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li>
-              <li className='list'><a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a></li> */}
+          <li className='list'><a className='link' href="#giftCards-v" data-toggle="tab">Gift Cards</a></li>
+          <li className='list'><a className='link' href="#notifications-v" data-toggle="tab">Notifications</a></li> */}
+          <li onClick={this.onCustomerCareClick.bind(this)} className='list'>
+            <a className='link' href="#customercare-v" data-toggle="tab">Customer Care</a>
+          </li>
         </ul>
       </div>
     );
@@ -130,7 +137,7 @@ export class MyAccountContainer extends React.Component {
                     }`}
                   id="changePassword-v"
                 >
-                  <ChangePassword changePasswordTagPro={this.state.changePasswordTag}/>
+                  <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />
                 </div>
                 <div
                   className={`tab-pane ${
@@ -143,6 +150,7 @@ export class MyAccountContainer extends React.Component {
                       this.props.location.state.isGuestTrackOrder
                     }
                   />
+
                 </div>
                 <div
                   className={`tab-pane ${
@@ -153,9 +161,11 @@ export class MyAccountContainer extends React.Component {
                   <ManageAddress />
                 </div>
                 {/* <div className="tab-pane" id="godrejCredit-v">Godrej Credit Tab.</div>
-              <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>
-              <div className="tab-pane" id="notifications-v">Notifications Tab.</div>
-              <div className="tab-pane" id="customercare-v">Customer Care Tab.</div> */}
+                <div className="tab-pane" id="giftCards-v">Gift Cards Tab.</div>
+                <div className="tab-pane" id="notifications-v">Notifications Tab.</div> */}
+
+                <div className="tab-pane" id="customercare-v">Customer Care Tab.</div>
+
               </div>
             </div>
           </div>
@@ -194,4 +204,5 @@ function mapStateToProps(state) {
 //   withConnect,
 // )(MyAccountContainer);
 
-export default connect(mapStateToProps)(MyAccountContainer);
+// export default withRouter(HeaderMobile);
+export default connect(mapStateToProps, withRouter)(MyAccountContainer);
