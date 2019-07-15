@@ -424,8 +424,6 @@
         }
     }
         .pincode{
-            width:55%;
-            float:left;
             border:1px solid $lightGrey;
             background: $colorwhite;
             .PincodeTextdata{
@@ -616,10 +614,8 @@
             li{
                 float: left;
                 position: relative;
-                margin-right: 45px;
                 a{
                     padding: 5px 0px;
-                    font-size:16px;
                     color: $battleshipGrey;
                     display: inline-block;
                     font-family: $font-regular;
@@ -632,11 +628,6 @@
                 border-bottom: 3px solid $cerulean;
                 a{ color:$greyDark;  font-family: $font-bold;}
                }
-            }
-        }
-        .purchaseGuideTabContent{
-            .image-gallery {
-                padding: 59px 59px 20px 59px;
             }
         }
         .purchaseGuide_description {
@@ -725,7 +716,6 @@
         color:$black;
      }
      .tabcontent{
-        padding: 30px 49px;
         border-top: 1px solid $lightblueGrey;
      }
  }
@@ -1200,3 +1190,149 @@
 } 
 
 
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .product_details{
+            .product_description{
+                .tabcontent{
+                    padding: 30px 49px;
+                }
+            } 
+        } 
+
+        .galleryArea{
+            .GallerytextBox{
+                .pincode{
+                    width:55%;
+                    float:left;
+                }
+            }
+
+            .purchase-guide-box{
+                .tab-nav-container{
+                    ul{ 
+                        li{
+                            margin-right: 45px;
+                            a{
+                                font-size:16px;
+                            }
+                        }
+                    }
+                }
+                .purchaseGuideTabContent{
+                    .image-gallery{
+                        padding: 59px 59px 20px 59px;
+                    }
+                } 
+            }
+        }   
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .product_details{
+        .product_description{
+            .tabcontent{
+                padding: 30px 15px;
+            }
+        } 
+    } 
+
+    .galleryArea{
+        .GallerytextBox{
+            .pincode{
+                width: 100%;
+            }
+            .price{
+                .offerprice{
+                   h2{
+                       margin-top: 0px;
+                   } 
+                }
+            } 
+        }
+
+        .purchase-guide-box{
+            .tab-nav-container{
+                ul{ 
+                    li{
+                        margin-right: 25px;
+                        a{
+                        font-size: 14px;
+                        }
+                    }        
+                }
+            }
+            .purchaseGuideTabContent{
+                .image-gallery{
+                    padding: 0px 0px 20px 0px;
+                }
+            } 
+        }
+    } 
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

@@ -88,23 +88,37 @@
 }
 
 .filterOutterCont {
-  height: 100%;
+  height: 93%;
   width: 100%;
   background-color: white;
   position: fixed;
-  bottom: 0px;
+  bottom: 45px;
   z-index: 100;
 
+.filter-data{
+  height: 530px;
+  overflow: scroll;
+  width: 100%;
+}
   .filterHeader {
     height: 55px;
     width: 100%;
-    position: fixed;
-    bottom: 34%;
+    float:left;
+    border-bottom: 1px solid $lightgrey;
 
     .filterTxt {
       color: #036cc5;
       font-size: 14px;
       float: left;
+      width: 20%;
+      text-align: left;
+      margin: 21px;
+    }
+
+    .clearTxt {
+      color: black;
+      font-size: 14px;
+      float: right;
       width: 20%;
       text-align: left;
       margin: 21px;
@@ -169,18 +183,7 @@
 
     .facetList {
       padding: 20px;
-      //background-color: antiquewhite;
       text-align: left;
-
-      // &::after {
-      //   content: " ";
-      //   position: absolute;
-      //   height: 1px;
-      //   background: red;
-      //   left: 0px;
-      //   width: 100%;
-      //   //bottom: 0px;
-      // }
     }
   }
 
@@ -272,49 +275,21 @@
   }
 
 
-
-
-
-  // .filterWrapper {
-  //   margin: 0 0 15px 0;
-  
-  //   position: relative;
-  //   .filter {
-  //     width: 80%;
-  //     float: left;
-  //     .heading {
-  //       font-family: $font-bold;
-  //       font-size: $base * 1.75;
-  //       padding: 0 0 15px 0px;
-  //       margin: 0;
-  //     }
-  //     .moreFilterBtn {
-  //       float: left;
-  //       background: transparent;
-  //       border: 0;
-  //       padding: 16px;
-  //       color: $greyish;
-  //       text-decoration: underline;
-  //       font-size: $base * 1.75;
-  //       font-family: $font-light;
-  //       &:focus {
-  //         outline: 0;
-  //       }
-  //     }
   
       .dropdown_filter {
         position: static;
         display: block;
-        //float: left;
-        //min-width: 23%;
-        width: 135px;
+        width: 100%;
+        float: left;
   
         &__filter {
-          background: $colorwhite;
-          border: 1px solid $lightgrey;
+          background-color: $greybg;
+          border-bottom: 1px solid $lightgrey;
           border-radius: 1px;
           z-index: 1;
-          background: $colorwhite;
+          width: 36%;
+          float: left;
+          position: relative;
   
           &:last-child {
             border-right: 1px solid $lightgrey;
@@ -335,37 +310,32 @@
   
         &__list {
           background: #fff;
-          /* border: 1px solid #dfe0de; */
-          /* transition: max-height 0.2s ease-out; */
-          max-height: 15px;
-          overflow: hidden;
           margin: 0;
           padding: 0;
           position: absolute;
           z-index: 2;
-          padding: 20px;
-          /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14); */
+          padding: 0px 15px;
           visibility: hidden;
-          max-width: 35%;
           height: 100%;
-          left: 1px;
-          top: 0;
+          right: 0px;
+          top: 70px;
           background: transparent;
-          z-index: -1;
+          width: 64%;
 
           .filterbtnWrapper {
             text-align: center;
           }
   
           &--active {
-            max-height: 1000px;
-            // opacity: 1;
+            max-height: 400px;
             visibility: visible;
+            overflow: scroll;
+            background: white;
           }
           .list {
             // display: inline-block;
             display: block;
-            float: right;
+            float: left;
   
             .input_box {
               margin: 0 15px 0 0;
@@ -439,10 +409,10 @@
               }
             }
             .label_text {
-              padding: 0 30px 26px 0;
+              padding: 0 0px 15px 0;
               color: $battleshipGrey;
               font-size: $base * 1.5;
-              min-width: 170px;
+              text-align: left;
             }
             .input_box,
             .label_text {
@@ -458,9 +428,16 @@
         &__list-item {
           cursor: pointer;
           list-style: none;
-          padding: 15px;
+          padding: 15px 9px;
           position: relative;
           display: flex;
+          font-size: 12px;
+          
+          .selectedFacet {
+            color: #036cc5;
+            margin: -17px 0px 0px 12px;
+            font-size: 22px;
+          }
   
           &--active {
             background: #f4f4f4;
@@ -484,14 +461,21 @@
             background: $colorwhite;
           }
   
-          background: $colorwhite;
+          /*background: $colorwhite;*/
         }
   
         .filterbtnWrapper {
-          padding: 30px 0 0 0;
+          padding: 30px 0 0px 0;
+          position: fixed;
+          bottom: 0px;
+          width: 100%;
+          left: 0px;
           .btn {
-            padding: 12px 60px;
+            padding: 12px 0px;
             border-radius: 0;
+            width: 50%;
+            float: left;
+            margin: 0px;
           }
         }
         &__cancelBtn {
@@ -601,14 +585,15 @@
   
         &toggle {
           color: $greyish;
+          
           &:hover {
             background: $colorwhite;
+            
           }
   
           background: $colorwhite;
         }
-     // }
-    //}
+
   }
 
 }
