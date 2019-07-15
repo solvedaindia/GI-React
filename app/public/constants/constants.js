@@ -146,8 +146,10 @@ export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secu
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 /* Address List API */
 export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
-/* Consultation form API*/
+/* Consultation form post API*/
 export const consultFormApi = `${secureHttp}://${host}:${port2}/api/v1/static/bookconsultation`;
+/* Consultation form dropdown get API*/
+export const consultGetApi = `${secureHttp}://${host}:${port2}/api/v1/static/getconsultation`;
 /* User data API */
 export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
 /* Order List API */

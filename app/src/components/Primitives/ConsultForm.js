@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import Input from '../Primitives/consultFormInput'
 import '../../../public/styles/wardrobes/warobes.scss'
 import {
-  consultFormApi
+  consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
 import axios from 'axios';
 import apiManager from '../../utils/apiManager';
@@ -22,19 +22,14 @@ class ConsultForm extends React.Component {
       mobileNumber:"",
       dropDownValue: "",
       message: "",
+      dropDownArr: [],
+      index: 0
      };
      this.state = this.initialState
   }
  
-//  handleSubmit = e => {
-//     e.preventDefault();
-    
-//     const data = new FormData(e.target.value);
 
-//       this.callConsultApi();
-//   };
 handleChange  = e => {
-  // const name = this.state.name
   const {name, value} = e.target; //gets info from Form
   console.log('data', e.target)
  
@@ -43,10 +38,6 @@ handleChange  = e => {
     [name] : value
    })
    console.log("name checks", [name])
-//alert(value);
- 
-// return console.log('check', this.state);
-// this.callConsultApi()
 
 }
  
@@ -87,7 +78,65 @@ submitForm = (e) => {
 			});
 			console.log('Notify API Error---', error.response.data.error.error_message);
 		});
-	}
+  }
+  getConsultDropDownApi = ()=> {
+    apiManager
+      .get(consultGetApi)
+      .then(response => {
+        console.log("ressss", response)
+        const {data} = response || {};
+        this.setState({
+          dropDownArr: data.data.consultationData
+        // layer1Data: data && data.data.Header_Static_Links,
+        // isLoading: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+        error,
+        isLoading: false,
+        });
+      });
+    }
+  componentDidMount(){
+    this.getConsultDropDownApi();
+  }
+
+  createSelectItems =() => {
+    let items = [];         
+items = this.state.dropDownArr.map((item, index) => {
+  return(
+    <option value={item}>{item}</option>
+   
+  )
+})
+  
+console.log('myarr', items)
+return items;
+
+  }
+
+onDropdownSelected = (e) => {
+  // if(dropDownValue){
+  //   const {name, dropDownValue} = e.target; //gets info from Form
+  // console.log('dataaaaa', e.target.value)
+ 
+  // this.setState({
+    
+  //   [name] : dropDownValue
+  //  })
+  // }
+  if (e.target.value !== 'null' && this.state.dropDownValue !== e.target.value) {
+    console.log("THE VAL", e.target.value);
+    this.setState({
+      dropDownValue : e.target.value
+     })
+  
+  }
+ 
+   //here you will see the current selected value of the select input
+}
+
 
     render() {
       const{name, email,mobileNumber,message, dropDownValue} = this.state
@@ -118,10 +167,10 @@ submitForm = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-                      <select   name="dropDownValue" value={dropDownValue} onChange={this.handleChange} className="form-control">
-                      <option value='null'>Select an option</option>
-
-                        <option value='dataa'>Selected option</option>
+                      <select name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control">
+                        <option value='null'>Select an option</option>
+                         {this.createSelectItems()}
+                        
                        
                       </select>
                     </div>
