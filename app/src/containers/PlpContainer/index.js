@@ -102,7 +102,8 @@ export class PlpContainer extends React.Component {
     for (const p of params) {
       if (p[0] === 'filter') {
         // filterRoutingURL += `${p[0]}=${p[1]}&`
-        filterRoutingURL += `${p[1]}&`;
+        filterRoutingURL += `${decodeURI(p[1])}&`;
+        console.log('maskkk -- ',filterRoutingURL)
         onlyFilter[p[1]];
       } else if (p[0] === 'sort') {
         sortingRoutingURL = p[1];
@@ -366,13 +367,9 @@ export class PlpContainer extends React.Component {
       var splitFacet = facetValue.split(' '); // If more than 1 filter applied from the same Facet
       filterResponse.map((facetItem, index) => {
         facetItem.facetValues.map((innerItem, index) => {
-          if (
-            splitFacet.includes(
-              innerItem.value.replace('+', '%2B'),
-            ) /*innerItem.value === facetValue*/
-          ) {
+          if (splitFacet.includes(innerItem.value.replace(/\+/g, '%2B'),) /*innerItem.value === facetValue*/) {
             name = facetItem.facetName;
-            innerItem.value = innerItem.value.replace('+', '%2B');
+            innerItem.value = innerItem.value.replace(/\+/g, '%2B');
             reduxFilter.push(innerItem);
           }
         }); // innerItem ended
