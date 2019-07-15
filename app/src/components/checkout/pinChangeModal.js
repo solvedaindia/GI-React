@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import RedditShareButton from 'react-share/lib/RedditShareButton';
+import { Redirect } from 'react-router-dom'
 
 class PinChangePopup extends React.Component {
   constructor(props) {
@@ -7,13 +9,23 @@ class PinChangePopup extends React.Component {
     this.state = {
       modal: true,
       modalClass: 'delete-modal',
+      redirect: false
     };
   }
   handleCancel = () => {
     this.props.cancel()
   }
+
+  handleProceed = () => {
+    this.setState({
+      redirect: true
+    })
+  }
   
   render() {
+    if (this.state.redirect) {
+      return <Redirect to='/cart'/>;
+    }
     return (
       <Modal
         show={this.state.modal}
@@ -32,6 +44,7 @@ class PinChangePopup extends React.Component {
               </Button>
               <Button
                 className="btn-save btn"
+                onClick={this.handleProceed}
               >
                 Proceed
               </Button>

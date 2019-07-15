@@ -27,8 +27,8 @@ function productDetailForPLP(productDetail) {
       }
     });
   }
-  productDetailJson.onClickUrl = '';
-  productDetailJson.seoUrl = '';
+  // productDetailJson.onClickUrl = '';
+  // productDetailJson.seoUrl = '';
   productDetailJson.thumbnail = imagefilter.getImagePath(
     productDetail.thumbnail,
   );
@@ -41,6 +41,8 @@ function productDetailForPLP(productDetail) {
   const productAttribute = getProductAttributes(productDetail.attributes);
   productDetailJson.discount = productAttribute.discount;
   productDetailJson.ribbonText = productAttribute.ribbonText;
+  productDetailJson.installationRequired =
+    productAttribute.installationRequired;
   if (productDetail.UserData && productDetail.UserData.length > 0) {
     productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
   }
@@ -102,6 +104,7 @@ function getProductAttributes(attributes) {
   const productAttribute = {
     ribbonText: '',
     discount: '',
+    installationRequired: '',
   };
   attributes.forEach(attribute => {
     if (attribute.identifier === 'percentOff') {
@@ -109,6 +112,9 @@ function getProductAttributes(attributes) {
     }
     if (attribute.identifier === 'Ribbon') {
       productAttribute.ribbonText = attribute.values[0].value;
+    }
+    if (attribute.identifier === 'ExtnIsInstallationReqd') {
+      productAttribute.installationRequired = attribute.values[0].value;
     }
   });
   return productAttribute;

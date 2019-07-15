@@ -1,8 +1,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {
+  connect
+} from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import {
+  compose
+} from 'redux';
 import '../../../public/styles/checkout.scss';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
@@ -10,8 +14,21 @@ import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import appCookie from '../../utils/cookie';
 import PinChangePopup from './pinChangeModal'
-import { Button, Modal } from 'react-bootstrap';
-import Input from '../Primitives/input'
+import {
+  Button,
+  Modal
+} from 'react-bootstrap';
+import Input from '../Primitives/input';
+import {
+  validateFullName,
+  validateMobileNo,
+  validateEmailId,
+  validatePindcode,
+  validateAddress,
+  validateCityDistrict,
+  validateState,
+  validateGST
+} from '../../utils/validationManager';
 import {
   storeId,
   accessToken,
@@ -19,44 +36,122 @@ import {
   userLoginAPI,
   addressListAPI,
   userDataAPI,
-  PinToCityAPI
+  PinToCityAPI,
+  addAddressAPI,
+  AddAddressToCardAPI,
+  minicartAPI,
+  PreCheckoutAPI,
+  SaveGSTAPI
 } from '../../../public/constants/constants';
 import {
-    getReleventReduxState
-  } from '../../utils/utilityManager';
+  getReleventReduxState
+} from '../../utils/utilityManager';
+import {
+  EROFS
+} from 'constants';
+import { replace } from 'connected-react-router';
 
 export class Step2Component extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          has_pass: false,
-          phone: '',
-          email: '',
-          same_bill: true,
-          step: 1,
-          showGift: false,
-          addressList: null,
-          saved_add: 'active_add',
-          new_add: null,
-          pin: '',
-          city: '',
-          state: '',
-          pinPop: false
-        }
+    constructor(props) {
+      super(props);
+      this.state = {
+        has_pass: false,
+        phone: '',
+        email: '',
+        same_bill: true,
+        step: 1,
+        selected_add: 0,
+        showGift: false,
+        addressList: null,
+        saved_add: 'active_add',
+        new_add: null,
+        pin: '',
+        city: '',
+        state: '',
+        ship_add_id: '',
+        bill_add_id: '',
+        orderId: '',
+        defaultAddress: 'false',
+        pinPop: false,
+        error_name: false,
+        error_number: false,
+        error_email: false,
+        error_pincode: false,
+        error_address: false,
+        error_city: false,
+        error_state: false,
+        error_gst: false,
+
+        errorMessage_name: '',
+        errorMessage_number: '',
+        errorMessage_email: '',
+        errorMessage_pincode: '',
+        errorMessaget_address: '',
+        errorMessage_city: '',
+        errorMessage_state: '',
+        errorMessage_gst: '',
+        inputText_name: '',
+        inputText_number: '',
+        inputText_email: '',
+        inputText_pincode: '',
+        inputText_address: '',
+        inputText_city: '',
+        inputText_state: '',
+        inputText_gst: '',
+
+        berror_name: false,
+        berror_number: false,
+        berror_email: false,
+        berror_pincode: false,
+        berror_address: false,
+        berror_city: false,
+        berror_state: false,
+
+        berrorMessage_name: '',
+        berrorMessage_number: '',
+        berrorMessage_email: '',
+        berrorMessage_pincode: '',
+        berrorMessaget_address: '',
+        berrorMessage_city: '',
+        berrorMessage_state: '',
+        binputText_name: '',
+        binputText_number: '',
+        binputText_email: '',
+        binputText_pincode: '',
+        binputText_address: '',
+        binputText_city: '',
+        binputText_state: '',
+        isSetAsDefault: ''
+      };
+
+      this.handleInput = this.handleInput.bind(this);
+
     }
 
     componentDidMount() {
-      if(this.props.isLoggedIn) {
-        this.callAddressAPI()
+      if (this.props.isLoggedIn) {
+        this.callPinApi()
+          .then(this.callAddressAPI)
           .then((data) => {
-            if(data.length > 0) {
-              this.setState({
-                addressList: data
-              })
-            }
+            console.log(data, "resolved data")
+            this.setState({
+              addressList: data.addressList,
+              inputText_pincode: data.pinData.pin,
+              inputText_city: data.pinData.city,
+              inputText_state: data.pinData.state
+            })
+          })
+      } else {
+        this.callPinApi()
+          .then((data) => {
+            this.setState({
+              inputText_pincode: data.pin,
+              inputText_city: data.city,
+              inputText_state: data.state
+            })
           })
       }
-      if(this.props.logonBy && this.props.logonBy.includes('@')) {
+      if (this.props.logonBy && this.props.logonBy.includes('@')) {
         this.setState({
           email: this.props.logonBy
         })
@@ -67,26 +162,38 @@ export class Step2Component extends React.Component {
       }
     }
 
-    callAddressAPI = () => {
+    callAddressAPI = (pinData) => {
       return new Promise((resolve, reject) => {
-        let token = appCookie.get('accessToken')
-        axios.get(addressListAPI, {
-          headers: { store_id: storeId, access_token: token }
-        }).then(response => {
-          console.log(response.data.data, "address list reponse")
-          resolve(response.data.data.addressList);
-        }).catch(error => {
-          reject(error);
-        })
+        if (this.props.isLoggedIn) {
+          let token = appCookie.get('accessToken')
+          axios.get(addressListAPI, {
+            headers: {
+              store_id: storeId,
+              access_token: token
+            }
+          }).then(response => {
+            console.log(response.data.data, "address list reponse")
+            var data = {};
+            data.addressList = response.data.data.addressList.sort((a, b) => {
+              if (b.isDefault == true) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            data.pinData = pinData;
+            resolve(data);
+          }).catch(error => {
+            reject(error);
+          })
+        } else {
+          resolve();
+        }
       })
     }
 
     handleChangeMobile = () => {
       this.props.back();
-    }
-
-    getUserAddress = () => {
-      
     }
 
     newAddActive = () => {
@@ -97,72 +204,72 @@ export class Step2Component extends React.Component {
     }
 
     savedAddActive = () => {
-    if(this.state.addressList) {
-      this.setState({
-        saved_add: 'active_add',
-        new_add: null
-      })
-    }  
+      if (this.state.addressList) {
+        this.setState({
+          saved_add: 'active_add',
+          new_add: null
+        })
+      }
     }
 
     callPinApi = (val) => {
-      let token = appCookie.get('accessToken')
-      let defPin = appCookie.get('pincode');
-      console.log(defPin, "this is defpin")
-      if(val == defPin) {
-        axios.get(`${PinToCityAPI}${val}`, {
-          headers: { store_id: storeId, access_token: token }
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
+        let defPin = appCookie.get('pincode');
+        console.log(defPin, "this is defpin")
+        axios.get(`${PinToCityAPI}${val ? val : defPin}`, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
         }).then(response => {
           console.log(response.data.data, "pin response");
-          this.setState({
-            city: response.data.data.city,
-            state: response.data.data.state
-          })
+          // this.setState({
+          //   city: response.data.data.city,
+          //   state: response.data.data.state,
+          //   pin: defPin
+          // })
+          var data = response.data.data;
+          data.pin = val ? val : defPin;
+          resolve(data);
         }).catch(error => {
           throw new Error(error);
+          resolve()
         })
-      } else {
-        console.log("in else  statement")
+      })
+    }
+
+    checkPIN = () => {
+      var localPIN = appCookie.get('pincode');
+      if (this.state.inputText_pincode !== localPIN) {
         this.setState({
           pinPop: true
         })
+      } else {
+        this.callAddress()
       }
     }
 
-    pinChange = (e) => {
-      console.log(e.target.value, 'pin obj')
-      if (e.target.value.length > 6) {
-        return false;
-      } else {
-        if (e.target.value.length === 6) {
-          this.callPinApi(e.target.value)
-        }
-        this.setState({
-          pin: e.target.value
-        });
-        }
-      }
+    cancelPinPop = () => {
+      this.setState({
+        pinPop: false
+      })
+    }
 
-      cancelPinPop = () => {
-        this.setState({
-          pinPop: false
-        })
-      }
+    phoneChange = (e) => {
+      this.setState({
+        phone: e.target.value
+      })
+    }
 
-      phoneChange = (e) => {
-        this.setState({
-          phone: e.target.value
-        })
-      }
-
-      mailChange = (e) => {
-        this.setState({
-          email: e.target.value
-        })
-      }
+    mailChange = (e) => {
+      this.setState({
+        email: e.target.value
+      })
+    }
 
     handleSameBill = () => {
-      if(this.state.same_bill == false) {
+      if (this.state.same_bill == false) {
         this.setState({
           same_bill: true
         })
@@ -173,18 +280,592 @@ export class Step2Component extends React.Component {
       }
     }
 
+    handleInput(value) {
+      this.setState({
+        error_name: false,
+        error_number: false,
+        error_email: false,
+        error_pincode: false,
+        error_address: false,
+        error_city: false,
+        error_state: false,
+        error_gst: false,
+        berror_name: false,
+        berror_number: false,
+        berror_email: false,
+        berror_pincode: false,
+        berror_address: false,
+        berror_city: false,
+        berror_state: false,
+      });
+      switch (value.target.id) {
+        case 'name':
+          return this.setState({
+            inputText_name: value.target.value,
+          });
+        case 'pin':
+          if (value.target.value.length < 6) {
+            return this.setState({
+              inputText_pincode: value.target.value,
+            });
+          } else if (value.target.value.length === 6) {
+            this.callPinApi(value.target.value).then((data) => {
+              this.setState({
+                inputText_pincode: data.pin,
+                inputText_city: data.city,
+                inputText_state: data.state
+              })
+            })
+          } else {
+            return false
+          };
+        case 'address':
+          return this.setState({
+            inputText_address: value.target.value,
+          });
+        case 'city':
+          return this.setState({
+            inputText_city: value.target.value,
+          });
+        case 'state':
+          return this.setState({
+            inputText_state: value.target.value,
+          });
+        case 'gst':
+          if(value.target.value.length <= 15) {
+            return this.setState({
+              inputText_gst: value.target.value,
+            });
+          } else {
+            return false;
+          }
+        case 'bname':
+          return this.setState({
+            binputText_name: value.target.value,
+          });
+        case 'bphone':
+          return this.setState({
+            binputText_number: value.target.value,
+          });
+        case 'bemail':
+          return this.setState({
+            binputText_email: value.target.value,
+          });
+        case 'bpin':
+          if (value.target.value.length < 6) {
+            return this.setState({
+              binputText_pincode: value.target.value,
+            });
+          } else if (value.target.value.length === 6) {
+            this.callPinApi(value.target.value).then((data) => {
+              this.setState({
+                binputText_pincode: data.pin,
+                binputText_city: data.city,
+                binputText_state: data.state
+              })
+            })
+          } else {
+            return false
+          };
+        case 'baddress':
+          return this.setState({
+            binputText_address: value.target.value,
+          });
+        case 'bcity':
+          return this.setState({
+            binputText_city: value.target.value,
+          });
+        case 'bstate':
+          return this.setState({
+            binputText_state: value.target.value,
+          });
+        default:
+          return null;
+      }
+    }
+
+    callAddress = () => {
+      this.addAddress()
+        .then(this.callAddressAPI)
+        .then((data) => {
+          console.log("in final resolve", data)
+          if (this.props.isLoggedIn) {
+            this.setState({
+              addressList: data.addressList,
+              saved_add: 'active_add',
+              new_add: null
+            })
+          } else {
+            this.addAddressToCart()
+              .then((orderId) => {
+                console.log(orderId, "this is order id")
+                var selected_add = {
+                  address: this.state.inputText_address,
+                  city: this.state.inputText_city,
+                  state: this.state.inputText_state,
+                  pincode: this.state.inputText_pincode,
+                  orderId: orderId,
+                  billAddId: this.state.bill_add_id
+                }
+                this.props.handleAddress(selected_add);
+                this.handleProceed()
+              })
+          }
+        }).catch((err) => {
+          throw new Error(err);
+        })
+    }
+
+    addAddress = () => {
+      return new Promise((resolve, reject) => {
+        var data = {
+          name: this.state.inputText_name,
+          pincode: this.state.inputText_pincode,
+          city: this.state.inputText_city,
+          state: this.state.inputText_state,
+          address: this.state.inputText_address,
+          default: this.state.defaultAddress,
+          phone_number: this.state.phone,
+          email_id: this.state.email
+        };
+        // data['phone number'] = this.state.phone;
+        // data['email id'] = this.state.email;
+        let token = appCookie.get('accessToken')
+        console.log(data, "this is address data");
+        axios.post(addAddressAPI, data, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then(response => {
+          if (this.state.same_bill == false && !this.props.isLoggedIn) {
+            this.saveBillAdd()
+              .then((billAddId) => {
+                this.setState({
+                  ship_add_id: response.data.data.addressID,
+                  bill_add_id: billAddId
+                })
+              })
+              resolve();
+          } else {
+            if (!this.props.isLoggedIn && this.state.same_bill == true) {
+              this.setState({
+                ship_add_id: response.data.data.addressID,
+                bill_add_id: response.data.data.addressID
+              })
+            }
+            resolve();
+          }
+        }).catch(err => {
+          throw new Error(err);
+          reject();
+        })
+      })
+    }
+
+    saveBillAdd = () => {
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken')
+        var bdata = {
+          name: this.state.binputText_name,
+          pincode: this.state.binputText_pincode,
+          city: this.state.binputText_city,
+          state: this.state.binputText_state,
+          address: this.state.binputText_address,
+          default: true,
+          phone_number: this.state.binputText_number,
+          email_id: this.state.binputText_email
+        };
+
+        axios.post(addAddressAPI, bdata, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then(res => {
+          // this.setState({
+          //   ship_add_id: response.data.data.addressID,
+          //   bill_add_id: res.data.data.addressID
+          // })
+          resolve(res.data.data.addressID);
+        }).catch(err => {
+          throw new Error(err);
+          reject();
+        })
+      })
+    }
+
+    saveGST = (orderId) => {
+      return new Promise((resolve, reject) => {
+        if(this.state.inputText_gst !== '' && this.state.inputText_gst.length == 15) {
+          let token = appCookie.get('accessToken');
+          var data = {
+            order_id: orderId,
+            gst_number: this.state.inputText_gst
+          }
+          axios.post(SaveGSTAPI, data, {
+            headers: {
+              store_id: storeId,
+              access_token: token
+            }
+          }).then((res) => {
+            console.log(res, "gst response")
+            resolve();
+          }).catch((err) => {
+            console.log(err, 'gst error');
+            reject();
+          })
+        } else {
+          resolve();
+        }
+      })
+    }
+
+    addAddressToCart = () => {
+      return new Promise((resolve, reject) => {
+        let token = appCookie.get('accessToken');
+        axios.get(minicartAPI, {
+          headers: {
+            store_id: storeId,
+            access_token: token
+          }
+        }).then((response) => {
+          var miniCartData  = response.data.data.miniCartData
+          console.log(miniCartData, "this is minicart data")
+          var data = [];
+          miniCartData.forEach((item) => {
+            if(item.freeGift != true) {
+              var obj = {
+                "orderItemId": `${item.orderItemId}`,
+                "shipModeId": "11251",
+                "addressId": `${this.state.ship_add_id}`
+              }
+              data.push(obj);
+            }
+          });
+          var body = {
+            "orderItem": data,
+            "shipModeId": "11251",
+            "addressId": `${this.state.bill_add_id}`
+          };
+          axios.post(AddAddressToCardAPI, body, {
+            headers: {
+              store_id: storeId,
+              access_token: token
+            }
+          }).then((res) => {
+            console.log(response, "add address to cart response");
+            var reqdata = {
+              order_id: response.data.data.orderID
+            }
+            axios.post(PreCheckoutAPI, reqdata, {
+              headers: {
+                store_id: storeId,
+                access_token: token
+              }
+            }).then((resp) => {
+              console.log(resp, "precheckout response");
+              this.saveGST(resp.data.data.orderId)
+                  .then(() => {
+                    resolve(resp.data.data.orderId);
+                  }).catch((err) => {
+                    reject();
+                  })
+            }).catch((err) => {
+              console.log(err, "precheckout err");
+              resolve()
+            })
+          }).catch((err) => {
+            console.log(body, err,  "add address to cart response");
+            resolve();
+          })
+        }).catch((err) => {
+          reject(err);
+        })
+      })
+    }
+
+    handleloginContinue = () => {
+      var selected_address = this.state.addressList[this.state.selected_add];
+      if (this.setState.same_bill == false) {
+        this.saveBillAdd()
+          .then((addressId) => {
+            var selected_address = this.state.addressList[this.state.selected_add];
+            this.setState({
+              ship_add_id: selected_address.addressID,
+              bill_add_id: addressId
+            })
+          })
+      } else {
+        this.setState({
+          ship_add_id: selected_address.addressID,
+          bill_add_id: selected_address.addressID
+        })
+        console.log(this.state.ship_add_id, this.state.bill_add_id, "shipping and billing address id")
+      }
+
+      this.addAddressToCart().then((orderId) => {
+        console.log(orderId, "this is order id")
+        selected_address.orderId = orderId;
+        selected_address.billAddId = this.state.bill_add_id;
+        this.props.handleAddress(selected_address);
+        this.props.proceed();
+      })
+
+    }
+
+    onLoginSave(event) {
+      event.preventDefault();
+      var selected_address = this.state.addressList[this.state.selected_add];
+      var localPIN = appCookie.get('pincode');
+      if(this.state.same_bill == true) {
+        error_gst: false
+      }
+      if (this.state.same_bill == false) {
+        this.setState({
+          berror_name: false,
+          berror_number: false,
+          berror_email: false,
+          berror_pincode: false,
+          berror_address: false,
+          berror_city: false,
+          berror_state: false,
+          error_gst: false
+        });
+
+        if (!validateFullName(this.state.binputText_name)) {
+          console.log(this.state.binputText_name, "this is input name")
+          this.setState({
+            berror_name: true,
+            berrorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
+          });
+          return;
+        }
+        if (!validateMobileNo(this.state.binputText_number)) {
+          this.setState({
+            berror_number: true,
+            berrorMessage_number: 'Please enter valid mobile number.',
+          });
+          return;
+        }
+
+        if (!validatePindcode(this.state.binputText_pincode)) {
+          this.setState({
+            berror_pincode: true,
+            berrorMessage_pincode: 'Please enter valid Pincode.',
+          });
+          return;
+        }
+        if (!validateEmailId(this.state.binputText_email)) {
+          this.setState({
+            berror_email: true,
+            berrorMessage_email: 'Please enter valid Email ID.',
+          });
+          return;
+        }
+        if (!validateAddress(this.state.binputText_address)) {
+          this.setState({
+            berror_address: true,
+            berrorMessaget_address: 'Please enter valid Address.',
+          });
+          return;
+        }
+        if (!validateCityDistrict(this.state.binputText_city)) {
+          this.setState({
+            berror_city: true,
+            berrorMessage_city: 'Please enter valid City/District.',
+          });
+          return;
+        }
+        if (!validateState(this.state.binputText_state)) {
+          this.setState({
+            berror_state: true,
+            berrorMessage_state: 'Please enter valid State.',
+          });
+          return;
+        }
+
+
+      }
+      if (!validateGST(this.state.inputText_gst)) {
+        this.setState({
+          error_gst: true,
+          errorMessage_gst: 'Please enter valid GST Number.',
+        });
+        return;
+      }
+      if (selected_address.pincode !== localPIN) {
+        this.setState({
+          pinPop: true
+        })
+        return;
+      }
+      this.handleloginContinue()
+      console.log(selected_address, 'this is selected address')
+    }
+
+    onSavebuttonClick(event) {
+      event.preventDefault();
+      this.setState({
+        error_name: false,
+        errorMessage_name: null,
+        error_number: false,
+        errorMessage_number: null,
+        error_email: false,
+        errorMessage_email: null,
+        error_pincode: false,
+        error_address: false,
+        error_city: false,
+        error_state: false,
+        error_gst: false,
+        berror_name: false,
+        berror_number: false,
+        berror_email: false,
+        berror_pincode: false,
+        berror_address: false,
+        berror_city: false,
+        berror_state: false,
+      });
+      if (!validateFullName(this.state.inputText_name)) {
+        this.setState({
+          error_name: true,
+          errorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
+        });
+        return;
+      }
+      if (!validateMobileNo(this.state.phone)) {
+        this.setState({
+          error_number: true,
+          errorMessage_number: 'Please enter valid mobile number.',
+        });
+        return;
+      }
+      if (!validateEmailId(this.state.email)) {
+        this.setState({
+          error_email: true,
+          errorMessage_email: 'Please enter valid Email ID.',
+        });
+        return;
+      }
+      if (!validatePindcode(this.state.inputText_pincode)) {
+        this.setState({
+          error_pincode: true,
+          errorMessage_pincode: 'Please enter valid Pincode.',
+        });
+        return;
+      }
+      if (!validateAddress(this.state.inputText_address)) {
+        this.setState({
+          error_address: true,
+          errorMessaget_address: 'Please enter valid Address.',
+        });
+        return;
+      }
+      if (!validateCityDistrict(this.state.inputText_city)) {
+        this.setState({
+          error_city: true,
+          errorMessage_city: 'Please enter valid City/District.',
+        });
+        return;
+      }
+      if (!validateState(this.state.inputText_state)) {
+        this.setState({
+          error_state: true,
+          errorMessage_state: 'Please enter valid State.',
+        });
+        return;
+      }
+      if (this.state.same_bill == false) {
+        if (!validateFullName(this.state.binputText_name)) {
+          console.log(this.state.binputText_name, "this is input name")
+          this.setState({
+            berror_name: true,
+            berrorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
+          });
+          return;
+        }
+        if (!validateMobileNo(this.state.binputText_number)) {
+          this.setState({
+            berror_number: true,
+            berrorMessage_number: 'Please enter valid mobile number.',
+          });
+          return;
+        }
+
+        if (!validatePindcode(this.state.binputText_pincode)) {
+          this.setState({
+            berror_pincode: true,
+            berrorMessage_pincode: 'Please enter valid Pincode.',
+          });
+          return;
+        }
+        if (!validateEmailId(this.state.binputText_email)) {
+          this.setState({
+            berror_email: true,
+            berrorMessage_email: 'Please enter valid Email ID.',
+          });
+          return;
+        }
+        if (!validateAddress(this.state.binputText_address)) {
+          this.setState({
+            berror_address: true,
+            berrorMessaget_address: 'Please enter valid Address.',
+          });
+          return;
+        }
+        if (!validateCityDistrict(this.state.binputText_city)) {
+          this.setState({
+            berror_city: true,
+            berrorMessage_city: 'Please enter valid City/District.',
+          });
+          return;
+        }
+        if (!validateState(this.state.binputText_state)) {
+          this.setState({
+            berror_state: true,
+            berrorMessage_state: 'Please enter valid State.',
+          });
+          return;
+        }
+      }
+      if (!validateGST(this.state.inputText_gst)) {
+        this.setState({
+          error_gst: true,
+          errorMessage_gst: 'Please enter valid GST Number.',
+        });
+        return;
+      }
+      if (this.props.isLoggedIn) {
+        this.callAddress();
+      } else {
+        this.checkPIN()
+      }
+    }
+
+    handleDefaultAddress = () => {
+      if(this.state.defaultAddress == true) {
+        this.setState({
+          defaultAddress: 'false'
+        })
+      } else {
+        this.setState({
+          defaultAddress: true
+        })
+      }
+    }
+
     renderAddressList = () => {
       if(this.state.addressList && this.state.addressList.length > 0) {
         var list = [];
-        this.state.addressList.forEach((add) => {
+        this.state.addressList.forEach((add, index) => {
           list.push(
-            <div className="col-md-12">
-              <ul class="saveAddress">
-                <li className='list'>
+            <div className="col-md-6">
+              <ul className="saveAddress">
+                <li className='list' onClick={this.handleAddressChange.bind(this, index)} style={{cursor: "pointer"}}>
                   <div className='inputBox'>
-                     <input type="radio" name="optradio"  checked />
+                     <input type="radio" name="optradio" value={index}  checked={this.state.selected_add == index} />
                   </div>
-                 
+
                   <div className='addressText'>{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
                 </li>
               </ul>
@@ -195,6 +876,13 @@ export class Step2Component extends React.Component {
       }
     }
 
+    handleAddressChange(index) {
+      console.log(index, "event on li");
+      this.setState({
+        selected_add: index
+      })
+    }
+
     handleProceed = () => {
       this.props.proceed();
     }
@@ -203,7 +891,8 @@ export class Step2Component extends React.Component {
       return (
           
             <div className="col-md-8 checkout_wrapper">
-              {this.state.pinPop ? <PinChangePopup cancel={this.cancelPinPop} /> :'' }
+              {this.state.pinPop ?
+              <PinChangePopup cancel={this.cancelPinPop} /> :'' }
               <div className='listRow clearfix'>
                 <div className='stepActive'>
                   <div className='checkmark'></div>
@@ -233,7 +922,7 @@ export class Step2Component extends React.Component {
                   <div className="heading-label">Ship To</div>
                   {this.props.isLoggedIn ? <div className='verticalTab'>
                     <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
-                      <div style={!this.state.addressList ? {color: 'grey'} : {color:'black'} }>Saved Address</div>
+                      <div style={!this.state.addressList ? {color: 'grey' } : {color:'black'} }>Saved Address</div>
                     </div>
                     <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
                       <div>New Address</div>
@@ -241,72 +930,75 @@ export class Step2Component extends React.Component {
                   </div> : ''}
                 </div>
                 <div className="rightBox">
-                  {!this.props.isLoggedIn || this.state.new_add ? <div>
+                  {!this.props.isLoggedIn || this.state.new_add ?
+                  <div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Full Name" id="name" name="name" />                        
+                          <Input inputType="text" title="Full Name" id="name" name="name"
+                            handleChange={this.handleInput} />
+                          {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> :
+                          null}
                         </div>
-                        {/* <label className="from-label" htmlFor="name">Full Name</label>
-                        <input type="text" name="name" className="form-control" /> */}
-                      </div> 
-                      <div className="col-md-6">
-                        {/* <label className="from-label" htmlFor="phone">Phone Number</label>
-                        <input type="text" name="phone" className="form-control" value={this.state.phone} onChange={e=>
-                        this.phoneChange(e)} /> */}
-
+                      </div>
+                      <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Phone Number"  name="phone" value={this.state.phone} onChange={e=> this.phoneChange(e)} />
+                          <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
+                            onChange={e=> this.phoneChange(e)} />
+                          {this.state.error_number ? (
+                          <div className="error-msg">
+                            {this.state.errorMessage_number}
+                          </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
-                        {/* <label className='form-label' htmlFor="pin">Pin Code</label>
-                        <input type="number" name="pin" className="form-control" value={this.state.pin} onChange={e=>
-                        this.pinChange(e)} /> */}
                         <div className="form-div clearfix div-error">
-                          <Input inputType="number" title="Pin Code" name="pin" value={this.state.pin} onChange={e=> this.pinChange(e)}/>
+                          <Input inputType="number" title="Pin Code" name="pin" value={this.state.inputText_pincode}
+                            handleChange={this.handleInput} />
+                          {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
+                          : null}
                         </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label className="from-label" htmlFor="email">Email</label>
-                        <input type="text" name="email" className="form-control" value={this.state.email} onChange={e=>
-                        this.mailChange(e)} /> */}
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Email" id="email" name="Email" value={this.state.email} onChange={e=> this.mailChange(e)} />    
+                          <Input inputType="text" title="Email (Optional)" id="email" name="Email"
+                            value={this.state.email} onChange={e=> this.mailChange(e)} />
+                          {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
+                          null}
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        {/* <label className="from-label" htmlFor="address">Address</label>
-                        <textarea type="text" name="address" className="form-control" /> */}
                          <div className="form-div clearfix div-error">
-                            <Input inputType="text" title="Address" id="address" name="address" />
+                            <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
+                            {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
                          </div>
                         </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-6 colpaddingRight">
-                        {/* <label  className="from-label" htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" value={this.state.city} /> */}
+                      <div className="col-md-6">
                          <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.city} />
+                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} handleChange={this.handleInput} />
+                           {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                          </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label  className="from-label" htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" value={this.state.state} /> */}
                          <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="State" id="state" name="state" value={this.state.state} />
+                           <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} />
+                           {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                          </div>
                       </div>
                     </div>
                     </div> : this.renderAddressList()}
+                    {!this.state.new_add ?
+                  <div> 
                     <div className="row">
                       <div className="col-md-12">
-                        <div className='bill-address customCheckbox clearfix'>
+                      <div className='bill-address customCheckbox clearfix'>
                         <div className='input_box'>
                           <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
                           <label className="lblCheck" htmlFor="checkbox"></label>
@@ -321,60 +1013,55 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
-                      {/* <label htmlFor="fullname">Full Name</label>
-                      <input type="text" name="fullname" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="Full Name" id="fullname" name="fullname"/>
+                           <Input inputType="text" title="Full Name" id="bname" name="bname" handleChange={this.handleInput}/>
+                           {this.state.berror_name ? <div className='error-msg'>{this.state.berrorMessage_name}</div> : null}
                          </div>
                     </div>
                     <div className="col-md-6">
-                      {/* <label htmlFor="phone">Phone Number</label>
-                      <input type="text" name="phone" className="form-control" /> */}
                        <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="Phone Number" id="phone" name="phone"/>
+                         <Input inputType="text" title="Phone Number" id="bphone" name="bphone" handleChange={this.handleInput} />
+                         {this.state.berror_number ? (
+                            <div className="error-msg">
+                              {this.state.berrorMessage_number}
+                            </div>
+                          ) : null}
                        </div>
                     </div>
                     </div>
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
-                      {/* <label htmlFor="pin">Pin Code</label>
-                      <input type="text" name="pin" className="form-control" /> */}
                        <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="Pin Code" id="pin" name="pincode"/>
+                         <Input inputType="text" title="Pin Code" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
+                         {this.state.berror_pincode ? <div className='error-msg'>{this.state.berrorMessage_pincode}</div> : null}
                        </div>
                     </div>
                     <div className="col-md-6">
-                      {/* <label htmlFor="email">Email</label>
-                      <input type="text" name="email" className="form-control" /> */}
                       <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="Email" id="email" name="email"/>
+                         <Input inputType="text" title="Email (Optional)" id="bemail" name="bemail" handleChange={this.handleInput} />
+                         {this.state.berror_email ? <div className="error-msg">{this.state.berrorMessage_email}</div> : null}
                        </div>
                     </div>
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                         <div className="form-div clearfix div-error">
-                           <div className="form-group">                           
-                           <textarea type="text" name="address" className="form-control" />
-                           <label className="form-label" htmlFor="address">Address</label>
-                           </div>
-                          </div>
-                        
+                        <div className="form-div clearfix div-error">
+                        <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} />
+                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
+                      </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
-                        {/* <label htmlFor="city">City/District</label>
-                        <input type="text" name="city" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="City/District" name="city"/>
+                         <Input inputType="text" title="City/District" name="bcity" id="bcity" value={this.state.binputText_city} handleChange={this.handleInput} />
+                         {this.state.berror_city ? <div className='error-msg'>{this.state.berrorMessage_city}</div> : null}
                        </div>
                       </div>
                       <div className="col-md-6">
-                        {/* <label htmlFor="state">State</label>
-                        <input type="text" name="state" className="form-control" /> */}
                         <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="State" name="city"/>
+                         <Input inputType="text" title="State" name="bstate" value={this.state.binputText_state} id="bstate" />
+                         {this.state.berror_state ? <div className='error-msg'>{this.state.berrorMessage_state}</div> : null}
                        </div>
                       </div>
                     </div>
@@ -387,40 +1074,50 @@ export class Step2Component extends React.Component {
                         :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
                      </div>
                     </div>
-
                     <div className="row">
                       <div className="col-md-12">
-                        {/* <label htmlFor="gst">GSTIN (Optional)</label>
-                        <input type="text" name="gst" className="form-control" />                         */}
                         <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="GSTIN (Optional)" name="city"/>
+                         <Input inputType="text" title="GSTIN (Optional)" value={this.state.inputText_gst} name="gst" handleChange={this.handleInput} />
+                         {this.state.error_gst ? <div className='error-msg'>{this.state.errorMessage_gst}</div> : null}
                        </div>
                       </div>
                     </div>
-
                     <div className='row'>
                      <div className='col-md-12 form-group'>
-                     <button className="btn-blackbg btn-block continueMargin" onClick={this.handleProceed}>Continue</button>
+                     <button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Continue</button>
                      </div>                    
                     </div>
-
-                    
-                  </div>
-                
+                  </div> : <div>
+                  <div className="row">
+                      <div className="col-md-12">
+                        <div>
+                          <input className='checkbox' type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <label className='label-billing' htmlFor="billing">Make this the default address</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                          <button className="btn-blackbg btn-block">cancel</button>
+                        </div>
+                        <div className="col-md-6">
+                          <button className="btn-blackbg btn-block"  onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
+                        </div>
+                    </div>
+                  </div>}
+                </div>
               </div>
-              
               <div className="listRow clearfix">
-                 <div className='stepActive'>
+                <div className='stepActive'>
                   <div className='stepbgNone'>3</div>
-                 </div>
+                </div>
                 <div className="leftBox">
-                <div className='heading-label'>Pay By</div>
+                  <div className='heading-label'>Pay By</div>
                 </div>
                 <div className="rightBox">
-                <div className='heading-label'>Choose a payment method</div>
+                  <div className='heading-label'>Choose a payment method</div>
                 </div>
               </div>
-              
             </div>
       )
     }

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const url = require('url');
 const storeLocatorHandler = require('../../handlers/storelocatorhandler');
 
 router.get('/bylocation', (req, res, next) => {
@@ -33,14 +34,12 @@ router.get('/bycoordinates', (req, res, next) => {
 });
 
 router.get('/byId', (req, res, next) => {
-  const idArray = [];
-  idArray.push(req.query.id);
-  // eslint-disable-next-line no-console
-  console.log(idArray, 'request params');
-  // const id = req.params.gi_storeId;
+  const physicalStoreIdUrl = req.originalUrl;
+  const physicalStoreIdQuery = url.parse(physicalStoreIdUrl, true);
+  const physicalStoreId = physicalStoreIdQuery.search.slice(1);
   storeLocatorHandler.storeByPhysicalIdentifier(
     req.headers,
-    idArray,
+    physicalStoreId,
     (err, result) => {
       if (err) {
         next(err);

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import HeaderL1 from '../../components/HeaderComponent/headerL1/headerL1';
 import HeaderL2 from '../../components/HeaderComponent/headerL2/headerL2';
 import Logo from '../../components/SVGs/logo';
-
+import HeaderMobile from './HeaderMobile/index';
 import '../../../public/styles/headerContainer/headerContainer.scss';
 
 export class HeaderContainer extends React.Component {
@@ -21,12 +21,17 @@ export class HeaderContainer extends React.Component {
       headerData: {},
       isLoading: false,
       error: null,
+      isMobile: window.innerWidth <= 760,
     };
   }
 
   render() {
+    if (this.state.isMobile) {
+      return <HeaderMobile />;
+    }
+
     return (
-      <header className="appheader">
+      <header className="appheader" id='header'>
         <div className="logo">
           <Link to="/">
             <Logo />
