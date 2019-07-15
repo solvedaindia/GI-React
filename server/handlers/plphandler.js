@@ -427,3 +427,73 @@ function productListByIDs(header, query, callback) {
     callback(null, res);
   });
 }
+
+module.exports.productListByPartNumbers = productListByPartNumbers;
+function productListByPartNumbers(header, query, callback) {
+  if (!query.pn) {
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const resJson = {
+    productCount: 0,
+    productList: [],
+  };
+  const partNumbers = [];
+  const reqHeader = header;
+  reqHeader.promotionData = 'false';
+  if (Array.isArray(query.pn)) {
+    query.pn.forEach(pn => {
+      partNumbers.push(pn);
+    });
+  } else {
+    partNumbers.push(query.pn);
+  }
+
+  async.map(
+    partNumbers,
+    (partNumber, cb) => {
+      productUtil.productDetailByPartNumber(partNumber, header, cb);
+    },
+    (error2, productList) => {
+      if (error2) {
+        callback(error2);
+        return;
+      }
+      if (productList && productList.length > 0) {
+        resJson.productCount = productList.length;
+        if (query.includepromotion === 'true') {
+          const productIds = [];
+          productList.forEach(product => {
+            productIds.push(product.uniqueID);
+          });
+          promotionUtil.getMultiplePromotionData(
+            productIds,
+            header,
+            (error3, promotionData) => {
+              if (error3) {
+                callback(error3);
+                return;
+              }
+              productList.forEach(product => {
+                let productDetail = {};
+                productDetail = pdpfilter.productDetailSummary(product);
+                productDetail.promotionData = pdpfilter.getSummaryPromotion(
+                  promotionData[productDetail.uniqueID],
+                );
+                resJson.productList.push(productDetail);
+              });
+              callback(null, resJson);
+            },
+          );
+        } else {
+          productList.forEach(product => {
+            let productDetail = {};
+            productDetail = pdpfilter.productDetailSummary(product);
+            resJson.productList.push(productDetail);
+          });
+          callback(null, resJson);
+        }
+      }
+    },
+  );
+}

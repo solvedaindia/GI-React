@@ -13,6 +13,9 @@ import SimilarCombosProducts from './similarAndCombosProducts';
 import AddToCart from './addToCart';
 import Price from './price';
 import MobileDiscountAndPrice from './mobileComponents/discountAndPrice';
+import MobileProductFeatures from './mobileComponents/productFeatures';
+import MobilePurchaseGuideGuide from './mobileComponents/purchaseGuide';
+import MobileProductDetail from './mobileComponents/productDetail';
 import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
@@ -80,7 +83,7 @@ class PdpComponent extends React.Component {
       pincodeData: defaultPincodeData
     });
 
-    this.callPinCodeAPI(skuDataArr, resolvedSkuData);
+    this.callPinCodeAPI(resolvedSkuData);
   }
 
   /* handle swatches */
@@ -116,7 +119,7 @@ class PdpComponent extends React.Component {
     return selectedSwatches;
   }
 
-  callPinCodeAPI(skuDataArr, resolvedSkuData) {
+  callPinCodeAPI(resolvedSkuData) {
     const dataParams = {
       params: {
         partnumber: resolvedSkuData.partNumber,
@@ -164,6 +167,7 @@ class PdpComponent extends React.Component {
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
   var box1=163;
+  if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
   var box3 = document.getElementById("box3").offsetTop;
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
@@ -228,6 +232,7 @@ class PdpComponent extends React.Component {
   } 			
   else {
     header.classList.remove("sticky");
+  }
   }
 }
 // handleScroll function End
@@ -352,16 +357,31 @@ class PdpComponent extends React.Component {
         )}
         <Grid>
           <Row>
-            <ProductFeatures productFeatureData={this.props.data} />
+          {!isMobile() ? (
+              <ProductFeatures productFeatureData={this.props.data} />
+            ) : (
+              <MobileProductFeatures productFeatureData={this.props.data}/> 
+            )
+          }
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12} className="purchase-guide-box">
-              <PurchaseGuide purchaseGuide={this.props.data} />
+            {!isMobile() ? (
+                <PurchaseGuide purchaseGuide={this.props.data} />
+              ) : (
+                <MobilePurchaseGuideGuide purchaseGuide={this.props.data}/> 
+              )
+            }
             </Col>
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12}>
-              <ProductDetail productDetail={this.props.data} />
+              {!isMobile() ? (
+                  <ProductDetail productDetail={this.props.data} />
+                ) : (
+                  <MobileProductDetail productDetail={this.props.data}/> 
+                )
+              }
             </Col>
           </Row>
           <Row>
