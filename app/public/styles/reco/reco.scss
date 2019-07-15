@@ -1,0 +1,53 @@
+@import '../variable';
+
+.reco {
+    @include container-width;
+    margin: $base*15 auto;
+    .recoImg {
+        width: 100%;
+    }
+    .leftSide {
+        width: 59%;
+        margin-right: 1%; 
+        .recoDesc {
+            width: 42.5%;
+            margin-right: 14.5%; 
+        }
+        .leftOne {
+            width: 42.5%;
+        }
+        .leftTwo {
+            width: 100%;
+            margin-top: $base*2.75; 
+        }
+        .recoDesc,
+        .leftOne {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .title {
+            text-align: left;
+            font-family: $font-medium;
+            margin: 0;
+        }
+        .data {
+            font-family: $font-regular;
+        }
+        .icon {
+            margin: 0;
+        }
+    }
+    .rightSide {
+        width: 38%;
+        margin-left: 2%; 
+        background-color: $borderLight;
+        .rightThree {
+            padding: $base*2;
+        }
+    }
+    .leftSide,
+    .rightSide {
+        display: inline-block;
+        vertical-align: top;
+    }
+}

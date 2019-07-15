@@ -100,6 +100,8 @@ export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
+/* Recommendation */
+export const recommendationAPI = `${secureHttp}://${host}:${port2}/api/v1/homebody/recommendedproduct`;
 /* ESPOT data API */
 export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
