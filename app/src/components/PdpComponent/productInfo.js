@@ -2,6 +2,7 @@ import React from 'react';
 import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import Price from './price';
+import { isMobile } from '../../utils/utilityManager';
 
 class productInfo extends React.Component {
   constructor() {
@@ -27,7 +28,7 @@ class productInfo extends React.Component {
 
     return (
       <>
-        <Price priceData={this.props.productData} />
+        { !isMobile() && <Price priceData={this.props.productData} /> }
         {this.props.pinCodeData.shippingCharge &&
         <div className="shippingCharge">
           Shipping Charges:{' '}

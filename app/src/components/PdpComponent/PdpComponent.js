@@ -10,17 +10,19 @@ import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
-import SocialMedia from '../../utils/socialMedia';
-import Wishlist from '../GlobalComponents/productItem/wishlist';
-import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import AddToCart from './addToCart';
 import Price from './price';
+import MobileDiscountAndPrice from './mobileComponents/discountAndPrice';
+import MobileProductFeatures from './mobileComponents/productFeatures';
+import MobilePurchaseGuideGuide from './mobileComponents/purchaseGuide';
+import MobileProductDetail from './mobileComponents/productDetail';
+import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
 import { pinCodeAPI } from '../../../public/constants/constants';
+import { isMobile } from '../../utils/utilityManager';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
-const shareImg = <img src={require('../../../public/images/share.svg')} />;
 
 
 
@@ -38,7 +40,8 @@ class PdpComponent extends React.Component {
 
 	componentDidMount() {
 		this.getResolveSkuData();
-		window.addEventListener('scroll', this.handleScroll);		
+    window.addEventListener('scroll', this.handleScroll);
+    window.scrollTo(0, 0);	
 	}
 
   /* get sku resolved data */
@@ -235,8 +238,8 @@ class PdpComponent extends React.Component {
 // handleScroll function End
   render() {
     const { isLoading } = this.state;
-    const wishlistArr = getOnlyWishlistUniqueIds();
     const isAddToCart = appCookie.get('isPDPAddToCart');
+
     return (
 
       <>
@@ -254,9 +257,8 @@ class PdpComponent extends React.Component {
 						<h4 className='heading'>
 							{this.state.skuData.productName}
 						</h4>
-						<div className='lockerText'>Locker, Mirror, OHU & Drawer in Royal Ivory Colour</div>
+						<div className='lockerText'>{this.state.skuData.shortDescription}</div>
 					</div>
-					
 					<div className='cartofferprice-wrap'>
 					<div className='PriceofferCart'>
 					   <div className='divpriceOffer' id="topdiv2">
@@ -297,31 +299,20 @@ class PdpComponent extends React.Component {
                   <Row>
                     <Col md={12} sm={12} xs={12}>
                       <Col md={6} sm={12} xs={12} className="product">
-                        <span className="text">Product ID: </span>
+                        { !isMobile() && <span className="text">Product ID: </span> }
                         <span className="text">
                           {this.state.skuData.partNumber}
                         </span>
                       </Col>
-                      <Col md={6} sm={12} xs={12} className="product-share">
-                        <div className="share">
-                          SHARE <div className="share-btn">{shareImg}</div>
-                          <SocialMedia
-                            productName={this.state.skuData.productName}
-                          />
-                        </div>
-                        <div className="wishListDiv">
-                          WISHLIST{' '}
-                          <Wishlist
-                            uniqueId={this.state.skuData.uniqueID}
-                            isInWishlistPro={wishlistArr.includes(
-                              this.state.skuData.uniqueID,
-                            )}
-                          />
-                        </div>
-                      </Col>
+                      { !isMobile() &&
+                        <WishlistAndShare skuData={this.state.skuData}/>
+                      }
                     </Col>
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
+                  { isMobile() &&
+                    <WishlistAndShare skuData={this.state.skuData}/>
+                  }
                   <ProductDefAttriutes
                     defAttributes={this.props.data.defAttributes}
                     selectedAttribute={this.state.skuData.defAttributes}
@@ -339,6 +330,24 @@ class PdpComponent extends React.Component {
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
                   />
+                  <Row>
+                      <Col md={6} sm={12} xs={12} className="product">
+                        { isMobile() && 
+                        <>
+                          <MobileDiscountAndPrice 
+                            skuData={this.state.skuData}
+                          />
+                          <AddToCart
+                          skuData={this.state.skuData}
+                          isMobile={true}
+                          pinCodeData={this.state.pincodeData}
+                          handleAddtocart={this.handleAddtocart.bind(this)}
+                        />
+                        </>
+                        }
+                      </Col>
+                  </Row>
+                  
                 </div>
               </Col>
             </Row>
@@ -348,16 +357,31 @@ class PdpComponent extends React.Component {
         )}
         <Grid>
           <Row>
-            <ProductFeatures productFeatureData={this.props.data} />
+          {!isMobile() ? (
+              <ProductFeatures productFeatureData={this.props.data} />
+            ) : (
+              <MobileProductFeatures productFeatureData={this.props.data}/> 
+            )
+          }
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12} className="purchase-guide-box">
-              <PurchaseGuide purchaseGuide={this.props.data} />
+            {!isMobile() ? (
+                <PurchaseGuide purchaseGuide={this.props.data} />
+              ) : (
+                <MobilePurchaseGuideGuide purchaseGuide={this.props.data}/> 
+              )
+            }
             </Col>
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12}>
-              <ProductDetail productDetail={this.props.data} />
+              {!isMobile() ? (
+                  <ProductDetail productDetail={this.props.data} />
+                ) : (
+                  <MobileProductDetail productDetail={this.props.data}/> 
+                )
+              }
             </Col>
           </Row>
           <Row>
