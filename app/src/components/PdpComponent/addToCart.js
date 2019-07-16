@@ -222,7 +222,7 @@ class addToCartComponent extends React.Component {
         {this.state.addToCartPopup}
         
         {isMobile() ?  
-          <label className='quantity-text'><b>Quantity</b></label>: ''}
+          <label className='quantity-text'><b>Quantity</b></label> : ''}
         <div className={isMobile() ? 'addCart quantity-box' : 'addCart'}>
           { !this.props.isMobile && (
           <>

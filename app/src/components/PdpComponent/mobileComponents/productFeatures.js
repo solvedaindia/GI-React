@@ -40,14 +40,11 @@ class productFeatures extends React.Component {
             <div className="PdpFeatures">
             <Accordion>
               <div className="featureVertical-tab">
-                <Row className="head">
+                <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="headingBox">
                       <h2 className="heading">Features</h2>
                       <span className="plusIcon">
-                        <img
-                          src={require('../../../../public/images/plusIconWhite.svg')}
-                        />
                       </span>
                     </div>
                   </Col>

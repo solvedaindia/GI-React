@@ -516,15 +516,12 @@
 
 
   .PdpFeatures{
-      padding:82px 0 45px 0 ;
       .featureVertical-tab{
           .headingBox{
             .heading{
-                font-size: 30px;
                 color:$black;
                 font-family: $font-bold;
                 margin: 0;
-                padding: 0 0 41px 0;
             }
           }
          
@@ -581,13 +578,11 @@
 
   .purchase-guide-box{
     .heading{
-        font-size: 30px;
         color:$black;
         margin:0;
         padding:0;
         font-weight:600;
         text-transform: capitalize;
-        padding: 48px 0 48px 0;
        }
         .tab-nav-container{
             width:100%;
@@ -658,16 +653,12 @@
 /* Product_details
 -----------------------------*/
 .product_details{
-    padding:87px 0 0px 0;
-    border-bottom: 1px solid $lightblueGrey;
     .heading{
-        font-size: 30px;
         color:$black;
         margin:0;
         padding:0;
         font-weight:600;
         text-transform: capitalize;
-        padding: 0 0 48px 0;
        }
  .product_img{
      display:flex;
@@ -709,15 +700,12 @@
 /* MoreKeyword
 -----------------------*/
 .moreKeyword{
-    padding:100px 0 0 0;
   .heading{
-    font-size: 30px;
     color:$black;
     margin:0;
     padding:0;
     font-weight:600;
     text-transform: capitalize;
-    padding: 0 0 51px 0;
     text-align: center;
   }
 
@@ -732,7 +720,6 @@
       padding: 10px 20px;
       border-radius: 20px;
       margin-right: 1%;
-      min-width: 188px;
       margin-bottom:15px; 
     }
 }
@@ -1199,14 +1186,44 @@
     */
     @media screen and (min-width: 768px){
         .product_details{
+            padding:87px 0 0px 0;
+            border-bottom: 1px solid $lightblueGrey;
             .product_description{
                 .tabcontent{
                     padding: 30px 49px;
                 }
+            }
+            .heading{
+                font-size: 30px;
+                padding: 0 0 48px 0;
             } 
         } 
 
+        .moreKeyword{
+            padding:100px 0 0 0;
+            .heading{
+                padding: 0 0 51px 0;
+                font-size: 30px;
+            }
+            .keywordsList{
+                .list{
+                    min-width: 188px;
+                }
+            } 
+        }
         .galleryArea{
+            .PdpFeatures{
+                padding:82px 0 45px 0 ;
+                .featureVertical-tab{
+                    .headingBox{
+                        .heading{
+                            font-size: 30px;
+                            padding: 0 0 41px 0;
+                        }
+                    }
+                }  
+            }
+
             .GallerytextBox{
                 .pincode{
                     width:55%;
@@ -1255,6 +1272,10 @@
             }
 
             .purchase-guide-box{
+                .heading{
+                    font-size: 30px;
+                    padding: 48px 0 48px 0;
+                }
                 .tab-nav-container{
                     ul{ 
                         li{
@@ -1300,14 +1321,72 @@
   */
   @media screen and (max-width: 767px){
     .product_details{
+        padding: 10px 0 0px 0;
+        position: relative;
         .product_description{
             .tabcontent{
                 padding: 30px 15px;
             }
         } 
+        .heading{
+            font-size: 18px;
+            padding:0 0 15px 0;
+        }
+        .plusIcon{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background: url('../../images/plusIcon.svg');
+            height: 20px;
+            width: 20px;
+            right: 15px;
+        }
+        &.active{
+            .plusIcon{
+                background:url('../../images/substract.svg');
+            }
+        }
     } 
-
+    .moreKeyword{
+        padding:10px 0 0 0;
+        .heading{
+            padding: 15px 0 20px 0;
+            font-size: 16px;
+        }
+        .keywordsList{
+            .list{
+                min-width:105px;
+                font-size: 11px;
+            }
+        } 
+    }
     .galleryArea{
+        .PdpFeatures{
+            padding:30px 0 10px 0 ;
+            .featureVertical-tab{
+                .headingBox{
+                    position: relative;
+                    .heading{
+                        font-size: 18px;
+                        padding:0 0 15px 0;
+                    }
+                    .plusIcon{
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        background: url('../../images/plusIcon.svg');
+                        height: 20px;
+                        width: 20px;
+                    }
+                }
+                &.active{
+                    .plusIcon{
+                        background:url('../../images/substract.svg'); 
+                    }
+                }
+            }
+              
+        }
         .GallerytextBox{
             font-size: 12px;
             .add-to-cart-floater{
@@ -1347,6 +1426,9 @@
                         line-height: 12px;   
                         }   
                    }
+                .quantity-text{
+                    display: none;
+                }
             }
             .addCart.quantity-box{
                 .btn:last-child{
@@ -1401,6 +1483,11 @@
         }
 
         .purchase-guide-box{
+            position: relative;
+            .heading{
+                font-size: 18px;
+                padding:0 0 15px 0;
+            }
             .tab-nav-container{
                 ul{ 
                     li{
@@ -1415,8 +1502,27 @@
                 .image-gallery{
                     padding: 0px 0px 20px 0px;
                 }
+            }
+            .plusIcon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                background: url('../../images/plusIcon.svg');
+                height: 20px;
+                width: 20px;
+                right: 15px;
+            }
+            .active{
+                .plusIcon{
+                    background:url('../../images/substract.svg');
+                }
             } 
         }
+        .similarProduct-Wrapper{
+            .slick-prev:before, .slick-next:before{
+                display: none;
+            }
+        } 
     } 
   }
 
