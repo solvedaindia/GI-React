@@ -5,6 +5,7 @@
     margin: $base*15 auto;
     .recoImg {
         width: 100%;
+        padding: $base*2;
     }
     .leftSide {
         width: 59%;
@@ -41,13 +42,59 @@
         width: 38%;
         margin-left: 2%; 
         background-color: $borderLight;
-        .rightThree {
-            padding: $base*2;
-        }
     }
     .leftSide,
     .rightSide {
         display: inline-block;
         vertical-align: top;
+    }
+    .leftOne,
+    .leftTwo,
+    .rightSide {
+        position: relative;
+        background-color: $borderLight;
+    }
+    .link {
+        .prodDetails {
+            display: none;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            height: 100%;
+            text-align: center;
+            .details{
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                .name {
+                    font-size: $base*2.25;
+                    color: $black;
+                }
+                .offerPrice{
+                    color: $ceruleanblue;
+                    font-size: $base*3;
+                    margin-right: $base;
+                }
+                .actualPrice{
+                    text-decoration: line-through;
+                    font-size: $base*2.25;
+                    color: $greylightColor;
+                }
+                .emiInfo,
+                .offerAmount {
+                    color: $reddishPink;
+                }
+            }
+            
+        }
+        &:hover {
+            .prodDetails {
+                display: block;
+                transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+                -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+            }
+        }
+        
     }
 }
