@@ -4,10 +4,10 @@ import  '../../../public/styles/wardrobes/warobes.scss'
 export default class WardrobeBanner extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="bannerkitchenss" src="http://multipelskleros.info/wp-content/uploads/2019/04/design-line-kitchens-banner.jpg" alt="rectangle"/>
-    const img2 = <img className="bannerkitchenss" src="http://multipelskleros.info/wp-content/uploads/2019/04/design-line-kitchens-banner.jpg" alt="rectangle"/>
-    const img3 = <img className="bannerkitchenss" src="http://multipelskleros.info/wp-content/uploads/2019/04/design-line-kitchens-banner.jpg" alt="rectangle"/>
-    
+    const img1 = <img className="bannerkitchenss" src={require('../../../public/images/WardrobeBanner.png')}  alt="rectangle"/>
+    const img2 = <img className="bannerkitchenss" src={require('../../../public/images/WardrobeBanner.png')} alt="rectangle"/>
+    const img3 = <img className="bannerkitchenss" src={require('../../../public/images/WardrobeBanner.png')} alt="rectangle"/>
+  
 
     this.state = {
       slides: [img1, img2, img3]
@@ -25,14 +25,14 @@ export default class WardrobeBanner extends Component {
 
   render() {
     const settings = {
-      dots: false,
+      dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 2
     };
     return (
-        <div>
+        <>
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
@@ -43,7 +43,7 @@ export default class WardrobeBanner extends Component {
           })}
         </Slider>
 
-        </div>
+        </>
     );
   }
 }
