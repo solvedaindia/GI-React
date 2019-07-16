@@ -92,9 +92,10 @@ class productDetail extends React.Component {
         {this.props.productDetail.productDetails.description.length > 0 && (
         <Accordion>
           <div className="product_details">
-            <Row className='head'>
+            <Row>
               <Col md={12} sm={12} xs={12}>
                 <h2 className="heading"> Product Details</h2>
+                <span className="plusIcon"></span>
               </Col>
             </Row>
             <Row className='body'>
