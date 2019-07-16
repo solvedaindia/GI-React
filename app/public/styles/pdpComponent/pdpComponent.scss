@@ -167,6 +167,26 @@
    }
 .gallaryWrapper{
       position: relative;
+      //.image-gallery-image img{width: 100% !important}
+      .image-gallery{
+          .image-gallery-content:not(.fullscreen){
+              .image-gallery-slides{
+               img{width:100% !important;}
+              }
+          }
+
+          .image-gallery-content:has(.fullscreen){
+            .image-gallery-slides{
+                .image-gallery-image{
+             img{width:100% !important;}
+            }
+            }
+        }
+          .image-gallery-thumbnail {
+            img{height:auto;}
+          }
+          
+      }
      .image-gallery-slides{ 
         max-height: 600px; 
       }
@@ -216,22 +236,26 @@
                 height: 45px;
                 padding:0;
                 font-size: unset;
+                &:before,&:after{
+                    transform: scale(0.7);
+                }
             }
             .image-gallery-image{
                 text-align: center;
                 min-height: 100vh;
                 max-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                // display: flex;
+                // align-items: center;
+                // justify-content: center;
+                overflow: hidden;
                 img{
                     transition: all .5s;
                     -moz-transition: all .5s;
                     -webkit-transition: all .5s;
                     -o-transition: all .5s;
                     -ms-transition: all .5s;
-                    max-width: 2500px;
-                    min-width: 780px;
+                    max-width: 3500px;
+                    min-width: 1280px;
                 }
             }
          }
@@ -316,8 +340,7 @@
         line-height: 12px;
         .text{
             color:$grey;
-            font-size: 12px;   
-            font-size: 12px;    
+            font-size: 12px;                 
             font-family: $font-medium;                   
         }      
     }
@@ -335,6 +358,7 @@
         color:$greyish;
         font-size:$base*2.25;
         line-height: $base*2.25;
+        font-family: $font-regular;
       }
     }
 
@@ -361,6 +385,8 @@
         }
     }
     .shippingCharge{
+        font-size: 12px;
+        font-family: $font-regular;
         .bold{
             font-family: $font-bold;
         }
@@ -606,7 +632,8 @@
         .active{
             border:none;
             label{
-                border:1px solid $black;
+                border:2px solid $black;
+                line-height: 10px;
                 color:$black;
             }            
         }
@@ -1017,9 +1044,10 @@
        }
     }
 
+    .slick-prev,.slick-next{min-width: 20px}
     .slick-prev{
         position: absolute;
-        right:50px;
+        right:40px;
         bottom: -80px;
         top:unset;       
         left: auto;
@@ -1277,7 +1305,7 @@
     
     .pdpstickyItem{
     .product{
-        width:50%;        
+        width:40%;        
         padding: 2px 0 7px 5%;
         float: left;       
         
@@ -1321,12 +1349,21 @@
                 color:$cerulean;
                 font-family: $font-bold;
                 font-size:28px;
+                padding: 0 13px 0 0;
                 .priceText{
                    margin:0;
                    color:$cerulean;
                    font-family: $font-bold;
                    font-size: $base*3.5;
                 }
+            }
+            .actualprice{
+                margin:0;
+                color: $grey;
+                font-size: 18px;
+                text-decoration: line-through;
+                text-decoration-color:$reddishPink;
+                font-family: $font-bold;
             }
             .priceno-discount{
                 font-size: 18px;
@@ -1339,8 +1376,11 @@
         .accessories-offer,
         .discount-off
         {
-           display: block;
-           float: left;
+        //    display: block;
+        //    float: left;
+        display: flex;
+        float: left;
+        align-items: center;
         }
         .accessories-offer{
             color:$reddishpink;
@@ -1366,4 +1406,26 @@
 }
 } 
 
-
+.zoominout{
+    position: fixed;
+    bottom: 71px;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    .zoomin{
+        margin-right:46px;
+    }
+    .zoom{
+        background:$colorwhite;
+        width: 30px;
+        height:30px;
+        border: none;
+        border-radius: 100%;
+        img{
+            width: 14px;
+        }
+    }
+}

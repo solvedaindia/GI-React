@@ -28,8 +28,8 @@ header {
         z-index: 5;
         list-style: none;        
         background-color:$colorwhite;
-        -webkit-transition: opacity 600ms, visibility 600ms;
-        transition: opacity 600ms, visibility 600ms;
+        -webkit-transition: opacity 200ms, visibility 200ms;
+        transition: opacity 200ms, visibility 200ms;
         -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
         -moz-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);

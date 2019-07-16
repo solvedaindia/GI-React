@@ -1,6 +1,9 @@
 @import '../variable';
-
+// .rightSide > li.user.icons{line-height: 68px;}
 .rightSide {
+    .user {
+        line-height: 68px;
+    }
     margin-bottom: 0;
     .icons {
         &:first-child{

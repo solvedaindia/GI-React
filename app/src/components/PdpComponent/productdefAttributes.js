@@ -94,9 +94,12 @@ class productDefAttribute extends React.Component {
 										boxClass = 'boxClass';
 									}
 									let selectedCircle = '';
+									let isActiveBox = '';
 
 									if (checkedType && !isRadio) {
 										selectedCircle = 'selectedCircle';
+									} else if(checkedType === true) {
+										isActiveBox = 'active';
 									}
 									radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index, isRadio, this.props.selectedAttribute[i].values[0].name)}{name}</label>
 									let isDisabled = '';
@@ -105,7 +108,7 @@ class productDefAttribute extends React.Component {
 										isDisabled = 'disabled-attr';
 									}
 									return (
-										<li className={`attributeList ${boxClass} ${isDisabled}`} key={index}>
+										<li className={`attributeList ${boxClass} ${isActiveBox} ${isDisabled}`} key={index}>
 											{radioButtonHtml}
 										</li>
 									);

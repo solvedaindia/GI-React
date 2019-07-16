@@ -5,6 +5,8 @@ import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import { imagePrefix } from '../../../public/constants/constants';
 
+import Zoomin from '../../components/SVGs/zoomIn.svg';
+import Zoomout from '../../components/SVGs/zoomOut.svg';
 
 class productImagesAndVideos extends React.Component {
   constructor() {
@@ -31,6 +33,7 @@ class productImagesAndVideos extends React.Component {
     this.hideThumnailsOnFullScreen(
       fullscreenButton[0].classList.contains('active'),
     );
+    // this.resetImage();
   }
 
   async hideThumnailsOnFullScreen(isFullScreen) {
@@ -46,11 +49,12 @@ class productImagesAndVideos extends React.Component {
       this.setState({
         activeData: true,
       });
+      
     } else {
       this.isZoomScreen = false;
       thumbnailsContainer[0].classList.remove('dataNotActive');
       thumbnailsContainer[0].classList.add('active');
-
+      
       this.setState({
         activeData: false,
       });
@@ -84,6 +88,7 @@ class productImagesAndVideos extends React.Component {
     });
   };
 
+
   /* render video player */
   renderVideoPlayer(event) {
     return (
@@ -93,6 +98,23 @@ class productImagesAndVideos extends React.Component {
         </Player>
       </div>
     );
+  }
+
+  resetImage() { 
+    const slides = document.getElementsByClassName('image-gallery-slide');
+    console.log('slides',slides);
+    for (let i = 0; i < slides.length; i++) {
+      //alert(slides[i].classList.contains('center'));
+      //alert(slides[i].children[0].classList.contains('image-gallery-image'));
+      //&& slides[i].children[0].classList.contains('image-gallery-image')
+      //if (slides[i].classList.contains('center')
+      //) {
+        //console.log('datavalue', currWidth);
+        const currWidth = slides[i].children[0].children[0].clientWidth;
+        slides[i].children[0].children[0].style.width = `${currWidth + 0}px`;
+      //}
+    }
+
   }
 
   zoomin() {
@@ -111,10 +133,7 @@ class productImagesAndVideos extends React.Component {
   zoomout() {
     const slides = document.getElementsByClassName('image-gallery-slide');
     for (let i = 0; i < slides.length; i++) {
-      if (
-        slides[i].classList.contains('center') &&
-        slides[i].children[0].classList.contains('image-gallery-image')
-      ) {
+      if (slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
         const currWidth = slides[i].children[0].children[0].clientWidth;
         if (currWidth == 100) return false;
         slides[i].children[0].children[0].style.width = `${currWidth - 300}px`;
@@ -147,6 +166,18 @@ class productImagesAndVideos extends React.Component {
     }
   }
 
+  renderZoomButtons = props => { 
+    if (this.isZoomScreen) {
+      return  <div className="zoominout" id="zoomdiv">
+      <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
+      <button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
+      </div>;
+    } else {
+      return;
+    }
+  
+  };
+
   render() {
 	  this.filterImagesAndVideos(this.props.skuData.attachments, this.isZoomScreen);
 	  let featuredClass = 'hide';
@@ -176,14 +207,19 @@ class productImagesAndVideos extends React.Component {
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
           lazyLoad={true}
+          renderCustomControls={this.renderZoomButtons}
         />
         
-
-        {/* <button onClick={this.zoomin}>+</button>
-				<button onClick={this.zoomout}>-</button> */}
+       {/* <div className="zoominout" id="zoomdiv">
+        <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
+				<button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
+        </div> */}
       </div>
     );
   }
 }
+// var node=document.querySelector('.image-gallery-fullscreen-button');
+// var elezoom =document.getElementById('zoomdiv');
+// node.parentNode.insertBefore(elezoom, node.nextSibling);
 
 export default productImagesAndVideos;

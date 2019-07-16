@@ -6,7 +6,7 @@ const price = props => {
       priceId = 'sticyPriceId';
   }
   return(<div className="price" id={priceId}>
-    {props.priceData.offerPrice && (      
+    {props.priceData.offerPrice >= 0 && (      
         <h2 className="offerprice text">&#8377;
         {props.priceData.offerPrice
           .toString()
