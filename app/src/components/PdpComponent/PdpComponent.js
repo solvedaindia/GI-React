@@ -23,7 +23,6 @@ import '../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = <img src={require('../../../public/images/share.svg')} />;
 
 
-
 class PdpComponent extends React.Component {
   constructor() {
     super();
@@ -49,30 +48,55 @@ class PdpComponent extends React.Component {
     } else {
       skuId = this.props.matchParams.skuId;
     }
-
-    this.props.data.skuData.map(skuLevelData => {
-      if (skuId === skuLevelData.uniqueID) {
-        this.getActualResolvedData(this.props.data.skuData, skuLevelData);
-      }
-    });
+    //alert('Hey====>>>');
+    console.log('dataValue', this.props.data);
+    if(this.props.data.type === 'product') {
+      this.props.data.skuData.map(skuLevelData => {
+        if (skuId === skuLevelData.uniqueID) {
+          this.getActualResolvedData(this.props.data.skuData, skuLevelData, this.props.data.type);
+        }
+      });
+    } else if(this.props.data.type === 'kit') {
+      this.props.data.kitData.map(skuLevelData => {
+        if (skuId === skuLevelData.uniqueID) {
+          console.log('skuLevelData==', skuLevelData);
+          this.getActualResolvedData(this.props.data.kitData, skuLevelData, this.props.data.type);
+        }
+      });
+    }
   }
 
   /* get actual resolve data  */
-  getActualResolvedData(data, resolvedSkuData) {
-    const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
+  getActualResolvedData(data, resolvedSkuData, type) {
     const skuDataArr = [];
-    data.map(skuLevelData => {
-      skuLevelData.defAttributes.map(attributeValue => {
-        if (selectedValue === attributeValue.values[0].name) {
-          skuDataArr.push(skuLevelData);
-        }
+    if (type === 'product') {
+      const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
+      data.map(skuLevelData => {
+        skuLevelData.defAttributes.map(attributeValue => {
+          if (selectedValue === attributeValue.values[0].name) {
+            skuDataArr.push(skuLevelData);
+          }
+        });
       });
-    });
+    } else {
+      const selectedValue = resolvedSkuData.swatchAttributes[0].values[0].name;
+      console.log('selectedValue', selectedValue);
+      data.map(skuLevelData => {
+        skuLevelData.swatchAttributes.map(attributeValue => {
+          if (selectedValue === attributeValue.values[0].name) {
+            skuDataArr.push(skuLevelData);
+          }
+        });
+      });
+    }
+
 
     const defaultPincodeData = {
       pincodeServiceable: null,
     };
 
+    console.log('skuDataArr=>', skuDataArr);
+    console.log('skuDataArr=>1', resolvedSkuData);
     this.setState({
       selectedSku: skuDataArr,
       isLoading: false,
@@ -237,6 +261,15 @@ class PdpComponent extends React.Component {
     const { isLoading } = this.state;
     const wishlistArr = getOnlyWishlistUniqueIds();
     const isAddToCart = appCookie.get('isPDPAddToCart');
+    console.log('dataValue1', this.props.data);
+    let attrData;
+
+    if (this.props.data.type === 'product') {
+      attrData = this.props.data.defAttributes;
+    } else {
+      attrData = this.props.data.swatchAttibutes;
+    }
+
     return (
 
       <>
@@ -323,14 +356,14 @@ class PdpComponent extends React.Component {
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
                   <ProductDefAttriutes
-                    defAttributes={this.props.data.defAttributes}
+                    defAttributes={attrData}
                     selectedAttribute={this.state.skuData.defAttributes}
                     allselectedData={this.state.selectedSku}
                     handleOptionData={this.handleSwatches.bind(this)}
                   />
                   <ProductInfo
                     productData={this.state.skuData}
-                    defAttributes={this.props.data.defAttributes}
+                    defAttributes={attrData}
                     pinCodeData={this.state.pincodeData}
                   />
                   <AddToCart
@@ -347,7 +380,7 @@ class PdpComponent extends React.Component {
           <div />
         )}
         <Grid>
-          <Row>
+          {/* <Row>
             <ProductFeatures productFeatureData={this.props.data} />
           </Row>
           <Row>
@@ -362,7 +395,7 @@ class PdpComponent extends React.Component {
           </Row>
           <Row>
             <ProductKeywords productKeywords={this.props.data} />
-          </Row>
+          </Row> */}
           <Row>
             {!isLoading ? (
               <SimilarCombosProducts
