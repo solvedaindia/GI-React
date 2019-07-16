@@ -170,6 +170,7 @@ export default class App extends React.Component {
         ) : (
           <HeaderContainer />
         )}
+        
         {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
