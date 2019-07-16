@@ -232,9 +232,6 @@
             .wishlistBtn {
                 border: none;
                 background: none;
-                img{
-                    width: 17px;
-                }
             }
             .user {
                 opacity: 0;
@@ -248,10 +245,6 @@
             position: relative;
             .share-btn{
                 display: inline;
-                img{
-                    width:17px;
-                    height: 17px;
-                }
             }
             .social-icon-share{
                 visibility: hidden;
@@ -288,12 +281,10 @@
             }
         }
     }
-    .product{
-        padding:0 0 5px 0px;      
+    .product{    
         font-weight: 600; 
         .text{
-            color:$grey;
-            font-size: 12px;                 
+            color:$grey;                
         }      
     }
 
@@ -310,8 +301,6 @@
     .price{
         font-family: $font-bold;
         font-weight: 600;
-        display: flex; 
-        flex-wrap: wrap;
        .text{
         margin:0;
         display: inline-flex;
@@ -336,7 +325,6 @@
     }
     .accessories-offer{
        color:$reddishPink;
-       padding: 17px 0 13px 12px;
        .text{
            display:inline-block;
            margin: 0 5px 0 0;
@@ -344,8 +332,6 @@
        .offerbg{
            background: $reddishPink;
            border-radius: 50%;
-           width: 22px;
-           height: 22px;
            color:$colorwhite;
            text-align: center;
        }
@@ -476,7 +462,6 @@
       
 
     .addCart{
-        margin:23px 0 0 0;
         .btn,.form-control{
             float: left;
             background:transparent;
@@ -497,7 +482,6 @@
             background:$black;
             border:1px solid $black;
             color:$colorwhite;
-            width:60%;
             font-family: $font-regular;
         }
         .notifybtn{
@@ -1228,6 +1212,46 @@
                     width:55%;
                     float:left;
                 }
+                .addCart{
+                    margin:23px 0 0 0;
+                    .addcartbtn{
+                        width:60%;
+                    }
+                }
+                .accessories-offer{
+                    padding: 17px 0 13px 12px;
+                    .offerbg{
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+                .price{
+                    display: flex; 
+                    flex-wrap: wrap;
+                }
+                .product{
+                    padding:0 0 5px 0px;   
+                    .text{
+                        font-size: 12px;    
+                        }
+                   }
+                   .product-share{
+                    .wishListDiv{
+                        .wishlistBtn{
+                            img{
+                                width: 17px;
+                            }
+                        }
+                    }
+                    .share{
+                        .share-btn{
+                            img{
+                                width: 17px;
+                                height: 17px;;
+                            }
+                        }
+                    } 
+                   } 
             }
 
             .purchase-guide-box{
@@ -1285,16 +1309,95 @@
 
     .galleryArea{
         .GallerytextBox{
+            font-size: 12px;
+            .add-to-cart-floater{
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                z-index: 911;
+                
+                .addCart{
+                    width: 45%;
+                    float: left;
+                    .addcartbtn{
+                        width:100%;
+                    }
+                }   
+                .accessories-offer{
+                    float: left;
+                    margin: 9px 5px 0px 20px;
+                    .offerbg{
+                        width: 32px;
+                        height: 32px;
+                        padding: 3px;
+                    }
+                }
+                .price{
+                    .offerprice{
+                       h2{
+                           margin:15px 0px 2px 5px;
+                           font-size: 20px;
+                       } 
+                    }
+                }
+                .product{
+                    padding:0px;  
+                    .text{
+                        font-size: 11px;
+                        line-height: 12px;   
+                        }   
+                   }
+            }
+            .addCart.quantity-box{
+                .btn:last-child{
+                    border-right: 1px solid $grey;
+                }
+            }
             .pincode{
                 width: 100%;
             }
-            .price{
-                .offerprice{
-                   h2{
-                       margin-top: 0px;
-                   } 
+                        
+            .product-price-detail{
+                width: 55%;
+                float: left;
+                min-height: 52px;
+                background: $greybg;
+            }  
+            .product-sku{
+                padding: 0px 0px 6px 0px;
+                font-size: 11px;
+                color: $grey;
+            }
+            
+            .wishlist-share{
+                width: 100%;
+                float: left;
+                padding: 10px 0px;
+                border-top: 1px solid $lightGrey;
+                margin: 10px 0px;
+                border-bottom: 1px solid $lightGrey;
+            }
+            .product-share{
+                .wishListDiv{
+                    .wishlistBtn{
+                        img{
+                            width: 20px;
+                        }
+                    }
                 }
-            } 
+                .share{
+                    .share-btn{
+                        img{
+                            width: 20px;
+                            height: 20px;;
+                        }
+                    }
+                } 
+               } 
+            .quantity-text{
+                font-size: 12px;
+                margin-top: 10px;
+            }
         }
 
         .purchase-guide-box{
