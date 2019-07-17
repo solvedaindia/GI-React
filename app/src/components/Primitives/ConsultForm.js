@@ -167,7 +167,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
-                      <select name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control">
+                      <select name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
                         <option value='null'>Select an option</option>
                          {this.createSelectItems()}
                         
@@ -181,7 +181,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="number">Mobile Number</label>
-                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="mobileNumber" name="mobileNumber" type="number" required/>
+                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="mobileNumber" name="mobileNumber" required/>
                     </div>
                   </div>
                 </div>

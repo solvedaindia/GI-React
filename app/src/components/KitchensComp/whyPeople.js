@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/kitchens/kitchens.scss'
-
 
 export default class WhyPeopleLove extends Component {
   constructor(props) {
@@ -33,7 +31,8 @@ export default class WhyPeopleLove extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+     
     };
     return (
         <div>

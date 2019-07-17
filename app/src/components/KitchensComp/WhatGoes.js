@@ -25,7 +25,7 @@ export default class WhatGoes extends Component {
   }
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -33,15 +33,15 @@ export default class WhatGoes extends Component {
     };
     return (
       <div>
-        <h2 className="Browse-Lookbook-by-T">Browse Lookbook by Theme</h2>
-        
+        <h1 className="What-goes-into-a-Godr">What goes into a Godrej Kitchen</h1>
+
         <Slider {...settings}>
           {this.state.slides.map(function(slide) {
-            return (
-              <div key={slide}>
-                <h3>{slide}</h3>
-              </div>
-            );
+          return (
+          <div key={slide}>
+            <h3>{slide}</h3>
+          </div>
+          );
           })}
         </Slider>
       </div>

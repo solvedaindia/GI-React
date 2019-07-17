@@ -3,18 +3,61 @@
 
 
   
+.Kitchen-1{
+  width: 100%;
+  background-color: #ffffff;
 
-.Kitchen-1 {
-    width: 100%;
-    height: 7490px;
-    background-color: #ffffff;
+  .kichenLayoutbanner{
+    width:100%;
+    background-color: #00b5a4;
+    .textBox,.imgBox{
+      float: left;
+      .Image-gallery {
+        // width: 415px;
+        height: 98px;
+        font-family: CeraGodrejInterio;
+        font-size: 42px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.17;
+        letter-spacing: normal;
+        color: #ffffff;
+        .btn-bookBlog{
+          font-size: 14px;
+          color:white;
+          font-family: $font-medium;
+          background-color: blue
+          }
+      }
+      
+    }
+    .textBox{
+      width:40%;
+      padding:60px 0;
+      text-align: center;
+     
+    }
+    .imgBox{
+      width:60%;
+      .kichenBlog{
+        width:100%;
+      }
+    }
   }
+}
+  .WardrowsBefits{
+    width:56%;
+    margin:0 auto;
+  }
+
+
   .Rectangle {
     width: 100%;
     height: auto;
     background-image: linear-gradient(276deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
   }
-  .container {
+  .containerKitchen {
     position: relative;
     text-align: center;
     color: white;
@@ -26,7 +69,6 @@
     background-color: #070707;
   }
   .header {
-    width: 411px;
     height: 60px;
     font-family: CeraGodrejInterio;
     font-size: 56px;
@@ -43,13 +85,10 @@
     color: #f9f9f9;
   }
   .types-kitchens {
-    max-width: 100%;
     height: auto;
     object-fit: contain;
   }
   .Types-of-Modular-Kit {
-    width: 371px;
-    height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
     font-weight: 500;
@@ -84,7 +123,7 @@
   }
 
   .-easy-steps-to-your {
-    width: 497px;
+    // width: 497px;
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
@@ -140,7 +179,7 @@
 }
 .stepwizard {
     display: table;
-    width: 50%;
+    width: 100%;
     position: relative;
 }
 .stepwizard-step button[disabled] {
@@ -179,27 +218,14 @@
   background-color: #026dc6;
 }
 
-.Image-gallery {
-  width: 415px;
-  height: 98px;
-  font-family: CeraGodrejInterio;
-  font-size: 42px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.17;
-  letter-spacing: normal;
-  color: #ffffff;
-}
 
-.Image-gallery .text-style-1 {
-  font-weight: normal;
-}
+
+
 .What-goes-into-a-Godr {
   height: 36px;
   font-family: CeraGodrejInterio;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -230,7 +256,7 @@ react-slideshow-container {
   object-fit: contain;
 }
 .Name-Copy {
-  width: 288px;
+  // width: 288px;
   height: 22px;
   font-family: CeraGodrejInterio;
   font-size: 20px;
@@ -244,8 +270,8 @@ react-slideshow-container {
 }
 
 .Rectangle-Copy-4 {
-  // margin-bottom: 80px;
-  width: 540px;
+  margin-bottom: 80px;
+  // width: 540px;
   height: 450px;
   background-color: #2e93c2;
   
@@ -275,7 +301,8 @@ react-slideshow-container {
   color: #ffffff;
 }
 .ParagraphSmall {
-  width: 297px;
+  margin-left: 266px;
+  // width: 297px;
   height: 104px;
   font-family: CeraGodrejInterio;
   font-size: 14px;
@@ -287,9 +314,8 @@ react-slideshow-container {
   color: #ffffff;
 }
 .Blacks {
-  margin-right: 50px;
-  // width: 1440px;
-  height: 600px;
+ 
+  height: auto;
   background-color: rgb(0, 204, 255);
 }
 .Group-60 {
@@ -311,25 +337,25 @@ react-slideshow-container {
   background-color:blue
 }
 .kitchenhallsize {
-  width: 358px;
+  width: 30%;
   height: 244px;
   object-fit: contain;
   text-align: center;
 
 }
-.Paragraphhall {
-  width: 555px;
-  height: 43px;
-  font-family: CeraGodrejInterio;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color:black
-}
+// .Paragraphhall {
+//   // width: 555px;
+//   height: 43px;
+//   font-family: CeraGodrejInterio;
+//   font-size: 16px;
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+//   line-height: normal;
+//   letter-spacing: normal;
+//   text-align: center;
+//   color:black
+// }
 .Kitchen-Hall-Of-Fame {
   // width: 297px;
   height: 36px;
@@ -344,10 +370,27 @@ react-slideshow-container {
   color: #000000;
 }
 .crousdiv {
-  width: 458px;
+  // width: 458px;
   height: 46px;
   background-color: var(--ice-blue);
 }
+.ParagraphStepper {
+  // width: 515px;
+  height: 108px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+
+// .Backgrounding {
+//   width: 100%;
+//   height: 300px;
+//   background-color: #00b5a4;
+// }
 .Paragraph-Copy-13 {
   width: 140px;
   height: 22px;
@@ -360,9 +403,69 @@ react-slideshow-container {
   letter-spacing: normal;
   color: var(--greyish-brown);
 }
+.wardroBanner{
+  position: relative;
+  overflow: hidden;
+  .wardroBannertext{
+    position:absolute;
+    top:30%;
+    left:6%;
+    .heading{
+      font-size: 56px;
+      color:#ffffff;
+      margin:0 0 10px 0;
+      line-height: 56px;
+    }
+    .subText{
+      font-size: 18px;
+      color:#ffffff;
+      font-family: $font-regular;
+      margin:0 0 28px 0;
+    }
+    .btn-book{
+      padding:13px 56px;
+      font-size: 14px;
+      color:#070707;
+      font-family: $font-medium;
+    }
+  }
+  .slick-dots{
+    bottom: 90px;
+    button{
+      width:10px;
+      height: 10px;
+      &:before{
+        width:10px;
+        height: 10px;
+      }
+    }
+    li{
+      width: 12px;
+      height:12px;
+      background:#807a7a;
+      button:before{
+        color:#807a7a;
+        width: 12px;
+        height:12px;
+      }
+    }
+    li.slick-active{
+      background:#ffffff;
+      button:before{
+        color:#ffffff;
+      }
+    }
+  }
+  
+  .slick-prev{
+    left:1%;
+  }
+  .slick-next{
+    right:1%;
+  }
+}
 
 .CrousParagraph {
-  width: 900px;
   height: 103px;
   font-family: CeraGodrejInterio;
   font-size: 28px;
@@ -375,7 +478,7 @@ react-slideshow-container {
   color: #000000;
 }
 .crousHead {
-  width: 437px;
+  // width: 437px;
   height: 36px;
   font-family: CeraGodrejInterio;
   font-size: 30px;
@@ -445,7 +548,7 @@ react-slideshow-container {
   color: #000000;
 }
 .Answer {
-  width: 534px;
+  // width: 534px;
   height: 17px;
   font-family: CeraGodrejInterio;
   font-size: 14px;

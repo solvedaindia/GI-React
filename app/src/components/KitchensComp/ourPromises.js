@@ -6,13 +6,12 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
-import '../../../public/styles/homePageStatic.scss';
 
-class EspotContent extends React.Component {
+class OurPromises extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: this.props.espotName,
+      espotName: "GI_Homepage_Our_Promises",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -57,4 +56,4 @@ class EspotContent extends React.Component {
   }
 }
 
-export default EspotContent;
+export default OurPromises;

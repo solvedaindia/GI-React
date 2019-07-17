@@ -60,43 +60,51 @@ index: 0
               </div>
 
               <div className="container">
-                <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
-                <div className="container">
+                <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>                
                   <div className="row">
-                    <div className="col-sm-2">
+                    <div className="col-md-12">
+                    <div className="WardrowsBefits clearfix">
+                    <div className="col-sm-3">
                       <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
                       <h3 className="titlesss">modular</h3>
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm-3">
                       <img className="Combined-Shape" src={require('../../../public/images/ic2.png')} alt="rectangle" />
                       <h3 className="titlesss">modular</h3>
 
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm-3">
                       <img className="Combined-Shape" src={require('../../../public/images/ic3.png')} alt="rectangle" />
                       <h3 className="titlesss">modular</h3>
 
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm-3">
                       <img className="Combined-Shape" src={require('../../../public/images/ic4.png')} alt="rectangle" />
                       <h3 className="titlesss">modular</h3>
 
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-2">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
-
                     </div>
-                    <div className="col-sm-2">
+                    </div>
+
+                  </div>
+
+                  <div className="row">
+                  <div className="col-md-12">
+                    <div className="WardrowsBefits column2 clearfix">
+                      <div className="col-sm-6">
+                        <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
+                        <h3 className="titlesss">modular</h3>
+
+                      </div>
+                      <div className="col-sm-6">
                       <img className="Combined-Shape" src={require('../../../public/images/ic6.png')} alt="rectangle" />
                       <h3 className="titlesss">modular</h3>
 
                     </div>
-
+                    </div>
                   </div>
-                </div>
+                  </div>
+               
               </div>
               <br />
               <br />
@@ -259,29 +267,39 @@ index: 0
                 </div>
 
               </div>
-              <div className="aboutgodrej">
-                <h className="About-Godrej-Interio ">Modular Wardrobes</h><br /><br />
-                <p1 className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
-                  manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
-                  diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
+            
+              <div className="modularWardrobes">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                  <h3 className="heading">Modular Wardrobes</h3>
+                  <p className="subText">Godrej Interio is India’s largest furniture brand. From
+                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
+                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
 
-                  We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
-                  designed, fun and functional furniture solutions to you.<br />
+                    We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
+                    designed, fun and functional furniture solutions to you.<br />
 
-                  True to the Godrej mission to conserve the environment, we design products, set up processes and use
-                  raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
+                    True to the Godrej mission to conserve the environment, we design products, set up processes and use
+                    raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
 
-                  We offer our customers home and office furniture, along with solutions for laboratories, hospitals
-                  and healthcare establishments, education and training institutes, shipyards<br /> and navy,
-                  auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
-                  and through 800 dealer outlets.<br />
+                    We offer our customers home and office furniture, along with solutions for laboratories, hospitals
+                    and healthcare establishments, education and training institutes, shipyards<br /> and navy,
+                    auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
+                    and through 800 dealer outlets.<br />
 
-                  Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
-                  India’s largest engineering and consumer product groups.</p1>
-                <br /><br /><br /><br /><br /><br /><br /><br />
-                <button className="Read-More">Read More</button>
+                    Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
+                    India’s largest engineering and consumer product groups.</p>
+                  
+                  <button className="Read-More">Read More</button>
+                  </div>
+                </div>
+               
+              </div>
               </div>
 
+             
+              
               <div></div>
             </div>
           
