@@ -34,6 +34,9 @@ class UserAccInfo extends React.Component {
 
   resetLoginValues() {
     console.log('resetLoginValues');
+    if (this.props.resetCallbackPro) {
+      this.props.resetCallbackPro();
+    }
     this.setState({
       showLoginRegisterMain: false,
       showForgotPassword: false,
@@ -139,12 +142,12 @@ class UserAccInfo extends React.Component {
         ));
     } else {
       this.setState({
-        userType: 
+        userType:
           <li className="listItemUnSelected">
             <a className="dropDown">Hello Guest!</a>
           </li>
         ,
-        loginStatus: 
+        loginStatus:
           <a
             className="dropDown"
             onClick={this.onLoginRegisterClick.bind(this)}
@@ -152,9 +155,9 @@ class UserAccInfo extends React.Component {
             {' '}
             Login/Register
           </a>
-        
+
       });
-      
+
     }
   }
 

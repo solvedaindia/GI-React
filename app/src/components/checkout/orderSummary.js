@@ -10,6 +10,7 @@ import {
 import appCookie from '../../utils/cookie';
 import axios from 'axios';
 import EMI from '../../../public/images/emi.svg';
+import {isMobile} from '../../utils/utilityManager';
 export class OrderSummaryComponent extends React.Component {
     constructor(props){
         super(props);
@@ -40,7 +41,9 @@ export class OrderSummaryComponent extends React.Component {
         this.callEMI()
       }
       return (
-            <div className='col-md-4 col-sm-12 col-xs-12 orderSummary'>
+        <>
+        {!isMobile() ? (<div className='col-md-4 col-sm-12 col-xs-12 orderSummary'>
+              
               <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
               <div className='listRow clearfix'>
                 <div className='lefttext-box'>Cart Total</div>
@@ -82,7 +85,9 @@ export class OrderSummaryComponent extends React.Component {
               <div className="SecureCheckout">
                 Secure Checkout
               </div>
-            </div>
+               
+            </div>): ''}
+            </>
       )
     }
 }
