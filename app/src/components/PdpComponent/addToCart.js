@@ -95,6 +95,9 @@ class addToCartComponent extends React.Component {
       });
     } else {
       const isPDPAddToCart = appCookie.get('isPDPAddToCart');
+      const addedProductToCart = appCookie.get('isPDPAddToCart').split(',');
+      
+      
       let quantity = '1';
       if (!this.props.sticky) {
         quantity = document.getElementById('quantity').value;
@@ -119,10 +122,12 @@ class addToCartComponent extends React.Component {
             loading: false,
           });
 
-          if (isPDPAddToCart === 'false') {
-            appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
-            this.props.handleAddtocart(false);
+          if (isPDPAddToCart === '') {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
+          } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + ','+this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
           }
+          this.props.handleAddtocart(false);
         })
         .catch(error => {
           console.log('AddToCart Error---', error);

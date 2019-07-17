@@ -33,7 +33,7 @@ class PdpContainer extends React.Component {
         });
 
         if (appCookie.get('isPDPAddToCart') === null) {
-          appCookie.set('isPDPAddToCart', false, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
         }
       })
       .catch(error => {
@@ -63,12 +63,17 @@ class PdpContainer extends React.Component {
         {!this.state.pdpLoading &&
           !this.state.espotLoading && (
             <>
-              <PdpComponent
-                data={this.state.pdp.data}
-                matchParams={this.props.match.params}
-                espot={this.state.pdpEspot}
-                historyData={this.props.history}
-              />
+				{ Object.keys(this.state.pdp.data).length > 0 ? (
+					<PdpComponent
+						data={this.state.pdp.data}
+						matchParams={this.props.match.params}
+						espot={this.state.pdpEspot}
+						historyData={this.props.history}
+					/>
+					) : (
+						<div><b>Data Not Found</b></div>
+					)
+				}
             </>
           )}
       </div>

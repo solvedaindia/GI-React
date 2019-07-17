@@ -239,13 +239,20 @@ class PdpComponent extends React.Component {
   render() {
     const { isLoading } = this.state;
     const isAddToCart = appCookie.get('isPDPAddToCart');
+    let isSticky = false;
+    if (!isLoading && isAddToCart !== null) { 
+    	if(isAddToCart.split(',').indexOf(this.state.skuData.uniqueID) === -1) {
+        	isSticky = true;
+       	}
+    } else if(isAddToCart === null) {
+    	isSticky = true;
+    }
 
     return (
-
       <>
 			{!isLoading  &&
 			<>
-				{ isAddToCart !== 'true' &&			
+				{ isSticky === true &&			
 			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
 			    <div className='pdpstickyItem clearfix'>				   
 					<div className="product" id="topdiv1" style={{opacity: '0'}}>
@@ -264,7 +271,7 @@ class PdpComponent extends React.Component {
 					   <div className='divpriceOffer' id="topdiv2">
 							<Price priceData={this.state.skuData} sticky={true}/>
 							<div className="accessories-offer">							
-								<span><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories</span>
+								<span>{this.state.skuData.discount > 1 && <><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/></>}{this.state.skuData.promotions[0].promocode}</span>
 							</div>
 						</div>
 						<div className='addtoCart' id="topdiv3">

@@ -25,7 +25,6 @@ class productInfo extends React.Component {
   }
 
   render() {
-
     return (
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
@@ -38,13 +37,19 @@ class productInfo extends React.Component {
           </span>
         </div>
         }
-        { this.props.productData.promotions.length > 0 &&
+        
         <>
         <div className="accessories-offer">
           <div className="offerbg text"> % </div>
           <div className="discount-off text">
-            {this.props.productData.discount}% OFF & free accessories{' '}
+            { this.props.productData.discount > 1 &&
+              <>{this.props.productData.discount}% OFF </>
+            }
+            { this.props.productData.promotions.length > 0 &&
+            <>{this.props.productData.promotions[0].promocode}{' '}</>
+            }
           </div>
+          { this.props.productData.promotions.length > 0 &&
           <a
             className="text viewOffer"
             role="button"
@@ -52,19 +57,21 @@ class productInfo extends React.Component {
           >
             View Offer
           </a>
+          }
         </div>
+        { this.props.productData.promotions.length > 0 &&
         <div id="offers" className={this.state.isActive}>
           <ul className="cashoffer-wrapper">
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>
-                <h4 className="heading">{promotion.name} </h4>
+                <h4 className="heading">{promotion.name}</h4>
                 {promotion.description} <TermsAndCondition />
               </li>
             ))}
           </ul>
         </div>
-        </>
         }
+        </>
         {this.props.productData.emiData &&
           this.props.productData.offerPrice >= 1500 && (
           <div className="starting-emitext">

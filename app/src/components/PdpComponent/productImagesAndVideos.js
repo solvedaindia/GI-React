@@ -165,8 +165,7 @@ class productImagesAndVideos extends React.Component {
 	        </span>
 	        {this.props.skuData.ribbonText &&
             <span className="featured-text">{this.props.skuData.ribbonText}</span>
-			}
-          )
+			    }
         </div>
         
         <ImageGallery

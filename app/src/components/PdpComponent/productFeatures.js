@@ -29,6 +29,12 @@ class productFeatures extends React.Component {
   }
 
   render() {
+    let defaultImgPath;
+    let fullImagePath;
+    if (this.props.productFeatureData.productFeatures.length > 0) {
+      defaultImgPath = imagePrefix+this.props.productFeatureData.productFeatures[0].imagePath;
+    }
+    
     return (
       <>
         {this.props.productFeatureData.productFeatures.length > 0 && (
@@ -47,9 +53,10 @@ class productFeatures extends React.Component {
                     <div className="featureImgbox">
                       {this.props.productFeatureData.productFeatures.map(
                         (imagePath, index) => {
-                          const fullImagePath = `${imagePrefix}${
-                            imagePath.imagePath
-                          }`;
+                           fullImagePath = `${imagePrefix}${imagePath.imagePath}`;
+                           if(imagePath.imagePath === "") {
+                              fullImagePath = defaultImgPath;
+                           }
                           this.dataClass = '';
                           if (index > 0) {
                             this.dataClass = 'dataNotActive';

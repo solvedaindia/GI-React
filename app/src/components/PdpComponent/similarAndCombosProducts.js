@@ -32,12 +32,11 @@ class SimilarCombosProducts extends React.Component {
   getSimilarCombosProducts(props) {
     return props.map((data, index) => {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
-
       return (
         <div className="similarProducts" key={index}>
           <div className="productlist">
             <div className="imgBox">
-              <img className="imgfullwidth" src={imgUrl} alt="Img" />
+              <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}><img className="imgfullwidth" src={imgUrl} alt="Img" /></a>
             </div>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
@@ -60,10 +59,14 @@ class SimilarCombosProducts extends React.Component {
               </p>
               <p className="emi-text text">
                 <span className="free-accessories">
-                  EMI Starting from <span className="bold">{data.emiData}</span>
+                  {data.emiData &&
+                    <>EMI Starting from <span className="bold">{data.emiData}</span></>
+                  }
+                  
                 </span>
-                <span className="bold">{data.discount}% Off </span> on this
-                product
+                { data.discount > 1 &&
+                <><span className="bold">{data.discount}% Off </span> on this product</>
+                }
               </p>
             </div>
           </div>
