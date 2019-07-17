@@ -19,7 +19,7 @@ class TypesOFkitchens extends React.Component {
 
   render() {
     return (
-        <div>
+        <div className="container">
         
         <div className="row">
             <div className="col-md-6">
@@ -29,7 +29,7 @@ class TypesOFkitchens extends React.Component {
                       alt="rectangle"
                     />
                       <h4 className="Steel-Chef">Steel Chef</h4>
-                    <p1 className="ParagraphStepper">Visit the store closest to you  & Get a<br/> free design consultation for your dream<br/> kitchen from our expert designers</p1>
+                    <p className="Paragraph">Visit the store closest to you  & Get a<br/> free design consultation for your dream<br/> kitchen from our expert designers</p>
                    <br /><div><button className="buttonExp">Explore</button></div>
             </div>
             <div className="col-md-6">
@@ -38,7 +38,7 @@ class TypesOFkitchens extends React.Component {
                       src={require('../../../public/images/cup2.jpg')}
                       alt="rectangle"
                     /> <h4 className="Steel-Chef">Willow</h4>
-                    <p1 className="ParagraphStepper">Visit the store closest to you  & Get a<br/> free design consultation for your dream<br/> kitchen from our expert designers</p1>
+                    <p className="ParagraphStepper">Visit the store closest to you  & Get a<br/> free design consultation for your dream<br/> kitchen from our expert designers</p>
                     <br /><div><button className="buttonExp">Explore</button></div>
 
                 </div>
