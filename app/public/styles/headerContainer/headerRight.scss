@@ -1,9 +1,6 @@
 @import '../variable';
-// .rightSide > li.user.icons{line-height: 68px;}
+.rightSide > li.user.icons{line-height: 68px;}
 .rightSide {
-    .user {
-        line-height: 68px;
-    }
     margin-bottom: 0;
     .icons {
         &:first-child{
@@ -36,6 +33,13 @@
             align-items: center;
             justify-content: center;
             font-family: $font-bold;
+        }
+        .welcomeDropDown{
+            .userList{               
+                li{
+                    line-height: 10px;
+                }
+            }
         }
     }
 }

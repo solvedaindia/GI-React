@@ -59,7 +59,7 @@ class productDefAttribute extends React.Component {
 				return (
 					<div key={i}>
 						<div className='att-val-name'><span className="attributeName">{valueName}:</span>  <span className="attributeVal">{this.props.selectedAttribute[i].values[0].name}</span><span id={`ColorName${i}`}></span></div>
-						<ul className="clearfix">
+						<ul className="clearfix swatcheWrapper">
 							{
 								data.values.map((value, index) => {
 									let checkedType = false;
