@@ -44,7 +44,10 @@ class OrderSummery extends React.Component {
               <div className="leftText">Cart Total</div>
               <div className="rightText">₹{summeryData.netAmount}</div>
             </div>
-
+            <div className="summaryDetails clearfix">
+              <div className="leftText">Shipping</div>
+              <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
+            </div>
             <div className="summaryDetails clearfix">
               <div className="leftText">Product Discount</div>
               <div className="rightText">{summeryData.productDiscount === 0 ? null : '-' } ₹{summeryData.productDiscount}</div>
@@ -52,10 +55,6 @@ class OrderSummery extends React.Component {
             <div className="summaryDetails clearfix">
               <div className="leftText">Order Discount</div>
               <div className="rightText">-₹{summeryData.orderDiscount}</div>
-            </div>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Shipping</div>
-              <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
             </div>
             <div className="divider"></div>
             <div className="summaryDetails subTotaltext clearfix">
