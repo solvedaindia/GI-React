@@ -14,7 +14,11 @@ import { Step3Component } from './step3';
 import { OrderSummaryComponent } from './orderSummary'
 import loadable from 'loadable-components';
 import appCookie from '../../utils/cookie';
+import queryString from 'query-string';
 import apiManager from '../../utils/apiManager';
+import failPop from './failPop'
+import { Redirect } from 'react-router-dom'
+
 import {
   storeId,
   accessToken,
@@ -22,12 +26,16 @@ import {
   userLoginAPI,
   addressListAPI,
   userDataAPI,
-  UserVerifyAPI
+  UserVerifyAPI,
+  OrderSummaryAPI,
+  CreateCheckSumAPI
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
 import { blue } from 'ansi-colors';
+import { timeout } from 'q';
+import FailPop from './failPop';
 
 export class CheckoutComponent extends React.Component {
     constructor(props){
@@ -44,11 +52,25 @@ export class CheckoutComponent extends React.Component {
           showGift: false,
           loggedIn: false,
           addressList: null,
+          orderSummaryData: '',
+          ship_add: '',
+          pay: false,
+          BankID: '',
+          paymentMode: '',
+          failPop: false,
+          redirect: false
         }
     }
 
     componentDidMount() {
-        var coke = appCookie.get('isLoggedIn')
+        var parsed = queryString.parse(location.search);
+        if(parsed && parsed.status == "fail") {
+          this.setState({
+            failPop: true
+          })
+        }
+        var coke = appCookie.get('isLoggedIn');
+        this.callOrderSummaryAPI();
         console.log(coke, 'coke in did mount');
         if(coke == 'true') {
             this.callprofileAPI()
@@ -200,21 +222,107 @@ export class CheckoutComponent extends React.Component {
       })
     }
 
+    callOrderSummaryAPI = () => {
+      console.log(this.props.isLoggedIn, "logged in order summary")
+      let token = appCookie.get('accessToken');
+      axios.get(OrderSummaryAPI, {
+        headers: { store_id: storeId, access_token: token }
+      }).then(response => {
+        console.log(response, 'order Summary response');
+        if(!response.data.data.orderSummary.netAmount) {
+          this.setState({
+            redirect: true
+          })
+          return;
+        }
+        this.setState({
+          orderSummaryData: response.data.data.orderSummary
+        })
+      }).catch(error => {
+        console.log(error, "order summary error");
+      })
+    }
+
+    handleAddress = (address) => {
+      this.setState({
+        ship_add: address
+      })
+    }
+
+    initialBdpayment = (data) => {
+      var body = {
+        orderId: this.state.ship_add.orderId,
+        email: this.state.logon_by.includes('@') ? this.state.logon_by : '',
+        payMethodId: "BillDesk",
+        amount: this.state.orderSummaryData.netAmount,
+        billing_address_id: this.state.ship_add.billAddId,
+        callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
+        BankID: this.state.BankID,
+        paymentMode: this.state.paymentMode
+      };
+      if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+        body.BankID = '123'
+      }
+      let token = appCookie.get('accessToken');
+      axios.post(CreateCheckSumAPI, body, {
+        headers: { store_id: storeId, access_token: token }
+      }).then((response) => {
+        console.log(response, "checksum response")
+        var res = response.data.data.response;
+        var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=CREDIT`;
+        if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+          url = `${res.transactionUrl}&msg=${res.msg}`;;
+          //  axios.post(url, {}, {
+
+          //   }).then((redirect) => {
+          //     // window.location.assign(redirect.data);
+          //   }).catch((err) => {
+          //     console.log(err, "biildessk err")
+          //   })
+        }
+        window.location.assign(url)
+        
+      }).catch((err) => {
+        console.log(err, "checksum error")
+      })
+    }
+
+    enalblePay = (data) => {
+      this.setState({
+        pay: true,
+        BankID: data.BankID,
+        paymentMode: data.paymentMode
+      })
+    }
+
+    disablePay = () => {
+      this.setState({
+        pay: false
+      })
+    }
+
     handleStep = () => {
         if(this.state.step == 3) {
             return <Step3Component 
-                    back={this.handleChange} 
-                    backtoMobile={this.handleChangeMobile} />             
+                    back={this.handleChange}
+                    backtoMobile={this.handleChangeMobile} 
+                    address={this.state.ship_add}
+                    logonBy={this.state.logon_by}
+                    isLoggedIn={this.state.loggedIn}
+                    initialBdpayment={this.initialBdpayment}
+                    enalblePay={this.enalblePay}
+                    disablePay={this.disablePay} />
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
                     back={this.handleChange}
                     isLoggedIn={this.state.loggedIn} 
-                    logonBy={this.state.logon_by} />
+                    logonBy={this.state.logon_by} 
+                    handleAddress={this.handleAddress} />
         } else {
             return <Step1Component 
                     proceed={this.handleProceed}
-                    login={this.handleUserLogin.bind(this)} 
+                    login={this.handleUserLogin.bind(this)}
                     proceedToSecond={this.proceedToSecond}
                     logonBy={this.state.logon_by}
                     msg={this.state.message} />
@@ -227,6 +335,12 @@ export class CheckoutComponent extends React.Component {
         step: 2
       })
     } 
+
+    cancelFail = () => {
+      this.setState({
+        failPop: false
+      })
+    }
 
     handleProceed = () => {
       if(this.state.step == 1) {
@@ -242,6 +356,9 @@ export class CheckoutComponent extends React.Component {
     }
 
     render() {
+      if (this.state.redirect) {
+        return <Redirect to='/cart'/>;
+      }
       return (
         <div className='checkout'>
         <div className="container">
@@ -249,7 +366,7 @@ export class CheckoutComponent extends React.Component {
           <div className='col-md-8'>
             <h3 className='heading'>Checkout</h3>
           </div>
-
+          {this.state.failPop ? <FailPop cancelFail={this.cancelFail} /> : '' }
           <div className='col-md-4'>
             <div className='summaryHeading'>
               {/* <h4 className='headingOrder'>Order Summary</h4> */}
@@ -263,7 +380,11 @@ export class CheckoutComponent extends React.Component {
             <div className='row'>
               {this.handleStep()}
               {/* <div className="col-md-4"> */}
-                <OrderSummaryComponent isLoggedIn={this.state.loggedIn} />
+                <OrderSummaryComponent 
+                  isLoggedIn={this.state.loggedIn} 
+                  orderData={this.state.orderSummaryData} 
+                  pay={this.state.pay} 
+                  initialBdpayment={this.initialBdpayment} />
               {/* </div>  */}
             </div>
             </div>    

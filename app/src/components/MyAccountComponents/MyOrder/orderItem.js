@@ -68,7 +68,7 @@ class OrderItem extends React.Component {
             <OrderSummery summeryDataro={orderData.orderSummary}
               addressDataPro={orderData.address}
               paymentMethodPro={orderData.paymentMethod}
-              invoiceDataPro={orderData.invoices} />
+               />
           </div>
           {orderData.orderItems.map((data, key) => {
             return (

@@ -78,7 +78,17 @@
 @media (min-width:320px) and (max-width:767px) {
     .emptyCartContainer {
         width: 100%;
-        margin: $base*7 0;
+        margin: 0 0 $base*7;
+        .mWebTitle {
+            position: fixed;
+            top: -$base*0.5;
+            z-index: 2;
+            text-align: center;
+            color: $colorwhite;
+            transform: translate(-50%);
+            left: 50%;
+            font-size: $base*2.5; 
+        }
         .emptyCart,
         .shopInfo {
             display: block;
@@ -87,21 +97,54 @@
         .emptyCart {
             .title {
                 text-align: center;
+                width: 70%;
+                margin: $base*7 auto 0;
+            }
+            .shopNow {
+                margin-top: $base*7;
+                .shopHeadLine {
+                    font-size: $base*2;
+                    color: $black;
+                    font-family: $font-medium;
+                }
+                .info {
+                    font-size: $base*1.5; 
+                    margin-bottom: 0; 
+                }
+                .shopBtn {
+                    margin-top: $base*3;
+                    width: 80%;
+                    border-radius: unset;  
+                }
             }
         }
         .shopInfo {
             .shopTitle {
                 text-align: center;
-                margin-top: $base*6;
+                margin-top: $base*6.5;
+                color: $black;
             }
-            .detailCard {
-                width: 33%;
-                display: inline-block;
-                border-radius: unset;
-                .cardInfo {
-                    display: none;
+            .keyPoints {
+                width: 100%;
+                margin: auto;
+                background-color: $greybg;
+                .detailCard {
+                    width: 33%;
+                    display: inline-block;
+                    border-radius: unset;
+                    text-align: center;
+                    margin: 0;
+                    padding: $base*2.5;
+                    .cardInfo {
+                        display: none;
+                    }
+                    .cardHeading {
+                        font-family: $font-regular;
+                        font-size: $base*1.5;
+                    }
                 }
             }
+            
         }
     }   
 }

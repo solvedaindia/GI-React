@@ -41,7 +41,7 @@ class CartDetail extends React.Component {
     const { cartData } = this.props;
     if (!cartData) return null;
     return (
-      !!cartData.cartItems && !!cart.cartItems.length
+      !!cartData.cartItems && !!cartData.cartItems.length
         ?
         <section className='cartDetails'>
           <div className='cartItem'>
@@ -60,7 +60,7 @@ class CartDetail extends React.Component {
                   <div className='prodDetails'>
                     <h3 className='prodTitle'>{itemData.productName}</h3>
                     <p className='subTitle'>({itemData.shortDescription})</p>
-                    {!itemData.freeGift &&
+                    {!isMobile() && !itemData.freeGift &&
                       <CartUpdate
                         quantity={itemData.quantity}
                         orderItemId={itemData.orderItemId}
@@ -80,9 +80,18 @@ class CartDetail extends React.Component {
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
                     <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
-                    <span className='price'>₹{itemData.offerPrice}</span>
-                    <span className='shipping'>Shipping charge ₹300</span>
-                  </div>
+                    {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
+                    {!isMobile() && <span className='shipping'>Shipping charge ₹300</span>}
+					</div>
+					{!!isMobile() && <div className='quantityPrice'>
+						{!itemData.freeGift &&
+						<CartUpdate
+							quantity={itemData.quantity}
+							orderItemId={itemData.orderItemId}
+							getCartDetails={this.props.getCartDetails}
+						/>}
+						<p className='price'>₹{itemData.offerPrice}</p>
+					</div>}
                 </li>
               ))}
             </ul>

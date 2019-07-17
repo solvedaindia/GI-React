@@ -29,7 +29,7 @@ class OrderSummery extends React.Component {
                 <li onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list">INVOICE {key + 1}</li>
               )
             })}
-          </ul>
+          </ul> */}
         </div>
 
         <div className="orderList paymentmethod">

@@ -5,9 +5,11 @@ import { getCookie } from '../../../utils/utilityManager';
 import {
   navigationApi,
   userDetailAPI,
+  headerStatic,
 } from '../../../../public/constants/constants';
 import { logoutTheUser } from '../../../utils/initialManager';
 import UserAccInfo from '../../../components/UserAccInfo/userAccInfo';
+import WelcomeBack from '../../../components/WelcomeBack/index';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 
 export class HeaderMobile extends React.Component {
@@ -21,14 +23,34 @@ export class HeaderMobile extends React.Component {
       userName: 'Hello',
       logonId: null,
       showLoginPopUp: false,
+      layer1Data: [],
     };
   }
 
   componentDidMount() {
     this.getCategoryData();
+    this.getHeaderLayer1();
     if (getCookie('isLoggedIn') === 'true') {
       this.getUserDetails();
     }
+  }
+
+  getHeaderLayer1() {
+    apiManager
+      .get(headerStatic)
+      .then(response => {
+        const { data } = response || {};
+        this.setState({
+          layer1Data: data && data.data.Header_Static_Links,
+          // isLoading: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+      });
   }
 
   getUserDetails() {
@@ -97,7 +119,7 @@ export class HeaderMobile extends React.Component {
                   if (catName === 'Rooms') {
                     routePath = `/rooms-${subcatName.split(' ').join('-')}/${
                       subCatData.uniqueID
-                    }`;
+                      }`;
                   } else {
                     routePath = `/furniture-${subcatName
                       .split(' ')
@@ -150,7 +172,7 @@ export class HeaderMobile extends React.Component {
     // this.props.pageNavigationRenderPro('My Profile');
   }
 
-  onSubcategoryClick() {}
+  onSubcategoryClick() { }
 
   onSignOutClick() {
     logoutTheUser();
@@ -207,9 +229,18 @@ export class HeaderMobile extends React.Component {
             >
               <li className="navTxt">Manage Address</li>
             </Link>
+            <Link to={{ pathname: '/support' }} onClick={() => this.onLinkNavigation('Customer Care')}>
+              <li className="navTxt">Customer Care</li>
+            </Link>
           </ul>
         </div>
       ),
+    });
+  }
+
+  resetLoginValues() {
+    this.setState({
+      showLoginPopUp: false,
     });
   }
 
@@ -271,16 +302,26 @@ export class HeaderMobile extends React.Component {
                 </li>
               ))}
             {myAccountItem}
-            <li className="navTxt">For Businesses</li>
-            <li className="navTxt">Locate Store</li>
-            <Link
-              onClick={this.onOverlayClick.bind(this)}
-              to="/guestTrackOrder"
-            >
-              <li className="navTxt">Track Order</li>
-            </Link>
-
-            <li className="navTxt">Support</li>
+            {this.state.layer1Data.map((linkData, index) => {
+              return (
+                <>
+                  {
+                    linkData.text === 'TRACK ORDER' ?
+                      getCookie('isLoggedIn') === 'true' ? (
+                        <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }} onClick={() => this.onLinkNavigation('My Orders')}>
+                          < li className="navTxt" >{linkData.text}</li>
+                        </Link>
+                      ) : (
+                          <Link onClick={this.onOverlayClick.bind(this)} to="/guestTrackOrder">
+                            < li className="navTxt" >{linkData.text}</li>
+                          </Link>
+                        )
+                      :
+                      < li className="navTxt" >{linkData.text}</li>
+                  }
+                </>
+              )
+            })}
           </ul>
         </div>
       );
@@ -290,7 +331,7 @@ export class HeaderMobile extends React.Component {
 
     return (
       <>
-        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.showLoginPopUp ? <WelcomeBack resetCallbackPro={this.resetLoginValues.bind(this)}/>/*<UserAccInfo fromWishlistPro />*/ : null}
         <div className="sideNavigation">
           <label>
             <input type="checkbox" checked={showNav ? 'checked' : ''} />

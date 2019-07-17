@@ -5,7 +5,7 @@ export const secureHttp = 'https';
 export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
-export const host1 = '192.168.0.57';
+export const host1 = window.location.hostname;
 // export const host = 'localhost';
 export const host = window.location.hostname;
 export const accessTokenCookie = 'accessToken';
@@ -38,7 +38,6 @@ export const removeFromWishlist = `${secureHttp}://${host}:${port2}/api/v1/secur
 /* Cart Detail API */
 export const cartDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/page`;
 /* Cart Update API */
-
 export const cartUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/update`;
 /* Cart Item Delet API */
 export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/remove`;
@@ -48,6 +47,8 @@ export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/c
 export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/applypromotion`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
+/* Invoice API */
+export const invoicAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/invoice/{invoiceNo}`;
 /* Auto Suggest API */
 export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
@@ -78,7 +79,7 @@ export let accessToken = getTheAccessToken();
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
 export const googleClientId =
-  '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -99,6 +100,8 @@ export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
+/* Recommendation */
+export const recommendationAPI = `${secureHttp}://${host}:${port2}/api/v1/homebody/recommendedproduct`;
 /* ESPOT data API */
 export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */
@@ -142,6 +145,15 @@ export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlis
 export const userDetailValidateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/validate`;
 /* User Detail Update API */
 export const userDetailUpdateAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo/update`;
+/* Store API */
+export const storeAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bycoordinates`;
+/* Store API City*/
+export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bylocation`;
+/* Store BY ID*/
+export const storeById = `${secureHttp}://${host}:${port2}/api/v1/storelocator/byId`;
+/* Google Map Key */
+//export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
+export const mapKey = 'AIzaSyBsrzy8y4BCLnpnqZ_MN0F6yTSIAa8Bg-I';
 /* Notify Me API */
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 /* Address List API */
@@ -161,8 +173,15 @@ export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
 export const OrderSummaryAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/ordersummary`;
-export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/createchecksum`;
-// export const catalog = 'SolvedaCommerceCatalogAssetStore';
+export const CreateCheckSumAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/initiateBDPayment`;
+export const AddAddressToCardAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/addaddress`;
+export const PreCheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/precheckout`;
+export const BankListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/banklist`;
+export const OrderDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/details`;
+export const CheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/checkout`;
+export const minEMIAPI = `${secureHttp}://${host}:${port2}/api/v1/emi/minimumemivalue`;
+export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/savegstin`;
+//export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
@@ -172,9 +191,9 @@ export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-  console.log('constantToke -----', tokenPro);
-  if (validateEmptyObject(tokenPro)) {
-    return (accessToken = tokenPro);
-  }
-  return (accessToken = getCookie(accessTokenCookie));
+    console.log('constantToke -----', tokenPro);
+    if (validateEmptyObject(tokenPro)) {
+        return (accessToken = tokenPro);
+    }
+    return (accessToken = getCookie(accessTokenCookie));
 }

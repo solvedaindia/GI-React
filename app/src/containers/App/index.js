@@ -42,9 +42,15 @@ import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
+import OrderConformtion from '../orderConfirmation/index'
+// import CartDetail from '../CartContainer/cartContainer';
 import CartDetail from '../CartContainer/cartContainer';
+import StoreLocator from '../../components/StoreLocator/storeLocator';
+import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
+import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -164,6 +170,7 @@ export default class App extends React.Component {
         ) : (
           <HeaderContainer />
         )}
+        
         {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
@@ -178,7 +185,11 @@ export default class App extends React.Component {
           <Route path="/checkout" component={CheckoutContainer} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
+          <Route path="/order/confirm/:orderId" component={OrderConformtion} />
           <Route path="/cart" component={CartDetail} />
+          <Route path="/storelocator" component={StoreLocator} />
+          <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
+          
         </Switch>
         <FooterContainer />
       </div>

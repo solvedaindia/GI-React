@@ -74,4 +74,5 @@ module.exports = Object.freeze({
   storeLocatorByPhysicalIdentifier: `${prodWcsResourceUrl}/{{storeId}}/storelocator/byStoreIds?{{queryParams}}&responseFormat=json`,
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
   bookConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/booking`,
+  getConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/dropDownValues`,
 });

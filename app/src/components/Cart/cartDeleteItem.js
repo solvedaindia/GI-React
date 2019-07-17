@@ -18,7 +18,6 @@ class DeleteCartItem extends React.Component {
 	}
 
 	handleChange() {
-		//   this.setState({quantity: event.target.value});
 		this.handleDeleteItem();
 	}
 	handleDeleteItem() {
