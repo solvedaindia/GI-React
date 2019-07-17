@@ -275,7 +275,7 @@
 }
 
 .Image-gallery {
-  width: 415px;
+  // width: 415px;
   height: 98px;
   font-family: CeraGodrejInterio;
   font-size: 42px;
@@ -339,26 +339,10 @@ react-slideshow-container {
   text-align: center;
   color: #4a4a4a
 }
-.Rectangle-Copy-4 {
-  width: 540px;
-  height: 450px;
-  background-color: #2e93c2;
-  
-}
-.Image-gallery2 {
-  width: 361px;
-  height: 108px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-}
+
+
 .The-Work-Triangle {
-  width: 171px;
+  // width: 171px; 
   height: 28px;
   font-family: CeraGodrejInterio;
   font-size: 20px;
@@ -368,6 +352,7 @@ react-slideshow-container {
   line-height: 1.4;
   letter-spacing: normal;
   color: #ffffff;
+  text-align: center;
 }
 .ParagraphSmall {
   width: 297px;
@@ -384,7 +369,7 @@ react-slideshow-container {
 
 .Group-60 {
   width: 653px;
-  height: 416px;
+  height: 300px;
   object-fit: contain;
 }
 .button_rect {
@@ -394,12 +379,7 @@ react-slideshow-container {
   border: solid 1px var(--battleship-grey);
   background-color: #ffffff;
 }
-.rectbut1 {
-  width: 124px;
-  height: 35px;
-  border-radius: 23.5px;
-  background-color:blue
-}
+
 .wardrobehallsize {
   width: 33%;
   height: 244px;
@@ -440,10 +420,10 @@ react-slideshow-container {
   color: black;
   margin-left: 634px
 }
-.Blacks {
-  height: auto;
-  background-color: #9EE4D9
-}
+// .Blacks {
+//   height: auto;
+//   background-color: #9EE4D9
+// }
 .CrousParagraph {
   width: 900px;
   height: 103px;
@@ -470,19 +450,7 @@ react-slideshow-container {
   text-align: center;
   color: #000000;
 }
-.Naming {
-  height: 24px;
-  font-family: CeraGodrejInterio;
-  font-size: 16px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  color: black;
-  text-align: center;
-  
-}
+
 .Fullhalf {
   // width: 1440px;
   height: 600px;

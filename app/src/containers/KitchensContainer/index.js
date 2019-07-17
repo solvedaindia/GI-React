@@ -83,8 +83,8 @@ index: 0
                   consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
                   aliquat enim ad minim.</p>
               </div>
-              {/*
-              <AlwaysRemember /> */}
+              
+              <AlwaysRemember /> 
               <KitchenHall />
               <div className="container">
                 <div className="col-md-12">

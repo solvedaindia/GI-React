@@ -30,37 +30,34 @@ index: 0
 
   render() {
     return (
-        <div className="container">
-        <div className="Blacks">
+        <div className="Blacks clear fix">
 
         <div className="row">
 
-            <div className="col-md-4">
+            <div className="Rectangle-Copy-4 col-md-4">
                 
-                <div className="Rectangle-Copy-4">
-                    <h1 className="Image-gallery2">When planning your<br /> kitchen, always remember..</h1>
+                    <h1 className="Image-gallery2">When planning your<br/> kitchen, always<br/> remember..</h1>
                 <h3 className="The-Work-Triangle ">The Work Triangle</h3>
-                <p4 className="ParagraphSmall">This consists of 3 fundamental and basic<br/> workstations i.e. the sink, refrigerator and<br/> the cooking hob/range. The triangle is<br/> measured from the center of the sink to the<br/> top of the refrigerator to the center of the<br/> cooking range.</p4>
+                <p className="ParagraphSmall">This consists of 3 fundamental and basic<br/> workstations i.e. the sink, refrigerator and<br/> the cooking hob/range. The triangle is<br/> measured from the center of the sink to the<br/> top of the refrigerator to the center of the<br/> cooking range.</p>
                 <h3 className="The-Work-Triangle ">The 26 Feet Rule</h3>
-                <p4 className="ParagraphSmall">To ensure maximum efficiency, the work<br/> triangle perimeter should be at least 12 feet<br/> but must not exceed 26 feet.</p4>
+                <p className="ParagraphSmall">To ensure maximum efficiency, the work<br/> triangle perimeter should be at least 12 feet<br/> but must not exceed 26 feet.</p>
 
-                </div>
             </div>
 
-            <div className="col-md-8">
+            <div className="col-md-8 fix clear">
             <img
                       className="Group-60"
                       src={this.state.imgList[this.state.index]}
                       alt="rectangle"
                     />
-                    <div className="btn-group">
+                      </div>
+                    <div className="group60-button btn-group">
   <button type="button" onClick={this.onHandleClickFirst.bind(this)} className="rectbut1">G Kitchen</button>
   <button type="button"  onClick={this.onHandleClickSecond.bind(this)} className="rectbut1">Parallel Kitchen</button>
   <button type="button"  onClick={this.onHandleClickThird.bind(this)} className="rectbut1">L Kitchen</button>
 </div>
-            </div>
+          
 
-        </div>
         </div>
         </div>
     );
