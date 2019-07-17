@@ -50,6 +50,7 @@ import StoreLocator from '../../components/StoreLocator/storeLocator';
 import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
+import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -169,6 +170,7 @@ export default class App extends React.Component {
         ) : (
           <HeaderContainer />
         )}
+        
         {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />

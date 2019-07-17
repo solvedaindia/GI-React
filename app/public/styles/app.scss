@@ -182,6 +182,31 @@ h4{font-weight: bold}
   display: block;
 }
 
+/*---- ScrollBar -----------------------*/
+@at-root#detailCardSection::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+border-radius: 10px;
+background-color: #f7f8f8;
+width:20px;
+}
+
+#detailCardSection::-webkit-scrollbar
+{
+width: 3px;
+background-color: #dfe0de;
+}
+
+#detailCardSection::-webkit-scrollbar-thumb
+{   
+width:5px;
+border-radius: 10px;
+box-shadow : inset 0 0 6px rgba(0,0,0,.3);
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #ccc;
+}
+
 
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
@@ -268,11 +293,6 @@ h4{font-weight: bold}
   /* 
     #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
   */
-  @media (min-width: 320px) and (max-width: 480px) {
-    
-    
-    
-  }
 .hideData {
     display: none;
 }
@@ -286,11 +306,10 @@ h4{font-weight: bold}
 -----------------------*/
 @at-root#detailCardSection::-webkit-scrollbar-track
 {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #f7f8f8;
-  width:20px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+    background-color: #f7f8f8;
+    width:20px;
 }
 
 #detailCardSection::-webkit-scrollbar
@@ -300,10 +319,8 @@ h4{font-weight: bold}
 }
 
 #detailCardSection::-webkit-scrollbar-thumb
-{   
-  width:5px;
-  border-radius: 10px;
-  box-shadow : inset 0 0 6px rgba(0,0,0,.3);
+{   width:5px;
+	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #ccc;
 }

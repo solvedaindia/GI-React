@@ -1,6 +1,14 @@
 @import "../../variable";
 
 .myOrder {
+  .ongoingOrder{
+    color:$greyDark;
+    font-size:$base*2;
+    line-height: 16px;
+    margin: 0 0 17px 0;
+    font-family: $font-medium;
+
+  }
 
   .noOrder{
     text-align: center;
@@ -11,7 +19,7 @@
   
   .tabBar {
     
-    padding: 20px;
+    padding: 14px 20px;
     background-color: #036cc5;
     position: relative;
 
@@ -31,11 +39,15 @@
         }
         .heading-top {
           font-size: 12px;
+          line-height: 12px;
+          padding: 0 0 10px 0;
+          text-transform: uppercase;
           font-family: $font-regular;
         }
         .heading-sub {
           font-size: 14px;
-          font-family: $font-bold;
+          font-family: $font-medium;
+          line-height: 14px;
         }
       }
     }
@@ -45,22 +57,27 @@
       color: #fff;
       position: absolute;
       right: 20px;
-      top: 26px;
+      top: 20px;
+      font-size: 14px;
       &:focus {
         outline: none;
+      }
+      .iconImg{
+        width:14px;
+        margin:0 0 0 5px;
       }
     }
   }
 
   .itemBox {
     border: solid 1px $greyborder;
-    padding: 26px 30px;
+    padding: 0 26px 30px;
     margin: 0 0 16px 0;
     .orderProduct {
       border-bottom: solid 1px $greyborder;
-      padding: 0px 0 29px 0;
+      padding: 31px 0 29px 0;
       .orderbtn {
-        width: 25%;
+        width: 19%;
         float: right;
         .btn-cancel {
           margin: 0 0 16px 0;
@@ -68,7 +85,8 @@
         .btn-borderwhite {
           width: 100%;
           font-size: 14px;
-          font-family: $font-bold;
+          font-family: $font-medium;
+          font-weight: 600;
           &:hover {
             background: $black;
             color: $colorwhite;
@@ -79,9 +97,9 @@
         width: 50%;
         float: left;
         .imgBox {
-          float: left;
-          display: block;
-          width: 35%;
+          min-height: 120px;
+          display: flex;
+          justify-content: center;
           border: 1px solid #efeeed;
           .imgfullwidth {
             width: 100%;
@@ -96,21 +114,26 @@
 
           .heading {
             color: $black;
-            font-family: $font-bold;
-            font-size: 16px;
-            margin: 0;
+            font-family: $font-medium;
+            font-size: 16px;            
+            line-height: 16px;
+            margin: 0 0 7px 0;
           }
           .description {
             margin: 0;
-            font-size: 10px;
+            font-size: 11px;
             color: $greyLight;
+            line-height: 11px;
           }
           .price {
-            margin: 0;
+            margin: 10px 0 10px 0;
+            line-height: 20px;
             .discount-price {
               font-size: 20px;
+              line-height: 20px;
               color: $cerulean;
               font-family: $font-bold;
+              
             }
             .priceno-discount {
               font-size: 16px;
@@ -126,16 +149,32 @@
             color: $battleshipGrey;
             font-size: 10px;
             margin: 0;
+            .quantity,
+            .delivery{
+              display: inline-block;
+              width:47%;
+            }
             .quantity {
-              padding: 0 16px 0 0;
-              display: block;
-              width: 25%;
-              float: left;
+              margin:0 6px 0 0;
+              .heading{
+                color:$battleshipGrey;
+                font-size: 10px;
+                line-height: 10px;
+                font-family: $font-medium;
+                text-transform: uppercase;
+              }
+              .heading,.textval{
+                display: block;
+              }
               .textval {
                 color: $black;
-                font-size: 18px;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
+                
               }
             }
+           
             .shipping-charge {
               float: left;
               display: block;
@@ -149,16 +188,55 @@
       }
     }
   }
-
+// Back Order css
+  .trackMyOrder{
+    .backBtn{
+      color:$battleshipGrey;
+      font-size:12px;
+      font-family: $font-medium;
+    }
+     .itemBox{
+       margin:0;
+       border:none;
+       padding:0;
+       .orderimgbox{
+         margin: 0 0 0px 0;       
+        }
+        .orderProduct {
+          padding: 31px 0 40px 0;
+      .trackorder-wrap{
+        width:100%;
+        position: static;
+        margin: 36px 0 0 auto;
+        .track-bar{
+          position: relative;
+          width:98%;
+          .list{
+            .status{
+              font-size: 14px;
+            }
+            .deliveryDate{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+     }
+  }
   .orderSummery {
     // background-color: blueviolet;
     // min-height: 50px;
+    .summerydata{
+      padding: 26px 0 0 0;
+    }
   }
 
   .heightActive {
     height: 235px;
     overflow: hidden;
     -webkit-transition: height 0.4s;
+    border-bottom: 1px solid $greyborder;
   }
 
   .heightInActive {
@@ -172,8 +250,29 @@
       width: 33.3%;
       display: block;
       float: left;
+      .heading{
+        color:$greylightColor;
+        font-size:$base*1.75;
+        font-family: $font-bold;
+        line-height: 14px;
+        margin:0 0 18px 0;
+      }
+      .subheading{
+        font-size: 14px;
+        color:$greyBorder;
+        font-family: $font-regular;
+        margin:0;
+        line-height: 14px;
+      }
+      .address{
+        font-family: $font-regular;
+        font-size: 14px;
+        color:$greyBorder;
+        line-height: 14px;
+        margin:11px 0 0 0;
+      }
       .invoiceList{
-        padding:34px 0 0 0;
+        padding: 59px 0 0 0;
         .list{
           display: inline-block;
           color:$battleshipGrey;
@@ -186,8 +285,13 @@
       }
       .orderSummary{
         .summaryDetails{
-         padding: 0 0 9px 0;
-        .leftText,.rightText{font-size:14px; color:$greyBorder;}
+         padding: 0 0 14px 0;
+        .leftText,.rightText{
+          font-size:14px; 
+          color:$greyBorder;
+          font-family: $font-regular;
+          line-height: 14px;
+        }
         .leftText{
           float: left;
         }
@@ -195,10 +299,18 @@
            float:right;
         }
       }
+      .divider{
+        height:1px;
+        background: $greyborder;
+        margin: 3px 0 14px 0;
+        width: 100%;       
+      }
       .summaryDetails.subTotaltext{
-        border-top:1px solid $greyborder;
-        padding: 14px 0;
-        .leftText,.rightText{font-weight: bold; color:$black;}
+        
+        .leftText,.rightText{
+          font-weight: bold; 
+          color:$black;
+        }
       }
       }
     }
@@ -211,9 +323,10 @@
 
 .trackorder-wrap {
   margin: 30px auto;
-  width: 60%;
+  width: 50%;
   position: relative;
   float: right;
+  top: -66px;
 
   ul.track-bar { 
     background-size: 35px 35px;
@@ -274,13 +387,17 @@
       }
     }
     .list {
-      display: inline-block;
+      display: block;
       margin: 30px 0 0;
       padding: 0;
       text-align: center;
       width: 19%;
       position: relative;
       font-size: 10px;
+      float: left;
+      .deliveryDate{
+        color:$battleshipGrey;
+      }
       &:nth-child(1):before {
         content: " ";
       }
