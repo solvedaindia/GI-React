@@ -305,20 +305,30 @@ class PdpComponent extends React.Component {
                 <div className="GallerytextBox">
                   <Row>
                     <Col md={12} sm={12} xs={12}>
-                      <Col md={6} sm={12} xs={12} className="product">
-                        { !isMobile() && <span className="text">Product ID: </span> }
+                    { !isMobile() && <Col md={6} sm={12} xs={12} className="product">
+                         <span className="text">Product ID: </span> 
                         <span className="text">
                           {this.state.skuData.partNumber}
                         </span>
-                      </Col>
+                      </Col>}
+
+                      {isMobile() && <Col md={6} sm={12} xs={12} className="product-sku">
+                        <span className="text">
+                          {this.state.skuData.partNumber}
+                        </span>
+                      </Col>}
+
+
                       { !isMobile() &&
                         <WishlistAndShare skuData={this.state.skuData}/>
                       }
                     </Col>
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
-                  { isMobile() &&
-                    <WishlistAndShare skuData={this.state.skuData}/>
+                  {isMobile() &&
+                    <div className='wishlist-share'>
+                      <WishlistAndShare skuData={this.state.skuData}/>
+                      </div>
                   }
                   <ProductDefAttriutes
                     defAttributes={this.props.data.defAttributes}
@@ -337,23 +347,20 @@ class PdpComponent extends React.Component {
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
                   />
-                  <Row>
+                  { isMobile() && <Row className='add-to-cart-floater'>
                       <Col md={6} sm={12} xs={12} className="product">
-                        { isMobile() && 
-                        <>
-                          <MobileDiscountAndPrice 
+                          <div className='product-price-detail'>
+                            <MobileDiscountAndPrice 
                             skuData={this.state.skuData}
-                          />
+                          /></div>
                           <AddToCart
                           skuData={this.state.skuData}
                           isMobile={true}
                           pinCodeData={this.state.pincodeData}
                           handleAddtocart={this.handleAddtocart.bind(this)}
-                        />
-                        </>
-                        }
+                        /> 
                       </Col>
-                  </Row>
+                  </Row>}
                   
                 </div>
               </Col>

@@ -122,9 +122,10 @@ class purchaseGuide extends React.Component {
         {this.props.purchaseGuide.purchaseGuide.length > 0 && (
           <Accordion>
             <div>
-            <Row className='head'>
+            <Row>
               <Col md={12} sm={12} xs={12}>
                 <h2 className="heading">Purchase Guide</h2>
+                <span className="plusIcon"></span>
               </Col>
             </Row>
             <Row className="body">

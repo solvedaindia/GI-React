@@ -5,7 +5,7 @@ export const secureHttp = 'https';
 export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
-export const host1 = '192.168.0.57';
+export const host1 = window.location.hostname;
 // export const host = 'localhost';
 export const host = window.location.hostname;
 export const accessTokenCookie = 'accessToken';
@@ -100,6 +100,8 @@ export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
+/* Recommendation */
+export const recommendationAPI = `${secureHttp}://${host}:${port2}/api/v1/homebody/recommendedproduct`;
 /* ESPOT data API */
 export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 /* Social Login API */

@@ -354,9 +354,7 @@
                 .continueMargin {
                     margin: 4px 0 0 0;
                 }
-                .colpaddingRight {
-                    padding-right: 3px;
-                }
+                
                 .saveAddress {
                     .list {
                         background: rgba(247, 248, 248, 0.5);
@@ -539,6 +537,9 @@
                                 min-height: 130px;
                             }
                         } 
+                        .colpaddingRight {
+                            padding-right: 3px;
+                        }
                     }
                 } 
             }
@@ -608,6 +609,9 @@
                         .label-billing{
                             width: 95%;
                         }
+                    }
+                    .colpaddingRight {
+                        padding-right: 15px;
                     } 
                 }
 
