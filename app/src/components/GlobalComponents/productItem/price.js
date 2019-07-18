@@ -3,17 +3,24 @@ import { Link, Route } from 'react-router-dom';
 
 class Price extends React.Component {
   render() {
-    const offerPrice = parseFloat(this.props.offerPrice);
-    const actualPrice = parseFloat(this.props.actualPrice);
+    let offerPrice = parseFloat(this.props.offerPrice);
+    let actualPrice = parseFloat(this.props.actualPrice);
     let crossPriceItem;
-    console.log('ppriccc -- ', offerPrice, actualPrice)
+
     if (offerPrice < actualPrice) {
       crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
+    }
+    if (!isNaN(offerPrice)) {
+      console.log('ppriccc -- ', offerPrice)
+      offerPrice = `₹ ${offerPrice}`
+    }
+    else {
+      offerPrice = null
     }
 
     return (
       <>
-        <span className="discount-price">₹{offerPrice}</span> {crossPriceItem}
+        <span className="discount-price">{offerPrice}</span> {crossPriceItem}
       </>
     );
   }

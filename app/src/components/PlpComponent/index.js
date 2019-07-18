@@ -83,6 +83,7 @@ class PlpComponent extends React.Component {
               skuList={item.skuList}
               swatchList={item.swatchesData}
               isShareWishlistPro={this.props.isShareWishlistPro}
+              coloumnLayout={this.props.coloumnLayout}
             /> :
             <ProductItem // Sku level
               key={index}
@@ -95,6 +96,7 @@ class PlpComponent extends React.Component {
               isSearchPathPro={this.props.isSearchPathPro}
               swatchList={[]}
               isShareWishlistPro={this.props.isShareWishlistPro}
+              coloumnLayout={this.props.coloumnLayout}
             />
           }
           <AdBanner indexPro={index + 1} />
@@ -156,10 +158,7 @@ class PlpComponent extends React.Component {
 
   render() {
     let coloumnLayout;
-    if (
-      this.props.coloumnLayout === 3 ||
-      this.props.isFromWishlistPro === true
-    ) {
+    if (this.props.coloumnLayout === 3 || this.props.isFromWishlistPro === true) {
       coloumnLayout = 'plp-products grid3';
     } else {
       coloumnLayout = 'plp-products grid2';

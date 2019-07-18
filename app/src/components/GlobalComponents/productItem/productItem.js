@@ -114,7 +114,7 @@ class ProductItem extends React.Component {
 	    <li className="productlist">
         <div className="prdListData">
           <ItemImage
-	          data={this.state.data.thumbnail}
+	          data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2 }
             uniqueId={this.state.data.uniqueID}
             parentUniqueId={this.state.data.parentUniqueID}
           />
