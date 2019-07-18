@@ -1,0 +1,44 @@
+@import '../variable';
+
+.trackMiniOrder {
+    width: 100%;
+    .userDetails,
+    .orderSummary {
+        min-height: $base*28;
+    }
+    .userDetails {
+        width: 25%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+        background-color: $ceruleanblue;
+    }
+    .orderSummary {
+        background-color: $greybg;
+    }
+    .orderDetails {
+        width: 75%;
+        display: inline-block;
+        .prodImg {
+            width: 180px;
+            height: 180px;
+            margin: $base*2.75 $base*7.5  $base*2.75 $base*12.25 ;
+            background-color: $colorwhite; 
+            display: inline-block;
+        }
+    }
+    .slick-prev {
+        left: $base;
+    }
+    .slick-next{
+        right: $base;
+    }
+    .slick-dots {
+        display: none;
+    }
+    .slick-next:before,
+    .slick-prev:before {
+        color: transparent;
+        font-size: $base*3.75;
+    }
+}
