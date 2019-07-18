@@ -13,6 +13,44 @@ module.exports.getImagePath = function getImagePath(imagePath) {
   return newImagePath;
 };
 
+/* Get 1:1 Thumbail Image */
+function getThumbnail(image) {
+  return (
+    image.usage === 'IMAGE_SIZE_500_500' && image.name.split('_')[1] === '02'
+  );
+}
+
+/* Get 3:2 Thumbnail Image */
+function getThumbnail2(image) {
+  return (
+    image.usage === 'IMAGE_SIZE_803_602' && image.name.split('_')[1] === '02'
+  );
+}
+
+/**
+ * Get Thumbnail Images
+ * @return images attachment
+ */
+module.exports.getThumbnailImages = getThumbnailImages;
+function getThumbnailImages(attachment) {
+  const resJson = {
+    thumbnail: '',
+    thumbnail2: '',
+  };
+  if (attachment && attachment.length > 0) {
+    const thumbnailObject = attachment.filter(getThumbnail);
+    if (thumbnailObject && thumbnailObject.length > 0) {
+      resJson.thumbnail = `/${thumbnailObject[0].attachmentAssetPath}`;
+    }
+
+    const thumbnail2Object = attachment.filter(getThumbnail2);
+    if (thumbnailObject && thumbnailObject.length > 0) {
+      resJson.thumbnail2 = `/${thumbnail2Object[0].attachmentAssetPath}`;
+    }
+  }
+  return resJson;
+}
+
 /**
  * Filter Images for PDP
  * @return images attachment

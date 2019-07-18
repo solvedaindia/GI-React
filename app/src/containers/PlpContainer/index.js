@@ -351,7 +351,7 @@ export class PlpContainer extends React.Component {
         })
         .catch(error => {
           this.setState({
-            error: error.message,
+            error: error.response.data.error.error_message,
             isLoading: false,
           });
         });
@@ -589,7 +589,7 @@ export class PlpContainer extends React.Component {
           <div className="container2">{plpProducts}</div>
         </section>
 
-        {error && <div style={{ color: '#900' }}>{error}</div>}
+        {error && <div className='noProductFound'>{error}</div>}
         {isLoading && (
           <div className="lazyloading-Indicator">
             <img

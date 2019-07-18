@@ -107,6 +107,12 @@ const errorlist = {
     error_key: 'invalid_credentials',
     error_message: 'LogonId or Password is incorrect',
   },
+  invalid_address: {
+    status_code: 400,
+    error_key: 'invalid_address',
+    error_message:
+      'The address you selected is not valid for the contracts in your current order.',
+  },
   account_locked: {
     status_code: 400,
     error_key: 'account_locked',
@@ -149,15 +155,15 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_INVALID_INPUT' ||
         errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
-        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
+        // errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
         errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
         errBody.errors[0].errorKey === '_ERR_GENERIC' ||
         errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
         errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
-        errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED' ||
+        // errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED' ||
         errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS' ||
-        errBody.errors[0].errorKey === '_ERR_INVALID_ADDR' ||
+        // errBody.errors[0].errorKey === '_ERR_INVALID_ADDR' ||
         errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE' ||
         errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT' ||
         errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION' ||
@@ -167,6 +173,13 @@ module.exports.handleWCSError = function handleWCSError(response) {
           status_code: 400,
           error_key: errBody.errors[0].errorKey,
           error_message: errBody.errors[0].errorMessage,
+        };
+      }
+      if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED') {
+        return {
+          status_code: 400,
+          error_key: 'ERR_PROMOTION_CODE_DUPLICATED',
+          error_message: 'You have entered a duplicate promotion code.',
         };
       }
       if (errBody.errors[0].errorKey === '_ERR_LOGIN_NOT_ALLOWED_NOW') {
@@ -187,6 +200,9 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_INVALID_ADDR') {
+        return errorlist.invalid_address;
       }
       if (errBody.errors[0].errorKey === 'ERROR_IN_EMAIL_SEND') {
         return errorlist.ERROR_IN_EMAIL_SEND;
@@ -272,7 +288,10 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_message: 'Not a valid pincode',
         };
       }
-      if (errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS') {
+      if (
+        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS' ||
+        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST'
+      ) {
         return errorlist.user_does_not_exists;
       }
       if (errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND') {

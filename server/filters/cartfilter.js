@@ -96,11 +96,11 @@ function getOrderSummary(cartData) {
       }
     });
   }
-
+  orderSummary.productDiscount = 0;
   if (cartData.adjustment && cartData.adjustment.length > 0) {
     cartData.adjustment.forEach(adjustment => {
       if (adjustment.displayLevel === 'OrderItem') {
-        orderSummary.productDiscount = Math.abs(adjustment.amount);
+        orderSummary.productDiscount += parseFloat(Math.abs(adjustment.amount));
       }
       if (adjustment.displayLevel === 'Order') {
         orderSummary.orderDiscount = Math.abs(adjustment.amount);
@@ -132,7 +132,11 @@ function getOrderSummary(cartData) {
   orderSummary.saving =
     parseFloat(orderSummary.orderDiscount) +
     parseFloat(orderSummary.productDiscount);
-  orderSummary.addressID = cartData.orderItem[0].addressId || '';
+  if (cartData.orderItem && cartData.orderItem.length > 0) {
+    orderSummary.addressID = cartData.orderItem[0].addressId || '';
+  } else {
+    orderSummary.addressID = '';
+  }
 
   return orderSummary;
 }

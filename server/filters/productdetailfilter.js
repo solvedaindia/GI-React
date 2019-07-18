@@ -17,21 +17,28 @@ function productDetailForPLP(productDetail) {
   productDetailJson.type = productDetail.catalogEntryTypeCode;
   productDetailJson.masterCategoryID = productDetail.masterCategoryId;
   productDetailJson.parentUniqueID = productDetail.parentCatalogEntryID || '';
+  productDetailJson.actualPrice = '';
+  productDetailJson.offerPrice = '';
   if (productDetail.price && productDetail.price.length > 0) {
     productDetail.price.forEach(price => {
-      if (price.usage === 'Display') {
-        productDetailJson.actualPrice = Number(price.value);
+      if (price.usage === 'Display' && price.value !== '') {
+        productDetailJson.actualPrice = parseFloat(price.value);
       }
-      if (price.usage === 'Offer') {
-        productDetailJson.offerPrice = Number(price.value);
+      if (price.usage === 'Offer' && price.value !== '') {
+        productDetailJson.offerPrice = parseFloat(price.value);
       }
     });
   }
   // productDetailJson.onClickUrl = '';
   // productDetailJson.seoUrl = '';
-  productDetailJson.thumbnail = imagefilter.getImagePath(
-    productDetail.thumbnail,
+  const thumbnailObject = imagefilter.getThumbnailImages(
+    productDetail.attachments,
   );
+  /* productDetailJson.thumbnail = imagefilter.getImagePath(
+    productDetail.thumbnail,
+  ); */
+  productDetailJson.thumbnail = thumbnailObject.thumbnail || '';
+  productDetailJson.thumbnail2 = thumbnailObject.thumbnail2 || '';
   productDetailJson.emiData = '';
   productDetailJson.inStock = '';
   productDetailJson.shortDescription = productDetail.shortDescription || '';

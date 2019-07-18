@@ -6,7 +6,7 @@ class Price extends React.Component {
     const offerPrice = parseFloat(this.props.offerPrice);
     const actualPrice = parseFloat(this.props.actualPrice);
     let crossPriceItem;
-
+    console.log('ppriccc -- ', offerPrice, actualPrice)
     if (offerPrice < actualPrice) {
       crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
     }

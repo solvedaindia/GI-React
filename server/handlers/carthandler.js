@@ -429,8 +429,8 @@ function getCompleteCartData(cartData, headers, callback) {
     promotionCode: [],
     // actualCartData: cartData,
   };
-  cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
   if (cartData.orderItem && cartData.orderItem.length > 0) {
+    cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
     getcartPageProductDetails(
       headers,
       cartData.orderItem,

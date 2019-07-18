@@ -1,3 +1,6 @@
+const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
+const imagefilter = require('./imagefilter');
+
 module.exports.getKitSummary = getKitSummary;
 function getKitSummary(kitData, promotions) {
   const kitSummary = {};
@@ -8,7 +11,8 @@ function getKitSummary(kitData, promotions) {
     kitSummary.type = kitData.catalogEntryTypeCode;
     kitSummary.masterCategoryID = kitData.masterCategoryId;
     kitSummary.parentUniqueID = kitData.parentCatalogEntryID || '';
-    kitSummary.swatchAttibute = getSwatchAttibute(kitData);
+    kitSummary.swatchAttributes = [];
+    kitSummary.swatchAttributes.push(getSwatchAttibute(kitData));
     if (kitData.price && kitData.price.length > 0) {
       kitData.price.forEach(price => {
         if (price.usage === 'Display') {
@@ -21,9 +25,7 @@ function getKitSummary(kitData, promotions) {
     }
     kitSummary.onClickUrl = '';
     kitSummary.seoUrl = '';
-    // kitSummary.thumbnail = imagefilter.getImagePath(
-    //   kitData.thumbnail,
-    // );
+    kitSummary.thumbnail = imagefilter.getImagePath(kitData.thumbnail);
     kitSummary.emiData = '';
     kitSummary.inStock = '';
     kitSummary.shortDescription = kitData.shortDescription || '';
@@ -51,24 +53,24 @@ function getKitSummary(kitData, promotions) {
   return kitSummary;
 }
 
-module.exports.getSwatchAttibute = getSwatchAttibute;
-function getSwatchAttibute(kitData) {
-  const swatchAttributes = {};
-  swatchAttributes.uniqueId = kitData.uniqueID;
-  swatchAttributes.name = '';
-  swatchAttributes.value = '';
-  swatchAttributes.imagePath = '';
-  if (kitData.components && kitData.components.length > 0) {
-    kitData.components.forEach(comp => {
-      if (comp.attributes && comp.attributes.length > 0) {
-        swatchAttributes.name = comp.attributes[0].values[0].value;
-        swatchAttributes.value = comp.attributes[0].values[0].image1;
-        swatchAttributes.imagePath = comp.attributes[0].values[0].image1path;
-      }
-    });
-  }
-  return swatchAttributes;
-}
+// module.exports.getSwatchAttibute = getSwatchAttibute;
+// function getSwatchAttibute(kitData) {
+//   const swatchAttributes = {};
+//   swatchAttributes.uniqueId = kitData.uniqueID;
+//   swatchAttributes.name = '';
+//   swatchAttributes.value = '';
+//   swatchAttributes.imagePath = '';
+//   if (kitData.components && kitData.components.length > 0) {
+//     kitData.components.forEach(comp => {
+//       if (comp.attributes && comp.attributes.length > 0) {
+//         swatchAttributes.name = comp.attributes[0].values[0].value;
+//         swatchAttributes.value = comp.attributes[0].values[0].image1;
+//         swatchAttributes.imagePath = comp.attributes[0].values[0].image1path;
+//       }
+//     });
+//   }
+//   return swatchAttributes;
+// }
 
 module.exports.getProductAttributes = getProductAttributes;
 function getProductAttributes(attributes) {
@@ -85,4 +87,39 @@ function getProductAttributes(attributes) {
     }
   });
   return productAttribute;
+}
+
+module.exports.getSwatchAttibute = getSwatchAttibute;
+function getSwatchAttibute(kitData) {
+  const attributeJson = {
+    uniqueID: '',
+    name: '',
+    values: [],
+  };
+  attributeJson.uniqueID = kitData.uniqueID;
+  if (kitData.components && kitData.components.length > 0) {
+    // iterate kit components
+    kitData.components.forEach(components => {
+      if (components.attributes && components.attributes.length > 0) {
+        // iterate kit components attributes
+        components.attributes.forEach(attr => {
+          attributeJson.name = attr.name;
+          // iterate attributes values
+          attr.values.forEach(attributeValue => {
+            const match = rbgRegex.exec(attributeValue.image1);
+            const attributeValueJSON = {};
+            attributeValueJSON.name = attributeValue.value;
+            if (match !== null) {
+              attributeValueJSON.colorCode = attributeValue.image1 || '';
+            } else {
+              attributeValueJSON.facetImage =
+                imagefilter.getImagePath(attributeValue.image1path) || '';
+            }
+            attributeJson.values.push(attributeValueJSON);
+          });
+        });
+      }
+    });
+  }
+  return attributeJson;
 }
