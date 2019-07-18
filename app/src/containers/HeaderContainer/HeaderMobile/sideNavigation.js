@@ -28,11 +28,16 @@ export class HeaderMobile extends React.Component {
   }
 
   componentDidMount() {
+    console.log('didimountt');
     this.getCategoryData();
     this.getHeaderLayer1();
     if (getCookie('isLoggedIn') === 'true') {
       this.getUserDetails();
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('compRecive --- ',this.state.showLoginPopUp);
   }
 
   getHeaderLayer1() {
@@ -331,7 +336,7 @@ export class HeaderMobile extends React.Component {
 
     return (
       <>
-        {this.state.showLoginPopUp ? <WelcomeBack resetCallbackPro={this.resetLoginValues.bind(this)}/>/*<UserAccInfo fromWishlistPro />*/ : null}
+        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)}/> : null}
         <div className="sideNavigation">
           <label>
             <input type="checkbox" checked={showNav ? 'checked' : ''} />
