@@ -38,7 +38,7 @@ export default class KitchenBanner extends Component {
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide} <div className="crousdiv"><p className="Paragraph-Copy-13">Chennai, L Kitchen</p></div></h3>
+                <h3>{slide}</h3>
               </div>
             );
           })}

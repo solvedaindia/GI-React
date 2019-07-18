@@ -6,7 +6,81 @@
 .Kitchen-1{
   width: 100%;
   background-color: #ffffff;
+  .modularWardrobes{  
+    background: #f7f8f8;   
+    padding:56px 0;
+    margin:80px 0 0 0;
 
+    .heading{
+      font-size: 34px;
+      line-height: 34px;
+      color:#000000;
+      text-align: left;
+      margin:0 0 23px 0;
+      font-family: $font-medium;
+    }
+    .subText{
+      font-size: 14px;
+      color:#767676;
+      font-family: $font-regular;
+      text-align: left;
+    }
+    .Read-More{
+      float:left;
+      border:none;
+      background: transparent;
+      color:#000;
+      font-size: 16px;
+      text-decoration: underline;
+      font-family: $font-medium;
+      margin:14px 0 0 0;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+ .kitchenHallLayout{
+   padding: 110px 0 0 0;
+  }
+  kitchenFaciliies{
+    padding: 120px 0 0 0;
+  }
+  .easySteps {
+    padding: 102px 0 110px 0;
+  }
+  .whatgoesSlider{
+    padding: 50px 0 100px 0;
+
+  }
+  .Ourpromise{
+    padding: 104px 0 0 0;
+  }
+
+
+.steelchefmodal{
+  text-align: left;
+  
+  .heading{
+    color:#000;
+    font-size: 20px;
+    padding:16px 0 16px 0;
+    margin:0;
+    font-family: $font-medium;
+  }
+  .subText{
+    color:#4a4a4a;
+    font-size: 16px;
+    font-family: $font-regular;
+    line-height: 16px;
+    margin:0 0 24px 0;
+  }
+  .buttonExp{
+    color:#ffffff;
+    border:none;
+    padding: 13px;
+    background: #000;
+  }
+}
   .kichenLayoutbanner{
     width:100%;
     background-color: #00b5a4;
@@ -99,23 +173,14 @@
     text-align: center;
     color: #000000;
   }
-  .Steel-Chef {
-    width: 97px;
-    height: 24px;
+  .Steel-Chef {      
     font-family: CeraGodrejInterio;
     font-size: 20px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
+    font-weight: 500;    
+    line-height: 20px;   
     color: #000000;
   }
-  .buttonExp {
-    width: 166px;
-    height: 46px;
-    background-color: #070707;
-  }
+  
   .bannerkitchen {
     width: 100%;
     height: 410px;
@@ -273,55 +338,83 @@ react-slideshow-container {
 
 
 
-.Blacks {
+.remembersection {
  width:100%;
   height: auto;
   background-color:#f2f5f7;
   .group60-button{
- align-self: auto;
+    align-self: auto;
   }
-  .Image-gallery2 {
-    height: 108px;
-    font-family: CeraGodrejInterio;
+  .Image-gallery2 {    
+   
+    font-family: $font-medium;
     font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
+    line-height: 30px;
+    font-weight: 500;    
     color: #ffffff;
-    text-align: center;
+    padding:0 0 30px 0;
+    margin:0;
+    
 
   }
-  .The-Work-Triangle {
-    height: 28px;
-    font-family: CeraGodrejInterio;
-    font-size: 20px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.4;
-    letter-spacing: normal;
-    color: #ffffff;
+  .The-Work-Triangle {    
+    font-family: $font-medium;
+    font-size: 20px;   
+    line-height: 20px;
+    color: #ffffff;   
+    margin:0px 0 12px 0 ;
   }
-  .ParagraphSmall {
-    height: 104px;
-    font-family: CeraGodrejInterio;
-    font-size: 14px;
+  .ParagraphSmall {    
+    font-family:$font-regular;
+    font-size: 14px;    
+    line-height: 14px;
+    color: #ffffff;
+    margin:0 0 40px 0;
     font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ffffff;
-    text-align: right;
+   
   }
-  .Rectangle-Copy-4 {
-    // margin-bottom: 80px;
-    // width: 540px;
-    height: 450px;
-    background-color: #2e93c2;
+  .RectanglularText {
+    height: 469px;
+    background-color: #036cc5;
+    padding: 60px 5% 0 8%;
     
+  }
+
+  .rememberImgbox{
+    .imgCenterbox{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding:60px 0 39px 0;
+      .imgcenter{
+        max-height: 300px;
+      }
+    }
+    .btnwrapper{
+      width: 60%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;  
+      .button.active{
+        background: #036cc5;
+        border: 1px solid #036cc5;
+        color: #fff;
+      }
+      .button{
+        border: 1px solid #77787a;
+        background: #ffffff;
+        color: #77787a;
+        font-size: 14px;
+        border-radius: 19px;
+        padding: 9px 31px;
+        &:focus{
+          outline: none;
+        }
+           
+      }
+      
+    }
   }
 }
 .Group-60 {
@@ -364,7 +457,6 @@ react-slideshow-container {
 //   color:black
 // }
 .Kitchen-Hall-Of-Fame {
-  // width: 297px;
   height: 36px;
   font-family: CeraGodrejInterio;
   font-size: 30px;

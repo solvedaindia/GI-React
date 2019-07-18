@@ -59,14 +59,18 @@ index: 0
                   </div>
                 </div>
               </div>
+              <div className="typesofkitch">
               <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
               <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
               <TypesOFkitchens />
+              </div>
+              <div className="easySteps">
               <div className="container">
                 <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
                 <DreamKitchens />
-              </div><br /><br /><br /><br />
+              </div>
+              </div>
               <div className="kichenLayoutbanner clearfix">
                 <div className="textBox">
                   <h1 className="Image-gallery">10 space-saving kitchen layouts</h1>
@@ -75,7 +79,8 @@ index: 0
                 <div className="imgBox">
                   <img className="kichenBlog" src={require('../../../public/images/mask@3x.png')} alt="rectangle" />
                 </div>
-              </div><br /><br />
+              </div>
+              <div className="whatgoesSlider">
               <div className="container">
                 <WhatGoes />
                 <h3 className="Name-Copy">Behind the Scenes Description</h3>
@@ -83,9 +88,11 @@ index: 0
                   consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
                   aliquat enim ad minim.</p>
               </div>
-              
+              </div>
               <AlwaysRemember /> 
+              <div className="kitchenHallLayout">
               <KitchenHall />
+              </div>
               <div className="container">
                 <div className="col-md-12">
                   <div className="row-md-6">
@@ -115,16 +122,12 @@ index: 0
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
-                  <br />
-                  <br />
-                  <br />
+
                   <ConsultationForm />
                 </div>
 
               </div>
-              <div>
                 <OurPromises />
-              </div><br /><br /><br />
               <div className="frequesntly">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br />
                 <div className="panel-group" id="accordion">
@@ -213,6 +216,7 @@ index: 0
 
                 </div>
               </div>
+              <div className="kitchenFaciliies">
               <div className="container">
                 <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
                 <div className="text-block">
@@ -223,28 +227,36 @@ index: 0
                     the home you've always wanted</p> <br />
                   <button className="seeMore">Know More</button>
                 </div>
-
+                </div>
               </div>
-              <div className="aboutgodrej">
-                <h className="About-Godrej-Interio ">Interio Kitchens</h><br /><br />
-                <p className="Godrej-Interio-is-In">Godrej Interio is India’s largest furniture brand. From
-                  manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
-                  diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
+              <div className="modularWardrobes">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                  <h3 className="heading">Modular Wardrobes</h3>
+                  <p className="subText">Godrej Interio is India’s largest furniture brand. From
+                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
+                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
 
-                  We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
-                  designed, fun and functional furniture solutions to you.<br />
+                    We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
+                    designed, fun and functional furniture solutions to you.<br />
 
-                  True to the Godrej mission to conserve the environment, we design products, set up processes and use
-                  raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
+                    True to the Godrej mission to conserve the environment, we design products, set up processes and use
+                    raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
 
-                  We offer our customers home and office furniture, along with solutions for laboratories, hospitals
-                  and healthcare establishments, education and training institutes, shipyards<br /> and navy,
-                  auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
-                  and through 800 dealer outlets.<br />
+                    We offer our customers home and office furniture, along with solutions for laboratories, hospitals
+                    and healthcare establishments, education and training institutes, shipyards<br /> and navy,
+                    auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
+                    and through 800 dealer outlets.<br />
 
-                  Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
-                  India’s largest engineering and consumer product groups.</p>
-                <br /><button className="Read-More ">Read More</button>
+                    Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
+                    India’s largest engineering and consumer product groups.</p>
+                  
+                  <button className="Read-More">Read More</button>
+                  </div>
+                </div>
+               
+              </div>
               </div>
             </div>
         )

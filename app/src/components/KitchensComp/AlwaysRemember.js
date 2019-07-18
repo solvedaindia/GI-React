@@ -30,32 +30,33 @@ index: 0
 
   render() {
     return (
-        <div className="Blacks clear fix">
-
+        <div className="remembersection clear fix">
         <div className="row">
-
-            <div className="Rectangle-Copy-4 col-md-4">
-                
-                    <h1 className="Image-gallery2">When planning your<br/> kitchen, always<br/> remember..</h1>
-                <h3 className="The-Work-Triangle ">The Work Triangle</h3>
-                <p className="ParagraphSmall">This consists of 3 fundamental and basic<br/> workstations i.e. the sink, refrigerator and<br/> the cooking hob/range. The triangle is<br/> measured from the center of the sink to the<br/> top of the refrigerator to the center of the<br/> cooking range.</p>
+            <div className="RectanglularText col-md-5">                
+                <h1 className="Image-gallery2">When planning your kitchen, always remember..</h1>
+                <h3 className="The-Work-Triangle">The Work Triangle</h3>
+                <p className="ParagraphSmall">This consists of 3 fundamental and basic workstations i.e. the sink, refrigerator and the cooking hob/range. The triangle is measured from the center of the sink to the top of the refrigerator to the center of the cooking range.</p>
                 <h3 className="The-Work-Triangle ">The 26 Feet Rule</h3>
-                <p className="ParagraphSmall">To ensure maximum efficiency, the work<br/> triangle perimeter should be at least 12 feet<br/> but must not exceed 26 feet.</p>
+                <p className="ParagraphSmall">To ensure maximum efficiency, the work triangle perimeter should be at least 12 feet but must not exceed 26 feet.</p>
 
             </div>
 
-            <div className="col-md-8 fix clear">
-            <img
-                      className="Group-60"
-                      src={this.state.imgList[this.state.index]}
-                      alt="rectangle"
-                    />
-                      </div>
-                    <div className="group60-button btn-group">
-  <button type="button" onClick={this.onHandleClickFirst.bind(this)} className="rectbut1">G Kitchen</button>
-  <button type="button"  onClick={this.onHandleClickSecond.bind(this)} className="rectbut1">Parallel Kitchen</button>
-  <button type="button"  onClick={this.onHandleClickThird.bind(this)} className="rectbut1">L Kitchen</button>
-</div>
+            <div className="col-md-7">
+           
+               <div className="rememberImgbox">
+                <div className="imgCenterbox">
+                    <img className="imgcenter" src={this.state.imgList[this.state.index]} alt="rectangle"/>
+                 </div>
+                 
+                 <div className="btnwrapper">
+                      <button type="button" onClick={this.onHandleClickFirst.bind(this)} className="button active">G Kitchen</button>
+                      <button type="button"  onClick={this.onHandleClickSecond.bind(this)} className="button">Parallel Kitchen</button>
+                      <button type="button"  onClick={this.onHandleClickThird.bind(this)} className="button">L Kitchen</button>
+                    </div>
+               </div>
+                 
+            </div>
+                    
           
 
         </div>

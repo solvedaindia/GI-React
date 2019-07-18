@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+const prevArrowImg = (
+  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
+);
+const nextArrowImg = (
+  <img src={require('../SVGs/carousel__arrowRight.svg')} />
+);
 
 export default class WhyPeopleLove extends Component {
   constructor(props) {
@@ -31,7 +37,9 @@ export default class WhyPeopleLove extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      prevArrow: prevArrowImg,
+      nextArrow: nextArrowImg
      
     };
     return (
