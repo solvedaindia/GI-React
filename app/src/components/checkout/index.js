@@ -313,6 +313,7 @@ export class CheckoutComponent extends React.Component {
                     enalblePay={this.enalblePay}
                     disablePay={this.disablePay} 
                     netAmount={this.state.orderSummaryData.netAmount} />
+
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
@@ -388,7 +389,8 @@ export class CheckoutComponent extends React.Component {
                   isLoggedIn={this.state.loggedIn} 
                   orderData={this.state.orderSummaryData} 
                   pay={this.state.pay} 
-                  initialBdpayment={this.initialBdpayment} />
+                  initialBdpayment={this.initialBdpayment}
+                  checkoutStep={this.state.step} />
               {/* </div>  */}
             </div>
             </div>    
