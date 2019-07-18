@@ -1446,7 +1446,7 @@
                 background: $greybg;
             }  
             .product-sku{
-                padding: 0px 0px 6px 0px;
+                padding: 15px 0px 6px 0px;
                 font-size: 11px;
                 color: $grey;
             }
@@ -1524,6 +1524,9 @@
             }
         } 
     } 
+    .Pdpstickybar{
+        display: none;
+    }
   }
 
 

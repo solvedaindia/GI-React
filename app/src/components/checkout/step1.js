@@ -302,7 +302,7 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    <button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed to checkout</button>
+                    {!isMobile() ? (<button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
                   </div>
             
               
@@ -330,6 +330,11 @@ export class Step1Component extends React.Component {
                 <div className='heading-label'>Choose a payment method</div>
                 </div>
               </div></>: ''}
+
+              {isMobile() ? (<div className='checkout-btn-floater'>
+                <div className='total-amount'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div>
+                <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed</button></div>
+              </div>):''}
                
             </div>
       )

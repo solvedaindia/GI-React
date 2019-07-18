@@ -625,6 +625,29 @@
                         display: none;
                     }
                 } 
+            }
+            .checkout-btn-floater{
+                position:fixed;
+                bottom: 0px;
+                left: 0px;
+                z-index: 911;
+                width: 100%;
+                .total-amount, .proceed-btn{
+                    width: 50%;
+                    float: left;
+                }
+                .total-amount{
+                    background:$colorwhite;
+                    min-height: 44px;
+                    text-align: center;
+                    font-family: $font-bold;
+                    font-size: 16px;
+                    padding-top: 3px;
+                    .total-amount-text{
+                        font-size: 10px;
+                        display: block;
+                    }
+                }
             } 
         }
     }
