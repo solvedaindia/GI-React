@@ -4,6 +4,7 @@ import { espotAPI } from '../../../../../public/constants/constants';
 import '../../../../../public/styles/myAccount/trackMyOrder.scss';
 import OrderItem from '../orderItem';
 import OrderStatusBar from '../orderStatusBar';
+import {imagePrefix} from '../../../../../public/constants/constants';
 
 class TrackOrderProduct extends React.Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class TrackOrderProduct extends React.Component {
            <div className="orderProduct clearfix">
           <div className="orderimgbox clearfix">
             <div className="imgBox">
-              <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+              <img src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
 
             <div className="product-text">
