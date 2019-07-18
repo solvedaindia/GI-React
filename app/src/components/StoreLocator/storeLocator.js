@@ -14,6 +14,7 @@ import phoneIcon from '../../../public/images/store/phoneIcon.svg';
 import starIcon from '../../../public/images/store/starIcon.svg';
 import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
+import {isMobile} from '../../utils/utilityManager';
 const NUMB_REG = /^\d+$/;
 
 class StoreLocator extends React.Component {
@@ -323,6 +324,7 @@ class StoreLocator extends React.Component {
 
                     { showFilter &&
                         <div className='storeTypes'>
+                             {isMobile() ? (<h1 className='headingtitle'>Choose store type</h1>):''}
                             <ul className='typeList'>
                                 <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture Stores', 'home')}>
                                     <figure className='typeList'><img src={Img1} className='storeImg'/></figure>
@@ -353,10 +355,10 @@ class StoreLocator extends React.Component {
                     }
                     { !storeData &&
                     <div className='storeTypes'>
-                        <h2>No stores within this {this.state.searchStoreType}</h2>
+                        <h2 className='headingtitle'>No stores within this {this.state.searchStoreType}</h2>
                         <>
                             { !showFilter &&
-                                <span>Please try another city or pincode</span>
+                                <span>Please try another city or pincode<br/><br/></span>
                             }
                         </>
                     </div>
@@ -366,8 +368,9 @@ class StoreLocator extends React.Component {
                 <div className="clearfix"></div>
                     { storeData &&                
                         <div className="storeDetails clearfix">
-                            <h1 className='headingtitle'>One stop destination for your furniture</h1>
+                            {!isMobile() ? (<h1 className='headingtitle'>One stop destination for your furniture</h1>):''}
                             <div className='storeList'>
+                            {isMobile() ? (<h1 className='headingtitle'>One stop destination for your furniture</h1>):''}
                                 {<div className='detailCard' id='detailCardSection'>
                                     {!!storeData && storeData.data.map((physicalData, index) => {
                                         const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, physicalData.latitude, physicalData.longitude);

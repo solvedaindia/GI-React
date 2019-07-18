@@ -1343,7 +1343,8 @@
         }
         &.active{
             .plusIcon{
-                background:url('../../images/substract.svg');
+                background:url('../../images/close-icon.svg');
+                background-size: cover;
             }
         }
     } 
@@ -1381,8 +1382,12 @@
                 }
                 &.active{
                     .plusIcon{
-                        background:url('../../images/substract.svg'); 
+                        background:url('../../images/close-icon.svg'); 
+                        background-size: cover;
                     }
+                }
+                &.active > .body {
+                    max-height: initial;
                 }
             }
               
@@ -1514,7 +1519,8 @@
             }
             .active{
                 .plusIcon{
-                    background:url('../../images/substract.svg');
+                    background:url('../../images/close-icon.svg');
+                    background-size: cover;
                 }
             } 
         }
