@@ -35,9 +35,11 @@ class SimilarCombosProducts extends React.Component {
       return (
         <div className="similarProducts" key={index}>
           <div className="productlist">
+          <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
             <div className="imgBox">
-              <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}><img className="imgfullwidth" src={imgUrl} alt="Img" /></a>
+              <img className="imgfullwidth" src={imgUrl} alt="Img" />
             </div>
+          </a>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
 
