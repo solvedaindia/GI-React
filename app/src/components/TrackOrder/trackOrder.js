@@ -1,9 +1,11 @@
 import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
+import { Link } from 'react-router-dom';
 import {
     trackOrderMiniAPI,
-    userDetailAPI
+    userDetailAPI,
+    imagePrefix
 } from '../../../public/constants/constants';
 import { getCookie } from '../../utils/utilityManager';
 import '../../../public/styles/trackMiniOrder/trackMiniOrder.scss';
@@ -77,17 +79,29 @@ class TrackOrder extends React.Component {
                 <Slider {...settings}>
                     {!!orderData && orderData.ongoingOrders.map((orderDetails) => {
                         return(
-                            // <p>
-                            //     {orderDetails.orderID}
-                            // </p>
-                            orderDetails.orderItems.map((subOrderDetails, index) => {
+                            orderDetails.orderItems.map((subOrderDetails) => {
                                 return(
-                                    <div className='orderSummary'>
-                                        <figure className='prodImg'>
-                                            <img src='https://192.168.0.57/imagestore/images/godrejInterio/pdp/sampleImages/56101502SD00473/56101502SD00473_546x307_01.png' alt={index}/>
-                                        </figure>
-
-                                    </div>
+                                    subOrderDetails.shipmentData.map((shipmentDetails, index) => {
+                                        return(
+                                            <div className='orderSummary'>
+                                                <figure className='prodImg'>
+                                                    <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index}/>
+                                                </figure>
+                                                <div className='prodDetails'>
+                                                    <p className='count'>ITEM({index}/{subOrderDetails.quantity})</p>
+                                                    <p className='orderID'>Order ID {orderDetails.orderID}</p>
+                                                    <p className='prodName'>{subOrderDetails.productName}</p>
+                                                    <span className='qty'>Quantity<br></br>{subOrderDetails.quantity}</span>
+                                                    <span className='status'>Status<br></br>{shipmentDetails.status}</span>
+                                                    <span className='delDate'>DELIVERY ON<br></br>{shipmentDetails.deliveryDate}</span>
+                                                </div>
+                                                <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
+                                                    <a className='link btn'>View Order</a>
+                                                </Link>
+                                            </div>
+                                        )
+                                    })
+                                    
                                 )
                             })
                         )
