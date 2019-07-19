@@ -57,9 +57,15 @@ import HelpSupport from '../serviceSupportContainer/index';
 
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
+import OrderConformtion from '../orderConfirmation/index'
+// import CartDetail from '../CartContainer/cartContainer';
 import CartDetail from '../CartContainer/cartContainer';
+import StoreLocator from '../../components/StoreLocator/storeLocator';
+import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
+import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -179,6 +185,7 @@ export default class App extends React.Component {
         ) : (
           <HeaderContainer />
         )}
+        
         {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
@@ -195,6 +202,7 @@ export default class App extends React.Component {
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
+          <Route path="/order/confirm/:orderId" component={OrderConformtion} />
           <Route path="/cart" component={CartDetail} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
@@ -202,11 +210,9 @@ export default class App extends React.Component {
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
           <Route path="/kitchen2" component={SteelChefKitchen} />
-
-
-
-
-
+          <Route path="/storelocator" component={StoreLocator} />
+          <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
+          
         </Switch>
         <FooterContainer />
       </div>

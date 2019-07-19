@@ -60,7 +60,7 @@ class CartDetail extends React.Component {
                   <div className='prodDetails'>
                     <h3 className='prodTitle'>{itemData.productName}</h3>
                     <p className='subTitle'>({itemData.shortDescription})</p>
-                    {!itemData.freeGift &&
+                    {!isMobile() && !itemData.freeGift &&
                       <CartUpdate
                         quantity={itemData.quantity}
                         orderItemId={itemData.orderItemId}
@@ -80,9 +80,18 @@ class CartDetail extends React.Component {
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
                     <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
-                    <span className='price'>₹{itemData.offerPrice}</span>
-                    <span className='shipping'>Shipping charge ₹300</span>
-                  </div>
+                    {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
+                    {!isMobile() && <span className='shipping'>Shipping charge ₹300</span>}
+					</div>
+					{!!isMobile() && <div className='quantityPrice'>
+						{!itemData.freeGift &&
+						<CartUpdate
+							quantity={itemData.quantity}
+							orderItemId={itemData.orderItemId}
+							getCartDetails={this.props.getCartDetails}
+						/>}
+						<p className='price'>₹{itemData.offerPrice}</p>
+					</div>}
                 </li>
               ))}
             </ul>
@@ -103,7 +112,7 @@ class CartDetail extends React.Component {
             <div className='summary'>
               <p className='cartTotal'>
                 <span className='info'>Cart Total</span>
-                <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
+                <span className='val'> ₹{cartData.orderSummary.totalAmount}</span>
               </p>
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">
@@ -135,7 +144,7 @@ class CartDetail extends React.Component {
               </p>
               <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
-                <span className='val'>₹{cartData.orderSummary.totalAmount}</span>
+                <span className='val'>₹{cartData.orderSummary.netAmount}</span>
                 <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
               </p>
               <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>

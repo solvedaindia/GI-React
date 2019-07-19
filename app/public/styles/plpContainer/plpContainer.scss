@@ -174,10 +174,8 @@ section.tablecarousel {
   .searchresult {
     .headingTitleFlat {
       font-family: $font-regular;
-      font-size: $base * 3.75;
       color: $black;
       margin: 0;
-      padding: 73px 0 16px 0;
     }
     .headingTitleSearch {
       font-family: $font-bold;
@@ -975,6 +973,12 @@ section.tablecarousel {
     .headingSubTitle{
       padding: 0 0 32px 0;
     }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 73px 0 16px 0;
+        font-size: $base * 3.75;
+      }
+    }
   }
 }
 
@@ -1057,6 +1061,12 @@ section.tablecarousel {
     }
     .headingSubTitle{
       padding: 0px;
+    }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 20px 0 16px 0;
+        font-size: $base * 2.75;
+      }
     }
   }
 }

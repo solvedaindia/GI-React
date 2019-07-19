@@ -95,11 +95,12 @@ class ForgotPasswordOTP extends React.Component {
     const data = {
       user_id: this.props.userIdPro,
       resend: 'true',
-      forgot_password: 'true',
+      forgot_password: this.props.isFromMyProfilePro ? 'false' : 'true',
     };
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
+        console.log('rrbrb -- ',response.data)
         const otpCount = response.data.data.otpCount;
         if (otpCount === 3) {
           const nextComp = 'ForgotPasswordOTP';
@@ -107,8 +108,7 @@ class ForgotPasswordOTP extends React.Component {
           this.setState({
             showOTPTxtField: false,
             error: true,
-            errorMessage:
-              'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
+            errorMessage: 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
             errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           });
         }
@@ -116,11 +116,16 @@ class ForgotPasswordOTP extends React.Component {
         alert(`OTP - ${otpValue.otpVal}`);
       })
       .catch(error => {
+        console.log('dmeee -- ',error);
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({
+          // error: true,
+          // errorMessage,
+          showOTPTxtField: false,
           error: true,
-          errorMessage,
+          errorMessage: errorMessage,
+          errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
         });
       });
   }
@@ -247,7 +252,7 @@ class ForgotPasswordOTP extends React.Component {
             <div className="form-div enterotp-msg clearfix">
               {inputTxtField}
               {errorItem}
-              {this.props.isFromMyProfilePro ? null : resendBtn}
+              {resendBtn}
             </div>
           </FormGroup>
           <FormGroup />

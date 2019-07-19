@@ -1,0 +1,305 @@
+@import '../variable';
+
+
+.storeLocator {
+    // @include container-width;
+    margin: 0 auto;
+    text-align: center;
+    .pc-field {
+        padding: 8px;
+    }
+    .pc-btn {
+        background-color: $ashGrey;
+        color: $colorwhite;
+        padding: $base*1.125;
+        border: 1px solid $ashGrey;
+    }
+    .storeTypes {
+        .typeList{
+        justify-content: center;
+        
+        .active{
+            border:1px solid $black !important;
+        }
+        .storeTypeItem{
+            display: block;
+            border: 1px solid #ddd;
+            margin: 1%;
+            float: left;
+            .typeList {
+                width: 51%;
+                margin: auto;
+            }
+            .storeImg {
+                width: 100%;
+            }
+        }
+    }
+
+    }
+}
+.storeDetails {
+    .headingtitle{
+        font-size:$base*3.75;
+        color:$black;
+        padding:0 0 24px 0;
+        font-family: $font-medium;
+    }
+    .storeList {     
+        margin: 0 19px 0 0;
+        background: #f7f8f8;
+        padding: 25px;
+        .detailCard{
+            overflow: auto;
+            padding: 0 12px 0 0;
+            .storeListItem.ribbon{
+              .Storewrapper{
+                  padding-top:23px;
+              }
+            }
+        .storeListItem{
+            position: relative;
+            background-color: $colorwhite; 
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+            margin:0 0 15px 0;
+            padding: 25px 24px;
+            width: 100%;
+            .modular_wardrobe{
+                position: absolute;
+                top:8px;
+                background:$black;
+                color:$colorwhite;
+                left: 0;
+                padding: 5px 10px;
+                font-size: 12px;
+                .icons{
+                    margin:0 5px 0 0;
+                }
+                .icons,.ribbonText {
+                 display: inline-block;
+                }
+            }
+            .Storewrapper{
+                margin: 0px 0 7px 0;
+                .storeName,.distance{display: inline-block}
+                .storeName{
+                  width:80%;
+                  margin:0;
+                  font-family: $font-medium;
+                  color:$black;
+                }
+                .distance{
+                  color:$greenLight;
+                  font-size:14px;
+                  font-family: $font-medium;
+                  width:20%;
+                }
+            }
+            .phoneDetails{
+                padding: 0 0 20px 0;
+                .phoneicon{
+                    width: 14px;
+                    margin:0 17px 0 0;
+                }
+                .phoneicon,.PhoneNo{
+                   display: inline-block;
+                }
+                .PhoneNo{
+                    font-size: 14px;
+                    color:$black;
+                    font-family: $font-regular;
+                }
+            }
+            .direction_dealerwrp{
+                display: flex;
+                .getDirection{
+                    color:$cerulean;
+                    font-size: $base*2;
+                    width: 50%;
+                    line-height: 16px;
+                    text-decoration: underline;
+                    font-family: $font-medium;
+                }
+                .getDirection,.dealer{display: inline-block;}
+                .dealer{                   
+                    font-size: $base*1.5;
+                    width: 50%;
+                    color:$black;
+                    .dealertext{text-align: right}
+                    .mapicon{
+                        width: 14px;
+                        margin: 0 5px 0 0;
+                    }
+                }
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+    }
+    }
+    .mapContainer {
+        height: 500px;
+    }
+    .storeList,
+    .mapContainer {
+        display: block;
+        float: left;
+    }
+}
+
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .storeLocator{
+            width: 80%;
+            .title {
+                margin: $base*8 0 $base*6.25 0;
+            }
+            .pc-field{
+                width: 36%;
+            }
+            .pc-btn{
+                width: 22%;
+            }
+            .storeTypes{
+                padding: 40px 0 0 0;
+                .typeList{
+                    display: flex;
+                    .storeTypeItem{
+                        width: 13%;
+                        min-height: 130px;
+                    }
+                } 
+            } 
+        }
+        
+        .storeDetails {
+            width: 91.63%;
+            margin-left: 8.37%; 
+            .storeList {
+                width: 35%;  
+                .detailCard{
+                    height: 400px;
+                }
+            }
+            .mapContainer{
+                width: 63%;
+            }
+        }
+    }
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+  
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .storeLocator{
+        width: 90%;
+        .title {
+            margin: $base*3 0 $base*3 0;
+        }
+        .pc-field{
+            width: 70%;
+        }
+        .pc-btn{
+            width: 30%;
+        }
+        .storeTypes{
+            padding: 20px 0 0 0;
+            .typeList{
+                .storeTypeItem{
+                    width: 48%;
+                    display: flex;
+                    min-height: 70px;
+                    .storetext{
+                        display:flex;
+                        align-items:center;
+                        font-size: 11px;
+                    }
+                }
+            } 
+            .headingtitle{
+                font-size: 18px;
+            }
+            
+        } 
+    } 
+    
+    .storeDetails {
+        width: 100%;
+        .storeList {
+            width: 100%;  
+            .headingtitle{
+                font-size: 18px;
+            }
+        }
+        .mapContainer{
+            width: 100%;
+        }
+    }
+  }
+  
+  
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

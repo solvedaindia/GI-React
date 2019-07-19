@@ -28,6 +28,10 @@ export const browserFilter = (browserFilterData) => ({
   browserFilter: browserFilterData,
 });
 
+export const clearAllRWDFilters = () => ({
+  type: actionTypes.CLEARALLFILTER,
+});
+
 export const adBannerAction = (value, sIndex) =>
   // console.log('adBannerAction', actionTypes);
   ({
