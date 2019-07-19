@@ -22,6 +22,16 @@
         text-align: center;
         color: $colorwhite;
         border: none;
+        font-family: $font-medium;
+    }
+    .btn-cancelborder {
+        background: $colorwhite;
+        padding: 11px 0;
+        text-align: center;        
+        border: 1px solid $black;
+        font-size: $base*1.75;
+        color:$black;
+        font-family: $font-medium;
     }
     .heading {
         padding: 0 0 13px 0;
@@ -184,9 +194,9 @@
                     }
                     .pay_radio {
                         padding: 0 0 26px 0;
-                        .inputRadio,
+                        .inputBox,
                         .form-label {
-                            display: inline;
+                            display: inline-block;
                         }
                         .inputRadio {
                             margin: 0 15px 0 0;
@@ -195,6 +205,57 @@
                             font-size: 16px;
                             font-weight: normal;
                             color: $black;
+                            line-height: 16px;
+                            margin: 0 0 0 15px;
+                        }
+                    }
+                    .dropdown-toggle{
+                        background: $colorwhite;
+                        padding:14px 15px;
+                        border:1px solid $lightGrey;
+                        min-width:268px;
+                        box-shadow: none;
+                        text-align: left;
+                        font-size: 14px;
+                        position: relative;
+                        color:$greyish;
+                        font-family: $font-medium;
+                        margin: 0 0 40px 0;
+
+                        .caret{
+                            position: absolute;
+                            right: 15px;
+                            top: 22px;
+                            color: rgba(68, 43, 45, 0.54);
+                        }
+                    }
+                    .dropdown-menu{
+                        width:100%;
+                        border-radius: 0;
+                        top: 48px;
+                        margin:0;
+                        padding:0;
+                        box-shadow: rgba(0, 0, 0, 0.14);
+                        max-height: 192px;
+                        overflow: auto;
+                        li{
+                            padding:14px 15px;
+                            border-bottom: 1px solid $lightGrey;                            
+                            a {                           
+                            color:$battleshipGrey;
+                            font-size: 14px;
+                            font-family: $font-regular;
+                            text-decoration: none;
+                            &:focus{
+                                outline: none;
+                            }
+                           }   
+                           &:last-child{
+                              border-bottom: none;
+                           }                    
+                         }
+                        li.divider{
+                            display: none;
                         }
                     }
                 }
@@ -377,11 +438,13 @@
                         padding: 15px 8px 15px 8px;
                         font-size: $base*1.625;
                         min-height: 130px;
-                        // width: 48.5%;
-                        display: inline-block;
+                        width: 49%;
+                        display: block;
+                        float: left;
                         margin: 0 8px 12px 0;
                         border-radius: 2px;
-                        &:nth-child(2) {
+                        cursor: pointer;
+                        &:nth-child(even) {
                             margin-right: 0;
                         }
                         .inputBox,
@@ -391,6 +454,7 @@
                         }
                         .inputBox {
                             width: 10%;
+                            height: 20px;
                         }
                         .addressText {
                             width: 90%;
@@ -490,12 +554,111 @@
     }
 }
 
-.dropdown-menu {
-    height: 160px;
-    overflow-y: scroll;
-    z-index: 0 !important;
+.orderconfirm{
+    margin:52px 0 70px 0;
+    .orderConfirmed{
+        .heading{
+            color:$cerulean;
+            font-size: 24px;
+            font-family: $font-bold;
+            margin:0;
+            padding: 0 0 10px 0;
+        }
+        .text{
+            color:$battleshipGrey;
+            font-size: 16px;
+            font-family: $font-regular;
+            line-height: 16px;
+            margin:0;
+            padding:0 0 5px 0;
+        }
+    }
+    .continueShopping{
+        float:right;
+        .btn-bg{
+            font-size: 14px;
+            
+        }
+    }
+    .orderDetails{
+        margin:45px 0 0 0;
+        padding:32px 24px 53px 24px;
+        background:$greybg;
+       .heading-details{
+           font-size: 24px;
+           color:$black;
+           margin:0 0 24px 0;
+           line-height: 24px;
+
+       }
+    }
 }
 
-.dropdown-menu .divider {
-    margin: 3px 0 !important;
+
+/* Radio custom css
+-------------------------*/
+.paymentMethod.customradio{
+    .inputBox{
+        &:before {  
+            top: 3px;
+        }
+    }    
 }
+.customradio{
+    .input[type='radio'] {
+        display: none;        
+    }
+    .inputBox{
+        position: relative;
+    &:before {       
+        content: " "; 
+        display: inline-block;
+        position: relative;
+        top: 4px;
+        margin: 0 0px 0 0;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
+        border: 1px solid $black; 
+        background-color: transparent;
+     }
+     .labelchecked{
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        left: 0;
+     }
+     .input[type='radio']:checked+.labelchecked {
+        border-radius: 100%;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 7px;
+        left: 3px;
+        display: block;
+        background-color: $black;
+      }
+    }
+}
+
+/* ScrollBar 
+---------------------*/
+ .dropdown-menu::-webkit-scrollbar-track
+{   box-shadow: inset 0 0 6px $colorwhite;
+    -webkit-box-shadow: inset 0 0 6px $colorwhite;
+    border-radius: 2px;
+    background-color: #cac9c9;
+}
+.dropdown-menu::-webkit-scrollbar
+{
+    width: 4px;      
+}
+.dropdown-menu::-webkit-scrollbar-thumb
+{
+    border-radius: 2px;
+    height: 50px;
+    box-shadow: inset 0 0 6pxrgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 0 0 6pxrgba(0, 0, 0, 0.5);
+    background-color: #d1d1d2;
+}
+

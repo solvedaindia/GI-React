@@ -243,7 +243,7 @@ export class Step3Component extends React.Component {
         return <DropdownButton
                   bsSize="large"
                   title="Select a Wallet"
-                  id="dropdown-size-large"
+                  id="dropdown-size-large"                  
                 >
                   {menuItems}
                 </DropdownButton>
@@ -349,38 +349,56 @@ export class Step3Component extends React.Component {
                       </div> : ''}
                     </div>
  
-                   <div className='paymentMethod'>
+                   <div className='paymentMethod customradio'>
                     <h4 className='heading'>Select Payment Method</h4>                   
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>Credit Card/Debit Card</label>
+                      <div className="pay_radio"> 
+                        <div className="inputBox">                      
+                          <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
+                          <label className='labelchecked' htmlFor='credit'></label>
+                        </div> 
+                        <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
                       </div>
 
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="netBank" checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>Netbanking</label>
+                      <div className="pay_radio"> 
+                        <div className="inputBox"> 
+                          <input className='inputRadio input' type="radio" id="netBank" name="netBank" checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
+                          <label className='labelchecked' htmlFor='netBank'></label>
+                        </div>
+                        <label htmlFor='netBank' className='form-label'>Netbanking</label>
                       </div>
 
                       {this.renderBanks()}
 
-                      <div className="pay_radio">                        
-                        <input name="cod" className='inputRadio' type="radio" name="COD" checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>Cash on Delivery</label>
+                      <div className="pay_radio">  
+                        <div className="inputBox">                       
+                          <input name="cod" className='inputRadio input' type="radio" id="cod" name="COD" checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
+                          <label className='labelchecked' htmlFor='cod'></label>
+                        </div>
+                        <label htmlFor='cod' className='form-label'>Cash on Delivery</label>
                       </div>
 
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="UPI" checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>UPI Payment</label>
+                      <div className="pay_radio">  
+                      <div className="inputBox">                       
+                        <input className='inputRadio input' id='upi' type="radio" name="UPI" checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
+                        <label className='labelchecked' htmlFor='upi'></label>
+                       </div>
+                        <label className='form-label' htmlFor='upi'>UPI Payment</label>
                       </div>
 
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="EMI" checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>EMI</label>
+                      <div className="pay_radio">  
+                      <div className="inputBox">                      
+                        <input className='inputRadio input' id='emi' type="radio" name="EMI" checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
+                        <label className='labelchecked' htmlFor='emi'></label>
+                      </div>
+                        <label htmlFor='emi' className='form-label'>EMI</label>
                       </div>
 
-                      <div className="pay_radio">                        
-                        <input className='inputRadio' type="radio" name="wallet" checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='form-label'>Wallets</label>
+                      <div className="pay_radio">    
+                      <div className="inputBox">                    
+                        <input className='inputRadio input' id='wallet' type="radio" name="wallet" checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
+                        <label className='labelchecked' htmlFor='wallet'></label>
+                       </div>
+                        <label htmlFor='wallet' className='form-label'>Wallets</label>
                       </div>
                       {this.renderWallets()}
                     

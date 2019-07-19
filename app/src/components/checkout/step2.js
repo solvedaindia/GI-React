@@ -858,21 +858,18 @@ export class Step2Component extends React.Component {
       if(this.state.addressList && this.state.addressList.length > 0) {
         var list = [];
         this.state.addressList.forEach((add, index) => {
-          list.push(
-            <div className="col-md-6">
-              <ul className="saveAddress">
-                <li className='list' onClick={this.handleAddressChange.bind(this, index)} style={{cursor: "pointer"}}>
+          list.push(            
+                <li className='list' onClick={this.handleAddressChange.bind(this, index)}>
                   <div className='inputBox'>
-                     <input type="radio" name="optradio" value={index}  checked={this.state.selected_add == index} />
+                     <input className="input" type="radio" name="optradio" value={index}  checked={this.state.selected_add == index} />
+                     <label className='labelchecked'></label>
                   </div>
 
                   <div className='addressText'>{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
-                </li>
-              </ul>
-            </div>
+                </li>                      
             )
         });
-        return <div className="row">{list}</div>;
+        return <ul className="saveAddress customradio clearfix">{list}</ul>;
       }
     }
 
@@ -941,7 +938,7 @@ export class Step2Component extends React.Component {
                           null}
                         </div>
                       </div>
-                      <div className="col-md-6 colpaddingRight">
+                      <div className="col-md-6">
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
                             onChange={e=> this.phoneChange(e)} />
@@ -1090,15 +1087,20 @@ export class Step2Component extends React.Component {
                   </div> : <div>
                   <div className="row">
                       <div className="col-md-12">
-                        <div>
-                          <input className='checkbox' type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
-                          <label className='label-billing' htmlFor="billing">Make this the default address</label>
+                      <div className='havePassword customCheckbox clearfix'>
+                        <div className='input_box'>
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <label className="lblCheck" htmlFor="checkboxBill"></label>
+                        </div>
+                          
+                          <label className='form-label defaultlbl' htmlFor="billing">Make this the default address</label>
                         </div>
                       </div>
+
                     </div>
                     <div className="row">
                         <div className="col-md-6">
-                          <button className="btn-blackbg btn-block">cancel</button>
+                          <button className="btn-cancelborder btn-block">cancel</button>
                         </div>
                         <div className="col-md-6">
                           <button className="btn-blackbg btn-block"  onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
