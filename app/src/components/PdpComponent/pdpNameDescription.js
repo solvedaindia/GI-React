@@ -8,7 +8,7 @@ const pdpNameDescription = (props) => {
                 <h4 id="box1" className='heading' style={{opacity: '1'}}>
                     {props.productData.productName}
                 </h4>
-                    {props.productData.shortDescription}<br/>
+                <div className="materialType"> {props.productData.shortDescription}</div>
             </Col>
             </Row>
         </>    

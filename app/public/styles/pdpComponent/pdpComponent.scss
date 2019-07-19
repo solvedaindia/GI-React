@@ -167,6 +167,26 @@
    }
 .gallaryWrapper{
       position: relative;
+      //.image-gallery-image img{width: 100% !important}
+      .image-gallery{
+          .image-gallery-content:not(.fullscreen){
+              .image-gallery-slides{
+               img{width:100% !important;}
+              }
+          }
+
+          .image-gallery-content:has(.fullscreen){
+            .image-gallery-slides{
+                .image-gallery-image{
+             img{width:100% !important;}
+            }
+            }
+        }
+          .image-gallery-thumbnail {
+            img{height:auto;}
+          }
+          
+      }
      .image-gallery-slides{ 
         max-height: 600px; 
       }
@@ -216,6 +236,24 @@
                 height: 45px;
                 padding:0;
                 font-size: unset;
+                &:before,&:after{
+                    transform: scale(0.7);
+                }
+            }
+            .image-gallery-image{
+                text-align: center;
+                min-height: 100vh;
+                max-height: 100vh;               
+                overflow: hidden;
+                img{
+                    transition: all .5s;
+                    -moz-transition: all .5s;
+                    -webkit-transition: all .5s;
+                    -o-transition: all .5s;
+                    -ms-transition: all .5s;
+                    max-width: 3500px;
+                    min-width: 1280px;
+                }
             }
          }
      }
@@ -228,10 +266,16 @@
         }
         .wishListDiv{
             font-size: 10px;
+            line-height: 10px;
             color: $greyish;
+            font-family: $font-medium;
             .wishlistBtn {
                 border: none;
                 background: none;
+                position: relative;
+                img{
+                    width: 17px;
+                }
             }
             .user {
                 opacity: 0;
@@ -241,6 +285,8 @@
             font-size: 10px;
             margin-left: 12px;
             color: $greyish;
+            line-height: 10px;
+            font-family: $font-medium;
             cursor: pointer;
             position: relative;
             .share-btn{
@@ -281,10 +327,14 @@
             }
         }
     }
-    .product{    
-        font-weight: 600; 
+    .product{
+        padding:0 0 5px 0px; 
+        font-family: $font-medium;     
+        line-height: 12px;
         .text{
-            color:$grey;                
+            color:$grey;
+            font-size: 12px;                 
+            font-family: $font-medium;                   
         }      
     }
 
@@ -294,13 +344,23 @@
         color:$ashGrey;
         font-family: $font-bold;
         font-size:30px;
-        padding:0 0 5px 0px;      
+        line-height: 30px;
+        padding:15px 0 5px 0px;         
      }
+     .materialType{
+        color:$greyish;
+        font-size:$base*2.25;
+        line-height: $base*2.25;
+        font-family: $font-regular;
+      }
     }
 
     .price{
         font-family: $font-bold;
         font-weight: 600;
+        display: flex; 
+        flex-wrap: wrap;
+        margin:15px 0 0 0;
        .text{
         margin:0;
         display: inline-flex;
@@ -308,17 +368,22 @@
         }       
         .actualprice{
             color:$grey;
-            font-size: 18px;                 
+            font-size: 18px;   
+            line-height: 18px;              
             text-decoration: line-through;
             text-decoration-color:$reddishpink;
         }
         .offerprice{
             color:$cerulean;
-            font-size:28px;
+            font-size:30px;
+            line-height: 28px;
             margin:0 10px 0 0;
         }
     }
     .shippingCharge{
+        font-size: 12px;
+        font-family: $font-regular;
+        margin: 0 0 5px 0;
         .bold{
             font-family: $font-bold;
         }
@@ -337,13 +402,22 @@
        }
        .discount-off{
            font-family: $font-bold;
+           min-width: 68%;
        }
        .viewOffer{
-           float:right;
-           font-family:$font-bold;
+        //    float:right;
+           font-family:$font-medium;
            font-size: 12px;
            color:$cerulean;
            text-decoration: none;
+           .upArrow{
+            padding: 0 0 0 12px;
+            opacity: 0.54;
+            width: 22px;
+           }
+           .downArrow{
+               transform: rotate(-90deg);
+           }
        }
     }
 
@@ -391,7 +465,10 @@
                 border: 0;
                 color:$cerulean;
                 font-family: $font-bold;
-                font-size: 12px;               
+                font-size: 12px;    
+                &:focus{
+                    outline: none;
+                }           
             }            
         }
         
@@ -412,25 +489,34 @@
         .pincode{
             border:1px solid $lightGrey;
             background: $colorwhite;
+            margin: 16px 0 0 0;
             .PincodeTextdata{
                 padding: 11px 19px;
+                display: flex;
                 .pincodeVal,.pincodeEdit{
                     display: block;
                     
                 }
+                .mapflag{
+                    float: left;
+                    width:18px;
+                    margin:0 14px 0 0;
+                    }
                 .pincodeVal{
                     float:left;
                     width: 70%;
                     border: none;
                     color:$black;
                     font-size: 18px;
+                    padding: 0px 0 0 0;
                     font-family: $font-bold;
+                    line-height: 24px;
                 }
                 .pincodeEdit{
                     color:$ceruleanblue;
                     float:right;
                     font-family: $font-bold;
-                    font-size: 14px;
+                    font-size: 12px;
                     padding: 5px 0 0 0;
                 }
             }
@@ -502,16 +588,77 @@
         background:$iceBlue;
         padding:18px 12px;
         font-size:12px;
-        margin:0 0 16px 0;
+        // margin:0 0 16px 0;
     }
 
     .attr-details-box{
         padding-top: 15px;
+        border-bottom: 1px solid $borderLight;
+        margin: 0 0 0px 0;
+        .swatcheWrapper{margin:0 0 20px 0}
+        .boxClass{   
+            label{
+                border:transparent;
+                line-height: 12px;
+                margin: 0;
+                box-shadow:none;
+
+                border:1px solid $lightGrey;
+                margin: 0 17px 0 0;
+                font-size: 12px;
+                color:$battleshipGrey;
+                padding: 14px 17px;
+                font-weight: normal;
+                font-family: $font-medium;
+                border-radius: 0;
+                &:hover{                    
+                    box-shadow:none;
+                }
+            }
+            
+            input[type="radio"]{
+                margin:0;
+                float: left;
+                visibility: hidden;
+                height: 0;
+                width: 0;
+
+            }
+        }
+        .active{
+            border:none;
+            label{
+                border:2px solid $black;
+                line-height: 10px;
+                color:$black;
+            }            
+        }
         .att-val-name{
-            padding-bottom: 10px;
+            padding-bottom: 16px;
+            font-family: $font-medium;
+            line-height: 12px;
+
+            .attributeName{
+                font-size: 10px;
+                font-family: $font-medium;
+                font-weight: bold;
+                text-transform: uppercase;
+                color:$ashGrey;
+  
+              }
+              .attributeVal{
+                  font-size: 12px;
+                  font-family: $font-medium;
+                  font-weight: bold;
+                  color:$black;
+              }
         }
     }
-    
+    .dropdownwishlist{
+        top: -64px;
+        right: 10%;
+      }
+      
   }
 
 
@@ -551,6 +698,7 @@
                         font-size: 14px;
                         color:$greyLight;
                         display: block;
+                        font-family: $font-regular;                        
                         .heading{
                             font-size: 20px;
                             color:$black;
@@ -558,6 +706,7 @@
                             padding:0;
                             text-transform: capitalize;
                             padding: 0 0 5px 0;
+                            font-family: $font-medium;
                         }
                     }
                     &:hover{
@@ -650,9 +799,30 @@
     }
 }
 
+
+.addedToWishlist.pdpWishlist{
+    min-width: 250px;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 3;
+  }
+
 /* Product_details
 -----------------------------*/
 .product_details{
+    padding:87px 0 0px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid $lightblueGrey;
+    position: relative;
+    &::after{
+        width:100%;
+        height:1px;
+        background: $lightblueGrey;
+        position: absolute;
+        content: '';
+        left: 15px;
+    }
     .heading{
         color:$black;
         margin:0;
@@ -692,6 +862,20 @@
      }
      .tabcontent{
         border-top: 1px solid $lightblueGrey;
+        .headingText{
+          font-size: 14px;
+          line-height: 14px;
+          color:$greylightColor;
+          font-family: $font-bold;
+          margin:0 0 10px 0;
+        }
+        .subText{
+           color:$greyish;
+           font-size: 14px;
+           line-height: 14px;
+           font-family: $font-regular;
+           margin:0 0 30px 0;
+        }
      }
  }
 
@@ -700,6 +884,7 @@
 /* MoreKeyword
 -----------------------*/
 .moreKeyword{
+    padding:70px 0 0 0;
   .heading{
     color:$black;
     margin:0;
@@ -861,9 +1046,10 @@
        }
     }
 
+    .slick-prev,.slick-next{min-width: 20px}
     .slick-prev{
         position: absolute;
-        right:50px;
+        right:40px;
         bottom: -80px;
         top:unset;       
         left: auto;
@@ -891,6 +1077,7 @@
             }
           }
           .emi_modal{
+              width:100%;
             padding: 30px;
             .heading{
                 margin:0 0 16px 0;
@@ -899,7 +1086,7 @@
                 font-size: 18px;
             }
             .emi_list{
-                padding:0 0 0 20px;
+                padding:0 0 25px 20px;
                 .list{
                     font-size: 12px;
                     padding: 0 0 2px 0;
@@ -997,12 +1184,14 @@
     display: block;
 }
 .attributeList {
-    display: inline-block;
-    padding: 0 7px 0 0;
+    display: block;
+    float: left;
+    padding: 0 0px 0 0;
     label{
         cursor: pointer;
         border: 3px solid $colorwhite;
         border-radius: 100%;
+        margin: 0 17px 0 0;
         
         &:hover{
             box-shadow: 0px 0px 0px 1px #b38602;
@@ -1044,6 +1233,56 @@
     width: 20%;
     text-align: center;
 }
+.bankEmiList{background-color: rgba(0, 0, 0, 0.11) !important;
+.subText{
+    font-family: $font-regular;
+    color:$battleshipGrey;
+    font-size: $base*1.5;
+}
+}
+.emiPlans{
+    text-align: center;
+}
+.emiPlans>tr:nth-of-type(even) {
+    background-color: rgba(238, 237, 237, 0.3);
+}
+.emiPlans tr>td{
+    width: 25%;
+}
+.emiPlans tr>td,th{
+    font-family: $font-medium;
+    color:$greyDark;
+    padding:9px 0;
+    font-size: 14px;
+}
+.tabHeading{
+    border-bottom: 2px solid $lightgrey;
+    border-collapse:separate;
+    border-spacing:0 5px;
+    td{
+        padding:0 !important;
+        margin:0 0 5px 0 !important;
+        
+    }
+    
+    .tableHeading{
+        width:88%;
+        margin:0 auto;
+    }
+}
+.spacing{
+    background-color: transparent !important;
+    .seprater{padding: 0px 0}
+}
+.emiPlans tr>td.active{
+        border-bottom: 2px solid $cerulean;
+        font-weight: bold;
+    }
+.banklistdata > td{
+    
+        padding:0 !important;
+    
+}
 
 .emiPlans a {
     padding: 20px;
@@ -1075,8 +1314,8 @@
     
     .pdpstickyItem{
     .product{
-        width:50%;        
-        padding: 2px 0 0 5%;
+        width:40%;        
+        padding: 2px 0 7px 5%;
         float: left;       
         
         .productId{
@@ -1115,12 +1354,25 @@
                }
             }
             .offerprice{
+                margin:0;
+                color:$cerulean;
+                font-family: $font-bold;
+                font-size:28px;
+                padding: 0 13px 0 0;
                 .priceText{
                    margin:0;
                    color:$cerulean;
                    font-family: $font-bold;
                    font-size: $base*3.5;
                 }
+            }
+            .actualprice{
+                margin:0;
+                color: $grey;
+                font-size: 18px;
+                text-decoration: line-through;
+                text-decoration-color:$reddishPink;
+                font-family: $font-bold;
             }
             .priceno-discount{
                 font-size: 18px;
@@ -1133,14 +1385,18 @@
         .accessories-offer,
         .discount-off
         {
-           display: block;
-           float: left;
+        //    display: block;
+        //    float: left;
+        display: flex;
+        float: left;
+        align-items: center;
         }
         .accessories-offer{
             color:$reddishpink;
             font-size: 14px;
             padding: 0 40px 0 0;
             font-family: $font-regular;
+            min-height: 30px;
             .bold{
                 font-family: $font-bold;
             }
@@ -1148,7 +1404,7 @@
         .addCart{
            .addcartbtn{
                background: $black;
-               padding: 27px 100px;
+               padding: 22px 100px;
                text-align: center;               
                color:$colorwhite;
                border-radius: 0;
@@ -1186,8 +1442,7 @@
     */
     @media screen and (min-width: 768px){
         .product_details{
-            padding:87px 0 0px 0;
-            border-bottom: 1px solid $lightblueGrey;
+            padding:87px 0 0px 0;           
             .product_description{
                 .tabcontent{
                     padding: 30px 49px;
@@ -1554,3 +1809,26 @@
     
     
   }
+.zoominout{
+    position: fixed;
+    bottom: 71px;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    .zoomin{
+        margin-right:46px;
+    }
+    .zoom{
+        background:$colorwhite;
+        width: 30px;
+        height:30px;
+        border: none;
+        border-radius: 100%;
+        img{
+            width: 14px;
+        }
+    }
+}

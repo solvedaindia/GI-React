@@ -6,16 +6,21 @@ const price = props => {
       priceId = 'sticyPriceId';
   }
   return(<div className="price" id={priceId}>
-    {props.priceData.offerPrice && (
-      <span className="offerprice text">
-        <h2 className="priceText">&#8377;
+    {props.priceData.offerPrice >= 0 && (      
+        <h2 className="offerprice text">&#8377;
         {props.priceData.offerPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </h2>
-      </span>
+      
     )}
-
+      
+        <h2 className="actualprice text">&#8377;
+        {props.priceData.offerPrice
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        </h2>
+      
     {props.priceData.offerPrice < props.priceData.actualPrice && (
       <span className="actualprice text">
         <h2>&#8377;

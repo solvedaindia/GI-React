@@ -4,23 +4,36 @@ import TermsAndCondition from './termsAndCondition';
 import Price from './price';
 import { isMobile } from '../../utils/utilityManager';
 
+import Uparrow from '../../components/SVGs/upArrow.svg';
+import DownArrow from '../../components/SVGs/downArrow.svg';
+
 class productInfo extends React.Component {
   constructor() {
     super();
     this.state = {
-      isActive: 'dataNotActive'
+      isActive: 'dataNotActive',
+      imageArrowSrc: DownArrow,
+      imageArrowAlt: 'DownArrow'
     }
   }
 
   toggleOffers() {
-	let activeClass;
+    let activeClass;
+    let imgSrc;
+    let imgAlt;
     if (this.state.isActive === 'dataNotActive') {
-		activeClass = 'dataActive';
+    activeClass = 'dataActive';
+    imgSrc = Uparrow;
+    imgAlt = 'Uparrow';
     } else {
-		activeClass = 'dataNotActive';
+      activeClass = 'dataNotActive';
+      imgSrc = DownArrow;
+      imgAlt = 'DownArrow';
 	}
     this.setState({
-      isActive: activeClass
+      isActive: activeClass,
+      imageArrowSrc: imgSrc,
+      imageArrowAlt: imgAlt
     })
   }
 
@@ -62,7 +75,8 @@ class productInfo extends React.Component {
             role="button"
             onClick={this.toggleOffers.bind(this)}
           >
-            View Offer
+           <span className="">View Offer</span>
+           <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }
         </div>
@@ -89,7 +103,7 @@ class productInfo extends React.Component {
               </div>
               <div className="text">Starting from </div>
               <div className="text bold">
-                रु {this.props.productData.emiData}{' '}
+              &#8377;{this.props.productData.emiData}{' '}
               </div>
               <div className="text">per month</div>
               <div className="text emiinfo">

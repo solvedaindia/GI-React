@@ -336,7 +336,8 @@ class PdpComponent extends React.Component {
 								skuData={this.state.skuData}
 								sticky={true}
 								pinCodeData={this.state.pincodeData}
-								handleAddtocart={this.handleAddtocart.bind(this)} 
+                handleAddtocart={this.handleAddtocart.bind(this)}
+                history={this.props.historyData}
 							/>
 						</div>
 					</div>
@@ -374,17 +375,15 @@ class PdpComponent extends React.Component {
                           {this.state.skuData.partNumber}
                         </span>
                       </Col>}
-
-
                       { !isMobile() &&
-                        <WishlistAndShare skuData={this.state.skuData}/>
+                        <WishlistAndShare skuData={this.state.skuData} historyData={this.props.historyData}/>
                       }
                     </Col>
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
                   {isMobile() &&
                     <div className='wishlist-share'>
-                      <WishlistAndShare skuData={this.state.skuData}/>
+                      <WishlistAndShare skuData={this.state.skuData} historyData={this.props.historyData}/>
                       </div>
 				  }
                   <ProductDefAttriutes
@@ -403,6 +402,7 @@ class PdpComponent extends React.Component {
                     sticky={false}
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
+                    history={this.props.historyData}
                   />
                   { isMobile() && <Row className='add-to-cart-floater'>
                       <Col md={6} sm={12} xs={12} className="product">
