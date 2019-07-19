@@ -2,6 +2,7 @@ import React from 'react';
 import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import Price from './price';
+import { isMobile } from '../../utils/utilityManager';
 
 class productInfo extends React.Component {
   constructor() {
@@ -27,7 +28,7 @@ class productInfo extends React.Component {
 
     return (
       <>
-        <Price priceData={this.props.productData} />
+        { !isMobile() && <Price priceData={this.props.productData} /> }
         {this.props.pinCodeData.shippingCharge &&
         <div className="shippingCharge">
           Shipping Charges:{' '}
@@ -37,6 +38,8 @@ class productInfo extends React.Component {
           </span>
         </div>
         }
+        { this.props.productData.promotions.length > 0 &&
+        <>
         <div className="accessories-offer">
           <div className="offerbg text"> % </div>
           <div className="discount-off text">
@@ -60,6 +63,8 @@ class productInfo extends React.Component {
             ))}
           </ul>
         </div>
+        </>
+        }
         {this.props.productData.emiData &&
           this.props.productData.offerPrice >= 1500 && (
           <div className="starting-emitext">

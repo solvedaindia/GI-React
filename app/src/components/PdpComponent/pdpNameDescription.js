@@ -5,9 +5,9 @@ const pdpNameDescription = (props) => {
         <>
             <Row>
             <Col md={12} sm={12} xs={12} className="slimline">
-                <h1 className='heading'>
+                <h4 id="box1" className='heading' style={{opacity: '1'}}>
                     {props.productData.productName}
-                </h1>
+                </h4>
                     {props.productData.shortDescription}<br/>
             </Col>
             </Row>

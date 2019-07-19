@@ -76,6 +76,40 @@ module.exports.productByProductID = function getproductDetailsByProductID(
   );
 };
 
+module.exports.productDetailByPartNumber = function productDetailByPartNumber(
+  partNumber,
+  headers,
+  callback,
+) {
+  logger.debug('Inside Product details by id method');
+  if (!partNumber) {
+    logger.debug('Get Product Detail By Product ID :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const originUrl = constants.productViewByPartNumber
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{partNumber}}', partNumber);
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    originMethod,
+    originUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body.catalogEntryView[0]);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+};
+
 /**
  * Get ProductView By IDS
  * @param storeId,access_token,Product ID Array
@@ -112,11 +146,14 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
 module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';
-  if (productIDs && productIDs.length > 0) {
-    productIDs.forEach(productID => {
-      id += `id=${productID}&`;
-    });
+  let productList = [];
+  if (!productIDs || productIDs.length === 0) {
+    callback(null, productList);
+    return;
   }
+  productIDs.forEach(productID => {
+    id += `id=${productID}&`;
+  });
   const originUrl = constants.productViewByProductIds
     .replace('{{storeId}}', headers.storeId)
     .replace('{{idQuery}}', id);
@@ -132,15 +169,13 @@ function getProductListByIDs(headers, productIDs, callback) {
     null,
     response => {
       if (response.status === 200) {
-        const productList = [];
         if (
           response.body.catalogEntryView &&
           response.body.catalogEntryView.length > 0
         ) {
-          callback(null, response.body.catalogEntryView);
-        } else {
-          callback(null, productList);
+          productList = response.body.catalogEntryView;
         }
+        callback(null, productList);
       } else {
         callback(errorUtils.handleWCSError(response));
       }
@@ -152,7 +187,7 @@ function getProductListByIDs(headers, productIDs, callback) {
 function getPromotionData(headers, productIDs, callback) {
   const promotionArray = [];
   let promotionObject = {};
-    promotionUtil.getMultiplePromotionData(
+  promotionUtil.getMultiplePromotionData(
     productIDs,
     headers,
     (error, promotion) => {

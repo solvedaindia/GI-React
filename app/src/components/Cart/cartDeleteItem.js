@@ -1,44 +1,102 @@
-import React from 'React';
-import {
-	cartDeleteItemAPI
-} from '../../../public/constants/constants';
+import React from 'react';
+import { cartDeleteItemAPI, addToWishlist } from '../../../public/constants/constants';
+import { Button, Modal, Row, Col } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import DeleteLogo from '../SVGs/deleteIcon';
 
 class DeleteCartItem extends React.Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
-      	this.handleChange = this.handleChange.bind(this);
-    }
-  
-    handleChange() {
-	//   this.setState({quantity: event.target.value});
-	  this.handleDeleteItem();
+		this.state = {
+			prodName: this.props.productName,
+			show: false
+		}
+		this.handleShow = this.handleShow.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleMoveToWishList = this.handleMoveToWishList.bind(this);
+	}
+
+	handleChange() {
+		this.handleDeleteItem();
 	}
 	handleDeleteItem() {
-		const data = {  
-			orderItemId: this.props.orderItemId
-		}
+		const data = {
+		orderItemId: this.props.orderItemId,
+		};
 		apiManager
-        .post(cartDeleteItemAPI, data)
-        .then(response => {
-			this.props.getCartDetails()
-            console.log('@@@@ Cart Update @@@', response.data.data);
-        })
-        .catch(error => {
-            this.setState({
-            error,
-            isLoading: false,
-            });
-        });
+		.post(cartDeleteItemAPI, data)
+		.then(response => {
+			this.props.getCartDetails();
+			this.handleClose();
+			console.log('@@@@ Cart Delete @@@', response.data.data);
+		})
+		.catch(error => {
+			this.setState({
+			error,
+			isLoading: false,
+			});
+		});
 	}
-    render() {
-      return (
-        <form className='delCartItem' onClick={this.handleChange}>
-			<DeleteLogo width={16} height={16}/>
-        </form>
-      );
-    }
-  }
-  
-  export default DeleteCartItem;
+	handleMoveToWishList() {
+	const data = {
+		sku_id: this.props.uniqueID,
+	};
+	apiManager
+		.post(addToWishlist, data)
+		.then(response => {
+			this.handleDeleteItem();
+			this.handleClose();
+			console.log('@@@@ Cart Wishlist @@@', response.data.data);
+			})
+			.catch(error => {
+			this.setState({
+				error,
+				isLoading: false,
+			});
+		});
+	}
+  	/* Handle Modal Close */
+	handleClose() {
+		this.setState({ show: false });
+	}
+	/* Handle Modal Show */
+	handleShow() {
+		this.setState({ show: true });
+	}
+	render() {
+		const { prodName } = this.state;
+		return (
+			<>
+			<form className="delCartItem" onClick={this.handleShow}>
+				<DeleteLogo width={16} height={16} />
+			</form>
+			<Modal className='modal deletItem' show={this.state.show} onHide={this.handleClose}>
+				<Modal.Body>
+					<Button className="close" onClick={this.handleClose}></Button>
+					<Row>
+						<Col xs={12} md={12}>
+							<div className='del_modal'>
+								<h4 className='heading'>Are you sure you want to delete</h4>
+								<p className='itemDelInfo'>
+									{prodName}?
+								</p>
+								<div className='userAction'> 
+									<button className='btn delete' onClick={this.handleMoveToWishList}>
+										Move to Wishlist
+									</button>
+									<button className='btn wishList' onClick={this.handleChange} >
+										Remove
+									</button>
+								</div>
+							</div>
+						</Col>
+					</Row>         
+				</Modal.Body>
+			</Modal>
+			</>
+		);
+	}
+}
+
+export default DeleteCartItem;

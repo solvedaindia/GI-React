@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUserProfile } from '../../actions/app/actions';
 import { Link } from 'react-router-dom';
+import { updateUserProfile } from '../../actions/app/actions';
 import apiManager from '../../utils/apiManager';
 import UserLogo from '../SVGs/user';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import '../../../public/styles/userInfo/userInfo.scss';
 import appCookie from '../../utils/cookie';
-import { getCookie } from '../../utils/utilityManager';
+import { getCookie, getReleventReduxState } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
@@ -34,6 +34,9 @@ class UserAccInfo extends React.Component {
 
   resetLoginValues() {
     console.log('resetLoginValues');
+    if (this.props.resetCallbackPro) {
+      this.props.resetCallbackPro();
+    }
     this.setState({
       showLoginRegisterMain: false,
       showForgotPassword: false,
@@ -75,19 +78,19 @@ class UserAccInfo extends React.Component {
   }
 
   getUserDetails() {
-    apiManager.get(userDetailAPI, {
-      headers: { profile: 'summary' },
-    })
+    apiManager
+      .get(userDetailAPI, {
+        headers: { profile: 'summary' },
+      })
       .then(response => {
         console.log('userDetail --- ', response.data.data.name);
         this.setState({
           userName: response.data.data.name,
-          logonId: response.data.data.logonID
-        })
+          logonId: response.data.data.logonID,
+        });
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
         this.showLoginStatus();
-        this.props.updateUserProfile(response.data.data.name)
-
+        this.props.updateUserProfile(response.data.data.name);
       })
       .catch(error => {
         // return null;
@@ -106,21 +109,20 @@ class UserAccInfo extends React.Component {
 
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'myprofile' } }}>
-              <a onClick={this.onMyProfileClick} className="dropDown">My Profile</a>
+              <a onClick={this.onMyProfileClick} className="dropDown">
+                My Profile
+              </a>
             </Link>
-
           </li>
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
               <a className="dropDown">My Orders</a>
             </Link>
-
           </li>
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'address' } }}>
               <a className="dropDown">Manage Addresses</a>
             </Link>
-
           </li>
           {/* <li className="listItem">
             <a className="dropDown">Godrej Credit</a>
@@ -134,23 +136,28 @@ class UserAccInfo extends React.Component {
         </>
       )),
         (this.state.loginStatus = (
-          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>Sign Out</a>
+          <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
+            Sign Out
+          </a>
         ));
     } else {
       this.setState({
-        userType: <li className="listItemUnSelected">
-          <a className="dropDown">Hello Guest!</a>
-        </li>,
-        loginStatus: <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
-      })
-      // (this.state.userType = (
-      //   <li className="listItem">
-      //     <a className="dropDown">Hello Guest!</a>
-      //   </li>
-      // )),
-      // (this.state.loginStatus = (
-      //   <a className="dropDown" onClick={this.onLoginRegisterClick.bind(this)}>{' '}Login/Register</a>
-      // ));
+        userType:
+          <li className="listItemUnSelected">
+            <a className="dropDown">Hello Guest!</a>
+          </li>
+        ,
+        loginStatus:
+          <a
+            className="dropDown"
+            onClick={this.onLoginRegisterClick.bind(this)}
+          >
+            {' '}
+            Login/Register
+          </a>
+
+      });
+
     }
   }
 
@@ -165,12 +172,14 @@ class UserAccInfo extends React.Component {
       this.getUserDetails();
     }
     this.showLoginStatus();
-
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('Recive Porps -- ', nextProps.fromWishlistPro);
     this.fromWishlist(nextProps.fromWishlistPro);
+    if (getCookie('isLoggedIn') === 'true') {
+      this.getUserDetails();
+    }
   }
 
   fromWishlist(data) {
@@ -192,9 +201,12 @@ class UserAccInfo extends React.Component {
       dropdownItem = (
         <ul className="userList">
           {/* <li className="listItem"> */}
-          {this.state.userName !== null && getCookie('isLoggedIn') === 'true' ? <li className="listItemUnSelected">
-            <a className="dropDown">{this.state.userName}!</a>
-          </li> : null}
+          {this.state.userName !== null &&
+            getCookie('isLoggedIn') === 'true' ? (
+              <li className="listItemUnSelected">
+                <a className="dropDown">{this.state.userName}!</a>
+              </li>
+            ) : null}
           {this.state.userType}
           {/* </li> */}
           <li className="listItem">{this.state.loginStatus}</li>
@@ -230,15 +242,18 @@ class UserAccInfo extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // default: state.default
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     // default: state.default
+//   };
+// }
+
+
 
 // commenting below is because componentWillRecivePops not getting called
 // export default connect(
 //   mapStateToProps,
 //   { updateUserProfile },
 // )(UserAccInfo);
+
 export default UserAccInfo;

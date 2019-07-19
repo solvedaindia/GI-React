@@ -103,7 +103,7 @@ class ForgotPasswordNewPassword extends React.Component {
     }
 
     return (
-      <div className="rightAnim">
+      <div className="searchAnimate">
         <h3 className="heading">Set New Password</h3>
         <Form className="modalmin-height">
           <FormGroup className="enternew-password">

@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { cartDetailAPI,
         imagePrefix
     } from '../../../public/constants/constants';

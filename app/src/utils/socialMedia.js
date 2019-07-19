@@ -9,68 +9,64 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
-import { getCookie } from './utilityManager';
 import { Link } from 'react-router-dom';
+import { getCookie } from './utilityManager';
 
 class SocialMedia extends React.Component {
   render() {
-    var shareUrl = window.location.href;
+    let shareUrl = window.location.href;
     let title = 'Welcome to Godrej';
     if (this.props.productName) {
-      title = `Found this amazing [${this.props.productName}] on Godrej Interio! Check it Out.`;
-    }
-    else if (this.props.fromWislistPro) {
-      title = `Checkout the designs ${getCookie('name')} loves on Godrej Interio!`
-      console.log('social sahre -- ',this.props.sharingURLPro)
-      shareUrl = this.props.sharingURLPro
+      title = `Found this amazing [${
+        this.props.productName
+      }] on Godrej Interio! Check it Out.`;
+    } else if (this.props.fromWislistPro) {
+      title = `Checkout the designs ${getCookie(
+        'name',
+      )} loves on Godrej Interio!`;
+      console.log('social sahre -- ', this.props.sharingURLPro);
+      shareUrl = this.props.sharingURLPro;
     }
 
     return (
       <div className="social-icon-share">
         <ul>
-          <li className='list'>
+          <li className="list">
             <FacebookShareButton url={shareUrl} quote={title}>
-              <div className='iconImg'>
+              <div className="iconImg">
                 <FacebookIcon size={26} round />
               </div>
-              <div className='labelText'>
+              <div className="labelText">
                 <span className="social-icon-text"> Facebook</span>
               </div>
             </FacebookShareButton>
-
           </li>
-          <li className='list'>
-            <WhatsappShareButton
-              url={shareUrl}
-              title={title}
-            >
-              <div className='iconImg'>
-                <WhatsappIcon size={26} className='icons' round />
+          <li className="list">
+            <WhatsappShareButton url={shareUrl} title={title}>
+              <div className="iconImg">
+                <WhatsappIcon size={26} className="icons" round />
               </div>
-              <div className='labelText'>
+              <div className="labelText">
                 <span className="social-icon-text">Whatsapp</span>
               </div>
             </WhatsappShareButton>
-
           </li>
-          <li className='list'>
-
+          <li className="list">
             <TwitterShareButton url={shareUrl} title={title}>
-              <div className='iconImg'>
+              <div className="iconImg">
                 <TwitterIcon size={26} round />
               </div>
-              <div className='labelText'>
+              <div className="labelText">
                 <span className="social-icon-text">Twitter</span>
               </div>
             </TwitterShareButton>
-
           </li>
-          <li className='list'>
-            <EmailShareButton url={title + ' ' + shareUrl}>
-              <div className='iconImg'>
+          <li className="list">
+            <EmailShareButton url={`${title} ${shareUrl}`}>
+              <div className="iconImg">
                 <EmailIcon size={26} round />
               </div>
-              <div className='labelText'>
+              <div className="labelText">
                 <span className="social-icon-text">Mail</span>
               </div>
             </EmailShareButton>

@@ -87,11 +87,7 @@ class wishListCount extends React.Component {
     return (
       <>
         <li className="icons" onClick={this.handleWLCount.bind(this)}>
-          {!isLoading ? (
-            wishlistItem
-          ) : (
-            <p className="error">No Category Found</p>
-          )}
+          {!isLoading ? wishlistItem : null}
           {wishlistLogo}
         </li>
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}

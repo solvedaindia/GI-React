@@ -1,3 +1,4 @@
+const async = require('async');
 const origin = require('./origin');
 const constants = require('./constants');
 const headerutil = require('./headerutil');
@@ -149,7 +150,7 @@ function pincodeServiceability(headers, pincode, callback) {
 
 /**  
 Find Inventory
-* @param: {pincode:'User Pincode',partNumber:'Part Number',quantity:'Quantity'}
+* @param {@pincode, @partNumber, @quanitity}
 * @return Inventory Details
 */
 module.exports.findInventory = findInventory;
@@ -203,6 +204,36 @@ function findInventory(headers, reqParams, callback) {
       } else {
         callback(errorUtils.handleWCSError(response));
       }
+    },
+  );
+}
+
+module.exports.getMultipleInventoryData = getMultipleInventoryData;
+function getMultipleInventoryData(headers, reqParamArray, callback) {
+  logger.debug('Inside the Find Inventory API');
+  async.map(
+    reqParamArray,
+    (reqParam, cb) => {
+      findInventory(headers, reqParam, (error, result) => {
+        if (!error) {
+          // eslint-disable-next-line no-param-reassign
+          reqParam.inventoryDetails = result;
+          cb(null, reqParam);
+        } else {
+          cb(error);
+        }
+      });
+    },
+    (errors, results) => {
+      if (errors) {
+        callback(errors);
+        return;
+      }
+      const inventoryArray = [];
+      results.forEach(element => {
+        inventoryArray.push(element);
+      });
+      callback(null, inventoryArray);
     },
   );
 }

@@ -69,33 +69,34 @@ class PlpComponent extends React.Component {
       const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => (
         <>
-        {!this.props.showSkuPro ? <ProductItem //Swatch level
-            key={index}
-            dataPro={item.skuList[0]}
-            isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
-            addProduct={this.handleAddProduct}
-            compData={this.props.compData}
-            isfromWishlistPro={this.props.isFromWishlistPro}
-            history={this.props.history}
-            isSearchPathPro={this.props.isSearchPathPro}
-            isColorSwatchPro={true}
-            skuList={item.skuList}
-            swatchList={item.swatchesData}
-            isShareWishlistPro={this.props.isShareWishlistPro}
-          /> : 
-          <ProductItem //Sku level
-            key={index}
-            dataPro={item}
-            isInWishlist={wishlistArr.includes(item.uniqueID)}
-            addProduct={this.handleAddProduct}
-            compData={this.props.compData}
-            isfromWishlistPro={this.props.isFromWishlistPro}
-            history={this.props.history}
-            isSearchPathPro={this.props.isSearchPathPro}
-            swatchList={[]}
-            isShareWishlistPro={this.props.isShareWishlistPro}
-          /> }
-          
+          {!this.props.showSkuPro ? 
+            <ProductItem // Swatch level
+              key={index}
+              dataPro={item.skuList[0]}
+              isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
+              addProduct={this.handleAddProduct}
+              compData={this.props.compData}
+              isfromWishlistPro={this.props.isFromWishlistPro}
+              history={this.props.history}
+              isSearchPathPro={this.props.isSearchPathPro}
+              isColorSwatchPro
+              skuList={item.skuList}
+              swatchList={item.swatchesData}
+              isShareWishlistPro={this.props.isShareWishlistPro}
+            /> :
+            <ProductItem // Sku level
+              key={index}
+              dataPro={item}
+              isInWishlist={wishlistArr.includes(item.uniqueID)}
+              addProduct={this.handleAddProduct}
+              compData={this.props.compData}
+              isfromWishlistPro={this.props.isFromWishlistPro}
+              history={this.props.history}
+              isSearchPathPro={this.props.isSearchPathPro}
+              swatchList={[]}
+              isShareWishlistPro={this.props.isShareWishlistPro}
+            />
+          }
           <AdBanner indexPro={index + 1} />
           {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
         </>
@@ -155,13 +156,15 @@ class PlpComponent extends React.Component {
 
   render() {
     let coloumnLayout;
-    if (this.props.coloumnLayout === 3 || this.props.isFromWishlistPro === true) {
+    if (
+      this.props.coloumnLayout === 3 ||
+      this.props.isFromWishlistPro === true
+    ) {
       coloumnLayout = 'plp-products grid3';
-    } 
-    else {
+    } else {
       coloumnLayout = 'plp-products grid2';
     }
-  
+
     return (
       // <div className="row no-padding">
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>

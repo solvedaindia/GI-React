@@ -3,8 +3,8 @@ const router = express.Router();
 const homepagehandler = require('../../handlers/homepagehandler');
 
 /* Homepage Body Static Data */
-router.get('/', (req, res, next) => {
-  homepagehandler.getBodyData(req.headers, (err, result) => {
+router.get('/recommendedproduct', (req, res, next) => {
+  homepagehandler.getRecommendedProducts(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

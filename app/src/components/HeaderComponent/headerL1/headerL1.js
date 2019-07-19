@@ -42,6 +42,7 @@ class HeaderL1 extends React.Component {
     const { isLoading, layer1Data } = this.state;
 
     return (
+      
       <ul className="layer1">
         {!isLoading ? (
           layer1Data.map((linkData, index) => (
@@ -60,9 +61,22 @@ class HeaderL1 extends React.Component {
                   </Link>
                 )
               ) : (
-                <a className="action" href={linkData.action}>
-                  {linkData.text}
-                </a>
+                <>
+                  {
+                    linkData.text === 'LOCATE STORES' ? (
+                        <Link
+                          className="action"
+                          to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                        >
+                          {linkData.text}
+                        </Link>
+                      ) : (
+                        <a className="action" href={linkData.action}>
+                          {linkData.text}
+                        </a>
+                      )
+                    }
+                </>
               )}
             </li>
           ))

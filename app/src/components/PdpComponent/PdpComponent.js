@@ -10,17 +10,21 @@ import PurchaseGuide from './purchaseGuide';
 import ProductDetail from './productDetail';
 import ProductKeywords from './productKeywords';
 import SimilarCombosProducts from './similarAndCombosProducts';
-import SocialMedia from '../../utils/socialMedia';
-import Wishlist from '../GlobalComponents/productItem/wishlist';
-import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import AddToCart from './addToCart';
 import Price from './price';
+import MobileDiscountAndPrice from './mobileComponents/discountAndPrice';
+import MobileProductFeatures from './mobileComponents/productFeatures';
+import MobilePurchaseGuideGuide from './mobileComponents/purchaseGuide';
+import MobileProductDetail from './mobileComponents/productDetail';
+import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
 import { pinCodeAPI } from '../../../public/constants/constants';
+import { isMobile } from '../../utils/utilityManager';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
-const shareImg = <img src={require('../../../public/images/share.svg')} />;
+
+
 
 class PdpComponent extends React.Component {
   constructor() {
@@ -34,9 +38,11 @@ class PdpComponent extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getResolveSkuData();
-  }
+	componentDidMount() {
+		this.getResolveSkuData();
+    window.addEventListener('scroll', this.handleScroll);
+    window.scrollTo(0, 0);	
+	}
 
   /* get sku resolved data */
   getResolveSkuData(resolvedSkuId = null) {
@@ -66,7 +72,18 @@ class PdpComponent extends React.Component {
       });
     });
 
-    this.callPinCodeAPI(skuDataArr, resolvedSkuData);
+    const defaultPincodeData = {
+      pincodeServiceable: null,
+    };
+
+    this.setState({
+      selectedSku: skuDataArr,
+      isLoading: false,
+      skuData: resolvedSkuData,
+      pincodeData: defaultPincodeData
+    });
+
+    this.callPinCodeAPI(resolvedSkuData);
   }
 
   /* handle swatches */
@@ -93,7 +110,7 @@ class PdpComponent extends React.Component {
     const selectedSwatches = new Array();
     for (let i = 0; i < count + 1; i++) {
       const name = document
-        .getElementsByClassName(`radio${count}`)[0]
+        .getElementsByClassName(`radio${i}`)[0]
         .getAttribute('name');
       const getValue = document.querySelector(`input[name = ${name}]:checked`)
         .value;
@@ -102,7 +119,7 @@ class PdpComponent extends React.Component {
     return selectedSwatches;
   }
 
-  callPinCodeAPI(skuDataArr, resolvedSkuData) {
+  callPinCodeAPI(resolvedSkuData) {
     const dataParams = {
       params: {
         partnumber: resolvedSkuData.partNumber,
@@ -115,9 +132,7 @@ class PdpComponent extends React.Component {
       .get(pinCodeAPI + appCookie.get('pincode'), dataParams)
       .then(response => {
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: response.data.data,
         });
       })
@@ -130,15 +145,15 @@ class PdpComponent extends React.Component {
           error: 'Not a valid pincode',
         };
         this.setState({
-          selectedSku: skuDataArr,
           isLoading: false,
-          skuData: resolvedSkuData,
           pincodeData: defaultPincodeData,
         });
       });
 
     this.props.historyData.push(
-      `/pdp/furniture-${resolvedSkuData.productName.toLowerCase().replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
+      `/pdp/furniture-${resolvedSkuData.productName
+        .toLowerCase()
+        .replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
     );
   }
 
@@ -148,45 +163,128 @@ class PdpComponent extends React.Component {
       window.scrollTo(0, 0);
     }
   }
- 
+ // handleScroll function start
+ handleScroll() {	
+  var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
+  var box1=163;
+  if (document.getElementById("priceId") && document.getElementById("box3")) {
+  var box2 = document.getElementById("priceId").offsetTop;
+  var box3 = document.getElementById("box3").offsetTop;
+  var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+  var scrollbox1;
+
+
+  var scrollbox1=box1-scrollTop;
+  var scrollbox2=box2-scrollTop;
+  var scrollbox3=box3-scrollTop;
+
+  
+  if(scrollbox1 <= headeroffset){
+    document.getElementById("Pdpstickybar").classList.add('slidedown');			
+    setTimeout(() => {			
+    document.getElementById("topdiv1").classList.add('slideUpPrice');
+    document.getElementById("topdiv1").style.cssText = "opacity: 1;";			
+  }, 100);
+  }
+  
+  if(scrollbox1 > headeroffset){			
+    setTimeout(() => {	
+    document.getElementById("Pdpstickybar").classList.remove('slidedown');
+    document.getElementById("topdiv1").classList.remove('slideUpPrice');	
+    document.getElementById("topdiv1").style.cssText = "opacity: 0;"
+    document.getElementById("box1").style.cssText = "opacity: 1;";	
+  }, 10);
+  }
+
+  /*------BOX2
+  -------------------*/
+  if(scrollbox2 <= headeroffset){	
+    setTimeout(() => {	
+    document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
+    document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+  }, 0);
+  }
+  
+  if(scrollbox2 > headeroffset){		
+    document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
+    document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
+  }
+
+  /*------BOX3
+  -------------------*/
+  if(scrollbox3<= headeroffset){	
+    document.getElementById("topdiv3").classList.add('slideUpCart');
+    document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+  }
+  
+  if(scrollbox3> headeroffset){		
+    document.getElementById("topdiv3").classList.remove('slideUpCart');
+    document.getElementById("topdiv3").style.cssText = "opacity: 0;"					
+  }
+
+  // header 
+  var header = document.getElementById("header");
+  var sticky = header.offsetTop;		
+  if (window.pageYOffset > sticky) 
+  {
+    header.classList.add("sticky");
+  } 			
+  else {
+    header.classList.remove("sticky");
+  }
+  }
+}
+// handleScroll function End
   render() {
     const { isLoading } = this.state;
-    const wishlistArr = getOnlyWishlistUniqueIds();
     const isAddToCart = appCookie.get('isPDPAddToCart');
+
     return (
+
+      <>
+			{!isLoading  &&
+			<>
+				{ isAddToCart !== 'true' &&			
+			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
+			    <div className='pdpstickyItem clearfix'>				   
+					<div className="product" id="topdiv1" style={{opacity: '0'}}>
+                       <div className='productId'>
+						 <span className='text'>Product ID:</span> 
+						 <span className='text'>{this.state.skuData.partNumber}</span>
+						</div>
+
+						<h4 className='heading'>
+							{this.state.skuData.productName}
+						</h4>
+						<div className='lockerText'>{this.state.skuData.shortDescription}</div>
+					</div>
+					<div className='cartofferprice-wrap'>
+					<div className='PriceofferCart'>
+					   <div className='divpriceOffer' id="topdiv2">
+							<Price priceData={this.state.skuData} sticky={true}/>
+							<div className="accessories-offer">							
+								<span><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories</span>
+							</div>
+						</div>
+						<div className='addtoCart' id="topdiv3">
+							<AddToCart 
+								skuData={this.state.skuData}
+								sticky={true}
+								pinCodeData={this.state.pincodeData}
+								handleAddtocart={this.handleAddtocart.bind(this)} 
+							/>
+						</div>
+					</div>
+					</div>
+			    </div>
+			</div>
+				}
+			</>
+			}
       <div className="galleryArea">
         {!isLoading ? (
-          <>
-            {isAddToCart === 'true1' && (
-              <Row>
-                <Col md={7} sm={12} xs={12}>
-                  <div className="product">
-                    <span className="text">Product ID: </span>
-                    <span className="text">
-                      {this.state.skuData.partNumber}
-                    </span>
-                    <h4 className="heading">
-                      {this.state.skuData.productName}
-                    </h4>
-                  </div>
-                </Col>
-                <Col md={4} sm={12} xs={12}>
-                  <Price priceData={this.state.skuData} />
-                  <div className="accessories-offer">
-                    <div className="offerbg text"> % </div>
-                    <div className="discount-off text">
-                      {this.state.skuData.discount}% OFF & free accessories{' '}
-                    </div>
-                  </div>
-                  <AddToCart
-                    skuData={this.state.skuData}
-                    sticky
-                    pinCodeData={this.state.pincodeData}
-                    handleAddtocart={this.handleAddtocart.bind(this)}
-                  />
-                </Col>
-              </Row>
-            )}
+          <>            
             <Row className="no-margin">
               <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
@@ -200,30 +298,31 @@ class PdpComponent extends React.Component {
                 <div className="GallerytextBox">
                   <Row>
                     <Col md={12} sm={12} xs={12}>
-                      <Col md={6} sm={12} xs={12} className="product">
-                        <span className="text">Product ID: </span>
+                    { !isMobile() && <Col md={6} sm={12} xs={12} className="product">
+                         <span className="text">Product ID: </span> 
                         <span className="text">
                           {this.state.skuData.partNumber}
                         </span>
-                      </Col>
-                      <Col md={6} sm={12} xs={12} className="product-share">
-                        <div className="share">
-                          SHARE <div className="share-btn">{shareImg}</div>
-                          <SocialMedia productName={this.state.skuData.productName}/>
-                        </div>
-                        <div className="wishListDiv">
-                          WISHLIST{' '}
-                          <Wishlist
-                            uniqueId={this.state.skuData.uniqueID}
-                            isInWishlistPro={wishlistArr.includes(
-                              this.state.skuData.uniqueID,
-                            )}
-                          />
-                        </div>
-                      </Col>
+                      </Col>}
+
+                      {isMobile() && <Col md={6} sm={12} xs={12} className="product-sku">
+                        <span className="text">
+                          {this.state.skuData.partNumber}
+                        </span>
+                      </Col>}
+
+
+                      { !isMobile() &&
+                        <WishlistAndShare skuData={this.state.skuData}/>
+                      }
                     </Col>
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
+                  {isMobile() &&
+                    <div className='wishlist-share'>
+                      <WishlistAndShare skuData={this.state.skuData}/>
+                      </div>
+                  }
                   <ProductDefAttriutes
                     defAttributes={this.props.data.defAttributes}
                     selectedAttribute={this.state.skuData.defAttributes}
@@ -241,6 +340,21 @@ class PdpComponent extends React.Component {
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
                   />
+                  { isMobile() && <Row className='add-to-cart-floater'>
+                      <Col md={6} sm={12} xs={12} className="product">
+                          <div className='product-price-detail'>
+                            <MobileDiscountAndPrice 
+                            skuData={this.state.skuData}
+                          /></div>
+                          <AddToCart
+                          skuData={this.state.skuData}
+                          isMobile={true}
+                          pinCodeData={this.state.pincodeData}
+                          handleAddtocart={this.handleAddtocart.bind(this)}
+                        /> 
+                      </Col>
+                  </Row>}
+                  
                 </div>
               </Col>
             </Row>
@@ -250,16 +364,31 @@ class PdpComponent extends React.Component {
         )}
         <Grid>
           <Row>
-            <ProductFeatures productFeatureData={this.props.data} />
+          {!isMobile() ? (
+              <ProductFeatures productFeatureData={this.props.data} />
+            ) : (
+              <MobileProductFeatures productFeatureData={this.props.data}/> 
+            )
+          }
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12} className="purchase-guide-box">
-              <PurchaseGuide purchaseGuide={this.props.data} />
+            {!isMobile() ? (
+                <PurchaseGuide purchaseGuide={this.props.data} />
+              ) : (
+                <MobilePurchaseGuideGuide purchaseGuide={this.props.data}/> 
+              )
+            }
             </Col>
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12}>
-              <ProductDetail productDetail={this.props.data} />
+              {!isMobile() ? (
+                  <ProductDetail productDetail={this.props.data} />
+                ) : (
+                  <MobileProductDetail productDetail={this.props.data}/> 
+                )
+              }
             </Col>
           </Row>
           <Row>
@@ -277,6 +406,7 @@ class PdpComponent extends React.Component {
         </Grid>
         <PdpEspot espot={this.props.espot} />
       </div>
+      </>
     );
   }
 }

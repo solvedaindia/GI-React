@@ -1,0 +1,43 @@
+.fold {
+  .fold_trigger {
+    &:before {
+      font-family: FontAwesome;
+      content: "\f107";
+      display: block;
+      float: left;
+      padding-right: 1rem;
+      transition: transform 400ms;
+      transform-origin: 20%;
+      color: $line-color;
+    }
+
+    text-align: start;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 1px solid $line-color;
+
+    &.open {
+      &:before {
+        transform: rotateZ(-180deg);
+      }
+    }
+  }
+
+  .fold_content {
+    display: none;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 400ms linear;
+
+    &.open {
+      display: block;
+      max-height: 400px;
+      opacity: 1;
+    }
+  }
+  border-bottom: 1px solid $line-color;
+}

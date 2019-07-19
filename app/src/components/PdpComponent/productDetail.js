@@ -1,9 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -65,7 +62,7 @@ class productDetail extends React.Component {
         let displayContent = '';
         if (Array.isArray(data.values)) {
           displayContent = data.values.map((tabContent, id) => (
-            <Col md={6} sm={12} xs={12} key={id}>
+            <Col md={6} sm={12} xs={6} key={id}>
               <b>{tabContent.name}</b>
               {<p>{tabContent.value}</p>}
             </Col>

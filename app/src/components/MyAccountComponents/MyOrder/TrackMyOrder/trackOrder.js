@@ -12,15 +12,20 @@ class TrackOrder extends React.Component {
   }
 
   render() {
+    console.log('In the Track Order -- ', this.props.trackOrderDataPro)
+
     return (
+
       <div className="trackMyOrder">
         <div className="bottomDivider">
-          <button
-            className="backBtn"
-            onClick={this.props.renderSelectionPro}
-          >{`< Back`}</button>
+          <button className="backBtn" onClick={this.props.renderSelectionPro} >{`< Back`}</button>
         </div>
-        <TrackOrderProduct />
+        {this.props.trackOrderDataPro.shipmentData.map((item, index) => {
+          return (
+            <TrackOrderProduct prodctDataPro={this.props.trackOrderDataPro} shipmentDataPro={item} />
+          )
+        })}
+
       </div>
     );
   }
