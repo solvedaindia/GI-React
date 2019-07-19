@@ -16,14 +16,16 @@ module.exports.getImagePath = function getImagePath(imagePath) {
 /* Get 1:1 Thumbail Image */
 function getThumbnail(image) {
   return (
-    image.usage === 'IMAGE_SIZE_500_500' && image.name.split('_')[1] === '02'
+    image.usage === 'IMAGE_SIZE_500_500' &&
+    (image.name.split('_')[1] === '03' || image.name.split('_')[1] === '3')
   );
 }
 
 /* Get 3:2 Thumbnail Image */
 function getThumbnail2(image) {
   return (
-    image.usage === 'IMAGE_SIZE_803_602' && image.name.split('_')[1] === '02'
+    image.usage === 'IMAGE_SIZE_546_307' &&
+    (image.name.split('_')[1] === '03' || image.name.split('_')[1] === '3')
   );
 }
 
@@ -44,7 +46,7 @@ function getThumbnailImages(attachment) {
     }
 
     const thumbnail2Object = attachment.filter(getThumbnail2);
-    if (thumbnailObject && thumbnailObject.length > 0) {
+    if (thumbnail2Object && thumbnail2Object.length > 0) {
       resJson.thumbnail2 = `/${thumbnail2Object[0].attachmentAssetPath}`;
     }
   }

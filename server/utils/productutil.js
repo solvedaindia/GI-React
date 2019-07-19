@@ -8,6 +8,7 @@ const headerutil = require('./headerutil');
 const promotionUtil = require('./promotionutil');
 const productDetailFilter = require('../filters/productdetailfilter');
 
+/* Product List By Category */
 module.exports.productsByCategoryID = function getProductByCategoryID(
   categoryID,
   headers,
@@ -42,6 +43,7 @@ module.exports.productsByCategoryID = function getProductByCategoryID(
   );
 };
 
+/* Product Detail By Product Id */
 module.exports.productByProductID = function getproductDetailsByProductID(
   ProductID,
   headers,
@@ -76,6 +78,7 @@ module.exports.productByProductID = function getproductDetailsByProductID(
   );
 };
 
+/* Product Detail By Part Number */
 module.exports.productDetailByPartNumber = function productDetailByPartNumber(
   partNumber,
   headers,
@@ -111,7 +114,7 @@ module.exports.productDetailByPartNumber = function productDetailByPartNumber(
 };
 
 /**
- * Get ProductView By IDS
+ * Get ProductView with Promotion Data By IDS
  * @param storeId,access_token,Product ID Array
  * @return Product List with Promotion Data
  * @throws contexterror,badreqerror if storeid or access_token is invalid
@@ -143,6 +146,7 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
   });
 };
 
+/* Get OOB Product Details by Product IDs */
 module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';

@@ -93,68 +93,78 @@ module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
     } else {
       logger.debug('Got all the origin resposes');
       const subCategoryArray = [];
-      const categoryIDs = [];
+      // const categoryIDs = [];
       const catlogGrupView = result.catalogGroupView;
       if (catlogGrupView && catlogGrupView.length > 0) {
         catlogGrupView.forEach(category => {
-          categoryIDs.push(category.uniqueID);
+          const subCatData = categoryFilter.categoryDetails(category);
+          subCategoryArray.push(subCatData);
         });
-        categoryUtil.getCategoryProductCountPrice(
-          reqHeaders,
-          categoryIDs,
-          (error, res) => {
-            if (error) {
-              callback(error);
-              return;
-            }
-            catlogGrupView.forEach(category => {
-              const subCatData = categoryFilter.categoryDetails(category);
-              subCatData.productCount = '';
-              subCatData.startPrice = '';
-              if (res[subCatData.uniqueID]) {
-                subCatData.productCount =
-                  res[subCatData.uniqueID].productCount || '';
-                subCatData.startPrice =
-                  res[subCatData.uniqueID].startPrice || '';
-              }
-              subCategoryArray.push(subCatData);
-            });
-            callback(null, subCategoryArray);
-          },
-        );
-
-        /* async.map(
-          catlogGrupView,
-          (subCategory, cb) => {
-            const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
-            productUtil.productsByCategoryID(
-              subCatData.uniqueID,
-              reqHeaders,
-              (error, productViewResult) => {
-                if (!error) {
-                  subCatData.productCount =
-                    productViewResult.recordSetTotal || 0; // Product Count
-                  cb(null, subCatData);
-                } else {
-                  cb(error);
-                }
-              },
-            );
-          },
-          (errors, results) => {
-            if (errors) {
-              callback(errors);
-              return;
-            }
-            results.forEach(element => {
-              subCategoryArray.push(element);
-            });
-            callback(null, subCategoryArray);
-          },
-        ); */
+        callback(null, subCategoryArray);
       } else {
         callback(null, subCategoryArray);
       }
+
+      // if (catlogGrupView && catlogGrupView.length > 0) {
+      //   catlogGrupView.forEach(category => {
+      //     categoryIDs.push(category.uniqueID);
+      //   });
+      //   categoryUtil.getCategoryProductCountPrice(
+      //     reqHeaders,
+      //     categoryIDs,
+      //     (error, res) => {
+      //       if (error) {
+      //         callback(error);
+      //         return;
+      //       }
+      //       catlogGrupView.forEach(category => {
+      //         const subCatData = categoryFilter.categoryDetails(category);
+      //         subCatData.productCount = '';
+      //         subCatData.startPrice = '';
+      //         if (res[subCatData.uniqueID]) {
+      //           subCatData.productCount =
+      //             res[subCatData.uniqueID].productCount || '';
+      //           subCatData.startPrice =
+      //             res[subCatData.uniqueID].startPrice || '';
+      //         }
+      //         subCategoryArray.push(subCatData);
+      //       });
+      //       callback(null, subCategoryArray);
+      //     },
+      //   );
+
+      //   /* async.map(
+      //     catlogGrupView,
+      //     (subCategory, cb) => {
+      //       const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
+      //       productUtil.productsByCategoryID(
+      //         subCatData.uniqueID,
+      //         reqHeaders,
+      //         (error, productViewResult) => {
+      //           if (!error) {
+      //             subCatData.productCount =
+      //               productViewResult.recordSetTotal || 0; // Product Count
+      //             cb(null, subCatData);
+      //           } else {
+      //             cb(error);
+      //           }
+      //         },
+      //       );
+      //     },
+      //     (errors, results) => {
+      //       if (errors) {
+      //         callback(errors);
+      //         return;
+      //       }
+      //       results.forEach(element => {
+      //         subCategoryArray.push(element);
+      //       });
+      //       callback(null, subCategoryArray);
+      //     },
+      //   ); */
+      // } else {
+      //   callback(null, subCategoryArray);
+      // }
     }
   });
 };

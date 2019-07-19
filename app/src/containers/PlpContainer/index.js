@@ -336,13 +336,8 @@ export class PlpContainer extends React.Component {
             this.state.pageNumber,
           );
           this.setState({
-            plpData: isFromScroll
-              ? [...this.state.plpData, ...response.data.data.productList]
-              : response.data.data.productList,
+            plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
-            hasMore:
-              /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this
-                .state.plpData.length < Number(response.data.data.productCount), // Now only show on 0 Products and disable it for lazyload
             filterData: response.data.data.facetData,
             isLoading: false,
             isCatDetails: false,
@@ -440,7 +435,7 @@ export class PlpContainer extends React.Component {
     } = this;
     console.log('is Has more --- ', hasMore);
     if (error || isLoading || !hasMore) return;
-    const adjustedHeight = 600;
+    const adjustedHeight = 1000;
     const windowHeight =
       window.innerHeight + document.documentElement.scrollTop;
     const windowOffsetHeight =

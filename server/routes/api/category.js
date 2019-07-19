@@ -4,6 +4,7 @@ const categoriesHandler = require('../../handlers/categoryhandler');
 const categoryUtil = require('../../utils/categoryutil');
 const testJson = require('../../configs/testjson');
 
+/* Get Category List for Navigation */
 router.get('/:keyword', (req, res, next) => {
   categoriesHandler.getCategories(
     req.params.keyword,
@@ -21,11 +22,8 @@ router.get('/:keyword', (req, res, next) => {
   );
 });
 
+/* Get Subcategory List */
 router.get('/subcategories/:categoryID', (req, res, next) => {
-  /* res.status(200).send({
-    status: 'success',
-    data: testJson.subcategories,
-  }); */
   categoriesHandler.getSubCategories(req, (err, result) => {
     if (err) {
       next(err);
@@ -38,6 +36,7 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
   });
 });
 
+/* Get Category Details */
 router.get('/details/:categoryID', (req, res, next) => {
   categoryUtil.getCategoryDetails(
     req.headers,

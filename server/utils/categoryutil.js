@@ -71,13 +71,13 @@ module.exports.categoryListByIDs = function getCategoryListByCategoryIDs(
 
   const categoryListTask = [
     getCategoryListByIDs.bind(null, headers, categoryIDs),
-    getProductCountandPrice.bind(null, headers, categoryIDs),
+    // getProductCountandPrice.bind(null, headers, categoryIDs),
   ];
   async.parallel(categoryListTask, (err, result) => {
     if (err) {
       callback(err);
     } else {
-      callback(null, transformJson2(result));
+      callback(null, transformJson3(result));
     }
   });
 };
@@ -212,6 +212,19 @@ function transformJson2(result) {
         categoryDetail.startPrice =
           productCountJSON[categoryDetail.uniqueID].startPrice || '';
       }
+      categoryList.push(categoryDetail);
+    }
+  });
+  return categoryList;
+}
+
+/* Merging Category Details and Product Count Data */
+function transformJson3(result) {
+  const categoryList = [];
+  const categoryListArray = result[0];
+  categoryListArray.forEach(category => {
+    const categoryDetail = category;
+    if (categoryDetail.uniqueID) {
       categoryList.push(categoryDetail);
     }
   });

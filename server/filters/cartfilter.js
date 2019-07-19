@@ -35,6 +35,9 @@ function mergeOrderItemandProduct(orderItemList, productList) {
         delete productData.ribbonText;
         delete productData.emiData;
         delete productData.inStock;
+        delete productData.masterCategoryID;
+        delete productData.installationRequired;
+
         Object.assign(itemJson, productData);
         break;
       }

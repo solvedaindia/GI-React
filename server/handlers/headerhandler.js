@@ -2,7 +2,6 @@ const async = require('async');
 const espotsHandler = require('./espotshandler');
 const logger = require('../utils/logger.js');
 const espots = require('../configs/espotnames');
-const filter = require('../filters/filter');
 const espotFilter = require('../filters/espotfilter');
 const headerEspot = espots.header;
 
