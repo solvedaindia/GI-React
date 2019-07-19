@@ -105,7 +105,6 @@
                 .heading-label {
                     font-size: $base*2.25;
                     margin: 0;
-                    padding: 30px 0;
                     font-weight: bold;
                 }
             }
@@ -541,6 +540,11 @@
                             padding-right: 3px;
                         }
                     }
+                    .labeltext-box{
+                        .heading-label {
+                            padding: 30px 0;
+                        }
+                    }
                 } 
             }
         }
@@ -588,6 +592,7 @@
                 width: 100%;
             }
             .listRow{
+                border: 0px;
                 .paybytext{
                     width:100%;
                 }
@@ -625,31 +630,38 @@
                         display: none;
                     }
                 } 
-            }
-            .checkout-btn-floater{
-                position:fixed;
-                bottom: 0px;
-                left: 0px;
-                z-index: 911;
-                width: 100%;
-                .total-amount, .proceed-btn{
-                    width: 50%;
-                    float: left;
-                }
-                .total-amount{
-                    background:$colorwhite;
-                    min-height: 44px;
-                    text-align: center;
-                    font-family: $font-bold;
-                    font-size: 16px;
-                    padding-top: 3px;
-                    .total-amount-text{
-                        font-size: 10px;
-                        display: block;
+                .labeltext-box{
+                    .heading-label {
+                        padding: 10px 0;
                     }
                 }
-            } 
+            }
+           
         }
+        .checkout-btn-floater{
+            position:fixed;
+            bottom: 0px;
+            left: 0px;
+            z-index: 911;
+            width: 100%;
+            .total-amount, .proceed-btn{
+                width: 50%;
+                float: left;
+            }
+            .total-amount{
+                background:$colorwhite;
+                min-height: 44px;
+                text-align: center;
+                font-family: $font-bold;
+                font-size: 16px;
+                padding-top: 3px;
+                border-top:1px solid $lightGrey;
+                .total-amount-text{
+                    font-size: 10px;
+                    display: block;
+                }
+            }
+        } 
     }
   }
 
