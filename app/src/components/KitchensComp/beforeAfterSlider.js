@@ -3,7 +3,7 @@ import BeforeAfterSlider from 'react-before-after-slider'
  
 class BeforeAfter extends Component {
   render () {
-    const before = require('../../../public/images/sl11.png')
+    const before = require('../../../public/images/sm1.jpg')
     const after = require('../../../public/images/whatgoes.png')
  
     return (

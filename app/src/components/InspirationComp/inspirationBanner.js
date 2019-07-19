@@ -4,9 +4,9 @@ import  '../../../public/styles/Inspiration/inspiration.scss'
 export default class InspirationBanner extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="Rectangle" src="http://www.tierneykitchens.ie/wp-content/uploads/2016/06/Wardrobe-Accessories-Banner.jpg" alt="rectangle"/>
-    const img2 = <img className="Rectangle" src="http://www.tierneykitchens.ie/wp-content/uploads/2016/06/Wardrobe-Accessories-Banner.jpg" alt="rectangle"/>
-    const img3 = <img className="Rectangle" src="http://www.tierneykitchens.ie/wp-content/uploads/2016/06/Wardrobe-Accessories-Banner.jpg" alt="rectangle"/>
+    const img1 = <img className="Rectangle" src={require('../../../public/images/inspbanner.jpg')} alt="rectangle"/>
+    const img2 = <img className="Rectangle" src={require('../../../public/images/inspbanner.jpg')} alt="rectangle"/>
+    const img3 = <img className="Rectangle" src={require('../../../public/images/inspbanner.jpg')} alt="rectangle"/>
     
 
     this.state = {
@@ -25,7 +25,7 @@ export default class InspirationBanner extends Component {
 
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -37,7 +37,7 @@ export default class InspirationBanner extends Component {
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide} <div className="crousdiv"><p className="Paragraph-Copy-13">Chennai, L Kitchen</p></div></h3>
+                <h3>{slide}</h3>
               </div>
             );
           })}

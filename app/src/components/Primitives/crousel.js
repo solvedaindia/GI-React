@@ -5,14 +5,16 @@ export default class Inscrousel extends Component {
   constructor(props) {
     super(props);
     const img1 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
-    const img2 = <img className="Oval-Copy-6" src={require('../../../public/images/cr2.jpg')} alt="rectangle"/>
-    const img3 = <img className="Oval-Copy-6" src={require('../../../public/images/cr3.jpg')} alt="rectangle"/>
-    const img4 = <img className="Oval-Copy-6" src={require('../../../public/images/cr4.jpg')} alt="rectangle"/>
-    const img5 = <img className="Oval-Copy-6" src={require('../../../public/images/cr6.jpg')} alt="rectangle"/>
-    const img6 = <img className="Oval-Copy-6" src={require('../../../public/images/cr0.jpg')} alt="rectangle"/>
+    const img2 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img3 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img4 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img5 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img6 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img7 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
+    const img8 = <img className="Oval-Copy-6" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
 
     this.state = {
-      slides: [img1, img2, img3, img4, img5, img6]
+      slides: [img1, img2, img3, img4, img5, img6, img7, img8]
     };
     this.click = this.click.bind(this);
   }
@@ -25,11 +27,13 @@ export default class Inscrousel extends Component {
   }
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 2
+      slidesToShow: 6,
+      slidesToScroll: 4,
+      centerMode: true
+      
     };
     return (
       <div>
@@ -39,7 +43,7 @@ export default class Inscrousel extends Component {
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide}</h3>
+                <h3>{slide}<h4 className="crusealHead">classic</h4></h3>
               </div>
             );
           })}
