@@ -59,7 +59,6 @@ class ForgotPasswordNewPassword extends React.Component {
       .post(forgotPasswordAPI, data)
       .then(response => {
         const passData = response.data.data;
-        alert('Password changed successfully!');
         const nextComp = 'NewPasswordSuccess';
         this.props.handlerPro(nextComp, null, null);
       })
