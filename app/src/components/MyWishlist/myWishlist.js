@@ -52,7 +52,7 @@ class MyWishlist extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps.wishlistUpdatedCount + '  this Porps ', this.props.wishlistUpdatedCount)
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
-      this.fetchMyWishlistData();
+      this.fetchMyWishlistData(myWishlistAPI);
     }
     if (nextProps.removeWishlistFlag) {
       console.log('Show The Popup Rmove from Wishlist', nextProps.removeWishlistFlag, this.props.removeWishlistFlag);
