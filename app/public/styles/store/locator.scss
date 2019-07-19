@@ -3,14 +3,9 @@
 
 .storeLocator {
     // @include container-width;
-    width: 80%;
     margin: 0 auto;
     text-align: center;
-    .title {
-        margin: $base*8 0 $base*6.25 0;
-    }
     .pc-field {
-        width: 36%;
         padding: 8px;
     }
     .pc-btn {
@@ -18,26 +13,18 @@
         color: $colorwhite;
         padding: $base*1.125;
         border: 1px solid $ashGrey;
-        width: 22%;
     }
     .storeTypes {
-        // width: 66.4%;
-        // margin: 44px auto;
-        padding: 40px 0 0 0;
         .typeList{
-
-        display: flex;
         justify-content: center;
         
         .active{
             border:1px solid $black !important;
         }
         .storeTypeItem{
-            width: 13%;
             display: block;
             border: 1px solid #ddd;
             margin: 1%;
-            min-height: 130px;
             float: left;
             .typeList {
                 width: 51%;
@@ -52,21 +39,17 @@
     }
 }
 .storeDetails {
-    width: 91.63%;
-    margin-left: 8.37%; 
     .headingtitle{
         font-size:$base*3.75;
         color:$black;
         padding:0 0 24px 0;
         font-family: $font-medium;
     }
-    .storeList {
-        width: 35%;       
+    .storeList {     
         margin: 0 19px 0 0;
         background: #f7f8f8;
         padding: 25px;
         .detailCard{
-            height: 400px;
             overflow: auto;
             padding: 0 12px 0 0;
             .storeListItem.ribbon{
@@ -157,7 +140,6 @@
     }
     }
     .mapContainer {
-        width: 63%;
         height: 500px;
     }
     .storeList,
@@ -166,3 +148,158 @@
         float: left;
     }
 }
+
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .storeLocator{
+            width: 80%;
+            .title {
+                margin: $base*8 0 $base*6.25 0;
+            }
+            .pc-field{
+                width: 36%;
+            }
+            .pc-btn{
+                width: 22%;
+            }
+            .storeTypes{
+                padding: 40px 0 0 0;
+                .typeList{
+                    display: flex;
+                    .storeTypeItem{
+                        width: 13%;
+                        min-height: 130px;
+                    }
+                } 
+            } 
+        }
+        
+        .storeDetails {
+            width: 91.63%;
+            margin-left: 8.37%; 
+            .storeList {
+                width: 35%;  
+                .detailCard{
+                    height: 400px;
+                }
+            }
+            .mapContainer{
+                width: 63%;
+            }
+        }
+    }
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+  
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .storeLocator{
+        width: 90%;
+        .title {
+            margin: $base*3 0 $base*3 0;
+        }
+        .pc-field{
+            width: 70%;
+        }
+        .pc-btn{
+            width: 30%;
+        }
+        .storeTypes{
+            padding: 20px 0 0 0;
+            .typeList{
+                .storeTypeItem{
+                    width: 48%;
+                    display: flex;
+                    min-height: 70px;
+                    .storetext{
+                        display:flex;
+                        align-items:center;
+                        font-size: 11px;
+                    }
+                }
+            } 
+            .headingtitle{
+                font-size: 18px;
+            }
+            
+        } 
+    } 
+    
+    .storeDetails {
+        width: 100%;
+        .storeList {
+            width: 100%;  
+            .headingtitle{
+                font-size: 18px;
+            }
+        }
+        .mapContainer{
+            width: 100%;
+        }
+    }
+  }
+  
+  
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

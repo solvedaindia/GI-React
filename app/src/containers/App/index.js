@@ -191,7 +191,7 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           
         </Switch>
-        <FooterContainer />
+        {/* <FooterContainer /> */}
       </div>
     );
   }

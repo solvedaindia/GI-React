@@ -7,13 +7,16 @@ import Content from '../Primitives/content';
 import ReadMore from '../GlobalComponents/readMore';
 import Recommendation from '../Recommendation/reco';
 import TrackOrder from '../TrackOrder/trackOrder';
+import { getCookie } from '../../utils/utilityManager';
 
 export default function WidgetList({ componentType, ...rest }) {
   switch (componentType) {
     case 'hero_banner':
       return <Slider {...rest} />;
     case 'mini_track_order':
-      return <TrackOrder {...rest} />;
+      if (getCookie('isLoggedIn') === 'true') {
+        return <TrackOrder {...rest} /> ;
+      }
     case 'best_selling':
       return <BestSeller {...rest} />;
     case 'recently_viewed':

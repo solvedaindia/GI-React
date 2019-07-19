@@ -2,7 +2,9 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import {
   imagePrefix,
-} from '../../../public/constants/constants';
+} from '../../../../public/constants/constants';
+import Accordion from './Accordion';
+import '../../../../public/styles/pdpComponent/accordian.scss';
 
 class productDetail extends React.Component {
   constructor() {
@@ -88,13 +90,15 @@ class productDetail extends React.Component {
     return (
       <>
         {this.props.productDetail.productDetails.description.length > 0 && (
+        <Accordion>
           <div className="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
                 <h2 className="heading"> Product Details</h2>
+                <span className="plusIcon"></span>
               </Col>
             </Row>
-            <Row>
+            <Row className='body'>
               <Col md={6} sm={12} xs={12}>
                 <div className="product_img">
                   <img
@@ -120,6 +124,7 @@ class productDetail extends React.Component {
               </Col>
             </Row>
           </div>
+          </Accordion>
         )}
       </>
     );

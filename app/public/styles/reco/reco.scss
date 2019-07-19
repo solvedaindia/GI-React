@@ -98,3 +98,23 @@
         
     }
 }
+
+@media (min-width: 320px) and (max-width:767px) {
+
+    .reco {
+        .leftSide {
+            width: 100%;
+            .recoDesc,
+            .leftOne,
+            .leftTwo {
+                width: 100%;
+                margin: $base 0;
+            }
+        }
+        .rightSide {
+            width: 100%;
+            margin: $base 0;
+        }
+    }
+
+}

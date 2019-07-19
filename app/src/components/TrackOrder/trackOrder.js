@@ -73,7 +73,7 @@ class TrackOrder extends React.Component {
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
-                    <p>Track Your Order</p>
+                    <p className='track'>Track Your Order</p>
                 </div>
                 <div className='orderDetails'>
                 <Slider {...settings}>
@@ -85,15 +85,21 @@ class TrackOrder extends React.Component {
                                         return(
                                             <div className='orderSummary'>
                                                 <figure className='prodImg'>
-                                                    <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index}/>
+                                                    <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
                                                 </figure>
                                                 <div className='prodDetails'>
-                                                    <p className='count'>ITEM({index}/{subOrderDetails.quantity})</p>
+                                                    <p className='count'>ITEM({index+1}/{subOrderDetails.quantity})</p>
                                                     <p className='orderID'>Order ID {orderDetails.orderID}</p>
                                                     <p className='prodName'>{subOrderDetails.productName}</p>
-                                                    <span className='qty'>Quantity<br></br>{subOrderDetails.quantity}</span>
-                                                    <span className='status'>Status<br></br>{shipmentDetails.status}</span>
-                                                    <span className='delDate'>DELIVERY ON<br></br>{shipmentDetails.deliveryDate}</span>
+                                                    <span className='qty item'>Quantity<br></br>
+                                                        <span className='qtyVal val'>{subOrderDetails.quantity}</span>
+                                                    </span>
+                                                    <span className='status item'>Status<br></br>
+                                                        <span className='statusVal val'>{shipmentDetails.status}</span>
+                                                    </span>
+                                                    <span className='delDate item'>DELIVERY ON<br></br>
+                                                        <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
+                                                    </span>
                                                 </div>
                                                 <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
                                                     <a className='link btn'>View Order</a>

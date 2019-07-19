@@ -8,7 +8,7 @@ import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import '../../../public/styles/userInfo/userInfo.scss';
 import appCookie from '../../utils/cookie';
-import { getCookie } from '../../utils/utilityManager';
+import { getCookie, getReleventReduxState } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
@@ -34,6 +34,9 @@ class UserAccInfo extends React.Component {
 
   resetLoginValues() {
     console.log('resetLoginValues');
+    if (this.props.resetCallbackPro) {
+      this.props.resetCallbackPro();
+    }
     this.setState({
       showLoginRegisterMain: false,
       showForgotPassword: false,
@@ -139,12 +142,12 @@ class UserAccInfo extends React.Component {
         ));
     } else {
       this.setState({
-        userType: 
+        userType:
           <li className="listItemUnSelected">
             <a className="dropDown">Hello Guest!</a>
           </li>
         ,
-        loginStatus: 
+        loginStatus:
           <a
             className="dropDown"
             onClick={this.onLoginRegisterClick.bind(this)}
@@ -152,9 +155,9 @@ class UserAccInfo extends React.Component {
             {' '}
             Login/Register
           </a>
-        
+
       });
-      
+
     }
   }
 
@@ -174,6 +177,9 @@ class UserAccInfo extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('Recive Porps -- ', nextProps.fromWishlistPro);
     this.fromWishlist(nextProps.fromWishlistPro);
+    if (getCookie('isLoggedIn') === 'true') {
+      this.getUserDetails();
+    }
   }
 
   fromWishlist(data) {
@@ -236,15 +242,18 @@ class UserAccInfo extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // default: state.default
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     // default: state.default
+//   };
+// }
+
+
 
 // commenting below is because componentWillRecivePops not getting called
 // export default connect(
 //   mapStateToProps,
 //   { updateUserProfile },
 // )(UserAccInfo);
+
 export default UserAccInfo;
