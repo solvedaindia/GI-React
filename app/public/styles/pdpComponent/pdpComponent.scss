@@ -1261,7 +1261,13 @@
     width: 20%;
     text-align: center;
 }
-.bankEmiList{background-color: rgba(0, 0, 0, 0.11) !important;}
+.bankEmiList{background-color: rgba(0, 0, 0, 0.11) !important;
+.subText{
+    font-family: $font-regular;
+    color:$battleshipGrey;
+    font-size: $base*1.5;
+}
+}
 .emiPlans{
     text-align: center;
 }

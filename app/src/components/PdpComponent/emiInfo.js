@@ -97,7 +97,7 @@ class EmiInfo extends React.Component {
 					 <tr key={id}>						
 							<td>{tabContent.tenure}</td>
 							<td>{tabContent.emiValue}</td>
-							<td>{tabContent.interestAmount}%</td>
+							<td>{tabContent.rate}%</td>
 							<td>{tabContent.totalAmount}</td>
 					</tr>	
 				));
@@ -148,10 +148,10 @@ class EmiInfo extends React.Component {
 											</tr>
 											
 											<tr className='bankEmiList'>
-												<td>PLANS</td>
-												<td>EMI</td>
-												<td>ANNUAL INTEREST</td>
-												<td>TOTAL COST</td>
+												<td>PLANS<br/><div class="subText">(Months)</div></td>
+												<td>EMI<br/><div class="subText">(Payable to provider)</div></td>
+												<td>ANNUAL INTEREST<br/><div class="subText">(Charged by provider)</div></td>
+												<td>TOTAL COST<br/><div class="subText">(Payable to provider)</div></td>
 											</tr>
 											
 											<tr className="banklistdata">
