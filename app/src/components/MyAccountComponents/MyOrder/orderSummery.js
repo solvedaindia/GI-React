@@ -23,7 +23,7 @@ class OrderSummery extends React.Component {
           <h4 className="heading">Delivery Address</h4>
           <p className="subheading">{addressData.name}</p>
           <p className="address">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
-          <ul className="invoiceList">
+          {/* <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
                 <li onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list">INVOICE {key + 1}</li>
@@ -44,7 +44,10 @@ class OrderSummery extends React.Component {
               <div className="leftText">Cart Total</div>
               <div className="rightText">₹{summeryData.netAmount}</div>
             </div>
-
+            <div className="summaryDetails clearfix">
+              <div className="leftText">Shipping</div>
+              <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
+            </div>
             <div className="summaryDetails clearfix">
               <div className="leftText">Product Discount</div>
               <div className="rightText">{summeryData.productDiscount === 0 ? null : '-' } ₹{summeryData.productDiscount}</div>
@@ -52,10 +55,6 @@ class OrderSummery extends React.Component {
             <div className="summaryDetails clearfix">
               <div className="leftText">Order Discount</div>
               <div className="rightText">-₹{summeryData.orderDiscount}</div>
-            </div>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Shipping</div>
-              <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
             </div>
             <div className="divider"></div>
             <div className="summaryDetails subTotaltext clearfix">

@@ -41,7 +41,7 @@ const initialState = fromJS({
 });
 
 function appReducer(state = initialState, action) {
-  console.log('in The Reducer ---', action.type, action.payload);
+  
   switch (action.type) {
     case LOAD_REPOS:
       return state
@@ -62,6 +62,7 @@ function appReducer(state = initialState, action) {
     case RESET_REMOVEWISHLISTFLAG:
       return state.set('loading', false).set('removeWishlistFlag', action.flag);
     case UPDATE_PROFILE:
+        console.log('in The Global Reducer ---', action.type, action.userName);
       return state.set('loading', false).set('userName', action.userName);
     // .set('logonId', action.logonId);
     // case GET_CART_FETCHED:

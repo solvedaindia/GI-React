@@ -89,7 +89,8 @@ export function resetTheCookiesAndData() {
   document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
   document.cookie = `name=;path=/;expires=''`;
   appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
-  window.location.reload(); // In case you don't reload the page, make this use as guest user.
+  //window.location.reload(); // In case you don't reload the page, make this use as guest user.
+  document.location.href="/";
 }
 
 export function removeFromWishlistGlobalAPI(uniqueId, reference) {
