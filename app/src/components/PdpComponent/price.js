@@ -15,12 +15,6 @@ const price = props => {
       
     )}
       
-        <h2 className="actualprice text">&#8377;
-        {props.priceData.offerPrice
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </h2>
-      
     {props.priceData.offerPrice < props.priceData.actualPrice && (
       <span className="actualprice text">
         <h2>&#8377;
