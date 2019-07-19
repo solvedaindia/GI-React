@@ -46,10 +46,10 @@ index: 0
     render(){
         return (
             <div className="Kitchen-1">
-              <div className="wardroBanner">
+              <div className="kitchensBanner">
                 <KitchenBanner />
                 <div className="container1">
-                  <div className="wardroBannertext">
+                  <div className="kitchensBannertext">
                     <h4 className="heading">Interio Kitchens</h4>
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                       eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
@@ -61,8 +61,7 @@ index: 0
               </div>
               <div className="typesofkitch">
               <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
-              <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
+            
               <TypesOFkitchens />
               </div>
               <div className="easySteps">
@@ -93,29 +92,17 @@ index: 0
               <div className="kitchenHallLayout">
               <KitchenHall />
               </div>
-              <div className="container">
-                <div className="col-md-12">
-                  <div className="row-md-6">
-                    <div className="container">
-                      <div className="Blacks">
-                        <div className="container">
-                          <h1 className="What-goes-into-a-Godr">Why People Love our Kitchens</h1>
-                          <WhyPeopleLove />
-                          <h1 className="Naming">Alvin Simon</h1>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row-md-6">
+            
+                  
 
-
+                   <div className="beforeAfterSlides">
                     <div className="container">
 
                       <BeforeAfter />
                     </div>
-                  </div>
-                </div>
-              </div>
+                    </div>
+                
+             
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div className="Form-bakground">
@@ -229,30 +216,22 @@ index: 0
                 </div>
                 </div>
               </div>
-              <div className="modularWardrobes">
+              <div className="modularKitches">
               <div className="container">
                 <div className="row">
                   <div className="col-md-12">
-                  <h3 className="heading">Modular Wardrobes</h3>
-                  <p className="subText">Godrej Interio is India’s largest furniture brand. From
-                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
-                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
+                  <h3 className="heading2">Interio Kitchens</h3>
+                  <p className="subText2">Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a diverse portfolio – it’s been a brilliant, exciting journey for us.
 
-                    We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
-                    designed, fun and functional furniture solutions to you.<br />
+We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you.
 
-                    True to the Godrej mission to conserve the environment, we design products, set up processes and use
-                    raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
+True to the Godrej mission to conserve the environment, we design products, set up processes and use raw materials that are eco-friendly to do our bit to preserve natural resources.
 
-                    We offer our customers home and office furniture, along with solutions for laboratories, hospitals
-                    and healthcare establishments, education and training institutes, shipyards<br /> and navy,
-                    auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
-                    and through 800 dealer outlets.<br />
+We offer our customers home and office furniture, along with solutions for laboratories, hospitals and healthcare establishments, education and training institutes, shipyards and navy, auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets. 
 
-                    Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
-                    India’s largest engineering and consumer product groups.</p>
+Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s largest engineering and consumer product groups.</p>
                   
-                  <button className="Read-More">Read More</button>
+                  <button className="Read-More2">Read More</button>
                   </div>
                 </div>
                

@@ -5,14 +5,44 @@
 .Kitchen-11 {
     width: 100%;
     background-color: #ffffff;
-    .WardrowsBefits{
-      width:56%;
-      margin:0 auto;
+    .BenefitedWardrobes{
+      padding: 100px 0 0 0;
+      .WardrowsBefits{
+        width:56%;
+        margin:0 auto;
+      }
+      .titlesss {
+        font-family: $font-regular;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #767676;
+      }
+      .Combined-Shape {
+        width: 100%;
+        background-color: white;
+      }
+      .WardrowsBefits.column2{
+        width:30%;
+        margin:0 auto;
+      }
+      .Benefits-of-Modular {
+        font-family: CeraGodrejInterio;
+        font-size: 30px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+      }
     }
-    .WardrowsBefits.column2{
-      width:30%;
-      margin:0 auto;
-    }
+   
 
     .wardroBanner{
       position: relative;
@@ -375,21 +405,7 @@ react-slideshow-container {
   text-align: center;
 
 }
-.Paragraphhall {
-  // width: 555px;
-  height: 43px;
-  font-family: CeraGodrejInterio;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color:#4a4a4a
 
-
-}
 
 .crousdiv {
   width: 458px;
@@ -584,35 +600,9 @@ transform: translate(-50%, -50%);
   color:#767676;
  }
 
-.Benefits-of-Modular {
-   height: 36px;
-    font-family: CeraGodrejInterio;
-    font-size: 30px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000000;
-  }
-  .Combined-Shape {
-    width: 120px;
-    height: 120px;
-    background-color: white;
-  }
-  .titlesss {
-    height: 17px;
-    font-family: CeraGodrejInterio;
-    font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #767676;
-  }
+
+  
+  
   .crouselBAckground {
     // width: 1440px;
     height: 1023x;

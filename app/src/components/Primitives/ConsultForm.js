@@ -117,24 +117,12 @@ return items;
   }
 
 onDropdownSelected = (e) => {
-  // if(dropDownValue){
-  //   const {name, dropDownValue} = e.target; //gets info from Form
-  // console.log('dataaaaa', e.target.value)
- 
-  // this.setState({
-    
-  //   [name] : dropDownValue
-  //  })
-  // }
   if (e.target.value !== 'null' && this.state.dropDownValue !== e.target.value) {
     console.log("THE VAL", e.target.value);
     this.setState({
       dropDownValue : e.target.value
      })
-  
   }
- 
-   //here you will see the current selected value of the select input
 }
 
 

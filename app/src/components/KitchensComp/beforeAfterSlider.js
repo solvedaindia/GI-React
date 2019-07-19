@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
- 
 import BeforeAfterSlider from 'react-before-after-slider'
  
 class BeforeAfter extends Component {
   render () {
-    const before = 'https://www.janelockhart.com/portfolio/images/001_J_L_Suz_Kitchen.jpg'
-    const after = 'https://webassets.inman.com/wp-content/uploads/2018/01/Untitled-design-56-1984x880.png'
+    const before = require('../../../public/images/sl11.png')
+    const after = require('../../../public/images/whatgoes.png')
  
     return (
       <BeforeAfterSlider

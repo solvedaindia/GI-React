@@ -58,7 +58,7 @@ index: 0
                 </div>
                 </div>
               </div>
-
+<div className="BenefitedWardrobes">
               <div className="container">
                 <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>                
                   <div className="row">
@@ -106,9 +106,7 @@ index: 0
                   </div>
                
               </div>
-              <br />
-              <br />
-              <br />
+              </div>
               <div className="crouselBAckgrounding"><br />
                 <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                 <WardrobesTypes />
