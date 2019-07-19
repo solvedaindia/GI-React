@@ -43,8 +43,14 @@ class productDefAttribute extends React.Component {
 	/* get selected swatches */
 	getSelectedSwatches() {
 		let selectedSwatches = Array();
+		let getData;
 		this.props.allselectedData.map(data => {
-			data.defAttributes.map((swatches) => {
+			if (data.defAttributes) {
+				getData = data.defAttributes;
+			} else if (data.swatchAttributes) {
+				getData = data.swatchAttributes
+			}
+			getData.map((swatches) => {
 				selectedSwatches.push(swatches.values[0].name);
 			});
 		});

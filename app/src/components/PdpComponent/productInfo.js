@@ -25,6 +25,12 @@ class productInfo extends React.Component {
   }
 
   render() {
+	let showOffer = false;
+	if (this.props.productData.promotions.length > 0 || parseInt(this.props.productData.discount) > 1) {
+		showOffer = true;
+	}
+	
+	
     return (
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
@@ -39,14 +45,15 @@ class productInfo extends React.Component {
         }
         
         <>
+		{ showOffer &&
         <div className="accessories-offer">
-          <div className="offerbg text"> % </div>
+		 <div className="offerbg text"> % </div>
           <div className="discount-off text">
-            { this.props.productData.discount > 1 &&
-              <>{this.props.productData.discount}% OFF </>
+            { parseInt(this.props.productData.discount) > 1 &&
+              <>{parseInt(this.props.productData.discount)}% OFF </>
             }
-            { this.props.productData.promotions.length > 0 &&
-            <>{this.props.productData.promotions[0].promocode}{' '}</>
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
+            <>{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</>
             }
           </div>
           { this.props.productData.promotions.length > 0 &&
@@ -59,6 +66,7 @@ class productInfo extends React.Component {
           </a>
           }
         </div>
+		}
         { this.props.productData.promotions.length > 0 &&
         <div id="offers" className={this.state.isActive}>
           <ul className="cashoffer-wrapper">

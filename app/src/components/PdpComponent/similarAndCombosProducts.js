@@ -66,8 +66,8 @@ class SimilarCombosProducts extends React.Component {
                   }
                   
                 </span>
-                { data.discount > 1 &&
-                <><span className="bold">{data.discount}% Off </span> on this product</>
+                { parseInt(data.discount) > 1 &&
+                <><span className="bold">{parseInt(data.discount)}% Off </span> on this product</>
                 }
               </p>
             </div>

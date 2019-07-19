@@ -75,7 +75,6 @@ class NotifyMe extends React.Component {
 			pincode: appCookie.get('pincode')
 		};
 		apiManager.post(notifyMeAPI, data).then((res) => {
-			console.log('@@@###$$$=>>>', res);
 			this.setState({
 				errorMessage: res.data.data.message,
 				msgClass: 'success-msg'

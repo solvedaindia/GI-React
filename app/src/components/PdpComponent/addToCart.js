@@ -61,7 +61,6 @@ class addToCartComponent extends React.Component {
         header.classList.remove("sticky");
       }
     }, 2000);
-    console.log('this.propsthis.props=>>', this.props);
     const pincode = appCookie.get('pincode');
     let quantity = 1;
     if (document.getElementById('quantity')) {

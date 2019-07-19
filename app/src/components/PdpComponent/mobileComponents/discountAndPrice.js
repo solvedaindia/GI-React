@@ -4,9 +4,9 @@ import Price from '../price';
 const discountAndPrice = props => {
     return(
     <div>
-        { props.skuData.discount > 1 &&
+        { parseInt(props.skuData.discount) > 1 &&
         <div className="accessories-offer">
-            <div className="offerbg text">{props.skuData.discount}% Off</div>
+            <div className="offerbg text">{parseInt(props.skuData.discount)}% Off</div>
         </div>
         }
         <Price priceData={props.skuData}/>
