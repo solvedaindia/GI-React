@@ -48,7 +48,7 @@ index: 0
             <div className="Kitchen-1">
               <div className="kitchensBannerLayout">
                 <KitchenBanner />
-                <div className="container">
+                <div className="container1">
                   <div className="kitchensBannertext">
                     <h4 className="heading">Interio Kitchens</h4>
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
