@@ -46,9 +46,9 @@ index: 0
     render(){
         return (
             <div className="Kitchen-1">
-              <div className="kitchensBanner">
+              <div className="kitchensBannerLayout">
                 <KitchenBanner />
-                <div className="container1">
+                <div className="container">
                   <div className="kitchensBannertext">
                     <h4 className="heading">Interio Kitchens</h4>
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -60,15 +60,15 @@ index: 0
                 </div>
               </div>
               <div className="typesofkitch">
-              <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
-            
-              <TypesOFkitchens />
+                <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
+
+                <TypesOFkitchens />
               </div>
               <div className="easySteps">
-              <div className="container">
-                <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
-                <DreamKitchens />
-              </div>
+                <div className="container">
+                  <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
+                  <DreamKitchens />
+                </div>
               </div>
               <div className="kichenLayoutbanner clearfix">
                 <div className="textBox">
@@ -80,46 +80,38 @@ index: 0
                 </div>
               </div>
               <div className="whatgoesSlider">
-              <div className="container">
-                <WhatGoes />
-                <h3 className="Name-Copy">Behind the Scenes Description</h3>
-                <p className="This-project-require">This project required a huge amount of hours but sit amet,
-                  consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
-                  aliquat enim ad minim.</p>
+                <div className="container">
+                  <WhatGoes />
+                  <h3 className="Name-Copy">Behind the Scenes Description</h3>
+                  <p className="This-project-require">This project required a huge amount of hours but sit amet,
+                    consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim.</p>
+                </div>
               </div>
-              </div>
-              <AlwaysRemember /> 
+              <AlwaysRemember />
               <div className="kitchenHallLayout">
-              <KitchenHall />
+                <KitchenHall />
               </div>
-            
-                  
-
-                   <div className="beforeAfterSlides">
-                    <div className="container">
-
-                      <BeforeAfter />
-                    </div>
-                    </div>
-                
-             
+              <div className="beforeAfterSlides">
+                <div className="container">
+                  <BeforeAfter />
+                </div>
+              </div>
+              <div className="formContainer">
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div className="Form-bakground">
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
-
                   <ConsultationForm />
                 </div>
-
+                </div>
               </div>
-                <OurPromises />
+              <OurPromises />
               <div className="frequesntly">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br />
                 <div className="panel-group" id="accordion">
-
-
                   <div className="panel panel-default">
                     <div className="panel-heading">
                       <h4>
@@ -198,44 +190,48 @@ index: 0
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="faqHeader">Sellers</div> */}
-
-                </div>
+                    </div>
               </div>
               <div className="kitchenFaciliies">
-              <div className="container">
-                <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
-                <div className="text-block">
-                  <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
-                    alt="rectangle" />
-                  <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
-                  <p className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
-                    the home you've always wanted</p> <br />
-                  <button className="seeMore">Know More</button>
-                </div>
+                <div className="container">
+                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+                  <div className="text-block">
+                    <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
+                      alt="rectangle" />
+                    <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
+                    <p className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
+                      the home you've always wanted</p> <br />
+                    <button className="seeMore">Know More</button>
+                  </div>
                 </div>
               </div>
               <div className="modularKitches">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-12">
-                  <h3 className="heading2">Interio Kitchens</h3>
-                  <p className="subText2">Godrej Interio is India’s largest furniture brand. From manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a diverse portfolio – it’s been a brilliant, exciting journey for us.
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h3 className="heading2">Interio Kitchens</h3>
+                      <p className="subText2">Godrej Interio is India’s largest furniture brand. From manufacturing the
+                        humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a diverse
+                        portfolio – it’s been a brilliant, exciting journey for us.
 
-We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well designed, fun and functional furniture solutions to you.
+                        We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering
+                        well designed, fun and functional furniture solutions to you.
 
-True to the Godrej mission to conserve the environment, we design products, set up processes and use raw materials that are eco-friendly to do our bit to preserve natural resources.
+                        True to the Godrej mission to conserve the environment, we design products, set up processes and
+                        use raw materials that are eco-friendly to do our bit to preserve natural resources.
 
-We offer our customers home and office furniture, along with solutions for laboratories, hospitals and healthcare establishments, education and training institutes, shipyards and navy, auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities and through 800 dealer outlets. 
+                        We offer our customers home and office furniture, along with solutions for laboratories,
+                        hospitals and healthcare establishments, education and training institutes, shipyards and navy,
+                        auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18
+                        cities and through 800 dealer outlets.
 
-Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s largest engineering and consumer product groups.</p>
-                  
-                  <button className="Read-More2">Read More</button>
+                        Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group,
+                        one of India’s largest engineering and consumer product groups.</p>
+
+                      <button className="Read-More2">Read More</button>
+                    </div>
                   </div>
                 </div>
-               
-              </div>
               </div>
             </div>
         )

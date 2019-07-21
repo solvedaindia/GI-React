@@ -44,7 +44,7 @@ index: 0
 
     render(){
         return (
-            <div className="Kitchen-11">              
+            <div className="wardrobes1">              
               <div className="wardroBanner">
                    <WardrobeBanner/>
                    <div className="container1">
@@ -148,22 +148,18 @@ index: 0
                 </div>
               </div>
               <WardrobesHAll />
-              <br />
-              <br /><br />
+              
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div className="Form-bakground">
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
-                  <br />
-                  <br />
-                  <br />
+
                   <ConsultationForm />
                 </div>
 
               </div>
-
               <div className="frequesntly">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br /><br /><br /><br /><br />
                 <div className="panel-group" id="accordion">

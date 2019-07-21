@@ -2,142 +2,35 @@
 @import '../base';
 
 .About-Us {
-  width: 1440px;
-  height: 2100px;
+  width: 100%;
+  height: auto;
   background-color: #ffffff;
-}
-.abouts-Us {
-  width: 129px;
-  height: 36px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-}
-.GodrejInterio {
-  width: 751px;
-  height: 260px;
-  font-family: CeraGodrejInterio;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: #000000;
-}
-
- 
-  .Post-title {
-    width: 60px;
-    height: 31px;
+  .abouts-Us {
+    width: 129px;
+    height: 36px;
     font-family: CeraGodrejInterio;
-    font-size: 21px;
+    font-size: 30px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.48;
+    line-height: normal;
     letter-spacing: normal;
     color: #000000;
   }
-  .Post-title-Copy {
-    width: 72px;
-    height: 31px;
+  .GodrejInterio {
+    width: 751px;
+    height: 260px;
     font-family: CeraGodrejInterio;
-    font-size: 21px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: normal;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.48;
+    line-height: 1.43;
     letter-spacing: normal;
     color: #000000;
   }
-  .Post-title-Copy-2 {
-    width: 65px;
-    height: 31px;
-    font-family: CeraGodrejInterio;
-    font-size: 21px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.48;
-    letter-spacing: normal;
-    color: #000000;
-  }
-
-
-  .Path-4 {
-    width: 27.5px;
-    height: 18.6px;
-    background-color: var(--light-blue-grey);
-  }
-  .Header-Copy-5 {
-  width: 223px;
-  height: 49px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-}
-.greenguard-certification {
-  width: 263px;
-  height: 263px;
-}
-.Name {
-  width: 371px;
-  height: 39px;
-  font-family: CeraGodrejInterio;
-  font-size: 28px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.36;
-  letter-spacing: normal;
-  color: #000000;
-}
-.Position {
-  height: 31px;
-  font-family: CeraGodrejInterio;
-  font-size: 21px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: black;
-}
-.Biography {
-  width: 556px;
-  height: 186px;
-  font-family: CeraGodrejInterio;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: #000000;
-}
-
-.Position-Copy {
-  width: 18px;@import '../variable';
-  @import '../base';
   
- 
- 
-    .Oval {
-      width: 89px;
-      height: 89px;
-      background-color: var(--ice-blue);
-    }
+   
     .Post-title {
       width: 60px;
       height: 31px;
@@ -175,7 +68,6 @@
       color: #000000;
     }
   
-    
   
     .Path-4 {
       width: 27.5px;
@@ -211,7 +103,6 @@
     color: #000000;
   }
   .Position {
-    width: 371px;
     height: 31px;
     font-family: CeraGodrejInterio;
     font-size: 21px;
@@ -220,7 +111,7 @@
     font-stretch: normal;
     line-height: 1.43;
     letter-spacing: normal;
-    color: var(--battleship-grey);
+    color: black;
   }
   .Biography {
     width: 556px;
@@ -236,7 +127,227 @@
   }
   
   .Position-Copy {
-    width: 18px;
+    width: 18px;@import '../variable';
+    @import '../base';
+    
+   
+   
+      .Oval {
+        width: 89px;
+        height: 89px;
+        background-color: var(--ice-blue);
+      }
+      .Post-title {
+        width: 60px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+      .Post-title-Copy {
+        width: 72px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+      .Post-title-Copy-2 {
+        width: 65px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+    
+      
+    
+      .Path-4 {
+        width: 27.5px;
+        height: 18.6px;
+        background-color: var(--light-blue-grey);
+      }
+      .Header-Copy-5 {
+      width: 223px;
+      height: 49px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .greenguard-certification {
+      width: 263px;
+      height: 263px;
+    }
+    .Name {
+      width: 371px;
+      height: 39px;
+      font-family: CeraGodrejInterio;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.36;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Position {
+      width: 371px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color: var(--battleship-grey);
+    }
+    .Biography {
+      width: 556px;
+      height: 186px;
+      font-family: CeraGodrejInterio;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    
+    .Position-Copy {
+      width: 18px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      color: #000000;
+    }
+   
+    .Header-Copy-4 {
+      width: 231px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Rectangle-Copy-3 {
+      width: 149px;
+      height: 354px;
+      background-color: #f2f5f7
+    }
+    .Rectangle {
+      width: 1040px;
+      height: 354px;
+      background-color: #f2f5f7
+    }
+    .greenguard-certification {
+      width: 263px;
+      height: 263px;
+    }
+    .title {
+      width: 417.3px;
+      height: 28px;
+      font-family: CeraGodrejInterio;
+      font-size: 20px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.4;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    
+   
+    .headerIn {
+      width: 542px;
+      height: 64px;
+      font-family: CeraGodrejInterio;
+      font-size: 50px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.28;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    .Your-information-is {
+      width: 475px;
+      height: 72px;
+      font-family: CeraGodrejInterio;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    .Rectangle1 {
+      width: 158px;
+      height: 37.8px;
+      background-color: #ffffff;
+    }
+    .HeaderCopy33 {
+      width: 179px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Wed-love-to-hear-from-you-Copys {
+      width: 121px;
+      height: 30px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color:black;
+    }
+   
+    .michael-d {
+      width: 555px;
+      height: 370px;
+    }
+    
     height: 31px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
@@ -247,19 +358,19 @@
     letter-spacing: normal;
     color: #000000;
   }
- 
-  .Header-Copy-4 {
-    width: 231px;
-    height: 36px;
+  .Position-Copy-2 {
+    width: 18px;
+    height: 31px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
-    line-height: normal;
+    line-height: 1;
     letter-spacing: normal;
-    color: #000000;
+    color: var(--light-blue-grey);
   }
+  
   .Rectangle-Copy-3 {
     width: 149px;
     height: 354px;
@@ -274,7 +385,7 @@
     width: 263px;
     height: 263px;
   }
-  .title {
+  title {
     width: 417.3px;
     height: 28px;
     font-family: CeraGodrejInterio;
@@ -287,8 +398,8 @@
     color: #000000;
   }
   .Paragraph {
-    
-    
+    width: 618px;
+    height: 120px;
     font-family: CeraGodrejInterio;
     font-size: 14px;
     font-weight: normal;
@@ -298,7 +409,11 @@
     letter-spacing: normal;
     color: #000000;
   }
- 
+  .Mask {
+    // width: 1141px;
+    height: 369px;
+    background-color: rgba(1, 123, 107, 0.73);
+  }
   .headerIn {
     width: 542px;
     height: 64px;
@@ -312,26 +427,54 @@
     text-align: center;
     color: #ffffff;
   }
-  .Your-information-is {
-    width: 475px;
-    height: 72px;
+  
+  
+  
+  
+  .hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+  .rawpixel-983726-unsplash {
+    width: 556px;
+    height: 371px;
+  }
+  .container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  .michaelSplash {
+    width: 456px;
+    height: 271px;
+  }
+  .Post-title {
+    width: 555px;
+    height: 31px;
     font-family: CeraGodrejInterio;
     font-size: 18px;
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.33;
+    line-height: 1.72;
     letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
+    color: #000000;
   }
-  .Rectangle1 {
-    width: 158px;
-    height: 37.8px;
+  /*.....privacy and policy....*/
+  .privacyPol {
+    width: 1440px;
+    height: 2738px;
     background-color: #ffffff;
   }
-  .HeaderCopy33 {
-    width: 179px;
+  
+  .privpol {
+    width: 529px;
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
@@ -341,442 +484,279 @@
     line-height: normal;
     letter-spacing: normal;
     color: #000000;
+    text-align: center;
   }
-  .Wed-love-to-hear-from-you-Copys {
-    width: 121px;
-    height: 30px;
+  .Godrej-Interio-is-Ins {
+    width: 1140px;
+    height: 206px;
     font-family: CeraGodrejInterio;
-    font-size: 21px;
+    font-size: 14px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.43;
+    line-height: normal;
     letter-spacing: normal;
-    color:black;
+    color:$reddishpink;
+    color: #000000
+  }
+  
+  /*.....survice & support.....*/
+  
+  .serviceSupport {
+    width: 1440px;
+    height: 2738px;
+    background-color: #ffffff;
+  }
+  .Header-Copy-h1 {
+    height: 36px;
+    font-family: CeraGodrejInterio-Medium;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    text-align: center;
+  }
+  .Header-Copy-h3 {
+    height: 36px;
+    font-family: CeraGodrejInterio-Medium;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    text-align: center;
+  }
+  .searchBars {
+    // width: 30%;
+    display: inline-block;
+    position: relative;
+    border-bottom: 1px solid $battleshipGrey;
+    margin: 0 auto;
+    width: 30%;
+    display: block;
+   .search-icon{margin:0}
+    .searchInput {
+        width: 100%;
+        border: transparent;
+        background: transparent;
+        padding: 0px 0 0 25px;
+        min-height: 35px;
+        &:focus {
+            outline: none;
+        }
+    }
+    .searchLogo {
+        position: absolute;
+        top: 6px;
+        left: 0px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        pointer-events: none;
+    }
+    .clearField {
+        position: absolute;
+        top: 2px;
+        right: 7px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        font-size: 18px;
+        text-decoration: none;
+        color:$black;    
+        display: none;
+       
+    }
+  
+    #autoSuggestDiv{
+        position: absolute;
+        top: 53px;
+        width: 100%;
+        background:$colorwhite;
+        z-index: 9;
+        left: 0;
+        box-shadow: 0 24px 24px -10px rgba(66, 75, 90, 0.47);
+  
+        .auto-search{
+            padding: 16px 0 16px 0;
+  
+            .list{
+                padding:0px;
+                &:first-child{
+                    .link{
+                        cursor: default;
+                    }
+                }
+                .link{
+                    display: block;
+                    padding: 7px 20px;
+                    text-decoration: none;
+                    color:$black;
+                    font-family: $font-regular;
+                    font-size: 12px;
+  
+                    &:hover{
+                        background:$paleGrey;
+                    }
+                }
+                &:first-child{
+                    .link{
+                        display: block;
+                        padding: 7px 20px;
+                        text-decoration: none;
+                        color:$black;
+                        font-family: $font-bold;
+     
+                        &:hover{
+                            background:transparent;
+                        }
+                    }
+                }
+  
+            }
+        }
+        
+    }
+  }
+  
+  .faqhead {
+    height: 18px;
+    font-family: CeraGodrejInterio-Medium;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    text-align: center;
+  }
+  .uldiver{
+    width:163px;
+    height:31px;
+    background-color: #eef8fe
+  }
+  .uldiv{
+    width:263px;
+    height:41px;
+    background-color: #eef8fe
+  }
+  .uldivlight{
+    width:263px;
+    height:41px;
+    background-color:white;
+  }
+  .MyOd {
+    margin-right: 837px;
+    margin-top: 40px;
+    height: 28px;
+    font-family: CeraGodrejInterio-Medium;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    text-align: center;
+  }
+  .panel-body{
+    margin-top: -2px;
+    color: #000000
+  }
+  .hrvertical { 
+    border-left: 6px solid green;
+    height: 500px;
+    }
+    .enquiry{
+      font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000000;
+  
+    }
+    
+  .emailus{
+    margin-top: 50px;
+      margin-left: 209px;
+    width: 23px;
+    height: 15px;
+  }
+  .contactus{
+    margin-left: 195px;
+    font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  height: 19px;
+  width: 76;
+  color: #000000;
+  
+  }
+  .Header-Copy-4 {
+    font-weight: bold;
+  
+    height: 36px;
+    font-family: CeraGodrejInterio-Medium;
+    font-size: 30px;
+    font-weight: 500px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    text-align: center;
+  }
+  .emailsmall{
+    margin-left: 160px;
+  text-align: center;
+  font-size: 14px;
+  height: 19px;
+  width: 76;
+  color: #000000;
+  
+  }
+  .chat{
+    margin-top: 50px;
+    margin-left: 457px;
+    height: 54px;
+    width: 162px;
+    background-color: #eef8fe;
+  }
+  .chattext{
+    margin-right: -22px;
+      font-weight: bold;
+      text-align: center;
+      height: 21px;
+      font-size: 14px;
+  }
+  .chatIcon{
+    width: 40px;
+    height: 30px;
+  }
+  .aboutUstextContainer{
+    padding:61px;
+    .heading{
+    font-family: $font-medium;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    }
+    .Paragraph {
+      font-family: $font-regular;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          line-height: 1.43;
+          color: #000000;
+        }
   }
  
-  .michael-d {
-    width: 555px;
-    height: 370px;
-  }
-  
-  height: 31px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  color: #000000;
-}
-.Position-Copy-2 {
-  width: 18px;
-  height: 31px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  color: var(--light-blue-grey);
-}
-
-.Rectangle-Copy-3 {
-  width: 149px;
-  height: 354px;
-  background-color: #f2f5f7
-}
-.Rectangle {
-  width: 1040px;
-  height: 354px;
-  background-color: #f2f5f7
-}
-.greenguard-certification {
-  width: 263px;
-  height: 263px;
-}
-title {
-  width: 417.3px;
-  height: 28px;
-  font-family: CeraGodrejInterio;
-  font-size: 20px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.4;
-  letter-spacing: normal;
-  color: #000000;
-}
-.Paragraph {
-  width: 618px;
-  height: 120px;
-  font-family: CeraGodrejInterio;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  color: #000000;
-}
-.Mask {
-  // width: 1141px;
-  height: 369px;
-  background-color: rgba(1, 123, 107, 0.73);
-}
-.headerIn {
-  width: 542px;
-  height: 64px;
-  font-family: CeraGodrejInterio;
-  font-size: 50px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.28;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
-}
-
-
-
-
-.hr { 
-  display: block;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-width: 1px;
-}
-.rawpixel-983726-unsplash {
-  width: 556px;
-  height: 371px;
-}
-.container {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-
-.michaelSplash {
-  width: 456px;
-  height: 271px;
-}
-.Post-title {
-  width: 555px;
-  height: 31px;
-  font-family: CeraGodrejInterio;
-  font-size: 18px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.72;
-  letter-spacing: normal;
-  color: #000000;
-}
-/*.....privacy and policy....*/
-.privacyPol {
-  width: 1440px;
-  height: 2738px;
-  background-color: #ffffff;
-}
-
-.privpol {
-  width: 529px;
-  height: 36px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  text-align: center;
-}
-.Godrej-Interio-is-Ins {
-  width: 1140px;
-  height: 206px;
-  font-family: CeraGodrejInterio;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color:$reddishpink;
-  color: #000000
-}
-
-/*.....survice & support.....*/
-
-.serviceSupport {
-  width: 1440px;
-  height: 2738px;
-  background-color: #ffffff;
-}
-.Header-Copy-h1 {
-  height: 36px;
-  font-family: CeraGodrejInterio-Medium;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  text-align: center;
-}
-.Header-Copy-h3 {
-  height: 36px;
-  font-family: CeraGodrejInterio-Medium;
-  font-size: 18px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #4a4a4a;
-  text-align: center;
-}
-.searchBars {
-  // width: 30%;
-  display: inline-block;
-  position: relative;
-  border-bottom: 1px solid $battleshipGrey;
-  margin: 0 auto;
-  width: 30%;
-  display: block;
- .search-icon{margin:0}
-  .searchInput {
-      width: 100%;
-      border: transparent;
-      background: transparent;
-      padding: 0px 0 0 25px;
-      min-height: 35px;
-      &:focus {
-          outline: none;
-      }
-  }
-  .searchLogo {
-      position: absolute;
-      top: 6px;
-      left: 0px;
-      z-index: 2;
-      display: block;        
-      text-align: center;
-      pointer-events: none;
-  }
-  .clearField {
-      position: absolute;
-      top: 2px;
-      right: 7px;
-      z-index: 2;
-      display: block;        
-      text-align: center;
-      font-size: 18px;
-      text-decoration: none;
-      color:$black;    
-      display: none;
-     
-  }
-
-  #autoSuggestDiv{
-      position: absolute;
-      top: 53px;
-      width: 100%;
-      background:$colorwhite;
-      z-index: 9;
-      left: 0;
-      box-shadow: 0 24px 24px -10px rgba(66, 75, 90, 0.47);
-
-      .auto-search{
-          padding: 16px 0 16px 0;
-
-          .list{
-              padding:0px;
-              &:first-child{
-                  .link{
-                      cursor: default;
-                  }
-              }
-              .link{
-                  display: block;
-                  padding: 7px 20px;
-                  text-decoration: none;
-                  color:$black;
-                  font-family: $font-regular;
-                  font-size: 12px;
-
-                  &:hover{
-                      background:$paleGrey;
-                  }
-              }
-              &:first-child{
-                  .link{
-                      display: block;
-                      padding: 7px 20px;
-                      text-decoration: none;
-                      color:$black;
-                      font-family: $font-bold;
-   
-                      &:hover{
-                          background:transparent;
-                      }
-                  }
-              }
-
-          }
-      }
-      
-  }
-}
-
-// .faqHeader {
-//   font-size: 27px;
-//   margin: 20px;
-// }
-
-// .panel-heading [data-toggle="collapse"]:after {
-//   font-family: 'Glyphicons Halflings';
-//   content: "e072"; /* "play" icon */
-//   float: right;
-//   color: #F58723;
-//   font-size: 18px;
-//   line-height: 22px;
-//   /* rotate "play" icon from > (right arrow) to down arrow */
-//   -webkit-transform: rotate(-90deg);
-//   -moz-transform: rotate(-90deg);
-//   -ms-transform: rotate(-90deg);
-//   -o-transform: rotate(-90deg);
-//   transform: rotate(-90deg);
-// }
-
-// .panel-heading [data-toggle="collapse"].collapsed:after {
-//   /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-//   -webkit-transform: rotate(90deg);
-//   -moz-transform: rotate(90deg);
-//   -ms-transform: rotate(90deg);
-//   -o-transform: rotate(90deg);
-//   transform: rotate(90deg);
-//   color: #454444;
-// }
-.faqhead {
-  height: 18px;
-  font-family: CeraGodrejInterio-Medium;
-  font-size: 14px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  text-align: center;
-}
-.uldiver{
-  width:163px;
-  height:31px;
-  background-color: #eef8fe
-}
-.uldiv{
-  width:263px;
-  height:41px;
-  background-color: #eef8fe
-}
-.uldivlight{
-  width:263px;
-  height:41px;
-  background-color:white;
-}
-.MyOd {
-  margin-right: 837px;
-  margin-top: 40px;
-  height: 28px;
-  font-family: CeraGodrejInterio-Medium;
-  font-size: 20px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  text-align: center;
-}
-.panel-body{
-  margin-top: -2px;
-  color: #000000
-}
-.hrvertical { 
-  border-left: 6px solid green;
-  height: 500px;
-  }
-  .enquiry{
-    font-weight: bold;
-text-align: center;
-font-size: 20px;
-line-height: 22px;
-color: #000000;
-
-  }
-  
-.emailus{
-  margin-top: 50px;
-    margin-left: 209px;
-  width: 23px;
-  height: 15px;
-}
-.contactus{
-  margin-left: 195px;
-  font-weight: bold;
-text-align: center;
-font-size: 16px;
-height: 19px;
-width: 76;
-color: #000000;
-
-}
-.Header-Copy-4 {
-  font-weight: bold;
-
-  height: 36px;
-  font-family: CeraGodrejInterio-Medium;
-  font-size: 30px;
-  font-weight: 500px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  text-align: center;
-}
-.emailsmall{
-  margin-left: 160px;
-text-align: center;
-font-size: 14px;
-height: 19px;
-width: 76;
-color: #000000;
-
-}
-.chat{
-  margin-top: 50px;
-  margin-left: 457px;
-  height: 54px;
-  width: 162px;
-  background-color: #eef8fe;
-}
-.chattext{
-  margin-right: -22px;
-    font-weight: bold;
-    text-align: center;
-    height: 21px;
-    font-size: 14px;
-}
-.chatIcon{
-  width: 40px;
-  height: 30px;
 }

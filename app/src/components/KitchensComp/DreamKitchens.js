@@ -64,25 +64,25 @@ class DreamKitchens extends React.Component {
       <div className="stepwizard-step">
         <a href="#step-1" type="button" className="btn btn-primary btn-circle">1</a>
         <p>Step 1</p>
-        <p1 className="ParagraphStepper">Visit the store closest to you & Get a<br/><br/> kitchen from our expert designers <br /></p1>
+        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/><br/> kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
         <a href="#step-2" type="button" className="btn btn-primary btn-circle" disabled="disabled">2</a>
         <p>Step 2</p>
-        <p1 className="ParagraphStepper">Visit the store closest to you & Get a<br/>free design consultation for your dream<br/>kitchen from our expert designers <br /></p1>
+        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/>free design consultation for your dream<br/>kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
         <a href="#step-3" type="button" className="btn btn-primary btn-circle" disabled="disabled">3</a>
         <p>Step 3</p>
-        <p1 className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p1>
+        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
         <a href="#step-4" type="button" className="btn btn-primary btn-circle" disabled="disabled">4</a>
         <p>Step 4</p>
-        <p1 className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p1>
+        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
 
       </div>
     </div>

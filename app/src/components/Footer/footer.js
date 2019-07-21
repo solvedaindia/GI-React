@@ -19,7 +19,7 @@ const FooterComponent = props => (
       </Col>
       <Col md={5} sm={12} xs={12}>
         <Row>
-          <Newsletter name={props.newsletter} socialicon={props.socialicons} />
+          {/* <Newsletter name={props.newsletter} socialicon={props.socialicons} /> */}
         </Row>
       </Col>
     </Row>
