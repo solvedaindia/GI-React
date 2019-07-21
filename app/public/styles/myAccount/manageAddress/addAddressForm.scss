@@ -3,12 +3,6 @@
 @import "../../variable.scss";
 
 .addAddressContainer {
-  width: 97%;
-  border-radius: 2px;
-  border: solid 1px $lightblueGrey;
-  background-color: rgba(238, 237, 237, 0.09);
-  padding: 21px 30px 21px 26px;
-  border-style: dashed;
   margin:0 0 0 0;
   position: relative;
   .heading{   
@@ -113,4 +107,80 @@
   }
   
 // }
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  //CSS
+}
+
+/* 
+  #Global Screen Chhange for Screen max 768
+  */
+@media screen and (min-width: 768px) {
+  .addAddressContainer {
+    width: 97%;
+    border-radius: 2px;
+    border: dashed 1px $lightblueGrey;
+    background-color: rgba(238, 237, 237, 0.09);
+    padding: 21px 30px 21px 26px;
+    .actionBtnWrapper {
+      .btn{
+        
+      }
+    }
+  }
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px) {
+  .addAddressContainer {
+    width: 100%;
+    padding: 21px 0px 21px 0px;
+    .actionBtnWrapper {
+      .btn{
+
+      }
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+}
 

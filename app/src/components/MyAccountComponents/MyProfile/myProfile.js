@@ -23,6 +23,7 @@ import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
 import { updateUserProfile } from '../../../actions/app/actions';
+import { isMobile } from '../../../utils/utilityManager';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -383,7 +384,7 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-
+          {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
             className="btn-apply btn"
