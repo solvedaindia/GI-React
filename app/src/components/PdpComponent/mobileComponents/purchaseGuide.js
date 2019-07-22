@@ -119,7 +119,7 @@ class purchaseGuide extends React.Component {
   render() {
     return (
       <>
-        {this.props.purchaseGuide.purchaseGuide.length > 0 && (
+        {this.props.purchaseGuide.purchaseGuide && this.props.purchaseGuide.purchaseGuide.length > 0 && (
           <Accordion>
             <div>
             <Row>

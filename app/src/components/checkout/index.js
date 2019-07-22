@@ -257,6 +257,7 @@ export class CheckoutComponent extends React.Component {
         amount: this.state.orderSummaryData.netAmount,
         billing_address_id: this.state.ship_add.billAddId,
         callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
+        // callbackUrl: 'http://localhost:5000/checkout/',
         BankID: this.state.BankID,
         paymentMode: this.state.paymentMode
       };

@@ -112,7 +112,7 @@ class CartDetail extends React.Component {
             <div className='summary'>
               <p className='cartTotal'>
                 <span className='info'>Cart Total</span>
-                <span className='val'> ₹{cartData.orderSummary.netAmount}</span>
+                <span className='val'> ₹{cartData.orderSummary.totalAmount}</span>
               </p>
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">
@@ -144,7 +144,7 @@ class CartDetail extends React.Component {
               </p>
               <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
-                <span className='val'>₹{cartData.orderSummary.totalAmount}</span>
+                <span className='val'>₹{cartData.orderSummary.netAmount}</span>
                 <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
               </p>
               <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>

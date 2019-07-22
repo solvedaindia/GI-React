@@ -1,0 +1,109 @@
+@import '../variable';
+
+.trackMiniOrder {
+    width: 100%;
+    .userDetails,
+    .orderSummary {
+        min-height: $base*28;
+    }
+    .userDetails {
+        width: 25%;
+        text-align: center;
+        vertical-align: top;
+        background-color: $ceruleanblue;
+        color: $greyWhite;
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        .userName {
+            font-family: $font-light;
+            font-size: $base*2.5;
+        }
+        .track {
+            font-family: $font-bold;
+        }
+    }
+    .orderSummary {
+        background-color: $greybg;
+    }
+    .orderDetails {
+        width: 75%;
+        display: inline-block;
+        .prodDetails,
+        .prodImg {
+            vertical-align: top;
+        }
+        .prodImg {
+            width: 20%;
+            height: 180px;
+            margin: $base*2.75 7.5%;
+            background-color: $colorwhite; 
+            display: inline-block;
+            .img {
+                width: 100%;
+            }
+        }
+        .prodDetails {
+            width: 39.5%;
+            margin: $base*2.75 0;
+            display: inline-block;
+            .count {
+                font-size: $base*1.5;
+                margin: 0;
+            }
+            .orderID {
+                color: $battleshipGrey;
+                font-size: $base*1.75;
+                margin: $base*3 0 0;
+            }
+            .prodName {
+                font-size: $base*2;
+            }
+            .item {
+                display: inline-block;
+                margin: $base*3 $base*6.25 0 0;
+                font-size: $base*1.5;
+            }
+            .val {
+                display: block;
+                margin-top: $base; 
+            }
+            .qtyVal,
+            .delVal {
+                color: $battleshipGrey;
+            }
+            .statusVal {
+                color: $greenLight;
+            }
+        }
+        .link {
+            width: 19.5%;
+            display: inline-block;
+            margin: $base*2.75 0;
+            vertical-align: bottom;
+            padding: $base;
+            background-color: $ashGrey;
+            color: $colorwhite;
+            border-radius: unset;
+        }
+    }
+    .slick-prev {
+        left: $base;
+    }
+    .slick-next{
+        right: $base;
+    }
+    .slick-slider{
+        .slick-dots {
+            display: none;
+            visibility: hidden;
+        }
+
+    }
+    .slick-next:before,
+    .slick-prev:before {
+        color: transparent;
+        font-size: $base*3.75;
+    }
+}

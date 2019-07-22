@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bookConsultantHandler = require('../../handlers/staticpagehandler');
 
-router.post('/bookconsultation', (req, res, next) => {
+router.post('/', (req, res, next) => {
   bookConsultantHandler.bookConsultant(req.headers, req.body, (err, result) => {
     if (err) {
       next(err);
@@ -15,7 +15,7 @@ router.post('/bookconsultation', (req, res, next) => {
   });
 });
 
-router.get('/getconsultation', (req, res, next) => {
+router.get('/getConsultant', (req, res, next) => {
   bookConsultantHandler.getConsultant(req.headers, (err, result) => {
     if (err) {
       next(err);
