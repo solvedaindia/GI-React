@@ -16,7 +16,7 @@ export default function WidgetList({ componentType, ...rest }) {
     case 'mini_track_order':
       if (getCookie('isLoggedIn') === 'true') {
         return <TrackOrder {...rest} /> ;
-      }
+      } else return null;
     case 'best_selling':
       return <BestSeller {...rest} />;
     case 'recently_viewed':
