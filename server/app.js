@@ -13,6 +13,7 @@ const tokenValidation = require('./utils/tokenvalidation');
 const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
+const paymentHandler = require('./handlers/paymenthandler');
 
 const port = process.env.PORT || '8002';
 
@@ -28,9 +29,9 @@ require('./utils/cronjobs').startStoreInfoCron();
 const app = express();
 
 app.use(
-  cors({
-    origin: '*',
-  }),
+    cors({
+        origin: '*',
+    }),
 );
 
 // app.use(require('morgan')('dev'));
@@ -39,16 +40,16 @@ app.use(
 
 // parse application/x-www-form-urlencoded
 app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  }),
+    bodyParser.urlencoded({
+        extended: false,
+    }),
 );
 
 // Setting JSON as default content type
 app.use(
-  bodyParser.json({
-    type: '*/*',
-  }),
+    bodyParser.json({
+        type: '*/*',
+    }),
 );
 
 app.use(bodyParser.json());
@@ -58,35 +59,62 @@ app.use(helmet.ieNoOpen());
 app.use(helmet.xssFilter());
 app.use(helmet.hidePoweredBy()); */
 
+
+app.post('/api/payment/handlePayment', (req, res) => {
+    console.log(req.body);
+    var obj = {
+        customInfo: req.body.msg,
+        payMethodId: 'BillDesk'
+    }
+
+    console.log(obj, "data object for verify checksum")
+    var headers = {
+        storeId: 10151
+    }
+    paymentHandler.verifyChecksum(obj, headers, (err, data) => {
+        if (err) {
+            console.log(err, "verify checksum error");
+            res.redirect('http://localhost:5000/checkout?status=fail')
+        } else {
+            console.log(data, "from verify checksum");
+            if (data.orderPlaced == true) {
+                res.redirect(`http://localhost:5000/order/confirm/${data.orderID}`)
+            } else {
+                res.redirect('http://localhost:5000/checkout?status=fail')
+            }
+        }
+    })
+})
+
 app.use(responseTime());
 const stats = new StatsD();
 stats.socket.on('error', error => {
-  // console.log('error', error);
-  logger.info(error.stack);
+    // console.log('error', error);
+    logger.info(error.stack);
 });
 
 app.use(
-  responseTime((req, res, time) => {
-    const stat = (req.method + req.url)
-      .toLowerCase()
-      // eslint-disable-next-line no-useless-escape
-      .replace(/[:\.]/g, '')
-      .replace(/\//g, '_');
-    stats.timing(stat, time);
-    if (time > 800) {
-      logger.info(
-        ` :(  Request: ${req.method}|${
+    responseTime((req, res, time) => {
+        const stat = (req.method + req.url)
+            .toLowerCase()
+            // eslint-disable-next-line no-useless-escape
+            .replace(/[:\.]/g, '')
+            .replace(/\//g, '_');
+        stats.timing(stat, time);
+        if (time > 800) {
+            logger.info(
+                ` :(  Request: ${req.method}|${
           req.originalUrl
         }::--:: Res Time: ${time}`,
-      );
-    } else {
-      logger.info(
-        ` :)  Request: ${req.method}|${
+            );
+        } else {
+            logger.info(
+                ` :)  Request: ${req.method}|${
           req.originalUrl
         }::--:: Res Time: ${time}`,
-      );
-    }
-  }),
+            );
+        }
+    }),
 );
 
 // db instance connection
@@ -95,47 +123,47 @@ app.use(
 app.use(contextService.middleware('apirequest'));
 
 app.use((req, res, next) => {
-  const reqUniqId = uniqid();
-  req.headers.Request_ID = reqUniqId;
-  contextService.set('apirequest:requestid', reqUniqId);
-  logger.debug(
-    `Request for api :${req.originalUrl} ::: Request ID : ${reqUniqId}`,
-  );
-  next();
+    const reqUniqId = uniqid();
+    req.headers.Request_ID = reqUniqId;
+    contextService.set('apirequest:requestid', reqUniqId);
+    logger.debug(
+        `Request for api :${req.originalUrl} ::: Request ID : ${reqUniqId}`,
+    );
+    next();
 });
 
 /* To get StoreId and CatalogID on basis of Store identifier */
 app.use((req, res, next) => {
-  const storeIdentifier = req.headers.store_id;
-  if (storeIdentifier) {
-    if (
-      global.storeDetails[storeIdentifier] &&
-      global.storeDetails[storeIdentifier].storeID
-    ) {
-      req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
-      req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
-      next();
-    } else {
-      storeInfo.getStoreDetails(req.headers, (error, result) => {
-        if (error) {
-          next(error);
+    const storeIdentifier = req.headers.store_id;
+    if (storeIdentifier) {
+        if (
+            global.storeDetails[storeIdentifier] &&
+            global.storeDetails[storeIdentifier].storeID
+        ) {
+            req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+            req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
+            next();
         } else {
-          global.storeDetails[storeIdentifier] = result;
-          req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
-          req.headers.catalogId =
-            global.storeDetails[storeIdentifier].catalogID;
-          next();
+            storeInfo.getStoreDetails(req.headers, (error, result) => {
+                if (error) {
+                    next(error);
+                } else {
+                    global.storeDetails[storeIdentifier] = result;
+                    req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+                    req.headers.catalogId =
+                        global.storeDetails[storeIdentifier].catalogID;
+                    next();
+                }
+            });
         }
-      });
+    } else {
+        const errorMessage = {
+            status: 'failure',
+            error: errorUtils.errorlist.storeid_missing,
+        };
+        logger.error(JSON.stringify(errorMessage));
+        res.status(400).send(errorMessage);
     }
-  } else {
-    const errorMessage = {
-      status: 'failure',
-      error: errorUtils.errorlist.storeid_missing,
-    };
-    logger.error(JSON.stringify(errorMessage));
-    res.status(400).send(errorMessage);
-  }
 });
 
 /* app.use((req, res, next) => {
@@ -155,8 +183,8 @@ app.use((req, res, next) => {
 
 // To handle secure API's and check token status
 app.use((req, res, next) => {
-  tokenValidation.validateSecureToken(req, res, next);
-  next();
+    tokenValidation.validateSecureToken(req, res, next);
+    next();
 });
 
 // Add routes
@@ -165,43 +193,43 @@ app.use(compression());
 
 // HTTP error 404 for unhandled routs
 app.use((req, res) => {
-  const errorMessage = {
-    status: 'failure',
-    error: {
-      status_code: 404,
-      error_key: 'Resource_Not_Found',
-      error_message: `Requested resource not found:${req.originalUrl}`,
-    },
-  };
-  logger.error('HTTP ERROR 404: ', JSON.stringify(errorMessage));
-  res.status(404).send(errorMessage);
+    const errorMessage = {
+        status: 'failure',
+        error: {
+            status_code: 404,
+            error_key: 'Resource_Not_Found',
+            error_message: `Requested resource not found:${req.originalUrl}`,
+        },
+    };
+    logger.error('HTTP ERROR 404: ', JSON.stringify(errorMessage));
+    res.status(404).send(errorMessage);
 });
 
 // Generic error handler
 app.use((err, req, res, next) => {
-  logger.error(
-    JSON.stringify({
-      url: req.originalUrl,
-      stackTrace: JSON.stringify(err.stack),
-      status_code: err.status_code,
-      error_message: err.error_message,
-      error_key: err.error_key,
-      req_headers: req.headers,
-    }),
-  );
-  res.status(err.status_code).send({
-    status: 'failure',
-    error: {
-      status_code: err.status_code,
-      error_key: err.error_key,
-      error_message: err.error_message,
-    },
-  });
+    logger.error(
+        JSON.stringify({
+            url: req.originalUrl,
+            stackTrace: JSON.stringify(err.stack),
+            status_code: err.status_code,
+            error_message: err.error_message,
+            error_key: err.error_key,
+            req_headers: req.headers,
+        }),
+    );
+    res.status(err.status_code).send({
+        status: 'failure',
+        error: {
+            status_code: err.status_code,
+            error_key: err.error_key,
+            error_message: err.error_message,
+        },
+    });
 });
 
 const options = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert'),
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert'),
 };
 
 /* app.listen(port, () =>
@@ -210,5 +238,5 @@ const options = {
 
 const server = https.createServer(options, app);
 server.listen(port, () =>
-  logger.info(`Server started on https://localhost:${port}`),
+    logger.info(`Server started on https://localhost:${port}`),
 );
