@@ -232,9 +232,6 @@
             .wishlistBtn {
                 border: none;
                 background: none;
-                img{
-                    width: 17px;
-                }
             }
             .user {
                 opacity: 0;
@@ -248,10 +245,6 @@
             position: relative;
             .share-btn{
                 display: inline;
-                img{
-                    width:17px;
-                    height: 17px;
-                }
             }
             .social-icon-share{
                 visibility: hidden;
@@ -288,12 +281,10 @@
             }
         }
     }
-    .product{
-        padding:0 0 5px 0px;      
+    .product{    
         font-weight: 600; 
         .text{
-            color:$grey;
-            font-size: 12px;                 
+            color:$grey;                
         }      
     }
 
@@ -310,8 +301,6 @@
     .price{
         font-family: $font-bold;
         font-weight: 600;
-        display: flex; 
-        flex-wrap: wrap;
        .text{
         margin:0;
         display: inline-flex;
@@ -336,7 +325,6 @@
     }
     .accessories-offer{
        color:$reddishPink;
-       padding: 17px 0 13px 12px;
        .text{
            display:inline-block;
            margin: 0 5px 0 0;
@@ -344,8 +332,6 @@
        .offerbg{
            background: $reddishPink;
            border-radius: 50%;
-           width: 22px;
-           height: 22px;
            color:$colorwhite;
            text-align: center;
        }
@@ -424,8 +410,6 @@
         }
     }
         .pincode{
-            width:55%;
-            float:left;
             border:1px solid $lightGrey;
             background: $colorwhite;
             .PincodeTextdata{
@@ -478,7 +462,6 @@
       
 
     .addCart{
-        margin:23px 0 0 0;
         .btn,.form-control{
             float: left;
             background:transparent;
@@ -499,7 +482,6 @@
             background:$black;
             border:1px solid $black;
             color:$colorwhite;
-            width:60%;
             font-family: $font-regular;
         }
         .notifybtn{
@@ -534,15 +516,12 @@
 
 
   .PdpFeatures{
-      padding:82px 0 45px 0 ;
       .featureVertical-tab{
           .headingBox{
             .heading{
-                font-size: 30px;
                 color:$black;
                 font-family: $font-bold;
                 margin: 0;
-                padding: 0 0 41px 0;
             }
           }
          
@@ -599,13 +578,11 @@
 
   .purchase-guide-box{
     .heading{
-        font-size: 30px;
         color:$black;
         margin:0;
         padding:0;
         font-weight:600;
         text-transform: capitalize;
-        padding: 48px 0 48px 0;
        }
         .tab-nav-container{
             width:100%;
@@ -616,10 +593,8 @@
             li{
                 float: left;
                 position: relative;
-                margin-right: 45px;
                 a{
                     padding: 5px 0px;
-                    font-size:16px;
                     color: $battleshipGrey;
                     display: inline-block;
                     font-family: $font-regular;
@@ -632,11 +607,6 @@
                 border-bottom: 3px solid $cerulean;
                 a{ color:$greyDark;  font-family: $font-bold;}
                }
-            }
-        }
-        .purchaseGuideTabContent{
-            .image-gallery {
-                padding: 59px 59px 20px 59px;
             }
         }
         .purchaseGuide_description {
@@ -683,16 +653,12 @@
 /* Product_details
 -----------------------------*/
 .product_details{
-    padding:87px 0 0px 0;
-    border-bottom: 1px solid $lightblueGrey;
     .heading{
-        font-size: 30px;
         color:$black;
         margin:0;
         padding:0;
         font-weight:600;
         text-transform: capitalize;
-        padding: 0 0 48px 0;
        }
  .product_img{
      display:flex;
@@ -725,7 +691,6 @@
         color:$black;
      }
      .tabcontent{
-        padding: 30px 49px;
         border-top: 1px solid $lightblueGrey;
      }
  }
@@ -735,15 +700,12 @@
 /* MoreKeyword
 -----------------------*/
 .moreKeyword{
-    padding:100px 0 0 0;
   .heading{
-    font-size: 30px;
     color:$black;
     margin:0;
     padding:0;
     font-weight:600;
     text-transform: capitalize;
-    padding: 0 0 51px 0;
     text-align: center;
   }
 
@@ -758,7 +720,6 @@
       padding: 10px 20px;
       border-radius: 20px;
       margin-right: 1%;
-      min-width: 188px;
       margin-bottom:15px; 
     }
 }
@@ -1200,3 +1161,396 @@
 } 
 
 
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .product_details{
+            padding:87px 0 0px 0;
+            border-bottom: 1px solid $lightblueGrey;
+            .product_description{
+                .tabcontent{
+                    padding: 30px 49px;
+                }
+            }
+            .heading{
+                font-size: 30px;
+                padding: 0 0 48px 0;
+            } 
+        } 
+
+        .moreKeyword{
+            padding:100px 0 0 0;
+            .heading{
+                padding: 0 0 51px 0;
+                font-size: 30px;
+            }
+            .keywordsList{
+                .list{
+                    min-width: 188px;
+                }
+            } 
+        }
+        .galleryArea{
+            .PdpFeatures{
+                padding:82px 0 45px 0 ;
+                .featureVertical-tab{
+                    .headingBox{
+                        .heading{
+                            font-size: 30px;
+                            padding: 0 0 41px 0;
+                        }
+                    }
+                }  
+            }
+
+            .GallerytextBox{
+                .pincode{
+                    width:55%;
+                    float:left;
+                }
+                .addCart{
+                    margin:23px 0 0 0;
+                    .addcartbtn{
+                        width:60%;
+                    }
+                }
+                .accessories-offer{
+                    padding: 17px 0 13px 12px;
+                    .offerbg{
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+                .price{
+                    display: flex; 
+                    flex-wrap: wrap;
+                }
+                .product{
+                    padding:0 0 5px 0px;   
+                    .text{
+                        font-size: 12px;    
+                        }
+                   }
+                   .product-share{
+                    .wishListDiv{
+                        .wishlistBtn{
+                            img{
+                                width: 17px;
+                            }
+                        }
+                    }
+                    .share{
+                        .share-btn{
+                            img{
+                                width: 17px;
+                                height: 17px;;
+                            }
+                        }
+                    } 
+                   } 
+            }
+
+            .purchase-guide-box{
+                .heading{
+                    font-size: 30px;
+                    padding: 48px 0 48px 0;
+                }
+                .tab-nav-container{
+                    ul{ 
+                        li{
+                            margin-right: 45px;
+                            a{
+                                font-size:16px;
+                            }
+                        }
+                    }
+                }
+                .purchaseGuideTabContent{
+                    .image-gallery{
+                        padding: 59px 59px 20px 59px;
+                    }
+                } 
+            }
+        }   
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .product_details{
+        padding: 10px 0 0px 0;
+        position: relative;
+        .product_description{
+            .tabcontent{
+                padding: 30px 15px;
+            }
+        } 
+        .heading{
+            font-size: 18px;
+            padding:0 0 15px 0;
+        }
+        .plusIcon{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background: url('../../images/plusIcon.svg');
+            height: 20px;
+            width: 20px;
+            right: 15px;
+        }
+        &.active{
+            .plusIcon{
+                background:url('../../images/close-icon.svg');
+                background-size: cover;
+            }
+        }
+    } 
+    .moreKeyword{
+        padding:10px 0 0 0;
+        .heading{
+            padding: 15px 0 20px 0;
+            font-size: 16px;
+        }
+        .keywordsList{
+            .list{
+                min-width:105px;
+                font-size: 11px;
+            }
+        } 
+    }
+    .galleryArea{
+        .PdpFeatures{
+            padding:30px 0 10px 0 ;
+            .featureVertical-tab{
+                .headingBox{
+                    position: relative;
+                    .heading{
+                        font-size: 18px;
+                        padding:0 0 15px 0;
+                    }
+                    .plusIcon{
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        background: url('../../images/plusIcon.svg');
+                        height: 20px;
+                        width: 20px;
+                    }
+                }
+                &.active{
+                    .plusIcon{
+                        background:url('../../images/close-icon.svg'); 
+                        background-size: cover;
+                    }
+                }
+                &.active > .body {
+                    max-height: initial;
+                }
+            }
+              
+        }
+        .GallerytextBox{
+            font-size: 12px;
+            .add-to-cart-floater{
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                z-index: 911;
+                
+                .addCart{
+                    width: 45%;
+                    float: left;
+                    .addcartbtn{
+                        width:100%;
+                    }
+                }   
+                .accessories-offer{
+                    float: left;
+                    margin: 9px 5px 0px 20px;
+                    .offerbg{
+                        width: 32px;
+                        height: 32px;
+                        padding: 3px;
+                    }
+                }
+                .price{
+                    .offerprice{
+                       h2{
+                           margin:15px 0px 2px 5px;
+                           font-size: 20px;
+                       } 
+                    }
+                }
+                .product{
+                    padding:0px;  
+                    .text{
+                        font-size: 11px;
+                        line-height: 12px;   
+                        }   
+                   }
+                .quantity-text{
+                    display: none;
+                }
+            }
+            .addCart.quantity-box{
+                .btn:last-child{
+                    border-right: 1px solid $grey;
+                }
+            }
+            .pincode{
+                width: 100%;
+            }
+                        
+            .product-price-detail{
+                width: 55%;
+                float: left;
+                min-height: 52px;
+                background: $greybg;
+            }  
+            .product-sku{
+                padding: 15px 0px 6px 0px;
+                font-size: 11px;
+                color: $grey;
+            }
+            
+            .wishlist-share{
+                width: 100%;
+                float: left;
+                padding: 10px 0px;
+                border-top: 1px solid $lightGrey;
+                margin: 10px 0px;
+                border-bottom: 1px solid $lightGrey;
+            }
+            .product-share{
+                .wishListDiv{
+                    .wishlistBtn{
+                        img{
+                            width: 20px;
+                        }
+                    }
+                }
+                .share{
+                    .share-btn{
+                        img{
+                            width: 20px;
+                            height: 20px;;
+                        }
+                    }
+                } 
+               } 
+            .quantity-text{
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        }
+
+        .purchase-guide-box{
+            position: relative;
+            .heading{
+                font-size: 18px;
+                padding:0 0 15px 0;
+            }
+            .tab-nav-container{
+                ul{ 
+                    li{
+                        margin-right: 25px;
+                        a{
+                        font-size: 14px;
+                        }
+                    }        
+                }
+            }
+            .purchaseGuideTabContent{
+                .image-gallery{
+                    padding: 0px 0px 20px 0px;
+                }
+            }
+            .plusIcon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                background: url('../../images/plusIcon.svg');
+                height: 20px;
+                width: 20px;
+                right: 15px;
+            }
+            .active{
+                .plusIcon{
+                    background:url('../../images/close-icon.svg');
+                    background-size: cover;
+                }
+            } 
+        }
+        .similarProduct-Wrapper{
+            .slick-prev:before, .slick-next:before{
+                display: none;
+            }
+        } 
+    } 
+    .Pdpstickybar{
+        display: none;
+    }
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

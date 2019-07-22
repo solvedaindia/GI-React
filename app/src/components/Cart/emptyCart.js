@@ -10,6 +10,8 @@ class EmptyCart extends React.Component {
   render() {
     return (
       <section className="emptyCartContainer">
+        {!!isMobile() ? <h2 className='mWebTitle'>Cart</h2> : '' }
+
         {/* left Side info */}
         <div className="emptyCart">
           <h2 className="title">
@@ -33,25 +35,28 @@ class EmptyCart extends React.Component {
               <DeliveryLogo width={34} height={34} />
               <h3 className="cardHeading">On time delivery</h3>
               <p className="cardInfo">On orders above ₹5000 and above.</p>
-              <a href="/help" className="detailLink">
+            {!isMobile() ? <a href="/help" className="detailLink">
                 Details
-              </a>
+              </a> : ''
+            }
             </li>
             <li className="detailCard">
               <InstallLogo width={34} height={34} />
               <h3 className="cardHeading">Free Installation</h3>
               <p className="cardInfo">On orders above ₹5000 and above.</p>
-              <a href="/help" className="detailLink">
+              {!isMobile() ? <a href="/help" className="detailLink">
                 Details
-              </a>
+              </a> : ''
+            }
             </li>
             <li className="detailCard">
               <ExchangeLogo width={34} height={34} />
               <h3 className="cardHeading">Furniture Exchange</h3>
               <p className="cardInfo">On orders above ₹5000 and above.</p>
-              <a href="/help" className="detailLink">
+              {!isMobile() ? <a href="/help" className="detailLink">
                 Details
-              </a>
+              </a> : ''
+            }
             </li>
           </ul>
         </div>

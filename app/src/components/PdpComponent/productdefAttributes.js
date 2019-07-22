@@ -58,7 +58,7 @@ class productDefAttribute extends React.Component {
 				let valueName = data.name;
 				return (
 					<div key={i}>
-						<div className='att-val-name'><b>{valueName}:  {this.props.selectedAttribute[i].values[0].name}</b><span id={`ColorName${i}`}></span></div>
+						<div className='att-val-name'><b>{valueName}:</b>  {this.props.selectedAttribute[i].values[0].name}<span id={`ColorName${i}`}></span></div>
 						<ul>
 							{
 								data.values.map((value, index) => {

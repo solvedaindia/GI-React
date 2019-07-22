@@ -6,14 +6,12 @@ const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
 const headerutil = require('./headerutil');
 const productUtil = require('./productutil');
-const minEMI = require('./emiutil').getMinimumEmiValue;
-const SwatchesData = require('../filters/productdetailfilter').getSwatchData
 
 module.exports.getCompareProducts = function getCompareProducts(headers, productIDs, callback) {
 
     productUtil.getProductListByIDs(headers, productIDs, (err, result) => {
         if (err) {
-            callback(errorUtils.handleWCSError(err));
+            callback(errorUtils.handleWCSError(response));
         } else {
 
             var data = [];
@@ -163,7 +161,7 @@ function getComparableAttributes(productAttribute) {
     const comparable = [];
     if (productAttribute && productAttribute.length > 0) {
         productAttribute.forEach(attribute => {
-            if (attribute.comparable === true && attribute.associatedKeyword == "Specifications") {
+            if (attribute.comparable === true) {
                 var att = {};
                 att.name = attribute.name;
                 att.uniqueID = attribute.uniqueID;

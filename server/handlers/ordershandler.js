@@ -5,7 +5,7 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const productUtil = require('../utils/productutil');
-const pincodeUtil = require('../utils/pincodeutil');
+// const pincodeUtil = require('../utils/pincodeutil');
 
 const profileFilter = require('../filters/profilefilter');
 const productDetailFilter = require('../filters/productdetailfilter');
@@ -15,14 +15,20 @@ const orderFilter = require('../filters/orderfilter');
 const sampleOrderDetails = require('../configs/testjson').orderDetails;
 
 module.exports.getOrdersList = getOrdersList;
-function getOrdersList(headers, callback) {
+function getOrdersList(headers, query, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
-
+  let pageSize = 1;
+  let pageNumber = 1;
+  if (query.pagesize) {
+    pageSize = query.pagesize;
+  }
+  if (query.pagenumber) {
+    pageNumber = query.pagenumber;
+  }
   const orderListURL = `${constants.ordersList.replace(
     '{{storeId}}',
     headers.storeId,
-  )}`;
-
+  )}?pageNumber=${pageNumber}&pageSize=${pageSize}`;
   origin.getResponse(
     'GET',
     orderListURL,
@@ -34,6 +40,8 @@ function getOrdersList(headers, callback) {
     response => {
       if (response.status === 200) {
         const orderResponse = {
+          // currentOrderList: [],
+          // pastOrderList: [],
           orderList: [],
         };
         if (response.body.Order && response.body.Order.length > 0) {
@@ -55,6 +63,13 @@ function getOrdersList(headers, callback) {
                 return;
               }
               orderResponse.orderList = results;
+              // results.forEach(order => {
+              //   if (order.orderStatus === 'completed') {
+              //     orderResponse.pastOrderList.push(order);
+              //   } else {
+              //     orderResponse.currentOrderList.push(order);
+              //   }
+              // });
               callback(null, orderResponse);
             },
           );
@@ -185,48 +200,83 @@ function getOrderProductList(headers, orderItemArray, callback) {
       reqParamArray.push(reqParam);
       productIDs.push(item.productId);
     });
-
-    const productListTask = [
-      productUtil.getProductListByIDs.bind(null, headers, productIDs),
-      pincodeUtil.getMultipleInventoryData.bind(null, headers, reqParamArray),
-    ];
-
-    async.parallel(productListTask, (err, result) => {
-      if (err) {
-        callback(err);
-      } else {
-        const productList = result[0];
-        const inventoryArray = result[1];
-        /* When Product Details Not Found */
-        if (productList.length === 0) {
-          inventoryArray.forEach(inventory => {
-            const productDetail = {};
-            productDetail.deliveryDate =
-              inventory.inventoryDetails.deliveryDate || '';
-            productListArray.push(productDetail);
-          });
-        } else {
-          productList.forEach(product => {
-            const productDetail = productDetailFilter.productDetailSummary(
-              product,
-            );
-            for (let index = 0; index < inventoryArray.length; index += 1) {
-              if (
-                productDetail.uniqueID ===
-                inventoryArray[index].inventoryDetails.uniqueID
-              ) {
-                // eslint-disable-next-line no-param-reassign
-                productDetail.deliveryDate =
-                  inventoryArray[index].inventoryDetails.deliveryDate || '';
-                productListArray.push(productDetail);
-                break;
-              }
-            }
-          });
+    productUtil.getProductListByIDs(
+      headers,
+      productIDs,
+      (error, productList) => {
+        if (error) {
+          callback(error);
+          return;
         }
+
+        productList.forEach(product => {
+          const productDetail = productDetailFilter.productDetailSummary(
+            product,
+          );
+          for (let index = 0; index < orderItemArray.length; index += 1) {
+            if (productDetail.uniqueID === orderItemArray[index].productId) {
+              productDetail.deliveryDate = '';
+              if (
+                orderItemArray[index].orderItemExtendAttribute &&
+                orderItemArray[index].orderItemExtendAttribute.length > 0
+              ) {
+                orderItemArray[index].orderItemExtendAttribute.forEach(
+                  attribute => {
+                    if (attribute.attributeName === 'ExpectedDeliveryDate') {
+                      productDetail.deliveryDate = attribute.attributeValue;
+                    }
+                  },
+                );
+              }
+              productListArray.push(productDetail);
+              break;
+            }
+          }
+        });
         callback(null, productListArray);
-      }
-    });
+      },
+    );
+    // const productListTask = [
+    //   productUtil.getProductListByIDs.bind(null, headers, productIDs),
+    //   pincodeUtil.getMultipleInventoryData.bind(null, headers, reqParamArray),
+    // ];
+
+    // async.parallel(productListTask, (err, result) => {
+    //   if (err) {
+    //     callback(err);
+    //   } else {
+    //     const productList = result[0];
+    //     const inventoryArray = result[1];
+    //     /* When Product Details Not Found */
+    //     if (productList.length === 0) {
+    //       inventoryArray.forEach(inventory => {
+    //         const productDetail = {};
+    //         productDetail.deliveryDate =
+    //           inventory.inventoryDetails.deliveryDate || '';
+    //         productListArray.push(productDetail);
+    //       });
+    //     } else {
+    //       productList.forEach(product => {
+    //         const productDetail = productDetailFilter.productDetailSummary(
+    //           product,
+    //         );
+    //         for (let index = 0; index < inventoryArray.length; index += 1) {
+    //           if (
+    //             productDetail.uniqueID ===
+    //             inventoryArray[index].inventoryDetails.uniqueID
+    //           ) {
+    //             // eslint-disable-next-line no-param-reassign
+    //             productDetail.deliveryDate =
+    //               inventoryArray[index].inventoryDetails.deliveryDate || '';
+    //             productListArray.push(productDetail);
+    //             break;
+    //           }
+    //         }
+    //       });
+    //     }
+    //     callback(null, productListArray);
+    //   }
+    // });
   } else {
     callback(null, productListArray);
   }

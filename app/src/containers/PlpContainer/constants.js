@@ -18,3 +18,4 @@
  export const REMOVEPRODUCT = 'REMOVE_PRODUCT';
  export const REMOVEALL = 'REMOVE_ALL';
  export const UPDATESKU = 'UPDATE_SKU'
+ export const CLEARALLFILTER = 'CLEAR_ALL_FILTER';

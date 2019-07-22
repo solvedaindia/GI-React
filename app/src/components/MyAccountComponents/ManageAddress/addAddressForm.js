@@ -306,14 +306,14 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="City/District" name="city" id="cityDistrict" placeholder="Enter City/District" value={this.state.inputText_city} handleChange={this.handleInput} />
+              <Input inputType="text" title="City/District" name="city" id="cityDistrict" placeholder="Enter City/District" value={this.state.inputText_city} handleChange={this.handleInput} readOnly/>
               {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
             </div>
           </div>
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="State" name="state" id="state" placeholder="Enter State" value={this.state.inputText_state} handleChange={this.handleInput} />
+              <Input inputType="text" title="State" name="state" id="state" placeholder="Enter State" value={this.state.inputText_state} handleChange={this.handleInput} readOnly/>
               {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
             </div>
           </div>
