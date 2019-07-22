@@ -3,7 +3,7 @@ const router = express.Router();
 const ordersHandler = require('../../handlers/ordershandler');
 
 router.get('/list', (req, res, next) => {
-  ordersHandler.getOrdersList(req.headers, req.query, (err, result) => {
+  ordersHandler.getOrdersList(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;

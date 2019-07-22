@@ -79,7 +79,6 @@ function getShipmentDetails(shipment) {
     deliveryDate: getFormattedDate(shipment.deliveryDate),
     installationReqDate: getFormattedDate(shipment.extnInstallationReqDate),
     techAssignDate: getFormattedDate(shipment.extnTechnicianAssignedDate),
-    serviceRequestNo: shipment.extnServiceRequestNo,
     expectedInstallationDate: getFormattedDate(
       shipment.extnTechnicianAssignedDate,
     ),

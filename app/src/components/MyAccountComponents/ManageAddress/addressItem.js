@@ -5,6 +5,7 @@ import {
 } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import DeletePopup from './deletePopup';
+import {isMobile} from '../../../utils/utilityManager';
 
 class AddressItem extends React.Component {
   state = {
@@ -82,6 +83,27 @@ class AddressItem extends React.Component {
           {this.props.addressData.isDefault ? (
             <label className="defaultAddress">Default Address :</label>
           ) : null}
+
+            {isMobile() && 
+            <>
+            {this.props.addressData.isDefault ? null : (
+              <div
+                className="setAsdefaultbtn"
+                onClick={this.setAsDefafultBtnClicked.bind(this)}
+              >
+                Set as Default
+              </div>
+            )}
+            <ul className="myacAddressList">
+              <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
+                <img src={require('../../../../public/images/edit.svg')} />
+              </li>
+              <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
+                <img src={require('../../../../public/images/delete.svg')} />
+              </li>
+            </ul>
+            </>
+            }
           <label className="addressText">
             {this.props.addressData.address}
             {/* {this.props.addressData.city} */}
@@ -89,7 +111,7 @@ class AddressItem extends React.Component {
             
           </label>
 
-          <ul className="modifyAddress">
+          {!isMobile() && <ul className="modifyAddress">
             <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
               Delete
             </li>
@@ -104,7 +126,8 @@ class AddressItem extends React.Component {
                 Set as Default
               </li>
             )}
-          </ul>
+          </ul>}
+          
         </div>
       </>
     );

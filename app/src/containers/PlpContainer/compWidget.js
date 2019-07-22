@@ -33,7 +33,6 @@ export class CompContainer extends React.Component {
   }
 
   buildData() {
-    console.log('frd in compwidget', this.props);
     const addDiv = (
       <li className="list">
         <div className='addproduct-box'>
