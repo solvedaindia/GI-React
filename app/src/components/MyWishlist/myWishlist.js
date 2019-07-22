@@ -53,7 +53,7 @@ class MyWishlist extends React.Component {
       this.props.wishlistUpdatedCount,
     );
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
-      this.fetchMyWishlistData();
+      this.fetchMyWishlistData(myWishlistAPI);
     }
     if (nextProps.removeWishlistFlag) {
       console.log(
