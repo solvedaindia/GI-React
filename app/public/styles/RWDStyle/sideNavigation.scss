@@ -6,7 +6,7 @@
   
   .handler {
     text-align: center;
-    font-size: 24px;
+    font-size: $base*3;
     float: left;
     min-width: 60px;
     .nav-bar-img{
@@ -26,6 +26,7 @@
     z-index: 9999;
     top:0px;
     width: 75%;
+    left:-1px;
     .searchBackBtn{padding: 0px;}
   }
   ul {
@@ -35,7 +36,7 @@
   ul li {
     display: block;
     margin: 0;
-    padding: 16px 16px;
+    padding:$base*1.75 $base*2;
   }
   .overlay {
     opacity: 0;
@@ -68,20 +69,20 @@
   .topMenu {
     background-color: #026dc6;
     width: 100%;
-    height: 72px;
+    height: $base*9;
   }
 
   .topMenuOverlap {
     position: absolute;
     background-color: #026dc6;
     width: 100%;
-    height: 72px;
+    height: $base*9;
   }
 
   .usernameTxt {
     color:$colorwhite;
-    font-size: 16px;
-    margin: 25px;
+    font-size: $base*2;
+    margin: 25px 16px;
     font-family: $font-light;
     &.catNavHeader{
       width: 120px;
@@ -115,10 +116,10 @@
   }
 
   .navTxt {
-    border-bottom: 1px solid #d1d1d2;
+    border-bottom: 1px solid $lightblueGrey;
     font-size: 12px;
-    font-family: $font-light;
-    color: black
+    font-family: $font-regular;
+    color: $black;
   }
 
   .arrow {
