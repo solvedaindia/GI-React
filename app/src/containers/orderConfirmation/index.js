@@ -64,6 +64,7 @@ export default class OrderConformation extends React.Component {
             })
         }, 4000);
             let token = appCookie.get('accessToken');
+        setTimeout(() => {
             var url = `${OrderDetailAPI}/${id}`
             axios.get(url, {
                 headers: { store_id: storeId, access_token: token, profile: 'summary' }
@@ -75,6 +76,7 @@ export default class OrderConformation extends React.Component {
             }).catch((err) => {
                 console.log(err, "order error")
             })
+        }, 3500)
         
     }
 
