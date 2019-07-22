@@ -17,7 +17,9 @@ class ChangePassword extends React.Component {
   state = {
     errorMessage: null,
     inputType: 'password',
+    inputTypeNew: 'password',
     isShowPass: false,
+    isShowPassNew: false,
     inputTextCurrent: '',
     inputTextNew: '',
     errorCurrent: false,
@@ -43,6 +45,20 @@ class ChangePassword extends React.Component {
       this.setState({
         isShowPass: true,
         inputType: 'text',
+      });
+    }
+  }
+
+  showHidePassNew() {
+    if (this.state.isShowPassNew) {
+      this.setState({
+        isShowPassNew: false,
+        inputTypeNew: 'password',
+      });
+    } else {
+      this.setState({
+        isShowPassNew: true,
+        inputTypeNew: 'text',
       });
     }
   }
@@ -207,7 +223,7 @@ class ChangePassword extends React.Component {
             {/* <label className="form-label">New Password</label> */}
             <Input
               className="form-control"
-              inputType="text"
+              inputType={this.state.inputTypeNew}
               title="New Password"
               name="email"
               id="new"
@@ -216,6 +232,9 @@ class ChangePassword extends React.Component {
               handleChange={this.handleInputChange.bind(this)}
               onPaste={this.onPasteText.bind(this)}
             />
+            {this.state.inputTextNew !== '' ? <span onClick={this.showHidePassNew.bind(this)} className="valiationPosition-NewPassword2" >
+              {<img src={require('../../SVGs/eye.svg')} />}
+            </span> : null}
           </div>
           {errorItemNew}
         </div>
