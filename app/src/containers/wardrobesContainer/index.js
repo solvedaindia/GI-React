@@ -44,84 +44,76 @@ index: 0
 
     render(){
         return (
-            <div className="wardrobes1">              
+            <div className="wardrobes1">
               <div className="wardroBanner">
-                   <WardrobeBanner/>
-                   <div className="container1">
-                <div className="wardroBannertext">
-                  <h4 className="heading">Modular Wardrobe Ardra</h4>
-                  <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
-                    the home you've always wanted</p> 
-                  <button className="btn-book">Book A Consultation</button>
-
-                </div>
+                <WardrobeBanner />
+                <div className="container1">
+                  <div className="wardroBannertext">
+                    <h4 className="heading">Modular Wardrobe Ardra</h4>
+                    <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                      eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
+                      the home you've always wanted</p>
+                    <button className="btn-book">Book A Consultation</button>
+                  </div>
                 </div>
               </div>
-<div className="BenefitedWardrobes">
-              <div className="container">
-                <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>                
+              <div className="BenefitedWardrobes">
+                <div className="container">
+                  <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
                   <div className="row">
                     <div className="col-md-12">
-                    <div className="WardrowsBefits clearfix">
-                    <div className="col-sm-3">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
-                    </div>
-                    <div className="col-sm-3">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic2.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
+                      <div className="WardrowsBefits clearfix">
+                        <div className="col-sm-3">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic1.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
+                        </div>
+                        <div className="col-sm-3">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic2.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
 
-                    </div>
-                    <div className="col-sm-3">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic3.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
+                        </div>
+                        <div className="col-sm-3">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic3.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
 
-                    </div>
-                    <div className="col-sm-3">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic4.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
+                        </div>
+                        <div className="col-sm-3">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic4.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
 
-                    </div>
-                    </div>
-                    </div>
-
-                  </div>
-
-                  <div className="row">
-                  <div className="col-md-12">
-                    <div className="WardrowsBefits column2 clearfix">
-                      <div className="col-sm-6">
-                        <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
-                        <h3 className="titlesss">modular</h3>
-
+                        </div>
                       </div>
-                      <div className="col-sm-6">
-                      <img className="Combined-Shape" src={require('../../../public/images/ic6.png')} alt="rectangle" />
-                      <h3 className="titlesss">modular</h3>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="WardrowsBefits column2 clearfix">
+                        <div className="col-sm-6">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic5.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
 
-                    </div>
+                        </div>
+                        <div className="col-sm-6">
+                          <img className="Combined-Shape" src={require('../../../public/images/ic6.png')}
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
+
+                   </div>
+                      </div>
                     </div>
                   </div>
-                  </div>
-               
-              </div>
+                </div>
               </div>
               <div className="crouselBAckgrounding"><br />
                 <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                 <WardrobesTypes />
-
-                {/*
-                <KitchenHall /> */}
-
               </div>
-              <br />
-              <br />
-
-              <br />
-
               <div className="container">
-
                 <div className="row">
                   <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
                   <p1 className="Choose-from-a-vast-r ">Choose from a vast range of acessories. Consectetur adipisicing
@@ -148,23 +140,20 @@ index: 0
                 </div>
               </div>
               <WardrobesHAll />
-              
+              <div className="formwardrobeContainer">
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div className="Form-bakground">
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
-
                   <ConsultationForm />
                 </div>
-
+                </div>
               </div>
               <div className="frequesntly">
-                <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br /><br /><br /><br /><br />
+                <h className="Frequently-Asked-Que">Frequently asked questions</h>
                 <div className="panel-group" id="accordion">
-
-
                   <div className="panel panel-default">
                     <div className="panel-heading">
                       <h4>
@@ -243,9 +232,6 @@ index: 0
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="faqHeader">Sellers</div> */}
-
                 </div>
               </div>
               <div className="container">
@@ -259,44 +245,41 @@ index: 0
                     the home you've always wanted</p2> <br />
                   <button className="seeMored">Find More Stores</button>
                 </div>
-
               </div>
-            
               <div className="modularWardrobes">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-12">
-                  <h3 className="heading">Modular Wardrobes</h3>
-                  <p className="subText">Godrej Interio is India’s largest furniture brand. From
-                    manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a
-                    diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h3 className="heading">Modular Wardrobes</h3>
+                      <p className="subText">Godrej Interio is India’s largest furniture brand. From
+                        manufacturing the humble Storwel cupboard 80 years back to being a vibrant, innovative brand
+                        with a
+                        diverse portfolio<br /> – it’s been a brilliant, exciting journey for us.<br />
 
-                    We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering well
-                    designed, fun and functional furniture solutions to you.<br />
+                        We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering
+                        well
+                        designed, fun and functional furniture solutions to you.<br />
 
-                    True to the Godrej mission to conserve the environment, we design products, set up processes and use
-                    raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
+                        True to the Godrej mission to conserve the environment, we design products, set up processes and
+                        use
+                        raw materials that are eco-friendly to do our bit to preserve natural<br /> resources.<br />
 
-                    We offer our customers home and office furniture, along with solutions for laboratories, hospitals
-                    and healthcare establishments, education and training institutes, shipyards<br /> and navy,
-                    auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18 cities
-                    and through 800 dealer outlets.<br />
+                        We offer our customers home and office furniture, along with solutions for laboratories,
+                        hospitals
+                        and healthcare establishments, education and training institutes, shipyards<br /> and navy,
+                        auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18
+                        cities
+                        and through 800 dealer outlets.<br />
 
-                    Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
-                    India’s largest engineering and consumer product groups.</p>
-                  
-                  <button className="Read-More">Read More</button>
+                        Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group,
+                        one of
+                        India’s largest engineering and consumer product groups.</p>
+                      <button className="Read-More">Read More</button>
+                    </div>
                   </div>
                 </div>
-               
               </div>
-              </div>
-
-             
-              
-              <div></div>
             </div>
-          
         )
     }
 }

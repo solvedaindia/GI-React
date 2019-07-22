@@ -2,7 +2,7 @@
 @import '../base';
 
 
-.Kitchen-11 {
+.wardrobes1 {
     width: 100%;
     background-color: #ffffff;
      .container {
@@ -472,10 +472,17 @@ react-slideshow-container {
   transform: translate(-50%, -50%);
 }
 .Form-bakground{
-  width: 944px;  
+  width: 80%;
+  height: 600px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
   background-color: #ffffff;
-  padding:60px 119px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 60px 119px;
+  
   .form-div{
     .form-group{
       .form-labeled{

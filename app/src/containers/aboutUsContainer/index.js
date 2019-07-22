@@ -79,16 +79,51 @@ export class AboutUs extends React.Component {
                 Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s
                 largest engineering and consumer product groups.</p> 
              </div>
-             <div className="col-md-4"></div>
-<div className="row">
-  <div className="col-sm-4">
-
+             <div className="col-md-4">
+<div className="AboutUsContent row">
+  <div className=" col-md-6">
+    <div className=" container">
+<div className="iconsBackground">
+<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
+</div>
   </div>
-  <div className="col-sm-4">
-    
+  
   </div>
+  <div className="col-md-6">
+    <h2>Vision</h2>
+    <p>The choice for home and work space solutions.</p>
 
 </div>
+<div className="AboutUsContent row">
+  <div className=" col-md-6">
+    <div className=" container">
+<div className="iconsBackground">
+<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
+</div>
+  </div>
+  
+  </div>
+  <div className="col-md-6">
+    <h2>Vision</h2>
+    <p>The choice for home and work space solutions.</p>
+</div>
+</div>
+<div className="AboutUsContent row">
+  <div className=" col-md-6">
+    <div className=" container">
+<div className="iconsBackground">
+<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
+</div>
+  </div>
+  
+  </div>
+  <div className="col-md-6">
+    <h2>Vision</h2>
+    <p>The choice for home and work space solutions.</p>
+</div>
+</div>
+</div>
+           </div>
            </div>
          </div>
       </div>

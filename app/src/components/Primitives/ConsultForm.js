@@ -41,13 +41,20 @@ handleChange  = e => {
 
 }
  
+successMassage = () => {
+if(error !== null){
+  alert('Thank you for the feed back')
 
+}
+  
+}
 
 submitForm = (e) => {
+  e.preventDefault()
   this.handleChange(e);
   this.setState(this.initialState);
-  console.log('sta')
   this.callConsultApi();
+  this.successMassage()
 }
 
  
