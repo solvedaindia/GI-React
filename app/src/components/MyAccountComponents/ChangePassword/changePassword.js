@@ -12,6 +12,7 @@ import '../../../../public/styles/myAccount/changePassword.scss';
 // import '../../../../public/styles/myAccount/myAccountBase.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 import Input from '../../Primitives/input';
+import { isMobile } from '../../../utils/utilityManager';
 
 class ChangePassword extends React.Component {
   state = {
@@ -219,7 +220,7 @@ class ChangePassword extends React.Component {
           </div>
           {errorItemNew}
         </div>
-
+        {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
         <button
           onClick={this.saveBtnPressed.bind(this)}
           className="btn-apply btn"
