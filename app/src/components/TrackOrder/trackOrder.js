@@ -70,6 +70,7 @@ class TrackOrder extends React.Component {
             slidesToScroll: 1,
           };
         return (
+           !!orderData && 
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
@@ -115,6 +116,7 @@ class TrackOrder extends React.Component {
                     </Slider>
                 </div>
             </section>
+                
         )
     }
 }
