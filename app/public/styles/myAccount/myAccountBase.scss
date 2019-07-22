@@ -63,6 +63,19 @@
       }
     }
 
+    .btn-applyActive{
+      background:rgba(7,7,7,1);
+      color:$colorwhite;
+      font-size:  $base*1.75;
+      padding: 12px 84px;
+      border-radius: 0;
+      margin:16px 0 16px 0;
+      &:hover{
+        background:rgba(7,7,7,0.4);
+        color:$colorwhite;
+      }
+    }
+
     .noteMsg{
       font-size:  $base*1.5;
       line-height: 1.5;
