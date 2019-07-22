@@ -7,10 +7,6 @@
 }
 
 .checkout {
-    padding: 56px 0 100px 0;
-    .container {
-        width: 85%;
-    }
     .form-control {
         border-radius: 2px;
         box-shadow: none;
@@ -27,10 +23,10 @@
     .btn-cancelborder {
         background: $colorwhite;
         padding: 11px 0;
-        text-align: center;        
+        text-align: center;
         border: 1px solid $black;
         font-size: $base*1.75;
-        color:$black;
+        color: $black;
         font-family: $font-medium;
     }
     .heading {
@@ -56,9 +52,6 @@
         }
         .inactive {
             opacity: 0.5;
-        }
-        .bgfullflex {
-            display: flex;
         }
         .listRow {
             border-bottom: 1px solid $greyLightborder;
@@ -121,7 +114,6 @@
                 .heading-label {
                     font-size: $base*2.25;
                     margin: 0;
-                    padding: 30px 0;
                     font-weight: bold;
                 }
             }
@@ -139,7 +131,6 @@
             }
             .paybytext {
                 float: left;
-                width: 70%;
                 padding: 19px 0 0 0;
                 .labelInput-greybg {
                     padding: 18px 0 18px 28px;
@@ -209,52 +200,51 @@
                             margin: 0 0 0 15px;
                         }
                     }
-                    .dropdown-toggle{
+                    .dropdown-toggle {
                         background: $colorwhite;
-                        padding:14px 15px;
-                        border:1px solid $lightGrey;
-                        min-width:268px;
+                        padding: 14px 15px;
+                        border: 1px solid $lightGrey;
+                        min-width: 268px;
                         box-shadow: none;
                         text-align: left;
                         font-size: 14px;
                         position: relative;
-                        color:$greyish;
+                        color: $greyish;
                         font-family: $font-medium;
                         margin: 0 0 40px 0;
-
-                        .caret{
+                        .caret {
                             position: absolute;
                             right: 15px;
                             top: 22px;
                             color: rgba(68, 43, 45, 0.54);
                         }
                     }
-                    .dropdown-menu{
-                        width:100%;
+                    .dropdown-menu {
+                        width: 100%;
                         border-radius: 0;
                         top: 48px;
-                        margin:0;
-                        padding:0;
+                        margin: 0;
+                        padding: 0;
                         box-shadow: rgba(0, 0, 0, 0.14);
                         max-height: 192px;
                         overflow: auto;
-                        li{
-                            padding:14px 15px;
-                            border-bottom: 1px solid $lightGrey;                            
-                            a {                           
-                            color:$battleshipGrey;
-                            font-size: 14px;
-                            font-family: $font-regular;
-                            text-decoration: none;
-                            &:focus{
-                                outline: none;
+                        li {
+                            padding: 14px 15px;
+                            border-bottom: 1px solid $lightGrey;
+                            a {
+                                color: $battleshipGrey;
+                                font-size: 14px;
+                                font-family: $font-regular;
+                                text-decoration: none;
+                                &:focus {
+                                    outline: none;
+                                }
                             }
-                           }   
-                           &:last-child{
-                              border-bottom: none;
-                           }                    
-                         }
-                        li.divider{
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                        }
+                        li.divider {
                             display: none;
                         }
                     }
@@ -266,9 +256,6 @@
                 padding: 18px 0;
             }
             .leftBox {
-                width: 30%;
-                float: left;
-                padding: 25px 0px 0 13px;
                 .heading-label {
                     font-size: $base*2.25;
                     font-weight: bold;
@@ -320,9 +307,6 @@
                 }
             }
             .rightBox {
-                width: 70%;
-                float: left;
-                padding: 22px 0 25px 27px;
                 .heading-label {
                     font-size: $base*2.25;
                 }
@@ -428,9 +412,6 @@
                 .continueMargin {
                     margin: 4px 0 0 0;
                 }
-                .colpaddingRight {
-                    padding-right: 3px;
-                }
                 .saveAddress {
                     .list {
                         background: rgba(247, 248, 248, 0.5);
@@ -468,8 +449,6 @@
         }
     }
     .orderSummary {
-        padding: 0 0 32px 37px;
-        margin-top: -28px;
         .heading {
             font-size: $base*2.25;
             color: $black;
@@ -554,107 +533,109 @@
     }
 }
 
-.orderconfirm{
-    margin:52px 0 70px 0;
-    .orderConfirmed{
-        .heading{
-            color:$cerulean;
+.orderconfirm {
+    margin: 52px 0 70px 0;
+    .orderConfirmed {
+        .heading {
+            color: $cerulean;
             font-size: 24px;
             font-family: $font-bold;
-            margin:0;
+            margin: 0;
             padding: 0 0 10px 0;
         }
-        .text{
-            color:$battleshipGrey;
+        .text {
+            color: $battleshipGrey;
             font-size: 16px;
             font-family: $font-regular;
             line-height: 16px;
-            margin:0;
-            padding:0 0 5px 0;
+            margin: 0;
+            padding: 0 0 5px 0;
         }
     }
-    .continueShopping{
-        float:right;
-        .btn-bg{
+    .continueShopping {
+        float: right;
+        .btn-bg {
             font-size: 14px;
-            
         }
     }
-    .orderDetails{
-        margin:45px 0 0 0;
-        padding:32px 24px 53px 24px;
-        background:$greybg;
-       .heading-details{
-           font-size: 24px;
-           color:$black;
-           margin:0 0 24px 0;
-           line-height: 24px;
-
-       }
+    .orderDetails {
+        margin: 45px 0 0 0;
+        padding: 32px 24px 53px 24px;
+        background: $greybg;
+        .heading-details {
+            font-size: 24px;
+            color: $black;
+            margin: 0 0 24px 0;
+            line-height: 24px;
+        }
     }
 }
 
 
 /* Radio custom css
 -------------------------*/
-.paymentMethod.customradio{
-    .inputBox{
-        &:before {  
+
+.paymentMethod.customradio {
+    .inputBox {
+        &:before {
             top: 3px;
         }
-    }    
-}
-.customradio{
-    .input[type='radio'] {
-        display: none;        
-    }
-    .inputBox{
-        position: relative;
-    &:before {       
-        content: " "; 
-        display: inline-block;
-        position: relative;
-        top: 4px;
-        margin: 0 0px 0 0;
-        width: 14px;
-        height: 14px;
-        border-radius: 100%;
-        border: 1px solid $black; 
-        background-color: transparent;
-     }
-     .labelchecked{
-        width: 14px;
-        height: 14px;
-        position: absolute;
-        left: 0;
-     }
-     .input[type='radio']:checked+.labelchecked {
-        border-radius: 100%;
-        width: 8px;
-        height: 8px;
-        position: absolute;
-        top: 7px;
-        left: 3px;
-        display: block;
-        background-color: $black;
-      }
     }
 }
 
+.customradio {
+    .input[type='radio'] {
+        display: none;
+    }
+    .inputBox {
+        position: relative;
+        &:before {
+            content: " ";
+            display: inline-block;
+            position: relative;
+            top: 4px;
+            margin: 0 0px 0 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            border: 1px solid $black;
+            background-color: transparent;
+        }
+        .labelchecked {
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            left: 0;
+        }
+        .input[type='radio']:checked+.labelchecked {
+            border-radius: 100%;
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: 7px;
+            left: 3px;
+            display: block;
+            background-color: $black;
+        }
+    }
+}
+
+
 /* ScrollBar 
 ---------------------*/
- .dropdown-menu::-webkit-scrollbar-track
-{   box-shadow: inset 0 0 6px $colorwhite;
+
+.dropdown-menu::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px $colorwhite;
     -webkit-box-shadow: inset 0 0 6px $colorwhite;
     border-radius: 2px;
     background-color: #cac9c9;
 }
-.dropdown-menu::-webkit-scrollbar
-{
-    width: 4px;      
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 4px;
 }
-.dropdown-menu::-webkit-scrollbar-thumb
-{
+
+.dropdown-menu::-webkit-scrollbar-thumb {
     border-radius: 2px;
     height: 50px;
     box-shadow: inset 0 0 6pxrgba(0, 0, 0, 0.5);
@@ -662,3 +643,204 @@
     background-color: #d1d1d2;
 }
 
+.dropdown-menu .divider {
+    margin: 3px 0 !important;
+}
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+
+@media (min-width: 1281px) {
+    //CSS
+}
+
+
+/* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    //CSS
+}
+
+
+/* 
+    #Global Screen Chhange for Screen max 768
+    */
+
+@media screen and (min-width: 768px) {
+    .checkout {
+        padding: 56px 0 100px 0;
+        .container {
+            width: 85%;
+        }
+        .orderSummary {
+            padding: 0 0 32px 37px;
+            margin-top: -28px;
+        }
+        .checkout_wrapper {
+            .bgfullflex {
+                display: flex;
+            }
+            .listRow {
+                .paybytext {
+                    width: 70%;
+                }
+                .leftBox {
+                    width: 30%;
+                    float: left;
+                    padding: 25px 0px 0 13px;
+                }
+                .rightBox {
+                    width: 70%;
+                    float: left;
+                    padding: 22px 0 25px 27px;
+                    .saveAddress {
+                        .list {
+                            min-height: 130px;
+                        }
+                    }
+                    .colpaddingRight {
+                        padding-right: 3px;
+                    }
+                }
+                .labeltext-box {
+                    .heading-label {
+                        padding: 30px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    //CSS
+}
+
+
+/* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    //CSS
+}
+
+
+/* 
+    #Global Screen Chhange for Screen max 767
+  */
+
+@media screen and (max-width: 767px) {
+    .checkout {
+        padding: 20px 0 100px 0;
+        .container {
+            width: 100%;
+        }
+        .orderSummary {
+            padding: 0px 10px 0px 10px;
+        }
+        .heading {
+            display: none;
+        }
+        .checkout_wrapper {
+            .bgfullflex {
+                display: block;
+                width: 100%;
+            }
+            .listRow {
+                border: 0px;
+                .paybytext {
+                    width: 100%;
+                }
+                .leftBox {
+                    width: 100%;
+                    padding: 10px 0px 10px 8px;
+                }
+                .rightBox {
+                    width: 100%;
+                    float: left;
+                    padding: 22px 0 25px 0px;
+                    .saveAddress {
+                        .list {
+                            min-height: 10px;
+                            width: 100%;
+                        }
+                    }
+                    .bill-address {
+                        .label-billing {
+                            width: 95%;
+                        }
+                    }
+                    .colpaddingRight {
+                        padding-right: 15px;
+                    }
+                }
+                .email-box {
+                    .heading-label {
+                        display: none;
+                    }
+                }
+                .stepActive {
+                    .stepBg {
+                        display: none;
+                    }
+                }
+                .labeltext-box {
+                    .heading-label {
+                        padding: 10px 0;
+                    }
+                }
+            }
+        }
+        .checkout-btn-floater {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            z-index: 911;
+            width: 100%;
+            .total-amount,
+            .proceed-btn {
+                width: 50%;
+                float: left;
+            }
+            .total-amount {
+                background: $colorwhite;
+                min-height: 44px;
+                text-align: center;
+                font-family: $font-bold;
+                font-size: 16px;
+                padding-top: 3px;
+                border-top: 1px solid $lightGrey;
+                .total-amount-text {
+                    font-size: 10px;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+
+/* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    //CSS
+}
+
+
+/* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {}

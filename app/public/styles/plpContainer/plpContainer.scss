@@ -174,10 +174,8 @@ section.tablecarousel {
   .searchresult {
     .headingTitleFlat {
       font-family: $font-regular;
-      font-size: $base * 3.75;
       color: $black;
       margin: 0;
-      padding: 73px 0 16px 0;
     }
     .headingTitleSearch {
       font-family: $font-bold;
@@ -200,17 +198,6 @@ section.tablecarousel {
       position: relative;
       border: 1px solid $borderLight;
       .hoverBox {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background: rgba(3, 108, 197, 0.38);
-        top: 0;
-        left: 0;
-        opacity: 0;
-        -webkit-transition: all 0.4s ease-in-out;
-        -o-transition: all 0.4s ease-in-out;
-        transition: all 0.4s ease-in-out;
-        padding: 20px;
 
         .btn-compare {
           background: $colorwhite;
@@ -231,13 +218,6 @@ section.tablecarousel {
 
         ul.colortheme {
           text-align: center;
-          width: 218px;
-          height: 44px;
-          left: 50%;
-          top: 50%;
-          margin-top: -75px;
-          margin-left: -109px;
-          position: absolute;
           .list {
             // padding: 2px;
             border-radius: 50%;
@@ -249,8 +229,6 @@ section.tablecarousel {
             .swatches-circle {
               display: block;
               padding: 5px;
-              width: 24px;
-              height: 24px;
               border-radius: 100%;
             }
           }
@@ -316,7 +294,6 @@ section.tablecarousel {
         background: transparent;
         border: none;
         z-index: 1;
-        opacity: 0;
         &:focus {
           outline: none;
         }
@@ -966,14 +943,59 @@ section.tablecarousel {
               font-size: $base * 3;
             }
           }
-        } 
+        }
+        &:hover .hoverBox {
+          opacity: 1;
+        }
+        &:hover .wishlistBtn {
+          opacity: 1;
+        }
       } 
+     
+      .wishlistBtn{
+        opacity: 0;
+      }
+      .hoverBox{
+        padding: 20px;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(3, 108, 197, 0.38);
+        top: 0;
+        left: 0;
+        opacity: 0;
+        -webkit-transition: all 0.4s ease-in-out;
+        -o-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out; 
+        ul.colortheme {
+          text-align: center;
+          width: 218px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -75px;
+          margin-left: -109px;
+          position: absolute;
+          .list{
+            .swatches-circle{
+              width: 24px;
+              height: 24px;
+            }
+          } 
+        }
+      }
     }
     .headingTitle{
       font-size: $base * 7;
     }
     .headingSubTitle{
       padding: 0 0 32px 0;
+    }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 73px 0 16px 0;
+        font-size: $base * 3.75;
+      }
     }
   }
 }
@@ -1050,6 +1072,20 @@ section.tablecarousel {
           }
         } 
       } 
+      .hoverBox{
+        padding:5px 20px;
+        .btn-compare{
+          display:none;
+        }
+        ul.colortheme{
+          .list{
+            .swatches-circle{
+              width: 15px;
+              height: 15px;
+            }
+          } 
+        } 
+      }
     }
     .headingTitle{
       font-size: $base * 3;
@@ -1057,6 +1093,12 @@ section.tablecarousel {
     }
     .headingSubTitle{
       padding: 0px;
+    }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 20px 0 16px 0;
+        font-size: $base * 2.75;
+      }
     }
   }
 }

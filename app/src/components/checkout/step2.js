@@ -13,7 +13,8 @@ import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import appCookie from '../../utils/cookie';
-import PinChangePopup from './pinChangeModal'
+import PinChangePopup from './pinChangeModal';
+import {isMobile} from '../../utils/utilityManager';
 import {
   Button,
   Modal
@@ -885,8 +886,8 @@ export class Step2Component extends React.Component {
     }
 
     render() {
+
       return (
-          
             <div className="col-md-8 checkout_wrapper">
               {this.state.pinPop ?
               <PinChangePopup cancel={this.cancelPinPop} /> :'' }
@@ -895,19 +896,17 @@ export class Step2Component extends React.Component {
                   <div className='checkmark'></div>
                 </div>
 
-                <div className="labeltext-box">
+                {!isMobile() ?<div className="labeltext-box">
                   <h4 className="heading-label">Mobile or Email</h4>
-                </div>
+                </div>: ''}
 
                 <div className="email-box">
                   <h4 className='heading-label'>{this.props.logonBy}</h4>
                 </div>
 
-                <div className="action-button">
-                  {!this.props.isLoggedIn ?
-                  <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
-                  : '' }
-                </div>
+                {!this.props.isLoggedIn && !isMobile() ? <div className="action-button">
+                  <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>  
+                </div>: '' }
 
               </div>
 
@@ -915,9 +914,9 @@ export class Step2Component extends React.Component {
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
-                <div className="leftBox bgGrey">
-                  <div className="heading-label">Ship To</div>
-                  {this.props.isLoggedIn ? <div className='verticalTab'>
+                <div className='leftBox bgGrey'>
+                  <div className='heading-label'>Ship To</div>
+                  {this.props.isLoggedIn && !isMobile() ? <div className='verticalTab'>
                     <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                       <div style={!this.state.addressList ? {color: 'grey' } : {color:'black'} }>Saved Address</div>
                     </div>
@@ -926,6 +925,7 @@ export class Step2Component extends React.Component {
                     </div>
                   </div> : ''}
                 </div>
+                
                 <div className="rightBox">
                   {!this.props.isLoggedIn || this.state.new_add ?
                   <div>
@@ -991,6 +991,13 @@ export class Step2Component extends React.Component {
                       </div>
                     </div>
                     </div> : this.renderAddressList()}
+                    
+                    {this.props.isLoggedIn && isMobile() ? <div className='verticalTab'>
+                    <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
+                      <div>New Address</div>
+                    </div>
+                  </div> : ''}
+
                     {!this.state.new_add ?
                   <div> 
                     <div className="row">
@@ -1081,7 +1088,7 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className='row'>
                      <div className='col-md-12 form-group'>
-                     <button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Continue</button>
+                     {!isMobile() ? (<button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Continue</button>):''}
                      </div>                    
                     </div>
                   </div> : <div>
@@ -1109,7 +1116,8 @@ export class Step2Component extends React.Component {
                   </div>}
                 </div>
               </div>
-              <div className="listRow clearfix">
+              
+              {this.props.isLoggedIn && !isMobile() ? <div className="listRow clearfix">
                 <div className='stepActive'>
                   <div className='stepbgNone'>3</div>
                 </div>
@@ -1119,7 +1127,12 @@ export class Step2Component extends React.Component {
                 <div className="rightBox">
                   <div className='heading-label'>Choose a payment method</div>
                 </div>
-              </div>
+              </div> : ''}
+
+              {isMobile() ? (<div className='checkout-btn-floater'>
+                <div className='total-amount'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div>
+                <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button></div>
+              </div>):''}
             </div>
       )
     }

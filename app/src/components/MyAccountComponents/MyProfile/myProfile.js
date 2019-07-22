@@ -22,6 +22,8 @@ import { } from '../../../../public/constants/constants';
 import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
+import { updateUserProfile } from '../../../actions/app/actions';
+import { isMobile } from '../../../utils/utilityManager';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -68,6 +70,18 @@ class MyProfile extends React.Component {
   componentDidMount() {
     this.getProfileDetails();
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps -- ', this.state)
+    if (this.state.userResponse !== null) {
+      this.setState({
+        inputText_name: this.state.userResponse.name,
+        inputText_email: this.state.userResponse.emailID,
+        inputText_number: this.state.userResponse.mobileNo,
+      });
+    }
+  }
+
 
   onSavebuttonClick(event) {
     event.preventDefault();
@@ -182,7 +196,7 @@ class MyProfile extends React.Component {
         else {
           this.updateUserDetail();
         }
-        
+
       })
       .catch(error => {
         console.log('validateUserDetails Error---', error.response.data.error.error_message);
@@ -237,6 +251,7 @@ class MyProfile extends React.Component {
           ),
         });
         this.getProfileDetails();
+        this.props.updateUserProfile(this.state.inputText_name);
       })
       .catch(error => {
         console.log('updateUserDetail Error---', error);
@@ -308,6 +323,7 @@ class MyProfile extends React.Component {
                 myProfileNumberPro={this.state.inputText_number.slice(-4)}
                 enteredOTPCallbackPro={this.enteredOTPCallback.bind(this)}
                 cancelOTPPro={this.toggle}
+                userIdPro={this.state.inputText_number}
               />
             }
             </div>
@@ -340,7 +356,7 @@ class MyProfile extends React.Component {
           </div>
           <div className="form-div clearfix div-error">
             <Input
-              inputType={'number'}
+              inputType={'text'}
               title={'Phone Number'}
               name={'name'}
               id={'phoneNumber'}
@@ -368,7 +384,7 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-
+          {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
             className="btn-apply btn"
@@ -382,4 +398,18 @@ class MyProfile extends React.Component {
   }
 }
 
-export default MyProfile;
+function mapStateToProps(state) {
+  // console.log('MyAccount MapStatetoprops --- ', state);
+  // const stateObj = getReleventReduxState(state, 'global');
+  // const updatedUsername = getReleventReduxState(stateObj, 'userName');
+
+  // return {
+  //   username: updatedUsername,
+  // };
+}
+
+export default connect(
+  mapStateToProps,
+  { updateUserProfile },
+)(MyProfile);
+//export default MyProfile;

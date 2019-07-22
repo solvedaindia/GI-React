@@ -312,21 +312,26 @@ export class CheckoutComponent extends React.Component {
                     isLoggedIn={this.state.loggedIn}
                     initialBdpayment={this.initialBdpayment}
                     enalblePay={this.enalblePay}
-                    disablePay={this.disablePay} />
+                    disablePay={this.disablePay} 
+                    netAmount={this.state.orderSummaryData.netAmount} />
+
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
                     back={this.handleChange}
                     isLoggedIn={this.state.loggedIn} 
                     logonBy={this.state.logon_by} 
-                    handleAddress={this.handleAddress} />
+                    handleAddress={this.handleAddress} 
+                    netAmount={this.state.orderSummaryData.netAmount} />
+                    
         } else {
             return <Step1Component 
                     proceed={this.handleProceed}
                     login={this.handleUserLogin.bind(this)}
                     proceedToSecond={this.proceedToSecond}
                     logonBy={this.state.logon_by}
-                    msg={this.state.message} />
+                    msg={this.state.message}
+                    netAmount={this.state.orderSummaryData.netAmount} />
         }
     }
 
@@ -385,7 +390,8 @@ export class CheckoutComponent extends React.Component {
                   isLoggedIn={this.state.loggedIn} 
                   orderData={this.state.orderSummaryData} 
                   pay={this.state.pay} 
-                  initialBdpayment={this.initialBdpayment} />
+                  initialBdpayment={this.initialBdpayment}
+                  checkoutStep={this.state.step} />
               {/* </div>  */}
             </div>
             </div>    

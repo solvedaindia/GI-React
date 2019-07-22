@@ -1,16 +1,45 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import apiManager from '../../../utils/apiManager';
-import { changePasswordAPI } from '../../../../public/constants/constants';
+import OrderStatusBar from './orderStatusBar';
+import {imagePrefix} from '../../../../public/constants/constants';
 
 class ProductOrder extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      dsNameTag: null,
+      dsDateTag: null,
+    };
+  }
+
+  componentDidMount() {
+    this.filterDeliveryInstallationTags();
   }
 
   onTrackOrderClick() {
     this.props.proceedToTrackOrderPro(this.props.allDataPro);
+  }
+
+  filterDeliveryInstallationTags() {
+    const shipmentData = this.props.prodctDataPro.shipmentData[0];
+    console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
+    if (shipmentData.expectedDeliveryDate !== '') {
+      console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
+      this.setState({
+        dsNameTag: 'DELIVERY ON',
+        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
+      })
+    }
+    else if (shipmentData.expectedInstallationDate !== '') {
+      console.log('Installation -- ',shipmentData.installationDate)
+      if (shipmentData.installationDate === '') {
+        this.setState({
+          dsNameTag: 'INSTALLATION ON',
+          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+        })
+      }
+      
+    }
+
   }
 
   render() {
@@ -23,66 +52,40 @@ class ProductOrder extends React.Component {
         <div className="orderProduct clearfix">
           <div className="orderimgbox clearfix">
             <div className="imgBox">
-              <img src={productData.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+              <img src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
-
             <div className="product-text">
               <p className="heading">{productData.productName}</p>
               <p className="description">({productData.shortDescription})</p>
               <p className="price">
                 <span className="discount-price">₹{productData.offerPrice}</span>
               </p>
-              <p className="quantity-shipping clearfix">
-                <span className="quantity">
-                  Quantity
-                  <br />
+              <div className="quantity-shipping clearfix">
+                <div className="quantity">
+                  <span className="heading">Quantity</span>
                   <span className="textval">{productData.quantity}</span>
-                </span>
-              </p>
+                </div>
+                {productData.shipmentData.length > 1 ? null :
+                  <div className="delivery quantity">
+                    <span className="heading">{this.state.dsNameTag}</span>
+                    <span className="textval">{this.state.dsDateTag}</span>
+                  </div>
+                }
+              </div>
             </div>
           </div>
 
           <div className="orderbtn">
-            <button className="btn-borderwhite btn-cancel">Cancel Order</button>
-            {/* {productData.shipmentData.length > 2 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
+            {productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
-            </button> : null} */}
-            <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
-              Track My Order
-            </button>
+            </button> : null}
 
           </div>
           <div className='clearfix'></div>
-          <div class="trackorder-wrap">
-            <ul class="track-bar">
-              <li class="list visited first">Ordered</li>
-              <li class="list previous visited">Packed</li>
-              <li class="list active">Shipping</li>
-              <li class="list next">Delivery</li>
-              <li class="list last">Installation</li>
-            </ul>
-          </div>
-
-
-          {/* <div className="orderStauts">
-            <ol className="progtrckr" data-progtrckr-steps="5">
-              <li className="progtrckr-done">
-                <span className="statusText">Order Processing</span>
-              </li>
-              <li className="progtrckr-done">
-                <span className="statusText">Pre-Production</span>
-              </li>
-              <li className="progtrckr-done">
-                <span className="statusText">In Production</span>
-              </li>
-              <li className="progtrckr-todo">
-                <span className="statusText">Shipped</span>
-              </li>
-              <li className="progtrckr-todo">
-                <span className="statusText">Delivered</span>
-              </li>
-            </ol>
-          </div> */}
+          {productData.shipmentData.length === 1 ?
+            <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap'/>
+            : null}
         </div>
       </>
     );

@@ -10,6 +10,7 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 import axios from 'axios';
 import appCookie from '../../utils/cookie';
 import Link from 'react-router-dom/Link';
+import {isMobile} from '../../utils/utilityManager';
 import {
   storeId,
   accessToken,
@@ -279,9 +280,9 @@ export class Step3Component extends React.Component {
                   <div className='stepActive'>
                     <div className='checkmark'></div>    
                   </div> 
-                  <div className="labeltext-box">
+                  {!isMobile() ?<div className="labeltext-box">
                     <h4 className="heading-label">Mobile or Email</h4>
-                  </div>
+                  </div>: ''}
 
                   <div className="email-box">                  
                      <h4 className='heading-label'>{this.props.logonBy}</h4>                     
@@ -297,12 +298,16 @@ export class Step3Component extends React.Component {
                     <div className='checkmark'></div>    
                   </div> 
                   <div className="labeltext-box leftBox shiptoBg">
-                    <div className="bgGrey">
+                  {!isMobile() ?<div className="bgGrey">
                       <h4 className="heading-label">Ship to</h4>
-                    </div>
+                    </div>: ''}
+
+                    {isMobile() ?<div className="bgGrey">
+                      <h4 className="heading-label">Pay by</h4>
+                    </div>: ''}
                   </div>
 
-                  <div className="email-box"> 
+                   <div className="email-box"> 
                     <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
                   </div>
 
@@ -317,9 +322,9 @@ export class Step3Component extends React.Component {
                   <div className='stepBg'>3</div>
                  </div>
                 <div>
-                  <div className="labeltext-box">
+                {!isMobile() ?<div className="labeltext-box">
                     <h4 className='heading-label'>Pay by</h4>
-                  </div>
+                  </div>: ''}
 
                   <div className="paybytext">
                     <div className='labelInput-greybg customCheckbox clearfix'>

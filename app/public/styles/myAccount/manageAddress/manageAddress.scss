@@ -7,16 +7,9 @@
     max-height: 354px;
     overflow: auto;
    .list{
-     width:31%;
-     float: left;
-     margin: 0px 16px 26px 0;
      position: relative;
      &:last-child{
       margin-right:0
-    }
-    .modifyAddress{
-      position: absolute;
-      bottom: 16px;
     }
 
     .addressItem.defaultAddress{
@@ -24,8 +17,6 @@
       border:1px solid $ceruleanblueborder;
     }
     .addressItem {
-      padding:16px 10px;
-      height: 162px;
       border-radius: 2px;
       border: solid 1px $lightblueGrey;
       background-color: rgba(247, 248, 248, 0.5);
@@ -49,15 +40,6 @@
       }
     
       .listitem {   
-        display: inline;
-        font-size:  $base*1.5;
-        font-family: $font-bold;
-        color: $cerulean;
-        padding: 0px 10px;
-        background: transparent;
-        border: none;
-        border-right:1px solid $black;
-        cursor: pointer;
         &:first-child{
           padding: 0 8px 0 0;
         }
@@ -90,5 +72,131 @@
 }
 
 
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .manageAddressContainer{
+      .itemList {
+        .list{
+          width:31%;
+          float: left;
+          margin: 0px 16px 26px 0;
+          .addressItem{
+            padding:16px 10px;
+            height: 162px;
+            .listitem{
+              display: inline;
+              font-size:  $base*1.5;
+              font-family: $font-bold;
+              color: $cerulean;
+              padding: 0px 10px;
+              background: transparent;
+              border: none;
+              border-right:1px solid $black;
+              cursor: pointer;
+            }
+          }
+          .modifyAddress{
+              position: absolute;
+              bottom: 16px;
+          }
+        }
+      }
+    } 
+    
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){
+  .manageAddressContainer{
+    .itemList {
+      .list{
+        margin: 0px 0px 15px 0;
+        .addressItem{
+          padding:16px 10px 40px 10px;
+          .setAsdefaultbtn{
+            float: left;
+            color: $ceruleanblue;
+            text-decoration: underline;
+          }
+        }
+      }
+      .myacAddressList{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        .listitem{
+          float:left;
+          img{
+            width:15px;
+          }
+        }
+      }
+    }
+  } 
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}
 
 
