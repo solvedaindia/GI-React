@@ -161,7 +161,7 @@ class addToCartComponent extends React.Component {
     const quantity = document.getElementById('quantity').value;
     if (type === false && quantity > 1) {
       document.getElementById('quantity').value = Number(quantity) - Number(1);
-    } else if (type === true) {
+    } else if (type === true && quantity < 99) {
       document.getElementById('quantity').value = Number(quantity) + Number(1);
     }
   };
@@ -184,7 +184,7 @@ class addToCartComponent extends React.Component {
 			btnId = 'box3';
     }
     
-    if(!props.pincodeServiceable) {
+    if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
       return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
       return <NotifyMe partNumber={this.props.skuData.partNumber} />

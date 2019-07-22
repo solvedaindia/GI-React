@@ -8,7 +8,7 @@ const price = props => {
   return(<div className="price" id={priceId}>
     {props.priceData.offerPrice >= 0 && (      
         <h2 className="offerprice text">&#8377;
-        {props.priceData.offerPrice
+        {parseInt(props.priceData.offerPrice)
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </h2>
@@ -18,7 +18,7 @@ const price = props => {
     {props.priceData.offerPrice < props.priceData.actualPrice && (
       <span className="actualprice text">
         <h2>&#8377;
-        {props.priceData.actualPrice
+        {parseInt(props.priceData.actualPrice)
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </h2>

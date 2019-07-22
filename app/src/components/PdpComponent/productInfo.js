@@ -87,7 +87,7 @@ class productInfo extends React.Component {
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>
                 <h4 className="heading">{promotion.name}</h4>
-                {promotion.description} <TermsAndCondition />
+                {promotion.description} <TermsAndCondition espotPromo={this.props.espotPromo} />
               </li>
             ))}
           </ul>
