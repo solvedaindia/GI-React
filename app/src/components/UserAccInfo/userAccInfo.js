@@ -84,8 +84,9 @@ class UserAccInfo extends React.Component {
       })
       .then(response => {
         console.log('userDetail --- ', response.data.data.name);
+        var username = String(response.data.data.name);
         this.setState({
-          userName: response.data.data.name,
+          userName: username.split(' ')[0],
           logonId: response.data.data.logonID,
         });
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
