@@ -8,7 +8,6 @@ const shareImg = <img src={require('../../../public/images/share.svg')} />;
 
 const wishListAndShare = props => {
     const wishlistArr = getOnlyWishlistUniqueIds();
-    console.log('propsData', props);
     return(
         <Col md={6} sm={12} xs={12} className="product-share">
             <div className="share">
@@ -24,6 +23,8 @@ const wishListAndShare = props => {
                     isInWishlistPro={wishlistArr.includes(
                         props.skuData.uniqueID,
                     )}
+                    isPDP={true}
+                    history={props.historyData}
                 />
             </div>
         </Col>

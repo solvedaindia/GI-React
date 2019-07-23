@@ -23,13 +23,13 @@ class OrderSummery extends React.Component {
           <h4 className="heading">Delivery Address</h4>
           <p className="subheading">{addressData.name}</p>
           <p className="address">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
-          {/* <ul className="invoiceList">
+           {/* <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
                 <li onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list">INVOICE {key + 1}</li>
               )
             })}
-          </ul> */}
+          </ul>  */}
         </div>
 
         <div className="orderList paymentmethod">

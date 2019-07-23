@@ -646,7 +646,7 @@ function transformKitData(kitData, subKitData, promoData, callback) {
         kitfilter.getSwatchAttibute(bodyData),
       );
       const kitDataJSON = kitfilter.getKitSummary(bodyData, promoData);
-      kitDataJSON.attachments = imagefilter.getProductImages(bodyData);
+      kitDataJSON.attachments = [];
       kitDataJSON.productDetails = pdpfilter.getProductDetails(
         attributes,
         bodyData,

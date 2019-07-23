@@ -257,6 +257,7 @@ export class CheckoutComponent extends React.Component {
         amount: this.state.orderSummaryData.netAmount,
         billing_address_id: this.state.ship_add.billAddId,
         callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
+        // callbackUrl: 'http://localhost:5000/checkout/',
         BankID: this.state.BankID,
         paymentMode: this.state.paymentMode
       };
@@ -313,6 +314,7 @@ export class CheckoutComponent extends React.Component {
                     enalblePay={this.enalblePay}
                     disablePay={this.disablePay} 
                     netAmount={this.state.orderSummaryData.netAmount} />
+
         } else if(this.state.step == 2) {
             return <Step2Component 
                     proceed={this.handleProceed} 
@@ -388,7 +390,8 @@ export class CheckoutComponent extends React.Component {
                   isLoggedIn={this.state.loggedIn} 
                   orderData={this.state.orderSummaryData} 
                   pay={this.state.pay} 
-                  initialBdpayment={this.initialBdpayment} />
+                  initialBdpayment={this.initialBdpayment}
+                  checkoutStep={this.state.step} />
               {/* </div>  */}
             </div>
             </div>    

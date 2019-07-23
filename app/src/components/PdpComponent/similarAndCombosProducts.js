@@ -32,27 +32,28 @@ class SimilarCombosProducts extends React.Component {
   getSimilarCombosProducts(props) {
     return props.map((data, index) => {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
-
       return (
         <div className="similarProducts" key={index}>
           <div className="productlist">
+          <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
             <div className="imgBox">
               <img className="imgfullwidth" src={imgUrl} alt="Img" />
             </div>
+          </a>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
 
               <p className="price text">
                 <span className="discount-price">
                   &#8377;
-                  {data.offerPrice
+                  {parseInt(data.offerPrice)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
                 {data.offerPrice < data.actualPrice && (
                   <span className="priceno-discount">
                     &#8377;
-                    {data.actualPrice
+                    {parseInt(data.actualPrice)
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </span>
@@ -60,10 +61,14 @@ class SimilarCombosProducts extends React.Component {
               </p>
               <p className="emi-text text">
                 <span className="free-accessories">
-                  EMI Starting from <span className="bold">{data.emiData}</span>
+                  {data.emiData &&
+                    <>EMI Starting from <span className="bold">{parseInt(data.emiData)}</span></>
+                  }
+                  
                 </span>
-                <span className="bold">{data.discount}% Off </span> on this
-                product
+                { parseInt(data.discount) > 1 &&
+                <><span className="bold">{parseInt(data.discount)}% Off </span> on this product</>
+                }
               </p>
             </div>
           </div>
