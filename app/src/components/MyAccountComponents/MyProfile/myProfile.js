@@ -22,8 +22,10 @@ import { } from '../../../../public/constants/constants';
 import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
-import { updateUserProfile } from '../../../actions/app/actions';
+import { updateUserProfile, resetRWDHeaderFlag } from '../../../actions/app/actions';
 import { isMobile } from '../../../utils/utilityManager';
+import {headerNetural} from '../../../containers/HeaderContainer/HeaderMobile/index'
+
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -334,11 +336,16 @@ class MyProfile extends React.Component {
 
   }
 
+  onRWDCancelBtnClick() {
+    console.log('dddid -- ',this.props)
+    this.props.resetRWDHeaderFlag(true);
+  }
+
   render() {
     return (
       <>
         {this.otpPopup()}
-        <form className="form-BgContainer">
+        <div className="form-BgContainer">
           {/* {this.otpPopup()} */}
           <div className="form-div clearfix div-error">
             <Input
@@ -384,7 +391,7 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-          {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
+          {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
             className="btn-apply btn"
@@ -392,7 +399,7 @@ class MyProfile extends React.Component {
             Save
         </button>
           {this.state.noteItem}
-        </form>
+        </div>
       </>
     );
   }
@@ -410,6 +417,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updateUserProfile },
+  {resetRWDHeaderFlag},
 )(MyProfile);
 //export default MyProfile;
