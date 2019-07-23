@@ -39,7 +39,7 @@ class HomePageStatic extends React.Component {
         {!isLoading ? (
           <div dangerouslySetInnerHTML={{ __html: homePageData.content }} />
         ) : (
-          <div>Something Went Wrong</div>
+          <div>...</div>
         )}
       </div>
     );

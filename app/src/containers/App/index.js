@@ -192,7 +192,7 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           
         </Switch>
-        <FooterContainer />
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' ? '' : <FooterContainer /> }
       </div>
     );
   }

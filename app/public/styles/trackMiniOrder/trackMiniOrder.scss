@@ -156,5 +156,11 @@
                 margin: $base*2 0 0;
             }
         }
+        .slick-prev {
+            left: -$base*3;
+        }
+        .slick-next{
+            right: -$base*3;
+        }
     }
 }
