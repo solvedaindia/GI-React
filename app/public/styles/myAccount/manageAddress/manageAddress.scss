@@ -183,9 +183,13 @@
       position:fixed;
       bottom: 0px;
       left: 0px;
-      padding: 15px 0px;
+      padding: 15px;
       background: $colorwhite;
+      text-align: left;
       z-index: 9;
+      .icon{
+        float: right;
+      }
     }
   } 
 }
