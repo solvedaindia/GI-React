@@ -2,7 +2,9 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 
 const Footerlinks = props => {
-  const footerLinksData = props.name.map((val, index) => (
+  let footerLinksData = '';
+  if (props.name && props.name.length > 0) {
+   footerLinksData = props.name.map((val, index) => (
     <Col key={index} md={3} sm={3}>
       {val.map((item, childindex) => (
         <div className="footerlink_wrpper" key={childindex}>
@@ -20,6 +22,7 @@ const Footerlinks = props => {
       ))}
     </Col>
   ));
+  }
   return footerLinksData;
 };
 

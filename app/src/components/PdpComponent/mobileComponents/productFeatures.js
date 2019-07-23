@@ -39,12 +39,12 @@ class productFeatures extends React.Component {
           
             <div className="PdpFeatures">
             <Accordion>
-              <div className="featureVertical-tab">
+              <div className="featureVertical-tab" id="featureVertical-tab">
                 <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="headingBox">
                       <h2 className="heading">Features</h2>
-                      <span className="plusIcon">
+                      <span className="plusIcon" onClick={this._handleClick}>
                       </span>
                     </div>
                   </Col>

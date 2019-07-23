@@ -121,7 +121,7 @@ class purchaseGuide extends React.Component {
       <>
         {this.props.purchaseGuide.purchaseGuide && this.props.purchaseGuide.purchaseGuide.length > 0 && (
           <Accordion>
-            <div>
+            <div className="purchaseGuideDiv" id="purchaseGuideDiv">
             <Row>
               <Col md={12} sm={12} xs={12}>
                 <h2 className="heading">Purchase Guide</h2>
