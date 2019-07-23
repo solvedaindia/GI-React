@@ -166,15 +166,18 @@ class Filter extends React.Component {
     const extFacetArr = filteredArr.map(
       item =>
         // console.log('exstractedArr --- ',item.value);
-        item.value.replace('%2B', '+'),
+        item.value.replace(/\%2B/g, '+'),
     );
+    console.log('maksss jjjjj -- ',extFacetArr);
     this.filterOptions(extFacetArr);
   }
 
   onApplyBtnClick() {
+    console.log('TotalFaeexxxxx--', this.state.facetArr);
     this.state.facetArr.map(item => {
-      item.value = item.value.replace('+', '%2B');
+      item.value = item.value.replace(/\+/g, '%2B');
     });
+    
 
     // var ddd = this.state.facetArr[0]
     // var facetName = ddd.value;

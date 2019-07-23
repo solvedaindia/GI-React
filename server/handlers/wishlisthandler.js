@@ -437,6 +437,12 @@ module.exports.deleteitem = function deleteitem(headers, body, callback) {
   );
 };
 
+/**
+ * Get Wishlist Data.
+ * @param access_token
+ * @return Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 function getWishlistData(headers, callback) {
   const fetchWishListOriginURL = constants.mylistFetch.replace(
     '{{storeId}}',
@@ -467,6 +473,12 @@ function getWishlistData(headers, callback) {
   );
 }
 
+/**
+ * Get External Wishlist Data.
+ * @params externalId,accesskey
+ * @return Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 function getExternalWishlistData(headers, params, query, callback) {
   if (!params.externalId || !query.accesskey) {
     callback(errorutils.errorlist.invalid_params);
@@ -503,6 +515,12 @@ function getExternalWishlistData(headers, params, query, callback) {
   );
 }
 
+/**
+ * Get Details for Wishlist Item.
+ * @params OOB Wishlist Data
+ * @return Merged Wishlist Data with Item Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 function getWishlistProductList(res, headers, callback) {
   const wishlistJson = {
     wishlistID: '',
@@ -511,6 +529,7 @@ function getWishlistProductList(res, headers, callback) {
     externalIdentifier: '',
     guestAccessKey: '',
     wishlistData: [],
+    // actualWishlistData: res,
   };
   const productIDs = [];
   if (res.GiftList && res.GiftList.length > 0) {
@@ -531,6 +550,9 @@ function getWishlistProductList(res, headers, callback) {
         }
         const productListArray = result.productList;
         productListArray.forEach(productDetail => {
+          delete productDetail.masterCategoryID;
+          delete productDetail.installationRequired;
+
           for (let index = 0; index < res.GiftList[0].item.length; index += 1) {
             if (
               productDetail.uniqueID === res.GiftList[0].item[index].productId
@@ -552,6 +574,13 @@ function getWishlistProductList(res, headers, callback) {
     callback(null, wishlistJson);
   }
 }
+
+/**
+ * Add Item into Wishlist.
+ * @params wishlistId,itemId
+ * @return 200 ,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.addItemInWishlist = function addItemInWishlist(
   headers,
   body,
