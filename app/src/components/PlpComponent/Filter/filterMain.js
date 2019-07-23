@@ -54,7 +54,7 @@ class FilterMain extends React.Component {
     if (this.props.filterDataPro) {
       const allItems = this.props.filterDataPro.map((item, index) => {
         return (
-          <Filter rwdFilterCallbackPro={this.props.rwdFilterCallback} isFromRWD={this.props.isFromRWD} key={index} dataPro={item} />
+          <Filter rwdFilterCallbackPro={this.props.rwdFilterCallback} isFromRWD={this.props.isFromRWD} key={index} dataPro={item} indexPro={index} />
         )
       })
 
@@ -70,21 +70,21 @@ class FilterMain extends React.Component {
         splitItems = allItems;
       }
 
-      this.setState({ 
+      this.setState({
         allFilters: allItems,
         splitFilters: splitItems,
         filterItem: this.props.isFromRWD ? allItems : splitItems,
         filterBtnTitle: leftOverFilterCount
-       });
+      });
     }
     this.fetchAllAppliedFilters();
   }
 
   moreFilterBtnClick() {
-    console.log('isFilter--',this.state.isFilterExpend);
+    console.log('isFilter--', this.state.isFilterExpend);
     var ssss = this.state.filterBtnTitle
     var data;
-    if ( this.state.isFilterExpend) {
+    if (this.state.isFilterExpend) {
       ssss = `+ ${this.state.allFilters.length - this.state.splitFilters.length} Filters`   //'+ ' + this.state.allFilters.length - this.state.splitFilters.length + ' Filters';
       data = this.state.splitFilters
     }
@@ -92,12 +92,12 @@ class FilterMain extends React.Component {
       ssss = '- Fewer filters';
       data = this.state.allFilters
     }
-    
-    this.setState({ 
+
+    this.setState({
       filterItem: data,
       filterBtnTitle: ssss,
       isFilterExpend: !this.state.isFilterExpend,
-     });
+    });
   }
 
   fetchAllAppliedFilters() {
@@ -121,10 +121,10 @@ class FilterMain extends React.Component {
   }
 
   clearTheSelectedFilter(index) {
-    console.log('All Data --', this.props.updatedFilter);
+    
     var selectionFacetValue = this.state.appliedFilters[index].value;
     //console.log(this.state.appliedFilters[index]);
-
+    console.log('All Data --', selectionFacetValue);
     var selectedFacetName;
     var selectedFacetValuesArr = [];
     for (const [key, value] of this.props.updatedFilter) {
@@ -168,17 +168,19 @@ class FilterMain extends React.Component {
     if (this.props.filterDataPro.length > 4) {
       moreFilterBtn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{this.state.filterBtnTitle}</button>
     }
-  
+
     return (
       <>
-      {this.props.isFromRWD ? null : <h4 className='heading'>Filter</h4> }
-        
+        {this.props.isFromRWD ? null : <h4 className='heading'>Filter</h4>}
+
         {this.state.filterItem}
-        {moreFilterBtn}
+        {this.props.isFromRWD ? null : moreFilterBtn}
         <div className='clearfix'></div>
-        <div className='filter-keywords'>
-          {this.state.selectedFilters}
-        </div>
+        {this.props.isFromRWD ? null :
+          <div className='filter-keywords'>
+            {this.state.selectedFilters}
+          </div>}
+
       </>
     );
   }

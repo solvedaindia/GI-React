@@ -32,13 +32,14 @@ class SimilarCombosProducts extends React.Component {
   getSimilarCombosProducts(props) {
     return props.map((data, index) => {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
-
       return (
         <div className="similarProducts" key={index}>
           <div className="productlist">
+          <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
             <div className="imgBox">
               <img className="imgfullwidth" src={imgUrl} alt="Img" />
             </div>
+          </a>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
 
@@ -60,10 +61,14 @@ class SimilarCombosProducts extends React.Component {
               </p>
               <p className="emi-text text">
                 <span className="free-accessories">
-                  EMI Starting from <span className="bold">{data.emiData}</span>
+                  {data.emiData &&
+                    <>EMI Starting from <span className="bold">{data.emiData}</span></>
+                  }
+                  
                 </span>
-                <span className="bold">{data.discount}% Off </span> on this
-                product
+                { parseInt(data.discount) > 1 &&
+                <><span className="bold">{parseInt(data.discount)}% Off </span> on this product</>
+                }
               </p>
             </div>
           </div>
@@ -81,6 +86,41 @@ class SimilarCombosProducts extends React.Component {
       slidesToScroll: 1,
       prevArrow: prevArrowImg,
       nextArrow: nextArrowImg,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+            centerMode: true,
+            infinite: true
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+            centerMode: true,
+            infinite: true
+          }
+        }
+      ]
     };
     return (
       <>

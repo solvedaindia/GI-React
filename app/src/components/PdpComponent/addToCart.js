@@ -15,6 +15,9 @@ import {
 import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
+import { isMobile } from '../../utils/utilityManager';
+
+import Mapflag from '../../components/SVGs/mapflag.svg';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -55,10 +58,11 @@ class addToCartComponent extends React.Component {
   /* find inventory of the product */
   findInventory = () => {
     setTimeout(() => {	
-      var header = document.getElementById("header");
-      header.classList.remove("sticky");
+      let header = document.getElementById("header");
+      if(header) {
+        header.classList.remove("sticky");
+      }
     }, 2000);
-    console.log('this.propsthis.props=>>', this.props);
     const pincode = appCookie.get('pincode');
     let quantity = 1;
     if (document.getElementById('quantity')) {
@@ -92,6 +96,9 @@ class addToCartComponent extends React.Component {
       });
     } else {
       const isPDPAddToCart = appCookie.get('isPDPAddToCart');
+      const addedProductToCart = appCookie.get('isPDPAddToCart').split(',');
+      
+      
       let quantity = '1';
       if (!this.props.sticky) {
         quantity = document.getElementById('quantity').value;
@@ -116,10 +123,12 @@ class addToCartComponent extends React.Component {
             loading: false,
           });
 
-          if (isPDPAddToCart === 'false') {
-            appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
-            this.props.handleAddtocart(false);
+          if (isPDPAddToCart === '') {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
+          } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + ','+this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
           }
+          this.props.handleAddtocart(false);
         })
         .catch(error => {
           console.log('AddToCart Error---', error);
@@ -135,8 +144,14 @@ class addToCartComponent extends React.Component {
       });
     }, 2000);
     return (
-      <div className="addedToWishlist clearfix">
+      <div className="addedToWishlist dropdownwishlist clearfix">
         <span className="wishlist-text">Product Added to Cart</span>
+        <button
+          onClick={() => this.props.history.push('/cart')()}
+          className="view-btn"
+        >
+          View
+        </button>
       </div>
     );
   }
@@ -184,13 +199,14 @@ class addToCartComponent extends React.Component {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
 			storeText = 'Stores';
 		}
-	}
+  }
 	  return (
       <>
-        {!this.props.sticky && (
+        {!this.props.sticky && !this.props.isMobile && (
           <>
             <div className="pincode">
               <div className="PincodeTextdata clearfix">
+               <img className="mapflag" src={Mapflag} alt="Mapflag"/>
                 <input
                   className="pincodeVal"
                   name="pincodeVal"
@@ -217,7 +233,12 @@ class addToCartComponent extends React.Component {
 			</>
         )}
         {this.state.addToCartPopup}
-        <div className="addCart">
+        
+        {isMobile() ?  
+          <label className='quantity-text'><b>Quantity</b></label> : ''}
+        <div className={isMobile() ? 'addCart quantity-box' : 'addCart'}>
+          { !this.props.isMobile && (
+          <>
           {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
             <>
               <Button
@@ -241,7 +262,9 @@ class addToCartComponent extends React.Component {
               </Button>
             </>
           )}
-          {this.renderButton(this.props.pinCodeData, this.quantity)}
+          </>
+          )}
+          { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.quantity)}
           {this.quantityErrorMessage && <div>Quantity is not available</div>}
         </div>
       </>

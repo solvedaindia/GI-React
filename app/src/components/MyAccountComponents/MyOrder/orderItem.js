@@ -4,19 +4,21 @@ import { changePasswordAPI } from '../../../../public/constants/constants';
 import OrderProduct from './orderProduct';
 import OrderSummery from './orderSummery';
 
+const showImg = <img className='iconImg' src={require('../../SVGs/plusIcon.svg')}/>
+const hideImg = <img className='iconImg' src={require('../../SVGs/minusIcon.svg')}/>
 class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isExpend: false,
-      expendCollapseText: '+',
+      expendCollapseText: showImg,
     };
   }
 
   collapseExpendClicked() {
     this.setState({
       isExpend: !this.state.isExpend,
-      expendCollapseText: !this.state.isExpend ? '-' : '+',
+      expendCollapseText: !this.state.isExpend ? hideImg : showImg,
     });
   }
 
@@ -66,7 +68,7 @@ class OrderItem extends React.Component {
             <OrderSummery summeryDataro={orderData.orderSummary}
               addressDataPro={orderData.address}
               paymentMethodPro={orderData.paymentMethod}
-              invoiceDataPro={orderData.invoices} />
+               />
           </div>
           {orderData.orderItems.map((data, key) => {
             return (

@@ -5,6 +5,7 @@ import Recently from '../RecentlyViewed/recentlyViewed';
 import SubCategory from '../GlobalComponents/subCategory';
 import Content from '../Primitives/content';
 import ReadMore from '../GlobalComponents/readMore';
+import Recommendation from '../Recommendation/reco';
 
 export default function WidgetList({ componentType, ...rest }) {
   switch (componentType) {
@@ -21,7 +22,7 @@ export default function WidgetList({ componentType, ...rest }) {
     case 'content':
       return <Content {...rest} />;
     case 'recommendation':
-      return '';
+      return <Recommendation {...rest} />;
     case 'read_more':
       return <ReadMore />;
     default:

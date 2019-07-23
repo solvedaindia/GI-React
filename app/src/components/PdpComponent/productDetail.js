@@ -1,9 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -66,8 +63,8 @@ class productDetail extends React.Component {
         if (Array.isArray(data.values)) {
           displayContent = data.values.map((tabContent, id) => (
             <Col md={6} sm={12} xs={12} key={id}>
-              <b>{tabContent.name}</b>
-              {<p>{tabContent.value}</p>}
+              <div className="headingText">{tabContent.name}</div>
+              {<p className="subText">{tabContent.value}</p>}
             </Col>
           ));
         } else {
@@ -90,7 +87,7 @@ class productDetail extends React.Component {
   render() {
     return (
       <>
-        {this.props.productDetail.productDetails.description.length > 0 && (
+        {this.props.productDetail.productDetails && this.props.productDetail.productDetails.description.length > 0 && (
           <div className="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
