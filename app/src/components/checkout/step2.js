@@ -888,6 +888,10 @@ export class Step2Component extends React.Component {
     render() {
 
       return (
+        <>
+        {isMobile() &&<div className='checkout-title'>
+                  Ship To
+                 </div>}
             <div className="col-md-8 checkout_wrapper">
               {this.state.pinPop ?
               <PinChangePopup cancel={this.cancelPinPop} /> :'' }
@@ -914,17 +918,17 @@ export class Step2Component extends React.Component {
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
-                <div className='leftBox bgGrey'>
+                {this.props.isLoggedIn && !isMobile() ? <div className='leftBox bgGrey'>
                   <div className='heading-label'>Ship To</div>
-                  {this.props.isLoggedIn && !isMobile() ? <div className='verticalTab'>
+                   <div className='verticalTab'>
                     <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                       <div style={!this.state.addressList ? {color: 'grey' } : {color:'black'} }>Saved Address</div>
                     </div>
                     <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
                       <div>New Address</div>
                     </div>
-                  </div> : ''}
-                </div>
+                  </div> 
+                </div>: ''}
                 
                 <div className="rightBox">
                   {!this.props.isLoggedIn || this.state.new_add ?
@@ -992,9 +996,9 @@ export class Step2Component extends React.Component {
                     </div>
                     </div> : this.renderAddressList()}
                     
-                    {this.props.isLoggedIn && isMobile() ? <div className='verticalTab'>
+                    {this.props.isLoggedIn && isMobile() ? <div className='add-new-address-box'>
                     <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
-                      <div>New Address</div>
+                      Add New Address <span className='add-address-btn'> </span>
                     </div>
                   </div> : ''}
 
@@ -1106,10 +1110,10 @@ export class Step2Component extends React.Component {
 
                     </div>
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className={!isMobile() ? 'col-md-6' : 'col-xs-6 col-md-6'}>
                           <button className="btn-cancelborder btn-block">cancel</button>
                         </div>
-                        <div className="col-md-6">
+                        <div className={!isMobile() ? 'col-md-6' : 'col-xs-6 col-md-6 address-submit'}>
                           <button className="btn-blackbg btn-block"  onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
                         </div>
                     </div>
@@ -1134,6 +1138,7 @@ export class Step2Component extends React.Component {
                 <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button></div>
               </div>):''}
             </div>
+            </>
       )
     }
 }
