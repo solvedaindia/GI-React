@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { imagePrefix } from '../../../../public/constants/constants';
 import Accordion from './Accordion';
 import '../../../../public/styles/pdpComponent/accordian.scss';
+import Slider from 'react-slick';
 
 class productFeatures extends React.Component {
   constructor() {
@@ -31,6 +32,26 @@ class productFeatures extends React.Component {
   }
 
   render() {
+    const settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,     
+      
+      responsive: [
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+            centerMode: false,
+            infinite: true
+          }
+        }
+      ]
+    }
     return (
       <>
         {this.props.productFeatureData.productFeatures && this.props.productFeatureData.productFeatures.length > 0 && (
@@ -49,61 +70,30 @@ class productFeatures extends React.Component {
                     </div>
                   </Col>
                 </Row>
-                <div className="row body">
-                  <Col md={6} sm={12} xs={12}>
-                    <div className="featureImgbox">
-                      {this.props.productFeatureData.productFeatures.map(
-                        (imagePath, index) => {
-                          const fullImagePath = `${imagePrefix}${
-                            imagePath.imagePath
-                          }`;
-                          this.dataClass = '';
-                          if (index > 0) {
-                            this.dataClass = 'dataNotActive';
-                          }
+              <div className="row body">
+              <Col md={12} sm={12} xs={12}>
+                 <Slider {...settings}>
+                   { this.props.productFeatureData.productFeatures.map((data, index) => {                    
+                     const fullImagePath = `${imagePrefix}${data.imagePath}`;
+                      return(
+                      <div className="featureResponsiveview">
+                        <div className="featureImgbox">
+                          <img src={fullImagePath} className="imgfullwidth"/>
+                        </div>
 
-                          return (
-                            <div
-                              id={`featureImage_${index}`}
-                              key={index}
-                              className={`featureImages ${this.dataClass}`}
-                            >
-                              <img
-                                src={fullImagePath}
-                                className="imgfullwidth"
-                              />
-                            </div>
-                          );
-                        },
-                      )}
-                    </div>
-                  </Col>
-                  <Col md={6} sm={12} xs={12}>
-                    <ul className="verticalTab">
-                      {this.props.productFeatureData.productFeatures.map(
-                        (featureData, i) => (
-                          <li
-                            className={
-                              this.isActive(i) ? 'list active' : 'list'
-                            }
-                            key={i}
-                            onClick={() => this.setActiveTab(i)}
-                          >
-                            <a
-                              className="link"
-                              role="button"
-                              onClick={this.showFeatureImage.bind(this, i)}
-                            >
-                              <h3 className="heading">{featureData.title}</h3>
-                              {featureData.description}
-                            </a>
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </Col>
+                        <ul className="featureTextbox">
+                          <h3 className="heading">{data.title}</h3>
+                          <li className='list'>{data.description}</li>
+                        </ul>
+                      </div>);
+                   })
+
+                   }
+                  </Slider>
+                 </Col>
                 </div>
               </div>
+            
               </Accordion>
             </div>
           </Col>

@@ -66,7 +66,7 @@ class productInfo extends React.Component {
               <>{parseInt(this.props.productData.discount)}% OFF </>
             }
             { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
-            <>{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</>
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
             }
           </div>
           { this.props.productData.promotions.length > 0 &&

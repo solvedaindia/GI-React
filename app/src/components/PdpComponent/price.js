@@ -16,14 +16,13 @@ const price = props => {
       
     )}
       
-    {props.priceData.offerPrice < props.priceData.actualPrice && (
-      <span className="actualprice text">
-        <h2>&#8377;
+    {props.priceData.offerPrice < props.priceData.actualPrice && (      
+        <h2 className="actualprice text">&#8377;
         {parseInt(props.priceData.actualPrice)
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </h2>
-      </span>
+     
     )}
   </div>);
 };

@@ -9,7 +9,7 @@ const shareImg = <img src={require('../../../public/images/share.svg')} />;
 const wishListAndShare = props => {
     const wishlistArr = getOnlyWishlistUniqueIds();
     return(
-        <Col md={6} sm={12} xs={12} className="product-share">
+        <Col md={5} sm={6} xs={12} className="product-share">
             <div className="share">
             {!isMobile() ? <>SHARE</> :''} <div className="share-btn">{shareImg}</div>
                 <SocialMedia
