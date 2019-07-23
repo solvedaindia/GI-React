@@ -14,6 +14,12 @@ const orderFilter = require('../filters/orderfilter');
 
 const sampleOrderDetails = require('../configs/testjson').orderDetails;
 
+/**
+ * Get Order List
+ * @param storeId,access_token
+ * @return 200,OK orderList Array
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.getOrdersList = getOrdersList;
 function getOrdersList(headers, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
@@ -68,6 +74,12 @@ function getOrdersList(headers, callback) {
   );
 }
 
+/**
+ * Get Order Details by OrerID
+ * @param headers,orderId
+ * @return 200,Order Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.getOrderbyId = getOrderbyId;
 function getOrderbyId(headers, orderId, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
@@ -118,6 +130,12 @@ function getOrderbyId(headers, orderId, callback) {
   );
 }
 
+/**
+ * Get Current Order Details
+ * @param headers
+ * @return 200,Order Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.getOngoingOrders = getOngoingOrders;
 function getOngoingOrders(headers, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
@@ -232,6 +250,7 @@ function getOrderProductList(headers, orderItemArray, callback) {
   }
 }
 
+/* Get OOB Order Details */
 function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
   const orderData = wcsOrderDetails;
   const orderDetails = {
@@ -248,7 +267,6 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
     // actualData: wcsOrderDetails,
   };
   orderDetails.orderID = orderData.orderId;
-  orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
   orderDetails.orderDate = orderFilter.getFormattedDate(orderData.placedDate);
   if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
     orderDetails.paymentMethod = orderData.paymentInstruction[0].payMethodId;
@@ -258,6 +276,7 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
   );
 
   if (orderData.orderItem && orderData.orderItem.length > 0) {
+    orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     getOrderProductList(headers, orderData.orderItem, (error, productList) => {
       if (error) {
         callback(error);
@@ -277,6 +296,7 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
   }
 }
 
+/* Get OMS  and OOB Order Details */
 function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
   const orderData = wcsOrderDetails;
   const orderDetails = {
@@ -431,6 +451,12 @@ function getOMSOrderDetails(headers, orderID, callback) {
   );
 }
 
+/**
+ * Get Invoice Details
+ * @param headers,invoiceNo
+ * @return 200,Order Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.getInvoiceDetails = getInvoiceDetails;
 function getInvoiceDetails(headers, params, callback) {
   if (!params.invoiceNo) {

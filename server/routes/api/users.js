@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const usersHandler = require('../../handlers/usershandler');
 
+/* Get User Details */
 router.get('/', (req, res, next) => {
   usersHandler.getUserDetails(req.headers, (err, result) => {
     if (err) {
@@ -15,6 +16,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
+/* Vaidate User Details */
 router.post('/validate', (req, res, next) => {
   usersHandler.validateUserDetails(req.body, req.headers, (err, result) => {
     if (err) {
@@ -28,6 +30,7 @@ router.post('/validate', (req, res, next) => {
   });
 });
 
+/* Update User Details */
 router.post('/update', (req, res, next) => {
   usersHandler.updateUserDetails(req.body, req.headers, (err, result) => {
     if (err) {
@@ -41,6 +44,7 @@ router.post('/update', (req, res, next) => {
   });
 });
 
+/* Change Password */
 router.put('/changepassword', (req, res, next) => {
   usersHandler.changeUserPassword(req.body, req.headers, (err, result) => {
     if (err) {
@@ -54,6 +58,7 @@ router.put('/changepassword', (req, res, next) => {
   });
 });
 
+/* Get Address List */
 router.get('/address/list', (req, res, next) => {
   usersHandler.getUserAddress(req.headers, (err, result) => {
     if (err) {
@@ -67,6 +72,7 @@ router.get('/address/list', (req, res, next) => {
   });
 });
 
+/* Delete Address List */
 router.post('/address/delete/:nickname', (req, res, next) => {
   usersHandler.deleteAddress(req, (err, result) => {
     if (err) {
@@ -80,6 +86,7 @@ router.post('/address/delete/:nickname', (req, res, next) => {
   });
 });
 
+/* Add Address */
 router.post('/address/add', (req, res, next) => {
   usersHandler.createAddress(req.headers, req.body, (err, result) => {
     if (err) {
@@ -93,6 +100,7 @@ router.post('/address/add', (req, res, next) => {
   });
 });
 
+/* Update Address */
 router.post('/address/update/:nickname', (req, res, next) => {
   usersHandler.updateAddress(req, (err, result) => {
     if (err) {
@@ -106,7 +114,7 @@ router.post('/address/update/:nickname', (req, res, next) => {
   });
 });
 
-router.get('/notifications', (req, res, next) => {
+/* router.get('/notifications', (req, res, next) => {
   usersHandler.getNotifications(req.headers, (err, result) => {
     if (err) {
       next(err);
@@ -117,9 +125,9 @@ router.get('/notifications', (req, res, next) => {
       data: result,
     });
   });
-});
+}); */
 
-router.get('/giftcard', (req, res, next) => {
+/* router.get('/giftcard', (req, res, next) => {
   usersHandler.getGiftCards(req.headers, (err, result) => {
     if (err) {
       next(err);
@@ -130,9 +138,9 @@ router.get('/giftcard', (req, res, next) => {
       data: result,
     });
   });
-});
+}); */
 
-router.get('/godrejcredit', (req, res, next) => {
+/* router.get('/godrejcredit', (req, res, next) => {
   usersHandler.getGodrejCredit(req.headers, (err, result) => {
     if (err) {
       next(err);
@@ -143,8 +151,9 @@ router.get('/godrejcredit', (req, res, next) => {
       data: result,
     });
   });
-});
+}); */
 
+/* Reset Password */
 router.post('/forgotpassword', (req, res) => {
   usersHandler.forgotPassword(req.body, req.headers, (err, result) => {
     if (err) {
@@ -161,6 +170,7 @@ router.post('/forgotpassword', (req, res) => {
   });
 });
 
+/* Set Password For Social Logged in User */
 router.post('/sociallogin/setpassword', (req, res, next) => {
   usersHandler.setSocialPassword(req.body, req.headers, (err, result) => {
     if (err) {

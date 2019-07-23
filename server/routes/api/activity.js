@@ -22,7 +22,7 @@ router.post('/recentlyviewed/:productID', (req, res, next) => {
 });
 
 /* Get Recently Viewed Products */
-router.get('/recentlyviewed', (req, res, next) => {
+/* router.get('/recentlyviewed', (req, res, next) => {
   activityHandler.getRecommendedProducts(
     req.headers,
     espotNames.recentlyViewed,
@@ -37,7 +37,7 @@ router.get('/recentlyviewed', (req, res, next) => {
       });
     },
   );
-});
+}); */
 
 /* Get Recommended Products */
 router.get('/recommendedproduct/:activityName', (req, res, next) => {
