@@ -144,6 +144,7 @@
                 }
                 .val {
                     display: inline;
+                    margin-left: $base; 
                 }
                 .item {
                     margin: $base*0.5 0;
