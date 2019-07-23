@@ -26,6 +26,7 @@ class addToCartComponent extends React.Component {
       addToCartPopup: null,
       loading: true,
       pincodeVal: appCookie.get('pincode'),
+      isEdit: true
     };
     this.quantity = 1;
     this.quantityErrorMessage = false;
@@ -166,11 +167,20 @@ class addToCartComponent extends React.Component {
     }
   };
 
-  updatePincode(props) {
-    const pincode = document.getElementById('pincodeVal').value;
-    appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-    this.quantity = 1;
-    props.handleAddtocart(true);
+  updatePincode(props, isUpdate) {
+    if (isUpdate === 'Edit') {
+      this.setState({
+        isEdit: false
+      });
+    } else {
+      const pincode = document.getElementById('pincodeVal').value;
+      appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+      this.quantity = 1;
+      props.handleAddtocart(true);
+      this.setState({
+        isEdit: true
+      });
+    }
   }
 
   handleChange = e => {
@@ -193,12 +203,18 @@ class addToCartComponent extends React.Component {
   }
 
   render() {
-	let storeText = 'Store';
-
+  let storeText = 'Store';
+  let btnName = 'Update';
+  let pincodeFocusId = 'pincodeVal';
 	if (this.props.pinCodeData.experienceStore) {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
 			storeText = 'Stores';
 		}
+  }
+
+  if (this.state.isEdit === true) {
+    btnName = 'Edit';
+    pincodeFocusId = '';
   }
 	  return (
       <>
@@ -215,14 +231,14 @@ class addToCartComponent extends React.Component {
                   onChange={this.handleChange}
                   value={this.state.pincodeVal}
                 />
-                <a
+                <label htmlFor={pincodeFocusId}
                   className="pincodeEdit"
                   id="edit"
                   role="button"
-                  onClick={this.updatePincode.bind(this, this.props)}
+                  onClick={this.updatePincode.bind(this, this.props, btnName)}
                 >
-                  Edit
-                </a>
+                  {btnName}
+                </label>
               </div>
               {this.renderdeliveryMessage(this.props.pinCodeData)}
             </div>
