@@ -31,7 +31,6 @@ export class ComparePageContainer extends React.Component {
     }
 
     componentWillReceiveProps(prevPorps, currentProp) {
-      console.log(prevPorps, currentProp, 'prev prop');
       this.renderPrd()
     }
 

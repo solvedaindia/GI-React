@@ -23,6 +23,7 @@ import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
 import { updateUserProfile } from '../../../actions/app/actions';
+import { isMobile } from '../../../utils/utilityManager';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -53,6 +54,7 @@ class MyProfile extends React.Component {
 
       dataLoad: {},
       enteredOTP: null,
+      isSaveBtnDisable: true,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -276,22 +278,41 @@ class MyProfile extends React.Component {
       error_number: false,
       error_email: false,
     });
+
+    // if (this.state.userResponse.name !== value.target.value && this.state.userResponse.mobileNo !== value.target.value && this.state.userResponse.emailID !== value.target.value) {
+    //   this.setState({
+    //     isSaveBtnDisable: false
+    //   });
+    // }
+    // else {
+    //   this.setState({
+    //     isSaveBtnDisable: true
+    //   });
+    // }
+
     switch (value.target.id) {
       case 'fullName':
+        console.log('value Change --- ', value.target.value, this.state.userResponse);
         return this.setState({
           inputText_name: value.target.value,
+          //isSaveBtnDisable: this.state.userResponse.name !== value.target.value ? false : true
         });
       case 'phoneNumber':
         return this.setState({
           inputText_number: value.target.value,
+          //isSaveBtnDisable: this.state.userResponse.mobileNo !== value.target.value ? false : true
         });
       case 'emailId':
         return this.setState({
           inputText_email: value.target.value,
+          //isSaveBtnDisable: this.state.userResponse.emailID !== value.target.value ? false : true
         });
       default:
         return null;
     }
+
+    
+    
   }
 
   focusIn() {
@@ -383,10 +404,10 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-
+          {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
-            className="btn-apply btn"
+            className={this.state.isSaveBtnDisable ? "btn-apply btn" : "btn-applyActive btn" }
           >
             Save
         </button>

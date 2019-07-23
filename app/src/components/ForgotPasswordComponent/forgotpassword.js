@@ -89,6 +89,7 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
+      this.props.callbackForgotPro();
     }
 
     this.setState({

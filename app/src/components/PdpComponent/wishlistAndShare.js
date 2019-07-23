@@ -8,7 +8,6 @@ const shareImg = <img src={require('../../../public/images/share.svg')} />;
 
 const wishListAndShare = props => {
     const wishlistArr = getOnlyWishlistUniqueIds();
-    console.log('propspropsprops', props);
     return(
         <Col md={5} sm={6} xs={12} className="product-share">
             <div className="share">

@@ -46,14 +46,14 @@ class SimilarCombosProducts extends React.Component {
               <p className="price text">
                 <span className="discount-price">
                   &#8377;
-                  {data.offerPrice
+                  {parseInt(data.offerPrice)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
                 {data.offerPrice < data.actualPrice && (
                   <span className="priceno-discount">
                     &#8377;
-                    {data.actualPrice
+                    {parseInt(data.actualPrice)
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </span>
@@ -62,7 +62,7 @@ class SimilarCombosProducts extends React.Component {
               <p className="emi-text text">
                 <span className="free-accessories">
                   {data.emiData &&
-                    <>EMI Starting from <span className="bold">{data.emiData}</span></>
+                    <>EMI Starting from <span className="bold">{parseInt(data.emiData)}</span></>
                   }
                   
                 </span>

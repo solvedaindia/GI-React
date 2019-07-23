@@ -12,34 +12,33 @@ class PdpContainer extends React.Component {
       pdpLoading: true,
       pdpError: false,
       espotLoading: true,
-      espotError: false,
+	  espotError: false,
+	  espotTandCLoading: true,
     };
   }
 
   componentDidMount() {
     this.callPdpApi();
-    this.callPdpEspotApi();
+	this.callPdpEspotApi();
+	this.callPdpPromoTandC();
   }
 
-  callPdpApi() {
-    const skuId = this.props.match.params.skuId;
-    apiManager
-      .get(pdpApi2 + skuId)
-      .then(response => {
-        //console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
-        this.setState({
-          pdp: response.data,
-          pdpLoading: false,
-        });
+	callPdpApi() {
+		const skuId = this.props.match.params.skuId;
+		apiManager.get(pdpApi2 + skuId).then(response => {
+			//console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
+			this.setState({
+				pdp: response.data,
+				pdpLoading: false,
+			});
 
-        if (appCookie.get('isPDPAddToCart') === null) {
-          appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
-        }
-      })
-      .catch(error => {
-        console.log('PDP API Error =>', error);
-      });
-  }
+			if (appCookie.get('isPDPAddToCart') === null) {
+				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
+			}
+		}).catch(error => {
+			console.log('PDP API Error =>', error);
+		});
+	}
 
   callPdpEspotApi() {
     const APIType = 'GI_PDP_Sample_Espot1';
@@ -57,17 +56,33 @@ class PdpContainer extends React.Component {
       });
   }
 
+  callPdpPromoTandC() {
+    const APIType = 'GI_PDP_Promocode_TandC';
+    const espotPdpApi = espotAPI + APIType;
+    apiManager
+      .get(espotPdpApi)
+      .then(response => {
+        this.setState({
+          pdpEspotTandC: response.data,
+          espotTandCLoading: false,
+        });
+      })
+      .catch(error => {
+        console.log('PDP Espot T & C API Error =>', error);
+      });
+  }
+
   render() {
     return (
       <div>
-        {!this.state.pdpLoading &&
-          !this.state.espotLoading && (
+        {!this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading && (
             <>
 				{ Object.keys(this.state.pdp.data).length > 0 ? (
 					<PdpComponent
 						data={this.state.pdp.data}
 						matchParams={this.props.match.params}
 						espot={this.state.pdpEspot}
+						espotPromo={this.state.pdpEspotTandC}
 						historyData={this.props.history}
 					/>
 					) : (

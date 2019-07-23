@@ -67,46 +67,35 @@ class PdpComponent extends React.Component {
 				}
 			});
 		}
-
-		// this.props.data.skuData.map(skuLevelData => {
-		//   if (skuId === skuLevelData.uniqueID) {
-		//     this.getActualResolvedData(this.props.data.skuData, skuLevelData);
-		//   }
-		// });
 	}
 
 	/* get actual resolve data  */
 	getActualResolvedData(data, resolvedSkuData, type) {
 		const skuDataArr = [];
+		const uniqueId = [];
 		if (type === 'product') {
-			const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
+			resolvedSkuData.defAttributes.map(dataVal => {
 			data.map(skuLevelData => {
 				skuLevelData.defAttributes.map(attributeValue => {
-					if (selectedValue === attributeValue.values[0].name) {
+					if (dataVal.values[0].name === attributeValue.values[0].name && uniqueId.indexOf(skuLevelData.uniqueID) === -1) {
 						skuDataArr.push(skuLevelData);
+						uniqueId.push(skuLevelData.uniqueID)
 					}
 				});
 			});
+		});
 		} else if (type === 'kit') {
-			const selectedValue = resolvedSkuData.swatchAttributes[0].values[0].name;
+			resolvedSkuData.swatchAttributes.map(dataVal => {
 			data.map(skuLevelData => {
 				skuLevelData.swatchAttributes.map(attributeValue => {
-					if (selectedValue === attributeValue.values[0].name) {
+					if (dataVal.values[0].name === attributeValue.values[0].name && uniqueId.indexOf(skuLevelData.uniqueID) === -1) {
 						skuDataArr.push(skuLevelData);
+						uniqueId.push(skuLevelData.uniqueID)
 					}
 				});
 			});
+			});
 		}
-
-		// const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
-		// const skuDataArr = [];
-		// data.map(skuLevelData => {
-		//   skuLevelData.defAttributes.map(attributeValue => {
-		//     if (selectedValue === attributeValue.values[0].name) {
-		//       skuDataArr.push(skuLevelData);
-		//     }
-		//   });
-		// });
 
 		const defaultPincodeData = {
 			pincodeServiceable: null,
@@ -125,16 +114,31 @@ class PdpComponent extends React.Component {
 	/* handle swatches */
 	handleSwatches(count) {
 		let swatches = new Array();
-		let productSkuData = this.props.data.skuData;
+		let productSkuData;
+		if (this.props.data.type === 'kit') {
+			productSkuData = this.props.data.kitData;
+		} else if (this.props.data.type === 'product') {
+			productSkuData = this.props.data.skuData;
+		}
 		const selectedSwatches = this.handleSelectedSwatches(count);
 		for (let j = 0; j < selectedSwatches.length; j++) {
 			swatches = new Array();
 			productSkuData.map(skuLevelData => {
-			skuLevelData.defAttributes.map((attributeValue, index) => {
-				if (selectedSwatches[j] === attributeValue.values[0].name) {
-				swatches.push(skuLevelData);
+				if (this.props.data.type === 'kit') {
+					skuLevelData.swatchAttributes.map((attributeValue, index) => {
+						if (selectedSwatches[j] === attributeValue.values[0].name) {
+						swatches.push(skuLevelData);
+						}
+					});
+
+				} else if (this.props.data.type === 'product') {
+					skuLevelData.defAttributes.map((attributeValue, index) => {
+						if (selectedSwatches[j] === attributeValue.values[0].name) {
+						swatches.push(skuLevelData);
+						}
+					});
+
 				}
-			});
 			});
 			productSkuData = swatches;
 		}
@@ -144,7 +148,7 @@ class PdpComponent extends React.Component {
 	/* handle selected swatches */
 	handleSelectedSwatches(count) {
 		const selectedSwatches = new Array();
-		for (let i = 0; i < count + 1; i++) {
+		for (let i = 0; i < count; i++) {
 			const name = document.getElementsByClassName(`radio${i}`)[0].getAttribute('name');
 			const getValue = document.querySelector(`input[name = ${name}]:checked`).value;
 			selectedSwatches.push(getValue);
@@ -170,8 +174,8 @@ class PdpComponent extends React.Component {
 			console.log('PDP Pin Code API Error =>', error);
 			const defaultPincodeData = {
 				pincodeServiceable: false,
-				inventoryStatus: 'unavailable',
-				shippingCharge: 0,
+				inventoryStatus: '',
+				shippingCharge: '',
 				error: 'Not a valid pincode',
 			};
 
@@ -198,13 +202,7 @@ class PdpComponent extends React.Component {
 	getAttributeTypeData(props) {
 		let attributeData;
 		if(props.type === 'kit') {
-			let getKitAttr = new Array();
-			props.swatchAttibutes.map(data => {
-				if (data.uniqueID === this.props.matchParams.skuId) {
-					getKitAttr.push(data);
-				}
-			})
-			attributeData =  getKitAttr;
+			attributeData =  props.swatchAttributes;
 		} else if (props.type === 'product') {
 			attributeData =  props.defAttributes;
 		}
@@ -387,15 +385,17 @@ class PdpComponent extends React.Component {
                       </div>
 				  }
                   <ProductDefAttriutes
-					defAttributes={attrTypeData}
+										defAttributes={attrTypeData}
                     selectedAttribute={stateAttr}
-                    allselectedData={this.state.selectedSku}
+										allselectedData={this.state.selectedSku}
+										resolvedSku={this.state.skuData}
                     handleOptionData={this.handleSwatches.bind(this)}
                   />
                   <ProductInfo
                     productData={this.state.skuData}
                     defAttributes={attrTypeData}
-                    pinCodeData={this.state.pincodeData}
+										pinCodeData={this.state.pincodeData}
+										espotPromo={this.props.espotPromo}
                   />
                   <AddToCart
                     skuData={this.state.skuData}
