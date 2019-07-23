@@ -4,8 +4,6 @@
   width: 100%;
   .itemList {    
     margin: 0;
-    max-height: 354px;
-    overflow: auto;
    .list{
      position: relative;
      &:last-child{
@@ -97,6 +95,8 @@
   @media screen and (min-width: 768px){
     .manageAddressContainer{
       .itemList {
+        max-height: 354px;
+        overflow: auto;
         .list{
           width:31%;
           float: left;
@@ -177,6 +177,15 @@
           }
         }
       }
+    }
+    .addNewAddress{
+      width: 100%;
+      position:fixed;
+      bottom: 0px;
+      left: 0px;
+      padding: 15px 0px;
+      background: $colorwhite;
+      z-index: 9;
     }
   } 
 }

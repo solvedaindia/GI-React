@@ -10,7 +10,6 @@
     .form-control {
         border-radius: 2px;
         box-shadow: none;
-        height: 54px;
     }
     .btn-blackbg {
         background: $black;
@@ -664,6 +663,9 @@
 @media screen and (min-width: 768px) {
     .checkout {
         padding: 56px 0 100px 0;
+        .form-control {
+            height: 54px;
+        }
         .container {
             width: 85%;
         }
@@ -762,6 +764,9 @@
     }
     .checkout {
         padding: 20px 0 10px 0;
+        .form-control {
+            height: 44px;
+        }
         .mob-checkout-steps{
             position: fixed;
             top: 0px;

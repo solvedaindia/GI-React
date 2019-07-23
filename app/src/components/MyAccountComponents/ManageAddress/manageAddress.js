@@ -98,7 +98,7 @@ class ManageAddress extends React.Component {
             className="addNewAddress"
             onClick={this.addNewAddressBtnClicked1.bind(this)}
           >
-            + Add New Address
+            <span className='icon'>+</span> Add New Address
           </button>
         )}
       </div>
