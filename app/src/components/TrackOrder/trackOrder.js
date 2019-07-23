@@ -7,7 +7,7 @@ import {
     userDetailAPI,
     imagePrefix
 } from '../../../public/constants/constants';
-import { getCookie } from '../../utils/utilityManager';
+import { getCookie, isMobile } from '../../utils/utilityManager';
 import '../../../public/styles/trackMiniOrder/trackMiniOrder.scss';
 
 class TrackOrder extends React.Component {
@@ -73,7 +73,7 @@ class TrackOrder extends React.Component {
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
-                    <p className='track'>Track Your Order</p>
+                    {!isMobile() && <p className='track'>Track Your Order</p>}
                 </div>
                 <div className='orderDetails'>
                 <Slider {...settings}>
@@ -88,16 +88,16 @@ class TrackOrder extends React.Component {
                                                     <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
                                                 </figure>
                                                 <div className='prodDetails'>
-                                                    <p className='count'>ITEM({index+1}/{subOrderDetails.quantity})</p>
+                                                    {!isMobile() && <p className='count'>ITEM({index+1}/{subOrderDetails.quantity})</p>}
                                                     <p className='orderID'>Order ID {orderDetails.orderID}</p>
                                                     <p className='prodName'>{subOrderDetails.productName}</p>
-                                                    <span className='qty item'>Quantity<br></br>
+                                                    <span className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
                                                         <span className='qtyVal val'>{subOrderDetails.quantity}</span>
                                                     </span>
-                                                    <span className='status item'>Status<br></br>
+                                                    <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
                                                         <span className='statusVal val'>{shipmentDetails.status}</span>
                                                     </span>
-                                                    <span className='delDate item'>DELIVERY ON<br></br>
+                                                    <span className='delDate item'>{!isMobile() ? 'DELIVERY ON' : 'Delivery on:' }
                                                         <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
                                                     </span>
                                                 </div>

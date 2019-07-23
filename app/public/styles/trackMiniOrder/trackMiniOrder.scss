@@ -107,3 +107,53 @@
         font-size: $base*3.75;
     }
 }
+
+@media (min-width:320px) and (max-width:767px) {
+    .trackMiniOrder {
+        width: 100%;
+        .userDetails,
+        .orderSummary {
+            min-height: auto;
+        }
+        .userDetails {
+            width: 100%;
+            display: block;
+            padding: 10%;  
+            text-align: left;
+        }
+        .orderDetails {
+            width: 80%;
+            margin: auto 10%;
+            position: relative;
+            top: -$base*3.7;
+            .prodImg {
+                margin: $base*2;
+                width: 24%;
+                height: $base*9;
+            }
+            .prodDetails {
+                margin: $base 0;
+                width: 65%;
+                .orderID {
+                    margin: 0;
+                    font-size: $base;
+                }
+                .prodName {
+                    font-size: $base*1.75;
+                    margin-bottom: $base; 
+                }
+                .val {
+                    display: inline;
+                }
+                .item {
+                    margin: $base*0.5 0;
+                    display: block;
+                }
+            }
+            .link {
+                width: 100%;
+                margin: $base*2 0 0;
+            }
+        }
+    }
+}
