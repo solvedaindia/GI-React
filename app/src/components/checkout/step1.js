@@ -221,15 +221,19 @@ export class Step1Component extends React.Component {
       }
 
       return (
+        <>
+        {isMobile() &&<div className='checkout-title'>
+                    Mobile or Email
+                 </div>}
             <div className="col-md-8 checkout_wrapper"> 
                <div className='listRow bgfullflex clearfix'>
                  <div className='stepActive'>
                   <div className='stepBg'>1</div>
                  </div>
                  
-                 <div className='leftBox bgGrey'>
+                 {!isMobile() &&<div className='leftBox bgGrey'>
                     <div className='heading-label'>Mobile or Email</div>
-                 </div>
+                 </div>}
 
                   <div className="rightBox" id='rightHeight'>
                     <div className='shipping-text'>Your Shipping and payment details will be assocaited with this number</div>
@@ -258,6 +262,15 @@ export class Step1Component extends React.Component {
                           value={this.props.logonBy ? this.props.logonBy : null}
                           onChange={this.handleChange}
                          /> */}
+                        
+                        <div className='havePassword customCheckbox clearfix'>
+                          <div className='input_box'>
+                            <input className='checkBox inputCheck' id="checkbox" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
+                            <label className="lblCheck" htmlFor="checkbox"></label>
+                          </div>
+                          <label className='form-label defaultlbl' htmlFor="has_pass">I have a password</label>
+                        </div>
+                       
                         {this.state.has_pass ? <div className='form-div clearfix div-error'><div>
                             <div className='password-field'>
                             <Input
@@ -278,13 +291,7 @@ export class Step1Component extends React.Component {
                                 }
                               </span>
                             </div>{errorMessagePassword}</div></div> : ''}
-                        <div className='havePassword customCheckbox clearfix'>
-                          <div className='input_box'>
-                            <input className='checkBox inputCheck' id="checkbox" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
-                            <label className="lblCheck" htmlFor="checkbox"></label>
-                          </div>
-                          <label className='form-label defaultlbl' htmlFor="has_pass">I have a password</label>
-                        </div>
+
                         {this.state.showRegister ? <RegisterModalData callbackRegisterPro={this.registerCallback.bind(this)}
                                                 resetCallbackPro={this.resetLoginValues.bind(this)}/> : '' }
                         {this.state.showLoginRegisterMain ? (
@@ -337,6 +344,7 @@ export class Step1Component extends React.Component {
               </div>):''}
                
             </div>
+            </>
       )
     }
 }

@@ -275,6 +275,8 @@ export class Step3Component extends React.Component {
 
     render() {
       return (
+        <>
+          {isMobile() &&<div className='checkout-title'>Pay by</div>}
            <div className="col-md-8 checkout_wrapper">           
               <div className='listRow clearfix'>
                   <div className='stepActive'>
@@ -297,23 +299,19 @@ export class Step3Component extends React.Component {
                   <div className='stepActive'>
                     <div className='checkmark'></div>    
                   </div> 
-                  <div className="labeltext-box leftBox shiptoBg">
-                  {!isMobile() ?<div className="bgGrey">
+                  {!isMobile() ? <div className="labeltext-box leftBox shiptoBg">
+                  <div className="bgGrey">
                       <h4 className="heading-label">Ship to</h4>
-                    </div>: ''}
-
-                    {isMobile() ?<div className="bgGrey">
-                      <h4 className="heading-label">Pay by</h4>
-                    </div>: ''}
-                  </div>
+                    </div>
+                  </div>: ''}
 
                    <div className="email-box"> 
                     <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
                   </div>
 
-                  <div className="action-button">
+                  {!isMobile() && <div className="action-button">
                         <button onClick={this.handleChange} className="btn-block btn-blackbg">Change</button>
-                  </div>
+                  </div>}
               </div>
 
              
@@ -413,6 +411,7 @@ export class Step3Component extends React.Component {
                 </div>
               </div>
             </div>
+            </>
       )
     }
 }
