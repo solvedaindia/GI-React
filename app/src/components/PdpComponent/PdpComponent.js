@@ -357,11 +357,11 @@ class PdpComponent extends React.Component {
                   />
                 </div>
               </Col>
-              <Col md={4} sm={12} xs={12}>
+              <Col className='pdpDetails' md={4} sm={12} xs={12}>
                 <div className="GallerytextBox">
                   <Row>
                     <Col md={12} sm={12} xs={12}>
-                    { !isMobile() && <Col md={6} sm={12} xs={12} className="product">
+                    { !isMobile() && <Col md={7} sm={6} xs={12} className="product">
                          <span className="text">Product ID: </span> 
                         <span className="text">
                           {this.state.skuData.partNumber}

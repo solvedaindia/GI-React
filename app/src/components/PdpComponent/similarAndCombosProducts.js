@@ -46,7 +46,8 @@ class SimilarCombosProducts extends React.Component {
               <p className="price text">
                 <span className="discount-price">
                   &#8377;
-                  {parseInt(data.offerPrice)
+                  {data.offerPrice &&
+                  parseInt(data.offerPrice)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
-import { pdpApi2, espotAPI } from '../../../public/constants/constants';
+import { pdpApi2, espotAPI, GI_PDP_Promocode_TandC, GI_PDP_Our_Promises } from '../../../public/constants/constants';
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
 import appCookie from '../../utils/cookie';
 
@@ -41,7 +41,7 @@ class PdpContainer extends React.Component {
 	}
 
   callPdpEspotApi() {
-    const APIType = 'GI_PDP_Sample_Espot1';
+    const APIType = GI_PDP_Our_Promises;
     const espotPdpApi = espotAPI + APIType;
     apiManager
       .get(espotPdpApi)
@@ -57,7 +57,7 @@ class PdpContainer extends React.Component {
   }
 
   callPdpPromoTandC() {
-    const APIType = 'GI_PDP_Promocode_TandC';
+    const APIType = GI_PDP_Promocode_TandC;
     const espotPdpApi = espotAPI + APIType;
     apiManager
       .get(espotPdpApi)

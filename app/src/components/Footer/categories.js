@@ -8,7 +8,8 @@ const Categories = (props) => {
                 <h3 className='heading'>
                     {props.name.text}
                 </h3>
-                { props.name.children.map((links, i) => {
+                { props.name.children && props.name.children.length > 0 &&
+                    props.name.children.map((links, i) => {
                     return (
                         <h4 className='categoriestext list' key={i}><a className='link ' href={links.action}>{links.text}</a></h4>
                     )})
