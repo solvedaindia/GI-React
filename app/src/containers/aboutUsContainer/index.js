@@ -56,12 +56,13 @@ export class AboutUs extends React.Component {
   render() {
     return (
     <div className="About-Us">
-         <div className="aboutUstextContainer">
-           <div className="row">
-             <div className="col-md-8">
-             <h1 className="heading">About Us</h1>
-             <p className="paragraph">
-              Godrej Interio is India’s largest furniture brand. From
+      <div className="container">
+        <div className="aboutUstextContainer">
+          <div className="row">
+            <div className="col-md-8">
+              <h1 className="headingtitle">About Us</h1>
+              <p className="Paragraph">
+                Godrej Interio is India’s largest furniture brand. From
                 manufacturing the humble Storwel cupboard 80 years back to being
                 a vibrant, innovative brand with a diverse portfolio – it’s been
                 a brilliant, exciting journey for us. We love bringing alive
@@ -77,58 +78,55 @@ export class AboutUs extends React.Component {
                 through our 50 exclusive showrooms in 18 cities and through 800
                 dealer outlets. Godrej Interio is a business unit of Godrej &
                 Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of India’s
-                largest engineering and consumer product groups.</p> 
-             </div>
-             <div className="col-md-4">
-<div className="AboutUsContent row">
-  <div className=" col-md-6">
-    <div className=" container">
-<div className="iconsBackground">
-<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
-</div>
-  </div>
-  
-  </div>
-  <div className="col-md-6">
-    <h2>Vision</h2>
-    <p>The choice for home and work space solutions.</p>
+                largest engineering and consumer product groups.</p>
+            </div>
+            
+            <div className="col-md-4 ">
+              <div className="visionRightbox">
+              <div className="AboutUsContent clearfix">
+ <div className="iconsBackground">
+                    <img className="abouticonimg" src={require('../../../public/images/abouticon.png')}
+                      alt="rectangle" />
+                  </div>                
+ <div className="ListBoxtext">
+                  <h2 className="heading">Vision</h2>
+                  <p className="text">The choice for home and work space solutions.</p>
+                </div>
+                
+              </div>
+              <div className="AboutUsContent clearfix">
+ <div className="iconsBackground">
+                    <img className="abouticonimg" src={require('../../../public/images/abouticon.png')}
+                      alt="rectangle" />
+                  </div>                
+ <div className="ListBoxtext">
+                  <h2 className="heading">Vision</h2>
+                  <p className="text">The choice for home and work space solutions.</p>
+                </div>
+                
+              </div>
+              <div className="AboutUsContent clearfix">
+ <div className="iconsBackground">
+                    <img className="abouticonimg" src={require('../../../public/images/abouticon.png')}
+                      alt="rectangle" />
+                  </div>                
+ <div className="ListBoxtext">
+                  <h2 className="heading">Vision</h2>
+                  <p className="text">The choice for home and work space solutions.</p>
+                </div>
+                
+              </div>
 
-</div>
-<div className="AboutUsContent row">
-  <div className=" col-md-6">
-    <div className=" container">
-<div className="iconsBackground">
-<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
-</div>
-  </div>
-  
-  </div>
-  <div className="col-md-6">
-    <h2>Vision</h2>
-    <p>The choice for home and work space solutions.</p>
-</div>
-</div>
-<div className="AboutUsContent row">
-  <div className=" col-md-6">
-    <div className=" container">
-<div className="iconsBackground">
-<img className="abouticonimg" src={require('../../../public/images/abouticon.png')} alt="rectangle" />
-</div>
-  </div>
-  
-  </div>
-  <div className="col-md-6">
-    <h2>Vision</h2>
-    <p>The choice for home and work space solutions.</p>
-</div>
-</div>
-</div>
-           </div>
-           </div>
-         </div>
+              
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
     );
-  }
-}
+    }
+    }
 
 export default AboutUs;

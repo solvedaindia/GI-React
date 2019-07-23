@@ -5,32 +5,7 @@
   width: 100%;
   height: auto;
   background-color: #ffffff;
-  .AboutUsContent{
-    .p{
-      font-size: 14px;
-      font-family: $font-medium;
-      // line-height: 21px;
-    }
-    .h2{
-      margin: 0px 0 0x 0;
-      font-size: 21px;
-      font-family: $font-medium;
-    }
-    .abouticonimg{
-      // width:44px;
-      height: 35px;
-      align-content: center
-    }
-    .iconsBackground{
-      // margin: 0px 20px 0 26px;
-      // padding: 20px 20px 0 0;
-  height:89px;
-  width: 89px;
-  background-color: #f2f5f7;
-  border-radius: 100%
-    }
-  }
- 
+  
   .abouts-Us {
     // width: 129px;
     height: 36px;
@@ -423,18 +398,7 @@
     letter-spacing: normal;
     color: #000000;
   }
-  .Paragraph {
-    width: 618px;
-    height: 120px;
-    font-family: CeraGodrejInterio;
-    font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.43;
-    letter-spacing: normal;
-    color: #000000;
-  }
+ 
   .Mask {
     // width: 1141px;
     height: 369px;
@@ -470,11 +434,7 @@
     width: 556px;
     height: 371px;
   }
-  .container {
-    position: relative;
-    text-align: center;
-    color: white;
-  }
+ 
   
   .michaelSplash {
     width: 456px;
@@ -766,23 +726,66 @@
     height: 30px;
   }
   .aboutUstextContainer{
-    padding:61px;
-    .heading{
+    padding:61px 0;
+    .headingtitle{
+      padding: 0 0 35px 0;
+
     font-family: $font-medium;
     font-size: 30px;
     font-weight: 500;
     font-style: normal;
     line-height: normal;
     color: #000000;
+    margin:0;
     }
     .Paragraph {
-      font-family: $font-regular;
+          font-family: $font-regular;
           font-size: 14px;
           font-weight: normal;
           font-style: normal;
           line-height: 1.43;
           color: #000000;
         }
+
+.visionRightbox{
+  margin:65px 0 0 0;
+        .AboutUsContent{
+          margin:0 0 27px 0;
+    .iconsBackground{
+      width:20%;
+      max-width: 89px;
+      padding: 20px;
+      background: #f2f5f7;
+      border-radius: 100%;
+      .abouticonimg{
+        width:100%;
+      }
+    }
+    .ListBoxtext{
+      width:80%;
+      padding:0 0 0 30px;
+      .heading{
+        margin:0;
+        font-size: 21px;
+        padding:0;
+        font-family: $font-medium;
+      }
+      .text{
+        color:#77787a;
+        font-size: 14px;
+        line-height: 14px;
+        font-family: $font-regular;
+        
+      }
+    }
+
+    .iconsBackground,.ListBoxtext{
+      display: block;
+      float:left;
+    }
+  }
+}
+
   }
  
 }

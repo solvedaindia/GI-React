@@ -110,6 +110,7 @@ index: 0
               </div>
               <OurPromises />
               <div className="frequesntly">
+                <div className="container">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br />
                 <div className="panel-group" id="accordion">
                   <div className="panel panel-default">
@@ -190,6 +191,7 @@ index: 0
                       </div>
                     </div>
                   </div>
+                    </div>
                     </div>
               </div>
               <div className="kitchenFaciliies">

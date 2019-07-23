@@ -37,6 +37,7 @@ export class Inspiration extends React.Component {
           <InsCrousel />
         </div>
         <div className="summersparkcontainer">
+          <div className="container">
           <div className="row">
             <div className="col-md-6">
               <img  className="RectImg" src={require('../../../public/images/sm1.jpg')} alt="rectangle" />
@@ -107,6 +108,7 @@ export class Inspiration extends React.Component {
             </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );
