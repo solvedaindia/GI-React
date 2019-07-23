@@ -758,9 +758,20 @@
         padding: $base*2 0px $base*2 15px;
         font-weight: bold;
         background: $borderLight;
+        margin-top: $base*6;
     }
     .checkout {
         padding: 20px 0 10px 0;
+        .mob-checkout-steps{
+            position: fixed;
+            top: 0px;
+            z-index: 9;
+            color: $colorwhite;
+            text-align: center;
+            width: 100%;
+            padding: 14px 0px;
+            font-size: 14px;
+        }
         .address-submit{
             padding-left: 0px;
         }

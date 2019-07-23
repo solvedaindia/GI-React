@@ -17,7 +17,8 @@ import appCookie from '../../utils/cookie';
 import queryString from 'query-string';
 import apiManager from '../../utils/apiManager';
 import failPop from './failPop'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import {isMobile} from '../../utils/utilityManager';
 
 import {
   storeId,
@@ -367,6 +368,9 @@ export class CheckoutComponent extends React.Component {
       }
       return (
         <div className='checkout'>
+          {isMobile() && <div className='mob-checkout-steps'>
+            Checkout (Step 2/{this.state.step}) 
+          </div>}
         <div className="container">
           <div className='row'>
           <div className='col-md-8'>
