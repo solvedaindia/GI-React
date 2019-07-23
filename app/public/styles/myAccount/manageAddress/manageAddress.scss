@@ -17,7 +17,6 @@
     .addressItem {
       border-radius: 2px;
       border: solid 1px $lightblueGrey;
-      background-color: rgba(247, 248, 248, 0.5);
     
       .defaultAddress {
         font-family: $font-bold;      
@@ -102,6 +101,7 @@
           float: left;
           margin: 0px 16px 26px 0;
           .addressItem{
+            background-color: rgba(247, 248, 248, 0.5);
             padding:16px 10px;
             height: 162px;
             .listitem{
