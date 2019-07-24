@@ -5,11 +5,12 @@
  */
 
 import React from 'react';
-import FullBanner from '../../components/Primitives/slider';
-import LivingTheme from '../../components/ClpComponent/subComponents/livingInspiration';
-import SubCategory from '../../components/GlobalComponents/subCategory';
+import CLPFullBanner from '../../components/ClpComponent/clpSlider';
+import LivingTheme from '../../components/ClpComponent/livingInspiration';
+import SubCategory from '../../components/ClpComponent/subCategory';
 import BestSeller from '../../components/BestSelling/bestSelling';
-import ReadMore from '../../components/GlobalComponents/readMore';
+import CLPReadMore from '../../components/ClpComponent/clpReadMore';
+import Solution from '../../components/ClpComponent/solution';
 
 export class HeaderContainer extends React.Component {
   constructor(props) {
@@ -26,11 +27,12 @@ export class HeaderContainer extends React.Component {
     return (
       <section className="clpBase">
         <div className="slider">
-          <FullBanner />
+          <CLPFullBanner />
           <SubCategory />
           <LivingTheme />
           <BestSeller />
-          <ReadMore />
+          {/* <Solution /> */}
+          <CLPReadMore />
         </div>
       </section>
     );
