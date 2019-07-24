@@ -14,6 +14,7 @@ const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
 const paymentHandler = require('./handlers/paymenthandler');
+const UrlConfig = require('./utils/paymentURLutil');
 
 const port = process.env.PORT || '8002';
 
@@ -60,27 +61,26 @@ app.use(helmet.xssFilter());
 app.use(helmet.hidePoweredBy()); */
 
 
+
+
 app.post('/api/payment/handlePayment', (req, res) => {
     console.log(req.body);
     var obj = {
         customInfo: req.body.msg,
         payMethodId: 'BillDesk'
-    }
+    };
 
-    console.log(obj, "data object for verify checksum")
     var headers = {
         storeId: 10151
     }
     paymentHandler.verifyChecksum(obj, headers, (err, data) => {
         if (err) {
-            console.log(err, "verify checksum error");
-            res.redirect('http://localhost:5000/checkout?status=fail')
+            res.redirect(`${UrlConfig.url}/checkout?status=fail`)
         } else {
-            console.log(data, "from verify checksum");
-            if (data.orderPlaced == true) {
-                res.redirect(`http://localhost:5000/order/confirm/${data.orderID}`)
+            if (data.paymentStatus == 'success') {
+                res.redirect(`${UrlConfig.url}/check/payment/${data.orderID}`)
             } else {
-                res.redirect('http://localhost:5000/checkout?status=fail')
+                res.redirect(`${UrlConfig.url}/checkout?status=fail`)
             }
         }
     })

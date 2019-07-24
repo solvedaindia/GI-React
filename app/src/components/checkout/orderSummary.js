@@ -47,7 +47,7 @@ export class OrderSummaryComponent extends React.Component {
               <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
               <div className='listRow clearfix'>
                 <div className='lefttext-box'>Cart Total</div>
-                <div className='righttext-box'>&#8377;{this.props.orderData.netAmount}</div>
+                <div className='righttext-box'>&#8377;{this.props.orderData.totalAmount}</div>
               </div>
 
               <div className='listRow clearfix'>

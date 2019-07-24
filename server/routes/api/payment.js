@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const paymentHandler = require('../../handlers/paymenthandler.js');
+const paymentHandler = require('../../handlers/paymenthandler.js')
+const urlConfig = require('../../utils/paymentURLutil');
 
 router.post('/initiateBDPayment', (req, res, next) => {
+    urlConfig.url = req.headers.origin;
+    console.log(urlConfig, "this is url config");
     paymentHandler.initiateBDPayment(req.body, req.headers, (err, result) => {
         if (err) {
             next(err);
