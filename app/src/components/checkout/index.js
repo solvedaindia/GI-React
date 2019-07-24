@@ -362,6 +362,16 @@ export class CheckoutComponent extends React.Component {
       }
     }
 
+    handleBack = () => {
+      if(this.state.loggedIn && this.state.step == 2) {
+        return; 
+      } else {
+        this.setState({
+          step: this.state.step -1
+        })
+      }
+    }
+
     render() {
       if (this.state.redirect) {
         return <Redirect to='/cart'/>;
@@ -369,7 +379,7 @@ export class CheckoutComponent extends React.Component {
       return (
         <div className='checkout'>
           {isMobile() && <div className='mob-checkout-steps'>
-            Checkout (Step 2/{this.state.step}) 
+          <a onClick={this.handleBack} className="backBtn"><img src={require('../../../public/images/LeftArrowWhite.svg')} /></a> Checkout (Step {this.state.step}/3) 
           </div>}
         <div className="container">
           <div className='row'>

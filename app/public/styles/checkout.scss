@@ -776,6 +776,14 @@
             width: 100%;
             padding: 14px 0px;
             font-size: 14px;
+            .backBtn{
+                float: left;
+                width: 22px;
+                margin: 0px 0px 0px 15px;
+                img{
+                    width: 100%;
+                }
+            }
         }
         .address-submit{
             padding-left: 0px;

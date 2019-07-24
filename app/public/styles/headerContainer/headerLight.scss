@@ -15,16 +15,8 @@
         padding: $base*1.5;
         z-index: 2;
         top: 0;
-        .backBtn{
-            float: left;
-            width: 22px;
-            margin: 2px 5px 0px 8px;
-            img{
-                width: 100%;
-            }
-        }
         .logo {
-            margin-left: 0; 
+            margin-left: 30px; 
         }
     }
 }
