@@ -659,6 +659,11 @@
 
 
   .PdpFeatures{
+      .slick-slider{
+        .slick-prev:before, .slick-next:before{
+            display: none;
+        }
+      }
       .featureVertical-tab{
           position: relative;
         .slick-dots{
@@ -1680,7 +1685,7 @@
                 .headingBox{
                     position: relative;
                     .heading{
-                        font-size: 18px;
+                        font-size: 16px;
                         padding:0 0 15px 0;
                     }
                     .plusIcon{
@@ -1805,6 +1810,7 @@
             .product-share{
                 .wishListDiv{
                     .wishlistBtn{
+                        margin-right: 10px;
                         img{
                             width: 20px;
                         }
@@ -1828,7 +1834,7 @@
         .purchase-guide-box{
             position: relative;
             .heading{
-                font-size: 18px;
+                font-size: 16px;
                 padding:0 0 15px 0;
             }
             .tab-nav-container{
