@@ -77,7 +77,7 @@ class PdpContainer extends React.Component {
       <div>
         {!this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading && (
             <>
-				{ Object.keys(this.state.pdp.data).length > 0 ? (
+				{ this.state.pdp.data && Object.keys(this.state.pdp.data).length > 0 ? (
 					<PdpComponent
 						data={this.state.pdp.data}
 						matchParams={this.props.match.params}

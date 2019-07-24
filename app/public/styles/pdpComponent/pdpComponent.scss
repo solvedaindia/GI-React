@@ -950,6 +950,10 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 19px;
+    a{
+        display: block;
+        text-decoration: none;
+    }
     .productlist {        
         position: relative; 
         padding: 0 15px;
