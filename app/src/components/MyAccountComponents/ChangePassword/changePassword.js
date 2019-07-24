@@ -13,6 +13,7 @@ import '../../../../public/styles/myAccount/changePassword.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 import Input from '../../Primitives/input';
 import { isMobile } from '../../../utils/utilityManager';
+import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 
 class ChangePassword extends React.Component {
   state = {
@@ -175,6 +176,11 @@ class ChangePassword extends React.Component {
     }
   }
 
+  onRWDCancelBtnClick() {
+    console.log('dddid -- ',this.props)
+    this.props.resetRWDHeaderFlag(true);
+  }
+
   render() {
     let errorItemCurrent = null;
     if (this.state.errorCurrent) {
@@ -239,7 +245,7 @@ class ChangePassword extends React.Component {
           </div>
           {errorItemNew}
         </div>
-        {isMobile() && <button className='btn-cancel btn'>Cancel</button>}
+        {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
         <button
           onClick={this.saveBtnPressed.bind(this)}
           className="btn-apply btn"
@@ -251,4 +257,18 @@ class ChangePassword extends React.Component {
   }
 }
 
-export default ChangePassword;
+function mapStateToProps(state) {
+  // console.log('MyAccount MapStatetoprops --- ', state);
+  // const stateObj = getReleventReduxState(state, 'global');
+  // const updatedUsername = getReleventReduxState(stateObj, 'userName');
+
+  // return {
+  //   username: updatedUsername,
+  // };
+}
+
+export default connect(
+  mapStateToProps,
+  {resetRWDHeaderFlag},
+)(ChangePassword);
+//export default ChangePassword;
