@@ -21,143 +21,84 @@ module.exports.getCompareProducts = function getCompareProducts(headers, product
             var att_promises = [];
             result.forEach(element => {
                 att_promises.push(new Promise((resolve, reject) => {
-                    var skus = [];
-                    var minemi_promises = [];
                     element.swatches = SwatchesData(element.attributes);
                     element.sKUs.forEach(sku => {
-                        minemi_promises.push(new Promise((resolve, reject) => {
-                            var selPriceObj = sku.price[1];
-                            if (selPriceObj.value) {
-                                minEMI(selPriceObj.value, headers, (err, data) => {
-                                    if (err) {
-                                        resolve();
-                                    } else {
-                                        // var swatch = SwatchesData(sku.attributes);
-                                        // var seatObj = sku.attributes.find((att) => {
-                                        //     return att.uniqueID == "7000000000000010201";
-                                        // });
-                                        // if (seatObj && seatObj[0]) {
-                                        //     swatch[0].size = seatObj.values[0].value;
-                                        //     swatch[0].uid = sku.uniqueID;
-                                        // }
-                                        // swatches.push(swatch[0]);
-                                        var wt = sku.attributes.find((att) => {
-                                            return att.uniqueID == "7000000000000001002"
-                                        })
-                                        var ht = sku.attributes.find((att) => {
-                                            return att.uniqueID == "7000000000000001011"
-                                        })
-                                        var dp = sku.attributes.find((att) => {
-                                            return att.uniqueID == "7000000000000001012"
-                                        })
+                        var wt = sku.attributes.find((att) => {
+                            return att.identifier == "NetWeight"
+                        })
+                        var ht = sku.attributes.find((att) => {
+                            return att.identifier == "Height(cm)"
+                        })
+                        var dp = sku.attributes.find((att) => {
+                            return att.identifier == "Depth(cm)"
+                        })
 
-                                        sku.weight = wt && wt.values[0] ? wt.values[0].value : 'NA';
-                                        sku.height = ht && ht.values[0] ? ht.values[0].value : 'NA';
-                                        sku.depth = dp && dp.values[0] ? dp.values[0].value : 'NA';
-                                        sku.minimumEMI = data.minEMIValue;
+                        sku.weight = wt && wt.values[0] ? wt.values[0].value : 'NA';
+                        sku.height = ht && ht.values[0] ? ht.values[0].value : 'NA';
+                        sku.depth = dp && dp.values[0] ? dp.values[0].value : 'NA';
 
-                                        var finishColor = sku.attributes.find((att) => {
-                                            return att.identifier == 'sc';
-                                        })
-                                        if (element.swatches && element.swatches.length > 0) {
-                                            element.swatches.forEach((swatch) => {
-                                                if (swatch.name == finishColor.values[0].value) {
-                                                    swatch.skuId = sku.uniqueID
-                                                }
-                                            })
-                                        }
-
-                                        // console.log(sku.attributes);
-                                        delete sku.attributes;
-                                        delete sku.attachments;
-                                        delete sku.longDescription;
-                                        delete sku.hasSingleSKU;
-                                        delete sku.resourceId;
-                                        delete sku.partNumber;
-                                        delete sku.catalogEntryTypeCode;
-                                        delete sku.buyable;
-                                        delete sku.masterCategoryId;
-                                        delete sku.storeID;
-                                        delete sku.parentCatalogGroupID;
-                                        resolve();
-                                    }
-                                })
-                            } else {
-                                var wt = sku.attributes.find((att) => {
-                                    return att.uniqueID == "7000000000000001002"
-                                })
-                                var ht = sku.attributes.find((att) => {
-                                    return att.uniqueID == "7000000000000001011"
-                                })
-                                var dp = sku.attributes.find((att) => {
-                                    return att.uniqueID == "7000000000000001012"
-                                })
-
-                                sku.weight = wt && wt.values[0] ? wt.values[0].value : 'NA';
-                                sku.height = ht && ht.values[0] ? ht.values[0].value : 'NA';
-                                sku.depth = dp && dp.values[0] ? dp.values[0].value : 'NA';
-                                sku.minimumEMI = data.minEMIValue;
-
-                                var finishColor = sku.attributes.find((att) => {
-                                    return att.identifier == 'sc';
-                                })
-                                if (element.swatches && element.swatches.length > 0) {
-                                    element.swatches.forEach((swatch) => {
-                                        if (swatch.name == finishColor.values[0].value) {
-                                            swatch.skuId = sku.uniqueID
-                                        }
-                                    })
+                        var finishColor = sku.attributes.find((att) => {
+                            return att.identifier == 'sc';
+                        })
+                        if (element.swatches && element.swatches.length > 0) {
+                            element.swatches.forEach((swatch) => {
+                                if (swatch.name == finishColor.values[0].value) {
+                                    swatch.skuId = sku.uniqueID
                                 }
+                            })
+                        }
+                        if (sku.UserData) {
+                            sku.minimumEMI = sku.UserData[0].x_field1_i;
+                        }
 
-                                // console.log(sku.attributes);
-                                delete sku.attributes;
-                                delete sku.attachments;
-                                delete sku.longDescription;
-                                delete sku.hasSingleSKU;
-                                delete sku.resourceId;
-                                delete sku.catalogEntryTypeCode;
-                                delete sku.buyable;
-                                delete sku.masterCategoryId;
-                                delete sku.storeID;
-                                delete sku.parentCatalogGroupID;
-                                console.log("no selling price object found");
-                                resolve();
-                            }
-                        }))
+                        // console.log(sku.attributes);
+                        delete sku.attributes;
+                        delete sku.attachments;
+                        delete sku.longDescription;
+                        delete sku.hasSingleSKU;
+                        delete sku.resourceId;
+                        delete sku.catalogEntryTypeCode;
+                        delete sku.buyable;
+                        delete sku.masterCategoryId;
+                        delete sku.storeID;
+                        delete sku.parentCatalogGroupID;
+                        delete sku.UserData;
                     });
 
-                    Promise.all(minemi_promises).then(() => {
-                        delete element.longDescription;
-                        delete element.price;
-                        delete element.hasSingleSKU;
-                        delete element.resourceId;
-                        delete element.partNumber;
-                        delete element.shortDescription;
-                        delete element.catalogEntryTypeCode;
-                        delete element.buyable;
-                        delete element.masterCategoryId;
-                        delete element.storeID;
-                        delete element.name;
-                        delete element.parentCatalogGroupID;
-                        delete element.numberOfSKUs;
-                        delete element.singleSKUCatalogEntryID;
-                        element.attributes = getComparableAttributes(element.attributes);
-                        data.push(element);
-                        resolve();
-                    }).catch((err) => {
-                        resolve();
-                        // callback(null, data);
-                    })
-                }))
+                    delete element.longDescription;
+                    delete element.price;
+                    delete element.hasSingleSKU;
+                    delete element.resourceId;
+                    delete element.partNumber;
+                    delete element.shortDescription;
+                    delete element.catalogEntryTypeCode;
+                    delete element.buyable;
+                    delete element.masterCategoryId;
+                    delete element.storeID;
+                    delete element.name;
+                    delete element.parentCatalogGroupID;
+                    delete element.numberOfSKUs;
+                    delete element.singleSKUCatalogEntryID;
+                    delete element.attachments;
+                    delete element.merchandisingAssociations;
+                    delete element.UserData;
+                    element.attributes = getComparableAttributes(element.attributes);
+                    data.push(element);
+                    resolve();
+
+                }));
             });
             Promise.all(att_promises).then(() => {
+                console.log("then called");
                 callback(null, data);
             }).catch((err) => {
+                console.log("catch called");
                 callback(null, data);
             })
         }
     })
 }
+
 
 function getComparableAttributes(productAttribute) {
     const comparable = [];

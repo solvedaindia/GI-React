@@ -21,38 +21,32 @@ export default class OrderConformation extends React.Component {
 
     componentDidMount() {
         var orderId = this.props.match.params.orderId;
-        console.log(orderId, "this is order id")
-        this.callCheckoutAPI(orderId)
-            .then(this.callOrderAPI)
-            .catch((err) => {
-                // window.location.redirect()
-            })
         this.callOrderAPI(orderId);
 
     }
 
-    callCheckoutAPI = (id) => {
-        return new Promise((resolve, reject) => {
-            let token = appCookie.get('accessToken');
-            var data = {
-                orderId: id
-            }
-            axios.post(CheckoutAPI, data, {
-                headers: { store_id: storeId, access_token: token }
-            }).then((res) => {
-                if(res.data.orderPlaced == true) {
-                    console.log("order place -----------", res)
-                    resolve();
-                } else {
-                    console.log("order rejected -----------", res)
-                    reject();
-                }
-            }).catch((err) => {
-                console.log(err);
-                reject();
-            })
-        })
-    } 
+    // callCheckoutAPI = (id) => {
+    //     return new Promise((resolve, reject) => {
+    //         let token = appCookie.get('accessToken');
+    //         var data = {
+    //             orderId: id
+    //         }
+    //         axios.post(CheckoutAPI, data, {
+    //             headers: { store_id: storeId, access_token: token }
+    //         }).then((res) => {
+    //             if(res.data.orderPlaced == true) {
+    //                 console.log("order place -----------", res)
+    //                 resolve();
+    //             } else {
+    //                 console.log("order rejected -----------", res)
+    //                 reject();
+    //             }
+    //         }).catch((err) => {
+    //             console.log(err);
+    //             reject();
+    //         })
+    //     })
+    // } 
     
     callOrderAPI(id) {
         this.setState({
@@ -64,7 +58,6 @@ export default class OrderConformation extends React.Component {
             })
         }, 4000);
             let token = appCookie.get('accessToken');
-        setTimeout(() => {
             var url = `${OrderDetailAPI}/${id}`
             axios.get(url, {
                 headers: { store_id: storeId, access_token: token, profile: 'summary' }
@@ -76,7 +69,7 @@ export default class OrderConformation extends React.Component {
             }).catch((err) => {
                 console.log(err, "order error")
             })
-        }, 3500)
+        
         
     }
 

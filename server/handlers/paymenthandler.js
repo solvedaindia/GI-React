@@ -202,8 +202,7 @@ module.exports.verifyChecksum = function verifyChecksum(
         response => {
             if (response.status === 200) {
                 const resBody = {
-                    paymentStatus: '',
-                    orderPlaced: '',
+                    paymentStatus: ''
                 };
                 if (response.body.response.paymentStatus === 'success') {
                     // const orderIdObj = {
@@ -223,12 +222,10 @@ module.exports.verifyChecksum = function verifyChecksum(
                     //   callback(null, resBody);
                     // });
                     resBody.paymentStatus = response.body.response.paymentStatus;
-                    resBody.orderPlaced = true;
                     resBody.orderID = response.body.orderId;
                     callback(null, resBody);
                 } else {
                     resBody.paymentStatus = response.body.response.paymentStatus;
-                    resBody.orderPlaced = false;
                     callback(null, resBody);
                 }
                 // callback(null, response);

@@ -51,6 +51,7 @@ import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
+import paymentWait from '../../components/checkout/paymentWait';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -189,6 +190,7 @@ export default class App extends React.Component {
           <Route path="/cart" component={CartDetail} />
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
+          <Route path="/check/payment/:orderId" component={paymentWait} />
           
         </Switch>
         <FooterContainer />

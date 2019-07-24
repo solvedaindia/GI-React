@@ -275,144 +275,153 @@ export class Step3Component extends React.Component {
 
     render() {
       return (
-           <div className="col-md-8 checkout_wrapper">           
-              <div className='listRow clearfix'>
-                  <div className='stepActive'>
-                    <div className='checkmark'></div>    
-                  </div> 
-                  {!isMobile() ?<div className="labeltext-box">
-                    <h4 className="heading-label">Mobile or Email</h4>
-                  </div>: ''}
+           <div className="col-md-8 checkout_wrapper">
+             <div className='listRow clearfix'>
+               <div className='stepActive'>
+                 <div className='checkmark'></div>
+               </div>
+               {!isMobile() ?<div className="labeltext-box">
+                 <h4 className="heading-label">Mobile or Email</h4>
+               </div>: ''}
 
-                  <div className="email-box">                  
-                     <h4 className='heading-label'>{this.props.logonBy}</h4>                     
-                  </div>   
+               <div className="email-box">
+                 <h4 className='heading-label'>{this.props.logonBy}</h4>
+               </div>
 
-                  {!this.props.isLoggedIn ? <div className="action-button">
-                     <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
-                    </div>: ''}         
-              </div>
+               {!this.props.isLoggedIn ? <div className="action-button">
+                 <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
+               </div>: ''}
+             </div>
 
-              <div className='listRow bgfullflex clearfix'>
-                  <div className='stepActive'>
-                    <div className='checkmark'></div>    
-                  </div> 
-                  <div className="labeltext-box leftBox shiptoBg">
-                  {!isMobile() ?<div className="bgGrey">
-                      <h4 className="heading-label">Ship to</h4>
-                    </div>: ''}
+             <div className='listRow bgfullflex clearfix'>
+               <div className='stepActive'>
+                 <div className='checkmark'></div>
+               </div>
+               <div className="labeltext-box leftBox shiptoBg">
+                 {!isMobile() ?<div className="bgGrey">
+                   <h4 className="heading-label">Ship to</h4>
+                 </div>: ''}
 
-                    {isMobile() ?<div className="bgGrey">
-                      <h4 className="heading-label">Pay by</h4>
-                    </div>: ''}
-                  </div>
+                 {isMobile() ?<div className="bgGrey">
+                   <h4 className="heading-label">Pay by</h4>
+                 </div>: ''}
+               </div>
 
-                   <div className="email-box"> 
-                    <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
-                  </div>
+               <div className="email-box">
+                 <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city},
+                   {this.props.address.state}, {this.props.address.pincode}</h4>
+               </div>
 
-                  <div className="action-button">
-                        <button onClick={this.handleChange} className="btn-block btn-blackbg">Change</button>
-                  </div>
-              </div>
+               <div className="action-button">
+                 <button onClick={this.handleChange} className="btn-block btn-blackbg">Change</button>
+               </div>
+             </div>
 
-             
-              <div className='listRow clearfix'>
-                 <div className='stepActive'>
-                  <div className='stepBg'>3</div>
-                 </div>
-                <div>
-                {!isMobile() ?<div className="labeltext-box">
-                    <h4 className='heading-label'>Pay by</h4>
-                  </div>: ''}
 
-                  <div className="paybytext">
-                    <div className='labelInput-greybg customCheckbox clearfix'>
-                    <div class="input_box">
-                      <input className='inputCheck' type="checkbox" id="checkbox" name="redeem" />
-                      <label class="lblCheck defaultlbl" htmlFor="checkbox"></label>
-                    </div>
-                     
-                    <label className='form-label' htmlFor="redeem">Godrej Credit <div className="clearfix"></div><span className='pricetext'>500 Credit used in this order</span></label>
-                    </div>
+             <div className='listRow clearfix'>
+               <div className='stepActive'>
+                 <div className='stepBg'>3</div>
+               </div>
+               <div>
+                 {!isMobile() ?<div className="labeltext-box">
+                   <h4 className='heading-label'>Pay by</h4>
+                 </div>: ''}
 
-                    <div className='labelInput-greybg customCheckbox clearfix'>
-                    <div class="input_box">                      
-                      <input className='inputCheck' id="checkboxRedeem" type="checkbox" name="redeem" onChange={this.showGiftCard}/>
-                      <label class="lblCheck defaultlbl" htmlFor="checkboxRedeem"></label>
-                    </div>
-                      
-                      <label className='form-label' htmlFor="redeem">Redeem Gift Card</label>
-                      <div className='clearfix'></div>
-                      {this.state.showGift ? <div className="giftCard">
-                        <div className="giftcard-input">
-                          <input type="text" placeholder="Gift Card Number" className="form-control" />
-                        </div>
-                        <div className="applybtn">
-                           <button className="btn-block btn-blackbg">Apply</button>
-                        </div>
-                      </div> : ''}
-                    </div>
- 
+                 <div className="paybytext">
+                   {/* <div className='labelInput-greybg customCheckbox clearfix'>
+                     <div class="input_box">
+                       <input className='inputCheck' type="checkbox" id="checkbox" name="redeem" />
+                       <label class="lblCheck defaultlbl" htmlFor="checkbox"></label>
+                     </div>
+
+                     <label className='form-label' htmlFor="redeem">Godrej Credit <div className="clearfix"></div><span
+                         className='pricetext'>500 Credit used in this order</span></label>
+                   </div> */}
+
+                   {/* <div className='labelInput-greybg customCheckbox clearfix'>
+                     <div class="input_box">
+                       <input className='inputCheck' id="checkboxRedeem" type="checkbox" name="redeem"
+                         onChange={this.showGiftCard} />
+                       <label class="lblCheck defaultlbl" htmlFor="checkboxRedeem"></label>
+                     </div>
+
+                     <label className='form-label' htmlFor="redeem">Redeem Gift Card</label>
+                     <div className='clearfix'></div>
+                     {this.state.showGift ? <div className="giftCard">
+                       <div className="giftcard-input">
+                         <input type="text" placeholder="Gift Card Number" className="form-control" />
+                       </div>
+                       <div className="applybtn">
+                         <button className="btn-block btn-blackbg">Apply</button>
+                       </div>
+                     </div> : ''}
+                   </div> */}
+
                    <div className='paymentMethod customradio'>
-                    <h4 className='heading'>Select Payment Method</h4>                   
-                      <div className="pay_radio"> 
-                        <div className="inputBox">                      
-                          <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
-                          <label className='labelchecked' htmlFor='credit'></label>
-                        </div> 
-                        <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
-                      </div>
-
-                      <div className="pay_radio"> 
-                        <div className="inputBox"> 
-                          <input className='inputRadio input' type="radio" id="netBank" name="netBank" checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
-                          <label className='labelchecked' htmlFor='netBank'></label>
-                        </div>
-                        <label htmlFor='netBank' className='form-label'>Netbanking</label>
-                      </div>
-
-                      {this.renderBanks()}
-
-                      <div className="pay_radio">  
-                        <div className="inputBox">                       
-                          <input name="cod" className='inputRadio input' type="radio" id="cod" name="COD" checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
-                          <label className='labelchecked' htmlFor='cod'></label>
-                        </div>
-                        <label htmlFor='cod' className='form-label'>Cash on Delivery</label>
-                      </div>
-
-                      <div className="pay_radio">  
-                      <div className="inputBox">                       
-                        <input className='inputRadio input' id='upi' type="radio" name="UPI" checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='labelchecked' htmlFor='upi'></label>
+                     <h4 className='heading'>Select Payment Method</h4>
+                     <div className="pay_radio">
+                       <div className="inputBox">
+                         <input className='inputRadio input' id='credit' type='radio' name="credit"
+                           checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='credit'></label>
                        </div>
-                        <label className='form-label' htmlFor='upi'>UPI Payment</label>
-                      </div>
+                       <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
+                     </div>
 
-                      <div className="pay_radio">  
-                      <div className="inputBox">                      
-                        <input className='inputRadio input' id='emi' type="radio" name="EMI" checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='labelchecked' htmlFor='emi'></label>
-                      </div>
-                        <label htmlFor='emi' className='form-label'>EMI</label>
-                      </div>
-
-                      <div className="pay_radio">    
-                      <div className="inputBox">                    
-                        <input className='inputRadio input' id='wallet' type="radio" name="wallet" checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='labelchecked' htmlFor='wallet'></label>
+                     <div className="pay_radio">
+                       <div className="inputBox">
+                         <input className='inputRadio input' type="radio" id="netBank" name="netBank"
+                           checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='netBank'></label>
                        </div>
-                        <label htmlFor='wallet' className='form-label'>Wallets</label>
-                      </div>
-                      {this.renderWallets()}
-                    
-                    </div>
+                       <label htmlFor='netBank' className='form-label'>Netbanking</label>
+                     </div>
 
-                  </div>
-                </div>
-              </div>
-            </div>
+                     {this.renderBanks()}
+
+                     {/* <div className="pay_radio">
+                       <div className="inputBox">
+                         <input name="cod" className='inputRadio input' type="radio" id="cod" name="COD"
+                           checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='cod'></label>
+                       </div>
+                       <label htmlFor='cod' className='form-label'>Cash on Delivery</label>
+                     </div> */}
+
+                     {/* <div className="pay_radio">
+                       <div className="inputBox">
+                         <input className='inputRadio input' id='upi' type="radio" name="UPI"
+                           checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='upi'></label>
+                       </div>
+                       <label className='form-label' htmlFor='upi'>UPI Payment</label>
+                     </div> */}
+
+                     <div className="pay_radio">
+                       <div className="inputBox">
+                         <input className='inputRadio input' id='emi' type="radio" name="EMI"
+                           checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='emi'></label>
+                       </div>
+                       <label htmlFor='emi' className='form-label'>EMI</label>
+                     </div>
+
+                     {/* <div className="pay_radio">
+                       <div className="inputBox">
+                         <input className='inputRadio input' id='wallet' type="radio" name="wallet"
+                           checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
+                         <label className='labelchecked' htmlFor='wallet'></label>
+                       </div>
+                       <label htmlFor='wallet' className='form-label'>Wallets</label>
+                     </div>
+                     {this.renderWallets()} */}
+
+                   </div>
+
+                 </div>
+               </div>
+             </div>
+           </div>
       )
     }
 }
