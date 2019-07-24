@@ -22,7 +22,7 @@ import { } from '../../../../public/constants/constants';
 import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
-import { updateUserProfile, resetRWDHeaderFlag } from '../../../actions/app/actions';
+import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 import { isMobile } from '../../../utils/utilityManager';
 import {headerNetural} from '../../../containers/HeaderContainer/HeaderMobile/index'
 

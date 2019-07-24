@@ -27,7 +27,9 @@ export class HeaderContainer extends React.Component {
 
   render() {
     if (this.state.isMobile) {
-      return <HeaderMobile />;
+      return (
+        <HeaderMobile />
+      );
     }
 
     return (

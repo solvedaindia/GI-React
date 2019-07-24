@@ -12,7 +12,7 @@ import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 import { Row, Col, Grid } from 'react-bootstrap';
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 
-export class HeaderMobile extends React.Component {
+class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +23,15 @@ export class HeaderMobile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('')
+    console.log('mixxx -- ',nextProps.isHeaderReset, this.props.isHeaderReset)
+    if (nextProps.isHeaderReset !== this.props.isHeaderReset) {
+      if(nextProps.isHeaderReset) {
+        this.headerCallback();
+        this.props.resetRWDHeaderFlag();
+      }
+      
+    }
+
   }
 
   defaultRender() {
@@ -116,16 +124,17 @@ export class HeaderMobile extends React.Component {
 
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
-  //const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
-  console.log('Mobile Header Subscription --- ', stateObj);
+  const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
+  console.log('Mobile Header Subscription --- ', defalutHeaderFlag);
 
   return {
-
+    isHeaderReset: defalutHeaderFlag,
   };
 }
 
-export default connect(
-  mapStateToProps,
-)(HeaderMobile);
-// export default withRouter(connect(mapStateToProps)(HeaderMobile))
+
+// export default connect(
+//   mapStateToProps,
+// )(HeaderMobile);
+export default withRouter(connect(mapStateToProps,{resetRWDHeaderFlag},)(HeaderMobile))
 // export default withRouter(HeaderMobile);
