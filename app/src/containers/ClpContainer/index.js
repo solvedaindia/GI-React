@@ -12,7 +12,7 @@ import BestSeller from '../../components/BestSelling/bestSelling';
 import CLPReadMore from '../../components/ClpComponent/clpReadMore';
 import Solution from '../../components/ClpComponent/solution';
 
-export class HeaderContainer extends React.Component {
+export class CLPContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,15 +28,15 @@ export class HeaderContainer extends React.Component {
       <section className="clpBase">
         <div className="slider">
           <CLPFullBanner />
+		</div>
           <SubCategory />
           <LivingTheme />
           <BestSeller />
           {/* <Solution /> */}
           <CLPReadMore />
-        </div>
       </section>
     );
   }
 }
 
-export default HeaderContainer;
+export default CLPContainer;
