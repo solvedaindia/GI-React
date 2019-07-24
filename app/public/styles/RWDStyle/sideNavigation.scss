@@ -36,7 +36,7 @@
   ul li {
     display: block;
     margin: 0;
-    padding:$base*1.75 $base*2;
+    padding:$base*1.75 $base*2.5;
   }
   .overlay {
     opacity: 0;
@@ -117,7 +117,7 @@
 
   .navTxt {
     border-bottom: 1px solid $lightblueGrey;
-    font-size: 12px;
+    font-size: 14px;
     font-family: $font-regular;
     color: $black;
   }

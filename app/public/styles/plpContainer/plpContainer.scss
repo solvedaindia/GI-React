@@ -198,7 +198,9 @@ section.tablecarousel {
       position: relative;
       border: 1px solid $borderLight;
       .hoverBox {
-
+        .inner-overlay{
+          text-align: center;
+        }
         .btn-compare {
           background: $colorwhite;
           color: $ashGrey;

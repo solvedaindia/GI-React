@@ -342,15 +342,10 @@
     .heading{
         margin:0;
         color:$ashGrey;
-        font-family: $font-bold;
-        font-size:30px;
-        line-height: 30px;
-        padding:15px 0 5px 0px;         
+        font-family: $font-bold;     
      }
      .materialType{
         color:$greyish;
-        font-size:$base*2.25;
-        line-height: $base*2.25;
         font-family: $font-regular;
       }
     }
@@ -650,10 +645,8 @@
   
               }
               .attributeVal{
-                  font-size: 12px;
                   font-family: $font-medium;
                   font-weight: bold;
-                  color:$black;
               }
         }
     }
@@ -1519,6 +1512,25 @@
             }
 
             .GallerytextBox{
+                .slimline{
+                    .heading{
+                        font-size:30px;
+                        line-height: 30px;
+                        padding:15px 0 5px 0px;         
+                     }
+                     .materialType{
+                        font-size:$base*2.25;
+                        line-height: $base*2.25;
+                      }
+                    }
+                .attr-details-box {
+                    .att-val-name{
+                        .attributeVal{
+                            font-size: 12px;
+                            color:$black;
+                        }
+                    } 
+                }
                 .pincode{
                     width:55%;
                     float:left;
@@ -1695,6 +1707,25 @@
         }
         .GallerytextBox{
             font-size: 12px;
+            .slimline{
+                .heading{
+                    font-size:20px;
+                    line-height: 27px;
+                    padding:0px;         
+                 }
+                 .materialType{
+                    font-size:$base*1.5;
+                    line-height: $base*2;
+                  }
+                }
+            .attr-details-box {
+                .att-val-name{
+                    .attributeVal{
+                        font-size: 10px;
+                        color:$grey;
+                    }
+                } 
+            }
             .add-to-cart-floater{
                 position: fixed;
                 bottom: 0px;
@@ -1758,7 +1789,7 @@
                 background: $greybg;
             }  
             .product-sku{
-                padding: 0px 0px 6px 0px;
+                padding: 10px 0px 0px 0px;
                 font-size: 11px;
                 color: $grey;
             }
