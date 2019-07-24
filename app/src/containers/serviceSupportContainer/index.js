@@ -1,8 +1,8 @@
-
 import React from 'react';
 import  '../../../public/styles/about-us/aboutUs.scss'
 import SearchLogo from '../../components/SVGs/search.js';
 import FaqAnswers from '../../components/HelpSupportComp/FaqAnswers'
+import  '../../../public/styles/static-pages/HelpSupport.scss'
 
 export default class HelpSupport extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class HelpSupport extends React.Component {
 
   render() {
     return (
-      <div className="serviceSupport">
+      <>
         <h1 className="Header-Copy-h1">Service & Support</h1>
         <h3 className="Header-Copy-h3">How can we help you?</h3>
         <div className='searchBars'>
@@ -26,7 +26,9 @@ export default class HelpSupport extends React.Component {
           <a className='clearField' id='clearField' role='button'>X</a>
 
         </div>
+        <div className="container">
         <div className="row">
+          <div className="container">
           <div className="col-md-2">
             <h3 className="faqhead">Frequently Asked Questions (FAQ)</h3>
             <ul>
@@ -61,9 +63,14 @@ export default class HelpSupport extends React.Component {
             </ul>
           </div>
           <div className="col-md-10">
-            <FaqAnswers /><br /><br /><br />
+          <h3 className="MyOd">My Orders</h3>
+
+            <FaqAnswers />
+            </div>
             <hr className="hr" />
             <h1 className="Header-Copy-4">Contact Customer Care</h1>
+            <div className="container">
+
             <div className="row">
               <div className="col-md-6">
                 <h4 className="enquiry">Enquiries</h4>
@@ -77,7 +84,7 @@ export default class HelpSupport extends React.Component {
                   <div className="col-sm-4"></div>
                   <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
                   <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547<br />+91 6325415873</h4>
+                  <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
                 </div>
               </div>
               <div className="col-md-6">
@@ -91,9 +98,9 @@ export default class HelpSupport extends React.Component {
                   <div className="col-sm-4"></div>
                   <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
                   <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547<br />+91 6325415873</h4>
+                  <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
                 </div>
-                <button className="chat"><br />
+                <button className="chat">
                   <div className="row">
                     <div className="col-md-6">
                       <h4 className="chattext">Live Chat </h4>
@@ -105,9 +112,11 @@ export default class HelpSupport extends React.Component {
                 </button>
               </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
+        </div>
+      </>
     );
   }
 }

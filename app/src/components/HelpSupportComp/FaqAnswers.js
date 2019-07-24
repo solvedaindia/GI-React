@@ -16,13 +16,7 @@ class FaqAnswers extends React.Component {
 render() {
     return (
         <div className="container">
-          <br />
-          <br />
-          <br />
-          <br />
-          <h3 className="MyOd">My Orders</h3>
           <div className="panel-group" id="accordion">
-            <div className="faqHeader">General questions</div>
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h4 className="panel-title">
@@ -76,7 +70,6 @@ render() {
               </div>
             </div>
 
-            <div className="faqHeader">Sellers</div>
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h4 className="panel-title">
@@ -116,7 +109,7 @@ render() {
                 Once your order has been shipped, you will receive an email and an SMS notification with details of the order. You can track the shipment by clicking on the link provided in the email.
 
 You can also track your order by visiting www.Godrej Interio .com and clicking on the Track Your Order link located in the upper right-hand corner of the website. From there, you can either login, or type in your order information to get tracking.
-                  <br />
+                  
                 </div>
               </div>
             </div>
@@ -177,7 +170,7 @@ You can also track your order by visiting www.Godrej Interio .com and clicking o
               <div id="collapseFour" className="panel-collapse collapse">
                 <div className="panel-body">
                 If you receive an email telling you that your item has reached your state or city, it is because it was shipped from a distant location and has one more step to go before it reaches you. Before you know it, it will be out to get delivered.
-                  <br />
+                  
                   Once the transaction is complete, you gain full access to the purchased product.
                 </div>
               </div>

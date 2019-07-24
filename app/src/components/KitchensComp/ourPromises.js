@@ -11,7 +11,7 @@ class OurPromises extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Homepage_Our_Promises",
+      espotName: "GI_MODULAR_KITCHEN_INTERIOR",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,

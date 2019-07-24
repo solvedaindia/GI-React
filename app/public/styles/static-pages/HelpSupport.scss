@@ -1,0 +1,235 @@
+@import '../variable';
+@import '../base';
+
+
+.serviceSupport {
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+.Header-Copy-h1 {
+  padding: 64px 0 0 0;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.Header-Copy-h3 {
+  padding: 24px 0 0 0;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  text-align: center;
+}
+.searchBars {
+  padding: 62px 0 0 0;
+
+  display: inline-block;
+  position: relative;
+  border-bottom: 1px solid $battleshipGrey;
+  margin: 0 auto;
+  width: 30%;
+  display: block;
+ .search-icon{margin:0}
+  .searchInput {
+      width: 100%;
+      border: transparent;
+      background: transparent;
+      padding: 0px 0 0 25px;
+      min-height: 35px;
+      &:focus {
+          outline: none;
+      }
+  }
+  .searchLogo {
+      position: absolute;
+      top: 6px;
+      left: 0px;
+      z-index: 2;
+      display: block;        
+      text-align: center;
+      pointer-events: none;
+  }
+  .clearField {
+      position: absolute;
+      top: 2px;
+      right: 7px;
+      z-index: 2;
+      display: block;        
+      text-align: center;
+      font-size: 18px;
+      text-decoration: none;
+      color:$black;    
+      display: none;
+     
+  }
+
+  #autoSuggestDiv{
+      position: absolute;
+      top: 53px;
+      width: 100%;
+      background:$colorwhite;
+      z-index: 9;
+      left: 0;
+      box-shadow: 0 24px 24px -10px rgba(66, 75, 90, 0.47);
+
+      .auto-search{
+          padding: 16px 0 16px 0;
+
+          .list{
+              padding:0px;
+              &:first-child{
+                  .link{
+                      cursor: default;
+                  }
+              }
+              .link{
+                  display: block;
+                  padding: 7px 20px;
+                  text-decoration: none;
+                  color:$black;
+                  font-family: $font-regular;
+                  font-size: 12px;
+
+                  &:hover{
+                      background:$paleGrey;
+                  }
+              }
+              &:first-child{
+                  .link{
+                      display: block;
+                      padding: 7px 20px;
+                      text-decoration: none;
+                      color:$black;
+                      font-family: $font-bold;
+   
+                      &:hover{
+                          background:transparent;
+                      }
+                  }
+              }
+
+          }
+      }
+      
+  }
+}
+.faqhead {
+// padding: 161px 18px 0 0;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.uldiver{
+  // width:163px;
+  // height:31px;
+  background-color: #eef8fe
+}
+.uldiv{
+  width:100%;
+  height:41px;
+  background-color: #eef8fe
+}
+.uldivlight{
+  width:100%;
+  height:41px;
+  background-color:white;
+}
+.MyOd {
+ padding: 63px 0 0 0;
+  height: 28px;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: left;
+}
+.panel-body{
+  color: #000000
+}
+.hrvertical { 
+  border-left: 6px solid green;
+  height: 500px;
+  }
+  .enquiry{
+    font-weight: bold;
+text-align: center;
+font-size: 20px;
+line-height: 22px;
+color: #000000;
+
+  }
+  
+.emailus{
+  height: 15px;
+}
+.contactus{
+  font-weight: bold;
+text-align: center;
+font-size: 16px;
+height: 19px;
+width: 76;
+color: #000000;
+
+}
+.emailsmall{
+text-align: center;
+font-size: 14px;
+height: 19px;
+width: 76;
+color: #000000;
+
+}
+.chat{
+  float: left;
+  background-color: #eef8fe;
+}
+.chattext{
+    font-weight: bold;
+    text-align: center;
+    height: 21px;
+    font-size: 14px;
+}
+.chatIcon{
+  // width: 40px;
+  height: 30px;
+}
+ 
+.Header-Copy-4 {
+  font-weight: bold;
+
+  height: 36px;
+  font-family: CeraGodrejInterio-Medium;
+  font-size: 30px;
+  font-weight: 500px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  text-align: center;
+}
+.panel-group{
+  // width:100%;
+  padding: 26px 0 0 0;
+}

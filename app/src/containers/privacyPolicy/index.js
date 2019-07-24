@@ -18,6 +18,7 @@ export class PrivacyPolicy extends React.Component {
     return (
       <div className="privacyPolicy">
         <div className="container">
+          <h1 className="topheading">Privacy Policy</h1>
           <p className="Topparagraph">Privacy Policy Godrej & Boyce Mfg. Ltd. respect your privacy and is committed to
             protecting it through Company’s compliance with this privacy policy.
             This policy describes:

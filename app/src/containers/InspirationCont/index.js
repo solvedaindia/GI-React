@@ -94,6 +94,8 @@ export class Inspiration extends React.Component {
                 ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
             </div>
           </div>
+          </div>
+          </div>
           <div className="uuscontainer">
           <div className="container">
             <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')}
@@ -108,8 +110,8 @@ export class Inspiration extends React.Component {
             </div>
             </div>
           </div>
-        </div>
-        </div>
+        
+       
       </div>
     );
   }

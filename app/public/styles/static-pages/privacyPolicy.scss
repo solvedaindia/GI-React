@@ -6,13 +6,22 @@
     width: 100%;
     height: auto;
     background-color: #ffffff;
+    .topheading{
+      padding: 60px 0 0 0;
+      font-family: CeraGIMedium, sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      line-height: normal;
+      color: #000000;
+     text-align: left;
+    }
     .Topparagraph{
       font-family: CeraGIMedium, sans-serif;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
     line-height: 1.43;
-      padding:65px 0 0 0;
     }
     .MainHeading {
     font-family: CeraGIMedium, sans-serif;
