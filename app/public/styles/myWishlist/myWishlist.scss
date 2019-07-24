@@ -227,6 +227,26 @@
     .heading {
       font-size: 24px;
     }
+    .plpCategories{
+      .plp-products{
+        .productlist{
+          padding: 0px;
+          .hoverBox{
+            padding: 5px 0px;
+            .mov-to-cart{
+              background: none;
+              display: block;
+              border: 0px;
+              text-align: center;
+              width: 100%;
+              padding: 10px 0px;
+              border-top:1px solid $borderLight;
+              color: $ashGrey;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

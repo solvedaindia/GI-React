@@ -68,6 +68,7 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
 exports.getRecommendedProducts = getRecommendedProducts;
 function getRecommendedProducts(headers, activityName, callback) {
   if (!activityName) {
+    logger.debug('Get Recommended Products - Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -164,6 +165,7 @@ exports.getRecommendedCategories = function getRecommendedCategories(
   callback,
 ) {
   if (!activityName) {
+    logger.debug('Get Recommended Categories - Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }

@@ -20,12 +20,13 @@ import {
   UPDATE_MINICART,
   RESET_REMOVEWISHLISTFLAG,
   UPDATE_PROFILE,
-  GET_CART_FETCHED
+  GET_CART_FETCHED,
+  RESET_RWDHEADER,
 } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
-  loading: false,
+  // loading: false,
   error: false,
   currentUser: false,
   userData: {
@@ -35,13 +36,13 @@ const initialState = fromJS({
   minicartCount: 0,
   removeWishlistFlag: false,
   userName: null,
-
+  //resetRWDFlag: false,
   // cart: null
   // logonId: null,
 });
 
 function appReducer(state = initialState, action) {
-  
+
   switch (action.type) {
     case LOAD_REPOS:
       return state
@@ -61,8 +62,10 @@ function appReducer(state = initialState, action) {
       return state.set('loading', false).set('minicartCount', action.count);
     case RESET_REMOVEWISHLISTFLAG:
       return state.set('loading', false).set('removeWishlistFlag', action.flag);
+    case RESET_RWDHEADER:
+      return state.set('loading', false).set('resetRWDFlag', action.flag);
     case UPDATE_PROFILE:
-        console.log('in The Global Reducer ---', action.type, action.userName);
+      console.log('in The Global Reducer ---', action.type, action.userName);
       return state.set('loading', false).set('userName', action.userName);
     // .set('logonId', action.logonId);
     // case GET_CART_FETCHED:

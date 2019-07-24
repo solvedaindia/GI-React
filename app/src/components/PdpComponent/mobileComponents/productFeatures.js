@@ -60,7 +60,6 @@ class productFeatures extends React.Component {
           
             <div className="PdpFeatures">
             <Accordion>
-           
               <div className="featureVertical-tab" id="featureVertical-tab">
                 <Row>
                   <Col md={12} sm={12} xs={12}>

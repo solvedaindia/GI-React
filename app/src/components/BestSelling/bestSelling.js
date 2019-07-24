@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
   bestSellerAPI,
@@ -9,6 +10,7 @@ import { is } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
+import Promotions from '../../components/GlobalComponents/productItem/promotion';
 
 class BestSeller extends React.Component {
   state = {
@@ -49,7 +51,7 @@ class BestSeller extends React.Component {
     } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -81,37 +83,44 @@ class BestSeller extends React.Component {
         },
       ],
     };
+    console.log('mmsmsms -- ', this.state.bestSellerData);
     return (
       <div className="bestSeller">
         <h1 className="title">{title}</h1>
         <Slider {...settings}>
           {is(productList, 'Array') &&
-            productList.map((sellerItemData, index) => (
-              <figure key={index} className="bsSlides">
-                <a href={sellerItemData.onClickUrl}>
-                  <img
-                    className="subCatImg"
-                    src={`${imagePrefix}${sellerItemData.thumbnail}`}
-                    alt={sellerItemData.uniqueID}
-                  />
-                </a>
-                <figcaption className="bsDetails">
-                  <h2 className="prodtitle">{sellerItemData.productName}</h2>
-                  <h2 className="peiceDeatils">
-                    <span className="discPrice">Rs.24,700</span>
-                    <span className="actualPrice">Rs.27,000</span>
-                  </h2>
-                  <p className="emi">
-                    EMI Starting From
-                    <span className="emiPrice">Rs.399</span>
-                  </p>
-                  <p className="emiOffer">
-                    <span className="emiOfferDisc">10% off</span>
-                    &amp; Free accessories
-                  </p>
-                </figcaption>
-              </figure>
-            ))}
+            productList.map((sellerItemData, index) => {
+              var productname = String(sellerItemData.productName).toLowerCase()
+              var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${sellerItemData.uniqueID}`
+
+              return (
+                <figure key={index} className="bsSlides">
+                  {/* <a href={sellerItemData.onClickUrl}> */}
+                  <Link to={routePath}>
+                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.uniqueID} />
+                  </Link>
+                  {/* </a> */}
+                  <figcaption className="bsDetails">
+                    <h2 className="prodtitle">{sellerItemData.productName}</h2>
+                    <h2 className="peiceDeatils">
+                      <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${sellerItemData.offerPrice}` : null }</span>
+                      <span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${sellerItemData.actualPrice}` : null}</span>
+                    </h2>
+                    {sellerItemData.emiData !== '' ? <p className="emi">
+                      EMI Starting From
+                    <span className="emiPrice">₹{sellerItemData.emiData}</span>
+                    </p> : null}
+
+                    <p className="emiOffer">
+                      {sellerItemData.discount !== '' ? <span className="emiOfferDisc">{parseInt(sellerItemData.discount) < 2 ? null : `${sellerItemData.discount}% Off`} </span> : null}
+                      {parseInt(sellerItemData.discount) < 2 ? null : sellerItemData.discount !== '' && sellerItemData.promotionData !== '' ? '& ' : ''}
+                      {sellerItemData.promotionData !== '' ? sellerItemData.promotionData : null}
+                    </p>
+                  </figcaption>
+                </figure>
+              )
+
+            })}
         </Slider>
       </div>
     );

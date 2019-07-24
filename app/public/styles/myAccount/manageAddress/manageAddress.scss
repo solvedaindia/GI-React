@@ -4,8 +4,6 @@
   width: 100%;
   .itemList {    
     margin: 0;
-    max-height: 354px;
-    overflow: auto;
    .list{
      position: relative;
      &:last-child{
@@ -19,7 +17,6 @@
     .addressItem {
       border-radius: 2px;
       border: solid 1px $lightblueGrey;
-      background-color: rgba(247, 248, 248, 0.5);
     
       .defaultAddress {
         font-family: $font-bold;      
@@ -97,11 +94,14 @@
   @media screen and (min-width: 768px){
     .manageAddressContainer{
       .itemList {
+        max-height: 354px;
+        overflow: auto;
         .list{
           width:31%;
           float: left;
           margin: 0px 16px 26px 0;
           .addressItem{
+            background-color: rgba(247, 248, 248, 0.5);
             padding:16px 10px;
             height: 162px;
             .listitem{
@@ -161,6 +161,8 @@
             float: left;
             color: $ceruleanblue;
             text-decoration: underline;
+            margin-bottom: 10px;
+            width: 100%;
           }
         }
       }
@@ -174,6 +176,21 @@
             width:15px;
           }
         }
+      }
+    }
+    .addNewAddress{
+      width: 100%;
+      position:fixed;
+      bottom: 0px;
+      left: 0px;
+      padding: 15px;
+      background: $colorwhite;
+      text-align: left;
+      z-index: 9;
+      .icon{
+        float: right;
+        font-size: 20px;
+        line-height: 20px;
       }
     }
   } 

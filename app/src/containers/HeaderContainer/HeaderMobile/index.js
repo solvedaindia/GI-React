@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getReleventReduxState } from '../../../utils/utilityManager';
 import { Link, withRouter } from 'react-router-dom';
 import WishListCount from '../../../components/Wishlist/wishlist';
 import CartCount from '../../../components/Cart/cart';
@@ -8,6 +10,8 @@ import SideNavigation from './sideNavigation';
 import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 import { Row, Col, Grid } from 'react-bootstrap';
+import { resetRWDHeaderFlag } from '../../../actions/app/actions';
+
 export class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +20,10 @@ export class HeaderMobile extends React.Component {
     };
     this.headerCallback = this.headerCallback.bind(this);
     this.pageNavigationRender = this.pageNavigationRender.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('')
   }
 
   defaultRender() {
@@ -78,6 +86,7 @@ export class HeaderMobile extends React.Component {
     });
   };
 
+
   onSearchClick() {
     this.setState({
       headerRenderItem: (
@@ -86,12 +95,14 @@ export class HeaderMobile extends React.Component {
     });
   }
 
+
   headerCallback = () => {
     this.setState({
       headerRenderItem: this.defaultRender(),
     });
     console.log('miii --- ', this.props);
     if (!this.props.match.isExact) {
+      
       this.props.history.goBack();
     }
   };
@@ -103,5 +114,18 @@ export class HeaderMobile extends React.Component {
   }
 }
 
-// export default HeaderMobile;
-export default withRouter(HeaderMobile);
+function mapStateToProps(state) {
+  const stateObj = getReleventReduxState(state, 'global');
+  //const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
+  console.log('Mobile Header Subscription --- ', stateObj);
+
+  return {
+
+  };
+}
+
+export default connect(
+  mapStateToProps,
+)(HeaderMobile);
+// export default withRouter(connect(mapStateToProps)(HeaderMobile))
+// export default withRouter(HeaderMobile);

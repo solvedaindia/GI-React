@@ -85,8 +85,11 @@ module.exports.getSubscriptionStatus = function getSubscriptionStatus(
     response => {
       if (response.status === 200) {
         const responseMessage = {
-          alreadySubscribed: response.body.response_msg,
+          alreadySubscribed: false,
         };
+        if (response.body['User Subscription Status'] === true) {
+          responseMessage.alreadySubscribed = true;
+        }
         callback(null, responseMessage);
       } else {
         logger.debug('Error While Hitting Newsletter Subscription Status API');

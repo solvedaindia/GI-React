@@ -159,13 +159,14 @@ export default class App extends React.Component {
     }
 
     const { isMobile } = this.state;
+    {console.log("Test URL", this.props)}
     return (
       <div>
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
         {newsletterItem}
-        {window.location.pathname === '/cart' ? (
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />
         ) : (
           <HeaderContainer />
@@ -191,7 +192,7 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           
         </Switch>
-        <FooterContainer />
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' ? '' : <FooterContainer /> }
       </div>
     );
   }

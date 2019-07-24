@@ -44,7 +44,6 @@
   
     .actionBtnWrapper {     
       .btn {
-        padding: 12px 60px;
         border-radius: 0;
       }
       &__cancelBtn {
@@ -133,8 +132,7 @@
     
       .modal-content{
         box-shadow: none;
-        .modalwrapper{
-          padding:64px 88px 64px 88px;      
+        .modalwrapper{    
           .heading{
             margin: 0 0 28px 0;
             font-size: $base*2.5;
@@ -195,6 +193,20 @@
       padding: 12px 84px;
       margin:16px 0 16px 0;
     }
+  } 
+  .delete-modal{
+    .modal-dialog{
+      .modal-content{
+        .modalwrapper{
+          padding:64px 88px 64px 88px;  
+          .actionBtnWrapper{
+            .btn{
+              padding: 12px 60px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -247,6 +259,27 @@
       min-width: 49%;
       max-width: 250px;
     } 
+  }
+  .delete-modal{
+    .modal-dialog{
+      .modal-content{
+        .modalwrapper{
+          padding:30px 30px 34px 30px;  
+          .actionBtnWrapper{
+            .btn{
+              padding: 12px 0px;
+            }
+            .btn-save{
+              margin: 0px;
+            }
+          } 
+        }
+      }
+    }
+    &.in{
+      bottom: 0px;
+      top:initial;
+    }
   }
 }
 

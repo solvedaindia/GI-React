@@ -35,7 +35,8 @@ class SubCatImage extends React.Component {
           {' '}
           <ImageLoader
             className="imgfullwidth"
-            src={`${imagePrefix}/${this.props.imageData}`}
+            // src={`${imagePrefix}/${this.props.imageData}`}
+            src={this.props.imageData !== '' ? `${imagePrefix}/${this.props.imageData}` : require('../../../../public/images/plpAssests/placeholder-image.png')} onError={require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth"
             alt="mattresses"
           />
         </div>

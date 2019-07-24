@@ -3,6 +3,7 @@ const router = express.Router();
 const espotsHandler = require('../../handlers/espotshandler');
 const espotFilter = require('../../filters/espotfilter');
 
+/* Get Espot Data */
 router.get('/:espotName', (req, res, next) => {
   espotsHandler.getEspotsData(
     req.headers,

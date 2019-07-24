@@ -11,7 +11,7 @@ const otpHandler = require('./otphandler');
 const defaultPincode = '122001';
 const passwordChangeMessage = 'Password Changed Successfully';
 const socialPasswordMessage = 'Password Successfully Reset';
-
+const regexMobileNo = /^\d{10}$/; // Mobile Number
 /**
  * Registeres User in WCS
  * @param storeId,access_token
@@ -223,7 +223,7 @@ module.exports.updateUserDetails = function updateUserDetails(
       user_id: '',
       otp: params.otp,
     };
-    const regexMobileNo = /^\d{10}$/; // Mobile Number
+    // const regexMobileNo = /^\d{10}$/; // Mobile Number
 
     if (regexMobileNo.test(params.logonid)) {
       validateOtpBody.user_id = params.logonid;
@@ -304,7 +304,7 @@ module.exports.validateUserDetails = function validateUserDetails(
     null,
     '',
     response => {
-      const regexMobileNo = /^\d{10}$/; // Mobile Number
+      // const regexMobileNo = /^\d{10}$/; // Mobile Number
       if (response.status === 200) {
         const otpBody = {
           user_id: '',

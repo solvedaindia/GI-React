@@ -6,7 +6,6 @@ export const port1 = '3001';
 export const port2 = '8002';
 export const port3 = '8443';
 export const host1 = window.location.hostname;
-// export const host = 'localhost';
 export const host = window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -167,6 +166,10 @@ export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orde
 
 /* Share Wishlist API */
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
+
+/* Espot Names */
+export const GI_PDP_Our_Promises = 'GI_PDP_Sample_Espot1';
+export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
