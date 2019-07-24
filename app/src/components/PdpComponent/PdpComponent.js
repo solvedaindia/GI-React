@@ -316,9 +316,9 @@ class PdpComponent extends React.Component {
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
-						<h4 className='heading'>
+						<h1 className='heading'>
 							{this.state.skuData.productName}
-						</h4>
+						</h1>
 						<div className='lockerText'>{this.state.skuData.shortDescription}</div>
 					</div>
 					<div className='cartofferprice-wrap'>
