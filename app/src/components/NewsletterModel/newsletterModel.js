@@ -132,7 +132,7 @@ class NewsletterModel extends React.Component {
               </div>
             </Col>
 
-            <Col xs={12} md={7}>
+            <Col xs={12} md={7} className='newsletter-form-box'>
               <div className="form_newsletter">
                 <h3 className="heading">
                   Have you joined our mailing list yet?
