@@ -122,7 +122,9 @@ export class Step2Component extends React.Component {
         binputText_address: '',
         binputText_city: '',
         binputText_state: '',
-        isSetAsDefault: ''
+        isSetAsDefault: '',
+        new_add_error: '',
+        new_add_msg: ''
       };
 
       this.handleInput = this.handleInput.bind(this);
@@ -202,6 +204,18 @@ export class Step2Component extends React.Component {
         saved_add: null,
         new_add: 'active_add'
       })
+    }
+
+    mobiAddActive = () => {
+      if(this.state.new_add == "active_add") {
+        this.setState({
+          new_add: null
+        })
+      } else {
+        this.setState({
+          new_add: 'active_add'
+        })
+      }
     }
 
     savedAddActive = () => {
@@ -617,6 +631,13 @@ export class Step2Component extends React.Component {
 
     onLoginSave(event) {
       event.preventDefault();
+      if(isMobile() && this.state.new_add) {
+        this.setState({
+          new_add_error: true,
+          new_add_msg: 'Please save you address first'
+        });
+        return;
+      }
       var selected_address = this.state.addressList[this.state.selected_add];
       var localPIN = appCookie.get('pincode');
       if(this.state.same_bill == true) {
@@ -748,6 +769,7 @@ export class Step2Component extends React.Component {
         });
         return;
       }
+      
       if (!validatePindcode(this.state.inputText_pincode)) {
         this.setState({
           error_pincode: true,
@@ -776,6 +798,7 @@ export class Step2Component extends React.Component {
         });
         return;
       }
+      console.log("Click Submit state");
       if (this.state.same_bill == false) {
         if (!validateFullName(this.state.binputText_name)) {
           console.log(this.state.binputText_name, "this is input name")
@@ -829,6 +852,7 @@ export class Step2Component extends React.Component {
           return;
         }
       }
+      
       if (!validateGST(this.state.inputText_gst)) {
         this.setState({
           error_gst: true,
@@ -836,6 +860,7 @@ export class Step2Component extends React.Component {
         });
         return;
       }
+
       if (this.props.isLoggedIn) {
         this.callAddress();
       } else {
@@ -918,26 +943,32 @@ export class Step2Component extends React.Component {
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
-                {this.props.isLoggedIn && !isMobile() ? <div className='leftBox bgGrey'>
+                {!isMobile() ?<div className='leftBox bgGrey'>
                   <div className='heading-label'>Ship To</div>
-                   <div className='verticalTab'>
+                  {this.props.isLoggedIn ? <div className='verticalTab'>
                     <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                       <div style={!this.state.addressList ? {color: 'grey' } : {color:'black'} }>Saved Address</div>
                     </div>
                     <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
                       <div>New Address</div>
                     </div>
-                  </div> 
-                </div>: ''}
+                  </div>:''}
+                </div>: ''} 
                 
                 <div className="rightBox">
+                {isMobile() &&  this.props.isLoggedIn ? this.renderAddressList() : ''}
+                {this.props.isLoggedIn && isMobile() ? <div className='add-new-address-box'>
+                    <div className={`add_tab ${this.state.new_add}`} onClick={this.mobiAddActive}>
+                      Add New Address <span className='add-address-btn'> </span>
+                    </div>
+                  </div> : ''}
                   {!this.props.isLoggedIn || this.state.new_add ?
                   <div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="Full Name" id="name" name="name"
-                            handleChange={this.handleInput} />
+                            handleChange={this.handleInput} /> 
                           {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> :
                           null}
                         </div>
@@ -993,16 +1024,29 @@ export class Step2Component extends React.Component {
                            {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                          </div>
                       </div>
+                      {isMobile() ? <div className="col-md-12">
+                     
+                      <div className='havePassword customCheckbox clearfix'>
+                        <div className='input_box'>
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <label className="lblCheck" htmlFor="checkboxBill"></label>
+                        </div>
+                          
+                          <label className='form-label defaultlbl' htmlFor="billing">Make this the default address</label>
+                        </div>
+                      
+                      <div className='col-xs-12 col-md-12 address-submit'>
+                          <button className="btn-blackbg btn-block"  onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
+                        </div>
+                      </div> :''}
+                      {this.state.new_add_error ? <div className='error-msg'>{this.state.new_add_msg}</div> : null}
                     </div>
-                    </div> : this.renderAddressList()}
+                    </div> : !isMobile() ? this.renderAddressList():'' }
                     
-                    {this.props.isLoggedIn && isMobile() ? <div className='add-new-address-box'>
-                    <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
-                      Add New Address <span className='add-address-btn'> </span>
-                    </div>
-                  </div> : ''}
+                    
+                  
 
-                    {!this.state.new_add ?
+                    {!this.state.new_add || isMobile() ?
                   <div> 
                     <div className="row">
                       <div className="col-md-12">
@@ -1072,6 +1116,7 @@ export class Step2Component extends React.Component {
                          {this.state.berror_state ? <div className='error-msg'>{this.state.berrorMessage_state}</div> : null}
                        </div>
                       </div>
+                      
                     </div>
                     </div> : ''}
 

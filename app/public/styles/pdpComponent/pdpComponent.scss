@@ -342,15 +342,10 @@
     .heading{
         margin:0;
         color:$ashGrey;
-        font-family: $font-bold;
-        font-size:30px;
-        line-height: 30px;
-        padding:15px 0 5px 0px;         
+        font-family: $font-bold;     
      }
      .materialType{
         color:$greyish;
-        font-size:$base*2.25;
-        line-height: $base*2.25;
         font-family: $font-regular;
       }
     }
@@ -650,10 +645,8 @@
   
               }
               .attributeVal{
-                  font-size: 12px;
                   font-family: $font-medium;
                   font-weight: bold;
-                  color:$black;
               }
         }
     }
@@ -666,6 +659,11 @@
 
 
   .PdpFeatures{
+      .slick-slider{
+        .slick-prev:before, .slick-next:before{
+            display: none;
+        }
+      }
       .featureVertical-tab{
           position: relative;
         .slick-dots{
@@ -945,7 +943,6 @@
 }
 
 .similarProduct-Wrapper{
-    padding:0 0 100px 0;
 .similarProducts{    
     display: flex;
     flex-wrap: wrap;
@@ -1018,13 +1015,11 @@
           .text {
             color: $black;
             padding: 5px 0 0 0;
-            line-height: 24px;
             margin: 0;
           }
           .price {
             font-weight: bold;
             .discount-price {
-              font-size: 18px;
               font-family: $font-bold;
               color: $cerulean;
             }
@@ -1033,7 +1028,6 @@
               text-decoration-color: $reddishpink;
               font-family: $font-light;
               padding-left: 15px;
-              font-size: 18px;
             }
           }
           .emi-text {
@@ -1058,13 +1052,11 @@
 
 }
     .similar-pro-tab{
-       margin-bottom: 40px;
        .tabs{
            padding: 5px 10px;
            display: inline-block;
            border-bottom: 1px solid $lightblueGrey;
            position: relative;
-           font-size: 16px;
            color: $battleshipGrey;
            font-family: $font-regular;
            text-decoration: none;
@@ -1523,6 +1515,25 @@
             }
 
             .GallerytextBox{
+                .slimline{
+                    .heading{
+                        font-size:30px;
+                        line-height: 30px;
+                        padding:15px 0 5px 0px;         
+                     }
+                     .materialType{
+                        font-size:$base*2.25;
+                        line-height: $base*2.25;
+                      }
+                    }
+                .attr-details-box {
+                    .att-val-name{
+                        .attributeVal{
+                            font-size: 12px;
+                            color:$black;
+                        }
+                    } 
+                }
                 .pincode{
                     width:55%;
                     float:left;
@@ -1590,7 +1601,30 @@
                     }
                 } 
             }
-        }   
+        }  
+        .similarProduct-Wrapper{
+            padding:0 0 100px 0;
+            .similar-pro-tab{
+                margin-bottom: 40px;
+                .tabs{
+                    font-size: 16px;
+                }
+            } 
+            .similarProducts{
+                .productlist {
+                    .product-text {
+                        .text{
+                            line-height: 24px;
+                        }
+                        .price {
+                            .discount-price, .priceno-discount {
+                                font-size: 18px;
+                            }
+                        }          
+                    }
+                }
+            } 
+        }  
     }
 
   /* 
@@ -1651,6 +1685,9 @@
                 width: 15px;
             }
         }
+      &.active > .body{
+        max-height: initial;
+      }  
     } 
     .moreKeyword{
         padding:10px 0 0 0;
@@ -1672,7 +1709,7 @@
                 .headingBox{
                     position: relative;
                     .heading{
-                        font-size: 18px;
+                        font-size: 16px;
                         padding:0 0 15px 0;
                     }
                     .plusIcon{
@@ -1699,6 +1736,25 @@
         }
         .GallerytextBox{
             font-size: 12px;
+            .slimline{
+                .heading{
+                    font-size:20px;
+                    line-height: 27px;
+                    padding:0px;         
+                 }
+                 .materialType{
+                    font-size:$base*1.5;
+                    line-height: $base*2;
+                  }
+                }
+            .attr-details-box {
+                .att-val-name{
+                    .attributeVal{
+                        font-size: 10px;
+                        color:$grey;
+                    }
+                } 
+            }
             .add-to-cart-floater{
                 position: fixed;
                 bottom: 0px;
@@ -1762,7 +1818,7 @@
                 background: $greybg;
             }  
             .product-sku{
-                padding: 0px 0px 6px 0px;
+                padding: 10px 0px 0px 0px;
                 font-size: 11px;
                 color: $grey;
             }
@@ -1778,6 +1834,7 @@
             .product-share{
                 .wishListDiv{
                     .wishlistBtn{
+                        margin-right: 10px;
                         img{
                             width: 20px;
                         }
@@ -1801,7 +1858,7 @@
         .purchase-guide-box{
             position: relative;
             .heading{
-                font-size: 18px;
+                font-size: 16px;
                 padding:0 0 15px 0;
             }
             .tab-nav-container{
@@ -1837,9 +1894,31 @@
             } 
         }
         .similarProduct-Wrapper{
+            padding:20px 0 40px 0;
             .slick-prev:before, .slick-next:before{
                 display: none;
             }
+            .similar-pro-tab{
+                margin-bottom: 20px;
+                .tabs{
+                    font-size: 14px;
+                }
+            } 
+            .similarProducts{
+                .productlist {
+                    .product-text {
+                        .heading{
+                            font-size: 14px;
+                            line-height: 16px;
+                        }
+                        .price {
+                            .discount-price, .priceno-discount {
+                                font-size: 14px;
+                            }
+                        } 
+                    }
+                }
+            } 
         } 
     } 
     .Pdpstickybar{
