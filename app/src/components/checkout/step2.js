@@ -943,17 +943,17 @@ export class Step2Component extends React.Component {
                 <div className='stepActive'>
                   <div className='stepBg'>2</div>
                 </div>
-                {this.props.isLoggedIn && !isMobile() ? <div className='leftBox bgGrey'>
+                {!isMobile() ?<div className='leftBox bgGrey'>
                   <div className='heading-label'>Ship To</div>
-                   <div className='verticalTab'>
+                  {this.props.isLoggedIn ? <div className='verticalTab'>
                     <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                       <div style={!this.state.addressList ? {color: 'grey' } : {color:'black'} }>Saved Address</div>
                     </div>
                     <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
                       <div>New Address</div>
                     </div>
-                  </div> 
-                </div>: ''}
+                  </div>:''}
+                </div>: ''} 
                 
                 <div className="rightBox">
                 {isMobile() &&  this.props.isLoggedIn ? this.renderAddressList() : ''}
