@@ -943,7 +943,6 @@
 }
 
 .similarProduct-Wrapper{
-    padding:0 0 100px 0;
 .similarProducts{    
     display: flex;
     flex-wrap: wrap;
@@ -1012,13 +1011,11 @@
           .text {
             color: $black;
             padding: 5px 0 0 0;
-            line-height: 24px;
             margin: 0;
           }
           .price {
             font-weight: bold;
             .discount-price {
-              font-size: 18px;
               font-family: $font-bold;
               color: $cerulean;
             }
@@ -1027,7 +1024,6 @@
               text-decoration-color: $reddishpink;
               font-family: $font-light;
               padding-left: 15px;
-              font-size: 18px;
             }
           }
           .emi-text {
@@ -1052,13 +1048,11 @@
 
 }
     .similar-pro-tab{
-       margin-bottom: 40px;
        .tabs{
            padding: 5px 10px;
            display: inline-block;
            border-bottom: 1px solid $lightblueGrey;
            position: relative;
-           font-size: 16px;
            color: $battleshipGrey;
            font-family: $font-regular;
            text-decoration: none;
@@ -1603,7 +1597,30 @@
                     }
                 } 
             }
-        }   
+        }  
+        .similarProduct-Wrapper{
+            padding:0 0 100px 0;
+            .similar-pro-tab{
+                margin-bottom: 40px;
+                .tabs{
+                    font-size: 16px;
+                }
+            } 
+            .similarProducts{
+                .productlist {
+                    .product-text {
+                        .text{
+                            line-height: 24px;
+                        }
+                        .price {
+                            .discount-price, .priceno-discount {
+                                font-size: 18px;
+                            }
+                        }          
+                    }
+                }
+            } 
+        }  
     }
 
   /* 
@@ -1664,6 +1681,9 @@
                 width: 15px;
             }
         }
+      &.active > .body{
+        max-height: initial;
+      }  
     } 
     .moreKeyword{
         padding:10px 0 0 0;
@@ -1870,9 +1890,31 @@
             } 
         }
         .similarProduct-Wrapper{
+            padding:20px 0 40px 0;
             .slick-prev:before, .slick-next:before{
                 display: none;
             }
+            .similar-pro-tab{
+                margin-bottom: 20px;
+                .tabs{
+                    font-size: 14px;
+                }
+            } 
+            .similarProducts{
+                .productlist {
+                    .product-text {
+                        .heading{
+                            font-size: 14px;
+                            line-height: 16px;
+                        }
+                        .price {
+                            .discount-price, .priceno-discount {
+                                font-size: 14px;
+                            }
+                        } 
+                    }
+                }
+            } 
         } 
     } 
     .Pdpstickybar{
