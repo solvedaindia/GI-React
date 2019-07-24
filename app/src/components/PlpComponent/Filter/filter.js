@@ -235,10 +235,7 @@ class Filter extends React.Component {
 
       let checkItem;
       // if (option.facetImage !== "") { //this condition to display all the images in any facet.
-      if (
-        this.props.dataPro.facetName.includes('Color') ||
-        this.props.dataPro.facetName.includes('Material')
-      ) {
+     // if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //As discussed with Lalit removing the condtion and adding check on Facet values
         // Show images only in colors facet
 
         let colorStyle = {
@@ -255,26 +252,39 @@ class Filter extends React.Component {
               <span className={colorRGBClass} style={colorStyle} />
             </div>
           );
-        } else {
+          checkItem = (
+            <label className="lblradio" htmlFor={customSelectionBoxId}>
+              {customCheckItem}
+            </label>
+          );
+        }
+        else if (option.facetImage) {
           colorRGBClass = 'circle';
           imgUrl = `${imagePrefix}${option.facetImage}`;
           console.log('Facet Faet ---- ', imgUrl, option);
           customCheckItem = (
             <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
           );
+          checkItem = (
+            <label className="lblradio" htmlFor={customSelectionBoxId}>
+              {customCheckItem}
+            </label>
+          );
+        }
+        else {
+          checkItem = (
+            <label className="lblCheck" htmlFor={customSelectionBoxId} />
+          );
         }
 
         // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
-        checkItem = (
-          <label className="lblradio" htmlFor={customSelectionBoxId}>
-            {customCheckItem}
-          </label>
-        );
-      } else {
-        checkItem = (
-          <label className="lblCheck" htmlFor={customSelectionBoxId} />
-        );
-      }
+        
+     // } 
+      // else {
+      //   checkItem = (
+      //     <label className="lblCheck" htmlFor={customSelectionBoxId} />
+      //   );
+      // }
 
       return (
         <li key={i} className="list">
