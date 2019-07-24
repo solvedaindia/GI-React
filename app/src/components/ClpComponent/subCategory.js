@@ -3,26 +3,25 @@ import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
-  featuredCatAPI,
-  imagePrefix,
-  accessToken,
-  catID,
+  plpSubCatAPI,
+  imagePrefix
 } from '../../../public/constants/constants';
 import '../../../public/styles/subCat/subCat.scss';
 
+let categoryId;
 export class SubCategory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       subCatData: null,
       isLoading: false,
-      error: null,
+      error: null
     };
   }
 
   getSubCategories() {
     apiManager
-      .get(featuredCatAPI)
+      .get(plpSubCatAPI + categoryId)
       .then(response => {
         const { data } = response || {};
         this.setState({
@@ -40,6 +39,11 @@ export class SubCategory extends React.Component {
   }
 
   componentDidMount() {
+    const path = String(window.location.pathname);
+    const idStr = path.split('/')[2];
+    if (idStr != undefined && idStr !== categoryId) {
+      categoryId = idStr;
+    }
     this.getSubCategories();
   }
 
@@ -102,7 +106,7 @@ export class SubCategory extends React.Component {
                       {subCatListData.productCount} Products
                   </span>
                     <p className="starting">
-                      Starting From
+                      Starting From 
                     <span className="startPrice">
                         {subCatListData.startPrice}
                       </span>
