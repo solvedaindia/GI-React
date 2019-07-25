@@ -84,7 +84,7 @@ export class Step1Component extends React.Component {
       } else if (!input.includes('@') && Number.isInteger(firstChar)) {
         if (!regexMobileNo.test(obj.userId)) {
           this.setState({
-            errorMessage: 'Please enter valid Email Id/Mobile number',
+            errorMessageUserId: 'Please enter valid Email Id/Mobile number',
           });
           isValidate = false;
         }
@@ -97,7 +97,7 @@ export class Step1Component extends React.Component {
       }
       if (!validateEmptyObject(obj.password) && this.state.has_pass) {
         this.setState({
-          errorMessagePassword: 'Enter a valid password ',
+          errorMessagePassword: 'Invalid logon id or password.',
         });
         isValidate = false;
       }
@@ -210,6 +210,10 @@ export class Step1Component extends React.Component {
       let errorMessagePassword = this.props.msg;
       if (this.state.errorMessageUserId) {
         errorMessageUserId = this.errorMessage(this.state.errorMessageUserId);
+      }
+
+      if(this.state.errorMessagePassword) {
+        errorMessagePassword = this.errorMessage(this.state.errorMessagePassword)
       }
   
       if (this.props.msg && this.props.msg !== "user verify err") {

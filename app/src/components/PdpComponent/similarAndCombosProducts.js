@@ -34,23 +34,24 @@ class SimilarCombosProducts extends React.Component {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
       return (
         <div className="similarProducts" key={index}>
+        <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
           <div className="productlist">
-          <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
             <div className="imgBox">
               <img className="imgfullwidth" src={imgUrl} alt="Img" />
             </div>
-          </a>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
 
               <p className="price text">
+              {data.offerPrice &&
                 <span className="discount-price">
                   &#8377;
-                  {data.offerPrice &&
+                  {
                   parseInt(data.offerPrice)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
+              }
                 {data.offerPrice < data.actualPrice && (
                   <span className="priceno-discount">
                     &#8377;
@@ -73,6 +74,7 @@ class SimilarCombosProducts extends React.Component {
               </p>
             </div>
           </div>
+          </a>
         </div>
       );
     });

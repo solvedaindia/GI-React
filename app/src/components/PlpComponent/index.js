@@ -84,6 +84,7 @@ class PlpComponent extends React.Component {
               swatchList={item.swatchesData}
               isShareWishlistPro={this.props.isShareWishlistPro}
               coloumnLayout={this.props.coloumnLayout}
+              moveToCartPopUpPro={this.props.moveToCartPopUpPro}
             /> :
             <ProductItem // Sku level
               key={index}
@@ -97,6 +98,7 @@ class PlpComponent extends React.Component {
               swatchList={[]}
               isShareWishlistPro={this.props.isShareWishlistPro}
               coloumnLayout={this.props.coloumnLayout}
+              moveToCartPopUpPro={this.props.moveToCartPopUpPro}
             />
           }
           <AdBanner indexPro={index + 1} />

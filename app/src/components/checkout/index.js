@@ -29,7 +29,10 @@ import {
   userDataAPI,
   UserVerifyAPI,
   OrderSummaryAPI,
-  CreateCheckSumAPI
+  CreateCheckSumAPI,
+  host,
+  secureHttp,
+  port2
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -184,7 +187,7 @@ export class CheckoutComponent extends React.Component {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({
-        message: `Error - ${errorMessage}`,
+        message: `Invalid logon id or password.`,
         });
       });
     }
@@ -257,7 +260,7 @@ export class CheckoutComponent extends React.Component {
         payMethodId: "BillDesk",
         amount: this.state.orderSummaryData.netAmount,
         billing_address_id: this.state.ship_add.billAddId,
-        callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
+        callbackUrl: `${secureHttp}://${host}:${port2}/api/payment/handlePayment`,
         // callbackUrl: 'http://localhost:5000/checkout/',
         BankID: this.state.BankID,
         paymentMode: this.state.paymentMode

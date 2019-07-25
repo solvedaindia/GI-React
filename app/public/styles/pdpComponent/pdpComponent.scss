@@ -600,9 +600,8 @@
                 line-height: 12px;
                 margin: 0;
                 box-shadow:none;
-
                 border:1px solid $lightGrey;
-                margin: 0 17px 0 0;
+                margin: 0 17px 4px 0;
                 font-size: 12px;
                 color:$battleshipGrey;
                 padding: 14px 17px;
@@ -947,6 +946,10 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 19px;
+    a{
+        display: block;
+        text-decoration: none;
+    }
     .productlist {        
         position: relative; 
         padding: 0 15px;

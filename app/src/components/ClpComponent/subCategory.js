@@ -3,26 +3,25 @@ import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
-  featuredCatAPI,
-  imagePrefix,
-  accessToken,
-  catID,
+  plpSubCatAPI,
+  imagePrefix
 } from '../../../public/constants/constants';
 import '../../../public/styles/subCat/subCat.scss';
 
+let categoryId;
 export class SubCategory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       subCatData: null,
       isLoading: false,
-      error: null,
+      error: null
     };
   }
 
   getSubCategories() {
     apiManager
-      .get(featuredCatAPI)
+      .get(plpSubCatAPI + categoryId)
       .then(response => {
         const { data } = response || {};
         this.setState({
@@ -40,6 +39,11 @@ export class SubCategory extends React.Component {
   }
 
   componentDidMount() {
+    const path = String(window.location.pathname);
+    const idStr = path.split('/')[2];
+    if (idStr != undefined && idStr !== categoryId) {
+      categoryId = idStr;
+    }
     this.getSubCategories();
   }
 
@@ -47,7 +51,7 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -86,7 +90,6 @@ export class SubCategory extends React.Component {
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
-              console.log('dskfsff --- ', subCatListData);
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
                 <figure className="subCatSlider">
@@ -98,12 +101,12 @@ export class SubCategory extends React.Component {
                     {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
                   </a>
                   <figcaption className="catDetails">
-                    <h2 className="catItem">{subCatListData.categoryName}</h2>
+                    <span className="catItem">{subCatListData.categoryName}</span>
                     <span className="itemCount">
                       {subCatListData.productCount} Products
                   </span>
                     <p className="starting">
-                      Starting From
+                      Starting From 
                     <span className="startPrice">
                         {subCatListData.startPrice}
                       </span>

@@ -86,7 +86,7 @@ class BestSeller extends React.Component {
     console.log('mmsmsms -- ', this.state.bestSellerData);
     return (
       <div className="bestSeller">
-        <h1 className="title">{title}</h1>
+        <h3 className="title">{title}</h3>
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
