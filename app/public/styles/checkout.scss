@@ -176,13 +176,11 @@
                 }
                 .paymentMethod {
                     .heading {
-                        font-size: $base*2.25;
                         color: $black;
                         padding: 0 0 24px 0;
                         border: none;
                     }
                     .pay_radio {
-                        padding: 0 0 26px 0;
                         .inputBox,
                         .form-label {
                             display: inline-block;
@@ -191,16 +189,13 @@
                             margin: 0 15px 0 0;
                         }
                         .form-label {
-                            font-size: 16px;
                             font-weight: normal;
                             color: $black;
                             line-height: 16px;
-                            margin: 0 0 0 15px;
                         }
                     }
                     .dropdown-toggle {
                         background: $colorwhite;
-                        padding: 14px 15px;
                         border: 1px solid $lightGrey;
                         min-width: 268px;
                         box-shadow: none;
@@ -209,7 +204,6 @@
                         position: relative;
                         color: $greyish;
                         font-family: $font-medium;
-                        margin: 0 0 40px 0;
                         .caret {
                             position: absolute;
                             right: 15px;
@@ -432,9 +426,6 @@
                         }
                     }
                 }
-            }
-            &:last-child.listRow {
-                border-bottom: 1px solid $borderLight;
             }
         }
     }
@@ -682,6 +673,20 @@
                     width: 70%;
                     .paymentMethod{
                         padding: 20px 0 0 19px;
+                        .heading{
+                            font-size: $base*2.25;
+                        }
+                        .pay_radio{
+                            padding: 0 0 26px 0;
+                            .form-label{
+                                margin: 0 0 0 15px;
+                                font-size: 16px;
+                            }
+                        } 
+                        .dropdown-toggle {
+                            padding: 14px 15px;
+                            margin: 0 0 40px 0;
+                        }
                     }
                 }
                 .leftBox {
@@ -725,6 +730,9 @@
                     .heading-label {
                         padding: 30px 0;
                     }
+                }
+                &:last-child.listRow {
+                    border-bottom: 1px solid $borderLight;
                 }
             }
         }
@@ -832,7 +840,21 @@
                 .paybytext {
                     width: 100%;
                     .paymentMethod{
-                        padding: 20px 0 0 8px;
+                        padding: 0px;
+                        .heading{
+                            font-size: $base*1.75;
+                        }
+                        .pay_radio{
+                            padding: 0 0 15px 0;
+                            .form-label{
+                                margin: 0 0 0 10px;
+                                font-size: 14px;
+                            }
+                        } 
+                        .dropdown-toggle {
+                            padding: 14px 15px;
+                            margin: 0 0 20px 0;
+                        }
                     }
                 }
                 .leftBox {
