@@ -50,6 +50,7 @@ import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
+import TermsConditions from '../TermsConditions/index';
 
 
 
@@ -212,7 +213,8 @@ export default class App extends React.Component {
           <Route path="/kitchen2" component={SteelChefKitchen} />
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
-          
+          <Route path="/termsconditions" component={TermsConditions} />
+
         </Switch>
         <FooterContainer />
       </div>
