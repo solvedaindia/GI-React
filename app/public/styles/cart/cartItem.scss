@@ -14,7 +14,6 @@
         border-bottom: 1px solid $darkAshGrey;
         .title {
             text-align: left;
-            width: 60%;
             display: inline-block;
             margin: 0;
             font-family: $font-bold;
@@ -49,7 +48,6 @@
     }
     .cartItem {
         .prodList {
-            min-height: 195px;
             height: auto;
             border: 1px solid $borderLight;
             border-bottom: none;
@@ -59,9 +57,7 @@
             }
             .prodImg {
                 width: 29%;
-                min-height: 195px;
                 display: inline-block;
-                border-right: 1px solid $borderLight;
             }
             .prodDetails {
                 width: 71%;
@@ -69,13 +65,8 @@
                 vertical-align: top;
                 padding: 0 $base*1.5;
                 position: relative;
-                .prodTitle {
-                    font-size: $base*2;
-                    margin: $base*1.5 0 0;
-                }
                 .subTitle {
                     color: $greyLight;
-                    font-size: $base*1.37;
                     margin-bottom: $base*1.5;
                 }
                 .qytLabel {
@@ -155,13 +146,10 @@
                 
             }
             .promoCode {
-                font-size: $base*2.25;
                 color: $black;
                 font-family: $font-bold;
-                margin: $base*2 0 0 0;
             }
             .promoDesc {
-                font-size: $base*1.75;
                 color: $battleshipGrey;
             }
             .applyPromo {
@@ -169,7 +157,6 @@
                 right: 0;
                 top: 0;
                 color: $cerulean;
-                font-size: $base*2;
             }
             .promoField {
                 .promoInput {
@@ -189,9 +176,7 @@
         }
         .title {
             text-align: left;
-            font-size: $base*2.25;
             font-family: $font-bold;
-            margin: $base*3.75 auto;
         }
         .summary {
             .val {
@@ -204,7 +189,6 @@
                 font-size: $base*1.5;
             }
             .emiInfo {
-                padding: 20px 0;
                 margin: 0;
                 border-top: 1px solid $darkAshGrey;
                 border-bottom: 1px solid $darkAshGrey;
@@ -217,7 +201,6 @@
                     margin: 0 $base*5 0;
                 }
                 .emiDetails {
-                    top: 20px;
                     right: 0;
                     position: absolute;
                 }
@@ -338,7 +321,119 @@
     }
 }
 
-@media (min-width: 320px) and (max-width: 767px){
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .cartDetails{
+            .cartHeadDetails{
+                .title{
+                    width: 60%;
+                }
+            }
+            .orderSummary {
+                .summary{
+                    .emiInfo{
+                        padding: 20px 0;
+                        .emiDetails {
+                            top: 20px;
+                        }
+                    }
+                }
+                .title{
+                    font-size: $base*2.25;
+                    margin: $base*3.75 auto;
+                }
+                .promotion{
+                    .promoCode{
+                        font-size: $base*2.25;
+                        margin: $base*2 0 0 0;
+                    }
+                    .promoDesc{
+                        font-size: $base*1.75;
+                    }
+                    .applyPromo{
+                        font-size: $base*2;
+                    }
+                    .promo{
+                        .viewAllPromo{
+                            width: 100px;
+                            text-decoration: underline;
+                            font-size: 12px;
+                            color: $cerulean;
+                            margin: auto;
+                            display: block;
+                        }
+                    }
+                }
+            }
+            .cartItem{
+                .prodList{
+                    min-height: 195px;
+                    .prodImg{
+                        min-height: 195px;
+                        border-right: 1px solid $borderLight;
+                    }
+                    .prodDetails{
+                        .prodTitle {
+                            font-size: $base*2;
+                            margin: $base*1.5 0 0;
+                        } 
+                        .subTitle {
+                            font-size: $base*1.37;
+                        }
+                     }
+                }
+            } 
+        } 
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
     .cartDetails {
         width: 100%;
         margin: 0 auto ;
@@ -350,22 +445,127 @@
         }
         .orderSummary {
             padding: $base*2;
-        }
-        .cartItem {
-            .prodDetails {
-                .delCartItem,
-                .moveItem {
-                    top: $base*2;
+            .summary{
+                .mob-emi-info{
+                    margin-bottom: 50px;
+                    font-size: 11px;
+                    padding: 12px 0;
+                }
+                .cartTotal, .orderDisc, .prodDisc, .shipping{
+                    font-size: 12px;
+                    line-height: 16px;
+                    font-family: $font-regular;
+                    .info, .val{
+                        font-family: $font-regular;
+                    }
+                }
+                .shipping{
+                    .shippingMsg{
+                        line-height: 20px;
+                    }
+                }
+                .emiInfo{
+                    padding: 14px 0;
+                    .emiDetails {
+                        top: 14px;
+                    }
                 }
             }
+            .title{
+                font-size: $base*1.75;
+                margin: $base*2.5 auto 16px auto;
+            }
+            .promotion{
+                .promoCode{
+                    font-size: $base*1.75;
+                    margin: $base*1.5 0 0 0;
+                }
+                .promoDesc{
+                    font-size: 11px;
+                    line-height: 16px;
+                }
+                .applyPromo{
+                    font-size: $base*1.75;
+                }
+            }
+            .checkout-btn-floater {
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                z-index: 911;
+                width: 100%;
+                .total-amount {
+                    background: #fff;
+                    min-height: 45px;
+                    text-align: center;
+                    font-family: $font-bold;
+                    font-size: 14px;
+                    padding-top: 4px;
+                    border-top: 1px solid #dfe0de;
+                    .total-amount-text {
+                        font-size: 10px;
+                        display: block;
+                        font-family: $font-medium;
+                        color:$greyishbrown;
+                    }
+                    .net-amount-box{
+                        float: left;
+                        margin-left: 40px;
+                        text-align: left;
+                    }
+                }
+                .total-amount, .proceed-btn {
+                    width: 50%;
+                    float: left;
+                }
+                .btn-blackbg {
+                    background: #000;
+                    padding: 14px 0;
+                    text-align: center;
+                    color: #fff;
+                    font-family: $font-medium;
+                    font-size: 12px;
+                }
+            }
+        }
+        .cartItem {
             .prodList {
                 border: none;
                 margin-bottom: $base*2;
                 background-color: $colorwhite;
+                padding:15px 0px 0px 0px;
+                .prodImg{
+                    padding: 0px 0px 0px 10px;
+                    img{
+                        border:1px solid $img-border;
+                    }
+                }
+                .prodDetails{
+                    padding-bottom: 15px;
+                    .prodTitle {
+                        font-size: $base*1.75;
+                        margin: 0px;
+                    } 
+                    .subTitle {
+                        font-size: 10px;
+                    }
+                    .delCartItem, .moveItem {
+                        top: 2px;
+                    }
+                    .delBy{
+                        margin: 0px;
+                        font-size: 9px;
+                        color: $battleshipGrey;
+                        font-family: $font-medium;
+                        line-height:normal;
+                    }
+                 }
                 .quantityPrice {
                     border-top: 1px solid $borderLight;
                     .qytList {
                         border: none;
+                        background: none;
+                        min-width:40px;
                     }
                     .cartQty,
                     .price {
@@ -373,6 +573,13 @@
                         display: inline-block;
                         text-align: center;
                         padding: $base;
+                        label{
+                            font-size: 10px;
+                            margin-right: 20px;
+                            font-weight: normal;
+                            font-family: $font-medium;
+                            color: $battleshipGrey;
+                        }
                     }
                     .price {
                         margin: 0;
@@ -402,20 +609,37 @@
             .title,
             .cartCount {
                 color: $colorwhite;
-                font-size: $base*2;
-            }
-            .title {
-                text-align: center;
-                padding: $base;
-                width: 50%;
-                position: fixed;
-                top: $base;
-                z-index: 2;
-                left: 50%;
-                transform: translateX(-50%);
+                font-size: $base*1.75;
+                font-family: $font-light;
             }
             .cartCount {
                 margin: 0;
+            }
+
+            .checkout-top-hedaer{
+                position: fixed;
+                top: 0px;
+                z-index: 4;
+                padding: 7px 15px;
+                width: 100%;
+                
+                .mob-header-logo{
+                    float: left;
+                    margin-top: 3px;
+                    position: fixed;
+                    left: 20px;
+                    z-index: 3;
+                }
+                .title{
+                    float: left;
+                    text-align: center;
+                    position: fixed;
+                    z-index: 1;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 7px;
+                    left: 0px;
+                }
             }
         }
     }
@@ -451,4 +675,24 @@
             }
         }
     }
-}
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

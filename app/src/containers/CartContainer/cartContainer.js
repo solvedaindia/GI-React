@@ -19,6 +19,7 @@ import MoveToWishList from '../../components/Cart/moveToWishList';
 import '../../../public/styles/cart/cartItem.scss';
 import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
+import MWebLogo from '../../components/SVGs/mWebLogo';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -47,8 +48,9 @@ class CartDetail extends React.Component {
           <div className='cartItem'>
             <div className='cartHeadDetails'>
                 {!isMobile() ? <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
-                </h2> : <h2 className='title'>Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span>
-                </h2> }
+                </h2> : <div className='checkout-top-hedaer'>
+                  <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
+                <h2 className='title'> Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span></h2></div> }
               <Pincode />
             </div>
             <ul className='cartItemList'>
@@ -138,16 +140,21 @@ class CartDetail extends React.Component {
                   <span className='val'>-₹{cartData.orderSummary.shippingCharges}</span>
                 </p>
               }
-              <p className='emiInfo'>
+              <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
                 <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
                 <TermsAndCondition />
               </p>
-              <p className='totalAmt'>
+              {!isMobile() ? <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
                 <span className='val'>₹{cartData.orderSummary.netAmount}</span>
                 <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
-              </p>
-              <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>
+              </p>:''}
+              {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
+              :
+              (<div class="checkout-btn-floater">
+                  <div class="total-amount"><div class="net-amount-box">₹{cartData.orderSummary.netAmount}<span class="total-amount-text">Total Amount</span></div></div>
+                  <div class="proceed-btn"><a class="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
+                </div>)}
             </div>
           </div>
         </section>
