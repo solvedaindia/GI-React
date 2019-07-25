@@ -107,6 +107,11 @@ class WelcomeForm extends Component {
     }
   }
 
+  copyPaste = e => {
+    e.preventDefault();
+  }
+
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -144,6 +149,7 @@ class WelcomeForm extends Component {
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
+          onPaste={this.copyPaste}
         />
        <span
             onClick={this.showHidePass}

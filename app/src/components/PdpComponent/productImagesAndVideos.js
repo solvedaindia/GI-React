@@ -33,7 +33,6 @@ class productImagesAndVideos extends React.Component {
     this.hideThumnailsOnFullScreen(
       fullscreenButton[0].classList.contains('active'),
     );
-    // this.resetImage();
   }
 
   async hideThumnailsOnFullScreen(isFullScreen) {
@@ -63,29 +62,39 @@ class productImagesAndVideos extends React.Component {
 
   /* render Videos */
   filterImagesAndVideos = (imagesAndVideos, screenType) => {
-    let imagePath;
+    let imagePath = '';
     this.images = [];
+    let imageArray = [];
+    if (imagesAndVideos.thumbnailImages.length >= imagesAndVideos.mainImages.length) {
+    	imageArray = imagesAndVideos.thumbnailImages;
+    } else {
+      	imageArray = imagesAndVideos.mainImages;
+	}
+	
+	imageArray.map((data, index) => {
+		let thumbnailPath = '';
+		if (screenType && imagesAndVideos.zoomImages[index]) {
+		  imagePath = imagesAndVideos.zoomImages[index].imagePath;
+		} else if(imagesAndVideos.mainImages[index]) {
+		  imagePath = imagesAndVideos.mainImages[index].imagePath;
+		}
+		
+		if (imagesAndVideos.thumbnailImages[index]) {
+			thumbnailPath = `${imagePrefix}${imagesAndVideos.thumbnailImages[index].imagePath}`;
+		}
 
-    imagesAndVideos.thumbnailImages.map((data, index) => {
-      if (screenType) {
-        imagePath = imagesAndVideos.zoomImages[index].imagePath;
-      } else {
-        imagePath = imagesAndVideos.mainImages[index].imagePath;
-      }
-      
-      const thumbnailPath = `${imagePrefix}${data.imagePath}`;
-        if (data.type === 'video') {
-          const videoUrl = `${imagePrefix}${data.videoPath}`;
-          this.images.push({
-            renderItem: this.renderVideoPlayer.bind(this),
-            thumbnail: thumbnailPath,
-            videourl: videoUrl,
-          });  
-        } else {
-          const fullImagePath = `${imagePrefix}${imagePath}`;
-          this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
-        }
-    });
+		if (data.type === 'video') {
+		const videoUrl = `${imagePrefix}${data.videoPath}`;
+			this.images.push({
+				renderItem: this.renderVideoPlayer.bind(this),
+				thumbnail: thumbnailPath,
+				videourl: videoUrl,
+			});  
+		} else {
+			const fullImagePath = `${imagePrefix}${imagePath}`;
+			this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
+		}
+	  });
   };
 
 
@@ -98,23 +107,6 @@ class productImagesAndVideos extends React.Component {
         </Player>
       </div>
     );
-  }
-
-  resetImage() { 
-    const slides = document.getElementsByClassName('image-gallery-slide');
-    console.log('slides',slides);
-    for (let i = 0; i < slides.length; i++) {
-      //alert(slides[i].classList.contains('center'));
-      //alert(slides[i].children[0].classList.contains('image-gallery-image'));
-      //&& slides[i].children[0].classList.contains('image-gallery-image')
-      //if (slides[i].classList.contains('center')
-      //) {
-        //console.log('datavalue', currWidth);
-        const currWidth = slides[i].children[0].children[0].clientWidth;
-        slides[i].children[0].children[0].style.width = `${currWidth + 0}px`;
-      //}
-    }
-
   }
 
   zoomin() {
