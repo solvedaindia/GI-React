@@ -127,6 +127,10 @@ class RegisterWithEmailMobile extends React.Component {
     return isValidate;
   }
 
+  copyPaste = e => {
+    e.preventDefault();
+  }
+
   /* Handle Submit */
   handleSubmit = e => {
     e.preventDefault();
@@ -284,6 +288,7 @@ class RegisterWithEmailMobile extends React.Component {
                       <div className="form-div clearfix">
                         <input
                           type={this.state.inputType}
+                          onPaste={this.copyPaste}
                           name="password"
                           id="password"
                           className="form-control"

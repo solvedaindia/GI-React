@@ -104,7 +104,8 @@ class SearchBar extends React.Component {
 	clearFields(e){         
 		var inputVal= document.getElementById("searchInput").value='';     
 		var crossbtn = document.getElementById('clearField');
-		crossbtn.style.display='none' 
+    crossbtn.style.display='none'
+    document.getElementById("searchInput").focus();
 	}
 
 	showButton(e){ 
