@@ -51,6 +51,7 @@ import WardrobesContainer from '../wardrobesContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../TermsConditions/index';
+import CookiePolicy from '../CookiePolicy/index';
 
 
 
@@ -199,22 +200,22 @@ export default class App extends React.Component {
           <Route path="/wishlist" component={MyWishlist} />
           <Route path="/myAccount" component={MyAccount} />
           <Route path="/checkout" component={CheckoutContainer} />
-          <Route path="/inspiration" component={Inspiration} />
-          <Route path="/kitchens" component={Kitchens} />
           <Route path="/guestTrackOrder" component={GuestTrackOrder} />
           <Route path="/search" component={PlpContainer} />
           <Route path="/order/confirm/:orderId" component={OrderConformtion} />
           <Route path="/cart" component={CartDetail} />
+          <Route path="/storelocator" component={StoreLocator} />
+          <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
+          <Route path="/termsconditions" component={TermsConditions} />
+          <Route path="/cookie" component={CookiePolicy} />
+          <Route path="/inspiration" component={Inspiration} />
+          <Route path="/kitchens" component={Kitchens} />
+          <Route path="/kitchen2" component={SteelChefKitchen} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy_policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
-          <Route path="/kitchen2" component={SteelChefKitchen} />
-          <Route path="/storelocator" component={StoreLocator} />
-          <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
-          <Route path="/termsconditions" component={TermsConditions} />
-
         </Switch>
         <FooterContainer />
       </div>
