@@ -100,11 +100,16 @@ class CartDetail extends React.Component {
           </div>
           <div className='orderSummary'>
             <div className='promotion'>
-              <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
+            {!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
               {this.state.showReply && <PromoField
                 orderID={cartData.orderSummary.orderID}
                 getCartDetails={this.props.getCartDetails}
+              />}</>:
+              <PromoField
+                orderID={cartData.orderSummary.orderID}
+                getCartDetails={this.props.getCartDetails}
               />}
+
               <GetCartPromo
                 orderID={cartData.orderSummary.orderID}
                 getCartDetails={this.props.getCartDetails}
