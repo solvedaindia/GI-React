@@ -6,6 +6,7 @@ import {
     espotAPI,
 } from '../../../public/constants/constants';
 
+let catName;
 class CLPFullBanner extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class CLPFullBanner extends React.Component {
 
   getSliderData() {
     apiManager
-      .get(espotAPI+'GI_Clp_Sample_Hero_Banner')
+      .get(espotAPI+`GI_Clp_Hero_Banner_${catName}`)
       .then(response => {
         const {data} = response || {}
         this.setState({
@@ -38,6 +39,13 @@ class CLPFullBanner extends React.Component {
   }
 
   componentDidMount() {
+    const path = String(window.location.pathname);
+    const idStr = path.split('/')[1];
+    const categoryName = idStr.split('-')[1];
+    if (idStr != undefined && idStr !== catName) {
+      catName = categoryName;
+    }
+
     this.getSliderData();
   }
 
