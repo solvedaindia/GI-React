@@ -11,6 +11,7 @@ import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import OurPromises from '../../components/KitchensComp/OurPromises';
+import InterioText from '../../components/KitchensComp/InterioText';
 
 
 
@@ -207,34 +208,7 @@ index: 0
                   </div>
                 </div>
               </div>
-              <div className="modularKitches">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <h3 className="heading2">Interio Kitchens</h3>
-                      <p className="subText2">Godrej Interio is India’s largest furniture brand. From manufacturing the
-                        humble Storwel cupboard 80 years back to being a vibrant, innovative brand with a diverse
-                        portfolio – it’s been a brilliant, exciting journey for us.
-
-                        We love bringing alive your dream space. We emphasize comfort and aesthetics while delivering
-                        well designed, fun and functional furniture solutions to you.
-
-                        True to the Godrej mission to conserve the environment, we design products, set up processes and
-                        use raw materials that are eco-friendly to do our bit to preserve natural resources.
-
-                        We offer our customers home and office furniture, along with solutions for laboratories,
-                        hospitals and healthcare establishments, education and training institutes, shipyards and navy,
-                        auditoriums and stadiums. We are present across India through our 50 exclusive showrooms in 18
-                        cities and through 800 dealer outlets.
-
-                        Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group,
-                        one of India’s largest engineering and consumer product groups.</p>
-
-                      <button className="Read-More2">Read More</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             <InterioText/>
             </div>
         )
     }

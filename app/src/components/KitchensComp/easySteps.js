@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class OurPromises extends React.Component {
+class EasySteps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Homepage_Our_Promises",
+      espotName: "",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -34,7 +34,7 @@ class OurPromises extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
+        console.log('kitchen data');
       });
   }
 
@@ -47,7 +47,8 @@ class OurPromises extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div>
+			<div className="espotContent" id={index}>
+				<h1 className="title">{pageLayoutEspot.title}</h1>
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)
@@ -55,4 +56,4 @@ class OurPromises extends React.Component {
   }
 }
 
-export default OurPromises;
+export default EasySteps;

@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class OurPromises extends React.Component {
+class Cookies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Homepage_Our_Promises",
+      espotName: "GI_Cookie_Policy_Static_Data",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -55,4 +55,4 @@ class OurPromises extends React.Component {
   }
 }
 
-export default OurPromises;
+export default Cookies;

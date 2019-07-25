@@ -6,6 +6,132 @@
   height: auto;
   background-color: #ffffff;
   
+.circle{
+    background: grey;
+    border-radius: 50px;
+    height: auto;
+    width: 40px;
+    margin: 20px;
+}
+
+.anas {
+    margin-top: 150px;
+
+}
+
+.h4 {
+    color: grey;
+}
+
+
+
+.background {
+    width: 100%;
+    height: 400px;
+}
+
+
+.link {
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+}
+
+.p {
+    color: white;
+    margin-left: 330px;
+    margin-right: 305px;
+    
+}
+
+#cat {
+    background-image: url("../../images/join-bg.png");
+    height: 370px;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+}
+.imgs {
+    // width: 195px;
+    height: 104px;
+    margin-left: -8px;
+}
+
+.heading {
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
+
+.main {
+    width:100%;
+}
+
+.padding {
+    padding-bottom: 20px;
+}
+
+.h3 {
+    padding-bottom: 20px;
+}
+#hr{
+    margin-right: 136px !important;
+}
+
+.border {
+    border-right: 3px solid black;
+}
+
+
+
+.color {
+    color: blue;
+}
+
+.button{
+    margin: 40px;
+    font-size: 30px;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 50px;
+    border: none;
+    background: white;
+}
+
+.jumbo {
+    background: rgb(241, 236, 236);
+    height: 300px;
+    width: 1000px;
+    padding-left: 40px;
+    padding-right: 60px;
+}
+.crousar {
+    width: 172px;
+    height: 205px;
+    margin-top: 50px;
+    margin-left: 70px;
+    border-radius: 40px;
+    background: rgb(110, 179, 8)
+}
+
+.crousal {
+    padding-top: 70px;
+}
+
+.crousarp {
+    width: 190px;
+    color: white;
+    font-size: 10px;
+}
+
+.crousarh{
+    color: white;
+    text-decoration-line: underline;
+}
+
+.top{
+    padding-top: 70px;
+}
+  
   .abouts-Us {
     // width: 129px;
     height: 36px;
@@ -544,3 +670,4 @@
   }
  
 }
+
