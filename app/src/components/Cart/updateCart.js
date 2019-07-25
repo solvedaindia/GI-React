@@ -8,6 +8,7 @@ class CartUpdate extends React.Component {
     this.state = {
       quantity: props.quantity,
       orderItemId: props.orderItemId,
+      size: 1
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -52,11 +53,13 @@ class CartUpdate extends React.Component {
           className="qytList"
           value={this.state.quantity}
           onChange={this.handleChange}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          size={this.state.size} onFocus={()=>{this.setState({size: 5})}}
+          >
+          {[...Array(100)].map((e, key) => {
+            if (key > 0) {
+              return <option key={key} value={key}>{key}</option>;
+            }
+          })}
         </select>
       </form>
     );

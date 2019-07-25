@@ -51,7 +51,7 @@ export class PlpContainer extends React.Component {
       marketingTextBannerData: null,
       plpDescriptionData: null,
       plpData: [],
-      adBannerData: [],
+      adBannerData: null,
       error: false,
       hasMore: true,
       isLoading: false,
@@ -203,7 +203,7 @@ export class PlpContainer extends React.Component {
       marketingTextBannerData: null,
       plpDescriptionData: null,
       plpData: [],
-      adBannerData: [],
+      adBannerData: null,
       error: false,
       hasMore: true,
       isLoading: false,
@@ -318,17 +318,18 @@ export class PlpContainer extends React.Component {
             }
           }
 
-          if (
-            this.state.isCatDetails &&
-            !this.state.isFromSearch.includes('/search')
-          ) {
-            this.fetchAdBannerData();
+          if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
+            
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
             this.setState({
               categoryDetail: response.data.data.categoryDetails,
               displaySkus: response.data.data.categoryDetails.displaySkus,
             });
+          }
+
+          if (this.state.isCatDetails) {
+            this.fetchAdBannerData();
           }
           console.log(
             'mixmatchh --- ',
@@ -479,10 +480,7 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-      if (
-        adBannerData.length != 0 ||
-        this.state.isFromSearch.includes('/search')
-      )
+      if (adBannerData)
         plpProducts = (
           <PlpComponent
             plpDataPro={this.state.plpData}

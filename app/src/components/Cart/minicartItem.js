@@ -14,12 +14,12 @@ class MinicartItem extends React.Component {
     let crossPriceItem;
 
     if (offerPrice < actualPrice) {
-      crossPriceItem = <span className="priceno-discount">{actualPrice}</span>;
+      crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
     }
 
     return (
       <p className="price">
-        <span className="discount-price">{offerPrice}</span>
+        <span className="discount-price">₹{offerPrice}</span>
         {crossPriceItem}{' '}
       </p>
     );
