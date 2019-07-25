@@ -80,13 +80,18 @@ class SearchBar extends React.Component {
   }
 
   onSearchResultClick(e) {
-    this.props.plpReduxStateReset();
-    const text = e.target.value;
-    console.log('dd -- ', this.props);
-    this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
-    this.setState({
-      searchData: [],
-    });
+    const text = e.target.value.trim();
+    if (text !== '') {
+      console.log('mmmmm --- ',e.target.value);
+      
+      this.props.plpReduxStateReset();
+      console.log('dd -- ', this.props);
+      this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+      this.setState({
+        searchData: [],
+      });
+    }
+    
   }
 
   onLinkNavigation = () => {

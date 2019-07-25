@@ -150,7 +150,7 @@ class ForgotPasswordEmailMobile extends React.Component {
           </FormGroup>
           <FormGroup>
             <p className="text text-emailotp">
-              An OTP will be sent to this email address{' '}
+            An OTP will be sent for validation{' '}
             </p>
           </FormGroup>
         </Form>
