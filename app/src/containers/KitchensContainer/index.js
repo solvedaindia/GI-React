@@ -12,6 +12,7 @@ import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import OurPromises from '../../components/KitchensComp/OurPromises';
 import InterioText from '../../components/KitchensComp/InterioText';
+import LayoutImage from '../../components/KitchensComp/layoutImage';
 
 
 
@@ -71,7 +72,7 @@ index: 0
                   <DreamKitchens />
                 </div>
               </div>
-              <div className="kichenLayoutbanner clearfix">
+              {/* <div className="kichenLayoutbanner clearfix">
                 <div className="textBox">
                   <h1 className="Image-gallery">10 space-saving kitchen layouts</h1>
                   <button className="btn-bookBlog">Read Our Block</button>
@@ -79,7 +80,8 @@ index: 0
                 <div className="imgBox">
                   <img className="kichenBlog" src={require('../../../public/images/mask@3x.png')} alt="rectangle" />
                 </div>
-              </div>
+              </div> */}
+              <LayoutImage/>
               <div className="whatgoesSlider">
                 <div className="container">
                   <WhatGoes />
@@ -109,7 +111,9 @@ index: 0
                 </div>
                 </div>
               </div>
+              <div className="ourprom">
               <OurPromises />
+              </div>
               <div className="frequesntly">
                 <div className="container">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h><br /><br />

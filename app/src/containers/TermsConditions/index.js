@@ -9,9 +9,7 @@ export class TermsConditions extends React.Component {
     super(props);
 
     this.state = {
-		// clpData: {},
-		// isLoading: false,
-		// error: null,
+		
     };
   }
 

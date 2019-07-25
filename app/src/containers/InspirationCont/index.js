@@ -8,6 +8,7 @@ import ReadMore from '../../components/GlobalComponents/readMore';
 import  '../../../public/styles/Inspiration/inspiration.scss'
 import InsCrousel from '../../components/Primitives/crousel'
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner'
+import SummerData from '../../components/InspirationComp/InspEspot';
 
 
 export class Inspiration extends React.Component {
@@ -36,66 +37,7 @@ export class Inspiration extends React.Component {
         <div className="lookcrouse">
           <InsCrousel />
         </div>
-        <div className="summersparkcontainer">
-          <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm1.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm2.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm1.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm2.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm1.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm2.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm1.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-            <div className="col-md-6">
-              <img  className="RectImg" src={require('../../../public/images/sm2.jpg')} alt="rectangle" />
-              <h4 className="Summer-Spark">Summer Spark</h4>
-              <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna,
-                ullamcorper sit amet arcu sed, viverra malesuada mi. Nam rutrum vulputate lectus vel tincidunt. </p>
-            </div>
-          </div>
-          </div>
-          </div>
+<SummerData/>
           <div className="uuscontainer">
           <div className="container">
             <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')}

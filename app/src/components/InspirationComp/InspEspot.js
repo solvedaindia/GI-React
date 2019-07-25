@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class EasySteps extends React.Component {
+class SummerData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "",
+      espotName: "GI_INSPIRATION_SUMMER",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -47,13 +47,12 @@ class EasySteps extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className="espotContent" id={index}>
-				<h1 className="title">{pageLayoutEspot.title}</h1>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+			<div>
+		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );
   }
 }
 
-export default EasySteps;
+export default SummerData;
