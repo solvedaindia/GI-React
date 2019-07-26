@@ -1024,7 +1024,7 @@ export class Step2Component extends React.Component {
                            {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                          </div>
                       </div>
-                      {isMobile() ? <div className="col-md-12">
+                      {this.props.isLoggedIn && isMobile() ? <div className="col-md-12">
                      
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
