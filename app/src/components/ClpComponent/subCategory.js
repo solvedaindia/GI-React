@@ -55,7 +55,7 @@ export class SubCategory extends React.Component {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      centerMode: true,
+      centerMode: false,
       responsive: [
         {
           breakpoint: 1024,
