@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import { getReleventReduxState } from '../../utils/utilityManager';
@@ -56,10 +57,12 @@ class CartDetail extends React.Component {
             <ul className='cartItemList'>
               {cartData.cartItems.map((itemData, index) => (
                 <li className='prodList' key={`${index}-pro`}>
-                  <figure className='prodImg'>
+                <Link to={`/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
+				  <figure className='prodImg'>
                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
                   </figure>
-                  <div className='prodDetails'>
+				</Link>
+                <div className='prodDetails'>
                     <h3 className='prodTitle'>{itemData.productName}</h3>
                     <p className='subTitle'>({itemData.shortDescription})</p>
                     {!isMobile() && !itemData.freeGift &&
@@ -83,8 +86,8 @@ class CartDetail extends React.Component {
                     <p className='delBy'>DELIVERY BY:</p>
                     <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
                     {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
-                    {!isMobile() && <span className='shipping'>Shipping charge ₹300</span>}
-					</div>
+                    {!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
+				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&
 						<CartUpdate
