@@ -194,7 +194,7 @@ export default class App extends React.Component {
           <Route path="/check/payment/:orderId" component={paymentWait} />
           
         </Switch>
-        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' ? '' : <FooterContainer /> }
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount' ? '' : <FooterContainer /> }
       </div>
     );
   }
