@@ -343,7 +343,7 @@ export class Step1Component extends React.Component {
               </div></>: ''}
 
               {isMobile() ? (<div className='checkout-btn-floater'>
-                <div className='total-amount'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div>
+                <div className='total-amount'><div className='net-amount-box'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div></div>
                 <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed</button></div>
               </div>):''}
                

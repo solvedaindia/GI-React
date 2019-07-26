@@ -146,7 +146,12 @@
         .imgfullwidth{ width:100% }
     }
 }
-
+.notFound{
+    text-align: center;
+    font-family: $font-bold;    
+    padding: 40px 0;
+    font-size: 24px;
+}
 
 .galleryArea{
     padding:40px 0 0 0;
@@ -844,7 +849,6 @@
 .product_details{
     padding:87px 0 0px 0;
     margin-bottom: 30px;
-    border-bottom: 1px solid $lightblueGrey;
     position: relative;
     &::after{
         width:100%;
@@ -872,7 +876,6 @@
  }
  .product_description{
     padding: 40px 0;
-    border: 1px solid $lightblueGrey;
     border-bottom: none;
     min-height: 300px;
      .tab{       
@@ -915,7 +918,6 @@
 /* MoreKeyword
 -----------------------*/
 .moreKeyword{
-    padding:70px 0 0 0;
   .heading{
     color:$black;
     margin:0;
@@ -1475,8 +1477,10 @@
     @media screen and (min-width: 768px){
        
         .product_details{
-            padding:87px 0 0px 0;           
+            padding:87px 0 0px 0;
+            border-bottom: 1px solid $lightblueGrey;           
             .product_description{
+                border: 1px solid $lightblueGrey;
                 .tabcontent{
                     padding: 30px 49px;
                 }
@@ -1494,6 +1498,7 @@
                 font-size: 30px;
             }
             .keywordsList{
+                padding:70px 0 0 0;
                 .list{
                     min-width: 188px;
                 }
@@ -1659,12 +1664,14 @@
         position: relative;
         .product_description{
             .tabcontent{
-                padding: 30px 15px;
+                padding: 20px 0px;
+                margin:0px 15px;
             }
         } 
         .heading{
-            font-size: 18px;
+            font-size: 16px;
             padding:0 0 15px 0;
+            font-family: $font-bold;
         }
         .plusIcon{
             position: absolute;
@@ -1686,20 +1693,29 @@
         }
       &.active > .body{
         max-height: initial;
-      }  
+      } 
+      &:after{
+          display: none;
+      } 
     } 
     .moreKeyword{
         padding:10px 0 0 0;
-        .heading{
-            padding: 15px 0 20px 0;
-            font-size: 16px;
-        }
-        .keywordsList{
-            .list{
-                min-width:105px;
-                font-size: 11px;
+       
+            .heading{
+                padding: 10px 0 20px 0;
+                font-size: 16px;
+                font-family: $font-medium;
             }
-        } 
+            .keywordsList{
+                .list{
+                    min-width:105px;
+                    font-size: 11px;
+                    font-family: $font-medium;
+                }
+            } 
+            .keywordsList{
+                padding:10px 0 0 0;
+            }
     }
     .galleryArea{       
         .PdpFeatures{
@@ -1710,6 +1726,7 @@
                     .heading{
                         font-size: 16px;
                         padding:0 0 15px 0;
+                        font-family: $font-bold;
                     }
                     .plusIcon{
                         position: absolute;
@@ -1758,8 +1775,7 @@
                 position: fixed;
                 bottom: 0px;
                 width: 100%;
-                z-index: 911;
-                
+                z-index: 911;                
                 .addCart{
                     width: 45%;
                     float: left;
@@ -1770,17 +1786,24 @@
                 .accessories-offer{
                     float: left;
                     margin: 13px 5px 0px 20px;
+                    position:absolute;
                     .offerbg{
-                        width: 32px;
-                        height: 32px;
+                        width: 28px;
+                        height: 28px;
                         padding: 3px;
+                        font-size: 10px;
                     }
                 }
                 .price{
-                    min-height: 30px;
+                    min-height: 52px;
+                    padding-left:$base*8;
+                    display: flex;
+                    align-self:center;
+                    margin: 0px;
                     .offerprice{
                         font-size: $base*2;
                         line-height: $base*2;
+                        font-family: $font-bold;
                        h2{
                            margin:15px 0px 2px 5px;                       
                        } 
@@ -1859,6 +1882,7 @@
             .heading{
                 font-size: 16px;
                 padding:0 0 15px 0;
+                font-family: $font-bold;
             }
             .tab-nav-container{
                 ul{ 

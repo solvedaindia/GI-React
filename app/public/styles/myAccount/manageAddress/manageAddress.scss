@@ -16,7 +16,6 @@
     }
     .addressItem {
       border-radius: 2px;
-      border: solid 1px $lightblueGrey;
     
       .defaultAddress {
         font-family: $font-bold;      
@@ -104,6 +103,7 @@
             background-color: rgba(247, 248, 248, 0.5);
             padding:16px 10px;
             height: 162px;
+            border: solid 1px $lightblueGrey;
             .listitem{
               display: inline;
               font-size:  $base*1.5;
@@ -156,13 +156,22 @@
       .list{
         margin: 0px 0px 15px 0;
         .addressItem{
-          padding:16px 10px 40px 10px;
+          padding:16px 10px 25px 10px;
+          border: solid 1px $lightGrey;
           .setAsdefaultbtn{
             float: left;
             color: $ceruleanblue;
             text-decoration: underline;
             margin-bottom: 10px;
             width: 100%;
+            font-family: $font-medium;
+            font-size: 12px;
+          }
+        }
+        .addressItem {
+          .addressText{
+            font-family: $font-regular;
+            color: $battleshipGrey;
           }
         }
       }

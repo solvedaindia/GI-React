@@ -329,7 +329,7 @@ class AddAddressForm extends React.Component {
         </div>
         <div className='clearfix'></div>
 
-        <div className='col-md-12'>
+        <div className='col-md-12 add-new-btn'>
           <div className='actionBtnWrapper'>
             <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
             <button onClick={this.onSavebuttonClick.bind(this)} className='btn-save btn'>Save</button>

@@ -90,7 +90,7 @@ export class OrderSummaryComponent extends React.Component {
 
             {this.props.checkoutStep == 3 && isMobile() ? (
               <div className='checkout-btn-floater'>
-              <div className='total-amount'>&#8377;{this.props.orderData.netAmount} <span className='total-amount-text'>Total Amount</span></div>
+              <div className='total-amount'><div className='net-amount-box'>&#8377;{this.props.orderData.netAmount} <span className='total-amount-text'>Total Amount</span></div></div>
               <div className='proceed-btn'><button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>Pay</button></div>
               </div>
             ) : ''}

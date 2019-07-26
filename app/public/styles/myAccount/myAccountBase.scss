@@ -11,7 +11,6 @@
     }
     .form-group{ 
       position: relative;
-      padding: 17px 0 0 0;
       .form-label{
         color:$battleshipGrey;
         position: absolute;
@@ -23,7 +22,6 @@
       }
       .form-control{
         border-radius: 0;
-        height: 54px;
         border:1px solid $lightGrey;
         box-shadow: none;
         margin:5px 0 20px 0;
@@ -181,11 +179,13 @@
     padding:25px 25px 32px 25px;
     .form-div{
       .form-group{
+        padding: 17px 0 0 0;
         .form-label{
           font-size: $base*1.75;
         }
         .form-control{
           font-size:  $base*2;
+          height: 54px;
         }
       }
     }
@@ -234,20 +234,33 @@
     padding:0px 10px 32px 10px;
     .form-div{
       .form-group{
+        padding: 5px 0 0 0;
         .form-label{
-          margin: 14px 0px 0px 15px;
+          margin: 0px 0px 0px 15px;
           padding: 0px 7px;
           background: $colorwhite;
-          font-size: 11px;
+          font-size: 12px;
+          font-family: $font-regular;
+          font-weight: normal;
         }
         .form-control{
-          font-size: 14px;
+          font-size: 12px;
+          font-weight: normal;
+          height: 44px;
+          &:-ms-input-placeholder {
+            color: #000;
+            font-family: $font-regular;
+          }
+          &::-webkit-input-placeholder {
+            color: #000;
+            font-family: $font-regular;
+          }
         }
       }
     }
     .btn-cancel{
       border: 1px solid $black;
-      padding: 12px 0px;
+      padding: 8px 0px;
       background: $colorwhite;
       border-radius: 0px;
       min-width: 49%;
@@ -255,10 +268,13 @@
       max-width: 250px;
     } 
     .btn-apply{
-      padding: 12px 0px;
+      padding: 8px 0px;
       min-width: 49%;
       max-width: 250px;
-    } 
+    }
+    .noteMsg {
+      margin-top:10px;
+    }
   }
   .delete-modal{
     .modal-dialog{

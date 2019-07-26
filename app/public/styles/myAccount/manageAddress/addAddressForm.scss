@@ -12,8 +12,7 @@
   }
   .cancelBtn {    
     position: absolute;   
-    top: 28px;
-    right: 30px;   
+    top: 28px; 
     background: transparent;
     border: none;    
     display: inline-block;
@@ -47,8 +46,7 @@
     }
   }
 
-  .actionBtnWrapper {
-    padding: 39px 0 18px 0;    
+  .actionBtnWrapper {  
     .btn-cancel {
       border: solid 1px $black;
       background-color: $colorwhite;
@@ -133,9 +131,10 @@
     background-color: rgba(238, 237, 237, 0.09);
     padding: 21px 30px 21px 26px;
     .actionBtnWrapper {
-      .btn{
-        
-      }
+      padding: 39px 0 18px 0; 
+    }
+    .cancelBtn{
+      right: 30px;  
     }
   }
 }
@@ -159,22 +158,29 @@
 */
 @media screen and (max-width: 767px) {
   .manageAddressContainer{
-  .addAddressContainer {
-    width: 100%;
-    padding: 21px 0px 21px 0px;
-    .actionBtnWrapper {
-      .btn-cancel{
-        padding: 12px 0px;
-        margin: 0px;
+    .addAddressContainer {
+      width: 100%;
+      padding: 21px 0px 21px 0px;
+      .actionBtnWrapper {
+        padding: 15px 0 15px 0; 
+        .btn-cancel{
+          padding: 8px 0px;
+          margin: 0px;
+        }
+        .btn-save{
+          padding: 8px 0px;
+          width: 49%;
+          margin: 0px 0px 0px 2%;
+        }
       }
-      .btn-save{
-        padding: 12px 0px;
-        width: 49%;
-        margin: 0px 0px 0px 2%;
+      .cancelBtn{
+        right:5px;
+      }
+      .add-new-btn{
+        padding: 0px;
       }
     }
   }
-}
 }
 
 

@@ -8,7 +8,7 @@ const LightHeader = () => (
   <div className="lighHeader">
     <figure className="logo">
       <a href="/">
-        {!isMobile() ? <WhiteLogo width="171" height="33" /> : <MWebLogo width="24" height="24" /> }
+        {!isMobile() ? <WhiteLogo width="171" height="33" /> : '' }
       </a>
     </figure>
   </div>
