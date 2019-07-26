@@ -64,24 +64,24 @@ index: 0
                     <div className="col-md-12">
                       <div className="WardrowsBefits clearfix">
                         <div className="col-sm-3">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic1.png')}
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
                         </div>
                         <div className="col-sm-3">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic2.png')}
-                            alt="rectangle" />
-                          <h3 className="titlesss">modular</h3>
-
-                        </div>
-                        <div className="col-sm-3">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic3.png')}
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
 
                         </div>
                         <div className="col-sm-3">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic4.png')}
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
+                            alt="rectangle" />
+                          <h3 className="titlesss">modular</h3>
+
+                        </div>
+                        <div className="col-sm-3">
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
 
@@ -93,13 +93,13 @@ index: 0
                     <div className="col-md-12">
                       <div className="WardrowsBefits column2 clearfix">
                         <div className="col-sm-6">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic5.png')}
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
 
                         </div>
                         <div className="col-sm-6">
-                          <img className="Combined-Shape" src={require('../../../public/images/ic6.png')}
+                          <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
 
@@ -152,6 +152,7 @@ index: 0
                 </div>
               </div>
               <div className="frequesntly">
+                <div className="container">
                 <h className="Frequently-Asked-Que">Frequently asked questions</h>
                 <div className="panel-group" id="accordion">
                   <div className="panel panel-default">
@@ -233,6 +234,7 @@ index: 0
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
               <div className="container">
                 <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />

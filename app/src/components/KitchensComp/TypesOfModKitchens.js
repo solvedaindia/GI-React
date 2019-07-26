@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col,Grid } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom'
 
 import  '../../../public/styles/kitchens/kitchens.scss'
 
@@ -26,8 +26,11 @@ class TypesOFkitchens extends React.Component {
                 <img className="types-kitchens" src={require('../../../public/images/cup.png')} alt="rectangle" />
                 <h4 className="heading">Steel Chef</h4>
                 <div className="subText">Visit the store closest to you & Get a free design consultation for your dream
-                  kitchen from our expert designers</div>              
-                <div><button className="buttonExp">Explore</button></div>
+                  kitchen from our expert designers</div>    
+                  <Link to='/kitchen2'>
+                  <button className="buttonExp">Explore</button>
+                  </Link>          
+                
               </div>
             </div>
 

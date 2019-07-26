@@ -5,6 +5,9 @@
   width: 100%;
   height: auto;
   background-color: #ffffff;
+  .mediaPressSection{
+    padding: 80px 0 0 ;
+  }
   
 .circle{
     background: grey;
@@ -32,15 +35,21 @@
 
 
 .link {
+
+  padding: 25px 0 0 0;
     text-align: center;
-    margin-top: 100px;
+    // margin-top: 100px;
     color: white;
 }
 
 .p {
+  // width:475px;
     color: white;
-    margin-left: 330px;
-    margin-right: 305px;
+    font-size: 18px;
+padding:19px 0 0 0;
+    // margin-left: 330px;
+    // margin-right: 305px;
+    text-align: center;
     
 }
 
@@ -54,13 +63,13 @@
 .imgs {
     // width: 195px;
     height: 104px;
-    margin-left: -8px;
+    // margin-left: -8px;
 }
 
-.heading {
-    margin-bottom: 40px;
-    padding-left: 20px;
-}
+// .heading {
+//     margin-bottom: 40px;
+//     padding-left: 20px;
+// }
 
 .main {
     width:100%;

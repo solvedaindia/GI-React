@@ -9,7 +9,7 @@ import  '../../../public/styles/Inspiration/inspiration.scss'
 import InsCrousel from '../../components/Primitives/crousel'
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner'
 import SummerData from '../../components/InspirationComp/InspEspot';
-
+import { Link } from 'react-router-dom'
 
 export class Inspiration extends React.Component {
   constructor(props) {

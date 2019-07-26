@@ -176,7 +176,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="number">Mobile Number</label>
-                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="mobileNumber" name="mobileNumber" required/>
+                      <input className="form-control"  onChange={this.handleChange} value={mobileNumber} id="mobileNumber" type="number" name="mobileNumber" required/>
                     </div>
                   </div>
                 </div>

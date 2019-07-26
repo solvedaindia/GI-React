@@ -17,7 +17,7 @@
         margin:0 auto;
       }
       .titlesss {
-        font-family: $font-regular;
+        font-family:CeraGIRegular,sans-serif;
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
@@ -36,9 +36,9 @@
         margin:0 auto;
       }
       .Benefits-of-Modular {
-        font-family: CeraGodrejInterio;
+        font-family: CeraGodrejInterio sans-serif;
         font-size: 30px;
-        font-weight: bold;
+        font-weight: 500;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
@@ -65,14 +65,14 @@
         .subText{
           font-size: 18px;
           color:#ffffff;
-          font-family: $font-regular;
+          font-family:CeraGIRegular,sans-serif;
           margin:0 0 28px 0;
         }
         .btn-book{
           padding:13px 56px;
           font-size: 14px;
           color:#070707;
-          font-family: $font-medium;
+          font-family:CeraGIMedium,sans-serif;
         }
       }
       .slick-dots{
@@ -122,12 +122,12 @@
         color:#000000;
         text-align: left;
         margin:0 0 23px 0;
-        font-family: $font-medium;
+        font-family:CeraGIMedium,sans-serif;
       }
       .subText{
         font-size: 14px;
         color:#767676;
-        font-family: $font-regular;
+        font-family:CeraGIRegular,sans-serif;
         text-align: left;
       }
       .Read-More{
@@ -137,7 +137,7 @@
         color:#000;
         font-size: 16px;
         text-decoration: underline;
-        font-family: $font-medium;
+        font-family:CeraGIMedium,sans-serif;
         margin:14px 0 0 0;
         &:focus{
           outline: none;
@@ -183,17 +183,7 @@
     text-align: center;
     color: #000000;
   }
-  // .Steel-Chef {
-  
-  //   font-family: CeraGodrejInterio;
-  //   font-size: 20px;
-  //   font-weight: 500;
-  //   font-style: normal;
-  //   font-stretch: normal;
-  //   line-height: normal;
-  //   letter-spacing: normal;
-  //   color: #000000;
-  // }
+
   .buttonExp {
     width: 166px;
     height: 46px;
@@ -488,7 +478,7 @@ react-slideshow-container {
          color:$battleshipGrey;
          display: block;
          font-size:14px;
-         font-family: $font-medium;
+         font-family:CeraGIMedium,sans-serif;
          text-align: left;
          font-weight: normal;
       }
@@ -541,28 +531,41 @@ react-slideshow-container {
 }
 
 .frequesntly {
+  padding: 80px 0 0 0;
   background-color:white;
-  margin-top: 50px;
-  
-  margin-left: 50px;
-}
-.Frequently-Asked-Que {
-  margin-left: 409px;
-  height: 36px;
-  font-family: CeraGodrejInterio;
-  font-size: 30px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
   text-align: center;
-  color: #000000;
+  .Frequently-Asked-Que {
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  
+  
+ 
+ 
+  .panel-body{
+    width:100%;
+    color: #000000
+  }
+    
+  
+ 
+ 
+  .panel-group{
+    padding: 26px 0 0 0;
+  }
 }
+
 
 .text-blocks {
   height: 261px;
-  width: 540px;
   position: absolute;
   top: 63%;
 left: 25%;
@@ -624,7 +627,7 @@ transform: translate(-50%, -50%);
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -654,7 +657,7 @@ transform: translate(-50%, -50%);
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -720,11 +723,10 @@ transform: translate(-50%, -50%);
     color:#4a4a4a
   }
   .Kitchen-Hall-Of-Fame {
-    // width: 297px;
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;

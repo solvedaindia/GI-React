@@ -1,6 +1,6 @@
 import React from 'react';
 import MediaPress from '../../components/aboutUs/mediaPress';
-
+import { Link } from 'react-router-dom';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/about-us/aboutUs.scss'
@@ -117,6 +117,7 @@ render() {
           </div>
         </div>
       </div>
+      <div className="mediaPressSection">
       <div className="container">
         <h3>Media/Press</h3>
         <h5>Latest News</h5>
@@ -131,7 +132,8 @@ render() {
             </div>
           </div>
           <div className="col-md-6">
-            <div className="row">
+          <Link to='/inspiration'>
+          <div className="row">
               <div className="col-md-4 padding"><img className="imgs" src={pic} /></div>
               <div className="col-md-8">
                 <p className="paragraph"><b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
@@ -140,6 +142,8 @@ render() {
                   <span> | by john jacobs</span></div>
               </div>
             </div>
+          </Link>
+           
             <div className="row">
               <div className="col-md-4 padding"><img className="imgs" src={image} /></div>
               <div className="col-md-8">
@@ -164,6 +168,7 @@ render() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
     );
