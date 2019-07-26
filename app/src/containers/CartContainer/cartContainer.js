@@ -84,9 +84,9 @@ class CartDetail extends React.Component {
                         getCartDetails={this.props.getCartDetails}
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
-                    <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
+                    <span className='date'>{itemData.deliveryDate}</span>
                     {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
-                    {!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
+					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
 				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&
