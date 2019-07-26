@@ -362,6 +362,7 @@
                         padding: 20px 0;
                         .emiDetails {
                             top: 20px;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -379,6 +380,10 @@
                     }
                     .applyPromo{
                         font-size: $base*2;
+                        cursor: pointer;
+                    }
+                    .promoMsg{
+                        cursor: pointer;
                     }
                     .promo{
                         .viewAllPromo{
@@ -492,6 +497,19 @@
                 .applyPromo{
                     font-size: $base*1.75;
                 }
+                .promo{
+                    .viewAllPromo{
+                        width: 100px;
+                        text-decoration: underline;
+                        font-size: 12px;
+                        color: $cerulean;
+                        margin: 16px auto 10px auto;
+                        display: block;
+                        cursor: pointer;
+                        font-family: $font-medium;
+                        text-align: center;
+                    }
+                }
             }
             .checkout-btn-floater {
                 position: fixed;
@@ -557,6 +575,9 @@
                     .delCartItem, .moveItem {
                         top: 2px;
                         cursor: pointer;
+                    }
+                    .moveItem{
+                        right: 38px;
                     }
                     .delBy{
                         margin: 0px;

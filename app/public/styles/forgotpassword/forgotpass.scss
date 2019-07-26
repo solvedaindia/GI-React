@@ -9,7 +9,6 @@
   .modal-content{
 
   .modal-wrapper {
-    padding:32px 0;
     .form-center {
       .form-group{
         margin:0;
@@ -138,4 +137,156 @@
     left: 0%;
     opacity: 1;
   }
+}
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .modal-forgot{
+      .modal-dialog{
+        .modal-content{
+          .modal-body{
+            .modal-wrapper{
+              padding:32px 0;
+            }
+          } 
+        } 
+      } 
+      
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){
+  .modal-forgot{
+    .modal-dialog{
+      .modal-content{
+        .modal-body{
+          .modal-wrapper{
+            padding:25px 0px 0px 0px;
+            .btn-back{
+              position: initial;
+              margin-left: 20px;
+            }
+            .form-center{
+
+              &.forrgot-pass-box{
+                max-width: 100%;
+                .heading{
+                  padding-bottom: 10px;
+                  font-size: 14px;
+                  line-height: 18px;
+                   font-family: $font-medium;
+                   text-align: left;
+                   margin-left: 50px;
+                   margin-top: -19px;
+                }
+                .form-group{
+                  .label-default{
+                    position: absolute;
+                    top: 0px;
+                    z-index: 1;
+                    background: #fff;
+                    padding: 0px 8px;
+                    margin: -4px 0px 0px 13px;
+                    font-size: 11px;
+                    font-family: $font-regular;
+                    font-weight: normal;
+                    text-transform: capitalize;
+                  }
+                  .form-control{
+                    &::-webkit-input-placeholder{
+                      color: $black;
+                      font-size: 12px;
+                    }
+                  }
+                  .text-emailotp{
+                    font-size: 11px;
+                    font-family: $font-regular;
+                    color: $black;
+                  }
+                }
+                .modalmin-height{
+                  padding: 25px 20px 0px 20px;
+                  border-top:1px solid $lightblueGrey;
+                  margin-top: 15px;
+                }
+                .btn-block{
+                  margin-bottom: 0px;
+                }
+              }
+            }
+          }
+        } 
+      } 
+    } 
+    
+    &.in{
+      bottom: 0px;
+      top: initial;
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) { 
+    //CSS
 }
