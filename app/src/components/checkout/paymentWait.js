@@ -30,13 +30,13 @@ export default class PaymentWait extends React.Component {
       }).then((res) => {
         console.log(res, "checkout response");
           if(res.data.data.orderPlaced == true) {
-              window.location.assign(`http://localhost:5000/order/confirm/${orderId}`)
+              window.location.assign(`${window.location.origin}/order/confirm/${orderId}`)
               
           } else {
-            window.location.assign('http://localhost:5000/checkout?status=fail')
+            window.location.assign(`${window.location.origin}/checkout?status=fail`)
           }
       }).catch((err) => {
-        window.location.assign('http://localhost:5000/checkout?status=fail')
+        window.location.assign(`${window.location.origin}/checkout?status=fail`)
       })
   }
   
