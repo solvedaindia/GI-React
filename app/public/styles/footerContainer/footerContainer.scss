@@ -192,6 +192,13 @@
         padding: 0 0 15px 0;
         font-size: 34px;
       }
+      .newsletter_section{
+        .heading{
+          opacity: 1;
+          font-family: $font-medium;
+          font-size: $base*5;
+        } 
+      }
       .categories_section {
         padding-left: 40px;
       }
@@ -235,8 +242,14 @@
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  
-  //CSS
+   .footer{
+    .newsletter_section{
+      .heading{      
+        font-size: $base*4.125;
+      } 
+    }
+}
+
   
 }
 
