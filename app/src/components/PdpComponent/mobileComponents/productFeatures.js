@@ -32,6 +32,8 @@ class productFeatures extends React.Component {
   }
 
   render() {
+    let defaultImgPath;
+    let fullImagePath;
     const settings = {
       dots: false,
       infinite: false,
@@ -51,6 +53,9 @@ class productFeatures extends React.Component {
           }
         }
       ]
+    }
+    if (this.props.productFeatureData.productFeatures.length > 0) {
+      defaultImgPath = imagePrefix+this.props.productFeatureData.productFeatures[0].imagePath;
     }
     return (
       <>
@@ -74,7 +79,10 @@ class productFeatures extends React.Component {
               <Col md={12} sm={12} xs={12}>
                  <Slider {...settings}>
                    { this.props.productFeatureData.productFeatures.map((data, index) => {                    
-                     const fullImagePath = `${imagePrefix}${data.imagePath}`;
+                     fullImagePath = `${imagePrefix}${data.imagePath}`;
+                     if(data.imagePath === "") {
+                        fullImagePath = defaultImgPath;
+                     }
                       return(
                       <div className="featureResponsiveview">
                         <div className="featureImgbox">

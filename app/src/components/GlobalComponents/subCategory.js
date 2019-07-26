@@ -86,7 +86,6 @@ export class SubCategory extends React.Component {
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
-              console.log('dskfsff --- ', subCatListData);
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
                 <figure className="subCatSlider">
