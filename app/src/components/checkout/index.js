@@ -19,6 +19,7 @@ import apiManager from '../../utils/apiManager';
 import failPop from './failPop'
 import { Redirect } from 'react-router-dom';
 import {isMobile} from '../../utils/utilityManager';
+import MWebLogo from '../../components/SVGs/mWebLogo';
 
 import {
   storeId,
@@ -382,7 +383,9 @@ export class CheckoutComponent extends React.Component {
       return (
         <div className='checkout'>
           {isMobile() && <div className='mob-checkout-steps'>
-          <a onClick={this.handleBack} className="backBtn"><img src={require('../../../public/images/LeftArrowWhite.svg')} /></a> Checkout (Step {this.state.step}/3) 
+          <a onClick={this.handleBack} className="backBtn"><img src={require('../../../public/images/LeftArrowWhite.svg')} /></a> 
+          <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
+          <h2 className='title'> Checkout (Step {this.state.step}/3) </h2>
           </div>}
         <div className="container">
           <div className='row'>
