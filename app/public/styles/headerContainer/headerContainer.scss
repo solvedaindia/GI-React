@@ -30,16 +30,18 @@ header {
         background-color:$colorwhite;
         -webkit-transition: opacity 200ms, visibility 200ms;
         transition: opacity 200ms, visibility 200ms;
-        -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
-        -moz-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
+        -webkit-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        -moz-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
 
         .subCatList {
             padding: $base 0;
+            display: inline-block;    
+            width: 100%;
             .links {
                 font-size: $base*1.75;
-                color: $battleshipGrey;
-                font-family: $font-medium;
+                color: $black;
+                font-family: $font-regular;
                 &:hover {
                     color: $ceruleanblue;
                     text-decoration: none;
@@ -57,26 +59,18 @@ header {
     .catList, 
     .catLongList{
         left: -20px;
-        padding: $base*4 $base*2.5;
+        padding:$base*3 $base*4 $base*3;
         min-width: 146px;
         width: auto;
         z-index: 5;
         position: relative;
-        background-color: $colorwhite;
-        // transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        // -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
-        // -moz-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
-        // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.29);
-        // -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        // -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        // -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        background-color: $colorwhite;      
 
     }
 
     .catLongList {
         columns: 3;
-        column-gap: $base*2.5;
-        padding: $base*4;
+        column-gap: $base*2.5;        
         min-width: 480px;
     }
 }
