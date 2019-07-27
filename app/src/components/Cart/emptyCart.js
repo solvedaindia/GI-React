@@ -24,7 +24,7 @@ class EmptyCart extends React.Component {
             }
             <h2 className="shopHeadLine">There’s nothing in here</h2>
             <p className="info">You haven’t added any items to your yet </p>
-            <a className="btn shopBtn">Shop Now</a>
+            <a className="btn shopBtn" href='/'>Shop Now</a>
           </div>
         </div>
         {/* Right Side Info */}

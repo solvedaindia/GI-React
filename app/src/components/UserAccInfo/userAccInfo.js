@@ -217,7 +217,7 @@ class UserAccInfo extends React.Component {
     return (
       <li className="user icons">
         {userLogoItem}
-        <ul className="welcomeDropDown">
+        <ul className={`welcomeDropDown ${getCookie('isLoggedIn') === 'true' ? 'userLogin' : null}`}>
           {dropdownItem}
           {this.state.showLoginRegisterMain ? (
             <WelcomeBack

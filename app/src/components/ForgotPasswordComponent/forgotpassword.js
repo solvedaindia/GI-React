@@ -193,7 +193,7 @@ class Forgotpassowrd extends React.Component {
               >
                 {this.state.hideBackArrow ? null : LeftArrow}
               </Button>
-              <div className="form-center">{item}</div>
+              <div className="form-center forrgot-pass-box">{item}</div>
             </div>
           </Modal.Body>
         </Modal>
