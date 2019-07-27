@@ -312,7 +312,7 @@ class PdpComponent extends React.Component {
 			    <div className='pdpstickyItem clearfix'>				   
 					<div className="product" id="topdiv1" style={{opacity: '0'}}>
                        <div className='productId'>
-						 <span className='text'>Product ID:</span> 
+						 <span className='text'>Product ID: </span> 
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
