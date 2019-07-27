@@ -461,8 +461,13 @@
                         } 
                     } 
                 } 
-            } 
+            }
+            
         } 
+        &.modal-wrapperotp {
+            top:initial;
+            bottom: 0px;
+        }
     } 
   }
 
