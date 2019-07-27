@@ -55,7 +55,7 @@ class FooterLinkAccordian extends React.Component {
                     <ul>
                       {item.children.map((litem, i) => (
                         <li className="list" key={i}>
-                          <a className="link" href={litem.action}>
+                          <a className="link" href={'https://www.google.com/'}>
                             {litem.text}
                           </a>
                         </li>
