@@ -19,7 +19,6 @@ class Accordion extends React.Component {
     }
     if(e) {
       if (e.target.className !== 'plusIcon') {
-        console.log('msksss --- ',acc[0])
         document.getElementById(acc[0].className.split(' ')[0]).classList.add("active");
       }
       
