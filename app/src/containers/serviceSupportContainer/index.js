@@ -1,5 +1,5 @@
 import React from 'react';
-import  '../../../public/styles/about-us/aboutUs.scss'
+import  '../../../public/styles/static-pages/aboutUs.scss'
 import SearchLogo from '../../components/SVGs/search.js';
 import FaqAnswers from '../../components/HelpSupportComp/FaqAnswers'
 import  '../../../public/styles/static-pages/HelpSupport.scss'

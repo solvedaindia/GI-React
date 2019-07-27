@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/wardrobes/warobes.scss'
+import  '../../../public/styles/static-pages/warobes.scss'
 
 export default class WardrobeBanner extends Component {
   constructor(props) {

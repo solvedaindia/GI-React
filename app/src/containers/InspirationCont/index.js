@@ -5,7 +5,7 @@ import LivingTheme from '../../components/ClpComponent/subComponents/livingInspi
 import SubCategory from '../../components/GlobalComponents/subCategory';
 import BestSeller from '../../components/BestSelling/bestSelling';
 import ReadMore from '../../components/GlobalComponents/readMore';
-import  '../../../public/styles/Inspiration/inspiration.scss'
+import  '../../../public/styles/static-pages/inspiration.scss'
 import InsCrousel from '../../components/Primitives/crousel'
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner'
 import SummerData from '../../components/InspirationComp/InspEspot';

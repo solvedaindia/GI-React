@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/static-pages/kitchens.scss'
 const prevArrowImg = (
   <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
 );

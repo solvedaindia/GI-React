@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/about-us/aboutUs.scss'
+import  '../../../public/styles/static-pages/aboutUs.scss'
 export default class OurProcess extends Component {
   constructor(props) {
     super(props);

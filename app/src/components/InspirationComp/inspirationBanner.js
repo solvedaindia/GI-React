@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/Inspiration/inspiration.scss'
+import  '../../../public/styles/static-pages/inspiration.scss'
 export default class InspirationBanner extends Component {
   constructor(props) {
     super(props);

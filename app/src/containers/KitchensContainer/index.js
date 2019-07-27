@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/static-pages/kitchens.scss'
 import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'

@@ -3,7 +3,7 @@ import MediaPress from '../../components/aboutUs/mediaPress';
 import { Link } from 'react-router-dom';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
-import  '../../../public/styles/about-us/aboutUs.scss'
+import  '../../../public/styles/static-pages/aboutUs.scss'
 import OurProcess from '../../components/aboutUs/ourProcess';
 import apiManager from '../../utils/apiManager';
 import {

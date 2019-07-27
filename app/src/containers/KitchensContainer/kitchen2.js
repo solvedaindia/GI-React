@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import '../../../public/styles/wardrobes/warobes.scss'
+import '../../../public/styles/static-pages/warobes.scss'
+
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
@@ -48,7 +49,7 @@ componentDidMount(){
 render(){
 return (
 <div className="Kitchen-11">
-  <div className="container1">
+  <div className="container">
     <WardrobeBanner />
     <div className="text-blocks">
       <h4 className="bannerTexts">Steel Chef</h4>

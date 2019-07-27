@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col,Grid } from 'react-bootstrap';
 
 
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/static-pages/kitchens.scss'
 
 class DreamKitchens extends React.Component {
   constructor() {

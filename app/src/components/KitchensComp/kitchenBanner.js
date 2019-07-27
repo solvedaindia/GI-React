@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/static-pages/kitchens.scss'
 
 export default class KitchenBanner extends Component {
   constructor(props) {

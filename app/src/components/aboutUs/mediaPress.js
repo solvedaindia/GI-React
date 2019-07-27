@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from '../Search/search';
 import HeaderRight from '../HeaderRight/headerRight';
 
-import  '../../../public/styles/about-us/aboutUs.scss'
+import  '../../../public/styles/static-pages/aboutUs.scss'
 
 
 

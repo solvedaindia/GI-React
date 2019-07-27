@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 // import Form from 'react-bootstrap-form';
 import Input from '../Primitives/consultFormInput'
-import '../../../public/styles/wardrobes/warobes.scss'
+import '../../../public/styles/static-pages/warobes.scss'
 import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';

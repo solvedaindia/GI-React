@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  '../../../public/styles/Inspiration/inspiration.scss'
+import  '../../../public/styles/static-pages/inspiration.scss'
 import Lookbook from '../../components/LookbookComponent/lookbbook'
 import Recommended from '../../components/InspirationComp/recommended.js';
 

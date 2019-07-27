@@ -457,7 +457,6 @@ react-slideshow-container {
   transform: translate(-50%, -50%);
 }
 .Form-bakground{
-  // width: 944px;
   height: 600px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
   background-color: #ffffff;
@@ -468,10 +467,9 @@ react-slideshow-container {
   transform: translate(-50%, -50%);
 }
 .reactang {
-  // width: 1px;
   height: 810px;
-  margin-top: 50px;
-  margin-right: 50px;
+  // margin-top: 50px;
+  // margin-right: 50px;
 }
 .Book-a-consultation {
   height: 36px;
@@ -690,6 +688,7 @@ background-color: rgba(255, 255, 255, .4);
      font-family: $font-regular;
      font-size: 16px;
      line-height: 16px;
+     text-align: center;
    }
   }
   .kitchenFaciliies{

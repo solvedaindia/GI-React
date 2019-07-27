@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col,Grid } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
-import  '../../../public/styles/kitchens/kitchens.scss'
+import  '../../../public/styles/static-pages/kitchens.scss'
 
 class TypesOFkitchens extends React.Component {
   constructor() {

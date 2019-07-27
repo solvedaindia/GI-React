@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import  '../../../public/styles/wardrobes/warobes.scss'
+import  '../../../public/styles/static-pages/warobes.scss'
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
