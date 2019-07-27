@@ -10,14 +10,21 @@ class newsletter extends React.Component {
     super(props);
     this.state = {
       inputText: '',
+      successFailItem: null,
     };
   }
 
   submitNewsLetter() {
-    if (
-      !validateEmptyObject(this.state.inputText) ||
-      !regexEmail.test(this.state.inputText)
-    ) {
+    if (!validateEmptyObject(this.state.inputText)) {
+      this.setState({
+        successFailItem: this.successFailMessageItem('Fail', 'This field is required')
+      });
+      return;
+    }
+    if (!regexEmail.test(this.state.inputText)) {
+      this.setState({
+        successFailItem: this.successFailMessageItem('Fail', 'Invalid Email address')
+      });
       return;
     }
 
@@ -28,12 +35,37 @@ class newsletter extends React.Component {
       .post(newsletterAPI, data)
       .then(response => {
         const data = response.data;
-        this.setState({ inputText: '' });
-        alert(`Thanks for Subscribing`);
+        this.setState({
+          inputText: '',
+          successFailItem: this.successFailMessageItem('Success')
+        });
       })
       .catch(error => {
-        console.log('newsError---', error);
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        this.setState({
+          successFailItem: this.successFailMessageItem('Fail', errorMessage)
+        });
       });
+  }
+
+  successFailMessageItem(message, erroMsg) {
+    setTimeout(() => {
+      this.setState({
+        successFailItem: null,
+      });
+    }, 2500);
+    if (message === 'Success') {
+      return (
+        <div className='successMsg'>Thank you for subscribing!</div>
+      )
+    }
+    else {
+      return (
+        <div className='successMsg'>{erroMsg}</div>
+      )
+    }
+    
   }
 
   handleInputChange(text) {
@@ -83,12 +115,14 @@ class newsletter extends React.Component {
               </Button>
             </Form>
           </li>
+          {this.state.successFailItem}
         </ul>
         {this.props.isFromMobile ? null : (
           <ul className="social-Link clearfix">
             <Socialicon name={this.props.socialicon} />
           </ul>
         )}
+
       </Col>
     );
     return <>{newsletterHtml}</>;
