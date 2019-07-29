@@ -360,9 +360,18 @@
                 .summary{
                     .emiInfo{
                         padding: 20px 0;
+                        position: relative;
                         .emiDetails {
                             top: 20px;
                             cursor: pointer;
+                        }
+                        .btn-knowmore {
+                            position: absolute;
+                            right: 0;
+                            top: $base*2;
+                            background: transparent;
+                            border: none;
+                            color: $cerulean;
                         }
                     }
                 }
