@@ -16,25 +16,43 @@ class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headerRenderItem: this.defaultRender(),
+      isOnHome: false,
+      headerRenderItem: null,
     };
     this.headerCallback = this.headerCallback.bind(this);
     this.pageNavigationRender = this.pageNavigationRender.bind(this);
+    this.defaultRender = this.defaultRender.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('mixxx -- ',nextProps.isHeaderReset, this.props.isHeaderReset)
+    console.log('mixxx -- ', nextProps, this.props)
+
+    if (nextProps.location.pathname !== "/myAccount") {
+      this.state.isOnHome = nextProps.match.isExact ? true : false;
+      this.setState({
+        headerRenderItem: this.defaultRender()
+      })
+    }
+
     if (nextProps.isHeaderReset !== this.props.isHeaderReset) {
-      if(nextProps.isHeaderReset) {
+      if (nextProps.isHeaderReset) {
         this.headerCallback();
         this.props.resetRWDHeaderFlag();
       }
-      
+
     }
 
   }
 
+  componentDidMount() {
+    this.state.isOnHome = this.props.match.isExact ? true : false;
+    this.setState({
+      headerRenderItem: this.defaultRender()
+    })
+  }
+
   defaultRender() {
+    console.log('msmsms -- ', this.state.isOnHome);
     return (
       <Row>
         <Col xs={12} md={12} className='leftAnim'>
@@ -50,7 +68,7 @@ class HeaderMobile extends React.Component {
           <ul className="mob-mini-nav">
             <WishListCount />
             <CartCount />
-            <li className="searchIcon">
+            {!this.state.isOnHome ? <li className="searchIcon">
               <button
                 onClick={this.onSearchClick.bind(this)}
                 className="searchBtn"
@@ -59,21 +77,26 @@ class HeaderMobile extends React.Component {
                   src={require('../../../../public/images/RWD Assets/search.svg')}
                   alt="my image"
                   onClick={this.myfunction}
-                /> 
+                />
               </button>
             </li>
+              :
+              null}
+
           </ul>
-         
-          {/* <div className='mob-home-search'>
-            <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />    
-          </div> */}
+
+          {this.state.isOnHome ? <div className='mob-home-search'>
+            <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />
+          </div>
+            :
+            null}
 
         </Col>
       </Row>
     );
   }
 
-  pageNavigationRender = pageName => {
+  pageNavigationRender = (pageName) => {
     console.log('Page Render ---- ', pageName);
     let item = (
       <Row>
@@ -115,7 +138,6 @@ class HeaderMobile extends React.Component {
     });
     console.log('miii --- ', this.props);
     if (!this.props.match.isExact) {
-      
       this.props.history.goBack();
     }
   };
@@ -141,5 +163,5 @@ function mapStateToProps(state) {
 // export default connect(
 //   mapStateToProps,
 // )(HeaderMobile);
-export default withRouter(connect(mapStateToProps,{resetRWDHeaderFlag},)(HeaderMobile))
+export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag })(HeaderMobile))
 // export default withRouter(HeaderMobile);
