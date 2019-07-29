@@ -424,6 +424,9 @@
                                             text-decoration: underline;
                                         }
                                     }
+                                    .btn-bg{
+                                        line-height: 26px;
+                                    }
                                 }
                             }
                         }
@@ -458,8 +461,13 @@
                         } 
                     } 
                 } 
-            } 
+            }
+            
         } 
+        &.modal-wrapperotp {
+            top:initial;
+            bottom: 0px;
+        }
     } 
   }
 

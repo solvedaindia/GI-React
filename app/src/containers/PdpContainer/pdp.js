@@ -86,7 +86,14 @@ class PdpContainer extends React.Component {
 						historyData={this.props.history}
 					/>
 					) : (
-						<div><b>Data Not Found</b></div>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                <div className="notFound">Data Not Found</div>
+                </div>
+              </div>
+            </div>
+						
 					)
 				}
             </>

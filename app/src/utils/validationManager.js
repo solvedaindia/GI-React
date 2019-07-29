@@ -73,13 +73,36 @@ export function validateMobileNo(data) {
 }
 
 /** -----------------------------------------------------------------------
+ * Validate Mobile No with Optiona field
+ * @param {*} data
+ * Should be 10 characters and all numeric
+ */
+export function validateMobileNo_OPTIONAL(data) {
+    if (regexMobileNo.test(data)) {
+        return true;
+    }
+    return false;
+}
+
+/** -----------------------------------------------------------------------
  * Validate Email Id
  * @param {*} data
- * Should be 10 digit and all numeric
  */
 export function validateEmailId(data) {
     console.log('Validate Email- ---- ', data);
     if (regexEmail.test(data) || data === '' || data === undefined) {
+        return true;
+    }
+    return false;
+}
+
+/** -----------------------------------------------------------------------
+ * Validate Email Id
+ * @param {*} data
+ */
+export function validateEmailId_OPTIONAL(data) {
+    console.log('Validate Email- ---- ', data);
+    if (regexEmail.test(data)) {
         return true;
     }
     return false;

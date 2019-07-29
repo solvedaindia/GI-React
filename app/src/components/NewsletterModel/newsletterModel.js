@@ -64,7 +64,7 @@ class NewsletterModel extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Pleaes enter New Password',
+        errorMessage: 'This field is required',
       });
       return;
     }

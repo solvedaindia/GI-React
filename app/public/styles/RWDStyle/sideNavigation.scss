@@ -56,6 +56,7 @@
   input:checked + .handler + .overlay {
     opacity: 0.3;
     pointer-events: auto;
+    z-index: 2;
   }
   input:checked + .handler + .overlay + nav {
     transform: translateX(0);
@@ -111,8 +112,6 @@
     font-size: 12px;
     margin: 20px 20px 0px 0px;
     float: right;
-    background: none;
-    border: 1px solid $colorwhite;
   }
 
   .navTxt {
@@ -120,6 +119,7 @@
     font-size: 14px;
     font-family: $font-regular;
     color: $black;
+    font-weight: normal;
   }
 
   .arrow {

@@ -321,7 +321,7 @@ class RegisterWithEmailMobile extends React.Component {
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
                     >
-                      SIGN UP
+                      Sign Up
                     </Button>
                     <p className="have-account">
                       Have an account?{' '}

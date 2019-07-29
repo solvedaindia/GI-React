@@ -158,14 +158,26 @@
             display: none;
         }
         .bsDetails {
-          .discPrice{
-            font-size: $base*2;
-          }
-          .actualPrice{
-            font-size: $base*2;
-          }
+          .peiceDeatils{
+            line-height: 14px;
+            .discPrice{
+              font-size: $base*1.5;
+              font-family: $font-bold;
+              padding: 0px 8px;
+            }
+            .actualPrice{
+              font-size: $base*1.25;
+              color:$greylightColor;
+              font-family: $font-regular;
+              padding: 0px 8px;
+            }
+         }
           .prodtitle{
-            font-size: $base*2;
+            font-size: $base*1.5;
+            color: $black;
+            &:after{
+              top:18px;
+            }
           }
         }
     }

@@ -312,7 +312,7 @@ class PdpComponent extends React.Component {
 			    <div className='pdpstickyItem clearfix'>				   
 					<div className="product" id="topdiv1" style={{opacity: '0'}}>
                        <div className='productId'>
-						 <span className='text'>Product ID:</span> 
+						 <span className='text'>Product ID: </span> 
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
@@ -349,7 +349,7 @@ class PdpComponent extends React.Component {
         {!isLoading ? (
           <>            
             <Row className="no-margin">
-              <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
+              <Col className="no-paddingLeft img-gallery-box" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
                   <Productimageandvideo
                     skuData={this.state.skuData}
@@ -471,24 +471,18 @@ class PdpComponent extends React.Component {
           <Row>
             <Col md={12} sm={12} xs={12}>
               {!isMobile() ? (
-				  <>
-				  { this.props.data.type === 'product' ? (
-					<ProductDetail productDetail={this.props.data} />
-				  ) : (
-				  	<>{ !isLoading && this.props.data.type === 'kit' && <ProductDetail productDetail={this.state.skuData}/>}</>
-				  )}
-				  </>
-                  
-                ) : (
-					<>
-					{this.props.data.type === 'product' ? (
-						<MobileProductDetail productDetail={this.props.data} />
-					  ) : (
-						<>{ !isLoading && this.props.data.type === 'kit' && <MobileProductDetail productDetail={this.state.skuData}/>}</>
-					  )
-					}
-					</>
-                )
+								<>
+									{ !isLoading && 
+										<ProductDetail productDetail={this.state.skuData} />
+									}
+								</>
+              ) : (
+							<>
+								{!isLoading && 
+									<MobileProductDetail productDetail={this.state.skuData} />
+								}
+							</>
+            	)
               }
             </Col>
           </Row>
