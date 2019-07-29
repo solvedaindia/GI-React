@@ -349,7 +349,7 @@ class PdpComponent extends React.Component {
         {!isLoading ? (
           <>            
             <Row className="no-margin">
-              <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
+              <Col className="no-paddingLeft img-gallery-box" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
                   <Productimageandvideo
                     skuData={this.state.skuData}
