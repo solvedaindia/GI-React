@@ -2,7 +2,7 @@ import React from 'React';
 import { cartDetailAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import EmptyCart from './emptyCart';
-import Pincode from './pincode';
+import appCookie from '../../utils/cookie';
 import '../../../public/styles/cart/cartItem.scss';
 
 class CartItem extends React.Component {
@@ -16,7 +16,7 @@ class CartItem extends React.Component {
     }
     getCartData() {
         apiManager
-        .get(cartDetailAPI, { 'headers': { 'pincode': '400610' } })
+        .get(cartDetailAPI, { 'headers': { 'pincode': appCookie.get('pincode') } })
         .then(response => {
             this.setState({
                 cartData: response.data.data,
