@@ -494,7 +494,7 @@
             margin: 16px 0 0 0;
             .PincodeTextdata{
                 padding: 11px 19px;
-                display: flex;
+                /*display: flex;*/
                 .pincodeVal,.pincodeEdit{
                     display: block;
                     
@@ -502,11 +502,11 @@
                 .mapflag{
                     float: left;
                     width:18px;
-                    margin:0 14px 0 0;
+                    margin:4px 14px 0 0;
                     }
                 .pincodeVal{
                     float:left;
-                    width: 70%;
+                    width: 61%;
                     border: none;
                     color:$black;
                     font-size: 18px;
