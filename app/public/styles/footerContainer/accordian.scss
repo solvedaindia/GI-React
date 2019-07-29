@@ -82,9 +82,14 @@
     
   }
 
-  .activeOver {
-      max-height: initial;
+  .footerMobile{
+    .footerlink_wrpper{
+      .activeOver {
+        max-height: initial;
+      }
     }
+  }
+
   
   .active > .body {
     padding: 0px 0px;
