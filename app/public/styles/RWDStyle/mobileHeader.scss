@@ -58,7 +58,26 @@
         opacity: 1;
       }
   }
-
+.mob-home-search{
+  position: absolute;
+  width: 100%;
+  margin-top: 50px;
+  background: #fff;
+  z-index: 1;
+  .searchBackBtn{
+    .menuBtn{
+      display: none;
+    }
+    .searchField{
+      width: 85%;
+    }
+  }
+  .searchBarHeader{
+    #autoSuggestDiv{
+      top:99px;
+    }
+  }
+}
   .mob-mini-nav{
     float: right;
     margin:8px 10px 0px 0px;
