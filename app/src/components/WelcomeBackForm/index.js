@@ -42,19 +42,19 @@ class WelcomeForm extends Component {
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
       });
       isValidate = false;
     } else if (!input.includes('@') && Number.isInteger(firstChar)) {
-      if (!regexMobileNo.test(obj.userId)) {
+      if ((!regexMobileNo.test(obj.userId)) || ((obj.userId.length) < 10) || ((obj.userId.length) > 10)) {
         this.setState({
-          errorMessage: 'Please enter valid Email Id/Mobile number',
+          errorMessageUserId: 'Please enter valid Email id/Mobile Number',
         });
         isValidate = false;
       }
     } else if (!regexEmail.test(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
       });
       isValidate = false;
     }

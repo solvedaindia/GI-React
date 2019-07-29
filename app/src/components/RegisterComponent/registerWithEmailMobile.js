@@ -21,6 +21,8 @@ import {
 } from './constants';
 import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
 import appCookie from '../../utils/cookie';
+import {isMobile} from '../../utils/utilityManager';
+import { LogoUrl } from './constants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -226,14 +228,17 @@ class RegisterWithEmailMobile extends React.Component {
       <div>
         <Row>
           <Col xs={12} md={5} className="no-padding">
-            <div className="Thumbnailbox">
+            {!isMobile () ? (<div className="Thumbnailbox">
               <img className="imgfullwidth" src={RegisterThumbnailImg} />
-            </div>
+            </div>):(<div className="reg-join-Us">
+              <img className="logo_width" src={LogoUrl} alt="logo" />
+              <h3 className="joinus-heading">Join us Now</h3>
+            </div>)}
           </Col>
 
           <Col xs={12} md={7}>
             <div className="form_register">
-              <h3 className="heading">{headerText}</h3>
+            {!isMobile () &&<h3 className="heading">{headerText}</h3>}
               <div>
                 <Form>
                   <FormGroup>
@@ -316,7 +321,7 @@ class RegisterWithEmailMobile extends React.Component {
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
                     >
-                      SIGN UP
+                      Sign Up
                     </Button>
                     <p className="have-account">
                       Have an account?{' '}

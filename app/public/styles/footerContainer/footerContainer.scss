@@ -5,20 +5,20 @@
   .rightPadding {
     padding-right: 7%;
   }
-   .logo_white {
+  .logo_white {
     padding: 0 15px 40px 15px;
     .logo_width {
       width: 250px;
     }
   }
   .newsletter_section {
-    
     .newsletterList {
       padding: 0 0 15px 0;
       li:first-child {
-        padding: 0 0 20px 0;
+        padding: 0 0 10px 0;
         font-style: italic;
         line-height: 0;
+        font-family: $font-regular;
       }
 
       .form-inline {
@@ -65,7 +65,7 @@
       padding: 0 10px 0 0;
     }
   }
-  
+
   .news_heading {
     opacity: 1;
     max-width: 78%;
@@ -104,7 +104,6 @@
       }
     }
   }
- 
 
   .categoriestext {
     margin: 0;
@@ -131,7 +130,7 @@
     width: 24px;
     height: 24px;
     display: block;
-    fill: #dcd9d9
+    fill: #dcd9d9;
   }
 
   .accor {
@@ -148,71 +147,72 @@
     background: transparent;
     padding: 0 20px;
     max-height: 0;
-    overflow: hidden;   
+    overflow: hidden;
   }
-  
 }
-
-
-
 
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
 @media (min-width: 1281px) {
-  
   //CSS
-  
 }
-
 
 /* 
   #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
 */
 @media (min-width: 1025px) and (max-width: 1280px) {
-  
   //CSS
-  
 }
 
-  /* 
+/* 
   #Global Screen Chhange for Screen max 768
   */
-  @media screen and (min-width: 768px){
-    .footer{
-      padding: 70px 0;
-      .footerlink_wrpper {
-        padding: 0 0 20px 0;
+@media screen and (min-width: 768px) {
+  .footer {
+    padding: 70px 0;
+    .footerlink_wrpper {
+      padding: 0 0 20px 0;
+    }
+    .newsletter_section{
+      .heading{
+        opacity: 1;
+        max-width: 100%;        
       }
-      .heading {
-        color: $colorwhite;
-        font-family: $font-bold;
-        opacity: 0.23;
-        margin: 0;
-        padding: 0 0 15px 0;
-        font-size: 34px;
-      }
-      .newsletter_section{
-        .heading{
-          opacity: 1;
-          font-family: $font-medium;
-          font-size: $base*5;
-        } 
-      }
-      .categories_section {
-        padding-left: 40px;
-      }
-      .newsletter_section {
-        padding-left: 40px;
-        .newsletterList{
-          .form-inline{
-            .btn-emailsubmit{
-              top:0px;
-            }
+    }
+    .heading {
+      color: $colorwhite;
+      font-family: $font-bold;
+      opacity: 0.23;
+      margin: 0;
+      padding: 0 0 15px 0;
+      font-size: 34px;
+    }
+    .categories_section {
+      padding-left: 40px;
+    }
+    .newsletter_section {
+      padding-left: 40px;
+      .newsletterList {
+        .form-inline {
+          .btn-emailsubmit {
+            top: 0px;
           }
         }
       }
-      .categoriestext {  
+    }
+    .categoriestext {
+      .link {
+        margin: 0 5px 13px 0;
+      }
+      &:last-child {
+        .link {
+          border-right: none;
+        }
+      }
+    }
+    .store_area {
+      .list {
         .link {
           margin: 0 5px 13px 0;
         }
@@ -222,55 +222,59 @@
           }
         }
       }
-      .store_area {
-        .list {
-            
-          .link {
-            margin: 0 5px 13px 0;
-          }
-          &:last-child {
-            .link {
-              border-right: none;
-            }
+    }
+  }
+}
+
+/* Screen 1200px Start*/
+@media screen and (min-width: 1200px) {
+  .footer {
+    .newsletter_section{
+      .heading{
+        opacity: 1;
+        max-width: 66%;
+        font-size: 40px;
+        line-height: 40px;
+        padding:0 0 33px 0;        
+      }
+      .newsletterList{
+        li:first-child {
+          padding: 0 0 45px 0;
+          .newsletter-heading{
+            margin:0;
           }
         }
       }
     }
   }
-
+}
+/* Screen 1200px Emd*/
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
 */
 @media (min-width: 768px) and (max-width: 1024px) {
-   .footer{
-    .newsletter_section{
-      .heading{      
-        font-size: $base*4.125;
-      } 
-    }
+  //CSS
 }
-
-  
-}
-
-
 
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
   //CSS
-  
 }
-
 
 /* 
   #Global Screen Chhange for Screen max 767
 */
-@media screen and (max-width: 767px){
-  .footer{
+@media screen and (max-width: 767px) {
+  .footer {
     padding: 25px 0;
+    .newsletter_section{
+      .newsletter-heading{       
+        font-size: 16px;     
+        margin: 0 0 12px 0;   
+      }
+    }
     .heading {
       color: $colorwhite;
       font-family: $font-bold;
@@ -286,31 +290,38 @@
       }
     }
     .newsletter_section {
-      .newsletterList{
-        .form-inline{
-          .btn-emailsubmit{
-            top:0px;
+      .newsletterList {
+        .form-inline {
+          .btn-emailsubmit {
+            top: 0px;
           }
         }
       }
-    } 
+
+      .successMsg {
+        color: #dbdbdb;
+        font-size: 11px;
+        font-weight: normal;
+        font-family: $font-regular;
+      }
+    }
     .active {
-       .body {
-      max-height: 600px;
-      margin-top: -10px;
-      .list {
-        color: $colorwhite;
-        line-height: 18px;
-        .link {
+      .body {
+        max-height: 600px;
+        margin-top: -10px;
+        .list {
           color: $colorwhite;
-          text-decoration: none;
-          font-size: 12px;
-          font-family: $font-regular;
+          line-height: 18px;
+          .link {
+            color: $colorwhite;
+            text-decoration: none;
+            font-size: 12px;
+            font-family: $font-regular;
+          }
         }
       }
-       }
-    } 
-    .categoriestext {  
+    }
+    .categoriestext {
       .link {
         margin: 0 5px 7px 0;
         font-family: $font-regular;
@@ -323,7 +334,6 @@
     }
     .store_area {
       .list {
-          
         .link {
           margin: 0 5px 7px 0;
           font-family: $font-regular;
@@ -338,22 +348,15 @@
   }
 }
 
-
 /* 
   #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
 */
 @media (min-width: 481px) and (max-width: 767px) {
-  
   //CSS
-  
 }
-
 
 /* 
   #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
 */
 @media (min-width: 320px) and (max-width: 480px) {
-  
-  
-  
 }
