@@ -86,7 +86,7 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="subCat">
-        <h1 className="title">Featured Category</h1>
+        {/* <h1 className="title">Featured Category</h1> */}
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
@@ -108,7 +108,7 @@ export class SubCategory extends React.Component {
                     <p className="starting">
                       Starting From 
                     <span className="startPrice">
-                        {subCatListData.startPrice}
+                      ₹{subCatListData.startPrice}
                       </span>
                     </p>
                   </figcaption>

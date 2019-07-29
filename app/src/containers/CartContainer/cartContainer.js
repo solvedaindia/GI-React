@@ -21,6 +21,7 @@ import '../../../public/styles/cart/cartItem.scss';
 import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import EmiInfo from '../../components/PdpComponent/emiInfo';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class CartDetail extends React.Component {
             <ul className='cartItemList'>
               {cartData.cartItems.map((itemData, index) => (
                 <li className='prodList' key={`${index}-pro`}>
-                <Link to={`/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
+                <Link to={`/pdp/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
 				  <figure className='prodImg'>
                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
                   </figure>
@@ -150,7 +151,8 @@ class CartDetail extends React.Component {
               }
               <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
                 <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
-                <TermsAndCondition />
+                {/* <TermsAndCondition netAmount={cartData.orderSummary.netAmount}/> */}
+				<EmiInfo price={cartData.orderSummary.netAmount}/>
               </p>
               {!isMobile() ? <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
