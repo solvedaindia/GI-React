@@ -13,16 +13,19 @@ class Accordion extends React.Component {
 
   _handleClick(e) {
     const acc = this._acc.children;
+    
     for (let i = 0; i < acc.length; i++) {
       const a = acc[i];
-      a.onclick = () => a.classList.toggle('active');
+      console.log('ac ccc --', a.children[1].classList);
+      a.onclick = () => a.classList.toggle('active'/*'activeOver'*/);
+      a.onclick = () => a.children[1].classList.toggle('activeOver');
     }
-    if(e) {
-      if (e.target.className !== 'plusIcon') {
-        document.getElementById(acc[0].className.split(' ')[0]).classList.add("active");
-      }
+    // if(e) {
+    //   if (e.target.className !== 'plusIcon') {
+    //     document.getElementById(acc[0].className.split(' ')[0]).classList.add("active");
+    //   }
       
-    }
+    // }
   }
 
   render() {
