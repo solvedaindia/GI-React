@@ -488,6 +488,14 @@
                     .emiDetails {
                         top: 14px;
                     }
+                    .btn-knowmore {
+                        position: absolute;
+                        right: 0;
+                        top: $base*1.5;
+                        background: transparent;
+                        border: none;
+                        color: $cerulean;
+                    }
                 }
             }
             .title{
