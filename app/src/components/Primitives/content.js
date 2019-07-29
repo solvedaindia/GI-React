@@ -51,7 +51,7 @@ class EspotContent extends React.Component {
 
 			<div className="espotContent" id={index}>
 				{isMobile() && (this.state.espotName === roomsEspotName) && 
-					(getCookie('isLoggedIn') === 'true') && <h2 className='mwebGreeting'>
+					(getCookie('isLoggedIn') !== 'true') && <h2 className='mwebGreeting'>
 						Hello Start Explore
 					</h2>
 				}
