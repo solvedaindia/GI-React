@@ -14,7 +14,6 @@ import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
 import EMILogo from '../../components/SVGs/emiIcon';
-import TermsAndCondition from '../../components/Cart/tnc';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
 import MoveToWishList from '../../components/Cart/moveToWishList';
 import '../../../public/styles/cart/cartItem.scss';

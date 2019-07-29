@@ -2,11 +2,11 @@ import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
   espotAPI,
-  storeId,
-  accessToken,
+  roomsEspotName
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 import '../../../public/styles/homePageStatic.scss';
+import {isMobile} from '../../utils/utilityManager';
 
 class EspotContent extends React.Component {
   constructor(props) {
@@ -47,7 +47,12 @@ class EspotContent extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
+
 			<div className="espotContent" id={index}>
+				{isMobile() && (this.state.espotName === roomsEspotName) && 
+				<h2 className='mwebGreeting'>
+					Hello Start Explore
+				</h2>}
 				<h1 className="title">{pageLayoutEspot.title}</h1>
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
