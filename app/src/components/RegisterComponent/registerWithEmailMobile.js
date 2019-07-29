@@ -281,6 +281,7 @@ class RegisterWithEmailMobile extends React.Component {
                             placeholder="Please Enter Mobile Number"
                             onChange={this.handleChange}
                             value={this.state.userId}
+                            maxlength="10"
                           />
                           {errorMessageUserId}
                         </div>
