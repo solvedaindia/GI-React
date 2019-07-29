@@ -79,6 +79,32 @@
     .emptyCartContainer {
         width: 100%;
         margin: 0 0 $base*7;
+        .checkout-top-hedaer {
+            position: fixed;
+            top: 0px;
+            z-index: 4;
+            padding: 7px 15px;
+            width: 100%;
+            .mob-header-logo {
+                float: left;
+                margin-top: 3px;
+                position: fixed;
+                left: 20px;
+                z-index: 3; 
+            }
+            .title {
+                float: left;
+                text-align: center;
+                position: fixed;
+                z-index: 1;
+                width: 100%;
+                text-align: center;
+                margin-top: 7px;
+                left: 0px;
+                color: $colorwhite; 
+            }
+            
+        }
         .mWebTitle {
             position: fixed;
             top: -$base*0.5;

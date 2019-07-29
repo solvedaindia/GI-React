@@ -59,10 +59,15 @@ class HeaderMobile extends React.Component {
                   src={require('../../../../public/images/RWD Assets/search.svg')}
                   alt="my image"
                   onClick={this.myfunction}
-                />
+                /> 
               </button>
             </li>
           </ul>
+         
+          {/* <div className='mob-home-search'>
+            <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />    
+          </div> */}
+
         </Col>
       </Row>
     );

@@ -56,6 +56,7 @@
   input:checked + .handler + .overlay {
     opacity: 0.3;
     pointer-events: auto;
+    z-index: 2;
   }
   input:checked + .handler + .overlay + nav {
     transform: translateX(0);
