@@ -1,4 +1,5 @@
 .clpBase{
+    
     .slick-prev {
         right: 60px;
     }
@@ -12,5 +13,19 @@
     .clpTheme {
         width: 83.33%;
         margin: 120px auto;
+        .content-childTheme {
+            width: 48%;
+            margin: 1%; 
+            display: inline-block;
+            position: relative;
+            .content-icons {
+                position: absolute;
+                cursor: pointer;
+            }
+        }
+        .img {
+            width: 100%;
+        }
+
     }
 }

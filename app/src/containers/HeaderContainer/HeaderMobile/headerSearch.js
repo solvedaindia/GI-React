@@ -11,6 +11,7 @@ export class HeaderSearch extends React.Component {
     this.state = {
       inputText: '',
       searchData: [],
+      isHomeSearch:false
     };
   }
 
