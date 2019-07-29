@@ -21,24 +21,17 @@ class DreamKitchens extends React.Component {
     return (
         <div className="container">
 
-        <div className="row">
-            <div className="col-md-3">
-            <i>
-            <img
-                      className="Delivery-Installation"
-                      src={require('../../../public/images/dm1.png')}
-                      alt="rectangle"
-                    />
-             </i>         
+        <div className="row progressBar">
+            <div className="col-md-3 imgBox">           
+              <img className="Delivery-Installation" src={require('../../../public/images/dm1.png')}
+              alt="rectangle"/>                
             </div>
-            <div className="col-md-3">
-            <img
-                      className="Delivery-Installation"
-                      src={require('../../../public/images/dm2.png')}
-                      alt="rectangle"
+            <div className="col-md-3 imgBox">
+            <img className="Delivery-Installation"  src={require('../../../public/images/dm2.png')}
+              alt="rectangle"
                     /> 
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 imgBox">
                     <i>
                     <img
                       className="Delivery-Installation"
@@ -49,7 +42,7 @@ class DreamKitchens extends React.Component {
            
 
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 imgBox">
                     <i>
             <img
                       className="Delivery-Installation"
@@ -62,26 +55,26 @@ class DreamKitchens extends React.Component {
                 <div className="stepwizard">
     <div className="stepwizard-row setup-panel">
       <div className="stepwizard-step">
-        <a href="#step-1" type="button" className="btn btn-primary btn-circle">1</a>
-        <p>Step 1</p>
-        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/><br/> kitchen from our expert designers <br /></p>
+        <a href="#step-1" type="button" className="stepCircle">1</a>
+       
+        <p className="ParagraphStepper">Visit the store closest to you & Get a<br/>kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
-        <a href="#step-2" type="button" className="btn btn-primary btn-circle" disabled="disabled">2</a>
-        <p>Step 2</p>
+        <a href="#step-2" type="button" className="stepCircle" disabled="disabled">2</a>
+       
         <p className="ParagraphStepper">Visit the store closest to you & Get a<br/>free design consultation for your dream<br/>kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
-        <a href="#step-3" type="button" className="btn btn-primary btn-circle" disabled="disabled">3</a>
-        <p>Step 3</p>
+        <a href="#step-3" type="button" className="stepCircle" disabled="disabled">3</a>
+       
         <p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
 
       </div>
       <div className="stepwizard-step">
-        <a href="#step-4" type="button" className="btn btn-primary btn-circle" disabled="disabled">4</a>
-        <p>Step 4</p>
+        <a href="#step-4" type="button" className="stepCircle" disabled="disabled">4</a>
+        
         <p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
 
       </div>

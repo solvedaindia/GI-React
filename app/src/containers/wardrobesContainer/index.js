@@ -42,6 +42,7 @@ index: 0
         }
       }
 
+
     render(){
         return (
             <div className="wardrobes1">
@@ -53,7 +54,9 @@ index: 0
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                       eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
                       the home you've always wanted</p>
-                    <button className="btn-book">Book A Consultation</button>
+                      <a  href= "#form_consult">
+                        <button className="btn-book">Book A Consultation</button></a>
+                   
                   </div>
                 </div>
               </div>
@@ -102,8 +105,7 @@ index: 0
                           <img className="Combined-Shape" src='https://192.168.0.57/imagestore/B2C/56101502SD00616/56101502SD00616_01_500x500.png'
                             alt="rectangle" />
                           <h3 className="titlesss">modular</h3>
-
-                   </div>
+ </div>
                       </div>
                     </div>
                   </div>
@@ -125,13 +127,11 @@ index: 0
                       adipisicing elit,<br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br />
                       enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br /> sit amet, consectetur
                       adipisicing elit.<br /> </p1>
-
-                    <ul className="moved">
+<ul className="moved">
                       <li className="Materials-and-Finish">Materials and Finishes</li><br />
                       <li className="Materials-and-Finish">Element</li><br />
                       <li className="Materials-and-Finish">Add-ones</li>
-
-                    </ul>
+ </ul>
                   </div>
                   <div className="col-md-6">
                     <WhatGoesward />
@@ -140,10 +140,10 @@ index: 0
                 </div>
               </div>
               <WardrobesHAll />
-              <div className="formwardrobeContainer">
+              <div id="form_consult" className="formwardrobeContainer">
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
-                <div className="Form-bakground">
+                <div  className="Form-bakground">
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>

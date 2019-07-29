@@ -483,74 +483,17 @@ react-slideshow-container {
   text-align: center;
   color: #000000;
 }
-.Answer {
-  // width: 534px;
-  height: 17px;
-  font-family: CeraGodrejInterio;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #767676;
-}
+
 .promises {
-  // width: 1440px;
   height: 421px;
   background-color: rgb(33, 33, 204);
   margin-top: 50px
 }
-// .Our-Promises {
-//   height: 67px;
-//   font-family: CeraGodrejInterio;
-//   font-size: 56px;
-//   font-weight: bold;
-//   font-style: normal;
-//   font-stretch: normal;
-//   line-height: normal;
-//   letter-spacing: normal;
-//   color: #f9f9f9;
-// }
-.our-promises{
-  padding: 40px 0;
-  background:$cerulean;
-  position: relative;
-  .heading {
-      font-weight: bold; 
-      font-size: 48px; 
-      padding-bottom: 30px;  
-      color:$colorwhite;    
-      margin-top: 0;
-   }
-  .Promise-boxtext {
-  .text{color:$colorwhite;}
-  .sub-heading{
-       color:$colorwhite;
-       font-size: 16px;
-       font-weight: bold;
-       text-transform: capitalize;   
-       margin: 10px 0;
-      }
-  }
 
-  .product-bg{
-      position: absolute; 
-      right: 0; 
-      width: 350px; 
-      top: -80px;
-      .imgfullwidth{ width:100% }
-  }
-}
+
 .frequesntly {
-  // width: 1240px;
-  // height: 621px;
-  background-color:white;
+ background-color:white;
 padding: 50px 0 0 0;
-  
-  // margin-left: 50px;
-}
 .Frequently-Asked-Que {
   height: 36px;
   font-family: CeraGodrejInterio;
@@ -563,6 +506,8 @@ padding: 50px 0 0 0;
   text-align: center;
   color: #000000;
 }
+}
+
 
 .text-block {
   position: absolute;
@@ -607,6 +552,7 @@ background-color: rgba(255, 255, 255, .4);
     .steelchefmodal{
       text-align: left;
       .types-kitchens {
+        width:100%;
         height: auto;
         object-fit: contain;
         
@@ -718,6 +664,37 @@ background-color: rgba(255, 255, 255, .4);
       text-align: center;
       color: #000000;
     }
+    .progressBar{
+      .imgBox{
+        text-align: center;
+      }
+      .stepwizard{
+        width:100%;
+        .stepwizard-row{
+          &:before{
+            width:74%;
+            left:13%;
+            border:1px dotted #d1d1d2;
+            height: 0;
+            background: transparent;
+          }
+          .stepwizard-step{
+            .stepCircle{
+              background: $cerulean;
+              color:$colorwhite;  
+              width: 30px;
+              height: 30px;
+              text-align: center;
+              padding: 6px 0;
+              font-size: 12px;
+              line-height: 1.428571429;
+              border-radius: 15px;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
   }
   .whatgoesSlider{
     padding: 50px 0 100px 0;
@@ -767,5 +744,7 @@ background-color: rgba(255, 255, 255, .4);
       }
     }
   }
+
+ 
 }
  

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../../public/styles/static-pages/warobes.scss'
+import '../../../public/styles/static-pages/kitchenChef.scss'
 
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
@@ -473,7 +473,7 @@ return (
 
       Godrej Interio is a business unit of Godrej & Boyce Mfg. Co. Ltd. - part of the Godrej Group, one of
       India’s largest engineering and consumer product groups.</p>
-    <br /><br /><br /><br /><br /><br /><br /><br />
+    
     <button className="Read-More">Read More</button>
   </div>
 </div>

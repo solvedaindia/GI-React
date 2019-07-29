@@ -13,7 +13,11 @@ import ConsultationForm from '../../components/Primitives/ConsultForm'
 import OurPromises from '../../components/KitchensComp/OurPromises';
 import InterioText from '../../components/KitchensComp/InterioText';
 import LayoutImage from '../../components/KitchensComp/layoutImage';
+import FaqEspot from '../../components/Primitives/faq.js';
+import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
+import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
 
+import {Link} from 'react-router-dom'
 
 
 export default class Kitchens extends React.Component {
@@ -61,15 +65,80 @@ index: 0
                   </div>
                 </div>
               </div>
-              <div className="typesofkitch">
-                <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
+              <KitchenTypesEspot/>
+                <EasystepsEspot/>
+              {/* <div className="typesofkitch"> */}
+                {/* <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
 
-                <TypesOFkitchens />
-              </div>
+                <TypesOFkitchens /> */}
+                
+              {/* </div> */}
               <div className="easySteps">
                 <div className="container">
                   <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
-                  <DreamKitchens />
+                  <div className="container">
+
+<div className="row progressBar">
+    <div className="col-md-3 imgBox">           
+      <img className="Delivery-Installation" src={require('../../../public/images/dm1.png')}
+      alt="rectangle"/>                
+    </div>
+    <div className="col-md-3 imgBox">
+    <img className="Delivery-Installation"  src={require('../../../public/images/dm2.png')}
+      alt="rectangle"
+            /> 
+        </div>
+        <div className="col-md-3 imgBox">
+            <i>
+            <img
+              className="Delivery-Installation"
+              src={require('../../../public/images/dm3.png')}
+              alt="rectangle"
+            /> 
+            </i>
+   
+
+        </div>
+        <div className="col-md-3 imgBox">
+            <i>
+    <img
+              className="Delivery-Installation"
+              src={require('../../../public/images/dm4.png')}
+              alt="rectangle"
+            /> 
+           </i>
+
+        </div>
+        <div className="stepwizard">
+<div className="stepwizard-row setup-panel">
+<div className="stepwizard-step">
+<a href="#step-1" type="button" className="stepCircle">1</a>
+
+<p className="ParagraphStepper">Visit the store closest to you & Get a<br/>kitchen from our expert designers <br /></p>
+
+</div>
+<div className="stepwizard-step">
+<a href="#step-2" type="button" className="stepCircle" disabled="disabled">2</a>
+
+<p className="ParagraphStepper">Visit the store closest to you & Get a<br/>free design consultation for your dream<br/>kitchen from our expert designers <br /></p>
+
+</div>
+<div className="stepwizard-step">
+<a href="#step-3" type="button" className="stepCircle" disabled="disabled">3</a>
+
+<p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
+
+</div>
+<div className="stepwizard-step">
+<a href="#step-4" type="button" className="stepCircle" disabled="disabled">4</a>
+
+<p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
                 </div>
               </div>
               {/* <div className="kichenLayoutbanner clearfix">
@@ -199,6 +268,7 @@ index: 0
                     </div>
                     </div>
               </div>
+              {/* <FaqEspot/> */}
               <div className="kitchenFaciliies">
                 <div className="container">
                   <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
