@@ -290,7 +290,7 @@ export class Step3Component extends React.Component {
                      <h4 className='heading-label'>{this.props.logonBy}</h4>                     
                   </div>   
 
-                  {!this.props.isLoggedIn ? <div className="action-button">
+                  {!this.props.isLoggedIn && !isMobile() ? <div className="action-button">
                      <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
                     </div>: ''}         
               </div>

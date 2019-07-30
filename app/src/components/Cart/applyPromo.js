@@ -35,7 +35,7 @@ class PromoField extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error,
+          error: error.response.data.error,
           isLoading: false,
         });
       });
@@ -55,7 +55,7 @@ class PromoField extends React.Component {
           Apply
         </button>
         {!!error && (
-          <div className="promoError">This promo code is not valid.</div>
+          <div className="promoError">{error.error_message || 'This promo code is invalid'}</div>
         )}
       </div>
     );

@@ -243,7 +243,7 @@ class RegisterWithEmailMobile extends React.Component {
                 <Form>
                   <FormGroup>
                     <div className="form-div clearfix">
-                      <Label>FULL NAME</Label>
+                      <Label>Full Name</Label>
                       <input
                         type="text"
                         name="name"
@@ -258,7 +258,7 @@ class RegisterWithEmailMobile extends React.Component {
                   <FormGroup>
                     {this.props.registrationType === registerWithEmail ? (
                       <div>
-                        <Label className="label">EMAIL ADDRESS</Label>
+                        <Label className="label">Email Address</Label>
                         <div className="form-div clearfix">
                           <input
                             type="email"

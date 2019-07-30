@@ -14,14 +14,15 @@ import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
 import EMILogo from '../../components/SVGs/emiIcon';
-import TermsAndCondition from '../../components/Cart/tnc';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
 import MoveToWishList from '../../components/Cart/moveToWishList';
 import '../../../public/styles/cart/cartItem.scss';
 import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import AppliedPromoCode from '../../components/Cart/appliedPromoCode';
 import EmiInfo from '../../components/PdpComponent/emiInfo';
+import ExpandIcon from '../../components/SVGs/expandArrow';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -53,7 +54,9 @@ class CartDetail extends React.Component {
                 </h2> : <div className='checkout-top-hedaer'>
                   <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
                 <h2 className='title'> Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span></h2></div> }
-              <Pincode />
+              	<Pincode
+			  		getCartDetails={this.props.getCartDetails}
+				/>
             </div>
             <ul className='cartItemList'>
               {cartData.cartItems.map((itemData, index) => (
@@ -104,20 +107,27 @@ class CartDetail extends React.Component {
           </div>
           <div className='orderSummary'>
             <div className='promotion'>
-            {!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
-              {this.state.showReply && <PromoField
-                orderID={cartData.orderSummary.orderID}
-                getCartDetails={this.props.getCartDetails}
-              />}</>:
-              <PromoField
-                orderID={cartData.orderSummary.orderID}
-                getCartDetails={this.props.getCartDetails}
-              />}
+				{	cartData.promotionCode && cartData.promotionCode.length ?
+					<AppliedPromoCode
+						promoCode = {cartData.promotionCode}
+						getCartDetails={this.props.getCartDetails}
+					/>
+					:
+					!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}
+					>Got a promo code? <ExpandIcon width={16} height={16}/></p>
+					{this.state.showReply && <PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>}</>:
+					<PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>}
 
-              <GetCartPromo
-                orderID={cartData.orderSummary.orderID}
-                getCartDetails={this.props.getCartDetails}
-              />
+					<GetCartPromo
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>
             </div>
             <h2 className='title'>Order Summary</h2>
             <div className='summary'>
