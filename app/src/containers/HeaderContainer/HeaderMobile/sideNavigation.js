@@ -133,14 +133,7 @@ export class HeaderMobile extends React.Component {
                   }
 
                   return (
-                    <Link
-                      to={{
-                        pathname: routePath,
-                        state: { categoryId: subCatData.uniqueID },
-                      }}
-                      className="links"
-                      onClick={this.onOverlayClick.bind(this)}
-                    >
+                    <Link to={{ pathname: routePath, state: { categoryId: subCatData.uniqueID }, }} className="links" onClick={this.onOverlayClick.bind(this)} >
                       <li
                         onClick={() => this.onSubcategoryClick()}
                         className="navTxt"
@@ -172,6 +165,7 @@ export class HeaderMobile extends React.Component {
 
   onOverlayClick() {
     console.log('On Overlay --- ', this.state.showNav);
+    this.onNavigationBackCick();
     this.setState({
       showNav: false,
     });

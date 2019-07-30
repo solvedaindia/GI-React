@@ -66,6 +66,10 @@ class wishListCount extends React.Component {
     this.getWishListCount();
   }
 
+  onLinkNavigation(pageText) {
+    this.props.pageNavigationRenderPro(pageText);
+  }
+
   render() {
     const token = appCookie.get('isLoggedIn');
     console.log('From Sishlit --- ', token);
@@ -78,7 +82,7 @@ class wishListCount extends React.Component {
       }
       console.log('Wihslist islog --', token);
       wishlistLogo = (
-        <Link to="/wishlist">
+        <Link to="/wishlist" onClick={() => this.onLinkNavigation('My Wishlist')}>
           <WishlistLogo />
         </Link>
       );
