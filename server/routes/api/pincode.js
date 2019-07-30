@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pincodeUtils = require('../../utils/pincodeutil');
 
+/* Get City and State Details */
 router.get('/city/:pincode', (req, res, next) => {
   pincodeUtils.getCityAndState(
     req.params.pincode,
@@ -19,6 +20,7 @@ router.get('/city/:pincode', (req, res, next) => {
   );
 });
 
+/* Set Pincode in Self Address */
 router.post('/updatedefault/:pincode', (req, res, next) => {
   pincodeUtils.setDefaultPincode(
     req.headers,
@@ -36,6 +38,7 @@ router.post('/updatedefault/:pincode', (req, res, next) => {
   );
 });
 
+/* Get Pincode Serviceability */
 router.get('/serviceable/:pincode', (req, res, next) => {
   pincodeUtils.getPincodeServiceability(
     req.headers,
@@ -53,6 +56,7 @@ router.get('/serviceable/:pincode', (req, res, next) => {
   );
 });
 
+/* Get Inventory Details */
 router.get('/findinventory/:pincode', (req, res, next) => {
   req.query.pincode = req.params.pincode;
   pincodeUtils.findInventory(req.headers, req.query, (err, result) => {

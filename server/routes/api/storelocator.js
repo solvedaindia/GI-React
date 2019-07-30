@@ -3,6 +3,9 @@ const router = express.Router();
 const url = require('url');
 const storeLocatorHandler = require('../../handlers/storelocatorhandler');
 
+/**
+ *  Get Stores by Location i.e CityName
+ */
 router.get('/bylocation', (req, res, next) => {
   storeLocatorHandler.storesByLocation(req, (err, result) => {
     if (err) {
@@ -16,6 +19,9 @@ router.get('/bylocation', (req, res, next) => {
   });
 });
 
+/**
+ *  Get Stores by Coordinates
+ */
 router.get('/bycoordinates', (req, res, next) => {
   const reqParams = {
     longitude: req.query.longitude,
@@ -33,6 +39,9 @@ router.get('/bycoordinates', (req, res, next) => {
   });
 });
 
+/**
+ *  Get Stores by Physical Store ID
+ */
 router.get('/byId', (req, res, next) => {
   const physicalStoreIdUrl = req.originalUrl;
   const physicalStoreIdQuery = url.parse(physicalStoreIdUrl, true);

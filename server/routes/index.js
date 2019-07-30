@@ -33,6 +33,6 @@ router.use('/storelocator', require('./api/storelocator'));
 router.use('/emi', require('./api/emi'));
 router.use('/pincode', require('./api/pincode'));
 router.use('/compare', require('./api/compare'));
-router.use('/staticpage', require('./api/staticpage'));
+router.use('/static', require('./api/staticpage'));
 
 module.exports = router;

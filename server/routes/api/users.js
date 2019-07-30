@@ -153,7 +153,7 @@ router.post('/address/update/:nickname', (req, res, next) => {
   });
 }); */
 
-/* Reset Password */
+/** Reset Password in case of you forget your old password */
 router.post('/forgotpassword', (req, res) => {
   usersHandler.forgotPassword(req.body, req.headers, (err, result) => {
     if (err) {

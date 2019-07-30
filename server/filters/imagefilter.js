@@ -13,6 +13,21 @@ module.exports.getImagePath = function getImagePath(imagePath) {
   return newImagePath;
 };
 
+/**
+ * Filter WCS Image Path.
+ * @return New Image Path
+ */
+module.exports.getCategoryImagePath = function getCategoryImagePath(imagePath) {
+  let newImagePath = '';
+  if (imagePath) {
+    newImagePath = imagePath.substring(
+      imagePath.indexOf('/B2C'),
+      imagePath.length,
+    );
+  }
+  return newImagePath;
+};
+
 /* Get 1:1 Thumbail Image */
 function getThumbnail(image) {
   return (

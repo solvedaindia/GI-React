@@ -197,7 +197,7 @@ function findInventory(headers, reqParams, callback) {
           ) {
             inventoryResponse.inventoryStatus = 'available';
             inventoryResponse.deliveryDate =
-              response.body.InventoryAvailability[0].availabilityDateTime;
+              response.body.InventoryAvailability[0].availabilityDateTime || '';
           }
         }
         callback(null, inventoryResponse);

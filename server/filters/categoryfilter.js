@@ -35,8 +35,12 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail = imagefilter.getImagePath(categoryDetails.thumbnail);
-  catData.fullImage = imagefilter.getImagePath(categoryDetails.fullImage);
+  catData.thumbnail = imagefilter.getCategoryImagePath(
+    categoryDetails.thumbnail,
+  );
+  catData.fullImage = imagefilter.getCategoryImagePath(
+    categoryDetails.fullImage,
+  );
   // catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
   // catData.seoUrl = '';

@@ -406,6 +406,7 @@ function productListByIDs(header, query, callback) {
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
+  const resJson = {};
   const productIDs = [];
   const reqHeader = header;
   reqHeader.promotionData = 'false';
@@ -424,6 +425,88 @@ function productListByIDs(header, query, callback) {
       callback(err);
       return;
     }
-    callback(null, res);
+    if (res.productList && res.productList.length > 0) {
+      res.productList.forEach(product => {
+        resJson[product.uniqueID] = product;
+      });
+    }
+    callback(null, resJson);
   });
+}
+
+module.exports.productListByPartNumbers = productListByPartNumbers;
+function productListByPartNumbers(header, query, callback) {
+  if (!query.pn) {
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const resJson = {};
+  /* const resJson = {
+    productCount: 0,
+    productList: [],
+  }; */
+  const partNumbers = [];
+  const reqHeader = header;
+  reqHeader.promotionData = 'false';
+  if (Array.isArray(query.pn)) {
+    query.pn.forEach(pn => {
+      partNumbers.push(pn);
+    });
+  } else {
+    partNumbers.push(query.pn);
+  }
+
+  async.map(
+    partNumbers,
+    (partNumber, cb) => {
+      productUtil.productDetailByPartNumber(partNumber, header, cb);
+    },
+    (error2, productList) => {
+      if (error2) {
+        callback(error2);
+        return;
+      }
+      if (productList && productList.length > 0) {
+        // resJson.productCount = productList.length;
+        if (query.includepromotion === 'true') {
+          const productIds = [];
+          productList.forEach(product => {
+            productIds.push(product.uniqueID);
+          });
+          promotionUtil.getMultiplePromotionData(
+            productIds,
+            header,
+            (error3, promotionData) => {
+              if (error3) {
+                callback(error3);
+                return;
+              }
+              productList.forEach(product => {
+                let productDetail = {};
+                productDetail = pdpfilter.productDetailSummary(product);
+                productDetail.promotionData = pdpfilter.getSummaryPromotion(
+                  promotionData[productDetail.uniqueID],
+                );
+                if(productDetail.partNumber){
+                  resJson[productDetail.partNumber] = productDetail;
+                }
+                // resJson.productList.push(productDetail);
+              });
+              callback(null, resJson);
+            },
+          );
+        } else {
+          productList.forEach(product => {
+            let productDetail = {};
+            productDetail = pdpfilter.productDetailSummary(product);
+            if(productDetail.partNumber){
+              resJson[productDetail.partNumber] = productDetail;
+            }
+            // resJson.productList.push(productDetail);
+          });
+          callback(null, resJson);
+        }
+      }
+    },
+  );
 }

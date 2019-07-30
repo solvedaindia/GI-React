@@ -11,59 +11,62 @@ const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 module.exports.productDetailSummary = productDetailForPLP;
 function productDetailForPLP(productDetail) {
   const productDetailJson = {};
-  productDetailJson.uniqueID = productDetail.uniqueID;
-  productDetailJson.productName = productDetail.name;
-  productDetailJson.partNumber = productDetail.partNumber;
-  productDetailJson.type = productDetail.catalogEntryTypeCode;
-  productDetailJson.masterCategoryID = productDetail.masterCategoryId;
-  productDetailJson.parentUniqueID = productDetail.parentCatalogEntryID || '';
-  productDetailJson.actualPrice = '';
-  productDetailJson.offerPrice = '';
-  if (productDetail.price && productDetail.price.length > 0) {
-    productDetail.price.forEach(price => {
-      if (price.usage === 'Display' && price.value !== '') {
-        productDetailJson.actualPrice = parseFloat(price.value);
-      }
-      if (price.usage === 'Offer' && price.value !== '') {
-        productDetailJson.offerPrice = parseFloat(price.value);
-      }
-    });
-  }
-  // productDetailJson.onClickUrl = '';
-  // productDetailJson.seoUrl = '';
-  const thumbnailObject = imagefilter.getThumbnailImages(
-    productDetail.attachments,
-  );
-  /* productDetailJson.thumbnail = imagefilter.getImagePath(
-    productDetail.thumbnail,
-  ); */
-  productDetailJson.thumbnail = thumbnailObject.thumbnail || '';
-  productDetailJson.thumbnail2 = thumbnailObject.thumbnail2 || '';
-  productDetailJson.emiData = '';
-  productDetailJson.inStock = '';
-  productDetailJson.shortDescription = productDetail.shortDescription || '';
-  /* productDetailJson.promotionData = getSummaryPromotion(
-    productDetail.promotionData,
-  ); */
-  const productAttribute = getProductAttributes(productDetail.attributes);
-  productDetailJson.discount = productAttribute.discount;
-  productDetailJson.ribbonText = productAttribute.ribbonText;
-  productDetailJson.installationRequired =
-    productAttribute.installationRequired;
-  if (productDetail.UserData && productDetail.UserData.length > 0) {
-    productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
-  }
-  /* if (productDetailJson.discount > 0) {
-    // eslint-disable-next-line radix
-    productDetailJson.actualPrice = parseInt(
-      (productDetailJson.offerPrice * 100) /
-        (100 - Number(productDetailJson.discount)),
+  if(productDetail){
+    productDetailJson.uniqueID = productDetail.uniqueID;
+    productDetailJson.productName = productDetail.name;
+    productDetailJson.partNumber = productDetail.partNumber;
+    productDetailJson.type = productDetail.catalogEntryTypeCode;
+    productDetailJson.masterCategoryID = productDetail.masterCategoryId;
+    productDetailJson.parentUniqueID = productDetail.parentCatalogEntryID || '';
+    productDetailJson.actualPrice = '';
+    productDetailJson.offerPrice = '';
+    if (productDetail.price && productDetail.price.length > 0) {
+      productDetail.price.forEach(price => {
+        if (price.usage === 'Display' && price.value !== '') {
+          productDetailJson.actualPrice = parseFloat(price.value);
+        }
+        if (price.usage === 'Offer' && price.value !== '') {
+          productDetailJson.offerPrice = parseFloat(price.value);
+        }
+      });
+    }
+    // productDetailJson.onClickUrl = '';
+    // productDetailJson.seoUrl = '';
+    const thumbnailObject = imagefilter.getThumbnailImages(
+      productDetail.attachments,
     );
-  } */
-  productDetailJson.pageTitle = productDetail.seo_prop_pageTitle || '';
-  productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
-  productDetailJson.metaDescription =
-    productDetail.seo_prop_metaDescription || '';
+    /* productDetailJson.thumbnail = imagefilter.getImagePath(
+      productDetail.thumbnail,
+    ); */
+    productDetailJson.thumbnail = thumbnailObject.thumbnail || '';
+    productDetailJson.thumbnail2 = thumbnailObject.thumbnail2 || '';
+    productDetailJson.emiData = '';
+    productDetailJson.inStock = '';
+    productDetailJson.shortDescription = productDetail.shortDescription || '';
+    /* productDetailJson.promotionData = getSummaryPromotion(
+      productDetail.promotionData,
+    ); */
+    const productAttribute = getProductAttributes(productDetail.attributes);
+    productDetailJson.discount = productAttribute.discount;
+    productDetailJson.ribbonText = productAttribute.ribbonText;
+    productDetailJson.installationRequired =
+      productAttribute.installationRequired;
+    if (productDetail.UserData && productDetail.UserData.length > 0) {
+      productDetailJson.emiData = Number(productDetail.UserData[0].x_field1_i);
+    }
+    /* if (productDetailJson.discount > 0) {
+      // eslint-disable-next-line radix
+      productDetailJson.actualPrice = parseInt(
+        (productDetailJson.offerPrice * 100) /
+          (100 - Number(productDetailJson.discount)),
+      );
+    } */
+    productDetailJson.pageTitle = productDetail.seo_prop_pageTitle || '';
+    productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
+    productDetailJson.metaDescription =
+      productDetail.seo_prop_metaDescription || '';
+
+  }
   return productDetailJson;
 }
 
@@ -113,17 +116,19 @@ function getProductAttributes(attributes) {
     discount: '',
     installationRequired: '',
   };
-  attributes.forEach(attribute => {
-    if (attribute.identifier === 'percentOff') {
-      productAttribute.discount = attribute.values[0].value;
-    }
-    if (attribute.identifier === 'Ribbon') {
-      productAttribute.ribbonText = attribute.values[0].value;
-    }
-    if (attribute.identifier === 'ExtnIsInstallationReqd') {
-      productAttribute.installationRequired = attribute.values[0].value;
-    }
-  });
+  if (attributes && attributes.length > 0) {
+    attributes.forEach(attribute => {
+      if (attribute.identifier === 'percentOff') {
+        productAttribute.discount = attribute.values[0].value;
+      }
+      if (attribute.identifier === 'Ribbon') {
+        productAttribute.ribbonText = attribute.values[0].value;
+      }
+      if (attribute.identifier === 'ExtnIsInstallationReqd') {
+        productAttribute.installationRequired = attribute.values[0].value;
+      }
+    });
+  }
   return productAttribute;
 }
 
@@ -262,7 +267,10 @@ function getAttachments(productData) {
  */
 module.exports.getProductDetails = getProductDetails;
 function getProductDetails(attributes, productData) {
-  const productDetailsJSON = {};
+  const productDetailsJSON = {
+    imagePath: '',
+    description: [],
+  };
   const productDetailsList = [];
   if (productData.attachments && productData.attachments.length > 0) {
     productData.attachments.forEach(attachment => {
@@ -273,8 +281,6 @@ function getProductDetails(attributes, productData) {
         productDetailsJSON.imagePath = attachment.attachmentAssetPath;
       }
     });
-  } else {
-    productDetailsJSON.imagePath = '';
   }
 
   if (attributes.descriptive && attributes.descriptive.length > 0) {

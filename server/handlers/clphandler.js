@@ -1,8 +1,58 @@
 const async = require('async');
 const errorUtils = require('../utils/errorutils');
 const espotsHandler = require('./espotshandler');
+const plpHandler = require('./plphandler');
+const espotFilter = require('../filters/espotfilter');
 const logger = require('../utils/logger.js');
 const filter = require('../filters/filter');
+
+module.exports.getInspirationThemes = getInspirationThemes;
+function getInspirationThemes(headers,params,callback){
+  if(!params.espotName){
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  espotsHandler.getEspotsData(headers, params.espotName,(err,res)=>{
+    if(err){
+      callback(err);
+      return;
+    }
+    const espotRes = espotFilter.espotContent(res);
+    if(espotRes && espotRes.recoImgArray && espotRes.recoImgArray.length>0){
+      const themes = espotRes.recoImgArray;
+      let query = {
+        pn : [],
+      };
+      
+      themes.forEach(theme => {
+        if(theme.recoIconArray && theme.recoIconArray.length>0){
+          theme.recoIconArray.forEach(icon => {
+            query.pn.push(icon.partNumber);
+          });
+        }
+      });
+      plpHandler.productListByPartNumbers(headers,query,(error,response)=>{
+        if(!error)
+          {
+            themes.forEach(theme => {
+              if(theme.recoIconArray && theme.recoIconArray.length>0){
+                theme.recoIconArray.forEach(icon => {
+                 Object.assign(icon,response[icon.partNumber]);
+                });
+              }
+            });
+            espotRes.recoImgArray = themes;
+            callback(null,espotRes);
+          } else {
+            console.log('>>>',error);
+          }
+      });
+    } else{
+      callback(null,espotRes);
+    }
+  });
+}
+
 
 /**
  * The function will return CLP Data
@@ -11,7 +61,7 @@ const filter = require('../filters/filter');
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 /* Get CLP Data from Espots */
-module.exports.getClpData = function getClpData(req, callback) {
+/* module.exports.getClpData = function getClpData(req, callback) {
   if (!req.query.id || !req.body.espot_name) {
     logger.debug('Get CLP data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
@@ -40,9 +90,9 @@ module.exports.getClpData = function getClpData(req, callback) {
       callback(null, transformClpBody(results));
     },
   );
-};
+}; */
 
-function transformClpBody(results) {
+/* function transformClpBody(results) {
   const res = {};
   results.forEach(element => {
     const espotResult = filter.filterData('espotcontent', element);
@@ -54,7 +104,7 @@ function transformClpBody(results) {
     }
   });
   return res;
-}
+} */
 
 /* const espotName = 'GI_Header_Static_Data';
 function getHeroBanner(headers, catId, callback) {

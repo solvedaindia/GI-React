@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const logoutHandler = require('../../handlers/logouthandler');
 
+/** For Logout */
 router.post('/', (req, res, next) => {
   logoutHandler.logout(req.headers, (err, result) => {
     if (err) {

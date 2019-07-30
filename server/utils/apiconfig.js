@@ -1,7 +1,8 @@
+require('dotenv').config();
 exports.getEnvHostName = function hostName() {
   let envName = '';
   let apiVersion = '/v1';
-  const port = normalizePort(process.env.PORT || '8002');
+  const port = normalizePort(process.env.SERVER_PORT || '8002');
   if (process.env.ENV) {
     envName = process.env.ENV;
   } else {
@@ -50,6 +51,10 @@ exports.getEndPoint = function getEndPoint() {
     case 'DEV':
       endpointConfigURL.hostname = '172.30.0.163:5443';
       endpointConfigURL.searchHostname = '172.30.0.163:3738';
+      break;
+    case 'SIT':
+      endpointConfigURL.hostname = '172.30.0.172:5443';
+      endpointConfigURL.searchHostname = '172.30.0.172:3738';
       break;
   }
   endpointConfigURL.endPoint = endPoint;
