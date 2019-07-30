@@ -102,6 +102,12 @@
         }
       }
     }
+    .moreButton{
+      .link{
+        font-family: $font-bold;
+        cursor: pointer;
+    }
+    }
   }
 
   .categoriestext {
@@ -307,6 +313,12 @@
             border-right: none;
           }
         }
+      }
+      .moreButton{
+        .link{
+          font-family: $font-bold;
+          cursor: pointer;
+      }
       }
     }
   }
