@@ -130,7 +130,7 @@ class WelcomeForm extends Component {
     }
     return (
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
-        <Input
+        <div className='relative'><Input
           type="text"
           title="Email ID/Mobile Number"
           name="userId"
@@ -140,8 +140,9 @@ class WelcomeForm extends Component {
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
-
-        <div className='password-field'>
+        </div>
+        
+        <div className='password-field relative'>
         <Input
           type={this.state.inputType}
           name="password"
@@ -161,10 +162,8 @@ class WelcomeForm extends Component {
               />
             }
           </span>
+          {errorMessagePassword}
         </div>
-
-        
-        {errorMessagePassword}
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
         <Button type="primary" title="Login" />

@@ -298,6 +298,14 @@
                         .valiationPosition-NewPassword{
                             top: 10px;
                         }
+                    }
+                    .relative{
+                        position: relative;
+                        .error-msg{
+                            position: absolute;
+                            top: 0px;
+                            margin-top: 44px;
+                        }
                     } 
                 }
             }
