@@ -18,6 +18,7 @@
         padding: 0 0 10px 0;
         font-style: italic;
         line-height: 0;
+        font-family: $font-regular;
       }
 
       .form-inline {
@@ -173,6 +174,12 @@
     .footerlink_wrpper {
       padding: 0 0 20px 0;
     }
+    .newsletter_section{
+      .heading{
+        opacity: 1;
+        max-width: 100%;        
+      }
+    }
     .heading {
       color: $colorwhite;
       font-family: $font-bold;
@@ -219,6 +226,29 @@
   }
 }
 
+/* Screen 1200px Start*/
+@media screen and (min-width: 1200px) {
+  .footer {
+    .newsletter_section{
+      .heading{
+        opacity: 1;
+        max-width: 66%;
+        font-size: 40px;
+        line-height: 40px;
+        padding:0 0 33px 0;        
+      }
+      .newsletterList{
+        li:first-child {
+          padding: 0 0 45px 0;
+          .newsletter-heading{
+            margin:0;
+          }
+        }
+      }
+    }
+  }
+}
+/* Screen 1200px Emd*/
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
 */
@@ -239,6 +269,12 @@
 @media screen and (max-width: 767px) {
   .footer {
     padding: 25px 0;
+    .newsletter_section{
+      .newsletter-heading{       
+        font-size: 16px;     
+        margin: 0 0 12px 0;   
+      }
+    }
     .heading {
       color: $colorwhite;
       font-family: $font-bold;

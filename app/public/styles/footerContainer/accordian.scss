@@ -39,6 +39,8 @@
       padding: 10px 20px;
       max-height: 600px;
     }
+
+    
   }
 
 /* 
@@ -76,7 +78,18 @@
     padding: 0 20px;
     max-height: 0;
     overflow: hidden;
+
+    
   }
+
+  .footerMobile{
+    .footerlink_wrpper{
+      .activeOver {
+        max-height: initial;
+      }
+    }
+  }
+
   
   .active > .body {
     padding: 0px 0px;
