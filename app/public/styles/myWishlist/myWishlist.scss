@@ -229,6 +229,8 @@
     }
     .plpCategories{
       .plp-products{
+        padding: 0px 0 60px 0;
+        
         .productlist{
           padding: 0px;
           .hoverBox{
@@ -250,6 +252,9 @@
         }
       }
     }
+  }
+  .shaire-headerwrp{
+    display: none;
   }
 }
 
