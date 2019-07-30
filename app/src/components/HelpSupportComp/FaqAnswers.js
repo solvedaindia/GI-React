@@ -15,7 +15,7 @@ class FaqAnswers extends React.Component {
 
 render() {
     return (
-        <div className="container">
+        <>
           <div className="panel-group" id="accordion">
             <div className="panel panel-default">
               <div className="panel-heading">
@@ -189,7 +189,7 @@ You can also track your order by visiting www.Godrej Interio .com and clicking o
               </div>
             </div>
           </div>
-        </div>
+        </>
     );
   }
 }
