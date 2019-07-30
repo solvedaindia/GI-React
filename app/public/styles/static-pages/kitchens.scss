@@ -6,6 +6,61 @@
 .Kitchen-1{
   width: 100%;
   background-color: #ffffff;
+  .exp-our-kitchen{
+
+    padding: 120 0 0 0;
+    .bigSofa {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .ourStores {
+      padding: 26px 43px 28px 43px;
+      width: 45%;
+      position: absolute;
+      background-color: white;
+      color: #000;
+      float: left;
+      left: 38px;
+      
+      text-align: center;
+      top: 57%;
+      transform: translateY(-50%);
+    }
+    .mainImg{
+      position: relative;
+     
+      .h3Css{
+        margin:0 0 10px 0;
+        font-size: 18px;
+        line-height: 18px;
+        font-family: CeraGodrejInterio-Regular;
+      }
+      .h2Css{
+      font-family:CeraGodrejInterio-Medium;
+      font-size: 30px;
+      line-height: 30px;
+      color:#000000;
+      margin:0;
+  }
+    .storeButton{
+      margin:31px 0 0 0; 
+      color: #ffffff;
+      background-color: #000;  
+      padding:13px 45px; 
+      border:none;
+    }
+    .paragraphcss{
+      line-height: 20px;
+  
+      margin: 9px 0 0 0;
+      font-family: CeraGodrejInterio-Medium; 
+      font-size: 16px;
+      color:#000000;
+    }
+   
+  }
+  }
   .ourprom{
     padding: 100px 0 0 0;
   }
@@ -509,22 +564,9 @@ padding: 50px 0 0 0;
 }
 
 
-.text-block {
-  position: absolute;
-  top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-color: rgba(255, 255, 255, .4);
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.bigSofa {
-  margin-top:50px;
-  // width: 1140px;
-  height: 345px;
-  object-fit: contain;
-}
+
+
+
 .aboutgodrej {
   margin-top: 50px;
   // width: 1440px;
@@ -646,13 +688,14 @@ background-color: rgba(255, 255, 255, .4);
       width: 162px;
       height: 108px;
       object-fit: contain;
+      
+      }
       .stepwizard {
         display: table;
         width: 100%;
         position: relative;
     }
-      }
-    .-easy-steps-to-your {
+    .easy-steps-to-your {
       height: 36px;
       font-family: CeraGodrejInterio;
       font-size: 30px;
@@ -664,37 +707,30 @@ background-color: rgba(255, 255, 255, .4);
       text-align: center;
       color: #000000;
     }
-    .progressBar{
+   
       .imgBox{
         text-align: center;
       }
       .stepwizard{
         width:100%;
-        .stepwizard-row{
-          &:before{
-            width:74%;
-            left:13%;
-            border:1px dotted #d1d1d2;
-            height: 0;
-            background: transparent;
-          }
-          .stepwizard-step{
-            .stepCircle{
-              background: $cerulean;
-              color:$colorwhite;  
-              width: 30px;
-              height: 30px;
-              text-align: center;
-              padding: 6px 0;
-              font-size: 12px;
-              line-height: 1.428571429;
-              border-radius: 15px;
-              display: inline-block;
-            }
-          }
-        }
+       
+       
+           
       }
-    }
+      .stepCircle{
+        background: $cerulean;
+        color:$colorwhite;  
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        display: inline-block;
+    
+  }
+    
   }
   .whatgoesSlider{
     padding: 50px 0 100px 0;
@@ -709,11 +745,20 @@ background-color: rgba(255, 255, 255, .4);
   .kichenLayoutbanner{
     width:100%;
     background-color: #00b5a4;
-    
-    .textBox,.imgBox{
-      float: left;
+    .btn-bookBlog{
+      font-size: 14px;
+      color:white;
+      font-family: CeraGIMedium,sans-serif;
+      background-color:#000000;
+      }
+     
+      .textBox{
+        width:40%;
+        padding:60px 0;
+        text-align: center;
+        float: left;
+      }
       .Image-gallery {
-        height: 98px;
         font-family: CeraGodrejInterio;
         font-size: 42px;
         font-weight: bold;
@@ -722,29 +767,21 @@ background-color: rgba(255, 255, 255, .4);
         line-height: 1.17;
         letter-spacing: normal;
         color: #ffffff;
-        .btn-bookBlog{
-          font-size: 14px;
-          color:white;
-          font-family: $font-medium;
-          background-color: blue
-          }
+        
       }
+   
+    
+    .imgBox{
+      float: left;
+      width:60%;
       
     }
-    .textBox{
-      width:40%;
-      padding:60px 0;
-      text-align: center;
-     
-    }
-    .imgBox{
-      width:60%;
-      .kichenBlog{
-        width:100%;
-      }
-    }
-  }
+  
 
- 
+  .kichenBlog{
+    width:100%;
+    height: 300px;
+  }
+  }
 }
  

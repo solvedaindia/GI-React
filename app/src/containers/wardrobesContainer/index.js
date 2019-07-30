@@ -11,6 +11,7 @@ import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner'
 import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
 import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
 import ConsultationForm from '../../components/Primitives/ConsultForm'
+import {Link} from 'react-router-dom'
 
 
 export default class WardrobesContainer extends React.Component {
@@ -111,19 +112,20 @@ index: 0
                   </div>
                 </div>
               </div>
-              <div className="crouselBAckgrounding"><br />
+              <div className="crouselBAckgrounding">
                 <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                 <WardrobesTypes />
               </div>
+              <div className='whatGoesContainer'>
               <div className="container">
                 <div className="row">
                   <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
-                  <p1 className="Choose-from-a-vast-r ">Choose from a vast range of acessories. Consectetur adipisicing
+                  <p className="whatGoesPara">Choose from a vast range of acessories. Consectetur adipisicing
                     elit, sed do eiusmod tempor incididunt ut labore<br /> et dolore magna aliquat enim ad minim veniam,
-                    quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p1>
+                    quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                   <div className="col-md-6">
-                    <h1 className="Accessories">Accessories</h1>
-                    <p1 className="Choose-from-a-vast-r-Copy ">Choose from a vast range of acessories. Consectetur
+                    <h1 className="AccessoriesText">Accessories</h1>
+                    <p1 className="whatGoesPara">Choose from a vast range of acessories. Consectetur
                       adipisicing elit,<br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br />
                       enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br /> sit amet, consectetur
                       adipisicing elit.<br /> </p1>
@@ -139,7 +141,10 @@ index: 0
                   </div>
                 </div>
               </div>
+              </div>
+              <div className='wardroHallCont'>
               <WardrobesHAll />
+              </div>
               <div id="form_consult" className="formwardrobeContainer">
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
@@ -236,7 +241,7 @@ index: 0
                 </div>
               </div>
               </div>
-              <div className="container">
+              {/* <div className="container">
                 <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
                 <div className="text-blocks">
                   <h1 className="Image-gallery-Copy-3">Our store</h1>
@@ -246,6 +251,25 @@ index: 0
                     You can find more stores around you.<br />
                     the home you've always wanted</p2> <br />
                   <button className="seeMored">Find More Stores</button>
+                </div>
+              </div> */}
+              <div class="exp-our-kitchen">
+              <div className="container">
+                <div className="mainImg">
+                <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+                <div className="ourStores">
+                  <h3 className="h3Css">Our store</h3>
+                  <h2 className="h2Css">Experience our Store facilities</h2>
+                  <p className="paragraphcss">Experience our wardrobes at <span className="spanish">Vikroli
+                      Godrej Store (1.6 km away) </span>
+                    You can find more stores around you.</p> 
+                    <Link to='/storelocator'>
+                    <button className="storeButton">Find More Stores</button>
+                    </Link>
+                  
+                </div>
+                </div>
+                
                 </div>
               </div>
               <div className="modularWardrobes">

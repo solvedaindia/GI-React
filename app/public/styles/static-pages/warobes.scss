@@ -5,6 +5,75 @@
 .wardrobes1 {
     width: 100%;
     background-color: #ffffff;
+    .wardroHallCont{
+       padding: 135px 0 0 0;
+       .Paragraphhall{
+        color:$greyish;
+        font-family: $font-regular;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+      }
+    }
+    .whatGoesContainer{
+      padding: 60px 0 0 0;
+    }
+    .exp-our-kitchen{
+
+      padding: 120 0 0 0;
+      .bigSofa {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+      .ourStores {
+        padding: 26px 43px 28px 43px;
+        width: 45%;
+        position: absolute;
+        background-color: white;
+        color: #000;
+        float: left;
+        left: 38px;
+        
+        text-align: center;
+        top: 57%;
+        transform: translateY(-50%);
+      }
+      .mainImg{
+        position: relative;
+       
+        .h3Css{
+          margin:0 0 10px 0;
+          font-size: 18px;
+          line-height: 18px;
+          font-family: CeraGodrejInterio-Regular;
+        }
+        .h2Css{
+        font-family:CeraGodrejInterio-Medium;
+        font-size: 30px;
+        line-height: 30px;
+        color:#000000;
+        margin:0;
+    }
+      .storeButton{
+        margin:31px 0 0 0; 
+        color: #ffffff;
+        background-color: #000;  
+        padding:13px 45px; 
+        border:none;
+      }
+      .paragraphcss{
+        line-height: 20px;
+    
+        margin: 9px 0 0 0;
+        font-family: CeraGodrejInterio-Medium; 
+        font-size: 16px;
+        color:#000000;
+      }
+     
+    }
+    }
+    
      .container {
     position: relative;
     color: white;
@@ -511,7 +580,6 @@ react-slideshow-container {
   color: #000000;
 }
 .Answer {
-  width: 534px;
   height: 17px;
   font-family: CeraGodrejInterio;
   font-size: 14px;
@@ -614,16 +682,15 @@ transform: translate(-50%, -50%);
   
   .crouselBAckground {
     // width: 1440px;
-    height: 1023x;
+    // height: 1023x;
     background-color:#f7f8f8
   }
   .crouselBAckgrounding {
-    // width: 1440px;
-    height: 949px;
+    width: 100%;
+    height: auto;
     background-color:#f7f8f8
   }
   .Types-of-Modular-War {
-    height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
     font-weight: 500;
@@ -647,12 +714,12 @@ transform: translate(-50%, -50%);
     color: #000000;
   }
   .Rectangleaa {
-    // width: 1141px;
-    height: 642px;
+    // margin: 80px 0 0 0;
+    width:100%;
+    height: auto;
     object-fit: contain;
   }
   .What-goes-into-a-Mod {
-    // width: 518px;
     height: 36px;
     font-family: CeraGodrejInterio;
     font-size: 30px;
@@ -664,10 +731,7 @@ transform: translate(-50%, -50%);
     text-align: center;
     color: #000000;
   }
-  .Accessories {
-    margin-top: 24px;
-    margin-left: -273px;
-    height: 24px;
+  .AccessoriesText {
     font-family: CeraGodrejInterio;
     font-size: 20px;
     font-weight: bold;
@@ -690,13 +754,12 @@ transform: translate(-50%, -50%);
     color: #000000;
   }
   .Rectanglessss {
-    width: 487px;
-    height: 365px;
+    width: 24%;
+    // height: auto;
     object-fit: contain;
   }
   .Materials-and-Finish {
     
-    height: 24px;
     font-family: CeraGodrejInterio;
     font-size: 20px;
     font-weight: normal;
@@ -710,8 +773,8 @@ transform: translate(-50%, -50%);
     margin-top: 24px;
     margin-left: 48px;
   }
-  .Choose-from-a-vast-r {
-    height: 38px;
+  .whatGoesPara {
+    text-align: center;
     font-family: CeraGodrejInterio;
     font-size: 16px;
     font-weight: normal;

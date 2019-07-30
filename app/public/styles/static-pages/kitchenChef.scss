@@ -5,6 +5,16 @@
 .wardrobes1 {
     width: 100%;
     background-color: #ffffff;
+    .crouselBAckground {
+      width: 100%;
+      height: auto;
+      background-color:#f7f8f8
+    }
+    .crouselBAckgrounding {
+      width: 100%;
+      height: auto;
+      background-color:#f7f8f8
+    }
     .stepwizard-step p {
       margin-top: 10px;
   }
@@ -470,8 +480,7 @@ react-slideshow-container {
   margin-right: 50px;
 }
 .Book-a-consultation {
-  height: 36px;
-  font-family: CeraGodrejInterio;
+  font-family: CeraGodrejInterio-Medium;
   font-size: 30px;
   font-weight: 500;
   font-style: normal;
@@ -482,7 +491,6 @@ react-slideshow-container {
   color: #000000;
 }
 .Answer {
-  width: 50%;
   height: 17px;
   font-family: CeraGodrejInterio;
   font-size: 14px;
@@ -491,7 +499,7 @@ react-slideshow-container {
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: center;
+  // text-align: center;
   color: #767676;
 }
 .promises {
@@ -583,16 +591,7 @@ transform: translate(-50%, -50%);
 
   
   
-  .crouselBAckground {
-    // width: 1440px;
-    height: 1023x;
-    background-color:#f7f8f8
-  }
-  .crouselBAckgrounding {
-    // width: 1440px;
-    height: 949px;
-    background-color:#f7f8f8
-  }
+  
   .Types-of-Modular-War {
     height: 36px;
     font-family: CeraGodrejInterio;
@@ -660,11 +659,11 @@ transform: translate(-50%, -50%);
     letter-spacing: normal;
     color: #000000;
   }
-  .Rectanglessss {
-    width: 487px;
-    height: 365px;
-    object-fit: contain;
-  }
+  // .Rectanglessss {
+  //   width: 487px;
+  //   height: 365px;
+  //   object-fit: contain;
+  // }
   .Materials-and-Finish {
     
     height: 24px;
@@ -718,9 +717,7 @@ transform: translate(-50%, -50%);
   text-align: center;
 }
 .seeMored {
-  margin-top: 20px;
-  width: 200px;
-  height: 46px;
+  
   background-color: #070707;
 }
 /*....kitchen....*/

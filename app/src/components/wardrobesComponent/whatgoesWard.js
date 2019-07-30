@@ -10,12 +10,12 @@ const nextArrowImg = (
 export default class WhatGoesward extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="Rectanglessss" src='https://pimediaonline.co.uk/wp-content/uploads/2015/02/tumblr_njxxmferwe1r5ld2yo2_1280.jpg' alt="rectangle"/>
-    const img2 = <img className="Rectanglessss" src="http://www.carcrossyukon.com/wp-content/uploads/2018/10/walk-in-wardrobe.jpg" alt="rectangle"/>
-    const img3 = <img className="Rectanglessss" src='https://pimediaonline.co.uk/wp-content/uploads/2015/02/tumblr_njxxmferwe1r5ld2yo2_1280.jpg' alt="rectangle"/>
-    const img4 = <img className="Rectanglessss" src="http://www.carcrossyukon.com/wp-content/uploads/2018/10/walk-in-wardrobe.jpg" alt="rectangle"/>
-    const img5 = <img className="Rectanglessss" src='https://pimediaonline.co.uk/wp-content/uploads/2015/02/tumblr_njxxmferwe1r5ld2yo2_1280.jpg' alt="rectangle"/>
-    const img6 = <img className="Rectanglessss" src="http://www.carcrossyukon.com/wp-content/uploads/2018/10/walk-in-wardrobe.jpg" alt="rectangle"/>
+    const img1 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
+    const img2 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
+    const img3 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
+    const img4 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
+    const img5 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
+    const img6 = <img className="Rectanglessss" src={require('../../../public/images/whatgos.png')} alt="rectangle"/>
 
     this.state = {
       slides: [img1, img2, img3, img4, img5, img6]
@@ -36,8 +36,7 @@ export default class WhatGoesward extends Component {
       speed: 500,
       slidesToShow: 2,
       slidesToScroll: 2,
-      prevArrow: prevArrowImg,
-     nextArrow: nextArrowImg
+    
     };
     return (
  <Slider {...settings}>

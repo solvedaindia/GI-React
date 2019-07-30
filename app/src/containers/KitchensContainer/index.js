@@ -60,97 +60,24 @@ index: 0
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                       eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
                       the home you've always wanted</p>
-                    <button className="btn-book">Book A Consultation</button>
-
+                   <a href='#consultForm'><button className="btn-book">Book A Consultation</button>
+</a> 
                   </div>
                 </div>
               </div>
               <KitchenTypesEspot/>
                 <EasystepsEspot/>
-              {/* <div className="typesofkitch"> */}
-                {/* <h1 className="Types-of-Modular-Kit">Types of Modular Kitchens</h1>
 
-                <TypesOFkitchens /> */}
-                
-              {/* </div> */}
-              <div className="easySteps">
-                <div className="container">
-                  <h1 className="-easy-steps-to-your">4 easy steps to your dream kitchen</h1>
-                  <div className="container">
-
-<div className="row progressBar">
-    <div className="col-md-3 imgBox">           
-      <img className="Delivery-Installation" src={require('../../../public/images/dm1.png')}
-      alt="rectangle"/>                
-    </div>
-    <div className="col-md-3 imgBox">
-    <img className="Delivery-Installation"  src={require('../../../public/images/dm2.png')}
-      alt="rectangle"
-            /> 
-        </div>
-        <div className="col-md-3 imgBox">
-            <i>
-            <img
-              className="Delivery-Installation"
-              src={require('../../../public/images/dm3.png')}
-              alt="rectangle"
-            /> 
-            </i>
-   
-
-        </div>
-        <div className="col-md-3 imgBox">
-            <i>
-    <img
-              className="Delivery-Installation"
-              src={require('../../../public/images/dm4.png')}
-              alt="rectangle"
-            /> 
-           </i>
-
-        </div>
-        <div className="stepwizard">
-<div className="stepwizard-row setup-panel">
-<div className="stepwizard-step">
-<a href="#step-1" type="button" className="stepCircle">1</a>
-
-<p className="ParagraphStepper">Visit the store closest to you & Get a<br/>kitchen from our expert designers <br /></p>
-
-</div>
-<div className="stepwizard-step">
-<a href="#step-2" type="button" className="stepCircle" disabled="disabled">2</a>
-
-<p className="ParagraphStepper">Visit the store closest to you & Get a<br/>free design consultation for your dream<br/>kitchen from our expert designers <br /></p>
-
-</div>
-<div className="stepwizard-step">
-<a href="#step-3" type="button" className="stepCircle" disabled="disabled">3</a>
-
-<p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
-
-</div>
-<div className="stepwizard-step">
-<a href="#step-4" type="button" className="stepCircle" disabled="disabled">4</a>
-
-<p className="ParagraphStepper">Visit the store closest to you & Get a<br/> kitchen from our expert designers <br /></p>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-                </div>
-              </div>
               {/* <div className="kichenLayoutbanner clearfix">
                 <div className="textBox">
                   <h1 className="Image-gallery">10 space-saving kitchen layouts</h1>
                   <button className="btn-bookBlog">Read Our Block</button>
                 </div>
                 <div className="imgBox">
-                  <img className="kichenBlog" src={require('../../../public/images/mask@3x.png')} alt="rectangle" />
+                  <img className="kichenBlog" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt='' />
                 </div>
               </div> */}
-              <LayoutImage/>
+              <LayoutImage/>  
               <div className="whatgoesSlider">
                 <div className="container">
                   <WhatGoes />
@@ -172,7 +99,7 @@ index: 0
               <div className="formContainer">
               <div className="container">
                 <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
-                <div className="Form-bakground">
+                <div id ='consultForm' className="Form-bakground">
                   <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
@@ -269,17 +196,20 @@ index: 0
                     </div>
               </div>
               {/* <FaqEspot/> */}
-              <div className="kitchenFaciliies">
-                <div className="container">
-                  <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
-                  <div className="text-block">
-                    <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
-                      alt="rectangle" />
-                    <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
-                    <p className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br />
-                      the home you've always wanted</p> <br />
-                    <button className="seeMore">Know More</button>
-                  </div>
+              <div class="exp-our-kitchen">
+              <div className="container">
+                <div className="mainImg">
+                <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+                <div className="ourStores">
+                  <h3 className="h3Css">Our store</h3>
+                  <h2 className="h2Css">Experience our Kitchen facilities</h2>
+                  <p className="paragraphcss">Experience our kitchens at <span className="spanish">Vikroli
+                      Godrej Store (1.6 km away) </span>
+                    You can find more stores around you.</p> 
+                  <button className="storeButton">Find More Stores</button>
+                </div>
+                </div>
+                
                 </div>
               </div>
              <InterioText/>

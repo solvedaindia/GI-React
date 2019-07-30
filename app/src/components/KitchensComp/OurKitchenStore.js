@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class EasyStepsEspot extends React.Component {
+class OurKitchenStore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_DREAM_KITCHEN_STEPS",
+      espotName: "GI_EXPERIENCE_OUR_KITCHENS_STORE ",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -22,7 +22,7 @@ class EasyStepsEspot extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('respo', response)
+        console.log('our kitchen', response)
         const {data} = response || {};
         this.setState({
           pageLayoutEspot: data && data.data,
@@ -55,4 +55,4 @@ class EasyStepsEspot extends React.Component {
   }
 }
 
-export default EasyStepsEspot;
+export default OurKitchenStore;

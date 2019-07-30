@@ -17,7 +17,8 @@ export default class HelpSupport extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='serviceSupport'>
+        <div className='container'>
         <h1 className="Header-Copy-h1">Service & Support</h1>
         <h3 className="Header-Copy-h3">How can we help you?</h3>
         <div className='searchBars'>
@@ -63,6 +64,7 @@ export default class HelpSupport extends React.Component {
             </ul>
           </div>
           <div className="col-md-10">
+            
           <h3 className="MyOd">My Orders</h3>
 
             <FaqAnswers />
@@ -116,7 +118,8 @@ export default class HelpSupport extends React.Component {
         </div>
         </div>
         </div>
-      </>
+        </div>
+      </div>
     );
   }
 }

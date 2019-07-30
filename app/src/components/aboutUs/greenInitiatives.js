@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/kitchenChef.scss'
+import  '../../../public/styles/static-pages/aboutUs.scss'
 
-export default class WardrobeBanner extends Component {
+
+export default class GreenInitiatives extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="bannerkitchenss" src='http://www.komandorstoragesolutions.co.uk/media/2858/21.png?mode=pad&rnd=131126291440000000'  alt="wardrobes banner"/>
-    const img2 = <img className="bannerkitchenss" src='http://www.komandorstoragesolutions.co.uk/media/2858/21.png?mode=pad&rnd=131126291440000000' alt="wardrobes banner"/>
-    const img3 = <img className="bannerkitchenss" src='http://www.komandorstoragesolutions.co.uk/media/2858/21.png?mode=pad&rnd=131126291440000000' alt="wardrobes banner"/>
-  
+    const img1 = <img className="greenImage" src={require('../../../public/images/greenGuard.jpg')} alt="rectangle"/>
+    const img2 = <img className="greenImage" src={require('../../../public/images/greenGuard.jpg')} alt="rectangle"/>
+    const img3 = <img className="greenImage" src={require('../../../public/images/greenGuard.jpg')} alt="rectangle"/>
+    
 
     this.state = {
       slides: [img1, img2, img3]
@@ -26,15 +27,15 @@ export default class WardrobeBanner extends Component {
 
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 2,
-      
+      slidesToShow: 1.8,
+      slidesToScroll: 3,
+    // centerMode: true
     };
     return (
-        <>
+        <div>
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
@@ -45,7 +46,7 @@ export default class WardrobeBanner extends Component {
           })}
         </Slider>
 
-        </>
+        </div>
     );
   }
 }

@@ -5,8 +5,45 @@
   width: 100%;
   height: auto;
   background-color: #ffffff;
+  .CareerContainer{
+    padding: 80px 0 0 0;
+    .careerHeading{
+      padding: 73px 0 19px 0;
+      font-family: CeraGodrejInterio-Medium;
+       font-size: 50px;
+
+      padding: 25px 0 0 0;
+      text-align: center;
+      color: white;
+    }
+  }
+  .greenContainer{
+    padding: 80px 0 0 0;
+
+    .greenTitle{
+      font-family: CeraGIMedium,sans-serif;
+      font-size:30px;
+      font-weight:500;font-style:normal;
+      line-height:normal;
+      color:#000;margin:0
+    }
+    
+    .greenImage{
+      width:93%;
+      height: 354px;
+    }
+  }
+  
   .mediaPressSection{
     padding: 80px 0 0 ;
+    .MediaTopHead{
+      padding: 73px 0 19px 0;
+      font-family: CeraGodrejInterio-Medium;
+       font-size: 50px;
+
+      text-align: left;
+      color: #000;
+    }
   }
   
 .circle{
@@ -42,7 +79,7 @@
     color: white;
 }
 
-.p {
+.paragraphCareer {
   // width:475px;
     color: white;
     font-size: 18px;
@@ -60,17 +97,17 @@ padding:19px 0 0 0;
     text-align: center;
     padding-top: 5px;
 }
-.imgs {
-    // width: 195px;
-    height: 104px;
-    // margin-left: -8px;
+.CareerButton{
+  margin: 31px 0 0 0;
+  color: #000;
+  background-color: #ffffff;
+  padding: 13px 45px;
+  border: none;
 }
-
-// .heading {
-//     margin-bottom: 40px;
-//     padding-left: 20px;
-// }
-
+.imgs {
+    height: 104px;
+   
+}
 .main {
     width:100%;
 }

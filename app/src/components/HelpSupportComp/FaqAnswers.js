@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col,Grid } from 'react-bootstrap';
-import  '../../../public/styles/static-pages/aboutUs.scss'
+import  '../../../public/styles/static-pages/HelpSupport.scss'
 
 
 

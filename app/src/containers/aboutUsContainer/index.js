@@ -19,6 +19,7 @@ import pics from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
 import images from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
 import picture from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
 import photo from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
 
 export class AboutUs extends React.Component {
   constructor(props) {
@@ -102,24 +103,30 @@ render() {
 
         </div>
       </div>
+      <div className='greenContainer'>
+        <div className='container'>
+        <h1 className='greenTitle'>Green Initiatives</h1>
+        <GreenInitiatives/>
+        </div>
+      </div>
 
-      <div className="row">
+      <div className="CareerContainer row">
         <div className="col-md-12">
           <div container>
             <div id="cat">
-              <h1 className="link">Careers</h1>
-              <p className="p">your information is secure and encrypted, consectetur
-                adipisicing elit,sed do eiumsod tempor incididunt ut
+              <h1 className="careerHeading">Careers</h1>
+              <p className="paragraphCareer">your information is secure and encrypted, consectetur<br/>
+                adipisicing elit,sed do eiumsod tempor incididunt ut<br/>
                 labore et dalore magna aliqion anim ad minim.
               </p>
-              <button className="btn btn-default btn-lg">Click Here</button>
+              <button className="CareerButton">See More</button>
             </div>
           </div>
         </div>
       </div>
       <div className="mediaPressSection">
       <div className="container">
-        <h3>Media/Press</h3>
+        <h3 className='MediaTopHead'>Media/Press</h3>
         <h5>Latest News</h5>
         <hr />
         <div className="row">
