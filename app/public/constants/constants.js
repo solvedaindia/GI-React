@@ -19,7 +19,7 @@ export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
 export const headerStatic = `${secureHttp}://${host}:${port2}/api/v1/header_static_info`;
 /* IP Data */
-export const ipDataApi = 'https://api.ipdata.co?api-key=test';
+export const ipDataApi = 'https://api.ipdata.co?api-key=9d9101e52609b887345507736c6548c3c961d80a7b033cf26b2a2cac';
 /* User Context API */
 export const mwApi = `${secureHttp}://${host}:${port1}/api/v1/user-context`;
 /* Categories API */
