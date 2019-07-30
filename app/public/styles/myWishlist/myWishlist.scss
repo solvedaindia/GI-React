@@ -191,6 +191,9 @@
   @media screen and (min-width: 768px){
     .myWishlist {
       padding: 60px 0 0 0;
+      .myWishlist{
+        padding: 0px;
+      }
       .heading {
         font-size: 30px;
       }
@@ -230,7 +233,7 @@
     .plpCategories{
       .plp-products{
         padding: 0px 0 60px 0;
-        
+
         .productlist{
           padding: 0px;
           .hoverBox{
