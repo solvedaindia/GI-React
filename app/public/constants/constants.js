@@ -1,12 +1,10 @@
 import { getCookie } from '../../src/utils/utilityManager';
 import { validateEmptyObject } from '../../src/utils/validationManager';
-
 export const secureHttp = 'https';
-export const port1 = '3001';
-export const port2 = '8002';
-export const port3 = '8443';
-export const host1 = window.location.hostname;
-export const host = window.location.hostname;
+export const port1 = '';
+export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
+export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+export const host = process.env.envKeys.WEBSERVER_IP || window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const wishlistDataCookie = 'wishlistData';
@@ -52,8 +50,6 @@ export const pinCodeServiceAPI = `${secureHttp}://${host}:${port2}/api/v1/pincod
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Invoice API */
 export const invoicAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/invoice/{invoiceNo}`;
-/* Auto Suggest API */
-export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
 export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
 /* Homepage Layout API */
@@ -177,7 +173,6 @@ export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
-export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
@@ -193,7 +188,7 @@ export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checko
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
-export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+export const imagePrefix = `${secureHttp}://${imgHost}/${imageStore}`;
 
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;
