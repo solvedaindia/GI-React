@@ -12,7 +12,7 @@ class Price extends React.Component {
     }
     if (!isNaN(offerPrice)) {
       console.log('ppriccc -- ', offerPrice)
-      offerPrice = `₹ ${offerPrice}`
+      offerPrice = `₹${offerPrice}`
     }
     else {
       offerPrice = null
