@@ -16,6 +16,7 @@ import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
 import ShareLogo from '../SVGs/shareIcon';
 import SocialMedia from '../../utils/socialMedia';
+import {isMobile} from '../../utils/utilityManager';
 import CryptoJS from 'crypto-js';
 
 const encryptKey = 'GIk';
@@ -172,7 +173,8 @@ class MyWishlist extends React.Component {
     const wishlistItem = (
       <>
         <div className="container">
-          <div className="shaire-headerwrp">
+          
+          {!isMobile() ? <div className="shaire-headerwrp">
             <h3 className="heading">
               {this.state.isShareWishlist
                 ? `${this.state.userNameS}'s wishlist`
@@ -192,7 +194,7 @@ class MyWishlist extends React.Component {
                 ) : null}
               </button>
             )}
-          </div>
+          </div>: '' }
 
           <section className="plpCategories">
             <PlpComponent

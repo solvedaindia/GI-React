@@ -6,6 +6,7 @@ import {
   navigationApi,
   userDetailAPI,
   headerStatic,
+  isLoggedIn,
 } from '../../../../public/constants/constants';
 import { logoutTheUser } from '../../../utils/initialManager';
 import UserAccInfo from '../../../components/UserAccInfo/userAccInfo';
@@ -275,7 +276,7 @@ export class HeaderMobile extends React.Component {
       navItem = (
         <div className="leftAnim">
           <div className="topMenu">
-            <label className="usernameTxt">{this.state.userName}!</label>
+            <label className={getCookie('isLoggedIn') === 'false' ? 'usernameTxt':'usernameTxt userInfo'}>{this.state.userName}!</label>
             {loginLogoutItem}
           </div>
           <ul>

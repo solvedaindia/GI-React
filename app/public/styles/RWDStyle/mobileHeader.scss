@@ -5,7 +5,7 @@
   width: 100%;
   height: auto;
   position: relative;
-  z-index: 9;
+  z-index: 101;
   padding: 5px 0px;
   .mobSideNav, .mob-logo{
     float: left;
@@ -56,15 +56,18 @@
       &::placeholder {
         color: #d1d1d2;
         opacity: 1;
+        font-family: $font-medium;
       }
   }
 .mob-home-search{
   position: absolute;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 48px;
   background: #fff;
   z-index: 1;
   .searchBackBtn{
+        border-top: 1px solid $lightblueGrey;
+        padding: 7px 15px;
     .menuBtn{
       display: none;
     }
@@ -259,3 +262,22 @@
     margin: 0 8px;
   }
 }
+
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 600px) {
+    
+    .sideNavigation{
+      .usernameTxt{
+
+        &.userInfo{
+          width: 200px;
+          white-space: nowrap; 
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    } 
+    
+  }

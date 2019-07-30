@@ -22,6 +22,7 @@ import PromoField from '../../components/Cart/applyPromo';
 import MWebLogo from '../../components/SVGs/mWebLogo';
 import AppliedPromoCode from '../../components/Cart/appliedPromoCode';
 import EmiInfo from '../../components/PdpComponent/emiInfo';
+import ExpandIcon from '../../components/SVGs/expandArrow';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -113,7 +114,7 @@ class CartDetail extends React.Component {
 					/>
 					:
 					!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}
-					>Got a promo code? </p>
+					>Got a promo code? <ExpandIcon width={16} height={16}/></p>
 					{this.state.showReply && <PromoField
 						orderID={cartData.orderSummary.orderID}
 						getCartDetails={this.props.getCartDetails}

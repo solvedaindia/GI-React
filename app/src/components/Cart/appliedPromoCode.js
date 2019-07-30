@@ -30,15 +30,16 @@ class AppliedPromoCode extends React.Component {
     const { promoCode } = this.props;
     return (
       <div className="promoField">
-            <div>
-                {promoCode[0]}
+            <div className='appliedPromoMsg'>
+                <span className='promo'>{promoCode[0]}</span> coupon applied.
+				<button className="removeBtn" onClick={this.removePromoCode}>
+					Remove
+				</button>
             </div>
-        <button className="applyBtn" onClick={this.removePromoCode}>
-          Remove
-        </button>
-        {!!error && (
-          <div className="promoError">This promo code is not valid.</div>
-        )}
+			
+			{!!error && (
+			<div className="promoError">This promo code is not valid.</div>
+			)}
       </div>
     );
   }
