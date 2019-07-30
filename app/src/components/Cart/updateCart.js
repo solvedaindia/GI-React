@@ -57,14 +57,25 @@ class CartUpdate extends React.Component {
     return (
       <form className="cartQty">
         <label className="qytLabel">QUANTITY</label>
-        
         <select
+          className="qytList"
+          value={this.state.quantity}
+          onChange={this.handleChange}
+          // size={this.state.size} onFocus={()=>{this.setState({size: 5})}}
+          >
+          {[...Array(100)].map((e, key) => {
+            if (key > 0) {
+              return <option key={key} value={key}>{key}</option>;
+            }
+          })}
+        </select>
+        {/* <select
           className="qytList"
           value={this.state.quantity}
           onChange={this.handleChange}
           >
             {this.buildOptions()}
-        </select>
+        </select> */}
       </form>
     );
   }
