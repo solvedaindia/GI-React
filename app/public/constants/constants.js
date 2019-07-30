@@ -15,7 +15,7 @@ export const isLoggedIn = false;
 export const catID = '13503';
 export const productTitleCharLimit = 35;
 export const productDescriptionCharLimit = 25;
-
+export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
@@ -44,6 +44,10 @@ export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/promocode`;
 /* Cart Apply Promotion API */
 export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/applypromotion`;
+/* Cart Remove Promo Code API */
+export const cartRemovePromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/removepromotion/`;
+/* Pincode Service API */
+export const pinCodeServiceAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/serviceable/`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Invoice API */
