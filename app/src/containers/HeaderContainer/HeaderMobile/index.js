@@ -27,7 +27,7 @@ class HeaderMobile extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('mixxx -- ', nextProps, this.props)
 
-    if (nextProps.location.pathname !== "/myAccount") {
+    if (nextProps.location.pathname !== "/myAccount" && nextProps.location.pathname !== "/wishlist") {
       this.state.isOnHome = nextProps.match.isExact ? true : false;
       this.setState({
         headerRenderItem: this.defaultRender()
@@ -66,7 +66,7 @@ class HeaderMobile extends React.Component {
           </div>
 
           <ul className="mob-mini-nav">
-            <WishListCount />
+            <WishListCount pageNavigationRenderPro={this.pageNavigationRender}/>
             <CartCount />
             {!this.state.isOnHome ? <li className="searchIcon">
               <button

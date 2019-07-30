@@ -23,7 +23,7 @@ function CompItem(props) {
       <div className="textBox">
         <h4 className="productName">{props.product.title} </h4>
         <Price
-          actualPrice={props.product.actualPrice}
+          // actualPrice={props.product.actualPrice}
           offerPrice={props.product.offerPrice}
         />
       </div>
