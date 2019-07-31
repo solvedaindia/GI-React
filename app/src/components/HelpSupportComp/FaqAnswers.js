@@ -24,7 +24,7 @@ render() {
                     href="#collapseOne">How do I become a registered member of Godrej Interio ?</a>
                 </h4>
               </div>
-              <div id="collapseOne" className="panel-collapse collapse in">
+              <div id="collapseOne" className="panel-collapse collapse">
                 <div className="panel-body">
                 Click on the 'Register' link on the top right-hand side of every page on Godrej Interio . This will open a window where you need to: fill in your basic details, choose a password for your account, and click on the 'Sign Up' button to complete your registration!
                 </div>
