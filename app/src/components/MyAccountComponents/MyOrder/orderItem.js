@@ -3,6 +3,7 @@ import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
 import OrderProduct from './orderProduct';
 import OrderSummery from './orderSummery';
+import {isMobile} from '../../../utils/utilityManager';
 
 const showImg = <img className='iconImg' src={require('../../SVGs/plusIcon.svg')}/>
 const hideImg = <img className='iconImg' src={require('../../SVGs/minusIcon.svg')}/>

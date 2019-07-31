@@ -1,3 +1,5 @@
+@import '../variable.scss';
+
 .clpBase{
     
     .slick-prev {
@@ -22,10 +24,63 @@
                 position: absolute;
                 cursor: pointer;
             }
+            .details {
+                position: absolute;
+                padding: $base;
+                border: 1px solid $borderLight;
+                background-color: $colorwhite; 
+                min-width: $base*26.25; 
+                z-index: 1;
+                .tnImg {
+                    width: 41.72%;
+                    height: $base*10;
+                    display: inline-block;
+                    background-color: $borderLight; 
+                    .img {
+                        width: 100%;
+                    }
+                }
+                .prodDetails{
+                    width: 58%;
+                    display: inline-block; 
+                    vertical-align: top;
+                    .prodNAme {
+                        font-size: $base*1.5;
+                        color: $black;
+                        margin: 0;
+                        padding: 0 $base; 
+                    }
+                    .price {
+                        color: $ceruleanblue;
+                        font-size: $base*1.75; 
+                    }
+                    .link {
+                        font-size: $base*1.5;
+                        color: $black;
+                        padding: $base;
+                    } 
+                }
+            }
         }
         .img {
             width: 100%;
         }
 
+    }
+}
+
+@media (min-width: 320px) and (max-width: 676px) {
+    .clpBase{
+        // Theme
+        .clpTheme {
+            .content-childTheme {
+                .content-icons {
+                }
+                .details {
+                    min-width: $base*23; 
+                }
+            }
+
+        }
     }
 }
