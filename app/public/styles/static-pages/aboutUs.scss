@@ -9,7 +9,7 @@
     padding: 80px 0 0 0;
     .careerHeading{
       padding: 73px 0 19px 0;
-      font-family: CeraGodrejInterio-Medium;
+      font-family: $font-medium;
        font-size: 50px;
 
       padding: 25px 0 0 0;
@@ -21,16 +21,36 @@
     padding: 80px 0 0 0;
 
     .greenTitle{
-      font-family: CeraGIMedium,sans-serif;
+      font-family: $font-medium;;
       font-size:30px;
-      font-weight:500;font-style:normal;
+      font-weight:500;
+      font-style:normal;
       line-height:normal;
-      color:#000;margin:0
+      color:#000;
+      margin:0
     }
     
     .greenImage{
-      width:93%;
-      height: 354px;
+      padding: 57px 0 0 0;
+      width:80%;
+      height: 300px;
+    }
+    .ULcontent{
+      padding: 94px  0 0 0;
+      color: #000000;
+      font-family: $font-medium;
+      font-size:20px;
+      line-height:28px;
+      text-align: center;
+
+    }
+    .ULparagraph{
+      color: #000000;
+      font-family: $font-medium;
+      font-size:14px;
+      line-height:20px;
+      text-align: center;
+
     }
   }
   
@@ -38,8 +58,8 @@
     padding: 80px 0 0 ;
     .MediaTopHead{
       padding: 73px 0 19px 0;
-      font-family: CeraGodrejInterio-Medium;
-       font-size: 50px;
+      font-family: $font-medium;
+       font-size: 30px;
 
       text-align: left;
       color: #000;
@@ -54,7 +74,7 @@
     margin: 20px;
 }
 
-.anas {
+.InitialIdea {
     margin-top: 150px;
 
 }
@@ -133,7 +153,7 @@ padding:19px 0 0 0;
     color: blue;
 }
 
-.button{
+.ProcessNumber{
     margin: 40px;
     font-size: 30px;
     margin-top: 1px;

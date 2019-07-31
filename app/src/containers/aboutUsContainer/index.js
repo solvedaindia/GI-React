@@ -13,55 +13,71 @@ import {
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
 import img from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
-import pic from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import pic from '../../../public/images/teach.jpg'
 import image from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
-import pics from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import pics from '../../../public/images/teach.jpg'
 import images from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
-import picture from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import picture from '../../../public/images/teach.jpg'
 import photo from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
-
+const paraFirst = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
+do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
+veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf`
+const paraSecond = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
+do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
+veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf
+conseqya.Lorem ipsum dolor sit amet, consecutetur adipisicing elit, sed do eiumsod tempor
+incididunt ul labore et dolore magna eliqua.ut enim ad minim veniam,quis nostrud
+exercitation ullacamo laboris nisi aliqion ex ea commodo conseqya.`
 export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      img_url: img
+      img_url: img,
+      content: paraFirst
     };
   }
 handleclick = event => {
     if(event.target.name == 1) {
         this.setState({
-            img_url: img
+            img_url: img,
+            content: paraFirst
         })
     }
    else if(event.target.name == 2) {
     this.setState({
-      img_url: pics
+      img_url: pics,
+      content: paraSecond
   })
 }
 else if(event.target.name == 3) {
   this.setState({
-      img_url:image
+      img_url:image,
+      content: paraFirst
   })
 }
 else if(event.target.name == 4) {
   this.setState({
-      img_url:pic
+      img_url:pic,
+      content: paraSecond
   })
 }
 else if(event.target.name == 5) {
   this.setState({
-      img_url:images
+      img_url:images,
+      content: paraFirst
   })
 }
 else if(event.target.name == 6) {
   this.setState({
-      img_url:picture
+      img_url:picture,
+      content: paraSecond
   })
 }
 else if(event.target.name == 7) {
   this.setState({
-      img_url:photo
+      img_url:photo,
+      content: paraFirst
   })
 }
 }
@@ -77,27 +93,21 @@ render() {
             <h1 className="headingtitle">Our Process</h1>
             <img className="background" src={this.state.img_url} alt="image" />
             <div>
-              <button name="1" className="button" onClick={this.handleclick}>1</button>
-              <button name="2" className="button" onClick={this.handleclick}>2</button>
-              <button name="3" className="button" onClick={this.handleclick}>3</button>
-              <button name="4" className="button" onClick={this.handleclick}>4</button>
-              <button name="5" className="button" onClick={this.handleclick}>5</button>
-              <button name="6" className="button" onClick={this.handleclick}>6</button>
-              <button name="7" className="button" onClick={this.handleclick}>7</button>
+              <button name="1" className="ProcessNumber" onClick={this.handleclick}>1</button>
+              <button name="2" className="ProcessNumber" onClick={this.handleclick}>2</button>
+              <button name="3" className="ProcessNumber" onClick={this.handleclick}>3</button>
+              <button name="4" className="ProcessNumber" onClick={this.handleclick}>4</button>
+              <button name="5" className="ProcessNumber" onClick={this.handleclick}>5</button>
+              <button name="6" className="ProcessNumber" onClick={this.handleclick}>6</button>
+              <button name="7" className="ProcessNumber" onClick={this.handleclick}>7</button>
 
             </div>
           </div>
-          <div className="col-md-6 anas">
+          <div className="col-md-6 InitialIdea">
             <h4><b>initial Ideation</b></h4>
             <p className="h4">Brainstorming to the final product</p>
-            <p className="paragraph">Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
-              do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
-              veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf
-              conseqya.
-            </p>
-            <p className="paragraph">Lorem ipsum dolor sit amet, consecutetur adipisicing elit, sed do eiumsod tempor
-              incididunt ul labore et dolore magna eliqua.ut enim ad minim veniam,quis nostrud
-              exercitation ullacamo laboris nisi aliqion ex ea commodo conseqya.
+           
+            <p className="paragraph">{this.state.content}
             </p>
           </div>
 
@@ -139,40 +149,43 @@ render() {
             </div>
           </div>
           <div className="col-md-6">
-          <Link to='/inspiration'>
+          <a href='https://mediatech914.wordpress.com/2019/01/04/%EF%BB%BFindias-millennials-driving-home-furnishing-democracy/'>
           <div className="row">
               <div className="col-md-4 padding"><img className="imgs" src={pic} /></div>
               <div className="col-md-8">
-                <p className="paragraph"><b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
+                <p className="paragraph"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
                 <div>
                   <span className="color">22 oct 2018</span>
                   <span> | by john jacobs</span></div>
               </div>
             </div>
-          </Link>
-           
+            </a>
+           <a href='https://indiannewz.wordpress.com/2019/01/04/indias-millennials-driving-home-furnishing-democracy-according-to-interio-index-survey-from-godrej-interio/'>
             <div className="row">
               <div className="col-md-4 padding"><img className="imgs" src={image} /></div>
               <div className="col-md-8">
-                <p className="paragraph"><b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
+                <p className="paragraph"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
                 <div>
                   <span className="color">22 oct 2018</span>
                   <span> | by john jacobs</span>
                 </div>
               </div>
             </div>
+            </a>
+            <a href='https://www.deccanchronicle.com/lifestyle/books-and-art/070119/millennial-couples-become-torchbearers-to-spur-societal-transformation.html'>
             <div className="row">
               <div className="col-md-4 padding">
                 <img className="imgs" src={pics} /></div>
               <div className="col-md-8">
                 <p className="paragraph">
-                  <b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
+                  <b>Millennial couples become torchbearers to spur societal transformation  </b></p>
                 <div>
                   <span className="color">22 oct 2018</span>
                   <span> | by john jacobs</span>
                 </div>
               </div>
             </div>
+            </a>
           </div>
         </div>
       </div>

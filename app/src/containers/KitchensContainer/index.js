@@ -206,7 +206,10 @@ index: 0
                   <p className="paragraphcss">Experience our kitchens at <span className="spanish">Vikroli
                       Godrej Store (1.6 km away) </span>
                     You can find more stores around you.</p> 
-                  <button className="storeButton">Find More Stores</button>
+                    <Link to='/storelocator'>
+                    <button className="storeButton">Find More Stores</button>
+
+                    </Link>
                 </div>
                 </div>
                 
