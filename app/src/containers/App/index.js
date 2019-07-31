@@ -40,6 +40,23 @@ import CompareContainer from '../comparePageContainer/index';
 import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
+import client from '../../utils/apiManager';
+import AboutUsContainer from '../aboutUsContainer/index';
+import Inspiration from '../InspirationCont/index';
+import Kitchens from '../KitchensContainer/index';
+import SteelChefKitchen from '../KitchensContainer/kitchen2';
+
+import InspirationDetails from '../InspirationDetailsContainer/index';
+import WardrobesContainer from '../wardrobesContainer/index';
+import privacyPolicy from '../privacyPolicy/index';
+import HelpSupport from '../serviceSupportContainer/index';
+import TermsConditions from '../TermsConditions/index';
+import CookiePolicy from '../CookiePolicy/index';
+
+
+
+
+
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 import SearchContainer from '../Search Container/searchContainer';
@@ -193,6 +210,16 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           
+          <Route path="/termsconditions" component={TermsConditions} />
+          <Route path="/cookie" component={CookiePolicy} />
+          <Route path="/inspiration" component={Inspiration} />
+          <Route path="/kitchens" component={Kitchens} />
+          <Route path="/kitchen2" component={SteelChefKitchen} />
+          <Route path="/lookbook" component={InspirationDetails} />
+          <Route path="/wardrobes" component={WardrobesContainer} />
+          <Route path="/privacyPolicy" component={privacyPolicy} />
+          <Route path="/aboutUs" component={AboutUsContainer} />
+          <Route path="/support" component={HelpSupport} />
         </Switch>
         {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount' ? '' : <FooterContainer /> }
       </div>

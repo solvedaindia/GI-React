@@ -2,18 +2,16 @@ import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
   espotAPI,
-  roomsEspotName
+  storeId,
+  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
-import '../../../public/styles/homePageStatic.scss';
-import {isMobile, getCookie } from '../../utils/utilityManager';
- 
-// const isLoggedIn = getCookie('isLoggedIn') === 'true';
-class EspotContent extends React.Component {
+
+class Cookies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: this.props.espotName,
+      espotName: "GI_Cookie_Policy_Static_Data",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -49,14 +47,7 @@ class EspotContent extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-
-			<div className="espotContent" id={index}>
-				{isMobile() && (this.state.espotName === roomsEspotName) && 
-					(getCookie('isLoggedIn') !== 'true') && <h2 className='mwebGreeting'>
-						Hello Start Exploring
-					</h2>
-				}
-				<h1 className="title">{pageLayoutEspot.title}</h1>
+			<div>
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)
@@ -64,4 +55,4 @@ class EspotContent extends React.Component {
   }
 }
 
-export default EspotContent;
+export default Cookies;

@@ -1,0 +1,25 @@
+@import '../variable';
+@import '../base';
+
+
+.CookieContainer {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+  .Topparagraph{
+      font-family: CeraGIMedium, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.43;
+    padding: 20px 0 120px 0;
+    }
+    .note{
+      padding: 34px 0 0 0; 
+
+      font-weight: 500;
+      font-size: 54px;
+      text-align: left;
+
+    }
+  }

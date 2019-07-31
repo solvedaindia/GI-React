@@ -1,0 +1,346 @@
+@import '../variable';
+@import '../base';
+.Inspiration {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    .uuscontainer{
+      padding: 0 0 120px 0;
+            }
+    .lookcrouse{
+      padding: 60px 0 0 0;
+      .crusealHead{
+font-family: CeraGIMedium,sans-serif;
+font-size: 20px;
+
+      }
+    }
+    .summersparkcontainer{
+      padding:121px 0 0 0;
+      .Paragraph {
+        height: 72px;
+        font-family: CeraGIMedium,sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: #000000;
+      }
+      .RectImg {
+        width: 100%;
+        height: 417px;
+        .Summer-Spark {
+          height: 28px;
+          font-family: CeraGIMedium,sans-serif;
+          font-size: 20px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.4;
+          letter-spacing: normal;
+          color: #000000;
+        }
+      }
+    }
+    .inpspirationBanner{
+      position: relative;
+      overflow: hidden;
+      .inspBannertext{
+        position:absolute;
+        top:30%;
+        left:6%;
+        .heading{
+          font-size: 56px;
+          color:#ffffff;
+          margin:0 0 10px 0;
+          line-height: 56px;
+        }
+        .subText{
+          font-size: 18px;
+          color:#ffffff;
+          font-family: CeraGIMedium,sans-serif;
+          margin:0 0 28px 0;
+        }
+        .btn-book{
+          padding:13px 56px;
+          font-size: 14px;
+          color:#070707;
+          font-family: CeraGIMedium,sans-serif;
+        }
+      }
+      .slick-dots{
+        bottom: 90px;
+        button{
+          width:10px;
+          height: 10px;
+          &:before{
+            width:10px;
+            height: 10px;
+          }
+        }
+        li{
+          width: 12px;
+          height:12px;
+          background:#807a7a;
+          button:before{
+            color:#807a7a;
+            width: 12px;
+            height:12px;
+          }
+        }
+        li.slick-active{
+          background:#ffffff;
+          button:before{
+            color:#ffffff;
+          }
+        }
+      }
+      
+      .slick-prev{
+        left:1%;
+      }
+      .slick-next{
+        right:1%;
+      }
+    }
+    .Rectangle {
+      // width: 1440px;
+      height: 480px;
+      background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+    }
+    .Browse-Lookbook-by-T {
+      // width: 406px;
+      height: 36px;
+      font-family: CeraGIMedium,sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .Oval-Copy-6 {
+      width: 126px;
+      height: 126px;
+      border-radius:82px;
+    }
+    .Contemporary {
+      width: 137px;
+      height: 24px;
+      font-family: CeraGodrejInterio;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    
+    
+   
+    .bigSofa {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .text-block {
+      
+      position: absolute;
+      top: 51%;
+    left: 43%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, .4);
+      color: white;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .container {
+      position: relative;
+    }
+    
+    .UUs-with-tagline-1 {
+      // width: 140px;
+      height: 62px;
+      object-fit: contain;
+    }
+    .Image-gallery-Copy-3 {
+      // width: 376px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .A-one-stop-shop-inte {
+      // width: 442px;
+      height: 40px;
+      font-family: CeraGodrejInterio;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.25;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .seeMore {
+      width: 150px;
+      height: 30px;
+      background-color: #070707;
+    }
+    .headerText {
+      // width: 699px;
+      height: 128px;
+      font-family: CeraGodrejInterio;
+      font-size: 56px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.14;
+      letter-spacing: normal;
+      color:blue;
+      position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    
+    .header-text-style-1 {
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .headerView {
+      width: 200px;
+      height: 46px;
+      background-color: #ffffff;
+    }
+    /*-----CSS for Inspiration details page-----*/
+  
+    .Inspiration-details {
+      // width: 1440px;
+      height: 2429px;
+      background-color: #ffffff;
+    }
+  
+    
+    .Bitmap {
+    // width: 564px;
+    height: 640px;
+  }
+
+  
+  
+  .leftArrow {
+    margin-left:-47px;
+    font-size: 0;
+    line-height: 0;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: 0;
+    background: 0 0;
+  }
+  .text-blocker {
+      width: 407px;
+      height: 185px;
+    position: absolute;
+    top: 57%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .headerpart {
+    font-family: CeraGodrejInterio;
+    font-size: 18px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+    color: #0f0c0c;
+  }
+  .prices {
+    font-family: CeraGodrejInterio;
+    font-size: 14px;
+    font-weight: bold;
+  
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+    color: #0f0c0c;
+  }
+  .stoolimg{
+    margin-top: 27px;
+    width: 139px;
+    height: 120px;
+  }
+  .RecHead{
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    // width:374px;
+    height:36px;
+  }
+  .tagplaceholder{
+    margin-left: 134px;
+      font-family: CeraGodrejInterio;
+      font-size: 16px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.38;
+      letter-spacing: normal;
+      color: var(--greyish-brown);
+  }
+  .Paragraph-Copy-133 {
+    // width: 361px;
+    height: 40px;
+    font-family: CeraGodrejInterio;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    color: black;
+  }
+  .crousdiv {
+    width: 458px;
+    height: 46px;
+    background-color: var(--ice-blue);
+  }
+  .subheadet {
+    width: 140px;
+    height: 22px;
+    font-family: CeraGodrejInterio;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    color: var(--greyish-brown);
+  }
+  }
+
