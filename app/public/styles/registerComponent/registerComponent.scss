@@ -467,6 +467,46 @@
         &.modal-wrapperotp {
             top:initial;
             bottom: 0px;
+            .modal-dialog{
+                .modal-content{
+                    .modal-wrapperotp{
+                        .modal-wrapper{
+                            padding: 25px 0px 0px 0px;
+                            .otp_screen{
+                                max-width:100%;
+                                .form_register{
+                                    max-width: 100%;
+                                    .heading{
+                                        font-size: 14px;
+                                        text-align: left;
+                                        padding: 7px 0px 18px 50px;
+                                    }
+                                    .otp-verification{
+                                        padding: 15px 20px 0px 20px;
+                                        border-top:1px solid  $lightblueGrey;
+                                        .otp-text{
+                                            font-size: 10px;
+                                            line-height: normal;
+                                            font-weight: normal;
+                                            font-family: $font-regular;
+                                            color:$black;
+                                        }
+                                        .form-control{
+                                            border: 1px solid $black;
+                                            border-radius: 0px;
+                                        }
+                                        .resend-otp{
+                                            bottom: initial;
+                                            top:0px;
+                                            margin:11px 10px 0px 0px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     } 
   }

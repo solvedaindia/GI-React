@@ -276,7 +276,7 @@ export class HeaderMobile extends React.Component {
       navItem = (
         <div className="leftAnim">
           <div className="topMenu">
-            <label className={getCookie('isLoggedIn') === 'false' ? 'usernameTxt':'usernameTxt userInfo'}>{this.state.userName}!</label>
+            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo':'usernameTxt'}>{this.state.userName}!</label>
             {loginLogoutItem}
           </div>
           <ul>
