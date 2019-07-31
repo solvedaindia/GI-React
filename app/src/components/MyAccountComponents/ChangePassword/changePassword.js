@@ -27,6 +27,7 @@ class ChangePassword extends React.Component {
     errorCurrent: false,
     errorNew: false,
     newPasswordPasteTxt: null,
+    isSaveBtnActive: false,
   };
 
   componentDidMount() {
@@ -67,7 +68,12 @@ class ChangePassword extends React.Component {
 
   saveBtnPressed() {
     // this.validate(this.state.inputTextCurrent, this.state.errorCurrent);
-    // console.log('afterrrr');
+    // console.log('afterrrr',this.state.isSaveBtnActive);
+    if (!this.state.isSaveBtnActive) {
+      return
+    }
+
+
     if (!validateEmptyObject(this.state.inputTextCurrent)) {
       this.setState({
         errorCurrent: true,
@@ -149,25 +155,56 @@ class ChangePassword extends React.Component {
   handleInputChange(value) {
     console.log('Handle Input --- ', value.target.id);
     if (value.target.id === 'new') {
+      this.state.inputTextNew = this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value;
       this.setState({
         errorCurrent: false,
         errorNew: false,
-        inputTextNew: this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value,
+        // inputTextNew: this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value,
         newPasswordPasteTxt: null,
       });
     } else {
+      this.state.inputTextCurrent = value.target.value;
       this.setState({
         errorCurrent: false,
         errorNew: false,
-        inputTextCurrent: value.target.value,
+        // inputTextCurrent: value.target.value,
       });
     }
+
+    this.enableDisableSaveBtn();
+  }
+
+  enableDisableSaveBtn() {
+    console.log('ddddd -- =',this.state.inputTextCurrent);
+    var isBtnValidate = true;
+    // console.log('maksss --- ', this.state.userResponse.emailID, this.state.inputText_email)
+    // if (this.state.userResponse.name !== this.state.inputText_name) {
+
+    //   isBtnValidate = false;
+    // }
+    // if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
+    //   isBtnValidate = false;
+    // }
+    // if (this.state.userResponse.emailID !== this.state.inputText_email) {
+    //   isBtnValidate = false;
+    // }
+    if (this.state.inputTextCurrent !== '' && this.state.inputTextNew !== '') {
+      console.log('ZZZZZZ -- =',this.state.inputTextCurrent);
+      isBtnValidate = true;
+    }
+    else {
+      isBtnValidate = false;
+    }
+    this.setState({
+      isSaveBtnActive: isBtnValidate,
+    })
+
   }
 
   onPasteText(value) {
-    
+
     if (value.target.id === 'new') {
-      console.log('onPasge --- ',value.clipboardData.getData('text'))
+      console.log('onPasge --- ', value.clipboardData.getData('text'))
       this.setState({
         errorCurrent: false,
         errorNew: false,
@@ -177,7 +214,7 @@ class ChangePassword extends React.Component {
   }
 
   onRWDCancelBtnClick() {
-    console.log('dddid -- ',this.props)
+    console.log('dddid -- ', this.props)
     this.props.resetRWDHeaderFlag(true);
   }
 
@@ -213,7 +250,7 @@ class ChangePassword extends React.Component {
             {this.state.inputTextCurrent !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword" >
               {<img src={require('../../SVGs/eye.svg')} />}
             </span> : null}
-            
+
           </div>
           {errorItemCurrent}
         </div>
@@ -246,10 +283,7 @@ class ChangePassword extends React.Component {
           {errorItemNew}
         </div>
         {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
-        <button
-          onClick={this.saveBtnPressed.bind(this)}
-          className="btn-apply btn"
-        >
+        <button onClick={this.saveBtnPressed.bind(this)} className={this.state.isSaveBtnActive ? "btn-applyActive btn" : "btn-apply btn"}>
           Save
         </button>
       </div>
@@ -269,6 +303,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {resetRWDHeaderFlag},
+  { resetRWDHeaderFlag },
 )(ChangePassword);
 //export default ChangePassword;
