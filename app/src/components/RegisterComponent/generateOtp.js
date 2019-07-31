@@ -102,7 +102,7 @@ class GenerateOtp extends React.Component {
                     <Form>
                         <FormGroup className='otp-verification'>
                             <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
-                            <p className='text otp-text text-center'>Enter the verification code that has been OTP sent to your mobile number</p>
+                            <p className='text otp-text'>Enter the verification code that has been OTP sent to your mobile number</p>
                             <div className='form-div clearfix'>
                                 <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
                                 {errorItem}
