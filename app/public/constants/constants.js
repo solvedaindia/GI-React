@@ -99,6 +99,8 @@ export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
 /* Recently Viewed API */
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
+/* CLP THEME API */
+export const clpThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/clp/themes/`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
 /* Recommendation */

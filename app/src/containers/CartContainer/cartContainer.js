@@ -171,9 +171,9 @@ class CartDetail extends React.Component {
               </p>:''}
               {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
               :
-              (<div class="checkout-btn-floater">
-                  <div class="total-amount"><div class="net-amount-box">₹{cartData.orderSummary.netAmount}<span class="total-amount-text">Total Amount</span></div></div>
-                  <div class="proceed-btn"><a class="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
+              (<div className="checkout-btn-floater">
+                  <div className="total-amount"><div className="net-amount-box">₹{cartData.orderSummary.netAmount}<span className="total-amount-text">Total Amount</span></div></div>
+                  <div className="proceed-btn"><a className="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
                 </div>)}
             </div>
           </div>
