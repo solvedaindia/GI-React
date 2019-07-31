@@ -1,26 +1,29 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/clpContainer/clpContainer.scss';
-// import themeData from '../../data/themeData.json';
+import ThemeData from './themeData';
 import {
-	espotAPI,
+	clpThemeAPI,
 	imagePrefix
 } from '../../../public/constants/constants';
 
 class LivingTheme extends React.Component {
-  state = {
-    themeData: null,
-    isLoading: true,
-    errors: null,
-  };
-
+	constructor(props) {
+		super(props);
+		this.state = {
+			themeData: null,
+			isLoading: true,
+			errors: null,
+			showPopup: false
+		};
+	  }
   contentShowDetails() {
     console.log('CLICKED');
   }
 
   getThemeData() {
   	apiManager
-  		.get(espotAPI+'GI_CLP_THEME_living')
+  		.get(clpThemeAPI+'GI_CLP_THEME_living')
   		.then(response => {
   			this.setState({
   			themeData: response.data.data,
@@ -44,27 +47,13 @@ class LivingTheme extends React.Component {
 			<p className='desc'>{themeData.description}</p>
 			{themeData.recoImgArray.map((themeItem) => {
 				return(
-					<div class='content-childTheme'>
+					<div className='content-childTheme'>
 						<figure>
 							<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
 						</figure>
 						{themeItem.recoIconArray.map((itemDetail) => {
 							return (
-								itemDetail.coords.map((cordVal, i) => {
-									const x = cordVal.x+'%';
-									const y = cordVal.y+'%';
-									return(
-										<span
-											className='content-icons'
-											style={{top:x, left:y}}
-										>
-											<img
-												src={`${imagePrefix}${itemDetail.iconOpen}`}
-												alt= 'open-icon'
-											/>
-										</span>
-									)									
-								})
+								<ThemeData itemDetail={itemDetail} />
 							)
 						})}
 					</div>
