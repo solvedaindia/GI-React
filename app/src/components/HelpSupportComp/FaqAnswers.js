@@ -159,7 +159,6 @@ You can also track your order by visiting www.Godrej Interio .com and clicking o
               </div>
             </div>
 
-            <div className="faqHeader">Buyers</div>
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h4 className="panel-title">

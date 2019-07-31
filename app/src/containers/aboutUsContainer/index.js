@@ -87,11 +87,12 @@ render() {
       <div className="container">
         <AboutTopMost />
       </div>
-      <div className="row para">
+      <div className='OurProcessContainer'>
+      <div className="row">
         <div className="container">
           <div className="col-md-6">
             <h1 className="headingtitle">Our Process</h1>
-            <img className="background" src={this.state.img_url} alt="image" />
+            <img className='processBigImg' src={this.state.img_url} alt="image" />
             <div>
               <button name="1" className="ProcessNumber" onClick={this.handleclick}>1</button>
               <button name="2" className="ProcessNumber" onClick={this.handleclick}>2</button>
@@ -112,6 +113,7 @@ render() {
           </div>
 
         </div>
+      </div>
       </div>
       <div className='greenContainer'>
         <div className='container'>
@@ -164,7 +166,7 @@ render() {
             <div className="row">
               <div className="col-md-4 padding"><img className="imgs" src={image} /></div>
               <div className="col-md-8">
-                <p className="paragraph"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
+                <p className="paragraph"><b>India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
                 <div>
                   <span className="color">22 oct 2018</span>
                   <span> | by john jacobs</span>

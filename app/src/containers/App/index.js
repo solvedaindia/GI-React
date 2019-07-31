@@ -210,7 +210,7 @@ export default class App extends React.Component {
           <Route path="/cookie" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
-          <Route path="/kitchen2" component={SteelChefKitchen} />
+          <Route path="/Chefkitchen" component={SteelChefKitchen} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacyPolicy" component={privacyPolicy} />

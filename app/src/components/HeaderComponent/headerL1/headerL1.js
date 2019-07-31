@@ -71,9 +71,12 @@ class HeaderL1 extends React.Component {
                           {linkData.text}
                         </Link>
                       ) : (
+                       
+                        <Link  to='/support'>
                         <a className="action" href={linkData.action}>
                           {linkData.text}
                         </a>
+                        </Link>
                       )
                     }
                 </>
