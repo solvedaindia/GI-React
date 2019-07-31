@@ -4,6 +4,7 @@ const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
 const headerUtil = require('../utils/headerutil');
+const radius = 25;
 
 /**
  *  Get Stores by Location i.e CityName
@@ -31,10 +32,14 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
     null,
     response => {
       if (response.status === 200) {
-        const storeData = response.body.PhysicalStore;
-
         const storeDataByCityArray = [];
-        storeDataParsing(storeData, storeDataByCityArray);
+        if (Object.keys(response.body).length !== 0) {
+          const storeData = response.body.PhysicalStore;
+
+          storeData.forEach(element => {
+            storeDataByCityArray.push(storeDataParsing(element));
+          });
+        }
         callback(null, storeDataByCityArray);
       } else {
         logger.debug('Error While fetching Store Details By Location API');
@@ -63,7 +68,6 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
     .replace('{{latitude}}', req.query.latitude)
     .replace('{{longitude}}', req.query.longitude);
 
-  const radius = 25;
   if (req.query.radius) {
     originUrl += `&radius=${req.query.radius}`;
   } else {
@@ -82,10 +86,14 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
     null,
     response => {
       if (response.status === 200) {
-        const storeData = response.body.PhysicalStore;
-
         const storeDataByCoordinatesArray = [];
-        storeDataParsing(storeData, storeDataByCoordinatesArray);
+        if (Object.keys(response.body).length !== 0) {
+          const storeData = response.body.PhysicalStore;
+
+          storeData.forEach(element => {
+            storeDataByCoordinatesArray.push(storeDataParsing(element));
+          });
+        }
         callback(null, storeDataByCoordinatesArray);
       } else {
         logger.debug('Error While fetching Store Details By Coordinates API');
@@ -122,8 +130,12 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
         const storeDataByStoreIdArray = [];
         if (Object.keys(response.body).length !== 0) {
           const storeData = response.body.PhysicalStore;
-          storeDataParsing(storeData, storeDataByStoreIdArray);
+
+          storeData.forEach(element => {
+            storeDataByStoreIdArray.push(storeDataParsing(element));
+          });
         }
+
         callback(null, storeDataByStoreIdArray);
       } else {
         callback(errorUtils.handleWCSError(response));
@@ -135,34 +147,31 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
 /**
  *  Parse the Store Data function
  */
-function storeDataParsing(storeData, parsedStoreData) {
-  if (storeData !== 0 && storeData !== undefined && storeData !== null) {
-    storeData.forEach(element => {
-      const storeDataObject = {};
-      storeDataObject.type = [];
-      storeDataObject.latitude = element.latitude;
-      storeDataObject.longitude = element.longitude;
-      storeDataObject.uniqueID = element.uniqueID;
-      storeDataObject.telephone = element.telephone1.trim();
-      storeDataObject.city = element.city;
-      storeDataObject.pinCode = element.postalCode.trim();
-      element.Description.forEach(storename => {
-        storeDataObject.storeName = storename.displayStoreName.trim();
-      });
-      element.Attribute.forEach(storeinfo => {
-        if (storeinfo.displayName === 'Type') {
-          storeDataObject.type.push(storeinfo.displayValue);
-        } else if (storeinfo.name === 'OwnerShip') {
-          storeDataObject.ownership = storeinfo.displayValue;
-        } else if (storeinfo.displayName === 'Label') {
-          storeDataObject.ribbonText = storeinfo.displayValue;
-        } else {
-          storeDataObject.ribbonText = '';
-        }
-      });
-      storeDataObject.address1 = `${element.addressLine[0]}`;
-      storeDataObject.address2 = `${element.addressLine[1]}`;
-      parsedStoreData.push(storeDataObject);
-    });
-  }
+function storeDataParsing(element) {
+  const storeDataObject = {};
+  storeDataObject.type = [];
+  storeDataObject.latitude = element.latitude;
+  storeDataObject.longitude = element.longitude;
+  storeDataObject.uniqueID = element.uniqueID;
+  storeDataObject.telephone = element.telephone1.trim();
+  storeDataObject.city = element.city;
+  storeDataObject.pinCode = element.postalCode.trim();
+  element.Description.forEach(storename => {
+    storeDataObject.storeName = storename.displayStoreName.trim();
+  });
+  element.Attribute.forEach(storeinfo => {
+    if (storeinfo.displayName === 'Type') {
+      storeDataObject.type.push(storeinfo.displayValue);
+    } else if (storeinfo.name === 'OwnerShip') {
+      storeDataObject.ownership = storeinfo.displayValue;
+    } else if (storeinfo.displayName === 'Label') {
+      storeDataObject.ribbonText = storeinfo.displayValue;
+    } else {
+      storeDataObject.ribbonText = '';
+    }
+  });
+  storeDataObject.address1 = `${element.addressLine[0]}`;
+  storeDataObject.address2 = `${element.addressLine[1]}`;
+
+  return storeDataObject;
 }

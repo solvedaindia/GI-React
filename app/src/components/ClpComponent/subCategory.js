@@ -101,7 +101,7 @@ export class SubCategory extends React.Component {
                     {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
                   </a>
                   <figcaption className="catDetails">
-                    <span className="catItem">{subCatListData.categoryName}</span>
+                    <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
                       {subCatListData.productCount} Products
                   </span>

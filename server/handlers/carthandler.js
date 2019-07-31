@@ -300,7 +300,15 @@ function getCartData(headers, callback) {
     headers.storeId,
   )}/@self?profileName=${cartProfileName}`;
   const reqHeader = headerutil.getWCSHeaders(headers);
-
+  /* 
+  async function name(params,cb) {
+    try {
+      var res = origin.getresp(url,method);
+    } catch (error) {
+      throw err;
+    }
+  }
+ */
   origin.getResponse(
     'GET',
     cartUrl,

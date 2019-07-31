@@ -4,6 +4,8 @@ const origin = require('../utils/origin.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 
+const subscriptionMessage = 'Thanks for Subscribing';
+
 /**
  * Newsletter API
  * @param email_id
@@ -43,7 +45,7 @@ module.exports.newsLetterSubscription = function newsLetterSubscription(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, { message: 'Thanks for Subscribing' });
+        callback(null, { message: subscriptionMessage });
       } else {
         logger.error(
           `newsletter error ${JSON.stringify(response.body)}`,

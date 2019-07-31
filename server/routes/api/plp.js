@@ -44,4 +44,17 @@ router.get('/byIds', (req, res, next) => {
   });
 });
 
+router.get('/bypartnumbers', (req, res, next) => {
+  plphandler.productListByPartNumbers(req.headers, req.query, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;
