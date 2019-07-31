@@ -11,6 +11,8 @@ import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 import { Row, Col, Grid } from 'react-bootstrap';
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
+import ShareLogo from '../../../components/SVGs/shareIcon';
+import SocialMedia from '../../../utils/socialMedia';
 
 class HeaderMobile extends React.Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class HeaderMobile extends React.Component {
     this.state = {
       isOnHome: false,
       headerRenderItem: null,
+      showSocialShare: false,
     };
     this.headerCallback = this.headerCallback.bind(this);
     this.pageNavigationRender = this.pageNavigationRender.bind(this);
@@ -66,7 +69,7 @@ class HeaderMobile extends React.Component {
           </div>
 
           <ul className="mob-mini-nav">
-            <WishListCount pageNavigationRenderPro={this.pageNavigationRender}/>
+            <WishListCount pageNavigationRenderPro={this.pageNavigationRender} />
             <CartCount />
             {!this.state.isOnHome ? <li className="searchIcon">
               <button
@@ -96,8 +99,15 @@ class HeaderMobile extends React.Component {
     );
   }
 
+  onShareClick() {
+    // this.setState({
+    //   showSocialShare: !this.state.showSocialShare,
+    // });
+    this.state.showSocialShare = !this.state.showSocialShare;
+    this.pageNavigationRender('My Wishlist');
+  }
+
   pageNavigationRender = (pageName) => {
-    console.log('Page Render ---- ', pageName);
     let item = (
       <Row>
         <Col xs={12} md={12} className='backToCategory'>
@@ -114,6 +124,16 @@ class HeaderMobile extends React.Component {
               <span className='navigationTitle'>{pageName}</span>
             </li>
           </ul>
+          {pageName === 'My Wishlist' ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
+            <ShareLogo />
+            {/* {this.state.showSocialShare ? (
+              <SocialMedia
+                fromWislistPro
+                sharingURLPro={'https:dksf'}
+              />
+            ) : null} */}
+          </button> : null}
+
         </Col>
       </Row>
     );
@@ -135,6 +155,7 @@ class HeaderMobile extends React.Component {
   headerCallback = () => {
     this.setState({
       headerRenderItem: this.defaultRender(),
+      showSocialShare: false,
     });
     console.log('miii --- ', this.props);
     if (!this.props.match.isExact) {
