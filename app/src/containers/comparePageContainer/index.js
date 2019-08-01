@@ -139,7 +139,7 @@ export class ComparePageContainer extends React.Component {
             <button to="#" className="back-btn" onClick={this.goBack}>Go Back</button>
             </Col>
           </Row>
-          <Row><h2 className="heading">Compare Products {this.state.data.length}/3</h2></Row>
+          <Row><h1 className="heading">Compare Products {this.state.data.length}/3</h1></Row>
           {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} swatchHandle={this.swatchHandle} /> : ''}
         </div>
       )

@@ -236,9 +236,9 @@
     .welcomeBack {
         .modal-dialog{
             .modal-content{
-                min-height: 640px;
+                min-height: 650px;
                 .forgotPassword{
-                    bottom:201px;
+                    bottom:211px;
                 }
                 
                 .divider {
@@ -293,10 +293,21 @@
                             height: 44px;
                             font-size: 12px;
                         }
+                        input[type='password']{
+                            letter-spacing:6px;
+                        }
                     }
                     .password-field{
                         .valiationPosition-NewPassword{
                             top: 10px;
+                        }
+                    }
+                    .relative{
+                        position: relative;
+                        .error-msg{
+                            position: absolute;
+                            top: 0px;
+                            margin-top: 44px;
                         }
                     } 
                 }

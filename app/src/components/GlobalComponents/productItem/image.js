@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 import ImageLoader from '../../../utils/imageLoader';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../../public/constants/constants';
 

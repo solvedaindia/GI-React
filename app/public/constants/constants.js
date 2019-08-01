@@ -1,12 +1,10 @@
 import { getCookie } from '../../src/utils/utilityManager';
 import { validateEmptyObject } from '../../src/utils/validationManager';
-
 export const secureHttp = 'https';
-export const port1 = '3001';
-export const port2 = '8002';
-export const port3 = '8443';
-export const host1 = window.location.hostname;
-export const host = window.location.hostname;
+export const port1 = '';
+export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
+export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+export const host = process.env.envKeys.WEBSERVER_IP || window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const wishlistDataCookie = 'wishlistData';
@@ -21,7 +19,7 @@ export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
 export const headerStatic = `${secureHttp}://${host}:${port2}/api/v1/header_static_info`;
 /* IP Data */
-export const ipDataApi = 'https://api.ipdata.co?api-key=test';
+export const ipDataApi = 'https://api.ipdata.co?api-key=9d9101e52609b887345507736c6548c3c961d80a7b033cf26b2a2cac';
 /* User Context API */
 export const mwApi = `${secureHttp}://${host}:${port1}/api/v1/user-context`;
 /* Categories API */
@@ -52,8 +50,6 @@ export const pinCodeServiceAPI = `${secureHttp}://${host}:${port2}/api/v1/pincod
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Invoice API */
 export const invoicAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/invoice/{invoiceNo}`;
-/* Auto Suggest API */
-export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
 export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
 /* Homepage Layout API */
@@ -103,6 +99,8 @@ export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
 /* Recently Viewed API */
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
+/* CLP THEME API */
+export const clpThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/clp/themes/`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
 /* Recommendation */
@@ -177,7 +175,6 @@ export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
 
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
-export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
@@ -193,7 +190,7 @@ export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checko
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
-export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+export const imagePrefix = `${secureHttp}://${imgHost}/${imageStore}`;
 
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;

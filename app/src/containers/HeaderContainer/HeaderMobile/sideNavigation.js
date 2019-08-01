@@ -276,7 +276,7 @@ export class HeaderMobile extends React.Component {
       navItem = (
         <div className="leftAnim">
           <div className="topMenu">
-            <label className={getCookie('isLoggedIn') === 'false' ? 'usernameTxt':'usernameTxt userInfo'}>{this.state.userName}!</label>
+            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo':'usernameTxt'}>{this.state.userName}!</label>
             {loginLogoutItem}
           </div>
           <ul>
@@ -317,7 +317,17 @@ export class HeaderMobile extends React.Component {
                           </Link>
                         )
                       :
-                      < li className="navTxt" >{linkData.text}</li>
+                      linkData.text === 'LOCATE STORES' ? (
+                        <Link
+                          onClick={() => this.onLinkNavigation('')}
+                          to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                        >
+                          < li className="navTxt" >{linkData.text}</li>
+                          
+                        </Link>
+                      )
+                      :
+                      < li className="navTxt" href={linkData.action}>{linkData.text}</li>
                   }
                 </>
               )

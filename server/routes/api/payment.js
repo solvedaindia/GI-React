@@ -3,8 +3,7 @@ const router = express.Router();
 const paymentHandler = require('../../handlers/paymenthandler.js');
 require('dotenv').config();
 
-const clientUrl =
-  `https://${process.env.WEBSERVER_IP}/` || 'https://203.110.85.50/';
+const clientUrl = ('https://'+process.env.WEBSERVER_IP) || 'http://localhost:5000/';
 
 router.post('/initiateBDPayment', (req, res, next) => {
   paymentHandler.initiateBDPayment(req.body, req.headers, (err, result) => {
