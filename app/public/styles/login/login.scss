@@ -46,6 +46,15 @@
             opacity: 1;
         }
     }
+    .loginForm{
+        .relative{
+            position: relative;
+            .error-msg{
+              position: absolute;
+              bottom: -30px;
+            }
+        }
+    }
     .loginForm {
         width: 100%;
         margin: auto;
@@ -110,11 +119,12 @@
     .registerNow {
         border: none;
         background-color: transparent;
-        font-size: $base*1.5;
+        font-size: $base*1.75;
         color: $cerulean;
         text-align: right;
-        font-family: $font-regular;
-        cursor: pointer;
+        font-family: $font-bold;
+        cursor: pointer;   
+        text-decoration: underline;     
     }
     .registerHere,
     .socialLogin {
@@ -191,6 +201,10 @@
                     }
                     .registerHere{
                         padding: $base*2 $base*4;
+                        font-size:$base*1.75;
+                        .labelText{
+                            font-family: $font-regular;
+                        }
                     }
 
                     .loginForm{
