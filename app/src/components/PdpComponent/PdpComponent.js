@@ -16,6 +16,7 @@ import MobileDiscountAndPrice from './mobileComponents/discountAndPrice';
 import MobileProductFeatures from './mobileComponents/productFeatures';
 import MobilePurchaseGuideGuide from './mobileComponents/purchaseGuide';
 import MobileProductDetail from './mobileComponents/productDetail';
+import MobileAddtocart from '../PdpComponent/mobileComponents/quantityAndPincode';
 import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
@@ -391,12 +392,22 @@ class PdpComponent extends React.Component {
 										resolvedSku={this.state.skuData}
                     handleOptionData={this.handleSwatches.bind(this)}
                   />
+									{ isMobile() &&
+                  <MobileAddtocart
+                    skuData={this.state.skuData}
+                    sticky={false}
+                    pinCodeData={this.state.pincodeData}
+                    handleAddtocart={this.handleAddtocart.bind(this)}
+                    history={this.props.historyData}
+                  />
+									}
                   <ProductInfo
                     productData={this.state.skuData}
                     defAttributes={attrTypeData}
 										pinCodeData={this.state.pincodeData}
 										espotPromo={this.props.espotPromo}
                   />
+									{ !isMobile() &&
                   <AddToCart
                     skuData={this.state.skuData}
                     sticky={false}
@@ -404,6 +415,7 @@ class PdpComponent extends React.Component {
                     handleAddtocart={this.handleAddtocart.bind(this)}
                     history={this.props.historyData}
                   />
+									}
                   { isMobile() && <Row className='add-to-cart-floater'>
                       <Col md={6} sm={12} xs={12} className="product">
                           <div className='product-price-detail'>
