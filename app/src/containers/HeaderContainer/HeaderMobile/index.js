@@ -13,6 +13,9 @@ import { Row, Col, Grid } from 'react-bootstrap';
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 import ShareLogo from '../../../components/SVGs/shareIcon';
 import SocialMedia from '../../../utils/socialMedia';
+import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
+import '../../../../public/styles/pdpComponent/pdpComponent.scss';
+const shareImg = <img src={require('../../../../public/images/share.svg')} />;
 
 class HeaderMobile extends React.Component {
   constructor(props) {
@@ -54,6 +57,10 @@ class HeaderMobile extends React.Component {
     })
   }
 
+  wishlsitShareURLCallback(shareURL) {
+console.log('Share URL --- ',shareURL);
+  }
+
   defaultRender() {
     console.log('msmsms -- ', this.state.isOnHome);
     return (
@@ -69,7 +76,7 @@ class HeaderMobile extends React.Component {
           </div>
 
           <ul className="mob-mini-nav">
-            <WishListCount pageNavigationRenderPro={this.pageNavigationRender} />
+            <WishListCount pageNavigationRenderPro={this.pageNavigationRender} shareURLCallbackPro={this.wishlsitShareURLCallback.bind(this)} />
             <CartCount />
             {!this.state.isOnHome ? <li className="searchIcon">
               <button
@@ -100,9 +107,9 @@ class HeaderMobile extends React.Component {
   }
 
   onShareClick() {
-    // this.setState({
-    //   showSocialShare: !this.state.showSocialShare,
-    // });
+    this.setState({
+      showSocialShare: !this.state.showSocialShare,
+    });
     this.state.showSocialShare = !this.state.showSocialShare;
     this.pageNavigationRender('My Wishlist');
   }
@@ -125,13 +132,13 @@ class HeaderMobile extends React.Component {
             </li>
           </ul>
           {pageName === 'My Wishlist' ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
-            <ShareLogo />
-            {/* {this.state.showSocialShare ? (
-              <SocialMedia
-                fromWislistPro
-                sharingURLPro={'https:dksf'}
-              />
-            ) : null} */}
+            {/* <ShareLogo /> */}
+            {/* {this.state.showSocialShare ? ( */}
+              
+              <SocialMediaRWD fromWislistPro
+              sharingURLPro={this.props.shareWishlistURL}
+               shareImage={shareImg}/>
+            {/* ) : null} */}
           </button> : null}
 
         </Col>
@@ -173,10 +180,12 @@ class HeaderMobile extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
-  console.log('Mobile Header Subscription --- ', defalutHeaderFlag);
+  const wishlistURL = getReleventReduxState(stateObj, 'rwdWishlistShareURL');
+  console.log('Mobile Header Subscription --- ', wishlistURL);
 
   return {
     isHeaderReset: defalutHeaderFlag,
+    shareWishlistURL: wishlistURL,
   };
 }
 

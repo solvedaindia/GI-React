@@ -22,13 +22,14 @@ import {
   UPDATE_PROFILE,
   GET_CART_FETCHED,
   RESET_RWDHEADER,
+  SHAREWISHLISTURL_RWD,
 } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
   // loading: false,
   error: false,
-  currentUser: false,
+  // currentUser: false,
   // userData: {
   //   repositories: false,
   // },
@@ -37,6 +38,7 @@ const initialState = fromJS({
   removeWishlistFlag: false,
   userName: null,
   resetRWDFlag: false,
+  rwdWishlistShareURL: null,
   // cart: null
   // logonId: null,
 });
@@ -70,6 +72,8 @@ function appReducer(state = initialState, action) {
     // .set('logonId', action.logonId);
     // case GET_CART_FETCHED:
     //   return state.set('cart', action.payload);
+    case SHAREWISHLISTURL_RWD:
+      return state.set('loading', false).set('rwdWishlistShareURL', action.url);
     default:
       return state;
   }
