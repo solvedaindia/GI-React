@@ -13,6 +13,7 @@ import {
   resolveTheWishlistData,
   getCookie,
   getReleventReduxState,
+  isMobile,
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import MyWishlist from '../MyWishlist/myWishlist';
@@ -67,7 +68,9 @@ class wishListCount extends React.Component {
   }
 
   onLinkNavigation(pageText) {
-    this.props.pageNavigationRenderPro(pageText);
+    if (isMobile()) {
+      this.props.pageNavigationRenderPro(pageText);
+    }
   }
 
   render() {

@@ -41,6 +41,11 @@ class MyWishlist extends React.Component {
   }
 
   componentDidMount() {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
+
     if (this.props.location.search !== '') {
       console.log('mixxx xxx --- ', this.props);
       this.decryptSharingURL(this.props.location.search);
@@ -50,6 +55,10 @@ class MyWishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
     console.log(
       'nextProps',
       `${nextProps.wishlistUpdatedCount}  this Porps `,
