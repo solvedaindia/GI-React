@@ -55,8 +55,21 @@ class EspotContent extends React.Component {
 						Hello Start Exploring
 					</h2>
 				}
-				<h1 className="title">{pageLayoutEspot.title}</h1>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+				{(this.state.espotName === roomsEspotName) && 
+					(getCookie('isLoggedIn') !== 'true') ? 
+					<div className='exploreGuest'>
+						<div className='greeting'>
+							<p className='greetingHead'>Welcome</p>
+							<p className='msg'>Explore Rooms</p>
+						</div>
+						<div className='exploreSection' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+					</div>
+					:
+					<>
+					<h1 className="title">{pageLayoutEspot.title}</h1>
+					<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+					</>
+        		}
 			</div>
 		)
     );
