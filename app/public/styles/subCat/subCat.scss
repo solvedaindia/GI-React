@@ -54,6 +54,9 @@
         .starting {
             font-style: italic;
             font-size: 11px;
+            .startPrice {
+              margin-left: $base*0.5; 
+            }
         }
     }
 }

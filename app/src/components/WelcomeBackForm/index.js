@@ -6,6 +6,7 @@ import {
   regexEmail,
   regexMobileNo,
   validateEmptyObject,
+  regexPw
 } from '../../utils/validationManager';
 import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
 
@@ -20,6 +21,7 @@ class WelcomeForm extends Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
+      isActive: 'hideData'
     };
     this.showHidePass=this.showHidePass.bind(this);
     this.callbackFunc=this.callbackFunc.bind(this);
@@ -27,7 +29,12 @@ class WelcomeForm extends Component {
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass });
   };
 
   /* Handle Validation */
@@ -62,6 +69,11 @@ class WelcomeForm extends Component {
     if (!validateEmptyObject(obj.password)) {
       this.setState({
         errorMessagePassword: 'Enter a valid password ',
+      });
+      isValidate = false;
+    } else if ((!regexPw.test(obj.password) && obj.password.length < 25) || (obj.password.length > 25)) {
+      this.setState({
+        errorMessagePassword: 'Password entered is incorrect ',
       });
       isValidate = false;
     }
@@ -146,6 +158,7 @@ class WelcomeForm extends Component {
         <Input
           type={this.state.inputType}
           name="password"
+          id="password"
           title="Password"
           placeholder=""
           onChange={this.handleChange}
@@ -154,7 +167,7 @@ class WelcomeForm extends Component {
         />
        <span
             onClick={this.showHidePass}
-            className="valiationPosition-NewPassword"
+            className={`valiationPosition-NewPassword ${this.state.isActive}`}
           >
             {
               <img
