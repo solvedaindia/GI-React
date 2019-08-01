@@ -150,7 +150,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">Hello Guest!</a>
+            <a className="dropDown">Hello Guest</a>
           </li>
         ,
         loginStatus:
@@ -159,7 +159,7 @@ class UserAccInfo extends React.Component {
             onClick={this.onLoginRegisterClick.bind(this)}
           >
             {' '}
-            Login/Register
+            Log In/Register
           </a>
 
       });
