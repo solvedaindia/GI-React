@@ -93,8 +93,12 @@
                 z-index: 999999;
             }
         }
-        
-
+        .hideData {
+            display: none;
+        }
+        .showData {
+            display: block;
+        }
     }
     .forgotPassword {
         font-size: $base*1.5;
