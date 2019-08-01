@@ -1999,6 +1999,55 @@
     .Pdpstickybar{
         display: none;
     }
+
+    .modalSocialIcons{
+        .modal-dialog{
+            .modal-content{
+                .modal-body{
+                    .close{
+                        top:15px;
+                        &::after, &::before{
+                            background: $black;
+                        }
+                    }
+                    .heading{
+                        font-size: 14px;
+                        color: $black;
+                        font-family: $font-medium;
+                        border-bottom: 1px solid $lightblueGrey;
+                        padding: 16px 20px;
+                        font-weight: bold;                        
+                    }
+                    .social-icon-share{
+                        padding: 10px 20px;
+                        .list{
+                            border-bottom: 1px solid #e8e8e8;
+                            padding: 17px 0px;
+                            .iconImg{
+                                float: left;
+                                width: 36px;
+                                svg{
+                                    margin: 0px;
+                                    width: 100%;
+                                }
+                            }
+                            .labelText{
+                                .social-icon-text{
+                                    font-size: 14px;
+                                    color: $black;
+                                    font-family: $font-medium;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.in{
+            top: initial;
+            bottom: 0px;
+        }
+    }
   }
 
 

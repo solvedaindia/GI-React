@@ -49,19 +49,19 @@ class SocialMedia extends React.Component {
         }
 		return (
 			<>
-				<a className='emiDetails share-btn'  onClick={this.handleShow}>{this.props.shareImage}</a>
-				<Modal className='modal_emiInstallment' show={this.state.show} onHide={this.handleClose}>
+				<a className='share-btn'  onClick={this.handleShow}>{this.props.shareImage}</a>
+				<Modal className='modalSocialIcons' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
+                        <h2 className='heading'>Share this product</h2>
 						<Row>
 							<Col xs={12} md={12}>
-								<div className='emi_modal'>
                                 <div className="social-icon-share">
                                     <ul>
                                     <li className="list">
                                         <FacebookShareButton url={shareUrl} quote={title}>
                                         <div className="iconImg">
-                                            <FacebookIcon size={26} round />
+                                            <FacebookIcon size={20} round />
                                         </div>
                                         <div className="labelText">
                                             <span className="social-icon-text"> Facebook</span>
@@ -71,7 +71,7 @@ class SocialMedia extends React.Component {
                                     <li className="list">
                                         <WhatsappShareButton url={shareUrl} title={title}>
                                         <div className="iconImg">
-                                            <WhatsappIcon size={26} className="icons" round />
+                                            <WhatsappIcon size={20} className="icons" round />
                                         </div>
                                         <div className="labelText">
                                             <span className="social-icon-text">Whatsapp</span>
@@ -81,7 +81,7 @@ class SocialMedia extends React.Component {
                                     <li className="list">
                                         <TwitterShareButton url={shareUrl} title={title}>
                                         <div className="iconImg">
-                                            <TwitterIcon size={26} round />
+                                            <TwitterIcon size={20} round />
                                         </div>
                                         <div className="labelText">
                                             <span className="social-icon-text">Twitter</span>
@@ -91,7 +91,7 @@ class SocialMedia extends React.Component {
                                     <li className="list">
                                         <EmailShareButton url={`${title} ${shareUrl}`}>
                                         <div className="iconImg">
-                                            <EmailIcon size={26} round />
+                                            <EmailIcon size={20} round />
                                         </div>
                                         <div className="labelText">
                                             <span className="social-icon-text">Mail</span>
@@ -100,7 +100,7 @@ class SocialMedia extends React.Component {
                                     </li>
                                     </ul>
                                 </div>
-                            </div>
+
 							</Col>
 						</Row>
 					</Modal.Body>
