@@ -1,7 +1,9 @@
 import React from 'react';
+import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/clpContainer/clpContainer.scss';
 import ThemeData from './themeData';
+import { isMobile } from '../../utils/utilityManager';
 import {
 	clpThemeAPI,
 	imagePrefix
@@ -39,27 +41,54 @@ class LivingTheme extends React.Component {
   }
 
   render() {
-	  const { themeData } = this.state;
+		const { themeData } = this.state;
+		const settings = {
+			dots: true,
+			infinite: false,
+			speed: 500,
+			autoplay: true,
+			autoplaySpeed: 2000,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+		};
     return (
 		!!themeData && 
 		<div className="clpTheme">
-			<h2>{themeData.title}</h2>
+			<h2 className='title'>{themeData.title}</h2>
 			<p className='desc'>{themeData.description}</p>
-			{themeData.recoImgArray.map((themeItem) => {
-				return(
-					<div className='content-childTheme'>
-						<figure>
-							<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
-						</figure>
-						{themeItem.recoIconArray.map((itemDetail) => {
-							return (
-								<ThemeData itemDetail={itemDetail} />
-							)
-						})}
-					</div>
-				)
-			})
-		}
+			{!isMobile() ?
+				themeData.recoImgArray.map((themeItem) => {
+					return(
+						<div className='content-childTheme'>
+							<figure>
+								<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
+							</figure>
+							{themeItem.recoIconArray.map((itemDetail) => {
+								return (
+									<ThemeData itemDetail={itemDetail} />
+								)
+							})}
+						</div>
+					)
+				})
+				:
+				<Slider {...settings}>
+					{themeData.recoImgArray.map((themeItem) => {
+						return(
+							<div className='content-childTheme'>
+								<figure>
+									<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
+								</figure>
+								{themeItem.recoIconArray.map((itemDetail) => {
+									return (
+										<ThemeData itemDetail={itemDetail} />
+									)
+								})}
+							</div>
+						)
+					})}
+				</Slider>
+			}
 		</div>
     );
   }
