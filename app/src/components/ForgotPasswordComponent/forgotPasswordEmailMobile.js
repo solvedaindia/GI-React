@@ -82,6 +82,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
+        console.log('ssssss --- ',errorMessage);
         this.setState({
           error: true,
           errorMessage,

@@ -2,7 +2,7 @@
 
 .cartDetails {
     @include container-width;
-    margin: $base*6.5 auto;
+    margin: $base*14.5 auto;
     .cartItem {
         width: 64%;
         display: inline-block;
@@ -310,6 +310,12 @@
                 padding: $base*6;
                 .close {
                     color: $black;
+                    top: $base;
+                    &::after,
+                    &::before {
+                        background-color: $black;
+                        top: $base*1.25;
+                    }
                 }
             }
         }
@@ -349,135 +355,92 @@
         }
     }
 }
-
-
+/* 
+#Global Screen Chhange for Screen max 768
+*/
+@media screen and (min-width: 768px){
+.cartDetails{
+    .cartHeadDetails{
+        .title{
+            width: 60%;
+        }
+    }
+    .orderSummary {
+        .summary{
+            .emiInfo{
+                padding: 20px 0;
+                position: relative;
+                .emiDetails {
+                    top: 20px;
+                    cursor: pointer;
+                }
+                .btn-knowmore {
+                    position: absolute;
+                    right: 0;
+                    top: $base*2;
+                    background: transparent;
+                    border: none;
+                    color: $cerulean;
+                }
+            }
+        }
+        .title{
+            font-size: $base*2.25;
+            margin: $base*3.75 auto;
+        }
+        .promotion{
+            .promoCode{
+                font-size: $base*2.25;
+                margin: $base*2 0 0 0;
+            }
+            .promoDesc{
+                font-size: $base*1.75;
+            }
+            .applyPromo{
+                font-size: $base*2;
+                cursor: pointer;
+            }
+            .promoMsg{
+                cursor: pointer;
+            }
+            .promo{
+                .viewAllPromo{
+                    width: 100px;
+                    text-decoration: underline;
+                    font-size: 12px;
+                    color: $cerulean;
+                    margin: auto;
+                    display: block;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .cartItem{
+        .prodList{
+            min-height: 195px;
+            .prodImg{
+                min-height: 195px;
+                border-right: 1px solid $borderLight;
+            }
+            .prodDetails{
+                .prodTitle {
+                    font-size: $base*2;
+                    margin: $base*1.5 0 0;
+                } 
+                .subTitle {
+                    font-size: $base*1.37;
+                }
+                }
+        }
+    } 
+} 
+}
 
 /* 
-  #Screen 1281px to higher resolution desktops, Device = Desktops
+#Global Screen Chhange for Screen max 767
 */
-@media (min-width: 1281px) {
-  
-    //CSS
-    
-  }
-  
-
-  /* 
-    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
-  */
-  @media (min-width: 1025px) and (max-width: 1280px) {
-    
-    //CSS
-    
-  }
-  
-    /* 
-    #Global Screen Chhange for Screen max 768
-    */
-    @media screen and (min-width: 768px){
-        .cartDetails{
-            .cartHeadDetails{
-                .title{
-                    width: 60%;
-                }
-            }
-            .orderSummary {
-                .summary{
-                    .emiInfo{
-                        padding: 20px 0;
-                        position: relative;
-                        .emiDetails {
-                            top: 20px;
-                            cursor: pointer;
-                        }
-                        .btn-knowmore {
-                            position: absolute;
-                            right: 0;
-                            top: $base*2;
-                            background: transparent;
-                            border: none;
-                            color: $cerulean;
-                        }
-                    }
-                }
-                .title{
-                    font-size: $base*2.25;
-                    margin: $base*3.75 auto;
-                }
-                .promotion{
-                    .promoCode{
-                        font-size: $base*2.25;
-                        margin: $base*2 0 0 0;
-                    }
-                    .promoDesc{
-                        font-size: $base*1.75;
-                    }
-                    .applyPromo{
-                        font-size: $base*2;
-                        cursor: pointer;
-                    }
-                    .promoMsg{
-                        cursor: pointer;
-                    }
-                    .promo{
-                        .viewAllPromo{
-                            width: 100px;
-                            text-decoration: underline;
-                            font-size: 12px;
-                            color: $cerulean;
-                            margin: auto;
-                            display: block;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-            .cartItem{
-                .prodList{
-                    min-height: 195px;
-                    .prodImg{
-                        min-height: 195px;
-                        border-right: 1px solid $borderLight;
-                    }
-                    .prodDetails{
-                        .prodTitle {
-                            font-size: $base*2;
-                            margin: $base*1.5 0 0;
-                        } 
-                        .subTitle {
-                            font-size: $base*1.37;
-                        }
-                     }
-                }
-            } 
-        } 
-    }
-
-  /* 
-    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
-  */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    
-    //CSS
-    
-  }
-  
-
-
-  /* 
-    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
-  */
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    
-    //CSS
-    
-  }
-  
-
-  /* 
-    #Global Screen Chhange for Screen max 767
-  */
-  @media screen and (max-width: 767px){
+@media (min-width: 320px) and (max-width: 767px){
     .cartDetails {
         width: 100%;
         margin: 0 auto ;
@@ -628,7 +591,7 @@
                         font-family: $font-medium;
                         line-height:normal;
                     }
-                 }
+                    }
                 .quantityPrice {
                     border-top: 1px solid $borderLight;
                     .qytList {
@@ -744,24 +707,11 @@
             }
         }
     }
-  }
-
-
-  /* 
-    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
-  */
-  @media (min-width: 481px) and (max-width: 767px) {
-    
-    //CSS
-    
-  }
-  
-  
-  /* 
-    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
-  */
-  @media (min-width: 320px) and (max-width: 480px) {
-    
-    
-    
-  }
+    .modal.deletItem {
+        top: 76.5%;
+        bottom: 0;
+    }
+    .modal.modal_emiInstallment {
+        top: 14.5%;
+    }
+}

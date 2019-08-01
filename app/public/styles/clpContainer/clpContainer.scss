@@ -69,18 +69,90 @@
     }
 }
 
-@media (min-width: 320px) and (max-width: 676px) {
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+       
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
     .clpBase{
         // Theme
         .clpTheme {
             .content-childTheme {
-                .content-icons {
-                }
                 .details {
                     min-width: $base*23; 
                 }
             }
 
         }
+        .slider{
+            .fsBanner{
+                margin-top: 0px;
+            }
+        }
     }
-}
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    //CSS
+  }
