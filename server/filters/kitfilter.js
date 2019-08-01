@@ -13,6 +13,11 @@ function getKitSummary(kitData, promotions) {
     kitSummary.parentUniqueID = kitData.parentCatalogEntryID || '';
     kitSummary.swatchAttributes = [];
     kitSummary.swatchAttributes.push(getSwatchAttibute(kitData));
+    if (kitSummary.swatchAttributes.length > 0) {
+      kitSummary.swatchAttributes = filterSwatchAtrributes(
+        kitSummary.swatchAttributes,
+      );
+    }
     if (kitData.price && kitData.price.length > 0) {
       kitData.price.forEach(price => {
         if (price.usage === 'Display') {
@@ -122,4 +127,80 @@ function getSwatchAttibute(kitData) {
     });
   }
   return attributeJson;
+}
+
+module.exports.getSwatchAttibutesCopy = getSwatchAttibutesCopy;
+function getSwatchAttibutesCopy(bodyData) {
+  const swatchAttributes = [];
+  if (bodyData.components && bodyData.components.length > 0) {
+    bodyData.components.forEach(components => {
+      if (components.attributes && components.attributes.length > 0) {
+        components.attributes.forEach(attr => {
+          if (attr.usage === 'Defining') {
+            swatchAttributes.push(attr);
+          }
+        });
+      }
+    });
+  }
+  return swatchAttributes;
+}
+
+module.exports.filterSwatchAtrributes = filterSwatchAtrributes;
+function filterSwatchAtrributes(attributes) {
+  const swatchAttributes = [];
+  if (attributes && attributes.length > 0) {
+    attributes.forEach(attribute => {
+      if (swatchAttributes.length > 0) {
+        let temp = false;
+        for (let index = 0; index < swatchAttributes.length; index += 1) {
+          const attr = swatchAttributes[index];
+          if (attr.name === attribute.name) {
+            const attrJson = {};
+            attrJson.name = attribute.values[0].name.trim();
+            if (attribute.values[0].colorCode) {
+              attrJson.colorCode = attribute.values[0].colorCode;
+            } else {
+              attrJson.facetImage = attribute.values[0].facetImage;
+            }
+            attr.values.push(attrJson);
+            temp = true;
+            break;
+          }
+        }
+        if (temp === false) {
+          const attributeJson = {
+            name: '',
+            values: [],
+          };
+          attributeJson.name = attribute.name.trim();
+          const attrJson = {};
+          attrJson.name = attribute.values[0].name;
+          if (attribute.values[0].colorCode) {
+            attrJson.colorCode = attribute.values[0].colorCode;
+          } else {
+            attrJson.facetImage = attribute.values[0].facetImage;
+          }
+          attributeJson.values.push(attrJson);
+          swatchAttributes.push(attributeJson);
+        }
+      } else {
+        const attributeJson = {
+          name: '',
+          values: [],
+        };
+        attributeJson.name = attribute.name.trim();
+        const attrJson = {};
+        attrJson.name = attribute.values[0].name;
+        if (attribute.values[0].colorCode) {
+          attrJson.colorCode = attribute.values[0].colorCode;
+        } else {
+          attrJson.facetImage = attribute.values[0].facetImage;
+        }
+        attributeJson.values.push(attrJson);
+        swatchAttributes.push(attributeJson);
+      }
+    });
+  }
+  return swatchAttributes;
 }

@@ -63,11 +63,16 @@ class UserAccInfo extends React.Component {
     }
   }
 
-  forgotPasswordCallback() {
+  forgotPasswordCallback(isShowRegister) { //isShowRegister active for JIRA-902
+    console.log('mixxinx --' ,isShowRegister);
     this.setState({
       showLoginRegisterMain: true,
       showForgotPassword: false,
     });
+    if (isShowRegister) {
+      this.welcomeBackCallback(false);
+    }
+
   }
 
   registerCallback() {
