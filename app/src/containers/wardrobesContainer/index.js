@@ -12,6 +12,8 @@ import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
 import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import {Link} from 'react-router-dom'
+import WbEspots from '../../components/wardrobesComponent/wardrobesBenefits';
+import WIEspots from '../../components/wardrobesComponent/wardrobesInterio';
 
 
 export default class WardrobesContainer extends React.Component {
@@ -60,8 +62,10 @@ index: 0
                    
                   </div>
                 </div>
+                
               </div>
-              <div className="BenefitedWardrobes">
+              <WbEspots/>
+              {/* <div className="BenefitedWardrobes">
                 <div className="container">
                   <h1 className="Benefits-of-Modular">Benefits of Modular Wardrobes</h1>
                   <div className="row">
@@ -111,7 +115,7 @@ index: 0
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="crouselBAckgrounding">
                 <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                 <WardrobesTypes />
@@ -120,20 +124,24 @@ index: 0
               <div className="container">
                 <div className="row">
                   <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
-                  <p className="whatGoesPara">Choose from a vast range of acessories. Consectetur adipisicing
+                  <p className="whatgoessubhead">Choose from a vast range of acessories. Consectetur adipisicing
                     elit, sed do eiusmod tempor incididunt ut labore<br /> et dolore magna aliquat enim ad minim veniam,
                     quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                   <div className="col-md-6">
                     <h1 className="AccessoriesText">Accessories</h1>
-                    <p1 className="whatGoesPara">Choose from a vast range of acessories. Consectetur
+                    <p className="whatGoesPara">Choose from a vast range of acessories. Consectetur
                       adipisicing elit,<br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br />
                       enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br /> sit amet, consectetur
-                      adipisicing elit.<br /> </p1>
+                      adipisicing elit.<br /> </p>
 <ul className="moved">
-                      <li className="Materials-and-Finish">Materials and Finishes</li><br />
-                      <li className="Materials-and-Finish">Element</li><br />
-                      <li className="Materials-and-Finish">Add-ones</li>
- </ul>
+  <li> <a className="Materials-and-Finish">Materials and Finishes</a>
+  </li>
+  <li> <a className="Materials-and-Finish">Element</a>
+  </li>
+  <li> <a className="Materials-and-Finish">Add-ones</a>
+  </li>
+
+</ul>
                   </div>
                   <div className="col-md-6">
                     <WhatGoesward />
@@ -272,6 +280,7 @@ index: 0
                 
                 </div>
               </div>
+              <WIEspots/>
               <div className="modularWardrobes">
                 <div className="container">
                   <div className="row">

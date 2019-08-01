@@ -43,22 +43,20 @@ export default class KitchenHall extends Component {
       nextArrow: nextArrowImg
     };
     return (
-        <div>
-      <div className="container">
+        <div className='container'>
         <h2 className="Kitchen-Hall-Of-Fame">Kitchen Hall Of Fame</h2>
         <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
-        </div>
+     
 
         <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide} <div className="crousdiv"><p className="Paragraph-Copy-13">Chennai, L Kitchen</p></div></h3>
+                <h3>{slide}<h3 className="Paragraph-Copy-13">Chennai, L Kitchen</h3></h3>
               </div>
             );
           })}
         </Slider>
-
         </div>
     );
   }
