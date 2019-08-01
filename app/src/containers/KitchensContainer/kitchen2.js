@@ -14,7 +14,7 @@ import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 
 
-export default class WardrobesContainer extends React.Component {
+export default class ChefKitchenContainer extends React.Component {
 constructor(props){
 super(props);
 const scatchImg1 = require('../../../public/images/scatch1.png')
