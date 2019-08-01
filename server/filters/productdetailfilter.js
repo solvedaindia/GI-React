@@ -11,7 +11,7 @@ const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 module.exports.productDetailSummary = productDetailForPLP;
 function productDetailForPLP(productDetail) {
   const productDetailJson = {};
-  if(productDetail){
+  if (productDetail) {
     productDetailJson.uniqueID = productDetail.uniqueID;
     productDetailJson.productName = productDetail.name;
     productDetailJson.partNumber = productDetail.partNumber;
