@@ -54,8 +54,9 @@
 import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
-// import BannerData from '../../data/BannerData.json';
 import '../../../public/styles/slider.scss';
+import  '../../../public/styles/static-pages/warobes.scss'
+
 import {
   wardrobesBannerAPI,
   storeId,
@@ -66,23 +67,30 @@ class WardrobeBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      heroSlider: null,
+      wardrobeSlider: null,
       isLoading: false,
       error: null,
+      title: '',
+      description: '',
+      type: ''
+
     };
   }
 
-  getSliderData() {
+  getWardrobesBannerData() {
     apiManager
       .get(wardrobesBannerAPI)
       .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}
         this.setState({
-          heroSlider: data && data.data.bannerList,
+          wardrobeSlider: data && data.data.bannerList,
+          title: data && data.data.title,
+          description: data && data.data.desc,
+          type: data && data.data.type,
           isLoading: false,
         });
-        console.log('Slider Data', data.data.bannerList);
+        console.log('banner Data', data.data.title);
       })
       .catch(error => {
         this.setState({
@@ -93,25 +101,26 @@ class WardrobeBanner extends React.Component {
       });
     console.log('SLider Data Error');
   }
+  
 
   componentDidMount() {
-    this.getSliderData();
+    this.getWardrobesBannerData();
   }
 
   render() {
-    const { heroSlider } = this.state;
+    const { wardrobeSlider } = this.state;
     const settings = {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 3,
       slidesToScroll: 1,
     };
     return (
-      <div className="fsBanner">
+      <div className="bannerkitchenss">
         <Slider {...settings}>
-          {!!heroSlider &&
-            heroSlider.map((sliderData, index) => (
+          {!!wardrobeSlider &&
+            wardrobeSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
                 <img src={sliderData.imageSrc} alt={sliderData.alt} />
               </a>

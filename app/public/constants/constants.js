@@ -95,8 +95,12 @@ export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
 /* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
-/* Kitchen Banner Slider */
+/* wardrobes Banner Slider */
 export const wardrobesBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_BANNER`;
+/* Wardrobes hall Slider */
+export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_HALL_OF_FAME `;
+
+
 /* Featured Category */
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
 /* Recently Viewed API */
