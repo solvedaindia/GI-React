@@ -192,7 +192,7 @@ function findInventory(headers, reqParams, callback) {
           if (
             response.body.InventoryAvailability[0].inventoryStatus ===
               'Available' &&
-            Number(response.body.InventoryAvailability[0].availableQuantity) >
+            Number(response.body.InventoryAvailability[0].availableQuantity) >=
               Number(reqParams.quantity)
           ) {
             inventoryResponse.inventoryStatus = 'available';
@@ -283,8 +283,10 @@ function getExperienceStore(headers, reqParams, callback) {
   const reqHeader = headerutil.getWCSHeaders(headers);
   const originUrl = constants.experienceStore
     .replace('{{storeId}}', headers.storeId)
-    .replace('{{pincode}}', reqParams.pincode)
-    .replace('{{partNumber}}', reqParams.partNumber);
+    .replace('{{pincode}}', 400061)
+    .replace('{{partNumber}}', 'StoreItem1');
+    // .replace('{{pincode}}', reqParams.pincode)
+    // .replace('{{partNumber}}', reqParams.partNumber);
 
   origin.getResponse(
     'GET',

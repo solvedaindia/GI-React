@@ -361,8 +361,7 @@ const wcsErrorList = {
     ERROR_USER_DOES_NOT_EXIST_ON_FORGOT_PASSWORD: {
       status_code: 400,
       error_key: 'invalid_user_id',
-      error_message:
-        'You are not registered with Godrej Interio, please click here to register',
+      error_message: 'You are not registered with Godrej Interio.',
     },
   },
   error_401: {

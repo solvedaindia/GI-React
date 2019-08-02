@@ -12,7 +12,7 @@ import {
 } from '../../../public/constants/constants';
 import { getReleventReduxState, getCookie } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
-import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
+import { resetRemoveFromWishlistFlag, rwdShareWishlistURL } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
 import ShareLogo from '../SVGs/shareIcon';
 import SocialMedia from '../../utils/socialMedia';
@@ -41,6 +41,11 @@ class MyWishlist extends React.Component {
   }
 
   componentDidMount() {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
+
     if (this.props.location.search !== '') {
       console.log('mixxx xxx --- ', this.props);
       this.decryptSharingURL(this.props.location.search);
@@ -50,6 +55,10 @@ class MyWishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
     console.log(
       'nextProps',
       `${nextProps.wishlistUpdatedCount}  this Porps `,
@@ -139,6 +148,7 @@ class MyWishlist extends React.Component {
     // Encrypt
     const ciphertext = CryptoJS.AES.encrypt(parmaURL, encryptKey).toString();
     console.log('its encryptt --- ', ciphertext);
+    this.props.rwdShareWishlistURL(shareURL + ciphertext);
     this.setState({
       sharingURL: shareURL + ciphertext,
     });
@@ -255,5 +265,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { resetRemoveFromWishlistFlag },
+  { resetRemoveFromWishlistFlag, rwdShareWishlistURL },
 )(MyWishlist);

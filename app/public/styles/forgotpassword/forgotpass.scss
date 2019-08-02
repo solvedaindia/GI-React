@@ -24,6 +24,13 @@
               margin: 0;
               position: static;
               min-height: auto;
+
+              .registerHere {
+                color: blue;
+                border: 0;
+                text-decoration: underline;
+                height: 0px;
+              }
             }
 
             .form-control {

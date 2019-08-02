@@ -90,6 +90,8 @@ class Forgotpassowrd extends React.Component {
         modal: false,
       });
       this.props.callbackForgotPro();
+    } else if (itemStr == 'RegisterRedirect') {
+      this.props.callbackForgotPro(true);
     }
 
     this.setState({

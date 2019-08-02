@@ -24,6 +24,7 @@ import {
   RESET_REMOVEWISHLISTFLAG,
   UPDATE_PROFILE,
   RESET_RWDHEADER,
+  SHAREWISHLISTURL_RWD,
 } from '../../constants/app/constants';
 
 /**
@@ -104,5 +105,13 @@ export function resetRWDHeaderFlag(flag) {
   return {
     type: RESET_RWDHEADER,
     flag,
+  };
+}
+
+export function rwdShareWishlistURL(url) {
+  console.log('rwdShareWishlistURL---', url);
+  return {
+    type: SHAREWISHLISTURL_RWD,
+    url,
   };
 }
