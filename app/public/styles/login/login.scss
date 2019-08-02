@@ -17,6 +17,7 @@
     }
     .smallLogo{
         text-align: center;
+        padding: 23px 0 0 0;
     }
     .modal-dialog {
         width: 35%;
@@ -126,9 +127,10 @@
         font-size: $base*1.75;
         color: $cerulean;
         text-align: right;
-        font-family: $font-bold;
+        font-family: $font-regular;
         cursor: pointer;   
-        text-decoration: underline;     
+        text-decoration: underline;    
+        font-weight: 600; 
     }
     .registerHere,
     .socialLogin {
@@ -180,6 +182,8 @@
         .welcomeBack {
             .modal-title {
                 font-size: $base*4.75;
+                line-height: 38px;
+                margin: 17px 0 13px 0;
             }
             
             .modal-dialog {
@@ -256,7 +260,7 @@
             .modal-content{
                 min-height: 650px;
                 .forgotPassword{
-                    bottom:211px;
+                    bottom:200px;
                 }
                 
                 .divider {
@@ -277,9 +281,11 @@
                 }
                 .modal-title {
                     font-size: $base*3;
+                    padding: 15px 0 0 0;
+                    line-height: 24px;
                 }
                 .smallLogo{
-                
+                    padding: 0px 0 0 0;
                     svg{
                         max-width: 100px;
                     }
@@ -294,6 +300,11 @@
                         }
                     }
                 } 
+                .registerHere{                   
+                    .labelText{
+                        font-family: $font-regular;
+                    }
+                }
                 .loginForm{
                     .form-group{
                         position: relative;
@@ -331,7 +342,9 @@
                 }
             }
         }
+        
     }
+    
   }
 
 
