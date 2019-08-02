@@ -19,8 +19,12 @@
 			font-family: $font-bold;
 			color: $ashGrey;
 			text-align: left;
-			margin: $base 0;
-		}
+			margin: $base 1%;
+        }
+        .desc {
+            margin: $base 1%;
+            font-family: $font-medium;
+        }
         .content-childTheme {
             width: 48%;
             margin: 1%; 
@@ -54,7 +58,8 @@
                         font-size: $base*1.5;
                         color: $black;
                         margin: 0;
-                        padding: 0 $base; 
+                        padding: 0 $base;
+                        font-family: $font-medium;
                     }
                     .price {
                         color: $ceruleanblue;
@@ -64,6 +69,8 @@
                         font-size: $base*1.5;
                         color: $black;
                         padding: $base;
+                        font-family: $font-medium;
+                        text-decoration: underline; 
                     } 
                 }
             }

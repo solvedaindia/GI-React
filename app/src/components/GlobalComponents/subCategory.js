@@ -104,7 +104,7 @@ export class SubCategory extends React.Component {
                     <p className="starting">
                       Starting From
                     <span className="startPrice">
-                        {subCatListData.startPrice}
+                      ₹{subCatListData.startPrice}
                       </span>
                     </p>
                   </figcaption>
