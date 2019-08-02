@@ -8,8 +8,8 @@ const selectGlobal = state => state.get('global');
 
 const selectRouter = state => state.get('router');
 
-const makeSelectCurrentUser = () =>
-  createSelector(selectGlobal, globalState => globalState.get('currentUser'));
+// const makeSelectCurrentUser = () =>
+//   createSelector(selectGlobal, globalState => globalState.get('currentUser'));
 
 const makeSelectLoading = () =>
   createSelector(selectGlobal, globalState => globalState.get('loading'));
@@ -29,7 +29,7 @@ const makeSelectLocation = () =>
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
+  //makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
   makeSelectRepos,

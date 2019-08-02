@@ -9,7 +9,6 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
-import { Link } from 'react-router-dom';
 import { getCookie } from './utilityManager';
 
 class SocialMedia extends React.Component {

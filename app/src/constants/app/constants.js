@@ -26,3 +26,4 @@ export const LOAD_FOOTER_DATA_FAILURE =
 export const GET_CART_FETCHED = 'app/CartContainer/GET_CART_FETCHED';
 export const GET_CART_REQUESTED = 'app/CartContainer/GET_CART_REQUESTED';
 export const RESET_RWDHEADER = 'App/RESET_RWDHEADER';
+export const SHAREWISHLISTURL_RWD = 'APP/SHAREWISHLISTURL_RWD'
