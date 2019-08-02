@@ -51,7 +51,7 @@ export class PlpContainer extends React.Component {
       marketingTextBannerData: null,
       plpDescriptionData: null,
       plpData: [],
-      adBannerData: [],
+      adBannerData: null,
       error: false,
       hasMore: true,
       isLoading: false,
@@ -102,7 +102,8 @@ export class PlpContainer extends React.Component {
     for (const p of params) {
       if (p[0] === 'filter') {
         // filterRoutingURL += `${p[0]}=${p[1]}&`
-        filterRoutingURL += `${p[1]}&`;
+        filterRoutingURL += `${decodeURI(p[1])}&`;
+        console.log('maskkk -- ',filterRoutingURL)
         onlyFilter[p[1]];
       } else if (p[0] === 'sort') {
         sortingRoutingURL = p[1];
@@ -180,18 +181,18 @@ export class PlpContainer extends React.Component {
       } else {
       }
     } else if (nextProps.location.pathname !== this.props.location.pathname) {
-        const nextPath = String(nextProps.location.pathname);
-        const nextIdStr = nextPath.split('/')[2];
+      const nextPath = String(nextProps.location.pathname);
+      const nextIdStr = nextPath.split('/')[2];
 
-        if (nextIdStr != undefined && nextIdStr !== categoryId) {
-          categoryId = nextIdStr
-          this.resetStateVars();
-          this.fetchPLPProductsData();
-          this.fetchSubCategoryData();
-          this.fetchMarketingTextBannerData();
-          this.fetchDescriptionData();
-        }
+      if (nextIdStr != undefined && nextIdStr !== categoryId) {
+        categoryId = nextIdStr
+        this.resetStateVars();
+        this.fetchPLPProductsData();
+        this.fetchSubCategoryData();
+        this.fetchMarketingTextBannerData();
+        this.fetchDescriptionData();
       }
+    }
 
   }
 
@@ -202,7 +203,7 @@ export class PlpContainer extends React.Component {
       marketingTextBannerData: null,
       plpDescriptionData: null,
       plpData: [],
-      adBannerData: [],
+      adBannerData: null,
       error: false,
       hasMore: true,
       isLoading: false,
@@ -232,7 +233,7 @@ export class PlpContainer extends React.Component {
         this.props.onAdBannerIndexUpdate(response.data.data);
         this.setState({ adBannerData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchSubCategoryData() {
@@ -243,7 +244,7 @@ export class PlpContainer extends React.Component {
       .then(response => {
         this.setState({ plpSubCatData: response.data.data });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchMarketingTextBannerData() {
@@ -254,7 +255,7 @@ export class PlpContainer extends React.Component {
           marketingTextBannerData: response.data.data.bannerList[0].content,
         });
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   fetchPLPProductsData(isFromScroll) {
@@ -302,26 +303,23 @@ export class PlpContainer extends React.Component {
                 newSearchTrigger: false,
               });
             } else if (response.data.data.spellCheck.length !== 0) {
-                this.setState({
-                  emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
-                  showBestSeller: false,
-                  newSearchTrigger: false,
-                })
-              }
-              else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
-                this.setState({
-                  showBestSeller: true,
-                  emptySearchItem: null,
-                  newSearchTrigger: false
-                })
-              }
+              this.setState({
+                emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
+                showBestSeller: false,
+                newSearchTrigger: false,
+              })
+            }
+            else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
+              this.setState({
+                showBestSeller: true,
+                emptySearchItem: null,
+                newSearchTrigger: false
+              })
+            }
           }
 
-          if (
-            this.state.isCatDetails &&
-            !this.state.isFromSearch.includes('/search')
-          ) {
-            this.fetchAdBannerData();
+          if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
+            
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
             this.setState({
@@ -329,19 +327,18 @@ export class PlpContainer extends React.Component {
               displaySkus: response.data.data.categoryDetails.displaySkus,
             });
           }
+
+          if (this.state.isCatDetails) {
+            this.fetchAdBannerData();
+          }
           console.log(
             'mixmatchh --- ',
             response.data.data.productCount,
             this.state.pageNumber,
           );
           this.setState({
-            plpData: isFromScroll
-              ? [...this.state.plpData, ...response.data.data.productList]
-              : response.data.data.productList,
+            plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
-            hasMore:
-              /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this
-                .state.plpData.length < Number(response.data.data.productCount), // Now only show on 0 Products and disable it for lazyload
             filterData: response.data.data.facetData,
             isLoading: false,
             isCatDetails: false,
@@ -350,7 +347,7 @@ export class PlpContainer extends React.Component {
         })
         .catch(error => {
           this.setState({
-            error: error.message,
+            error: error.response.data.error.error_message,
             isLoading: false,
           });
         });
@@ -366,13 +363,9 @@ export class PlpContainer extends React.Component {
       var splitFacet = facetValue.split(' '); // If more than 1 filter applied from the same Facet
       filterResponse.map((facetItem, index) => {
         facetItem.facetValues.map((innerItem, index) => {
-          if (
-            splitFacet.includes(
-              innerItem.value.replace('+', '%2B'),
-            ) /*innerItem.value === facetValue*/
-          ) {
+          if (splitFacet.includes(innerItem.value.replace(/\+/g, '%2B'),) /*innerItem.value === facetValue*/) {
             name = facetItem.facetName;
-            innerItem.value = innerItem.value.replace('+', '%2B');
+            innerItem.value = innerItem.value.replace(/\+/g, '%2B');
             reduxFilter.push(innerItem);
           }
         }); // innerItem ended
@@ -414,8 +407,8 @@ export class PlpContainer extends React.Component {
             <div className="label-text">Did you mean: </div>
             <div className="serchlist-button">
               {spellCheckArr.map(item => (
-                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
-                ))}
+                <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
+              ))}
             </div>
           </div>
         </div>
@@ -443,16 +436,14 @@ export class PlpContainer extends React.Component {
     } = this;
     console.log('is Has more --- ', hasMore);
     if (error || isLoading || !hasMore) return;
-    const adjustedHeight = 600;
+    const adjustedHeight = 1000;
     const windowHeight =
       window.innerHeight + document.documentElement.scrollTop;
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
-    if (
-      windowHeight >= windowOffsetHeight &&
-      windowHeight - 300 <= windowOffsetHeight
-    ) {
+    if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
+      console.log('On scroll call --- ', this.state.plpData)
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }
@@ -489,10 +480,7 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-      if (
-        adBannerData.length != 0 ||
-        this.state.isFromSearch.includes('/search')
-      )
+      if (adBannerData)
         plpProducts = (
           <PlpComponent
             plpDataPro={this.state.plpData}
@@ -527,9 +515,9 @@ export class PlpContainer extends React.Component {
     let titleItem = null;
     if (this.state.categoryDetail !== null) {
       titleItem = (
-        <h3 className="headingTitle">
+        <h1 className="headingTitle">
           {this.state.categoryDetail.categoryName}
-        </h3>
+        </h1>
       );
     }
     const params = new URLSearchParams(this.state.searchKeyword);
@@ -594,7 +582,7 @@ export class PlpContainer extends React.Component {
           <div className="container2">{plpProducts}</div>
         </section>
 
-        {error && <div style={{ color: '#900' }}>{error}</div>}
+        {error && <div className='noProductFound'>{error}</div>}
         {isLoading && (
           <div className="lazyloading-Indicator">
             <img
@@ -607,19 +595,19 @@ export class PlpContainer extends React.Component {
         {/* Show only when get zero products from Filter */}
         {/* {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null} */}
         {this.state.productCount === 0 &&
-        !this.state.isFromSearch.includes('/search') ? (
-          <div className="noProductFound">No Products Found</div>
-        ) : null}
+          !this.state.isFromSearch.includes('/search') ? (
+            <div className="noProductFound">No Products Found</div>
+          ) : null}
 
         {descriptionItem}
         <CompContainer />
 
 
 
-       {this.state.isMobile && plpData.length !== 0 ? <div className='sortfilter'>
-          <RWDSort sortingIndexPro={this.state.plpSorting}/>
-          <RWDFilterMain filterDataPro={filterData}/>
-          
+        {this.state.isMobile && plpData.length !== 0 ? <div className='sortfilter'>
+          <RWDSort sortingIndexPro={this.state.plpSorting} />
+          <RWDFilterMain filterDataPro={filterData} />
+
         </div> : null}
       </>
     );

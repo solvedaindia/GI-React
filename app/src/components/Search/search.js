@@ -28,6 +28,7 @@ class SearchBar extends React.Component {
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.clearFields= this.clearFields.bind(this);
     this.showButton= this.showButton.bind(this);
+    this.searchResultClick = false;
   }
 
   handleChange = event => {
@@ -80,13 +81,20 @@ class SearchBar extends React.Component {
   }
 
   onSearchResultClick(e) {
-    this.props.plpReduxStateReset();
-    const text = e.target.value;
-    console.log('dd -- ', this.props);
-    this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
-    this.setState({
-      searchData: [],
-    });
+    const text = e.target.value.trim();
+    if (text !== '') {
+      console.log('mmmmm --- ',e.target.value);
+      
+      this.props.plpReduxStateReset();
+      console.log('dd -- ', this.props);
+      this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+      this.setState({
+        searchData: [],
+      });
+      this.searchResultClick = true;
+      this.clearFields();
+    }
+    
   }
 
   onLinkNavigation = () => {
@@ -94,17 +102,23 @@ class SearchBar extends React.Component {
     this.setState({
       searchData: [],
     });
+    this.clearFields();
   }
 
 	clearFields(e){         
-		var inputVal= document.getElementById("searchInput").value='';     
-		var crossbtn = document.getElementById('clearField');
-		crossbtn.style.display='none' 
+		document.getElementById("searchInput").value='';     
+		const crossbtn = document.getElementById('clearField');
+    crossbtn.style.display='none'
+    document.getElementById("searchInput").focus();
 	}
 
-	showButton(e){ 
-	var crossbtn = document.getElementById('clearField');
-	crossbtn.style.display='block'
+	showButton(e){
+    if (this.searchResultClick === false) {
+	    const crossbtn = document.getElementById('clearField');
+      crossbtn.style.display='block'
+    } else {
+      this.searchResultClick = false;
+    }
 	}
 
   render() {

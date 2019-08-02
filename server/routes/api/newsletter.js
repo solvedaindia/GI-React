@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const newsletterHandler = require('../../handlers/newsletterhandler');
 
+/* Subscibing for Newsletter */
 router.post('/subscribe', (req, res, next) => {
   newsletterHandler.newsLetterSubscription(
     req.body,
@@ -19,6 +20,7 @@ router.post('/subscribe', (req, res, next) => {
   );
 });
 
+/* Newsletter Subscription Status */
 router.get('/status', (req, res, next) => {
   newsletterHandler.getSubscriptionStatus(req.headers, (err, result) => {
     if (err) {

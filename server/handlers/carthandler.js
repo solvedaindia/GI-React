@@ -288,13 +288,27 @@ module.exports.updateitem = function updateitem(params, headers, callback) {
   );
 };
 
+/**
+ * Get Cart Data.
+ * @param access_token
+ * @return OOB Cart Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 function getCartData(headers, callback) {
   const cartUrl = `${constants.cartData.replace(
     '{{storeId}}',
     headers.storeId,
   )}/@self?profileName=${cartProfileName}`;
   const reqHeader = headerutil.getWCSHeaders(headers);
-
+  /* 
+  async function name(params,cb) {
+    try {
+      var res = origin.getresp(url,method);
+    } catch (error) {
+      throw err;
+    }
+  }
+ */
   origin.getResponse(
     'GET',
     cartUrl,
@@ -429,8 +443,8 @@ function getCompleteCartData(cartData, headers, callback) {
     promotionCode: [],
     // actualCartData: cartData,
   };
-  cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
   if (cartData.orderItem && cartData.orderItem.length > 0) {
+    cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
     getcartPageProductDetails(
       headers,
       cartData.orderItem,
@@ -461,6 +475,7 @@ function getCompleteCartData(cartData, headers, callback) {
   }
 }
 
+/* Get Empty Cart Response */
 function getEmptyRecord() {
   const cartJson = {
     cartData: {},

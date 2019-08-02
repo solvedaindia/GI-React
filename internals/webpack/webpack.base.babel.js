@@ -4,6 +4,15 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed;
+
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 // const fs = require('fs');
 // const lessToJs = require('less-vars-to-js');
 // const themeVariables = lessToJs(
@@ -128,6 +137,7 @@ module.exports = options => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        envKeys,
       },
     }),
   ]),

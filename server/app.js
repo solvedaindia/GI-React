@@ -10,11 +10,11 @@ const uniqid = require('uniqid');
 const https = require('https');
 const fs = require('fs');
 const tokenValidation = require('./utils/tokenvalidation');
-const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
+require('dotenv').config();
 
-const port = process.env.PORT || '8002';
+const port = process.env.SERVER_PORT || '8002';
 
 global.storeDetails = {};
 
@@ -110,7 +110,8 @@ app.use((req, res, next) => {
   if (storeIdentifier) {
     if (
       global.storeDetails[storeIdentifier] &&
-      global.storeDetails[storeIdentifier].storeID
+      global.storeDetails[storeIdentifier].storeID &&
+      global.storeDetails[storeIdentifier].catalogID
     ) {
       req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
       req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
@@ -129,12 +130,13 @@ app.use((req, res, next) => {
       });
     }
   } else {
-    const errorMessage = {
-      status: 'failure',
-      error: errorUtils.errorlist.storeid_missing,
-    };
-    logger.error(JSON.stringify(errorMessage));
-    res.status(400).send(errorMessage);
+    next();
+    // const errorMessage = {
+    //   status: 'failure',
+    //   error: errorUtils.errorlist.storeid_missing,
+    // };
+    // logger.error(JSON.stringify(errorMessage));
+    // res.status(400).send(errorMessage);
   }
 });
 

@@ -17,6 +17,8 @@ import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
 import { isMobile } from '../../utils/utilityManager';
 
+import Mapflag from '../../components/SVGs/mapflag.svg';
+
 class addToCartComponent extends React.Component {
   constructor(props) {
 	super(props);
@@ -24,6 +26,7 @@ class addToCartComponent extends React.Component {
       addToCartPopup: null,
       loading: true,
       pincodeVal: appCookie.get('pincode'),
+      isEdit: true
     };
     this.quantity = 1;
     this.quantityErrorMessage = false;
@@ -61,7 +64,6 @@ class addToCartComponent extends React.Component {
         header.classList.remove("sticky");
       }
     }, 2000);
-    console.log('this.propsthis.props=>>', this.props);
     const pincode = appCookie.get('pincode');
     let quantity = 1;
     if (document.getElementById('quantity')) {
@@ -95,6 +97,9 @@ class addToCartComponent extends React.Component {
       });
     } else {
       const isPDPAddToCart = appCookie.get('isPDPAddToCart');
+      const addedProductToCart = appCookie.get('isPDPAddToCart').split(',');
+      
+      
       let quantity = '1';
       if (!this.props.sticky) {
         quantity = document.getElementById('quantity').value;
@@ -119,10 +124,12 @@ class addToCartComponent extends React.Component {
             loading: false,
           });
 
-          if (isPDPAddToCart === 'false') {
-            appCookie.set('isPDPAddToCart', true, 365 * 24 * 60 * 60 * 1000);
-            this.props.handleAddtocart(false);
+          if (isPDPAddToCart === '') {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
+          } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
+            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + ','+this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
           }
+          this.props.handleAddtocart(false);
         })
         .catch(error => {
           console.log('AddToCart Error---', error);
@@ -138,8 +145,14 @@ class addToCartComponent extends React.Component {
       });
     }, 2000);
     return (
-      <div className="addedToWishlist clearfix">
+      <div className="addedToWishlist dropdownwishlist clearfix">
         <span className="wishlist-text">Product Added to Cart</span>
+        <button
+          onClick={() => this.props.history.push('/cart')()}
+          className="view-btn"
+        >
+          View
+        </button>
       </div>
     );
   }
@@ -149,16 +162,25 @@ class addToCartComponent extends React.Component {
     const quantity = document.getElementById('quantity').value;
     if (type === false && quantity > 1) {
       document.getElementById('quantity').value = Number(quantity) - Number(1);
-    } else if (type === true) {
+    } else if (type === true && quantity < 99) {
       document.getElementById('quantity').value = Number(quantity) + Number(1);
     }
   };
 
-  updatePincode(props) {
-    const pincode = document.getElementById('pincodeVal').value;
-    appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-    this.quantity = 1;
-    props.handleAddtocart(true);
+  updatePincode(props, isUpdate) {
+    if (isUpdate === 'Edit') {
+      this.setState({
+        isEdit: false
+      });
+    } else {
+      const pincode = document.getElementById('pincodeVal').value;
+      appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+      this.quantity = 1;
+      props.handleAddtocart(true);
+      this.setState({
+        isEdit: true
+      });
+    }
   }
 
   handleChange = e => {
@@ -172,7 +194,7 @@ class addToCartComponent extends React.Component {
 			btnId = 'box3';
     }
     
-    if(!props.pincodeServiceable) {
+    if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
       return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
       return <NotifyMe partNumber={this.props.skuData.partNumber} />
@@ -181,12 +203,18 @@ class addToCartComponent extends React.Component {
   }
 
   render() {
-	let storeText = 'Store';
-
+  let storeText = 'Store';
+  let btnName = 'Update';
+  let pincodeFocusId = 'pincodeVal';
 	if (this.props.pinCodeData.experienceStore) {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
 			storeText = 'Stores';
 		}
+  }
+
+  if (this.state.isEdit === true) {
+    btnName = 'Edit';
+    pincodeFocusId = '';
   }
 	  return (
       <>
@@ -194,6 +222,7 @@ class addToCartComponent extends React.Component {
           <>
             <div className="pincode">
               <div className="PincodeTextdata clearfix">
+               <img className="mapflag" src={Mapflag} alt="Mapflag"/>
                 <input
                   className="pincodeVal"
                   name="pincodeVal"
@@ -202,14 +231,14 @@ class addToCartComponent extends React.Component {
                   onChange={this.handleChange}
                   value={this.state.pincodeVal}
                 />
-                <a
+                <label htmlFor={pincodeFocusId}
                   className="pincodeEdit"
                   id="edit"
                   role="button"
-                  onClick={this.updatePincode.bind(this, this.props)}
+                  onClick={this.updatePincode.bind(this, this.props, btnName)}
                 >
-                  Edit
-                </a>
+                  {btnName}
+                </label>
               </div>
               {this.renderdeliveryMessage(this.props.pinCodeData)}
             </div>

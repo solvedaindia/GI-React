@@ -29,6 +29,7 @@ import {
   getCookie,
   getCorrespondingGiftlistId,
   getOnlyWishlistUniqueIds,
+  isMobile,
 } from '../../../utils/utilityManager';
 
 class ProductItem extends React.Component {
@@ -75,7 +76,8 @@ class ProductItem extends React.Component {
         console.log('Add to cart Data ---- ', response.data);
         getUpdatedMinicartCount(this);
         // this.props.updatetMinicart();
-	      removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
+        removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
+        this.props.moveToCartPopUpPro();
 	    })
 	    .catch(error => {
         console.log('AddToCart Error---', error);
@@ -114,7 +116,7 @@ class ProductItem extends React.Component {
 	    <li className="productlist">
         <div className="prdListData">
           <ItemImage
-	          data={this.state.data.thumbnail}
+	          data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2 }
             uniqueId={this.state.data.uniqueID}
             parentUniqueId={this.state.data.parentUniqueID}
           />
@@ -140,7 +142,7 @@ class ProductItem extends React.Component {
 	      <Link className="link" to={routePath}>
 	        <div className="hoverBox">
             {this.props.isfromWishlistPro ? 
-	            <button className="btn-compare" onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
+	            <button className={this.props.isShareWishlistPro ? 'btn-compare': isMobile() ? 'mov-to-cart' :  'btn-compare' } onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
 	            <button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
 
 	          {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">

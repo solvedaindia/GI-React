@@ -8,13 +8,14 @@ import apiManger from '../../utils/apiManager';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
-import { compareAPI, storeId, accessToken } from '../../../public/constants/constants';
+import { compareAPI, storeId, accessToken, pinCodeAPI } from '../../../public/constants/constants';
 import * as actionCreators from '../PlpContainer/actions';
 import Link from 'react-router-dom/Link';
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
 import CompPrd from '../../components/compareComponents/compreProduct';
+import appCookie from '../../utils/cookie';
 
 export class ComparePageContainer extends React.Component {
     constructor(props){
@@ -29,13 +30,21 @@ export class ComparePageContainer extends React.Component {
       this.callCompareApi();
     }
 
+    componentWillReceiveProps(prevPorps, currentProp) {
+      this.renderPrd()
+    }
+
     callCompareApi = () => {
       var ids = [];
+      var token = appCookie.get('accessToken');
       this.props.compWidgetData.forEach(element => {
         ids.push(element.id);
       });
       apiManger.get(`${compareAPI}?ids=${ids}`, {
-        headers: { }
+        headers: {
+          store_id: storeId,
+          access_token: token
+        }
       }).then(response => {
         
         this.setState({data: response.data.data.reverse()});
@@ -50,6 +59,22 @@ export class ComparePageContainer extends React.Component {
       this.props.history.goBack();
     }
 
+    callDeliveryDateAPI = (id, partNumber) => {
+      var token = appCookie.get('accessToken');
+      var defPin = appCookie.get('pincode');
+      var url = `${pinCodeAPI}${defPin}?partnumber=${partNumber}&quantity=1&uniqueid=${id}`
+      axios.get(url, {
+        headers: {
+          store_id: storeId,
+          access_token: token
+        }
+      }).then((resp) => {
+        console.log(resp, "delivery date response")
+      }).catch((err) => {
+        console.log(err, "delivery date err")
+      })
+    }
+
     renderPrd = () => {
       var prds = [];
       var reverse_data = this.state.data;
@@ -58,6 +83,7 @@ export class ComparePageContainer extends React.Component {
           return sKU.uniqueID == this.props.compWidgetData[0].skuId;
         });
         if(sku1) {
+          this.callDeliveryDateAPI(sku1.uniqueID, sku1.partNumber)
           sku1.parentProductId = data.uniqueID;
           sku1.specs = data.attributes;
           sku1.swatches = data.swatches;
@@ -91,6 +117,20 @@ export class ComparePageContainer extends React.Component {
       })
     }
 
+    swatchHandle = (id, index, name) => {
+      var obj = {
+        id: id,
+        index: index,
+        name: name
+      };
+
+      if(index == 0) {
+
+      }
+      console.log(obj, 'swatch data', this.props.compWidgetData)
+      this.props.updateSKU(obj);
+    }
+
     render() {
       return (
         <div className="container compare-product">
@@ -99,8 +139,8 @@ export class ComparePageContainer extends React.Component {
             <button to="#" className="back-btn" onClick={this.goBack}>Go Back</button>
             </Col>
           </Row>
-          <Row><h2 className="heading">Compare Products {this.state.data.length}/3</h2></Row>
-          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} /> : ''}
+          <Row><h1 className="heading">Compare Products {this.state.data.length}/3</h1></Row>
+          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} swatchHandle={this.swatchHandle} /> : ''}
         </div>
       )
     }
@@ -114,7 +154,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeProduct: id => dispatch(actionCreators.RemoveProduct(id))
+  removeProduct: id => dispatch(actionCreators.RemoveProduct(id)),
+  updateSKU: obj => dispatch(actionCreators.updateSKU(obj))
 });
 
 const withConnect = connect(

@@ -12,6 +12,7 @@ import saga from './saga';
 import {
   getReleventReduxState,
   resolveTheFilter,
+  getCookie,
 } from '../../utils/utilityManager';
 import '../../../public/styles/myAccount/myAccount.scss';
 import * as actionCreators from './actions';
@@ -33,7 +34,18 @@ export class MyAccountContainer extends React.Component {
     this.myProfileCallback = this.myProfileCallback.bind(this);
   }
 
+  componentDidMount() {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
+  }
+
   componentWillReceiveProps(nextProp) {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
     console.log('In My Account Next Props ---- ', this.props.location);
   }
 
@@ -50,7 +62,6 @@ export class MyAccountContainer extends React.Component {
   }
 
   onMyProfileClick() {
-    console.log('my  porifile colic ');
     this.setState({
 
     })

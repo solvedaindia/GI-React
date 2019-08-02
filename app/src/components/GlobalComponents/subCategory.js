@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
   featuredCatAPI,
@@ -81,34 +82,35 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="subCat">
-        <h1 className="title">Featured Category</h1>
+        <h2 className="title">Featured Category</h2>
         <Slider {...settings}>
           {!!subCatData &&
-            subCatData.map((subCatListData, index) => (
-              <figure className="subCatSlider">
-                <a href={subCatListData.onClickUrl} key={index}>
-                  <img
-                    className="subCatImg"
-                    src={`${imagePrefix}${subCatListData.thumbnail}`}
-                    // src={subCatListData.thumbnail}
-                    alt={subCatListData.categoryName}
-                  />
-                  {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
-                </a>
-                <figcaption className="catDetails">
-                  <span className="catItem">{subCatListData.categoryName}</span>
-                  <span className="itemCount">
-                    {subCatListData.productCount} Products
+            subCatData.map((subCatListData, index) => {
+              var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
+              return (
+                <figure className="subCatSlider">
+                  <a href={subCatListData.onClickUrl} key={index}>
+                    <Link to={routePath}>
+                    <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
+                    />
+                    </Link>
+                    {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
+                  </a>
+                  <figcaption className="catDetails">
+                    <h2 className="catItem">{subCatListData.categoryName}</h2>
+                    <span className="itemCount">
+                      {subCatListData.productCount} Products
                   </span>
-                  <p className="starting">
-                    Starting From
+                    <p className="starting">
+                      Starting From
                     <span className="startPrice">
-                      {subCatListData.startPrice}
-                    </span>
-                  </p>
-                </figcaption>
-              </figure>
-            ))}
+                        {subCatListData.startPrice}
+                      </span>
+                    </p>
+                  </figcaption>
+                </figure>
+              )
+            })}
         </Slider>
       </div>
     );

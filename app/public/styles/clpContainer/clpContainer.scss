@@ -1,4 +1,7 @@
+@import '../variable.scss';
+
 .clpBase{
+    
     .slick-prev {
         right: 60px;
     }
@@ -11,6 +14,94 @@
     // Theme
     .clpTheme {
         width: 83.33%;
-        margin: 120px auto;
+		margin: 120px auto;
+		.title {
+			font-family: $font-bold;
+			color: $ashGrey;
+			text-align: left;
+			margin: $base 0;
+		}
+        .content-childTheme {
+            width: 48%;
+            margin: 1%; 
+            display: inline-block;
+            position: relative;
+            .content-icons {
+                position: absolute;
+                cursor: pointer;
+            }
+            .details {
+                position: absolute;
+                padding: $base;
+                border: 1px solid $borderLight;
+                background-color: $colorwhite; 
+                min-width: $base*26.25; 
+                z-index: 1;
+                .tnImg {
+                    width: 41.72%;
+                    height: $base*10;
+                    display: inline-block;
+                    background-color: $borderLight; 
+                    .img {
+                        width: 100%;
+                    }
+                }
+                .prodDetails{
+                    width: 58%;
+                    display: inline-block; 
+                    vertical-align: top;
+                    .prodNAme {
+                        font-size: $base*1.5;
+                        color: $black;
+                        margin: 0;
+                        padding: 0 $base; 
+                    }
+                    .price {
+                        color: $ceruleanblue;
+                        font-size: $base*1.75; 
+                    }
+                    .link {
+                        font-size: $base*1.5;
+                        color: $black;
+                        padding: $base;
+                    } 
+                }
+            }
+        }
+        .img {
+            width: 100%;
+        }
+
     }
 }
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @media screen and (max-width: 767px){
+    .clpBase{
+        // Theme
+        .clpTheme {
+			.title {
+				font-size: $base*2.5;
+			}
+            .content-childTheme {
+				margin: 0;
+                .details {
+                    min-width: $base*23; 
+                }
+            }
+			.slick-dots {
+				bottom: -$base*3;
+			}
+			.slick-next::before
+			.slick-prev::before {
+				color: transparent;
+			}
+        }
+        .slider{
+            .fsBanner{
+                margin-top: 0px;
+            }
+		}
+    }
+  }

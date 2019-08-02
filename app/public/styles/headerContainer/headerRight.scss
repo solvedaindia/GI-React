@@ -1,5 +1,5 @@
 @import '../variable';
-
+.rightSide > li.user.icons{line-height: 51px; margin-top: 18px;}
 .rightSide {
     margin-bottom: 0;
     .icons {
@@ -8,6 +8,7 @@
         }
         &:last-child{
             margin-right:0;
+            vertical-align: sub;
         }
         display: inline-block;
         cursor: pointer;
@@ -33,6 +34,13 @@
             align-items: center;
             justify-content: center;
             font-family: $font-bold;
+        }
+        .welcomeDropDown{
+            .userList{               
+                li{
+                    line-height: 10px;
+                }
+            }
         }
     }
 }

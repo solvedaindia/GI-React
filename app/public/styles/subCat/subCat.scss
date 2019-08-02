@@ -44,6 +44,7 @@
             font-size: $base*2;
             font-family: $font-bold;
             color: $black; 
+            margin:0;
         }
         .itemCount{
             font-size: 11px;
@@ -53,6 +54,9 @@
         .starting {
             font-style: italic;
             font-size: 11px;
+            .startPrice {
+              margin-left: $base*0.5; 
+            }
         }
     }
 }

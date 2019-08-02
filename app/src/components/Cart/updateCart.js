@@ -8,6 +8,7 @@ class CartUpdate extends React.Component {
     this.state = {
       quantity: props.quantity,
       orderItemId: props.orderItemId,
+      size: 1
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -17,6 +18,13 @@ class CartUpdate extends React.Component {
     this.handleCartUpdate(event.target.value);
   }
 
+  buildOptions() {
+      var arr = [];
+      for (let i = 1; i <= 99; i++) {
+      arr.push(<option key={i} value="{i}">{i}</option>)
+      }
+      return arr; 
+  }
   handleCartUpdate(qty) {
     const data = {
       orderItem: [
@@ -44,6 +52,7 @@ class CartUpdate extends React.Component {
       });
   }
 
+
   render() {
     return (
       <form className="cartQty">
@@ -52,12 +61,21 @@ class CartUpdate extends React.Component {
           className="qytList"
           value={this.state.quantity}
           onChange={this.handleChange}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          // size={this.state.size} onFocus={()=>{this.setState({size: 5})}}
+          >
+          {[...Array(100)].map((e, key) => {
+            if (key > 0) {
+              return <option key={key} value={key}>{key}</option>;
+            }
+          })}
         </select>
+        {/* <select
+          className="qytList"
+          value={this.state.quantity}
+          onChange={this.handleChange}
+          >
+            {this.buildOptions()}
+        </select> */}
       </form>
     );
   }

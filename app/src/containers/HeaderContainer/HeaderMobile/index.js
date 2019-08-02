@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getReleventReduxState } from '../../../utils/utilityManager';
 import { Link, withRouter } from 'react-router-dom';
 import WishListCount from '../../../components/Wishlist/wishlist';
 import CartCount from '../../../components/Cart/cart';
@@ -8,17 +10,59 @@ import SideNavigation from './sideNavigation';
 import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 import { Row, Col, Grid } from 'react-bootstrap';
-export class HeaderMobile extends React.Component {
+import { resetRWDHeaderFlag } from '../../../actions/app/actions';
+import ShareLogo from '../../../components/SVGs/shareIcon';
+import SocialMedia from '../../../utils/socialMedia';
+import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
+import '../../../../public/styles/pdpComponent/pdpComponent.scss';
+const shareImg = <img src={require('../../../../public/images/share.svg')} />;
+
+class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headerRenderItem: this.defaultRender(),
+      isOnHome: false,
+      headerRenderItem: null,
+      showSocialShare: false,
     };
     this.headerCallback = this.headerCallback.bind(this);
     this.pageNavigationRender = this.pageNavigationRender.bind(this);
+    this.defaultRender = this.defaultRender.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('mixxx -- ', nextProps, this.props)
+
+    if (nextProps.location.pathname !== "/myAccount" && nextProps.location.pathname !== "/wishlist") {
+      this.state.isOnHome = nextProps.match.isExact ? true : false;
+      this.setState({
+        headerRenderItem: this.defaultRender()
+      })
+    }
+
+    if (nextProps.isHeaderReset !== this.props.isHeaderReset) {
+      if (nextProps.isHeaderReset) {
+        this.headerCallback();
+        this.props.resetRWDHeaderFlag();
+      }
+
+    }
+
+  }
+
+  componentDidMount() {
+    this.state.isOnHome = this.props.match.isExact ? true : false;
+    this.setState({
+      headerRenderItem: this.defaultRender()
+    })
+  }
+
+  wishlsitShareURLCallback(shareURL) {
+console.log('Share URL --- ',shareURL);
   }
 
   defaultRender() {
+    console.log('msmsms -- ', this.state.isOnHome);
     return (
       <Row>
         <Col xs={12} md={12} className='leftAnim'>
@@ -32,9 +76,9 @@ export class HeaderMobile extends React.Component {
           </div>
 
           <ul className="mob-mini-nav">
-            <WishListCount />
+            <WishListCount pageNavigationRenderPro={this.pageNavigationRender} shareURLCallbackPro={this.wishlsitShareURLCallback.bind(this)} />
             <CartCount />
-            <li className="searchIcon">
+            {!this.state.isOnHome ? <li className="searchIcon">
               <button
                 onClick={this.onSearchClick.bind(this)}
                 className="searchBtn"
@@ -46,14 +90,31 @@ export class HeaderMobile extends React.Component {
                 />
               </button>
             </li>
+              :
+              null}
+
           </ul>
+
+          {this.state.isOnHome ? <div className='mob-home-search'>
+            <HeaderSearch headerCallbackPro={this.headerCallback.bind(this)} />
+          </div>
+            :
+            null}
+
         </Col>
       </Row>
     );
   }
 
-  pageNavigationRender = pageName => {
-    console.log('Page Render ---- ', pageName);
+  onShareClick() {
+    this.setState({
+      showSocialShare: !this.state.showSocialShare,
+    });
+    this.state.showSocialShare = !this.state.showSocialShare;
+    this.pageNavigationRender('My Wishlist');
+  }
+
+  pageNavigationRender = (pageName) => {
     let item = (
       <Row>
         <Col xs={12} md={12} className='backToCategory'>
@@ -70,6 +131,16 @@ export class HeaderMobile extends React.Component {
               <span className='navigationTitle'>{pageName}</span>
             </li>
           </ul>
+          {pageName === 'My Wishlist' ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
+            {/* <ShareLogo /> */}
+            {/* {this.state.showSocialShare ? ( */}
+              
+              <SocialMediaRWD fromWislistPro
+              sharingURLPro={this.props.shareWishlistURL}
+               shareImage={shareImg}/>
+            {/* ) : null} */}
+          </button> : null}
+
         </Col>
       </Row>
     );
@@ -77,6 +148,7 @@ export class HeaderMobile extends React.Component {
       headerRenderItem: item,
     });
   };
+
 
   onSearchClick() {
     this.setState({
@@ -86,9 +158,11 @@ export class HeaderMobile extends React.Component {
     });
   }
 
+
   headerCallback = () => {
     this.setState({
       headerRenderItem: this.defaultRender(),
+      showSocialShare: false,
     });
     console.log('miii --- ', this.props);
     if (!this.props.match.isExact) {
@@ -103,5 +177,21 @@ export class HeaderMobile extends React.Component {
   }
 }
 
-// export default HeaderMobile;
-export default withRouter(HeaderMobile);
+function mapStateToProps(state) {
+  const stateObj = getReleventReduxState(state, 'global');
+  const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
+  const wishlistURL = getReleventReduxState(stateObj, 'rwdWishlistShareURL');
+  console.log('Mobile Header Subscription --- ', wishlistURL);
+
+  return {
+    isHeaderReset: defalutHeaderFlag,
+    shareWishlistURL: wishlistURL,
+  };
+}
+
+
+// export default connect(
+//   mapStateToProps,
+// )(HeaderMobile);
+export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag })(HeaderMobile))
+// export default withRouter(HeaderMobile);

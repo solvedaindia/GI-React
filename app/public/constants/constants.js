@@ -1,14 +1,10 @@
 import { getCookie } from '../../src/utils/utilityManager';
 import { validateEmptyObject } from '../../src/utils/validationManager';
-
 export const secureHttp = 'https';
-export const port1 = '3001';
-export const port2 = '8002';
-export const port3 = '8443';
-export const host1 = '192.168.0.57';
-// export const host1 = window.location.hostname ;
-// export const host = 'localhost';
-export const host = window.location.hostname;
+export const port1 = '';
+export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
+export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+export const host = process.env.envKeys.WEBSERVER_IP || window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
 export const wishlistDataCookie = 'wishlistData';
@@ -17,13 +13,13 @@ export const isLoggedIn = false;
 export const catID = '13503';
 export const productTitleCharLimit = 35;
 export const productDescriptionCharLimit = 25;
-
+export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
 export const headerStatic = `${secureHttp}://${host}:${port2}/api/v1/header_static_info`;
 /* IP Data */
-export const ipDataApi = 'https://api.ipdata.co?api-key=test';
+export const ipDataApi = 'https://api.ipdata.co?api-key=9d9101e52609b887345507736c6548c3c961d80a7b033cf26b2a2cac';
 /* User Context API */
 export const mwApi = `${secureHttp}://${host}:${port1}/api/v1/user-context`;
 /* Categories API */
@@ -46,12 +42,14 @@ export const cartDeleteItemAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const cartGetPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/promocode`;
 /* Cart Apply Promotion API */
 export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/applypromotion`;
+/* Cart Remove Promo Code API */
+export const cartRemovePromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/removepromotion/`;
+/* Pincode Service API */
+export const pinCodeServiceAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/serviceable/`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Invoice API */
 export const invoicAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/invoice/{invoiceNo}`;
-/* Auto Suggest API */
-export const autoSuggestApi = `${secureHttp}://${host}:${port1}/api/v1/auto-suggest/`;
 /* Homepage API Static */
 export const homePageApi = `${secureHttp}://${host}:${port2}/api/v1/homebody`;
 /* Homepage Layout API */
@@ -95,19 +93,14 @@ export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
 /* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
-/* wardrobes Banner Slider */
-export const wardrobesBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_BANNER`;
-/* Wardrobes hall Slider */
-export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_HALL_OF_FAME `;
-/* kitchens Banner Slider */
-export const kitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_BANNER `;
-/* kitchens hall Slider */
-export const kitchensHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_HALL_OF_FAME `;
-
+/* HomePage Track Order */
+export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/current`;
 /* Featured Category */
 export const featuredCatAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/featuredcategories`;
 /* Recently Viewed API */
 export const recentlyViewedAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/recentlyviewed`;
+/* CLP THEME API */
+export const clpThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/clp/themes/`;
 /* Best Seller */
 export const bestSellerAPI = `${secureHttp}://${host}:${port2}/api/v1/activity/bestseller`;
 /* Recommendation */
@@ -180,9 +173,12 @@ export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orde
 /* Share Wishlist API */
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
 
+/* Espot Names */
+export const GI_PDP_Our_Promises = 'GI_PDP_Sample_Espot1';
+export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
+
 /* Compare API */
 export const compareAPI = `${secureHttp}://${host}:${port2}/api/v1/compare/products`;
-export const newMachineUrl = `${secureHttp}://${host1}:${port3}`;
 export const store = 'wcsstore';
 export const PinToCityAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/city/`;
 export const UserVerifyAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/userstatus/`;
@@ -198,7 +194,7 @@ export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checko
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
-export const imagePrefix = `${secureHttp}://${host1}/${imageStore}`;
+export const imagePrefix = `${secureHttp}://${imgHost}/${imageStore}`;
 
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;

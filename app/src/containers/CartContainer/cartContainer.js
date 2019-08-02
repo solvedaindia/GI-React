@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import { getReleventReduxState } from '../../utils/utilityManager';
@@ -13,12 +14,15 @@ import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
 import EMILogo from '../../components/SVGs/emiIcon';
-import TermsAndCondition from '../../components/Cart/tnc';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
 import MoveToWishList from '../../components/Cart/moveToWishList';
 import '../../../public/styles/cart/cartItem.scss';
 import GetCartPromo from '../../components/Cart/promotion';
 import PromoField from '../../components/Cart/applyPromo';
+import MWebLogo from '../../components/SVGs/mWebLogo';
+import AppliedPromoCode from '../../components/Cart/appliedPromoCode';
+import EmiInfo from '../../components/PdpComponent/emiInfo';
+import ExpandIcon from '../../components/SVGs/expandArrow';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -47,17 +51,22 @@ class CartDetail extends React.Component {
           <div className='cartItem'>
             <div className='cartHeadDetails'>
                 {!isMobile() ? <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
-                </h2> : <h2 className='title'>Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span>
-                </h2> }
-              <Pincode />
+                </h2> : <div className='checkout-top-hedaer'>
+                  <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
+                <h2 className='title'> Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span></h2></div> }
+              	<Pincode
+			  		getCartDetails={this.props.getCartDetails}
+				/>
             </div>
             <ul className='cartItemList'>
               {cartData.cartItems.map((itemData, index) => (
                 <li className='prodList' key={`${index}-pro`}>
-                  <figure className='prodImg'>
+                <Link to={`/pdp/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
+				  <figure className='prodImg'>
                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
                   </figure>
-                  <div className='prodDetails'>
+				</Link>
+                <div className='prodDetails'>
                     <h3 className='prodTitle'>{itemData.productName}</h3>
                     <p className='subTitle'>({itemData.shortDescription})</p>
                     {!isMobile() && !itemData.freeGift &&
@@ -79,10 +88,10 @@ class CartDetail extends React.Component {
                         getCartDetails={this.props.getCartDetails}
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
-                    <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
+                    <span className='date'>{itemData.deliveryDate}</span>
                     {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
-                    {!isMobile() && <span className='shipping'>Shipping charge ₹300</span>}
-					</div>
+					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
+				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&
 						<CartUpdate
@@ -98,15 +107,27 @@ class CartDetail extends React.Component {
           </div>
           <div className='orderSummary'>
             <div className='promotion'>
-              <p className='promoMsg' onClick={this.handleOnClick.bind(this)}>Got a promo code? </p>
-              {this.state.showReply && <PromoField
-                orderID={cartData.orderSummary.orderID}
-                getCartDetails={this.props.getCartDetails}
-              />}
-              <GetCartPromo
-                orderID={cartData.orderSummary.orderID}
-                getCartDetails={this.props.getCartDetails}
-              />
+				{	cartData.promotionCode && cartData.promotionCode.length ?
+					<AppliedPromoCode
+						promoCode = {cartData.promotionCode}
+						getCartDetails={this.props.getCartDetails}
+					/>
+					:
+					!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}
+					>Got a promo code? <ExpandIcon width={16} height={16}/></p>
+					{this.state.showReply && <PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>}</>:
+					<PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>}
+
+					<GetCartPromo
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>
             </div>
             <h2 className='title'>Order Summary</h2>
             <div className='summary'>
@@ -138,16 +159,22 @@ class CartDetail extends React.Component {
                   <span className='val'>-₹{cartData.orderSummary.shippingCharges}</span>
                 </p>
               }
-              <p className='emiInfo'>
+              <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
                 <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
-                <TermsAndCondition />
+                {/* <TermsAndCondition netAmount={cartData.orderSummary.netAmount}/> */}
+				<EmiInfo price={cartData.orderSummary.netAmount}/>
               </p>
-              <p className='totalAmt'>
+              {!isMobile() ? <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
                 <span className='val'>₹{cartData.orderSummary.netAmount}</span>
                 <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
-              </p>
-              <a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>
+              </p>:''}
+              {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
+              :
+              (<div className="checkout-btn-floater">
+                  <div className="total-amount"><div className="net-amount-box">₹{cartData.orderSummary.netAmount}<span className="total-amount-text">Total Amount</span></div></div>
+                  <div className="proceed-btn"><a className="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
+                </div>)}
             </div>
           </div>
         </section>

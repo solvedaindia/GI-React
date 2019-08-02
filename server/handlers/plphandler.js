@@ -406,6 +406,7 @@ function productListByIDs(header, query, callback) {
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
+  const resJson = {};
   const productIDs = [];
   const reqHeader = header;
   reqHeader.promotionData = 'false';
@@ -424,7 +425,12 @@ function productListByIDs(header, query, callback) {
       callback(err);
       return;
     }
-    callback(null, res);
+    if (res.productList && res.productList.length > 0) {
+      res.productList.forEach(product => {
+        resJson[product.uniqueID] = product;
+      });
+    }
+    callback(null, resJson);
   });
 }
 
@@ -434,10 +440,11 @@ function productListByPartNumbers(header, query, callback) {
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const resJson = {
+  const resJson = {};
+  /* const resJson = {
     productCount: 0,
     productList: [],
-  };
+  }; */
   const partNumbers = [];
   const reqHeader = header;
   reqHeader.promotionData = 'false';
@@ -460,7 +467,7 @@ function productListByPartNumbers(header, query, callback) {
         return;
       }
       if (productList && productList.length > 0) {
-        resJson.productCount = productList.length;
+        // resJson.productCount = productList.length;
         if (query.includepromotion === 'true') {
           const productIds = [];
           productList.forEach(product => {
@@ -480,7 +487,10 @@ function productListByPartNumbers(header, query, callback) {
                 productDetail.promotionData = pdpfilter.getSummaryPromotion(
                   promotionData[productDetail.uniqueID],
                 );
-                resJson.productList.push(productDetail);
+                if(productDetail.partNumber){
+                  resJson[productDetail.partNumber] = productDetail;
+                }
+                // resJson.productList.push(productDetail);
               });
               callback(null, resJson);
             },
@@ -489,7 +499,10 @@ function productListByPartNumbers(header, query, callback) {
           productList.forEach(product => {
             let productDetail = {};
             productDetail = pdpfilter.productDetailSummary(product);
-            resJson.productList.push(productDetail);
+            if(productDetail.partNumber){
+              resJson[productDetail.partNumber] = productDetail;
+            }
+            // resJson.productList.push(productDetail);
           });
           callback(null, resJson);
         }

@@ -17,7 +17,9 @@ import appCookie from '../../utils/cookie';
 import queryString from 'query-string';
 import apiManager from '../../utils/apiManager';
 import failPop from './failPop'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import {isMobile} from '../../utils/utilityManager';
+import MWebLogo from '../../components/SVGs/mWebLogo';
 
 import {
   storeId,
@@ -28,7 +30,10 @@ import {
   userDataAPI,
   UserVerifyAPI,
   OrderSummaryAPI,
-  CreateCheckSumAPI
+  CreateCheckSumAPI,
+  host,
+  secureHttp,
+  port2
 } from '../../../public/constants/constants';
 import {
     getReleventReduxState
@@ -183,7 +188,7 @@ export class CheckoutComponent extends React.Component {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({
-        message: `Error - ${errorMessage}`,
+        message: `Invalid logon id or password.`,
         });
       });
     }
@@ -256,7 +261,8 @@ export class CheckoutComponent extends React.Component {
         payMethodId: "BillDesk",
         amount: this.state.orderSummaryData.netAmount,
         billing_address_id: this.state.ship_add.billAddId,
-        callbackUrl: 'https://localhost:8002/api/payment/handlePayment',
+        callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePaymet`,
+        // callbackUrl: 'http://localhost:5000/checkout/',
         BankID: this.state.BankID,
         paymentMode: this.state.paymentMode
       };
@@ -360,12 +366,27 @@ export class CheckoutComponent extends React.Component {
       }
     }
 
+    handleBack = () => {
+      if(this.state.loggedIn && this.state.step == 2) {
+        return; 
+      } else {
+        this.setState({
+          step: this.state.step -1
+        })
+      }
+    }
+
     render() {
       if (this.state.redirect) {
         return <Redirect to='/cart'/>;
       }
       return (
         <div className='checkout'>
+          {isMobile() && <div className='mob-checkout-steps'>
+          <a onClick={this.handleBack} className="backBtn"><img src={require('../../../public/images/LeftArrowWhite.svg')} /></a> 
+          <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
+          <h2 className='title'> Checkout (Step {this.state.step}/3) </h2>
+          </div>}
         <div className="container">
           <div className='row'>
           <div className='col-md-8'>

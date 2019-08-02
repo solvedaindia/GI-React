@@ -99,9 +99,28 @@
 */
 @media screen and (max-width: 767px) {
   .MyAccount{
-      padding: 10px 0 40px 0;
+      padding: 10px 0 10px 0;
     .myaccount-leftnav{
       display: none;
+    }
+
+    .container{
+      .changePasswordContainer{
+        .form-div{
+          .valiationPosition-NewPassword{
+            top:20px;
+          }
+          .valiationPosition-NewPassword2{
+            top:24px;
+          }
+          .error-msg{
+            position: relative;
+            margin-top:-11px;
+            font-size: 10px;
+          }
+        }
+        
+      }
     }
   }
 }

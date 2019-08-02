@@ -13,6 +13,7 @@ import {
   resolveTheWishlistData,
   getCookie,
   getReleventReduxState,
+  isMobile,
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import MyWishlist from '../MyWishlist/myWishlist';
@@ -66,6 +67,12 @@ class wishListCount extends React.Component {
     this.getWishListCount();
   }
 
+  onLinkNavigation(pageText) {
+    if (isMobile()) {
+      this.props.pageNavigationRenderPro(pageText);
+    }
+  }
+
   render() {
     const token = appCookie.get('isLoggedIn');
     console.log('From Sishlit --- ', token);
@@ -78,7 +85,7 @@ class wishListCount extends React.Component {
       }
       console.log('Wihslist islog --', token);
       wishlistLogo = (
-        <Link to="/wishlist">
+        <Link to="/wishlist" onClick={() => this.onLinkNavigation('My Wishlist')}>
           <WishlistLogo />
         </Link>
       );

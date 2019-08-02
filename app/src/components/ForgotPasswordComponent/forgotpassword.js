@@ -89,6 +89,9 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
+      this.props.callbackForgotPro();
+    } else if (itemStr == 'RegisterRedirect') {
+      this.props.callbackForgotPro(true);
     }
 
     this.setState({
@@ -192,7 +195,7 @@ class Forgotpassowrd extends React.Component {
               >
                 {this.state.hideBackArrow ? null : LeftArrow}
               </Button>
-              <div className="form-center">{item}</div>
+              <div className="form-center forrgot-pass-box">{item}</div>
             </div>
           </Modal.Body>
         </Modal>

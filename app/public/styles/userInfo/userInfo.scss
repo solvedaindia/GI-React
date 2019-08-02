@@ -9,14 +9,16 @@
     }
 }
 .user{
+    .userLogin{
+       padding-bottom:20px;
+    }
     .welcomeDropDown {
         visibility: hidden;
         opacity: 0;
-        position: absolute;
-        // padding: 8px;
-        top: 49px;
-        max-width: 176px;
-        width: 176px;
+        position: absolute;       
+        top: 52px;
+        max-width: 200px;
+        width: 218px;
         right: 0;
         background-color: $colorwhite;
         transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
@@ -28,11 +30,10 @@
         -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         .dropDown {
-            font-size: $base*1.5;
-            color: $battleshipGrey;
+            font-size: $base*1.75;
+            color: $black;
             font-family: $font-regular;
-            padding: 10px 0 10px $base*4;
-            font-family: $font-medium;
+            padding: 10px 0 10px $base*2.75;            
             &:hover {
                 text-decoration: none;
             }
@@ -45,6 +46,9 @@
                 }
             }
             padding: $base*1.25;
+            a{
+                font-size: 14px;
+            }
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
@@ -54,11 +58,18 @@
         }
         .listItemUnSelected {
             padding: $base*1.25;
+            background: $iceBlue;             
+            .dropDown{
+                color:$cerulean;
+                font-family: $font-medium;
+                font-size: $base*1.5;
+            }
             &:hover {
-                background-color: transparent; 
+                // background-color: transparent; 
+                
                 cursor: default;
                 .dropDown {
-                    color: #77787a;
+                    color:$cerulean;
                 }
             }
         }

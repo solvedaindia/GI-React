@@ -25,7 +25,38 @@
     @media screen and (min-width: 768px){
         .espotContent {
             margin-top: $base*15; 
+            .exploreGuest{
+              width: 100%;
+              display: flex;
+              .greeting {
+                width: 27.5%;
+                background-color: $ceruleanblue;
+                color: $colorwhite;
+                text-align: center;
+                display: inline-flex;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                .greetingHead {
+                  font-size: $base*2.5;
+                  font-weight: 100;
+                }
+                .msg {
+                  font-size: $base*4;
+                }
+              }
+              .exploreSection {
+                display: inline-block;
+                width: 65%;
+                .explore-room {
+                  .explore {
+                    width: 100%;
+                  }
+                }
+              }
+            }
         }
+
     }
 
   /* 
@@ -54,7 +85,14 @@
   */
   @media screen and (max-width: 767px){
     .espotContent {
-        margin-top: $base; 
+        .mwebGreeting {
+			background-color: $ceruleanblue;
+			color: $colorwhite;
+			font-size: $base*1.75; 
+			font-family: $font-bold;
+			margin: 0;
+			padding: $base*2;
+        }
     }
   }
 

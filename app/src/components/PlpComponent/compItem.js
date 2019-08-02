@@ -3,9 +3,6 @@ import ItemImage from '../GlobalComponents/productItem/image';
 import Price from '../GlobalComponents/productItem/price';
 import '../../../public/styles/compWidget.scss';
 import {
-  newMachineUrl,
-  store,
-  catalog,
   imagePrefix,
 } from '../../../public/constants/constants';
 import close from '../../../public/images/close.svg';
@@ -26,7 +23,7 @@ function CompItem(props) {
       <div className="textBox">
         <h4 className="productName">{props.product.title} </h4>
         <Price
-          actualPrice={props.product.actualPrice}
+          // actualPrice={props.product.actualPrice}
           offerPrice={props.product.offerPrice}
         />
       </div>

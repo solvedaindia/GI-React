@@ -179,7 +179,7 @@
               .textarea{
                 font-size: 12px;
                 padding: 12px 0 0 0;
-                font-family: $font-regular;
+                font-family: $font-medium;
                 font-weight: normal;
               }
               .imgfullwidth{
@@ -270,9 +270,11 @@
         }
     }
     .fsBanner{
-      padding-bottom:15px;
+      margin-top: 45px;
     }
-
+    .reco{
+      display: none;
+    }
   }
 
 

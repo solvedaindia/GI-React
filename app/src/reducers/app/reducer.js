@@ -20,39 +20,42 @@ import {
   UPDATE_MINICART,
   RESET_REMOVEWISHLISTFLAG,
   UPDATE_PROFILE,
-  GET_CART_FETCHED
+  GET_CART_FETCHED,
+  RESET_RWDHEADER,
+  SHAREWISHLISTURL_RWD,
 } from '../../constants/app/constants';
 
 // The initial state of the App
 const initialState = fromJS({
-  loading: false,
+  // loading: false,
   error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
-  },
+  // currentUser: false,
+  // userData: {
+  //   repositories: false,
+  // },
   wishlistCount: 0,
   minicartCount: 0,
   removeWishlistFlag: false,
   userName: null,
-
+  resetRWDFlag: false,
+  rwdWishlistShareURL: null,
   // cart: null
   // logonId: null,
 });
 
 function appReducer(state = initialState, action) {
-  
+
   switch (action.type) {
     case LOAD_REPOS:
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
+        // .setIn(['userData', 'repositories'], false);
     case LOAD_REPOS_SUCCESS:
       return state
         .setIn(['userData', 'repositories'], action.repos)
         .set('loading', false)
-        .set('currentUser', action.username);
+        // .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
     case WISH_LIST_COUNT:
@@ -61,12 +64,16 @@ function appReducer(state = initialState, action) {
       return state.set('loading', false).set('minicartCount', action.count);
     case RESET_REMOVEWISHLISTFLAG:
       return state.set('loading', false).set('removeWishlistFlag', action.flag);
+    case RESET_RWDHEADER:
+      return state.set('loading', false).set('resetRWDFlag', action.flag);
     case UPDATE_PROFILE:
-        console.log('in The Global Reducer ---', action.type, action.userName);
+      console.log('in The Global Reducer ---', action.type, action.userName);
       return state.set('loading', false).set('userName', action.userName);
     // .set('logonId', action.logonId);
     // case GET_CART_FETCHED:
     //   return state.set('cart', action.payload);
+    case SHAREWISHLISTURL_RWD:
+      return state.set('loading', false).set('rwdWishlistShareURL', action.url);
     default:
       return state;
   }

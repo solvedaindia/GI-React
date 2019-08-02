@@ -10,19 +10,23 @@ import {
   getReleventReduxState,
 } from '../../../utils/utilityManager';
 import '../../../../public/styles/myAccount/changePassword.scss';
-import { regexEmail } from '../../../utils/validationManager';
+import { regexEmail, regexMobileNo } from '../../../utils/validationManager';
 import '../../../../public/styles/myAccount/myProfile.scss';
 import Input from '../../Primitives/input';
 import {
   validateFullName,
   validateMobileNo,
   validateEmailId,
+  validateMobileNo_OPTIONAL
 } from '../../../utils/validationManager';
 import { } from '../../../../public/constants/constants';
 import ForgotPasswordOTP from '../../ForgotPasswordComponent/forgotPasswordOTP';
 import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
-import { updateUserProfile } from '../../../actions/app/actions';
+import { resetRWDHeaderFlag, updateUserProfile } from '../../../actions/app/actions';
+import { isMobile } from '../../../utils/utilityManager';
+import { headerNetural } from '../../../containers/HeaderContainer/HeaderMobile/index'
+
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -53,6 +57,7 @@ class MyProfile extends React.Component {
 
       dataLoad: {},
       enteredOTP: null,
+      isSaveBtnDisable: true,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -96,8 +101,9 @@ class MyProfile extends React.Component {
       }
     }
 
-    if (this.state.userResponse.mobileNo !== '') {
-      if (!validateMobileNo(this.state.inputText_number)) {
+    // if (this.state.userResponse.mobileNo !== '') { //If user register with Email this condition fails
+    if (this.state.inputText_number !== '') {
+      if (!validateMobileNo_OPTIONAL(this.state.inputText_number)) {
         this.setState({
           error_number: true,
           errorMessage_number: 'Please enter valid mobile number.',
@@ -106,15 +112,17 @@ class MyProfile extends React.Component {
       }
     }
 
-    if (this.state.userResponse.emailID !== '') {
-      if (!validateEmailId(this.state.inputText_email) || this.state.inputText_email === '') {
-        this.setState({
-          error_email: true,
-          errorMessage_email: 'Please enter valid Email ID.',
-        });
-        return;
-      }
+    // }
+
+    // if (this.state.userResponse.emailID !== '') { //If user register with Mobile this condition fails
+    if (!validateEmailId(this.state.inputText_email)) {
+      this.setState({
+        error_email: true,
+        errorMessage_email: 'Please enter valid Email ID.',
+      });
+      return;
     }
+    // }
 
 
     //Update the data on server
@@ -166,56 +174,69 @@ class MyProfile extends React.Component {
         this.state.dataLoad.logonid = this.state.inputText_email
       }
       else {
-        this.state.dataLoad.field1 = this.state.inputText_number
+        this.state.dataLoad.field1 = this.state.inputText_email
       }
     }
 
     if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
       console.log('update only the Mobile No');
       showOTP = true;
-      if (regexEmail.test(this.state.userResponse.logonID)) {
+      if (regexMobileNo.test(this.state.userResponse.logonID)) {
         // LogonId is Email
-        this.state.dataLoad.field1 = this.state.inputText_number
+        this.state.dataLoad.logonid = this.state.inputText_number
       }
       else {
-        this.state.dataLoad.logonid = this.state.inputText_email
+        this.state.dataLoad.field1 = this.state.inputText_number
       }
     }
 
-    apiManager.post(userDetailValidateAPI, this.state.dataLoad)
-      .then(response => {
-        console.log('Validate Profile --- ', response.data.data.otpValue);
-        if (showOTP) {
-          // Call Validate API
-          this.setState({
-            modal: true
-          })
-          alert(`OTP - ${response.data.data.otpValue}`);
-        }
-        else {
-          this.updateUserDetail();
-        }
+    console.log('payload -- ', this.state.dataLoad);
+    if (!this.isEmpty(this.state.dataLoad)) {
+      console.log('It empty');
+      apiManager.post(userDetailValidateAPI, this.state.dataLoad)
+        .then(response => {
+          console.log('Validate Profile --- ', response.data.data.otpValue);
+          if (showOTP) {
+            // Call Validate API
+            this.setState({
+              modal: true
+            })
+            alert(`OTP - ${response.data.data.otpValue}`);
+          }
+          else {
+            this.updateUserDetail();
+          }
 
-      })
-      .catch(error => {
-        console.log('validateUserDetails Error---', error.response.data.error.error_message);
-        setTimeout(() => {
+        })
+        .catch(error => {
+          console.log('validateUserDetails Error---', error.response.data.error.error_message);
+          setTimeout(() => {
+            this.setState({
+              noteItem: null,
+            });
+          }, 2000);
           this.setState({
-            noteItem: null,
+            noteItem: (
+              <div className="noteMsg">
+                <span className="failMsg">{error.response.data.error.error_message}</span>
+              </div>
+            ),
           });
-        }, 2000);
-        this.setState({
-          noteItem: (
-            <div className="noteMsg">
-              <span className="failMsg">{error.response.data.error.error_message}</span>
-            </div>
-          ),
         });
-      });
+
+    }
 
 
 
+  }
 
+  isEmpty(map) {
+    for (var key in map) {
+      if (map.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   enteredOTPCallback(otpText) {
@@ -242,6 +263,7 @@ class MyProfile extends React.Component {
           });
         }, 2000);
         this.setState({
+          isSaveBtnDisable: true,
           dataLoad: {},
           noteItem: (
             <div className="noteMsg">
@@ -276,22 +298,69 @@ class MyProfile extends React.Component {
       error_number: false,
       error_email: false,
     });
+
+    // if (this.state.userResponse.name !== value.target.value && this.state.userResponse.mobileNo !== value.target.value && this.state.userResponse.emailID !== value.target.value) {
+    //   this.setState({
+    //     isSaveBtnDisable: false
+    //   });
+    // }
+    // else {
+    //   this.setState({
+    //     isSaveBtnDisable: true
+    //   });
+    // }
+
+
     switch (value.target.id) {
       case 'fullName':
-        return this.setState({
-          inputText_name: value.target.value,
-        });
+        console.log('value Change --- ', value.target.value, this.state.userResponse);
+        this.state.inputText_name = value.target.value
+        // this.setState({
+        //   inputText_name: value.target.value,
+        //   // isSaveBtnDisable: this.state.userResponse.name !== value.target.value ? false : true
+        // });
+        break
       case 'phoneNumber':
-        return this.setState({
-          inputText_number: value.target.value,
-        });
+        this.state.inputText_number = value.target.value
+        // this.setState({
+        //   inputText_number: value.target.value,
+        //   // isSaveBtnDisable: this.state.userResponse.mobileNo !== value.target.value ? false : true
+        // });
+        break
       case 'emailId':
-        return this.setState({
-          inputText_email: value.target.value,
-        });
+        this.state.inputText_email = value.target.value
+        // this.setState({
+        //   inputText_email: value.target.value,
+        //   // isSaveBtnDisable: this.state.userResponse.emailID !== value.target.value ? false : true
+        // });
+        break
       default:
-        return null;
+
     }
+
+
+    this.enableDisableSaveBtn();
+
+
+  }
+
+  enableDisableSaveBtn() {
+    var isBtnValidate = true;
+    console.log('maksss --- ', this.state.userResponse.emailID, this.state.inputText_email)
+    if (this.state.userResponse.name !== this.state.inputText_name) {
+
+      isBtnValidate = false;
+    }
+    if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
+      isBtnValidate = false;
+    }
+    if (this.state.userResponse.emailID !== this.state.inputText_email) {
+      isBtnValidate = false;
+    }
+    this.setState({
+      isSaveBtnDisable: isBtnValidate,
+    })
+
   }
 
   focusIn() {
@@ -333,11 +402,16 @@ class MyProfile extends React.Component {
 
   }
 
+  onRWDCancelBtnClick() {
+    console.log('dddid -- ', this.props)
+    this.props.resetRWDHeaderFlag(true);
+  }
+
   render() {
     return (
       <>
         {this.otpPopup()}
-        <form className="form-BgContainer">
+        <div className="form-BgContainer">
           {/* {this.otpPopup()} */}
           <div className="form-div clearfix div-error">
             <Input
@@ -383,15 +457,15 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-
+          {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
-            className="btn-apply btn"
+            className={this.state.isSaveBtnDisable ? "btn-apply btn" : "btn-applyActive btn"}
           >
             Save
         </button>
           {this.state.noteItem}
-        </form>
+        </div>
       </>
     );
   }
@@ -409,6 +483,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updateUserProfile },
+  { resetRWDHeaderFlag, updateUserProfile },
 )(MyProfile);
 //export default MyProfile;

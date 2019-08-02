@@ -247,7 +247,7 @@ class WelcomeBack extends React.Component {
             </p>
           </div>
           <p className="registerHere">
-            <span>New to Godrej Interio? </span>
+            <span className='labelText'>New to Godrej Interio? </span>
             <Button
               className="registerNow"
               onClick={this.clickedOnRegister.bind(this)}

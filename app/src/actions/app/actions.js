@@ -23,6 +23,8 @@ import {
   UPDATE_MINICART,
   RESET_REMOVEWISHLISTFLAG,
   UPDATE_PROFILE,
+  RESET_RWDHEADER,
+  SHAREWISHLISTURL_RWD,
 } from '../../constants/app/constants';
 
 /**
@@ -95,5 +97,21 @@ export function updateUserProfile(userName) {
   return {
     type: UPDATE_PROFILE,
     userName,
+  };
+}
+
+export function resetRWDHeaderFlag(flag) {
+  console.log('resetRWDHeaderFlag---', flag);
+  return {
+    type: RESET_RWDHEADER,
+    flag,
+  };
+}
+
+export function rwdShareWishlistURL(url) {
+  console.log('rwdShareWishlistURL---', url);
+  return {
+    type: SHAREWISHLISTURL_RWD,
+    url,
   };
 }

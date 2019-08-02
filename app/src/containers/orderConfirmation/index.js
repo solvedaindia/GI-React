@@ -21,38 +21,32 @@ export default class OrderConformation extends React.Component {
 
     componentDidMount() {
         var orderId = this.props.match.params.orderId;
-        console.log(orderId, "this is order id")
-        this.callCheckoutAPI(orderId)
-            .then(this.callOrderAPI)
-            .catch((err) => {
-                // window.location.redirect()
-            })
         this.callOrderAPI(orderId);
 
     }
 
-    callCheckoutAPI = (id) => {
-        return new Promise((resolve, reject) => {
-            let token = appCookie.get('accessToken');
-            var data = {
-                orderId: id
-            }
-            axios.post(CheckoutAPI, data, {
-                headers: { store_id: storeId, access_token: token }
-            }).then((res) => {
-                if(res.data.orderPlaced == true) {
-                    console.log("order place -----------", res)
-                    resolve();
-                } else {
-                    console.log("order rejected -----------", res)
-                    reject();
-                }
-            }).catch((err) => {
-                console.log(err);
-                reject();
-            })
-        })
-    } 
+    // callCheckoutAPI = (id) => {
+    //     return new Promise((resolve, reject) => {
+    //         let token = appCookie.get('accessToken');
+    //         var data = {
+    //             orderId: id
+    //         }
+    //         axios.post(CheckoutAPI, data, {
+    //             headers: { store_id: storeId, access_token: token }
+    //         }).then((res) => {
+    //             if(res.data.orderPlaced == true) {
+    //                 console.log("order place -----------", res)
+    //                 resolve();
+    //             } else {
+    //                 console.log("order rejected -----------", res)
+    //                 reject();
+    //             }
+    //         }).catch((err) => {
+    //             console.log(err);
+    //             reject();
+    //         })
+    //     })
+    // } 
     
     callOrderAPI(id) {
         this.setState({
@@ -63,7 +57,6 @@ export default class OrderConformation extends React.Component {
                 showPop: false
             })
         }, 4000);
-        setTimeout(() => {
             let token = appCookie.get('accessToken');
             var url = `${OrderDetailAPI}/${id}`
             axios.get(url, {
@@ -76,7 +69,7 @@ export default class OrderConformation extends React.Component {
             }).catch((err) => {
                 console.log(err, "order error")
             })
-        }, 1000)
+        
         
     }
 
@@ -121,20 +114,24 @@ export default class OrderConformation extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="orderconfirm">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-9">
-                            <h4>You Order has been confirmed!</h4>
-                            <p>Thank you for shopping with us!</p>
-                            <p>An Email will be sent to your account when your order has been shipped.</p>
+                            <div className="orderConfirmed">
+                              <h3 className="heading">You Order has been confirmed!</h3>
+                              <p className="text">Thank you for shopping with us!</p>
+                              <p className="text">An Email will be sent to your account when your order has been shipped.</p>
+                            </div>
                         </div>
                         <div className="col-md-3">
-                            <button className="btn btn-large">Continue Shopping</button>
+                            <div className="continueShopping">
+                              <button className="btn-bg">Continue Shopping</button>
+                            </div>                            
                         </div>
                     </div>
-                    <div style={{background: '#eceaea', padding: '15px'}}>
-                        <h4>Order Details</h4>
+                    <div className="orderDetails">
+                        <h4 className="heading-details">Order Details</h4>
                         {this.state.orderData ? <div className="row">
                             <div className="col-md-2">
                                 <h6>Order ID</h6>
@@ -157,7 +154,7 @@ export default class OrderConformation extends React.Component {
                                 <p>{this.state.orderData.orderSummary.netAmount}</p>
                             </div>
                         </div> : ''}
-                        <button className="btn btn-large">Track Order</button>
+                        <button className="btn-bg">Track Order</button>
                         <hr style={{borderTop: '1px solid #bbbaba'}} />
                         <p>Items in order</p>
                         <div className="row">

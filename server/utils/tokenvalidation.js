@@ -35,16 +35,23 @@ function decryptToken(encryptedToken) {
 }
 
 exports.validateSecureToken = function validateSecureToken(req, res, next) {
-  const headerToken = req.headers.access_token;
+  // const headerToken = req.headers.access_token;
+  if (req.url.indexOf('/payment/handlePayment') !== -1) {
+    req.headers.storeId = '10151';
+    return;
+  }
+  if (!req.headers.storeId || req.headers.storeId === '') {
+    next(errorUtils.errorlist.storeid_missing);
+  }
   try {
     if (req.url.indexOf('/token/guest') !== -1) {
       return;
     }
-    if (!headerToken) {
+    if (!req.headers.access_token) {
       next(errorUtils.errorlist.token_missing);
       return;
     }
-
+    const headerToken = req.headers.access_token;
     const decodedToken = decodeToken(headerToken); // Decode Access Token
     req.headers.WCToken = decodedToken.WCToken;
     req.headers.WCTrustedToken = decodedToken.WCTrustedToken;

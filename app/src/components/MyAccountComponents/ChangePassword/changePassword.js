@@ -12,17 +12,22 @@ import '../../../../public/styles/myAccount/changePassword.scss';
 // import '../../../../public/styles/myAccount/myAccountBase.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 import Input from '../../Primitives/input';
+import { isMobile } from '../../../utils/utilityManager';
+import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 
 class ChangePassword extends React.Component {
   state = {
     errorMessage: null,
     inputType: 'password',
+    inputTypeNew: 'password',
     isShowPass: false,
+    isShowPassNew: false,
     inputTextCurrent: '',
     inputTextNew: '',
     errorCurrent: false,
     errorNew: false,
     newPasswordPasteTxt: null,
+    isSaveBtnActive: false,
   };
 
   componentDidMount() {
@@ -47,9 +52,28 @@ class ChangePassword extends React.Component {
     }
   }
 
+  showHidePassNew() {
+    if (this.state.isShowPassNew) {
+      this.setState({
+        isShowPassNew: false,
+        inputTypeNew: 'password',
+      });
+    } else {
+      this.setState({
+        isShowPassNew: true,
+        inputTypeNew: 'text',
+      });
+    }
+  }
+
   saveBtnPressed() {
     // this.validate(this.state.inputTextCurrent, this.state.errorCurrent);
-    // console.log('afterrrr');
+    // console.log('afterrrr',this.state.isSaveBtnActive);
+    if (!this.state.isSaveBtnActive) {
+      return
+    }
+
+
     if (!validateEmptyObject(this.state.inputTextCurrent)) {
       this.setState({
         errorCurrent: true,
@@ -131,31 +155,67 @@ class ChangePassword extends React.Component {
   handleInputChange(value) {
     console.log('Handle Input --- ', value.target.id);
     if (value.target.id === 'new') {
+      this.state.inputTextNew = this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value;
       this.setState({
         errorCurrent: false,
         errorNew: false,
-        inputTextNew: this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value,
+        // inputTextNew: this.state.newPasswordPasteTxt !== null ? this.state.inputTextNew : value.target.value,
         newPasswordPasteTxt: null,
       });
     } else {
+      this.state.inputTextCurrent = value.target.value;
       this.setState({
         errorCurrent: false,
         errorNew: false,
-        inputTextCurrent: value.target.value,
+        // inputTextCurrent: value.target.value,
       });
     }
+
+    this.enableDisableSaveBtn();
+  }
+
+  enableDisableSaveBtn() {
+    console.log('ddddd -- =',this.state.inputTextCurrent);
+    var isBtnValidate = true;
+    // console.log('maksss --- ', this.state.userResponse.emailID, this.state.inputText_email)
+    // if (this.state.userResponse.name !== this.state.inputText_name) {
+
+    //   isBtnValidate = false;
+    // }
+    // if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
+    //   isBtnValidate = false;
+    // }
+    // if (this.state.userResponse.emailID !== this.state.inputText_email) {
+    //   isBtnValidate = false;
+    // }
+    if (this.state.inputTextCurrent !== '' && this.state.inputTextNew !== '') {
+      console.log('ZZZZZZ -- =',this.state.inputTextCurrent);
+      isBtnValidate = true;
+    }
+    else {
+      isBtnValidate = false;
+    }
+    this.setState({
+      isSaveBtnActive: isBtnValidate,
+    })
+
   }
 
   onPasteText(value) {
-    
+
     if (value.target.id === 'new') {
-      console.log('onPasge --- ',value.clipboardData.getData('text'))
+      console.log('onPasge --- ', value.clipboardData.getData('text'))
       this.setState({
         errorCurrent: false,
         errorNew: false,
         newPasswordPasteTxt: value.clipboardData.getData('text'),
       });
     }
+  }
+
+  onRWDCancelBtnClick() {
+    console.log('dddid -- ', this.props)
+    this.props.resetRWDHeaderFlag(true);
   }
 
   render() {
@@ -190,7 +250,7 @@ class ChangePassword extends React.Component {
             {this.state.inputTextCurrent !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword" >
               {<img src={require('../../SVGs/eye.svg')} />}
             </span> : null}
-            
+
           </div>
           {errorItemCurrent}
         </div>
@@ -207,7 +267,7 @@ class ChangePassword extends React.Component {
             {/* <label className="form-label">New Password</label> */}
             <Input
               className="form-control"
-              inputType="text"
+              inputType={this.state.inputTypeNew}
               title="New Password"
               name="email"
               id="new"
@@ -216,14 +276,14 @@ class ChangePassword extends React.Component {
               handleChange={this.handleInputChange.bind(this)}
               onPaste={this.onPasteText.bind(this)}
             />
+            {this.state.inputTextNew !== '' ? <span onClick={this.showHidePassNew.bind(this)} className="valiationPosition-NewPassword2" >
+              {<img src={require('../../SVGs/eye.svg')} />}
+            </span> : null}
           </div>
           {errorItemNew}
         </div>
-
-        <button
-          onClick={this.saveBtnPressed.bind(this)}
-          className="btn-apply btn"
-        >
+        {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
+        <button onClick={this.saveBtnPressed.bind(this)} className={this.state.isSaveBtnActive ? "btn-applyActive btn" : "btn-apply btn"}>
           Save
         </button>
       </div>
@@ -231,4 +291,18 @@ class ChangePassword extends React.Component {
   }
 }
 
-export default ChangePassword;
+function mapStateToProps(state) {
+  // console.log('MyAccount MapStatetoprops --- ', state);
+  // const stateObj = getReleventReduxState(state, 'global');
+  // const updatedUsername = getReleventReduxState(stateObj, 'userName');
+
+  // return {
+  //   username: updatedUsername,
+  // };
+}
+
+export default connect(
+  mapStateToProps,
+  { resetRWDHeaderFlag },
+)(ChangePassword);
+//export default ChangePassword;

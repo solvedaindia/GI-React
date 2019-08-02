@@ -25,6 +25,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       isValidate: false,
       preFilledUserId: null,
     };
+    this.onRegisterRedirectClick = this.onRegisterRedirectClick.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Please enter Email or Mobile Number',
+        errorMessage: <p className="error-msg">Please enter Email or Mobile Number</p>,
         isValidate: false,
       });
       return;
@@ -49,7 +50,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       if (!regexMobileNo.test(this.state.inputText)) {
         this.setState({
           error: true,
-          errorMessage: 'Invalid Mobile Number',
+          errorMessage: <p className="error-msg">Invalid Mobile Number</p>,
           isValidate: false,
         });
         return;
@@ -57,7 +58,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     } else if (!regexEmail.test(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Invalid Email address',
+        errorMessage: <p className="error-msg">Invalid Email address</p>,
         isValidate: false,
       });
       return;
@@ -82,11 +83,28 @@ class ForgotPasswordEmailMobile extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
+        const errorKey = errorData.error.error_key;
+        const lll = (
+          // {errorKey === 'invalid_user_id' ?  ` Please click ${<button>here</button>} to register` : null}
+          <>
+            Please click <button onClick={this.onRegisterRedirectClick} className='registerHere'>here</button> to register
+          </>
+        )
+        const errorItem = (
+          <p className="error-msg">{errorMessage}{` `}{errorKey === 'invalid_user_id' ? lll : null}</p>
+        )
         this.setState({
           error: true,
-          errorMessage,
+          errorMessage: errorItem,
         });
       });
+  }
+
+  onRegisterRedirectClick(e) {
+    e.preventDefault();
+    console.log('dsds')
+    const nextComp = 'RegisterRedirect';
+    this.props.handlerPro(nextComp, null, null);
   }
 
   handleInputChange(text) {
@@ -103,7 +121,7 @@ class ForgotPasswordEmailMobile extends React.Component {
   render() {
     let errorItem;
     if (this.state.error) {
-      errorItem = <p className="error-msg">{this.state.errorMessage}</p>;
+      errorItem = this.state.errorMessage;
     } else {
       errorItem = null;
     }
@@ -150,7 +168,7 @@ class ForgotPasswordEmailMobile extends React.Component {
           </FormGroup>
           <FormGroup>
             <p className="text text-emailotp">
-              An OTP will be sent to this email address{' '}
+              An OTP will be sent for validation{' '}
             </p>
           </FormGroup>
         </Form>

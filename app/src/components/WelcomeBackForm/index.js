@@ -6,6 +6,7 @@ import {
   regexEmail,
   regexMobileNo,
   validateEmptyObject,
+  regexPw
 } from '../../utils/validationManager';
 import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
 
@@ -20,6 +21,7 @@ class WelcomeForm extends Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
+      isActive: 'hideData'
     };
     this.showHidePass=this.showHidePass.bind(this);
     this.callbackFunc=this.callbackFunc.bind(this);
@@ -27,7 +29,12 @@ class WelcomeForm extends Component {
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass });
   };
 
   /* Handle Validation */
@@ -42,19 +49,19 @@ class WelcomeForm extends Component {
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
       });
       isValidate = false;
     } else if (!input.includes('@') && Number.isInteger(firstChar)) {
-      if (!regexMobileNo.test(obj.userId)) {
+      if ((!regexMobileNo.test(obj.userId)) || ((obj.userId.length) < 10) || ((obj.userId.length) > 10)) {
         this.setState({
-          errorMessage: 'Please enter valid Email Id/Mobile number',
+          errorMessageUserId: 'Please enter valid Email id/Mobile Number',
         });
         isValidate = false;
       }
     } else if (!regexEmail.test(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
       });
       isValidate = false;
     }
@@ -62,6 +69,11 @@ class WelcomeForm extends Component {
     if (!validateEmptyObject(obj.password)) {
       this.setState({
         errorMessagePassword: 'Enter a valid password ',
+      });
+      isValidate = false;
+    } else if ((!regexPw.test(obj.password) && obj.password.length < 25) || (obj.password.length > 25)) {
+      this.setState({
+        errorMessagePassword: 'Password entered is incorrect ',
       });
       isValidate = false;
     }
@@ -107,6 +119,11 @@ class WelcomeForm extends Component {
     }
   }
 
+  copyPaste = e => {
+    e.preventDefault();
+  }
+
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -125,7 +142,7 @@ class WelcomeForm extends Component {
     }
     return (
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
-        <Input
+        <div className='relative'><Input
           type="text"
           title="Email ID/Mobile Number"
           name="userId"
@@ -135,19 +152,22 @@ class WelcomeForm extends Component {
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
-
-        <div className='password-field'>
+        </div>
+        
+        <div className='password-field relative'>
         <Input
           type={this.state.inputType}
           name="password"
+          id="password"
           title="Password"
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
+          onPaste={this.copyPaste}
         />
        <span
             onClick={this.showHidePass}
-            className="valiationPosition-NewPassword"
+            className={`valiationPosition-NewPassword ${this.state.isActive}`}
           >
             {
               <img
@@ -155,10 +175,8 @@ class WelcomeForm extends Component {
               />
             }
           </span>
+          {errorMessagePassword}
         </div>
-
-        
-        {errorMessagePassword}
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
         <Button type="primary" title="Login" />

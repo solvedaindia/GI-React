@@ -1,6 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import apiManager from '../../utils/apiManager';
+import appCookie from '../../utils/cookie';
 import {cartDetailAPI} from '../../../public/constants/constants';
+
 import * as actionTypes from '../../constants/app/constants';
 
 // Individual exports for testing
@@ -9,7 +11,7 @@ import * as actionTypes from '../../constants/app/constants';
 	
 	function* getCart(action) {
 		try {
-			const response = yield call(apiManager.get, cartDetailAPI, { 'headers': { 'pincode': '400610' } });
+			const response = yield call(apiManager.get, cartDetailAPI, { 'headers': { 'pincode': appCookie.get('pincode') } });
 			yield put({type: actionTypes.GET_CART_FETCHED, payload: response.data.data});
 		} catch (e) {
 			yield put({type: "USER_FETCH_FAILED", message: e.message});

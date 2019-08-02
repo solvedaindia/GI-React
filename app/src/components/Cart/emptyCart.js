@@ -5,12 +5,15 @@ import { isMobile } from '../../utils/utilityManager';
 import InstallLogo from '../SVGs/installLogo';
 import ExchangeLogo from '../SVGs/exchangeLogo';
 import DeliveryLogo from '../SVGs/deliveryLogo';
+import MWebLogo from '../../components/SVGs/mWebLogo';
 
 class EmptyCart extends React.Component {
   render() {
     return (
       <section className="emptyCartContainer">
-        {!!isMobile() ? <h2 className='mWebTitle'>Cart</h2> : '' }
+        {!!isMobile() ? <div className='checkout-top-hedaer'>
+                  <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
+                <h2 className='title'> Cart</h2></div> : '' }
 
         {/* left Side info */}
         <div className="emptyCart">
@@ -24,7 +27,7 @@ class EmptyCart extends React.Component {
             }
             <h2 className="shopHeadLine">There’s nothing in here</h2>
             <p className="info">You haven’t added any items to your yet </p>
-            <a className="btn shopBtn">Shop Now</a>
+            <a className="btn shopBtn" href='/'>Shop Now</a>
           </div>
         </div>
         {/* Right Side Info */}

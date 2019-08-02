@@ -1,5 +1,5 @@
 import React from 'react';
-import jsPDF from 'jsPDF';
+import jsPDF from 'jspdf';
 import { invoicAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';

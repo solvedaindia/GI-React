@@ -16,6 +16,7 @@ import MobileDiscountAndPrice from './mobileComponents/discountAndPrice';
 import MobileProductFeatures from './mobileComponents/productFeatures';
 import MobilePurchaseGuideGuide from './mobileComponents/purchaseGuide';
 import MobileProductDetail from './mobileComponents/productDetail';
+import MobileAddtocart from '../PdpComponent/mobileComponents/quantityAndPincode';
 import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
@@ -23,146 +24,191 @@ import { pinCodeAPI } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
+import { array } from 'prop-types';
 
 
 
 class PdpComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      skuData: {},
-      isLoading: true,
-      selectedSku: {},
-      dataVal: '',
-      pincodeData: '',
-    };
-  }
+	constructor() {
+		super();
+		this.state = {
+			skuData: {},
+			isLoading: true,
+			selectedSku: {},
+			dataVal: '',
+			pincodeData: '',
+		};
+	}
 
 	componentDidMount() {
 		this.getResolveSkuData();
-    window.addEventListener('scroll', this.handleScroll);
-    window.scrollTo(0, 0);	
+    	window.addEventListener('scroll', this.handleScroll);
+    	window.scrollTo(0, 0);	
 	}
 
-  /* get sku resolved data */
-  getResolveSkuData(resolvedSkuId = null) {
-    let skuId;
-    if (resolvedSkuId) {
-      skuId = resolvedSkuId;
-    } else {
-      skuId = this.props.matchParams.skuId;
-    }
+	/* get sku resolved data */
+	getResolveSkuData(resolvedSkuId = null) {
+		let skuId;
+		if (resolvedSkuId) {
+			skuId = resolvedSkuId;
+		} else {
+			skuId = this.props.matchParams.skuId;
+		}
 
-    this.props.data.skuData.map(skuLevelData => {
-      if (skuId === skuLevelData.uniqueID) {
-        this.getActualResolvedData(this.props.data.skuData, skuLevelData);
-      }
-    });
-  }
+		if(this.props.data.type === 'product') {
+			this.props.data.skuData.map(skuLevelData => {
+				if (skuId === skuLevelData.uniqueID) {
+					this.getActualResolvedData(this.props.data.skuData, skuLevelData, this.props.data.type);
+				}
+			});
+		} else if(this.props.data.type === 'kit') {
+			this.props.data.kitData.map(skuLevelData => {
+				if (skuId === skuLevelData.uniqueID) {
+					this.getActualResolvedData(this.props.data.kitData, skuLevelData, this.props.data.type);
+				}
+			});
+		}
+	}
 
-  /* get actual resolve data  */
-  getActualResolvedData(data, resolvedSkuData) {
-    const selectedValue = resolvedSkuData.defAttributes[0].values[0].name;
-    const skuDataArr = [];
-    data.map(skuLevelData => {
-      skuLevelData.defAttributes.map(attributeValue => {
-        if (selectedValue === attributeValue.values[0].name) {
-          skuDataArr.push(skuLevelData);
-        }
-      });
-    });
+	/* get actual resolve data  */
+	getActualResolvedData(data, resolvedSkuData, type) {
+		const skuDataArr = [];
+		const uniqueId = [];
+		if (type === 'product') {
+			resolvedSkuData.defAttributes.map(dataVal => {
+			data.map(skuLevelData => {
+				skuLevelData.defAttributes.map(attributeValue => {
+					if (dataVal.values[0].name === attributeValue.values[0].name && uniqueId.indexOf(skuLevelData.uniqueID) === -1) {
+						skuDataArr.push(skuLevelData);
+						uniqueId.push(skuLevelData.uniqueID)
+					}
+				});
+			});
+		});
+		} else if (type === 'kit') {
+			resolvedSkuData.swatchAttributes.map(dataVal => {
+			data.map(skuLevelData => {
+				skuLevelData.swatchAttributes.map(attributeValue => {
+					if (dataVal.values[0].name === attributeValue.values[0].name && uniqueId.indexOf(skuLevelData.uniqueID) === -1) {
+						skuDataArr.push(skuLevelData);
+						uniqueId.push(skuLevelData.uniqueID)
+					}
+				});
+			});
+			});
+		}
 
-    const defaultPincodeData = {
-      pincodeServiceable: null,
-    };
+		const defaultPincodeData = {
+			pincodeServiceable: null,
+		};
 
-    this.setState({
-      selectedSku: skuDataArr,
-      isLoading: false,
-      skuData: resolvedSkuData,
-      pincodeData: defaultPincodeData
-    });
+		this.setState({
+			selectedSku: skuDataArr,
+			isLoading: false,
+			skuData: resolvedSkuData,
+			pincodeData: defaultPincodeData
+		});
 
-    this.callPinCodeAPI(resolvedSkuData);
-  }
+		this.callPinCodeAPI(resolvedSkuData);
+	}
 
-  /* handle swatches */
-  handleSwatches(count) {
-    let swatches = new Array();
-    let productSkuData = this.props.data.skuData;
-    const selectedSwatches = this.handleSelectedSwatches(count);
-    for (let j = 0; j < selectedSwatches.length; j++) {
-      swatches = new Array();
-      productSkuData.map(skuLevelData => {
-        skuLevelData.defAttributes.map((attributeValue, index) => {
-          if (selectedSwatches[j] === attributeValue.values[0].name) {
-            swatches.push(skuLevelData);
-          }
-        });
-      });
-      productSkuData = swatches;
-    }
-    this.getResolveSkuData(swatches[0].uniqueID);
-  }
+	/* handle swatches */
+	handleSwatches(count) {
+		let swatches = new Array();
+		let productSkuData;
+		if (this.props.data.type === 'kit') {
+			productSkuData = this.props.data.kitData;
+		} else if (this.props.data.type === 'product') {
+			productSkuData = this.props.data.skuData;
+		}
+		const selectedSwatches = this.handleSelectedSwatches(count);
+		for (let j = 0; j < selectedSwatches.length; j++) {
+			swatches = new Array();
+			productSkuData.map(skuLevelData => {
+				if (this.props.data.type === 'kit') {
+					skuLevelData.swatchAttributes.map((attributeValue, index) => {
+						if (selectedSwatches[j] === attributeValue.values[0].name) {
+						swatches.push(skuLevelData);
+						}
+					});
 
-  /* handle selected swatches */
-  handleSelectedSwatches(count) {
-    const selectedSwatches = new Array();
-    for (let i = 0; i < count + 1; i++) {
-      const name = document
-        .getElementsByClassName(`radio${i}`)[0]
-        .getAttribute('name');
-      const getValue = document.querySelector(`input[name = ${name}]:checked`)
-        .value;
-      selectedSwatches.push(getValue);
-    }
-    return selectedSwatches;
-  }
+				} else if (this.props.data.type === 'product') {
+					skuLevelData.defAttributes.map((attributeValue, index) => {
+						if (selectedSwatches[j] === attributeValue.values[0].name) {
+						swatches.push(skuLevelData);
+						}
+					});
 
-  callPinCodeAPI(resolvedSkuData) {
-    const dataParams = {
-      params: {
-        partnumber: resolvedSkuData.partNumber,
-        quantity: 1,
-        uniqueid: resolvedSkuData.uniqueID,
-      },
-    };
+				}
+			});
+			productSkuData = swatches;
+		}
+		this.getResolveSkuData(swatches[0].uniqueID);
+	}
 
-    apiManager
-      .get(pinCodeAPI + appCookie.get('pincode'), dataParams)
-      .then(response => {
-        this.setState({
-          isLoading: false,
-          pincodeData: response.data.data,
-        });
-      })
-      .catch(error => {
-        console.log('PDP Pin Code API Error =>', error);
-        const defaultPincodeData = {
-          pincodeServiceable: false,
-          inventoryStatus: 'unavailable',
-          shippingCharge: 0,
-          error: 'Not a valid pincode',
-        };
-        this.setState({
-          isLoading: false,
-          pincodeData: defaultPincodeData,
-        });
-      });
+	/* handle selected swatches */
+	handleSelectedSwatches(count) {
+		const selectedSwatches = new Array();
+		for (let i = 0; i < count; i++) {
+			const name = document.getElementsByClassName(`radio${i}`)[0].getAttribute('name');
+			const getValue = document.querySelector(`input[name = ${name}]:checked`).value;
+			selectedSwatches.push(getValue);
+		}
+		return selectedSwatches;
+	}
 
-    this.props.historyData.push(
-      `/pdp/furniture-${resolvedSkuData.productName
-        .toLowerCase()
-        .replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
-    );
-  }
+	callPinCodeAPI(resolvedSkuData) {
+		const dataParams = {
+			params: {
+			partnumber: resolvedSkuData.partNumber,
+			quantity: 1,
+			uniqueid: resolvedSkuData.uniqueID,
+			},
+		};
 
-  handleAddtocart(ispincode) {
-    this.getResolveSkuData();
-    if (!ispincode) {
-      window.scrollTo(0, 0);
-    }
-  }
+		apiManager.get(pinCodeAPI + appCookie.get('pincode'), dataParams).then(response => {
+			this.setState({
+				isLoading: false,
+				pincodeData: response.data.data,
+			});
+		}).catch(error => {
+			console.log('PDP Pin Code API Error =>', error);
+			const defaultPincodeData = {
+				pincodeServiceable: false,
+				inventoryStatus: '',
+				shippingCharge: '',
+				error: 'Not a valid pincode',
+			};
+
+			this.setState({
+				isLoading: false,
+				pincodeData: defaultPincodeData,
+			});
+		});
+
+		this.props.historyData.push(
+			`/pdp/furniture-${resolvedSkuData.productName
+			.toLowerCase()
+			.replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
+		);
+	}
+
+	handleAddtocart(ispincode) {
+		this.getResolveSkuData();
+		if (!ispincode) {
+			window.scrollTo(0, 0);
+		}
+	}
+
+	getAttributeTypeData(props) {
+		let attributeData;
+		if(props.type === 'kit') {
+			attributeData =  props.swatchAttributes;
+		} else if (props.type === 'product') {
+			attributeData =  props.defAttributes;
+		}
+		return attributeData;
+	}
  // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
@@ -236,35 +282,52 @@ class PdpComponent extends React.Component {
   }
 }
 // handleScroll function End
-  render() {
+  render() { 
     const { isLoading } = this.state;
     const isAddToCart = appCookie.get('isPDPAddToCart');
+	let isSticky = false;
+	let stateAttr = {};
+    if (!isLoading && isAddToCart !== null) { 
+    	if(isAddToCart.split(',').indexOf(this.state.skuData.uniqueID) === -1) {
+        	isSticky = true;
+       	}
+    } else if(isAddToCart === null) {
+    	isSticky = true;
+	}
 
+	if (!isLoading) {
+		if (this.props.data.type === 'product') {
+			stateAttr = this.state.skuData.defAttributes
+		} else if (this.props.data.type === 'kit') {
+			stateAttr = this.state.skuData.swatchAttributes;
+		}
+	}
+	
+	const attrTypeData = this.getAttributeTypeData(this.props.data);
     return (
-
       <>
-			{!isLoading  &&
+			{!isLoading &&
 			<>
-				{ isAddToCart !== 'true' &&			
+				{ isSticky === true &&			
 			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
 			    <div className='pdpstickyItem clearfix'>				   
 					<div className="product" id="topdiv1" style={{opacity: '0'}}>
                        <div className='productId'>
-						 <span className='text'>Product ID:</span> 
+						 <span className='text'>Product ID: </span> 
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
-						<h4 className='heading'>
+						<h1 className='heading'>
 							{this.state.skuData.productName}
-						</h4>
+						</h1>
 						<div className='lockerText'>{this.state.skuData.shortDescription}</div>
 					</div>
 					<div className='cartofferprice-wrap'>
 					<div className='PriceofferCart'>
 					   <div className='divpriceOffer' id="topdiv2">
 							<Price priceData={this.state.skuData} sticky={true}/>
-							<div className="accessories-offer">							
-								<span><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/>& free accessories</span>
+							<div className="accessories-offer">		
+								<span>{this.state.skuData.discount > 1 && <><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/></>}{ this.state.skuData.promotions.length > 0 && this.state.skuData.promotions[0].name && <>{parseInt(this.state.skuData.discount) > 1 && '& '}{this.state.skuData.promotions[0].name}</>}</span>
 							</div>
 						</div>
 						<div className='addtoCart' id="topdiv3">
@@ -272,7 +335,8 @@ class PdpComponent extends React.Component {
 								skuData={this.state.skuData}
 								sticky={true}
 								pinCodeData={this.state.pincodeData}
-								handleAddtocart={this.handleAddtocart.bind(this)} 
+                handleAddtocart={this.handleAddtocart.bind(this)}
+                history={this.props.historyData}
 							/>
 						</div>
 					</div>
@@ -286,7 +350,7 @@ class PdpComponent extends React.Component {
         {!isLoading ? (
           <>            
             <Row className="no-margin">
-              <Col className="no-paddingLeft" md={7} sm={12} xs={12}>
+              <Col className="no-paddingLeft img-gallery-box" md={7} sm={12} xs={12}>
                 <div className="GalleryBox">
                   <Productimageandvideo
                     skuData={this.state.skuData}
@@ -294,11 +358,11 @@ class PdpComponent extends React.Component {
                   />
                 </div>
               </Col>
-              <Col md={4} sm={12} xs={12}>
+              <Col className='pdpDetails' md={4} sm={12} xs={12}>
                 <div className="GallerytextBox">
                   <Row>
                     <Col md={12} sm={12} xs={12}>
-                    { !isMobile() && <Col md={6} sm={12} xs={12} className="product">
+                    { !isMobile() && <Col md={7} sm={6} xs={12} className="product">
                          <span className="text">Product ID: </span> 
                         <span className="text">
                           {this.state.skuData.partNumber}
@@ -310,36 +374,48 @@ class PdpComponent extends React.Component {
                           {this.state.skuData.partNumber}
                         </span>
                       </Col>}
-
-
                       { !isMobile() &&
-                        <WishlistAndShare skuData={this.state.skuData}/>
+                        <WishlistAndShare skuData={this.state.skuData} historyData={this.props.historyData}/>
                       }
                     </Col>
                   </Row>
                   <ProductNameDescription productData={this.state.skuData} />
                   {isMobile() &&
                     <div className='wishlist-share'>
-                      <WishlistAndShare skuData={this.state.skuData}/>
+                      <WishlistAndShare skuData={this.state.skuData} historyData={this.props.historyData}/>
                       </div>
-                  }
+				  }
                   <ProductDefAttriutes
-                    defAttributes={this.props.data.defAttributes}
-                    selectedAttribute={this.state.skuData.defAttributes}
-                    allselectedData={this.state.selectedSku}
+										defAttributes={attrTypeData}
+                    selectedAttribute={stateAttr}
+										allselectedData={this.state.selectedSku}
+										resolvedSku={this.state.skuData}
                     handleOptionData={this.handleSwatches.bind(this)}
                   />
+									{ isMobile() &&
+                  <MobileAddtocart
+                    skuData={this.state.skuData}
+                    sticky={false}
+                    pinCodeData={this.state.pincodeData}
+                    handleAddtocart={this.handleAddtocart.bind(this)}
+                    history={this.props.historyData}
+                  />
+									}
                   <ProductInfo
                     productData={this.state.skuData}
-                    defAttributes={this.props.data.defAttributes}
-                    pinCodeData={this.state.pincodeData}
+                    defAttributes={attrTypeData}
+										pinCodeData={this.state.pincodeData}
+										espotPromo={this.props.espotPromo}
                   />
+									{ !isMobile() &&
                   <AddToCart
                     skuData={this.state.skuData}
                     sticky={false}
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
+                    history={this.props.historyData}
                   />
+									}
                   { isMobile() && <Row className='add-to-cart-floater'>
                       <Col md={6} sm={12} xs={12} className="product">
                           <div className='product-price-detail'>
@@ -365,35 +441,70 @@ class PdpComponent extends React.Component {
         <Grid>
           <Row>
           {!isMobile() ? (
-              <ProductFeatures productFeatureData={this.props.data} />
+			  <>
+			  { this.props.data.type === 'product' ? (
+				  <ProductFeatures productFeatureData={this.props.data} />
+			  ) : (
+				  <>{ !isLoading && this.props.data.type === 'kit' && <ProductFeatures productFeatureData={this.state.skuData}/>}</>
+			  )}
+		  	</>
             ) : (
-              <MobileProductFeatures productFeatureData={this.props.data}/> 
+				<>
+				{this.props.data.type === 'product' ? (
+					<MobileProductFeatures productFeatureData={this.props.data}/> 
+				) : (
+					<>{ !isLoading && this.props.data.type === 'kit' && <MobileProductFeatures productFeatureData={this.state.skuData}/>}</>
+				)}
+				</>
             )
           }
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12} className="purchase-guide-box">
             {!isMobile() ? (
-                <PurchaseGuide purchaseGuide={this.props.data} />
-              ) : (
-                <MobilePurchaseGuideGuide purchaseGuide={this.props.data}/> 
-              )
-            }
+				<>
+					{ this.props.data.type === 'product' ? (
+						<PurchaseGuide purchaseGuide={this.props.data} />
+					) : (
+						<>{ !isLoading && this.props.data.type === 'kit' && <PurchaseGuide purchaseGuide={this.state.skuData}/>}</>
+					)}
+				</>
+            ) : ( 
+				<>
+					{this.props.data.type === 'product' ? (
+						<MobilePurchaseGuideGuide purchaseGuide={this.props.data}/>
+					) : (
+						<>{ !isLoading && this.props.data.type === 'kit' && <MobilePurchaseGuideGuide purchaseGuide={this.state.skuData}/>}</>
+					)}
+				</>
+            )}
             </Col>
           </Row>
           <Row>
             <Col md={12} sm={12} xs={12}>
               {!isMobile() ? (
-                  <ProductDetail productDetail={this.props.data} />
-                ) : (
-                  <MobileProductDetail productDetail={this.props.data}/> 
-                )
+								<>
+									{ !isLoading && 
+										<ProductDetail productDetail={this.state.skuData} />
+									}
+								</>
+              ) : (
+							<>
+								{!isLoading && 
+									<MobileProductDetail productDetail={this.state.skuData} />
+								}
+							</>
+            	)
               }
             </Col>
           </Row>
           <Row>
-            <ProductKeywords productKeywords={this.props.data} />
-          </Row>
+		  		{ this.props.data.type === 'product' ? (
+					<ProductKeywords productKeywords={this.props.data} />
+				) : (
+					<>{ !isLoading && this.props.data.type === 'kit' && <ProductKeywords productKeywords={this.state.skuData}/>}</>
+				)}
+          </Row> 
           <Row>
             {!isLoading ? (
               <SimilarCombosProducts

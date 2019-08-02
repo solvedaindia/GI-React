@@ -8,6 +8,7 @@ const pincodeUtil = require('../utils/pincodeutil');
 const pdpfilter = require('../filters/productdetailfilter');
 const imagefilter = require('../filters/imagefilter');
 const kitfilter = require('../filters/kitfilter');
+// const bundlefilter = require('../filters/bundlefilter');
 const headerutil = require('../utils/headerutil.js');
 const constants = require('../utils/constants');
 const origin = require('../utils/origin.js');
@@ -41,7 +42,7 @@ module.exports.getProductDetails = function getProductDetailsData(
       callback(err);
     } else {
       logger.debug('Got all the origin resposes From PDP API');
-      if (result.catalogEntryView.length > 0) {
+      if (result.catalogEntryView && result.catalogEntryView.length > 0) {
         if (result.catalogEntryView[0].catalogEntryTypeCode === 'ProductBean') {
           callback(null, {});
         } else if (
@@ -63,6 +64,25 @@ module.exports.getProductDetails = function getProductDetailsData(
         } else if (
           result.catalogEntryView[0].catalogEntryTypeCode === 'BundleBean'
         ) {
+          // const bundleIds = [];
+          // bundleIds.push(result.catalogEntryView[0].uniqueID);
+          // const taskList = [
+          //   promotionDetails.bind(
+          //     null,
+          //     reqHeaders,
+          //     result.catalogEntryView[0],
+          //     null,
+          //     bundleIds,
+          //   ),
+          //   mergeBundleData,
+          // ];
+          // async.waterfall(taskList, (er, res) => {
+          //   if (er) {
+          //     callback(er);
+          //   } else {
+          //     callback(null, res);
+          //   }
+          // });
           callback(null, result.catalogEntryView[0]);
         } else {
           const productId = result.catalogEntryView[0].parentCatalogEntryID;
@@ -389,7 +409,10 @@ function productListByIDs(header, productData, callback) {
     } else {
       if (result.length > 0) {
         result.forEach(sku => {
-          if (sku.merchandisingAssociations.length > 0) {
+          if (
+            sku.merchandisingAssociations &&
+            sku.merchandisingAssociations.length > 0
+          ) {
             sku.merchandisingAssociations.forEach(element => {
               if (skuIds.indexOf(element.uniqueID) === -1) {
                 skuIds.push(element.uniqueID);
@@ -435,7 +458,6 @@ function mergePDPData(prodData, skuData, promoData, callback) {
     type: 'product',
     defAttributes: [],
     skuData: [],
-    productDetails: [],
     productFeatures: [],
     purchaseGuide: [],
     keywords: [],
@@ -449,10 +471,10 @@ function mergePDPData(prodData, skuData, promoData, callback) {
       attributes.defining,
     );
     productDataSummary.skuData = getSkuData(skuData, promoData);
-    productDataSummary.productDetails = pdpfilter.getProductDetails(
-      attributes,
-      productData,
-    );
+    // productDataSummary.productDetails = pdpfilter.getProductDetails(
+    //   attributes,
+    //   productData,
+    // );
     productDataSummary.productFeatures = pdpfilter.getProductFeatures(
       attributes,
     );
@@ -508,6 +530,7 @@ function getSkuData(bodyData, promotions) {
         });
       }
       skuDataJson.promotions = associatedPromo;
+      skuDataJson.productDetails = pdpfilter.getProductDetails(attributes, sku);
       skuDataJson.similarProducts = mercAssociations.similarProducts;
       skuDataJson.combos = mercAssociations.combosYouMayLike;
       skuData.push(skuDataJson);
@@ -634,15 +657,14 @@ function kitDetailsByIds(header, kitData, kitIds, callback) {
 function transformKitData(kitData, subKitData, promoData, callback) {
   const kitDataSummary = {
     type: 'kit',
-    swatchAttibutes: [],
+    swatchAttributes: [],
     kitData: [],
   };
-
   if (subKitData.length > 0) {
     subKitData.forEach(bodyData => {
       const attributes = pdpfilter.getAttributes(bodyData);
       const mercAssociations = getMercAssociationsData(bodyData, promoData);
-      kitDataSummary.swatchAttibutes.push(
+      kitDataSummary.swatchAttributes.push(
         kitfilter.getSwatchAttibute(bodyData),
       );
       const kitDataJSON = kitfilter.getKitSummary(bodyData, promoData);
@@ -656,6 +678,70 @@ function transformKitData(kitData, subKitData, promoData, callback) {
       kitDataJSON.combos = mercAssociations.combosYouMayLike;
       kitDataSummary.kitData.push(kitDataJSON);
     });
+
+    if (kitDataSummary.swatchAttributes.length > 0) {
+      kitDataSummary.swatchAttributes = kitfilter.filterSwatchAtrributes(
+        kitDataSummary.swatchAttributes,
+      );
+    }
   }
   callback(null, kitDataSummary);
 }
+
+// function mergeBundleData(bundleData, key1, promoData, callback) {
+//   const bundleSummaryJson = {
+//     type: 'bundle',
+//     uniqueID: '',
+//     productName: '',
+//     partNumber: '',
+//     masterCategoryID: '',
+//     parentUniqueID: '',
+//     actualPrice: '',
+//     offerPrice: '',
+//     emiData: '',
+//     inStock: '',
+//     shortDescription: '',
+//   };
+//   if (bundleData) {
+//     bundleSummaryJson.uniqueID = bundleData.uniqueID;
+//     bundleSummaryJson.productName = bundleData.name;
+//     bundleSummaryJson.partNumber = bundleData.partNumber;
+//     bundleSummaryJson.masterCategoryID = bundleData.masterCategoryId;
+//     bundleSummaryJson.parentUniqueID = bundleData.parentCatalogEntryID || '';
+//     bundleSummaryJson.actualPrice = '';
+//     bundleSummaryJson.offerPrice = '';
+//     if (bundleData.price && bundleData.price.length > 0) {
+//       bundleData.price.forEach(price => {
+//         if (price.usage === 'Display' && price.value !== '') {
+//           bundleSummaryJson.actualPrice = parseFloat(price.value);
+//         }
+//         if (price.usage === 'Offer' && price.value !== '') {
+//           bundleSummaryJson.offerPrice = parseFloat(price.value);
+//         }
+//       });
+//     }
+//     bundleSummaryJson.emiData = '';
+//     bundleSummaryJson.inStock = '';
+//     bundleSummaryJson.shortDescription = bundleData.shortDescription || '';
+//     const bundlesData = bundlefilter.getBundlesData(bundleData);
+//     const bundleDataJson = {
+//       itemDataArray: [],
+//       productData: {},
+//     };
+//     if (bundlesData.itemDataArray.length > 0) {
+//       bundlesData.itemDataArray.forEach(item => {
+//         bundleDataJson.itemDataArray.push(
+//           bundlefilter.getItemDataSummary(item, promoData),
+//         );
+//       });
+//     }
+//     if (Object.keys(bundlesData.productDataJson).length !== 0) {
+//       bundleDataJson.productData = bundlefilter.getProductDataSummary(
+//         bundlesData.productDataJson,
+//         promoData,
+//       );
+//     }
+//     bundleSummaryJson.bundleData = bundleDataJson;
+//   }
+//   callback(null, bundleSummaryJson);
+// }

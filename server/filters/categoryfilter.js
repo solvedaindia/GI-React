@@ -35,20 +35,24 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail = imagefilter.getImagePath(categoryDetails.thumbnail);
-  catData.fullImage = imagefilter.getImagePath(categoryDetails.fullImage);
-
-  catData.onClickUrl = '';
+  catData.thumbnail = imagefilter.getCategoryImagePath(
+    categoryDetails.thumbnail,
+  );
+  catData.fullImage = imagefilter.getCategoryImagePath(
+    categoryDetails.fullImage,
+  );
+  // catData.onClickUrl = '';
   catData.shortDescription = categoryDetails.shortDescription || '';
-  catData.seoUrl = '';
+  // catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
-  // catData.startPrice = 2499;
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {
     catData.displaySkus = false;
   }
   catData.pageTitle = categoryDetails.seo_prop_pageTitle || '';
   catData.imageAltText = categoryDetails.seo_prop_imageAltText || '';
   catData.metaDescription = categoryDetails.seo_prop_metaDescription || '';
+  catData.startPrice = categoryDetails.startPrice || '';
+  catData.productCount = categoryDetails.productCount || '';
   return catData;
 }

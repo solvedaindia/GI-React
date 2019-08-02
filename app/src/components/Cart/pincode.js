@@ -2,49 +2,100 @@ import React from 'react';
 import '../../../public/styles/cart/cartItem.scss';
 import appCookie from '../../utils/cookie';
 import PinLocationLogo from '../SVGs/pinLocationIcon';
+import apiManager from '../../utils/apiManager';
+import { pinCodeServiceAPI } from '../../../public/constants/constants';
+
+const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
 class Pincode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
       error: null,
-      pincodeVal: appCookie.get('pincode'),
+	  pincodeVal: appCookie.get('pincode'),
+	  edit: false
     };
   }
 
   updatePincode(props) {
     const pincode = document.getElementById('pincodeVal').value;
-    appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-    this.quantity = 1;
+	appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+	this.setState({
+		edit: false
+	})
+	this.getPincodeService();
   }
+   editPincode() {
+	   this.setState({
+		   edit : true
+	   })
+   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+	handleChange = e => {
+			var val = e.target.value;
+			if( val === '' || PINCODE_REGEX.test(val)) {
+				this.setState({ [e.target.name]: e.target.value });
+			}
+	}
+	getPincodeService() {
+		apiManager
+		.get(pinCodeServiceAPI + this.state.pincodeVal)
+		.then(response => {
+			this.setState({
+				error: null
+			})
+			this.props.getCartDetails();
+
+		})
+		.catch(error => {
+			this.setState({
+			error,
+			isLoading: false,
+			});
+		});
+	}
+
 
   render() {
+	  let attrs = {};
+	  if ( !this.state.edit ) {
+		  attrs = { readOnly : true }
+	  }
     return (
-      <div className="pincodeField">
-        <span className="pinLogo">
-          <PinLocationLogo width={12} height={13} />
-        </span>
-        <input
-          className="pincodeVal"
-          name="pincodeVal"
-          id="pincodeVal"
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.pincodeVal}
-        />
-        <a
-          className="pincodeEdit"
-          id="edit"
-          role="button"
-          onClick={this.updatePincode.bind(this, this.props)}
-        >
-          Edit
-        </a>
-      </div>
+		<>
+		<div className="pincodeField">
+			<span className="pinLogo">
+			<PinLocationLogo width={12} height={13} />
+			</span>
+			<input
+				className="pincodeVal"
+				name="pincodeVal"
+				id="pincodeVal"
+				type="text"
+				onChange={this.handleChange}
+				value={this.state.pincodeVal}
+				{...attrs}
+			/>
+			{this.state.edit ? 
+				<a
+				className="pincodeUpdate"
+				role="button"
+				onClick={this.updatePincode.bind(this, this.props)}
+				>
+				Update
+				</a>
+				:
+				<a
+				className="pincodeEdit"
+				role="button"
+				onClick={this.editPincode.bind(this, this.props)}
+				>
+				Edit
+				</a>
+			}
+      	</div>
+		{!!this.state.error && <p className='pinErrorMsg'>Pincode is not servicable.</p>}
+		</>
     );
   }
 }

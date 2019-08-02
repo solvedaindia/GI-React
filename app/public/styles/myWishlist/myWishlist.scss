@@ -191,6 +191,9 @@
   @media screen and (min-width: 768px){
     .myWishlist {
       padding: 60px 0 0 0;
+      .myWishlist{
+        padding: 0px;
+      }
       .heading {
         font-size: 30px;
       }
@@ -227,6 +230,34 @@
     .heading {
       font-size: 24px;
     }
+    .plpCategories{
+      .plp-products{
+        padding: 0px 0 60px 0;
+
+        .productlist{
+          padding: 0px;
+          .hoverBox{
+            padding: 5px 0px;
+            .inner-overlay{
+              text-align: center;
+            }
+            .mov-to-cart{
+              background: none;
+              display: block;
+              border: 0px;
+              text-align: center;
+              width: 100%;
+              padding: 10px 0px;
+              border-top:1px solid $borderLight;
+              color: $ashGrey;
+            }
+          }
+        }
+      }
+    }
+  }
+  .shaire-headerwrp{
+    display: none;
   }
 }
 

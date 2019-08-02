@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import EmptyWishlist from './emptyWishlist';
 import '../../../public/styles/myWishlist/myWishlist.scss';
@@ -11,10 +12,11 @@ import {
 } from '../../../public/constants/constants';
 import { getReleventReduxState, getCookie } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
-import { resetRemoveFromWishlistFlag } from '../../actions/app/actions';
+import { resetRemoveFromWishlistFlag, rwdShareWishlistURL } from '../../actions/app/actions';
 import BestSeller from '../BestSelling/bestSelling';
 import ShareLogo from '../SVGs/shareIcon';
 import SocialMedia from '../../utils/socialMedia';
+import {isMobile} from '../../utils/utilityManager';
 import CryptoJS from 'crypto-js';
 
 const encryptKey = 'GIk';
@@ -26,6 +28,7 @@ class MyWishlist extends React.Component {
       isLoading: false,
       wishlistData: [],
       wishlistPopup: null,
+      moveToCartPOPup: null,
       showSocialShare: false,
       wishlistAPIURL: myWishlistAPI,
       // Sharing
@@ -38,6 +41,11 @@ class MyWishlist extends React.Component {
   }
 
   componentDidMount() {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
+
     if (this.props.location.search !== '') {
       console.log('mixxx xxx --- ', this.props);
       this.decryptSharingURL(this.props.location.search);
@@ -47,13 +55,17 @@ class MyWishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (getCookie('isLoggedIn') !== 'true') {
+      this.props.history.push('/')
+      return;
+    }
     console.log(
       'nextProps',
       `${nextProps.wishlistUpdatedCount}  this Porps `,
       this.props.wishlistUpdatedCount,
     );
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
-      this.fetchMyWishlistData();
+      this.fetchMyWishlistData(myWishlistAPI);
     }
     if (nextProps.removeWishlistFlag) {
       console.log(
@@ -79,6 +91,26 @@ class MyWishlist extends React.Component {
         <span className="wishlist-text">Product removed from Wishlist</span>
       </div>
     );
+  }
+
+  MoveToCartPopUpItem() {
+    console.log('Move to Cart Dynamic --- ');
+    setTimeout(() => {
+      this.setState({
+        moveToCartPOPup: null,
+      });
+    }, 2000);
+    this.setState({
+      moveToCartPOPup: <div className="removeFromWishlist clearfix">
+        <span className="wishlist-text">Product Added to Cart</span>
+        <Link to='/cart'>
+        <button className="view-btn" >
+          View
+        </button>
+        </Link>
+      </div>
+    })
+
   }
 
   fetchMyWishlistData(APIURL) {
@@ -111,11 +143,12 @@ class MyWishlist extends React.Component {
     const shareURL = `${window.location.href}?`;
     const parmaURL = `${getCookie('name')}${seperateStr}${
       this.state.guestAccessKey
-    }${seperateStr}${this.state.externalIdentifier}`;
+      }${seperateStr}${this.state.externalIdentifier}`;
 
     // Encrypt
     const ciphertext = CryptoJS.AES.encrypt(parmaURL, encryptKey).toString();
     console.log('its encryptt --- ', ciphertext);
+    this.props.rwdShareWishlistURL(shareURL + ciphertext);
     this.setState({
       sharingURL: shareURL + ciphertext,
     });
@@ -150,7 +183,8 @@ class MyWishlist extends React.Component {
     const wishlistItem = (
       <>
         <div className="container">
-          <div className="shaire-headerwrp">
+          
+          {!isMobile() ? <div className="shaire-headerwrp">
             <h3 className="heading">
               {this.state.isShareWishlist
                 ? `${this.state.userNameS}'s wishlist`
@@ -170,7 +204,7 @@ class MyWishlist extends React.Component {
                 ) : null}
               </button>
             )}
-          </div>
+          </div>: '' }
 
           <section className="plpCategories">
             <PlpComponent
@@ -178,6 +212,7 @@ class MyWishlist extends React.Component {
               isFromWishlistPro
               showSkuPro
               isShareWishlistPro={this.state.isShareWishlist}
+              moveToCartPopUpPro={this.MoveToCartPopUpItem.bind(this)}
             />
           </section>
         </div>
@@ -197,20 +232,21 @@ class MyWishlist extends React.Component {
     return (
       <div className="myWishlist">
         {this.state.wishlistPopup}
+        {this.state.moveToCartPOPup}
         {!this.state.isLoading ? (
           loadingIndicator
         ) : (
-          <div className="myWishlist">
-            {this.state.wishlistData.length != 0 ? (
-              wishlistItem
-            ) : (
-              <>
-                <EmptyWishlist />
-                <BestSeller />
-              </>
-            )}
-          </div>
-        )}
+            <div className="myWishlist">
+              {this.state.wishlistData.length != 0 ? (
+                wishlistItem
+              ) : (
+                  <>
+                    <EmptyWishlist />
+                    <BestSeller />
+                  </>
+                )}
+            </div>
+          )}
       </div>
     );
   }
@@ -229,5 +265,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { resetRemoveFromWishlistFlag },
+  { resetRemoveFromWishlistFlag, rwdShareWishlistURL },
 )(MyWishlist);

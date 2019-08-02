@@ -68,6 +68,7 @@ import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
+import paymentWait from '../../components/checkout/paymentWait';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -176,13 +177,14 @@ export default class App extends React.Component {
     }
 
     const { isMobile } = this.state;
+    {console.log("Test URL", this.props)}
     return (
       <div>
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
         {newsletterItem}
-        {window.location.pathname === '/cart' ? (
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />
         ) : (
           <HeaderContainer />
@@ -216,8 +218,10 @@ export default class App extends React.Component {
           <Route path="/privacyPolicy" component={privacyPolicy} />
           <Route path="/aboutUs" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
+          <Route path="/check/payment/:orderId" component={paymentWait} />
+          
         </Switch>
-        <FooterContainer />
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount' ? '' : <FooterContainer /> }
       </div>
     );
   }

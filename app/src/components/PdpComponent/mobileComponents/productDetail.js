@@ -89,9 +89,9 @@ class productDetail extends React.Component {
   render() {
     return (
       <>
-        {this.props.productDetail.productDetails.description.length > 0 && (
+        {this.props.productDetail.productDetails && this.props.productDetail.productDetails.description.length > 0 && (
         <Accordion>
-          <div className="product_details">
+          <div className="product_details" id="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
                 <h2 className="heading"> Product Details</h2>

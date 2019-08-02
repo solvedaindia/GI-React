@@ -11,6 +11,7 @@ import HeaderL1 from '../../components/HeaderComponent/headerL1/headerL1';
 import HeaderL2 from '../../components/HeaderComponent/headerL2/headerL2';
 import Logo from '../../components/SVGs/logo';
 import HeaderMobile from './HeaderMobile/index';
+import {isMobile} from '../../utils/utilityManager'
 import '../../../public/styles/headerContainer/headerContainer.scss';
 
 export class HeaderContainer extends React.Component {
@@ -21,13 +22,14 @@ export class HeaderContainer extends React.Component {
       headerData: {},
       isLoading: false,
       error: null,
-      isMobile: window.innerWidth <= 760,
     };
   }
 
   render() {
-    if (this.state.isMobile) {
-      return <HeaderMobile />;
+    if (isMobile()) {
+      return (
+        <HeaderMobile />
+      );
     }
 
     return (

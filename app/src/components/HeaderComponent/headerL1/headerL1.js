@@ -84,7 +84,7 @@ class HeaderL1 extends React.Component {
             </li>
           ))
         ) : (
-          <div>Something Went Wrong</div>
+          <div>...</div>
         )}
       </ul>
     );
