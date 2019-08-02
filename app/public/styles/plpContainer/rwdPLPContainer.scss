@@ -333,9 +333,9 @@
             background:$colorwhite;
           }
           .list {
-            // display: inline-block;
             display: block;
             float: left;
+            width: 100%;
   
             .input_box {
               margin: 0 15px 0 0;
@@ -417,6 +417,15 @@
             .input_box,
             .label_text {
               display: inline-block;
+            }
+            .label_text {
+              width:100%;
+              .filterCount{
+                float: right;
+                color: $greyBorder;
+                font-size: 10px;
+                font-family: $font-light;
+              }
             }
             .dropdown__list-item {
               display: flex;

@@ -6,6 +6,8 @@ import {
   ipDataApi,
 } from '../../../public/constants/constants';
 import {is} from '../../utils/utilityManager';
+import appCookie from '../../utils/cookie';
+import CrossIcon from '../../components/SVGs/crossIcons.svg';
 
 export class HomapegeLayout extends React.Component {
 	constructor(props) {
@@ -15,7 +17,9 @@ export class HomapegeLayout extends React.Component {
 		isLoading: false,
 		error: null,
 		ipData: null,
+		cookiePolicy: appCookie.get('isCookiePolicy')
 		};
+		this.hideCookiePopup = this.hideCookiePopup.bind(this);
 	}
 
 	getIPData() {
@@ -61,9 +65,17 @@ export class HomapegeLayout extends React.Component {
 		this.getPageLayout();
 	}
 
+	hideCookiePopup() {
+		appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
+		this.setState({
+			cookiePolicy: false
+		})
+	}
+
 	render() {
 		const { homepageLayout } = this.state;
 		return (
+			<> {
 			!!homepageLayout &&
 			homepageLayout.map((widget, i) => (
 				<WidgetList
@@ -72,6 +84,16 @@ export class HomapegeLayout extends React.Component {
 					index={`${widget.title}_widget_${i}`}
 				/>
 			))
+			}
+			{ this.state.cookiePolicy === 'true' &&
+				<div className="cookiesPolicySticky">
+					We use our own third party cookies to improve your experience and our services, and to
+					analyse the use of our website. if you continue browsing, we take that to mean that you
+					accept their use.
+				<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
+			}
+			
+			</>
 		);
 	}
 }

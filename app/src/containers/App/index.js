@@ -69,6 +69,7 @@ export default class App extends React.Component {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     this.getPincodeData();
+    this.cookiePolicyPopup();
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -101,6 +102,12 @@ export default class App extends React.Component {
       console.log('In the new');
       this.getNewsletterSubscriptionStatus();
       // this.setState({ showNewsLetter: true });
+    }
+  }
+
+  cookiePolicyPopup() {
+    if (appCookie.get('isCookiePolicy') !== 'false') {
+      appCookie.set('isCookiePolicy', true, 365 * 24 * 60 * 60 * 1000);
     }
   }
 
@@ -147,11 +154,27 @@ export default class App extends React.Component {
     this.setState({ isMobile: window.innerWidth <= 760 });
   }
 
+  checkCookiePolicyPopup() {
+    if (appCookie.get('isCookiePolicy') === 'true' && window.location.pathname !== '/') {
+      appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
+    } 
+  }
+
+  checkSearchInput() {
+    if (window.location.pathname !== '/search' && document.getElementById("searchInput")) {
+      document.getElementById("searchInput").value='';     
+      const crossbtn = document.getElementById('clearField');
+      crossbtn.style.display='none'
+    }
+  }
+
   render() {
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
-
+    this.checkCookiePolicyPopup();
+    this.checkSearchInput();
+    
     let newsletterItem;
     if (this.state.showNewsLetter) {
       newsletterItem = <NewsletterModel />;
