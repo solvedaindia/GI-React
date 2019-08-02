@@ -7,7 +7,7 @@ import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
+import { getReleventReduxState, isMobile } from '../../../utils/utilityManager';
 import { imagePrefix } from '../../../../public/constants/constants';
 import { runInThisContext } from 'vm';
 
@@ -300,9 +300,17 @@ class Filter extends React.Component {
               {checkItem}
             </div>
 
-            <div className="label_text">
+            {!isMobile ()? (
+              <div className="label_text">
               {`${option.label} (${option.count})`}
             </div>
+            )
+            : (
+              <div className="label_text">
+              {option.label} <span className='filterCount'> {option.count}</span>
+            </div>
+            )}
+            
           </div>
         </li>
       );
