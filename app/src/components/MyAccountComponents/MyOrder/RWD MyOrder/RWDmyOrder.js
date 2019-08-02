@@ -1,8 +1,8 @@
 import React from 'react';
 import apiManager from '../../../../utils/apiManager';
 import { orderListAPI } from '../../../../../public/constants/constants';
-import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
-import OrderItem from '../orderItem';
+import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
+import RWDOrderItem from '../RWD MyOrder/RWDOrderItem';
 import TrackOrder from '../TrackMyOrder/trackOrder';
 
 class RWDMyOrder extends React.Component {
@@ -152,7 +152,7 @@ class RWDMyOrder extends React.Component {
           <img
             id="me"
             className="loadingImg"
-            src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+            src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
           />
         </div>
     )
@@ -166,19 +166,19 @@ class RWDMyOrder extends React.Component {
           <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
         ) :
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
-            return (
-              <>
-                {this.displayOnGoingPastOrder(data)}
-                <OrderItem
-                  renderSelectionPro={this.renderSelection.bind(this)}
-                  isGuestTrackOrderPro={this.state.isGuestTrackOrder}
-                  orderItemData={data}
-                />
-              </>
-            )
+              return (
+                <>
+                  {this.displayOnGoingPastOrder(data)}
+                  <RWDOrderItem
+                    renderSelectionPro={this.renderSelection.bind(this)}
+                    isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+                    orderItemData={data}
+                  />
+                </>
+              )
+            
           }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
         }
-
 
       </div>
     );
