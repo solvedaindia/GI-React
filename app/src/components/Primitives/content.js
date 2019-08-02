@@ -58,10 +58,10 @@ class EspotContent extends React.Component {
 				{(this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') ? 
 					<div className='exploreGuest'>
-						<div className='greeting'>
+						{!isMobile() && <div className='greeting'>
 							<p className='greetingHead'>Welcome</p>
 							<p className='msg'>Explore Rooms</p>
-						</div>
+						</div>}
 						<div className='exploreSection' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 					</div>
 					:
