@@ -118,10 +118,11 @@
                     }
                     .already-member{
                         text-align: center;
-                        margin: 12px 0 0;
+                        margin: 14px 0 0;
                         color:$black;
                         font-family: $font-regular;
                         font-size: $base*1.75;
+                        line-height: $base*1.75;
                         .login{
                             color:$ceruleanblue;
                             font-family: $font-bold;
@@ -314,7 +315,7 @@
                         .joinUs{
                             padding:30px 0;
                             .joinus-heading{
-                                font-size: $base*4;
+                                font-size: $base*4.75;
                             }
                         }
                         .form_register{
