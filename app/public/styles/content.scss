@@ -24,7 +24,7 @@
     */
     @media screen and (min-width: 768px){
         .espotContent {
-            margin-top: $base*15; 
+            margin-bottom: $base*15; 
             .exploreGuest{
               width: 100%;
               display: flex;
@@ -51,6 +51,7 @@
                 .explore-room {
                   .explore {
                     width: 100%;
+                    padding: $base*4 0;
                   }
                 }
               }
