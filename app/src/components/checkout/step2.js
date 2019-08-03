@@ -537,6 +537,7 @@ export class Step2Component extends React.Component {
     }
 
     addAddressToCart = () => {
+      console.log('shipMode-ID --- ',this.props.shipModePro);
       return new Promise((resolve, reject) => {
         let token = appCookie.get('accessToken');
         axios.get(minicartAPI, {
@@ -552,7 +553,7 @@ export class Step2Component extends React.Component {
             if(item.freeGift != true) {
               var obj = {
                 "orderItemId": `${item.orderItemId}`,
-                "shipModeId": "11251",
+                "shipModeId": this.props.shipModePro,
                 "addressId": `${this.state.ship_add_id}`
               }
               data.push(obj);
@@ -560,7 +561,7 @@ export class Step2Component extends React.Component {
           });
           var body = {
             "orderItem": data,
-            "shipModeId": "11251",
+            "shipModeId": this.props.shipModePro,
             "addressId": `${this.state.bill_add_id}`
           };
           axios.post(AddAddressToCardAPI, body, {

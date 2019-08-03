@@ -22,7 +22,8 @@ import {
 import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
 import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
-import { LogoUrl } from './constants';
+// import { LogoUrl } from './constants';
+import WhiteLogo from '../SVGs/whiteLogo';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -231,7 +232,8 @@ class RegisterWithEmailMobile extends React.Component {
             {!isMobile () ? (<div className="Thumbnailbox">
               <img className="imgfullwidth" src={RegisterThumbnailImg} />
             </div>):(<div className="reg-join-Us">
-              <img className="logo_width" src={LogoUrl} alt="logo" />
+              {/* <img className="logo_width" src={LogoUrl} alt="logo" /> */}
+              <WhiteLogo width="100" height="33" />
               <h3 className="joinus-heading">Join us Now</h3>
             </div>)}
           </Col>

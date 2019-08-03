@@ -187,6 +187,7 @@ export const OrderDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/or
 export const CheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payment/checkout`;
 export const minEMIAPI = `${secureHttp}://${host}:${port2}/api/v1/emi/minimumemivalue`;
 export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/savegstin`;
+export const shipModeAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/shipmodes`;
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';

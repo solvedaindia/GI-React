@@ -92,7 +92,6 @@ class SearchBar extends React.Component {
         searchData: [],
       });
       this.searchResultClick = true;
-      this.clearFields();
     }
     
   }
@@ -102,7 +101,6 @@ class SearchBar extends React.Component {
     this.setState({
       searchData: [],
     });
-    this.clearFields();
   }
 
 	clearFields(e){         
