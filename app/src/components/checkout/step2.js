@@ -989,7 +989,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="number" title="Pin Code" name="pin" value={this.state.inputText_pincode}
+                          <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
                             handleChange={this.handleInput} />
                           {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
@@ -1015,7 +1015,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6">
                          <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} handleChange={this.handleInput} />
+                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city}/>
                            {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                          </div>
                       </div>
@@ -1085,7 +1085,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
                        <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="Pin Code" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
+                         <Input inputType="text" title="Pincode" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
                          {this.state.berror_pincode ? <div className='error-msg'>{this.state.berrorMessage_pincode}</div> : null}
                        </div>
                     </div>
