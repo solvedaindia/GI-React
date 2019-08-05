@@ -24,7 +24,7 @@ import ChangePassword from '../../components/MyAccountComponents/ChangePassword/
 import MyProfile from '../../components/MyAccountComponents/MyProfile/myProfile';
 import ManageAddress from '../../components/MyAccountComponents/ManageAddress/manageAddress';
 import MyOrder from '../../components/MyAccountComponents/MyOrder/myOrder';
-import RWDMyOrder from '../../components/MyAccountComponents/MyOrder/RWD MyOrder/RWDMyOrder';
+import RWDMyOrder from '../../components/MyAccountComponents/MyOrder/RWDMyOrder/RWDmyOrder';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {
@@ -130,7 +130,7 @@ export class MyAccountContainer extends React.Component {
                   <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />
                 </div>
                 <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v" >
-                  {isMobile() ? <RWDMyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /> : <MyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /> }
+                  {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /></div> : <MyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /> }
                 </div>
                 <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v">
                   <ManageAddress />
