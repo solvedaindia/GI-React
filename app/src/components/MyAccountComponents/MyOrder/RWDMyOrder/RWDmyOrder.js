@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getReleventReduxState } from '../../../../utils/utilityManager';
 import apiManager from '../../../../utils/apiManager';
 import { orderListAPI } from '../../../../../public/constants/constants';
 import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
 import RWDOrderItem from './RWDOrderItem';
 import TrackOrder from '../TrackMyOrder/trackOrder';
 import RWDSingleProduct from './RWDSingleProduct';
+import { updateTheRWDHeader } from '../../../../actions/app/actions';
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
@@ -26,6 +29,7 @@ class RWDMyOrder extends React.Component {
       pageSize: 4,
 
       currentComponent: null,
+      currentComponentData: null,
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
@@ -41,10 +45,24 @@ class RWDMyOrder extends React.Component {
     removeEventListener('scroll', this.onscroll);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
+      if (nextProps.updatedHeaderReturnVal === 'MyOrder Return') {
+        this.setState({
+          currentComponent: '',
+          currentComponentData: null,
+        })
+        this.props.updateTheRWDHeader('');
+      }
+    }
+  }
+
   myOrderCallback(compName, data) {
     console.log('ddddd -- ', compName, data);
+    this.props.updateTheRWDHeader('Track Order');
     this.setState({
       currentComponent: compName,
+      currentComponentData: data
     })
   }
 
@@ -145,10 +163,6 @@ class RWDMyOrder extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
-    console.log('in the Track order --- ', this.state.isTrackOrder);
-  }
-
   loadingbar() {
     return (
       <div className="lazyloading-Indicator">
@@ -166,6 +180,7 @@ class RWDMyOrder extends React.Component {
       return (
         <div className="myOrder">
           <RWDSingleProduct
+            orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback} />
         </div>
       );
@@ -197,4 +212,15 @@ class RWDMyOrder extends React.Component {
   }
 }
 
-export default RWDMyOrder;
+function mapStateToProps(state) {
+  const stateObj = getReleventReduxState(state, 'global');
+  const updatedHeaderReturn = getReleventReduxState(stateObj, 'updatedRWDHeader');
+  console.log('Mobile Header Subscription RWD --- ', updatedHeaderReturn);
+
+  return {
+    updatedHeaderReturnVal: updatedHeaderReturn
+  };
+}
+
+export default connect(mapStateToProps,{ updateTheRWDHeader },)(RWDMyOrder);
+// export default RWDMyOrder;
