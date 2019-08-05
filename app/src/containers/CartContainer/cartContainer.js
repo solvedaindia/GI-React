@@ -167,7 +167,7 @@ class CartDetail extends React.Component {
               {!isMobile() ? <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
                 <span className='val'>₹{cartData.orderSummary.netAmount}</span>
-                <span className='savingText'>You saved ₹{cartData.orderSummary.saving}</span>
+                <span className='savingText'>You saved <span className='savedAmt'>₹{cartData.orderSummary.saving}</span></span>
               </p>:''}
               {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
               :
