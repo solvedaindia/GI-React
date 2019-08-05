@@ -16,7 +16,10 @@ ul {
     }
 }
 
-p,
+p
+{
+  font-family: $font-regular;
+}
 span,
 a,
 li,

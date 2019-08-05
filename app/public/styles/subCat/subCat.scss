@@ -54,12 +54,16 @@
             position: absolute;
             right: 0;
             top: $base*2.75;
+            font-family: $font-regular;
         }
         .starting {
+            color: $battleshipGrey;
             font-style: italic;
             font-size: 11px;
             .startPrice {
               margin-left: $base*0.5; 
+              font-family: $font-medium;
+
             }
         }
     }
