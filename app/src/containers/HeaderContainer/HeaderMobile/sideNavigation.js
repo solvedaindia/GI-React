@@ -302,7 +302,7 @@ export class HeaderMobile extends React.Component {
                 </li>
               ))}
             {myAccountItem}
-            {this.state.layer1Data.map((linkData, index) => {
+            { !this.state.layer1Data && this.state.layer1Data.map((linkData, index) => {
               return (
                 <>
                   {
