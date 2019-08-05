@@ -135,7 +135,7 @@ class RWDMyOrder extends React.Component {
         }
       }
 
-      return <div className="ongoingOrder">{tagOutput}</div>
+      return <h2 className='heading-text'>{tagOutput}</h2>
     }
     else {
       return null;

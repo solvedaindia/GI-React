@@ -56,7 +56,7 @@ class RWDOrderItem extends React.Component {
     return (
       <>
         <div className="tabBar clearfix">
-          <ul className="heading clearfix">
+          <ul className="orders-short-desc-heading clearfix">
             <li className="list">
               <span className="heading-top">Order ID</span>{' '}
               <span className="heading-sub">{orderData.orderID}</span>
