@@ -24,7 +24,7 @@ import ChangePassword from '../../components/MyAccountComponents/ChangePassword/
 import MyProfile from '../../components/MyAccountComponents/MyProfile/myProfile';
 import ManageAddress from '../../components/MyAccountComponents/ManageAddress/manageAddress';
 import MyOrder from '../../components/MyAccountComponents/MyOrder/myOrder';
-import RWDMyOrder from '../../components/MyAccountComponents/MyOrder/RWD MyOrder/RWDMyOrder';
+import RWDMyOrder from '../../components/MyAccountComponents/MyOrder/RWDMyOrder/RWDmyOrder';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {

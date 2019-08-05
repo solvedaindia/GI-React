@@ -164,6 +164,7 @@ export default class App extends React.Component {
     if (window.location.pathname !== '/search' && document.getElementById("searchInput")) {
       document.getElementById("searchInput").value='';     
       const crossbtn = document.getElementById('clearField');
+      console.log('hello', checkSearchInput)
       crossbtn.style.display='none';
     }
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import apiManager from '../../../../utils/apiManager';
 import { orderListAPI } from '../../../../../public/constants/constants';
 import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
-import RWDOrderItem from '../RWD MyOrder/RWDOrderItem';
+import RWDOrderItem from './RWDOrderItem';
 import TrackOrder from '../TrackMyOrder/trackOrder';
 
 class RWDMyOrder extends React.Component {
