@@ -84,7 +84,7 @@ class RWDOrderItem extends React.Component {
         {orderData.orderItems.map((data, key) => {
           console.log('mixxxx -- ', data);
           return (
-            <div className="itemBox" onClick={this.onProductClick.bind(this, data)}>
+            <div className="order-item-box" onClick={this.onProductClick.bind(this, data)}>
               <div className='itemImg'>
                 <img className='imgBox' src={data.thumbnail !== '' ? `${imagePrefix}${data.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
               </div>
@@ -97,8 +97,9 @@ class RWDOrderItem extends React.Component {
         <div className='totalItem'>
           <label className='totalTag'>Total: ₹{orderData.orderSummary.netAmount}</label>
           <button className='viewOrder' onClick={this.onViewOrderClick}>View Order</button>
+          
         </div>
-
+        <div className='order-separator'></div>
       </>
     );
   }
