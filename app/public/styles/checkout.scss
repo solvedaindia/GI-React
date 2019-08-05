@@ -228,8 +228,10 @@
                                 font-size: 14px;
                                 font-family: $font-regular;
                                 text-decoration: none;
+                                background-color: transparent;
                                 &:focus {
                                     outline: none;
+                                    
                                 }
                             }
                             &:last-child {
