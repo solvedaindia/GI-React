@@ -195,13 +195,10 @@
       }
     }
 
-    .itemBox {
-      border: 1px solid $greyborder;
-      border-left: 0;
-      border-right:0;
-      border-top: 0;
+    .order-item-box {
+      border-bottom: 1px solid $greyborder;
       padding: 20px 15px 20px 15px;
-      margin: 0 0 0px 0;
+      margin: 0px 15px 0px 15px;
       .itemImg, .itemStatus, .itemArrow{
         display: inline-block;
       }
@@ -226,22 +223,28 @@
 
     .totalItem {
       padding: 10px 15px;
+      margin-top:-1px;
+      border-top: 1px solid $greyborder;
       .totalTag{
         color: $cerulean;
         font-family:$font-bold;
+        font-size: $base*1.5;
       }
       .viewOrder {
         float:right;
-        display: block;
-        color: blue;
         text-decoration: underline;
         background: none;
         border: 0px;
         color:$cerulean;
         font-family: $font-regular;
+        font-size: $base*1.5;
       }
+      
     }
-
+    .order-separator{
+      background: $greybg;
+      height: 12px;
+    }
   }
 }
 /* Order checkout page */
