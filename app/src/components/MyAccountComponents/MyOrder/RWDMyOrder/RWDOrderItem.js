@@ -4,6 +4,7 @@ import { changePasswordAPI, imagePrefix } from '../../../../../public/constants/
 import OrderProduct from '../orderProduct';
 import OrderSummery from '../orderSummery';
 import { isMobile } from '../../../../utils/utilityManager';
+import RWDSingleProduct from './RWDSingleProduct'
 
 const showImg = <img className='iconImg' src={require('../../../SVGs/plusIcon.svg')} />
 const hideImg = <img className='iconImg' src={require('../../../SVGs/minusIcon.svg')} />
@@ -20,8 +21,17 @@ class RWDOrderItem extends React.Component {
 
   }
 
-  getStatusDate(shipmentData, status) {
+  onProductClick(data) {
+    this.props.myOrderCallbackPro('SingleProduct', data)
+    // if (shipmentData.length > 1) {
 
+    // }
+    // else {
+      
+    // }
+  }
+
+  getStatusDate(shipmentData, status) {
     var statusDate;
     if (status === 'Created') {
       statusDate = shipmentData.createdDate
@@ -36,7 +46,6 @@ class RWDOrderItem extends React.Component {
       statusDate = shipmentData.deliveryDate
     }
     else if (status === 'Installed' || status === 'Installation') {
-      console.log('its in installed');
       statusDate = shipmentData.installationDate
     }
     return statusDate;
@@ -75,7 +84,7 @@ class RWDOrderItem extends React.Component {
         {orderData.orderItems.map((data, key) => {
           console.log('mixxxx -- ', data);
           return (
-            <div className="itemBox">
+            <div className="itemBox" onClick={this.onProductClick.bind(this, data)}>
               <div className='itemImg'>
                 <img className='imgBox' src={data.thumbnail !== '' ? `${imagePrefix}${data.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
               </div>

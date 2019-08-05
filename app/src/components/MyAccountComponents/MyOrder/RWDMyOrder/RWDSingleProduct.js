@@ -10,7 +10,6 @@ class RWDSingleProduct extends React.Component {
     };
   }
 
-
   render() {
     return (
       <>
