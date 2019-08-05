@@ -9,87 +9,7 @@
     font-family: $font-medium;
   }
 
-  .noOrder {
-    text-align: center;
-    font-size: 20px;
-    color: darkgray;
-    margin: 22px;
-  }
 
-  .tabBar {
-    padding: 14px 20px;
-    background-color: #eef8fe;
-    position: relative;
-
-    .heading {
-      margin: 0;
-      float: left;
-      display: block;
-      .list {
-        display: block;
-        float: left;
-        color: black;
-        padding: 0 7px 0 0;
-        line-height: 20px;
-        .heading-top,
-        .heading-sub {
-          display: block;
-        }
-        .heading-top {
-          font-size: 12px;
-          line-height: 12px;
-          padding: 0 0 10px 0;
-          text-transform: uppercase;
-          font-family: $font-regular;
-        }
-        .heading-sub {
-          font-size: 14px;
-          font-family: $font-medium;
-          line-height: 14px;
-        }
-      }
-    }
-  }
-
-  .itemBox {
-    border: 1px solid $greyborder;
-    border-left: 0;
-    border-right:0;
-    border-top: 0;
-    padding: 0 26px 30px;
-    margin: 0 0 16px 0;
-    .itemImg,.itemStatus,.itemArrow{
-      display: inline-block;
-    }
-    .itemImg {
-      .imgBox {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .itemStatus {
-    }
-
-    .itemArrow {
-      width:30px;
-    }
-
-    
-  }
-
-  .totalItem {
-    .totalTag {
-
-    }
-
-    .viewOrder {
-      float:right;
-      display: block;
-      color: blue;
-      text-decoration: underline;
-    }
-  }
   // Back Order css
   .trackMyOrder {
     .backBtn {
@@ -220,6 +140,108 @@
   }
   .paymentmethod {
     padding: 0 20px 0 10px;
+  }
+
+}
+
+.ongoing-order{
+  .myOrder{
+    .heading-text{
+      font-size: $base*1.75;
+      font-family: $font-bold;
+      background: $greybg;
+      margin: 0px;
+      padding:11px 15px;
+    }
+    .noOrder {
+      color: darkgray;
+      margin: 22px;
+    }
+    .tabBar {
+      padding: 13px 15px;
+      background-color: $paleGrey;
+      position: relative;
+  
+      .orders-short-desc-heading {
+        margin: 0;
+        float: left;
+        width: 100%;
+        .list {
+          display: block;
+          float: left;
+          color: white;
+          padding: 0 7px 0 0;
+          line-height: 20px;
+          width: 33%;
+          .heading-top,
+          .heading-sub {
+            display: block;
+          }
+          .heading-top {
+            font-size: 10px;
+            line-height: 12px;
+            padding:0px;
+            text-transform: uppercase;
+            font-family: $font-regular;
+            color: $ashGrey;
+          }
+          .heading-sub {
+            font-size: 11px;
+            font-family: $font-regular;
+            line-height: 15px;
+            color: $ashGrey;
+          }
+        }
+      }
+    }
+
+    .itemBox {
+      border: 1px solid $greyborder;
+      border-left: 0;
+      border-right:0;
+      border-top: 0;
+      padding: 20px 15px 20px 15px;
+      margin: 0 0 0px 0;
+      .itemImg, .itemStatus, .itemArrow{
+        display: inline-block;
+      }
+      .itemImg {
+        margin: 0px 10px 0px 0px;
+        .imgBox {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .itemStatus{
+        color: $battleshipGrey;
+        font-family: $font-regular;
+        font-size: 11px;
+      }  
+      .itemArrow {
+        width:26px;
+        float: right;
+        padding:10px 5px;
+      }
+    }
+
+    .totalItem {
+      padding: 10px 15px;
+      .totalTag{
+        color: $cerulean;
+        font-family:$font-bold;
+      }
+      .viewOrder {
+        float:right;
+        display: block;
+        color: blue;
+        text-decoration: underline;
+        background: none;
+        border: 0px;
+        color:$cerulean;
+        font-family: $font-regular;
+      }
+    }
+
   }
 }
 /* Order checkout page */

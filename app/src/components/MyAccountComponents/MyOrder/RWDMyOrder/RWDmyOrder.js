@@ -2,8 +2,9 @@ import React from 'react';
 import apiManager from '../../../../utils/apiManager';
 import { orderListAPI } from '../../../../../public/constants/constants';
 import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
-import RWDOrderItem from '../RWD MyOrder/RWDOrderItem';
+import RWDOrderItem from './RWDOrderItem';
 import TrackOrder from '../TrackMyOrder/trackOrder';
+import RWDSingleProduct from './RWDSingleProduct';
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
@@ -23,9 +24,12 @@ class RWDMyOrder extends React.Component {
       isLoading: false,
       pageNumber: 1,
       pageSize: 4,
+
+      currentComponent: null,
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
+    this.myOrderCallback = this.myOrderCallback.bind(this);
   }
 
   componentDidMount() {
@@ -37,10 +41,15 @@ class RWDMyOrder extends React.Component {
     removeEventListener('scroll', this.onscroll);
   }
 
+  myOrderCallback(compName, data) {
+    console.log('ddddd -- ', compName, data);
+    this.setState({
+      currentComponent: compName,
+    })
+  }
+
   getOrderList(isFromScroll) {
     this.setState({ isLoading: true }, () => {
-
-
       let orderAPI =
         `${orderListAPI}?` +
         `pagenumber=${this.state.pageNumber}&` +
@@ -49,17 +58,11 @@ class RWDMyOrder extends React.Component {
       apiManager.get(orderAPI)
         .then(response => {
           console.log('OrderList Response --- ', response.data);
-          // this.setState({
-          //   orderListData: response.data.data.orderList,
-          //   isLoading: false,
-          // })
-
           this.setState({
             orderListData: isFromScroll ? [...this.state.orderListData, ...response.data.data.orderList] : response.data.data.orderList,
             hasMore: response.data.data.orderList.length !== 0, // Now only show on 0 Products and disable it for lazyload
             isLoading: false,
           });
-
         })
         .catch(error => {
           this.setState({
@@ -135,7 +138,7 @@ class RWDMyOrder extends React.Component {
         }
       }
 
-      return <div className="ongoingOrder">{tagOutput}</div>
+      return <h2 className='heading-text'>{tagOutput}</h2>
     }
     else {
       return null;
@@ -149,39 +152,48 @@ class RWDMyOrder extends React.Component {
   loadingbar() {
     return (
       <div className="lazyloading-Indicator">
-          <img
-            id="me"
-            className="loadingImg"
-            src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-          />
-        </div>
+        <img
+          id="me"
+          className="loadingImg"
+          src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+        />
+      </div>
     )
   }
 
   render() {
-    console.log('is Show TrackOrder --- ', this.state.isTrackOrder)
-    return (
-      <div className="myOrder">
-        {this.state.isTrackOrder ? (
-          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
-        ) :
-          this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
-              return (
-                <>
-                  {this.displayOnGoingPastOrder(data)}
-                  <RWDOrderItem
-                    renderSelectionPro={this.renderSelection.bind(this)}
-                    isGuestTrackOrderPro={this.state.isGuestTrackOrder}
-                    orderItemData={data}
-                  />
-                </>
-              )
-            
-          }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
-        }
+    if (this.state.currentComponent === 'SingleProduct') {
+      return (
+        <div className="myOrder">
+          <RWDSingleProduct
+            myOrderCallbackPro={this.myOrderCallback} />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="myOrder">
+          {this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
+            return (
+              <>
+                {this.displayOnGoingPastOrder(data)}
+                <RWDOrderItem
+                  renderSelectionPro={this.renderSelection.bind(this)}
+                  isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+                  orderItemData={data}
+                  myOrderCallbackPro={this.myOrderCallback}
+                />
+              </>
+            )
 
-      </div>
-    );
+          }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
+          }
+
+        </div>
+      );
+    }
+
+
   }
 }
 
