@@ -283,7 +283,7 @@ export class CheckoutComponent extends React.Component {
       payMethodId: "BillDesk",
       amount: this.state.orderSummaryData.netAmount,
       billing_address_id: this.state.ship_add.billAddId,
-      callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePaymet`,
+      callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePayment`,
       // callbackUrl: 'http://localhost:5000/checkout/',
       BankID: this.state.BankID,
       paymentMode: this.state.paymentMode
