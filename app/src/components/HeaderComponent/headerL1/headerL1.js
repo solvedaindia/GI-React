@@ -44,7 +44,7 @@ class HeaderL1 extends React.Component {
     return (
       
       <ul className="layer1">
-        {!isLoading ? (
+        {!isLoading && !layer1Data ? (
           layer1Data.map((linkData, index) => (
             <li className="listItems" key={index}>
               {linkData.text === 'TRACK ORDER' ? (
