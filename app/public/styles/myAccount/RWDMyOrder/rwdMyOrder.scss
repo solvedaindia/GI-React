@@ -201,24 +201,31 @@
       border-right:0;
       border-top: 0;
       padding: 20px 15px 20px 15px;
-      margin: 0 0 16px 0;
-      .itemImg,.itemStatus,.itemArrow{
+      margin: 0 0 0px 0;
+      .itemImg, .itemStatus, .itemArrow{
         display: inline-block;
       }
       .itemImg {
+        margin: 0px 10px 0px 0px;
         .imgBox {
           width: 40px;
           height: 40px;
         }
+      }
+      .itemStatus{
+        color: $battleshipGrey;
+        font-family: $font-regular;
+        font-size: 11px;
       }  
       .itemArrow {
-        width:20px;
+        width:26px;
         float: right;
+        padding:10px 5px;
       }
     }
 
     .totalItem {
-      padding: 0px 15px;
+      padding: 10px 15px;
       .totalTag{
         color: $cerulean;
         font-family:$font-bold;
