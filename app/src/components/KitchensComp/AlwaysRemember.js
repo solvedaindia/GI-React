@@ -1,7 +1,14 @@
 import React from 'react';
 import { Row, Col,Grid } from 'react-bootstrap';
+import apiManager from '../../utils/apiManager';
 
-
+import {
+    AlwaysRememberApi,
+    imagePrefix,
+    storeId,
+    accessToken,
+  } from '../../../public/constants/constants';
+  
 import  '../../../public/styles/static-pages/kitchens.scss'
 
 class AlwaysRemember extends React.Component {
@@ -12,23 +19,75 @@ class AlwaysRemember extends React.Component {
         const scatchImg3 =  require('../../../public/images/btnsch3.jpg') 
 
         this.state = {
-            imgList: [scatchImg1,scatchImg2,scatchImg3],
-index: 0
+            imageFirstSrc: '',
+            imageSecondSrc:'',
+            imagethirdSrc: '',
+            img_url: ''
         }
     }
 
-    onHandleClickFirst= () => (this.state.index === 0 || this.state.index === 2) ?   this.setState({index:1}) : "" ;
-    onHandleClickSecond= () => (this.state.index === 1 || this.state.index === 2) ?   this.setState({index:0}) : "" ;
-    onHandleClickThird= () => (this.state.index === 0 || this.state.index === 1) ?   this.setState({index:2}) : "" ;
 
         
         
-     
+    onHandleClick = event => {
+        if(event.target.name == 1) {
+            console.log('img1 is clicked')
+            this.setState({
+                img_url:this.state.imageFirstSrc,
+            })
+        }
+       else if(event.target.name == 2) {
+        console.log('img1 is clicked')
+
+        this.setState({
+          img_url: this.state.imageSecondSrc,
+      })
+    }
+    else if(event.target.name == 3) {
+      this.setState({
+          img_url: this.state.imageThirdSrc
+      })
+      console.log('setstate', this.state.imageThirdSrc)
+    }
+}
       
+    getAlwaysRememberData() {
+    apiManager
+      .get(AlwaysRememberApi)
+      .then(response => {
+        console.log('response of remember', response)
+        const {data} = response || {}
+        this.setState({
+          imageFirstSrc: data && data.data.KitchenImg.imageSrc,
+          imageSecondSrc: data &&  data.data.gkitchenImg.imageSrc,
+          imageThirdSrc: data &&  data.data.parallelKitchenImg.imageSrc,
+          type: data && data.data.type,
+          isLoading: false,
+          imageHeading:  data && data.data.imgHeading,
+          img_url: data && data.data.KitchenImg.imageSrc
+        });
+        console.log('remeber Data',  data.data.KitchenImg.imageSrc);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('SLider Data Error');
+      });
+    console.log('SLider Data Error');
+  }
+  
+
+  componentWillMount() {
+    this.getAlwaysRememberData();
     
+  }
+
   
 
   render() {
+   
     return (
         <div className="remembersection clear fix">
         <div className="row">
@@ -45,13 +104,13 @@ index: 0
            
                <div className="rememberImgbox">
                 <div className="imgCenterbox">
-                    <img className="imgcenter" src={this.state.imgList[this.state.index]} alt="rectangle"/>
+                    <img className="imgcenter" src={imagePrefix + this.state.img_url} alt="rectangle"/>
                  </div>
                  
                  <div className="btnwrapper">
-                      <button type="button" onClick={this.onHandleClickFirst.bind(this)} className="button active">G Kitchen</button>
-                      <button type="button"  onClick={this.onHandleClickSecond.bind(this)} className="button">Parallel Kitchen</button>
-                      <button type="button"  onClick={this.onHandleClickThird.bind(this)} className="button">L Kitchen</button>
+                      <button type="button" name='1' onClick={this.onHandleClick} className="button active">G Kitchen</button>
+                      <button type="button" name='2'  onClick={this.onHandleClick} className="button">Parallel Kitchen</button>
+                      <button type="button" name='3'  onClick={this.onHandleClick} className="button">L Kitchen</button>
                     </div>
                </div>
                  

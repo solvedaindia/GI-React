@@ -81,15 +81,15 @@ index: 0
               <div className="whatgoesSlider">
                 <div className="container">
                   <WhatGoes />
-                  <h3 className="Name-Copy">Behind the Scenes Description</h3>
-                  <p className="This-project-require">This project required a huge amount of hours but sit amet,
-                    consectetur adipisicing elit, sed do <br />eiusmod tempor incididunt ut labore et dolore magna
-                    aliquat enim ad minim.</p>
+                  
                 </div>
               </div>
+              <div className='AlwaysRememberParent'>
               <div className='container'>
               <AlwaysRemember />
               </div>
+              </div>
+             
               <div className="kitchenHallLayout">
                 <KitchenHall />
               </div>
