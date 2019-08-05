@@ -58,6 +58,7 @@ import  '../../../public/styles/static-pages/kitchens.scss'
 
 import {
   kitchenBannerAPI,
+  imagePrefix,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
@@ -121,7 +122,7 @@ class WardrobeBanner extends React.Component {
           {!!kitchenSlider &&
             kitchenSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img src={sliderData.imageSrc} alt='kitchen' />
+                <img src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}
         </Slider>

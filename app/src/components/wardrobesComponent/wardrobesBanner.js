@@ -59,6 +59,7 @@ import  '../../../public/styles/static-pages/warobes.scss'
 
 import {
   wardrobesBannerAPI,
+  imagePrefix,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
@@ -117,12 +118,12 @@ class WardrobeBanner extends React.Component {
       slidesToScroll: 1,
     };
     return (
-      <div className="bannerkitchenss">
+      <div className="fsBanner">
         <Slider {...settings}>
           {!!wardrobeSlider &&
             wardrobeSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img src={sliderData.imageSrc} alt={sliderData.alt} />
+                <img src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}
         </Slider>

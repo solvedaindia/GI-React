@@ -51,12 +51,12 @@ index: 0
             <div className="wardrobes1">
               <div className="wardroBanner">
                 <WardrobeBanner />
-                <div className="container1">
+                <div className="bannerTextcontainer">
                   <div className="wardroBannertext">
-                    <h4 className="heading">Modular Wardrobe Ardra</h4>
+                    {/* <h4 className="heading">Modular Wardrobe Ardra</h4>
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                       eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
-                      the home you've always wanted</p>
+                      the home you've always wanted</p> */}
                       <a  href= "#form_consult">
                         <button className="btn-book">Book A Consultation</button></a>
                    
@@ -155,11 +155,11 @@ index: 0
               </div>
               <div id="form_consult" className="formwardrobeContainer">
               <div className="container">
-                <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
+                <img className="formBackGroundCover" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div  className="Form-bakground">
-                  <h2 className="Book-a-consultation">Book a consultation</h2>
+                  {/* <h2 className="Book-a-consultation">Book a consultation</h2>
                   <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor. </p>
+                    tempor. </p> */}
                   <ConsultationForm />
                 </div>
                 </div>
@@ -261,7 +261,7 @@ index: 0
                   <button className="seeMored">Find More Stores</button>
                 </div>
               </div> */}
-              <div class="exp-our-kitchen">
+              <div className="exp-our-kitchen">
               <div className="container">
                 <div className="mainImg">
                 <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />

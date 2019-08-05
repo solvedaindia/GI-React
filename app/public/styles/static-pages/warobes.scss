@@ -122,7 +122,7 @@
       overflow: hidden;
       .wardroBannertext{
         position:absolute;
-        top:30%;
+        bottom:27%;
         left:6%;
         .heading{
           font-size: 56px;
@@ -454,8 +454,8 @@
   }
   
   .wardrobehallsize {
-    width: 33%;
-    height: 244px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
     text-align: center;
   
@@ -557,27 +557,10 @@
     
     
   }
-  .reactang {
-    width: 100%;
-    height: 810px;
-    margin-top: 50px;
-    margin-right: 50px;
-  }
-  .Book-a-consultation {
-    height: 36px;
-    font-family: CeraGodrejInterio;
-    font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #000000;
-  }
-  .Answer {
-    height: 17px;
-    font-family: CeraGodrejInterio;
+  
+ 
+  .FormPAra {
+    font-family: $font-regular;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
@@ -627,16 +610,7 @@
   }
   
   
-  .text-blocks {
-    height: 261px;
-    position: absolute;
-    top: 63%;
-  left: 25%;
-  transform: translate(-50%, -50%);
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+ 
   .bigSofa {
     margin-top:50px;
     // width: 1140px;
@@ -856,11 +830,7 @@
     }
   }
   
-    .colorsKitchen{
-      margin-right: 20px;
-      height: 166px;
-      width:100%;
-    }
+    
     .namingconv {
       height:17px;
       text-align: center;
@@ -923,5 +893,78 @@
       outline: none;
     }
   }
+  
+  .formContainer{
+    padding: 143px 0 0 0;
+    .formBackGroundCover {
+      height: 810px;
+      width: 100%;
+      .FormPAra {
+        font-family: $font-regular;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: normal;
+        text-align: center;
+        color: #767676;
+      }
+      
+     
+    }
+    .Form-bakground{
+      width: 80%;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
+      background-color: #ffffff;
+      object-fit: contain;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 60px 119px;
+
+      
+      .form-div{
+        .form-group{
+          .form-labeled{
+             color:$battleshipGrey;
+             display: block;
+             font-size:14px;
+             font-family:$font-regular;
+             text-align: left;
+             font-weight: normal;
+          }
+          .form-control{
+            border:1px solid $lightGrey;
+            border-radius: 0;
+            box-shadow: none;
+            height:54px;
+          }
+        }
+      }
+      .Book-a-consultation {
+        font-family: $font-medium;
+        font-size: 30px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        text-align: center;
+        color: #000;
+      }
+      
+    }
   }
+}
+ 
+    .Book-a-consultation {
+        font-family: $font-medium;
+        font-size: 30px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        text-align: center;
+        color: #000;
+      }
+  
   

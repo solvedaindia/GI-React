@@ -70,11 +70,12 @@ import '../../../public/styles/slider.scss';
 
 import {
   wardrobesHallAPI,
+  imagePrefix,
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
 
-class wardrobesHAll extends React.Component {
+class WardrobesHAll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,7 +134,7 @@ class wardrobesHAll extends React.Component {
           {!!hallSlider &&
             hallSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img className='wardrobehallsize' src={sliderData.imageSrc} alt={sliderData.alt} />
+                <img className='wardrobehallsize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                </a>
             ))}
         </Slider>
@@ -142,4 +143,4 @@ class wardrobesHAll extends React.Component {
   }
 }
 
-export default wardrobesHAll;
+export default WardrobesHAll;

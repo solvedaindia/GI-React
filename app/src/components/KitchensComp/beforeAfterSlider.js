@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import BeforeAfterSlider from 'react-before-after-slider'
- 
+import ReactCompareImage from 'react-compare-image'; 
 class BeforeAfter extends Component {
   render () {
-    const before = require('../../../public/images/sm1.jpg')
-    const after = require('../../../public/images/whatgoes.png')
+    const before = 'https://chillikitchens.co.uk/wp-content/uploads/2018/01/chilli-kitchens-hero-banner.jpg'
+    const after = 'http://focuskitchensandbathrooms.com.au/wp-content/uploads/2016/05/promotions-banner.jpg'
  
     return (
-      <BeforeAfterSlider
-        before={before}
-        after={after}
-        width={1140}
-        height={410}
-      />
+      <>
+
+<ReactCompareImage leftImage={before} rightImage={after} />
+      </>
+     
     )
   }
 }

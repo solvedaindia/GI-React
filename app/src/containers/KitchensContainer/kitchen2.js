@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../../public/styles/static-pages/aboutUs.scss'
+import '../../../public/styles/static-pages/chefKitchen.scss'
 
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
@@ -48,7 +48,7 @@ componentDidMount(){
 
 render(){
 return (
-<div className="Kitchen-11">
+<div className="chefKitchen">
   <div className="container">
     <WardrobeBanner />
     <div className="text-blocks">
@@ -170,7 +170,7 @@ return (
   </div>
   </div>
   </div>
-  
+  <div className="container" >
   <div className="row">
     <div className="col-md-2">
     </div>
@@ -209,7 +209,7 @@ return (
     </div>
    
   </div>
-  
+  </div>
     
 
    

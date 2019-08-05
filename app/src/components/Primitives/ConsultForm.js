@@ -139,6 +139,9 @@ onDropdownSelected = (e) => {
         return (
           <form>
             <div>
+            <h2 className="Book-a-consultation">Book a consultation</h2>
+                  <p className="FormPAra">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor. </p>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">

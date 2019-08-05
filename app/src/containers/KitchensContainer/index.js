@@ -56,10 +56,10 @@ index: 0
                 <KitchenBanner />
                 <div className="container1">
                   <div className="kitchensBannertext">
-                    <h4 className="heading">Interio Kitchens</h4>
+                    {/* <h4 className="heading">Interio Kitchens</h4>
                     <p className="subText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                       eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. <br />
-                      the home you've always wanted</p>
+                      the home you've always wanted</p> */}
                    <a href='#consultForm'><button className="btn-book">Book A Consultation</button>
 </a> 
                   </div>
@@ -87,7 +87,9 @@ index: 0
                     aliquat enim ad minim.</p>
                 </div>
               </div>
+              <div className='container'>
               <AlwaysRemember />
+              </div>
               <div className="kitchenHallLayout">
                 <KitchenHall />
               </div>
@@ -98,11 +100,9 @@ index: 0
               </div>
               <div className="formContainer">
               <div className="container">
-                <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
+                <img className="formBackGroundCover" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
                 <div id ='consultForm' className="Form-bakground">
-                  <h2 className="Book-a-consultation">Book a consultation</h2>
-                  <p className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor. </p>
+                
                   <ConsultationForm />
                 </div>
                 </div>
