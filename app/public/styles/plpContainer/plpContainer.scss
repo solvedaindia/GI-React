@@ -379,7 +379,10 @@ section.tablecarousel {
             display: block;
           }
           .name {
-            font-family: $font-bold;
+            font-family: $font-medium;
+            font-size: $base*2.25;
+            line-height: $base*2.25;;
+            margin: 0;
           }
           .description {
             font-family: $font-light;

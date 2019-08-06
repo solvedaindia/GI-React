@@ -29,8 +29,8 @@ class RegisterModalData extends React.Component {
   }
 
   /* Handle Modal Close */
-  handleClose() {
-    if (this.state.data.props.registrationType === 'generateOtp') {
+  handleClose(isClose = false) {
+    if (this.state.data.props.registrationType === 'generateOtp' && isClose !== true) {
       this.handleComponent('registerWithMobileNum', this.state.data.props.userdata);
     } else {
       this.props.resetCallbackPro();
@@ -55,7 +55,7 @@ class RegisterModalData extends React.Component {
       data: null,
       modalClass: 'modal-wrapperjoinus',
     });
-    // this.handleClose();
+    this.handleClose(true);
     return <WelcomeBack />;
   }
 
@@ -116,8 +116,7 @@ class RegisterModalData extends React.Component {
               response.data.data.access_token
             };path=/;expires=''`,
           );
-
-          this.handleClose();
+          this.handleClose(true);
           window.location.reload();
         } else {
           if (type === resendOtp && response.data.data.otpCount > 3) {
