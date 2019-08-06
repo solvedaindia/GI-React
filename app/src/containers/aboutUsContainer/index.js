@@ -88,13 +88,17 @@ render() {
         <AboutTopMost />
       </div>
       <div className='OurProcessContainer'>
-      <div className="row">
-        <div className="container">
-          <div className="col-md-6">
-            <h1 className="headingtitle">Our Process</h1>
+      <div className="container">
+        <div className='row'>
+          <div className='col-md-12'>
+             <h1 className="headingtitle">Our Process</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">            
             <img className='processBigImg' src={this.state.img_url} alt="image" />
             <div>
-              <button name="1" className="ProcessNumber" onClick={this.handleclick}>1</button>
+              <button name="1" className="ProcessNumber active" onClick={this.handleclick}>1</button>
               <button name="2" className="ProcessNumber" onClick={this.handleclick}>2</button>
               <button name="3" className="ProcessNumber" onClick={this.handleclick}>3</button>
               <button name="4" className="ProcessNumber" onClick={this.handleclick}>4</button>
