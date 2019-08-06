@@ -168,6 +168,11 @@
         .modal-body {
           .modal-wrapper {
             padding: 32px 0;
+            .forrgot-pass-box{
+              .label{
+                text-transform: capitalize;
+              }
+            }
           }
         }
       }
