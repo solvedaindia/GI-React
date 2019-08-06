@@ -135,26 +135,30 @@ class NewsletterModel extends React.Component {
 
             <Col xs={12} md={7} className='newsletter-form-box'>
               <div className="form_newsletter">
-                <h3 className="heading">
+              {!isMobile() ?<h3 className="heading">
                   Have you joined our mailing list yet?
-                </h3>
-                <Form>
-                  <p className="signup-text">
+                </h3>:''}
+                <Form className='news-letter-form'>
+                {!isMobile() ? <p className="signup-text">
                     Sign up to be the first to recieve updates and ongoing
                     offers!
-                  </p>
+                  </p>:''}
+                  {isMobile() ? <h3 className="heading">
+                    Have you joined our mailing list yet?
+                  </h3> : ''}
                   <FormGroup className="email">
+                    {isMobile() ?<label className='form-label'>Email Address</label>:''}
                     <input
                       onChange={this.handleInputChange.bind(this)}
                       type={this.state.inputType}
                       name="text"
                       id="exampleEmail"
                       className="form-control newinputmargin"
-                      placeholder="Your Email"
+                      placeholder={!isMobile() ? 'Your Email' :''}
                     />
                     {errorItem}
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className='news-letter-btn'>
                     <Button
                       onClick={this.doneBtnPressed.bind(this)}
                       className="btn-block btn-bg"
