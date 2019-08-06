@@ -18,6 +18,7 @@
             color: $battleshipGrey;
             font-family: $font-medium;
             font-weight: 500;
+            cursor: pointer;
             &:hover {
                 color: $reddishPink;
             }

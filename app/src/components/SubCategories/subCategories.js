@@ -45,7 +45,7 @@ class SubCategoriesArray extends React.Component {
 
   onLinkNavigation = () => {
     this.props.plpReduxStateReset();
-    //window.location.href.reload();
+    window.location.href.reload();
   }
 
   render() {
@@ -61,8 +61,9 @@ class SubCategoriesArray extends React.Component {
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
             var routePath;
-            var subcatName = String(subCategoryData.categoryName).toLowerCase()
-            if (this.props.categoryNamePro === 'Rooms') {
+			var subcatName = String(subCategoryData.categoryName).toLowerCase();
+			
+            if (this.props.categoryNamePro === 'Rooms' || this.props.categoryNamePro === 'Rooms_S' ) {
               routePath = `/rooms-${subcatName.split(' ').join('-')}/${subCategoryData.uniqueID}`;
             }
             else {
