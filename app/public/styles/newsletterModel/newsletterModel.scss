@@ -111,20 +111,38 @@
   #Global Screen Chhange for Screen max 767
 */
 @media screen and (max-width: 767px) {
-  .newsletter-Wrapper{
-    .modal-dialog {
-      .form_newsletter{
-        padding: 20px 15px 0 15px;
-        .heading{
-          font-size: 18px;
+  .modal-open{
+    .newsletter-Wrapper{
+      .modal-dialog {
+        .modal-content{
+          .modal-body{
+            .form_newsletter{
+              padding: 20px 15px 0 15px;
+              .heading{
+                font-size: 24px;
+              }
+            }
+            .newsletter-form-box{
+              margin-top: 5px;
+              background: #fff;
+            }
+            .Thumbnailbox{
+              width: 55%;
+              margin: auto;
+              margin-top: -100px;
+              position: relative;
+              z-index: 9;
+            }
+          }
         }
       }
-      .newsletter-form-box{
-        margin-top: -65px;
-        background: #fff;
+      &.in{
+        top: initial;
+        bottom: 0px;
+        overflow: visible;
       }
-    }
-  } 
+    } 
+  }
 }
 
 

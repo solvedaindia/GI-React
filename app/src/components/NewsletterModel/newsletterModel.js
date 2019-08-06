@@ -27,7 +27,8 @@ import { getCookie } from '../../utils/utilityManager';
 import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 
 import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.png';
-
+import newsLetterMobPopupImg from '../../../public/images/news-letter_01.png';
+import {isMobile} from '../../utils/utilityManager';
 class NewsletterModel extends React.Component {
   constructor(props) {
     super(props);
@@ -128,7 +129,7 @@ class NewsletterModel extends React.Component {
           <Row className="no-margin">
             <Col xs={12} md={5} className="no-padding">
               <div className="Thumbnailbox">
-                <img className="imgfullwidth" src={NewsletterThumbnailImg} />
+                {!isMobile() ? <img className="imgfullwidth" src={NewsletterThumbnailImg} />:<img className="imgfullwidth" src={newsLetterMobPopupImg} />}
               </div>
             </Col>
 
