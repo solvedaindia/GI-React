@@ -65,7 +65,7 @@ color: #D2691E;
     }
     .topheading{
       padding: 60px 0 0 0;
-      font-family: CeraGIMedium, sans-serif;
+      font-family: $font-medium;
       font-size: 30px;
       font-weight: 500;
       font-style: normal;
@@ -74,14 +74,14 @@ color: #D2691E;
      text-align: left;
     }
     .Topparagraph{
-      font-family: CeraGIMedium, sans-serif;
+      font-family: $font-medium;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
     line-height: 1.43;
     }
     .MainHeading {
-    font-family: CeraGIMedium, sans-serif;
+    font-family: $font-medium;
     font-size: 30px;
     font-weight: bold;
     font-style: normal;
