@@ -19,7 +19,7 @@
     
     .Types-of-Modular-Ward {
         height: 36px;
-        font-family: CeraGodrejInterio;
+        font-family: $font-regular;
         font-size: 30px;
         font-weight: normal;
         font-style: normal;
@@ -30,7 +30,7 @@
         color: #000000;
       }
     .titlesss {
-        font-family:CeraGIRegular,sans-serif;
+        font-family: $font-regular;
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
@@ -50,7 +50,7 @@
         background-color: white;
       }
       .Benefits-of-Modular {
-        font-family: CeraGodrejInterio sans-serif;
+        font-family: $font-regular sans-serif;
         font-size: 30px;
         font-weight: 500;
         font-style: normal;
@@ -79,7 +79,7 @@
       .bannerTexts {
         width: 411px;
         height: 60px;
-        font-family: CeraGodrejInterio;
+        font-family: $font-regular;
         font-size: 56px;
         font-weight: bold;
         font-style: normal;
@@ -98,7 +98,7 @@
       .This-project-requirement {
         // width: 751px;
         // height: 60px;
-        font-family: CeraGodrejInterio;
+        font-family: $font-regular;
         font-size: 16px;
         font-weight: normal;
         font-style: normal;

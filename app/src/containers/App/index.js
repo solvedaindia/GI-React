@@ -45,18 +45,12 @@ import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/index';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
-
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../TermsConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
-
-
-
-
-
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 import SearchContainer from '../Search Container/searchContainer';
@@ -69,6 +63,7 @@ import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 import paymentWait from '../../components/checkout/paymentWait';
+import StaticPagesList from '../../components/staticPages';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -233,6 +228,7 @@ export default class App extends React.Component {
           <Route path="/cart" component={CartDetail} />
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
+          <Route path='/staticpages' component = {StaticPagesList} />
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/cookie" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />

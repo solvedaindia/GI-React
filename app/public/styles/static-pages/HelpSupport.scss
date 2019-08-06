@@ -8,7 +8,7 @@
   background-color: #ffffff;
   .Header-Copy-h1 {
     padding: 64px 0 0 0;
-    font-family: CeraGodrejInterio-Medium;
+    font-family: $font-regular;
     font-size: 30px;
     font-weight: 500;
     font-style: normal;
@@ -20,7 +20,7 @@
   }
   .Header-Copy-h3 {
     padding: 24px 0 0 0;
-    font-family: CeraGodrejInterio-Medium;
+    font-family: $font-regular;
     font-size: 18px;
     font-weight: 500;
     font-style: normal;
@@ -124,7 +124,7 @@
     }
   }
   .faqhead {
-    font-family: CeraGodrejInterio-Medium;
+    font-family: $font-regular;
     font-size: 14px;
     font-weight: bold;
     font-style: normal;
@@ -151,7 +151,7 @@
   .MyOd {
    padding: 63px 0 0 0;
     height: 28px;
-    font-family: CeraGodrejInterio-Medium;
+    font-family: $font-regular;
     font-size: 20px;
     font-weight: bold;
     font-style: normal;
@@ -215,7 +215,7 @@
     font-weight: bold;
   
     height: 36px;
-    font-family: CeraGodrejInterio-Medium;
+    font-family: $font-regular;
     font-size: 30px;
     font-weight: 500px;
     font-style: normal;
