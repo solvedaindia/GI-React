@@ -6,28 +6,60 @@
     width: 100%;
     height: auto;
     background-color: #ffffff;
+    padding:61px 0 80px 0;
     .contactPersons{
       padding: 34px 0 0 0; 
-color: #000000;
-      font-weight: bold;
+      color: #000000;
+      font-family: $font-regular;
       font-size: 18px;
       text-align: left;
+      .headingAddress{
+        margin:0;
+        color:#000000;
+        font-family: $font-medium;
+      }
+      .AddressArea{
+        .zoneList{
+          display: block;
+          float: left;
+          width: 32%;
+          background: #f7f7f7;
+          margin: 0 5px 5px 0;
+          padding: 20px;
+          min-height: 163px;
+          font-size: 14px;
+
+        .mailtoLink{
+          color:#005084;
+        }
+        }
+        
+      }
+      .contactDetails{
+        font-family: $font-regular;
+        margin:15px 0 0 0;
+        font-size: 14px;
+      }
+
     }
-    .Redparagraph{
-      padding: 34px 0 0 0; 
+    .Redparagraph{      
       font-family: $font-regular;
       font-size: 14px;
+      line-height: 16px;
+      padding: 0 0 16px 0;
+
       font-weight: normal;
       font-style: normal;
       line-height: 1.43;
       color: #D2691E;
-      text-align: center;
+      text-align: left;
     }
     .Rednote{
-      padding: 34px 0 0 0; 
+      line-height: 16px;
+    padding: 0 0 16px 0;
 color: #D2691E;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       text-align: left;
 
     }
@@ -74,23 +106,32 @@ color: #D2691E;
       text-align: center;
 
     }
-    .paragraph {
-      padding: 34px 0 0 0; 
+    .paragraph {      
       font-family: $font-regular;
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
       line-height: 1.43;
-      color: #000000;
-      text-align: center;
+      color: #888a8d;
+      text-align: left;
+      padding:0 0 32px 0;
 
     }
-    .note{
-      padding: 34px 0 0 0; 
-
-      font-weight: bold;
-      font-size: 18px;
+    .heading{
+      padding: 0px 0 36px 0; 
+      font-family: $font-medium;
+      font-size: 30px;
+      line-height: 30px;
       text-align: left;
+      color:#000000;
+      margin:0;
 
+    }
+    .subHeading{
+      font-family: $font-medium;
+      font-size: 16px;
+      line-height: 16px;
+      padding:0 0 16px 0;
+      color:#222222;
     }
   }
