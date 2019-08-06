@@ -6,7 +6,14 @@
   height: auto;
   background-color: #ffffff;
   .OurProcessContainer{
-    padding: 144px 0 0 0;
+    padding: 80px 0 0 0;
+    .headingtitle{
+      font-size: 30px;
+      line-height: 30px;
+      font-family: $font-medium;
+      margin:0;
+      padding: 0 0 43px 0;
+    }
   }
   .CareerContainer{
     padding: 80px 0 0 0;
@@ -58,7 +65,31 @@
   }
   
   .mediaPressSection{
-    padding: 80px 0 0 ;
+    padding: 80px 0 80px 0 ;
+    .paddingBottom {
+      padding-bottom: 20px;
+  }
+    .Paragraphfont {
+      font-family: $font-regular;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.43;
+      color: #000000;
+    }
+    .extrinsiveSmallImgs {
+      height: 104px;
+     
+  }
+    .ColorDate {
+      color: #036cc5;
+  }
+    .extrinsiveBigImg {
+      width:100%;
+  }
+    .MotivationBorder {
+      border-right: 3px solid black;
+  }
     .MediaTopHead{
       padding: 73px 0 19px 0;
       font-family: $font-medium;
@@ -78,7 +109,7 @@
 }
 
 .InitialIdea {
-    margin-top: 150px;
+    margin-top: 83px;
 
 }
 
@@ -88,8 +119,7 @@
 
 
 
-.processBigImg {
-  padding: 43px 0 0 0;
+.processBigImg {  
     width: 100%;
     height: 400px;
 }
@@ -128,17 +158,10 @@ padding:19px 0 0 0;
   padding: 13px 45px;
   border: none;
 }
-.imgs {
-    height: 104px;
-   
-}
-.main {
-    width:100%;
-}
 
-.padding {
-    padding-bottom: 20px;
-}
+
+
+
 
 .h3 {
     padding-bottom: 20px;
@@ -147,24 +170,26 @@ padding:19px 0 0 0;
     margin-right: 136px !important;
 }
 
-.border {
-    border-right: 3px solid black;
-}
 
 
 
-.color {
-    color: blue;
-}
+
+
 
 .ProcessNumber{
-    margin: 40px;
-    font-size: 30px;
-    margin-top: 1px;
-    margin-left: 5px;
-    margin-right: 50px;
+    margin: 24px 54px 0 0;
+    font-size: 30px;  
+    line-height: 30px;
     border: none;
-    background: white;
+    background:$colorwhite;
+    color:$lightblueGrey;
+    font-family: $font-medium;
+    &:focus{
+      outline: none;
+    }
+}
+.ProcessNumber.active{
+  color:$black;
 }
 
 .jumbo {
@@ -677,7 +702,7 @@ padding:19px 0 0 0;
   
 
   .aboutUstextContainer{
-    padding:61px 0;
+    padding:61px 0 0 0;
     .headingtitle{
       padding: 0 0 35px 0;
 

@@ -178,12 +178,13 @@ imageHeading: ""
               <a href={sliderData.onClickUrl} key={index}>
                 <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
               </a>
+
             ))}
-               {/* <h3 className="Name-Copy">{this.state.imgHeading}</h3>
-               <p className="This-project-require">{this.state.imageDescription}</p>  */}
-            
+
         </Slider>
-      
+        <h3 className="Name-Copy">Behind the Scenes Description</h3>
+        <p className="This-project-require">This project required a huge amount of hours but  sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p> 
+
             
            
         
