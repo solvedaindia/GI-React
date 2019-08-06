@@ -1472,7 +1472,23 @@
     }
 }
 
-
+.loadingIndicator{
+    padding: 100px 0;
+    .loader-modal{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;      
+        .loadingIndicatorStyle-outter{
+           position: static;
+           left:0;
+           top:0;
+        }
+    }
+}
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
