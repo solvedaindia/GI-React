@@ -34,50 +34,109 @@ export class AboutUs extends React.Component {
     super(props);
     this.state = {
       img_url: img,
-      content: paraFirst
+      content: paraFirst,
+      button1: false,
+      button2: false,
+      button3: false,
+      button4: false,
+      button5: false,
+      button6: false,
+      button7: false
+
     };
   }
 handleclick = event => {
     if(event.target.name == 1) {
         this.setState({
             img_url: img,
-            content: paraFirst
+            content: paraFirst,
+            button1: 'active',
+            button2: false,
+            button3: false,
+            button4: false,
+            button5: false,
+            button6: false,
+            button7: false,
         })
     }
    else if(event.target.name == 2) {
     this.setState({
       img_url: pics,
-      content: paraSecond
+      content: paraSecond,
+      button2: 'active',
+      button1: false,
+      button3: false,
+      button4: false,
+      button5: false,
+      button6: false,
+      button7: false,
   })
 }
 else if(event.target.name == 3) {
   this.setState({
       img_url:image,
-      content: paraFirst
+      content: paraFirst,
+      button3: 'active',
+      button1: false,
+      button2: false,
+      button4: false,
+      button5: false,
+      button6: false,
+      button7: false,
+
   })
 }
 else if(event.target.name == 4) {
   this.setState({
       img_url:pic,
-      content: paraSecond
+      content: paraSecond,
+      button4: 'active',
+      button1: false,
+      button3: false,
+      button2: false,
+      button5: false,
+      button6: false,
+      button7: false,
   })
 }
 else if(event.target.name == 5) {
   this.setState({
       img_url:images,
-      content: paraFirst
+      content: paraFirst,
+      button5: 'active',
+      button1: false,
+      button3: false,
+      button4: false,
+      button2: false,
+      button6: false,
+      button7: false,
   })
 }
 else if(event.target.name == 6) {
   this.setState({
       img_url:picture,
-      content: paraSecond
+      content: paraSecond,
+      button6: 'active',
+      button1: false,
+      button3: false,
+      button4: false,
+      button5: false,
+      button2: false,
+      button7: false,
   })
 }
 else if(event.target.name == 7) {
   this.setState({
       img_url:photo,
-      content: paraFirst
+      content: paraFirst,
+      button7: 'active',
+      button1: false,
+      button3: false,
+      button4: false,
+      button5: false,
+      button6: false,
+      button2: false,
+
   })
 }
 }
@@ -98,13 +157,13 @@ render() {
           <div className="col-md-6">            
             <img className='processBigImg' src={this.state.img_url} alt="image" />
             <div>
-              <button name="1" className="ProcessNumber active" onClick={this.handleclick}>1</button>
-              <button name="2" className="ProcessNumber" onClick={this.handleclick}>2</button>
-              <button name="3" className="ProcessNumber" onClick={this.handleclick}>3</button>
-              <button name="4" className="ProcessNumber" onClick={this.handleclick}>4</button>
-              <button name="5" className="ProcessNumber" onClick={this.handleclick}>5</button>
-              <button name="6" className="ProcessNumber" onClick={this.handleclick}>6</button>
-              <button name="7" className="ProcessNumber" onClick={this.handleclick}>7</button>
+              <button name="1" className={`ProcessNumber ${this.state.button1}`} onClick={this.handleclick}>1</button>
+              <button name="2" className={`ProcessNumber ${this.state.button2}`} onClick={this.handleclick}>2</button>
+              <button name="3" className={`ProcessNumber ${this.state.button3}`} onClick={this.handleclick}>3</button>
+              <button name="4" className={`ProcessNumber ${this.state.button4}`} onClick={this.handleclick}>4</button>
+              <button name="5" className={`ProcessNumber ${this.state.button5}`} onClick={this.handleclick}>5</button>
+              <button name="6" className={`ProcessNumber ${this.state.button6}`} onClick={this.handleclick}>6</button>
+              <button name="7" className={`ProcessNumber ${this.state.button7}`} onClick={this.handleclick}>7</button>
 
             </div>
           </div>
