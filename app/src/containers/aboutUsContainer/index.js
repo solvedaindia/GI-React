@@ -12,13 +12,13 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
-import img from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import img from '../../../public/images/ourprocessimg.jpg'
 import pic from '../../../public/images/teach.jpg'
-import image from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import image from '../../../public/images/ourprocessimg.jpg'
 import pics from '../../../public/images/teach.jpg'
-import images from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import images from '../../../public/images/ourprocessimg.jpg'
 import picture from '../../../public/images/teach.jpg'
-import photo from '../../../public/images/96134077-rawpixel-983726-unsplash.jpg'
+import photo from '../../../public/images/ourprocessimg.jpg'
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
 const paraFirst = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
 do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
@@ -108,7 +108,7 @@ render() {
             <h4><b>initial Ideation</b></h4>
             <p className="h4">Brainstorming to the final product</p>
            
-            <p className="paragraph">{this.state.content}
+            <p className="Paragraphfont">{this.state.content}
             </p>
           </div>
 
@@ -142,33 +142,33 @@ render() {
         <h5>Latest News</h5>
         <hr />
         <div className="row">
-          <div className="col-md-6 border">
-            <img className="main" src={pic} />
+          <div className="col-md-6 MotivationBorder">
+            <img className="extrinsiveBigImg" src={pic} />
             <p><b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
             <div>
-              <span className="color">22 oct 2018</span>
+              <span className="ColorDate">22 oct 2018</span>
               <span> | by john jacobs</span>
             </div>
           </div>
           <div className="col-md-6">
           <a href='https://mediatech914.wordpress.com/2019/01/04/%EF%BB%BFindias-millennials-driving-home-furnishing-democracy/'>
           <div className="row">
-              <div className="col-md-4 padding"><img className="imgs" src={pic} /></div>
+              <div className="col-md-4 paddingBottom"><img className="extrinsiveSmallImgs" src={pic} /></div>
               <div className="col-md-8">
-                <p className="paragraph"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
+                <p className="Paragraphfont"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
                 <div>
-                  <span className="color">22 oct 2018</span>
+                  <span className="ColorDate">22 oct 2018</span>
                   <span> | by john jacobs</span></div>
               </div>
             </div>
             </a>
            <a href='https://indiannewz.wordpress.com/2019/01/04/indias-millennials-driving-home-furnishing-democracy-according-to-interio-index-survey-from-godrej-interio/'>
             <div className="row">
-              <div className="col-md-4 padding"><img className="imgs" src={image} /></div>
+              <div className="col-md-4 paddingBottom"><img className="extrinsiveSmallImgs" src={image} /></div>
               <div className="col-md-8">
-                <p className="paragraph"><b>India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
+                <p className="Paragraphfont"><b>India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
                 <div>
-                  <span className="color">22 oct 2018</span>
+                  <span className="ColorDate">22 oct 2018</span>
                   <span> | by john jacobs</span>
                 </div>
               </div>
@@ -176,13 +176,13 @@ render() {
             </a>
             <a href='https://www.deccanchronicle.com/lifestyle/books-and-art/070119/millennial-couples-become-torchbearers-to-spur-societal-transformation.html'>
             <div className="row">
-              <div className="col-md-4 padding">
-                <img className="imgs" src={pics} /></div>
+              <div className="col-md-4 paddingBottom">
+                <img className="extrinsiveSmallImgs" src={pics} /></div>
               <div className="col-md-8">
-                <p className="paragraph">
+                <p className="Paragraphfont">
                   <b>Millennial couples become torchbearers to spur societal transformation  </b></p>
                 <div>
-                  <span className="color">22 oct 2018</span>
+                  <span className="ColorDate">22 oct 2018</span>
                   <span> | by john jacobs</span>
                 </div>
               </div>

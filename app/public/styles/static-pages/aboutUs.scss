@@ -58,7 +58,31 @@
   }
   
   .mediaPressSection{
-    padding: 80px 0 0 ;
+    padding: 80px 0 80px 0 ;
+    .paddingBottom {
+      padding-bottom: 20px;
+  }
+    .Paragraphfont {
+      font-family: $font-regular;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.43;
+      color: #000000;
+    }
+    .extrinsiveSmallImgs {
+      height: 104px;
+     
+  }
+    .ColorDate {
+      color: #036cc5;
+  }
+    .extrinsiveBigImg {
+      width:100%;
+  }
+    .MotivationBorder {
+      border-right: 3px solid black;
+  }
     .MediaTopHead{
       padding: 73px 0 19px 0;
       font-family: $font-medium;
@@ -128,17 +152,10 @@ padding:19px 0 0 0;
   padding: 13px 45px;
   border: none;
 }
-.imgs {
-    height: 104px;
-   
-}
-.main {
-    width:100%;
-}
 
-.padding {
-    padding-bottom: 20px;
-}
+
+
+
 
 .h3 {
     padding-bottom: 20px;
@@ -147,15 +164,11 @@ padding:19px 0 0 0;
     margin-right: 136px !important;
 }
 
-.border {
-    border-right: 3px solid black;
-}
 
 
 
-.color {
-    color: blue;
-}
+
+
 
 .ProcessNumber{
     margin: 40px;
@@ -677,7 +690,7 @@ padding:19px 0 0 0;
   
 
   .aboutUstextContainer{
-    padding:61px 0;
+    padding:61px 0 0 0;
     .headingtitle{
       padding: 0 0 35px 0;
 

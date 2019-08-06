@@ -358,6 +358,28 @@ react-slideshow-container {
         }
            
       }
+      .buttonTrue {
+        width:32%;
+        border: 1px solid #77787a;
+        background: #ffffff;
+        color: #77787a;
+        font-size: 14px;
+        border-radius: 19px;
+        padding: 9px 31px;
+        &:focus{
+          outline: none;
+        }
+      }
+      
+      .buttonFalse {
+        width:32%;
+        background: #036cc5;
+        border: 1px solid #036cc5;
+        color: #fff;
+        font-size: 14px;
+        padding: 9px 31px;
+        border-radius: 19px;
+      }
       
     }
   }
