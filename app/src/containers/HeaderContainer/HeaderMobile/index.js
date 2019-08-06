@@ -52,6 +52,9 @@ class HeaderMobile extends React.Component {
       if (nextProps.updatedHeaderVal === 'Track Order') {
         this.pageNavigationRender('Track Order');
       }
+      if (nextProps.updatedHeaderVal === 'My Order Redirect') {
+        this.pageNavigationRender('My Order');
+      }
     }
 
   }
@@ -170,8 +173,8 @@ class HeaderMobile extends React.Component {
       headerRenderItem: this.defaultRender(),
       showSocialShare: false,
     });
-    console.log('miii --- ', this.props);
-    if (this.props.updatedHeaderVal === 'Track Order') {
+    console.log(' --miii- ', this.props);
+    if (this.props.updatedHeaderVal === 'Track Order' || this.props.updatedHeaderVal === 'My Order Redirect') {
       this.pageNavigationRender('My Order');
       this.props.updateTheRWDHeader('MyOrder Return');
       return;

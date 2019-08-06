@@ -17,18 +17,17 @@ class RWDOrderItem extends React.Component {
     };
   }
 
-  onViewOrderClick() {
-
+  onViewOrderClick(data) {
+    this.props.myOrderCallbackPro('ViewOrder', data)
   }
 
-  onProductClick(data) {
-    this.props.myOrderCallbackPro('SingleProduct', data)
-    // if (shipmentData.length > 1) {
-
-    // }
-    // else {
-      
-    // }
+  onProductClick(data, completeData) {
+    if (data.shipmentData.length > 1) {
+      this.props.myOrderCallbackPro('MultiProduct', data, completeData)
+    }
+    else {
+      this.props.myOrderCallbackPro('SingleProduct', data, completeData)
+    }
   }
 
   getStatusDate(shipmentData, status) {
@@ -84,7 +83,7 @@ class RWDOrderItem extends React.Component {
         {orderData.orderItems.map((data, key) => {
           console.log('mixxxx -- ', data);
           return (
-            <div className="order-item-box" onClick={this.onProductClick.bind(this, data)}>
+            <div className="order-item-box" onClick={this.onProductClick.bind(this, data, orderData)}>
               <div className='itemImg'>
                 <img className='imgBox' src={data.thumbnail !== '' ? `${imagePrefix}${data.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
               </div>
@@ -96,7 +95,7 @@ class RWDOrderItem extends React.Component {
 
         <div className='totalItem'>
           <label className='totalTag'>Total: ₹{orderData.orderSummary.netAmount}</label>
-          <button className='viewOrder' onClick={this.onViewOrderClick}>View Order</button>
+          <button className='viewOrder' onClick={this.onViewOrderClick.bind(this, orderData)}>View Order</button>
           
         </div>
         <div className='order-separator'></div>
