@@ -3,6 +3,7 @@ import apiManager from '../../utils/apiManager';
 import { pdpApi2, espotAPI, GI_PDP_Promocode_TandC, GI_PDP_Our_Promises } from '../../../public/constants/constants';
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
 import appCookie from '../../utils/cookie';
+import LoadingIndicator from '../../utils/loadingIndicator';
 
 class PdpContainer extends React.Component {
   constructor() {
@@ -75,7 +76,7 @@ class PdpContainer extends React.Component {
   render() {
     return (
       <div>
-        {!this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading && (
+        { !this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading ? (
             <>
 				{ this.state.pdp.data && Object.keys(this.state.pdp.data).length > 0 ? (
 					<PdpComponent
@@ -93,10 +94,17 @@ class PdpContainer extends React.Component {
                 </div>
               </div>
             </div>
-						
 					)
 				}
             </>
+          ) : (
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="loadingIndicator"><LoadingIndicator /></div>
+                </div>
+              </div>
+            </div>
           )}
       </div>
     );

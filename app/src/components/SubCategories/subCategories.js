@@ -61,8 +61,9 @@ class SubCategoriesArray extends React.Component {
         <ul className={catClass}>
           {this.props.subCategoryArray.map((subCategoryData, index) => {
             var routePath;
-            var subcatName = String(subCategoryData.categoryName).toLowerCase()
-            if (this.props.categoryNamePro === 'Rooms') {
+			      var subcatName = String(subCategoryData.categoryName).toLowerCase();
+			
+            if (this.props.categoryNamePro.indexOf('Rooms') > -1 ) {
               routePath = `/rooms-${subcatName.split(' ').join('-')}/${subCategoryData.uniqueID}`;
             }
             else {
