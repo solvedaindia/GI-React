@@ -30,8 +30,12 @@ export default class GreenInitiatives extends Component {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 1.2,
+      // slidesToShow: 1.2,
+      // slidesToScroll: 2,
+      slidesToShow: 2,
       slidesToScroll: 2,
+      arrows: false,
+      centerMode: true,
     // centerMode: true
     };
     return (
@@ -39,21 +43,20 @@ export default class GreenInitiatives extends Component {
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
-              <div key={slide}>
-                <h3>
+              <div key={slide}>               
                 <div className='row'>
                   <div className='col-md-4'>
 {slide}
                   </div>
                   <div className='col-md-8'>
                     <h2 className='ULcontent'>UL Greenguard</h2>
-                  <p className='ULparagraph'>your information is secure and encrypted, consectetur<br/>
-                adipisicing elit,sed do eiumsod tempor incididunt ut<br/>
+                  <p className='ULparagraph'>your information is secure and encrypted, consectetur
+                adipisicing elit,sed do eiumsod tempor incididunt ut
                 labore et dalore magna aliqion anim ad minim.</p>
                   </div>
 
                 </div>
-                </h3>
+                
                
               </div>
             );

@@ -105,7 +105,7 @@ render() {
               <button name="5" className="ProcessNumber" onClick={this.handleclick}>5</button>
               <button name="6" className="ProcessNumber" onClick={this.handleclick}>6</button>
               <button name="7" className="ProcessNumber" onClick={this.handleclick}>7</button>
-
+              
             </div>
           </div>
           <div className="col-md-6 InitialIdea">
@@ -122,12 +122,15 @@ render() {
       <div className='greenContainer'>
         <div className='container'>
         <h1 className='greenTitle'>Green Initiatives</h1>
-        <GreenInitiatives/>
         </div>
+        <GreenInitiatives/>
+      
       </div>
 
-      <div className="CareerContainer row">
-        <div className="col-md-12">
+      <div className="CareerContainer">
+        <div className="container">
+          <div className='row'>
+          <div className="col-md-12">
           <div container>
             <div id="cat">
               <h1 className="careerHeading">Careers</h1>
@@ -139,6 +142,9 @@ render() {
             </div>
           </div>
         </div>
+          </div>
+        </div>
+        
       </div>
       <div className="mediaPressSection">
       <div className="container">

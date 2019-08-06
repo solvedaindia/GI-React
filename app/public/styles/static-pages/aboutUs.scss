@@ -17,18 +17,27 @@
   }
   .CareerContainer{
     padding: 80px 0 0 0;
-    .careerHeading{
-      padding: 73px 0 19px 0;
+    .careerHeading{     
       font-family: $font-medium;
-       font-size: 50px;
-
-      padding: 25px 0 0 0;
+      font-size: 50px;
+      line-height: 50px;
+      padding: 0px 0 0 0;
       text-align: center;
       color: white;
+      margin:0;
+    }
+    .paragraphCareer{
+      font-size: 18px;
+      font-family: $font-medium;
     }
   }
   .greenContainer{
     padding: 80px 0 0 0;
+    .slick-slider{
+      .slick-list{
+        max-height: 270px;
+      }
+    }
 
     .greenTitle{
       font-family: $font-medium;;
@@ -37,30 +46,40 @@
       font-style:normal;
       line-height:normal;
       color:#000;
-      margin:0
+      margin:0;
+      padding: 0 0 57px 0;
     }
     
     .greenImage{
-      padding: 57px 0 0 0;
-      width:80%;
-      height: 300px;
+      padding: 0px 0 0 0;
+      width:100%;
+      // height: 300px;
     }
     .ULcontent{
-      padding: 94px  0 0 0;
+      padding: 25px 0 18px 0;
+      margin:0;
       color: #000000;
       font-family: $font-medium;
       font-size:20px;
-      line-height:28px;
-      text-align: center;
+      line-height: 20px;
+      line-height:20px;
+      text-align: left;
 
     }
     .ULparagraph{
       color: #000000;
-      font-family: $font-medium;
+      font-family: $font-regular;
       font-size:14px;
       line-height:20px;
-      text-align: center;
+     
 
+    }
+    .slick-initialized {
+      .slick-slide{
+        background: #f2f5f7;
+        margin: 11px;
+        padding: 50px 50px 50px 52px;
+      }
     }
   }
   
@@ -91,7 +110,8 @@
       border-right: 3px solid black;
   }
     .MediaTopHead{
-      padding: 73px 0 19px 0;
+      padding:0;
+      margin:0;
       font-family: $font-medium;
        font-size: 30px;
 
@@ -149,14 +169,16 @@ padding:19px 0 0 0;
     height: 370px;
     width: 100%;
     text-align: center;
-    padding-top: 5px;
+    padding: 73px;
 }
 .CareerButton{
-  margin: 31px 0 0 0;
-  color: #000;
-  background-color: #ffffff;
+  margin: 25px 0 0 0;
+  color: $black;
+  background-color: $colorwhite;
   padding: 13px 45px;
   border: none;
+  font-size: 14px;
+  font-family: $font-medium;
 }
 
 
