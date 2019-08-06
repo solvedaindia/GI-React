@@ -16,12 +16,15 @@ ul {
     }
 }
 
-p,
+p
+{
+  font-family: $font-regular;
+}
 span,
 a,
 li,
 figcaption  {
-    font-family: $font-light;
+    font-family: $font-regular;
 }
 
 h1,h2,h3 {

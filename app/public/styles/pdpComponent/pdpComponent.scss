@@ -1561,7 +1561,7 @@
                     } 
                 }
                 .pincode{
-                    width:55%;
+                    width:56%;
                     float:left;
                 }
                 .addCart{
@@ -1767,10 +1767,28 @@
                                 }
                             }
                         }
+
+                    &.fullscreen{
+                        .image-gallery-thumbnails-wrapper{
+                            .image-gallery-thumbnails{
+                                margin: -90px auto 20px auto;
+                                .image-gallery-thumbnails-container{
+                                    .image-gallery-thumbnail{
+                                        width: 75px;
+                                        height: auto;
+                                        .image-gallery-thumbnail-inner{
+                                            display: block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     }
                 }
             }
-        }      
+        }
+              
         .PdpFeatures{
             padding:30px 0 10px 0 ;
             .featureVertical-tab{

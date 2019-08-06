@@ -8,7 +8,6 @@ import {
   googleClientId,
 } from '../../../public/constants/constants';
 import { registerWithEmail, registerWithMobileNum } from './constants';
-// import { LogoUrl } from './constants';
 import {
   onFacebookResponse,
   onGoogleResponse,
@@ -100,8 +99,7 @@ class Register extends React.Component {
       <Row>
         <Col xs={12} md={12}>
           <div className="form_register">
-            <div className="joinUs">
-              {/* <img className="logo_width" src={LogoUrl} alt="logo" /> */}
+            <div className="joinUs">              
               <WhiteLogo width="171" height="33" />
               <h3 className="joinus-heading">Join us Now</h3>
             </div>

@@ -35,9 +35,11 @@ export class Step3Component extends React.Component {
           CODCheck: false,
           EMICheck: false,
           creditCheck: false,
+          debitCheck: false,
           UPICheck: false,
           walletCheck: false,
-          netBankCheck: false
+          netBankCheck: false,
+          selectedBank: 'Select a Bank'
         }
     }
 
@@ -131,19 +133,19 @@ export class Step3Component extends React.Component {
         paymentMode: 'NET_BANKING'
       }
       this.props.enalblePay(data);
+      this.setState({
+        selectedBank: bank.bankName,
+      })
     }
+
     renderBanks = () => {
       if(this.state.netBankCheck) {
         var menuItems = [];
         this.state.banks.forEach((item, index) => {
-          menuItems.push(<div><MenuItem key={index} onClick={this.checkBanks.bind(this, index)} eventKey={index+1}>{item.bankName}</MenuItem>
-          <MenuItem divider /></div>)
+          menuItems.push(<MenuItem key={index} onClick={this.checkBanks.bind(this, index)} eventKey={index+1}>{item.bankName}</MenuItem>
+          )
         })
-        return <DropdownButton
-                  bsSize="large"
-                  title="Select a Bank"
-                  id="dropdown-size-large"
-                >
+        return <DropdownButton bsSize="large" title={this.state.selectedBank} id="dropdown-size-large" >
                   {menuItems}
                 </DropdownButton>
       }
@@ -168,6 +170,7 @@ export class Step3Component extends React.Component {
         CODCheck: false,
         EMICheck: false,
         creditCheck: false,
+        debitCheck: false,
         UPICheck: false,
         walletCheck: false,
         netBankCheck: false
@@ -184,6 +187,15 @@ export class Step3Component extends React.Component {
           showWallets: false,
           paymentModeId: 'CREDIT_CARD',
           creditCheck: true
+        })
+      }
+      if(event.target.name == "debit") {
+        this.props.enalblePay({paymentMode: 'DEBIT_CARD'});
+        return this.setState({
+          showBanks: false,
+          showWallets: false,
+          paymentModeId: 'DEBIT_CART',
+          debitCheck: true
         })
       }
       if(event.target.name == "netBank") {
@@ -359,7 +371,15 @@ export class Step3Component extends React.Component {
                           <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
                           <label className='labelchecked' htmlFor='credit'></label>
                         </div> 
-                        <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
+                        <label className='form-label' htmlFor='credit'>Credit Card</label>
+                      </div>
+
+                      <div className="pay_radio"> 
+                        <div className="inputBox">                      
+                          <input className='inputRadio input' id='debit' type='radio' name="debit" checked={this.state.debitCheck} onChange={this.handleOptionChange.bind(this)} />
+                          <label className='labelchecked' htmlFor='debit'></label>
+                        </div> 
+                        <label className='form-label' htmlFor='credit'>Debit Card</label>
                       </div>
 
                       <div className="pay_radio"> 

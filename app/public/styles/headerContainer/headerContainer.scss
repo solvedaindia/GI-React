@@ -60,7 +60,7 @@ header {
     .catLongList{
         left: -20px;
         padding:$base*3 $base*4 $base*3;
-        min-width: 146px;
+        min-width: $base*18.75;
         width: auto;
         z-index: 5;
         position: relative;
