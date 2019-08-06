@@ -37,7 +37,9 @@ class AlwaysRemember extends React.Component {
             console.log('img1 is clicked')
             this.setState({
                 img_url:this.state.imageFirstSrc,
-                buttonFirst:!this.state.buttonFirst
+                buttonFirst:!this.state.buttonFirst,
+                buttonThird:this.state.buttonFirst,
+                buttonSecond:this.state.buttonFirst
             })
         }
        else if(event.target.name == 2) {
@@ -45,14 +47,18 @@ class AlwaysRemember extends React.Component {
 
         this.setState({
           img_url: this.state.imageSecondSrc,
-          buttonSecond:!this.state.buttonSecond
+          buttonSecond:!this.state.buttonSecond,
+          buttonThird:this.state.buttonSecond,
+          buttonFirst:this.state.buttonSecond
       })
     }
     else if(event.target.name == 3) {
       console.log('img3 is clicked')
       this.setState({
           img_url: this.state.imageThirdSrc,
-          buttonThird:!this.state.buttonThird
+          buttonThird:!this.state.buttonThird,
+          buttonFirst:this.state.buttonThird,
+          buttonSecond:this.state.buttonThird
       })
     }
 }
