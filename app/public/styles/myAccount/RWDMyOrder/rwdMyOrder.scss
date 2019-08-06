@@ -221,6 +221,22 @@
       }
     }
 
+    .itemBoxTrack {
+      padding: 20px 15px 20px 15px;
+      margin: 0 0 0px 0;
+      .itemImg, .itemInfo{
+        display: block;
+        float: left;
+      }
+      .itemImg {
+        margin: 0px 10px 0px 0px;
+        .imgBox {
+          width: 80px;
+          height: 80px;
+        }
+      }      
+    }
+
     .totalItem {
       padding: 10px 15px;
       margin-top:-1px;

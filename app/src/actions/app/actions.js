@@ -25,6 +25,7 @@ import {
   UPDATE_PROFILE,
   RESET_RWDHEADER,
   SHAREWISHLISTURL_RWD,
+  UPDATED_RWD_HEADER,
 } from '../../constants/app/constants';
 
 /**
@@ -113,5 +114,13 @@ export function rwdShareWishlistURL(url) {
   return {
     type: SHAREWISHLISTURL_RWD,
     url,
+  };
+}
+
+export function updateTheRWDHeader(data) {
+  console.log('updateTheRWDHeader---', data);
+  return {
+    type: UPDATED_RWD_HEADER,
+    data,
   };
 }

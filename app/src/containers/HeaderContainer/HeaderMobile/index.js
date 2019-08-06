@@ -16,6 +16,7 @@ import SocialMedia from '../../../utils/socialMedia';
 import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
 import '../../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = <img src={require('../../../../public/images/share.svg')} />;
+import { updateTheRWDHeader } from '../../../actions/app/actions';
 
 class HeaderMobile extends React.Component {
   constructor(props) {
@@ -45,7 +46,12 @@ class HeaderMobile extends React.Component {
         this.headerCallback();
         this.props.resetRWDHeaderFlag();
       }
+    }
 
+    if (nextProps.updatedHeaderVal !== this.props.updatedHeaderVal) {
+      if (nextProps.updatedHeaderVal === 'Track Order') {
+        this.pageNavigationRender('Track Order');
+      }
     }
 
   }
@@ -58,7 +64,7 @@ class HeaderMobile extends React.Component {
   }
 
   wishlsitShareURLCallback(shareURL) {
-console.log('Share URL --- ',shareURL);
+    console.log('Share URL --- ', shareURL);
   }
 
   defaultRender() {
@@ -134,10 +140,10 @@ console.log('Share URL --- ',shareURL);
           {pageName === 'My Wishlist' ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
             {/* <ShareLogo /> */}
             {/* {this.state.showSocialShare ? ( */}
-              
-              <SocialMediaRWD fromWislistPro
+
+            <SocialMediaRWD fromWislistPro
               sharingURLPro={this.props.shareWishlistURL}
-               shareImage={shareImg}/>
+              shareImage={shareImg} />
             {/* ) : null} */}
           </button> : null}
 
@@ -165,6 +171,12 @@ console.log('Share URL --- ',shareURL);
       showSocialShare: false,
     });
     console.log('miii --- ', this.props);
+    if (this.props.updatedHeaderVal === 'Track Order') {
+      this.pageNavigationRender('My Order');
+      this.props.updateTheRWDHeader('MyOrder Return');
+      return;
+    }
+
     if (!this.props.match.isExact) {
       this.props.history.goBack();
     }
@@ -181,11 +193,13 @@ function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
   const wishlistURL = getReleventReduxState(stateObj, 'rwdWishlistShareURL');
-  console.log('Mobile Header Subscription --- ', wishlistURL);
+  const updatedHeader = getReleventReduxState(stateObj, 'updatedRWDHeader');
+  console.log('Mobile Header Subscription --- ', updatedHeader);
 
   return {
     isHeaderReset: defalutHeaderFlag,
     shareWishlistURL: wishlistURL,
+    updatedHeaderVal: updatedHeader
   };
 }
 
@@ -193,5 +207,5 @@ function mapStateToProps(state) {
 // export default connect(
 //   mapStateToProps,
 // )(HeaderMobile);
-export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag })(HeaderMobile))
+export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag, updateTheRWDHeader })(HeaderMobile))
 // export default withRouter(HeaderMobile);
