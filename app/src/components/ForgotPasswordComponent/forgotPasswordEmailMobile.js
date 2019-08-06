@@ -149,7 +149,7 @@ class ForgotPasswordEmailMobile extends React.Component {
         <Form className="modalmin-height">
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
-              Email id/mobile number
+              Email ID/Mobile Number
             </Label>
             <div className="form-div clearfix div-error">
               <input
