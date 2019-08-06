@@ -117,11 +117,10 @@
         right:1%;
       }
     }
-    .Rectangle {
-      // width: 1440px;
-      height: 480px;
-      background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
-    }
+    // .Rectangle {
+    //   // width: 1440px;
+    //   background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+    // }
     .Browse-Lookbook-by-T {
       // width: 406px;
       height: 36px;
@@ -138,8 +137,7 @@
     }
     .Oval-Copy-6 {
       width: 100%;
-      height: 126px;
-      border-radius:82px;
+      border-radius: 50%;
     }
     .Contemporary {
       width: 137px;
@@ -348,5 +346,28 @@
     letter-spacing: normal;
     color: var(--greyish-brown);
   }
+  }
+
+  @media (min-width:320px) and (max-width:767px) {
+    .Inspiration {
+      .lookcrouse {
+        .themeSlider {
+          .themeSlides {
+            margin: 0 $base;
+          }
+        }
+      }
+      .Browse-Lookbook-by-T {
+        margin: $base*5 0 $base*3;
+        font-size: $base*2; 
+      }
+      .lookcrouse {
+        padding: 0;
+      }
+      .summersparkcontainer{
+        padding: $base*7.25 0 0 0;
+      }
+    }
+    
   }
 

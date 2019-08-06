@@ -33,11 +33,11 @@ export default class InspirationBanner extends Component {
     };
     return (
         <div>
- <Slider {...settings}>
+ 		<Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide}</h3>
+                {slide}
               </div>
             );
           })}
