@@ -391,7 +391,9 @@ export class CheckoutComponent extends React.Component {
 
   handleBack = () => {
     if(this.state.loggedIn && this.state.step == 2) {
-      return;
+      this.setState({
+        redirect: true
+      })
     } else {
       this.setState({
         step: this.state.step -1
