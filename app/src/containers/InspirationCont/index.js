@@ -37,23 +37,21 @@ export class Inspiration extends React.Component {
         <div className="lookcrouse">
           <InsCrousel />
         </div>
-<SummerData/>
+		<SummerData/>
           <div className="uuscontainer">
           <div className="container">
-            <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')}
-              alt="rectangle" />
-            <div className="text-block">
-              <img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
-                alt="rectangle" />
-              <h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
-              <p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br /> the
-                home you've always wanted</p2> <br />
-              <button className="seeMore">Know More</button>
-            </div>
+				<img className="bigSofa" src={require('../../../public/images/inspi9.jpg')}
+				alt="rectangle" />
+				<div className="text-block">
+					<img className="UUs-with-tagline-1" src={require('../../../public/images/u-us-with-tagline-1.jpg')}
+				alt="rectangle" />
+					<h4 className="Image-gallery-Copy-3 ">Godrej Interior Solutions</h4>
+					<p2 className="A-one-stop-shop-inte">A one-stop-shop interior design service to help you create<br /> the
+				home you've always wanted</p2> <br />
+					<button className="seeMore">Know More</button>
+				</div>
             </div>
           </div>
-        
-       
       </div>
     );
   }

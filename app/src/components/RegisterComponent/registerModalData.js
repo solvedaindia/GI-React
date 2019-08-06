@@ -30,12 +30,16 @@ class RegisterModalData extends React.Component {
 
   /* Handle Modal Close */
   handleClose() {
-    this.props.resetCallbackPro();
-    this.setState({
-      show: false,
-      data: null,
-      modalClass: 'modal-wrapperjoinus',
-    });
+    if (this.state.data.props.registrationType === 'generateOtp') {
+      this.handleComponent('registerWithMobileNum', this.state.data.props.userdata);
+    } else {
+      this.props.resetCallbackPro();
+      this.setState({
+        show: false,
+        data: null,
+        modalClass: 'modal-wrapperjoinus',
+      });
+    }
   }
 
   /* Handle Modal Show */

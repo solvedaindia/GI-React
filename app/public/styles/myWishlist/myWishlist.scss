@@ -140,10 +140,6 @@
   background: #000;
   animation: wishlistPopupAnimation 0.5s ease-in-out 0s forwards;
   padding: 16px 17px 16px 20px;
-  margin: -45px 205px 0 0;
-  width: 261px;
-  position: absolute;
-  right: 20px;
 
   .wishlist-text,
   .view-btn {
@@ -197,6 +193,12 @@
       .heading {
         font-size: 30px;
       }
+    }
+    .removeFromWishlist{
+      margin: -45px 205px 0 0;
+      width: 261px;
+      position: absolute;
+      right: 20px;
     }
   }
 
@@ -258,6 +260,13 @@
   }
   .shaire-headerwrp{
     display: none;
+  }
+  .removeFromWishlist{
+    width: 95%;
+    position: fixed;
+    bottom: 0px;
+    left: 2.5%;
+    z-index: 19;
   }
 }
 

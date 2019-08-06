@@ -47,7 +47,7 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -104,7 +104,7 @@ export class SubCategory extends React.Component {
                     <p className="starting">
                       Starting From
                     <span className="startPrice">
-                        {subCatListData.startPrice}
+                      ₹{subCatListData.startPrice}
                       </span>
                     </p>
                   </figcaption>

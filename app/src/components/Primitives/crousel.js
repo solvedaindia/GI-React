@@ -16,34 +16,23 @@ export default class Inscrousel extends Component {
     this.state = {
       slides: [img1, img2, img3, img4, img5, img6, img7, img8]
     };
-    this.click = this.click.bind(this);
-  }
-  click() {
-    const { slides } = this.state;
-    this.setState({
-      slides:
-        slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
-    });
   }
   render() {
     const settings = {
       dots: false,
-      infinite: true,
-      speed: 500,
       slidesToShow: 6,
-      slidesToScroll: 4,
-      centerMode: true
-      
+      slidesToScroll: 1,
+      autoplay: false,
+      autoplaySpeed: 2000
     };
     return (
       <div>
         <h2 className="Browse-Lookbook-by-T">Browse Lookbook by Theme</h2>
-        
         <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
-              <div key={slide}>
-                <h3>{slide}<h4 className="crusealHead">classic</h4></h3>
+              <div key={slide} className='themeSlider'>
+                <figure className='themeSlides'>{slide}<h4 className="crusealHead">Classic</h4></figure>
               </div>
             );
           })}

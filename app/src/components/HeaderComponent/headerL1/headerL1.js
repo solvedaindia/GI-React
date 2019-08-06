@@ -39,10 +39,8 @@ class HeaderL1 extends React.Component {
   }
 
   render() {
-    const { isLoading, layer1Data } = this.state;
-
+	const { isLoading, layer1Data } = this.state;
     return (
-      
       <ul className="layer1">
         {!isLoading ? (
           layer1Data.map((linkData, index) => (

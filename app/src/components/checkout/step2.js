@@ -537,6 +537,7 @@ export class Step2Component extends React.Component {
     }
 
     addAddressToCart = () => {
+      console.log('shipMode-ID --- ',this.props.shipModePro);
       return new Promise((resolve, reject) => {
         let token = appCookie.get('accessToken');
         axios.get(minicartAPI, {
@@ -552,7 +553,7 @@ export class Step2Component extends React.Component {
             if(item.freeGift != true) {
               var obj = {
                 "orderItemId": `${item.orderItemId}`,
-                "shipModeId": "11251",
+                "shipModeId": this.props.shipModePro,
                 "addressId": `${this.state.ship_add_id}`
               }
               data.push(obj);
@@ -560,7 +561,7 @@ export class Step2Component extends React.Component {
           });
           var body = {
             "orderItem": data,
-            "shipModeId": "11251",
+            "shipModeId": this.props.shipModePro,
             "addressId": `${this.state.bill_add_id}`
           };
           axios.post(AddAddressToCardAPI, body, {
@@ -988,7 +989,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="number" title="Pin Code" name="pin" value={this.state.inputText_pincode}
+                          <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
                             handleChange={this.handleInput} />
                           {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
@@ -1014,7 +1015,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6">
                          <div className="form-div clearfix div-error">
-                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} handleChange={this.handleInput} />
+                           <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city}/>
                            {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                          </div>
                       </div>
@@ -1084,7 +1085,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                     <div className="col-md-6 colpaddingRight">
                        <div className="form-div clearfix div-error">
-                         <Input inputType="text" title="Pin Code" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
+                         <Input inputType="text" title="Pincode" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
                          {this.state.berror_pincode ? <div className='error-msg'>{this.state.berrorMessage_pincode}</div> : null}
                        </div>
                     </div>

@@ -85,7 +85,7 @@
         margin:0 auto;
       }
       .titlesss {
-        font-family:CeraGIRegular,sans-serif;
+        font-family: $font-regular;
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
@@ -133,7 +133,7 @@
         .subText{
           font-size: 18px;
           color:#ffffff;
-          font-family:CeraGIRegular,sans-serif;
+          font-family: $font-regular;
           margin:0 0 28px 0;
         }
         .btn-book{
@@ -195,7 +195,7 @@
       .subText{
         font-size: 14px;
         color:#767676;
-        font-family:CeraGIRegular,sans-serif;
+        font-family: $font-regular;
         text-align: left;
       }
       .Read-More{
@@ -240,7 +240,7 @@
     
     .Types-of-Modular-Kit {
       height: 36px;
-      font-family: CeraGodrejInterio;
+      font-family: $font-medium;
       font-size: 30px;
       font-weight: bold;
       font-style: normal;

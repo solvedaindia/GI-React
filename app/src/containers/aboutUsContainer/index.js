@@ -191,12 +191,15 @@ render() {
       <div className='greenContainer'>
         <div className='container'>
         <h1 className='greenTitle'>Green Initiatives</h1>
-        <GreenInitiatives/>
         </div>
+        <GreenInitiatives/>
+      
       </div>
 
-      <div className="CareerContainer row">
-        <div className="col-md-12">
+      <div className="CareerContainer">
+        <div className="container">
+          <div className='row'>
+          <div className="col-md-12">
           <div container>
             <div id="cat">
               <h1 className="careerHeading">Careers</h1>
@@ -208,6 +211,9 @@ render() {
             </div>
           </div>
         </div>
+          </div>
+        </div>
+        
       </div>
       <div className="mediaPressSection">
       <div className="container">
