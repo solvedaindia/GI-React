@@ -6,19 +6,20 @@
   width: 100%;
   height: auto;
   background-color: #ffffff;
-  .Header-Copy-h1 {
-    padding: 64px 0 0 0;
-    font-family: $font-regular;
-    font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
+  padding:64px 0 144px 0;
+  .innerContent{
+    padding:63px 0 0 0;
+  }
+  .headingServicesupport {
+    padding: 0;
+    font-family: $font-medium;
+    font-size: 30px;  
+    line-height: 30px;    
     color: #000000;
     text-align: center;
+    margin:0;
   }
-  .Header-Copy-h3 {
+  .subHeading {
     padding: 24px 0 0 0;
     font-family: $font-regular;
     font-size: 18px;
@@ -29,10 +30,10 @@
     letter-spacing: normal;
     color: #4a4a4a;
     text-align: center;
+    margin:0;
   }
   .searchBars {
-    padding: 62px 0 0 0;
-  
+    padding: 62px 0 0 0;  
     display: inline-block;
     position: relative;
     border-bottom: 1px solid $battleshipGrey;
@@ -123,82 +124,24 @@
         
     }
   }
-  .faqhead {
-    font-family: $font-regular;
-    font-size: 14px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
-  }
+  
   .uldiver{
     // width:163px;
     // height:31px;
     background-color: #eef8fe
   }
-  .uldiv{
-    width:100%;
-    height:41px;
-    background-color: #eef8fe
-  }
-  .uldivlight{
-    width:100%;
-    height:41px;
-    background-color:white;
-  }
-  .MyOd {
-   padding: 63px 0 0 0;
-    height: 28px;
-    font-family: $font-regular;
-    font-size: 20px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
-    text-align: left;
-  }
+  
+  
+ 
   .panel-body{
-    color: #000000
+    color: #000000;
+    padding: 0;
   }
   .hrvertical { 
     border-left: 6px solid green;
     height: 500px;
     }
-    .enquiry{
-      font-weight: bold;
-  text-align: center;
-  font-size: 20px;
-  line-height: 22px;
-  color: #000000;
-  
-    }
-    
-  .emailus{
-    height: 15px;
-  }
-  .contactus{
-    font-weight: bold;
-  text-align: center;
-  font-size: 16px;
-  
-  color: #000000;
-  
-  }
-  .emailsmall{
-  text-align: center;
-  font-size: 14px;
-  
-  color: #000000;
-  
-  }
-  .chat{
-    float: left;
-    background-color: #eef8fe;
-  }
+   
   .chattext{
       font-weight: bold;
       text-align: center;
@@ -209,22 +152,157 @@
     height: 30px;
   }
    
-  .Header-Copy-4 {
-    font-weight: bold;
   
-    height: 36px;
-    font-family: $font-regular;
-    font-size: 30px;
-    font-weight: 500px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000000;
-    text-align: center;
+  
+
+  .faqArea{
+    .faqhead {
+      font-family: $font-bold;
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: bold;     
+      color: #000000;
+      margin:0;
+      padding:0 0 8px 0;
+    }
+    .faqList{
+      .active{
+        background: #eef8fe;
+      }
+      .faqItem{
+        font-size: 14px;
+        font-family: $font-regular;
+        padding:12px;
+
+      }
+    }
   }
-  .panel-group{
-    padding: 26px 0 0 0;
+
+  .myOrder{
+    .myOrders {
+      padding: 0px 0 8px 0;
+       height: 28px;
+       font-family: $font-medium;
+       font-size: 20px;      
+       line-height: 20px;       
+       color: #000000;
+       text-align: left;
+       margin:0;
+       
+     }
+     .panel-group{
+      border-top:1px solid #e4eaee;
+      margin: 26px 0 0 0;
+       .panel{
+         border:1px solid #e4eaee;
+         border-left:none;
+         border-right:none;
+         border-top:none;
+         box-shadow: none;
+         border-radius: 0;
+         margin:0;
+         padding: 25px 0;
+         .panel-heading{
+           padding: 0;
+           background: transparent;
+           border:none;
+           color:#000000;          
+           border-radius: 0;
+           .panel-title{
+            font-family: $font-medium;
+            font-size: 16px;
+            color:#000000;
+            .accordion-toggle{
+              font-family: $font-medium;
+              font-size: 16px;
+              color:#000000;
+              &:focus,&:hover{
+                text-decoration: none;
+              }
+            }
+           }
+         }
+         
+         .panel-collapse.show{
+          .panel-body{
+            border-top:none;
+            padding: 12px 0 0 0;
+            font-size:12px;
+            font-family: $font-regular;
+            color:#888a8d;
+          }
+         }
+         .panel-body{
+          padding: 12px 0 0 0;
+          border-top:none;
+          font-size:12px;
+          font-family: $font-regular;
+          color:#888a8d;
+         }
+       }
+     }
+  }
+
+  .customerCare{
+    border-top:1px solid #dadada;
+    margin:60px 0 0 0;
+    padding:42px 0 0 0;
+    .headingCustomercare {           
+      font-family: $font-medium;
+      font-size: 30px;      
+      line-height: 30px;    
+      color: #000000;
+      text-align: center;
+      margin:0 0 37px 0; 
+    }
+    .borderRight{
+      border-right:1px solid #dadada;
+    }
+    .enquiry{
+      font-weight: bold;
+      text-align: center;
+      font-size: 20px;
+      line-height: 22px;
+      color: #000000;
+      margin: 0 0 42px 0;
+  
+    }
+    .contactus{
+      font-family: $font-medium;   
+      text-align: center;
+      font-size: 16px; 
+      line-height: 16px;   
+      color: #000000;
+      margin:15px 0 0 0;    
+    }
+      
+    .icon{
+      height: 15px;
+    }
+    .emailsmall{
+      text-align: center;
+      font-size: 14px;
+      line-height: 18px;      
+      color: #77787a;
+      font-family: $font-regular;
+      margin:8px 0 0 0;
+      
+      }
+  }
+  .Livechat{
+    background: #eef8fe;
+    padding: 16px;
+    border: none;
+    position: fixed;
+    right: 10px;
+    bottom: 30px;
+    border-radius: 29px;
+    .text{
+      font-family: $font-medium;
+      font-size: 14px;
+      color:#000000;
+      padding:0 10px 0 0;
+    }
   }
   
 }
