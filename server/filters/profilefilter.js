@@ -1,3 +1,5 @@
+const stateCode = require('../configs/statecode');
+
 /**
  * Filter User Profile Data-Summary.
  * @return User Profile JSON Data
@@ -57,7 +59,8 @@ module.exports.userAddress = function getUserAddress(contactAddress) {
   res.pincode = contactAddress.zipCode || '';
   res.address = '';
   res.city = contactAddress.city;
-  res.state = contactAddress.state;
+  res.state =
+    stateCode.getStateName[contactAddress.state] || contactAddress.state;
   res.isDefault = false;
   if (contactAddress.primary === 'true') {
     res.isDefault = true;

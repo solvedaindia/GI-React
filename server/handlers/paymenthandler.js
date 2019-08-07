@@ -38,7 +38,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
   const initiateBDPaymentBody = {
     orderId: params.orderId,
     email: params.email,
-    payMethodId: params.payMethodId,
+    payMethodId: 'NET_BANKING',
     amount: params.amount,
     mobile: params.mobile,
     callbackUrl: params.callbackUrl,
