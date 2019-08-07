@@ -109,6 +109,13 @@
             .fsBanner{
                 margin-top: 0px;
             }
-		}
+        }
+        .subCat{
+            .slick-slider{
+                .slick-dots{
+                    bottom: -18px;
+                }
+             }
+        }
     }
   }

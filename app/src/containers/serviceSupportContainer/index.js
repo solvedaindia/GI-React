@@ -64,56 +64,67 @@ export default class HelpSupport extends React.Component {
 
             <FaqAnswers />
             </div>
-            <hr className="hr" />
-            <h1 className="Header-Copy-4">Contact Customer Care</h1>
-            <div className="container">
+            
+            
+            <div className='clearfix'></div>
+           
+        </div>
+        </div>
+        </div>
+        <div className='clearfix'></div>
+        <div className="container">
 
-            <div className="row">
-              <div className="col-md-6">
-                <h4 className="enquiry">Enquiries</h4>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
-                    <h4 className="contactus">Email</h4>
-                    <h4 className="emailsmall">talktous@godrej.com</h4>
+<div className="row">
+  <div className="col-md-12">
+  <h1 className="Header-Copy-4">Contact Customer Care</h1>
+  </div>
 
-                  </div>
-                  <div className="col-sm-4"></div>
-                  <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
-                  <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <h4 className="enquiry">After Sales Services</h4>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
-                    <h4 className="contactus">Email</h4>
-                    <h4 className="emailsmall">talktous@godrej.com</h4>
-                  </div>
-                  <div className="col-sm-4"></div>
-                  <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
-                  <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
-                </div>
-                <button className="chat">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h4 className="chattext">Live Chat </h4>
-                    </div>
-                    <div className="col-md-6">
-                      <img className="chatIcon" src={require('../../../public/images/chat.png')} alt="Rectangle" />
-                    </div>
-                  </div>
-                </button>
-              </div>
-            </div>
-            </div>
+  <div className="col-md-6">
+    <h4 className="enquiry">Enquiries</h4>
+    <div className="row">
+      <div className="col-sm-6 text-center">
+        <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+        <h4 className="contactus">Email</h4>
+        <h4 className="emailsmall">talktous@godrej.com</h4>
+
+      </div>
+      <div className="col-sm-6 text-center">
+      <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+      <h4 className="contactus">Contact-Us</h4>
+      <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
+      </div>
+    </div>
+  </div>
+  <div className="col-md-6">
+    <h4 className="enquiry">After Sales Services</h4>
+    <div className="row">
+      <div className="col-sm-6 text-center">
+        <img className="emailus" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+        <h4 className="contactus">Email</h4>
+        <h4 className="emailsmall">talktous@godrej.com</h4>
+      </div>
+      <div className="col-sm-6 text-center">
+      <img className="emailus" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+      <h4 className="contactus">Contact-Us</h4>
+      <h4 className="emailsmall">+91 8654123547+91 6325415873</h4>
+      </div>
+    </div>
+  
+  </div>
+</div>
+
+</div>
         </div>
+        <button className="chat">
+      <div className="row">
+        <div className="col-md-6">
+          <h4 className="chattext">Live Chat </h4>
         </div>
+        <div className="col-md-6">
+          <img className="chatIcon" src={require('../../../public/images/chat.png')} alt="Rectangle" />
         </div>
-        </div>
+      </div>
+    </button>
       </div>
     );
   }

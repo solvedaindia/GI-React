@@ -45,7 +45,7 @@ class ForgotPasswordOTP extends React.Component {
     if (!validateOTPDigit(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Pleaes enter 4 digit OTP',
+        errorMessage: 'OTP entered is incorrect',
       });
       return;
     }
