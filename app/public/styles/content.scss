@@ -21,10 +21,16 @@
 				.greetingHead {
 				font-size: $base*2.5;
 				font-weight: 100;
+				font-family: $font-regular;
 				}
 				.msg {
-				font-size: $base*4;
+				font-size: $base*3;
 				font-family: $font-bold;
+				}
+				.msg,
+				.greetingHead {
+					margin-left: $base*15.5;
+					text-align: left;	
 				}
 			}
 			.exploreSection {
