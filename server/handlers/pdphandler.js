@@ -5,10 +5,11 @@ const logger = require('../utils/logger.js');
 const productUtil = require('../utils/productutil');
 const promotionUtil = require('../utils/promotionutil');
 const pincodeUtil = require('../utils/pincodeutil');
+const emiUtils = require('../utils/emiutil');
 const pdpfilter = require('../filters/productdetailfilter');
 const imagefilter = require('../filters/imagefilter');
 const kitfilter = require('../filters/kitfilter');
-// const bundlefilter = require('../filters/bundlefilter');
+const bundlefilter = require('../filters/bundlefilter');
 const headerutil = require('../utils/headerutil.js');
 const constants = require('../utils/constants');
 const origin = require('../utils/origin.js');
@@ -64,26 +65,20 @@ module.exports.getProductDetails = function getProductDetailsData(
         } else if (
           result.catalogEntryView[0].catalogEntryTypeCode === 'BundleBean'
         ) {
-          // const bundleIds = [];
-          // bundleIds.push(result.catalogEntryView[0].uniqueID);
-          // const taskList = [
-          //   promotionDetails.bind(
-          //     null,
-          //     reqHeaders,
-          //     result.catalogEntryView[0],
-          //     null,
-          //     bundleIds,
-          //   ),
-          //   mergeBundleData,
-          // ];
-          // async.waterfall(taskList, (er, res) => {
-          //   if (er) {
-          //     callback(er);
-          //   } else {
-          //     callback(null, res);
-          //   }
-          // });
-          callback(null, result.catalogEntryView[0]);
+          const bundleIds = getBundleIds(result);
+          const taskList = [
+            bundleDetailsByIds.bind(null, reqHeaders, result, bundleIds),
+            promotionDetails,
+            mergeBundleData,
+            minEmiValue,
+          ];
+          async.waterfall(taskList, (er, res) => {
+            if (er) {
+              callback(er);
+            } else {
+              callback(null, res);
+            }
+          });
         } else {
           const productId = result.catalogEntryView[0].parentCatalogEntryID;
           const taskList = [
@@ -148,14 +143,14 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
         if (serviceability === true) {
           async.parallel(
             [
-              findInventory.bind(null, reqHeaders, reqBody),
-              getShippingCharge.bind(null, reqHeaders, reqBody),
+              pincodeUtil.findInventory.bind(null, reqHeaders, reqBody),
+              pincodeUtil.getShippingCharge.bind(null, reqHeaders, reqBody),
               getExperienceStore.bind(null, reqHeaders, reqBody),
             ],
             // eslint-disable-next-line no-shadow
             (err, result) => {
               if (err) {
-                callback(errorUtils.handleWCSError(err));
+                callback(err);
               } else {
                 callback(null, transformJson(result, serviceability));
               }
@@ -324,7 +319,7 @@ module.exports.setProductNotification = function productStockNotification(
  * @param {*} reqParams
  * @param {*} callback
  */
-function getShippingCharge(header, reqParams, callback) {
+/* function getShippingCharge(header, reqParams, callback) {
   pincodeUtil.getShippingCharge(header, reqParams, (err, result) => {
     if (err) {
       callback(null, 'Sipping charge not found');
@@ -332,7 +327,7 @@ function getShippingCharge(header, reqParams, callback) {
       callback(null, result);
     }
   });
-}
+} */
 
 /**
  * Function for Experience Store
@@ -357,7 +352,7 @@ function getExperienceStore(header, reqParams, callback) {
  * @param {*} reqParams
  * @param {*} callback
  */
-function findInventory(header, reqParams, callback) {
+/* function findInventory(header, reqParams, callback) {
   pincodeUtil.findInventory(header, reqParams, (err, result) => {
     if (err) {
       callback(err);
@@ -365,7 +360,7 @@ function findInventory(header, reqParams, callback) {
       callback(null, result);
     }
   });
-}
+} */
 
 /**
  * This function will return product data
@@ -439,7 +434,7 @@ function promotionDetails(header, productData, skuData, skuIds, callback) {
     if (err) {
       callback(null, productData, skuData, '');
     } else {
-      callback(null, productData, skuData, result);
+      callback(null, header, productData, skuData, result);
     }
   });
 }
@@ -452,7 +447,7 @@ function promotionDetails(header, productData, skuData, skuIds, callback) {
  * @param {*} callback
  * @return this function will merge productData, skuData and promoData and return PDP data
  */
-function mergePDPData(prodData, skuData, promoData, callback) {
+function mergePDPData(header, prodData, skuData, promoData, callback) {
   const productDataSummary = {
     uniqueID: '',
     type: 'product',
@@ -463,7 +458,7 @@ function mergePDPData(prodData, skuData, promoData, callback) {
     keywords: [],
   };
 
-  if (prodData.catalogEntryView.length > 0) {
+  if (prodData && prodData.catalogEntryView.length > 0) {
     const productData = prodData.catalogEntryView[0];
     productDataSummary.uniqueID = productData.uniqueID;
     const attributes = pdpfilter.getAttributes(productData);
@@ -490,12 +485,18 @@ function mergePDPData(prodData, skuData, promoData, callback) {
  * @param {*} serviceability
  */
 function transformJson(result, serviceability) {
-  const pincodeData = {};
-  pincodeData.pincodeServiceable = serviceability;
+  const pincodeData = {
+    pincodeServiceable: serviceability,
+    inventoryStatus: '',
+    deliveryDateAndTime: '',
+    shippingCharge: '',
+    experienceStore: [],
+  };
+  // pincodeData.pincodeServiceable = serviceability;
   if (result && result.length > 0) {
-    pincodeData.inventoryStatus = result[0].inventoryStatus || '';
-    pincodeData.deliveryDateAndTime = result[0].deliveryDate || '';
-    pincodeData.shippingCharge = result[1].ShipCharge || '';
+    pincodeData.inventoryStatus = result[0].inventoryStatus;
+    pincodeData.deliveryDateAndTime = result[0].deliveryDate;
+    pincodeData.shippingCharge = result[1].shippingCharge;
     pincodeData.experienceStore = transformExperienceStore(result[2]);
   }
   return pincodeData;
@@ -582,7 +583,7 @@ function getMercAssociationsData(bodyData, promotions) {
 function transformExperienceStore(bodyData) {
   // eslint-disable-next-line no-shadow
   const experienceStore = [];
-  if (bodyData.storeList) {
+  if (bodyData.storeList && bodyData.storeList.length > 0) {
     bodyData.storeList.sort(
       (a, b) =>
         parseInt(b.DistanceFromShipToAddress, 10) -
@@ -616,7 +617,7 @@ function transformExperienceStore(bodyData) {
  */
 function getKitIds(bodyData) {
   const kitIds = [];
-  if (bodyData.catalogEntryView.length > 0) {
+  if (bodyData.catalogEntryView && bodyData.catalogEntryView.length > 0) {
     kitIds.push(bodyData.catalogEntryView[0].uniqueID);
     if (
       bodyData.catalogEntryView[0].merchandisingAssociations &&
@@ -638,6 +639,37 @@ function getKitIds(bodyData) {
 }
 
 /**
+ * Function for return bundleIds
+ * @param {} header
+ * @param {*} kitData
+ * @param {*} kitIds
+ * @param {*} callback
+ */
+function getBundleIds(bodyData) {
+  const bundleIds = [];
+  if (bodyData.catalogEntryView && bodyData.catalogEntryView.length > 0) {
+    bundleIds.push(bodyData.catalogEntryView[0].uniqueID);
+    if (
+      bodyData.catalogEntryView[0].merchandisingAssociations &&
+      bodyData.catalogEntryView[0].merchandisingAssociations.length > 0
+    ) {
+      bodyData.catalogEntryView[0].merchandisingAssociations.forEach(
+        element => {
+          if (
+            bundleIds.indexOf(element.uniqueID) === -1 &&
+            element.associationType === 'REPLACEMENT' &&
+            element.catalogEntryTypeCode === 'BundleBean'
+          ) {
+            bundleIds.push(element.uniqueID);
+          }
+        },
+      );
+    }
+  }
+  return bundleIds;
+}
+
+/**
  * This function will return kit data using kit Ids
  */
 function kitDetailsByIds(header, kitData, kitIds, callback) {
@@ -650,17 +682,28 @@ function kitDetailsByIds(header, kitData, kitIds, callback) {
   });
 }
 
+/** Function will return bundle data using bundleIds */
+function bundleDetailsByIds(header, bundleData, bundleIds, callback) {
+  productUtil.getProductListByIDs(header, bundleIds, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, header, bundleData, result, bundleIds);
+    }
+  });
+}
+
 /**
  * Function for transforming Kit Data Json
  * @param {*} bodyData
  */
-function transformKitData(kitData, subKitData, promoData, callback) {
+function transformKitData(headers, kitData, subKitData, promoData, callback) {
   const kitDataSummary = {
     type: 'kit',
     swatchAttributes: [],
     kitData: [],
   };
-  if (subKitData.length > 0) {
+  if (subKitData && subKitData.length > 0) {
     subKitData.forEach(bodyData => {
       const attributes = pdpfilter.getAttributes(bodyData);
       const mercAssociations = getMercAssociationsData(bodyData, promoData);
@@ -688,7 +731,7 @@ function transformKitData(kitData, subKitData, promoData, callback) {
   callback(null, kitDataSummary);
 }
 
-// function mergeBundleData(bundleData, key1, promoData, callback) {
+// function mergeBundleData(header, bundleData, key1, promoData, callback) {
 //   const bundleSummaryJson = {
 //     type: 'bundle',
 //     uniqueID: '',
@@ -745,3 +788,100 @@ function transformKitData(kitData, subKitData, promoData, callback) {
 //   }
 //   callback(null, bundleSummaryJson);
 // }
+
+/** Function to merge bundle data */
+function mergeBundleData(header, key1, subBundleData, promoData, callback) {
+  const bundleDataSummary = {
+    type: 'bundle',
+    swatchAttributes: [],
+    bundleData: [],
+  };
+  if (subBundleData && subBundleData.length > 0) {
+    subBundleData.forEach(bodyData => {
+      const componentsSummary = bundlefilter.bundleComponentsSummary(bodyData);
+      const attributes = pdpfilter.getAttributes(bodyData);
+      const mercAssociations = getMercAssociationsData(bodyData, promoData);
+      bundleDataSummary.swatchAttributes.push(
+        componentsSummary.swatchAttributes,
+      );
+      const bundleDataJSON = pdpfilter.productDetailSummary(
+        bodyData,
+        promoData,
+      );
+      bundleDataJSON.actualPrice = componentsSummary.actualPrice || '';
+      bundleDataJSON.offerPrice = componentsSummary.offerPrice || '';
+      bundleDataJSON.swatchAttributes = [];
+      bundleDataJSON.swatchAttributes.push(componentsSummary.swatchAttributes);
+      if (bundleDataJSON.swatchAttributes.length > 0) {
+        bundleDataJSON.swatchAttributes = kitfilter.filterSwatchAtrributes(
+          bundleDataJSON.swatchAttributes,
+        );
+      }
+      const associatedPromo = [];
+      if (promoData[bodyData.uniqueID]) {
+        promoData[bodyData.uniqueID].forEach(promo => {
+          associatedPromo.push({
+            name: promo.name,
+            description: promo.description || '',
+            promocode: promo.promoCode,
+          });
+        });
+      }
+      bundleDataJSON.promotions = associatedPromo;
+      bundleDataJSON.attachments = imagefilter.getProductImages(bodyData);
+      // bundleDataJSON.productDetails = pdpfilter.getProductDetails(
+      //   attributes,
+      //   bodyData,
+      // );
+      bundleDataJSON.productFeatures = pdpfilter.getProductFeatures(attributes);
+      bundleDataJSON.productDetails = [];
+      // bundleDataJSON.productFeatures = [];
+      bundleDataJSON.itemInThisBundle = componentsSummary.itemInThisBundle;
+      bundleDataJSON.similarProducts = mercAssociations.similarProducts;
+      bundleDataJSON.keywords = pdpfilter.getKeywords(bodyData.keyword);
+      bundleDataSummary.bundleData.push(bundleDataJSON);
+    });
+
+    if (bundleDataSummary.swatchAttributes.length > 0) {
+      bundleDataSummary.swatchAttributes = kitfilter.filterSwatchAtrributes(
+        bundleDataSummary.swatchAttributes,
+      );
+    }
+  }
+  callback(null, header, bundleDataSummary);
+}
+
+/** Function to find min EMI value for bundles */
+function minEmiValue(header, bundleDataSummary, callback) {
+  if (bundleDataSummary.bundleData && bundleDataSummary.bundleData.length > 0) {
+    async.map(
+      bundleDataSummary.bundleData,
+      (element, cb) => {
+        emiUtils.getMinimumEmiValue(
+          element.offerPrice,
+          header,
+          (error, result) => {
+            if (!error) {
+              // eslint-disable-next-line no-param-reassign
+              element.emiData = result.minEMIValue;
+              cb(null, element);
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              element.emiData = '';
+              cb(null, element);
+            }
+          },
+        );
+      },
+      errors => {
+        if (errors) {
+          callback(null, bundleDataSummary);
+          return;
+        }
+        callback(null, bundleDataSummary);
+      },
+    );
+  } else {
+    callback(null, bundleDataSummary);
+  }
+}

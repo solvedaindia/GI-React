@@ -12,7 +12,7 @@ const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
 
-const sampleOrderDetails = require('../configs/testjson').orderDetails;
+// const sampleOrderDetails = require('../configs/testjson').orderDetails;
 
 /**
  * Get Order List
@@ -118,9 +118,9 @@ function getOrderbyId(headers, orderId, callback) {
           return;
         }
         if (
-          headers.profile === 'summary' // ||
-          // response.body.orderStatus === 'M' ||
-          // response.body.orderStatus === 'C'
+          headers.profile === 'summary' ||
+          response.body.orderStatus === 'M' ||
+          response.body.orderStatus === 'C'
         ) {
           fetchOrderData = [
             getOOBOrderDetails.bind(null, headers, response.body),
@@ -174,8 +174,8 @@ function getOngoingOrders(headers, callback) {
           ongoingOrders: [],
         };
         if (response.body.OngoingOrder) {
-          // const orderID = response.body.OngoingOrder;
-          const orderID = '61874079619';
+          const orderID = response.body.OngoingOrder;
+          // const orderID = '61874079619';
 
           getOMSOrderDetails(headers, orderID, (error, orderDetails) => {
             if (error) {
@@ -321,9 +321,11 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
   if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
     orderDetails.paymentMethod = orderData.paymentInstruction[0].payMethodId;
   }
-  orderDetails.address = profileFilter.userAddress(
-    orderData.paymentInstruction[0],
-  );
+  if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
+    orderDetails.address = profileFilter.userAddress(
+      orderData.paymentInstruction[0],
+    );
+  }
 
   if (orderData.orderItem && orderData.orderItem.length > 0) {
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
@@ -412,7 +414,7 @@ function getOMSOrderDetails(headers, orderID, callback) {
           address: '',
           orderItems: [],
         };
-        response.body = sampleOrderDetails;
+        // response.body = sampleOrderDetails;
         if (response.body.result.order) {
           const omsOrderDetail = response.body.result.order;
           resJson.orderID = omsOrderDetail.orderId;
@@ -493,6 +495,14 @@ function getOMSOrderDetails(headers, orderID, callback) {
           } else {
             callback(null, resJson);
           }
+        } else if (response.body.result.error) {
+          const errorBody = {
+            status_code: 400,
+            error_key: 'order_failed',
+            error_message: response.body.result.error.errorDescription,
+          };
+          // callback(errorBody);
+          callback(null, resJson);
         }
       } else {
         callback(errorutils.handleWCSError(response));

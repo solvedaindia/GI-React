@@ -65,7 +65,6 @@ function productDetailForPLP(productDetail) {
     productDetailJson.imageAltText = productDetail.seo_prop_imageAltText || '';
     productDetailJson.metaDescription =
       productDetail.seo_prop_metaDescription || '';
-
   }
   return productDetailJson;
 }
@@ -491,10 +490,13 @@ function mergeImagesAndVideos(imageArray, videoArray) {
 module.exports.getKeywords = getKeywords;
 function getKeywords(bodyData) {
   let keywordArray = [];
-  try {
-    keywordArray = bodyData.split(',');
-    return keywordArray;
-  } catch (err) {
-    return keywordArray;
+  if (bodyData) {
+    try {
+      keywordArray = bodyData.split(',');
+      return keywordArray;
+    } catch (err) {
+      return keywordArray;
+    }
   }
+  return keywordArray;
 }

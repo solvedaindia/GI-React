@@ -5,7 +5,7 @@ const constants = require('../utils/constants');
 const headerutils = require('../utils/headerutil');
 
 const otpValidateSuccess = 'OTP Validation Successfull';
-
+const regexMobileNo = /^\d{10}$/; // Mobile Number
 /**
  * Generate OTP for Registartion,forgot password
  * @param storeId,access_token
@@ -49,7 +49,17 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
         callback(null, response.body);
       } else {
         logger.debug('Error while calling Generate Otp API');
-        callback(errorutils.handleWCSError(response));
+        if (response.body.errors && response.body.errors.length > 0) {
+          if (response.body.errors[0].errorKey === 'ERROR_USER_EXISTS') {
+            if (regexMobileNo.test(params.user_id)) {
+              callback(errorutils.errorlist.user_exists_mobile);
+            } else {
+              callback(errorutils.errorlist.user_exists_email);
+            }
+          } else {
+            callback(errorutils.handleWCSError(response));
+          }
+        }
       }
     },
   );
