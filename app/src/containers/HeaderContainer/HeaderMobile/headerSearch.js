@@ -88,7 +88,7 @@ export class HeaderSearch extends React.Component {
           ) : (
             <button onClick={this.onSearchClick.bind(this)}>
               <img
-                src={require('../../../../public/images/RWD Assets/search.svg')}
+                src={require('../../../../public/images/rwd-assets/search.svg')}
               />
             </button>
           )}

@@ -16,10 +16,16 @@ class RWDSingleProduct extends React.Component {
     this.filterDeliveryInstallationTags();
   }
 
-  filterDeliveryInstallationTags() {
+  showOrderDetail() {
+    this.props.orderDetailCallbackPro(this.props.orderCompleteDataPro);
+  }
 
+  trackOrderFromViewOrder(data) {
+    this.props.viewOrderTrackCallbackPro(data)
+  }
+
+  filterDeliveryInstallationTags() {
     const shipmentData = this.props.orderDataPro.shipmentData[0];
-    console.log('ssssdkdkd --- ', shipmentData)
     if (shipmentData.expectedDeliveryDate !== '') {
       this.setState({
         dsNameTag: 'DELIVERY ON',
@@ -27,7 +33,6 @@ class RWDSingleProduct extends React.Component {
       })
     }
     else if (shipmentData.expectedInstallationDate !== '') {
-      console.log('Installation -- ', shipmentData.installationDate)
       if (shipmentData.installationDate === '') {
         this.setState({
           dsNameTag: 'INSTALLATION ON',
@@ -38,33 +43,33 @@ class RWDSingleProduct extends React.Component {
   }
 
   render() {
-    console.log('triccc -- ', this.props.orderDataPro);
     const productData = this.props.orderDataPro;
+    console.log('dddd -- ',productData.shipmen)
     return (
       <>
         <div className="itemBoxTrack clearfix">
-
           <div className='itemImg'>
             <img className='imgBox' src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
           </div>
-
           <div className='itemInfo'>
             <div className='productName'>{productData.productName}</div>
             <div className='description'>{productData.shortDescription}</div>
-            <div className='quantity'>{productData.quantity}</div>
+            <div className='quantity'>{this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
             <div className='price'>{productData.offerPrice}</div>
             <div className='deliveryTag'>
               <span>{this.state.dsNameTag}</span>
               <span>{this.state.dsDateTag}</span>
             </div>
           </div>
-
         </div>
         <div className='clearfix'></div>
         <div className='orderStatus'>
-          <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap' />
+          {this.props.isFromViewOrder ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' /> }
         </div>
-
+        <div className='clearfix'/>
+        <div className='orderBtn'>
+          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 1 ? <button onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button> : this.props.isFromViewOrder ? null : <button onClick={this.showOrderDetail.bind(this)}>View Order Details</button> : null}
+        </div>  
       </>
     );
   }

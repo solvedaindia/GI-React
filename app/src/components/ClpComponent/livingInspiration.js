@@ -54,8 +54,10 @@ class LivingTheme extends React.Component {
     return (
 		!!themeData && 
 		<div className="clpTheme">
-			<h2 className='title'>{themeData.title}</h2>
-			<p className='desc'>{themeData.description}</p>
+			<div class='clp-short-desc'>
+				<h2 className='title'>{themeData.title}</h2>
+				<p className='desc'>{themeData.description}</p>
+			</div>
 			{!isMobile() ?
 				themeData.recoImgArray.map((themeItem) => {
 					return(
