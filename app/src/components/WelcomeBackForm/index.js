@@ -179,7 +179,7 @@ class WelcomeForm extends Component {
         </div>
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
-        <Button type="primary" title="Login" />
+        <Button type="primary" title="Log In" />
         {/* Submit */}
       </form>
     );
