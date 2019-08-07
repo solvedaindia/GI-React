@@ -67,7 +67,7 @@ class LookbookThemeCarousel extends React.Component {
             infinite: false,
             speed: 500,
             slidesToShow: 6,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
             prevArrow: prevArrowImg,
             nextArrow: nextArrowImg,
             responsive: [

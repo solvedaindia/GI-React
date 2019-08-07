@@ -142,10 +142,16 @@ else if(event.target.name == 7) {
 }
 
 getImageOnArrowClick = (e) =>{
+  if (e.target.name == 'arrowClick')
   if (this.state.img_url == img){
     this.setState({
-    img
+    img_url: images
     })
+  }
+  else if (this.state.img_url == images){
+    this.setState({
+      img_url: img
+      })
   }
 }
 
@@ -174,7 +180,7 @@ render() {
                 <button name="5" className={`ProcessNumber ${this.state.button5}`} onClick={this.handleclick}>5</button>
                 <button name="6" className={`ProcessNumber ${this.state.button6}`} onClick={this.handleclick}>6</button>
                 <button name="7" className={`ProcessNumber ${this.state.button7}`} onClick={this.handleclick}>7</button>
-                <button name="arrow" className='arrowNumber' onClick={this.handleclick}>
+                <button name="arrowClick" className='arrowNumber' onClick={this.getImageOnArrowClick}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25">
                     <g fill="none" fill-rule="evenodd" stroke="#ffffff">
                       <path strokeWidth="1.892" d="M27 12.7H.2 27z" />
