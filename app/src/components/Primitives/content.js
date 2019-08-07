@@ -24,6 +24,7 @@ class EspotContent extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
+        console.log('respo', response)
         const {data} = response || {};
         this.setState({
           pageLayoutEspot: data && data.data,
@@ -51,9 +52,10 @@ class EspotContent extends React.Component {
 
 			<div className="espotContent" id={index}>
 				{isMobile() && (this.state.espotName === roomsEspotName) && 
-					(getCookie('isLoggedIn') !== 'true') && <h2 className='mwebGreeting'>
+					(getCookie('isLoggedIn') !== 'true') && <><h2 className='mwebGreeting'>
 						Hello Start Exploring
 					</h2>
+          <h1 className="title">{pageLayoutEspot.title}</h1></>
 				}
 				{(this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') ? 

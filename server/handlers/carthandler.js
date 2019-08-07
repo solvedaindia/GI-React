@@ -693,7 +693,7 @@ module.exports.precheckout = function precheckout(req, callback) {
  */
 module.exports.checkout = checkout;
 function checkout(headers, params, callback) {
-  logger.debug('Adding Address To Cart');
+  logger.debug('Checkout API');
   if (!params || !params.orderId) {
     callback(errorutils.errorlist.invalid_params);
     return;
@@ -701,6 +701,8 @@ function checkout(headers, params, callback) {
 
   const reqBody = {
     orderId: params.orderId,
+    notifyShopper: '0',
+    notifyOrderSubmitted: '0',
   };
   const checkoutURL = `${constants.cartData.replace(
     '{{storeId}}',
