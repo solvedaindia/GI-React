@@ -84,6 +84,15 @@ class RWDMyOrder extends React.Component {
       currentComponentData: data
     })
   }
+
+  viewOrderTrackbtnCallback(data) {
+    console.log('mmmmmm----',data)
+    this.props.updateTheRWDHeader('Track Order');
+    this.setState({
+      currentComponent: 'MultiProduct',
+      currentComponentData: data
+    })
+  }
   
 
   getOrderList(isFromScroll) {
@@ -221,7 +230,8 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder">
           <RWDCompleteOrder
             orderDataPro={this.state.currentComponentData}
-            myOrderCallbackPro={this.myOrderCallback} />
+            myOrderCallbackPro={this.myOrderCallback} 
+            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)}/>
         </div>
       );
     }
