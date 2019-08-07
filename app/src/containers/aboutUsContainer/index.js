@@ -140,6 +140,16 @@ else if(event.target.name == 7) {
   })
 }
 }
+
+getImageOnArrow = (e) =>{
+  if (this.state.img_url == img){
+    this.setState({
+    img
+    })
+  }
+}
+
+
 render() {
     return (
     <div className="About-Us">
@@ -215,7 +225,7 @@ render() {
         </div>
         
       </div>
-      <div className="mediaPressSection">
+      {/* <div className="mediaPressSection">
       <div className="container">
         <h3 className='MediaTopHead'>Media/Press</h3>
         <h5>Latest News</h5>
@@ -270,7 +280,8 @@ render() {
           </div>
         </div>
       </div>
-      </div>
+      </div> */}
+      <MediaPress/>
     </div>
     );
     }
