@@ -24,11 +24,13 @@
         .title {
             font-size: $base*3.75;
             font-weight: 300;
+            font-family: $font-bold;
             margin: $base*1.25 0 $base*2.25;
         }
         .place,
         .dist {
             color: $ceruleanblue;
+            font-family: $font-medium;
         }
         .place {
             font-weight: 500;
@@ -48,6 +50,30 @@
             background-color: #070707;
             border: none;
   
+        }
+    }
+}
+
+@media (min-width: 320px) and (max-width:767px) {
+    .exStore {
+        width: 100%;
+        .content {
+            width: 90%;
+            left: 0;
+            top: $base*25;
+            .title {
+                font-size: $base*2.75;
+                text-align: left;
+            }
+            .details {
+                text-align: left;
+                font-size: $base*1.5;
+            }
+            .btn-flat {
+                float: left;
+                overflow: hidden;
+                clear: both;
+            }
         }
     }
 }
