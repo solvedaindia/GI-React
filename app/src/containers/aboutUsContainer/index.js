@@ -142,7 +142,7 @@ else if(event.target.name == 7) {
 }
 
 getImageOnArrowClick = (e) =>{
-  if (e.target.name == 'arrowClick')
+  if (e.target.name == 'arrowClick'){
   if (this.state.img_url == img){
     this.setState({
     img_url: images
@@ -153,7 +153,7 @@ getImageOnArrowClick = (e) =>{
       img_url: img
       })
   }
-}
+}}
 
 
 render() {

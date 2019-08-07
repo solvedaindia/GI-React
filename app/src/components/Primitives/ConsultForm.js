@@ -188,7 +188,7 @@ onDropdownSelected = (e) => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="massage">Massage</label>
+                      <label className="form-labeled" htmlFor="massage">Message</label>
                       <input className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                     </div>
                   </div>
