@@ -20,11 +20,11 @@ class StaticPagesList extends React.Component {
         <Route path="/cookie" component={CookiePolicy} > Cookie Policy</Route>
         <Route path="/inspiration" component={Inspiration} > Inspiration </Route>
         <Route path="/kitchens" component={Kitchens} >Kitchens</Route>
-        <Route path="/Chefkitchen" component={SteelChefKitchen} > Steel Kitchen Chef</Route>
+        <Route path="/chefkitchen" component={SteelChefKitchen} > Steel Kitchen Chef</Route>
         <Route path="/lookbook" component={InspirationDetails} >Inspirational Details</Route>
         <Route path="/wardrobes" component={WardrobesContainer} >Wardrob Container</Route>
-        <Route path="/privacyPolicy" component={PrivacyPolicy} >Privacy Policy </Route>
-        <Route path="/aboutUs" component={AboutUsContainer} > About Us</Route>
+        <Route path="/privacy-policy" component={PrivacyPolicy} >Privacy Policy </Route>
+        <Route path="/about-us" component={AboutUsContainer} > About Us</Route>
         <Route path="/support" component={HelpSupport} > Help &amp; Support</Route>
       </Switch>
     );

@@ -8,7 +8,7 @@ import WardrobesHAll from '../../components/wardrobesComponent/wardrobeHall.js';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
-import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
+import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
 import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
 import ConsultationForm from '../../components/Primitives/ConsultForm'
@@ -50,15 +50,15 @@ render(){
 return (
 <div className="chefKitchen">
   <div className="container">
-    <WardrobeBanner />
-    <div className="text-blocks">
+    <KitchenBanner />
+    {/* <div className="text-blocks">
       <h4 className="bannerTexts">Steel Chef</h4>
       <p className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. </p><br /><br />
       <button className="butt">
         <p className="buttontex">Book A Consultation</p>
       </button>
-    </div>
+    </div> */}
   </div>
   <div className="container">
     <h1 className="Benefits-of-Modular">Benefits of Steel Kitchens</h1>
