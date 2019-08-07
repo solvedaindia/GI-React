@@ -76,12 +76,21 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
         };
         callback(null, signupResponseBody);
       } else {
-        logger.error(
-          `signup error ${JSON.stringify(response.body)}`,
-          'Error',
-          null,
-        );
-        callback(errorutils.handleWCSError(response));
+        logger.debug('Error is Signup');
+        if (response.body.errors && response.body.errors.length > 0) {
+          if (
+            response.body.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+            response.body.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST'
+          ) {
+            if (regexMobileNo.test(params.user_id)) {
+              callback(errorutils.errorlist.user_exists_mobile);
+            } else {
+              callback(errorutils.errorlist.user_exists_email);
+            }
+          } else {
+            callback(errorutils.handleWCSError(response));
+          }
+        }
       }
     },
   );
@@ -501,6 +510,7 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
         state: reqParams.state,
         primary: 'false',
         nickName: addressNickName,
+        country: 'IN',
       },
     ],
     userId: headers.userId,
@@ -580,6 +590,7 @@ module.exports.updateAddress = function updateAddress(req, callback) {
     email1: reqParams.email_id || '',
     city: reqParams.city,
     state: reqParams.state,
+    country: 'IN',
     primary: reqParams.default,
   };
 

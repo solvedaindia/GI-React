@@ -157,131 +157,67 @@ render() {
         <AboutTopMost />
       </div>
       <div className='OurProcessContainer'>
-      <div className="container">
-        <div className='row'>
-          <div className='col-md-12'>
-             <h1 className="headingtitle">Our Process</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">            
-            <img className='processBigImg' src={this.state.img_url} alt="image" />
-            <div>
-              <button name="1" className={`ProcessNumber ${this.state.button1}`} onClick={this.handleclick}>1</button>
-              <button name="2" className={`ProcessNumber ${this.state.button2}`} onClick={this.handleclick}>2</button>
-              <button name="3" className={`ProcessNumber ${this.state.button3}`} onClick={this.handleclick}>3</button>
-              <button name="4" className={`ProcessNumber ${this.state.button4}`} onClick={this.handleclick}>4</button>
-              <button name="5" className={`ProcessNumber ${this.state.button5}`} onClick={this.handleclick}>5</button>
-              <button name="6" className={`ProcessNumber ${this.state.button6}`} onClick={this.handleclick}>6</button>
-              <button name="7" className={`ProcessNumber ${this.state.button7}`} onClick={this.handleclick}>7</button>
-              <button name="7" className='arrowNumber' onClick={this.handleclick}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25">
-    <g fill="none" fill-rule="evenodd" stroke="#ffffff">
-        <path strokeWidth="1.892" d="M27 12.7H.2 27z"/>
-        <path strokeWidth="1.89" d="M16.7 1.4l10.6 11.3L16.7 24"/>
-    </g>
-</svg>
-              </button>
-
-            
-
+        <div className="container">
+          <div className='row'>
+            <div className='col-md-12'>
+              <h1 className="headingtitle">Our Process</h1>
             </div>
           </div>
-          <div className="col-md-6 InitialIdea">
-            <h4><b>initial Ideation</b></h4>
-            <p className="h4">Brainstorming to the final product</p>
-           
-            <p className="Paragraphfont">{this.state.content}
-            </p>
+          <div className="row">
+            <div className="col-md-6">
+              <img className='processBigImg' src={this.state.img_url} alt="image" />
+              <div>
+                <button name="1" className={`ProcessNumber ${this.state.button1}`} onClick={this.handleclick}>1</button>
+                <button name="2" className={`ProcessNumber ${this.state.button2}`} onClick={this.handleclick}>2</button>
+                <button name="3" className={`ProcessNumber ${this.state.button3}`} onClick={this.handleclick}>3</button>
+                <button name="4" className={`ProcessNumber ${this.state.button4}`} onClick={this.handleclick}>4</button>
+                <button name="5" className={`ProcessNumber ${this.state.button5}`} onClick={this.handleclick}>5</button>
+                <button name="6" className={`ProcessNumber ${this.state.button6}`} onClick={this.handleclick}>6</button>
+                <button name="7" className={`ProcessNumber ${this.state.button7}`} onClick={this.handleclick}>7</button>
+                <button name="7" className='arrowNumber' onClick={this.handleclick}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25">
+                    <g fill="none" fill-rule="evenodd" stroke="#ffffff">
+                      <path strokeWidth="1.892" d="M27 12.7H.2 27z" />
+                      <path strokeWidth="1.89" d="M16.7 1.4l10.6 11.3L16.7 24" />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div className="col-md-6 InitialIdea">
+              <h4><b>initial Ideation</b></h4>
+              <p className="h4">Brainstorming to the final product</p>
+ <p className="Paragraphfont">{this.state.content}
+              </p>
+            </div>
           </div>
-
         </div>
-      </div>
       </div>
       <div className='greenContainer'>
         <div className='container'>
-        <h1 className='greenTitle'>Green Initiatives</h1>
+          <h1 className='greenTitle'>Green Initiatives</h1>
         </div>
-        <GreenInitiatives/>
-      
+        <GreenInitiatives />
       </div>
-
       <div className="CareerContainer">
         <div className="container">
           <div className='row'>
-          <div className="col-md-12">
-          <div container>
-            <div id="cat">
-              <h1 className="careerHeading">Careers</h1>
-              <p className="paragraphCareer">your information is secure and encrypted, consectetur<br/>
-                adipisicing elit,sed do eiumsod tempor incididunt ut<br/>
-                labore et dalore magna aliqion anim ad minim.
-              </p>
-              <button className="CareerButton">See More</button>
-            </div>
-          </div>
-        </div>
-          </div>
-        </div>
-        
-      </div>
-      {/* <div className="mediaPressSection">
-      <div className="container">
-        <h3 className='MediaTopHead'>Media/Press</h3>
-        <h5>Latest News</h5>
-        <hr />
-        <div className="row">
-          <div className="col-md-6 MotivationBorder">
-            <img className="extrinsiveBigImg" src={pic} />
-            <p><b>Impact of Extrinsic Motivation on Intrinsic Motivation</b></p>
-            <div>
-              <span className="ColorDate">22 oct 2018</span>
-              <span> | by john jacobs</span>
-            </div>
-          </div>
-          <div className="col-md-6">
-          <a href='https://mediatech914.wordpress.com/2019/01/04/%EF%BB%BFindias-millennials-driving-home-furnishing-democracy/'>
-          <div className="row">
-              <div className="col-md-4 paddingBottom"><img className="extrinsiveSmallImgs" src={pic} /></div>
-              <div className="col-md-8">
-                <p className="Paragraphfont"><b>﻿India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
-                <div>
-                  <span className="ColorDate">22 oct 2018</span>
-                  <span> | by john jacobs</span></div>
-              </div>
-            </div>
-            </a>
-           <a href='https://indiannewz.wordpress.com/2019/01/04/indias-millennials-driving-home-furnishing-democracy-according-to-interio-index-survey-from-godrej-interio/'>
-            <div className="row">
-              <div className="col-md-4 paddingBottom"><img className="extrinsiveSmallImgs" src={image} /></div>
-              <div className="col-md-8">
-                <p className="Paragraphfont"><b>India’s Millennials Driving ‘Home Furnishing Democracy’</b></p>
-                <div>
-                  <span className="ColorDate">22 oct 2018</span>
-                  <span> | by john jacobs</span>
+            <div className="col-md-12">
+              <div container>
+                <div id="cat">
+                  <h1 className="careerHeading">Careers</h1>
+                  <p className="paragraphCareer">your information is secure and encrypted, consectetur<br />
+                    adipisicing elit,sed do eiumsod tempor incididunt ut<br />
+                    labore et dalore magna aliqion anim ad minim.
+                  </p>
+                  <button className="CareerButton">See More</button>
                 </div>
               </div>
             </div>
-            </a>
-            <a href='https://www.deccanchronicle.com/lifestyle/books-and-art/070119/millennial-couples-become-torchbearers-to-spur-societal-transformation.html'>
-            <div className="row">
-              <div className="col-md-4 paddingBottom">
-                <img className="extrinsiveSmallImgs" src={pics} /></div>
-              <div className="col-md-8">
-                <p className="Paragraphfont">
-                  <b>Millennial couples become torchbearers to spur societal transformation  </b></p>
-                <div>
-                  <span className="ColorDate">22 oct 2018</span>
-                  <span> | by john jacobs</span>
-                </div>
-              </div>
-            </div>
-            </a>
           </div>
         </div>
       </div>
-      </div> */}
-      <MediaPress/>
+      <MediaPress />
     </div>
     );
     }

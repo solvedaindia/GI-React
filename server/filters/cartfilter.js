@@ -100,6 +100,7 @@ function getOrderSummary(cartData) {
     });
   }
   orderSummary.productDiscount = 0;
+  orderSummary.orderDiscount = 0;
   if (cartData.adjustment && cartData.adjustment.length > 0) {
     cartData.adjustment.forEach(adjustment => {
       if (adjustment.displayLevel === 'OrderItem') {

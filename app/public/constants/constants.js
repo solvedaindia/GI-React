@@ -3,7 +3,8 @@ import { validateEmptyObject } from '../../src/utils/validationManager';
 export const secureHttp = 'https';
 export const port1 = '';
 export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
-export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+// export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+export const imgHost = '192.168.0.57';
 export const host = process.env.envKeys.WEBSERVER_IP || window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -109,6 +110,10 @@ export const kitchenHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI
 export const whatGoesKitchenAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_MODULAR_KITCHEN_SLIDER `;
 /*  types of Wardrobes Slider */
 export const typesOfWardrobesAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_TYPES_OF_MODULAR_WARDROBES `;
+/*  inspiration banner */
+export const inspirationBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_INSPIRATION_LOOKBOOK_BANNER `;
+/*  browse by lookbook theme carousel */
+export const lookbookThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_THEME`;
 /* HomePage Track Order */
 export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/current`;
 /* Featured Category */
