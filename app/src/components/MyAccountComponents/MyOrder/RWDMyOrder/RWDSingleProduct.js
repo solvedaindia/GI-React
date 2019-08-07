@@ -21,7 +21,7 @@ class RWDSingleProduct extends React.Component {
   }
 
   trackOrderFromViewOrder(data) {
-    this.props.myOrderCallbackPro('MultiProduct', data, null)
+    this.props.viewOrderTrackCallbackPro(data)
   }
 
   filterDeliveryInstallationTags() {
@@ -64,11 +64,11 @@ class RWDSingleProduct extends React.Component {
         </div>
         <div className='clearfix'></div>
         <div className='orderStatus'>
-          {!this.props.isMultiTrackPro ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' /> }
+          {this.props.isFromViewOrder ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' /> }
         </div>
         <div className='clearfix'/>
         <div className='orderBtn'>
-          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 1 ? <button /*onClick={this.trackOrderFromViewOrder(productData)}*/>Track Order</button> : this.props.isFromViewOrder ? null : <button onClick={this.showOrderDetail.bind(this)}>View Order Details</button> : null}
+          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 1 ? <button onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button> : this.props.isFromViewOrder ? null : <button onClick={this.showOrderDetail.bind(this)}>View Order Details</button> : null}
         </div>  
       </>
     );
