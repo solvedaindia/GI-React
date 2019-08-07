@@ -8,6 +8,8 @@ import ReadMore from '../../components/GlobalComponents/readMore';
 import  '../../../public/styles/static-pages/inspiration.scss'
 import InsCrousel from '../../components/Primitives/crousel'
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner'
+import GodrejSolutionEspot from '../../components/InspirationComp/godrejSolution'
+
 import SummerData from '../../components/InspirationComp/InspEspot';
 import { Link } from 'react-router-dom'
 
@@ -27,19 +29,19 @@ export class Inspiration extends React.Component {
       <div className="Inspiration">
         <div className="inpspirationBanner">
           <InspirationBanner />
-          <div className="container1">
+          {/* <div className="container1">
             <div className="inspBannertext">
               <h2 className="heading"><strong>Lookbook </strong>of the<br /> year 2018</h2>
               <button className="btn-book">View</button>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="lookcrouse">
           <InsCrousel />
         </div>
 		<SummerData/>
           <div className="uuscontainer">
-          <div className="container">
+          {/* <div className="container">
 				<img className="bigSofa" src={require('../../../public/images/inspi9.jpg')}
 				alt="rectangle" />
 				<div className="text-block">
@@ -50,7 +52,8 @@ export class Inspiration extends React.Component {
 				home you've always wanted</p2> <br />
 					<button className="seeMore">Know More</button>
 				</div>
-            </div>
+            </div> */}
+            <GodrejSolutionEspot/>
           </div>
       </div>
     );
