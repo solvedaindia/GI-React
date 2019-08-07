@@ -65,7 +65,7 @@ class ProductOrder extends React.Component {
                   <span className="heading">Quantity</span>
                   <span className="textval">{productData.quantity}</span>
                 </div>
-                {productData.shipmentData.length > 1 ? null :
+                {productData.shipmentData && productData.shipmentData.length > 1 ? null :
                   <div className="delivery quantity">
                     <span className="heading">{this.state.dsNameTag}</span>
                     <span className="textval">{this.state.dsDateTag}</span>
@@ -77,13 +77,13 @@ class ProductOrder extends React.Component {
 
           <div className="orderbtn">
             {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
-            {productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            {productData.shipmentData && productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
             </button> : null}
 
           </div>
           <div className='clearfix'></div>
-          {productData.shipmentData.length === 1 ?
+          { productData.shipmentData &&productData.shipmentData.length === 1 ?
             <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap'/>
             : null}
         </div>
