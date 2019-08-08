@@ -380,9 +380,6 @@
         }
     }
     .shippingCharge{
-        font-size: 12px;
-        font-family: $font-regular;
-        margin: 0 0 5px 0;
         .bold{
             font-family: $font-bold;
         }
@@ -522,12 +519,7 @@
                     padding: 5px 0 0 0;
                 }
             }
-            .soldbyDealers {
-                font-size: 10px;
-                padding: 5px 0px 5px 19px;
-                background: $greybg;
-                color:$greyish;                
-            }
+
             .pincodeNotServiceable {
                 font-size: 10px;
                 padding: 5px 0px 5px 19px;
@@ -640,15 +632,13 @@
 
             .attributeName{
                 font-size: 10px;
-                font-family: $font-medium;
-                font-weight: bold;
+                font-family: $font-medium;                
                 text-transform: uppercase;
                 color:$ashGrey;
   
               }
               .attributeVal{
-                  font-family: $font-medium;
-                  font-weight: bold;
+                  font-family: $font-medium;                  
               }
         }
     }
@@ -1579,6 +1569,17 @@
                 .pincode{
                     width:57%;
                     float:left;
+                    .shippingCharge{
+                        font-size: 12px;
+                        font-family: $font-regular;
+                        margin: 0 0 5px 0;
+                    }
+                    .soldbyDealers {
+                        font-size: 10px;
+                        padding: 5px 0px 5px 19px;
+                        background: $greybg;
+                        color:$greyish;                
+                    }
                 }
                 .addCart{
                     margin:23px 0 0 0;
@@ -1841,8 +1842,9 @@
             font-size: 12px;
             .accessories-offer{
                background: #f7f8f8;
-               margin:10px 0;
+               margin:30px 0px 10px 0;
                padding:12px;
+               clear: both;
                .offerbg{
                 padding: 1px;
                 width: 20px;
@@ -1931,6 +1933,12 @@
                 clear: both;
                 max-width:450px;
                 float:left;
+                .soldbyDealers, .shippingCharge {
+                    font-size: 10px;
+                    padding: 5px 0px 5px 19px;
+                    background: $greybg;
+                    color:$greyish;                
+                }
             }
                         
             .product-price-detail{
