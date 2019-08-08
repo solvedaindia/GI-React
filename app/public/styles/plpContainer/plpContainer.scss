@@ -17,9 +17,20 @@ $imgfullwid: 100%;
 }
 
 section.tablecarousel {
-  padding: 40px 0 40px 0;
+  padding: 0px 0 0px 0;
   .slick-slider {
     margin: 0 -15px;
+    .slick-list{
+      .slick-track{
+        margin-bottom: 40px;
+        &:empty {
+          display: none;
+       }
+      }
+    }
+    .slick-dots{
+        bottom:5px;
+    }
   }
   .headingText {
     .heading {
