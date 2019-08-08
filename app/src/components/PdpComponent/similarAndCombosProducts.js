@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import {
   imagePrefix,
 } from '../../../public/constants/constants';
+import { formatPrice } from '../../utils/utilityManager';
 
 const prevArrowImg = (
   <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} />
@@ -46,18 +47,13 @@ class SimilarCombosProducts extends React.Component {
               {data.offerPrice &&
                 <span className="discount-price">
                   &#8377;
-                  {
-                  parseInt(data.offerPrice)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  {formatPrice(data.offerPrice)}
                 </span>
               }
                 {data.offerPrice < data.actualPrice && (
                   <span className="priceno-discount">
                     &#8377;
-                    {parseInt(data.actualPrice)
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    {formatPrice(data.actualPrice)}
                   </span>
                 )}
               </p>

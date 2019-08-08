@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatPrice } from '../../utils/utilityManager';
 
 const price = props => {
   let priceId = 'priceId';
@@ -8,20 +9,14 @@ const price = props => {
   return(<div className="price" id={priceId}>
     {props.priceData.offerPrice >= 0 && props.priceData.offerPrice && (    
         <h2 className="offerprice text">&#8377;
-        {
-        parseInt(props.priceData.offerPrice)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          {formatPrice(props.priceData.offerPrice)}
         </h2>
     )}
       
     {props.priceData.offerPrice < props.priceData.actualPrice && (      
         <h2 className="actualprice text">&#8377;
-        {parseInt(props.priceData.actualPrice)
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          {formatPrice(props.priceData.actualPrice)}
         </h2>
-     
     )}
   </div>);
 };

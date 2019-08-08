@@ -243,3 +243,7 @@ export function updateWidgetData(data, obj) {
     return widgetdata;
 
 }
+
+export function formatPrice(priceValue) {
+    return parseInt(priceValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}   
