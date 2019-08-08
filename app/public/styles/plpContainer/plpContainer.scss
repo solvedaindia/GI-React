@@ -107,6 +107,7 @@ section.tablecarousel {
       .bold {
         font-family: $font-bold;
         font-size: $base * 2;
+        min-height: 16px;
       }
       .start_price {
         font-size: $base * 1.375;

@@ -1,6 +1,7 @@
 const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 const imagefilter = require('./imagefilter');
 
+/** Function for Kit Data Summary */
 module.exports.getKitSummary = getKitSummary;
 function getKitSummary(kitData, promotions) {
   const kitSummary = {};
@@ -58,42 +59,27 @@ function getKitSummary(kitData, promotions) {
   return kitSummary;
 }
 
-// module.exports.getSwatchAttibute = getSwatchAttibute;
-// function getSwatchAttibute(kitData) {
-//   const swatchAttributes = {};
-//   swatchAttributes.uniqueId = kitData.uniqueID;
-//   swatchAttributes.name = '';
-//   swatchAttributes.value = '';
-//   swatchAttributes.imagePath = '';
-//   if (kitData.components && kitData.components.length > 0) {
-//     kitData.components.forEach(comp => {
-//       if (comp.attributes && comp.attributes.length > 0) {
-//         swatchAttributes.name = comp.attributes[0].values[0].value;
-//         swatchAttributes.value = comp.attributes[0].values[0].image1;
-//         swatchAttributes.imagePath = comp.attributes[0].values[0].image1path;
-//       }
-//     });
-//   }
-//   return swatchAttributes;
-// }
-
+/** Function to return Product Attributes */
 module.exports.getProductAttributes = getProductAttributes;
 function getProductAttributes(attributes) {
   const productAttribute = {
     ribbonText: '',
     discount: '',
   };
-  attributes.forEach(attribute => {
-    if (attribute.identifier === 'percentOff') {
-      productAttribute.discount = attribute.values[0].value;
-    }
-    if (attribute.identifier === 'Ribbon') {
-      productAttribute.ribbonText = attribute.values[0].value;
-    }
-  });
+  if (attributes && attributes.length > 0) {
+    attributes.forEach(attribute => {
+      if (attribute.identifier === 'percentOff') {
+        productAttribute.discount = attribute.values[0].value;
+      }
+      if (attribute.identifier === 'Ribbon') {
+        productAttribute.ribbonText = attribute.values[0].value;
+      }
+    });
+  }
   return productAttribute;
 }
 
+/** Function to return swatch attributes from kit components */
 module.exports.getSwatchAttibute = getSwatchAttibute;
 function getSwatchAttibute(kitData) {
   const attributeJson = {
@@ -129,46 +115,47 @@ function getSwatchAttibute(kitData) {
   return attributeJson;
 }
 
-module.exports.getSwatchAttibutesCopy = getSwatchAttibutesCopy;
-function getSwatchAttibutesCopy(bodyData) {
-  const swatchAttributes = [];
-  if (bodyData.components && bodyData.components.length > 0) {
-    bodyData.components.forEach(components => {
-      if (components.attributes && components.attributes.length > 0) {
-        components.attributes.forEach(attr => {
-          if (attr.usage === 'Defining') {
-            swatchAttributes.push(attr);
-          }
-        });
-      }
-    });
-  }
-  return swatchAttributes;
-}
-
+/** Fubction for filter swatch attributes on the basis of name */
 module.exports.filterSwatchAtrributes = filterSwatchAtrributes;
 function filterSwatchAtrributes(attributes) {
   const swatchAttributes = [];
   if (attributes && attributes.length > 0) {
     attributes.forEach(attribute => {
-      if (swatchAttributes.length > 0) {
-        let temp = false;
-        for (let index = 0; index < swatchAttributes.length; index += 1) {
-          const attr = swatchAttributes[index];
-          if (attr.name === attribute.name) {
+      if (attribute.values.length > 0) {
+        if (swatchAttributes.length > 0) {
+          let temp = false;
+          for (let index = 0; index < swatchAttributes.length; index += 1) {
+            const attr = swatchAttributes[index];
+            if (attr.name === attribute.name) {
+              const attrJson = {};
+              attrJson.name = attribute.values[0].name.trim();
+              if (attribute.values[0].colorCode) {
+                attrJson.colorCode = attribute.values[0].colorCode;
+              } else {
+                attrJson.facetImage = attribute.values[0].facetImage;
+              }
+              attr.values.push(attrJson);
+              temp = true;
+              break;
+            }
+          }
+          if (temp === false) {
+            const attributeJson = {
+              name: '',
+              values: [],
+            };
+            attributeJson.name = attribute.name.trim();
             const attrJson = {};
-            attrJson.name = attribute.values[0].name.trim();
+            attrJson.name = attribute.values[0].name;
             if (attribute.values[0].colorCode) {
               attrJson.colorCode = attribute.values[0].colorCode;
             } else {
               attrJson.facetImage = attribute.values[0].facetImage;
             }
-            attr.values.push(attrJson);
-            temp = true;
-            break;
+            attributeJson.values.push(attrJson);
+            swatchAttributes.push(attributeJson);
           }
-        }
-        if (temp === false) {
+        } else {
           const attributeJson = {
             name: '',
             values: [],
@@ -184,23 +171,95 @@ function filterSwatchAtrributes(attributes) {
           attributeJson.values.push(attrJson);
           swatchAttributes.push(attributeJson);
         }
-      } else {
-        const attributeJson = {
-          name: '',
-          values: [],
-        };
-        attributeJson.name = attribute.name.trim();
-        const attrJson = {};
-        attrJson.name = attribute.values[0].name;
-        if (attribute.values[0].colorCode) {
-          attrJson.colorCode = attribute.values[0].colorCode;
-        } else {
-          attrJson.facetImage = attribute.values[0].facetImage;
-        }
-        attributeJson.values.push(attrJson);
-        swatchAttributes.push(attributeJson);
       }
     });
   }
   return swatchAttributes;
+}
+
+/** Function to return swatch attributes for kit comparison */
+module.exports.swatchAttributesForCompare = swatchAttributesForCompare;
+function swatchAttributesForCompare(kitData) {
+  const attributeJson = {
+    skuId: '',
+    name: '',
+    colorCode: '',
+  };
+  attributeJson.skuId = kitData.uniqueID;
+  if (kitData.components && kitData.components.length > 0) {
+    // iterate kit components
+    kitData.components.forEach(components => {
+      if (components.attributes && components.attributes.length > 0) {
+        // iterate kit components attributes
+        components.attributes.forEach(attr => {
+          // iterate attributes values
+          if (attr.usage === 'Defining' && attr.identifier === 'sc') {
+            attr.values.forEach(attributeValue => {
+              const match = rbgRegex.exec(attributeValue.image1);
+              attributeJson.name = attributeValue.value;
+              if (match !== null) {
+                attributeJson.colorCode = attributeValue.image1 || '';
+              } else {
+                attributeJson.colorCode =
+                  imagefilter.getImagePath(attributeValue.image1path) || '';
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+  return attributeJson;
+}
+
+/** Function to return kit sumaary for kit comparison */
+module.exports.kitSummaryForCompare = kitSummaryForCompare;
+function kitSummaryForCompare(kitData) {
+  const kitSummary = {
+    uniqueID: '',
+    partNumber: '',
+    shortDescription: '',
+    name: '',
+    swatch: [],
+    price: '',
+    thumbnail: '',
+    fullImage: '',
+    keyword: '',
+    weight: '',
+    height: '',
+    depth: '',
+  };
+  if (kitData) {
+    kitSummary.uniqueID = kitData.uniqueID;
+    kitSummary.partNumber = kitData.partNumber;
+    kitSummary.shortDescription = kitData.shortDescription;
+    kitSummary.name = kitData.name;
+    kitSummary.swatch.push(swatchAttributesForCompare(kitData));
+    kitSummary.price = kitData.price;
+    kitSummary.thumbnail = kitData.thumbnail;
+    kitSummary.fullImage = kitData.fullImage;
+    kitSummary.keyword = kitData.keyword;
+  }
+  return kitSummary;
+}
+
+/** Function to return comparable attributes for kit comparison */
+module.exports.getComparableAttributes = getComparableAttributes;
+function getComparableAttributes(kitData) {
+  const comparable = [];
+  if (kitData.attributes && kitData.attributes.length > 0) {
+    kitData.attributes.forEach(attribute => {
+      if (
+        attribute.comparable === true &&
+        attribute.associatedKeyword === 'Specifications'
+      ) {
+        const att = {};
+        att.name = attribute.name;
+        att.uniqueID = attribute.uniqueID;
+        att.value = attribute.values[0].value;
+        comparable.push(att);
+      }
+    });
+  }
+  return comparable;
 }

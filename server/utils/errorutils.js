@@ -49,6 +49,18 @@ const errorlist = {
     error_key: 'wcs_invalid_response',
     error_message: 'Invalid Response From WCS.',
   },
+  user_exists_mobile: {
+    status_code: 400,
+    error_key: 'user_exists',
+    error_message:
+      'Mobile Number is already registered with us. Please use forgot password link to reset your password',
+  },
+  user_exists_email: {
+    status_code: 400,
+    error_key: 'user_exists',
+    error_message:
+      'Email entered is already registered with us .Please use forgot password link to reset password ',
+  },
   user_exists: {
     status_code: 400,
     error_key: 'user_exists',
@@ -168,7 +180,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT' ||
         errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_ORDER_UNLOCKED' ||
-        errBody.errors[0].errorKey === 'ERROR_EMAIL_INVALID'
+        errBody.errors[0].errorKey === 'ERROR_EMAIL_INVALID' ||
+        errBody.errors[0].errorKey === '_ERR_UBF_USER_AUTHORITY'
       ) {
         return {
           status_code: 400,

@@ -4,6 +4,7 @@ const constants = require('./constants');
 const headerutil = require('./headerutil');
 const originMethod = 'GET';
 const errorUtils = require('./errorutils');
+const orderFilter = require('../filters/orderfilter');
 const logger = require('./logger.js');
 
 /**
@@ -197,7 +198,9 @@ function findInventory(headers, reqParams, callback) {
           ) {
             inventoryResponse.inventoryStatus = 'available';
             inventoryResponse.deliveryDate =
-              response.body.InventoryAvailability[0].availabilityDateTime || '';
+              orderFilter.getFormattedDate(
+                response.body.InventoryAvailability[0].availabilityDateTime,
+              ) || '';
           }
         }
         callback(null, inventoryResponse);
@@ -262,10 +265,14 @@ function getShippingCharge(headers, reqParams, callback) {
     null,
     null,
     response => {
+      const resJSON = { shippingCharge: '' };
       if (response.status === 200) {
-        callback(null, response.body);
+        if (response.body.ShipCharge) {
+          resJSON.shippingCharge = response.body.ShipCharge;
+        }
+        callback(null, resJSON);
       } else {
-        callback(errorUtils.handleWCSError(response));
+        callback(null, resJSON);
       }
     },
   );
@@ -283,10 +290,8 @@ function getExperienceStore(headers, reqParams, callback) {
   const reqHeader = headerutil.getWCSHeaders(headers);
   const originUrl = constants.experienceStore
     .replace('{{storeId}}', headers.storeId)
-    .replace('{{pincode}}', 400061)
-    .replace('{{partNumber}}', 'StoreItem1');
-    // .replace('{{pincode}}', reqParams.pincode)
-    // .replace('{{partNumber}}', reqParams.partNumber);
+    .replace('{{pincode}}', reqParams.pincode)
+    .replace('{{partNumber}}', reqParams.partNumber);
 
   origin.getResponse(
     'GET',

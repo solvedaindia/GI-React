@@ -21,7 +21,7 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
         eachFacetValue.facetName = 'Price';
       }
       if (facet.name === 'percentOff') {
-        eachFacetValue.facetName = 'Discount';
+        eachFacetValue.facetName = 'Offer';
       }
 
       if (facet.entry && facet.entry.length > 0) {

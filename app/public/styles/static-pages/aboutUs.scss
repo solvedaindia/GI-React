@@ -1,0 +1,800 @@
+@import '../variable';
+@import '../base';
+
+.About-Us {
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  .OurProcessContainer{
+    padding: 80px 0 0 0;
+    .headingtitle{
+      font-size: 30px;
+      line-height: 30px;
+      font-family: $font-medium;
+      margin:0;
+      padding: 0 0 43px 0;
+    }
+  }
+  .CareerContainer{
+    padding: 80px 0 0 0;
+    .careerHeading{     
+      font-family: $font-medium;
+      font-size: 50px;
+      line-height: 50px;
+      padding: 0px 0 0 0;
+      text-align: center;
+      color: white;
+      margin:0;
+    }
+    .paragraphCareer{
+      font-size: 18px;
+      font-family: $font-medium;
+    }
+  }
+  .greenContainer{
+    padding: 80px 0 0 0;
+    .slick-slider{
+      .slick-list{
+        max-height: 270px;
+      }
+    }
+
+    .greenTitle{
+      font-family: $font-medium;;
+      font-size:30px;
+      font-weight:500;
+      font-style:normal;
+      line-height:normal;
+      color:#000;
+      margin:0;
+      padding: 0 0 57px 0;
+    }
+    
+    .greenImage{
+      padding: 0px 0 0 0;
+      width:100%;
+      // height: 300px;
+    }
+    .ULcontent{
+      padding: 25px 0 18px 0;
+      margin:0;
+      color: #000000;
+      font-family: $font-medium;
+      font-size:20px;
+      line-height: 20px;
+      line-height:20px;
+      text-align: left;
+
+    }
+    .ULparagraph{
+      color: #000000;
+      font-family: $font-regular;
+      font-size:14px;
+      line-height:20px;
+     
+
+    }
+    .slick-initialized {
+      .slick-slide{
+        background: #f2f5f7;
+        margin: 11px;
+        padding: 50px 50px 50px 52px;
+      }
+    }
+  }
+  
+  .mediaPressSection{
+    padding: 80px 0 80px 0 ;
+    .paddingBottom {
+      padding-bottom: 20px;
+  }
+    .Paragraphfont {
+      font-family: $font-regular;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.43;
+      color: #000000;
+    }
+    .extrinsiveSmallImgs {
+      height: 104px;
+     
+  }
+    .ColorDate {
+      color: #036cc5;
+  }
+    .extrinsiveBigImg {
+      width:100%;
+  }
+    .MotivationBorder {
+      border-right: 3px solid black;
+  }
+    .MediaTopHead{
+      padding:0;
+      margin:0;
+      font-family: $font-medium;
+       font-size: 30px;
+
+      text-align: left;
+      color: #000;
+    }
+  }
+  
+.circle{
+    background: grey;
+    border-radius: 50px;
+    height: auto;
+    width: 40px;
+    margin: 20px;
+}
+
+.InitialIdea {
+    margin-top: 83px;
+
+}
+
+.h4 {
+    color: grey;
+}
+
+
+
+.processBigImg {  
+    width: 100%;
+    height: 400px;
+}
+
+
+.link {
+
+  padding: 25px 0 0 0;
+    text-align: center;
+    // margin-top: 100px;
+    color: white;
+}
+
+.paragraphCareer {
+  // width:475px;
+    color: white;
+    font-size: 18px;
+padding:19px 0 0 0;
+    // margin-left: 330px;
+    // margin-right: 305px;
+    text-align: center;
+    
+}
+
+#cat {
+    background-image: url("../../images/join-bg.png");
+    height: 370px;
+    width: 100%;
+    text-align: center;
+    padding: 73px;
+}
+.CareerButton{
+  margin: 25px 0 0 0;
+  color: $black;
+  background-color: $colorwhite;
+  padding: 13px 45px;
+  border: none;
+  font-size: 14px;
+  font-family: $font-medium;
+}
+
+
+
+
+
+.h3 {
+    padding-bottom: 20px;
+}
+#hr{
+    margin-right: 136px !important;
+}
+
+
+
+
+
+
+
+.ProcessNumber{
+    margin: 24px 54px 0 0;
+    font-size: 30px;  
+    line-height: 30px;
+    border: none;
+    background:$colorwhite;
+    color:$lightblueGrey;
+    font-family: $font-medium;
+    &:focus{
+      outline: none;
+    }
+}
+.arrowNumber{
+
+  font-size: 30px;  
+  line-height: 40px;
+  border: none;;
+  color:#000;
+  &:focus{
+    outline: none;
+  }
+}
+.ProcessNumber.active{
+  color:$black;
+}
+
+.jumbo {
+    background: rgb(241, 236, 236);
+    height: 300px;
+    width: 1000px;
+    padding-left: 40px;
+    padding-right: 60px;
+}
+.crousar {
+    width: 172px;
+    height: 205px;
+    margin-top: 50px;
+    margin-left: 70px;
+    border-radius: 40px;
+    background: rgb(110, 179, 8)
+}
+
+.crousal {
+    padding-top: 70px;
+}
+
+.crousarp {
+    width: 190px;
+    color: white;
+    font-size: 10px;
+}
+
+.crousarh{
+    color: white;
+    text-decoration-line: underline;
+}
+
+.top{
+    padding-top: 70px;
+}
+  
+  .abouts-Us {
+    // width: 129px;
+    height: 36px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  .GodrejInterio {
+    width: 751px;
+    height: 260px;
+    font-family: CeraGodrejInterio;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  
+   
+    .Post-title {
+      width: 60px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.48;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Post-title-Copy {
+      width: 72px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.48;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Post-title-Copy-2 {
+      width: 65px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.48;
+      letter-spacing: normal;
+      color: #000000;
+    }
+  
+  
+    .Path-4 {
+      width: 27.5px;
+      height: 18.6px;
+      background-color: var(--light-blue-grey);
+    }
+    .Header-Copy-5 {
+    width: 223px;
+    height: 49px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  .greenguard-certification {
+    width: 263px;
+    height: 263px;
+  }
+  .Name {
+    width: 371px;
+    height: 39px;
+    font-family: CeraGodrejInterio;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    color: #000000;
+  }
+
+  .Biography {
+    width: 556px;
+    height: 186px;
+    font-family: CeraGodrejInterio;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  
+  .Position-Copy {
+    width: 18px;@import '../variable';
+    @import '../base';
+    
+   
+   
+      .Oval {
+        width: 89px;
+        height: 89px;
+        background-color: var(--ice-blue);
+      }
+      .Post-title {
+        width: 60px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+      .Post-title-Copy {
+        width: 72px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+      .Post-title-Copy-2 {
+        width: 65px;
+        height: 31px;
+        font-family: CeraGodrejInterio;
+        font-size: 21px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.48;
+        letter-spacing: normal;
+        color: #000000;
+      }
+    
+      
+    
+      .Path-4 {
+        width: 27.5px;
+        height: 18.6px;
+        background-color: var(--light-blue-grey);
+      }
+      .Header-Copy-5 {
+      width: 223px;
+      height: 49px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .greenguard-certification {
+      width: 263px;
+      height: 263px;
+    }
+    .Name {
+      width: 371px;
+      height: 39px;
+      font-family: CeraGodrejInterio;
+      font-size: 28px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.36;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Position {
+      width: 371px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color: var(--battleship-grey);
+    }
+    .Biography {
+      width: 556px;
+      height: 186px;
+      font-family: CeraGodrejInterio;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    
+    .Position-Copy {
+      width: 18px;
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      color: #000000;
+    }
+   
+    .Header-Copy-4 {
+      width: 231px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Rectangle-Copy-3 {
+      width: 149px;
+      height: 354px;
+      background-color: #f2f5f7
+    }
+    .Rectangle {
+      width: 1040px;
+      height: 354px;
+      background-color: #f2f5f7
+    }
+    .greenguard-certification {
+      width: 263px;
+      height: 263px;
+    }
+    .title {
+      width: 417.3px;
+      height: 28px;
+      font-family: CeraGodrejInterio;
+      font-size: 20px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.4;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    
+   
+    .headerIn {
+      width: 542px;
+      height: 64px;
+      font-family: CeraGodrejInterio;
+      font-size: 50px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.28;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    .Your-information-is {
+      width: 475px;
+      height: 72px;
+      font-family: CeraGodrejInterio;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    .Rectangle1 {
+      width: 158px;
+      height: 37.8px;
+      background-color: #ffffff;
+    }
+    .HeaderCopy33 {
+      width: 179px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+    }
+    .Wed-love-to-hear-from-you-Copys {
+      width: 121px;
+      height: 30px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color:black;
+    }
+   
+    .michael-d {
+      width: 555px;
+      height: 370px;
+    }
+    
+    height: 31px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  .Position-Copy-2 {
+    width: 18px;
+    height: 31px;
+    font-family: CeraGodrejInterio;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: var(--light-blue-grey);
+  }
+  
+  .Rectangle-Copy-3 {
+    width: 149px;
+    height: 354px;
+    background-color: #f2f5f7
+  }
+  .Rectangle {
+    width: 1040px;
+    height: 354px;
+    background-color: #f2f5f7
+  }
+  .greenguard-certification {
+    width: 263px;
+    height: 263px;
+  }
+  title {
+    width: 417.3px;
+    height: 28px;
+    font-family: CeraGodrejInterio;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: #000000;
+  }
+ 
+  .Mask {
+    // width: 1141px;
+    height: 369px;
+    background-color: rgba(1, 123, 107, 0.73);
+  }
+  .headerIn {
+    width: 542px;
+    height: 64px;
+    font-family: CeraGodrejInterio;
+    font-size: 50px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.28;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  
+  
+  
+  .hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+  .rawpixel-983726-unsplash {
+    width: 556px;
+    height: 371px;
+  }
+ 
+  
+  .michaelSplash {
+    width: 456px;
+    height: 271px;
+  }
+  .Post-title {
+    width: 555px;
+    height: 31px;
+    font-family: CeraGodrejInterio;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.72;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  /*.....privacy and policy....*/
+  .privacyPol {
+    width: 1440px;
+    height: 2738px;
+    background-color: #ffffff;
+    .privpol {
+      width: 529px;
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #000000;
+      text-align: center;
+    }
+    .Position {
+      height: 31px;
+      font-family: CeraGodrejInterio;
+      font-size: 21px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      color: black;
+    }
+  }
+  
+ 
+ 
+  
+  /*.....survice & support.....*/
+  
+  
+
+  .aboutUstextContainer{
+    padding:61px 0 0 0;
+    .headingtitle{
+      padding: 0 0 35px 0;
+
+    font-family: $font-medium;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    color: #000000;
+    margin:0;
+    }
+    .Paragraph {
+          font-family: $font-regular;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          line-height: 1.43;
+          color: #000000;
+        }
+
+.visionRightbox{
+  margin:65px 0 0 0;
+        .AboutUsContent{
+          margin:0 0 27px 0;
+    .iconsBackground{
+      width:20%;
+      max-width: 89px;
+      padding: 20px;
+      background: #f2f5f7;
+      border-radius: 100%;
+      .abouticonimg{
+        width:100%;
+      }
+    }
+    .ListBoxtext{
+      width:80%;
+      padding:0 0 0 30px;
+      .heading{
+        margin:0;
+        font-size: 21px;
+        padding:0;
+        font-family: $font-medium;
+      }
+      .text{
+        color:#77787a;
+        font-size: 14px;
+        line-height: 14px;
+        font-family: $font-regular;
+        
+      }
+    }
+
+    .iconsBackground,.ListBoxtext{
+      display: block;
+      float:left;
+    }
+  }
+}
+
+  }
+ 
+}
+
