@@ -272,6 +272,14 @@
         font-size: 12px;
       }
     }
+    .bestSeller{
+      .title{
+        color: $colorbluedull;
+        margin-bottom: 10px;
+        font-size: $base*2.25;
+        padding-left:10px;
+      }
+    }
   }
   .shaire-headerwrp{
     display: none;
