@@ -16,6 +16,7 @@ import NotifyMe from '../notifyMe';
 import appCookie from '../../../utils/cookie';
 import ExperienceStore from '../experienceStore';
 import { isMobile } from '../../../utils/utilityManager';
+import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 
@@ -48,9 +49,10 @@ class addToCartComponent extends React.Component {
       }
       return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
+
     if (this.deliveryTime === '') {
       if (props.deliveryDateAndTime) {
-        this.deliveryTime = props.deliveryDateAndTime;
+        this.deliveryTime = 'Delivery Between: '+props.deliveryDateAndTime;
       }
     }
     return <div className="soldbyDealers">{this.deliveryTime}</div>;
@@ -254,6 +256,12 @@ class addToCartComponent extends React.Component {
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.quantity)}
           {this.quantityErrorMessage && <div>Quantity is not available</div>}
         </div>
+        <ProductInfo
+                    productData={this.props.skuData}
+                    defAttributes={this.props.defAttributes}
+										pinCodeData={this.props.pinCodeData}
+										espotPromo={this.props.espotPromo}
+                  />
         {!this.props.sticky && !this.props.isMobile && (
           <>
             <div className="pincode">
@@ -277,6 +285,19 @@ class addToCartComponent extends React.Component {
                 </label>
               </div>
               {this.renderdeliveryMessage(this.props.pinCodeData)}
+              { <div className="shippingCharge">
+          Estimated Shipping Charges:{' '}
+          <span className="bold">
+            {this.props.pinCodeData.shippingCharge > 0 ? (
+            <>
+              &#8377;
+              {this.props.pinCodeData.shippingCharge}
+            </>
+            ) : (
+              <>Free</>
+            )}
+          </span>
+        </div> }
             </div>
             <div className="clearfix" />
 			{ this.props.pinCodeData.experienceStore &&
