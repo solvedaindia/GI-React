@@ -64,6 +64,7 @@ export class CheckoutComponent extends React.Component {
       pay: false,
       BankID: '',
       paymentMode: '',
+      paymentId: '',
       failPop: false,
       redirect: false,
       shipMode: null,
@@ -279,8 +280,9 @@ export class CheckoutComponent extends React.Component {
   initialBdpayment = (data) => {
     var body = {
       orderId: this.state.ship_add.orderId,
-      email: this.state.logon_by.includes('@') ? this.state.logon_by : '',
-      payMethodId: "BillDesk",
+      email: this.state.logon_by.includes('@') ? this.state.logon_by : null,
+      mobile: !this.state.logon_by.includes('@') ? this.state.logon_by : null,
+      payMethodId: this.state.paymentId,
       amount: this.state.orderSummaryData.netAmount,
       billing_address_id: this.state.ship_add.billAddId,
       callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePayment`,
@@ -299,7 +301,7 @@ export class CheckoutComponent extends React.Component {
       var res = response.data.data.response;
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=CREDIT`;
       if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
-        url = `${res.transactionUrl}&msg=${res.msg}`;;
+        url = `${res.transactionUrl}&msg=${res.msg}`;
         //  axios.post(url, {}, {
 
         //   }).then((redirect) => {
@@ -316,10 +318,12 @@ export class CheckoutComponent extends React.Component {
   }
 
   enalblePay = (data) => {
+    console.log('enablePay ---- ',data);
     this.setState({
       pay: true,
       BankID: data.BankID,
-      paymentMode: data.paymentMode
+      paymentMode: data.paymentMode,
+      paymentId: data.paymentId
     })
   }
 
@@ -391,7 +395,9 @@ export class CheckoutComponent extends React.Component {
 
   handleBack = () => {
     if(this.state.loggedIn && this.state.step == 2) {
-      return;
+      this.setState({
+        redirect: true
+      })
     } else {
       this.setState({
         step: this.state.step -1

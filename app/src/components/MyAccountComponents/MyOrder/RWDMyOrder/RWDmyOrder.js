@@ -7,6 +7,8 @@ import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
 import RWDOrderItem from './RWDOrderItem';
 import TrackOrder from '../TrackMyOrder/trackOrder';
 import RWDSingleProduct from './RWDSingleProduct';
+import RWDMultiTrack from './RWDMultiTrack';
+import RWDCompleteOrder from './RWDCompleteOrder';
 import { updateTheRWDHeader } from '../../../../actions/app/actions';
 
 class RWDMyOrder extends React.Component {
@@ -30,10 +32,12 @@ class RWDMyOrder extends React.Component {
 
       currentComponent: null,
       currentComponentData: null,
+      currentCompleteData: null,
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
     this.myOrderCallback = this.myOrderCallback.bind(this);
+    this.orderDetailCallback = this.orderDetailCallback.bind(this);
   }
 
   componentDidMount() {
@@ -57,14 +61,39 @@ class RWDMyOrder extends React.Component {
     }
   }
 
-  myOrderCallback(compName, data) {
+  myOrderCallback(compName, data, completeData) {
     console.log('ddddd -- ', compName, data);
-    this.props.updateTheRWDHeader('Track Order');
+    if (compName === 'ViewOrder') {
+      this.props.updateTheRWDHeader('My Order Redirect');
+    }
+    else {
+      this.props.updateTheRWDHeader('Track Order');
+    }
+    
     this.setState({
       currentComponent: compName,
+      currentComponentData: data,
+      currentCompleteData: completeData,
+    })
+  }
+
+  orderDetailCallback(data) {
+    this.props.updateTheRWDHeader('My Order Redirect');
+    this.setState({
+      currentComponent: 'ViewOrder',
       currentComponentData: data
     })
   }
+
+  viewOrderTrackbtnCallback(data) {
+    console.log('mmmmmm----',data)
+    this.props.updateTheRWDHeader('Track Order');
+    this.setState({
+      currentComponent: 'MultiProduct',
+      currentComponentData: data
+    })
+  }
+  
 
   getOrderList(isFromScroll) {
     this.setState({ isLoading: true }, () => {
@@ -181,7 +210,28 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder">
           <RWDSingleProduct
             orderDataPro={this.state.currentComponentData}
+            myOrderCallbackPro={this.myOrderCallback}
+            orderDetailCallbackPro={this.orderDetailCallback}
+            orderCompleteDataPro={this.state.currentCompleteData}/>
+        </div>
+      );
+    }
+    else if (this.state.currentComponent === 'MultiProduct') {
+      return (
+        <div className="myOrder">
+          <RWDMultiTrack
+            orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback} />
+        </div>
+      );
+    }
+    else if (this.state.currentComponent === 'ViewOrder') {
+      return (
+        <div className="myOrder">
+          <RWDCompleteOrder
+            orderDataPro={this.state.currentComponentData}
+            myOrderCallbackPro={this.myOrderCallback} 
+            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)}/>
         </div>
       );
     }

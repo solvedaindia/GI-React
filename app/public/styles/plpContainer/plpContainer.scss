@@ -107,6 +107,7 @@ section.tablecarousel {
       .bold {
         font-family: $font-bold;
         font-size: $base * 2;
+        min-height: 16px;
       }
       .start_price {
         font-size: $base * 1.375;
@@ -385,7 +386,7 @@ section.tablecarousel {
             margin: 0;
           }
           .description {
-            font-family: $font-light;
+            font-family: $font-regular;
           }
         }
 
@@ -403,9 +404,10 @@ section.tablecarousel {
           .priceno-discount {
             text-decoration: line-through;
             text-decoration-color: $reddishpink;
-            font-family: $font-light;
+            font-family: $font-regular;
             padding-left: 15px;
             font-size: $base * 2.25;
+            color:$greylightColor;
           }
         }
         .emi-text {
@@ -973,6 +975,7 @@ section.tablecarousel {
           .price{
             .discount-price{
               font-size: $base * 3;
+              line-height: $base * 3;
             }
           }
           .text {
@@ -1062,14 +1065,14 @@ section.tablecarousel {
 
     .heading {
       font-family: $font-bold;
-      font-size: $base * 2.5;
+      font-size: $base * 2.25;
       color: $black;
       margin: 0 0 20px 0;
     }
     .description_area {
       p {
         color: $greyLight;
-        font-size: 12px;
+        font-size: 11px;
         font-family: $font-regular;
         line-height: 18px;
       }

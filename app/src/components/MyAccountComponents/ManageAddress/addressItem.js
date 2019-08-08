@@ -105,8 +105,8 @@ class AddressItem extends React.Component {
             </>
             }
           <label className="addressText">
-            {this.props.addressData.address}
-            {/* {this.props.addressData.city} */}
+            {this.props.addressData.address},
+            {this.props.addressData.city}
             <div>{this.props.addressData.state},{` ${this.props.addressData.pincode}`}</div>
             
           </label>

@@ -20,7 +20,7 @@ accCallback() {
   render() {
     return (
       <>
-        {this.props.name.map((val, index) => (
+        { this.props.name.data && this.props.name.data.length > 0 && this.props.name.data.map((val, index) => (
           <Col key={index} md={3} sm={3}>
             <Accordion accCallbackPro={this.accCallback.bind(this)}>
               {val.map((item, childindex) => (
@@ -35,7 +35,7 @@ accCallback() {
                     <ul>
                       {item.children.map((litem, i) => (
                         <li className="list" key={i}>
-                          <a className="link" href={'https://www.google.com/'}>
+                          <a className="link" href={litem.action}>
                             {litem.text}
                           </a>
                         </li>
