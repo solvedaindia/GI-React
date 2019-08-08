@@ -117,14 +117,11 @@
   }
 
   .emptyWishlist {
-    padding: 30px 0 80px 0;
     text-align: center;
     .heading-Wishlist {
       opacity: 0.45;
-      font-size: 30px;
       color: $black;
       margin: 0;
-      padding: 0 0 12px 0;
     }
 
     .subtext {
@@ -193,6 +190,13 @@
       .heading {
         font-size: 30px;
       }
+      .emptyWishlist{
+        padding: 30px 0 80px 0;
+        .heading-Wishlist{
+          font-size: 30px;
+          padding: 0 0 12px 0;
+        }
+      }
     }
     .removeFromWishlist{
       margin: -45px 205px 0 0;
@@ -200,6 +204,7 @@
       position: absolute;
       right: 20px;
     }
+ 
   }
 
 /* 
@@ -255,6 +260,16 @@
             }
           }
         }
+      }
+    }
+    .emptyWishlist{
+      padding: 10px 0 14px 0;
+      .heading-Wishlist{
+        font-size: 14px;
+        padding: 0 0 12px 0;
+      }
+      .subtext{
+        font-size: 12px;
       }
     }
   }
