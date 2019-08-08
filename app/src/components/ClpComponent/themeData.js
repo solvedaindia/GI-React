@@ -42,7 +42,7 @@ class ThemeData extends React.Component {
             {this.state.showPopup ? 
                 <div className='details'
                     onClick={this.handlePopUp}
-                    style={{top:`${x}%`, left:`${y}%`}}
+                    style={{top:`${x}%`, left:`20+${y}%`}}
                 >
                     <figure className='tnImg'>
                         <img

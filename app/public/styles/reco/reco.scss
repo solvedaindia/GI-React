@@ -78,17 +78,12 @@
                     margin-right: $base;
                     font-family: $font-bold;
                 }
-                .actualPrice{
-                    text-decoration: line-through;
-                    font-size: $base*2.25;
-                    color: $greylightColor;
-                }
+                @include line-through;
                 .emiInfo,
                 .offerAmount {
                     color: $reddishPink;
                 }
             }
-            
         }
         &:hover {
             .prodDetails {

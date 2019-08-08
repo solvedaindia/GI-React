@@ -104,7 +104,7 @@ class BestSeller extends React.Component {
                     <h2 className="prodtitle">{sellerItemData.productName}</h2>
                     <h2 className="peiceDeatils">
                       <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${sellerItemData.offerPrice}` : null }</span>
-                      <span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${sellerItemData.actualPrice}` : null}</span>
+                      <span className='actualPriceLine'><span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${sellerItemData.actualPrice}` : null}</span></span>
                     </h2>
                     {sellerItemData.emiData !== '' ? <p className="emi">
                       EMI Starting From
