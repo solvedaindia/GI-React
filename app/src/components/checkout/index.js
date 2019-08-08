@@ -64,6 +64,7 @@ export class CheckoutComponent extends React.Component {
       pay: false,
       BankID: '',
       paymentMode: '',
+      paymentId: '',
       failPop: false,
       redirect: false,
       shipMode: null,
@@ -280,7 +281,7 @@ export class CheckoutComponent extends React.Component {
     var body = {
       orderId: this.state.ship_add.orderId,
       email: this.state.logon_by.includes('@') ? this.state.logon_by : '',
-      payMethodId: "BillDesk",
+      payMethodId: this.state.paymentId,
       amount: this.state.orderSummaryData.netAmount,
       billing_address_id: this.state.ship_add.billAddId,
       callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePayment`,
@@ -316,10 +317,12 @@ export class CheckoutComponent extends React.Component {
   }
 
   enalblePay = (data) => {
+    console.log('enablePay ---- ',data);
     this.setState({
       pay: true,
       BankID: data.BankID,
-      paymentMode: data.paymentMode
+      paymentMode: data.paymentMode,
+      paymentId: data.paymentId
     })
   }
 
