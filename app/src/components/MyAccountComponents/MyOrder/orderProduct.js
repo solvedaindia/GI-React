@@ -20,26 +20,27 @@ class ProductOrder extends React.Component {
   }
 
   filterDeliveryInstallationTags() {
-    const shipmentData = this.props.prodctDataPro.shipmentData[0];
-    console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
-    if (shipmentData.expectedDeliveryDate !== '') {
-      console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
-      this.setState({
-        dsNameTag: 'DELIVERY ON',
-        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
-      })
-    }
-    else if (shipmentData.expectedInstallationDate !== '') {
-      console.log('Installation -- ',shipmentData.installationDate)
-      if (shipmentData.installationDate === '') {
+    if (this.props.prodctDataPro.shipmentData) {
+      const shipmentData = this.props.prodctDataPro.shipmentData[0];
+      console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
+      if (shipmentData.expectedDeliveryDate !== '') {
+        console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
         this.setState({
-          dsNameTag: 'INSTALLATION ON',
-          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          dsNameTag: 'DELIVERY ON',
+          dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
         })
       }
-      
+      else if (shipmentData.expectedInstallationDate !== '') {
+        console.log('Installation -- ',shipmentData.installationDate)
+        if (shipmentData.installationDate === '') {
+          this.setState({
+            dsNameTag: 'INSTALLATION ON',
+            dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          })
+        }
+        
+      }
     }
-
   }
 
   render() {

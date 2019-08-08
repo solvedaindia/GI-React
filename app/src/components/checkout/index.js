@@ -280,7 +280,8 @@ export class CheckoutComponent extends React.Component {
   initialBdpayment = (data) => {
     var body = {
       orderId: this.state.ship_add.orderId,
-      email: this.state.logon_by.includes('@') ? this.state.logon_by : '',
+      email: this.state.logon_by.includes('@') ? this.state.logon_by : null,
+      mobile: !this.state.logon_by.includes('@') ? this.state.logon_by : null,
       payMethodId: this.state.paymentId,
       amount: this.state.orderSummaryData.netAmount,
       billing_address_id: this.state.ship_add.billAddId,
@@ -300,7 +301,7 @@ export class CheckoutComponent extends React.Component {
       var res = response.data.data.response;
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=CREDIT`;
       if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
-        url = `${res.transactionUrl}&msg=${res.msg}`;;
+        url = `${res.transactionUrl}&msg=${res.msg}`;
         //  axios.post(url, {}, {
 
         //   }).then((redirect) => {
