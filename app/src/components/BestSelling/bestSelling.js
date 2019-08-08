@@ -6,7 +6,7 @@ import {
   bestSellerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import { is } from '../../utils/utilityManager';
+import { is, formatPrice } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
@@ -103,12 +103,12 @@ class BestSeller extends React.Component {
                   <figcaption className="bsDetails">
                     <h2 className="prodtitle">{sellerItemData.productName}</h2>
                     <h2 className="peiceDeatils">
-                      <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${sellerItemData.offerPrice}` : null }</span>
-                      <span className='actualPriceLine'><span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${sellerItemData.actualPrice}` : null}</span></span>
+                      <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${formatPrice(sellerItemData.offerPrice)}` : null }</span>
+                      <span className='actualPriceLine'><span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${formatPrice(sellerItemData.actualPrice)}` : null}</span></span>
                     </h2>
                     {sellerItemData.emiData !== '' ? <p className="emi">
                       EMI Starting From
-                    <span className="emiPrice">₹{sellerItemData.emiData}</span>
+                    <span className="emiPrice">₹{formatPrice(sellerItemData.emiData)}</span>
                     </p> : null}
 
                     <p className="emiOffer">

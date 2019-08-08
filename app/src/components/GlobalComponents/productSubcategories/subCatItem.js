@@ -1,5 +1,6 @@
 import React from 'react';
 import SubCatImage from './subCatImage';
+import { formatPrice } from '../../../utils/utilityManager';
 
 const subCatItem = ({ itemData }) => (
     <>
@@ -8,7 +9,7 @@ const subCatItem = ({ itemData }) => (
             <div className="itemtext">
                 <div className="leftbox">
                     <div className="bold">{itemData.categoryName}</div>
-                    <div className='start_price'>Starting from ₹ {itemData.startPrice}</div>
+                    <div className='start_price'>Starting from ₹ {formatPrice(itemData.startPrice)}</div>
                 </div>
                 <div className="rightbox">{itemData.productCount} Products</div>
             </div>
