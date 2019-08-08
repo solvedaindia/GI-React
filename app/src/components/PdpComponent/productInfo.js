@@ -61,8 +61,9 @@ class productInfo extends React.Component {
         </div> }
         
         <>
-		{ showOffer &&
-        <div className="accessories-offer">
+    { showOffer && <>
+    {isMobile() && <div className='clear'></div>}
+    <div className="accessories-offer">
 		 <div className="offerbg text"> % </div>
           <div className="discount-off text">
             { parseInt(this.props.productData.discount) > 1 &&
@@ -82,7 +83,7 @@ class productInfo extends React.Component {
            <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }
-        </div>
+        </div></>
 		}
         { this.props.productData.promotions.length > 0 &&
         <div id="offers" className={this.state.isActive}>
