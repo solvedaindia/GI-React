@@ -8,12 +8,13 @@
         }
         &:last-child{
             margin-right:0;
+            margin-left:0;
             vertical-align: sub;
         }
         display: inline-block;
         cursor: pointer;
         position: relative;
-        margin: 0 8px 0 8px;
+        margin: 0 23px 0 22px;
         svg{
             margin: 0;
         }
