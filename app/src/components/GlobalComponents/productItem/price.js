@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
+import { formatPrice } from '../../../utils/utilityManager';
+
 
 class Price extends React.Component {
   render() {
@@ -8,11 +10,11 @@ class Price extends React.Component {
     let crossPriceItem;
 
     if (offerPrice < actualPrice) {
-      crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
+      crossPriceItem = <span className="priceno-discount">₹{formatPrice(actualPrice)}</span>;
     }
     if (!isNaN(offerPrice)) {
       console.log('ppriccc -- ', offerPrice)
-      offerPrice = `₹${offerPrice}`
+      offerPrice = `₹${formatPrice(offerPrice)}`
     }
     else {
       offerPrice = null

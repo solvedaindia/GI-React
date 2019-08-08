@@ -28,7 +28,7 @@ export class CLPContainer extends React.Component {
       <section className="clpBase">
         <div className="slider">
           <CLPFullBanner />
-		</div>
+		    </div>
           <SubCategory />
           <LivingTheme />
           <BestSeller />

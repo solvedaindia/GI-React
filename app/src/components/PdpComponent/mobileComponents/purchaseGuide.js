@@ -71,8 +71,8 @@ class purchaseGuide extends React.Component {
   }
 
   /* render tab data */
-  renderTabData() {
-    return this.props.purchaseGuide.purchaseGuide.map((tabData, index) => {
+  renderTabData(filterArray) {
+    return filterArray.map((tabData, index) => {
       this.activeClass = 'active';
       if (index > 0) {
         this.activeClass = '';
@@ -93,8 +93,8 @@ class purchaseGuide extends React.Component {
   }
 
   /* render tab content */
-  renderTabContent() {
-    return this.props.purchaseGuide.purchaseGuide.map((contentData, index) => {
+  renderTabContent(filterArray) {
+    return filterArray.map((contentData, index) => {
       if (index > 0) {
         this.activeClass = 'dataNotActive';
       }
@@ -116,10 +116,24 @@ class purchaseGuide extends React.Component {
     });
   }
 
+  /* filter purchase guide array */
+  filterPurchaseGuideArray(purchaseGuideData) {
+    const data = purchaseGuideData.filter(function(data) {
+      return data.values.length > 0;
+    });
+    return data;
+  }
+
   render() {
+    let purchaseGuideLength = 0;
+    let filterArray = [];
+    if (this.props.purchaseGuide.purchaseGuide && this.props.purchaseGuide.purchaseGuide.length > 0) {
+      filterArray = this.filterPurchaseGuideArray(this.props.purchaseGuide.purchaseGuide);
+      purchaseGuideLength = filterArray.length;
+    }
     return (
       <>
-        {this.props.purchaseGuide.purchaseGuide && this.props.purchaseGuide.purchaseGuide.length > 0 && (
+        {this.props.purchaseGuide.purchaseGuide && this.props.purchaseGuide.purchaseGuide.length > 0 && purchaseGuideLength > 0 && (
           <Accordion>
             <div className="purchaseGuideDiv" id="purchaseGuideDiv">
             <Row>
@@ -137,10 +151,10 @@ class purchaseGuide extends React.Component {
               >
                 <Row>
                   <Col md={12} sm={12} xs={12} className="tab-nav-container">
-                    <ul>{this.renderTabData()}</ul>
+                    <ul>{this.renderTabData(filterArray)}</ul>
                   </Col>
                   <Col md={12} sm={12} xs={12} className="tab-content">
-                    {this.renderTabContent()}
+                    {this.renderTabContent(filterArray)}
                   </Col>
                 </Row>
               </Col>

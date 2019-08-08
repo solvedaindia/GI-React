@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
+import { formatPrice } from '../../utils/utilityManager';
 import {
   plpSubCatAPI,
   imagePrefix
@@ -108,7 +109,7 @@ export class SubCategory extends React.Component {
                     <p className="starting">
                       Starting From 
                     <span className="startPrice">
-                       ₹{subCatListData.startPrice}
+                       ₹{formatPrice(subCatListData.startPrice)}
                       </span>
                     </p>
                   </figcaption>

@@ -20,26 +20,27 @@ class ProductOrder extends React.Component {
   }
 
   filterDeliveryInstallationTags() {
-    const shipmentData = this.props.prodctDataPro.shipmentData[0];
-    console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
-    if (shipmentData.expectedDeliveryDate !== '') {
-      console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
-      this.setState({
-        dsNameTag: 'DELIVERY ON',
-        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
-      })
-    }
-    else if (shipmentData.expectedInstallationDate !== '') {
-      console.log('Installation -- ',shipmentData.installationDate)
-      if (shipmentData.installationDate === '') {
+    if (this.props.prodctDataPro.shipmentData) {
+      const shipmentData = this.props.prodctDataPro.shipmentData[0];
+      console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
+      if (shipmentData.expectedDeliveryDate !== '') {
+        console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
         this.setState({
-          dsNameTag: 'INSTALLATION ON',
-          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          dsNameTag: 'DELIVERY ON',
+          dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
         })
       }
-      
+      else if (shipmentData.expectedInstallationDate !== '') {
+        console.log('Installation -- ',shipmentData.installationDate)
+        if (shipmentData.installationDate === '') {
+          this.setState({
+            dsNameTag: 'INSTALLATION ON',
+            dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          })
+        }
+        
+      }
     }
-
   }
 
   render() {
@@ -65,7 +66,7 @@ class ProductOrder extends React.Component {
                   <span className="heading">Quantity</span>
                   <span className="textval">{productData.quantity}</span>
                 </div>
-                {productData.shipmentData.length > 1 ? null :
+                {productData.shipmentData && productData.shipmentData.length > 1 ? null :
                   <div className="delivery quantity">
                     <span className="heading">{this.state.dsNameTag}</span>
                     <span className="textval">{this.state.dsDateTag}</span>
@@ -77,13 +78,13 @@ class ProductOrder extends React.Component {
 
           <div className="orderbtn">
             {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
-            {productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            {productData.shipmentData && productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
             </button> : null}
 
           </div>
           <div className='clearfix'></div>
-          {productData.shipmentData.length === 1 ?
+          { productData.shipmentData &&productData.shipmentData.length === 1 ?
             <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap'/>
             : null}
         </div>

@@ -21,8 +21,8 @@ class OrderSummery extends React.Component {
       <div className="summerydata">
         <div className="orderList">
           <h4 className="heading">Delivery Address</h4>
-          <p className="subheading">{addressData.name}</p>
-          <p className="address">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
+          <p className="subheading">{addressData.name ? addressData.name : null}</p>
+          <p className="address">{`${addressData.address ? addressData.address : null}, ${addressData.city ? addressData.city : null}, ${addressData.state ? addressData.state: null}, ${addressData.pincode ? addressData.pincode : null}`}</p>
            {/* <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
@@ -42,24 +42,26 @@ class OrderSummery extends React.Component {
             <h4 className="heading">Order Summary</h4>
             <div className="summaryDetails clearfix">
               <div className="leftText">Cart Total</div>
-              <div className="rightText">₹{summeryData.netAmount}</div>
+              <div className="rightText">₹{summeryData.totalAmount}</div>
             </div>
             <div className="summaryDetails clearfix">
               <div className="leftText">Shipping</div>
               <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
             </div>
-            <div className="summaryDetails clearfix">
+            {summeryData.productDiscount === 0 ? null : <div className="summaryDetails clearfix">
               <div className="leftText">Product Discount</div>
-              <div className="rightText">{summeryData.productDiscount === 0 ? null : '-' } ₹{summeryData.productDiscount}</div>
-            </div>
-            <div className="summaryDetails clearfix">
+              <div className="rightText">-₹{summeryData.productDiscount}</div>
+            </div>}
+
+            {summeryData.orderDiscount === 0 ? null : <div className="summaryDetails clearfix">
               <div className="leftText">Order Discount</div>
               <div className="rightText">-₹{summeryData.orderDiscount}</div>
-            </div>
+            </div>}
+            
             <div className="divider"></div>
             <div className="summaryDetails subTotaltext clearfix">
               <div className="leftText">Total</div>
-              <div className="rightText">₹{summeryData.totalAmount}</div>
+              <div className="rightText">₹{summeryData.netAmount}</div>
             </div>
           </div>
 

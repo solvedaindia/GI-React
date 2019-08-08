@@ -15,7 +15,7 @@
         padding: $base*2;
         text-align: center;
         background: $colorwhite;
-        top: $base*7.75;
+        top: 14%;
         left: $base*4;
         .subTitle {
             font-size: $base*2.25;
@@ -24,11 +24,13 @@
         .title {
             font-size: $base*3.75;
             font-weight: 300;
+            font-family: $font-medium;
             margin: $base*1.25 0 $base*2.25;
         }
         .place,
         .dist {
             color: $ceruleanblue;
+            font-family: $font-medium;
         }
         .place {
             font-weight: 500;
@@ -48,6 +50,32 @@
             background-color: #070707;
             border: none;
   
+        }
+    }
+}
+
+@media (min-width: 320px) and (max-width:767px) {
+    .exStore {
+        width: 100%;
+        margin: $base*15 0 $base*20;
+
+        .content {
+            width: 90%;
+            left: 0;
+            top: 70%;
+            .title {
+                font-size: $base*3;
+                text-align: left;
+            }
+            .details {
+                text-align: left;
+                font-size: $base*1.5;
+            }
+            .btn-flat {
+                float: left;
+                overflow: hidden;
+                clear: both;
+            }
         }
     }
 }

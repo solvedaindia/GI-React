@@ -9,6 +9,7 @@ import {
 	imagePrefix
 } from '../../../public/constants/constants';
 
+let catID;
 class LivingTheme extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,7 +26,7 @@ class LivingTheme extends React.Component {
 
   getThemeData() {
   	apiManager
-  		.get(clpThemeAPI+'GI_CLP_THEME_living')
+  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${catID}`)
   		.then(response => {
   			this.setState({
   			themeData: response.data.data,
@@ -37,6 +38,12 @@ class LivingTheme extends React.Component {
   }
 
   componentDidMount() {
+	const path = String(window.location.pathname);
+    const idStr = path.split('/')[2];
+    const categoryName = idStr;
+    if (idStr != undefined && idStr !== catID) {
+      catID = categoryName;
+    }
   	this.getThemeData();
   }
 
@@ -54,8 +61,10 @@ class LivingTheme extends React.Component {
     return (
 		!!themeData && 
 		<div className="clpTheme">
-			<h2 className='title'>{themeData.title}</h2>
-			<p className='desc'>{themeData.description}</p>
+			<div class='clp-short-desc'>
+				<h2 className='title'>{themeData.title}</h2>
+				<p className='desc'>{themeData.description}</p>
+			</div>
 			{!isMobile() ?
 				themeData.recoImgArray.map((themeItem) => {
 					return(

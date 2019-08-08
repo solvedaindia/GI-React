@@ -43,23 +43,27 @@ class productInfo extends React.Component {
 		showOffer = true;
 	}
 	
-	
     return (
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
-        {this.props.pinCodeData.shippingCharge &&
-        <div className="shippingCharge">
+        { !isMobile() && <div className="shippingCharge">
           Shipping Charges:{' '}
           <span className="bold">
-            &#8377;
-            {this.props.pinCodeData.shippingCharge}
+            {this.props.pinCodeData.shippingCharge > 0 ? (
+            <>
+              &#8377;
+              {this.props.pinCodeData.shippingCharge}
+            </>
+            ) : (
+              <>Free</>
+            )}
           </span>
-        </div>
-        }
+        </div> }
         
         <>
-		{ showOffer &&
-        <div className="accessories-offer">
+    { showOffer && <>
+    {isMobile() && <div className='clear'></div>}
+    <div className="accessories-offer">
 		 <div className="offerbg text"> % </div>
           <div className="discount-off text">
             { parseInt(this.props.productData.discount) > 1 &&
@@ -79,7 +83,7 @@ class productInfo extends React.Component {
            <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }
-        </div>
+        </div></>
 		}
         { this.props.productData.promotions.length > 0 &&
         <div id="offers" className={this.state.isActive}>

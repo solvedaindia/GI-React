@@ -89,6 +89,8 @@
                 }
                 .qytList {
                     width: 67px;
+                    height: 38px;
+                    padding: $base;
                     cursor: pointer;
                     font-family: $font-bold;
                     option {
@@ -134,6 +136,12 @@
                 }
             }
         }
+    }
+    .delBy{
+        margin: 19px 0 0;
+        font-size: 9px;
+        color: $battleshipGrey;
+        font-family: $font-medium;
     }
     .orderSummary {
         width: 33%;
@@ -235,6 +243,8 @@
                 }
                 .emiMsg {
                     margin: 0 $base*5 0;
+                    font-family: $font-bold;
+                    color: $black;
                 }
                 .emiDetails {
                     right: 0;
@@ -256,6 +266,11 @@
                         color: $greenLight;
                         font-family: $font-bold;
                     }
+                }
+                .val {
+                    color: $cerulean;
+                    font-family: $font-bold;
+                    font-size: $base*3;
                 }
             }
             .btnCheckout {
@@ -399,7 +414,7 @@
                 .btn-knowmore {
                     position: absolute;
                     right: 0;
-                    top: $base*2;
+                    top: $base*2.5;
                     background: transparent;
                     border: none;
                     color: $cerulean;
@@ -615,14 +630,7 @@
                     .moveItem{
                         right: 38px;
                     }
-                    .delBy{
-                        margin: 0px;
-                        font-size: 9px;
-                        color: $battleshipGrey;
-                        font-family: $font-medium;
-                        line-height:normal;
-                    }
-                    }
+                }
                 .quantityPrice {
                     border-top: 1px solid $borderLight;
                     .qytList {

@@ -65,7 +65,7 @@ class Pincode extends React.Component {
 		<>
 		<div className="pincodeField">
 			<span className="pinLogo">
-			<PinLocationLogo width={12} height={13} />
+			<PinLocationLogo width={20} height={20} />
 			</span>
 			<input
 				className="pincodeVal"

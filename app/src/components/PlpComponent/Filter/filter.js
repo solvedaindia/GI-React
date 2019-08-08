@@ -344,6 +344,7 @@ class Filter extends React.Component {
             }`}
           >
             {this.state.facetItem}
+            <div className='clearfix'></div>
             <div className="filterbtnWrapper">
               <button
                 onClick={() => this.onCancelBtnClick()}

@@ -291,7 +291,7 @@
                     }
                 }
                 .socialLogin{
-                    padding:$base*3 $base*2 $base*2 $base*4;
+                    padding:$base*3 $base*2.5 $base*2 $base*2.5;
                     .btn-white{
                         padding: $base 4px $base 4px;
                         font-size: $base*1.25;
@@ -306,6 +306,7 @@
                     }
                 }
                 .loginForm{
+                    padding:$base*2 $base*2.5;
                     .form-group{
                         position: relative;
                         padding-bottom: 20px;

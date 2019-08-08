@@ -8,6 +8,7 @@ import ReadMore from '../GlobalComponents/readMore';
 import Recommendation from '../Recommendation/reco';
 import TrackOrder from '../TrackOrder/trackOrder';
 import { getCookie } from '../../utils/utilityManager';
+import ExStore from '../ExStore/exStore';
 
 export default function WidgetList({ componentType, ...rest }) {
   switch (componentType) {
@@ -25,6 +26,8 @@ export default function WidgetList({ componentType, ...rest }) {
       return <SubCategory {...rest} />;
     case 'content':
       return <Content {...rest} />;
+    case 'experience_store':
+      return <ExStore {...rest} />;
     case 'recommendation':
       return <Recommendation {...rest} />;
     case 'read_more':
