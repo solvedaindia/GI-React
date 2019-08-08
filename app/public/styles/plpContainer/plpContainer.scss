@@ -386,7 +386,7 @@ section.tablecarousel {
             margin: 0;
           }
           .description {
-            font-family: $font-light;
+            font-family: $font-regular;
           }
         }
 
@@ -404,9 +404,10 @@ section.tablecarousel {
           .priceno-discount {
             text-decoration: line-through;
             text-decoration-color: $reddishpink;
-            font-family: $font-light;
+            font-family: $font-regular;
             padding-left: 15px;
             font-size: $base * 2.25;
+            color:$greylightColor;
           }
         }
         .emi-text {
@@ -974,6 +975,7 @@ section.tablecarousel {
           .price{
             .discount-price{
               font-size: $base * 3;
+              line-height: $base * 3;
             }
           }
           .text {
