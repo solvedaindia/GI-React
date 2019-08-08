@@ -6,9 +6,9 @@ import  '../../../public/styles/static-pages/aboutUs.scss'
 export default class GreenInitiatives extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="greenImage" src={require('../../../public/images/rectimg.jpg')} alt="rectangle"/>
-    const img2 = <img className="greenImage" src={require('../../../public/images/rectimg.jpg')} alt="rectangle"/>
-    const img3 = <img className="greenImage" src={require('../../../public/images/rectimg.jpg')} alt="rectangle"/>
+    const img1 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
+    const img2 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
+    const img3 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
     
 
     this.state = {

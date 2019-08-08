@@ -23,11 +23,11 @@ class DreamKitchens extends React.Component {
 
         <div className="row progressBar">
             <div className="col-md-3 imgBox">           
-              <img className="Delivery-Installation" src={require('../../../public/images/dm1.png')}
+              <img className="Delivery-Installation" src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
               alt="rectangle"/>                
             </div>
             <div className="col-md-3 imgBox">
-            <img className="Delivery-Installation"  src={require('../../../public/images/dm2.png')}
+            <img className="Delivery-Installation"  src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
               alt="rectangle"
                     /> 
                 </div>
@@ -35,7 +35,7 @@ class DreamKitchens extends React.Component {
                     <i>
                     <img
                       className="Delivery-Installation"
-                      src={require('../../../public/images/dm3.png')}
+                      src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
                       alt="rectangle"
                     /> 
                     </i>
@@ -46,7 +46,7 @@ class DreamKitchens extends React.Component {
                     <i>
             <img
                       className="Delivery-Installation"
-                      src={require('../../../public/images/dm4.png')}
+                      src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
                       alt="rectangle"
                     /> 
                    </i>

@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/inspiration.scss'
-const prevArrowImg = (
-    <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
-  );
-  const nextArrowImg = (
-    <img src={require('../SVGs/carousel__arrowRight.svg')} />
-  );
+
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
@@ -38,8 +33,7 @@ export default class Recommended extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 2,
-    //   prevArrow: prevArrowImg,
-    //   nextArrow: nextArrowImg
+    
     };
     return (
         <div>

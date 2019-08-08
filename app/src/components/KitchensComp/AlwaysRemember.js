@@ -14,9 +14,7 @@ import  '../../../public/styles/static-pages/kitchens.scss'
 class AlwaysRemember extends React.Component {
     constructor(props){
         super(props);
-        const scatchImg1 =  require('../../../public/images/scatch1.png')
-        const scatchImg2 =  require('../../../public/images/btnsch2.jpg')
-        const scatchImg3 =  require('../../../public/images/btnsch3.jpg') 
+    
 
         this.state = {
             imageFirstSrc: '',

@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/warobes.scss'
+import  '../../../public/styles/static-pages/warobes.scss';
 
 export default class WrdrobesTypes extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="typeskitchenimg" src={require('../../../public/images/cr1.jpg')} alt="rectangle"/>
-    const img2 = <img className="typeskitchenimg" src={require('../../../public/images/cr2.jpg')} alt="rectangle"/>
-    const img3 = <img className="typeskitchenimg" src={require('../../../public/images/cr3.jpg')} alt="rectangle"/>
-    const img4 = <img className="typeskitchenimg" src={require('../../../public/images/cr4.jpg')} alt="rectangle"/>
-    const img5 = <img className="typeskitchenimg" src={require('../../../public/images/cr6.jpg')} alt="rectangle"/>
-    const img6 = <img className="typeskitchenimg" src={require('../../../public/images/cr0.jpg')} alt="rectangle"/>
+    const img1 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
+    const img2 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
+    const img3 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
+    const img4 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
+    const img5 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
+    const img6 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
 
     this.state = {
       slides: [img1, img2, img3, img4, img5, img6]

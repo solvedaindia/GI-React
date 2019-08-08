@@ -23,7 +23,7 @@ class TypesOFkitchens extends React.Component {
           <div className="row">
             <div className="col-md-6">
               <div className="steelchefmodal">
-                <img className="types-kitchens" src={require('../../../public/images/cup.png')} alt="rectangle" />
+                <img className="types-kitchens" src='https://203.110.85.50/imagestore/images/godrejInterio/store-bg-2x.png' alt="rectangle" />
                 <h4 className="heading">Steel Chef</h4>
                 <div className="subText">Visit the store closest to you & Get a free design consultation for your dream
                   kitchen from our expert designers</div>    
@@ -37,7 +37,7 @@ class TypesOFkitchens extends React.Component {
             <div className="col-md-6">
             <div className="steelchefmodal">
 
-              <img className="types-kitchens" src={require('../../../public/images/cup2.jpg')} alt="rectangle" />
+              <img className="types-kitchens" src='https://203.110.85.50/imagestore/images/godrejInterio/store-bg-2x.png' alt="rectangle" />
               <h4 className="heading">Willow</h4>
               <p className="subText">Visit the store closest to you & Get a free design consultation for
                 your dream kitchen from our expert designers</p>

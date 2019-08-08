@@ -43,7 +43,7 @@ class KitchenTypesEspot extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot, index } = this.state;
+    const { pageLayoutEspot } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (

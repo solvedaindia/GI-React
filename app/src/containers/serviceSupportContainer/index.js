@@ -60,13 +60,13 @@ export default class HelpSupport extends React.Component {
               <h2 className="enquiry">Enquiries</h2>
               <div className="row">
                 <div className="col-sm-6 text-center">
-                  <img className="icon" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
                   <h4 className="contactus">Email</h4>
                   <h4 className="emailsmall">talktous@godrej.com</h4>
 
                 </div>
                 <div className="col-sm-6 text-center">
-                <img className="icon" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
                 <h4 className="contactus">Contact-Us</h4>
                 <h4 className="emailsmall">+91 8654123547 <br/>+91 6325415873</h4>
                 </div>
@@ -76,12 +76,12 @@ export default class HelpSupport extends React.Component {
               <h2 className="enquiry">After Sales Services</h2>
               <div className="row">
                 <div className="col-sm-6 text-center">
-                  <img className="icon" src={require('../../../public/images/emailus.png')} alt="Rectangle" />
+                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
                   <h4 className="contactus">Email</h4>
                   <h4 className="emailsmall">talktous@godrej.com</h4>
                 </div>
                 <div className="col-sm-6 text-center">
-                <img className="icon" src={require('../../../public/images/1034131.svg')} alt="Rectangle" />
+                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
                 <h4 className="contactus">Contact-Us</h4>
                 <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
                 </div>
@@ -95,7 +95,7 @@ export default class HelpSupport extends React.Component {
         
         <button className="Livechat">
         <span className="text">Live Chat </span>
-        <span className='iconChat'><img className="chatIcon" src={require('../../../public/images/chat.png')} alt="Rectangle" /></span>
+        <span className='iconChat'><img className="chatIcon" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Rectangle" /></span>
             
        </button>
       </div>

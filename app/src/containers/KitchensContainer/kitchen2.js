@@ -17,9 +17,7 @@ import ConsultationForm from '../../components/Primitives/ConsultForm'
 export default class ChefKitchenContainer extends React.Component {
 constructor(props){
 super(props);
-const scatchImg1 = require('../../../public/images/scatch1.png')
-const scatchImg2 = require('../../../public/images/btnsch2.jpg')
-const scatchImg3 = require('../../../public/images/btnsch3.jpg')
+
 
 this.state = {
 imgList: [scatchImg1,scatchImg2,scatchImg3],
@@ -51,46 +49,39 @@ return (
 <div className="chefKitchen">
   <div className="container">
     <KitchenBanner />
-    {/* <div className="text-blocks">
-      <h4 className="bannerTexts">Steel Chef</h4>
-      <p className="A-one-stop-shop-inte">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-        eiusmod<br /> tempor incididunt ut labore et dolore magna aliqua. </p><br /><br />
-      <button className="butt">
-        <p className="buttontex">Book A Consultation</p>
-      </button>
-    </div> */}
+  
   </div>
   <div className="container">
     <h1 className="Benefits-of-Modular">Benefits of Steel Kitchens</h1>
     <div className="container">
       <div className="row">
         <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic1.png')} alt="rectangle" />
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
           <h3 className="titlesss">modular</h3>
         </div>
         <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic2.png')} alt="rectangle" />
-          <h3 className="titlesss">modular</h3>
-
-        </div>
-        <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic3.png')} alt="rectangle" />
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
           <h3 className="titlesss">modular</h3>
 
         </div>
         <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic4.png')} alt="rectangle" />
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
+          <h3 className="titlesss">modular</h3>
+
+        </div>
+        <div className="col-sm-2">
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
           <h3 className="titlesss">modular</h3>
 
         </div>
       </div>
       <div className="row">
         <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic5.png')} alt="rectangle" />
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
           <h3 className="titlesss">modular</h3>
         </div>
         <div className="col-sm-2">
-          <img className="Combined-Shape" src={require('../../../public/images/ic6.png')} alt="rectangle" />
+          <img className="Combined-Shape" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
           <h3 className="titlesss">modular</h3>
         </div>
       </div>
@@ -229,27 +220,27 @@ return (
     <div className="col-md-10">
     <div className="row colFive">
     <div  className="col-sm-2 colorsKitchen">
-    <img className="colorsKitchen" src={require('../../../public/images/st11.png')} alt="rectangle" />
+    <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
     <h4 className="namingconv" >Cooking Kit</h4>
 
     </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st12.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Dark Wood</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st13.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Dish Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st14.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Multi-Utility Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st15.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Bottle Pull Out Kit</h4>
 
       </div>
@@ -263,27 +254,27 @@ return (
     </div>
     <div className="col-md-10">
       <div  className="col-sm-2 colorsKitchen" >
-      <img className="colorsKitchen" src={require('../../../public/images/st11.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st12.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st13.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st14.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st15.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
@@ -296,27 +287,27 @@ return (
     </div>
     <div className="col-md-10">
       <div  className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st11.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st12.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st13.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st14.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st15.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
@@ -330,12 +321,12 @@ return (
     </div>
     <div className="col-md-10">
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st11.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
       <h4 className="namingconv" >Cooking Kit</h4>
 
       </div>
       <div className="col-sm-2 colorsKitchen">
-      <img className="colorsKitchen" src={require('../../../public/images/st12.png')} alt="rectangle" />
+      <img className="colorsKitchen" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
          <h4 className="namingconv" >Cooking Kit</h4>
       </div>
       
@@ -344,7 +335,7 @@ return (
   </div><br/><br/><br/>
   
   <div className="container">
-    <img className="reactang" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
+    <img className="reactang" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Snow" />
     <div className="Form-bakground">
       <h2 className="Book-a-consultation">Book a consultation</h2>
       <p4 className="Answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -436,13 +427,10 @@ return (
           </div>
         </div>
       </div>
-
-      {/* <div className="faqHeader">Sellers</div> */}
-
-    </div>
+  </div>
   </div>
   <div className="container">
-    <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+    <img className="bigSofa" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
     <div className="text-blocks">
       <h1 className="Image-gallery-Copy-3">Our store</h1>
       <h4 className="Image-gallery-Copy-3 ">Experience our store facilities</h4>

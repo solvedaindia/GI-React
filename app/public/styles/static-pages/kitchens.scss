@@ -6,6 +6,22 @@
 .Kitchen-1{
   width: 100%;
   background-color: #ffffff;
+  .faqContainer {
+    background-color:white;
+   padding: 110px 0 0 0;
+   .Frequently-Asked-Que {
+     padding: 0 0 80px 0;
+     font-family: $font-medium;
+     font-size: 30px;
+     font-weight: 500;
+     font-style: normal;
+     font-stretch: normal;
+     line-height: normal;
+     letter-spacing: normal;
+     text-align: center;
+     color: #000000;
+   }
+   }
   .AlwaysRememberParent{
     padding: 80px 0 0 0;
   }
@@ -561,22 +577,7 @@ react-slideshow-container {
 }
 
 
-.faqContainer {
- background-color:white;
-padding: 110px 0 0 0;
-.Frequently-Asked-Que {
-  padding: 0 0 80px 0;
-  font-family: $font-medium;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #000000;
-}
-}
+
 
 
 

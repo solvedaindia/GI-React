@@ -19,44 +19,16 @@ import WIEspots from '../../components/wardrobesComponent/wardrobesInterio';
 export default class WardrobesContainer extends React.Component {
     constructor(props){
         super(props);
-        const scatchImg1 =  require('../../../public/images/scatch1.png')
-        const scatchImg2 =  require('../../../public/images/btnsch2.jpg')
-        const scatchImg3 =  require('../../../public/images/btnsch3.jpg') 
+       
 
         this.state = {
-            imgList: [scatchImg1,scatchImg2,scatchImg3],
-index: 0
         }
     }
-
-    onHandleClickFirst= () => {
-        if (this.state.index === 0 || this.state.index === 2){
-          this.setState({index:1})
-        } 
-      };
-      onHandleClickSecond(){
-        if (this.state.index === 0 || this.state.index === 1){
-          this.setState({index:2})
-        } 
-      }
-      onHandleClickThird(){
-        if (this.state.index === 1 || this.state.index === 2){
-          this.setState({index:0})
-        }
-      }
-
-
-    render(){
+ render(){
         return (
             <div className="wardrobes1">
               <div className="wardroBanner">
                 <WardrobeBanner />
-                <div className="bannerTextcontainer">
-                  <div className="wardroBannertext">
-                    <a href="#form_consult">
-                      <button className="btn-book">Book A Consultation</button></a>
-                  </div>
-                </div>
               </div>
               <WbEspots />
               <div className="crouselBAckgrounding">
@@ -99,7 +71,7 @@ index: 0
               </div>
               <div id="form_consult" className="formwardrobeContainer">
                 <div className="container">
-                  <img className="formBackGroundCover" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
+                  <img className="formBackGroundCover" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="Snow" />
                   <div className="Form-bakground">
 
                     <ConsultationForm />
@@ -202,7 +174,7 @@ index: 0
               <div className="exp-our-kitchen">
                 <div className="container">
                   <div className="mainImg">
-                    <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+                    <img className="bigSofa" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle" />
                     <div className="ourStores">
                       <h3 className="h3Css">Our store</h3>
                       <h2 className="h2Css">Experience our Store facilities</h2>

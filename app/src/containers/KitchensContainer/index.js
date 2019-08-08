@@ -65,7 +65,7 @@ export default class Kitchens extends React.Component {
               </div>
               <div className="formContainer">
                 <div className="container">
-                  <img className="formBackGroundCover" src={require('../../../public/images/inspi9.jpg')} alt="Snow" />
+                  <img className="formBackGroundCover" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt="Snow" />
                   <div id='consultForm' className="Form-bakground">
                     <ConsultationForm />
                   </div>
@@ -74,9 +74,10 @@ export default class Kitchens extends React.Component {
               <div className="ourprom">
                 <OurPromises />
               </div>
-              <div className="frequesntly">
+              <div className="faqContainer">
+              <h1 className="Frequently-Asked-Que">Frequently asked questions</h1>
+
                 <div className="container">
-                  <h className="Frequently-Asked-Que">Frequently asked questions</h>
                   <div className="panel-group" id="accordion">
                     <div className="panel panel-default">
                       <div className="panel-heading">
@@ -170,7 +171,7 @@ export default class Kitchens extends React.Component {
               <div class="exp-our-kitchen">
                 <div className="container">
                   <div className="mainImg">
-                    <img className="bigSofa" src={require('../../../public/images/inspi9.jpg')} alt="rectangle" />
+                    <img className="bigSofa" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt="rectangle" />
                     <div className="ourStores">
                       <h3 className="h3Css">Our store</h3>
                       <h2 className="h2Css">Experience our Kitchen facilities</h2>

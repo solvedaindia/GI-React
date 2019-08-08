@@ -63,8 +63,11 @@ beforeSlide = () => {
 
 
   render () {
-    const before = 'https://chillikitchens.co.uk/wp-content/uploads/2018/01/chilli-kitchens-hero-banner.jpg'
-    const after = 'http://focuskitchensandbathrooms.com.au/wp-content/uploads/2016/05/promotions-banner.jpg'
+    const beforeImg = imagePrefix + this.state.beforeImage
+    const afterImg = imagePrefix + this.state.afterImage
+console.log('iamges check', afterImg)
+    const before = {beforeImg}
+    const after = {afterImg}
  
     return (
       <>

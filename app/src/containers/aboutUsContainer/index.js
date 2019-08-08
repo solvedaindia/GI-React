@@ -3,8 +3,7 @@ import MediaPress from '../../components/aboutUs/mediaPress';
 import { Link } from 'react-router-dom';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
-import  '../../../public/styles/static-pages/aboutUs.scss'
-import OurProcess from '../../components/aboutUs/ourProcess';
+import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
 import {
   espotAPI,
@@ -12,13 +11,6 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
-import img from '../../../public/images/ourprocessimg.jpg'
-import pic from '../../../public/images/teach.jpg'
-import image from '../../../public/images/ourprocessimg.jpg'
-import pics from '../../../public/images/teach.jpg'
-import images from '../../../public/images/ourprocessimg.jpg'
-import picture from '../../../public/images/teach.jpg'
-import photo from '../../../public/images/ourprocessimg.jpg'
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
 const paraFirst = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
 do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
@@ -28,7 +20,10 @@ do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
 veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf
 conseqya.Lorem ipsum dolor sit amet, consecutetur adipisicing elit, sed do eiumsod tempor
 incididunt ul labore et dolore magna eliqua.ut enim ad minim veniam,quis nostrud
-exercitation ullacamo laboris nisi aliqion ex ea commodo conseqya.`
+exercitation ullacamo laboris nisi aliqion ex ea commodo conseqya.`;
+const img = 'https://192.168.0.57/imagestore/staticImages/aboutUs/teach.jpg';
+const images = 'https://192.168.0.57/imagestore/staticImages/aboutUs/ourprocessimg.jpg';
+
 export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +56,7 @@ handleclick = event => {
     }
    else if(event.target.name == 2) {
     this.setState({
-      img_url: pics,
+      img_url: images,
       content: paraSecond,
       button2: 'active',
       button1: false,
@@ -74,7 +69,7 @@ handleclick = event => {
 }
 else if(event.target.name == 3) {
   this.setState({
-      img_url:image,
+      img_url:img,
       content: paraFirst,
       button3: 'active',
       button1: false,
@@ -88,7 +83,7 @@ else if(event.target.name == 3) {
 }
 else if(event.target.name == 4) {
   this.setState({
-      img_url:pic,
+      img_url:images,
       content: paraSecond,
       button4: 'active',
       button1: false,
@@ -101,7 +96,7 @@ else if(event.target.name == 4) {
 }
 else if(event.target.name == 5) {
   this.setState({
-      img_url:images,
+      img_url:img,
       content: paraFirst,
       button5: 'active',
       button1: false,
@@ -114,7 +109,7 @@ else if(event.target.name == 5) {
 }
 else if(event.target.name == 6) {
   this.setState({
-      img_url:picture,
+      img_url:images,
       content: paraSecond,
       button6: 'active',
       button1: false,
@@ -127,7 +122,7 @@ else if(event.target.name == 6) {
 }
 else if(event.target.name == 7) {
   this.setState({
-      img_url:photo,
+      img_url:img,
       content: paraFirst,
       button7: 'active',
       button1: false,
@@ -143,17 +138,20 @@ else if(event.target.name == 7) {
 
 getImageOnArrowClick = (e) =>{
   if (e.target.name == 'arrowClick'){
-  if (this.state.img_url == img){
-    this.setState({
-    img_url: images
-    })
-  }
-  else if (this.state.img_url == images){
+  if (this.state.img_url == images) {
     this.setState({
       img_url: img
       })
   }
-}}
+  else if (this.state.img_url == img) {
+    this.setState({
+      img_url: images
+      })
+  }
+  
+  
+}
+}
 
 
 render() {
