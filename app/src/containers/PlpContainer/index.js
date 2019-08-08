@@ -228,10 +228,12 @@ export class PlpContainer extends React.Component {
 
   fetchAdBannerData() {
     apiManager
-      .get(`${espotAPI}GI_Plp_Sample_AD_Banner`)
+      .get(`${espotAPI}GI_PLP_AD_BANNER_${categoryId}`)
       .then(response => {
-        this.props.onAdBannerIndexUpdate(response.data.data);
-        this.setState({ adBannerData: response.data.data });
+        if (response.data.data) {
+          this.props.onAdBannerIndexUpdate(response.data.data);
+          this.setState({ adBannerData: response.data.data });
+        }
       })
       .catch(error => { });
   }
@@ -242,18 +244,22 @@ export class PlpContainer extends React.Component {
         headers: {},
       })
       .then(response => {
-        this.setState({ plpSubCatData: response.data.data });
+        if (response.data.data) {
+          this.setState({ plpSubCatData: response.data.data });
+        }
       })
       .catch(error => { });
   }
 
   fetchMarketingTextBannerData() {
     apiManager
-      .get(`${espotAPI}GI_Plp_Sample_Hero_Banner`)
+      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId}`)
       .then(response => {
-        this.setState({
-          marketingTextBannerData: response.data.data.bannerList[0].content,
-        });
+        if (response.data.data) {
+          this.setState({
+            marketingTextBannerData: response.data.data.bannerList[0].content,
+          });
+        }
       })
       .catch(error => { });
   }
@@ -378,9 +384,11 @@ export class PlpContainer extends React.Component {
 
   fetchDescriptionData() {
     apiManager
-      .get(`${espotAPI}GI_Plp_Description`)
+      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId}`)
       .then(response => {
-        this.setState({ plpDescriptionData: response.data.data });
+        if (response.data.data.description) {
+          this.setState({ plpDescriptionData: response.data.data });
+        }
       })
       .catch(error => {
         // console.log('PLPBannerrror---', error);s
@@ -504,6 +512,7 @@ export class PlpContainer extends React.Component {
 
     let descriptionItem;
     if (this.state.plpDescriptionData != null) {
+      console.log('in dessss -- ',this.state.plpDescriptionData);
       descriptionItem = (
         <DescriptionBanner
           descriptionDataPro={this.state.plpDescriptionData}
