@@ -302,7 +302,7 @@ export class HeaderMobile extends React.Component {
                 </li>
               ))}
             {myAccountItem}
-            { !this.state.layer1Data && this.state.layer1Data.map((linkData, index) => {
+            {this.state.layer1Data && this.state.layer1Data.map((linkData, index) => {
               return (
                 <>
                   {
@@ -348,7 +348,7 @@ export class HeaderMobile extends React.Component {
             <div onClick={this.onMenuClick.bind(this)} className="handler">
               <img
                 className="nav-bar-img"
-                src={require('../../../../public/images/RWD Assets/menu.svg')}
+                src={require('../../../../public/images/rwd-assets/menu.svg')}
                 alt="my image"
               />
             </div>

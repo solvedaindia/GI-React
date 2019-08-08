@@ -43,19 +43,23 @@ class productInfo extends React.Component {
 		showOffer = true;
 	}
 	
-	
     return (
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
-        {this.props.pinCodeData.shippingCharge &&
         <div className="shippingCharge">
           Shipping Charges:{' '}
           <span className="bold">
-            &#8377;
-            {this.props.pinCodeData.shippingCharge}
+            {this.props.pinCodeData.shippingCharge > 0 ? (
+            <>
+              &#8377;
+              {this.props.pinCodeData.shippingCharge}
+            </>
+            ) : (
+              <>Free</>
+            )}
           </span>
         </div>
-        }
+      
         
         <>
 		{ showOffer &&

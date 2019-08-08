@@ -595,7 +595,6 @@
 
     .attr-details-box{
         padding-top: 15px;
-        border-bottom: 1px solid $borderLight;
         margin: 0 0 0px 0;
         .swatcheWrapper{margin:0 0 20px 0}
         .boxClass{   
@@ -1569,6 +1568,7 @@
                       }
                     }
                 .attr-details-box {
+                    border-bottom: 1px solid $borderLight;
                     .att-val-name{
                         .attributeVal{
                             font-size: 12px;
@@ -1882,8 +1882,12 @@
                 }   
                 .accessories-offer{
                     float: left;
-                    margin: 13px 5px 0px 20px;
-                    position:absolute;                   
+                    left: 20px;
+                    position: absolute;
+                    width: 30px;
+                    top: 12px;
+                    margin: 0px;
+                    padding: 0px;                                
                     .offerbg{
                         width: 28px;
                         height: 28px;

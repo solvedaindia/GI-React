@@ -325,7 +325,7 @@ export class PlpContainer extends React.Component {
           }
 
           if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
-            
+
             const coloumnValue = response.data.data.categoryDetails.columns;
             this.props.initialValuesUpdate(coloumnValue);
             this.setState({
@@ -369,7 +369,7 @@ export class PlpContainer extends React.Component {
       var splitFacet = facetValue.split(' '); // If more than 1 filter applied from the same Facet
       filterResponse.map((facetItem, index) => {
         facetItem.facetValues.map((innerItem, index) => {
-          if (splitFacet.includes(innerItem.value.replace(/\+/g, '%2B'),) /*innerItem.value === facetValue*/) {
+          if (splitFacet.includes(innerItem.value.replace(/\+/g, '%2B')) /*innerItem.value === facetValue*/) {
             name = facetItem.facetName;
             innerItem.value = innerItem.value.replace(/\+/g, '%2B');
             reduxFilter.push(innerItem);

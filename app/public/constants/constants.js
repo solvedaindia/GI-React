@@ -93,6 +93,26 @@ export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
 /* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
+/* wardrobes Banner Slider */
+export const wardrobesBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_BANNER`;
+/* wardrobes Hall Slider */
+export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_HALL_OF_FAME `;
+/* kitchens Banner Slider */
+export const kitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_BANNER`;
+/* before after Slider */
+export const beforeAfterApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_BEFORE_AFTER_SLIDER `;
+/* Always remember Hall Slider */
+export const AlwaysRememberApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHEN_PLANNING `;
+/* kitchens Hall Slider */
+export const kitchenHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_HALL_OF_FAME `;
+/*what goes in godrej kitchen Slider */
+export const whatGoesKitchenAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_MODULAR_KITCHEN_SLIDER `;
+/*  types of Wardrobes Slider */
+export const typesOfWardrobesAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_TYPES_OF_MODULAR_WARDROBES `;
+/*  inspiration banner */
+export const inspirationBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_INSPIRATION_LOOKBOOK_BANNER `;
+/*  browse by lookbook theme carousel */
+export const lookbookThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_THEME`;
 /* HomePage Track Order */
 export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/current`;
 /* Featured Category */
@@ -161,6 +181,10 @@ export const mapKey = 'AIzaSyBsrzy8y4BCLnpnqZ_MN0F6yTSIAa8Bg-I';
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;
 /* Address List API */
 export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
+/* Consultation form post API*/
+export const consultFormApi = `${secureHttp}://${host}:${port2}/api/v1/static/bookconsultation`;
+/* Consultation form dropdown get API*/
+export const consultGetApi = `${secureHttp}://${host}:${port2}/api/v1/static/getconsultation`;
 /* User data API */
 export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
 /* Order List API */
