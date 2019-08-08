@@ -39,25 +39,25 @@
         font-family: $font-regular;
         margin:15px 0 0 0;
         font-size: 14px;
+        text-align: justify;
       }
 
     }
     .Redparagraph{      
-      font-family: $font-regular;
+      font-family: CeraGIRegular, sans-serif;
       font-size: 14px;
-      line-height: 16px;
-      padding: 0 0 16px 0;
-
       font-weight: normal;
       font-style: normal;
       line-height: 1.43;
-      color: #D2691E;
-      text-align: left;
+      color: #888a8d;
+      text-align: justify;
+      padding: 0 0 32px 0;
+      margin: 0;
     }
     .Rednote{
       line-height: 16px;
     padding: 0 0 16px 0;
-color: #D2691E;
+color: #000000;
       font-weight: bold;
       font-size: 16px;
       text-align: left;
@@ -116,6 +116,7 @@ color: #D2691E;
       text-align: left;
       padding:0 0 32px 0;
       margin:0;
+      text-align: justify;
 
     }
     .heading{
