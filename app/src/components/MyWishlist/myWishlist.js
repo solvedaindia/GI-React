@@ -41,6 +41,7 @@ class MyWishlist extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (getCookie('isLoggedIn') !== 'true') {
       this.props.history.push('/')
       return;
