@@ -298,7 +298,6 @@
     }
     .promoList {
         margin: 0;
-        padding: 0 $base*4;
         .promoListItem {
             border-bottom: 1px solid $borderLight;
             position: relative;
@@ -477,6 +476,11 @@
         }
     } 
 } 
+    .viewAllPopUp {
+        .promoList{
+            padding: 0 $base*4;
+        }
+    }
 }
 
 /* 
@@ -718,6 +722,16 @@
         .modal-dialog {
             width: 100%;
             height: auto;
+            .modal-content{
+                .modal-body{
+                    .heading{
+                        padding:0 $base*2.5;
+                    }
+                    .promoList{
+                        padding: 0 $base*2.5;
+                    }
+                }
+             }
         }
     }
     .modal_emiInstallment {
