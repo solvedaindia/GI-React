@@ -361,6 +361,9 @@
                         line-height: 12px;
                         font-weight: normal;
                     }
+                    .error-msg.errorAcountnotfound{
+                        bottom:-6px;
+                    }
                 }
                 .bill-address {
                     padding: 9px 0 20px 0;
@@ -658,6 +661,9 @@
         padding: 56px 0 100px 0;
         .form-control {
             height: 54px;
+        }
+        .proceedButton{
+            margin:15px 0 0  0;
         }
         .container {
             width: 85%;

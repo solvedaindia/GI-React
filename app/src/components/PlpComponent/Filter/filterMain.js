@@ -10,6 +10,8 @@ import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
 
+import crossIcon from '../../../../public/images/closeplpFilter.svg';
+
 import Filter from './filter';
 
 {/* <button style="
@@ -111,7 +113,7 @@ class FilterMain extends React.Component {
 
     const item = appliedFilltersArr.map((data, i) => {
       return (
-        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>X</span></button>
+        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}><img className='crossImg' src={crossIcon}/></span></button>
       )
     })
     this.setState({
