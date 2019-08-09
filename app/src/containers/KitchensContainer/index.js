@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import  '../../../public/styles/static-pages/kitchens.scss'
-import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
-import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
-import InsCrousel from '../../components/Primitives/crousel'
+import React, { Component } from 'react';
+import  '../../../public/styles/static-pages/kitchens.scss';
+import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens';
+import DreamKitchens from '../../components/KitchensComp/DreamKitchens';
+import InsCrousel from '../../components/Primitives/crousel';
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
@@ -16,8 +16,9 @@ import LayoutImage from '../../components/KitchensComp/layoutImage';
 import FaqEspot from '../../components/Primitives/faq.js';
 import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
 import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
-
-import {Link} from 'react-router-dom'
+import ExKitchens from '../../components/KitchensComp/expKitchens';
+import {Link} from 'react-router-dom';
+import '../../../public/styles/static-pages/consultForm.scss';
 
 
 export default class Kitchens extends React.Component {
@@ -65,7 +66,7 @@ export default class Kitchens extends React.Component {
               </div>
               <div className="formContainer">
                 <div className="container">
-                  <img className="formBackGroundCover" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt="Snow" />
+                  <img className="formBackGroundCover" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="Snow" />
                   <div id='consultForm' className="Form-bakground">
                     <ConsultationForm />
                   </div>
@@ -168,23 +169,8 @@ export default class Kitchens extends React.Component {
               </div>
               {/*
               <FaqEspot /> */}
-              <div class="exp-our-kitchen">
-                <div className="container">
-                  <div className="mainImg">
-                    <img className="bigSofa" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt="rectangle" />
-                    <div className="ourStores">
-                      <h3 className="h3Css">Our store</h3>
-                      <h2 className="h2Css">Experience our Kitchen facilities</h2>
-                      <p className="paragraphcss">Experience our kitchens at <span className="spanish">Vikroli
-                          Godrej Store (1.6 km away) </span>
-                        You can find more stores around you.</p>
-                      <Link to='/storelocator'>
-                      <button className="storeButton">Find More Stores</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
+              <ExKitchens/>
               <InterioText />
             </div>
         )

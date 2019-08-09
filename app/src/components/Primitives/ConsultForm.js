@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../public/styles/static-pages/warobes.scss';
+import '../../../public/styles/static-pages/consultForm.scss';
 import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';

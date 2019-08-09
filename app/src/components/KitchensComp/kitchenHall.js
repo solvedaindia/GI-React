@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
-// import  '../../../public/styles/static-pages/warobes.scss'
 
 import {
   kitchenHallAPI,
@@ -52,7 +51,6 @@ class KitchenHall extends React.Component {
 
   render() {
     const { hallSlider } = this.state;
-    // console.log('test data', description)
     const settings = {
       dots: true,
       infinite: true,
@@ -68,7 +66,7 @@ class KitchenHall extends React.Component {
           {!!hallSlider &&
             hallSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img className='Paragraph-Copy-13' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <img className='kitchenhallsize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                </a>
             ))}
         </Slider>
