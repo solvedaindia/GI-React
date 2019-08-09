@@ -64,11 +64,13 @@ class Wishlist extends React.Component {
     apiManager
       .post(addToWishlist, data)
       .then(response => {
+        const data = getUpdatedWishlist(this);
+      if(data) {
         this.setState({
           wishlistCurrentImage: wishlistAddedImg,
           wishlistPopup: this.wishlistPopupItem(),
         });
-        getUpdatedWishlist(this);
+      }
       })
       .catch(error => {
         console.log('newsError---', error);
