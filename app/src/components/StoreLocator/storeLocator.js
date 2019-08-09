@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import apiManager from '../../utils/apiManager';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps";
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 import { storeAPI, storeCityAPI, storeById, mapKey } from '../../../public/constants/constants';
 import '../../../public/styles/store/locator.scss';
 import Img1 from '../../../public/images/store/furniture-stores-black.png';
@@ -16,7 +17,12 @@ import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
 const NUMB_REG = /^\d+$/;
-
+const prevArrowImg = (
+    <img src={require('../SVGs/carousel__arrowLeft.svg')} />
+  );
+  const nextArrowImg = (
+    <img src={require('../SVGs/carousel__arrowRight.svg')} />
+  );
 class StoreLocator extends React.Component {
     constructor(props) {
         super();
@@ -32,7 +38,51 @@ class StoreLocator extends React.Component {
             isOpen: false,
             Infokey: null,        
         };
-        
+
+        this.settings = {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            arrows: true,
+            prevArrow: prevArrowImg,
+            nextArrow: nextArrowImg,
+            // prevArrow,
+            // nextArrow,
+            responsive: [
+              {
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: true,
+                  dots: true,
+                },
+              },
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2,
+                  initialSlide: 2,
+                  dots: true,
+                  prevArrow: false,
+                  nextArrow: false,
+                },
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  dots: true,
+                  prevArrow: false,
+                  nextArrow: false,
+                },
+              },
+            ],
+          };        
     }
 
     componentDidMount() { 
@@ -319,7 +369,7 @@ class StoreLocator extends React.Component {
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
                         <input type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
-                        <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>Find Stores</button>
+                        <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Find Stores':'Find'}</button>
                     </div>
 
                     { showFilter &&
@@ -380,7 +430,7 @@ class StoreLocator extends React.Component {
                                         }
                                         return(
                                             <div key={index}>
-                                                <div className={`storeListItem ${ribbonClass}`}>
+                                                 {!isMobile() ? (<div className={`storeListItem ${ribbonClass}`}>
                                                     { physicalData.ribbonText &&
                                                     <div className="modular_wardrobe">
                                                         <img className='icons' src={starIcon} alt="star"/>
@@ -408,7 +458,36 @@ class StoreLocator extends React.Component {
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    </div>):
+                                                    (<Slider {...this.settings}><div className={`storeListItem ${ribbonClass}`}>
+                                                    { physicalData.ribbonText &&
+                                                    <div className="modular_wardrobe">
+                                                        <img className='icons' src={starIcon} alt="star"/>
+                                                        <div className='ribbonText'>{physicalData.ribbonText}</div>
+                                                    </div>
+                                                    }
+                                                    <div className="Storewrapper">
+                                                        <h2 className="storeName">{physicalData.storeName}</h2>
+                                                        { this.props.history.location.state.pincode && 
+                                                        <>
+                                                            <div className="distance">{data} Km</div>
+                                                        </>
+                                                        }
+                                                    </div>
+                                                    <p className='store-detal-desc'>{physicalData.address1} {physicalData.address2} {physicalData.address3}, {physicalData.city} - {physicalData.pinCode}</p>
+                                                    <div className="phoneDetails">
+                                                        <img className="phoneicon" src={phoneIcon} alt="phone"/>
+                                                        <div className="PhoneNo">{physicalData.telephone}</div>
+                                                    </div>
+                                                    <div className="direction_dealerwrp">
+                                                        <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                            Get Directions
+                                                        </Link>
+                                                        <div className="dealer">
+                                                            <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
+                                                        </div>
+                                                    </div>
+                                                    </div></Slider>)}
                                             </div>
                                         );
                                     }

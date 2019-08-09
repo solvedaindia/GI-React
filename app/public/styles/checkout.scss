@@ -853,10 +853,31 @@
                                 margin: 0 0 0 10px;
                                 font-size: 14px;
                             }
-                        } 
-                        .dropdown-toggle {
-                            padding: 14px 15px;
-                            margin: 0 0 20px 0;
+                        }
+                        .dropdown{ 
+                            margin-bottom: 10px;
+                            .dropdown-toggle {
+                                padding: 10px 15px;
+                                color: $greyBorder;
+                                font-size: 12px;
+                                font-family: $font-regular;
+                                min-width: 310px;
+                                .caret{
+                                    top: 18px;
+                                }
+                            }
+                            .dropdown-menu{
+                                position:initial;
+                                margin-top: -1px;
+                                li{
+                                    padding: 10px 15px;
+                                    a{
+                                        padding: 3px 0px;
+                                        color: $greyBorder;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -898,10 +919,11 @@
                                 letter-spacing: 12px;
                             }
                             .form-label{
-                                margin: 14px 0px 0px 10px;
+                                margin: 15px 0px 0px 10px;
                                 background: $colorwhite;
-                                font-size: 11px;
+                                font-size: 10px;
                                 padding: 0px 10px;
+                                font-family: $font-light;
                             }
                         }
                     } 

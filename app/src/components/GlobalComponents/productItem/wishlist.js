@@ -128,7 +128,7 @@ class Wishlist extends React.Component {
       this.setState({
         wishlistPopup: null,
       });
-    }, 2000);
+    }, 3000);
     let pdpWishlist = '';
     if (this.props.isPDP) {
       pdpWishlist = 'pdpWishlist';

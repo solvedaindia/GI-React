@@ -1922,6 +1922,16 @@
                 .quantity-text{
                     display: none;
                 }
+                .addedToWishlist{
+                    &.dropdownwishlist{
+                        top: initial;
+                        right: 0px;
+                        position: fixed;
+                        bottom: 55px;
+                        left: 0px;
+                        width: 100%;
+                    }
+                } 
             }
             .addCart.quantity-box{
                 .btn:last-child{
@@ -1960,6 +1970,16 @@
                 border-top: 1px solid $lightGrey;
                 margin: 10px 0px;
                 border-bottom: 1px solid $lightGrey;
+                .addedToWishlist{
+                    &.pdpWishlist{
+                        position: fixed;
+                        top: initial;
+                        right: 0;
+                        left: 0px;
+                        bottom: 55px;
+                        width: 100%;
+                    }
+                }
             }
             .product-share{
                 .wishListDiv{

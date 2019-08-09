@@ -298,7 +298,6 @@
     }
     .promoList {
         margin: 0;
-        padding: 0 $base*4;
         .promoListItem {
             border-bottom: 1px solid $borderLight;
             position: relative;
@@ -482,6 +481,11 @@
         }
     } 
 } 
+    .viewAllPopUp {
+        .promoList{
+            padding: 0 $base*4;
+        }
+    }
 }
 
 /* 
@@ -723,6 +727,39 @@
         .modal-dialog {
             width: 100%;
             height: auto;
+            .modal-content{
+                .modal-body{
+                    .heading{
+                        padding: 20px 20px;
+                        text-align: left;
+                        font-size: 14px;
+                    }
+                    .promoList{
+                        padding: 0 $base*2.5;
+                        .promoListItem{
+                            .promoCode{
+                                font-size: 14px;
+                                padding-bottom: 0px;
+                            }
+                            .promoDesc{
+                                font-size: 11px;
+                                padding: 0px 0px 10px 0px;
+                                line-height: normal;
+                            }
+                            .applyPromo{
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .close{
+                        top:14px;
+                    }
+                }
+             }
+        }
+        &.in.modal{
+            bottom: 0px;
+            top:initial;
         }
     }
     .modal_emiInstallment {
