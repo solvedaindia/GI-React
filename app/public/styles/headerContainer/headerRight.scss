@@ -1,5 +1,8 @@
 @import '../variable';
-.rightSide > li.user.icons{line-height: 51px; margin-top: 18px;}
+.rightSide > li.user.icons{
+    display: inline-flex;
+    padding: 20px 0;
+}
 .rightSide {
     margin-bottom: 0;
     .icons {
@@ -38,8 +41,11 @@
         }
         .welcomeDropDown{
             .userList{               
-                li{
-                    line-height: 10px;
+                .listItem{
+                    height: $base*5.5;
+                    &.listItemUnSelected {
+                        height: $base*4.25;
+                    }
                 }
             }
         }

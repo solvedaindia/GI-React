@@ -326,10 +326,15 @@
                 font-size: $base*2;
                 right: $base*4;
                 top: $base;
+                font-family: $font-medium;
+                cursor: pointer;
             }
         }
     }
-    
+    .promoError {
+        color: $errorMsg;
+        padding: $base*3;
+    }
 }
 .deletItem {
     .modal-dialog {

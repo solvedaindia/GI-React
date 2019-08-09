@@ -90,7 +90,7 @@ class CartDetail extends React.Component {
                     <p className='delBy'>DELIVERY BY:</p>
                     <span className='date'>{itemData.deliveryDate}</span>
                     {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
-					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
+					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges === 0 ? 'FREE' : itemData.shippingCharges}</span>}
 				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&
@@ -122,18 +122,18 @@ class CartDetail extends React.Component {
 					<PromoField
 						orderID={cartData.orderSummary.orderID}
 						getCartDetails={this.props.getCartDetails}
-					/>}
-
-					<GetCartPromo
-						orderID={cartData.orderSummary.orderID}
-						getCartDetails={this.props.getCartDetails}
 					/>
+				}
+				<GetCartPromo
+					orderID={cartData.orderSummary.orderID}
+					getCartDetails={this.props.getCartDetails}
+				/>
             </div>
             <h2 className='title'>Order Summary</h2>
             <div className='summary'>
               <p className='cartTotal'>
                 <span className='info'>Cart Total</span>
-                <span className='val'> ₹{formatPrice(cartData.orderSummary.totalAmount)}</span>
+                <span className='val'> ₹{formatPrice(cartData.orderSummary.totalAmount === '' ? '0' : cartData.orderSummary.totalAmount)}</span>
               </p>
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">

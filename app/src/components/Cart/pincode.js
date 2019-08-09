@@ -59,7 +59,7 @@ class Pincode extends React.Component {
   render() {
 	  let attrs = {};
 	  if ( !this.state.edit ) {
-		  attrs = { readOnly : true }
+		  attrs = { readOnly : false }
 	  }
     return (
 		<>

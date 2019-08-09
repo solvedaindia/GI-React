@@ -8,6 +8,7 @@ import {
 	clpThemeAPI,
 	imagePrefix
 } from '../../../public/constants/constants';
+import ThemeListData from './themeList';
 
 let catID;
 class LivingTheme extends React.Component {
@@ -29,8 +30,8 @@ class LivingTheme extends React.Component {
   		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${catID}`)
   		.then(response => {
   			this.setState({
-  			themeData: response.data.data,
-  			isLoading: false,
+				themeData: response.data.data,
+				isLoading: false,
   			});
   			console.log('#######&&&&&&&', response.data.data);
   		})
@@ -71,12 +72,9 @@ class LivingTheme extends React.Component {
 						<div className='content-childTheme'>
 							<figure>
 								<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
+								<ThemeListData themeItem = { themeItem } />
+
 							</figure>
-							{themeItem.recoIconArray.map((itemDetail) => {
-								return (
-									<ThemeData itemDetail={itemDetail} />
-								)
-							})}
 						</div>
 					)
 				})
@@ -88,11 +86,7 @@ class LivingTheme extends React.Component {
 								<figure>
 									<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
 								</figure>
-								{themeItem.recoIconArray.map((itemDetail) => {
-									return (
-										<ThemeData itemDetail={itemDetail} />
-									)
-								})}
+								<ThemeListData themeItem = { themeItem } />
 							</div>
 						)
 					})}

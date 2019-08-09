@@ -149,7 +149,7 @@ class UserAccInfo extends React.Component {
     } else {
       this.setState({
         userType:
-          <li className="listItemUnSelected">
+          <li className="listItem listItemUnSelected">
             <a className="dropDown">Hello Guest</a>
           </li>
         ,
@@ -209,7 +209,7 @@ class UserAccInfo extends React.Component {
           {/* <li className="listItem"> */}
           {this.state.userName !== null &&
             getCookie('isLoggedIn') === 'true' ? (
-              <li className="listItemUnSelected">
+              <li className="listItem listItemUnSelected">
                 <a className="dropDown">{this.state.userName}!</a>
               </li>
             ) : null}

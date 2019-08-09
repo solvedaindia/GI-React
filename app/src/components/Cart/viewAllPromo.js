@@ -67,11 +67,11 @@ class ViewAllPromo extends React.Component {
           onHide={this.handleClose}
         >
           <Modal.Body>
+            <Button className="close" onClick={this.handleClose} />
+            <h4 className="heading">Available Promo codes/Coupons</h4>
             {!!error && (
               <div className="promoError">This promo code is not valid.</div>
             )}
-            <Button className="close" onClick={this.handleClose} />
-            <h4 className="heading">Available Promo codes/Coupons</h4>
             <ul className="promoList viewAll">
               {!!promo &&
                 promo.map((sellerItemData, index) => (
