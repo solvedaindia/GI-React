@@ -73,7 +73,6 @@ class LivingTheme extends React.Component {
 							<figure>
 								<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
 								<ThemeListData themeItem = { themeItem } />
-
 							</figure>
 						</div>
 					)

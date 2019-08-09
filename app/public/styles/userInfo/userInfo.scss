@@ -21,14 +21,11 @@
         right: 0;
         border-top: 1px solid #ddd; 
         background-color: $colorwhite;
-        -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        border: 1px solid #F5F5F6;
+        -webkit-transition: opacity 200ms, visibility 200ms;
+        transition: opacity 200ms, visibility 200ms;
+        -webkit-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        -moz-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
         z-index: 3;
         .dropDown {
             font-size: $base*1.75;
@@ -65,8 +62,6 @@
                 font-size: $base*1.5;
             }
             &:hover {
-                // background-color: transparent; 
-                
                 cursor: default;
                 .dropDown {
                     color:$cerulean;
