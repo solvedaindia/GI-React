@@ -655,7 +655,7 @@ section.tablecarousel {
       }
 
       .filterbtnWrapper {
-        padding: 30px 0 0 0;
+        padding: 22px 0 0 0;
         .btn {
           padding: 12px 60px;
           border-radius: 0;
@@ -810,14 +810,18 @@ section.tablecarousel {
 
 //Filter Selection
 .filterSelection_btn {
-  padding: 9px 26px;
+  padding: 11px 0px;
   height: 34px;
   border-radius: 2px;
   background-color: #eef8fe;
   position: relative;
-  margin: 0 16px 12px 0;
+  margin: 0 13px 12px 0;
   border: none;
-  min-width: 100px;
+  min-width: 125px;
+  font-size:$base* 1.5;
+  line-height:$base* 1.5;
+  font-family: $font-medium;
+  color:$greyish;
   cursor: default;
   &:focus {
     border: none;
@@ -827,16 +831,22 @@ section.tablecarousel {
 
 .filterSelection_oval {
   width: 18px;
-  height: 18px;
-  border: solid 1px var(--light-blue-grey);
-  background-color: #ffffff;
+  height: 18px; 
+  background-color:$colorwhite;
   position: absolute;
-  top: -8px;
+  top: -5px;
   right: -5px;
   border-radius: 50%;
-  border: 1px solid #d1d1d2;
+  border: 1px solid $lightblueGrey;
   font-size: $base * 1.5;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .crossImg{
+    width:10px;
+    height:10px;
+  }
 }
 
 //Lazy loading Indicator

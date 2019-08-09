@@ -199,7 +199,7 @@ export class Step1Component extends React.Component {
 
     errorMessage = message => {
      if(message === 'user verify err') {
-       return <div className="error-msg">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
+       return <div className="error-msg errorAcountnotfound">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
      } else {
       console.log("user error found")
       return  <div className="error-msg">{message}</div>;
@@ -313,7 +313,7 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    {!isMobile() ? (<button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
+                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
                   </div>
             
               

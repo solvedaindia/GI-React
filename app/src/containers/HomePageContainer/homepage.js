@@ -8,6 +8,7 @@ import {
 import {is} from '../../utils/utilityManager';
 import appCookie from '../../utils/cookie';
 import CrossIcon from '../../components/SVGs/crossIcons.svg';
+import LoadingIndicator from '../../utils/loadingIndicator';
 
 export class HomapegeLayout extends React.Component {
 	constructor(props) {
@@ -76,7 +77,7 @@ export class HomapegeLayout extends React.Component {
 		const { homepageLayout } = this.state;
 		return (
 			<> {
-			!!homepageLayout &&
+			!!homepageLayout ? (			
 			homepageLayout.map((widget, i) => (
 				<WidgetList
 					{...widget}
@@ -84,6 +85,9 @@ export class HomapegeLayout extends React.Component {
 					index={`${widget.title}_widget_${i}`}
 				/>
 			))
+			) : (
+				<LoadingIndicator />
+			)
 			}
 			{ this.state.cookiePolicy === 'true' &&
 				<div className="cookiesPolicySticky">

@@ -52,6 +52,8 @@ export function getUpdatedWishlist(wishlist) {
       // wishlist.props.resetRemoveFromWishlistFlag(true)
     })
     .catch(error => {});
+
+    return true;
 }
 
 export function getUpdatedMinicartCount(minicart) {
