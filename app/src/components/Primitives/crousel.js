@@ -1,7 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
-import '../../../public/styles/slider.scss';
+import '../../../public/styles/static-pages/inspiration.scss';
+
 
 import {
   lookbookThemeAPI,
@@ -22,7 +23,7 @@ class LookbookThemeCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hallSlider: null,
+      lookbookThemeSlider: null,
       isLoading: false,
       error: null,
       title: '',
@@ -38,7 +39,7 @@ class LookbookThemeCarousel extends React.Component {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
         this.setState({
-          hallSlider: data && data.data.bannerList,
+          lookbookThemeSlider: data && data.data.bannerList,
           title: data && data.data.title,
           description:data && data.data.desc,
           isLoading: false,
@@ -60,8 +61,7 @@ class LookbookThemeCarousel extends React.Component {
   }
 
   render() {
-    const { hallSlider } = this.state;
-    // console.log('test data', description)
+    const { lookbookThemeSlider } = this.state;
     const settings = {
             dots: false,
             infinite: false,
@@ -103,8 +103,8 @@ class LookbookThemeCarousel extends React.Component {
           <h2 className="Browse-Lookbook-by-T">{this.state.title}</h2>
           <p className="Paragraphhall">{this.state.description}</p>
           <Slider {...settings}>
-            {!!hallSlider &&
-              hallSlider.map((sliderData, index) => (
+            {!!lookbookThemeSlider &&
+              lookbookThemeSlider.map((sliderData, index) => (
                 <a href={sliderData.onClickUrl} key={index}>
                   <img className='sliderImageSize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                 </a>

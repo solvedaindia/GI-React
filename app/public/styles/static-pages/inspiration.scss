@@ -8,7 +8,9 @@
       padding: 0 0 120px 0;
     }
     .sliderImageSize{
-      border-radius: 50%;
+      border-radius: 60%;
+      width: 100%;
+      height:auto
       
     }
     .lookcrouse{
@@ -223,22 +225,7 @@
 
   
   
-  .leftArrow {
-    margin-left:-47px;
-    font-size: 0;
-    line-height: 0;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    -webkit-transform: translate(0,-50%);
-    -ms-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-    cursor: pointer;
-    color: transparent;
-    border: none;
-    outline: 0;
-    background: 0 0;
-  }
+  
   .text-blocker {
       width: 407px;
       height: 185px;
