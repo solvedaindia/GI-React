@@ -1127,7 +1127,16 @@ section.tablecarousel {
           .text {
             line-height: 18px;
           }
-        } 
+        }
+        .addedToWishlist{
+          width: 100%;
+          position: fixed;
+          bottom: 58px;
+          top: initial;
+          left: 0;
+          right: 0;
+          z-index: 9;
+        }
       } 
       .hoverBox{
         padding:5px 20px;
