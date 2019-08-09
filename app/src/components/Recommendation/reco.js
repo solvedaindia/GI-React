@@ -3,6 +3,7 @@ import apiManager from '../../utils/apiManager';
 import {
     recommendationAPI,
 } from '../../../public/constants/constants';
+import { formatPrice } from '../../utils/utilityManager';
 import { Link } from 'react-router-dom';
 
 import '../../../public/styles/reco/reco.scss';
@@ -77,8 +78,8 @@ class Recommendation extends React.Component {
                                 <div className='details'>
                                     <p className='name'>{recoData.recommendationArray[0].productName}</p>
                                     <p className='price'>
-                                        <span className='offerPrice'>₹{recoData.recommendationArray[0].offerPrice}</span>
-                                        <span className='actualPrice'>₹{recoData.recommendationArray[0].actualPrice}</span>
+                                        <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[0].offerPrice)}</span>
+                                        <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[0].actualPrice)}</span></span>
                                     </p>
                                     <p className='emiInfo'>
                                     EMI Starting from ₹399
@@ -96,8 +97,8 @@ class Recommendation extends React.Component {
                                 <div className='details'>
                                     <p className='name'>{recoData.recommendationArray[1].productName}</p>
                                     <p className='price'>
-                                        <span className='offerPrice'>₹{recoData.recommendationArray[1].offerPrice}</span>
-                                        <span className='actualPrice'>₹{recoData.recommendationArray[1].actualPrice}</span>
+                                        <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[1].offerPrice)}</span>
+                                        <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[1].actualPrice)}</span></span>
                                     </p>
                                     <p className='emiInfo'>
                                     EMI Starting from ₹399
@@ -118,8 +119,8 @@ class Recommendation extends React.Component {
                                 <div className='details'>
                                     <p className='name'>{recoData.recommendationArray[2].productName}</p>
                                     <p className='price'>
-                                        <span className='offerPrice'>₹{recoData.recommendationArray[2].offerPrice}</span>
-                                        <span className='actualPrice'>₹{recoData.recommendationArray[2].actualPrice}</span>
+                                        <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[2].offerPrice)}</span>
+                                        <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[2].actualPrice)}</span></span>
                                     </p>
                                     <p className='emiInfo'>
                                     EMI Starting from ₹399

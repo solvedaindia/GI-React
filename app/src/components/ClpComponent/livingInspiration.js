@@ -9,6 +9,7 @@ import {
 	imagePrefix
 } from '../../../public/constants/constants';
 
+let catID;
 class LivingTheme extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,7 +26,7 @@ class LivingTheme extends React.Component {
 
   getThemeData() {
   	apiManager
-  		.get(clpThemeAPI+'GI_CLP_THEME_living')
+  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${catID}`)
   		.then(response => {
   			this.setState({
   			themeData: response.data.data,
@@ -37,6 +38,12 @@ class LivingTheme extends React.Component {
   }
 
   componentDidMount() {
+	const path = String(window.location.pathname);
+    const idStr = path.split('/')[2];
+    const categoryName = idStr;
+    if (idStr != undefined && idStr !== catID) {
+      catID = categoryName;
+    }
   	this.getThemeData();
   }
 

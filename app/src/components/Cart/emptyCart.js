@@ -37,8 +37,8 @@ class EmptyCart extends React.Component {
             <li className="detailCard">
               <DeliveryLogo width={34} height={34} />
               <h3 className="cardHeading">On time delivery</h3>
-              <p className="cardInfo">On orders above ₹5000 and above.</p>
-            {!isMobile() ? <a href="/help" className="detailLink">
+              <p className="cardInfo">On orders above ₹5,000 and above.</p>
+            {!isMobile() ? <a href="/support" className="detailLink">
                 Details
               </a> : ''
             }
@@ -46,8 +46,8 @@ class EmptyCart extends React.Component {
             <li className="detailCard">
               <InstallLogo width={34} height={34} />
               <h3 className="cardHeading">Free Installation</h3>
-              <p className="cardInfo">On orders above ₹5000 and above.</p>
-              {!isMobile() ? <a href="/help" className="detailLink">
+              <p className="cardInfo">On orders above ₹5,000 and above.</p>
+              {!isMobile() ? <a href="/support" className="detailLink">
                 Details
               </a> : ''
             }
@@ -55,8 +55,8 @@ class EmptyCart extends React.Component {
             <li className="detailCard">
               <ExchangeLogo width={34} height={34} />
               <h3 className="cardHeading">Furniture Exchange</h3>
-              <p className="cardInfo">On orders above ₹5000 and above.</p>
-              {!isMobile() ? <a href="/help" className="detailLink">
+              <p className="cardInfo">On orders above ₹5,000 and above.</p>
+              {!isMobile() ? <a href="/support" className="detailLink">
                 Details
               </a> : ''
             }

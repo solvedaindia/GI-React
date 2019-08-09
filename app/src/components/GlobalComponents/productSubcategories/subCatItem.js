@@ -2,7 +2,6 @@ import React from 'react';
 import SubCatImage from './subCatImage';
 import { formatPrice } from '../../../utils/utilityManager';
 
-
 const subCatItem = ({ itemData }) => (
     <>
         <div className="featureCarouselbox clearfix">

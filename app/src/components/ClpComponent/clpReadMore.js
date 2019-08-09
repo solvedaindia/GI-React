@@ -5,6 +5,8 @@ import {
 } from '../../../public/constants/constants';
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
+
+let catID;
 class CLPReadMore extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class CLPReadMore extends React.Component {
 
   	getReadMoreData() {
     apiManager
-      	.get(`${espotAPI}GI_Clp_Description`)
+      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${catID}`)
 		.then(response => {
 			const {data} = response || {};
 			this.setState({
@@ -34,6 +36,12 @@ class CLPReadMore extends React.Component {
   	}
 
   componentDidMount() {
+    const path = String(window.location.pathname);
+    const idStr = path.split('/')[2];
+    const categoryName = idStr;
+    if (idStr != undefined && idStr !== catID) {
+      catID = categoryName;
+    }
     this.getReadMoreData();
   }
 

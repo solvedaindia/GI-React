@@ -59,3 +59,14 @@ $font-medium:CeraGIMedium,sans-serif;
 @mixin container-width {
     width: 83.33%;
 }
+
+@mixin line-through {
+    .actualPriceLine {
+        color: $errorMsg;
+        text-decoration: line-through;
+        .actualPrice {
+            color: $greylightColor;
+            font-family: $font-regular;
+        }
+    }
+}

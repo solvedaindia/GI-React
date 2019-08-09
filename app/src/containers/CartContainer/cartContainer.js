@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import { getReleventReduxState } from '../../utils/utilityManager';
-import { isMobile } from '../../utils/utilityManager';
+import { isMobile, formatPrice } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
 import { getCartDetails } from './action';
@@ -89,7 +89,7 @@ class CartDetail extends React.Component {
                       />}
                     <p className='delBy'>DELIVERY BY:</p>
                     <span className='date'>{itemData.deliveryDate}</span>
-                    {!isMobile() && <span className='price'>₹{itemData.offerPrice}</span>}
+                    {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
 					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges}</span>}
 				</div>
 					{!!isMobile() && <div className='quantityPrice'>
@@ -99,7 +99,7 @@ class CartDetail extends React.Component {
 							orderItemId={itemData.orderItemId}
 							getCartDetails={this.props.getCartDetails}
 						/>}
-						<p className='price'>₹{itemData.offerPrice}</p>
+						<p className='price'>₹{formatPrice(itemData.offerPrice)}</p>
 					</div>}
                 </li>
               ))}
@@ -133,30 +133,30 @@ class CartDetail extends React.Component {
             <div className='summary'>
               <p className='cartTotal'>
                 <span className='info'>Cart Total</span>
-                <span className='val'> ₹{cartData.orderSummary.totalAmount}</span>
+                <span className='val'> ₹{formatPrice(cartData.orderSummary.totalAmount)}</span>
               </p>
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">
                   <span className='info'>Product Discount</span>
-                  <span className='val'> ₹{cartData.orderSummary.productDiscount}</span>
+                  <span className='val'> ₹{formatPrice(cartData.orderSummary.productDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.orderDiscount &&
                 <p className='orderDisc'>
                   <span className='info'>Order Discount</span>
-                  <span className='val'>-₹{cartData.orderSummary.orderDiscount}</span>
+                  <span className='val'>-₹{formatPrice(cartData.orderSummary.orderDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.shippingCharges == '0' ?
                 <p className='shipping'>
                   <span className='info'>Shipping</span>
                   <span className='val'>Free</span>
-                  <span className='shippingMsg'>Free shipping on cart total above ₹5000</span>
+                  <span className='shippingMsg'>Free shipping on cart total above ₹5,000</span>
                 </p>
                 :
                 <p className='shipping'>
                   <span className='info'>Shipping</span>
-                  <span className='val'>-₹{cartData.orderSummary.shippingCharges}</span>
+                  <span className='val'>-₹{formatPrice(cartData.orderSummary.shippingCharges)}</span>
                 </p>
               }
               <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
@@ -166,13 +166,13 @@ class CartDetail extends React.Component {
               </p>
               {!isMobile() ? <p className='totalAmt'>
                 <span className='totalPrice'>Total</span>
-                <span className='val'>₹{cartData.orderSummary.netAmount}</span>
-                <span className='savingText'>You saved <span className='savedAmt'>₹{cartData.orderSummary.saving}</span></span>
+                <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
+                <span className='savingText'>You saved <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
               </p>:''}
               {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
               :
               (<div className="checkout-btn-floater">
-                  <div className="total-amount"><div className="net-amount-box">₹{cartData.orderSummary.netAmount}<span className="total-amount-text">Total Amount</span></div></div>
+                  <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">Total Amount</span></div></div>
                   <div className="proceed-btn"><a className="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
                 </div>)}
             </div>
