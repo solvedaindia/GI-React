@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../../public/styles/static-pages/chefKitchen.scss'
+import '../../../public/styles/static-pages/chefkitchen.scss'
 
 import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
 import InsCrousel from '../../components/Primitives/crousel'
