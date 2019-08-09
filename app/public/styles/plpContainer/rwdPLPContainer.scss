@@ -88,7 +88,7 @@
 }
 
 .filterOutterCont {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: white;
   position: fixed;
@@ -96,7 +96,7 @@
   z-index: 100;
 
 .filter-data{
-  height: calc(100vh - 100px);
+  height: calc(100% - 100px);
   overflow: scroll;
   width: 100%;
 }
