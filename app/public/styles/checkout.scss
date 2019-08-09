@@ -861,6 +861,7 @@
                                 color: $greyBorder;
                                 font-size: 12px;
                                 font-family: $font-regular;
+                                min-width: 310px;
                                 .caret{
                                     top: 18px;
                                 }
@@ -918,10 +919,11 @@
                                 letter-spacing: 12px;
                             }
                             .form-label{
-                                margin: 14px 0px 0px 10px;
+                                margin: 15px 0px 0px 10px;
                                 background: $colorwhite;
-                                font-size: 11px;
+                                font-size: 10px;
                                 padding: 0px 10px;
+                                font-family: $font-light;
                             }
                         }
                     } 
