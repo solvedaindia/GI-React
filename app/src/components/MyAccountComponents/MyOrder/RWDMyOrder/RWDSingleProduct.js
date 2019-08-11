@@ -54,7 +54,7 @@ class RWDSingleProduct extends React.Component {
           <div className='itemInfo'>
             <div className='productName'>{productData.productName}</div>
             <div className='description'>{productData.shortDescription}</div>
-            <div className='quantity'>{this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
+            <div className='quantity'>Quantity: {this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
             <div className='price'>{productData.offerPrice}</div>
             <div className='deliveryTag'>
               <span>{this.state.dsNameTag}</span>
