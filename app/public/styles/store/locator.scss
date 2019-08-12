@@ -48,7 +48,6 @@
         margin: 0 19px 0 0;
         background: #f7f8f8;
         .detailCard{
-            overflow: auto;
             .storeListItem.ribbon{
               .Storewrapper{
                   padding-top:23px;
@@ -57,9 +56,6 @@
         .storeListItem{
             position: relative;
             background-color: $colorwhite; 
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
-            padding: 25px 24px;
             width: 100%;
             .modular_wardrobe{
                 position: absolute;
@@ -206,8 +202,12 @@
                 .detailCard{
                     height: 400px;
                     padding: 0 12px 0 0;
+                    overflow: auto;
                     .storeListItem{
                         margin:0 0 15px 0;
+                        border: 1px solid #ccc;
+                        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+                        padding: 25px 24px;
                     }
                 }
             }
@@ -237,7 +237,7 @@
     
   }
   
-  
+
   /* 
     #Global Screen Chhange for Screen max 767
   */
@@ -295,8 +295,10 @@
                 margin: 0px 0px 20px 0px;
             }
             .detailCard{
-                padding: 0 5px 0 5px;
+                padding: 0;
                 .storeListItem{
+                    padding: 22px 24px 15px 20px;
+                    min-height: 190px;
                     .Storewrapper{
                         .storeName{
                             font-size: $base*1.75;
@@ -331,12 +333,38 @@
                             }
                             .mapicon{
                                 position: absolute;
-                                left: 0px;
-                                top: 0px;
+                                left: 3px;
+                                top: 1px;
+                                width: 10px;
                             }
                         } 
                     }
+                    .modular_wardrobe{
+                        .icons{
+                            width: 8px;
+                        }
+                        .ribbonText{
+                            font-size: 9px;
+                            font-family: $font-medium;
+                        }
+                    }
+                    &.ribbon{
+                        .Storewrapper{
+                            padding-top:12px;
+                        }
+                    }
                      
+                }
+                .slick-slider{
+                    .slick-list{
+                        padding: 0px !important;
+                    }
+                    .slick-dots{
+                        display: none;
+                    }
+                    .store-list-item-box{
+                        margin-right: 10px;
+                    }
                 }
             } 
         }
