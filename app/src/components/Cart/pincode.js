@@ -17,24 +17,26 @@ class Pincode extends React.Component {
     };
   }
 
-  updatePincode(props) {
-    const pincode = document.getElementById('pincodeVal').value;
-	appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-	this.setState({
-		edit: false
-	})
-	this.getPincodeService();
-  }
-   editPincode() {
-	   this.setState({
-		   edit : true
-	   })
-   }
+	updatePincode(props) {
+		const pincode = document.getElementById('pincodeVal').value;
+		appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+		this.setState({
+			edit: false
+		})
+		this.getPincodeService();
+	}
+	editPincode() {
+		this.setState({
+			edit : true
+		})
+	}
 
 	handleChange = e => {
 			var val = e.target.value;
+
 			if( val === '' || PINCODE_REGEX.test(val)) {
-				this.setState({ [e.target.name]: e.target.value });
+				this.setState({ [e.target.name]: e.target.value,
+				edit: true });
 			}
 	}
 	getPincodeService() {
@@ -57,10 +59,10 @@ class Pincode extends React.Component {
 
 
   render() {
-	  let attrs = {};
-	  if ( !this.state.edit ) {
-		  attrs = { readOnly : false }
-	  }
+	let attrs = {};
+	if ( !this.state.edit ) {
+		attrs = { readOnly : false }
+	}
     return (
 		<>
 		<div className="pincodeField">
