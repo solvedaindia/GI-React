@@ -1846,11 +1846,82 @@
                padding:12px;
                clear: both;
                .offerbg{
-                padding: 1px;
-                width: 20px;
-                height: 20px;
+                    padding: 1px;
+                    width: 20px;
+                    height: 20px;
                }
+               
+                &.mob-offer-accessories{
+                    position: relative;
+                    padding: 12px 12px 12px 48px;
+                    .offerbg{
+                        position: absolute;
+                        top: 15px;
+                        left: 12px;
+                        width: 25px;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .discount-off{
+                        line-height: 14px;
+                        .discount-text-off{
+                            display: block;
+                            font-family: $font-bold;
+                        }
+                        .free-accessories{
+                            font-size: 10px;
+                        }
+                    }
+                    .viewOffer{
+                        font-size: 10px;
+                        margin-top:10px;
+                        .view-offer-text{
+                            font-family: $font-medium;
+                            color: $ceruleanlblue;
+                        }
+                        .upArrow{
+                            padding: 0 0 0 7px;
+                            width: 15px;
+                        }
+                    }
+                }
             }
+
+            .starting-emitext{
+                &.pdp-emitext-mob{
+                    position: relative;
+                    padding: 12px 12px 12px 48px;
+                    .offerbg{
+                        position: absolute;
+                        top: 15px;
+                        left: 12px;
+                        width: 25px;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .emi-text-desc{
+                        width: 65%;
+                        display: inline-block;
+                        font-size: 11px;
+                        line-height: 14px;
+                        .starting-from{
+                            display: block;
+                        }
+                    }
+                    .emiinfo{
+                        .btn-knowmore{
+                            font-size: 10px;
+                            margin-top:10px;
+                            font-family: $font-medium;
+                            color: $ceruleanlblue;
+                        }
+                    }
+                }
+            } 
             .slimline{
                 .heading{
                     font-size:20px;
