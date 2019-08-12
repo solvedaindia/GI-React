@@ -74,6 +74,7 @@ export class Step2Component extends React.Component {
       orderId: '',
       defaultAddress: 'false',
       pinPop: false,
+      currentPin: null,
       error_name: false,
       error_number: false,
       error_email: false,
@@ -99,6 +100,15 @@ export class Step2Component extends React.Component {
       inputText_city: '',
       inputText_state: '',
       inputText_gst: '',
+      
+      focus_inputText_name: false,
+      focus_inputText_number: false,
+      focus_inputText_email: false,
+      focus_inputText_pincode: false,
+      focus_inputText_address: false,
+      focus_inputText_city: false,
+      focus_inputText_state: false,
+      focus_inputText_gst: false,
 
       berror_name: false,
       berror_number: false,
@@ -122,6 +132,15 @@ export class Step2Component extends React.Component {
       binputText_address: '',
       binputText_city: '',
       binputText_state: '',
+
+      focus_binputText_name: false,
+      focus_binputText_number: false,
+      focus_binputText_email: false,
+      focus_binputText_pincode: false,
+      focus_binputText_address: false,
+      focus_binputText_city: false,
+      focus_binputText_state: false,
+
       isSetAsDefault: '',
       new_add_error: '',
       new_add_msg: ''
@@ -261,6 +280,7 @@ export class Step2Component extends React.Component {
     var localPIN = appCookie.get('pincode');
     if (this.state.inputText_pincode !== localPIN) {
       this.setState({
+        currentPin: inputText_pincode,
         pinPop: true
       })
     } else {
@@ -270,6 +290,7 @@ export class Step2Component extends React.Component {
 
   cancelPinPop = () => {
     this.setState({
+      currentPin: null,
       pinPop: false
     })
   }
@@ -756,6 +777,7 @@ export class Step2Component extends React.Component {
     }
     if (selected_address.pincode !== localPIN) {
       this.setState({
+        currentPin: selected_address.pincode,
         pinPop: true
       })
       return;
@@ -786,6 +808,15 @@ export class Step2Component extends React.Component {
       berror_address: false,
       berror_city: false,
       berror_state: false,
+
+      focus_inputText_name: false,
+      focus_inputText_number: false,
+      focus_inputText_email: false,
+      focus_inputText_pincode: false,
+      focus_inputText_city: false,
+      focus_inputText_state: false,
+      focus_inputText_name: false,
+
     });
 
     console.log('Save btn pressed---', this.state.error_name);
@@ -793,6 +824,7 @@ export class Step2Component extends React.Component {
 
     if (!validateFullName(this.state.inputText_name)) {
       this.setState({
+        focus_inputText_name: true,
         error_name: true,
         errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
       });
@@ -801,6 +833,7 @@ export class Step2Component extends React.Component {
     }
     if (!validateMobileNo(this.state.phone)) {
       this.setState({
+        focus_inputText_number: true,
         error_number: true,
         errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number.',
       });
@@ -809,6 +842,7 @@ export class Step2Component extends React.Component {
     }
     if (!validateEmailId(this.state.email)) {
       this.setState({
+        focus_inputText_email: true,
         error_email: true,
         errorMessage_email: !this.state.email ? 'This is a required field' : 'Please enter valid Email ID.',
       });
@@ -818,6 +852,7 @@ export class Step2Component extends React.Component {
 
     if (!validatePindcode(this.state.inputText_pincode)) {
       this.setState({
+        focus_inputText_pincode: true,
         error_pincode: true,
         errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
       });
@@ -826,6 +861,7 @@ export class Step2Component extends React.Component {
     }
     if (!validateAddress(this.state.inputText_address)) {
       this.setState({
+        focus_inputText_address: true,
         error_address: true,
         errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
       });
@@ -834,6 +870,7 @@ export class Step2Component extends React.Component {
     }
     if (!validateCityDistrict(this.state.inputText_city)) {
       this.setState({
+        focus_inputText_city: true,
         error_city: true,
         errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
       });
@@ -842,6 +879,7 @@ export class Step2Component extends React.Component {
     }
     if (!validateState(this.state.inputText_state)) {
       this.setState({
+        focus_inputText_state: true,
         error_state: true,
         errorMessage_state: !this.state.inputText_state ? 'This is a required field' : 'Please enter valid State.',
       });
@@ -965,7 +1003,7 @@ export class Step2Component extends React.Component {
   }
 
   render() {
-
+    console.log('onfocusss --- ',this.state.focus_inputText_number)
     return (
       <>
         {isMobile() && <div className='checkout-title'>
@@ -973,7 +1011,7 @@ export class Step2Component extends React.Component {
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
-            <PinChangePopup cancel={this.cancelPinPop} /> : ''}
+            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} /> : ''}
           <div className='listRow clearfix'>
             <div className='stepActive'>
               <div className='checkmark'></div>
@@ -1022,7 +1060,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Full Name" id="name" name="name"
-                          handleChange={this.handleInput} />
+                          handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_name} />
                         {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> :
                           null}
                       </div>
@@ -1030,7 +1068,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
-                          onChange={e => this.phoneChange(e)} />
+                          onChange={e => this.phoneChange(e)} isAutoFocus={this.state.focus_inputText_number}/>
                         {this.state.error_number ? (
                           <div className="error-msg">
                             {this.state.errorMessage_number}
@@ -1043,7 +1081,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
                         <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
-                          handleChange={this.handleInput} />
+                          handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_pincode}/>
                         {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
                       </div>
@@ -1051,7 +1089,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Email (Optional)" id="email" name="Email"
-                          value={this.state.email} onChange={e => this.mailChange(e)} />
+                          value={this.state.email} onChange={e => this.mailChange(e)} isAutoFocus={this.state.focus_inputText_email}/>
                         {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
                           null}
                       </div>
@@ -1060,7 +1098,7 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
+                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_address}/>
                         {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
                       </div>
                     </div>
@@ -1068,13 +1106,13 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} />
+                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} isAutoFocus={this.state.focus_inputText_city}/>
                         {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} />
+                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} isAutoFocus={this.state.focus_inputText_state}/>
                         {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                       </div>
                     </div>
