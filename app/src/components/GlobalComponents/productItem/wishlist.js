@@ -41,7 +41,6 @@ class Wishlist extends React.Component {
 
   onWishlistClick() {
     const wishlistArr = getOnlyWishlistUniqueIds();
-
     console.log('isWishlist Added --- ', this.props.isInWishlistPro);
     if (getCookie('isLoggedIn') === 'true') {
       if (wishlistArr.includes(this.props.uniqueId)) {
@@ -60,7 +59,6 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
-
     apiManager
       .post(addToWishlist, data)
       .then(response => {
@@ -165,10 +163,10 @@ class Wishlist extends React.Component {
           className="wishlistBtn"
         >
           {this.state.wishlistCurrentImage}
-          { this.props.isPDP &&
-            this.state.wishlistPopup
-          }
         </button>
+        { this.props.isPDP &&
+            this.state.wishlistPopup
+        }
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
     );
