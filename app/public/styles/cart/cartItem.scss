@@ -278,7 +278,9 @@
                 background-color: $ashGrey;
                 color: $colorwhite;
                 margin-top: $base*4; 
-                border-radius: none; 
+                border-radius: unset; 
+                padding: 0;
+                line-height: 44;
             }
         }
     }
