@@ -322,7 +322,7 @@ export class Step3Component extends React.Component {
             <div className='stepActive'>
               <div className='checkmark'></div>
             </div>
-            {!isMobile() ? <div className="labeltext-box leftBox shiptoBg">
+            {!isMobile() ? <div className="labeltext-box shiptoBg">
               <div className="bgGrey">
                 <h4 className="heading-label">Ship to</h4>
               </div>

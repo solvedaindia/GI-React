@@ -279,8 +279,7 @@
                 color: $colorwhite;
                 margin-top: $base*4; 
                 border-radius: unset; 
-                padding: 0;
-                line-height: 44;
+                padding: 11px 0;
             }
         }
     }
@@ -647,7 +646,7 @@
                     .qytList {
                         border: none;
                         background: none;
-                        min-width:40px;
+                        // min-width: 40px;
                     }
                     .cartQty,
                     .price {
