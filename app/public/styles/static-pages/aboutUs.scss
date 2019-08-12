@@ -5,32 +5,8 @@
   width: 100%;
   height: auto;
   background-color: #ffffff;
-  .OurProcessContainer{
-    padding: 80px 0 0 0;
-    .headingtitle{
-      font-size: 30px;
-      line-height: 30px;
-      font-family: $font-medium;
-      margin:0;
-      padding: 0 0 43px 0;
-    }
-  }
-  .CareerContainer{
-    padding: 80px 0 0 0;
-    .careerHeading{     
-      font-family: $font-medium;
-      font-size: 50px;
-      line-height: 50px;
-      padding: 0px 0 0 0;
-      text-align: center;
-      color: white;
-      margin:0;
-    }
-    .paragraphCareer{
-      font-size: 18px;
-      font-family: $font-medium;
-    }
-  }
+  
+  
   .greenContainer{
     padding: 80px 0 0 0;
     .slick-slider{
@@ -139,10 +115,6 @@
 
 
 
-.processBigImg {  
-    width: 100%;
-    height: 400px;
-}
 
 
 .link {
@@ -164,22 +136,6 @@ padding:19px 0 0 0;
     
 }
 
-#cat {
-    background-image: url("../../images/join-bg.png");
-    height: 370px;
-    width: 100%;
-    text-align: center;
-    padding: 73px;
-}
-.CareerButton{
-  margin: 25px 0 0 0;
-  color: $black;
-  background-color: $colorwhite;
-  padding: 13px 45px;
-  border: none;
-  font-size: 14px;
-  font-family: $font-medium;
-}
 
 
 
@@ -198,18 +154,7 @@ padding:19px 0 0 0;
 
 
 
-.ProcessNumber{
-    margin: 24px 54px 0 0;
-    font-size: 30px;  
-    line-height: 30px;
-    border: none;
-    background:$colorwhite;
-    color:$lightblueGrey;
-    font-family: $font-medium;
-    &:focus{
-      outline: none;
-    }
-}
+
 .arrowNumber{
 
   font-size: 30px;  
@@ -371,8 +316,7 @@ padding:19px 0 0 0;
   }
   
   .Position-Copy {
-    width: 18px;@import '../variable';
-    @import '../base';
+    width: 18px;
     
    
    
@@ -734,24 +678,7 @@ padding:19px 0 0 0;
   
 
   .aboutUstextContainer{
-    padding:61px 0 0 0;
-    .headingtitle{
-      padding: 0 0 35px 0;
-
-    font-family: $font-medium;
-    font-size: 30px;
-    font-weight: 500;
-    font-style: normal;
-    line-height: normal;
-    color: #000000;
-    margin:0;
-    }
     .Paragraph {
-          font-family: $font-regular;
-          font-size: 14px;
-          font-weight: normal;
-          font-style: normal;
-          line-height: 1.43;
           color: #000000;
         }
 
@@ -798,3 +725,287 @@ padding:19px 0 0 0;
  
 }
 
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+   
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .About-Us{
+      .aboutUstextContainer{
+        padding:61px 0 0 0;
+        .headingtitle{
+          padding: 0 0 35px 0;
+          font-family: $font-medium;
+          font-size: 30px;
+          font-weight: 500;
+          font-style: normal;
+          line-height: normal;
+          color: #000000;
+          margin:0;
+        }
+        .Paragraph {
+          font-family: $font-regular;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          line-height: 1.43;
+        }
+      }
+
+      .OurProcessContainer{
+        padding: 80px 0 0 0;
+        .headingtitle{
+          font-size: 30px;
+          line-height: 30px;
+          font-family: $font-medium;
+          margin:0;
+          padding: 0 0 43px 0;
+        }
+      }
+
+      .ProcessNumber{
+          margin: 24px 54px 0 0;
+          font-size: 30px;  
+          line-height: 30px;
+          border: none;
+          background:$colorwhite;
+          color:$lightblueGrey;
+          font-family: $font-medium;
+          &:focus{
+            outline: none;
+          }
+      }
+      
+      #cat {
+        background-image: url("../../images/join-bg.png");
+        height: 370px;
+        width: 100%;
+        text-align: center;
+        padding: 73px;
+    }
+    .CareerButton{
+      margin: 25px 0 0 0;
+      color: $black;
+      background-color: $colorwhite;
+      padding: 13px 45px;
+      border: none;
+      font-size: 14px;
+      font-family: $font-medium;
+    }
+    
+    .CareerContainer{
+      padding: 80px 0 0 0;
+      .careerHeading{     
+        font-family: $font-medium;
+        font-size: 50px;
+        line-height: 50px;
+        padding: 0px 0 0 0;
+        text-align: center;
+        color: white;
+        margin:0;
+      }
+      .paragraphCareer{
+        font-size: 18px;
+        font-family: $font-medium;
+      }
+    }
+      .processBigImg {  
+        width: 100%;
+        height: 400px;
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){      
+  .About-Us{
+    .aboutUstextContainer{
+      padding:30px 0 0 0;
+      .headingtitle{
+        padding: 0 0 10px 0;
+        font-family: $font-bold;
+        font-size: 16px;
+        color:$black;
+        margin:0;
+      }
+      .Paragraph {
+        font-family: $font-regular;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+    .OurProcessContainer{
+      padding: 20px 0 0 0;
+      .headingtitle{
+        padding: 0 0 15px 0;
+        font-family: $font-bold;
+        font-size: 16px;
+        color:$black;
+        margin:0;
+      }
+      .arrowNumber{
+        display: none;
+      }
+    }
+    .InitialIdea{
+      padding: 25px 15px 0 15px;
+      margin: 0px;
+      .headingtitle{
+        padding: 0 0 6px 0;
+        font-family: $font-bold;
+        font-size: 16px;
+        color:$black;
+        margin:0;
+      }
+      .heading-sub-title{
+        padding: 0 0 10px 0;
+        font-family: $font-regular;
+        font-size: 14px;
+        color:$colorgrey;
+        margin:0;
+      }
+      .Paragraphfont{
+        font-family: $font-regular;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+
+
+    .greenContainer{
+      padding: 25px 15px 0 15px;
+      margin: 0px;
+      .greenTitle{
+        padding: 0 0 6px 0;
+        font-family: $font-bold;
+        font-size: 16px;
+        color:$black;
+        margin:0;
+      }
+      .Paragraphfont{
+        font-family: $font-regular;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      .slick-list{
+        padding: 0px !important;
+      }
+    }
+
+    #cat {
+        background-image: url("../../images/careers-bg.jpg");
+        width: 100%;
+        text-align: center;
+        padding: 20px 35px;
+    }
+    .CareerButton{
+      margin: 25px 0 15px 0;
+      color: $black;
+      background-color: $colorwhite;
+      padding: 8px 45px;
+      border: none;
+      font-size: 12px;
+      font-family: $font-medium;
+    }
+    .CareerContainer{
+      padding: 50px 0 0 0;
+      .careerHeading{     
+        font-family: $font-bold;
+        font-size: 20px;
+        padding-top: 35px;
+        text-align: center;
+        color: $colorwhite;
+        margin:0;
+      }
+      .paragraphCareer{
+        font-size: 12px;
+        font-family: $font-medium;
+        line-height: 18px;
+      }
+    }
+    
+    
+        .ProcessNumber{
+          margin: 4px 33px 0 0;
+          font-size: 12px;  
+          line-height: 30px;
+          border: none;
+          background:$colorwhite;
+          color:$lightblueGrey;
+          font-family: $font-medium;
+          &:focus{
+            outline: none;
+          }
+        }
+        
+
+
+  
+    .processBigImg {  
+      width: 100%;
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}

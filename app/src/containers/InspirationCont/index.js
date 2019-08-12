@@ -25,17 +25,15 @@ export class Inspiration extends React.Component {
 
   render() {
     return (
-      <div className="Inspiration">
+      <div className="inspiration">
         <div className="inpspirationBanner">
           <InspirationBanner />
-         
         </div>
         <div className="lookcrouse">
           <InsCrousel />
         </div>
-		<SummerData/>
+		    <SummerData/>
           <div className="uuscontainer">
-        
             <GodrejSolutionEspot/>
           </div>
       </div>
