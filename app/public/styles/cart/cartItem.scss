@@ -204,12 +204,13 @@
             }
             .promoField {
                 .appliedPromoMsg {
-                    border-bottom: 1px solid $borderLight;
+                    border: 1px solid $borderLight;
                     position: relative;
-                    padding-bottom: $base*2;
+                    padding: $base*2;
                     .removeBtn {
                         position: absolute;
                         right: 0;
+                        width: $base*3.5;
                         border: none;
                         color: $cerulean;
                         font-family: $font-bold;
