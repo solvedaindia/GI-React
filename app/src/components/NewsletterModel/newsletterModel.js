@@ -97,7 +97,7 @@ class NewsletterModel extends React.Component {
         )};path=/;expires=${now.toGMTString()}`;
         this.setState({ inputText: '' });
         this.toggle();
-        alert(`Newsletter Subscription - ${data.status}`);
+        alert(`Thanks for Subscribing`);
       })
       .catch(error => {
         console.log('newsError---', error);
