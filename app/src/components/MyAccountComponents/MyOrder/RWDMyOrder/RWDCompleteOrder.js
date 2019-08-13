@@ -48,46 +48,47 @@ class RWDCompleteOrder extends React.Component {
           />
         ))}
 
-        <div className="">
-          <h4 className="heading">Delivery Address</h4>
-          <p className="subheading">{addressData.name}</p>
-          <p className="address">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
+        <div className='order-delivery-add'>
+          <h2 className="title">Delivery Address</h2>
+          <p className="order-text-desc">{addressData.name}</p>
+          <p className="order-text-desc">{`${addressData.address}, ${addressData.city}, ${addressData.state}, ${addressData.pincode}`}</p>
         </div>
 
-        <div className="">
-          <h4 className="heading">Payment Method</h4>
-          <p className="subheading">{orderData.paymentMethod}</p>
+        <div className='order-payent-method'>
+          <h2 className="title">Payment Method</h2>
+          <p className="order-text-desc">{orderData.paymentMethod}</p>
         </div>
 
-        <div className="orderList">
+        <div className="order-list-summary">
           <div className="orderSummary">
-            <h4 className="heading">Order Summary</h4>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Cart Total</div>
-              <div className="rightText">₹{summeryData.netAmount}</div>
-            </div>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Shipping</div>
-              <div className="rightText">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</div>
-            </div>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Product Discount</div>
-              <div className="rightText">{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</div>
-            </div>
-            <div className="summaryDetails clearfix">
-              <div className="leftText">Order Discount</div>
-              <div className="rightText">-₹{summeryData.orderDiscount}</div>
-            </div>
+            <h2 className="title">Order Summary</h2>
+            <div className='summary'>
+            <p className="cart-total">
+              <span className="info-text">Cart Total</span>
+              <span className="info-val">₹{summeryData.netAmount}</span>
+            </p>
+            <p className="product-ship-disc">
+              <span className="info-text">Shipping</span>
+              <span className="info-val">{summeryData.shippingCharges === 0 ? `Free` : summeryData.shippingCharges}</span>
+            </p>
+            <p className="product-disc">
+              <span className="info-text">Product Discount</span>
+              <span className="info-val">{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</span>
+            </p> 
+            <p className="order-disc">
+              <span className="info-text">Order Discount</span>
+              <span className="info-val">-₹{summeryData.orderDiscount}</span>
+            </p>
             <div className="divider"></div>
-            <div className="summaryDetails subTotaltext clearfix">
-              <div className="leftText">Total</div>
-              <div className="rightText">₹{summeryData.totalAmount}</div>
+            <p className="totalAmt">
+              <span className="info-text">Total</span>
+              <span className="info-val">₹{summeryData.totalAmount}</span>
+            </p>
             </div>
           </div>
         </div>
 
-        <div>
-
+        <div className='order-invoice-details'>
           <ul className="invoiceList">
             {invoiceData.map((data, key) => {
               return (

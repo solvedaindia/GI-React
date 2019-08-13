@@ -1,6 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import { cartRemovePromoAPI } from '../../../public/constants/constants';
+import CrossIcon from '../SVGs/crossIcon';
 class AppliedPromoCode extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +34,7 @@ class AppliedPromoCode extends React.Component {
             <div className='appliedPromoMsg'>
                 <span className='promo'>{promoCode[0]}</span> coupon applied.
 				<button className="removeBtn" onClick={this.removePromoCode}>
-					Remove
+					<CrossIcon />
 				</button>
             </div>
 			
