@@ -1080,7 +1080,7 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
+                        <Input inputType="number" title="Pin Code" name="pin" value={this.state.inputText_pincode}
                           handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_pincode}/>
                         {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
@@ -1214,7 +1214,7 @@ export class Step2Component extends React.Component {
 
                   <div className='row'>
                     <div className='col-md-12 bussinessNote'>
-                      <h5 className='buying'>Buying it for your business.</h5>
+                      <h5 className='buying'>Buying it for your business?</h5>
                       <div className='noteGstin'><span className='bold'>Note</span>
                         :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
                     </div>
