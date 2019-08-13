@@ -447,9 +447,12 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/${this.state.defaultLat},${this.state.defaultLng}/${physicalData.latitude},${physicalData.longitude}`}} className="getDirection" target='_blank'>
                                                             Get Directions
                                                         </Link>
+                                                        {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                            Get Directions
+                                                        </Link> */}
                                                         <div className="dealer">
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
