@@ -543,6 +543,7 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
  * @throws contexterror,badreqerror if storeid or access_token is invalid or null
  */
 module.exports.addAddress = addAddress;
+
 function addAddress(headers, params, callback) {
   logger.debug('Adding Address To Cart');
   if (
@@ -599,6 +600,7 @@ function addAddress(headers, params, callback) {
  * @throws contexterror,badreqerror if storeid or access_token is invalid or null
  */
 module.exports.getShipModes = getShipModes;
+
 function getShipModes(headers, callback) {
   logger.debug('Get Shipmodes');
 
@@ -666,24 +668,78 @@ module.exports.precheckout = function precheckout(req, callback) {
     req.headers.storeId,
   );
 
+  const promise1 = new Promise((resolve, reject) => {
+    unlockOrder(req.headers, reqBody.orderId, (error, response) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+  promise1
+    .then(res => {
+      if (res.locked === '0') {
+        origin.getResponse(
+          'PUT',
+          originUrl,
+          reqHeader,
+          null,
+          reqBody,
+          null,
+          '',
+          response => {
+            if (response.status === 200) {
+              callback(null, response.body);
+            } else {
+              logger.debug('Error While Set Reserve Inventory API');
+              callback(errorutils.handleWCSError(response));
+            }
+          },
+        );
+      } else {
+        callback(null, res);
+      }
+    })
+    .catch(err => {
+      callback(err);
+    });
+};
+
+/**
+ * Unlock Order
+ * @param access_token,storeId,orderId
+ * @return 200,OK with Unlock Order
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+function unlockOrder(headers, orderId, callback) {
+  logger.debug('Checkout API');
+  if (!orderId) {
+    callback(errorutils.errorlist.invalid_params);
+  }
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  const unlockOrderURL = `${constants.unlockOrder
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{orderId}}', orderId)}`;
+
   origin.getResponse(
-    'PUT',
-    originUrl,
+    'POST',
+    unlockOrderURL,
     reqHeader,
     null,
-    reqBody,
+    null,
     null,
     '',
     response => {
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        logger.debug('Error While Set Reserve Inventory API');
+        logger.debug('Error While Unlock Order API');
         callback(errorutils.handleWCSError(response));
       }
     },
   );
-};
+}
 
 /**
  * Checkout Cart
@@ -692,6 +748,7 @@ module.exports.precheckout = function precheckout(req, callback) {
  * @throws contexterror,badreqerror if storeid or access_token is invalid or null
  */
 module.exports.checkout = checkout;
+
 function checkout(headers, params, callback) {
   logger.debug('Checkout API');
   if (!params || !params.orderId) {

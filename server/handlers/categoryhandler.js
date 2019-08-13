@@ -1,13 +1,11 @@
-const async = require('async');
 const origin = require('../utils/origin');
+const origin2 = require('../utils/origin2.js');
 const constants = require('../utils/constants');
 const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
 const filter = require('../filters/filter');
 const headerUtil = require('../utils/headerutil');
-const productUtil = require('../utils/productutil');
-const categoryUtil = require('../utils/categoryutil');
 const categoryFilter = require('../filters/categoryfilter');
 
 const topCategories = '@top';
@@ -79,121 +77,39 @@ function getCategoriesData(urlParam, headers, callback) {
  * This function will return sub categories data
  * @param categoryID
  */
-module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
+module.exports.getSubCategories = getSubCategoriesData;
+async function getSubCategoriesData(req, callback) {
   if (!req.params.categoryID) {
     logger.debug('Get Sub Categories Data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
   const categoryId = req.params.categoryID;
-  const reqHeaders = req.headers;
-  categoryViewByParentCategoryId(reqHeaders, categoryId, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      logger.debug('Got all the origin resposes');
-      const subCategoryArray = [];
-      // const categoryIDs = [];
-      const catlogGrupView = result.catalogGroupView;
-      if (catlogGrupView && catlogGrupView.length > 0) {
-        catlogGrupView.forEach(category => {
-          const subCatData = categoryFilter.categoryDetails(category);
-          subCategoryArray.push(subCatData);
-        });
-        callback(null, subCategoryArray);
-      } else {
-        callback(null, subCategoryArray);
-      }
-
-      // if (catlogGrupView && catlogGrupView.length > 0) {
-      //   catlogGrupView.forEach(category => {
-      //     categoryIDs.push(category.uniqueID);
-      //   });
-      //   categoryUtil.getCategoryProductCountPrice(
-      //     reqHeaders,
-      //     categoryIDs,
-      //     (error, res) => {
-      //       if (error) {
-      //         callback(error);
-      //         return;
-      //       }
-      //       catlogGrupView.forEach(category => {
-      //         const subCatData = categoryFilter.categoryDetails(category);
-      //         subCatData.productCount = '';
-      //         subCatData.startPrice = '';
-      //         if (res[subCatData.uniqueID]) {
-      //           subCatData.productCount =
-      //             res[subCatData.uniqueID].productCount || '';
-      //           subCatData.startPrice =
-      //             res[subCatData.uniqueID].startPrice || '';
-      //         }
-      //         subCategoryArray.push(subCatData);
-      //       });
-      //       callback(null, subCategoryArray);
-      //     },
-      //   );
-
-      //   /* async.map(
-      //     catlogGrupView,
-      //     (subCategory, cb) => {
-      //       const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
-      //       productUtil.productsByCategoryID(
-      //         subCatData.uniqueID,
-      //         reqHeaders,
-      //         (error, productViewResult) => {
-      //           if (!error) {
-      //             subCatData.productCount =
-      //               productViewResult.recordSetTotal || 0; // Product Count
-      //             cb(null, subCatData);
-      //           } else {
-      //             cb(error);
-      //           }
-      //         },
-      //       );
-      //     },
-      //     (errors, results) => {
-      //       if (errors) {
-      //         callback(errors);
-      //         return;
-      //       }
-      //       results.forEach(element => {
-      //         subCategoryArray.push(element);
-      //       });
-      //       callback(null, subCategoryArray);
-      //     },
-      //   ); */
-      // } else {
-      //   callback(null, subCategoryArray);
-      // }
-    }
-  });
-};
-
-/**
- *  Get sub categories by category id
- */
-function categoryViewByParentCategoryId(header, categoryID, callback) {
   const originUrl = constants.categoryViewByParentId
-    .replace('{{storeId}}', header.storeId)
-    .replace('{{categoryId}}', categoryID);
+    .replace('{{storeId}}', req.headers.storeId)
+    .replace('{{categoryId}}', categoryId);
 
-  const reqHeader = headerUtil.getWCSHeaders(header);
-
-  origin.getResponse(
-    originMethod,
-    originUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.debug('Error While Calling Category View by Parent Category ID');
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
+  const reqHeaders = headerUtil.getWCSHeaders(req.headers);
+  try {
+    const result = await origin2.getResponse(
+      'GET',
+      originUrl,
+      reqHeaders,
+      null,
+    );
+    logger.debug('Got all the origin resposes');
+    const subCategoryArray = [];
+    const catlogGrupView = result.body.catalogGroupView;
+    if (catlogGrupView && catlogGrupView.length > 0) {
+      catlogGrupView.forEach(category => {
+        const subCatData = categoryFilter.categoryDetails(category);
+        subCategoryArray.push(subCatData);
+      });
+      callback(null, subCategoryArray);
+    } else {
+      callback(null, subCategoryArray);
+    }
+  } catch (error) {
+    callback(errorUtils.handleWCSError(error));
+  }
 }

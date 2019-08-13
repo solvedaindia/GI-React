@@ -52,6 +52,7 @@ module.exports.getProductDetails = function getProductDetailsData(
           const kitIds = getKitIds(result);
           const taskList = [
             kitDetailsByIds.bind(null, reqHeaders, result, kitIds),
+            productCompAndMercAssocIds,
             promotionDetails,
             transformKitData,
           ];
@@ -68,6 +69,7 @@ module.exports.getProductDetails = function getProductDetailsData(
           const bundleIds = getBundleIds(result);
           const taskList = [
             bundleDetailsByIds.bind(null, reqHeaders, result, bundleIds),
+            productCompAndMercAssocIds,
             promotionDetails,
             mergeBundleData,
             minEmiValue,
@@ -386,7 +388,7 @@ function productDetails(header, productID, callback) {
  */
 function productListByIDs(header, productData, callback) {
   const skuIds = [];
-  if (productData.catalogEntryView.length > 0) {
+  if (productData && productData.catalogEntryView.length > 0) {
     if (
       productData.catalogEntryView[0].sKUs &&
       productData.catalogEntryView[0].sKUs.length > 0
@@ -419,6 +421,54 @@ function productListByIDs(header, productData, callback) {
       callback(null, header, productData, result, skuIds);
     }
   });
+}
+
+/**
+ * Function to return components and merchendising assoc
+ * @param {*} header
+ * @param {*} productData
+ * @param {*} productsData
+ * @param {*} productIds
+ * @param {*} callback
+ */
+function productCompAndMercAssocIds(
+  header,
+  productData,
+  productsData,
+  productIds,
+  callback,
+) {
+  if (productsData && productsData.length > 0) {
+    productsData.forEach(product => {
+      if (
+        product.catalogEntryTypeCode === 'BundleBean' &&
+        product.components &&
+        product.components.length > 0
+      ) {
+        product.components.forEach(element => {
+          if (productIds.indexOf(element.uniqueID) === -1) {
+            productIds.push(element.uniqueID);
+          }
+        });
+      }
+      if (
+        product.merchandisingAssociations &&
+        product.merchandisingAssociations.length > 0
+      ) {
+        product.merchandisingAssociations.forEach(element => {
+          if (
+            element.associationType === 'X-SELL' ||
+            element.associationType === 'UPSELL'
+          ) {
+            if (productIds.indexOf(element.uniqueID) === -1) {
+              productIds.push(element.uniqueID);
+            }
+          }
+        });
+      }
+    });
+  }
+  callback(null, header, productData, productsData, productIds);
 }
 
 /**
@@ -731,64 +781,6 @@ function transformKitData(headers, kitData, subKitData, promoData, callback) {
   callback(null, kitDataSummary);
 }
 
-// function mergeBundleData(header, bundleData, key1, promoData, callback) {
-//   const bundleSummaryJson = {
-//     type: 'bundle',
-//     uniqueID: '',
-//     productName: '',
-//     partNumber: '',
-//     masterCategoryID: '',
-//     parentUniqueID: '',
-//     actualPrice: '',
-//     offerPrice: '',
-//     emiData: '',
-//     inStock: '',
-//     shortDescription: '',
-//   };
-//   if (bundleData) {
-//     bundleSummaryJson.uniqueID = bundleData.uniqueID;
-//     bundleSummaryJson.productName = bundleData.name;
-//     bundleSummaryJson.partNumber = bundleData.partNumber;
-//     bundleSummaryJson.masterCategoryID = bundleData.masterCategoryId;
-//     bundleSummaryJson.parentUniqueID = bundleData.parentCatalogEntryID || '';
-//     bundleSummaryJson.actualPrice = '';
-//     bundleSummaryJson.offerPrice = '';
-//     if (bundleData.price && bundleData.price.length > 0) {
-//       bundleData.price.forEach(price => {
-//         if (price.usage === 'Display' && price.value !== '') {
-//           bundleSummaryJson.actualPrice = parseFloat(price.value);
-//         }
-//         if (price.usage === 'Offer' && price.value !== '') {
-//           bundleSummaryJson.offerPrice = parseFloat(price.value);
-//         }
-//       });
-//     }
-//     bundleSummaryJson.emiData = '';
-//     bundleSummaryJson.inStock = '';
-//     bundleSummaryJson.shortDescription = bundleData.shortDescription || '';
-//     const bundlesData = bundlefilter.getBundlesData(bundleData);
-//     const bundleDataJson = {
-//       itemDataArray: [],
-//       productData: {},
-//     };
-//     if (bundlesData.itemDataArray.length > 0) {
-//       bundlesData.itemDataArray.forEach(item => {
-//         bundleDataJson.itemDataArray.push(
-//           bundlefilter.getItemDataSummary(item, promoData),
-//         );
-//       });
-//     }
-//     if (Object.keys(bundlesData.productDataJson).length !== 0) {
-//       bundleDataJson.productData = bundlefilter.getProductDataSummary(
-//         bundlesData.productDataJson,
-//         promoData,
-//       );
-//     }
-//     bundleSummaryJson.bundleData = bundleDataJson;
-//   }
-//   callback(null, bundleSummaryJson);
-// }
-
 /** Function to merge bundle data */
 function mergeBundleData(header, key1, subBundleData, promoData, callback) {
   const bundleDataSummary = {
@@ -798,12 +790,12 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
   };
   if (subBundleData && subBundleData.length > 0) {
     subBundleData.forEach(bodyData => {
-      const componentsSummary = bundlefilter.bundleComponentsSummary(bodyData);
+      const componentsSummary = bundlefilter.bundleComponentsSummary(
+        bodyData,
+        promoData,
+      );
       const attributes = pdpfilter.getAttributes(bodyData);
       const mercAssociations = getMercAssociationsData(bodyData, promoData);
-      bundleDataSummary.swatchAttributes.push(
-        componentsSummary.swatchAttributes,
-      );
       const bundleDataJSON = pdpfilter.productDetailSummary(
         bodyData,
         promoData,
@@ -811,7 +803,13 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
       bundleDataJSON.actualPrice = componentsSummary.actualPrice || '';
       bundleDataJSON.offerPrice = componentsSummary.offerPrice || '';
       bundleDataJSON.swatchAttributes = [];
-      bundleDataJSON.swatchAttributes.push(componentsSummary.swatchAttributes);
+      const swatchAttributes = bundlefilter.getSwatchAttributes(bodyData);
+      if (Array.isArray(swatchAttributes) && swatchAttributes.length > 0) {
+        swatchAttributes.forEach(attr => {
+          bundleDataSummary.swatchAttributes.push(attr);
+          bundleDataJSON.swatchAttributes.push(attr);
+        });
+      }
       if (bundleDataJSON.swatchAttributes.length > 0) {
         bundleDataJSON.swatchAttributes = kitfilter.filterSwatchAtrributes(
           bundleDataJSON.swatchAttributes,
@@ -829,13 +827,11 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
       }
       bundleDataJSON.promotions = associatedPromo;
       bundleDataJSON.attachments = imagefilter.getProductImages(bodyData);
-      // bundleDataJSON.productDetails = pdpfilter.getProductDetails(
-      //   attributes,
-      //   bodyData,
-      // );
+      bundleDataJSON.productDetails = pdpfilter.getProductDetails(
+        attributes,
+        bodyData,
+      );
       bundleDataJSON.productFeatures = pdpfilter.getProductFeatures(attributes);
-      bundleDataJSON.productDetails = [];
-      // bundleDataJSON.productFeatures = [];
       bundleDataJSON.itemInThisBundle = componentsSummary.itemInThisBundle;
       bundleDataJSON.similarProducts = mercAssociations.similarProducts;
       bundleDataJSON.keywords = pdpfilter.getKeywords(bodyData.keyword);
