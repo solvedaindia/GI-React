@@ -12,7 +12,7 @@ import RegisterModalData from '../RegisterComponent/registerModalData';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import Input from '../Primitives/input'
-import {isMobile} from '../../utils/utilityManager';
+import {isMobile, formatPrice} from '../../utils/utilityManager';
 import {
   regexEmail,
   regexMobileNo,
@@ -343,7 +343,7 @@ export class Step1Component extends React.Component {
               </div></>: ''}
 
               {isMobile() ? (<div className='checkout-btn-floater'>
-                <div className='total-amount'><div className='net-amount-box'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div></div>
+                <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.netAmount)} <span className='total-amount-text'>Total Amount</span></div></div>
                 <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed</button></div>
               </div>):''}
                
