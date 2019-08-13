@@ -150,7 +150,7 @@ class CompPrd extends React.Component {
           {this.renderSpecs()}
           
           {this.state.payment ? <Row>
-            <h3 className="title-text">Payment</h3>
+            <h2 className="title-text">Payment</h2>
             {this.renderPayment()}
           </Row> : ''}
         </div>

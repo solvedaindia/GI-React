@@ -23,7 +23,6 @@ import MWebLogo from '../../components/SVGs/mWebLogo';
 import AppliedPromoCode from '../../components/Cart/appliedPromoCode';
 import EmiInfo from '../../components/PdpComponent/emiInfo';
 import ExpandIcon from '../../components/SVGs/expandArrow';
-import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -44,8 +43,7 @@ class CartDetail extends React.Component {
 
   render() {
     const { cartData } = this.props;
-	if (!cartData) return null;
-	let disableCheckout = false;
+    if (!cartData) return null;
     return (
       !!cartData.cartItems && !!cartData.cartItems.length
         ?
@@ -61,16 +59,11 @@ class CartDetail extends React.Component {
 				/>
             </div>
             <ul className='cartItemList'>
-              {cartData.cartItems.map((itemData, index) => {
-                let outOfStock = itemData.inventoryStatus !== 'available';
-				disableCheckout = !disableCheckout ? outOfStock : disableCheckout;
-				return (
-				<li className={`prodList${outOfStock ? ' outOfStockList' : ''}`} key={`${index}-pro`}>
-				{outOfStock && <div className='outOfStock' />}
+              {cartData.cartItems.map((itemData, index) => (
+                <li className='prodList' key={`${index}-pro`}>
                 <Link to={`/pdp/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
 				  <figure className='prodImg'>
                     <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
-					{outOfStock && <div className='outOfStockLogo'><OutOfStockIcon /></div>}
                   </figure>
 				</Link>
                 <div className='prodDetails'>
@@ -109,39 +102,28 @@ class CartDetail extends React.Component {
 						<p className='price'>₹{formatPrice(itemData.offerPrice)}</p>
 					</div>}
                 </li>
-			  )})}
+              ))}
             </ul>
           </div>
           <div className='orderSummary'>
             <div className='promotion'>
-				{!isMobile() ?
-					<>
-						<p
-							className='promoMsg'
-							onClick={this.handleOnClick.bind(this)}
-						>
-							Got a promo code? <ExpandIcon width={16} height={16}/>
-						</p>
-						{cartData.promotionCode && cartData.promotionCode.length ?
-						<AppliedPromoCode
-							promoCode = {cartData.promotionCode}
-							getCartDetails={this.props.getCartDetails}
-						/> :
-						this.state.showReply && <PromoField
-							orderID={cartData.orderSummary.orderID}
-							getCartDetails={this.props.getCartDetails}
-						/>}
-					</>:
-					cartData.promotionCode && cartData.promotionCode.length ?
-						<AppliedPromoCode
-							promoCode = {cartData.promotionCode}
-							getCartDetails={this.props.getCartDetails}
-						/> :
-						<PromoField
-							orderID={cartData.orderSummary.orderID}
-							getCartDetails={this.props.getCartDetails}
-						/>
-					}
+				{	cartData.promotionCode && cartData.promotionCode.length ?
+					<AppliedPromoCode
+						promoCode = {cartData.promotionCode}
+						getCartDetails={this.props.getCartDetails}
+					/>
+					:
+					!isMobile() ? <> <p className='promoMsg' onClick={this.handleOnClick.bind(this)}
+					>Got a promo code? <ExpandIcon width={16} height={16}/></p>
+					{this.state.showReply && <PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>}</>:
+					<PromoField
+						orderID={cartData.orderSummary.orderID}
+						getCartDetails={this.props.getCartDetails}
+					/>
+				}
 				<GetCartPromo
 					orderID={cartData.orderSummary.orderID}
 					getCartDetails={this.props.getCartDetails}
@@ -187,11 +169,11 @@ class CartDetail extends React.Component {
                 <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
                 <span className='savingText'>You saved <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
               </p>:''}
-              {!isMobile() ? (<a className={`btn btnCheckout ${disableCheckout ? 'disable' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed to Checkout</a>)
+              {!isMobile() ? (<a className='btn btnCheckout' href='/checkout'>Proceed to Checkout</a>)
               :
               (<div className="checkout-btn-floater">
                   <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">Total Amount</span></div></div>
-                  <div className="proceed-btn"><a className={`btn-blackbg btn-block ${disableCheckout ? 'disable' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed</a></div>
+                  <div className="proceed-btn"><a className="btn-blackbg btn-block" href='/checkout'>Proceed</a></div>
                 </div>)}
             </div>
           </div>

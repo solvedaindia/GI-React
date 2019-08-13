@@ -1,93 +1,22 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { isMobile, getWindowWidth } from '../../utils/utilityManager';
+import { isMobile } from '../../utils/utilityManager';
 
 class StoreLinks extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          defaultCount: 41
+          defaultCount: 34
         };
     }
 
-    componentDidMount() {      
-        // Store Locator List screen 
-        if (getWindowWidth() >= 1024 && getWindowWidth() <= 1188)
-        {
+    componentDidMount() {
+        if (isMobile()) {
             this.setState({
-               defaultCount: 30
+                defaultCount: 23
             })
-        }    
-        
-        else if (getWindowWidth() >= 741 && getWindowWidth() <= 1023)
-        {
-            this.setState({
-                defaultCount: 38
-             })
-        } 
-
-        else if (getWindowWidth() >= 668 && getWindowWidth() <= 740)
-        {
-            this.setState({
-              defaultCount: 35
-             })
-        } 
-        else if (getWindowWidth() >= 605 && getWindowWidth() <= 667)
-        {
-            this.setState({
-              defaultCount: 35
-             })
         }
-        else if (getWindowWidth() >= 596 && getWindowWidth() <= 604)
-        {
-            this.setState({
-              defaultCount: 30
-             })
-        } 
-        else if (getWindowWidth() >= 579 && getWindowWidth() <= 595)
-        {
-            this.setState({
-              defaultCount: 30
-             })
-        } 
-        
-        else if (getWindowWidth() >= 530 && getWindowWidth() <= 578)
-        {
-            this.setState({
-              defaultCount: 20
-             })
-        } 
-        else if (getWindowWidth() >= 450 && getWindowWidth() <= 520)
-        {
-            this.setState({
-              defaultCount: 25
-             })
-        } 
-        else if (getWindowWidth() >= 352 && getWindowWidth() <= 449)
-        {
-            this.setState({
-              defaultCount: 20
-             })
-        } 
-        else if (getWindowWidth() >= 351 && getWindowWidth() <= 399)
-        {
-            this.setState({
-              defaultCount: 20
-             })
-        }
-        else if (getWindowWidth() >= 321 && getWindowWidth() <= 350)
-        {
-            this.setState({
-              defaultCount: 18
-             })
-        } 
-        else if (getWindowWidth() >= 300 && getWindowWidth() <= 320)
-        {
-            this.setState({
-              defaultCount: 15
-             })
-        } 
     }
     
     onClickMore() {
@@ -119,9 +48,9 @@ class StoreLinks extends React.Component {
                                 </>
                             )})
                         }
-
+                        { this.props.name.children.length > this.state.defaultCount &&
                          <li className='list moreButton'>
-                            <a className='link'>
+                            <a className='link' onClick={this.onClickMore.bind(this, this.props.name.children.count)}>
                                 { !isMobile() ? (
                                     <>...More</>
                                 ) : (
@@ -129,7 +58,7 @@ class StoreLinks extends React.Component {
                                 )}
                                 </a>
                         </li>
-                        
+                        }
                     </ul>
                 </div>
             </Col>

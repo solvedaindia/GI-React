@@ -207,7 +207,7 @@ class RWDMyOrder extends React.Component {
   render() {
     if (this.state.currentComponent === 'SingleProduct') {
       return (
-        <div className="myOrder single-item-order">
+        <div className="myOrder">
           <RWDSingleProduct
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
@@ -218,7 +218,7 @@ class RWDMyOrder extends React.Component {
     }
     else if (this.state.currentComponent === 'MultiProduct') {
       return (
-        <div className="myOrder multi-item-order">
+        <div className="myOrder">
           <RWDMultiTrack
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback} />
@@ -227,7 +227,7 @@ class RWDMyOrder extends React.Component {
     }
     else if (this.state.currentComponent === 'ViewOrder') {
       return (
-        <div className="myOrder View-Order">
+        <div className="myOrder">
           <RWDCompleteOrder
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback} 

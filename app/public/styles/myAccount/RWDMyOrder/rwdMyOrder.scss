@@ -261,231 +261,27 @@
       background: $greybg;
       height: 12px;
     }
-
-
-    &.View-Order{
-      .orderBtn{
-        float: left;
-        width:100%;
-        padding: 20px 15px;
-        border-bottom: 12px solid $greybg;
-        margin-bottom: 15px;
-          .btn-blackbg {
-            background: $black;
-            padding: 12px 0;
-            text-align: center;
-            color: $colorwhite;
-            border: none;
-            font-family: $font-medium;
-        }
-        .btn-cancelborder {
-            background: $colorwhite;
-            padding: 11px 0;
-            text-align: center;
-            border: 1px solid $black;
-            font-size: $base*1.75;
-            color: $black;
-            font-family: $font-medium;
-        }
-        .track-order-btn{
-          width: 50%;
-          float: right;
-        }
-      }
-      .itemBoxTrack{
-        .itemInfo{
-          .productName{
-            font-size: 11px;
-            font-family: $font-bold;
-            color: $black;
-          }
-          .description{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-          .quantity{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-          .price{
-            font-size: 12px;            
-            font-family:$font-bold;
-            color: $colorbluedull;
-          }
-          .deliveryTag{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-        }
-      }
-    }
-
-
-
-
-    .order-delivery-add, .order-payent-method, .order-list-summary, .order-invoice-details{
-      float: left;
-      width:100%;
-      .order-text-desc{
-        font-family: $font-regular;
-        color:$battleshipGrey;
-        font-size: $base*1.5;
-        line-height:  $base*2;
-      }
-      .title{
-        font-size: $base*1.75;
-        margin: 5px auto 16px auto;
-        font-family: $font-bold;
-        text-align: left;
-      }
-    }
-    .order-delivery-add, .order-payent-method{
-      border-bottom: 12px solid $greybg;
-      margin-bottom: 5px;
-      padding: 20px 15px;
-    }
-
-
-    .order-list-summary{
-      padding: 15px 15px 0px 15px;
-      .summary{
-        float: left;
-        width:100%;
-        color:$battleshipGrey;
-        .info-text, .info-val{
-          font-family: $font-regular; 
-        }
-        .info-val{
-          float: right;
-        }
-      }
-      .totalAmt{
-        border-top:1px solid $lightblueGrey;
-        padding-top:10px;
-        .info-text, .info-val{
-          font-family: $font-bold;
-          color: $black;
-          font-size: $base*1.75;
-        }
-      }
-    }
-
-
-    .order-invoice-details{
-      padding: 20px 15px;
-      .invoiceList{
-        float: right;
-        .list{
-          float:left;
-          margin-left:15px;
-          color:$cerulean;
-          font-size: $base*1.5;
-          text-decoration: underline;
-        }
-      }
-    }
-
-
-    &.multi-item-order{
-      .orderStatus{
-        float: left;
-        width: 100%;
-        border-bottom: 12px solid $greybg;
-      }
-      .itemBoxTrack{
-        .itemInfo{
-          .productName{
-            font-size: 11px;
-            font-family: $font-bold;
-            color: $black;
-          }
-          .description{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-          .quantity{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-          .price{
-            font-size: 12px;            
-            font-family:$font-bold;
-            color: $colorbluedull;
-          }
-          .deliveryTag{
-            font-size: 9px;
-            font-family: $font-regular;
-            color: $greyLight;
-          }
-        }
-      }
-    }
-
-    &.single-item-order{
-      .orderBtn{
-        float: left;
-        width:100%;
-        padding: 20px 15px;
-        border-bottom: 12px solid $greybg;
-        margin-bottom: 15px;
-          .btn-blackbg {
-            background: $black;
-            padding: 12px 0;
-            text-align: center;
-            color: $colorwhite;
-            border: none;
-            font-family: $font-medium;
-        }
-        .btn-cancelborder {
-            background: $colorwhite;
-            padding: 11px 0;
-            text-align: center;
-            border: 1px solid $black;
-            font-size: $base*1.75;
-            color: $black;
-            font-family: $font-medium;
-        }
-        .track-order-btn{
-          width: 50%;
-          float: right;
-        }
-      }
-    }
   }
 }
 /* Order checkout page */
 
 .trackorder-wrap {
   margin: 30px auto;
-  width: 100%;
+  width: 50%;
   position: relative;
-  float: left;
-  top: 0px;
+  float: right;
+  top: -66px;
 
   ul.track-bar {
     background-size: 35px 35px;
-    background-color: $colorwhite;
-    border-radius: 0px;
-    height: initial;
-    margin: 0px 0 0 25px;
+    background-color: #ececec;
+    border-radius: 15px;
+    height: 2px;
+    margin: 0px 0 0 40px;
     padding: 0;
-    position: relative;
+    position: absolute;
     width: 100%;
-    float: left;
     &:before {
-      background-color: $colorwhite;
-      height: 2px;
-      left: 0;
-      position: absolute;
-      width: 10%;
-      content: "";
-    }
-    &:after {
       background-color: $colorwhite;
       height: 2px;
       left: 0;
@@ -495,7 +291,7 @@
     }
     .list.visited:after {
       background-size: 35px 35px;
-      background-color: $colorwhite;
+      background-color: $black;
       content: "";
       height: 2px;
       left: 50%;
@@ -503,7 +299,6 @@
       top: -30px;
       width: 100%;
       z-index: 99;
-      border-left:1px solid $black; 
     }
     .list.last:after {
       background-size: 35px 35px;
@@ -532,22 +327,18 @@
         background: $greenLight;
         z-index: 99999;
         padding: 10px;
-        top: 0px;
-        margin-left: -3px;
+        top: -41px;
       }
     }
     .list {
       display: block;
-      margin:0;
-      padding: 0px 0px 0px 20px;
-      text-align: left;
-      width: 100%;
+      margin: 30px 0 0;
+      padding: 0;
+      text-align: center;
+      width: 19%;
       position: relative;
       font-size: 10px;
       float: left;
-      min-height: 60px;
-      border-left: 1px solid $battleshipGrey;
-      
       .deliveryDate {
         color: $battleshipGrey;
       }
@@ -571,7 +362,7 @@
         border-radius: 50%;
         color: #fff;
         font-weight: 700;
-        left: -7px;
+        left: 40%;
         line-height: 37px;
         height: 15px;
         width: 15px;
@@ -579,7 +370,7 @@
         text-align: center;
         top: 4px;
         z-index: 999;
-        top: 0px;
+        top: -37px;
       }
     }
   }

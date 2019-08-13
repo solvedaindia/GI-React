@@ -201,38 +201,34 @@
                         box-shadow: none;
                         text-align: left;
                         font-size: 14px;
-                        line-height: 14px;
                         position: relative;
                         color: $greyish;
                         font-family: $font-medium;
                         .caret {
                             position: absolute;
                             right: 15px;
-                            top: 18px;
+                            top: 22px;
                             color: rgba(68, 43, 45, 0.54);
                         }
                     }
                     .dropdown-menu {
                         width: 100%;
                         border-radius: 0;
-                        top: 44px;
+                        top: 48px;
                         margin: 0;
                         padding: 0;
-                        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.14);
+                        box-shadow: rgba(0, 0, 0, 0.14);
                         max-height: 192px;
                         overflow: auto;
-                        border-top:none;
                         li {
                             padding: 14px 15px;
                             border-bottom: 1px solid $lightGrey;
                             a {
                                 color: $battleshipGrey;
                                 font-size: 14px;
-                                line-height: 14px;
                                 font-family: $font-regular;
                                 text-decoration: none;
                                 background-color: transparent;
-                                padding:0;
                                 &:focus {
                                     outline: none;
                                     
@@ -699,9 +695,6 @@
                             padding: 14px 15px;
                             margin: 0 0 40px 0;
                         }
-                        .dropdown{
-                            margin:0 0 0 30px;
-                        }
                     }
                 }
                 .leftBox {
@@ -876,7 +869,7 @@
                                 font-family: $font-regular;
                                 min-width: 310px;
                                 .caret{
-                                    top: 16px;
+                                    top: 18px;
                                 }
                             }
                             .dropdown-menu{

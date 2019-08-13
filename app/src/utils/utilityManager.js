@@ -29,15 +29,6 @@ export function validatePIN(pin) {
 export function isMobile() {
     return $(window).width() < 768;
 }
-
-/**
- * Function will pick the browser width *
- */
-
-export function getWindowWidth() {
-    return $(window).width();
-}
-
 /**
  * Function to Fetch specific data from Cookie store
  * @param {*} cname

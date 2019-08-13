@@ -44,37 +44,43 @@ class StoreLocator extends React.Component {
             infinite: false,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 1,
-            centerMode: true,
-            centerPadding: '15px',
+            slidesToScroll: 4,
+            arrows: true,
+            prevArrow: prevArrowImg,
+            nextArrow: nextArrowImg,
+            // prevArrow,
+            // nextArrow,
             responsive: [
-                {
+              {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true,
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: true,
+                  dots: true,
                 },
-                },
-                {
+              },
+              {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    dots: true,
+                  slidesToShow: 2,
+                  slidesToScroll: 2,
+                  initialSlide: 2,
+                  dots: true,
+                  prevArrow: false,
+                  nextArrow: false,
                 },
-                },
-                {
+              },
+              {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    dots: false,
-                    prevArrow: false,
-                    nextArrow: false
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  dots: true,
+                  prevArrow: false,
+                  nextArrow: false,
                 },
-                },
+              },
             ],
           };        
     }
@@ -416,17 +422,15 @@ class StoreLocator extends React.Component {
                             <div className='storeList'>
                             {isMobile() ? (<h1 className='headingtitle'>One stop destination for your furniture</h1>):''}
                                 {<div className='detailCard' id='detailCardSection'>
-                                {!isMobile() ? (
-                                    !!storeData && storeData.data.map((physicalData, index) => {
+                                    {!!storeData && storeData.data.map((physicalData, index) => {
                                         const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, physicalData.latitude, physicalData.longitude);
                                         let ribbonClass = '';
                                         if (physicalData.ribbonText) {
                                             ribbonClass = 'ribbon';
                                         }
                                         return(
-                                            <>
                                             <div key={index}>
-                                                 <div className={`storeListItem ${ribbonClass}`}>
+                                                 {!isMobile() ? (<div className={`storeListItem ${ribbonClass}`}>
                                                     { physicalData.ribbonText &&
                                                     <div className="modular_wardrobe">
                                                         <img className='icons' src={starIcon} alt="star"/>
@@ -447,34 +451,15 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/${this.state.defaultLat},${this.state.defaultLng}/${physicalData.latitude},${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
                                                             Get Directions
                                                         </Link>
-                                                        {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
-                                                            Get Directions
-                                                        </Link> */}
                                                         <div className="dealer">
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
                                                     </div>
-                                                    </div></div>  
-                                            </>
-                                        );
-                                    }
-                                )
-
-                                ):
-                                (<Slider {...this.settings}>
-                                    {!!storeData && storeData.data.map((physicalData, index) => {
-                                        const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, physicalData.latitude, physicalData.longitude);
-                                        let ribbonClass = '';
-                                        if (physicalData.ribbonText) {
-                                            ribbonClass = 'ribbon';
-                                        }
-                                        return(
-                                            <>
-                                            <div key={index} className='store-list-item-box'>
-                                                 <div className={`storeListItem ${ribbonClass}`}>
+                                                    </div>):
+                                                    (<Slider {...this.settings}><div className={`storeListItem ${ribbonClass}`}>
                                                     { physicalData.ribbonText &&
                                                     <div className="modular_wardrobe">
                                                         <img className='icons' src={starIcon} alt="star"/>
@@ -502,14 +487,11 @@ class StoreLocator extends React.Component {
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
                                                     </div>
-                                                    </div></div>  
-                                            </>
+                                                    </div></Slider>)}
+                                            </div>
                                         );
                                     }
                                 )}
-
-                                </Slider>)}
-                                
                             </div>
                         }
                     </div>

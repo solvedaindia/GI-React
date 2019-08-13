@@ -53,7 +53,7 @@ class TopContainer extends React.Component {
         </div>
     
         <div className='product-desc'>
-          <h2 className='product-name'>{this.props.product.name} </h2>
+          <h4 className='product-name'>{this.props.product.name} </h4>
           <p className='description-text'>{this.props.product.shortDescription}</p>
           {this.props.product.price[1].value ? <Price
             actualPrice={this.props.product.price[0].value}
