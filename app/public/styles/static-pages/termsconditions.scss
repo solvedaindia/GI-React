@@ -201,35 +201,26 @@
       font-family: $font-regular;
       font-size: 18px;
       text-align: left;
-      .headingAddress{
-        margin:0;
-        color:$black;
-        font-family: $font-medium;
-      }
+      
       .AddressArea{
         .zoneList{
-          display: block;
-          float: left;
-          width: 32%;
           background: #f7f7f7;
           margin: 0 5px 5px 0;
           padding: 20px;
-          min-height: 163px;
-          font-size: 14px;
-
+          font-size: 12px;
+          font-family: $font-regular;
         .mailtoLink{
           color:#005084;
         }
         }
         
       }
-      .contactDetails{
+      
+      h4{
         font-family: $font-regular;
-        margin:15px 0 0 0;
         font-size: 14px;
-        text-align: justify;
+        margin: 0px 0px 5px 0px;
       }
-
     }
     
     .topheading{
@@ -261,7 +252,7 @@
 
     }
     
-    .paragraph, .Redparagraph {      
+    .paragraph, .Redparagraph, .contactDetails {      
       font-family: $font-regular;
       font-size: 12px;
       line-height: 16px;
@@ -270,7 +261,7 @@
       padding: 0 0 20px 0;
 
     }
-    .heading, .Rednote{
+    .heading, .Rednote, .headingAddress{
       padding: 0px 0 5px 0;
       font-family: $font-bold;
       font-size: 16px;
