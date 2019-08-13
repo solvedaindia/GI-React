@@ -9,6 +9,7 @@ const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
  * @return Product Details for PLP
  */
 module.exports.productDetailSummary = productDetailForPLP;
+
 function productDetailForPLP(productDetail) {
   const productDetailJson = {};
   if (productDetail) {
@@ -70,6 +71,7 @@ function productDetailForPLP(productDetail) {
 }
 
 module.exports.getSummaryPromotion = getSummaryPromotion;
+
 function getSummaryPromotion(promotionData) {
   let resPromotionData = '';
   if (promotionData && promotionData.length > 0) {
@@ -85,6 +87,7 @@ function getSummaryPromotion(promotionData) {
 }
 
 module.exports.getSwatchData = getSwatchData;
+
 function getSwatchData(productAttribueArray) {
   const swatchColor = [];
   if (productAttribueArray && productAttribueArray.length > 0) {
@@ -109,6 +112,7 @@ function getSwatchData(productAttribueArray) {
 }
 
 module.exports.getProductAttributes = getProductAttributes;
+
 function getProductAttributes(attributes) {
   const productAttribute = {
     ribbonText: '',
@@ -132,6 +136,7 @@ function getProductAttributes(attributes) {
 }
 
 module.exports.getFixedAttribute = getFixedAttributes;
+
 function getFixedAttributes(productAttribute) {
   const fixedAttribute = {};
   if (productAttribute && productAttribute.length > 0) {
@@ -152,6 +157,7 @@ function getFixedAttributes(productAttribute) {
  * @param {*} productAttribute;
  */
 module.exports.getAttributes = getAttributes;
+
 function getAttributes(productData) {
   const attributes = {};
   const defining = [];
@@ -176,6 +182,7 @@ function getAttributes(productData) {
  * @param {*} attributes
  */
 module.exports.getDefAttributes = getDefAttributes;
+
 function getDefAttributes(attributes) {
   const defAttributes = [];
   if (attributes && attributes.length > 0) {
@@ -207,6 +214,7 @@ function getDefAttributes(attributes) {
  * @param {*} productData
  */
 module.exports.getAttachments = getAttachments;
+
 function getAttachments(productData) {
   const productAttachment = [];
   if (productData.attachments && productData.attachments.length > 0) {
@@ -265,6 +273,7 @@ function getAttachments(productData) {
  * @param {*} productDetailsAttributes;
  */
 module.exports.getProductDetails = getProductDetails;
+
 function getProductDetails(attributes, productData) {
   const productDetailsJSON = {
     imagePath: '',
@@ -325,6 +334,7 @@ function getProductDetails(attributes, productData) {
  * @param {*} attributes
  */
 module.exports.getProductFeatures = getProductFeatures;
+
 function getProductFeatures(attributes) {
   const featuresDummy = [];
   const featuresJson = [];
@@ -373,10 +383,10 @@ function getProductFeatures(attributes) {
  * @param {*} purchaseGuideData
  */
 module.exports.getPurchaseGuide = getPurchaseGuide;
+
 function getPurchaseGuide(purchaseGuideData) {
   // eslint-disable-next-line no-shadow
-  const purchaseGuide = [
-    {
+  const purchaseGuide = [{
       title: 'Product Videos',
       values: [],
     },
@@ -488,6 +498,7 @@ function mergeImagesAndVideos(imageArray, videoArray) {
  * @param {*} bodyData
  */
 module.exports.getKeywords = getKeywords;
+
 function getKeywords(bodyData) {
   let keywordArray = [];
   if (bodyData) {
@@ -499,4 +510,59 @@ function getKeywords(bodyData) {
     }
   }
   return keywordArray;
+}
+
+// Function for compare product attributes
+module.exports.swatchAttributesForCompare = swatchAttributesForCompare;
+
+function swatchAttributesForCompare(productData) {
+  const attributeJson = {
+    skuId: '',
+    name: '',
+    colorCode: '',
+  };
+  attributeJson.skuId = productData.uniqueID;
+  if (productData.attributes && productData.attributes.length > 0) {
+    // iterate kit components attributes
+    productData.attributes.forEach(attr => {
+      // iterate attributes values
+      if (attr.usage === 'Defining' && attr.identifier === 'sc') {
+        attr.values.forEach(attributeValue => {
+          const match = rbgRegex.exec(attributeValue.image1);
+          attributeJson.name = attributeValue.value;
+          if (match !== null) {
+            attributeJson.colorCode = attributeValue.image1 || '';
+          } else {
+            attributeJson.colorCode =
+              imagefilter.getImagePath(attributeValue.image1path) || '';
+          }
+        });
+      }
+    });
+  }
+  // if (kitData.attributes && kitData.attributes.length > 0) {
+  //   // iterate kit components
+
+  //   // kitData.components.forEach(components => {
+  //   //   if (components.attributes && components.attributes.length > 0) {
+  //   //     // iterate kit components attributes
+  //   //     components.attributes.forEach(attr => {
+  //   //       // iterate attributes values
+  //   //       if (attr.usage === 'Defining' && attr.identifier === 'sc') {
+  //   //         attr.values.forEach(attributeValue => {
+  //   //           const match = rbgRegex.exec(attributeValue.image1);
+  //   //           attributeJson.name = attributeValue.value;
+  //   //           if (match !== null) {
+  //   //             attributeJson.colorCode = attributeValue.image1 || '';
+  //   //           } else {
+  //   //             attributeJson.colorCode =
+  //   //               imagefilter.getImagePath(attributeValue.image1path) || '';
+  //   //           }
+  //   //         });
+  //   //       }
+  //   //     });
+  //   //   }
+  //   // });
+  // }
+  return attributeJson;
 }

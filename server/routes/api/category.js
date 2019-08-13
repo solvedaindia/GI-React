@@ -37,21 +37,19 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
 });
 
 /* Get Category Details */
-router.get('/details/:categoryID', (req, res, next) => {
-  categoryUtil.getCategoryDetails(
-    req.headers,
-    req.params.categoryID,
-    (err, result) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      res.status(200).send({
-        status: 'success',
-        data: result,
-      });
-    },
-  );
+router.get('/details/:categoryID', async (req, res, next) => {
+  try {
+    const result = await categoryUtil.getCategoryDetails2(
+      req.headers,
+      req.params.categoryID,
+    );
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

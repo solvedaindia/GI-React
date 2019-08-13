@@ -3,17 +3,16 @@ const router = express.Router();
 const usersHandler = require('../../handlers/usershandler');
 
 /* Get User Details */
-router.get('/', (req, res, next) => {
-  usersHandler.getUserDetails(req.headers, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
+router.get('/', async (req, res, next) => {
+  try {
+    const result = await usersHandler.getUserDetails(req.headers);
     res.status(200).send({
       status: 'success',
       data: result,
     });
-  });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /* Vaidate User Details */

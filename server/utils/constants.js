@@ -75,4 +75,5 @@ module.exports = Object.freeze({
   getBankList: `${prodWcsResourceUrl}/{{storeId}}/allbank/getbankdetails`,
   bookConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/booking`,
   getConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/dropDownValues`,
+  unlockOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/unlockOrder/{{orderId}}`,
 });

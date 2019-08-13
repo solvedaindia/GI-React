@@ -1,5 +1,6 @@
+/* eslint-disable indent */
 /* eslint-disable no-param-reassign */
-// const async = require('async');
+const async = require('async');
 // const origin = require('./origin');
 // const constants = require('./constants');
 // const originMethod = 'GET';
@@ -10,6 +11,8 @@ const productUtil = require('./productutil');
 const kitfilter = require('../filters/kitfilter');
 const bundlefilter = require('../filters/bundlefilter');
 // const minEMI = require('./emiutil').getMinimumEmiValue;
+const productDetailFilter = require('../filters/productdetailfilter');
+const emiUtils = require('./emiutil');
 const SwatchesData = require('../filters/productdetailfilter').getSwatchData;
 
 module.exports.getCompareProducts = function getCompareProducts(
@@ -22,43 +25,43 @@ module.exports.getCompareProducts = function getCompareProducts(
       callback(errorUtils.handleWCSError(err));
     } else {
       const data = [];
-      console.log('api called utils');
       const attPromises = [];
       result.forEach(element => {
         if (element.catalogEntryTypeCode === 'PackageBean') {
-          console.log('in kit func');
-          const compareDataSummary = {
-            uniqueId: '',
-            type: '',
-            sKUs: [],
-            attributes: [],
-            swatches: [],
-          };
-          compareDataSummary.uniqueId = element.uniqueID;
-          compareDataSummary.type = 'kit';
-          compareDataSummary.swatches.push(
-            kitfilter.swatchAttributesForCompare(element),
-          );
-          compareDataSummary.sKUs.push(kitfilter.kitSummaryForCompare(element));
-          compareDataSummary.attributes = kitfilter.getComparableAttributes(
-            element,
-          );
-          if (
-            element.merchandisingAssociations &&
-            element.merchandisingAssociations.length > 0
-          ) {
-            element.merchandisingAssociations.forEach(attr => {
-              if (attr.associationType === 'REPLACEMENT') {
-                compareDataSummary.swatches.push(
-                  kitfilter.swatchAttributesForCompare(attr),
-                );
-                compareDataSummary.sKUs.push(
-                  kitfilter.kitSummaryForCompare(attr),
-                );
+          data.push(kitCompareDataSummary(element));
+        } else if (element.catalogEntryTypeCode === 'BundleBean') {
+          const bundleCompareSummary = bundleCompareDataSummary(element);
+
+          const promise = new Promise((resolve, reject) => {
+            getEmiValue(headers, bundleCompareSummary, (error, endResult) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(endResult);
               }
             });
-          }
-          data.push(compareDataSummary);
+          });
+          attPromises.push(promise);
+        } else if (element.catalogEntryTypeCode === 'ProductBean') {
+          data.push(productCompareDataSummary(element));
+        } else if (element.catalogEntryTypeCode === 'ItemBean') {
+          productUtil.productByProductID(
+            element.parentCatalogEntryID,
+            headers,
+            // eslint-disable-next-line no-shadow
+            (err, result) => {
+              if (err) {
+                callback(err);
+              } else if (
+                result.catalogEntryView &&
+                result.catalogEntryView.length > 0
+              ) {
+                data.push(
+                  productCompareDataSummary(result.catalogEntryView[0]),
+                );
+              }
+            },
+          );
         } else {
           attPromises.push(
             new Promise((resolve, reject) => {
@@ -131,13 +134,11 @@ module.exports.getCompareProducts = function getCompareProducts(
         }
       });
       Promise.all(attPromises)
-        .then(() => {
-          console.log('then called');
-          callback(null, data);
+        .then(resu => {
+          callback(null, resu);
         })
         .catch(error => {
-          console.log('catch called', error);
-          callback(null, data);
+          callback(error);
         });
     }
   });
@@ -160,4 +161,243 @@ function getComparableAttributes(productAttribute) {
     });
   }
   return comparable;
+}
+
+function bundleCompareDataSummary(element) {
+  const compareDataSummary = {
+    uniqueId: '',
+    type: '',
+    sKUs: [],
+    attributes: [],
+    swatches: [],
+  };
+  if (element) {
+    compareDataSummary.uniqueId = element.uniqueID;
+    compareDataSummary.type = 'bundle';
+    const swatchAttr = bundlefilter.swatchAttributesForCompare(element);
+    if (swatchAttr.length > 0) {
+      swatchAttr.forEach(sw => {
+        compareDataSummary.swatches.push(sw);
+      });
+    }
+    const Price = bundlefilter.bundleComponentsSummary(element, '');
+    const productSummary = productDetailFilter.productDetailSummary(element);
+    const descAttr = kitfilter.getDescriptiveAttributes(element);
+    productSummary.weight =
+      descAttr.wt && descAttr.wt.values[0] ? descAttr.wt.values[0].value : 'NA';
+    productSummary.height =
+      descAttr.ht && descAttr.ht.values[0] ? descAttr.ht.values[0].value : 'NA';
+    productSummary.depth =
+      descAttr.dp && descAttr.dp.values[0] ? descAttr.dp.values[0].value : 'NA';
+    productSummary.actualPrice = Price.actualPrice;
+    productSummary.offerPrice = Price.offerPrice;
+    compareDataSummary.sKUs.push(productSummary);
+
+    if (element.attributes && element.attributes.length > 0) {
+      compareDataSummary.attributes = kitfilter.getComparableAttributes(
+        element,
+      );
+    }
+    if (
+      element.merchandisingAssociations &&
+      element.merchandisingAssociations.length > 0
+    ) {
+      element.merchandisingAssociations.forEach(attr => {
+        if (
+          attr.associationType === 'REPLACEMENT' &&
+          attr.catalogEntryTypeCode === 'BundleBean'
+        ) {
+          // eslint-disable-next-line no-shadow
+          const swatchAttr = bundlefilter.swatchAttributesForCompare(attr);
+          if (swatchAttr.length > 0) {
+            swatchAttr.forEach(sw => {
+              compareDataSummary.swatches.push(sw);
+            });
+          }
+          const mercPrice = bundlefilter.bundleComponentsSummary(attr, '');
+          const mercProductSummary = productDetailFilter.productDetailSummary(
+            attr,
+          );
+          // eslint-disable-next-line no-shadow
+          const descAttr = kitfilter.getDescriptiveAttributes(attr);
+          mercProductSummary.weight =
+            descAttr.wt && descAttr.wt.values[0] ?
+            descAttr.wt.values[0].value :
+            'NA';
+          mercProductSummary.height =
+            descAttr.ht && descAttr.ht.values[0] ?
+            descAttr.ht.values[0].value :
+            'NA';
+          mercProductSummary.depth =
+            descAttr.dp && descAttr.dp.values[0] ?
+            descAttr.dp.values[0].value :
+            'NA';
+          mercProductSummary.actualPrice = mercPrice.actualPrice;
+          mercProductSummary.offerPrice = mercPrice.offerPrice;
+          compareDataSummary.sKUs.push(mercProductSummary);
+        }
+      });
+    }
+  }
+  return compareDataSummary;
+}
+
+function kitCompareDataSummary(element) {
+  const compareDataSummary = {
+    uniqueId: '',
+    type: '',
+    sKUs: [],
+    attributes: [],
+    swatches: [],
+  };
+  if (element) {
+    compareDataSummary.uniqueId = element.uniqueID;
+    compareDataSummary.type = 'kit';
+    compareDataSummary.swatches.push(
+      kitfilter.swatchAttributesForCompare(element),
+    );
+    const productSummary = productDetailFilter.productDetailSummary(element);
+    const descAttr = kitfilter.getDescriptiveAttributes(element);
+    productSummary.weight =
+      descAttr.wt && descAttr.wt.values[0] ? descAttr.wt.values[0].value : 'NA';
+    productSummary.height =
+      descAttr.ht && descAttr.ht.values[0] ? descAttr.ht.values[0].value : 'NA';
+    productSummary.depth =
+      descAttr.dp && descAttr.dp.values[0] ? descAttr.dp.values[0].value : 'NA';
+    compareDataSummary.sKUs.push(productSummary);
+    if (element.attributes) {
+      compareDataSummary.attributes = kitfilter.getComparableAttributes(
+        element,
+      );
+    }
+    if (
+      element.merchandisingAssociations &&
+      element.merchandisingAssociations.length > 0
+    ) {
+      element.merchandisingAssociations.forEach(attr => {
+        if (attr.associationType === 'REPLACEMENT') {
+          compareDataSummary.swatches.push(
+            kitfilter.swatchAttributesForCompare(attr),
+          );
+          const mercProductSummary = productDetailFilter.productDetailSummary(
+            attr,
+          );
+          // eslint-disable-next-line no-shadow
+          const descAttr = kitfilter.getDescriptiveAttributes(attr);
+          mercProductSummary.weight =
+            descAttr.wt && descAttr.wt.values[0] ?
+            descAttr.wt.values[0].value :
+            'NA';
+          mercProductSummary.height =
+            descAttr.ht && descAttr.ht.values[0] ?
+            descAttr.ht.values[0].value :
+            'NA';
+          mercProductSummary.depth =
+            descAttr.dp && descAttr.dp.values[0] ?
+            descAttr.dp.values[0].value :
+            'NA';
+          compareDataSummary.sKUs.push(mercProductSummary);
+        }
+      });
+    }
+  }
+  return compareDataSummary;
+}
+
+function productCompareDataSummary(element) {
+  const compareDataSummary = {
+    uniqueId: '',
+    type: '',
+    sKUs: [],
+    attributes: [],
+    swatches: [],
+  };
+  if (element) {
+    compareDataSummary.uniqueId = element.uniqueID;
+    compareDataSummary.type = 'product';
+    // compareDataSummary.swatches.push(
+    //   productDetailFilter.swatchAttributesForCompare(element),
+    // );
+    // const productSummary = productDetailFilter.productDetailSummary(element);
+    // const descAttr = kitfilter.getDescriptiveAttributes(element);
+    // productSummary.weight =
+    //   descAttr.wt && descAttr.wt.values[0] ? descAttr.wt.values[0].value : 'NA';
+    // productSummary.height =
+    //   descAttr.ht && descAttr.ht.values[0] ? descAttr.ht.values[0].value : 'NA';
+    // productSummary.depth =
+    //   descAttr.dp && descAttr.dp.values[0] ? descAttr.dp.values[0].value : 'NA';
+    // compareDataSummary.sKUs.push(productSummary);
+    if (element.attributes) {
+      compareDataSummary.attributes = kitfilter.getComparableAttributes(
+        element,
+      );
+    }
+    if (element.sKUs && element.sKUs.length > 0) {
+      element.sKUs.forEach(sku => {
+        compareDataSummary.swatches.push(
+          productDetailFilter.swatchAttributesForCompare(sku),
+        );
+        const skuProductSummary = productDetailFilter.productDetailSummary(sku);
+        const descAttr = kitfilter.getDescriptiveAttributes(sku);
+        skuProductSummary.weight =
+          descAttr.wt && descAttr.wt.values[0] ?
+          descAttr.wt.values[0].value :
+          'NA';
+        skuProductSummary.height =
+          descAttr.ht && descAttr.ht.values[0] ?
+          descAttr.ht.values[0].value :
+          'NA';
+        skuProductSummary.depth =
+          descAttr.dp && descAttr.dp.values[0] ?
+          descAttr.dp.values[0].value :
+          'NA';
+        compareDataSummary.sKUs.push(skuProductSummary);
+      });
+    }
+  }
+  return compareDataSummary;
+}
+
+function getEmiValue(header, bundleCompareSummary, callback) {
+  return minEmiValue(header, bundleCompareSummary, (err, res) => {
+    if (err) {
+      callback(null, err);
+    } else {
+      callback(null, res);
+    }
+  });
+}
+
+/** Function to find min EMI value for bundles */
+module.exports.minEmiValue = minEmiValue;
+
+function minEmiValue(header, bundleDataSummary, callback) {
+  if (bundleDataSummary.sKUs && bundleDataSummary.sKUs.length > 0) {
+    return async.map(
+      bundleDataSummary.sKUs,
+      (element, cb) => {
+        emiUtils.getMinimumEmiValue(
+          element.offerPrice,
+          header,
+          (error, result) => {
+            if (!error) {
+              // eslint-disable-next-line no-param-reassign
+              element.emiData = result.minEMIValue;
+              cb(null, element);
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              element.emiData = '';
+              cb(null, element);
+            }
+          },
+        );
+      },
+      (errors, results) => {
+        if (errors) {
+          callback(errors, bundleDataSummary);
+        }
+        callback(null, results);
+      },
+    );
+  }
 }
