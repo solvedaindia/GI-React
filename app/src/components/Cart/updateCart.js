@@ -1,6 +1,7 @@
 import React from 'react';
 import { cartUpdateAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import { isMobile } from '../../utils/utilityManager';
 
 class CartUpdate extends React.Component {
   constructor(props) {
@@ -61,7 +62,6 @@ class CartUpdate extends React.Component {
           className="qytList"
           value={this.state.quantity}
           onChange={this.handleChange}
-          // size={this.state.size} onFocus={()=>{this.setState({size: 5})}}
           >
           {[...Array(100)].map((e, key) => {
             if (key > 0) {
@@ -69,13 +69,7 @@ class CartUpdate extends React.Component {
             }
           })}
         </select>
-        {/* <select
-          className="qytList"
-          value={this.state.quantity}
-          onChange={this.handleChange}
-          >
-            {this.buildOptions()}
-        </select> */}
+        {!!isMobile() && <span className='caretDown' />}
       </form>
     );
   }

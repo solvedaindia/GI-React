@@ -54,7 +54,7 @@ class RWDSingleProduct extends React.Component {
           <div className='itemInfo'>
             <div className='productName'>{productData.productName}</div>
             <div className='description'>{productData.shortDescription}</div>
-            <div className='quantity'>{this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
+            <div className='quantity'>Quantity: {this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
             <div className='price'>{productData.offerPrice}</div>
             <div className='deliveryTag'>
               <span>{this.state.dsNameTag}</span>
@@ -68,7 +68,7 @@ class RWDSingleProduct extends React.Component {
         </div>
         <div className='clearfix'/>
         <div className='orderBtn'>
-          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 1 ? <button onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button> : this.props.isFromViewOrder ? null : <button onClick={this.showOrderDetail.bind(this)}>View Order Details</button> : null}
+          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 1 ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button> : this.props.isFromViewOrder ? null : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button> : null}
         </div>  
       </>
     );

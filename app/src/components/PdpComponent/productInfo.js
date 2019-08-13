@@ -63,23 +63,35 @@ class productInfo extends React.Component {
         <>
     { showOffer && <>
     {isMobile() && <div className='clear'></div>}
-    <div className="accessories-offer">
+    <div className={!isMobile() ? 'accessories-offer' : 'accessories-offer mob-offer-accessories'}>
 		 <div className="offerbg text"> % </div>
-          <div className="discount-off text">
+          {!isMobile() ?  
+          (<div className="discount-off text">
             { parseInt(this.props.productData.discount) > 1 &&
               <>{parseInt(this.props.productData.discount)}% OFF </>
             }
             { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
             <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
             }
-          </div>
+          </div>)
+          :
+          (<div className="discount-off text mob-discouont-off">
+            { parseInt(this.props.productData.discount) > 1 &&
+              <><span className='discount-text-off'>{parseInt(this.props.productData.discount)}% OFF </span></>
+            }
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
+            }
+          </div>)
+          }
+
           { this.props.productData.promotions.length > 0 &&
           <a
             className="text viewOffer"
             role="button"
             onClick={this.toggleOffers.bind(this)}
           >
-           <span className="">View Offer</span>
+           <span className="view-offer-text">View Offer</span>
            <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }
@@ -100,6 +112,7 @@ class productInfo extends React.Component {
         </>
         {this.props.productData.emiData &&
           this.props.productData.offerPrice >= 1500 && (
+            !isMobile() ?  
           <div className="starting-emitext">
               <div className="offerbg text">
                 {' '}
@@ -110,6 +123,22 @@ class productInfo extends React.Component {
               &#8377;{this.props.productData.emiData}{' '}
               </div>
               <div className="text">per month</div>
+              <div className="text emiinfo">
+                <EmiInfo price={this.props.productData.offerPrice} />
+              </div>
+          </div>
+          :
+          <div className="starting-emitext pdp-emitext-mob">
+              <div className="offerbg text">
+                {' '}
+                <span className="emitext">EMI</span>
+              </div>
+              <div className='emi-text-desc'>
+              <div className="text starting-from">Starting from </div>
+              <div className="text bold">
+              &#8377;{this.props.productData.emiData}{' '}
+              </div>
+              <div className="text">per month</div></div>
               <div className="text emiinfo">
                 <EmiInfo price={this.props.productData.offerPrice} />
               </div>

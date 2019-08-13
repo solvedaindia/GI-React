@@ -167,9 +167,19 @@
         }
         .slick-prev {
             left: -$base*3;
+            &::before {
+                content: '<';
+                background: url("http://203.110.85.50/imagestore/images/godrejInterio/back.png") no-repeat;
+                color: transparent;
+            }
         }
         .slick-next{
             right: -$base*3;
+            &::before {
+                content: '>';
+                background: url("http://203.110.85.50/imagestore/images/godrejInterio/next.png") no-repeat;
+                color: transparent;
+            }
         }
     }
 }

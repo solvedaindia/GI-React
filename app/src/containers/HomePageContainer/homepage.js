@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import {
@@ -76,7 +77,16 @@ export class HomapegeLayout extends React.Component {
 	render() {
 		const { homepageLayout } = this.state;
 		return (
-			<> {
+			<>
+			<Helmet>
+				<meta name="twitter:card" content="summary" />
+				<meta name="twitter:site" content="@godrejinterio" />
+				<meta name="twitter:title" content="Godrej Interio - Best Home and Office Furniture Store in India" />
+				<meta name="twitter:description" content="Shop from Godrej Interio's furniture store for best quality home and office furniture. Browse our wide range of living room, bedroom, mattress, kitchen, desking, seating. ✔Exchange Policy ✔Best Price ✔Free Shipping &amp; Installation ✔Best Quality &apm; Service ✔Smart &apm; innovative designs" />
+				<meta name="twitter:image" content="http://www.godrejinterio.com/GodrejInterio/assets/images/godrej-interio_logo.gif" />
+				<meta name="twitter:image:alt" content="Godrej Interio" />
+            </Helmet>
+			{
 			!!homepageLayout ? (			
 			homepageLayout.map((widget, i) => (
 				<WidgetList
@@ -96,7 +106,6 @@ export class HomapegeLayout extends React.Component {
 					accept their use.
 				<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
 			}
-			
 			</>
 		);
 	}

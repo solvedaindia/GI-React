@@ -67,9 +67,25 @@
             &:last-child {
                 border-bottom: 1px solid $borderLight;
             }
+            .outOfStock {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.6;
+                background-color: $colorwhite;
+                z-index: 2;
+            }
             .prodImg {
                 width: 29%;
                 display: inline-block;
+                position: relative;
+                .outOfStockLogo {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 100%;
+                    z-index: 3;
+                }
             }
             .prodDetails {
                 width: 71%;
@@ -127,6 +143,7 @@
                     position: absolute;
                     bottom: 0;
                     cursor: pointer;
+                    z-index: 3;
                 }
                 .delCartItem {
                     right: $base;
@@ -187,12 +204,13 @@
             }
             .promoField {
                 .appliedPromoMsg {
-                    border-bottom: 1px solid $borderLight;
+                    border: 1px solid $borderLight;
                     position: relative;
-                    padding-bottom: $base*2;
+                    padding: $base*2;
                     .removeBtn {
                         position: absolute;
                         right: 0;
+                        width: $base*3.5;
                         border: none;
                         color: $cerulean;
                         font-family: $font-bold;
@@ -279,8 +297,11 @@
                 color: $colorwhite;
                 margin-top: $base*4; 
                 border-radius: unset; 
-                padding: 0;
-                line-height: 44;
+                padding: 11px 0;
+                &.disable {
+                    background-color: $disable;
+                    pointer-events: none;
+                }
             }
         }
     }
@@ -647,7 +668,10 @@
                     .qytList {
                         border: none;
                         background: none;
-                        min-width:40px;
+                        padding: 0 20px;
+                    }
+                    .cartQty {
+                        position: relative;
                     }
                     .cartQty,
                     .price {
@@ -798,3 +822,22 @@
         top: 14.5%;
     }
 }
+
+@supports (-webkit-overflow-scrolling: touch) {
+    /* CSS specific to iOS devices */ 
+    .caretDown {
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 14px;
+        right: 23px;
+        display: inline-block;
+        border: $base*0.75 solid transparent;
+        border-top-color: $black;
+    }
+  }
+  
+  @supports not (-webkit-overflow-scrolling: touch) {
+    /* CSS for other than iOS devices */ 
+    
+  }
