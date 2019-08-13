@@ -2,35 +2,13 @@
 @import '../base';
 
 
-.serviceSupport {
-  width: 100%;
-  height: auto;
-  background-color: #ffffff;
-  padding:64px 0 144px 0;
-  .innerContent{
-    padding:63px 0 0 0;
-  }
-  .headingServicesupport {
-    padding: 0;
-    font-family: $font-medium;
-    font-size: 30px;  
-    line-height: 30px;    
-    color: #000000;
+.service-support {
+  .heading {   
+    color: $black;
     text-align: center;
-    margin:0;
   }
   .subHeading {
-    padding: 24px 0 0 0;
-    font-family: $font-regular;
-    font-size: 18px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #4a4a4a;
     text-align: center;
-    margin:0;
   }
   .searchBars {
     padding: 62px 0 0 0;  
@@ -155,30 +133,16 @@
   
   
 
-  .faqArea{
-    .faqhead {
+  .faq-wrapper{
+    .faq-heading {
       font-family: $font-bold;
+      color: $black;
       font-size: 14px;
-      line-height: 14px;
-      font-weight: bold;     
-      color: #000000;
-      margin:0;
-      padding:0 0 8px 0;
-    }
-    .faqList{
-      .active{
-        background: #eef8fe;
-      }
-      .faqItem{
-        font-size: 14px;
-        font-family: $font-regular;
-        padding:12px;
-
-      }
+      line-height: 14px; 
     }
   }
 
-  .myOrder{
+  .faq-my-Order{
     .myOrders {
       padding: 0px 0 8px 0;
        height: 28px;
@@ -304,5 +268,151 @@
       padding:0 10px 0 0;
     }
   }
+  
+}
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+   
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .service-support{
+      padding:64px 0 144px 0;
+      .innerContent{
+        padding:63px 0 0 0;
+      }
+      .heading{
+        padding: 0;
+        margin:0;
+        font-family: $font-medium;
+        font-size: 30px;  
+        line-height: 30px; 
+      }
+      .subHeading{
+        padding: 24px 0 0 0;
+        margin:0;
+        font-family: $font-regular;
+        font-size: 18px;
+        color: #4a4a4a;
+      }
+
+      .faq-wrapper{
+        .faq-heading {    
+          margin:0;
+          padding:0 0 8px 0;
+        }
+        .faqList{
+          .active{
+            background: #eef8fe;
+          }
+          .faqItem{
+            font-size: 14px;
+            font-family: $font-regular;
+            padding:12px;
+    
+          }
+        }
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){     
+  .service-support{
+    padding:0px 0 30px 0;
+    .innerContent{
+      padding:20px 0 0 0;
+    }
+    .heading{
+      font-family: $font-bold;
+      font-size:$base*3;  
+      line-height: $base*3.5; 
+      margin:25px 0px 10px 0px;
+    }
+    .subHeading{
+      font-family: $font-regular;
+      font-size:$base*1.5;
+      color: $greyBorder;
+      margin: 0px;
+    }
+
+    .faq-wrapper{
+      padding:10px  0px;
+      .faq-heading {    
+        margin:0;
+        padding:0 0 15px 16px;
+      }
+      .faqList{
+        .faqItem{
+          font-size: 12px;
+          font-family: $font-medium;
+          padding:$base*1.75 $base*2;
+          border-top:1px solid $lightblueGrey; 
+          
+        }
+      }
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
   
 }

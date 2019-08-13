@@ -17,14 +17,14 @@ export default class HelpSupport extends React.Component {
 
   render() {
     return (
-      <div className='serviceSupport'>
+      <div className='service-support'>
         <div className='container'>
-        <h1 className="headingServicesupport">Service & Support</h1>
+        <h1 className="heading">Service & Support</h1>
         <h3 className="subHeading">How can we help you?</h3>      
         
         <div className="row innerContent">
-          <div className="col-md-3 faqArea">
-            <h2 className="faqhead">Frequently Asked Questions (FAQ)</h2>
+          <div className="col-md-3 faq-wrapper">
+            <h2 className="faq-heading">Frequently Asked Questions (FAQ)</h2>
             <ul className='faqList'>
               <li className='faqItem active'>My Orders</li>
               <li className='faqItem'>Before I Buy</li>
@@ -36,7 +36,7 @@ export default class HelpSupport extends React.Component {
               <li className='faqItem'>Request Service</li>
             </ul>
           </div>
-          <div className="col-md-9 myOrder">            
+          <div className="col-md-9 faq-my-Order">            
           <h2 className="myOrders">My Orders</h2>
             <FaqAnswers />
             </div>
