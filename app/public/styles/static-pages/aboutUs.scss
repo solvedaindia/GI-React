@@ -6,96 +6,7 @@
   height: auto;
   background-color: #ffffff;
   
-  
-  .greenContainer{
-    padding: 80px 0 0 0;
-    .slick-slider{
-      .slick-list{
-        max-height: 270px;
-      }
-    }
-
-    .greenTitle{
-      font-family: $font-medium;;
-      font-size:30px;
-      font-weight:500;
-      font-style:normal;
-      line-height:normal;
-      color:#000;
-      margin:0;
-      padding: 0 0 57px 0;
-    }
     
-    .greenImage{
-      padding: 0px 0 0 0;
-      width:100%;
-      // height: 300px;
-    }
-    .ULcontent{
-      padding: 25px 0 18px 0;
-      margin:0;
-      color: #000000;
-      font-family: $font-medium;
-      font-size:20px;
-      line-height: 20px;
-      line-height:20px;
-      text-align: left;
-
-    }
-    .ULparagraph{
-      color: #000000;
-      font-family: $font-regular;
-      font-size:14px;
-      line-height:20px;
-     
-
-    }
-    .slick-initialized {
-      .slick-slide{
-        background: #f2f5f7;
-        margin: 11px;
-        padding: 50px 50px 50px 52px;
-      }
-    }
-  }
-  
-  .mediaPressSection{
-    padding: 80px 0 80px 0 ;
-    .paddingBottom {
-      padding-bottom: 20px;
-  }
-    .Paragraphfont {
-      font-family: $font-regular;
-      font-size: 14px;
-      font-weight: normal;
-      font-style: normal;
-      line-height: 1.43;
-      color: #000000;
-    }
-    .extrinsiveSmallImgs {
-      height: 104px;
-     
-  }
-    .ColorDate {
-      color: #036cc5;
-  }
-    .extrinsiveBigImg {
-      width:100%;
-  }
-    .MotivationBorder {
-      border-right: 3px solid black;
-  }
-    .MediaTopHead{
-      padding:0;
-      margin:0;
-      font-family: $font-medium;
-       font-size: 30px;
-
-      text-align: left;
-      color: #000;
-    }
-  }
-  
 .circle{
     background: grey;
     border-radius: 50px;
@@ -682,44 +593,7 @@ padding:19px 0 0 0;
           color: #000000;
         }
 
-.visionRightbox{
-  margin:65px 0 0 0;
-        .AboutUsContent{
-          margin:0 0 27px 0;
-    .iconsBackground{
-      width:20%;
-      max-width: 89px;
-      padding: 20px;
-      background: #f2f5f7;
-      border-radius: 100%;
-      .abouticonimg{
-        width:100%;
-      }
-    }
-    .ListBoxtext{
-      width:80%;
-      padding:0 0 0 30px;
-      .heading{
-        margin:0;
-        font-size: 21px;
-        padding:0;
-        font-family: $font-medium;
-      }
-      .text{
-        color:#77787a;
-        font-size: 14px;
-        line-height: 14px;
-        font-family: $font-regular;
-        
-      }
-    }
 
-    .iconsBackground,.ListBoxtext{
-      display: block;
-      float:left;
-    }
-  }
-}
 
   }
  
@@ -769,6 +643,45 @@ padding:19px 0 0 0;
           font-weight: normal;
           font-style: normal;
           line-height: 1.43;
+        }
+
+        .visionRightbox{
+          margin:65px 0 0 0;
+                .AboutUsContent{
+                  margin:0 0 27px 0;
+            .iconsBackground{
+              width:20%;
+              max-width: 89px;
+              padding: 20px;
+              background: #f2f5f7;
+              border-radius: 100%;
+              .abouticonimg{
+                width:100%;
+              }
+            }
+            .ListBoxtext{
+              width:80%;
+              padding:0 0 0 30px;
+              .heading{
+                margin:0;
+                font-size: 21px;
+                padding:0;
+                font-family: $font-medium;
+              }
+              .text{
+                color:#77787a;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
+                
+              }
+            }
+        
+            .iconsBackground,.ListBoxtext{
+              display: block;
+              float:left;
+            }
+          }
         }
       }
 
@@ -829,11 +742,102 @@ padding:19px 0 0 0;
         font-family: $font-medium;
       }
     }
+
+
+    .mediaPressSection{
+      padding: 80px 0 80px 0 ;
+      .paddingBottom {
+        padding-bottom: 20px;
+    }
+      .Paragraphfont {
+        font-family: $font-regular;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.43;
+        color: #000000;
+      }
+      .extrinsiveSmallImgs {
+        height: 104px;
+       
+    }
+      .ColorDate {
+        color: #036cc5;
+    }
+      .extrinsiveBigImg {
+        width:100%;
+    }
+      .MotivationBorder {
+        border-right: 3px solid black;
+    }
+      .MediaTopHead{
+        padding:0;
+        margin:0;
+        font-family: $font-medium;
+         font-size: 30px;
+  
+        text-align: left;
+        color: #000;
+      }
+    }
       .processBigImg {  
         width: 100%;
         height: 400px;
       }
+      .greenContainer{
+        padding: 80px 0 0 0;
+        .slick-slider{
+          .slick-list{
+            max-height: 270px;
+          }
+        }
+    
+        .greenTitle{
+          font-family: $font-medium;;
+          font-size:30px;
+          font-weight:500;
+          font-style:normal;
+          line-height:normal;
+          color:#000;
+          margin:0;
+          padding: 0 0 57px 0;
+        }
+        
+        .greenImage{
+          padding: 0px 0 0 0;
+          width:100%;
+          // height: 300px;
+        }
+        .ULcontent{
+          padding: 25px 0 18px 0;
+          margin:0;
+          color: #000000;
+          font-family: $font-medium;
+          font-size:20px;
+          line-height: 20px;
+          line-height:20px;
+          text-align: left;
+    
+        }
+        .ULparagraph{
+          color: #000000;
+          font-family: $font-regular;
+          font-size:14px;
+          line-height:20px;
+         
+    
+        }
+        .slick-initialized {
+          .slick-slide{
+            background: #f2f5f7;
+            margin: 11px;
+            padding: 50px 50px 50px 52px;
+          }
+        }
+      }
     }
+
+   
   }
 
 /* 
@@ -874,6 +878,53 @@ padding:19px 0 0 0;
         font-family: $font-regular;
         font-size: 12px;
         line-height: 16px;
+      }
+
+      .visionRightbox{
+        margin:20px 0 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        .AboutUsContent{
+          margin:0 0 10px 0;
+          width: 50%;
+          padding: 0px 10px;
+          .iconsBackground{
+            width: 80px;
+            padding: 20px;
+            background: #f2f5f7;
+            border-radius: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+            margin: auto;
+            .abouticonimg{
+              width:100%;
+            }
+          }
+          .ListBoxtext{
+            width: 100%;
+            text-align: center;
+            .heading{
+              margin:0;
+              font-size: 16px;
+              padding:10px 0;
+              font-family: $font-medium;
+            }
+            .text{
+              color:#77787a;
+              font-size: 12px;
+              line-height: 14px;
+              font-family: $font-regular;
+              
+            }
+          }
+      
+          .ListBoxtext{
+            display: block;
+            float:left;
+          }
+        }
       }
     }
     .OurProcessContainer{
@@ -981,11 +1032,105 @@ padding:19px 0 0 0;
           }
         }
         
+        .mediaPressSection{
+          padding: 0px 0 20px 0 ;
+          .paddingBottom {
+            padding-bottom: 20px;
+        }
+          .Paragraphfont {
+            font-family: $font-regular;
+            font-size: 12px;
+            color:$black;
+          }
+          .extrinsiveSmallImgs {
+            height: 104px;
+           
+        }
+          .ColorDate {
+            color: #036cc5;
+        }
+          .extrinsiveBigImg {
+            width:100%;
+        }
+          .MotivationBorder {
+            border-right: 3px solid black;
+        }
+          .MediaTopHead{
+            font-family: $font-bold;
+            font-size: 20px;
+            padding-top: 35px;
+            color: $black;
+            margin:0;
+          }
 
+          .col-md-6{
+            margin-top:10px;
+            .col-md-4{
+              width: 40%;
+              float: left;
+              padding-right: 0px;
+              .extrinsiveSmallImgs{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .col-md-8{
+              width: 57%;
+              float: left;
+            }
+          }
+          hr{
+            margin: 10px 0px;
+          }
+        }
 
   
     .processBigImg {  
       width: 100%;
+    }
+
+    .greenContainer{
+      padding:0;
+  
+      .greenTitle{
+        font-family: $font-bold;
+        font-size: 16px;
+        padding-top: 35px;
+        color: $black;
+        margin:0;
+      }
+      
+      .greenImage{
+        padding: 0px 0 0 0;
+        width:130px;
+        margin: auto;
+      }
+      .ULcontent{
+        padding: 25px 0 18px 0;
+        margin:0;
+        color: #000000;
+        font-family: $font-medium;
+        font-size:20px;
+        line-height: 20px;
+        line-height:20px;
+        text-align: left;
+  
+      }
+      .ULparagraph{
+        color: #000000;
+        font-family: $font-regular;
+        font-size:14px;
+        line-height:20px;
+       
+  
+      }
+      .slick-initialized {
+        .slick-slide > div{
+          background: #f2f5f7;
+          padding: 30px ;
+          margin:0px 10px;
+        }
+      }
     }
   }
 }
@@ -1009,3 +1154,10 @@ padding:19px 0 0 0;
   
   
 }
+
+
+/**
+* CSS added only for demo  purpose, 
+* Need to change the class name and css attributes,
+* Review the code and found lots of modifacation
+**/

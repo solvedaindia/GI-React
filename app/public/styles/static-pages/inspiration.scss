@@ -4,9 +4,6 @@
     width: 100%;
     height: auto;
     background-color: $colorwhite;
-    .uuscontainer{
-      padding: 0 0 120px 0;
-    }
     .lookcrouse{
 	  padding: 60px 0 0 0;
 	  width: 84.3%;
@@ -339,7 +336,11 @@
   #Global Screen Chhange for Screen max 768
   */
   @media screen and (min-width: 768px){
-     
+    .inspiration {
+      .uuscontainer{
+        padding: 0 0 120px 0;
+      }
+    }
   }
 
 /* 
@@ -407,6 +408,9 @@
     }
     .summersparkcontainer{
       padding: $base*7.25 0 0 0;
+    }
+    .uuscontainer{
+      padding: 0 0 40px 0;
     }
   }
 }
