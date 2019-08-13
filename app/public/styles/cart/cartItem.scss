@@ -445,6 +445,7 @@
                     background: transparent;
                     border: none;
                     color: $cerulean;
+                    font-family: $font-bold;
                 }
             }
         }
@@ -838,7 +839,7 @@
         }
     }
     .modal.deletItem {
-        top: 76.5%;
+        top: unset;
         bottom: 0;
     }
     .modal.modal_emiInstallment {
