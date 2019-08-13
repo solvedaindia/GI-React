@@ -428,7 +428,8 @@ class PdpComponent extends React.Component {
                           skuData={this.state.skuData}
                           isMobile={true}
                           pinCodeData={this.state.pincodeData}
-                          handleAddtocart={this.handleAddtocart.bind(this)}
+													handleAddtocart={this.handleAddtocart.bind(this)}
+													history={this.props.historyData}
                         /> 
                       </Col>
                   </Row>}

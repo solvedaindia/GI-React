@@ -42,7 +42,7 @@ class addToCartComponent extends React.Component {
   /* render delivery message */
   renderdeliveryMessage(props) {
     if (props.pincodeServiceable === false) {
-      let errorMsg = 'Pincode is not serviceable';
+      let errorMsg = 'This Pin Code is non-serviceable';
       if (props.error) {
         errorMsg = props.error;
       }
@@ -148,7 +148,7 @@ class addToCartComponent extends React.Component {
       <div className="addedToWishlist dropdownwishlist clearfix">
         <span className="wishlist-text">Product Added to Cart</span>
         <button
-          onClick={() => this.props.history.push('/cart')()}
+          onClick={() => this.props.history.push('/cart')}
           className="view-btn"
         >
           View
