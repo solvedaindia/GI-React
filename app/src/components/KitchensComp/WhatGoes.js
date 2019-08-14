@@ -172,17 +172,14 @@ imageHeading: ""
     return (
       <div className="goesOnKitchen">
             <h1 className="What-goes-into-a-Godr">{this.state.title}</h1>
-        <Slider {...settings}>
-          {!!whatGoesSlider &&
-            whatGoesSlider.map((sliderData, index) => (
-              <a href={sliderData.onClickUrl} key={index}>
-                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
-              </a>
-            ))}
-               {/* <h3 className="Name-Copy">{this.state.imgHeading}</h3>
-               <p className="This-project-require">{this.state.imageDescription}</p>  */}
-            
-        </Slider>
+			<Slider {...settings}>
+			{!!whatGoesSlider &&
+				whatGoesSlider.map((sliderData, index) => (
+				<a href={sliderData.onClickUrl} key={index}>
+					<img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+				</a>
+				))}
+			</Slider>
       
             
            

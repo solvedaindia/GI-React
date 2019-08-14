@@ -3,7 +3,8 @@ import { validateEmptyObject } from '../../src/utils/validationManager';
 export const secureHttp = 'https';
 export const port1 = '';
 export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
-export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+// export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;
+export const imgHost = '192.168.0.57';
 export const host = process.env.envKeys.WEBSERVER_IP || window.location.hostname;
 export const accessTokenCookie = 'accessToken';
 export const newsletterTokenCookie = 'newsletterToken';
@@ -100,9 +101,9 @@ export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/
 /* kitchens Banner Slider */
 export const kitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_BANNER`;
 /* before after Slider */
-export const beforeAfterApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_BEFORE_AFTER_SLIDER `;
+export const beforeAfterApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_BEFORE_AFTER_SLIDER`;
 /* Always remember Hall Slider */
-export const AlwaysRememberApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHEN_PLANNING `;
+export const AlwaysRememberApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHEN_PLANNING`;
 /* kitchens Hall Slider */
 export const kitchenHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_HALL_OF_FAME `;
 /*what goes in godrej kitchen Slider */
