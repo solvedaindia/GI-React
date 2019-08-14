@@ -10,7 +10,14 @@ export default class FailPop extends React.Component {
     };
   }
   handleCancel = () => {
+    window.location.assign('/')
     this.props.cancelFail()
+  }
+
+  handleTryAgain = () => {
+    this.setState({
+      modal: false,
+    })
   }
   
   render() {
@@ -29,9 +36,7 @@ export default class FailPop extends React.Component {
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel
               </Button>
-              <Button
-                className="btn-save btn"
-              >
+              <Button onClick={this.handleTryAgain} className="btn-save btn">
                 Try Again
               </Button>
             </div>
