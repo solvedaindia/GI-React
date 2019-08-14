@@ -3,6 +3,7 @@ import  '../../../public/styles/static-pages/aboutUs.scss'
 import SearchLogo from '../../components/SVGs/search.js';
 import FaqAnswers from '../../components/HelpSupportComp/FaqAnswers'
 import  '../../../public/styles/static-pages/HelpSupport.scss'
+import {isMobile} from '../../utils/utilityManager'
 
 export default class HelpSupport extends React.Component {
   constructor(props) {
@@ -53,31 +54,32 @@ export default class HelpSupport extends React.Component {
               <div className="col-md-6 borderRight">
                 <h2 className="enquiry">Enquiries</h2>
                 <div className="row">
-                  <div className="col-sm-6 text-center">
-                    <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                    <h4 className="contactus">Email</h4>
-                    <h4 className="emailsmall">talktous@godrej.com</h4>
-
+                  <div className='col-sm-6 email-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
+                    <h4 className="emailto">talktous@godrej.com</h4></div>
                   </div>
-                  <div className="col-sm-6 text-center">
-                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547 <br/>+91 6325415873</h4>
+
+                  <div className='col-sm-6  contact-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
+                    <h4 className="emailto">+91 8654123547 <br/>+91 6325415873</h4></div>
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
                 <h2 className="enquiry">After Sales Services</h2>
                 <div className="row">
-                  <div className="col-sm-6 text-center">
-                    <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                    <h4 className="contactus">Email</h4>
-                    <h4 className="emailsmall">talktous@godrej.com</h4>
+                  <div className='col-sm-6 email-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
+                    <h4 className="emailto">talktous@godrej.com</h4></div>
                   </div>
-                  <div className="col-sm-6 text-center">
-                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Contact-Us</h4>
-                  <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
+
+                  <div className='col-sm-6 contact-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
+                    <h4 className="emailto">+91 8654123547<br/>+91 6325415873</h4></div>
                   </div>
                 </div>
               
