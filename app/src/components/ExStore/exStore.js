@@ -56,7 +56,7 @@ export class ExStore extends React.Component {
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
                         <h1 className='title'>Experience Our Stores</h1>
-                        {!isMobile() ? <p className='details'>Experience our products at <span className='place'>{storeLocData.city[0]}</span><span className='dist'>({storeLocData.distance[0]}) km away.</span><br></br>You can find more stores around you.</p> : <p className='details'>Experience products at <span className='place'>{storeLocData.city[0]}</span><span className='dist'>({storeLocData.distance[0]})</span> near you.</p>} 
+                        {!isMobile() ? <p className='details'>Experience our products at <span className='place'>{storeLocData.city}</span><span className='dist'>({storeLocData.distance}) km away.</span><br></br>You can find more stores around you.</p> : <p className='details'>Experience products at <span className='place'>{storeLocData.city}</span><span className='dist'>({storeLocData.distance})</span> near you.</p>} 
                         {!isMobile() ? <a href='/storelocator' ><button className='btn-flat'>Find More Stores</button></a> : <a href='/storelocator' ><button className='btn-flat'>Explore More Stores</button></a> }
                     </div>
                 </div>
