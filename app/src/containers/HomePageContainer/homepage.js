@@ -77,7 +77,7 @@ export class HomapegeLayout extends React.Component {
 	render() {
 		const { homepageLayout } = this.state;
 		return (
-			<>
+			<div className='home'>
 			<Helmet>
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:site" content="@godrejinterio" />
@@ -106,7 +106,7 @@ export class HomapegeLayout extends React.Component {
 					accept their use.
 				<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
 			}
-			</>
+			</div>
 		);
 	}
 }

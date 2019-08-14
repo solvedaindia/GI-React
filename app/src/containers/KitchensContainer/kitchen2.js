@@ -432,8 +432,8 @@ return (
   <div className="container">
     <img className="bigSofa" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="rectangle" />
     <div className="text-blocks">
-      <h1 className="Image-gallery-Copy-3">Our store</h1>
-      <h4 className="Image-gallery-Copy-3 ">Experience our store facilities</h4>
+      <h1 className="image-gallery-Copy-3">Our store</h1>
+      <h4 className="image-gallery-Copy-3 ">Experience our store facilities</h4>
       <p className="A-one-stop-shop-inte">Experience our wardrobe at <span className="spanish">Vikroli Godrej Store
           (1.6 km away)</span><br />
         You can find more stores around you.<br />

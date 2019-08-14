@@ -126,16 +126,24 @@
     }
     .modal-dialog{    
       width: 50%;
-      max-width: 592px;
+      // max-width: 592px;
+      max-width: 50%;
     
       .modal-content{
         box-shadow: none;
         .modalwrapper{    
           .heading{
-            margin: 0 0 28px 0;
+            margin: 0 0 16px 0;
             font-size: $base*2.5;
             color:$black;
             font-family: $font-bold;
+          }
+          .text{
+            color:$battleshipGrey;
+            font-family: $font-regular;
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0 0 28px 0;
           }
         .actionBtnWrapper{
           padding: 0px 0 0px 0;
@@ -198,7 +206,8 @@
     .modal-dialog{
       .modal-content{
         .modalwrapper{
-          padding:64px 88px 64px 88px;  
+          padding: 55px 92px 55px 92px;
+          text-align: center;
           .actionBtnWrapper{
             .btn{
               padding: 12px 60px;

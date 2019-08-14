@@ -409,6 +409,9 @@
            font-size: 12px;
            color:$cerulean;
            text-decoration: none;
+           .view-offer-text{
+               font-family: $font-medium;
+           }
            .upArrow{
             padding: 0 0 0 12px;
             opacity: 0.54;

@@ -344,7 +344,7 @@ export class Step3Component extends React.Component {
             </div>
             <div>
               {!isMobile() ? <div className="labeltext-box">
-                <h4 className='heading-label'>Pay by</h4>
+                <h4 className='heading-label'>Pay By</h4>
               </div> : ''}
 
               <div className="paybytext">
@@ -382,16 +382,16 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='credit'></label>
                     </div>
-                    <label className='form-label' htmlFor='credit'>Credit Card</label>
+                    <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
                   </div>
 
-                  <div className="pay_radio">
+                  {/* <div className="pay_radio">
                     <div className="inputBox">
                       <input className='inputRadio input' id='debit' type='radio' name="debit" checked={this.state.debitCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='debit'></label>
                     </div>
                     <label className='form-label' htmlFor='credit'>Debit Card</label>
-                  </div>
+                  </div> */}
 
                   <div className="pay_radio">
                     <div className="inputBox">

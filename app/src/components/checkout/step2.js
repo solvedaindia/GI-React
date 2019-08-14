@@ -1018,7 +1018,7 @@ export class Step2Component extends React.Component {
     return (
       <>
         {isMobile() && <div className='checkout-title'>
-          Ship To
+          Ship to
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
@@ -1047,7 +1047,7 @@ export class Step2Component extends React.Component {
               <div className='stepBg'>2</div>
             </div>
             {!isMobile() ? <div className='leftBox bgGrey'>
-              <div className='heading-label'>Ship To</div>
+              <div className='heading-label'>Ship to</div>
               {this.props.isLoggedIn ? <div className='verticalTab'>
                 <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                   <div style={!this.state.addressList ? { color: 'grey' } : { color: 'black' }}>Saved Address</div>
@@ -1243,7 +1243,7 @@ export class Step2Component extends React.Component {
 
                   <div className='row'>
                     <div className='col-md-12 bussinessNote'>
-                      <h5 className='buying'>Buying it for your business.</h5>
+                      <h5 className='buying'>Buying it for your business?</h5>
                       <div className='noteGstin'><span className='bold'>Note</span>
                         :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
                     </div>

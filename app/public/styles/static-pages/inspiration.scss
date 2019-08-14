@@ -1,12 +1,9 @@
 @import '../variable';
 @import '../base';
-.Inspiration {
+.inspiration {
     width: 100%;
     height: auto;
-    background-color: #ffffff;
-    .uuscontainer{
-      padding: 0 0 120px 0;
-    }
+    background-color: $colorwhite;
     .lookcrouse{
 	  padding: 60px 0 0 0;
 	  width: 84.3%;
@@ -32,27 +29,27 @@
       padding:121px 0 0 0;
       .Paragraph {
         height: 72px;
-        font-family: CeraGIMedium,sans-serif;
+        font-family: $font-medium;
         font-size: 14px;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.43;
         letter-spacing: normal;
-        color: #000000;
+        color: $black;
       }
       .RectImg {
         width: 100%;
         .Summer-Spark {
           height: 28px;
-          font-family: CeraGIMedium,sans-serif;
+          font-family: $font-medium;
           font-size: 20px;
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
           line-height: 1.4;
           letter-spacing: normal;
-          color: #000000;
+          color: $black;
         }
       }
     }
@@ -72,14 +69,14 @@
         .subText{
           font-size: 18px;
           color:#ffffff;
-          font-family: CeraGIMedium,sans-serif;
+          font-family: $font-medium;
           margin:0 0 28px 0;
         }
         .btn-book{
           padding:13px 56px;
           font-size: 14px;
           color:#070707;
-          font-family: CeraGIMedium,sans-serif;
+          font-family: $font-medium;
         }
       }
       .slick-prev{
@@ -89,14 +86,10 @@
         right:1%;
       }
     }
-    // .Rectangle {
-    //   // width: 1440px;
-    //   background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
-    // }
-    .Browse-Lookbook-by-T {
-      // width: 406px;
+
+    .title {
       height: 36px;
-      font-family: CeraGIMedium,sans-serif;
+      font-family: $font-medium;
       font-size: 30px;
       font-weight: 500;
       font-style: normal;
@@ -104,7 +97,7 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: center;
-      color: #000000;
+      color: $black;
       margin-bottom: $base*4;
     }
     .Oval-Copy-6 {
@@ -122,7 +115,7 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: center;
-      color: #000000;
+      color: $black;
     }
     .bigSofa {
       width: 100%;
@@ -132,9 +125,9 @@
     .text-block {
       position: absolute;
       top: 51%;
-    left: 43%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, .4);
+      left: 43%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, .4);
       color: white;
       padding-left: 20px;
       padding-right: 20px;
@@ -148,7 +141,7 @@
       height: 62px;
       object-fit: contain;
     }
-    .Image-gallery-Copy-3 {
+    .image-gallery-Copy-3 {
       height: 36px;
       font-family: $font-regular;
       font-size: 30px;
@@ -158,7 +151,7 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: center;
-      color: #000000;
+      color:$black;
     }
     .A-one-stop-shop-inte {
       height: 40px;
@@ -170,7 +163,7 @@
       line-height: 1.25;
       letter-spacing: normal;
       text-align: center;
-      color: #000000;
+      color: $black;
     }
     .seeMore {
       width: 150px;
@@ -205,17 +198,15 @@
     }
     /*-----CSS for Inspiration details page-----*/
   
-    .Inspiration-details {
-      // width: 1440px;
+    .inspiration-details {
       height: 2429px;
       background-color: #ffffff;
     }
   
     
     .Bitmap {
-    // width: 564px;
-    height: 640px;
-  }
+      height: 640px;
+    }
 
   
   
@@ -320,26 +311,126 @@
   }
   }
 
-  @media (min-width:320px) and (max-width:767px) {
-    .Inspiration {
-      .lookcrouse {
-        .themeSlider {
-          .themeSlides {
-            margin: 0 $base;
-          }
-        }
-      }
-      .Browse-Lookbook-by-T {
-        margin: $base*5 0 $base*3;
-        font-size: $base*2; 
-      }
-      .lookcrouse {
-        padding: 0;
-      }
-      .summersparkcontainer{
-        padding: $base*7.25 0 0 0;
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+   
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .inspiration {
+      .uuscontainer{
+        padding: 0 0 120px 0;
       }
     }
-    
   }
 
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){      
+  .inspiration {
+    .inpspirationBanner{
+      .fsBanner{
+        margin-top:0px;
+      }
+    }
+    .summersparkcontainer{
+      .container{
+        .Summer-Spark{
+          font-family: $font-medium;
+          font-size: 16px;
+          color: $black;
+          margin: 20px 0px 8px 0px;
+        }
+        .Paragraph{
+          height: initial;
+          font-family: $font-regular;
+          font-size: 12px;
+          color: $black;
+          padding-bottom: 15px;
+        }
+      }
+    }
+    .lookcrouse {
+      padding: 0;
+      .browse-theme{
+        padding: 0px 10px;
+      }
+      .themeSlider {
+        .themeSlides {
+          margin: 0 $base;
+        }
+      }
+    }
+    .title {
+      margin: $base*5 0 $base*2;
+      font-size: $base*2;
+      height: initial; 
+    }
+    .summersparkcontainer{
+      padding: $base*7.25 0 0 0;
+    }
+    .uuscontainer{
+      padding: 0 0 40px 0;
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}
