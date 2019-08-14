@@ -79,14 +79,14 @@ export default class OrderConformation extends React.Component {
             this.state.orderData.orderItems.forEach((item) => {
                 items.push(
                     <div className="col-md-6">
-                        <div style={{background: 'white', margin: "10px"}}>
+                        <div className='itemOrderdata'>
                         <div className="row">
                             <div className="col-md-4">
                                 <img src={item.thumbnail} />
                             </div>
                             
                             <div className="col-md-6">
-                            <div style={{borderLeft: '1px solid grey', height: 'auto'}}></div>
+                            <div className='itemText'>
                                 <p>{item.productName}</p>
                                 <h6>{item.shortDescription}</h6>
                                 <div className="row">
@@ -101,6 +101,8 @@ export default class OrderConformation extends React.Component {
                                 </div>
                                 <h6>Price</h6>
                                 <p>{item.offerPrice}</p>
+                                </div>
+
                             </div>
                         </div>
                         </div>
@@ -119,9 +121,9 @@ export default class OrderConformation extends React.Component {
                     <div className="row">
                         <div className="col-md-9">
                             <div className="orderConfirmed">
-                              <h3 className="heading">You Order has been confirmed!</h3>
-                              <p className="text">Thank you for shopping with us!</p>
-                              <p className="text">An Email will be sent to your account when your order has been shipped.</p>
+                              <h3 className="heading">Your Order has been confirmed!</h3>
+                              <h4 className="text">Thank you for shopping with us!</h4>
+                              <h4 className="text">An Email will be sent to your account when your order has been shipped.</h4>
                             </div>
                         </div>
                         <div className="col-md-3">
@@ -134,29 +136,29 @@ export default class OrderConformation extends React.Component {
                         <h4 className="heading-details">Order Details</h4>
                         {this.state.orderData ? <div className="row">
                             <div className="col-md-2">
-                                <h6>Order ID</h6>
-                                <p>{this.state.orderData.orderID}</p>
+                                <div className='heading'>Order ID</div>
+                                <div className='subText'>{this.state.orderData.orderID}</div>
                             </div>
                             <div className="col-md-2">
-                                <h6>Order Date</h6>
-                                <p>{moment(this.state.orderData.orderDate).format('dddd')}, {moment(this.state.orderData.orderDate).format('MMMM Do YYYY')}</p>
+                                <div className="heading">Order Date</div>
+                                <div className="subText">{moment(this.state.orderData.orderDate).format('dddd')}, {moment(this.state.orderData.orderDate).format('MMMM Do YYYY')}</div>
                             </div>
                             <div className="col-md-3">
-                                <h6>Address</h6>
-                                <p>{this.state.orderData.address.address}, {this.state.orderData.address.city}, {this.state.orderData.address.state}, {this.state.orderData.address.pincode}</p>
+                                <div className='heading'>Address</div>
+                                <div className="subText">{this.state.orderData.address.address}, {this.state.orderData.address.city}, {this.state.orderData.address.state}, {this.state.orderData.address.pincode}</div>
                             </div>
                             <div className="col-md-2">
-                                <h6>Payment Method</h6>
-                                <p>{this.state.orderData.paymentMethod}</p>
+                               <div className='heading'>Payment Method</div>
+                               <div className="subText">{this.state.orderData.paymentMethod}</div>
                             </div>
                             <div className="col-md-3">
-                                <h6>Total Amount</h6>
-                                <p>{this.state.orderData.orderSummary.netAmount}</p>
+                            <div className='heading'>Total Amount</div>
+                            <div className="totalAmount">{this.state.orderData.orderSummary.netAmount}</div>
                             </div>
                         </div> : ''}
-                        <button className="btn-bg">Track Order</button>
-                        <hr style={{borderTop: '1px solid #bbbaba'}} />
-                        <p>Items in order</p>
+                        <button className="btn-bg btntrackorder">Track Order</button>
+                        <div className='seprator'></div>
+                        <h4 className="heading-details">Items in order</h4>
                         <div className="row">
                            {this.state.orderData ? this.renderItems() : '' }
                         </div>

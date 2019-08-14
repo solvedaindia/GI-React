@@ -159,6 +159,7 @@
       }
     }
   }
+ 
   }
   
 
@@ -216,6 +217,9 @@
         }
       }
     }
+  }
+  .mobileView{
+    display: none;
   }
 }
 
@@ -292,6 +296,8 @@
   }
   .delete-modal{
     .modal-dialog{
+      width:100%;
+      max-width: 100%;
       .modal-content{
         .modalwrapper{
           padding:30px 30px 34px 30px;  
@@ -304,12 +310,25 @@
             }
           } 
         }
+        .mobileView{
+          .btn{
+            width:50%;
+            border-radius: 0;
+            padding: 15px 0;
+          }
+          .btn-save {
+            margin:0;
+          }
+        }
       }
     }
     &.in{
       bottom: 0px;
       top:initial;
     }
+  }
+  .webView{
+    display: none;
   }
 }
 
