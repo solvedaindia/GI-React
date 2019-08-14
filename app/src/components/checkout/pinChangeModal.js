@@ -40,7 +40,7 @@ class PinChangePopup extends React.Component {
             <h3 className="heading">
               Are you sure you want to change the Pincode?
             </h3>
-            <p>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
+            <p className='text'>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel

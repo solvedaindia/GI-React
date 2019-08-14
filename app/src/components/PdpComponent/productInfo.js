@@ -2,7 +2,7 @@ import React from 'react';
 import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import Price from './price';
-import { isMobile } from '../../utils/utilityManager';
+import { isMobile, formatPrice } from '../../utils/utilityManager';
 
 import Uparrow from '../../components/SVGs/upArrow.svg';
 import DownArrow from '../../components/SVGs/downArrow.svg';
@@ -52,7 +52,7 @@ class productInfo extends React.Component {
             {this.props.pinCodeData.shippingCharge > 0 ? (
             <>
               &#8377;
-              {this.props.pinCodeData.shippingCharge}
+              {formatPrice(this.props.pinCodeData.shippingCharge)}
             </>
             ) : (
               <>Free</>
@@ -120,7 +120,7 @@ class productInfo extends React.Component {
               </div>
               <div className="text">Starting from </div>
               <div className="text bold">
-              &#8377;{this.props.productData.emiData}{' '}
+              &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
               <div className="text">per month</div>
               <div className="text emiinfo">
@@ -136,7 +136,7 @@ class productInfo extends React.Component {
               <div className='emi-text-desc'>
               <div className="text starting-from">Starting from </div>
               <div className="text bold">
-              &#8377;{this.props.productData.emiData}{' '}
+              &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
               <div className="text">per month</div></div>
               <div className="text emiinfo">

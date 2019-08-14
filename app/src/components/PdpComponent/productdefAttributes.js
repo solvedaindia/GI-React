@@ -82,7 +82,11 @@ class productDefAttribute extends React.Component {
 		this.props.defAttributes.map((data, i) => {
 			data.values.map(getVal => {
 				if(resolvedSku.indexOf(getVal.name) !== -1) {
-					swatchesFormatArr.push(getVal.name)
+					if (getVal.colorCode) {
+						swatchesFormatArr.push(getVal.name);
+					} else {
+						swatchesFormatArr.push('');
+					}
 				}
 				
 			})
@@ -99,7 +103,7 @@ class productDefAttribute extends React.Component {
 				let valueName = data.name;
 				return (
 					<div key={i}>
-						<div className='att-val-name'><span className="attributeName">{valueName}:</span>  <span className="attributeVal">{getSwatchNameInFormat[i]}</span><span id={`ColorName${i}`}></span></div>
+						<div className='att-val-name'><span className="attributeName">{valueName} {getSwatchNameInFormat[i] && ':'}</span>  <span className="attributeVal">{getSwatchNameInFormat[i]}</span><span id={`ColorName${i}`}></span></div>
 						<ul className="clearfix swatcheWrapper">
 							{
 								data.values.map((value, index) => {

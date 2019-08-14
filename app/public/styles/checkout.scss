@@ -113,7 +113,7 @@
                 .heading-label {
                     font-size: $base*2.25;
                     margin: 0;
-                    font-weight: bold;
+                   font-family: $font-bold;
                 }
             }
             .email-box {
@@ -205,6 +205,9 @@
                         position: relative;
                         color: $greyish;
                         font-family: $font-medium;
+                        overflow-wrap: break-word;
+                        word-wrap: break-word;
+                        white-space: normal;
                         .caret {
                             position: absolute;
                             right: 15px;
@@ -233,6 +236,9 @@
                                 text-decoration: none;
                                 background-color: transparent;
                                 padding:0;
+                                overflow-wrap: break-word;
+                                word-wrap: break-word;
+                                white-space: normal;
                                 &:focus {
                                     outline: none;
                                     
@@ -662,7 +668,7 @@
 
 @media screen and (min-width: 768px) {
     .checkout {
-        padding: 56px 0 100px 0;
+        padding: 116px 0 100px 0;
         .form-control {
             height: 54px;
         }
@@ -693,10 +699,11 @@
                             .form-label{
                                 margin: 0 0 0 15px;
                                 font-size: 16px;
+                                font-family: $font-regular;
                             }
                         } 
                         .dropdown-toggle {
-                            padding: 14px 15px;
+                            padding: 14px 30px 14px 15px;
                             margin: 0 0 40px 0;
                         }
                         .dropdown{
@@ -733,6 +740,7 @@
                         .label-billing {
                             font-size: 16px;
                             font-family: $font-medium;
+                            font-weight: 400;
                         }
                     }
                     .bussinessNote{
@@ -783,10 +791,10 @@
         padding: $base*2 0px $base*2 15px;
         font-weight: bold;
         background: $borderLight;
-        margin-top: $base*6;
+        margin-top: 0;
     }
     .checkout {
-        padding: 20px 0 10px 0;
+        padding: 63px 0 10px 0;
         .form-control {
             height: 44px;
         }
@@ -869,12 +877,13 @@
                         }
                         .dropdown{ 
                             margin-bottom: 10px;
+                            width: 100%;
                             .dropdown-toggle {
                                 padding: 10px 15px;
                                 color: $greyBorder;
                                 font-size: 12px;
                                 font-family: $font-regular;
-                                min-width: 310px;
+                                min-width: 100%;
                                 .caret{
                                     top: 16px;
                                 }

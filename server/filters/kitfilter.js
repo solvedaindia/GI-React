@@ -121,7 +121,7 @@ function filterSwatchAtrributes(attributes) {
   const swatchAttributes = [];
   if (attributes && attributes.length > 0) {
     attributes.forEach(attribute => {
-      if (attribute.values.length > 0) {
+      if (attribute.values && attribute.values.length > 0) {
         if (swatchAttributes.length > 0) {
           let temp = false;
           for (let index = 0; index < swatchAttributes.length; index += 1) {
@@ -262,4 +262,25 @@ function getComparableAttributes(kitData) {
     });
   }
   return comparable;
+}
+
+module.exports.getDescriptiveAttributes = getDescriptiveAttributes;
+function getDescriptiveAttributes(kitData) {
+  const descAttr = {
+    wt: '',
+    ht: '',
+    dp: '',
+  };
+  if (kitData.attributes && kitData.attributes.length > 0) {
+    kitData.attributes.forEach(attr => {
+      if (attr.identifier === 'NetWeight') {
+        descAttr.wt = attr;
+      } else if (attr.identifier === 'Height(cm)') {
+        descAttr.ht = attr;
+      } else if (attr.identifier === 'Depth(cm)') {
+        descAttr.dp = attr;
+      }
+    });
+  }
+  return descAttr;
 }

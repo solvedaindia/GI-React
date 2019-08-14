@@ -40,12 +40,12 @@
                 right: $base*2;
                 font-family: $font-medium;
             }
-
             .pincodeVal{
                 margin-left: $base*4;
                 border: transparent;
                 color:$black;
-                font-weight: $font-medium;
+                font-family: $font-medium;
+                width: 87%;
                 &:focus{
                     outline: none;
                 }
@@ -560,6 +560,7 @@
                         background: transparent;
                         border: none;
                         color: $cerulean;
+                        font-family: $font-bold;
                     }
                 }
             }
@@ -570,14 +571,15 @@
             .promotion{
                 .promoCode{
                     font-size: $base*1.75;
-                    margin: $base*1.5 0 0 0;
+                    margin: $base*2.5 0 0 0;
                 }
                 .promoDesc{
                     font-size: 11px;
                     line-height: 16px;
                 }
                 .applyPromo{
-                    font-size: $base*1.75;
+                    font-size: $base*1.5;
+                    font-family: $font-medium;
                 }
                 .promo{
                     .viewAllPromo{
@@ -706,11 +708,29 @@
         .cartHeadDetails{
             margin-top: $base*7; 
             border-bottom: none;
+            position: relative;
             .pincodeField {
                 width: 100%;
                 margin: auto;
                 border: none;
+                padding: $base*2.9375 0;
+                margin-top: -$base*1.25; 
                 border-bottom: 1px solid $borderLight;  
+                .pincodeVal {
+                    width: 90%;
+                    font-family: $font-medium;
+                    margin-left: $base*6.375; 
+                    &.pincodeError {
+                        color: $errorMsg;
+                    }
+                }
+                .pincodeUpdate,
+                .pincodeEdit {
+                    top: $base*3;
+                }
+                .pinLogo {
+                    left: $base;
+                }
             }
             .title,
             .cartCount {
@@ -721,7 +741,11 @@
             .cartCount {
                 margin: 0;
             }
-
+            .pinErrorMsg {
+                position: absolute;
+                top: $base*4;
+                left: $base*6.375;
+            }
             .checkout-top-hedaer{
                 position: fixed;
                 top: 0px;
@@ -815,7 +839,7 @@
         }
     }
     .modal.deletItem {
-        top: 76.5%;
+        top: unset;
         bottom: 0;
     }
     .modal.modal_emiInstallment {

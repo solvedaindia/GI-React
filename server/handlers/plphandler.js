@@ -377,6 +377,20 @@ function getFilteredSKUs(productsList, callback) {
       productDetail.skuList.push(skuJSON);
       productListArray.push(productDetail);
     }
+    if (
+      product.catalogEntryTypeCode === 'BundleBean' &&
+      product.components &&
+      product.components.length > 0
+    ) {
+      const productDetail = {
+        skuList: [],
+        swatchesData: [],
+      };
+      const skuJSON = pdpfilter.productDetailSummary(product);
+      skuJSON.parentUniqueID = product.uniqueID;
+      productDetail.skuList.push(skuJSON);
+      productListArray.push(productDetail);
+    }
   });
   callback(null, productListArray);
 }

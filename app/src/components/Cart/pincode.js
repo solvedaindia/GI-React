@@ -4,6 +4,9 @@ import appCookie from '../../utils/cookie';
 import PinLocationLogo from '../SVGs/pinLocationIcon';
 import apiManager from '../../utils/apiManager';
 import { pinCodeServiceAPI } from '../../../public/constants/constants';
+import { isMobile } from '../../utils/utilityManager';
+import EditIcon from '../SVGs/editIcon';
+import { is } from 'immutable';
 
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
 class Pincode extends React.Component {
@@ -71,6 +74,7 @@ class Pincode extends React.Component {
 			</span>
 			<input
 				className="pincodeVal"
+				className={!this.state.error ? 'pincodeVal' : 'pincodeVal pincodeError'}
 				name="pincodeVal"
 				id="pincodeVal"
 				type="text"
@@ -84,19 +88,20 @@ class Pincode extends React.Component {
 				role="button"
 				onClick={this.updatePincode.bind(this, this.props)}
 				>
-				Update
+				Done
 				</a>
 				:
 				<a
-				className="pincodeEdit"
-				role="button"
-				onClick={this.editPincode.bind(this, this.props)}
+					className="pincodeEdit"
+					role="button"
+					onClick={this.editPincode.bind(this, this.props)}
 				>
-				Edit
+					{!isMobile() ? 'Edit' : 
+					<EditIcon />}
 				</a>
 			}
       	</div>
-		{!!this.state.error && <p className='pinErrorMsg'>Pincode is not servicable.</p>}
+		{!!this.state.error && <p className='pinErrorMsg'>{!isMobile() ? 'Pincode is not servicable.' : 'Pincode is Non-Serviceable' } </p>}
 		</>
     );
   }

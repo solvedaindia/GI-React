@@ -15,6 +15,7 @@ export const regexPwChar = /[a-zA-Z]/;
 export const regexPincode = /^\d{6}$/;
 /* Whether string contains special character or not */
 export const regexName = /^[A-Za-z ]+$/;
+export const regexName1 = /^[0-9 ]+$/;
 
 export const regexGST = /^[a-zA-Z0-9]+$/;
 
@@ -42,7 +43,7 @@ export const validateGST = input => {
     if (input === '' || input === undefined) {
         return true;
     }
-    if (regexGST.test(input) && input.length === 15) {
+    if (!regexName1.test(input) && !regexName.test(input) && input.length === 15) {
         return true;
     }
     return false;

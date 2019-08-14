@@ -100,15 +100,6 @@ export class Step2Component extends React.Component {
       inputText_city: '',
       inputText_state: '',
       inputText_gst: '',
-      
-      focus_inputText_name: false,
-      focus_inputText_number: false,
-      focus_inputText_email: false,
-      focus_inputText_pincode: false,
-      focus_inputText_address: false,
-      focus_inputText_city: false,
-      focus_inputText_state: false,
-      focus_inputText_gst: false,
 
       berror_name: false,
       berror_number: false,
@@ -132,14 +123,6 @@ export class Step2Component extends React.Component {
       binputText_address: '',
       binputText_city: '',
       binputText_state: '',
-
-      focus_binputText_name: false,
-      focus_binputText_number: false,
-      focus_binputText_email: false,
-      focus_binputText_pincode: false,
-      focus_binputText_address: false,
-      focus_binputText_city: false,
-      focus_binputText_state: false,
 
       isSetAsDefault: '',
       new_add_error: '',
@@ -704,57 +687,9 @@ export class Step2Component extends React.Component {
         error_gst: false
       });
 
-      if (!validateFullName(this.state.binputText_name)) {
-        console.log(this.state.binputText_name, "this is input name")
-        this.setState({
-          berror_name: true,
-          berrorMessage_name: !this.state.binputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
-        });
-        validateBillingAddress = false
-        //return;
-      }
-      if (!validateMobileNo(this.state.binputText_number)) {
-        this.setState({
-          berror_number: true,
-          berrorMessage_number: !this.state.binputText_number ? 'This is a required field' : 'Please enter valid mobile number.',
-        });
-        validateBillingAddress = false
-        //return;
-      }
 
-      if (!validatePindcode(this.state.binputText_pincode)) {
-        this.setState({
-          berror_pincode: true,
-          berrorMessage_pincode: !this.state.binputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
-        });
-        validateBillingAddress = false
-        //return;
-      }
-      if (!validateEmailId(this.state.binputText_email)) {
-        this.setState({
-          berror_email: true,
-          berrorMessage_email: !this.state.binputText_email ? 'This is a required field' : 'Please enter valid Email ID.',
-        });
-        validateBillingAddress = false
-        //return;
-      }
-      if (!validateAddress(this.state.binputText_address)) {
-        this.setState({
-          berror_address: true,
-          berrorMessaget_address: !this.state.binputText_address ? 'This is a required field' : 'Please enter valid Address.',
-        });
-        validateBillingAddress = false
-        //return;
-      }
-      if (!validateCityDistrict(this.state.binputText_city)) {
-        this.setState({
-          berror_city: true,
-          berrorMessage_city: !this.state.binputText_city ? 'This is a required field' : 'Please enter valid City/District.',
-        });
-        validateBillingAddress = false
-        //return;
-      }
       if (!validateState(this.state.binputText_state)) {
+        document.getElementById('bstate').focus();
         this.setState({
           berror_state: true,
           berrorMessage_state: !this.state.binputText_state ? 'This is a required field' : 'Please enter valid State.',
@@ -762,12 +697,67 @@ export class Step2Component extends React.Component {
         validateBillingAddress = false
         //return;
       }
-
-
+      if (!validateCityDistrict(this.state.binputText_city)) {
+        document.getElementById('bcity').focus();
+        this.setState({
+          berror_city: true,
+          berrorMessage_city: !this.state.binputText_city ? 'This is a required field' : 'Please enter valid City/District.',
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validateAddress(this.state.binputText_address)) {
+        document.getElementById('baddress').focus();
+        this.setState({
+          berror_address: true,
+          berrorMessaget_address: !this.state.binputText_address ? 'This is a required field' : 'Please enter valid Address.',
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validateEmailId(this.state.binputText_email)) {
+        document.getElementById('bemail').focus();
+        this.setState({
+          berror_email: true,
+          berrorMessage_email: !this.state.binputText_email ? 'This is a required field' : 'Please enter valid Email ID.',
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validatePindcode(this.state.binputText_pincode)) {
+        document.getElementById('bpin').focus();
+        this.setState({
+          berror_pincode: true,
+          berrorMessage_pincode: !this.state.binputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validateMobileNo(this.state.binputText_number)) {
+        document.getElementById('bphone').focus();
+        this.setState({
+          berror_number: true,
+          berrorMessage_number: !this.state.binputText_number ? 'This is a required field' : 'Please enter valid mobile number.',
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validateFullName(this.state.binputText_name)) {
+        console.log(this.state.binputText_name, "this is input name")
+        document.getElementById('bname').focus();
+        this.setState({
+          berror_name: true,
+          berrorMessage_name: !this.state.binputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
+        });
+        validateBillingAddress = false
+        //return;
+      }
     }
+
     if (!validateBillingAddress) {
       return;
     }
+
     if (!validateGST(this.state.inputText_gst)) {
       this.setState({
         error_gst: true,
@@ -820,72 +810,71 @@ export class Step2Component extends React.Component {
     });
 
     console.log('Save btn pressed---', this.state.error_name);
-
-
-    if (!validateFullName(this.state.inputText_name)) {
-      this.setState({
-        focus_inputText_name: true,
-        error_name: true,
-        errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
-      });
-      validateBillingAddress = false
-      // return;
-    }
-    if (!validateMobileNo(this.state.phone)) {
-      this.setState({
-        focus_inputText_number: true,
-        error_number: true,
-        errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number.',
-      });
-      validateBillingAddress = false
-      //return;
-    }
-    if (!validateEmailId(this.state.email)) {
-      this.setState({
-        focus_inputText_email: true,
-        error_email: true,
-        errorMessage_email: !this.state.email ? 'This is a required field' : 'Please enter valid Email ID.',
-      });
-      validateBillingAddress = false
-      //return;
-    }
-
-    if (!validatePindcode(this.state.inputText_pincode)) {
-      this.setState({
-        focus_inputText_pincode: true,
-        error_pincode: true,
-        errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
-      });
-      validateBillingAddress = false
-      //return;
-    }
-    if (!validateAddress(this.state.inputText_address)) {
-      this.setState({
-        focus_inputText_address: true,
-        error_address: true,
-        errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
-      });
-      validateBillingAddress = false
-      //return;
-    }
-    if (!validateCityDistrict(this.state.inputText_city)) {
-      this.setState({
-        focus_inputText_city: true,
-        error_city: true,
-        errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
-      });
-      validateBillingAddress = false
-      //return;
-    }
+    
     if (!validateState(this.state.inputText_state)) {
+      document.getElementById('state').focus();
       this.setState({
-        focus_inputText_state: true,
         error_state: true,
         errorMessage_state: !this.state.inputText_state ? 'This is a required field' : 'Please enter valid State.',
       });
       validateBillingAddress = false
       //return;
     }
+    if (!validateCityDistrict(this.state.inputText_city)) {
+      document.getElementById('city').focus();
+      this.setState({
+        error_city: true,
+        errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    if (!validateAddress(this.state.inputText_address)) {
+      document.getElementById('address').focus();
+      this.setState({
+        error_address: true,
+        errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    if (!validatePindcode(this.state.inputText_pincode)) {
+      document.getElementById('pin').focus();
+      this.setState({
+        error_pincode: true,
+        errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    if (!validateEmailId(this.state.email)) {
+      document.getElementById('email').focus();
+      this.setState({
+        error_email: true,
+        errorMessage_email: !this.state.email ? 'This is a required field' : 'Please enter valid Email ID.',
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    if (!validateMobileNo(this.state.phone)) {
+      document.getElementById('phone').focus();
+      this.setState({
+        error_number: true,
+        errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number.',
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    if (!validateFullName(this.state.inputText_name)) {
+      document.getElementById('name').focus();
+      this.setState({
+        error_name: true,
+        errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
+      });
+      validateBillingAddress = false
+      // return;
+    }
+    
     if (!validateBillingAddress) {
       return;
     }
@@ -894,6 +883,7 @@ export class Step2Component extends React.Component {
     if (this.state.same_bill == false) {
       if (!validateFullName(this.state.binputText_name)) {
         console.log(this.state.binputText_name, "this is input name")
+        document.getElementById('bname').focus();
         this.setState({
           berror_name: true,
           berrorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
@@ -901,6 +891,7 @@ export class Step2Component extends React.Component {
         return;
       }
       if (!validateMobileNo(this.state.binputText_number)) {
+        document.getElementById('bphone').focus();
         this.setState({
           berror_number: true,
           berrorMessage_number: 'Please enter valid mobile number.',
@@ -909,6 +900,7 @@ export class Step2Component extends React.Component {
       }
 
       if (!validatePindcode(this.state.binputText_pincode)) {
+        document.getElementById('bpin').focus();
         this.setState({
           berror_pincode: true,
           berrorMessage_pincode: 'Please enter valid Pincode.',
@@ -916,6 +908,7 @@ export class Step2Component extends React.Component {
         return;
       }
       if (!validateEmailId(this.state.binputText_email)) {
+        document.getElementById('bemail').focus();
         this.setState({
           berror_email: true,
           berrorMessage_email: 'Please enter valid Email ID.',
@@ -923,6 +916,7 @@ export class Step2Component extends React.Component {
         return;
       }
       if (!validateAddress(this.state.binputText_address)) {
+        document.getElementById('baddress').focus();
         this.setState({
           berror_address: true,
           berrorMessaget_address: 'Please enter valid Address.',
@@ -930,6 +924,7 @@ export class Step2Component extends React.Component {
         return;
       }
       if (!validateCityDistrict(this.state.binputText_city)) {
+        document.getElementById('bcity').focus();
         this.setState({
           berror_city: true,
           berrorMessage_city: 'Please enter valid City/District.',
@@ -937,6 +932,7 @@ export class Step2Component extends React.Component {
         return;
       }
       if (!validateState(this.state.binputText_state)) {
+        document.getElementById('bstate').focus();
         this.setState({
           berror_state: true,
           berrorMessage_state: 'Please enter valid State.',
@@ -1003,11 +999,10 @@ export class Step2Component extends React.Component {
   }
 
   render() {
-    console.log('onfocusss --- ',this.state.focus_inputText_number)
     return (
       <>
         {isMobile() && <div className='checkout-title'>
-          Ship To
+          Ship to
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
@@ -1036,7 +1031,7 @@ export class Step2Component extends React.Component {
               <div className='stepBg'>2</div>
             </div>
             {!isMobile() ? <div className='leftBox bgGrey'>
-              <div className='heading-label'>Ship To</div>
+              <div className='heading-label'>Ship to</div>
               {this.props.isLoggedIn ? <div className='verticalTab'>
                 <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
                   <div style={!this.state.addressList ? { color: 'grey' } : { color: 'black' }}>Saved Address</div>
@@ -1060,7 +1055,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Full Name" id="name" name="name"
-                          handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_name} />
+                          handleChange={this.handleInput} tabIndexNo={-1} />
                         {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> :
                           null}
                       </div>
@@ -1068,7 +1063,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
-                          onChange={e => this.phoneChange(e)} isAutoFocus={this.state.focus_inputText_number}/>
+                          onChange={e => this.phoneChange(e)} tabIndexNo={2} />
                         {this.state.error_number ? (
                           <div className="error-msg">
                             {this.state.errorMessage_number}
@@ -1081,7 +1076,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
                         <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
-                          handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_pincode}/>
+                          handleChange={this.handleInput}/>
                         {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
                       </div>
@@ -1089,7 +1084,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Email (Optional)" id="email" name="Email"
-                          value={this.state.email} onChange={e => this.mailChange(e)} isAutoFocus={this.state.focus_inputText_email}/>
+                          value={this.state.email} onChange={e => this.mailChange(e)}/>
                         {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
                           null}
                       </div>
@@ -1098,7 +1093,7 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} isAutoFocus={this.state.focus_inputText_address}/>
+                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput}/>
                         {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
                       </div>
                     </div>
@@ -1106,13 +1101,13 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} isAutoFocus={this.state.focus_inputText_city}/>
+                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city}/>
                         {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} isAutoFocus={this.state.focus_inputText_state}/>
+                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state}/>
                         {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                       </div>
                     </div>
@@ -1214,7 +1209,7 @@ export class Step2Component extends React.Component {
 
                   <div className='row'>
                     <div className='col-md-12 bussinessNote'>
-                      <h5 className='buying'>Buying it for your business.</h5>
+                      <h5 className='buying'>Buying it for your business?</h5>
                       <div className='noteGstin'><span className='bold'>Note</span>
                         :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
                     </div>
