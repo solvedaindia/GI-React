@@ -14,8 +14,9 @@ import  '../../../public/styles/static-pages/kitchens.scss'
 class AlwaysRemember extends React.Component {
     constructor(props){
         super(props);
+    
+
         this.state = {
-			alwaysRememberData: null,
             imageFirstSrc: '',
             imageSecondSrc:'',
             imagethirdSrc: '',
@@ -26,6 +27,9 @@ class AlwaysRemember extends React.Component {
         }
     }
   
+
+        
+        
     onHandleClick = event => {
         if(event.target.name == 1) {
             console.log('img1 is clicked')
@@ -36,14 +40,14 @@ class AlwaysRemember extends React.Component {
                 buttonSecond:this.state.buttonFirst
             })
         }
-		else if(event.target.name == 2) {
-			console.log('img2 is clicked')
-			this.setState({
-			img_url: this.state.imageSecondSrc,
-			buttonSecond:!this.state.buttonSecond,
-			buttonThird:this.state.buttonSecond,
-			buttonFirst:this.state.buttonSecond
-		})
+       else if(event.target.name == 2) {
+        console.log('img2 is clicked')
+        this.setState({
+          img_url: this.state.imageSecondSrc,
+          buttonSecond:!this.state.buttonSecond,
+          buttonThird:this.state.buttonSecond,
+          buttonFirst:this.state.buttonSecond
+      })
     }
     else if(event.target.name == 3) {
       console.log('img3 is clicked')
@@ -55,47 +59,42 @@ class AlwaysRemember extends React.Component {
       })
     }
 }
+      
     getAlwaysRememberData() {
-    	apiManager
-		.get(AlwaysRememberApi)
-		.then(response => {
-			console.log('response', response)
-			const {data} = response || {}
-			this.setState({
-			alwaysRememberData: data && data.data,
-			isLoading: false,
-			});
-			console.log('Slider Data', data.data.bannerList);
-		})
-		.then(response => {
-			console.log('response of remember', response)
-			const {data} = response || {}
-			this.setState({
-			imageFirstSrc: data && data.data.KitchenImg.imageSrc,
-			imageSecondSrc: data &&  data.data.gkitchenImg.imageSrc,
-			imageThirdSrc: data &&  data.data.parallelKitchenImg.imageSrc,
-			type: data && data.data.type,
-			isLoading: false,
-			imageHeading:  data && data.data.imgHeading,
-			img_url: data && data.data.KitchenImg.imageSrc
-			});
-			console.log('remeber Data',  data.data.KitchenImg.imageSrc);
-		})
-		.catch(error => {
-			this.setState({
-			error,
-			isLoading: false,
-			});
-			console.log('SLider Data Error');
-		});
-  	}
+    apiManager
+      .get(AlwaysRememberApi)
+      .then(response => {
+        console.log('response of remember', response)
+        const {data} = response || {}
+        this.setState({
+          imageFirstSrc: data && data.data.KitchenImg.imageSrc,
+          imageSecondSrc: data &&  data.data.gkitchenImg.imageSrc,
+          imageThirdSrc: data &&  data.data.parallelKitchenImg.imageSrc,
+          type: data && data.data.type,
+          isLoading: false,
+          imageHeading:  data && data.data.imgHeading,
+          img_url: data && data.data.KitchenImg.imageSrc
+        });
+        console.log('remeber Data',  data.data.KitchenImg.imageSrc);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('SLider Data Error');
+      });
+    console.log('SLider Data Error');
+  }
   
 
   componentWillMount() {
     this.getAlwaysRememberData();
   }
+
+  
+
   render() {
-	  const { alwaysRememberData } = this.state;
     return (
         <div className="remembersection clear fix">
           <div className="row">
@@ -126,7 +125,7 @@ class AlwaysRemember extends React.Component {
             </div>
           </div>
         </div>
-    );
+        );
   }
 }
 
