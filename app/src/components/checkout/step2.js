@@ -303,7 +303,7 @@ export class Step2Component extends React.Component {
   }
 
   handleInput(value) {
-    console.log('handle chagne called ---- ');
+    console.log('handle chagne called ---- ', value.target.id);
     this.setState({
       error_name: false,
       error_number: false,
@@ -609,13 +609,21 @@ export class Step2Component extends React.Component {
               access_token: token
             }
           }).then((resp) => {
-            console.log(resp, "precheckout response");
-            this.saveGST(resp.data.data.orderId)
+            console.log(res, "precheckout response");
+            const inventoryFlag = resp.data.data.reserved;
+            if (inventoryFlag === '0') {
+              alert('One or more item in you cart is Out Of Stock.')
+              window.location.assign('/cart')
+            }
+            else {
+              this.saveGST(resp.data.data.orderId)
               .then(() => {
                 resolve(resp.data.data.orderId);
               }).catch((err) => {
                 reject();
               })
+            }
+            
           }).catch((err) => {
             console.log(err, "precheckout err");
             resolve()
@@ -809,8 +817,9 @@ export class Step2Component extends React.Component {
 
     });
 
-    console.log('Save btn pressed---', this.state.error_name);
-    
+    console.log('Save btn pressed---', document.getElementById("address").value);
+    this.state.inputText_address = document.getElementById("address").value;
+
     if (!validateState(this.state.inputText_state)) {
       document.getElementById('state').focus();
       this.setState({
@@ -860,7 +869,7 @@ export class Step2Component extends React.Component {
       document.getElementById('phone').focus();
       this.setState({
         error_number: true,
-        errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number.',
+        errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number',
       });
       validateBillingAddress = false
       //return;
@@ -874,7 +883,7 @@ export class Step2Component extends React.Component {
       validateBillingAddress = false
       // return;
     }
-    
+
     if (!validateBillingAddress) {
       return;
     }
@@ -894,7 +903,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bphone').focus();
         this.setState({
           berror_number: true,
-          berrorMessage_number: 'Please enter valid mobile number.',
+          berrorMessage_number: 'Please enter valid mobile number',
         });
         return;
       }
@@ -903,7 +912,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bpin').focus();
         this.setState({
           berror_pincode: true,
-          berrorMessage_pincode: 'Please enter valid Pincode.',
+          berrorMessage_pincode: 'Please enter valid Pincode',
         });
         return;
       }
@@ -911,7 +920,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bemail').focus();
         this.setState({
           berror_email: true,
-          berrorMessage_email: 'Please enter valid Email ID.',
+          berrorMessage_email: 'Please enter valid Email ID',
         });
         return;
       }
@@ -919,7 +928,7 @@ export class Step2Component extends React.Component {
         document.getElementById('baddress').focus();
         this.setState({
           berror_address: true,
-          berrorMessaget_address: 'Please enter valid Address.',
+          berrorMessaget_address: 'Please enter valid Address',
         });
         return;
       }
@@ -927,7 +936,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bcity').focus();
         this.setState({
           berror_city: true,
-          berrorMessage_city: 'Please enter valid City/District.',
+          berrorMessage_city: 'Please enter valid City/District',
         });
         return;
       }
@@ -935,7 +944,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bstate').focus();
         this.setState({
           berror_state: true,
-          berrorMessage_state: 'Please enter valid State.',
+          berrorMessage_state: 'Please enter valid State',
         });
         return;
       }
@@ -944,7 +953,7 @@ export class Step2Component extends React.Component {
     if (!validateGST(this.state.inputText_gst)) {
       this.setState({
         error_gst: true,
-        errorMessage_gst: 'Please enter valid GST Number.',
+        errorMessage_gst: 'Please enter valid GST Number',
       });
       return;
     }
@@ -984,6 +993,13 @@ export class Step2Component extends React.Component {
         )
       });
       return <ul className="saveAddress customradio clearfix">{list}</ul>;
+    }
+    else {
+      return (
+        <div className='noAddress'>
+          No Saved address
+        </div>
+      )
     }
   }
 
@@ -1076,7 +1092,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
                         <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
-                          handleChange={this.handleInput}/>
+                          handleChange={this.handleInput} />
                         {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
                       </div>
@@ -1084,30 +1100,48 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="Email (Optional)" id="email" name="Email"
-                          value={this.state.email} onChange={e => this.mailChange(e)}/>
+                          value={this.state.email} onChange={e => this.mailChange(e)} />
                         {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
                           null}
                       </div>
                     </div>
                   </div>
+
                   <div className="row">
                     <div className="col-md-12">
-                      <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput}/>
-                        {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+                      <div className="form-div addressTextarea clearfix div-error">
+                        <div className='form-group'>
+                          <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
+                          <label htmlFor='address' className="form-label">Address</label>
+                          {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+
+                        </div>
                       </div>
                     </div>
                   </div>
+
+
+                  {/* <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-div clearfix div-error">
+                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
+                        {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+                      </div>
+                    </div>
+                  </div> */}
+
+
+
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city}/>
+                        <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} />
                         {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state}/>
+                        <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} />
                         {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
                       </div>
                     </div>
@@ -1243,7 +1277,7 @@ export class Step2Component extends React.Component {
                   </div>
                   <div className="row">
                     <div className={!isMobile() ? 'col-md-6' : 'col-xs-6 col-md-6'}>
-                      <button className="btn-cancelborder btn-block">cancel</button>
+                      <button className="btn-cancelborder btn-block" onClick={this.savedAddActive.bind(this)}>Cancel</button>
                     </div>
                     <div className={!isMobile() ? 'col-md-6' : 'col-xs-6 col-md-6 address-submit'}>
                       <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
