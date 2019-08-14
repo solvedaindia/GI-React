@@ -19,7 +19,7 @@ import queryString from 'query-string';
 import apiManager from '../../utils/apiManager';
 import failPop from './failPop'
 import { Redirect } from 'react-router-dom';
-import {isMobile} from '../../utils/utilityManager';
+import { isMobile } from '../../utils/utilityManager';
 import MWebLogo from '../../components/SVGs/mWebLogo';
 
 import {
@@ -144,7 +144,7 @@ export class CheckoutComponent extends React.Component {
   // }
 
   handleHasPass = () => {
-    if(this.state.has_pass == false) {
+    if (this.state.has_pass == false) {
       this.setState({
         has_pass: true
       })
@@ -217,7 +217,7 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleChange = () => {
-    if(this.state.step == 2) {
+    if (this.state.step == 2) {
       this.setState({
         step: 1
       })
@@ -229,7 +229,7 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleSameBill = () => {
-    if(this.state.same_bill == false) {
+    if (this.state.same_bill == false) {
       this.setState({
         same_bill: true
       })
@@ -257,7 +257,7 @@ export class CheckoutComponent extends React.Component {
       headers: { store_id: storeId, access_token: token }
     }).then(response => {
       console.log(response, 'order Summary response');
-      if(!response.data.data.orderSummary.netAmount) {
+      if (!response.data.data.orderSummary.netAmount) {
         this.setState({
           redirect: true
         })
@@ -290,17 +290,31 @@ export class CheckoutComponent extends React.Component {
       BankID: this.state.BankID,
       paymentMode: this.state.paymentMode
     };
-    if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+    if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
       body.BankID = '123'
     }
+    var payCategoryId;
+    if (this.state.paymentMode === 'DEBIT_CARD') {
+      payCategoryId = 'DEBIT';
+    }
+    else if (this.state.paymentMode === 'CC_EMI') {
+      payCategoryId = 'EMI';
+    }
+    else if (this.state.paymentMode === 'UPI') {
+      payCategoryId = 'UPI';
+    }
+    else { //CREDIT_CARD case
+      payCategoryId = 'CREDIT';
+    }
+
     let token = appCookie.get('accessToken');
     axios.post(CreateCheckSumAPI, body, {
       headers: { store_id: storeId, access_token: token }
     }).then((response) => {
       console.log(response, "checksum response")
       var res = response.data.data.response;
-      var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=CREDIT`;
-      if(this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+      var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
+      if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
         url = `${res.transactionUrl}&msg=${res.msg}`;
         //  axios.post(url, {}, {
 
@@ -318,7 +332,7 @@ export class CheckoutComponent extends React.Component {
   }
 
   enalblePay = (data) => {
-    console.log('enablePay ---- ',data);
+    console.log('enablePay ---- ', data);
     this.setState({
       pay: true,
       BankID: data.BankID,
@@ -334,7 +348,7 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleStep = () => {
-    if(this.state.step == 3) {
+    if (this.state.step == 3) {
       return <Step3Component
         back={this.handleChange}
         backtoMobile={this.handleChangeMobile}
@@ -346,7 +360,7 @@ export class CheckoutComponent extends React.Component {
         disablePay={this.disablePay}
         netAmount={this.state.orderSummaryData.netAmount} />
 
-    } else if(this.state.step == 2) {
+    } else if (this.state.step == 2) {
       return <Step2Component
         proceed={this.handleProceed}
         back={this.handleChange}
@@ -381,12 +395,12 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleProceed = () => {
-    if(this.state.step == 1) {
+    if (this.state.step == 1) {
       this.setState({
         step: 2,
         has_pass: false
       })
-    } else if(this.state.step == 2) {
+    } else if (this.state.step == 2) {
       this.setState({
         step: 3
       })
@@ -394,20 +408,20 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleBack = () => {
-    if(this.state.loggedIn && this.state.step == 2) {
+    if (this.state.loggedIn && this.state.step == 2) {
       this.setState({
         redirect: true
       })
     } else {
       this.setState({
-        step: this.state.step -1
+        step: this.state.step - 1
       })
     }
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to='/cart'/>;
+      return <Redirect to='/cart' />;
     }
     return (
       <div className='checkout'>
@@ -421,7 +435,7 @@ export class CheckoutComponent extends React.Component {
             <div className='col-md-8'>
               <h3 className='heading'>Checkout</h3>
             </div>
-            {this.state.failPop ? <FailPop cancelFail={this.cancelFail} /> : '' }
+            {this.state.failPop ? <FailPop cancelFail={this.cancelFail} /> : ''}
             <div className='col-md-4'>
               <div className='summaryHeading'>
                 {/* <h4 className='headingOrder'>Order Summary</h4> */}
