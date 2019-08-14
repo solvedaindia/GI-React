@@ -37,59 +37,53 @@ export default class HelpSupport extends React.Component {
             </ul>
           </div>
           <div className="col-md-9 faq-my-Order">            
-          <h2 className="myOrders">My Orders</h2>
+            <h2 className="heading">My Orders</h2>
             <FaqAnswers />
-            </div>
-            
-            
-            <div className='clearfix'></div>
+          </div> 
         </div>
-        
-        <div className='clearfix'></div>
-       
-
         </div>
-        <div className='customerCare'>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-            <h1 className="headingCustomercare">Contact Customer Care</h1>
-            </div>
 
-            <div className="col-md-6 borderRight">
-              <h2 className="enquiry">Enquiries</h2>
-              <div className="row">
-                <div className="col-sm-6 text-center">
+        <div className='customer-care'>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+              <h2 className="heading">Contact Customer Care</h2>
+              </div>
+
+              <div className="col-md-6 borderRight">
+                <h2 className="enquiry">Enquiries</h2>
+                <div className="row">
+                  <div className="col-sm-6 text-center">
+                    <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
+                    <h4 className="contactus">Email</h4>
+                    <h4 className="emailsmall">talktous@godrej.com</h4>
+
+                  </div>
+                  <div className="col-sm-6 text-center">
                   <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Email</h4>
-                  <h4 className="emailsmall">talktous@godrej.com</h4>
-
-                </div>
-                <div className="col-sm-6 text-center">
-                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                <h4 className="contactus">Contact-Us</h4>
-                <h4 className="emailsmall">+91 8654123547 <br/>+91 6325415873</h4>
+                  <h4 className="contactus">Contact-Us</h4>
+                  <h4 className="emailsmall">+91 8654123547 <br/>+91 6325415873</h4>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6">
-              <h2 className="enquiry">After Sales Services</h2>
-              <div className="row">
-                <div className="col-sm-6 text-center">
+              <div className="col-md-6">
+                <h2 className="enquiry">After Sales Services</h2>
+                <div className="row">
+                  <div className="col-sm-6 text-center">
+                    <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
+                    <h4 className="contactus">Email</h4>
+                    <h4 className="emailsmall">talktous@godrej.com</h4>
+                  </div>
+                  <div className="col-sm-6 text-center">
                   <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Email</h4>
-                  <h4 className="emailsmall">talktous@godrej.com</h4>
+                  <h4 className="contactus">Contact-Us</h4>
+                  <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
+                  </div>
                 </div>
-                <div className="col-sm-6 text-center">
-                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                <h4 className="contactus">Contact-Us</h4>
-                <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
-                </div>
+              
               </div>
-            
             </div>
-          </div>
-       </div>
+        </div>
         </div>
        
         
