@@ -136,8 +136,7 @@ onDropdownSelected = (e) => {
           <form>
             <div>
             <h2 className="Book-a-consultation">Book a consultation</h2>
-                  <p className="FormPAra">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor. </p>
+                  <p className="FormPAra">Take the first step towards making your dream kitchen a reality. Simply fill in the form below to book an appointment with our in-house design expert.</p>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">
