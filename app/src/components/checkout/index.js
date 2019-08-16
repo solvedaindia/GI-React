@@ -211,7 +211,7 @@ export class CheckoutComponent extends React.Component {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({
-          message: `Invalid logon id or password.`,
+          message: `Password entered is incorrect. Please try again or uncheck the above box to proceed.`,
         });
       });
   }

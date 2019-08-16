@@ -39,7 +39,7 @@ class AppliedPromoCode extends React.Component {
             </div>
 			
 			{!!error && (
-			<div className="promoError">This promo code is not valid.</div>
+			<div className="promoError">This coupon code is not valid.</div>
 			)}
       </div>
     );

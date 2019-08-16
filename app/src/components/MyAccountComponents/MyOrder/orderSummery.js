@@ -13,7 +13,7 @@ class OrderSummery extends React.Component {
   }
 
   render() {
-    console.log('summery ddd -- ', this.props.summeryDataro, this.props.addressDataPro)
+    console.log('summery ddd invo9cdee -- ', this.props.invoiceDataPro)
     const summeryData = this.props.summeryDataro;
     const addressData = this.props.addressDataPro;
 
@@ -23,13 +23,13 @@ class OrderSummery extends React.Component {
           <h4 className="heading">Delivery Address</h4>
           <p className="subheading">{addressData.name ? addressData.name : null}</p>
           <p className="address">{`${addressData.address ? addressData.address : null}, ${addressData.city ? addressData.city : null}, ${addressData.state ? addressData.state: null}, ${addressData.pincode ? addressData.pincode : null}`}</p>
-           {/* <ul className="invoiceList">
+           <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
                 <li onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list">INVOICE {key + 1}</li>
               )
             })}
-          </ul>  */}
+          </ul> 
         </div>
 
         <div className="orderList paymentmethod">

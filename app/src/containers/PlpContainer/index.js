@@ -103,7 +103,7 @@ export class PlpContainer extends React.Component {
       if (p[0] === 'filter') {
         // filterRoutingURL += `${p[0]}=${p[1]}&`
         filterRoutingURL += `${decodeURI(p[1])}&`;
-        console.log('maskkk -- ',filterRoutingURL)
+        console.log('maskkk -- ', filterRoutingURL)
         onlyFilter[p[1]];
       } else if (p[0] === 'sort') {
         sortingRoutingURL = p[1];
@@ -409,7 +409,7 @@ export class PlpContainer extends React.Component {
       return (
         <div className="noResultfound">
           <div className="label-noresult">
-            No results found for “{searchText}”
+            No results for “{searchText}”
           </div>
           <div className="product-serchGuide">
             <div className="label-text">Did you mean: </div>
@@ -512,7 +512,7 @@ export class PlpContainer extends React.Component {
 
     let descriptionItem;
     if (this.state.plpDescriptionData != null) {
-      console.log('in dessss -- ',this.state.plpDescriptionData);
+      console.log('in dessss -- ', this.state.plpDescriptionData);
       descriptionItem = (
         <DescriptionBanner
           descriptionDataPro={this.state.plpDescriptionData}
@@ -535,7 +535,7 @@ export class PlpContainer extends React.Component {
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">
-            Results for <span className="headingTitleSearch">{keywoard}</span>
+            Search results for <span className="headingTitleSearch">{keywoard}</span>
           </h3>
         </div>
       );
@@ -560,7 +560,7 @@ export class PlpContainer extends React.Component {
             <div>
               <div className="noResultfound">
                 <div className="label-noresult">
-                  No results found for “{keywoard}”
+                  No results for “{keywoard}”
                 </div>
               </div>
               <div className="Search-bestseller container">
