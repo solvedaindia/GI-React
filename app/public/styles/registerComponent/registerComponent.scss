@@ -431,12 +431,15 @@
                                         font-family: $font-regular;
                                         color: $blackLight;
                                     }
-                                    .form-control::-webkit-input-placeholder{
-                                        color:$black;
-                                        font-family: $font-regular;
-                                        font-weight: normal;
-                                        font-size: 12px;
+                                    .form-control{
+                                        &::-webkit-input-placeholder{
+                                            color:$black;
+                                            font-family: $font-regular;
+                                            font-weight: normal;
+                                            font-size: 12px;
+                                        }
                                     }
+                                    
                                     .have-account, .sign_text, .link{
                                         font-family: $font-regular;
                                         color: $blackLight;
@@ -448,6 +451,13 @@
                                     }
                                     .btn-bg{
                                         line-height: 26px;
+                                    }
+                                    .form-div{
+                                        .error-msg{
+                                            position: relative;
+                                            margin-top: -25px;
+                                            margin-bottom: 15px;
+                                        }
                                     }
                                 }
                             }
