@@ -35,7 +35,7 @@ export default class WardrobesContainer extends React.Component {
               <WbEspots />
               <div className="crouselBAckgrounding">
                 <div className='container'>
-                <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
+                {/* <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1> */}
                 <WardrobesTypes />
               </div>
               </div>
@@ -174,8 +174,8 @@ export default class WardrobesContainer extends React.Component {
                 </div>
               </div>
                 <ExKitchens/>
-              {/* <WIEspots /> */}
-              <div className="modularWardrobes">
+              <WIEspots />
+              {/* <div className="modularWardrobes">
                 <div className="container">
                   <div className="row">
                     <div className="col-md-12">
@@ -207,7 +207,7 @@ export default class WardrobesContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
         )
     }

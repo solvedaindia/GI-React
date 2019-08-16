@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/warobes.scss';
+import apiManager from '../../utils/apiManager';
+
+import {
+  typesOfWardrobesAPI,
+  imagePrefix,
+  storeId,
+  accessToken,
+} from '../../../public/constants/constants';
 
 export default class WrdrobesTypes extends Component {
   constructor(props) {
@@ -13,7 +21,13 @@ export default class WrdrobesTypes extends Component {
     const img6 = <img className="typeskitchenimg" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle"/>
 
     this.state = {
-      slides: [img1, img2, img3, img4, img5, img6]
+      slides: [img1, img2, img3, img4, img5, img6],
+      wardrobeSlider: null,
+      isLoading: false,
+      error: null,
+      title: '',
+      description: '',
+      type: ''
     };
     this.click = this.click.bind(this);
   }
@@ -23,6 +37,35 @@ export default class WrdrobesTypes extends Component {
       slides:
         slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
     });
+  }
+  getTypesOfWardobData() {
+    apiManager
+      .get(typesOfWardrobesAPI)
+      .then(response => {
+        console.log('response of wardrobes types', response)
+        const {data} = response || {}
+        this.setState({
+          wardrobeSlider: data && data.data.bannerList,
+          title: data && data.data.title,
+          description: data && data.data.desc,
+          type: data && data.data.type,
+          isLoading: false,
+        });
+        console.log('types Data',data && data.data.title);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('SLider Data Error');
+      });
+    console.log('SLider Data Error');
+  }
+  
+
+  componentDidMount() {
+    this.getTypesOfWardobData();
   }
 
 
@@ -37,7 +80,7 @@ export default class WrdrobesTypes extends Component {
     return (
         <div>
       <div className="container">
-
+<h1 className='Types-of-Modular-War'>{this.state.title}</h1>
         <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
         </div>
 
@@ -45,7 +88,7 @@ export default class WrdrobesTypes extends Component {
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide} <div className="crousdiv"><p className="Paragraph-Copy-13">Chennai, L Kitchen</p></div></h3>
+                {slide} <div className="crousdiv"><p className="Paragraph-Copy-13">Chennai, L Kitchen</p></div>
               </div>
             );
           })}
