@@ -1,6 +1,7 @@
 const filter = require('./filter');
 const imageFilter = require('./imagefilter');
 const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
+const numberPattern = /\d+/g;
 /**
  * Filter Product List Data.
  * @return Product List with Facet Data
@@ -32,6 +33,18 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
             count: Number(facetValue.count),
             // facetImage: facetValue.image || '',
           };
+          if (facet.name === 'OfferPrice_INR') {
+            const priceRange = facetValue.label
+              .replace('*', 0)
+              .match(numberPattern);
+            if (priceRange[1] === '0') {
+              facetEntry.label = `Above ₹${formatPrice(priceRange[0])}`;
+            } else {
+              facetEntry.label = `₹${formatPrice(
+                priceRange[0],
+              )} to ₹${formatPrice(priceRange[1])}`;
+            }
+          }
           if (facet.value === 'parentCatgroup_id_search') {
             facetEntry.value = `${facet.value}:${catalogID}_${
               facetValue.value
@@ -237,4 +250,8 @@ function resolveSKU(skuData, attribute) {
     });
   }
   return resolvedSKUArray;
+}
+
+function formatPrice(priceValue) {
+  return priceValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

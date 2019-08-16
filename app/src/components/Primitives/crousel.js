@@ -3,6 +3,8 @@ import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/static-pages/inspiration.scss';
 
+import '../../../public/styles/slider.scss';
+import {isMobile} from '../../utils/utilityManager';
 
 import {
   lookbookThemeAPI,
@@ -100,7 +102,7 @@ class LookbookThemeCarousel extends React.Component {
           };
     return (
       <div className="fsBanner">
-          <h2 className="Browse-Lookbook-by-T">{this.state.title}</h2>
+          <h1 className="title">{this.state.title}</h1>
           <p className="Paragraphhall">{this.state.description}</p>
           <Slider {...settings}>
             {!!lookbookThemeSlider &&

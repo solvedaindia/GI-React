@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import RedditShareButton from 'react-share/lib/RedditShareButton';
 import { Redirect } from 'react-router-dom'
+import appCookie from '../../utils/cookie';
 
 class PinChangePopup extends React.Component {
   constructor(props) {
@@ -23,7 +24,9 @@ class PinChangePopup extends React.Component {
   }
   
   render() {
+    console.log('Pincode eee ---- ',this.props.currentPinPro)
     if (this.state.redirect) {
+      appCookie.set('pincode', this.props.currentPinPro, 365 * 24 * 60 * 60 * 1000);
       return <Redirect to='/cart'/>;
     }
     return (
@@ -37,7 +40,7 @@ class PinChangePopup extends React.Component {
             <h3 className="heading">
               Are you sure you want to change the Pincode?
             </h3>
-            <p>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
+            <p className='text'>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel

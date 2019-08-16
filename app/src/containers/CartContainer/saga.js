@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import apiManager from '../../utils/apiManager';
 import appCookie from '../../utils/cookie';
-import {cartDetailAPI} from '../../../public/constants/constants';
+import { cartDetailAPI, findinventoryAPI} from '../../../public/constants/constants';
 
 import * as actionTypes from '../../constants/app/constants';
 
@@ -17,7 +17,7 @@ import * as actionTypes from '../../constants/app/constants';
 			yield put({type: "USER_FETCH_FAILED", message: e.message});
 		}
 	}
-
+	
 	/*
 		Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
 		Allows concurrent fetches of user.

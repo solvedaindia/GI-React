@@ -5,6 +5,7 @@ import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
+import {isMobile} from '../../utils/utilityManager';
 import {
   espotAPI,
   storeId,
@@ -189,8 +190,8 @@ render() {
               </div>
             </div>
             <div className="col-md-6 InitialIdea">
-              <h4><b>initial Ideation</b></h4>
-              <p className="h4">Brainstorming to the final product</p>
+              <h1 className='headingtitle'>initial Ideation</h1>
+              <p className="h4 heading-sub-title">Brainstorming to the final product</p>
  <p className="Paragraphfont">{this.state.content}
               </p>
             </div>
@@ -210,10 +211,13 @@ render() {
               <div container>
                 <div id="cat">
                   <h1 className="careerHeading">Careers</h1>
-                  <p className="paragraphCareer">your information is secure and encrypted, consectetur<br />
+                  {!isMobile() ? <p className="paragraphCareer">your information is secure and encrypted, consectetur<br />
                     adipisicing elit,sed do eiumsod tempor incididunt ut<br />
                     labore et dalore magna aliqion anim ad minim.
-                  </p>
+                  </p>:<p className="paragraphCareer">your information is secure and encrypted, consectetur
+                    adipisicing elit,sed do eiumsod tempor incididunt ut
+                    labore et dalore magna aliqion anim ad minim.
+                  </p>}
                   <button className="CareerButton">See More</button>
                 </div>
               </div>

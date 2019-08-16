@@ -48,7 +48,11 @@ export class ExStore extends React.Component {
 		return (
             !!storeData && storeData.map((storeLocData, index) => (
                 <div className='exStore' key={index}>
-                    {!isMobile() ? <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> : <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> }
+                    {!isMobile() ? 
+                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> 
+                        : 
+                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-mweb.png`} alt='Store Image'/> 
+                    }
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
                         <h1 className='title'>Experience Our Stores</h1>

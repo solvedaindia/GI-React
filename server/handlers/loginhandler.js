@@ -1,10 +1,46 @@
 const constants = require('../utils/constants');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
+const origin2 = require('../utils/origin2.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const userHandler = require('./usershandler');
+
+/**
+ * Get Guest Token from WCS
+ * @param storeId
+ * @return 200,OK with encrypted tokens as access_token
+ * @throws contexterror,badreqerror if storeid is invalid
+ */
+/* module.exports.guestLogin = guestLogin;
+async function guestLogin(headers, callback) {
+  const guestLoginUrl = `${constants.login.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}/guestidentity`;
+
+  const guestLoginHeaders = {
+    'cache-control': 'no-cache',
+    'content-type': 'application/json',
+  };
+  try {
+    const response = await origin2.getResponse(
+      'POST',
+      guestLoginUrl,
+      guestLoginHeaders,
+      null,
+    );
+    const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
+    const guestLoginResponse = {
+      access_token: encryptedAccessToken,
+    };
+    callback(null, guestLoginResponse);
+  } catch (error) {
+    callback(errorutils.handleWCSError(error));
+  }
+}
+ */
 
 /**
  * Get Guest Token from WCS
@@ -50,7 +86,8 @@ module.exports.guestLogin = function guestLogin(headers, callback) {
  * @return 200,OK with encrypted tokens as access_token
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.userLogin = function userLogin(params, headers, callback) {
+module.exports.userLogin = userLogin;
+async function userLogin(params, headers, callback) {
   logger.debug('Call to get login api');
   if (!params.user_id || !params.password) {
     logger.debug('Registered User Login:::Invalid Params');
@@ -70,50 +107,33 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
     headers.storeId,
   )}/loginidentity`;
 
-  origin.getResponse(
-    'POST',
-    originLoginURL,
-    reqHeaders,
-    null,
-    loginBody,
-    null,
-    '',
-    response => {
-      if (response.status === 201) {
-        const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
-        const loginResponseBody = {
-          access_token: encryptedAccessToken,
-        };
-        const userDetailHeader = headers;
-        // userDetailHeader.profile = 'summary';
-        userDetailHeader.WCToken = response.body.WCToken;
-        userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
-        userHandler.getUserDetails(userDetailHeader, (err, result) => {
-          loginResponseBody.userDetails = {};
-          if (!err) {
-            /*  let firstname = '';
-            let lastname = '';
-            if (result.name.indexOf(' ') > 0) {
-              firstname = result.name.substr(0, result.name.indexOf(' '));
-              lastname = result.name
-                .substring(result.name.indexOf(' ') + 1)
-                .trim();
-            } else {
-              firstname = params.name;
-            } */
-            loginResponseBody.userDetails.name = result.name;
-            // loginResponseBody.userDetails.lastName = lastname;
-            loginResponseBody.userDetails.pincode = result.pincode;
-            // delete loginResponseBody.userDetails.logonID;
-          }
-          callback(null, loginResponseBody);
-        });
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-};
+  try {
+    const response = await origin2.getResponse(
+      'POST',
+      originLoginURL,
+      reqHeaders,
+      loginBody,
+    );
+    const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
+    const loginResponseBody = {
+      access_token: encryptedAccessToken,
+    };
+    const userDetailHeader = headers;
+    userDetailHeader.WCToken = response.body.WCToken;
+    userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
+    try {
+      const userDetails = await userHandler.getUserDetails(userDetailHeader);
+      loginResponseBody.userDetails = {};
+      loginResponseBody.userDetails.name = userDetails.name;
+      loginResponseBody.userDetails.pincode = userDetails.pincode;
+      callback(null, loginResponseBody);
+    } catch (err) {
+      callback(null, loginResponseBody);
+    }
+  } catch (error) {
+    callback(errorutils.handleWCSError(error));
+  }
+}
 
 /**
  * Social Login

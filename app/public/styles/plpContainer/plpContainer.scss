@@ -17,9 +17,20 @@ $imgfullwid: 100%;
 }
 
 section.tablecarousel {
-  padding: 40px 0 40px 0;
+  padding: 0px 0 0px 0;
   .slick-slider {
     margin: 0 -15px;
+    .slick-list{
+      .slick-track{
+        margin-bottom: 40px;
+        &:empty {
+          display: none;
+       }
+      }
+    }
+    .slick-dots{
+        bottom:5px;
+    }
   }
   .headingText {
     .heading {
@@ -194,7 +205,6 @@ section.tablecarousel {
   }
   .plp-products {
     .productlist {
-      padding: 0 0 16px 0;
       position: relative;
       border: 1px solid $borderLight;
       .hoverBox {
@@ -366,7 +376,6 @@ section.tablecarousel {
           &:after {
             position: absolute;
             width: 20px;
-            height: 1px;
             background: $reddishpink;
             content: "";
             bottom: 0;
@@ -646,7 +655,7 @@ section.tablecarousel {
       }
 
       .filterbtnWrapper {
-        padding: 30px 0 0 0;
+        padding: 22px 0 0 0;
         .btn {
           padding: 12px 60px;
           border-radius: 0;
@@ -801,14 +810,18 @@ section.tablecarousel {
 
 //Filter Selection
 .filterSelection_btn {
-  padding: 9px 26px;
+  padding: 11px 0px;
   height: 34px;
   border-radius: 2px;
   background-color: #eef8fe;
   position: relative;
-  margin: 0 16px 12px 0;
+  margin: 0 13px 12px 0;
   border: none;
-  min-width: 100px;
+  min-width: 125px;
+  font-size:$base* 1.5;
+  line-height:$base* 1.5;
+  font-family: $font-medium;
+  color:$greyish;
   cursor: default;
   &:focus {
     border: none;
@@ -818,16 +831,22 @@ section.tablecarousel {
 
 .filterSelection_oval {
   width: 18px;
-  height: 18px;
-  border: solid 1px var(--light-blue-grey);
-  background-color: #ffffff;
+  height: 18px; 
+  background-color:$colorwhite;
   position: absolute;
-  top: -8px;
+  top: -5px;
   right: -5px;
   border-radius: 50%;
-  border: 1px solid #d1d1d2;
+  border: 1px solid $lightblueGrey;
   font-size: $base * 1.5;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .crossImg{
+    width:10px;
+    height:10px;
+  }
 }
 
 //Lazy loading Indicator
@@ -965,11 +984,15 @@ section.tablecarousel {
       padding: 64px 0 60px 0;
       width: 1140px;
       .productlist{
+        padding: 0 0 16px 0;
         .product-text{
           .heading{
             font-size: $base * 1.5;
             .description{
               font-size: 11px;
+            }
+            &:after {
+              height: 1px;
             }
           }
           .price{
@@ -1101,22 +1124,52 @@ section.tablecarousel {
     .plp-products {
       padding: 0px 0 60px 0;
       .productlist{
+        padding: 0 0 8px 0;
         .product-text{
           .heading{
             font-size: $base * 1.75;
             .description{
               font-size: 10px;
+              color: $greyBorder;
+            }
+            .name{
+              font-size: $base * 1.75;
+            }
+            &:after {
+              height: 2px;
             }
           }
           .price{
             .discount-price, .priceno-discount{
-              font-size: $base * 2;
+              font-size: 13px;
             }
           }
           .text {
             line-height: 18px;
           }
-        } 
+          .emi-text{
+            border-top:1px solid $borderLight;
+            width: 85%;
+            margin: auto;
+            margin-top: 5px;
+            .free-accessories{
+              font-size: 10px;
+              line-height: 14px;
+            }
+            &:empty{
+              display: none;
+            }
+          }
+        }
+        .addedToWishlist{
+          width: 100%;
+          position: fixed;
+          bottom: 58px;
+          top: initial;
+          left: 0;
+          right: 0;
+          z-index: 9;
+        }
       } 
       .hoverBox{
         padding:5px 20px;

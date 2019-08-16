@@ -1,6 +1,7 @@
 const constants = require('../utils/constants');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
+const origin2 = require('../utils/origin2.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
@@ -18,7 +19,8 @@ const regexMobileNo = /^\d{10}$/; // Mobile Number
  * @return 200,OK with encrypted tokens as access_token
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.registerUser = function userRegister(params, headers, callback) {
+module.exports.registerUser = userRegistration;
+async function userRegistration(params, headers, callback) {
   logger.debug('User Registration API');
   if (!params.name || !params.user_id || !params.password || !params.pincode) {
     logger.debug('User Registration:Invalid Params');
@@ -28,14 +30,6 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
 
   const reqHeader = headerutil.getWCSHeaders(headers);
 
-  /*  let firstname = '';
-  let lastname = '';
-  if (params.name.indexOf(' ') > 0) {
-    firstname = params.name.substr(0, params.name.indexOf(' '));
-    lastname = params.name.substring(params.name.indexOf(' ') + 1).trim();
-  } else {
-    firstname = params.name;
-  } */
   const reqBody = {
     firstName: params.name,
     logonId: params.user_id,
@@ -44,57 +38,45 @@ module.exports.registerUser = function userRegister(params, headers, callback) {
     x_otp: params.otp || '',
     zipCode: params.pincode || defaultPincode,
   };
-  /*   if (params.otp) {
-    reqBody.x_otp = params.otp;
-  }
- */
-  /* if (lastname !== '') {
-    reqBody.lastName = lastname;
-  } */
   const originUserUrl = constants.userRegistration.replace(
     '{{storeId}}',
     headers.storeId,
   );
 
-  origin.getResponse(
-    'POST',
-    originUserUrl,
-    reqHeader,
-    null,
-    reqBody,
-    null,
-    '',
-    response => {
-      if (response.status === 201) {
-        const accessToken = tokenGenerator.encodeToken(response.body);
-        const signupResponseBody = {
-          access_token: accessToken,
-          userDetails: {
-            name: reqBody.firstName,
-            pincode: reqBody.zipCode,
-          },
-        };
-        callback(null, signupResponseBody);
-      } else {
-        logger.debug('Error is Signup');
-        if (response.body.errors && response.body.errors.length > 0) {
-          if (
-            response.body.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
-            response.body.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST'
-          ) {
-            if (regexMobileNo.test(params.user_id)) {
-              callback(errorutils.errorlist.user_exists_mobile);
-            } else {
-              callback(errorutils.errorlist.user_exists_email);
-            }
-          } else {
-            callback(errorutils.handleWCSError(response));
-          }
+  try {
+    const response = await origin2.getResponse(
+      'POST',
+      originUserUrl,
+      reqHeader,
+      reqBody,
+    );
+    const accessToken = tokenGenerator.encodeToken(response.body);
+    const signupResponseBody = {
+      access_token: accessToken,
+      userDetails: {
+        name: reqBody.firstName,
+        pincode: reqBody.zipCode,
+      },
+    };
+    callback(null, signupResponseBody);
+  } catch (error) {
+    logger.debug('Error is Signup');
+    if (error.body.errors && error.body.errors.length > 0) {
+      if (
+        error.body.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        error.body.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST'
+      ) {
+        if (regexMobileNo.test(params.user_id)) {
+          callback(errorutils.errorlist.user_exists_mobile);
+        } else {
+          callback(errorutils.errorlist.user_exists_email);
         }
+      } else {
+        callback(errorutils.handleWCSError(error));
       }
-    },
-  );
-};
+    }
+  }
+}
 
 /**
  * Change user password
@@ -137,7 +119,9 @@ module.exports.changeUserPassword = function changeUserPassword(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, { message: passwordChangeMessage });
+        callback(null, {
+          message: passwordChangeMessage,
+        });
       } else {
         logger.debug('error in userdetails while change password');
         callback(errorutils.handleWCSError(response));
@@ -149,33 +133,33 @@ module.exports.changeUserPassword = function changeUserPassword(
 /**
  * Get user details
  */
-module.exports.getUserDetails = function getUserDetails(headers, callback) {
-  logger.debug('Call to get userDetails api');
-  const originUserDetailURL = constants.userDetails
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{userId}}', headers.userId);
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  origin.getResponse(
-    'GET',
-    originUserDetailURL,
-    reqHeader,
-    null,
-    null,
-    null,
-    '',
-    response => {
-      if (response.status === 200) {
-        /* if (headers.profile === 'summary') {
-          callback(null, profileFilter.userInfoSummary(response.body));
-          return;
-        } */
-        callback(null, profileFilter.userInfoDetails(response.body));
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-};
+module.exports.getUserDetails = getUserDetails;
+
+function getUserDetails(headers) {
+  return new Promise((resolve, reject) => {
+    logger.debug('Call to get userDetails api');
+    const originUserDetailURL = constants.userDetails
+      .replace('{{storeId}}', headers.storeId)
+      .replace('{{userId}}', headers.userId);
+    const reqHeader = headerutil.getWCSHeaders(headers);
+    origin.getResponse(
+      'GET',
+      originUserDetailURL,
+      reqHeader,
+      null,
+      null,
+      null,
+      '',
+      response => {
+        if (response.status === 200) {
+          resolve(profileFilter.userInfoDetails(response.body));
+        } else {
+          reject(errorutils.handleWCSError(response));
+        }
+      },
+    );
+  });
+}
 
 /**
  * Update User Details
@@ -658,7 +642,9 @@ module.exports.updateAddress = function updateAddress(req, callback) {
 
 module.exports.getNotifications = function getNotifications(headers, callback) {
   logger.debug('Call to get user contact api');
-  callback(null, { message: 'WCS Integration Pending to get Notifictaions' });
+  callback(null, {
+    message: 'WCS Integration Pending to get Notifictaions',
+  });
 };
 
 module.exports.getGiftCards = function getGiftCards(headers, callback) {
@@ -779,7 +765,9 @@ module.exports.setSocialPassword = function setPasswordForSocialLogin(
     '',
     response => {
       if (response.status === 200) {
-        callback(null, { message: socialPasswordMessage });
+        callback(null, {
+          message: socialPasswordMessage,
+        });
       } else {
         logger.debug('set password (Social Login) API');
         callback(errorutils.handleWCSError(response));

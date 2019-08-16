@@ -40,12 +40,12 @@
                 right: $base*2;
                 font-family: $font-medium;
             }
-
             .pincodeVal{
                 margin-left: $base*4;
                 border: transparent;
                 color:$black;
-                font-weight: $font-medium;
+                font-family: $font-medium;
+                width: 87%;
                 &:focus{
                     outline: none;
                 }
@@ -67,9 +67,25 @@
             &:last-child {
                 border-bottom: 1px solid $borderLight;
             }
+            .outOfStock {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.6;
+                background-color: $colorwhite;
+                z-index: 2;
+            }
             .prodImg {
                 width: 29%;
                 display: inline-block;
+                position: relative;
+                .outOfStockLogo {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 100%;
+                    z-index: 3;
+                }
             }
             .prodDetails {
                 width: 71%;
@@ -127,6 +143,7 @@
                     position: absolute;
                     bottom: 0;
                     cursor: pointer;
+                    z-index: 3;
                 }
                 .delCartItem {
                     right: $base;
@@ -187,12 +204,13 @@
             }
             .promoField {
                 .appliedPromoMsg {
-                    border-bottom: 1px solid $borderLight;
+                    border: 1px solid $borderLight;
                     position: relative;
-                    padding-bottom: $base*2;
+                    padding: $base*2;
                     .removeBtn {
                         position: absolute;
                         right: 0;
+                        width: $base*3.5;
                         border: none;
                         color: $cerulean;
                         font-family: $font-bold;
@@ -278,7 +296,12 @@
                 background-color: $ashGrey;
                 color: $colorwhite;
                 margin-top: $base*4; 
-                border-radius: none; 
+                border-radius: unset; 
+                padding: 11px 0;
+                &.disable {
+                    background-color: $disable;
+                    pointer-events: none;
+                }
             }
         }
     }
@@ -298,7 +321,6 @@
     }
     .promoList {
         margin: 0;
-        padding: 0 $base*4;
         .promoListItem {
             border-bottom: 1px solid $borderLight;
             position: relative;
@@ -326,10 +348,15 @@
                 font-size: $base*2;
                 right: $base*4;
                 top: $base;
+                font-family: $font-medium;
+                cursor: pointer;
             }
         }
     }
-    
+    .promoError {
+        color: $errorMsg;
+        padding: $base*3;
+    }
 }
 .deletItem {
     .modal-dialog {
@@ -477,6 +504,11 @@
         }
     } 
 } 
+    .viewAllPopUp {
+        .promoList{
+            padding: 0 $base*4;
+        }
+    }
 }
 
 /* 
@@ -528,6 +560,7 @@
                         background: transparent;
                         border: none;
                         color: $cerulean;
+                        font-family: $font-bold;
                     }
                 }
             }
@@ -538,14 +571,15 @@
             .promotion{
                 .promoCode{
                     font-size: $base*1.75;
-                    margin: $base*1.5 0 0 0;
+                    margin: $base*2.5 0 0 0;
                 }
                 .promoDesc{
                     font-size: 11px;
                     line-height: 16px;
                 }
                 .applyPromo{
-                    font-size: $base*1.75;
+                    font-size: $base*1.5;
+                    font-family: $font-medium;
                 }
                 .promo{
                     .viewAllPromo{
@@ -636,7 +670,10 @@
                     .qytList {
                         border: none;
                         background: none;
-                        min-width:40px;
+                        padding: 0 20px;
+                    }
+                    .cartQty {
+                        position: relative;
                     }
                     .cartQty,
                     .price {
@@ -671,11 +708,29 @@
         .cartHeadDetails{
             margin-top: $base*7; 
             border-bottom: none;
+            position: relative;
             .pincodeField {
                 width: 100%;
                 margin: auto;
                 border: none;
+                padding: $base*2.9375 0;
+                margin-top: -$base*1.25; 
                 border-bottom: 1px solid $borderLight;  
+                .pincodeVal {
+                    width: 90%;
+                    font-family: $font-medium;
+                    margin-left: $base*6.375; 
+                    &.pincodeError {
+                        color: $errorMsg;
+                    }
+                }
+                .pincodeUpdate,
+                .pincodeEdit {
+                    top: $base*3;
+                }
+                .pinLogo {
+                    left: $base;
+                }
             }
             .title,
             .cartCount {
@@ -686,7 +741,11 @@
             .cartCount {
                 margin: 0;
             }
-
+            .pinErrorMsg {
+                position: absolute;
+                top: $base*4;
+                left: $base*6.375;
+            }
             .checkout-top-hedaer{
                 position: fixed;
                 top: 0px;
@@ -718,6 +777,39 @@
         .modal-dialog {
             width: 100%;
             height: auto;
+            .modal-content{
+                .modal-body{
+                    .heading{
+                        padding: 20px 20px;
+                        text-align: left;
+                        font-size: 14px;
+                    }
+                    .promoList{
+                        padding: 0 $base*2.5;
+                        .promoListItem{
+                            .promoCode{
+                                font-size: 14px;
+                                padding-bottom: 0px;
+                            }
+                            .promoDesc{
+                                font-size: 11px;
+                                padding: 0px 0px 10px 0px;
+                                line-height: normal;
+                            }
+                            .applyPromo{
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .close{
+                        top:14px;
+                    }
+                }
+             }
+        }
+        &.in.modal{
+            bottom: 0px;
+            top:initial;
         }
     }
     .modal_emiInstallment {
@@ -747,10 +839,29 @@
         }
     }
     .modal.deletItem {
-        top: 76.5%;
+        top: unset;
         bottom: 0;
     }
     .modal.modal_emiInstallment {
         top: 14.5%;
     }
 }
+
+@supports (-webkit-overflow-scrolling: touch) {
+    /* CSS specific to iOS devices */ 
+    .caretDown {
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 14px;
+        right: 23px;
+        display: inline-block;
+        border: $base*0.75 solid transparent;
+        border-top-color: $black;
+    }
+  }
+  
+  @supports not (-webkit-overflow-scrolling: touch) {
+    /* CSS for other than iOS devices */ 
+    
+  }

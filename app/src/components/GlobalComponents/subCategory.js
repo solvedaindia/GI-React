@@ -53,6 +53,7 @@ export class SubCategory extends React.Component {
       slidesToShow: 4,
       slidesToScroll: 1,
       centerMode: true,
+      centerPadding: '40px',
       responsive: [
         {
           breakpoint: 1024,

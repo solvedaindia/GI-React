@@ -3,7 +3,6 @@
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 1;
     }
@@ -16,24 +15,24 @@
         visibility: hidden;
         opacity: 0;
         position: absolute;       
-        top: 52px;
+        top:67.4px;
         max-width: 200px;
         width: 218px;
         right: 0;
+        border-top: 1px solid #ddd; 
         background-color: $colorwhite;
-        transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        -webkit-transition: opacity 200ms, visibility 200ms;
+        transition: opacity 200ms, visibility 200ms;
+        -webkit-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        -moz-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
         z-index: 3;
-        -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -webkit-transition: opacity 0.2s ease-out, visibility .3s ease-out;
-        -o-transition: opacity 0.2s ease-out, visibility .3s ease-out;
-        -moz-transition: opacity 0.2s ease-out, visibility .3s ease-out;
         .dropDown {
             font-size: $base*1.75;
             color: $black;
             font-family: $font-regular;
-            padding: 10px 0 10px $base*2.75;            
+            display: block;
+            padding-left: $base*4; 
             &:hover {
                 text-decoration: none;
             }
@@ -46,9 +45,6 @@
                 }
             }
             padding: $base*1.25;
-            a{
-                font-size: 14px;
-            }
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
@@ -56,6 +52,7 @@
                 }
             }
         }
+        
         .listItemUnSelected {
             padding: $base*1.25;
             background: $iceBlue;             
@@ -65,8 +62,6 @@
                 font-size: $base*1.5;
             }
             &:hover {
-                // background-color: transparent; 
-                
                 cursor: default;
                 .dropDown {
                     color:$cerulean;
@@ -79,7 +74,6 @@
             visibility: visible;
             opacity: 1;
             cursor: pointer;
-            animation: fade 1.6s;
         }
     }
 }

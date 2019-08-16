@@ -39,9 +39,12 @@ class Wishlist extends React.Component {
     };
   }
 
-  onWishlistClick() {
-    const wishlistArr = getOnlyWishlistUniqueIds();
+  onWishlistClick(e) {
+    if (e.target.name === 'viewWishListButton') {
+      return;
+    }
 
+    const wishlistArr = getOnlyWishlistUniqueIds();
     console.log('isWishlist Added --- ', this.props.isInWishlistPro);
     if (getCookie('isLoggedIn') === 'true') {
       if (wishlistArr.includes(this.props.uniqueId)) {
@@ -60,15 +63,15 @@ class Wishlist extends React.Component {
     const data = {
       sku_id: this.props.uniqueId,
     };
-
     apiManager
       .post(addToWishlist, data)
       .then(response => {
+        
+      getUpdatedWishlist(this);
         this.setState({
           wishlistCurrentImage: wishlistAddedImg,
           wishlistPopup: this.wishlistPopupItem(),
         });
-        getUpdatedWishlist(this);
       })
       .catch(error => {
         console.log('newsError---', error);
@@ -128,7 +131,7 @@ class Wishlist extends React.Component {
       this.setState({
         wishlistPopup: null,
       });
-    }, 2000);
+    }, 3000);
     let pdpWishlist = '';
     if (this.props.isPDP) {
       pdpWishlist = 'pdpWishlist';
@@ -139,6 +142,7 @@ class Wishlist extends React.Component {
         <button
           onClick={() => this.redirectToWishlistPage()}
           className="view-btn"
+          name="viewWishListButton"
         >
           View
         </button>
@@ -167,6 +171,7 @@ class Wishlist extends React.Component {
             this.state.wishlistPopup
           }
         </button>
+
         {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
       </>
     );

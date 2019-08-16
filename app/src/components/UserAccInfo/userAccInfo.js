@@ -91,7 +91,7 @@ class UserAccInfo extends React.Component {
         console.log('userDetail --- ', response.data.data.name);
         var username = String(response.data.data.name);
         this.setState({
-          userName: username.split(' ')[0],
+          userName: `Hello ${username.split(' ')[0]}`,
           logonId: response.data.data.logonID,
         });
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
@@ -150,7 +150,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">Hello Guest</a>
+            <a className="dropDown">Hello Guest!</a>
           </li>
         ,
         loginStatus:
@@ -209,7 +209,7 @@ class UserAccInfo extends React.Component {
           {/* <li className="listItem"> */}
           {this.state.userName !== null &&
             getCookie('isLoggedIn') === 'true' ? (
-              <li className="listItemUnSelected">
+              <li className="listItem listItemUnSelected">
                 <a className="dropDown">{this.state.userName}!</a>
               </li>
             ) : null}

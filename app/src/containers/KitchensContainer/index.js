@@ -10,8 +10,8 @@ import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
-import OurPromises from '../../components/KitchensComp/OurPromises';
-import InterioText from '../../components/KitchensComp/InterioText';
+import OurPromises from '../../components/KitchensComp/ourPromises';
+import InterioText from '../../components/KitchensComp/interiotext';
 import LayoutImage from '../../components/KitchensComp/layoutImage';
 import FaqEspot from '../../components/Primitives/faq.js';
 import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';

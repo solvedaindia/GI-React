@@ -231,6 +231,7 @@ function getOrderProductList(headers, orderItemArray, callback) {
           const productDetail = productDetailFilter.productDetailSummary(
             product,
           );
+          productDetail.shipmentData = [];
           for (let index = 0; index < orderItemArray.length; index += 1) {
             if (productDetail.uniqueID === orderItemArray[index].productId) {
               productDetail.deliveryDate = '';
@@ -363,16 +364,19 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderSummary: {},
     transferredToOMS: true,
   };
-  const orderID = orderData.orderId;
-  getOMSOrderDetails(headers, orderID, (error, omsOrderResponse) => {
+  const wcsOrderID = orderData.orderId;
+  getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
     if (error) {
       callback(error);
       return;
     }
     const omsData = omsOrderResponse;
-    orderDetails.orderID = omsData.orderID;
+    // orderDetails.orderID = omsData.orderID;
+    orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
-    orderDetails.orderDate = omsData.orderDate;
+    orderDetails.orderDate =
+      omsData.orderDate ||
+      orderFilter.getFormattedDate(wcsOrderDetails.placedDate);
     orderDetails.paymentMethod = omsData.paymentMethod;
     orderDetails.address = omsData.address;
     orderDetails.orderStatus = omsData.orderStatus;
@@ -388,6 +392,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
 
 module.exports.getOMSOrderDetails = getOMSOrderDetails;
 function getOMSOrderDetails(headers, orderID, callback) {
+  const wcsOrderID = orderID;
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const orderDetails = `${constants.orderDetailOMS
@@ -417,7 +422,8 @@ function getOMSOrderDetails(headers, orderID, callback) {
         // response.body = sampleOrderDetails;
         if (response.body.result.order) {
           const omsOrderDetail = response.body.result.order;
-          resJson.orderID = omsOrderDetail.orderId;
+          // resJson.orderID = omsOrderDetail.orderId;
+          resJson.orderID = wcsOrderID;
           resJson.orderTotal = omsOrderDetail.orderTotal;
           resJson.orderDate = orderFilter.getFormattedDate(
             omsOrderDetail.orderDate,
@@ -427,9 +433,11 @@ function getOMSOrderDetails(headers, orderID, callback) {
           if (omsOrderDetail.invoices && omsOrderDetail.invoices.length > 0) {
             resJson.invoices = omsOrderDetail.invoices;
           }
-          resJson.address = orderFilter.getOMSOrderAddress(
-            omsOrderDetail.deliveryAddress,
-          );
+          if (omsOrderDetail.deliveryAddress) {
+            resJson.address = orderFilter.getOMSOrderAddress(
+              omsOrderDetail.deliveryAddress,
+            );
+          }
           if (
             omsOrderDetail.orderLines &&
             omsOrderDetail.orderLines.length > 0

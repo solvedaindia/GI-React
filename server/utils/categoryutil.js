@@ -1,5 +1,6 @@
 const async = require('async');
 const origin = require('./origin');
+const origin2 = require('./origin2');
 const constants = require('./constants');
 const originMethod = 'GET';
 const errorUtils = require('./errorutils');
@@ -7,6 +8,42 @@ const logger = require('./logger.js');
 const headerUtil = require('./headerutil');
 const productUtil = require('./productutil');
 const categoryFilter = require('../filters/categoryfilter');
+
+/**
+ *  Get Category Details by ID
+ */
+module.exports.getCategoryDetails2 = getCategoryDetails2;
+function getCategoryDetails2(headers, categoryID) {
+  return new Promise((resolve, reject) => {
+    if (!categoryID) {
+      logger.debug('Get Category Details :: invalid params');
+      reject(errorUtils.errorlist.invalid_params);
+      return;
+    }
+    const originUrl = constants.categoryViewByCategoryId
+      .replace('{{storeId}}', headers.storeId)
+      .replace('{{categoryId}}', categoryID);
+
+    const reqHeader = headerUtil.getWCSHeaders(headers);
+    origin2
+      .getResponse(originMethod, originUrl, reqHeader, null)
+      .then(result => {
+        let categoryDetails = {};
+        if (
+          result.body.catalogGroupView &&
+          result.body.catalogGroupView.length > 0
+        ) {
+          categoryDetails = categoryFilter.categoryDetails(
+            result.body.catalogGroupView[0],
+          );
+        }
+        resolve(categoryDetails);
+      })
+      .catch(err => {
+        reject(errorUtils.handleWCSError(err));
+      });
+  });
+}
 
 /**
  *  Get Category Details by ID

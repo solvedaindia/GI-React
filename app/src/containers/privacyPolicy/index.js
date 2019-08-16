@@ -1,6 +1,6 @@
 
 import React from 'react';
-import  '../../../public/styles/static-pages/PrivacyPolicy.scss';
+import  '../../../public/styles/static-pages/privacyPolicy.scss';
 import PrivacyPolicies from '../../components/PrivacyPolicy/privpol';
 
 

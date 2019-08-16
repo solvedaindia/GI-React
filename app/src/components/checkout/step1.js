@@ -12,7 +12,7 @@ import RegisterModalData from '../RegisterComponent/registerModalData';
 import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import Input from '../Primitives/input'
-import {isMobile} from '../../utils/utilityManager';
+import {isMobile, formatPrice} from '../../utils/utilityManager';
 import {
   regexEmail,
   regexMobileNo,
@@ -199,7 +199,7 @@ export class Step1Component extends React.Component {
 
     errorMessage = message => {
      if(message === 'user verify err') {
-       return <div className="error-msg">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
+       return <div className="error-msg errorAcountnotfound">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
      } else {
       console.log("user error found")
       return  <div className="error-msg">{message}</div>;
@@ -251,7 +251,7 @@ export class Step1Component extends React.Component {
                             <Input
                               type="text"
                               name="userId"
-                              title="Email ID/Mobile Number"
+                              title="Mobile Number/Email Address"
                               placeholder=""
                               onChange={e => this.handleChange(e)}
                               value={this.state.userId}
@@ -313,7 +313,7 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    {!isMobile() ? (<button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
+                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
                   </div>
             
               
@@ -323,7 +323,7 @@ export class Step1Component extends React.Component {
                   <div className='stepbgNone'>2</div>
                  </div>
                 <div className='leftBox'>
-                  <div className='heading-label'>Ship To</div>
+                  <div className='heading-label'>Ship to</div>
                 </div>
                 <div className='rightBox'>                 
                 <div className='heading-label'>Add your shipping address</div>              
@@ -335,7 +335,7 @@ export class Step1Component extends React.Component {
                    <div className='stepbgNone'>3</div>
                  </div>
                 <div className='leftBox'>
-                <div className='heading-label'>Pay Byf</div>
+                <div className='heading-label'>Pay By</div>
                 </div>
                 <div className='rightBox'>
                 <div className='heading-label'>Choose a payment method</div>
@@ -343,7 +343,7 @@ export class Step1Component extends React.Component {
               </div></>: ''}
 
               {isMobile() ? (<div className='checkout-btn-floater'>
-                <div className='total-amount'><div className='net-amount-box'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div></div>
+                <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.netAmount)} <span className='total-amount-text'>Total Amount</span></div></div>
                 <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed</button></div>
               </div>):''}
                

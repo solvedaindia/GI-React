@@ -27,7 +27,6 @@
             margin: 1%;
             float: left;
             .typeList {
-                width: 51%;
                 margin: auto;
             }
             .storeImg {
@@ -48,10 +47,7 @@
     .storeList {     
         margin: 0 19px 0 0;
         background: #f7f8f8;
-        padding: 25px;
         .detailCard{
-            overflow: auto;
-            padding: 0 12px 0 0;
             .storeListItem.ribbon{
               .Storewrapper{
                   padding-top:23px;
@@ -60,10 +56,6 @@
         .storeListItem{
             position: relative;
             background-color: $colorwhite; 
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
-            margin:0 0 15px 0;
-            padding: 25px 24px;
             width: 100%;
             .modular_wardrobe{
                 position: absolute;
@@ -124,7 +116,7 @@
                 .getDirection,.dealer{display: inline-block;}
                 .dealer{                   
                     font-size: $base*1.5;
-                    width: 50%;
+                    width: 55%;
                     color:$black;
                     .dealertext{text-align: right}
                     .mapicon{
@@ -193,6 +185,9 @@
                     .storeTypeItem{
                         width: 13%;
                         min-height: 130px;
+                        .typeList{
+                            width: 51%;
+                        }
                     }
                 } 
             } 
@@ -203,8 +198,17 @@
             margin-left: 8.37%; 
             .storeList {
                 width: 35%;  
+                padding: 25px;
                 .detailCard{
                     height: 400px;
+                    padding: 0 12px 0 0;
+                    overflow: auto;
+                    .storeListItem{
+                        margin:0 0 15px 0;
+                        border: 1px solid #ccc;
+                        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+                        padding: 25px 24px;
+                    }
                 }
             }
             .mapContainer{
@@ -233,7 +237,7 @@
     
   }
   
-  
+
   /* 
     #Global Screen Chhange for Screen max 767
   */
@@ -241,7 +245,7 @@
     .storeLocator{
         width: 90%;
         .title {
-            margin: $base*3 0 $base*3 0;
+            margin: $base*3 0 $base*2.25 0;
         }
         .pc-field{
             width: 70%;
@@ -252,20 +256,27 @@
         .storeTypes{
             padding: 20px 0 0 0;
             .typeList{
-                .storeTypeItem{
+                .storeTypeItem{ 
                     width: 48%;
                     display: flex;
-                    min-height: 95px;
+                    min-height: 48px;
                     .storetext{
                         display:flex;
                         align-items:center;
                         font-size: 11px;
                         text-align: left;
+                        padding: 0px 10px 0px 8px;
+                    }
+                    .typeList{
+                        width: 30%;
                     }
                 }
             } 
             .headingtitle{
-                font-size: 18px;
+                font-size: $base*1.75;
+                color: $black;
+                font-family: $font-medium;
+                margin-top: 5px;
             }
             
         } 
@@ -274,10 +285,88 @@
     .storeDetails {
         width: 100%;
         .storeList {
+            padding: 25px 0px 25px 20px; 
             width: 100%;  
             .headingtitle{
-                font-size: 18px;
+                font-size: $base*1.5;
+                margin-top: 10px;
+                text-align: center;
+                padding: 0px;
+                margin: 0px 0px 20px 0px;
             }
+            .detailCard{
+                padding: 0;
+                .storeListItem{
+                    padding: 22px 24px 15px 20px;
+                    min-height: 190px;
+                    .Storewrapper{
+                        .storeName{
+                            font-size: $base*1.75;
+                            font-family: $font-bold;
+                            color: $black;
+                        }
+                    } 
+                    .store-detal-desc{
+                        font-size: $base*1.5;
+                        color: $black;
+                        line-height: $base*2;
+                        padding-top:5px;
+                    }
+                    .phoneDetails{
+                        .PhoneNo{
+                            font-size: $base*1.5;
+                        }
+                    }
+                    .direction_dealerwrp{
+                        .getDirection{
+                            font-size: $base*1.5;
+                            color:$ceruleanlblue;
+                        }
+                        .dealer{
+                            .dealertext{
+                                position: relative;
+                                padding-left: $base*3;
+                                float: right;
+                                min-height: $base*2.5;
+                                line-height: $base*2;
+                                font-size: 11px; 
+                            }
+                            .mapicon{
+                                position: absolute;
+                                left: 3px;
+                                top: 1px;
+                                width: 10px;
+                            }
+                        } 
+                    }
+                    .modular_wardrobe{
+                        .icons{
+                            width: 8px;
+                        }
+                        .ribbonText{
+                            font-size: 9px;
+                            font-family: $font-medium;
+                        }
+                    }
+                    &.ribbon{
+                        .Storewrapper{
+                            padding-top:12px;
+                        }
+                    }
+                     
+                }
+                .slick-slider{
+                    .slick-list{
+                        padding: 0px !important;
+                    }
+                    .slick-dots{
+                        display: none;
+                    }
+                    .store-list-item-box{
+                        margin-right: 10px;
+                    }
+                }
+            } 
         }
         .mapContainer{
             width: 100%;

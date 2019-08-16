@@ -67,7 +67,7 @@ export class HeaderMobile extends React.Component {
       .then(response => {
         console.log('userDetail --- ', response.data.data.name);
         this.setState({
-          userName: `${this.state.userName} ${response.data.data.name}`,
+          userName: `${this.state.userName} ${response.data.data.name !== undefined ? response.data.data.name : ''}`,
           logonId: response.data.data.logonID,
         });
         this.showLoginStatus();

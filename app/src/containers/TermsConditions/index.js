@@ -1,6 +1,6 @@
 
 import React from 'react';
-import  '../../../public/styles/static-pages/TermsConditions.scss';
+import  '../../../public/styles/static-pages/termsconditions.scss';
 import Terms from '../../components/TermsConditionComp/termCond';
 
 
