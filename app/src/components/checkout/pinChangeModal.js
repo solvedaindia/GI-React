@@ -53,6 +53,18 @@ class PinChangePopup extends React.Component {
               </Button>
             </div>
           </div>
+
+          <div className="actionBtnWrapper mobileView">
+              <Button className="btn-cancel btn" onClick={this.handleCancel}>
+                Cancel
+              </Button>
+              <Button
+                className="btn-save btn"
+                onClick={this.handleProceed}
+              >
+                Proceed
+              </Button>
+            </div>
         </Modal.Body>
       </Modal>
     );

@@ -569,6 +569,76 @@
       margin: 0 0 24px 0;
       line-height: 24px;
     }
+    .heading{
+        font-size: 14px;
+        font-family: $font-medium;
+        color:$battleshipGrey;
+        line-height: 14px;
+        margin: 0 0 8px 0;
+    }
+    .subText{
+        font-size:14px;
+        font-family: $font-regular;
+        color:$black;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+    }
+    .totalAmount{
+        font-size:24px;
+        font-family: $font-bold;
+        color:$cerulean;
+    }
+    .btntrackorder{
+        padding:12px 75px;
+        font-family: $font-medium;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .seprator{
+        height: 1px;
+        background: $lightGrey;
+        margin:18px 0 32px 0;
+    }
+    .itemOrderdata{
+        background: $colorwhite;
+        .itemText{
+            padding:20px 0 36px 0;
+            .heading{
+                color:$black;
+                font-size: 16px;
+                line-height: 16px;
+                font-family: $font-medium;
+                margin:0 0 5px 0;
+            }
+            .subText{
+                color:$greyLight;
+                font-family: $font-regular;
+                font-size: 11px;
+                line-height: 11px;
+                margin:0 0 12px 0;
+            }
+            .headingSubtext{
+                font-family: $font-medium;
+                font-size: 10px;
+                line-height: 10px;
+                color:$battleshipGrey;
+                margin:0;
+            }
+            .quantityDelivery{
+                font-family: $font-regular;
+                font-size: 14px;
+                color:$black;
+                line-height: 14px;
+                margin:8px 0 12px 0; 
+            }
+            .priceHeading{
+                margin:0;
+                font-size: 10px;
+                font-family: $font-medium;
+                color:$battleshipGrey;
+            }
+        }
+    }
   }
 }
 

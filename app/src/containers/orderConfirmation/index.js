@@ -84,28 +84,30 @@ class OrderConformation extends React.Component {
             this.state.orderData.orderItems.forEach((item) => {
                 items.push(
                     <div className="col-md-6">
-                        <div style={{ background: 'white', margin: "10px" }}>
+                        <div className='itemOrderdata'>
                             <div className="row">
                                 <div className="col-md-4">
                                     <img src={`${imagePrefix}${item.thumbnail}`} />
                                 </div>
 
-                                <div className="col-md-6">
-                                    <div style={{ borderLeft: '1px solid grey', height: 'auto' }}></div>
-                                    <p>{item.productName}</p>
-                                    <h6>{`(${item.shortDescription})`}</h6>
+                                <div className="col-md-8">
+                                    <div className='itemText'>
+                                    <h4 className='heading'>{item.productName}</h4>
+                                    <p className='subText'>{`(${item.shortDescription})`}</p>
                                     <div className="row">
                                         <div className="col-md-4">
-                                            <h6>Quantity</h6>
-                                            <p>{item.quantity}</p>
+                                            <div className='headingSubtext'>Quantity</div>
+                                            <div className='quantityDelivery'>{item.quantity}</div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <h6>Delivery On</h6>
-                                            <p>{this.state.orderData.orderDate}</p>
+                                        <div className="col-md-8">
+                                            <div className='headingSubtext'>Delivery On</div>
+                                            <div className='quantityDelivery'>{this.state.orderData.orderDate}</div>
                                         </div>
                                     </div>
-                                    <h6>Price</h6>
-                                    <p>₹{formatPrice(item.offerPrice)}</p>
+                                    <div className='priceHeading'>Price</div>
+                                    <div className=''>₹{formatPrice(item.offerPrice)}</div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -162,24 +164,24 @@ class OrderConformation extends React.Component {
                         <h4 className="heading-details">Order Details</h4>
                         {this.state.orderData ? <div className="row">
                             <div className="col-md-2">
-                                <h6>Order ID</h6>
-                                <p>{this.state.orderData.orderID}</p>
+                                <div className='heading'>Order ID</div>
+                                <div className='subText'>{this.state.orderData.orderID}</div>
                             </div>
                             <div className="col-md-2">
-                                <h6>Order Date</h6>
-                                <p>{this.state.orderData.orderDate}</p>
+                            <div className="heading">Order Date</div>
+                            <div className="subText">{this.state.orderData.orderDate}</div>
                             </div>
                             <div className="col-md-3">
-                                <h6>Address</h6>
-                                <p>{this.state.orderData.address.address}, {this.state.orderData.address.city}, {this.state.orderData.address.state}, {this.state.orderData.address.pincode}</p>
+                                <div className='heading'>Address</div>
+                                <div className="subText">{this.state.orderData.address.address}, {this.state.orderData.address.city}, {this.state.orderData.address.state}, {this.state.orderData.address.pincode}</div>
                             </div>
                             <div className="col-md-2">
-                                <h6>Payment Method</h6>
-                                <p>{this.state.orderData.paymentMethod}</p>
+                               <div className='heading'>Payment Method</div>
+                               <div className="subText">{this.state.orderData.paymentMethod}</div>
                             </div>
                             <div className="col-md-3">
-                                <h6>Total Amount</h6>
-                                <p>₹{formatPrice(this.state.orderData.orderSummary.netAmount)}</p>
+                            <div className='heading'>Total Amount</div>
+                            <div className="totalAmount">₹{formatPrice(this.state.orderData.orderSummary.netAmount)}</div>
                             </div>
                         </div> : ''}
 
@@ -188,18 +190,18 @@ class OrderConformation extends React.Component {
                                 className="action"
                                 to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
                             >
-                                <button className="btn-bg">Track Order</button>
+                                <button className="btn-bg btntrackorder">Track Order</button>
                             </Link>
                         ) : (
                                 <Link className="action" to="/guestTrackOrder">
-                                    <button className="btn-bg">Track Order</button>
+                                    <button className="btn-bg btntrackorder">Track Order</button>                                    
                                 </Link>
                             )}
 
 
 
-                        <hr style={{ borderTop: '1px solid #bbbaba' }} />
-                        <p>Items in order</p>
+                        <div className='seprator'></div>
+                        <h4 className="heading-details">Items in order</h4>
                         <div className="row">
                             {this.state.orderData ? this.renderItems() : ''}
                         </div>

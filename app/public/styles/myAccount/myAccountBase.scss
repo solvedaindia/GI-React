@@ -125,13 +125,26 @@
       }
     }
     .modal-dialog{    
-      width: 50%;
+      width: 47%;
       // max-width: 592px;
-      max-width: 50%;
+      max-width: 47%;
     
       .modal-content{
         box-shadow: none;
-        .modalwrapper{    
+        .modalwrapper{   
+          .OopsIcon{
+            margin:0 0 30px 0;
+            .oopsImg{
+              width:50px;
+              height: 50px;
+            }
+          } 
+          .payment-notcomplete{
+            margin:0 0 36px 0;
+            font-family: $font-regular;
+            font-size: $base*2.5;
+            line-height: $base*2.5;
+          }
           .heading{
             margin: 0 0 16px 0;
             font-size: $base*2.5;
@@ -159,6 +172,7 @@
       }
     }
   }
+ 
   }
   
 
@@ -206,7 +220,7 @@
     .modal-dialog{
       .modal-content{
         .modalwrapper{
-          padding: 55px 92px 55px 92px;
+          padding: 55px 70px 55px 70px;
           text-align: center;
           .actionBtnWrapper{
             .btn{
@@ -216,6 +230,9 @@
         }
       }
     }
+  }
+  .mobileView{
+    display: none;
   }
 }
 
@@ -292,6 +309,8 @@
   }
   .delete-modal{
     .modal-dialog{
+      width:100%;
+      max-width: 100%;
       .modal-content{
         .modalwrapper{
           padding:30px 30px 34px 30px;  
@@ -304,12 +323,25 @@
             }
           } 
         }
+        .mobileView{
+          .btn{
+            width:50%;
+            border-radius: 0;
+            padding: 15px 0;
+          }
+          .btn-save {
+            margin:0;
+          }
+        }
       }
     }
     &.in{
       bottom: 0px;
       top:initial;
     }
+  }
+  .webView{
+    display: none;
   }
 }
 
