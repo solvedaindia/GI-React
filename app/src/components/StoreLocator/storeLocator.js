@@ -16,7 +16,10 @@ import starIcon from '../../../public/images/store/starIcon.svg';
 import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
+import { Helmet } from 'react-helmet'
 const NUMB_REG = /^\d+$/;
+const pageTitle = 'Experience our products at your nearest Godrej Interio store';
+
 const prevArrowImg = (
     <img src={require('../SVGs/carousel__arrowLeft.svg')} />
   );
@@ -368,6 +371,9 @@ class StoreLocator extends React.Component {
 
 		return (
             <Fragment>
+                <Helmet>
+                    <title>{pageTitle}</title>
+                </Helmet>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
