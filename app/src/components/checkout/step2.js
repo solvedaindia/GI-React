@@ -263,7 +263,7 @@ export class Step2Component extends React.Component {
     var localPIN = appCookie.get('pincode');
     if (this.state.inputText_pincode !== localPIN) {
       this.setState({
-        currentPin: inputText_pincode,
+        currentPin: this.state.inputText_pincode,
         pinPop: true
       })
     } else {
@@ -1245,7 +1245,7 @@ export class Step2Component extends React.Component {
                     <div className='col-md-12 bussinessNote'>
                       <h5 className='buying'>Buying it for your business?</h5>
                       <div className='noteGstin'><span className='bold'>Note</span>
-                        :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
+                        :The GSTIN cannot be changed once the order has been placed. The state in which the GSTIN is registered must be same either on the billing or the delivery address.</div>
                     </div>
                   </div>
                   <div className="row">

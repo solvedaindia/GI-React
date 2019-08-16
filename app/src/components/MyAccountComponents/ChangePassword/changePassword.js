@@ -73,7 +73,6 @@ class ChangePassword extends React.Component {
       return
     }
 
-
     if (!validateEmptyObject(this.state.inputTextCurrent)) {
       this.setState({
         errorCurrent: true,
@@ -89,7 +88,7 @@ class ChangePassword extends React.Component {
           'Invalid Password. Password should not be more than 25 characters';
       } else {
         errorMsg =
-          'Invalid Password. Password should have min 6 characters and atleast 1 number';
+          'Password should be within 6-20 characters only. Special characters are not permitted';
       }
 
       this.setState({

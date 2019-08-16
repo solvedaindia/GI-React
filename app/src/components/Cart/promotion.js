@@ -67,7 +67,7 @@ class GetCartPromo extends React.Component {
     return (
       <div className="promo">
         {!!error && (
-          <div className="promoError">This promo code is not valid.</div>
+          <div className="promoError">This coupon code is not valid.</div>
         )}
         <ul className="promoList">
           {!!promo &&

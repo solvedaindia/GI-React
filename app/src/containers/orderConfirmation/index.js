@@ -149,7 +149,7 @@ class OrderConformation extends React.Component {
                             <div className="orderConfirmed">
                                 <h3 className="heading">Your Order has been confirmed!</h3>
                                 <p className="text">Thank you for shopping with us!</p>
-                                <p className="text">An Email will be sent to your account when your order has been shipped.</p>
+                                <p className="text">We will notify you via email when your order is ready to be shipped.</p>
                             </div>
                         </div>
                         <div className="col-md-3">
