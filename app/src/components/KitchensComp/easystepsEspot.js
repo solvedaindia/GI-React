@@ -34,7 +34,6 @@ class EasyStepsEspot extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 
@@ -43,7 +42,7 @@ class EasyStepsEspot extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot, index } = this.state;
+    const { pageLayoutEspot } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (

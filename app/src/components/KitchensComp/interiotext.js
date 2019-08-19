@@ -1,9 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI,
-  storeId,
-  accessToken,
+  espotAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 

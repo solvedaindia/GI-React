@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import  '../../../public/styles/static-pages/kitchens.scss'
-import TypesOFkitchens from '../../components/KitchensComp/TypesOfModKitchens'
-import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
-import InsCrousel from '../../components/Primitives/crousel'
-import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
+// import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
-import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
@@ -13,10 +9,9 @@ import ConsultationForm from '../../components/Primitives/ConsultForm'
 import OurPromises from '../../components/KitchensComp/ourPromises';
 import InterioText from '../../components/KitchensComp/interiotext';
 import LayoutImage from '../../components/KitchensComp/layoutImage';
-import FaqEspot from '../../components/Primitives/faq.js';
 import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
 import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
-
+import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import {Link} from 'react-router-dom'
 
 
@@ -28,8 +23,6 @@ export default class Kitchens extends React.Component {
         this.state = {
        }
     }
-
-   
 
     render(){
         return (
@@ -50,11 +43,11 @@ export default class Kitchens extends React.Component {
                   <WhatGoes />
                 </div>
               </div>
-              <div className='AlwaysRememberParent'>
+              {/* <div className='AlwaysRememberParent'>
                 <div className='container'>
                   <AlwaysRemember />
                 </div>
-              </div>
+              </div> */}
               <div className="kitchenHallLayout">
                 <KitchenHall />
               </div>
@@ -76,7 +69,6 @@ export default class Kitchens extends React.Component {
               </div>
               <div className="faqContainer">
               <h1 className="Frequently-Asked-Que">Frequently asked questions</h1>
-
                 <div className="container">
                   <div className="panel-group" id="accordion">
                     <div className="panel panel-default">
@@ -167,24 +159,8 @@ export default class Kitchens extends React.Component {
                 </div>
               </div>
               {/*
-              <FaqEspot /> */}
-              <div class="exp-our-kitchen">
-                <div className="container">
-                  <div className="mainImg">
-                    <img className="bigSofa" src='https://192.168.0.57/imagestore/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg' alt="rectangle" />
-                    <div className="ourStores">
-                      <h3 className="h3Css">Our store</h3>
-                      <h2 className="h2Css">Experience our Kitchen facilities</h2>
-                      <p className="paragraphcss">Experience our kitchens at <span className="spanish">Vikroli
-                          Godrej Store (1.6 km away) </span>
-                        You can find more stores around you.</p>
-                      <Link to='/storelocator'>
-                      <button className="storeButton">Find More Stores</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+			  <FaqEspot /> */}
+			  <KitchenStore />
               <InterioText />
             </div>
         )

@@ -477,34 +477,6 @@ react-slideshow-container {
       font-family: $font-medium;
     }
   }
-  .slick-dots{
-    bottom: 90px;
-    button{
-      width:10px;
-      height: 10px;
-      &:before{
-        width:10px;
-        height: 10px;
-      }
-    }
-    li{
-      width: 12px;
-      height:12px;
-      background:#807a7a;
-      button:before{
-        color:#807a7a;
-        width: 12px;
-        height:12px;
-      }
-    }
-    li.slick-active{
-      background:#ffffff;
-      button:before{
-        color:#ffffff;
-      }
-    }
-  }
-  
   .slick-prev{
     left:1%;
   }
@@ -575,11 +547,6 @@ react-slideshow-container {
   background-color: rgb(33, 33, 204);
   margin-top: 50px
 }
-
-
-
-
-
 
 
 
