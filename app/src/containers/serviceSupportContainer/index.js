@@ -3,6 +3,7 @@ import  '../../../public/styles/static-pages/aboutUs.scss'
 import SearchLogo from '../../components/SVGs/search.js';
 import FaqAnswers from '../../components/HelpSupportComp/FaqAnswers'
 import  '../../../public/styles/static-pages/HelpSupport.scss'
+import {isMobile} from '../../utils/utilityManager'
 
 export default class HelpSupport extends React.Component {
   constructor(props) {
@@ -17,14 +18,14 @@ export default class HelpSupport extends React.Component {
 
   render() {
     return (
-      <div className='serviceSupport'>
+      <div className='service-support'>
         <div className='container'>
-        <h1 className="headingServicesupport">Service & Support</h1>
+        <h1 className="heading">Service & Support</h1>
         <h3 className="subHeading">How can we help you?</h3>      
         
         <div className="row innerContent">
-          <div className="col-md-3 faqArea">
-            <h2 className="faqhead">Frequently Asked Questions (FAQ)</h2>
+          <div className="col-md-3 faq-wrapper">
+            <h2 className="faq-heading">Frequently Asked Questions (FAQ)</h2>
             <ul className='faqList'>
               <li className='faqItem active'>My Orders</li>
               <li className='faqItem'>Before I Buy</li>
@@ -36,64 +37,59 @@ export default class HelpSupport extends React.Component {
               <li className='faqItem'>Request Service</li>
             </ul>
           </div>
-          <div className="col-md-9 myOrder">            
-          <h2 className="myOrders">My Orders</h2>
+          <div className="col-md-9 faq-my-Order">            
+            <h2 className="heading">My Orders</h2>
             <FaqAnswers />
-            </div>
-            
-            
-            <div className='clearfix'></div>
+          </div> 
         </div>
-        
-        <div className='clearfix'></div>
-       
-
         </div>
-        <div className='customerCare'>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-            <h1 className="headingCustomercare">Contact Customer Care</h1>
-            </div>
 
-            <div className="col-md-6 borderRight">
-              <h2 className="enquiry">Enquiries</h2>
-              <div className="row">
-                <div className="col-sm-6 text-center">
-                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Email</h4>
-                  <h4 className="emailsmall">talktous@godrej.com</h4>
+        <div className='customer-care'>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+              <h2 className="heading">Contact Customer Care</h2>
+              </div>
 
-                </div>
-                <div className="col-sm-6 text-center">
-                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                <h4 className="contactus">Contact-Us</h4>
-                <h4 className="emailsmall">+91 8654123547 <br/>+91 6325415873</h4>
+              <div className="col-md-6 separator">
+                <h2 className="title-text">Enquiries</h2>
+                <div className="row">
+                  <div className='col-sm-6 email-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
+                    <p className="emailto">talktous@godrej.com</p></div>
+                  </div>
+
+                  <div className='col-sm-6  contact-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
+                    <p className="mob-text">+91 8654123547 <br/>+91 6325415873</p></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6">
-              <h2 className="enquiry">After Sales Services</h2>
-              <div className="row">
-                <div className="col-sm-6 text-center">
-                  <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                  <h4 className="contactus">Email</h4>
-                  <h4 className="emailsmall">talktous@godrej.com</h4>
+              <div className="col-md-6">
+                <h2 className="title-text">After Sales Services</h2>
+                <div className="row">
+                  <div className='col-sm-6 email-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
+                    <p className="emailto">talktous@godrej.com</p></div>
+                  </div>
+
+                  <div className='col-sm-6 contact-box'>
+                    <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
+                    <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
+                    <p className="mob-text">+91 8654123547<br/>+91 6325415873</p></div>
+                  </div>
                 </div>
-                <div className="col-sm-6 text-center">
-                <img className="icon" src='https://203.110.85.50/imagestore/images/godrejInterio/LivingRoomHover.svg' alt="Rectangle" />
-                <h4 className="contactus">Contact-Us</h4>
-                <h4 className="emailsmall">+91 8654123547<br/>+91 6325415873</h4>
-                </div>
+              
               </div>
-            
             </div>
-          </div>
-       </div>
+        </div>
         </div>
        
         
-        <button className="Livechat">
+        <button className="live-chat">
         <span className="text">Live Chat </span>
         <span className='iconChat'><img className="chatIcon" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Rectangle" /></span>
             

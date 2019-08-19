@@ -21,17 +21,18 @@ accCallback() {
     return (
       <>
         { this.props.name.data && this.props.name.data.length > 0 && this.props.name.data.map((val, index) => (
-          <Col key={index} md={3} sm={3}>
-            <Accordion accCallbackPro={this.accCallback.bind(this)}>
+          <Col key={index} md={3} sm={3} id="accordion">
+
               {val.map((item, childindex) => (
-                <div className="footerlink_wrpper accor" id="footerlink_wrpper">
-                  <h5 className="head heading">
+                <div className="footerlink_wrpper">
+                  <h5 className="heading accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href={"#collapseOne"+index} >
                     {item.text}
-                    <span className="plusIcon" onClick={this._handleClick}>
+                    <span className="plusIcon">
                       <img src={require('../../../../public/images/plusIconWhite.svg')} />
                     </span>
                   </h5>
-                  <div className="body">
+                  <div id={"collapseOne"+index} className="panel-collapse collapse">
                     <ul>
                       {item.children.map((litem, i) => (
                         <li className="list" key={i}>
@@ -44,7 +45,7 @@ accCallback() {
                   </div>
                 </div>
               ))}
-            </Accordion>
+
           </Col>
         ))}
       </>

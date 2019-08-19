@@ -129,6 +129,7 @@ export class Step3Component extends React.Component {
 
   checkBanks(index) {
     var bank = this.state.banks[index]
+    
     var data = {
       BankID: bank.bankID,
       paymentMode: 'NET_BANKING',
@@ -219,7 +220,7 @@ export class Step3Component extends React.Component {
       })
     }
     if (event.target.name == 'UPI') {
-      this.props.enalblePay({ paymentMode: 'UPI' });
+      this.props.enalblePay({ paymentMode: 'UPI', paymentId: 'UPI' });
       return this.setState({
         showBanks: false,
         showWallets: false,
@@ -262,6 +263,7 @@ export class Step3Component extends React.Component {
 
   checkWallet(index) {
     var wallet = this.state.wallets[index];
+    console.log('ddddd --- ',wallet);
     var paymentId;
     if (wallet.bankName.includes('PhonePe')) {
       paymentId = 'PHONEPE';
@@ -382,16 +384,16 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='credit'></label>
                     </div>
-                    <label className='form-label' htmlFor='credit'>Credit Card/Debit Card</label>
+                    <label className='form-label' htmlFor='credit'>Credit Card</label>
                   </div>
 
-                  {/* <div className="pay_radio">
+                  <div className="pay_radio">
                     <div className="inputBox">
                       <input className='inputRadio input' id='debit' type='radio' name="debit" checked={this.state.debitCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='debit'></label>
                     </div>
                     <label className='form-label' htmlFor='credit'>Debit Card</label>
-                  </div> */}
+                  </div>
 
                   <div className="pay_radio">
                     <div className="inputBox">

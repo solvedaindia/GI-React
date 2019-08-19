@@ -16,7 +16,10 @@ import starIcon from '../../../public/images/store/starIcon.svg';
 import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
+import { Helmet } from 'react-helmet'
 const NUMB_REG = /^\d+$/;
+const pageTitle = 'Experience our products at your nearest Godrej Interio store';
+
 const prevArrowImg = (
     <img src={require('../SVGs/carousel__arrowLeft.svg')} />
   );
@@ -81,7 +84,6 @@ class StoreLocator extends React.Component {
 
     componentDidMount() { 
         if (this.props.history.location.state) {
-            console.log('props', this.props.history.location.state);
             if (this.props.history.location.state.storeName){ 
                 this.getLatAndLong(this.props.history.location.state.storeName);
             } else if (this.props.history.location.state.pincode) {
@@ -195,6 +197,7 @@ class StoreLocator extends React.Component {
             this.setState({
                 storeData: null,
                 isError: true,
+                searchStoreType: 'pincode',
                 isLoading: false,
                 isError: true
             });
@@ -269,19 +272,28 @@ class StoreLocator extends React.Component {
         Geocode.fromAddress(getdata).then(response => { 
             const { lat, lng } = response.results[0].geometry.location;
             
-            if (this.props.history.location.state.storeName){ 
+            if (this.props.history.location.state.storeName){
                 this.getSToreDataByCity(lat, lng, getdata);
             } else if (this.props.history.location.state.storeId) {
                 this.getSToreDataById(lat, lng, this.props.history.location.state.storeId);
             } else {
                 this.getStoreDataFromPincode(lat, lng);
             }
-        },error => { 
+        },error => {
+                let getStringVal = '';
+                console.log('getStringVal', this.props.history.location.state)
+                if (this.props.history.location.state.storeName) {
+                    getStringVal = 'city';
+                } else if (this.props.history.location.state.storeId) {
+                    getStringVal = 'store';
+                } else if (this.props.history.location.state.pincode){
+                    getStringVal = 'pincode'
+                }   
                 console.log('Error=>>', error);
                 this.setState({
                     storeData: null,
                     isLoading: false,
-                    searchStoreType: '',
+                    searchStoreType: getStringVal,
                     isError: true
                 });
                 
@@ -359,6 +371,9 @@ class StoreLocator extends React.Component {
 
 		return (
             <Fragment>
+                <Helmet>
+                    <title>{pageTitle}</title>
+                </Helmet>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>

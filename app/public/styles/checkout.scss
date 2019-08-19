@@ -1,1050 +1,1128 @@
-@import './app.scss';
-@import './variable';
-@import './base';
+@import "./app.scss";
+@import "./variable";
+@import "./base";
 .disableddiv {
-    pointer-events: none;
-    opacity: 0.4;
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 .checkout {
-    .form-control {
-        border-radius: 2px;
-        box-shadow: none;
+  .form-control {
+    border-radius: 2px;
+    box-shadow: none;
+  }
+  .btn-blackbg {
+    background: $black;
+    padding: 12px 0;
+    text-align: center;
+    color: $colorwhite;
+    border: none;
+    font-family: $font-medium;
+  }
+  .btn-cancelborder {
+    background: $colorwhite;
+    padding: 11px 0;
+    text-align: center;
+    border: 1px solid $black;
+    font-size: $base * 1.75;
+    color: $black;
+    font-family: $font-medium;
+  }
+  .heading {
+    padding: 0 0 13px 0;
+    margin: 0;
+    font-size: $base * 3.75;
+    font-weight: bold;
+    color: $black;
+    border-bottom: 1px solid $greyLightborder;
+  }
+  .summaryHeading {
+    .headingOrder {
+      font-size: $base * 2.25;
+      color: $black;
+      padding: 0px 0 32px 0;
+      font-weight: bold;
+      margin: 0;
     }
-    .btn-blackbg {
-        background: $black;
-        padding: 12px 0;
-        text-align: center;
-        color: $colorwhite;
-        border: none;
-        font-family: $font-medium;
+  }
+  .checkout_wrapper {
+    .bgGrey {
+      background: $borderLight;
     }
-    .btn-cancelborder {
-        background: $colorwhite;
-        padding: 11px 0;
-        text-align: center;
-        border: 1px solid $black;
-        font-size: $base*1.75;
-        color: $black;
-        font-family: $font-medium;
+    .inactive {
+      opacity: 0.5;
     }
-    .heading {
-        padding: 0 0 13px 0;
-        margin: 0;
-        font-size: $base*3.75;
-        font-weight: bold;
-        color: $black;
-        border-bottom: 1px solid $greyLightborder;
-    }
-    .summaryHeading {
-        .headingOrder {
-            font-size: $base*2.25;
+    .listRow {
+      border-bottom: 1px solid $greyLightborder;
+      position: relative;
+      .stepActive {
+        .stepBg {
+          position: absolute;
+          width: 34px;
+          height: 34px;
+          background: $black;
+          padding: 5px;
+          border-radius: 50%;
+          color: $colorwhite;
+          text-align: center;
+          left: -40px;
+          top: 22px;
+          font-size: $base * 2;
+        }
+        .stepbgNone {
+          position: absolute;
+          width: 34px;
+          height: 34px;
+          background: transparent;
+          padding: 5px;
+          border-radius: 50%;
+          color: $lightblueGrey;
+          text-align: center;
+          left: -34px;
+          top: 22px;
+          font-size: $base * 2;
+        }
+        .checkmark {
+          position: absolute;
+          width: 34px;
+          height: 34px;
+          padding: 5px;
+          color: $colorwhite;
+          text-align: center;
+          left: -40px;
+          top: 22px;
+          font-size: $base * 2;
+          &:after {
+            content: "";
+            display: block;
+            width: 7px;
+            height: 16px;
+            border: solid $black;
+            border-width: 0 1px 1px 0;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 13px;
+            top: 10px;
+          }
+        }
+      }
+      .labeltext-box {
+        width: 30%;
+        float: left;
+        padding-left: 13px;
+        .heading-label {
+          font-size: $base * 2.25;
+          margin: 0;
+          font-family: $font-bold;
+        }
+      }
+      .email-box {
+        float: left;
+        width: 48%;
+        padding: 0 34px 0 0;
+        .heading-label {
+          font-size: $base * 2.25;
+          margin: 0;
+          padding: 30px 0;
+          font-weight: bold;
+          line-height: 27px;
+        }
+      }
+      .paybytext {
+        float: left;
+        padding: 19px 0 0 0;
+        .labelInput-greybg {
+          padding: 18px 0 18px 28px;
+          margin: 0 0 20px 0;
+          background: $greybg;
+          .pricetext {
+            color: $cerulean;
+            line-height: 24px;
+          }
+          .inputCheck {
+            margin: 5px 16px 0 0;
+          }
+          .form-label {
+            font-size: 14px;
             color: $black;
-            padding: 0px 0 32px 0;
-            font-weight: bold;
+            padding: 0 0 0 16px;
+            line-height: 14px;
             margin: 0;
+          }
+          .inputCheck,
+          .form-label {
+            float: left;
+          }
+          .giftCard {
+            padding: 0 31px 0 28px;
+            width: 100%;
+            .giftcard-input,
+            .applybtn {
+              float: left;
+            }
+            .giftcard-input {
+              width: 70%;
+              .form-control {
+                height: 45px;
+                border-right: none;
+                border: 1px solid $borderLight;
+                color: $lightblueGrey;
+              }
+            }
+            .applybtn {
+              width: 30%;
+            }
+          }
         }
-    }
-    .checkout_wrapper {
-        .bgGrey {
-            background: $borderLight;
-        }
-        .inactive {
-            opacity: 0.5;
-        }
-        .listRow {
-            border-bottom: 1px solid $greyLightborder;
-            position: relative;
-            .stepActive {
-                .stepBg {
-                    position: absolute;
-                    width: 34px;
-                    height: 34px;
-                    background: $black;
-                    padding: 5px;
-                    border-radius: 50%;
-                    color: $colorwhite;
-                    text-align: center;
-                    left: -40px;
-                    top: 22px;
-                    font-size: $base*2;
-                }
-                .stepbgNone {
-                    position: absolute;
-                    width: 34px;
-                    height: 34px;
-                    background: transparent;
-                    padding: 5px;
-                    border-radius: 50%;
-                    color: $lightblueGrey;
-                    text-align: center;
-                    left: -34px;
-                    top: 22px;
-                    font-size: $base*2;
-                }
-                .checkmark {
-                    position: absolute;
-                    width: 34px;
-                    height: 34px;
-                    padding: 5px;
-                    color: $colorwhite;
-                    text-align: center;
-                    left: -40px;
-                    top: 22px;
-                    font-size: $base*2;
-                    &:after {
-                        content: '';
-                        display: block;
-                        width: 7px;
-                        height: 16px;
-                        border: solid $black;
-                        border-width: 0 1px 1px 0;
-                        transform: rotate(45deg);
-                        position: absolute;
-                        left: 13px;
-                        top: 10px;
-                    }
-                }
-            }
-            .labeltext-box {
-                width: 30%;
-                float: left;
-                padding-left: 13px;
-                .heading-label {
-                    font-size: $base*2.25;
-                    margin: 0;
-                   font-family: $font-bold;
-                }
-            }
-            .email-box {
-                float: left;
-                width: 48%;
-                padding: 0 34px 0 0;
-                .heading-label {
-                    font-size: $base*2.25;
-                    margin: 0;
-                    padding: 30px 0;
-                    font-weight: bold;
-                    line-height: 27px;
-                }
-            }
-            .paybytext {
-                float: left;
-                padding: 19px 0 0 0;
-                .labelInput-greybg {
-                    padding: 18px 0 18px 28px;
-                    margin: 0 0 20px 0;
-                    background: $greybg;
-                    .pricetext {
-                        color: $cerulean;
-                        line-height: 24px;
-                    }
-                    .inputCheck {
-                        margin: 5px 16px 0 0;
-                    }
-                    .form-label {
-                        font-size: 14px;
-                        color: $black;
-                        padding: 0 0 0 16px;
-                        line-height: 14px;
-                        margin: 0;
-                    }
-                    .inputCheck,
-                    .form-label {
-                        float: left;
-                    }
-                    .giftCard {
-                        padding: 0 31px 0 28px;
-                        width: 100%;
-                        .giftcard-input,
-                        .applybtn {
-                            float: left;
-                        }
-                        .giftcard-input {
-                            width: 70%;
-                            .form-control {
-                                height: 45px;
-                                border-right: none;
-                                border: 1px solid $borderLight;
-                                color: $lightblueGrey;
-                            }
-                        }
-                        .applybtn {
-                            width: 30%;
-                        }
-                    }
-                }
-                .paymentMethod {
-                    .heading {
-                        color: $black;
-                        padding: 0 0 24px 0;
-                        border: none;
-                    }
-                    .pay_radio {
-                        .inputBox,
-                        .form-label {
-                            display: inline-block;
-                        }
-                        .inputRadio {
-                            margin: 0 15px 0 0;
-                        }
-                        .form-label {
-                            font-weight: normal;
-                            color: $black;
-                            line-height: 16px;
-                        }
-                    }
-                    .dropdown-toggle {
-                        background: $colorwhite;
-                        border: 1px solid $lightGrey;
-                        min-width: 268px;
-                        box-shadow: none;
-                        text-align: left;
-                        font-size: 14px;
-                        line-height: 14px;
-                        position: relative;
-                        color: $greyish;
-                        font-family: $font-medium;
-                        overflow-wrap: break-word;
-                        word-wrap: break-word;
-                        white-space: normal;
-                        .caret {
-                            position: absolute;
-                            right: 15px;
-                            top: 18px;
-                            color: rgba(68, 43, 45, 0.54);
-                        }
-                    }
-                    .dropdown-menu {
-                        width: 100%;
-                        border-radius: 0;
-                        top: 44px;
-                        margin: 0;
-                        padding: 0;
-                        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.14);
-                        max-height: 192px;
-                        overflow: auto;
-                        border-top:none;
-                        li {
-                            padding: 14px 15px;
-                            border-bottom: 1px solid $lightGrey;
-                            a {
-                                color: $battleshipGrey;
-                                font-size: 14px;
-                                line-height: 14px;
-                                font-family: $font-regular;
-                                text-decoration: none;
-                                background-color: transparent;
-                                padding:0;
-                                overflow-wrap: break-word;
-                                word-wrap: break-word;
-                                white-space: normal;
-                                &:focus {
-                                    outline: none;
-                                    
-                                }
-                            }
-                            &:last-child {
-                                border-bottom: none;
-                            }
-                        }
-                        li.divider {
-                            display: none;
-                        }
-                    }
-                }
-            }
-            .action-button {
-                float: left;
-                width: 22%;
-                padding: 18px 0;
-            }
-            .leftBox {
-                .heading-label {
-                    font-size: $base*2.25;
-                    font-weight: bold;
-                }
-                .verticalTab {
-                    padding: 16px 0 0 0;
-                    .add_tab {
-                        font-size: 18px;
-                        color: $black;
-                        font-weight: bold;
-                        padding: 22px 0 22px 15px;
-                        cursor: pointer;
-                    }
-                    .add_tab.active_add {
-                        background: $colorwhite;
-                    }
-                }
-            }
-            .shiptoBg {
-                padding: 0px 0px 0 0px;
-                display: flex;
-                .bgGrey {
-                    width: 90%;
-                    padding: 0 0 0 13px;
-                }
-            }
-            .customCheckbox {
-                .inputCheck[type="checkbox"] {
-                    display: none;
-                }
-                /* Input Checkbox Squere
-              -----------------------------*/
-                .inputCheck[type="checkbox"]+.lblCheck {
-                    // background: url("../../../images/plpAssests/unchecked.jpg") left top no-repeat;    
-                    background: url("../images/plpAssests/unchecked.jpg") left top no-repeat;
-                    display: inline;
-                    min-height: 16px;
-                    padding-left: 11px;
-                    background-size: contain;
-                }
-                .inputCheck[type="checkbox"]:checked+.lblCheck {
-                    background: url("../images/plpAssests/checked.jpg") left top no-repeat;
-                    background-size: contain;
-                    padding-left: 11px;
-                }
-                .input_box,
-                .defaultlbl {
-                    float: left;
-                }
-            }
-            .rightBox {
-                .heading-label {
-                    font-size: $base*2.25;
-                }
-                .shipping-text {
-                    color: $battleshipGrey;
-                }
-                .havePassword {
-                    padding: 0 0 12px 7px;
-                    .checkBox {
-                        margin: 0 14px 0 0;
-                    }
-                    .form-label {
-                        font-size: 13px;
-                        font-weight: normal;
-                        color: $black;
-                        line-height: 13px;
-                        padding: 0 0 0 14px;
-                    }
-                }
-                .password-field {
-                    .valiationPosition-NewPassword {
-                        top: 36px;
-                    }
-                }
-                .form-div {
-                    position: relative;
-                    .form-group {
-                        position: relative;
-                        padding: 17px 0 0 0;
-                        .form-control {
-                            border: 1px solid $lightGrey;
-                            margin: 5px 0 20px 0;
-                            &:focus {
-                                border: 1px solid $black !important;
-                                box-shadow: none !important;
-                            }
-                            &:focus~ {
-                                .form-label {
-                                    color: $cerulean !important;
-                                }
-                            }
-                            .add_tab.active_add {
-                                background: $colorwhite;
-                            }
-                        }
-                        .form-label {
-                            color: $battleshipGrey;
-                            position: absolute;
-                            top: 0;
-                            // bottom: 8px;
-                        }
-                    }
-                    .error-msg {
-                        color: $reddishPink;
-                        position: absolute;
-                        bottom: 5px;
-                        font-size: $base*1.5;
-                        line-height: 12px;
-                        font-weight: normal;
-                    }
-                    .error-msg.errorAcountnotfound{
-                        bottom:-6px;
-                    }
-                }
-                .bill-address {
-                    padding: 9px 0 20px 0;
-                    border-bottom: 1px solid $lightGrey;
-                    .checkbox,
-                    .label-billing {
-                        float: left;
-                    }
-                    .shipping-text {
-                        font-size: $base*2;
-                        color: $battleshipGrey;
-                        padding: 0 59px 24px 0;
-                    }
-                    .label-billing {
-                        color: $greyDark;
-                        padding: 0 0 0 14px;
-                        line-height: 16px;
-                        margin: 0;
-                    }
-                }
-                .bussinessNote {
-                    .buying {
-                        padding: 21px 0 14px 0;
-                        font-size: 16px;
-                        color: $greyDark;
-                        margin: 0;
-                        font-family: $font-medium;
-                    }
-                    .noteGstin {
-                        color: $battleshipGrey;
-                        font-size: 12px;
-                        line-height: 18px;
-                        .bold {
-                            font-weight: bold;
-                        }
-                    }
-                }
-                .continueMargin {
-                    margin: 4px 0 0 0;
-                }
-                .saveAddress {
-                    .list {
-                        padding: 15px 8px 15px 8px;
-                        font-size: $base*1.625;
-                        min-height: 130px;
-                        width: 49%;
-                        display: block;
-                        float: left;
-                        border-radius: 2px;
-                        cursor: pointer;
-                        &:nth-child(even) {
-                            margin-right: 0;
-                        }
-                        .inputBox,
-                        .addressText {
-                            display: block;
-                            float: left;
-                        }
-                        .inputBox {
-                            width: 10%;
-                            height: 20px;
-                        }
-                        .addressText {
-                            width: 90%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .orderSummary {
-        .heading {
-            font-size: $base*2.25;
+        .paymentMethod {
+          .heading {
             color: $black;
-            padding: 0 0 32px 0;
+            padding: 0 0 24px 0;
+            border: none;
+          }
+          .pay_radio {
+            .inputBox,
+            .form-label {
+              display: inline-block;
+            }
+            .inputRadio {
+              margin: 0 15px 0 0;
+            }
+            .form-label {
+              font-weight: normal;
+              color: $black;
+              line-height: 16px;
+            }
+          }
+          .dropdown-toggle {
+            background: $colorwhite;
+            border: 1px solid $lightGrey;
+            min-width: 268px;
+            box-shadow: none;
+            text-align: left;
+            font-size: 14px;
+            line-height: 14px;
+            position: relative;
+            color: $greyish;
+            font-family: $font-medium;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            white-space: normal;
+            .caret {
+              position: absolute;
+              right: 15px;
+              top: 18px;
+              color: rgba(68, 43, 45, 0.54);
+            }
+          }
+          .dropdown-menu {
+            width: 100%;
+            border-radius: 0;
+            top: 44px;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.14);
+            max-height: 192px;
+            overflow: auto;
+            border-top: none;
+            li {
+              padding: 14px 15px;
+              border-bottom: 1px solid $lightGrey;
+              a {
+                color: $battleshipGrey;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
+                text-decoration: none;
+                background-color: transparent;
+                padding: 0;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                white-space: normal;
+                &:focus {
+                  outline: none;
+                }
+              }
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+            li.divider {
+              display: none;
+            }
+          }
         }
-        .listRow {
-            padding: 0 0 20px 0;
-            .lefttext-box,
-            .righttext-box {
-                color: $black;
-                font-size: $base*1.75;
-                font-weight: bold;
-            }
-            .lefttext-box {
-                float: left;
-            }
-            .righttext-box {
-                float: right;
-            }
+      }
+      .action-button {
+        float: left;
+        width: 22%;
+        padding: 18px 0;
+      }
+      .leftBox {
+        .heading-label {
+          font-size: $base * 2.25;
+          font-weight: bold;
         }
-        .freeshipping {
+        .verticalTab {
+          padding: 16px 0 0 0;
+          .add_tab {
+            font-size: 18px;
+            color: $black;
+            font-weight: bold;
+            padding: 22px 0 22px 15px;
+            cursor: pointer;
+          }
+          .add_tab.active_add {
+            background: $colorwhite;
+          }
+        }
+      }
+      .shiptoBg {
+        padding: 0px 0px 0 0px;
+        display: flex;
+        .bgGrey {
+          width: 90%;
+          padding: 0 0 0 13px;
+        }
+      }
+      .customCheckbox {
+        .inputCheck[type="checkbox"] {
+          display: none;
+        }
+        /* Input Checkbox Squere
+              -----------------------------*/
+        .inputCheck[type="checkbox"] + .lblCheck {
+          // background: url("../../../images/plpAssests/unchecked.jpg") left top no-repeat;
+          background: url("../images/plpAssests/unchecked.jpg") left top no-repeat;
+          display: inline;
+          min-height: 16px;
+          padding-left: 11px;
+          background-size: contain;
+        }
+        .inputCheck[type="checkbox"]:checked + .lblCheck {
+          background: url("../images/plpAssests/checked.jpg") left top no-repeat;
+          background-size: contain;
+          padding-left: 11px;
+        }
+        .input_box,
+        .defaultlbl {
+          float: left;
+        }
+      }
+      .rightBox {
+        .noAddress {
+          color: #c9c9c9;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          font-size: 17px;
+        }
+        .heading-label {
+          font-size: $base * 2.25;
+        }
+        .shipping-text {
+          color: $battleshipGrey;
+        }
+        .havePassword {
+          padding: 0 0 12px 7px;
+          .checkBox {
+            margin: 0 14px 0 0;
+          }
+          .form-label {
+            font-size: 13px;
+            font-weight: normal;
+            color: $black;
+            line-height: 13px;
+            padding: 0 0 0 14px;
+          }
+        }
+        .password-field {
+          .valiationPosition-NewPassword {
+            top: 36px;
+          }
+        }
+        .form-div {
+          position: relative;
+          .form-group {
+            position: relative;
+            padding: 17px 0 0 0;
+            .form-control {
+              border: 1px solid $lightGrey;
+              margin: 5px 0 20px 0;
+              &:focus {
+                border: 1px solid $black !important;
+                box-shadow: none !important;
+              }
+              &:focus ~ {
+                .form-label {
+                  color: $cerulean !important;
+                }
+              }
+              .add_tab.active_add {
+                background: $colorwhite;
+              }
+            }
+            .form-label {
+              color: $battleshipGrey;
+              position: absolute;
+              top: 0;
+              // bottom: 8px;
+            }
+          }
+          .error-msg {
+            color: $reddishPink;
+            position: absolute;
+            bottom: 5px;
+            font-size: $base * 1.5;
+            line-height: 12px;
+            font-weight: normal;
+          }
+          .error-msg.errorAcountnotfound {
+            bottom: -6px;
+          }
+        }
+        .bill-address {
+          padding: 9px 0 20px 0;
+          border-bottom: 1px solid $lightGrey;
+          .checkbox,
+          .label-billing {
+            float: left;
+          }
+          .shipping-text {
+            font-size: $base * 2;
             color: $battleshipGrey;
-            font-size: $base*1.5;
-            padding: 0 0 20px 0;
+            padding: 0 59px 24px 0;
+          }
+          .label-billing {
+            color: $greyDark;
+            padding: 0 0 0 14px;
+            line-height: 16px;
+            margin: 0;
+          }
         }
-        .startEmi {
-            border: 1px solid $greyLightborder;
-            border-left: 0;
-            border-right: 0;
-            padding: 19px 0;
-            .emitext,
-            .knowmore {
-                font-size: $base*1.75;
-                font-family: $font-bold;
+        .bussinessNote {
+          .buying {
+            padding: 21px 0 14px 0;
+            font-size: 16px;
+            color: $greyDark;
+            margin: 0;
+            font-family: $font-medium;
+          }
+          .noteGstin {
+            color: $battleshipGrey;
+            font-size: 12px;
+            line-height: 18px;
+            .bold {
+              font-weight: bold;
             }
-            .emi-icon {
-                float: left;
-                padding: 0 8px 0 0;
-            }
-            .emitext {
-                float: left;
-                color: $black;
-            }
-            .knowmore {
-                float: right;
-                color: $cerulean;
-            }
+          }
         }
-        .totalBox {
-            padding: 16px 0 32px;
-            .totaltext {
-                float: left;
-                .label-text {
-                    color: $cerulean;
-                    font-size: $base*3;
-                    font-weight: bold;
-                }
-                .savetext {
-                    .save-label,
-                    .saving-amount {
-                        font-size: $base*1.375;
-                    }
-                    .save-label {
-                        color: $battleshipGrey;
-                    }
-                    .saving-amount {
-                        color: $greenLight;
-                    }
-                }
-            }
-            .totalAmount {
-                float: right;
-                color: $cerulean;
-                font-size: $base*3;
-                font-weight: bold;
-            }
+        .continueMargin {
+          margin: 4px 0 0 0;
         }
-        .SecureCheckout {
-            text-align: center;
-            padding: 24px 0 0 0;
+        .saveAddress {
+          .list {
+            padding: 15px 8px 15px 8px;
+            font-size: $base * 1.625;
+            min-height: 130px;
+            width: 49%;
+            display: block;
+            float: left;
+            border-radius: 2px;
+            cursor: pointer;
+            &:nth-child(even) {
+              margin-right: 0;
+            }
+            .inputBox,
+            .addressText {
+              display: block;
+              float: left;
+            }
+            .inputBox {
+              width: 10%;
+              height: 20px;
+            }
+            .addressText {
+              width: 90%;
+            }
+          }
         }
+      }
     }
+  }
+  .orderSummary {
+    .heading {
+      font-size: $base * 2.25;
+      color: $black;
+      padding: 0 0 32px 0;
+    }
+    .listRow {
+      padding: 0 0 20px 0;
+      .lefttext-box,
+      .righttext-box {
+        color: $black;
+        font-size: $base * 1.75;
+        font-weight: bold;
+      }
+      .lefttext-box {
+        float: left;
+      }
+      .righttext-box {
+        float: right;
+      }
+    }
+    .freeshipping {
+      color: $battleshipGrey;
+      font-size: $base * 1.5;
+      padding: 0 0 20px 0;
+    }
+    .startEmi {
+      border: 1px solid $greyLightborder;
+      border-left: 0;
+      border-right: 0;
+      padding: 19px 0;
+      .emitext,
+      .knowmore {
+        font-size: $base * 1.75;
+        font-family: $font-bold;
+      }
+      .emi-icon {
+        float: left;
+        padding: 0 8px 0 0;
+      }
+      .emitext {
+        float: left;
+        color: $black;
+      }
+      .knowmore {
+        float: right;
+        color: $cerulean;
+      }
+    }
+    .totalBox {
+      padding: 16px 0 32px;
+      .totaltext {
+        float: left;
+        .label-text {
+          color: $cerulean;
+          font-size: $base * 3;
+          font-weight: bold;
+        }
+        .savetext {
+          .save-label,
+          .saving-amount {
+            font-size: $base * 1.375;
+          }
+          .save-label {
+            color: $battleshipGrey;
+          }
+          .saving-amount {
+            color: $greenLight;
+          }
+        }
+      }
+      .totalAmount {
+        float: right;
+        color: $cerulean;
+        font-size: $base * 3;
+        font-weight: bold;
+      }
+    }
+    .SecureCheckout {
+      text-align: center;
+      padding: 24px 0 0 0;
+    }
+  }
 }
 
 .orderconfirm {
-    margin: 52px 0 70px 0;
-    .orderConfirmed {
-        .heading {
-            color: $cerulean;
-            font-size: 24px;
-            font-family: $font-bold;
-            margin: 0;
-            padding: 0 0 10px 0;
-        }
-        .text {
-            color: $battleshipGrey;
-            font-size: 16px;
-            font-family: $font-regular;
-            line-height: 16px;
-            margin: 0;
-            padding: 0 0 5px 0;
+  margin: 52px 0 70px 0;
+  .orderConfirmed {
+    .heading {
+      color: $cerulean;
+      font-size: 24px;
+      font-family: $font-bold;
+      margin: 0;
+      padding: 0 0 10px 0;
+    }
+    .text {
+      color: $battleshipGrey;
+      font-size: 16px;
+      font-family: $font-regular;
+      line-height: 16px;
+      margin: 0;
+      padding: 0 0 5px 0;
+    }
+  }
+  .continueShopping {
+    float: right;
+    .btn-bg {
+      font-size: 14px;
+    }
+  }
+  .orderDetails {
+    margin: 45px 0 0 0;
+    padding: 32px 24px 53px 24px;
+    background: $greybg;
+    .heading-details {
+      font-size: 24px;
+      color: $black;
+      margin: 0 0 24px 0;
+      line-height: 24px;
+    }
+    .heading{
+        font-size: 14px;
+        font-family: $font-medium;
+        color:$battleshipGrey;
+        line-height: 14px;
+        margin: 0 0 8px 0;
+    }
+    .subText{
+        font-size:14px;
+        font-family: $font-regular;
+        color:$black;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+    }
+    .totalAmount{
+        font-size:24px;
+        font-family: $font-bold;
+        color:$cerulean;
+    }
+    .btntrackorder{
+        padding:12px 75px;
+        font-family: $font-medium;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .seprator{
+        height: 1px;
+        background: $lightGrey;
+        margin:18px 0 32px 0;
+    }
+    .itemOrderdata{
+        background: $colorwhite;
+        .itemText{
+            padding:20px 0 36px 0;
+            .heading{
+                color:$black;
+                font-size: 16px;
+                line-height: 16px;
+                font-family: $font-medium;
+                margin:0 0 5px 0;
+            }
+            .subText{
+                color:$greyLight;
+                font-family: $font-regular;
+                font-size: 11px;
+                line-height: 11px;
+                margin:0 0 12px 0;
+            }
+            .headingSubtext{
+                font-family: $font-medium;
+                font-size: 10px;
+                line-height: 10px;
+                color:$battleshipGrey;
+                margin:0;
+            }
+            .quantityDelivery{
+                font-family: $font-regular;
+                font-size: 14px;
+                color:$black;
+                line-height: 14px;
+                margin:8px 0 12px 0; 
+            }
+            .priceHeading{
+                margin:0;
+                font-size: 10px;
+                font-family: $font-medium;
+                color:$battleshipGrey;
+            }
         }
     }
-    .continueShopping {
-        float: right;
-        .btn-bg {
-            font-size: 14px;
-        }
-    }
-    .orderDetails {
-        margin: 45px 0 0 0;
-        padding: 32px 24px 53px 24px;
-        background: $greybg;
-        .heading-details {
-            font-size: 24px;
-            color: $black;
-            margin: 0 0 24px 0;
-            line-height: 24px;
-        }
-    }
+  }
 }
-
 
 /* Radio custom css
 -------------------------*/
 
 .paymentMethod.customradio {
-    .inputBox {
-        &:before {
-            top: 3px;
-        }
+  .inputBox {
+    &:before {
+      top: 3px;
     }
+  }
 }
 
 .customradio {
-    .input[type='radio'] {
-        display: none;
+  .input[type="radio"] {
+    display: none;
+  }
+  .inputBox {
+    position: relative;
+    &:before {
+      content: " ";
+      display: inline-block;
+      position: relative;
+      top: 4px;
+      margin: 0 0px 0 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      border: 1px solid $black;
+      background-color: transparent;
     }
-    .inputBox {
-        position: relative;
-        &:before {
-            content: " ";
-            display: inline-block;
-            position: relative;
-            top: 4px;
-            margin: 0 0px 0 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 100%;
-            border: 1px solid $black;
-            background-color: transparent;
-        }
-        .labelchecked {
-            width: 14px;
-            height: 14px;
-            position: absolute;
-            left: 0;
-        }
-        .input[type='radio']:checked+.labelchecked {
-            border-radius: 100%;
-            width: 8px;
-            height: 8px;
-            position: absolute;
-            top: 7px;
-            left: 3px;
-            display: block;
-            background-color: $black;
-        }
+    .labelchecked {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      left: 0;
     }
+    .input[type="radio"]:checked + .labelchecked {
+      border-radius: 100%;
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      top: 7px;
+      left: 3px;
+      display: block;
+      background-color: $black;
+    }
+  }
 }
-
 
 /* ScrollBar 
 ---------------------*/
 
 .dropdown-menu::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px $colorwhite;
-    -webkit-box-shadow: inset 0 0 6px $colorwhite;
-    border-radius: 2px;
-    background-color: #cac9c9;
+  box-shadow: inset 0 0 6px $colorwhite;
+  -webkit-box-shadow: inset 0 0 6px $colorwhite;
+  border-radius: 2px;
+  background-color: #cac9c9;
 }
 
 .dropdown-menu::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 .dropdown-menu::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    height: 50px;
-    box-shadow: inset 0 0 6pxrgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: inset 0 0 6pxrgba(0, 0, 0, 0.5);
-    background-color: #d1d1d2;
+  border-radius: 2px;
+  height: 50px;
+  box-shadow: inset 0 0 6pxrgba (0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0 0 6pxrgba (0, 0, 0, 0.5);
+  background-color: #d1d1d2;
 }
 
 .dropdown-menu .divider {
-    margin: 3px 0 !important;
+  margin: 3px 0 !important;
 }
-
 
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
 
 @media (min-width: 1281px) {
-    //CSS
+  //CSS
 }
-
 
 /* 
     #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
   */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    //CSS
+  //CSS
 }
-
 
 /* 
     #Global Screen Chhange for Screen max 768
     */
 
 @media screen and (min-width: 768px) {
-    .checkout {
-        padding: 116px 0 100px 0;
-        .form-control {
-            height: 54px;
-        }
-        .proceedButton{
-            margin:15px 0 0  0;
-        }
-        .container {
-            width: 85%;
-        }
-        .orderSummary {
-            padding: 0 0 32px 37px;
-            margin-top: -28px;
-        }
-        .checkout_wrapper {
-            .bgfullflex {
-                display: flex;
-            }
-            .listRow {
-                .paybytext {
-                    width: 70%;
-                    .paymentMethod{
-                        padding: 20px 0 0 19px;
-                        .heading{
-                            font-size: $base*2.25;
-                        }
-                        .pay_radio{
-                            padding: 0 0 26px 0;
-                            .form-label{
-                                margin: 0 0 0 15px;
-                                font-size: 16px;
-                                font-family: $font-regular;
-                            }
-                        } 
-                        .dropdown-toggle {
-                            padding: 14px 30px 14px 15px;
-                            margin: 0 0 40px 0;
-                        }
-                        .dropdown{
-                            margin:0 0 0 30px;
-                        }
-                    }
-                }
-                .leftBox {
-                    width: 30%;
-                    float: left;
-                    padding: 25px 0px 0 13px;
-                }
-                .rightBox {
-                    width: 70%;
-                    float: left;
-                    padding: 22px 0 25px 27px;
-                    .saveAddress {
-                        .list {
-                            min-height: 130px;
-                            background: rgba(247, 248, 248, 0.5);
-                            border: 1px solid $lightblueGrey;
-                            margin: 0 8px 12px 0;
-                        }
-                    }
-                    .colpaddingRight {
-                        padding-right: 3px;
-                    }
-                    .shipping-text{
-                        font-size: $base*2;
-                        padding: 0 59px 24px 0;
-                    }
-
-                    .bill-address {
-                        .label-billing {
-                            font-size: 16px;
-                            font-family: $font-medium;
-                            font-weight: 400;
-                        }
-                    }
-                    .bussinessNote{
-                        .noteGstin{
-                            padding: 0 0 22px 0;
-                        }
-                       }
-                }
-                .labeltext-box {
-                    .heading-label {
-                        padding: 30px 0;
-                    }
-                }
-                &:last-child.listRow {
-                    border-bottom: 1px solid $borderLight;
-                }
-            }
-        }
+  .checkout {
+    padding: 116px 0 100px 0;
+    .addressTextarea {
+      .textarea {
+        border: 1px solid #dfe0de;
+        margin: 5px 0 20px 0;
+        width: 100%;
+        min-height: 112px;
+        resize: none;
+      }
+      .error-msg {
+        bottom: -16px !important;
+      }
     }
-}
+    .form-control {
+      height: 54px;
+    }
+    .proceedButton {
+      margin: 15px 0 0 0;
+    }
+    .container {
+      width: 85%;
+    }
+    .orderSummary {
+      padding: 0 0 32px 37px;
+      margin-top: -28px;
+    }
+    .checkout_wrapper {
+      .bgfullflex {
+        display: flex;
+      }
+      .listRow {
+        .paybytext {
+          width: 70%;
+          .paymentMethod {
+            padding: 20px 0 0 19px;
+            .heading {
+              font-size: $base * 2.25;
+            }
+            .pay_radio {
+              padding: 0 0 26px 0;
+              .form-label {
+                margin: 0 0 0 15px;
+                font-size: 16px;
+                font-family: $font-regular;
+              }
+            }
+            .dropdown-toggle {
+              padding: 14px 30px 14px 15px;
+              margin: 0 0 40px 0;
+            }
+            .dropdown {
+              margin: 0 0 0 30px;
+            }
+          }
+        }
+        .leftBox {
+          width: 30%;
+          float: left;
+          padding: 25px 0px 0 13px;
+        }
+        .rightBox {
+          width: 70%;
+          float: left;
+          padding: 22px 0 25px 27px;
+          .saveAddress {
+            .list {
+              min-height: 130px;
+              background: rgba(247, 248, 248, 0.5);
+              border: 1px solid $lightblueGrey;
+              margin: 0 8px 12px 0;
+            }
+          }
+          .colpaddingRight {
+            padding-right: 3px;
+          }
+          .shipping-text {
+            font-size: $base * 2;
+            padding: 0 59px 24px 0;
+          }
 
+          .bill-address {
+            .label-billing {
+              font-size: 16px;
+              font-family: $font-medium;
+              font-weight: 400;
+            }
+          }
+          .bussinessNote {
+            .noteGstin {
+              padding: 0 0 22px 0;
+            }
+          }
+        }
+        .labeltext-box {
+          .heading-label {
+            padding: 30px 0;
+          }
+        }
+        &:last-child.listRow {
+          border-bottom: 1px solid $borderLight;
+        }
+      }
+    }
+  }
+}
 
 /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    //CSS
+  //CSS
 }
-
 
 /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
   */
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    //CSS
+  //CSS
 }
-
 
 /* 
     #Global Screen Chhange for Screen max 767
   */
 
 @media screen and (max-width: 767px) {
-    .checkout-title {
-        font-size: $base*1.75;
-        padding: $base*2 0px $base*2 15px;
-        font-weight: bold;
-        background: $borderLight;
-        margin-top: 0;
+  .checkout-title {
+    font-size: $base * 1.75;
+    padding: $base * 2 0px $base * 2 15px;
+    font-weight: bold;
+    background: $borderLight;
+    margin-top: 0;
+  }
+  .checkout {
+    padding: 63px 0 10px 0;
+    .form-control {
+      height: 44px;
     }
-    .checkout {
-        padding: 63px 0 10px 0;
-        .form-control {
-            height: 44px;
+    .mob-checkout-steps {
+      position: fixed;
+      top: 0px;
+      z-index: 9;
+      color: $colorwhite;
+      text-align: center;
+      width: 100%;
+      padding: 14px 15px;
+      font-size: 14px;
+      .backBtn {
+        float: left;
+        width: 20px;
+        margin: 0px 0px 0px 15px;
+        position: fixed;
+        top: 11px;
+        left: 3px;
+        z-index: 4;
+        img {
+          width: 100%;
         }
-        .mob-checkout-steps{
-            position: fixed;
-            top: 0px;
-            z-index: 9;
-            color: $colorwhite;
-            text-align: center;
-            width: 100%;
-            padding: 14px 15px;
-            font-size: 14px;
-            .backBtn{
-                float: left;
-                width: 20px;
-                margin: 0px 0px 0px 15px;
-                position:fixed;
-                top: 11px;
-                left: 3px;
-                z-index: 4;
-                img{
-                    width: 100%;
-                }
+      }
+      .mob-header-logo {
+        float: left;
+        position: fixed;
+        left: 50px;
+        z-index: 3;
+        top: 10px;
+      }
+      .title {
+        float: left;
+        text-align: center;
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        margin-top: 7px;
+        left: 0px;
+        top: 7px;
+        font-family: $font-light;
+        color: $colorwhite;
+        font-size: 14px;
+      }
+    }
+    .address-submit {
+      padding-left: 0px;
+    }
+    .container {
+      width: 100%;
+    }
+    .orderSummary {
+      padding: 0px 10px 0px 10px;
+    }
+    h3.heading {
+      display: none;
+    }
+    .checkout_wrapper {
+      .bgfullflex {
+        display: block;
+        width: 100%;
+      }
+      .listRow {
+        border: 0px;
+        .paybytext {
+          width: 100%;
+          min-height: 420px;
+          .paymentMethod {
+            padding: 0px;
+            .heading {
+              font-size: $base * 1.75;
             }
-            .mob-header-logo{
-                float: left;
-                position: fixed;
-                left: 50px;
-                z-index: 3;
-                top: 10px;
-            }
-            .title{
-                float: left;
-                text-align: center;
-                position: fixed;
-                z-index: 1;
-                width: 100%;
-                text-align: center;
-                margin-top: 7px;
-                left: 0px;
-                top:7px;
-                font-family: $font-light;
-                color: $colorwhite;
+            .pay_radio {
+              padding: 0 0 15px 0;
+              .form-label {
+                margin: 0 0 0 10px;
                 font-size: 14px;
+              }
             }
-        }
-        .address-submit{
-            padding-left: 0px;
-        }
-        .container {
-            width: 100%;
-        }
-        .orderSummary {
-            padding: 0px 10px 0px 10px;
-        }
-        h3.heading {
-            display: none;
-        }
-        .checkout_wrapper {
-            .bgfullflex {
-                display: block;
-                width: 100%;
+            .dropdown {
+              margin-bottom: 10px;
+              width: 100%;
+              .dropdown-toggle {
+                padding: 10px 15px;
+                color: $greyBorder;
+                font-size: 12px;
+                font-family: $font-regular;
+                min-width: 100%;
+                .caret {
+                  top: 16px;
+                }
+              }
+              .dropdown-menu {
+                position: initial;
+                margin-top: -1px;
+                li {
+                  padding: 10px 15px;
+                  a {
+                    padding: 3px 0px;
+                    color: $greyBorder;
+                    font-size: 12px;
+                  }
+                }
+              }
             }
-            .listRow {
-                border: 0px;
-                .paybytext {
-                    width: 100%;
-                    min-height: 420px;
-                    .paymentMethod{
-                        padding: 0px;
-                        .heading{
-                            font-size: $base*1.75;
-                        }
-                        .pay_radio{
-                            padding: 0 0 15px 0;
-                            .form-label{
-                                margin: 0 0 0 10px;
-                                font-size: 14px;
-                            }
-                        }
-                        .dropdown{ 
-                            margin-bottom: 10px;
-                            width: 100%;
-                            .dropdown-toggle {
-                                padding: 10px 15px;
-                                color: $greyBorder;
-                                font-size: 12px;
-                                font-family: $font-regular;
-                                min-width: 100%;
-                                .caret{
-                                    top: 16px;
-                                }
-                            }
-                            .dropdown-menu{
-                                position:initial;
-                                margin-top: -1px;
-                                li{
-                                    padding: 10px 15px;
-                                    a{
-                                        padding: 3px 0px;
-                                        color: $greyBorder;
-                                        font-size: 12px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                .leftBox {
-                    width: 100%;
-                    padding: 10px 0px 10px 8px;
-                }
-                .rightBox {
-                    width: 100%;
-                    float: left;
-                    padding: 22px 0 25px 0px;
-                    .saveAddress {
-                        .list {
-                            min-height: 10px;
-                            width: 100%;
-                            border: 1px solid $lightGrey;
-                            margin: 0 0px 8px 0;
-                            .addressText{
-                                font-family: $font-regular;
-                                color:$battleshipGrey;
-                                font-size: 12px;
-                            }
-                        }
-                    }
-                    .bill-address {
-                        .label-billing {
-                            width: 95%;
-                            font-size: 12px;
-                            font-family: $font-regular;
-                            font-weight: normal;
-                        }
-                    }
-                    .colpaddingRight {
-                        padding-right: 15px;
-                    }
-                    .form-div{
-                        .form-group {
-                            input[type='password']{
-                                letter-spacing: 12px;
-                            }
-                            .form-label{
-                                margin: 15px 0px 0px 10px;
-                                background: $colorwhite;
-                                font-size: 10px;
-                                padding: 0px 10px;
-                                font-family: $font-light;
-                            }
-                        }
-                    } 
-                    .shipping-text{
-                        font-size: $base*1.5;
-                        padding: 0 0px 10px 0;
-                    }
-                    .add-new-address-box{
-                        color: $cerulean;
-                        margin-bottom: 12px;
-                        position: relative;
-                        font-size: 14px;
-                        padding: 0px 10px;
-
-                        .add-address-btn{
-                            position:absolute;
-                            right: 0px;
-                            top: 0px;
-                            width: 20px;
-                            height: 20px;
-                            background: url('../images/plusIcon-blue.svg');
-                        }
-                        .active_add{
-                            .add-address-btn{
-                                background: url('../images/close-blue.svg');
-                                background-size: cover;
-                            }
-                        }
-                    }
-                    .bussinessNote{
-                     .noteGstin{
-                        padding:0px;
-                     }
-                    }
-                }
-                .email-box {
-                    .heading-label {
-                        display: none;
-                    }
-                }
-                .stepActive {
-                    .stepBg {
-                        display: none;
-                    }
-                }
-                .labeltext-box {
-                    .heading-label {
-                        padding: 10px 0;
-                    }
-                }
-            }
+          }
         }
-        .checkout-btn-floater {
-            position: fixed;
-            bottom: 0px;
-            left: 0px;
-            z-index: 911;
-            width: 100%;
-            .total-amount,
-            .proceed-btn {
-                width: 50%;
-                float: left;
+        .leftBox {
+          width: 100%;
+          padding: 10px 0px 10px 8px;
+        }
+        .rightBox {
+          width: 100%;
+          float: left;
+          padding: 22px 0 25px 0px;
+          .saveAddress {
+            .list {
+              min-height: 10px;
+              width: 100%;
+              border: 1px solid $lightGrey;
+              margin: 0 0px 8px 0;
+              .addressText {
+                font-family: $font-regular;
+                color: $battleshipGrey;
+                font-size: 12px;
+              }
             }
-            .total-amount {
+          }
+          .bill-address {
+            .label-billing {
+              width: 95%;
+              font-size: 12px;
+              font-family: $font-regular;
+              font-weight: normal;
+            }
+          }
+          .colpaddingRight {
+            padding-right: 15px;
+          }
+          .form-div {
+            .form-group {
+              input[type="password"] {
+                letter-spacing: 12px;
+              }
+              .form-label {
+                margin: 15px 0px 0px 10px;
                 background: $colorwhite;
-                min-height: 44px;
-                text-align: center;
-                font-family: $font-bold;
-                font-size: 14px;
-                padding-top: 4px;
-                border-top: 1px solid $lightGrey;
-                .net-amount-box{
-                    float: left;
-                    margin-left: 40px;
-                    text-align: left;
-                }
-                .total-amount-text {
-                    font-size: 10px;
-                    display: block;
-                    font-family: $font-medium;
-                    color:$greyishbrown;
-                }
+                font-size: 10px;
+                padding: 0px 10px;
+                font-family: $font-light;
+              }
             }
-        }
-    }
-}
+          }
+          .shipping-text {
+            font-size: $base * 1.5;
+            padding: 0 0px 10px 0;
+          }
+          .add-new-address-box {
+            color: $cerulean;
+            margin-bottom: 12px;
+            position: relative;
+            font-size: 14px;
+            padding: 0px 10px;
 
+            .add-address-btn {
+              position: absolute;
+              right: 0px;
+              top: 0px;
+              width: 20px;
+              height: 20px;
+              background: url("../images/plusIcon-blue.svg");
+            }
+            .active_add {
+              .add-address-btn {
+                background: url("../images/close-blue.svg");
+                background-size: cover;
+              }
+            }
+          }
+          .bussinessNote {
+            .noteGstin {
+              padding: 0px;
+            }
+          }
+        }
+        .email-box {
+          .heading-label {
+            display: none;
+          }
+        }
+        .stepActive {
+          .stepBg {
+            display: none;
+          }
+        }
+        .labeltext-box {
+          .heading-label {
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+    .checkout-btn-floater {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      z-index: 911;
+      width: 100%;
+      .total-amount,
+      .proceed-btn {
+        width: 50%;
+        float: left;
+      }
+      .total-amount {
+        background: $colorwhite;
+        min-height: 44px;
+        text-align: center;
+        font-family: $font-bold;
+        font-size: 14px;
+        padding-top: 4px;
+        border-top: 1px solid $lightGrey;
+        .net-amount-box {
+          float: left;
+          margin-left: 40px;
+          text-align: left;
+        }
+        .total-amount-text {
+          font-size: 10px;
+          display: block;
+          font-family: $font-medium;
+          color: $greyishbrown;
+        }
+      }
+    }
+  }
+}
 
 /* 
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
   */
 
 @media (min-width: 481px) and (max-width: 767px) {
-    //CSS
+  //CSS
 }
-
 
 /* 
     #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
   */
 
-@media (min-width: 320px) and (max-width: 480px) {}
+@media (min-width: 320px) and (max-width: 480px) {
+}

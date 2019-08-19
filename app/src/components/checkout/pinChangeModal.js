@@ -40,7 +40,7 @@ class PinChangePopup extends React.Component {
             <h3 className="heading">
               Are you sure you want to change the Pincode?
             </h3>
-            <p className='text'>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
+            <p className='text'>Changing your pincode will take you back to the cart and show updated information on product availability, delivery charges and expected delivery date.</p>
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel
@@ -53,6 +53,18 @@ class PinChangePopup extends React.Component {
               </Button>
             </div>
           </div>
+
+          <div className="actionBtnWrapper mobileView">
+              <Button className="btn-cancel btn" onClick={this.handleCancel}>
+                Cancel
+              </Button>
+              <Button
+                className="btn-save btn"
+                onClick={this.handleProceed}
+              >
+                Proceed
+              </Button>
+            </div>
         </Modal.Body>
       </Modal>
     );
