@@ -42,7 +42,6 @@ class AlwaysRemember extends React.Component {
         }
        else if(event.target.name == 2) {
         console.log('img2 is clicked')
-
         this.setState({
           img_url: this.state.imageSecondSrc,
           buttonSecond:!this.state.buttonSecond,
@@ -91,13 +90,11 @@ class AlwaysRemember extends React.Component {
 
   componentWillMount() {
     this.getAlwaysRememberData();
-    
   }
 
   
 
   render() {
-   
     return (
         <div className="remembersection clear fix">
           <div className="row">

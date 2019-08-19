@@ -19,7 +19,6 @@ class WardrobeBanner extends React.Component {
       title: '',
       description: '',
       type: ''
-
     };
   }
 
@@ -68,7 +67,7 @@ class WardrobeBanner extends React.Component {
           {!!kitchenSlider &&
             kitchenSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index}>
-                <img src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <img src={`${imagePrefix}${sliderData.imageSrc}`} alt={sliderData.alt} />
               </a>
             ))}
         </Slider>
