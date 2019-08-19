@@ -179,8 +179,7 @@ imageHeading: ""
                 <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}
-               {/* <h3 className="Name-Copy">{this.state.imgHeading}</h3>
-               <p className="This-project-require">{this.state.imageDescription}</p>  */}
+               
             
         </Slider>
       
