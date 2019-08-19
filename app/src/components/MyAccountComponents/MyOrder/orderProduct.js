@@ -1,6 +1,6 @@
 import React from 'react';
 import OrderStatusBar from './orderStatusBar';
-import {imagePrefix} from '../../../../public/constants/constants';
+import { imagePrefix } from '../../../../public/constants/constants';
 
 class ProductOrder extends React.Component {
   constructor(props) {
@@ -22,23 +22,27 @@ class ProductOrder extends React.Component {
   filterDeliveryInstallationTags() {
     if (this.props.prodctDataPro.shipmentData) {
       const shipmentData = this.props.prodctDataPro.shipmentData[0];
-      console.log('ddkdkd -- ',shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
-      if (shipmentData.expectedDeliveryDate !== '') {
-        console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
-        this.setState({
-          dsNameTag: 'DELIVERY ON',
-          dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
-        })
-      }
-      else if (shipmentData.expectedInstallationDate !== '') {
-        console.log('Installation -- ',shipmentData.installationDate)
-        if (shipmentData.installationDate === '') {
+      console.log('ssssss -- ', shipmentData);
+      if (shipmentData !== undefined) {
+
+
+        if (shipmentData.expectedDeliveryDate !== '') {
+          console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
           this.setState({
-            dsNameTag: 'INSTALLATION ON',
-            dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+            dsNameTag: 'DELIVERY ON',
+            dsDateTag: shipmentData.expectedDeliveryDate.split(',')[1]
           })
         }
-        
+        else if (shipmentData.expectedInstallationDate !== '') {
+          console.log('Installation -- ', shipmentData.installationDate)
+          if (shipmentData.installationDate === '') {
+            this.setState({
+              dsNameTag: 'INSTALLATION ON',
+              dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+            })
+          }
+
+        }
       }
     }
   }
@@ -84,8 +88,8 @@ class ProductOrder extends React.Component {
 
           </div>
           <div className='clearfix'></div>
-          { productData.shipmentData &&productData.shipmentData.length === 1 ?
-            <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap'/>
+          {productData.shipmentData && productData.shipmentData.length === 1 ?
+            <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap' />
             : null}
         </div>
       </>
