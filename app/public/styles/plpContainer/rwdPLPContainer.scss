@@ -72,7 +72,7 @@
     .sortLi {
       padding: 15px 20px 15px 20px;
       text-align: left;
-      color: #070707;
+      color: $ashGrey;
       font-size: 14px;
     }
 
@@ -90,14 +90,14 @@
 .filterOutterCont {
   height: 100%;
   width: 100%;
-  background-color: white;
+  background-color: $colorwhite;
   position: fixed;
   bottom: 45px;
   z-index: 100;
 
 .filter-data{
-  height: calc(100% - 100px);
-  overflow: scroll;
+  height: calc(100% - 103px);
+  overflow: auto;
   width: 100%;
 }
   .filterHeader {
@@ -112,23 +112,24 @@
       float: left;
       width: 20%;
       text-align: left;
-      margin: 60px 0px 0px 8px;
+      margin: 64px 0px 0px 8px;
+     font-family: $font-bold;
     }
 
     .clearTxt {
-      color: black;
-      font-size: 14px;
+      color: $black;
+      font-size: 12px;
       float: right;
-      width: 20%;
       text-align: left;
-      margin: 60px 8px 0px 8px;
+      margin: 60px 15px 0px 8px;
+      font-family: $font-regular;
     }
 
     &::after {
       content: " ";
       position: absolute;
       height: 1px;
-      background: #d1d1d2;
+      background: $lightblueGrey;
       left: 0px;
       width: 100%;
       bottom: 0px;
@@ -140,7 +141,7 @@
       content: " ";
       position: absolute;
       height: 1px;
-      background: #d1d1d2;
+      background: $lightblueGrey;
       left: 0px;
       width: 100%;
       top: 0px;
@@ -152,14 +153,14 @@
     bottom: 0;
 
     .cancelBtn {
-      color: black;
+      color: $black;
       font-size: 14px;
       float: left;
       width: 18%;
       text-align: center;
       margin: 0px;
       height: inherit;
-      background-color: white;
+      background-color: $colorwhite;
     }
 
     .applyBtn {
@@ -169,7 +170,7 @@
       width: 19%;
       text-align: center;
       margin: 0px;
-      background-color: black;
+      background-color: $black;
       height: inherit;
     }
   }
@@ -179,7 +180,7 @@
     width: 15%;
     position: fixed;
     bottom: 2.7%;
-    background-color: #f7f8f8;
+    background-color:$greybg;
 
     .facetList {
       padding: 20px;
@@ -281,7 +282,16 @@
         display: block;
         width: 100%;
         float: left;
-  
+        .filter-data-list{
+          max-height: calc(100vh - 118px);
+          overflow: auto;
+          float: left;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 110px;
+
+        }
         &__filter {
           background-color: $greybg;
           border-bottom: 1px solid $lightgrey;
@@ -318,7 +328,7 @@
           visibility: hidden;
           height: 100%;
           right: 0px;
-          top: 110px;
+          
           background: transparent;
           width: 64%;
 
@@ -327,10 +337,12 @@
           }
   
           &--active {
-            max-height: calc(100vh - 118px);
+            /*max-height: calc(100vh - 118px);
+            overflow: scroll;*/
             visibility: visible;
-            overflow: scroll;
             background:$colorwhite;
+            display: inline-table;
+            top:0px;
           }
           .list {
             display: block;
@@ -437,10 +449,13 @@
         &__list-item {
           cursor: pointer;
           list-style: none;
-          padding: 15px 9px;
+          padding: 13px 9px;
           position: relative;
           display: flex;
           font-size: 12px;
+          font-family: $font-light;
+          line-height: 16px;
+          color:$ashGrey;
           
           .selectedFacet {
             color: #036cc5;
@@ -478,6 +493,7 @@
           bottom: 0px;
           width: 100%;
           left: 0px;
+          z-index: 9;
           .btn {
             padding: 12px 0px;
             border-radius: 0;
