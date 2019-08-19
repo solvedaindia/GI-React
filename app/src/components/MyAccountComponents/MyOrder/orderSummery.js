@@ -13,16 +13,17 @@ class OrderSummery extends React.Component {
   }
 
   render() {
-    console.log('summery ddd invo9cdee -- ', this.props.invoiceDataPro)
+    
     const summeryData = this.props.summeryDataro;
     const addressData = this.props.addressDataPro;
-
+    console.log('summery ddd invo9cdee -- ', addressData.pincode)
     return (
       <div className="summerydata">
         <div className="orderList">
           <h4 className="heading">Delivery Address</h4>
-          <p className="subheading">{addressData.name ? addressData.name : null}</p>
-          <p className="address">{`${addressData.address ? addressData.address : null}, ${addressData.city ? addressData.city : null}, ${addressData.state ? addressData.state: null}, ${addressData.pincode ? addressData.pincode : null}`}</p>
+          {addressData ? <><p className="subheading">{addressData.name !== undefined ? addressData.name : null}</p>
+          <p className="address">{`${addressData && addressData.address !== undefined ? addressData.address : null}, ${addressData.city !== undefined ? addressData.city : null}, ${addressData.state !== undefined ? addressData.state: null}, ${addressData.pincode !== undefined ? addressData.pincode : null}`}</p></>: null }
+          
            <ul className="invoiceList">
             {this.props.invoiceDataPro.map((data, key) => {
               return (
