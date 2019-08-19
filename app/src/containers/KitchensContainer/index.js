@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import  '../../../public/styles/static-pages/kitchens.scss'
-import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
+// import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
@@ -11,7 +11,7 @@ import InterioText from '../../components/KitchensComp/interiotext';
 import LayoutImage from '../../components/KitchensComp/layoutImage';
 import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
 import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
-
+import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import {Link} from 'react-router-dom'
 
 
@@ -43,11 +43,11 @@ export default class Kitchens extends React.Component {
                   <WhatGoes />
                 </div>
               </div>
-              <div className='AlwaysRememberParent'>
+              {/* <div className='AlwaysRememberParent'>
                 <div className='container'>
                   <AlwaysRemember />
                 </div>
-              </div>
+              </div> */}
               <div className="kitchenHallLayout">
                 <KitchenHall />
               </div>
@@ -159,7 +159,8 @@ export default class Kitchens extends React.Component {
                 </div>
               </div>
               {/*
-              <FaqEspot /> */}
+			  <FaqEspot /> */}
+			  <KitchenStore />
               <InterioText />
             </div>
         )
