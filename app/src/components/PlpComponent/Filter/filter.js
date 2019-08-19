@@ -344,7 +344,7 @@ class Filter extends React.Component {
             }`}
           >
             {this.state.facetItem}
-            <div className='clearfix'></div>
+            {!isMobile() && <><div className='clearfix'></div>
             <div className="filterbtnWrapper">
               <button
                 onClick={() => this.onCancelBtnClick()}
@@ -358,8 +358,23 @@ class Filter extends React.Component {
               >
                 Apply
               </button>
-            </div>
+            </div></>}
           </ul>
+          {isMobile() && <><div className='clearfix'></div>
+            <div className="filterbtnWrapper">
+              <button
+                onClick={() => this.onCancelBtnClick()}
+                className="dropdown_filter__cancelBtn btn"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => this.onApplyBtnClick()}
+                className="dropdown_filter__applyBtn btn"
+              >
+                Apply
+              </button>
+            </div></>}
         </div>
       </>
     );
