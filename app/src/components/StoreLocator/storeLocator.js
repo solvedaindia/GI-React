@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import apiManager from '../../utils/apiManager';
-import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps";
+import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import { storeAPI, storeCityAPI, storeById, mapKey } from '../../../public/constants/constants';
@@ -309,6 +309,7 @@ class StoreLocator extends React.Component {
                 defaultCenter={{lat: parseFloat(this.state.defaultLat), lng: parseFloat(this.state.defaultLng)}}  
             >
                 {storeData.map((item, index) => {
+                    const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, item.latitude, item.longitude);
                     let iconType = orangeIcon;
                     if(item.ownership === 'Godrej Interio Store') {
                         iconType = blueIcon;
@@ -316,19 +317,23 @@ class StoreLocator extends React.Component {
                     return(
                         <div key={index}>
                             <Marker
-                                // onClick={() => this.handleToggleOpen(index)} 
+                                onClick={() => this.handleToggleOpen(index)} 
                                 position={{lat: parseFloat(item.latitude), lng: parseFloat(item.longitude)}} 
                                 icon={{
                                     url: iconType,
                                 }}
                             >
-                                {/* { this.state.Infokey === index && this.state.isOpen &&
+                                { this.state.Infokey === index && this.state.isOpen &&
                                     <InfoWindow onCloseClick={() => this.handleToggleClose}>
                                         <div>
                                             <h4>{item.storeName}</h4>
+                                            { this.props.history.location.state.pincode &&
+                                                <p>{data} Km</p>
+                                            }
+                                            <p>{item.storeHours}</p>
                                         </div>
                                     </InfoWindow>
-                                } */}
+                                }
                             </Marker>
                         </div>
                     )
