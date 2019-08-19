@@ -330,7 +330,7 @@ class StoreLocator extends React.Component {
                                             { this.props.history.location.state.pincode &&
                                                 <p>{data} Km</p>
                                             }
-                                            <p>{item.storeHours}</p>
+                                            <p>{item.storeHours && item.storeHours}</p>
                                         </div>
                                     </InfoWindow>
                                 }
