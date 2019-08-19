@@ -10,7 +10,6 @@ import {
 } from '../../../public/constants/constants';
 import ThemeListData from './themeList';
 
-let catID;
 class LivingTheme extends React.Component {
 	constructor(props) {
 		super(props);
@@ -21,13 +20,10 @@ class LivingTheme extends React.Component {
 			showPopup: false
 		};
 	  }
-  contentShowDetails() {
-    console.log('CLICKED');
-  }
 
-  getThemeData() {
+  getThemeData(id) {
   	apiManager
-  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${catID}`)
+  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${id}`)
   		.then(response => {
   			this.setState({
 				themeData: response.data.data,
@@ -37,15 +33,16 @@ class LivingTheme extends React.Component {
   		})
   		.catch(error => this.setState({ error, isLoading: false }));
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if(this.props.id !== nextProps.id){
+      console.log('Next Props ID', nextProps);
+      this.getThemeData(nextProps.id);
+    }
+  }
 
   componentDidMount() {
-	const path = String(window.location.pathname);
-    const idStr = path.split('/')[2];
-    const categoryName = idStr;
-    if (idStr != undefined && idStr !== catID) {
-      catID = categoryName;
-    }
-  	this.getThemeData();
+  	this.getThemeData(this.props.id);
   }
 
   render() {
