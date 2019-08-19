@@ -107,9 +107,10 @@ class MyOrder extends React.Component {
 
     if (!this.state.isPastOrdeShown && !this.state.isOnGoingOrderShown) {
       var tagOutput;
-      var isInstallationRequired = false;
+      var isInstallationRequired = true;
       data.orderItems.map(item => {
-        if (item.installationRequired) {
+        
+        if (item.installationRequired === 'N') {
           isInstallationRequired = true;
         }
       })

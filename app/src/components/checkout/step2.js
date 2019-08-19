@@ -609,8 +609,9 @@ export class Step2Component extends React.Component {
               access_token: token
             }
           }).then((resp) => {
-            console.log(res, "precheckout response");
+            
             const inventoryFlag = resp.data.data.reserved;
+            console.log("precheckout response ----",inventoryFlag, resp.data);
             if (inventoryFlag === '0') {
               alert('One or more item in you cart is Out Of Stock.')
               window.location.assign('/cart')
@@ -626,7 +627,7 @@ export class Step2Component extends React.Component {
             
           }).catch((err) => {
             console.log(err, "precheckout err");
-            resolve()
+            reject()
           })
         }).catch((err) => {
           console.log(body, err, "add address to cart response");
