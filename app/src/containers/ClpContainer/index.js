@@ -15,25 +15,25 @@ import Solution from '../../components/ClpComponent/solution';
 export class CLPContainer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       clpData: {},
       isLoading: false,
       error: null,
     };
+    console.log('CLP Props', props);
   }
 
   render() {
     return (
       <section className="clpBase">
         <div className="slider">
-          <CLPFullBanner />
+          <CLPFullBanner {...this.props.match.params}/>
 		    </div>
-          <SubCategory />
-          <LivingTheme />
-          <BestSeller />
+          <SubCategory {...this.props.match.params}/>
+          <LivingTheme {...this.props.match.params}/>
+          <BestSeller {...this.props.match.params}/>
           {/* <Solution /> */}
-          <CLPReadMore />
+          <CLPReadMore {...this.props.match.params}/>
       </section>
     );
   }
