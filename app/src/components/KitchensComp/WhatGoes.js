@@ -69,7 +69,7 @@ imageHeading: ""
     };
     return (
       <div className="goesOnKitchen">
-            <h1 className="What-goes-into-a-Godr">{this.state.title}</h1>
+            <h1 className="title">{this.state.title}</h1>
             <Slider {...settings}>
             {!!whatGoesSlider &&
               whatGoesSlider.map((sliderData, index) => (

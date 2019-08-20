@@ -46,7 +46,7 @@ class EasyStepsEspot extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div>
+			<div className='kitchenEspots'>
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)

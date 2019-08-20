@@ -43,7 +43,7 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
-import Kitchens from '../KitchensContainer/index';
+import Kitchens from '../KitchensContainer/kitchenContainer';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer/index';

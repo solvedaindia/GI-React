@@ -59,6 +59,7 @@
 }
 
 .faqContainer {
+    margin: $base*7.5 auto;
     .panel-group {
         width: 80%;
         margin: auto;
@@ -90,3 +91,69 @@
         }
     }
 }   
+
+.kitchenEspots {
+    // @include container-width;
+    margin: 60px auto;
+}
+.beforeAfter {
+    margin: 120px auto;
+}
+
+.goesOnKitchen{
+    width: 70%;
+    margin: 60px auto;
+}
+.ourPromis {
+    width: 100%;
+}
+
+.formContainer {
+    position: relative;
+    width: 100%;
+    margin: 60px auto;
+    .bgImg {
+        width: 100%;
+    }
+    .formDetails {
+        width: 75%;
+        left: 12.5%;
+        background-color: #fff;
+        position: absolute;
+        top: 15%; 
+        padding: $base*7.5 $base*15;
+        .title {
+            margin: $base*4 0 0;
+        }
+        .desc {
+            text-align: center;
+            margin: $base*1.5 0 $base*7.5;
+        }
+        .form-labeled {
+            color: $battleshipGrey;
+            font-family: $font-medium;
+            font-size: $base*1.75;
+        }
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            -webkit-transition: unset;
+            -o-transition: unset;
+            -webkit-transition: unset;
+            transition: unset;
+            transition: unset;
+            height: $base*6.75;
+        }
+        .btn-submit {
+            border-radius: unset;
+            float: right;
+            padding: $base;
+            width: $base*41;
+            background-color: $black;
+            color: $colorwhite;  
+        }
+    }
+}
+

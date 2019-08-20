@@ -70,9 +70,9 @@ beforeSlide = () => {
     const after = {afterImg}
  
     return (
-      <>
+      <div className='beforeAfter'>
 		<ReactCompareImage leftImage={imagePrefix + '/staticImages/kitchens/typekitchfirst.png'} rightImage={imagePrefix + '/staticImages/kitchens/typekitchsecond.png'} />
-      </>
+      </div>
      
     )
   }
