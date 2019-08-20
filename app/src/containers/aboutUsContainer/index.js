@@ -10,20 +10,22 @@ import {
   espotAPI,
   storeId,
   accessToken,
+  imagePrefix,
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
-const paraFirst = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
-do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
-veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf`
-const paraSecond = `Lottie has graduated from hyderabad dolor sit amet, consecuter adipisicing elit,sed
-do eiusmod tempor incididunt ut labour el dolore magna eliqua.Ut enim ad minim
-veniam,qois nostrud exercitation ullacamo laboris nisi ut aliqion commodf
-conseqya.Lorem ipsum dolor sit amet, consecutetur adipisicing elit, sed do eiumsod tempor
-incididunt ul labore et dolore magna eliqua.ut enim ad minim veniam,quis nostrud
-exercitation ullacamo laboris nisi aliqion ex ea commodo conseqya.`;
-const img = 'https://192.168.0.57/imagestore/staticImages/aboutUs/teach.jpg';
-const images = 'https://192.168.0.57/imagestore/staticImages/aboutUs/ourprocessimg.jpg';
+const paraFirst = `The Phase Zero is where we lay the foundation to any project. The first step towards initiating a New Product Development is the Marketing brief, followed by the Research and Study, where the ideas are sculpted and given form. Then, the concept is validated and improvised followed by photo-rendering to give clarity of design and structure.
+It is at this level that the Target Green Quotient of this product is defined.
+`;
+const paraSecond = `The Final product is further refined, and the product prototype is tested for the possible product abuse. For every new and critical process in the design manufacturing, we collaborate with vendors and suppliers to work out the details and preserve the idea.
+A final prototype is made if any corrections post testing is required, and this is also checked for the fit and finish. 
+`;
+const paraThird = `The work in this phase involves actual development of all tools, jigs, fixtures, gauges and special purpose machines and its verification to ensure smooth production of the product. It also includes the Pilot lot production for the final approval for launch. The Design Team contributes to supporting the product managers with requisite documents to prepare the launch communications.
+`;
+const paraForth = `This phase focuses on making the launch of the product successful by ensuring training, communication, in-store display, and visual merchandising. Besides introducing the product/ solution in an effective manner, this phase also focuses on improvements. Post the first few order executions, a team of the product managers and designers visit the customers to understand their experiences and gather feedback for improvements.
+`
+const img = `${imagePrefix}/staticImages/aboutUs/teach.jpg`
+const images = `${imagePrefix}/staticImages/aboutUs/ourprocessimg.jpg`
 
 export class AboutUs extends React.Component {
   constructor(props) {
@@ -45,7 +47,7 @@ handleclick = event => {
     if(event.target.name == 1) {
         this.setState({
             img_url: img,
-            content: paraFirst,
+            content: paraSecond,
             button1: 'active',
             button2: false,
             button3: false,
@@ -58,7 +60,7 @@ handleclick = event => {
    else if(event.target.name == 2) {
     this.setState({
       img_url: images,
-      content: paraSecond,
+      content: paraThird,
       button2: 'active',
       button1: false,
       button3: false,
@@ -71,7 +73,7 @@ handleclick = event => {
 else if(event.target.name == 3) {
   this.setState({
       img_url:img,
-      content: paraFirst,
+      content: paraForth,
       button3: 'active',
       button1: false,
       button2: false,

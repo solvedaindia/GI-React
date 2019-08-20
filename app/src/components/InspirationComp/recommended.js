@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/inspiration.scss'
+import  '../../../public/styles/static-pages/InspirationDetails.scss'
 
 export default class Recommended extends Component {
   constructor(props) {
@@ -36,16 +36,17 @@ export default class Recommended extends Component {
     
     };
     return (
-        <div>
       <div className="container">
         <h2 className="RecHead">Recommended Lookbooks</h2>
-        </div>
+       
 
         <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>
-                <h3>{slide} <div className="crousdiv"><h1 className="subheadet">Talking Textures</h1><p className="Paragraph-Copy-133">The new way to style velvet in your living room lorem<br/>ipsum </p></div></h3>
+                {slide} <div className="crouselImg">
+                  <h1 className="recTitle">Talking Textures</h1>
+                  <p className="paragraph">The new way to style velvet in your living room lorem<br/>ipsum</p></div>
               </div>
             );
           })}
