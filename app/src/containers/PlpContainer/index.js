@@ -545,7 +545,7 @@ export class PlpContainer extends React.Component {
     if (this.state.productCount !== null && plpData.length != 0) {
       productCountItem = (
         <div className="headingSubTitle">
-          (Produts {this.state.productCount})
+          ({this.state.productCount} Produts)
         </div>
       );
     }

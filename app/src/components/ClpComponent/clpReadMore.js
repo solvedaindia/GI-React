@@ -6,7 +6,6 @@ import {
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
 
-let catID;
 class CLPReadMore extends React.Component {
   constructor(props) {
     super(props);
@@ -18,9 +17,9 @@ class CLPReadMore extends React.Component {
     };
   }
 
-  	getReadMoreData() {
+  	getReadMoreData(id) {
     apiManager
-      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${catID}`)
+      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id}`)
 		.then(response => {
 			const {data} = response || {};
 			this.setState({
@@ -34,15 +33,16 @@ class CLPReadMore extends React.Component {
 			});
 		});
   	}
+    
+  componentWillReceiveProps(nextProps) {
+    if(this.props.id !== nextProps.id){
+      console.log('Next Props ID', nextProps);
+      this.getReadMoreData(nextProps.id);
+    }
+  }
 
   componentDidMount() {
-    const path = String(window.location.pathname);
-    const idStr = path.split('/')[2];
-    const categoryName = idStr;
-    if (idStr != undefined && idStr !== catID) {
-      catID = categoryName;
-    }
-    this.getReadMoreData();
+  	this.getReadMoreData(this.props.id);
   }
 
   render() {

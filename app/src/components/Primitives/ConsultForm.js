@@ -1,13 +1,9 @@
 import React from 'react';
-import '../../../public/styles/static-pages/warobes.scss';
+// import '../../../public/styles/static-pages/warobes.scss';
 import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
-
-
-
-
 
 class ConsultForm extends React.Component {
   constructor() {
@@ -133,10 +129,9 @@ onDropdownSelected = (e) => {
       const{name, email,mobileNumber,message, dropDownValue} = this.state
       console.log('test=>', this.state)
         return (
-          <form>
-            <div>
-            <h2 className="Book-a-consultation">Book a consultation</h2>
-                  <p className="FormPAra">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          <form className='consultForm'>
+            <h2 className="title">Book a consultation</h2>
+              <p className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
               <div className="row">
                 <div className="col-md-6 ">
@@ -164,8 +159,6 @@ onDropdownSelected = (e) => {
                       <select name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
                         <option value='null'>Select an option</option>
                          {this.createSelectItems()}
-                        
-                       
                       </select>
                     </div>
                   </div>
@@ -194,12 +187,11 @@ onDropdownSelected = (e) => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <button type="button" onClick={this.submitForm} className="btn btn-primary send-div">Send</button>
+                      <button type="button" onClick={this.submitForm} className="btn btn-primary btn-submit">Send</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
           </form>
         );
     }

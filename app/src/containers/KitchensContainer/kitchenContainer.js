@@ -1,3 +1,9 @@
+/**
+ *
+ * KitchenContainer
+ *
+ */
+
 import React from 'react';
 import  '../../../public/styles/static-pages/kitchen.scss';
 import { imagePrefix } from '../../../public/constants/constants';
@@ -14,60 +20,36 @@ import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
 import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 
-export class Kitchens extends React.Component {
-    constructor(props){
-        super(props);
-      
+export class KitchenContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      error: null,
+    };
+  }
 
-        this.state = {
-       }
-    }
-
-    render(){
-        return (
-            <div className="Kitchen-1">
-              <div className="kitchensBannerLayout">
+  render() {
+    return (
+        <section className="kitchenContainer">
+            <div className="slider">
                 <KitchenBanner />
-                <div className="container1">
-                  <div className="kitchensBannertext">
-                    <a href='#consultForm'><button className="btn-book">Book A Consultation</button></a>
-                  </div>
-                </div>
+            </div>
+            <KitchenTypesEspot />
+            <EasystepsEspot />
+            <LayoutImage />
+            <WhatGoes />
+            <KitchenHall />
+            <BeforeAfter />
+            <div className="formContainer">
+              <img className="bgImg" src={`${imagePrefix}/staticImages/kitchens/whatgoesimg.png`} alt="Snow" />
+              <div id='consultForm' className='formDetails'>
+                <ConsultationForm />
               </div>
-              <KitchenTypesEspot />
-              <EasystepsEspot />
-              <LayoutImage />
-              <div className="whatgoesSlider">
-                <div className="container">
-                  <WhatGoes />
-                </div>
-              </div>
-              {/* <div className='AlwaysRememberParent'>
-                <div className='container'>
-                  <AlwaysRemember />
-                </div>
-              </div> */}
-              <div className="kitchenHallLayout">
-                <KitchenHall />
-              </div>
-              <div className="beforeAfterSlides">
-                <div className="container">
-                  <BeforeAfter />
-                </div>
-              </div>
-              <div className="formContainer">
-                <div className="container">
-                  <img className="formBackGroundCover" src={`${imagePrefix}/B2C/56101543SD00009/56101543SD00009_A1_803x602.jpg`} alt="Snow" />
-                  <div id='consultForm' className="Form-bakground">
-                    <ConsultationForm />
-                  </div>
-                </div>
-              </div>
-              <div className="ourprom">
-                <OurPromises />
-              </div>
-              <div className="faqContainer">
-                <h1 className="title">Frequently asked questions</h1>
+            </div>
+            <OurPromises />
+            <div className="faqContainer">
+              <h1 className="title">Frequently asked questions</h1>
                 <div className="container">
                   <div className="panel-group" id="accordion">
                     <div className="panel panel-default">
@@ -156,14 +138,12 @@ export class Kitchens extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              {/*
-			  <FaqEspot /> */}
+            </div>
               <KitchenStore />
               <InterioText />
-            </div>
-        )
-    }
+        </section>
+    );
+  }
 }
 
-export default Kitchens;
+export default KitchenContainer;

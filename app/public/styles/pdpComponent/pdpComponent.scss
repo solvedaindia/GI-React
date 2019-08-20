@@ -1789,15 +1789,39 @@
                         }
 
                     &.fullscreen{
+                        background: $colorwhite;
+                        .image-gallery-slide-wrapper{
+                            .image-gallery-swipe{
+                                .image-gallery-slides{
+                                    .image-gallery-slide{
+                                        background: $colorwhite;
+                                        .image-gallery-image{
+                                            align-items: center;
+                                            justify-items: center;
+                                            display: flex;
+                                            img{
+                                                min-width: initial;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         .image-gallery-thumbnails-wrapper{
                             .image-gallery-thumbnails{
                                 margin: -90px auto 20px auto;
                                 .image-gallery-thumbnails-container{
                                     .image-gallery-thumbnail{
+                                        border-radius:0;
                                         width: 75px;
                                         height: auto;
                                         .image-gallery-thumbnail-inner{
                                             display: block;
+                                        }
+
+                                        &.active{
+                                            background: none;
+                                            border: 1px solid $colorblack;
                                         }
                                     }
                                 }
