@@ -147,14 +147,12 @@
           }
           .heading{
             margin: 0 0 16px 0;
-            font-size: $base*2.5;
             color:$black;
             font-family: $font-bold;
           }
           .text{
             color:$battleshipGrey;
             font-family: $font-regular;
-            font-size: 14px;
             line-height: 20px;
             margin: 0 0 28px 0;
           }
@@ -227,6 +225,14 @@
               padding: 12px 60px;
             }
           }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.5;
+            }
+            .text{
+              font-size: 14px;
+            }
+          } 
         }
       }
     }
@@ -321,6 +327,15 @@
             .btn-save{
               margin: 0px;
             }
+          }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.25;
+            }
+            .text{
+              font-size: 12px;
+            }
+
           } 
         }
         .mobileView{
@@ -331,6 +346,15 @@
           }
           .btn-save {
             margin:0;
+          }
+        }
+        .actionBtnWrapper {
+          &.mobileView{
+            .btn-cancel{
+              border-width: 1px 0px 1px 0px;
+              border-style: solid;
+              border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+            }
           }
         }
       }

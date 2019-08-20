@@ -292,7 +292,7 @@ export class HeaderMobile extends React.Component {
                   className="navTxt"
                 >
                   {categoryData.categoryName}
-                  {categoryData.subCategoryArray.length > 1 ? (
+                  {categoryData.subCategoryArray.length > 0 ? (
                     <span className="arrow">
                       <img
                         src={require('../../../../public/images/nav_next.svg')}
