@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  '../../../public/styles/static-pages/inspiration.scss'
+import '../../../public/styles/static-pages/InspirationDetails.scss'
 import Lookbook from '../../components/LookbookComponent/lookbbook'
 import Recommended from '../../components/InspirationComp/recommended.js';
 
@@ -10,10 +10,10 @@ class InspirationDetails extends React.Component {
 
     render(){
         return(
-            <div className="inspiration-details"><br/><br/><br/><br/>
-               <h1 className="Summer-Spark-Text">Summer Spark</h1>
-               <p className="Paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra<br/> malesuada mi. Nam rutrum vulputate lectus vel tincidunt.  Curabitur turpis augue, accumsan ut turpis at, finibus<br/> vulputate augue. Suspendisse ultrices eget ipsum quis dapibus. Aliquam turpis erat, viverra quis est sed.</p>
-                <div className="container">
+            <div className="inspirationDetails">
+               <h1 className="title">Summer Spark</h1>
+               <p className="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra<br/> malesuada mi. Nam rutrum vulputate lectus vel tincidunt.  Curabitur turpis augue, accumsan ut turpis at, finibus<br/> vulputate augue. Suspendisse ultrices eget ipsum quis dapibus. Aliquam turpis erat, viverra quis est sed.</p>
+                {/* <div className="container">
                 < Lookbook/>
                 <div className="text-blocker">
                     <div className="row">
@@ -32,7 +32,7 @@ class InspirationDetails extends React.Component {
                  </div>
 
                </div>
-               <Recommended/>
+               <Recommended/> */}
 
                 </div>
 
