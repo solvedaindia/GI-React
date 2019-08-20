@@ -55,10 +55,8 @@ class TopContainer extends React.Component {
         <div className='product-desc'>
           <h2 className='product-name'>{this.props.product.name} </h2>
           <p className='description-text'>{this.props.product.shortDescription}</p>
-          {this.props.product.price[1].value ? <Price
-            actualPrice={this.props.product.price[0].value}
-            offerPrice={this.props.product.price[1].value}
-          /> : 0}
+          {/* {this.props.product.price[1].value ? <Price actualPrice={this.props.product.price[0].value} offerPrice={this.props.product.price[1].value} /> : 0} */}
+          <Price actualPrice={this.props.product.actualPrice} offerPrice={this.props.product.offerPrice} />
           <p className='emi-desc'>EMI Starting from {this.props.product.minimumEMI ? this.props.product.minimumEMI : 0}</p>
         </div> 
     
