@@ -20,8 +20,8 @@ class PdpContainer extends React.Component {
 
   componentDidMount() {
     this.callPdpApi();
-	this.callPdpEspotApi();
-	this.callPdpPromoTandC();
+	  this.callPdpEspotApi();
+	  this.callPdpPromoTandC();
   }
 
 	callPdpApi() {
