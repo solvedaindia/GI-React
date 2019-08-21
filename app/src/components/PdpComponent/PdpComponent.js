@@ -65,6 +65,12 @@ class PdpComponent extends React.Component {
 					this.getActualResolvedData(this.props.data.kitData, skuLevelData, this.props.data.type);
 				}
 			});
+		} else if(this.props.data.type === 'bundle') {
+			this.props.data.bundleData.map(skuLevelData => {
+				if (skuId === skuLevelData.uniqueID) {
+					this.getActualResolvedData(this.props.data.bundleData, skuLevelData, this.props.data.type);
+				}
+			});
 		}
 	}
 
@@ -83,7 +89,7 @@ class PdpComponent extends React.Component {
 				});
 			});
 		});
-		} else if (type === 'kit') {
+		} else if (type === 'kit' || type === 'bundle') {
 			resolvedSkuData.swatchAttributes.map(dataVal => {
 			data.map(skuLevelData => {
 				skuLevelData.swatchAttributes.map(attributeValue => {
@@ -118,12 +124,15 @@ class PdpComponent extends React.Component {
 			productSkuData = this.props.data.kitData;
 		} else if (this.props.data.type === 'product') {
 			productSkuData = this.props.data.skuData;
+		} else if (this.props.data.type === 'bundle') {
+			productSkuData = this.props.data.bundleData;
 		}
+
 		const selectedSwatches = this.handleSelectedSwatches(count);
 		for (let j = 0; j < selectedSwatches.length; j++) {
 			swatches = new Array();
 			productSkuData.map(skuLevelData => {
-				if (this.props.data.type === 'kit') {
+				if (this.props.data.type === 'kit' || this.props.data.type === 'bundle') {
 					skuLevelData.swatchAttributes.map((attributeValue, index) => {
 						if (selectedSwatches[j] === attributeValue.values[0].name) {
 						swatches.push(skuLevelData);
@@ -200,7 +209,7 @@ class PdpComponent extends React.Component {
 
 	getAttributeTypeData(props) {
 		let attributeData;
-		if(props.type === 'kit') {
+		if(props.type === 'kit' || props.type === 'bundle') {
 			attributeData =  props.swatchAttributes;
 		} else if (props.type === 'product') {
 			attributeData =  props.defAttributes;
@@ -296,7 +305,7 @@ class PdpComponent extends React.Component {
 	if (!isLoading) {
 		if (this.props.data.type === 'product') {
 			stateAttr = this.state.skuData.defAttributes
-		} else if (this.props.data.type === 'kit') {
+		} else if (this.props.data.type !== 'product') {
 			stateAttr = this.state.skuData.swatchAttributes;
 		}
 	}
@@ -448,7 +457,7 @@ class PdpComponent extends React.Component {
 			  { this.props.data.type === 'product' ? (
 				  <ProductFeatures productFeatureData={this.props.data} />
 			  ) : (
-				  <>{ !isLoading && this.props.data.type === 'kit' && <ProductFeatures productFeatureData={this.state.skuData}/>}</>
+				  <>{ !isLoading && this.props.data.type !== 'product' && <ProductFeatures productFeatureData={this.state.skuData}/>}</>
 			  )}
 		  	</>
             ) : (
@@ -456,7 +465,7 @@ class PdpComponent extends React.Component {
 				{this.props.data.type === 'product' ? (
 					<MobileProductFeatures productFeatureData={this.props.data}/> 
 				) : (
-					<>{ !isLoading && this.props.data.type === 'kit' && <MobileProductFeatures productFeatureData={this.state.skuData}/>}</>
+					<>{ !isLoading && this.props.data.type !== 'product' && <MobileProductFeatures productFeatureData={this.state.skuData}/>}</>
 				)}
 				</>
             )
@@ -469,7 +478,7 @@ class PdpComponent extends React.Component {
 					{ this.props.data.type === 'product' ? (
 						<PurchaseGuide purchaseGuide={this.props.data} />
 					) : (
-						<>{ !isLoading && this.props.data.type === 'kit' && <PurchaseGuide purchaseGuide={this.state.skuData}/>}</>
+						<>{ !isLoading && this.props.data.type !== 'product' && <PurchaseGuide purchaseGuide={this.state.skuData}/>}</>
 					)}
 				</>
             ) : ( 
@@ -477,7 +486,7 @@ class PdpComponent extends React.Component {
 					{this.props.data.type === 'product' ? (
 						<MobilePurchaseGuideGuide purchaseGuide={this.props.data}/>
 					) : (
-						<>{ !isLoading && this.props.data.type === 'kit' && <MobilePurchaseGuideGuide purchaseGuide={this.state.skuData}/>}</>
+						<>{ !isLoading && this.props.data.type !== 'product' && <MobilePurchaseGuideGuide purchaseGuide={this.state.skuData}/>}</>
 					)}
 				</>
             )}
@@ -505,7 +514,7 @@ class PdpComponent extends React.Component {
 		  		{ this.props.data.type === 'product' ? (
 					<ProductKeywords productKeywords={this.props.data} />
 				) : (
-					<>{ !isLoading && this.props.data.type === 'kit' && <ProductKeywords productKeywords={this.state.skuData}/>}</>
+					<>{ !isLoading && this.props.data.type !== 'product' && <ProductKeywords productKeywords={this.state.skuData}/>}</>
 				)}
           </Row> 
           <Row>

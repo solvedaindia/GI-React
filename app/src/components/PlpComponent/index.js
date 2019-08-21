@@ -41,7 +41,7 @@ class PlpComponent extends React.Component {
   }
 
   handleAddProduct = product => {
-    const compPrd = this.props.compData.find(prd => prd.id == product.id);
+    const compPrd = this.props.compData.find(prd => prd.skuId == product.skuId);
     const compCat = this.props.compData.find(
       prd => prd.catId == this.props.catId,
     );

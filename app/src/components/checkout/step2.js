@@ -631,7 +631,7 @@ export class Step2Component extends React.Component {
           })
         }).catch((err) => {
           console.log(body, err, "add address to cart response");
-          resolve();
+          reject();
         })
       }).catch((err) => {
         reject(err);
