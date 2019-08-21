@@ -563,6 +563,9 @@
     margin: 45px 0 0 0;
     padding: 32px 24px 53px 24px;
     background: $greybg;
+    .paddingRight{
+      padding-right:9px;
+    }
     .heading-details {
       font-size: 24px;
       color: $black;
@@ -601,6 +604,21 @@
     }
     .itemOrderdata{
         background: $colorwhite;
+        margin: 0 0 24px 0;
+        border: 1px solid #eeeded;
+        .borderLeft{
+          border-left: 1px solid #eeeded;
+        }
+        .itemImg{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 7px 0 0px;
+          min-height: 145px;
+          .imgFullwidth{
+            width: 100%;
+          }
+        }
         .itemText{
             padding:20px 0 36px 0;
             .heading{
@@ -632,10 +650,17 @@
                 margin:8px 0 12px 0; 
             }
             .priceHeading{
-                margin:0;
-                font-size: 10px;
+                margin:0 0 8px 0;
+                font-size: $base*1.25;
+                line-height: $base*1.25;
                 font-family: $font-medium;
                 color:$battleshipGrey;
+            }
+            .priceVal{
+              color: $cerulean;
+              font-family: $font-bold;
+              font-size: $base*2;
+              line-height: $base*2;
             }
         }
     }
