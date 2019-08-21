@@ -7,6 +7,30 @@
   .inspirationDetails {
     height: auto;
 width:100%;
+.recImages{
+
+
+}
+.recommendedLookbook{
+    .slick-slide{
+        margin:0 15px 0 0;
+    }
+    .crouseltextarea{
+        .heading{
+            font-size: 20px;
+            line-height: 20px;
+            font-family: $font-medium;     
+            margin: 21px 0 0 0;       
+        }
+        .subText{
+            text-align: left;
+            font-size: 14px;
+            line-height: 14px;
+            font-family: $font-regular;
+            margin:10px 0 0 0;
+        }
+    }
+}
 .title{
     color: #000000;
     padding: 89px 0 0 0;
@@ -14,12 +38,13 @@ width:100%;
     font-family: $font-medium;
     font-size: 30px;
 }
-.recTitle{
+.recommendedTitle{
     color: #000000;
     padding: 89px 0 0 0;
     text-align: left;
     font-family: $font-medium;
     font-size: 30px;
+    margin:0 0 32px 0;
 }
 .paragraph{
     line-height: 26px;
@@ -28,10 +53,7 @@ width:100%;
     font-family: $font-regular;
     font-size: 14px;
 }
-.crouselImg{
-width:30%;
 
-}
 }
 
   
