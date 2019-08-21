@@ -255,4 +255,39 @@ export function updateWidgetData(data, obj) {
 
 export function formatPrice(priceValue) {
     return parseInt(priceValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}   
+}
+
+/** -----------------------------------------------------------------------
+ * Function to map Payment Method Id
+ * @param {*} PaymentMode
+ */
+export function mapPaymentMethodMode(paymentMode) {
+    if (paymentMode === 'CREDIT_CARD') {
+        return 'Credit Card';
+    }
+    else if (paymentMode === 'DEBIT_CARD') {
+        return 'Debit Card';
+    }
+    else if (paymentMode === 'NET_BANKING') {
+        return 'Netbanking';
+    }
+    else if (paymentMode === 'UPI') {
+        return 'UPI';
+    }
+    else if (paymentMode === 'CC_EMI') {
+        return 'EMI';
+    }
+    else if (paymentMode === 'MOBIKWIK') {
+        return 'Mobikwik';
+    }
+    else if (paymentMode === 'PHONEPE') {
+        return 'PhonePe';
+    }
+    else if (paymentMode === 'PAYTM') {
+        return 'PayTM';
+    }
+    else {
+        return '';
+    }
+
+}

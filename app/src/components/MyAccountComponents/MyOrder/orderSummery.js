@@ -1,6 +1,7 @@
 import React from 'react';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
+import { mapPaymentMethodMode } from '../../../utils/utilityManager';
 
 class OrderSummery extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class OrderSummery extends React.Component {
 
         <div className="orderList paymentmethod">
           <h4 className="heading">Payment Method</h4>
-          <p className="subheading">{this.props.paymentMethodPro}</p>
+          <p className="subheading">{mapPaymentMethodMode(this.props.paymentMethodPro)}</p>
 
         </div>
         <div className="orderList">

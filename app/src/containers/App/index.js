@@ -197,18 +197,23 @@ export default class App extends React.Component {
     }
 
     const { isMobile } = this.state;
-    {console.log("Test URL", this.props)}
+    {console.log("Test URL", window.location)}
     return (
       <div>
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
           <meta name="description" content="A Godrej application" />
         </Helmet>
         {newsletterItem}
-        {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
+        {window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />
         ) : (
           <HeaderContainer />
-        )}
+        ) }
+        {/* {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
+          <LightHeader />
+        ) : (
+          <HeaderContainer />
+        )} */}
         
         {/* <HeaderContainer /> */}
         <Switch>
@@ -242,7 +247,7 @@ export default class App extends React.Component {
           <Route path="/check/payment/:orderId" component={paymentWait} />
           
         </Switch>
-        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount' ? '' : <FooterContainer /> }
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') ? '' : <FooterContainer /> }
       </div>
     );
   }
