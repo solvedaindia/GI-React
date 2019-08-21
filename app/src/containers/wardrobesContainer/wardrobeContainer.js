@@ -20,7 +20,7 @@ import KitchenTypesEspot from '../../components/KitchensComp/kitchenTypesEspot';
 import EasystepsEspot from '../../components/KitchensComp/easystepsEspot';
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 
-export class KitchenContainer extends React.Component {
+export class WardrobeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ export class KitchenContainer extends React.Component {
     return (
         <section className="kitchenContainer">
             <div className="slider">
-                <KitchenBanner />
+                <WardrobeBanner />
             </div>
             <KitchenTypesEspot />
             <EasystepsEspot />
@@ -146,4 +146,4 @@ export class KitchenContainer extends React.Component {
   }
 }
 
-export default KitchenContainer;
+export default WardrobeContainer;

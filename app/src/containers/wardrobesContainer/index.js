@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import  '../../../public/styles/static-pages/warobes.scss'
-import DreamKitchens from '../../components/KitchensComp/DreamKitchens'
-import InsCrousel from '../../components/Primitives/crousel'
+import React, { Component } from 'react';
+import  '../../../public/styles/static-pages/warobes.scss';
+import DreamKitchens from '../../components/KitchensComp/DreamKitchens';
+import InsCrousel from '../../components/Primitives/crousel';
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import WardrobesHAll from '../../components/wardrobesComponent/wardrobeHall.js';
 import WhyPeopleLove from '../../components/KitchensComp/whyPeople';
@@ -10,8 +10,8 @@ import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
 import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
 import WardrobesTypes from '../../components/wardrobesComponent/wadrobesTypes';
 import WhatGoesward from '../../components/wardrobesComponent/whatgoesWard.js'
-import ConsultationForm from '../../components/Primitives/ConsultForm'
-import {Link} from 'react-router-dom'
+import ConsultationForm from '../../components/Primitives/ConsultForm';
+import {Link} from 'react-router-dom';
 import WbEspots from '../../components/wardrobesComponent/wardrobesBenefits';
 import WIEspots from '../../components/wardrobesComponent/wardrobesInterio';
 
