@@ -134,7 +134,7 @@ handleValidation=(obj, errorType)=>{
   // For name validation
   if (!validateEmptyObject(obj.name)) {
       this.setState({
-        errorMessageName: 'This field is required',
+        errorMessageName: 'Please enter your full name',
       });
       isValidate = false;
   }
@@ -148,7 +148,7 @@ handleValidation=(obj, errorType)=>{
   // For email validation
   if (!validateEmptyObject(obj.email) && !isMobileEntered) {
     this.setState({
-      errorMessageEmail: 'Email or Mobile is required',
+      errorMessageEmail: 'Email or Mobile number is required',
     });
     isValidate = false;
   }
@@ -175,7 +175,7 @@ handleValidation=(obj, errorType)=>{
   if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
     console.log("log_ali", 'Mobile field is required')
     this.setState({
-      errorMessageMobile: 'Mobile or Email is required',
+      errorMessageMobile: 'Mobile number or Email is required',
     });
     isValidate = false;
   }
@@ -224,8 +224,6 @@ handleValidation=(obj, errorType)=>{
         const {data} = response || {};
         this.setState({
           dropDownArr: data.data.consultationData
-        // layer1Data: data && data.data.Header_Static_Links,
-        // isLoading: false,
         });
       })
       .catch(error => {

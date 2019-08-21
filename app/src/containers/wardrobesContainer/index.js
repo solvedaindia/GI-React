@@ -35,7 +35,6 @@ export default class WardrobesContainer extends React.Component {
               <WbEspots />
               <div className="crouselBAckgrounding">
                 <div className='container'>
-                {/* <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1> */}
                 <WardrobesTypes />
               </div>
               </div>

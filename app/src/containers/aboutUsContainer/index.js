@@ -7,9 +7,6 @@ import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
 import {isMobile} from '../../utils/utilityManager';
 import {
-  espotAPI,
-  storeId,
-  accessToken,
   imagePrefix,
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
