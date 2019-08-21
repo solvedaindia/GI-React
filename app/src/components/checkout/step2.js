@@ -1067,7 +1067,7 @@ export class Step2Component extends React.Component {
                 </div>
               </div> : ''}
               {!this.props.isLoggedIn || this.state.new_add ?
-                <div>
+                <div className={isMobile() &&'add-new-address-form'}>
                   <div className="row">
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
@@ -1161,7 +1161,7 @@ export class Step2Component extends React.Component {
                         <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
                       </div>
                     </div> : ''}
-                    {this.state.new_add_error ? <div className='error-msg'>{this.state.new_add_msg}</div> : null}
+                    {this.state.new_add_error ? <div className="col-md-12 error-box"><div className='error-msg'>{this.state.new_add_msg}</div></div> : null}
                   </div>
                 </div> : !isMobile() ? this.renderAddressList() : ''}
 
