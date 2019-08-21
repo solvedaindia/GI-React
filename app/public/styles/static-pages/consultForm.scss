@@ -94,7 +94,17 @@
         border: 1px solid #ccc;
         border-radius: 4px;
       }
-      
+      .error-msg {
+        position: absolute;
+        color:$reddishpink;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 13px;
+        min-height: 25px;
+        width: 100%;
+        margin:0 0 0 0;
+        font-family: $font-regular;
+      }
       .form-controlered{
         margin-left: 123px;
         display: block;
