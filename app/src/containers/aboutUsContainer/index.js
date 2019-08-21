@@ -205,20 +205,7 @@ getImageOnArrowClick = (e) =>{
     selected_index:selected_index
   });
   console.log("getImageOnArrowClick",this.state);
-//   if (e.target.name == 'arrowClick'){
-//   if (this.state.img_url == images) {
-//     this.setState({
-//       img_url: img
-//       })
-//   }
-//   else if (this.state.img_url == img) {
-//     this.setState({
-//       img_url: images
-//       })
-//   }
-  
-  
-// }
+
 }
 componentDidMount(){
   
@@ -270,6 +257,7 @@ render() {
             <div className="col-md-6 InitialIdea">
               <h1 className='headingtitle'>{this.state.title}</h1>
               <p className="h4 heading-sub-title">{this.state.sub_title}</p>
+
  <p className="Paragraphfont">{this.state.content}
               </p>
             </div>
