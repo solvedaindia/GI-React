@@ -6,7 +6,7 @@ import appCookie from '../../utils/cookie';
 import moment from 'moment';
 import { getCookie } from '../../utils/utilityManager';
 import { imagePrefix } from '../../../public/constants/constants';
-import { formatPrice } from '../../utils/utilityManager';
+import { formatPrice, mapPaymentMethodMode } from '../../utils/utilityManager';
 import {
     storeId,
     accessToken,
@@ -177,7 +177,7 @@ class OrderConformation extends React.Component {
                             </div>
                             <div className="col-md-2">
                                <div className='heading'>Payment Method</div>
-                               <div className="subText">{this.state.orderData.paymentMethod}</div>
+                               <div className="subText">{mapPaymentMethodMode(this.state.orderData.paymentMethod)}</div>
                             </div>
                             <div className="col-md-3">
                             <div className='heading'>Total Amount</div>
