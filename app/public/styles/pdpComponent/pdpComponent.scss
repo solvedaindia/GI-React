@@ -1997,14 +1997,15 @@
                 }
                 .price{
                     min-height: 52px;
-                    padding-left:$base*8;
                     display: flex;
                     align-self:center;
                     margin: 0px;
+                    padding: $base 0px $base $base*8 ;
                     .offerprice{
                         font-size: $base*2;
                         line-height: $base*2;
                         font-family: $font-bold;
+                        width: 100%;
                        h2{
                            margin:15px 0px 2px 5px;                       
                        } 
