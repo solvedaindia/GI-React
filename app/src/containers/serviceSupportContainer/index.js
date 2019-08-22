@@ -21,7 +21,7 @@ export default class HelpSupport extends React.Component {
       <div className='service-support'>
         <div className='container'>
         <h1 className="heading">Service & Support</h1>
-        <h3 className="subHeading">How can we help you?</h3>      
+        <h3 className="subHeading">What can we help you with today?</h3>      
         
         <div className="row innerContent">
           <div className="col-md-3 faq-wrapper">
