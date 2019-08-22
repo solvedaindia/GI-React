@@ -6,7 +6,6 @@ import {
     espotAPI,
 } from '../../../public/constants/constants';
 
-let catID;
 class CLPFullBanner extends React.Component {
   constructor(props) {
     super(props);
@@ -17,9 +16,9 @@ class CLPFullBanner extends React.Component {
     };
   }
 
-  getSliderData() {
+  getSliderData(id) {
     apiManager
-      .get(espotAPI+`GI_CLP_ROOMS_BANNER_${catID}`)
+      .get(espotAPI+`GI_CLP_ROOMS_BANNER_${id}`)
       .then(response => {
         const {data} = response || {}
         this.setState({
@@ -38,15 +37,14 @@ class CLPFullBanner extends React.Component {
     console.log('SLider Data Error');
   }
 
-  componentDidMount() {
-    const path = String(window.location.pathname);
-    const idStr = path.split('/')[2];
-    const categoryName = idStr;
-    if (idStr != undefined && idStr !== catID) {
-      catID = categoryName;
+  componentWillReceiveProps(nextProps) {
+    if(this.props.id !== nextProps.id){
+      console.log('Next Props ID', nextProps);
+      this.getSliderData(nextProps.id);
     }
-
-    this.getSliderData();
+  }
+  componentDidMount() {
+    this.getSliderData(this.props.id);
   }
 
   render() {

@@ -72,7 +72,7 @@ class GuestTrackOrder extends React.Component {
           className="submitBtn"
           onClick={this.submitBtnClicked.bind(this)}
         >
-          Submit
+          Track Order
         </button>
         {/* </Link> */}
       </div>

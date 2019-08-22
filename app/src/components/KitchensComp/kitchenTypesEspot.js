@@ -47,9 +47,7 @@ class KitchenTypesEspot extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
-			</div>
+				<div className='kitchenEspots' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 		)
     );
   }

@@ -121,9 +121,24 @@ class SimilarCombosProducts extends React.Component {
         }
       ]
     };
+    let combosBundleData = '';
+    let combosBundleType = '';
+    let similarData = this.props.similarCombosProducts.similarProducts;
+    let combosBundleObj = '';
+    if (this.props.similarCombosProducts.combos) {
+      combosBundleData = this.props.similarCombosProducts.combos;
+      combosBundleType = 'Combos You May Like';
+      combosBundleObj = combosBundleData;
+    } else {
+      combosBundleData = this.props.similarCombosProducts.itemInThisBundle;
+      combosBundleType = 'Items in this bundle';
+      combosBundleObj = similarData;
+      similarData = combosBundleData;
+      
+    }
     return (
       <>
-        {this.props.similarCombosProducts.combos.length > 0 &&
+        {combosBundleData.length > 0 &&
           this.props.similarCombosProducts.similarProducts.length > 0 && (
           <Col md={12} sm={12} xs={12} className="similarProduct-Wrapper">
               <Row>
@@ -139,7 +154,12 @@ class SimilarCombosProducts extends React.Component {
                     className="tabs active"
                     onClick={this.productsType.bind(this, 'similar', 'combos')}
                   >
-                    Similar Products
+                    { this.props.similarCombosProducts.combos ? (
+                      <>Similar Products</>
+                    ) : (
+                      combosBundleType
+                    )
+                    }
                   </a>
                   <a
                     role="button"
@@ -147,7 +167,12 @@ class SimilarCombosProducts extends React.Component {
                     className="tabs"
                     onClick={this.productsType.bind(this, 'combos', 'similar')}
                   >
-                    Combos You May Like
+                  { this.props.similarCombosProducts.combos ? (
+                      combosBundleType
+                    ) : (
+                      <>Similar Products</>
+                    )
+                    }
                   </a>
               </Col>
 
@@ -160,7 +185,7 @@ class SimilarCombosProducts extends React.Component {
                 >
                   <Slider {...settings}>
                     {this.getSimilarCombosProducts(
-                      this.props.similarCombosProducts.similarProducts,
+                      similarData,
                     )}
                 </Slider>
               </Col>
@@ -173,7 +198,7 @@ class SimilarCombosProducts extends React.Component {
                 >
                   <Slider {...settings}>
                     {this.getSimilarCombosProducts(
-                      this.props.similarCombosProducts.combos,
+                      combosBundleObj,
                     )}
                 </Slider>
               </Col>

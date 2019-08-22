@@ -195,7 +195,7 @@ class addToCartComponent extends React.Component {
     }
     
     if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
-      return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
+      return <Button className="btn addcartbtn" id={btnId} disabled>Add to Cart</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
       return <NotifyMe partNumber={this.props.skuData.partNumber} />
     } 

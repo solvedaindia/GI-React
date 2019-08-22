@@ -21,7 +21,7 @@ class BeforeAfter extends Component {
       title: '',
       imageDescription: '',
       type: '',
-imageHeading: ""
+		imageHeading: ""
     };
   }
 
@@ -65,15 +65,14 @@ beforeSlide = () => {
   render () {
     const beforeImg = imagePrefix + this.state.beforeImage
     const afterImg = imagePrefix + this.state.afterImage
-console.log('iamges check', afterImg)
+	console.log('iamges check', afterImg)
     const before = {beforeImg}
     const after = {afterImg}
  
     return (
-      <>
-
-<ReactCompareImage leftImage={imagePrefix + this.state.beforeImage} rightImage={imagePrefix + this.state.afterImage} />
-      </>
+      <div className='beforeAfter'>
+		<ReactCompareImage leftImage={imagePrefix + '/staticImages/kitchens/typekitchfirst.png'} rightImage={imagePrefix + '/staticImages/kitchens/typekitchsecond.png'} />
+      </div>
      
     )
   }

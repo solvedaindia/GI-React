@@ -24,6 +24,7 @@ import AppliedPromoCode from '../../components/Cart/appliedPromoCode';
 import EmiInfo from '../../components/PdpComponent/emiInfo';
 import ExpandIcon from '../../components/SVGs/expandArrow';
 import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
+import EMIVal from '../../components/Cart/emiPrice';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -178,7 +179,7 @@ class CartDetail extends React.Component {
                 </p>
               }
               <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
-                <p className='emiMsg'><span className='emiLogo'><EMILogo width={23} height={23} /></span>Starting from ₹999 per month</p>
+				<EMIVal getCartDetails={this.props.getCartDetails} price={cartData.orderSummary.netAmount} />
                 {/* <TermsAndCondition netAmount={cartData.orderSummary.netAmount}/> */}
 				<EmiInfo price={cartData.orderSummary.netAmount}/>
               </p>

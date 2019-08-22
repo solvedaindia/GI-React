@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
+import  '../../../public/styles/static-pages/kitchen.scss'
 
 import {
   kitchenHallAPI,
@@ -50,24 +51,28 @@ class KitchenHall extends React.Component {
   }
 
   render() {
-    const { hallSlider } = this.state;
+    const { hallSlider, title, description } = this.state;
+    // console.log('test data', description)
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll:2,
     };
     return (
-      <div className="fsBanner">
-         <h2 className="Kitchen-Hall-Of-Fame">{this.state.title}</h2>
-     <p className="Paragraphhall">{this.state.description}</p>
+      hallSlider && 
+      <div className="hallOfFame">
+        <h2 className="title">{title}</h2>
+        <p className="desc">{description}</p>
         <Slider {...settings}>
           {!!hallSlider &&
             hallSlider.map((sliderData, index) => (
-              <a href={sliderData.onClickUrl} key={index}>
-                <img className='kitchenhallsize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+              <a href={sliderData.onClickUrl} key={index} className='slides'>
+                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <p className='info'>{sliderData.desc}</p>
                </a>
+
             ))}
         </Slider>
       </div>

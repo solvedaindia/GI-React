@@ -22,7 +22,7 @@ section.tablecarousel {
     margin: 0 -15px;
     .slick-list{
       .slick-track{
-        margin-bottom: 40px;
+        margin-bottom: 0px;
         &:empty {
           display: none;
        }
@@ -1049,6 +1049,7 @@ section.tablecarousel {
     .headingTitle{
       font-size: $base * 7;
       line-height: $base * 7;
+      margin:40px 0 0 0;
     }
     .headingSubTitle{
       padding: 0 0 32px 0;

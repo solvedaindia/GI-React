@@ -43,12 +43,12 @@ class LayoutImage extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot, index } = this.state;
+    const { pageLayoutEspot } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div>
-		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
+			<div className='kitchenEspots'>
+		    <div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );

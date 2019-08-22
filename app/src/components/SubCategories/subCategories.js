@@ -45,7 +45,6 @@ class SubCategoriesArray extends React.Component {
 
   onLinkNavigation = () => {
     this.props.plpReduxStateReset();
-    window.location.href.reload();
   }
 
   render() {

@@ -129,6 +129,7 @@ export class Step3Component extends React.Component {
 
   checkBanks(index) {
     var bank = this.state.banks[index]
+    
     var data = {
       BankID: bank.bankID,
       paymentMode: 'NET_BANKING',
@@ -219,7 +220,7 @@ export class Step3Component extends React.Component {
       })
     }
     if (event.target.name == 'UPI') {
-      this.props.enalblePay({ paymentMode: 'UPI' });
+      this.props.enalblePay({ paymentMode: 'UPI', paymentId: 'UPI' });
       return this.setState({
         showBanks: false,
         showWallets: false,
@@ -262,6 +263,7 @@ export class Step3Component extends React.Component {
 
   checkWallet(index) {
     var wallet = this.state.wallets[index];
+    console.log('ddddd --- ',wallet);
     var paymentId;
     if (wallet.bankName.includes('PhonePe')) {
       paymentId = 'PHONEPE';
