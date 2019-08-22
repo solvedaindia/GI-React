@@ -27,14 +27,14 @@ export default class HelpSupport extends React.Component {
           <div className="col-md-3 faq-wrapper">
             <h2 className="faq-heading">Frequently Asked Questions (FAQ)</h2>
             <ul className='faqList'>
-              <li className='faqItem active'>My Orders</li>
-              <li className='faqItem'>Before I Buy</li>
-              <li className='faqItem'>Payments</li>
-              <li className='faqItem'>Warranty and Post Delivery Services</li>
-              <li className='faqItem'>My Order Queries</li>
-              <li className='faqItem'>Cancellations and Returns</li>
-              <li className='faqItem'>Gift Cards</li>
-              <li className='faqItem'>Request Service</li>
+            <a href='/support'><li className='faqItem active'>My Orders</li></a>
+              <a href='/support'><li className='faqItem'>Before I Buy</li></a>
+              <a href='/support'><li className='faqItem'>Payments</li></a>
+              <a href='/support'><li className='faqItem'>Warranty and Post Delivery Services</li></a>
+              <a href='/support'><li className='faqItem'>My Order Queries</li></a>
+              <a href='/support'><li className='faqItem'>Cancellations and Returns</li></a>
+              <a href='/support'><li className='faqItem'>Gift Cards</li></a>
+              <a href='/support'><li className='faqItem'>Request Service</li></a>
             </ul>
           </div>
           <div className="col-md-9 faq-my-Order">            

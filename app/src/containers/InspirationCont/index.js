@@ -29,7 +29,7 @@ export class Inspiration extends React.Component {
         <div className="inpspirationBanner">
           <InspirationBanner />
         </div>
-        <div className="lookcrouse">
+        <div className="container">
           <InsCrousel />
         </div>
 		    <SummerData/>

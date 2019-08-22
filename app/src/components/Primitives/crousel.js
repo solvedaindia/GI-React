@@ -71,7 +71,8 @@ class LookbookThemeCarousel extends React.Component {
             slidesToShow: 6,
             slidesToScroll: 2,
             prevArrow: prevArrowImg,
-            nextArrow: nextArrowImg,
+            nextArrow: nextArrowImg,            
+            variableWidth: true,
             responsive: [
               {
                 breakpoint: 1024,
@@ -104,6 +105,7 @@ class LookbookThemeCarousel extends React.Component {
       <div className="fsBanner">
           <h1 className="title">{this.state.title}</h1>
           <p className="Paragraphhall">{this.state.description}</p>
+          <div className="inspirationSlider">
           <Slider {...settings}>
             {!!lookbookThemeSlider &&
               lookbookThemeSlider.map((sliderData, index) => (
@@ -112,6 +114,7 @@ class LookbookThemeCarousel extends React.Component {
                 </a>
               ))}
           </Slider>
+          </div>
       </div>
     );
   }

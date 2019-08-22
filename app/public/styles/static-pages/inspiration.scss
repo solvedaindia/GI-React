@@ -4,10 +4,30 @@
     width: 100%;
     height: auto;
     background-color: $colorwhite;
-    .sliderImageSize{
-      width: 100%;
-      height: 354px;
+    .inspirationSlider{
+      .slick-slide{
+        .sliderImageSize{
+          width: 126px;
+          border-radius: 100%;
+          height: 126px;   
+        }        
+      }
+      .slick-slider{
+        .slick-list{
+         width: 89%;
+         margin: 0 auto;
+       }
+     }
+      .slick-list{        
+        .slick-track{
+          .slick-slide{
+            margin: 0 1.4% 0 1.4%;
+          }
+        }
+      
     }
+    }
+   
     .lookcrouse{
 	  padding: 60px 0 0 0;
 	  width: 84.3%;
