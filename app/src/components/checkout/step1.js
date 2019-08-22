@@ -240,7 +240,7 @@ export class Step1Component extends React.Component {
                  </div>}
 
                   <div className="rightBox" id='rightHeight'>
-                    <div className='shipping-text'>Your Shipping and payment details will be assocaited with this number</div>
+                    <div className='shipping-text'>Your delivery and payment details will be linked to this number/address.</div>
                     <div className="row">
                       <div className="col-md-12">
                         <div>

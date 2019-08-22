@@ -101,9 +101,11 @@ export class HomapegeLayout extends React.Component {
 			}
 			{ this.state.cookiePolicy === 'true' &&
 				<div className="cookiesPolicySticky">
-					We use our own third party cookies to improve your experience and our services, and to
+					<div className="cookiesText">We use our own third party cookies to improve your experience and our services, and to
 					analyse the use of our website. if you continue browsing, we take that to mean that you
-					accept their use.
+					accept their use. 
+					</div>
+					<button className='accept_cookies' onClick={this.hideCookiePopup}>Accept</button>
 				<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
 			}
 			</div>

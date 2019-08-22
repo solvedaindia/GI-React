@@ -48,7 +48,6 @@ class WbEspots extends React.Component {
     return (
 		!!pageLayoutEspot && (
 			<div id={index}>
-			
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)

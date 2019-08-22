@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../public/styles/static-pages/consultForm.scss';
+// import '../../../public/styles/static-pages/warobes.scss';
 import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
@@ -297,10 +298,10 @@ onDropdownSelected = (e) => {
 
       console.log('test=>', this.state)
         return (
-          <form>
-            <div>
-            <h2 className="Book-a-consultation">Book a consultation</h2>
-                  <p className="FormPAra">Take the first step towards making your dream kitchen a reality. Simply fill in the form below to book an appointment with our in-house design expert.</p>
+          <form className='consultForm'>
+            <h2 className="title">Book a consultation</h2>
+              <p className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor. </p>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">
@@ -329,8 +330,6 @@ onDropdownSelected = (e) => {
                       <select  name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
                         <option value='Select an option' selected='true'>Select an option</option>
                          {this.createSelectItems()}
-                        
-                       
                       </select>
                       {errorMessageOption}
                     </div>
@@ -362,12 +361,11 @@ onDropdownSelected = (e) => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <button type="button" onClick={this.submitForm} className="btn btn-primary send-div">Send</button>
+                      <button type="button" onClick={this.submitForm} className="btn btn-primary btn-submit">Send</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
           </form>
         );
     }

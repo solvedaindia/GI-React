@@ -6,6 +6,12 @@
   opacity: 0.4;
 }
 
+.redirectedMsg {
+  color: #7f7f7f;
+  text-align: center;
+  padding-top: 100px;
+}
+
 .checkout {
   .form-control {
     border-radius: 2px;
@@ -381,7 +387,6 @@
           }
         }
         .bill-address {
-          padding: 9px 0 20px 0;
           border-bottom: 1px solid $lightGrey;
           .checkbox,
           .label-billing {
@@ -563,11 +568,106 @@
     margin: 45px 0 0 0;
     padding: 32px 24px 53px 24px;
     background: $greybg;
+    .paddingRight{
+      padding-right:9px;
+    }
     .heading-details {
       font-size: 24px;
       color: $black;
       margin: 0 0 24px 0;
       line-height: 24px;
+    }
+    .heading{
+        font-size: 14px;
+        font-family: $font-medium;
+        color:$battleshipGrey;
+        line-height: 14px;
+        margin: 0 0 8px 0;
+    }
+    .subText{
+        font-size:14px;
+        font-family: $font-regular;
+        color:$black;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+    }
+    .totalAmount{
+        font-size:24px;
+        font-family: $font-bold;
+        color:$cerulean;
+    }
+    .btntrackorder{
+        padding:12px 75px;
+        font-family: $font-medium;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .seprator{
+        height: 1px;
+        background: $lightGrey;
+        margin:18px 0 32px 0;
+    }
+    .itemOrderdata{
+        background: $colorwhite;
+        margin: 0 0 24px 0;
+        border: 1px solid #eeeded;
+        .borderLeft{
+          border-left: 1px solid #eeeded;
+        }
+        .itemImg{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 7px 0 0px;
+          min-height: 145px;
+          .imgFullwidth{
+            width: 100%;
+          }
+        }
+        .itemText{
+            padding:20px 0 36px 0;
+            .heading{
+                color:$black;
+                font-size: 16px;
+                line-height: 16px;
+                font-family: $font-medium;
+                margin:0 0 5px 0;
+            }
+            .subText{
+                color:$greyLight;
+                font-family: $font-regular;
+                font-size: 11px;
+                line-height: 11px;
+                margin:0 0 12px 0;
+            }
+            .headingSubtext{
+                font-family: $font-medium;
+                font-size: 10px;
+                line-height: 10px;
+                color:$battleshipGrey;
+                margin:0;
+            }
+            .quantityDelivery{
+                font-family: $font-regular;
+                font-size: 14px;
+                color:$black;
+                line-height: 14px;
+                margin:8px 0 12px 0; 
+            }
+            .priceHeading{
+                margin:0 0 8px 0;
+                font-size: $base*1.25;
+                line-height: $base*1.25;
+                font-family: $font-medium;
+                color:$battleshipGrey;
+            }
+            .priceVal{
+              color: $cerulean;
+              font-family: $font-bold;
+              font-size: $base*2;
+              line-height: $base*2;
+            }
+        }
     }
   }
 }
@@ -749,6 +849,7 @@
           }
 
           .bill-address {
+            padding: 9px 0 20px 0;
             .label-billing {
               font-size: 16px;
               font-family: $font-medium;
@@ -851,7 +952,7 @@
       }
     }
     .address-submit {
-      padding-left: 0px;
+      padding: 0px;
     }
     .container {
       width: 100%;
@@ -934,6 +1035,9 @@
             }
           }
           .bill-address {
+            border-top: 1px solid $lightGrey;
+            padding: 15px 0 15px 0;
+            margin-top:15px;
             .label-billing {
               width: 95%;
               font-size: 12px;
@@ -981,6 +1085,18 @@
               .add-address-btn {
                 background: url("../images/close-blue.svg");
                 background-size: cover;
+              }
+            }
+          }
+          .add-new-address-form{
+            .error-box{
+              clear: both;
+              .error-msg {
+                color: $reddishPink;
+                font-size: $base * 1.5;
+                line-height: 12px;
+                font-weight: normal;
+                padding-top: 10px;
               }
             }
           }

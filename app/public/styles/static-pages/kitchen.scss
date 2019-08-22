@@ -1,0 +1,159 @@
+@import '../variable';
+
+.hallOfFame {
+    .title {
+        margin: 0; 
+        font-family: $font-medium;
+    }
+    .desc {
+        width: 40%;
+        margin: $base*2 auto $base*5 auto;
+    }
+    .desc,
+    .title {
+        text-align: center;
+    }
+    .slides {
+        text-decoration: none;
+    }
+    .info {
+        background-color: $iceColor;
+        padding: $base*1.5;
+        color: $greyish;
+        text-decoration: none;
+    }
+    .slick-initialized .slick-slide {
+        padding: 0 15px;
+    }
+    .slick-next {
+        right: 10px;
+    }
+    .slick-prev {
+        right: 72px;
+        left: unset;
+    }
+    .slick-prev,
+    .slick-next {
+        top: unset;
+        bottom: -20%;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
+}
+
+.goesOnKitchen {
+    .slick-prev {
+        left: -60px;
+    }
+    .slick-next {
+        right: -60px;;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
+}
+
+.faqContainer {
+    margin: $base*7.5 auto;
+    .panel-group {
+        width: 80%;
+        margin: auto;
+        .panel {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: none;
+            border-bottom: 1px solid $borderLight;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+        }
+        .panel + .panel {
+            border: none;
+            border-bottom: 1px solid $borderLight;
+        }
+        .panel-default > .panel-heading {
+            background-color: transparent;
+        }
+        .panel-heading {
+            h4 {
+                a {
+                    color: $black;
+                    font-size: $base*2.5;
+                    text-decoration: none;
+                    font-family: $font-medium; 
+                }
+            }
+        }
+    }
+}   
+
+.kitchenEspots {
+    // @include container-width;
+    margin: 60px auto;
+}
+.beforeAfter {
+    margin: 120px auto;
+}
+
+.goesOnKitchen{
+    width: 70%;
+    margin: 60px auto;
+}
+.ourPromis {
+    width: 100%;
+}
+
+.formContainer {
+    position: relative;
+    width: 100%;
+    margin: 60px auto;
+    .bgImg {
+        width: 100%;
+    }
+    .formDetails {
+        width: 75%;
+        left: 12.5%;
+        background-color: #fff;
+        position: absolute;
+        top: 8%; 
+        padding: $base*7.5 $base*15;
+        .title {
+            margin: $base*4 0 0;
+        }
+        .desc {
+            text-align: center;
+            margin: $base*1.5 0 $base*7.5;
+        }
+        .form-labeled {
+            color: $battleshipGrey;
+            font-family: $font-medium;
+            font-size: $base*1.75;
+        }
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            -webkit-transition: unset;
+            -o-transition: unset;
+            -webkit-transition: unset;
+            transition: unset;
+            transition: unset;
+            height: $base*6.75;
+        }
+        .btn-submit {
+            border-radius: unset;
+            float: right;
+            padding: $base;
+            width: $base*41;
+            background-color: $black;
+            color: $colorwhite;  
+        }
+    }
+}
+

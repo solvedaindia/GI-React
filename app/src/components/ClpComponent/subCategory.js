@@ -9,7 +9,6 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/subCat/subCat.scss';
 
-let categoryId;
 export class SubCategory extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +19,9 @@ export class SubCategory extends React.Component {
     };
   }
 
-  getSubCategories() {
+  getSubCategories(id) {
     apiManager
-      .get(plpSubCatAPI + categoryId)
+      .get(plpSubCatAPI + id)
       .then(response => {
         const { data } = response || {};
         this.setState({
@@ -39,14 +38,16 @@ export class SubCategory extends React.Component {
       });
   }
 
-  componentDidMount() {
-    const path = String(window.location.pathname);
-    const idStr = path.split('/')[2];
-    if (idStr != undefined && idStr !== categoryId) {
-      categoryId = idStr;
+  componentWillReceiveProps(nextProps) {
+    if(this.props.id !== nextProps.id){
+      console.log('Next Props ID', nextProps);
+      this.getSubCategories(nextProps.id);
     }
-    this.getSubCategories();
   }
+  componentDidMount() {
+    this.getSubCategories(this.props.id);
+  }
+
 
   render() {
     const { subCatData } = this.state;

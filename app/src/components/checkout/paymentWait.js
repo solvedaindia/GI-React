@@ -49,8 +49,8 @@ export default class PaymentWait extends React.Component {
     //   return <Redirect to="checkout?status=fail" />
     // }
     return (
-        <div>
-            <h3>Please Wait, You are being redirected.</h3>
+        <div className='redirectedMsg'>
+            <h3>Please Wait, You are being redirected...</h3>
         </div>
     );
   }

@@ -263,7 +263,7 @@ export class Step2Component extends React.Component {
     var localPIN = appCookie.get('pincode');
     if (this.state.inputText_pincode !== localPIN) {
       this.setState({
-        currentPin: inputText_pincode,
+        currentPin: this.state.inputText_pincode,
         pinPop: true
       })
     } else {
@@ -609,8 +609,9 @@ export class Step2Component extends React.Component {
               access_token: token
             }
           }).then((resp) => {
-            console.log(res, "precheckout response");
+            
             const inventoryFlag = resp.data.data.reserved;
+            console.log("precheckout response ----",inventoryFlag, resp.data);
             if (inventoryFlag === '0') {
               alert('One or more item in you cart is Out Of Stock.')
               window.location.assign('/cart')
@@ -626,11 +627,11 @@ export class Step2Component extends React.Component {
             
           }).catch((err) => {
             console.log(err, "precheckout err");
-            resolve()
+            reject()
           })
         }).catch((err) => {
           console.log(body, err, "add address to cart response");
-          resolve();
+          reject();
         })
       }).catch((err) => {
         reject(err);
@@ -1066,7 +1067,7 @@ export class Step2Component extends React.Component {
                 </div>
               </div> : ''}
               {!this.props.isLoggedIn || this.state.new_add ?
-                <div>
+                <div className={isMobile() &&'add-new-address-form'}>
                   <div className="row">
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
@@ -1160,7 +1161,7 @@ export class Step2Component extends React.Component {
                         <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
                       </div>
                     </div> : ''}
-                    {this.state.new_add_error ? <div className='error-msg'>{this.state.new_add_msg}</div> : null}
+                    {this.state.new_add_error ? <div className="col-md-12 error-box"><div className='error-msg'>{this.state.new_add_msg}</div></div> : null}
                   </div>
                 </div> : !isMobile() ? this.renderAddressList() : ''}
 
@@ -1245,7 +1246,7 @@ export class Step2Component extends React.Component {
                     <div className='col-md-12 bussinessNote'>
                       <h5 className='buying'>Buying it for your business?</h5>
                       <div className='noteGstin'><span className='bold'>Note</span>
-                        :GSTIN cannot be changed after placing order. Registration state must match either billing or shipping state.</div>
+                        :The GSTIN cannot be changed once the order has been placed. The state in which the GSTIN is registered must be same either on the billing or the delivery address.</div>
                     </div>
                   </div>
                   <div className="row">

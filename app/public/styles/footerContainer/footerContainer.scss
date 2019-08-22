@@ -225,6 +225,7 @@
         &:last-child {
           .link {
             border-right: none;
+            cursor: default;
           }
         }
       }
@@ -347,6 +348,7 @@
         &:last-child {
           .link {
             border-right: none;
+            cursor: default;
           }
         }
       }

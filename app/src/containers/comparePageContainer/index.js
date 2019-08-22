@@ -22,7 +22,8 @@ export class ComparePageContainer extends React.Component {
         super(props);
         this.state = {
           data: '',
-          prds: null
+          prds: null,
+          loading: true,
         }
     }
 
@@ -38,7 +39,7 @@ export class ComparePageContainer extends React.Component {
       var ids = [];
       var token = appCookie.get('accessToken');
       this.props.compWidgetData.forEach(element => {
-        ids.push(element.id);
+        ids.push(element.skuId);
       });
       apiManger.get(`${compareAPI}?ids=${ids}`, {
         headers: {
@@ -47,11 +48,17 @@ export class ComparePageContainer extends React.Component {
         }
       }).then(response => {
         
-        this.setState({data: response.data.data.reverse()});
+        this.setState({
+          data: response.data.data.reverse(),
+          loading: false
+        });
         console.log(response.data.data, 'data from api')
         this.renderPrd();
       }).catch(error => {
         console.log(error);
+        this.setState({
+          loading: false
+        })
       })
     }
 
@@ -77,7 +84,13 @@ export class ComparePageContainer extends React.Component {
 
     renderPrd = () => {
       var prds = [];
+      
+      var skuIdsArr = [];
       var reverse_data = this.state.data;
+      if (!reverse_data) {
+        return
+      }
+      console.log('Reserv Data --- ', reverse_data);
       reverse_data.forEach(data => {
         var sku1 = data.sKUs.find(sKU => {
           return sKU.uniqueID == this.props.compWidgetData[0].skuId;
@@ -87,7 +100,12 @@ export class ComparePageContainer extends React.Component {
           sku1.parentProductId = data.uniqueID;
           sku1.specs = data.attributes;
           sku1.swatches = data.swatches;
-          prds.push(sku1)
+          
+          if (!skuIdsArr.includes(sku1.uniqueID)) {
+            skuIdsArr.push(sku1.uniqueID);
+            prds.push(sku1)
+          }
+          
         }
         if(this.props.compWidgetData.length > 1) {
           var sku2 = data.sKUs.find(sku => {
@@ -97,7 +115,12 @@ export class ComparePageContainer extends React.Component {
             sku2.parentProductId = data.uniqueID;
             sku2.specs = data.attributes;
             sku2.swatches = data.swatches;
+
+            if (!skuIdsArr.includes(sku2.uniqueID)) {
+              skuIdsArr.push(sku2.uniqueID);
             prds.push(sku2)
+            }
+            
           }
         }
         if(this.props.compWidgetData.length > 2) {
@@ -108,10 +131,17 @@ export class ComparePageContainer extends React.Component {
             sku3.parentProductId = data.uniqueID;
             sku3.specs = data.attributes;
             sku3.swatches = data.swatches;
-            prds.push(sku3);
+
+            if (!skuIdsArr.includes(sku3.uniqueID)) {
+              skuIdsArr.push(sku3.uniqueID);
+              prds.push(sku3);
+            }
+            
           }
         } 
+        
       })
+      
       this.setState({
         prds: prds
       })
@@ -131,7 +161,20 @@ export class ComparePageContainer extends React.Component {
       this.props.updateSKU(obj);
     }
 
+    loadingbar() {
+      return (
+        <div className="lazyloading-Indicator">
+            <img
+              id="me"
+              className="loadingImg"
+              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+            />
+          </div>
+      )
+    }
+
     render() {
+      console.log('Commmmm --- ',this.state.data)
       return (
         <div className="container compare-product">
           <Row>
@@ -139,8 +182,9 @@ export class ComparePageContainer extends React.Component {
             <button to="#" className="back-btn" onClick={this.goBack}>Go Back</button>
             </Col>
           </Row>
-          <Row><h1 className="heading">Compare Products {this.state.data.length}/3</h1></Row>
-          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} swatchHandle={this.swatchHandle} /> : ''}
+          {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.data.length}/3</h1></Row> : null }
+          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.props.removeProduct} swatchHandle={this.swatchHandle} /> : ''}</> }
+          
         </div>
       )
     }

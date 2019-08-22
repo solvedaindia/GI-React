@@ -51,35 +51,35 @@ export default class HelpSupport extends React.Component {
               <h2 className="heading">Contact Customer Care</h2>
               </div>
 
-              <div className="col-md-6 borderRight">
-                <h2 className="enquiry">Enquiries</h2>
+              <div className="col-md-6 separator">
+                <h2 className="title-text">Enquiries</h2>
                 <div className="row">
                   <div className='col-sm-6 email-box'>
                     <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
                     <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
-                    <h4 className="emailto">talktous@godrej.com</h4></div>
+                    <p className="emailto">talktous@godrej.com</p></div>
                   </div>
 
                   <div className='col-sm-6  contact-box'>
                     <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
                     <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
-                    <h4 className="emailto">+91 8654123547 <br/>+91 6325415873</h4></div>
+                    <p className="mob-text">+91 8654123547 <br/>+91 6325415873</p></div>
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <h2 className="enquiry">After Sales Services</h2>
+                <h2 className="title-text">After Sales Services</h2>
                 <div className="row">
                   <div className='col-sm-6 email-box'>
                     <span className='img-icon'><img className="icon" src={require('../../../public/images/email.svg')}  alt="email" /></span>
                     <div className='email-box-desc'><h4 className="sub-heading">Email</h4>
-                    <h4 className="emailto">talktous@godrej.com</h4></div>
+                    <p className="emailto">talktous@godrej.com</p></div>
                   </div>
 
                   <div className='col-sm-6 contact-box'>
                     <span className='img-icon'><img className="icon" src={require('../../../public/images/contact.svg')}  alt="contact" /></span>
                     <div className='email-box-desc'><h4 className="sub-heading">Contact-Us</h4>
-                    <h4 className="emailto">+91 8654123547<br/>+91 6325415873</h4></div>
+                    <p className="mob-text">+91 8654123547<br/>+91 6325415873</p></div>
                   </div>
                 </div>
               
@@ -90,6 +90,7 @@ export default class HelpSupport extends React.Component {
        
         
         {/* <button className="Livechat">
+        <button className="live-chat">
         <span className="text">Live Chat </span>
         <span className='iconChat'><img className="chatIcon" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Rectangle" /></span>
             

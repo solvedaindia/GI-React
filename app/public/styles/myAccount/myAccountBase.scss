@@ -90,8 +90,14 @@
 
 /* Modal Delete 
 ----------------------*/
+.delete-modal.succes{
+  .modal-dialog{
+    background: transparent;    
+  }
+}
   .delete-modal{
     background: rgba(255, 255, 255, 0.65);
+    
     .cancelBtn {    
       position: absolute;   
       top: 20px;
@@ -125,23 +131,34 @@
       }
     }
     .modal-dialog{    
-      width: 50%;
+      width: 47%;
       // max-width: 592px;
-      max-width: 50%;
+      max-width: 47%;
     
       .modal-content{
         box-shadow: none;
-        .modalwrapper{    
+        .modalwrapper{   
+          .OopsIcon{
+            margin:0 0 30px 0;
+            .oopsImg{
+              width:50px;
+              height: 50px;
+            }
+          } 
+          .payment-notcomplete{
+            margin:0 0 36px 0;
+            font-family: $font-regular;
+            font-size: $base*2.5;
+            line-height: $base*2.5;
+          }
           .heading{
             margin: 0 0 16px 0;
-            font-size: $base*2.5;
             color:$black;
             font-family: $font-bold;
           }
           .text{
             color:$battleshipGrey;
             font-family: $font-regular;
-            font-size: 14px;
             line-height: 20px;
             margin: 0 0 28px 0;
           }
@@ -159,6 +176,7 @@
       }
     }
   }
+ 
   }
   
 
@@ -206,16 +224,41 @@
     .modal-dialog{
       .modal-content{
         .modalwrapper{
-          padding: 55px 92px 55px 92px;
+          padding: 55px 70px 55px 70px;
           text-align: center;
+          .heading-succes{
+            font-family: $font-bold;
+            font-size:$base*4;
+            line-height: $base*4;
+            color:$black;
+            margin:15px 0 0 0;
+          }
+          .orderConfirmed{
+            font-family: $font-regular;
+            font-size:$base*2.5;
+            line-height: $base*2.5;
+            margin:16px 0 0 0;
+            color:$black;
+          }
           .actionBtnWrapper{
             .btn{
               padding: 12px 60px;
             }
           }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.5;
+            }
+            .text{
+              font-size: 14px;
+            }
+          } 
         }
       }
     }
+  }
+  .mobileView{
+    display: none;
   }
 }
 
@@ -292,9 +335,11 @@
   }
   .delete-modal{
     .modal-dialog{
+      width:100%;
+      max-width: 100%;
       .modal-content{
         .modalwrapper{
-          padding:30px 30px 34px 30px;  
+          padding:30px 30px 34px 30px;            
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;
@@ -302,7 +347,35 @@
             .btn-save{
               margin: 0px;
             }
+          }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.25;
+            }
+            .text{
+              font-size: 12px;
+            }
+
           } 
+        }
+        .mobileView{
+          .btn{
+            width:50%;
+            border-radius: 0;
+            padding: 15px 0;
+          }
+          .btn-save {
+            margin:0;
+          }
+        }
+        .actionBtnWrapper {
+          &.mobileView{
+            .btn-cancel{
+              border-width: 1px 0px 1px 0px;
+              border-style: solid;
+              border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+            }
+          }
         }
       }
     }
@@ -310,6 +383,9 @@
       bottom: 0px;
       top:initial;
     }
+  }
+  .webView{
+    display: none;
   }
 }
 

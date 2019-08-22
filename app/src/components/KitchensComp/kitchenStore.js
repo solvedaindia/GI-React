@@ -7,7 +7,7 @@ import {
 import { isMobile } from '../../utils/utilityManager';
 import '../../../public/styles/store/store.scss';
 
-export class ExStore extends React.Component {
+export class KitchenStore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ export class ExStore extends React.Component {
         apiManager.get(`${storeAPI}?latitude=${this.state.testLat}&longitude=${this.state.testLong}`)
         .then( response => {
             this.setState({
-                storeData: response.data.data[0],
+                storeData: response.data.data,
                 isLoading: false
             })
             console.log('@@@@ Store Data @@@@@', response.data.data);
@@ -43,25 +43,27 @@ export class ExStore extends React.Component {
 	}
 
 	render() {
-        const { storeData, index } = this.state;
+        const { storeData } = this.state;
         if ( storeData == '') return null;
 		return (
-            !!storeData && 
+            !!storeData && storeData.map((storeLocData, index) => (
                 <div className='exStore' key={index}>
                     {!isMobile() ? 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> 
+                        <img className='img' src={`${imagePrefix}/staticImages/kitchens/kitchen_store.png`} alt='Store Image'/> 
                         : 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-mweb.png`} alt='Store Image'/> 
+                        <img className='img' src={`${imagePrefix}/staticImages/kitchens/kitchen_store.png`} alt='Store Image'/> 
                     }
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
-                        <h1 className='title'>Experience Our Stores</h1>
-                        {!isMobile() ? <p className='details'>Experience our products at <span className='place'>{storeData.city}</span><span className='dist'>({storeData.distance}) km away.</span><br></br>You can find more stores around you.</p> : <p className='details'>Experience products at <span className='place'>{storeData.city}</span><span className='dist'>({storeData.distance})</span> near you.</p>} 
+                        <h1 className='title'>Experience our Kitchen facilities</h1>
+                        
+                        {!isMobile() ? <p className='details'>Experience our kitchens at <span className='place'>{storeLocData.city}</span><span className='dist'>({storeLocData.distance}) km away.</span><br></br>You can find more stores around you.</p> : <p className='details'>Experience products at <span className='place'>{storeLocData.city}</span><span className='dist'>({storeLocData.distance})</span> near you.</p>} 
                         {!isMobile() ? <a href='/storelocator' ><button className='btn-flat'>Find More Stores</button></a> : <a href='/storelocator' ><button className='btn-flat'>Explore More Stores</button></a> }
                     </div>
                 </div>
+            ))
 		);
 	}
 }
 
-export default ExStore;
+export default KitchenStore;

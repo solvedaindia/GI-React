@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import RedditShareButton from 'react-share/lib/RedditShareButton';
 import { Redirect } from 'react-router-dom'
 import appCookie from '../../utils/cookie';
+import {isMobile} from '../../utils/utilityManager';
 
 class PinChangePopup extends React.Component {
   constructor(props) {
@@ -35,13 +36,13 @@ class PinChangePopup extends React.Component {
         className={this.state.modalClass}
       >
         <Modal.Body>
-          <div className="modalwrapper">
+          <div className="modalwrapper change-pinocde">
             <Button className="cancelBtn" onClick={this.handleCancel} />
             <h3 className="heading">
               Are you sure you want to change the Pincode?
             </h3>
-            <p className='text'>Changing the pincode will take you back to the cart and show you updated information on availability, delivery dates and shopping charges.</p>
-            <div className="actionBtnWrapper">
+            <p className='text'>Changing your pincode will take you back to the cart and show updated information on product availability, delivery charges and expected delivery date.</p>
+            {!isMobile() && <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel
               </Button>
@@ -51,8 +52,20 @@ class PinChangePopup extends React.Component {
               >
                 Proceed
               </Button>
-            </div>
+            </div>}
           </div>
+
+          {isMobile() && <div className="actionBtnWrapper mobileView">
+              <Button className="btn-cancel btn" onClick={this.handleCancel}>
+                Cancel
+              </Button>
+              <Button
+                className="btn-save btn"
+                onClick={this.handleProceed}
+              >
+                Proceed
+              </Button>
+            </div>}
         </Modal.Body>
       </Modal>
     );
