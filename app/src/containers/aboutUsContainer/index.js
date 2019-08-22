@@ -100,7 +100,7 @@ export class AboutUs extends React.Component {
 handleclick = event => {
   let index = parseInt(event.target.name);
   const {data} = this.state;
-  for ( var i =0; i<data.length; i++){
+  for ( let i =0; i<data.length; i++){
     if(i==index)
     {
         data[i].checked='active'
@@ -131,7 +131,7 @@ getImageOnArrowClick = (e) =>{
   {
     index =0;
   }
-  for ( var i =0; i<data.length; i++){
+  for (let i =0; i<data.length; i++){
       if(i==index)
       {
           data[i].checked='active'
@@ -192,9 +192,9 @@ render() {
               <div>
                 
                 {views}
-                <button name="arrowClick" className='arrowNumber' onClick={this.getImageOnArrowClick}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25">
-                    <g fill="none" fill-rule="evenodd" stroke="#ffffff">
+                <button name="arrowClick" className='arrowNumber' onClick={this.getImageOnArrowClick} >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25"  >
+                    <g fill="none" fill-rule="evenodd" stroke="#000000">
                       <path strokeWidth="1.892" d="M27 12.7H.2 27z" />
                       <path strokeWidth="1.89" d="M16.7 1.4l10.6 11.3L16.7 24" />
                     </g>
