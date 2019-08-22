@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/warobes.scss';
+import  '../../../public/styles/static-pages/chefkitchen.scss';
 import apiManager from '../../utils/apiManager';
 
 import {
@@ -10,7 +10,7 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 
-export default class WrdrobesTypes extends Component {
+export default class SteelKitchenTypes extends Component {
   constructor(props) {
     super(props);
     const img1 = <img className="typeskitchenimg" src={`${imagePrefix}/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png`} alt=""/>
@@ -80,8 +80,6 @@ export default class WrdrobesTypes extends Component {
     return (
         <div>
       <div className="container">
-<h1 className='Types-of-Modular-War'>{this.state.title}</h1>
-        <p className="Paragraphhall">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br /> tempor incididunt ut labore et dolore magna aliquat enim ad minim.</p>
         </div>
 
         <Slider {...settings}>
