@@ -69,7 +69,7 @@ class productFeatures extends React.Component {
                 <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="headingBox">
-                      <h2 className="heading">Features</h2>
+                      <h2 className="heading">Product Features</h2>
                       <span className="plusIcon" onClick={this._handleClick}>
                       </span>
                     </div>

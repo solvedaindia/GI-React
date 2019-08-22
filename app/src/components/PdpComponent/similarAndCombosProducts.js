@@ -127,11 +127,11 @@ class SimilarCombosProducts extends React.Component {
     let combosBundleObj = '';
     if (this.props.similarCombosProducts.combos) {
       combosBundleData = this.props.similarCombosProducts.combos;
-      combosBundleType = 'Combos You May Like';
+      combosBundleType = 'Popular Combinations';
       combosBundleObj = combosBundleData;
     } else {
       combosBundleData = this.props.similarCombosProducts.itemInThisBundle;
-      combosBundleType = 'Items in this bundle';
+      combosBundleType = 'Products In This Bundle';
       combosBundleObj = similarData;
       similarData = combosBundleData;
       

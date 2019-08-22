@@ -43,7 +43,7 @@ class addToCartComponent extends React.Component {
   /* render delivery message */
   renderdeliveryMessage(props) {
     if (props.pincodeServiceable === false) {
-      let errorMsg = 'This Pin Code is non-serviceable';
+      let errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
         errorMsg = props.error;
       }
@@ -286,7 +286,7 @@ class addToCartComponent extends React.Component {
               </div>
               {this.renderdeliveryMessage(this.props.pinCodeData)}
               { <div className="shippingCharge">
-          Estimated Shipping Charges:{' '}
+          Estimated Delivery Charges:{' '}
           <span className="bold">
             {this.props.pinCodeData.shippingCharge > 0 ? (
             <>
