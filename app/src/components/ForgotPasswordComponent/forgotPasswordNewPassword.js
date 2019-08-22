@@ -129,7 +129,7 @@ class ForgotPasswordNewPassword extends React.Component {
           onClick={this.doneBtnPressed.bind(this)}
           className="btn-block btn-bg"
         >
-          DONE
+          Save
         </Button>
       </div>
     );
