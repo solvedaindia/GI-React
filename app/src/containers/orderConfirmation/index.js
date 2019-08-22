@@ -83,14 +83,16 @@ class OrderConformation extends React.Component {
         if (this.state.orderData) {
             this.state.orderData.orderItems.forEach((item) => {
                 items.push(
-                    <div className="col-md-6">
+                    <div className="col-md-6 paddingRight">
                         <div className='itemOrderdata'>
                             <div className="row">
                                 <div className="col-md-4">
-                                    <img src={`${imagePrefix}${item.thumbnail}`} />
+                                    <div className='itemImg'>
+                                       <img className='imgFullwidth' src={`${imagePrefix}${item.thumbnail}`} alt='itemImg' />
+                                    </div>                                    
                                 </div>
 
-                                <div className="col-md-8">
+                                <div className="col-md-8 borderLeft">
                                     <div className='itemText'>
                                     <h4 className='heading'>{item.productName}</h4>
                                     <p className='subText'>{`(${item.shortDescription})`}</p>
@@ -105,7 +107,7 @@ class OrderConformation extends React.Component {
                                         </div>
                                     </div>
                                     <div className='priceHeading'>Price</div>
-                                    <div className=''>₹{formatPrice(item.offerPrice)}</div>
+                                    <div className='priceVal'>₹{formatPrice(item.offerPrice)}</div>
                                     </div>
 
                                 </div>
@@ -208,6 +210,7 @@ class OrderConformation extends React.Component {
                     </div>
                 </div>
                 {this.state.showPop ? <SuccessPop /> : ''}
+                {/* <SuccessPop /> */}
             </div>
         )
     }

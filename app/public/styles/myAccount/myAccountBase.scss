@@ -90,8 +90,14 @@
 
 /* Modal Delete 
 ----------------------*/
+.delete-modal.succes{
+  .modal-dialog{
+    background: transparent;    
+  }
+}
   .delete-modal{
     background: rgba(255, 255, 255, 0.65);
+    
     .cancelBtn {    
       position: absolute;   
       top: 20px;
@@ -220,6 +226,20 @@
         .modalwrapper{
           padding: 55px 70px 55px 70px;
           text-align: center;
+          .heading-succes{
+            font-family: $font-bold;
+            font-size:$base*4;
+            line-height: $base*4;
+            color:$black;
+            margin:15px 0 0 0;
+          }
+          .orderConfirmed{
+            font-family: $font-regular;
+            font-size:$base*2.5;
+            line-height: $base*2.5;
+            margin:16px 0 0 0;
+            color:$black;
+          }
           .actionBtnWrapper{
             .btn{
               padding: 12px 60px;
@@ -319,7 +339,7 @@
       max-width: 100%;
       .modal-content{
         .modalwrapper{
-          padding:30px 30px 34px 30px;  
+          padding:30px 30px 34px 30px;            
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;
