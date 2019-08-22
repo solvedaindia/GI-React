@@ -1,9 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI,
-  storeId,
-  accessToken,
+  espotAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
@@ -48,7 +46,7 @@ class GodrejSolutionEspot extends React.Component {
     return (
 		!!pageLayoutEspot && (
 			<div>
-		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
+		      <div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );
