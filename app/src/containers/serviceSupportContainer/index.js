@@ -89,11 +89,11 @@ export default class HelpSupport extends React.Component {
         </div>
        
         
-        <button className="Livechat">
+        {/* <button className="Livechat">
         <span className="text">Live Chat </span>
         <span className='iconChat'><img className="chatIcon" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Rectangle" /></span>
             
-       </button>
+       </button> */}
       </div>
     );
   }

@@ -204,7 +204,7 @@ render() {
             </div>
             <div className="col-md-6 InitialIdea">
               <h1 className='headingtitle'>{this.state.title}</h1>
-              <p className="h4 heading-sub-title">{this.state.sub_title}</p>
+              <p className=" heading-sub-title">{this.state.sub_title}</p>
 
  <p className="Paragraphfont">{this.state.content}
               </p>
