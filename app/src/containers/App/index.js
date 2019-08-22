@@ -46,7 +46,7 @@ import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/kitchenContainer';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
 import InspirationDetails from '../InspirationDetailsContainer/index';
-import WardrobesContainer from '../wardrobesContainer/index';
+import WardrobesContainer from '../wardrobesContainer/wardrobeContainer';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../TermsConditions/index';
