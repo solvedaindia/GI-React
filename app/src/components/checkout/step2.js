@@ -1019,7 +1019,7 @@ export class Step2Component extends React.Component {
     return (
       <>
         {isMobile() && <div className='checkout-title'>
-          Ship to
+        Deliver To
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
@@ -1048,10 +1048,10 @@ export class Step2Component extends React.Component {
               <div className='stepBg'>2</div>
             </div>
             {!isMobile() ? <div className='leftBox bgGrey'>
-              <div className='heading-label'>Ship to</div>
+              <div className='heading-label'>Deliver To</div>
               {this.props.isLoggedIn ? <div className='verticalTab'>
                 <div className={`add_tab ${this.state.saved_add}`} onClick={this.savedAddActive}>
-                  <div style={!this.state.addressList ? { color: 'grey' } : { color: 'black' }}>Saved Address</div>
+                  <div style={!this.state.addressList ? { color: 'grey' } : { color: 'black' }}>Saved Address(s)</div>
                 </div>
                 <div className={`add_tab ${this.state.new_add}`} onClick={this.newAddActive}>
                   <div>New Address</div>
@@ -1079,7 +1079,7 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Phone Number" name="phone" value={this.state.phone}
+                        <Input inputType="text" title="Mobile Number" name="phone" value={this.state.phone}
                           onChange={e => this.phoneChange(e)} tabIndexNo={2} />
                         {this.state.error_number ? (
                           <div className="error-msg">
@@ -1100,7 +1100,7 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Email (Optional)" id="email" name="Email"
+                        <Input inputType="text" title="Email Address (Optional)" id="email" name="Email"
                           value={this.state.email} onChange={e => this.mailChange(e)} />
                         {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
                           null}
@@ -1154,7 +1154,7 @@ export class Step2Component extends React.Component {
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
-                        <label className='form-label defaultlbl' htmlFor="billing">Make this the default address</label>
+                        <label className='form-label defaultlbl' htmlFor="billing">Make this my default address</label>
                       </div>
 
                       <div className='col-xs-12 col-md-12 address-submit'>
@@ -1177,7 +1177,7 @@ export class Step2Component extends React.Component {
                           <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
                           <label className="lblCheck" htmlFor="checkbox"></label>
                         </div>
-                        <label className='label-billing defaultlbl' htmlFor="billing">Billing address same as shipping address</label>
+                        <label className='label-billing defaultlbl' htmlFor="billing">Billing address is the same as delivery address</label>
                       </div>
                     </div>
                   </div>
@@ -1194,7 +1194,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Phone Number" id="bphone" name="bphone" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Mobile Number" id="bphone" name="bphone" handleChange={this.handleInput} />
                           {this.state.berror_number ? (
                             <div className="error-msg">
                               {this.state.berrorMessage_number}
@@ -1212,7 +1212,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Email (Optional)" id="bemail" name="bemail" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Email Address (Optional)" id="bemail" name="bemail" handleChange={this.handleInput} />
                           {this.state.berror_email ? <div className="error-msg">{this.state.berrorMessage_email}</div> : null}
                         </div>
                       </div>
@@ -1259,7 +1259,7 @@ export class Step2Component extends React.Component {
                   </div>
                   <div className='row'>
                     <div className='col-md-12 form-group'>
-                      {!isMobile() ? (<button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Continue</button>) : ''}
+                      {!isMobile() ? (<button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button>) : ''}
                     </div>
                   </div>
                 </div> : <div>
@@ -1271,7 +1271,7 @@ export class Step2Component extends React.Component {
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
-                        <label className='form-label defaultlbl' htmlFor="billing">Make this the default address</label>
+                        <label className='form-label defaultlbl' htmlFor="billing">Make this my default address</label>
                       </div>
                     </div>
 
@@ -1293,7 +1293,7 @@ export class Step2Component extends React.Component {
               <div className='stepbgNone'>3</div>
             </div>
             <div className="leftBox">
-              <div className='heading-label'>Pay By</div>
+              <div className='heading-label'>Payment Options</div>
             </div>
             <div className="rightBox">
               <div className='heading-label'>Choose a payment method</div>

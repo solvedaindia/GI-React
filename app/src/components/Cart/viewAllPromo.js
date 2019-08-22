@@ -68,7 +68,7 @@ class ViewAllPromo extends React.Component {
         >
           <Modal.Body>
             <Button className="close" onClick={this.handleClose} />
-            <h4 className="heading">Available Promo codes/Coupons</h4>
+            <h4 className="heading">Available Coupon Codes</h4>
             {!!error && (
               <div className="promoError">This coupon code is not valid.</div>
             )}

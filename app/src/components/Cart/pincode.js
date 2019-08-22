@@ -88,7 +88,7 @@ class Pincode extends React.Component {
 				role="button"
 				onClick={this.updatePincode.bind(this, this.props)}
 				>
-				Done
+				Submit
 				</a>
 				:
 				<a

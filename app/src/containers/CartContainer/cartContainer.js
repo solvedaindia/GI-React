@@ -120,7 +120,7 @@ class CartDetail extends React.Component {
 							className='promoMsg'
 							onClick={this.handleOnClick.bind(this)}
 						>
-							Got a promo code? <ExpandIcon width={16} height={16}/>
+							Do you have a coupon code?<ExpandIcon width={16} height={16}/>
 						</p>
 						{cartData.promotionCode && cartData.promotionCode.length ?
 						<AppliedPromoCode
@@ -169,7 +169,7 @@ class CartDetail extends React.Component {
                 <p className='shipping'>
                   <span className='info'>Shipping</span>
                   <span className='val'>Free</span>
-                  <span className='shippingMsg'>Free shipping on cart total above ₹5,000</span>
+                  <span className='shippingMsg'>Free shipping on orders above ₹5,000</span>
                 </p>
                 :
                 <p className='shipping'>

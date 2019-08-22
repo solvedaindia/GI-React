@@ -149,9 +149,9 @@ class OrderConformation extends React.Component {
                     <div className="row">
                         <div className="col-md-9">
                             <div className="orderConfirmed">
-                                <h3 className="heading">Your Order has been confirmed!</h3>
+                                <h3 className="heading">Your order has been confirmed</h3>
                                 <p className="text">Thank you for shopping with us!</p>
-                                <p className="text">We will notify you via email when your order is ready to be shipped.</p>
+                                <p className="text">We will send an email to your registered address when your order is ready to be shipped.</p>
                             </div>
                         </div>
                         <div className="col-md-3">

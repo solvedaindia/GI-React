@@ -251,7 +251,7 @@ export class Step1Component extends React.Component {
                             <Input
                               type="text"
                               name="userId"
-                              title="Mobile Number/Email Address"
+                              title="Mobile or Email"
                               placeholder=""
                               onChange={e => this.handleChange(e)}
                               value={this.state.userId}
@@ -323,10 +323,10 @@ export class Step1Component extends React.Component {
                   <div className='stepbgNone'>2</div>
                  </div>
                 <div className='leftBox'>
-                  <div className='heading-label'>Ship to</div>
+                  <div className='heading-label'>Deliver To</div>
                 </div>
                 <div className='rightBox'>                 
-                <div className='heading-label'>Add your shipping address</div>              
+                <div className='heading-label'>Add your delivery address</div>              
                 </div>
               </div>
               
@@ -335,7 +335,7 @@ export class Step1Component extends React.Component {
                    <div className='stepbgNone'>3</div>
                  </div>
                 <div className='leftBox'>
-                <div className='heading-label'>Pay By</div>
+                <div className='heading-label'>Payment Options</div>
                 </div>
                 <div className='rightBox'>
                 <div className='heading-label'>Choose a payment method</div>
