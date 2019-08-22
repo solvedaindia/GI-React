@@ -144,7 +144,7 @@ class WelcomeForm extends Component {
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
         <div className='relative'><Input
           type="text"
-          title="Email ID/Mobile Number"
+          title="Email Address or Mobile Number"
           name="userId"
           placeholder=""
           onChange={this.handleChange}
