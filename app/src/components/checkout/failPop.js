@@ -41,9 +41,9 @@ export default class FailPop extends React.Component {
 
             </div>
             <h3 className="heading">
-              Oops!
+              Oops
             </h3>
-            <p className='payment-notcomplete'>We couldn't complete the payment.</p>
+            <p className='payment-notcomplete'>Your payment could not be completed</p>
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
                 Cancel

@@ -77,13 +77,14 @@ class DeleteCartItem extends React.Component {
 					<Row>
 						<Col xs={12} md={12}>
 							<div className='del_modal'>
-								<h4 className='heading'>Are you sure you want to delete</h4>
+								<h4 className='heading'>Are you sure you want to remove </h4>
 								<p className='itemDelInfo'>
-									{prodName}?
+									{prodName}
 								</p>
+								<h4 className='heading'>from your cart?</h4>
 								<div className='userAction'> 
 									<button className='btn delete' onClick={this.handleMoveToWishList}>
-										Move to Wishlist
+										Save For Later
 									</button>
 									<button className='btn wishList' onClick={this.handleChange} >
 										Remove

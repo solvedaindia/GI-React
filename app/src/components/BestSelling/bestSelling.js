@@ -49,6 +49,7 @@ class BestSeller extends React.Component {
     const {
       bestSellerData: { productList = [], title = '' },
     } = this.state;
+    console.log('dididi --- ',title)
     const settings = {
       dots: false,
       infinite: false,
