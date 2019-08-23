@@ -210,7 +210,7 @@ class UserAccInfo extends React.Component {
           {this.state.userName !== null &&
             getCookie('isLoggedIn') === 'true' ? (
               <li className="listItem listItemUnSelected">
-                <a className="dropDown">{this.state.userName}!</a>
+                <a className="dropDown">{this.state.userName}</a>
               </li>
             ) : null}
           {this.state.userType}
