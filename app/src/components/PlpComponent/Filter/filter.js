@@ -101,8 +101,7 @@ class Filter extends React.Component {
     let filteredArr = [...this.state.facetArr];
     // console.log('FilterArr---',this.state.facetArr);
     const extFacetArr = this.state.facetArr.map(item => {
-      console.log('exstractedArr --- ', item.value);
-      return item.value;
+      return item.value.replace(/\%2B/g, '+');
     });
     if (!extFacetArr.includes(selectedFacet.value)) {
       filteredArr.push(selectedFacet);
@@ -110,7 +109,7 @@ class Filter extends React.Component {
     } else {
       filteredArr = this.state.facetArr.filter((value, i, arr) => {
         console.log('else value -- ', value, selectedFacet);
-        if (value.value != selectedFacet.value) {
+        if (value.value.replace(/\%2B/g, '+') != selectedFacet.value) {
           return value;
         }
       });
