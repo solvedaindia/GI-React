@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/InspirationDetails.scss'
+import  '../../../public/styles/static-pages/inspirationDetails.scss'
 import {
   imagePrefix,
 } from '../../../public/constants/constants';
