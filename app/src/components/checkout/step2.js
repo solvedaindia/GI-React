@@ -612,18 +612,24 @@ export class Step2Component extends React.Component {
             
             const inventoryFlag = resp.data.data.reserved;
             console.log("precheckout response ----",inventoryFlag, resp.data);
-            if (inventoryFlag === '0') {
-              alert('One or more item in you cart is Out Of Stock.')
-              window.location.assign('/cart')
-            }
-            else {
-              this.saveGST(resp.data.data.orderId)
-              .then(() => {
-                resolve(resp.data.data.orderId);
-              }).catch((err) => {
-                reject();
-              })
-            }
+            this.saveGST(resp.data.data.orderId)
+            .then(() => {
+              resolve(resp.data.data.orderId);
+            }).catch((err) => {
+              reject();
+            })
+            // if (inventoryFlag === '0') {
+            //   alert('One or more item in you cart is Out Of Stock.')
+            //   window.location.assign('/cart')
+            // }
+            // else {
+            //   this.saveGST(resp.data.data.orderId)
+            //   .then(() => {
+            //     resolve(resp.data.data.orderId);
+            //   }).catch((err) => {
+            //     reject();
+            //   })
+            // }
             
           }).catch((err) => {
             console.log(err, "precheckout err");

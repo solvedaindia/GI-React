@@ -9,7 +9,7 @@
   width: 100%;
 }
 .mini-cartscroll {
-  max-height: 570px;
+  max-height: 400px;
   overflow: auto;
 }
 .mini-cart {
@@ -72,27 +72,38 @@
           display: block;
           width: 65%;
           padding: 0 0 0 12px;
+          .link{
+            &:hover,&:focus{
+              text-decoration: none;
+            }
+          }
 
           .heading {
             color: $black;
-            font-family: $font-bold;
+            font-family: $font-medium;
             font-size: 16px;
-            margin: 0;
+            line-height: 16px;
+            margin: 0 0 5px 0;
           }
           .description {
-            margin: 0;
+            margin: 0 0 6px 0;
             font-size: 10px;
+            line-height: 10px;
             color: $greyLight;
+            font-family: $font-regular;
           }
           .price {
             margin: 0;
+            line-height: initial;
             .discount-price {
               font-size: 20px;
+              line-height: 20px;
               color: $cerulean;
               font-family: $font-bold;
             }
             .priceno-discount {
               font-size: 16px;
+              line-height: 16px;
               color: $greylightColor;
               font-family: $font-light;
               text-decoration: line-through;
@@ -115,6 +126,7 @@
             color: $battleshipGrey;
             font-size: 10px;
             margin: 0;
+            font-family: $font-medium;
             .quantity {
               padding: 0 16px 0 0;
               display: block;
@@ -122,7 +134,9 @@
               float: left;
               .textval {
                 color: $black;
-                font-size: 18px;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
               }
             }
             .shipping-charge {
@@ -130,7 +144,9 @@
               display: block;
               .textval {
                 color: $black;
-                font-size: 18px;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
               }
             }
           }
@@ -179,6 +195,30 @@
   }
 }
 
+/*---- ScrollBar -----------------------*/
+@at-root#mini-cartscroll::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+border-radius: 10px;
+background-color: #f7f8f8;
+width:20px;
+}
+
+#mini-cartscroll::-webkit-scrollbar
+{
+width: 3px;
+background-color: #dfe0de;
+}
+
+#mini-cartscroll::-webkit-scrollbar-thumb
+{   
+width:5px;
+border-radius: 10px;
+box-shadow : inset 0 0 6px rgba(0,0,0,.3);
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #ccc;
+}
 
 
 /* 
