@@ -378,7 +378,7 @@ export class Step3Component extends React.Component {
                     </div> */}
 
                 <div className='paymentMethod customradio'>
-                  <h4 className='heading'>Select Payment Method</h4>
+                  <h4 className='heading'>Choose your payment method</h4>
                   <div className="pay_radio">
                     <div className="inputBox">
                       <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />

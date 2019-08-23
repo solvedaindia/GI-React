@@ -28,7 +28,7 @@ import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 
 import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.png';
 import newsLetterMobPopupImg from '../../../public/images/news-letter_01.png';
-import {isMobile} from '../../utils/utilityManager';
+import { isMobile } from '../../utils/utilityManager';
 class NewsletterModel extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +45,7 @@ class NewsletterModel extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps(nextProps) { }
 
   componentDidMount() {
     const now = new Date();
@@ -129,32 +129,31 @@ class NewsletterModel extends React.Component {
           <Row className="no-margin">
             <Col xs={12} md={5} className="no-padding">
               <div className="Thumbnailbox">
-                {!isMobile() ? <img className="imgfullwidth" src={NewsletterThumbnailImg} />:<img className="imgfullwidth" src={newsLetterMobPopupImg} />}
+                {!isMobile() ? <img className="imgfullwidth" src={NewsletterThumbnailImg} /> : <img className="imgfullwidth" src={newsLetterMobPopupImg} />}
               </div>
             </Col>
 
             <Col xs={12} md={7} className='newsletter-form-box'>
               <div className="form_newsletter">
-              {!isMobile() ?<h3 className="heading">
+                {!isMobile() ? <h3 className="heading">
                   Have you joined our mailing list yet?
-                </h3>:''}
+                </h3> : ''}
                 <Form className='news-letter-form'>
-                {!isMobile() ? <p className="signup-text">
-                    Sign up to be the first to recieve updates and ongoing
-                    offers!
-                  </p>:''}
+                  {!isMobile() ? <p className="signup-text">
+                    Sign up to be the first to recieve updates and ongoing offers!
+                  </p> : ''}
                   {isMobile() ? <h3 className="heading">
                     Have you joined our mailing list yet?
                   </h3> : ''}
                   <FormGroup className="email">
-                    {isMobile() ?<label className='form-label'>Email Address</label>:''}
+                    {isMobile() ? <label className='form-label'>Email Address</label> : ''}
                     <input
                       onChange={this.handleInputChange.bind(this)}
                       type={this.state.inputType}
                       name="text"
                       id="exampleEmail"
                       className="form-control newinputmargin"
-                      placeholder={!isMobile() ? 'Your Email' :''}
+                      placeholder={!isMobile() ? 'Email Address' : ''}
                     />
                     {errorItem}
                   </FormGroup>

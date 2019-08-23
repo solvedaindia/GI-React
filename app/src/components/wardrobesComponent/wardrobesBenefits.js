@@ -1,13 +1,11 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI,
-  storeId,
-  accessToken,
+  espotAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class WbEspots extends React.Component {
+class WardrobeBenefits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,12 +45,10 @@ class WbEspots extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div id={index}>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
-			</div>
+				<div className='wardrobeEspot' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 		)
     );
   }
 }
 
-export default WbEspots;
+export default WardrobeBenefits;

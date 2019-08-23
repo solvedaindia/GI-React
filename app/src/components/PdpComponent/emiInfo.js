@@ -118,7 +118,7 @@ class EmiInfo extends React.Component {
 	render () {
 		return (
 			<>
-				<Button className='btn-knowmore'  onClick={this.handleShow}>Know More</Button>
+				<Button className='btn-knowmore'  onClick={this.handleShow}>Learn More</Button>
 				<Modal className='modal_emiInstallment' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>

@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
-import  '../../../public/styles/static-pages/chefKitchen.scss';
+import  '../../../public/styles/static-pages/chefkitchen.scss';
 
 import {
   kitchenBannerAPI,

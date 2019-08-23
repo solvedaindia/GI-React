@@ -42,7 +42,7 @@ class addToCartComponent extends React.Component {
   /* render delivery message */
   renderdeliveryMessage(props) {
     if (props.pincodeServiceable === false) {
-      let errorMsg = 'This Pin Code is non-serviceable';
+      let errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
         errorMsg = props.error;
       }

@@ -324,10 +324,10 @@ class RegisterWithEmailMobile extends React.Component {
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
                     >
-                      Sign Up
+                      Register
                     </Button>
                     <p className="have-account">
-                      Have an account?{' '}
+                    Already have an account?{' '}
                       <a
                         className="login"
                         role="button"
@@ -337,7 +337,7 @@ class RegisterWithEmailMobile extends React.Component {
                       </a>
                     </p>
                     <p className="sign_text">
-                      By signing up you agree to our{' '}
+                    By clicking register you agree to our{' '}
                       <a className="link" href="">
                         T&C
                       </a>{' '}

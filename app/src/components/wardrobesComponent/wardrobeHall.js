@@ -2,14 +2,13 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
-import  '../../../public/styles/static-pages/warobes.scss';
 
 import {
   wardrobesHallAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 
-class WardrobesHAll extends React.Component {
+class WHallOfFame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,27 +52,28 @@ class WardrobesHAll extends React.Component {
   render() {
     const { hallSlider } = this.state;
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll:2,
     };
     return (
-      <div className="fsBanner">
-         <h2 className="Kitchen-Hall-Of-Fame">{this.state.title}</h2>
-     <p className="Paragraphhall">{this.state.description}</p>
-        <Slider {...settings}>
-          {!!hallSlider &&
-            hallSlider.map((sliderData, index) => (
-              <a href={sliderData.onClickUrl} key={index}>
-                <img className='wardrobehallsize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
-               </a>
-            ))}
-        </Slider>
-      </div>
+      	<div className="hallOfFame">
+         	<h2 className="title">{this.state.title}</h2>
+          	<p className="desc">{this.state.description}</p>
+			<Slider {...settings}>
+			{!!hallSlider &&
+				hallSlider.map((sliderData, index) => (
+				<a href={sliderData.onClickUrl} key={index}>
+					<img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+					<p className='info'>{sliderData.desc}</p>
+				</a>
+				))}
+			</Slider>
+      	</div>
     );
   }
 }
 
-export default WardrobesHAll;
+export default WHallOfFame;

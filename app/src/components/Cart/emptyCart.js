@@ -25,21 +25,21 @@ class EmptyCart extends React.Component {
              : 
               <CartLogo width={68} height={68} />
             }
-            <h2 className="shopHeadLine">Your shopping cart is empty</h2>
-            <p className="info">You haven’t added any items to your yet </p>
-            <a className="btn shopBtn" href='/'>Shop Now</a>
+            <h2 className="shopHeadLine">You haven't chosen any products yet</h2>
+            <p className="info">Click on the link below to find furniture you won't be able to resist</p>
+            <a className="btn shopBtn" href='/'>Start Browsing</a>
           </div>
         </div>
         {/* Right Side Info */}
         <div className="shopInfo">
-          <h2 className="shopTitle">Why shop from us</h2>
+          <h2 className="shopTitle">Why Choose Godrej Interio</h2>
           <ul className="keyPoints">
             <li className="detailCard">
               <DeliveryLogo width={34} height={34} />
-              <h3 className="cardHeading">On time delivery</h3>
+              <h3 className="cardHeading">{`Free Delivery & Installation`}</h3>
               <p className="cardInfo">On orders above ₹5,000 and above.</p>
             {!isMobile() ? <a href="/support" className="detailLink">
-                Details
+            Learn More
               </a> : ''
             }
             </li>
@@ -48,7 +48,7 @@ class EmptyCart extends React.Component {
               <h3 className="cardHeading">Free Installation</h3>
               <p className="cardInfo">On orders above ₹5,000 and above.</p>
               {!isMobile() ? <a href="/support" className="detailLink">
-                Details
+              Learn More
               </a> : ''
             }
             </li>
@@ -57,7 +57,7 @@ class EmptyCart extends React.Component {
               <h3 className="cardHeading">Furniture Exchange</h3>
               <p className="cardInfo">On orders above ₹5,000 and above.</p>
               {!isMobile() ? <a href="/support" className="detailLink">
-                Details
+              Learn More
               </a> : ''
             }
             </li>
