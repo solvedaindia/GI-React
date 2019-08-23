@@ -96,7 +96,9 @@ class SearchBar extends React.Component {
     
   }
 
-  onLinkNavigation = () => {
+  onLinkNavigation = (e) => {
+    console.log('dd -- ', e.target.name);
+    document.getElementById("searchInput").value=e.target.name;
     this.props.plpReduxStateReset();
     this.setState({
       searchData: [],
@@ -135,7 +137,7 @@ class SearchBar extends React.Component {
                             if (index < 6) {								
                                 return(
 									<li className="list" key={index}>
-										<Link className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${item.term}`, }} >
+										<Link name={item.term} className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${item.term}`, }} >
 											<strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length).replace(' ','')}
 										</Link>
 									</li>
