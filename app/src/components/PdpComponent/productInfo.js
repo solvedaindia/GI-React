@@ -47,7 +47,7 @@ class productInfo extends React.Component {
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
         { !isMobile() && <div className="shippingCharge">
-          Shipping Charges:{' '}
+          Delivery Charges:{' '}
           <span className="bold">
             {this.props.pinCodeData.shippingCharge > 0 ? (
             <>
@@ -68,7 +68,7 @@ class productInfo extends React.Component {
           {!isMobile() ?  
           (<div className="discount-off text">
             { parseInt(this.props.productData.discount) > 1 &&
-              <>{parseInt(this.props.productData.discount)}% OFF </>
+              <>Get {parseInt(this.props.productData.discount)} % OFF </>
             }
             { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
             <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
@@ -77,7 +77,7 @@ class productInfo extends React.Component {
           :
           (<div className="discount-off text mob-discouont-off">
             { parseInt(this.props.productData.discount) > 1 &&
-              <><span className='discount-text-off'>{parseInt(this.props.productData.discount)}% OFF </span></>
+              <><span className='discount-text-off'>Get {parseInt(this.props.productData.discount)}% OFF </span></>
             }
             { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
             <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
@@ -91,7 +91,7 @@ class productInfo extends React.Component {
             role="button"
             onClick={this.toggleOffers.bind(this)}
           >
-           <span className="view-offer-text">View Offer</span>
+           <span className="view-offer-text">View Offers</span>
            <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }

@@ -11,14 +11,15 @@ const experienceStore = props => {
   	<>
 		{props.experienceStore.length > 0 &&
 			<div className="ExperienceProduct">
-				Experience this product at{' '}
+				Experience this product at your neartest{' '}
 				<Link to={{ pathname: '/storelocator', state: { storeId: [props.experienceStore[0].storeId] } }} className="bold" role="button">
-					{props.experienceStore[0].name} ({props.experienceStore[0].distanceFromShipToAddress} K.M away)
+					{props.experienceStore[0].name} ,{props.experienceStore[0].distanceFromShipToAddress} km from your current location.
                 </Link>
 				{ props.experienceStore.length > 1 &&
 					<>
-						{' '}and <Link to={{ pathname: '/storelocator', state: { storeId: storeArray } }} className="bold" role="button">
-							{props.experienceStore.length-1} More {props.storeText}
+						{' '} <Link to={{ pathname: '/storelocator', state: { storeId: storeArray } }} className="bold" role="button">
+							{/* {props.experienceStore.length-1}  */}
+							Locate More {props.storeText}
                 		</Link>
 					</>
 				}

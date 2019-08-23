@@ -18,7 +18,7 @@ import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
 const NUMB_REG = /^\d+$/;
-const pageTitle = 'Experience our products at your nearest Godrej Interio store';
+const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
 
 const prevArrowImg = (
     <img src={require('../SVGs/carousel__arrowLeft.svg')} />
@@ -383,35 +383,35 @@ class StoreLocator extends React.Component {
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
                         <input type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
-                        <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Find Stores':'Find'}</button>
+                        <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores':'Find'}</button>
                     </div>
 
                     { showFilter &&
                         <div className='storeTypes'>
                              {isMobile() ? (<h1 className='headingtitle'>Choose store type</h1>):''}
                             <ul className='typeList'>
-                                <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture Stores', 'home')}>
+                                <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture', 'home')}>
                                     <figure className='typeList'><img src={Img1} className='storeImg'/></figure>
                                     <figcaption className="storetext">
-                                        Home Furniture Stores
+                                        Home Furniture
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattress Stores', 'mattress')}>
+                                <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattresses', 'mattress')}>
                                     <figure className='typeList' ><img src={Img2} className='storeImg'/></figure>
                                     <figcaption className="storetext">
-                                        Mattress Stores
+                                        Mattresses
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchen Gallery', 'kitchen')}>
+                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchens', 'kitchen')}>
                                     <figure className='typeList'><img src={Img3} className='storeImg'/></figure>
                                     <figcaption className="storetext">
-                                        Kitchen Galleries
+                                        Kitchens
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'B2B Experience Stores', 'b2b')}>
+                                <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Office/ Business Furniture', 'b2b')}>
                                     <figure className='typeList'><img src={Img4} className='storeImg'/></figure>
                                     <figcaption className="storetext">
-                                        B2B Experience Stores
+                                        Office/ Business Furniture
                                     </figcaption>
                                 </li>
                             </ul>
@@ -419,7 +419,7 @@ class StoreLocator extends React.Component {
                     }
                     { !storeData &&
                     <div className='storeTypes'>
-                        <h2 className='headingtitle'>No stores within this {this.state.searchStoreType}</h2>
+                        <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                         <>
                             { !showFilter &&
                                 <span>Please try another city or pincode<br/><br/></span>
@@ -432,9 +432,9 @@ class StoreLocator extends React.Component {
                 <div className="clearfix"></div>
                     { storeData &&                
                         <div className="storeDetails clearfix">
-                            {!isMobile() ? (<h1 className='headingtitle'>One stop destination for your furniture</h1>):''}
+                            {!isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>):''}
                             <div className='storeList'>
-                            {isMobile() ? (<h1 className='headingtitle'>One stop destination for your furniture</h1>):''}
+                            {isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>):''}
                                 {<div className='detailCard' id='detailCardSection'>
                                 {!isMobile() ? (
                                     !!storeData && storeData.data.map((physicalData, index) => {

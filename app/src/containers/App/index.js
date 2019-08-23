@@ -46,7 +46,7 @@ import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer/kitchenContainer';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
 import InspirationDetails from '../InspirationDetailsContainer/index';
-import WardrobesContainer from '../wardrobesContainer/index';
+import WardrobesContainer from '../wardrobesContainer/wardrobeContainer';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../TermsConditions/index';
@@ -238,7 +238,7 @@ export default class App extends React.Component {
           <Route path="/cookie" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
-          {/* <Route path="/chefkitchen" component={SteelChefKitchen} /> */}
+          <Route path="/chef-kitchen" component={SteelChefKitchen} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy-policy" component={privacyPolicy} />

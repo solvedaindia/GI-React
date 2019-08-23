@@ -5,7 +5,7 @@ import {
 } from '../../../public/constants/constants';
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
-class ReadMore extends React.Component {
+class AboutWardrobe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ class ReadMore extends React.Component {
 
   	getReadMoreData() {
     apiManager
-      	.get(`${espotAPI}GI_Homepage_About_Godrej`)
+      	.get(`${espotAPI}GI_ABOUT_MODULAR_WARDROBE`)
 		.then(response => {
 			const {data} = response || {};
 			this.setState({
@@ -53,4 +53,4 @@ class ReadMore extends React.Component {
   }
 }
 
-export default ReadMore;
+export default AboutWardrobe;

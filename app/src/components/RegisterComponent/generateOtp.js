@@ -103,9 +103,9 @@ class GenerateOtp extends React.Component {
                     <Form>
                         <FormGroup className='otp-verification'>
                             <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
-                            <p className='text otp-text'>Enter the verification code that has been OTP sent to your mobile number</p>
+                            <p className='text otp-text'>Please enter the verification code sent to your mobile number</p>
                             <div className='form-div clearfix'>
-                                <label for="otp" className="form-label">OTP (Sent to xxxxxx{userId.substr(userId.length - 4)})</label>
+                                <label for="otp" className="form-label">OTP sent to xxxxxx{userId.substr(userId.length - 4)}</label>
                                 <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
                                 {errorItem}
                                 <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>Resend OTP</Button>

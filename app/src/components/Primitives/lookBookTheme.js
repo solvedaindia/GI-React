@@ -2,16 +2,10 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/static-pages/inspiration.scss';
-
 import '../../../public/styles/slider.scss';
-import {isMobile} from '../../utils/utilityManager';
-
 import {
   lookbookThemeAPI,
-  FullImg,
   imagePrefix,
-  storeId,
-  accessToken,
 } from '../../../public/constants/constants';
 const prevArrowImg = (
     <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
