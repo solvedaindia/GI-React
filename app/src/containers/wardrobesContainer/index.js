@@ -14,8 +14,6 @@ import ConsultationForm from '../../components/Primitives/ConsultForm';
 import {Link} from 'react-router-dom';
 import WbEspots from '../../components/wardrobesComponent/wardrobesBenefits';
 import WIEspots from '../../components/wardrobesComponent/wardrobesInterio';
-import ExKitchens from '../../components/KitchensComp/expKitchens';
-import '../../../public/styles/static-pages/consultForm.scss';
 
 
 export default class WardrobesContainer extends React.Component {
@@ -34,9 +32,8 @@ export default class WardrobesContainer extends React.Component {
               </div>
               <WbEspots />
               <div className="crouselBAckgrounding">
-                <div className='container'>
+                <h1 className="Types-of-Modular-War">Types of Modular Wardrobes</h1>
                 <WardrobesTypes />
-              </div>
               </div>
               <div className='whatGoesContainer'>
                 <div className="container">
@@ -72,10 +69,11 @@ export default class WardrobesContainer extends React.Component {
               <div className='wardroHallCont'>
                 <WardrobesHAll />
               </div>
-              <div className="formContainer">
+              <div id="form_consult" className="formwardrobeContainer">
                 <div className="container">
                   <img className="formBackGroundCover" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="Snow" />
-                  <div id='consultForm' className="Form-bakground">
+                  <div className="Form-bakground">
+
                     <ConsultationForm />
                   </div>
                 </div>
@@ -172,9 +170,28 @@ export default class WardrobesContainer extends React.Component {
                   </div>
                 </div>
               </div>
-                <ExKitchens/>
-              <WIEspots />
-              {/* <div className="modularWardrobes">
+
+              <div className="exp-our-kitchen">
+                <div className="container">
+                  <div className="mainImg">
+                    <img className="bigSofa" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png' alt="rectangle" />
+                    <div className="ourStores">
+                      <h3 className="h3Css">Our store</h3>
+                      <h2 className="h2Css">Experience our Store facilities</h2>
+                      <p className="paragraphcss">Experience our wardrobes at <span className="spanish">Vikroli
+                          Godrej Store (1.6 km away) </span>
+                        You can find more stores around you.</p>
+                      <Link to='/storelocator'>
+                      <button className="storeButton">Find More Stores</button>
+                      </Link>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {/* <WIEspots /> */}
+              <div className="modularWardrobes">
                 <div className="container">
                   <div className="row">
                     <div className="col-md-12">
@@ -206,7 +223,7 @@ export default class WardrobesContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
         )
     }

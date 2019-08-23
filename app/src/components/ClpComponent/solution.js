@@ -12,7 +12,7 @@ class Solution extends React.Component {
 
   getSolutionData() {
   	apiManager
-  		.get(`${espotAPI}GI_Homepage_Godrej_Solution`)
+  		.get(espotAPI+'GI_Homepage_Godrej_Solution')
   		.then(response => {
   			this.setState({
                 solutionData: response.data.data,
@@ -27,11 +27,15 @@ class Solution extends React.Component {
   }
 
   render() {
-    const { solutionData } = this.state;
+    const { isLoading, solutionData } = this.state;
     return (
-      
-      !!solutionData &&
-      <div dangerouslySetInnerHTML={{ __html: solutionData.content }} />
+        <div className="homePageStatic">
+            {/* {!isLoading ? (
+                <div dangerouslySetInnerHTML={{ __html: solutionData.description }} />
+            ) : (
+            <div>...</div>
+            )} */}
+        </div>
     );
   }
 }

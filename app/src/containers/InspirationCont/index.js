@@ -1,6 +1,12 @@
-import React from 'react';import SubCategory from '../../components/GlobalComponents/subCategory';
+
+import React from 'react';
+import FullBanner from '../../components/Primitives/slider';
+import LivingTheme from '../../components/ClpComponent/subComponents/livingInspiration';
+import SubCategory from '../../components/GlobalComponents/subCategory';
+import BestSeller from '../../components/BestSelling/bestSelling';
+import ReadMore from '../../components/GlobalComponents/readMore';
 import  '../../../public/styles/static-pages/inspiration.scss';
-import LookbookThemeCarousel from '../../components/Primitives/lookBookTheme';
+import InsCrousel from '../../components/Primitives/crousel';
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner';
 import GodrejSolutionEspot from '../../components/InspirationComp/godrejSolution';
 
@@ -23,8 +29,8 @@ export class Inspiration extends React.Component {
         <div className="inpspirationBanner">
           <InspirationBanner />
         </div>
-        <div className="container">
-          <LookbookThemeCarousel />
+        <div className="lookcrouse">
+          <InsCrousel />
         </div>
 		    <SummerData/>
           <div className="uuscontainer">

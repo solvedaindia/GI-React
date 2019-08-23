@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/aboutUs.scss'
-import {
- imagePrefix,
-} from '../../../public/constants/constants';
+
 
 export default class GreenInitiatives extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
-    const img2 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
-    const img3 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
+    const img1 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
+    const img2 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
+    const img3 = <img className="greenImage" src='https://192.168.0.57/imagestore/staticImages/aboutUs/greenguard.jpg' alt="rectangle"/>
     
 
     this.state = {

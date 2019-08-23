@@ -98,7 +98,7 @@ class NotifyMe extends React.Component {
 		  }
 		return (
 			<>
-				<Button className="btn notifybtn" onClick={this.handleShow}>Notify me when available</Button>
+				<Button className="btn notifybtn" onClick={this.handleShow}>Notify Me</Button>
 				<Modal className='modal_notify' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
@@ -107,8 +107,7 @@ class NotifyMe extends React.Component {
 						<Row>
 							<Col xs={12} md={12}>
 								<div className=''>
-
-									<h4 className='heading'>Notify me at this email address</h4>
+									<h4 className='heading'>Notify this Email Address</h4>
 								</div>
 							</Col>
 						</Row>       
@@ -117,7 +116,7 @@ class NotifyMe extends React.Component {
 								<Form>
 									<FormGroup>
 										<div className="form-div clearfix">
-											<Label>Email Address</Label>
+											<Label>Enter Email</Label>
 											<input
 												type="text"
 												name="email"
@@ -134,7 +133,7 @@ class NotifyMe extends React.Component {
 											className="btn-block btn-bg"
 											onClick={this.handleSubmit}
 										>
-											Submit
+											Send
 										</Button>
 									</FormGroup>
 								</Form>

@@ -1,7 +1,9 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI
+  espotAPI,
+  storeId,
+  accessToken,
 } from '../../../public/constants/constants';
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';

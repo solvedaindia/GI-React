@@ -91,7 +91,7 @@ class UserAccInfo extends React.Component {
         console.log('userDetail --- ', response.data.data.name);
         var username = String(response.data.data.name);
         this.setState({
-          userName: `Welcome ${username.split(' ')[0]}`,
+          userName: `Hello ${username.split(' ')[0]}`,
           logonId: response.data.data.logonID,
         });
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
@@ -143,14 +143,14 @@ class UserAccInfo extends React.Component {
       )),
         (this.state.loginStatus = (
           <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
-            Logout
+            Sign Out
           </a>
         ));
     } else {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">Welcome Guest</a>
+            <a className="dropDown">Hello Guest!</a>
           </li>
         ,
         loginStatus:
@@ -159,7 +159,7 @@ class UserAccInfo extends React.Component {
             onClick={this.onLoginRegisterClick.bind(this)}
           >
             {' '}
-            Login/ Register
+            Log In/Register
           </a>
 
       });

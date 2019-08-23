@@ -116,58 +116,6 @@
       font-style: normal;
       line-height: normal;
       color: #000000;
-      font-family: $font-regular;
-      font-size: 18px;
-      text-align: left;
-     }
-    .mailtoLink{
-      color:#005084;
-    }
-    .headingAddress{
-      margin:0;
-      color:#000000;
-      font-family: $font-medium;
-    }
-    .contactDetails{
-      font-family: $font-regular;
-      margin:15px 0 0 0;
-      font-size: 14px;
-      text-align: justify;
-    }
-    .zoneList{
-      display: block;
-      float: left;
-      width: 32%;
-      background: #f7f7f7;
-      margin: 0 5px 5px 0;
-      padding: 20px;
-      min-height: 163px;
-      font-size: 14px;
-
-    
-    }
-   
-    
-   
-    .Redparagraph{      
-      font-family: CeraGIRegular, sans-serif;
-      font-size: 14px;
-      font-weight: normal;
-      font-style: normal;
-      line-height: 1.43;
-      color: #888a8d;
-      text-align: justify;
-      padding: 0 0 32px 0;
-      margin: 0;
-    }
-    .Rednote{
-      line-height: 16px;
-    padding: 0 0 16px 0;
-color: #000000;
-      font-weight: bold;
-      font-size: 16px;
-      text-align: left;
-
         text-align: center;
         padding: 61px 0 0 0;
   
@@ -285,7 +233,13 @@ color: #000000;
       color:$black;
      text-align: left;
     }
-    
+    .Topparagraph{
+      font-family: $font-medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.43;
+    }
     .MainHeading {
     font-family: $font-medium;
     font-size: 30px;

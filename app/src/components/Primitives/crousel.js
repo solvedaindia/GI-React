@@ -1,8 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
-import '../../../public/styles/static-pages/inspiration.scss';
-
 import '../../../public/styles/slider.scss';
 import {isMobile} from '../../utils/utilityManager';
 
@@ -25,7 +23,7 @@ class LookbookThemeCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lookbookThemeSlider: null,
+      hallSlider: null,
       isLoading: false,
       error: null,
       title: '',
@@ -41,7 +39,7 @@ class LookbookThemeCarousel extends React.Component {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
         this.setState({
-          lookbookThemeSlider: data && data.data.bannerList,
+          hallSlider: data && data.data.bannerList,
           title: data && data.data.title,
           description:data && data.data.desc,
           isLoading: false,
@@ -63,7 +61,8 @@ class LookbookThemeCarousel extends React.Component {
   }
 
   render() {
-    const { lookbookThemeSlider } = this.state;
+    const { hallSlider } = this.state;
+    // console.log('test data', description)
     const settings = {
             dots: false,
             infinite: false,
@@ -71,8 +70,7 @@ class LookbookThemeCarousel extends React.Component {
             slidesToShow: 6,
             slidesToScroll: 2,
             prevArrow: prevArrowImg,
-            nextArrow: nextArrowImg,            
-            variableWidth: true,
+            nextArrow: nextArrowImg,
             responsive: [
               {
                 breakpoint: 1024,
@@ -105,16 +103,14 @@ class LookbookThemeCarousel extends React.Component {
       <div className="fsBanner">
           <h1 className="title">{this.state.title}</h1>
           <p className="Paragraphhall">{this.state.description}</p>
-          <div className="inspirationSlider">
           <Slider {...settings}>
-            {!!lookbookThemeSlider &&
-              lookbookThemeSlider.map((sliderData, index) => (
-                <a href={sliderData.onClickUrl} key={index}>
-                  <img className='sliderImageSize' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+            {!!hallSlider &&
+              hallSlider.map((sliderData, index) => (
+                <a href={sliderData.onClickUrl} key={index} className='browse-theme'>
+                  <img className='Paragraph-Copy-13' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                 </a>
               ))}
           </Slider>
-          </div>
       </div>
     );
   }

@@ -100,8 +100,7 @@ render() {
               <div className="panel-heading">
                 <h4 className="panel-title">
                   <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                    href="#collapseFive">How do I track my order?
-
+                    href="#collapseFive">How do I track the progress of an order?
                     </a>
                 </h4>
               </div>
