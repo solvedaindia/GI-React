@@ -36,7 +36,7 @@ class productDefAttribute extends React.Component {
 			radioChecked = getActualSwatchesName === radioValue;
 		}
 
-		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '')} className={`radio${count} ${radioButton}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this)} checked={radioChecked} />;
+		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')} className={`radio${count} ${radioButton}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this)} checked={radioChecked} />;
 		return radioButtonHtml;
 	}
 
