@@ -144,7 +144,7 @@ class CartCount extends React.Component {
         <>
           {CartCount != 0 && CartCount != undefined ? (
             <>
-              <div className="mini-cartscroll">{this.renderOptions()}</div>{' '}
+              <div id="mini-cartscroll" className="mini-cartscroll">{this.renderOptions()}</div>{' '}
               <a href='/cart'><button className="checkout-btn">Proceed to Checkout</button></a>
             </>
           ) : (
