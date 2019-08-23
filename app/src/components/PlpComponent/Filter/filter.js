@@ -46,13 +46,13 @@ class Filter extends React.Component {
   }
 
   toggleDropdown(ismmm) {
-    console.log('ismmm -- ',ismmm);
+    console.log('ismmm -- ', ismmm);
     // if (this.props.isFromRWD && this.state.active) {
     //   // this.props.resetAllPro();
 
     //   //return;
     // }
-    
+
 
     if (!this.state.active) {
       document.addEventListener('click', this.handleOutsideClick, false);
@@ -85,7 +85,7 @@ class Filter extends React.Component {
       facetArr: filteredArr,
     });
   }
-  
+
 
   handleOutsideClick(e) {
     if (this.node.contains(e.target)) {
@@ -125,7 +125,7 @@ class Filter extends React.Component {
     if (this.props.isFromRWD) {
       this.props.rwdFilterCallbackPro();
     }
-    
+
   }
 
   unCkeckAll() {
@@ -148,26 +148,26 @@ class Filter extends React.Component {
     const alreadyAddedFiltersArr = [];
     const filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
-      console.log('kkkeyy --- ',key);
+      console.log('kkkeyy --- ', key);
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
-          console.log('otttt -- ',option);
+          console.log('otttt -- ', option);
           filteredArr.push(option);
           alreadyAddedFiltersArr.push(option);
         });
       }
     }
-    console.log('maksss -- ',alreadyAddedFiltersArr);
+    console.log('maksss -- ', alreadyAddedFiltersArr);
     this.setState({
       facetArr: filteredArr,
       active: this.props.indexPro === 0 && this.props.isFromRWD ? !this.state.active : false
-     });
+    });
     const extFacetArr = filteredArr.map(
       item =>
         // console.log('exstractedArr --- ',item.value);
         item.value.replace(/\%2B/g, '+'),
     );
-    console.log('maksss jjjjj -- ',extFacetArr);
+    console.log('maksss jjjjj -- ', extFacetArr);
     this.filterOptions(extFacetArr);
   }
 
@@ -176,7 +176,7 @@ class Filter extends React.Component {
     this.state.facetArr.map(item => {
       item.value = item.value.replace(/\+/g, '%2B');
     });
-    
+
 
     // var ddd = this.state.facetArr[0]
     // var facetName = ddd.value;
@@ -194,7 +194,7 @@ class Filter extends React.Component {
 
   filterOptions(alreadyAddedFiltersArr) {
     // return this.props.dataPro.facetValues.map((option, i) => {
-      var isRWDFacetSelecte = false;
+    var isRWDFacetSelecte = false;
     const item = this.props.dataPro.facetValues.map((option, i) => {
       let checkboxItem;
       let customSelectionBoxId;
@@ -205,14 +205,14 @@ class Filter extends React.Component {
           <input
             className={`inputCheck checkboxSelected${
               this.props.dataPro.facetName
-            }`}
+              }`}
             onChange={evt => this.onCheckBoxClick(i)}
             defaultChecked
             type="checkbox"
             id={customSelectionBoxId}
             name="scales"
           />
-          
+
         );
         isRWDFacetSelecte = true;
         console.log('ITsChecked----', option.value);
@@ -227,58 +227,58 @@ class Filter extends React.Component {
             id={customSelectionBoxId}
             name="scales"
           />
-        );console.log('ITsChecked Not----', option.value);
+        ); console.log('ITsChecked Not----', option.value);
 
         // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
 
       let checkItem;
       // if (option.facetImage !== "") { //this condition to display all the images in any facet.
-     // if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //As discussed with Lalit removing the condtion and adding check on Facet values
-        // Show images only in colors facet
+      // if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //As discussed with Lalit removing the condtion and adding check on Facet values
+      // Show images only in colors facet
 
-        let colorStyle = {
-          display: 'block',
-        };
-        let imgUrl = null;
-        let colorRGBClass;
-        let customCheckItem;
-        if (option.colorCode) {
-          colorRGBClass = 'circleRGB';
-          colorStyle = { backgroundColor: `rgb${option.colorCode}` };
-          customCheckItem = (
-            <div className="circlebox">
-              <span className={colorRGBClass} style={colorStyle} />
-            </div>
-          );
-          checkItem = (
-            <label className="lblradio" htmlFor={customSelectionBoxId}>
-              {customCheckItem}
-            </label>
-          );
-        }
-        else if (option.facetImage) {
-          colorRGBClass = 'circle';
-          imgUrl = `${imagePrefix}${option.facetImage}`;
-          console.log('Facet Faet ---- ', imgUrl, option);
-          customCheckItem = (
-            <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
-          );
-          checkItem = (
-            <label className="lblradio" htmlFor={customSelectionBoxId}>
-              {customCheckItem}
-            </label>
-          );
-        }
-        else {
-          checkItem = (
-            <label className="lblCheck" htmlFor={customSelectionBoxId} />
-          );
-        }
+      let colorStyle = {
+        display: 'block',
+      };
+      let imgUrl = null;
+      let colorRGBClass;
+      let customCheckItem;
+      if (option.colorCode) {
+        colorRGBClass = 'circleRGB';
+        colorStyle = { backgroundColor: `rgb${option.colorCode}` };
+        customCheckItem = (
+          <div className="circlebox">
+            <span className={colorRGBClass} style={colorStyle} />
+          </div>
+        );
+        checkItem = (
+          <label className="lblradio" htmlFor={customSelectionBoxId}>
+            {customCheckItem}
+          </label>
+        );
+      }
+      else if (option.facetImage) {
+        colorRGBClass = 'circle';
+        imgUrl = `${imagePrefix}${option.facetImage}`;
+        console.log('Facet Faet ---- ', imgUrl, option);
+        customCheckItem = (
+          <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
+        );
+        checkItem = (
+          <label className="lblradio" htmlFor={customSelectionBoxId}>
+            {customCheckItem}
+          </label>
+        );
+      }
+      else {
+        checkItem = (
+          <label className="lblCheck" htmlFor={customSelectionBoxId} />
+        );
+      }
 
-        // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
-        
-     // } 
+      // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
+
+      // } 
       // else {
       //   checkItem = (
       //     <label className="lblCheck" htmlFor={customSelectionBoxId} />
@@ -292,24 +292,24 @@ class Filter extends React.Component {
             key={i}
             className={`dropdown__list-item ${
               i === this.state.selected ? 'dropdown__list-item--active' : ''
-            }`}
+              }`}
           >
             <div className="input_box">
               {checkboxItem}
               {checkItem}
             </div>
 
-            {!isMobile ()? (
+            {!isMobile() ? (
               <div className="label_text">
-              {`${option.label} (${option.count})`}
-            </div>
+                {`${option.label} (${option.count})`}
+              </div>
             )
-            : (
-              <div className="label_text">
-              {option.label} <span className='filterCount'> {option.count}</span>
-            </div>
-            )}
-            
+              : (
+                <div className="label_text">
+                  {option.label} <span className='filterCount'> {option.count}</span>
+                </div>
+              )}
+
           </div>
         </li>
       );
@@ -330,61 +330,38 @@ class Filter extends React.Component {
           className="dropdown_filter"
         >
           <div className="dropdown_filter__filter">
-            <div className="dropdown_filter__toggle dropdown_filter__list-item" onClick={this.props.isFromRWD ? this.state.active ? null : () => this.toggleDropdown(true) : () => this.toggleDropdown(true) }>
+            <div className="dropdown_filter__toggle dropdown_filter__list-item" onClick={this.props.isFromRWD ? this.state.active ? null : () => this.toggleDropdown(true) : () => this.toggleDropdown(true)}>
               {this.props.dataPro.facetName}
-              {this.props.isFromRWD ? this.state.isRWDFilterSelected ? <div className='selectedFacet'>•</div> : null : null }
+              {this.props.isFromRWD ? this.state.isRWDFilterSelected ? <div className='selectedFacet'>•</div> : null : null}
               {this.props.isFromRWD ? null : this.state.active ? upArrow : downArrow}
             </div>
           </div>
 
-          {!isMobile() && <ul
-            className={`dropdown_filter__list ${
-              this.state.active ? 'dropdown_filter__list--active' : ''
-            }`}
-          >
+          {!isMobile() && <ul className={`dropdown_filter__list ${this.state.active ? 'dropdown_filter__list--active' : ''}`}>
             {this.state.facetItem}
-             <div className='clearfix'></div>
+            <div className='clearfix'></div>
             <div className="filterbtnWrapper">
-              <button
-                onClick={() => this.onCancelBtnClick()}
-                className="dropdown_filter__cancelBtn btn"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => this.onApplyBtnClick()}
-                className="dropdown_filter__applyBtn btn"
-              >
-                Apply
-              </button>
+              <button onClick={() => this.onCancelBtnClick()} className="dropdown_filter__cancelBtn btn">Cancel</button>
+              <button onClick={() => this.onApplyBtnClick()} className="dropdown_filter__applyBtn btn">Apply</button>
             </div>
           </ul>}
 
           {isMobile() && <div className='filter-data-list'><ul
             className={`dropdown_filter__list ${
               this.state.active ? 'dropdown_filter__list--active' : ''
-            }`}
+              }`}
           >
             {this.state.facetItem}
-           
+            {isMobile() && <><div className='clearfix'></div>
+
+              <div className="filterbtnWrapper">
+                <button onClick={() => this.onCancelBtnClick()} className="dropdown_filter__cancelBtn btn" >Cancel</button>
+                <button onClick={() => this.onApplyBtnClick()} className="dropdown_filter__applyBtn btn">Apply</button>
+              </div></>}
           </ul></div>}
 
 
-          {isMobile() && <><div className='clearfix'></div>
-            <div className="filterbtnWrapper">
-              <button
-                onClick={() => this.onCancelBtnClick()}
-                className="dropdown_filter__cancelBtn btn"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => this.onApplyBtnClick()}
-                className="dropdown_filter__applyBtn btn"
-              >
-                Apply
-              </button>
-            </div></>}
+
         </div>
       </>
     );
