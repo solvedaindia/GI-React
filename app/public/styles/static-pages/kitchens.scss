@@ -667,7 +667,7 @@ react-slideshow-container {
     padding: 0 0 0 0;
   }
   .easySteps {
-    padding: 102px 0 0 0;
+    padding: 102px 0 110px 0;
     .Delivery-Installation {
       width: 162px;
       height: 108px;
@@ -761,7 +761,9 @@ react-slideshow-container {
   }
   .whatgoesSlider{
     padding: 122px 0 0 0;
- }
+    
+
+  }
   .Ourpromise{
     padding: 104px 0 0 0;
   }
@@ -810,7 +812,67 @@ react-slideshow-container {
   }
   
 
-}
+  .formContainer{
+    padding: 143px 0 0 0;
+   
+    .Form-bakground{
+      width: 80%;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
+      background-color: #ffffff;
+      object-fit: contain;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 60px 119px;
 
+      
+      .form-div{
+        .form-group{
+          .form-labeled{
+             color:$battleshipGrey;
+             display: block;
+             font-size:14px;
+             font-family:CeraGIMedium,sans-serif;
+             text-align: left;
+             font-weight: normal;
+          }
+          .form-control{
+            border:1px solid $lightGrey;
+            border-radius: 0;
+            box-shadow: none;
+            height:54px;
+          }
+        }
+      }
+      .Book-a-consultation {
+        font-family: $font-medium;
+        font-size: 30px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        text-align: center;
+        color: #000000;
+      }
+      
+    }
+  }
+}
+.formBackGroundCover {
+  height: 642px;
+  width: 100%;
+}
   
  
+.FormPAra {
+  font-family: $font-regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #767676;
+}

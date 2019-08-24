@@ -252,7 +252,7 @@ export class HeaderMobile extends React.Component {
     if (getCookie('isLoggedIn') === 'true') {
       loginLogoutItem = (
         <button onClick={this.onSignOutClick} className="signoutBtn">
-          Logout
+          Sign Out
         </button>
       );
       myAccountItem = (
@@ -266,7 +266,7 @@ export class HeaderMobile extends React.Component {
     } else {
       loginLogoutItem = (
         <button onClick={this.onSignInClick.bind(this)} className="loginBtn">
-          Login/ Register
+          Log In/ Register
         </button>
       );
     }

@@ -92,6 +92,10 @@
     }
 }   
 
+.kitchenEspots {
+    // @include container-width;
+    margin: 60px auto;
+}
 .beforeAfter {
     margin: 120px auto;
 }
@@ -152,14 +156,4 @@
         }
     }
 }
-@media screen and (min-width: 768px){
-    .kitchenEspots {
-        margin: 60px auto;
-    }
-}
 
-@media screen and (max-width: 767px){     
-    .kitchenEspots {
-        margin: 35px auto;
-    }
-}

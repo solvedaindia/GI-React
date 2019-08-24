@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'React';
 import { minEMIAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import EMILogo from '../../components/SVGs/emiIcon';

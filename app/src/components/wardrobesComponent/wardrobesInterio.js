@@ -48,6 +48,7 @@ class WIEspots extends React.Component {
     return (
 		!!pageLayoutEspot && (
 			<div className="espotContent" id={index}>
+				
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)

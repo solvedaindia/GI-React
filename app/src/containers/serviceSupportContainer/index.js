@@ -21,20 +21,20 @@ export default class HelpSupport extends React.Component {
       <div className='service-support'>
         <div className='container'>
         <h1 className="heading">Service & Support</h1>
-        <h3 className="subHeading">What can we help you with today?</h3>      
+        <h3 className="subHeading">How can we help you?</h3>      
         
         <div className="row innerContent">
           <div className="col-md-3 faq-wrapper">
             <h2 className="faq-heading">Frequently Asked Questions (FAQ)</h2>
             <ul className='faqList'>
-            <a href='/support'><li className='faqItem active'>My Orders</li></a>
-              <a href='/support'><li className='faqItem'>Before I Buy</li></a>
-              <a href='/support'><li className='faqItem'>Payments</li></a>
-              <a href='/support'><li className='faqItem'>Warranty and Post Delivery Services</li></a>
-              <a href='/support'><li className='faqItem'>My Order Queries</li></a>
-              <a href='/support'><li className='faqItem'>Cancellations and Returns</li></a>
-              <a href='/support'><li className='faqItem'>Gift Cards</li></a>
-              <a href='/support'><li className='faqItem'>Request Service</li></a>
+              <li className='faqItem active'>My Orders</li>
+              <li className='faqItem'>Before I Buy</li>
+              <li className='faqItem'>Payments</li>
+              <li className='faqItem'>Warranty and Post Delivery Services</li>
+              <li className='faqItem'>My Order Queries</li>
+              <li className='faqItem'>Cancellations and Returns</li>
+              <li className='faqItem'>Gift Cards</li>
+              <li className='faqItem'>Request Service</li>
             </ul>
           </div>
           <div className="col-md-9 faq-my-Order">            
@@ -89,12 +89,11 @@ export default class HelpSupport extends React.Component {
         </div>
        
         
-        {/* <button className="Livechat">
         <button className="live-chat">
         <span className="text">Live Chat </span>
         <span className='iconChat'><img className="chatIcon" src='https://203.110.85.50/imagestore/B2C/56101502SD00616/56101502SD00616_01_1440x810.png' alt="Rectangle" /></span>
             
-       </button> */}
+       </button>
       </div>
     );
   }

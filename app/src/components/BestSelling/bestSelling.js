@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import {
   bestSellerAPI,
-  espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 import { is, formatPrice } from '../../utils/utilityManager';
@@ -23,7 +22,7 @@ class BestSeller extends React.Component {
 
   getBestSellerData() {
     apiManager
-      .get(`${espotAPI}GI_CLP_BEST_SELLERS`)
+      .get(bestSellerAPI)
       .then(response => {
         const { data } = response || {};
         const bsData = data && data.data;

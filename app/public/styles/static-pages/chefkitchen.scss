@@ -5,166 +5,23 @@
 .chefKitchen {
     width: 100%;
     background-color: #ffffff;
-    .Paragraph-Copy-13 {
- 
-      font-family: $font-regular;
-      font-size: 14px;
-      font-style: normal;
-      color: $greyish;
-    }
-    .anchorColor{
-      color: #77787a;
-    }
-    .accessContainer{
-      padding: 83px 0 51px 0;
-    }
-    
-    .uldiver{
-      letter-spacing: -0.26px;
-      padding: 20px 0 0 0;
-      font-size: 14px;
-      font-family: $font-medium;
-      color: #036cc5;
-}
-.notSelected{
-  letter-spacing: -0.26px;
-  padding: 20px 0 0 0;
-  font-size: 14px;
-  font-family: $font-medium;
-  color: #77787a;
-}
-    .shutterContainer{
-      padding: 83px  0 51px 0;
-    }
-    .typesOfShut{
-      font-family: $font-medium;
-      font-size: 20px;
-      line-height: 20px;
-    }
-    .accesoriescont{
-      font-family: $font-medium;
-      font-size: 20px;
-      line-height: 20px;
-    }
-    .faqContainer {
-      background-color:white;
-     padding: 110px 0 0 0;
-     .Frequently-Asked-Que {
-       padding: 0 0 80px 0;
-       font-family: $font-medium;
-       font-size: 30px;
-       font-weight: 500;
-       font-style: normal;
-       font-stretch: normal;
-       line-height: normal;
-       letter-spacing: normal;
-       text-align: center;
-       color: #000000;
-     }
-     }
-    .yourKitchenContainer{
-      .imageTitle{
-          font-family: $font-medium;
-          font-size: 16px;
-          letter-spacing: -0.26px;
-          padding: 60px 0 20px 42px;
-      }
-      .colorsKitchenone{
-        background:#664857;
+    .colorsKitchen{
+        // margin-right: 20px;
         height: 166px;
         width:100%;
       }
-      .imageBackGround{
-        background:white;
-        height: 166px;
-        width:100%;
-      }
-      .colorsKitchentwo{
-        background:#a92631;
-        height: 166px;
-        width:100%;
-      }
-      .colorsKitchenthree{
-        background:#f8faf0;
-        height: 166px;
-        width:100%;
-      }.colorsKitchenfour{
-        background:#592a2a;
-        height: 166px;
-        width:100%;
-      }.colorsKitchenfive{
-        background:#ef7f2e;
-        height: 166px;
-        width:100%;
-      }.colorsKitchensix{
-        background:#e77467;
-        height: 166px;
-        width:100%;
-      }.colorsKitchenseven{
-        background:#fbef59;
-        height: 166px;
-        width:100%;
-      }.colorsKitcheneight{
-        background:#b7d76c;
-        height: 166px;
-        width:100%;
-      }.colorsKitchennine{
-        background:#292764;
-        height: 166px;
-        width:100%;
-      }.colorsKitchenten{
-        background:#a8a8a7;
-        height: 166px;
-        width:100%;
-      }.colorsKitcheneleven{
-        background:#664857;
-        height: 166px;
-        width:100%;
-      }.colorsKitchentwelve{
-        background:#664857;
-        height: 166px;
-        width:100%;
-      }
-      .topParagraph {
-        padding: 16px 0 0 0;
-        font-family: $font-regular;
-        font-size: 14px;
-        font-weight: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: normal;
+      .namingconv {
+        height:17px;
         text-align: center;
-        color:#4a4a4a;
+        font-size:14px;
+        color: black;
       }
-     padding: 110px 0 0 0;
-     .heading {
-      height: 36px;
-      font-family: $font-medium;
-      font-size: 30px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-      color: #000000;
-    }
-    }
-    .typesOfSteelContainer{
-      padding: 110px 0 0 0;
-    }
-    .container {
-      position: relative;
-    }
-    .Benefitedsteel{
-      padding: 64px 0 0 0;
-      .topSpacing{
-        padding: 40px 0 0 0;
-      }
-      .heading {
-        font-family: $font-regular sans-serif;
+    
+    .Types-of-Modular-Ward {
+        height: 36px;
+        font-family: $font-regular;
         font-size: 30px;
-        font-weight: 500;
+        font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
@@ -172,11 +29,7 @@
         text-align: center;
         color: #000000;
       }
-      .steelBefits{
-        width:56%;
-        margin:0 auto;
-      }
-      .steelTitle {
+    .titlesss {
         font-family: $font-regular;
         font-size: 14px;
         font-weight: normal;
@@ -187,16 +40,17 @@
         text-align: center;
         color: #767676;
       }
-      .Combined-Shape {
+    .Combined-Shape {
         width: 100%;
         background-color: white;
       }
-      .WardrowsBefits.column2{
-        width:30%;
-        margin:0 auto;
+    .butt {
+        width: 263px;;
+        height: 46px;
+        background-color: white;
       }
       .Benefits-of-Modular {
-        font-family: CeraGodrejInterio sans-serif;
+        font-family: $font-regular sans-serif;
         font-size: 30px;
         font-weight: 500;
         font-style: normal;
@@ -206,120 +60,6 @@
         text-align: center;
         color: #000000;
       }
-    }
-    .kitchensBannerLayout{
-      position: relative;
-      overflow: hidden;
-      .btn-book{
-        padding:13px 56px;
-        font-size: 14px;
-        color:#070707;
-        font-family: $font-medium;
-      }
-      .kitchensBannertext{
-        position: absolute;
-        bottom: 27%;
-        left: 6%;
-        .heading{
-          font-size: 56px;
-          color:#ffffff;
-          margin:0 0 10px 0;
-          line-height: 56px;
-        }
-        .subText{
-          font-size: 18px;
-          color:#ffffff;
-          font-family: $font-regular;
-          margin:0 0 28px 0;
-        }
-        .btn-book{
-          padding:13px 56px;
-          font-size: 14px;
-          color:#070707;
-          font-family: $font-medium;
-        }
-      }
-      .slick-dots{
-        bottom: 90px;
-        button{
-          width:10px;
-          height: 10px;
-          &:before{
-            width:10px;
-            height: 10px;
-          }
-        }
-        li{
-          width: 12px;
-          height:12px;
-          background:#807a7a;
-          button:before{
-            color:#807a7a;
-            width: 12px;
-            height:12px;
-          }
-        }
-        li.slick-active{
-          background:#ffffff;
-          button:before{
-            color:#ffffff;
-          }
-        }
-      }
-      
-      .slick-prev{
-        left:1%;
-      }
-      .slick-next{
-        right:1%;
-      }
-    }
-   
-      .namingconv {
-        font-family: $font-regular;
-        text-align: center;
-        font-size:14px;
-        color: black;
-      }
-    
-  
-    
-   
-    .butt {
-        width: 263px;;
-        height: 46px;
-        background-color: white;
-      }
-      .benefitsOfSteelContainer{
-        padding: 64px 0 0 0;
-        .titlesss {
-          font-family: $font-regular;
-          font-size: 14px;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          text-align: center;
-          color: #767676;
-        }
-        .Combined-Shape {
-          width: 100%;
-          background-color: white;
-        }
-        .Benefits-of-Modular {
-          font-family: $font-regular sans-serif;
-          font-size: 30px;
-          font-weight: 500;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          text-align: center;
-          color: #000000;
-        }
-      }
-     
     .text-blocks {
         height: 261px;
         position: absolute;
@@ -355,12 +95,24 @@
         font-size:14px;
         text-align: center;
       }
-     
-     
+      .This-project-requirement {
+        // width: 751px;
+        // height: 60px;
+        font-family: $font-regular;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: black
+      }
+      .colFive{
         .col-sm-2{
-          width:20% ;
+          width:20%;
         }
-      
+      }
       
        
         
