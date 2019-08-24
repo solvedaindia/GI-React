@@ -1,7 +1,6 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/privacyPolicy.scss';
-import PrivacyPolicies from '../../components/PrivacyPolicy/privpol';
 import PrivacyPolicyInfo from '../../components/PrivacyPolicyEspot/privacyPolicyEspotOne';
 import PrivacyPoliciesThirdPartyInfo from '../../components/PrivacyPolicyEspot/privacyPolicyEspotTwo';
 import PrivacyPolicySecurity from '../../components/PrivacyPolicyEspot/privacyPolicyEspotThree';
