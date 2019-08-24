@@ -35,9 +35,9 @@ export class HeaderContainer extends React.Component {
     return (
       <header className="appheader" id='header'>
         <div className="logo">
-          <Link to="/">
-            <Logo />
-          </Link>
+        {window.location.pathname === '/' ? (<a href="/"><Logo /></a>):
+        (<Link to="/"><Logo /></Link>)}
+          
         </div>
         <div className="navigation">
           <HeaderL1 />
