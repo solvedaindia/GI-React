@@ -107,7 +107,7 @@ class LookbookThemeCarousel extends React.Component {
             {!!hallSlider &&
               hallSlider.map((sliderData, index) => (
                 <a href={sliderData.onClickUrl} key={index} className='browse-theme'>
-                  <img className='Paragraph-Copy-13' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                  <img className='loobookImg' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                 </a>
               ))}
           </Slider>
