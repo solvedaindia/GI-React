@@ -319,7 +319,7 @@ export class HeaderMobile extends React.Component {
                       :
                       linkData.text === 'LOCATE STORES' ? (
                         <Link
-                          onClick={() => this.onLinkNavigation('')}
+                        onClick={this.onOverlayClick.bind(this)}
                           to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
                         >
                           < li className="navTxt" >{linkData.text}</li>
