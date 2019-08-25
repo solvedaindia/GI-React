@@ -56,6 +56,10 @@ exports.getEndPoint = function getEndPoint() {
       endpointConfigURL.hostname = '172.30.0.172:5443';
       endpointConfigURL.searchHostname = '172.30.0.172:3738';
       break;
+    case 'UAT':
+      endpointConfigURL.hostname = '172.30.0.181:5443';
+      endpointConfigURL.searchHostname = '172.30.0.181:3738';
+      break;
   }
   endpointConfigURL.endPoint = endPoint;
   return endpointConfigURL;

@@ -4,7 +4,6 @@ const constants = require('../utils/constants');
 const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
-const filter = require('../filters/filter');
 const headerUtil = require('../utils/headerutil');
 const categoryFilter = require('../filters/categoryfilter');
 
@@ -63,7 +62,7 @@ function getCategoriesData(urlParam, headers, callback) {
     response => {
       if (response.status === 200) {
         const resJson = {
-          categoryArray: filter.filterData('categorynavigation', response.body), // Category Navigation Filter
+          categoryArray: categoryFilter.navigation(response.body), // Category Navigation Filter
         };
         callback(null, resJson);
         return;

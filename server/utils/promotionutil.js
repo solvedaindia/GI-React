@@ -141,38 +141,6 @@ function getMultiplePromotions(productID, headers, callback) {
   );
 }
 
-/* module.exports.getPublicPromotions = getPublicPromotions;
-function getPublicPromotions(productID, headers, callback) {
-  if (!productID) {
-    logger.debug('Get Public Promotion Data :: invalid params');
-    callback(errorUtils.errorlist.invalid_params);
-  }
-
-  const originUrl = constants.associatedPublicPromotion
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{productId}}', '');
-
-  const reqHeader = headerutil.getWCSHeaders(headers);
-
-  origin.getResponse(
-    'GET',
-    originUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response);
-      } else {
-        logger.debug('Error While Calling Promotion API');
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
-} */
-
 /**
  * Get PromotionID List
  */

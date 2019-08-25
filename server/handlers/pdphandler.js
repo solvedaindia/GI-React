@@ -167,110 +167,6 @@ module.exports.getPincodeServiceability = function getPincodeServiceability(
 };
 
 /**
- * SKU Details Summary by Product ID and Swatch Color Identifier
- */
-module.exports.getProductDetailByColor = function getProductDetailByColor(
-  req,
-  callback,
-) {
-  if (!req.params.productId || !req.query.coloridentifier) {
-    logger.debug('GET SKU Details by Color :: Invalid Params');
-    callback(errorUtils.errorlist.invalid_params);
-    return;
-  }
-
-  const reqHeaders = req.headers;
-  const productID = req.params.productId;
-  const colorIdentifier = req.query.coloridentifier;
-  let resJSON = {};
-
-  productUtil.productByProductID(productID, reqHeaders, (err, result) => {
-    if (err) {
-      callback(errorUtils.handleWCSError(err));
-    } else if (result.catalogEntryView && result.catalogEntryView.length > 0) {
-      const skuArray = result.catalogEntryView[0].sKUs;
-      const skuDetail = [];
-      if (skuArray && skuArray.length > 0) {
-        skuArray.forEach(sku => {
-          const attributeArray = sku.attributes;
-          attributeArray.forEach(attribute => {
-            if (attribute.identifier === 'fc') {
-              if (attribute.values[0].identifier === colorIdentifier) {
-                skuDetail.push(sku);
-              }
-            }
-          });
-        });
-      }
-      if (skuDetail.length > 0) {
-        promotionUtil.getPromotionData(
-          skuDetail[0].uniqueID,
-          reqHeaders,
-          (error, promotionResult) => {
-            if (error) {
-              callback(error);
-              return;
-            }
-            resJSON = pdpfilter.productDetailSummary(skuDetail[0]);
-            const swatchColor = pdpfilter.getSwatchData(
-              skuDetail[0].attributes,
-            );
-            if (swatchColor && swatchColor.length > 0) {
-              resJSON.swatchColor = swatchColor[0].name;
-            }
-            resJSON.promotionData = pdpfilter.getSummaryPromotion(
-              promotionResult,
-            );
-            callback(null, resJSON);
-          },
-        );
-      } else {
-        callback(null, resJSON);
-      }
-    } else {
-      callback(null, resJSON);
-    }
-  });
-};
-
-/**
- * Product Details Summary
- */
-module.exports.getProductDetailSummary = function getProductDetailSummary(
-  req,
-  callback,
-) {
-  if (!req.params.skuId) {
-    logger.debug('GET SKU Details by Color :: Invalid Params');
-    callback(errorUtils.errorlist.invalid_params);
-    return;
-  }
-
-  const reqHeaders = req.headers;
-  const productID = req.params.skuId;
-
-  let resJSON = {};
-  const productDetailTask = [
-    productUtil.productByProductID.bind(null, productID, reqHeaders),
-    promotionUtil.getPromotionData.bind(null, productID, reqHeaders),
-  ];
-
-  async.parallel(productDetailTask, (err, result) => {
-    if (err) {
-      callback(err);
-      return;
-    }
-    logger.debug('Got all the origin resposes for SKU Detail Summary');
-    if (result[0].catalogEntryView && result[0].catalogEntryView.length > 0) {
-      resJSON = pdpfilter.productDetailSummary(result[0].catalogEntryView[0]);
-      resJSON.promotionData = pdpfilter.getSummaryPromotion(result[1]);
-    }
-
-    callback(null, resJSON);
-  });
-};
-
-/**
  * Function for Notify Me API
  * @returns 200, will return a notification when the product is back in stock
  * @throws contexterror,badreqerror if storeid or access_token is invalid
@@ -316,22 +212,6 @@ module.exports.setProductNotification = function productStockNotification(
 };
 
 /**
- * This Function will return shipping cahrge
- * @param {*} header
- * @param {*} reqParams
- * @param {*} callback
- */
-/* function getShippingCharge(header, reqParams, callback) {
-  pincodeUtil.getShippingCharge(header, reqParams, (err, result) => {
-    if (err) {
-      callback(null, 'Sipping charge not found');
-    } else {
-      callback(null, result);
-    }
-  });
-} */
-
-/**
  * Function for Experience Store
  * @param {*} header
  * @param {*} reqParams
@@ -347,22 +227,6 @@ function getExperienceStore(header, reqParams, callback) {
     }
   });
 }
-
-/**
- * This function will return inventory status
- * @param {*} header
- * @param {*} reqParams
- * @param {*} callback
- */
-/* function findInventory(header, reqParams, callback) {
-  pincodeUtil.findInventory(header, reqParams, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, result);
-    }
-  });
-} */
 
 /**
  * This function will return product data
@@ -388,7 +252,7 @@ function productDetails(header, productID, callback) {
  */
 function productListByIDs(header, productData, callback) {
   const skuIds = [];
-  if (productData && productData.catalogEntryView.length > 0) {
+  if (productData.catalogEntryView && productData.catalogEntryView.length > 0) {
     if (
       productData.catalogEntryView[0].sKUs &&
       productData.catalogEntryView[0].sKUs.length > 0
@@ -424,7 +288,7 @@ function productListByIDs(header, productData, callback) {
 }
 
 /**
- * Function to return components and merchendising assoc
+ * Function to return components and merchendising assoc Ids
  * @param {*} header
  * @param {*} productData
  * @param {*} productsData
@@ -482,7 +346,7 @@ function productCompAndMercAssocIds(
 function promotionDetails(header, productData, skuData, skuIds, callback) {
   promotionUtil.getMultiplePromotionData(skuIds, header, (err, result) => {
     if (err) {
-      callback(null, productData, skuData, '');
+      callback(null, header, productData, skuData, '');
     } else {
       callback(null, header, productData, skuData, result);
     }
@@ -508,7 +372,7 @@ function mergePDPData(header, prodData, skuData, promoData, callback) {
     keywords: [],
   };
 
-  if (prodData && prodData.catalogEntryView.length > 0) {
+  if (prodData.catalogEntryView && prodData.catalogEntryView.length > 0) {
     const productData = prodData.catalogEntryView[0];
     productDataSummary.uniqueID = productData.uniqueID;
     const attributes = pdpfilter.getAttributes(productData);
@@ -516,10 +380,6 @@ function mergePDPData(header, prodData, skuData, promoData, callback) {
       attributes.defining,
     );
     productDataSummary.skuData = getSkuData(skuData, promoData);
-    // productDataSummary.productDetails = pdpfilter.getProductDetails(
-    //   attributes,
-    //   productData,
-    // );
     productDataSummary.productFeatures = pdpfilter.getProductFeatures(
       attributes,
     );
@@ -542,7 +402,6 @@ function transformJson(result, serviceability) {
     shippingCharge: '',
     experienceStore: [],
   };
-  // pincodeData.pincodeServiceable = serviceability;
   if (result && result.length > 0) {
     pincodeData.inventoryStatus = result[0].inventoryStatus;
     pincodeData.deliveryDateAndTime = result[0].deliveryDate;
@@ -581,7 +440,7 @@ function getSkuData(bodyData, promotions) {
         });
       }
       skuDataJson.promotions = associatedPromo;
-      skuDataJson.productDetails = pdpfilter.getProductDetails(attributes, sku);
+      skuDataJson.productDetails = pdpfilter.getProductDetails(attributes);
       skuDataJson.similarProducts = mercAssociations.similarProducts;
       skuDataJson.combos = mercAssociations.combosYouMayLike;
       skuData.push(skuDataJson);
@@ -604,8 +463,6 @@ function getMercAssociationsData(bodyData, promotions) {
     bodyData.merchandisingAssociations.length > 0
   ) {
     bodyData.merchandisingAssociations.forEach(sku => {
-      // eslint-disable-next-line no-param-reassign
-      // sku.promotionData = promotions[sku.uniqueID];
       if (sku.associationType === 'X-SELL') {
         const similarProducts = pdpfilter.productDetailSummary(sku);
         similarProducts.promotionData = pdpfilter.getSummaryPromotion(
@@ -627,7 +484,7 @@ function getMercAssociationsData(bodyData, promotions) {
 }
 
 /**
- * Function for JSON Experience Store Data
+ * Function for Experience Store Data JSON
  * @param {*} bodyData
  */
 function transformExperienceStore(bodyData) {
@@ -757,18 +614,33 @@ function transformKitData(headers, kitData, subKitData, promoData, callback) {
     subKitData.forEach(bodyData => {
       const attributes = pdpfilter.getAttributes(bodyData);
       const mercAssociations = getMercAssociationsData(bodyData, promoData);
-      kitDataSummary.swatchAttributes.push(
-        kitfilter.getSwatchAttibute(bodyData),
-      );
-      const kitDataJSON = kitfilter.getKitSummary(bodyData, promoData);
+      const swatchAttribute = kitfilter.getSwatchAttibute(bodyData);
+      const kitDataJSON = pdpfilter.productDetailSummary(bodyData);
+      kitDataJSON.swatchAttributes = [];
+      kitDataJSON.swatchAttributes.push(swatchAttribute);
+      if (kitDataJSON.swatchAttributes.length > 0) {
+        kitDataJSON.swatchAttributes = kitfilter.filterSwatchAtrributes(
+          kitDataJSON.swatchAttributes,
+        );
+      }
+      const associatedPromo = [];
+      if (promoData[bodyData.uniqueID]) {
+        promoData[bodyData.uniqueID].forEach(promo => {
+          associatedPromo.push({
+            name: promo.name,
+            description: promo.description || '',
+            promocode: promo.promoCode,
+          });
+        });
+      }
+      kitDataJSON.promotions = associatedPromo;
       kitDataJSON.attachments = imagefilter.getProductImages(bodyData);
-      kitDataJSON.productDetails = pdpfilter.getProductDetails(
-        attributes,
-        bodyData,
-      );
+      kitDataJSON.productDetails = pdpfilter.getProductDetails(attributes);
       kitDataJSON.productFeatures = pdpfilter.getProductFeatures(attributes);
       kitDataJSON.similarProducts = mercAssociations.similarProducts;
       kitDataJSON.combos = mercAssociations.combosYouMayLike;
+      kitDataJSON.keywords = pdpfilter.getKeywords(bodyData.keyword);
+      kitDataSummary.swatchAttributes.push(swatchAttribute);
       kitDataSummary.kitData.push(kitDataJSON);
     });
 
@@ -796,10 +668,7 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
       );
       const attributes = pdpfilter.getAttributes(bodyData);
       const mercAssociations = getMercAssociationsData(bodyData, promoData);
-      const bundleDataJSON = pdpfilter.productDetailSummary(
-        bodyData,
-        promoData,
-      );
+      const bundleDataJSON = pdpfilter.productDetailSummary(bodyData);
       bundleDataJSON.actualPrice = componentsSummary.actualPrice || '';
       bundleDataJSON.offerPrice = componentsSummary.offerPrice || '';
       bundleDataJSON.swatchAttributes = [];
@@ -827,10 +696,7 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
       }
       bundleDataJSON.promotions = associatedPromo;
       bundleDataJSON.attachments = imagefilter.getProductImages(bodyData);
-      bundleDataJSON.productDetails = pdpfilter.getProductDetails(
-        attributes,
-        bodyData,
-      );
+      bundleDataJSON.productDetails = pdpfilter.getProductDetails(attributes);
       bundleDataJSON.productFeatures = pdpfilter.getProductFeatures(attributes);
       bundleDataJSON.itemInThisBundle = componentsSummary.itemInThisBundle;
       bundleDataJSON.similarProducts = mercAssociations.similarProducts;
@@ -848,6 +714,7 @@ function mergeBundleData(header, key1, subBundleData, promoData, callback) {
 }
 
 /** Function to find min EMI value for bundles */
+module.exports.minEmiValue = minEmiValue;
 function minEmiValue(header, bundleDataSummary, callback) {
   if (bundleDataSummary.bundleData && bundleDataSummary.bundleData.length > 0) {
     async.map(
