@@ -5,6 +5,11 @@
     height: auto;
     background-color: $colorwhite;
     .lookcrouse{
+      .loobookImg{
+        height: 126px;
+        width: 126px;
+        border-radius: 54%
+      }
 	  padding: 60px 0 0 0;
 	  width: 84.3%;
 	  margin: auto;
@@ -281,17 +286,7 @@
       letter-spacing: normal;
       color: var(--greyish-brown);
   }
-  .Paragraph-Copy-133 {
-    height: 40px;
-    font-family: $font-regular;
-    font-size: 14px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.38;
-    letter-spacing: normal;
-    color: black;
-  }
+
   .crousdiv {
     width: 458px;
     height: 46px;

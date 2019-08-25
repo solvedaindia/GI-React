@@ -131,6 +131,7 @@ class ChangePassword extends React.Component {
       .put(changePasswordAPI, data)
       .then(response => {
         console.log('Change password -- ', response.data.data.message);
+        console.log('Change password -- ', response);
         this.setState({
           errorCurrent: false,
           errorNew: false,
@@ -141,9 +142,19 @@ class ChangePassword extends React.Component {
       })
       .catch(error => {
         const errorData = error.response.data;
+        const erroCode = error.response.status;
         const errorMessage = errorData.error.error_message;
         console.log('Current passwod Error -- ', errorMessage);
-        alert(errorMessage);
+        if(erroCode==400)
+        {
+          this.setState({
+            errorNew: true,
+            errorMessage: errorMessage,
+          });
+        }
+        else
+          alert(errorMessage);
+        
         // this.setState({
         //   error: true,
         //   errorMessage,
