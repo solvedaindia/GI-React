@@ -93,7 +93,6 @@
 }   
 
 .kitchenEspots {
-    // @include container-width;
     margin: 60px auto;
 }
 .beforeAfter {
@@ -157,3 +156,12 @@
     }
 }
 
+@media screen and (max-width: 767px){   
+    .kitchenContainer{
+        .slider{
+            .fsBanner{
+                margin: 0px;
+            }
+        }
+    }
+}
