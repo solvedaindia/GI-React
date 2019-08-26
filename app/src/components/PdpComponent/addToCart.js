@@ -255,7 +255,7 @@ class addToCartComponent extends React.Component {
         <div className={isMobile() ? 'addCart quantity-box' : 'addCart'}>
           { !this.props.isMobile && (
           <>
-          {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
+          {!this.props.sticky && (
             <>
               <Button
                 className="btn"

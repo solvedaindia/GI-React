@@ -98,7 +98,7 @@ class NotifyMe extends React.Component {
 		  }
 		return (
 			<>
-				<Button className="btn notifybtn" onClick={this.handleShow}>Notify Me</Button>
+				<Button className="btn notifybtn addcartbtn" id="box3" onClick={this.handleShow}>Notify Me</Button>
 				<Modal className='modal_notify' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
