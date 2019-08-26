@@ -96,9 +96,13 @@ class NotifyMe extends React.Component {
 		if (this.state.errorMessage) {
 			errorMessage = this.errorMessage(this.state.errorMessage);
 		  }
+		  let btnId = 'stickyBox';
+		  if(!this.props.sticky) {
+			  btnId = 'box3';
+	  	  }
 		return (
 			<>
-				<Button className="btn notifybtn" onClick={this.handleShow}>Notify me when available</Button>
+				<Button className="btn notifybtn addcartbtn" id={btnId} onClick={this.handleShow}>Notify me when available</Button>
 				<Modal className='modal_notify' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
