@@ -252,7 +252,7 @@ export class HeaderMobile extends React.Component {
     if (getCookie('isLoggedIn') === 'true') {
       loginLogoutItem = (
         <button onClick={this.onSignOutClick} className="signoutBtn">
-          Logout
+          Sign Out
         </button>
       );
       myAccountItem = (
@@ -266,7 +266,7 @@ export class HeaderMobile extends React.Component {
     } else {
       loginLogoutItem = (
         <button onClick={this.onSignInClick.bind(this)} className="loginBtn">
-          Login/ Register
+          Log In/ Register
         </button>
       );
     }
@@ -276,7 +276,7 @@ export class HeaderMobile extends React.Component {
       navItem = (
         <div className="leftAnim">
           <div className="topMenu">
-            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo':'usernameTxt'}>{this.state.userName}!</label>
+            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo' : 'usernameTxt'}>{this.state.userName}!</label>
             {loginLogoutItem}
           </div>
           <ul>
@@ -309,25 +309,27 @@ export class HeaderMobile extends React.Component {
                     linkData.text === 'TRACK ORDER' ?
                       getCookie('isLoggedIn') === 'true' ? (
                         <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }} onClick={() => this.onLinkNavigation('My Orders')}>
-                          < li className="navTxt" >{linkData.text}</li>
+                          < li className="navTxt" >{linkData.text.toLowerCase()}</li>
                         </Link>
                       ) : (
                           <Link onClick={this.onOverlayClick.bind(this)} to="/guestTrackOrder">
-                            < li className="navTxt" >{linkData.text}</li>
+                            < li className="navTxt" >{linkData.text.toLowerCase()}</li>
                           </Link>
                         )
                       :
                       linkData.text === 'LOCATE STORES' ? (
                         <Link
-                          onClick={() => this.onLinkNavigation('')}
+                          onClick={this.onOverlayClick.bind(this)}
                           to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
                         >
-                          < li className="navTxt" >{linkData.text}</li>
-                          
+                          < li className="navTxt" >{linkData.text.toLowerCase()}</li>
+
                         </Link>
                       )
-                      :
-                      < li className="navTxt" href={linkData.action}>{linkData.text}</li>
+                        :
+                        <Link to='/support' onClick={this.onOverlayClick.bind(this)}>
+                          < li className="navTxt" href={linkData.action}>{linkData.text.toLowerCase()}</li>
+                        </Link>
                   }
                 </>
               )
@@ -341,7 +343,7 @@ export class HeaderMobile extends React.Component {
 
     return (
       <>
-        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)}/> : null}
+        {this.state.showLoginPopUp ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
         <div className="sideNavigation">
           <label>
             <input type="checkbox" checked={showNav ? 'checked' : ''} />
