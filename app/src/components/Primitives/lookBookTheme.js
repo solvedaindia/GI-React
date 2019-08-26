@@ -7,12 +7,7 @@ import {
   lookbookThemeAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-const prevArrowImg = (
-    <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
-  );
-  const nextArrowImg = (
-    <img src={require('../SVGs/carousel__arrowRight.svg')} />
-  );
+
   
 
 class LookbookThemeCarousel extends React.Component {
@@ -55,17 +50,15 @@ class LookbookThemeCarousel extends React.Component {
   componentDidMount() {
     this.getkitchensHallData();
   }
-
-  render() {
+render() {
     const { lookbookThemeSlider } = this.state;
     const settings = {
             dots: false,
-            infinite: false,
+            infinite: true,
             speed: 500,
             slidesToShow: 6,
             slidesToScroll: 2,
-            prevArrow: prevArrowImg,
-            nextArrow: nextArrowImg,            
+                       
             variableWidth: true,
             responsive: [
               {
@@ -96,7 +89,7 @@ class LookbookThemeCarousel extends React.Component {
             ],
           };
     return (
-      <div className="fsBanner">
+      <div className="">
           <h1 className="title">{this.state.title}</h1>
           <p className="Paragraphhall">{this.state.description}</p>
           <div className="inspirationSlider">
