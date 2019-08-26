@@ -190,6 +190,8 @@ export const consultGetApi = `${secureHttp}://${host}:${port2}/api/v1/static/get
 export const userDataAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/`;
 /* Order List API */
 export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/list`;
+/* Set Password API (Social Login) */
+export const setPassword = `${secureHttp}://${host}:${port2}/api/v1/secure/users/sociallogin/setpassword`;
 
 /* Share Wishlist API */
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
