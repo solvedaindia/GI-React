@@ -197,7 +197,7 @@ class addToCartComponent extends React.Component {
     if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
       return <Button className="btn addcartbtn" id={btnId} disabled>Add to Cart</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
-      return <NotifyMe partNumber={this.props.skuData.partNumber} />
+      return <NotifyMe partNumber={this.props.skuData.partNumber} sticky={this.props.sticky} />
     } 
     return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
@@ -255,7 +255,7 @@ class addToCartComponent extends React.Component {
         <div className={isMobile() ? 'addCart quantity-box' : 'addCart'}>
           { !this.props.isMobile && (
           <>
-          {!this.props.sticky && this.props.pinCodeData.inventoryStatus !=='unavailable' && (
+          {!this.props.sticky && (
             <>
               <Button
                 className="btn"
