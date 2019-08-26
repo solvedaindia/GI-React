@@ -15,7 +15,7 @@ export class TermsConditions extends React.Component {
 
   render() {
     return (    
-      <>     
+      <>      
       <Terms/> 
       </>
     )
