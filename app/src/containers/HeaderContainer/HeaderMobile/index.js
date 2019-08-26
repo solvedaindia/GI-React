@@ -80,9 +80,9 @@ class HeaderMobile extends React.Component {
           </div>
       
           <div className="mob-logo">
-            <Link to="/">
-              {this.state.isOnHome ? <img className='mob-logo-Img' src={require('../../../../public/images/rwd-assets/mob-logo.svg')} alt="my image" onClick={this.myfunction} />: <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} />}
-            </Link>
+          
+              {this.state.isOnHome ? <a href="/"><img className='mob-logo-Img' src={require('../../../../public/images/rwd-assets/mob-logo.svg')} alt="my image" onClick={this.myfunction} /></a>: <Link to="/"><img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} /></Link>}
+            
           </div>
 
           <ul className="mob-mini-nav">
