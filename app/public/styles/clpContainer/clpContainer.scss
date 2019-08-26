@@ -163,6 +163,14 @@
             .clp-short-desc{
                 padding: 0px 15px;
             }
+            .slick-slider{
+                .slick-prev{
+                    left:0px;
+                }
+                .slick-next:before, [dir=rtl] .slick-prev:before, .slick-prev:before {
+                    background: transparent;
+                }
+            }
         }
         .slider{
             .fsBanner{
