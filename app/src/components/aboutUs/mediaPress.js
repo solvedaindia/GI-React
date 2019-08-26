@@ -41,13 +41,13 @@ class MediaPress extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot, index } = this.state;
+    const { pageLayoutEspot } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className="" id={index}>
+			
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
-			</div>
+			
 		)
     );
   }

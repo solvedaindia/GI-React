@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Categories = (props) => {
     return(
@@ -11,7 +12,11 @@ const Categories = (props) => {
                 { props.name.children && props.name.children.length > 0 &&
                     props.name.children.map((links, i) => {
                     return (
-                        <h4 className='categoriestext list' key={i}><a className='link ' href={links.action}>{links.text}</a></h4>
+                        <h4 className='categoriestext list' key={i}>
+                            <Link className='link' to={links.action}>
+                                {links.text}
+                            </Link>
+                        </h4>
                     )})
                 }
             </div>

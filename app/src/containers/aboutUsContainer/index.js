@@ -117,16 +117,16 @@ handleclick = event => {
     sub_title:data[index].sub_title,
     selected_index:index
   });
-  console.log("getImageOnArrowClick",this.state);
+  console.log('getImageOnArrowClick',this.state);
 }
 
 getImageOnArrowClick = (e) =>{
 
   const {data} = this.state;
-  console.log("getImageOnArrowClick",this.state);
+  console.log('getImageOnArrowClick',this.state);
   let index= this.state.selected_index;
   index = index+1;
-  console.log("getImageOnArrowClick Index",index);
+  console.log('getImageOnArrowClick Index',index);
   if(index>=this.state.data.length)
   {
     index =0;
@@ -148,13 +148,13 @@ getImageOnArrowClick = (e) =>{
     sub_title:data[index].sub_title,
     selected_index:index
   });
-  console.log("getImageOnArrowClick",this.state);
+  console.log('getImageOnArrowClick',this.state);
 
 }
 componentDidMount(){
 
   const {data,selected_index} = this.state;
-  console.log("componentDidMount",data);
+  console.log('componentDidMount',data);
   this.setState({
       img_url: data[selected_index].image_url,
       content: data[selected_index].paragraph,
@@ -175,71 +175,71 @@ getButtons=(data)=>{
 render() {
     let views = this.getButtons(this.state.data);
     return (
-    <div className="About-Us">
-      <div className="container">
+    <div className='About-Us'>
+      <div className='container' id='aboutUs'>
         <AboutTopMost />
       </div>
-      <div className='OurProcessContainer'>
-        <div className="container">
+      <div className='OurProcessContainer' id='design-process'>
+        <div className='container'>
           <div className='row'>
             <div className='col-md-12'>
-              <h1 className="headingtitle">Our Process</h1>
+              <h1 className='headingtitle'>Our Process</h1>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-6">
-              <img className='processBigImg' src={this.state.img_url} alt="image" />
+          <div className='row'>
+            <div className='col-md-6'>
+              <img className='processBigImg' src={this.state.img_url} alt='image' />
               <div>
                 
                 {views}
-                <button name="arrowClick" className='arrowNumber' onClick={this.getImageOnArrowClick} >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25"  >
-                    <g fill="none" fill-rule="evenodd" stroke="#000000">
-                      <path strokeWidth="1.892" d="M27 12.7H.2 27z" />
-                      <path strokeWidth="1.89" d="M16.7 1.4l10.6 11.3L16.7 24" />
+                <button name='arrowClick' className='arrowNumber' onClick={this.getImageOnArrowClick} >
+                  <svg xmlns='http://www.w3.org/2000/svg' width='29' height='25' viewBox='0 0 29 25'  >
+                    <g fill='none' fill-rule='evenodd' stroke='#000000'>
+                      <path strokeWidth='1.892' d='M27 12.7H.2 27z' />
+                      <path strokeWidth='1.89' d='M16.7 1.4l10.6 11.3L16.7 24' />
                     </g>
                   </svg>
                 </button>
               </div>
             </div>
-            <div className="col-md-6 InitialIdea">
+            <div className='col-md-6 InitialIdea'>
               <h1 className='headingtitle'>{this.state.title}</h1>
-              <p className=" heading-sub-title">{this.state.sub_title}</p>
-
- <p className="Paragraphfont">{this.state.content}
-              </p>
+              	<p className=' heading-sub-title'>{this.state.sub_title}</p>
+ 				<p className='Paragraphfont'>{this.state.content}</p>
             </div>
           </div>
         </div>
       </div>
-      <div className='greenContainer'>
+      <div className='greenContainer' id='green-initiatve'>
         <div className='container'>
           <h1 className='greenTitle'>Green Initiatives</h1>
         </div>
         <GreenInitiatives />
       </div>
-      <div className="CareerContainer">
-        <div className="container">
+      <div className='CareerContainer' id='career'>
+        <div className='container'>
           <div className='row'>
-            <div className="col-md-12">
+            <div className='col-md-12'>
               <div container>
-                <div id="cat">
-                  <h1 className="careerHeading">Careers</h1>
-                  {!isMobile() ? <p className="paragraphCareer">your information is secure and encrypted, consectetur<br />
+                <div id='cat'>
+                  <h1 className='careerHeading'>Careers</h1>
+                  {!isMobile() ? <p className='paragraphCareer'>your information is secure and encrypted, consectetur<br />
                     adipisicing elit,sed do eiumsod tempor incididunt ut<br />
                     labore et dalore magna aliqion anim ad minim.
-                  </p>:<p className="paragraphCareer">your information is secure and encrypted, consectetur
+                  </p>:<p className='paragraphCareer'>your information is secure and encrypted, consectetur
                     adipisicing elit,sed do eiumsod tempor incididunt ut
                     labore et dalore magna aliqion anim ad minim.
                   </p>}
-                  <button className="CareerButton">See More</button>
+                  <button className='CareerButton'>See More</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <MediaPress />
+      <div className='media' id='media'>
+	  	<MediaPress />
+		</div>
     </div>
     );
     }
