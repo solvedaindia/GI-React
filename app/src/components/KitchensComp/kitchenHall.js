@@ -55,16 +55,47 @@ class KitchenHall extends React.Component {
     // console.log('test data', description)
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll:2,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: false,
+          },
+        },
+      ],
     };
+
+
     return (
       hallSlider && 
       <div className="hallOfFame">
-        <h2 className="title">{title}</h2>
-        <p className="desc">{description}</p>
+        <div className='hall-frame-content'>
+          <h2 className="title">{title}</h2>
+          <p className="desc">{description}</p>
+        </div>
         <Slider {...settings}>
           {!!hallSlider &&
             hallSlider.map((sliderData, index) => (

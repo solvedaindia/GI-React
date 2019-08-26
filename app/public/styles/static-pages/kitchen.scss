@@ -5,10 +5,6 @@
         margin: 0; 
         font-family: $font-medium;
     }
-    .desc {
-        width: 40%;
-        margin: $base*2 auto $base*5 auto;
-    }
     .desc,
     .title {
         text-align: center;
@@ -58,40 +54,6 @@
     }
 }
 
-.faqContainer {
-    margin: $base*7.5 auto;
-    .panel-group {
-        width: 80%;
-        margin: auto;
-        .panel {
-            margin-bottom: 20px;
-            background-color: #fff;
-            border: none;
-            border-bottom: 1px solid $borderLight;
-            border-radius: unset;
-            -webkit-box-shadow: unset;
-            box-shadow: unset;
-        }
-        .panel + .panel {
-            border: none;
-            border-bottom: 1px solid $borderLight;
-        }
-        .panel-default > .panel-heading {
-            background-color: transparent;
-        }
-        .panel-heading {
-            h4 {
-                a {
-                    color: $black;
-                    font-size: $base*2.5;
-                    text-decoration: none;
-                    font-family: $font-medium; 
-                }
-            }
-        }
-    }
-}   
-
 .kitchenEspots {
     margin: 60px auto;
 }
@@ -103,59 +65,102 @@
     width: 100%;
 }
 
-.formContainer {
-    position: relative;
-    width: 100%;
-    margin: 60px auto;
-    .bgImg {
-        width: 100%;
-    }
-    .formDetails {
-        width: 75%;
-        left: 12.5%;
-        background-color: #fff;
-        position: absolute;
-        top: 8%; 
-        padding: $base*7.5 $base*15;
-        .title {
-            margin: $base*4 0 0;
-        }
-        .desc {
-            text-align: center;
-            margin: $base*1.5 0 $base*7.5;
-        }
-        .form-labeled {
-            color: $battleshipGrey;
-            font-family: $font-medium;
-            font-size: $base*1.75;
-        }
-        .form-control {
-            border: 1px solid #ccc;
-            border-radius: unset;
-            -webkit-box-shadow: unset;
-            box-shadow: unset;
-            -webkit-transition: unset;
-            -o-transition: unset;
-            -webkit-transition: unset;
-            transition: unset;
-            transition: unset;
-            height: $base*6.75;
-        }
-        .btn-submit {
-            border-radius: unset;
-            float: right;
-            padding: $base;
-            width: $base*41;
-            background-color: $black;
-            color: $colorwhite;  
-        }
-    }
-}
 
-@media screen and (min-width: 767px){   
-    .goesOnKitchen{
-        width: 70%;
-        margin: 60px auto;
+
+@media screen and (min-width: 768px){   
+    .kitchenContainer{
+        .goesOnKitchen{
+            width: 70%;
+            margin: 60px auto;
+        }
+        .hallOfFame {
+            .title {
+                margin: 0; 
+                font-family: $font-medium;
+            }
+            .desc {
+                width: 40%;
+                margin: $base*2 auto $base*5 auto;
+            }
+        }
+
+        .book-consult-form {
+            position: relative;
+            width: 100%;
+            margin: 60px auto;
+            .bgImg {
+                width: 100%;
+            }
+            .formDetails {
+                width: 75%;
+                left: 12.5%;
+                background-color: #fff;
+                position: absolute;
+                top: 8%; 
+                padding: $base*7.5 $base*15;
+                .title {
+                    margin: $base*4 0 0;
+                }
+                .desc {
+                    text-align: center;
+                    margin: $base*1.5 0 $base*7.5;
+                }
+                .form-labeled {
+                    color: $battleshipGrey;
+                    font-family: $font-medium;
+                    font-size: $base*1.75;
+                }
+                .form-control {
+                    border: 1px solid #ccc;
+                    border-radius: initial;
+                    transition: initial;
+                    height: $base*6.75;
+                }
+                .btn-submit {
+                    border-radius: unset;
+                    float: right;
+                    padding: $base;
+                    width: $base*41;
+                    background-color: $black;
+                    color: $colorwhite;  
+                }
+            }
+        }
+
+
+        .faqContainer {
+            margin: $base*7.5 auto;
+            .panel-group {
+                width: 80%;
+                margin: auto;
+                .panel {
+                    margin-bottom: 20px;
+                    background-color: #fff;
+                    border: none;
+                    border-bottom: 1px solid $borderLight;
+                    border-radius: unset;
+                    -webkit-box-shadow: unset;
+                    box-shadow: unset;
+                }
+                .panel + .panel {
+                    border: none;
+                    border-bottom: 1px solid $borderLight;
+                }
+                .panel-default > .panel-heading {
+                    background-color: transparent;
+                }
+                .panel-heading {
+                    h4 {
+                        a {
+                            color: $black;
+                            font-size: $base*2.5;
+                            text-decoration: none;
+                            font-family: $font-medium; 
+                        }
+                    }
+                }
+            }
+        }   
     }
 }
 
@@ -166,8 +171,123 @@
                 margin: 0px;
             }
         }
+        .kitchenEspots > div:empty{
+            display: none;
+        }
+
         .goesOnKitchen{
             width:100%;
+            padding:28px 0px 28px 20px;
+            background: $greybg;
+            .slick-slider{
+                .slick-list{
+                    padding:0px !important;
+                    .slick-track{
+                        .slick-slide > div{
+                            margin: 0px 10px 0px 0px
+                        }
+                    }
+                }
+            }
         }
-    }
+
+
+        .hallOfFame {
+            margin: 20px 0px;
+            .hall-frame-content{
+                background: $colorbluedull;
+                padding:20px 20px 20px 20px;
+                min-height: 270px;
+                .title{
+                    color: $colorwhite;
+                    font-size: $base*2;
+                    margin-bottom: $base*2.25;
+                }
+                .desc{
+                    color: $colorwhite;
+                    font-size: $base*1.5;
+                    line-height: 14px;
+                }
+            }
+            .slick-slider{
+                margin-top: -130px;
+            }
+        }
+    
+        .book-consult-form {
+            position: relative;
+            width: 100%;
+            margin: 60px auto;
+            .bgImg {
+                width: 100%;
+            }
+            .formDetails {
+                position: relative;
+                margin: -190px 20px 0px 20px;
+                .title {
+                    margin: $base*4 0 0;
+                    color:  $colorwhite;
+                }
+                .desc {
+                    text-align: center;
+                    margin: 0px 0px 20px 0px;
+                    color:  $colorwhite;
+                }
+                .consult-form-fild{
+                    background:  $colorwhite;
+                    padding: 10px 15px;
+                    .form-labeled {
+                        color: $battleshipGrey;
+                        font-family: $font-medium;
+                        font-size: $base*1.75;
+                    }
+                    .form-control {
+                        border: 1px solid #ccc;
+                        border-radius: 0px;
+                    }
+                    .btn-submit {
+                        border-radius: unset;
+                        float: right;
+                        padding: $base;
+                        width: 100%;
+                        background-color: $black;
+                        color: $colorwhite;  
+                    }
+                 }
+            }
+        }
+    
+        .faqContainer {
+            margin: $base*2.5 auto;
+            .panel-group {
+                width: 100%;
+                .panel {
+                    margin-bottom: 0px;
+                    border: none;
+                    border-bottom: 1px solid $borderLight;
+                    border-radius: unset;
+                    -webkit-box-shadow: unset;
+                    box-shadow: unset;
+                }
+                .panel + .panel {
+                    border: none;
+                    border-bottom: 1px solid $borderLight;
+                }
+                .panel-default > .panel-heading {
+                    background-color: transparent;
+                }
+                .panel-heading {
+                    h4 {
+                        font-size: $base*1.5;
+                        font-family: $font-medium; 
+                        a {
+                            color: $black;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        } 
+
+    }  
 }

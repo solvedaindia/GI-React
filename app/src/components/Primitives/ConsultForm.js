@@ -133,6 +133,7 @@ onDropdownSelected = (e) => {
             <h2 className="title">Book a consultation</h2>
               <p className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor. </p>
+              <div className='consult-form-fild'>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">
@@ -191,6 +192,7 @@ onDropdownSelected = (e) => {
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
           </form>
         );

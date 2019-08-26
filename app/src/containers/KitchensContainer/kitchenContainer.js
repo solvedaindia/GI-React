@@ -41,7 +41,7 @@ export class KitchenContainer extends React.Component {
             <WhatGoes />
             <KitchenHall />
             {/* <BeforeAfter /> */}
-            <div className="formContainer">
+            <div className="book-consult-form">
               <img className="bgImg" src={`${imagePrefix}/staticImages/kitchens/whatgoesimg.png`} alt="Snow" />
               <div id='consultForm' className='formDetails'>
                 <ConsultationForm />
