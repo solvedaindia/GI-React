@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
-import { changePasswordAPI } from '../../../../public/constants/constants';
+import { changePasswordAPI, setPassword } from '../../../../public/constants/constants';
 import {
   resolveTheWishlistData,
   getCookie,
@@ -73,30 +73,33 @@ class ChangePassword extends React.Component {
       return
     }
 
-    if (!validateEmptyObject(this.state.inputTextCurrent)) {
-      this.setState({
-        errorCurrent: true,
-        errorMessage: this.state.inputTextCurrent === '' ? 'The field is required' : 'Please enter the Password',
-      });
-      return;
-    }
-
-    if (!regexPw.test(this.state.inputTextCurrent)) {
-      let errorMsg;
-      if (this.state.inputTextCurrent.length > 25) {
-        errorMsg =
-          'Invalid Password. Password should not be more than 25 characters';
-      } else {
-        errorMsg =
-          'Password should be within 6-20 characters only. Special characters are not permitted';
+    if (this.props.changePasswordTagPro === 0) {
+      if (!validateEmptyObject(this.state.inputTextCurrent)) {
+        this.setState({
+          errorCurrent: true,
+          errorMessage: this.state.inputTextCurrent === '' ? 'The field is required' : 'Please enter the Password',
+        });
+        return;
       }
 
-      this.setState({
-        errorCurrent: true,
-        errorMessage: errorMsg,
-      });
-      return;
+      if (!regexPw.test(this.state.inputTextCurrent)) {
+        let errorMsg;
+        if (this.state.inputTextCurrent.length > 25) {
+          errorMsg =
+            'Invalid Password. Password should not be more than 25 characters';
+        } else {
+          errorMsg =
+            'Password should be within 6-20 characters only. Special characters are not permitted';
+        }
+
+        this.setState({
+          errorCurrent: true,
+          errorMessage: errorMsg,
+        });
+        return;
+      }
     }
+
 
     if (!validateEmptyObject(this.state.inputTextNew)) {
       this.setState({
@@ -123,6 +126,16 @@ class ChangePassword extends React.Component {
       return;
     }
 
+    if (this.props.changePasswordTagPro === 0) {
+      this.changePassword();
+    }
+    else {
+      this.setNewPassword();
+    }
+
+  }
+
+  changePassword() {
     const data = {
       current_password: this.state.inputTextCurrent,
       new_password: this.state.inputTextNew,
@@ -151,6 +164,30 @@ class ChangePassword extends React.Component {
       });
   }
 
+  setNewPassword() {
+    const data = {
+      new_password: this.state.inputTextNew,
+    };
+    apiManager
+      .post(setPassword, data)
+      .then(response => {
+        console.log('Set new --- ',response);
+        this.setState({
+          errorCurrent: false,
+          errorNew: false,
+          inputTextNew: '',
+          inputTextCurrent: '',
+        });
+        alert(response.data.data.message);
+      })
+      .catch(error => {
+        console.log('Set new Error --- ',error);
+        // const errorData = error.response.data;
+        // const errorMessage = errorData.error.error_message;
+        // alert(errorMessage);
+      });
+  }
+
   handleInputChange(value) {
     console.log('Handle Input --- ', value.target.id);
     if (value.target.id === 'new') {
@@ -174,7 +211,6 @@ class ChangePassword extends React.Component {
   }
 
   enableDisableSaveBtn() {
-    console.log('ddddd -- =',this.state.inputTextCurrent);
     var isBtnValidate = true;
     // console.log('maksss --- ', this.state.userResponse.emailID, this.state.inputText_email)
     // if (this.state.userResponse.name !== this.state.inputText_name) {
@@ -188,12 +224,21 @@ class ChangePassword extends React.Component {
     //   isBtnValidate = false;
     // }
     if (this.state.inputTextCurrent !== '' && this.state.inputTextNew !== '') {
-      console.log('ZZZZZZ -- =',this.state.inputTextCurrent);
       isBtnValidate = true;
     }
     else {
       isBtnValidate = false;
     }
+
+    if (this.props.changePasswordTagPro === 1) {
+      if (this.state.inputTextNew !== '') {
+        isBtnValidate = true;
+      }
+      else {
+        isBtnValidate = false;
+      }
+    }
+
     this.setState({
       isSaveBtnActive: isBtnValidate,
     })
