@@ -99,10 +99,6 @@
     margin: 120px auto;
 }
 
-.goesOnKitchen{
-    width: 70%;
-    margin: 60px auto;
-}
 .ourPromis {
     width: 100%;
 }
@@ -156,12 +152,22 @@
     }
 }
 
+@media screen and (min-width: 767px){   
+    .goesOnKitchen{
+        width: 70%;
+        margin: 60px auto;
+    }
+}
+
 @media screen and (max-width: 767px){   
     .kitchenContainer{
         .slider{
             .fsBanner{
                 margin: 0px;
             }
+        }
+        .goesOnKitchen{
+            width:100%;
         }
     }
 }

@@ -60,12 +60,42 @@ imageHeading: ""
 
   render() {
     const { whatGoesSlider } = this.state;
-    const settings = {
+    
+     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '40px',
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+          },
+        },
+      ],
     };
     return (
       <div className="goesOnKitchen">
