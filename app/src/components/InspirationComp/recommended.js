@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/inspiration.scss'
-
+import  '../../../public/styles/static-pages/inspirationDetails.scss'
+import {
+  imagePrefix,
+} from '../../../public/constants/constants';
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
