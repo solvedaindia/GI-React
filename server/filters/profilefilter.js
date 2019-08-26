@@ -22,9 +22,6 @@ module.exports.userInfoDetails = function getDetailedUserProfile(profileData) {
   const regexMobileNo = /^\d{10}$/; // Mobile Number
   const userDetails = {};
   userDetails.name = profileData.firstName;
-  /*  if (profileData.lastName && profileData.lastName !== '') {
-    userDetails.name = `${userDetails.name} ${profileData.lastName}`;
-  } */
   if (regexMobileNo.test(profileData.logonId)) {
     userDetails.mobileNo = profileData.logonId;
     userDetails.emailID = profileData.x_userField1 || '';
@@ -50,17 +47,18 @@ module.exports.userAddress = function getUserAddress(contactAddress) {
   const res = {};
   res.addressID = contactAddress.addressId;
   res.nickName = contactAddress.nickName;
-  res.name = contactAddress.firstName;
-  /* if (contactAddress.lastName && contactAddress.lastName !== '') {
-    res.name = `${res.name} ${contactAddress.lastName}`;
-  } */
+  res.name = contactAddress.firstName || '';
   res.phoneNumber = contactAddress.phone1 || '';
   res.emailId = contactAddress.email1;
   res.pincode = contactAddress.zipCode || '';
   res.address = '';
-  res.city = contactAddress.city;
+  res.city = contactAddress.city || '';
   res.state =
-    stateCode.getStateName[contactAddress.state] || contactAddress.state;
+    stateCode.getStateName[contactAddress.state] || contactAddress.state || '';
+  res.country =
+    stateCode.getCountryName[contactAddress.country] ||
+    contactAddress.country ||
+    '';
   res.isDefault = false;
   if (contactAddress.primary === 'true') {
     res.isDefault = true;

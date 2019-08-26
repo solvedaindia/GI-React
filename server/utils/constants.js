@@ -2,7 +2,6 @@ const apiconfig = require('./apiconfig.js');
 const endPointURLConfig = apiconfig.getEndPoint();
 const HostName = endPointURLConfig.hostname;
 const searchHostName = endPointURLConfig.searchHostname;
-// const storeID = global.wcsParams.storeId;
 
 // production Resource URL
 const prodSearchResourceUrl = `https://${searchHostName}/search/resources/store`;
@@ -27,12 +26,11 @@ module.exports = Object.freeze({
   userRegistration: `${prodWcsResourceUrl}/{{storeId}}/person?responseFormat=json&mode=self`,
   userDetails: `${prodWcsResourceUrl}/{{storeId}}/person/@self`,
   searchByTerm: `${prodSearchResourceUrl}/{{storeId}}/productview/bySearchTerm/{{searchTerm}}?{{queryUrl}}&responseFormat=json`,
-  autoSuggest: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/keywordSuggestionsByTerm/{{urlParam}}`,
+  autoSuggest: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/keywordSuggestionsByTerm/{{urlParam}}?limit=6`,
   cartData: `${prodWcsResourceUrl}/{{storeId}}/cart`,
   mylistFetch: `${prodWcsResourceUrl}/{{storeId}}/wishlist/@self`,
   createWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist`,
   editWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{wishlistid}}`,
-  // shareWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{externalID}}?action=announce`,
   shareWishlist: `${prodWcsResourceUrl}/{{storeId}}/giWishlist/{{externalID}}`,
   externalWishlist: `${prodWcsResourceUrl}/{{storeId}}/wishlist/{{externalID}}?guestAccessKey={{guestAccessKey}}`,
   updateProfile: `${prodWcsResourceUrl}/{{storeId}}/person/@self?action=updateUserRegistration&responseFormat=json`,

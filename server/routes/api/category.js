@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const categoriesHandler = require('../../handlers/categoryhandler');
 const categoryUtil = require('../../utils/categoryutil');
-const testJson = require('../../configs/testjson');
 
 /* Get Category List for Navigation */
 router.get('/:keyword', (req, res, next) => {

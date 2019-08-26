@@ -1,84 +1,6 @@
 const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 const imagefilter = require('./imagefilter');
 
-/** Function for Kit Data Summary */
-module.exports.getKitSummary = getKitSummary;
-function getKitSummary(kitData, promotions) {
-  const kitSummary = {};
-  if (kitData) {
-    kitSummary.uniqueID = kitData.uniqueID;
-    kitSummary.productName = kitData.name;
-    kitSummary.partNumber = kitData.partNumber;
-    kitSummary.type = kitData.catalogEntryTypeCode;
-    kitSummary.masterCategoryID = kitData.masterCategoryId;
-    kitSummary.parentUniqueID = kitData.parentCatalogEntryID || '';
-    kitSummary.swatchAttributes = [];
-    kitSummary.swatchAttributes.push(getSwatchAttibute(kitData));
-    if (kitSummary.swatchAttributes.length > 0) {
-      kitSummary.swatchAttributes = filterSwatchAtrributes(
-        kitSummary.swatchAttributes,
-      );
-    }
-    if (kitData.price && kitData.price.length > 0) {
-      kitData.price.forEach(price => {
-        if (price.usage === 'Display') {
-          kitSummary.actualPrice = Number(price.value);
-        }
-        if (price.usage === 'Offer') {
-          kitSummary.offerPrice = Number(price.value);
-        }
-      });
-    }
-    kitSummary.onClickUrl = '';
-    kitSummary.seoUrl = '';
-    kitSummary.thumbnail = imagefilter.getImagePath(kitData.thumbnail);
-    kitSummary.emiData = '';
-    kitSummary.inStock = '';
-    kitSummary.shortDescription = kitData.shortDescription || '';
-    const productAttribute = getProductAttributes(kitData.attributes);
-    kitSummary.discount = productAttribute.discount;
-    kitSummary.ribbonText = productAttribute.ribbonText;
-    if (kitData.UserData && kitData.UserData.length > 0) {
-      kitSummary.emiData = Number(kitData.UserData[0].x_field1_i);
-    }
-    kitSummary.pageTitle = kitData.seo_prop_pageTitle || '';
-    kitSummary.imageAltText = kitData.seo_prop_imageAltText || '';
-    kitSummary.metaDescription = '';
-    const associatedPromo = [];
-    if (promotions[kitData.uniqueID]) {
-      promotions[kitData.uniqueID].forEach(promo => {
-        associatedPromo.push({
-          name: promo.name,
-          description: promo.description || '',
-          promocode: promo.promoCode,
-        });
-      });
-    }
-    kitSummary.promotions = associatedPromo;
-  }
-  return kitSummary;
-}
-
-/** Function to return Product Attributes */
-module.exports.getProductAttributes = getProductAttributes;
-function getProductAttributes(attributes) {
-  const productAttribute = {
-    ribbonText: '',
-    discount: '',
-  };
-  if (attributes && attributes.length > 0) {
-    attributes.forEach(attribute => {
-      if (attribute.identifier === 'percentOff') {
-        productAttribute.discount = attribute.values[0].value;
-      }
-      if (attribute.identifier === 'Ribbon') {
-        productAttribute.ribbonText = attribute.values[0].value;
-      }
-    });
-  }
-  return productAttribute;
-}
-
 /** Function to return swatch attributes from kit components */
 module.exports.getSwatchAttibute = getSwatchAttibute;
 function getSwatchAttibute(kitData) {
@@ -94,20 +16,22 @@ function getSwatchAttibute(kitData) {
       if (components.attributes && components.attributes.length > 0) {
         // iterate kit components attributes
         components.attributes.forEach(attr => {
-          attributeJson.name = attr.name;
-          // iterate attributes values
-          attr.values.forEach(attributeValue => {
-            const match = rbgRegex.exec(attributeValue.image1);
-            const attributeValueJSON = {};
-            attributeValueJSON.name = attributeValue.value;
-            if (match !== null) {
-              attributeValueJSON.colorCode = attributeValue.image1 || '';
-            } else {
-              attributeValueJSON.facetImage =
-                imagefilter.getImagePath(attributeValue.image1path) || '';
-            }
-            attributeJson.values.push(attributeValueJSON);
-          });
+          if (attr.usage === 'Defining') {
+            attributeJson.name = attr.name;
+            // iterate attributes values
+            attr.values.forEach(attributeValue => {
+              const match = rbgRegex.exec(attributeValue.image1);
+              const attributeValueJSON = {};
+              attributeValueJSON.name = attributeValue.value;
+              if (match !== null) {
+                attributeValueJSON.colorCode = attributeValue.image1 || '';
+              } else {
+                attributeValueJSON.facetImage =
+                  imagefilter.getImagePath(attributeValue.image1path) || '';
+              }
+              attributeJson.values.push(attributeValueJSON);
+            });
+          }
         });
       }
     });
@@ -178,8 +102,8 @@ function filterSwatchAtrributes(attributes) {
 }
 
 /** Function to return swatch attributes for kit comparison */
-module.exports.swatchAttributesForCompare = swatchAttributesForCompare;
-function swatchAttributesForCompare(kitData) {
+module.exports.swatchAttributesForComparePage = swatchAttributesForComparePage;
+function swatchAttributesForComparePage(kitData) {
   const attributeJson = {
     skuId: '',
     name: '',
@@ -193,7 +117,10 @@ function swatchAttributesForCompare(kitData) {
         // iterate kit components attributes
         components.attributes.forEach(attr => {
           // iterate attributes values
-          if (attr.usage === 'Defining' && attr.identifier === 'sc') {
+          if (
+            attr.usage === 'Defining' &&
+            (attr.identifier === 'sc' || attr.identifier === 'SWATCHCOLOR')
+          ) {
             attr.values.forEach(attributeValue => {
               const match = rbgRegex.exec(attributeValue.image1);
               attributeJson.name = attributeValue.value;
@@ -210,77 +137,4 @@ function swatchAttributesForCompare(kitData) {
     });
   }
   return attributeJson;
-}
-
-/** Function to return kit sumaary for kit comparison */
-module.exports.kitSummaryForCompare = kitSummaryForCompare;
-function kitSummaryForCompare(kitData) {
-  const kitSummary = {
-    uniqueID: '',
-    partNumber: '',
-    shortDescription: '',
-    name: '',
-    swatch: [],
-    price: '',
-    thumbnail: '',
-    fullImage: '',
-    keyword: '',
-    weight: '',
-    height: '',
-    depth: '',
-  };
-  if (kitData) {
-    kitSummary.uniqueID = kitData.uniqueID;
-    kitSummary.partNumber = kitData.partNumber;
-    kitSummary.shortDescription = kitData.shortDescription;
-    kitSummary.name = kitData.name;
-    kitSummary.swatch.push(swatchAttributesForCompare(kitData));
-    kitSummary.price = kitData.price;
-    kitSummary.thumbnail = kitData.thumbnail;
-    kitSummary.fullImage = kitData.fullImage;
-    kitSummary.keyword = kitData.keyword;
-  }
-  return kitSummary;
-}
-
-/** Function to return comparable attributes for kit comparison */
-module.exports.getComparableAttributes = getComparableAttributes;
-function getComparableAttributes(kitData) {
-  const comparable = [];
-  if (kitData.attributes && kitData.attributes.length > 0) {
-    kitData.attributes.forEach(attribute => {
-      if (
-        attribute.comparable === true &&
-        attribute.associatedKeyword === 'Specifications'
-      ) {
-        const att = {};
-        att.name = attribute.name;
-        att.uniqueID = attribute.uniqueID;
-        att.value = attribute.values[0].value;
-        comparable.push(att);
-      }
-    });
-  }
-  return comparable;
-}
-
-module.exports.getDescriptiveAttributes = getDescriptiveAttributes;
-function getDescriptiveAttributes(kitData) {
-  const descAttr = {
-    wt: '',
-    ht: '',
-    dp: '',
-  };
-  if (kitData.attributes && kitData.attributes.length > 0) {
-    kitData.attributes.forEach(attr => {
-      if (attr.identifier === 'NetWeight') {
-        descAttr.wt = attr;
-      } else if (attr.identifier === 'Height(cm)') {
-        descAttr.ht = attr;
-      } else if (attr.identifier === 'Depth(cm)') {
-        descAttr.dp = attr;
-      }
-    });
-  }
-  return descAttr;
 }

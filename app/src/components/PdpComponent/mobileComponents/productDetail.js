@@ -102,8 +102,8 @@ class productDetail extends React.Component {
               <Col md={6} sm={12} xs={12}>
                 <div className="product_img">
                   <img
-                    className="imgfullwidth"
-                    src={`${imagePrefix}${this.props.productDetail.imagePath}`}
+                    className="imgfullwidth"                   
+                    src={`${imagePrefix}${this.props.productDetail.productDetails.imagePath}`}
                   />
                 </div>
               </Col>

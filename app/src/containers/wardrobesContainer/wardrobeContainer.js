@@ -1,6 +1,6 @@
 /**
  *
- * KitchenContainer
+ * WardrobesContainer
  *
  */
 
@@ -33,7 +33,7 @@ export class WardrobeContainer extends React.Component {
     return (
         <section className="kitchenContainer">
             <div className="slider">
-                <WardrobeBanner />
+                <KitchenBanner />
             </div>
             <KitchenTypesEspot />
             <EasystepsEspot />

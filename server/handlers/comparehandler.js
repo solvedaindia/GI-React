@@ -28,8 +28,8 @@ module.exports.getCompareData = function getCompareData(req, callback) {
       logger.debug('Error in Compare Data API');
       callback(errorUtils.handleWCSError(err));
     } else {
-      logger.debug('Got all the origin resposes for Product Detail');
-      callback(null, result);
+      logger.debug('Got all the origin responses for Product Detail');
+      callback(null, sortJsonOrder(result, ids));
     }
   });
 };
@@ -86,7 +86,7 @@ function getCompareProducts(headers, productIDs, callback) {
           callback(null, resu);
         })
         .catch(error => {
-          logger.debug('catch called', error);
+          logger.debug('Error in GET COMPARE PRODUCTS API', error);
           callback(error);
         });
     }
@@ -100,15 +100,14 @@ function getCompareProducts(headers, productIDs, callback) {
 function bundleCompareDataSummary(element) {
   const compareDataSummary = {
     uniqueId: '',
-    type: '',
+    type: 'bundle',
     sKUs: [],
     attributes: [],
     swatches: [],
   };
   if (element) {
     compareDataSummary.uniqueId = element.uniqueID;
-    compareDataSummary.type = 'bundle';
-    const swatchAttr = bundlefilter.swatchAttributesForCompare(element);
+    const swatchAttr = bundlefilter.swatchAttributesForComparePage(element);
     if (swatchAttr.length > 0) {
       swatchAttr.forEach(sw => {
         compareDataSummary.swatches.push(sw);
@@ -116,18 +115,17 @@ function bundleCompareDataSummary(element) {
     }
     const Price = bundlefilter.bundleComponentsSummary(element, '');
     const productSummary = productDetailFilter.productDetailSummary(element);
-    const descAttr = kitfilter.getDescriptiveAttributes(element);
-    const productDimension = productDimensionSummary(descAttr);
-    productSummary.weight = productDimension.weight;
-    productSummary.height = productDimension.height;
-    productSummary.depth = productDimension.depth;
+    const descAttr = productDetailFilter.getDescriptiveAttributes(element);
+    productSummary.weight = descAttr.weight;
+    productSummary.height = descAttr.height;
+    productSummary.depth = descAttr.depth;
     productSummary.actualPrice = Price.actualPrice;
     productSummary.offerPrice = Price.offerPrice;
     compareDataSummary.sKUs.push(productSummary);
 
     if (element.attributes && element.attributes.length > 0) {
-      compareDataSummary.attributes = kitfilter.getComparableAttributes(
-        element,
+      compareDataSummary.attributes = productDetailFilter.getComparableAttributes(
+        element.attributes,
       );
     }
     if (
@@ -140,7 +138,7 @@ function bundleCompareDataSummary(element) {
           attr.catalogEntryTypeCode === 'BundleBean'
         ) {
           // eslint-disable-next-line no-shadow
-          const swatchAttr = bundlefilter.swatchAttributesForCompare(attr);
+          const swatchAttr = bundlefilter.swatchAttributesForComparePage(attr);
           if (swatchAttr.length > 0) {
             swatchAttr.forEach(sw => {
               compareDataSummary.swatches.push(sw);
@@ -151,12 +149,10 @@ function bundleCompareDataSummary(element) {
             attr,
           );
           // eslint-disable-next-line no-shadow
-          const descAttr = kitfilter.getDescriptiveAttributes(attr);
-          // eslint-disable-next-line no-shadow
-          const productDimension = productDimensionSummary(descAttr);
-          mercProductSummary.weight = productDimension.weight;
-          mercProductSummary.height = productDimension.height;
-          mercProductSummary.depth = productDimension.depth;
+          const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
+          mercProductSummary.weight = descAttr.weight;
+          mercProductSummary.height = descAttr.height;
+          mercProductSummary.depth = descAttr.depth;
           mercProductSummary.actualPrice = mercPrice.actualPrice;
           mercProductSummary.offerPrice = mercPrice.offerPrice;
           compareDataSummary.sKUs.push(mercProductSummary);
@@ -174,27 +170,25 @@ function bundleCompareDataSummary(element) {
 function kitCompareDataSummary(element) {
   const compareDataSummary = {
     uniqueId: '',
-    type: '',
+    type: 'kit',
     sKUs: [],
     attributes: [],
     swatches: [],
   };
   if (element) {
     compareDataSummary.uniqueId = element.uniqueID;
-    compareDataSummary.type = 'kit';
     compareDataSummary.swatches.push(
-      kitfilter.swatchAttributesForCompare(element),
+      kitfilter.swatchAttributesForComparePage(element),
     );
     const productSummary = productDetailFilter.productDetailSummary(element);
-    const descAttr = kitfilter.getDescriptiveAttributes(element);
-    const productDimension = productDimensionSummary(descAttr);
-    productSummary.weight = productDimension.weight;
-    productSummary.height = productDimension.height;
-    productSummary.depth = productDimension.depth;
+    const descAttr = productDetailFilter.getDescriptiveAttributes(element);
+    productSummary.weight = descAttr.weight;
+    productSummary.height = descAttr.height;
+    productSummary.depth = descAttr.depth;
     compareDataSummary.sKUs.push(productSummary);
-    if (element.attributes) {
-      compareDataSummary.attributes = kitfilter.getComparableAttributes(
-        element,
+    if (element.attributes && element.attributes.length > 0) {
+      compareDataSummary.attributes = productDetailFilter.getComparableAttributes(
+        element.attributes,
       );
     }
     if (
@@ -204,18 +198,16 @@ function kitCompareDataSummary(element) {
       element.merchandisingAssociations.forEach(attr => {
         if (attr.associationType === 'REPLACEMENT') {
           compareDataSummary.swatches.push(
-            kitfilter.swatchAttributesForCompare(attr),
+            kitfilter.swatchAttributesForComparePage(attr),
           );
           const mercProductSummary = productDetailFilter.productDetailSummary(
             attr,
           );
           // eslint-disable-next-line no-shadow
-          const descAttr = kitfilter.getDescriptiveAttributes(attr);
-          // eslint-disable-next-line no-shadow
-          const productDimension = productDimensionSummary(descAttr);
-          mercProductSummary.weight = productDimension.weight;
-          mercProductSummary.height = productDimension.height;
-          mercProductSummary.depth = productDimension.depth;
+          const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
+          mercProductSummary.weight = descAttr.weight;
+          mercProductSummary.height = descAttr.height;
+          mercProductSummary.depth = descAttr.depth;
           compareDataSummary.sKUs.push(mercProductSummary);
         }
       });
@@ -232,17 +224,16 @@ function kitCompareDataSummary(element) {
 function productCompareDataSummary(element, skuId) {
   const compareDataSummary = {
     uniqueId: '',
-    type: '',
+    type: 'product',
     sKUs: [],
     attributes: [],
     swatches: [],
   };
   if (element) {
     compareDataSummary.uniqueId = skuId;
-    compareDataSummary.type = 'product';
-    if (element.attributes) {
-      compareDataSummary.attributes = kitfilter.getComparableAttributes(
-        element,
+    if (element.attributes && element.attributes.length > 0) {
+      compareDataSummary.attributes = productDetailFilter.getComparableAttributes(
+        element.attributes,
       );
     }
     if (element.sKUs && element.sKUs.length > 0) {
@@ -251,31 +242,15 @@ function productCompareDataSummary(element, skuId) {
           productDetailFilter.swatchAttributesForCompare(sku),
         );
         const skuProductSummary = productDetailFilter.productDetailSummary(sku);
-        const descAttr = kitfilter.getDescriptiveAttributes(sku);
-        const productDimension = productDimensionSummary(descAttr);
-        skuProductSummary.weight = productDimension.weight;
-        skuProductSummary.height = productDimension.height;
-        skuProductSummary.depth = productDimension.depth;
+        const descAttr = productDetailFilter.getDescriptiveAttributes(sku);
+        skuProductSummary.weight = descAttr.weight;
+        skuProductSummary.height = descAttr.height;
+        skuProductSummary.depth = descAttr.depth;
         compareDataSummary.sKUs.push(skuProductSummary);
       });
     }
   }
   return compareDataSummary;
-}
-
-/**
- * Function to return product dimensions
- * @param {*} descAttr
- */
-function productDimensionSummary(descAttr) {
-  const productDimension = {};
-  productDimension.weight =
-    descAttr.wt && descAttr.wt.values[0] ? descAttr.wt.values[0].value : 'NA';
-  productDimension.height =
-    descAttr.ht && descAttr.ht.values[0] ? descAttr.ht.values[0].value : 'NA';
-  productDimension.depth =
-    descAttr.dp && descAttr.dp.values[0] ? descAttr.dp.values[0].value : 'NA';
-  return productDimension;
 }
 
 /**
@@ -368,5 +343,24 @@ function minEmiValue(header, bundleDataSummary, callback) {
   } catch (e) {
     logger.debug('Error in minEmiVal function', e);
     return e;
+  }
+}
+
+/** Function to short JSON object */
+function sortJsonOrder(resp, ids) {
+  try {
+    const result = resp
+      .map(res => {
+        const n = ids.indexOf(res.uniqueId);
+        // eslint-disable-next-line no-param-reassign
+        ids[n] = '';
+        return [n, res];
+      })
+      .sort()
+      .map(j => j[1]);
+    return result;
+  } catch (e) {
+    logger.debug('Error in JSON Parsing', e);
+    return resp;
   }
 }

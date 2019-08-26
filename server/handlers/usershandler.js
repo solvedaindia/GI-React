@@ -170,7 +170,6 @@ module.exports.updateUserDetails = function updateUserDetails(
   callback,
 ) {
   if (
-    // (!params.name && !params.field1 && !params.logonid) ||
     !params.validateotp ||
     (params.validateotp !== 'false' && params.validateotp !== 'true')
   ) {
@@ -180,19 +179,6 @@ module.exports.updateUserDetails = function updateUserDetails(
   logger.debug('Call to Update User Details');
 
   const reqBody = {};
-
-  /*  if (params.name) {
-    let firstname = '';
-    let lastname = '';
-    if (params.name.indexOf(' ') > 0) {
-      firstname = params.name.substr(0, params.name.indexOf(' '));
-      lastname = params.name.substring(params.name.indexOf(' ') + 1).trim();
-    } else {
-      firstname = params.name;
-    }
-    reqBody.firstName = firstname;
-    reqBody.lastName = lastname;
-  } */
 
   if (params.name) {
     reqBody.firstName = params.name;
@@ -216,7 +202,6 @@ module.exports.updateUserDetails = function updateUserDetails(
       user_id: '',
       otp: params.otp,
     };
-    // const regexMobileNo = /^\d{10}$/; // Mobile Number
 
     if (regexMobileNo.test(params.logonid)) {
       validateOtpBody.user_id = params.logonid;
@@ -297,7 +282,6 @@ module.exports.validateUserDetails = function validateUserDetails(
     null,
     '',
     response => {
-      // const regexMobileNo = /^\d{10}$/; // Mobile Number
       if (response.status === 200) {
         const otpBody = {
           user_id: '',
@@ -471,21 +455,11 @@ module.exports.createAddress = function createAddress(headers, body, callback) {
     '{{storeId}}',
     headers.storeId,
   )}`;
-
-  /*   let firstname = '';
-  let lastname = '';
-  if (reqParams.name.indexOf(' ') > 0) {
-    firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
-    lastname = reqParams.name.substring(reqParams.name.indexOf(' ') + 1).trim();
-  } else {
-    firstname = reqParams.name;
-  } */
   const addressNickName = `${headers.userId}_${Date.now()}`;
   const reqBody = {
     contact: [
       {
         firstName: reqParams.name,
-        //  lastName: lastname,
         zipCode: reqParams.pincode,
         phone1: reqParams.phone_number,
         email1: reqParams.email_id,
@@ -583,18 +557,7 @@ module.exports.updateAddress = function updateAddress(req, callback) {
     reqBody.addressLine.push(reqParams.address);
   }
   if (reqParams.name) {
-    /* let firstname = '';
-    let lastname = '';
-    if (reqParams.name.indexOf(' ') > 0) {
-      firstname = reqParams.name.substr(0, reqParams.name.indexOf(' '));
-      lastname = reqParams.name
-        .substring(reqParams.name.indexOf(' ') + 1)
-        .trim();
-    } else {
-      firstname = reqParams.name;
-    } */
     reqBody.firstName = reqParams.name;
-    // reqBody.lastName = lastname;
   }
 
   const reqHeader = headerutil.getWCSHeaders(req.headers);
@@ -640,27 +603,6 @@ module.exports.updateAddress = function updateAddress(req, callback) {
   );
 };
 
-module.exports.getNotifications = function getNotifications(headers, callback) {
-  logger.debug('Call to get user contact api');
-  callback(null, {
-    message: 'WCS Integration Pending to get Notifictaions',
-  });
-};
-
-module.exports.getGiftCards = function getGiftCards(headers, callback) {
-  logger.debug('Call to get user contact api');
-  callback(null, {
-    message: 'WCS Integration Pending to get GiftCard Details',
-  });
-};
-
-module.exports.getGodrejCredit = function getGodrejCredit(headers, callback) {
-  logger.debug('Call to get user contact api');
-  callback(null, {
-    message: 'WCS Integration Pending to get Godrej Credit Details',
-  });
-};
-
 /**
  * Forgot Password API
  * @param user_id
@@ -688,7 +630,6 @@ module.exports.forgotPassword = function forgotPassword(
   );
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
-  // `${params.user_id}_IBM_${params.otp}`
   const forgotPasswordBody = {
     logonId: params.user_id,
     resetPassword: 'true',
