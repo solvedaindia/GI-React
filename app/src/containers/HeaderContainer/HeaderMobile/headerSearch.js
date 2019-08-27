@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import { autoSuggestAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/RWDStyle/mobileHeader.scss';
 // import '../../../../public/styles/RWDStyle/sideNavigation.scss';
+import { connect } from 'react-redux';
+import injectSaga from '../../../utils/injectSaga';
+import injectReducer from '../../../utils/injectReducer';
+import reducer from '../../../containers/PlpContainer/reducer';
+import saga from '../../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../../containers/PlpContainer/actions';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
 
 export class HeaderSearch extends React.Component {
   constructor(props) {
@@ -11,7 +19,11 @@ export class HeaderSearch extends React.Component {
     this.state = {
       inputText: '',
       searchData: [],
-    };
+	};
+  }
+
+  componentDidMount() {
+	console.log('twing --- ',this.props)
   }
 
   onBackBtn() {
@@ -28,7 +40,7 @@ export class HeaderSearch extends React.Component {
   onSearchClick() {}
 
   onLinkNavigation(searchTxt) {
-    // this.props.plpReduxStateReset();
+    this.props.plpReduxStateReset();
     this.setState({
       inputText: searchTxt,
       searchData: [],
@@ -62,10 +74,20 @@ export class HeaderSearch extends React.Component {
     }
   }
 
+  
+onkeydownclick(text) {
+	if(event.key === 'Enter') {
+		if (text !== '') {
+			this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+			this.onLinkNavigation(this.state.inputText);
+		}
+    }
+}
+
   render() {
     const searchData = this.state.searchData;
     return (
-      <>
+      <form action=".">
         <div className="searchBackBtn">
           <button onClick={this.onBackBtn.bind(this)} className="menuBtn">
             <img
@@ -79,7 +101,9 @@ export class HeaderSearch extends React.Component {
             placeholder="Search for Rooms, Products, etc "
             value={this.state.inputText}
             onChange={this.handleInputChange.bind(this)}
-            type="text"
+            type="search"
+			onKeyPress={() => this.onkeydownclick(document.getElementById('searchInput').value)}
+			
           />
           {this.state.inputText !== '' ? (
             <button onClick={this.onClearClick.bind(this)}>
@@ -136,9 +160,40 @@ export class HeaderSearch extends React.Component {
             </div>
           )}
         </div>
-      </>
+      </form>
     );
   }
 }
 
-export default HeaderSearch;
+//export default HeaderSearch;
+// export default withRouter(HeaderSearch);
+
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+	return {
+	  plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+	}
+  };
+  
+  const mapStateToProps = state => {
+	const stateObj = getReleventReduxState(state, 'plpContainer');
+	return {
+  
+	}
+  };
+  
+  const withConnect = connect(
+	mapStateToProps,
+	mapDispatchToProps,
+  );
+  
+  const withReducer = injectReducer({ key: 'plpContainer', reducer });
+  const withSaga = injectSaga({ key: 'plpContainer', saga });
+  
+  export default compose(
+	withReducer,
+	withSaga,
+	withConnect,
+	withRouter,
+  )(HeaderSearch);
+

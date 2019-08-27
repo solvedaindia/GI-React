@@ -313,7 +313,7 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>Proceed to checkout</button>):''}
+                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>Proceed to Checkout</button>):''}
                   </div>
             
               

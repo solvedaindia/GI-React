@@ -71,7 +71,7 @@ class SearchBar extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() { 
     const wage = document.getElementById('searchInput');
     wage.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
