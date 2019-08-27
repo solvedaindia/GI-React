@@ -4,6 +4,7 @@ import { validateEmptyObject } from '../../../utils/validationManager';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/guestTrackOrder.scss';
+import {isMobile} from '../../../utils/utilityManager';
 
 class GuestTrackOrder extends React.Component {
   constructor(props) {
@@ -58,23 +59,32 @@ class GuestTrackOrder extends React.Component {
 
     return (
       <div className="guestTrackOrder">
-        <label className="helloGuestMsg clearfix">
+         {!isMobile() && <h3 className="helloGuestMsg clearfix">
           Hello Guest! Please enter your Order Number to track
-        </label>
+        </h3>}
+        <div className='form-group'>
+        {isMobile() && <label className='form-label'>Order Number</label>}
         <input
-          className="orderIdField"
+          className="form-control"
           placeholder="Enter order number"
           onChange={this.handleInputChange.bind(this)}
         />
         {errorItem}
+        </div>
         {/* <Link to={{ pathname: '/myAccount', state: { from: 'myorder', isGuestTrackOrder: true } }}> */}
-        <button
-          className="submitBtn"
-          onClick={this.submitBtnClicked.bind(this)}
-        >
-          Track Order
-        </button>
+        <div className='track-order-btn'>
+          <button
+            className="submitBtn"
+            onClick={this.submitBtnClicked.bind(this)}
+          >
+            Track Order
+          </button>
+        </div>
         {/* </Link> */}
+
+        {isMobile() &&<div className='back-btn'>
+           <Link to='/' className='go-back'>Go back</Link>
+          </div>}
       </div>
     );
   }
