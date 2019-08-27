@@ -7,7 +7,7 @@ import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
 import {isMobile} from '../../utils/utilityManager';
 import {
-  imagePrefix,
+  imagePrefix,aboutUsOurProcessApi,
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
@@ -28,62 +28,10 @@ export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `The Phase Zero is where we lay the foundation to any project. The first step towards initiating a New Product Development is the Marketing brief, followed by the Research and Study, where the ideas are sculpted and given form. Then, the concept is validated and improvised followed by photo-rendering to give clarity of design and structure.
-          It is at this level that the Target Green Quotient of this product is defined.`,
-          image_url: img,
-          checked:'active'
-        },
-        {
-          title:'initial Ideation ',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `The Final product is further refined, and the product prototype is tested for the possible product abuse. For every new and critical process in the design manufacturing, we collaborate with vendors and suppliers to work out the details and preserve the idea.
-          A final prototype is made if any corrections post testing is required, and this is also checked for the fit and finish. 
-          `,
-          image_url: images,
-          checked:false
-        },
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `The work in this phase involves actual development of all tools, jigs, fixtures, gauges and special purpose machines and its verification to ensure smooth production of the product. It also includes the Pilot lot production for the final approval for launch. The Design Team contributes to supporting the product managers with requisite documents to prepare the launch communications.`,
-          image_url: img,
-          checked:false
-        },
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `This phase focuses on making the launch of the product successful by ensuring training, communication, in-store display, and visual merchandising. Besides introducing the product/ solution in an effective manner, this phase also focuses on improvements. Post the first few order executions, a team of the product managers and designers visit the customers to understand their experiences and gather feedback for improvements.`,
-          image_url: images,
-          checked:false
-        },
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `The work in this phase involves actual development of all tools, jigs, fixtures, gauges and special purpose machines and its verification to ensure smooth production of the product. It also includes the Pilot lot production for the final approval for launch. The Design Team contributes to supporting the product managers with requisite documents to prepare the launch communications.`,
-          image_url: img,
-          checked:false
-        },
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `This phase focuses on making the launch of the product successful by ensuring training, communication, in-store display, and visual merchandising. Besides introducing the product/ solution in an effective manner, this phase also focuses on improvements. Post the first few order executions, a team of the product managers and designers visit the customers to understand their experiences and gather feedback for improvements.`,
-          image_url: images,
-          checked:false
-        },
-        {
-          title:'initial Ideation',
-          sub_title:'Brainstorming to the final product',
-          paragraph: `The work in this phase involves actual development of all tools, jigs, fixtures, gauges and special purpose machines and its verification to ensure smooth production of the product. It also includes the Pilot lot production for the final approval for launch. The Design Team contributes to supporting the product managers with requisite documents to prepare the launch communications.`,
-          image_url: img,
-          checked:false
-        }
-      ],
+      data:[],
       img_url: img,
       content: paraFirst,
+      component_title:'',
       title:'',
       sub_title:'',
       selected_index:0,
@@ -111,7 +59,7 @@ handleclick = event => {
   }
   this.setState({
     data : data,
-    img_url: data[index].image_url,
+    img_url: data[index].image_url.imageSrc,
     content: data[index].paragraph,
     title:data[index].title,
     sub_title:data[index].sub_title,
@@ -142,7 +90,7 @@ getImageOnArrowClick = (e) =>{
   }
   this.setState({
     data : data,
-    img_url: data[index].image_url,
+    img_url: data[index].image_url.imageSrc,
     content: data[index].paragraph,
     title:data[index].title,
     sub_title:data[index].sub_title,
@@ -151,16 +99,44 @@ getImageOnArrowClick = (e) =>{
   console.log('getImageOnArrowClick',this.state);
 
 }
+
+getOurProcessData()
+{
+  apiManager
+  .get(aboutUsOurProcessApi)
+  .then(response => {
+    console.log('getOurProcessData', response)
+    const {data} = response || {}
+    console.log('getOurProcessData Title', data.data.processData);
+    this.setState({
+      component_title:data.data.title,
+      data :data.data.processData,
+      img_url: data.data.processData[0].image_url.imageSrc,
+      content: data.data.processData[0].paragraph,
+      title:data.data.processData[0].title,
+      sub_title:data.data.processData[0].sub_title
+
+    });
+    console.log('getOurProcessData state',this.state);
+  })
+  .catch(error => {
+    this.setState({
+    });
+    console.log('getOurProcessData',error);
+  });
+}
+
 componentDidMount(){
 
   const {data,selected_index} = this.state;
   console.log('componentDidMount',data);
-  this.setState({
-      img_url: data[selected_index].image_url,
-      content: data[selected_index].paragraph,
-      title:data[selected_index].title,
-      sub_title:data[selected_index].sub_title
-  });
+  this.getOurProcessData()
+   //this.setState({
+    //   img_url: data[selected_index].image_url,
+  //     content: data[selected_index].paragraph,
+  //     title:data[selected_index].title,
+  //     sub_title:data[selected_index].sub_title
+// });
 }
 
 getButtons=(data)=>{
@@ -183,12 +159,12 @@ render() {
         <div className='container'>
           <div className='row'>
             <div className='col-md-12'>
-              <h1 className='headingtitle'>Our Process</h1>
+              <h1 className='headingtitle'>{this.state.component_title}</h1>
             </div>
           </div>
           <div className='row'>
             <div className='col-md-6'>
-              <img className='processBigImg' src={this.state.img_url} alt='image' />
+              <img className='processBigImg' src={imagePrefix + this.state.img_url} alt='image' />
               <div>
                 
                 {views}
