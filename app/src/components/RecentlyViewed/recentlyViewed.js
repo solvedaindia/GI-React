@@ -50,7 +50,7 @@ class RecentlyViewed extends React.Component {
     // };
     return (
       <div className="bestSeller">
-        <h1 className="title">Recently Viewed</h1>
+        <h3 className="title">Recently Viewed</h3>
         {/* <Slider {...settings}>
                     {!!recentlyViewedData && recentlyViewedData.map((rcItemData, index) =>{
                         return (

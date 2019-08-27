@@ -13,6 +13,7 @@
             margin-right:0;
             margin-left:0;
             vertical-align: sub;
+            margin-top: 4px;
         }
         display: inline-block;
         cursor: pointer;
@@ -42,9 +43,9 @@
         .welcomeDropDown{
             .userList{               
                 .listItem{
-                    height: $base*5.5;
+                    // height: $base*5.5;
                     &.listItemUnSelected {
-                        height: $base*4.25;
+                        // height: $base*4.25;
                     }
                 }
             }
