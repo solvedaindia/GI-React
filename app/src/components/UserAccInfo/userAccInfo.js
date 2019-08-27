@@ -159,7 +159,7 @@ class UserAccInfo extends React.Component {
             onClick={this.onLoginRegisterClick.bind(this)}
           >
             {' '}
-            Login/ Register
+            Login/Register
           </a>
 
       });

@@ -8,8 +8,14 @@
         font-size: 10px;
 
         .action {
+            color: #77787a;
             &:hover{
+                text-decoration: underline;
+                color: #ee4060;
+            }
+            &:visited,&:focus{
                 text-decoration: none;
+                outline: none;
             }
         }
     }

@@ -9,13 +9,18 @@
 }
 .user{
     .userLogin{
-       padding-bottom:20px;
+       padding-bottom:10px;
+       .userList{
+           .listItemUnSelected{
+               padding:12px 10px 8px 10px;
+           }
+       }
     }
     .welcomeDropDown {
         visibility: hidden;
         opacity: 0;
         position: absolute;       
-        top:67.4px;
+        top:64.3px;
         max-width: 200px;
         width: 218px;
         right: 0;
@@ -29,6 +34,7 @@
         z-index: 3;
         .dropDown {
             font-size: $base*1.75;
+            line-height: $base*2.5;
             color: $black;
             font-family: $font-regular;
             display: block;
@@ -44,7 +50,7 @@
                     cursor:default;                    
                 }
             }
-            padding: $base*1.25;
+            padding: $base*1;
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
@@ -60,6 +66,7 @@
                 color:$cerulean;
                 font-family: $font-medium;
                 font-size: $base*1.5;
+                line-height: $base*1.75;
             }
             &:hover {
                 cursor: default;

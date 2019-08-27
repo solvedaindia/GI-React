@@ -152,6 +152,7 @@ class ForgotPasswordOTP extends React.Component {
   }
 
   render() {
+    const userId = this.props.userIdPro;
     let errorItem;
     if (this.state.error) {
       errorItem = (
@@ -181,7 +182,9 @@ class ForgotPasswordOTP extends React.Component {
     let inputTxtField = null;
     let titleOTP = null;
     if (this.state.showOTPTxtField) {
-      titleOTP = <p className="text">Enter OTP sent to your mobile number</p>;
+      titleOTP = <p className="text">     
+        OTP sent to xxxxxx{userId.substr(userId.length - 4)}
+      </p>;
     }
     if (this.props.isFromMyProfilePro) {
       titleOTP = (

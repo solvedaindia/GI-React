@@ -10,6 +10,11 @@
     margin: 0;
     width: 50%;
     display: inline-block;
+    &:first-child{
+        .catList{
+            left: -32px;
+        }
+    }
     .listItems {
         padding: 28px 40px 28px 0;
         font-size: $base*1.5;
