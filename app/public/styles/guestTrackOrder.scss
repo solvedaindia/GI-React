@@ -19,7 +19,10 @@
     text-align: center;
     color: $reddishPink;
   }
-
+  .back-btn{
+    text-align: center;
+    padding: 44px 0px 20px 0px;
+  }
 }
 
 
@@ -68,6 +71,7 @@
           border: 0px;
         }
       }
+      
       .form-group{
         .form-control{
           padding: $base*3.5 $base*3;
@@ -116,10 +120,7 @@
         width: 100%;
       }
     }
-    .back-btn{
-      text-align: center;
-      padding: 44px 0px 20px 0px;
-    }
+
     .form-label{
       position: absolute;
       top: 0px;

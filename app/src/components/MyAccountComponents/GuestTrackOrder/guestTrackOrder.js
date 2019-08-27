@@ -82,9 +82,9 @@ class GuestTrackOrder extends React.Component {
         </div>
         {/* </Link> */}
 
-        {isMobile() &&<div className='back-btn'>
+        <div className='back-btn'>
            <Link to='/' className='go-back'>Go back</Link>
-          </div>}
+          </div>
       </div>
     );
   }
