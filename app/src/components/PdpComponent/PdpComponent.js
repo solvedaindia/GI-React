@@ -74,6 +74,18 @@ class PdpComponent extends React.Component {
 		}
 	}
 
+	/*check filter count */
+	checkArrayFilter(uniqueIdArray, matchValue) {
+		  let dataArray = Array();
+			for(let i = 0; i < uniqueIdArray.length; i++) {
+				 if (uniqueIdArray[i] === matchValue) {
+					dataArray.push(matchValue);
+				 }
+			}
+			return dataArray.length;
+	}
+	
+
 	/* get actual resolve data  */
 	getActualResolvedData(data, resolvedSkuData, type) {
 		const skuDataArr = [];
@@ -82,9 +94,12 @@ class PdpComponent extends React.Component {
 			resolvedSkuData.defAttributes.map(dataVal => {
 			data.map(skuLevelData => {
 				skuLevelData.defAttributes.map(attributeValue => {
-					if (dataVal.values[0].name === attributeValue.values[0].name && uniqueId.indexOf(skuLevelData.uniqueID) === -1) {
-						skuDataArr.push(skuLevelData);
-						uniqueId.push(skuLevelData.uniqueID)
+					if (dataVal.values[0].name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').replace(/\s/g, '') === attributeValue.values[0].name.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').replace(/\s/g, '')) {
+						uniqueId.push(skuLevelData.uniqueID);
+						const getValueLength = this.checkArrayFilter(uniqueId, skuLevelData.uniqueID);
+						if (getValueLength >= (resolvedSkuData.defAttributes.length - 1)) {
+							skuDataArr.push(skuLevelData);
+						}							
 					}
 				});
 			});
@@ -105,7 +120,6 @@ class PdpComponent extends React.Component {
 		const defaultPincodeData = {
 			pincodeServiceable: null,
 		};
-
 		this.setState({
 			selectedSku: skuDataArr,
 			isLoading: false,
