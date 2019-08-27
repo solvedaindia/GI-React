@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Footerlinks = props => {
   console.log("myprops", props)
@@ -13,9 +14,9 @@ const Footerlinks = props => {
           <ul>
             {item.children.map((litem, i) => (
               <li className="list" key={i}>
-                <a className="link" href={litem.action}>
-                  {litem.text}
-                </a>
+                <Link className='link' to={litem.action}>
+                    {litem.text}
+                </Link>
               </li>
             ))}
           </ul>
