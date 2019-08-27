@@ -23,7 +23,7 @@ class BestSeller extends React.Component {
 
   getBestSellerData() {
     apiManager
-      .get(`${espotAPI}GI_CLP_BEST_SELLERS`)
+      .get(bestSellerAPI)
       .then(response => {
         const { data } = response || {};
         const bsData = data && data.data;
