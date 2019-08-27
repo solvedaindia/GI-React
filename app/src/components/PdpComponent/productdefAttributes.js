@@ -17,7 +17,7 @@ class productDefAttribute extends React.Component {
 	}
 
 	/* get radio button html */
-	getRadioButtonHtml(radioName, radioValue, isChecked, count, selectedSwatches, index, isRadio, getActualSwatchesName) {
+	getRadioButtonHtml(radioName, radioValue, isChecked, count, selectedSwatches, index, isRadio, resolvedSku) {
 		let radioButtonHtml;
 		let isDisabled = false;
 		let radioButton = 'hideRadio';
@@ -33,9 +33,12 @@ class productDefAttribute extends React.Component {
 		if (this.state.selectedOption === '') {
 			radioChecked = isChecked;
 		} else {
-			radioChecked = getActualSwatchesName === radioValue;
+			if(resolvedSku.indexOf(radioValue) === -1) {
+				radioChecked = false;
+			} else {
+				radioChecked = true;
+			}
 		}
-
 		radioButtonHtml = <input type='radio' disabled={isDisabled} name={radioName.replace(/\s/g, '').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')} className={`radio${count} ${radioButton}`} id={`radio_${count}_${index}`} value={radioValue} onChange={this.handleOptionChange.bind(this)} checked={radioChecked} />;
 		return radioButtonHtml;
 	}
@@ -146,7 +149,7 @@ class productDefAttribute extends React.Component {
 									} else if(checkedType === true) {
 										isActiveBox = 'active';
 									}
-									radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index, isRadio, this.props.selectedAttribute[i].values[0].name)}{name}</label>
+									radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index, isRadio, resolvedSku)}{name}</label>
 									let isDisabled = '';
 
 									if (i > -1 && selectedSwatches.indexOf(value.name) === -1 && this.props.defAttributes.length > 1) {

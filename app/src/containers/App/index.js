@@ -23,7 +23,13 @@ import {
   newsletterTokenCookie,
   newsletterStatusAPI,
   ipDataApi,
+  mapKey
 } from '../../../public/constants/constants';
+
+import {
+ validatePindcode
+} from '../../utils/validationManager';
+
 import appCookie from '../../utils/cookie';
 
 // import HomePageContainer from '../HomePageContainer/index';
@@ -64,6 +70,8 @@ import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
 import paymentWait from '../../components/checkout/paymentWait';
 import StaticPagesList from '../../components/staticPages';
+import Geocode from "react-geocode";
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -84,6 +92,7 @@ export default class App extends React.Component {
     this.cookiePolicyPopup();
     window.addEventListener('resize', this.resize);
     this.resize();
+    this.getCurrentLocation();
   }
 
   initialLoginHandling() {
@@ -165,6 +174,29 @@ export default class App extends React.Component {
   resize() {
     this.setState({ isMobile: window.innerWidth <= 760 });
   }
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
+
+    function showPosition(position) {
+      Geocode.setApiKey(mapKey);
+      Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
+        response => {
+          const address = response.results[0].formatted_address;
+          const data = address.replace(', India', '');
+          const postalCode = data.substr(data.length -6);
+          if (validatePindcode(postalCode) === true) {
+            appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+          }          
+        },
+        error => {
+          console.error(error);
+        }
+      );
+     }
+    }
 
   checkCookiePolicyPopup() {
     if (appCookie.get('isCookiePolicy') === 'true' && window.location.pathname !== '/') {
