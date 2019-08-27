@@ -235,7 +235,7 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           <Route path='/staticpages' component = {StaticPagesList} />
           <Route path="/termsconditions" component={TermsConditions} />
-          <Route path="/cookie" component={CookiePolicy} />
+          <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
