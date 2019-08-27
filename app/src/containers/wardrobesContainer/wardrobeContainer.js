@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import  '../../../public/styles/static-pages/warobes.scss';
+
 import  '../../../public/styles/static-pages/kitchen.scss';
 import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
 import { imagePrefix } from '../../../public/constants/constants';
@@ -13,6 +15,7 @@ import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import WardrobeBenefits from '../../components/wardrobesComponent/wardrobesBenefits';
 import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
 import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
+import WhatGoesward  from '../../components/wardrobesComponent/whatgoesWard';
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
@@ -28,6 +31,37 @@ export class WardrobeContainer extends React.Component {
         <section className="kitchenContainer">
             <WardrobeBanner />
             <WardrobeBenefits />
+			<div className='whatGoesContainer'>
+                <div className="container">
+                  <div className="row">
+                    <h1 className="What-goes-into-a-Mod ">What goes into a Modular wardrobe</h1>
+                    <p className="whatgoessubhead">Choose from a vast range of acessories. Consectetur adipisicing
+                      elit, sed do eiusmod tempor incididunt ut labore<br /> et dolore magna aliquat enim ad minim
+                      veniam,
+                      quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <div className="col-md-6">
+                      <h1 className="AccessoriesText">Accessories</h1>
+                      <p className="whatGoesPara">Choose from a vast range of acessories. Consectetur
+                        adipisicing elit,<br /> sed do eiusmod tempor incididunt ut labore et dolore magna aliquat<br />
+                        enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor<br /> sit amet, consectetur
+                        adipisicing elit.<br /> </p>
+                      <ul className="moved">
+                        <li> <a className="Materials-and-Finish">Materials and Finishes</a>
+                        </li>
+                        <li> <a className="Materials-and-Finish">Element</a>
+                        </li>
+                        <li> <a className="Materials-and-Finish">Add-ones</a>
+                        </li>
+
+                      </ul>
+                    </div>
+                    <div className="col-md-6">
+                      <WhatGoesward />
+
+                    </div>
+                  </div>
+                </div>
+              </div>
             <WHallOfFame />
 			<div className="formContainer">
 				<div className='containerSetForm'>

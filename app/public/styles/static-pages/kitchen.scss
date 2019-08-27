@@ -1,6 +1,7 @@
 @import '../variable';
 
 .hallOfFame {
+    
     .title {
         margin: 0; 
         font-family: $font-medium;
@@ -156,6 +157,58 @@
         }
     }
 }
+.whatGoesContainer{
+    padding: 60px 0 0 0;
+    .Materials-and-Finish {
+      padding: 30px 0 0 0;
+      font-family: $font-regular;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      color: #77787a
+    }
+    .whatGoesPara {
+      font-family:  $font-regular;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      color:#4a4a4a
+    }
+    .goesOnKitchen {
+      height: 563px;
+      object-fit: contain;
+    }
+    .AccessoriesText {
+      font-family: $font-medium;
+      font-size: 20px;
+      font-weight: bold;
+      font-style: normal;
+      line-height: normal;
+      color: #036cc5;
+      margin: 80px 0 0 0;
+    }
+    .What-goes-into-a-Mod {
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .whatgoessubhead {
+      text-align: center;
+      font-family:  $font-regular;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      color:#4a4a4a
+    }
+  }
 @media screen and (min-width: 768px){
     .kitchenEspots {
         margin: 60px auto;
