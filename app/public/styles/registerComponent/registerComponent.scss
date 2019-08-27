@@ -359,6 +359,18 @@
                     } 
                 } 
             } 
+
+            &.modal-wrapperotp{
+                .modal-dialog{
+                    .modal-wrapper{
+                        .form_register{
+                            .error-msg{
+                                max-width: 75%;
+                            }
+                        } 
+                    }
+                }  
+            }
         } 
     }
 
