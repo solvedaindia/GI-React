@@ -19,6 +19,7 @@ const Input = props => (
       onPaste={props.onPaste}
       readOnly={props.readOnly}
       autoFocus={props.isAutoFocus}
+      maxLength={props.maxLength}
       {...props}
     />
     {props.hideAnimation ? null : <label htmlFor={props.name} className="form-label">

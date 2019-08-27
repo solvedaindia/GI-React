@@ -198,9 +198,19 @@ class AddAddressForm extends React.Component {
   }
 
   pincodeFocusOut() {
-    if (validatePindcode(this.state.inputText_pincode)) {
-      this.getStateCityFromPincode();
+    console.log('pinFocus ---- ',this.state.inputText_pincode)
+    if (this.state.inputText_pincode !== '' && this.state.inputText_pincode.length === 6) {
+      if (validatePindcode(this.state.inputText_pincode)) {
+        this.getStateCityFromPincode();
+      }
     }
+    else {
+      this.setState({
+        inputText_city: '',
+        inputText_state: '',
+      })
+    }
+    
   }
 
   getStateCityFromPincode() {
@@ -212,7 +222,17 @@ class AddAddressForm extends React.Component {
           inputText_state: response.data.data.state,
         });
       })
-      .catch(error => { });
+      .catch(error => { 
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        console.log('iii --- ',errorMessage)
+        this.setState({
+          inputText_city: '',
+          inputText_state: '',
+          error_pincode: true,
+          errorMessage_pincode: errorMessage,
+        })
+      });
   }
 
   onSetAsDefaultChange() {
@@ -299,7 +319,7 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} />
+              <Input inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={200} />
               {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
             </div>
           </div>

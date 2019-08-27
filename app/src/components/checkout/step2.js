@@ -1112,7 +1112,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-12">
                       <div className="form-div addressTextarea clearfix div-error">
                         <div className='form-group'>
-                          <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
+                          <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={200} />
                           <label htmlFor='address' className="form-label">Address</label>
                           {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
 
@@ -1220,7 +1220,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={200}/>
                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
                       </div>
