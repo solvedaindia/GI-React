@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class Terms extends React.Component {
+class USerAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Terms_and_Conditions_Static_Data",
+      espotName: "GI_TERMS_AND_CONDITIONS_USERACCOUNT",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -55,4 +55,4 @@ class Terms extends React.Component {
   }
 }
 
-export default Terms;
+export default USerAccount;
