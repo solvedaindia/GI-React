@@ -142,8 +142,17 @@ class ChangePassword extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
+        const erroCode = error.response.status;
         console.log('Current passwod Error -- ', errorMessage);
-        alert(errorMessage);
+        if(erroCode==400)
+        {
+          this.setState({
+            errorNew: true,
+            errorMessage: errorMessage,
+          });
+        }
+        else
+          alert(errorMessage);
         // this.setState({
         //   error: true,
         //   errorMessage,

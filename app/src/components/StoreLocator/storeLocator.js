@@ -99,6 +99,13 @@ class StoreLocator extends React.Component {
         if (this.props.history.location.state) {
             if (nextProps.history.location.state.storeName){ 
                 this.getLatAndLong(nextProps.history.location.state.storeName);
+                let commingCity = nextProps.history.location.state.storeName;
+                let enterCity =  document.getElementById("city").value;
+                if(commingCity!=enterCity)
+                {
+                    document.getElementById("city").value=""
+                }
+                //document.getElementById("city").value="";
             } else if (nextProps.history.location.state.pincode) {
                 this.getLatAndLong(nextProps.history.location.state.pincode);
             } else {
@@ -382,7 +389,7 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
+                        <input id="city" type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
                         <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores':'Find'}</button>
                     </div>
 
