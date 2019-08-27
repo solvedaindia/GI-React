@@ -1,7 +1,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/termsconditions.scss';
-import Terms from '../../components/TermsConditionComp/termCond';
+import Terms from '../../components/termsConditionsComp/termConditions';
 
 
 export class TermsConditions extends React.Component {

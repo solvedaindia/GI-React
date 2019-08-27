@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class PrivacyPolicies extends React.Component {
+class PPDataProtection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Privacy_Policy_Static_Data",
+      espotName: "GI_Privacy_Policy_DataProtectionAndFishing",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -55,4 +55,4 @@ class PrivacyPolicies extends React.Component {
   }
 }
 
-export default PrivacyPolicies;
+export default PPDataProtection;
