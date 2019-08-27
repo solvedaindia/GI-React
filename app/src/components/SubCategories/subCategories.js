@@ -26,22 +26,22 @@ class SubCategoriesArray extends React.Component {
     this.ref = ref;
   }
 
-  handleMouseOver(subCategoryData) {
-    this.setState({
-      subCatImg: subCategoryData.fullImage,
-    });
-  }
+  // handleMouseOver(subCategoryData) {
+  //   this.setState({
+  //     subCatImg: subCategoryData.fullImage,
+  //   });
+  // }
 
-  handleMouseOut() {
-    this.setState({
-      subCatImg: null,
-    });
-  }
+  // handleMouseOut() {
+  //   this.setState({
+  //     subCatImg: null,
+  //   });
+  // }
 
-  componentDidMount() {
-    const rect = this.ref.getBoundingClientRect();
-    this.compLeft = { left: -1 * rect.left };
-  }
+  // componentDidMount() {
+  //   const rect = this.ref.getBoundingClientRect();
+  //   this.compLeft = { left: -1 * rect.left };
+  // }
 
   onLinkNavigation = () => {
     this.props.plpReduxStateReset();
@@ -74,8 +74,8 @@ class SubCategoriesArray extends React.Component {
               <li
                 className="subCatList"
                 key={`subCat-${index}`}
-                onMouseOver={this.handleMouseOver.bind(this, subCategoryData)}
-                onMouseOut={this.handleMouseOut.bind(this)}
+                // onMouseOver={this.handleMouseOver.bind(this, subCategoryData)}
+                // onMouseOut={this.handleMouseOut.bind(this)}
               >
                 <Link to={{ pathname: routePath, state: { categoryId: subCategoryData.uniqueID }, }} className="links" onClick={this.onLinkNavigation} >
                   {subCategoryData.categoryName}

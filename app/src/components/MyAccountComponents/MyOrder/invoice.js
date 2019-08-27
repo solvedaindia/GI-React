@@ -1,14 +1,9 @@
 import React from 'react';
 import jsPDF from 'jspdf';
+import { withRouter } from 'react-router-dom';
 import { invoicAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';
-
-const data = {
-    firstName: 'john',
-    lastName: 'donohue',
-    email: 'john.donohue@trendcycle.co',
-  }
 
 class Invoice extends React.Component {
     constructor(props){
@@ -16,13 +11,14 @@ class Invoice extends React.Component {
         this.state = {
             invoiceData: null
         }
+        this.download = this.download.bind(this);
     }
     componentDidMount() {
         this.getInvoiveDetails();
     }
     getInvoiveDetails() {
 		apiManager
-		.get(invoicAPI + '123456')
+		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
 			this.setState({
 				invoiceData: response.data.data,
@@ -35,13 +31,13 @@ class Invoice extends React.Component {
 		})
 		.catch(error => {
 			this.setState({
-			error,
-			isLoading: false,
+                error,
+                isLoading: false,
 			});
 			console.log('Invoive data error');
 		});
 	}
-    download=event=>{
+    download=( )=>{
         this.doc.save('invoice.pdf');
     }
     setup() {
@@ -51,7 +47,7 @@ class Invoice extends React.Component {
             const width = 210
             const elementHandlers = {
                 '#ignorePDF': (element,renderer)=>{
-                return true
+                    return true
                 }
             }
             doc.fromHTML(el,1,1,{width,elementHandlers},()=>{
@@ -70,11 +66,9 @@ class Invoice extends React.Component {
         return (
             <div className="invoiceContainer" style={{width: '95%', margin: 'auto'}}>
                 {
-                    <div class="invoiceData">
+                    <div className="invoiceData">
                         <h3 style={{textAlign: 'center'}}>TAX INVOICE</h3>
-                        <span style={{width: '40vw', marginBottom:'20px', fontSize:'11px'}}>{!!invoiceData && invoiceData.companyAddress.name}</span>
-                        <span style={{width: '40vw', marginBottom:'20px', fontSize:'10px'}}>{!!invoiceData && invoiceData.companyAddress.address}</span>
-                        <span style={{width: '40vw', marginBottom:'20px', fontSize:'10px'}}>{!!invoiceData && invoiceData.cinNO}</span>
+                        <p>Invoice Body</p>
                     </div>
                 }
             </div>
@@ -83,14 +77,13 @@ class Invoice extends React.Component {
     render() {
         return(
             <div className="invoiceTicket">
-                <h1 className='title'>INVOICE</h1>
                 <div id="content">
                     {this.invoiceDatailedData()}
                 </div>
-                <button className="btn btn-outline-primary" onClick={this.download}>Save as PDF</button>
-        </div>
+                <p className='downloadBtn'><button className="btn btn-outline-primary" onClick={this.download}>Downlaod Invoice</button></p>
+            </div>
         );
     }
 }
 
-export default Invoice;
+export default withRouter(Invoice);

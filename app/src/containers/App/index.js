@@ -61,7 +61,7 @@ import StoreLocator from '../../components/StoreLocator/storeLocator';
 import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
-import Invoice from '../../components/MyAccountComponents/MyOrder/invoice1';
+import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
 import paymentWait from '../../components/checkout/paymentWait';
 import StaticPagesList from '../../components/staticPages';
 
@@ -126,7 +126,7 @@ export default class App extends React.Component {
   getPincodeData() {
     if (appCookie.get('pincode') === null) {
       apiManager
-        .get(ipDataApi, { headers: { Accept: 'application/json' } })
+        .get(ipDataApi)
         .then(response => {
           appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
           console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
@@ -244,6 +244,7 @@ export default class App extends React.Component {
           <Route path="/privacy-policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
+          <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           
         </Switch>

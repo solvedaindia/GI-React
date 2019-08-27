@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
 import { mapPaymentMethodMode } from '../../../utils/utilityManager';
@@ -14,24 +15,28 @@ class OrderSummery extends React.Component {
   }
 
   render() {
-    
     const summeryData = this.props.summeryDataro;
-    const addressData = this.props.addressDataPro;
+	const addressData = this.props.addressDataPro;
     console.log('summery ddd invo9cdee -- ', addressData.pincode)
     return (
       <div className="summerydata">
         <div className="orderList">
-          <h4 className="heading">Delivery Address</h4>
-          {addressData ? <><p className="subheading">{addressData.name !== undefined ? addressData.name : null}</p>
-          <p className="address">{`${addressData && addressData.address !== undefined ? addressData.address : null}, ${addressData.city !== undefined ? addressData.city : null}, ${addressData.state !== undefined ? addressData.state: null}, ${addressData.pincode !== undefined ? addressData.pincode : null}`}</p></>: null }
-          
-           <ul className="invoiceList">
-            {this.props.invoiceDataPro.map((data, key) => {
-              return (
-                <li onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list">INVOICE {key + 1}</li>
-              )
-            })}
-          </ul> 
+			<h4 className="heading">Delivery Address</h4>
+			{addressData ? <><p className="subheading">{addressData.name !== undefined ? addressData.name : null}</p>
+			<p className="address">{`${addressData && addressData.address !== undefined ? addressData.address : null}, ${addressData.city !== undefined ? addressData.city : null}, ${addressData.state !== undefined ? addressData.state: null}, ${addressData.pincode !== undefined ? addressData.pincode : null}`}</p></>: null }
+			<ul className="invoiceList">
+				{this.props.invoiceDataPro.map((data, key) => {
+				return (
+					<li
+						onClick={evt => this.onInvoiceClick(this.props.invoiceDataPro[key])} className="list"
+					>
+						<Link className='link' to={{ pathname: `/invoice/${data}` }}>
+							INVOICE {key + 1}
+						</Link>
+					</li>
+				)
+				})}
+			</ul> 
         </div>
 
         <div className="orderList paymentmethod">
