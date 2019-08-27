@@ -1,6 +1,6 @@
 /**
  *
- * KitchenContainer
+ * WardrobesContainer
  *
  */
 
@@ -30,9 +30,11 @@ export class WardrobeContainer extends React.Component {
             <WardrobeBenefits />
             <WHallOfFame />
 			<div className="formContainer">
+				<div className='containerSetForm'>
 				<img className="bgImg" src={`${imagePrefix}/staticImages/kitchens/whatgoesimg.png`} alt="Snow" />
 				<div id='consultForm' className='formDetails'>
 					<ConsultationForm />
+				</div>
 				</div>
             </div>
             <div className="faqContainer">
