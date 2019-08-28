@@ -375,6 +375,9 @@
                     .store-list-item-box{
                         margin-right: 10px;
                     }
+                    .slick-next:before, .slick-prev:before{
+                        content: none;
+                    }
                 }
             } 
         }
