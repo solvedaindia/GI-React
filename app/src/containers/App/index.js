@@ -68,7 +68,6 @@ import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
-import HtmlToPdf from '../../components/MyAccountComponents/MyOrder/invoiceTest';
 import paymentWait from '../../components/checkout/paymentWait';
 import StaticPagesList from '../../components/staticPages';
 import Geocode from "react-geocode";
@@ -278,7 +277,6 @@ export default class App extends React.Component {
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
-          <Route path="/invoice" component={HtmlToPdf} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           
         </Switch>
