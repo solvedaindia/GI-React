@@ -298,6 +298,13 @@
                         .icon{
                             width: $base*1.75;
                         }
+                        &.btn-fb{
+                            .icon-img{
+                                .icon{
+                                    margin-left:0px;
+                                }
+                            }
+                        }
                     }
                 } 
                 .registerHere{                   
