@@ -93,6 +93,15 @@ export default class App extends React.Component {
     window.addEventListener('resize', this.resize);
     this.resize();
     this.getCurrentLocation();
+   
+  }
+
+  componentWillUpdate() {
+    let header = document.getElementById("header");
+    if(header) {
+      header.classList.remove("sticky");
+    } 
+    window.scrollTo(0, 0);
   }
 
   initialLoginHandling() {

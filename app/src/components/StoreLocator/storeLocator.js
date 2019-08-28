@@ -422,7 +422,7 @@ class StoreLocator extends React.Component {
                         <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                         <>
                             { !showFilter &&
-                                <span>Please try another city or pincode<br/><br/></span>
+                                <div className="anotherCity">Please try another city or pincode</div>
                             }
                         </>
                     </div>
