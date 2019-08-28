@@ -201,6 +201,7 @@ class StoreLocator extends React.Component {
                 isLoading: false,
                 isError: true
             });
+            this.inputRef.value ='';
         });
     }
 
@@ -231,6 +232,7 @@ class StoreLocator extends React.Component {
                 searchStoreType: 'city',
                 isError: true
             });
+
         });
     }
 
