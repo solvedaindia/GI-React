@@ -1,11 +1,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/privacyPolicy.scss';
-import PPInformation from '../../components/PrivacyPolicy/information';
-import PPSecurity from '../../components/PrivacyPolicy/security';
-import PPDisclosure from '../../components/PrivacyPolicy/anonymousAndDisclosure';
-import PPthirdParty from '../../components/PrivacyPolicy/thirdPartyInfo';
-import PPDataProtection from '../../components/PrivacyPolicy/dataProtectionAndFishing';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 
 export class PrivacyPolicy extends React.Component {
@@ -16,12 +12,12 @@ export class PrivacyPolicy extends React.Component {
     return (
       <div className='privacyPolicy'>
         <div className='container'>
-      <PPInformation/> 
-      <PPSecurity/> 
-      <PPDisclosure/> 
-      <PPthirdParty/> 
-      <PPDataProtection/> 
-      </div>
+          <ContentEspot espotName={ 'GI_Privacy_Policy_Information' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_Security' } />
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_MaterialsAndUsage' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_ThirdParty_Information' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_DataProtectionAndFishing' } />
+        </div>
       </div>
     );
   }

@@ -1,21 +1,8 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/termsconditions.scss';
-import GeneralProvision from '../../components/termsConditionsComp/tcGeneralPro';
-import Amendments from '../../components/termsConditionsComp/tcAmendments';
-import Communication from '../../components/termsConditionsComp/tcCommunication';
-import Coupans from '../../components/termsConditionsComp/tcCoupans';
-import Disclaimer from '../../components/termsConditionsComp/tcDisclaimer';
-import Materials from '../../components/termsConditionsComp/tcMaterial';
-import Payments from '../../components/termsConditionsComp/tcPayment';
-import PropertyRights from '../../components/termsConditionsComp/tcPropertyRights';
-import Selling from '../../components/termsConditionsComp/tcSelling';
-import USerAccount from '../../components/termsConditionsComp/tcUSerAccount';
-import Grievance from '../../components/termsConditionsComp/tcGrievance';
-import Membership from '../../components/termsConditionsComp/tcMembership';
-import WebsiteUSe from '../../components/termsConditionsComp/tcWebsiteUSe';
-import Violations from '../../components/termsConditionsComp/tcViolations';
-import WarrantyRight from '../../components/termsConditionsComp/tcWarrantyRight';
+
+import ContentEspot from '../../components/Primitives/staticContent';
 
 
 export class TermsConditions extends React.Component {
@@ -31,21 +18,36 @@ export class TermsConditions extends React.Component {
     return (    
       <div className='termsContainer'>
         <div className='container'>
-          <Disclaimer />
-          <Membership />
-          <Communication />
-          <WebsiteUSe />
-          <Payments />
-          <Selling />
-          <Coupans />
-          <Amendments />
-          <USerAccount />
-          <Materials />
-          <PropertyRights />
-          <WarrantyRight />
-          <Violations />
-          <GeneralProvision />
-          <Grievance />
+       
+      
+           <ContentEspot espotName={ 'GI_Terms_and_Conditions_Disclaimer' } />
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_Membership' } />
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_WebsiteUse' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PlatformForCommunication' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PaymentFacility' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_BreachAndSelling' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_Coupons' } />
+
+         <ContentEspot espotName={ 'GI_Terms_and_Conditions_Amendments' } />
+
+            <ContentEspot espotName={ 'GI_Terms_and_Conditions_UserAccount' } />
+
+           <ContentEspot espotName={ 'GI_Terms_and_Conditions_MaterialsAndUsage' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PropertyRights' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_WarrantiesAndLiliabilites' } />
+
+       <ContentEspot espotName={ 'GI_Terms_and_Conditions_ViolationToNewsletter' } />
+
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_GeneralProvisions' } />
+
+           <ContentEspot espotName={ 'GI_Terms_and_Conditions_GrievanceOfficer' } />
+
         </div>
       </div>
     )

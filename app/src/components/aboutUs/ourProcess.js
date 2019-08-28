@@ -11,11 +11,8 @@ import {
 } from '../../../public/constants/constants';
 import AboutTopMost from '../../components/aboutUs/aboutUsTop';
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
-import OurProcess from '../../components/aboutUs/ourProcess';
-import ContentEspot from '../../components/Primitives/staticContent';
-import Careers from '../../components/aboutUs/careers';
 
-export class AboutUs extends React.Component {
+export class OurProcess extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -122,7 +119,6 @@ componentDidMount(){
   const {data,selected_index} = this.state;
   console.log('componentDidMount',data);
   this.getOurProcessData()
-  
 
 }
 
@@ -138,31 +134,41 @@ getButtons=(data)=>{
 render() {
     let views = this.getButtons(this.state.data);
     return (
-    <div className='About-Us'>
-
-
-      <div className='container' id='aboutUs'>
-        <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
-
-      </div>
-      <OurProcess />
-      
-      <div className='greenContainer' id='green-initiatve'>
-        <GreenInitiatives />
-      </div>
-      <div className='CareerContainer' id='career'>
+ 
+      <div className='OurProcessContainer' id='design-process'>
         <div className='container'>
-        <ContentEspot espotName={ 'GI_CAREERS' } />
-
+          <div className='row'>
+            <div className='col-md-12'>
+              <h1 className='headingtitle'>{this.state.component_title}</h1>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-md-6'>
+              <img className='processBigImg' src={imagePrefix + this.state.img_url} alt='image' />
+              <div>
+                
+                {views}
+                <button name='arrowClick' className='arrowNumber' onClick={this.getImageOnArrowClick} >
+                  <svg xmlns='http://www.w3.org/2000/svg' width='29' height='25' viewBox='0 0 29 25'  >
+                    <g fill='none' fill-rule='evenodd' stroke='#000000'>
+                      <path strokeWidth='1.892' d='M27 12.7H.2 27z' />
+                      <path strokeWidth='1.89' d='M16.7 1.4l10.6 11.3L16.7 24' />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div className='col-md-6 InitialIdea'>
+              <h1 className='headingtitle'>{this.state.title}</h1>
+              	<p className=' heading-sub-title'>{this.state.sub_title}</p>
+ 				<p className='Paragraphfont'>{this.state.content}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className='media' id='media'>
-        <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
-
-      </div>
-    </div>
+     
     );
     }
     }
 
-export default AboutUs;
+export default OurProcess;

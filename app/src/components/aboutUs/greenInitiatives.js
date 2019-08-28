@@ -94,7 +94,7 @@ export default class GreenInitiatives extends Component {
     return (
         <div>
            <div className='container'>
-          <h1 className='greenTitle'>{this.state.title}</h1>
+          <h1 className='greenTitle'>Green Initiatives</h1>
         </div>
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
