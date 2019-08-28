@@ -7,12 +7,17 @@
     text-align: center;
     .pc-field {
         padding: 8px;
+        font-family: $font-medium;
+        font-size: 16px;
+        height: 54px;
     }
     .pc-btn {
         background-color: $ashGrey;
         color: $colorwhite;
         padding: $base*1.125;
         border: 1px solid $ashGrey;
+        height: 54px;
+        line-height: 36px;
     }
     .storeTypes {
         .typeList{
@@ -179,7 +184,21 @@
                 width: 22%;
             }
             .storeTypes{
-                padding: 40px 0 0 0;
+                padding: 84px 0 0 0;
+                .headingtitle{
+                    margin:0 0 16px 0;
+                    font-size: 30px;
+                    line-height: 30px;
+                    font-family: $font-medium;
+                    opacity: .45;
+                }
+                .anotherCity{
+                    font-size:20px;
+                    line-height: 20px;
+                    font-family: $font-regular;
+                    color:$black;
+                    margin:0 0 197px 0;
+                }
                 .typeList{
                     display: flex;
                     .storeTypeItem{
