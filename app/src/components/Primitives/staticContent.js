@@ -1,18 +1,15 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI,
-  storeId,
-  accessToken,
+  espotAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class OurPromises extends React.Component {
+class ContentEspot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Homepage_Our_Promises",
-      pageLayoutEspot: null,
+      staticContent: null,
       isLoading: true,
       error: null,
     };
@@ -20,13 +17,12 @@ class OurPromises extends React.Component {
 
   getEspotData() {
     apiManager
-      .get(espotAPI + this.state.espotName)
+      .get(espotAPI + this.props.espotName)
       .then(response => {
-        console.log('respo', response)
         const {data} = response || {};
         this.setState({
-          pageLayoutEspot: data && data.data,
-          isLoading: false,
+            staticContent: data && data.data,
+            isLoading: false,
         });
       })
       .catch(error => {
@@ -34,7 +30,6 @@ class OurPromises extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 
@@ -43,16 +38,14 @@ class OurPromises extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot, index } = this.state;
-    if(!pageLayoutEspot) return null;
+    const { staticContent } = this.state;
+    if(!staticContent) return null;
     return (
-		!!pageLayoutEspot && (
-			<div className='ourPromis'>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
-			</div>
+		!!staticContent && (
+            <div className={this.props.espotName} dangerouslySetInnerHTML={{ __html: staticContent.content }} />
 		)
     );
   }
 }
 
-export default OurPromises;
+export default ContentEspot;
