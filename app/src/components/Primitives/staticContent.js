@@ -42,7 +42,7 @@ class ContentEspot extends React.Component {
     if(!staticContent) return null;
     return (
 		!!staticContent && (
-            <div className={this.props.espotName} dangerouslySetInnerHTML={{ __html: staticContent.content }} />
+      <div className={this.props.espotName} dangerouslySetInnerHTML={{ __html: staticContent.content }} />
 		)
     );
   }
