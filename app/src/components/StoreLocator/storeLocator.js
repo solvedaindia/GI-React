@@ -205,6 +205,7 @@ class StoreLocator extends React.Component {
                 isError: true,
                 filteredSingleStore: null
             });
+            this.inputRef.value ='';
         });
     }
 
@@ -237,6 +238,7 @@ class StoreLocator extends React.Component {
                 isError: true,
                 filteredSingleStore: null
             });
+
         });
     }
 
