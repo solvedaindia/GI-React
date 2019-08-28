@@ -1,7 +1,11 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/privacyPolicy.scss';
-import PrivacyPolicies from '../../components/PrivacyPolicy/privpol';
+import PPInformation from '../../components/PrivacyPolicy/information';
+import PPSecurity from '../../components/PrivacyPolicy/security';
+import PPDisclosure from '../../components/PrivacyPolicy/anonymousAndDisclosure';
+import PPthirdParty from '../../components/PrivacyPolicy/thirdPartyInfo';
+import PPDataProtection from '../../components/PrivacyPolicy/dataProtectionAndFishing';
 
 
 export class PrivacyPolicy extends React.Component {
@@ -10,9 +14,15 @@ export class PrivacyPolicy extends React.Component {
 
   render() {
     return (
-      <>
-      <PrivacyPolicies/> 
-      </>
+      <div className='privacyPolicy'>
+        <div className='container'>
+      <PPInformation/> 
+      <PPSecurity/> 
+      <PPDisclosure/> 
+      <PPthirdParty/> 
+      <PPDataProtection/> 
+      </div>
+      </div>
     );
   }
 }

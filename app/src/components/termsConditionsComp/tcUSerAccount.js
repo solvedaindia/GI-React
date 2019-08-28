@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class PrivacyPolicies extends React.Component {
+class USerAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Privacy_Policy_Static_Data",
+      espotName: "GI_TERMS_AND_CONDITIONS_USERACCOUNT",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -34,7 +34,7 @@ class PrivacyPolicies extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('kitchen data');
+        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 
@@ -48,11 +48,11 @@ class PrivacyPolicies extends React.Component {
     return (
 		!!pageLayoutEspot && (
 			<div>
-		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
+				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)
     );
   }
 }
 
-export default PrivacyPolicies;
+export default USerAccount;

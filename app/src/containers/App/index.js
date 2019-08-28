@@ -55,7 +55,7 @@ import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
-import TermsConditions from '../TermsConditions/index';
+import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
