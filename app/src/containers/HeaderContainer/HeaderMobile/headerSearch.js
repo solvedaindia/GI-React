@@ -72,6 +72,7 @@ export class HeaderSearch extends React.Component {
       } else {
       }
     }
+    
   }
 
   
@@ -86,6 +87,13 @@ onkeydownclick(text) {
 
   render() {
     const searchData = this.state.searchData;
+
+    if(searchData.length > 0 ){
+      document.body.classList.add('lock-screen');
+    }else{
+      document.body.classList.remove('lock-screen');
+    }
+
     return (
       <form action=".">
         <div className="searchBackBtn">
