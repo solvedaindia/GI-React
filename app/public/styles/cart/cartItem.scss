@@ -93,6 +93,10 @@
                 vertical-align: top;
                 padding: 0 $base*1.5;
                 position: relative;
+                .cartQty {
+                    z-index: 3;
+                    position: relative;
+                }
                 .subTitle {
                     color: $greyLight;
                     margin-bottom: $base*1.5;
