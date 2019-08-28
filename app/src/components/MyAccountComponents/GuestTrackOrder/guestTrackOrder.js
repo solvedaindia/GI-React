@@ -77,7 +77,7 @@ class GuestTrackOrder extends React.Component {
             className="submitBtn"
             onClick={this.submitBtnClicked.bind(this)}
           >
-            Track Order
+            {!isMobile() ? 'Track Order':'Submit'}
           </button>
         </div>
         {/* </Link> */}

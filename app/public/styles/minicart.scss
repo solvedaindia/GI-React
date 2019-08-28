@@ -249,7 +249,10 @@ background-color: #ccc;
         &__list {
           position: absolute;
           width: 440px;
-          top: 49px;
+          top: 48px;
+        }
+        .link{
+         display: block;
         }
       }
     }
@@ -287,7 +290,10 @@ background-color: #ccc;
         width: 100%;
         max-width: 450px;;
         top: 55px;
-      }
+      } 
+      .link{
+        display: block;
+       }     
     }
   }
 }
