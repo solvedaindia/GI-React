@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/aboutUs.scss'
 import {
- imagePrefix,
+ imagePrefix,aboutUsGreenInitiativesApi
 } from '../../../public/constants/constants';
+import apiManager from '../../utils/apiManager';
 
 export default class GreenInitiatives extends Component {
   constructor(props) {
@@ -14,16 +15,43 @@ export default class GreenInitiatives extends Component {
     
 
     this.state = {
-      slides: [img1, img2, img3]
+     // slides: [img1, img2, img3]
+     title:'',
+     slides: []
     };
     this.click = this.click.bind(this);
   }
   click() {
-    const { slides } = this.state;
-    this.setState({
-      slides:
-        slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
-    });
+    // const { slides } = this.state;
+    // this.setState({
+    //   slides:
+    //     slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
+    // });
+  }
+
+  componentDidMount(){
+    this.getGreenUnititaiveData()
+  }
+  getGreenImage=(source)=>{
+    return(<img className="greenImage" src={imagePrefix+source} alt=""/>);
+  }
+  getGreenUnititaiveData(){
+    apiManager
+      .get(aboutUsGreenInitiativesApi)
+      .then(response => {
+        console.log('aboutUsGreenInitiativesApi', response)
+        const {data} = response || {}
+        console.log('aboutUsGreenInitiativesApi Title', data.data.bannerList);
+         this.setState({
+              title:data.data.title,
+              slides:data.data.bannerList,
+         });
+      })
+      .catch(error => {
+        this.setState({
+        });
+        console.log('getOurProcessData',error);
+      });
   }
 
 
@@ -65,19 +93,23 @@ export default class GreenInitiatives extends Component {
   };
     return (
         <div>
+           <div className='container'>
+          <h1 className='greenTitle'>{this.state.title}</h1>
+        </div>
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
               <div key={slide}>               
                 <div className='row'>
                   <div className='col-md-4'>
-{slide}
+                    {console.log("ali ahmad",slide)}
+                    <a href={slide.onClickUrl} >
+                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt=""/>
+                    </a>
                   </div>
                   <div className='col-md-8'>
-                    <h2 className='ULcontent'>UL Greenguard</h2>
-                  <p className='ULparagraph'>your information is secure and encrypted, consectetur
-                adipisicing elit,sed do eiumsod tempor incididunt ut
-                labore et dalore magna aliqion anim ad minim.</p>
+                    <h2 className='ULcontent'>{slide.content_title}</h2>
+                  <p className='ULparagraph'>{slide.desc}</p>
                   </div>
 
                 </div>

@@ -131,12 +131,7 @@ componentDidMount(){
   const {data,selected_index} = this.state;
   console.log('componentDidMount',data);
   this.getOurProcessData()
-   //this.setState({
-    //   img_url: data[selected_index].image_url,
-  //     content: data[selected_index].paragraph,
-  //     title:data[selected_index].title,
-  //     sub_title:data[selected_index].sub_title
-// });
+  
 }
 
 getButtons=(data)=>{
@@ -187,9 +182,7 @@ render() {
         </div>
       </div>
       <div className='greenContainer' id='green-initiatve'>
-        <div className='container'>
-          <h1 className='greenTitle'>Green Initiatives</h1>
-        </div>
+       
         <GreenInitiatives />
       </div>
       <div className='CareerContainer' id='career'>
