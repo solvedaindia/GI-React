@@ -254,7 +254,7 @@
             width: 30%;
         }
         .storeTypes{
-            padding: 20px 0 0 0;
+            padding: 20px 0 20px 0;
             clear: both;
             .typeList{
                 .storeTypeItem{ 
@@ -275,9 +275,14 @@
             } 
             .headingtitle{
                 font-size: $base*1.75;
-                color: $black;
-                font-family: $font-medium;
+                color: $battleshipGrey;
+                font-family: $font-regular;
                 margin-top: 5px;
+            }
+            .headingTitleDesc{
+                font-size: $base*1.5;
+                color: $black;
+                font-family: $font-regular;
             }
             
         } 
@@ -305,6 +310,10 @@
                             font-size: $base*1.75;
                             font-family: $font-bold;
                             color: $black;
+                        }
+                        .distance{
+                            position: absolute;
+                            margin-top: 7px;
                         }
                     } 
                     .store-detal-desc{
