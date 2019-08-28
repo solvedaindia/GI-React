@@ -8,7 +8,7 @@ import WelcomeBack from '../WelcomeBack/index';
 import ForgotPassword from '../ForgotPasswordComponent/forgotpassword';
 import '../../../public/styles/userInfo/userInfo.scss';
 import appCookie from '../../utils/cookie';
-import { getCookie, getReleventReduxState } from '../../utils/utilityManager';
+import { getCookie, getReleventReduxState, isMobile } from '../../utils/utilityManager';
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
@@ -202,7 +202,7 @@ class UserAccInfo extends React.Component {
 
     let userLogoItem = null;
     let dropdownItem = null;
-    if (!this.state.isFromWishlist) {
+    if (!isMobile()) {
       userLogoItem = <UserLogo />;
       dropdownItem = (
         <ul className="userList">

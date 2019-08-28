@@ -445,7 +445,7 @@ class MyProfile extends React.Component {
           <div className="form-div clearfix div-error">
             <Input
               inputType={'email'}
-              title={'Email ID'}
+              title={isMobile() ? 'Email Address' : 'Email ID'}
               name={'name'}
               id={'emailId'}
               placeholder={'Enter EmailId'}

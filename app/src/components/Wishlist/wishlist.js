@@ -60,11 +60,14 @@ class wishListCount extends React.Component {
     );
     this.setState({
       wishListCount: nextProps.wishlistUpdatedCount,
+      isWelcomeBack: false
     });
   }
 
   componentDidMount() {
+    this.setState({ isWelcomeBack: false });
     this.getWishListCount();
+    
   }
 
   onLinkNavigation(pageText) {
@@ -97,7 +100,7 @@ class wishListCount extends React.Component {
           {!isLoading ? wishlistItem : null}
           {wishlistLogo}
         </li>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.isWelcomeBack ? isMobile() ? <UserAccInfo fromWishlistPro /> : this.props.userInfoCallbackPro() : null}
       </>
     );
   }

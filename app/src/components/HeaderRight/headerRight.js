@@ -3,13 +3,15 @@ import WishListCount from '../../components/Wishlist/wishlist';
 import CartCount from '../Cart/cart';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import '../../../public/styles/headerContainer/headerRight.scss';
-import { getReleventReduxState } from '../../utils/utilityManager';
+import { getReleventReduxState, isMobile } from '../../utils/utilityManager';
 import { connect } from 'react-redux';
+
 
 class SearchBar extends React.Component {
     state = {
         isLoading: true,
-        errors: null
+        errors: null,
+        showlogin: false,
     };
 
     componentWillReceiveProps(nextProps) {
@@ -19,12 +21,19 @@ class SearchBar extends React.Component {
         })
     }
 
+    userInfoCallback() {
+        console.log('commmmmiiiinnnggggg >>>>>>')
+        this.setState({
+            showlogin: true,
+        })
+    }
+
     render() {
         return (
             <ul className='rightSide'>
-                <WishListCount />
+                {isMobile() ? <WishListCount/> : <WishListCount userInfoCallbackPro={this.userInfoCallback.bind(this)}/> }
                 <CartCount />
-                <UserAccInfo />
+                <UserAccInfo fromWishlistPro={this.state.showlogin}/>
             </ul>
         );
     }
