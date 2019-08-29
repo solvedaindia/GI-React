@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import '../../../public/styles/static-pages/chefkitchen.scss'
+import '../../../public/styles/static-pages/chefkitchen.scss';
+import  '../../../public/styles/staticpages/staticpages.scss';
+;
 import ContentEspot from '../../components/Primitives/staticContent';
 import ChefKitchenBanner from '../../components/KitchensComp/chefKitchenBanner';
 import SteelKitchenTypes from '../../components/KitchensComp/typesOfSteelKitchen';

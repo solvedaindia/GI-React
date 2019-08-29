@@ -1,6 +1,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/termsconditions.scss';
+import  '../../../public/styles/staticpages/staticpages.scss';
 
 import ContentEspot from '../../components/Primitives/staticContent';
 
@@ -16,40 +17,15 @@ export class TermsConditions extends React.Component {
 
   render() {
     return (    
-      <div className='termsContainer'>
-        <div className='container'>
-       
-      
-           <ContentEspot espotName={ 'GI_Terms_and_Conditions_Disclaimer' } />
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_Membership' } />
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_WebsiteUse' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PlatformForCommunication' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PaymentFacility' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_BreachAndSelling' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_Coupons' } />
-
-         <ContentEspot espotName={ 'GI_Terms_and_Conditions_Amendments' } />
-
-            <ContentEspot espotName={ 'GI_Terms_and_Conditions_UserAccount' } />
-
-           <ContentEspot espotName={ 'GI_Terms_and_Conditions_MaterialsAndUsage' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_PropertyRights' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_WarrantiesAndLiliabilites' } />
-
-       <ContentEspot espotName={ 'GI_Terms_and_Conditions_ViolationToNewsletter' } />
-
-          <ContentEspot espotName={ 'GI_Terms_and_Conditions_GeneralProvisions' } />
-
-           <ContentEspot espotName={ 'GI_Terms_and_Conditions_GrievanceOfficer' } />
+      <div className='staticpages termsContainer'>
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_WARRANTIESANDLILIABILITES' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_USERACCOUNT' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_4' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_5' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_6' } />
 
         </div>
-      </div>
     )
   }
 }

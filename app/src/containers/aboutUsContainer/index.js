@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/static-pages/aboutUs.scss';
+import  '../../../public/styles/staticpages/staticpages.scss';
+
 import apiManager from '../../utils/apiManager';
 import {isMobile} from '../../utils/utilityManager';
 import {
@@ -138,28 +140,26 @@ getButtons=(data)=>{
 render() {
     let views = this.getButtons(this.state.data);
     return (
-    <div className='About-Us'>
+    <div className='staticpage about-us'>
 
-
-      <div className='container' id='aboutUs'>
-        <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
-
-      </div>
+      <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
+      <ContentEspot espotName={ 'GI_ABOUT_US_2' } />
+      <a id='ourProcess'>
       <OurProcess />
-      
-      <div className='greenContainer' id='green-initiatve'>
-        <GreenInitiatives />
-      </div>
-      <div className='CareerContainer' id='career'>
-        <div className='container'>
-        <ContentEspot espotName={ 'GI_CAREERS' } />
-
-        </div>
-      </div>
-      <div className='media' id='media'>
-        <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
-
-      </div>
+      </a>
+      <ContentEspot espotName={ 'GI_ABOUT_US_4' } />
+      <a id='greenInitiatives'>
+      <GreenInitiatives />
+      </a>
+      <ContentEspot espotName={ 'GI_ABOUT_US_6' } />
+      <a id='careers' >
+      <ContentEspot espotName={ 'GI_CAREERS' } />
+      </a>
+      <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
+      <a id='mediaPress'>
+      <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
+      </a>
+      <ContentEspot espotName={ 'GI_ABOUT_US_10' } />
     </div>
     );
     }
