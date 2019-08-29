@@ -162,17 +162,19 @@ class CartCount extends React.Component {
         ) : (
           <p className="error">No Cart Item Found</p>
         )} */}
-        {cartCountItem}
+        {/* {cartCountItem} */}
 
         <div className="dropdown">
           {this.state.isMobile ?
             <Link className="link" to='/cart'>
+              {cartCountItem}
               <div className="dropdown__toggle dropdown__list-item icons_border" >
                 <CartLogo width={24} height={24} />
               </div>
             </Link>
             :
             <div onClick={() => this.toggleDropdown()} className="dropdown__toggle dropdown__list-item icons_border" >
+              {cartCountItem}
               <CartLogo width={24} height={24} />
             </div>
           }
