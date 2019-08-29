@@ -34,7 +34,7 @@ componentDidMount(){
 
 render(){
 return (
-<div className="staticpages chefKitchen">
+<div className="staticpage chefKitchen">
     <ChefKitchenBanner />
     <ContentEspot espotName = { 'GI__STEEL_KITCHEN_BENEFITS' } />
     <SteelKitchenTypes />

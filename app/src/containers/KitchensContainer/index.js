@@ -27,7 +27,7 @@ export class KitchenContainer extends React.Component {
 
   render() {
     return (
-        <section className="kitchenContainer">
+        <section className="staticpage kitchenContainer">
             <div className="slider">
                 <KitchenBanner />
             </div>

@@ -18,7 +18,7 @@ export default class HelpSupport extends React.Component {
 
   render() {
     return (
-      <div className='staticpages serviceSupport'>
+      <div className='staticpage serviceSupport'>
         <ContentEspot espotName={ 'GI_SUPPORT_FAQ' } />
         <a id='customerCare'>
        <ContentEspot espotName={ 'GI_CONTACT_US_CUSTOMER_CARE' } />

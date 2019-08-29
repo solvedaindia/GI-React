@@ -26,7 +26,7 @@ export class WardrobeContainer extends React.Component {
 
   render() {
     return (
-        <section className="kitchenContainer">
+        <section className="staticpage kitchenContainer">
             <WardrobeBanner />
 			<ContentEspot espotName = { 'GI_Wardrobes_Benefit_Modular' } />
 

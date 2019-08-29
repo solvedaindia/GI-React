@@ -16,7 +16,7 @@ export class CookiePolicy extends React.Component {
 
   render() {
     return (
-      <div className='staticpages cookiepolicy'>
+      <div className='staticpage cookiepolicy'>
       <ContentEspot espotName={ 'GI_Cookie_Policy_Static_Data' } />
       <ContentEspot espotName={ 'GI_Cookie_Policy_2' } />
       <ContentEspot espotName={ 'GI_Cookie_Policy_3' } />

@@ -17,7 +17,7 @@ export class TermsConditions extends React.Component {
 
   render() {
     return (    
-      <div className='staticpages termsContainer'>
+      <div className='staticpage termsContainer'>
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_WARRANTIESANDLILIABILITES' } />
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_USERACCOUNT' } />
