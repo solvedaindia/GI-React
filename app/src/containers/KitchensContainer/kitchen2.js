@@ -27,59 +27,34 @@ this.state = {
 }
 }
 
-onHandleClickFirst= () => {
-if (this.state.index === 0 || this.state.index === 2){
-this.setState({index:1})
-}
-};
-onHandleClickSecond(){
-if (this.state.index === 0 || this.state.index === 1){
-this.setState({index:2})
-}
-}
-onHandleClickThird(){
-if (this.state.index === 1 || this.state.index === 2){
-this.setState({index:0})
-}
-}
+
 componentDidMount(){
   
 }
 
 render(){
 return (
-<div className="chefKitchen">
-  <div className="kitchensBannerLayout">
+<div className="staticpages chefKitchen">
     <ChefKitchenBanner />
-    <div className="container1">
-      <div className="kitchensBannertext">
-        <a href='#consultForm'><button className="btn-book">Book A Consultation</button></a>
-      </div>
-    </div>
-  </div>
-  <SteelKitchenBenefits />
-  <div className='typesOfSteelContainer'>
-    <div className='container'>
-      <SteelKitchenTypes />
-    </div>
-  </div>
-  
-  <YourKitchenYourWay />
+    <ContentEspot espotName = { 'GI__STEEL_KITCHEN_BENEFITS' } />
+    <SteelKitchenTypes />
+    <ContentEspot espotName = { 'GI__STEEL_YOUR_KITCHEN_YOUR_WAY' } />
  
   <div className="formContainer">
     <div className="container">
-      <img className="formBackGroundCover"
-        src={`${imagePrefix}/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png`} alt="Snow" />
+    <ContentEspot espotName = { 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+
       <div id='consultForm' className="Form-bakground">
         <ConsultationForm />
       </div>
     </div>
   </div>
-  <FaqEspot />
+  <ContentEspot espotName = { 'GI_KITCHEN_FAQ' } />
   <ExKitchens />
   <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR' } />
+  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_10' } />
+  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_11' } />
 
-  {/* <InterioText /> */}
 </div>
 )
 }

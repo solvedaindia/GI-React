@@ -63,7 +63,7 @@ class ChefKitchenBanner extends React.Component {
       slidesToScroll: 1,
     };
     return (
-      <div className="fsBanner">
+      <div className="kitchensBannerLayout fsBanner">
         <Slider {...settings}>
           {!!kitchenSlider &&
             kitchenSlider.map((sliderData, index) => (

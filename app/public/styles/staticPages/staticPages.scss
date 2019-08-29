@@ -1,11 +1,14 @@
+@import '../variable';
+@import '../base';
 
+	
+	
 	.staticpage
 	{
 		padding:30px;
-		float:left;
 	}
 	.staticpage h1, h2, h3, h4, p, span, a {
-		font-family:CeraGIMedium,sans-serif;
+		font-family:$font-regular;
 		color:#000;
 	}
 	.staticpage h1
