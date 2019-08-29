@@ -4,6 +4,7 @@ import { Button, Modal, Row, Col, FormGroup, Form, Label  } from 'react-bootstra
 import { notifyMeAPI} from '../../../public/constants/constants';
 import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 import appCookie from '../../utils/cookie';
+import { isMobile } from '../../utils/utilityManager';
 
 class NotifyMe extends React.Component {
 	constructor() {
@@ -102,7 +103,7 @@ class NotifyMe extends React.Component {
 	  	  }
 		return (
 			<>
-				<Button className="btn notifybtn addcartbtn" id={btnId} onClick={this.handleShow}>Notify me when available</Button>
+				<Button className="btn notifybtn addcartbtn" id={btnId} onClick={this.handleShow}>{isMobile() ? 'Notify Me':'Notify me when available'}</Button>
 				<Modal className='modal_notify' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
@@ -120,7 +121,7 @@ class NotifyMe extends React.Component {
 							<Col xs={12} md={12}>
 								<Form>
 									<FormGroup>
-										<div className="form-div clearfix">
+										<div className="form-div notify-emeil clearfix">
 											<Label>Email Address</Label>
 											<input
 												type="text"

@@ -123,11 +123,12 @@
         .emptyCart {
             .title {
                 text-align: center;
-                width: 70%;
+                width: 90%;
                 margin: $base*7 auto 0;
             }
             .shopNow {
-                margin-top: $base*7;
+                margin-top: $base*3;
+                padding: 0px 20px;
                 .shopHeadLine {
                     font-size: $base*2;
                     color: $black;
@@ -135,11 +136,12 @@
                 }
                 .info {
                     font-size: $base*1.5; 
-                    margin-bottom: 0; 
+                    margin-bottom: 0;
+                    line-height: normal; 
                 }
                 .shopBtn {
                     margin-top: $base*3;
-                    width: 80%;
+                    width: 100%;
                     border-radius: unset;  
                 }
             }
@@ -149,6 +151,7 @@
                 text-align: center;
                 margin-top: $base*6.5;
                 color: $black;
+                font-size: $base*2;
             }
             .keyPoints {
                 width: 100%;
