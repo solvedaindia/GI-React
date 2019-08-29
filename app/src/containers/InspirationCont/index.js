@@ -19,17 +19,13 @@ export class Inspiration extends React.Component {
 
   render() {
     return (
-      <div className="inspiration">
-        <div className="inpspirationBanner">
-          <InspirationBanner />
-        </div>
-        <div className="container">
-          <LookbookThemeCarousel />
-        </div>
-		    <SummerData/>
-          <div className="uuscontainer">
-            <GodrejSolutionEspot/>
-          </div>
+      <div className="staticpages inspiration">
+        <InspirationBanner />
+        <LookbookThemeCarousel />
+        <SummerData/>
+        <GodrejSolutionEspot/>
+        <ContentEspot espotName={ 'GI_LOOKBOOK_5' } />
+        <ContentEspot espotName={ 'GI_LOOKBOOK_6' } />
       </div>
     );
   }

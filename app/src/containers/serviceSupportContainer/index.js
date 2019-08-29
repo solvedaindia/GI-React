@@ -10,9 +10,7 @@ export default class HelpSupport extends React.Component {
     super(props);
 
     this.state = {
-		// clpData: {},
-		// isLoading: false,
-		// error: null,
+		
     };
   }
 

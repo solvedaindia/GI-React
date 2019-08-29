@@ -16,14 +16,15 @@ export class TermsConditions extends React.Component {
 
   render() {
     return (    
-      <div className='termsContainer'>
-        <div className='container'>
-           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
+      <div className='staticpages termsContainer'>
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_WARRANTIESANDLILIABILITES' } />
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_USERACCOUNT' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_4' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_5' } />
+          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_6' } />
 
         </div>
-      </div>
     )
   }
 }

@@ -138,28 +138,26 @@ getButtons=(data)=>{
 render() {
     let views = this.getButtons(this.state.data);
     return (
-    <div className='About-Us'>
+    <div className='staticpage about-us'>
 
-
-      <div className='container' id='aboutUs'>
-        <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
-
-      </div>
+      <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
+      <ContentEspot espotName={ 'GI_ABOUT_US_2' } />
+      <div id='ourProcess'>
       <OurProcess />
-      
-      <div className='greenContainer' id='green-initiatve'>
-        <GreenInitiatives />
       </div>
-      <div className='CareerContainer' id='career'>
-        <div className='container'>
-        <ContentEspot espotName={ 'GI_CAREERS' } />
-
-        </div>
+      <ContentEspot espotName={ 'GI_ABOUT_US_4' } />
+      <div id='greenInitiatives'>
+      <GreenInitiatives />
       </div>
-      <div className='media' id='media'>
-        <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
-
+      <ContentEspot espotName={ 'GI_ABOUT_US_6' } />
+      <div id='careers' >
+      <ContentEspot espotName={ 'GI_CAREERS' } />
       </div>
+      <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
+      <div id='mediaPress'>
+      <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
+      </div>
+      <ContentEspot espotName={ 'GI_ABOUT_US_10' } />
     </div>
     );
     }
