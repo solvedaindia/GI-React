@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
             <ul className='rightSide'>
                 {isMobile() ? <WishListCount/> : <WishListCount userInfoCallbackPro={this.userInfoCallback.bind(this)}/> }
                 <CartCount />
-                <UserAccInfo fromWishlistPro={this.state.showlogin}/>
+                <UserAccInfo fromWishlistPro={this.state.showlogin} showUserInfo={true}/>
             </ul>
         );
     }

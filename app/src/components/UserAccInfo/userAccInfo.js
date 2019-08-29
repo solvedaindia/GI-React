@@ -34,6 +34,9 @@ class UserAccInfo extends React.Component {
 
   resetLoginValues() {
     console.log('resetLoginValues');
+    if(this.props.resetCartVarPro) {
+      this.props.resetCartVarPro();
+    }
     if (this.props.resetCallbackPro) {
       this.props.resetCallbackPro();
     }
@@ -202,7 +205,7 @@ class UserAccInfo extends React.Component {
 
     let userLogoItem = null;
     let dropdownItem = null;
-    if (!isMobile()) {
+    if (this.props.showUserInfo) {
       userLogoItem = <UserLogo />;
       dropdownItem = (
         <ul className="userList">
