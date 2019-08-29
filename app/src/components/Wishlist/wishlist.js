@@ -17,6 +17,9 @@ import {
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import MyWishlist from '../MyWishlist/myWishlist';
+import {
+  updatetWishListCount,
+} from '../../actions/app/actions';
 
 class wishListCount extends React.Component {
   state = {
@@ -32,6 +35,7 @@ class wishListCount extends React.Component {
       .then(response => {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
+        this.props.updatetWishListCount(count);
         this.setState({
           wishListCount: response.data.data.wishlistTotalItems,
           isLoading: false,
@@ -60,11 +64,14 @@ class wishListCount extends React.Component {
     );
     this.setState({
       wishListCount: nextProps.wishlistUpdatedCount,
+      isWelcomeBack: false
     });
   }
 
   componentDidMount() {
+    this.setState({ isWelcomeBack: false });
     this.getWishListCount();
+    
   }
 
   onLinkNavigation(pageText) {
@@ -97,7 +104,7 @@ class wishListCount extends React.Component {
         <li className="icons" onClick={this.handleWLCount.bind(this)}>          
           {wishlistLogo}
         </li>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.isWelcomeBack ? isMobile() ? <UserAccInfo fromWishlistPro /> : this.props.userInfoCallbackPro() : null}
       </>
     );
   }
@@ -112,6 +119,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(wishListCount);
-
+export default connect(
+  mapStateToProps,
+  { updatetWishListCount },
+)(wishListCount);
 // export default wishListCount;

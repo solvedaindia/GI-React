@@ -40,7 +40,7 @@ class MoveToWishList extends React.Component {
   handleMoveToWishList() {
     if (getCookie('isLoggedIn') !== 'true') {
       return this.setState({
-        loginScreen : true
+        loginScreen : !this.state.loginScreen
       })
     }
     const data = {
@@ -60,16 +60,17 @@ class MoveToWishList extends React.Component {
       });
   }
   resetCallbackPro() {
+    console.log('restcall varrr rr ');
     this.setState ({
       loginScreen : false
     })
   }
   render() {
+    console.log('mimi -- ',this.state.loginScreen)
     return (
       <div className="moveItem" onClick={this.handleMoveToWishList}>
         <MoveToWishListLogo width={19} height={16} />
-        {this.state.loginScreen ? <UserAccInfo fromWishlistPro resetCallbackPro = {this.resetCallbackPro}/>
-        : null }
+        {this.state.loginScreen ? <UserAccInfo fromWishlistPro/> : null}
       </div>
     );
   }
