@@ -4,9 +4,11 @@
 		padding:30px;
 		float:left;
 	}
-	.staticpage h1, h2, h3, h4, p, span, a {
-		font-family:CeraGIMedium,sans-serif;
-		color:#000;
+	.staticpage {
+			h1, h2, h3, h4, p, span, a {
+			font-family:CeraGIMedium,sans-serif;
+			color:#000;
+		}
 	}
 	.staticpage h1
 	{
