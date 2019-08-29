@@ -18,6 +18,7 @@ import {
   wishlistIdCookie,
 } from '../../../../public/constants/constants';
 import UserAccInfo from '../../UserAccInfo/userAccInfo';
+import appCookie from '../../../utils/cookie';
 
 const wishlistAddedImg = (
   <img
@@ -54,7 +55,8 @@ class Wishlist extends React.Component {
       }
     } else {
       // Show login Pop up
-      // alert('Please Login');
+      //alert('Please Login');
+      appCookie.set('wishListUniqueId', this.props.uniqueId , 365 * 24 * 60 * 60 * 1000);
       this.setState({ isWelcomeBack: true });
     }
   }
@@ -124,6 +126,13 @@ class Wishlist extends React.Component {
         ? wishlistAddedImg
         : wishListRemovedImg,
     });
+
+    if (appCookie.get('wishListUniqueId')) {
+        if (appCookie.get('wishListUniqueId') !== '' && appCookie.get('isLoggedIn') !== true) {
+          appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+          document.getElementById("wishlistBtnId").click();
+        }
+    }
   }
 
   wishlistPopupItem() {
@@ -165,6 +174,7 @@ class Wishlist extends React.Component {
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
+          id="wishlistBtnId"
         >
           {this.state.wishlistCurrentImage}
           { this.props.isPDP &&
