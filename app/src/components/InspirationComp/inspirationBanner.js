@@ -65,6 +65,8 @@ class InspirationBanner extends React.Component {
       slidesToScroll: 1,
     };
     return (
+       <div className="inpspirationBanner">
+
       <div className="fsBanner">
         <Slider {...settings}>
           {!!kitchenSlider &&
@@ -75,6 +77,8 @@ class InspirationBanner extends React.Component {
             ))}
         </Slider>
       </div>
+      </div>
+
     );
   }
 }

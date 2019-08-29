@@ -89,8 +89,8 @@ render() {
             ],
           };
     return (
-      <div className="">
-          <h1 className="title">{this.state.title}</h1>
+      <div className="container">
+      <h1 className="title">{this.state.title}</h1>
           <p className="Paragraphhall">{this.state.description}</p>
           <div className="inspirationSlider">
           <Slider {...settings}>
