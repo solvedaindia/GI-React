@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/static-pages/aboutUs.scss';
+import  '../../../public/styles/staticpages/staticpages.scss';
+
 import apiManager from '../../utils/apiManager';
 import {isMobile} from '../../utils/utilityManager';
 import {

@@ -5,6 +5,7 @@ import FaqAnswers from '../../components/HelpSupportComp/FaqAnswers'
 import  '../../../public/styles/static-pages/HelpSupport.scss'
 import {isMobile} from '../../utils/utilityManager'
 import ContentEspot from '../../components/Primitives/staticContent';
+import  '../../../public/styles/staticpages/staticpages.scss';
 
 export default class HelpSupport extends React.Component {
   constructor(props) {

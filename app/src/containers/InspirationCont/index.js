@@ -3,6 +3,7 @@ import  '../../../public/styles/static-pages/inspiration.scss';
 import LookbookThemeCarousel from '../../components/Primitives/lookBookTheme';
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner';
 import GodrejSolutionEspot from '../../components/InspirationComp/godrejSolution';
+import  '../../../public/styles/staticpages/staticpages.scss';
 
 import SummerData from '../../components/InspirationComp/InspEspot';
 ;

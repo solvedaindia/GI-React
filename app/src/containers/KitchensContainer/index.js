@@ -6,7 +6,6 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/kitchen.scss';
-import { imagePrefix } from '../../../public/constants/constants';
 // import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
@@ -15,6 +14,7 @@ import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ContentEspot from '../../components/Primitives/staticContent';
+import  '../../../public/styles/staticpages/staticpages.scss';
 
 export class KitchenContainer extends React.Component {
   constructor(props) {

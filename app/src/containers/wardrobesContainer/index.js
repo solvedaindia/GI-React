@@ -13,6 +13,7 @@ import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
 import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
 import ContentEspot from '../../components/Primitives/staticContent';
+import  '../../../public/styles/staticpages/staticpages.scss';
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
