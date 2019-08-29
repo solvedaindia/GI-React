@@ -28,8 +28,8 @@ const upArrow = (
   />
 );
 const recommended = 'Interio Recommends';
-const price_L_H = 'Price - Low to High';
-const price_H_L = 'Price - High to Low';
+const price_L_H = 'Price Low to High';
+const price_H_L = 'Price High to Low';
 const newArrival = 'New Arrival';
 class RWDSort extends React.Component {
   constructor(props) {
