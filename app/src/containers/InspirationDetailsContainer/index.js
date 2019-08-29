@@ -14,7 +14,7 @@ class InspirationDetails extends React.Component {
 
     render(){
         return(
-            <div className="staticpages inspirationDetails">
+            <div className="staticpage inspirationDetails">
              < Lookbook/>
                 <Recommended/>
                 <ContentEspot espotName={ 'GI_LOOKBOOK_3' } />

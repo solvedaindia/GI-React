@@ -1,8 +1,6 @@
-
 	.staticpage
 	{
-		padding:30px;
-		float:left;
+		padding:20px;
 	}
 	.staticpage {
 			h1, h2, h3, h4, p, span, a {
@@ -13,27 +11,26 @@
 	.staticpage h1
 	{
 		padding-top:30px;
+		padding-top:10px;
 		font-size:30px;
 		font-weight:500;
-		margin:0
 	}
 	
 	.staticpage h2
 	{
-		padding-top:30px;
-		padding-left:10px;
-		font-size:24px;
-		font-weight:normal;
-		margin:0
+		padding-top:30px; 
+		font-size:30px;
+		font-weight:500;
+		margin:0;
+		color:#000;
 	}
 	
 	.staticpage h3
 	{
 		padding-top:10px;
-		padding-left:20px;
 		font-size:21px;
 		font-weight:normal;
-		margin:0
+		margin:0;
 	}
 	
 	.staticpage p {

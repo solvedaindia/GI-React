@@ -78,7 +78,9 @@ export default class SteelKitchenTypes extends Component {
       slidesToScroll: 1
     };
     return (
-        <div>
+      <div className='typesOfSteelContainer'>
+
+        <div className='container'>
       <div className="container">
         </div>
 
@@ -91,7 +93,7 @@ export default class SteelKitchenTypes extends Component {
             );
           })}
         </Slider>
-
+        </div>
         </div>
     );
   }

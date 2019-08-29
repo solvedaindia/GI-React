@@ -9,7 +9,7 @@ import {
   imagePrefix,
 } from '../../../public/constants/constants';
 
-class ChefKitchenBanner extends React.Component {
+class WillowKitchenBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -77,4 +77,4 @@ class ChefKitchenBanner extends React.Component {
   }
 }
 
-export default ChefKitchenBanner;
+export default WillowKitchenBanner;

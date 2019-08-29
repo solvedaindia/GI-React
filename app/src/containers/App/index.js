@@ -51,6 +51,8 @@ import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
 import Kitchens from '../KitchensContainer';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
+import WillowKitchen from '../KitchensContainer/willowKitchen';
+
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer';
 import privacyPolicy from '../privacyPolicy/index';
@@ -281,6 +283,9 @@ export default class App extends React.Component {
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
+          <Route path="/willow-kitchen" component={WillowKitchen} />
+
+      
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy-policy" component={privacyPolicy} />
