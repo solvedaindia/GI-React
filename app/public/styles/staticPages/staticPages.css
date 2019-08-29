@@ -1,0 +1,69 @@
+<style TYPE="text/css" MEDIA=screen>
+
+	.staticpage
+	{
+		padding:30px;
+		float:left;
+	}
+	.staticpage h1, h2, h3, h4, p, span, a {
+		font-family:CeraGIMedium,sans-serif;
+		color:#000;
+	}
+	.staticpage h1
+	{
+		padding-top:30px;
+		font-size:30px;
+		font-weight:500;
+		margin:0
+	}
+	
+	.staticpage h2
+	{
+		padding-top:30px;
+		padding-left:10px;
+		font-size:24px;
+		font-weight:normal;
+		margin:0
+	}
+	
+	.staticpage h3
+	{
+		padding-top:10px;
+		padding-left:20px;
+		font-size:21px;
+		font-weight:normal;
+		margin:0
+	}
+	
+	.staticpage p {
+		font-size:14px;
+		line-height: 1.43;	
+	}
+	
+	.staticpage .whitep {
+		color: #fff;
+	}
+	
+	.staticpage .text
+	{
+		color:#77787a;
+		font-size:14px;
+		line-height:14px;
+		margin: 0px;
+	}
+
+
+	.staticpage img {
+		width:100%;
+	}
+
+	.staticpage .WhiteButton {
+		margin: 25px 0 0 0;
+		color: #000;
+		background-color: #fff;
+		padding: 13px 45px;
+		border: none;
+		font-size: 14px;
+		font-family: CeraGIMedium, sans-serif;
+	}
+</style>

@@ -142,21 +142,21 @@ render() {
 
       <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
       <ContentEspot espotName={ 'GI_ABOUT_US_2' } />
-      <div id='ourProcess'>
+      <a id='ourProcess'>
       <OurProcess />
-      </div>
+      </a>
       <ContentEspot espotName={ 'GI_ABOUT_US_4' } />
-      <div id='greenInitiatives'>
+      <a id='greenInitiatives'>
       <GreenInitiatives />
-      </div>
+      </a>
       <ContentEspot espotName={ 'GI_ABOUT_US_6' } />
-      <div id='careers' >
+      <a id='careers' >
       <ContentEspot espotName={ 'GI_CAREERS' } />
-      </div>
+      </a>
       <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
-      <div id='mediaPress'>
+      <a id='mediaPress'>
       <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
-      </div>
+      </a>
       <ContentEspot espotName={ 'GI_ABOUT_US_10' } />
     </div>
     );
