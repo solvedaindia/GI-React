@@ -166,7 +166,7 @@ class CartCount extends React.Component {
 
         <div className="dropdown">
           {this.state.isMobile ?
-            <Link to='/cart'>
+            <Link className="link" to='/cart'>
               <div className="dropdown__toggle dropdown__list-item icons_border" >
                 <CartLogo width={24} height={24} />
               </div>

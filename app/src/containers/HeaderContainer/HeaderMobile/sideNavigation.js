@@ -120,9 +120,9 @@ export class HeaderMobile extends React.Component {
                 subCat.map((subCatData, index) => {
                   let routePath;
                   const subcatName = String(
-                    subCatData.categoryName,
+                    subCatData.categoryName
                   ).toLowerCase();
-                  if (catName === 'Rooms') {
+                  if (catName.toLowerCase().indexOf('rooms') > -1) {
                     routePath = `/rooms-${subcatName.split(' ').join('-')}/${
                       subCatData.uniqueID
                       }`;

@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class EasyStepsEspot extends React.Component {
+class PPSecurity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_DREAM_KITCHEN_STEPS",
+      espotName: "GI_Privacy_Policy_Security",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -34,6 +34,7 @@ class EasyStepsEspot extends React.Component {
           error,
           isLoading: false,
         });
+        console.log('kitchen data');
       });
   }
 
@@ -42,16 +43,16 @@ class EasyStepsEspot extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot } = this.state;
+    const { pageLayoutEspot, index } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className='kitchenEspots'>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+			<div>
+		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );
   }
 }
 
-export default EasyStepsEspot;
+export default PPSecurity;

@@ -114,6 +114,13 @@ export const typesOfWardrobesAPI = `${secureHttp}://${host}:${port2}/api/v1/espo
 export const inspirationBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_INSPIRATION_LOOKBOOK_BANNER `;
 /*  browse by lookbook theme carousel */
 export const lookbookThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_THEME`;
+/*  About Us Our Process */
+export const aboutUsOurProcessApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_OUR_PROCESS`;
+
+/*  About Us Green Initiatives */
+export const aboutUsGreenInitiativesApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_GREEN_INITIATIVES`;
+
+
 /* HomePage Track Order */
 export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/current`;
 /* Featured Category */

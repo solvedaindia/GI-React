@@ -23,7 +23,7 @@ export class HeaderSearch extends React.Component {
   }
 
   componentDidMount() {
-	console.log('twing --- ',this.props)
+  console.log('twing --- ',this.props)
   }
 
   onBackBtn() {
@@ -45,6 +45,7 @@ export class HeaderSearch extends React.Component {
       inputText: searchTxt,
       searchData: [],
     });
+    document.body.classList.remove('lock-screen');
   }
 
   handleInputChange(event) {
@@ -72,6 +73,7 @@ export class HeaderSearch extends React.Component {
       } else {
       }
     }
+    
   }
 
   
@@ -86,6 +88,13 @@ onkeydownclick(text) {
 
   render() {
     const searchData = this.state.searchData;
+
+    if(searchData.length > 0 ){
+      document.body.classList.add('lock-screen');
+    }else{
+      document.body.classList.remove('lock-screen');
+    }
+
     return (
       <form action=".">
         <div className="searchBackBtn">

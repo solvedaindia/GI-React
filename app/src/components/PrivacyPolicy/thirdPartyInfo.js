@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class LayoutImage extends React.Component {
+class PPthirdParty extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_KITCHEN_LAYOUTS",
+      espotName: "GI_Privacy_Policy_ThirdParty_Information",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -43,16 +43,16 @@ class LayoutImage extends React.Component {
   }
 
   render() {
-    const { pageLayoutEspot } = this.state;
+    const { pageLayoutEspot, index } = this.state;
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className='kitchenEspots'>
-		    <div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
+			<div>
+		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );
   }
 }
 
-export default LayoutImage;
+export default PPthirdParty;

@@ -1,15 +1,17 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI
+  espotAPI,
+  storeId,
+  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class InterioText extends React.Component {
+class Careers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_MODULAR_KITCHEN_INTERIOR",
+      espotName: "GI_CAREERS",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -32,7 +34,7 @@ class InterioText extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('kitchen data');
+        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 
@@ -45,8 +47,7 @@ class InterioText extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className="espotContent" id={index}>
-				<h1 className="title">{pageLayoutEspot.title}</h1>
+			<div className="" id={index}>
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)
@@ -54,4 +55,4 @@ class InterioText extends React.Component {
   }
 }
 
-export default InterioText;
+export default Careers;

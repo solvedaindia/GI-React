@@ -39,7 +39,8 @@ class StoreLocator extends React.Component {
             searchStoreType: null,
             allstoreData: null,
             isOpen: false,
-            Infokey: null,        
+            Infokey: null,
+            filteredSingleStore: null    
         };
 
         this.settings = {
@@ -99,6 +100,13 @@ class StoreLocator extends React.Component {
         if (this.props.history.location.state) {
             if (nextProps.history.location.state.storeName){ 
                 this.getLatAndLong(nextProps.history.location.state.storeName);
+                let commingCity = nextProps.history.location.state.storeName;
+                let enterCity =  document.getElementById("city").value;
+                if(commingCity!=enterCity)
+                {
+                    document.getElementById("city").value=""
+                }
+                //document.getElementById("city").value="";
             } else if (nextProps.history.location.state.pincode) {
                 this.getLatAndLong(nextProps.history.location.state.pincode);
             } else {
@@ -106,6 +114,7 @@ class StoreLocator extends React.Component {
             }
             this.removeActiveClassFromFilter();
             window.scrollTo(0, 0);
+
         }
     }
 
@@ -190,7 +199,8 @@ class StoreLocator extends React.Component {
                 defaultLat: lat,
                 defaultLng: lng,
                 isOpen: false,
-                isError: false
+                isError: false,
+                filteredSingleStore: null
             });
         }).catch(error => {
             console.log('Error=>', error.response);
@@ -199,8 +209,10 @@ class StoreLocator extends React.Component {
                 isError: true,
                 searchStoreType: 'pincode',
                 isLoading: false,
-                isError: true
+                isError: true,
+                filteredSingleStore: null
             });
+            this.inputRef.value ='';
         });
     }
 
@@ -219,7 +231,8 @@ class StoreLocator extends React.Component {
                 defaultLat: latVal,
                 defaultLng: lngVal,
                 isOpen: false,
-                isError: false
+                isError: false,
+                filteredSingleStore: null
             })
            
         })
@@ -229,8 +242,10 @@ class StoreLocator extends React.Component {
                 storeData: null,
                 isLoading: false,
                 searchStoreType: 'city',
-                isError: true
+                isError: true,
+                filteredSingleStore: null
             });
+
         });
     }
 
@@ -253,7 +268,8 @@ class StoreLocator extends React.Component {
                 defaultLat: latVal,
                 defaultLng: lngVal,
                 isOpen: false,
-                isError: false
+                isError: false,
+                filteredSingleStore: null
             })
         }).catch(error => {
             console.log('Error=>', error.response)
@@ -261,7 +277,8 @@ class StoreLocator extends React.Component {
                 storeData: null,
                 isLoading: false,
                 searchStoreType: 'storeId',
-                isError: true
+                isError: true,
+                filteredSingleStore: null
             });
         });
     }
@@ -294,7 +311,8 @@ class StoreLocator extends React.Component {
                     storeData: null,
                     isLoading: false,
                     searchStoreType: getStringVal,
-                    isError: true
+                    isError: true,
+                    filteredSingleStore: null
                 });
                 
             }
@@ -303,10 +321,14 @@ class StoreLocator extends React.Component {
 
     /* create Map */
     createMap(storeData) {
+        const defaultMapOptions = {
+            fullscreenControl: false,
+        };
         return (
             <GoogleMap
                 defaultZoom={10}
                 defaultCenter={{lat: parseFloat(this.state.defaultLat), lng: parseFloat(this.state.defaultLng)}}  
+                defaultOptions={defaultMapOptions}
             >
                 {storeData.map((item, index) => {
                     const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, item.latitude, item.longitude);
@@ -361,14 +383,29 @@ class StoreLocator extends React.Component {
         getValueInKm = inKm * getValueInKm;
         return getValueInKm.toFixed(1);
     }
- 
+
+    handleCliked(filterRecord) {
+        this.setState({
+            filteredSingleStore: filterRecord
+        })
+    }
 
 	render() { 
-        const { storeData, searchStoreType } = this.state;
+        const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
         let showFilter = false;
+        let mapData;
+        const mapArray = new Array();
+
         if (storeData) {
-             WrappedMap = withScriptjs(withGoogleMap(this.createMap.bind(this, storeData.data)));
+             if (filteredSingleStore !== null) {
+                mapArray.push(filteredSingleStore);
+                mapData = mapArray;
+             } else {
+                mapData = storeData.data;
+             }
+
+             WrappedMap = withScriptjs(withGoogleMap(this.createMap.bind(this, mapData)));
              showFilter = true;
         } else if (searchStoreType === 'filter') {
             showFilter = true;
@@ -382,7 +419,7 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
+                        <input id="city" type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
                         <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores':'Find'}</button>
                     </div>
 
@@ -396,7 +433,7 @@ class StoreLocator extends React.Component {
                                         Home Furniture
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattresses', 'mattress')}>
+                                <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattress Store', 'mattress')}>
                                     <figure className='typeList' ><img src={Img2} className='storeImg'/></figure>
                                     <figcaption className="storetext">
                                         Mattresses
@@ -408,7 +445,7 @@ class StoreLocator extends React.Component {
                                         Kitchens
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Office/ Business Furniture', 'b2b')}>
+                                <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Business Furniture', 'b2b')}>
                                     <figure className='typeList'><img src={Img4} className='storeImg'/></figure>
                                     <figcaption className="storetext">
                                         Office/ Business Furniture
@@ -422,7 +459,7 @@ class StoreLocator extends React.Component {
                         <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                         <>
                             { !showFilter &&
-                                <span>Please try another city or pincode<br/><br/></span>
+                                <div className="anotherCity">Please try another city or pincode</div>
                             }
                         </>
                     </div>
@@ -454,7 +491,7 @@ class StoreLocator extends React.Component {
                                                     </div>
                                                     }
                                                     <div className="Storewrapper">
-                                                        <h2 className="storeName">{physicalData.storeName}</h2>
+                                                        <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                         { this.props.history.location.state.pincode && 
                                                         <>
                                                             <div className="distance">{data} Km</div>
@@ -515,9 +552,12 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/${this.state.defaultLat},${this.state.defaultLng}/${physicalData.latitude},${physicalData.longitude}`}} className="getDirection" target='_blank'>
                                                             Get Directions
                                                         </Link>
+                                                        {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                            Get Directions
+                                                        </Link> */}
                                                         <div className="dealer">
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>

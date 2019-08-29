@@ -1,15 +1,17 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI
+  espotAPI,
+  storeId,
+  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class WardrobeBenefits extends React.Component {
+class PPDisclosure extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Wardrobes_Benefit_Modular",
+      espotName: "GI_Privacy_Policy_Static_Data",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -45,10 +47,12 @@ class WardrobeBenefits extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-				<div className='wardrobeEspot' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+			<div>
+		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
+			</div>
 		)
     );
   }
 }
 
-export default WardrobeBenefits;
+export default PPDisclosure;

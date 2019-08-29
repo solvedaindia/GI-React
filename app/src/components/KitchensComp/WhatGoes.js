@@ -8,9 +8,7 @@ import  '../../../public/styles/static-pages/kitchen.scss'
 
 import {
   whatGoesKitchenAPI,
-  imagePrefix,
-  storeId,
-  accessToken,
+  imagePrefix
 } from '../../../public/constants/constants';
 
 class WhatGoes extends React.Component {
@@ -23,7 +21,7 @@ class WhatGoes extends React.Component {
       title: '',
       imageDescription: '',
       type: '',
-imageHeading: ""
+      imageHeading: ""
     };
   }
 

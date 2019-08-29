@@ -7,11 +7,11 @@ import {
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
 
-class OurPromises extends React.Component {
+class PPDataProtection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Homepage_Our_Promises",
+      espotName: "GI_Privacy_Policy_DataProtectionAndFishing",
       pageLayoutEspot: null,
       isLoading: true,
       error: null,
@@ -34,7 +34,7 @@ class OurPromises extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
+        console.log('kitchen data');
       });
   }
 
@@ -47,12 +47,12 @@ class OurPromises extends React.Component {
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-			<div className='ourPromis'>
-				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
+			<div>
+		<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }}/>
 			</div>
 		)
     );
   }
 }
 
-export default OurPromises;
+export default PPDataProtection;

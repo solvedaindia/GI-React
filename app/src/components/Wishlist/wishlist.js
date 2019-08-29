@@ -89,6 +89,7 @@ class wishListCount extends React.Component {
       console.log('Wihslist islog --', token);
       wishlistLogo = (
         <Link to="/wishlist" onClick={() => this.onLinkNavigation('My Wishlist')}>
+          {!isLoading ? wishlistItem : null}
           <WishlistLogo />
         </Link>
       );
@@ -96,8 +97,7 @@ class wishListCount extends React.Component {
 
     return (
       <>
-        <li className="icons" onClick={this.handleWLCount.bind(this)}>
-          {!isLoading ? wishlistItem : null}
+        <li className="icons" onClick={this.handleWLCount.bind(this)}>          
           {wishlistLogo}
         </li>
         {this.state.isWelcomeBack ? isMobile() ? <UserAccInfo fromWishlistPro /> : this.props.userInfoCallbackPro() : null}

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/privacyPolicy.scss';
-import PrivacyPolicies from '../../components/PrivacyPolicy/privpol';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 
 export class PrivacyPolicy extends React.Component {
@@ -10,9 +10,15 @@ export class PrivacyPolicy extends React.Component {
 
   render() {
     return (
-      <>
-      <PrivacyPolicies/> 
-      </>
+      <div className='privacyPolicy'>
+        <div className='container'>
+          <ContentEspot espotName={ 'GI_Privacy_Policy_Information' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_Security' } />
+          <ContentEspot espotName={ 'GI_Terms_and_Conditions_MaterialsAndUsage' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_ThirdParty_Information' } />
+          <ContentEspot espotName={ 'GI_Privacy_Policy_DataProtectionAndFishing' } />
+        </div>
+      </div>
     );
   }
 }

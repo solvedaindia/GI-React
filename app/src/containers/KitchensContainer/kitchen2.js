@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import '../../../public/styles/static-pages/chefkitchen.scss'
-
+import ContentEspot from '../../components/Primitives/staticContent';
 import ChefKitchenBanner from '../../components/KitchensComp/chefKitchenBanner';
 import SteelKitchenTypes from '../../components/KitchensComp/typesOfSteelKitchen';
 import SteelKitchenBenefits from '../../components/KitchensComp/benefitsOfSteelType';
 import YourKitchenYourWay from '../../components/KitchensComp/yourKitchenYourWay';
-import InterioText from '../../components/KitchensComp/interiotext';
 import FaqEspot from '../../components/Primitives/faq.js';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
 import '../../../public/styles/static-pages/consultForm.scss';
@@ -76,7 +75,9 @@ return (
   </div>
   <FaqEspot />
   <ExKitchens />
-  <InterioText />
+  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR' } />
+
+  {/* <InterioText /> */}
 </div>
 )
 }

@@ -49,13 +49,13 @@ import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
 import Inspiration from '../InspirationCont/index';
-import Kitchens from '../KitchensContainer/kitchenContainer';
+import Kitchens from '../KitchensContainer';
 import SteelChefKitchen from '../KitchensContainer/kitchen2';
 import InspirationDetails from '../InspirationDetailsContainer/index';
-import WardrobesContainer from '../wardrobesContainer/wardrobeContainer';
+import WardrobesContainer from '../wardrobesContainer';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
-import TermsConditions from '../TermsConditions/index';
+import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
@@ -93,6 +93,15 @@ export default class App extends React.Component {
     window.addEventListener('resize', this.resize);
     this.resize();
     this.getCurrentLocation();
+   
+  }
+
+  componentWillUpdate() {
+    let header = document.getElementById("header");
+    if(header) {
+      header.classList.remove("sticky");
+    } 
+    window.scrollTo(0, 0);
   }
 
   initialLoginHandling() {

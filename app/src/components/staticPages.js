@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import TermsConditions from '../components/TermsConditionComp/termCond';
+// import TermsConditions from '../components/termsConditionsComp/termConditions';
 import CookiePolicy from '../containers/CookiePolicy';
 import Inspiration from '../containers/InspirationCont';
 import Kitchens from '../containers/KitchensContainer';
