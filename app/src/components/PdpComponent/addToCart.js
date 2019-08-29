@@ -18,6 +18,7 @@ import ExperienceStore from './experienceStore';
 import { isMobile } from '../../utils/utilityManager';
 
 import Mapflag from '../../components/SVGs/mapflag.svg';
+const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -174,17 +175,22 @@ class addToCartComponent extends React.Component {
       });
     } else {
       const pincode = document.getElementById('pincodeVal').value;
-      appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-      this.quantity = 1;
-      props.handleAddtocart(true);
-      this.setState({
-        isEdit: true
-      });
+      if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
+        appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        this.quantity = 1;
+        props.handleAddtocart(true);
+        this.setState({
+          isEdit: true,
+        });
+      }
     }
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const val = e.target.value;
+    if (val === '' || PINCODE_REGEX.test(val)) {
+      this.setState({ [e.target.name]: e.target.value, isEdit: false });
+    }
   };
 
   /* render buttons */
