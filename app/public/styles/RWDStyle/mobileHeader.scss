@@ -18,7 +18,7 @@
       float: left;
     }
     .backToCatBtn {
-      padding: 8px 15px 20px 10px;
+      padding: 8px 15px 10px 10px;
     }
     .back-mob-logo {
       margin-top: 6px;
@@ -39,9 +39,12 @@
 
   .menuBtn {
     width: 24px;
-    height: 24px;
+    // height: 24px;
     background: none;
     border: 0px;
+    .logoImg{
+      margin-top: 7px;
+    }
   }
 
   .navigationTitle {

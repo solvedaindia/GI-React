@@ -214,6 +214,37 @@ h4{font-weight: bold}
     
     }
 }
+
+.pageNotfound{
+  width: 50%;
+  margin: 0 auto;
+  padding: 30px 0 0 0;
+  min-height: 200px;
+  .ErrorIcon,.ErrorText{float: left;}
+  .ErrorIcon{
+    width:20%;
+    .icon{
+      width: 100%;
+    }
+  }
+  .ErrorText{
+    width:80%;
+    padding: 0 0 0 40px;
+    .heading{
+      font-size: 30px;
+      line-height: 30px;
+      color:$black;
+      font-family: $font-bold;
+      margin: 0 0 8px 0;
+    }
+    .errorDescription{
+      font-size: 16px;
+      font-family: $font-light;
+      color: $battleshipGrey;
+      line-height: 16px;
+    }
+  }
+}
 /*---Spining button Css
 ----------------------------*/
 input::-webkit-inner-spin-button, 
