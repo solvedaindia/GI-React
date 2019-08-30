@@ -1,5 +1,7 @@
 @import "../../variable";
 
+
+@media screen and (max-width: 767px) {
 .myOrder {
   .ongoingOrder {
     color: $greyDark;
@@ -581,6 +583,11 @@
         z-index: 999;
         top: 0px;
       }
+
+      &.last.active, &.last{
+        border: 0px;
+      }
     }
   }
+}
 }
