@@ -61,7 +61,6 @@ import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import SearchContainer from '../Search Container/searchContainer';
 import OrderConformtion from '../orderConfirmation/index'
 // import CartDetail from '../CartContainer/cartContainer';
 import CartDetail from '../CartContainer/cartContainer';
@@ -278,7 +277,7 @@ export default class App extends React.Component {
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           <Route path='/staticpages' component = {StaticPagesList} />
           <Route path="/termsconditions" component={TermsConditions} />
-          <Route path="/cookie-policy" component={CookiePolicy} />
+          <Route path="/cookie" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
