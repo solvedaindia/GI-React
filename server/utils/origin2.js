@@ -1,16 +1,13 @@
+/* eslint-disable no-useless-escape */
 const request = require('request');
 const logger = require('./logger.js');
-// eslint-disable-next-line no-useless-escape
 const regexHidePW = /\"logonPassword\"\s*\:\s*\"[^\}]+\"\}/;
-// eslint-disable-next-line no-useless-escape
+const regexHideConfirmPW = /\"logonPasswordVerify\"\s*\:\s*\"[^\}]+\"\}/;
 const regexHideID = /\"logonId\"\s*\:\s*\"[^\}]+\"\}/;
 
 exports.getResponse = getResponse;
 function getResponse(originMethod, originURL, reqHeaders, reqBody) {
-  logger.debug(`Origin Method:::${originMethod}`);
   logger.debug(`Origin URL:::${originURL}`);
-  // logger.debug('Request Header:::', reqHeaders);
-  // logger.debug('Request Body:::', JSON.stringify(reqBody));
   return new Promise((resolve, reject) => {
     const options = {
       url: originURL,
@@ -28,7 +25,6 @@ function getResponse(originMethod, originURL, reqHeaders, reqBody) {
         reject(error);
         return;
       }
-      // logger.debug(`Response From Origin::${JSON.stringify(response)}`);
       response.status = response.statusCode;
       if (response.status >= 200 && response.status < 300) {
         resolve(response);
@@ -41,11 +37,11 @@ function getResponse(originMethod, originURL, reqHeaders, reqBody) {
           ReqBody: reqBody || '',
           Body: response.body,
         };
-        logger.debug(`Error from WCS::${response}`);
         logger.wcserror(
           JSON.stringify(responceJSON)
             .replace(regexHideID, '"logonId":"*******"')
-            .replace(regexHidePW, '"logonPassword":"*******"'),
+            .replace(regexHidePW, '"logonPassword":"*******"')
+            .replace(regexHideConfirmPW, '"logonPasswordVerify":"*******"'),
         );
         reject(response);
       }

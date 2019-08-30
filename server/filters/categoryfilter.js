@@ -35,15 +35,9 @@ function getCategoryDetails(categoryDetails) {
   catData.categoryIdentifier = categoryDetails.identifier;
   catData.categoryName = categoryDetails.name;
   catData.uniqueID = categoryDetails.uniqueID;
-  catData.thumbnail = imagefilter.getCategoryImagePath(
-    categoryDetails.thumbnail,
-  );
-  catData.fullImage = imagefilter.getCategoryImagePath(
-    categoryDetails.fullImage,
-  );
-  // catData.onClickUrl = '';
+  catData.thumbnail = imagefilter.getImagePathNew(categoryDetails.thumbnail);
+  catData.fullImage = imagefilter.getImagePathNew(categoryDetails.fullImage);
   catData.shortDescription = categoryDetails.shortDescription || '';
-  // catData.seoUrl = '';
   catData.columns = Number(categoryDetails.x_field2_sm) || 3;
   catData.displaySkus = true;
   if (categoryDetails.x_field1_q && Number(categoryDetails.x_field1_q) === 1) {

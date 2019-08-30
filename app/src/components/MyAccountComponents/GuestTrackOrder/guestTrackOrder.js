@@ -4,7 +4,7 @@ import { validateEmptyObject } from '../../../utils/validationManager';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/guestTrackOrder.scss';
-import {isMobile} from '../../../utils/utilityManager';
+import {isMobile, getCookie} from '../../../utils/utilityManager';
 
 class GuestTrackOrder extends React.Component {
   constructor(props) {
@@ -15,6 +15,12 @@ class GuestTrackOrder extends React.Component {
       errorMessage: null,
       inputText: null,
     };
+  }
+
+  componentDidMount() {
+    if (getCookie('isLoggedIn') === 'true') {
+      this.props.history.push('/')
+    }
   }
 
   handleInputChange(text) {

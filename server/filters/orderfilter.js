@@ -1,3 +1,13 @@
+const stateCode = require('../configs/statecode');
+
+module.exports.getOOBOrderStatus = {
+  C: 'Created',
+  M: 'Created',
+  F: 'Created',
+  P: 'Pending',
+  X: 'Cancelled',
+};
+
 module.exports.getInvoiceAddress = getInvoiceAddress;
 function getInvoiceAddress(address) {
   const addressJSON = {};
@@ -57,9 +67,11 @@ function getOMSOrderAddress(address) {
   }
   addressJSON.companyName = address.company || '';
   addressJSON.city = address.city || '';
-  addressJSON.state = address.state || '';
-  addressJSON.country = address.country || '';
-  addressJSON.pincode = address.ZipCode || '';
+  addressJSON.state =
+    stateCode.getStateName[address.state] || address.state || '';
+  addressJSON.country =
+    stateCode.getCountryName[address.country] || address.country || '';
+  addressJSON.pincode = address.zipCode || '';
   addressJSON.phoneNumber = address.mobilePhone || '';
   addressJSON.addressID = address.addressID || '';
   return addressJSON;

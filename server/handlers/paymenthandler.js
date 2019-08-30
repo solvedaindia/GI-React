@@ -5,6 +5,7 @@ const origin = require('../utils/origin.js');
 const checkout = require('../handlers/carthandler');
 const logger = require('../utils/logger.js');
 
+/* Initiate Payment */
 module.exports.initiateBDPayment = function initiateBDPayment(
   params,
   headers,
@@ -71,82 +72,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
   );
 };
 
-module.exports.verifyBDPayment = function verifyBDPayment(
-  params,
-  headers,
-  callback,
-) {
-  if (
-    !params.orderId ||
-    !params.payMethodId ||
-    !params.amount ||
-    !params.customInfo ||
-    !params.billing_address_id
-  ) {
-    logger.debug('Verify Payment:::Invalid Params');
-    callback(errorutils.errorlist.invalid_params);
-    return;
-  }
-  const reqHeaders = headerutil.getWCSHeaders(headers);
-
-  const verifyBDPaymentURL = `${constants.verifyBDPayment.replace(
-    '{{storeId}}',
-    headers.storeId,
-  )}`;
-
-  const verifyBDPaymentBody = {
-    orderId: params.orderId,
-    email: params.email,
-    payMethodId: params.payMethodId,
-    amount: params.amount,
-    customInfo: params.customInfo,
-    billing_address_id: params.billing_address_id,
-  };
-
-  origin.getResponse(
-    'POST',
-    verifyBDPaymentURL,
-    reqHeaders,
-    null,
-    verifyBDPaymentBody,
-    null,
-    '',
-    response => {
-      if (response.status === 200) {
-        const resBody = {
-          paymentStatus: '',
-          orderPlaced: '',
-        };
-        if (response.body.response.paymentStatus === 'success') {
-          const orderIdObj = {
-            orderId: response.body.orderId,
-          };
-          checkout.checkout(headers, orderIdObj, (err, result) => {
-            if (err) {
-              resBody.paymentStatus = response.body.response.paymentStatus;
-              resBody.orderPlaced = false;
-              resBody.checkoutError = err;
-              callback(null, resBody);
-              return;
-            }
-            resBody.paymentStatus = response.body.response.paymentStatus;
-            resBody.orderPlaced = true;
-            resBody.orderID = result.orderID;
-            callback(null, resBody);
-          });
-        } else {
-          resBody.paymentStatus = response.body.response.paymentStatus;
-          resBody.orderPlaced = false;
-          callback(null, resBody);
-        }
-        // callback(null, response);
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-};
-
+/* Verify Payment Checksum */
 module.exports.verifyChecksum = function verifyChecksum(
   headers,
   reqBody,
@@ -157,14 +83,12 @@ module.exports.verifyChecksum = function verifyChecksum(
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-  // const reqHeaders = headerutil.getWCSHeaders(headers);
   const verifyBDPaymentURL = `${constants.verifyBDPayment.replace(
     '{{storeId}}',
     headers.storeId,
   )}`;
 
   const verifyBDPaymentBody = {
-    payMethodId: 'BillDesk',
     customInfo: reqBody.msg,
   };
 
@@ -196,6 +120,7 @@ module.exports.verifyChecksum = function verifyChecksum(
   );
 };
 
+/* Checkout API */
 module.exports.confirmCheckout = function confirmCheckout(
   params,
   headers,

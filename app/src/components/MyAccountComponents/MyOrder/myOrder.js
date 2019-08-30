@@ -22,7 +22,7 @@ class MyOrder extends React.Component {
       hasMore: true,
       isLoading: false,
       pageNumber: 1,
-      pageSize: 4,
+      pageSize: 20,
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);

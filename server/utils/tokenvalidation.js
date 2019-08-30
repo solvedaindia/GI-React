@@ -1,7 +1,9 @@
 const jwt = require('jwt-simple');
 const crypto = require('crypto-js');
-const encryptionKey = 'yqzSYsrLLYkJBya0P513QGqQq82CiojT';
-const encodingKey = 'rVlJvxsARa0bDTwFeSrnoQCO7SPN0lFt';
+const {
+  encryptionKey,
+  encodingKey,
+} = require('../configs/authtokenconfig').getAuthConfig();
 const errorUtils = require('./errorutils');
 const logger = require('./logger');
 
@@ -35,9 +37,7 @@ function decryptToken(encryptedToken) {
 }
 
 exports.validateSecureToken = function validateSecureToken(req, res, next) {
-  // const headerToken = req.headers.access_token;
   if (req.url.indexOf('/payment/handlePayment') !== -1) {
-    req.headers.storeId = '10151';
     return;
   }
   if (!req.headers.storeId || req.headers.storeId === '') {

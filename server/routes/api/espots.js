@@ -4,6 +4,20 @@ const espotsHandler = require('../../handlers/espotshandler');
 const espotFilter = require('../../filters/espotfilter');
 
 /* Get Espot Data */
+router.get('/multiple', (req, res, next) => {
+  espotsHandler.getMultipleEspotsData(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/* Get Espot Data */
 router.get('/:espotName', (req, res, next) => {
   espotsHandler.getEspotsData(
     req.headers,

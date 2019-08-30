@@ -119,11 +119,11 @@ onkeydownclick(text) {
               <img src={require('../../../../public/images/close.svg')} />
             </button>
           ) : (
-            <button onClick={this.onSearchClick.bind(this)}>
+            // <button >
               <img
                 src={require('../../../../public/images/rwd-assets/search.svg')}
               />
-            </button>
+            // </button>
           )}
         </div>
 

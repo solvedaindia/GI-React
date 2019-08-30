@@ -5,7 +5,6 @@ function getItemOrderDetail(OrderItem) {
     shippingCharges: parseFloat(OrderItem.shippingCharge),
     orderItemId: OrderItem.orderItemId,
     freeGift: false,
-    // actualPrice: parseFloat(OrderItem.xitem_field2) || '',
     offerPrice: parseFloat(OrderItem.unitPrice) || '',
   };
   if (OrderItem.freeGift === 'true') {
@@ -42,12 +41,6 @@ function mergeOrderItemandProduct(orderItemList, productList) {
         break;
       }
     }
-    /*  if (itemJson.freeGift === true) {
-        delete itemJson.actualPrice;
-        delete itemJson.offerPrice;
-        delete itemJson.discount;
-        delete itemJson.promotionData;
-      } */
     orderItemJson.orderItemList.push(itemJson);
   });
 
@@ -107,28 +100,10 @@ function getOrderSummary(cartData) {
         orderSummary.productDiscount += parseFloat(Math.abs(adjustment.amount));
       }
       if (adjustment.displayLevel === 'Order') {
-        orderSummary.orderDiscount = Math.abs(adjustment.amount);
+        orderSummary.orderDiscount += parseFloat(Math.abs(adjustment.amount));
       }
     });
   }
-
-  /*   cartData.orderItem.forEach(item => {
-    const itemOfferPriceTotal = parseFloat(item.orderItemPrice);
-    let itemListPriceTotal = 0;
-    if (
-      item.orderItemExtendAttribute &&
-      item.orderItemExtendAttribute.length > 0
-    ) {
-      item.orderItemExtendAttribute.forEach(itemAttribute => {
-        if (itemAttribute.attributeName === 'MRP') {
-          itemListPriceTotal = parseFloat(itemAttribute.attributeValue);
-        }
-      });
-    }
-    const priceDifference = itemListPriceTotal - itemOfferPriceTotal;
-    merchandizingDiscount += priceDifference;
-  }); */
-  // console.log('merchandizingDiscount>>>',merchandizingDiscount);
   orderSummary.productDiscount += merchandizingDiscount;
   orderSummary.orderDiscount = parseFloat(orderSummary.orderDiscount);
   orderSummary.productDiscount = parseFloat(orderSummary.productDiscount);

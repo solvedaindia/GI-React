@@ -15,32 +15,6 @@ router.get('/productDetails/:skuId', (req, res, next) => {
   });
 });
 
-router.get('/productdetailbycolor/:productId', (req, res, next) => {
-  pdpHandler.getProductDetailByColor(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
-});
-
-router.get('/skudetails/:skuId', (req, res, next) => {
-  pdpHandler.getProductDetailSummary(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
-});
-
 router.get('/productavailability/:pincode', (req, res, next) => {
   req.query.pincode = req.params.pincode;
   pdpHandler.getPincodeServiceability(req.headers, req.query, (err, result) => {
@@ -53,6 +27,24 @@ router.get('/productavailability/:pincode', (req, res, next) => {
       data: result,
     });
   });
+});
+
+router.get('/productavailabilitybundle/:pincode', (req, res, next) => {
+  req.query.pincode = req.params.pincode;
+  pdpHandler.getPincodeServiceabilityForBundle(
+    req.headers,
+    req.query,
+    (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.status(200).send({
+        status: 'success',
+        data: result,
+      });
+    },
+  );
 });
 
 router.post('/notifyme', (req, res, next) => {

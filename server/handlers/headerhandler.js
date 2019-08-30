@@ -26,12 +26,6 @@ module.exports.getHeaderData = function headerData(headers, callback) {
       const resJson = {
         Header_Static_Links: espotFilter.espotContent(results[0]) || '',
       };
-      /*      results.forEach(element => {
-        const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration
-        if (espotParserResult != null) {
-          Object.assign(resJson, espotParserResult);
-        }
-      }); */
       callback(null, resJson);
     },
   );

@@ -77,3 +77,7 @@ module.exports.getStateCode = {
   'Uttar Pradesh': 'UP',
   'West Bengal': 'WB',
 };
+
+module.exports.getCountryName = {
+  IN: 'India',
+};

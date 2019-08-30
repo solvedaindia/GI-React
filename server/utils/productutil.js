@@ -84,9 +84,9 @@ module.exports.productDetailByPartNumber = function productDetailByPartNumber(
   headers,
   callback,
 ) {
-  logger.debug('Inside Product details by id method');
+  logger.debug('Inside Product details by Part Number method');
   if (!partNumber) {
-    logger.debug('Get Product Detail By Product ID :: invalid params');
+    logger.debug('Get Product Detail By Part Number :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
@@ -105,7 +105,15 @@ module.exports.productDetailByPartNumber = function productDetailByPartNumber(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body.catalogEntryView[0]);
+        let productDetail = {};
+        if (
+          response.body.catalogEntryView &&
+          response.body.catalogEntryView.length > 0
+        ) {
+          // eslint-disable-next-line prefer-destructuring
+          productDetail = response.body.catalogEntryView[0];
+        }
+        callback(null, productDetail);
       } else {
         callback(errorUtils.handleWCSError(response));
       }
@@ -189,7 +197,6 @@ function getProductListByIDs(headers, productIDs, callback) {
 
 /* Get Promotion Data for All The Products */
 function getPromotionData(headers, productIDs, callback) {
-  const promotionArray = [];
   let promotionObject = {};
   promotionUtil.getMultiplePromotionData(
     productIDs,
@@ -203,33 +210,6 @@ function getPromotionData(headers, productIDs, callback) {
       }
     },
   );
-  /* async.map(
-    productIDs,
-    (productId, cb) => {
-      promotionUtil.getPromotionData(productId, headers, (error, promotion) => {
-        if (!error) {
-          const promotionJson = {
-            uniqueID: productId,
-            promotionData: promotion,
-          };
-          cb(null, promotionJson);
-        } else {
-          cb(error);
-        }
-      });
-    },
-    (errors, results) => {
-      if (errors) {
-        callback(errors);
-        return;
-      }
-      results.forEach(result => {
-        promotionObject[result.uniqueID] = result.promotionData;
-        promotionArray.push(result);
-      });
-      callback(null, promotionObject);
-    },
-  ); */
 }
 
 /* Merge Product Details and Promotion Data */
@@ -245,19 +225,6 @@ function transformJson(result) {
       productListing.push(productDetail);
     });
   } else {
-    /* productListArray.forEach(product => {
-      let productDetail = {};
-      const productPromotion = promotionJson.filter(
-        promotion => promotion.uniqueID === product.uniqueID,
-      );
-      // eslint-disable-next-line no-param-reassign
-      // product.promotionData = productPromotion[0].promotionData;
-      productDetail = productDetailFilter.productDetailSummary(product);
-      productDetail.promotionData = productDetailFilter.getSummaryPromotion(
-        productPromotion[0].promotionData,
-      );
-      productListing.push(productDetail);
-    }); */
     productListArray.forEach(product => {
       let productDetail = {};
       productDetail = productDetailFilter.productDetailSummary(product);
