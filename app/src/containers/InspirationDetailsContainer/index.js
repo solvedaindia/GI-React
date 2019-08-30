@@ -3,7 +3,7 @@ import '../../../public/styles/static-pages/inspirationDetails.scss'
 import Lookbook from '../../components/LookbookComponent/lookbbook'
 import Recommended from '../../components/InspirationComp/recommended';
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticpages.scss';
+import  '../../../public/styles/staticpages/staticPages.scss';
 
 import LookbooksocialShare from '../../components/InspirationComp/lookbooksocialShare';
 

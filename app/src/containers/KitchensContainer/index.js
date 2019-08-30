@@ -14,7 +14,7 @@ import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticpages.scss';
+import  '../../../public/styles/staticpages/staticPages.scss';
 
 export class KitchenContainer extends React.Component {
   constructor(props) {
@@ -47,6 +47,9 @@ export class KitchenContainer extends React.Component {
             <ContentEspot espotName = { 'GI_KITCHEN_FAQ' } />
             <KitchenStore />
             <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR' } />
+            <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_12' } />
+            <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_13' } />
+
         </section>
     );
   }

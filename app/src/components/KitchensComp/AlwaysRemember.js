@@ -1,12 +1,10 @@
 import React from 'react';
-import { Row, Col,Grid } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 
 import {
     AlwaysRememberApi,
     imagePrefix,
-    storeId,
-    accessToken,
+   
   } from '../../../public/constants/constants';
   
 import  '../../../public/styles/static-pages/kitchens.scss'
