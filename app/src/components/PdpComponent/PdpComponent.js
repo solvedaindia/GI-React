@@ -207,11 +207,13 @@ class PdpComponent extends React.Component {
 			});
 		});
 
-		this.props.historyData.push(
-			`/pdp/furniture-${resolvedSkuData.productName
-			.toLowerCase()
-			.replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
-		);
+		if (this.props.matchParams.skuId !== resolvedSkuData.uniqueID) {
+			this.props.historyData.push(
+				`/pdp/furniture-${resolvedSkuData.productName
+				.toLowerCase()
+				.replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
+			);
+		}
 	}
 
 	handleAddtocart(ispincode) {
