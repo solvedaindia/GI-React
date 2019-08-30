@@ -100,6 +100,15 @@ export const wardrobesBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espot
 export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_HALL_OF_FAME `;
 /* kitchens Banner Slider */
 export const kitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_BANNER`;
+/* look book summer spark Banner Slider */
+
+export const lookBookSummerSparkAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_CHEF_KITCHENS_BANNER`;
+/* chef kitchens Banner Slider */
+export const chefKitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_CHEF_KITCHENS_BANNER`;
+/* recommended slider Slider */
+
+export const recommendedAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_CHEF_KITCHENS_BANNER`;
+
 /* before after Slider */
 export const beforeAfterApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_BEFORE_AFTER_SLIDER`;
 /* Always remember Hall Slider */

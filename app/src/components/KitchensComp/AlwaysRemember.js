@@ -94,10 +94,11 @@ class AlwaysRemember extends React.Component {
 
   render() {
     return (
+      <div className='container'>
         <div className="remembersection clear fix">
           <div className="row">
             <div className="RectanglularText col-md-5">
-              <h1 className="Image-gallery2">When planning your kitchen, always remember..</h1>
+              <h1>When planning your kitchen, always remember..</h1>
               <h3 className="The-Work-Triangle">The Work Triangle</h3>
               <p className="ParagraphSmall">This consists of 3 fundamental and basic workstations i.e. the sink,
                 refrigerator and the cooking hob/range. The triangle is measured from the center of the sink to the top
@@ -119,6 +120,7 @@ class AlwaysRemember extends React.Component {
                   <button type="button" name='3' onClick={this.onHandleClick} className={this.state.buttonThird
                     ? "buttonTrue" : "buttonFalse" }>L Kitchen</button>
                 </div>
+              </div>
               </div>
             </div>
           </div>

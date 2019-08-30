@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import  '../../../public/styles/static-pages/kitchen.scss';
-// import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
+import  '../../../public/styles/static-pages/kitchens.scss';
+import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 // import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
@@ -34,6 +34,7 @@ export class KitchenContainer extends React.Component {
             <ContentEspot espotName = { 'GI_KITCHEN_TYPES' } />
             <ContentEspot espotName = { 'GI_DREAM_KITCHEN_STEPS' } />
             <ContentEspot espotName = { 'GI_KITCHEN_LAYOUTS' } />
+            <AlwaysRemember/>
             <WhatGoes />
             <KitchenHall />
             {/* <BeforeAfter /> */}
