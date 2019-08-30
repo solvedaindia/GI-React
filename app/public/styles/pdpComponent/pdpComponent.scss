@@ -1825,7 +1825,7 @@
                                         .image-gallery-image{
                                             align-items: center;
                                             justify-items: center;
-                                            display: flex;
+                                            display: grid;
                                             img{
                                                 min-width: initial;
                                             }
