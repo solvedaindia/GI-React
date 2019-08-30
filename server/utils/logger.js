@@ -26,32 +26,17 @@ const moment = require('moment');
 const TIMESTAMP_FORMAT = 'DD-MM-YYYY HH:mm:ss a';
 const fileDatePattern = 'yyyy-MM-dd';
 
-// winston.setLevels(winston.config.npm.levels);
-// winston.setLevels(logLevels.levels);
-// winston.addColors(logLevels.levels.colors);
-
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
-
-// To Be used later for exception handling
-
-/* let exceptionLoggers = [];//[consoleLogger];
-    let exceptionFileLogger = new winston.transports.File({
-        filename: logDir + '/' + instance + '_' + moment().format('DD-MM-YY') + '-exceptions.log',
-        timestamp: function () { return moment().format(TIMESTAMP_FORMAT) },
-        colorize: true,
-        handleExceptions : true,
-        humanReadableUnhandledException: true,
-        maxsize: 1024 * 1024 * 2 // 2MB
-    });
-    exceptionLoggers.push(exceptionFileLogger); */
 
 const consoleLogger = new winston.transports.Console({
   name: 'console-file',
   level: 'info',
   timestamp() {
-    return moment().format(TIMESTAMP_FORMAT);
+    return moment()
+      .tz('Asia/Kolkata')
+      .format(TIMESTAMP_FORMAT);
   },
   colorize: true,
   prettyPrint: true,
@@ -65,7 +50,9 @@ const errorLogger = new winston.transports.DailyRotateFile({
   datePattern: fileDatePattern,
   filename: `${logDir}/${instance}_error_`,
   timestamp() {
-    return moment().format(TIMESTAMP_FORMAT);
+    return moment()
+      .tz('Asia/Kolkata')
+      .format(TIMESTAMP_FORMAT);
   },
   handleExceptions: true,
   humanReadableUnhandledException: true,
@@ -81,7 +68,9 @@ const validationLogger = new winston.transports.DailyRotateFile({
   datePattern: fileDatePattern,
   filename: `${logDir}/${instance}_validation_`,
   timestamp() {
-    return moment().format(TIMESTAMP_FORMAT);
+    return moment()
+      .tz('Asia/Kolkata')
+      .format(TIMESTAMP_FORMAT);
   },
   handleExceptions: true,
   humanReadableUnhandledException: true,
@@ -97,7 +86,9 @@ const wcserrorLogger = new winston.transports.DailyRotateFile({
   datePattern: fileDatePattern,
   filename: `${logDir}/${instance}_wcserror_`, // + moment().format('DD-MM-YY') + '-wcserror.log',
   timestamp() {
-    return moment().format(TIMESTAMP_FORMAT);
+    return moment()
+      .tz('Asia/Kolkata')
+      .format(TIMESTAMP_FORMAT);
   },
   handleExceptions: true,
   humanReadableUnhandledException: true,
@@ -114,7 +105,6 @@ loggers.push(validationLogger);
 logger = new winston.Logger({
   levels: logLevels.levels,
   transports: loggers,
-  // exceptionHandlers: exceptionLoggers
 });
 
 winston.addColors({

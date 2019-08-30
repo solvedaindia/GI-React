@@ -204,11 +204,11 @@ export class Step2Component extends React.Component {
     this.props.back();
   }
 
-  newAddActive = () => {
+  newAddActive = () => { 
     this.setState({
       saved_add: null,
-      new_add: 'active_add'
-    })
+      new_add: 'active_add',
+    })  
   }
 
   mobiAddActive = () => {
@@ -232,7 +232,7 @@ export class Step2Component extends React.Component {
     }
   }
 
-  callPinApi = (val) => {
+  callPinApi = (val, errorField) => {
     return new Promise((resolve, reject) => {
       let token = appCookie.get('accessToken')
       let defPin = appCookie.get('pincode');
@@ -253,10 +253,72 @@ export class Step2Component extends React.Component {
         data.pin = val ? val : defPin;
         resolve(data);
       }).catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        console.log('iii --- ',errorMessage)
+        
+        if(errorField === 'pin') {
+          this.setState({
+            inputText_city: '',
+            inputText_state: '',
+            error_pincode: true,
+            errorMessage_pincode: errorMessage,
+          })
+        }
+        else {
+          this.setState({
+            binputText_city: '',
+            binputText_state: '',
+            berror_pincode: true,
+            berrorMessage_pincode: errorMessage,
+          })
+        }
+
+
         throw new Error(error);
         resolve()
       })
     })
+  }
+
+  pincodeFocusOut() {
+    if (this.state.inputText_pincode !== '' && this.state.inputText_pincode.length === 6) {
+      if (validatePindcode(this.state.inputText_pincode)) {
+        this.callPinApi(this.state.inputText_pincode, 'pin').then((data) => {
+          return this.setState({
+            inputText_pincode: data.pin,
+            inputText_city: data.city,
+            inputText_state: data.state
+          })
+        })
+      }
+    }
+    else {
+      this.setState({
+        inputText_city: '',
+        inputText_state: '',
+      })
+    }
+  }
+
+  bPincodeFocusOut() {
+    if (this.state.binputText_pincode !== '' && this.state.binputText_pincode.length === 6) {
+      if (validatePindcode(this.state.binputText_pincode)) {
+        this.callPinApi(this.state.binputText_pincode, 'bpin').then((data) => {
+          return this.setState({
+            binputText_pincode: data.pin,
+            binputText_city: data.city,
+            binputText_state: data.state
+          })
+        })
+      }
+    }
+    else {
+      this.setState({
+        binputText_city: '',
+        binputText_state: '',
+      })
+    }
   }
 
   checkPIN = () => {
@@ -331,20 +393,23 @@ export class Step2Component extends React.Component {
           inputText_address: value.target.value,
         });
       case 'pin':
-        if (value.target.value.length < 6) {
+        if (value.target.value.length <= 6) {
           return this.setState({
             inputText_pincode: value.target.value,
           });
         }
-        else if (value.target.value.length === 6) {
-          this.callPinApi(value.target.value).then((data) => {
-            return this.setState({
-              inputText_pincode: data.pin,
-              inputText_city: data.city,
-              inputText_state: data.state
-            })
-          })
+        else {
+          return;
         }
+        // else if (value.target.value.length === 6) {
+        //   this.callPinApi(value.target.value).then((data) => {
+        //     return this.setState({
+        //       inputText_pincode: data.pin,
+        //       inputText_city: data.city,
+        //       inputText_state: data.state
+        //     })
+        //   })
+        // }
       //  else {
       //   // return false
       // };
@@ -382,20 +447,22 @@ export class Step2Component extends React.Component {
           binputText_address: value.target.value,
         });
       case 'bpin':
-        if (value.target.value.length < 6) {
+        if (value.target.value.length <= 6) {
           return this.setState({
             binputText_pincode: value.target.value,
           });
-        } else if (value.target.value.length === 6) {
-          this.callPinApi(value.target.value).then((data) => {
-            this.setState({
-              binputText_pincode: data.pin,
-              binputText_city: data.city,
-              binputText_state: data.state
-            })
-          })
-        } else {
-          return false
+        } 
+        // else if (value.target.value.length === 6) {
+        //   this.callPinApi(value.target.value).then((data) => {
+        //     this.setState({
+        //       binputText_pincode: data.pin,
+        //       binputText_city: data.city,
+        //       binputText_state: data.state
+        //     })
+        //   })
+        // } 
+        else {
+          return;
         };
       case 'bcity':
         return this.setState({
@@ -1092,8 +1159,8 @@ export class Step2Component extends React.Component {
                   <div className="row">
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="number" title="Pincode" name="pin" value={this.state.inputText_pincode}
-                          handleChange={this.handleInput} />
+                        <Input inputType="text" title="Pincode" name="pin" value={this.state.inputText_pincode}
+                          handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
                         {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div>
                           : null}
                       </div>
@@ -1206,7 +1273,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Pincode" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} />
+                          <Input inputType="text" title="Pincode" id="bpin" name="bpin" value={this.state.binputText_pincode} handleChange={this.handleInput} focusOut={this.bPincodeFocusOut.bind(this)} />
                           {this.state.berror_pincode ? <div className='error-msg'>{this.state.berrorMessage_pincode}</div> : null}
                         </div>
                       </div>
@@ -1228,7 +1295,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="City/District" name="bcity" id="bcity" value={this.state.binputText_city} handleChange={this.handleInput} />
+                          <Input inputType="text" title="City/District" name="bcity" id="bcity" value={this.state.binputText_city} />
                           {this.state.berror_city ? <div className='error-msg'>{this.state.berrorMessage_city}</div> : null}
                         </div>
                       </div>

@@ -35,10 +35,22 @@ module.exports.storesByLocation = function getStoresByLocation(req, callback) {
         const storeDataByCityArray = [];
         if (Object.keys(response.body).length !== 0) {
           const storeData = response.body.PhysicalStore;
-
-          storeData.forEach(element => {
-            storeDataByCityArray.push(storeDataParsing(element));
-          });
+          if (storeData && storeData.length > 0) {
+            storeData.forEach(element => {
+              storeDataByCityArray.push(storeDataParsing(element));
+            });
+            storeDataByCityArray.sort((a, b) => {
+              const storeNameA = a.storeName.toLowerCase();
+              const storeNameB = b.storeName.toLowerCase();
+              if (storeNameA < storeNameB) {
+                return -1;
+              }
+              if (storeNameA > storeNameB) {
+                return 1;
+              }
+              return 0;
+            });
+          }
         }
         callback(null, storeDataByCityArray);
       } else {
@@ -89,10 +101,11 @@ module.exports.storesByCoordinates = function getStoresByCoordinates(
         const storeDataByCoordinatesArray = [];
         if (Object.keys(response.body).length !== 0) {
           const storeData = response.body.PhysicalStore;
-
-          storeData.forEach(element => {
-            storeDataByCoordinatesArray.push(storeDataParsing(element));
-          });
+          if (storeData && storeData.length > 0) {
+            storeData.forEach(element => {
+              storeDataByCoordinatesArray.push(storeDataParsing(element));
+            });
+          }
         }
         callback(null, storeDataByCoordinatesArray);
       } else {
@@ -130,12 +143,12 @@ module.exports.storeByPhysicalIdentifier = function storeByPhysicalIdentifier(
         const storeDataByStoreIdArray = [];
         if (Object.keys(response.body).length !== 0) {
           const storeData = response.body.PhysicalStore;
-
-          storeData.forEach(element => {
-            storeDataByStoreIdArray.push(storeDataParsing(element));
-          });
+          if (storeData && storeData.length > 0) {
+            storeData.forEach(element => {
+              storeDataByStoreIdArray.push(storeDataParsing(element));
+            });
+          }
         }
-
         callback(null, storeDataByStoreIdArray);
       } else {
         callback(errorUtils.handleWCSError(response));
@@ -162,10 +175,12 @@ function storeDataParsing(element) {
   element.Attribute.forEach(storeinfo => {
     if (storeinfo.displayName === 'Type') {
       storeDataObject.type.push(storeinfo.displayValue);
-    } else if (storeinfo.name === 'OwnerShip') {
+    } else if (storeinfo.displayName === 'OwnerShip') {
       storeDataObject.ownership = storeinfo.displayValue;
     } else if (storeinfo.displayName === 'Label') {
       storeDataObject.ribbonText = storeinfo.displayValue;
+    } else if (storeinfo.displayName === 'Store Hours') {
+      storeDataObject.storeHours = storeinfo.displayValue;
     } else {
       storeDataObject.ribbonText = '';
     }

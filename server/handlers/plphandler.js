@@ -179,23 +179,15 @@ function getAllSKUProductList(
         if (response.body.metaData.spellcheck) {
           productListJson.spellCheck = response.body.metaData.spellcheck;
         }
+        productListJson.breadCrumbData = plpfilter.getBreadCrumbData(
+          response.body.breadCrumbTrailEntryViewExtended,
+        );
         productListJson.productCount = response.body.recordSetTotal;
         productListJson.facetData = plpfilter.facetData(
           response.body.facetView,
           headers.catalogId,
         );
-        productListJson.productList = [];
-        /* if (
-          response.body.catalogEntryView &&
-          response.body.catalogEntryView.length > 0
-        ) {
-          response.body.catalogEntryView.forEach(product => {
-            if (product.catalogEntryTypeCode !== 'ProductBean') {
-              productListJson.productList.push(product);
-            }
-          });
-        } */
-        productListJson.productList = response.body.catalogEntryView;
+        productListJson.productList = response.body.catalogEntryView || [];
         callback(null, headers, productListJson);
       } else {
         callback(errorUtils.handleWCSError(response));
@@ -235,36 +227,6 @@ function getSkuPromotionData(headers, productListJson, callback) {
       productListJson.productList = productListArray;
       callback(null, productListJson);
     });
-
-    /* async.map(
-      productListJson.productList,
-      (product, cb) => {
-        let productDetail = product;
-        promotionUtil.getPromotionData(
-          productDetail.uniqueID,
-          headers,
-          (error, promotionData) => {
-            if (!error) {
-              productDetail = pdpfilter.productDetailSummary(productDetail); // Filter Product Details
-              productDetail.promotionData = pdpfilter.getSummaryPromotion(
-                promotionData,
-              ); // Add Promotion Data to Product Details
-              cb(null, productDetail);
-            } else {
-              cb(error);
-            }
-          },
-        );
-      },
-      (errors, results) => {
-        if (errors) {
-          callback(errors);
-          return;
-        }
-        productListJson.productList = results;
-        callback(null, productListJson);
-      },
-    ); */
   } else {
     callback(null, productListJson);
   }
@@ -470,10 +432,6 @@ function productListByPartNumbers(header, query, callback) {
     return;
   }
   const resJson = {};
-  /* const resJson = {
-    productCount: 0,
-    productList: [],
-  }; */
   const partNumbers = [];
   const reqHeader = header;
   reqHeader.promotionData = 'false';
@@ -496,7 +454,6 @@ function productListByPartNumbers(header, query, callback) {
         return;
       }
       if (productList && productList.length > 0) {
-        // resJson.productCount = productList.length;
         if (query.includepromotion === 'true') {
           const productIds = [];
           productList.forEach(product => {
@@ -516,10 +473,9 @@ function productListByPartNumbers(header, query, callback) {
                 productDetail.promotionData = pdpfilter.getSummaryPromotion(
                   promotionData[productDetail.uniqueID],
                 );
-                if(productDetail.partNumber){
+                if (productDetail.partNumber) {
                   resJson[productDetail.partNumber] = productDetail;
                 }
-                // resJson.productList.push(productDetail);
               });
               callback(null, resJson);
             },
@@ -528,10 +484,9 @@ function productListByPartNumbers(header, query, callback) {
           productList.forEach(product => {
             let productDetail = {};
             productDetail = pdpfilter.productDetailSummary(product);
-            if(productDetail.partNumber){
+            if (productDetail.partNumber) {
               resJson[productDetail.partNumber] = productDetail;
             }
-            // resJson.productList.push(productDetail);
           });
           callback(null, resJson);
         }

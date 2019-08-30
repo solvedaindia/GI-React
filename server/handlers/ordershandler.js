@@ -5,14 +5,11 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const productUtil = require('../utils/productutil');
-// const pincodeUtil = require('../utils/pincodeutil');
 
 const profileFilter = require('../filters/profilefilter');
 const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
-
-// const sampleOrderDetails = require('../configs/testjson').orderDetails;
 
 /**
  * Get Order List
@@ -46,36 +43,39 @@ function getOrdersList(headers, query, callback) {
     response => {
       if (response.status === 200) {
         const orderResponse = {
-          // currentOrderList: [],
-          // pastOrderList: [],
           orderList: [],
         };
         if (response.body.Order && response.body.Order.length > 0) {
           async.map(
             response.body.Order,
             (orderItem, cb) => {
-              const orderID = orderItem.orderId;
-              getOrderbyId(headers, orderID, (error, orderDetails) => {
-                if (error) {
-                  cb(error);
-                  return;
-                }
-                cb(null, orderDetails);
-              });
+              if (
+                orderItem.orderStatus === 'P' ||
+                orderItem.orderStatus === 'J' ||
+                orderItem.orderStatus === 'X'
+              ) {
+                cb(null, null);
+              } else {
+                const orderID = orderItem.orderId;
+                getOrderbyId(headers, orderID, (error, orderDetails) => {
+                  if (error) {
+                    cb(error);
+                    return;
+                  }
+                  cb(null, orderDetails);
+                });
+              }
             },
             (errors, results) => {
               if (errors) {
                 callback(errors);
                 return;
               }
-              orderResponse.orderList = results;
-              // results.forEach(order => {
-              //   if (order.orderStatus === 'completed') {
-              //     orderResponse.pastOrderList.push(order);
-              //   } else {
-              //     orderResponse.currentOrderList.push(order);
-              //   }
-              // });
+              results.forEach(result => {
+                if (result) {
+                  orderResponse.orderList.push(result);
+                }
+              });
               callback(null, orderResponse);
             },
           );
@@ -113,7 +113,11 @@ function getOrderbyId(headers, orderId, callback) {
     response => {
       if (response.status === 200) {
         let fetchOrderData = [];
-        if (response.body.orderStatus === 'P') {
+        if (
+          response.body.orderStatus === 'P' ||
+          response.body.orderStatus === 'J' ||
+          response.body.orderStatus === 'X'
+        ) {
           callback(errorutils.errorlist.order_not_found);
           return;
         }
@@ -175,7 +179,6 @@ function getOngoingOrders(headers, callback) {
         };
         if (response.body.OngoingOrder) {
           const orderID = response.body.OngoingOrder;
-          // const orderID = '61874079619';
 
           getOMSOrderDetails(headers, orderID, (error, orderDetails) => {
             if (error) {
@@ -242,7 +245,9 @@ function getOrderProductList(headers, orderItemArray, callback) {
                 orderItemArray[index].orderItemExtendAttribute.forEach(
                   attribute => {
                     if (attribute.attributeName === 'ExpectedDeliveryDate') {
-                      productDetail.deliveryDate = attribute.attributeValue;
+                      productDetail.deliveryDate = orderFilter.getFormattedDate(
+                        attribute.attributeValue,
+                      );
                     }
                   },
                 );
@@ -255,47 +260,6 @@ function getOrderProductList(headers, orderItemArray, callback) {
         callback(null, productListArray);
       },
     );
-    // const productListTask = [
-    //   productUtil.getProductListByIDs.bind(null, headers, productIDs),
-    //   pincodeUtil.getMultipleInventoryData.bind(null, headers, reqParamArray),
-    // ];
-
-    // async.parallel(productListTask, (err, result) => {
-    //   if (err) {
-    //     callback(err);
-    //   } else {
-    //     const productList = result[0];
-    //     const inventoryArray = result[1];
-    //     /* When Product Details Not Found */
-    //     if (productList.length === 0) {
-    //       inventoryArray.forEach(inventory => {
-    //         const productDetail = {};
-    //         productDetail.deliveryDate =
-    //           inventory.inventoryDetails.deliveryDate || '';
-    //         productListArray.push(productDetail);
-    //       });
-    //     } else {
-    //       productList.forEach(product => {
-    //         const productDetail = productDetailFilter.productDetailSummary(
-    //           product,
-    //         );
-    //         for (let index = 0; index < inventoryArray.length; index += 1) {
-    //           if (
-    //             productDetail.uniqueID ===
-    //             inventoryArray[index].inventoryDetails.uniqueID
-    //           ) {
-    //             // eslint-disable-next-line no-param-reassign
-    //             productDetail.deliveryDate =
-    //               inventoryArray[index].inventoryDetails.deliveryDate || '';
-    //             productListArray.push(productDetail);
-    //             break;
-    //           }
-    //         }
-    //       });
-    //     }
-    //     callback(null, productListArray);
-    //   }
-    // });
   } else {
     callback(null, productListArray);
   }
@@ -306,7 +270,9 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
   const orderData = wcsOrderDetails;
   const orderDetails = {
     orderID: '',
-    orderStatus: '',
+    orderStatus:
+      orderFilter.getOOBOrderStatus[wcsOrderDetails.orderStatus] ||
+      wcsOrderDetails.orderStatus,
     orderDate: '',
     paymentMethod: '',
     address: '',
@@ -314,13 +280,13 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
     orderTotalItems: 0,
     orderItems: [],
     orderSummary: {},
-    transferredToOMS: false,
-    // actualData: wcsOrderDetails,
+    wcsOrderStatus: wcsOrderDetails.orderStatus,
   };
   orderDetails.orderID = orderData.orderId;
   orderDetails.orderDate = orderFilter.getFormattedDate(orderData.placedDate);
   if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
-    orderDetails.paymentMethod = orderData.paymentInstruction[0].payMethodId;
+    orderDetails.paymentMethod =
+      orderData.paymentInstruction[0].payMethodId || '';
   }
   if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
     orderDetails.address = profileFilter.userAddress(
@@ -362,7 +328,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderTotalItems: 0,
     orderItems: [],
     orderSummary: {},
-    transferredToOMS: true,
+    wcsOrderStatus: wcsOrderDetails.orderStatus,
   };
   const wcsOrderID = orderData.orderId;
   getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
@@ -377,7 +343,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderDetails.orderDate =
       omsData.orderDate ||
       orderFilter.getFormattedDate(wcsOrderDetails.placedDate);
-    orderDetails.paymentMethod = omsData.paymentMethod;
+    orderDetails.paymentMethod = omsData.paymentMethod || '';
     orderDetails.address = omsData.address;
     orderDetails.orderStatus = omsData.orderStatus;
     orderDetails.invoices = omsData.invoices;
@@ -385,7 +351,6 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
       orderDetails.orderTotalItems = omsData.orderItems.length;
       orderDetails.orderItems = omsData.orderItems;
     }
-    // orderDetails.omsData = omsData.actualData;
     callback(null, orderDetails);
   });
 }
@@ -408,28 +373,26 @@ function getOMSOrderDetails(headers, orderID, callback) {
     null,
     '',
     response => {
+      const resJson = {
+        orderID: '',
+        orderTotal: '',
+        orderDate: '',
+        orderStatus: '',
+        paymentMethod: '',
+        invoices: [],
+        address: '',
+        orderItems: [],
+      };
       if (response.status === 200) {
-        const resJson = {
-          orderID: '',
-          orderTotal: '',
-          orderDate: '',
-          orderStatus: '',
-          paymentMethod: '',
-          invoices: [],
-          address: '',
-          orderItems: [],
-        };
-        // response.body = sampleOrderDetails;
         if (response.body.result.order) {
           const omsOrderDetail = response.body.result.order;
-          // resJson.orderID = omsOrderDetail.orderId;
           resJson.orderID = wcsOrderID;
           resJson.orderTotal = omsOrderDetail.orderTotal;
           resJson.orderDate = orderFilter.getFormattedDate(
             omsOrderDetail.orderDate,
           );
           resJson.orderStatus = omsOrderDetail.orderStatus;
-          resJson.paymentMethod = omsOrderDetail.paymentMethod;
+          resJson.paymentMethod = omsOrderDetail.paymentMethod || '';
           if (omsOrderDetail.invoices && omsOrderDetail.invoices.length > 0) {
             resJson.invoices = omsOrderDetail.invoices;
           }
@@ -474,7 +437,6 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
-                        // productDetail.orderItemStatus = orderItem.status;
                         productDetail.shipmentData = [];
                         if (
                           orderItem.shipments &&
@@ -495,8 +457,6 @@ function getOMSOrderDetails(headers, orderID, callback) {
                     }
                   });
                 }
-
-                // resJson.actualData = omsOrderDetail;
                 callback(null, resJson);
               },
             );
@@ -513,7 +473,8 @@ function getOMSOrderDetails(headers, orderID, callback) {
           callback(null, resJson);
         }
       } else {
-        callback(errorutils.handleWCSError(response));
+        callback(null, resJson);
+        // callback(errorutils.handleWCSError(response));
       }
     },
   );
@@ -598,14 +559,7 @@ function getInvoiceDetails(headers, params, callback) {
             lineDetails.LineDetail.forEach(lineItem => {
               const lineItemJSON = {
                 itemCode: lineItem.ItemID,
-                itemDesc: lineItem.OrderLine.Item.ItemShortDesc,
                 salesOrderNo: invoiceJson.Shipment.Extn.ExtnLNOrderNo,
-                pos:
-                  invoiceJson.Shipment.ShipmentLines.ShipmentLine[0].Extn
-                    .ExtnLNLinePosition,
-                seq:
-                  invoiceJson.Shipment.ShipmentLines.ShipmentLine[0].Extn
-                    .ExtnLNScheduleNo,
                 hsnCode: lineItem.InvoiceLineReference,
                 quantity: lineItem.Quantity,
                 quantityUOM: lineItem.UnitOfMeasure,
@@ -614,12 +568,30 @@ function getInvoiceDetails(headers, params, callback) {
                 weightUOM: lineItem.Extn.ExtnWeightUOM,
                 itemPrice: lineItem.UnitPrice,
                 priceUnit: lineItem.Extn.ExtnPriceUnit,
-                discountPercentage:
-                  lineItem.LineCharges.LineCharge[0].Reference,
-                discountAmount:
-                  lineItem.LineCharges.LineCharge[0].ChargePerLine,
                 taxableValue: lineItem.Extn.ExtnOrdLineTaxableVal,
               };
+              if (
+                invoiceJson.Shipment.ShipmentLines.ShipmentLine &&
+                invoiceJson.Shipment.ShipmentLines.ShipmentLine.length > 0
+              ) {
+                lineItemJSON.pos =
+                  invoiceJson.Shipment.ShipmentLines.ShipmentLine[0].Extn.ExtnLNLinePosition;
+                lineItemJSON.seq =
+                  invoiceJson.Shipment.ShipmentLines.ShipmentLine[0].Extn.ExtnLNScheduleNo;
+              }
+              if (lineItem.OrderLine && lineItem.OrderLine.Item) {
+                lineItemJSON.itemDesc =
+                  lineItem.OrderLine.Item.ItemShortDesc || '';
+              }
+              if (
+                lineItem.LineCharges.LineCharge &&
+                lineItem.LineCharges.LineCharge.length > 0
+              ) {
+                lineItemJSON.discountPercentage =
+                  lineItem.LineCharges.LineCharge[0].Reference;
+                lineItemJSON.discountAmount =
+                  lineItem.LineCharges.LineCharge[0].ChargePerLine;
+              }
               if (
                 lineItem.LineTaxes.LineTax &&
                 lineItem.LineTaxes.LineTax.length > 0

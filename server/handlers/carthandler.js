@@ -16,6 +16,7 @@ const cartProfileName = 'IBM_Details';
 const cartCalculationUsage = '-1,-2,-4,-5,-7';
 const cartCalculationUsageAddAddress = '-2,-4,-7';
 const cartCalculateOrder = '1';
+const emptyCartMessage = 'Cart is Empty';
 
 /**
  * Fetch Mini Cart Details.
@@ -94,7 +95,6 @@ module.exports.fetchCart = function fetchCartMain(headers, callback) {
   }
   const fetchCartData = [getCartData.bind(null, headers), getCompleteCartData];
 
-  // const fetchCartData = [getCartData.bind(null, headers)];
   async.waterfall(fetchCartData, (err, results) => {
     if (err) {
       callback(err);
@@ -152,18 +152,6 @@ module.exports.addToCart = function addCart(params, headers, callback) {
       }
     },
   );
-
-  /*  const addToCartTaskCMD = [addToCart.bind(null, headers, reqBody)];
-
-  async.waterfall(addToCartTaskCMD, (err, results) => {
-    if (err) {
-      logger.error('Error', JSON.stringify(err));
-      callback(err);
-    } else {
-      logger.debug('Got all the origin resposes');
-      callback(null, results);
-    }
-  }); */
 };
 
 /**
@@ -188,9 +176,7 @@ module.exports.emptyCart = function emptyCart(headers, callback) {
     null,
     response => {
       if (response.status === 204) {
-        const resp = {
-          message: 'Cart is Empty',
-        };
+        const resp = { emptyCartMessage };
         callback(null, resp);
       } else {
         callback(errorutils.handleWCSError(response));
@@ -300,15 +286,7 @@ function getCartData(headers, callback) {
     headers.storeId,
   )}/@self?profileName=${cartProfileName}`;
   const reqHeader = headerutil.getWCSHeaders(headers);
-  /* 
-  async function name(params,cb) {
-    try {
-      var res = origin.getresp(url,method);
-    } catch (error) {
-      throw err;
-    }
-  }
- */
+
   origin.getResponse(
     'GET',
     cartUrl,
@@ -319,7 +297,6 @@ function getCartData(headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        logger.debug('Successfully Fetched Cart Data');
         callback(null, response.body, headers);
       } else if (response.status === 404) {
         callback(null, getEmptyRecord(), headers);
@@ -351,10 +328,9 @@ function getMiniCartProductDetails(cartData, headers, callback) {
     callback(null, cartData, productListArray, headers);
   }
 }
+
 /* Merge Cart Data and Product Details to Get MiniCart Data */
 function mergeMiniCart(cartData, productList, headers, callback) {
-  // callback(null, cartFilter.minicart(cartData, productList));
-
   const minicartJson = {
     orderID: '',
     cartTotalQuantity: 0,
@@ -441,7 +417,6 @@ function getCompleteCartData(cartData, headers, callback) {
     cartTotalItems: 0,
     cartItems: [],
     promotionCode: [],
-    // actualCartData: cartData,
   };
   if (cartData.orderItem && cartData.orderItem.length > 0) {
     cartDetails.orderSummary = cartFilter.getOrderSummary(cartData);
@@ -604,7 +579,6 @@ module.exports.getShipModes = getShipModes;
 function getShipModes(headers, callback) {
   logger.debug('Get Shipmodes');
 
-  // const reqHeader = headerutil.getWCSHeaders(headers);
   const originUrl = `${constants.cartData.replace(
     '{{storeId}}',
     headers.storeId,

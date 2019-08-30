@@ -8,7 +8,7 @@ const espotNames = require('../configs/espotnames');
 const espotHandler = require('./espotshandler');
 
 const bestSellingTitle = 'Best Selling Products';
-const recentlyViewedTitle = 'Recently Viewed Products';
+const recentlyViewedTitle = 'Recently Viewed';
 
 /**
  * Add Product to Recently Viewed
@@ -50,10 +50,8 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
     response => {
       if (response.status === 200) {
         logger.debug('Added to recently viewed');
-        // callback(null, response.body);
       } else {
         logger.debug('Error while Calling Add to Recently Viewed');
-        // callback(errorutils.handleWCSError(response));
       }
     },
   );

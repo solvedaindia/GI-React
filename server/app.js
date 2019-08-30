@@ -15,15 +15,10 @@ const storeInfo = require('./utils/storeinfo');
 require('dotenv').config();
 
 const port = process.env.SERVER_PORT || '8002';
-
 global.storeDetails = {};
 
 // Cron JOB
 require('./utils/cronjobs').startStoreInfoCron();
-
-// const csrf = require('csurf');
-// const session = require('express-session');
-// const errorHandler = require('errorhandler');
 
 const app = express();
 
@@ -32,10 +27,6 @@ app.use(
     origin: '*',
   }),
 );
-
-// app.use(require('morgan')('dev'));
-// app.disable('x-powered-by');
-// app.use(csrf());
 
 // parse application/x-www-form-urlencoded
 app.use(
@@ -53,15 +44,10 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(helmet());
-/* app.use(helmet.noSniff());
-app.use(helmet.ieNoOpen());
-app.use(helmet.xssFilter());
-app.use(helmet.hidePoweredBy()); */
 
 app.use(responseTime());
 const stats = new StatsD();
 stats.socket.on('error', error => {
-  // console.log('error', error);
   logger.info(error.stack);
 });
 
@@ -89,9 +75,6 @@ app.use(
   }),
 );
 
-// db instance connection
-// require('./utils/db');
-
 app.use(contextService.middleware('apirequest'));
 
 app.use((req, res, next) => {
@@ -106,7 +89,7 @@ app.use((req, res, next) => {
 
 /* To get StoreId and CatalogID on basis of Store identifier */
 app.use((req, res, next) => {
-  const storeIdentifier = req.headers.store_id;
+  const storeIdentifier = req.headers.store_id || 'GodrejInterioESite';
   if (storeIdentifier) {
     if (
       global.storeDetails[storeIdentifier] &&
@@ -117,7 +100,7 @@ app.use((req, res, next) => {
       req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
       next();
     } else {
-      storeInfo.getStoreDetails(req.headers, (error, result) => {
+      storeInfo.getStoreDetails(storeIdentifier, (error, result) => {
         if (error) {
           next(error);
         } else {
@@ -131,29 +114,8 @@ app.use((req, res, next) => {
     }
   } else {
     next();
-    // const errorMessage = {
-    //   status: 'failure',
-    //   error: errorUtils.errorlist.storeid_missing,
-    // };
-    // logger.error(JSON.stringify(errorMessage));
-    // res.status(400).send(errorMessage);
   }
 });
-
-/* app.use((req, res, next) => {
-  if (req.headers.store_id) {
-    req.headers.storeId = req.headers.store_id;
-    req.headers.catalogId = req.headers.catalog_id || 10051;
-    next();
-  } else {
-    const errorMessage = {
-      status: 'failure',
-      error: errorUtils.errorlist.storeid_missing,
-    };
-    logger.error(JSON.stringify(errorMessage));
-    res.status(400).send(errorMessage);
-  }
-}); */
 
 // To handle secure API's and check token status
 app.use((req, res, next) => {
@@ -205,10 +167,6 @@ const options = {
   key: fs.readFileSync('server.key'),
   cert: fs.readFileSync('server.cert'),
 };
-
-/* app.listen(port, () =>
-  logger.info(`Server started on http://localhost:${port}`),
-); */
 
 const server = https.createServer(options, app);
 server.listen(port, () =>

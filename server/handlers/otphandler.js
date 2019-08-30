@@ -46,7 +46,10 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        const res = {
+          otpCount: response.body.otpCount,
+        };
+        callback(null, res);
       } else {
         logger.debug('Error while calling Generate Otp API');
         if (response.body.errors && response.body.errors.length > 0) {

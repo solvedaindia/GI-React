@@ -5,6 +5,8 @@
 module.exports.content = function espotContentFilter(espotBody) {
   const resJson = {};
   if (
+    espotBody &&
+    espotBody !== '' &&
     espotBody.MarketingSpotData[0] &&
     espotBody.MarketingSpotData[0].baseMarketingSpotActivityData &&
     espotBody.MarketingSpotData[0].baseMarketingSpotActivityData.length > 0
@@ -34,6 +36,8 @@ module.exports.content = function espotContentFilter(espotBody) {
 module.exports.espotContent = function espotContentFilter(espotBody) {
   let resJson = {};
   if (
+    espotBody &&
+    espotBody !== '' &&
     espotBody.MarketingSpotData[0] &&
     espotBody.MarketingSpotData[0].baseMarketingSpotActivityData &&
     espotBody.MarketingSpotData[0].baseMarketingSpotActivityData.length > 0

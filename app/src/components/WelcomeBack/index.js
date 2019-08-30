@@ -229,7 +229,7 @@ class WelcomeBack extends React.Component {
                   <span className="signin-text">Sign in with Facebook</span>
                 </button>
               )}
-              autoLoad
+              // autoLoad
               fields="name,email,picture"
               cssClass="btn-white"
               onClick={this.facebookOnClick.bind(this)}
