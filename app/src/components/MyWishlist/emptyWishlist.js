@@ -10,7 +10,7 @@ class EmptyWishlist extends React.Component {
     return (
       <div className="emptyWishlist">
         <div className="heading-Wishlist">Your Wishlist is empty </div>
-        <div className="subtext">Start addinng items to your wishlist</div>
+        <div className="subtext">Start adding items to your wishlist</div>
       </div>
     );
   }

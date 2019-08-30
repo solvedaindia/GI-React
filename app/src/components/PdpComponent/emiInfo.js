@@ -137,7 +137,8 @@ class EmiInfo extends React.Component {
 												<td colSpan="4">
 													<table className="tableHeading table" width="100%">
 														<tr>
-														{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}														
+														{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}										
+														
 														</tr>
 													</table>
 												</td>
