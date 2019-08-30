@@ -34,7 +34,6 @@ export class KitchenContainer extends React.Component {
             <ContentEspot espotName = { 'GI_KITCHEN_TYPES' } />
             <ContentEspot espotName = { 'GI_DREAM_KITCHEN_STEPS' } />
             <ContentEspot espotName = { 'GI_KITCHEN_LAYOUTS' } />
-            <AlwaysRemember/>
             <WhatGoes />
             <KitchenHall />
             {/* <BeforeAfter /> */}
