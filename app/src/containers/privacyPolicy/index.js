@@ -11,7 +11,7 @@ export class PrivacyPolicy extends React.Component {
 
   render() {
     return (
-      <div className='staticpages privacyPolicy'>
+      <div className='staticpages privacy-Policy'>
           <ContentEspot espotName={ 'GI_Privacy_Policy_Information' } />
           <ContentEspot espotName={ 'GI_Privacy_Policy_ThirdParty_Information' } />
 

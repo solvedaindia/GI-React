@@ -61,6 +61,7 @@ import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
+import SearchContainer from '../Search Container/searchContainer';
 import OrderConformtion from '../orderConfirmation/index'
 // import CartDetail from '../CartContainer/cartContainer';
 import CartDetail from '../CartContainer/cartContainer';
