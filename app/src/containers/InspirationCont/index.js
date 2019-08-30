@@ -27,8 +27,7 @@ export class Inspiration extends React.Component {
         <LookbookThemeCarousel />
         <SummerData/>
         <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />
-
-        <ContentEspot espotName={ 'GI_LOOKBOOK_5' } />
+          <ContentEspot espotName={ 'GI_LOOKBOOK_5' } />
         <ContentEspot espotName={ 'GI_LOOKBOOK_6' } />
       </div>
     );
