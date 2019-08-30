@@ -11,6 +11,7 @@ import SubCategory from '../../components/ClpComponent/subCategory';
 import BestSeller from '../../components/BestSelling/bestSelling';
 import CLPReadMore from '../../components/ClpComponent/clpReadMore';
 import ContentEspot from '../../components/Primitives/staticContent';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 // import Solution from '../../components/ClpComponent/solution';
 
 export class CLPContainer extends React.Component {
@@ -30,6 +31,7 @@ export class CLPContainer extends React.Component {
         <div className="slider">
           <CLPFullBanner {...this.props.match.params}/>
 		    </div>
+          <Breadcrumb {...this.props.match.params}/>
           <SubCategory {...this.props.match.params}/>
           <LivingTheme {...this.props.match.params}/>
           <BestSeller {...this.props.match.params}/>

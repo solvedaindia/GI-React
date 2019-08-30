@@ -1,0 +1,12 @@
+@import './variable';
+
+.breadCrumb {
+    @include container-width;
+    margin: auto;
+    .links {
+        display: inline-block;
+        color: $black;
+        font-size: $base*1.25;
+        text-transform: capitalize;
+    }
+}

@@ -5,7 +5,7 @@ import { Col, Form, FormControl, Button } from 'react-bootstrap';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/static-pages/aboutUs.scss';
 import  '../../../public/styles/staticpages/staticpages.scss';
-
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import apiManager from '../../utils/apiManager';
 import {isMobile} from '../../utils/utilityManager';
 import {
@@ -141,24 +141,24 @@ render() {
     let views = this.getButtons(this.state.data);
     return (
     <div className='staticpage about-us'>
-
+      <Breadcrumb {...this.props.match.params} staticName = {'About Us'}/>
       <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
       <ContentEspot espotName={ 'GI_ABOUT_US_2' } />
-      <a id='ourProcess'>
+      <div id='ourProcess'>
       <OurProcess />
-      </a>
+      </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_4' } />
-      <a id='greenInitiatives'>
+      <div id='greenInitiatives'>
       <GreenInitiatives />
-      </a>
+      </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_6' } />
-      <a id='careers' >
+      <div id='careers' >
       <ContentEspot espotName={ 'GI_CAREERS' } />
-      </a>
+      </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
-      <a id='mediaPress'>
+      <div id='mediaPress'>
       <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
-      </a>
+      </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_10' } />
     </div>
     );

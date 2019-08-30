@@ -14,6 +14,7 @@ import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ContentEspot from '../../components/Primitives/staticContent';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import  '../../../public/styles/staticpages/staticpages.scss';
 
 export class KitchenContainer extends React.Component {
@@ -28,6 +29,7 @@ export class KitchenContainer extends React.Component {
   render() {
     return (
         <section className="staticpage kitchenContainer">
+            <Breadcrumb {...this.props.match.params} staticName={ 'Kitchen' }/>
             <div className="slider">
                 <KitchenBanner />
             </div>

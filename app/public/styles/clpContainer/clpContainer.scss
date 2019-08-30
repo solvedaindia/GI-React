@@ -61,6 +61,8 @@
                         font-family: $font-medium;
                     }
                     .price {
+                        padding: 0 $base;
+                        font-family: $font-medium;
                         color: $ceruleanblue;
                         font-size: $base*1.75; 
                     }
