@@ -5,6 +5,17 @@
     height: auto;
     background-color: $colorwhite;
     .inspirationSlider{
+      .slick-prev {
+        left: -30px;
+    }
+    .slick-next {
+        right: -30px;;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
       .slick-slide{
         .sliderImageSize{
           width: 126px;
