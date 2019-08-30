@@ -146,7 +146,7 @@ class UserAccInfo extends React.Component {
       )),
         (this.state.loginStatus = (
           <a className="dropDown" onClick={this.onLogoutClick.bind(this)}>
-            Logout
+            Sign Out
           </a>
         ));
     } else {
