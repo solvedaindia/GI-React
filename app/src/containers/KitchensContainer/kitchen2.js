@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../../../public/styles/static-pages/chefkitchen.scss';
-import  '../../../public/styles/staticpages/staticpages.scss';
+import  '../../../public/styles/staticpages/staticPages.scss';
 ;
 import ContentEspot from '../../components/Primitives/staticContent';
 import ChefKitchenBanner from '../../components/KitchensComp/chefKitchenBanner';
@@ -36,9 +36,8 @@ render(){
 return (
 <div className="staticpage chefKitchen">
     <ChefKitchenBanner />
-    <ContentEspot espotName = { 'GI__STEEL_KITCHEN_BENEFITS' } />
-    <SteelKitchenTypes />
-    <ContentEspot espotName = { 'GI__STEEL_YOUR_KITCHEN_YOUR_WAY' } />
+    <ContentEspot espotName = { 'GI_STEEL_KITCHEN_BENEFITS' } />
+    <ContentEspot espotName = { 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
  
   <div className="formContainer">
     <div className="container">

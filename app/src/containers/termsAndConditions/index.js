@@ -1,7 +1,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/termsconditions.scss';
-import  '../../../public/styles/staticpages/staticpages.scss';
+import  '../../../public/styles/staticpages/staticPages.scss';
 
 import ContentEspot from '../../components/Primitives/staticContent';
 

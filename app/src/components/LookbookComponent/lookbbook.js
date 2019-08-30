@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import apiManager from '../../utils/apiManager';
+
 import '../../../public/styles/static-pages/inspiration.scss'
+import {
+  lookBookSummerSparkAPI,
+} from '../../../public/constants/constants';
 const prevArrowImg = (
   <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
 );
@@ -11,26 +16,49 @@ const nextArrowImg = (
 export default class Lookbook extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="Bitmap" src="https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner3.jpg" alt="rectangle"/>
-    const img2 = <img className="Bitmap" src="https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner3.jpg" alt="rectangle"/>
-    const img3 = <img className="Bitmap" src="https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner3.jpg" alt="rectangle"/>
-    const img4 = <img className="Bitmap" src='https://203.110.85.50/imagestore/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner3.jpg' alt="rectangle"/>
   
 
     this.state = {
-      slides: [img1, img2, img3, img4]
+      slides: [],
+      lookSlider: null,
+      isLoading: false,
+      error: null,
+      title: '',
+      description:'',
     };
-    this.click = this.click.bind(this);
   }
-  click() {
-    const { slides } = this.state;
-    this.setState({
-      slides:
-        slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
-    });
+
+  
+  getLookBookData() {
+    apiManager
+      .get(lookBookSummerSparkAPI)
+      .then(response => {
+        console.log('response of kitchen hall', response)
+        const {data} = response || {}
+        this.setState({
+          lookSlider: data && data.data.bannerList,
+          title: data && data.data.title,
+          description:data && data.data.desc,
+          isLoading: false,
+        });
+        console.log('hall Data', data.data.desc);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('SLider Data Error');
+      });
+    console.log('SLider Data Error');
+  }
+
+  componentDidMount() {
+    this.getLookBookData();
   }
   render() {
-    
+    const { lookSlider, title, description } = this.state;
+
     const settings = {
       dots: false,
       infinite: true,
@@ -43,8 +71,9 @@ export default class Lookbook extends Component {
     };
     return (
       <>
-        <h1 className="title">Summer Spark</h1>
-               <p className="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam urna, ullamcorper sit amet arcu sed, viverra<br/> malesuada mi. Nam rutrum vulputate lectus vel tincidunt.  Curabitur turpis augue, accumsan ut turpis at, finibus<br/> vulputate augue. Suspendisse ultrices eget ipsum quis dapibus. Aliquam turpis erat, viverra quis est sed.</p>
+
+        <h1 className="title">{this.state.title}</h1>
+               <p className="paragraph">{this.state.description}</p>
       <div className='container'>
         <Slider {...settings}>
           {this.state.slides.map(function(slide) {

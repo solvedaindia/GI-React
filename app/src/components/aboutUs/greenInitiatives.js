@@ -9,24 +9,16 @@ import apiManager from '../../utils/apiManager';
 export default class GreenInitiatives extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
-    const img2 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
-    const img3 = <img className="greenImage" src={`${imagePrefix}/staticImages/aboutUs/greenguard.jpg`} alt=""/>
     
 
     this.state = {
-     // slides: [img1, img2, img3]
      title:'',
      slides: []
     };
     this.click = this.click.bind(this);
   }
   click() {
-    // const { slides } = this.state;
-    // this.setState({
-    //   slides:
-    //     slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
-    // });
+    
   }
 
   componentDidMount(){
@@ -102,7 +94,6 @@ export default class GreenInitiatives extends Component {
               <div key={slide}>               
                 <div className='row'>
                   <div className='col-md-4'>
-                    {console.log("ali ahmad",slide)}
                     <a href={slide.onClickUrl} >
                       <img className="greenImage" src={imagePrefix + slide.imageSrc} alt=""/>
                     </a>
@@ -111,11 +102,8 @@ export default class GreenInitiatives extends Component {
                     <h2 className='ULcontent'>{slide.content_title}</h2>
                   <p className='ULparagraph'>{slide.desc}</p>
                   </div>
-
                 </div>
-                
-               
-              </div>
+               </div>
             );
           })}
         </Slider>
