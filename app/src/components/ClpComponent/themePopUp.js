@@ -25,7 +25,7 @@ class ThemeData extends React.Component {
                 </figure>
                 <div className='prodDetails'>
                     <h2 className='prodNAme'>{itemDetail.productName}</h2>
-                    <p className='price'>{itemDetail.offerPrice}</p>
+                    <p className='price'>₹{itemDetail.offerPrice}</p>
                     <Link to={routePath}><p className='link'>View Details</p></Link>
                 </div>
             </div>

@@ -1,34 +1,58 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/inspirationDetails.scss'
+import apiManager from '../../utils/apiManager';
+
+import '../../../public/styles/static-pages/inspiration.scss'
 import {
-  imagePrefix,
+  recommendedAPI,
 } from '../../../public/constants/constants';
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
-    const img1 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`} alt=""/>
-    const img2 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`} alt=""/>
-    const img3 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`} alt=""/>
-    const img4 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`} alt=""/>
-    const img5 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`}/>
-    const img6 = <img className="recImages" src={`${imagePrefix}/staticImages/kitchens/typekitchfirst.png`} alt=""/>
 
     this.state = {
-      slides: [img1, img2, img3, img4, img5, img6]
+      slides: [],
+      recommendedSlider: null,
+      isLoading: false,
+      error: null,
+      title: '',
+      description:'',
     };
-    this.click = this.click.bind(this);
   }
-  click() {
-    const { slides } = this.state;
-    this.setState({
-      slides:
-        slides.length === 6 ? [img1, img2, img3, img4, img5, img6, "", "", ""] : [img1, img2, img3, img4, img5, img6]
-    });
+
+  getRecommendedData() {
+    apiManager
+      .get(recommendedAPI)
+      .then(response => {
+        console.log('response of kitchen hall', response)
+        const {data} = response || {}
+        this.setState({
+          recommendedSlider: data && data.data.bannerList,
+          title: data && data.data.title,
+          description:data && data.data.desc,
+          isLoading: false,
+        });
+        console.log('hall Data', data.data.desc);
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+        console.log('SLider Data Error');
+      });
+    console.log('SLider Data Error');
+  }
+
+  componentDidMount() {
+    this.getRecommendedData();
   }
 
 
   render() {
+    const { recommendedSlider, title, description } = this.state;
+
     const settings = {
       dots: false,
       infinite: true,
@@ -38,23 +62,20 @@ export default class Recommended extends Component {
     
     };
     return (
-      <div className="container recommendedLookbook">
-        <h2 className="recommendedTitle">Recommended Lookbooks</h2>
-       
-
+      recommendedSlider && 
+      <div className="hallOfFame">
+        <h2 className="title">{title}</h2>
+        <p className="desc">{description}</p>
         <Slider {...settings}>
-          {this.state.slides.map(function(slide) {
-            return (
-              <div key={slide}>
-                {slide} <div className="crouseltextarea">
-                  <h2 className="heading">Talking Textures</h2>
-                  <p className="subText">The new way to style velvet in your living room lorem<br/>ipsum</p></div>
-              </div>
-            );
-          })}
-        </Slider>
+          {!!recommendedSlider &&
+            recommendedSlider.map((sliderData, index) => (
+              <a href={sliderData.onClickUrl} key={index} className='slides'>
+                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+               </a>
 
-        </div>
+            ))}
+        </Slider>
+      </div>
     );
   }
 }

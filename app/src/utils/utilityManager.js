@@ -83,10 +83,10 @@ export function getReleventReduxState(state, reducerName) {
  */
 export function fetchReleventSortingValue(value) {
     console.log('ttttt', value);
-    if (value === 'Price Low to High') {
+    if (value === 'Price - Low to High') {
         return 3;
     }
-    if (value === 'Price High to Low') {
+    if (value === 'Price - High to Low') {
         return 4;
     }
     if (value === 'New Arrival') {
@@ -99,10 +99,10 @@ export function fetchReleventSortingValue(value) {
 export function fetchReleventSortingValueByIndex(index) {
     console.log('it index --- ', index);
     if (parseInt(index) === 3) {
-        return 'Price Low to High';
+        return 'Price - Low to High';
     }
     if (parseInt(index) === 4) {
-        return 'Price High to Low';
+        return 'Price - High to Low';
     }
     if (parseInt(index) === 5) {
         return 'New Arrival';

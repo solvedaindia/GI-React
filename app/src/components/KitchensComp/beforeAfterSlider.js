@@ -7,8 +7,6 @@ import  '../../../public/styles/static-pages/kitchens.scss'
 import {
   beforeAfterApi,
   imagePrefix,
-  storeId,
-  accessToken,
 } from '../../../public/constants/constants';
 class BeforeAfter extends Component {
   constructor(props) {

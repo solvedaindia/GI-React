@@ -48,7 +48,6 @@ export class SubCategory extends React.Component {
     this.getSubCategories(this.props.id);
   }
 
-
   render() {
     const { subCatData } = this.state;
     const settings = {

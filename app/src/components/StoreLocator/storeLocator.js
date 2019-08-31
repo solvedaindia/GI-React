@@ -40,7 +40,7 @@ class StoreLocator extends React.Component {
             allstoreData: null,
             isOpen: false,
             Infokey: null,
-            filteredSingleStore: null    
+            filteredSingleStore: null
         };
 
         this.settings = {
@@ -98,21 +98,28 @@ class StoreLocator extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.history.location.state) {
+            let storeNameInput =  document.getElementById("city").value;
             if (nextProps.history.location.state.storeName){ 
                 this.getLatAndLong(nextProps.history.location.state.storeName);
-                let commingCity = nextProps.history.location.state.storeName;
-                let enterCity =  document.getElementById("city").value;
-                if(commingCity!=enterCity)
+                if(storeNameInput!=nextProps.history.location.state.storeName)
                 {
-                    document.getElementById("city").value=""
+                    document.getElementById("city").value="";
                 }
-                //document.getElementById("city").value="";
             } else if (nextProps.history.location.state.pincode) {
+                if(storeNameInput!=nextProps.history.location.state.pincode)
+                {
+                    document.getElementById("city").value="";
+                }
                 this.getLatAndLong(nextProps.history.location.state.pincode);
             } else {
+                if(storeNameInput!=appCookie.get('pincode'))
+                {
+                    document.getElementById("city").value="";
+                }
                 this.getLatAndLong(appCookie.get('pincode'));
             }
             this.removeActiveClassFromFilter();
+
             window.scrollTo(0, 0);
 
         }
@@ -504,7 +511,7 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/${this.state.defaultLat},${this.state.defaultLng}/${physicalData.latitude},${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
                                                             Get Directions
                                                         </Link>
                                                         {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
@@ -539,7 +546,7 @@ class StoreLocator extends React.Component {
                                                     </div>
                                                     }
                                                     <div className="Storewrapper">
-                                                        <h2 className="storeName">{physicalData.storeName}</h2>
+                                                        <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                         { this.props.history.location.state.pincode && 
                                                         <>
                                                             <div className="distance">{data} Km</div>
@@ -552,7 +559,7 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/${this.state.defaultLat},${this.state.defaultLng}/${physicalData.latitude},${physicalData.longitude}`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
                                                             Get Directions
                                                         </Link>
                                                         {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>

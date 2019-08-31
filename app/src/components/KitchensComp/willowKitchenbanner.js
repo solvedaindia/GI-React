@@ -5,7 +5,7 @@ import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/chefkitchen.scss';
 
 import {
-  kitchenBannerAPI,
+  WillowKitchenBannerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -25,7 +25,7 @@ class WillowKitchenBanner extends React.Component {
 
   getKitchensBannerData() {
     apiManager
-      .get(kitchenBannerAPI)
+      .get(WillowKitchenBannerAPI)
       .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}

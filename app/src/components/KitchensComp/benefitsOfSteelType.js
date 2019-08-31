@@ -3,7 +3,6 @@ import '../../../public/styles/static-pages/chefkitchen.scss'
 
 
 import {
-  kitchenBannerAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 

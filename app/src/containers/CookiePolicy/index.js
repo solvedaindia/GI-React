@@ -2,7 +2,7 @@
 import React from 'react';
 import  '../../../public/styles/static-pages/cookie.scss'
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticpages.scss';
+import  '../../../public/styles/staticpages/staticPages.scss';
 
 
 export class CookiePolicy extends React.Component {
