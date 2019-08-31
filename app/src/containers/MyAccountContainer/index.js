@@ -37,14 +37,14 @@ export class MyAccountContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (getCookie('isLoggedIn') !== 'true') {
+    if (getCookie('isLoggedIn') !== 'true' && !this.props.location.state) {
       this.props.history.push('/')
       return;
     }
   }
 
   componentWillReceiveProps(nextProp) {
-    if (getCookie('isLoggedIn') !== 'true') {
+    if (getCookie('isLoggedIn') !== 'true' && !this.props.location.state) {
       this.props.history.push('/')
       return;
     }
@@ -71,7 +71,19 @@ export class MyAccountContainer extends React.Component {
 
   render() {
     console.log('In My Account ---- ', this.props);
-    const redirectedFrom = this.props.location.state.from;
+    var redirectedFrom;
+    if (this.props.location.state != undefined) {
+      redirectedFrom = this.props.location.state.from;
+    }
+    var guestOrderData;
+    if (redirectedFrom) {
+      guestOrderData = this.props.location.state.orderData;
+    }
+    var isGuestTrackOrder;
+    if (this.props.location.state != undefined) {
+      isGuestTrackOrder = this.props.location.state.isGuestTrackOrder;
+    }
+    
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
         <ul className="nav nav-tabs">
@@ -113,10 +125,10 @@ export class MyAccountContainer extends React.Component {
       <div className="MyAccount">
         <div className="container">
           <div className="row">
-            {this.props.location.state.isGuestTrackOrder ? null : navigationBar}
+            {isGuestTrackOrder ? null : navigationBar}
             <div
               className={
-                this.props.location.state.isGuestTrackOrder
+                isGuestTrackOrder
                   ? `col-xs-12 col-sm-12 col-md-12`
                   : `col-xs-12 col-sm-9 col-md-9`
               }
@@ -130,7 +142,8 @@ export class MyAccountContainer extends React.Component {
                   <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />
                 </div>
                 <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v" >
-                  {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /></div> : <MyOrder isGuestTrackOrderPro={this.props.location.state.isGuestTrackOrder} /> }
+                  {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /></div> : 
+                  <MyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /> }
                 </div>
                 <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v">
                   <ManageAddress />

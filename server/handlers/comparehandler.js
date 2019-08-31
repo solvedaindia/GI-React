@@ -16,32 +16,14 @@ const emiUtils = require('../utils/emiutil');
 module.exports.getCompareData = function getCompareData(req, callback) {
   logger.debug('Inside the Compare Data Method');
   if (!req.query.ids) {
-    logger.debug('GET PDP Data :: Invalid Params');
+    logger.debug('GET Compare Page Data :: Invalid Params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
   const reqHeaders = req.headers;
   const ids = req.query.ids.split(',');
 
-  getCompareProducts(reqHeaders, ids, (err, result) => {
-    if (err) {
-      logger.debug('Error in Compare Data API');
-      callback(errorUtils.handleWCSError(err));
-    } else {
-      logger.debug('Got all the origin responses for Product Detail');
-      callback(null, sortJsonOrder(result, ids));
-    }
-  });
-};
-
-/**
- * Function to return compare data for all productIds
- * @param {*} headers
- * @param {*} productIDs
- * @param {*} callback
- */
-function getCompareProducts(headers, productIDs, callback) {
-  productUtil.getProductListByIDs(headers, productIDs, (err, result) => {
+  productUtil.getProductListByIDs(reqHeaders, ids, (err, result) => {
     if (err) {
       callback(errorUtils.handleWCSError(err));
     } else {
@@ -52,13 +34,17 @@ function getCompareProducts(headers, productIDs, callback) {
         } else if (element.catalogEntryTypeCode === 'BundleBean') {
           const bundleCompareSummary = bundleCompareDataSummary(element);
           const promise = new Promise((resolve, reject) => {
-            getEmiValue(headers, bundleCompareSummary, (error, endResult) => {
-              if (error) {
-                reject(error);
-              } else {
-                resolve(endResult);
-              }
-            });
+            getEmiValue(
+              reqHeaders,
+              bundleCompareSummary,
+              (error, endResult) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve(endResult);
+                }
+              },
+            );
           });
           attPromises.push(promise);
         } else if (element.catalogEntryTypeCode === 'ProductBean') {
@@ -66,7 +52,7 @@ function getCompareProducts(headers, productIDs, callback) {
         } else if (element.catalogEntryTypeCode === 'ItemBean') {
           const promise = new Promise((resolve, reject) => {
             productByProductID(
-              headers,
+              reqHeaders,
               element.parentCatalogEntryID,
               element.uniqueID,
               (error, endResult) => {
@@ -83,7 +69,7 @@ function getCompareProducts(headers, productIDs, callback) {
       });
       Promise.all(attPromises)
         .then(resu => {
-          callback(null, resu);
+          callback(null, sortJsonOrder(resu, ids));
         })
         .catch(error => {
           logger.debug('Error in GET COMPARE PRODUCTS API', error);
@@ -91,7 +77,7 @@ function getCompareProducts(headers, productIDs, callback) {
         });
     }
   });
-}
+};
 
 /**
  * Function to return compare data summary for bundles
@@ -116,7 +102,7 @@ function bundleCompareDataSummary(element) {
     const Price = bundlefilter.bundleComponentsSummary(element, '');
     const productSummary = productDetailFilter.productDetailSummary(element);
     const descAttr = productDetailFilter.getDescriptiveAttributes(element);
-    productSummary.weight = descAttr.weight;
+    productSummary.width = descAttr.width;
     productSummary.height = descAttr.height;
     productSummary.depth = descAttr.depth;
     productSummary.actualPrice = Price.actualPrice;
@@ -150,7 +136,7 @@ function bundleCompareDataSummary(element) {
           );
           // eslint-disable-next-line no-shadow
           const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
-          mercProductSummary.weight = descAttr.weight;
+          mercProductSummary.width = descAttr.width;
           mercProductSummary.height = descAttr.height;
           mercProductSummary.depth = descAttr.depth;
           mercProductSummary.actualPrice = mercPrice.actualPrice;
@@ -182,7 +168,7 @@ function kitCompareDataSummary(element) {
     );
     const productSummary = productDetailFilter.productDetailSummary(element);
     const descAttr = productDetailFilter.getDescriptiveAttributes(element);
-    productSummary.weight = descAttr.weight;
+    productSummary.width = descAttr.width;
     productSummary.height = descAttr.height;
     productSummary.depth = descAttr.depth;
     compareDataSummary.sKUs.push(productSummary);
@@ -205,7 +191,7 @@ function kitCompareDataSummary(element) {
           );
           // eslint-disable-next-line no-shadow
           const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
-          mercProductSummary.weight = descAttr.weight;
+          mercProductSummary.width = descAttr.width;
           mercProductSummary.height = descAttr.height;
           mercProductSummary.depth = descAttr.depth;
           compareDataSummary.sKUs.push(mercProductSummary);
@@ -243,7 +229,7 @@ function productCompareDataSummary(element, skuId) {
         );
         const skuProductSummary = productDetailFilter.productDetailSummary(sku);
         const descAttr = productDetailFilter.getDescriptiveAttributes(sku);
-        skuProductSummary.weight = descAttr.weight;
+        skuProductSummary.width = descAttr.width;
         skuProductSummary.height = descAttr.height;
         skuProductSummary.depth = descAttr.depth;
         compareDataSummary.sKUs.push(skuProductSummary);

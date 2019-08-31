@@ -28,7 +28,7 @@ class RWDMyOrder extends React.Component {
       hasMore: true,
       isLoading: false,
       pageNumber: 1,
-      pageSize: 4,
+      pageSize: 20,
 
       currentComponent: null,
       currentComponentData: null,
@@ -42,7 +42,16 @@ class RWDMyOrder extends React.Component {
 
   componentDidMount() {
     addEventListener('scroll', this.onscroll);
-    this.getOrderList();
+    if(this.props.isGuestTrackOrderPro) {
+      this.setState({
+        orderListData: this.props.guestOrderDataPro,
+        hasMore: false,
+        isLoading: false,
+      });
+    }
+    else {
+      this.getOrderList();
+    }
   }
 
   componentWillUnmount() {

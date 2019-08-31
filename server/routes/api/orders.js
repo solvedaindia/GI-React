@@ -29,6 +29,21 @@ router.get('/details/:orderId', (req, res, next) => {
   });
 });
 
+router.get('/guestdetails/:orderId', (req, res, next) => {
+  const id = req.params.orderId;
+  req.headers.profileName = 'guest';
+  ordersHandler.getOrderbyId(req.headers, id, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 router.get('/invoice/:invoiceNo', (req, res, next) => {
   ordersHandler.getInvoiceDetails(req.headers, req.params, (err, result) => {
     if (err) {
