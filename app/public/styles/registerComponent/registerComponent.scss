@@ -565,27 +565,17 @@
                 }
             }
         }
-    } 
-    .modal-wrapperjoinus  {
-        .modal-dialog{
-            max-width: 100%;
-            width:100%;
-        }
-       
-    }
-  }
- /* 
-    #Screen 768px, Device = Low Resolution Tablets
-  */
- @include mix-md-tablet {
-    .modal_register{
-        &.modal-wrapperjoinus{
+        &.modal-wrapperjoinus  {
             .modal-dialog{
-                max-width: initial;
+                max-width: 500px;
+                width:100%;
             }
+           
         }
-    }
- }
+    } 
+
+  }
+
 
   /* 
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
