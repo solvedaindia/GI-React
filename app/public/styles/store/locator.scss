@@ -25,13 +25,19 @@
         
         .active{
             border:1px solid $black !important;
+			
+			figcaption {
+				font-family: $font-bold;
+			}
         }
+		
         .storeTypeItem{
             display: block;
             border: 1px solid #ddd;
             margin: 1%;
             float: left;
             .typeList {
+				width: 13%;
                 margin: auto;
             }
             .storeImg {
@@ -190,7 +196,7 @@
                 width: 22%;
             }
             .storeTypes{
-                padding: 84px 0 0 0;
+                padding: 64px 0 0 0;
                 .headingtitle{
                     margin:0 0 16px 0;
                     font-size: 30px;
@@ -208,7 +214,7 @@
                 .typeList{
                     display: flex;
                     .storeTypeItem{
-                        width: 13%;
+                        width: 18%;
                         min-height: 130px;
                         .typeList{
                             width: 51%;
@@ -299,9 +305,9 @@
                 }
             } 
             .headingtitle{
-                font-size: $base*1.75;
-                color: $battleshipGrey;
-                font-family: $font-regular;
+                font-size: $base*1.5;
+                color: $black;
+                font-family: $font-medium;
                 margin-top: 5px;
             }
             .headingTitleDesc{

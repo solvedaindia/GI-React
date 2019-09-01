@@ -131,7 +131,7 @@ class SearchBar extends React.Component {
             { searchData.length > 0 && 
                 <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
                     <ul className='auto-search'>
-                    <li className='list'><a className='link' href='#'>Suggestions</a></li>
+                    <li className='list'><a className='link' href='#'><strong>Suggestions</strong></a></li>
                         { searchData.map((item, index) => {    
                             const searchItem = document.getElementById("searchInput").value;
                             if (index < 6) {								

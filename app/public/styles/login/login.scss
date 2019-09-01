@@ -87,11 +87,11 @@
             padding: $base;
             border: transparent;
             border-radius: $base*0.25;
-            margin-top: 16px;
+            margin-top: 20px;
         }
         .error-msg {
             color: $errorMsg;
-            font-size: $base*1.25;
+            font-size: $base*1.5;
         }
 
         .password-field{
@@ -117,7 +117,7 @@
         font-family: $font-regular;
         cursor: pointer;
         position: absolute;
-        bottom: 104px;
+		bottom:96px;
         right: 32px;
         font-weight: 600;
     }

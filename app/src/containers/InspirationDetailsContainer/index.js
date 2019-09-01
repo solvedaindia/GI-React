@@ -4,7 +4,7 @@ import Lookbook from '../../components/LookbookComponent/lookbbook'
 import Recommended from '../../components/InspirationComp/recommended';
 import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticpages/staticPages.scss';
-
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import LookbooksocialShare from '../../components/InspirationComp/lookbooksocialShare';
 
 class InspirationDetails extends React.Component {
@@ -15,7 +15,7 @@ class InspirationDetails extends React.Component {
     render(){
         return(
             <div className="staticpage inspirationDetails">
-                
+            <Breadcrumb {...this.props.match.params} staticName = {'Inspiration Lookbook'}/>    
              < Lookbook/>
                 <Recommended/>
                 <ContentEspot espotName={ 'GI_LOOKBOOK_3' } />

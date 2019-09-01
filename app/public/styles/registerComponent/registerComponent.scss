@@ -191,7 +191,6 @@
             .heading{
                 text-align: left;
                 font-family:$font-bold;
-                text-transform: capitalize;
                 padding: 0 0 30px 0;
                 margin: 0;
                 color: $black;
@@ -212,20 +211,15 @@
                 .form-control {
                     box-shadow: none;
                     height: 40px;
-                    margin: 0 0 28px 0;
+                    margin: 0 0 10px 0;
                     border:1px solid $lightgrey;
                 }
                 .error-msg {
-                    position: absolute;
                     color:$reddishpink;
-                    font-weight: normal;
                     font-size: 12px;
                     line-height: 13px;
-                    min-height: 25px;
                     bottom: 0;
                     width: 100%;
-                    margin:0 0 0 0;
-                    font-family: $font-regular;
                 }
                 .form-div {
                     position: relative;

@@ -62,7 +62,7 @@
   .mob-logo-Img{
     float: left;
   }
-
+ 
   .searchField {
     font-size: 12px;
     caret-color: #036cc5;
@@ -86,7 +86,7 @@
     z-index: 1;
     .searchBackBtn {
       border-top: 1px solid $lightblueGrey;
-      padding: 7px 15px;
+      padding: 7px 15px 0px 15px;
       .menuBtn {
         display: none;
       }
@@ -244,7 +244,7 @@
       z-index: 9;
 
       .auto-search {
-        padding: 16px 0 16px 0;
+        padding: 0px 0 16px 0;
 
         .list {
           padding: 0px;
@@ -253,7 +253,7 @@
             padding: 7px 20px;
             text-decoration: none;
             color: $black;
-            font-family: $font-regular;
+            font-family: $font-bold;
             font-size: 12px;
 
             &:hover {
@@ -266,7 +266,7 @@
               padding: 7px 20px;
               text-decoration: none;
               color: $black;
-              font-family: $font-bold;
+              font-family: $font-light;
 
               &:hover {
                 background: transparent;

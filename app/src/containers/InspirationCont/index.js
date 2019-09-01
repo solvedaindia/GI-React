@@ -6,9 +6,9 @@ import InspirationBanner from '../../components/InspirationComp/inspirationBanne
 import GodrejSolutionEspot from '../../components/InspirationComp/godrejSolution';
 import  '../../../public/styles/staticpages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
-
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import SummerData from '../../components/InspirationComp/InspEspot';
-;
+
 export class Inspiration extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,9 @@ export class Inspiration extends React.Component {
   render() {
     return (
       <div className="staticpages inspiration">
+	   
         <InspirationBanner />
+		<Breadcrumb {...this.props.match.params} staticName = {'Inspiration'}/>
         <LookbookThemeCarousel />
         <SummerData/>
         <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />

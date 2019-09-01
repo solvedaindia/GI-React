@@ -170,7 +170,7 @@ class CartDetail extends React.Component {
                 <p className='shipping'>
                   <span className='info'>Shipping</span>
                   <span className='val'>Free</span>
-                  <span className='shippingMsg'>Free shipping on orders above ₹5,000</span>
+                  <span className='shippingMsg'>{cartData.orderSummary.shippingMessage}</span>
                 </p>
                 :
                 <p className='shipping'>
