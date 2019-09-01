@@ -9,14 +9,13 @@
         padding: 8px;
         font-family: $font-medium;
         font-size: 16px;
-        height: 54px;
+
     }
     .pc-btn {
         background-color: $ashGrey;
         color: $colorwhite;
         padding: $base*1.125;
         border: 1px solid $ashGrey;
-        height: 54px;
         line-height: 36px;
     }
     .storeTypes {
@@ -175,9 +174,9 @@
   }
   
     /* 
-    #Global Screen Chhange for Screen max 768
+    #Global Screen Chhange for Screen Device = Laptops, Desktops
     */
-    @media screen and (min-width: 768px){
+    @include mix-lg{
         .storeLocator{
             width: 80%;
             .title {
@@ -185,9 +184,11 @@
             }
             .pc-field{
                 width: 36%;
+                height: 54px;
             }
             .pc-btn{
                 width: 22%;
+                height: 54px;
             }
             .storeTypes{
                 padding: 84px 0 0 0;
@@ -264,9 +265,9 @@
   
 
   /* 
-    #Global Screen Chhange for Screen max 767
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .storeLocator{
         width: 90%;
         .title {
@@ -274,9 +275,12 @@
         }
         .pc-field{
             width: 70%;
+            height: 44px;
         }
         .pc-btn{
             width: 30%;
+            line-height: 27px;
+            height: 44px;
         }
         .storeTypes{
             padding: 20px 0 20px 0;
