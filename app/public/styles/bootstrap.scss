@@ -1587,17 +1587,17 @@ html {
     margin-left: auto;
   }
   @media (min-width: 768px) {
-    .container {
+    .container, .breadcrumb {
       width: 750px;
     }
   }
   @media (min-width: 992px) {
-    .container {
+    .container, .breadcrumb {
       width: 970px;
     }
   }
   @media (min-width: 1200px) {
-    .container {
+    .container, .breadcrumb {
       width: 1170px;
     }
   }

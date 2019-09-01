@@ -91,6 +91,7 @@
   #Global Screen Chhange for Screen max 768
   */
   @media screen and (min-width: 768px){
+  
     .manageAddressContainer{
       .itemList {
         max-height: 354px;
@@ -99,11 +100,13 @@
           width:31%;
           float: left;
           margin: 0px 16px 26px 0;
+		  
           .addressItem{
             background-color: rgba(247, 248, 248, 0.5);
             padding:16px 10px;
             height: 162px;
             border: solid 1px $lightblueGrey;
+			
             .listitem{
               display: inline;
               font-size:  $base*1.5;
@@ -155,6 +158,10 @@
     .itemList {
       .list{
         margin: 0px 0px 15px 0;
+		.addressItem.defaultAddress{
+			  background-color: white;
+			  border: solid 1px $lightGrey;
+		 }
         .addressItem{
           padding:16px 10px 25px 10px;
           border: solid 1px $lightGrey;

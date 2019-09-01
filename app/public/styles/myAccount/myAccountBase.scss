@@ -170,7 +170,7 @@
           .btn {
             padding: 12px 60px;
             border-radius: 0; 
-            width: 47%;
+            width: 46%;
           }
         }   
       }
@@ -339,7 +339,13 @@
       max-width: 100%;
       .modal-content{
         .modalwrapper{
-          padding:30px 30px 34px 30px;            
+		  .heading{
+		    text-align: center;
+		  }
+          .deleteQuestion{
+			align-content: center;
+			margin: 0px;padding: 20px 70px;
+		  }          
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;

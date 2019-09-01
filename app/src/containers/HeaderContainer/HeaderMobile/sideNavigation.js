@@ -76,7 +76,7 @@ export class HeaderMobile extends React.Component {
       .then(response => {
         console.log('userDetail --- ', response.data.data.name);
         this.setState({
-          userName: `${this.state.userName} ${response.data.data.name !== undefined ? response.data.data.name : ''}`,
+          userName: `${this.state.userName} ${(response.data.data.name !== undefined && response.data.data.name !== '') ? response.data.data.name.split(' ')[0] : ''}`,
           logonId: response.data.data.logonID,
         });
         this.showLoginStatus();
@@ -289,7 +289,7 @@ export class HeaderMobile extends React.Component {
       navItem = (
         <div className="leftAnim">
           <div className="topMenu">
-            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo' : 'usernameTxt'}>{this.state.userName}!</label>
+            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo' : 'usernameTxt'}>{getCookie('isLoggedIn') === 'true' ?this.state.userName :'Hello!'}</label>
             {loginLogoutItem}
           </div>
           <ul>
