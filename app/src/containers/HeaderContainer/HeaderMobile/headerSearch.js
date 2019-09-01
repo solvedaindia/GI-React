@@ -115,12 +115,12 @@ onkeydownclick(text) {
 			
           />
           {this.state.inputText !== '' ? (
-            <button onClick={this.onClearClick.bind(this)}>
+            <button className='search-sm-btn' onClick={this.onClearClick.bind(this)}>
               <img src={require('../../../../public/images/close.svg')} />
             </button>
           ) : (
             // <button >
-              <img
+              <img className='search-sm-btn'
                 src={require('../../../../public/images/rwd-assets/search.svg')}
               />
             // </button>

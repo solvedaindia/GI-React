@@ -176,9 +176,9 @@
   }
   
     /* 
-    #Global Screen Chhange for Screen max 768
+    #Global Screen Chhange for Screen Device = Laptops, Desktops
     */
-    @media screen and (min-width: 768px){
+    @include mix-lg{
         .welcomeBack {
             .modal-title {
                 font-size: $base*4.75;
@@ -254,7 +254,7 @@
   /* 
     #Global Screen Chhange for Screen max 767
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .welcomeBack {
         .modal-dialog{
             .modal-content{
@@ -350,7 +350,12 @@
                 }
             }
         }
-        
+        &.in{
+            .modal-dialog{
+                max-width: 500px;
+                margin: auto;
+            }
+        }
     }
     
   }
