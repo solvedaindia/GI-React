@@ -78,8 +78,7 @@ export let accessToken = getTheAccessToken();
 /* Facebook AppId */
 export const facebookAppId = '248827646023949';
 /* Google ClientId */
-export const googleClientId =
-    '380096657271-mr3mvob1u4ginpqf1jrrkiuv93fk3j3o.apps.googleusercontent.com';
+export const googleClientId = '540799499871-esslds0s75as1le9pufkmpmljb96vedo.apps.googleusercontent.com';
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */

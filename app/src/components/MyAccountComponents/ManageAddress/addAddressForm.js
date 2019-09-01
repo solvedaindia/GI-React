@@ -79,6 +79,7 @@ class AddAddressForm extends React.Component {
       this.setState({
         error_pincode: true,
         errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+        inputText_pincode: null
       });
       // return;
     }
@@ -267,6 +268,10 @@ class AddAddressForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    window.scrollTo(0,document.body.scrollHeight - 700);
+  }
+
   render() {
     console.log('The Data --- ', this.props.editAddressDataPro.nickName);
     return (
@@ -279,7 +284,7 @@ class AddAddressForm extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} />
+              <Input inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
               {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
             </div>
           </div>

@@ -13,6 +13,15 @@ import UserAccInfo from '../../../components/UserAccInfo/userAccInfo';
 import WelcomeBack from '../../../components/WelcomeBack/index';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
 
+import { connect } from 'react-redux';
+import injectSaga from '../../../utils/injectSaga';
+import injectReducer from '../../../utils/injectReducer';
+import reducer from '../../../containers/PlpContainer/reducer';
+import saga from '../../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../../containers/PlpContainer/actions';
+import { getReleventReduxState } from '../../../utils/utilityManager';
+
 export class HeaderMobile extends React.Component {
   constructor(props) {
     super(props);
@@ -133,7 +142,7 @@ export class HeaderMobile extends React.Component {
                   }
 
                   return (
-                    <Link to={{ pathname: routePath, state: { categoryId: subCatData.uniqueID }, }} className="links" onClick={this.onOverlayClick.bind(this)} >
+                    <Link to={{ pathname: routePath, state: { categoryId: subCatData.uniqueID }, }} className="links" onClick={this.onSubCatClick.bind(this)} >
                       <li
                         onClick={() => this.onSubcategoryClick()}
                         className="navTxt"
@@ -163,8 +172,12 @@ export class HeaderMobile extends React.Component {
     });
   }
 
+  onSubCatClick() {
+    this.props.plpReduxStateReset();
+    this.onOverlayClick();
+  }
+
   onOverlayClick() {
-    console.log('On Overlay --- ', this.state.showNav);
     this.onNavigationBackCick();
     this.setState({
       showNav: false,
@@ -366,4 +379,31 @@ export class HeaderMobile extends React.Component {
   }
 }
 
-export default HeaderMobile;
+// export default HeaderMobile;
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+  return {
+    plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  }
+};
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(HeaderMobile);
