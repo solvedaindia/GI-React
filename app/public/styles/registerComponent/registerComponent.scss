@@ -323,9 +323,9 @@
   }
   
     /* 
-    #Global Screen Chhange for Screen max 768
+    #Global Screen Chhange for Screen Laptops, Desktops
     */
-    @media screen and (min-width: 768px){
+    @include mix-lg{
         .modal_register{
             .modal-dialog{
                 .modal-wrapperjoinus{
@@ -396,9 +396,9 @@
   
 
   /* 
-    #Global Screen Chhange for Screen max 767
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .modal_register{
             .modal-dialog{
                 .modal-content{
@@ -574,7 +574,18 @@
        
     }
   }
-
+ /* 
+    #Screen 768px, Device = Low Resolution Tablets
+  */
+ @include mix-md-tablet {
+    .modal_register{
+        &.modal-wrapperjoinus{
+            .modal-dialog{
+                max-width: initial;
+            }
+        }
+    }
+ }
 
   /* 
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)

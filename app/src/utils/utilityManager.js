@@ -27,7 +27,7 @@ export function validatePIN(pin) {
  */
 
 export function isMobile() {
-    return $(window).width() < 768;
+    return $(window).width() < 992;
 }
 
 /**
