@@ -9,6 +9,7 @@ import {
   imagePrefix,
 } from '../../../public/constants/constants';
 
+
 class WillowKitchenBanner extends React.Component {
   constructor(props) {
     super(props);
