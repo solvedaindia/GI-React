@@ -65,6 +65,7 @@ class OrderItem extends React.Component {
           {/* {this.state.isExpend ? <div className={`orderSummery ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
             <OrderSummery />
           </div> : null} */}
+          {/* Check if the Invoice belongs to the Customer of not -TODO */}
           <div className={`orderSummery  clearfix ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
             <OrderSummery summeryDataro={orderData.orderSummary}
               addressDataPro={orderData.address}
