@@ -1,5 +1,6 @@
 const productDetailfilter = require('./productdetailfilter');
 const imagefilter = require('./imagefilter');
+const swatchIdentifier = 'SWATCHCOLOR';
 const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 
 /** Function to return swatch attributes from components */
@@ -59,8 +60,7 @@ function getSwatchAttributes(bundleData) {
   if (bundleData.attributes && bundleData.attributes.length > 0) {
     bundleData.attributes.forEach(attribute => {
       if (
-        attribute.name.includes('Swatch') &&
-        attribute.identifier === 'sc' &&
+        attribute.identifier === swatchIdentifier &&
         attribute.values &&
         attribute.values.length > 0
       ) {
@@ -118,8 +118,7 @@ function swatchAttributesForComparePage(bundleData) {
   if (bundleData.attributes && bundleData.attributes.length > 0) {
     bundleData.attributes.forEach(attribute => {
       if (
-        attribute.name.includes('Swatch') &&
-        attribute.identifier === 'sc' &&
+        attribute.identifier === swatchIdentifier &&
         attribute.values &&
         attribute.values.length > 0
       ) {

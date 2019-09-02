@@ -27,9 +27,8 @@ class Image extends React.Component {
         />
       );
     }
-    const routePath = `/pdp/${this.props.parentUniqueId}/${
-      this.props.uniqueId
-    }`;
+    //const routePath = `/pdp/${this.props.parentUniqueId}/${this.props.uniqueId}`;
+    var routePath = `/pdp/furniture-${this.props.productname.split(' ').join('-')}/${this.props.uniqueId}`
     return (
       <LazyLoad className="imgBox" debounce={false}>
         <Link className="link" to={routePath}>

@@ -191,7 +191,6 @@
             .heading{
                 text-align: left;
                 font-family:$font-bold;
-                text-transform: capitalize;
                 padding: 0 0 30px 0;
                 margin: 0;
                 color: $black;
@@ -212,20 +211,15 @@
                 .form-control {
                     box-shadow: none;
                     height: 40px;
-                    margin: 0 0 28px 0;
+                    margin: 0 0 10px 0;
                     border:1px solid $lightgrey;
                 }
                 .error-msg {
-                    position: absolute;
                     color:$reddishpink;
-                    font-weight: normal;
                     font-size: 12px;
                     line-height: 13px;
-                    min-height: 25px;
                     bottom: 0;
                     width: 100%;
-                    margin:0 0 0 0;
-                    font-family: $font-regular;
                 }
                 .form-div {
                     position: relative;
@@ -323,9 +317,9 @@
   }
   
     /* 
-    #Global Screen Chhange for Screen max 768
+    #Global Screen Chhange for Screen Laptops, Desktops
     */
-    @media screen and (min-width: 768px){
+    @include mix-lg{
         .modal_register{
             .modal-dialog{
                 .modal-wrapperjoinus{
@@ -396,9 +390,9 @@
   
 
   /* 
-    #Global Screen Chhange for Screen max 767
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .modal_register{
             .modal-dialog{
                 .modal-content{
@@ -565,14 +559,15 @@
                 }
             }
         }
-    } 
-    .modal-wrapperjoinus  {
-        .modal-dialog{
-            max-width: 100%;
-            width:100%;
+        &.modal-wrapperjoinus  {
+            .modal-dialog{
+                max-width: 500px;
+                width:100%;
+            }
+           
         }
-       
-    }
+    } 
+
   }
 
 

@@ -9,14 +9,13 @@
         padding: 8px;
         font-family: $font-medium;
         font-size: 16px;
-        height: 54px;
+
     }
     .pc-btn {
         background-color: $ashGrey;
         color: $colorwhite;
         padding: $base*1.125;
         border: 1px solid $ashGrey;
-        height: 54px;
         line-height: 36px;
     }
     .storeTypes {
@@ -25,13 +24,19 @@
         
         .active{
             border:1px solid $black !important;
+			
+			figcaption {
+				font-family: $font-bold;
+			}
         }
+		
         .storeTypeItem{
             display: block;
             border: 1px solid #ddd;
             margin: 1%;
             float: left;
             .typeList {
+				width: 13%;
                 margin: auto;
             }
             .storeImg {
@@ -175,9 +180,9 @@
   }
   
     /* 
-    #Global Screen Chhange for Screen max 768
+    #Global Screen Chhange for Screen Device = Laptops, Desktops
     */
-    @media screen and (min-width: 768px){
+    @include mix-lg{
         .storeLocator{
             width: 80%;
             .title {
@@ -185,12 +190,14 @@
             }
             .pc-field{
                 width: 36%;
+                height: 54px;
             }
             .pc-btn{
                 width: 22%;
+                height: 54px;
             }
             .storeTypes{
-                padding: 84px 0 0 0;
+                padding: 64px 0 0 0;
                 .headingtitle{
                     margin:0 0 16px 0;
                     font-size: 30px;
@@ -208,7 +215,7 @@
                 .typeList{
                     display: flex;
                     .storeTypeItem{
-                        width: 13%;
+                        width: 18%;
                         min-height: 130px;
                         .typeList{
                             width: 51%;
@@ -264,9 +271,9 @@
   
 
   /* 
-    #Global Screen Chhange for Screen max 767
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .storeLocator{
         width: 90%;
         .title {
@@ -274,9 +281,12 @@
         }
         .pc-field{
             width: 70%;
+            height: 44px;
         }
         .pc-btn{
             width: 30%;
+            line-height: 27px;
+            height: 44px;
         }
         .storeTypes{
             padding: 20px 0 20px 0;
@@ -299,9 +309,9 @@
                 }
             } 
             .headingtitle{
-                font-size: $base*1.75;
-                color: $battleshipGrey;
-                font-family: $font-regular;
+                font-size: $base*1.5;
+                color: $black;
+                font-family: $font-medium;
                 margin-top: 5px;
             }
             .headingTitleDesc{

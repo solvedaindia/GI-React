@@ -11,6 +11,17 @@
     .slick-dots {
         bottom: 12px;
     }
+	
+	.subCat {
+		margin: 16px auto 0;
+	}
+	
+	.bestSeller {
+		margin-top: 60px;
+		.title {
+		    margin-bottom: 40px;
+		}
+	}
     // Theme
     .clpTheme {
 		.title {
@@ -111,7 +122,7 @@
         .clpBase{
             .clpTheme {
                 width: 83.33%;
-                margin: 120px auto;
+                margin: 40px auto;
             }
         }
     }

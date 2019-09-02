@@ -108,7 +108,7 @@ class ForgotPasswordOTP extends React.Component {
           this.setState({
             showOTPTxtField: false,
             error: true,
-            errorMessage: 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)',
+            errorMessage: 'You have exceeded the maximum number of attempts (3)',
             errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           });
         }
@@ -183,7 +183,7 @@ class ForgotPasswordOTP extends React.Component {
     let titleOTP = null;
     if (this.state.showOTPTxtField) {
       titleOTP = <p className="text">     
-        OTP sent to xxxxxx{userId.substr(userId.length - 4)}
+        OTP (Sent to xxxxxx{userId.substr(userId.length - 4)})
       </p>;
     }
     if (this.props.isFromMyProfilePro) {

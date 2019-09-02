@@ -187,64 +187,6 @@ function getDefAttributes(attributes) {
 }
 
 /**
- * Function to return product images and videos
- * @param {*} productData
- */
-module.exports.getAttachments = getAttachments;
-function getAttachments(productData) {
-  const productAttachment = [];
-  if (productData.attachments && productData.attachments.length > 0) {
-    // eslint-disable-next-line prefer-destructuring
-    const attachments = productData.attachments;
-    for (let i = 0; i < attachments.length; i += 1) {
-      const obj = {};
-      if (
-        attachments[i].usage === 'ANGLEIMAGES_FULLIMAGE' &&
-        !attachments[i].name.includes('OVERLAY')
-      ) {
-        for (let j = 0; j < attachments.length; j += 1) {
-          const lastChar = attachments[i].name[attachments[i].name.length - 1];
-          if (
-            attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
-            attachments[j].name.includes(lastChar)
-          ) {
-            obj.type = 'image';
-            obj.fullImagePath = attachments[i].attachmentAssetPath;
-            obj.thumbnailPath = attachments[j].attachmentAssetPath;
-          }
-          if (
-            attachments[j].usage === 'ANGLEIMAGES_FULLIMAGE' &&
-            attachments[j].name.includes(lastChar)
-          ) {
-            obj.fullScreenImagePath = attachments[j].attachmentAssetPath;
-          }
-        }
-        productAttachment.push(obj);
-      } else if (
-        attachments[i].usage === 'MEDIA' &&
-        !attachments[i].name.includes('purchaseGuide')
-      ) {
-        for (let j = 1; j < attachments.length; j += 1) {
-          const lastChar = attachments[i].name[attachments[i].name.length - 1];
-          if (
-            attachments[j].usage === 'ANGLEIMAGES_THUMBNAIL' &&
-            attachments[j].name.includes(lastChar)
-          ) {
-            productAttachment.push({
-              type: 'video',
-              thumbnailPath: attachments[j].attachmentAssetPath,
-              videoPath: attachments[i].attachmentAssetPath,
-            });
-            break;
-          }
-        }
-      }
-    }
-  }
-  return productAttachment;
-}
-
-/**
  * Function to return product details for Productbean
  * @param {*} productDetailsAttributes;
  */
@@ -497,7 +439,7 @@ function swatchAttributesForCompare(productData) {
     // iterate kit components attributes
     productData.attributes.forEach(attr => {
       // iterate attributes values
-      if (attr.usage === 'Defining' && attr.identifier === 'sc') {
+      if (attr.usage === 'Defining' && attr.identifier === swatchIdentifier) {
         attr.values.forEach(attributeValue => {
           const match = rbgRegex.exec(attributeValue.image1);
           attributeJson.name = attributeValue.value;
@@ -518,17 +460,17 @@ function swatchAttributesForCompare(productData) {
 module.exports.getDescriptiveAttributes = getDescriptiveAttributes;
 function getDescriptiveAttributes(productData) {
   const descAttr = {
-    weight: '',
+    width: '',
     height: '',
     depth: '',
   };
   if (productData.attributes && productData.attributes.length > 0) {
     productData.attributes.forEach(attr => {
-      if (attr.identifier === 'NetWeight') {
-        descAttr.weight = attr && attr.values[0] ? attr.values[0].value : 'NA';
-      } else if (attr.identifier === 'Height(cm)') {
+      if (attr.identifier === 'ExtnWidth') {
+        descAttr.width = attr && attr.values[0] ? attr.values[0].value : 'NA';
+      } else if (attr.identifier === 'ExtnHeight') {
         descAttr.height = attr && attr.values[0] ? attr.values[0].value : 'NA';
-      } else if (attr.identifier === 'Depth(cm)') {
+      } else if (attr.identifier === 'ExtnDepth') {
         descAttr.depth = attr && attr.values[0] ? attr.values[0].value : 'NA';
       }
     });

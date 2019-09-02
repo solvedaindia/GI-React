@@ -30,7 +30,18 @@ class MyOrder extends React.Component {
 
   componentDidMount() {
     addEventListener('scroll', this.onscroll);
-    this.getOrderList();
+    if(this.props.isGuestTrackOrderPro) {
+      console.log('guestOrderDataPro --- ',this.props.guestOrderDataPro);
+      this.setState({
+        orderListData: this.props.guestOrderDataPro,
+        hasMore: false,
+        isLoading: false,
+      });
+    }
+    else {
+      this.getOrderList();
+    }
+    
   }
 
   componentWillUnmount() {

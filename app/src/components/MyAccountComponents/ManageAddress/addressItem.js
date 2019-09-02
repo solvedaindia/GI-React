@@ -81,7 +81,7 @@ class AddressItem extends React.Component {
         ) : null}
         <div className={`addressItem ${stylingClass}`}>
           {this.props.addressData.isDefault ? (
-            <label className="defaultAddress">Default Address :</label>
+            <label className="defaultAddress">Default Address</label>
           ) : null}
 
             {isMobile() && 
