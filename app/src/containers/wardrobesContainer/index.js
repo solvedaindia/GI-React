@@ -8,7 +8,7 @@ import React from 'react';
 import '../../../public/styles/static-pages/kitchen.scss';
 import '../../../public/styles/staticpages/staticPages.scss';
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
-import ConsultationForm from '../../components/Primitives/ConsultForm';store
+import ConsultationForm from '../../components/Primitives/ConsultForm';
 import ContentEspot from '../../components/Primitives/staticContent';
 import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
 import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
