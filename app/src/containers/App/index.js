@@ -200,7 +200,7 @@ export default class App extends React.Component {
           const address = response.results[0].formatted_address;
           const data = address.replace(', India', '');
           const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true) {
+          if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
           }          
         },
