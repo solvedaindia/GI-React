@@ -308,7 +308,7 @@ export class Step3Component extends React.Component {
               <div className='checkmark'></div>
             </div>
             {!isMobile() ? <div className="labeltext-box">
-              <h4 className="heading-label">Mobile or Email</h4>
+              <h4 className="heading-label">Mobile Number/ Email Address</h4>
             </div> : ''}
 
             <div className="email-box">
