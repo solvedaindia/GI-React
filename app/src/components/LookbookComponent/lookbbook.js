@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import apiManager from '../../utils/apiManager';
 
 import '../../../public/styles/static-pages/inspiration.scss'
-import {espotAPI} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 const prevArrowImg = (
   <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
 );
@@ -62,27 +62,27 @@ export default class Lookbook extends Component {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 2,
+      slidesToShow: 1,
       slidesToScroll: 3,
       arrows: true,
-      prevArrow: prevArrowImg,
-      nextArrow: nextArrowImg
+      
     };
     return (
       <>
       <div className='container'>
-
+<div className='lookbookImgSize'>
         <h1 className="title">{title}</h1>
                <p className="paragraph">{description}</p>
         <Slider {...settings}>
         {!!lookSlider &&
             lookSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index} className='slides'>
-                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                </a>
 
             ))}
         </Slider>
+      </div>
       </div>
       </>
     );

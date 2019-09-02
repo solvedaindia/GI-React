@@ -61,14 +61,14 @@ export default class Recommended extends Component {
     
     };
     return (
-      <div className="hallOfFame">
-        <h2 className="title">{title}</h2>
+      <div className="recommededSlides">
+        <h2 className="topTitle">{title}</h2>
         <p className="desc">{description}</p>
         <Slider {...settings}>
           {!!recommendedSlider &&
             recommendedSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index} className='slides'>
-                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                </a>
 
             ))}
