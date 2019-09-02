@@ -1947,6 +1947,10 @@
                 &.pdp-emitext-mob{
                     position: relative;
                     padding: 12px 12px 12px 48px;
+                    clear: both;
+                    float: left;
+                    width: 100%;
+                    margin-top: 10px;
                     .offerbg{
                         position: absolute;
                         top: 15px;
@@ -1959,9 +1963,9 @@
                     }
                     .emi-text-desc{
                         width: 65%;
-                        display: inline-block;
                         font-size: 11px;
                         line-height: 14px;
+                        float: left;
                         .starting-from{
                             display: block;
                         }

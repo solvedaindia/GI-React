@@ -195,9 +195,9 @@
 }
 
 /* 
-  #Global Screen Chhange for Screen max 768
-  */
-@media screen and (min-width: 768px) {
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
   .form-BgContainer {
     width: 70%;
     background-color:$greybg;
@@ -276,10 +276,10 @@
   //CSS
 }
 
-/* 
-  #Global Screen Chhange for Screen max 767
-*/
-@media screen and (max-width: 767px) {
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
   .form-BgContainer {
     width: 100%;
     float: left;    
@@ -339,13 +339,15 @@
       max-width: 100%;
       .modal-content{
         .modalwrapper{
+          padding: 20px 20px 0px 20px;
 		  .heading{
 		    text-align: center;
 		  }
-          .deleteQuestion{
-			align-content: center;
-			margin: 0px;padding: 20px 70px;
-		  }          
+        .deleteQuestion{
+          align-content: center;
+          margin: 0px;
+          padding: 20px 70px;
+          }          
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;
