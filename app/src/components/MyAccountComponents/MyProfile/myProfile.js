@@ -201,7 +201,6 @@ class MyProfile extends React.Component {
             this.setState({
               modal: true
             })
-            alert(`OTP - ${response.data.data.otpValue}`);
           }
           else {
             this.updateUserDetail();
