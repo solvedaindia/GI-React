@@ -75,7 +75,7 @@ import StaticPagesList from '../../components/staticPages';
 import Geocode from "react-geocode";
 
 import NotFound from '../HomePageContainer/notfound';
-// import Internalserver from '../HomePageContainer/Internalserver';
+import Maintenance from '../HomePageContainer/Maintenance';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -296,7 +296,7 @@ export default class App extends React.Component {
           <Route path="/check/payment/:orderId" component={paymentWait} />
 
           <Route path="*" component={NotFound} />
-          {/* <Route path="/502" component={Internalserver} /> */}
+          <Route path="/502" component={Maintenance} />
           
           
         </Switch>

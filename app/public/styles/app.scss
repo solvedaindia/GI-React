@@ -216,11 +216,19 @@ h4{font-weight: bold}
 }
 
 .pageNotfound{
-  width: 50%;
-  margin: 0 auto;
-  padding: 30px 0 0 0;
-  min-height: 200px;
-  .ErrorIcon,.ErrorText{float: left;}
+  width: 100%;
+  padding: 0px 0 0 0;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  .innerContainer{
+    width:50%;
+    margin: 0 auto;
+  .ErrorIcon,.ErrorText{
+    float: left;
+  }
   .ErrorIcon{
     width:20%;
     .icon{
@@ -243,7 +251,18 @@ h4{font-weight: bold}
       color: $battleshipGrey;
       line-height: 16px;
     }
+    .UserDetailsform{
+      padding:20px 0 0 0;
+      .submit{
+        background:$black;
+        color:#fff;
+        border: 1px solid $black;
+        min-width: 170px;
+        cursor: pointer;
+      }
+    }
   }
+}
 }
 /*---Spining button Css
 ----------------------------*/
@@ -346,6 +365,36 @@ background-color: #ccc;
     #app {
         overflow: hidden;
         width: 100%;
+    }
+
+    .pageNotfound{
+      width: 100%;
+      padding: 0px 20px 0 20px;
+      
+      .innerContainer{
+        width:100%;
+        margin: 0 auto;
+      .ErrorIcon,.ErrorText{
+        float: left;
+      }
+      .ErrorIcon{
+        width:100%;
+        max-width: 49%;
+        margin: 0 auto;
+        float: none;
+        .icon{
+          width: 100%;
+        }
+      }
+      .ErrorText{
+        width:100%;
+        padding: 20px 0 0 0px;
+        .heading{
+          font-size: 24px;
+        }
+       
+      }
+    }
     }
    
   }
