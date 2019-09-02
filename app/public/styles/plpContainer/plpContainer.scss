@@ -1202,6 +1202,14 @@ section.tablecarousel {
       }
     }
   }
+  section.tablecarousel{
+    .slick-slider{
+      .slick-dots{
+        bottom: -13px;
+      }
+    }
+  } 
+ 
 }
 
 

@@ -112,8 +112,6 @@ class ForgotPasswordOTP extends React.Component {
             errorClass: 'forgototp-mobile modalmin-height forgot-attempts',
           });
         }
-        const otpValue = response.data.data;
-        alert(`OTP - ${otpValue.otpVal}`);
       })
       .catch(error => {
         console.log('dmeee -- ',error);

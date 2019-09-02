@@ -179,6 +179,7 @@ class addToCartComponent extends React.Component {
       const pincode = document.getElementById('pincodeVal').value;
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
         appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         this.quantity = 1;
         props.handleAddtocart(true);
         this.setState({
