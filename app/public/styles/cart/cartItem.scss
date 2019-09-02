@@ -495,6 +495,10 @@
                 border-right: 1px solid $borderLight;
             }
             .prodDetails{
+                .cartQty {
+                    z-index: 3;
+                    position: relative;
+                }
                 .prodTitle {
                     font-size: $base*2;
                     margin: $base*1.5 0 0;
@@ -678,6 +682,7 @@
                     }
                     .cartQty {
                         position: relative;
+                        z-index: 3;
                     }
                     .cartQty,
                     .price {
