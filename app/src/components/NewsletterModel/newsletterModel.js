@@ -140,7 +140,7 @@ class NewsletterModel extends React.Component {
                 </h3> : ''}
                 <Form className='news-letter-form'>
                   {!isMobile() ? <p className="signup-text">
-                    Sign up to be the first to recieve updates and ongoing offers!
+                    'Be the first to receive updates on offers, new arrivals and more.'
                   </p> : ''}
                   {isMobile() ? <h3 className="heading">
                     Have you joined our mailing list yet?

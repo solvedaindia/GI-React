@@ -71,7 +71,6 @@ import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
 // import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
 import paymentWait from '../../components/checkout/paymentWait';
-import StaticPagesList from '../../components/staticPages';
 import Geocode from "react-geocode";
 
 import NotFound from '../HomePageContainer/notfound';
@@ -278,7 +277,6 @@ export default class App extends React.Component {
           <Route path="/cart" component={CartDetail} />
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
-          <Route path='/staticpages' component = {StaticPagesList} />
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />

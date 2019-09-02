@@ -65,10 +65,10 @@ export class OrderSummaryComponent extends React.Component {
                 <div className='righttext-box'>{this.props.orderData.shippingCharges == 0 ? 'Free' : this.props.orderData.shippingCharges}</div>
               </div>
 
-              <div className='freeshipping'>Free shipping on cart total above &#8377;5,000  </div>
+              <div className='freeshipping'></div>
               <div className='startEmi clearfix'>
                 <div className='emi-icon'><img src={EMI} alt='EMI'/></div>
-                <div className='emitext'> Starting from &#8377;{formatPrice(this.state.minEMI)} per month</div>
+                <div className='emitext'> Starting from &#8377;{formatPrice(this.state.minEMI)} a month</div>
                 <div className='knowmore'>Know More</div>
               </div>
              

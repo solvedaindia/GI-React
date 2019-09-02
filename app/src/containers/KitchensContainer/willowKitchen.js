@@ -3,8 +3,7 @@ import '../../../public/styles/static-pages/chefkitchen.scss';
 import  '../../../public/styles/staticpages/staticPages.scss';
 ;
 import ContentEspot from '../../components/Primitives/staticContent';
-import WillowKitchenBanner from '../../components/KitchensComp/willowKitchenBanner';
-import SteelKitchenBenefits from '../../components/KitchensComp/benefitsOfSteelType';
+import WillowKitchenBanner from '../../components/KitchensComp/willowKitchenbanner';
 
 
 export default class WillowKitchens extends React.Component {

@@ -227,7 +227,7 @@ export class Step1Component extends React.Component {
       return (
         <>
         {isMobile() &&<div className='checkout-title'>
-                    Mobile or Email
+                    Mobile Number/ Email Address
                  </div>}
             <div className="col-md-8 checkout_wrapper"> 
                <div className='listRow bgfullflex clearfix'>
@@ -236,7 +236,7 @@ export class Step1Component extends React.Component {
                  </div>
                  
                  {!isMobile() &&<div className='leftBox bgGrey'>
-                    <div className='heading-label'>Mobile or Email</div>
+                    <div className='heading-label'>Mobile Number/ Email Address</div>
                  </div>}
 
                   <div className="rightBox" id='rightHeight'>

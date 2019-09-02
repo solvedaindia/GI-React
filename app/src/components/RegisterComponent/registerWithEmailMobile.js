@@ -339,7 +339,7 @@ class RegisterWithEmailMobile extends React.Component {
                     <p className="sign_text">
                     By clicking register you agree to our{' '}
                       <a className="link" href="">
-                        T&C
+                        'Terms & Conditions'
                       </a>{' '}
                     </p>
                     {/* </p> */}

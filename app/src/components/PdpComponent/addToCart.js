@@ -147,7 +147,7 @@ class addToCartComponent extends React.Component {
     }, 2000);
     return (
       <div className="addedToWishlist dropdownwishlist clearfix">
-        <span className="wishlist-text">Product Added to Cart</span>
+        <span className="wishlist-text">Product added to cart</span>
         <button
           onClick={() => this.props.history.push('/cart')}
           className="view-btn"
