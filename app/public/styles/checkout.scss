@@ -763,10 +763,9 @@
 }
 
 /* 
-    #Global Screen Chhange for Screen max 768
-    */
-
-@media screen and (min-width: 768px) {
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
   .checkout {
     padding: 116px 0 100px 0;
     .addressTextarea {
@@ -891,11 +890,10 @@
   //CSS
 }
 
-/* 
-    #Global Screen Chhange for Screen max 767
+ /* 
+    #Global Screen Chhange for Screen max 992
   */
-
-@media screen and (max-width: 767px) {
+  @include mix-md{
   .checkout-title {
     font-size: $base * 1.75;
     padding: $base * 2 0px $base * 2 15px;

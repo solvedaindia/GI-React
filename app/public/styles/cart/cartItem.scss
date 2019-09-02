@@ -415,9 +415,9 @@
     }
 }
 /* 
-#Global Screen Chhange for Screen max 768
+#Global Screen Chhange for Screen Laptops, Desktops
 */
-@media screen and (min-width: 768px){
+@include mix-lg{
 .cartDetails{
     .cartHeadDetails{
         .title{
@@ -515,10 +515,10 @@
     }
 }
 
-/* 
-#Global Screen Chhange for Screen max 767
-*/
-@media (min-width: 320px) and (max-width: 767px){
+  /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
     .cartDetails {
         width: 100%;
         margin: 0 auto ;
@@ -657,6 +657,7 @@
                     .prodTitle {
                         font-size: $base*1.75;
                         margin: 0px;
+                        padding-right: $base*7.5;
                     } 
                     .subTitle {
                         font-size: 10px;
