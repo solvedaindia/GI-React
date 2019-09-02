@@ -5,15 +5,15 @@
  */
 
 import React from 'react';
-import  '../../../public/styles/static-pages/kitchen.scss';
-import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
-import { imagePrefix } from '../../../public/constants/constants';
-import ConsultationForm from '../../components/Primitives/ConsultForm'
+import '../../../public/styles/static-pages/kitchen.scss';
+import '../../../public/styles/staticpages/staticPages.scss';
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
-import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
-import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
+import ConsultationForm from '../../components/Primitives/ConsultForm';store
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
+import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
+import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
+
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
@@ -26,10 +26,10 @@ export class WardrobeContainer extends React.Component {
 
   render() {
     return (
-        <section className="staticpage kitchenContainer">
+        <section className="staticpage wardrobesContainer">
             <WardrobeBanner />
 			<ContentEspot espotName = { 'GI_Wardrobes_Benefit_Modular' } />
-
+   
             <WHallOfFame />
 			<div className="formContainer">
 			<ContentEspot espotName = { 'GI_WARDROBES_FORMBACKGROUND_IMG' } />
