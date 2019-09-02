@@ -3,9 +3,7 @@ import Slider from "react-slick";
 import apiManager from '../../utils/apiManager';
 
 import '../../../public/styles/static-pages/inspiration.scss'
-import {
-  lookBookSummerSparkAPI,
-} from '../../../public/constants/constants';
+import {espotAPI} from '../../../public/constants/constants';
 const prevArrowImg = (
   <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
 );
@@ -19,6 +17,7 @@ export default class Lookbook extends Component {
   
 
     this.state = {
+      espotName:'GI_LOOKBOOK_SUMMER_SPARK',
       slides: [],
       lookSlider: null,
       isLoading: false,
@@ -31,7 +30,7 @@ export default class Lookbook extends Component {
   
   getLookBookData() {
     apiManager
-      .get(lookBookSummerSparkAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
@@ -41,7 +40,7 @@ export default class Lookbook extends Component {
           description:data && data.data.desc,
           isLoading: false,
         });
-        console.log('hall Data', data.data.desc);
+        console.log('look Data', data.data.desc);
       })
       .catch(error => {
         this.setState({
@@ -71,18 +70,18 @@ export default class Lookbook extends Component {
     };
     return (
       <>
-
-        <h1 className="title">{this.state.title}</h1>
-               <p className="paragraph">{this.state.description}</p>
       <div className='container'>
+
+        <h1 className="title">{title}</h1>
+               <p className="paragraph">{description}</p>
         <Slider {...settings}>
-          {this.state.slides.map(function(slide) {
-            return (
-              <div key={slide}>
-                <h3>{slide}</h3>
-              </div>
-            );
-          })}
+        {!!lookSlider &&
+            lookSlider.map((sliderData, index) => (
+              <a href={sliderData.onClickUrl} key={index} className='slides'>
+                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+               </a>
+
+            ))}
         </Slider>
       </div>
       </>

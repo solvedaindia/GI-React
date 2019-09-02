@@ -6,15 +6,13 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
 
-import {
-  whatGoesKitchenAPI,
-  imagePrefix
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 
 class WhatGoes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName:'GI_MODULAR_KITCHEN_SLIDER',
       whatGoesSlider: [],
       isLoading: false,
       error: null,
@@ -27,7 +25,7 @@ class WhatGoes extends React.Component {
 
   getWardrobesBannerData() {
     apiManager
-      .get(whatGoesKitchenAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of whatgoes banner', response)
         const {data} = response || {}

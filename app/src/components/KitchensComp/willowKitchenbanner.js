@@ -5,7 +5,7 @@ import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/chefkitchen.scss';
 
 import {
-  WillowKitchenBannerAPI,
+  espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -13,6 +13,7 @@ class WillowKitchenBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_WILLOW_KITCHENS_BANNER',
       kitchenSlider: null,
       isLoading: false,
       error: null,
@@ -25,7 +26,7 @@ class WillowKitchenBanner extends React.Component {
 
   getKitchensBannerData() {
     apiManager
-      .get(WillowKitchenBannerAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}

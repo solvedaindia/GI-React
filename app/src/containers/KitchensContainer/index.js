@@ -7,6 +7,8 @@
 import React from 'react';
 import  '../../../public/styles/static-pages/kitchens.scss';
 import AlwaysRemember from '../../components/KitchensComp/AlwaysRemember';
+import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';
+
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
 // import BeforeAfter from '../../components/KitchensComp/beforeAfterSlider';

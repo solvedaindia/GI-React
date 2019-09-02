@@ -5,7 +5,7 @@ import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchens.scss';
 
 import {
-  kitchenBannerAPI,
+  espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
 
@@ -13,6 +13,7 @@ class WardrobeBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_KITCHENS_BANNER',
       kitchenSlider: null,
       isLoading: false,
       error: null,
@@ -24,8 +25,8 @@ class WardrobeBanner extends React.Component {
 
   getKitchensBannerData() {
     apiManager
-      .get(kitchenBannerAPI)
-      .then(response => {
+    .get(espotAPI + this.state.espotName)
+    .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}
         this.setState({

@@ -4,14 +4,12 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchens.scss'
 
-import {
-  beforeAfterApi,
-  imagePrefix,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 class BeforeAfter extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName:'GI_BEFORE_AFTER_SLIDER',
       beforeImage: '',
       afterImage: '',
       isLoading: false,
@@ -25,7 +23,7 @@ class BeforeAfter extends Component {
 
   beforeAfterDataCall() {
     apiManager
-      .get(beforeAfterApi)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of whatgoes banner', response)
         const {data} = response || {}

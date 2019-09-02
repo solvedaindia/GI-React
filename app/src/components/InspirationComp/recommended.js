@@ -4,14 +4,13 @@ import  '../../../public/styles/static-pages/inspirationDetails.scss'
 import apiManager from '../../utils/apiManager';
 
 import '../../../public/styles/static-pages/inspiration.scss'
-import {
-  recommendedAPI,
-} from '../../../public/constants/constants';
+import {imagePrefix,espotAPI} from '../../../public/constants/constants';
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      espotName: 'GI_LOOKBOOK_RECOMMENDED_SLIDER',
       slides: [],
       recommendedSlider: null,
       isLoading: false,
@@ -23,7 +22,7 @@ export default class Recommended extends Component {
 
   getRecommendedData() {
     apiManager
-      .get(recommendedAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
@@ -62,7 +61,6 @@ export default class Recommended extends Component {
     
     };
     return (
-      recommendedSlider && 
       <div className="hallOfFame">
         <h2 className="title">{title}</h2>
         <p className="desc">{description}</p>
