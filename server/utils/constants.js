@@ -63,6 +63,7 @@ module.exports = Object.freeze({
   notifyMe: `${prodWcsResourceUrl}/{{storeId}}/GINotifyUser/saveUserAndProductDetails`,
   ordersList: `${prodWcsResourceUrl}/{{storeId}}/order/@history`,
   orderDetail: `${prodWcsResourceUrl}/{{storeId}}/order/{{orderId}}?profileName=IBM_Details`,
+  guestOrderDetail: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/fetchGuestOrderById/{{orderId}}`,
   ongoingOrders: `${prodWcsResourceUrl}/{{storeId}}/GIOrderStatus/trackOrder`,
   orderDetailOMS: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/findOrderById/{{orderId}}?responseFormat=json`,
   initiateBDPayment: `${prodWcsResourceUrl}/{{storeId}}/gipayment/paymentGateways/checksum`,

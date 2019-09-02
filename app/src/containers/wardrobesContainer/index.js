@@ -14,6 +14,7 @@ import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
 import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
 import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticpages/staticPages.scss';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
@@ -27,7 +28,9 @@ export class WardrobeContainer extends React.Component {
   render() {
     return (
         <section className="staticpage kitchenContainer">
+			
             <WardrobeBanner />
+			<Breadcrumb {...this.props.match.params} staticName = {'Wardrobe Collections'}/>
 			<ContentEspot espotName = { 'GI_Wardrobes_Benefit_Modular' } />
 
             <WHallOfFame />

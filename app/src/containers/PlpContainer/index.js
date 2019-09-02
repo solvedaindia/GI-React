@@ -76,7 +76,7 @@ export class PlpContainer extends React.Component {
       browserFilters: [],
 
       // RWD Vars
-      isMobile: window.innerWidth <= 760,
+      isMobile: window.innerWidth <= 992,
     };
     this.myRef = React.createRef();
     this.onscroll = this.onscroll.bind(this);

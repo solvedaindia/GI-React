@@ -29,10 +29,11 @@ export class KitchenContainer extends React.Component {
   render() {
     return (
         <section className="staticpage kitchenContainer">
-            <Breadcrumb {...this.props.match.params} staticName={ 'Kitchen' }/>
+            
             <div className="slider">
                 <KitchenBanner />
             </div>
+			<Breadcrumb {...this.props.match.params} staticName={ 'Kitchen Collections' }/>
             <ContentEspot espotName = { 'GI_KITCHEN_TYPES' } />
             <ContentEspot espotName = { 'GI_DREAM_KITCHEN_STEPS' } />
             <ContentEspot espotName = { 'GI_KITCHEN_LAYOUTS' } />

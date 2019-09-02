@@ -50,6 +50,8 @@
     .btn-cancel {
       border: solid 1px $black;
       background-color: $colorwhite;
+	  padding: 12px 84px;
+	   font-size:  $base*1.75;
     }
     .btn-save {
       border: solid 1px $black;
@@ -57,6 +59,8 @@
       background: $black;
       color: $colorwhite;
       margin: 0 0 0 23px;
+	  padding: 12px 84px;
+	   font-size:  $base*1.75;
       &:hover{
         color:$colorwhite;
         background:$black;

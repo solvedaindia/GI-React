@@ -445,10 +445,10 @@ class MyProfile extends React.Component {
           <div className="form-div clearfix div-error">
             <Input
               inputType={'email'}
-              title={isMobile() ? 'Email Address' : 'Email ID'}
+              title={'Email Address'}
               name={'name'}
               id={'emailId'}
-              placeholder={'Enter EmailId'}
+              placeholder={'Enter email address'}
               value={this.state.inputText_email}
               handleChange={this.handleInput}
               focusIn={this.focusIn.bind(this)}

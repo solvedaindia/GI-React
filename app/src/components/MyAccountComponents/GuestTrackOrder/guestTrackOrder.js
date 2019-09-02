@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { validateEmptyObject } from '../../../utils/validationManager';
 import apiManager from '../../../utils/apiManager';
-import { changePasswordAPI } from '../../../../public/constants/constants';
+import { guestTrackOrderAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/guestTrackOrder.scss';
-import {isMobile, getCookie} from '../../../utils/utilityManager';
+import { isMobile, getCookie } from '../../../utils/utilityManager';
 
 class GuestTrackOrder extends React.Component {
   constructor(props) {
@@ -39,10 +39,25 @@ class GuestTrackOrder extends React.Component {
       return;
     }
 
-    this.setState({
-      error: false,
-      redirect: true,
-    });
+    apiManager.get(`${guestTrackOrderAPI}${this.state.inputText}`)
+      .then(response => {
+        console.log('guest track Response --- ', response.data, this.props);
+        this.props.history.push({ pathname: '/myAccount', state: {from: 'myorder', isGuestTrackOrder: true, orderData:[response.data.data]}});
+      })
+      .catch(error => {
+        const errorData = error.response.data;
+        const errorMessage = errorData.error.error_message;
+        this.setState({
+          error: true,
+          errorMessage: errorMessage,
+        });
+      });
+      
+      
+    // this.setState({
+    //   error: false,
+    //   redirect: true,
+    // });
   }
 
   render() {
@@ -65,17 +80,17 @@ class GuestTrackOrder extends React.Component {
 
     return (
       <div className="guestTrackOrder">
-         {!isMobile() && <h3 className="helloGuestMsg clearfix">
+        {!isMobile() && <h3 className="helloGuestMsg clearfix">
           Hello Guest! Please enter your Order Number to track
         </h3>}
         <div className='form-group'>
-        {isMobile() && <label className='form-label'>Order Number</label>}
-        <input
-          className="form-control"
-          placeholder="Enter order number"
-          onChange={this.handleInputChange.bind(this)}
-        />
-        {errorItem}
+          {isMobile() && <label className='form-label'>Order Number</label>}
+          <input
+            className="form-control"
+            placeholder="Enter order number"
+            onChange={this.handleInputChange.bind(this)}
+          />
+          {errorItem}
         </div>
         {/* <Link to={{ pathname: '/myAccount', state: { from: 'myorder', isGuestTrackOrder: true } }}> */}
         <div className='track-order-btn'>
@@ -83,14 +98,14 @@ class GuestTrackOrder extends React.Component {
             className="submitBtn"
             onClick={this.submitBtnClicked.bind(this)}
           >
-            {!isMobile() ? 'Track Order':'Submit'}
+            {!isMobile() ? 'Track Order' : 'Submit'}
           </button>
         </div>
         {/* </Link> */}
 
         <div className='back-btn'>
-           <Link to='/' className='go-back'>Go back</Link>
-          </div>
+          <Link to='/' className='go-back'>Go back</Link>
+        </div>
       </div>
     );
   }

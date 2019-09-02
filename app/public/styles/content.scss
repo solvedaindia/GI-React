@@ -3,7 +3,7 @@
     /* 
     #Global Screen Chhange for Screen max 768
     */
-@media screen and (min-width: 768px){
+@include mix-lg{
 	.espotContent {
 		margin-bottom: $base*15; 
 		.exploreGuest{
@@ -51,7 +51,7 @@
   /* 
     #Global Screen Chhange for Screen max 767
   */
-@media screen and (max-width: 767px){
+  @include mix-md{
     .espotContent {
         .mwebGreeting {
 			background-color: $ceruleanblue;

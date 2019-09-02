@@ -1,4 +1,5 @@
 const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
+const swatchIdentifier = 'SWATCHCOLOR';
 const imagefilter = require('./imagefilter');
 
 /** Function to return swatch attributes from kit components */
@@ -119,7 +120,7 @@ function swatchAttributesForComparePage(kitData) {
           // iterate attributes values
           if (
             attr.usage === 'Defining' &&
-            (attr.identifier === 'sc' || attr.identifier === 'SWATCHCOLOR')
+            attr.identifier === swatchIdentifier
           ) {
             attr.values.forEach(attributeValue => {
               const match = rbgRegex.exec(attributeValue.image1);

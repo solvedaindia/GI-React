@@ -37,10 +37,10 @@ class DeletePopup extends React.Component {
       >
         <Modal.Body>
           <div className="modalwrapper">
+		   <div className="deleteQuestion"> 
+			<p className="heading">Are you sure you want delete the address?</p> 
+		  </div>
             <Button className="cancelBtn" onClick={this.toggle} />
-            <h3 className="heading">
-              Are you sure you want delete the address?
-            </h3>
 
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.toggle}>
@@ -50,7 +50,7 @@ class DeletePopup extends React.Component {
                 className="btn-save btn"
                 onClick={this.onDelete.bind(this)}
               >
-                Proceed
+                Delete
               </Button>
             </div>
           </div>

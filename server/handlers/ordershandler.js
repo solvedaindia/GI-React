@@ -57,13 +57,30 @@ function getOrdersList(headers, query, callback) {
                 cb(null, null);
               } else {
                 const orderID = orderItem.orderId;
-                getOrderbyId(headers, orderID, (error, orderDetails) => {
-                  if (error) {
-                    cb(error);
-                    return;
-                  }
-                  cb(null, orderDetails);
-                });
+                if (
+                  orderItem.orderStatus !== 'M' ||
+                  orderItem.orderStatus !== 'C'
+                ) {
+                  getCompleteOrderDetails(
+                    headers,
+                    orderItem,
+                    (error, orderDetails) => {
+                      if (error) {
+                        cb(error);
+                        return;
+                      }
+                      cb(null, orderDetails);
+                    },
+                  );
+                } else {
+                  getOrderbyId(headers, orderID, (error, orderDetails) => {
+                    if (error) {
+                      cb(error);
+                      return;
+                    }
+                    cb(null, orderDetails);
+                  });
+                }
               }
             },
             (errors, results) => {
@@ -99,11 +116,20 @@ module.exports.getOrderbyId = getOrderbyId;
 function getOrderbyId(headers, orderId, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
-  const orderDetailURL = `${constants.orderDetail
+  let orderDetailURL = `${constants.orderDetail
     .replace('{{storeId}}', headers.storeId)
     .replace('{{orderId}}', orderId)}`;
+  let reqType = 'GET';
+
+  if (headers.profileName === 'guest') {
+    reqType = 'POST';
+    orderDetailURL = `${constants.guestOrderDetail
+      .replace('{{storeId}}', headers.storeId)
+      .replace('{{orderId}}', orderId)}`;
+  }
+
   origin.getResponse(
-    'GET',
+    reqType,
     orderDetailURL,
     reqHeaders,
     null,
@@ -112,6 +138,14 @@ function getOrderbyId(headers, orderId, callback) {
     '',
     response => {
       if (response.status === 200) {
+        if (headers.profileName === 'guest') {
+          response.body = response.body.orderDetail;
+          if (response.body.errors && response.body.errors.length > 0) {
+            response.status = 400;
+            callback(errorutils.handleWCSError(response));
+            return;
+          }
+        }
         let fetchOrderData = [];
         if (
           response.body.orderStatus === 'P' ||
@@ -340,9 +374,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     // orderDetails.orderID = omsData.orderID;
     orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
-    orderDetails.orderDate =
-      omsData.orderDate ||
-      orderFilter.getFormattedDate(wcsOrderDetails.placedDate);
+    orderDetails.orderDate = omsData.orderDate;
     orderDetails.paymentMethod = omsData.paymentMethod || '';
     orderDetails.address = omsData.address;
     orderDetails.orderStatus = omsData.orderStatus;
