@@ -66,6 +66,9 @@ class CartCount extends React.Component {
 
     // this.getCartCount();
     getUpdatedMinicartCount(this);
+    this.setState({ //For Mobile
+      CartCount : this.props.updatedMinicartCount
+    })
     // this.setState({
     //   CartCount: this.props.updatedMinicartCount,
     // });

@@ -290,9 +290,9 @@ export class CheckoutComponent extends React.Component {
       BankID: this.state.BankID,
       paymentMode: this.state.paymentMode
     };
-    if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
-      body.BankID = '123'
-    }
+    // if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+    //   body.BankID = '123'
+    // }
     var payCategoryId;
     if (this.state.paymentMode === 'DEBIT_CARD') {
       payCategoryId = 'DEBIT';

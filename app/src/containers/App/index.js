@@ -67,7 +67,7 @@ import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
 import paymentWait from '../../components/checkout/paymentWait';
 import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
-// import Internalserver from '../HomePageContainer/Internalserver';
+import Maintenance from '../HomePageContainer/Maintenance';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -192,7 +192,7 @@ export default class App extends React.Component {
           const address = response.results[0].formatted_address;
           const data = address.replace(', India', '');
           const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true) {
+          if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
           }          
         },
@@ -287,7 +287,7 @@ export default class App extends React.Component {
           <Route path="/check/payment/:orderId" component={paymentWait} />
 
           <Route path="*" component={NotFound} />
-          {/* <Route path="/502" component={Internalserver} /> */}
+          <Route path="/502" component={Maintenance} />
           
           
         </Switch>

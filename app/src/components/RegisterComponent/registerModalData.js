@@ -30,16 +30,23 @@ class RegisterModalData extends React.Component {
 
   /* Handle Modal Close */
   handleClose(isClose = false) {
-    if (this.state.data.props.registrationType === 'generateOtp' && isClose !== true) {
+    if (this.state.data === null) {
+      this.closePopup();
+    } else if (this.state.data.props.registrationType === 'generateOtp' && isClose !== true) {
       this.handleComponent('registerWithMobileNum', this.state.data.props.userdata);
     } else {
-      this.props.resetCallbackPro();
-      this.setState({
-        show: false,
-        data: null,
-        modalClass: 'modal-wrapperjoinus',
-      });
+      this.closePopup();
     }
+  }
+
+  /*close pop up */
+  closePopup() {
+    this.props.resetCallbackPro();
+    this.setState({
+      show: false,
+      data: null,
+      modalClass: 'modal-wrapperjoinus',
+    });
   }
 
   /* Handle Modal Show */
@@ -55,7 +62,7 @@ class RegisterModalData extends React.Component {
       data: null,
       modalClass: 'modal-wrapperjoinus',
     });
-    this.handleClose(true);
+    //this.handleClose(true);
     return <WelcomeBack />;
   }
 
@@ -123,7 +130,6 @@ class RegisterModalData extends React.Component {
             callbackFunc('OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)');
             return;
           } 
-          alert(`OTP - ${response.data.data.otpVal}`);
           if (type !== resendOtp) {
             this.handleComponent(generateOtp, data);
           }

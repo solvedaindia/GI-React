@@ -75,8 +75,6 @@ class ForgotPasswordEmailMobile extends React.Component {
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
-        const otpValue = response.data.data;
-        alert(`OTP - ${otpValue.otpVal}`);
         const nextComp = 'ForgotPasswordOTP';
         this.props.handlerPro(nextComp, this.state.inputText, null);
       })
