@@ -120,6 +120,7 @@ class ProductItem extends React.Component {
             uniqueId={this.state.data.uniqueID}
             parentUniqueId={this.state.data.parentUniqueID}
             productname={this.state.data.productName}
+            breadcrumbDataPro={this.props.plpBreadcrumbPro}
           />
           <InStock isInStock={this.state.data.inStock} />
 	        <RibbonTag data={this.state.data.ribbonText} />
