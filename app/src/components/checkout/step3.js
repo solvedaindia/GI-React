@@ -276,7 +276,7 @@ export class Step3Component extends React.Component {
     }
     var data = {
       BankID: wallet.bankID,
-      paymentMode: wallet.paymentId,
+      paymentMode: paymentId,
       paymentId: paymentId
     };
     this.props.enalblePay(data);
