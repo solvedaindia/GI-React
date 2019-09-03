@@ -85,6 +85,7 @@ class PlpComponent extends React.Component {
               isShareWishlistPro={this.props.isShareWishlistPro}
               coloumnLayout={this.props.coloumnLayout}
               moveToCartPopUpPro={this.props.moveToCartPopUpPro}
+              plpBreadcrumbPro={this.props.plpBreadcrumbPro}
             /> :
             <ProductItem // Sku level
               key={index}
@@ -99,6 +100,7 @@ class PlpComponent extends React.Component {
               isShareWishlistPro={this.props.isShareWishlistPro}
               coloumnLayout={this.props.coloumnLayout}
               moveToCartPopUpPro={this.props.moveToCartPopUpPro}
+              plpBreadcrumbPro={this.props.plpBreadcrumbPro}
             />
           }
           <AdBanner indexPro={index + 1} />
