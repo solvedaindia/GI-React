@@ -314,7 +314,7 @@ export class CheckoutComponent extends React.Component {
       console.log(response, "checksum response")
       var res = response.data.data.response;
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
-      if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+      if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "WALLET" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
         url = `${res.transactionUrl}&msg=${res.msg}`;
         //  axios.post(url, {}, {
 

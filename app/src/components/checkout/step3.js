@@ -242,7 +242,7 @@ export class Step3Component extends React.Component {
       return this.setState({
         showBanks: false,
         showWallets: false,
-        paymentModeId: 'EMI',
+        paymentModeId: 'WALLET',
         walletCheck: true
       })
     }
@@ -276,7 +276,7 @@ export class Step3Component extends React.Component {
     }
     var data = {
       BankID: wallet.bankID,
-      paymentMode: wallet.bankID,
+      paymentMode: wallet.paymentId,
       paymentId: paymentId
     };
     this.props.enalblePay(data);

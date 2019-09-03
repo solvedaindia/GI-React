@@ -377,8 +377,7 @@
           }
           .error-msg {
             color: $reddishPink;
-            position: absolute;
-            bottom: 5px;
+            margin-bottom: 5px;
             font-size: $base * 1.5;
             line-height: 12px;
             font-weight: normal;
