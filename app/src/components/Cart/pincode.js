@@ -55,14 +55,15 @@ class Pincode extends React.Component {
 		})
 		.catch(error => {
 			this.setState({
-			error,
-			isLoading: false,
+			error: error.response.data.error,
+			isLoading: false
 			});
 		});
 	}
 
 
   render() {
+	const { error } = this.state;
 	let attrs = {};
 	if ( !this.state.edit ) {
 		attrs = { readOnly : false }
@@ -102,7 +103,10 @@ class Pincode extends React.Component {
 				</a>
 			}
       	</div>
-		{!!this.state.error && <p className='pinErrorMsg'>{!isMobile() ? 'Sorry! We do not currently deliver in this area. Please try another pincode.' : 'Pincode is Non-Serviceable' } </p>}
+		{!!error && (
+          <div className="pinErrorMsg">{error.error_message}</div>
+        )}
+		{/* {!!this.state.error && <p className='pinErrorMsg'>{!isMobile() ? 'Sorry! We do not currently deliver in this area. Please try another pincode.' : 'Pincode is Non-Serviceable' } </p>} */}
 		</>
     );
   }
