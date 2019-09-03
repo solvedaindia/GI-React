@@ -103,7 +103,7 @@ class BestSeller extends React.Component {
                   </Link>
                   {/* </a> */}
                   <figcaption className="bsDetails">
-                    <h2 className="prodtitle">{sellerItemData.productName}</h2>
+                    <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
                       <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${formatPrice(sellerItemData.offerPrice)}` : null }</span>
                       <span className='actualPriceLine'><span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${formatPrice(sellerItemData.actualPrice)}` : null}</span></span>
