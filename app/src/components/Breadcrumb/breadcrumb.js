@@ -3,19 +3,19 @@ import { withRouter, Link } from 'react-router-dom';
 import '../../../public/styles/breadcrumb.scss';
 
 class Breadcrumb extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            breadcrumbData: null,
-            isLoading: true,
-            errors: null
-        };
-        console.log('Breadcrumb Data Params', this.props);
-    }
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      breadcrumbData: null,
+      isLoading: true,
+      errors: null
+    };
+    console.log('Breadcrumb Data Params', this.props);
+  }
+
 
   getBreadcrumbData() {
-    
+
   }
 
   componentDidMount() {
@@ -23,17 +23,49 @@ class Breadcrumb extends React.Component {
   }
 
   render() {
-    
+
+    if (this.props.plpBreadcrumbPro) {
+      return (
+        <div className='breadCrumb'>
+          {this.props.plpBreadcrumbPro.map((data, index) => {
+            var breadLabel = data.label;
+            var breadRoute = '/';
+            if (index === 0) {
+              breadLabel = 'Home';
+            }
+            
+            if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
+              breadRoute = `/rooms-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+            else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+            else if (index === 0) {
+              breadRoute = '/';
+            }
+            else {
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+
+            return (
+              <span className='links'>{this.props.plpBreadcrumbPro.length === index+1 ? `${breadLabel}` : <Link to={breadRoute}>{`${breadLabel} >`}</Link>}</span>
+            )
+
+          })}
+        </div>
+      )
+    }
+
     return (
-        this.props.match.path === '/rooms-:category/:id' ?
+      this.props.match.path === '/rooms-:category/:id' ?
         (<div className='breadCrumb'>
-            <span className='links'> <Link to='/'>Home ></Link></span>
-            <span className='links'> {this.props.match.params.category.replace(/-/g, " ")}</span> 
+          <span className='links'> <Link to='/'>Home ></Link></span>
+          <span className='links'> {this.props.match.params.category.replace(/-/g, " ")}</span>
         </div>)
         :
         <div className='breadCrumb'>
-            <span className='links'> <Link to='/'>Home ></Link></span>
-            <span className='links'> {this.props.staticName}</span> 
+          <span className='links'> <Link to='/'>Home ></Link></span>
+          <span className='links'> {this.props.staticName}</span>
         </div>
     );
   }

@@ -41,6 +41,7 @@ import {
 import { stringify } from 'querystring';
 import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -66,6 +67,7 @@ export class PlpContainer extends React.Component {
       plpFilter: '',
       plpSorting: '',
       displaySkus: true,
+      breadcrumbData: null,
       // Search Vars
       isFromSearch: this.props.location.pathname,
       searchKeyword: this.props.location.search,
@@ -346,6 +348,7 @@ export class PlpContainer extends React.Component {
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
             filterData: response.data.data.facetData,
+            breadcrumbData: response.data.data.breadCrumbData,
             isLoading: false,
             isCatDetails: false,
             browserFilters: [],
@@ -550,6 +553,13 @@ export class PlpContainer extends React.Component {
       );
     }
 
+    let breadcrumbItem = null;
+    if (this.state.breadcrumbData !== null && plpData.length != 0) {
+      breadcrumbItem = (
+        <Breadcrumb plpBreadcrumbPro={this.state.breadcrumbData} />
+      );
+    }
+
     return (
       <>
         {this.state.emptySearchItem !== null
@@ -570,6 +580,7 @@ export class PlpContainer extends React.Component {
           </>
         ) : null}
         {marketingBanner}
+        {breadcrumbItem}
         {subCategories}
         <section className="plpCategories">
           <div className="container">
