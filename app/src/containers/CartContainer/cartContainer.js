@@ -53,7 +53,7 @@ class CartDetail extends React.Component {
         <section className='cartDetails'>
           <div className='cartItem'>
             <div className='cartHeadDetails'>
-                {!isMobile() ? <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
+                {!isMobile() ? <h2 className='title'>Your Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
                 </h2> : <div className='checkout-top-hedaer'>
                   <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
                 <h2 className='title'> Your Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span></h2></div> }
