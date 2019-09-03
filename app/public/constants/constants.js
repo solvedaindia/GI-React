@@ -175,8 +175,12 @@ export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetail
 export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
 /* Pincode API */
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
+/* Pincode API For Bundle */
+export const pinCodeAPIBundle = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailabilitybundle/`;
 /* Find Inventory API */
 export const findinventoryAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/findinventory/`;
+/* Find Multiple product Inventory API */
+export const findMultiProductInventory = `${secureHttp}://${host}:${port2}/api/v1/pincode/multiplefindinventory/`;
 /* Search Page API */
 export const searchPageAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bysearchterm/`;
 /* User Detail Validate API */
