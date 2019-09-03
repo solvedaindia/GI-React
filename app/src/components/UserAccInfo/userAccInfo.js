@@ -153,7 +153,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">Welcome Guest</a>
+            <a className="dropDown">Welcome to Interio!</a>
           </li>
         ,
         loginStatus:

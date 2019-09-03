@@ -103,7 +103,7 @@ class MyWishlist extends React.Component {
     }, 2000);
     this.setState({
       moveToCartPOPup: <div className="removeFromWishlist clearfix">
-        <span className="wishlist-text">Product Added to Cart</span>
+        <span className="wishlist-text">Product added to cart</span>
         <Link to='/cart'>
         <button className="view-btn" >
           View

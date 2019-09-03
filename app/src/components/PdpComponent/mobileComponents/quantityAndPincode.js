@@ -149,7 +149,7 @@ class addToCartComponent extends React.Component {
     }, 2000);
     return (
       <div className="addedToWishlist dropdownwishlist clearfix">
-        <span className="wishlist-text">Product Added to Cart</span>
+        <span className="wishlist-text">Product added to cart</span>
         <button
           onClick={() => this.props.history.push('/cart')()}
           className="view-btn"
@@ -179,6 +179,7 @@ class addToCartComponent extends React.Component {
       const pincode = document.getElementById('pincodeVal').value;
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
         appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         this.quantity = 1;
         props.handleAddtocart(true);
         this.setState({

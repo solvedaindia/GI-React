@@ -203,7 +203,7 @@ class OrderConformation extends React.Component {
 
 
                         <div className='seprator'></div>
-                        <h4 className="heading-details">Items in order</h4>
+                        <h4 className="heading-details">Products in your order</h4>
                         <div className="row">
                             {this.state.orderData ? this.renderItems() : ''}
                         </div>

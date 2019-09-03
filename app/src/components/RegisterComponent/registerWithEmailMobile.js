@@ -73,7 +73,7 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessageUserId: null,
       errorMessagePassword: null,
     });
-
+    
     if (!validateEmptyObject(obj.name)) {
       this.setState({
         errorMessageName: 'This field is required',
@@ -108,7 +108,7 @@ class RegisterWithEmailMobile extends React.Component {
       });
       isValidate = false;
     }
-
+    
     if (!validateEmptyObject(obj.password)) {
       this.setState({
         errorMessagePassword: 'The field is required',
@@ -154,15 +154,15 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.handleApi(
         registartionAPI,
         data,
-		this.props.registrationType,
-		this.callbackFunc
+		    this.props.registrationType,
+		    this.callbackFunc
       );
     } else {
       this.props.handleApi(
         generateOTPAPI,
         data,
-		this.props.registrationType,
-		this.callbackFunc
+		    this.props.registrationType,
+		    this.callbackFunc
       );
     }
   };
@@ -339,7 +339,7 @@ class RegisterWithEmailMobile extends React.Component {
                     <p className="sign_text">
                     By clicking register you agree to our{' '}
                       <a className="link" href="">
-                        T&C
+                        'Terms & Conditions'
                       </a>{' '}
                     </p>
                     {/* </p> */}

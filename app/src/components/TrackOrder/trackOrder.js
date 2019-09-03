@@ -71,7 +71,7 @@ class TrackOrder extends React.Component {
             slidesToScroll: 1,
           };
         return (
-           !!orderData && 
+           !!orderData && !!orderData.ongoingOrders.orderItems &&
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>

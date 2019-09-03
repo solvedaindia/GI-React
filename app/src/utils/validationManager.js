@@ -6,7 +6,7 @@ export const regexMobileNo = /^\d{10}$/; // Mobile Number
 export const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // Email
 /* Complete Password  */
 //export const regexPw = /^(?=.*?[0-9]).{6,25}$/;
-export const regexPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{6,25}$/;
+export const regexPw = /(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{6,25}$/;
 /* Whether String contains a Number or Not */
 export const regexPwNo = /\d/;
 /* Whether String contains a Character or Not */
@@ -22,7 +22,7 @@ export const regexGST = /^[a-zA-Z0-9]+$/;
 /** ******* Functions ******* */
 /* Validate empty object */
 export const validateEmptyObject = input => {
-    if (input === null || input === undefined || input === '') {
+    if (input === null || input === undefined || input.trim() === '') {
         return false;
     }
 

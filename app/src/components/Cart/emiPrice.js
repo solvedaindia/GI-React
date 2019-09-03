@@ -41,7 +41,7 @@ class EMIVal extends React.Component {
             <p className='emiMsg'>
                 <span className='emiLogo'>
                 <EMILogo width={23} height={23} />
-                </span>Starting from ₹{emiVal} per month
+                </span>Starting from ₹{emiVal} a month
             </p>
         )
     }

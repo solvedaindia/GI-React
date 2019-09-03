@@ -538,7 +538,7 @@ export class PlpContainer extends React.Component {
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">
-            Search results for <span className="headingTitleSearch">"{keywoard}"</span>
+            Results for <span className="headingTitleSearch">"{keywoard}"</span>
           </h3>
         </div>
       );

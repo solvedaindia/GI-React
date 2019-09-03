@@ -82,10 +82,14 @@ export class HomapegeLayout extends React.Component {
 					<meta name="twitter:card" content="summary" />
 					<meta name="twitter:site" content="@godrejinterio" />
 					<meta name="twitter:title" content="Godrej Interio - Best Home and Office Furniture Store in India" />
-					<meta name="twitter:description" content="Shop from Godrej Interio's furniture store for best quality home and office furniture. Browse our wide range of living room, bedroom, mattress, kitchen, desking, seating. ✔Exchange Policy ✔Best Price ✔Free Shipping &amp; Installation ✔Best Quality &apm; Service ✔Smart &apm; innovative designs" />
-					<title>Godrej India Furniture</title>
+					<meta name="twitter:description" content="Shop from Godrej Interio's furniture store for best quality home and office furniture. Browse our wide range of living room, bedroom, mattress, kitchen, desking, seating. ✔Exchange Policy ✔Best Price ✔Free Shipping &amp; Installation ✔Best Quality &amp; Service ✔Smart &amp; innovative designs" />
 					<meta name="twitter:image" content="http://www.godrejinterio.com/GodrejInterio/assets/images/godrej-interio_logo.gif" />
 					<meta name="twitter:image:alt" content="Godrej Interio" />
+					<meta property="og:url" content="https://www.pepperfry.com/" />
+					<meta property="og:type" content="website" />
+					<meta property="og:title" content="Place Page Meta Title" />
+					<meta property="og:description" content="Place Meta Description " />
+
 				</Helmet>
 				{
 				!!homepageLayout ? (			

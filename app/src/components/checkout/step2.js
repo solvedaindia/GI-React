@@ -1167,7 +1167,7 @@ export class Step2Component extends React.Component {
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Email Address (Optional)" id="email" name="Email"
+                        <Input inputType="text" title="Email Address" id="email" name="Email"
                           value={this.state.email} onChange={e => this.mailChange(e)} />
                         {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> :
                           null}
@@ -1250,7 +1250,7 @@ export class Step2Component extends React.Component {
                   </div>
                   {!this.state.same_bill ? <div className="bill_div">
                     <div className="row">
-                      <div className="col-md-12"><h4>Enter a billing address</h4></div>
+                      <div className="col-md-12"><p class="label-enter-billing">Enter A billing address</p></div>
                     </div>
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
@@ -1279,7 +1279,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Email Address (Optional)" id="bemail" name="bemail" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Email Address" id="bemail" name="bemail" handleChange={this.handleInput} />
                           {this.state.berror_email ? <div className="error-msg">{this.state.berrorMessage_email}</div> : null}
                         </div>
                       </div>

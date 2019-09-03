@@ -14,11 +14,7 @@ import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
-  guestLoginAPI,
-  storeId,
-  accessToken,
   accessTokenCookie,
-  isLoggedIn,
   getTheAccessToken,
   newsletterTokenCookie,
   newsletterStatusAPI,
@@ -63,19 +59,15 @@ import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
 import SearchContainer from '../Search Container/searchContainer';
 import OrderConformtion from '../orderConfirmation/index'
-// import CartDetail from '../CartContainer/cartContainer';
 import CartDetail from '../CartContainer/cartContainer';
 import StoreLocator from '../../components/StoreLocator/storeLocator';
 import Directions from '../../components/StoreLocator/index';
 import LightHeader from '../../components/HeaderComponent/headerL1/lightHeader';
-// import CartDetail from '../../components/Cart/cartDetail';
 import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
 import paymentWait from '../../components/checkout/paymentWait';
-import StaticPagesList from '../../components/staticPages';
 import Geocode from "react-geocode";
-
 import NotFound from '../HomePageContainer/notfound';
-// import Internalserver from '../HomePageContainer/Internalserver';
+import Maintenance from '../HomePageContainer/Maintenance';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -200,7 +192,7 @@ export default class App extends React.Component {
           const address = response.results[0].formatted_address;
           const data = address.replace(', India', '');
           const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true) {
+          if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
           }          
         },
@@ -263,7 +255,7 @@ export default class App extends React.Component {
         {/* <HeaderContainer /> */}
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-          <Route path="/rooms-:category/:id" component={ClpContainer} />
+          <Route path="/furniture-:category/:id" component={ClpContainer} />
           <Route path="/furniture:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
@@ -278,7 +270,6 @@ export default class App extends React.Component {
           <Route path="/cart" component={CartDetail} />
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
-          <Route path='/staticpages' component = {StaticPagesList} />
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
@@ -296,7 +287,7 @@ export default class App extends React.Component {
           <Route path="/check/payment/:orderId" component={paymentWait} />
 
           <Route path="*" component={NotFound} />
-          {/* <Route path="/502" component={Internalserver} /> */}
+          <Route path="/502" component={Maintenance} />
           
           
         </Switch>

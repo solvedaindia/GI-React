@@ -122,7 +122,7 @@ class productInfo extends React.Component {
               <div className="text bold">
               &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
-              <div className="text">per month</div>
+              <div className="text">a month</div>
               <div className="text emiinfo">
                 <EmiInfo price={this.props.productData.offerPrice} />
               </div>
@@ -138,7 +138,7 @@ class productInfo extends React.Component {
               <div className="text bold">
               &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
-              <div className="text">per month</div></div>
+              <div className="text">a month</div></div>
               <div className="text emiinfo">
                 <EmiInfo price={this.props.productData.offerPrice} />
               </div>

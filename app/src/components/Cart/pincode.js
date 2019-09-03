@@ -23,6 +23,7 @@ class Pincode extends React.Component {
 	updatePincode(props) {
 		const pincode = document.getElementById('pincodeVal').value;
 		appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+		appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
 		this.setState({
 			edit: false
 		})
