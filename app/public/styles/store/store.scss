@@ -54,18 +54,23 @@
     }
 }
 
-@media (min-width: 320px) and (max-width:767px) {
+/* 
+#Global Mobile screen - 767 max
+*/
+@include mix-sm-mobile {
     .exStore {
         width: 100%;
-        margin: $base*15 0 $base*22.5;
+        margin: $base*8 0 $base*12;
+        min-height: 240px;
 
         .content {
             width: 90%;
             left: 0;
-            top: 70%;
+            top: 60%;
             .title {
                 font-size: $base*3;
                 text-align: left;
+                font-family: $font-bold;
             }
             .details {
                 text-align: left;
@@ -75,6 +80,9 @@
                 float: left;
                 overflow: hidden;
                 clear: both;
+                font-size: 12px;
+                width: 175px;
+                height: 40px;
             }
         }
     }

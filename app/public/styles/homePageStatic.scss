@@ -231,7 +231,15 @@
             }
           }
       }
-      .ourstoreImgbox{height: initial; padding:20px 20px  20px 0px; float: left; width:100%;}
+      .ourstoreImgbox{
+        height: initial; 
+        padding:20px 20px  20px 0px; 
+        float: left; 
+        width:100%;
+          img{
+            width: 100%;
+          }
+      }
     }
     } 
 
