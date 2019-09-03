@@ -226,6 +226,7 @@ class Filter extends React.Component {
             type="checkbox"
             id={customSelectionBoxId}
             name="scales"
+            disabled={option.count === 0 ? true : false}
           />
         ); console.log('ITsChecked Not----', option.value);
 
@@ -300,12 +301,12 @@ class Filter extends React.Component {
             </div>
 
             {!isMobile() ? (
-              <div className="label_text">
+              <div className={option.count === 0 ? 'label_text_disable' : 'label_text'}>
                 {`${option.label} (${option.count})`}
               </div>
             )
               : (
-                <div className="label_text">
+                <div className={option.count === 0 ? 'label_text_disable' : 'label_text'}>
                   {option.label} <span className='filterCount'> {option.count}</span>
                 </div>
               )}
