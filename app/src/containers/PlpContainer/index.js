@@ -554,14 +554,23 @@ export class PlpContainer extends React.Component {
     }
 
     let breadcrumbItem = null;
-    if (this.state.breadcrumbData !== null && plpData.length != 0) {
+    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData.length !== 0) {
       breadcrumbItem = (
         <Breadcrumb plpBreadcrumbPro={this.state.breadcrumbData} />
+      );
+    }
+    else if (this.state.isFromSearch.includes('/search')) { 
+      breadcrumbItem = (
+        <Breadcrumb isFromSearchPro={true} />
       );
     }
 
     return (
       <>
+        
+        {marketingBanner}
+        {breadcrumbItem}
+        {subCategories}
         {this.state.emptySearchItem !== null
           ? this.state.emptySearchItem
           : null}
@@ -579,9 +588,6 @@ export class PlpContainer extends React.Component {
             </div>
           </>
         ) : null}
-        {marketingBanner}
-        {breadcrumbItem}
-        {subCategories}
         <section className="plpCategories">
           <div className="container">
             <div className="row">

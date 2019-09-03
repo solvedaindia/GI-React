@@ -23,25 +23,23 @@ class Breadcrumb extends React.Component {
   }
 
   render() {
-
+    
     if (this.props.plpBreadcrumbPro) {
       return (
         <div className='breadCrumb'>
           {this.props.plpBreadcrumbPro.map((data, index) => {
             var breadLabel = data.label;
             var breadRoute = '/';
+            
             if (index === 0) {
               breadLabel = 'Home';
+              breadRoute = '/';
             }
-            
-            if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
+            else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
               breadRoute = `/rooms-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
               breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
-            }
-            else if (index === 0) {
-              breadRoute = '/';
             }
             else {
               breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
@@ -52,6 +50,14 @@ class Breadcrumb extends React.Component {
             )
 
           })}
+        </div>
+      )
+    }
+    else if (this.props.isFromSearchPro) {
+      return (
+        <div className='breadCrumb'>
+          <span className='links'> <Link to='/'>Home ></Link></span>
+          <span className='links'>Search Result</span>
         </div>
       )
     }
