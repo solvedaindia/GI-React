@@ -499,6 +499,7 @@ export class PlpContainer extends React.Component {
             catId={this.state.categoryDetail.uniqueID}
             history={this.props.history}
             isSearchPathPro={this.props.location.pathname}
+            plpBreadcrumbPro={this.state.breadcrumbData}
             showSkuPro={
               !this.state.isFromSearch.includes('/search')
                 ? this.state.categoryDetail.displaySkus

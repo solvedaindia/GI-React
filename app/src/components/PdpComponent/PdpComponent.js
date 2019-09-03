@@ -22,6 +22,7 @@ import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
 import { pinCodeAPI } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 import { array } from 'prop-types';
@@ -35,10 +36,17 @@ class PdpComponent extends React.Component {
 			selectedSku: {},
 			dataVal: '',
 			pincodeData: '',
+			breadcrumbData: null,
 		};
 	}
 
 	componentDidMount() {
+		console.log('PDP breadcrumb --- ',this.props.data);
+		if (this.props.historyData.location.state != undefined) {
+			this.setState({
+				breadcrumbData: this.props.historyData.location.state.breadcrumbData,
+			})
+		}
 		this.getResolveSkuData();
     	window.addEventListener('scroll', this.handleScroll);
     	window.scrollTo(0, 0);	
@@ -325,12 +333,20 @@ class PdpComponent extends React.Component {
 			stateAttr = this.state.skuData.swatchAttributes;
 		}
 	}
+
+	let breadcrumbItem = null;
+	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData.length !== 0) {
+		breadcrumbItem = (
+			<Breadcrumb pdpBreadcrumbPro={this.state.breadcrumbData} productNamePro={this.state.skuData.productName} />
+		);
+	}
 	
 	const attrTypeData = this.getAttributeTypeData(this.props.data);
     return (
       <>
 			{!isLoading &&
 			<>
+			{breadcrumbItem}
 				{ isSticky === true &&			
 			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
 			    <div className='pdpstickyItem clearfix'>				   

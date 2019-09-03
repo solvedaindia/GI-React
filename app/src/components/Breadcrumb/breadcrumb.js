@@ -23,14 +23,15 @@ class Breadcrumb extends React.Component {
   }
 
   render() {
-    
+
+    // ---- PLP Breadcrumb ----
     if (this.props.plpBreadcrumbPro) {
       return (
         <div className='breadCrumb'>
           {this.props.plpBreadcrumbPro.map((data, index) => {
             var breadLabel = data.label;
             var breadRoute = '/';
-            
+
             if (index === 0) {
               breadLabel = 'Home';
               breadRoute = '/';
@@ -46,7 +47,7 @@ class Breadcrumb extends React.Component {
             }
 
             return (
-              <span className='links'>{this.props.plpBreadcrumbPro.length === index+1 ? `${breadLabel}` : <Link to={breadRoute}>{`${breadLabel} >`}</Link>}</span>
+              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute}>{`${breadLabel} >`}</Link>}</span>
             )
 
           })}
@@ -58,6 +59,41 @@ class Breadcrumb extends React.Component {
         <div className='breadCrumb'>
           <span className='links'> <Link to='/'>Home ></Link></span>
           <span className='links'>Search Result</span>
+        </div>
+      )
+    }
+
+    // ---- PDP Breadcrumb ----
+    if (this.props.pdpBreadcrumbPro) {
+      var pdpBreadcrumb = this.props.pdpBreadcrumbPro;
+      return (
+        <div className='breadCrumb'>
+          {pdpBreadcrumb.map((data, index) => {
+            var breadLabel = data.label;
+            var breadRoute = '/';
+
+            if (index === 0) {
+              breadLabel = 'Home';
+              breadRoute = '/';
+            }
+            else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1) {
+              breadRoute = `/rooms-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+            else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+            else {
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+            }
+
+            return (
+              <>
+                <span className='links'><Link to={breadRoute}>{`${breadLabel} >`}</Link></span>
+                {pdpBreadcrumb.length === index + 1 ? <span className='links'>{`${this.props.productNamePro}`}</span> : null}
+              </>
+            )
+
+          })}
         </div>
       )
     }
