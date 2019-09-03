@@ -13,9 +13,9 @@ class EMIVal extends React.Component {
             error: null
         }
     }
-    getEmiVal() {
+    getEmiVal(price) {
         apiManager
-        .get(`${minEMIAPI}/${this.props.price}`)
+        .get(`${minEMIAPI}/${price}`)
         .then(response => {
             this.setState({
                 emiVal: response.data.data.minEMIValue,
@@ -31,8 +31,16 @@ class EMIVal extends React.Component {
             });
         });
     }
+    
+    componentWillReceiveProps(nextProps) {
+		if(this.props.price !== nextProps.price){
+			console.log('Next Props ID', nextProps);
+			this.getEmiVal(nextProps.price);
+		}
+    }
+    
     componentDidMount() {
-        this.getEmiVal();
+        this.getEmiVal(this.props.price);
     }
     render() {
         const { emiVal } = this.state

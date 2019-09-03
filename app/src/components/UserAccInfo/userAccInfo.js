@@ -34,9 +34,9 @@ class UserAccInfo extends React.Component {
 
   resetLoginValues() {
     console.log('resetLoginValues');
-    if(this.props.resetCartVarPro) {
-      this.props.resetCartVarPro();
-    }
+    // if(this.props.resetCartVarPro) {
+    //   this.props.resetCartVarPro();
+    // }
     if (this.props.resetCallbackPro) {
       this.props.resetCallbackPro();
     }

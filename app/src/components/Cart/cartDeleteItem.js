@@ -8,7 +8,6 @@ class DeleteCartItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			prodName: this.props.productName,
 			show: false
 		}
 		this.handleShow = this.handleShow.bind(this);
@@ -65,7 +64,7 @@ class DeleteCartItem extends React.Component {
 		this.setState({ show: true });
 	}
 	render() {
-		const { prodName } = this.state;
+		const { productName } = this.props;
 		return (
 			<>
 			<form className="delCartItem" onClick={this.handleShow}>
@@ -79,7 +78,7 @@ class DeleteCartItem extends React.Component {
 							<div className='del_modal'>
 								<h4 className='heading'>Are you sure you want to remove </h4>
 								<p className='itemDelInfo'>
-									{prodName}
+									{productName}
 								</p>
 								<h4 className='heading'>from your cart?</h4>
 								<div className='userAction'> 

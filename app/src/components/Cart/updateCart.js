@@ -53,6 +53,13 @@ class CartUpdate extends React.Component {
       });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.quantity !== nextProps.quantity){
+      this.setState({
+        quantity: nextProps.quantity
+      })
+    }
+  }
 
   render() {
     return (

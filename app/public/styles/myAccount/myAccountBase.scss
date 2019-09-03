@@ -340,17 +340,28 @@
       .modal-content{
         .modalwrapper{
           padding: 20px 20px 0px 20px;
-		  .heading{
-		    text-align: center;
-		  }
+          .actionBtnWrapper{
+            margin-left: -20px;
+            margin-right: -20px;
+          }
+        .heading{
+          text-align: center;
+          font-family: $font-regular;
+          font-size: 14px;
+        }
         .deleteQuestion{
           align-content: center;
           margin: 0px;
-          padding: 20px 70px;
+          padding: 20px 60px;
           }          
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;
+              width: 50%;
+            }
+            .btn-cancel{
+              border-left: 0px;
+              border-top: 1px solid $greyWhite;
             }
             .btn-save{
               margin: 0px;

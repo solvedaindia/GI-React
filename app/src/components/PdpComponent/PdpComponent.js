@@ -20,7 +20,7 @@ import MobileQuantityAndPincode from '../PdpComponent/mobileComponents/quantityA
 import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
-import { pinCodeAPI } from '../../../public/constants/constants';
+import { pinCodeAPI, pinCodeAPIBundle } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
@@ -135,7 +135,7 @@ class PdpComponent extends React.Component {
 			pincodeData: defaultPincodeData
 		});
 
-		this.callPinCodeAPI(resolvedSkuData);
+		this.callPinCodeAPI(resolvedSkuData, type);
 	}
 
 	/* handle swatches */
@@ -186,16 +186,51 @@ class PdpComponent extends React.Component {
 		return selectedSwatches;
 	}
 
-	callPinCodeAPI(resolvedSkuData) {
-		const dataParams = {
-			params: {
-			partnumber: resolvedSkuData.partNumber,
-			quantity: 1,
-			uniqueid: resolvedSkuData.uniqueID,
-			},
-		};
+	/* get pincode API params */
+	getPincodeApiParams(resolvedSkuData, type) {
+		let partnumber = [];
+		let quantity = [];
+		let uniqueid = [];
+		let dataParams;
+		if (resolvedSkuData.itemInThisBundle && type === 'bundle') {
+			resolvedSkuData.itemInThisBundle.map((data) => {
+				partnumber.push(data.partNumber);
+				quantity.push(data.quantity);
+				uniqueid.push(data.uniqueID);
+				
+				 dataParams = {
+					params: {
+					partnumber: partnumber.toString(),
+					quantity: quantity.toString(),
+					uniqueid: uniqueid.toString(),
+					},
+				};
+			})
+		} else {
+			 dataParams = {
+				params: {
+				partnumber: resolvedSkuData.partNumber,
+				quantity: 1,
+				uniqueid: resolvedSkuData.uniqueID,
+				},
+			};
+		}
 
-		apiManager.get(pinCodeAPI + appCookie.get('pincode'), dataParams).then(response => {
+		return dataParams;
+
+	}
+
+	callPinCodeAPI(resolvedSkuData, type) {
+		let callPincodeApi;
+		if (type === 'bundle') {
+			callPincodeApi = pinCodeAPIBundle;
+		} else {
+			callPincodeApi = pinCodeAPI;
+		}
+
+		const dataParams = this.getPincodeApiParams(resolvedSkuData, type);
+
+		apiManager.get(callPincodeApi + appCookie.get('pincode'), dataParams).then(response => {
 			this.setState({
 				isLoading: false,
 				pincodeData: response.data.data,

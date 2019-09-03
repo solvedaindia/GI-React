@@ -110,6 +110,13 @@ $screen-xs-mobile-width: 320px;
     }
  }
 
+// tablet devices - 767 only
+@mixin mix-sm-mobile {
+    @media screen and (max-width: #{$screen-sm-tablet-width}){
+        @content;
+    }
+ }
+
 // tablet devices - 768 only
   @mixin mix-md-tablet {
     @media screen and (max-width: #{$screen-md-tablet-width}){
