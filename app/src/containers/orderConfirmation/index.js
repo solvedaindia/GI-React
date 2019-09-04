@@ -209,7 +209,7 @@ class OrderConformation extends React.Component {
 
                          {!isMobile()  &&<div className='seprator'></div>}
                         <div className='orderItemSummary'>
-                            <h4 className="heading-details">Products in your order</h4>
+                            <h4 className="heading-details">Items in Order</h4>
                             <div className="row">
                                 {this.state.orderData ? this.renderItems() : ''}
                             </div>
