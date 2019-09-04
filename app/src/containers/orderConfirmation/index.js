@@ -6,7 +6,7 @@ import appCookie from '../../utils/cookie';
 import moment from 'moment';
 import { getCookie } from '../../utils/utilityManager';
 import { imagePrefix } from '../../../public/constants/constants';
-import { formatPrice, mapPaymentMethodMode } from '../../utils/utilityManager';
+import { formatPrice, mapPaymentMethodMode, isMobile } from '../../utils/utilityManager';
 import {
     storeId,
     accessToken,
@@ -83,31 +83,33 @@ class OrderConformation extends React.Component {
         if (this.state.orderData) {
             this.state.orderData.orderItems.forEach((item) => {
                 items.push(
-                    <div className="col-md-6 paddingRight">
+                    <div className="col-md-6 paddingRight orderItemsList">
                         <div className='itemOrderdata'>
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className={!isMobile() ? 'col-xs-4 col-sm-3 col-md-4':'col-xs-4 col-sm-3 col-md-4 orderItemsImg'}>
                                     <div className='itemImg'>
                                        <img className='imgFullwidth' src={`${imagePrefix}${item.thumbnail}`} alt='itemImg' />
                                     </div>                                    
                                 </div>
 
-                                <div className="col-md-8 borderLeft">
+                                <div className={!isMobile() ? 'col-xs-8 col-sm-9 col-md-8 borderLeft':'col-xs-8 col-sm-9 col-md-8'}>
                                     <div className='itemText'>
                                     <h4 className='heading'>{item.productName}</h4>
                                     <p className='subText'>{`(${item.shortDescription})`}</p>
                                     <div className="row">
-                                        <div className="col-md-4">
-                                            <div className='headingSubtext'>Quantity</div>
+                                        <div className="col-xs-6 col-sm-6 col-md-4 qty-details">
+                                            <div className='headingSubtext'>Quantity {isMobile()&&': '}</div>
                                             <div className='quantityDelivery'>{item.quantity}</div>
                                         </div>
-                                        <div className="col-md-8">
+                                        {isMobile()&&<div className='col-xs-6 col-sm-6 item-per-price'>₹{formatPrice(item.offerPrice)}</div>}
+
+                                        <div className="col-xs-12 col-sm-12 col-md-8 dlivery-desc">
                                             <div className='headingSubtext'>Delivery On</div>
                                             <div className='quantityDelivery'>{this.state.orderData.orderDate}</div>
                                         </div>
                                     </div>
-                                    <div className='priceHeading'>Price</div>
-                                    <div className='priceVal'>₹{formatPrice(item.offerPrice)}</div>
+                                    {!isMobile()&&<><div className='priceHeading'>Price</div>
+                                    <div className='priceVal'>₹{formatPrice(item.offerPrice)}</div></>}
                                     </div>
 
                                 </div>
@@ -156,57 +158,74 @@ class OrderConformation extends React.Component {
                                 <p className="text">We will send an email to your registered address when your order is ready to be shipped.</p>
                             </div>
                         </div>
-                        <div className="col-md-3">
+                        {!isMobile()  &&<div className="col-md-3">
                             <div className="continueShopping">
                                 <button onClick={this.onContinueShoppingBtn.bind(this)} className="btn-bg">Continue Shopping</button>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                     <div className="orderDetails">
+                        <div className='trackOrdersData'>
                         <h4 className="heading-details">Order Details</h4>
                         {this.state.orderData ? <div className="row">
-                            <div className="col-md-2">
+                            <div className="col-xs-6 col-sm-6 col-md-2">
                                 <div className='heading'>Order ID</div>
                                 <div className='subText'>{this.state.orderData.orderID}</div>
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-xs-6 col-sm-6 col-md-2">
                             <div className="heading">Order Date</div>
                             <div className="subText">{this.state.orderData.orderDate}</div>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-xs-6 col-sm-6 col-md-3">
                                 <div className='heading'>Address</div>
                                 <div className="subText">{this.state.orderData.address.address}, {this.state.orderData.address.city}, {this.state.orderData.address.state}, {this.state.orderData.address.pincode}</div>
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-xs-6 col-sm-6 col-md-2">
                                <div className='heading'>Payment Method</div>
                                <div className="subText">{mapPaymentMethodMode(this.state.orderData.paymentMethod)}</div>
                             </div>
-                            <div className="col-md-3">
+                            {!isMobile()  &&<div className="col-md-3">
                             <div className='heading'>Total Amount</div>
                             <div className="totalAmount">₹{formatPrice(this.state.orderData.orderSummary.netAmount)}</div>
-                            </div>
-                        </div> : ''}
-
+                            </div>}
+                        </div>: ''}</div>
+                        
                         {getCookie('isLoggedIn') === 'true' ? (
+                            <div className='trackOrderBtnBox'>
                             <Link
                                 className="action"
                                 to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
                             >
                                 <button className="btn-bg btntrackorder">Track Order</button>
-                            </Link>
+                            </Link></div>
                         ) : (
+                            <div className='trackOrderBtnBox'>
                                 <Link className="action" to="/guestTrackOrder">
                                     <button className="btn-bg btntrackorder">Track Order</button>                                    
-                                </Link>
+                                </Link></div>
                             )}
 
 
 
-                        <div className='seprator'></div>
-                        <h4 className="heading-details">Products in your order</h4>
-                        <div className="row">
-                            {this.state.orderData ? this.renderItems() : ''}
+                         {!isMobile()  &&<div className='seprator'></div>}
+                        <div className='orderItemSummary'>
+                            <h4 className="heading-details">Items in Order</h4>
+                            <div className="row">
+                                {this.state.orderData ? this.renderItems() : ''}
+                            </div>
                         </div>
+
+                        {isMobile()  &&
+                        <div className='row track-order-total'>
+                        {this.state.orderData &&<div className="order-price-details">
+                            <div className='heading'>Total:</div>
+                            <div className="totalAmount">₹{formatPrice(this.state.orderData.orderSummary.netAmount)}</div>
+                        </div>}
+                        
+                        <div className="continueShopping">
+                            <button onClick={this.onContinueShoppingBtn.bind(this)} className="btn-bg">Continue Shopping</button>
+                        </div>
+                        </div>}
                     </div>
                 </div>
                 {this.state.showPop ? <SuccessPop /> : ''}

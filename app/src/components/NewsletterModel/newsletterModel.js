@@ -29,6 +29,7 @@ import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.png';
 import newsLetterMobPopupImg from '../../../public/images/news-letter_01.png';
 import { isMobile } from '../../utils/utilityManager';
+import ContentEspot from '../../components/Primitives/staticContent';
 class NewsletterModel extends React.Component {
   constructor(props) {
     super(props);
@@ -129,7 +130,7 @@ class NewsletterModel extends React.Component {
           <Row className="no-margin">
             <Col xs={12} md={5} className="no-padding">
               <div className="Thumbnailbox">
-                {!isMobile() ? <img className="imgfullwidth" src={NewsletterThumbnailImg} /> : <img className="imgfullwidth" src={newsLetterMobPopupImg} />}
+                {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_WEB' } />: <ContentEspot espotName = { 'GI_NEWSLETTER_MOBILE' } />}
               </div>
             </Col>
 

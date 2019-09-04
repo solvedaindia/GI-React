@@ -39,7 +39,7 @@ class DeletePopup extends React.Component {
         <Modal.Body>
           <div className="modalwrapper">
 		   <div className="deleteQuestion"> 
-			<p className="heading">Are you sure you want delete the address?</p> 
+			<p className="heading">Are you sure you want delete this address?</p> 
 		  </div>
          {!isMobile() && <Button className="cancelBtn" onClick={this.toggle} />}
 

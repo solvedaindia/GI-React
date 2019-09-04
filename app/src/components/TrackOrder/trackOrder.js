@@ -71,7 +71,7 @@ class TrackOrder extends React.Component {
             slidesToScroll: 1,
           };
         return (
-           !!orderData && !!orderData.ongoingOrders.orderItems &&
+           !!orderData && !!orderData.ongoingOrders &&
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
@@ -99,7 +99,7 @@ class TrackOrder extends React.Component {
                                                     <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
                                                         <span className='statusVal val'>{shipmentDetails.status}</span>
                                                     </span>
-                                                    <span className='delDate item'>{!isMobile() ? 'DELIVERY ON' : 'Delivery on:' }
+                                                    <span className='delDate item'>{!isMobile() ? 'Delivery on' : 'Delivery on:' }
                                                         <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
                                                     </span>
                                                 </div>

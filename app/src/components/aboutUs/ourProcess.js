@@ -1,21 +1,13 @@
 import React from 'react';
-import MediaPress from '../../components/aboutUs/mediaPress';
-import { Link } from 'react-router-dom';
-import { Col, Form, FormControl, Button } from 'react-bootstrap';
-import WidgetList from '../../components/HomePageStatic/widgetList';
 import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
-import {isMobile} from '../../utils/utilityManager';
-import {
-  imagePrefix,aboutUsOurProcessApi,
-} from '../../../public/constants/constants';
-import AboutTopMost from '../../components/aboutUs/aboutUsTop';
-import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
+import {espotAPI, imagePrefix} from '../../../public/constants/constants';
 
 export class OurProcess extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_OUR_PROCESS',
       data:[],
       img_url: '',
       content: '',
@@ -91,7 +83,7 @@ getImageOnArrowClick = (e) =>{
 getOurProcessData()
 {
   apiManager
-  .get(aboutUsOurProcessApi)
+  .get(espotAPI + this.state.espotName)
   .then(response => {
     console.log('getOurProcessData', response)
     const {data} = response || {}
@@ -132,7 +124,7 @@ getButtons=(data)=>{
 
 
 render() {
-    let views = this.getButtons(this.state.data);
+    let viewers = this.getButtons(this.state.data);
     return (
  
       <div className='OurProcessContainer' id='design-process'>
@@ -147,7 +139,7 @@ render() {
               <img className='processBigImg' src={imagePrefix + this.state.img_url} alt='image' />
               <div>
                 
-                {views}
+                {viewers}
                 <button name='arrowClick' className='arrowNumber' onClick={this.getImageOnArrowClick} >
                   <svg xmlns='http://www.w3.org/2000/svg' width='29' height='25' viewBox='0 0 29 25'  >
                     <g fill='none' fill-rule='evenodd' stroke='#000000'>

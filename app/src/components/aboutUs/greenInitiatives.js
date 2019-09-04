@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/aboutUs.scss'
 import {
- imagePrefix,aboutUsGreenInitiativesApi
-} from '../../../public/constants/constants';
+ imagePrefix,espotAPI} from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 
 export default class GreenInitiatives extends Component {
@@ -12,6 +11,7 @@ export default class GreenInitiatives extends Component {
     
 
     this.state = {
+      espotName:'GI_GREEN_INITIATIVES',
      title:'',
      slides: []
     };
@@ -29,8 +29,8 @@ export default class GreenInitiatives extends Component {
   }
   getGreenUnititaiveData(){
     apiManager
-      .get(aboutUsGreenInitiativesApi)
-      .then(response => {
+    .get(espotAPI + this.state.espotName)
+    .then(response => {
         console.log('aboutUsGreenInitiativesApi', response)
         const {data} = response || {}
         console.log('aboutUsGreenInitiativesApi Title', data.data.bannerList);

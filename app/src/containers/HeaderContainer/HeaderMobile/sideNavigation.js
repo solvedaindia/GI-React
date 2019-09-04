@@ -304,7 +304,7 @@ export class HeaderMobile extends React.Component {
                   }
                   className="navTxt"
                 >
-                  {categoryData.categoryName}
+                  {categoryData.categoryName.toLowerCase() === 'rooms' || categoryData.categoryName.toLowerCase() === 'products' ? ("Shop by "+categoryData.categoryName):(categoryData.categoryName)}
                   {categoryData.subCategoryArray.length > 0 ? (
                     <span className="arrow">
                       <img

@@ -29,10 +29,12 @@
               min-height: auto;
 
               .registerHere {
-                color: blue;
+                color:$ceruleanblue;
                 border: 0;
-                text-decoration: underline;
-                height: 0px;
+                text-decoration: underline;                
+                margin:0;
+                -webkit-border:0;
+                background: transparent;
               }
             }
 

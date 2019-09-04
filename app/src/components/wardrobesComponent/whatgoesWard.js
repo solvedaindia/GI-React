@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import  '../../../public/styles/static-pages/warobes.scss';
-const prevArrowImg = (
-  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
-);
-const nextArrowImg = (
-  <img src={require('../SVGs/carousel__arrowRight.svg')} />
-);
+import '../../../public/styles/static-pages/kitchen.scss';
+
 export default class WhatGoesward extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +34,8 @@ export default class WhatGoesward extends Component {
     
     };
     return (
+      <div className="col-md-6">
+<div className='whatGoesArrow'>
  <Slider {...settings}>
           {this.state.slides.map(function(slide) {
             return (
@@ -48,7 +45,9 @@ export default class WhatGoesward extends Component {
             );
           })}
         </Slider>
-
+        </div>
+   
+</div>
     );
   }
 }

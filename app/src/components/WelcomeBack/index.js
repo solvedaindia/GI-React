@@ -17,8 +17,6 @@ import {
 } from '../../utils/socialLoginHandler';
 
 import {
-  storeId,
-  accessToken,
   accessTokenCookie,
   userLoginAPI,
 } from '../../../public/constants/constants';

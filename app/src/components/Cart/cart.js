@@ -57,11 +57,11 @@ class CartCount extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener(
-      'click',
-      this.handleOutsideClick.bind(this),
-      true,
-    );
+    // document.addEventListener(
+    //   'click',
+    //   this.handleOutsideClick.bind(this),
+    //   true,
+    // );
     this.fetchMinicartDetails();
 
     // this.getCartCount();
