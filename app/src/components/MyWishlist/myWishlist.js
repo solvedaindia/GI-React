@@ -42,7 +42,7 @@ class MyWishlist extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (getCookie('isLoggedIn') !== 'true') {
+    if (getCookie('isLoggedIn') !== 'true' && this.props.location.search === '') {
       this.props.history.push('/')
       return;
     }
@@ -129,7 +129,7 @@ class MyWishlist extends React.Component {
           externalIdentifier: response.data.data.externalIdentifier,
           isLoading: true,
         });
-        this.shareURLFormation();
+        this.shareURLFormation(response.data.data.wishlistData.length);
       })
       .catch(error => {
         console.log('Wishlist rrror---', error);
@@ -140,7 +140,7 @@ class MyWishlist extends React.Component {
       });
   }
 
-  shareURLFormation() {
+  shareURLFormation(wishlistCount) {
     const shareURL = `${window.location.href}?`;
     const parmaURL = `${getCookie('name')}${seperateStr}${
       this.state.guestAccessKey
@@ -148,8 +148,8 @@ class MyWishlist extends React.Component {
 
     // Encrypt
     const ciphertext = CryptoJS.AES.encrypt(parmaURL, encryptKey).toString();
-    console.log('its encryptt --- ', ciphertext);
-    this.props.rwdShareWishlistURL(shareURL + ciphertext);
+    console.log('its encryptt --- ', ciphertext,this.state.wishlistData.length);
+    this.props.rwdShareWishlistURL(wishlistCount === 0 ? null : shareURL + ciphertext);
     this.setState({
       sharingURL: shareURL + ciphertext,
     });
