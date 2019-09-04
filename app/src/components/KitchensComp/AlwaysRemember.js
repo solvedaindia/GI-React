@@ -1,11 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 
-import {
-    AlwaysRememberApi,
-    imagePrefix,
-   
-  } from '../../../public/constants/constants';
+import {espotAPI,imagePrefix} from '../../../public/constants/constants';
   
 import  '../../../public/styles/static-pages/kitchens.scss'
 
@@ -15,6 +11,7 @@ class AlwaysRemember extends React.Component {
     
 
         this.state = {
+          espotName:'GI_KITCHEN_PLANNING',
             imageFirstSrc: '',
             imageSecondSrc:'',
             imagethirdSrc: '',
@@ -60,7 +57,7 @@ class AlwaysRemember extends React.Component {
       
     getAlwaysRememberData() {
     apiManager
-      .get(AlwaysRememberApi)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of remember', response)
         const {data} = response || {}

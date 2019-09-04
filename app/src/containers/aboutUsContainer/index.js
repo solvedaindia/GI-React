@@ -11,20 +11,7 @@ export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[],
-      img_url: '',
-      content: '',
-      component_title:'',
-      title:'',
-      sub_title:'',
-      selected_index:0,
-      button1: false,
-      button2: false,
-      button3: false,
-      button4: false,
-      button5: false,
-      button6: false,
-      button7: false
+     
 
     };
   }

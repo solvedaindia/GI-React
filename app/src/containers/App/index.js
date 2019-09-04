@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
-import { getCookie } from '../../utils/utilityManager';
+import { getCookie,isMobile } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
   accessTokenCookie,
@@ -69,6 +69,7 @@ import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -97,7 +98,9 @@ export default class App extends React.Component {
     if(header) {
       header.classList.remove("sticky");
     } 
-    window.scrollTo(0, 0);
+    if(!isMobile()){
+      window.scrollTo(0, 0);
+    }
   }
 
   initialLoginHandling() {

@@ -5,12 +5,52 @@
   /*-----CSS for Inspiration details page-----*/
   
   .inspirationDetails {
+    .recommededSlides {
+        .slick-slide img {
+            width: 90%;
+        
+            .topTitle {
+                margin: 0; 
+                font-family: $font-medium;
+            }
+            .desc {
+                width: 40%;
+                margin: $base*2 auto $base*5 auto;
+            }
+            .desc,
+            .topTitle {
+                text-align: left;
+            }
+            
+           
+        }
+
+        .slick-slider{
+            .slick-prev,.slick-next{
+                display: none !important;
+            }
+        }
+        
+    }
+
+  
     height: auto;
 width:100%;
-.recImages{
-
-
+.lookbookImgSize{
+    width: 70%;
+  margin: 60px auto;
+  .slick-prev {
+    left: -60px;
 }
+.slick-next {
+    right: -60px;;
+}
+.slick-next::before,
+.slick-prev::before {
+    font-size: 30px;
+    color: transparent;
+}
+  }
 .recommendedLookbook{
     .slick-slide{
         margin:0 15px 0 0;

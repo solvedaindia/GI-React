@@ -22,13 +22,13 @@ export class Inspiration extends React.Component {
 
   render() {
     return (
-      <div className="staticpages inspiration">
+      <div className="staticpage inspiration">
 	   
         <InspirationBanner />
 		<Breadcrumb {...this.props.match.params} staticName = {'Inspiration'}/>
         <LookbookThemeCarousel />
-        <SummerData/>
-        <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />
+        <ContentEspot espotName={ 'GI_INSPIRATION_SUMMER' } />
+         <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />
           <ContentEspot espotName={ 'GI_LOOKBOOK_5' } />
         <ContentEspot espotName={ 'GI_LOOKBOOK_6' } />
       </div>

@@ -85,7 +85,7 @@ class ForgotPasswordEmailMobile extends React.Component {
         const lll = (
           // {errorKey === 'invalid_user_id' ?  ` Please click ${<button>here</button>} to register` : null}
           <>
-            Please click <button onClick={this.onRegisterRedirectClick} className='registerHere'>here</button> to register
+            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>here</span> to register
           </>
         )
         const errorItem = (

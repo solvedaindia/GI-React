@@ -17,8 +17,6 @@ import {
 } from '../../utils/socialLoginHandler';
 
 import {
-  storeId,
-  accessToken,
   accessTokenCookie,
   userLoginAPI,
 } from '../../../public/constants/constants';
@@ -96,7 +94,7 @@ class WelcomeBack extends React.Component {
         firstName,
         lastName,
         authorizationProvider: 'facebook',
-        userId: response.userID,
+        userId: response.email,
         socialToken: response.accessToken,
         emialId: response.email,
       });

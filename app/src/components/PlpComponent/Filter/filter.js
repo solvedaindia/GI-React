@@ -171,6 +171,12 @@ class Filter extends React.Component {
     this.filterOptions(extFacetArr);
   }
 
+  componentWillReceiveProps() {
+    if (this.state.active && isMobile()) {
+      this.unCkeckAll();
+    }
+  }
+
   onApplyBtnClick() {
     console.log('TotalFaeexxxxx--', this.state.facetArr);
     this.state.facetArr.map(item => {

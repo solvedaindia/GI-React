@@ -3,10 +3,7 @@ import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/static-pages/inspiration.scss';
 import '../../../public/styles/slider.scss';
-import {
-  lookbookThemeAPI,
-  imagePrefix,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
   
 
@@ -14,6 +11,7 @@ class LookbookThemeCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_LOOKBOOK_THEME',
       lookbookThemeSlider: null,
       isLoading: false,
       error: null,
@@ -25,7 +23,7 @@ class LookbookThemeCarousel extends React.Component {
 
   getkitchensHallData() {
     apiManager
-      .get(lookbookThemeAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of kitchen hall', response)
         const {data} = response || {}

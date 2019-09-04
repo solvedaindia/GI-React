@@ -4,15 +4,13 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
 
-import {
-  kitchenHallAPI,
-  imagePrefix,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
 class KitchenHall extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_KITCHENS_HALL_OF_FAME',
       hallSlider: null,
       isLoading: false,
       error: null,
@@ -24,7 +22,7 @@ class KitchenHall extends React.Component {
 
   getkitchensHallData() {
     apiManager
-      .get(kitchenHallAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
@@ -52,7 +50,6 @@ class KitchenHall extends React.Component {
 
   render() {
     const { hallSlider, title, description } = this.state;
-    // console.log('test data', description)
     const settings = {
       dots: false,
       infinite: true,

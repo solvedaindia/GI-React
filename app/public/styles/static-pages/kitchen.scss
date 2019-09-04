@@ -44,6 +44,28 @@
         color: transparent;
     }
 }
+.whatGoesArrow{
+    .slick-initialized .slick-slide {
+      padding: 0 15px;
+  }
+  .slick-next {
+      right: 70px;
+  }
+  .slick-prev {
+      right: 119px;
+      left: unset;
+  }
+  .slick-prev,
+  .slick-next {
+      top: unset;
+      bottom: -20%;
+  }
+  .slick-next::before,
+  .slick-prev::before {
+      font-size: 30px;
+      color: transparent;
+  }
+  }
 
 .goesOnKitchen {
     .slick-prev {
@@ -68,14 +90,14 @@
             margin-bottom: 20px;
             background-color: #fff;
             border: none;
-            border-bottom: 1px solid $borderLight;
+            border-bottom: none;
             border-radius: unset;
             -webkit-box-shadow: unset;
             box-shadow: unset;
         }
         .panel + .panel {
             border: none;
-            border-bottom: 1px solid $borderLight;
+            border-bottom: none;
         }
         .panel-default > .panel-heading {
             background-color: transparent;

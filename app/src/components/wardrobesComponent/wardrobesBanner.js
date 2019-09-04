@@ -4,17 +4,13 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/warobes.scss';
 
-import {
-  wardrobesBannerAPI,
-  imagePrefix,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import {imagePrefix,espotAPI} from '../../../public/constants/constants';
 
 class WardrobeBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName:'GI_WARDROBES_BANNER',
       wardrobeSlider: null,
       isLoading: false,
       error: null,
@@ -27,7 +23,7 @@ class WardrobeBanner extends React.Component {
 
   getWardrobesBannerData() {
     apiManager
-      .get(wardrobesBannerAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}
