@@ -1,34 +1,35 @@
 import React from 'react';
-import apiManager from '../../utils/apiManager';
+import Geocode from "react-geocode";
 import {
-    storeAPI,
-    imagePrefix
+    mapKey
 } from '../../../public/constants/constants';
-import { isMobile } from '../../utils/utilityManager';
+import appCookie from '../../utils/cookie';
 import '../../../public/styles/store/store.scss';
+import StoreDetails from './storeDetails';
 
 export class ExStore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             storeData: null,
-            long: this.props.longitude,
-            lat: this.props.latitude,
-            testLat: '13.10127',
-            testLong: '80.2873',
+            long: null,
+            lat: null,
             isLoading: false,
             error: null
         };
+        console.log('Test props', this.props);
     }
     
-    getStoreData() {
-        apiManager.get(`${storeAPI}?latitude=${this.state.testLat}&longitude=${this.state.testLong}`)
-        .then( response => {
+    /* get lat and long */
+    getLatAndLong(pinCode) { 
+        Geocode.setApiKey(mapKey);
+        Geocode.fromAddress(pinCode).then( response => {
+            const { lat, lng } = response.results[0].geometry.location;
             this.setState({
-                storeData: response.data.data[0],
-                isLoading: false
-            })
-            console.log('@@@@ Store Data @@@@@', response.data.data);
+                lat: lat,
+                long: lng
+            });
+            console.log('Check Get Data - Store', response.results[0].geometry.location)
         })
         .catch(error => {
             this.setState({
@@ -39,27 +40,15 @@ export class ExStore extends React.Component {
     }
 
     componentDidMount() {
-        this.getStoreData();
+        this.getLatAndLong(appCookie.get('pincode'));
 	}
 
 	render() {
-        const { storeData, index } = this.state;
-        if ( storeData == '') return null;
+        const { lat, long } = this.state;
+        
 		return (
-            !!storeData && 
-                <div className='exStore' key={index}>
-                    {!isMobile() ? 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> 
-                        : 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-mweb.png`} alt='Store Image'/> 
-                    }
-                    <div className='content'>
-                        {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
-                        <h1 className='title'>Experience Our Stores</h1>
-                        {!isMobile() ? <p className='details'>Experience our products at <span className='place'>{storeData.city}</span><span className='dist'>({storeData.distance}) km away.</span><br></br>You can find more stores around you.</p> : <p className='details'>Experience products at <span className='place'>{storeData.city}</span><span className='dist'>({storeData.distance})</span> near you.</p>} 
-                        {!isMobile() ? <a href='/storelocator' ><button className='btn-flat'>Find More Stores</button></a> : <a href='/storelocator' ><button className='btn-flat'>Explore More Stores</button></a> }
-                    </div>
-                </div>
+            !!lat && !!long &&
+            <StoreDetails longitude={long} latitude={lat} />
 		);
 	}
 }

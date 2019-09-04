@@ -86,7 +86,7 @@ export class MyAccountContainer extends React.Component {
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
         <ul className="nav nav-tabs">
-          {this.state.profileName !== null ? <h4 className="username">Hi, {this.state.profileName.split(' ')[0]}!</h4> : null}
+          {this.state.profileName !== null ? <h4 className="username">Hello {this.state.profileName.split(' ')[0]}!</h4> : null}
           {/* {this.props.username !== null ? (
             <h4 className="username">{this.props.username}!</h4>
           ) : null} */}

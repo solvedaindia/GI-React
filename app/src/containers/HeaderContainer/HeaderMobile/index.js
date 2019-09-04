@@ -25,6 +25,7 @@ class HeaderMobile extends React.Component {
       isOnHome: false,
       headerRenderItem: null,
       showSocialShare: false,
+      wishlistURL: null,
     };
     this.headerCallback = this.headerCallback.bind(this);
     this.pageNavigationRender = this.pageNavigationRender.bind(this);
@@ -55,6 +56,13 @@ class HeaderMobile extends React.Component {
       if (nextProps.updatedHeaderVal === 'My Order Redirect') {
         this.pageNavigationRender('My Order');
       }
+    }
+
+    
+    if (nextProps.shareWishlistURL !== this.props.shareWishlistURL) {
+      this.state.wishlistURL = nextProps.shareWishlistURL
+      console.log('idid --- ',nextProps.shareWishlistURL, this.props.shareWishlistURL);
+      this.pageNavigationRender('My Wishlist');
     }
 
   }
@@ -124,7 +132,7 @@ class HeaderMobile extends React.Component {
     this.pageNavigationRender('My Wishlist');
   }
 
-  pageNavigationRender = (pageName) => {
+  pageNavigationRender = (pageName) => {  
     let item = (
       <Row>
         <Col xs={12} md={12} className='backToCategory'>
@@ -141,7 +149,7 @@ class HeaderMobile extends React.Component {
               <span className='navigationTitle'>{pageName}</span>
             </li>
           </ul>
-          {pageName === 'My Wishlist' ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
+          {/* pageName === 'My Wishlist' */this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
             {/* <ShareLogo /> */}
             {/* {this.state.showSocialShare ? ( */}
 
@@ -198,7 +206,7 @@ function mapStateToProps(state) {
   const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
   const wishlistURL = getReleventReduxState(stateObj, 'rwdWishlistShareURL');
   const updatedHeader = getReleventReduxState(stateObj, 'updatedRWDHeader');
-  console.log('Mobile Header Subscription --- ', updatedHeader);
+  console.log('Mobile Header Subscription --- ', wishlistURL);
 
   return {
     isHeaderReset: defalutHeaderFlag,
