@@ -188,11 +188,11 @@ class CartDetail extends React.Component {
                 <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
                 <span className='savingText'>You saved <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
               </p>:''}
-              {!isMobile() ? (<a className={`btn btnCheckout ${disableCheckout ? 'disable' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed to Checkout</a>)
+              {!isMobile() ? (<a id='checkoutBtn' className={`btn btnCheckout ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed to Checkout</a>)
               :
               (<div className="checkout-btn-floater">
                   <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">Total Amount</span></div></div>
-                  <div className="proceed-btn"><a className={`btn-blackbg btn-block ${disableCheckout ? 'disable' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed</a></div>
+                  <div className="proceed-btn"><a id='checkoutBtn' className={`btn-blackbg btn-block ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed</a></div>
                 </div>)}
             </div>
           </div>

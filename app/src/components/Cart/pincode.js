@@ -10,16 +10,28 @@ import { is } from 'immutable';
 
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
 class Pincode extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      error: null,
-	  pincodeVal: appCookie.get('pincode'),
-	  edit: false
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+		isLoading: false,
+		error: null,
+		pincodeVal: appCookie.get('pincode'),
+		edit: false
+		};
+	}
 
+	enableCheckoutBtn() {
+		var btn = document.getElementById('checkoutBtn');
+		if(btn.classList.contains('disable')){
+			btn.classList.remove('disable')
+		}
+	}
+	disableCheckoutBtn() {
+		var btn = document.getElementById('checkoutBtn');
+		if(!btn.classList.contains('disable')){
+			btn.classList.add('disable')
+		}
+	}
 	updatePincode(props) {
 		const pincode = document.getElementById('pincodeVal').value;
 		appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
@@ -50,18 +62,21 @@ class Pincode extends React.Component {
 			this.setState({
 				error: null
 			})
+			this.enableCheckoutBtn();
 			this.props.getCartDetails();
-
 		})
 		.catch(error => {
 			this.setState({
 			error: error.response.data.error,
 			isLoading: false
 			});
+			this.disableCheckoutBtn();
 		});
 	}
 
-
+	componentDidMount() {
+		this.getPincodeService();
+	}
   render() {
 	const { error } = this.state;
 	let attrs = {};

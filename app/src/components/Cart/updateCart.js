@@ -64,7 +64,7 @@ class CartUpdate extends React.Component {
   render() {
     return (
       <form className="cartQty">
-        <label className="qytLabel">QUANTITY</label>
+        <label className="qytLabel">{!isMobile() ? 'QUANTITY' : 'QUANTITY:'}</label>
         <select
           className="qytList"
           value={this.state.quantity}
