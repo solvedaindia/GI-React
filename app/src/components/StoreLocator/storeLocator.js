@@ -305,7 +305,6 @@ class StoreLocator extends React.Component {
             }
         },error => {
                 let getStringVal = '';
-                console.log('getStringVal', this.props.history.location.state)
                 if (this.props.history.location.state.storeName) {
                     getStringVal = 'city';
                 } else if (this.props.history.location.state.storeId) {

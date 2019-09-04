@@ -29,17 +29,19 @@ class addToCartComponent extends React.Component {
       addToCartPopup: null,
       loading: true,
       pincodeVal: appCookie.get('pincode'),
-      isEdit: true
+      isEdit: true,
+      qtyVal: 1
     };
-    this.quantity = 1;
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
   }
 
   componentWillReceiveProps() {
-    this.quantity = 1;
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
+    this.setState({
+      qtyVal: 1
+    })
   }
 
   /* render delivery message */
@@ -126,9 +128,9 @@ class addToCartComponent extends React.Component {
   moveToCartClicked = inventory => {
     if (inventory.data.inventoryStatus === 'unavailable') {
       this.quantityErrorMessage = true;
-      this.quantity = document.getElementById('quantity').value;
       this.setState({
         loading: false,
+        qtyVal: document.getElementById('quantity').value
       });
     } else {
       const isPDPAddToCart = appCookie.get('isPDPAddToCart');
@@ -188,6 +190,7 @@ class addToCartComponent extends React.Component {
     setTimeout(() => {
       this.setState({
         addToCartPopup: null,
+        qtyVal: 1
       });
     }, 2000);
     return (
@@ -205,11 +208,17 @@ class addToCartComponent extends React.Component {
 
   /* product quantity increase and decrease */
   productQuantity = type => {
+    this.quantityErrorMessage = false;
     const quantity = document.getElementById('quantity').value;
     if (type === false && quantity > 1) {
-      document.getElementById('quantity').value = Number(quantity) - Number(1);
+      this.setState({
+        qtyVal: Number(quantity) - Number(1)
+      })
+        
     } else if (type === true && quantity < 99) {
-      document.getElementById('quantity').value = Number(quantity) + Number(1);
+      this.setState({
+        qtyVal: Number(quantity) + Number(1)
+      })
     }
   };
 
@@ -223,10 +232,10 @@ class addToCartComponent extends React.Component {
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
         appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
         appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
-        this.quantity = 1;
         props.handleAddtocart(true);
         this.setState({
           isEdit: true,
+          qtyVal: 1
         });
       }
     }
@@ -291,7 +300,7 @@ class addToCartComponent extends React.Component {
                 id="quantity"
                 type="text"
                 readOnly
-                value={this.quantity}
+                value={this.state.qtyVal}
               />
               <Button
                 className="btn"
@@ -303,7 +312,7 @@ class addToCartComponent extends React.Component {
           )}
           </>
           )}
-          { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.quantity)}
+          { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
           {this.quantityErrorMessage && <div>Quantity is not available</div>}
         </div>
         <ProductInfo
