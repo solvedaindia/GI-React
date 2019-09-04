@@ -17,7 +17,7 @@ class InspirationDetails extends React.Component {
             <div className="staticpage inspirationDetails">
             <Breadcrumb {...this.props.match.params} staticName = {'Inspiration Lookbook'}/>    
              < Lookbook/>
-                <Recommended/>
+                <Recommended/> 
                 <ContentEspot espotName={ 'GI_LOOKBOOK_3' } />
                <ContentEspot espotName={ 'GI_LOOKBOOK_4' } />
                </div>

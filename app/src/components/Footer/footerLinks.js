@@ -14,9 +14,9 @@ const Footerlinks = props => {
           <ul>
             {item.children.map((litem, i) => (
               <li className="list" key={i}>
-                <Link className='link' to={litem.action}>
+                <a className='link' href={litem.action}>
                     {litem.text}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

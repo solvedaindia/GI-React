@@ -3,12 +3,7 @@ import Slider from "react-slick";
 import  '../../../public/styles/static-pages/warobes.scss';
 import apiManager from '../../utils/apiManager';
 
-import {
-  typesOfWardrobesAPI,
-  imagePrefix,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
 export default class WrdrobesTypes extends Component {
   constructor(props) {
@@ -21,6 +16,7 @@ export default class WrdrobesTypes extends Component {
     const img6 = <img className="typeskitchenimg" src={`${imagePrefix}/B2C/EspotImages/Images/Banners/GI_Homepage_Hero_Banner1.png`} alt=""/>
 
     this.state = {
+      espotName:'GI_TYPES_OF_MODULAR_WARDROBES',
       slides: [img1, img2, img3, img4, img5, img6],
       wardrobeSlider: null,
       isLoading: false,
@@ -40,7 +36,7 @@ export default class WrdrobesTypes extends Component {
   }
   getTypesOfWardobData() {
     apiManager
-      .get(typesOfWardrobesAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of wardrobes types', response)
         const {data} = response || {}

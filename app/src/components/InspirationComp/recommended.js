@@ -4,14 +4,13 @@ import  '../../../public/styles/static-pages/inspirationDetails.scss'
 import apiManager from '../../utils/apiManager';
 
 import '../../../public/styles/static-pages/inspiration.scss'
-import {
-  recommendedAPI,
-} from '../../../public/constants/constants';
+import {imagePrefix,espotAPI} from '../../../public/constants/constants';
 export default class Recommended extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      espotName: 'GI_LOOKBOOK_RECOMMENDED_SLIDER',
       slides: [],
       recommendedSlider: null,
       isLoading: false,
@@ -23,7 +22,7 @@ export default class Recommended extends Component {
 
   getRecommendedData() {
     apiManager
-      .get(recommendedAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of kitchen hall', response)
         const {data} = response || {}
@@ -59,18 +58,19 @@ export default class Recommended extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 2,
+      prevArrow: null,
+      nextArrow: null,
     
     };
     return (
-      recommendedSlider && 
-      <div className="hallOfFame">
-        <h2 className="title">{title}</h2>
+      <div className="recommededSlides">
+        <h2 className="topTitle">{title}</h2>
         <p className="desc">{description}</p>
         <Slider {...settings}>
           {!!recommendedSlider &&
             recommendedSlider.map((sliderData, index) => (
               <a href={sliderData.onClickUrl} key={index} className='slides'>
-                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
                </a>
 
             ))}
