@@ -1,10 +1,12 @@
 .slick-prev::before {
     content: '';
-    background: url("http://203.110.85.50/imagestore/images/godrejInterio/LeftArrow.svg") no-repeat;
+    // background: url("http://203.110.85.50/imagestore/images/godrejInterio/LeftArrow.svg") no-repeat;
+    background: url("../../public/images/LeftArrow.svg") no-repeat;
 }
 .slick-next::before {
     content: '';
-    background: url("http://203.110.85.50/imagestore/images/godrejInterio/RightArrow.svg") no-repeat;
+    // background: url("http://203.110.85.50/imagestore/images/godrejInterio/RightArrow.svg") no-repeat;
+    background: url("../../public/images/RightArrow.svg") no-repeat;
 }
 .slick-next:before, 
 .slick-prev:before {
