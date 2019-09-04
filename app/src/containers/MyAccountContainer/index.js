@@ -69,7 +69,6 @@ export class MyAccountContainer extends React.Component {
   }
 
   render() {
-    console.log('In My Account ---- ', this.props);
     var redirectedFrom;
     if (this.props.location.state != undefined) {
       redirectedFrom = this.props.location.state.from;
@@ -86,7 +85,7 @@ export class MyAccountContainer extends React.Component {
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
         <ul className="nav nav-tabs">
-          {this.state.profileName !== null ? <h4 className="username">Hi, {this.state.profileName.split(' ')[0]}!</h4> : null}
+          {this.state.profileName !== null && this.state.profileName !== undefined ? <h4 className="username">Hi, {this.state.profileName.split(' ')[0]}!</h4> : null}
           {/* {this.props.username !== null ? (
             <h4 className="username">{this.props.username}!</h4>
           ) : null} */}
