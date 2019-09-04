@@ -99,9 +99,12 @@ class TrackOrder extends React.Component {
                                                     <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
                                                         <span className='statusVal val'>{shipmentDetails.status}</span>
                                                     </span>
+													{
+													if (shipmentData.expectedDeliveryDate !== '') && 
                                                     <span className='delDate item'>{!isMobile() ? 'Delivery on' : 'Delivery on:' }
-                                                        <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
+                                                        <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>
                                                     </span>
+													}
                                                 </div>
                                                 <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
                                                     <a className='link btn'>View Order</a>
