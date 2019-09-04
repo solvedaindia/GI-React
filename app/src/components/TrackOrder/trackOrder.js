@@ -99,7 +99,7 @@ class TrackOrder extends React.Component {
                                                     <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
                                                         <span className='statusVal val'>{shipmentDetails.status}</span>
                                                     </span>
-                                                    <span className='delDate item'>{!isMobile() ? 'DELIVERY ON' : 'Delivery on:' }
+                                                    <span className='delDate item'>{!isMobile() ? 'Delivery on' : 'Delivery on:' }
                                                         <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
                                                     </span>
                                                 </div>
