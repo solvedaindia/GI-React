@@ -96,7 +96,7 @@ class WelcomeBack extends React.Component {
         firstName,
         lastName,
         authorizationProvider: 'facebook',
-        userId: response.userID,
+        userId: response.email,
         socialToken: response.accessToken,
         emialId: response.email,
       });
