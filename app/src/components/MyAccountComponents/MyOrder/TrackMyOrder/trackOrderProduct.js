@@ -33,23 +33,17 @@ class TrackOrderProduct extends React.Component {
 
   filterDeliveryInstallationTags() {
     const shipmentData = this.props.shipmentDataPro;
-    console.log('ddkdkd -- ', shipmentData.expectedDeliveryDate, shipmentData.expectedInstallationDate);
     if (shipmentData.expectedDeliveryDate !== '') {
-      console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
       this.setState({
-        dsNameTag: 'DELIVERY ON',
-        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[1]
+        dsNameTag: 'Delivery on: ',
+        dsDateTag: shipmentData
       })
     }
     else if (shipmentData.expectedInstallationDate !== '') {
-      console.log('Installation -- ', shipmentData.installationDate)
-      // if (shipmentData.installationDate === '') {
         this.setState({
-          dsNameTag: 'INSTALLATION ON',
-          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          dsNameTag: 'Installation On: ',
+          dsDateTag: shipmentData
         })
-      // }
-
     }
 
   }

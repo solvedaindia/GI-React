@@ -28,15 +28,15 @@ class RWDSingleProduct extends React.Component {
     const shipmentData = this.props.orderDataPro.shipmentData[0];
     if (shipmentData.expectedDeliveryDate !== '') {
       this.setState({
-        dsNameTag: 'DELIVERY ON',
-        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0]
+        dsNameTag: 'Delivery on: ',
+        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0] + ', ' + shipmentData.expectedDeliveryDate.split(',')[1]
       })
     }
     else if (shipmentData.expectedInstallationDate !== '') {
       if (shipmentData.installationDate === '') {
         this.setState({
-          dsNameTag: 'INSTALLATION ON',
-          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
+          dsNameTag: 'Installation On: ',
+          dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0] + ', ' + shipmentData.expectedDeliveryDate.split(',')[1]
         })
       }
     }
@@ -55,7 +55,7 @@ class RWDSingleProduct extends React.Component {
             <div className='productName'>{productData.productName}</div>
             <div className='description'>{productData.shortDescription}</div>
             <div className='quantity'>Quantity: {this.props.isMultiTrackPro ? this.props.shipmentDataPro.quantity : productData.quantity}</div>
-            <div className='price'>{productData.offerPrice}</div>
+            <div className='price'>₹{productData.offerPrice}</div>
             <div className='deliveryTag'>
               <span>{this.state.dsNameTag}</span>
               <span>{this.state.dsDateTag}</span>
