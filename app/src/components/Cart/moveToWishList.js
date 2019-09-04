@@ -37,10 +37,13 @@ class MoveToWishList extends React.Component {
       });
   }
 
-  handleMoveToWishList() {
+  componentWillReceiveProps(){
+    console.log('Testing Wishlist');
+  }
+  handleMoveToWishList(e) {
     if (getCookie('isLoggedIn') !== 'true') {
       return this.setState({
-        loginScreen : !this.state.loginScreen
+        loginScreen : true
       })
     }
     const data = {
@@ -68,10 +71,12 @@ class MoveToWishList extends React.Component {
   render() {
     console.log('mimi -- ',this.state.loginScreen)
     return (
+      <>
       <div className="moveItem" onClick={this.handleMoveToWishList}>
         <MoveToWishListLogo width={19} height={16} />
-        {this.state.loginScreen ? <UserAccInfo fromWishlistPro/> : null}
       </div>
+      {this.state.loginScreen ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetCallbackPro} /> : null}
+      </>
     );
   }
 }
