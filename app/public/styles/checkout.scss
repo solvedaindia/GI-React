@@ -1305,6 +1305,27 @@
       }
     }
   }
+  .delete-modal{
+    &.succes{
+      &.in{
+        .modal-dialog{
+          .modal-content{
+            .modalwrapper{
+              &.succesModal{
+                .successIcon{
+                  text-align: center;
+                  img{
+                    width: 50%;
+                  }
+                }
+              }
+            }
+          } 
+        } 
+      }
+    }
+  } 
+
 }
 
 /* 
