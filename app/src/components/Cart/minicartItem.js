@@ -56,24 +56,20 @@ class MinicartItem extends React.Component {
 		var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.props.dataPro.uniqueID}`
     return (
       <>
+      
         <div className="minicartList">
           <Link className="link" to={routePath} onClick={this.onNavigationLink}>
             <div className="imgBox">
               {/* <img src={require('../../../public/images/miniItem1.png')} className="imgfullwidth" /> */}
               <img src={this.props.dataPro.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} onError={require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
-          </Link>
           <div className="product-text">
-            <Link className="link" to={routePath} onClick={this.onNavigationLink}>
-              <p className="heading">{this.props.dataPro.productName}</p>
-            </Link>
+            <p className="heading">{this.props.dataPro.productName}</p>
             <p className="description">
               ({this.props.dataPro.shortDescription})
             </p>
             {this.state.isFreeItem ? (<p className="price"><span className="discount-price">Free</span></p>) : (this.minicartPrice())}
-
             {this.state.isFreeItem ? null : discountAccessoriesItem}
-
             <p className="quantity-shipping clearfix">
               <span className="quantity">
                 Quantity
@@ -83,6 +79,7 @@ class MinicartItem extends React.Component {
               {this.shippingCharegeHandler()}
             </p>
           </div>
+          </Link>
         </div>
       </>
     );

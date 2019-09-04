@@ -23,23 +23,33 @@ export class HomapegeLayout extends React.Component {
 		};
 		this.hideCookiePopup = this.hideCookiePopup.bind(this);
 	}
-
+	
+	// Please DO NOT remove the commented code.
 	getIPData() {
-		apiManager
-		.get(ipDataApi, { headers: { Accept: 'application/json' } })
-		.then(response => {
-			this.setState({
-			ipData: response.data,
-			isLoading: false,
-			});
-			console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-		})
-		.catch(error => {
-			this.setState({
-			error,
-			isLoading: false,
-			});
-		});
+		var request = new XMLHttpRequest();
+		request.open('GET', ipDataApi);
+		request.setRequestHeader('Accept', 'application/json');
+		request.onreadystatechange = function () {
+			if (this.readyState === 4) {
+				console.log(this.responseText);
+			}
+		};
+		request.send();
+		// apiManager
+		// .get(ipDataApi)
+		// .then(response => {
+		// 	this.setState({
+		// 		ipData: response.data,
+		// 		isLoading: false,
+		// 	});
+		// 	console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
+		// })
+		// .catch(error => {
+		// 	this.setState({
+		// 	error,
+		// 	isLoading: false,
+		// 	});
+		// });
 	}
 
 	getPageLayout() {
