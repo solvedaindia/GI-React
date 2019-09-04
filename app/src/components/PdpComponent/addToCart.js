@@ -6,6 +6,7 @@ import { getUpdatedMinicartCount } from '../../utils/initialManager';
 import {
   addToCart,
   findinventoryAPI,
+  findMultiProductInventory,
 } from '../../../public/constants/constants';
 import {
   updatetMinicart,
@@ -57,8 +58,44 @@ class addToCartComponent extends React.Component {
     return <div className="soldbyDealers">{this.deliveryTime}</div>;
   }
 
+  	/* get pincode API params */
+	getInventoryApiParams(resolvedSkuData, getQuantity) {
+		let partnumber = [];
+		let quantity = [];
+    let dataParams;
+    
+		if (resolvedSkuData.itemInThisBundle) {
+			resolvedSkuData.itemInThisBundle.map((data) => {
+				partnumber.push(data.partNumber);
+				quantity.push(data.quantity * getQuantity);
+				 dataParams = {
+					params: {
+            partnumber: partnumber.toString(),
+					  quantity: quantity.toString(),
+					},
+				};
+			})
+		} else {
+      dataParams = {
+        params: {
+          partNumber: resolvedSkuData.partNumber,
+          quantity: getQuantity,
+        },
+      };
+		}
+		return dataParams;
+
+	}
+
   /* find inventory of the product */
   findInventory = () => {
+    let callIntertoryAPI;
+    if (this.props.skuData.itemInThisBundle) {
+      callIntertoryAPI = findMultiProductInventory;
+    } else {
+      callIntertoryAPI = findinventoryAPI;
+    }
+  
     setTimeout(() => {	
       let header = document.getElementById("header");
       if(header) {
@@ -71,15 +108,10 @@ class addToCartComponent extends React.Component {
       quantity = document.getElementById('quantity').value;
     }
 
-    const data = {
-      params: {
-        partNumber: this.props.skuData.partNumber,
-        quantity,
-      },
-    };
+    const data = this.getInventoryApiParams(this.props.skuData, quantity);
 
     apiManager
-      .get(findinventoryAPI + pincode, data)
+      .get(callIntertoryAPI + pincode, data)
       .then(response => {
         this.moveToCartClicked(response.data);
       })
@@ -102,18 +134,29 @@ class addToCartComponent extends React.Component {
       
       
       let quantity = '1';
+      let data;
       if (!this.props.sticky) {
         quantity = document.getElementById('quantity').value;
       }
 
-      const data = {
-        orderItem: [
-          {
-            sku_id: this.props.skuData.uniqueID,
-            quantity,
-          },
-        ],
-      };
+      if (this.props.skuData.itemInThisBundle) {
+        let orderItem = Array();
+        this.props.skuData.itemInThisBundle.map(bundleData => {
+          orderItem.push({sku_id: bundleData.uniqueID, quantity: (bundleData.quantity * quantity).toString()})
+        });
+        data = {
+          orderItem
+        };
+      } else {
+        data = {
+          orderItem: [
+            {
+              sku_id: this.props.skuData.uniqueID,
+              quantity,
+            },
+          ],
+        };
+      }
 
       apiManager
         .post(addToCart, data)

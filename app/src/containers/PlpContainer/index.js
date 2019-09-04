@@ -41,6 +41,7 @@ import {
 import { stringify } from 'querystring';
 import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
+import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -66,6 +67,7 @@ export class PlpContainer extends React.Component {
       plpFilter: '',
       plpSorting: '',
       displaySkus: true,
+      breadcrumbData: null,
       // Search Vars
       isFromSearch: this.props.location.pathname,
       searchKeyword: this.props.location.search,
@@ -346,6 +348,7 @@ export class PlpContainer extends React.Component {
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
             filterData: response.data.data.facetData,
+            breadcrumbData: response.data.data.breadCrumbData,
             isLoading: false,
             isCatDetails: false,
             browserFilters: [],
@@ -496,6 +499,7 @@ export class PlpContainer extends React.Component {
             catId={this.state.categoryDetail.uniqueID}
             history={this.props.history}
             isSearchPathPro={this.props.location.pathname}
+            plpBreadcrumbPro={this.state.breadcrumbData}
             showSkuPro={
               !this.state.isFromSearch.includes('/search')
                 ? this.state.categoryDetail.displaySkus
@@ -550,8 +554,24 @@ export class PlpContainer extends React.Component {
       );
     }
 
+    let breadcrumbItem = null;
+    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData.length !== 0) {
+      breadcrumbItem = (
+        <Breadcrumb plpBreadcrumbPro={this.state.breadcrumbData} />
+      );
+    }
+    else if (this.state.isFromSearch.includes('/search')) { 
+      breadcrumbItem = (
+        <Breadcrumb isFromSearchPro={true} />
+      );
+    }
+
     return (
       <>
+        
+        {marketingBanner}
+        {breadcrumbItem}
+        {subCategories}
         {this.state.emptySearchItem !== null
           ? this.state.emptySearchItem
           : null}
@@ -569,8 +589,6 @@ export class PlpContainer extends React.Component {
             </div>
           </>
         ) : null}
-        {marketingBanner}
-        {subCategories}
         <section className="plpCategories">
           <div className="container">
             <div className="row">

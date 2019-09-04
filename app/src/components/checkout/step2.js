@@ -504,24 +504,24 @@ export class Step2Component extends React.Component {
               this.handleProceed()
             })
         }
-        this.setState({
-          inputText_name: '',
-          inputText_number: '',
-          inputText_email: '',
-          inputText_pincode: '',
-          inputText_address: '',
-          inputText_city: '',
-          inputText_state: '',
-          inputText_gst: '',
+        // this.setState({
+        //   inputText_name: '',
+        //   inputText_number: '',
+        //   inputText_email: '',
+        //   inputText_pincode: '',
+        //   inputText_address: '',
+        //   inputText_city: '',
+        //   inputText_state: '',
+        //   inputText_gst: '',
 
-          binputText_name: '',
-          binputText_number: '',
-          binputText_email: '',
-          binputText_pincode: '',
-          binputText_address: '',
-          binputText_city: '',
-          binputText_state: '',
-        });
+        //   binputText_name: '',
+        //   binputText_number: '',
+        //   binputText_email: '',
+        //   binputText_pincode: '',
+        //   binputText_address: '',
+        //   binputText_city: '',
+        //   binputText_state: '',
+        // });
       }).catch((err) => {
         throw new Error(err);
       })
@@ -884,7 +884,7 @@ export class Step2Component extends React.Component {
       focus_inputText_name: false,
 
     });
-
+    
     console.log('Save btn pressed---', document.getElementById("address").value);
     this.state.inputText_address = document.getElementById("address").value;
 

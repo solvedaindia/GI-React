@@ -426,11 +426,29 @@
               font-size: $base * 1.5;
               text-align: left;
             }
+            .label_text_disable {
+              padding: 0 0px 15px 0;
+              color: #c9c9c9;
+              font-size: $base * 1.5;
+              text-align: left;
+            }
             .input_box,
             .label_text {
               display: inline-block;
             }
+            .label_text_disable {
+              display: inline-block;
+            }
             .label_text {
+              width:100%;
+              .filterCount{
+                float: right;
+                color: $greyBorder;
+                font-size: 10px;
+                font-family: $font-light;
+              }
+            }
+            .label_text_disable {
               width:100%;
               .filterCount{
                 float: right;

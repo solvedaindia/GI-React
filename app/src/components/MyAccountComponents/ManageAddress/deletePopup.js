@@ -5,6 +5,7 @@ import {
   updateAddressAPI,
 } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
+import {isMobile} from '../../../utils/utilityManager';
 
 class DeletePopup extends React.Component {
   constructor(props) {
@@ -40,10 +41,10 @@ class DeletePopup extends React.Component {
 		   <div className="deleteQuestion"> 
 			<p className="heading">Are you sure you want delete the address?</p> 
 		  </div>
-            <Button className="cancelBtn" onClick={this.toggle} />
+         {!isMobile() && <Button className="cancelBtn" onClick={this.toggle} />}
 
             <div className="actionBtnWrapper">
-              <Button className="btn-cancel btn" onClick={this.toggle}>
+             <Button className="btn-cancel btn" onClick={this.toggle}>
                 Cancel
               </Button>
               <Button
