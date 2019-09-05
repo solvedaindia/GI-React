@@ -19,7 +19,6 @@ import {
   registerWithEmailText,
   registerWithMobileNumText,
 } from './constants';
-import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
 import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
