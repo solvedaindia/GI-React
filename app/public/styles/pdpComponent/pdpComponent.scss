@@ -1767,15 +1767,28 @@
                 font-size: 16px;
                 font-family: $font-medium;
             }
-            .keywordsList{
-                .list{
-                    min-width:105px;
-                    font-size: 11px;
-                    font-family: $font-medium;
-                }
-            } 
+            
             .keywordsList{
                 padding:10px 0 0 0;
+            }
+            .slick-slider{
+                .slick-arrow{
+                    display: none !important;
+                }
+                .slick-list{
+                    .prodKeywordList{
+                        .list{
+                            font-size: 11px;
+                            font-family: $font-medium;
+                            display: inline-block;
+                            border: solid 1px #017b6b;
+                            color: #00b5a4;
+                            margin: 0px 10px;
+                            padding: 10px 20px;
+                            border-radius: 20px;
+                        }
+                    }
+                }
             }
     }
     .galleryArea{
