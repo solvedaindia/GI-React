@@ -52,11 +52,13 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: false,
-      speed: 500,
+      infinite: true,
+      speed: 200,
       slidesToShow: 4,
       slidesToScroll: 1,
-      centerMode: false,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      //centerMode: false,
       responsive: [
         {
           breakpoint: 1024,
