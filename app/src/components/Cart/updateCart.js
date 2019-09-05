@@ -31,7 +31,7 @@ class CartUpdate extends React.Component {
       orderItem: [
         {
           quantity: qty,
-          orderItemId: this.state.orderItemId,
+          orderItemId: this.props.orderItemId,
         },
       ],
     };
