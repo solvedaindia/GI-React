@@ -6,6 +6,7 @@ import {
 } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
 import '../../../public/styles/store/store.scss';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 export class ExKitchens extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ export class ExKitchens extends React.Component {
 		return (
             !!storeData && storeData.map((storeLocData, index) => (
                 <div className='exStore' key={index}>
-                    {!isMobile() ? <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> : <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> }
+                    {!isMobile() ? <ContentEspot espotName = { 'GI_EXP_KITCHEN_WEB_IMG' } />: <ContentEspot espotName = { 'GI_EXP_KITCHEN_MOBILE_IMG' } /> }
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
                         <h1 className='title'>Experience Our Kitchen Facilities</h1>
