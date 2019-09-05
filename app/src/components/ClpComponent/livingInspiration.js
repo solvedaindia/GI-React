@@ -49,7 +49,7 @@ class LivingTheme extends React.Component {
 		const { themeData } = this.state;
 		const settings = {
 			dots: true,
-			infinite: false,
+			infinite: true,
 			speed: 500,
 			autoplay: true,
 			autoplaySpeed: 2000,
