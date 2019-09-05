@@ -11,11 +11,13 @@ class productKeywords extends React.Component {
   render() {
     const settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
       centerMode: false,
+      centerPadding: '30px',
+      variableWidth: true,
       responsive: [
         {
           breakpoint: 1024,
@@ -39,11 +41,12 @@ class productKeywords extends React.Component {
         {
           breakpoint: 480,
           settings: {
-            slidesToShow:2,
+            slidesToShow:3,
             slidesToScroll: 1,
             dots: false,
             centerMode: false,
-            infinite: true
+            infinite: true,
+            variableWidth: true
           }
         }
       ]
