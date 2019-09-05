@@ -16,8 +16,15 @@ class EmiInfo extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(this.props.price !== nextProps.price){
+			console.log('Next Props ID Cart', nextProps);
+			this.callBankEmiApi(nextProps.price);
+		}
+	}
+	
 	componentDidMount() {
-		this.callBankEmiApi();
+		this.callBankEmiApi(this.props.price);
 	}
 
 	/* Handle Modal Close */
@@ -31,8 +38,8 @@ class EmiInfo extends React.Component {
 	}
 
 	/* call bank emi api */
-	callBankEmiApi() {
-		apiManager.get(bankEmiApi + this.props.price).then(response => {
+	callBankEmiApi(price) {
+		apiManager.get(`${bankEmiApi}${price}`).then(response => {
 			this.setState({
 				bankDetails: response.data,
 			  	loading: false,
@@ -41,6 +48,7 @@ class EmiInfo extends React.Component {
 			console.log('Emi Info Error---', error);
 		});
 	}
+	
 
 	/* display tab with data */
 	EmiDetailsTab(divId) {

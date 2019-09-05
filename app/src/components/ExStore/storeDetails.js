@@ -5,7 +5,7 @@ import {
     storeAPI,
     imagePrefix
 } from '../../../public/constants/constants';
-import { isMobile } from '../../utils/utilityManager';
+import { isMobile, getCookie } from '../../utils/utilityManager';
 import '../../../public/styles/store/store.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 
@@ -69,17 +69,26 @@ export class StoreDetails extends React.Component {
                        <ContentEspot espotName = { 'GI_EXP_STORE_WEB_IMG' } />: <ContentEspot espotName = { 'GI_EXP_STORE_MOBILE_IMG' } />
                     }
                     <div className='content'>
-                        
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
                         <h1 className='title'>Experience Our Stores</h1>
                         {!!storeData && !!storeData.latitude && storeData.latitude &&
                             <p className='details'>Experience our products at
-                                <span className='place'> {storeData.city}</span>
-                                <span className='dist'> {this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} km away.</span>
+                                <Link
+                                    className='storeLink'
+                                    to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                                >
+                                    <span className='place'> {storeData.storeName}</span>
+                                    <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} km away)</span>
+                                </Link>
                             </p>
                         }
                         <p className='details'>{!isMobile() ? 'You can find more stores around you.' : 'near you.'}</p>
-                        <Link to='/storelocator'><button className='btn-flat'>{!isMobile() ?'Find More Stores' : 'Explore More Stores' }</button></Link>
+                        <Link
+                            className='storeLink'
+                            to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                        >
+                            <button className='btn-flat'>{!isMobile() ?'Find More Stores' : 'Explore More Stores' }</button>
+                        </Link>
                     </div>
                 </div>
 		);
