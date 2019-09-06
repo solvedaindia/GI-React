@@ -22,7 +22,6 @@ class EMIVal extends React.Component {
                 isLoading: false,
             });
             this.props.getCartDetails();
-            console.log('@@@@ EMI Value @@@', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -34,7 +33,6 @@ class EMIVal extends React.Component {
     
     componentWillReceiveProps(nextProps) {
 		if(this.props.price !== nextProps.price){
-			console.log('Next Props ID', nextProps);
 			this.getEmiVal(nextProps.price);
 		}
     }

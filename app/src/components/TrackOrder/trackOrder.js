@@ -90,8 +90,8 @@ class TrackOrder extends React.Component {
                                                     <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
                                                 </figure>
                                                 <div className='prodDetails'>
-													<p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>
-                                                    <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>
+													{orderDetails.orderItems.length > 1 && <p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>}
+													{subOrderDetails.shipmentData.length > 1 && <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>}
                                                     <p className='orderID'>Order ID {orderDetails.orderID}</p>
                                                     <p className='prodName'>{subOrderDetails.productName}</p>
                                                     <span className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
