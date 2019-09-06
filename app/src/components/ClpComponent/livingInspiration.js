@@ -29,7 +29,6 @@ class LivingTheme extends React.Component {
 				themeData: response.data.data,
 				isLoading: false,
   			});
-  			console.log('#######&&&&&&&', response.data.data);
   		})
   		.catch(error => this.setState({ error, isLoading: false }));
   }
@@ -49,7 +48,7 @@ class LivingTheme extends React.Component {
 		const { themeData } = this.state;
 		const settings = {
 			dots: true,
-			infinite: false,
+			infinite: true,
 			speed: 500,
 			autoplay: true,
 			autoplaySpeed: 2000,

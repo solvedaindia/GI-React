@@ -77,7 +77,7 @@ class MinicartItem extends React.Component {
             {this.state.isFreeItem ? null : discountAccessoriesItem}
             <p className="quantity-shipping clearfix">
               <span className="quantity">
-                Quantity
+                QUANTITY
                 <br />
                 <span className="textval">{this.props.dataPro.quantity}</span>
               </span>
