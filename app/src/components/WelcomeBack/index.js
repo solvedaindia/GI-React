@@ -232,6 +232,7 @@ class WelcomeBack extends React.Component {
               cssClass="btn-white"
               onClick={this.facebookOnClick.bind(this)}
               callback={this.responseFacebook}
+              disableMobileRedirect={true}
             />
           </div>
           <p className="divider">or</p>
