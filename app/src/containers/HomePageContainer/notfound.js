@@ -1,10 +1,8 @@
 import React from 'react'
+import ContentEspot from '../../components/Primitives/staticContent';
 
 const Error404 = (
-    <img
-      className="icon"
-      src={require('../../../src/components/SVGs/error404.svg')}
-    />
+  <ContentEspot espotName = { 'GI_ERROR_404_IMG' } />
   );
 
 const NotFound = () =>

@@ -1,10 +1,9 @@
 import React from 'react'
+import ContentEspot from '../../components/Primitives/staticContent';
 
 const Maintenanceimg = (
-    <img
-      className="icon"
-      src={require('../../../public/images/maintenance.png')}
-    />
+  <ContentEspot espotName = { 'GI_MAINTENANCE_IMG' } />
+
   );
 
 const Maintenance = () =>

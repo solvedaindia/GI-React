@@ -81,7 +81,7 @@ class TrackOrder extends React.Component {
                 <Slider {...settings}>
                     {!!orderData && orderData.ongoingOrders.map((orderDetails) => {
                         return(
-                            orderDetails.orderItems.map((subOrderDetails) => {
+                            orderDetails.orderItems.map((subOrderDetails, itemIndex) => {
                                 return(
                                     subOrderDetails.shipmentData.map((shipmentDetails, index) => {
                                         return(
@@ -90,18 +90,30 @@ class TrackOrder extends React.Component {
                                                     <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
                                                 </figure>
                                                 <div className='prodDetails'>
-                                                    {!isMobile() && <p className='count'>ITEM({index+1}/{subOrderDetails.quantity})</p>}
+													<p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>
+                                                    <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>
                                                     <p className='orderID'>Order ID {orderDetails.orderID}</p>
                                                     <p className='prodName'>{subOrderDetails.productName}</p>
                                                     <span className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
-                                                        <span className='qtyVal val'>{subOrderDetails.quantity}</span>
+                                                        <span className='qtyVal val'>{shipmentDetails.quantity}</span>
                                                     </span>
                                                     <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
                                                         <span className='statusVal val'>{shipmentDetails.status}</span>
                                                     </span>
-                                                    <span className='delDate item'>{!isMobile() ? 'Delivery on' : 'Delivery on:' }
-                                                        <span className='delVal val'>{shipmentDetails.deliveryDate}</span>
-                                                    </span>
+													{!!shipmentDetails.expectedDeliveryDate && !isMobile() && 
+														<span className='delDate item'>
+															{!isMobile() ? 'Delivery on' : 'Delivery on:' }
+															{!isMobile() ? <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>: '' }
+														</span>		
+													}
+													
+													{ !!shipmentDetails.expectedDeliveryDate && isMobile() && 
+														<span className='delDate item'>Delivery on:</span>								
+													}
+													{ !!shipmentDetails.expectedDeliveryDate && isMobile() && 
+														<span className='delDate item'>{shipmentDetails.expectedDeliveryDate} </span>
+													}
+													
                                                 </div>
                                                 <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
                                                     <a className='link btn'>View Order</a>
