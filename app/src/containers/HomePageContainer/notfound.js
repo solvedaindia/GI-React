@@ -2,7 +2,7 @@ import React from 'react'
 import ContentEspot from '../../components/Primitives/staticContent';
 
 const Error404 = (
-  <ContentEspot espotName = { 'GI_error_404_IMG' } />
+  <ContentEspot espotName = { 'GI_ERROR_404_IMG' } />
   );
 
 const NotFound = () =>

@@ -45,6 +45,7 @@ class MyProfile extends React.Component {
       errorMessage_email: '',
 
       noteItem: null,
+	  noteItemMsg: null,
       userResponse: null,
       inputLogoId: null,
       //Validaton vars
@@ -212,10 +213,11 @@ class MyProfile extends React.Component {
           setTimeout(() => {
             this.setState({
               noteItem: null,
+			  noteItemMsg: null,
             });
           }, 2000);
           this.setState({
-            noteItem: (
+            noteItemMsg: (
               <div className="noteMsg">
                 <span className="failMsg">{error.response.data.error.error_message}</span>
               </div>
@@ -259,6 +261,7 @@ class MyProfile extends React.Component {
         setTimeout(() => {
           this.setState({
             noteItem: null,
+			noteItemMsg: null,
           });
         }, 2000);
         this.setState({
@@ -278,10 +281,11 @@ class MyProfile extends React.Component {
         setTimeout(() => {
           this.setState({
             noteItem: null,
+			noteItemMsg: null,
           });
         }, 2000);
         this.setState({
-          noteItem: (
+          noteItemMsg: (
             <div className="noteMsg">
               <span className="failMsg">{error.response.data.error.error_message}</span>
             </div>
@@ -456,6 +460,7 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
+		  {this.state.noteItemMsg}
           {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
           <button
             onClick={this.onSavebuttonClick.bind(this)}
