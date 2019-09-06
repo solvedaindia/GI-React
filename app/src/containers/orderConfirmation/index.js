@@ -105,7 +105,7 @@ class OrderConformation extends React.Component {
 
                                         <div className="col-xs-12 col-sm-12 col-md-8 dlivery-desc">
                                             <div className='headingSubtext'>Delivery On</div>
-                                            <div className='quantityDelivery'>{this.state.orderData.orderDate}</div>
+                                            <div className='quantityDelivery'>{item.deliveryDate}</div>
                                         </div>
                                     </div>
                                     {!isMobile()&&<><div className='priceHeading'>Price</div>

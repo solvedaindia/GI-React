@@ -165,7 +165,15 @@ module.exports.getPromotionsList = function getPromotionsList(
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        const promotionIds = [];
+        if (response.body.Promotion && response.body.Promotion.length > 0) {
+          response.body.Promotion.forEach(promo => {
+            if (promo.status === 'Active') {
+              promotionIds.push(promo);
+            }
+          });
+        }
+        callback(null, promotionIds);
       } else {
         callback(errorUtils.handleWCSError(response));
       }

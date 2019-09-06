@@ -471,10 +471,9 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
     } else {
       logger.debug('Get all origin response : getPromoCodes');
       const promoData = [];
-      const promotions = result.Promotion;
-      if (promotions && promotions.length > 0) {
+      if (result && result.length > 0) {
         async.map(
-          promotions,
+          result,
           (promotion, cb) => {
             promotionUtil.getPromoCode(
               promotion.promotionId,
