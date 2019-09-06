@@ -30,10 +30,9 @@
         .place,
         .dist {
             color: $ceruleanblue;
-            font-family: $font-medium;
         }
         .place {
-            font-weight: 500;
+            font-family: $font-medium;
         }
         .details {
             font-size: $base*2;
@@ -50,6 +49,9 @@
             background-color: #070707;
             border: none;
   
+        }
+        .storeLink {
+            text-decoration: none;
         }
     }
 }
@@ -84,6 +86,7 @@
                 width: 175px;
                 height: 40px;
             }
+            
         }
     }
 }

@@ -1,12 +1,17 @@
 import React from 'react';
-import { Route, NavLink, Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Price from '../GlobalComponents/productItem/price';
 import { imagePrefix } from '../../../public/constants/constants';
 
 class MinicartItem extends React.Component {
-  state = {
-    isFreeItem: this.props.dataPro.freeGift,
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      isFreeItem: this.props.dataPro.freeGift,
+    };
+    console.log('Miniwishliat Data Params', this.props);
+  }
+  
 
   minicartPrice() {
     const offerPrice = parseFloat(this.props.dataPro.offerPrice);
@@ -58,7 +63,7 @@ class MinicartItem extends React.Component {
       <>
       
         <div className="minicartList">
-          <Link className="link" to={routePath} onClick={this.onNavigationLink}>
+          <a className="link" href={routePath} onClick={this.onNavigationLink}>
             <div className="imgBox">
               {/* <img src={require('../../../public/images/miniItem1.png')} className="imgfullwidth" /> */}
               <img src={this.props.dataPro.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} onError={require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
@@ -72,18 +77,19 @@ class MinicartItem extends React.Component {
             {this.state.isFreeItem ? null : discountAccessoriesItem}
             <p className="quantity-shipping clearfix">
               <span className="quantity">
-                Quantity
+                QUANTITY
                 <br />
                 <span className="textval">{this.props.dataPro.quantity}</span>
               </span>
               {this.shippingCharegeHandler()}
             </p>
           </div>
-          </Link>
+          </a>
         </div>
       </>
     );
   }
 }
 
-export default MinicartItem;
+// export default MinicartItem;
+export default withRouter(MinicartItem);

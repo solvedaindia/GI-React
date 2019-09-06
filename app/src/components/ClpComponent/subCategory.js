@@ -52,11 +52,13 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: false,
-      speed: 500,
+      infinite: true,
+      speed: 200,
       slidesToShow: 4,
       slidesToScroll: 1,
-      centerMode: false,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      //centerMode: false,
       responsive: [
         {
           breakpoint: 1024,
@@ -98,8 +100,7 @@ export class SubCategory extends React.Component {
                     <Link to={routePath}>
                     <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
                     />
-                    </Link>
-                    {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
+                    </Link>              
                   </a>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>

@@ -197,7 +197,7 @@ export class Step3Component extends React.Component {
       return this.setState({
         showBanks: false,
         showWallets: false,
-        paymentModeId: 'DEBIT_CART',
+        paymentModeId: 'DEBIT_CARD',
         debitCheck: true
       })
     }
