@@ -149,7 +149,7 @@ class productDefAttribute extends React.Component {
 									} else if(checkedType === true) {
 										isActiveBox = 'active';
 									}
-									radioButtonHtml = <label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index, isRadio, resolvedSku)}{name}</label>
+									radioButtonHtml = <h2 className='swachesHeading'><label htmlFor={`radio_${i}_${index}`} style={colorStyle} className={`${circle} ${selectedCircle}`}>{this.getRadioButtonHtml(data.name, value.name, checkedType, i, selectedSwatches, index, isRadio, resolvedSku)}{name}</label></h2>
 									let isDisabled = '';
 
 									if (i > -1 && selectedSwatches.indexOf(value.name) === -1 && this.props.defAttributes.length > 1) {

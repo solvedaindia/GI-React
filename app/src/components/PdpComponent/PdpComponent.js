@@ -391,7 +391,8 @@ class PdpComponent extends React.Component {
 	}
 
 	let breadcrumbItem = null;
-	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData.length !== 0) {
+	
+	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData !== undefined && this.state.breadcrumbData.length !== 0) {
 		breadcrumbItem = (
 			<Breadcrumb pdpBreadcrumbPro={this.state.breadcrumbData} productNamePro={this.state.skuData.productName} />
 		);

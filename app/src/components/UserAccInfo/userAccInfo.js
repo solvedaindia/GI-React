@@ -97,9 +97,14 @@ class UserAccInfo extends React.Component {
           userName: `Welcome ${username.split(' ')[0]}`,
           logonId: response.data.data.logonID,
         });
+
+        if (response.data.data.pincode && response.data.data.pincode !== '') {
+          appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
+        }
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
         this.showLoginStatus();
         this.props.updateUserProfile(response.data.data.name);
+        
       })
       .catch(error => {
         // return null;
