@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,7 +13,6 @@ const fs = require('fs');
 const tokenValidation = require('./utils/tokenvalidation');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
-require('dotenv').config();
 
 const port = process.env.SERVER_PORT || '8002';
 global.storeDetails = {};

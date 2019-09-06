@@ -102,6 +102,7 @@ function bundleCompareDataSummary(element) {
     const Price = bundlefilter.bundleComponentsSummary(element, '');
     const productSummary = productDetailFilter.productDetailSummary(element);
     const descAttr = productDetailFilter.getDescriptiveAttributes(element);
+    productSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
     productSummary.width = descAttr.width;
     productSummary.height = descAttr.height;
     productSummary.depth = descAttr.depth;
@@ -136,6 +137,7 @@ function bundleCompareDataSummary(element) {
           );
           // eslint-disable-next-line no-shadow
           const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
+          mercProductSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
           mercProductSummary.width = descAttr.width;
           mercProductSummary.height = descAttr.height;
           mercProductSummary.depth = descAttr.depth;
@@ -168,6 +170,7 @@ function kitCompareDataSummary(element) {
     );
     const productSummary = productDetailFilter.productDetailSummary(element);
     const descAttr = productDetailFilter.getDescriptiveAttributes(element);
+    productSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
     productSummary.width = descAttr.width;
     productSummary.height = descAttr.height;
     productSummary.depth = descAttr.depth;
@@ -191,6 +194,7 @@ function kitCompareDataSummary(element) {
           );
           // eslint-disable-next-line no-shadow
           const descAttr = productDetailFilter.getDescriptiveAttributes(attr);
+          mercProductSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
           mercProductSummary.width = descAttr.width;
           mercProductSummary.height = descAttr.height;
           mercProductSummary.depth = descAttr.depth;
@@ -229,6 +233,7 @@ function productCompareDataSummary(element, skuId) {
         );
         const skuProductSummary = productDetailFilter.productDetailSummary(sku);
         const descAttr = productDetailFilter.getDescriptiveAttributes(sku);
+        skuProductSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
         skuProductSummary.width = descAttr.width;
         skuProductSummary.height = descAttr.height;
         skuProductSummary.depth = descAttr.depth;

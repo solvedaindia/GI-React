@@ -6,6 +6,7 @@ const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
 const headerUtil = require('../utils/headerutil');
 const categoryFilter = require('../filters/categoryfilter');
+const plpFilter = require('../filters/productlistfilter');
 
 const topCategories = '@top';
 const categoryNavigation = '@top?depthAndLimit=25,0';
@@ -107,6 +108,66 @@ async function getSubCategoriesData(req, callback) {
       callback(null, subCategoryArray);
     } else {
       callback(null, subCategoryArray);
+    }
+  } catch (error) {
+    callback(errorUtils.handleWCSError(error));
+  }
+}
+
+/**
+ * This function will return Bread Crumb Data for Category
+ * @param categoryID
+ */
+module.exports.getBreadcrumb = getBreadcrumb;
+async function getBreadcrumb(req, callback) {
+  if (!req.query.categoryid && !req.query.itemid) {
+    logger.debug('Get Category Breadcrumb Data :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  let categoryId = req.query.categoryid || null;
+  const reqHeaders = headerUtil.getWCSHeaders(req.headers);
+  const resJson = {
+    breadCrumbData: [],
+  };
+  try {
+    if (req.query.itemid && !categoryId) {
+      const productUrl = constants.pdp
+        .replace('{{storeId}}', req.headers.storeId)
+        .replace('{{productId}}', req.query.itemid);
+      const productDetail = await origin2.getResponse(
+        'GET',
+        productUrl,
+        reqHeaders,
+        null,
+      );
+      if (
+        productDetail.body.catalogEntryView &&
+        productDetail.body.catalogEntryView.length > 0
+      ) {
+        const parentCategory = productDetail.body.catalogEntryView[0].parentCatalogGroupID
+          .pop()
+          .split('_')[1];
+        categoryId = parentCategory;
+      }
+    }
+    if (categoryId) {
+      const categoryBreadCrumbUrl = constants.categoryBreadcrumb
+        .replace('{{storeId}}', req.headers.storeId)
+        .replace('{{categoryId}}', categoryId);
+
+      const categoryBreadcrumbData = await origin2.getResponse(
+        'GET',
+        categoryBreadCrumbUrl,
+        reqHeaders,
+        null,
+      );
+      resJson.breadCrumbData = plpFilter.getBreadCrumbData(
+        categoryBreadcrumbData.body.breadCrumbTrailEntryViewExtended,
+      );
+      callback(null, resJson);
+    } else {
+      callback(null, resJson);
     }
   } catch (error) {
     callback(errorUtils.handleWCSError(error));

@@ -58,7 +58,7 @@ function getOrdersList(headers, query, callback) {
               } else {
                 const orderID = orderItem.orderId;
                 if (
-                  orderItem.orderStatus !== 'M' ||
+                  orderItem.orderStatus !== 'M' &&
                   orderItem.orderStatus !== 'C'
                 ) {
                   getCompleteOrderDetails(

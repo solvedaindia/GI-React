@@ -1,4 +1,3 @@
-require('dotenv').config();
 exports.getEnvHostName = function hostName() {
   let envName = '';
   let apiVersion = '/v1';
