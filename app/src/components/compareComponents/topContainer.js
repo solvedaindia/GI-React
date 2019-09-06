@@ -52,7 +52,7 @@ class TopContainer extends React.Component {
       return (
         <Col xs={12} sm={4} md={4} className='comp-list-item'>
         <div className='img-box'>
-          <img src={`${imagePrefix}${this.props.product.thumbnail}`} />
+        <img src={this.props.product.thumbnail !== '' ? `${imagePrefix}${this.props.product.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} />
         </div>
     
         <div className='product-desc'>

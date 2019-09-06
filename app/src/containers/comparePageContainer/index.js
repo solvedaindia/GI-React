@@ -68,7 +68,7 @@ export class ComparePageContainer extends React.Component {
       }
     }
     else {
-      this.updateRoute();
+      //this.updateRoute();
     }
 
 
@@ -97,12 +97,12 @@ export class ComparePageContainer extends React.Component {
   updateRoute() {
     let params = new URLSearchParams(this.props.location.search);
     var searchParam = '';
-      this.state.compWidgetData.map((skuId, index) => {
-        searchParam += `${skuId}${this.state.compWidgetData.length === index + 1 ? '' : '/'}`
-      })
-      params.set(`ids`, searchParam);
-      let finalMap = params.toString();
-      this.props.history.push({ search: finalMap });
+    this.state.compWidgetData.reverse().map((skuId, index) => {
+      searchParam += `${skuId}${this.state.compWidgetData.length === index + 1 ? '' : '/'}`
+    })
+    params.set(`ids`, searchParam);
+    let finalMap = params.toString();
+    this.props.history.push({ search: finalMap });
   }
 
   goBack = () => {
@@ -173,17 +173,56 @@ export class ComparePageContainer extends React.Component {
     })
   }
 
-  swatchHandle = (id, index, name) => {
-    var obj = {
-      id: id,
-      index: index,
-      name: name
-    };
+  updateSingleCompProduct(index) {
 
-    if (index == 0) {
+    var prds = this.state.prds;
 
+    var skuIdsArr = [];
+    var reverse_data = this.state.data;
+    if (!reverse_data) {
+      return
     }
-    this.props.updateSKU(obj);
+    reverse_data.forEach(data => {
+      var sku1 = data.sKUs.find(sKU => {
+        return sKU.uniqueID == this.state.compWidgetData[index];
+      });
+      if (sku1) {
+        sku1.parentProductId = data.uniqueId;
+        sku1.specs = data.attributes;
+        sku1.swatches = data.swatches;
+
+        if (!skuIdsArr.includes(sku1.uniqueID)) {
+          skuIdsArr.push(sku1.uniqueID);
+          prds[index] = sku1;
+        }
+      }
+    })
+
+    this.setState({
+      prds: prds,
+      compCount: prds.length,
+    })
+  }
+
+  swatchHandle = (id, index, name) => {
+
+    if (!this.state.compWidgetData.includes(id)) {
+      this.state.compWidgetData[index] = id;
+      //this.renderPrd()
+      this.updateSingleCompProduct(index);
+      //this.updateRoute();
+    }
+
+    // var obj = {
+    //   id: id,
+    //   index: index,
+    //   name: name
+    // };
+
+    // if (index == 0) {
+
+    // }
+    // this.props.updateSKU(obj);
   }
 
   loadingbar() {
@@ -199,8 +238,8 @@ export class ComparePageContainer extends React.Component {
   }
 
   removeCompareId(data) {
-    console.log('remev data ----- ',data);
-    this.state.compWidgetData = this.state.compWidgetData.filter( el => el !== data );
+    console.log('remev data ----- ', data);
+    this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);
     this.renderPrd()
     this.updateRoute();
   }
