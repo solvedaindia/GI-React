@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
-import { getCookie,isMobile } from '../../utils/utilityManager';
+import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
   accessTokenCookie,
@@ -98,8 +98,8 @@ export default class App extends React.Component {
     if(header) {
       header.classList.remove("sticky");
     } 
-    if(!isMobile()){
-      window.scrollTo(0, 0);
+    if(!isMobile() && !isTab()){  
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
   }
 
