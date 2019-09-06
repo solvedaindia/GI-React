@@ -121,7 +121,6 @@ class Pincode extends React.Component {
 		{!!error && (
           <div className="pinErrorMsg">{error.error_message}</div>
         )}
-		{/* {!!this.state.error && <p className='pinErrorMsg'>{!isMobile() ? 'Sorry! We do not currently deliver in this area. Please try another pincode.' : 'Pincode is Non-Serviceable' } </p>} */}
 		</>
     );
   }

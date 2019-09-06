@@ -116,7 +116,7 @@ class CartDetail extends React.Component {
                     <p className='delBy'>{DELIVERY_BY}</p>
                     <span className='date'>{itemData.deliveryDate}</span>
                     {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
-					{!isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? {FREE} : itemData.shippingCharges}</span>}
+					{!isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? `${FREE}` : itemData.shippingCharges}</span>}
 				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&

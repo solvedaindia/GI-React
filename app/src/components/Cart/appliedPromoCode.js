@@ -1,6 +1,9 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import { cartRemovePromoAPI } from '../../../public/constants/constants';
+import {COUPAN_APPLIED } from '../../constants/app/cartConstants';
+import {COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
+
 import CrossIcon from '../SVGs/crossIcon';
 class AppliedPromoCode extends React.Component {
   constructor(props) {
@@ -16,7 +19,6 @@ class AppliedPromoCode extends React.Component {
         .post(cartRemovePromoAPI + this.props.promoCode[0])
         .then(response => {
             this.props.getCartDetails();
-            console.log('Promotion Data', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -32,14 +34,14 @@ class AppliedPromoCode extends React.Component {
     return (
       <div className="promoField">
             <div className='appliedPromoMsg'>
-                <span className='promo'>{promoCode[0]}</span> coupon applied.
+                <span className='promo'>{promoCode[0]}</span> {COUPAN_APPLIED }
 				<button className="removeBtn" onClick={this.removePromoCode}>
 					<CrossIcon />
 				</button>
             </div>
 			
 			{!!error && (
-			<div className="promoError">This coupon code is not valid.</div>
+			<div className="promoError">{COUPAN_CODE_NOT_VALID }</div>
 			)}
       </div>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import { cartApplyPromoAPI } from '../../../public/constants/constants';
+import {PROMO_CODE_IS_INVALID } from '../../constants/app/cartConstants';
+
 class PromoField extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +33,6 @@ class PromoField extends React.Component {
           error: null,
         });
         this.props.getCartDetails();
-        console.log('Promotion Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -55,7 +56,7 @@ class PromoField extends React.Component {
           Apply
         </button>
         {!!error && (
-          <div className="promoError">{error.error_message || 'This promo code is invalid'}</div>
+          <div className="promoError">{error.error_message || `${PROMO_CODE_IS_INVALID }`}</div>
         )}
       </div>
     );

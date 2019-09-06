@@ -7,6 +7,16 @@ import EmptyCart from './emptyCart';
 import Pincode from './pincode';
 import CartUpdate from './updateCart';
 import '../../../public/styles/cart/cartItem.scss';
+import {DELIVERY_BY, SHIPPING_CHARGES_300 } from '../../constants/app/cartConstants';
+import {DECEMBER_2019 } from '../../constants/app/cartConstants';
+import {SHIPPING_CHARGES_300 } from '../../constants/app/cartConstants';
+import {DECEMBER_2019 } from '../../constants/app/cartConstants';
+import {GOT_PROMO_CODE } from '../../constants/app/cartConstants';
+import {ORDER_SUMMARY } from '../../constants/app/cartConstants';
+import {ITEMS } from '../../constants/app/cartConstants';
+
+
+
 
 class CartDetail extends React.Component {
     constructor(props){
@@ -25,7 +35,6 @@ class CartDetail extends React.Component {
                 cartData: response.data.data,
                 isLoading: false,
             });
-            console.log('@@@@ Cart Data @@@', response.data.data);
         })
         .catch(error => {
             this.setState({
@@ -47,7 +56,7 @@ class CartDetail extends React.Component {
             <section className='cartDetails'>
                 <div className='cartItem'>
                     <div className='cartHeadDetails'>
-                        <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
+                        <h2 className='title'>Cart <span className='cartCount'>{cartData.cartTotalItems} {ITEMS}</span>
                         </h2>
                         <Pincode />
                     </div>
@@ -66,10 +75,10 @@ class CartDetail extends React.Component {
                                         quantity={itemData.quantity}
                                         orderItemId={itemData.orderItemId}
                                     />}
-                                    <p className='delBy'>DELIVERY BY:</p>
-                                    <span className='date'>{itemData.deliveryDate}31 DEC 2019</span>
+                                    <p className='delBy'>{DELIVERY_BY}</p>
+                                    <span className='date'>{itemData.deliveryDate}{DECEMBER_2019}</span>
                                     <span className='price'>₹{itemData.offerPrice}</span>
-                                    <span className='shipping'>Shipping charge ₹300</span>
+                                    <span className='shipping'>{SHIPPING_CHARGES_300}</span>
                                 </div>
                             </li>
                         )
@@ -78,9 +87,9 @@ class CartDetail extends React.Component {
                 </div>
                 <div className='orderSummary'>
                     <div className='promotion'>
-                        <h3 className='promoHead'>Got a promo code?</h3>
+                        <h3 className='promoHead'>{GOT_PROMO_CODE}</h3>
                     </div>
-                    <h2 className='title'>Order Summary</h2>
+                    <h2 className='title'>{ORDER_SUMMARY}</h2>
                     <div className='summary'>
                         <p className='cartTotal'>{}</p>
                         <p className='prodDisc'></p>
