@@ -178,10 +178,10 @@
   
 }
 
-  /* 
-  #Global Screen Chhange for Screen max 768
-  */
-  @media screen and (min-width: 768px){
+ /* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
     .myWishlist {
       padding: 60px 0 0 0;
       .myWishlist{
@@ -228,10 +228,10 @@
 }
 
 
-/* 
-  #Global Screen Chhange for Screen max 767
-*/
-@media screen and (max-width: 767px){
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
   .myWishlist {
     padding: 10px 0 0 0;
     .heading {
