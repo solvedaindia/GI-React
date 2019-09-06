@@ -25,6 +25,24 @@ import EmiInfo from '../../components/PdpComponent/emiInfo';
 import ExpandIcon from '../../components/SVGs/expandArrow';
 import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
 import EMIVal from '../../components/Cart/emiPrice';
+import {YOUR_CART} from '../../constants/app/cartConstants';
+import {DO_YOU_HAVE_COUPAN} from '../../constants/app/cartConstants';
+import {ORDER_SUMMARY} from '../../constants/app/cartConstants';
+import {CART_TOTAL} from '../../constants/app/cartConstants';
+import {PRODUCT_DISCOUNT} from '../../constants/app/cartConstants';
+import {ORDER_DISCOUNT} from '../../constants/app/cartConstants';
+import {SHIPPING} from '../../constants/app/cartConstants';
+import {TOTAL} from '../../constants/app/cartConstants';
+import {PROCEED_TO_CHECK_OUT} from '../../constants/app/cartConstants';
+import {FREE} from '../../constants/app/cartConstants';
+import {DELIVERY_BY} from '../../constants/app/cartConstants';
+import {SHIPPING_CHARGES} from '../../constants/app/cartConstants';
+import {YOU_SAVED} from '../../constants/app/cartConstants';
+import {TOTAL_AMOUNT} from '../../constants/app/cartConstants';
+import {PROCEED} from '../../constants/app/cartConstants';
+import {ITEMS} from '../../constants/app/cartConstants';
+
+
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -53,10 +71,10 @@ class CartDetail extends React.Component {
         <section className='cartDetails'>
           <div className='cartItem'>
             <div className='cartHeadDetails'>
-                {!isMobile() ? <h2 className='title'>Your Cart <span className='cartCount'>{cartData.cartTotalItems} items</span>
+                {!isMobile() ? <h2 className='title'>{YOUR_CART}<span className='cartCount'>{cartData.cartTotalItems} {ITEMS}</span>
                 </h2> : <div className='checkout-top-hedaer'>
                   <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
-                <h2 className='title'> Your Cart <span className='cartCount'>({cartData.cartTotalItems} items)</span></h2></div> }
+                <h2 className='title'>{YOUR_CART}<span className='cartCount'>({cartData.cartTotalItems} {ITEMS})</span></h2></div> }
               	<Pincode
 			  		getCartDetails={this.props.getCartDetails}
 				/>
@@ -95,10 +113,10 @@ class CartDetail extends React.Component {
                         productName = {itemData.productName}
                         getCartDetails={this.props.getCartDetails}
                       />}
-                    <p className='delBy'>DELIVERY BY:</p>
+                    <p className='delBy'>{DELIVERY_BY}</p>
                     <span className='date'>{itemData.deliveryDate}</span>
                     {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
-					{!isMobile() && <span className='shipping'>Shipping charges {itemData.shippingCharges === 0 ? 'FREE' : itemData.shippingCharges}</span>}
+					{!isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? {FREE} : itemData.shippingCharges}</span>}
 				</div>
 					{!!isMobile() && <div className='quantityPrice'>
 						{!itemData.freeGift &&
@@ -121,7 +139,7 @@ class CartDetail extends React.Component {
 							className='promoMsg'
 							onClick={this.handleOnClick.bind(this)}
 						>
-							Do you have a coupon code?<ExpandIcon width={16} height={16}/>
+							{DO_YOU_HAVE_COUPAN}<ExpandIcon width={16} height={16}/>
 						</p>
 						{cartData.promotionCode && cartData.promotionCode.length ?
 						<AppliedPromoCode
@@ -148,51 +166,50 @@ class CartDetail extends React.Component {
 					getCartDetails={this.props.getCartDetails}
 				/>
             </div>
-            <h2 className='title'>Order Summary</h2>
+            <h2 className='title'>{ORDER_SUMMARY}</h2>
             <div className='summary'>
               <p className='cartTotal'>
-                <span className='info'>Cart Total</span>
+                <span className='info'>{CART_TOTAL}</span>
                 <span className='val'> ₹{formatPrice(cartData.orderSummary.totalAmount === '' ? '0' : cartData.orderSummary.totalAmount)}</span>
               </p>
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">
-                  <span className='info'>Product Discount</span>
+                  <span className='info'>{PRODUCT_DISCOUNT}</span>
                   <span className='val'> ₹{formatPrice(cartData.orderSummary.productDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.orderDiscount &&
                 <p className='orderDisc'>
-                  <span className='info'>Order Discount</span>
+                  <span className='info'>{ORDER_DISCOUNT}</span>
                   <span className='val'>-₹{formatPrice(cartData.orderSummary.orderDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.shippingCharges == '0' ?
                 <p className='shipping'>
-                  <span className='info'>Shipping</span>
-                  <span className='val'>Free</span>
+                  <span className='info'>{SHIPPING}</span>
+                  <span className='val'>{FREE}</span>
                   <span className='shippingMsg'>{cartData.orderSummary.shippingMessage}</span>
                 </p>
                 :
                 <p className='shipping'>
-                  <span className='info'>Shipping</span>
+                  <span className='info'>{SHIPPING}</span>
                   <span className='val'>-₹{formatPrice(cartData.orderSummary.shippingCharges)}</span>
                 </p>
               }
               <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
 				<EMIVal getCartDetails={this.props.getCartDetails} price={cartData.orderSummary.netAmount} />
-                {/* <TermsAndCondition netAmount={cartData.orderSummary.netAmount}/> */}
 				<EmiInfo price={cartData.orderSummary.netAmount}/>
               </p>
               {!isMobile() ? <p className='totalAmt'>
-                <span className='totalPrice'>Total</span>
+                <span className='totalPrice'> {TOTAL}</span>
                 <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
-                <span className='savingText'>You saved <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
+                <span className='savingText'>{YOU_SAVED} <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
               </p>:''}
-              {!isMobile() ? (<a id='checkoutBtn' className={`btn btnCheckout ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed to Checkout</a>)
+              {!isMobile() ? (<a id='checkoutBtn' className={`btn btnCheckout ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED_TO_CHECK_OUT}</a>)
               :
               (<div className="checkout-btn-floater">
-                  <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">Total Amount</span></div></div>
-                  <div className="proceed-btn"><a id='checkoutBtn' className={`btn-blackbg btn-block ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>Proceed</a></div>
+                  <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">{TOTAL_AMOUNT}</span></div></div>
+                  <div className="proceed-btn"><a id='checkoutBtn' className={`btn-blackbg btn-block ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED}</a></div>
                 </div>)}
             </div>
           </div>
