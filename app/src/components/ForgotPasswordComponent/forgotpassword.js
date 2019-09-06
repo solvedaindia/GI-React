@@ -13,7 +13,7 @@ import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 
 const LeftArrow = (
   <img
-    className="leftArrow"
+    className="leftArrow" id="leftArrowId"
     src={require('../../../public/images/left-arrow.png')}
   />
 );
@@ -40,7 +40,7 @@ class Forgotpassowrd extends React.Component {
   }
 
   //* Callback Handler *//
-  handler(itemStr, userId, otpStr, isBack, hideBackArrow) {
+  handler(itemStr, userId, otpStr, isBack, hideBackArrow) { 
     if (userId != null) {
       this.setState({
         userId,
@@ -177,7 +177,7 @@ class Forgotpassowrd extends React.Component {
     } else {
       item = this.state.currentItem;
     }
-
+    
     return (
       <>
         {/* <p onClick={this.toggle}>Forgot Password?</p> */}

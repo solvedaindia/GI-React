@@ -27,12 +27,21 @@ class ForgotPasswordOTP extends React.Component {
     };
   }
 
-  proceedBtnPressed() {
-    if (!this.state.showOTPTxtField) {
+  proceedBtnPressed() { 
+    if (!this.state.showOTPTxtField) { 
+      // const nextComp = 'ForgotPasswordOTP';
+      //this.props.handlerPro(null, null, null, false);
       const nextComp = 'ForgotPasswordOTP';
-      this.props.handlerPro(nextComp, null, this.state.inputText, true);
+      this.props.handlerPro(nextComp, null, this.state.inputText, false, false);
+      
+      this.setState({
+        showOTPTxtField: true,
+        errorMessage: null,
+        errorClass: 'forgototp-mobile modalmin-height',
+      })
       return;
     }
+   
 
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
@@ -91,7 +100,7 @@ class ForgotPasswordOTP extends React.Component {
     });
   }
 
-  resendOTP() {
+  resendOTP() { 
     const data = {
       user_id: this.props.userIdPro,
       resend: 'true',
