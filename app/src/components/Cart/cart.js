@@ -1,13 +1,11 @@
 import React from 'react';
-import { Route, NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import apiManager from '../../utils/apiManager';
-import appCookie from '../../utils/cookie';
 import '../../../public/styles/headerContainer/category.scss';
 import {
   cartCountApi,
-  storeId,
-  accessToken,
+  
   minicartAPI,
 } from '../../../public/constants/constants';
 import CartLogo from '../SVGs/cart';
@@ -18,6 +16,7 @@ import ReactDOM from 'react-dom';
 import '../../../public/styles/minicart.scss';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import { updatetMinicart } from '../../actions/app/actions';
+import {PROCEED_TO_CHECK_OUT } from '../../constants/app/cartConstants';
 
 class CartCount extends React.Component {
   constructor(props) {
@@ -33,7 +32,6 @@ class CartCount extends React.Component {
   }
 
   handleOutsideClick(e) {
-    console.log('handleOutsideClick');
     const domNode = ReactDOM.findDOMNode(this);
 
     if (!domNode || !domNode.contains(event.target)) {
@@ -57,28 +55,19 @@ class CartCount extends React.Component {
   }
 
   componentDidMount() {
-    // document.addEventListener(
-    //   'click',
-    //   this.handleOutsideClick.bind(this),
-    //   true,
-    // );
+    
     this.fetchMinicartDetails();
 
-    // this.getCartCount();
     getUpdatedMinicartCount(this);
     this.setState({ //For Mobile
       CartCount : this.props.updatedMinicartCount
     })
-    // this.setState({
-    //   CartCount: this.props.updatedMinicartCount,
-    // });
-    // console.log('get mini cart count ---- ',getUpdatedMinicartCount(this))
+   
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.updatedMinicartCount != this.props.updatedMinicartCount) {
       this.fetchMinicartDetails();
-      // this.getCartCount();
       this.setState({
         CartCount: nextProps.updatedMinicartCount,
         isLoading: false,
@@ -94,12 +83,10 @@ class CartCount extends React.Component {
         this.setState({ minicartData: data && data.data.miniCartData });
       })
       .catch(error => {
-        console.log('miniCart Error ---', error);
       });
   }
 
   toggleDropdown = () => {
-    console.log('toggleDropdown');
     this.setState({
       active: !this.state.active,
     });
@@ -123,7 +110,6 @@ class CartCount extends React.Component {
               }`}
           >
             <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
-            {/* {option} */}
           </div>
         </>
       ));
@@ -132,7 +118,6 @@ class CartCount extends React.Component {
 
   render() {
     const { isLoading, CartCount } = this.state;
-    console.log('minicart recive props', CartCount, this.state.minicartData);
     let cartCountItem = null;
     let minicartDropdownItem = null;
     if (CartCount != 0 && CartCount != undefined) {
@@ -148,7 +133,7 @@ class CartCount extends React.Component {
           {CartCount != 0 && CartCount != undefined ? (
             <>
               <div id="mini-cartscroll" className="mini-cartscroll">{this.renderOptions()}</div>{' '}
-              <a href='/cart'><button className="checkout-btn">Proceed to Checkout</button></a>
+              <a href='/cart'><button className="checkout-btn">{PROCEED_TO_CHECK_OUT}</button></a>
             </>
           ) : (
               <EmptyMinicart />
@@ -160,11 +145,7 @@ class CartCount extends React.Component {
 
     return (
       <li className="icons mini-cart">
-        {/* {!isLoading ? (
-          cartCountItem
-        ) : (
-          <p className="error">No Cart Item Found</p>
-        )} */}
+       
         {/* {cartCountItem} */}
 
         <div className="dropdown">
@@ -192,7 +173,6 @@ class CartCount extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const minicartCount = getReleventReduxState(stateObj, 'minicartCount');
-  console.log('Its Globale Minicart', minicartCount);
   return {
     updatedMinicartCount: minicartCount,
   };
@@ -202,4 +182,3 @@ export default connect(
   mapStateToProps,
   { updatetMinicart },
 )(CartCount);
-// export default CartCount;

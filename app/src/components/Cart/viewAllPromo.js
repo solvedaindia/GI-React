@@ -2,6 +2,12 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import { cartApplyPromoAPI } from '../../../public/constants/constants';
+import {AVAILABLE_CODES } from '../../constants/app/cartConstants';
+import {COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
+import {VIEW_MORE } from '../../constants/app/cartConstants';
+import {APPLY } from '../../constants/app/cartConstants';
+
+
 
 class ViewAllPromo extends React.Component {
   constructor(props) {
@@ -27,7 +33,6 @@ class ViewAllPromo extends React.Component {
         });
         this.props.getCartDetails();
         this.handleClose();
-        console.log('Promotion Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -58,7 +63,7 @@ class ViewAllPromo extends React.Component {
         {!!promo &&
           promo.length > 3 && (
           <span className="viewAllPromo" onClick={this.handleShow}>
-              View More
+            {VIEW_MORE}
           </span>
         )}
         <Modal
@@ -68,9 +73,9 @@ class ViewAllPromo extends React.Component {
         >
           <Modal.Body>
             <Button className="close" onClick={this.handleClose} />
-            <h4 className="heading">Available Coupon Codes</h4>
+            <h4 className="heading">{AVAILABLE_CODES}</h4>
             {!!error && (
-              <div className="promoError">This coupon code is not valid.</div>
+              <div className="promoError">{COUPAN_CODE_NOT_VALID}</div>
             )}
             <ul className="promoList viewAll">
               {!!promo &&
@@ -85,7 +90,7 @@ class ViewAllPromo extends React.Component {
                         sellerItemData.promocode,
                       )}
                     >
-                      Apply
+                      {APPLY}
                     </span>
                   </li>
                 ))}
