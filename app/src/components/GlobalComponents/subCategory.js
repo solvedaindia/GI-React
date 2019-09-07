@@ -84,7 +84,7 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="subCat">
-        <h2 className="title">Featured Categories</h2>
+        <h2 className="title">In the Spotlight</h2>
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {

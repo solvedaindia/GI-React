@@ -121,7 +121,6 @@ class Forgotpassowrd extends React.Component {
   backButtonPressed() {
     let itemStr = this.state.currentItemName;
     let item;
-    console.log('ComponentNameBAck---', this.state.currentItemName);
     if (itemStr === 'ForgotPasswordOTP') {
       item = (
         <ForgotPasswordEmailMobile
@@ -157,8 +156,6 @@ class Forgotpassowrd extends React.Component {
       currentItem: item,
       currentItemName: itemStr,
     });
-
-    console.log('Back');
   }
 
   componentDidMount() {
