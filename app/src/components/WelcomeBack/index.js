@@ -115,7 +115,7 @@ class WelcomeBack extends React.Component {
       (this.state.userType = 'Hello User!'),
         (this.state.loginStatus = 'Logout');
     } else {
-      (this.state.userType = 'Hello Gues!'),
+      (this.state.userType = 'Hello Guest!'),
       (this.state.loginStatus = 'Login/Register');
     }
   }
