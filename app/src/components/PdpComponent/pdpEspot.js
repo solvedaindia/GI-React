@@ -10,7 +10,7 @@ const espot = props => {
         <div dangerouslySetInnerHTML={{ __html: espotData.content }} />
       );
     } else {
-      renderData = <img href={espotData.content} />;
+      renderData = <img href={espotData.content} alt='Banner Content' />;
     }
   }
   return <div>{renderData}</div>;

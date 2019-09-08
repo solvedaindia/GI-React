@@ -301,7 +301,7 @@ class ChangePassword extends React.Component {
               handleChange={this.handleInputChange.bind(this)}
             />
             {this.state.inputTextCurrent !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword" >
-              {<img src={require('../../SVGs/eye.svg')} />}
+              {<img src={require('../../SVGs/eye.svg')}  alt='Show Password'/>}
             </span> : null}
 
           </div>
@@ -330,7 +330,7 @@ class ChangePassword extends React.Component {
               onPaste={this.onPasteText.bind(this)}
             />
             {this.state.inputTextNew !== '' ? <span onClick={this.showHidePassNew.bind(this)} className="valiationPosition-NewPassword2" >
-              {<img src={require('../../SVGs/eye.svg')} />}
+              {<img src={require('../../SVGs/eye.svg')}  alt='Show Password' />}
             </span> : null}
           </div>
           {errorItemNew}

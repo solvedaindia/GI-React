@@ -426,7 +426,8 @@ export class CheckoutComponent extends React.Component {
     return (
       <div className='checkout'>
         {isMobile() && <div className='mob-checkout-steps'>
-          <a onClick={this.handleBack} className="backBtn"><img src={require('../../../public/images/LeftArrowWhite.svg')} /></a>
+          <a onClick={this.handleBack} className="backBtn">
+		  <img src={require('../../../public/images/LeftArrowWhite.svg')} alt='Left'/></a>
           <a href="/" className='mob-header-logo'><MWebLogo width="24" height="24" /></a>
           <h2 className='title'> Checkout (Step {this.state.step}/3) </h2>
         </div>}

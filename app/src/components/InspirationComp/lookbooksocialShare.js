@@ -4,7 +4,7 @@ import SocialMedia from '../../utils/socialMedia';
 import MobileSocialMedia from '../../utils/mobileUtils/socialMedia';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import { isMobile } from '../../utils/utilityManager';
-const shareImg = <img src={require('../../../public/images/share.svg')} />;
+const shareImg = <img src={require('../../../public/images/share.svg')} alt="Share" />;
 
 const LookbooksocialShare = () => {
     return(

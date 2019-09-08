@@ -14,12 +14,12 @@ import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 const LeftArrow = (
   <img
     className="leftArrow" id="leftArrowId"
-    src={require('../../../public/images/left-arrow.png')}
+    src={require('../../../public/images/left-arrow.png')} alt='Left' 
   />
 );
 
 const prevArrowImg = (
-  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')} />
+  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')}  alt='Left' />
 );
 class Forgotpassowrd extends React.Component {
   constructor(props) {

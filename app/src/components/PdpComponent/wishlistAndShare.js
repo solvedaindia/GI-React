@@ -5,7 +5,7 @@ import MobileSocialMedia from '../../utils/mobileUtils/socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import { isMobile } from '../../utils/utilityManager';
-const shareImg = <img src={require('../../../public/images/share.svg')} />;
+const shareImg = <img src={require('../../../public/images/share.svg')} alt="Share Wishlist"/>;
 
 const wishListAndShare = props => {
     const wishlistArr = getOnlyWishlistUniqueIds();

@@ -57,7 +57,7 @@ class ProductOrder extends React.Component {
         <div className="orderProduct clearfix">
           <div className="orderimgbox clearfix">
             <div className="imgBox">
-              <img src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+              <img  alt={productData.productName} src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
             <div className="product-text">
               <p className="heading">{productData.productName}</p>

@@ -175,13 +175,13 @@ class CartDetail extends React.Component {
               {!!cartData.orderSummary.productDiscount &&
                 <p className="prodDisc">
                   <span className='info'>{PRODUCT_DISCOUNT}</span>
-                  <span className='val'> ₹{formatPrice(cartData.orderSummary.productDiscount)}</span>
+                  <span className='val'>- ₹{formatPrice(cartData.orderSummary.productDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.orderDiscount &&
                 <p className='orderDisc'>
                   <span className='info'>{ORDER_DISCOUNT}</span>
-                  <span className='val'>-₹{formatPrice(cartData.orderSummary.orderDiscount)}</span>
+                  <span className='val'>- ₹{formatPrice(cartData.orderSummary.orderDiscount)}</span>
                 </p>
               }
               {!!cartData.orderSummary.shippingCharges == '0' ?

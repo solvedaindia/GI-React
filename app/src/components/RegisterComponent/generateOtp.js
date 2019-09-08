@@ -7,7 +7,7 @@ import { resendOtp, otpConfirmed } from './constants';
 
 const LeftArrow = (
     <img className='leftArrow'
-      src={require('../../../public/images/left-arrow.png')}
+      src={require('../../../public/images/left-arrow.png')}  alt="Left"
     />
   );
 

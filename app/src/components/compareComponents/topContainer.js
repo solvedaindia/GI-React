@@ -35,7 +35,7 @@ class TopContainer extends React.Component {
             swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
           } else if(swatch.facetImage) {
             // src={`${imagePrefix}${this.props.data}`}
-            swatches.push(<li><a><img src={`${imagePrefix}${swatch.facetImage}`}/></a></li>)
+            swatches.push(<li><a><img src={`${imagePrefix}${swatch.facetImage}`} alt={swatch.name} /></a></li>)
           } else {
             swatches.push(<li><a>{swatch.name}</a></li>)
           }
@@ -52,7 +52,7 @@ class TopContainer extends React.Component {
       return (
         <Col xs={12} sm={4} md={4} className='comp-list-item'>
         <div className='img-box'>
-        <img src={this.props.product.thumbnail !== '' ? `${imagePrefix}${this.props.product.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} />
+        <img  alt={this.props.product.productName} src={this.props.product.thumbnail !== '' ? `${imagePrefix}${this.props.product.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} />
         </div>
     
         <div className='product-desc'>

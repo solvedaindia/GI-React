@@ -8,7 +8,7 @@ class EmptyMinicart extends React.Component {
   render() {
     return (
       <div className="emptyCart">
-        <img className="emptyCartIcon" src={require('../SVGs/emptycart.svg')} />
+        <img className="emptyCartIcon" src={require('../SVGs/emptycart.svg')} alt="My Cart" />
         <h4 className="heading">{YOUR_SHOPPING_CART_EMPTY}</h4>
         <h4 className="subheading">{NOT_ADDED_ANY_ITEM}</h4>
       </div>

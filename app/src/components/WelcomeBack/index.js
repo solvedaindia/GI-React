@@ -205,7 +205,7 @@ class WelcomeBack extends React.Component {
                   disabled={renderProps.disabled}
                 >
                   <span className="icon-img">
-                    <img className="icon" src={Google} />
+                    <img className="icon" src={Google} alt="Google"/>
                   </span>
                   <span className="signin-text">Sign in with Google</span>
                 </button>
@@ -222,7 +222,7 @@ class WelcomeBack extends React.Component {
                   isdisabled={renderProps.disabled}
                 >
                   <span className="icon-img">
-                    <img className="icon" src={Facebook} />
+                    <img className="icon" src={Facebook} alt="Facebook"/>
                   </span>
                   <span className="signin-text">Sign in with Facebook</span>
                 </button>
