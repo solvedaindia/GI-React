@@ -537,7 +537,8 @@ export class Step2Component extends React.Component {
         address: this.state.inputText_address,
         default: this.state.defaultAddress,
         phone_number: this.state.phone,
-        email_id: this.state.email
+        email_id: this.state.email,
+        default: 'true',
       };
       // data['phone number'] = this.state.phone;
       // data['email id'] = this.state.email;
