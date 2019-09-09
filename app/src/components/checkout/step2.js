@@ -1091,7 +1091,7 @@ export class Step2Component extends React.Component {
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
-            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} /> : ''}
+            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} currentAddressPro={this.state.addressList.length !== 0 ? this.state.addressList[this.state.selected_add] : null } /> : ''}
           <div className='listRow clearfix'>
             <div className='stepActive'>
               <div className='checkmark'></div>
