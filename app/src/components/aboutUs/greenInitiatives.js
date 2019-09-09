@@ -25,7 +25,7 @@ export default class GreenInitiatives extends Component {
     this.getGreenUnititaiveData()
   }
   getGreenImage=(source)=>{
-    return(<img className="greenImage" src={imagePrefix+source} alt=""/>);
+    return(<img className="greenImage" src={imagePrefix+source} alt="Green Initiatives"/>);
   }
   getGreenUnititaiveData(){
     apiManager
@@ -95,7 +95,7 @@ export default class GreenInitiatives extends Component {
                 <div className='row'>
                   <div className='col-md-4'>
                     <a href={slide.onClickUrl} >
-                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt=""/>
+                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
                     </a>
                   </div>
                   <div className='col-md-8'>

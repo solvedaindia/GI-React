@@ -13,13 +13,13 @@ import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 
 const LeftArrow = (
   <img
-    className="leftArrow"
-    src={require('../../../public/images/left-arrow.png')}
+    className="leftArrow" id="leftArrowId"
+    src={require('../../../public/images/left-arrow.png')} alt='Left' 
   />
 );
 
 const prevArrowImg = (
-  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')} />
+  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')}  alt='Left' />
 );
 class Forgotpassowrd extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class Forgotpassowrd extends React.Component {
   }
 
   //* Callback Handler *//
-  handler(itemStr, userId, otpStr, isBack, hideBackArrow) {
+  handler(itemStr, userId, otpStr, isBack, hideBackArrow) { 
     if (userId != null) {
       this.setState({
         userId,
@@ -121,7 +121,6 @@ class Forgotpassowrd extends React.Component {
   backButtonPressed() {
     let itemStr = this.state.currentItemName;
     let item;
-    console.log('ComponentNameBAck---', this.state.currentItemName);
     if (itemStr === 'ForgotPasswordOTP') {
       item = (
         <ForgotPasswordEmailMobile
@@ -157,8 +156,6 @@ class Forgotpassowrd extends React.Component {
       currentItem: item,
       currentItemName: itemStr,
     });
-
-    console.log('Back');
   }
 
   componentDidMount() {
@@ -177,7 +174,7 @@ class Forgotpassowrd extends React.Component {
     } else {
       item = this.state.currentItem;
     }
-
+    
     return (
       <>
         {/* <p onClick={this.toggle}>Forgot Password?</p> */}

@@ -5,8 +5,8 @@ import OrderProduct from './orderProduct';
 import OrderSummery from './orderSummery';
 import {isMobile} from '../../../utils/utilityManager';
 
-const showImg = <img className='iconImg' src={require('../../SVGs/plusIcon.svg')}/>
-const hideImg = <img className='iconImg' src={require('../../SVGs/minusIcon.svg')}/>
+const showImg = <img className='iconImg' src={require('../../SVGs/plusIcon.svg')}  alt='Increase'/>
+const hideImg = <img className='iconImg' src={require('../../SVGs/minusIcon.svg')}  alt='Decrease'/>
 class OrderItem extends React.Component {
   constructor(props) {
     super(props);

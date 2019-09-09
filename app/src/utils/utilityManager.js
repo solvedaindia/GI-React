@@ -34,6 +34,14 @@ export function isMobile() {
  * Function will pick the browser width *
  */
 
+export function isTab() {
+    return $(window).width() < 1025;
+}
+
+/**
+ * Function will pick the browser width *
+ */
+
 export function getWindowWidth() {
     return $(window).width();
 }

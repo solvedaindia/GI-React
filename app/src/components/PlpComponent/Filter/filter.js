@@ -14,13 +14,13 @@ import { runInThisContext } from 'vm';
 const downArrow = (
   <img
     className="dropdownArrow"
-    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg') }  alt="Down"
   />
 );
 const upArrow = (
   <img
     className="dropdownArrow"
-    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}   alt="Up"
   />
 );
 
@@ -282,15 +282,6 @@ class Filter extends React.Component {
           <label className="lblCheck" htmlFor={customSelectionBoxId} />
         );
       }
-
-      // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
-
-      // } 
-      // else {
-      //   checkItem = (
-      //     <label className="lblCheck" htmlFor={customSelectionBoxId} />
-      //   );
-      // }
 
       return (
         <li key={i} className="list">

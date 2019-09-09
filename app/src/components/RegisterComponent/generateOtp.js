@@ -7,7 +7,7 @@ import { resendOtp, otpConfirmed } from './constants';
 
 const LeftArrow = (
     <img className='leftArrow'
-      src={require('../../../public/images/left-arrow.png')}
+      src={require('../../../public/images/left-arrow.png')}  alt="Left"
     />
   );
 
@@ -65,6 +65,13 @@ class GenerateOtp extends React.Component {
         this.props.componentData('registerWithMobileNum', this.props.userdata);
     }
 
+    backToGenerateOtp() {
+        this.setState({
+            errorMessage: null
+        })
+        this.props.componentData('generateOtp', this.props.userdata);
+    }
+
     callbackFunc(errorMsg) {
         this.setState({
             error: true,
@@ -72,7 +79,7 @@ class GenerateOtp extends React.Component {
         });
     }
 
-    render() {
+    render() { 
         const userId = this.props.userdata.user_id;
         let errorItem = null;
         let isErrorExist = false;
@@ -93,7 +100,7 @@ class GenerateOtp extends React.Component {
                         <Form>
                             <div className='form-div clearfix'>{errorItem}</div>
                             <FormGroup className='text-center'>
-                                <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-bg btn-register btn-block'>Back</Button>
+                                <Button onClick={this.backToGenerateOtp.bind(this)} className='btn-bg btn-register btn-block'>Back</Button>
                             </FormGroup>
                         </Form>
                     </>

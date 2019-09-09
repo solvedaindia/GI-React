@@ -13,7 +13,6 @@ class CartUpdate extends React.Component {
   }
 
   handleChange(event) {
-    //   this.setState({quantity: event.target.value});
     this.handleCartUpdate(event.target.value);
   }
 
@@ -33,7 +32,6 @@ class CartUpdate extends React.Component {
           quantity: qty,
           isLoading: false,
         });
-        console.log('@@@@ Cart Update @@@', response.data.data);
       })
       .catch(error => {
         this.setState({

@@ -27,12 +27,21 @@ class ForgotPasswordOTP extends React.Component {
     };
   }
 
-  proceedBtnPressed() {
-    if (!this.state.showOTPTxtField) {
+  proceedBtnPressed() { 
+    if (!this.state.showOTPTxtField) { 
+      // const nextComp = 'ForgotPasswordOTP';
+      //this.props.handlerPro(null, null, null, false);
       const nextComp = 'ForgotPasswordOTP';
-      this.props.handlerPro(nextComp, null, this.state.inputText, true);
+      this.props.handlerPro(nextComp, null, this.state.inputText, false, false);
+      
+      this.setState({
+        showOTPTxtField: true,
+        errorMessage: null,
+        errorClass: 'forgototp-mobile modalmin-height',
+      })
       return;
     }
+   
 
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
@@ -65,7 +74,6 @@ class ForgotPasswordOTP extends React.Component {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         const errorMsgKey = errorData.error.error_key;
-        console.log('OTP Response----', errorMsgKey);
         if (errorMsgKey === 'otp_incorrect_limit_exceed') {
           const nextComp = 'ForgotPasswordOTP';
           this.props.handlerPro(nextComp, null, null, false, true);
@@ -91,7 +99,7 @@ class ForgotPasswordOTP extends React.Component {
     });
   }
 
-  resendOTP() {
+  resendOTP() { 
     const data = {
       user_id: this.props.userIdPro,
       resend: 'true',
@@ -100,8 +108,7 @@ class ForgotPasswordOTP extends React.Component {
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
-        console.log('rrbrb -- ',response.data)
-        const otpCount = response.data.data.otpCount;
+		const otpCount = response.data.data.otpCount;
         if (otpCount === 3) {
           const nextComp = 'ForgotPasswordOTP';
           this.props.handlerPro(nextComp, null, null, false, true);
@@ -114,7 +121,6 @@ class ForgotPasswordOTP extends React.Component {
         }
       })
       .catch(error => {
-        console.log('dmeee -- ',error);
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({

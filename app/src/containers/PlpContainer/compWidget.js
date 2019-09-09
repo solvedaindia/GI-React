@@ -36,7 +36,7 @@ export class CompContainer extends React.Component {
     const addDiv = (
       <li className="list">
         <div className='addproduct-box'>
-          <button className='add-icon'><img src={plus}/></button>
+          <button className='add-icon'><img src={plus} /></button>
           <div className='addproduct-text'>Add Product</div>
         </div>
       </li>
@@ -61,7 +61,7 @@ export class CompContainer extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.compData.length > this.props.compData.length) {
+    if (newProps.compData.length > this.props.compData.length) {
       this.setState({
         modalClass: 'open'
       })
@@ -69,7 +69,7 @@ export class CompContainer extends React.Component {
   }
 
   showHideCompare = () => {
-    if(this.state.modalClass == 'open') {
+    if (this.state.modalClass == 'open') {
       this.setState({
         modalClass: '',
       })
@@ -80,7 +80,7 @@ export class CompContainer extends React.Component {
     }
   }
 
-  handleGoToCompare(e) { 
+  handleGoToCompare(e) {
     // var element = document.getElementById("change");
     // element.classList.toggle("open");
     // this.setState({
@@ -88,10 +88,10 @@ export class CompContainer extends React.Component {
     //   modalClass: 'open',
     // })
 
-      if(this.props.compData.length < 2) {
-        e.preventDefault();
-        alert('Please add at least two products to compare');
-      }
+    if (this.props.compData.length < 2) {
+      e.preventDefault();
+      alert('Please add at least two products to compare');
+    }
   }
   clearAll() {
     this.props.removeAll();
@@ -99,42 +99,55 @@ export class CompContainer extends React.Component {
 
   render() {
     // alert(this.state.modalClass)
+    var searchParam = '';
+    var compIdData =[];
+    if (this.props.compData.length !== 0) {
+      this.props.compData.forEach(element => {
+        compIdData.push(element.skuId);
+      });
+      compIdData.map((skuId, index) => {
+        searchParam += `${skuId}${compIdData.length === index + 1 ? '' : '/'}`
+      })
+    }
+    console.log('idid',searchParam);
     return (
       <>
-      {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow'/> </button> </div>:
-    <div className='compare'><button onClick={this.showHideCompare} className="btnCompare"> <img className='arrow' src={UpArrow} alt='upArrow'/></button><div className='clearfix'></div> <div className='comparelebal'>Compare</div></div> : ''}
-    {this.props.compData.length > 0 ? <div  className={`animationDIV ${this.state.modalClass}`} id='change'>
-      {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
-      <div  className='compareProductwrap'>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <ul className="compareProducts">
-                {this.buildData()}
-                {this.props.compData.length > 0 ? <li className="list">
-                    <Link to="/compare" className="btn-compare" onClick={(e) => this.handleGoToCompare(e)}>
-                      Compare {this.props.compData.length}
-                      /3
+        {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :
+          <div className='compare'><button onClick={this.showHideCompare} className="btnCompare"> <img className='arrow' src={UpArrow} alt='upArrow' /></button><div className='clearfix'></div> <div className='comparelebal'>Compare</div></div> : ''}
+        {this.props.compData.length > 0 ? <div className={`animationDIV ${this.state.modalClass}`} id='change'>
+          {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
+          <div className='compareProductwrap'>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="compareProducts">
+                    {this.buildData()}
+                    {this.props.compData.length > 0 ? <li className="list">
+                      {/* <Link className="btn-compare" to="/compare" params={{ ids: searchParam }} onClick={(e) => this.handleGoToCompare(e)}> */}
+                      <Link className="btn-compare" to={{pathname: '/compare', search: `ids=${searchParam}`}} onClick={(e) => this.handleGoToCompare(e)} >
+                        {/* <Link to="/compare" className="btn-compare" onClick={(e) => this.handleGoToCompare(e)}> */}
+                        Compare {this.props.compData.length}
+                        /3
                     </Link>
-                    <button className="btn-clearall" onClick={this.clearAll}>
-                      Clear All
+                      <button className="btn-clearall" onClick={this.clearAll}>
+                        Clear All
                     </button>
-                    {/* <button className='btnCompare' onClick={this.showHideCompare}>
+                      {/* <button className='btnCompare' onClick={this.showHideCompare}>
                       hide
                     </button> */}
-                  </li> : ""}
-              </ul>
+                    </li> : ""}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div> :
+          </div> :
       {/* // : <button onClick={this.showHideCompare} className="btnCompare">
       //                 show
       //               </button> */}
-      {/* 'uyu' */}
-    {/* } */}
-    </div> : ''}
-    </>
+          {/* 'uyu' */}
+          {/* } */}
+        </div> : ''}
+      </>
     );
   }
 }

@@ -107,7 +107,7 @@ class AlwaysRemember extends React.Component {
             <div className="col-md-7">
               <div className="rememberImgbox">
                 <div className="imgCenterbox">
-                  <img className="imgcenter" src={imagePrefix + this.state.img_url} alt="" />
+                  <img className="imgcenter" src={imagePrefix + this.state.img_url} alt="Always remember" />
                 </div>
                 <div className="btnwrapper">
                   <button type="button" name='1' onClick={this.onHandleClick} className={this.state.buttonFirst

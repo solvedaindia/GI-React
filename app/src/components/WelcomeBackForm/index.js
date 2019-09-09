@@ -172,6 +172,7 @@ class WelcomeForm extends Component {
             {
               <img
                 src={require('../../../src/components/SVGs/eye.svg')}
+				 alt="Show Password"
               />
             }
           </span>

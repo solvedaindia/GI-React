@@ -239,7 +239,6 @@ class PdpComponent extends React.Component {
 				pincodeData: response.data.data,
 			});
 		}).catch(error => {
-			console.log('PDP Pin Code API Error =>', error);
 			const defaultPincodeData = {
 				pincodeServiceable: false,
 				inventoryStatus: '',
@@ -292,7 +291,6 @@ class PdpComponent extends React.Component {
 				breadcrumbData: response.data.data.breadCrumbData,
 			})
 		}).catch(error => {
-			console.log('BreadCrumb Error - '+error);
 		});
 	}
 
@@ -391,7 +389,8 @@ class PdpComponent extends React.Component {
 	}
 
 	let breadcrumbItem = null;
-	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData.length !== 0) {
+	
+	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData !== undefined && this.state.breadcrumbData.length !== 0) {
 		breadcrumbItem = (
 			<Breadcrumb pdpBreadcrumbPro={this.state.breadcrumbData} productNamePro={this.state.skuData.productName} />
 		);

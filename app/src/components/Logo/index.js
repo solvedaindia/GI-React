@@ -24,8 +24,8 @@ class Logo extends React.PureComponent {
       <div className="logo">
         <Link to="/">
           <figure className="header__topBar_logo">
-            <img className='logo-with-gradient' src={this.props.logoImage} />
-            <img className='logo-text' src={this.props.textImage} />
+            <img className='logo-with-gradient' src={this.props.logoImage}  alt='Godrej Interio'/>
+            <img className='logo-text' src={this.props.textImage}  alt='Godrej Interio'/>
           </figure>
         </Link>
       </div>

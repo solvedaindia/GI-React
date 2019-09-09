@@ -23,11 +23,11 @@ class DreamKitchens extends React.Component {
 
         <div className="row progressBar">
             <div className="col-md-3 imgBox">           
-              <img className="Delivery-Installation" src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
+              <img className="Delivery-Installation" src='/imagestore/images/godrejInterio/KichenHover.svg'
               alt="rectangle"/>                
             </div>
             <div className="col-md-3 imgBox">
-            <img className="Delivery-Installation"  src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
+            <img className="Delivery-Installation"  src='/imagestore/images/godrejInterio/KichenHover.svg'
               alt="rectangle"
                     /> 
                 </div>

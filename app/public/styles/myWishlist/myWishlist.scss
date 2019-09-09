@@ -178,10 +178,10 @@
   
 }
 
-  /* 
-  #Global Screen Chhange for Screen max 768
-  */
-  @media screen and (min-width: 768px){
+ /* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
     .myWishlist {
       padding: 60px 0 0 0;
       .myWishlist{
@@ -228,10 +228,10 @@
 }
 
 
-/* 
-  #Global Screen Chhange for Screen max 767
-*/
-@media screen and (max-width: 767px){
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
   .myWishlist {
     padding: 10px 0 0 0;
     .heading {
@@ -243,6 +243,8 @@
 
         .productlist{
           padding: 0px;
+		  width: 48%;
+		  float: left;
           .hoverBox{
             padding: 5px 0px;
             .inner-overlay{
@@ -273,6 +275,7 @@
       }
     }
     .bestSeller{
+		margin-bottom: 30px;
       .title{
         color: $colorbluedull;
         margin-bottom: 10px;

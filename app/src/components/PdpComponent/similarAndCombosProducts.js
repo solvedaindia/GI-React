@@ -7,10 +7,10 @@ import {
 import { formatPrice } from '../../utils/utilityManager';
 
 const prevArrowImg = (
-  <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} />
+  <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} alt='Left' />
 );
 const nextArrowImg = (
-  <img src={`${imagePrefix}/images/godrejInterio/RightArrow.svg`} />
+  <img src={`${imagePrefix}/images/godrejInterio/RightArrow.svg`} alt='Right'/>
 );
 class SimilarCombosProducts extends React.Component {
   constructor() {
@@ -39,7 +39,7 @@ class SimilarCombosProducts extends React.Component {
         <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
           <div className="productlist">
             <div className="imgBox">
-              <img className="imgfullwidth" src={imgUrl} alt="Img" />
+              <img className="imgfullwidth" src={imgUrl} alt={data.productName} />
             </div>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>

@@ -460,13 +460,19 @@ function swatchAttributesForCompare(productData) {
 module.exports.getDescriptiveAttributes = getDescriptiveAttributes;
 function getDescriptiveAttributes(productData) {
   const descAttr = {
+    dimensionThumbnail: '',
     width: '',
     height: '',
     depth: '',
   };
   if (productData.attributes && productData.attributes.length > 0) {
     productData.attributes.forEach(attr => {
-      if (attr.identifier === 'ExtnWidth') {
+      if (attr.identifier === 'DIMENSIONIMG') {
+        descAttr.dimensionThumbnail =
+          attr && attr.values[0]
+            ? imagefilter.getImagePathNew(attr.values[0].value)
+            : '';
+      } else if (attr.identifier === 'ExtnWidth') {
         descAttr.width = attr && attr.values[0] ? attr.values[0].value : 'NA';
       } else if (attr.identifier === 'ExtnHeight') {
         descAttr.height = attr && attr.values[0] ? attr.values[0].value : 'NA';

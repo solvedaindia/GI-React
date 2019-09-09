@@ -14,6 +14,8 @@ const getClient = (baseUrl = null) => {
     headers: {
       access_token: accessToken,
       store_id: storeId,
+	  Pragma: 'no-cache',
+	  'cache-control':'no-cache',
     },
   };
 
@@ -50,7 +52,9 @@ const getClient = (baseUrl = null) => {
  */
 export default {
   // Provide request methods with the default base_url
-  get(url, conf = {}) {
+  get(url, conf = {}) 
+  {
+	 console.log('THIS is the URL invoked ', url); 
     return getClient()
       .get(url, conf)
       .then(response => Promise.resolve(response))

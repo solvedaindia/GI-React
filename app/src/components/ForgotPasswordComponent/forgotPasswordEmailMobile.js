@@ -129,7 +129,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       validateImg = (
         <img
           className="checkmarkImg"
-          src={require('../../../src/components/SVGs/checkmark.svg')}
+          src={require('../../../src/components/SVGs/checkmark.svg') } alt="Select"
         />
       );
     } else {

@@ -120,7 +120,7 @@ class ForgotPasswordNewPassword extends React.Component {
               {errorItem}
               
               {this.state.inputText !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword">
-                {<img src={require('../../../src/components/SVGs/eye.svg')} />}
+                {<img src={require('../../../src/components/SVGs/eye.svg')}  alt="Show Password" />}
               </span> : null}
             </div>
           </FormGroup>

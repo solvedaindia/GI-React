@@ -347,7 +347,7 @@ function productCompAndMercAssocIds(
 function promotionDetails(header, productData, skuData, skuIds, callback) {
   promotionUtil.getMultiplePromotionData(skuIds, header, (err, result) => {
     if (err) {
-      callback(null, header, productData, skuData, '');
+      callback(err);
     } else {
       callback(null, header, productData, skuData, result);
     }
@@ -879,7 +879,14 @@ function transformBundleProdAvailability(product) {
         inventoryStatusList.push(product[i].inventoryStatus);
       }
       shipCharge += product[i].shippingCharge;
-      datesList.push(new Date(product[i].deliveryDateAndTime));
+      if (
+        !(
+          product[i].deliveryDateAndTime === '' ||
+          product[i].deliveryDateAndTime === undefined
+        )
+      ) {
+        datesList.push(new Date(product[i].deliveryDateAndTime));
+      }
       if (product[i].experienceStore && product[i].experienceStore.length > 0) {
         product[i].experienceStore.forEach(ex => {
           if (map.has(ex.storeIdentifier)) {
@@ -896,9 +903,11 @@ function transformBundleProdAvailability(product) {
       ? 'unavailable'
       : 'available';
     pincodeData.shippingCharge = shipCharge !== '0' ? shipCharge : '';
-    pincodeData.deliveryDateAndTime = orderfilter.getFormattedDate(
-      new Date(Math.max.apply(null, datesList)),
-    );
+    if (datesList.length > 0) {
+      pincodeData.deliveryDateAndTime = orderfilter.getFormattedDate(
+        new Date(Math.max.apply(null, datesList)),
+      );
+    }
     pincodeData.experienceStore = getExpericeStoreForBundle(
       storeList,
       map,
@@ -932,4 +941,85 @@ function getExpericeStoreForBundle(storeLists, map, length) {
     );
   }
   return expStore;
+}
+
+/**
+ * API for Multiple Find Inventory
+ */
+module.exports.getMultipleFindInventory = function getMultipleFindInventory(
+  reqHeaders,
+  req,
+  callback,
+) {
+  logger.debug('Inside the GET Multiple Find Inventory API');
+  const partNumber = req.partnumber.split(',');
+  const quantity = req.quantity.split(',');
+  if (partNumber.length !== quantity.length) {
+    logger.debug('GET PDP Data :: Invalid Params');
+    callback(errorUtils.errorlist.invalid_params);
+  }
+  const attPromises = [];
+  for (let i = 0; i < partNumber.length; i += 1) {
+    const reqBody = {
+      pincode: req.pincode,
+      partNumber: partNumber[i],
+      quantity: quantity[i],
+    };
+    const promise = new Promise((resolve, reject) => {
+      pincodeUtil.findInventory(reqHeaders, reqBody, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+    attPromises.push(promise);
+  }
+  Promise.all(attPromises)
+    .then(resu => {
+      callback(null, transformMultipleInventoryData(resu));
+    })
+    .catch(error => {
+      logger.debug('Inside the GET Multiple Find Inventory API', error);
+      callback(error);
+    });
+};
+
+/**
+ * transform multiple find inventory api data
+ */
+function transformMultipleInventoryData(product) {
+  const inventoryResponse = {
+    inventoryStatus: 'unavailable',
+    deliveryDate: '',
+  };
+  if (product && product.length > 0) {
+    const datesList = [];
+    const inventoryStatusList = [];
+    for (let i = 0; i < product.length; i += 1) {
+      if (inventoryStatusList.indexOf(product[i].inventoryStatus) === -1) {
+        inventoryStatusList.push(product[i].inventoryStatus);
+      }
+      if (
+        !(
+          product[i].deliveryDateAndTime === undefined ||
+          product[i].deliveryDateAndTime === ''
+        )
+      ) {
+        datesList.push(new Date(product[i].deliveryDateAndTime));
+      }
+    }
+    inventoryResponse.inventoryStatus = inventoryStatusList.includes(
+      'unavailable',
+    )
+      ? 'unavailable'
+      : 'available';
+    if (datesList.length > 0) {
+      inventoryResponse.deliveryDate = orderfilter.getFormattedDate(
+        new Date(Math.max.apply(null, datesList)),
+      );
+    }
+  }
+  return inventoryResponse;
 }

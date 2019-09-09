@@ -1,6 +1,7 @@
 import React from 'react';
 import { cartUpdateAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import {QUANTITY } from '../../constants/app/cartConstants';
 
 class OrderSummy extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class OrderSummy extends React.Component {
   render() {
     return (
       <form className="cartQty">
-        <label className="qytLabel">QUANTITY</label>
+        <label className="qytLabel">{QUANTITY}</label>
         <select
           className="qytList"
           value={this.state.quantity}

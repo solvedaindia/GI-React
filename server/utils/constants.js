@@ -1,4 +1,4 @@
-const apiconfig = require('./apiconfig.js');
+const apiconfig = require('../configs/apiconfig.js');
 const endPointURLConfig = apiconfig.getEndPoint();
 const HostName = endPointURLConfig.hostname;
 const searchHostName = endPointURLConfig.searchHostname;
@@ -75,4 +75,5 @@ module.exports = Object.freeze({
   bookConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/booking`,
   getConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/dropDownValues`,
   unlockOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/unlockOrder/{{orderId}}`,
+  categoryBreadcrumb: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?responseFormat=json&profileName=IBM_BreadCrumbByCategoryUniqueId`,
 });

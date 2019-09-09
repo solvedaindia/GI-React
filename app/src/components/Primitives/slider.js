@@ -15,7 +15,7 @@ class FullBanner extends React.Component {
     this.state = {
       heroSlider: null,
       isLoading: false,
-      error: null,
+      error: null,     
     };
   }
 
@@ -45,6 +45,12 @@ class FullBanner extends React.Component {
     this.getSliderData();
   }
 
+  
+
+  handleOnClick (e) {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const { heroSlider } = this.state;
     const settings = {
@@ -61,7 +67,7 @@ class FullBanner extends React.Component {
         <Slider {...settings}>
           {!!heroSlider &&
             heroSlider.map((sliderData, index) => (
-              <a href={sliderData.onClickUrl} key={index}>
+              <a href={sliderData.onClickUrl} onClick={e => this.handleOnClick(e)} onMouseDown={e => this.handleOnClick(e)} key={index}>
                 <img src={sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}
