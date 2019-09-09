@@ -65,7 +65,7 @@ class Invoice extends React.Component {
         console.log('!!!!! Invoice' , invoiceData);
         // if(!invoiceData) return null;
         return (
-            <div className="invoiceContainer" style={{border:'1px solid black' width: '90%', margin: 'auto' , float: 'left'}}>
+            <div className="invoiceContainer" style={{border:'1px solid black', width: '90%', margin: 'auto' , float: 'left'}}>
                 <h3 style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
