@@ -1,9 +1,7 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import {
   connect
 } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
 import {
   compose
 } from 'redux';
@@ -20,6 +18,22 @@ import {
   Modal
 } from 'react-bootstrap';
 import Input from '../Primitives/input';
+import {MOBILE_EMAIL } from '../../constants/app/checkoutConstants';
+import {ONE_OR_MORE_ITEM } from '../../constants/app/checkoutConstants';
+import {SAVE_YOUR_ADDRESS } from '../../constants/app/checkoutConstants';
+import {ENTER_VALID_STATE } from '../../constants/app/checkoutConstants';
+import {REQUIRED_FIELD } from '../../constants/app/checkoutConstants';
+import {VALID_CITY_DISTRICT } from '../../constants/app/checkoutConstants';
+import {VALID_ADDRESS } from '../../constants/app/checkoutConstants';
+import {VALID_PINCODE } from '../../constants/app/checkoutConstants';
+import {VALID_EMAIL } from '../../constants/app/checkoutConstants';
+
+
+
+
+
+
+
 import {
   validateFullName,
   validateMobileNo,
@@ -138,7 +152,6 @@ export class Step2Component extends React.Component {
       this.callPinApi()
         .then(this.callAddressAPI)
         .then((data) => {
-          console.log(data, "resolved data")
           if (data.addressList.length === 0) {
             this.newAddActive();
           }
@@ -180,7 +193,6 @@ export class Step2Component extends React.Component {
             access_token: token
           }
         }).then(response => {
-          console.log(response.data.data, "address list reponse")
           var data = {};
           data.addressList = response.data.data.addressList.sort((a, b) => {
             if (b.isDefault == true) {
@@ -236,26 +248,19 @@ export class Step2Component extends React.Component {
     return new Promise((resolve, reject) => {
       let token = appCookie.get('accessToken')
       let defPin = appCookie.get('pincode');
-      console.log(defPin, "this is defpin")
       axios.get(`${PinToCityAPI}${val ? val : defPin}`, {
         headers: {
           store_id: storeId,
           access_token: token
         }
       }).then(response => {
-        console.log(response.data.data, "pin response");
-        // this.setState({
-        //   city: response.data.data.city,
-        //   state: response.data.data.state,
-        //   pin: defPin
-        // })
+       
         var data = response.data.data;
         data.pin = val ? val : defPin;
         resolve(data);
       }).catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        console.log('iii --- ',errorMessage)
         
         if(errorField === 'pin') {
           this.setState({
@@ -365,7 +370,6 @@ export class Step2Component extends React.Component {
   }
 
   handleInput(value) {
-    console.log('handle chagne called ---- ', value.target.id);
     this.setState({
       error_name: false,
       error_number: false,
@@ -401,18 +405,7 @@ export class Step2Component extends React.Component {
         else {
           return;
         }
-        // else if (value.target.value.length === 6) {
-        //   this.callPinApi(value.target.value).then((data) => {
-        //     return this.setState({
-        //       inputText_pincode: data.pin,
-        //       inputText_city: data.city,
-        //       inputText_state: data.state
-        //     })
-        //   })
-        // }
-      //  else {
-      //   // return false
-      // };
+  
 
       case 'city':
         return this.setState({
@@ -452,15 +445,7 @@ export class Step2Component extends React.Component {
             binputText_pincode: value.target.value,
           });
         } 
-        // else if (value.target.value.length === 6) {
-        //   this.callPinApi(value.target.value).then((data) => {
-        //     this.setState({
-        //       binputText_pincode: data.pin,
-        //       binputText_city: data.city,
-        //       binputText_state: data.state
-        //     })
-        //   })
-        // } 
+      
         else {
           return;
         };
@@ -481,7 +466,6 @@ export class Step2Component extends React.Component {
     this.addAddress()
       .then(this.callAddressAPI)
       .then((data) => {
-        console.log("in final resolve", data)
         if (this.props.isLoggedIn) {
           this.setState({
             addressList: data.addressList,
@@ -491,7 +475,6 @@ export class Step2Component extends React.Component {
         } else {
           this.addAddressToCart()
             .then((orderId) => {
-              console.log(orderId, "this is order id")
               var selected_add = {
                 address: this.state.inputText_address,
                 city: this.state.inputText_city,
@@ -504,24 +487,7 @@ export class Step2Component extends React.Component {
               this.handleProceed()
             })
         }
-        // this.setState({
-        //   inputText_name: '',
-        //   inputText_number: '',
-        //   inputText_email: '',
-        //   inputText_pincode: '',
-        //   inputText_address: '',
-        //   inputText_city: '',
-        //   inputText_state: '',
-        //   inputText_gst: '',
-
-        //   binputText_name: '',
-        //   binputText_number: '',
-        //   binputText_email: '',
-        //   binputText_pincode: '',
-        //   binputText_address: '',
-        //   binputText_city: '',
-        //   binputText_state: '',
-        // });
+      
       }).catch((err) => {
         throw new Error(err);
       })
@@ -540,10 +506,8 @@ export class Step2Component extends React.Component {
         email_id: this.state.email,
         default: 'true',
       };
-      // data['phone number'] = this.state.phone;
-      // data['email id'] = this.state.email;
+    
       let token = appCookie.get('accessToken')
-      console.log(data, "this is address data");
       axios.post(addAddressAPI, data, {
         headers: {
           store_id: storeId,
@@ -595,10 +559,7 @@ export class Step2Component extends React.Component {
           access_token: token
         }
       }).then(res => {
-        // this.setState({
-        //   ship_add_id: response.data.data.addressID,
-        //   bill_add_id: res.data.data.addressID
-        // })
+        
         resolve(res.data.data.addressID);
       }).catch(err => {
         throw new Error(err);
@@ -621,10 +582,8 @@ export class Step2Component extends React.Component {
             access_token: token
           }
         }).then((res) => {
-          console.log(res, "gst response")
           resolve();
         }).catch((err) => {
-          console.log(err, 'gst error');
           reject();
         })
       } else {
@@ -634,7 +593,6 @@ export class Step2Component extends React.Component {
   }
 
   addAddressToCart = () => {
-    console.log('shipMode-ID --- ', this.props.shipModePro);
     return new Promise((resolve, reject) => {
       let token = appCookie.get('accessToken');
       axios.get(minicartAPI, {
@@ -644,7 +602,6 @@ export class Step2Component extends React.Component {
         }
       }).then((response) => {
         var miniCartData = response.data.data.miniCartData
-        console.log(miniCartData, "this is minicart data")
         var data = [];
         miniCartData.forEach((item) => {
           if (item.freeGift != true) {
@@ -667,7 +624,6 @@ export class Step2Component extends React.Component {
             access_token: token
           }
         }).then((res) => {
-          console.log(response, "add address to cart response");
           var reqdata = {
             order_id: response.data.data.orderID
           }
@@ -679,9 +635,8 @@ export class Step2Component extends React.Component {
           }).then((resp) => {
             
             const inventoryFlag = resp.data.data.reserved;
-            console.log("precheckout response ----",inventoryFlag, resp.data);
             if (inventoryFlag === '0') {
-              alert('One or more item in you cart is Out Of Stock.')
+              alert(`${ONE_OR_MORE_ITEM}`)
               window.location.assign('/cart')
             }
             else {
@@ -694,11 +649,9 @@ export class Step2Component extends React.Component {
             }
             
           }).catch((err) => {
-            console.log(err, "precheckout err");
             reject()
           })
         }).catch((err) => {
-          console.log(body, err, "add address to cart response");
           reject();
         })
       }).catch((err) => {
@@ -723,11 +676,9 @@ export class Step2Component extends React.Component {
         ship_add_id: selected_address.addressID,
         bill_add_id: selected_address.addressID
       })
-      console.log(this.state.ship_add_id, this.state.bill_add_id, "shipping and billing address id")
     }
 
     this.addAddressToCart().then((orderId) => {
-      console.log(orderId, "this is order id")
       selected_address.orderId = orderId;
       selected_address.billAddId = this.state.bill_add_id;
       this.props.handleAddress(selected_address);
@@ -738,11 +689,10 @@ export class Step2Component extends React.Component {
 
   onLoginSave(event) {
     event.preventDefault();
-    console.log('onLoginSave pressed  ----');
     if (isMobile() && this.state.new_add) {
       this.setState({
         new_add_error: true,
-        new_add_msg: 'Please save you address first'
+        new_add_msg: `${SAVE_YOUR_ADDRESS}`
       });
       return;
     }
@@ -769,7 +719,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bstate').focus();
         this.setState({
           berror_state: true,
-          berrorMessage_state: !this.state.binputText_state ? 'This is a required field' : 'Please enter valid State.',
+          berrorMessage_state: !this.state.binputText_state ? `${REQUIRED_FIELD}` : `${ENTER_VALID_STATE}`,
         });
         validateBillingAddress = false
         //return;
@@ -778,7 +728,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bcity').focus();
         this.setState({
           berror_city: true,
-          berrorMessage_city: !this.state.binputText_city ? 'This is a required field' : 'Please enter valid City/District.',
+          berrorMessage_city: !this.state.binputText_city ? `${REQUIRED_FIELD}` : `${VALID_CITY_DISTRICT}`,
         });
         validateBillingAddress = false
         //return;
@@ -787,7 +737,7 @@ export class Step2Component extends React.Component {
         document.getElementById('baddress').focus();
         this.setState({
           berror_address: true,
-          berrorMessaget_address: !this.state.binputText_address ? 'This is a required field' : 'Please enter valid Address.',
+          berrorMessaget_address: !this.state.binputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
         });
         validateBillingAddress = false
         //return;
@@ -796,7 +746,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bemail').focus();
         this.setState({
           berror_email: true,
-          berrorMessage_email: !this.state.binputText_email ? 'This is a required field' : 'Please enter valid Email ID.',
+          berrorMessage_email: !this.state.binputText_email ? `${REQUIRED_FIELD}` : `${VALID_EMAIL}`,
         });
         validateBillingAddress = false
         //return;
@@ -805,7 +755,7 @@ export class Step2Component extends React.Component {
         document.getElementById('bpin').focus();
         this.setState({
           berror_pincode: true,
-          berrorMessage_pincode: !this.state.binputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+          berrorMessage_pincode: !this.state.binputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
         });
         validateBillingAddress = false
         //return;
@@ -814,17 +764,16 @@ export class Step2Component extends React.Component {
         document.getElementById('bphone').focus();
         this.setState({
           berror_number: true,
-          berrorMessage_number: !this.state.binputText_number ? 'This is a required field' : 'Please enter valid mobile number.',
+          berrorMessage_number: !this.state.binputText_number ? `${REQUIRED_FIELD}` : 'Please enter valid mobile number.',
         });
         validateBillingAddress = false
         //return;
       }
       if (!validateFullName(this.state.binputText_name)) {
-        console.log(this.state.binputText_name, "this is input name")
         document.getElementById('bname').focus();
         this.setState({
           berror_name: true,
-          berrorMessage_name: !this.state.binputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
+          berrorMessage_name: !this.state.binputText_name ? `${REQUIRED_FIELD}` : 'Please enter a valid Name. It should not exceed 100 characters',
         });
         validateBillingAddress = false
         //return;
@@ -850,7 +799,6 @@ export class Step2Component extends React.Component {
       return;
     }
     this.handleloginContinue()
-    console.log(selected_address, 'this is selected address')
   }
 
   onSavebuttonClick(event) {
@@ -886,14 +834,13 @@ export class Step2Component extends React.Component {
 
     });
     
-    console.log('Save btn pressed---', document.getElementById("address").value);
     this.state.inputText_address = document.getElementById("address").value;
 
     if (!validateState(this.state.inputText_state)) {
       document.getElementById('state').focus();
       this.setState({
         error_state: true,
-        errorMessage_state: !this.state.inputText_state ? 'This is a required field' : 'Please enter valid State.',
+        errorMessage_state: !this.state.inputText_state ? `${REQUIRED_FIELD}` : `${ENTER_VALID_STATE}`,
       });
       validateBillingAddress = false
       //return;
@@ -902,7 +849,7 @@ export class Step2Component extends React.Component {
       document.getElementById('city').focus();
       this.setState({
         error_city: true,
-        errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
+        errorMessage_city: !this.state.inputText_city ? `${REQUIRED_FIELD}` : `${VALID_CITY_DISTRICT}`,
       });
       validateBillingAddress = false
       //return;
@@ -911,7 +858,7 @@ export class Step2Component extends React.Component {
       document.getElementById('address').focus();
       this.setState({
         error_address: true,
-        errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
+        errorMessaget_address: !this.state.inputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
       });
       validateBillingAddress = false
       //return;
@@ -920,7 +867,7 @@ export class Step2Component extends React.Component {
       document.getElementById('pin').focus();
       this.setState({
         error_pincode: true,
-        errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
       });
       validateBillingAddress = false
       //return;
@@ -929,7 +876,7 @@ export class Step2Component extends React.Component {
       document.getElementById('email').focus();
       this.setState({
         error_email: true,
-        errorMessage_email: !this.state.email ? 'This is a required field' : 'Please enter valid Email ID.',
+        errorMessage_email: !this.state.email ? `${REQUIRED_FIELD}` : `${VALID_EMAIL}`,
       });
       validateBillingAddress = false
       //return;
@@ -938,7 +885,7 @@ export class Step2Component extends React.Component {
       document.getElementById('phone').focus();
       this.setState({
         error_number: true,
-        errorMessage_number: !this.state.phone ? 'This is a required field' : 'Please enter valid mobile number',
+        errorMessage_number: !this.state.phone ? `${REQUIRED_FIELD}` : 'Please enter valid mobile number',
       });
       validateBillingAddress = false
       //return;
@@ -947,7 +894,7 @@ export class Step2Component extends React.Component {
       document.getElementById('name').focus();
       this.setState({
         error_name: true,
-        errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
+        errorMessage_name: !this.state.inputText_name ? `${REQUIRED_FIELD}` : 'Please enter a valid Name. It should not exceed 100 characters',
       });
       validateBillingAddress = false
       // return;
@@ -957,10 +904,8 @@ export class Step2Component extends React.Component {
       return;
     }
 
-    console.log("Click Submit state");
     if (this.state.same_bill == false) {
       if (!validateFullName(this.state.binputText_name)) {
-        console.log(this.state.binputText_name, "this is input name")
         document.getElementById('bname').focus();
         this.setState({
           berror_name: true,
@@ -1073,7 +1018,6 @@ export class Step2Component extends React.Component {
   }
 
   handleAddressChange(index) {
-    console.log(index, "event on li");
     this.setState({
       selected_add: index
     })
@@ -1098,7 +1042,7 @@ export class Step2Component extends React.Component {
             </div>
 
             {!isMobile() ? <div className="labeltext-box">
-              <h4 className="heading-label">Mobile Number/ Email Address</h4>
+              <h4 className="heading-label">{MOBILE_EMAIL}</h4>
             </div> : ''}
 
             <div className="email-box">
@@ -1183,25 +1127,11 @@ export class Step2Component extends React.Component {
                           <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={200} />
                           <label htmlFor='address' className="form-label">Address</label>
                           {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
-
-                        </div>
+ </div>
                       </div>
                     </div>
                   </div>
-
-
-                  {/* <div className="row">
-                    <div className="col-md-12">
-                      <div className="form-div clearfix div-error">
-                        <Input inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} />
-                        {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
-                      </div>
-                    </div>
-                  </div> */}
-
-
-
-                  <div className="row">
+<div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} />

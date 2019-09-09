@@ -11,6 +11,25 @@ import appCookie from '../../utils/cookie';
 import axios from 'axios';
 import EMI from '../../../public/images/emi.svg';
 import {isMobile, formatPrice} from '../../utils/utilityManager';
+import {CART_TOTAL } from '../../constants/app/checkoutConstants';
+import {ORDER_SUMMARY } from '../../constants/app/checkoutConstants';
+import {PRODUCT_DISCOUNT } from '../../constants/app/checkoutConstants';
+import {ORDER_DISCOUNT } from '../../constants/app/checkoutConstants';
+import {SHIPPING } from '../../constants/app/checkoutConstants';
+import {STARTING_FROM } from '../../constants/app/checkoutConstants';
+import {KNOW_MORE } from '../../constants/app/checkoutConstants';
+import {TOTAL } from '../../constants/app/checkoutConstants';
+import {TOTAL_AMOUNT } from '../../constants/app/checkoutConstants';
+import {PAY } from '../../constants/app/checkoutConstants';
+import {YOU_SAVED } from '../../constants/app/checkoutConstants';
+import {SECURE_CHECKOUT } from '../../constants/app/checkoutConstants';
+
+
+
+
+
+
+
 export class OrderSummaryComponent extends React.Component {
     constructor(props){
         super(props);
@@ -19,9 +38,6 @@ export class OrderSummaryComponent extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //   this.callEMI()
-    // }
     callEMI = () => {
         let token = appCookie.get('accessToken');
       axios.get(`${minEMIAPI}/${this.props.orderData.netAmount}`, {
@@ -30,9 +46,7 @@ export class OrderSummaryComponent extends React.Component {
         this.setState({
           minEMI: res.data.data.minEMIValue
         })
-        console.log(res, 'emi reposnse')
       }).catch((err) => {
-        console.log('min emi error', err)
       })
     }
 
@@ -44,37 +58,37 @@ export class OrderSummaryComponent extends React.Component {
         <>
         {!isMobile() ? (<div className='col-md-4 col-sm-12 col-xs-12 orderSummary'>
               
-              <div className='summaryHeading'><h4 className='headingOrder'>Order Summary</h4></div>
+              <div className='summaryHeading'><h4 className='headingOrder'>{ORDER_SUMMARY}</h4></div>
               <div className='listRow clearfix'>
-                <div className='lefttext-box'>Cart Total</div>
+                <div className='lefttext-box'>{CART_TOTAL}</div>
                 <div className='righttext-box'>&#8377;{formatPrice(this.props.orderData.totalAmount)}</div>
               </div>
 
               <div className='listRow clearfix'>
-                <div className='lefttext-box'>Product Discount</div>
+                <div className='lefttext-box'>{PRODUCT_DISCOUNT}</div>
                 <div className='righttext-box'>- &#8377;{formatPrice(this.props.orderData.productDiscount)}</div>
               </div>
 
               <div className='listRow clearfix'>
-                <div className='lefttext-box'>Order Discount</div>
+                <div className='lefttext-box'>{ORDER_DISCOUNT}</div>
                 <div className='righttext-box'>- &#8377;{formatPrice(this.props.orderData.orderDiscount)}</div>
               </div>
 
               <div className='listRow clearfix'>
-                <div className='lefttext-box'>Shipping</div>
+                <div className='lefttext-box'>{SHIPPING}</div>
                 <div className='righttext-box'>{this.props.orderData.shippingCharges == 0 ? 'Free' : this.props.orderData.shippingCharges}</div>
               </div>
 
               <div className='freeshipping'></div>
               <div className='startEmi clearfix'>
                 <div className='emi-icon'><img src={EMI} alt='EMI'/></div>
-                <div className='emitext'> Starting from &#8377;{formatPrice(this.state.minEMI)} a month</div>
-                <div className='knowmore'>Know More</div>
+                <div className='emitext'> {STARTING_FROM} &#8377;{formatPrice(this.state.minEMI)} a month</div>
+                <div className='knowmore'>{KNOW_MORE}</div>
               </div>
              
              <div className='totalBox clearfix'>
-                <div className='totaltext'><span className='label-text'>Total</span><br/>
-                <div className='savetext'><span className='save-label'>You saved</span> <span className='saving-amount'>&#8377;{formatPrice(this.props.orderData.saving)}</span></div>
+                <div className='totaltext'><span className='label-text'>{TOTAL}</span><br/>
+                <div className='savetext'><span className='save-label'>{YOU_SAVED}</span> <span className='saving-amount'>&#8377;{formatPrice(this.props.orderData.saving)}</span></div>
                 </div>
                 <div className='totalAmount'>&#8377;{formatPrice(this.props.orderData.netAmount)}</div>
              </div>              
@@ -83,15 +97,15 @@ export class OrderSummaryComponent extends React.Component {
                 <button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>Pay &#8377;{formatPrice(this.props.orderData.netAmount)}</button>
               </div>
               <div className="SecureCheckout">
-                Secure Checkout
+                {SECURE_CHECKOUT}
               </div>
                
             </div>): ''}
 
             {this.props.checkoutStep == 3 && isMobile() ? (
               <div className='checkout-btn-floater'>
-              <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.orderData.netAmount)} <span className='total-amount-text'>Total Amount</span></div></div>
-              <div className='proceed-btn'><button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>Pay</button></div>
+              <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.orderData.netAmount)} <span className='total-amount-text'>{TOTAL_AMOUNT}</span></div></div>
+              <div className='proceed-btn'><button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>{PAY}</button></div>
               </div>
             ) : ''}
             </>
