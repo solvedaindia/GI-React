@@ -21,6 +21,22 @@ import {
 import {
     getReleventReduxState
   } from '../../utils/utilityManager';
+  import {DOES_NOT_EXIST } from '../../constants/app/checkoutConstants';
+  import {CREATE } from '../../constants/app/checkoutConstants';
+  import {GI_ACCOUNT } from '../../constants/app/checkoutConstants';
+  import {MOBILE_EMAIL } from '../../constants/app/checkoutConstants';
+  import {DELIVERY_AND_PAYMENT_ADD } from '../../constants/app/checkoutConstants';
+  import {I_HAVE_PASSWORD } from '../../constants/app/checkoutConstants';
+  import {PROCEED_TO_CHECKOUT } from '../../constants/app/checkoutConstants';
+  import {DELIVER_TO } from '../../constants/app/checkoutConstants';
+  import {ADD_A_DELIVERY_ADD } from '../../constants/app/checkoutConstants';
+  import {PAYMENT_OPTION } from '../../constants/app/checkoutConstants';
+  import {CHOOSE_A_PAYMENT_METHOD } from '../../constants/app/checkoutConstants';
+  import {PROCEED } from '../../constants/app/checkoutConstants';
+  import {TOTAL_AMOUNT } from '../../constants/app/checkoutConstants';
+
+  
+  
 
 export class Step1Component extends React.Component {
     constructor(props){
@@ -40,16 +56,8 @@ export class Step1Component extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //   if(this.props.logonBy) {
-    //     this.setState({
-          
-    //     })
-    //   }
-    // }
-
+    
     handleChange = e => {
-      console.log(e.target.name, e.target.value, "name and vlaue")
       this.setState({ [e.target.name]: e.target.value });
     };
 
@@ -69,14 +77,12 @@ export class Step1Component extends React.Component {
       let isValidate = errorType;
       const input = String(obj.userId);
       const firstChar = Number(input.charAt(0));
-      console.log("handle validetion called", obj.userId, obj.pass)
       this.setState({
         errorMessageUserId: null,
         errorMessagePassword: null,
       });
   
       if (!validateEmptyObject(obj.userId)) {
-        console.log("empty userId")
         this.setState({
           errorMessageUserId: 'Please enter valid Email Id/Mobile number',
         });
@@ -89,7 +95,6 @@ export class Step1Component extends React.Component {
           isValidate = false;
         }
       } else if (!regexEmail.test(obj.userId)) {
-        console.log("wrong user id")
         this.setState({
           errorMessageUserId: 'Please enter valid Email Id/Mobile number',
         });
@@ -187,7 +192,6 @@ export class Step1Component extends React.Component {
     }
 
     resetLoginValues() {
-      console.log('resetLoginValues');
       this.setState({
         showLoginRegisterMain: false,
         showForgotPassword: false,
@@ -199,9 +203,8 @@ export class Step1Component extends React.Component {
 
     errorMessage = message => {
      if(message === 'user verify err') {
-       return <div className="error-msg errorAcountnotfound">This account does not exist. Enter a valid mobile number or email address to proceed or <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>Create</span> a new GI account</div>
+       return <div className="error-msg errorAcountnotfound">{DOES_NOT_EXIST} <span style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={this.openModal}>{CREATE}</span>{GI_ACCOUNT}</div>
      } else {
-      console.log("user error found")
       return  <div className="error-msg">{message}</div>;
      }
     }
@@ -227,7 +230,7 @@ export class Step1Component extends React.Component {
       return (
         <>
         {isMobile() &&<div className='checkout-title'>
-                    Mobile Number/ Email Address
+                    {MOBILE_EMAIL}
                  </div>}
             <div className="col-md-8 checkout_wrapper"> 
                <div className='listRow bgfullflex clearfix'>
@@ -236,18 +239,15 @@ export class Step1Component extends React.Component {
                  </div>
                  
                  {!isMobile() &&<div className='leftBox bgGrey'>
-                    <div className='heading-label'>Mobile Number/ Email Address</div>
+                    <div className='heading-label'>{MOBILE_EMAIL}</div>
                  </div>}
 
                   <div className="rightBox" id='rightHeight'>
-                    <div className='shipping-text'>Your delivery and payment details will be linked to this number/address.</div>
+                    <div className='shipping-text'>{DELIVERY_AND_PAYMENT_ADD}</div>
                     <div className="row">
                       <div className="col-md-12">
                         <div>
                           <div className='form-div clearfix div-error'>
-                          {/* <label className='from-label' htmlFor="mobile">Mobile Number/Email Address</label>
-                          <input type="text" name="userId" id="userId" value={this.state.userId} className="form-control"
-                            onChange={e => this.handleChange(e)} /> */}
                             <Input
                               type="text"
                               name="userId"
@@ -259,20 +259,14 @@ export class Step1Component extends React.Component {
                           {errorMessageUserId}
                           </div>
                         </div>
-                        {/* <Input
-                          title="Mobile Number/Email Address"
-                          name='userId'
-                          inputType="text"
-                          value={this.props.logonBy ? this.props.logonBy : null}
-                          onChange={this.handleChange}
-                         /> */}
+                        
                         
                         <div className='havePassword customCheckbox clearfix'>
                           <div className='input_box'>
                             <input className='checkBox inputCheck' id="checkbox" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
                             <label className="lblCheck" htmlFor="checkbox"></label>
                           </div>
-                          <label className='form-label defaultlbl' htmlFor="has_pass">I have a password</label>
+                          <label className='form-label defaultlbl' htmlFor="has_pass">{I_HAVE_PASSWORD}</label>
                         </div>
                        
                         {this.state.has_pass ? <div className='form-div clearfix div-error'><div>
@@ -313,7 +307,7 @@ export class Step1Component extends React.Component {
                       </div>
                     </div>
 
-                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>Proceed to Checkout</button>):''}
+                    {!isMobile() ? (<button className="btn-blackbg btn-block proceedButton" onClick={this.handleFormSubmit}>{PROCEED_TO_CHECKOUT}</button>):''}
                   </div>
             
               
@@ -323,10 +317,10 @@ export class Step1Component extends React.Component {
                   <div className='stepbgNone'>2</div>
                  </div>
                 <div className='leftBox'>
-                  <div className='heading-label'>Deliver To</div>
+                  <div className='heading-label'>{DELIVER_TO}</div>
                 </div>
                 <div className='rightBox'>                 
-                <div className='heading-label'>Add your delivery address</div>              
+                <div className='heading-label'>{ADD_A_DELIVERY_ADD}</div>              
                 </div>
               </div>
               
@@ -335,16 +329,16 @@ export class Step1Component extends React.Component {
                    <div className='stepbgNone'>3</div>
                  </div>
                 <div className='leftBox'>
-                <div className='heading-label'>Payment Options</div>
+                <div className='heading-label'>{PAYMENT_OPTION}</div>
                 </div>
                 <div className='rightBox'>
-                <div className='heading-label'>Choose a payment method</div>
+                <div className='heading-label'>{CHOOSE_A_PAYMENT_METHOD}</div>
                 </div>
               </div></>: ''}
 
               {isMobile() ? (<div className='checkout-btn-floater'>
-                <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.netAmount)} <span className='total-amount-text'>Total Amount</span></div></div>
-                <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>Proceed</button></div>
+                <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.netAmount)} <span className='total-amount-text'>{TOTAL_AMOUNT}</span></div></div>
+                <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>{PROCEED}</button></div>
               </div>):''}
                
             </div>
