@@ -376,6 +376,26 @@
             }
 
           } 
+           .OopsIcon{
+            text-align: center;
+          }
+
+          &.paymentFaild{
+            .heading{
+              font-size: $base*4;
+            }
+            .payment-notcomplete{
+              text-align: center;
+            }
+            .actionBtnWrapper {
+              .btn-cancel{
+                border-width: 1px 0px 1px 0px;
+                border-style: solid;
+                border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+              }
+            }
+          }
+
         }
         .mobileView{
           .btn{

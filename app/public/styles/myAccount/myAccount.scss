@@ -74,7 +74,8 @@
 /* 
   #Global Screen Chhange for Screen max 768
   */
-@media screen and (min-width: 768px) {
+  
+  @include mix-lg{
   .MyAccount{
       padding: 40px 0 40px 0;
   }
@@ -94,10 +95,11 @@
   //CSS
 }
 
+
 /* 
-  #Global Screen Chhange for Screen max 767
+#Global Mobile screen - 767 max
 */
-@media screen and (max-width: 767px) {
+@include  mix-md {
   .MyAccount{
       padding: 10px 0 10px 0;
     .myaccount-leftnav{
@@ -121,6 +123,9 @@
         }
         
       }
+    }
+    .myOnGoingOoders{
+      width: 100%;
     }
   }
 }

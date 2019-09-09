@@ -46,7 +46,7 @@
             text-align: center;
             color: $colorwhite;
             margin: $base*3.87 0 $base*1.5 0;
-            background-color: #070707;
+            background-color: $ashGrey;
             border: none;
   
         }
@@ -59,7 +59,7 @@
 /* 
 #Global Mobile screen - 767 max
 */
-@include mix-sm-mobile {
+@include  mix-md {
     .exStore {
         width: 100%;
         margin: $base*8 0 $base*12;
