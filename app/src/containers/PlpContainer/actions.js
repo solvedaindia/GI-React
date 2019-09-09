@@ -17,10 +17,18 @@ export const increment = () => ({
     type: actionTypes.INCREMENT,
 });
 
-export const filter = (newUpdatedFilter, newFacetName) => ({
+export const filter = (newUpdatedFilter, newFacetName, isRWDUpate) => ({
     type: actionTypes.FILTER,
     updatedFilter: newUpdatedFilter,
     facetName: newFacetName,
+    isRWDUpate: isRWDUpate,
+});
+
+export const RWDFilter = (updatedFilter, facetName, isApply) => ({
+    type: actionTypes.RWDFILTER,
+    RWDupdatedFilter: updatedFilter,
+    RWDfacetName: facetName,
+    RWDisApply: isApply
 });
 
 export const browserFilter = (browserFilterData) => ({

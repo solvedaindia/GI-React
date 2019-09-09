@@ -229,8 +229,12 @@ export class PlpContainer extends React.Component {
   }
 
   fetchAdBannerData() {
+    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId}`;
+    if (this.state.isFromSearch.includes('/search')) {
+      adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
+    }
     apiManager
-      .get(`${espotAPI}GI_PLP_AD_BANNER_${categoryId}`)
+      .get(`${espotAPI}${adBannerEspotName}`)
       .then(response => {
         if (response.data.data) {
           this.props.onAdBannerIndexUpdate(response.data.data);
@@ -326,15 +330,20 @@ export class PlpContainer extends React.Component {
             }
           }
 
-          if (this.state.isCatDetails && !this.state.isFromSearch.includes('/search')) {
-
-            const coloumnValue = response.data.data.categoryDetails.columns;
-            this.props.initialValuesUpdate(coloumnValue);
-            this.setState({
-              categoryDetail: response.data.data.categoryDetails,
-              displaySkus: response.data.data.categoryDetails.displaySkus,
-            });
+          if (this.state.isCatDetails) {
+            if (!this.state.isFromSearch.includes('/search')) {
+              const coloumnValue = response.data.data.categoryDetails.columns;
+              this.props.initialValuesUpdate(coloumnValue);
+              this.setState({
+                categoryDetail: response.data.data.categoryDetails,
+                displaySkus: response.data.data.categoryDetails.displaySkus,
+              });
+            }
+            else {
+              this.props.initialValuesUpdate(3);
+            }
           }
+          
 
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
@@ -491,7 +500,7 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-      if (adBannerData)
+      
         plpProducts = (
           <PlpComponent
             plpDataPro={this.state.plpData}
@@ -555,7 +564,7 @@ export class PlpContainer extends React.Component {
     }
 
     let breadcrumbItem = null;
-    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData.length !== 0) {
+    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData!== undefined && this.state.breadcrumbData.length !== 0) {
       breadcrumbItem = (
         <Breadcrumb plpBreadcrumbPro={this.state.breadcrumbData} />
       );
@@ -653,8 +662,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  initialValuesUpdate: coloumn =>
-    dispatch(actionCreators.updateInitialValues(coloumn)),
+  initialValuesUpdate: coloumn => dispatch(actionCreators.updateInitialValues(coloumn)),
   onIncrementCounter: () => dispatch(actionCreators.increment()),
   onAdBannerIndexUpdate: adBannerData =>
     dispatch(actionCreators.adBannerDataAction(adBannerData)),

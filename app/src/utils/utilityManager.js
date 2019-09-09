@@ -159,6 +159,17 @@ export function updateFilterMap(updatedFilter, facetName, currentFilter) {
         return filterMap;
     }
     filterMap.set(facetName, updatedFilter);
+    console.log('Ne2 RWD Filter >>>> ',filterMap);
+    return filterMap;
+}
+
+export function RWDUpdateFilterMap(updatedFilter, facetName, currentFilter) {
+    const filterMap = currentFilter.rwdUpdatedFilter;
+    if (updatedFilter.length === 0) {
+        filterMap.delete(facetName);
+        return filterMap;
+    }
+    filterMap.set(facetName, updatedFilter);
     return filterMap;
 }
 
