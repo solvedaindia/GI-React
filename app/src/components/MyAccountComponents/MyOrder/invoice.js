@@ -157,7 +157,7 @@ class Invoice extends React.Component {
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
                                 return (
                                     <div className="itemList" index={`${index}-item`}>
-                                        <div className='testItem' style={{width: '13%', margin: 'auto', float: 'left'}}>Test data: {itemList.totalPackageQuantity}</div>
+                                        <div  style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.totalPackageQuantity}</div>
                                         <div style={{width: '30%', margin: 'auto', float: 'left'}}>{itemList.itemDesc}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
