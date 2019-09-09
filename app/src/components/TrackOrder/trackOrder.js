@@ -71,65 +71,66 @@ class TrackOrder extends React.Component {
             slidesToScroll: 1,
           };
         return (
-           !!orderData && !!orderData.ongoingOrders &&
+           !!orderData && !!orderData.ongoingOrders[0] && orderData.ongoingOrders[0].orderItems.length > '0'
+            ?
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
                     <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
                     {!isMobile() && <p className='track'>Track Your Order</p>}
                 </div>
                 <div className='orderDetails'>
-                <Slider {...settings}>
-                    {!!orderData && orderData.ongoingOrders.map((orderDetails) => {
-                        return(
-                            orderDetails.orderItems.map((subOrderDetails, itemIndex) => {
-                                return(
-                                    subOrderDetails.shipmentData.map((shipmentDetails, index) => {
-                                        return(
-                                            <div className='orderSummary'>
-                                                <figure className='prodImg'>
-                                                    <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
-                                                </figure>
-                                                <div className='prodDetails'>
-													{orderDetails.orderItems.length > 1 && <p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>}
-													{subOrderDetails.shipmentData.length > 1 && <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>}
-                                                    <p className='orderID'>Order ID {orderDetails.orderID}</p>
-                                                    <p className='prodName'>{subOrderDetails.productName}</p>
-                                                    <span className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
-                                                        <span className='qtyVal val'>{shipmentDetails.quantity}</span>
-                                                    </span>
-                                                    <span className='status item'>{!isMobile() ? 'Status' : 'Status:'}
-                                                        <span className='statusVal val'>{shipmentDetails.status}</span>
-                                                    </span>
-													{!!shipmentDetails.expectedDeliveryDate && !isMobile() && 
-														<span className='delDate item'>
-															{!isMobile() ? 'Delivery on' : 'Delivery on:' }
-															{!isMobile() ? <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>: '' }
-														</span>		
-													}
-													
-													{ !!shipmentDetails.expectedDeliveryDate && isMobile() && 
-														<span className='delDate item'>Delivery on:</span>								
-													}
-													{ !!shipmentDetails.expectedDeliveryDate && isMobile() && 
-														<span className='delDate item'>{shipmentDetails.expectedDeliveryDate} </span>
-													}
-													
+                    <Slider {...settings}>
+                        {!!orderData && orderData.ongoingOrders.map((orderDetails) => {
+                            return(
+                                orderDetails.orderItems.map((subOrderDetails, itemIndex) => {
+                                    return(
+                                        subOrderDetails.shipmentData.map((shipmentDetails, index) => {
+                                            return(
+                                                <div className='orderSummary'>
+                                                    <figure className='prodImg'>
+                                                        <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
+                                                    </figure>
+                                                    <div className='prodDetails'>
+                                                        {orderDetails.orderItems.length > 1 && <p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>}
+                                                        {subOrderDetails.shipmentData.length > 1 && <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>}
+                                                        <p className='orderID'>Order ID {orderDetails.orderID}</p>
+                                                        <p className='prodName'>{subOrderDetails.productName}</p>
+                                                        <p className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
+                                                            <span className='qtyVal val'>{shipmentDetails.quantity}</span>
+                                                        </p>
+                                                        <p className='status item'>{!isMobile() ? 'Status' : 'Status:'}
+                                                            <span className='statusVal val'>{shipmentDetails.status}</span>
+                                                        </p>
+                                                        {!!shipmentDetails.expectedDeliveryDate && !isMobile() && 
+                                                            <p className='delDate item'>
+                                                                {!isMobile() ? 'Delivery on' : 'Delivery on:' }
+                                                                {!isMobile() ? <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>: '' }
+                                                            </p>		
+                                                        }
+                                                        
+                                                        { !!shipmentDetails.expectedDeliveryDate && isMobile() && 
+                                                            <span className='delDate item'>Delivery on:</span>								
+                                                        }
+                                                        { !!shipmentDetails.expectedDeliveryDate && isMobile() && 
+                                                            <span className='delDate item'>{shipmentDetails.expectedDeliveryDate} </span>
+                                                        }
+                                                        
+                                                    </div>
+                                                    <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
+                                                        <a className='link btn'>View Order</a>
+                                                    </Link>
                                                 </div>
-                                                <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
-                                                    <a className='link btn'>View Order</a>
-                                                </Link>
-                                            </div>
-                                        )
-                                    })
-                                    
-                                )
-                            })
-                        )
-                    })}
+                                            )
+                                        })
+                                        
+                                    )
+                                })
+                            )
+                        })}
                     </Slider>
                 </div>
             </section>
-                
+            : ''
         )
     }
 }

@@ -86,12 +86,11 @@ export default class App extends React.Component {
   componentDidMount() {
     this.initialLoginHandling();
     this.newsletterPopupHandling();
-    this.getPincodeData();
     this.cookiePolicyPopup();
     window.addEventListener('resize', this.resize);
     this.resize();
     this.getCurrentLocation();
-   
+    this.getIPData();
   }
 
   componentWillUpdate() {
@@ -141,24 +140,6 @@ export default class App extends React.Component {
     }
   }
 
-  getPincodeData() {
-    if (appCookie.get('pincode') === null) {
-      apiManager
-        .get(ipDataApi)
-        .then(response => {
-          appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
-          console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-        })
-        .catch(error => {
-          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-          console.log(`Pincode APi Error=>> ${error}`);
-        });
-        this.setState({
-          loading: false
-        })
-    }
-  }
-
   getNewsletterSubscriptionStatus() {
     apiManager
       .get(newsletterStatusAPI)
@@ -187,6 +168,28 @@ export default class App extends React.Component {
     this.setState({ isMobile: window.innerWidth <= 760 });
   }
 
+  // IP Data Call.
+	getIPData() {
+		if( appCookie.get('pincode') === null && appCookie.get('pincodeUpdated') !== true) {
+			var request = new XMLHttpRequest();
+			request.open('GET', ipDataApi);
+			request.setRequestHeader('Accept', 'application/json');
+			request.onreadystatechange = function () {
+				if (this.readyState === 4 && this.status == 200) {
+					var ipData = JSON.parse(this.responseText);
+					var ipDataPostCode = ipData.postal;
+					appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+					console.log('IP data response Postal', ipData.postal);
+				}
+			};
+			request.send();
+		}
+		else {
+			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+			console.log('Pincode Error');
+		}
+  	}
+  
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
