@@ -43,7 +43,7 @@ class Wishlist extends React.Component {
   }
 
   onWishlistClick(e) {
-    if (e.target.name === 'viewWishListButton') {
+    if (e.target && e.target.name === 'viewWishListButton') {
       return;
     }
 
@@ -63,7 +63,7 @@ class Wishlist extends React.Component {
     }
   }
 
-  addToWishlistAPI() {
+  addToWishlistAPI() { 
     const data = {
       sku_id: this.props.uniqueId,
     };
@@ -128,12 +128,11 @@ class Wishlist extends React.Component {
         ? wishlistAddedImg
         : wishListRemovedImg,
     });
-
-    if (appCookie.get('wishListUniqueId')) {
-        if (appCookie.get('wishListUniqueId') !== '' && appCookie.get('isLoggedIn') !== true) {
+    
+    if (appCookie.get('wishListUniqueId') !== "" && appCookie.get('isLoggedIn') === 'true') {
+          const cookieData = appCookie.get('wishListUniqueId');
           appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-          document.getElementById("wishlistBtnId").click();
-        }
+          document.getElementById("wishlistBtnId_"+cookieData).click();
     }
   }
 
@@ -167,6 +166,10 @@ class Wishlist extends React.Component {
   };
 
   render() {
+    let wishListId = 'wishlistBtnId';
+    if (appCookie.get('wishListUniqueId')) {
+      wishListId = 'wishlistBtnId_'+appCookie.get('wishListUniqueId');
+    }
     return (
       <>
         { !this.props.isPDP &&
@@ -176,7 +179,7 @@ class Wishlist extends React.Component {
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
-          id="wishlistBtnId"
+          id={wishListId}
         >
           {this.state.wishlistCurrentImage}
           { this.props.isPDP &&
