@@ -104,10 +104,10 @@
     
   }
   
-    /* 
-    #Global Screen Chhange for Screen max 768
-    */
-    @media screen and (min-width: 768px){
+ /* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
         .explore-room{
             .explore{
                 width:80%;margin:0 auto;display:flex;-webkit-display:flex;-moz-display:flex;-ms-display:flex;justify-content:space-around;
@@ -150,10 +150,10 @@
   }
   
 
-  /* 
-    #Global Screen Chhange for Screen max 767
+ /* 
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){
+  @include mix-md{
     .espotContent{
     .explore-room{
         .explore{
