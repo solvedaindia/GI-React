@@ -1225,7 +1225,7 @@ export class Step2Component extends React.Component {
                       </div>
 
                       <div className='col-xs-12 col-md-12 address-submit'>
-                        <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
+                        <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>{!isMobile() ? 'Submit':'Save Address'}</button>
                       </div>
                     </div> : ''}
                     {this.state.new_add_error ? <div className="col-md-12 error-box"><div className='error-msg'>{this.state.new_add_msg}</div></div> : null}
