@@ -5,6 +5,7 @@ import {
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import ViewAllPromo from './viewAllPromo';
+import {COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
 
 class GetCartPromo extends React.Component {
   constructor(props) {
@@ -29,7 +30,6 @@ class GetCartPromo extends React.Component {
           promo: response.data.data,
           isLoading: false,
         });
-        console.log('Promotion Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -52,7 +52,6 @@ class GetCartPromo extends React.Component {
           error: null,
         });
         this.props.getCartDetails();
-        console.log('Promotion Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -67,7 +66,7 @@ class GetCartPromo extends React.Component {
     return (
       <div className="promo">
         {!!error && (
-          <div className="promoError">This coupon code is not valid.</div>
+          <div className="promoError">{COUPAN_CODE_NOT_VALID}</div>
         )}
         <ul className="promoList">
           {!!promo &&

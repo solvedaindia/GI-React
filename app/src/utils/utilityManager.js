@@ -34,6 +34,14 @@ export function isMobile() {
  * Function will pick the browser width *
  */
 
+export function isTab() {
+    return $(window).width() < 1025;
+}
+
+/**
+ * Function will pick the browser width *
+ */
+
 export function getWindowWidth() {
     return $(window).width();
 }
@@ -83,30 +91,58 @@ export function getReleventReduxState(state, reducerName) {
  */
 export function fetchReleventSortingValue(value) {
     console.log('ttttt', value);
-    if (value === 'Price - Low to High') {
-        return 3;
+    if (isMobile()) {
+        if (value === 'Price - Low to High') {
+            return 3;
+        }
+        if (value === 'Price - High to Low') {
+            return 4;
+        }
+        if (value === 'New Arrival') {
+            return 5;
+        }
     }
-    if (value === 'Price - High to Low') {
-        return 4;
+    else {
+        if (value === 'Price Low to High') {
+            return 3;
+        }
+        if (value === 'Price High to Low') {
+            return 4;
+        }
+        if (value === 'New Arrival') {
+            return 5;
+        }
     }
-    if (value === 'New Arrival') {
-        return 5;
-    }
+    
     // Recommended
     return 0;
 }
 
 export function fetchReleventSortingValueByIndex(index) {
     console.log('it index --- ', index);
-    if (parseInt(index) === 3) {
-        return 'Price - Low to High';
+    if (isMobile()) {
+        if (parseInt(index) === 3) {
+            return 'Price - Low to High';
+        }
+        if (parseInt(index) === 4) {
+            return 'Price - High to Low';
+        }
+        if (parseInt(index) === 5) {
+            return 'New Arrival';
+        }
     }
-    if (parseInt(index) === 4) {
-        return 'Price - High to Low';
+    else {
+        if (parseInt(index) === 3) {
+            return 'Price Low to High';
+        }
+        if (parseInt(index) === 4) {
+            return 'Price High to Low';
+        }
+        if (parseInt(index) === 5) {
+            return 'New Arrival';
+        }
     }
-    if (parseInt(index) === 5) {
-        return 'New Arrival';
-    }
+    
     return 'Interio Recommends';
 }
 

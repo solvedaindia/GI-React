@@ -21,10 +21,10 @@ const NUMB_REG = /^\d+$/;
 const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
 
 const prevArrowImg = (
-    <img src={require('../SVGs/carousel__arrowLeft.svg')} />
+    <img src={require('../SVGs/carousel__arrowLeft.svg')}  alt="Prev" />
   );
   const nextArrowImg = (
-    <img src={require('../SVGs/carousel__arrowRight.svg')} />
+    <img src={require('../SVGs/carousel__arrowRight.svg')}  alt="Next" />
   );
 class StoreLocator extends React.Component {
     constructor(props) {
@@ -305,7 +305,6 @@ class StoreLocator extends React.Component {
             }
         },error => {
                 let getStringVal = '';
-                console.log('getStringVal', this.props.history.location.state)
                 if (this.props.history.location.state.storeName) {
                     getStringVal = 'city';
                 } else if (this.props.history.location.state.storeId) {
@@ -435,25 +434,25 @@ class StoreLocator extends React.Component {
                              {isMobile() ? (<h1 className='headingtitle'>Choose store type</h1>):''}
                             <ul className='typeList'>
                                 <li className='storeTypeItem' id='home' onClick={this.handleStoreType.bind(this,'Home Furniture', 'home')}>
-                                    <figure className='typeList'><img src={Img1} className='storeImg'/></figure>
+                                    <figure className='typeList'><img src={Img1} className='storeImg' alt='Store Information' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
                                         Home Furniture
                                     </figcaption>
                                 </li>
                                 <li className='storeTypeItem' id='mattress' onClick={this.handleStoreType.bind(this,'Mattress Store', 'mattress')}>
-                                    <figure className='typeList' ><img src={Img2} className='storeImg'/></figure>
+                                    <figure className='typeList' ><img src={Img2} className='storeImg' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
                                         Mattresses
                                     </figcaption>
                                 </li>
                                 <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchens', 'kitchen')}>
-                                    <figure className='typeList'><img src={Img3} className='storeImg'/></figure>
+                                    <figure className='typeList'><img src={Img3} className='storeImg' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
                                         Kitchens
                                     </figcaption>
                                 </li>
                                 <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Business Furniture', 'b2b')}>
-                                    <figure className='typeList'><img src={Img4} className='storeImg'/></figure>
+                                    <figure className='typeList'><img src={Img4} className='storeImg' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
                                         Office/ Business Furniture
                                     </figcaption>

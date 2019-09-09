@@ -46,10 +46,10 @@
   
 }
 
-  /* 
-  #Global Screen Chhange for Screen max 768
-  */
-  @media screen and (min-width: 768px){
+/* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
     .guestTrackOrder {
       width: 35%;
       margin: 0 auto;
@@ -103,10 +103,10 @@
 }
 
 
-/* 
-  #Global Screen Chhange for Screen max 767
-*/
-@media screen and (max-width: 767px){
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
   .guestTrackOrder {
     width: 100%;
     padding: $base*11 $base*2;

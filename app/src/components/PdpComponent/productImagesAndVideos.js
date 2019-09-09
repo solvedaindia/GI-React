@@ -128,7 +128,7 @@ class productImagesAndVideos extends React.Component {
       if (slides[i].classList.contains('center') && slides[i].children[0].classList.contains('image-gallery-image')) {
         const currWidth = slides[i].children[0].children[0].clientWidth;
         if (currWidth == 100) return false;
-        slides[i].children[0].children[0].style.width = `${currWidth - 300}px`;
+        slides[i].children[0].children[0].style.width = `${currWidth - 100}px`;
       }
     }
   }

@@ -17,7 +17,6 @@ export class ExStore extends React.Component {
             isLoading: false,
             error: null
         };
-        console.log('Test props', this.props);
     }
     
     /* get lat and long */

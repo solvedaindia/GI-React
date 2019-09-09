@@ -158,7 +158,7 @@ module.exports.productByProductIDs = function getproductDetailsByProductIDs(
 module.exports.getProductListByIDs = getProductListByIDs;
 function getProductListByIDs(headers, productIDs, callback) {
   let id = '';
-  let productList = [];
+  const productList = [];
   if (!productIDs || productIDs.length === 0) {
     callback(null, productList);
     return;
@@ -185,7 +185,15 @@ function getProductListByIDs(headers, productIDs, callback) {
           response.body.catalogEntryView &&
           response.body.catalogEntryView.length > 0
         ) {
-          productList = response.body.catalogEntryView;
+          // Sort Products Based on Input Product Ids Sequence
+          productIDs.forEach(productID => {
+            const prod = response.body.catalogEntryView.filter(
+              i => i.uniqueID === productID,
+            );
+            if (prod && prod.length > 0) {
+              productList.push(prod[0]);
+            }
+          });
         }
         callback(null, productList);
       } else {

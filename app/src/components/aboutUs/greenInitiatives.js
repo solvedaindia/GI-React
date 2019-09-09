@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import  '../../../public/styles/static-pages/aboutUs.scss'
 import {
- imagePrefix,aboutUsGreenInitiativesApi
-} from '../../../public/constants/constants';
+ imagePrefix,espotAPI} from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 
 export default class GreenInitiatives extends Component {
@@ -12,6 +11,7 @@ export default class GreenInitiatives extends Component {
     
 
     this.state = {
+      espotName:'GI_GREEN_INITIATIVES',
      title:'',
      slides: []
     };
@@ -25,12 +25,12 @@ export default class GreenInitiatives extends Component {
     this.getGreenUnititaiveData()
   }
   getGreenImage=(source)=>{
-    return(<img className="greenImage" src={imagePrefix+source} alt=""/>);
+    return(<img className="greenImage" src={imagePrefix+source} alt="Green Initiatives"/>);
   }
   getGreenUnititaiveData(){
     apiManager
-      .get(aboutUsGreenInitiativesApi)
-      .then(response => {
+    .get(espotAPI + this.state.espotName)
+    .then(response => {
         console.log('aboutUsGreenInitiativesApi', response)
         const {data} = response || {}
         console.log('aboutUsGreenInitiativesApi Title', data.data.bannerList);
@@ -95,7 +95,7 @@ export default class GreenInitiatives extends Component {
                 <div className='row'>
                   <div className='col-md-4'>
                     <a href={slide.onClickUrl} >
-                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt=""/>
+                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
                     </a>
                   </div>
                   <div className='col-md-8'>

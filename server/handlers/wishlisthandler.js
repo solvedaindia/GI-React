@@ -368,10 +368,17 @@ function getWishlistProductList(res, headers, callback) {
               // eslint-disable-next-line no-param-reassign
               productDetail.giftListItemID =
                 res.GiftList[0].item[index].giftListItemID;
+              // eslint-disable-next-line no-param-reassign
+              productDetail.createdTime = new Date(
+                res.GiftList[0].item[index].itemCreatedTime,
+              ).getTime();
               break;
             }
           }
         });
+        productListArray.sort(
+          (a, b) => parseInt(b.createdTime, 10) - parseInt(a.createdTime, 10),
+        );
         wishlistJson.wishlistData = productListArray;
         callback(null, wishlistJson);
       });

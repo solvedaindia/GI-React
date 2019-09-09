@@ -4,15 +4,13 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/chefkitchen.scss';
 
-import {
-  chefKitchenBannerAPI,
-  imagePrefix,
-} from '../../../public/constants/constants';
+import {imagePrefix,espotAPI} from '../../../public/constants/constants';
 
 class ChefKitchenBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_CHEF_KITCHENS_BANNER',
       kitchenSlider: null,
       isLoading: false,
       error: null,
@@ -25,7 +23,7 @@ class ChefKitchenBanner extends React.Component {
 
   getKitchensBannerData() {
     apiManager
-      .get(chefKitchenBannerAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of wardrobes banner', response)
         const {data} = response || {}

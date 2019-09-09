@@ -20,7 +20,7 @@ import MobileQuantityAndPincode from '../PdpComponent/mobileComponents/quantityA
 import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
-import { pinCodeAPI, pinCodeAPIBundle } from '../../../public/constants/constants';
+import { pinCodeAPI, pinCodeAPIBundle, breadcrumbAPI } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 
@@ -41,7 +41,6 @@ class PdpComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('PDP breadcrumb --- ',this.props.data);
 		if (this.props.historyData.location.state != undefined) {
 			this.setState({
 				breadcrumbData: this.props.historyData.location.state.breadcrumbData,
@@ -128,6 +127,10 @@ class PdpComponent extends React.Component {
 		const defaultPincodeData = {
 			pincodeServiceable: null,
 		};
+
+		if (this.props.historyData.location.state === undefined) { 
+			this.callBreadcrumbAPI(resolvedSkuData.uniqueID);
+		}
 		this.setState({
 			selectedSku: skuDataArr,
 			isLoading: false,
@@ -236,7 +239,6 @@ class PdpComponent extends React.Component {
 				pincodeData: response.data.data,
 			});
 		}).catch(error => {
-			console.log('PDP Pin Code API Error =>', error);
 			const defaultPincodeData = {
 				pincodeServiceable: false,
 				inventoryStatus: '',
@@ -275,6 +277,23 @@ class PdpComponent extends React.Component {
 		}
 		return attributeData;
 	}
+
+	/* call BreadcrumbAPI */
+	callBreadcrumbAPI(itemUniqueID) {
+		const dataParams = {
+			params: {
+				itemid: itemUniqueID,
+			},
+		};
+
+		apiManager.get(breadcrumbAPI , dataParams).then(response => {
+			this.setState({
+				breadcrumbData: response.data.data.breadCrumbData,
+			})
+		}).catch(error => {
+		});
+	}
+
  // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
@@ -370,7 +389,8 @@ class PdpComponent extends React.Component {
 	}
 
 	let breadcrumbItem = null;
-	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData.length !== 0) {
+	
+	if (this.state.breadcrumbData !== null && this.props.data !== null && this.props.data !== '' && this.state.breadcrumbData !== undefined && this.state.breadcrumbData.length !== 0) {
 		breadcrumbItem = (
 			<Breadcrumb pdpBreadcrumbPro={this.state.breadcrumbData} productNamePro={this.state.skuData.productName} />
 		);

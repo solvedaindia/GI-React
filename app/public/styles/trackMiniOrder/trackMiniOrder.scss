@@ -65,13 +65,12 @@
             }
             .item {
                 display: inline-block;
-                margin: $base*3 $base*6.25 0 0;
+                margin: 0 $base 0 0;
                 font-size: $base*1.5;
                 font-family: $font-medium;
             }
             .val {
                 display: block;
-                margin-top: $base*2; 
             }
             .qtyVal,
             .delVal {
@@ -166,7 +165,7 @@
             }
         }
         .slick-prev {
-            left: -$base*3;
+            left: -$base*4;
             &::before {
                 content: '<';
                 background: url("http://203.110.85.50/imagestore/images/godrejInterio/back.png") no-repeat;
@@ -174,7 +173,7 @@
             }
         }
         .slick-next{
-            right: -$base*3;
+            right: -$base*4;
             &::before {
                 content: '>';
                 background: url("http://203.110.85.50/imagestore/images/godrejInterio/next.png") no-repeat;

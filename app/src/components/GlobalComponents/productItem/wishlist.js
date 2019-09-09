@@ -23,11 +23,13 @@ import appCookie from '../../../utils/cookie';
 const wishlistAddedImg = (
   <img
     src={require('../../../../public/images/plpAssests/wishlist_added.svg')}
+	 alt="Added"
   />
 );
 const wishListRemovedImg = (
   <img
     src={require('../../../../public/images/plpAssests/wishlist_blank.svg')}
+	 alt="Removed"
   />
 );
 class Wishlist extends React.Component {

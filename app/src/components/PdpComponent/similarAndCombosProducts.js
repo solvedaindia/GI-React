@@ -7,10 +7,10 @@ import {
 import { formatPrice } from '../../utils/utilityManager';
 
 const prevArrowImg = (
-  <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} />
+  <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} alt='Left' />
 );
 const nextArrowImg = (
-  <img src={`${imagePrefix}/images/godrejInterio/RightArrow.svg`} />
+  <img src={`${imagePrefix}/images/godrejInterio/RightArrow.svg`} alt='Right'/>
 );
 class SimilarCombosProducts extends React.Component {
   constructor() {
@@ -31,6 +31,7 @@ class SimilarCombosProducts extends React.Component {
   }
 
   getSimilarCombosProducts(props) {
+    if (props && props.length > 0) {
     return props.map((data, index) => {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
       return (
@@ -38,7 +39,7 @@ class SimilarCombosProducts extends React.Component {
         <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
           <div className="productlist">
             <div className="imgBox">
-              <img className="imgfullwidth" src={imgUrl} alt="Img" />
+              <img className="imgfullwidth" src={imgUrl} alt={data.productName} />
             </div>
             <div className="product-text">
               <p className="heading text">{data.productName}</p>
@@ -74,6 +75,7 @@ class SimilarCombosProducts extends React.Component {
         </div>
       );
     });
+    }
   }
 
   render() {
@@ -125,6 +127,7 @@ class SimilarCombosProducts extends React.Component {
     let combosBundleType = '';
     let similarData = this.props.similarCombosProducts.similarProducts;
     let combosBundleObj = '';
+    let isData = false;
     if (this.props.similarCombosProducts.combos) {
       combosBundleData = this.props.similarCombosProducts.combos;
       combosBundleType = 'Popular Combinations';
@@ -133,13 +136,17 @@ class SimilarCombosProducts extends React.Component {
       combosBundleData = this.props.similarCombosProducts.itemInThisBundle;
       combosBundleType = 'Products In This Bundle';
       combosBundleObj = similarData;
-      similarData = combosBundleData;
-      
+      similarData = combosBundleData;  
     }
+
+    if (similarData && similarData.length > 0 || combosBundleObj && combosBundleObj.length > 0) {
+      isData = true;
+    }
+
     return (
       <>
-        {combosBundleData.length > 0 &&
-          this.props.similarCombosProducts.similarProducts.length > 0 && (
+        { isData === true &&  (
+            
           <Col md={12} sm={12} xs={12} className="similarProduct-Wrapper">
               <Row>
                 <Col
@@ -148,6 +155,7 @@ class SimilarCombosProducts extends React.Component {
                   xs={12}
                   className="similar-pro-tab text-center"
                 >
+                { similarData && similarData.length > 0 &&
                   <a
                     role="button"
                     id="similarHead"
@@ -161,6 +169,8 @@ class SimilarCombosProducts extends React.Component {
                     )
                     }
                   </a>
+                }
+                { combosBundleObj && combosBundleObj.length > 0 &&
                   <a
                     role="button"
                     id="combosHead"
@@ -174,6 +184,7 @@ class SimilarCombosProducts extends React.Component {
                     )
                     }
                   </a>
+                }
               </Col>
 
                 <Col

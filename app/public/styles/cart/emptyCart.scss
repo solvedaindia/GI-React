@@ -74,8 +74,10 @@
         }
     }
 }
-
-@media (min-width:320px) and (max-width:767px) {
+/* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
     .emptyCartContainer {
         width: 100%;
         margin: 0 0 $base*7;

@@ -3,6 +3,11 @@ import { cartDeleteItemAPI, addToWishlist } from '../../../public/constants/cons
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import DeleteLogo from '../SVGs/deleteIcon';
+import {WANT_TO_REMOVE } from '../../constants/app/cartConstants';
+import {FROM_YOUR_CART } from '../../constants/app/cartConstants';
+import {SAVE_FOR_LATER } from '../../constants/app/cartConstants';
+import {REMOVE } from '../../constants/app/cartConstants';
+
 
 class DeleteCartItem extends React.Component {
 	constructor(props) {
@@ -28,7 +33,6 @@ class DeleteCartItem extends React.Component {
 		.then(response => {
 			this.props.getCartDetails();
 			this.handleClose();
-			console.log('@@@@ Cart Delete @@@', response.data.data);
 		})
 		.catch(error => {
 			this.setState({
@@ -46,7 +50,6 @@ class DeleteCartItem extends React.Component {
 		.then(response => {
 			this.handleDeleteItem();
 			this.handleClose();
-			console.log('@@@@ Cart Wishlist @@@', response.data.data);
 			})
 			.catch(error => {
 			this.setState({
@@ -76,17 +79,17 @@ class DeleteCartItem extends React.Component {
 					<Row>
 						<Col xs={12} md={12}>
 							<div className='del_modal'>
-								<h4 className='heading'>Are you sure you want to remove </h4>
+								<h4 className='heading'>{WANT_TO_REMOVE}</h4>
 								<p className='itemDelInfo'>
 									{productName}
 								</p>
-								<h4 className='heading'>from your cart?</h4>
+								<h4 className='heading'>{FROM_YOUR_CART}</h4>
 								<div className='userAction'> 
 									<button className='btn delete' onClick={this.handleMoveToWishList}>
-										Save For Later
+									{SAVE_FOR_LATER}
 									</button>
 									<button className='btn wishList' onClick={this.handleChange} >
-										Remove
+										{REMOVE}
 									</button>
 								</div>
 							</div>

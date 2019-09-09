@@ -7,6 +7,7 @@ import {
 } from '../../../public/constants/constants';
 import { isMobile, getCookie } from '../../utils/utilityManager';
 import '../../../public/styles/store/store.scss';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 export class StoreDetails extends React.Component {
     constructor(props) {
@@ -65,9 +66,7 @@ export class StoreDetails extends React.Component {
             
                 <div className='exStore' key={index}>
                     {!isMobile() ? 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-2x.png`} alt='Store Image'/> 
-                        : 
-                        <img className='img' src={`${imagePrefix}/images/godrejInterio/store-bg-mweb.png`} alt='Store Image'/> 
+                       <ContentEspot espotName = { 'GI_EXP_STORE_WEB_IMG' } />: <ContentEspot espotName = { 'GI_EXP_STORE_MOBILE_IMG' } />
                     }
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}

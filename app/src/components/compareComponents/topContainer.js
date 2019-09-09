@@ -34,7 +34,8 @@ class TopContainer extends React.Component {
           if(swatch.colorCode) {
             swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
           } else if(swatch.facetImage) {
-            swatches.push(<li><a><img src={`https://192.168.0.36:8443${swatch.facetImage}`}/></a></li>)
+            // src={`${imagePrefix}${this.props.data}`}
+            swatches.push(<li><a><img src={`${imagePrefix}${swatch.facetImage}`} alt={swatch.name} /></a></li>)
           } else {
             swatches.push(<li><a>{swatch.name}</a></li>)
           }
@@ -46,23 +47,25 @@ class TopContainer extends React.Component {
     }
 
     render() {
+      console.log('com pp -- ',this.props);
+      var routePath = `/pdp/furniture-${this.props.product.productName.split(' ').join('-')}/${this.props.product.uniqueID}`
       return (
         <Col xs={12} sm={4} md={4} className='comp-list-item'>
         <div className='img-box'>
-          <img src={`${imagePrefix}${this.props.product.thumbnail}`} />
+        <img  alt={this.props.product.productName} src={this.props.product.thumbnail !== '' ? `${imagePrefix}${this.props.product.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} />
         </div>
     
         <div className='product-desc'>
-          <h2 className='product-name'>{this.props.product.title} </h2>
+          <h2 className='product-name'>{this.props.product.productName} </h2>
           <p className='description-text'>{this.props.product.shortDescription}</p>
           {/* {this.props.product.price[1].value ? <Price actualPrice={this.props.product.price[0].value} offerPrice={this.props.product.price[1].value} /> : 0} */}
           <Price actualPrice={this.props.product.actualPrice} offerPrice={this.props.product.offerPrice} />
-          <p className='emi-desc'>EMI Starting from {this.props.product.minimumEMI ? this.props.product.minimumEMI : 0}</p>
+          <p className='emi-desc'>{this.props.product.emiData ? `EMI Starting from ₹${this.props.product.emiData}` : null }</p>
         </div> 
     
         <div className='remove-box'>
           <button className='remove-btn' onClick={this.removePrd}>Remove</button>
-          <Link to={`/pdp/${this.props.product.parentProductId}/${this.props.product.uniqueID}`} className='view-product-btn'>View Product</Link>
+          <Link to={routePath} className='view-product-btn'>View Product</Link>
         </div> 
     
         <div className='product-attr'>

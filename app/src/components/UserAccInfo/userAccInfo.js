@@ -33,10 +33,6 @@ class UserAccInfo extends React.Component {
   }
 
   resetLoginValues() {
-    console.log('resetLoginValues');
-    // if(this.props.resetCartVarPro) {
-    //   this.props.resetCartVarPro();
-    // }
     if (this.props.resetCallbackPro) {
       this.props.resetCallbackPro();
     }
@@ -67,7 +63,6 @@ class UserAccInfo extends React.Component {
   }
 
   forgotPasswordCallback(isShowRegister) { //isShowRegister active for JIRA-902
-    console.log('mixxinx --' ,isShowRegister);
     this.setState({
       showLoginRegisterMain: true,
       showForgotPassword: false,
@@ -91,15 +86,19 @@ class UserAccInfo extends React.Component {
         headers: { profile: 'summary' },
       })
       .then(response => {
-        console.log('userDetail --- ', response.data.data.name);
         var username = String(response.data.data.name);
         this.setState({
           userName: `Welcome ${username.split(' ')[0]}`,
           logonId: response.data.data.logonID,
         });
+
+        if (response.data.data.pincode && response.data.data.pincode !== '') {
+          appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
+        }
         document.cookie = `name=${response.data.data.name};path=/;expires=''`;
         this.showLoginStatus();
         this.props.updateUserProfile(response.data.data.name);
+        
       })
       .catch(error => {
         // return null;
@@ -108,14 +107,9 @@ class UserAccInfo extends React.Component {
 
   showLoginStatus() {
     const getLoginCookie = appCookie.get('isLoggedIn');
-    console.log('my Name', this.state.userName);
     if (getCookie('isLoggedIn') === 'true') {
       (this.state.userType = (
         <>
-          {/* <li className="listItem">
-            <a className="dropDown">{this.state.userName}!</a>
-          </li> */}
-
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'myprofile' } }}>
               <a onClick={this.onMyProfileClick} className="dropDown">
@@ -184,7 +178,6 @@ class UserAccInfo extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Recive Porps -- ', nextProps.fromWishlistPro);
     this.fromWishlist(nextProps.fromWishlistPro);
     if (getCookie('isLoggedIn') === 'true') {
       this.getUserDetails();
@@ -201,9 +194,7 @@ class UserAccInfo extends React.Component {
   }
 
   render() {
-    console.log('back to login from forgot password', this.state);
-
-    let userLogoItem = null;
+     let userLogoItem = null;
     let dropdownItem = null;
     if (this.props.showUserInfo) {
       userLogoItem = <UserLogo />;

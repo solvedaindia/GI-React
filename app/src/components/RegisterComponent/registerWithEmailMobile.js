@@ -19,9 +19,9 @@ import {
   registerWithEmailText,
   registerWithMobileNumText,
 } from './constants';
-import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
 import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
+import ContentEspot from '../../components/Primitives/staticContent';
 // import { LogoUrl } from './constants';
 import WhiteLogo from '../SVGs/whiteLogo';
 
@@ -230,7 +230,7 @@ class RegisterWithEmailMobile extends React.Component {
         <Row>
           <Col xs={12} md={5} className="no-padding">
             {!isMobile () ? (<div className="Thumbnailbox">
-              <img className="imgfullwidth" src={RegisterThumbnailImg} />
+				{<ContentEspot espotName = { 'GI_REGISTER' } />}
             </div>):(<div className="reg-join-Us">
               {/* <img className="logo_width" src={LogoUrl} alt="logo" /> */}
               <WhiteLogo width="100" height="33" />

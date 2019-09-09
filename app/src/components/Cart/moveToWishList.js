@@ -53,7 +53,6 @@ class MoveToWishList extends React.Component {
       .post(addToWishlist, data)
       .then(response => {
         this.removeFromCart();
-        console.log('@@@@ Cart Wishlist @@@', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -83,7 +82,6 @@ class MoveToWishList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // default: state.default
   };
 }
 

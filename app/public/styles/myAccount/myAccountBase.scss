@@ -3,11 +3,11 @@
   .form-div{
     position: relative; 
     .error-msg{
-      position:absolute;
       bottom: 0;
       color:$errorMsg;
       margin:0;
       font-size:  $base*1.5;
+	  margin-bottom:10px;
     }
     .form-group{ 
       position: relative;
@@ -24,7 +24,7 @@
         border-radius: 0;
         border:1px solid $lightGrey;
         box-shadow: none;
-        margin:5px 0 20px 0;
+        margin:5px 0 10px 0;
         color:rgba(0, 0, 0, 0.87);
         font-weight: bold;
         padding: 17px 21px;

@@ -32,13 +32,13 @@ class CompPrd extends React.Component {
 
     renderDims = () => {
       var dims = [];
-      var weights = [];
+      var width = [];
       var heights = [];
       var Depth = [];
       this.props.data.map((elem, index) => {
-        weights.push(
+        width.push(
             <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ? <div><span className="col-md-5">Weight</span> <span className="col-md-7">{elem.weight}</span></div> : <p>{elem.weight}</p>}
+              {index == 0 ? <div><span className="col-md-5">Width</span> <span className="col-md-7">{elem.width}</span></div> : <p>{elem.width}</p>}
             </Col>)
         heights.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
@@ -50,7 +50,7 @@ class CompPrd extends React.Component {
             </Col>)
       })
 
-      dims.push(<Row>{weights}</Row>)
+      dims.push(<Row>{width}</Row>)
       dims.push(<Row>{heights}</Row>)
       dims.push(<Row>{Depth}</Row>)
 
@@ -63,7 +63,7 @@ class CompPrd extends React.Component {
         images.push(
           <Col xs={12} sm={4} md={4}  className="comp-list-item">
               <div className="img-box">
-              <img src={`${imagePrefix}${elem.thumbnail}`} />
+              <img src={`${imagePrefix}${elem.dimensionThumbnail}`} />
               </div>
         </Col>)
       })
@@ -74,23 +74,24 @@ class CompPrd extends React.Component {
       var payments = [];
       var emis = [];
       this.props.data.map(elem => {
-        if(elem.minimumEMI) {
-          emis.push(elem.minimumEMI);
+        // if(elem.emiData) {
+        //   emis.push(elem.emiData);
           payments.push(
             <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
-              <h4>EMI available</h4>
+              <h4>{elem.emiData !== '' && elem.emiData !== null && elem.emiData !== undefined && elem.emiData !== 0 ? 'EMI available': 'EMI not available'}</h4>
             </Col>
           )
-        }
+        // }
       });
-      if(emis.length > 0) {
-        return payments;
-      } else {
-        this.setState({
-          payment: false
-        });
-        return '';
-      }
+      return payments;
+      // if(emis.length > 0) {
+      //   return payments;
+      // } else {
+      //   this.setState({
+      //     payment: false
+      //   });
+      //   return '';
+      // }
     }
 
     renderSpecs = () => {
@@ -127,7 +128,8 @@ class CompPrd extends React.Component {
     renderDelivery = () => {
       var dels = [];
       this.props.data.map(elem => {
-        dels.push(<DelContainer />)
+        console.log('delivery data --- ',elem);
+        dels.push(<DelContainer skuData={elem}/>)
       })
       return dels;
     }

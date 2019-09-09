@@ -4,17 +4,13 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchens.scss';
 
-import {
-  inspirationBannerAPI,
-  imagePrefix,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
 class InspirationBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_INSPIRATION_LOOKBOOK_BANNER',
       kitchenSlider: null,
       isLoading: false,
       error: null,
@@ -27,7 +23,7 @@ class InspirationBanner extends React.Component {
 
   getKitchensBannerData() {
     apiManager
-      .get(inspirationBannerAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of inspi banner', response)
         const {data} = response || {}

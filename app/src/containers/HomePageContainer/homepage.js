@@ -3,8 +3,7 @@ import {Helmet} from "react-helmet";
 import apiManager from '../../utils/apiManager';
 import WidgetList from '../../components/HomePageStatic/widgetList';
 import {
-  homePageLayoutAPI,
-  ipDataApi,
+  homePageLayoutAPI
 } from '../../../public/constants/constants';
 import {is} from '../../utils/utilityManager';
 import appCookie from '../../utils/cookie';
@@ -24,20 +23,6 @@ export class HomapegeLayout extends React.Component {
 		this.hideCookiePopup = this.hideCookiePopup.bind(this);
 	}
 	
-	// Please DO NOT remove the commented code.
-	getIPData() {
-		var request = new XMLHttpRequest();
-		request.open('GET', ipDataApi);
-		request.setRequestHeader('Accept', 'application/json');
-		request.onreadystatechange = function () {
-			if (this.readyState === 4 && this.status == 200) {
-				var ipData = JSON.parse(this.responseText);
-				console.log('IP data response', ipData);
-			}
-		};
-		request.send();
-	}
-
 	getPageLayout() {
 		apiManager
 		.get(homePageLayoutAPI)
@@ -59,7 +44,6 @@ export class HomapegeLayout extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getIPData();
 		this.getPageLayout();
 	}
 
@@ -85,7 +69,7 @@ export class HomapegeLayout extends React.Component {
 					<meta property="og:type" content="website" />
 					<meta property="og:title" content="Place Page Meta Title" />
 					<meta property="og:description" content="Place Meta Description " />
-
+					<title>Godrej Interio - Best Home and Office Furniture Store in India</title>
 				</Helmet>
 				{
 				!!homepageLayout ? (			

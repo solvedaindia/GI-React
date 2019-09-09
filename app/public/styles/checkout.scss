@@ -548,18 +548,10 @@
   .orderConfirmed {
     .heading {
       color: $cerulean;
-      font-size: 24px;
       font-family: $font-bold;
-      margin: 0;
-      padding: 0 0 10px 0;
     }
     .text {
-      color: $battleshipGrey;
-      font-size: 16px;
       font-family: $font-regular;
-      line-height: 16px;
-      margin: 0;
-      padding: 0 0 5px 0;
     }
   }
   .continueShopping {
@@ -569,31 +561,20 @@
     }
   }
   .orderDetails {
-    margin: 45px 0 0 0;
-    padding: 32px 24px 53px 24px;
-    background: $greybg;
     .paddingRight{
       padding-right:9px;
     }
     .heading-details {
-      font-size: 24px;
       color: $black;
-      margin: 0 0 24px 0;
-      line-height: 24px;
     }
     .heading{
-        font-size: 14px;
         font-family: $font-medium;
         color:$battleshipGrey;
-        line-height: 14px;
-        margin: 0 0 8px 0;
+
     }
     .subText{
-        font-size:14px;
         font-family: $font-regular;
         color:$black;
-        line-height: 20px;
-        margin: 0 0 10px 0;
     }
     .totalAmount{
         font-size:24px;
@@ -612,24 +593,15 @@
         margin:18px 0 32px 0;
     }
     .itemOrderdata{
-        background: $colorwhite;
-        margin: 0 0 24px 0;
-        border: 1px solid #eeeded;
         .borderLeft{
           border-left: 1px solid #eeeded;
         }
         .itemImg{
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 7px 0 0px;
-          min-height: 145px;
           .imgFullwidth{
             width: 100%;
           }
         }
         .itemText{
-            padding:20px 0 36px 0;
             .heading{
                 color:$black;
                 font-size: 16px;
@@ -871,6 +843,59 @@
         }
         &:last-child.listRow {
           border-bottom: 1px solid $borderLight;
+        }
+      }
+    }
+  }
+
+  .orderconfirm {
+    margin: 25px 0 70px 0;
+    .orderConfirmed{
+      .heading{
+        font-size: 24px;
+        margin: 0;
+        padding: 0 0 10px 0;
+      }
+      .text{
+        font-size: 16px;
+        line-height: 16px;
+        margin: 0;
+        padding: 0 0 5px 0;
+        color: $battleshipGrey;
+      }  
+    }
+    .orderDetails{
+      background: $greybg;
+      margin: 45px 0 0 0;
+      padding: 32px 24px 53px 24px;
+      .heading-details {
+        font-size: 24px;
+        margin: 0 0 24px 0;
+        line-height: 24px;
+      }
+      .heading{
+        font-size: 14px;
+        line-height: 14px;
+        margin: 0 0 8px 0;
+      }
+      .subText{
+          font-size:14px;
+          line-height: 20px;
+          margin: 0 0 10px 0;
+      }
+      .itemOrderdata{
+        background: $colorwhite;
+        margin: 0 0 24px 0;
+        border: 1px solid #eeeded;
+        .itemImg{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 7px 0 0px;
+          min-height: 145px;
+        }
+        .itemText{
+          padding:20px 0 36px 0;
         }
       }
     }
@@ -1157,6 +1182,150 @@
       }
     }
   }
+
+  .orderconfirm {
+    margin: 25px 0 0px 0;
+    .orderConfirmed{
+      .heading{
+        font-size:$base*2.25;
+        line-height: $base*2.5;
+        margin: 0;
+        padding: 0 0 10px 0;
+      }
+      .text{
+        font-size: $base*1.5;
+        line-height: $base*2;
+        margin: 0;
+        padding: 0 0 5px 0;
+        color: $greyish;
+      }
+    }
+    .orderDetails{
+      margin-left:-15px;
+      margin-right: -15px;
+      padding: 20px 0px 0px 0px;
+      .trackOrdersData{
+        padding: 20px 15px;
+        border-top: 12px solid $greybg;
+        .heading-details{
+          font-size: $base*1.75;
+          margin: 0 0 $base*1.25 0;
+          line-height: $base*3;
+          font-family: $font-bold;
+        }
+        .heading{
+          font-size: $base*1.25;
+          margin: $base*1.25 0 0 0;
+        }
+        .subText{
+          font-size: $base*1.5;
+          line-height: $base*2;
+        }
+      }
+      .trackOrderBtnBox{
+        border-bottom: 12px solid $greybg;
+        .btntrackorder{
+          width: 100%;
+        }
+      }
+      .orderItemSummary{
+        padding:$base*2;
+        .heading-details{
+          font-size:$base*1.75;
+          font-family: $font-bold;
+        }
+
+        .orderItemsList{
+          border-bottom: 12px solid $greybg;
+          .itemOrderdata{
+            padding: 20px 0px;
+            .orderItemsImg{
+              padding-right: 0px;
+              .itemImg{
+                .imgFullwidth{
+                  border: 1px solid $img-border;
+                }
+              }
+           }
+
+           .itemText{
+             .heading{
+               font-size: $base*1.5;
+             }
+            .qty-details{ 
+                .headingSubtext,.quantityDelivery{ 
+                  display: inline;
+                  font-size: 11px;
+                }
+                .quantityDelivery{
+                  color: $black;
+                }
+              }
+              .item-per-price{
+                color: $cerulean;
+                font-family:$font-bold;
+                font-size: $base*1.5;
+                line-height: $base*2;
+              }
+              .dlivery-desc{
+                padding-top: 10px;
+                .quantityDelivery{
+                  margin-top: 0px;
+                  font-size: $base*1.5;
+                }
+              }
+           }
+          }
+        }
+      }
+      .track-order-total{
+        .order-price-details{
+          padding: 0px 20px 20px 20px;
+          display: flex;
+          justify-content: center;
+          .heading, .totalAmount{
+            display: inline;
+            font-size: $base*3;
+          }
+          .heading{
+            font-family: $font-regular;
+          }
+          .totalAmount{
+            font-family:$font-bold;
+            color: $black;
+            padding-left: $base*1.25;
+          }
+        }
+        .continueShopping{
+          float: initial;
+          .btn-bg{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .delete-modal{
+    &.succes{
+      &.in{
+        .modal-dialog{
+          .modal-content{
+            .modalwrapper{
+              &.succesModal{
+                .successIcon{
+                  text-align: center;
+                  img{
+                    width: 50%;
+                  }
+                }
+              }
+            }
+          } 
+        } 
+      }
+    }
+  } 
+
 }
 
 /* 

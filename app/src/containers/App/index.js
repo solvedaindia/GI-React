@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
-import { getCookie } from '../../utils/utilityManager';
+import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
   accessTokenCookie,
@@ -69,6 +69,7 @@ import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -76,6 +77,7 @@ export default class App extends React.Component {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
       showNewsLetter: false,
+      loading: true
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
@@ -96,7 +98,9 @@ export default class App extends React.Component {
     if(header) {
       header.classList.remove("sticky");
     } 
-    window.scrollTo(0, 0);
+    if(!isMobile() && !isTab()){  
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
+    }
   }
 
   initialLoginHandling() {
@@ -136,21 +140,6 @@ export default class App extends React.Component {
     }
   }
 
-//   getPincodeData() {
-//     if (appCookie.get('pincode') === null) {
-//       apiManager
-//         .get(ipDataApi)
-//         .then(response => {
-//           appCookie.set('pincode', response.data, 365 * 24 * 60 * 60 * 1000);
-//           console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-//         })
-//         .catch(error => {
-//           appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-//           console.log(`Pincode APi Error=>> ${error}`);
-//         });
-//     }
-//   }
-
   getNewsletterSubscriptionStatus() {
     apiManager
       .get(newsletterStatusAPI)
@@ -181,23 +170,25 @@ export default class App extends React.Component {
 
   // IP Data Call.
 	getIPData() {
-		var request = new XMLHttpRequest();
-		request.open('GET', ipDataApi);
-		request.setRequestHeader('Accept', 'application/json');
-		request.onreadystatechange = function () {
-			if (this.readyState === 4 && this.status == 200) {
-				var ipData = JSON.parse(this.responseText);
-				var ipDataPostCode = ipData.postal;
-				appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-				console.log('IP data response Postal', ipData.postal);
-			}
-			else {
-				appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-				console.log('Pincode Error');
-			}
-		};
-		request.send();
-  }
+		if( appCookie.get('pincode') === null && appCookie.get('pincodeUpdated') !== true) {
+			var request = new XMLHttpRequest();
+			request.open('GET', ipDataApi);
+			request.setRequestHeader('Accept', 'application/json');
+			request.onreadystatechange = function () {
+				if (this.readyState === 4 && this.status == 200) {
+					var ipData = JSON.parse(this.responseText);
+					var ipDataPostCode = ipData.postal;
+					appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+					console.log('IP data response Postal', ipData.postal);
+				}
+			};
+			request.send();
+		}
+		else {
+			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+			console.log('Pincode Error');
+		}
+  	}
   
   getCurrentLocation() {
     if (navigator.geolocation) {
@@ -213,6 +204,9 @@ export default class App extends React.Component {
           const postalCode = data.substr(data.length -6);
           if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+            this.setState({
+              loading: false
+            })
           }          
         },
         error => {
@@ -310,7 +304,7 @@ export default class App extends React.Component {
           
           
         </Switch>
-        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') ? '' : <FooterContainer /> }
+        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') || window.location.pathname.includes('/order/confirm/') ? '' : <FooterContainer /> }
       </div>
     );
   }

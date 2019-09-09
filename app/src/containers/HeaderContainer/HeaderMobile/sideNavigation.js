@@ -21,6 +21,7 @@ import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../utils/utilityManager';
+import appCookie from '../../../utils/cookie';
 
 export class HeaderMobile extends React.Component {
   constructor(props) {
@@ -75,6 +76,9 @@ export class HeaderMobile extends React.Component {
       })
       .then(response => {
         console.log('userDetail --- ', response.data.data.name);
+        if (response.data.data.pincode && response.data.data.pincode !== '') {
+          appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
+        }
         this.setState({
           userName: `${this.state.userName} ${(response.data.data.name !== undefined && response.data.data.name !== '') ? response.data.data.name.split(' ')[0] : ''}`,
           logonId: response.data.data.logonID,
@@ -304,7 +308,7 @@ export class HeaderMobile extends React.Component {
                   }
                   className="navTxt"
                 >
-                  {categoryData.categoryName}
+                  {categoryData.categoryName.toLowerCase() === 'rooms' || categoryData.categoryName.toLowerCase() === 'products' ? ("Shop by "+categoryData.categoryName):(categoryData.categoryName)}
                   {categoryData.subCategoryArray.length > 0 ? (
                     <span className="arrow">
                       <img

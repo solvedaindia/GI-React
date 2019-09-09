@@ -86,7 +86,7 @@ class productFeatures extends React.Component {
                       return(
                       <div className="featureResponsiveview">
                         <div className="featureImgbox">
-                          <img src={fullImagePath} className="imgfullwidth"/>
+                          <img src={fullImagePath} className="imgfullwidth" alt={data.title} />
                         </div>
 
                         <ul className="featureTextbox">

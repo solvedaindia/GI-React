@@ -3,15 +3,13 @@ import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 
-import {
-  wardrobesHallAPI,
-  imagePrefix,
-} from '../../../public/constants/constants';
+import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
 class WHallOfFame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      espotName: 'GI_WARDROBES_HALL_OF_FAME',
       hallSlider: null,
       isLoading: false,
       error: null,
@@ -23,7 +21,7 @@ class WHallOfFame extends React.Component {
 
   getWardrobesHallData() {
     apiManager
-      .get(wardrobesHallAPI)
+    .get(espotAPI + this.state.espotName)
       .then(response => {
         console.log('response of wardrobe hall', response)
         const {data} = response || {}

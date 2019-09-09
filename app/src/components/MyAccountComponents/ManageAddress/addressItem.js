@@ -96,10 +96,10 @@ class AddressItem extends React.Component {
             )}
             <ul className="myacAddressList">
               <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
-                <img src={require('../../../../public/images/edit.svg')} />
+                <img src={require('../../../../public/images/edit.svg')}  alt='Edit' />
               </li>
               <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-                <img src={require('../../../../public/images/delete.svg')} />
+                <img src={require('../../../../public/images/delete.svg')}  alt='Delete'/>
               </li>
             </ul>
             </>
