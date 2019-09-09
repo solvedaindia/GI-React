@@ -30,26 +30,12 @@ export class HomapegeLayout extends React.Component {
 		request.open('GET', ipDataApi);
 		request.setRequestHeader('Accept', 'application/json');
 		request.onreadystatechange = function () {
-			if (this.readyState === 4) {
-				console.log(this.responseText);
+			if (this.readyState === 4 && this.status == 200) {
+				var ipData = JSON.parse(this.responseText);
+				console.log('IP data response', ipData);
 			}
 		};
 		request.send();
-		// apiManager
-		// .get(ipDataApi)
-		// .then(response => {
-		// 	this.setState({
-		// 		ipData: response.data,
-		// 		isLoading: false,
-		// 	});
-		// 	console.log('@@@@ IP DATA RESPONSE @@@@@', response.data);
-		// })
-		// .catch(error => {
-		// 	this.setState({
-		// 	error,
-		// 	isLoading: false,
-		// 	});
-		// });
 	}
 
 	getPageLayout() {
