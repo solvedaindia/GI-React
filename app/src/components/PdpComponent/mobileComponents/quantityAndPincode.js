@@ -56,7 +56,7 @@ class addToCartComponent extends React.Component {
 
     if (this.deliveryTime === '') {
       if (props.deliveryDateAndTime) {
-        this.deliveryTime = 'Delivery between '+props.deliveryDateAndTime;
+        this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
         return <div className="soldbyDealers">{this.deliveryTime}</div>;
       }
     }

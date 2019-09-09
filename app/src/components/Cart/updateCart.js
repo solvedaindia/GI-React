@@ -2,6 +2,9 @@ import React from 'react';
 import { cartUpdateAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import { isMobile } from '../../utils/utilityManager';
+import {QUANTITY } from '../../constants/app/cartConstants';
+import {MOBILE_QUANTITY } from '../../constants/app/cartConstants';
+
 
 class CartUpdate extends React.Component {
   constructor(props) {
@@ -43,7 +46,6 @@ class CartUpdate extends React.Component {
           isLoading: false,
         });
         this.props.getCartDetails();
-        console.log('@@@@ Cart Update @@@', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -64,7 +66,7 @@ class CartUpdate extends React.Component {
   render() {
     return (
       <form className="cartQty">
-        <label className="qytLabel">{!isMobile() ? 'QUANTITY' : 'QUANTITY:'}</label>
+        <label className="qytLabel">{!isMobile() ? QUANTITY  : MOBILE_QUANTITY}</label>
         <select
           className="qytList"
           value={this.state.quantity}

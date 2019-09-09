@@ -1207,6 +1207,10 @@
     display: block;
     float: left;
     padding: 0 0px 0 0;
+    .swachesHeading{
+        margin-top:0;
+        margin-bottom: 0;
+    }
     label{
         cursor: pointer;
         border: 3px solid $colorwhite;
@@ -1464,19 +1468,17 @@
 }
 
 .loadingIndicator{
-    padding: 100px 0;
-    .loader-modal{
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+    // padding: 100px 0;
+    .loader-modal{        
         display: flex;
         align-items: center;
-        justify-content: center;      
+        justify-content: center;  
+        width: 100%;
+        min-height: 45vh;         
         .loadingIndicatorStyle-outter{
-           position: static;
-           left:0;
-           top:0;
+        //    position: static;
+        //    left:0;
+        //    top:0;
         }
     }
 }
@@ -1499,11 +1501,10 @@
     
   }
   
-    /* 
-    #Global Screen Chhange for Screen max 768
-    */
-    @media screen and (min-width: 768px){
-       
+ /* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
         .product_details{
             padding:87px 0 0px 0;
             border-bottom: 1px solid $lightblueGrey;           
@@ -1695,12 +1696,27 @@
   /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
-  @media (min-width: 768px) and (max-width: 1024px) {
+ @include mix-md-ipad {
     
     .galleryArea{
-        .pdpDetails{width:40%;  } 
+        .pdpDetails{width:100%;  } 
+        .GallerytextBox{
+            .wishlist-share{
+                .product-share{
+                    width: 100%;
+                }
+            }
+        }
 
     }
+
+    .our-promises{
+        .product-bg{
+            .imgfullwidth{
+                display: none;
+            }
+        } 
+    } 
     
   }
   
@@ -1716,10 +1732,10 @@
   }
   
 
-  /* 
-    #Global Screen Chhange for Screen max 767
+/* 
+    #Global Screen Chhange for Screen max 992
   */
-  @media screen and (max-width: 767px){      
+  @include mix-md{   
     .product_details{
         padding: 10px 0 0px 0;
         position: relative;
@@ -1829,7 +1845,15 @@
                         background: $colorwhite;
                         .image-gallery-slide-wrapper{
                             .zoominout, .image-gallery-left-nav, .image-gallery-right-nav{
-                                display: none;
+                                /*display: none;*/
+                            }
+                            .image-gallery-left-nav{
+                                right: 0px;
+                                left: initial;
+                            }
+                            .image-gallery-right-nav{
+                                left: 0px;
+                                right: initial;
                             }
                             .image-gallery-swipe{
                                 .image-gallery-slides{

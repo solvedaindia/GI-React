@@ -157,18 +157,18 @@ class TopHeader extends React.PureComponent {
                         delayHide={1000}
                       >
                         <span className="header-icon-link user-profile-icon">
-                          <img src={profile} />
+                          <img src={profile}  alt='My profile'/>
                         </span>
                       </OverlayTrigger>
                     </li>
                     <li> <a title="Wishlist" className="header-icon-link" href="/wishlist?src=header">
                       <div id="shortlist-badge"> <span className="header-icon">
-                        <img src={wishlist} />
+                        <img src={wishlist}  alt="My Wishlist"/>
                       </span> <span className="badge-count">{wishlistCount}</span></div>
                     </a></li>
                     <li> <a title="Cart" className="header-icon-link" href="/cart?src=header">
                       <div id="cart-badge"> <span className="header-icon">
-                        <img src={minicart} />
+                        <img src={minicart}  alt='My Cart'/>
                       </span> <span className="badge-count bg-color">{miniCartCount}</span></div>
                     </a></li>
                   </ul>

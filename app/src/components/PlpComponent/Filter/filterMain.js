@@ -113,7 +113,8 @@ class FilterMain extends React.Component {
 
     const item = appliedFilltersArr.map((data, i) => {
       return (
-        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}><img className='crossImg' src={crossIcon}/></span></button>
+        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>
+		<img className='crossImg' src={crossIcon}  alt="Close"/></span></button>
       )
     })
     this.setState({

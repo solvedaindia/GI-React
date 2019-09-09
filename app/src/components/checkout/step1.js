@@ -291,6 +291,7 @@ export class Step1Component extends React.Component {
                                 {
                                   <img
                                     src={require('../SVGs/eye.svg')}
+									 alt='Show Password'
                                   />
                                 }
                               </span>

@@ -226,6 +226,7 @@ class MyWishlist extends React.Component {
           id="me"
           className="loadingImg"
           src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+		  alt="Loading"
         />
       </div>
     );

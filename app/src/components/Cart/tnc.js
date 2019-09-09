@@ -2,6 +2,22 @@ import React from 'react';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
 import { bankEmiApi } from '../../../public/constants/constants';
+import {KNOW_MORE } from '../../constants/app/cartConstants';
+import {EMI_EASY_INSTALLATION } from '../../constants/app/cartConstants';
+import {PAY_IN_EQUAL_INSTALLMENT } from '../../constants/app/cartConstants';
+import {YOUR_BANK_WILL_CONVERT } from '../../constants/app/cartConstants';
+import {FOR_PAYMENTS_DONE } from '../../constants/app/cartConstants';
+import {PLANS } from '../../constants/app/cartConstants';
+import {MONTHS } from '../../constants/app/cartConstants';
+import {EMI } from '../../constants/app/cartConstants';
+import {PAYABLE_PROVIDER } from '../../constants/app/cartConstants';
+import {ANNUAL_INTEREST } from '../../constants/app/cartConstants';
+import {TOTAL_COST } from '../../constants/app/cartConstants';
+
+
+
+
+
 
 class TermsAndCondition extends React.Component {
 	constructor() {
@@ -31,9 +47,7 @@ class TermsAndCondition extends React.Component {
 			error,
 			isLoading: false,
 			});
-			console.log('Best Seller ERROR');
 		});
-		console.log('ERROR');
 	}
 	
 	componentDidMount() {
@@ -53,18 +67,18 @@ class TermsAndCondition extends React.Component {
 	render () {
 		return (
 			<>
-				<a className='emiDetails'  onClick={this.handleShow}>Know More</a>
+				<a className='emiDetails'  onClick={this.handleShow}>{KNOW_MORE}</a>
 				<Modal className='modal_emiInstallment' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>
 						<Row>
 							<Col xs={12} md={12}>
 								<div className='emi_modal'>
-								<h4 className='heading'>EMI (Easy Installment)</h4>
+								<h4 className='heading'>{EMI_EASY_INSTALLATION}</h4>
 									<ul className='emi_list'>
-										<li className='list'>Pay for your order in equal monthly installments (EMI), using any one of the payment options in the table below.</li>
-										<li className='list'>Your bank will convert the payment done using credit or debit cards into EMI in 3-4 working days.</li>
-										<li className='list'>For payments done using credit and debit cards, to make this a No Cost EMI offer, the interest amount will be discounted from the price of your order. Your card will be charged for the item price minus the discounted interest. The total amount you will pay to the bank (excluding GST) will be equal to the price of the item. The bank will charge GST on the interest amount. For payments done using Amazon Pay EMI, the price will not be discounted upfront. Instead, you will not be charged any interest for a No Cost EMI offer.</li>
+										<li className='list'>{PAY_IN_EQUAL_INSTALLMENT}</li>
+										<li className='list'>{YOUR_BANK_WILL_CONVERT}</li>
+										<li className='list'>{FOR_PAYMENTS_DONE}</li>
 									</ul>
 								{!this.state.loading && (
 										<table width="100%" className="emiPlans table table-striped">
@@ -83,10 +97,10 @@ class TermsAndCondition extends React.Component {
 											</tr>
 											
 											<tr className='bankEmiList'>
-												<td>PLANS<br/><div class="subText">(Months)</div></td>
-												<td>EMI<br/><div class="subText">(Payable to provider)</div></td>
-												<td>ANNUAL INTEREST<br/><div class="subText">(Charged by provider)</div></td>
-												<td>TOTAL COST<br/><div class="subText">(Payable to provider)</div></td>
+												<td>{PLANS}<br/><div class="subText">{MONTHS}</div></td>
+												<td>{EMI}<br/><div class="subText">{PAYABLE_PROVIDER}</div></td>
+												<td>{ANNUAL_INTEREST}<br/><div class="subText">{CHARGED_PROVIDER}</div></td>
+												<td>{TOTAL_COST}<br/><div class="subText">{PAYABLE_PROVIDER}</div></td>
 											</tr>
 											
 											<tr className="banklistdata">

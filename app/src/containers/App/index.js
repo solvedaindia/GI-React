@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
-import { getCookie,isMobile } from '../../utils/utilityManager';
+import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {
   accessTokenCookie,
@@ -77,6 +77,7 @@ export default class App extends React.Component {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
       showNewsLetter: false,
+      loading: true
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
@@ -98,8 +99,8 @@ export default class App extends React.Component {
     if(header) {
       header.classList.remove("sticky");
     } 
-    if(!isMobile()){
-      window.scrollTo(0, 0);
+    if(!isMobile() && !isTab()){  
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
   }
 
@@ -152,6 +153,9 @@ export default class App extends React.Component {
           appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
           console.log(`Pincode APi Error=>> ${error}`);
         });
+        this.setState({
+          loading: false
+        })
     }
   }
 
@@ -197,6 +201,9 @@ export default class App extends React.Component {
           const postalCode = data.substr(data.length -6);
           if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+            this.setState({
+              loading: false
+            })
           }          
         },
         error => {

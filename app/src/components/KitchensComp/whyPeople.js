@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 const prevArrowImg = (
-  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} />
+  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')}  alt='Left'/>
 );
 const nextArrowImg = (
-  <img src={require('../SVGs/carousel__arrowRight.svg')} />
+  <img src={require('../SVGs/carousel__arrowRight.svg')}  alt='Right' />
 );
 
 export default class WhyPeopleLove extends Component {
