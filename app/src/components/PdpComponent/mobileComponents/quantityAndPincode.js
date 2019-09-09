@@ -30,7 +30,8 @@ class addToCartComponent extends React.Component {
       loading: true,
       pincodeVal: appCookie.get('pincode'),
       isEdit: true,
-      qtyVal: 1
+      qtyVal: 1,
+      isPincodeValid: true
     };
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
@@ -40,14 +41,21 @@ class addToCartComponent extends React.Component {
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
     this.setState({
-      qtyVal: 1
+      qtyVal: 1,
+      isPincodeValid: true
     })
   }
 
   /* render delivery message */
   renderdeliveryMessage(props) {
+      let errorMsg = '';
+      if (this.state.isPincodeValid === false) {
+        errorMsg = 'Please enter valid pincode';
+        return <div className="pincodeNotServiceable">{errorMsg}</div>;
+      }
+
     if (props.pincodeServiceable === false) {
-      let errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
+      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
         errorMsg = props.error;
       }
@@ -235,8 +243,13 @@ class addToCartComponent extends React.Component {
         props.handleAddtocart(true);
         this.setState({
           isEdit: true,
-          qtyVal: 1
+          qtyVal: 1,
+          isPincodeValid: true
         });
+      } else if (pincode.length < 6) {
+          this.setState({
+              isPincodeValid: false
+          })
       }
     }
   }

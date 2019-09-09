@@ -52,9 +52,9 @@ class productFeatures extends React.Component {
                   <Col md={6} sm={12} xs={12}>
                     <div className="featureImgbox">
                       {this.props.productFeatureData.productFeatures.map(
-                        (imagePath, index) => {
-                           fullImagePath = `${imagePrefix}${imagePath.imagePath}`;
-                           if(imagePath.imagePath === "") {
+                        (featureImagePath, index) => {
+                           fullImagePath = `${imagePrefix}${featureImagePath.imagePath}`;
+                           if(featureImagePath.imagePath === "") {
                               fullImagePath = defaultImgPath;
                            }
                           this.dataClass = '';
