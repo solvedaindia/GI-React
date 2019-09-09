@@ -56,8 +56,8 @@ export class SubCategory extends React.Component {
       speed: 200,
       slidesToShow: 4,
       slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
+      autoplay: false,
+      // autoplaySpeed: 2000,
       //centerMode: false,
       responsive: [
         {
