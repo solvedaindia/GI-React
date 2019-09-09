@@ -29,17 +29,45 @@ class CartCount extends React.Component {
       minicartData: null,
       isMobile: window.innerWidth <= 760,
     };
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+
   }
 
-  handleOutsideClick(e) {
-    const domNode = ReactDOM.findDOMNode(this);
+  componentWillMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
 
-    if (!domNode || !domNode.contains(event.target)) {
-      this.setState({
-        active: false,
-      });
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+   /**
+   * Set the wrapper ref
+   */
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+   /**
+   * Alert if clicked on outside of element
+   */
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.state.active) {
+      //alert('You clicked outside of me!');
+      this.toggleDropdown();
     }
   }
+
+  // handleOutsideClick(e) {
+  //   const domNode = ReactDOM.findDOMNode(this);
+
+  //   if (!domNode || !domNode.contains(event.target)) {
+  //     this.setState({
+  //       active: false,
+  //     });
+  //   }
+  // }
 
   getCartCount() {
     apiManager
@@ -148,7 +176,7 @@ class CartCount extends React.Component {
        
         {/* {cartCountItem} */}
 
-        <div className="dropdown">
+        <div className="dropdown" ref={this.setWrapperRef}>
           {this.state.isMobile ?
             <Link className="link" to='/cart'>
               {cartCountItem}
