@@ -125,7 +125,23 @@ class Filter extends React.Component {
     if (isMobile()) {
       this.state.facetArr = filteredArr;
       this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, false);
-      // this.onApplyBtnClick();
+
+      var staticFilterArr = [];
+      this.state.facetArr.map(data => {
+        staticFilterArr.push(data.value)
+      })
+
+      this.filterOptions(staticFilterArr);
+      // if (filteredArr.length !== 0) {
+      //   this.setState({
+      //     isRWDFilterSelected: true,
+      //   });
+      // }
+      // else {
+      //   this.setState({
+      //     isRWDFilterSelected: false,
+      //   });
+      // }
     }
   }
 
