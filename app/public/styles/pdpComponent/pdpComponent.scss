@@ -616,8 +616,11 @@
                 margin:0;
                 float: left;
                 visibility: hidden;
-                height: 0;
-                width: 0;
+                display: none;
+                -webkit-visibility: hidden;
+                -moz-visibility: hidden;
+                height: 0px;
+                width: 0px;
 
             }
         }

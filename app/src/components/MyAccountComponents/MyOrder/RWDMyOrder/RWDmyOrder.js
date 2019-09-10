@@ -78,7 +78,7 @@ class RWDMyOrder extends React.Component {
     else {
       this.props.updateTheRWDHeader('Track Order');
     }
-    
+
     this.setState({
       currentComponent: compName,
       currentComponentData: data,
@@ -102,7 +102,7 @@ class RWDMyOrder extends React.Component {
       currentComponentData: data
     })
   }
-  
+
 
   getOrderList(isFromScroll) {
     this.setState({ isLoading: true }, () => {
@@ -208,13 +208,15 @@ class RWDMyOrder extends React.Component {
           id="me"
           className="loadingImg"
           src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-		   alt='Loading Orders'
+          alt='Loading Orders'
         />
       </div>
     )
   }
 
   render() {
+    this.state.isOnGoingOrderShown = false;
+    this.state.isPastOrdeShown = false;
     if (this.state.currentComponent === 'SingleProduct') {
       return (
         <div className="myOrder single-item-order">
@@ -240,7 +242,7 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder View-Order">
           <RWDCompleteOrder
             orderDataPro={this.state.currentComponentData}
-            myOrderCallbackPro={this.myOrderCallback} 
+            myOrderCallbackPro={this.myOrderCallback}
             viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)}/>
         </div>
       );
@@ -282,5 +284,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps,{ updateTheRWDHeader },)(RWDMyOrder);
+export default connect(mapStateToProps, { updateTheRWDHeader })(RWDMyOrder);
 // export default RWDMyOrder;

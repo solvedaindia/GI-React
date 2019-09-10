@@ -31,6 +31,8 @@ import {
   getOnlyWishlistUniqueIds,
   isMobile,
 } from '../../../utils/utilityManager';
+import {ADD_TO_COMPARE} from '../../../constants/app/footerConstants';
+
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -68,19 +70,16 @@ class ProductItem extends React.Component {
         },
 	    ],
 	  };
-    console.log('Move To Cart Clicked  ----  ', data);
 
 	  apiManager
 	    .post(addToCart, data)
 	    .then(response => {
-        console.log('Add to cart Data ---- ', response.data);
         getUpdatedMinicartCount(this);
         // this.props.updatetMinicart();
         removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
         this.props.moveToCartPopUpPro();
 	    })
 	    .catch(error => {
-        console.log('AddToCart Error---', error);
       });
   };
 
@@ -100,7 +99,6 @@ class ProductItem extends React.Component {
   };
 
   render() {
-	  console.log('Color Swatch Split  ----  ', this.state.colorSwatchSplit, this.state.colorSwatchFull, );
 	  var productname = String(this.state.data.productName).toLowerCase()
 	  var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.state.data.uniqueID}`
 
@@ -145,29 +143,11 @@ class ProductItem extends React.Component {
 	        <div className="hoverBox">
             {this.props.isfromWishlistPro ? 
 	            <button className={this.props.isShareWishlistPro ? 'btn-compare': isMobile() ? 'mov-to-cart' :  'btn-compare' } onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
-	            <button className="btn-compare" onClick={this.handleClick.bind(this)}>Add to compare</button>}
+	            <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>}
 
 	          {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
 	            <ul className="colortheme clearfix">
-                  {/* {this.state.colorSwatchSplit.length !== 0 ? 
-									this.state.colorSwatchSplit.map(item => {
-										var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
-										return (
-											<li onClick={(e) => this.onSwatchChange(e, item.name)} class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-												<span className='swatches-circle' style={colorStyle}></span>
-											</li>
-										)
-	
-									}) : 
-									this.state.colorSwatchFull.map(item => {
-										var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
-										return (
-											<li onClick={(e) => this.onSwatchChange(e, item.name)} class={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-												<span className='swatches-circle' style={colorStyle}></span>
-											</li>
-										)
-	
-									}) } */}
+                 
                   {swatchFinalData.map(item => {
 	                var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
                     return (
@@ -196,7 +176,6 @@ class ProductItem extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // default: state.default
   };
 }
 
@@ -204,4 +183,3 @@ export default connect(
   mapStateToProps,
   { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
 )(ProductItem);
-// export default ProductItem;

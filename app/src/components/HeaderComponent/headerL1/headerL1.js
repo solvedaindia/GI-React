@@ -12,6 +12,7 @@ class HeaderL1 extends React.Component {
     layer1Data: [],
     isLoading: true,
     errors: null,
+    getDefaultPincode: ''
   };
 
 	getHeaderLayer1() {
@@ -34,10 +35,19 @@ class HeaderL1 extends React.Component {
 
   componentDidMount() {
     this.getHeaderLayer1();
+    this.setState({
+      getDefaultPincode: getCookie('pincode')
+    })
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      getDefaultPincode: getCookie('pincode')
+    })
   }
 
   render() {
-	const { isLoading, layer1Data } = this.state;
+  const { isLoading, layer1Data, getDefaultPincode } = this.state;
     return (
       <ul className="layer1">
         {!isLoading ? (
@@ -62,7 +72,7 @@ class HeaderL1 extends React.Component {
                     linkData.text === 'LOCATE STORES' ? (
                         <Link
                           className="action"
-                          to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                          to={{ pathname: '/storelocator', state: { pincode: getDefaultPincode } }}
                         >
                           {linkData.text}
                         </Link>

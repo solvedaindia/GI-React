@@ -35,8 +35,7 @@ class Sort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected:
-        this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
+      selected: this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
     };

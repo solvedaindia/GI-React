@@ -8,6 +8,7 @@ import {
 import { isMobile, getCookie } from '../../utils/utilityManager';
 import '../../../public/styles/store/store.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
+import {OUR_STORES, EXPERIENCE_OUR_STORES, EXP_OUR_PRODUCTS, KM_AWAY} from '../../constants/app/storeDetailsConstants'
 
 export class StoreDetails extends React.Component {
     constructor(props) {
@@ -69,16 +70,16 @@ export class StoreDetails extends React.Component {
                        <ContentEspot espotName = { 'GI_EXP_STORE_WEB_IMG' } />: <ContentEspot espotName = { 'GI_EXP_STORE_MOBILE_IMG' } />
                     }
                     <div className='content'>
-                        {!isMobile() && <h2 className='subTitle'>Our Stores</h2>}
-                        <h1 className='title'>Experience Our Stores</h1>
+                        {!isMobile() && <h2 className='subTitle'>{OUR_STORES}</h2>}
+                        <h1 className='title'>{EXPERIENCE_OUR_STORES}</h1>
                         {!!storeData && !!storeData.latitude && storeData.latitude &&
-                            <p className='details'>Experience our products at
+                            <p className='details'>{EXP_OUR_PRODUCTS}
                                 <Link
                                     className='storeLink'
                                     to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
                                 >
                                     <span className='place'> {storeData.storeName}</span>
-                                    <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} km away)</span>
+                                    <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} `{KM_AWAY}`</span>
                                 </Link>
                             </p>
                         }

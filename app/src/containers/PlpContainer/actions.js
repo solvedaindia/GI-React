@@ -40,6 +40,10 @@ export const clearAllRWDFilters = () => ({
   type: actionTypes.CLEARALLFILTER,
 });
 
+export const cancelRWDFilters = () => ({
+    type: actionTypes.RWDFILTERCANCEL,
+  });
+
 export const adBannerAction = (value, sIndex) =>
     // console.log('adBannerAction', actionTypes);
     ({

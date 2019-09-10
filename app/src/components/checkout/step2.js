@@ -18,15 +18,8 @@ import {
   Modal
 } from 'react-bootstrap';
 import Input from '../Primitives/input';
-import {MOBILE_EMAIL } from '../../constants/app/checkoutConstants';
-import {ONE_OR_MORE_ITEM } from '../../constants/app/checkoutConstants';
-import {SAVE_YOUR_ADDRESS } from '../../constants/app/checkoutConstants';
-import {ENTER_VALID_STATE } from '../../constants/app/checkoutConstants';
-import {REQUIRED_FIELD } from '../../constants/app/checkoutConstants';
-import {VALID_CITY_DISTRICT } from '../../constants/app/checkoutConstants';
-import {VALID_ADDRESS } from '../../constants/app/checkoutConstants';
-import {VALID_PINCODE } from '../../constants/app/checkoutConstants';
-import {VALID_EMAIL } from '../../constants/app/checkoutConstants';
+import {MOBILE_EMAIL, ONE_OR_MORE_ITEM, SAVE_YOUR_ADDRESS, ENTER_VALID_STATE, REQUIRED_FIELD ,VALID_CITY_DISTRICT, VALID_ADDRESS, VALID_PINCODE,VALID_EMAIL  } from '../../constants/app/checkoutConstants';
+
 
 
 
@@ -1035,7 +1028,7 @@ export class Step2Component extends React.Component {
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
-            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} currentAddressPro={this.state.addressList.length !== 0 ? this.state.addressList[this.state.selected_add] : null } /> : ''}
+            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} currentAddressPro={this.state.addressList !== null ? this.state.addressList[this.state.selected_add] : null } /> : ''}
           <div className='listRow clearfix'>
             <div className='stepActive'>
               <div className='checkmark'></div>

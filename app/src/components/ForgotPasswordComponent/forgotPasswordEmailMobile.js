@@ -12,6 +12,7 @@ import {
   validateEmptyObject,
 } from '../../utils/validationManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
+import {ENTER_MOBILE_EMAIL, INVALID_MOBILE_NUMBER,PROCEED,INVALID_EMAIL_ADDRESS,TO_REGISTER , FORGOT_PASSWORD, EMAIL_MOBILE_NUM,AN_OTP} from '../../constants/app/footerConstants';
 
 class ForgotPasswordEmailMobile extends React.Component {
   constructor() {
@@ -38,7 +39,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: <p className="error-msg">Please enter Email or Mobile Number</p>,
+        errorMessage: <p className="error-msg">{ENTER_MOBILE_EMAIL}</p>,
         isValidate: false,
       });
       return;
@@ -50,7 +51,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       if (!regexMobileNo.test(this.state.inputText)) {
         this.setState({
           error: true,
-          errorMessage: <p className="error-msg">Invalid Mobile Number</p>,
+          errorMessage: <p className="error-msg">{INVALID_MOBILE_NUMBER}</p>,
           isValidate: false,
         });
         return;
@@ -58,7 +59,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     } else if (!regexEmail.test(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: <p className="error-msg">Invalid Email address</p>,
+        errorMessage: <p className="error-msg">{INVALID_EMAIL_ADDRESS}</p>,
         isValidate: false,
       });
       return;
@@ -83,9 +84,8 @@ class ForgotPasswordEmailMobile extends React.Component {
         const errorMessage = errorData.error.error_message;
         const errorKey = errorData.error.error_key;
         const lll = (
-          // {errorKey === 'invalid_user_id' ?  ` Please click ${<button>here</button>} to register` : null}
           <>
-            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>here</span> to register
+            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>{HERE}</span> {TO_REGISTER}
           </>
         )
         const errorItem = (
@@ -100,7 +100,6 @@ class ForgotPasswordEmailMobile extends React.Component {
 
   onRegisterRedirectClick(e) {
     e.preventDefault();
-    console.log('dsds')
     const nextComp = 'RegisterRedirect';
     this.props.handlerPro(nextComp, null, null);
   }
@@ -112,9 +111,7 @@ class ForgotPasswordEmailMobile extends React.Component {
     });
   }
 
-  // onpress = e => {
-  //   e.preventDefault();
-  // };
+ 
 
   render() {
     let errorItem;
@@ -143,11 +140,11 @@ class ForgotPasswordEmailMobile extends React.Component {
 
     return (
       <div className={animeClass}>
-        <h3 className="heading">Forgot password</h3>
+        <h3 className="heading">{FORGOT_PASSWORD}</h3>
         <Form className="modalmin-height">
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
-              Email ID/Mobile Number
+             {EMAIL_MOBILE_NUM}
             </Label>
             <div className="form-div clearfix div-error">
               <input
@@ -166,7 +163,7 @@ class ForgotPasswordEmailMobile extends React.Component {
           </FormGroup>
           <FormGroup>
             <p className="text text-emailotp">
-              An OTP will be sent for validation{' '}
+             {AN_OTP}{' '}
             </p>
           </FormGroup>
         </Form>
@@ -174,7 +171,7 @@ class ForgotPasswordEmailMobile extends React.Component {
           onClick={this.proceedBtnPressed.bind(this)}
           className="btn-block btn-bg"
         >
-          Proceed
+          {PROCEED}
         </Button>
       </div>
     );

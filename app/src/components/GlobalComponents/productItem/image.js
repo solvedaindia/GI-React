@@ -22,12 +22,10 @@ class Image extends React.Component {
         <ImageLoader
           className="imgfullwidth"
           src={`${imagePrefix}${this.props.data}`}
-          // src={`https://192.168.0.36:8443${this.props.data}`}
           alt="sofa"
         />
       );
     }
-    //const routePath = `/pdp/${this.props.parentUniqueId}/${this.props.uniqueId}`;
     var routePath = `/pdp/furniture-${this.props.productname.split(' ').join('-')}/${this.props.uniqueId}`
     return (
       <LazyLoad className="imgBox" debounce={false}>

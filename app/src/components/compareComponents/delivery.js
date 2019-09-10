@@ -9,6 +9,8 @@ import Link from 'react-router-dom/Link';
 import appCookie from '../../utils/cookie';
 import apiManger from '../../utils/apiManager';
 import { storeId, accessToken, findinventoryAPI } from '../../../public/constants/constants';
+import {DELIVERY_BETWEEN} from '../../constants/app/compareConstants'
+
 import axios from 'axios';
 
 class DelContainer extends React.Component {
@@ -19,7 +21,6 @@ class DelContainer extends React.Component {
       isLoading: true,
     }
   }
-  // function DelContainer(props) {
   componentDidMount() {
     this.callDeliveryDateAPI(this.props.skuData.partNumber);
   }
@@ -61,7 +62,7 @@ class DelContainer extends React.Component {
     return (
       <Col xs={12} sm={4} md={4}>
         <div className='DeliveryLoaderwrap'>
-          <div className='DeliveryText'>Delivery Between:</div>
+          <div className='DeliveryText'>{DELIVERY_BETWEEN}</div>
           <div className='loaderdiv'>{this.state.isLoading ? this.dotLoader() : <strong>{this.state.deliveryData}</strong>}</div>
         
         </div> 

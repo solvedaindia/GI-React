@@ -1,3 +1,4 @@
+@import "../variable.scss";
 .logo{
     width: 15%;
     margin-left: 5%;
@@ -5,5 +6,19 @@
     .img {
         width : 100%;
         padding: 15px;
+    }
+}
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@include mix-md-ipad {
+    .logo{
+        a{
+            display: inline-block;
+            svg{
+                max-width: 130px;;
+            }
+        }
     }
 }

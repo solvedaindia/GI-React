@@ -8,6 +8,7 @@ import {
   imagePrefix
 } from '../../../public/constants/constants';
 import '../../../public/styles/featuredCat/featuredCat.scss';
+import {STARTING_FROM, PRODUCTS } from '../../constants/app/clpConstants';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -86,7 +87,6 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="featuredCat">
-        {/* <h1 className="title">Featured Category</h1> */}
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
@@ -100,10 +100,10 @@ export class SubCategory extends React.Component {
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount} Products
+                      {subCatListData.productCount} {PRODUCTS}
                   </span>
                     <p className="starting">
-                      Starting From 
+                      {STARTING_FROM}
                     <span className="startPrice">
                        ₹{formatPrice(subCatListData.startPrice)}
                       </span>

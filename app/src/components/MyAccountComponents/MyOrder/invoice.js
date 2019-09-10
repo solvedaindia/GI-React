@@ -36,29 +36,7 @@ class Invoice extends React.Component {
 			});
 		});
 	}
-    // download=( )=>{
-    //     this.doc.save('invoice.pdf');
-    // }
-    // setup() {
-    //     const doc = new jsPDF();
-    //     const el = document.getElementById('content');
-    //     if (typeof(el)==="object' && el!==null) {
-    //         const width = 210
-    //         const elementHandlers = {
-    //             '#ignorePDF': (element,renderer)=>{
-    //                 return true
-    //             }
-    //         }
-    //         doc.fromHTML(el,1,1,{width,elementHandlers},()=>{
-    //             const pdf = doc.output('datauristring')
-    //             if (typeof(pdf)==="string' && pdf.length>0) {
-    //             this.setState({pdf})
-    //             }
-    //         })
-            
-    //     }
-    //     this.doc = doc;
-    // }
+
     invoiceDatailedData() {
         const { invoiceData } = this.state;
         // if(!invoiceData) return null;
