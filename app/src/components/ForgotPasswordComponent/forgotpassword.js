@@ -149,7 +149,6 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
-      //this.toggle();
     }
 
     this.setState({

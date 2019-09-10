@@ -7,6 +7,7 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import { regexPw, validateEmptyObject } from '../../utils/validationManager';
+import {ENTER_VALID_PASS, PASSWORD_SHOULD_NOT, SIX_CHARACTER_PASS, SET_NEW,NEW_PASS } from '../../constants/app/footerConstants';
 
 class ForgotPasswordNewPassword extends React.Component {
   constructor() {
@@ -27,7 +28,7 @@ class ForgotPasswordNewPassword extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Enter a valid Password',
+        errorMessage: `${ENTER_VALID_PASS}`,
       });
       return;
     }
@@ -35,10 +36,10 @@ class ForgotPasswordNewPassword extends React.Component {
     if (!regexPw.test(this.state.inputText)) {
       let errorMsg;
       if (this.state.inputText.length > 25) {
-        errorMsg = 'Invalid Password. Password should not be more than 25 char';
+        errorMsg = `${PASSWORD_SHOULD_NOT}`;
       } else {
         errorMsg =
-          'Invalid Password. Password should have min 6 characters and atleast 1 number';
+          `${SIX_CHARACTER_PASS}`;
       }
 
       this.setState({
@@ -103,10 +104,10 @@ class ForgotPasswordNewPassword extends React.Component {
 
     return (
       <div className="searchAnimate">
-        <h3 className="heading">Set New Password</h3>
+        <h3 className="heading">{SET_NEW}</h3>
         <Form className="modalmin-height">
           <FormGroup className="enternew-password">
-            <p className="text">New Password</p>
+            <p className="text">{NEW_PASS}</p>
             <div className="form-div clearfix">
               <input
                 onChange={this.handleInputChange.bind(this)}
