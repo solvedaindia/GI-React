@@ -7,7 +7,7 @@
 import React from 'react';
 import CLPFullBanner from '../../components/ClpComponent/clpSlider';
 import LivingTheme from '../../components/ClpComponent/livingInspiration';
-import SubCategory from '../../components/ClpComponent/subCategory';
+import FeaturedCategory from '../../components/ClpComponent/featuredCategory';
 import BestSeller from '../../components/BestSelling/bestSelling';
 import CLPReadMore from '../../components/ClpComponent/clpReadMore';
 import ContentEspot from '../../components/Primitives/staticContent';
@@ -32,7 +32,7 @@ export class CLPContainer extends React.Component {
           <CLPFullBanner {...this.props.match.params}/>
 		    </div>
           <Breadcrumb {...this.props.match.params}/>
-          <SubCategory {...this.props.match.params}/>
+          <FeaturedCategory {...this.props.match.params}/>
           <LivingTheme {...this.props.match.params}/>
           <BestSeller {...this.props.match.params}/>
           <ContentEspot espotName = { 'GI_Homepage_Godrej_Solution' } />

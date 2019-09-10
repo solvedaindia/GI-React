@@ -172,8 +172,6 @@ export default class App extends React.Component {
 	getIPData() {
 		if( appCookie.get('pincode') === null && appCookie.get('pincodeUpdated') !== true) {
 			var request = new XMLHttpRequest();
-			request.open('GET', ipDataApi);
-			request.setRequestHeader('Accept', 'application/json');
 			request.onreadystatechange = function () {
 				if (this.readyState === 4 && this.status == 200) {
 					var ipData = JSON.parse(this.responseText);
@@ -181,13 +179,16 @@ export default class App extends React.Component {
 					appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
 					console.log('IP data response Postal', ipData.postal);
 				}
+				else {
+					appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+					console.log('Pincode Error');
+				}
 			};
+			request.open('GET', ipDataApi);
+			request.setRequestHeader('Accept', 'application/json');
 			request.send();
 		}
-		else {
-			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-			console.log('Pincode Error');
-		}
+		
   	}
   
   getCurrentLocation() {
