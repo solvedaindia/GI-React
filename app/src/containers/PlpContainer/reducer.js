@@ -49,13 +49,13 @@ function plpContainerReducer(state = initialState, action) {
             };
         case actionTypes.RWDFILTER:
             return {
-                ...state, 
+                ...state,
                 rwdUpdatedFilter: RWDUpdateFilterMap(
                     action.RWDupdatedFilter,
                     action.RWDfacetName,
                     state,
                 ),
-                updateFilter: action.RWDisApply ? [...state.rwdUpdatedFilter] : state.updateFilter,
+                updateFilter: action.RWDisApply ? new Map(state.rwdUpdatedFilter) : state.updateFilter,
             };
         case actionTypes.BROWSERFILTER:
             return {
@@ -67,6 +67,11 @@ function plpContainerReducer(state = initialState, action) {
                 ...state,
                 updateFilter: new Map(),
                 rwdUpdatedFilter: new Map(),
+            };
+        case actionTypes.RWDFILTERCANCEL:
+            return {
+                ...state,
+                rwdUpdatedFilter: new Map(state.updateFilter),
             };
         case actionTypes.ADBANNERCOUNT:
             return {

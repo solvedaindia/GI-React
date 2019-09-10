@@ -21,7 +21,9 @@ class PinChangePopup extends React.Component {
   }
 
   handleProceed = () => {
-    this.setAsDefafultBtnClicked();
+    if (this.props.currentAddressPro !== null) {
+      this.setAsDefafultBtnClicked();
+    }
     this.setState({
       redirect: true
     })

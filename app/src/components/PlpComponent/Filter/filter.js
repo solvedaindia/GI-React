@@ -73,7 +73,11 @@ class Filter extends React.Component {
     });
 
     const filteredArr = [];
-    for (const [key, value] of this.props.updatedFilter) {
+    var preFilter = this.props.updatedFilter;
+    if (isMobile()) {
+      preFilter = this.props.RWDupdatedFilter
+    }
+    for (const [key, value] of preFilter) {
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
           filteredArr.push(option);
@@ -132,16 +136,16 @@ class Filter extends React.Component {
       })
 
       this.filterOptions(staticFilterArr);
-      // if (filteredArr.length !== 0) {
-      //   this.setState({
-      //     isRWDFilterSelected: true,
-      //   });
-      // }
-      // else {
-      //   this.setState({
-      //     isRWDFilterSelected: false,
-      //   });
-      // }
+      if (filteredArr.length !== 0) {
+        this.setState({
+          isRWDFilterSelected: true,
+        });
+      }
+      else {
+        this.setState({
+          isRWDFilterSelected: false,
+        });
+      }
     }
   }
 
@@ -149,6 +153,10 @@ class Filter extends React.Component {
     this.toggleDropdown();
     if (this.props.isFromRWD) {
       this.props.rwdFilterCallbackPro();
+      this.props.onRWDFilterCancel()
+    }
+    if (isMobile()) {
+      // this.props.onRWDFilterCancel()
     }
 
   }
@@ -174,10 +182,12 @@ class Filter extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.active && isMobile()) {
-      this.unCkeckAll();
+    if (isMobile()) {
+      if (nextProps.RWDupdatedFilter !== this.props.RWDupdatedFilter) {
+        this.unCkeckAll();
+        this.filterOptions([]);
+      }
     }
-    this.resolvePreSelectedFilters();
   }
 
   resolvePreSelectedFilters() {
@@ -226,18 +236,18 @@ class Filter extends React.Component {
     // console.log('TotalFacemakeee---', ddd);
     // if (this.state.facetArr.length !== 0) {
 
-      if (isMobile()) {
-        this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
-        // this.onApplyBtnClick();
-      }
-      else {
-        this.props.onFilterUpdate(
-          this.state.facetArr,
-          this.props.dataPro.facetName,
-        );
-      }
+    if (isMobile()) {
+      this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
+      // this.onApplyBtnClick();
+    }
+    else {
+      this.props.onFilterUpdate(
+        this.state.facetArr,
+        this.props.dataPro.facetName,
+      );
+    }
 
-    
+
     // }
   }
 
@@ -414,6 +424,7 @@ const mapDispatchToProps = dispatch => {
   if (isMobile()) {
     return {
       onRWDFilterUpdate: (RWDupdatedArr, RWDfacetName, isApply) => dispatch(actionCreators.RWDFilter(RWDupdatedArr, RWDfacetName, isApply)),
+      onRWDFilterCancel: () => dispatch(actionCreators.cancelRWDFilters()),
     }
   }
   else {
@@ -421,8 +432,8 @@ const mapDispatchToProps = dispatch => {
       onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
     }
   }
-  
-  
+
+
 };
 
 const mapStateToProps = state => {
