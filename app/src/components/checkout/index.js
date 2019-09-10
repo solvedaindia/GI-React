@@ -21,6 +21,10 @@ import failPop from './failPop'
 import { Redirect } from 'react-router-dom';
 import { isMobile } from '../../utils/utilityManager';
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import {CHECKOUT } from '../../constants/app/checkoutConstants';
+
+CHECKOUT
+
 
 import {
   storeId,
@@ -81,7 +85,6 @@ export class CheckoutComponent extends React.Component {
     var coke = appCookie.get('isLoggedIn');
     this.callOrderSummaryAPI();
     this.fetchShipModeAPI();
-    console.log(coke, 'coke in did mount');
     if (coke == 'true') {
       this.callprofileAPI()
         .then((data) => {
@@ -103,7 +106,6 @@ export class CheckoutComponent extends React.Component {
       axios.get(userDataAPI, {
         headers: { store_id: storeId, access_token: token }
       }).then(response => {
-        console.log(response, 'profile response')
         resolve(response.data.data);
       }).catch(error => {
         reject(error);
@@ -112,19 +114,16 @@ export class CheckoutComponent extends React.Component {
   }
 
   fetchShipModeAPI() {
-    console.log('apirrrrrr --- ', shipModeAPI);
     axios
       .get(shipModeAPI, {
         headers: { store_id: storeId, access_token: accessToken },
       })
       .then(response => {
-        console.log('missss --- ', response.data.data.shipModes[0].shipModeId);
         this.setState({
           shipMode: response.data.data.shipModes[0].shipModeId,
         })
       })
       .catch(error => {
-        console.log('Errrrror ---- ', error);
       });
   }
 
@@ -161,7 +160,6 @@ export class CheckoutComponent extends React.Component {
     this.checkUserExist(data)
       .then(this.CallLoginApi)
       .catch((err) => {
-        console.log(err);
       })
   }
 
@@ -176,9 +174,6 @@ export class CheckoutComponent extends React.Component {
 
         resolve(data);
       }).catch(error => {
-        console.log(error, "this is in catch block");
-        // const errorData = error.response.data;
-        // const errorMessage = errorData.error.error_message;
         this.setState({
           message: 'user verify err',
         });
@@ -205,7 +200,6 @@ export class CheckoutComponent extends React.Component {
           show: false
         });
 
-        // alert('Successfully Logged In');
       })
       .catch(error => {
         const errorData = error.response.data;
@@ -251,12 +245,10 @@ export class CheckoutComponent extends React.Component {
   }
 
   callOrderSummaryAPI = () => {
-    console.log(this.props.isLoggedIn, "logged in order summary")
     let token = appCookie.get('accessToken');
     axios.get(OrderSummaryAPI, {
       headers: { store_id: storeId, access_token: token }
     }).then(response => {
-      console.log(response, 'order Summary response');
       if (!response.data.data.orderSummary.netAmount) {
         this.setState({
           redirect: true
@@ -267,7 +259,6 @@ export class CheckoutComponent extends React.Component {
         orderSummaryData: response.data.data.orderSummary
       })
     }).catch(error => {
-      console.log(error, "order summary error");
     })
   }
 
@@ -286,13 +277,9 @@ export class CheckoutComponent extends React.Component {
       amount: this.state.orderSummaryData.netAmount,
       billing_address_id: this.state.ship_add.billAddId,
       callbackUrl: `${secureHttp}://${host}:${port2}/api/v1/secure/payment/handlePayment`,
-      // callbackUrl: 'http://localhost:5000/checkout/',
       BankID: this.state.BankID,
       paymentMode: this.state.paymentMode
     };
-    // if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
-    //   body.BankID = '123'
-    // }
     var payCategoryId;
     if (this.state.paymentMode === 'DEBIT_CARD') {
       payCategoryId = 'DEBIT';
@@ -311,28 +298,19 @@ export class CheckoutComponent extends React.Component {
     axios.post(CreateCheckSumAPI, body, {
       headers: { store_id: storeId, access_token: token }
     }).then((response) => {
-      console.log(response, "checksum response")
       var res = response.data.data.response;
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
       if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "WALLET" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
         url = `${res.transactionUrl}&msg=${res.msg}`;
-        //  axios.post(url, {}, {
-
-        //   }).then((redirect) => {
-        //     // window.location.assign(redirect.data);
-        //   }).catch((err) => {
-        //     console.log(err, "biildessk err")
-        //   })
+    
       }
       window.location.assign(url)
 
     }).catch((err) => {
-      console.log(err, "checksum error")
     })
   }
 
   enalblePay = (data) => {
-    console.log('enablePay ---- ', data);
     this.setState({
       pay: true,
       BankID: data.BankID,
@@ -434,29 +412,25 @@ export class CheckoutComponent extends React.Component {
         <div className="container">
           <div className='row'>
             <div className='col-md-8'>
-              <h3 className='heading'>Checkout</h3>
+              <h3 className='heading'>{CHECKOUT}</h3>
             </div>
             {this.state.failPop ? <FailPop cancelFail={this.cancelFail} /> : ''}
             <div className='col-md-4'>
               <div className='summaryHeading'>
-                {/* <h4 className='headingOrder'>Order Summary</h4> */}
               </div>
             </div>
           </div>
 
           <div className="row">
             <div className='col-md-12'>
-              {/* <h3 className='heading'>Checkout</h3> */}
               <div className='row'>
                 {this.handleStep()}
-                {/* <div className="col-md-4"> */}
                 <OrderSummaryComponent
                   isLoggedIn={this.state.loggedIn}
                   orderData={this.state.orderSummaryData}
                   pay={this.state.pay}
                   initialBdpayment={this.initialBdpayment}
                   checkoutStep={this.state.step} />
-                {/* </div>  */}
               </div>
             </div>
           </div>

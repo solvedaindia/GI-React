@@ -128,7 +128,7 @@ export class MyAccountContainer extends React.Component {
               className={
                 isGuestTrackOrder
                   ? `col-xs-12 col-sm-12 col-md-12`
-                  : `col-xs-12 col-sm-9 col-md-9`
+                  : `col-xs-12 col-sm-9 col-md-9 myOnGoingOoders`
               }
             >
               <div className="tab-content">

@@ -8,6 +8,7 @@
 
  export const INCREMENT = 'INCREMENT';
  export const FILTER = 'FILTER_UPDATE';
+ export const RWDFILTER = 'RWDFILTER_UPDATE';
  export const BROWSERFILTER = 'BROWSER_FILTER_UPDATE';
  export const ADBANNERCOUNT = 'AD_BANNER_COUNT';
  export const SORTING = 'SORTING_UPDATE';

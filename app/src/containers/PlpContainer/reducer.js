@@ -11,7 +11,9 @@ import {
     fetchReleventSortingValue,
     updateFilterMap,
     checkCompareWidget,
-    updateWidgetData
+    updateWidgetData,
+    RWDUpdateFilterMap,
+    isMobile,
 } from '../../utils/utilityManager';
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
     adBannerCurrentIndex: 0,
     adBannerData: [],
     updateFilter: new Map(),
+    rwdUpdatedFilter: new Map(),
     compWidgetData: [],
     compCategories: [],
 };
@@ -38,11 +41,21 @@ function plpContainerReducer(state = initialState, action) {
                 ...state,
                 adBannerPos: initialState.adBannerPos,
                 adBannerCurrentIndex: initialState.adBannerCurrentIndex,
-                updateFilter: updateFilterMap(
+                updateFilter: isMobile() ? state.rwdUpdatedFilter : updateFilterMap(
                     action.updatedFilter,
                     action.facetName,
                     state,
                 ),
+            };
+        case actionTypes.RWDFILTER:
+            return {
+                ...state, 
+                rwdUpdatedFilter: RWDUpdateFilterMap(
+                    action.RWDupdatedFilter,
+                    action.RWDfacetName,
+                    state,
+                ),
+                updateFilter: action.RWDisApply ? [...state.rwdUpdatedFilter] : state.updateFilter,
             };
         case actionTypes.BROWSERFILTER:
             return {
@@ -53,6 +66,7 @@ function plpContainerReducer(state = initialState, action) {
             return {
                 ...state,
                 updateFilter: new Map(),
+                rwdUpdatedFilter: new Map(),
             };
         case actionTypes.ADBANNERCOUNT:
             return {
@@ -82,6 +96,7 @@ function plpContainerReducer(state = initialState, action) {
                 adBannerCurrentIndex: 0,
                 adBannerData: [],
                 updateFilter: new Map(),
+                rwdUpdatedFilter: new Map(),
                 compWidgetData: [],
                 compCategories: [],
             };

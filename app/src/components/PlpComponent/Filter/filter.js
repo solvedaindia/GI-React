@@ -14,13 +14,13 @@ import { runInThisContext } from 'vm';
 const downArrow = (
   <img
     className="dropdownArrow"
-    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg') }  alt="Down"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')} alt="Down"
   />
 );
 const upArrow = (
   <img
     className="dropdownArrow"
-    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}   alt="Up"
+    src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')} alt="Up"
   />
 );
 
@@ -56,6 +56,9 @@ class Filter extends React.Component {
 
     if (!this.state.active) {
       document.addEventListener('click', this.handleOutsideClick, false);
+      if (isMobile()) {
+        this.resolvePreSelectedFilters();
+      }
     } else {
       document.removeEventListener('click', this.handleOutsideClick, false);
     }
@@ -118,6 +121,28 @@ class Filter extends React.Component {
     const params = new URLSearchParams(this.props.location.search);
 
     this.setState({ facetArr: filteredArr });
+
+    if (isMobile()) {
+      this.state.facetArr = filteredArr;
+      this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, false);
+
+      var staticFilterArr = [];
+      this.state.facetArr.map(data => {
+        staticFilterArr.push(data.value)
+      })
+
+      this.filterOptions(staticFilterArr);
+      // if (filteredArr.length !== 0) {
+      //   this.setState({
+      //     isRWDFilterSelected: true,
+      //   });
+      // }
+      // else {
+      //   this.setState({
+      //     isRWDFilterSelected: false,
+      //   });
+      // }
+    }
   }
 
   onCancelBtnClick() {
@@ -145,9 +170,24 @@ class Filter extends React.Component {
   componentDidMount() {
     console.log('dddmdmd -- ', this.props.indexPro);
 
+    this.resolvePreSelectedFilters();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.active && isMobile()) {
+      this.unCkeckAll();
+    }
+    this.resolvePreSelectedFilters();
+  }
+
+  resolvePreSelectedFilters() {
     const alreadyAddedFiltersArr = [];
     const filteredArr = [...this.state.facetArr];
-    for (const [key, value] of this.props.updatedFilter) {
+    var preFilter = this.props.updatedFilter;
+    if (isMobile()) {
+      preFilter = this.props.RWDupdatedFilter
+    }
+    for (const [key, value] of preFilter) {
       console.log('kkkeyy --- ', key);
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
@@ -171,12 +211,6 @@ class Filter extends React.Component {
     this.filterOptions(extFacetArr);
   }
 
-  componentWillReceiveProps() {
-    if (this.state.active && isMobile()) {
-      this.unCkeckAll();
-    }
-  }
-
   onApplyBtnClick() {
     console.log('TotalFaeexxxxx--', this.state.facetArr);
     this.state.facetArr.map(item => {
@@ -191,10 +225,19 @@ class Filter extends React.Component {
     // ddd.value = facetName
     // console.log('TotalFacemakeee---', ddd);
     // if (this.state.facetArr.length !== 0) {
-    this.props.onFilterUpdate(
-      this.state.facetArr,
-      this.props.dataPro.facetName,
-    );
+
+      if (isMobile()) {
+        this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
+        // this.onApplyBtnClick();
+      }
+      else {
+        this.props.onFilterUpdate(
+          this.state.facetArr,
+          this.props.dataPro.facetName,
+        );
+      }
+
+    
     // }
   }
 
@@ -367,16 +410,27 @@ class Filter extends React.Component {
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
-const mapDispatchToProps = dispatch => ({
-  onFilterUpdate: (updatedArr, facetName) =>
-    dispatch(actionCreators.filter(updatedArr, facetName)),
-});
+const mapDispatchToProps = dispatch => {
+  if (isMobile()) {
+    return {
+      onRWDFilterUpdate: (RWDupdatedArr, RWDfacetName, isApply) => dispatch(actionCreators.RWDFilter(RWDupdatedArr, RWDfacetName, isApply)),
+    }
+  }
+  else {
+    return {
+      onFilterUpdate: (updatedArr, facetName) => dispatch(actionCreators.filter(updatedArr, facetName)),
+    }
+  }
+  
+  
+};
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  console.log('Zebraa MIN --- ', stateObj.updateFilter);
+  console.log('Zebraa MIN --- ', stateObj.updateFilter, state.rwdUpdatedFilter);
   return {
     updatedFilter: stateObj.updateFilter,
+    RWDupdatedFilter: stateObj.rwdUpdatedFilter,
   };
 };
 
