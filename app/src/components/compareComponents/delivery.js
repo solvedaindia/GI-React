@@ -19,7 +19,6 @@ class DelContainer extends React.Component {
       isLoading: true,
     }
   }
-  // function DelContainer(props) {
   componentDidMount() {
     this.callDeliveryDateAPI(this.props.skuData.partNumber);
   }

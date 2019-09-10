@@ -10,6 +10,7 @@ import {
   catID,
 } from '../../../public/constants/constants';
 import '../../../public/styles/subCat/subCat.scss';
+import {PRODUCTS, STARTING_FROM, SPOTLIGHT} from '../../constants/app/footerConstants';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -84,7 +85,7 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="subCat">
-        <h2 className="title">In the Spotlight</h2>
+        <h2 className="title">{SPOTLIGHT}</h2>
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
@@ -100,10 +101,10 @@ export class SubCategory extends React.Component {
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount} Products
+                      {subCatListData.productCount + PRODUCTS} 
                   </span>
                     <p className="starting">
-                      Starting From
+                      {STARTING_FROM}
                     <span className="startPrice">
                       ₹{formatPrice(subCatListData.startPrice)}
                       </span>
