@@ -151,7 +151,7 @@ class Invoice extends React.Component {
                                     <div style={{width: '13%', margin: 'auto', float: 'left'}}>Item Price</div>
                                     <div style={{width: '12%', margin: 'auto', float: 'left'}}>Quantity</div>
                                     <div style={{width: '13%', margin: 'auto', float: 'left'}}>CGST Amount</div>
-                                    <div style={{width: '12%', margin: 'auto', float: 'left'}}>sgstAmount</div>
+                                    <div style={{width: '12%', margin: 'auto', float: 'left'}}>SGST Amount</div>
                                     <div style={{width: '14%', margin: 'auto', float: 'left'}}>Total Amount</div> 
                             </div>
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
