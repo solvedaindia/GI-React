@@ -1,5 +1,9 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import {PAYMENT_NOT_COMPLETED } from '../../constants/app/checkoutConstants';
+import {OOPS } from '../../constants/app/checkoutConstants';
+import {CANCEL } from '../../constants/app/checkoutConstants';
+import {TRY_AGAIN } from '../../constants/app/checkoutConstants';
 
 export default class FailPop extends React.Component {
   constructor(props) {
@@ -41,15 +45,15 @@ export default class FailPop extends React.Component {
 
             </div>
             <h3 className="heading">
-              Oops!
+              {OOPS}
             </h3>
-            <p className='payment-notcomplete'>Your payment could not be completed</p>
+            <p className='payment-notcomplete'>{PAYMENT_NOT_COMPLETED}</p>
             <div className="actionBtnWrapper">
               <Button className="btn-cancel btn" onClick={this.handleCancel}>
-                Cancel
+                {CANCEL}
               </Button>
               <Button onClick={this.handleTryAgain} className="btn-save btn">
-                Try Again
+              {TRY_AGAIN}
               </Button>
             </div>
           </div>

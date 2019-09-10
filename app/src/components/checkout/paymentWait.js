@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import {PLEASE_WAIT } from '../../constants/app/checkoutConstants';
+
 import {
   storeId,
   accessToken,
@@ -28,7 +30,6 @@ export default class PaymentWait extends React.Component {
       axios.post(CheckoutAPI, data, {
           headers: { store_id: storeId, access_token: token }
       }).then((res) => {
-        console.log(res, "checkout response");
           if(res.data.data.orderPlaced == true) {
               window.location.assign(`${window.location.origin}/order/confirm/${orderId}`)
               
@@ -42,15 +43,9 @@ export default class PaymentWait extends React.Component {
   
   
   render() {
-    // if(this.state.redirect == "order") {
-    //   return <Redirect to={`order/confirm/${this.state.orderId}`} />
-    // }
-    // if(this.state.redirect == "checkout") {
-    //   return <Redirect to="checkout?status=fail" />
-    // }
     return (
         <div className='redirectedMsg'>
-            <h3>Please Wait, You are being redirected...</h3>
+            <h3>{PLEASE_WAIT}</h3>
         </div>
     );
   }
