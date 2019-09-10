@@ -35,7 +35,6 @@ class LivingTheme extends React.Component {
   
   componentWillReceiveProps(nextProps) {
     if(this.props.id !== nextProps.id){
-      console.log('Next Props ID', nextProps);
       this.getThemeData(nextProps.id);
     }
   }

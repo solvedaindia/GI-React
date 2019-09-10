@@ -84,7 +84,6 @@ class SubCategories extends React.Component {
   }
 
   render() {
-    console.log('dkdkddk -- ', this.state.subCatItem);
     return (
       <section className="tablecarousel">
         <div className="container">

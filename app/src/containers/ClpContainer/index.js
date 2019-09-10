@@ -22,7 +22,6 @@ export class CLPContainer extends React.Component {
       isLoading: false,
       error: null,
     };
-    console.log('CLP Props', props);
   }
 
   render() {

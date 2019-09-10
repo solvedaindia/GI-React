@@ -4,9 +4,7 @@ import apiManager from '../../../utils/apiManager';
 import { getCookie } from '../../../utils/utilityManager';
 import '../../../../public/styles/headerContainer/headerL1.scss';
 import {
-  headerStatic,
-  storeId,
-  accessToken,
+  headerStatic
 } from '../../../../public/constants/constants';
 
 class HeaderL1 extends React.Component {
@@ -71,9 +69,9 @@ class HeaderL1 extends React.Component {
                       ) : (
                        
                         <Link className="action"  to='/support'>
-                        <a className="action" href={linkData.action}>
+                        
                           {linkData.text}
-                        </a>
+                        
                         </Link>
                       )
                     }

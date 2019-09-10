@@ -24,10 +24,6 @@ export class HomapegeLayout extends React.Component {
           homepageLayout: response.data.data.GI_Homepage_Layout_Content,
           isLoading: false,
         });
-        console.log(
-          'HomepageData',
-          response.data.data.GI_Homepage_Layout_Content,
-        );
       })
       .catch(error => {
         this.setState({

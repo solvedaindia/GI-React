@@ -239,6 +239,9 @@
                     padding: $base;
                 }
             }
+            .promoError {
+                color: $errorMsg;
+            }
         }
         .title {
             text-align: left;
@@ -302,7 +305,7 @@
                 margin-top: $base*4; 
                 border-radius: unset; 
                 padding: 11px 0;
-                &.disable {
+                &.disabled {
                     background-color: $disable;
                     pointer-events: none;
                 }
@@ -450,6 +453,9 @@
                     border: none;
                     color: $cerulean;
                     font-family: $font-bold;
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
         }
@@ -641,6 +647,12 @@
                     color: #fff;
                     font-family: $font-medium;
                     font-size: 12px;
+                    display: block;
+                    width: 100%;
+                    &.disabled {
+                        background-color: $disable;
+                        pointer-events: none;
+                    }
                 }
             }
         }

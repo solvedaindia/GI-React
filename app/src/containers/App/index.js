@@ -117,7 +117,6 @@ export default class App extends React.Component {
   }
 
   newsletterPopupHandling() {
-    console.log('NewsletterCookie---', getCookie(newsletterTokenCookie));
     if (
       getCookie(newsletterTokenCookie) &&
       getCookie(newsletterTokenCookie) != null
@@ -128,7 +127,6 @@ export default class App extends React.Component {
       // Hit api if NewsletterCookie is null/Empty
       // If yes -> Don't show the Popup
       // If No -> Show the Pop UP
-      console.log('In the new');
       this.getNewsletterSubscriptionStatus();
       // this.setState({ showNewsLetter: true });
     }
@@ -144,10 +142,6 @@ export default class App extends React.Component {
     apiManager
       .get(newsletterStatusAPI)
       .then(response => {
-        console.log(
-          'Newsletter status: ',
-          response.data.data.alreadySubscribed,
-        );
         if (!response.data.data.alreadySubscribed) {
           this.setState({ showNewsLetter: true });
         }
@@ -177,11 +171,9 @@ export default class App extends React.Component {
 					var ipData = JSON.parse(this.responseText);
 					var ipDataPostCode = ipData.postal;
 					appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-					console.log('IP data response Postal', ipData.postal);
 				}
 				else {
 					appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-					console.log('Pincode Error');
 				}
 			};
 			request.open('GET', ipDataApi);
@@ -211,7 +203,6 @@ export default class App extends React.Component {
           }          
         },
         error => {
-          console.error(error);
         }
       );
      }
@@ -248,7 +239,6 @@ export default class App extends React.Component {
     }
 
     const { isMobile } = this.state;
-    {console.log("Test URL", window.location)}
     return (
       <div>
         <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">

@@ -2,33 +2,26 @@ import React from 'react';
 import '../../../public/styles/checkout.scss';
 import {
   storeId,
-  accessToken,
-  accessTokenCookie,
-  OrderSummaryAPI,
   minEMIAPI
 } from '../../../public/constants/constants';
 import appCookie from '../../utils/cookie';
 import axios from 'axios';
 import EMI from '../../../public/images/emi.svg';
+import EmiInfo from '../../components/PdpComponent/emiInfo';
 import {isMobile, formatPrice} from '../../utils/utilityManager';
-import {CART_TOTAL } from '../../constants/app/checkoutConstants';
-import {ORDER_SUMMARY } from '../../constants/app/checkoutConstants';
-import {PRODUCT_DISCOUNT } from '../../constants/app/checkoutConstants';
-import {ORDER_DISCOUNT } from '../../constants/app/checkoutConstants';
-import {SHIPPING } from '../../constants/app/checkoutConstants';
-import {STARTING_FROM } from '../../constants/app/checkoutConstants';
-import {KNOW_MORE } from '../../constants/app/checkoutConstants';
-import {TOTAL } from '../../constants/app/checkoutConstants';
-import {TOTAL_AMOUNT } from '../../constants/app/checkoutConstants';
-import {PAY } from '../../constants/app/checkoutConstants';
-import {YOU_SAVED } from '../../constants/app/checkoutConstants';
-import {SECURE_CHECKOUT } from '../../constants/app/checkoutConstants';
-
-
-
-
-
-
+import {
+	CART_TOTAL,
+	ORDER_SUMMARY,
+	PRODUCT_DISCOUNT,
+	ORDER_DISCOUNT,
+	SHIPPING,
+	STARTING_FROM,
+	TOTAL,
+	TOTAL_AMOUNT,
+	PAY,
+	YOU_SAVED,
+	SECURE_CHECKOUT
+} from '../../constants/app/checkoutConstants';
 
 export class OrderSummaryComponent extends React.Component {
     constructor(props){
@@ -83,7 +76,8 @@ export class OrderSummaryComponent extends React.Component {
               <div className='startEmi clearfix'>
                 <div className='emi-icon'><img src={EMI} alt='EMI'/></div>
                 <div className='emitext'> {STARTING_FROM} &#8377;{formatPrice(this.state.minEMI)} a month</div>
-                <div className='knowmore'>{KNOW_MORE}</div>
+                {/* <div className='knowmore'>{KNOW_MORE}</div> */}
+				<EmiInfo price={this.props.orderData.netAmount}/>
               </div>
              
              <div className='totalBox clearfix'>

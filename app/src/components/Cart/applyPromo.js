@@ -20,7 +20,7 @@ class PromoField extends React.Component {
   }
 
   applyPromoCode() {
-    if (!this.state.promoCode) return;
+    if (!this.state.promoCode) return null;
     const data = {
       orderId: this.state.orderID,
       promoCode: this.state.promoCode,

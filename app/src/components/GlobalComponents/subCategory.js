@@ -90,13 +90,11 @@ export class SubCategory extends React.Component {
             subCatData.map((subCatListData, index) => {
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
-                <figure className="subCatSlider">
-                  <a href={subCatListData.onClickUrl} key={index}>
+                <figure className="subCatSlider" key={`${index}-img`}>
                     <Link to={routePath}>
                     <img className="subCatImg"  alt={subCatListData.categoryName}  src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
                     />
                     </Link>
-                  </a>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">

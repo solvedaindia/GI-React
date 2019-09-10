@@ -34,7 +34,6 @@ class Invoice extends React.Component {
                 error,
                 isLoading: false,
 			});
-			console.log('Invoive data error');
 		});
 	}
     // download=( )=>{
@@ -62,7 +61,6 @@ class Invoice extends React.Component {
     // }
     invoiceDatailedData() {
         const { invoiceData } = this.state;
-        console.log('!!!!! Invoice' , invoiceData);
         // if(!invoiceData) return null;
         return (
             <div className="invoiceContainer" style={{border:'1px solid black', width: '90%', margin: 'auto' , float: 'left'}}>

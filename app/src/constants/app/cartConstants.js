@@ -52,7 +52,6 @@ export const NOT_ADDED_ANY_ITEM = 'You haven’t added any items to your cart';
 export const OFF = 'Off';
 export const QUANTITY = 'QUANTITY';
 export const MOBILE_QUANTITY = 'QUANTITY:';
-
 export const KNOW_MORE = 'Know More';
 export const EMI_EASY_INSTALLATION = 'EMI (Easy Installment)';
 export const PAY_IN_EQUAL_INSTALLMENT = 'Pay for your order in equal monthly installments (EMI), using any one of the payment options in the table below.';

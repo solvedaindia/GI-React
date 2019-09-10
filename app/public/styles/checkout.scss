@@ -502,9 +502,15 @@
         float: left;
         color: $black;
       }
-      .knowmore {
+      .btn-knowmore {
         float: right;
         color: $cerulean;
+        border: none;
+        background: transparent;
+        font-family: $font-medium;
+        &:focus {
+          outline: none;
+        }
       }
     }
     .totalBox {

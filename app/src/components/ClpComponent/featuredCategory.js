@@ -28,7 +28,6 @@ export class SubCategory extends React.Component {
           subCatData: data && data.data,
           isLoading: false,
         });
-        console.log('Featured Category Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -40,7 +39,6 @@ export class SubCategory extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.id !== nextProps.id){
-      console.log('Next Props ID', nextProps);
       this.getSubCategories(nextProps.id);
     }
   }
@@ -95,12 +93,10 @@ export class SubCategory extends React.Component {
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
                 <figure className="subCatSlider">
-                  <a href={subCatListData.onClickUrl} key={index}>
                     <Link to={routePath}>
                     <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
                     />
                     </Link>              
-                  </a>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">

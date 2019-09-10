@@ -37,9 +37,7 @@ class BestSeller extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Best Seller ERROR');
       });
-    console.log('ERROR');
   }
 
   componentDidMount() {
@@ -50,7 +48,6 @@ class BestSeller extends React.Component {
     const {
       bestSellerData: { productList = [], title = '' },
     } = this.state;
-    console.log('dididi --- ',title)
     const settings = {
       dots: false,
       infinite: false,
@@ -85,7 +82,6 @@ class BestSeller extends React.Component {
         },
       ],
     };
-    console.log('mmsmsms -- ', this.state.bestSellerData);
     return (
       <div className="bestSeller">
         <h3 className="title">{title}</h3>
@@ -99,14 +95,28 @@ class BestSeller extends React.Component {
                 <figure key={index} className="bsSlides">
                   {/* <a href={sellerItemData.onClickUrl}> */}
                   <Link to={routePath}>
-                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.uniqueID} />
+                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.imageAltText} />
                   </Link>
                   {/* </a> */}
                   <figcaption className="bsDetails">
                     <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
-                      <span className="discPrice">{sellerItemData.offerPrice !=="" ? `₹${formatPrice(sellerItemData.offerPrice)}` : null }</span>
-                      <span className='actualPriceLine'><span className="actualPrice">{sellerItemData.actualPrice !== "" ? `₹${formatPrice(sellerItemData.actualPrice)}` : null}</span></span>
+						{sellerItemData.actualPrice <= sellerItemData.offerPrice ? 
+							<span className="discPrice">
+								{sellerItemData.actualPrice !=="" ? `₹${formatPrice(sellerItemData.actualPrice)}` : null }
+							</span>
+						:
+						<>
+						<span className="discPrice">
+							{sellerItemData.offerPrice !=="" ? `₹${formatPrice(sellerItemData.offerPrice)}` : null }
+						</span>
+						<span className='actualPriceLine'>
+							<span className="actualPrice">
+							{sellerItemData.actualPrice !== "" ? `₹${formatPrice(sellerItemData.actualPrice)}` : null}
+							</span>
+						</span>
+						</>
+						}
                     </h2>
                     {sellerItemData.emiData !== '' ? <p className="emi">
                       EMI Starting From
