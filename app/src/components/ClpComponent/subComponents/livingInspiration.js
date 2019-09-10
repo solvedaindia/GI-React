@@ -1,10 +1,10 @@
 import React from 'react';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/clpContainer/clpContainer.scss';
-// import themeData from '../../../data/themeData.json';
 import {
 	espotAPI
 } from '../../../../public/constants/constants';
+import {THEME_DATA} from '../../../constants/app/clpConstants';
 
 class LivingTheme extends React.Component {
   state = {
@@ -33,17 +33,7 @@ class LivingTheme extends React.Component {
   render() {
     return (
       <div className="clpTheme testCLP">
-        theme data
-        {/* <h3>{themeData.data.themeData.title}</h3>
-        <p>{themeData.data.themeData.subTitle}</p>
-        <div
-          dangerouslySetInnerHTML={{ __html: themeData.data.themeData.content }}
-        /> */}
-        {/* {!isLoading ? (
-			<div dangerouslySetInnerHTML={{ __html: homePageData.themeData.data.ThemeData.con }} />
-			) : (
-			<div>Something Went Wrong</div>
-			)} */}
+       {THEME_DATA}
       </div>
     );
   }

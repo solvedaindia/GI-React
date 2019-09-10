@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {imagePrefix} from '../../../public/constants/constants';
 import '../../../public/styles/clpContainer/themeData.scss';
+import {VIEW_DETAILS } from '../../constants/app/clpConstants';
+
 class ThemeData extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +28,7 @@ class ThemeData extends React.Component {
                 <div className='prodDetails'>
                     <h2 className='prodNAme'>{itemDetail.productName}</h2>
                     <p className='price'>₹{itemDetail.offerPrice}</p>
-                    <Link to={routePath}><p className='link'>View Details</p></Link>
+                    <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>
             </div>
         )	

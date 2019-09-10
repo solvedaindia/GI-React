@@ -1,4 +1,5 @@
 import React from 'react';
+import {FRESH_CONTENT} from '../../../constants/app/clpConstants';
 
 class FreshContent extends React.Component {
   render() {
@@ -8,7 +9,7 @@ class FreshContent extends React.Component {
           <div className='row'>
             <div className='col-md-12'>
               <div className='fresh-heading clearfix'>
-                <h4 className='heading'>Fresh content</h4><a className='seeAll' href='javascript:void(0)'>See all</a>
+                <h4 className='heading'>{FRESH_CONTENT}</h4><a className='seeAll' href='javascript:void(0)'>See all</a>
               </div>
             </div>
 
