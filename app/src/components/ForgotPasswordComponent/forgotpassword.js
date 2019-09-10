@@ -149,7 +149,6 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
-      //this.toggle();
     }
 
     this.setState({
@@ -177,7 +176,6 @@ class Forgotpassowrd extends React.Component {
     
     return (
       <>
-        {/* <p onClick={this.toggle}>Forgot Password?</p> */}
         <Modal
           show={this.state.modal}
           onHide={this.toggle}

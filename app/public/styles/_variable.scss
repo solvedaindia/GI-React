@@ -62,7 +62,7 @@ $font-medium:CeraGIMedium,sans-serif;
 $screen-lg-desk-width: 1281px;
 $screen-md-desk-width: 1280px;
 
-$screen-md-desk-width: 1025px;
+$screen-sm-md-desk-width: 1025px;
 $screen-sm-desk-width: 1024px;
 
 $screen-lg-tablet-width: 993px;
@@ -124,7 +124,9 @@ $screen-xs-mobile-width: 320px;
     }
  }
  
-// tablet devices - 768 only
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads
+*/
 @mixin mix-md-ipad {
     @media (min-width: #{$screen-md-tablet-width}) and (max-width: #{$screen-sm-desk-width}) {
         @content;
@@ -147,15 +149,20 @@ $screen-xs-mobile-width: 320px;
     }
  }
 
- // Medium - Large devices, Mac
+
+ /* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops, Medium - Large devices, Mac
+*/
  @mixin mix-md-lg {
-    @media (min-width: #{$screen-md-desk-width}) and (max-width: #{$screen-md-desk-width}) { 
+    @media (min-width: #{$screen-sm-md-desk-width}) and (max-width: #{$screen-md-desk-width}) { 
         @content;
     }
  }
  
  
- // Extra large devices
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
  @mixin mix-xl {
     @media (min-width: #{$screen-lg-desk-width}) {
         @content;

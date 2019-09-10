@@ -9,6 +9,8 @@ import { RemoveProduct } from '../../containers/PlpContainer/actions';
 import {
   imagePrefix
 } from '../../../public/constants/constants';
+import {REMOVE, VIEW_PRODUCT} from '../../constants/app/compareConstants'
+
 
 class TopContainer extends React.Component {
     constructor(props) {
@@ -58,14 +60,13 @@ class TopContainer extends React.Component {
         <div className='product-desc'>
           <h2 className='product-name'>{this.props.product.productName} </h2>
           <p className='description-text'>{this.props.product.shortDescription}</p>
-          {/* {this.props.product.price[1].value ? <Price actualPrice={this.props.product.price[0].value} offerPrice={this.props.product.price[1].value} /> : 0} */}
           <Price actualPrice={this.props.product.actualPrice} offerPrice={this.props.product.offerPrice} />
           <p className='emi-desc'>{this.props.product.emiData ? `EMI Starting from ₹${this.props.product.emiData}` : null }</p>
         </div> 
     
         <div className='remove-box'>
-          <button className='remove-btn' onClick={this.removePrd}>Remove</button>
-          <Link to={routePath} className='view-product-btn'>View Product</Link>
+          <button className='remove-btn' onClick={this.removePrd}>{REMOVE}</button>
+          <Link to={routePath} className='view-product-btn'>{VIEW_PRODUCT}</Link>
         </div> 
     
         <div className='product-attr'>

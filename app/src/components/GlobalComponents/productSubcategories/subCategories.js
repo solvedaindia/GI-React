@@ -26,8 +26,6 @@ class SubCategories extends React.Component {
       arrows: true,
       prevArrow: prevArrowImg,
       nextArrow: nextArrowImg,
-      // prevArrow,
-      // nextArrow,
       responsive: [
         {
           breakpoint: 1024,
@@ -90,8 +88,6 @@ class SubCategories extends React.Component {
           <div className="row">
             <div className="col-md-12 text-center">
               <div className="headingText">
-                {/* <h3 className="heading">Table</h3> */}
-                {/* <p className="total-products">(38 Product)</p> */}
               </div>
             </div>
           </div>
@@ -102,5 +98,4 @@ class SubCategories extends React.Component {
   }
 }
 
-// export default SubCategories;
 export default withRouter(SubCategories);
