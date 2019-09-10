@@ -17,6 +17,8 @@ import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
+
+// import Imgblack1 from '../../../public/images/store/kitchen-galleries-black.png';
 const NUMB_REG = /^\d+$/;
 const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
 
@@ -466,7 +468,9 @@ class StoreLocator extends React.Component {
                                     </figcaption>
                                 </li>
                                 <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchens', 'kitchen')}>
-                                    <figure className='typeList'><img src={Img3} className='storeImg' alt='Store Information'/></figure>
+                                    <figure className='typeList'><img src={Img3} className='storeImg grey' alt='Store Information'/>
+                                    {/* <img src={Imgblack1} className='storeImg black' alt='Store Information' alt='Store Information'/> */}
+                                    </figure>
                                     <figcaption className="storetext">
                                         Kitchens
                                     </figcaption>
@@ -474,7 +478,7 @@ class StoreLocator extends React.Component {
                                 <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Business Furniture', 'b2b')}>
                                     <figure className='typeList'><img src={Img4} className='storeImg' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
-                                        Office/ Business Furniture
+                                        Office/Business Furniture
                                     </figcaption>
                                 </li>
                             </ul>
