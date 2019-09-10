@@ -10,6 +10,8 @@ import close from '../../../public/images/close.svg';
 import Link from 'react-router-dom/Link';
 import TopContainer from './topContainer'
 import DelContainer from './delivery'
+import {WIDTH, HEIGHT, DEPTH, DELIVERY,DIMENSIONS, SPECIFICATIONS, PAYMENT } from '../../constants/app/compareConstants'
+
 class CompPrd extends React.Component {
     constructor(props) {
       super(props);
@@ -38,15 +40,15 @@ class CompPrd extends React.Component {
       this.props.data.map((elem, index) => {
         width.push(
             <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ? <div><span className="col-md-5">Width</span> <span className="col-md-7">{elem.width}</span></div> : <p>{elem.width}</p>}
+              {index == 0 ? <div><span className="col-md-5">{WIDTH}</span> <span className="col-md-7">{elem.width}</span></div> : <p>{elem.width}</p>}
             </Col>)
         heights.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Height</span> <span className="col-md-7">{elem.height}</span></div> : <p>{elem.height}</p>}
+              {index == 0 ?  <div><span className="col-md-5">{HEIGHT}</span> <span className="col-md-7">{elem.height}</span></div> : <p>{elem.height}</p>}
             </Col>)
         Depth.push(
           <Col className={index == 0 ?"col-md-6 attr-dims" : index ==1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
-              {index == 0 ?  <div><span className="col-md-5">Depth</span> <span className="col-md-7">{elem.depth}</span></div> : <p>{elem.depth}</p>}
+              {index == 0 ?  <div><span className="col-md-5">{DEPTH}</span> <span className="col-md-7">{elem.depth}</span></div> : <p>{elem.depth}</p>}
             </Col>)
       })
 
@@ -74,24 +76,15 @@ class CompPrd extends React.Component {
       var payments = [];
       var emis = [];
       this.props.data.map(elem => {
-        // if(elem.emiData) {
-        //   emis.push(elem.emiData);
+     
           payments.push(
             <Col xs={12} sm={4} md={4} className='comp-cod-option text-center'>
               <h4>{elem.emiData !== '' && elem.emiData !== null && elem.emiData !== undefined && elem.emiData !== 0 ? 'EMI available': 'EMI not available'}</h4>
             </Col>
           )
-        // }
       });
       return payments;
-      // if(emis.length > 0) {
-      //   return payments;
-      // } else {
-      //   this.setState({
-      //     payment: false
-      //   });
-      //   return '';
-      // }
+     
     }
 
     renderSpecs = () => {
@@ -138,21 +131,21 @@ class CompPrd extends React.Component {
         <div className="compare-product-list">
           <Row>{this.renderProducts()}</Row>
          
-          <Row><h2 className="title-text">Delivery</h2></Row>
+          <Row><h2 className="title-text">{DELIVERY}</h2></Row>
           <Row className="prod-delivery-slot">
             {this.renderDelivery()}
           </Row>
 
           <Row>
-            <h2 className="title-text">Dimensions</h2>
+            <h2 className="title-text">{DIMENSIONS}</h2>
             {this.renderImages()}</Row>
           <div className="dims-detail">{this.renderDims()}</div>
 
-          <Row><h2 className="title-text">Specifications</h2></Row>
+          <Row><h2 className="title-text">{SPECIFICATIONS}</h2></Row>
           {this.renderSpecs()}
           
           {this.state.payment ? <Row>
-            <h3 className="title-text">Payment</h3>
+            <h3 className="title-text">{PAYMENT}</h3>
             {this.renderPayment()}
           </Row> : ''}
         </div>
