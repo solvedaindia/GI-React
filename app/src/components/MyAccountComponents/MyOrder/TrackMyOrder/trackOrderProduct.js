@@ -36,13 +36,13 @@ class TrackOrderProduct extends React.Component {
     if (shipmentData.expectedDeliveryDate !== '') {
       this.setState({
         dsNameTag: 'Delivery on: ',
-        dsDateTag: shipmentData
+        dsDateTag: shipmentData.expectedDeliveryDate.split(',')[1]
       })
     }
     else if (shipmentData.expectedInstallationDate !== '') {
         this.setState({
           dsNameTag: 'Installation On: ',
-          dsDateTag: shipmentData
+          dsDateTag: shipmentData.expectedInstallationDate.split(',')[1]
         })
     }
 
@@ -72,9 +72,9 @@ class TrackOrderProduct extends React.Component {
                   <span className="textval">{this.props.shipmentDataPro.quantity}</span>
                 </div>
 
-                <div className="delivery quantity">
-                <span className="heading">{this.state.dsNameTag}</span>
-                <span className="textval">{this.state.dsDateTag}</span>
+                <div className="delivery quantity"> 
+                {this.state.dsNameTag !== null ? <span className="heading">{this.state.dsNameTag}</span> : null}
+                {this.state.dsDateTag !== null ? <span className="textval">{this.state.dsDateTag}</span> : null}
                 </div>
 
               </div>

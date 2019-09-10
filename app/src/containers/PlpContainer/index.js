@@ -608,7 +608,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {plpData.length === 0 || this.state.isMobile ? null : (
+                  {plpData.length === 0 ? null : (
                     <Sort sortingIndexPro={this.state.plpSorting} />
                   )}
                 </div>
