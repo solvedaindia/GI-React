@@ -143,7 +143,7 @@ class Invoice extends React.Component {
 							</div>
 						</div>
 						
-                        <div className="invoiceContainer itemsection" style={{border:'0', width: '90%', margin: 'auto', float: 'left'}}>
+                        <div className="invoiceContainer itemsection" style={{border:'0', width: '100%', margin: '40px 0 0 0', float: 'left'}}>
 							<div className="itemsection invoiceheading" style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                             <div style={{width: '10%', margin: 'auto', float: 'left'}}>Item Id</div>
 									<div style={{width: '13%', margin: 'auto', float: 'left'}}>Description</div>
