@@ -145,26 +145,26 @@ class Invoice extends React.Component {
 						
                         <div className="invoiceContainer itemsection" style={{border:'0', width: '90%', margin: 'auto', float: 'left'}}>
 							<div className="itemsection invoiceheading" style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
-                            <div style={{width: '13%', margin: 'auto', float: 'left'}}>Item Id</div>
-									<div style={{width: '30%', margin: 'auto', float: 'left'}}>Item Description</div>
-									<div style={{width: '10%', margin: 'auto', float: 'left'}}>Item HsnCode</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>Item Price</div>
-                                    <div style={{width: '7%', margin: 'auto', float: 'left'}}>Quantity</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>Cgst Amount</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>sgstAmount</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>itemTotalAmount</div> 
+                            <div style={{width: '10%', margin: 'auto', float: 'left'}}>Item Id</div>
+									<div style={{width: '13%', margin: 'auto', float: 'left'}}>Description</div>
+									<div style={{width: '13%', margin: 'auto', float: 'left'}}>HSN Code</div>
+                                    <div style={{width: '13%', margin: 'auto', float: 'left'}}>Item Price</div>
+                                    <div style={{width: '12%', margin: 'auto', float: 'left'}}>Quantity</div>
+                                    <div style={{width: '13%', margin: 'auto', float: 'left'}}>CGST Amount</div>
+                                    <div style={{width: '12%', margin: 'auto', float: 'left'}}>sgstAmount</div>
+                                    <div style={{width: '14%', margin: 'auto', float: 'left'}}>Total Amount</div> 
                             </div>
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
                                 return (
                                     <div className="itemList" index={`${index}-item`}>
-                                        <div  style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.totalPackageQuantity}</div>
-                                        <div style={{width: '30%', margin: 'auto', float: 'left'}}>{itemList.itemDesc}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
-                                        <div style={{width: '7%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.cgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.sgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemTotalAmount}</div>
+                                        <div  style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
+                                        <div style={{width: '13%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
+                                        <div style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
+                                        <div style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
+                                        <div style={{width: '12%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
+                                        <div style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.cgstAmount}</div>
+                                        <div style={{width: '12%', margin: 'auto', float: 'left'}}>{itemList.sgstAmount}</div>
+                                        <div style={{width: '14%', margin: 'auto', float: 'left'}}>{itemList.itemTotalAmount}</div>
                                         
 
                                         {itemList.itemTotalAmount}
