@@ -173,6 +173,8 @@ class MyOrder extends React.Component {
 
   render() {
     console.log('is Show TrackOrder --- ', this.state.isTrackOrder)
+    this.state.isOnGoingOrderShown = false;
+    this.state.isPastOrdeShown = false;
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
