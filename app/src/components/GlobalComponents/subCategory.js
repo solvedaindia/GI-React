@@ -9,7 +9,7 @@ import {
   accessToken,
   catID,
 } from '../../../public/constants/constants';
-import '../../../public/styles/subCat/subCat.scss';
+import '../../../public/styles/featuredCat/featuredCat.scss';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -83,7 +83,7 @@ export class SubCategory extends React.Component {
       ],
     };
     return (
-      <div className="subCat">
+      <div className="featuredCat">
         <h2 className="title">In the Spotlight</h2>
         <Slider {...settings}>
           {!!subCatData &&

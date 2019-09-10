@@ -7,7 +7,7 @@ import {
   plpSubCatAPI,
   imagePrefix
 } from '../../../public/constants/constants';
-import '../../../public/styles/subCat/subCat.scss';
+import '../../../public/styles/featuredCat/featuredCat.scss';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -52,13 +52,12 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
-      speed: 200,
+	  speed: 200,
+	  infinite: false,
       slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 2000,
-      //centerMode: false,
       responsive: [
         {
           breakpoint: 1024,
@@ -88,7 +87,7 @@ export class SubCategory extends React.Component {
       ],
     };
     return (
-      <div className="subCat">
+      <div className="featuredCat">
         {/* <h1 className="title">Featured Category</h1> */}
         <Slider {...settings}>
           {!!subCatData &&

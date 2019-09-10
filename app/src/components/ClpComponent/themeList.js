@@ -39,6 +39,7 @@ class ThemeListData extends React.Component {
                         handlePopUp = {this.handlePopUp.bind(this, itemDetail, index)}
                         closePopUp = {this.closePopUp.bind(this, itemDetail, index)}
                         selectedIndex = {index === this.state.index}
+                        key = {`${index}-theme`}
                     />
                 )
             })}

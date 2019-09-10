@@ -58,30 +58,30 @@ class LivingTheme extends React.Component {
     return (
 		!!themeData && 
 		<div className="clpTheme">
-			<div class='clp-short-desc'>
+			<div className='clp-short-desc'>
 				<h2 className='title'>{themeData.title}</h2>
 				<p className='desc'>{themeData.description}</p>
 			</div>
 			{!isMobile() ?
-				themeData.recoImgArray.map((themeItem) => {
+				themeData.recoImgArray.map((themeItem, index) => {
 					return(
-						<div className='content-childTheme'>
+						<div className='content-childTheme' key={index}>
 							<figure>
 								<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
-								<ThemeListData themeItem = { themeItem } />
+								<ThemeListData themeItem = { themeItem } key={`${index}-livingTheme`}/>
 							</figure>
 						</div>
 					)
 				})
 				:
 				<Slider {...settings}>
-					{themeData.recoImgArray.map((themeItem) => {
+					{themeData.recoImgArray.map((themeItem, index) => {
 						return(
 							<div className='content-childTheme'>
 								<figure>
 									<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
 								</figure>
-								<ThemeListData themeItem = { themeItem } />
+								<ThemeListData themeItem = { themeItem } key={`${index}-livingTheme`}/>
 							</div>
 						)
 					})}
