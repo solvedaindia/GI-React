@@ -120,8 +120,10 @@ class Wishlist extends React.Component {
     
     if (appCookie.get('wishListUniqueId') !== "" && appCookie.get('isLoggedIn') === 'true') {
           const cookieData = appCookie.get('wishListUniqueId');
-          appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-          document.getElementById("wishlistBtnId_"+cookieData).click();
+          if (document.getElementById("wishlistBtnId_"+cookieData)) {
+            appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+            document.getElementById("wishlistBtnId_"+cookieData).click();
+          }
     }
   }
 

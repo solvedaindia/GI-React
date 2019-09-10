@@ -26,6 +26,7 @@ export class ComparePageContainer extends React.Component {
       compCount: null,
       compWidgetData: [],
       loading: true,
+      isRouteUpdated: false
     }
   }
 
@@ -100,13 +101,20 @@ export class ComparePageContainer extends React.Component {
     this.state.compWidgetData.reverse().map((skuId, index) => {
       searchParam += `${skuId}${this.state.compWidgetData.length === index + 1 ? '' : '/'}`
     })
+    this.setState({
+      isRouteUpdated: true
+    })
     params.set(`ids`, searchParam);
     let finalMap = params.toString();
     this.props.history.push({ search: finalMap });
   }
 
   goBack = () => {
-    this.props.history.goBack();
+    if (this.state.isRouteUpdated === true) {
+      window.history.go(-2)
+    } else {
+      window.history.go(-1)
+    }
   }
 
   renderPrd = () => {
@@ -245,7 +253,6 @@ export class ComparePageContainer extends React.Component {
   }
 
   render() {
-    console.log('Commmmm --- ', this.state.data)
     return (
       <div className="container compare-product">
         <Row>
