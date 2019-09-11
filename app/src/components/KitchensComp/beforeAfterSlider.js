@@ -25,7 +25,6 @@ class BeforeAfter extends Component {
     apiManager
     .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('response of whatgoes banner', response)
         const {data} = response || {}
         this.setState({
           beforeImage: data && data.data.BeforeImg.imageSrc,
@@ -35,16 +34,13 @@ class BeforeAfter extends Component {
           isLoading: false,
           imageHeading:  data && data.data.imgHeading
         });
-        console.log('b4after Data',  data.data.BeforeImg.imageSrc);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
   
 
@@ -61,7 +57,6 @@ beforeSlide = () => {
   render () {
     const beforeImg = imagePrefix + this.state.beforeImage
     const afterImg = imagePrefix + this.state.afterImage
-	console.log('iamges check', afterImg)
     const before = {beforeImg}
     const after = {afterImg}
  

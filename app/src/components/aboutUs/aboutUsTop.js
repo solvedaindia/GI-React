@@ -22,7 +22,6 @@ class AboutTopMost extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('respo', response)
         const {data} = response || {};
         this.setState({
           pageLayoutEspot: data && data.data,
@@ -34,7 +33,6 @@ class AboutTopMost extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 
@@ -48,7 +46,6 @@ class AboutTopMost extends React.Component {
     return (
 		!!pageLayoutEspot && (
 			<div className="" id={index}>
-				{/* <h1 className="title">{pageLayoutEspot.title}</h1> */}
 				<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 			</div>
 		)

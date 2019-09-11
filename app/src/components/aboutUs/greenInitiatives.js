@@ -31,9 +31,7 @@ export default class GreenInitiatives extends Component {
     apiManager
     .get(espotAPI + this.state.espotName)
     .then(response => {
-        console.log('aboutUsGreenInitiativesApi', response)
         const {data} = response || {}
-        console.log('aboutUsGreenInitiativesApi Title', data.data.bannerList);
          this.setState({
               title:data.data.title,
               slides:data.data.bannerList,
@@ -42,7 +40,6 @@ export default class GreenInitiatives extends Component {
       .catch(error => {
         this.setState({
         });
-        console.log('getOurProcessData',error);
       });
   }
 

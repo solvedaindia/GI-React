@@ -45,16 +45,13 @@ handleclick = event => {
     sub_title:data[index].sub_title,
     selected_index:index
   });
-  console.log('getImageOnArrowClick',this.state);
 }
 
 getImageOnArrowClick = (e) =>{
 
   const {data} = this.state;
-  console.log('getImageOnArrowClick',this.state);
   let index= this.state.selected_index;
   index = index+1;
-  console.log('getImageOnArrowClick Index',index);
   if(index>=this.state.data.length)
   {
     index =0;
@@ -76,7 +73,6 @@ getImageOnArrowClick = (e) =>{
     sub_title:data[index].sub_title,
     selected_index:index
   });
-  console.log('getImageOnArrowClick',this.state);
 
 }
 
@@ -85,9 +81,7 @@ getOurProcessData()
   apiManager
   .get(espotAPI + this.state.espotName)
   .then(response => {
-    console.log('getOurProcessData', response)
     const {data} = response || {}
-    console.log('getOurProcessData Title', data.data.processData);
     this.setState({
       component_title:data.data.title,
       data :data.data.processData,
@@ -97,19 +91,16 @@ getOurProcessData()
       sub_title:data.data.processData[0].sub_title
 
     });
-    console.log('getOurProcessData state',this.state);
   })
   .catch(error => {
     this.setState({
     });
-    console.log('getOurProcessData',error);
   });
 }
 
 componentDidMount(){
 
   const {data,selected_index} = this.state;
-  console.log('componentDidMount',data);
   this.getOurProcessData()
 
 }
