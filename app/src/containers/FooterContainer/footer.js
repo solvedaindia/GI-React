@@ -77,7 +77,7 @@ class FooterContainer extends React.Component {
               )}
           </footer>
         )}
-        <ContentEspot espotName = { 'GI_FOOTER_END' } />
+        <ContentEspot espotName = { 'GI_PIXEL_FOOTER_END' } />
       </>
     );
   }
