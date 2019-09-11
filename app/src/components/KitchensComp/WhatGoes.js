@@ -27,7 +27,6 @@ class WhatGoes extends React.Component {
     apiManager
     .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('response of whatgoes banner', response)
         const {data} = response || {}
         this.setState({
           whatGoesSlider: data && data.data.bannerList,
@@ -37,16 +36,13 @@ class WhatGoes extends React.Component {
           isLoading: false,
           imageHeading:  data && data.data.imgHeading
         });
-        console.log('whatgoes Data',  data.data.bannerList[0].imgDesc);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
   
 

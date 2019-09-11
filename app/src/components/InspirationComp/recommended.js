@@ -24,7 +24,6 @@ export default class Recommended extends Component {
     apiManager
     .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('response of kitchen hall', response)
         const {data} = response || {}
         this.setState({
           recommendedSlider: data && data.data.bannerList,
@@ -32,16 +31,13 @@ export default class Recommended extends Component {
           description:data && data.data.desc,
           isLoading: false,
         });
-        console.log('hall Data', data.data.desc);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
 
   componentDidMount() {

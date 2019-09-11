@@ -27,7 +27,6 @@ class AlwaysRemember extends React.Component {
         
     onHandleClick = event => {
         if(event.target.name == 1) {
-            console.log('img1 is clicked')
             this.setState({
                 img_url:this.state.imageFirstSrc,
                 buttonFirst:!this.state.buttonFirst,
@@ -36,7 +35,6 @@ class AlwaysRemember extends React.Component {
             })
         }
        else if(event.target.name == 2) {
-        console.log('img2 is clicked')
         this.setState({
           img_url: this.state.imageSecondSrc,
           buttonSecond:!this.state.buttonSecond,
@@ -45,7 +43,6 @@ class AlwaysRemember extends React.Component {
       })
     }
     else if(event.target.name == 3) {
-      console.log('img3 is clicked')
       this.setState({
           img_url: this.state.imageThirdSrc,
           buttonThird:!this.state.buttonThird,
@@ -59,7 +56,6 @@ class AlwaysRemember extends React.Component {
     apiManager
     .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('response of remember', response)
         const {data} = response || {}
         this.setState({
           imageFirstSrc: data && data.data.KitchenImg.imageSrc,
@@ -70,16 +66,13 @@ class AlwaysRemember extends React.Component {
           imageHeading:  data && data.data.imgHeading,
           img_url: data && data.data.KitchenImg.imageSrc
         });
-        console.log('remeber Data',  data.data.KitchenImg.imageSrc);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
   
 

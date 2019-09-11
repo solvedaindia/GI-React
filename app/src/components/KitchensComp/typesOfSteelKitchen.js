@@ -42,7 +42,6 @@ export default class SteelKitchenTypes extends Component {
     apiManager
       .get(typesOfWardrobesAPI)
       .then(response => {
-        console.log('response of wardrobes types', response)
         const {data} = response || {}
         this.setState({
           wardrobeSlider: data && data.data.bannerList,
@@ -51,16 +50,13 @@ export default class SteelKitchenTypes extends Component {
           type: data && data.data.type,
           isLoading: false,
         });
-        console.log('types Data',data && data.data.title);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
   
 

@@ -29,7 +29,6 @@ class WillowKitchenBanner extends React.Component {
     apiManager
     .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('response of wardrobes banner', response)
         const {data} = response || {}
         this.setState({
           kitchenSlider: data && data.data.bannerList,
@@ -38,16 +37,13 @@ class WillowKitchenBanner extends React.Component {
           type: data && data.data.type,
           isLoading: false,
         });
-        console.log('banner Data', data.data.title);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
   
 

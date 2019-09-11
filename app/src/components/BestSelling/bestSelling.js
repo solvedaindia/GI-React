@@ -93,11 +93,11 @@ class BestSeller extends React.Component {
 
               return (
                 <figure key={index} className="bsSlides">
-                  {/* <a href={sellerItemData.onClickUrl}> */}
+               
                   <Link to={routePath}>
                     <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.imageAltText} />
                   </Link>
-                  {/* </a> */}
+           
                   <figcaption className="bsDetails">
                     <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
