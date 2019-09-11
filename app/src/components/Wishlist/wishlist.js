@@ -50,11 +50,7 @@ class wishListCount extends React.Component {
       this.setState({ isWelcomeBack: true });
     }
 
-    // const token = appCookie.get('isLoggedIn');
-    // console.log('Testest', token);
-    // appCookie.get('isLoggedIn')
-    //   ? alert('Take user to wishlist page')
-    //   : this.setState({isWelcomeBack: true})
+  
   }
 
   componentWillReceiveProps(nextProps) {
@@ -123,4 +119,3 @@ export default connect(
   mapStateToProps,
   { updatetWishListCount },
 )(wishListCount);
-// export default wishListCount;

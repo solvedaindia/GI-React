@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../../public/styles/static-pages/consultForm.scss';
-// import '../../../public/styles/static-pages/warobes.scss';
 import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import {BOOK_CONSULTATION,DUMMY_TEXT,SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER} from '../../constants/app/primitivesConstants';
 
 import {
   regexEmail,
@@ -41,7 +41,6 @@ class ConsultForm extends React.Component {
 
 handleChange  = e => {
   const {name, value} = e.target; //gets info from Form
-  console.log('data', e.target)
   if(e.target.name =="name")
   {
     this.setState({
@@ -74,7 +73,6 @@ handleChange  = e => {
     
     [name] : value
    })
-   console.log("name checks", [name])
 
 }
 
@@ -154,7 +152,6 @@ handleValidation=(obj, errorType)=>{
     isValidate = false;
   }
   else if (isEmailEntered && !regexEmail.test(obj.email)) {
-    console.log("log_ali", 'Invalid email')
     this.setState({
       errorMessageEmail: 'Please enter valid Email Id',
     });
@@ -164,7 +161,6 @@ handleValidation=(obj, errorType)=>{
 
   // For drop option validation
   if (obj.index==0) {
-    console.log("log_ali", 'Select Option')
     this.setState({
       errorMessageDropOption: 'Please select an option',
     });
@@ -174,14 +170,12 @@ handleValidation=(obj, errorType)=>{
 
   // For mobile validation
   if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
-    console.log("log_ali", 'Mobile field is required')
     this.setState({
       errorMessageMobile: 'Mobile number or Email is required',
     });
     isValidate = false;
   }
   else if (isMobileEntered && !regexMobileNo.test(obj.mobileNumber)) {
-    console.log("log_ali", 'Invalid mobile')
     this.setState({
       errorMessageMobile: 'Please enter valid Mobile Number',
     });
@@ -205,7 +199,6 @@ handleValidation=(obj, errorType)=>{
         message:this.state.message,
        
         }
-        console.log('api_request', data);
 		apiManager.post(consultFormApi, data).then((res) => {
       alert('Thank you for the feed back')
       this.clearData();
@@ -214,14 +207,12 @@ handleValidation=(obj, errorType)=>{
        error: error
       });
       alert('Somthing went wrong')
-			console.log('api_resposne_error', error.response.data.error.error_message);
 		});
   }
   getConsultDropDownApi = ()=> {
     apiManager
       .get(consultGetApi)
       .then(response => {
-        console.log("ressss", response)
         const {data} = response || {};
         this.setState({
           dropDownArr: data.data.consultationData
@@ -296,17 +287,15 @@ onDropdownSelected = (e) => {
       }
       
 
-      console.log('test=>', this.state)
         return (
           <form className='consultForm'>
-            <h2 className="title">Book a consultation</h2>
-              <p className="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor. </p>
+            <h2 className="title">{BOOK_CONSULTATION}</h2>
+              <p className="desc">{DUMMY_TEXT} </p>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="name">Full Name</label>
+                      <label className="form-labeled" htmlFor="name">{FULL_NAME}</label>
                       <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required  />
                       {errorMessageName}
                     </div>
@@ -315,7 +304,7 @@ onDropdownSelected = (e) => {
                 <div className="col-md-6">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="email">Email</label>
+                      <label className="form-labeled" htmlFor="email">{EMAIL}</label>
                       <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
                       {errorMessageEmail}
                     </div>
@@ -326,9 +315,9 @@ onDropdownSelected = (e) => {
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="dropdown">What Would you Like to Do</label>
+                      <label className="form-labeled" htmlFor="dropdown">{WHAT_YOU_LIKE}</label>
                       <select  name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
-                        <option value='Select an option' selected='true'>Select an option</option>
+                        <option value='Select an option' selected='true'>{SELECT_OPTION}</option>
                          {this.createSelectItems()}
                       </select>
                       {errorMessageOption}
@@ -339,7 +328,7 @@ onDropdownSelected = (e) => {
                 <div className="col-md-6">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="number">Mobile Number</label>
+                      <label className="form-labeled" htmlFor="number">{MOBILE_NUMBER}</label>
                       <input className="form-control"  onChange={this.handleChange}  pattern="[0-9]*" value={mobileNumber} id="mobileNumber" type="mobile" name="mobileNumber" maxlength="10" required/>
                       {errorMessageMobile}
                     </div>
@@ -350,7 +339,7 @@ onDropdownSelected = (e) => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <label className="form-labeled" htmlFor="massage">Message</label>
+                      <label className="form-labeled" htmlFor="massage">{MESSEGE}</label>
                       <input className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                       {errorMessageDescription}
                     </div>
@@ -361,7 +350,7 @@ onDropdownSelected = (e) => {
                 <div className="col-md-12">
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
-                      <button type="button" onClick={this.submitForm} className="btn btn-primary btn-submit">Send</button>
+                      <button type="button" onClick={this.submitForm} className="btn btn-primary btn-submit">{SEND}</button>
                     </div>
                   </div>
                 </div>

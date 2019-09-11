@@ -8,6 +8,7 @@ import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
 import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
+import {SUGGESTIONS} from '../../constants/app/primitivesConstants';
 
 import { Route, NavLink, Link, withRouter } from 'react-router-dom';
 
@@ -52,7 +53,6 @@ class SearchBar extends React.Component {
             });
           })
           .catch(error => {
-            console.log(error.message);
           });
       } else {
         document.removeEventListener('click', this.handleOutsideClick, false);
@@ -83,10 +83,8 @@ class SearchBar extends React.Component {
   onSearchResultClick(e) {
     const text = e.target.value.trim();
     if (text !== '') {
-      console.log('mmmmm --- ',e.target.value);
       
       this.props.plpReduxStateReset();
-      console.log('dd -- ', this.props);
       this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
       this.setState({
         searchData: [],
@@ -97,7 +95,6 @@ class SearchBar extends React.Component {
   }
 
   onLinkNavigation = (e) => {
-    console.log('dd -- ', e.target.name);
     document.getElementById("searchInput").value=e.target.name;
     this.props.plpReduxStateReset();
     this.setState({
@@ -131,7 +128,7 @@ class SearchBar extends React.Component {
             { searchData.length > 0 && 
                 <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
                     <ul className='auto-search'>
-                    <li className='list'><a className='link' href='#'><strong>Suggestions</strong></a></li>
+                    <li className='list'><a className='link' href='#'><strong>{SUGGESTIONS}</strong></a></li>
                         { searchData.map((item, index) => {    
                             const searchItem = document.getElementById("searchInput").value;
                             if (index < 6) {								
