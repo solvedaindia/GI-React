@@ -48,7 +48,6 @@ class Wishlist extends React.Component {
     }
 
     const wishlistArr = getOnlyWishlistUniqueIds();
-    console.log('isWishlist Added --- ', this.props.isInWishlistPro);
     if (getCookie('isLoggedIn') === 'true') {
       if (wishlistArr.includes(this.props.uniqueId)) {
         this.removeFromWishlistAPI();

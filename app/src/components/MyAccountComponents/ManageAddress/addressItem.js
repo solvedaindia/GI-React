@@ -7,6 +7,7 @@ import apiManager from '../../../utils/apiManager';
 import DeletePopup from './deletePopup';
 import {isMobile} from '../../../utils/utilityManager';
 import {DELETE, SET_DEFAULT, EDIT, DEF_ADD} from '../../../constants/app/myAccountConstants';
+import appCookie from '../../../utils/cookie';
 
 class AddressItem extends React.Component {
   state = {
@@ -43,7 +44,6 @@ class AddressItem extends React.Component {
   }
 
   setAsDefafultBtnClicked() {
-    console.log('setAsDefafultBtnClicked');
     const data = {
       name: this.props.addressData.name,
       phone_number: this.props.addressData.phoneNumber,
@@ -54,7 +54,7 @@ class AddressItem extends React.Component {
       state: this.props.addressData.state,
       default: String(true),
     };
-    console.log('Add Address  ----  ', data);
+   
 
     apiManager
       .post(updateAddressAPI + this.props.addressData.nickName, data)
@@ -64,6 +64,9 @@ class AddressItem extends React.Component {
       .catch(error => {
         console.log('UPDATE Error---', error);
       });
+	  
+	 appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);
+	 appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
   }
 
   render() {
