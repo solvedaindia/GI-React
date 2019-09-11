@@ -6,21 +6,17 @@ import InstallLogo from '../SVGs/installLogo';
 import ExchangeLogo from '../SVGs/exchangeLogo';
 import DeliveryLogo from '../SVGs/deliveryLogo';
 import MWebLogo from '../../components/SVGs/mWebLogo';
-import {CART } from '../../constants/app/cartConstants';
-import {IS_EMPTY } from '../../constants/app/cartConstants';
-import {NOT_CHOSEN_ANY_PRODUCT } from '../../constants/app/cartConstants';
-import {CLICK_ON_LINK } from '../../constants/app/cartConstants';
-import {START_BROWSING } from '../../constants/app/cartConstants';
-import {WHY_GODREG_CHOOSE } from '../../constants/app/cartConstants';
-import {ON_ORDERS_ABOVE } from '../../constants/app/cartConstants';
-import {LEARN_MORE } from '../../constants/app/cartConstants';
-import {FURNITURE_EXCHANGE } from '../../constants/app/cartConstants';
-import {FREE_INSTALLATION } from '../../constants/app/cartConstants';
-
-
-
-
-
+import {CART,
+        IS_EMPTY,
+        NOT_CHOSEN_ANY_PRODUCT,
+        CLICK_ON_LINK,
+        START_BROWSING,
+        WHY_GODREG_CHOOSE,
+        ON_ORDERS_ABOVE,
+        LEARN_MORE,
+        FURNITURE_EXCHANGE,
+        FREE_INSTALLATION 
+      } from '../../constants/app/cartConstants';
 
 class EmptyCart extends React.Component {
   render() {

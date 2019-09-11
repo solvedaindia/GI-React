@@ -17,11 +17,13 @@ import {
 const downArrow = (
   <img
     className="dropdownArrow"
+    alt='dropdown'
     src={require('../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
   />
 );
 const upArrow = (
   <img
+    alt='dropdown'
     className="dropdownArrow"
     src={require('../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
   />

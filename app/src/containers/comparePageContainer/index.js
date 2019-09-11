@@ -238,6 +238,7 @@ export class ComparePageContainer extends React.Component {
       <div className="lazyloading-Indicator">
         <img
           id="me"
+          alt='loader'
           className="loadingImg"
           src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
         />
@@ -260,6 +261,7 @@ export class ComparePageContainer extends React.Component {
             <button to="#" className="back-btn" onClick={this.goBack}><img
               className="backlogoImg"
               src={require('../../../public/images/LeftArrow.svg')}
+              alt='logo'
             /> Go Back</button>
           </Col>
         </Row>

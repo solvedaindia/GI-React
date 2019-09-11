@@ -4,7 +4,7 @@ import { footerApi } from '../../../public/constants/constants';
 import Footer from '../../components/Footer/footer';
 import '../../../public/styles/footerContainer/footerContainer.scss';
 import FooterMobile from './FooterRWD/index';
-
+import ContentEspot from '../../components/Primitives/staticContent';
 class FooterContainer extends React.Component {
   constructor() {
     super();
@@ -77,6 +77,7 @@ class FooterContainer extends React.Component {
               )}
           </footer>
         )}
+        <ContentEspot espotName = { 'GI_FOOTER_END' } />
       </>
     );
   }

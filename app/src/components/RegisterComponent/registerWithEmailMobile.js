@@ -310,6 +310,7 @@ class RegisterWithEmailMobile extends React.Component {
                         >
                           {
                             <img
+                              alt='show'
                               src={require('../../../src/components/SVGs/eye.svg')}
                             />
                           }

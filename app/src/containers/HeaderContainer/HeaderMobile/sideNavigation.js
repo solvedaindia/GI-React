@@ -124,6 +124,7 @@ export class HeaderMobile extends React.Component {
                 <img
                   className="back-nav"
                   src={require('../../../../public/images/nav_back.svg')}
+                  alt='prevImg'
                 />
                 {` ${catName}`}
               </label>
@@ -214,6 +215,7 @@ export class HeaderMobile extends React.Component {
               <img
                 className="back-nav"
                 src={require('../../../../public/images/nav_back.svg')}
+                alt='prevImg'
               />
               {` My Account`}
             </label>
@@ -276,7 +278,7 @@ export class HeaderMobile extends React.Component {
         <li onClick={this.onMyAccountClick.bind(this)} className="navTxt">
           My Account
           <span className="arrow">
-            <img src={require('../../../../public/images/nav_next.svg')} />
+            <img src={require('../../../../public/images/nav_next.svg')} alt='nxtImg'/>
           </span>
         </li>
       );
@@ -313,6 +315,7 @@ export class HeaderMobile extends React.Component {
                     <span className="arrow">
                       <img
                         src={require('../../../../public/images/nav_next.svg')}
+                        alt='nxtImg'
                       />
                     </span>
                   ) : null}
@@ -368,7 +371,7 @@ export class HeaderMobile extends React.Component {
               <img
                 className="nav-bar-img"
                 src={require('../../../../public/images/rwd-assets/menu.svg')}
-                alt="my image"
+                alt="menu"
               />
             </div>
             <div onClick={this.onOverlayClick.bind(this)} className="overlay" />

@@ -624,7 +624,9 @@ export class PlpContainer extends React.Component {
             <img
               id="me"
               className="loadingImg"
-              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+              alt='Lazy Loader'
+              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')
+            }
             />
           </div>
         )}

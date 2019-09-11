@@ -49,7 +49,7 @@ class RWDSingleProduct extends React.Component {
       <>
         <div className="itemBoxTrack clearfix">
           <div className='itemImg'>
-            <img className='imgBox' src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
+            <img className='imgBox' src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} alt='thumbnail'/>
           </div>
           <div className='itemInfo'>
             <div className='productName'>{productData.productName}</div>

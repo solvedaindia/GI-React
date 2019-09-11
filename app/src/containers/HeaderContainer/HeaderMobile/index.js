@@ -15,7 +15,7 @@ import ShareLogo from '../../../components/SVGs/shareIcon';
 import SocialMedia from '../../../utils/socialMedia';
 import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
 import '../../../../public/styles/pdpComponent/pdpComponent.scss';
-const shareImg = <img src={require('../../../../public/images/share.svg')} />;
+const shareImg = <img src={require('../../../../public/images/share.svg')} alt='shareImg'/>;
 import { updateTheRWDHeader } from '../../../actions/app/actions';
 
 class HeaderMobile extends React.Component {
@@ -89,7 +89,7 @@ class HeaderMobile extends React.Component {
       
           <div className="mob-logo">
           
-              {this.state.isOnHome ? <a href="/"><img className='mob-logo-Img' src={require('../../../../public/images/rwd-assets/mob-logo.svg')} alt="my image" onClick={this.myfunction} /></a>: <Link to="/"><img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} /></Link>}
+              {this.state.isOnHome ? <a href="/"><img className='mob-logo-Img' src={require('../../../../public/images/rwd-assets/mob-logo.svg')} alt="logo" onClick={this.myfunction} /></a>: <Link to="/"><img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="logo" onClick={this.myfunction} /></Link>}
             
           </div>
 
@@ -103,7 +103,7 @@ class HeaderMobile extends React.Component {
               >
                 <img
                   src={require('../../../../public/images/rwd-assets/search.svg')}
-                  alt="my image"
+                  alt="search"
                   onClick={this.myfunction}
                 />
               </button>
@@ -141,7 +141,7 @@ class HeaderMobile extends React.Component {
           </div>
           <div className="back-mob-logo">
             <Link to="/">
-              <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="my image" onClick={this.myfunction} />
+              <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} alt="Loader" onClick={this.myfunction} />
             </Link>
           </div>
           <ul className="mob-mini-profile-nav">
