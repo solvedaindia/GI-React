@@ -196,7 +196,7 @@ class HeaderMobile extends React.Component {
 
   render() {
     return (
-      <header className="mobileHeader">{this.state.headerRenderItem}</header>
+      <header className="mobileHeader" id='mob-header'>{this.state.headerRenderItem}</header>
     );
   }
 }
