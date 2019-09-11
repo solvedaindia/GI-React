@@ -23,7 +23,8 @@ import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
 import WhiteLogo from '../SVGs/whiteLogo';
-import {JOIN_US,FULL_NAME, Login, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER} from '../../constants/app/primitivesConstants';
+import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER} from '../../constants/app/primitivesConstants';
+import {PASSWORD} from '../../../constants/app/myAccountConstants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
