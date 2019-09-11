@@ -12,6 +12,7 @@ import { getCookie, getReleventReduxState, isMobile } from '../../utils/utilityM
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
+import {MY_ORDER,MANAGE_ADDRESSES, WELCOME_INTERIO,LOGIN_REGISTER } from '../../constants/app/primitivesConstants';
 
 class UserAccInfo extends React.Component {
   constructor(props) {
@@ -119,23 +120,15 @@ class UserAccInfo extends React.Component {
           </li>
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
-              <a className="dropDown">My Orders</a>
+              <a className="dropDown">{MY_ORDER}</a>
             </Link>
           </li>
           <li className="listItem">
             <Link to={{ pathname: '/myAccount', state: { from: 'address' } }}>
-              <a className="dropDown">Manage Addresses</a>
+              <a className="dropDown">{MANAGE_ADDRESSES}</a>
             </Link>
           </li>
-          {/* <li className="listItem">
-            <a className="dropDown">Godrej Credit</a>
-          </li>
-          <li className="listItem">
-            <a className="dropDown">Gift Credit</a>
-          </li>
-          <li className="listItem">
-            <a className="dropDown">Notifications</a>
-          </li> */}
+        
         </>
       )),
         (this.state.loginStatus = (
@@ -147,7 +140,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">Welcome to Interio!</a>
+            <a className="dropDown">{WELCOME_INTERIO}</a>
           </li>
         ,
         loginStatus:
@@ -156,7 +149,7 @@ class UserAccInfo extends React.Component {
             onClick={this.onLoginRegisterClick.bind(this)}
           >
             {' '}
-            Login/Register
+            {LOGIN_REGISTER}
           </a>
 
       });
@@ -169,7 +162,6 @@ class UserAccInfo extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Did Mount -- ', this.props.fromWishlistPro);
     this.fromWishlist(this.props.fromWishlistPro);
     if (getCookie('isLoggedIn') === 'true') {
       this.getUserDetails();
@@ -200,7 +192,6 @@ class UserAccInfo extends React.Component {
       userLogoItem = <UserLogo />;
       dropdownItem = (
         <ul className="userList">
-          {/* <li className="listItem"> */}
           {this.state.userName !== null &&
             getCookie('isLoggedIn') === 'true' ? (
               <li className="listItem listItemUnSelected">
@@ -208,7 +199,6 @@ class UserAccInfo extends React.Component {
               </li>
             ) : null}
           {this.state.userType}
-          {/* </li> */}
           <li className="listItem">{this.state.loginStatus}</li>
         </ul>
       );
@@ -242,18 +232,5 @@ class UserAccInfo extends React.Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     // default: state.default
-//   };
-// }
-
-
-
-// commenting below is because componentWillRecivePops not getting called
-// export default connect(
-//   mapStateToProps,
-//   { updateUserProfile },
-// )(UserAccInfo);
 
 export default UserAccInfo;

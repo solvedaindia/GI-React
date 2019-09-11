@@ -25,14 +25,12 @@ class Recommendation extends React.Component {
                 recoData: data && data.data,
                 isLoading: false,
             });
-            console.log('Recommendation Data', data.data);
         })
         .catch(error => {
             this.setState({
             error,
             isLoading: false,
             });
-            console.log('ERROR');
         });
     }
 

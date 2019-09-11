@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, NavLink, Link } from 'react-router-dom';
+import {SEARCH_PAGE} from '../../constants/app/primitivesConstants';
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class SearchPage extends React.Component {
   render() {
     return (
       <>
-        <h4>Search Page</h4>
+        <h4>{SEARCH_PAGE}</h4>
       </>
     );
   }

@@ -6,6 +6,7 @@ import {
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
+import {RECENTLY_VIEWED} from '../../constants/app/primitivesConstants';
 
 import '../../../public/styles/bestSeller/bestSeller.scss';
 class RecentlyViewed extends React.Component {
@@ -43,7 +44,7 @@ class RecentlyViewed extends React.Component {
   
     return (
       <div className="bestSeller">
-        <h3 className="title">Recently Viewed</h3>
+        <h3 className="title">{RECENTLY_VIEWED}</h3>
       </div>
     );
   }
