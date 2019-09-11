@@ -35,19 +35,16 @@ export class ComparePageContainer extends React.Component {
     this.props.updatedCompData.forEach(element => {
       this.state.compWidgetData.push(element.skuId);
     });
-    //this.state.compWidgetData = this.props.updatedCompData
     this.callCompareApi();
 
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('icicic --- ', nextProps);
     if (nextProps.updatedCompData !== this.props.updatedCompData) {
       this.state.compWidgetData = [];
       nextProps.updatedCompData.forEach(element => {
         this.state.compWidgetData.push(element.skuId);
       });
-      //this.state.compWidgetData = nextProps.updatedCompData
       this.renderPrd()
     }
   }
@@ -55,9 +52,7 @@ export class ComparePageContainer extends React.Component {
   callCompareApi = () => {
     var ids = this.state.compWidgetData;
     var token = appCookie.get('accessToken');
-    // this.state.compWidgetData.forEach(element => {
-    //   ids.push(element.skuId);
-    // });
+  
 
     let params = new URLSearchParams(this.props.location.search);
     const compIdStr = params.get('ids');
@@ -85,10 +80,8 @@ export class ComparePageContainer extends React.Component {
         data: response.data.data.reverse(),
         loading: false
       });
-      console.log(response.data.data, 'data from api')
       this.renderPrd();
     }).catch(error => {
-      console.log(error);
       this.setState({
         loading: false
       })
@@ -246,7 +239,6 @@ export class ComparePageContainer extends React.Component {
   }
 
   removeCompareId(data) {
-    console.log('remev data ----- ', data);
     this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);
     this.renderPrd()
     this.updateRoute();

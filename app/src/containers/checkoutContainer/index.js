@@ -38,8 +38,7 @@ const withConnect = connect(
     mapDispatchToProps
   );
   
-//   const withReducer = injectReducer({ key: 'plpContainer', reducer });
-//   const withSaga = injectSaga({ key: 'plpContainer', saga });
+
   
   export default compose(
     withConnect,

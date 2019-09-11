@@ -44,7 +44,6 @@ class FormContainer extends Component {
           [name]: value,
         },
       }),
-      () => console.log(this.state.newUser),
     );
   }
 
@@ -61,7 +60,6 @@ class FormContainer extends Component {
       },
     }).then(response => {
       response.json().then(data => {
-        console.log(`Successful${data}`);
       });
     });
   }
