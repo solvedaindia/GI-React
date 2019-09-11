@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
 import { imagePrefix } from '../../../../../public/constants/constants';
+import {CANCEL, APPLY  } from '../../../../constants/app/plpConstants';
 
 
 
@@ -27,9 +28,7 @@ class RWDFilterCore extends React.Component {
   }
 
   unCkeckAll(item) {
-    console.log('In the uncheckAll---', item);
     [...document.getElementsByClassName('checkbox' + item.facetName)].map((input) => { //checkboxsofa
-      console.log('unchecktt---', input);
       if (input.checked) {
         input.checked = unchecked;
       }
@@ -39,32 +38,14 @@ class RWDFilterCore extends React.Component {
 
 
   toggleDropdown(item) {
-    // if (!this.state.active) {
-    //   document.addEventListener('click', this.handleOutsideClick, false);
-    // } else {
-    //   document.removeEventListener('click', this.handleOutsideClick, false);
-    // }
+  
 
     this.unCkeckAll(item);
     [...document.getElementsByClassName('checkboxSelected' + item.facetName)].map((input) => {
       input.checked = 'checked';
     })
 
-    // let filteredArr = [];
-    // for (const [key, value] of this.props.updatedFilter) {
-    //   if (key === this.props.dataPro.facetName) {
-    //     value.map((option, i) => {
-    //       filteredArr.push(option)
-    //     })
-    //   }
-    // }
 
-    //this.setState({facetArr: filteredArr})
-
-    // this.setState({
-    //   active: !this.state.active,
-    //   facetArr: filteredArr
-    // });
   }
 
   componentDidMount() {
@@ -75,8 +56,6 @@ class RWDFilterCore extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.unCkeckAll(nextProps.itemPro);
     if (this.props.itemPro !== nextProps.itemPro) {
-      console.log('componentWillReceiveProps -- ')
-      //this.toggleDropdown(nextProps.itemPro);
       this.subFacetValues(nextProps.itemPro);
       
       
@@ -87,30 +66,12 @@ class RWDFilterCore extends React.Component {
     if (item.facetName === this.state.currentFilter.facetName) {
       return;
     }
-    // this.setState({
-    //   selected: 0,
-    //   options: ['recommended', 'price_L_H', 'price_H_L', 'newArrival'],
-    //   //facetMap: new Map(),
-    //   facetItem: null,
-    //   facetArr: [],
-    //   checked: false,
-    //   alreadyAddedFiltersArr: [],
-    //   currentFilter: [],
-    // })
-
-
-    //this.unCkeckAll(item);
-    // [...document.getElementsByClassName('checkboxSelected' + item.facetName)].map((input) => {
-    //   input.checked = 'checked';
-    // })
-
-    // var alreadyAddedFiltersArr = [];
+  
     let filteredArr = [...this.state.facetArr];
     for (const [key, value] of this.props.updatedFilter) {
       if (key === item.facetName) {
         value.map((option, i) => {
           filteredArr.push(option)
-          //alreadyAddedFiltersArr.push(option);
         })
       }
     }
@@ -119,16 +80,11 @@ class RWDFilterCore extends React.Component {
 
     this.setState({ facetArr: filteredArr })
     const alreadyAddedFiltersArr = filteredArr.map(item => {
-      //console.log('exstractedArr --- ',item.value);
       return item.value;
 
     })
 
-    console.log('dddmdmd -- ', alreadyAddedFiltersArr, item)
-    // this.setState({
-    //   facetArr: filteredArr,
-    //   alreadyAddedFiltersArr: alreadyAddedFiltersArr,
-    // })
+  
 
     var facetItem = item.facetValues.map((option, i) => {
 
@@ -139,22 +95,15 @@ class RWDFilterCore extends React.Component {
       if (alreadyAddedFiltersArr.includes(option.value)) {
         customSelectionBoxId = 'selected_' + item.facetName + i
         checkboxItem = <input className={'inputCheck checkboxSelected' + item.facetName} onChange={evt => this.onCheckBoxClick(i)} defaultChecked={true} type="checkbox" id={customSelectionBoxId} />
-        console.log('ITsChecked----');
       }
       else {
         customSelectionBoxId = item.facetName + i
-        // checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
         checkboxItem = <input className={'inputCheck checkbox' + item.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id={customSelectionBoxId} />
-        // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
-        //this.unCkeckAll(item);
 
-        console.log('ITs Not Checked----');
       }
 
 
-      //Show images only in colors facet -----------------------------
       var checkItem;
-      // if (option.facetImage !== "") { //this condition to display all the images in any facet.
       if (item.facetName.includes('Color') || item.facetName.includes('Material')) {
 
         let colorStyle = {
@@ -171,11 +120,9 @@ class RWDFilterCore extends React.Component {
         else {
           colorRGBClass = 'circle'
           imgUrl = `${imagePrefix}${option.facetImage}`;
-          console.log('Facet Faet ---- ', imgUrl, option)
           customCheckItem = <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
         }
 
-        // const checkNew = <img className={colorRGBClass} style={colorStyle} src={imgUrl}/>
         checkItem = <label className="lblradio" htmlFor={customSelectionBoxId}>
           {customCheckItem}
         </label>
@@ -213,8 +160,8 @@ class RWDFilterCore extends React.Component {
           : null}
 
         <div className='filterFooter'>
-          <button onClick={() => this.onCancelBtn()} className='cancelBtn'>Cancel</button>
-          <button onClick={() => this.onApplyBtnClick()} className='applyBtn'>Apply</button>
+          <button onClick={() => this.onCancelBtn()} className='cancelBtn'>{CANCEL}</button>
+          <button onClick={() => this.onApplyBtnClick()} className='applyBtn'>{APPLY}</button>
         </div>
       </>
     );

@@ -30,11 +30,9 @@ class Filter extends React.Component {
     this.state = {
       selected: 0,
       options: ['recommended', 'price_L_H', 'price_H_L', 'newArrival'],
-      // facetMap: new Map(),
       facetItem: null,
       facetArr: [],
       checked: false,
-      //RWD Vars
       isMobile: window.innerWidth <= 760,
       isRWDFilterSelected: false,
     }
@@ -46,12 +44,7 @@ class Filter extends React.Component {
   }
 
   toggleDropdown(ismmm) {
-    console.log('ismmm -- ', ismmm);
-    // if (this.props.isFromRWD && this.state.active) {
-    //   // this.props.resetAllPro();
-
-    //   //return;
-    // }
+   
 
 
     if (!this.state.active) {
@@ -98,7 +91,6 @@ class Filter extends React.Component {
     if (this.node.contains(e.target)) {
       return;
     }
-    console.log('handleOutsideClick')
     this.toggleDropdown();
   }
 
@@ -106,22 +98,18 @@ class Filter extends React.Component {
     const selectedFacet = this.props.dataPro.facetValues[index];
 
     let filteredArr = [...this.state.facetArr];
-    // console.log('FilterArr---',this.state.facetArr);
     const extFacetArr = this.state.facetArr.map(item => {
       return item.value.replace(/\%2B/g, '+');
     });
     if (!extFacetArr.includes(selectedFacet.value)) {
       filteredArr.push(selectedFacet);
-      // this.setState({ facetArr: filteredArr })
     } else {
       filteredArr = this.state.facetArr.filter((value, i, arr) => {
-        console.log('else value -- ', value, selectedFacet);
         if (value.value.replace(/\%2B/g, '+') != selectedFacet.value) {
           return value;
         }
       });
     }
-    console.log('Selected --- ', filteredArr);
     const params = new URLSearchParams(this.props.location.search);
 
     this.setState({ facetArr: filteredArr });
@@ -156,7 +144,6 @@ class Filter extends React.Component {
       this.props.onRWDFilterCancel()
     }
     if (isMobile()) {
-      // this.props.onRWDFilterCancel()
     }
 
   }
@@ -167,7 +154,6 @@ class Filter extends React.Component {
         `checkbox${this.props.dataPro.facetName}`,
       ),
     ].map(input => {
-      // console.log('uncheck---', input);
       if (input.checked) {
         input.checked = !input.checked;
       }
@@ -176,7 +162,6 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    console.log('dddmdmd -- ', this.props.indexPro);
 
     this.resolvePreSelectedFilters();
   }
@@ -198,47 +183,34 @@ class Filter extends React.Component {
       preFilter = this.props.RWDupdatedFilter
     }
     for (const [key, value] of preFilter) {
-      console.log('kkkeyy --- ', key);
       if (key === this.props.dataPro.facetName) {
         value.map((option, i) => {
-          console.log('otttt -- ', option);
           filteredArr.push(option);
           alreadyAddedFiltersArr.push(option);
         });
       }
     }
-    console.log('maksss -- ', alreadyAddedFiltersArr);
     this.setState({
       facetArr: filteredArr,
       active: this.props.indexPro === 0 && this.props.isFromRWD ? !this.state.active : false
     });
     const extFacetArr = filteredArr.map(
       item =>
-        // console.log('exstractedArr --- ',item.value);
         item.value.replace(/\%2B/g, '+'),
     );
-    console.log('maksss jjjjj -- ', extFacetArr);
     this.filterOptions(extFacetArr);
   }
 
   onApplyBtnClick() {
-    console.log('TotalFaeexxxxx--', this.state.facetArr);
     this.state.facetArr.map(item => {
       item.value = item.value.replace(/\+/g, '%2B');
     });
 
 
-    // var ddd = this.state.facetArr[0]
-    // var facetName = ddd.value;
-    // facetName = facetName.replace('+', '%2B')
-    console.log('TotalFace---', this.state.facetArr);
-    // ddd.value = facetName
-    // console.log('TotalFacemakeee---', ddd);
-    // if (this.state.facetArr.length !== 0) {
+  
 
     if (isMobile()) {
       this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
-      // this.onApplyBtnClick();
     }
     else {
       this.props.onFilterUpdate(
@@ -248,16 +220,13 @@ class Filter extends React.Component {
     }
 
 
-    // }
   }
 
   filterOptions(alreadyAddedFiltersArr) {
-    // return this.props.dataPro.facetValues.map((option, i) => {
     var isRWDFacetSelecte = false;
     const item = this.props.dataPro.facetValues.map((option, i) => {
       let checkboxItem;
       let customSelectionBoxId;
-      console.log('Momentt --- ', alreadyAddedFiltersArr);
       if (alreadyAddedFiltersArr.includes(option.value)) {
         customSelectionBoxId = `selected_${this.props.dataPro.facetName}${i}`;
         checkboxItem = (
@@ -274,10 +243,8 @@ class Filter extends React.Component {
 
         );
         isRWDFacetSelecte = true;
-        console.log('ITsChecked----', option.value);
       } else {
         customSelectionBoxId = this.props.dataPro.facetName + i;
-        // checkboxItem = <input className={'inputCheck checkbox' + this.props.dataPro.facetName} onChange={evt => this.onCheckBoxClick(i)} type="checkbox" id="chkkl" name="scales" />
         checkboxItem = (
           <input
             className={`inputCheck checkbox${this.props.dataPro.facetName}`}
@@ -287,15 +254,12 @@ class Filter extends React.Component {
             name="scales"
             disabled={option.count === 0 ? true : false}
           />
-        ); console.log('ITsChecked Not----', option.value);
+        ); 
 
-        // checkboxItem = <input className={'checkbox'+this.props.dataPro.facetName} onChange={this.onCheckBoxClick.bind(this)} defaultChecked={this.state.checked} type="checkbox" name="scales" />
       }
 
       let checkItem;
-      // if (option.facetImage !== "") { //this condition to display all the images in any facet.
-      // if (this.props.dataPro.facetName.includes('Color') || this.props.dataPro.facetName.includes('Material')) { //As discussed with Lalit removing the condtion and adding check on Facet values
-      // Show images only in colors facet
+    
 
       let colorStyle = {
         display: 'block',
@@ -320,7 +284,6 @@ class Filter extends React.Component {
       else if (option.facetImage) {
         colorRGBClass = 'circle';
         imgUrl = `${imagePrefix}${option.facetImage}`;
-        console.log('Facet Faet ---- ', imgUrl, option);
         customCheckItem = (
           <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
         );
@@ -339,7 +302,6 @@ class Filter extends React.Component {
       return (
         <li key={i} className="list">
           <div
-            // onClick={evt => this.handleClick(i)}
             key={i}
             className={`dropdown__list-item ${
               i === this.state.selected ? 'dropdown__list-item--active' : ''
@@ -438,7 +400,6 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  console.log('Zebraa MIN --- ', stateObj.updateFilter, state.rwdUpdatedFilter);
   return {
     updatedFilter: stateObj.updateFilter,
     RWDupdatedFilter: stateObj.rwdUpdatedFilter,

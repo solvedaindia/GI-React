@@ -5,6 +5,7 @@ import { notifyMeAPI} from '../../../public/constants/constants';
 import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 import appCookie from '../../utils/cookie';
 import { isMobile } from '../../utils/utilityManager';
+import {NOTIFY_ME,EMAIL_ADD,SUBMIT} from '../../constants/app/pdpConstants';
 
 class NotifyMe extends React.Component {
 	constructor() {
@@ -85,7 +86,6 @@ class NotifyMe extends React.Component {
 				 errorMessage: error.response.data.error.error_message,
 				 msgClass: 'error-msg'
 			});
-			console.log('Notify API Error---', error.response.data.error.error_message);
 		});
 	}
 
@@ -113,7 +113,7 @@ class NotifyMe extends React.Component {
 							<Col xs={12} md={12}>
 								<div className=''>
 
-									<h4 className='heading'>Notify me at this email address</h4>
+									<h4 className='heading'>{NOTIFY_ME}</h4>
 								</div>
 							</Col>
 						</Row>       
@@ -122,7 +122,7 @@ class NotifyMe extends React.Component {
 								<Form>
 									<FormGroup>
 										<div className="form-div notify-emeil clearfix">
-											<Label>Email Address</Label>
+											<Label>{EMAIL_ADD}</Label>
 											<input
 												type="text"
 												name="email"
@@ -139,7 +139,7 @@ class NotifyMe extends React.Component {
 											className="btn-block btn-bg"
 											onClick={this.handleSubmit}
 										>
-											Submit
+											{SUBMIT}
 										</Button>
 									</FormGroup>
 								</Form>

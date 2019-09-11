@@ -51,7 +51,6 @@ class RWDSort extends React.Component {
   }
 
   handleClick(i) {
-    console.log('yes handle click -- ', i);
     if (i !== this.state.selected) {
       this.setState({
         selected: i,
@@ -59,11 +58,9 @@ class RWDSort extends React.Component {
       });
       this.props.updateSortingValue(this.state.options[i]);
     }
-    // this.toggleDropdown();
   }
 
   render() {
-    console.log('what Sort Value --- ', this.props.sortingIndexPro);
     return (
       <>
         <button className='sortBy' onClick={evt => this.showSortOptions()}><img className='sortbyicon' src={require('../../../../public/images/sort.svg')} /> Sort</button>

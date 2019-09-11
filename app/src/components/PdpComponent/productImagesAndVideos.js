@@ -200,17 +200,10 @@ class productImagesAndVideos extends React.Component {
           lazyLoad={true}
           renderCustomControls={this.renderZoomButtons}
         />
-        
-       {/* <div className="zoominout" id="zoomdiv">
-        <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
-				<button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
-        </div> */}
       </div>
     );
   }
 }
-// var node=document.querySelector('.image-gallery-fullscreen-button');
-// var elezoom =document.getElementById('zoomdiv');
-// node.parentNode.insertBefore(elezoom, node.nextSibling);
+
 
 export default productImagesAndVideos;

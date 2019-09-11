@@ -40,14 +40,7 @@ class RecentlyViewed extends React.Component {
   }
 
   render() {
-    // const { recentlyViewedData } = this.state;
-    // const settings = {
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1
-    // };
+  
     return (
       <div className="bestSeller">
         <h3 className="title">Recently Viewed</h3>

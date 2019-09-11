@@ -1,5 +1,4 @@
 import React from 'react';
-//Redux
 import { connect } from 'react-redux';
 import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
@@ -14,23 +13,9 @@ import crossIcon from '../../../../public/images/closeplpFilter.svg';
 
 import Filter from './filter';
 
-{/* <button style="
-    float: left;
-    background: transparent;
-    border: 0;
-    padding: 16px;
-    color: #687ed8;
-">More</button>
 
-float: left;
-background: transparent;
-border: 0;
-padding: 16px;
-color: #687ed8;
-} */}
 
-// - Fewer filters
-// + 3 filters
+
 
 class FilterMain extends React.Component {
   constructor(props) {
@@ -44,7 +29,6 @@ class FilterMain extends React.Component {
       appliedFilters: [],
       isFilterExpend: false,
 
-      //RWD Vars
       isMobile: window.innerWidth <= 760,
     };
 
@@ -65,8 +49,7 @@ class FilterMain extends React.Component {
       if (this.props.filterDataPro.length > 4) {
         splitItems = allItems.slice(0, 4);
         leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
-        //const btn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{leftOverFilterCount}</button>
-        //splitItems.push(btn)
+      
       }
       else {
         splitItems = allItems;
@@ -126,7 +109,6 @@ class FilterMain extends React.Component {
   clearTheSelectedFilter(index) {
     
     var selectionFacetValue = this.state.appliedFilters[index].value;
-    //console.log(this.state.appliedFilters[index]);
     console.log('All Data --', selectionFacetValue);
     var selectedFacetName;
     var selectedFacetValuesArr = [];
@@ -144,7 +126,6 @@ class FilterMain extends React.Component {
           if (value != selectionFacetValue) {
             console.log('returnn -- ', facetItems[i]);
             selectedFacetValuesArr.push(facetItems[i]);
-            //return facetItems[i];
           }
         });
       }

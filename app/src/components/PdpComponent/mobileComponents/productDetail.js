@@ -5,6 +5,7 @@ import {
 } from '../../../../public/constants/constants';
 import Accordion from './Accordion';
 import '../../../../public/styles/pdpComponent/accordian.scss';
+import {PRODUCT_DETAILS} from '../../../constants/app/pdpConstants';
 
 class productDetail extends React.Component {
   constructor() {
@@ -94,7 +95,7 @@ class productDetail extends React.Component {
           <div className="product_details" id="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
-                <h2 className="heading"> Product Details</h2>
+                <h2 className="heading">{PRODUCT_DETAILS}</h2>
                 <span className="plusIcon"></span>
               </Col>
             </Row>

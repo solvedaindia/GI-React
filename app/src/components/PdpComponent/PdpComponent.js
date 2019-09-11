@@ -23,6 +23,7 @@ import apiManager from '../../utils/apiManager';
 import { pinCodeAPI, pinCodeAPIBundle, breadcrumbAPI } from '../../../public/constants/constants';
 import { isMobile } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import {PRODUCT_ID} from '../../constants/app/pdpConstants';
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 import { array } from 'prop-types';
@@ -407,7 +408,7 @@ class PdpComponent extends React.Component {
 			    <div className='pdpstickyItem clearfix'>				   
 					<div className="product" id="topdiv1" style={{opacity: '0'}}>
                        <div className='productId'>
-						 <span className='text'>Product ID: </span> 
+						 <span className='text'>{PRODUCT_ID} </span> 
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
