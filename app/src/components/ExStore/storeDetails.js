@@ -50,7 +50,6 @@ export class StoreDetails extends React.Component {
         const dLon = this.toRadius(destiLon-currentLon);
         const getLat1 = this.toRadius(currentLat);
         const getLat2 = this.toRadius(destiLat);
-
         let getValueInKm = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(getLat1) * Math.cos(getLat2); 
         getValueInKm = 2 * Math.atan2(Math.sqrt(getValueInKm), Math.sqrt(1-getValueInKm)); 
         getValueInKm = inKm * getValueInKm;

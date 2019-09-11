@@ -121,6 +121,7 @@ onkeydownclick(text) {
           ) : (
             // <button >
               <img className='search-sm-btn'
+                alt='search'
                 src={require('../../../../public/images/rwd-assets/search.svg')}
               />
             // </button>

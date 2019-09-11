@@ -36,7 +36,7 @@ export class CompContainer extends React.Component {
     const addDiv = (
       <li className="list">
         <div className='addproduct-box'>
-          <button className='add-icon'><img src={plus} /></button>
+          <button className='add-icon'><img src={plus} alt='plusIcon'/></button>
           <div className='addproduct-text'>Add Product</div>
         </div>
       </li>

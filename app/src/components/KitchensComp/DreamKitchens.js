@@ -44,7 +44,7 @@ class DreamKitchens extends React.Component {
                 </div>
                 <div className="col-md-3 imgBox">
                     <i>
-            <img
+                  <img
                       className="Delivery-Installation"
                       src='https://203.110.85.50/imagestore/images/godrejInterio/KichenHover.svg'
                       alt="rectangle"

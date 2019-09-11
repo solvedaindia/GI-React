@@ -65,7 +65,7 @@ class CompPrd extends React.Component {
         images.push(
           <Col xs={12} sm={4} md={4}  className="comp-list-item">
               <div className="img-box">
-              <img src={`${imagePrefix}${elem.dimensionThumbnail}`} />
+              <img src={`${imagePrefix}${elem.dimensionThumbnail}`} alt='img'/>
               </div>
         </Col>)
       })

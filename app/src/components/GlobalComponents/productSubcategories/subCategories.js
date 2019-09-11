@@ -5,10 +5,10 @@ import SubCatItem from './subCatItem';
 import '../../../../public/styles/plpContainer/plpContainer.scss';
 
 const prevArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowLeft.svg')} />
+  <img src={require('../../SVGs/carousel__arrowLeft.svg')} alt='prevImg'/>
 );
 const nextArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowRight.svg')} />
+  <img src={require('../../SVGs/carousel__arrowRight.svg')} alt='nxtImg'/>
 );
 class SubCategories extends React.Component {
   constructor(props) {

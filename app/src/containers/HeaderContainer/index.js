@@ -13,6 +13,7 @@ import Logo from '../../components/SVGs/logo';
 import HeaderMobile from './HeaderMobile/index';
 import {isMobile} from '../../utils/utilityManager'
 import '../../../public/styles/headerContainer/headerContainer.scss';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 export class HeaderContainer extends React.Component {
   constructor(props) {
@@ -33,6 +34,8 @@ export class HeaderContainer extends React.Component {
     }
 
     return (
+      <>
+      <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } />
       <header className="appheader" id='header'>
         <div className="logo">
           {window.location.pathname === '/' ? (<a href="/"><Logo /></a>):(<Link to="/"><Logo /></Link>)}
@@ -42,6 +45,7 @@ export class HeaderContainer extends React.Component {
           <HeaderL2 />
         </div>
       </header>
+      </>
     );
   }
 }
