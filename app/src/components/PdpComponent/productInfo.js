@@ -3,6 +3,7 @@ import EmiInfo from './emiInfo';
 import TermsAndCondition from './termsAndCondition';
 import Price from './price';
 import { isMobile, formatPrice } from '../../utils/utilityManager';
+import {DEL_CHARGES,VIEW_OFFERS,STARTING_FROM,EMI,A_MONTH} from '../../constants/app/pdpConstants';
 
 import Uparrow from '../../components/SVGs/upArrow.svg';
 import DownArrow from '../../components/SVGs/downArrow.svg';
@@ -47,7 +48,7 @@ class productInfo extends React.Component {
       <>
         { !isMobile() && <Price priceData={this.props.productData} /> }
         { !isMobile() && <div className="shippingCharge">
-          Delivery Charges:{' '}
+         {DEL_CHARGES}{' '}
           <span className="bold">
             {this.props.pinCodeData.shippingCharge > 0 ? (
             <>
@@ -91,7 +92,7 @@ class productInfo extends React.Component {
             role="button"
             onClick={this.toggleOffers.bind(this)}
           >
-           <span className="view-offer-text">View Offers</span>
+           <span className="view-offer-text">{VIEW_OFFERS}</span>
            <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
           </a>
           }
@@ -116,13 +117,13 @@ class productInfo extends React.Component {
           <div className="starting-emitext">
               <div className="offerbg text">
                 {' '}
-                <span className="emitext">EMI</span>
+                <span className="emitext">{EMI}</span>
               </div>
-              <div className="text">Starting from </div>
+              <div className="text">{STARTING_FROM} </div>
               <div className="text bold">
               &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
-              <div className="text">a month</div>
+              <div className="text">{A_MONTH}</div>
               <div className="text emiinfo">
                 <EmiInfo price={this.props.productData.offerPrice} />
               </div>
@@ -131,14 +132,14 @@ class productInfo extends React.Component {
           <div className="starting-emitext pdp-emitext-mob">
               <div className="offerbg text">
                 {' '}
-                <span className="emitext">EMI</span>
+                <span className="emitext">{EMI}</span>
               </div>
               <div className='emi-text-desc'>
-              <div className="text starting-from">Starting from </div>
+              <div className="text starting-from">{STARTING_FROM} </div>
               <div className="text bold">
               &#8377;{formatPrice(this.props.productData.emiData)}{' '}
               </div>
-              <div className="text">a month</div></div>
+              <div className="text">{A_MONTH}</div></div>
               <div className="text emiinfo">
                 <EmiInfo price={this.props.productData.offerPrice} />
               </div>

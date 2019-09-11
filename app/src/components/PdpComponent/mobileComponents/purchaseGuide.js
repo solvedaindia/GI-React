@@ -9,6 +9,8 @@ import {
 } from '../../../../public/constants/constants';
 import Accordion from './Accordion';
 import '../../../../public/styles/pdpComponent/accordian.scss';
+import {PURCHASE_GUIDE} from '../../../constants/app/pdpConstants';
+
 
 class purchaseGuide extends React.Component {
   constructor() {
@@ -138,7 +140,7 @@ class purchaseGuide extends React.Component {
             <div className="purchaseGuideDiv" id="purchaseGuideDiv">
             <Row>
               <Col md={12} sm={12} xs={12}>
-                <h2 className="heading">Purchase Guide</h2>
+                <h2 className="heading">{PURCHASE_GUIDE}</h2>
                 <span className="plusIcon"></span>
               </Col>
             </Row>

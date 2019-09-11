@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../../../../public/styles/footerContainer/accordian.scss'
 
 class Accordion extends React.Component {
   constructor() {

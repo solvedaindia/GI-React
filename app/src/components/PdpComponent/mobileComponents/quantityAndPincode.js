@@ -21,6 +21,7 @@ import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
+import {PRODUCT_ADDED,ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE,VIEW} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -128,7 +129,6 @@ class addToCartComponent extends React.Component {
         this.moveToCartClicked(response.data);
       })
       .catch(error => {
-        console.log('findInventory API Error =>', error);
       });
   };
 
@@ -188,7 +188,6 @@ class addToCartComponent extends React.Component {
           this.props.handleAddtocart(false);
         })
         .catch(error => {
-          console.log('AddToCart Error---', error);
         });
     }
   };
@@ -203,12 +202,12 @@ class addToCartComponent extends React.Component {
     }, 2000);
     return (
       <div className="addedToWishlist dropdownwishlist clearfix">
-        <span className="wishlist-text">Product added to cart</span>
+        <span className="wishlist-text">{PRODUCT_ADDED}</span>
         <button
           onClick={() => this.props.history.push('/cart')()}
           className="view-btn"
         >
-          View
+          {VIEW}
         </button>
       </div>
     );
@@ -269,7 +268,7 @@ class addToCartComponent extends React.Component {
     }
     
     if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
-      return <Button className="btn addcartbtn" disabled>Add to Cart</Button>
+      return <Button className="btn addcartbtn" disabled>{ADD_TO_CART}</Button>
     } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
       return <NotifyMe partNumber={this.props.skuData.partNumber} sticky={this.props.sticky} />
     } 
@@ -296,7 +295,7 @@ class addToCartComponent extends React.Component {
         {this.state.addToCartPopup}
         
         {isMobile() ?  
-          <label className='quantity-text'><b>Quantity</b></label> : ''}
+          <label className='quantity-text'><b>{QUANTITY}</b></label> : ''}
         <div className={isMobile() ? 'addCart quantity-box' : 'addCart'}>
           { !this.props.isMobile && (
           <>
@@ -326,7 +325,7 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>Quantity is not available</div>}
+          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
         </div>
         <ProductInfo
                     productData={this.props.skuData}
@@ -358,7 +357,7 @@ class addToCartComponent extends React.Component {
               </div>
               {this.renderdeliveryMessage(this.props.pinCodeData)}
               { <div className="shippingCharge">
-          Estimated Delivery Charges:{' '}
+         {ESTIMATED_DELIVERY}{' '}
           <span className="bold">
             {this.props.pinCodeData.shippingCharge > 0 ? (
             <>
@@ -366,7 +365,7 @@ class addToCartComponent extends React.Component {
               {this.props.pinCodeData.shippingCharge}
             </>
             ) : (
-              <>Free</>
+              <>{FREE}</>
             )}
           </span>
         </div> }

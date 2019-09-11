@@ -13,6 +13,7 @@ import {
   fetchReleventSortingValue,
   fetchReleventSortingValueByIndex,
 } from '../../../utils/utilityManager';
+import {SORT  } from '../../../constants/app/plpConstants';
 
 const downArrow = (
   <img
@@ -78,7 +79,6 @@ class Sort extends React.Component {
     if (!this.state.options) {
       return;
     }
-    // console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
     return this.state.options.map((option, i) => (
       <li
         onClick={evt => this.handleClick(i)}
@@ -89,9 +89,7 @@ class Sort extends React.Component {
             : ''
         }`}
       >
-        {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
         {option}
-        {/* </Link> */}
       </li>
     ));
   }
@@ -99,7 +97,7 @@ class Sort extends React.Component {
   render() {
     return (
       <>
-        <h4 className="heading">Sort</h4>
+        <h4 className="heading">{SORT}</h4>
         <div
           ref={node => {
             this.node = node;
