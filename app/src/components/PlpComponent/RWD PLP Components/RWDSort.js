@@ -12,6 +12,7 @@ import {
   getReleventReduxState,
   fetchReleventSortingValue,
   fetchReleventSortingValueByIndex,
+  mapSortIndex
 } from '../../../utils/utilityManager';
 
 
@@ -37,7 +38,7 @@ class RWDSort extends React.Component {
     this.state = {
       currentSelection: recommended,
       selected:
-        this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
+        this.props.sortingIndexPro === '' ? 2 : mapSortIndex(this.props.sortingIndexPro),
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
       isShowSortOptions: false,

@@ -121,29 +121,42 @@ export function fetchReleventSortingValue(value) {
 export function fetchReleventSortingValueByIndex(index) {
     console.log('it index --- ', index);
     if (isMobile()) {
-        if (parseInt(index) === 3) {
+        if (parseInt(index) === 0) {
             return 'Price - Low to High';
         }
-        if (parseInt(index) === 4) {
+        if (parseInt(index) === 1) {
             return 'Price - High to Low';
         }
-        if (parseInt(index) === 5) {
+        if (parseInt(index) === 3) {
             return 'New Arrival';
         }
     }
     else {
-        if (parseInt(index) === 3) {
+        if (parseInt(index) === 0) {
             return 'Price Low to High';
         }
-        if (parseInt(index) === 4) {
+        if (parseInt(index) === 1) {
             return 'Price High to Low';
         }
-        if (parseInt(index) === 5) {
+        if (parseInt(index) === 3) {
             return 'New Arrival';
         }
     }
     
     return 'Interio Recommends';
+}
+
+export function mapSortIndex(index) {
+    if (parseInt(index) === 3) {
+        return 0;
+    }
+    if (parseInt(index) === 4) {
+        return 1;
+    }
+    if (parseInt(index) === 5) {
+        return 3;
+    }
+    return 2;
 }
 
 /**
