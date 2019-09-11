@@ -13,7 +13,6 @@ import { imagePrefix } from '../../../public/constants/constants';
 import EmptyCart from '../../components/Cart/emptyCart';
 import Pincode from '../../components/Cart/pincode';
 import CartUpdate from '../../components/Cart/updateCart';
-import EMILogo from '../../components/SVGs/emiIcon';
 import DeleteCartItem from '../../components/Cart/cartDeleteItem';
 import MoveToWishList from '../../components/Cart/moveToWishList';
 import '../../../public/styles/cart/cartItem.scss';
@@ -25,22 +24,24 @@ import EmiInfo from '../../components/PdpComponent/emiInfo';
 import ExpandIcon from '../../components/SVGs/expandArrow';
 import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
 import EMIVal from '../../components/Cart/emiPrice';
-import {YOUR_CART} from '../../constants/app/cartConstants';
-import {DO_YOU_HAVE_COUPAN} from '../../constants/app/cartConstants';
-import {ORDER_SUMMARY} from '../../constants/app/cartConstants';
-import {CART_TOTAL} from '../../constants/app/cartConstants';
-import {PRODUCT_DISCOUNT} from '../../constants/app/cartConstants';
-import {ORDER_DISCOUNT} from '../../constants/app/cartConstants';
-import {SHIPPING} from '../../constants/app/cartConstants';
-import {TOTAL} from '../../constants/app/cartConstants';
-import {PROCEED_TO_CHECK_OUT} from '../../constants/app/cartConstants';
-import {FREE} from '../../constants/app/cartConstants';
-import {DELIVERY_BY} from '../../constants/app/cartConstants';
-import {SHIPPING_CHARGES} from '../../constants/app/cartConstants';
-import {YOU_SAVED} from '../../constants/app/cartConstants';
-import {TOTAL_AMOUNT} from '../../constants/app/cartConstants';
-import {PROCEED} from '../../constants/app/cartConstants';
-import {ITEMS} from '../../constants/app/cartConstants';
+import {
+	YOUR_CART,
+	DO_YOU_HAVE_COUPAN,
+	ORDER_SUMMARY,
+	CART_TOTAL,
+	PRODUCT_DISCOUNT,
+	ORDER_DISCOUNT,
+	SHIPPING,
+	TOTAL,
+	PROCEED_TO_CHECK_OUT,
+	FREE,
+	DELIVERY_BY,
+	SHIPPING_CHARGES,
+	YOU_SAVED,
+	TOTAL_AMOUNT,
+	PROCEED,
+	ITEMS
+} from '../../constants/app/cartConstants';
 
 
 
@@ -205,11 +206,11 @@ class CartDetail extends React.Component {
                 <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
                 <span className='savingText'>{YOU_SAVED} <span className='savedAmt'>₹{formatPrice(cartData.orderSummary.saving)}</span></span>
               </p>:''}
-              {!isMobile() ? (<a id='checkoutBtn' className={`btn btnCheckout ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED_TO_CHECK_OUT}</a>)
+              {!isMobile() ? (<a id='checkoutBtn' className={`btn btnCheckout ${disableCheckout ? 'disabled oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED_TO_CHECK_OUT}</a>)
               :
               (<div className="checkout-btn-floater">
                   <div className="total-amount"><div className="net-amount-box">₹{formatPrice(cartData.orderSummary.netAmount)}<span className="total-amount-text">{TOTAL_AMOUNT}</span></div></div>
-                  <div className="proceed-btn"><a id='checkoutBtn' className={`btn-blackbg btn-block ${disableCheckout ? 'disable oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED}</a></div>
+                  <div className="proceed-btn"><a id='checkoutBtn' className={`btn-blackbg ${disableCheckout ? 'disabled oos' : '' }`} href={!disableCheckout ? '/checkout' : ''}>{PROCEED}</a></div>
                 </div>)}
             </div>
           </div>

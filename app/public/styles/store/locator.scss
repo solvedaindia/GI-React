@@ -21,18 +21,22 @@
     .storeTypes {
         .typeList{
         justify-content: center;
-        
+            .storetext {
+                font-family: $font-regular;
+                color:$darkAshGrey;
+            }
         .active{
             border:1px solid $black !important;
 			
-			figcaption {
-				font-family: $font-bold;
+			.storetext {
+                font-family: $font-medium;
+                color:$black;
 			}
         }
 		
         .storeTypeItem{
             display: block;
-            border: 1px solid #ddd;
+            border: 1px solid $darkAshGrey;
             margin: 1%;
             float: left;
             .typeList {
@@ -42,7 +46,22 @@
             .storeImg {
                 width: 100%;
             }
+            // .black{
+            //     visibility: hidden;
+            //     display: none;
+            // }
         }
+
+        // .storeTypeItem.active{
+        //     .black{
+        //         visibility: hidden;
+        //         display: block;
+        //     }
+        //     .grey{
+        //         visibility: visible;
+        //         display: none;
+        //     }
+        // }
     }
 
     }
@@ -232,7 +251,7 @@
                 width: 35%;  
                 padding: 25px;
                 .detailCard{
-                    height: 400px;
+                    height: 450px;
                     padding: 0 12px 0 0;
                     overflow: auto;
                     .storeListItem{

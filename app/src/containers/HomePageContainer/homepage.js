@@ -33,7 +33,6 @@ export class HomapegeLayout extends React.Component {
 				homepageLayout: is(layout, 'Array') && layout,
 				isLoading: false,
 			});
-			console.log('HomepageData Layout', response.data.data);
 		})
 		.catch(error => {
 			this.setState({

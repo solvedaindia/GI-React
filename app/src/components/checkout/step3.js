@@ -1,7 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import '../../../public/styles/checkout.scss';
 import injectSaga from '../../utils/injectSaga';
@@ -20,6 +18,7 @@ import {
 import {
   getReleventReduxState
 } from '../../utils/utilityManager';
+import {PAY_BY,MOBILE_EMAIL, CHANGE, SHIP_TO, CHOOSE_A_PAYMENT_METHOD, CREDIT_CARD, DEBIT_CARD, NET_BANKING,EMI, WALLETS} from '../../constants/app/checkoutConstants';
 
 export class Step3Component extends React.Component {
   constructor(props) {
@@ -56,7 +55,6 @@ export class Step3Component extends React.Component {
         access_token: token
       }
     }).then((response) => {
-      console.log(response, "this is bank list response")
       var bankdata = response.data.data.bankList;
       var banks = [];
       var wallets = [];
@@ -74,7 +72,6 @@ export class Step3Component extends React.Component {
         wallets: wallets
       })
     }).catch((err) => {
-      console.log(err);
     })
   }
 
@@ -98,9 +95,7 @@ export class Step3Component extends React.Component {
     this.props.backtoMobile();
   }
 
-  // callGodrejCreditAPI = () => {
-  //   axios.get()
-  // }
+
 
   handleSameBill = () => {
     if (this.state.same_bill == false) {
@@ -155,7 +150,6 @@ export class Step3Component extends React.Component {
   }
 
   showWallets = () => {
-    console.log("show walledts call")
     if (this.state.showWallets) {
       this.setState({
         showWallets: false
@@ -178,11 +172,7 @@ export class Step3Component extends React.Component {
       walletCheck: false,
       netBankCheck: false
     })
-    // if(event.target.name == "credit" || event.target.name == "UPI" || event.target.name == "EMI") {
-    //   this.props.enalblePay();
-    // } else {
-    //   this.props.disablePay();
-    // }
+  
     if (event.target.name == "credit") {
       this.props.enalblePay({ paymentMode: 'CREDIT_CARD', paymentId: 'CREDIT_CARD' });
       return this.setState({
@@ -250,7 +240,6 @@ export class Step3Component extends React.Component {
 
   renderWallets = () => {
     if (this.state.walletCheck) {
-      console.log("rendering show wallets")
       var menuItems = [];
       this.state.wallets.forEach((item, index) => {
         menuItems.push(<MenuItem eventKey={index + 1} key={index} onClick={this.checkWallet.bind(this, index)}>{item.bankName}</MenuItem>)
@@ -263,7 +252,6 @@ export class Step3Component extends React.Component {
 
   checkWallet(index) {
     var wallet = this.state.wallets[index];
-    console.log('ddddd --- ',wallet);
     var paymentId;
     if (wallet.bankName.includes('PhonePe')) {
       paymentId = 'PHONEPE';
@@ -283,7 +271,6 @@ export class Step3Component extends React.Component {
     this.setState({
       selectedWallet: wallet.bankName,
     })
-    console.log(wallet, "this is selected wallet");
 
   }
   showGiftCard = () => {
@@ -301,14 +288,14 @@ export class Step3Component extends React.Component {
   render() {
     return (
       <>
-        {isMobile() && <div className='checkout-title'>Pay by</div>}
+        {isMobile() && <div className='checkout-title'>{PAY_BY}</div>}
         <div className="col-md-8 checkout_wrapper">
           <div className='listRow clearfix'>
             <div className='stepActive'>
               <div className='checkmark'></div>
             </div>
             {!isMobile() ? <div className="labeltext-box">
-              <h4 className="heading-label">Mobile Number/ Email Address</h4>
+              <h4 className="heading-label">{MOBILE_EMAIL}</h4>
             </div> : ''}
 
             <div className="email-box">
@@ -316,7 +303,7 @@ export class Step3Component extends React.Component {
             </div>
 
             {!this.props.isLoggedIn && !isMobile() ? <div className="action-button">
-              <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">Change</button>
+              <button onClick={this.handleChangeMobile} className="btn-block btn-blackbg">{CHANGE}</button>
             </div> : ''}
           </div>
 
@@ -326,7 +313,7 @@ export class Step3Component extends React.Component {
             </div>
             {!isMobile() ? <div className="labeltext-box shiptoBg">
               <div className="bgGrey">
-                <h4 className="heading-label">Ship to</h4>
+                <h4 className="heading-label">{SHIP_TO}</h4>
               </div>
             </div> : ''}
 
@@ -335,7 +322,7 @@ export class Step3Component extends React.Component {
             </div>
 
             {!isMobile() && <div className="action-button">
-              <button onClick={this.handleChange} className="btn-block btn-blackbg">Change</button>
+              <button onClick={this.handleChange} className="btn-block btn-blackbg">{CHANGE}</button>
             </div>}
           </div>
 
@@ -346,45 +333,20 @@ export class Step3Component extends React.Component {
             </div>
             <div>
               {!isMobile() ? <div className="labeltext-box">
-                <h4 className='heading-label'>Pay By</h4>
+                <h4 className='heading-label'>{PAY_BY}</h4>
               </div> : ''}
 
               <div className="paybytext">
-                {/* <div className='labelInput-greybg customCheckbox clearfix'>
-                    <div class="input_box">
-                      <input className='inputCheck' type="checkbox" id="checkbox" name="redeem" />
-                      <label class="lblCheck defaultlbl" htmlFor="checkbox"></label>
-                    </div>
-                     
-                    <label className='form-label' htmlFor="redeem">Godrej Credit <div className="clearfix"></div><span className='pricetext'>500 Credit used in this order</span></label>
-                    </div> */}
-
-                {/* <div className='labelInput-greybg customCheckbox clearfix'>
-                    <div class="input_box">                      
-                      <input className='inputCheck' id="checkboxRedeem" type="checkbox" name="redeem" onChange={this.showGiftCard}/>
-                      <label class="lblCheck defaultlbl" htmlFor="checkboxRedeem"></label>
-                    </div>
-                      
-                      <label className='form-label' htmlFor="redeem">Redeem Gift Card</label>
-                      <div className='clearfix'></div>
-                      {this.state.showGift ? <div className="giftCard">
-                        <div className="giftcard-input">
-                          <input type="text" placeholder="Gift Card Number" className="form-control" />
-                        </div>
-                        <div className="applybtn">
-                           <button className="btn-block btn-blackbg">Apply</button>
-                        </div>
-                      </div> : ''}
-                    </div> */}
+               
 
                 <div className='paymentMethod customradio'>
-                  <h4 className='heading'>Choose your payment method</h4>
+                  <h4 className='heading'>{CHOOSE_A_PAYMENT_METHOD}</h4>
                   <div className="pay_radio">
                     <div className="inputBox">
                       <input className='inputRadio input' id='credit' type='radio' name="credit" checked={this.state.creditCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='credit'></label>
                     </div>
-                    <label className='form-label' htmlFor='credit'>Credit Card</label>
+                    <label className='form-label' htmlFor='credit'>{CREDIT_CARD}</label>
                   </div>
 
                   <div className="pay_radio">
@@ -392,7 +354,7 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' id='debit' type='radio' name="debit" checked={this.state.debitCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='debit'></label>
                     </div>
-                    <label className='form-label' htmlFor='credit'>Debit Card</label>
+                    <label className='form-label' htmlFor='credit'>{DEBIT_CARD}</label>
                   </div>
 
                   <div className="pay_radio">
@@ -400,33 +362,19 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' type="radio" id="netBank" name="netBank" checked={this.state.netBankCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='netBank'></label>
                     </div>
-                    <label htmlFor='netBank' className='form-label'>Netbanking</label>
+                    <label htmlFor='netBank' className='form-label'>{NET_BANKING}</label>
                   </div>
 
                   {this.renderBanks()}
 
-                  {/* <div className="pay_radio">  
-                        <div className="inputBox">                       
-                          <input name="cod" className='inputRadio input' type="radio" id="cod" name="COD" checked={this.state.CODCheck} onChange={this.handleOptionChange.bind(this)} />
-                          <label className='labelchecked' htmlFor='cod'></label>
-                        </div>
-                        <label htmlFor='cod' className='form-label'>Cash on Delivery</label>
-                      </div> */}
-
-                  {/* <div className="pay_radio">  
-                      <div className="inputBox">                       
-                        <input className='inputRadio input' id='upi' type="radio" name="UPI" checked={this.state.UPICheck} onChange={this.handleOptionChange.bind(this)} />
-                        <label className='labelchecked' htmlFor='upi'></label>
-                       </div>
-                        <label className='form-label' htmlFor='upi'>UPI Payment</label>
-                      </div> */}
+              
 
                   <div className="pay_radio">
                     <div className="inputBox">
                       <input className='inputRadio input' id='emi' type="radio" name="EMI" checked={this.state.EMICheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='emi'></label>
                     </div>
-                    <label htmlFor='emi' className='form-label'>EMI</label>
+                    <label htmlFor='emi' className='form-label'>{EMI}</label>
                   </div>
 
                   <div className="pay_radio">
@@ -434,7 +382,7 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' id='wallet' type="radio" name="wallet" checked={this.state.walletCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='wallet'></label>
                     </div>
-                    <label htmlFor='wallet' className='form-label'>Wallets</label>
+                    <label htmlFor='wallet' className='form-label'>{WALLETS}</label>
                   </div>
                   {this.renderWallets()}
 

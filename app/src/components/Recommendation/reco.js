@@ -71,7 +71,7 @@ class Recommendation extends React.Component {
                         </div>
                         <figure className='leftOne col-md-5' onMouseOver={this.handleData}>
                             <Link className="link" to={routePath1}>
-                                <img src={recoData.recommendationArray[0].imagePath} className='recoImg' />
+                                <img src={recoData.recommendationArray[0].imagePath} className='recoImg' alt={recoData.recommendationArray[0].imageAltText}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
                                         <p className='name'>{recoData.recommendationArray[0].productName}</p>
@@ -91,7 +91,7 @@ class Recommendation extends React.Component {
                         </figure>
                         <figure className='leftTwo col-md-12'>
                             <Link className="link" to={routePath2}>
-                                <img src={recoData.recommendationArray[1].imagePath} className='recoImg' />
+                                <img src={recoData.recommendationArray[1].imagePath} className='recoImg' alt={recoData.recommendationArray[1].imageAltText}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
                                         <p className='name'>{recoData.recommendationArray[1].productName}</p>
@@ -113,7 +113,7 @@ class Recommendation extends React.Component {
                     <div className='rightSide col-md-5'>
                         <figure className='rightThree col-md-12'>
                             <Link className="link" to={routePath3}>
-                                <img src={recoData.recommendationArray[2].imagePath}  className='recoImg' />
+                                <img src={recoData.recommendationArray[2].imagePath}  className='recoImg' alt={recoData.recommendationArray[2].imageAltText}/>
                                 <div className='prodDetails'>
                                 <div className='details'>
                                     <p className='name'>{recoData.recommendationArray[2].productName}</p>

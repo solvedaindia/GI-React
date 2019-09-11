@@ -3,8 +3,11 @@ import { minEMIAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import EMILogo from '../../components/SVGs/emiIcon';
 import '../../../public/styles/cart/cartItem.scss';
-import {STARTING_FROM_RS } from '../../constants/app/cartConstants';
-import {A_MONTH } from '../../constants/app/cartConstants';
+import { formatPrice } from '../../utils/utilityManager';
+import {
+    STARTING_FROM_RS,
+    A_MONTH 
+} from '../../constants/app/cartConstants';
 
 
 class EMIVal extends React.Component {
@@ -50,7 +53,7 @@ class EMIVal extends React.Component {
             <p className='emiMsg'>
                 <span className='emiLogo'>
                 <EMILogo width={23} height={23} />
-                </span>{STARTING_FROM_RS}{emiVal} {A_MONTH }
+                </span>{STARTING_FROM_RS} {formatPrice(emiVal)} {A_MONTH }
             </p>
         )
     }

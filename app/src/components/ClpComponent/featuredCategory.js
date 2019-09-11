@@ -7,7 +7,8 @@ import {
   plpSubCatAPI,
   imagePrefix
 } from '../../../public/constants/constants';
-import '../../../public/styles/subCat/subCat.scss';
+import '../../../public/styles/featuredCat/featuredCat.scss';
+import {STARTING_FROM, PRODUCTS } from '../../constants/app/clpConstants';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -28,7 +29,6 @@ export class SubCategory extends React.Component {
           subCatData: data && data.data,
           isLoading: false,
         });
-        console.log('Featured Category Data', response.data.data);
       })
       .catch(error => {
         this.setState({
@@ -40,7 +40,6 @@ export class SubCategory extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.id !== nextProps.id){
-      console.log('Next Props ID', nextProps);
       this.getSubCategories(nextProps.id);
     }
   }
@@ -52,13 +51,12 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
-      speed: 200,
+	  speed: 200,
+	  infinite: false,
       slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: false,
-      // autoplaySpeed: 2000,
-      //centerMode: false,
+      autoplaySpeed: 2000,
       responsive: [
         {
           breakpoint: 1024,
@@ -88,27 +86,24 @@ export class SubCategory extends React.Component {
       ],
     };
     return (
-      <div className="subCat">
-        {/* <h1 className="title">Featured Category</h1> */}
+      <div className="featuredCat">
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
                 <figure className="subCatSlider">
-                  <a href={subCatListData.onClickUrl} key={index}>
                     <Link to={routePath}>
                     <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
                     />
                     </Link>              
-                  </a>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount} Products
+                      {subCatListData.productCount} {PRODUCTS}
                   </span>
                     <p className="starting">
-                      Starting From 
+                      {STARTING_FROM}
                     <span className="startPrice">
                        ₹{formatPrice(subCatListData.startPrice)}
                       </span>
