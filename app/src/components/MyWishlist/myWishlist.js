@@ -18,6 +18,7 @@ import ShareLogo from '../SVGs/shareIcon';
 import SocialMedia from '../../utils/socialMedia';
 import {isMobile} from '../../utils/utilityManager';
 import CryptoJS from 'crypto-js';
+import { PRODUCT_REMOVED} from '../../constants/app/myWishListConstants';
 
 const encryptKey = 'GIk';
 const seperateStr = '~~';
@@ -48,7 +49,6 @@ class MyWishlist extends React.Component {
     }
 
     if (this.props.location.search !== '') {
-      console.log('mixxx xxx --- ', this.props);
       this.decryptSharingURL(this.props.location.search);
     } else {
       this.fetchMyWishlistData(myWishlistAPI);
@@ -60,20 +60,12 @@ class MyWishlist extends React.Component {
       this.props.history.push('/')
       return;
     }
-    console.log(
-      'nextProps',
-      `${nextProps.wishlistUpdatedCount}  this Porps `,
-      this.props.wishlistUpdatedCount,
-    );
+   
     if (nextProps.wishlistUpdatedCount !== this.props.wishlistUpdatedCount) {
       this.fetchMyWishlistData(myWishlistAPI);
     }
     if (nextProps.removeWishlistFlag) {
-      console.log(
-        'Show The Popup Rmove from Wishlist',
-        nextProps.removeWishlistFlag,
-        this.props.removeWishlistFlag,
-      );
+   
       this.setState({
         wishlistPopup: this.wishlistPopupItem(),
       });
@@ -89,13 +81,12 @@ class MyWishlist extends React.Component {
     }, 2000);
     return (
       <div className="removeFromWishlist clearfix">
-        <span className="wishlist-text">Product removed from Wishlist</span>
+        <span className="wishlist-text">{PRODUCT_REMOVED}</span>
       </div>
     );
   }
 
   MoveToCartPopUpItem() {
-    console.log('Move to Cart Dynamic --- ');
     setTimeout(() => {
       this.setState({
         moveToCartPOPup: null,
@@ -115,11 +106,9 @@ class MyWishlist extends React.Component {
   }
 
   fetchMyWishlistData(APIURL) {
-    console.log('makeeee -- ', APIURL);
     apiManager
       .get(APIURL, {})
       .then(response => {
-        console.log('Wishlist Response----', response.data);
         this.setState({
           wishlistData: [],
         });
@@ -132,7 +121,6 @@ class MyWishlist extends React.Component {
         this.shareURLFormation(response.data.data.wishlistData.length);
       })
       .catch(error => {
-        console.log('Wishlist rrror---', error);
         this.setState({
           error: error.message,
           isLoading: false,
@@ -148,7 +136,6 @@ class MyWishlist extends React.Component {
 
     // Encrypt
     const ciphertext = CryptoJS.AES.encrypt(parmaURL, encryptKey).toString();
-    console.log('its encryptt --- ', ciphertext,this.state.wishlistData.length);
     this.props.rwdShareWishlistURL(wishlistCount === 0 ? null : shareURL + ciphertext);
     this.setState({
       sharingURL: shareURL + ciphertext,
@@ -162,10 +149,8 @@ class MyWishlist extends React.Component {
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
 
     const dataArr = originalText.split(seperateStr);
-    console.log('miiccccc --- ', dataArr);
 
     const finalURl = `${shareWishlistAPI}${dataArr[2]}?accesskey=${dataArr[1]}`;
-    console.log('fecthsssss --- ', finalURl);
     this.setState({
       isShareWishlist: true,
       userNameS: dataArr[0],
@@ -258,7 +243,6 @@ function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const wishlistCount = getReleventReduxState(stateObj, 'wishlistCount');
   const removeFlag = getReleventReduxState(stateObj, 'removeWishlistFlag');
-  console.log('Its Globale MyWishlist', removeFlag);
   return {
     wishlistUpdatedCount: wishlistCount,
     removeWishlistFlag: removeFlag,

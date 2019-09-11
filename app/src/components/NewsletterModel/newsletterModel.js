@@ -30,6 +30,8 @@ import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.
 import newsLetterMobPopupImg from '../../../public/images/news-letter_01.png';
 import { isMobile } from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
+import { MAILING_LIST_YET, RECIEVE_UPDATES,JOINED_MAILING_LIST,SUBMIT, EMAIL_ADD} from '../../constants/app/myWishListConstants';
+
 class NewsletterModel extends React.Component {
   constructor(props) {
     super(props);
@@ -101,7 +103,6 @@ class NewsletterModel extends React.Component {
         alert(`Thanks for Subscribing`);
       })
       .catch(error => {
-        console.log('newsError---', error);
       });
   }
 
@@ -137,17 +138,17 @@ class NewsletterModel extends React.Component {
             <Col xs={12} md={7} className='newsletter-form-box'>
               <div className="form_newsletter">
                 {!isMobile() ? <h3 className="heading">
-                  Have you joined our mailing list yet?
+                 {MAILING_LIST_YET}
                 </h3> : ''}
                 <Form className='news-letter-form'>
                   {!isMobile() ? <p className="signup-text">
-                    'Be the first to receive updates on offers, new arrivals and more.'
+                    `${RECIEVE_UPDATES}`
                   </p> : ''}
                   {isMobile() ? <h3 className="heading">
-                    Have you joined our mailing list yet?
+                   {JOINED_MAILING_LIST}
                   </h3> : ''}
                   <FormGroup className="email">
-                    {isMobile() ? <label className='form-label'>Email Address</label> : ''}
+                    {isMobile() ? <label className='form-label'>{EMAIL_ADD}</label> : ''}
                     <input
                       onChange={this.handleInputChange.bind(this)}
                       type={this.state.inputType}
@@ -163,7 +164,7 @@ class NewsletterModel extends React.Component {
                       onClick={this.doneBtnPressed.bind(this)}
                       className="btn-block btn-bg"
                     >
-                      Submit
+                      {SUBMIT}
                     </Button>
                   </FormGroup>
                 </Form>
