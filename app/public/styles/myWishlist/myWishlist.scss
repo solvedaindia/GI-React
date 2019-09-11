@@ -210,9 +210,19 @@
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
 */
-@media (min-width: 768px) and (max-width: 1024px) {
+@include mix-md-ipad{
   
-  //CSS
+  .myWishlist{
+    .plpCategories{
+      .plp-products{
+        .productlist {
+          padding: 0px;
+          width: 50%;
+          float: left;
+        }
+      }
+    }
+  }  
   
 }
 
@@ -223,7 +233,7 @@
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   
-  //CSS
+ //CSS
   
 }
 
@@ -243,8 +253,8 @@
 
         .productlist{
           padding: 0px;
-		  width: 48%;
-		  float: left;
+          width: 50%;
+          float: left;
           .hoverBox{
             padding: 5px 0px;
             .inner-overlay{

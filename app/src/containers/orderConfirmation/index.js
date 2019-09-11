@@ -24,7 +24,6 @@ class OrderConformation extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Confirmation ---- ', this.props);
         var orderId = this.props.match.params.orderId;
         this.callOrderAPI(orderId);
 
@@ -40,14 +39,11 @@ class OrderConformation extends React.Component {
     //             headers: { store_id: storeId, access_token: token }
     //         }).then((res) => {
     //             if(res.data.orderPlaced == true) {
-    //                 console.log("order place -----------", res)
     //                 resolve();
     //             } else {
-    //                 console.log("order rejected -----------", res)
     //                 reject();
     //             }
     //         }).catch((err) => {
-    //             console.log(err);
     //             reject();
     //         })
     //     })

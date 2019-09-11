@@ -93,6 +93,41 @@ export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
 /* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
+/* wardrobes Banner Slider */
+export const wardrobesBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_BANNER`;
+/* wardrobes Hall Slider */
+export const wardrobesHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WARDROBES_HALL_OF_FAME `;
+/* kitchens Banner Slider */
+export const kitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI__WILLOW_KITCHENS_BANNER`;
+/* willow kitchen Banner Slider */
+export const WillowKitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_WILLOW_KITCHENS_BANNER`;
+/* look book summer spark Banner Slider */
+export const lookBookSummerSparkAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_SUMMER_SPARK`;
+/* chef kitchens Banner Slider */
+export const chefKitchenBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_CHEF_KITCHENS_BANNER`;
+/* recommended slider Slider */
+export const recommendedAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_RECOMMENDED_SLIDER`;
+/* before after Slider */
+export const beforeAfterApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_BEFORE_AFTER_SLIDER`;
+/* Always remember Hall Slider */
+export const AlwaysRememberApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHEN_PLANNING`;
+/* kitchens Hall Slider */
+export const kitchenHallAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_KITCHENS_HALL_OF_FAME `;
+/*what goes in godrej kitchen Slider */
+export const whatGoesKitchenAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_MODULAR_KITCHEN_SLIDER `;
+/*  types of Wardrobes Slider */
+export const typesOfWardrobesAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_TYPES_OF_MODULAR_WARDROBES `;
+/*  inspiration banner */
+export const inspirationBannerAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_INSPIRATION_LOOKBOOK_BANNER `;
+/*  browse by lookbook theme carousel */
+export const lookbookThemeAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_LOOKBOOK_THEME`;
+/*  About Us Our Process */
+export const aboutUsOurProcessApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_OUR_PROCESS`;
+
+/*  About Us Green Initiatives */
+export const aboutUsGreenInitiativesApi = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_GREEN_INITIATIVES`;
+
+
 /* HomePage Track Order */
 export const trackOrderMiniAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/current`;
 /* Featured Category */
@@ -160,10 +195,7 @@ export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocato
 export const storeById = `${secureHttp}://${host}:${port2}/api/v1/storelocator/byId`;
 /* Google Map Key */
 //export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
-//export const mapKey = 'AIzaSyBsrzy8y4BCLnpnqZ_MN0F6yTSIAa8Bg-I';
-export const mapKey = 'AIzaSyDpiDvLqsOlIRiu-4dScwKsmB0HJQwiTBw';
-/* Breadcrumb API */
-export const breadcrumbAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/breadcrumb`;
+export const mapKey = 'AIzaSyBsrzy8y4BCLnpnqZ_MN0F6yTSIAa8Bg-I';
 
 /* Notify Me API */
 export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme`;

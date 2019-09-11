@@ -938,15 +938,31 @@ section.tablecarousel {
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
-@media (min-width: 1281px) {
-  //CSS
+@include mix-xl{
+  .plpCategories{
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      width: 1140px;
+    }
+  } 
 }
 
 /* 
   #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
 */
-@media (min-width: 1025px) and (max-width: 1280px) {
-  //CSS
+@include mix-md-lg {
+  .plpCategories{
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      width: 1140px;
+    }
+  } 
 }
 
 /* 
@@ -987,13 +1003,8 @@ section.tablecarousel {
 
 
   .plpCategories {
-    .grid3 {
-      display: flex;
-      flex-wrap: wrap;
-    }
     .plp-products {
       padding: 64px 0 60px 0;
-      width: 1140px;
       .productlist{
         padding: 0 0 16px 0;
         .product-text{

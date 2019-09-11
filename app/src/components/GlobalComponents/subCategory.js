@@ -9,7 +9,8 @@ import {
   accessToken,
   catID,
 } from '../../../public/constants/constants';
-import '../../../public/styles/subCat/subCat.scss';
+import '../../../public/styles/featuredCat/featuredCat.scss';
+import {PRODUCTS, STARTING_FROM, SPOTLIGHT} from '../../constants/app/footerConstants';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -83,27 +84,25 @@ export class SubCategory extends React.Component {
       ],
     };
     return (
-      <div className="subCat">
-        <h2 className="title">In the Spotlight</h2>
+      <div className="featuredCat">
+        <h2 className="title">{SPOTLIGHT}</h2>
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
               var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
               return (
-                <figure className="subCatSlider">
-                  <a href={subCatListData.onClickUrl} key={index}>
+                <figure className="subCatSlider" key={`${index}-img`}>
                     <Link to={routePath}>
                     <img className="subCatImg"  alt={subCatListData.categoryName}  src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
                     />
                     </Link>
-                  </a>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount} Products
+                      {subCatListData.productCount + PRODUCTS} 
                   </span>
                     <p className="starting">
-                      Starting From
+                      {STARTING_FROM}
                     <span className="startPrice">
                       ₹{formatPrice(subCatListData.startPrice)}
                       </span>

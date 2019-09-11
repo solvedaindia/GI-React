@@ -17,7 +17,6 @@ export class ExStore extends React.Component {
             isLoading: false,
             error: null
         };
-        console.log('Test props', this.props);
     }
     
     /* get lat and long */
@@ -29,7 +28,6 @@ export class ExStore extends React.Component {
                 lat: lat,
                 long: lng
             });
-            console.log('Check Get Data - Store', response.results[0].geometry.location)
         })
         .catch(error => {
             this.setState({

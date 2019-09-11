@@ -10,7 +10,6 @@ class Breadcrumb extends React.Component {
       isLoading: true,
       errors: null
     };
-    console.log('Breadcrumb Data Params', this.props);
   }
 
 

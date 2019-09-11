@@ -4,9 +4,7 @@ import apiManager from '../../../utils/apiManager';
 import { getCookie } from '../../../utils/utilityManager';
 import '../../../../public/styles/headerContainer/headerL1.scss';
 import {
-  headerStatic,
-  storeId,
-  accessToken,
+  headerStatic
 } from '../../../../public/constants/constants';
 
 class HeaderL1 extends React.Component {
@@ -14,6 +12,7 @@ class HeaderL1 extends React.Component {
     layer1Data: [],
     isLoading: true,
     errors: null,
+    getDefaultPincode: ''
   };
 
 	getHeaderLayer1() {
@@ -36,10 +35,19 @@ class HeaderL1 extends React.Component {
 
   componentDidMount() {
     this.getHeaderLayer1();
+    this.setState({
+      getDefaultPincode: getCookie('pincode')
+    })
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      getDefaultPincode: getCookie('pincode')
+    })
   }
 
   render() {
-	const { isLoading, layer1Data } = this.state;
+  const { isLoading, layer1Data, getDefaultPincode } = this.state;
     return (
       <ul className="layer1">
         {!isLoading ? (
@@ -64,16 +72,16 @@ class HeaderL1 extends React.Component {
                     linkData.text === 'LOCATE STORES' ? (
                         <Link
                           className="action"
-                          to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                          to={{ pathname: '/storelocator', state: { pincode: getDefaultPincode } }}
                         >
                           {linkData.text}
                         </Link>
                       ) : (
                        
                         <Link className="action"  to='/support'>
-                        <a className="action" href={linkData.action}>
+                        
                           {linkData.text}
-                        </a>
+                        
                         </Link>
                       )
                     }

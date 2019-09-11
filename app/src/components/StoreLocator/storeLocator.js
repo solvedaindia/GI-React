@@ -17,6 +17,8 @@ import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
+
+// import Imgblack1 from '../../../public/images/store/kitchen-galleries-black.png';
 const NUMB_REG = /^\d+$/;
 const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
 
@@ -40,7 +42,8 @@ class StoreLocator extends React.Component {
             allstoreData: null,
             isOpen: false,
             Infokey: null,
-            filteredSingleStore: null
+            filteredSingleStore: null,
+            defaultPincodeVal: null
         };
 
         this.settings = {
@@ -83,24 +86,30 @@ class StoreLocator extends React.Component {
           };        
     }
 
-    componentDidMount() { 
+    componentDidMount() {
+        let pincodeVal;
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName){ 
                 this.getLatAndLong(this.props.history.location.state.storeName);
-            } else if (this.props.history.location.state.pincode) {
-                this.getLatAndLong(this.props.history.location.state.pincode);
-            } else {
+                pincodeVal = this.props.history.location.state.storeName;
+            }else {
                 this.getLatAndLong(appCookie.get('pincode'));
+                pincodeVal = appCookie.get('pincode');
             }
+            this.setState({
+                defaultPincodeVal: pincodeVal
+            })
         }
         window.scrollTo(0, 0);
     }
 
     componentWillReceiveProps(nextProps) {
+        let pincodeVal;
         if (this.props.history.location.state) {
             let storeNameInput =  document.getElementById("city").value;
             if (nextProps.history.location.state.storeName){ 
                 this.getLatAndLong(nextProps.history.location.state.storeName);
+                pincodeVal = this.props.history.location.state.storeName;
                 if(storeNameInput!=nextProps.history.location.state.storeName)
                 {
                     document.getElementById("city").value="";
@@ -111,19 +120,25 @@ class StoreLocator extends React.Component {
                     document.getElementById("city").value="";
                 }
                 this.getLatAndLong(nextProps.history.location.state.pincode);
+                pincodeVal = this.props.history.location.state.pincode;
             } else {
                 if(storeNameInput!=appCookie.get('pincode'))
                 {
                     document.getElementById("city").value="";
                 }
                 this.getLatAndLong(appCookie.get('pincode'));
+                pincodeVal = appCookie.get('pincode');
             }
+            this.setState({
+                defaultPincodeVal: pincodeVal
+            })
             this.removeActiveClassFromFilter();
 
             window.scrollTo(0, 0);
 
         }
     }
+    
 
     /* handle toggle */
     handleToggleOpen = (index) => {
@@ -396,12 +411,17 @@ class StoreLocator extends React.Component {
         })
     }
 
+    handleChange(e) {
+        this.setState({ 'defaultPincodeVal': e.target.value});
+    }
+
 	render() { 
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
         let showFilter = false;
         let mapData;
         const mapArray = new Array();
+        let pincodeValue;
 
         if (storeData) {
              if (filteredSingleStore !== null) {
@@ -425,7 +445,7 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input id="city" type='text' className='pc-field' ref={(ref)=> {this.inputRef=ref}}/>
+                        <input id="city" type='text' name='locateStoreInput' className='pc-field' ref={(ref)=> {this.inputRef=ref}} value={this.state.defaultPincodeVal} onChange={this.handleChange.bind(this)}/>
                         <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores':'Find'}</button>
                     </div>
 
@@ -446,7 +466,9 @@ class StoreLocator extends React.Component {
                                     </figcaption>
                                 </li>
                                 <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this,'Kitchens', 'kitchen')}>
-                                    <figure className='typeList'><img src={Img3} className='storeImg' alt='Store Information'/></figure>
+                                    <figure className='typeList'><img src={Img3} className='storeImg grey' alt='Store Information'/>
+                                    {/* <img src={Imgblack1} className='storeImg black' alt='Store Information' alt='Store Information'/> */}
+                                    </figure>
                                     <figcaption className="storetext">
                                         Kitchens
                                     </figcaption>
@@ -454,7 +476,7 @@ class StoreLocator extends React.Component {
                                 <li className='storeTypeItem' id='b2b' onClick={this.handleStoreType.bind(this,'Business Furniture', 'b2b')}>
                                     <figure className='typeList'><img src={Img4} className='storeImg' alt='Store Information'/></figure>
                                     <figcaption className="storetext">
-                                        Office/ Business Furniture
+                                        Office/Business Furniture
                                     </figcaption>
                                 </li>
                             </ul>

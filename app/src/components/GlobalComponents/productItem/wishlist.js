@@ -43,7 +43,7 @@ class Wishlist extends React.Component {
   }
 
   onWishlistClick(e) {
-    if (e.target.name === 'viewWishListButton') {
+    if (e.target && e.target.name === 'viewWishListButton') {
       return;
     }
 
@@ -56,14 +56,12 @@ class Wishlist extends React.Component {
         this.addToWishlistAPI();
       }
     } else {
-      // Show login Pop up
-      //alert('Please Login');
       appCookie.set('wishListUniqueId', this.props.uniqueId , 365 * 24 * 60 * 60 * 1000);
       this.setState({ isWelcomeBack: true });
     }
   }
 
-  addToWishlistAPI() {
+  addToWishlistAPI() { 
     const data = {
       sku_id: this.props.uniqueId,
     };
@@ -83,8 +81,6 @@ class Wishlist extends React.Component {
   }
 
   removeFromWishlistAPI() {
-    // console.log('isFromWishlistDDDD --- ',this.props.isFromWishlistPro);
-    // return;
     const data = {
       wishlist_id: getCookie(wishlistIdCookie),
       giftlistitem_id: getCorrespondingGiftlistId(this.props.uniqueId),
@@ -100,7 +96,6 @@ class Wishlist extends React.Component {
           this.props.resetRemoveFromWishlistFlag(true)
         }
         
-        // this.props.updatetWishListCount(6);
       })
       .catch(error => {
         console.log('newsError---', error);
@@ -108,12 +103,6 @@ class Wishlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({
-    //   isWelcomeBack: false,
-    //   wishlistCurrentImage: this.props.isInWishlistPro
-    //     ? wishlistAddedImg
-    //     : wishListRemovedImg,
-    // });
     this.setState({
       isWelcomeBack: false,
       wishlistCurrentImage: nextProps.isInWishlistPro
@@ -128,12 +117,13 @@ class Wishlist extends React.Component {
         ? wishlistAddedImg
         : wishListRemovedImg,
     });
-
-    if (appCookie.get('wishListUniqueId')) {
-        if (appCookie.get('wishListUniqueId') !== '' && appCookie.get('isLoggedIn') !== true) {
-          appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-          document.getElementById("wishlistBtnId").click();
-        }
+    
+    if (appCookie.get('wishListUniqueId') !== "" && appCookie.get('isLoggedIn') === 'true') {
+          const cookieData = appCookie.get('wishListUniqueId');
+          if (document.getElementById("wishlistBtnId_"+cookieData)) {
+            appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+            document.getElementById("wishlistBtnId_"+cookieData).click();
+          }
     }
   }
 
@@ -167,6 +157,10 @@ class Wishlist extends React.Component {
   };
 
   render() {
+    let wishListId = 'wishlistBtnId';
+    if (appCookie.get('wishListUniqueId')) {
+      wishListId = 'wishlistBtnId_'+appCookie.get('wishListUniqueId');
+    }
     return (
       <>
         { !this.props.isPDP &&
@@ -176,7 +170,7 @@ class Wishlist extends React.Component {
         <button
           onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
-          id="wishlistBtnId"
+          id={wishListId}
         >
           {this.state.wishlistCurrentImage}
           { this.props.isPDP &&
@@ -192,7 +186,6 @@ class Wishlist extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // default: state.default
   };
 }
 
@@ -200,4 +193,3 @@ export default connect(
   mapStateToProps,
   { updatetWishListCount, resetRemoveFromWishlistFlag},
 )(Wishlist);
-// export default Wishlist;

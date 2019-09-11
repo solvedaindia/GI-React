@@ -25,21 +25,17 @@ class CLPFullBanner extends React.Component {
           heroSlider: data && data.data.bannerList,
           isLoading: false,
         });
-        console.log('Slider Data', data.data.bannerList);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('SLider Data Error');
       });
-    console.log('SLider Data Error');
   }
 
   componentWillReceiveProps(nextProps) {
     if(this.props.id !== nextProps.id){
-      console.log('Next Props ID', nextProps);
       this.getSliderData(nextProps.id);
     }
   }
