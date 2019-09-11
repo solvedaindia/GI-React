@@ -12,6 +12,7 @@ import {
   getReleventReduxState,
   fetchReleventSortingValue,
   fetchReleventSortingValueByIndex,
+  mapSortIndex,
 } from '../../../utils/utilityManager';
 
 const downArrow = (
@@ -35,7 +36,7 @@ class Sort extends React.Component {
     super(props);
     this.state = {
       currentSelection: recommended,
-      selected: this.props.sortingIndexPro === '' ? 2 : this.props.sortingIndexPro,
+      selected: this.props.sortingIndexPro === '' ? 2 : mapSortIndex(this.props.sortingIndexPro),
       options: [price_L_H, price_H_L, recommended, newArrival],
       title: recommended,
     };
@@ -79,21 +80,23 @@ class Sort extends React.Component {
       return;
     }
     // console.log('Sorrrrr -- ',this.state.selected, fetchReleventSortingValueByIndex(this.state.selected))
-    return this.state.options.map((option, i) => (
-      <li
-        onClick={evt => this.handleClick(i)}
-        key={i}
-        className={`dropdownlist-item list ${
-          option === fetchReleventSortingValueByIndex(this.state.selected)
-            ? 'dropdownlist-itemactive'
-            : ''
-        }`}
-      >
-        {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
-        {option}
-        {/* </Link> */}
-      </li>
-    ));
+    return this.state.options.map((option, i) => {
+      return (
+        <li
+          onClick={evt => this.handleClick(i)}
+          key={i}
+          className={`dropdownlist-item list ${
+            option === fetchReleventSortingValueByIndex(this.state.selected)
+              ? 'dropdownlist-itemactive'
+              : ''
+            }`}
+        >
+          {/* <Link to={{ search: `sort=${fetchReleventSortingValue(option)}` }}> */}
+          {option}
+          {/* </Link> */}
+        </li>
+      )
+    });
   }
 
   render() {
@@ -116,7 +119,7 @@ class Sort extends React.Component {
           <ul
             className={`dropdownlist ${
               this.state.active ? 'dropdownlistactive' : ''
-            }`}
+              }`}
           >
             {this.sortingOptions()}
           </ul>
