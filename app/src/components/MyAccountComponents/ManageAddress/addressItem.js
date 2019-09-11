@@ -6,7 +6,7 @@ import {
 import apiManager from '../../../utils/apiManager';
 import DeletePopup from './deletePopup';
 import {isMobile} from '../../../utils/utilityManager';
-import {DELETE, SET_DEFAULT, DEF_ADD} from '../../../constants/app/myAccountConstants';
+import {DELETE, SET_DEFAULT, EDIT, DEF_ADD} from '../../../constants/app/myAccountConstants';
 
 class AddressItem extends React.Component {
   state = {
