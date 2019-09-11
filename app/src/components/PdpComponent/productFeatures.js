@@ -1,6 +1,9 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { imagePrefix } from '../../../public/constants/constants';
+import {PRODUCT_FEATURES} from '../../constants/app/pdpConstants';
+
+
 
 class productFeatures extends React.Component {
   constructor() {
@@ -44,7 +47,7 @@ class productFeatures extends React.Component {
                 <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="headingBox">
-                      <h2 className="heading">Product Features</h2>
+                      <h2 className="heading">{PRODUCT_FEATURES}</h2>
                     </div>
                   </Col>
                 </Row>

@@ -5,6 +5,8 @@ import {
   imagePrefix,
 } from '../../../public/constants/constants';
 import { formatPrice } from '../../utils/utilityManager';
+import {EMI_STARTING,ON_THIS_PRODUCT} from '../../constants/app/pdpConstants';
+
 
 const prevArrowImg = (
   <img src={`${imagePrefix}/images/godrejInterio/LeftArrow.svg`} alt='Left' />
@@ -61,12 +63,12 @@ class SimilarCombosProducts extends React.Component {
               <p className="emi-text text">
                 <span className="free-accessories">
                   {data.emiData &&
-                    <>EMI Starting from <span className="bold">{parseInt(data.emiData)}</span></>
+                    <>{EMI_STARTING} <span className="bold">{parseInt(data.emiData)}</span></>
                   }
                   
                 </span>
                 { parseInt(data.discount) > 1 &&
-                <><span className="bold">{parseInt(data.discount)}% Off </span> on this product</>
+                <><span className="bold">{parseInt(data.discount)}% Off </span> {ON_THIS_PRODUCT}</>
                 }
               </p>
             </div>

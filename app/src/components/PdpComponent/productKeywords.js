@@ -2,6 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import {isMobile} from '../../utils/utilityManager';
+import {PRODUCTS_YOU_MAY,} from '../../constants/app/pdpConstants';
 
 class productKeywords extends React.Component {
   constructor() {
@@ -57,7 +58,7 @@ class productKeywords extends React.Component {
       {this.props.productKeywords.keywords && this.props.productKeywords.keywords.length > 0 && (
         <Col md={12} sm={12} xs={12}>
           <div className="moreKeyword">
-            <h3 className="heading">Products You May Like</h3>
+            <h3 className="heading">{PRODUCTS_YOU_MAY}</h3>
             {isMobile() &&
               <Slider {...settings}>
               {this.props.productKeywords.keywords.map((keywords, index) => {

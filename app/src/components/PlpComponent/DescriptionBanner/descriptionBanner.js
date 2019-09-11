@@ -29,14 +29,12 @@ class DescriptionBanner extends React.Component {
 
   readMoreClicked() {
     if (this.state.isReadMore) {
-      console.log('Hide');
       this.setState({
         isReadMore: false,
         finalData: this.state.splitData,
         readMoreTitle: 'Read More',
       });
     } else {
-      console.log('Show');
       this.setState({
         isReadMore: true,
         finalData: this.props.descriptionDataPro.description,
@@ -56,7 +54,6 @@ class DescriptionBanner extends React.Component {
                 <div
                   dangerouslySetInnerHTML={{ __html: this.state.finalData }}
                 />
-                {/* <text className='list'>{this.state.finalData}</text> */}
               </ul>
               <button
                 onClick={this.readMoreClicked.bind(this)}

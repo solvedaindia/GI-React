@@ -4,6 +4,7 @@ import { imagePrefix } from '../../../../public/constants/constants';
 import Accordion from './Accordion';
 import '../../../../public/styles/pdpComponent/accordian.scss';
 import Slider from 'react-slick';
+import {PRODUCT_FEATURE} from '../../../constants/app/pdpConstants';
 
 class productFeatures extends React.Component {
   constructor() {
@@ -69,7 +70,7 @@ class productFeatures extends React.Component {
                 <Row>
                   <Col md={12} sm={12} xs={12}>
                     <div className="headingBox">
-                      <h2 className="heading">Product Features</h2>
+                      <h2 className="heading">{PRODUCT_FEATURE}</h2>
                       <span className="plusIcon" onClick={this._handleClick}>
                       </span>
                     </div>

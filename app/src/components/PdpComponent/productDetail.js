@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import {
   imagePrefix,
 } from '../../../public/constants/constants';
+import {PRODUCT_DETAILS} from '../../constants/app/pdpConstants';
 
 class productDetail extends React.Component {
   constructor() {
@@ -91,7 +92,7 @@ class productDetail extends React.Component {
           <div className="product_details">
             <Row>
               <Col md={12} sm={12} xs={12}>
-                <h2 className="heading"> Product Details</h2>
+                <h2 className="heading"> {PRODUCT_DETAILS}</h2>
               </Col>
             </Row>
             <Row>
