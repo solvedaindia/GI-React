@@ -41,7 +41,7 @@ class RecentlyViewed extends React.Component {
   }
 
   render() {
-  
+
     return (
       <div className="bestSeller">
         <h3 className="title">{RECENTLY_VIEWED}</h3>
