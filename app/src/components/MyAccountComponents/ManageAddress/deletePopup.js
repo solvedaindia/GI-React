@@ -6,6 +6,7 @@ import {
 } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import {isMobile} from '../../../utils/utilityManager';
+import {DELETE,CANCEL,SURE_DELETE_YOUR_ADD } from '../../../constants/app/myAccountConstants';
 
 class DeletePopup extends React.Component {
   constructor(props) {
@@ -39,19 +40,19 @@ class DeletePopup extends React.Component {
         <Modal.Body>
           <div className="modalwrapper">
 		   <div className="deleteQuestion"> 
-			<p className="heading">Are you sure you want delete this address?</p> 
+			<p className="heading">{SURE_DELETE_YOUR_ADD}</p> 
 		  </div>
          {!isMobile() && <Button className="cancelBtn" onClick={this.toggle} />}
 
             <div className="actionBtnWrapper">
              <Button className="btn-cancel btn" onClick={this.toggle}>
-                Cancel
+                {CANCEL}
               </Button>
               <Button
                 className="btn-save btn"
                 onClick={this.onDelete.bind(this)}
               >
-                Delete
+               { DELETE}
               </Button>
             </div>
           </div>
