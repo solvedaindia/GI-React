@@ -24,7 +24,6 @@ import {isMobile} from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
 import WhiteLogo from '../SVGs/whiteLogo';
 import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER} from '../../constants/app/primitivesConstants';
-import {PASSWORD} from '../../../constants/app/myAccountConstants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -291,7 +290,7 @@ class RegisterWithEmailMobile extends React.Component {
                   </FormGroup>
                   <FormGroup>
                     <div>
-                      <Label className="label">{PASSWORD}</Label>
+                      <Label className="label">Password</Label>
                       <div className="form-div clearfix">
                         <input
                           type={this.state.inputType}

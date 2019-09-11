@@ -5,7 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { DEFAULT_ACTION } from './constants';
+import {DEFAULT_ACTION } from './constants';
 import * as actionTypes from './constants';
 import {
   fetchReleventSortingValue,

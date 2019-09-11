@@ -9,7 +9,7 @@ import {
 } from '../../../public/constants/constants';
 import { getCookie, isMobile } from '../../utils/utilityManager';
 import '../../../public/styles/trackMiniOrder/trackMiniOrder.scss';
-import {DELIVERY_ON,ITEM,VIEW_ORDER,SHIPMENT  } from '../../constants/app/primitivesConstants';
+import {HELLO, SHIPMENT, ITEM, ORDER_ID, TRACK_ORDER, DELIVERY_ON,ITEM,VIEW_ORDER  } from '../../constants/app/primitivesConstants';
 
 class TrackOrder extends React.Component {
     constructor(props){
