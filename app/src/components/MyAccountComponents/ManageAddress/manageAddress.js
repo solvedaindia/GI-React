@@ -13,6 +13,7 @@ import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 import '../../../../public/styles/myAccount/manageAddress/manageAddress.scss';
 import AddressItem from './addressItem';
 import AddAddressForm from './addAddressForm';
+import { ADD_NEW_ADD} from '../../../constants/app/myAccountConstants';
 
 class ManageAddress extends React.Component {
   constructor(props) {
@@ -39,7 +40,6 @@ class ManageAddress extends React.Component {
   }
 
   addNewAddressBtnClicked(editData) {
-    console.log('Edit Clicked', editData);
     this.setState({
       editAddressData: editData,
       isAddAddress: !this.state.isAddAddress,
@@ -47,7 +47,6 @@ class ManageAddress extends React.Component {
   }
 
   addNewAddressBtnClicked1(editData) {
-    console.log('Edit 2 Clicked', editData);
     this.setState({
       isAddAddress: !this.state.isAddAddress,
     });
@@ -57,11 +56,9 @@ class ManageAddress extends React.Component {
     apiManager
       .get(getAddressListAPI)
       .then(response => {
-        console.log('GetAddresList --- ', response.data.data.addressList);
         this.fetchAddressItems(response.data.data.addressList);
       })
       .catch(error => {
-        console.log('GetAddresList Error --- ', error);
       });
   }
 
@@ -98,7 +95,7 @@ class ManageAddress extends React.Component {
             className="addNewAddress"
             onClick={this.addNewAddressBtnClicked1.bind(this)}
           >
-            <span className='icon'>+</span> Add New Address
+            <span className='icon'>+</span> {ADD_NEW_ADD}
           </button>
         )}
       </div>

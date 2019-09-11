@@ -5,6 +5,7 @@ import apiManager from '../../../utils/apiManager';
 import { guestTrackOrderAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/guestTrackOrder.scss';
 import { isMobile, getCookie } from '../../../utils/utilityManager';
+import {HELLO_GUEST, ORDER_NO, GO_BACK} from '../../../constants/app/myAccountConstants';
 
 class GuestTrackOrder extends React.Component {
   constructor(props) {
@@ -41,7 +42,6 @@ class GuestTrackOrder extends React.Component {
 
     apiManager.get(`${guestTrackOrderAPI}${this.state.inputText}`)
       .then(response => {
-        console.log('guest track Response --- ', response.data, this.props);
         this.props.history.push({ pathname: '/myAccount', state: {from: 'myorder', isGuestTrackOrder: true, orderData:[response.data.data]}});
       })
       .catch(error => {
@@ -52,12 +52,7 @@ class GuestTrackOrder extends React.Component {
           errorMessage: errorMessage,
         });
       });
-      
-      
-    // this.setState({
-    //   error: false,
-    //   redirect: true,
-    // });
+ 
   }
 
   render() {
@@ -81,10 +76,10 @@ class GuestTrackOrder extends React.Component {
     return (
       <div className="guestTrackOrder">
         {!isMobile() && <h3 className="helloGuestMsg clearfix">
-          Hello Guest! Please enter your Order Number to track
+         {HELLO_GUEST}
         </h3>}
         <div className='form-group'>
-          {isMobile() && <label className='form-label'>Order Number</label>}
+          {isMobile() && <label className='form-label'>{ORDER_NO}</label>}
           <input
             className="form-control"
             placeholder="Enter order number"
@@ -92,7 +87,6 @@ class GuestTrackOrder extends React.Component {
           />
           {errorItem}
         </div>
-        {/* <Link to={{ pathname: '/myAccount', state: { from: 'myorder', isGuestTrackOrder: true } }}> */}
         <div className='track-order-btn'>
           <button
             className="submitBtn"
@@ -101,10 +95,9 @@ class GuestTrackOrder extends React.Component {
             {!isMobile() ? 'Track Order' : 'Submit'}
           </button>
         </div>
-        {/* </Link> */}
 
         <div className='back-btn'>
-          <Link to='/' className='go-back'>Go back</Link>
+          <Link to='/' className='go-back'>{GO_BACK}</Link>
         </div>
       </div>
     );

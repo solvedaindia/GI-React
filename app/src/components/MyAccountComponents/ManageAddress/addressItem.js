@@ -6,6 +6,7 @@ import {
 import apiManager from '../../../utils/apiManager';
 import DeletePopup from './deletePopup';
 import {isMobile} from '../../../utils/utilityManager';
+import {DELETE, SET_DEFAULT, DEF_ADD} from '../../../constants/app/myAccountConstants';
 
 class AddressItem extends React.Component {
   state = {
@@ -81,7 +82,7 @@ class AddressItem extends React.Component {
         ) : null}
         <div className={`addressItem ${stylingClass}`}>
           {this.props.addressData.isDefault ? (
-            <label className="defaultAddress">Default Address</label>
+            <label className="defaultAddress">{DEF_ADD}</label>
           ) : null}
 
             {isMobile() && 
@@ -91,7 +92,7 @@ class AddressItem extends React.Component {
                 className="setAsdefaultbtn"
                 onClick={this.setAsDefafultBtnClicked.bind(this)}
               >
-                Set as Default
+                {SET_DEFAULT}
               </div>
             )}
             <ul className="myacAddressList">
@@ -113,17 +114,17 @@ class AddressItem extends React.Component {
 
           {!isMobile() && <ul className="modifyAddress">
             <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-              Delete
+              {DELETE}
             </li>
             <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
-              Edit
+              {EDIT}
             </li>
             {this.props.addressData.isDefault ? null : (
               <li
                 className="listitem"
                 onClick={this.setAsDefafultBtnClicked.bind(this)}
               >
-                Set as Default
+                {SET_DEFAULT}
               </li>
             )}
           </ul>}
