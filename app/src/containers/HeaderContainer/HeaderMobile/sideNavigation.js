@@ -106,6 +106,10 @@ export class HeaderMobile extends React.Component {
 
   onMenuClick() {
     console.log('On menuclick --- ', this.state.showNav);
+    if(document.getElementById('mob-header').className == 'mobileHeader'){
+      document.getElementById('mob-header').classList.add("active-nav");
+    }
+
     this.setState({
       showNav: true,
     });
@@ -183,6 +187,9 @@ export class HeaderMobile extends React.Component {
 
   onOverlayClick() {
     this.onNavigationBackCick();
+    if(document.getElementById('mob-header').className == 'mobileHeader active-nav'){
+      document.getElementById('mob-header').classList.remove("active-nav");
+    }
     this.setState({
       showNav: false,
     });
