@@ -3,6 +3,7 @@ import apiManager from '../../utils/apiManager';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import { bankEmiApi} from '../../../public/constants/constants';
 import {LEARN_MORE,EMI_EASY,TOTAL_COST,PLANS,MONTHS,ANNUAL_INTEREST,CHARGED_PROVIDER,EQUAL_MONTHLY_INSTALLMENT,PAYABLE_PROVIDER,CONVERT_THE_PAYMENT,DEBIT_CARD_PAY} from '../../constants/app/pdpConstants';
+import {EMI } from '../../constants/app/cartConstants';
 
 class EmiInfo extends React.Component {
 	constructor() {
