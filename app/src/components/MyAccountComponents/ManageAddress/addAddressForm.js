@@ -324,7 +324,7 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={200} />
+              <Input inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={70} />
               {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
             </div>
           </div>

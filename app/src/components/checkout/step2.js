@@ -79,7 +79,7 @@ export class Step2Component extends React.Component {
       ship_add_id: '',
       bill_add_id: '',
       orderId: '',
-      defaultAddress: 'false',
+      defaultAddress: true,
       pinPop: false,
       currentPin: null,
       error_name: false,
@@ -494,10 +494,9 @@ export class Step2Component extends React.Component {
         city: this.state.inputText_city,
         state: this.state.inputText_state,
         address: this.state.inputText_address,
-        default: this.state.defaultAddress,
+        default: String(this.state.defaultAddress),
         phone_number: this.state.phone,
         email_id: this.state.email,
-        default: 'true',
       };
     
       let token = appCookie.get('accessToken')
@@ -975,7 +974,7 @@ export class Step2Component extends React.Component {
   handleDefaultAddress = () => {
     if (this.state.defaultAddress == true) {
       this.setState({
-        defaultAddress: 'false'
+        defaultAddress: false
       })
     } else {
       this.setState({
@@ -1117,7 +1116,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-12">
                       <div className="form-div addressTextarea clearfix div-error">
                         <div className='form-group'>
-                          <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={200} />
+                          <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={70} />
                           <label htmlFor='address' className="form-label">Address</label>
                           {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
  </div>
@@ -1141,7 +1140,7 @@ export class Step2Component extends React.Component {
 
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing"  onChange={this.handleDefaultAddress} />
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
@@ -1211,7 +1210,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={200}/>
+                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={70}/>
                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
                       </div>
