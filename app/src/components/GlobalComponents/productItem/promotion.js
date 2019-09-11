@@ -5,9 +5,9 @@ class Promotions extends React.Component {
   render() {
     let emiItem = null;
     if (this.props.emi !== '') {
-      const boldStr = <span className="bold">₹{this.props.emi}</span>
+      const boldStr = <span className="bold"> ₹{this.props.emi}</span>
       emiItem = (
-        <span className="free-accessories"> {EMI_STARTING +  boldStr}</span>
+        <span className="free-accessories">{EMI_STARTING} {boldStr}</span>
       );
     }
 
