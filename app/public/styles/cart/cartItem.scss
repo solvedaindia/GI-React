@@ -94,8 +94,8 @@
                 padding: 0 $base*1.5;
                 position: relative;
                 .cartQty {
-                    z-index: 3;
-                    position: relative;
+                    /*z-index: 3;
+                    position: relative;*/
                 }
                 .subTitle {
                     color: $greyLight;
@@ -165,6 +165,87 @@
                 .moveItem {
                     right: $base*4;
                 }
+            }
+            .Dropdown-root{
+                position:relative
+            }
+            .Dropdown-control{
+                position:relative;
+                overflow:hidden;
+                border:1px solid $lightGrey;
+                border-radius:2px;
+                box-sizing:border-box;
+                color:$black;
+                cursor:default;
+                outline:none;
+                padding:8px 52px 8px 10px;
+                transition:all 200ms ease
+            }
+            .Dropdown-control:hover{
+                box-shadow:0 1px 0 rgba(0,0,0,.06)
+            }
+            .Dropdown-arrow{
+                border-color:$black transparent transparent;
+                border-style:solid;
+                border-width:5px 5px 0;
+                content:' ';
+                display:block;
+                height:0;
+                margin-top:-ceil(2.5);
+                position:absolute;
+                right:10px;
+                top:16px;
+                width:0
+            }
+            .is-open .Dropdown-arrow{
+                border-color:transparent transparent $black;
+                border-width:0 5px 5px
+            }
+            .Dropdown-menu{
+                border:1px solid $lightGrey;
+                background: $colorwhite;
+                box-shadow:0 1px 0 rgba(0,0,0,.06);
+                box-sizing:border-box;
+                margin-top:-1px;
+                max-height:150px;
+                overflow-y:auto;
+                position:absolute;
+                top:100%;
+                width:100%;
+                z-index:9;
+                -webkit-overflow-scrolling:touch
+            }
+            .Dropdown-menu .Dropdown-group>.Dropdown-title{
+                padding:8px 10px;
+                color:$black;
+                font-weight:700;
+                text-transform:capitalize
+            }
+            .Dropdown-option{
+                box-sizing:border-box;
+                color:$black;
+                cursor:pointer;
+                display:block;
+                padding:8px 10px
+            }
+            .Dropdown-option:last-child{
+                border-bottom-right-radius:2px;
+                border-bottom-left-radius:2px
+            }
+            .Dropdown-option:hover{
+                background-color:#f2f9fc;
+                color:$black
+            }
+            .Dropdown-option.is-selected{
+                background-color:#f2f9fc;
+                color:$black
+            }
+            .Dropdown-noresults{
+                box-sizing:border-box;
+                color:#ccc;
+                cursor:default;
+                display:block;
+                padding:8px 10px
             }
         }
     }
@@ -512,8 +593,11 @@
             }
             .prodDetails{
                 .cartQty {
-                    z-index: 3;
-                    position: relative;
+                    /*z-index: 3;
+                    position: relative;*/
+                    .qty-dropdown{
+                        width: 70px;
+                    }
                 }
                 .prodTitle {
                     font-size: $base*2;
@@ -705,7 +789,17 @@
                     }
                     .cartQty {
                         position: relative;
-                        z-index: 3;
+                        z-index: 1;
+                        .qty-dropdown{
+                            width: 52px;
+                            position: absolute;
+                            top: 0px;
+                            right: 10px;
+                            .Dropdown-control{
+                                border: 0px;
+                                padding-right: 45px;
+                            }
+                        }
                     }
                     .cartQty,
                     .price {
