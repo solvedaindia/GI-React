@@ -2104,6 +2104,10 @@
                 .btn:last-child{
                     border-right: 1px solid $grey;
                 }
+                .qty-input{
+                    width: auto;
+                    max-width: $base*8;
+                }
             }
             .pincode{
                 width: 100%;

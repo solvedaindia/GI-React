@@ -308,7 +308,7 @@ class addToCartComponent extends React.Component {
                 -
               </Button>
               <input
-                className="btn"
+                className="btn qty-input"
                 id="quantity"
                 type="text"
                 readOnly
