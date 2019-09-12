@@ -1452,6 +1452,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+	display:none;
     left: 50%;
     transform: translate(-50%, -48%);
     .zoomin{
@@ -1468,6 +1469,10 @@
             width: 14px;
         }
     }
+}
+
+.fullscreen .zoominout {
+	display: block !important;
 }
 
 .loadingIndicator{

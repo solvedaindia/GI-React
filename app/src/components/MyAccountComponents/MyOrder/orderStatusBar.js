@@ -80,6 +80,7 @@ class OrderStatusBar extends React.Component {
     return (
       <div class={this.props.customClassPro}>
         <ul class="track-bar">
+		  {this.state.isInCurrenStatus = false}
           {statusBarItem}
 
           {/* <li class="list visited first"><div className="status">Ordered</div><div className="deliveryDate">21 June 2018</div></li>

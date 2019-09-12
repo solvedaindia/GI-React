@@ -5,6 +5,9 @@
     max-width: 1440px;
     margin: auto;
 }
+#mainContainer {
+	min-height:600px;
+}
 p{ line-height: 24px} 
 h4{font-weight: bold}
 .form-control:focus { 
