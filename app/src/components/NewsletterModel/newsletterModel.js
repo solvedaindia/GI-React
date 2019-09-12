@@ -142,7 +142,7 @@ class NewsletterModel extends React.Component {
                 </h3> : ''}
                 <Form className='news-letter-form'>
                   {!isMobile() ? <p className="signup-text">
-                    `${RECIEVE_UPDATES}`
+                    {RECIEVE_UPDATES}
                   </p> : ''}
                   {isMobile() ? <h3 className="heading">
                    {JOINED_MAILING_LIST}
