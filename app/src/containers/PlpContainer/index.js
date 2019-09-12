@@ -19,6 +19,7 @@ import {
   getReleventReduxState,
   resolveTheFilter,
   resolveBrowserFilters,
+  formateSearchKeyword,
 } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 
@@ -277,8 +278,8 @@ export class PlpContainer extends React.Component {
       if (this.state.isFromSearch.includes('/search')) {
         const params = new URLSearchParams(this.state.searchKeyword);
         const keywoard = params.get('keyword');
-        searchText = keywoard;
-        urlMaking = searchPageAPI + keywoard;
+        searchText = formateSearchKeyword(keywoard, false);
+        urlMaking = searchPageAPI + searchText;
       }
 
       let plpURL =
@@ -549,8 +550,9 @@ export class PlpContainer extends React.Component {
       );
     }
     const params = new URLSearchParams(this.state.searchKeyword);
-    const keywoard = params.get('keyword');
+    var keywoard = params.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
+      keywoard = formateSearchKeyword(params.get('keyword'), false);
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">
