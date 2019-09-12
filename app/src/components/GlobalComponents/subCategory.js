@@ -31,7 +31,7 @@ export class SubCategory extends React.Component {
           subCatData: data && data.data,
           isLoading: false,
         });
-        console.log('Featured Category Data', response.data.data);
+        
       })
       .catch(error => {
         this.setState({

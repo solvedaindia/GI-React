@@ -18,8 +18,7 @@ class TopContainer extends React.Component {
     }
      
     removePrd = () => {
-      console.log("remove prd called");
-      if(this.props.count == 2) {
+      if(this.props.count == 1) {
         alert("Cannot remove Product. Need atleast two products to compare");
       } else {
         this.props.remove(this.props.product.uniqueID)
@@ -27,12 +26,9 @@ class TopContainer extends React.Component {
     }
 
     renderSwatches() {
-      console.log("render swatches called")
       if(this.props.product.swatches && this.props.product.swatches.length > 0) {
-          console.log(this.props.product.swatches, "swatches data")
         var swatches = [];
         this.props.product.swatches.forEach((swatch) => {
-          console.log(swatch, 'swatch')
           if(swatch.colorCode) {
             swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
           } else if(swatch.facetImage) {
@@ -44,12 +40,10 @@ class TopContainer extends React.Component {
         });
         return swatches;
       } else {
-        console.log("no swatches found")
       }
     }
 
     render() {
-      console.log('com pp -- ',this.props);
       var routePath = `/pdp/furniture-${this.props.product.productName.split(' ').join('-')}/${this.props.product.uniqueID}`
       return (
         <Col xs={12} sm={4} md={4} className='comp-list-item'>

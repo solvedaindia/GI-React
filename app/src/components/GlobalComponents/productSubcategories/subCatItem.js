@@ -12,7 +12,7 @@ const subCatItem = ({ itemData }) => (
                     <div className="bold">{itemData.categoryName}</div>
                     <div className='start_price'>{STARTING_RS + formatPrice(itemData.startPrice)}</div>
                 </div>
-                <div className="rightbox">{itemData.productCount + PRODUCTS} </div>
+                <div className="rightbox">{itemData.productCount + " " + PRODUCTS} </div>
             </div>
         </div>
     </>
