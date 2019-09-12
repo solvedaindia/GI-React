@@ -18,7 +18,7 @@ import {
   Modal
 } from 'react-bootstrap';
 import Input from '../Primitives/input';
-import {MOBILE_EMAIL, ONE_OR_MORE_ITEM, SAVE_YOUR_ADDRESS, ENTER_VALID_STATE, REQUIRED_FIELD ,VALID_CITY_DISTRICT, VALID_ADDRESS, VALID_PINCODE,VALID_EMAIL  } from '../../constants/app/checkoutConstants';
+import { MOBILE_EMAIL, ONE_OR_MORE_ITEM, SAVE_YOUR_ADDRESS, ENTER_VALID_STATE, REQUIRED_FIELD, VALID_CITY_DISTRICT, VALID_ADDRESS, VALID_PINCODE, VALID_EMAIL } from '../../constants/app/checkoutConstants';
 
 
 
@@ -142,19 +142,34 @@ export class Step2Component extends React.Component {
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
+      let selectedAddID = appCookie.get('adrID');
       this.callPinApi()
         .then(this.callAddressAPI)
         .then((data) => {
+          var selectedIndex = null;
           if (data.addressList.length === 0) {
             this.newAddActive();
           }
+          else {
+            if (selectedAddID !== null && selectedAddID !== undefined && selectedAddID !== '') {
+              data.addressList.map((data, index) => {
+                if (selectedAddID === data.addressID) {
+                  selectedIndex = index;
+                }
+              })
+            }
+          }
+
           this.setState({
+            selected_add: selectedIndex !== null && selectedIndex !== undefined ? selectedIndex : 0,
             addressList: data.addressList,
             inputText_pincode: data.pinData.pin,
             inputText_city: data.pinData.city,
             inputText_state: data.pinData.state
           })
+          console.log('iicicic --- ',this.state);
         })
+
     } else {
       this.callPinApi()
         .then((data) => {
@@ -209,11 +224,11 @@ export class Step2Component extends React.Component {
     this.props.back();
   }
 
-  newAddActive = () => { 
+  newAddActive = () => {
     this.setState({
       saved_add: null,
       new_add: 'active_add',
-    })  
+    })
   }
 
   mobiAddActive = () => {
@@ -247,15 +262,15 @@ export class Step2Component extends React.Component {
           access_token: token
         }
       }).then(response => {
-       
+
         var data = response.data.data;
         data.pin = val ? val : defPin;
         resolve(data);
       }).catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        
-        if(errorField === 'pin') {
+
+        if (errorField === 'pin') {
           this.setState({
             inputText_city: '',
             inputText_state: '',
@@ -398,7 +413,7 @@ export class Step2Component extends React.Component {
         else {
           return;
         }
-  
+
 
       case 'city':
         return this.setState({
@@ -437,8 +452,8 @@ export class Step2Component extends React.Component {
           return this.setState({
             binputText_pincode: value.target.value,
           });
-        } 
-      
+        }
+
         else {
           return;
         };
@@ -480,7 +495,7 @@ export class Step2Component extends React.Component {
               this.handleProceed()
             })
         }
-      
+
       }).catch((err) => {
         throw new Error(err);
       })
@@ -498,7 +513,7 @@ export class Step2Component extends React.Component {
         phone_number: this.state.phone,
         email_id: this.state.email,
       };
-    
+
       let token = appCookie.get('accessToken')
       axios.post(addAddressAPI, data, {
         headers: {
@@ -551,7 +566,7 @@ export class Step2Component extends React.Component {
           access_token: token
         }
       }).then(res => {
-        
+
         resolve(res.data.data.addressID);
       }).catch(err => {
         throw new Error(err);
@@ -625,7 +640,7 @@ export class Step2Component extends React.Component {
               access_token: token
             }
           }).then((resp) => {
-            
+
             const inventoryFlag = resp.data.data.reserved;
             if (inventoryFlag === '0') {
               alert(`${ONE_OR_MORE_ITEM}`)
@@ -633,13 +648,13 @@ export class Step2Component extends React.Component {
             }
             else {
               this.saveGST(resp.data.data.orderId)
-              .then(() => {
-                resolve(resp.data.data.orderId);
-              }).catch((err) => {
-                reject();
-              })
+                .then(() => {
+                  resolve(resp.data.data.orderId);
+                }).catch((err) => {
+                  reject();
+                })
             }
-            
+
           }).catch((err) => {
             reject()
           })
@@ -825,7 +840,7 @@ export class Step2Component extends React.Component {
       focus_inputText_name: false,
 
     });
-    
+
     this.state.inputText_address = document.getElementById("address").value;
 
     if (!validateState(this.state.inputText_state)) {
@@ -1023,11 +1038,11 @@ export class Step2Component extends React.Component {
     return (
       <>
         {isMobile() && <div className='checkout-title'>
-        Deliver To
+          Deliver To
                  </div>}
         <div className="col-md-8 checkout_wrapper">
           {this.state.pinPop ?
-            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} currentAddressPro={this.state.addressList !== null ? this.state.addressList[this.state.selected_add] : null } /> : ''}
+            <PinChangePopup cancel={this.cancelPinPop} currentPinPro={this.state.currentPin} currentAddressPro={this.state.addressList !== null ? this.state.addressList[this.state.selected_add] : null} /> : ''}
           <div className='listRow clearfix'>
             <div className='stepActive'>
               <div className='checkmark'></div>
@@ -1071,7 +1086,7 @@ export class Step2Component extends React.Component {
                 </div>
               </div> : ''}
               {!this.props.isLoggedIn || this.state.new_add ?
-                <div className={isMobile() &&'add-new-address-form'}>
+                <div className={isMobile() && 'add-new-address-form'}>
                   <div className="row">
                     <div className="col-md-6 colpaddingRight">
                       <div className="form-div clearfix div-error">
@@ -1119,11 +1134,11 @@ export class Step2Component extends React.Component {
                           <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={70} />
                           <label htmlFor='address' className="form-label">Address</label>
                           {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
- </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-<div className="row">
+                  <div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} />
@@ -1140,7 +1155,7 @@ export class Step2Component extends React.Component {
 
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing"  onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
@@ -1148,7 +1163,7 @@ export class Step2Component extends React.Component {
                       </div>
 
                       <div className='col-xs-12 col-md-12 address-submit'>
-                        <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>{!isMobile() ? 'Submit':'Save Address'}</button>
+                        <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>{!isMobile() ? 'Submit' : 'Save Address'}</button>
                       </div>
                     </div> : ''}
                     {this.state.new_add_error ? <div className="col-md-12 error-box"><div className='error-msg'>{this.state.new_add_msg}</div></div> : null}
@@ -1210,7 +1225,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={70}/>
+                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={70} />
                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
                       </div>
