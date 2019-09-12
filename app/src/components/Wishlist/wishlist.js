@@ -50,18 +50,10 @@ class wishListCount extends React.Component {
       this.setState({ isWelcomeBack: true });
     }
 
-    // const token = appCookie.get('isLoggedIn');
-    // console.log('Testest', token);
-    // appCookie.get('isLoggedIn')
-    //   ? alert('Take user to wishlist page')
-    //   : this.setState({isWelcomeBack: true})
+  
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(
-      'Wishlist -- componentWillReceiveProps -- ',
-      nextProps.wishlistUpdatedCount,
-    );
     this.setState({
       wishListCount: nextProps.wishlistUpdatedCount,
       isWelcomeBack: false
@@ -82,7 +74,6 @@ class wishListCount extends React.Component {
 
   render() {
     const token = appCookie.get('isLoggedIn');
-    console.log('From Sishlit --- ', token);
     const { isLoading, wishListCount } = this.state;
     let wishlistItem = null;
     let wishlistLogo = <WishlistLogo />;
@@ -90,7 +81,6 @@ class wishListCount extends React.Component {
       if (wishListCount != 0 && wishListCount != undefined) {
         wishlistItem = <span className="wishListCount">{wishListCount}</span>;
       }
-      console.log('Wihslist islog --', token);
       wishlistLogo = (
         <Link to="/wishlist" onClick={() => this.onLinkNavigation('My Wishlist')}>
           {!isLoading ? wishlistItem : null}
@@ -113,7 +103,6 @@ class wishListCount extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const wishlistCount = getReleventReduxState(stateObj, 'wishlistCount');
-  console.log('Its Globale', wishlistCount);
   return {
     wishlistUpdatedCount: wishlistCount,
   };
@@ -123,4 +112,3 @@ export default connect(
   mapStateToProps,
   { updatetWishListCount },
 )(wishListCount);
-// export default wishListCount;

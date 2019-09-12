@@ -7,7 +7,7 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import { regexPw, validateEmptyObject } from '../../utils/validationManager';
-import {ENTER_VALID_PASS, PASSWORD_SHOULD_NOT, SIX_CHARACTER_PASS, SET_NEW,NEW_PASS } from '../../constants/app/footerConstants';
+import {ENTER_VALID_PASS, PASSWORD_SHOULD_NOT, SIX_CHARACTER_PASS, NEW_PASS } from '../../constants/app/footerConstants';
 
 class ForgotPasswordNewPassword extends React.Component {
   constructor() {
@@ -104,7 +104,7 @@ class ForgotPasswordNewPassword extends React.Component {
 
     return (
       <div className="searchAnimate">
-        <h3 className="heading">{SET_NEW}</h3>
+        <h3 className="heading">Set New Password</h3>
         <Form className="modalmin-height">
           <FormGroup className="enternew-password">
             <p className="text">{NEW_PASS}</p>

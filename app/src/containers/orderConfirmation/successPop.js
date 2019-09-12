@@ -19,7 +19,7 @@ export default class SuccessPop extends React.Component {
         <Modal.Body>
           <div className="modalwrapper succesModal">
             <div className='successIcon'>
-              <img src={require('../../components/SVGs/succesIcon.svg')}/>
+              <img src={require('../../components/SVGs/succesIcon.svg')} alt='sucessIcon'/>
             </div>
             <h3 className='heading-succes'>Success!</h3>
             <div className='orderConfirmed'>Your Order has been confirmed!</div>

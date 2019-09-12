@@ -6,8 +6,8 @@ import OrderSummery from '../orderSummery';
 import { isMobile } from '../../../../utils/utilityManager';
 import RWDSingleProduct from './RWDSingleProduct'
 
-const showImg = <img className='iconImg' src={require('../../../SVGs/plusIcon.svg')} />
-const hideImg = <img className='iconImg' src={require('../../../SVGs/minusIcon.svg')} />
+const showImg = <img className='iconImg' src={require('../../../SVGs/plusIcon.svg')} alt='plusIcon'/>
+const hideImg = <img className='iconImg' src={require('../../../SVGs/minusIcon.svg')} alt='hideIcon'/>
 class RWDOrderItem extends React.Component {
   constructor(props) {
     super(props);
@@ -85,10 +85,10 @@ class RWDOrderItem extends React.Component {
           return (
             <div className="order-item-box" onClick={this.onProductClick.bind(this, data, orderData)}>
               <div className='itemImg'>
-                <img className='imgBox' src={data.thumbnail !== '' ? `${imagePrefix}${data.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} />
+                <img className='imgBox' src={data.thumbnail !== '' ? `${imagePrefix}${data.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} alt='placeHolder'/>
               </div>
               {this.filterProductStat(data.shipmentData)}
-              <div className='itemArrow'><img src={require('../../../../../public/images/nav_next.svg')} /></div>
+              <div className='itemArrow'><img src={require('../../../../../public/images/nav_next.svg')} alt='nxtImg'/></div>
             </div>
           )
         })}

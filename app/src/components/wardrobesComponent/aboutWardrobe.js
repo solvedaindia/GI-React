@@ -30,7 +30,6 @@ class AboutWardrobe extends React.Component {
 			error,
 			isLoading: false,
 			});
-			console.log('@@@@@Espot Data Error', error);
 		});
   	}
 

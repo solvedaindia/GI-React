@@ -12,6 +12,7 @@ import {
 } from '../../../utils/validationManager';
 import { cityStateAPI, addAddressAPI, updateAddressAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
+import {ADD_NEW_ADD, REQUIRED_FIELD, VALID_NAME,DEFAULT_ADDRESS, VALID_MOBILE_NO,ENTER_EMAIL_ID,VALID_CITY,VALID_STATE, VALID_PIN, VALID_ADD} from '../../../constants/app/myAccountConstants';
 
 class AddAddressForm extends React.Component {
   constructor(props) {
@@ -54,58 +55,58 @@ class AddAddressForm extends React.Component {
       isProceed = false;
       this.setState({
         error_name: true,
-        errorMessage_name: !this.state.inputText_name ? 'This is a required field' : 'Please enter a valid Name. It should not exceed 100 characters',
+        errorMessage_name: !this.state.inputText_name ? `${REQUIRED_FIELD}` : `${VALID_NAME}`,
       });
-      // return;
+      
     }
     if (!validateMobileNo(this.state.inputText_number)) {
       isProceed = false;
       this.setState({
         error_number: true,
-        errorMessage_number: !this.state.inputText_number ? 'This is a required field' : 'Please enter valid mobile number.',
+        errorMessage_number: !this.state.inputText_number ? `${REQUIRED_FIELD}` : `${VALID_MOBILE_NO}`,
       });
-      // return;
+      
     }
     if (!validateEmailId(this.state.inputText_email)) {
       isProceed = false;
       this.setState({
         error_email: true,
-        errorMessage_email: !this.state.inputText_email ? 'This is a required field' : 'Please enter valid Email ID.',
+        errorMessage_email: !this.state.inputText_email ? `${REQUIRED_FIELD}` : `${ENTER_EMAIL_ID}`,
       });
-      // return;
+      
     }
     if (!validatePindcode(this.state.inputText_pincode)) {
       isProceed = false;
       this.setState({
         error_pincode: true,
-        errorMessage_pincode: !this.state.inputText_pincode ? 'This is a required field' : 'Please enter valid Pincode.',
+        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PIN}`,
         inputText_pincode: null
       });
-      // return;
+      
     }
     if (!validateAddress(this.state.inputText_address)) {
       isProceed = false;
       this.setState({
         error_address: true,
-        errorMessaget_address: !this.state.inputText_address ? 'This is a required field' : 'Please enter valid Address.',
+        errorMessaget_address: !this.state.inputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADD}`,
       });
-      // return;
+      
     }
     if (!validateCityDistrict(this.state.inputText_city)) {
       isProceed = false;
       this.setState({
         error_city: true,
-        errorMessage_city: !this.state.inputText_city ? 'This is a required field' : 'Please enter valid City/District.',
+        errorMessage_city: !this.state.inputText_city ? `${REQUIRED_FIELD}` : `${VALID_CITY}`,
       });
-      // return;
+      
     }
     if (!validateState(this.state.inputText_state)) {
       isProceed = false;
       this.setState({
         error_state: true,
-        errorMessage_state: !this.state.inputText_state ? 'This is a required field' : 'Please enter valid State.',
+        errorMessage_state: !this.state.inputText_state ? `${REQUIRED_FIELD}` : `${VALID_STATE}`,
       });
-      // return;
+      
     }
 
     if (!isProceed) {
@@ -160,7 +161,6 @@ class AddAddressForm extends React.Component {
   }
 
   addAddress() {
-    // updateAddressAPI+this.props.editAddressDataPro.nickName
     let APIURL = addAddressAPI;
     if (this.props.editAddressDataPro.nickName !== undefined) {
       APIURL = updateAddressAPI + this.props.editAddressDataPro.nickName;
@@ -175,12 +175,10 @@ class AddAddressForm extends React.Component {
       state: this.state.inputText_state,
       default: String(this.state.isSetAsDefault),
     };
-    console.log('Add Address  ----  ', data);
 
     apiManager
       .post(APIURL, data)
       .then(response => {
-        console.log('Add Address Response ---- ', response.data);
         this.props.onUpdateActivity();
         this.props.onCancel({
           name: '',
@@ -194,12 +192,10 @@ class AddAddressForm extends React.Component {
         });
       })
       .catch(error => {
-        console.log('Add Address Error---', error);
       });
   }
 
   pincodeFocusOut() {
-    console.log('pinFocus ---- ',this.state.inputText_pincode)
     if (this.state.inputText_pincode !== '' && this.state.inputText_pincode.length === 6) {
       if (validatePindcode(this.state.inputText_pincode)) {
         this.getStateCityFromPincode();
@@ -226,7 +222,6 @@ class AddAddressForm extends React.Component {
       .catch(error => { 
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        console.log('iii --- ',errorMessage)
         this.setState({
           inputText_city: '',
           inputText_state: '',
@@ -273,10 +268,9 @@ class AddAddressForm extends React.Component {
   }
 
   render() {
-    console.log('The Data --- ', this.props.editAddressDataPro.nickName);
     return (
       <div className="form-BgContainer addAddressContainer">
-        <h4 className="heading">Add New Address</h4>
+        <h4 className="heading">{ADD_NEW_ADD}</h4>
         <button
           className="cancelBtn"
           onClick={this.closeAddNewAddress.bind(this)}
@@ -349,7 +343,7 @@ class AddAddressForm extends React.Component {
               <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
               <label className="lblCheck" htmlFor="checkbox"></label>
             </div>
-            <label className='defaultlbl'>Make this default address</label>
+            <label className='defaultlbl'>{DEFAULT_ADDRESS}</label>
           </div>
         </div>
         <div className='clearfix'></div>

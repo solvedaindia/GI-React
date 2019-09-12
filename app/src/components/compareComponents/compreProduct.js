@@ -20,7 +20,6 @@ class CompPrd extends React.Component {
       }
     }
     renderProducts = () => {
-      console.log(this.props, "this is remove function ---- ",this.props.data)
       var prds = [];
       this.props.data.map((element, index) => {
         prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
@@ -65,7 +64,7 @@ class CompPrd extends React.Component {
         images.push(
           <Col xs={12} sm={4} md={4}  className="comp-list-item">
               <div className="img-box">
-              <img src={`${imagePrefix}${elem.dimensionThumbnail}`} />
+              <img src={`${imagePrefix}${elem.dimensionThumbnail}`} alt='img'/>
               </div>
         </Col>)
       })

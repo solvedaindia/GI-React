@@ -340,14 +340,20 @@ export class PlpContainer extends React.Component {
               });
             }
             else {
-              this.props.initialValuesUpdate(3);
+              this.props.initialValuesUpdate(3); 
             }
           }
           
 
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
-          }
+          }else {
+			  if(this.state.isFromSearch.includes('/search'))
+			  {
+				this.fetchAdBannerData();
+			  }
+		  }
+		  
           console.log(
             'mixmatchh --- ',
             response.data.data.productCount,
@@ -624,7 +630,9 @@ export class PlpContainer extends React.Component {
             <img
               id="me"
               className="loadingImg"
-              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+              alt='Lazy Loader'
+              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')
+            }
             />
           </div>
         )}

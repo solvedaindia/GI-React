@@ -4,6 +4,7 @@ import { Button, Form, FormGroup } from 'react-bootstrap';
 import { validateEmptyObject, validateOTPDigit } from '../../utils/validationManager';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
+import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER} from '../../constants/app/primitivesConstants';
 
 const LeftArrow = (
     <img className='leftArrow'
@@ -106,20 +107,20 @@ class GenerateOtp extends React.Component {
                     </>
                 ):(
                 <>
-                    <h3 className="heading">Enter OTP</h3>
+                    <h3 className="heading">{ENTER_OTP}</h3>
                     <Form>
                         <FormGroup className='otp-verification'>
                             <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
-                            <p className='text otp-text'>Please enter the verification code sent to your mobile number</p>
+                            <p className='text otp-text'>{VERIFICATION_CODE}</p>
                             <div className='form-div clearfix'>
-                                <label for="otp" className="form-label">OTP sent to xxxxxx{userId.substr(userId.length - 4)}</label>
+                                <label for="otp" className="form-label">{XXXX_SENT}{userId.substr(userId.length - 4)}</label>
                                 <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
                                 {errorItem}
-                                <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>Resend OTP</Button>
+                                <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button>
                             </div>
                         </FormGroup>
                         <FormGroup className='text-center'>
-                            <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>Register</Button>
+                            <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>{REGISTER}</Button>
                         </FormGroup>
                     </Form>
                 </>

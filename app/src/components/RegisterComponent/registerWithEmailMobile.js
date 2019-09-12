@@ -22,8 +22,8 @@ import {
 import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
-// import { LogoUrl } from './constants';
 import WhiteLogo from '../SVGs/whiteLogo';
+import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER} from '../../constants/app/primitivesConstants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -47,7 +47,6 @@ class RegisterWithEmailMobile extends React.Component {
       this.setState({
         name: this.props.userdata.name,
         userId: this.props.userdata.user_id,
-		//password: this.props.userdata.password,
 		password: ''
       });
     }
@@ -232,9 +231,8 @@ class RegisterWithEmailMobile extends React.Component {
             {!isMobile () ? (<div className="Thumbnailbox">
 				{<ContentEspot espotName = { 'GI_REGISTER' } />}
             </div>):(<div className="reg-join-Us">
-              {/* <img className="logo_width" src={LogoUrl} alt="logo" /> */}
               <WhiteLogo width="100" height="33" />
-              <h3 className="joinus-heading">Join us Now</h3>
+              <h3 className="joinus-heading">{JOIN_US}</h3>
             </div>)}
           </Col>
 
@@ -245,7 +243,7 @@ class RegisterWithEmailMobile extends React.Component {
                 <Form>
                   <FormGroup>
                     <div className="form-div clearfix">
-                      <Label>Full Name</Label>
+                      <Label>{FULL_NAME}</Label>
                       <input
                         type="text"
                         name="name"
@@ -260,7 +258,7 @@ class RegisterWithEmailMobile extends React.Component {
                   <FormGroup>
                     {this.props.registrationType === registerWithEmail ? (
                       <div>
-                        <Label className="label">Email Address</Label>
+                        <Label className="label">{EMAIL_ADD}</Label>
                         <div className="form-div clearfix">
                           <input
                             type="email"
@@ -274,7 +272,7 @@ class RegisterWithEmailMobile extends React.Component {
                       </div>
                     ) : (
                       <div>
-                        <Label className="label">Mobile Number</Label>
+                        <Label className="label">{MOBILE_NUMBER}</Label>
                         <div className="form-div clearfix">
                           <input
                             type="mobile"
@@ -310,6 +308,7 @@ class RegisterWithEmailMobile extends React.Component {
                         >
                           {
                             <img
+                              alt='show'
                               src={require('../../../src/components/SVGs/eye.svg')}
                             />
                           }
@@ -324,25 +323,24 @@ class RegisterWithEmailMobile extends React.Component {
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
                     >
-                      Register
+                      {REGISTER}
                     </Button>
                     <p className="have-account">
-                    Already have an account?{' '}
+                   {ALREADY_HAVE_PASSWORD + ' '}
                       <a
                         className="login"
                         role="button"
                         onClick={this.renderLoginComponent.bind(this)}
                       >
-                        Login
+                        {LOGIN}
                       </a>
                     </p>
                     <p className="sign_text">
-                    By clicking register you agree to our{' '}
+                    {YOU_AGREE + ' '}
                       <a className="link" href="">
-                        'Terms & Conditions'
+                       {T_C}
                       </a>{' '}
                     </p>
-                    {/* </p> */}
                   </FormGroup>
                 </Form>
               </div>

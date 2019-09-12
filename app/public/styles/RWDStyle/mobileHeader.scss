@@ -286,6 +286,9 @@
   svg:not(:root) {
     margin: 0 8px;
   }
+  &.active-nav{
+    z-index: 111;
+  }
 }
 @media  (max-width: 600px) {
   .sideNavigation {

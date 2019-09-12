@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-// Redux Imports
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import injectSaga from '../../utils/injectSaga';
@@ -104,61 +103,13 @@ class PlpComponent extends React.Component {
             />
           }
           <AdBanner indexPro={index + 1} />
-          {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
         </>
       ));
-      // this.initialize(plpData);
       this.setState({ plpItem: item });
     }
   }
 
-  /*
-  initialize(plpData) {
-    var coloumnLayout;
-    if (this.props.coloumnLayout === 3) {
-      coloumnLayout = 'plp-products grid3';
-    }
-    else {
-      coloumnLayout = 'plp-products grid2';
-    }
 
-
-    var reduxValue = this.props.bannerPosIndex
-    var ddd = [];
-    var actualItem = [];
-    plpData.forEach(function (item, index) {
-      console.log('end===',ddd);
-      //console.log('mmmm===',actualItem);
-      if (index+1 === reduxValue) {
-        ddd.push(<ProductItem key={index} data={item} />);
-       
-        actualItem.push(
-          <>
-            <ul className={coloumnLayout}>{ddd}</ul>
-            <AdBanner key={'banner'+index} indexPro={index+1} />
-          </>
-        )
-        
-        ddd = [];
-        
-      }
-      else {
-        ddd.push(<ProductItem key={index} data={item} />);
-      }
-
-
-    })
-    actualItem.push(
-      <>
-        <ul className={coloumnLayout}>{ddd}</ul>
-        
-      </>
-    )
-
-    this.setState({ plpItem: actualItem });
-
-  }
-*/
 
   render() {
     let coloumnLayout;
@@ -168,10 +119,8 @@ class PlpComponent extends React.Component {
       coloumnLayout = 'plp-products grid2';
     }
     return (
-      // <div className="row no-padding">
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      // </div>
-      //
+      
     );
   }
 }
@@ -179,7 +128,6 @@ class PlpComponent extends React.Component {
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(actionCreators.AddProduct(product)),
-  // onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
 });
 
 const mapStateToProps = state => {

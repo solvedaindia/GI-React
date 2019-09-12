@@ -7,7 +7,8 @@ import {
 import '../../../public/styles/content.scss';
 import '../../../public/styles/homePageStatic.scss';
 import {isMobile, getCookie } from '../../utils/utilityManager';
- 
+import {HELLO_START,HELLO_GUEST, EXPLORE_ROOMS} from '../../constants/app/primitivesConstants';
+
 // const isLoggedIn = getCookie('isLoggedIn') === 'true';
 class EspotContent extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class EspotContent extends React.Component {
 			<div className="espotContent" id={index}>
 				{isMobile() && (this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') && <><h2 className='mwebGreeting'>
-						Hello Start Exploring
+					{HELLO_START}
 					</h2>
           <h1 className="title">{pageLayoutEspot.title}</h1></>
 				}
@@ -61,8 +62,8 @@ class EspotContent extends React.Component {
 					(getCookie('isLoggedIn') !== 'true') ? 
 					<div className='exploreGuest'>
 						{!isMobile() && <div className='greeting'>
-							<p className='greetingHead'>Hello Guest</p>
-							<p className='msg'>Explore By Room</p>
+							<p className='greetingHead'>{HELLO_GUEST}</p>
+							<p className='msg'>{EXPLORE_ROOMS}</p>
 						</div>}
 						<div className='exploreSection' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content }} />
 					</div>

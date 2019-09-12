@@ -29,7 +29,7 @@ accCallback() {
                     href={"#collapseOne"+index} >
                     {item.text}
                     <span className="plusIcon">
-                      <img src={require('../../../../public/images/plusIconWhite.svg')} />
+                      <img src={require('../../../../public/images/plusIconWhite.svg')} alt='addMore'/>
                     </span>
                   </h5>
                   <div id={"collapseOne"+index} className="panel-collapse collapse">

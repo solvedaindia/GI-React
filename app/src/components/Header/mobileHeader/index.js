@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon, Row, Col } from 'react-bootstrap';
-// import CategoryNavigation from 'containers/CategoryNavigation';
 import Logo from 'components/Logo';
 import Header from './styles.js';
 
@@ -10,7 +9,6 @@ class MobileHeader extends React.Component {
       <Header>
         <Row>
           <Col xs={4}>
-            {/* <CategoryNavigation isMobile /> */}
           </Col>
           <Col xs={4}>
             <Logo isMobile />

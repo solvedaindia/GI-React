@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-// import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import apiManager from '../../utils/apiManager';
@@ -45,7 +44,6 @@ class WelcomeBack extends React.Component {
   }
 
   handleClose() {
-    console.log('welocme Cloase');
     this.props.resetCallbackPro();
     this.setState({ show: false, message: null });
   }
@@ -54,7 +52,6 @@ class WelcomeBack extends React.Component {
     if (this.state.loginStatus == 'Login/Register') {
       this.setState({ show: true, message: null });
     } else {
-      console.log('Remove the cookie');
     }
   }
 
@@ -76,7 +73,6 @@ class WelcomeBack extends React.Component {
     });
 
     onGoogleResponse(this.state, itemData => {
-      console.log('GoogleCallback', itemData);
     });
   };
 
@@ -100,7 +96,6 @@ class WelcomeBack extends React.Component {
       });
 
       onFacebookResponse(this.state, itemData => {
-        console.log('FacebookCallback', itemData);
       });
     }
   };
@@ -138,14 +133,11 @@ class WelcomeBack extends React.Component {
           userType: 'Hello User!',
           show: false,
         });
-        // alert('Successfully Logged In');
       })
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        // this.setState({
-        //   message: `Error - ${errorMessage}`,
-        // });
+     
         callbackFunc(errorMessage);
       });
   }
@@ -153,13 +145,11 @@ class WelcomeBack extends React.Component {
   clickedOnForgotPassword() {
     this.props.callbackPro(true);
     this.setState({ show: false, message: null });
-    // this.handleClose();
   }
 
   clickedOnRegister() {
     this.props.callbackPro(false);
     this.setState({ show: false, message: null });
-    // this.handleClose();
   }
 
   render() {
@@ -169,18 +159,7 @@ class WelcomeBack extends React.Component {
     }
     return (
       <div>
-        {/* <ul className="userList">
-			<li className="listItem">
-				<a href="" className="dropDown">
-				{this.state.userType}
-				</a>
-			</li>
-			<li className="listItem">
-				<a className="dropDown" onClick={this.handleShow}>
-				{this.state.loginStatus}
-				</a>
-			</li>
-			</ul> */}
+       
         <Modal
           className="welcomeBack"
           size="lg"
@@ -253,7 +232,6 @@ class WelcomeBack extends React.Component {
             >
               Register
             </Button>
-            {/* <RegisterModalData /> */}
           </p>
         </Modal>
       </div>

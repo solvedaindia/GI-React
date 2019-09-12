@@ -9,6 +9,7 @@ import {
 } from '../../../public/constants/constants';
 import { getCookie, isMobile } from '../../utils/utilityManager';
 import '../../../public/styles/trackMiniOrder/trackMiniOrder.scss';
+import {HELLO, SHIPMENT, ITEM, ORDER_ID, TRACK_ORDER, DELIVERY_ON,VIEW_ORDER  } from '../../constants/app/primitivesConstants';
 
 class TrackOrder extends React.Component {
     constructor(props){
@@ -75,8 +76,8 @@ class TrackOrder extends React.Component {
             ?
             <section className='trackMiniOrder'>
                 <div className='userDetails'>
-                    <p className='userName'>Hello {!!userInfo && userInfo.name}</p>
-                    {!isMobile() && <p className='track'>Track Your Order</p>}
+                    <p className='userName'> {HELLO + !!userInfo && userInfo.name}</p>
+                    {!isMobile() && <p className='track'>{TRACK_ORDER}</p>}
                 </div>
                 <div className='orderDetails'>
                     <Slider {...settings}>
@@ -91,9 +92,9 @@ class TrackOrder extends React.Component {
                                                         <img src={`${imagePrefix}${subOrderDetails.thumbnail}`} alt={index} className='img'/>
                                                     </figure>
                                                     <div className='prodDetails'>
-                                                        {orderDetails.orderItems.length > 1 && <p className='count'>ITEM({itemIndex+1}/{orderDetails.orderItems.length})</p>}
-                                                        {subOrderDetails.shipmentData.length > 1 && <p className='count'>SHIPMENT# ({index+1}/{subOrderDetails.shipmentData.length})</p>}
-                                                        <p className='orderID'>Order ID {orderDetails.orderID}</p>
+                                                        {orderDetails.orderItems.length > 1 && <p className='count'>({ITEM + itemIndex+1}/{orderDetails.orderItems.length})</p>}
+                                                        {subOrderDetails.shipmentData.length > 1 && <p className='count'> ({SHIPMENT + index+1}/{subOrderDetails.shipmentData.length})</p>}
+                                                        <p className='orderID'> {ORDER_ID + orderDetails.orderID}</p>
                                                         <p className='prodName'>{subOrderDetails.productName}</p>
                                                         <p className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
                                                             <span className='qtyVal val'>{shipmentDetails.quantity}</span>
@@ -109,7 +110,7 @@ class TrackOrder extends React.Component {
                                                         }
                                                         
                                                         { !!shipmentDetails.expectedDeliveryDate && isMobile() && 
-                                                            <span className='delDate item'>Delivery on:</span>								
+                                                            <span className='delDate item'>{DELIVERY_ON}</span>								
                                                         }
                                                         { !!shipmentDetails.expectedDeliveryDate && isMobile() && 
                                                             <span className='delDate item'>{shipmentDetails.expectedDeliveryDate} </span>
@@ -117,7 +118,7 @@ class TrackOrder extends React.Component {
                                                         
                                                     </div>
                                                     <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
-                                                        <a className='link btn'>View Order</a>
+                                                        <a className='link btn'>{VIEW_ORDER}</a>
                                                     </Link>
                                                 </div>
                                             )

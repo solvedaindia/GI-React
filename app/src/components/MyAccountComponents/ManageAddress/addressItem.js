@@ -6,6 +6,8 @@ import {
 import apiManager from '../../../utils/apiManager';
 import DeletePopup from './deletePopup';
 import {isMobile} from '../../../utils/utilityManager';
+import {DELETE, SET_DEFAULT, EDIT, DEF_ADD} from '../../../constants/app/myAccountConstants';
+import appCookie from '../../../utils/cookie';
 
 class AddressItem extends React.Component {
   state = {
@@ -42,7 +44,6 @@ class AddressItem extends React.Component {
   }
 
   setAsDefafultBtnClicked() {
-    console.log('setAsDefafultBtnClicked');
     const data = {
       name: this.props.addressData.name,
       phone_number: this.props.addressData.phoneNumber,
@@ -53,7 +54,7 @@ class AddressItem extends React.Component {
       state: this.props.addressData.state,
       default: String(true),
     };
-    console.log('Add Address  ----  ', data);
+   
 
     apiManager
       .post(updateAddressAPI + this.props.addressData.nickName, data)
@@ -63,6 +64,9 @@ class AddressItem extends React.Component {
       .catch(error => {
         console.log('UPDATE Error---', error);
       });
+	  
+	 appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);
+	 appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
   }
 
   render() {
@@ -81,7 +85,7 @@ class AddressItem extends React.Component {
         ) : null}
         <div className={`addressItem ${stylingClass}`}>
           {this.props.addressData.isDefault ? (
-            <label className="defaultAddress">Default Address</label>
+            <label className="defaultAddress">{DEF_ADD}</label>
           ) : null}
 
             {isMobile() && 
@@ -91,7 +95,7 @@ class AddressItem extends React.Component {
                 className="setAsdefaultbtn"
                 onClick={this.setAsDefafultBtnClicked.bind(this)}
               >
-                Set as Default
+                {SET_DEFAULT}
               </div>
             )}
             <ul className="myacAddressList">
@@ -113,17 +117,17 @@ class AddressItem extends React.Component {
 
           {!isMobile() && <ul className="modifyAddress">
             <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-              Delete
+              {DELETE}
             </li>
             <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
-              Edit
+              {EDIT}
             </li>
             {this.props.addressData.isDefault ? null : (
               <li
                 className="listitem"
                 onClick={this.setAsDefafultBtnClicked.bind(this)}
               >
-                Set as Default
+                {SET_DEFAULT}
               </li>
             )}
           </ul>}

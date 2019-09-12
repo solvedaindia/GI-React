@@ -1,4 +1,5 @@
 import React from 'react';
+import { WISHLIST_EMPTY, ITEMS_WISHLIST} from '../../constants/app/myWishListConstants';
 
 class EmptyWishlist extends React.Component {
   constructor(props) {
@@ -9,8 +10,8 @@ class EmptyWishlist extends React.Component {
   render() {
     return (
       <div className="emptyWishlist">
-        <div className="heading-Wishlist">Your Wishlist is empty </div>
-        <div className="subtext">Start adding items to your wishlist</div>
+        <div className="heading-Wishlist">{WISHLIST_EMPTY}</div>
+        <div className="subtext">{ITEMS_WISHLIST}</div>
       </div>
     );
   }

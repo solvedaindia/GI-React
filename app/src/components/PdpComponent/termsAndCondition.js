@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
+import {TC_APPLY} from '../../constants/app/pdpConstants';
+
+
 
 class TermsAndCondition extends React.Component {
 	constructor() {
@@ -25,7 +28,7 @@ class TermsAndCondition extends React.Component {
 	render () {
 		return (
 			<>
-				<a className='emiDetails'  onClick={this.handleShow}>T&C Apply</a>
+				<a className='emiDetails'  onClick={this.handleShow}>{TC_APPLY}</a>
 				<Modal className='modal_emiInstallment' show={this.state.show} onHide={this.handleClose}>
 					<Modal.Body>
 						<Button className="close" onClick={this.handleClose}></Button>

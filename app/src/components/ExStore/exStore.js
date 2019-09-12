@@ -43,10 +43,8 @@ export class ExStore extends React.Component {
 
 	render() {
         const { lat, long } = this.state;
-        
 		return (
-            !!lat && !!long &&
-            <StoreDetails longitude={long} latitude={lat} />
+            <StoreDetails longitude={long || '72.925430'} latitude={lat || '19.102543'} />
 		);
 	}
 }

@@ -18,6 +18,9 @@ import Geocode from "react-geocode";
 import {isMobile} from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
 
+
+import {DIRECTIONS} from '../../constants/app/primitivesConstants';
+
 // import Imgblack1 from '../../../public/images/store/kitchen-galleries-black.png';
 const NUMB_REG = /^\d+$/;
 const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
@@ -225,7 +228,6 @@ class StoreLocator extends React.Component {
                 filteredSingleStore: null
             });
         }).catch(error => {
-            console.log('Error=>', error.response);
             this.setState({
                 storeData: null,
                 isError: true,
@@ -259,7 +261,6 @@ class StoreLocator extends React.Component {
            
         })
         .catch(error => {
-            console.log('Error=>', error.response);
             this.setState({
                 storeData: null,
                 isLoading: false,
@@ -294,7 +295,6 @@ class StoreLocator extends React.Component {
                 filteredSingleStore: null
             })
         }).catch(error => {
-            console.log('Error=>', error.response)
             this.setState({
                 storeData: null,
                 isLoading: false,
@@ -327,7 +327,6 @@ class StoreLocator extends React.Component {
                 } else if (this.props.history.location.state.pincode){
                     getStringVal = 'pincode'
                 }   
-                console.log('Error=>>', error);
                 this.setState({
                     storeData: null,
                     isLoading: false,
@@ -533,11 +532,9 @@ class StoreLocator extends React.Component {
                                                     </div>
                                                     <div className="direction_dealerwrp">
                                                         <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
-                                                            Get Directions
+                                                           {DIRECTIONS}
                                                         </Link>
-                                                        {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
-                                                            Get Directions
-                                                        </Link> */}
+                                                      
                                                         <div className="dealer">
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
@@ -581,11 +578,9 @@ class StoreLocator extends React.Component {
                                                     </div>
                                                     <div className="direction_dealerwrp">
                                                         <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
-                                                            Get Directions
+                                                            {DIRECTIONS}
                                                         </Link>
-                                                        {/* <Link to={{ pathname: `/direction/${this.state.defaultLat}/${this.state.defaultLng}/${physicalData.latitude}/${physicalData.longitude}`}} className="getDirection" target='_blank'>
-                                                            Get Directions
-                                                        </Link> */}
+                                                        
                                                         <div className="dealer">
                                                             <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map"/>{physicalData.ownership}</div>
                                                         </div>
