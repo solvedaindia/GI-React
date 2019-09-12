@@ -34,7 +34,7 @@ class AppliedPromoCode extends React.Component {
     return (
       <div className="promoField">
             <div className='appliedPromoMsg'>
-                <span className='promo'>{promoCode[0]}</span> {COUPAN_APPLIED }
+                <span className='promo'>{promoCode[0]}</span><span> {COUPAN_APPLIED}</span>
 				<button className="removeBtn" onClick={this.removePromoCode}>
 					<CrossIcon />
 				</button>
