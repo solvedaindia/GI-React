@@ -5,6 +5,7 @@ import { pdpApi2, espotAPI, GI_PDP_Promocode_TandC, GI_PDP_Our_Promises } from '
 import PdpComponent from '../../components/PdpComponent/PdpComponent';
 import appCookie from '../../utils/cookie';
 import LoadingIndicator from '../../utils/loadingIndicator';
+import PDPMeta from './pdpMeta';
 
 class PdpContainer extends React.Component {
   constructor() {
@@ -33,7 +34,6 @@ class PdpContainer extends React.Component {
 				pdp: response.data,
 				pdpLoading: false,
 			});
-
 			if (appCookie.get('isPDPAddToCart') === null) {
 				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
 			}
@@ -75,25 +75,16 @@ class PdpContainer extends React.Component {
   }
 
   render() {
+	const { pdp } = this.state;
     return (
-      <div>
-        	<Helmet>
-				{/* Twitter Tags */}
-				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@godrejinterio" />
-				<meta name="twitter:title" content="Display Units and Display Cabinets - Godrej Interio" />
-				<meta name="twitter:description" content=" Godrej Interio services, office furniture, modern office furniture, latest design office furniture, interior office furniture, Desking Furnitures, chairs, comfortable seating chairs, modern storage furniture, latest design workstations, lab solutions, marine solutions, Godrej Interio, lab solution products, marine solutions products, innovative home furniture, latest design furniture, living room furniture, bedroom furniture and kids room furniture, aesthetic design furniture, durable furniture" />
-				<meta name="twitter:image" content="http://www.godrejinterio.com/GodrejInterio/ProductImages/Fab_Fiesta_Media_Unit_1.jpg" />
-				<meta name="twitter:image:alt" content="FAB FIESTA MEDIA UNIT" />
-				{/* OG Tags */}
-
-				<meta property="og:url" content="http://www.godrejinterio.com/GodrejInterio/products.aspx?id=29&amp;menuid=310&amp;catid=41&amp;subcatid=43&amp;sec=det&amp;prodid=4305" />
-				<meta property="og:type" content="Website" />
-				<meta property="og:title" content="Place Page Meta Title" />
-				<meta property="og:description"content="Place Meta Description " />
-				<meta property="og:image" content="Add Image URL" />
-
-			</Helmet>
+		<>
+		{!!pdp && <PDPMeta
+      keywords={pdp.data.keywords} 
+      description={pdp.data.skuData[0].metaDescription}
+      title={pdp.data.skuData[0].pageTitle}
+      alt={pdp.data.skuData[0].imageAltText}
+			/>}
+        <div>
         { !this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading ? (
             <>
 				{ this.state.pdp.data && Object.keys(this.state.pdp.data).length > 0 ? (
@@ -125,6 +116,7 @@ class PdpContainer extends React.Component {
             </div>
           )}
       </div>
+	  </>
     );
   }
 }
