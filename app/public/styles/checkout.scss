@@ -848,7 +848,7 @@
           }
         }
         &:last-child.listRow {
-          border-bottom: 1px solid $borderLight;
+          border-bottom: none;
         }
       }
     }

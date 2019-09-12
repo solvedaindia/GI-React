@@ -19,9 +19,9 @@ class TopContainer extends React.Component {
      
     removePrd = () => {
       if(this.props.count == 1) {
-        alert("Cannot remove Product. Need atleast two products to compare");
+        window.history.go(-3);
       } else {
-        this.props.remove(this.props.product.uniqueID)
+        this.props.remove(this.props.product.uniqueID);
       }
     }
 

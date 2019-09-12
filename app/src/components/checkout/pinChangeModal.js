@@ -27,36 +27,37 @@ class PinChangePopup extends React.Component {
   }
 
   handleProceed = () => {
-    if (this.props.currentAddressPro !== null) {
-      this.setAsDefafultBtnClicked();
-    }
+    // if (this.props.currentAddressPro !== null) {
+    //   this.setAsDefafultBtnClicked();
+    // }
     this.setState({
       redirect: true
     })
   }
 
-  setAsDefafultBtnClicked() {
-    const data = {
-      name: this.props.currentAddressPro.name,
-      phone_number: this.props.currentAddressPro.phoneNumber,
-      email_id: this.props.currentAddressPro,
-      pincode: this.props.currentAddressPro.pincode,
-      address: this.props.currentAddressPro.address,
-      city: this.props.currentAddressPro.city,
-      state: this.props.currentAddressPro.state,
-      default: String(true),
-    };
-    console.log('Add Address  ----  ', data);
-    apiManager
-      .post(updateAddressAPI + this.props.currentAddressPro.nickName, data)
-      .then(response => {})
-      .catch(error => {});
-  }
+  // setAsDefafultBtnClicked() {
+  //   const data = {
+  //     name: this.props.currentAddressPro.name,
+  //     phone_number: this.props.currentAddressPro.phoneNumber,
+  //     email_id: this.props.currentAddressPro,
+  //     pincode: this.props.currentAddressPro.pincode,
+  //     address: this.props.currentAddressPro.address,
+  //     city: this.props.currentAddressPro.city,
+  //     state: this.props.currentAddressPro.state,
+  //     default: String(true),
+  //   };
+  //   console.log('Add Address  ----  ', data);
+  //   apiManager
+  //     .post(updateAddressAPI + this.props.currentAddressPro.nickName, data)
+  //     .then(response => {})
+  //     .catch(error => {});
+  // }
   
   render() {
     if (this.state.redirect) {
       appCookie.set('pincode', this.props.currentPinPro, 365 * 24 * 60 * 60 * 1000);
       appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+      appCookie.set(`adrID=${this.props.currentAddressPro !== null ? this.props.currentAddressPro.addressID : '' };path=/;expires=''`);
       return <Redirect to='/cart'/>;
     }
     return (
