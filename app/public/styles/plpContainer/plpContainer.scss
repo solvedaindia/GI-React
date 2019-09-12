@@ -459,6 +459,7 @@ section.tablecarousel {
       font-size: $base * 1.75;
       padding: 0 0 15px 0px;
       margin: 0;
+      text-transform: uppercase;
     }
     .moreFilterBtn {
       float: left;
@@ -478,7 +479,7 @@ section.tablecarousel {
       position: static;
       display: block;
       float: left;
-      min-width: 23%;
+      min-width: 17%;
 
       &__filter {
         background: $colorwhite;
@@ -486,6 +487,7 @@ section.tablecarousel {
         border-radius: 1px;
         z-index: 1;
         background: $colorwhite;
+        margin-left: -1px;
 
         &:last-child {
           border-right: 1px solid $lightgrey;
@@ -510,7 +512,7 @@ section.tablecarousel {
         transition: max-height 0.2s ease-out;
         max-height: 0;
         overflow: hidden;
-        margin: 0;
+        margin: -1px 0px 0px 0px;
         padding: 0;
         position: absolute;
         z-index: 2;
@@ -561,6 +563,7 @@ section.tablecarousel {
                 justify-content: center;
                 border-radius: 100%;
                 padding: 2px;
+                margin-top:-5px;
 
                 .circleRGB {
                   border-radius: 50%;
@@ -606,10 +609,12 @@ section.tablecarousel {
             }
           }
           .label_text {
-            padding: 0 30px 26px 0;
+            padding: 0px 30px 23px 0;
             color: $battleshipGrey;
             font-size: $base * 1.5;
             min-width: 170px;
+            display: flex !important;
+            align-items: center;
           }
           .label_text_disable {
             padding: 0 30px 26px 0;
@@ -634,6 +639,8 @@ section.tablecarousel {
         padding: 15px;
         position: relative;
         display: flex;
+        font-size: $base*1.75;
+        font-family: $font-medium;
 
         &--active {
           background: #f4f4f4;
@@ -691,6 +698,7 @@ section.tablecarousel {
       font-size: $base * 1.75;
       padding: 0 0 15px 15px;
       margin: 0;
+      text-transform: uppercase;
     }
 
     .dropdown {
@@ -765,7 +773,9 @@ section.tablecarousel {
         padding: 15px;
         background: $colorwhite;
         color: $battleshipGrey;
-        font-weight: 600;
+        font-weight: normal;
+        font-size: $base*1.75;
+        font-family: $font-medium;
 
         &active {
           color: $ceruleanblue;
@@ -1004,7 +1014,7 @@ section.tablecarousel {
 
   .plpCategories {
     .plp-products {
-      padding: 64px 0 60px 0;
+      padding: 20px 0 60px 0;
       .productlist{
         padding: 0 0 16px 0;
         .product-text{
@@ -1087,10 +1097,21 @@ section.tablecarousel {
 }
 
 /* 
-  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads
 */
-@media (min-width: 768px) and (max-width: 1024px) {
-  //CSS
+@include mix-md-ipad{
+  .filterWrapper{
+    .filter{
+      width:79%;
+      .dropdown_filter{
+        min-width: 160px;
+        margin-top:-1px;
+      }
+    }
+    .sort{
+      width: 21%;
+    } 
+  } 
 }
 
 /* 

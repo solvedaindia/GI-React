@@ -1847,9 +1847,6 @@
                     &.fullscreen{
                         background: $colorwhite;
                         .image-gallery-slide-wrapper{
-                            .zoominout, .image-gallery-left-nav, .image-gallery-right-nav{
-                                /*display: none;*/
-                            }
                             .image-gallery-left-nav{
                                 right: 0px;
                                 left: initial;
@@ -2106,6 +2103,10 @@
             .addCart.quantity-box{
                 .btn:last-child{
                     border-right: 1px solid $grey;
+                }
+                .qty-input{
+                    width: auto;
+                    max-width: $base*7;
                 }
             }
             .pincode{
