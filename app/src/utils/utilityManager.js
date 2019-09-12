@@ -319,6 +319,24 @@ export function formatPrice(priceValue) {
 
 /** -----------------------------------------------------------------------
  * Function to map Payment Method Id
+ * @param {*} searchKeyword
+ */
+export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
+    
+    if (searchKeyword !== null && searchKeyword !== undefined && searchKeyword !== '') {
+        if (isKeywordEntered) {
+            return searchKeyword.replace(/&/g, 'z9f')
+        }
+        else {
+            return searchKeyword.replace(/z9f/g, '&')
+        }
+    }
+    
+    
+}
+
+/** -----------------------------------------------------------------------
+ * Function to map Payment Method Id
  * @param {*} PaymentMode
  */
 export function mapPaymentMethodMode(paymentMode) {
