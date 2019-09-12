@@ -1847,9 +1847,6 @@
                     &.fullscreen{
                         background: $colorwhite;
                         .image-gallery-slide-wrapper{
-                            .zoominout, .image-gallery-left-nav, .image-gallery-right-nav{
-                                /*display: none;*/
-                            }
                             .image-gallery-left-nav{
                                 right: 0px;
                                 left: initial;
