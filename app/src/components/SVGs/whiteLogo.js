@@ -2,6 +2,7 @@ import React from 'react';
 
 const WhiteLogo = props => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 33" {...props}>
+    <title>White Logo</title>
     <g fill="none" fillRule="evenodd">
       <path
         fill="#FFF"
