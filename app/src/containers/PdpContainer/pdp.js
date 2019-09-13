@@ -33,7 +33,7 @@ class PdpContainer extends React.Component {
 			this.setState({
 				pdp: response.data,
 				pdpLoading: false,
-			});
+      });
 			if (appCookie.get('isPDPAddToCart') === null) {
 				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
 			}
@@ -78,12 +78,14 @@ class PdpContainer extends React.Component {
 	const { pdp } = this.state;
     return (
 		<>
-		{!!pdp && <PDPMeta
-      keywords={pdp.data.keywords} 
-      description={pdp.data.skuData[0].metaDescription}
-      title={pdp.data.skuData[0].pageTitle}
-      alt={pdp.data.skuData[0].imageAltText}
-			/>}
+		{!!pdp && 
+			<PDPMeta
+				keywords={pdp.data.keywords} 
+				description={pdp.data.skuData ? pdp.data.skuData[0].metaDescription : ''}
+				title={pdp.data.skuData ? pdp.data.skuData[0].pageTitle : ''}
+				alt={pdp.data.skuData ? pdp.data.skuData[0].imageAltText : ''}
+			/>
+		}
         <div>
         { !this.state.pdpLoading && !this.state.espotLoading && !this.state.espotTandCLoading ? (
             <>
