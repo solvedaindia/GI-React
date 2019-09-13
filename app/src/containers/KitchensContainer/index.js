@@ -6,6 +6,7 @@
 
 import React from 'react';
 import  '../../../public/styles/static-pages/kitchens.scss';
+import {Helmet} from "react-helmet";
 
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
@@ -28,32 +29,38 @@ export class KitchenContainer extends React.Component {
 
   render() {
     return (
+      <>
+        <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } />
         <section className="staticpage kitchenContainer">
-            
-            <div className="slider">
-                <KitchenBanner />
+        <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_KITCHEN_META'}/>
+				</Helmet>
+          <div className="slider">
+            <KitchenBanner />
+          </div>
+          <Breadcrumb {...this.props.match.params} staticName={ 'Kitchen Collections' } />
+          <ContentEspot espotName={ 'GI_KITCHEN_TYPES' } />
+          <ContentEspot espotName={ 'GI_DREAM_KITCHEN_STEPS' } />
+          <ContentEspot espotName={ 'GI_KITCHEN_LAYOUTS' } />
+          <WhatGoes />
+          <KitchenHall />
+          {/*
+          <BeforeAfter /> */}
+          <div className="formContainer">
+            <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+            <div id='consultForm' className='formDetails'>
+              <ConsultationForm />
             </div>
-			<Breadcrumb {...this.props.match.params} staticName={ 'Kitchen Collections' }/>
-            <ContentEspot espotName = { 'GI_KITCHEN_TYPES' } />
-            <ContentEspot espotName = { 'GI_DREAM_KITCHEN_STEPS' } />
-            <ContentEspot espotName = { 'GI_KITCHEN_LAYOUTS' } />
-            <WhatGoes />
-            <KitchenHall />
-            {/* <BeforeAfter /> */}
-            <div className="formContainer">
-              <ContentEspot espotName = { 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
-              <div id='consultForm' className='formDetails'>
-                <ConsultationForm />
-              </div>
-            </div>
-            <ContentEspot espotName = { 'GI_Homepage_Our_Promises' } />
-            <ContentEspot espotName = { 'GI_KITCHEN_FAQ' } />
-            <KitchenStore />
-            <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR' } />
-            <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_12' } />
-            <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_13' } />
-
+          </div>
+          <ContentEspot espotName={ 'GI_Homepage_Our_Promises' } />
+          <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
+          <KitchenStore />
+          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR' } />
+          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_12' } />
+          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_13' } />
         </section>
+        <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_END' } />
+      </>
     );
   }
 }

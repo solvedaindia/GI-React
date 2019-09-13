@@ -10,6 +10,7 @@ import YourKitchenYourWay from '../../components/KitchensComp/yourKitchenYourWay
 import FaqEspot from '../../components/Primitives/faq.js';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
 import '../../../public/styles/static-pages/consultForm.scss';
+import {Helmet} from "react-helmet";
 
 import {
   imagePrefix,
@@ -34,27 +35,32 @@ componentDidMount(){
 
 render(){
 return (
-<div className="staticpage chefKitchen">
-    <ChefKitchenBanner />
-    <ContentEspot espotName = { 'GI_STEEL_KITCHEN_BENEFITS' } />
-    <ContentEspot espotName = { 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
- 
-  <div className="formContainer">
-    <div className="container">
-    <ContentEspot espotName = { 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+  <>
+    <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
+    <div className="staticpage chefKitchen">
+    <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_KITCHEN_META'}/>
+				</Helmet>
+      <ChefKitchenBanner />
+      <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
+      <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
+      <div className="formContainer">
+        <div className="container">
+          <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
-      <div id='consultForm' className="Form-bakground">
-        <ConsultationForm />
+          <div id='consultForm' className="Form-bakground">
+            <ConsultationForm />
+          </div>
+        </div>
       </div>
+      <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
+      <ExKitchens />
+      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR' } />
+      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
+      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
     </div>
-  </div>
-  <ContentEspot espotName = { 'GI_KITCHEN_FAQ' } />
-  <ExKitchens />
-  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR' } />
-  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_10' } />
-  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_11' } />
-
-</div>
+    <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_END' } />
+  </>
 )
 }
 }
