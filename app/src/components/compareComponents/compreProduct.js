@@ -88,6 +88,9 @@ class CompPrd extends React.Component {
 
     renderSpecs = () => {
       var specs = [];
+      if (this.props.data === undefined && this.props.data === null && this.props.data === '' && this.props.data.length === 0) {
+        return <></>
+      }
       this.props.data[0].specs.map((att, index) => {
         if(this.props.data.length > 1) {
           var second_att = this.props.data[1].specs.find(s_att => {
