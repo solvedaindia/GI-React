@@ -558,13 +558,24 @@
                     }
                 }
             }
+            &.in{
+                padding-left: 0px !important;
+            }
         }
         &.modal-wrapperjoinus  {
             .modal-dialog{
                 max-width: 500px;
                 width:100%;
             }
-           
+           &.in{
+               padding-left: 0px !important;
+           }
+        }
+
+        &.registerEmailMobile  {
+           &.in{
+               padding-left: 0px !important;
+           }
         }
     } 
 
