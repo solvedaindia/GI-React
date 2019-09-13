@@ -8,7 +8,7 @@ import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
 import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../utils/utilityManager';
-import {SUGGESTIONS} from '../../constants/app/primitivesConstants';
+import { SUGGESTIONS } from '../../constants/app/primitivesConstants';
 
 import { Route, NavLink, Link, withRouter } from 'react-router-dom';
 
@@ -24,20 +24,21 @@ class SearchBar extends React.Component {
     super();
     this.state = {
       searchData: [],
+      categorySearchData: [],
     };
     this.handleClick = this.handleChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.clearFields= this.clearFields.bind(this);
-    this.showButton= this.showButton.bind(this);
+    this.clearFields = this.clearFields.bind(this);
+    this.showButton = this.showButton.bind(this);
     this.searchResultClick = false;
   }
 
   handleChange = event => {
     const searchText = event.target.value;
-    if (event.target.value === '') {            
-      var crossbtn=document.getElementById('clearField');
-      crossbtn.style.display='none';
-  	}
+    if (event.target.value === '') {
+      var crossbtn = document.getElementById('clearField');
+      crossbtn.style.display = 'none';
+    }
     this.setState({
       searchData: [],
     });
@@ -48,9 +49,11 @@ class SearchBar extends React.Component {
           .get(autoSuggestAPI + searchText)
           .then(response => {
             document.addEventListener('click', this.handleOutsideClick, false);
-            this.setState({
-              searchData: response.data.data.suggestionView[0].entry,
-            });
+            searchStr =
+              this.setState({
+                searchData: response.data.data.suggestionView[0].entry,
+                categorySearchData: response.data.data.categorySuggestionView ? response.data.data.categorySuggestionView : [],
+              });
           })
           .catch(error => {
           });
@@ -71,7 +74,7 @@ class SearchBar extends React.Component {
     }
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     const wage = document.getElementById('searchInput');
     wage.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
@@ -83,7 +86,7 @@ class SearchBar extends React.Component {
   onSearchResultClick(e) {
     const text = formateSearchKeyword(e.target.value.trim(), true);
     if (text !== '') {
-      
+
       this.props.plpReduxStateReset();
       this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
       this.setState({
@@ -91,61 +94,91 @@ class SearchBar extends React.Component {
       });
       this.searchResultClick = true;
     }
-    
+
   }
 
   onLinkNavigation = (e) => {
-    document.getElementById("searchInput").value=e.target.name;
+    document.getElementById("searchInput").value = e.target.name;
     this.props.plpReduxStateReset();
     this.setState({
       searchData: [],
     });
   }
 
-	clearFields(e){         
-		document.getElementById("searchInput").value='';     
-		const crossbtn = document.getElementById('clearField');
-    crossbtn.style.display='none'
+  clearFields(e) {
+    document.getElementById("searchInput").value = '';
+    const crossbtn = document.getElementById('clearField');
+    crossbtn.style.display = 'none'
     document.getElementById("searchInput").focus();
-	}
+  }
 
-	showButton(e){
+  showButton(e) {
     if (this.searchResultClick === false) {
-	    const crossbtn = document.getElementById('clearField');
-      crossbtn.style.display='block'
+      const crossbtn = document.getElementById('clearField');
+      crossbtn.style.display = 'block'
     } else {
       this.searchResultClick = false;
     }
-	}
+  }
+
+  renderCategorySuggestions() {
+    
+    if (this.state.categorySearchData.length !== 0) {
+      var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
+        const searchItem = document.getElementById("searchInput").value;
+        var categoryRoutePath = `/furniture-${item.categoryName.split(' ').join('-').toLowerCase()}/${item.categoryId}`;;
+        var searchStr = item.categoryName;
+        searchStr += ` in ${item.parentRoom}`;
+        if (index < 4) {
+          return (
+            <li className="list" key={index}>
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={categoryRoutePath} >
+                <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
+              </Link>
+            </li>
+          );
+        }
+      })
+
+      return catSuggestionItem;
+    }
+    
+    
+    
+  }
 
   render() {
-	const searchData = this.state.searchData;
+    const searchData = this.state.searchData;
     return (
-        <div className='searchBar'>
-            <SearchLogo />                
-            <input className='searchInput' id='searchInput' onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' />
-            <a className='clearField' id='clearField' role='button' onClick={this.clearFields}>X</a>
-            { searchData.length > 0 && 
-                <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
-                    <ul className='auto-search'>
-                    <li className='list'><a className='link' href='#'><strong>{SUGGESTIONS}</strong></a></li>
-                        { searchData.map((item, index) => {    
-                            const searchItem = document.getElementById("searchInput").value;
-                            if (index < 6) {								
-                                return(
-									<li className="list" key={index}>
-										<Link name={item.term} className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${item.term}`, }} >
-											<strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length).replace(' ','')}
-										</Link>
-									</li>
-                                );
-                            }
-                            })
-                        }
-                    </ul>
-                </div>
-            }
-        </div>
+      <div className='searchBar'>
+        <SearchLogo />
+        <input className='searchInput' id='searchInput' onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' />
+        <a className='clearField' id='clearField' role='button' onClick={this.clearFields}>X</a>
+        {searchData.length > 0 &&
+          <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
+            <ul className='auto-search'>
+              <li className='list'><a className='link' href='#'><strong>{SUGGESTIONS}</strong></a></li>
+              {searchData.map((item, index) => {
+                const searchItem = document.getElementById("searchInput").value;
+                var categoryRoutePath;
+                var searchStr = item.term;
+                if (index < 6) {
+                  return (
+                    <li className="list" key={index}>
+                      <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${searchStr}`, }} >
+                        <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length).replace(' ', '')}
+                      </Link>
+                    </li>
+                  );
+                }
+              })
+              }
+              {this.renderCategorySuggestions()}
+            </ul>
+          </div>
+        }
+        
+      </div>
     );
   }
 }

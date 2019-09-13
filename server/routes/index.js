@@ -34,5 +34,6 @@ router.use('/emi', require('./api/emi'));
 router.use('/pincode', require('./api/pincode'));
 router.use('/compare', require('./api/compare'));
 router.use('/static', require('./api/staticpage'));
+router.use('/cache', require('./api/cache'));
 
 module.exports = router;

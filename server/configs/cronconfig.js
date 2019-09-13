@@ -10,7 +10,8 @@
 //        └───────────────────────── second (0 - 59, OPTIONAL)
 
 const cronSchedule = {
-  storeInfo: '0 6 * * *', // At 6:00 AM
+  storeInfo: '0 1 * * *', // At 6:30 AM
+  clearCache: '0 1 * * *', // At 6:30 AM
 };
 
 module.exports.getRule = function getRule(cronName) {

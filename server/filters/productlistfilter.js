@@ -26,7 +26,8 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
       }
 
       if (facet.entry && facet.entry.length > 0) {
-        facet.entry.forEach(facetValue => {
+        for (let i = 0; i < facet.entry.length; i += 1) {
+          const facetValue = facet.entry[i];
           const facetEntry = {
             label: facetValue.label,
             count: Number(facetValue.count),
@@ -42,6 +43,13 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
                 priceRange[0],
               )} to ₹${formatPrice(priceRange[1])}`;
             }
+          }
+          if (
+            facet.value === 'parentCatgroup_id_search' &&
+            !facetValue.extendedData.parentIds
+          ) {
+            // eslint-disable-next-line no-continue
+            continue;
           }
           if (facet.value === 'parentCatgroup_id_search') {
             facetEntry.value = `${facet.value}:${catalogID}_${
@@ -62,9 +70,8 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
               );
             }
           }
-
           eachFacetValue.facetValues.push(facetEntry);
-        });
+        }
       }
       facetData.push(eachFacetValue);
     });
