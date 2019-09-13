@@ -1,17 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const pdpHandler = require('../../handlers/pdphandler');
+const apiCache = require('../../utils/apicache');
 
 router.get('/productDetails/:skuId', (req, res, next) => {
-  pdpHandler.getProductDetails(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
+  apiCache.getCachedResponse('pdp', req, cacheRes => {
+    if (cacheRes) {
+      res.status(200).send(cacheRes);
+    } else {
+      pdpHandler.getProductDetails(req, (err, result) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        const resJSON = {
+          status: 'success',
+          data: result,
+        };
+        apiCache.cacheResponse('pdp', req, resJSON);
+        res.status(200).send(resJSON);
+      });
     }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
   });
 });
 

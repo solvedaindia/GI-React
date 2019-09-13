@@ -1,18 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const plphandler = require('../../handlers/plphandler');
+const apiCache = require('../../utils/apicache');
 
 /* To Get Product List By Category ID for PLP */
 router.get('/bycategory/:categoryId', (req, res, next) => {
-  plphandler.getProductsByCategory(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
+  apiCache.getCachedResponse('plp', req, cacheRes => {
+    if (cacheRes) {
+      res.status(200).send(cacheRes);
+    } else {
+      plphandler.getProductsByCategory(req, (err, result) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        const resJSON = {
+          status: 'success',
+          data: result,
+        };
+        apiCache.cacheResponse('plp', req, resJSON);
+        res.status(200).send(resJSON);
+      });
     }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
   });
 });
 

@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 const async = require('async');
 const origin = require('./origin');
 const constants = require('./constants');
@@ -193,8 +194,9 @@ function findInventory(headers, reqParams, callback) {
           if (
             response.body.InventoryAvailability[0].inventoryStatus ===
               'Available' &&
-            Number(response.body.InventoryAvailability[0].availableQuantity) >=
-              Number(reqParams.quantity)
+            parseInt(
+              response.body.InventoryAvailability[0].availableQuantity,
+            ) >= parseInt(reqParams.quantity)
           ) {
             inventoryResponse.inventoryStatus = 'available';
             inventoryResponse.deliveryDate =

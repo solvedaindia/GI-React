@@ -76,4 +76,5 @@ module.exports = Object.freeze({
   getConsultant: `${prodWcsResourceUrl}/{{storeId}}/consultation/dropDownValues`,
   unlockOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/unlockOrder/{{orderId}}`,
   categoryBreadcrumb: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?responseFormat=json&profileName=IBM_BreadCrumbByCategoryUniqueId`,
+  categorySuggestions: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/categorySuggestions`,
 });

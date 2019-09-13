@@ -216,23 +216,26 @@ function productCompareDataSummary(element, skuId) {
     uniqueId: '',
     type: 'product',
     sKUs: [],
-    attributes: [],
     swatches: [],
   };
   if (element) {
     compareDataSummary.uniqueId = skuId;
-    if (element.attributes && element.attributes.length > 0) {
-      compareDataSummary.attributes = productDetailFilter.getComparableAttributes(
-        element.attributes,
-      );
-    }
     if (element.sKUs && element.sKUs.length > 0) {
       element.sKUs.forEach(sku => {
-        compareDataSummary.swatches.push(
-          productDetailFilter.swatchAttributesForCompare(sku),
+        const varData = productDetailFilter.swatchAttributesForCompare(sku);
+        const index = compareDataSummary.swatches.findIndex(
+          e => e.name === varData.name,
         );
+        if (index === -1) {
+          compareDataSummary.swatches.push(varData);
+        }
         const skuProductSummary = productDetailFilter.productDetailSummary(sku);
         const descAttr = productDetailFilter.getDescriptiveAttributes(sku);
+        if (sku.attributes && sku.attributes.length > 0) {
+          skuProductSummary.attributes = productDetailFilter.getComparableAttributes(
+            sku.attributes,
+          );
+        }
         skuProductSummary.dimensionThumbnail = descAttr.dimensionThumbnail;
         skuProductSummary.width = descAttr.width;
         skuProductSummary.height = descAttr.height;
