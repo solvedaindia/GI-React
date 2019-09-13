@@ -23,7 +23,7 @@ class PDPMeta extends React.Component {
                 <title>{this.props.title}</title>
                 
                 <meta name="keywords" content={
-                    this.props.keywords.map((keywordsData)=> {
+                    !!this.props.keywords && this.props.keywords.map((keywordsData)=> {
                         return (
                             keywordsData
                         )
