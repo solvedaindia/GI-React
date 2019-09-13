@@ -67,6 +67,9 @@ export class MyAccountContainer extends React.Component {
 
     })
   }
+  isScrollTop(){
+    window.scrollTo(0, 0);
+  }
 
   render() {
     var redirectedFrom;
@@ -90,22 +93,22 @@ export class MyAccountContainer extends React.Component {
             <h4 className="username">{this.props.username}!</h4>
           ) : null} */}
           <li onClick={this.onMyProfileClick.bind(this)} className="list">
-            <a className={`link ${redirectedFrom === 'myprofile' ? 'active' : ''}`} href="#profile-v" data-toggle="tab" >
+            <a className={`link ${redirectedFrom === 'myprofile' ? 'active' : ''}`} href="#profile-v" data-toggle="tab">
               My Profile
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'password' ? 'active' : ''}`} href="#changePassword-v" data-toggle="tab" >
+            <a className={`link ${redirectedFrom === 'password' ? 'active' : ''}`} href="#changePassword-v" data-toggle="tab">
               Change Password
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'myorder' ? 'active' : ''}`} href="#myOrder-v" data-toggle="tab" >
+            <a className={`link ${redirectedFrom === 'myorder' ? 'active' : ''}`} href="#myOrder-v" data-toggle="tab" onClick={this.isScrollTop.bind(this)}>
               My Orders
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'address' ? 'active' : ''}`} href="#manageAddresses-v" data-toggle="tab" >
+            <a className={`link ${redirectedFrom === 'address' ? 'active' : ''}`} href="#manageAddresses-v" data-toggle="tab" onClick={this.isScrollTop.bind(this)}>
               Manage Addresses
             </a>
           </li>
