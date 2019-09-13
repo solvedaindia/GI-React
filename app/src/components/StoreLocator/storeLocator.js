@@ -3,7 +3,7 @@ import apiManager from '../../utils/apiManager';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { storeAPI, storeCityAPI, storeById, mapKey } from '../../../public/constants/constants';
+import { storeAPI, ipDataApi, storeCityAPI, storeById, mapKey } from '../../../public/constants/constants';
 import '../../../public/styles/store/locator.scss';
 import Img1 from '../../../public/images/store/furniture-stores-black.png';
 import Img2 from '../../../public/images/store/mattress-stores-grey.png';
@@ -37,6 +37,8 @@ class StoreLocator extends React.Component {
         super(props);
         this.state = {
             storeData: null,
+			currentDataLat:null,
+			currentDataLong:null,
             isLoading: true,
             defaultLat: '',
             defaultLng: '',
@@ -88,7 +90,7 @@ class StoreLocator extends React.Component {
             ],
           };        
     }
-
+	
     componentDidMount() {
         let pincodeVal;
         if (this.props.history.location.state) {
@@ -103,9 +105,31 @@ class StoreLocator extends React.Component {
                 defaultPincodeVal: pincodeVal
             })
         }
+		
+		var request = new XMLHttpRequest();
+		request.open('GET', ipDataApi);
+		request.setRequestHeader('Accept', 'application/json');
+		request.onLoad = function (e){
+			if (this.readyState === 4 && this.status == 200) 
+			{
+				var ipData = JSON.parse(this.responseText);
+				console.log('ipData ' , ipData);
+				this.state.currentDataLat = ipData.latitude;
+				this.state.currentDataLong = ipData.longitude;
+			}
+			else {
+				console.log('ipData ' + ' error');
+			}
+		
+		}.bind(this);
+		request.send(null);
+		
         window.scrollTo(0, 0);
     }
 
+	
+	
+	
     componentWillReceiveProps(nextProps) {
         let pincodeVal;
         if (this.props.history.location.state) {
@@ -531,7 +555,8 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
+													
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.currentDataLat},${this.state.currentDataLong}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
                                                            {DIRECTIONS}
                                                         </Link>
                                                       
@@ -577,7 +602,7 @@ class StoreLocator extends React.Component {
                                                         <div className="PhoneNo">{physicalData.telephone}</div>
                                                     </div>
                                                     <div className="direction_dealerwrp">
-                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
+                                                        <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.currentLocationData.latitude},${this.state.currentLocationData.longitude}'/'${physicalData.latitude},${physicalData.longitude}'`}} className="getDirection" target='_blank'>
                                                             {DIRECTIONS}
                                                         </Link>
                                                         

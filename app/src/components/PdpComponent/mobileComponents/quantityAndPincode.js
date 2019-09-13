@@ -48,7 +48,8 @@ class addToCartComponent extends React.Component {
   }
 
   /* render delivery message */
-  renderdeliveryMessage(props) {
+  renderdeliveryMessage(props) 
+  {
       let errorMsg = '';
       if (this.state.isPincodeValid === false) {
         errorMsg = 'Please enter valid pincode';
@@ -58,17 +59,19 @@ class addToCartComponent extends React.Component {
     if (props.pincodeServiceable === false) {
       errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
-        errorMsg = props.error;
+        errorMsg = props.error;	
       }
-      return <div className="pincodeNotServiceable">{errorMsg}</div>;
+	  return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
 
-    if (this.deliveryTime === '') {
-      if (props.deliveryDateAndTime) {
-        this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
-        return <div className="soldbyDealers">{this.deliveryTime}</div>;
-      }
-    }
+	  if (props.deliveryDateAndTime) 
+	  {
+		this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
+		return <div className="soldbyDealers">{this.deliveryTime}</div>;
+	  }
+	  else {
+		  return <div className="soldbyDealers">{this.deliveryTime}</div>;
+	  }
   }
 
     	/* get pincode API params */
