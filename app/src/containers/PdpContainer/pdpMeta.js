@@ -19,7 +19,10 @@ class PDPMeta extends React.Component {
                 <meta property="og:title" content={this.props.title} />
                 <meta property="og:description"content={this.props.description} />
                 <meta property="og:image" content="http://www.godrejinterio.com/GodrejInterio/ProductImages/Fab_Fiesta_Media_Unit_1.jpg" />
-                <meta name="keywords" content={!!
+                
+                <title>{this.props.title}</title>
+                
+                <meta name="keywords" content={
                     this.props.keywords.map((keywordsData)=> {
                         return (
                             keywordsData
