@@ -11,7 +11,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../../utils/utilityManager';
 
 export class HeaderSearch extends React.Component {
   constructor(props) {
@@ -80,7 +80,7 @@ export class HeaderSearch extends React.Component {
 onkeydownclick(text) {
 	if(event.key === 'Enter') {
 		if (text !== '') {
-			this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+			this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
 			this.onLinkNavigation(this.state.inputText);
 		}
     }

@@ -7,7 +7,7 @@ import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
+import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../utils/utilityManager';
 import {SUGGESTIONS} from '../../constants/app/primitivesConstants';
 
 import { Route, NavLink, Link, withRouter } from 'react-router-dom';
@@ -81,7 +81,7 @@ class SearchBar extends React.Component {
   }
 
   onSearchResultClick(e) {
-    const text = e.target.value.trim();
+    const text = formateSearchKeyword(e.target.value.trim(), true);
     if (text !== '') {
       
       this.props.plpReduxStateReset();

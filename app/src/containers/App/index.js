@@ -257,6 +257,7 @@ export default class App extends React.Component {
         )} */}
         
         {/* <HeaderContainer /> */}
+		<div id="mainContainer">
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route path="/rooms-:category/:id" component={ClpContainer} />
@@ -295,6 +296,7 @@ export default class App extends React.Component {
           
           
         </Switch>
+		</div>
         {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') || window.location.pathname.includes('/order/confirm/') ? '' : <FooterContainer /> }
       </div>
     );

@@ -159,7 +159,7 @@ class productImagesAndVideos extends React.Component {
   }
 
   renderZoomButtons = props => { 
-    if (this.isZoomScreen) {
+    if (true) {
       return  <div className="zoominout" id="zoomdiv">
       <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
       <button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
