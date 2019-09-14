@@ -100,8 +100,8 @@ export class SubCategory extends React.Component {
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount} {PRODUCTS}
-                  </span>
+                      {subCatListData.productCount + ' '  + PRODUCTS}
+                    </span>
                     <p className="starting">
                       {STARTING_FROM}
                     <span className="startPrice">

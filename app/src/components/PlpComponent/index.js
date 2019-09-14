@@ -46,7 +46,7 @@ class PlpComponent extends React.Component {
     );
     if (compPrd) {
       alert(
-        'Product alreday added in Compare tray. Please add another product',
+        'Product already added in Compare tray. Please add another product',
       );
     } else if (this.props.compData.length == 3) {
       alert(
