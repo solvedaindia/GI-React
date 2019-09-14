@@ -2,6 +2,7 @@ import React from 'react';
 
 const MWebLogo = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
+        <title>Web</title>
         <g fill="none" fill-rule="evenodd">
             <path fill="#F9A01B" d="M17.349 10.77h4.385V6.385h-4.385z"/>
             <path fill="#026DC6" d="M6.385 6.385h4.385V2H6.385z"/>

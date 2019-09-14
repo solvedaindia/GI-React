@@ -1,6 +1,7 @@
 import React from 'react';
 const MoveToWishListLogo = props => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 16" {...props}>
+    <title>Move to Wishlist</title>
     <g fill="none" fillRule="evenodd" opacity=".499">
       <path d="M-2-4h24v24H-2z" />
       <path

@@ -2,6 +2,7 @@ import React from 'react';
 const ExchangeLogo = (props) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 39" {...props}>
+            <title>Exchange</title>
             <g fill="none" fillRule="evenodd">
                 <path d="M-4-8h55v55H-4z"/>
                 <g stroke="#000">
