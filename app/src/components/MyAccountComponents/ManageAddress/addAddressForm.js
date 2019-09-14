@@ -311,7 +311,7 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="number" title="Pincode" name="pincode" id="pincode" size="6" placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
+              <Input inputType="text" title="Pincode" name="pincode" id="pincode" maxLength="6"  placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
               {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div> : null}
             </div>
           </div>

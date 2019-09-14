@@ -372,7 +372,7 @@ class StoreLocator extends React.Component {
                 {storeData.map((item, index) => {
                     const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, item.latitude, item.longitude);
                     let iconType = orangeIcon;
-                    if (item.ownership === 'Godrej Interio Store') {
+                    if (item.storeName === 'Godrej Interio Store') {
                         iconType = blueIcon;
                     }
                     return (
@@ -526,6 +526,10 @@ class StoreLocator extends React.Component {
                                         if (physicalData.ribbonText) {
                                             ribbonClass = 'ribbon';
                                         }
+										 let iconType = orangeIcon;
+											if (physicalData.storeName === 'Godrej Interio Store') {
+												iconType = blueIcon;
+											}
                                         return (
                                             <>
                                                 <div key={index}>
@@ -555,7 +559,7 @@ class StoreLocator extends React.Component {
                                                             </Link>
 
                                                             <div className="dealer">
-                                                                <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map" />{physicalData.ownership}</div>
+															<div className="dealertext"><img className="mapicon" src={iconType} alt="map" />{physicalData.ownership}</div>
                                                             </div>
                                                         </div>
                                                     </div></div>
