@@ -48,9 +48,7 @@ class RWDFilter extends React.Component {
 
 
   unCkeckAll(item) {
-    console.log('In the uncheckAll---', item);
     [...document.getElementsByClassName('checkbox' + item.facetName)].map((input) => {
-      console.log('uncheck---', input);
       if (input.checked) {
         input.checked = !input.checked;
       }
@@ -129,7 +127,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
-  console.log('Zebraa MIN --- ', stateObj.updateFilter);
   return {
     updatedFilter: stateObj.updateFilter,
   };

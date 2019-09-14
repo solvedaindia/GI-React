@@ -31,7 +31,6 @@ class MyOrder extends React.Component {
   componentDidMount() {
     addEventListener('scroll', this.onscroll);
     if(this.props.isGuestTrackOrderPro) {
-      console.log('guestOrderDataPro --- ',this.props.guestOrderDataPro);
       this.setState({
         orderListData: this.props.guestOrderDataPro,
         hasMore: false,
@@ -56,15 +55,9 @@ class MyOrder extends React.Component {
         `${orderListAPI}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&`;
-      console.log('order API --- ', orderAPI);
+      
       apiManager.get(orderAPI)
         .then(response => {
-          console.log('OrderList Response --- ', response.data);
-          // this.setState({
-          //   orderListData: response.data.data.orderList,
-          //   isLoading: false,
-          // })
-
           this.setState({
             orderListData: isFromScroll ? [...this.state.orderListData, ...response.data.data.orderList] : response.data.data.orderList,
             hasMore: response.data.data.orderList.length !== 0, // Now only show on 0 Products and disable it for lazyload
@@ -82,7 +75,6 @@ class MyOrder extends React.Component {
   }
 
   renderSelection(trackOrderData) {
-    console.log('back tro rnder seldelt', trackOrderData);
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
       updatedTrackOrderData: trackOrderData
@@ -91,7 +83,6 @@ class MyOrder extends React.Component {
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
-    console.log('is Has more --- ', hasMore);
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
     const windowHeight =
@@ -155,7 +146,6 @@ class MyOrder extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log('in the Track order --- ', this.state.isTrackOrder);
   }
 
   loadingbar() {
@@ -172,7 +162,6 @@ class MyOrder extends React.Component {
   }
 
   render() {
-    console.log('is Show TrackOrder --- ', this.state.isTrackOrder)
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     return (

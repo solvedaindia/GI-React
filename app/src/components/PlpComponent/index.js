@@ -61,8 +61,6 @@ class PlpComponent extends React.Component {
   };
 
   parsePLPData(data) {
-    console.log('isFromWishlist ---- ', this.props.showSkuPro);
-
     if (data) {
       const wishlistArr = getOnlyWishlistUniqueIds();
       const plpData = data.plpDataPro;

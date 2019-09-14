@@ -66,7 +66,6 @@ class OrderConformation extends React.Component {
             this.setState({
                 orderData: res.data.data
             })
-            console.log(res, "order data");
         }).catch((err) => {
             console.log(err, "order error")
         })

@@ -113,7 +113,6 @@ function plpContainerReducer(state = initialState, action) {
                 columnLayout: action.coloumnValue,
             };
         case actionTypes.ADDPRODUCT:
-            console.log('frd', 'in add product reducer', state);
             return {
                 ...state,
                 compWidgetData: [...state.compWidgetData, action.payload.product],

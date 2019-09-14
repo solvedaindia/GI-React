@@ -93,7 +93,7 @@ class StoreLocator extends React.Component {
 
     componentDidMount() {
 
-        let pincodeVal;
+        let pincodeVal =  appCookie.get('pincode');
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName) {
                 this.getLatAndLong(this.props.history.location.state.storeName);
@@ -102,11 +102,12 @@ class StoreLocator extends React.Component {
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
             }
-            this.setState({
-                defaultPincodeVal: pincodeVal
-            })
+            
         }
 
+		this.setState({
+                defaultPincodeVal: pincodeVal
+        })
         this.getUserCurrentLocation();
         window.scrollTo(0, 0);
     }
