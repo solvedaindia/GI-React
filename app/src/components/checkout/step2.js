@@ -133,7 +133,10 @@ export class Step2Component extends React.Component {
 
       isSetAsDefault: '',
       new_add_error: '',
-      new_add_msg: ''
+      new_add_msg: '',
+
+      isSaveBtnDisabled: false,
+      isProcceedBtnDisabled: false
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -471,6 +474,7 @@ export class Step2Component extends React.Component {
   }
 
   callAddress = () => {
+    
     this.addAddress()
       .then(this.callAddressAPI)
       .then((data) => {
@@ -502,6 +506,9 @@ export class Step2Component extends React.Component {
   }
 
   addAddress = () => {
+    this.setState({
+      isSaveBtnDisabled: true
+    })
     return new Promise((resolve, reject) => {
       var data = {
         name: this.state.inputText_name,
@@ -521,6 +528,7 @@ export class Step2Component extends React.Component {
           access_token: token
         }
       }).then(response => {
+        
         if (this.state.same_bill == false && !this.props.isLoggedIn) {
           this.saveBillAdd()
             .then((billAddId) => {
@@ -539,7 +547,13 @@ export class Step2Component extends React.Component {
           }
           resolve();
         }
+        this.setState({
+          isSaveBtnDisabled: false
+        })
       }).catch(err => {
+        this.setState({
+          isSaveBtnDisabled: false
+        })
         throw new Error(err);
         reject();
       })
@@ -600,6 +614,9 @@ export class Step2Component extends React.Component {
   }
 
   addAddressToCart = () => {
+    this.setState({
+      isProcceedBtnDisabled: true,
+    })
     return new Promise((resolve, reject) => {
       let token = appCookie.get('accessToken');
       axios.get(minicartAPI, {
@@ -656,12 +673,21 @@ export class Step2Component extends React.Component {
             }
 
           }).catch((err) => {
+            this.setState({
+              isProcceedBtnDisabled: false,
+            })
             reject()
           })
         }).catch((err) => {
+          this.setState({
+            isProcceedBtnDisabled: false,
+          })
           reject();
         })
       }).catch((err) => {
+        this.setState({
+          isProcceedBtnDisabled: false,
+        })
         reject(err);
       })
     })
@@ -1163,7 +1189,7 @@ export class Step2Component extends React.Component {
                       </div>
 
                       <div className='col-xs-12 col-md-12 address-submit'>
-                        <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>{!isMobile() ? 'Submit' : 'Save Address'}</button>
+                        <button className="btn-blackbg btn-block" disabled={this.state.isSaveBtnDisabled} onClick={this.onSavebuttonClick.bind(this)}>{!isMobile() ? 'Submit' : 'Save Address'}</button>
                       </div>
                     </div> : ''}
                     {this.state.new_add_error ? <div className="col-md-12 error-box"><div className='error-msg'>{this.state.new_add_msg}</div></div> : null}
@@ -1264,7 +1290,7 @@ export class Step2Component extends React.Component {
                   </div>
                   <div className='row'>
                     <div className='col-md-12 form-group'>
-                      {!isMobile() ? (<button className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button>) : ''}
+                      {!isMobile() ? (<button disabled={this.state.isProcceedBtnDisabled} className="btn-blackbg btn-block continueMargin" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button>) : ''}
                     </div>
                   </div>
                 </div> : <div>
@@ -1286,7 +1312,7 @@ export class Step2Component extends React.Component {
                       <button className="btn-cancelborder btn-block" onClick={this.savedAddActive.bind(this)}>Cancel</button>
                     </div>
                     <div className={!isMobile() ? 'col-md-6' : 'col-xs-6 col-md-6 address-submit'}>
-                      <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)}>Submit</button>
+                      <button className="btn-blackbg btn-block" onClick={this.onSavebuttonClick.bind(this)} disabled={this.state.isSaveBtnDisabled}>Submit</button>
                     </div>
                   </div>
                 </div>}
@@ -1307,7 +1333,7 @@ export class Step2Component extends React.Component {
 
           {isMobile() ? (<div className='checkout-btn-floater'>
             <div className='total-amount'><div className='net-amount-box'>&#8377;{this.props.netAmount} <span className='total-amount-text'>Total Amount</span></div></div>
-            <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button></div>
+            <div className='proceed-btn'><button disabled={this.state.isProcceedBtnDisabled} className="btn-blackbg btn-block" onClick={this.props.isLoggedIn ? this.onLoginSave.bind(this) : this.onSavebuttonClick.bind(this)}>Proceed</button></div>
           </div>) : ''}
         </div>
       </>

@@ -12,7 +12,7 @@ import {
 } from '../../../utils/validationManager';
 import { cityStateAPI, addAddressAPI, updateAddressAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
-import {ADD_NEW_ADD, REQUIRED_FIELD, VALID_NAME,DEFAULT_ADDRESS, VALID_MOBILE_NO,ENTER_EMAIL_ID,VALID_CITY,VALID_STATE, VALID_PIN, VALID_ADD} from '../../../constants/app/myAccountConstants';
+import { ADD_NEW_ADD, REQUIRED_FIELD, VALID_NAME, DEFAULT_ADDRESS, VALID_MOBILE_NO, ENTER_EMAIL_ID, VALID_CITY, VALID_STATE, VALID_PIN, VALID_ADD } from '../../../constants/app/myAccountConstants';
 
 class AddAddressForm extends React.Component {
   constructor(props) {
@@ -42,6 +42,8 @@ class AddAddressForm extends React.Component {
       errorMessaget_address: '',
       errorMessage_city: '',
       errorMessage_state: '',
+
+      isSaveBtnDisabled: false
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -57,7 +59,7 @@ class AddAddressForm extends React.Component {
         error_name: true,
         errorMessage_name: !this.state.inputText_name ? `${REQUIRED_FIELD}` : `${VALID_NAME}`,
       });
-      
+
     }
     if (!validateMobileNo(this.state.inputText_number)) {
       isProceed = false;
@@ -65,7 +67,7 @@ class AddAddressForm extends React.Component {
         error_number: true,
         errorMessage_number: !this.state.inputText_number ? `${REQUIRED_FIELD}` : `${VALID_MOBILE_NO}`,
       });
-      
+
     }
     if (!validateEmailId(this.state.inputText_email)) {
       isProceed = false;
@@ -73,7 +75,7 @@ class AddAddressForm extends React.Component {
         error_email: true,
         errorMessage_email: !this.state.inputText_email ? `${REQUIRED_FIELD}` : `${ENTER_EMAIL_ID}`,
       });
-      
+
     }
     if (!validatePindcode(this.state.inputText_pincode)) {
       isProceed = false;
@@ -82,7 +84,7 @@ class AddAddressForm extends React.Component {
         errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PIN}`,
         inputText_pincode: null
       });
-      
+
     }
     if (!validateAddress(this.state.inputText_address)) {
       isProceed = false;
@@ -90,7 +92,7 @@ class AddAddressForm extends React.Component {
         error_address: true,
         errorMessaget_address: !this.state.inputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADD}`,
       });
-      
+
     }
     if (!validateCityDistrict(this.state.inputText_city)) {
       isProceed = false;
@@ -98,7 +100,7 @@ class AddAddressForm extends React.Component {
         error_city: true,
         errorMessage_city: !this.state.inputText_city ? `${REQUIRED_FIELD}` : `${VALID_CITY}`,
       });
-      
+
     }
     if (!validateState(this.state.inputText_state)) {
       isProceed = false;
@@ -106,7 +108,7 @@ class AddAddressForm extends React.Component {
         error_state: true,
         errorMessage_state: !this.state.inputText_state ? `${REQUIRED_FIELD}` : `${VALID_STATE}`,
       });
-      
+
     }
 
     if (!isProceed) {
@@ -165,6 +167,9 @@ class AddAddressForm extends React.Component {
     if (this.props.editAddressDataPro.nickName !== undefined) {
       APIURL = updateAddressAPI + this.props.editAddressDataPro.nickName;
     }
+    this.setState({
+      isSaveBtnDisabled: true
+    })
     const data = {
       name: this.state.inputText_name,
       phone_number: this.state.inputText_number,
@@ -190,8 +195,14 @@ class AddAddressForm extends React.Component {
           state: '',
           isDefault: String(false),
         });
+        this.setState({
+          isSaveBtnDisabled: false
+        })
       })
       .catch(error => {
+        this.setState({
+          isSaveBtnDisabled: false
+        })
       });
   }
 
@@ -207,7 +218,7 @@ class AddAddressForm extends React.Component {
         inputText_state: '',
       })
     }
-    
+
   }
 
   getStateCityFromPincode() {
@@ -219,7 +230,7 @@ class AddAddressForm extends React.Component {
           inputText_state: response.data.data.state,
         });
       })
-      .catch(error => { 
+      .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         this.setState({
@@ -264,7 +275,7 @@ class AddAddressForm extends React.Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0,document.body.scrollHeight - 700);
+    window.scrollTo(0, document.body.scrollHeight - 700);
   }
 
   render() {
@@ -325,14 +336,14 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="City/District" name="city" id="cityDistrict" placeholder="Enter City/District" value={this.state.inputText_city} handleChange={this.handleInput} readOnly/>
+              <Input inputType="text" title="City/District" name="city" id="cityDistrict" placeholder="Enter City/District" value={this.state.inputText_city} handleChange={this.handleInput} readOnly />
               {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
             </div>
           </div>
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="State" name="state" id="state" placeholder="Enter State" value={this.state.inputText_state} handleChange={this.handleInput} readOnly/>
+              <Input inputType="text" title="State" name="state" id="state" placeholder="Enter State" value={this.state.inputText_state} handleChange={this.handleInput} readOnly />
               {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
             </div>
           </div>
@@ -351,7 +362,7 @@ class AddAddressForm extends React.Component {
         <div className='col-md-12 add-new-btn'>
           <div className='actionBtnWrapper'>
             <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
-            <button onClick={this.onSavebuttonClick.bind(this)} className='btn-save btn'>Save</button>
+            <button onClick={this.onSavebuttonClick.bind(this)} disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Save</button>
           </div>
         </div>
       </div>
