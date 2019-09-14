@@ -72,6 +72,7 @@ export class CheckoutComponent extends React.Component {
       failPop: false,
       redirect: false,
       shipMode: null,
+      isCheckSumAPIFail: false,
     }
   }
 
@@ -307,6 +308,9 @@ export class CheckoutComponent extends React.Component {
       window.location.assign(url)
 
     }).catch((err) => {
+      this.setState({
+        isCheckSumAPIFail: true
+      })
     })
   }
 
@@ -430,6 +434,7 @@ export class CheckoutComponent extends React.Component {
                   orderData={this.state.orderSummaryData}
                   pay={this.state.pay}
                   initialBdpayment={this.initialBdpayment}
+                  isCheckSumAPIFailPro={this.state.isCheckSumAPIFail}
                   checkoutStep={this.state.step} />
               </div>
             </div>

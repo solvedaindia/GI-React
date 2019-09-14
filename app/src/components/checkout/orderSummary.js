@@ -27,7 +27,8 @@ export class OrderSummaryComponent extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          minEMI: false
+          minEMI: false,
+          isPayBtnDisabled: false
         }
     }
 
@@ -41,6 +42,23 @@ export class OrderSummaryComponent extends React.Component {
         })
       }).catch((err) => {
       })
+    }
+
+    componentWillReceiveProps(nextProps) {
+      console.log('issisisis --- ',nextProps.isCheckSumAPIFailPro);
+      if (nextProps.isCheckSumAPIFailPro) {
+        this.setState({
+          isPayBtnDisabled: false,
+        })
+      }
+
+    }
+
+    onPayClick() {
+      this.setState({
+        isPayBtnDisabled: true
+      })
+      this.props.initialBdpayment()
     }
 
     render() {
@@ -88,7 +106,7 @@ export class OrderSummaryComponent extends React.Component {
              </div>              
               
               <div className="payBtn">
-                <button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>Pay &#8377;{formatPrice(this.props.orderData.netAmount)}</button>
+                <button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} disabled={this.state.isPayBtnDisabled} onClick={this.onPayClick.bind(this)}>{PAY} &#8377;{formatPrice(this.props.orderData.netAmount)}</button>
               </div>
               <div className="SecureCheckout">
                 {SECURE_CHECKOUT}
@@ -99,7 +117,7 @@ export class OrderSummaryComponent extends React.Component {
             {this.props.checkoutStep == 3 && isMobile() ? (
               <div className='checkout-btn-floater'>
               <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.orderData.netAmount)} <span className='total-amount-text'>{TOTAL_AMOUNT}</span></div></div>
-              <div className='proceed-btn'><button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} onClick={this.props.initialBdpayment}>{PAY}</button></div>
+              <div className='proceed-btn'><button className={`btn-block btn-blackbg ${this.props.pay ? '' : 'disableddiv'}`} disabled={this.state.isPayBtnDisabled} onClick={this.onPayClick.bind(this)}>{PAY}</button></div>
               </div>
             ) : ''}
             </>
