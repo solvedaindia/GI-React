@@ -65,15 +65,27 @@
     #Global Screen Chhange for Screen max 768
     */
     @media screen and (min-width: 768px){
-        .featuredCat {
+        .featuredCat 
+		{
             width: 83.33%;
             margin: $base*15 auto 0;
             .slick-next:before, 
             .slick-prev:before {
                 font-size: 30px;
                 color: transparent;
+				
             }
+			
         }
 
     }
 
+	@media screen and (max-width: 768px){
+		.featuredCat 
+		{
+			.slick-prev, .slick-next {
+				display: none !important;
+			}
+		}
+
+    }
