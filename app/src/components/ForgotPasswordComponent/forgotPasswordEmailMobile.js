@@ -85,7 +85,7 @@ class ForgotPasswordEmailMobile extends React.Component {
         const errorKey = errorData.error.error_key;
         const lll = (
           <>
-            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>here</span> {TO_REGISTER}
+            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>here</span> to register
           </>
         )
         const errorItem = (

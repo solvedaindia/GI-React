@@ -177,6 +177,7 @@ class addToCartComponent extends React.Component {
         .post(addToCart, data)
         .then(() => {
           getUpdatedMinicartCount(this);
+		  console.log('data from add to cart' + data);
           this.deliveryTime = inventory.data.deliveryDate;
           this.setState({
             addToCartPopup: this.addToCartPopupItem(),
@@ -191,6 +192,7 @@ class addToCartComponent extends React.Component {
           this.props.handleAddtocart(false);
         })
         .catch(error => {
+			 console.log('error from add to cart' + data);
         });
     }
   };

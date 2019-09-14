@@ -33,13 +33,11 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     error => {
-      console.log('the Error --- ', error.response);
       if (error.response.status >= 500) {
         Raven.captureException(error);
       } else if (error.response.data.error.error_key === 'token_expired') {
         // theCount += 1;
         // isTokenExpire = true;
-        console.log('THIS THE COUNT ---- ', isTokenExpire);
         expireAccessTokenHandling();
       }
       return Promise.reject(error);
@@ -54,7 +52,6 @@ export default {
   // Provide request methods with the default base_url
   get(url, conf = {}) 
   {
-	 console.log('THIS is the URL invoked ', url); 
     return getClient()
       .get(url, conf)
       .then(response => Promise.resolve(response))
