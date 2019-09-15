@@ -17,6 +17,7 @@ import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import { isMobile } from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
+import ContentEspot from '../../components/Primitives/staticContent';
 
 
 import { DIRECTIONS } from '../../constants/app/primitivesConstants';
@@ -456,7 +457,12 @@ class StoreLocator extends React.Component {
         }
 
         return (
-            <Fragment>
+            <>
+        <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_START' } />
+         <Fragment>
+         <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
+				</Helmet>
                 <Helmet>
                     <title>{pageTitle}</title>
                 </Helmet>
@@ -632,8 +638,11 @@ class StoreLocator extends React.Component {
                     </div>
                 }
             </Fragment>
-        );
-    }
+            <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_END' } />
+
+            </>
+		);
+	}
 }
 
 export default StoreLocator;

@@ -8,6 +8,7 @@ import  '../../../public/styles/staticpages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import SummerData from '../../components/InspirationComp/InspEspot';
+import {Helmet} from "react-helmet";
 
 export class Inspiration extends React.Component {
   constructor(props) {
@@ -22,9 +23,13 @@ export class Inspiration extends React.Component {
 
   render() {
     return (
+      <>
+       <ContentEspot espotName={ 'GI_PIXEL_INSPIRATION_BODY_START' } />
       <div className="staticpage inspiration">
-	   
-        <InspirationBanner />
+      <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_INSPIRATION_META'}/>
+				</Helmet>
+	    <InspirationBanner />
 		<Breadcrumb {...this.props.match.params} staticName = {'Inspiration'}/>
         <LookbookThemeCarousel />
         <ContentEspot espotName={ 'GI_INSPIRATION_SUMMER' } />
@@ -32,6 +37,8 @@ export class Inspiration extends React.Component {
           <ContentEspot espotName={ 'GI_LOOKBOOK_5' } />
         <ContentEspot espotName={ 'GI_LOOKBOOK_6' } />
       </div>
+      <ContentEspot espotName={ 'GI_PIXEL_INSPIRATION_BODY_END' } />
+      </>
     );
   }
 }

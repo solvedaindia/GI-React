@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import '../../../public/styles/static-pages/chefkitchen.scss';
 import  '../../../public/styles/staticpages/staticPages.scss';
-;
 import ContentEspot from '../../components/Primitives/staticContent';
 import WillowKitchenBanner from '../../components/KitchensComp/willowKitchenbanner';
+import {Helmet} from "react-helmet";
 
 
 export default class WillowKitchens extends React.Component {
@@ -23,7 +23,12 @@ componentDidMount(){
 
 render(){
 return (
+  <>
+  <ContentEspot espotName={ 'GI_PIXEL_WILLOW_KITCHEN_BODY_START' } />
 <div className="staticpage willowKitchen">
+<Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_WILLOW_KITCHEN_META'}/>
+				</Helmet>
     <WillowKitchenBanner />
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_BENEFITS' } />
 
@@ -31,6 +36,8 @@ return (
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_5' } />
 
 </div>
+<ContentEspot espotName={ 'GI_PIXEL_WILLOW_KITCHEN_BODY_END' } />
+</>
 )
 }
 }

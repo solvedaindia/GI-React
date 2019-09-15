@@ -24,6 +24,9 @@ import EmiInfo from '../../components/PdpComponent/emiInfo';
 import ExpandIcon from '../../components/SVGs/expandArrow';
 import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
 import EMIVal from '../../components/Cart/emiPrice';
+import ContentEspot from '../../components/Primitives/staticContent';
+import {Helmet} from "react-helmet";
+
 import {
 	YOUR_CART,
 	DO_YOU_HAVE_COUPAN,
@@ -69,7 +72,12 @@ class CartDetail extends React.Component {
     return (
       !!cartData.cartItems && !!cartData.cartItems.length
         ?
-        <section className='cartDetails'>
+        <>
+     <ContentEspot espotName = { 'GI_PIXEL_CART_BODY_START' } />
+  <section className='cartDetails'>
+  <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_CART_META'}/>
+				</Helmet>
           <div className='cartItem'>
             <div className='cartHeadDetails'>
                 {!isMobile() ? <h2 className='title'>{YOUR_CART}<span className='cartCount'>{cartData.cartTotalItems} {ITEMS}</span>
@@ -215,6 +223,9 @@ class CartDetail extends React.Component {
             </div>
           </div>
         </section>
+        <ContentEspot espotName = { 'GI_PIXEL_CART_BODY_END' } />
+
+        </>
         : <EmptyCart />
     )
   }

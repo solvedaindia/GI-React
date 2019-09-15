@@ -29,6 +29,7 @@ import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBan
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
 import BestSeller from '../../components/BestSelling/bestSelling';
+import {Helmet} from "react-helmet";
 
 import * as actionCreators from './actions';
 import CompContainer from './compWidget';
@@ -43,6 +44,7 @@ import { stringify } from 'querystring';
 import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import ContentEspot from '../../components/Primitives/staticContent';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -575,26 +577,29 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        
+        <ContentEspot espotName={ 'GI_PIXEL_PLP_BODY_START' } />
+        <Helmet>
+					<ContentEspot espotName= {'GI_PIXEL_PLP_META'}/>
+				</Helmet>
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}
         {this.state.emptySearchItem !== null
-          ? this.state.emptySearchItem
-          : null}
+        ? this.state.emptySearchItem
+        : null}
         {this.state.showBestSeller ? (
-          <>
-            <div>
-              <div className="noResultfound">
-                <div className="label-noresult">
-                  No results for “{keywoard}”
-                </div>
-              </div>
-              <div className="Search-bestseller container">
-                <BestSeller />
+        <>
+          <div>
+            <div className="noResultfound">
+              <div className="label-noresult">
+                No results for “{keywoard}”
               </div>
             </div>
-          </>
+            <div className="Search-bestseller container">
+              <BestSeller />
+            </div>
+          </div>
+        </>
         ) : null}
         <section className="plpCategories">
           <div className="container">
@@ -607,7 +612,7 @@ export class PlpContainer extends React.Component {
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
                   {plpData.length === 0 || this.state.isMobile ? null : (
-                    <Sort sortingIndexPro={this.state.plpSorting} />
+                  <Sort sortingIndexPro={this.state.plpSorting} />
                   )}
                 </div>
               </div>
@@ -618,22 +623,16 @@ export class PlpContainer extends React.Component {
 
         {error && <div className='noProductFound'>{error}</div>}
         {isLoading && (
-          <div className="lazyloading-Indicator">
-            <img
-              id="me"
-              className="loadingImg"
-              alt='Lazy Loader'
-              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')
-            }
-            />
-          </div>
+        <div className="lazyloading-Indicator">
+          <img id="me" className="loadingImg" alt='Lazy Loader'
+            src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg') } />
+        </div>
         )}
-        {/* Show only when get zero products from Filter */}
-        {/* {!hasMore && !this.state.isFromSearch.includes('/search') ? <div className="noProductFound">No Products Found</div> : null} */}
+     
         {this.state.productCount === 0 &&
-          !this.state.isFromSearch.includes('/search') ? (
-            <div className="noProductFound">No Products Found</div>
-          ) : null}
+        !this.state.isFromSearch.includes('/search') ? (
+        <div className="noProductFound">No Products Found</div>
+        ) : null}
 
         {descriptionItem}
         <CompContainer />
@@ -645,6 +644,8 @@ export class PlpContainer extends React.Component {
           <RWDFilterMain filterDataPro={filterData} />
 
         </div> : null}
+        <ContentEspot espotName={ 'GI_PIXEL_PLP_BODY_END' } />
+
       </>
     );
   }
