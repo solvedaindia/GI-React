@@ -106,7 +106,6 @@ export class PlpContainer extends React.Component {
       if (p[0] === 'filter') {
         // filterRoutingURL += `${p[0]}=${p[1]}&`
         filterRoutingURL += `${decodeURI(p[1])}&`;
-        console.log('maskkk -- ', filterRoutingURL)
         onlyFilter[p[1]];
       } else if (p[0] === 'sort') {
         sortingRoutingURL = p[1];
@@ -287,7 +286,6 @@ export class PlpContainer extends React.Component {
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&` +
         `orderby=${this.state.plpSorting}&${this.state.plpFilter}`;
-      console.log('PLPURL---', plpURL);
 
       apiManager
         .get(plpURL, {
@@ -297,7 +295,6 @@ export class PlpContainer extends React.Component {
           },
         })
         .then(response => {
-          console.log('PLP Response----', response.data);
           if (this.state.browserFilters.length !== 0) {
             this.resolveBrowserFilters(
               response.data.data.facetData,
@@ -355,11 +352,7 @@ export class PlpContainer extends React.Component {
 			  }
 		  }
 		  
-          console.log(
-            'mixmatchh --- ',
-            response.data.data.productCount,
-            this.state.pageNumber,
-          );
+          
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
@@ -410,7 +403,6 @@ export class PlpContainer extends React.Component {
         }
       })
       .catch(error => {
-        // console.log('PLPBannerrror---', error);s
       });
   }
 
@@ -461,7 +453,7 @@ export class PlpContainer extends React.Component {
     const {
       state: { error, isLoading, hasMore },
     } = this;
-    console.log('is Has more --- ', hasMore);
+    
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 1000;
     const windowHeight =
@@ -470,7 +462,6 @@ export class PlpContainer extends React.Component {
       document.documentElement.offsetHeight - adjustedHeight;
 
     if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
-      console.log('On scroll call --- ', this.state.plpData)
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }
@@ -532,7 +523,6 @@ export class PlpContainer extends React.Component {
 
     let descriptionItem;
     if (this.state.plpDescriptionData != null) {
-      console.log('in dessss -- ', this.state.plpDescriptionData);
       descriptionItem = (
         <DescriptionBanner
           descriptionDataPro={this.state.plpDescriptionData}

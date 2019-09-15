@@ -69,7 +69,6 @@ function appReducer(state = initialState, action) {
     case RESET_RWDHEADER:
       return state.set('loading', false).set('resetRWDFlag', action.flag);
     case UPDATE_PROFILE:
-      console.log('in The Global Reducer ---', action.type, action.userName);
       return state.set('loading', false).set('userName', action.userName);
     // .set('logonId', action.logonId);
     // case GET_CART_FETCHED:

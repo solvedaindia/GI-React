@@ -23,7 +23,6 @@ export class HeaderSearch extends React.Component {
   }
 
   componentDidMount() {
-  console.log('twing --- ',this.props)
   }
 
   onBackBtn() {
@@ -68,7 +67,6 @@ export class HeaderSearch extends React.Component {
             });
           })
           .catch(error => {
-            console.log(error.message);
           });
       } else {
       }

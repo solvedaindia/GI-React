@@ -90,7 +90,6 @@ export function getReleventReduxState(state, reducerName) {
   5 - New Arrival
  */
 export function fetchReleventSortingValue(value) {
-    console.log('ttttt', value);
     if (isMobile()) {
         if (value === 'Price - Low to High') {
             return 3;
@@ -119,7 +118,6 @@ export function fetchReleventSortingValue(value) {
 }
 
 export function fetchReleventSortingValueByIndex(index) {
-    console.log('it index --- ', index);
     if (isMobile()) {
         if (parseInt(index) === 0) {
             return 'Price - Low to High';
@@ -165,14 +163,12 @@ export function mapSortIndex(index) {
  * @param {*} facetName
  */
 export function updateFilterMap(updatedFilter, facetName, currentFilter) {
-    console.log('it it --- ', updatedFilter, facetName, currentFilter);
     const filterMap = currentFilter.updateFilter;
     if (updatedFilter.length === 0) {
         filterMap.delete(facetName);
         return filterMap;
     }
     filterMap.set(facetName, updatedFilter);
-    console.log('Ne2 RWD Filter >>>> ',filterMap);
     return filterMap;
 }
 
@@ -198,15 +194,11 @@ export function resolveBrowserFilters(filterResponse, browserFilters) {
             var reduxFilter = [];
 
             const facetValue = browserFilters[i][1];
-            console.log('misss === ', facetValue);
             filterResponse.map((facetItem, index) => {
-                console.log('browser Filter Item -- ', facetItem);
                 const name = facetItem.facetName;
 
                 facetItem.facetValues.map((innerItem, index) => {
-                    console.log('browser Filter Item innerr -- ', innerItem);
                     if (innerItem.value === facetValue) {
-                        console.log('its Matched --- ', facetValue);
                         reduxFilter.push(innerItem);
                     }
                 }); // innerItem ended
@@ -253,10 +245,6 @@ export function resolveTheWishlistData(wishlist_Data) {
 
 export function getOnlyWishlistUniqueIds() {
     const wishliArrStr = getCookie(wishlistDataCookie);
-    console.log('dd -- ', wishliArrStr);
-    // if (wishliArrStr === null) {
-    //   return;
-    // }
     const wishlistArr = JSON.parse(wishliArrStr);
 
     const wishlistUniqueIdArr = wishlistArr.map(item => item.uniqueID);
@@ -300,7 +288,6 @@ export function is(val, type) {
 }
 
 export function updateWidgetData(data, obj) {
-    console.log(obj, 'obj in utility');
     var widgetdata = [];
     data.forEach((elem, index) => {
         var comp = elem;

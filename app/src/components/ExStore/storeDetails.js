@@ -18,7 +18,6 @@ export class StoreDetails extends React.Component {
             isLoading: false,
             error: null
         };
-        console.log('Test props', this.props);
     }
     
     /* get store details */
@@ -30,7 +29,6 @@ export class StoreDetails extends React.Component {
                 storeData: response.data.data[0],
                 isLoading: false
             })
-            console.log('@@@@ Store Data @@@@@', response.data.data);
         })
         .catch(error => {
             this.setState({

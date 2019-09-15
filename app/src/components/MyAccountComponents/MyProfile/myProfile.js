@@ -77,7 +77,6 @@ class MyProfile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps -- ', this.state)
     if (this.state.userResponse !== null) {
       this.setState({
         inputText_name: this.state.userResponse.name,
@@ -90,8 +89,6 @@ class MyProfile extends React.Component {
 
   onSavebuttonClick(event) {
     event.preventDefault();
-
-    console.log('Makssss ---- ', this.state.userResponse.mobileNo);
     if (this.state.userResponse.name !== '') {
       if (!validateFullName(this.state.inputText_name)) {
         this.setState({
@@ -134,7 +131,6 @@ class MyProfile extends React.Component {
     apiManager
       .get(userDetailAPI)
       .then(response => {
-        console.log('profile detail --- ', response.data);
         this.setState({
           inputText_name: response.data.data.name,
           inputText_email: response.data.data.emailID,
@@ -153,7 +149,6 @@ class MyProfile extends React.Component {
     var showOTP = false;
     //var dataLoad = {}
     if (this.state.userResponse.name !== this.state.inputText_name && this.state.userResponse.emailID === this.state.inputText_email && this.state.userResponse.mobileNo === this.state.inputText_number) {
-      console.log('update only the Name');
       // Call Update API
       this.state.dataLoad = {
         name: this.state.inputText_name,
@@ -162,13 +157,11 @@ class MyProfile extends React.Component {
       return;
     }
     if (this.state.userResponse.name !== this.state.inputText_name) {
-      console.log('update only the Name Seperate');
       // Call Validate API
       this.state.dataLoad.name = this.state.inputText_name
     }
 
     if (this.state.userResponse.emailID !== this.state.inputText_email) {
-      console.log('update only the Email');
       // Check if Logon id is email or mobile, and add accordingly.
       if (regexEmail.test(this.state.userResponse.logonID)) {
         // LogonId is Email
@@ -180,7 +173,6 @@ class MyProfile extends React.Component {
     }
 
     if (this.state.userResponse.mobileNo !== this.state.inputText_number) {
-      console.log('update only the Mobile No');
       showOTP = true;
       if (regexMobileNo.test(this.state.userResponse.logonID)) {
         // LogonId is Email
@@ -191,12 +183,9 @@ class MyProfile extends React.Component {
       }
     }
 
-    console.log('payload -- ', this.state.dataLoad);
     if (!this.isEmpty(this.state.dataLoad)) {
-      console.log('It empty');
       apiManager.post(userDetailValidateAPI, this.state.dataLoad)
         .then(response => {
-          console.log('Validate Profile --- ', response.data.data.otpValue);
           if (showOTP) {
             // Call Validate API
             this.setState({
@@ -209,7 +198,6 @@ class MyProfile extends React.Component {
 
         })
         .catch(error => {
-          console.log('validateUserDetails Error---', error.response.data.error.error_message);
           setTimeout(() => {
             this.setState({
               noteItem: null,
@@ -257,7 +245,6 @@ class MyProfile extends React.Component {
 
     apiManager.post(userDetailUpdateAPI, this.state.dataLoad)
       .then(response => {
-        console.log('profile detail --- ', response.data);
         setTimeout(() => {
           this.setState({
             noteItem: null,
@@ -277,7 +264,6 @@ class MyProfile extends React.Component {
         this.props.updateUserProfile(this.state.inputText_name);
       })
       .catch(error => {
-        console.log('updateUserDetail Error---', error);
         setTimeout(() => {
           this.setState({
             noteItem: null,
@@ -316,7 +302,6 @@ class MyProfile extends React.Component {
 
     switch (value.target.id) {
       case 'fullName':
-        console.log('value Change --- ', value.target.value, this.state.userResponse);
         this.state.inputText_name = value.target.value
         // this.setState({
         //   inputText_name: value.target.value,
@@ -349,7 +334,6 @@ class MyProfile extends React.Component {
 
   enableDisableSaveBtn() {
     var isBtnValidate = true;
-    console.log('maksss --- ', this.state.userResponse.emailID, this.state.inputText_email)
     if (this.state.userResponse.name !== this.state.inputText_name) {
 
       isBtnValidate = false;
@@ -367,7 +351,6 @@ class MyProfile extends React.Component {
   }
 
   focusIn() {
-    console.log('Focus In');
     this.setState({
       noteItem: (
         <div className="noteMsg">
@@ -406,7 +389,6 @@ class MyProfile extends React.Component {
   }
 
   onRWDCancelBtnClick() {
-    console.log('dddid -- ', this.props)
     this.props.resetRWDHeaderFlag(true);
   }
 
@@ -476,7 +458,6 @@ class MyProfile extends React.Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('MyAccount MapStatetoprops --- ', state);
   // const stateObj = getReleventReduxState(state, 'global');
   // const updatedUsername = getReleventReduxState(stateObj, 'userName');
 

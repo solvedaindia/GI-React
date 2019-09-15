@@ -170,7 +170,7 @@ export class Step2Component extends React.Component {
             inputText_city: data.pinData.city,
             inputText_state: data.pinData.state
           })
-          console.log('iicicic --- ',this.state);
+          
         })
 
     } else {

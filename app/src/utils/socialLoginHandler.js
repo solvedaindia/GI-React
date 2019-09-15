@@ -8,7 +8,6 @@ import {
 import appCookie from './cookie';
 
 export function onFacebookResponse(socialData, callback) {
-  console.log('Facebook---', socialData);
   socialLoginAPIHandler(socialData, callback);
 }
 
@@ -37,10 +36,8 @@ function socialLoginAPIHandler(socialData, callback) {
       );
       window.location.reload();
       callback('Success');
-      console.log('socialData---', response.data.data.access_token);
     })
     .catch(error => {
       callback('Error');
-      console.log('socialerrr0r---', error);
     });
 }

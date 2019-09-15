@@ -13,7 +13,6 @@ class Price extends React.Component {
       crossPriceItem = <span className="priceno-discount">₹{formatPrice(actualPrice)}</span>;
     }
     if (!isNaN(offerPrice)) {
-      console.log('ppriccc -- ', offerPrice)
       offerPrice = `₹${formatPrice(offerPrice)}`
     }
     else {

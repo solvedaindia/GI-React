@@ -22,7 +22,6 @@ class Cookies extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('respo', response)
         const {data} = response || {};
         this.setState({
           pageLayoutEspot: data && data.data,
@@ -34,7 +33,6 @@ class Cookies extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('Homepage Layout Espot Data ERROR');
       });
   }
 

@@ -18,7 +18,6 @@ class OrderStatusBar extends React.Component {
   filterShippingData() {
     if (this.props.shipmentDataPro) {
       var statusArr = this.props.shipmentDataPro.statusLine.split(',');
-      console.log('ddddd -- ', statusArr)
       this.setState({
         shippingStatusArr: statusArr,
       })

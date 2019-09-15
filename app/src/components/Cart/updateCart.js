@@ -28,7 +28,6 @@ class CartUpdate extends React.Component {
     
   }
   isQtyChange(eVal){
-    //console.log(typeof eVal.value);
     this.handleCartUpdate(eVal.value);
   }
   

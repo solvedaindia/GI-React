@@ -20,7 +20,6 @@ class EmiInfo extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if(this.props.price !== nextProps.price){
-			console.log('Next Props ID Cart', nextProps);
 			this.callBankEmiApi(nextProps.price);
 		}
 	}
@@ -47,7 +46,7 @@ class EmiInfo extends React.Component {
 			  	loading: false,
 			});
 		}).catch(error => {
-			console.log('Emi Info Error---', error);
+			console.log('Error: ', error);
 		});
 	}
 	

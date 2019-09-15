@@ -24,12 +24,10 @@ class OrderItem extends React.Component {
   }
 
   proceedToTrackOrder(trackOrderData) {
-    console.log('TackORderData --- ',trackOrderData);
     this.props.renderSelectionPro(trackOrderData);
   }
 
   render() {
-    console.log('isGuestTrack----', this.props.orderItemData);
     const orderData = this.props.orderItemData;
 
     return (

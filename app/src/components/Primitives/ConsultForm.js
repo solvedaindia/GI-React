@@ -246,10 +246,8 @@ items = this.state.dropDownArr.map((item, index) => {
   
 })
   
-console.log('myarr', items)
 return items;
-
-  }
+}
 
 onDropdownSelected = (e) => {
   if (e.target.value !== 'null' && this.state.dropDownValue !== e.target.value) {

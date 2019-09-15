@@ -23,7 +23,6 @@ class SubCatImage extends React.Component {
   }
 
   render() {
-    console.log('Subcatttt---', this.props);
     var subcatName = String(this.props.categoryNamePro).toLowerCase()
     var routePath = `/furniture-${subcatName.split(' ').join('-')}/${this.props.uniqueIdPro}`;
     return (

@@ -46,7 +46,6 @@ class PinChangePopup extends React.Component {
   //     state: this.props.currentAddressPro.state,
   //     default: String(true),
   //   };
-  //   console.log('Add Address  ----  ', data);
   //   apiManager
   //     .post(updateAddressAPI + this.props.currentAddressPro.nickName, data)
   //     .then(response => {})

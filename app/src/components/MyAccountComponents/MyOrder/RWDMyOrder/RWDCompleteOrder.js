@@ -11,7 +11,6 @@ class RWDCompleteOrder extends React.Component {
   }
 
   onInvoiceClick(invoiceNo) {
-    console.log('INvoice No --- ', invoiceNo)
   }
 
   render() {
@@ -19,7 +18,6 @@ class RWDCompleteOrder extends React.Component {
     const addressData = orderData.address;
     const summeryData = orderData.orderSummary
     const invoiceData = orderData.invoices;
-    console.log('mkdmdk -- ', orderData);
     return (
       <>
         <div className="tabBar clearfix">

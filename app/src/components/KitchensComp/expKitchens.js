@@ -33,7 +33,6 @@ export class ExKitchens extends React.Component {
                 lat: lat,
                 long: lng
             });
-            console.log('Check Get Data - Store', response.results[0].geometry.location)
         })
         .catch(error => {
             this.setState({

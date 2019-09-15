@@ -75,7 +75,7 @@ class Wishlist extends React.Component {
         });
       })
       .catch(error => {
-        console.log('newsError---', error);
+        console.log('Error: ', error);
       });
   }
 
@@ -87,7 +87,6 @@ class Wishlist extends React.Component {
     apiManager
       .post(removeFromWishlist, data)
       .then(response => {
-        console.log('Add wishlit --- ', this.props);
         this.setState({ wishlistCurrentImage: wishListRemovedImg });
         getUpdatedWishlist(this);
         
@@ -97,7 +96,7 @@ class Wishlist extends React.Component {
         
       })
       .catch(error => {
-        console.log('newsError---', error);
+        console.log('Error: ', error);
       });
   }
 
@@ -151,7 +150,6 @@ class Wishlist extends React.Component {
   }
 
   redirectToWishlistPage = () => {
-    console.log('its view veiw view veiw');
     this.props.history.push('/wishlist');
   };
 

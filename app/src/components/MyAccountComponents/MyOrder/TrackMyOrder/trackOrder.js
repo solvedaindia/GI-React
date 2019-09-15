@@ -12,9 +12,7 @@ class TrackOrder extends React.Component {
   }
 
   render() {
-    console.log('In the Track Order -- ', this.props.trackOrderDataPro)
-
-    return (
+   return (
 
       <div className="trackMyOrder">
         <div className="bottomDivider">

@@ -28,7 +28,6 @@ export class KitchenStore extends React.Component {
                 storeData: response.data.data,
                 isLoading: false
             })
-            console.log('@@@@ Store Data @@@@@', response.data.data);
         })
         .catch(error => {
             this.setState({

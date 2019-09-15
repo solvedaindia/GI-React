@@ -61,7 +61,6 @@ class FormContainer extends Component {
       },
     }).then(response => {
       response.json().then(data => {
-        console.log(`Successful${data}`);
       });
     });
   }

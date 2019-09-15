@@ -90,7 +90,6 @@ export function validateMobileNo_OPTIONAL(data) {
  * @param {*} data
  */
 export function validateEmailId(data) {
-    console.log('Validate Email- ---- ', data);
     if (regexEmail.test(data) || data === '' || data === undefined) {
         return true;
     }
@@ -102,7 +101,6 @@ export function validateEmailId(data) {
  * @param {*} data
  */
 export function validateEmailId_OPTIONAL(data) {
-    console.log('Validate Email- ---- ', data);
     if (regexEmail.test(data)) {
         return true;
     }

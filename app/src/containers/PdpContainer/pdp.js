@@ -29,7 +29,6 @@ class PdpContainer extends React.Component {
 	callPdpApi() {
 		const skuId = this.props.match.params.skuId;
 		apiManager.get(pdpApi2 + skuId).then(response => {
-			//console.log('=====>PDP=>>'+pdpApi2+'=>>>', JSON.stringify(response.data));
 			this.setState({
 				pdp: response.data,
 				pdpLoading: false,
@@ -38,7 +37,6 @@ class PdpContainer extends React.Component {
 				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
 			}
 		}).catch(error => {
-			console.log('PDP API Error =>', error);
 		});
 	}
 
@@ -54,7 +52,7 @@ class PdpContainer extends React.Component {
         });
       })
       .catch(error => {
-        console.log('PDP Espot API Error =>', error);
+        console.log('Error: ', error);
       });
   }
 
@@ -70,7 +68,7 @@ class PdpContainer extends React.Component {
         });
       })
       .catch(error => {
-        console.log('PDP Espot T & C API Error =>', error);
+        console.log('Error: ', error);
       });
   }
 

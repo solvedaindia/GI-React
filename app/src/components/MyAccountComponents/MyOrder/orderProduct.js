@@ -22,19 +22,16 @@ class ProductOrder extends React.Component {
   filterDeliveryInstallationTags() {
     if (this.props.prodctDataPro.shipmentData) {
       const shipmentData = this.props.prodctDataPro.shipmentData[0];
-      console.log('ssssss -- ', shipmentData);
       if (shipmentData !== undefined) {
 
 
         if (shipmentData.expectedDeliveryDate !== '') {
-          console.log('Delivery -- ', this.props.prodctDataPro.expectedDeliveryDate)
           this.setState({
             dsNameTag: 'DELIVERY ON',
             dsDateTag: shipmentData.expectedDeliveryDate.split(',')[1]
           })
         }
         else if (shipmentData.expectedInstallationDate !== '') {
-          console.log('Installation -- ', shipmentData.installationDate)
           if (shipmentData.installationDate === '') {
             this.setState({
               dsNameTag: 'INSTALLATION ON',
@@ -50,7 +47,6 @@ class ProductOrder extends React.Component {
   render() {
 
     const productData = this.props.prodctDataPro;
-    console.log('order Product --- ', this.props.allDataPro)
     return (
       <>
         <div className="clearfix" />

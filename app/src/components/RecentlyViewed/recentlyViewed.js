@@ -25,14 +25,12 @@ class RecentlyViewed extends React.Component {
           recentlyViewedData: data && data.data,
           isLoading: false,
         });
-        console.log('Recently Viewed', data.data);
       })
       .catch(error => {
         this.setState({
           error,
           isLoading: false,
         });
-        console.log('ERROR');
       });
   }
 

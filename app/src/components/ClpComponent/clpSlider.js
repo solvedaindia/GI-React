@@ -22,7 +22,6 @@ class CLPFullBanner extends React.Component {
       .then(response => 
 	  {
         const {data} = response || {}
-		console.log(data.data.bannerList);
         this.setState({
           heroSlider: data && data.data.bannerList,
           isLoading: false,

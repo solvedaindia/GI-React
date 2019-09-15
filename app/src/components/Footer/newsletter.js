@@ -80,11 +80,8 @@ class newsletter extends React.Component {
         {this.props.isFromMobile ? null : (
           <h6 className="heading news_heading">{this.props.name.text}</h6>
         )}
-        {console.log('test', this.props.name.children)}
         <ul className="newsletterList">
           {this.props.name.children.map((newsletterDesc, index) => {
-            //alert(newsletterDesc.text);
-            console.log('NEwsletter --- ', newsletterDesc);
             return(<li className="list" key={index}>
               <h6 className="newsletter-heading">{newsletterDesc.text}</h6>
             </li>);

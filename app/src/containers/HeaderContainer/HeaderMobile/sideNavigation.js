@@ -39,7 +39,6 @@ export class HeaderMobile extends React.Component {
   }
 
   componentDidMount() {
-    console.log('didimountt');
     this.getCategoryData();
     this.getHeaderLayer1();
     if (getCookie('isLoggedIn') === 'true') {
@@ -48,7 +47,6 @@ export class HeaderMobile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('compRecive --- ',this.state.showLoginPopUp);
   }
 
   getHeaderLayer1() {
@@ -75,7 +73,6 @@ export class HeaderMobile extends React.Component {
         headers: { profile: 'summary' },
       })
       .then(response => {
-        console.log('userDetail --- ', response.data.data.name);
         if (response.data.data.pincode && response.data.data.pincode !== '') {
           appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
         }
@@ -105,7 +102,6 @@ export class HeaderMobile extends React.Component {
   }
 
   onMenuClick() {
-    console.log('On menuclick --- ', this.state.showNav);
     if(document.getElementById('mob-header').className == 'mobileHeader'){
       document.getElementById('mob-header').classList.add("active-nav");
     }

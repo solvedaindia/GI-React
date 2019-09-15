@@ -45,7 +45,6 @@ export class OrderSummaryComponent extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-      console.log('issisisis --- ',nextProps.isCheckSumAPIFailPro);
       if (nextProps.isCheckSumAPIFailPro) {
         this.setState({
           isPayBtnDisabled: false,

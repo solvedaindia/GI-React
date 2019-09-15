@@ -15,14 +15,12 @@ class SearchBar extends React.Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        console.log('Will Recive new name -- ',nextProps, this.props)
         this.setState({
             isLoading: false,
         })
     }
 
     userInfoCallback() {
-        console.log('commmmmiiiinnnggggg >>>>>>')
         this.setState({
             showlogin: true,
         })
@@ -42,7 +40,6 @@ class SearchBar extends React.Component {
 function mapStateToProps(state) {
     const stateObj = getReleventReduxState(state, 'global');
     const updatedUsername = getReleventReduxState(stateObj, 'userName');
-    console.log('Header Right MapStatetoprops --- ', updatedUsername);
 
     return {
         reduxUserName: updatedUsername,

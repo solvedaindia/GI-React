@@ -22,7 +22,7 @@ class PPInformation extends React.Component {
     apiManager
       .get(espotAPI + this.state.espotName)
       .then(response => {
-        console.log('respo', response)
+        
         const {data} = response || {};
         this.setState({
           pageLayoutEspot: data && data.data,
@@ -34,7 +34,6 @@ class PPInformation extends React.Component {
           error,
           isLoading: false,
         });
-        console.log('kitchen data');
       });
   }
 

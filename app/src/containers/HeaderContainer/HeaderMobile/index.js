@@ -33,7 +33,6 @@ class HeaderMobile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('mixxx -- ', nextProps, this.props)
 
     if (nextProps.location.pathname !== "/myAccount" && nextProps.location.pathname !== "/wishlist") {
       this.state.isOnHome = nextProps.match.isExact ? true : false;
@@ -61,7 +60,6 @@ class HeaderMobile extends React.Component {
     
     if (nextProps.shareWishlistURL !== this.props.shareWishlistURL) {
       this.state.wishlistURL = nextProps.shareWishlistURL
-      console.log('idid --- ',nextProps.shareWishlistURL, this.props.shareWishlistURL);
       this.pageNavigationRender('My Wishlist');
     }
 
@@ -75,11 +73,9 @@ class HeaderMobile extends React.Component {
   }
 
   wishlsitShareURLCallback(shareURL) {
-    console.log('Share URL --- ', shareURL);
   }
 
   defaultRender() {
-    console.log('msmsms -- ', this.state.isOnHome);
     return (
       <Row>
         <Col xs={12} md={12} className='leftAnim'>
@@ -182,7 +178,6 @@ class HeaderMobile extends React.Component {
       headerRenderItem: this.defaultRender(),
       showSocialShare: false,
     });
-    console.log(' --miii- ', this.props);
     if (this.props.updatedHeaderVal === 'Track Order' || this.props.updatedHeaderVal === 'My Order Redirect') {
       this.pageNavigationRender('My Order');
       this.props.updateTheRWDHeader('MyOrder Return');
@@ -206,7 +201,6 @@ function mapStateToProps(state) {
   const defalutHeaderFlag = getReleventReduxState(stateObj, 'resetRWDFlag');
   const wishlistURL = getReleventReduxState(stateObj, 'rwdWishlistShareURL');
   const updatedHeader = getReleventReduxState(stateObj, 'updatedRWDHeader');
-  console.log('Mobile Header Subscription --- ', wishlistURL);
 
   return {
     isHeaderReset: defalutHeaderFlag,

@@ -15,7 +15,6 @@ class AddressItem extends React.Component {
   };
 
   editBtnClicked() {
-    console.log('editBtnClicked');
     this.props.openEditAddress(this.props.addressData);
   }
 
@@ -39,7 +38,6 @@ class AddressItem extends React.Component {
         this.props.onUpdateActivity();
       })
       .catch(error => {
-        console.log('Delete Error---', error);
       });
   }
 
@@ -62,7 +60,7 @@ class AddressItem extends React.Component {
         this.props.onUpdateActivity();
       })
       .catch(error => {
-        console.log('UPDATE Error---', error);
+        console.log('Error: ', error);
       });
 	  
 	 appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);

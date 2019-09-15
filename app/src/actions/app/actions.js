@@ -70,7 +70,6 @@ export function repoLoadingError(error) {
 }
 
 export function updatetWishListCount(count) {
-  console.log('its in the update wihslit action', count);
   return {
     type: WISH_LIST_COUNT,
     count,
@@ -78,7 +77,6 @@ export function updatetWishListCount(count) {
 }
 
 export function updatetMinicart(count) {
-  console.log('Its updated MiniCart');
   return {
     type: UPDATE_MINICART,
     count,
@@ -86,7 +84,6 @@ export function updatetMinicart(count) {
 }
 
 export function resetRemoveFromWishlistFlag(flag) {
-  console.log('resetRemoveFromWishlistFlag---', flag);
   return {
     type: RESET_REMOVEWISHLISTFLAG,
     flag,
@@ -94,7 +91,6 @@ export function resetRemoveFromWishlistFlag(flag) {
 }
 
 export function updateUserProfile(userName) {
-  console.log('updateUserProfile---', userName);
   return {
     type: UPDATE_PROFILE,
     userName,
@@ -102,7 +98,6 @@ export function updateUserProfile(userName) {
 }
 
 export function resetRWDHeaderFlag(flag) {
-  console.log('resetRWDHeaderFlag---', flag);
   return {
     type: RESET_RWDHEADER,
     flag,
@@ -110,7 +105,6 @@ export function resetRWDHeaderFlag(flag) {
 }
 
 export function rwdShareWishlistURL(url) {
-  console.log('rwdShareWishlistURL---', url);
   return {
     type: SHAREWISHLISTURL_RWD,
     url,
@@ -118,7 +112,6 @@ export function rwdShareWishlistURL(url) {
 }
 
 export function updateTheRWDHeader(data) {
-  console.log('updateTheRWDHeader---', data);
   return {
     type: UPDATED_RWD_HEADER,
     data,

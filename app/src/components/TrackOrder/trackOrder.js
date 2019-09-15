@@ -45,14 +45,12 @@ class TrackOrder extends React.Component {
                 orderData: response.data.data,
                 isLoading: false
             });
-            console.log(' Mini Cart Data', data.data);
         })
         .catch(error => {
             this.setState({
             error,
             isLoading: false
             });
-            console.log('ERROR');
         });
     }
     componentDidMount() {

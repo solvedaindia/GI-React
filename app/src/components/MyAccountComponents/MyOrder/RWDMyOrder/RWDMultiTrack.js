@@ -14,7 +14,6 @@ class RWDMultiTrack extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
-    console.log('mkdmdk -- ', productData);
     return (
       <>
         {productData.shipmentData.map((item, index) => {

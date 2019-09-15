@@ -81,7 +81,6 @@ class RWDOrderItem extends React.Component {
         </div>
 
         {orderData.orderItems.map((data, key) => {
-          console.log('mixxxx -- ', data);
           return (
             <div className="order-item-box" onClick={this.onProductClick.bind(this, data, orderData)}>
               <div className='itemImg'>

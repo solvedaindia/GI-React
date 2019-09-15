@@ -80,7 +80,6 @@ export default {
   },
 
   post(url, data = {}, conf = {}) {
-    console.log('POST DATA -- ', data, url);
     return getClient()
       .post(url, data, conf)
       .then(response => Promise.resolve(response))
@@ -103,7 +102,6 @@ export default {
 };
 export function expireAccessTokenHandling() {
   if (getCookie(accessTokenCookie) != '') {
-    console.log('Token has expired', getCookie(accessTokenCookie));
     alert('Please relogin, your session has expired.');
     resetTheCookiesAndData();
   }

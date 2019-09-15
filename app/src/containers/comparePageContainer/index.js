@@ -41,7 +41,6 @@ export class ComparePageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('icicic --- ', nextProps);
     if (nextProps.updatedCompData !== this.props.updatedCompData) {
       this.state.compWidgetData = [];
       nextProps.updatedCompData.forEach(element => {
@@ -85,10 +84,9 @@ export class ComparePageContainer extends React.Component {
         data: response.data.data.reverse(),
         loading: false
       });
-      console.log(response.data.data, 'data from api')
       this.renderPrd();
     }).catch(error => {
-      console.log(error);
+      console.log('Error: ' + error);
       this.setState({
         loading: false
       })
@@ -247,7 +245,6 @@ export class ComparePageContainer extends React.Component {
   }
 
   removeCompareId(data) {
-    console.log('remev data ----- ', data);
     this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);
     this.renderPrd()
     this.updateRoute();

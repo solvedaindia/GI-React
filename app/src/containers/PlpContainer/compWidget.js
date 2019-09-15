@@ -109,7 +109,6 @@ export class CompContainer extends React.Component {
         searchParam += `${skuId}${compIdData.length === index + 1 ? '' : '/'}`
       })
     }
-    console.log('idid',searchParam);
     return (
       <>
         {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :

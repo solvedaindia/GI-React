@@ -51,7 +51,6 @@ export class MyAccountContainer extends React.Component {
   }
 
   myProfileCallback(userName, passwordTag) {
-    console.log('myProfileCallback ---- ', userName, passwordTag)
     this.setState({
       profileName: userName,
       changePasswordTag: passwordTag
@@ -167,7 +166,6 @@ export class MyAccountContainer extends React.Component {
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 // function mapStateToProps(state) {
-//   console.log('MyAccount MapStatetoprops --- ', state);
 //   const stateObj = getReleventReduxState(state, 'global');
 //   const updatedUsername = getReleventReduxState(stateObj, 'userName');
 

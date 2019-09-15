@@ -34,20 +34,18 @@ export function registerGuestUser(callback) {
       callback(guestToken);
     })
     .catch(error => {
-      console.log('guestError--', error);
+      console.log('Error: ', error);
       callback('');
     });
 }
 
 export function getUpdatedWishlist(wishlist) {
-  console.log('getUpdatedWishlist');
   apiManager
     .get(wishListCountApi)
     .then(response => {
       resolveTheWishlistData(response.data.data);
       const wishlistCount =
         response.data.data.wishlistItemArray[0].wishlistItemList.length;
-      console.log('Wishlist Count --- ', wishlistCount);
       wishlist.props.updatetWishListCount(wishlistCount);
       // wishlist.props.resetRemoveFromWishlistFlag(true)
     })
@@ -77,7 +75,7 @@ export function logoutTheUser() {
       // alert('Newsletter Subscription - ' + data.status);
     })
     .catch(error => {
-      console.log('newsError---', error);
+      console.log('Error: ', error);
     });
 }
 
@@ -99,17 +97,15 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
     wishlist_id: getCookie(wishlistIdCookie),
     giftlistitem_id: getCorrespondingGiftlistId(uniqueId),
   };
-  console.log('removeFromWishlistAPI', data);
   apiManager
     .post(removeFromWishlist, data)
     .then(response => {
-      console.log('Add wishlit --- ', response.data);
       // this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
       // reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
       // this.props.updatetWishListCount(6);
     })
     .catch(error => {
-      console.log('newsError---', error);
+      console.log('Error: ', error);
     });
 }

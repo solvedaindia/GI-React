@@ -11,13 +11,11 @@ class OrderSummery extends React.Component {
   }
 
   onInvoiceClick(invoiceNo) {
-    console.log('INvoice No --- ', invoiceNo)
   }
 
   render() {
     const summeryData = this.props.summeryDataro;
 	const addressData = this.props.addressDataPro;
-    console.log('summery ddd invo9cdee -- ', addressData.pincode)
     return (
       <div className="summerydata">
         <div className="orderList">

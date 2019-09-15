@@ -67,7 +67,6 @@ class OrderConformation extends React.Component {
                 orderData: res.data.data
             })
         }).catch((err) => {
-            console.log(err, "order error")
         })
 
 

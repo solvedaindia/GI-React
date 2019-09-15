@@ -3,7 +3,6 @@ import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Footerlinks = props => {
-  console.log("myprops", props)
   let footerLinksData = '';
   if (props.name.data && props.name.data.length > 0) {
    footerLinksData = props.name.data.map((val, index) => (

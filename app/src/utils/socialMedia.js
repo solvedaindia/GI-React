@@ -23,7 +23,6 @@ class SocialMedia extends React.Component {
       title = `Checkout the designs ${getCookie(
         'name',
       )} loves on Godrej Interio!`;
-      console.log('social sahre -- ', this.props.sharingURLPro);
       shareUrl = this.props.sharingURLPro;
     }
 

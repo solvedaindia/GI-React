@@ -58,7 +58,6 @@ class Register extends React.Component {
     });
 
     onGoogleResponse(this.state, itemData => {
-      console.log('GoogleCallback', itemData);
     });
   };
 
@@ -82,7 +81,6 @@ class Register extends React.Component {
       });
 
       onFacebookResponse(this.state, itemData => {
-        console.log('FacebookCallback', itemData);
       });
     }
   };

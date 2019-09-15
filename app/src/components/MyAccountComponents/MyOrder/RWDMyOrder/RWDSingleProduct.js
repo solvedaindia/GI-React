@@ -44,7 +44,6 @@ class RWDSingleProduct extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
-    console.log('dddd -- ',productData.shipmen)
     return (
       <>
         <div className="itemBoxTrack clearfix">

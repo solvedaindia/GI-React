@@ -125,7 +125,6 @@ class CompPrd extends React.Component {
     renderDelivery = () => {
       var dels = [];
       this.props.data.map(elem => {
-        console.log('delivery data --- ',elem);
         dels.push(<DelContainer skuData={elem}/>)
       })
       return dels;

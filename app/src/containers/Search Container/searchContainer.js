@@ -23,7 +23,6 @@ class SearchContainer extends React.Component {
   handleState(customState) {
     const params = new URLSearchParams(customState.location.search);
     const keywoard = params.get('keyword');
-    console.log('Search Container --- ', keywoard);
     this.getSearchKeywordResult(keywoard);
   }
 
@@ -31,11 +30,9 @@ class SearchContainer extends React.Component {
     apiManager
       .get(searchPageAPI + keywoard)
       .then(response => {
-        console.log('Search page Response --- ', response.data);
       })
       .catch(error => {
-        console.log(error.message);
-        console.log('Search page Error --- ', error.message);
+        console.log('Error: ' + error.message);
       });
   }
 

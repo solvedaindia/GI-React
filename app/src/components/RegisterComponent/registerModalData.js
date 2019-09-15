@@ -55,7 +55,6 @@ class RegisterModalData extends React.Component {
   }
 
   handleLoginComponent() {
-    console.log('back to login');
     this.props.callbackRegisterPro();
     this.setState({
       show: false,

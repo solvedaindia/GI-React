@@ -34,13 +34,11 @@ class DelContainer extends React.Component {
         access_token: token
       }
     }).then((resp) => {
-      console.log(resp.data.data.deliveryDate, "delivery date response")
       this.setState({
         deliveryData: resp.data.data.deliveryDate,
         isLoading: false,
       })
     }).catch((err) => {
-      console.log(err, "delivery date err")
       this.setState({
         isLoading: false,
       })
