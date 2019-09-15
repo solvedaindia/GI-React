@@ -10,6 +10,7 @@ const contextService = require('request-context');
 const uniqid = require('uniqid');
 const https = require('https');
 const fs = require('fs');
+require('./utils/apicache');
 const tokenValidation = require('./utils/tokenvalidation');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
@@ -19,6 +20,11 @@ global.storeDetails = {};
 
 // Cron JOB
 require('./utils/cronjobs').startStoreInfoCron();
+
+process.on('uncaughtException', err => {
+  logger.debug(err);
+  process.exit(1);
+});
 
 const app = express();
 

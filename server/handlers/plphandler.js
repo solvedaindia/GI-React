@@ -269,6 +269,7 @@ function getDefaultSKU(skuArray) {
 }
 
 /* Filter the SKU's with Swatch Data from list of all SKu's */
+module.exports.getFilteredSKUs = getFilteredSKUs;
 function getFilteredSKUs(productsList, callback) {
   const productListArray = [];
   productsList.forEach(product => {

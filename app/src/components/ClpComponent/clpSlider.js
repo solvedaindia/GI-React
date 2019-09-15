@@ -19,8 +19,10 @@ class CLPFullBanner extends React.Component {
   getSliderData(id) {
     apiManager
       .get(espotAPI+`GI_CLP_ROOMS_BANNER_${id}`)
-      .then(response => {
+      .then(response => 
+	  {
         const {data} = response || {}
+		console.log(data.data.bannerList);
         this.setState({
           heroSlider: data && data.data.bannerList,
           isLoading: false,

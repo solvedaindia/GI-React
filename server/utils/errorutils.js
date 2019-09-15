@@ -200,6 +200,16 @@ module.exports.handleWCSError = function handleWCSError(response) {
         };
       }
       if (
+        errBody.errors[0].errorKey === '_ERR_THRESHOLD_SHOPPING_CART_QUANTITY'
+      ) {
+        return {
+          status_code: 400,
+          error_key: '_ERR_THRESHOLD_SHOPPING_CART_QUANTITY',
+          error_message:
+            'A maximum of 99 units of a product can be purchased in 1 order',
+        };
+      }
+      if (
         errBody.errors[0].errorKey === '_ERR_AUTHENTICATION_REUSEOLD_PASSWORD'
       ) {
         return {

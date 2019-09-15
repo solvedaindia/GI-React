@@ -37,7 +37,10 @@ function decryptToken(encryptedToken) {
 }
 
 exports.validateSecureToken = function validateSecureToken(req, res, next) {
-  if (req.url.indexOf('/payment/handlePayment') !== -1) {
+  if (
+    req.url.indexOf('/payment/handlePayment') !== -1 ||
+    req.url.indexOf('/cache') !== -1
+  ) {
     return;
   }
   if (!req.headers.storeId || req.headers.storeId === '') {

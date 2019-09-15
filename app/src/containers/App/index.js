@@ -253,9 +253,6 @@ export default class App extends React.Component {
     const { isMobile } = this.state;
     return (
       <div>
-        <Helmet titleTemplate="%s - Godrej" defaultTitle="Godrej">
-          <meta name="description" content="A Godrej application" />
-        </Helmet>
         {newsletterItem}
         {window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />

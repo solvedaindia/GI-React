@@ -66,7 +66,6 @@ class FilterMain extends React.Component {
   }
 
   moreFilterBtnClick() {
-    console.log('isFilter--', this.state.isFilterExpend);
     var ssss = this.state.filterBtnTitle
     var data;
     if (this.state.isFilterExpend) {
@@ -89,7 +88,6 @@ class FilterMain extends React.Component {
     var appliedFilltersArr = [];
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
-        console.log('Applied Filters -- ', key + ' ---- Value', option);
         appliedFilltersArr.push(option);
       })
     }
@@ -109,7 +107,6 @@ class FilterMain extends React.Component {
   clearTheSelectedFilter(index) {
     
     var selectionFacetValue = this.state.appliedFilters[index].value;
-    console.log('All Data --', selectionFacetValue);
     var selectedFacetName;
     var selectedFacetValuesArr = [];
     for (const [key, value] of this.props.updatedFilter) {
@@ -124,14 +121,12 @@ class FilterMain extends React.Component {
         selectedFacetName = key;
         items.filter(function (value, i, arr) {
           if (value != selectionFacetValue) {
-            console.log('returnn -- ', facetItems[i]);
             selectedFacetValuesArr.push(facetItems[i]);
           }
         });
       }
     }
 
-    console.log('Deleted Facet -- ', selectedFacetName, selectedFacetValuesArr);
     this.props.onFilterUpdate(selectedFacetValuesArr, selectedFacetName)
 
   }
@@ -140,7 +135,6 @@ class FilterMain extends React.Component {
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
         if (this.state.appliedFilters[index].label === option.label) {
-          console.log('returnmmm', key);
           return key;
         }
       })

@@ -82,6 +82,7 @@
                 .outOfStockLogo {
                     position: absolute;
                     top: 50%;
+					opacity: 0.6;
                     transform: translateY(-50%);
                     width: 100%;
                     z-index: 3;
@@ -179,7 +180,8 @@
                 cursor:default;
                 outline:none;
                 padding:8px 52px 8px 10px;
-                transition:all 200ms ease
+                transition:all 200ms ease;
+				z-index:3;
             }
             .Dropdown-control:hover{
                 box-shadow:0 1px 0 rgba(0,0,0,.06)
@@ -262,7 +264,7 @@
         color: $black;
         margin-left: 1%;
         .promotion {
-            margin: 0;
+            margin: 1px;
             padding: 0 0 $base*2;
             border-bottom: 1px solid $darkAshGrey; 
             .promoListItem {
@@ -597,6 +599,7 @@
                     position: relative;*/
                     .qty-dropdown{
                         width: 70px;
+						z-index: 3;
                     }
                 }
                 .prodTitle {
@@ -789,7 +792,6 @@
                     }
                     .cartQty {
                         position: relative;
-                        z-index: 1;
                         .qty-dropdown{
                             width: 52px;
                             position: absolute;

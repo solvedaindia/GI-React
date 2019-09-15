@@ -200,7 +200,10 @@
                     .socialLogin{
                         padding: $base*2 $base*4;
                         .btn-white{
-                            padding: $base;
+                            padding-top: $base;
+							padding-bottom: $base;
+							padding-left: 5px;
+							padding-right: 5px;
                             font-size: $base*1.5;
                             .icon{
                                 width: $base*3;

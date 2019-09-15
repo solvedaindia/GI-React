@@ -108,7 +108,7 @@ class CartUpdate extends React.Component {
           })}
         </select> */}
       <div className='qty-dropdown'> <Dropdown 
-        options={this.returnSelectValues([...Array(100)])}
+        options={this.returnSelectValues([...Array(99)])}
         value={this.state.cartQty}
         onChange={this.isQtyChange}
         controlClassName='cart-qty'

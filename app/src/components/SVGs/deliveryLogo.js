@@ -2,6 +2,7 @@ import React from 'react';
 const DeliveryLogo = (props) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 29" {...props}>
+            <title>Delivery Logo</title>
             <g fill="none" fillRule="evenodd">
                 <path d="M-6-13h55v55H-6z"/>
                 <g stroke="#000" strokeWidth=".9">

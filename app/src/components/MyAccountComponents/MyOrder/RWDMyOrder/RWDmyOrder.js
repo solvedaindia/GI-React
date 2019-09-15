@@ -71,7 +71,6 @@ class RWDMyOrder extends React.Component {
   }
 
   myOrderCallback(compName, data, completeData) {
-    console.log('ddddd -- ', compName, data);
     if (compName === 'ViewOrder') {
       this.props.updateTheRWDHeader('My Order Redirect');
     }
@@ -95,7 +94,6 @@ class RWDMyOrder extends React.Component {
   }
 
   viewOrderTrackbtnCallback(data) {
-    console.log('mmmmmm----',data)
     this.props.updateTheRWDHeader('Track Order');
     this.setState({
       currentComponent: 'MultiProduct',
@@ -110,10 +108,8 @@ class RWDMyOrder extends React.Component {
         `${orderListAPI}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&`;
-      console.log('order API --- ', orderAPI);
       apiManager.get(orderAPI)
         .then(response => {
-          console.log('OrderList Response --- ', response.data);
           this.setState({
             orderListData: isFromScroll ? [...this.state.orderListData, ...response.data.data.orderList] : response.data.data.orderList,
             hasMore: response.data.data.orderList.length !== 0, // Now only show on 0 Products and disable it for lazyload
@@ -130,7 +126,6 @@ class RWDMyOrder extends React.Component {
   }
 
   renderSelection(trackOrderData) {
-    console.log('back tro rnder seldelt', trackOrderData);
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
       updatedTrackOrderData: trackOrderData
@@ -139,7 +134,6 @@ class RWDMyOrder extends React.Component {
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
-    console.log('is Has more --- ', hasMore);
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
     const windowHeight =
@@ -277,7 +271,6 @@ class RWDMyOrder extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const updatedHeaderReturn = getReleventReduxState(stateObj, 'updatedRWDHeader');
-  console.log('Mobile Header Subscription RWD --- ', updatedHeaderReturn);
 
   return {
     updatedHeaderReturnVal: updatedHeaderReturn

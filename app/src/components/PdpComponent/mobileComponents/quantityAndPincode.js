@@ -48,7 +48,8 @@ class addToCartComponent extends React.Component {
   }
 
   /* render delivery message */
-  renderdeliveryMessage(props) {
+  renderdeliveryMessage(props) 
+  {
       let errorMsg = '';
       if (this.state.isPincodeValid === false) {
         errorMsg = 'Please enter valid pincode';
@@ -58,17 +59,19 @@ class addToCartComponent extends React.Component {
     if (props.pincodeServiceable === false) {
       errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
-        errorMsg = props.error;
+        errorMsg = props.error;	
       }
-      return <div className="pincodeNotServiceable">{errorMsg}</div>;
+	  return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
 
-    if (this.deliveryTime === '') {
-      if (props.deliveryDateAndTime) {
-        this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
-        return <div className="soldbyDealers">{this.deliveryTime}</div>;
-      }
-    }
+	  if (props.deliveryDateAndTime) 
+	  {
+		this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
+		return <div className="soldbyDealers">{this.deliveryTime}</div>;
+	  }
+	  else {
+		  return <div className="soldbyDealers">{this.deliveryTime}</div>;
+	  }
   }
 
     	/* get pincode API params */
@@ -174,6 +177,7 @@ class addToCartComponent extends React.Component {
         .post(addToCart, data)
         .then(() => {
           getUpdatedMinicartCount(this);
+		  console.log('data from add to cart' + data);
           this.deliveryTime = inventory.data.deliveryDate;
           this.setState({
             addToCartPopup: this.addToCartPopupItem(),
@@ -188,6 +192,7 @@ class addToCartComponent extends React.Component {
           this.props.handleAddtocart(false);
         })
         .catch(error => {
+			 console.log('error from add to cart' + data);
         });
     }
   };

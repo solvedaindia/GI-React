@@ -38,7 +38,6 @@ class LookbookThemeCarousel extends React.Component {
     apiManager
       .get(lookbookThemeAPI)
       .then(response => {
-        console.log('response of kitchen hall', response)
         const {data} = response || {}
         this.setState({
           lookbookThemeSlider: data && data.data.bannerList,

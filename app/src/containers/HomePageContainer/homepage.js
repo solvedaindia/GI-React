@@ -86,7 +86,7 @@ export class HomapegeLayout extends React.Component {
 					<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
 				}
 			</div>
-			<ContentEspot espotName = { 'GI_PIXEL_BODY_START' } />
+			<ContentEspot espotName = { 'GI_PIXEL_BODY_END' } />
 			</>
 		);
 	}

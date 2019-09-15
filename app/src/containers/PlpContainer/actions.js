@@ -45,7 +45,6 @@ export const cancelRWDFilters = () => ({
   });
 
 export const adBannerAction = (value, sIndex) =>
-    // console.log('adBannerAction', actionTypes);
     ({
         type: actionTypes.ADBANNERCOUNT,
         val: value,

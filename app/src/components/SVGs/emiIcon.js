@@ -1,6 +1,7 @@
 import React from 'react';
 const EMILogo = props => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" {...props}>
+    <title>EMI</title>
     <path
       fill="#EE4060"
       fillRule="nonzero"

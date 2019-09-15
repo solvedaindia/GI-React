@@ -74,7 +74,7 @@ class RWDCompleteOrder extends React.Component {
             </p>
             <p className="product-disc">
               <span className="info-text">Product Discount</span>
-              <span className="info-val">-₹{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</span>
+              <span className="info-val">{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</span>
             </p> 
             <p className="order-disc">
               <span className="info-text">Order Discount</span>
