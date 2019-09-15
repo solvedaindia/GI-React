@@ -9,6 +9,7 @@ import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import SummerData from '../../components/InspirationComp/InspEspot';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 export class Inspiration extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export class Inspiration extends React.Component {
        <ContentEspot espotName={ 'GI_PIXEL_INSPIRATION_BODY_START' } />
       <div className="staticpage inspiration">
       <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_INSPIRATION_META'}/>
+					<Pixels espotName= {'GI_PIXEL_INSPIRATION_META'}/>
 				</Helmet>
 	    <InspirationBanner />
 		<Breadcrumb {...this.props.match.params} staticName = {'Inspiration'}/>

@@ -7,6 +7,7 @@
 import React from 'react';
 import  '../../../public/styles/static-pages/kitchens.scss';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 import KitchenHall from '../../components/KitchensComp/kitchenHall';
 import WhatGoes from '../../components/KitchensComp/WhatGoes';
@@ -33,7 +34,7 @@ export class KitchenContainer extends React.Component {
         <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } />
         <section className="staticpage kitchenContainer">
         <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_KITCHEN_META'}/>
+					<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
 				</Helmet>
           <div className="slider">
             <KitchenBanner />

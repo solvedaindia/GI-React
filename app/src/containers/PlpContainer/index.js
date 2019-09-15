@@ -15,6 +15,7 @@ import injectReducer from '../../utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import PlpComponent from '../../components/PlpComponent/index';
+import Pixels from '../../components/Primitives/pixels';
 import {
   getReleventReduxState,
   resolveTheFilter,
@@ -579,8 +580,8 @@ export class PlpContainer extends React.Component {
       <>
         <ContentEspot espotName={ 'GI_PIXEL_PLP_BODY_START' } />
         <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_PLP_META'}/>
-				</Helmet>
+					<Pixels espotName= {'GI_PIXEL_PLP_META'}/>
+		</Helmet>
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}

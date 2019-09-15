@@ -15,6 +15,7 @@ import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
 import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 
 export class WardrobeContainer extends React.Component {
@@ -33,7 +34,7 @@ export class WardrobeContainer extends React.Component {
 
         <section className="staticpage wardrobesContainer">
         <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_WARDROBES_META'}/>
+					<Pixels espotName= {'GI_PIXEL_WARDROBES_META'}/>
 				</Helmet>
             <WardrobeBanner />
 			<Breadcrumb {...this.props.match.params} staticName = {'Wardrobe Collections'}/>

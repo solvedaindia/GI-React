@@ -26,6 +26,7 @@ import OutOfStockIcon from '../../components/SVGs/outOfStockIcon';
 import EMIVal from '../../components/Cart/emiPrice';
 import ContentEspot from '../../components/Primitives/staticContent';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 import {
 	YOUR_CART,
@@ -76,7 +77,7 @@ class CartDetail extends React.Component {
      <ContentEspot espotName = { 'GI_PIXEL_CART_BODY_START' } />
   <section className='cartDetails'>
   <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_CART_META'}/>
+					<Pixels espotName= {'GI_PIXEL_CART_META'}/>
 				</Helmet>
           <div className='cartItem'>
             <div className='cartHeadDetails'>

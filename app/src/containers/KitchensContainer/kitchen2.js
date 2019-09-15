@@ -11,6 +11,7 @@ import FaqEspot from '../../components/Primitives/faq.js';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
 import '../../../public/styles/static-pages/consultForm.scss';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 import {
   imagePrefix,
@@ -39,8 +40,8 @@ return (
     <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
     <div className="staticpage chefKitchen">
     <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_KITCHEN_META'}/>
-				</Helmet>
+		<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
+	</Helmet>
       <ChefKitchenBanner />
       <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
       <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />

@@ -13,6 +13,7 @@ import CLPReadMore from '../../components/ClpComponent/clpReadMore';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 // import Solution from '../../components/ClpComponent/solution';
 
@@ -32,7 +33,7 @@ export class CLPContainer extends React.Component {
         <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' } />
          <section className="clpBase">
          <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_CLP_META'}/>
+					<Pixels espotName= {'GI_PIXEL_CLP_META'}/>
 				</Helmet>
           <div className="slider">
             <CLPFullBanner {...this.props.match.params} />

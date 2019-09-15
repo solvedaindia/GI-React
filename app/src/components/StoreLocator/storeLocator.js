@@ -17,6 +17,7 @@ import appCookie from '../../utils/cookie';
 import Geocode from "react-geocode";
 import { isMobile } from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
+import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
 
 
@@ -461,7 +462,7 @@ class StoreLocator extends React.Component {
         <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_START' } />
          <Fragment>
          <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
+					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
 				</Helmet>
                 <Helmet>
                     <title>{pageTitle}</title>

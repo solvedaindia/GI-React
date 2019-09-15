@@ -9,6 +9,7 @@ import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import {Helmet} from "react-helmet";
+import Pixels from '../../components/Primitives/pixels';
 
 import {
     getReleventReduxState
@@ -30,7 +31,7 @@ export class CheckoutContainer extends React.Component {
          <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_START' } />
          <div>
          <Helmet>
-					<ContentEspot espotName= {'GI_PIXEL_CHECKOUT_META'}/>
+					<Pixels espotName= {'GI_PIXEL_CHECKOUT_META'}/>
 				</Helmet>
           <CheckoutComponent />
         </div>
