@@ -95,12 +95,24 @@ export default class App extends React.Component {
 
   componentWillUpdate() {
     let header = document.getElementById("header");
+    let pathurl=window.location.pathname;
     if(header) {
       header.classList.remove("sticky");
     } 
     if(!isMobile() && !isTab()){  
       $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
+    if(pathurl=="/" || pathurl.includes("/pdp")){
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+    else{
+      $('html, body').stop().animate();
+    }
+    
+    // if(pathurl.includes("/furniture")){
+    //   $('html, body').stop().animate();
+    // }
+    
   }
 
   initialLoginHandling() {
