@@ -42,7 +42,7 @@ class productKeywords extends React.Component {
         {
           breakpoint: 480,
           settings: {
-            slidesToShow:3,
+            slidesToShow:2,
             slidesToScroll: 3,
             dots: false,
             centerMode: false,
