@@ -19,11 +19,12 @@ export class HeaderSearch extends React.Component {
     this.state = {
       inputText: '',
       searchData: [],
-	};
+      categorySearchData: [],
+    };
   }
 
   componentDidMount() {
-  console.log('twing --- ',this.props)
+    console.log('twing --- ', this.props)
   }
 
   onBackBtn() {
@@ -65,6 +66,7 @@ export class HeaderSearch extends React.Component {
           .then(response => {
             this.setState({
               searchData: response.data.data.suggestionView[0].entry,
+              categorySearchData: response.data.data.categorySuggestionView ? response.data.data.categorySuggestionView : [],
             });
           })
           .catch(error => {
@@ -73,25 +75,51 @@ export class HeaderSearch extends React.Component {
       } else {
       }
     }
-    
+
   }
 
-  
-onkeydownclick(text) {
-	if(event.key === 'Enter') {
-		if (text !== '') {
-			this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
-			this.onLinkNavigation(this.state.inputText);
-		}
+
+  onkeydownclick(text) {
+    if (event.key === 'Enter') {
+      if (text !== '') {
+        this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
+        this.onLinkNavigation(this.state.inputText);
+      }
     }
-}
+  }
+
+  renderCategorySuggestions() {
+
+    if (this.state.categorySearchData.length !== 0) {
+      var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
+        const searchItem = document.getElementById("searchInput").value;
+        var categoryRoutePath = `/furniture-${item.categoryName.split(' ').join('-').toLowerCase()}/${item.categoryId}`;;
+        var searchStr = item.categoryName;
+        searchStr += ` in ${item.parentRoom}`;
+        if (index < 4) {
+          return (
+            <li className="list" key={index}>
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={categoryRoutePath} >
+                <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
+              </Link>
+            </li>
+          );
+        }
+      })
+
+      return catSuggestionItem;
+    }
+
+
+
+  }
 
   render() {
     const searchData = this.state.searchData;
 
-    if(searchData.length > 0 ){
+    if (searchData.length > 0) {
       document.body.classList.add('lock-screen');
-    }else{
+    } else {
       document.body.classList.remove('lock-screen');
     }
 
@@ -111,21 +139,21 @@ onkeydownclick(text) {
             value={this.state.inputText}
             onChange={this.handleInputChange.bind(this)}
             type="search"
-			onKeyPress={() => this.onkeydownclick(document.getElementById('searchInput').value)}
-			
+            onKeyPress={() => this.onkeydownclick(document.getElementById('searchInput').value)}
+
           />
           {this.state.inputText !== '' ? (
             <button className='search-sm-btn' onClick={this.onClearClick.bind(this)}>
               <img src={require('../../../../public/images/close.svg')} />
             </button>
           ) : (
-            // <button >
+              // <button >
               <img className='search-sm-btn'
                 alt='search'
                 src={require('../../../../public/images/rwd-assets/search.svg')}
               />
-            // </button>
-          )}
+              // </button>
+            )}
         </div>
 
         <div className="searchBarHeader">
@@ -147,14 +175,7 @@ onkeydownclick(text) {
                     if (index < 6) {
                       return (
                         <li className="list" key={index}>
-                          <Link
-                            className="link"
-                            to={{
-                              pathname: '/search',
-                              search: `keyword=${item.term}`,
-                            }}
-                            onClick={() => this.onLinkNavigation(item.term)}
-                          >
+                          <Link className="link" to={{ pathname: '/search', search: `keyword=${item.term}`, }} onClick={() => this.onLinkNavigation(item.term)} >
                             <strong>
                               {' '}
                               {item.term.substr(0, searchItem.length)}{' '}
@@ -166,6 +187,7 @@ onkeydownclick(text) {
                     }
                   })}
                 </li>
+                {this.renderCategorySuggestions()}
               </ul>
             </div>
           )}
@@ -180,30 +202,30 @@ onkeydownclick(text) {
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => {
-	return {
-	  plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
-	}
-  };
-  
-  const mapStateToProps = state => {
-	const stateObj = getReleventReduxState(state, 'plpContainer');
-	return {
-  
-	}
-  };
-  
-  const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps,
-  );
-  
-  const withReducer = injectReducer({ key: 'plpContainer', reducer });
-  const withSaga = injectSaga({ key: 'plpContainer', saga });
-  
-  export default compose(
-	withReducer,
-	withSaga,
-	withConnect,
-	withRouter,
-  )(HeaderSearch);
+  return {
+    plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  }
+};
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+  withRouter,
+)(HeaderSearch);
 
