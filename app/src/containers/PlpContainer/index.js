@@ -48,6 +48,7 @@ import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
 
 let categoryId;
+let spellCheckEndCount = 1;
 export class PlpContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -78,6 +79,7 @@ export class PlpContainer extends React.Component {
       emptySearchItem: null,
       showBestSeller: null,
       newSearchTrigger: false,
+      spellCheckCount: 0,
       // Browser Routing Vars
       browserFilters: [],
 
@@ -181,6 +183,7 @@ export class PlpContainer extends React.Component {
           searchKeyword: nextProps.location.search,
           showBestSeller: false,
           newSearchTrigger: true,
+          spellCheckCount: 0,
         });
         this.fetchPLPProductsData();
       } else {
@@ -228,6 +231,7 @@ export class PlpContainer extends React.Component {
       showBestSeller: null,
       newSearchTrigger: false,
       browserFilters: [],
+      spellCheckCount: 0,
     });
   }
 
@@ -279,8 +283,8 @@ export class PlpContainer extends React.Component {
       let searchText = null;
       if (this.state.isFromSearch.includes('/search')) {
         const params = new URLSearchParams(this.state.searchKeyword);
-        const keywoard = params.get('keyword');
-        searchText = formateSearchKeyword(keywoard, false);
+        const keyword = params.get('keyword');
+        searchText = encodeURIComponent(keyword).replace(/%2F/g, ' ');
         urlMaking = searchPageAPI + searchText;
       }
 
@@ -306,10 +310,7 @@ export class PlpContainer extends React.Component {
           }
 
           if (this.state.isFromSearch.includes('/search')) {
-            if (
-              this.state.newSearchTrigger &&
-              response.data.data.productList.length !== 0
-            ) {
+            if (this.state.newSearchTrigger && response.data.data.productList.length !== 0) {
               this.setState({
                 emptySearchItem: null,
                 showBestSeller: false,
@@ -341,26 +342,27 @@ export class PlpContainer extends React.Component {
               });
             }
             else {
-              this.props.initialValuesUpdate(3); 
+              this.props.initialValuesUpdate(3);
             }
           }
-          
+
 
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
-          }else {
-			  if(this.state.isFromSearch.includes('/search'))
-			  {
-				this.fetchAdBannerData();
-			  }
-		  }
-		  
+          } else {
+            if (this.state.isFromSearch.includes('/search')) {
+              this.fetchAdBannerData();
+            }
+          }
+
           
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
             filterData: response.data.data.facetData,
             breadcrumbData: response.data.data.breadCrumbData,
+            hasMore:
+              /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), // Now only show on 0 Products and disable it for lazyload
             isLoading: false,
             isCatDetails: false,
             browserFilters: [],
@@ -412,6 +414,25 @@ export class PlpContainer extends React.Component {
   onSearchNoResut(searchText, spellCheckArr) {
     if (spellCheckArr) {
       if (spellCheckArr && spellCheckArr.length !== 0) {
+        if (this.state.spellCheckCount === spellCheckEndCount) {
+          const params = new URLSearchParams(this.props.location.search);
+        const keywoard = params.get('keyword');
+          return (
+            <div>
+              <div className="noResultfound">
+                <div className="label-noresult">
+                  No results for “{keywoard}”
+                </div>
+              </div>
+              <div className="Search-bestseller container">
+                <BestSeller />
+              </div>
+            </div>
+          );
+        }
+        else {
+          this.state.spellCheckCount += 1;
+        }
         this.setState({
           searchKeyword: `keyword=${spellCheckArr[0]}`,
         });
@@ -456,14 +477,21 @@ export class PlpContainer extends React.Component {
     const {
       state: { error, isLoading, hasMore },
     } = this;
-    
+
+    var scrollYindex;
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+      scrollYindex = window.innerHeight + document.body.scrollTop;
+    }
+    else { //All other browsers
+      scrollYindex = window.innerHeight + document.documentElement.scrollTop;
+    }
+
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 1000;
-    const windowHeight =
-      window.innerHeight + document.documentElement.scrollTop;
-    const windowOffsetHeight =
-      document.documentElement.offsetHeight - adjustedHeight;
+    const windowHeight = scrollYindex;
+    const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight;
 
+    console.log('is Has more --- ', hasMore, windowHeight);
     if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
@@ -501,22 +529,22 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-      
-        plpProducts = (
-          <PlpComponent
-            plpDataPro={this.state.plpData}
-            adBannerDataPro={adBannerData}
-            catId={this.state.categoryDetail.uniqueID}
-            history={this.props.history}
-            isSearchPathPro={this.props.location.pathname}
-            plpBreadcrumbPro={this.state.breadcrumbData}
-            showSkuPro={
-              !this.state.isFromSearch.includes('/search')
-                ? this.state.categoryDetail.displaySkus
-                : true
-            }
-          />
-        );
+
+      plpProducts = (
+        <PlpComponent
+          plpDataPro={this.state.plpData}
+          adBannerDataPro={adBannerData}
+          catId={this.state.categoryDetail.uniqueID}
+          history={this.props.history}
+          isSearchPathPro={this.props.location.pathname}
+          plpBreadcrumbPro={this.state.breadcrumbData}
+          showSkuPro={
+            !this.state.isFromSearch.includes('/search')
+              ? this.state.categoryDetail.displaySkus
+              : true
+          }
+        />
+      );
     }
 
     let filterItem;
@@ -565,12 +593,12 @@ export class PlpContainer extends React.Component {
     }
 
     let breadcrumbItem = null;
-    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData!== undefined && this.state.breadcrumbData.length !== 0) {
+    if (this.state.breadcrumbData !== null && plpData.length != 0 && this.state.breadcrumbData !== undefined && this.state.breadcrumbData.length !== 0) {
       breadcrumbItem = (
         <Breadcrumb plpBreadcrumbPro={this.state.breadcrumbData} />
       );
     }
-    else if (this.state.isFromSearch.includes('/search')) { 
+    else if (this.state.isFromSearch.includes('/search')) {
       breadcrumbItem = (
         <Breadcrumb isFromSearchPro={true} />
       );
@@ -624,10 +652,15 @@ export class PlpContainer extends React.Component {
 
         {error && <div className='noProductFound'>{error}</div>}
         {isLoading && (
-        <div className="lazyloading-Indicator">
-          <img id="me" className="loadingImg" alt='Lazy Loader'
-            src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg') } />
-        </div>
+          <div className="lazyloading-Indicator">
+            <img
+              id="me"
+              className="loadingImg"
+              alt='Lazy Loader'
+              src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')
+              }
+            />
+          </div>
         )}
      
         {this.state.productCount === 0 &&

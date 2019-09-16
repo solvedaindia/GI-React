@@ -29,7 +29,7 @@ class PromoField extends React.Component {
       .post(cartApplyPromoAPI, data)
       .then(response => {
         this.setState({
-          promoCode: response.data.data,
+          promoCode: response.data.data.promoCode,
           error: null,
         });
         this.props.getCartDetails();
