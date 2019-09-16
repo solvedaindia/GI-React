@@ -18,6 +18,7 @@ class TrackOrderProduct extends React.Component {
 
   componentDidMount() {
     this.filterDeliveryInstallationTags();
+    window.scrollTo(0, 0);
   }
 
   getCustomerCareDetails() {
