@@ -111,7 +111,6 @@ class StoreLocator extends React.Component {
                 defaultPincodeVal: pincodeVal
         })
         this.getUserCurrentLocation();
-        window.scrollTo(0, 0);
     }
 
     getUserCurrentLocation() {
@@ -157,9 +156,6 @@ class StoreLocator extends React.Component {
                 defaultPincodeVal: pincodeVal
             })
             this.removeActiveClassFromFilter();
-
-            window.scrollTo(0, 0);
-
         }
     }
 

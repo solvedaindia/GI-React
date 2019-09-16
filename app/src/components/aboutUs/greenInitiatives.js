@@ -81,31 +81,26 @@ export default class GreenInitiatives extends Component {
     ],
   };
     return (
-        <div>
-           <div className='container'>
+        <div className='container'>
           <h1 className='greenTitle'>{this.state.title}</h1>
-        </div>
- <Slider {...settings}>
-          {this.state.slides.map(function(slide) {
-            return (
-              <div key={slide}>               
-                <div className='row'>
-                  <div className='col-md-4'>
-                    <a href={slide.onClickUrl} >
-                      <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
-                    </a>
-                  </div>
-                  <div className='col-md-8'>
-                    <h2 className='ULcontent'>{slide.content_title}</h2>
-                  <p className='ULparagraph'>{slide.desc}</p>
-                  </div>
-                </div>
-               </div>
-            );
-          })}
-        </Slider>
-
-        </div>
+			<Slider {...settings}>
+			  {this.state.slides.map(function(slide) {
+				return (
+				  <div key={slide}>               
+					  <div className='col-md-4'>
+						<a href={slide.onClickUrl} >
+						  <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
+						</a>
+					  </div>
+					  <div className='col-md-8'>
+						<h2 className='ULcontent'>{slide.content_title}</h2>
+					  <p className='ULparagraph'>{slide.desc}</p>
+					  </div>
+					</div>
+				);
+			  })}
+			</Slider>
+      </div>
     );
   }
 }

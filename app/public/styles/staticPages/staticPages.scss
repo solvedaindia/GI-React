@@ -3,6 +3,14 @@
 			font-family:CeraGIRegular,sans-serif;
 			color:#000;
 		}
+		
+		.slick-next:before, 
+		.slick-prev:before {
+			font-size: 32px;
+			line-height: unset;
+			opacity: unset;
+			color: unset;
+		}
 	}
 	.staticpage h1
 	{

@@ -137,16 +137,10 @@ class NewsletterModel extends React.Component {
 
             <Col xs={12} md={7} className='newsletter-form-box'>
               <div className="form_newsletter">
-                {!isMobile() ? <h3 className="heading">
-                 {MAILING_LIST_YET}
-                </h3> : ''}
+                {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_HEADING' } /> : ''}
                 <Form className='news-letter-form'>
-                  {!isMobile() ? <p className="signup-text">
-                    `${RECIEVE_UPDATES}`
-                  </p> : ''}
-                  {isMobile() ? <h3 className="heading">
-                   {JOINED_MAILING_LIST}
-                  </h3> : ''}
+                  {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_DETAIL' } /> : ''}
+                  {isMobile() ? <h3 className="heading">{JOINED_MAILING_LIST}</h3> : ''}
                   <FormGroup className="email">
                     {isMobile() ? <label className='form-label'>{EMAIL_ADD}</label> : ''}
                     <input

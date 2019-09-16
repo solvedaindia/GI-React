@@ -130,7 +130,7 @@
 .formContainer {
     position: relative;
     width: 100%;
-    margin: 60px auto;
+    margin: 0px auto;
     .containerSetForm{
         position: relative;
         width:100%
@@ -139,11 +139,7 @@
         width: 100%;
     }
     .formDetails {
-        width: 75%;
-        left: 12.5%;
         background-color: #fff;
-        position: absolute;
-        top: 8%; 
         padding: $base*7.5 $base*15;
         .title {
             margin: $base*4 0 0;
@@ -173,7 +169,7 @@
             border-radius: unset;
             float: right;
             padding: $base;
-            width: $base*41;
+            width: $base*25;
             background-color: $black;
             color: $colorwhite;  
         }
