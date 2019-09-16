@@ -101,7 +101,7 @@ class Recommendation extends React.Component {
                                             {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${recoData.recommendationArray[1].emiData}` : ''}
                                         </p>
                                         <p className='offerAmount'>
-                                            {recoData.recommendationArray[1].discount}% Off {recoData.recommendationArray[1].promotionData}
+                                            {recoData.recommendationArray[1].discount !== '' ? `${recoData.recommendationArray[1].discount} ${% Off } ${recoData.recommendationArray[1].promotionData}` : ''}
                                         </p>
                                     </div>
                                 </div>
