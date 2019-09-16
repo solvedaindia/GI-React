@@ -69,6 +69,14 @@ import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
 
+// import  {createBrowserHistory} from 'history';
+// export const history =createBrowserHistory();
+// alert(history,'history');
+
+// history.listen(({pathname}) => {
+//   shouldScrollLogin && window.scrollTo(0,0)
+// });
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -95,19 +103,19 @@ export default class App extends React.Component {
 
   componentWillUpdate() {
     let header = document.getElementById("header");
-    let pathurl=window.location.pathname;
+    // let pathurl=window.location.pathname;
     if(header) {
       header.classList.remove("sticky");
     } 
-    if(!isMobile() && !isTab()){  
-      $('html, body').animate({ scrollTop: 0 }, 'slow');
-    }
-    if(pathurl=="/" || pathurl.includes("/pdp")){
-      $('html, body').animate({ scrollTop: 0 }, 'fast');
-    }
-    else{
-      $('html, body').stop().animate();
-    }
+    // if(!isMobile() && !isTab()){  
+    //   $('html, body').animate({ scrollTop: 0 }, 'slow');
+    // }
+    // if(pathurl=="/" || pathurl.includes("/pdp")){
+    //   // $('html, body').animate({ scrollTop: 0 }, 'fast');
+    // }
+    // else{
+    //   $('html, body').stop().animate();
+    // }
     
     // if(pathurl.includes("/furniture")){
     //   $('html, body').stop().animate();

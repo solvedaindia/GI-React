@@ -38,15 +38,16 @@
         .prodImg {
             width: 20%;
             height: 180px;
-            margin: $base*2.75 7.5%;
+            margin: $base*2.75 4.5%;
             background-color: $colorwhite; 
             display: inline-block;
+            max-width: 180px;
             .img {
                 width: 100%;
             }
         }
         .prodDetails {
-            width: 39.5%;
+            width: 40.5%;
             margin: $base*2.75 0;
             display: inline-block;
             .count {
@@ -62,10 +63,11 @@
             .prodName {
                 font-size: $base*2;
                 font-family: $font-medium;
+                line-height: 16px;
             }
             .item {
                 display: inline-block;
-                margin: 0 $base 0 0;
+                margin: 0 $base*2.5 0 0;
                 font-size: $base*1.5;
                 font-family: $font-medium;
             }
@@ -75,15 +77,21 @@
             .qtyVal,
             .delVal {
                 color: $battleshipGrey;
+                font-size: $base*2;
+                font-family: $font-regular;
+                line-height: 16px;
             }
             .statusVal {
                 color: $greenLight;
+                font-family: $font-regular;
+                line-height: 16px;
+                font-size: $base*2;
             }
         }
         .link {
             width: 19.5%;
             display: inline-block;
-            margin: $base*2.75 0;
+            margin: $base*11 0;
             vertical-align: bottom;
             padding: $base;
             background-color: $ashGrey;
@@ -155,8 +163,9 @@
                     font-family: $font-medium;
                 }
                 .item {
-                    margin: $base*3 0;
+                    margin: $base*1.25 0;
                     display: block;
+                    line-height: 12px;
                 }
             }
             .link {
