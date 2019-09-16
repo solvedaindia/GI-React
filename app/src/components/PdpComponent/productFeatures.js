@@ -53,7 +53,7 @@ class productFeatures extends React.Component {
                 </Row>
                 <div className="row">
                   <Col md={6} sm={12} xs={12}>
-                    <div className="featureImgbox">
+                    <div className="featureImgbox">			 
                       {this.props.productFeatureData.productFeatures.map(
                         (featureImagePath, index) => {
                            fullImagePath = `${imagePrefix}${featureImagePath.imagePath}`;
@@ -77,8 +77,8 @@ class productFeatures extends React.Component {
                               />
                             </div>
                           );
-                        },
-                      )}
+                        })
+					}
                     </div>
                   </Col>
                   <Col md={6} sm={12} xs={12}>
