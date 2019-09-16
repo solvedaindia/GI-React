@@ -6,7 +6,6 @@
 
   
   .formContainer{
-    padding: 143px 0 0 0;
     .Book-a-consultation {
         font-family: $font-medium;
         font-size: 30px;
@@ -24,7 +23,6 @@
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.24);
         background-color: #ffffff;
         object-fit: contain;
-        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

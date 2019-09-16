@@ -49,7 +49,6 @@ class PdpComponent extends React.Component {
 		}
 		this.getResolveSkuData();
     	window.addEventListener('scroll', this.handleScroll);
-    	window.scrollTo(0, 0);	
 	}
 
 	/* get sku resolved data */

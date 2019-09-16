@@ -13,6 +13,8 @@ import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
+import {createBrowserHistory} from 'history';
+
 import {
   accessTokenCookie,
   getTheAccessToken,
@@ -79,6 +81,7 @@ import Maintenance from '../HomePageContainer/Maintenance';
 
 
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -99,27 +102,25 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
+
   }
 
   componentWillUpdate() {
     let header = document.getElementById("header");
-    // let pathurl=window.location.pathname;
+    let pathurl=window.location.href;
     if(header) {
       header.classList.remove("sticky");
     } 
-    // if(!isMobile() && !isTab()){  
-    //   $('html, body').animate({ scrollTop: 0 }, 'slow');
-    // }
-    // if(pathurl=="/" || pathurl.includes("/pdp")){
-    //   // $('html, body').animate({ scrollTop: 0 }, 'fast');
-    // }
-    // else{
-    //   $('html, body').stop().animate();
-    // }
-    
-    // if(pathurl.includes("/furniture")){
-    //   $('html, body').stop().animate();
-    // }
+	
+    if(pathurl.includes("sort")){
+       $('html, body').stop().animate();
+    }
+    else if(pathurl.includes("filter")){
+       $('html, body').stop().animate();
+    }
+	else {
+	   $('html, body').animate({ scrollTop: 0 }, 'fast');
+	}
     
   }
 
@@ -243,6 +244,8 @@ export default class App extends React.Component {
       }
     }
   }
+  
+  
 
   render() {
     if (this.state.accessToken === '') {
@@ -319,3 +322,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export const history = createBrowserHistory();	

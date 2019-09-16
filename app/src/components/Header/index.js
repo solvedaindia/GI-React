@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryNavigation from 'containers/CategoryNavigation';
 import FeaturedLinkBar from 'components/FeaturedLinkBar';
 import TopHeader from 'components/TopHeader';
-import LoadingIndicator from '../../components/LoadingIndicator';
+import LoadingIndicator from '../../utils/loadingIndicator';
 // import MobileHeader from './MobileHeader/index';
 import { catApi, headerApi2, mwApi } from '../../../public/constants/constants';
 

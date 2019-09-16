@@ -236,10 +236,15 @@
   /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    
-    //CSS
-    
+  @include mix-md-ipad {  
+    .welcomeBack, .modal-wrapperjoinus {
+        &.in{
+            .modal-dialog{
+                width: 500px;
+                max-width: initial;
+            }
+        }
+    }    
   }
   
 
