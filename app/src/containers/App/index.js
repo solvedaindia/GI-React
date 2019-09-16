@@ -71,6 +71,14 @@ import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
 
+// import  {createBrowserHistory} from 'history';
+// export const history =createBrowserHistory();
+// alert(history,'history');
+
+// history.listen(({pathname}) => {
+//   shouldScrollLogin && window.scrollTo(0,0)
+// });
+
 
 export default class App extends React.Component {
 
