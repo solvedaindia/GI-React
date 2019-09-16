@@ -976,19 +976,6 @@
     }
 }
 
-@supports (-webkit-overflow-scrolling: touch) {
-    /* CSS specific to iOS devices */ 
-    .caretDown {
-        width: 0;
-        height: 0;
-        position: absolute;
-        top: 14px;
-        right: 23px;
-        display: inline-block;
-        border: $base*0.75 solid transparent;
-        border-top-color: $black;
-    }
-  }
   
   @supports not (-webkit-overflow-scrolling: touch) {
     /* CSS for other than iOS devices */ 
