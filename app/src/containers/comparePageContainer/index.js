@@ -37,7 +37,6 @@ export class ComparePageContainer extends React.Component {
     });
     //this.state.compWidgetData = this.props.updatedCompData
     this.callCompareApi();
-
   }
 
   componentWillReceiveProps(nextProps) {
