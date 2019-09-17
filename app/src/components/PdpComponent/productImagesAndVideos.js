@@ -133,11 +133,25 @@ class productImagesAndVideos extends React.Component {
     }
   }
 
-  async handleClick(e) {
+  resetwidth(e) {    
+    let imgGallery = document.getElementsByClassName('image-gallery-image');  
+    for (let i = 0; i < imgGallery.length; i++) {    
+      if (imgGallery[i] === undefined) {
+        let data = imgGallery[i].children[0].style.width=''; 
+      } 
+      else {
+        let data = imgGallery[i].children[0].style.width='';
+      }
+    } 
+  
+  }
+
+  async handleClick(e) {    
     if (
       e.target.nodeName === 'IMG' ||
       e.target.classList.contains('video-react-icon-fullscreen') === true
     ) {
+      this.resetwidth();
       const btnSubmitTags = document.getElementsByClassName(
         'image-gallery-fullscreen-button',
       );
@@ -156,6 +170,7 @@ class productImagesAndVideos extends React.Component {
         });
       }
     }
+    
   }
 
   renderZoomButtons = props => { 
