@@ -53,7 +53,7 @@ class addToCartComponent extends React.Component {
       return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
     if (props.pincodeServiceable === false) {
-      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
+      errorMsg = 'This Pincode is non-serviceable';
       if (props.error) {
         errorMsg = props.error;
       }

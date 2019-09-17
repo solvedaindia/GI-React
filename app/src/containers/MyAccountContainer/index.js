@@ -66,7 +66,11 @@ export class MyAccountContainer extends React.Component {
 
     })
   }
-
+  
+  isScrollTop(){
+    window.scrollTo(0, 0);
+  }
+  
   render() {
     var redirectedFrom;
     if (this.props.location.state != undefined) {
