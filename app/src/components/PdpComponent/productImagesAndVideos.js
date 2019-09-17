@@ -137,10 +137,10 @@ class productImagesAndVideos extends React.Component {
     let imgGallery = document.getElementsByClassName('image-gallery-image');  
     for (let i = 0; i < imgGallery.length; i++) {    
       if (imgGallery[i] === undefined) {
-        let data = imgGallery[i].children[0].style.width=''; 
+        imgGallery[i].children[0].style.width=''; 
       } 
       else {
-        let data = imgGallery[i].children[0].style.width='';
+        imgGallery[i].children[0].style.width='';
       }
     } 
   
