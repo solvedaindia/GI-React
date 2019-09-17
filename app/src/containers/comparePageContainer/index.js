@@ -247,6 +247,7 @@ export class ComparePageContainer extends React.Component {
     this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);
     this.renderPrd()
     this.updateRoute();
+    this.props.removeProduct(data);
   }
 
   render() {

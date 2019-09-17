@@ -270,14 +270,14 @@ export function trimTheSentence(title, charLimit) {
     return trimStr;
 }
 
-export function checkCompareWidget(compWidget, id) {
-    const data = compWidget.find(prd => prd.id == id);
+export function checkCompareWidget(compWidget, skuId) {
+    const data = compWidget.find(prd => prd.skuId == skuId);
     if (data) {
-        return compWidget.filter(prd => prd.id != id);
+        return compWidget.filter(prd => prd.skuId != skuId);
     }
-    const skuData = compWidget.find(prd => prd.skuId == id);
+    const skuData = compWidget.find(prd => prd.skuId == skuId);
     if (skuData) {
-        return compWidget.filter(prd => prd.skuId != id);
+        return compWidget.filter(prd => prd.skuId != idskuId);
     }
 
     return compWidget;

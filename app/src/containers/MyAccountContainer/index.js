@@ -91,11 +91,7 @@ export class MyAccountContainer extends React.Component {
       redirectedFrom: 'address'
     })
   }
-  
-  isScrollTop(){
-    window.scrollTo(0, 0);
-  }
-  
+
   render() {
 
     var guestOrderData;
