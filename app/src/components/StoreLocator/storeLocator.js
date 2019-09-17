@@ -87,12 +87,13 @@ class StoreLocator extends React.Component {
     }
 
     componentDidMount() {
+        alert(appCookie.get('pincode') + '===');
         let pincodeVal;
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName){ 
                 this.getLatAndLong(this.props.history.location.state.storeName);
                 pincodeVal = this.props.history.location.state.storeName;
-            }else {
+            }else { 
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
             }
@@ -104,6 +105,7 @@ class StoreLocator extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        alert(appCookie.get('pincode') + '===???>>>>');
         let pincodeVal;
         if (this.props.history.location.state) {
             let storeNameInput =  document.getElementById("city").value;
@@ -114,13 +116,6 @@ class StoreLocator extends React.Component {
                 {
                     document.getElementById("city").value="";
                 }
-            } else if (nextProps.history.location.state.pincode) {
-                if(storeNameInput!=nextProps.history.location.state.pincode)
-                {
-                    document.getElementById("city").value="";
-                }
-                this.getLatAndLong(nextProps.history.location.state.pincode);
-                pincodeVal = this.props.history.location.state.pincode;
             } else {
                 if(storeNameInput!=appCookie.get('pincode'))
                 {

@@ -27,7 +27,7 @@ class TopContainer extends React.Component {
     }
 
     renderSwatches() {
-      console.log("render swatches called")
+      console.log("renderSwatchesCalled", this.props.product.swatches)
       if(this.props.product.swatches && this.props.product.swatches.length > 0) {
           console.log(this.props.product.swatches, "swatches data")
         var swatches = [];
