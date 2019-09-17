@@ -312,12 +312,20 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
     
     if (searchKeyword !== null && searchKeyword !== undefined && searchKeyword !== '') {
         if (isKeywordEntered) {
-            return searchKeyword.replace(/&/g, 'z9f')
+			searchKeyword = searchKeyword.replace(/&/g, ' ::: ');
+			searchKeyword = searchKeyword.replace(/%/g, ' _:');
+            return searchKeyword;
         }
         else {
-            return searchKeyword.replace(/z9f/g, '&')
+			searchKeyword = searchKeyword.replace(/:::/g, '&');
+			searchKeyword = searchKeyword.replace(/_:/g, '%');
+            return searchKeyword;
         }
     }
+	else{
+		searchKeyword = '';
+		return searchKeyword;
+	}
     
     
 }

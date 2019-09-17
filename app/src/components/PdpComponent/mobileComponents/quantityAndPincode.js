@@ -14,7 +14,7 @@ import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
-import {ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
+import {PRODUCT_ADDED, ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
