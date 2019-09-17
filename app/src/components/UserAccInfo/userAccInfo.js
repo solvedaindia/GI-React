@@ -81,7 +81,7 @@ class UserAccInfo extends React.Component {
     });
   }
 
-  getUserDetails() { alert('USER')
+  getUserDetails() {
     apiManager
       .get(userDetailAPI, {
         headers: { profile: 'summary' },
