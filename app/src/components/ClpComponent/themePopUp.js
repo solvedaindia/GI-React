@@ -26,10 +26,9 @@ class ThemeData extends React.Component {
         const [{ x, y }] = itemDetail.coords;
         var currentLeftCords = "62";
         var currentBottomCords = "66";
-;
+        
         if(isMobile()){
             if(currentLeftCords < Number(y)){
-
                 this.setState({currentLeftCoords: "0px 0px 0px -211px"});
 
             if(currentBottomCords < Number(x)){
