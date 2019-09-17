@@ -13,6 +13,11 @@
         .rightSide {
             background-color: #f7f8f8; 
         }
+		.leftOne {
+			.col-md-5 {
+					margin-bottom:15px;
+				}
+		}
         .leftSide {
             // width: 59%;
             // margin-right: 1%; 
@@ -22,6 +27,7 @@
             }
             .leftOne {
                 // width: 42.5%;
+				
             }
             .leftTwo {
                 width: 100%;
@@ -31,6 +37,7 @@
             .leftOne {
                 display: inline-block;
                 vertical-align: top;
+				margin-bottom: 15px;
             }
             .title {
                 text-align: left;
