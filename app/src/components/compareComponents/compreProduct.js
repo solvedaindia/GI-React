@@ -19,7 +19,8 @@ class CompPrd extends React.Component {
         payment: true
       }
     }
-    renderProducts = () => {
+    renderProducts = () => { 
+      console.log('tempoData', this.props.data)
       var prds = [];
       this.props.data.map((element, index) => {
         prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
@@ -87,6 +88,7 @@ class CompPrd extends React.Component {
     }
 
     renderSpecs = () => {
+      
       var specs = [];
 	  if (this.props.data === undefined || this.props.data === null || this.props.data === ''
 		|| this.props.data.length === 0 || this.props.data.specs === undefined || this.props.data.specs === null) 
