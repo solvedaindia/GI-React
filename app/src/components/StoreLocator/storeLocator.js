@@ -130,6 +130,7 @@ class StoreLocator extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        alert(appCookie.get('pincode') + '===???>>>>');
         let pincodeVal;
         if (this.props.history.location.state) {
             let storeNameInput = document.getElementById("city").value;

@@ -41,9 +41,15 @@ class addToCartComponent extends React.Component {
   componentWillReceiveProps() {
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
+
+    let pinData = appCookie.get('pincode');
+    if (appCookie.get('tempPincode') && appCookie.get('tempPincode') !== "") {
+      pinData = appCookie.get('tempPincode');
+    }
     this.setState({
       qtyVal: 1,
-      isPincodeValid: true
+      isPincodeValid: true,
+      pincodeVal: pinData
     })
   }
 
@@ -57,7 +63,7 @@ class addToCartComponent extends React.Component {
       }
 
     if (props.pincodeServiceable === false) {
-      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
+      errorMsg = 'This Pincode is non-serviceable';
       if (props.error) {
         errorMsg = props.error;	
       }
@@ -183,6 +189,12 @@ class addToCartComponent extends React.Component {
             loading: false,
           });
 
+          if (appCookie.get('tempPincode') && appCookie.get('tempPincode')!== "") {
+            appCookie.set('pincode', appCookie.get('tempPincode'), 365 * 24 * 60 * 60 * 1000);
+            appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+            appCookie.set('tempPincode', '', 365 * 24 * 60 * 60 * 1000);
+          }
+
           if (isPDPAddToCart === '') {
             appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
           } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
@@ -241,13 +253,15 @@ class addToCartComponent extends React.Component {
     } else {
       const pincode = document.getElementById('pincodeVal').value;
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
-        appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-        appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('tempPincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        // appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        // appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         props.handleAddtocart(true);
         this.setState({
           isEdit: true,
           qtyVal: 1,
-          isPincodeValid: true
+          isPincodeValid: true,
+          pincodeVal: pincode
         });
       } else if (pincode.length < 6) {
           this.setState({

@@ -44,7 +44,9 @@ export class KitchenContainer extends React.Component {
           <ContentEspot espotName={ 'GI_DREAM_KITCHEN_STEPS' } />
           <ContentEspot espotName={ 'GI_KITCHEN_LAYOUTS' } />
           <WhatGoes />
+          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_12' } />
           <KitchenHall />
+          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_13' } />
           {/*
           <BeforeAfter /> */}
           <div className="formContainer">
@@ -57,8 +59,6 @@ export class KitchenContainer extends React.Component {
           <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
           <KitchenStore />
           <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR' } />
-          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_12' } />
-          <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_13' } />
         </section>
         <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_END' } />
       </>
