@@ -112,7 +112,11 @@ export default class App extends React.Component {
       header.classList.remove("sticky");
     } 
 	
-    if(pathurl.includes("sort")){
+	if(window.location.hash)
+	{
+		 $('html, body').stop().animate();
+	}
+    else if(pathurl.includes("sort")){
        $('html, body').stop().animate();
     }
     else if(pathurl.includes("filter")){
@@ -206,7 +210,7 @@ export default class App extends React.Component {
   
   getCurrentLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     }
 
     function showPosition(position) {
