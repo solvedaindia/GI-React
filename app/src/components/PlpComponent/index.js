@@ -15,6 +15,7 @@ import * as actionCreators from '../../containers/PlpContainer/actions';
 import {
   getReleventReduxState,
   getOnlyWishlistUniqueIds,
+  isMobile,
 } from '../../utils/utilityManager';
 
 import ProductItem from '../GlobalComponents/productItem/productItem';
@@ -113,8 +114,15 @@ class PlpComponent extends React.Component {
     let coloumnLayout;
     if (this.props.coloumnLayout === 3 || this.props.isFromWishlistPro === true) {
       coloumnLayout = 'plp-products grid3';
-    } else {
+      if (isMobile()) {
+        coloumnLayout = 'plp-products grid2';
+      }
+    } 
+    else {
       coloumnLayout = 'plp-products grid2';
+      if (isMobile()) {
+        coloumnLayout = 'plp-products grid3';
+      }
     }
     return (
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>
