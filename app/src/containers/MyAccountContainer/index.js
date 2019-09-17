@@ -32,6 +32,7 @@ export class MyAccountContainer extends React.Component {
     this.state = {
       profileName: null,
       changePasswordTag: null,
+      redirectedFrom: null,
     };
     this.myProfileCallback = this.myProfileCallback.bind(this);
   }
@@ -48,6 +49,12 @@ export class MyAccountContainer extends React.Component {
       this.props.history.push('/')
       return;
     }
+
+    if (nextProp.location.state !== this.props.location.state) {
+      this.setState({
+        redirectedFrom: nextProp.location.state.from,
+      })
+    }
   }
 
   myProfileCallback(userName, passwordTag) {
@@ -63,7 +70,25 @@ export class MyAccountContainer extends React.Component {
 
   onMyProfileClick() {
     this.setState({
+      redirectedFrom: 'myprofile'
+    })
+  }
 
+  onPasswordClick() {
+    this.setState({
+      redirectedFrom: 'password'
+    })
+  }
+
+  onMyOrderClick() {
+    this.setState({
+      redirectedFrom: 'myorder'
+    })
+  }
+
+  onAddressClick() {
+    this.setState({
+      redirectedFrom: 'address'
     })
   }
   
@@ -72,19 +97,23 @@ export class MyAccountContainer extends React.Component {
   }
   
   render() {
-    var redirectedFrom;
-    if (this.props.location.state != undefined) {
-      redirectedFrom = this.props.location.state.from;
-    }
+
     var guestOrderData;
-    if (redirectedFrom) {
+    var isGuestTrackOrder;
+    if (this.state.redirectedFrom === null) {
+      if (this.props.location.state != undefined) {
+        this.state.redirectedFrom = this.props.location.state.from;
+      }
+    }
+
+    if (this.state.redirectedFrom) {
       guestOrderData = this.props.location.state.orderData;
     }
-    var isGuestTrackOrder;
+
     if (this.props.location.state != undefined) {
       isGuestTrackOrder = this.props.location.state.isGuestTrackOrder;
     }
-    
+
     const navigationBar = (
       <div className="col-xs-12 col-sm-3 col-md-3 myaccount-leftnav">
         <ul className="nav nav-tabs">
@@ -92,23 +121,23 @@ export class MyAccountContainer extends React.Component {
           {/* {this.props.username !== null ? (
             <h4 className="username">{this.props.username}!</h4>
           ) : null} */}
-          <li onClick={this.onMyProfileClick.bind(this)} className="list">
-            <a className={`link ${redirectedFrom === 'myprofile' ? 'active' : ''}`} href="#profile-v" data-toggle="tab">
+          <li className="list">
+            <a onClick={this.onMyProfileClick.bind(this)} className={`link ${this.state.redirectedFrom === 'myprofile' ? 'active show' : ''}`}/*  href="#profile-v" */ /* data-toggle="tab" */>
               My Profile
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'password' ? 'active' : ''}`} href="#changePassword-v" data-toggle="tab">
+            <a onClick={this.onPasswordClick.bind(this)} className={`link ${this.state.redirectedFrom === 'password' ? 'active show' : ''}`}/*  href="#changePassword-v" */ /* data-toggle="tab" */>
               Change Password
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'myorder' ? 'active' : ''}`} href="#myOrder-v" data-toggle="tab" onClick={this.isScrollTop.bind(this)}>
+            <a onClick={this.onMyOrderClick.bind(this)} className={`link ${this.state.redirectedFrom === 'myorder' ? 'active show' : ''}`} /* href="#myOrder-v" */ /* data-toggle="tab" */>
               My Orders
             </a>
           </li>
           <li className="list">
-            <a className={`link ${redirectedFrom === 'address' ? 'active' : ''}`} href="#manageAddresses-v" data-toggle="tab" onClick={this.isScrollTop.bind(this)}>
+            <a onClick={this.onAddressClick.bind(this)} className={`link ${this.state.redirectedFrom === 'address' ? 'active show' : ''}`} /* href="#manageAddresses-v" */ /* data-toggle="tab" */>
               Manage Addresses
             </a>
           </li>
@@ -135,18 +164,18 @@ export class MyAccountContainer extends React.Component {
               }
             >
               <div className="tab-content">
-                <div className={`tab-pane ${redirectedFrom === 'myprofile' ? 'active' : ''}`} id="profile-v" >
+                <div className={`tab-pane ${this.state.redirectedFrom === 'myprofile' ? 'active' : ''}`}/*  id="profile-v" */ >
                   {' '}
                   <MyProfile myProfileCallbackPro={this.myProfileCallback} />
                 </div>
-                <div className={`tab-pane ${redirectedFrom === 'password' ? 'active' : ''}`} id="changePassword-v" >
+                <div className={`tab-pane ${this.state.redirectedFrom === 'password' ? 'active' : ''}`}/*  id="changePassword-v" */ >
                   <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />
                 </div>
-                <div className={`tab-pane ${redirectedFrom === 'myorder' ? 'active' : ''}`} id="myOrder-v" >
-                  {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /></div> : 
-                  <MyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /> }
+                <div className={`tab-pane ${this.state.redirectedFrom === 'myorder' ? 'active' : ''}`}/*  id="myOrder-v" */ >
+                  {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /></div> :
+                    <MyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} />}
                 </div>
-                <div className={`tab-pane ${redirectedFrom === 'address' ? 'active' : ''}`} id="manageAddresses-v">
+                <div className={`tab-pane ${this.state.redirectedFrom === 'address' ? 'active' : ''}`} /* id="manageAddresses-v" */>
                   <ManageAddress />
                 </div>
                 <div className="tab-pane" id="customercare-v">Customer Care Tab.</div>
@@ -194,4 +223,4 @@ export class MyAccountContainer extends React.Component {
 // )(MyAccountContainer);
 
 // export default withRouter(HeaderMobile);
-export default connect( withRouter)(MyAccountContainer);
+export default connect(withRouter)(MyAccountContainer);
