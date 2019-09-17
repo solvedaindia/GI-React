@@ -96,7 +96,9 @@ $screen-xs-mobile-width: 320px;
 
 
 
-// Extra small devices
+/* 
+#Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles, Extra small devices
+*/
 @mixin mix-xs {
     @media (min-width: #{$screen-xs-mobile-width}) and (max-width: #{$screen-sm-mobile-width}){
         @content;
