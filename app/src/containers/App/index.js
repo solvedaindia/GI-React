@@ -197,7 +197,7 @@ export default class App extends React.Component {
 
   // IP Data Call.
 	getIPData() {
-		if( appCookie.get('pincode') === null && appCookie.get('pincodeUpdated') !== true) {
+		if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") && appCookie.get('pincodeUpdated') !== true) {
 			var request = new XMLHttpRequest();
 			request.onreadystatechange = function () {
 				if (this.readyState === 4 && this.status == 200) {
@@ -228,7 +228,7 @@ export default class App extends React.Component {
           const address = response.results[0].formatted_address;
           const data = address.replace(', India', '');
           const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
+          if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
             this.setState({
               loading: false

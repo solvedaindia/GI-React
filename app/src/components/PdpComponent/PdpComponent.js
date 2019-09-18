@@ -45,7 +45,8 @@ class PdpComponent extends React.Component {
 		if (this.props.historyData.location.state != undefined) {
 			this.setState({
 				breadcrumbData: this.props.historyData.location.state.breadcrumbData,
-			})
+			});
+			appCookie.set('tempPincode', '', 365 * 24 * 60 * 60 * 1000);
 		}
 		this.getResolveSkuData();
     	window.addEventListener('scroll', this.handleScroll);
@@ -230,10 +231,14 @@ class PdpComponent extends React.Component {
 		} else {
 			callPincodeApi = pinCodeAPI;
 		}
+		let pincodeVal = appCookie.get('pincode');
+		if (appCookie.get('tempPincode') && appCookie.get('tempPincode') !== "") {
+			pincodeVal = appCookie.get('tempPincode');
+		}
 
 		const dataParams = this.getPincodeApiParams(resolvedSkuData, type);
 
-		apiManager.get(callPincodeApi + appCookie.get('pincode'), dataParams).then(response => {
+		apiManager.get(callPincodeApi + pincodeVal, dataParams).then(response => {
 			this.setState({
 				isLoading: false,
 				pincodeData: response.data.data,
