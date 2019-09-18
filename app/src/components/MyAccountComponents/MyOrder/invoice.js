@@ -25,7 +25,8 @@ class Invoice extends React.Component {
 			this.setState({
 				invoiceData: response.data.data,
 				isLoading: false,
-            },
+			},
+			console.log('invoiceId', this.props.match.params.invoiceId )
             // () => {
             //     this.setup();
             // }
@@ -54,7 +55,8 @@ class Invoice extends React.Component {
 	}
 
     invoiceDatailedData() {
-        const { invoiceData } = this.state;
+		const { invoiceData } = this.state;
+		console.log('invoice data', invoiceData)
         // if(!invoiceData) return null;
 		console.log(invoiceData);
         return (
@@ -179,14 +181,17 @@ class Invoice extends React.Component {
     }
     render() {
 		const UserLoggedIn = appCookie.get('isLoggedIn');
+		const { invoiceData } = this.state;
+		// console.log('invoiceIDNo',invoiceData.salesInvoiceNo )
+
        return(
             <div className="invoiceTicket">
                 <div id="content">
-				{UserLoggedIn == 'true' ? this.invoiceDatailedData() : ''}
+				{UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : <div>Not Applicable</div>}
 			  </div>
-				<div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
+				{ UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? <div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
 				<button  onClick={this._exportPdf}>Download Invoice</button>
-				</div>
+				</div> : ""}
 
             </div>
         );
