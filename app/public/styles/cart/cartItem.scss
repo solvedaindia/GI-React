@@ -293,6 +293,9 @@
                 color: $battleshipGrey;
             }
             .applyPromo {
+                background: transparent;
+                border: none;
+                outline:none;
                 position: absolute;
                 right: 0;
                 top: 0;
@@ -444,6 +447,9 @@
                 font-family: $font-regular;
             }
             .applyPromo {
+                background: transparent;
+                border: none;
+                outline:none;
                 position: absolute;
                 color: $cerulean;
                 font-size: $base*2;
@@ -566,6 +572,9 @@
                 font-size: $base*1.75;
             }
             .applyPromo{
+                background : transparent;
+                border: none;
+                outline:none;
                 font-size: $base*2;
                 cursor: pointer;
                 font-family: $font-medium;

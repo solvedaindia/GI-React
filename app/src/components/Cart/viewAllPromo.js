@@ -1,13 +1,16 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
-import { cartApplyPromoAPI } from '../../../public/constants/constants';
-import {AVAILABLE_CODES } from '../../constants/app/cartConstants';
-import {COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
-import {VIEW_MORE } from '../../constants/app/cartConstants';
-import {APPLY } from '../../constants/app/cartConstants';
-
-
+import {
+  cartApplyPromoAPI,
+  cartRemovePromoAPI,
+} from '../../../public/constants/constants';
+import {
+  AVAILABLE_CODES,
+  COUPAN_CODE_NOT_VALID,
+  VIEW_MORE,
+  APPLY,
+} from '../../constants/app/cartConstants';
 
 class ViewAllPromo extends React.Component {
   constructor(props) {
@@ -15,31 +18,41 @@ class ViewAllPromo extends React.Component {
     this.state = {
       show: false,
       error: null,
+      isApplyDisable: false,
     };
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
-  applyPromoCode(promoCode) {
+  async applyPromoCode(promoCode) {
     const data = {
       orderId: this.props.orderID,
       promoCode,
     };
-    apiManager
-      .post(cartApplyPromoAPI, data)
-      .then(response => {
-        this.setState({
-          error: null,
-        });
-        this.props.getCartDetails();
-        this.handleClose();
-      })
-      .catch(error => {
-        this.setState({
-          error,
-          isLoading: false,
-        });
+    try {
+      this.setState({
+        isApplyDisable: true,
       });
+      if (this.props.appliedPromoCode[0]) {
+        await apiManager.post(
+          cartRemovePromoAPI + this.props.appliedPromoCode[0],
+        );
+      }
+      const response = await apiManager.post(cartApplyPromoAPI, data);
+      this.setState({
+        promoCode: response.data.data,
+        error: null,
+        isApplyDisable: false,
+      });
+      this.props.getCartDetails();
+      this.handleClose();
+    } catch (error) {
+      this.setState({
+        error,
+        isLoading: false,
+        isApplyDisable: false,
+      });
+    }
   }
 
   /* Handle Modal Close */
@@ -65,7 +78,7 @@ class ViewAllPromo extends React.Component {
           <span className="viewAllPromo" onClick={this.handleShow}>
             {VIEW_MORE}
           </span>
-        )}
+          )}
         <Modal
           className="modal_emiInstallment viewAllPopUp"
           show={this.state.show}
@@ -79,21 +92,31 @@ class ViewAllPromo extends React.Component {
             )}
             <ul className="promoList viewAll">
               {!!promo &&
-                promo.map((sellerItemData, index) => (
-                  <li className="promoListItem" key={index}>
-                    <p className="promoCode">{sellerItemData.promocode}</p>
-                    <p className="promoDesc">{sellerItemData.description}</p>
-                    <span
-                      className="applyPromo"
-                      onClick={this.applyPromoCode.bind(
-                        this,
-                        sellerItemData.promocode,
-                      )}
-                    >
-                      {APPLY}
-                    </span>
-                  </li>
-                ))}
+                promo.map((sellerItemData, index) => {
+                  if (
+                    this.props.appliedPromoCode &&
+                    this.props.appliedPromoCode.length > 0 &&
+                    this.props.appliedPromoCode[0] === sellerItemData.promocode
+                  ) {
+                    return null;
+                  }
+                  return (
+                    <li className="promoListItem" key={index}>
+                      <p className="promoCode">{sellerItemData.promocode}</p>
+                      <p className="promoDesc">{sellerItemData.description}</p>
+                      <button
+                        disabled={this.state.isApplyDisable}
+                        className="applyPromo"
+                        onClick={this.applyPromoCode.bind(
+                          this,
+                          sellerItemData.promocode,
+                        )}
+                      >
+                        {APPLY}
+                      </button>
+                    </li>
+                  );
+                })}
             </ul>
           </Modal.Body>
         </Modal>
