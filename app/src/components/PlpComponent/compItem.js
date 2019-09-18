@@ -9,7 +9,7 @@ import close from '../../../public/images/close.svg';
 
 function CompItem(props) {
   function handleRemove() {
-    props.remove(props.product.id);
+    props.remove(props.product.skuId);
   }
   return (
     <li className="list">

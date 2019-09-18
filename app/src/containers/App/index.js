@@ -92,7 +92,6 @@ export default class App extends React.Component {
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
-	this.handleLoad = this.handleLoad.bind(this);
   }
 
   componentDidMount() {
@@ -113,8 +112,6 @@ export default class App extends React.Component {
       header.classList.remove("sticky");
     } 
 	
-	window.addEventListener('load', this.handleLoad);
-	
 	if(window.location.hash)
 	{
 		 $('html, body').stop().animate();
@@ -129,12 +126,6 @@ export default class App extends React.Component {
 	   $('html, body').animate({ scrollTop: 0 }, 'fast');
 	}
     
-  }
-  
-  handleLoad() {
-	const element = document.getElementById(windows.location.hash);
-	 if (element) 
-		 element.scrollIntoView();
   }
 
   initialLoginHandling() {

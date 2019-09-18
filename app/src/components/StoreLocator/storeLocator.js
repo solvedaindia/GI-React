@@ -94,7 +94,6 @@ class StoreLocator extends React.Component {
     }
 
     componentDidMount() {
-
         let pincodeVal =  appCookie.get('pincode');
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName) {
@@ -187,16 +186,18 @@ class StoreLocator extends React.Component {
                 filterArr.push(this.state.allstoreData.data[i]);
             }
         }
-
+        
         if (filterArr.length > 0) {
             obj = { 'data': filterArr };
         }
-
         this.setState({
             storeData: obj,
             isLoading: false,
             searchStoreType: 'filter',
+            filteredSingleStore: null,
+            isOpen: false
         });
+        
     }
 
     /* handle store search */
@@ -374,6 +375,7 @@ class StoreLocator extends React.Component {
                         iconType = blueIcon;
                     }
                     return (
+                        
                         <div key={index}>
                             <Marker
                                 onClick={() => this.handleToggleOpen(index)}
@@ -432,6 +434,7 @@ class StoreLocator extends React.Component {
     }
 
     render() {
+        //debugger;
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
         let showFilter = false;
@@ -440,13 +443,13 @@ class StoreLocator extends React.Component {
         let pincodeValue;
 
         if (storeData) {
+            mapData = storeData.data;
             if (filteredSingleStore !== null) {
                 mapArray.push(filteredSingleStore);
                 mapData = mapArray;
             } else {
                 mapData = storeData.data;
             }
-
             WrappedMap = withScriptjs(withGoogleMap(this.createMap.bind(this, mapData)));
             showFilter = true;
         } else if (searchStoreType === 'filter') {

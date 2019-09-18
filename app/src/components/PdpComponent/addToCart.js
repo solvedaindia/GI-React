@@ -31,7 +31,8 @@ class addToCartComponent extends React.Component {
       pincodeVal: appCookie.get('pincode'),
       isEdit: true,
       qtyVal: 1,
-      isPincodeValid: true
+      isPincodeValid: true,
+      maxQty: false
     };
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
@@ -41,7 +42,8 @@ class addToCartComponent extends React.Component {
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
     this.setState({
-      isPincodeValid: true
+      isPincodeValid: true,
+      maxQty: false
     })
   }
 
@@ -184,6 +186,9 @@ class addToCartComponent extends React.Component {
           this.props.handleAddtocart(false);
         })
         .catch(error => {
+          this.setState({
+            maxQty: error.response.data.error.error_message,
+         });
         });
     }
   };
@@ -216,11 +221,13 @@ class addToCartComponent extends React.Component {
     
     if (type === false && quantity > 1) {
       this.setState({
-        qtyVal: Number(quantity) - Number(1)
+        qtyVal: Number(quantity) - Number(1),
+        maxQty: false
       })
     } else if (type === true && quantity < 99) {
       this.setState({
-        qtyVal: Number(quantity) + Number(1)
+        qtyVal: Number(quantity) + Number(1),
+        maxQty: false
       })
     }
   };
@@ -271,7 +278,7 @@ class addToCartComponent extends React.Component {
     return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
 
-  render() {
+  render() { 
   let storeText = 'Store';
   let btnName = 'Update';
   let pincodeFocusId = 'pincodeVal';
@@ -350,7 +357,8 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
+          {this.quantityErrorMessage && <div  className="errorMessage">{NOT_AVAILABLE}</div>}
+          { this.state.maxQty !== false && <div className="errorMessage">{this.state.maxQty}</div>}
         </div>
       </>
     );

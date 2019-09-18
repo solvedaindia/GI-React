@@ -20,7 +20,6 @@ class MinicartItem extends React.Component {
     const offerPrice = parseFloat(this.props.dataPro.offerPrice);
     const actualPrice = parseFloat(this.props.dataPro.actualPrice);
     let crossPriceItem;
-
     if (offerPrice < actualPrice) {
       crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
     }

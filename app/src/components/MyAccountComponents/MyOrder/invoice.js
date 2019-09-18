@@ -40,9 +40,10 @@ class Invoice extends React.Component {
     invoiceDatailedData() {
         const { invoiceData } = this.state;
         // if(!invoiceData) return null;
+		console.log(invoiceData);
         return (
-            <div className="invoiceContainer" style={{border:'1px solid black', width: '90%', margin: 'auto' , float: 'left'}}>
-                <h3 style={{textAlign: 'center'}}>TAX INVOICE</h3>
+            <div className="invoiceContainer" style={{width:'1170px'}}>
+                <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
 						<div className="invoiceContainer topsection" style={{border:'0', width: '100%', margin: 'auto',height: '100px'}}>
@@ -60,7 +61,6 @@ class Invoice extends React.Component {
 								<div className="value heading">From</div>
 								<div className="value">  
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.name}</div>
-								<div className="value heading">Company Address</div>
 								<div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.address}</div>
                                     <div className="value">
@@ -76,7 +76,7 @@ class Invoice extends React.Component {
 								<div className="value heading">Company Name</div>
 								<div className="value">  
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.name}</div>
-								<div className="value heading">From Address</div>
+								
 								<div className="value">
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.address}</div>
                                     <div className="value">
@@ -106,7 +106,7 @@ class Invoice extends React.Component {
 								<div className="value">
 									{!!invoiceData.billTo && invoiceData.billTo.gstinNo}</div>
 							</div>
-							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: '50px 0 0 0', float: 'left'}}>
+							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Customer Name</div>
 								<div className="value">  
 									{!!invoiceData.shipTo && invoiceData.shipTo.name}</div>
@@ -122,14 +122,14 @@ class Invoice extends React.Component {
                         <div className="invoiceContainer itemsection" style={{border:'0', width: '100%', margin: '50px 0 0 0', float: 'left'}}>
 							<div className="itemsection invoiceheading" style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                 
-                            <div style={{width: '13%', margin: 'auto', float: 'left'}}>Item Id</div>
-									<div style={{width: '13%', margin: 'auto', float: 'left'}}> Description</div>
-									<div style={{width: '16%', margin: 'auto', float: 'left'}}>HSN Code</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>Item Price</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>Quantity</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>CGST</div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>SGST </div>
-                                    <div style={{width: '10%', margin: 'auto', float: 'left'}}>Item Total Amount</div> 
+									<div className="value heading" style={{width: '13%', margin: 'auto', float: 'left'}}>Item Id</div>
+									<div className="value heading"  style={{width: '13%', margin: 'auto', float: 'left'}}> Description</div>
+									<div className="value heading" style={{width: '16%', margin: 'auto', float: 'left'}}>HSN Code</div>
+                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Item Price</div>
+                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Quantity</div>
+                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>CGST</div>
+                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>SGST </div>
+                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Item Total Amount</div> 
                             </div>
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
                                 return (
@@ -140,9 +140,9 @@ class Invoice extends React.Component {
                                         <div style={{width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.cgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.sgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemTotalAmount}</div>
+                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.cgstAmount}</div>
+                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.sgstAmount}</div>
+                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.itemTotalAmount}</div>
                                         
 
                                       
@@ -150,9 +150,9 @@ class Invoice extends React.Component {
                                 )
 							})}
 							<div className="itemsection invoicefooter" style={{border:'0', width: '100%', margin: '20px 0 0 0', float: 'left'}}>
-                                <div style={{width: '60%', margin: 'auto', float: 'left'}}>Total</div>
-								<div style={{width: '20%', margin: 'auto', float: 'left'}}>Quantity</div>
-								<div style={{width: '20%', margin: 'auto', float: 'left'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
+                                <div style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;</div>
+								<div className="value heading" style={{width: '20%', margin: 'auto', float: 'left', align:'right'}}>Total (Rs) </div>
+								<div style={{width: '20%', float: 'left', align:'right'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
                             </div>
 						</div>
                     </div>
