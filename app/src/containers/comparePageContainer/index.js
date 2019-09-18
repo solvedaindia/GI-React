@@ -211,12 +211,12 @@ export class ComparePageContainer extends React.Component {
 
   swatchHandle = (id, index, name) => {
 
-    if (!this.state.compWidgetData.includes(id)) {
+    //if (!this.state.compWidgetData.includes(id)) {
       this.state.compWidgetData[index] = id;
       //this.renderPrd()
       this.updateSingleCompProduct(index);
       //this.updateRoute();
-    }
+   // }
 
     // var obj = {
     //   id: id,
