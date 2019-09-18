@@ -596,7 +596,7 @@ section.tablecarousel {
             -----------------------------*/
             .inputCheck[type="checkbox"] + .lblCheck {
               background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
-              display: inline;
+              display: block;
               min-height: 16px;
               padding-left: 16px;
               background-size: contain;
