@@ -183,12 +183,10 @@ class Invoice extends React.Component {
             <div className="invoiceTicket">
                 <div id="content">
 				{UserLoggedIn == 'true' ? this.invoiceDatailedData() : ''}
-				
-				   
-                </div>
-				{/* <div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix"> */}
+			  </div>
+				<div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
 				<button  onClick={this._exportPdf}>Download Invoice</button>
-				{/* </div> */}
+				</div>
 
             </div>
         );
