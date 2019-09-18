@@ -297,7 +297,7 @@ class PdpComponent extends React.Component {
  // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
-  var box1=163;
+  var box1=168;
   if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
   var box3 = document.getElementById("box3").offsetTop;
