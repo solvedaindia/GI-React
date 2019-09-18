@@ -357,8 +357,8 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
-          { this.state.maxQty !== false && <div>{this.state.maxQty}</div>}
+          {this.quantityErrorMessage && <div  className="errorMessage">{NOT_AVAILABLE}</div>}
+          { this.state.maxQty !== false && <div className="errorMessage">{this.state.maxQty}</div>}
         </div>
       </>
     );

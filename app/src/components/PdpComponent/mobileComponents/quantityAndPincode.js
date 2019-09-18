@@ -322,7 +322,7 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
+          {this.quantityErrorMessage && <div  className="errorMessage">{NOT_AVAILABLE}</div>}
         </div>
         <ProductInfo
                     productData={this.props.skuData}
