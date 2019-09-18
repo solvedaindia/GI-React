@@ -416,7 +416,8 @@ export class PlpContainer extends React.Component {
       if (spellCheckArr && spellCheckArr.length !== 0) {
         if (this.state.spellCheckCount === spellCheckEndCount) {
           const params = new URLSearchParams(this.props.location.search);
-        const keywoard = params.get('keyword');
+        const keywoard = formateSearchKeyword(params.get('keyword'), false);
+		searchText = formateSearchKeyword(searchText, false);
           return (
             <div>
               <div className="noResultfound">
@@ -572,8 +573,8 @@ export class PlpContainer extends React.Component {
     }
     const params = new URLSearchParams(this.state.searchKeyword);
     var keywoard = params.get('keyword');
+	keywoard = formateSearchKeyword(params.get('keyword'), false);
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
-      keywoard = formateSearchKeyword(params.get('keyword'), false);
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">
@@ -640,9 +641,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {plpData.length === 0 || this.state.isMobile ? null : (
-                  <Sort sortingIndexPro={this.state.plpSorting} />
-                  )}
+                  {this.state.isCatDetails || this.state.isMobile ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
                 </div>
               </div>
             </div>

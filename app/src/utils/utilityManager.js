@@ -270,14 +270,14 @@ export function trimTheSentence(title, charLimit) {
     return trimStr;
 }
 
-export function checkCompareWidget(compWidget, id) {
-    const data = compWidget.find(prd => prd.id == id);
+export function checkCompareWidget(compWidget, skuId) {
+    const data = compWidget.find(prd => prd.skuId == skuId);
     if (data) {
-        return compWidget.filter(prd => prd.id != id);
+        return compWidget.filter(prd => prd.skuId != skuId);
     }
-    const skuData = compWidget.find(prd => prd.skuId == id);
+    const skuData = compWidget.find(prd => prd.skuId == skuId);
     if (skuData) {
-        return compWidget.filter(prd => prd.skuId != id);
+        return compWidget.filter(prd => prd.skuId != idskuId);
     }
 
     return compWidget;
@@ -312,12 +312,20 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
     
     if (searchKeyword !== null && searchKeyword !== undefined && searchKeyword !== '') {
         if (isKeywordEntered) {
-            return searchKeyword.replace(/&/g, 'z9f')
+			searchKeyword = searchKeyword.replace(/&/g, ' ::: ');
+			searchKeyword = searchKeyword.replace(/%/g, ' _:');
+            return searchKeyword;
         }
         else {
-            return searchKeyword.replace(/z9f/g, '&')
+			searchKeyword = searchKeyword.replace(/:::/g, '&');
+			searchKeyword = searchKeyword.replace(/_:/g, '%');
+            return searchKeyword;
         }
     }
+	else{
+		searchKeyword = '';
+		return searchKeyword;
+	}
     
     
 }

@@ -154,7 +154,10 @@ class Wishlist extends React.Component {
   };
 
   render() {
-    const wishListId = 'wishlistBtnId_'+this.props.uniqueId;
+    let wishListId = 'wishlistBtnId';
+    if (appCookie.get('wishListUniqueId')) {
+      wishListId = 'wishlistBtnId_'+appCookie.get('wishListUniqueId');
+    }
     return (
       <>
         { !this.props.isPDP &&

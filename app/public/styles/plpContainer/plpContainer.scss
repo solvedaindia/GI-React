@@ -707,6 +707,7 @@ section.tablecarousel {
       z-index: 2;
       right: 0;
       width: 100%;
+      margin-top:-1px;
 
       .dropdowntoggle {
         border: 1px solid $lightGrey;
@@ -1106,10 +1107,18 @@ section.tablecarousel {
       .dropdown_filter{
         min-width: 160px;
         margin-top:-1px;
+        &__list {
+          .list{
+            min-width: 240px;
+          }
+        }
       }
     }
     .sort{
       width: 21%;
+      .dropdown{
+        margin-top:-1px;
+      }
     } 
   } 
 }

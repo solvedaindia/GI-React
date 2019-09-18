@@ -1,13 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import apiManager from '../../../utils/apiManager';
-import { getUpdatedMinicartCount } from '../../../utils/initialManager';
-import {
-  addToCart,
-  findinventoryAPI,
-  findMultiProductInventory
-} from '../../../../public/constants/constants';
 import {
   updatetMinicart,
   updatetWishListCount,
@@ -21,7 +14,7 @@ import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
-import {PRODUCT_ADDED,ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE,VIEW} from '../../../constants/app/pdpConstants';
+import {PRODUCT_ADDED, ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -41,15 +34,9 @@ class addToCartComponent extends React.Component {
   componentWillReceiveProps() {
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
-
-    let pinData = appCookie.get('pincode');
-    if (appCookie.get('tempPincode') && appCookie.get('tempPincode') !== "") {
-      pinData = appCookie.get('tempPincode');
-    }
     this.setState({
       qtyVal: 1,
-      isPincodeValid: true,
-      pincodeVal: pinData
+      isPincodeValid: true
     })
   }
 
@@ -63,7 +50,7 @@ class addToCartComponent extends React.Component {
       }
 
     if (props.pincodeServiceable === false) {
-      errorMsg = 'This Pincode is non-serviceable';
+      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
       if (props.error) {
         errorMsg = props.error;	
       }
@@ -189,12 +176,6 @@ class addToCartComponent extends React.Component {
             loading: false,
           });
 
-          if (appCookie.get('tempPincode') && appCookie.get('tempPincode')!== "") {
-            appCookie.set('pincode', appCookie.get('tempPincode'), 365 * 24 * 60 * 60 * 1000);
-            appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
-            appCookie.set('tempPincode', '', 365 * 24 * 60 * 60 * 1000);
-          }
-
           if (isPDPAddToCart === '') {
             appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
           } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
@@ -253,15 +234,13 @@ class addToCartComponent extends React.Component {
     } else {
       const pincode = document.getElementById('pincodeVal').value;
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
-        appCookie.set('tempPincode', pincode, 365 * 24 * 60 * 60 * 1000);
-        // appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-        // appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         props.handleAddtocart(true);
         this.setState({
           isEdit: true,
           qtyVal: 1,
-          isPincodeValid: true,
-          pincodeVal: pincode
+          isPincodeValid: true
         });
       } else if (pincode.length < 6) {
           this.setState({
@@ -343,7 +322,7 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
+          {this.quantityErrorMessage && <div  className="errorMessage">{NOT_AVAILABLE}</div>}
         </div>
         <ProductInfo
                     productData={this.props.skuData}
