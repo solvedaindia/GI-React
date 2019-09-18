@@ -30,7 +30,7 @@ import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBan
 import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/descriptionBanner';
 import Sort from '../../components/PlpComponent/Sorting/sort';
 import BestSeller from '../../components/BestSelling/bestSelling';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import * as actionCreators from './actions';
 import CompContainer from './compWidget';
@@ -318,7 +318,7 @@ export class PlpContainer extends React.Component {
               });
             } else if (response.data.data.spellCheck.length !== 0) {
               this.setState({
-                emptySearchItem: this.onSearchNoResut(searchText, response.data.data.spellCheck),
+                emptySearchItem: this.onSearchNoResut(decodeURI(searchText), response.data.data.spellCheck),
                 showBestSeller: false,
                 newSearchTrigger: false,
               })
@@ -355,7 +355,7 @@ export class PlpContainer extends React.Component {
             }
           }
 
-          
+
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,
@@ -416,8 +416,7 @@ export class PlpContainer extends React.Component {
       if (spellCheckArr && spellCheckArr.length !== 0) {
         if (this.state.spellCheckCount === spellCheckEndCount) {
           const params = new URLSearchParams(this.props.location.search);
-        const keywoard = formateSearchKeyword(params.get('keyword'), false);
-		searchText = formateSearchKeyword(searchText, false);
+          var keywoard = formateSearchKeyword(params.get('keyword'), false);
           return (
             <div>
               <div className="noResultfound">
@@ -445,7 +444,7 @@ export class PlpContainer extends React.Component {
       return (
         <div className="noResultfound">
           <div className="label-noresult">
-            No results for “{searchText}”
+            No results forr “{formateSearchKeyword(searchText, false)}”
           </div>
           <div className="product-serchGuide">
             <div className="label-text">Did you mean: </div>
@@ -553,6 +552,11 @@ export class PlpContainer extends React.Component {
       filterItem = <FilterMain filterDataPro={filterData} />;
     }
 
+    let sortItem;
+    if (!this.state.isMobile && this.state.productCount !== null && this.state.productCount !== 0) {
+      sortItem = <Sort sortingIndexPro={this.state.plpSorting} />
+    }
+
     let descriptionItem;
     if (this.state.plpDescriptionData != null) {
       descriptionItem = (
@@ -573,8 +577,8 @@ export class PlpContainer extends React.Component {
     }
     const params = new URLSearchParams(this.state.searchKeyword);
     var keywoard = params.get('keyword');
-	keywoard = formateSearchKeyword(params.get('keyword'), false);
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
+      keywoard = formateSearchKeyword(params.get('keyword'), false);
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">
@@ -585,7 +589,7 @@ export class PlpContainer extends React.Component {
     }
 
     let productCountItem = null;
-    if (this.state.productCount !== null && plpData.length != 0) {
+    if (this.state.productCount !== null && plpData.length != 0 && this.state.productCount) {
       productCountItem = (
         <div className="headingSubTitle">
           ({this.state.productCount} Products)
@@ -607,29 +611,29 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={ 'GI_PIXEL_PLP_BODY_START' } />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START'} />
         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_PLP_META'}/>
-		</Helmet>
+          <Pixels espotName={'GI_PIXEL_PLP_META'} />
+        </Helmet>
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}
         {this.state.emptySearchItem !== null
-        ? this.state.emptySearchItem
-        : null}
+          ? this.state.emptySearchItem
+          : null}
         {this.state.showBestSeller ? (
-        <>
-          <div>
-            <div className="noResultfound">
-              <div className="label-noresult">
-                No results for “{keywoard}”
+          <>
+            <div>
+              <div className="noResultfound">
+                <div className="label-noresult">
+                  No results for “{formateSearchKeyword(keywoard, false)}”
+              </div>
+              </div>
+              <div className="Search-bestseller container">
+                <BestSeller />
               </div>
             </div>
-            <div className="Search-bestseller container">
-              <BestSeller />
-            </div>
-          </div>
-        </>
+          </>
         ) : null}
         <section className="plpCategories">
           <div className="container">
@@ -641,7 +645,7 @@ export class PlpContainer extends React.Component {
               <div className="filterWrapper clearfix">
                 <div className="filter">{filterItem}</div>
                 <div className="sort">
-                  {this.state.isCatDetails || this.state.isMobile ? null : <Sort sortingIndexPro={this.state.plpSorting} />}
+                  {sortItem}
                 </div>
               </div>
             </div>
@@ -661,11 +665,11 @@ export class PlpContainer extends React.Component {
             />
           </div>
         )}
-     
+
         {this.state.productCount === 0 &&
-        !this.state.isFromSearch.includes('/search') ? (
-        <div className="noProductFound">No Products Found</div>
-        ) : null}
+          !this.state.isFromSearch.includes('/search') ? (
+            <div className="noProductFound">No Products Found</div>
+          ) : null}
 
         {descriptionItem}
         <CompContainer />
@@ -677,7 +681,7 @@ export class PlpContainer extends React.Component {
           <RWDFilterMain filterDataPro={filterData} />
 
         </div> : null}
-        <ContentEspot espotName={ 'GI_PIXEL_PLP_BODY_END' } />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END'} />
 
       </>
     );
