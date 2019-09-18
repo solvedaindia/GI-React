@@ -28,20 +28,33 @@ class ThemeData extends React.Component {
         var currentBottomCords = "66";
         
         if(isMobile()){
-            if(currentLeftCords < Number(y)){
-                this.setState({currentLeftCoords: "0px 0px 0px -211px"});
-
-            if(currentBottomCords < Number(x)){
-                    this.setState({currentLeftCoords: "-90px 0px 0px -211px"});      
-                }else{
+            if(window.screen.width < 767){
+                if(62 < Number(y)){
                     this.setState({currentLeftCoords: "0px 0px 0px -211px"});
+
+                if(currentBottomCords < Number(x)){
+                        this.setState({currentLeftCoords: "-90px 0px 0px -211px"});      
+                    }else{
+                        this.setState({currentLeftCoords: "0px 0px 0px -211px"});
+                    }
+                }else if(44 < Number(y)){
+                    this.setState({currentLeftCoords: "15px 0px 0px -40px"});
+
+                }else if(26 > Number(y)){
+                    this.setState({currentLeftCoords: "22px 0px 0px -22px"});
+
+                }else{
+                    this.setState({currentLeftCoords: "0px 0px 0px 0px"});
                 }
-            }else if(26 > Number(y)){
-                this.setState({currentLeftCoords: "22px 0px 0px -22px"});
             }else{
-                this.setState({currentLeftCoords: "0px 0px 0px 0px"});
+                if(currentLeftCords < Number(y)){
+                    this.setState({currentLeftCoords: "0px 0px 0px -211px"});
+                    
+                }else{
+                    this.setState({currentLeftCoords: "0px 0px 0px 0px"});
+                }
             }
-        }    
+        }
       }
       
       componentWillUnmount() {
