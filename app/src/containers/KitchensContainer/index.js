@@ -33,9 +33,9 @@ export class KitchenContainer extends React.Component {
       <>
         <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } />
         <section className="staticpage kitchenContainer">
-        <Helmet>
-					<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
-				</Helmet>
+		   <Helmet>
+			 <Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
+		  </Helmet>
           <div className="slider">
             <KitchenBanner />
           </div>

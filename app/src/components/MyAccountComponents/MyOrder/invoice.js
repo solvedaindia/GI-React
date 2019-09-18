@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { invoicAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';
-import appCookie from '../../../utils/cookie';
-import html2canvas from 'html2canvas'
-import 'jspdf-autotable';
+
 class Invoice extends React.Component {
     constructor(props){
         super(props);
@@ -38,27 +36,13 @@ class Invoice extends React.Component {
 			});
 		});
 	}
-	_exportPdf = () => {
-
-		html2canvas(document.querySelector("#invoiceDiv")).then(canvas => {
-		    document.body.appendChild(canvas);  // if you want to see your screenshot in body.
-		   const invoiceData = canvas.toDataURL('image/png');
-		   const pdf = new jsPDF();
-		  
-		   pdf.setFontType("normal");
-		   pdf.setFont("arial", "bold");
-		   pdf.addImage(invoiceData, 1, 1);
-		   pdf.save("a5.pdf"); 
-	   });
-   
-	}
 
     invoiceDatailedData() {
         const { invoiceData } = this.state;
         // if(!invoiceData) return null;
 		console.log(invoiceData);
         return (
-            <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
+            <div className="invoiceContainer" style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
@@ -178,18 +162,12 @@ class Invoice extends React.Component {
         )
     }
     render() {
-		const UserLoggedIn = appCookie.get('isLoggedIn');
-       return(
+        return(
             <div className="invoiceTicket">
                 <div id="content">
-				{UserLoggedIn == 'true' ? this.invoiceDatailedData() : ''}
-				
-				   
+                    {this.invoiceDatailedData()}
                 </div>
-				{/* <div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix"> */}
-				<button  onClick={this._exportPdf}>Download Invoice</button>
-				{/* </div> */}
-
+               
             </div>
         );
     }
