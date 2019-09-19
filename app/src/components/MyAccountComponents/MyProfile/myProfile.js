@@ -45,7 +45,7 @@ class MyProfile extends React.Component {
       errorMessage_email: '',
 
       noteItem: null,
-	  noteItemMsg: null,
+      noteItemMsg: null,
       userResponse: null,
       inputLogoId: null,
       //Validaton vars
@@ -59,6 +59,7 @@ class MyProfile extends React.Component {
       dataLoad: {},
       enteredOTP: null,
       isSaveBtnDisable: true,
+      saveDisable: false,
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -184,12 +185,16 @@ class MyProfile extends React.Component {
     }
 
     if (!this.isEmpty(this.state.dataLoad)) {
+      this.setState({
+        saveDisable: true
+      })
       apiManager.post(userDetailValidateAPI, this.state.dataLoad)
         .then(response => {
           if (showOTP) {
             // Call Validate API
             this.setState({
-              modal: true
+              modal: true,
+              saveDisable: false,
             })
           }
           else {
@@ -201,10 +206,11 @@ class MyProfile extends React.Component {
           setTimeout(() => {
             this.setState({
               noteItem: null,
-			  noteItemMsg: null,
+              noteItemMsg: null,
             });
           }, 2000);
           this.setState({
+            saveDisable: false,
             noteItemMsg: (
               <div className="noteMsg">
                 <span className="failMsg">{error.response.data.error.error_message}</span>
@@ -243,15 +249,19 @@ class MyProfile extends React.Component {
       updateDataload.validateotp = "false";
     }
 
+    this.setState({
+      saveDisable: true,
+    })
     apiManager.post(userDetailUpdateAPI, this.state.dataLoad)
       .then(response => {
         setTimeout(() => {
           this.setState({
             noteItem: null,
-			noteItemMsg: null,
+            noteItemMsg: null,
           });
         }, 2000);
         this.setState({
+          saveDisable: false,
           isSaveBtnDisable: true,
           dataLoad: {},
           noteItem: (
@@ -267,10 +277,11 @@ class MyProfile extends React.Component {
         setTimeout(() => {
           this.setState({
             noteItem: null,
-			noteItemMsg: null,
+            noteItemMsg: null,
           });
         }, 2000);
         this.setState({
+          saveDisable: false,
           noteItemMsg: (
             <div className="noteMsg">
               <span className="failMsg">{error.response.data.error.error_message}</span>
@@ -442,9 +453,10 @@ class MyProfile extends React.Component {
               <div className="error-msg">{this.state.errorMessage_email}</div>
             ) : null}
           </div>
-		  {this.state.noteItemMsg}
+          {this.state.noteItemMsg}
           {isMobile() && <button onClick={this.onRWDCancelBtnClick.bind(this)} className='btn-cancel btn'>Cancel</button>}
           <button
+            disabled={this.state.saveDisable}
             onClick={this.onSavebuttonClick.bind(this)}
             className={this.state.isSaveBtnDisable ? "btn-apply btn" : "btn-applyActive btn"}
           >

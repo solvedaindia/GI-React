@@ -304,6 +304,15 @@ export function formatPrice(priceValue) {
     return parseInt(priceValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+function escapeRegExp(string){
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+ 
+/* Define functin to find and replace specified term with replacement string */
+function replaceAll(str, term, replacement) {
+  return str.replace(new RegExp(escapeRegExp(term), 'g'), replacement);
+}
+
 /** -----------------------------------------------------------------------
  * Function to map Payment Method Id
  * @param {*} searchKeyword
@@ -314,11 +323,15 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
         if (isKeywordEntered) {
 			searchKeyword = searchKeyword.replace(/&/g, ' ::: ');
 			searchKeyword = searchKeyword.replace(/%/g, ' _:');
+			searchKeyword = replaceAll(searchKeyword, '[', ' __');
+			searchKeyword = replaceAll(searchKeyword, ']', ' :_');
             return searchKeyword;
         }
         else {
 			searchKeyword = searchKeyword.replace(/:::/g, '&');
 			searchKeyword = searchKeyword.replace(/_:/g, '%');
+			searchKeyword = searchKeyword.replace(/ __/g, ' [');
+			searchKeyword = searchKeyword.replace(/ :_/g, ' ]');
             return searchKeyword;
         }
     }

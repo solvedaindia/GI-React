@@ -14,7 +14,7 @@ import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
-import {PRODUCT_ADDED, ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
+import {ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -67,149 +67,6 @@ class addToCartComponent extends React.Component {
 	  }
   }
 
-    	/* get pincode API params */
-	getInventoryApiParams(resolvedSkuData, getQuantity) {
-		let partnumber = [];
-		let quantity = [];
-    let dataParams;
-    
-		if (resolvedSkuData.itemInThisBundle) {
-			resolvedSkuData.itemInThisBundle.map((data) => {
-				partnumber.push(data.partNumber);
-				quantity.push(data.quantity * getQuantity);
-				 dataParams = {
-					params: {
-            partnumber: partnumber.toString(),
-					  quantity: quantity.toString(),
-					},
-				};
-			})
-		} else {
-      dataParams = {
-        params: {
-          partNumber: resolvedSkuData.partNumber,
-          quantity: getQuantity,
-        },
-      };
-		}
-		return dataParams;
-
-	}
-
-  /* find inventory of the product */
-  findInventory = () => {
-    let callIntertoryAPI;
-    if (this.props.skuData.itemInThisBundle) {
-      callIntertoryAPI = findMultiProductInventory;
-    } else {
-      callIntertoryAPI = findinventoryAPI;
-    }
-  
-    setTimeout(() => {	
-      let header = document.getElementById("header");
-      if(header) {
-        header.classList.remove("sticky");
-      }
-    }, 2000);
-    const pincode = appCookie.get('pincode');
-    let quantity = 1;
-    if (document.getElementById('quantity')) {
-      quantity = document.getElementById('quantity').value;
-    }
-
-    const data = this.getInventoryApiParams(this.props.skuData, quantity);
-
-    apiManager
-      .get(callIntertoryAPI + pincode, data)
-      .then(response => {
-        this.moveToCartClicked(response.data);
-      })
-      .catch(error => {
-      });
-  };
-
-  /* move to cart */
-  moveToCartClicked = inventory => {
-    if (inventory.data.inventoryStatus === 'unavailable') {
-      this.quantityErrorMessage = true;
-      this.setState({
-        loading: false,
-        qtyVal: document.getElementById('quantity').value
-      });
-    } else {
-      const isPDPAddToCart = appCookie.get('isPDPAddToCart');
-      const addedProductToCart = appCookie.get('isPDPAddToCart').split(',');
-      
-      
-      let quantity = '1';
-      let data;
-      if (!this.props.sticky) {
-        quantity = document.getElementById('quantity').value;
-      }
-
-      if (this.props.skuData.itemInThisBundle) {
-        let orderItem = Array();
-        this.props.skuData.itemInThisBundle.map(bundleData => {
-          orderItem.push({sku_id: bundleData.uniqueID, quantity: (bundleData.quantity * quantity).toString()})
-        });
-        data = {
-          orderItem
-        };
-      } else {
-        data = {
-          orderItem: [
-            {
-              sku_id: this.props.skuData.uniqueID,
-              quantity,
-            },
-          ],
-        };
-      }
-
-      apiManager
-        .post(addToCart, data)
-        .then(() => {
-          getUpdatedMinicartCount(this);
-          this.deliveryTime = inventory.data.deliveryDate;
-          this.setState({
-            addToCartPopup: this.addToCartPopupItem(),
-            loading: false,
-          });
-
-          if (isPDPAddToCart === '') {
-            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
-          } else if(addedProductToCart.indexOf(this.props.skuData.uniqueID) === -1) {
-            appCookie.set('isPDPAddToCart', appCookie.get('isPDPAddToCart') + ','+this.props.skuData.uniqueID, 365 * 24 * 60 * 60 * 1000);
-          }
-          this.props.handleAddtocart(false);
-        })
-        .catch(error => {
-			 console.log('Error: ' + data);
-        });
-    }
-  };
-
-  /* add to cart pop */
-  addToCartPopupItem() {
-    setTimeout(() => {
-      this.setState({
-        addToCartPopup: null,
-        qtyVal: 1
-      });
-    }, 2000);
-    return (
-      <div className="addedToWishlist dropdownwishlist clearfix">
-        <span className="wishlist-text">{PRODUCT_ADDED}</span>
-        <button
-          onClick={() => this.props.history.push('/cart')()}
-          className="view-btn"
-        >
-          {VIEW}
-        </button>
-      </div>
-    );
-  }
-
   /* product quantity increase and decrease */
   productQuantity = type => {
     this.quantityErrorMessage = false;
@@ -234,13 +91,15 @@ class addToCartComponent extends React.Component {
     } else {
       const pincode = document.getElementById('pincodeVal').value;
       if (pincode !== '' && PINCODE_REGEX.test(pincode) && pincode.length === 6) {
-        appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
-        appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        //appCookie.set('pincode', pincode, 365 * 24 * 60 * 60 * 1000);
+        //appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('tempPincode', pincode, 365 * 24 * 60 * 60 * 1000);
         props.handleAddtocart(true);
         this.setState({
           isEdit: true,
           qtyVal: 1,
-          isPincodeValid: true
+          isPincodeValid: true,
+          pincodeVal: pincode
         });
       } else if (pincode.length < 6) {
           this.setState({

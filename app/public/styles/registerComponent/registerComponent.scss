@@ -358,8 +358,18 @@
                 .modal-dialog{
                     .modal-wrapper{
                         .form_register{
-                            .error-msg{
-                                text-align: center;
+                            .form-group{
+                                .form-div{
+                                    padding-bottom: 15px;
+                                    .resend-otp{
+                                        bottom: 3px;
+                                    }
+                                    .error-msg{
+                                        text-align: left;
+                                        position: absolute;
+                                        bottom: -5px;
+                                    }
+                                }
                             }
                         } 
                     }

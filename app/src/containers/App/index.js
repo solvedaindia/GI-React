@@ -70,7 +70,7 @@ import paymentWait from '../../components/checkout/paymentWait';
 import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
-import { is } from 'immutable';
+import Shipping from '../shippingContainer/index';
 
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
@@ -196,7 +196,7 @@ export default class App extends React.Component {
 
   // IP Data Call.
 	getIPData() {
-		if( appCookie.get('pincode') === null && appCookie.get('pincodeUpdated') !== true) {
+		if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") && appCookie.get('pincodeUpdated') !== true) {
 			var request = new XMLHttpRequest();
 			request.onreadystatechange = function () {
 				if (this.readyState === 4 && this.status == 200) {
@@ -227,7 +227,7 @@ export default class App extends React.Component {
           const address = response.results[0].formatted_address;
           const data = address.replace(', India', '');
           const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true && !appCookie.get('pincodeUpdated')) {
+          if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
             appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
             this.setState({
               loading: false
@@ -312,6 +312,7 @@ export default class App extends React.Component {
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
           <Route path="/willow-kitchen" component={WillowKitchen} />
+          <Route path="/shipping" component={Shipping} />
 
       
           <Route path="/lookbook" component={InspirationDetails} />
@@ -324,7 +325,7 @@ export default class App extends React.Component {
 
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
-          
+
           
         </Switch>
 		</div>
