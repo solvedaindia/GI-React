@@ -130,6 +130,8 @@
 .formContainer {
     position: relative;
     width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
     margin: 0px auto;
     .containerSetForm{
         position: relative;
@@ -139,8 +141,13 @@
         width: 100%;
     }
     .formDetails {
-        background-color: #fff;
-        padding: $base*7.5 $base*15;
+        background: #fff;
+        padding: $base*7.5 $base*7.5;
+		margin-top: $base*-75;
+		margin-left: $base*12;
+		width:70%;
+		position:absolute;
+		margin-bottom:$base*5;
         .title {
             margin: $base*4 0 0;
         }
@@ -237,4 +244,8 @@
     .kitchenEspots {
         margin: 35px auto;
     }
+	
+	.formDetails {
+        .GI_KITCHEN_FORMBACKGROUND_IMG {display:none;}
+	}
 }

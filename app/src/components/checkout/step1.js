@@ -53,12 +53,18 @@ export class Step1Component extends React.Component {
           showRegister: false,
           inputType: 'password',
           isShowPass: false,
+          isEnable: true
         }
     }
 
     
     handleChange = e => {
-      this.setState({ [e.target.name]: e.target.value });
+      const mobileOrEmail = document.getElementById('userId').value;
+      let isEnableVal = true;
+      if (mobileOrEmail.trim() !== "") {
+        isEnableVal = false;
+      }
+      this.setState({ [e.target.name]: e.target.value, isEnable: isEnableVal, errorMessageUserId: null });
     };
 
     handleHasPass = () => {
@@ -106,11 +112,10 @@ export class Step1Component extends React.Component {
         });
         isValidate = false;
       }
-  
       return isValidate;
     }
 
-    handleFormSubmit = e => {
+    handleFormSubmit = e => { 
       var uId = document.getElementById('userId').value;
       if(this.state.has_pass) {
         var pass = document.getElementById('password').value;
@@ -214,15 +219,12 @@ export class Step1Component extends React.Component {
       if (this.state.errorMessageUserId) {
         errorMessageUserId = this.errorMessage(this.state.errorMessageUserId);
       }
-
       if(this.state.errorMessagePassword) {
         errorMessagePassword = this.errorMessage(this.state.errorMessagePassword)
       }
-  
       if (this.props.msg && this.props.msg !== "user verify err") {
         errorMessagePassword = this.errorMessage(this.props.msg);
       }
-
       if(this.props.msg == "user verify err") {
         errorMessagePassword = this.errorMessage(this.props.msg);
       }
@@ -339,7 +341,7 @@ export class Step1Component extends React.Component {
 
               {isMobile() ? (<div className='checkout-btn-floater'>
                 <div className='total-amount'><div className='net-amount-box'>&#8377;{formatPrice(this.props.netAmount)} <span className='total-amount-text'>{TOTAL_AMOUNT}</span></div></div>
-                <div className='proceed-btn'><button className="btn-blackbg btn-block" onClick={this.handleFormSubmit}>{PROCEED}</button></div>
+                <div className='proceed-btn'><button className="btn-blackbg btn-block" disabled={this.state.isEnable} onClick={this.handleFormSubmit}>{PROCEED}</button></div>
               </div>):''}
                
             </div>

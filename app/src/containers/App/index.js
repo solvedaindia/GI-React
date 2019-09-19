@@ -70,6 +70,7 @@ import paymentWait from '../../components/checkout/paymentWait';
 import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
+import Shipping from '../shippingContainer/index';
 
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
@@ -112,7 +113,15 @@ export default class App extends React.Component {
       header.classList.remove("sticky");
     } 
 	
-	if(window.location.hash)
+	if(isTab())
+	{
+		 $('html, body').stop().animate();
+	}
+	else if(isMobile())
+	{
+		 $('html, body').stop().animate();
+	}
+	else if(window.location.hash)
 	{
 		 $('html, body').stop().animate();
 	}
@@ -305,6 +314,7 @@ export default class App extends React.Component {
           <Route path="/kitchens" component={Kitchens} />
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
           <Route path="/willow-kitchen" component={WillowKitchen} />
+          <Route path="/shipping" component={Shipping} />
 
       
           <Route path="/lookbook" component={InspirationDetails} />
@@ -317,7 +327,7 @@ export default class App extends React.Component {
 
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
-          
+
           
         </Switch>
 		</div>
