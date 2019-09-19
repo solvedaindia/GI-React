@@ -48,7 +48,6 @@ class StoreLocator extends React.Component {
             isOpen: false,
             Infokey: null,
             filteredSingleStore: null,
-            defaultPincodeVal: null,
             currentLat: null,
             currentLong: null,
         };
@@ -103,12 +102,9 @@ class StoreLocator extends React.Component {
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
             }
-            
         }
 
-		this.setState({
-                defaultPincodeVal: pincodeVal
-        })
+        document.getElementById('city').value=pincodeVal;
         this.getUserCurrentLocation();
     }
 
@@ -151,9 +147,7 @@ class StoreLocator extends React.Component {
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
             }
-            this.setState({
-                defaultPincodeVal: pincodeVal
-            })
+            document.getElementById('city').value=pincodeVal;
             this.removeActiveClassFromFilter();
         }
     }
@@ -429,12 +423,7 @@ class StoreLocator extends React.Component {
         })
     }
 
-    handleChange(e) {
-        this.setState({ 'defaultPincodeVal': e.target.value });
-    }
-
     render() {
-        //debugger;
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
         let showFilter = false;
@@ -469,8 +458,8 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input id="city" type='text' name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }} value={this.state.defaultPincodeVal} onChange={this.handleChange.bind(this)} />
-                        <button type="button" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores' : 'Find'}</button>
+                        <input id="city" type='text' name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }} />
+                        <button type="button" id="locateStoreBtn" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores' : 'Find'}</button>
                     </div>
 
                     {showFilter &&
