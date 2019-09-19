@@ -18,11 +18,10 @@ class TopContainer extends React.Component {
     }
      
     removePrd = () => {
-      if(this.props.count == 1) {
-        window.history.go(-3);
-      } else {
-        this.props.remove(this.props.product.uniqueID);
+      if(this.props.count == 2) {
+        window.history.go(-2);
       }
+      this.props.remove(this.props.product.uniqueID);
     }
 
     renderSwatches() {

@@ -27,6 +27,10 @@ class ThemeListData extends React.Component {
             index: null
         })
     }
+
+    componentWillReceiveProps(nextprops){
+        this.closePopUp();
+    }
     
     render(){
         const { themeItem } = this.props;

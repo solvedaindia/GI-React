@@ -1,13 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import apiManager from '../../../utils/apiManager';
-import { getUpdatedMinicartCount } from '../../../utils/initialManager';
-import {
-  addToCart,
-  findinventoryAPI,
-  findMultiProductInventory
-} from '../../../../public/constants/constants';
 import {
   updatetMinicart,
   updatetWishListCount,
@@ -21,7 +14,7 @@ import ProductInfo from '../productInfo';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
-import {PRODUCT_ADDED,ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE,VIEW} from '../../../constants/app/pdpConstants';
+import {PRODUCT_ADDED, ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -329,7 +322,7 @@ class addToCartComponent extends React.Component {
           </>
           )}
           { (!isMobile() || this.props.isMobile === true) && this.renderButton(this.props.pinCodeData, this.state.qtyVal)}
-          {this.quantityErrorMessage && <div>{NOT_AVAILABLE}</div>}
+          {this.quantityErrorMessage && <div  className="errorMessage">{NOT_AVAILABLE}</div>}
         </div>
         <ProductInfo
                     productData={this.props.skuData}

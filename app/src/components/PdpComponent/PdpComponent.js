@@ -369,16 +369,8 @@ class PdpComponent extends React.Component {
 // handleScroll function End
   render() { 
     const { isLoading } = this.state;
-    const isAddToCart = appCookie.get('isPDPAddToCart');
-	let isSticky = false;
+	let isSticky = true;
 	let stateAttr = {};
-    if (!isLoading && isAddToCart !== null) { 
-    	if(isAddToCart.split(',').indexOf(this.state.skuData.uniqueID) === -1) {
-        	isSticky = true;
-       	}
-    } else if(isAddToCart === null) {
-    	isSticky = true;
-	}
 
 	if (!isLoading) {
 		if (this.props.data.type === 'product') {

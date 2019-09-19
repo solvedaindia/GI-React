@@ -14,7 +14,7 @@
     
 }
 .slidedown {            
-    max-height: 75px ;                    
+    max-height: 85px ;                    
 }    
 
 /*-----slideUpPrice*/
@@ -80,7 +80,9 @@
    }
   }
 
-
+.errorMessage{
+	color:red;
+}
 .appheader{
     -webkit-transition: all 0.5s ease;
     -moz-transition: position 10s;
@@ -1733,10 +1735,17 @@
   /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
   */
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     
     //CSS
-    
+	.galleryArea {
+		.no-paddingLeft {
+			width:100%;
+		}
+		.col-md-7 {
+			width:100%;
+		}
+	}
   }
   
 

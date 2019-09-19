@@ -216,10 +216,12 @@
           outline: 0;
         }
         .remove-btn {
-          color: $colorgrey;
+          color: $battleshipGrey;
+          font-size: $base*1.5;
         }
         .view-product-btn {
           color: $ceruleanblue;
+          font-family: $font-regular;
         }
       }
       .product-desc {
@@ -233,8 +235,9 @@
           margin: 0;
         }
         .description-text {
-          font-family: $font-light;
+          font-family: $font-regular;
           font-size: 11px;
+          color:$greyLight;
         }
         .discount-price {
           font-size: $base * 2.25;
