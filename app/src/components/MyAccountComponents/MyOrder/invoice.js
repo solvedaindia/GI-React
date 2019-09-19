@@ -25,10 +25,6 @@ class Invoice extends React.Component {
 				invoiceData: response.data.data,
 				isLoading: false,
 			},
-			console.log('invoiceId', this.props.match.params.invoiceId )
-            // () => {
-            //     this.setup();
-            // }
             );
 		})
 		.catch(error => {
@@ -46,8 +42,6 @@ class Invoice extends React.Component {
     invoiceDatailedData() {
 		const { invoiceData } = this.state;
 		console.log('invoice data', invoiceData)
-        // if(!invoiceData) return null;
-		console.log(invoiceData);
         return (
             <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
@@ -176,9 +170,13 @@ class Invoice extends React.Component {
        return(
             <div className="invoiceTicket">
                 <div id="content">
-				{UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : <div>Not Applicable</div>}
+				{UserLoggedIn == 'true' && invoiceData 
+					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : 
+					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>Selected invoice is not applicable for you, please login</div>}
 			  </div>
-				{ UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? <div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
+				{ UserLoggedIn == 'true' && invoiceData 
+					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? 
+					<div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
 				</div> : ""}
 
             </div>

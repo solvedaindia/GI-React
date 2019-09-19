@@ -385,7 +385,19 @@ class StoreLocator extends React.Component {
                                             {this.props.history.location.state.pincode &&
                                                 <p>{data} Km</p>
                                             }
-                                            <p>{item.storeHours && item.storeHours}</p>
+											
+											
+                                            { 
+											
+											item.storeHours && item.storeHours.split('|')[0] && <p>{item.storeHours.split('|')[0]}</p>
+																						
+											}
+											{ 
+											
+											item.storeHours && item.storeHours.split('|')[1] && <p>{item.storeHours.split('|')[1]}</p>
+																						
+											}
+											
                                         </div>
                                     </InfoWindow>
                                 }
