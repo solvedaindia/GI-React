@@ -42,9 +42,8 @@ class PlpComponent extends React.Component {
 
   handleAddProduct = product => {
     const compPrd = this.props.compData.find(prd => prd.skuId == product.skuId);
-    const compCat = this.props.compData.find(
-      prd => prd.catId == this.props.catId,
-    );
+    const compCat = this.props.compData.find(prd => prd.catId == this.props.catId);
+    const masterProduct = this.props.compData.find(prd => prd.masterCategoryID == product.masterCategoryID);
     if (compPrd) {
       alert(
         'Product already added in Compare tray. Please add another product',
@@ -55,7 +54,11 @@ class PlpComponent extends React.Component {
       );
     } else if (this.props.compData.length > 0 && !compCat) {
       alert('Please select same category products');
-    } else {
+    } 
+    else if (this.props.compData.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
+      alert('Selected product is from different category');
+    } 
+    else {
       product.catId = this.props.catId;
       this.props.addProduct(product);
     }

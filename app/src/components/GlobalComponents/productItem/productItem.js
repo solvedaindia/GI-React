@@ -55,6 +55,7 @@ class ProductItem extends React.Component {
       id: this.state.data.parentUniqueID,
       actualPrice: this.state.data.actualPrice,
       offerPrice: this.state.data.offerPrice,
+      masterCategoryID: this.state.data.masterCategoryID,
     };
     this.props.addProduct(product);
   }
