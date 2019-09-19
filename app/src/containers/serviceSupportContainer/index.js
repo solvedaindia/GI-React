@@ -17,6 +17,17 @@ export default class HelpSupport extends React.Component {
     return (
       <div className='staticpage serviceSupport'>
 		<Breadcrumb {...this.props.match.params} staticName = {'Service & Support'}/>
+    <div className='container'>
+    <ul>
+      <li style={{color: '#eef8fe'}}><a href='/support#myorders'>My Orders</a></li>
+      <li><a href='/support#beforeIBuy'>Before I Buy</a></li>
+      <li><a href='/support#payments'>Payments</a></li>
+      <li><a href='/support#myaccount'>MY ACCOUNT</a></li>
+      <li><a href='/support#returns'>RETURNS AND CANCELLATIONS</a></li>
+      <li><a href='/support#afterSales'>AFTER SALES SERVICE</a></li>
+    </ul>
+    </div>
+   
         <ContentEspot espotName={ 'GI_SUPPORT_FAQ' } />
         <a id='customerCare'>
        <ContentEspot espotName={ 'GI_CONTACT_US_CUSTOMER_CARE' } />
