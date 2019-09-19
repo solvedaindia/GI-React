@@ -577,8 +577,8 @@ export class PlpContainer extends React.Component {
     }
     const params = new URLSearchParams(this.state.searchKeyword);
     var keywoard = params.get('keyword');
-	keywoard = formateSearchKeyword(params.get('keyword'), false);
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
+      keywoard = formateSearchKeyword(params.get('keyword'), false);
       titleItem = (
         <div className="searchresult">
           <h3 className="headingTitleFlat">

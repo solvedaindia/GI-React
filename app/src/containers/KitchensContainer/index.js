@@ -33,9 +33,9 @@ export class KitchenContainer extends React.Component {
       <>
         <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } />
         <section className="staticpage kitchenContainer">
-        <Helmet>
-					<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
-				</Helmet>
+		   <Helmet>
+			 <Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
+		  </Helmet>
           <div className="slider">
             <KitchenBanner />
           </div>
@@ -48,11 +48,14 @@ export class KitchenContainer extends React.Component {
           {/*
           <BeforeAfter /> */}
           <div className="formContainer">
-            <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
-            <div id='consultForm' className='formDetails'>
-              <ConsultationForm />
-            </div>
-          </div>
+			<div className="container">
+			  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+
+			  <div id='consultForm' className="formDetails">
+				<ConsultationForm />
+			  </div>
+			</div>
+		  </div>
           <ContentEspot espotName={ 'GI_Homepage_Our_Promises' } />
           <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
           <KitchenStore />

@@ -147,7 +147,7 @@ handleValidation=(obj, errorType)=>{
   // For email validation
   if (!validateEmptyObject(obj.email) && !isMobileEntered) {
     this.setState({
-      errorMessageEmail: 'Email or Mobile number is required',
+      errorMessageEmail: 'Please enter valid Email Id',
     });
     isValidate = false;
   }
@@ -171,7 +171,7 @@ handleValidation=(obj, errorType)=>{
   // For mobile validation
   if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
     this.setState({
-      errorMessageMobile: 'Mobile number or Email is required',
+      errorMessageMobile: 'Please enter valid Mobile Number',
     });
     isValidate = false;
   }
