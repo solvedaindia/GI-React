@@ -112,16 +112,8 @@ export default class App extends React.Component {
     if(header) {
       header.classList.remove("sticky");
     } 
-	
-	if(isTab())
-	{
-		 $('html, body').stop().animate();
-	}
-	else if(isMobile())
-	{
-		 $('html, body').stop().animate();
-	}
-	else if(window.location.hash)
+
+	if(window.location.hash)
 	{
 		 $('html, body').stop().animate();
 	}
@@ -133,9 +125,15 @@ export default class App extends React.Component {
     }
 	else {
 	   $('html, body').animate({ scrollTop: 0 }, 'fast');
-	}
-    
   }
+  /*Ipad and Mobile stop scrollTop
+-----------------------------------*/
+  if(isMobile() || isTab())
+  { 
+    $('html, body').stop().animate();
+  }    
+  }
+
 
   initialLoginHandling() {
     const token = getCookie(accessTokenCookie);
