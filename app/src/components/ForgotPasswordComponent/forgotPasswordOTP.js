@@ -28,7 +28,8 @@ class ForgotPasswordOTP extends React.Component {
     };
   }
 
-  proceedBtnPressed() { 
+  proceedBtnPressed(e) {
+    e.preventDefault(); 
     if (!this.state.showOTPTxtField) { 
       const nextComp = `${FORGET_PASS_OTP}`;
       this.props.handlerPro(nextComp, null, this.state.inputText, false, false);
@@ -221,6 +222,7 @@ class ForgotPasswordOTP extends React.Component {
 
     let finalBtn = (
       <Button
+        type="submit"
         onClick={this.proceedBtnPressed.bind(this)}
         className="btn-block btn-bg"
       >
@@ -261,8 +263,8 @@ class ForgotPasswordOTP extends React.Component {
             </div>
           </FormGroup>
           <FormGroup />
-        </Form>
         {finalBtn}
+        </Form>
       </div>
     );
   }

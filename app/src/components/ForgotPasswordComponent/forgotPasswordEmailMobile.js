@@ -1,18 +1,21 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
-import {
-  generateOTPAPI,
-  storeId,
-  accessToken,
-} from '../../../public/constants/constants';
+import { generateOTPAPI } from '../../../public/constants/constants';
 import {
   regexEmail,
   regexMobileNo,
   validateEmptyObject,
 } from '../../utils/validationManager';
-import LoadingIndicator from '../../utils/loadingIndicator';
-import {ENTER_MOBILE_EMAIL, INVALID_MOBILE_NUMBER,PROCEED,INVALID_EMAIL_ADDRESS,TO_REGISTER , FORGOT_PASSWORD, EMAIL_MOBILE_NUM,AN_OTP} from '../../constants/app/footerConstants';
+import {
+  ENTER_MOBILE_EMAIL,
+  INVALID_MOBILE_NUMBER,
+  PROCEED,
+  INVALID_EMAIL_ADDRESS,
+  FORGOT_PASSWORD,
+  EMAIL_MOBILE_NUM,
+  AN_OTP,
+} from '../../constants/app/footerConstants';
 
 class ForgotPasswordEmailMobile extends React.Component {
   constructor() {
@@ -85,12 +88,23 @@ class ForgotPasswordEmailMobile extends React.Component {
         const errorKey = errorData.error.error_key;
         const lll = (
           <>
-            Please click <span onClick={this.onRegisterRedirectClick} className='registerHere'>here</span> to register
+            Please click{' '}
+            <span
+              onClick={this.onRegisterRedirectClick}
+              className="registerHere"
+            >
+              here
+            </span>{' '}
+            to register
           </>
-        )
+        );
         const errorItem = (
-          <p className="error-msg">{errorMessage}{` `}{errorKey === 'invalid_user_id' ? lll : null}</p>
-        )
+          <p className="error-msg">
+            {errorMessage}
+            {` `}
+            {errorKey === 'invalid_user_id' ? lll : null}
+          </p>
+        );
         this.setState({
           error: true,
           errorMessage: errorItem,
@@ -110,8 +124,6 @@ class ForgotPasswordEmailMobile extends React.Component {
       inputText: text.target.value,
     });
   }
-
- 
 
   render() {
     let errorItem;
@@ -144,7 +156,7 @@ class ForgotPasswordEmailMobile extends React.Component {
         <Form className="modalmin-height">
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
-             {EMAIL_MOBILE_NUM}
+              {EMAIL_MOBILE_NUM}
             </Label>
             <div className="form-div clearfix div-error">
               <input
@@ -162,17 +174,16 @@ class ForgotPasswordEmailMobile extends React.Component {
             </div>
           </FormGroup>
           <FormGroup>
-            <p className="text text-emailotp">
-             {AN_OTP}{' '}
-            </p>
+            <p className="text text-emailotp">{AN_OTP} </p>
           </FormGroup>
+          <Button
+            type="submit"
+            onClick={this.proceedBtnPressed.bind(this)}
+            className="btn-block btn-bg"
+          >
+            {PROCEED}
+          </Button>
         </Form>
-        <Button
-          onClick={this.proceedBtnPressed.bind(this)}
-          className="btn-block btn-bg"
-        >
-          {PROCEED}
-        </Button>
       </div>
     );
   }

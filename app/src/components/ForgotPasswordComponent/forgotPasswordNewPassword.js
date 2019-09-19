@@ -24,7 +24,8 @@ class ForgotPasswordNewPassword extends React.Component {
     };
   }
 
-  doneBtnPressed() {
+  doneBtnPressed(e) {
+    e.preventDefault();
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
@@ -125,13 +126,14 @@ class ForgotPasswordNewPassword extends React.Component {
               </span> : null}
             </div>
           </FormGroup>
-        </Form>
-        <Button
+          <Button
+          type="submit"
           onClick={this.doneBtnPressed.bind(this)}
           className="btn-block btn-bg"
         >
           Save
         </Button>
+        </Form>
       </div>
     );
   }
