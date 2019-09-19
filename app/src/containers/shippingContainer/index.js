@@ -19,10 +19,10 @@ class Shipping extends React.Component {
   render() {
     return (
         <div className='shippingPage'>
-        <Breadcrumb {...this.props.match.params} staticName = {'shipping'}/>
-        <ContentEspot espotName={ 'SHIPPING_PAGE_1' } />
-        <ContentEspot espotName={ 'SHIPPING_PAGE_2' } />
-        <ContentEspot espotName={ 'SHIPPING_PAGE_3' } />
+        <Breadcrumb {...this.props.match.params} staticName = {'Shipping Information'}/>
+        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_1' } />
+        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_2' } />
+        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_3' } />
       </div>
     );
   }
