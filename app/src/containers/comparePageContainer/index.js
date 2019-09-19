@@ -244,10 +244,13 @@ export class ComparePageContainer extends React.Component {
   }
 
   removeCompareId(data) {
-    this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);
-    this.renderPrd()
+    this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);    
+    this.renderPrd();
     this.updateRoute();
     this.props.removeProduct(data);
+    if (this.state.compWidgetData.length === 1) {
+      this.props.removeProduct(this.state.compWidgetData[0]);
+    }
   }
 
   render() {
@@ -263,7 +266,7 @@ export class ComparePageContainer extends React.Component {
           </Col>
         </Row>
         {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.compCount}/3</h1></Row> : null}
-          {this.state.prds ? <CompPrd data={this.state.prds} remove={this.removeCompareId.bind(this)} swatchHandle={this.swatchHandle} /> : ''}</>}
+          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} swatchHandle={this.swatchHandle} /> : ''}</>}
 
       </div>
     )
