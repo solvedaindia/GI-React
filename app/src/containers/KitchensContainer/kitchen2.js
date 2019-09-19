@@ -49,7 +49,7 @@ return (
         <div className="container">
           <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
-          <div id='consultForm' className="Form-bakground">
+          <div id='consultForm' className="formDetails">
             <ConsultationForm />
           </div>
         </div>

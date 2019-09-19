@@ -6,7 +6,6 @@ import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';
 import appCookie from '../../../utils/cookie';
 import html2canvas from 'html2canvas'
-import 'jspdf-autotable';
 class Invoice extends React.Component {
     constructor(props){
         super(props);
@@ -41,16 +40,6 @@ class Invoice extends React.Component {
 	}
 	_exportPdf = () => {
 
-		html2canvas(document.querySelector("#invoiceDiv")).then(canvas => {
-		    document.body.appendChild(canvas);  // if you want to see your screenshot in body.
-		   const invoiceData = canvas.toDataURL('image/png');
-		   const pdf = new jsPDF();
-		  
-		   pdf.setFontType("normal");
-		   pdf.setFont("arial", "bold");
-		   pdf.addImage(invoiceData, 1, 1);
-		   pdf.save("a5.pdf"); 
-	   });
    
 	}
 
@@ -190,7 +179,6 @@ class Invoice extends React.Component {
 				{UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : <div>Not Applicable</div>}
 			  </div>
 				{ UserLoggedIn == 'true' && invoiceData && invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? <div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
-				<button  onClick={this._exportPdf}>Download Invoice</button>
 				</div> : ""}
 
             </div>
