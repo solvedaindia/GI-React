@@ -236,6 +236,20 @@ function transformJson(result) {
     productListArray.forEach(product => {
       let productDetail = {};
       productDetail = productDetailFilter.productDetailSummary(product);
+      if (
+        product.catalogEntryTypeCode === 'BundleBean' &&
+        product.components &&
+        product.components.length > 0
+      ) {
+        productDetail.bundleComponents = [];
+        product.components.forEach(component => {
+          const componentData = {
+            uniqueID: component.uniqueID,
+            quantity: parseInt(component.quantity, 10),
+          };
+          productDetail.bundleComponents.push(componentData);
+        });
+      }
       productDetail.promotionData = productDetailFilter.getSummaryPromotion(
         promotionJson[productDetail.uniqueID],
       );

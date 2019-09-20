@@ -1,4 +1,5 @@
 const origin = require('./origin');
+const origin2 = require('./origin2');
 const constants = require('./constants');
 const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
@@ -107,6 +108,37 @@ function removePromoCode(headers, params, callback) {
       }
     },
   );
+}
+
+/* Get Applied Promotion from Cart */
+module.exports.getCartAppliedPromotions = getCartAppliedPromotions;
+async function getCartAppliedPromotions(headers) {
+  return new Promise(async (resolve, reject) => {
+    logger.debug('Call to get userDetails api');
+    const originUserDetailURL = constants.getCartPromotion.replace(
+      '{{storeId}}',
+      headers.storeId,
+    );
+    const reqHeader = headerutil.getWCSHeaders(headers);
+    try {
+      const response = await origin2.getResponse(
+        'GET',
+        originUserDetailURL,
+        reqHeader,
+        null,
+      );
+      let cartPromotion = [];
+      if (
+        response.body.promotionCode &&
+        response.body.promotionCode.length > 0
+      ) {
+        cartPromotion = response.body.promotionCode;
+      }
+      resolve(cartPromotion);
+    } catch (error) {
+      reject(errorUtils.handleWCSError(error));
+    }
+  });
 }
 
 module.exports.getMultiplePromotions = getMultiplePromotions;

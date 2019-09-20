@@ -30,7 +30,10 @@ module.exports.getCachedResponse = function getCachedResponse(
     callback(null);
     return;
   }
-  let key = apiName + req.url + req.headers.storeId;
+  let key = apiName;
+  if (req) {
+    key = apiName + req.url + req.headers.storeId;
+  }
   let userSpecific = false;
   const apiCacheConf = apiCacheConfig[apiName] || null;
   if (apiCacheConf) {
@@ -49,7 +52,10 @@ module.exports.getCachedResponse = function getCachedResponse(
 
 module.exports.cacheResponse = function cacheResponse(apiName, req, res) {
   if (global.isRedis === true) {
-    let key = apiName + req.url + req.headers.storeId;
+    let key = apiName;
+    if (req) {
+      key = apiName + req.url + req.headers.storeId;
+    }
     let expiryTime = 1800;
     let userSpecific = false;
     const apiCacheConf = apiCacheConfig[apiName] || null;
@@ -74,9 +80,11 @@ module.exports.clearCache = function clearCache(callback) {
   callback('Redis Not Connected');
 };
 
-module.exports.getKeys = function getKeys(callback) {
+module.exports.getKeys = function getKeys(req, callback) {
   if (global.isRedis === true) {
-    defaultCacheConfig.redisClient.keys('*', (err, keys) => {
+    const keyword = req.query.keyword;
+    const searchKey = keyword ? `*${keyword}*` : '*';
+    defaultCacheConfig.redisClient.keys(searchKey, (err, keys) => {
       if (err) {
         callback(`Error In Fetching Keys from Redis${err}`);
         return;
