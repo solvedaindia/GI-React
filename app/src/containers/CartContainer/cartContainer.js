@@ -8,6 +8,7 @@ import {
   getReleventReduxState,
   isMobile,
   formatPrice,
+  createPdpURL,
 } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
@@ -97,7 +98,7 @@ class CartDetail extends React.Component {
           return (
             <li className={`prodList${outOfStock ? ' outOfStockList' : ''}`} key={`${index}-pro`}>
               {outOfStock && <div className='outOfStock' />}
-              <Link to={`/pdp/furniture-${itemData.productName.split(' ').join('-')}/${itemData.uniqueID}`}>
+              <Link to={createPdpURL(itemData.productName, itemData.partNumber)}>
 				  <figure className='prodImg'>
                   <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
                   {outOfStock && <div className='outOfStockLogo'><OutOfStockIcon /></div>}

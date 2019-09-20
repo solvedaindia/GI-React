@@ -481,11 +481,12 @@ export class PlpContainer extends React.Component {
     var scrollYindex;
     if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
       scrollYindex = window.innerHeight + document.body.scrollTop;
-    }
-    else { //All other browsers
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1){
+      scrollYindex = window.innerHeight + window.pageYOffset;
+    } else { //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
-
+   
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 1000;
     const windowHeight = scrollYindex;

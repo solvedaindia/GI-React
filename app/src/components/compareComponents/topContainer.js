@@ -10,7 +10,7 @@ import {
   imagePrefix
 } from '../../../public/constants/constants';
 import {REMOVE, VIEW_PRODUCT} from '../../constants/app/compareConstants'
-
+import {createPdpURL} from '../../utils/utilityManager';
 
 class TopContainer extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class TopContainer extends React.Component {
     }
 
     render() {
-      var routePath = `/pdp/furniture-${this.props.product.productName.split(' ').join('-')}/${this.props.product.uniqueID}`
+      var routePath = createPdpURL(this.props.product.productName, this.props.product.partNumber)
       return (
         <Col xs={12} sm={4} md={4} className='comp-list-item'>
         <div className='img-box'>

@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import {
   imagePrefix,
 } from '../../../public/constants/constants';
-import { formatPrice } from '../../utils/utilityManager';
+import {createPdpURL, formatPrice } from '../../utils/utilityManager';
 import {EMI_STARTING,ON_THIS_PRODUCT} from '../../constants/app/pdpConstants';
 
 
@@ -38,7 +38,7 @@ class SimilarCombosProducts extends React.Component {
       const imgUrl = `${imagePrefix}${data.thumbnail}`;
       return (
         <div className="similarProducts" key={index}>
-        <a href={`/pdp/furniture-${data.productName.toLowerCase().replace(/ /g, '-')}/${data.uniqueID}`}>
+        <a href={createPdpURL(data.productName, data.partNumber)}>
           <div className="productlist">
             <div className="imgBox">
               <img className="imgfullwidth" src={imgUrl} alt={data.productName} />

@@ -29,6 +29,7 @@ import {
   getCookie,
   getCorrespondingGiftlistId,
   getOnlyWishlistUniqueIds,
+  createPdpURL,
   isMobile,
 } from '../../../utils/utilityManager';
 import {ADD_TO_COMPARE} from '../../../constants/app/footerConstants';
@@ -100,8 +101,7 @@ class ProductItem extends React.Component {
   };
 
   render() {
-	  var productname = String(this.state.data.productName).toLowerCase()
-	  var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.state.data.uniqueID}`
+	  var routePath = createPdpURL(this.state.data.productName, this.state.data.partNumber);
 
 	  var swatchFinalData;
     if (this.state.colorSwatchSplit.length !== 0) {

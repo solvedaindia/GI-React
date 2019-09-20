@@ -4,6 +4,7 @@ import {imagePrefix} from '../../../public/constants/constants';
 import '../../../public/styles/clpContainer/themeData.scss';
 import {VIEW_DETAILS } from '../../constants/app/clpConstants';
 import {isMobile } from '../../utils/utilityManager';
+import {createPdpURL} from '../../utils/utilityManager';
 
 class ThemeData extends React.Component {
 	constructor(props) {
@@ -74,7 +75,7 @@ class ThemeData extends React.Component {
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
         var productname = String(itemDetail.productName).toLowerCase()
-        var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${itemDetail.uniqueID}`;
+        var routePath = createPdpURL(itemDetail.productName, itemDetail.partNumber)
 
         return(
             
