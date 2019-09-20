@@ -299,9 +299,9 @@ class PdpComponent extends React.Component {
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
   if(window.screen.width > 993 && window.screen.width < 1279){
-	var box1=1580;
+	var box1=955;
   }else{
-	var box1=163
+	var box1=168;
   }
   if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
@@ -309,7 +309,6 @@ class PdpComponent extends React.Component {
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
   var scrollbox1;
-
 
   var scrollbox1=box1-scrollTop;
   var scrollbox2=box2-scrollTop;
