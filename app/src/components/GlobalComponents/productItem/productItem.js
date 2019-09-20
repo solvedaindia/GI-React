@@ -32,7 +32,7 @@ import {
   createPdpURL,
   isMobile,
 } from '../../../utils/utilityManager';
-import {ADD_TO_COMPARE} from '../../../constants/app/footerConstants';
+import { ADD_TO_COMPARE } from '../../../constants/app/footerConstants';
 
 
 class ProductItem extends React.Component {
@@ -63,112 +63,129 @@ class ProductItem extends React.Component {
 
   moveToCartClicked = e => {
     e.preventDefault();
+    
+    const productType = this.state.data.type;
 
-	  const data = {
-	    orderItem: [
-        {
-	        sku_id: this.state.data.uniqueID,
-	        quantity: '1',
-        },
-	    ],
-	  };
+    var data;
+    if (productType === 'BundleBean') {
+      let orderItem = Array();
+      this.state.data.bundleComponents.map(bundleData => {
+        orderItem.push({ sku_id: bundleData.uniqueID, quantity: bundleData.quantity.toString() })
+      });
+      data = {
+        orderItem
+      };
 
-	  apiManager
-	    .post(addToCart, data)
-	    .then(response => {
+    }
+    else {
+      data = {
+        orderItem: [
+          {
+            sku_id: this.state.data.uniqueID,
+            quantity: '1',
+          },
+        ],
+      };
+    }
+
+    console.log('ididiiddi ---- ', data)
+// return
+    apiManager
+      .post(addToCart, data)
+      .then(response => {
         getUpdatedMinicartCount(this);
         // this.props.updatetMinicart();
         removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
         this.props.moveToCartPopUpPro();
-	    })
-	    .catch(error => {
+      })
+      .catch(error => {
       });
   };
 
   onSwatchChange(e, selectedSwatch) {
     e.preventDefault();
-	  const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
-	  this.setState({
-	    data: selectedItem,
-	  })
+    const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
+    this.setState({
+      data: selectedItem,
+    })
   }
 
   showAllSwatchColors = e => {
     e.preventDefault();
-	  this.setState({
+    this.setState({
       colorSwatchSplit: [],
-	  })
+    })
   };
 
   render() {
 	  var routePath = createPdpURL(this.state.data.productName, this.state.data.partNumber);
 
-	  var swatchFinalData;
+    var swatchFinalData;
     if (this.state.colorSwatchSplit.length !== 0) {
-	    swatchFinalData = this.state.colorSwatchSplit;
-	  }
-	  else {
-	    swatchFinalData = this.state.colorSwatchFull;
+      swatchFinalData = this.state.colorSwatchSplit;
+    }
+    else {
+      swatchFinalData = this.state.colorSwatchFull;
     }
 
     return (
-	    <li className="productlist">
+      <li className="productlist">
         <div className="prdListData">
           <ItemImage
-	          data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2 }
+            data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2}
             uniqueId={this.state.data.uniqueID}
             parentUniqueId={this.state.data.parentUniqueID}
             productname={this.state.data.productName}
             breadcrumbDataPro={this.props.plpBreadcrumbPro}
           />
           <InStock isInStock={this.state.data.inStock} />
-	        <RibbonTag data={this.state.data.ribbonText} />
-	        <div className="product-text">
+          <RibbonTag data={this.state.data.ribbonText} />
+          <div className="product-text">
             <Title
               titlePro={this.state.data.productName}
-	            descriptionPro={this.state.data.shortDescription}
-	          />
-	          <p className="price text">
-	            <Price
+              descriptionPro={this.state.data.shortDescription}
+            />
+            <p className="price text">
+              <Price
                 actualPrice={this.state.data.actualPrice}
                 offerPrice={this.state.data.offerPrice}
-	            />
+              />
             </p>
             <Promotions
-	            promoData={this.state.data.promotionData}
+              promoData={this.state.data.promotionData}
               discount={this.state.data.discount}
-	            emi={this.state.data.emiData} />
+              emi={this.state.data.emiData} />
           </div>
-	      </div>
-	      <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.plpBreadcrumbPro} }}>
-	        <div className="hoverBox">
-            {this.props.isfromWishlistPro ? 
-	            <button className={this.props.isShareWishlistPro ? 'btn-compare': isMobile() ? 'mov-to-cart' :  'btn-compare' } onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
-	            <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>}
+        </div>
+        <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.plpBreadcrumbPro } }}>
+          <div className="hoverBox">
+            {this.props.isfromWishlistPro ?
+              <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
+              <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>}
 
-	          {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
-	            <ul className="colortheme clearfix">
-                 
-                  {swatchFinalData.map(item => {
-	                var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
-                    return (
-	                  <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-	                    <span className='swatches-circle' style={colorStyle}></span>
-	                  </li>
-	                )
-	
-	              }) }
+            {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
+              <ul className="colortheme clearfix">
 
-	              {this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null }
-                </ul>
-	          </div> : null}
+                {swatchFinalData.map(item => {
+                  var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+                  return (
+                    <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+                      <span className='swatches-circle' style={colorStyle}></span>
+                    </li>
+                  )
+
+                })}
+
+                {this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
+              </ul>
+            </div> : null}
           </div>
         </Link>
-	      <Wishlist
+        <Wishlist
           uniqueId={this.state.data.uniqueID}
           isInWishlistPro={this.props.isInWishlist}
-	        isFromWishlistPro={this.props.isfromWishlistPro}
-	        history={this.props.history}
+          isFromWishlistPro={this.props.isfromWishlistPro}
+          history={this.props.history}
         />
       </li>
     );

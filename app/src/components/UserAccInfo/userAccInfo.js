@@ -12,7 +12,7 @@ import { getCookie, getReleventReduxState, isMobile } from '../../utils/utilityM
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
-import {MY_ORDER,MANAGE_ADDRESSES, WELCOME_INTERIO,LOGIN_REGISTER } from '../../constants/app/primitivesConstants';
+import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER } from '../../constants/app/primitivesConstants';
 
 class UserAccInfo extends React.Component {
   constructor(props) {
@@ -87,21 +87,26 @@ class UserAccInfo extends React.Component {
         headers: { profile: 'summary' },
       })
       .then(response => {
-        var username = String(response.data.data.name);
-        if (response.data.data.pincode && response.data.data.pincode !== '') {
-          appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
-          appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        if (!response.data.data.hasOwnProperty('name') && response.data.data.name === undefined) {
+          this.onLogoutClick();
+        }
+        else {
+          var username = String(response.data.data.name);
+          if (response.data.data.pincode && response.data.data.pincode !== '') {
+            appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
+            appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+          }
+
+          this.setState({
+            userName: `Welcome ${username.split(' ')[0]}`,
+            logonId: response.data.data.logonID,
+          });
+
+          document.cookie = `name=${response.data.data.name};path=/;expires=''`;
+          this.showLoginStatus();
+          this.props.updateUserProfile(response.data.data.name);
         }
 
-        this.setState({
-          userName: `Welcome ${username.split(' ')[0]}`,
-          logonId: response.data.data.logonID,
-        });
-
-        document.cookie = `name=${response.data.data.name};path=/;expires=''`;
-        this.showLoginStatus();
-        this.props.updateUserProfile(response.data.data.name);
-        
       })
       .catch(error => {
         // return null;
@@ -130,7 +135,7 @@ class UserAccInfo extends React.Component {
               <a className="dropDown">{MANAGE_ADDRESSES}</a>
             </Link>
           </li>
-        
+
         </>
       )),
         (this.state.loginStatus = (
@@ -190,7 +195,7 @@ class UserAccInfo extends React.Component {
   }
 
   render() {
-     let userLogoItem = null;
+    let userLogoItem = null;
     let dropdownItem = null;
     if (this.props.showUserInfo) {
       userLogoItem = <UserLogo />;
