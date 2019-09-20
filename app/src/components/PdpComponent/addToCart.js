@@ -282,10 +282,10 @@ class addToCartComponent extends React.Component {
 		if(!this.props.sticky) {
 			btnId = 'box3';
     }
-    
+
     if(!props.pincodeServiceable || this.props.skuData.offerPrice === "") {
       return <Button className="btn addcartbtn" id={btnId} disabled>{ADD_TO_CART}</Button>
-    } else if (props.inventoryStatus === 'unavailable' && quantity === 1) {
+    } else if (props.inventoryStatus === 'unavailable') {
       return <NotifyMe partNumber={this.props.skuData.partNumber} sticky={this.props.sticky} />
     } 
     return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
