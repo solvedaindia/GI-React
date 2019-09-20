@@ -22,7 +22,7 @@ class CompPrd extends React.Component {
   renderProducts = () => {
     var prds = [];
     this.props.data.map((element, index) => {
-      prds.push(<TopContainer key={index} product={element} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
+      prds.push(<TopContainer key={index} product={element} isRouteUpdated={this.props.isRouteUpdated} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
     });
     return prds;
   }
@@ -88,8 +88,9 @@ class CompPrd extends React.Component {
 
   renderSpecs = () => {
 
+    console.log('iiiii ----- ',this.props.data);
     var specs = [];
-    if (this.props.data === undefined || this.props.data === null || this.props.data === '') {
+    if (this.props.data === undefined || this.props.data === null || this.props.data === '' || this.props.data.length === 0) {
       return <></>
     }
     this.props.data[0].attributes.map((att, index) => {
