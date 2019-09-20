@@ -4,7 +4,7 @@ import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
-import {BOOK_CONSULTATION,DUMMY_TEXT,SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER} from '../../constants/app/primitivesConstants';
+import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT, SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER} from '../../constants/app/primitivesConstants';
 
 import {
   regexEmail,
@@ -287,8 +287,6 @@ onDropdownSelected = (e) => {
 
         return (
           <form className='consultForm'>
-            <h2 className="title">{BOOK_CONSULTATION}</h2>
-              <p className="desc">{DUMMY_TEXT} </p>
               <div className="row">
                 <div className="col-md-6 ">
                   <div className="form-div clearfix div-error">

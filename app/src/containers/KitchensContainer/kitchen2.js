@@ -12,6 +12,7 @@ import ExKitchens from '../../components/KitchensComp/expKitchens';
 import '../../../public/styles/static-pages/consultForm.scss';
 import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
+import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 
 import {
   imagePrefix,
@@ -50,8 +51,10 @@ return (
           <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
           <div id='consultForm' className="formDetails">
-            <ConsultationForm />
-          </div>
+				<h2 className="title">{BOOK_CONSULTATION}</h2>
+				<p className="desc">{KITCHEN_CONSULT} </p>
+				<ConsultationForm />
+			</div>
         </div>
       </div>
       <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />

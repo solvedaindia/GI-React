@@ -16,6 +16,7 @@ import WardrobeBenefits from '../../components/wardrobesComponent/wardrobesBenef
 import WHallOfFame from '../../components/wardrobesComponent/wardrobeHall';
 import AboutWardrobe from '../../components/wardrobesComponent/aboutWardrobe';
 import WhatGoesward  from '../../components/wardrobesComponent/whatgoesWard';
+import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
@@ -66,9 +67,11 @@ export class WardrobeContainer extends React.Component {
 			<div className="formContainer">
 				<div className='containerSetForm'>
 				<img className="bgImg" src={`${imagePrefix}/staticImages/kitchens/whatgoesimg.png`} alt="Snow" />
-				<div id='consultForm' className='formDetails'>
+				 <div id='consultForm' className="formDetails">
+					<h2 className="title">{BOOK_CONSULTATION}</h2>
+					<p className="desc">{WARDROBE_CONSULT} </p>
 					<ConsultationForm />
-				</div>
+				  </div>
 				</div>
             </div>
             <div className="faqContainer">

@@ -95,7 +95,7 @@ class BestSeller extends React.Component {
                 <figure key={index} className="bsSlides">
                
                   <Link to={routePath}>
-                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.imageAltText} />
+                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.productName} />
                   </Link>
            
                   <figcaption className="bsDetails">

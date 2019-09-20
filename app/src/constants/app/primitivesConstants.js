@@ -10,7 +10,8 @@
  */
 
 export const BOOK_CONSULTATION = 'Book a consultation';
-export const DUMMY_TEXT = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodempor.';
+export const KITCHEN_CONSULT = 'Take the first step towards making your dream kitchen a reality by meeting our in-house design expert to discuss your design. Simply fill in the form below to book your appointment';
+export const WARDROBE_CONSULT = 'Take the first step towards making your dream kitchen a reality by meeting our in-house design expert to discuss your design. Simply fill in the form below to book your appointment';
 export const FULL_NAME = 'Full Name';
 export const EMAIL = 'Email';
 export const MESSEGE = 'Message';

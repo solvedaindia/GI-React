@@ -18,6 +18,7 @@ import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticpages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 
 export class KitchenContainer extends React.Component {
   constructor(props) {
@@ -50,8 +51,10 @@ export class KitchenContainer extends React.Component {
           <div className="formContainer">
 			<div className="container">
 			  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
-
+		
 			  <div id='consultForm' className="formDetails">
+				<h2 className="title">{BOOK_CONSULTATION}</h2>
+				<p className="desc">{KITCHEN_CONSULT} </p>
 				<ConsultationForm />
 			  </div>
 			</div>

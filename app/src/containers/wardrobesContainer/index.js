@@ -16,6 +16,7 @@ import WardrobeBanner from '../../components/wardrobesComponent/wardrobesBanner'
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
+import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 
 
 export class WardrobeContainer extends React.Component {
@@ -43,9 +44,11 @@ export class WardrobeContainer extends React.Component {
             <WHallOfFame />
 			<div className="formContainer">
 			<ContentEspot espotName = { 'GI_WARDROBES_FORMBACKGROUND_IMG' } />
-				<div id='consultForm' className='formDetails'>
+				 <div id='consultForm' className="formDetails">
+					<h2 className="title">{BOOK_CONSULTATION}</h2>
+					<p className="desc">{WARDROBE_CONSULT} </p>
 					<ConsultationForm />
-				</div>
+			  </div>
             </div>
             <ContentEspot espotName = { 'GI_WARDROBES_FAQ' } />
             <KitchenStore />
