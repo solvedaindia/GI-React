@@ -137,9 +137,12 @@ class StoreLocator extends React.Component {
             } else if (nextProps.history.location.state.pincode) {
                 if (storeNameInput != nextProps.history.location.state.pincode) {
                     document.getElementById("city").value = "";
+                    this.getLatAndLong(appCookie.get('pincode'));
+                    pincodeVal = appCookie.get('pincode');
+                } else {
+                    this.getLatAndLong(nextProps.history.location.state.pincode);
+                    pincodeVal = this.props.history.location.state.pincode;
                 }
-                this.getLatAndLong(nextProps.history.location.state.pincode);
-                pincodeVal = this.props.history.location.state.pincode;
             } else {
                 if (storeNameInput != appCookie.get('pincode')) {
                     document.getElementById("city").value = "";
