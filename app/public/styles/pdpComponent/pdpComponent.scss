@@ -2105,11 +2105,10 @@
                 }
                 .addedToWishlist{
                     &.dropdownwishlist{
-                        // top: initial;
-                        top:30px;
+                        top: initial;                      
                         right: 0px;
                         position: fixed;
-                        // bottom: 55px;
+                        bottom: 55px;
                         left: 0px;
                         width: 100%;
                     }
@@ -2368,20 +2367,7 @@
   */
   @media (min-width: 481px) and (max-width: 767px) {
     .galleryArea{
-        .pdpDetails {padding: 15px 15px 0 15px;}
-
-        .GallerytextBox{
-            .add-to-cart-floater{
-                .addedToWishlist.dropdownwishlist{
-                    top: 30px;
-                    right: 0px;
-                    position: fixed;
-                    left: 0px;
-                    width: 100%;
-                }
-            }
-        }
-        
+        .pdpDetails {padding: 15px 15px 0 15px;}      
     }
     //CSS
     
