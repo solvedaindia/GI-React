@@ -7,7 +7,7 @@ import {
   espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import { is, formatPrice } from '../../utils/utilityManager';
+import { is, formatPrice,createPdpURL } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
