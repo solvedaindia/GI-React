@@ -41,7 +41,7 @@ class AppliedPromoCode extends React.Component {
             </div>
 			
 			{!!error && (
-			<div className="promoError">{COUPAN_CODE_NOT_VALID }</div>
+				<div className="promoError">{COUPAN_CODE_NOT_VALID }</div>
 			)}
       </div>
     );

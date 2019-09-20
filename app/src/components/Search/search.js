@@ -98,7 +98,7 @@ class SearchBar extends React.Component {
   }
 
   onLinkNavigation = (e) => {
-    document.getElementById("searchInput").value = e.target.name;
+	document.getElementById("searchInput").value = e.target.getAttribute('name');
     this.props.plpReduxStateReset();
     this.setState({
       searchData: [],
