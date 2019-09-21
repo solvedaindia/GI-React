@@ -1,22 +1,85 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import { withRouter } from 'react-router-dom';
-import { invoicAPI } from '../../../../public/constants/constants';
+import { invoicAPI,orderListAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';
 import appCookie from '../../../utils/cookie';
-import html2canvas from 'html2canvas'
+import html2canvas from 'html2canvas';
 class Invoice extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            invoiceData: null
+			flag: 0,
+			invoiceData: null,
+			isTrackOrder: false,
+      isGuestTrackOrder: this.props.isGuestTrackOrderPro,
+      orderListData: [],
+      isLoading: true,
+      updatedTrackOrderData: null,
+      isOnGoingOrderShown: false,
+      isPastOrdeShown: false,
+
+      //Lazy Load Vars
+      error: false,
+      hasMore: true,
+      isLoading: false,
+      pageNumber: 1,
+	  pageSize: 20,
+	  orderQue: []
         }
         // this.download = this.download.bind(this);
     }
     componentDidMount() {
-        this.getInvoiveDetails();
-    }
+		this.getInvoiveDetails();
+	
+		//this.getOrderList()
+	}
+	getOrderList() {
+		this.setState({ isLoading: true }, () => {
+	
+	
+		  let orderAPI =
+			`${orderListAPI}?` +
+			`pagenumber=${this.state.pageNumber}&` +
+			`pagesize=${this.state.pageSize}&`;
+		  
+		  apiManager.get(orderAPI)
+			.then(response => {
+			    console.log('order respi',response )
+	           this.setState({
+				orderQue: response.data.data.orderList,
+			  });
+			  this.getOrderID();
+			})
+			.catch(error => {
+			  this.setState({
+				isLoading: false,
+				error: error.message,
+			  })
+			});
+		});
+	  }
+
+getOrderID(){
+	const { invoiceData } = this.state;
+	var Ids = ''
+	var flag1=0
+	const{orderQue} = this.state
+ 	if (!!orderQue && orderQue.length > 0){
+	orderQue.forEach((items)=>{invoiceDatailedData
+		 Ids = items.orderID
+		 console.log(Ids)
+		 if(invoiceData.salesInvoiceNo == Ids)
+		 {
+			 flag1=1;
+		 }
+
+	 })
+	}
+	this.setState({flag:flag1})
+}
+	
     getInvoiveDetails() {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
@@ -25,6 +88,8 @@ class Invoice extends React.Component {
 				invoiceData: response.data.data,
 				isLoading: false,
 			},
+			this.getOrderList()
+			
             );
 		})
 		.catch(error => {
@@ -39,7 +104,12 @@ class Invoice extends React.Component {
    
 	}
 
+	
+
     invoiceDatailedData() {
+	// if ()
+
+	// }
 		const { invoiceData } = this.state;
 		console.log('invoice data', invoiceData)
         return (
@@ -156,6 +226,7 @@ class Invoice extends React.Component {
 								<div style={{width: '20%', float: 'left', align:'right'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
                             </div>
 						</div>
+						<button onClick={this.getOrderID.bind(this)}>check</button>
                     </div>
 
                 }
@@ -164,21 +235,21 @@ class Invoice extends React.Component {
     }
     render() {
 		const UserLoggedIn = appCookie.get('isLoggedIn');
-		const { invoiceData } = this.state;
+		const { invoiceData,flag } = this.state;
 		// console.log('invoiceIDNo',invoiceData.salesInvoiceNo )
 
        return(
             <div className="invoiceTicket">
                 <div id="content">
-				{UserLoggedIn == 'true' && invoiceData 
-					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : 
-					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>Selected invoice is not applicable for you, please login</div>}
+				{/* {UserLoggedIn == 'true' && invoiceData && flag==1
+					  ? this.invoiceDatailedData() : 
+					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>Selected invoice is not applicable for you, please login</div>} */}
+			  {this.getOrderID.bind(this)}
 			  </div>
 				{ UserLoggedIn == 'true' && invoiceData 
 					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? 
 					<div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
 				</div> : ""}
-
             </div>
         );
     }
