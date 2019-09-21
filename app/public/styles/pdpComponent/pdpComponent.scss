@@ -1709,7 +1709,6 @@
  @include mix-md-ipad {
     
     .galleryArea{
-        .pdpDetails{width:100%;  } 
         .GallerytextBox{
             .wishlist-share{
                 .product-share{
@@ -1737,15 +1736,6 @@
   */
   @media (min-width: 768px) and (max-width: 1024px) {
     
-    //CSS
-	.galleryArea {
-		.no-paddingLeft {
-			width:100%;
-		}
-		.col-md-7 {
-			width:100%;
-		}
-	}
   }
   
 
