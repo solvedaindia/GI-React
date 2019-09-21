@@ -1,7 +1,7 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import { withRouter } from 'react-router-dom';
-import { invoicAPI } from '../../../../public/constants/constants';
+import { orderListAPI, invoicAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import '../../../../public/styles/myAccount/invoice.scss';
 import appCookie from '../../../utils/cookie';
@@ -10,12 +10,28 @@ class Invoice extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            invoiceData: null
+            invoiceData: null,
+            orderListData: null
         }
         // this.download = this.download.bind(this);
     }
     componentDidMount() {
         this.getInvoiveDetails();
+		
+		apiManager.get(orderListAPI)
+        .then(response => {
+          this.setState({
+            orderListData: response.data.data.orderList
+          });
+
+        })
+        .catch(error => {
+          this.setState({
+            isLoading: false,
+            error: error.message,
+          })
+        });
+		
     }
     getInvoiveDetails() {
 		apiManager
@@ -39,9 +55,10 @@ class Invoice extends React.Component {
    
 	}
 
-    invoiceDatailedData() {
-		const { invoiceData } = this.state;
-		console.log('invoice data', invoiceData)
+    invoiceDatailedData() 
+	{
+		
+		const { invoiceData } = this.state.invoiceData;
         return (
             <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
@@ -164,20 +181,25 @@ class Invoice extends React.Component {
     }
     render() {
 		const UserLoggedIn = appCookie.get('isLoggedIn');
-		const { invoiceData } = this.state;
-		// console.log('invoiceIDNo',invoiceData.salesInvoiceNo )
-
+		const { invoiceData } = this.state.invoiceData;
+		isMatchForUser = false;
+		this.state.orderListData.length !== 0 ? this.state.orderListData.map((orderInfo, key) => 
+		{
+			if(orderInfo.orderNo == invoiceData.orderNo)
+			{
+				isMatchForUser = true;
+			}
+            
+		}):isMatchForUser = false;
        return(
             <div className="invoiceTicket">
                 <div id="content">
-				{UserLoggedIn == 'true' && invoiceData 
-					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId   ? this.invoiceDatailedData() : 
-					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>Selected invoice is not applicable for you, please login</div>}
-			  </div>
-				{ UserLoggedIn == 'true' && invoiceData 
-					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId ? 
-					<div style={{width:'80%',  margin: 'auto', padding: '16px'}} className="clearfix">
-				</div> : ""}
+				{UserLoggedIn == 'true' && invoiceData  && isMatchForUser
+					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId? 
+					this.invoiceDatailedData() : 
+					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
+						Selected invoice is not applicable for you, please login</div>}
+					</div>
 
             </div>
         );
