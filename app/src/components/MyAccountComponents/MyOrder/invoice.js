@@ -181,28 +181,44 @@ class Invoice extends React.Component {
     }
     render() {
 		const UserLoggedIn = appCookie.get('isLoggedIn');
-		const { invoiceData } = this.state.invoiceData;
-		isMatchForUser = false;
-		this.state.orderListData.length !== 0 ? this.state.orderListData.map((orderInfo, key) => 
+		
+		if(this.state.invoiceData != null)
 		{
-			if(orderInfo.orderNo == invoiceData.orderNo)
+			const { invoiceData } = this.state.invoiceData;
+			var isMatchForUser = false;
+			(this.state.orderListData != null && this.state.orderListData.length !== 0)? this.state.orderListData.map((orderInfo, key) => 
 			{
-				isMatchForUser = true;
-			}
-            
-		}):isMatchForUser = false;
-       return(
-            <div className="invoiceTicket">
-                <div id="content">
-				{UserLoggedIn == 'true' && invoiceData  && isMatchForUser
-					&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId? 
-					this.invoiceDatailedData() : 
-					<div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
-						Selected invoice is not applicable for you, please login</div>}
-					</div>
+				if(orderInfo.orderNo == invoiceData.orderNo)
+				{
+					isMatchForUser = true;
+				}
+				
+			}):isMatchForUser = false;
+		   return(
+				<div className="invoiceTicket">
+					<div id="content">
+					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser
+						&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId? 
+						this.invoiceDatailedData() : 
+						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+							Selected invoice is not applicable for you, please login with linked user account</div>}
+						</div>
 
-            </div>
-        );
+				</div>
+			);
+		}
+		else
+		{
+			return(
+				<div className="invoiceTicket">
+					<div id="content">
+						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+							Invoice data is not available
+						</div>
+					</div>
+				</div>
+				);
+		}
     }
 }
 
