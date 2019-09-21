@@ -20,9 +20,9 @@ class TopContainer extends React.Component {
     removePrd = () => {
       if(this.props.count == 2) {
         if (this.props.isRouteUpdated === true) {
-          window.history.go(-2)
+          window.history.go(-2);
         } else {
-          window.history.go(-1)
+          window.history.go(-1);
         }
       }
       this.props.remove(this.props.product.uniqueID);
