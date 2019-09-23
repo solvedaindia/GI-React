@@ -127,6 +127,11 @@ class WelcomeBack extends React.Component {
         else {
           window.location.reload();
         }
+        appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
+        if (response.data.data.userDetails.pincode && response.data.data.userDetails.pincode !== '') {
+          appCookie.set('pincode', response.data.data.userDetails.pincode, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        }
         appCookie.set(
           `${accessTokenCookie}=${
           response.data.data.access_token
