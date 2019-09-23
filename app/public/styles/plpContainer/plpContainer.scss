@@ -151,6 +151,8 @@ section.tablecarousel {
     margin: 0 auto;
   }
   .grid3 {
+    display: flex;
+    flex-wrap: wrap;
     .productlist {
       flex: 0 0 33.33%;
 

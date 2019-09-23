@@ -185,21 +185,23 @@ class Invoice extends React.Component {
 		if(this.state.invoiceData != null)
 		{
 			const { invoiceData } = this.state.invoiceData;
+			console.log('invoiceData ', invoiceData);
+			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
-			(this.state.orderListData != null && this.state.orderListData.length !== 0)? this.state.orderListData.map((orderInfo, key) => 
-			{
-				if(orderInfo.orderNo == invoiceData.orderNo)
+			(
+				this.state.orderListData != null && this.state.orderListData.length !== 0)? this.state.orderListData.map((orderInfo, key) => 
 				{
-					isMatchForUser = true;
+					if(orderInfo.orderNo === invoiceData.orderNo)
+					{
+						isMatchForUser = true;
+					}
+					
 				}
-				
-			}):isMatchForUser = false;
+			):isMatchForUser = false;
 		   return(
 				<div className="invoiceTicket">
 					<div id="content">
-					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser
-						&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId? 
-						this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
