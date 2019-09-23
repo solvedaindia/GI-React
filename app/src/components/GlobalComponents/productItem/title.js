@@ -6,7 +6,7 @@ class Title extends React.Component {
   render() {
     return (
       <p className="heading text">
-        <h2 className="name">{this.props.titlePro.length > productTitleCharLimit ? trimTheSentence(this.props.titlePro, productTitleCharLimit) : this.props.titlePro } </h2>
+        <span className="name">{this.props.titlePro.length > productTitleCharLimit ? trimTheSentence(this.props.titlePro, productTitleCharLimit) : this.props.titlePro } </span>
         {this.props.descriptionPro ? (
           <span className="description">
             ({this.props.descriptionPro.length > productDescriptionCharLimit ? trimTheSentence(this.props.descriptionPro, productDescriptionCharLimit) : this.props.descriptionPro})

@@ -7,7 +7,7 @@ import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
+import {createCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
 
 
 import { Route, NavLink, Link, withRouter } from 'react-router-dom';
@@ -46,13 +46,13 @@ class SubCategoriesArray extends React.Component {
 			      var subcatName = String(subCategoryData.categoryName).toLowerCase();
 			
             if (this.props.categoryNamePro.toLowerCase().indexOf('rooms') > -1 ) {
-              routePath = `/rooms-${subcatName.split(' ').join('-')}/${subCategoryData.uniqueID}`;
+              routePath = `/rooms-${subCategoryData.categoryIdentifier.toLowerCase()}`;
             }
             else if (this.props.categoryNamePro.indexOf('Inspiration') > -1 ) {
               routePath = '/inspiration';
             }
             else {
-              routePath = `/furniture-${subcatName.split(' ').join('-')}/${subCategoryData.uniqueID}`;
+			  routePath = createCategoryPlpURL(subCategoryData.categoryIdentifier);
             }
             return (
               <li

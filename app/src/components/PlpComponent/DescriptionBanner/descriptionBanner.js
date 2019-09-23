@@ -17,13 +17,13 @@ class DescriptionBanner extends React.Component {
 
   componentDidMount() {
     const charLimit = this.props.descriptionDataPro.webCharLimit;
-	var trimStr = '';
-	if(this.props.descriptionDataPro.description != null && this.props.descriptionDataPro.description != undefined)
+	var trimStr;
+	if(this.props.descriptionDataPro.description != null)
 	{
 		trimStr = `${this.props.descriptionDataPro.description.substring(
-      0,
-      charLimit,
-    )}...`;
+		  0,
+		  charLimit,
+		)}...`;
 	}
     this.setState({
       splitData: trimStr,

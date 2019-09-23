@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
-import { formatPrice } from '../../utils/utilityManager';
+import {createCategoryPlpURL, formatPrice } from '../../utils/utilityManager';
 import {
   plpSubCatAPI,
   imagePrefix
@@ -90,7 +90,7 @@ export class SubCategory extends React.Component {
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
-              var routePath = `/furniture-${subCatListData.categoryName.split(' ').join('-')}/${subCatListData.uniqueID}`;
+			  var routePath = createCategoryPlpURL(subCatListData.categoryIdentifier);
               return (
                 <figure className="subCatSlider">
                     <Link to={routePath}>

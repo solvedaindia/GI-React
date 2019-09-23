@@ -32,9 +32,9 @@ export class CLPContainer extends React.Component {
       <>
         <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' } />
          <section className="clpBase">
-         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_CLP_META'}/>
-				</Helmet>
+           <Helmet>
+			 <Pixels espotName= {'GI_PIXEL_CLP_META'}/>
+		  </Helmet>
           <div className="slider">
             <CLPFullBanner {...this.props.match.params} />
           </div>

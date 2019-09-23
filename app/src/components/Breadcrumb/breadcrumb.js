@@ -36,13 +36,13 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
-              breadRoute = `/rooms-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/rooms-${data.value.toLowerCase()}`;
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value.toLowerCase()}`;
             }
             else {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value.toLowerCase()}`;
             }
 
             return (
@@ -76,13 +76,13 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1) {
-              breadRoute = `/rooms-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/rooms-${data.value}`;
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/furniture/${data.value.toLowerCase()}`;
             }
             else {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value}`;
+              breadRoute = `/furniture/${data.value.toLowerCase()}`;
             }
 
             return (
@@ -98,10 +98,10 @@ class Breadcrumb extends React.Component {
     }
 
     return (
-      this.props.match.path === '/rooms-:category/:id' ?
+      this.props.match.path === '/rooms-:id' ?
         (<div className='breadCrumb'>
           <span className='links'> <Link to='/'>Home ></Link></span>
-          <span className='links'> {this.props.match.params.category.replace(/-/g, " ")}</span>
+          <span className='links'> {this.props.match.params.id.replace(/-/g, " ")}</span>
         </div>)
         :
         <div className='breadCrumb'>

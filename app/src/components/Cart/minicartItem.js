@@ -65,7 +65,7 @@ class MinicartItem extends React.Component {
         <div className="minicartList">
           <a className="link" href={routePath} onClick={this.onNavigationLink}>
             <div className="imgBox">
-              <img alt="My Cart" src={this.props.dataPro.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} onError={require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+              <img alt="My Cart" src={this.props.dataPro.thumbnail !== '' ? `${imagePrefix}${this.props.dataPro.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
             </div>
           <div className="product-text">
             <p className="heading">{this.props.dataPro.productName}</p>

@@ -314,6 +314,21 @@ export function createPdpURL(prodName, skuId){
 }
 
 
+export function createCategoryPlpURL(categoryIdentifier)
+{
+	 var categoryRoutePath = `/`;
+	if(categoryIdentifier != undefined && categoryIdentifier != '')
+	{
+		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
+		catIdentifier = catIdentifier.replace(/ /g, "");
+        categoryRoutePath = `/furniture/${catIdentifier}`;;
+
+	}
+    return categoryRoutePath;
+}
+
+
+
 
 function escapeRegExp(string){
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

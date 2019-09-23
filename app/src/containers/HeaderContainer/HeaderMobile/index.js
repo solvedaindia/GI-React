@@ -141,7 +141,7 @@ class HeaderMobile extends React.Component {
             </Link>
           </div>
           <ul className="mob-mini-profile-nav">
-            <li>
+            <li key={pageName}>
               <span className='navigationTitle'>{pageName}</span>
             </li>
           </ul>

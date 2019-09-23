@@ -11,7 +11,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../../utils/utilityManager';
+import {createCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../../utils/utilityManager';
 
 export class HeaderSearch extends React.Component {
   constructor(props) {
@@ -91,7 +91,7 @@ export class HeaderSearch extends React.Component {
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-        var categoryRoutePath = `/furniture-${item.categoryName.split(' ').join('-').toLowerCase()}/${item.categoryId}`;;
+        routePath = createCategoryPlpURL(item.categoryIdentifier);
         var searchStr = item.categoryName;
         searchStr += ` in ${item.parentRoom}`;
         if (index < 4) {

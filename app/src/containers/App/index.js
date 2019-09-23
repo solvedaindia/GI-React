@@ -300,10 +300,12 @@ export default class App extends React.Component {
 		<div id="mainContainer">
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-		  <Route path="/rooms-kitchen/:id" component={Kitchens} />
-		  <Route path="/rooms-wardrobes/:id" component={WardrobesContainer} />
-          <Route path="/rooms-:category/:id" component={ClpContainer} />
-          <Route path="/furniture:id" component={PlpContainer} />
+		  <Route path="/rooms-kitchen_s" component={Kitchens} />
+		  <Route path="/rooms-kitchen" component={Kitchens} />
+		  <Route path="/rooms-wardrobes" component={WardrobesContainer} />
+		  <Route path="/rooms-wardrobes_S" component={WardrobesContainer} />
+          <Route path="/rooms-:id" component={ClpContainer} />
+          <Route path="/furniture/:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />

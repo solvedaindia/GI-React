@@ -20,7 +20,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
+import {createCategoryPlpURL,  getReleventReduxState } from '../../../utils/utilityManager';
 import appCookie from '../../../utils/cookie';
 
 export class HeaderMobile extends React.Component {
@@ -137,13 +137,11 @@ export class HeaderMobile extends React.Component {
                     subCatData.categoryName
                   ).toLowerCase();
                   if (catName.toLowerCase().indexOf('rooms') > -1) {
-                    routePath = `/rooms-${subcatName.split(' ').join('-')}/${
-                      subCatData.uniqueID
+                    routePath = `/rooms-${
+                      subCatData.categoryIdentifier.split(' ').join('').toLowerCase()
                       }`;
                   } else {
-                    routePath = `/furniture-${subcatName
-                      .split(' ')
-                      .join('-')}/${subCatData.uniqueID}`;
+                    routePath = createCategoryPlpURL(subCatData.categoryIdentifier);
                   }
 
                   return (

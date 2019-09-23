@@ -19,7 +19,7 @@ class CLPReadMore extends React.Component {
 
   	getReadMoreData(id) {
     apiManager
-      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id}`)
+      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id.toUpperCase().replace(' ', '')}`)
 		.then(response => {
 			const {data} = response || {};
 			this.setState({
