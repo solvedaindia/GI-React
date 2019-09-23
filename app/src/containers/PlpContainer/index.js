@@ -184,6 +184,7 @@ export class PlpContainer extends React.Component {
           showBestSeller: false,
           newSearchTrigger: true,
           spellCheckCount: 0,
+          emptySearchItem: null,
         });
         this.fetchPLPProductsData();
       } else {
@@ -316,7 +317,7 @@ export class PlpContainer extends React.Component {
                 showBestSeller: false,
                 newSearchTrigger: false,
               });
-            } else if (response.data.data.spellCheck.length !== 0) {
+            } else if (response.data.data.spellCheck.length !== 0 && response.data.data.productList.length === 0 && !isFromScroll) {
               this.setState({
                 emptySearchItem: this.onSearchNoResut(decodeURI(searchText), response.data.data.spellCheck),
                 showBestSeller: false,
@@ -444,7 +445,7 @@ export class PlpContainer extends React.Component {
       return (
         <div className="noResultfound">
           <div className="label-noresult">
-            No results forr “{formateSearchKeyword(searchText, false)}”
+            No results for “{formateSearchKeyword(searchText, false)}”
           </div>
           <div className="product-serchGuide">
             <div className="label-text">Did you mean: </div>
@@ -577,6 +578,8 @@ export class PlpContainer extends React.Component {
     }
     const params = new URLSearchParams(this.state.searchKeyword);
     var keywoard = params.get('keyword');
+    const paramsRoute = new URLSearchParams(this.props.location.search);
+    var keywoardRoute = paramsRoute.get('keyword');
     if (this.state.isFromSearch.includes('/search') && plpData.length != 0) {
       keywoard = formateSearchKeyword(params.get('keyword'), false);
       titleItem = (
@@ -626,7 +629,7 @@ export class PlpContainer extends React.Component {
             <div>
               <div className="noResultfound">
                 <div className="label-noresult">
-                  No results for “{formateSearchKeyword(keywoard, false)}”
+                  No results for “{formateSearchKeyword(keywoardRoute, false)}”
               </div>
               </div>
               <div className="Search-bestseller container">
