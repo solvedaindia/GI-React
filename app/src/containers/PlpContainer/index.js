@@ -679,7 +679,8 @@ export class PlpContainer extends React.Component {
 
 
 
-        {this.state.isMobile && plpData.length !== 0 ? <div className='sortfilter'>
+        {this.state.isMobile && this.state.productCount !== null && this.state.productCount.length !== 0 ?
+		<div className='sortfilter'>
           <RWDSort sortingIndexPro={this.state.plpSorting} />
           <RWDFilterMain filterDataPro={filterData} />
 

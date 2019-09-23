@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import '../../../public/styles/breadcrumb.scss';
+import { createCategoryPlpURL } from '../../utils/utilityManager';
 
 class Breadcrumb extends React.Component {
   constructor(props) {
@@ -36,13 +37,13 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
-              breadRoute = `/rooms-${data.value.toLowerCase()}`;
+              breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value.toLowerCase()}`;
+              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
             }
             else {
-              breadRoute = `/furniture-${breadLabel.split(' ').join('-').toLowerCase()}/${data.value.toLowerCase()}`;
+              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
             }
 
             return (
@@ -76,13 +77,13 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1) {
-              breadRoute = `/rooms-${data.value}`;
+              breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = `/furniture/${data.value.toLowerCase()}`;
+              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
             }
             else {
-              breadRoute = `/furniture/${data.value.toLowerCase()}`;
+              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
             }
 
             return (
