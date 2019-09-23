@@ -298,12 +298,13 @@ class PdpComponent extends React.Component {
  // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
-  if(window.screen.width > 993 && window.screen.width < 1279){
-	var box1=955;
-  }else{
-	var box1=168;
-  }
-  if (document.getElementById("priceId") && document.getElementById("box3")) {
+  var box1=168;
+//   if(window.screen.width > 993 && window.screen.width < 1279){
+// 	//var box1=955;
+//   }else{
+// 	var box1=168;
+//   }
+  //if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
   var box3 = document.getElementById("box3").offsetTop;
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
@@ -313,7 +314,6 @@ class PdpComponent extends React.Component {
   var scrollbox1=box1-scrollTop;
   var scrollbox2=box2-scrollTop;
   var scrollbox3=box3-scrollTop;
-
   
   if(scrollbox1 <= headeroffset){
     document.getElementById("Pdpstickybar").classList.add('slidedown');			
@@ -368,7 +368,7 @@ class PdpComponent extends React.Component {
   else {
     header.classList.remove("sticky");
   }
-  }
+  //}
 }
 // handleScroll function End
   render() { 
