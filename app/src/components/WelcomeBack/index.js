@@ -111,7 +111,7 @@ class WelcomeBack extends React.Component {
         (this.state.loginStatus = 'Logout');
     } else {
       (this.state.userType = 'Hello Guest!'),
-      (this.state.loginStatus = 'Login/Register');
+        (this.state.loginStatus = 'Login/Register');
     }
   }
 
@@ -121,11 +121,16 @@ class WelcomeBack extends React.Component {
     apiManager
       .post(userLoginAPI, data)
       .then(response => {
-        window.location.reload();
+        if (window.location.pathname.includes('myAccount')) {
+          window.location.assign('/')
+        }
+        else {
+          window.location.reload();
+        }
         appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
         appCookie.set(
           `${accessTokenCookie}=${
-            response.data.data.access_token
+          response.data.data.access_token
           };path=/;expires=''`,
         );
         this.setState({
@@ -137,7 +142,7 @@ class WelcomeBack extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-     
+
         callbackFunc(errorMessage);
       });
   }
@@ -159,7 +164,7 @@ class WelcomeBack extends React.Component {
     }
     return (
       <div>
-       
+
         <Modal
           className="welcomeBack"
           size="lg"
