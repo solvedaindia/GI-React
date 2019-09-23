@@ -21,7 +21,7 @@ import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
 import { pinCodeAPI, pinCodeAPIBundle, breadcrumbAPI } from '../../../public/constants/constants';
-import { isMobile } from '../../utils/utilityManager';
+import { isMobile,createPdpURL } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {PRODUCT_ID} from '../../constants/app/pdpConstants';
 
@@ -60,22 +60,21 @@ class PdpComponent extends React.Component {
 		} else {
 			skuId = this.props.matchParams.skuId;
 		}
-
 		if(this.props.data.type === 'product') {
 			this.props.data.skuData.map(skuLevelData => {
-				if (skuId === skuLevelData.uniqueID) {
+				if (skuId === skuLevelData.partNumber ||  skuId === skuLevelData.uniqueID) {
 					this.getActualResolvedData(this.props.data.skuData, skuLevelData, this.props.data.type);
 				}
 			});
 		} else if(this.props.data.type === 'kit') {
 			this.props.data.kitData.map(skuLevelData => {
-				if (skuId === skuLevelData.uniqueID) {
+				if (skuId === skuLevelData.partNumber ||  skuId === skuLevelData.uniqueID) {
 					this.getActualResolvedData(this.props.data.kitData, skuLevelData, this.props.data.type);
 				}
 			});
 		} else if(this.props.data.type === 'bundle') {
 			this.props.data.bundleData.map(skuLevelData => {
-				if (skuId === skuLevelData.uniqueID) {
+				if (skuId === skuLevelData.partNumber ||  skuId === skuLevelData.uniqueID) {
 					this.getActualResolvedData(this.props.data.bundleData, skuLevelData, this.props.data.type);
 				}
 			});
@@ -257,12 +256,9 @@ class PdpComponent extends React.Component {
 			});
 		});
 
-		if (this.props.matchParams.skuId !== resolvedSkuData.uniqueID) {
-			this.props.historyData.push(
-				`/pdp/furniture-${resolvedSkuData.productName
-				.toLowerCase()
-				.replace(/ /g, '-')}/${resolvedSkuData.uniqueID}`,
-			);
+		if (this.props.matchParams.skuId !== resolvedSkuData.partNumber) 
+		{
+			this.props.historyData.push(createPdpURL(resolvedSkuData.productName, resolvedSkuData.partNumber));
 		}
 	}
 
@@ -303,9 +299,9 @@ class PdpComponent extends React.Component {
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
   if(window.screen.width > 993 && window.screen.width < 1279){
-	var box1=1580;
+	var box1=955;
   }else{
-	var box1=163
+	var box1=168;
   }
   if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
@@ -313,7 +309,6 @@ class PdpComponent extends React.Component {
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
   var scrollbox1;
-
 
   var scrollbox1=box1-scrollTop;
   var scrollbox2=box2-scrollTop;

@@ -85,7 +85,11 @@ section.tablecarousel {
 }
 /*------Featured Categories
 -------------------------------------*/
-
+.tablecarousel {
+	.slick-prev, .slick-next{
+		z-index:3;
+	}
+}
 .featureCarouselbox {
   .slick-prev {
     left: -20px;

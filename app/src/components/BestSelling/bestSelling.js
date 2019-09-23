@@ -7,7 +7,7 @@ import {
   espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import { is, formatPrice } from '../../utils/utilityManager';
+import { is, formatPrice,createPdpURL } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
@@ -88,8 +88,8 @@ class BestSeller extends React.Component {
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
-              var productname = String(sellerItemData.productName).toLowerCase()
-              var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${sellerItemData.uniqueID}`
+              var productname = String(sellerItemData.productName).toLowerCase();
+              var routePath = createPdpURL(sellerItemData.productName, sellerItemData.partNumber);
 
               return (
                 <figure key={index} className="bsSlides">

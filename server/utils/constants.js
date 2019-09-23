@@ -51,6 +51,7 @@ module.exports = Object.freeze({
   getCityAndState: `${prodWcsResourceUrl}/{{storeId}}/pincode/getCityState/{{pincode}}`,
   applyCartPromotion: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/assigned_promotion_code`,
   removeCartPromotion: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/assigned_promotion_code/{{promoCode}}`,
+  getCartPromotion: `${prodWcsResourceUrl}/{{storeId}}/cart/@self/assigned_promotion_code`,
   findInvertory: `${prodWcsResourceUrl}/{{storeId}}/inventory/byPartNumber/{{partNumber}}?zipCode={{pinCode}}&quantity={{quantity}}&onlineStoreName=GodrejInterioESite`,
   getPromotionsList: `${prodWcsResourceUrl}/{{storeId}}/promotion?q=all`,
   getPromoCode: `${prodWcsResourceUrl}/{{storeId}}/custompromotion/getpromocode/{{promotionId}}`,

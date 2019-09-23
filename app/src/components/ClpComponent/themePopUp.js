@@ -4,6 +4,7 @@ import {imagePrefix} from '../../../public/constants/constants';
 import '../../../public/styles/clpContainer/themeData.scss';
 import {VIEW_DETAILS } from '../../constants/app/clpConstants';
 import {isMobile } from '../../utils/utilityManager';
+import {createPdpURL} from '../../utils/utilityManager';
 
 class ThemeData extends React.Component {
 	constructor(props) {
@@ -74,13 +75,49 @@ class ThemeData extends React.Component {
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
         var productname = String(itemDetail.productName).toLowerCase()
-        var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${itemDetail.uniqueID}`;
-
+        var routePath = createPdpURL(itemDetail.productName, itemDetail.partNumber)
+		var widthContainer = $('.content-childTheme').width();
+		var heightContainer = $('.content-childTheme').height();
+		var clickY = Number(x) * heightContainer /100;
+		var clickX = Number(y) * widthContainer /100;
+		var leftX=0
+		var leftX=clickX+15
+		var topY=0
+		var topY = clickY+30
+		var width = 200
+		var height = 110
+		if(isMobile())
+		{
+			if((Number(widthContainer)-clickX) < 200)
+			{
+				leftX = (Number(widthContainer)  - 200);
+			}
+			
+			if((Number(heightContainer)-clickY) < 120)
+			{
+				topY = clickY - 120;
+			}
+			
+		}
+		else{
+			width=250
+			height = 120
+			if((Number(widthContainer)-clickX) < 300)
+			{
+				leftX = (Number(widthContainer)  - 300);
+			}
+			
+			if((Number(heightContainer)-clickY) < 160)
+			{
+				topY = clickY - 130;
+			}
+		}
+		
         return(
             
             <div className='details'
                 onClick={this.props.closePopUp}
-                style={{top:`${Number(x)+5}%`, left:`${Number(y)+5}%`, margin:`${this.state.currentLeftCoords}`} }
+                style={{top:`${topY}px`, left:`${leftX}px`, width:`${width}px`, height:`${height}px` }}
             >
                 <figure className='tnImg'>
                     <img

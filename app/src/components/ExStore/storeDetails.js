@@ -76,7 +76,7 @@ export class StoreDetails extends React.Component {
                                     to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
                                 >
                                     <span className='place'> {storeData.storeName}</span>
-                                    <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} `{KM_AWAY}`</span>
+                                    <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} {KM_AWAY}</span>
                                 </Link>
                             </p>
                         }

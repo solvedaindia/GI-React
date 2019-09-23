@@ -304,6 +304,17 @@ export function formatPrice(priceValue) {
     return parseInt(priceValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+export function createPdpURL(prodName, skuId){
+	if(prodName != undefined && prodName != '')
+	{
+		prodName =prodName.toLowerCase();
+		return '/pdp/furniture-' + prodName.split(' ').join('-') + '/' + skuId;
+	}
+    return '/pdp/furniture-' + prodName + '/' + skuId;
+}
+
+
+
 function escapeRegExp(string){
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
