@@ -43,12 +43,11 @@ class Wishlist extends React.Component {
   }
 
   onWishlistClick(e) {
-    if (e.target && e.target.name === 'viewWishListButton') {
-      return;
-    }
-
     const wishlistArr = getOnlyWishlistUniqueIds();
     if (getCookie('isLoggedIn') === 'true') {
+      if (e.target && e.target.name === 'viewWishListButton') {
+        return;
+      }
       if (wishlistArr.includes(this.props.uniqueId)) {
         this.removeFromWishlistAPI();
       } else {

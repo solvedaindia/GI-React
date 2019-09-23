@@ -45,7 +45,8 @@ class UserAccInfo extends React.Component {
   }
 
   onLoginRegisterClick() {
-    this.setState({ showLoginRegisterMain: true });
+    appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+    this.setState({ showLoginRegisterMain: true }); 
   }
 
   welcomeBackCallback(fromForgot) {
