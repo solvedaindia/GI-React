@@ -18,7 +18,7 @@ class Shipping extends React.Component {
 
   render() {
     return (
-        <div className='shippingPage'>
+        <div className='staticpage shippingPage'>
         <Breadcrumb {...this.props.match.params} staticName = {'Shipping Information'}/>
         <ContentEspot espotName={ 'GI_SHIPPING_PAGE_1' } />
         <ContentEspot espotName={ 'GI_SHIPPING_PAGE_2' } />

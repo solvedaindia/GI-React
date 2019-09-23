@@ -90,6 +90,9 @@
         }
 
     }
+    .descriptionBanner{
+       margin-top:111px;
+    }
 }
 
 
@@ -241,7 +244,11 @@
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
   */
   @media (min-width: 481px) and (max-width: 767px) {
-    
+    .clpBase {
+        .descriptionBanner {
+            margin-top: 40px;
+        }
+    }
     //CSS
     
   }
@@ -251,7 +258,11 @@
     #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
   */
   @include mix-xs {
-
+    .clpBase {
+        .descriptionBanner {
+            margin-top: 40px;
+        }
+    }
     //CSS
 
   }

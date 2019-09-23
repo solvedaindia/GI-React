@@ -6,6 +6,7 @@ import {FREE } from '../../constants/app/cartConstants';
 import {SHIPPING_CHARGES } from '../../constants/app/cartConstants';
 import {OFF } from '../../constants/app/cartConstants';
 import {QUANTITY } from '../../constants/app/cartConstants';
+import {createPdpURL} from '../../utils/utilityManager';
 
 class MinicartItem extends React.Component {
   constructor(props){
@@ -56,8 +57,8 @@ class MinicartItem extends React.Component {
       );
     }
 
-    var productname = String(this.props.dataPro.productName).toLowerCase()
-		var routePath = `/pdp/furniture-${productname.split(' ').join('-')}/${this.props.dataPro.uniqueID}`
+    var productname = String(this.props.dataPro.productName).toLowerCase();
+	var routePath = createPdpURL(this.props.dataPro.productName, this.props.dataPro.partNumber);
     return (
       <>
       

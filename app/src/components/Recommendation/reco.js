@@ -4,7 +4,7 @@ import {
     recommendationAPI,
 
 } from '../../../public/constants/constants';
-import { formatPrice } from '../../utils/utilityManager';
+import {createPdpURL, formatPrice } from '../../utils/utilityManager';
 import { Link } from 'react-router-dom';
 
 import '../../../public/styles/reco/reco.scss';
@@ -45,17 +45,17 @@ class Recommendation extends React.Component {
         const getProdName = !!recoData && recoData.recommendationArray.map((prodName) => {
             return prodName.productName;
         });
-        const getUniqueID = !!recoData && recoData.recommendationArray.map((id) => {
-            return id.uniqueID;
+        const getSkuID = !!recoData && recoData.recommendationArray.map((id) => {
+            return id.partNumber;
         });
         
         const productname1 = String(getProdName[0]).toLowerCase();
         const productname2 = String(getProdName[1]).toLowerCase();
         const productname3 = String(getProdName[2]).toLowerCase();
         
-        const routePath1 = `/pdp/furniture-${productname1.split(' ').join('-')}/${getUniqueID[0]}`;
-        const routePath2 = `/pdp/furniture-${productname2.split(' ').join('-')}/${getUniqueID[1]}`;
-        const routePath3 = `/pdp/furniture-${productname3.split(' ').join('-')}/${getUniqueID[2]}`;
+        const routePath1 = createPdpURL(productname1, getSkuID[1]);
+        const routePath2 = createPdpURL(productname2, getSkuID[2]);
+        const routePath3 = createPdpURL(productname3, getSkuID[3]);
         
         return (
             !!recoData &&
