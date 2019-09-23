@@ -492,7 +492,6 @@ export class PlpContainer extends React.Component {
     const windowHeight = scrollYindex;
     const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight;
 
-    console.log('is Has more --- ', hasMore, windowHeight);
     if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);

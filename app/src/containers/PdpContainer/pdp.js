@@ -28,9 +28,7 @@ class PdpContainer extends React.Component {
 
 	callPdpApi() {
 		const skuId = this.props.match.params.skuId;
-		console.log(skuId);
 		apiManager.get(pdpApi2 + skuId).then(response => {
-			console.log(response.data);
 			this.setState({
 				pdp: response.data,
 				pdpLoading: false,

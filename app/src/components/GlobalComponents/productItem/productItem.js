@@ -88,8 +88,6 @@ class ProductItem extends React.Component {
       };
     }
 
-    console.log('ididiiddi ---- ', data)
-// return
     apiManager
       .post(addToCart, data)
       .then(response => {

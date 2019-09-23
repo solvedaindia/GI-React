@@ -92,7 +92,8 @@ class StoreLocator extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount() 
+	{
         let pincodeVal =  appCookie.get('pincode');
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName) {

@@ -373,8 +373,6 @@ class PdpComponent extends React.Component {
 // handleScroll function End
   render() { 
     const { isLoading } = this.state;
-	console.log('state - ' , this.props.data);
-	console.log('state - ' , this.state);
 	let isSticky = true;
 	let stateAttr = {};
 

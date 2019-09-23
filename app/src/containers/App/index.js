@@ -195,24 +195,32 @@ export default class App extends React.Component {
   }
 
   // IP Data Call.
-	getIPData() {
-		if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") && appCookie.get('pincodeUpdated') !== true) {
-			var request = new XMLHttpRequest();
-			request.onreadystatechange = function () {
-				if (this.readyState === 4 && this.status == 200) {
-					var ipData = JSON.parse(this.responseText);
-					var ipDataPostCode = ipData.postal;
-					appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-				}
-				else {
-					appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-				}
-			};
-			request.open('GET', ipDataApi);
-			request.setRequestHeader('Accept', 'application/json');
-			request.send();
-		}
-		
+	getIPData() 
+	{
+		navigator.geolocation.watchPosition(function(position) {
+			if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") 
+				&& appCookie.get('pincodeUpdated') !== true) 
+			{
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function () {
+					if (this.readyState === 4 && this.status == 200) {
+						var ipData = JSON.parse(this.responseText);
+						var ipDataPostCode = ipData.postal;
+						appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+					}
+					else {
+						appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+					}
+				};
+				request.open('GET', ipDataApi);
+				request.setRequestHeader('Accept', 'application/json');
+				request.send();
+			}
+		  },
+		  function(error) {
+			if (error.code == error.PERMISSION_DENIED)
+			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+		  });
   	}
   
   getCurrentLocation() {
@@ -220,7 +228,8 @@ export default class App extends React.Component {
       navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     }
 
-    function showPosition(position) {
+    function showPosition(position) 
+	{
       Geocode.setApiKey(mapKey);
       Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
         response => {

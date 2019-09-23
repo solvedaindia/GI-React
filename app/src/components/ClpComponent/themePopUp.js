@@ -80,11 +80,6 @@ class ThemeData extends React.Component {
 		var heightContainer = $('.content-childTheme').height();
 		var clickY = Number(x) * heightContainer /100;
 		var clickX = Number(y) * widthContainer /100;
-		console.log(clickY);
-		console.log(heightContainer);
-		console.log(clickX);
-		console.log(widthContainer);
-		console.log('-----------------');
 		var leftX=0
 		var leftX=clickX+15
 		var topY=0
