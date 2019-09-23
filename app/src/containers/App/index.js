@@ -197,9 +197,9 @@ export default class App extends React.Component {
   // IP Data Call.
 	getIPData() 
 	{
+    appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
 		navigator.geolocation.watchPosition(function(position) {
-			if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") 
-				&& appCookie.get('pincodeUpdated') !== true) 
+			if(appCookie.get('pincodeUpdated') !== true) 
 			{
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function () {
@@ -227,26 +227,7 @@ export default class App extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     }
-
-    function showPosition(position) 
-	{
-      Geocode.setApiKey(mapKey);
-      Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
-        response => {
-          const address = response.results[0].formatted_address;
-          const data = address.replace(', India', '');
-          const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
-            appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
-            this.setState({
-              loading: false
-            })
-          }          
-        },
-        error => {
-        }
-      );
-     }
+    function showPosition(position) { }
     }
 
   checkCookiePolicyPopup() {
