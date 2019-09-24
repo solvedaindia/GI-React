@@ -236,8 +236,13 @@ export class PlpContainer extends React.Component {
     });
   }
 
-  fetchAdBannerData() {
-    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
+  fetchAdBannerData() 
+  {
+	  var adBannerEspotName = `GI_PLP_AD_BANNER`;
+	  if(categoryId != undefined)
+	  {
+		adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
+	  }
     if (this.state.isFromSearch.includes('/search')) {
       adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
     }
@@ -303,6 +308,7 @@ export class PlpContainer extends React.Component {
           },
         })
         .then(response => {
+			console.log(response);
           if (this.state.browserFilters.length !== 0) {
             this.resolveBrowserFilters(
               response.data.data.facetData,
@@ -347,7 +353,7 @@ export class PlpContainer extends React.Component {
             }
           }
 
-
+console.log(this.state.isCatDetails);
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
           } else {
@@ -369,7 +375,9 @@ export class PlpContainer extends React.Component {
             browserFilters: [],
           });
         })
-        .catch(error => {
+        .catch(error => 
+		{
+			console.log(error);
           this.setState({
             error: error.response.data.error.error_message,
             isLoading: false,
