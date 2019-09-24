@@ -310,12 +310,16 @@
                     padding: $base*2;
                     .removeBtn {
                         position: absolute;
-                        right: 0;
+                        right: 15px;
                         width: $base*3.5;
                         border: none;
                         color: $cerulean;
                         font-family: $font-bold;
                         background-color: transparent;
+                        .cancelBtn{
+                            width:18px;
+                            margin: 0;
+                        }
                     } 
                 }
                 .promoError {

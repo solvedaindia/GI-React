@@ -25,6 +25,9 @@
     border: none;
     font-family: $font-medium;
   }
+  .btn-blackbg[disabled], html input[disabled]{
+    background: $disable;
+ }
   .btn-cancelborder {
     background: $colorwhite;
     padding: 11px 0;
