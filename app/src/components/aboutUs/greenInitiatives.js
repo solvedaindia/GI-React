@@ -49,8 +49,8 @@ export default class GreenInitiatives extends Component {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     centerMode: false,
     responsive: [
       {
@@ -82,18 +82,18 @@ export default class GreenInitiatives extends Component {
   };
     return (
         <div className='container'>
-          <h1 className='greenTitle'>{this.state.title}</h1>
+          <h2 className='greenTitle'>{this.state.title}</h2>
 			<Slider {...settings}>
 			  {this.state.slides.map(function(slide) {
 				return (
 				  <div key={slide}>               
-					  <div className='col-md-4'>
+					  <div className='col-md-2'>
 						<a href={slide.onClickUrl} >
 						  <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
 						</a>
 					  </div>
 					  <div className='col-md-8'>
-						<h2 className='ULcontent'>{slide.content_title}</h2>
+						<h5 className='ULcontent'>{slide.content_title}</h5>
 					  <p className='ULparagraph'>{slide.desc}</p>
 					  </div>
 					</div>
