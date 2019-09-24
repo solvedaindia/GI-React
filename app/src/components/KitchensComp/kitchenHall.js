@@ -50,6 +50,8 @@ class KitchenHall extends React.Component {
       dots: false,
       infinite: true,
       speed: 500,
+	  autoplay: true,
+      autoplaySpeed: 2000,
       slidesToShow: 3,
       slidesToScroll:2,
     };

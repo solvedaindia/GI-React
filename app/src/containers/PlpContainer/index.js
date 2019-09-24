@@ -614,9 +614,9 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START'} />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}/>
         <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META'} />
+          <Pixels espotName={'GI_PIXEL_PLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')} />
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}
@@ -685,7 +685,7 @@ export class PlpContainer extends React.Component {
           <RWDFilterMain filterDataPro={filterData} />
 
         </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END'} />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')} />
 
       </>
     );

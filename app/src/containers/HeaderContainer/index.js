@@ -35,6 +35,7 @@ export class HeaderContainer extends React.Component {
 
     return (
       <>
+					
       <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } />
       <header className="appheader" id='header'>
         <div className="logo">

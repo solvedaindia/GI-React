@@ -16,10 +16,14 @@ class Invoice extends React.Component {
         // this.download = this.download.bind(this);
     }
     componentDidMount() {
-        this.getInvoiveDetails();
+        this.getInvoiceDetails();
+		
+		console.log(orderListAPI);
 		
 		apiManager.get(orderListAPI)
-        .then(response => {
+        .then(response => 
+		{
+				console.log(response);
           this.setState({
             orderListData: response.data.data.orderList
           });
@@ -33,7 +37,7 @@ class Invoice extends React.Component {
         });
 		
     }
-    getInvoiveDetails() {
+    getInvoiceDetails() {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
@@ -59,7 +63,7 @@ class Invoice extends React.Component {
     invoiceDatailedData() 
 	{
 		
-		const { invoiceData } = this.state.invoiceData;
+		let  invoiceData  = this.state.invoiceData;
         return (
             <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
@@ -182,17 +186,19 @@ class Invoice extends React.Component {
     }
     render() {
 		const UserLoggedIn = appCookie.get('isLoggedIn');
-		
+		//this.getInvoiceDetails();
 		if(this.state.invoiceData != null)
 		{
-			const { invoiceData } = this.state.invoiceData;
+			var invoiceData = this.state.invoiceData;
 			console.log('invoiceData ', invoiceData);
 			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
-			(
-				this.state.orderListData != null && this.state.orderListData.length !== 0)? this.state.orderListData.map((orderInfo, key) => 
+			console.log(this.state.orderListData);
+			(this.state.orderListData != null && this.state.orderListData.length !== 0)? 
+				this.state.orderListData.map((orderInfo, key) => 
 				{
-					if(orderInfo.orderNo === invoiceData.orderNo)
+					console.log('orderInfo.orderNo ', orderInfo.orderID);
+					if(orderInfo.orderID === invoiceData.orderNo)
 					{
 						isMatchForUser = true;
 					}
