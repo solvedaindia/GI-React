@@ -15,7 +15,7 @@ class DescriptionBanner extends React.Component {
     };
   }
 
-  componentDidMount() {
+  initBanner() {
     const charLimit = this.props.descriptionDataPro.webCharLimit;
 	var trimStr;
 	if(this.props.descriptionDataPro.description != null)
@@ -30,7 +30,12 @@ class DescriptionBanner extends React.Component {
       finalData: trimStr,
     });
   }
+  
+  componentDidMount() {
+    this.initBanner();
+  }
 
+  
   readMoreClicked() {
     if (this.state.isReadMore) {
       this.setState({

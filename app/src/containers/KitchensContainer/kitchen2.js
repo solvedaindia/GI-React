@@ -59,7 +59,7 @@ return (
       </div>
       <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
       <ExKitchens />
-      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR' } />
+      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } />
       <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
       <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
     </div>
