@@ -93,7 +93,7 @@ class UserAccInfo extends React.Component {
         }
         else {
           var username = String(response.data.data.name);
-          if (response.data.data.pincode && response.data.data.pincode !== '') {
+          if (response.data.data.pincode && response.data.data.pincode !== '' && appCookie.get('pincodeUpdated') !== 'true') {
             appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
             appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
           }

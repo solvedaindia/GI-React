@@ -240,6 +240,7 @@ export const shipModeAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${imgHost}/${imageStore}`;
+export const webUrl = 'www.godrejinterio.com';
 
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;

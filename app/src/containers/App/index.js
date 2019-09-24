@@ -197,10 +197,12 @@ export default class App extends React.Component {
   // IP Data Call.
 	getIPData() 
 	{
-    appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+    if (appCookie.get('pincode') === null || appCookie.get('pincode') === "") {
+      appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+    }
+    if(appCookie.get('pincodeUpdated') !== 'true') {
 		navigator.geolocation.watchPosition(function(position) {
-			if(appCookie.get('pincodeUpdated') !== true) 
-			{
+			
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function () {
 					if (this.readyState === 4 && this.status == 200) {
@@ -215,12 +217,13 @@ export default class App extends React.Component {
 				request.open('GET', ipDataApi);
 				request.setRequestHeader('Accept', 'application/json');
 				request.send();
-			}
+			
 		  },
 		  function(error) {
 			if (error.code == error.PERMISSION_DENIED)
 			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-		  });
+      });
+    }
   	}
   
   getCurrentLocation() {
