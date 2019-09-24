@@ -30,10 +30,10 @@ export class CLPContainer extends React.Component {
   render() {
     return (
       <>
-        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' } />
+        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
          <section className="clpBase">
            <Helmet>
-			 <Pixels espotName= {'GI_PIXEL_CLP_META'}/>
+			 <Pixels espotName= {'GI_PIXEL_CLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}/>
 		  </Helmet>
           <div className="slider">
             <CLPFullBanner {...this.props.match.params} />
@@ -45,7 +45,7 @@ export class CLPContainer extends React.Component {
           <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />
           <CLPReadMore {...this.props.match.params} />
         </section>
-        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_END' } />
+        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_END' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
 
       </>
     );

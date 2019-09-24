@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { getCookie } from '../../utils/utilityManager';
 
 const Footerlinks = props => {
   let footerLinksData = '';
@@ -15,10 +16,18 @@ const Footerlinks = props => {
             {
 				item.children.map((litem, i) => (
 				  <li className="list" key={i}>
-					if(litem.action
-					<a className='link' href={litem.action}>
-						{litem.text}
-					</a>
+					  {litem.action.indexOf('#') == -1?
+						   <Link
+							className="link"
+							to={{ pathname: litem.action, state: { pincode: getCookie('pincode') } }}
+						  >
+							{litem.text}
+						  </Link>
+					  :
+						<a className='link' href={litem.action}>
+							{litem.text}
+						</a>
+					  }
 				  </li>
 				))
 			}

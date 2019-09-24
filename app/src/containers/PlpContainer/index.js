@@ -236,8 +236,13 @@ export class PlpContainer extends React.Component {
     });
   }
 
-  fetchAdBannerData() {
-    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId}`;
+  fetchAdBannerData() 
+  {
+	  var adBannerEspotName = `GI_PLP_AD_BANNER`;
+	  if(categoryId != undefined)
+	  {
+		adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
+	  }
     if (this.state.isFromSearch.includes('/search')) {
       adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
     }
@@ -267,7 +272,7 @@ export class PlpContainer extends React.Component {
 
   fetchMarketingTextBannerData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data) {
           this.setState({
@@ -303,6 +308,7 @@ export class PlpContainer extends React.Component {
           },
         })
         .then(response => {
+			console.log(response);
           if (this.state.browserFilters.length !== 0) {
             this.resolveBrowserFilters(
               response.data.data.facetData,
@@ -347,7 +353,7 @@ export class PlpContainer extends React.Component {
             }
           }
 
-
+console.log(this.state.isCatDetails);
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
           } else {
@@ -369,7 +375,9 @@ export class PlpContainer extends React.Component {
             browserFilters: [],
           });
         })
-        .catch(error => {
+        .catch(error => 
+		{
+			console.log(error);
           this.setState({
             error: error.response.data.error.error_message,
             isLoading: false,
@@ -402,7 +410,7 @@ export class PlpContainer extends React.Component {
 
   fetchDescriptionData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data.description) {
           this.setState({ plpDescriptionData: response.data.data });
@@ -614,9 +622,10 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START'} />
+		
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
         <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META'} />
+          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}
@@ -685,7 +694,7 @@ export class PlpContainer extends React.Component {
           <RWDFilterMain filterDataPro={filterData} />
 
         </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END'} />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' +(this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
 
       </>
     );

@@ -25,6 +25,7 @@ export class StoreDetails extends React.Component {
     getStoreData() {
         apiManager.get(`${storeAPI}?latitude=${this.props.latitude}&longitude=${this.props.longitude}`)
         .then( response => {
+			console.log(storeData);
             this.setState({
                 storeData: response.data.data[0],
                 isLoading: false
