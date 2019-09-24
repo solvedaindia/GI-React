@@ -83,10 +83,19 @@ class MyOrder extends React.Component {
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
+
+    var scrollYindex;
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+      scrollYindex = window.innerHeight + document.body.scrollTop;
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1){ //Edge browser
+      scrollYindex = window.innerHeight + window.pageYOffset;
+    } else { //All other browsers
+      scrollYindex = window.innerHeight + document.documentElement.scrollTop;
+    }
+
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
-    const windowHeight =
-      window.innerHeight + document.documentElement.scrollTop;
+    const windowHeight = scrollYindex
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
