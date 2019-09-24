@@ -126,12 +126,12 @@ export default class App extends React.Component {
 	else {
 	   $('html, body').animate({ scrollTop: 0 }, 'fast');
   }
-  /*Ipad and Mobile stop scrollTop
------------------------------------*/
-  if(isMobile() || isTab())
-  { 
-    $('html, body').stop().animate();
-  }    
+	  /*Ipad and Mobile stop scrollTop
+	-----------------------------------*/
+	  if((isMobile() || isTab()) && !pathurl.includes("sort") && !pathurl.includes("filter"))
+	  { 
+		$('html, body').stop().animate();
+	  }    
   }
 
 

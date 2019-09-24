@@ -36,7 +36,7 @@ class ImageLoader extends React.Component {
              onClick={this.props.onClick} 
              className={className} 
              onLoad={this.onLoad} 
-             alt='loader'
+             alt={this.props.alt} 
             />;
   }
 }

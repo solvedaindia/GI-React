@@ -237,7 +237,7 @@ export class PlpContainer extends React.Component {
   }
 
   fetchAdBannerData() {
-    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId}`;
+    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
     if (this.state.isFromSearch.includes('/search')) {
       adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
     }
@@ -267,7 +267,7 @@ export class PlpContainer extends React.Component {
 
   fetchMarketingTextBannerData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data) {
           this.setState({
@@ -402,7 +402,7 @@ export class PlpContainer extends React.Component {
 
   fetchDescriptionData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data.description) {
           this.setState({ plpDescriptionData: response.data.data });

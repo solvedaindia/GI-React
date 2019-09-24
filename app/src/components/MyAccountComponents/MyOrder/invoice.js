@@ -37,6 +37,7 @@ class Invoice extends React.Component {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
+			console.log(response.data.data);
 			this.setState({
 				invoiceData: response.data.data,
 				isLoading: false,
