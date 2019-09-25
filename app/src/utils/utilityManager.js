@@ -333,16 +333,28 @@ export function createPlpItemData(plpData) {
     let productName;
     let productUrl;
     plpData.map((data, index) => {
-        if (data.skuList[0] && data.skuList[0].productName) {
-        productName = data.skuList[0].productName;
-        } else {
-        productName = '';
+        if (data.skuList && data.skuList[0] && data.skuList[0].productName) 
+		{
+			productName = data.skuList[0].productName;
+        } 
+		else if(data.productName)
+		{
+			productName = data.productName;
+        }
+		else 
+		{
+			productName = '';
         }
 
-        if (data.skuList[0] && data.skuList[0].partNumber) {
-        productUrl = host+createCategoryPlpURL(productName, data.skuList[0].partNumber);
-        } else {
-        productUrl = '';
+        if (data.skuList && data.skuList[0] && data.skuList[0].partNumber) {
+			productUrl = host+createCategoryPlpURL(productName, data.skuList[0].partNumber);
+        } 
+		else if(data.partNumber)
+		{
+			productUrl = host+createCategoryPlpURL(productName, data.partNumber);
+        }
+		else {
+			productUrl = '';
         }
 
         if (index === 0) {

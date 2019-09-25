@@ -11,7 +11,8 @@ class Invoice extends React.Component {
         super(props);
         this.state = {
             invoiceData: null,
-            orderListData: null
+            orderListData: null,
+			isLoading:true
         }
         // this.download = this.download.bind(this);
     }
