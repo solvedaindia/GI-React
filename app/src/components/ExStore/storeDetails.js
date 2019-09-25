@@ -25,7 +25,6 @@ export class StoreDetails extends React.Component {
     getStoreData() {
         apiManager.get(`${storeAPI}?latitude=${this.props.latitude}&longitude=${this.props.longitude}`)
         .then( response => {
-			console.log(storeData);
             this.setState({
                 storeData: response.data.data[0],
                 isLoading: false
@@ -70,7 +69,8 @@ export class StoreDetails extends React.Component {
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>{OUR_STORES}</h2>}
                         <h1 className='title'>{EXPERIENCE_OUR_STORES}</h1>
-                        {!!storeData && !!storeData.latitude && storeData.latitude &&
+                        {
+							!!storeData && !!storeData.latitude && storeData.latitude &&
                             <p className='details'>{EXP_OUR_PRODUCTS}
                                 <Link
                                     className='storeLink'

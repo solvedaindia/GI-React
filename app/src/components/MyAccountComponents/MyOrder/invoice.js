@@ -187,7 +187,12 @@ class Invoice extends React.Component {
             </div>
         )
     }
-    render() {
+    render() 
+	{
+		if(this.state.isLoading)
+		{
+			return <div></div>;
+		}
 		const UserLoggedIn = appCookie.get('isLoggedIn');
 		//this.getInvoiceDetails();
 		if(this.state.invoiceData != null)

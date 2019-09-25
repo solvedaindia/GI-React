@@ -124,7 +124,7 @@ class PlpComponent extends React.Component {
     else {
       coloumnLayout = 'plp-products grid2';
       if (isMobile()) {
-        coloumnLayout = 'plp-products grid3';
+        coloumnLayout = 'plp-products grid1';
       }
     }
     return (

@@ -134,10 +134,6 @@ export default class App extends React.Component {
 		{
 			$('html, body').stop().animate();
 		}
-		else
-		{
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
-		}
 	  }  
   }
 
