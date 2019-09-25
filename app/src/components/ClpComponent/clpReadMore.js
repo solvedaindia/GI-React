@@ -19,13 +19,13 @@ class CLPReadMore extends React.Component {
 
   	getReadMoreData(id) 
 	{
-		
     apiManager
       	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id.toUpperCase().replace(' ', '')}`)
 		.then(response => {
 			var {data} = response || {};
 			this.setState({
-				readableData: data && data.data,
+        readableData: data && data.data,
+        
 			});
 		})
 		.catch(error => {
@@ -43,14 +43,13 @@ class CLPReadMore extends React.Component {
   }
 
   componentDidMount() {
-	  
   	this.getReadMoreData(this.props.id);
   }
 
   render() {
     return (
       !!this.state.readableData && (
-	  
+	    
         <div className="readMore">
           <DescriptionBanner
             descriptionDataPro={this.state.readableData}
