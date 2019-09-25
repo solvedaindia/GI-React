@@ -47,11 +47,11 @@ class DeleteCartItem extends React.Component {
 		});
 	}
 	handleMoveToWishList() {
-		//this.handleClose();
 		if(getCookie('isLoggedIn') === 'true') {
 			this.setState({isWelcomeBack: false, isCartModal: true});
 		} else if(getCookie('isLoggedIn') !== 'true'){
-			this.setState({ show: false,isWelcomeBack: true, isCartModal: false})
+			this.handleClose();
+			this.setState({isWelcomeBack: true, isCartModal: false})
 		}
 
 	const data = {
@@ -71,8 +71,8 @@ class DeleteCartItem extends React.Component {
 		});
 	}
   	/* Handle Modal Close */
-	async handleClose() {
-		await this.setState({ show: false });
+	handleClose() {
+		this.setState({ show: false });
 	}
 	/* Handle Modal Show */
 	handleShow() {
