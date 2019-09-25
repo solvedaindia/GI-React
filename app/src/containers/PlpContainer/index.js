@@ -46,6 +46,7 @@ import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
+import { createPlpItemData } from '../../utils/utilityManager';
 
 let categoryId;
 let spellCheckEndCount = 1;
@@ -506,7 +507,7 @@ console.log(this.state.isCatDetails);
       this.fetchPLPProductsData(true);
     }
   };
-
+  
   render() {
     const {
       error,
@@ -520,6 +521,7 @@ console.log(this.state.isCatDetails);
     } = this.state;
 
     let marketingBanner;
+    let itemData = '';
     if (marketingTextBannerData != null) {
       /**
        * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
@@ -538,7 +540,7 @@ console.log(this.state.isCatDetails);
 
     let plpProducts;
     if (plpData.length != 0) {
-
+      itemData = createPlpItemData(plpData);
       plpProducts = (
         <PlpComponent
           plpDataPro={this.state.plpData}
@@ -626,6 +628,9 @@ console.log(this.state.isCatDetails);
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
         <Helmet>
           <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
+          <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
+            {`"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}`}
+          </script>
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}

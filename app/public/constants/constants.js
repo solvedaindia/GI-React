@@ -213,6 +213,8 @@ export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orde
 export const guestTrackOrderAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/guestdetails/`;
 /* Set Password API (Social Login) */
 export const setPassword = `${secureHttp}://${host}:${port2}/api/v1/secure/users/sociallogin/setpassword`;
+/* Breadcrumb API */
+export const breadcrumbAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/breadcrumb`;
 
 /* Share Wishlist API */
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
