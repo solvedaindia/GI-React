@@ -134,10 +134,6 @@ export default class App extends React.Component {
 		{
 			$('html, body').stop().animate();
 		}
-		else
-		{
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
-		}
 	  }  
   }
 
@@ -204,33 +200,51 @@ export default class App extends React.Component {
   // IP Data Call.
 	getIPData() 
 	{
-    if (appCookie.get('pincode') === null || appCookie.get('pincode') === "") {
-      appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-    }
-    if(appCookie.get('pincodeUpdated') !== 'true') {
-		navigator.geolocation.watchPosition(function(position) {
-			
-				var request = new XMLHttpRequest();
-				request.onreadystatechange = function () {
-					if (this.readyState === 4 && this.status == 200) {
-						var ipData = JSON.parse(this.responseText);
-						var ipDataPostCode = ipData.postal;
-						appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-					}
-					else {
-						appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-					}
-				};
-				request.open('GET', ipDataApi);
-				request.setRequestHeader('Accept', 'application/json');
-				request.send();
-			
-		  },
-		  function(error) {
-			if (error.code == error.PERMISSION_DENIED)
-			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-      });
-    }
+		if (appCookie.get('pincode') === null || appCookie.get('pincode') === "") 
+		{
+			navigator.geolocation.watchPosition(function(position) {
+					var request = new XMLHttpRequest();
+					request.onreadystatechange = function () 
+					{
+						console.log('ipdata ' , this.responseText);
+						if (this.readyState === 4 && this.status == 200) 
+						{
+							console.log('ipdata ' , this.responseText);
+							var ipData = JSON.parse(this.responseText);
+							var ipDataPostCode = ipData.postal;
+							appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+						}
+						else 
+						{
+  						    Geocode.setApiKey(mapKey);
+						    Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
+								response => {
+								  const address = response.results[0].formatted_address;
+								  const data = address.replace(', India', '');
+								  const postalCode = data.substr(data.length -6);
+								  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
+									appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+									this.setState({
+									  loading: false
+									})
+								  }          
+								},
+								error => {
+									appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+								}
+							)
+						}
+					};
+					request.open('GET', ipDataApi);
+					request.setRequestHeader('Accept', 'application/json');
+					request.send();
+				
+			  },
+			  function(error) {
+				if (error.code == error.PERMISSION_DENIED)
+				appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+		  });
+	   }
   	}
   
   getCurrentLocation() {

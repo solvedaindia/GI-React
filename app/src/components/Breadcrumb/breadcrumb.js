@@ -76,7 +76,7 @@ class Breadcrumb extends React.Component {
               breadLabel = 'Home';
               breadRoute = '/';
             }
-            else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1) {
+            else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1 && data.categoryIdentifier) {
               breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {

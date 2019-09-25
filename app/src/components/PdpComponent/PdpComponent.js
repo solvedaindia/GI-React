@@ -232,9 +232,6 @@ class PdpComponent extends React.Component {
 			callPincodeApi = pinCodeAPI;
 		}
 		let pincodeVal = appCookie.get('pincode');
-		if (appCookie.get('tempPincode') && appCookie.get('tempPincode') !== "") {
-			pincodeVal = appCookie.get('tempPincode');
-		}
 
 		const dataParams = this.getPincodeApiParams(resolvedSkuData, type);
 

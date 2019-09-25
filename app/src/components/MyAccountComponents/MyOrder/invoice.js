@@ -11,7 +11,8 @@ class Invoice extends React.Component {
         super(props);
         this.state = {
             invoiceData: null,
-            orderListData: null
+            orderListData: null,
+			isLoading:true
         }
         // this.download = this.download.bind(this);
     }
@@ -20,10 +21,13 @@ class Invoice extends React.Component {
 		
 		console.log(orderListAPI);
 		
-		apiManager.get(orderListAPI)
+		let orderAPI =
+        `${orderListAPI}?` + `pagenumber=1&` + `pagesize=200&`;
+		
+		apiManager.get(orderAPI)
         .then(response => 
 		{
-				console.log(response);
+		  console.log(response);
           this.setState({
             orderListData: response.data.data.orderList
           });
@@ -65,7 +69,7 @@ class Invoice extends React.Component {
 		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
+            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'90%'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
@@ -184,7 +188,12 @@ class Invoice extends React.Component {
             </div>
         )
     }
-    render() {
+    render() 
+	{
+		if(this.state.isLoading)
+		{
+			return <div></div>;
+		}
 		const UserLoggedIn = appCookie.get('isLoggedIn');
 		//this.getInvoiceDetails();
 		if(this.state.invoiceData != null)
@@ -209,7 +218,7 @@ class Invoice extends React.Component {
 				<div className="invoiceTicket">
 					<div id="content">
 					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
-						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
 
@@ -221,7 +230,7 @@ class Invoice extends React.Component {
 			return(
 				<div className="invoiceTicket">
 					<div id="content">
-						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Invoice data is not available
 						</div>
 					</div>
