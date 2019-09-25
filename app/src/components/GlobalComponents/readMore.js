@@ -9,7 +9,7 @@ class ReadMore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      readableData: null,
+      readableData: '',
       error: false,
       hasMore: true,
       isLoading: false,
