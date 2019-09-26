@@ -200,7 +200,7 @@ export default class App extends React.Component {
   // IP Data Call.
 	getIPData() 
 	{
-		if (appCookie.get('pincode') === null || appCookie.get('pincode') === "") 
+		if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
 		{
 			navigator.geolocation.watchPosition(function(position) {
 					var request = new XMLHttpRequest();

@@ -75,7 +75,7 @@ class Invoice extends React.Component {
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
 						<div className="invoiceContainer topsection" style={{border:'0', width: '100%', margin: 'auto',height: '100px'}}>
-                        <div className="value heading"  style={{width: '24%', float: 'left'}} >Cin No</div>
+                        <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Invoice Date</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.invoiceDate}</div>
@@ -92,12 +92,6 @@ class Invoice extends React.Component {
 								<div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.address}</div>
                                     <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.city}</div>
-                                    <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.state}</div>
-                                    <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.zipCode}</div>
-                                    <div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.gstinNo}</div>
 							</div>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
@@ -107,12 +101,6 @@ class Invoice extends React.Component {
 								
 								<div className="value">
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.address}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.city}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.state}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.zipCode}</div>
                                     <div className="value">
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.gstinNo}</div>
                                     
@@ -162,7 +150,7 @@ class Invoice extends React.Component {
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
                                 return (
                                     
-                                    <div className="itemList" index={`${index}-item`}>
+                                    <div className="itemList" index={`${index}-item`}  style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                         <div  style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
                                         <div style={{width: '13%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
                                         <div style={{width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
