@@ -526,7 +526,7 @@ section.tablecarousel {
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
         // opacity: 0;
         visibility: hidden;
-        max-width: 84%;
+        max-width: 88%;
         left: 0;
         .filterbtnWrapper {
           text-align: center;
@@ -618,7 +618,7 @@ section.tablecarousel {
             padding: 0px 30px 23px 0;
             color: $battleshipGrey;
             font-size: $base * 1.5;
-            min-width: 170px;
+            min-width: 200px;
             display: flex !important;
             align-items: center;
           }

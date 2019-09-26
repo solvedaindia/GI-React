@@ -84,9 +84,7 @@ class BestSeller extends React.Component {
     };
     return (
       <div className="bestSeller">
-        <h3 className="title">{
-			
-		}</h3>
+        <h3 className="title">{title}</h3>
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
