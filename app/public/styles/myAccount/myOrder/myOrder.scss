@@ -225,6 +225,13 @@
             .status{
               font-size: 14px;
             }
+			.items5{
+				width:19%;
+			  }
+			
+			  .items4{
+				width:24%;
+			  }
             .deliveryDate{
               font-size: 12px;
             }
@@ -346,7 +353,7 @@
     margin: 0px 0 0 40px;
     padding: 0;
     position: absolute;
-    width: 100%;
+    width: 98%;
     &:before{
       background-color:$colorwhite;    
       height: 2px;
@@ -396,17 +403,22 @@
         top: -41px;
       }
     }
-    .list {
+	.list.items5{
+		width:19%;
+	}
+	.list.items4{
+		width:24%;
+	}
+    .list 
+	{
       display: block;
       margin: 30px 0 0;
       padding: 0;
       text-align: center;
-      width: 19%;
       position: relative;
       font-size: 10px;
       float: left;
-      z-index: 1;
-      .deliveryDate{
+	  .deliveryDate{
         color:$battleshipGrey;
       }
       &:nth-child(1):before {
@@ -439,6 +451,7 @@
         z-index: 999;
         top: -37px;
       }
+	  
     }
   }
 }

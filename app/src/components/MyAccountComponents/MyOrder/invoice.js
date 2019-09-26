@@ -16,7 +16,9 @@ class Invoice extends React.Component {
         }
         // this.download = this.download.bind(this);
     }
-    componentDidMount() {
+    componentDidMount() 
+	{
+		this.state.isLoading = true;
         this.getInvoiceDetails();
 		
 		console.log(orderListAPI);
@@ -29,7 +31,8 @@ class Invoice extends React.Component {
 		{
 		  console.log(response);
           this.setState({
-            orderListData: response.data.data.orderList
+            orderListData: response.data.data.orderList,
+			isLoading: false
           });
 
         })
@@ -47,15 +50,13 @@ class Invoice extends React.Component {
 		.then(response => {
 			console.log(response.data.data);
 			this.setState({
-				invoiceData: response.data.data,
-				isLoading: false,
+				invoiceData: response.data.data
 			},
             );
 		})
 		.catch(error => {
 			this.setState({
-                error,
-                isLoading: false,
+                error
 			});
 		});
 	}

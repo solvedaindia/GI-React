@@ -355,9 +355,10 @@
           .form-group {
             position: relative;
             padding: 17px 0 0 0;
+			margin-bottom: 5px;
             .form-control {
               border: 1px solid $lightGrey;
-              margin: 5px 0 20px 0;
+               margin: 10px 0 0px 0;
               &:focus {
                 border: 1px solid $black !important;
                 box-shadow: none !important;
@@ -380,7 +381,7 @@
           }
           .error-msg {
             color: $reddishPink;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-size: $base * 1.5;
             line-height: 12px;
             font-weight: normal;

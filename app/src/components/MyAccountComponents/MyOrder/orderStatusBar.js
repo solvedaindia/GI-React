@@ -25,7 +25,13 @@ class OrderStatusBar extends React.Component {
   }
 
   getStatusBarCustomClassname(item, index) {
-    var customClassName = 'list';
+	  
+    var customClassName = 'list items5';
+	if(this.state.shippingStatusArr.length < 5)
+	{
+		customClassName = 'list items4';
+	}
+	
     if (index === 0) {
       customClassName += ' first';
     }
@@ -70,9 +76,13 @@ class OrderStatusBar extends React.Component {
   }
 
   render() {
-    var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
+    var statusBarItem = this.state.shippingStatusArr.map((item, index) => 
+	{
       return (
-        <li class={this.getStatusBarCustomClassname(item, index)}><div className="status">{item}</div><div className="deliveryDate">{this.getStatusBarDate(item)}</div></li>
+        <li class={this.getStatusBarCustomClassname(item, index)}>
+		<div className="status">{item}</div>
+		<div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+		</li>
       )
     })
 
