@@ -204,15 +204,24 @@ export default class App extends React.Component {
 		{
 			navigator.geolocation.watchPosition(function(position) {
 					var request = new XMLHttpRequest();
-					request.onreadystatechange = function () 
+					request.open('GET', ipDataApi);
+					request.setRequestHeader('Accept', 'application/json');
+					request.send();
+					request.onreadystatechange = 
+					function () 
 					{
-						console.log('ipdata ' , this.responseText);
-						if (this.readyState === 4 && this.status == 200) 
+						if (this.status == 200) 
 						{
-							console.log('ipdata ' , this.responseText);
 							var ipData = JSON.parse(this.responseText);
-							var ipDataPostCode = ipData.postal;
-							appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+							if(ipData && ipData.postal)
+							{
+								var ipDataPostCode = ipData.postal;
+								appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+							}
+							else
+							{
+								appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+							}
 						}
 						else 
 						{
@@ -234,11 +243,7 @@ export default class App extends React.Component {
 								}
 							)
 						}
-					};
-					request.open('GET', ipDataApi);
-					request.setRequestHeader('Accept', 'application/json');
-					request.send();
-				
+					};				
 			  },
 			  function(error) {
 				if (error.code == error.PERMISSION_DENIED)

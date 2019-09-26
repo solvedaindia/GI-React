@@ -284,7 +284,9 @@ export class PlpContainer extends React.Component {
       .catch(error => { });
   }
 
-  fetchPLPProductsData(isFromScroll) {
+  fetchPLPProductsData(isFromScroll) 
+  {
+	  
     this.setState({ isLoading: true }, () => {
       let urlMaking = plpAPI + categoryId;
       let searchText = null;
@@ -309,7 +311,6 @@ export class PlpContainer extends React.Component {
           },
         })
         .then(response => {
-			console.log(response);
           if (this.state.browserFilters.length !== 0) {
             this.resolveBrowserFilters(
               response.data.data.facetData,
@@ -354,7 +355,6 @@ export class PlpContainer extends React.Component {
             }
           }
 
-console.log(this.state.isCatDetails);
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
           } else {
@@ -384,6 +384,7 @@ console.log(this.state.isCatDetails);
             isLoading: false,
           });
         });
+		
     });
   }
 
@@ -625,12 +626,17 @@ console.log(this.state.isCatDetails);
     return (
       <>
 		
+		{console.log(this.state.categoryDetail)}
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
         <Helmet>
           <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
             {`"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}`}
           </script>
+		  
+		   <title>{this.state.categoryDetail.pageTitle}</title>            
+		   <meta name="description" content={this.state.categoryDetail.metaDescription} />
+		   <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}
