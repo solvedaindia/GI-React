@@ -69,7 +69,6 @@ class DescriptionBanner extends React.Component {
                 <div
                   dangerouslySetInnerHTML={{ __html: this.state.finalData }}
                 />
-                {console.log('data2',this.state.finalData)}
               </ul>
               <button
                 onClick={this.readMoreClicked.bind(this)}
