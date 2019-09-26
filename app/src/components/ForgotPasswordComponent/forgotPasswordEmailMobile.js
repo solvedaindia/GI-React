@@ -153,7 +153,9 @@ class ForgotPasswordEmailMobile extends React.Component {
     return (
       <div className={animeClass}>
         <h3 className="heading">{FORGOT_PASSWORD}</h3>
-        <Form className="modalmin-height">
+        <Form className="modalmin-height"
+         onSubmit = {this.proceedBtnPressed.bind(this)}
+        >
           <FormGroup>
             <Label className="label" htmlFor="exampleEmail">
               {EMAIL_MOBILE_NUM}
@@ -176,6 +178,7 @@ class ForgotPasswordEmailMobile extends React.Component {
           <FormGroup>
             <p className="text text-emailotp">{AN_OTP} </p>
           </FormGroup>
+        </Form>
           <Button
             type="submit"
             onClick={this.proceedBtnPressed.bind(this)}
@@ -183,7 +186,6 @@ class ForgotPasswordEmailMobile extends React.Component {
           >
             {PROCEED}
           </Button>
-        </Form>
       </div>
     );
   }

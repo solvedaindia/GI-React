@@ -248,7 +248,9 @@ class ForgotPasswordOTP extends React.Component {
     return (
       <div className={animeClass}>
         {headingItem}
-        <Form className={this.state.errorClass}>
+        <Form className={this.state.errorClass}
+        onSubmit = {this.proceedBtnPressed.bind(this)}
+        >
           <FormGroup>
             {titleOTP}
             {this.props.isFromMyProfilePro ? (
@@ -263,8 +265,8 @@ class ForgotPasswordOTP extends React.Component {
             </div>
           </FormGroup>
           <FormGroup />
-        {finalBtn}
         </Form>
+        {finalBtn}
       </div>
     );
   }

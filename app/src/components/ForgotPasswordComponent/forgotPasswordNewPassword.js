@@ -106,7 +106,9 @@ class ForgotPasswordNewPassword extends React.Component {
     return (
       <div className="searchAnimate">
         <h3 className="heading">Set New Password</h3>
-        <Form className="modalmin-height">
+        <Form className="modalmin-height"
+         onSubmit = {this.doneBtnPressed.bind(this)}
+        >
           <FormGroup className="enternew-password">
             <p className="text">{NEW_PASS}</p>
             <div className="form-div clearfix">
@@ -126,14 +128,15 @@ class ForgotPasswordNewPassword extends React.Component {
               </span> : null}
             </div>
           </FormGroup>
-          <Button
+          
+        </Form>
+        <Button
           type="submit"
           onClick={this.doneBtnPressed.bind(this)}
           className="btn-block btn-bg"
         >
           Save
         </Button>
-        </Form>
       </div>
     );
   }
