@@ -15,12 +15,12 @@ class DescriptionBanner extends React.Component {
     };
   }
 
-  initBanner() {
-    const charLimit = this.props.descriptionDataPro.webCharLimit;
+  initBanner(getData) {
+    const charLimit = getData.descriptionDataPro.webCharLimit;
 	var trimStr;
-	if(this.props.descriptionDataPro.description != null)
+	if(getData.descriptionDataPro.description != null)
 	{
-		trimStr = `${this.props.descriptionDataPro.description.substring(
+		trimStr = `${getData.descriptionDataPro.description.substring(
 		  0,
 		  charLimit,
 		)}...`;
@@ -28,11 +28,16 @@ class DescriptionBanner extends React.Component {
     this.setState({
       splitData: trimStr,
       finalData: trimStr,
+      title: getData.descriptionDataPro.title
     });
   }
   
   componentDidMount() {
-    this.initBanner();
+    this.initBanner(this.props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.initBanner(nextProps);
   }
 
   
@@ -49,6 +54,7 @@ class DescriptionBanner extends React.Component {
         finalData: this.props.descriptionDataPro.description,
         readMoreTitle: 'Read Less',
       });
+      {console.log('data',this.state.finalData)}
     }
   }
 
@@ -63,6 +69,7 @@ class DescriptionBanner extends React.Component {
                 <div
                   dangerouslySetInnerHTML={{ __html: this.state.finalData }}
                 />
+                {console.log('data2',this.state.finalData)}
               </ul>
               <button
                 onClick={this.readMoreClicked.bind(this)}
