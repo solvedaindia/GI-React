@@ -87,17 +87,16 @@ export class HeaderSearch extends React.Component {
   }
 
   renderCategorySuggestions() {
-
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-        routePath = createCategoryPlpURL(item.categoryIdentifier);
+        createCategoryPlpURL(item.categoryIdentifier);
         var searchStr = item.categoryName;
         searchStr += ` in ${item.parentRoom}`;
         if (index < 4) {
           return (
             <li className="list" key={index}>
-              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={categoryRoutePath} >
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={'/'} >
                 <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
               </Link>
             </li>
@@ -174,11 +173,7 @@ export class HeaderSearch extends React.Component {
                       return (
                         <li className="list" key={index}>
                           <Link className="link" to={{ pathname: '/search', search: `keyword=${item.term}`, }} onClick={() => this.onLinkNavigation(item.term)} >
-                            <strong>
-                              {' '}
-                              {item.term.substr(0, searchItem.length)}{' '}
-                            </strong>{' '}
-                            {item.term.substr(searchItem.length)}
+                            <strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length).replace(' ', '')}
                           </Link>
                         </li>
                       );
