@@ -587,6 +587,10 @@ class StoreLocator extends React.Component {
                                             if (physicalData.ribbonText) {
                                                 ribbonClass = 'ribbon';
                                             }
+                                            let iconType = orangeIcon;
+											if (physicalData.storeName === 'Godrej Interio Store') {
+												iconType = blueIcon;
+											}
                                             return (
                                                 <>
                                                     <div key={index} className='store-list-item-box'>
@@ -616,7 +620,7 @@ class StoreLocator extends React.Component {
                                                                 </Link>
 
                                                                 <div className="dealer">
-                                                                    <div className="dealertext"><img className="mapicon" src={orangeIcon} alt="map" />{physicalData.ownership}</div>
+                                                                    <div className="dealertext"><img className="mapicon" src={iconType} alt="map" />{physicalData.ownership}</div>
                                                                 </div>
                                                             </div>
                                                         </div></div>
