@@ -51,11 +51,13 @@ class RWDOrderItem extends React.Component {
   }
 
   filterProductStat(shipmentData) {
-    if (shipmentData.length > 1) {
-      return <div className='itemStatus'>Multiple Shipments</div>
-    }
-    else {
-      return <div className='itemStatus'>{shipmentData[0].status}<br />{this.getStatusDate(shipmentData[0], shipmentData[0].status)}</div>
+    if(shipmentData && shipmentData.length>0){
+      if (shipmentData.length > 1) {
+        return <div className='itemStatus'>Multiple Shipments</div>
+      }
+      else {
+        return <div className='itemStatus'>{shipmentData[0].status}<br />{this.getStatusDate(shipmentData[0], shipmentData[0].status)}</div>
+      }
     }
   }
 
