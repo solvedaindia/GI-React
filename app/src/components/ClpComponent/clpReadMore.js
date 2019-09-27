@@ -17,13 +17,15 @@ class CLPReadMore extends React.Component {
     };
   }
 
-  	getReadMoreData(id) {
+  	getReadMoreData(id) 
+	{
     apiManager
-      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id}`)
+      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id.toUpperCase().replace(' ', '')}`)
 		.then(response => {
-			const {data} = response || {};
+			var {data} = response || {};
 			this.setState({
-				readableData: data && data.data,
+        readableData: data && data.data,
+        
 			});
 		})
 		.catch(error => {
@@ -34,10 +36,10 @@ class CLPReadMore extends React.Component {
 		});
   	}
     
-  componentWillReceiveProps(nextProps) {
-    if(this.props.id !== nextProps.id){
+  componentWillReceiveProps(nextProps) 
+  {
+	console.log(nextProps.id);
       this.getReadMoreData(nextProps.id);
-    }
   }
 
   componentDidMount() {
@@ -45,9 +47,9 @@ class CLPReadMore extends React.Component {
   }
 
   render() {
-    const { readableData } = this.state;
     return (
-      !!readableData && (
+      !!this.state.readableData && (
+	    
         <div className="readMore">
           <DescriptionBanner
             descriptionDataPro={this.state.readableData}

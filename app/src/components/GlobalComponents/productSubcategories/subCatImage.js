@@ -7,7 +7,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
+import {createCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../../utils/utilityManager';
 
 import { Link, withRouter, NavLink, Redirect } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
@@ -24,7 +24,7 @@ class SubCatImage extends React.Component {
 
   render() {
     var subcatName = String(this.props.categoryNamePro).toLowerCase()
-    var routePath = `/furniture-${subcatName.split(' ').join('-')}/${this.props.uniqueIdPro}`;
+    var routePath = createCategoryPlpURL(this.props.uniqueIdPro);
     return (
       <Link className="link" to={routePath} onClick={this.onLinkNavigation}>
         <div className="Imgbox">

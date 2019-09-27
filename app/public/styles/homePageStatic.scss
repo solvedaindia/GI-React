@@ -46,10 +46,11 @@
 .oursolutions .store-textbox{background:#f7f8f8;padding:20px;text-align: center}
 .oursolutions .store-textbox .imgfullwidth{width: 95px;}
 .oursolutions .btn-bg{  background: #070707;color: #fff; padding: 0px 40px; border-style: none;margin:10px 0 0 0}
-.oursolutions .store-textbox{   position: absolute; top: 50%; left: 50%; width: 540px; height: 228px; margin-top: -114px; margin-left: -270px;}
+.oursolutions .store-textbox{   position: relative; top: 50%; left: 50%; width: 540px; height: 228px; margin-left: -270px;}
 .oursolutions .store-textbox .heading{font-weight: bold;font-size: 18px;}
 .oursolutions .store-textbox .text{margin:5px 0 0 0}
 .oursolutions .store-textbox .text .bold{color:#036cc5;font-weight: bold;}
+.oursolutions .ourstoreImgbox img{width: 100%;}
 
 /* recommendation
 ------------------------------------*/
@@ -114,7 +115,7 @@
               }
         } 
         .oursolutions{
-          .store-textbox{position: absolute; top: 50%; left: 26%; width: 540px; height: 220px; margin-top: -110px; margin-left: -270px;}
+          .store-textbox{position: relative; top: 50%; left: 26%; width: 540px; height: 220px; margin-left: -270px;}
         } 
         .our-promises{
             .heading{

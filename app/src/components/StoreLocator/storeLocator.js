@@ -559,7 +559,7 @@ class StoreLocator extends React.Component {
                                                                 </>
                                                             }
                                                         </div>
-                                                        <p>{physicalData.address1} {physicalData.address2} {physicalData.address3}, {physicalData.city} - {physicalData.pinCode}</p>
+                                                       <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                         <div className="phoneDetails">
                                                             <img className="phoneicon" src={phoneIcon} alt="phone" />
                                                             <div className="PhoneNo">{physicalData.telephone}</div>
@@ -605,7 +605,7 @@ class StoreLocator extends React.Component {
                                                                     </>
                                                                 }
                                                             </div>
-                                                            <p className='store-detal-desc'>{physicalData.address1} {physicalData.address2} {physicalData.address3}, {physicalData.city} - {physicalData.pinCode}</p>
+                                                            <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                             <div className="phoneDetails">
                                                                 <img className="phoneicon" src={phoneIcon} alt="phone" />
                                                                 <div className="PhoneNo">{physicalData.telephone}</div>

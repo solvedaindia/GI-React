@@ -33,6 +33,7 @@ return (
     <WillowKitchenBanner />
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_BENEFITS' } />
 
+  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR_WILLOW' } />
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_4' } />
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_5' } />
 

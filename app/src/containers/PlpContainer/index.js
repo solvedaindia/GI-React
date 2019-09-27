@@ -46,6 +46,7 @@ import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
+import { createPlpItemData } from '../../utils/utilityManager';
 
 let categoryId;
 let spellCheckEndCount = 1;
@@ -236,8 +237,13 @@ export class PlpContainer extends React.Component {
     });
   }
 
-  fetchAdBannerData() {
-    var adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId}`;
+  fetchAdBannerData() 
+  {
+	  var adBannerEspotName = `GI_PLP_AD_BANNER`;
+	  if(categoryId != undefined)
+	  {
+		adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
+	  }
     if (this.state.isFromSearch.includes('/search')) {
       adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
     }
@@ -267,7 +273,7 @@ export class PlpContainer extends React.Component {
 
   fetchMarketingTextBannerData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_HERO_BANNER_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data) {
           this.setState({
@@ -278,7 +284,9 @@ export class PlpContainer extends React.Component {
       .catch(error => { });
   }
 
-  fetchPLPProductsData(isFromScroll) {
+  fetchPLPProductsData(isFromScroll) 
+  {
+	  
     this.setState({ isLoading: true }, () => {
       let urlMaking = plpAPI + categoryId;
       let searchText = null;
@@ -347,7 +355,6 @@ export class PlpContainer extends React.Component {
             }
           }
 
-
           if (this.state.isCatDetails) {
             this.fetchAdBannerData();
           } else {
@@ -369,12 +376,15 @@ export class PlpContainer extends React.Component {
             browserFilters: [],
           });
         })
-        .catch(error => {
+        .catch(error => 
+		{
+			console.log(error);
           this.setState({
             error: error.response.data.error.error_message,
             isLoading: false,
           });
         });
+		
     });
   }
 
@@ -402,7 +412,7 @@ export class PlpContainer extends React.Component {
 
   fetchDescriptionData() {
     apiManager
-      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId}`)
+      .get(`${espotAPI}GI_PLP_DESCRIPTION_${categoryId.toUpperCase()}`)
       .then(response => {
         if (response.data.data.description) {
           this.setState({ plpDescriptionData: response.data.data });
@@ -498,7 +508,7 @@ export class PlpContainer extends React.Component {
       this.fetchPLPProductsData(true);
     }
   };
-
+  
   render() {
     const {
       error,
@@ -512,6 +522,7 @@ export class PlpContainer extends React.Component {
     } = this.state;
 
     let marketingBanner;
+    let itemData = '';
     if (marketingTextBannerData != null) {
       /**
        * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
@@ -530,7 +541,7 @@ export class PlpContainer extends React.Component {
 
     let plpProducts;
     if (plpData.length != 0) {
-
+      itemData = createPlpItemData(plpData);
       plpProducts = (
         <PlpComponent
           plpDataPro={this.state.plpData}
@@ -614,9 +625,18 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START'} />
+		
+		{console.log(this.state.categoryDetail)}
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
         <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META'} />
+          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
+          <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
+            {`"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}`}
+          </script>
+		  
+		   <title>{this.state.categoryDetail.pageTitle}</title>            
+		   <meta name="description" content={this.state.categoryDetail.metaDescription} />
+		   <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}
@@ -679,7 +699,8 @@ export class PlpContainer extends React.Component {
 
 
 
-        {this.state.isMobile && this.state.productCount !== null && this.state.productCount !== 0 ? <div className='sortfilter'>
+        {this.state.isMobile && this.state.productCount !== null && this.state.productCount.length !== 0 ?
+		<div className='sortfilter'>
           <RWDSort sortingIndexPro={this.state.plpSorting} />
           <RWDFilterMain
             filterDataPro={filterData}
@@ -689,7 +710,7 @@ export class PlpContainer extends React.Component {
             searchKeywordPro={keywoard}
           />
         </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END'} />
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' +(this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
 
       </>
     );

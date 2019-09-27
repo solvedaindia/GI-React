@@ -122,7 +122,7 @@ render() {
         <div className='container'>
           <div className='row'>
             <div className='col-md-12'>
-              <h1 className='headingtitle'>{this.state.component_title}</h1>
+              <h2 className='headingtitle'>{this.state.component_title}</h2>
             </div>
           </div>
           <div className='row'>
@@ -142,7 +142,7 @@ render() {
               </div>
             </div>
             <div className='col-md-6 InitialIdea'>
-              <h1 className='headingtitle'>{this.state.title}</h1>
+              <h3 className='headingtitle'>{this.state.title}</h3>
               	<p className=' heading-sub-title'>{this.state.sub_title}</p>
  				<p className='Paragraphfont'>{this.state.content}</p>
             </div>

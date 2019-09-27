@@ -132,8 +132,8 @@ class ProductItem extends React.Component {
           <ItemImage
             data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2}
             uniqueId={this.state.data.uniqueID}
-            parentUniqueId={this.state.data.parentUniqueID}
-            productname={this.state.data.productName}
+            partNumber={this.state.data.partNumber}
+            productName={this.state.data.productName}
             breadcrumbDataPro={this.props.plpBreadcrumbPro}
           />
           <InStock isInStock={this.state.data.inStock} />

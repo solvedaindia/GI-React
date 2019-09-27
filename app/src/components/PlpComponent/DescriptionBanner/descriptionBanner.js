@@ -15,22 +15,32 @@ class DescriptionBanner extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const charLimit = this.props.descriptionDataPro.webCharLimit;
-	var trimStr = '';
-	if(this.props.descriptionDataPro.description != null && this.props.descriptionDataPro.description != undefined)
+  initBanner(getData) {
+    const charLimit = getData.descriptionDataPro.webCharLimit;
+	var trimStr;
+	if(getData.descriptionDataPro.description != null)
 	{
-		trimStr = `${this.props.descriptionDataPro.description.substring(
-      0,
-      charLimit,
-    )}...`;
+		trimStr = `${getData.descriptionDataPro.description.substring(
+		  0,
+		  charLimit,
+		)}...`;
 	}
     this.setState({
       splitData: trimStr,
       finalData: trimStr,
+      title: getData.descriptionDataPro.title
     });
   }
+  
+  componentDidMount() {
+    this.initBanner(this.props);
+  }
 
+  componentWillReceiveProps(nextProps){
+    this.initBanner(nextProps);
+  }
+
+  
   readMoreClicked() {
     if (this.state.isReadMore) {
       this.setState({
@@ -44,6 +54,7 @@ class DescriptionBanner extends React.Component {
         finalData: this.props.descriptionDataPro.description,
         readMoreTitle: 'Read Less',
       });
+      {console.log('data',this.state.finalData)}
     }
   }
 

@@ -11,17 +11,28 @@ class Invoice extends React.Component {
         super(props);
         this.state = {
             invoiceData: null,
-            orderListData: null
+            orderListData: null,
+			isLoading:true
         }
         // this.download = this.download.bind(this);
     }
-    componentDidMount() {
-        this.getInvoiveDetails();
+    componentDidMount() 
+	{
+		this.state.isLoading = true;
+        this.getInvoiceDetails();
 		
-		apiManager.get(orderListAPI)
-        .then(response => {
+		console.log(orderListAPI);
+		
+		let orderAPI =
+        `${orderListAPI}?` + `pagenumber=1&` + `pagesize=200&`;
+		
+		apiManager.get(orderAPI)
+        .then(response => 
+		{
+		  console.log(response);
           this.setState({
-            orderListData: response.data.data.orderList
+            orderListData: response.data.data.orderList,
+			isLoading: false
           });
 
         })
@@ -33,20 +44,19 @@ class Invoice extends React.Component {
         });
 		
     }
-    getInvoiveDetails() {
+    getInvoiceDetails() {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
+			console.log(response.data.data);
 			this.setState({
-				invoiceData: response.data.data,
-				isLoading: false,
+				invoiceData: response.data.data
 			},
             );
 		})
 		.catch(error => {
 			this.setState({
-                error,
-                isLoading: false,
+                error
 			});
 		});
 	}
@@ -58,14 +68,14 @@ class Invoice extends React.Component {
     invoiceDatailedData() 
 	{
 		
-		const { invoiceData } = this.state.invoiceData;
+		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="invoiceContainer" style={{width:'1170px'}}>
+            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'90%'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
 						<div className="invoiceContainer topsection" style={{border:'0', width: '100%', margin: 'auto',height: '100px'}}>
-                        <div className="value heading"  style={{width: '24%', float: 'left'}} >Cin No</div>
+                        <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Invoice Date</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.invoiceDate}</div>
@@ -82,12 +92,6 @@ class Invoice extends React.Component {
 								<div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.address}</div>
                                     <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.city}</div>
-                                    <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.state}</div>
-                                    <div className="value">
-									{!!invoiceData.companyAddress && invoiceData.companyAddress.zipCode}</div>
-                                    <div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.gstinNo}</div>
 							</div>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
@@ -97,12 +101,6 @@ class Invoice extends React.Component {
 								
 								<div className="value">
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.address}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.city}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.state}</div>
-                                    <div className="value">
-									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.zipCode}</div>
                                     <div className="value">
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.gstinNo}</div>
                                     
@@ -152,7 +150,7 @@ class Invoice extends React.Component {
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
                                 return (
                                     
-                                    <div className="itemList" index={`${index}-item`}>
+                                    <div className="itemList" index={`${index}-item`}  style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                         <div  style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
                                         <div style={{width: '13%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
                                         <div style={{width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
@@ -179,28 +177,37 @@ class Invoice extends React.Component {
             </div>
         )
     }
-    render() {
+    render() 
+	{
+		if(this.state.isLoading)
+		{
+			return <div></div>;
+		}
 		const UserLoggedIn = appCookie.get('isLoggedIn');
-		
+		//this.getInvoiceDetails();
 		if(this.state.invoiceData != null)
 		{
-			const { invoiceData } = this.state.invoiceData;
+			var invoiceData = this.state.invoiceData;
+			console.log('invoiceData ', invoiceData);
+			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
-			(this.state.orderListData != null && this.state.orderListData.length !== 0)? this.state.orderListData.map((orderInfo, key) => 
-			{
-				if(orderInfo.orderNo == invoiceData.orderNo)
+			console.log(this.state.orderListData);
+			(this.state.orderListData != null && this.state.orderListData.length !== 0)? 
+				this.state.orderListData.map((orderInfo, key) => 
 				{
-					isMatchForUser = true;
+					console.log('orderInfo.orderNo ', orderInfo.orderID);
+					if(orderInfo.orderID === invoiceData.orderNo)
+					{
+						isMatchForUser = true;
+					}
+					
 				}
-				
-			}):isMatchForUser = false;
+			):isMatchForUser = false;
 		   return(
 				<div className="invoiceTicket">
 					<div id="content">
-					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser
-						&& invoiceData.salesInvoiceNo === this.props.match.params.invoiceId? 
-						this.invoiceDatailedData() : 
-						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
+						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
 
@@ -212,7 +219,7 @@ class Invoice extends React.Component {
 			return(
 				<div className="invoiceTicket">
 					<div id="content">
-						<div id='invoiceDiv' className="invoiceContainer" style={{color:'red', margin:'60px', width:'1170px'}}>
+						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Invoice data is not available
 						</div>
 					</div>

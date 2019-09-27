@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import HeaderL1 from '../../components/HeaderComponent/headerL1/headerL1';
 import HeaderL2 from '../../components/HeaderComponent/headerL2/headerL2';
@@ -14,6 +14,8 @@ import HeaderMobile from './HeaderMobile/index';
 import {isMobile} from '../../utils/utilityManager'
 import '../../../public/styles/headerContainer/headerContainer.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
+import { webUrl } from '../../../public/constants/constants';
+
 
 export class HeaderContainer extends React.Component {
   constructor(props) {
@@ -27,14 +29,36 @@ export class HeaderContainer extends React.Component {
   }
 
   render() {
+    let searchStr = '';
+    if (document.getElementById('searchInput')) {
+       searchStr = document.getElementById('searchInput').value;
+    }
+    const dataVal = <Helmet>
+          <script data-react-helmet="true" type="application/ld+json">
+            {`
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "url": "${webUrl}",
+              "potentialAction": {
+              "@type": "SearchAction",
+              "target": "/search/?keyword={${searchStr}}",
+                "query-input": "required name=${searchStr}"
+              }
+            `}
+          </script>
+        </Helmet>
     if (isMobile()) {
       return (
+        <>
+        {dataVal}
         <HeaderMobile />
+        </>
       );
     }
-
+    
     return (
       <>
+      {dataVal}
       <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } />
       <header className="appheader" id='header'>
         <div className="logo">

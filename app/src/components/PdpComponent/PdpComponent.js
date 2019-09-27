@@ -24,6 +24,7 @@ import { pinCodeAPI, pinCodeAPIBundle, breadcrumbAPI } from '../../../public/con
 import { isMobile,createPdpURL } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {PRODUCT_ID} from '../../constants/app/pdpConstants';
+import {Helmet} from "react-helmet";
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 import { array } from 'prop-types';
@@ -231,9 +232,6 @@ class PdpComponent extends React.Component {
 			callPincodeApi = pinCodeAPI;
 		}
 		let pincodeVal = appCookie.get('pincode');
-		if (appCookie.get('tempPincode') && appCookie.get('tempPincode') !== "") {
-			pincodeVal = appCookie.get('tempPincode');
-		}
 
 		const dataParams = this.getPincodeApiParams(resolvedSkuData, type);
 
@@ -298,12 +296,13 @@ class PdpComponent extends React.Component {
  // handleScroll function start
  handleScroll() {	
   var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
-  if(window.screen.width > 993 && window.screen.width < 1279){
-	var box1=955;
-  }else{
-	var box1=168;
-  }
-  if (document.getElementById("priceId") && document.getElementById("box3")) {
+  var box1=168;
+//   if(window.screen.width > 993 && window.screen.width < 1279){
+// 	//var box1=955;
+//   }else{
+// 	var box1=168;
+//   }
+  //if (document.getElementById("priceId") && document.getElementById("box3")) {
   var box2 = document.getElementById("priceId").offsetTop;
   var box3 = document.getElementById("box3").offsetTop;
   var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
@@ -313,7 +312,6 @@ class PdpComponent extends React.Component {
   var scrollbox1=box1-scrollTop;
   var scrollbox2=box2-scrollTop;
   var scrollbox3=box3-scrollTop;
-
   
   if(scrollbox1 <= headeroffset){
     document.getElementById("Pdpstickybar").classList.add('slidedown');			
@@ -368,19 +366,25 @@ class PdpComponent extends React.Component {
   else {
     header.classList.remove("sticky");
   }
-  }
+  //}
 }
 // handleScroll function End
   render() { 
     const { isLoading } = this.state;
 	let isSticky = true;
 	let stateAttr = {};
+	let imgUrl = '';
 
 	if (!isLoading) {
 		if (this.props.data.type === 'product') {
 			stateAttr = this.state.skuData.defAttributes
 		} else if (this.props.data.type !== 'product') {
 			stateAttr = this.state.skuData.swatchAttributes;
+		}
+		if(this.state.skuData.attachments.length > 0) {
+			if(this.state.skuData.attachments.mainImages.length > 0) {
+				imgUrl = this.state.skuData.attachments.mainImages[0].imagePath;
+			}
 		}
 	}
 
@@ -395,8 +399,13 @@ class PdpComponent extends React.Component {
 	const attrTypeData = this.getAttributeTypeData(this.props.data);
     return (
       <>
-			{!isLoading &&
+			{!isLoading && 
 			<>
+			<Helmet>
+				<script type="application/ld+json" nonce="17609530198069878121" id="jsonLD">
+						{`[{"@context":"http://schema.org/","@type":"Product","name":"${this.state.skuData.productName}","image":"${imgUrl}","brand":{"@type":"Thing","name":"Godrej Interio"}}]`}
+				</script>
+			</Helmet>
 			{breadcrumbItem}
 				{ isSticky === true &&			
 			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  

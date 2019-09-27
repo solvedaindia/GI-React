@@ -71,6 +71,7 @@ class productImagesAndVideos extends React.Component {
       	imageArray = imagesAndVideos.mainImages;
 	}
 	
+	
 	imageArray.map((data, index) => {
 		let thumbnailPath = '';
 		if (screenType && imagesAndVideos.zoomImages[index]) {
@@ -87,17 +88,17 @@ class productImagesAndVideos extends React.Component {
 		const videoUrl = `${imagePrefix}${data.videoPath}`;
 			this.images.push({
 				renderItem: this.renderVideoPlayer.bind(this),
-				thumbnail: thumbnailPath,
+				thumbnail: thumbnailPath, originalAlt:this.props.skuData.productName, thumbnailAlt:this.props.skuData.productName, 
 				videourl: videoUrl,
 			});  
 		} else {
 			const fullImagePath = `${imagePrefix}${imagePath}`;
-			this.images.push({ original: fullImagePath, thumbnail: thumbnailPath });
+			this.images.push({ original: fullImagePath, originalAlt:this.props.skuData.productName, thumbnailAlt:this.props.skuData.productName, thumbnail: thumbnailPath });
 		}
 	  });
   };
 
-
+  
   /* render video player */
   renderVideoPlayer(event) {
     return (

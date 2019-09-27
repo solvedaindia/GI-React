@@ -1,6 +1,7 @@
 import {
     wishlistDataCookie,
     wishlistIdCookie,
+    host
 } from '../../public/constants/constants';
 import LightHeader from '../components/HeaderComponent/headerL1/lightHeader';
 import HeaderContainer from '../containers/HeaderContainer';
@@ -312,6 +313,59 @@ export function createPdpURL(prodName, skuId){
 	}
     return '/pdp/furniture-' + prodName + '/' + skuId;
 }
+
+
+export function createCategoryPlpURL(categoryIdentifier)
+{
+	 var categoryRoutePath = `/`;
+	if(categoryIdentifier != undefined && categoryIdentifier != '')
+	{
+		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
+		catIdentifier = catIdentifier.replace(/ /g, "");
+        categoryRoutePath = `/furniture/${catIdentifier}`;;
+
+	}
+    return categoryRoutePath;
+}
+
+export function createPlpItemData(plpData) {
+    let plpItem = Array();
+    let productName;
+    let productUrl;
+    plpData.map((data, index) => {
+        if (data.skuList && data.skuList[0] && data.skuList[0].productName) 
+		{
+			productName = data.skuList[0].productName;
+        } 
+		else if(data.productName)
+		{
+			productName = data.productName;
+        }
+		else 
+		{
+			productName = '';
+        }
+
+        if (data.skuList && data.skuList[0] && data.skuList[0].partNumber) {
+			productUrl = host+createCategoryPlpURL(productName, data.skuList[0].partNumber);
+        } 
+		else if(data.partNumber)
+		{
+			productUrl = host+createCategoryPlpURL(productName, data.partNumber);
+        }
+		else {
+			productUrl = '';
+        }
+
+        if (index === 0) {
+            plpItem.push({"@type":"ListItem","position":1,"url":productUrl,"name":productName});
+        } else {
+            plpItem.push({"@type":productUrl,"name":productName});
+        }
+        
+    });
+    return plpItem;
+  }
 
 
 

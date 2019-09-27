@@ -126,12 +126,15 @@ export default class App extends React.Component {
 	else {
 	   $('html, body').animate({ scrollTop: 0 }, 'fast');
   }
-  /*Ipad and Mobile stop scrollTop
------------------------------------*/
-  if(isMobile() || isTab())
-  { 
-    $('html, body').stop().animate();
-  }    
+	  /*Ipad and Mobile stop scrollTop
+	-----------------------------------*/
+	  if((isMobile() || isTab()))
+	  { 
+		if(!pathurl.includes("sort") && !pathurl.includes("filter"))
+		{
+			$('html, body').stop().animate();
+		}
+	  }  
   }
 
 
@@ -197,56 +200,63 @@ export default class App extends React.Component {
   // IP Data Call.
 	getIPData() 
 	{
-		navigator.geolocation.watchPosition(function(position) {
-			if((appCookie.get('pincode') === null || appCookie.get('pincode') === "") 
-				&& appCookie.get('pincodeUpdated') !== true) 
-			{
-				var request = new XMLHttpRequest();
-				request.onreadystatechange = function () {
-					if (this.readyState === 4 && this.status == 200) {
-						var ipData = JSON.parse(this.responseText);
-						var ipDataPostCode = ipData.postal;
-						appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-					}
-					else {
-						appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-					}
-				};
-				request.open('GET', ipDataApi);
-				request.setRequestHeader('Accept', 'application/json');
-				request.send();
-			}
-		  },
-		  function(error) {
-			if (error.code == error.PERMISSION_DENIED)
-			appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+		if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
+		{
+			navigator.geolocation.watchPosition(function(position) {
+					var request = new XMLHttpRequest();
+					request.open('GET', ipDataApi);
+					request.setRequestHeader('Accept', 'application/json');
+					request.send();
+					request.onreadystatechange = 
+					function () 
+					{
+						if (this.status == 200) 
+						{
+							var ipData = JSON.parse(this.responseText);
+							if(ipData && ipData.postal)
+							{
+								var ipDataPostCode = ipData.postal;
+								appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+							}
+							else
+							{
+								appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+							}
+						}
+						else 
+						{
+  						    Geocode.setApiKey(mapKey);
+						    Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
+								response => {
+								  const address = response.results[0].formatted_address;
+								  const data = address.replace(', India', '');
+								  const postalCode = data.substr(data.length -6);
+								  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
+									appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+									this.setState({
+									  loading: false
+									})
+								  }          
+								},
+								error => {
+									appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+								}
+							)
+						}
+					};				
+			  },
+			  function(error) {
+				if (error.code == error.PERMISSION_DENIED)
+				appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
 		  });
+	   }
   	}
   
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     }
-
-    function showPosition(position) 
-	{
-      Geocode.setApiKey(mapKey);
-      Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
-        response => {
-          const address = response.results[0].formatted_address;
-          const data = address.replace(', India', '');
-          const postalCode = data.substr(data.length -6);
-          if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
-            appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
-            this.setState({
-              loading: false
-            })
-          }          
-        },
-        error => {
-        }
-      );
-     }
+    function showPosition(position) { }
     }
 
   checkCookiePolicyPopup() {
@@ -300,10 +310,12 @@ export default class App extends React.Component {
 		<div id="mainContainer">
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-		  <Route path="/rooms-kitchen/:id" component={Kitchens} />
-		  <Route path="/rooms-wardrobes/:id" component={WardrobesContainer} />
-          <Route path="/rooms-:category/:id" component={ClpContainer} />
-          <Route path="/furniture:id" component={PlpContainer} />
+		  <Route path="/rooms-kitchen_s" component={Kitchens} />
+		  <Route path="/rooms-kitchen" component={Kitchens} />
+		  <Route path="/rooms-wardrobes" component={WardrobesContainer} />
+		  <Route path="/rooms-wardrobes_S" component={WardrobesContainer} />
+          <Route path="/rooms-:id" component={ClpContainer} />
+          <Route path="/furniture/:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />

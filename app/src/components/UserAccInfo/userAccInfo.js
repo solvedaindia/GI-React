@@ -45,7 +45,8 @@ class UserAccInfo extends React.Component {
   }
 
   onLoginRegisterClick() {
-    this.setState({ showLoginRegisterMain: true });
+    appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+    this.setState({ showLoginRegisterMain: true }); 
   }
 
   welcomeBackCallback(fromForgot) {
@@ -92,7 +93,7 @@ class UserAccInfo extends React.Component {
         }
         else {
           var username = String(response.data.data.name);
-          if (response.data.data.pincode && response.data.data.pincode !== '') {
+          if (response.data.data.pincode && response.data.data.pincode !== '' && appCookie.get('pincodeUpdated') !== 'true') {
             appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
             appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
           }
@@ -165,7 +166,6 @@ class UserAccInfo extends React.Component {
   }
 
   onLogoutClick() {
-    appCookie.set('pincode', '', 365 * 24 * 60 * 60 * 1000);
     appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
     logoutTheUser();
   }

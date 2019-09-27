@@ -62,6 +62,7 @@ export class HomapegeLayout extends React.Component {
 			<div className='home'>
 				<Helmet>
 					<Pixels espotName= {'GI_PIXEL_HOME_META'}/>
+					
 				</Helmet>
 				{
 				!!homepageLayout ? (			

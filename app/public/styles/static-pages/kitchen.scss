@@ -142,15 +142,12 @@
     }
     .formDetails {
         background: #fff;
-        padding: $base*7.5 $base*7.5;
+        padding: $base*2 $base*2;
 		margin-top: $base*-75;
 		margin-left: $base*12;
 		width:70%;
 		position:absolute;
 		margin-bottom:$base*5;
-        .title {
-            margin: $base*4 0 0;
-        }
         .desc {
             text-align: center;
             margin: $base*1.5 0 $base*7.5;

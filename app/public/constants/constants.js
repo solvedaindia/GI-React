@@ -91,6 +91,8 @@ export const userLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logi
 export const plpSubCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/`;
 /* Sub-Category API */
 export const subCatAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/subcategories/13009`;
+/* Category Details API By Identifier */
+export const catDetailsAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/details/byidentifier/`;
 /* Hero Banner Slider */
 export const heroSliderAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_Homepage_Hero_Banner`;
 /* wardrobes Banner Slider */
@@ -217,6 +219,8 @@ export const orderListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orde
 export const guestTrackOrderAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/guestdetails/`;
 /* Set Password API (Social Login) */
 export const setPassword = `${secureHttp}://${host}:${port2}/api/v1/secure/users/sociallogin/setpassword`;
+/* Breadcrumb API */
+export const breadcrumbAPI = `${secureHttp}://${host}:${port2}/api/v1/categories/breadcrumb`;
 
 /* Share Wishlist API */
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
@@ -244,6 +248,7 @@ export const shipModeAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';
 export const imagePrefix = `${secureHttp}://${imgHost}/${imageStore}`;
+export const webUrl = 'www.godrejinterio.com';
 
 /* Footer logo url */
 export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg`;

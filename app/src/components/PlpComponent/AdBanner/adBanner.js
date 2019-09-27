@@ -11,7 +11,6 @@ import { getReleventReduxState } from '../../../utils/utilityManager';
 
 import { Link, Route } from 'react-router-dom';
 
-const bannerImg = <img className='adBannerWidth' src={require('../../../../public/images/plpAssests/mask@3x.png')} />
 class AdBanner extends React.Component {
   constructor(props) {
     super(props);

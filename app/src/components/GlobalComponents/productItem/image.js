@@ -15,7 +15,7 @@ class Image extends React.Component {
         <ImageLoader
           className="imgfullwidth"
           src={require('../../../../public/images/plpAssests/placeholder-image.png')}
-          alt="sofa"
+          alt="product"
         />
       );
     } else {
@@ -23,11 +23,12 @@ class Image extends React.Component {
         <ImageLoader
           className="imgfullwidth"
           src={`${imagePrefix}${this.props.data}`}
-          alt="sofa"
+          alt={this.props.productName}
         />
       );
     }
-    var routePath = createPdpURL(this.props.data.productName, this.props.data.partNumber);
+
+    var routePath = createPdpURL(this.props.productName, this.props.partNumber);
     return (
       <LazyLoad className="imgBox" debounce={false}>
         <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.breadcrumbDataPro} }}>

@@ -23,7 +23,7 @@ class LivingTheme extends React.Component {
 
   getThemeData(id) {
   	apiManager
-  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${id}`)
+  		.get(clpThemeAPI+`GI_CLP_ROOMS_THEME_${id.toUpperCase().replace(' ', '')}`)
   		.then(response => {
   			this.setState({
 				themeData: response.data.data,

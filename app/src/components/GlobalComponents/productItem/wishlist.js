@@ -43,12 +43,11 @@ class Wishlist extends React.Component {
   }
 
   onWishlistClick(e) {
-    if (e.target && e.target.name === 'viewWishListButton') {
-      return;
-    }
-
     const wishlistArr = getOnlyWishlistUniqueIds();
     if (getCookie('isLoggedIn') === 'true') {
+      if (e.target && e.target.name === 'viewWishListButton') {
+        return;
+      }
       if (wishlistArr.includes(this.props.uniqueId)) {
         this.removeFromWishlistAPI();
       } else {
@@ -153,6 +152,13 @@ class Wishlist extends React.Component {
     this.props.history.push('/wishlist');
   };
 
+  
+  resetLoginValues() {
+    this.setState({
+      isWelcomeBack: false,
+    });
+  }
+
   render() {
     const wishListId = 'wishlistBtnId_'+this.props.uniqueId;
     return (
@@ -172,7 +178,7 @@ class Wishlist extends React.Component {
           }
         </button>
 
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)}/> : null}
       </>
     );
   }
