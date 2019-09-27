@@ -6,7 +6,7 @@ import {
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import ViewAllPromo from './viewAllPromo';
-import { COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
+import { COUPAN_CODE_NOT_VALID, ERR_PROMOTION_CODE_DUPLICATED } from '../../constants/app/cartConstants';
 
 class GetCartPromo extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class GetCartPromo extends React.Component {
       });
   }
 
-  async applyPromoCode(promoCode) {
+  async applyPromoCode(promoCode) { 
     const data = {
       orderId: this.props.orderID,
       promoCode,
@@ -63,11 +63,18 @@ class GetCartPromo extends React.Component {
       });
       this.props.getCartDetails();
     } catch (error) {
-      this.setState({
-        error,
-        isLoading: false,
-        isApplyDisable: false,
-      });
+      if (error.response.data.error.error_key !== ERR_PROMOTION_CODE_DUPLICATED) {
+        this.setState({
+          error,
+          isLoading: false,
+          isApplyDisable: false,
+        });
+      } else {
+        this.setState({
+          isLoading: false,
+          isApplyDisable: false,
+        });
+      }
     }
   }
 

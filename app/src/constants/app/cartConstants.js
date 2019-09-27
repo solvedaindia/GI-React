@@ -27,6 +27,7 @@ export const PROCEED = 'Proceed';
 export const ITEMS = 'Items';
 export const COUPAN_APPLIED = 'coupon applied.';
 export const COUPAN_CODE_NOT_VALID = 'This coupon code is not valid.';
+export const ERR_PROMOTION_CODE_DUPLICATED = 'ERR_PROMOTION_CODE_DUPLICATED';
 export const PROMO_CODE_IS_INVALID = 'This promo code is invalid.';
 export const WANT_TO_REMOVE = 'Are you sure you want to remove.';
 export const FROM_YOUR_CART = 'from your cart?';

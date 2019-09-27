@@ -32,10 +32,13 @@ export class ComparePageContainer extends React.Component {
 
   componentDidMount() {
     this.state.compWidgetData = [];
-    this.props.updatedCompData.forEach(element => {
+    let updatedCompData = this.props.updatedCompData;
+    if (this.props.updatedCompData.length === 0 && appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct')).length > 0) {
+      updatedCompData = JSON.parse(appCookie.get('compareProduct'));
+    }
+    updatedCompData.forEach(element => {
       this.state.compWidgetData.push(element.skuId);
     });
-    //this.state.compWidgetData = this.props.updatedCompData
     this.callCompareApi();
   }
 
@@ -50,25 +53,33 @@ export class ComparePageContainer extends React.Component {
     }
   }
 
-  callCompareApi = () => {
+  callCompareApi = () => { 
     var ids = this.state.compWidgetData;
     var token = appCookie.get('accessToken');
+    let cookieIdArray = new Array();
+    if (ids.length === 0 && appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct'))) {
+      JSON.parse(appCookie.get('compareProduct')).map(dataId => {
+        cookieIdArray.push(dataId.skuId);
+      });
+      ids = cookieIdArray;
+    }
+    
     // this.state.compWidgetData.forEach(element => {
     //   ids.push(element.skuId);
     // });
 
-    let params = new URLSearchParams(this.props.location.search);
-    const compIdStr = params.get('ids');
-    if (compIdStr != null) { //Load page from Route search params
-      const compIdArr = compIdStr.split('/');
-      if (compIdArr.length !== 0) {
-        ids = compIdArr
-        this.state.compWidgetData = compIdArr;
-      }
-    }
-    else {
-      //this.updateRoute();
-    }
+    // let params = new URLSearchParams(this.props.location.search);
+    // const compIdStr = params.get('ids');
+    // if (compIdStr != null) { //Load page from Route search params
+    //   const compIdArr = compIdStr.split('/');
+    //   if (compIdArr.length !== 0) {
+    //     ids = compIdArr
+    //     this.state.compWidgetData = compIdArr;
+    //   }
+    // }
+    // else {
+    //   //this.updateRoute();
+    // }
 
 
 
@@ -78,9 +89,8 @@ export class ComparePageContainer extends React.Component {
         access_token: token
       }
     }).then(response => {
-
       this.setState({
-        data: response.data.data.reverse(),
+        data: response.data.data,
         loading: false
       });
       this.renderPrd();
@@ -107,11 +117,7 @@ export class ComparePageContainer extends React.Component {
   }
 
   goBack = () => {
-    if (this.state.isRouteUpdated === true) {
-      window.history.go(-2)
-    } else {
-      window.history.go(-1)
-    }
+    this.props.history.goBack();
   }
 
   renderPrd = () => {
@@ -244,9 +250,8 @@ export class ComparePageContainer extends React.Component {
   }
 
   removeCompareId(data) {
-    this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);    
+    this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);   
     this.renderPrd();
-    this.updateRoute();
     this.props.removeProduct(data);
   }
 
@@ -263,7 +268,7 @@ export class ComparePageContainer extends React.Component {
           </Col>
         </Row>
         {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.compCount}/3</h1></Row> : null}
-          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} swatchHandle={this.swatchHandle} /> : ''}</>}
+          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} history={this.props.history} swatchHandle={this.swatchHandle} /> : ''}</>}
 
       </div>
     )
