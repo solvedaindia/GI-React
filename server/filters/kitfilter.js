@@ -17,7 +17,7 @@ function getSwatchAttibute(kitData) {
       if (components.attributes && components.attributes.length > 0) {
         // iterate kit components attributes
         components.attributes.forEach(attr => {
-          if (attr.usage === 'Defining') {
+          if (attr.usage === 'Defining' && attr.identifier === swatchIdentifier) {
             attributeJson.name = attr.name;
             // iterate attributes values
             attr.values.forEach(attributeValue => {

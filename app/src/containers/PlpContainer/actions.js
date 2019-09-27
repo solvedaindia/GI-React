@@ -40,6 +40,10 @@ export const clearAllRWDFilters = () => ({
   type: actionTypes.CLEARALLFILTER,
 });
 
+export const resetCurentFilterSelection = () => ({
+    type: actionTypes.RESETCURRENTFILLTER,
+  });
+
 export const cancelRWDFilters = () => ({
     type: actionTypes.RWDFILTERCANCEL,
   });

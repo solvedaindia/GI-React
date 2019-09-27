@@ -44,14 +44,19 @@ class RWDFilterMain extends React.Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount RWD Filter')
+  }
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps RWD Filter', this.state, this.props)
 
   }
 
   moreFilterBtnClick() {
- 
+
   }
 
-  
+
 
   filterCallback() {
     this.setState({
@@ -64,6 +69,7 @@ class RWDFilterMain extends React.Component {
   }
 
   render() {
+    console.log('makrkrkr --- ',this.props.searchKeywordPro);
     return (
       <>
         <button onClick={evt => this.showFilterOptions()} className="filterBy">
@@ -76,14 +82,25 @@ class RWDFilterMain extends React.Component {
 
         {this.state.isShowFilterOptions ?
           <div className='filterOutterCont'>
+
             <div className='filterHeader'>
               <label className='filterTxt'>{FILTERS}</label>
               <label onClick={this.onClearAllclick.bind(this)} className='clearTxt'>{CLEAR_ALL}</label>
             </div>
-           
+
             <div className='filter-data'>
-              <FilterMain isFromRWD={true} rwdFilterCallback={evt => this.filterCallback()} filterDataPro={this.props.filterDataPro} />
+              <FilterMain
+                isFromRWD={true}
+                rwdFilterCallback={evt => this.filterCallback()}
+                filterDataPro={this.props.filterDataPro}
+                isSKUPro={this.props.isSKUPro}
+                categoryIdPro={this.props.categoryIdPro}
+                isSearchPathPro={this.props.isSearchPathPro}
+                searchKeywordPro={this.props.searchKeywordPro}
+              />
             </div>
+
+
           </div>
           : null}
 

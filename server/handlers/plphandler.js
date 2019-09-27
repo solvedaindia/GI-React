@@ -13,16 +13,15 @@ const plpconfig = require('../configs/plpconfig');
 const productUtil = require('../utils/productutil');
 
 /* Get Product List By Category ID with All the Data including Promotion, Category Details */
-module.exports.getProductsByCategory = function getProductsByCategory(
-  req,
-  callback,
-) {
+module.exports.getProductsByCategory = getProductsByCategory;
+async function getProductsByCategory(req, callback) {
   if (!req.params.categoryId) {
     logger.debug('Get Product List by Category :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const categoryID = req.params.categoryId;
+  const categoryIdentifier = req.params.categoryId;
+  let categoryID = categoryIdentifier;
   const reqHeader = req.headers;
 
   const queryUrl = getQueryUrl(req);
@@ -33,26 +32,31 @@ module.exports.getProductsByCategory = function getProductsByCategory(
     productList: [],
     categoryDetails: {},
   };
-  if (reqHeader.cat_details === 'true') {
-    categoryUtil.getCategoryDetails(reqHeader, categoryID, (err, result) => {
-      if (err) {
-        callback(err);
-        return;
-      }
-      const categoryDetail = result;
-      plpResponse.categoryDetails = categoryDetail;
-      if (categoryDetail.displaySkus === true) {
-        reqHeader.sku_display = 'true';
-      }
-      if (categoryDetail.displaySkus === false) {
-        reqHeader.sku_display = 'false';
-      }
-      plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
-    });
-  } else {
+
+  try {
+    let categoryDetail = await categoryUtil.getCategoryDetailsByIdentifier(
+      reqHeader,
+      categoryIdentifier,
+    );
+    if (categoryDetail.uniqueID) {
+      categoryID = categoryDetail.uniqueID;
+    }
+    categoryDetail = await categoryUtil.getCategoryDetails2(
+      reqHeader,
+      categoryID,
+    );
+    plpResponse.categoryDetails = categoryDetail;
+    if (categoryDetail.displaySkus === true) {
+      reqHeader.sku_display = 'true';
+    }
+    if (categoryDetail.displaySkus === false) {
+      reqHeader.sku_display = 'false';
+    }
     plpProductList(reqHeader, categoryID, queryUrl, plpResponse, callback);
+  } catch (error) {
+    callback(error);
   }
-};
+}
 
 /* Get Product List By Search Term with All the Data including Promotion Data */
 module.exports.getProductsBySearchTerm = function getProductsBySearch(
@@ -96,6 +100,129 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   });
 };
 
+/* Get FacetList for PLP */
+module.exports.getPLPFacetList = getPLPFacetList;
+function getPLPFacetList(req, callback) {
+  if (!req.params.categoryId) {
+    logger.debug('Get Product List by Category :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  const categoryID = req.params.categoryId;
+  const header = req.headers;
+  const reqQuery = req.query;
+  let queryUrl = `catalogId=${header.catalogId}`;
+  let facetUrl = '';
+
+  if (reqQuery.facet) {
+    const differentFacetArray = encodeURIComponent(req.query.facet).split(
+      '%2C',
+    );
+    differentFacetArray.forEach(sameFacet => {
+      const sameFacetArray = sameFacet.split('%20');
+      facetUrl += '&facet=';
+      sameFacetArray.forEach(differentFacet => {
+        facetUrl += `${differentFacet}+`;
+      });
+    });
+    queryUrl += `${facetUrl}`;
+  }
+  let searchType = plpconfig.allSKUSearchType;
+  if (header.sku_display === 'false') {
+    searchType = plpconfig.productSearchType;
+  }
+  let facetListUrl = constants.facetListByCategory
+    .replace('{{storeId}}', header.storeId)
+    .replace('{{categoryId}}', categoryID)
+    .replace('{{queryUrl}}', queryUrl);
+  facetListUrl += `&searchType=${searchType}`;
+  const reqHeader = headerUtil.getWCSHeaders(header);
+  origin.getResponse(
+    'GET',
+    facetListUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const facetRes = {
+          facetData: [],
+        };
+        if (response.body.facetView && response.body.facetView.length > 0) {
+          facetRes.facetData = plpfilter.facetData(
+            response.body.facetView,
+            header.catalogId,
+          );
+        }
+        callback(null, facetRes);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/* Get FacetList for Search */
+module.exports.getSearchFacetList = getSearchFacetList;
+function getSearchFacetList(req, callback) {
+  if (!req.params.searchterm) {
+    logger.debug('Get Product List By Search Term :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+
+  const header = req.headers;
+  let facetUrl = '';
+  const reqQuery = req.query;
+  let queryUrl = '';
+  if (reqQuery.facet) {
+    const differentFacetArray = encodeURIComponent(req.query.facet).split(
+      '%2C',
+    );
+    differentFacetArray.forEach(sameFacet => {
+      const sameFacetArray = sameFacet.split('%20');
+      facetUrl += '&facet=';
+      sameFacetArray.forEach(differentFacet => {
+        facetUrl += `${differentFacet}+`;
+      });
+    });
+    queryUrl += `${facetUrl}`;
+  }
+  let facetListUrl = constants.searchByTerm
+    .replace('{{storeId}}', header.storeId)
+    .replace('{{searchTerm}}', req.params.searchterm)
+    .replace('{{queryUrl}}', queryUrl);
+  facetListUrl += `&searchType=${plpconfig.searchPageSearchType}`;
+  const reqHeader = headerUtil.getWCSHeaders(header);
+  origin.getResponse(
+    'GET',
+    facetListUrl,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        const facetRes = {
+          facetData: [],
+        };
+        if (response.body.facetView && response.body.facetView.length > 0) {
+          facetRes.facetData = plpfilter.facetData(
+            response.body.facetView,
+            header.catalogId,
+          );
+        }
+        callback(null, facetRes);
+      } else {
+        callback(errorUtils.handleWCSError(response));
+      }
+    },
+  );
+}
+
 function plpProductList(headers, categoryID, queryUrl, plpResponse, callback) {
   let productListUrl = constants.allSKUByCategoryId
     .replace('{{storeId}}', headers.storeId)
@@ -133,7 +260,6 @@ function getQueryUrl(req) {
   const pageSize = Number(reqQuery.pagesize) || plpconfig.pageSize;
   const pageNumber = Number(reqQuery.pagenumber) || plpconfig.pageNumber;
   const orderBy = Number(reqQuery.orderby) || plpconfig.orderBy;
-  const currency = plpconfig.currencyType;
 
   let queryUrl = `pageSize=${pageSize}&pageNumber=${pageNumber}&orderBy=${orderBy}&catalogId=${
     reqHeader.catalogId

@@ -27,6 +27,7 @@ const initialState = {
     rwdUpdatedFilter: new Map(),
     compWidgetData: [],
     compCategories: [],
+    resetCurrentSelection: false,
 };
 
 function plpContainerReducer(state = initialState, action) {
@@ -67,6 +68,12 @@ function plpContainerReducer(state = initialState, action) {
                 ...state,
                 updateFilter: new Map(),
                 rwdUpdatedFilter: new Map(),
+                resetCurrentSelection: true,
+            };
+        case actionTypes.RESETCURRENTFILLTER:
+            return {
+                ...state,
+                resetCurrentSelection: false,
             };
         case actionTypes.RWDFILTERCANCEL:
             return {

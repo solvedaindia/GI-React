@@ -433,13 +433,16 @@ function swatchAttributesForCompare(productData) {
     skuId: '',
     name: '',
     colorCode: '',
+    seatCapacity: '',
   };
   attributeJson.skuId = productData.uniqueID;
   if (productData.attributes && productData.attributes.length > 0) {
-    // iterate kit components attributes
     productData.attributes.forEach(attr => {
-      // iterate attributes values
-      if (attr.usage === 'Defining' && attr.identifier === swatchIdentifier) {
+      if (
+        attr.usage === 'Defining' &&
+        attr.identifier === swatchIdentifier &&
+        attr.values.length > 0
+      ) {
         attr.values.forEach(attributeValue => {
           const match = rbgRegex.exec(attributeValue.image1);
           attributeJson.name = attributeValue.value;
@@ -449,6 +452,16 @@ function swatchAttributesForCompare(productData) {
             attributeJson.colorCode =
               imagefilter.getImagePath(attributeValue.image1path) || '';
           }
+        });
+      }
+
+      if (
+        attr.usage === 'Defining' &&
+        attr.identifier === 'SEATINGCAPACITY' &&
+        attr.values.length > 0
+      ) {
+        attr.values.forEach(attributeValue => {
+          attributeJson.seatCapacity = attributeValue.value;
         });
       }
     });
@@ -488,7 +501,7 @@ function getDescriptiveAttributes(productData) {
 module.exports.getComparableAttributes = getComparableAttributes;
 function getComparableAttributes(attributes) {
   const comparable = [];
-  if (attributes) {
+  if (attributes && attributes.length > 0) {
     attributes.forEach(attribute => {
       if (
         attribute.comparable === true &&

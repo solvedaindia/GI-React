@@ -4,6 +4,7 @@ const origin = require('../utils/origin');
 const constants = require('../utils/constants');
 const errorUtils = require('../utils/errorutils');
 const headerUtils = require('../utils/headerutil');
+const apiCache = require('../utils/apicache');
 
 /* GET Auto Suggest key */
 /* Auto Suggest Result Page API */
@@ -56,34 +57,46 @@ function getKeywordSuggestion(headers, searchTerm, callback) {
 }
 
 function getCategorySuggestion(req, searchTerm, callback) {
-  const originUrl = constants.categorySuggestions.replace(
-    '{{storeId}}',
-    req.headers.storeId,
-  );
-
-  const reqHeaders = headerUtils.getWCSHeaders(req.headers);
-
-  origin.getResponse(
-    'GET',
-    originUrl,
-    reqHeaders,
-    null,
-    null,
-    null,
-    '',
-    async response => {
-      if (response.status === 200) {
-        const data = response.body.suggestionView[0].entry;
-        if (searchTerm) {
-          const filterData = await filterDataFunction(searchTerm, data);
-          callback(null, filterData);
-        }
-      } else {
-        logger.debug('Error in Calling Auto Category Suggestion');
-        callback(errorUtils.handleWCSError(response));
+  apiCache.getCachedResponse('catsuggestion', null, async cacheRes => {
+    if (cacheRes) {
+      const categorySuggestion = cacheRes;
+      const data = categorySuggestion.suggestionView[0].entry;
+      if (searchTerm) {
+        const filterData = await filterDataFunction(searchTerm, data);
+        callback(null, filterData);
       }
-    },
-  );
+    } else {
+      const originUrl = constants.categorySuggestions.replace(
+        '{{storeId}}',
+        req.headers.storeId,
+      );
+
+      const reqHeaders = headerUtils.getWCSHeaders(req.headers);
+
+      origin.getResponse(
+        'GET',
+        originUrl,
+        reqHeaders,
+        null,
+        null,
+        null,
+        '',
+        async response => {
+          if (response.status === 200) {
+            apiCache.cacheResponse('catsuggestion', null, response.body);
+            const data = response.body.suggestionView[0].entry;
+            if (searchTerm) {
+              const filterData = await filterDataFunction(searchTerm, data);
+              callback(null, filterData);
+            }
+          } else {
+            logger.debug('Error in Calling Auto Category Suggestion');
+            callback(errorUtils.handleWCSError(response));
+          }
+        },
+      );
+    }
+  });
 }
 
 const filterDataFunction = (filterKeyword, data) =>
@@ -101,12 +114,15 @@ const filterDataFunction = (filterKeyword, data) =>
       ) {
         if (item.fullPath.toLowerCase().startsWith(starting.toLowerCase())) {
           const pathString = item.fullPath.split('>');
-          const parentRoom = pathString[1].trim();
+          const parentRoom = pathString[1]
+            ? pathString[1].trim()
+            : pathString[1];
           const lowerKeyword = filterKeyword.toLowerCase();
           const lowerStartString = starting.toLowerCase();
           if (pathString.length > 2 || lowerKeyword === lowerStartString) {
             filterDataArrayObject.categoryId = item.value;
             filterDataArrayObject.categoryName = item.name;
+            filterDataArrayObject.categoryIdentifier = item.identifier_ntk;
             filterDataArrayObject.parentRoom = parentRoom;
             filterDataArray.push(filterDataArrayObject);
           }

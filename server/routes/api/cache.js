@@ -12,7 +12,7 @@ router.post('/clear', (req, res, next) => {
  * Get Cached Keys
  */
 router.get('/keys', (req, res, next) => {
-  apiCache.getKeys(response => {
+  apiCache.getKeys(req, response => {
     res.send(response);
   });
 });

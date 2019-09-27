@@ -11,6 +11,10 @@ module.exports.apiCacheConfig = {
     expiryTime: 60 * 60 * 4,
     userSpecific: false,
   },
+  catsuggestion: {
+    expiryTime: 60 * 60 * 24,
+    userSpecific: false,
+  },
 };
 
 module.exports.redisConfig = getRedisConfig;

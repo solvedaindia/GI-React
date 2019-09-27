@@ -35,6 +35,7 @@ class Filter extends React.Component {
       checked: false,
       isMobile: window.innerWidth <= 760,
       isRWDFilterSelected: false,
+      active: false,
     }
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -44,12 +45,15 @@ class Filter extends React.Component {
   }
 
   toggleDropdown(ismmm) {
-   
 
+    if (!this.state.active) {
+      this.props.updateCurrentFacetSelection(this.props.dataPro.facetName)
+    }
 
     if (!this.state.active) {
       document.addEventListener('click', this.handleOutsideClick, false);
       if (isMobile()) {
+        this.state.facetArr = [];
         this.resolvePreSelectedFilters();
       }
     } else {
@@ -137,6 +141,41 @@ class Filter extends React.Component {
     }
   }
 
+  onFacetChange(isToggle) {
+    if (isToggle) {
+      this.toggleDropdown(true)
+    }
+
+    if (this.props.onFacetChangePro) {
+      this.props.onFacetChangePro((err, res) => {
+        if (res) {
+          this.unCkeckAll();
+
+          const filteredArr = [...this.state.facetArr];
+          var preFilter = this.props.RWDupdatedFilter
+          for (const [key, value] of preFilter) {
+            if (key === this.props.dataPro.facetName) {
+              value.map((option, i) => {
+                filteredArr.push(option);
+                
+              });
+            }
+          }
+        
+          const extFacetArr = filteredArr.map(
+            item =>
+              item.value.replace(/\%2B/g, '+'),
+          );
+          this.filterOptions(extFacetArr);
+
+
+
+          // this.filterOptions([]);
+        }
+      });
+    }
+  }
+
   onCancelBtnClick() {
     this.toggleDropdown();
     if (this.props.isFromRWD) {
@@ -145,8 +184,52 @@ class Filter extends React.Component {
     }
     if (isMobile()) {
     }
-
   }
+
+  onApplyBtnClick() {
+    this.state.facetArr.map(item => {
+      item.value = item.value.replace(/\+/g, '%2B');
+    });
+
+    if (isMobile()) {
+      console.log('iiiii --- ',this.props.RWDupdatedFilter,this.props.updatedFilter)
+      
+      this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
+      if (!this.compareMaps(this.props.RWDupdatedFilter, this.props.updatedFilter)) {
+        this.onCancelBtnClick();
+      }
+    }
+    else {
+      this.props.onFilterUpdate(
+        this.state.facetArr,
+        this.props.dataPro.facetName,
+      );
+    }
+ 
+  }
+
+  compareMaps(map1, map2) {
+    var testVal;
+    if (map1.size !== map2.size) {
+        return false;
+    }
+    for (var [key, val] of map1) {
+        testVal = map2.get(key);
+        // in cases of an undefined value, make sure the key
+        // actually exists on the object so there are no false positives
+        if (testVal !== val) {
+            return false;
+        }
+        if (testVal === undefined ) {
+          return false;
+      }
+      if (!map2.has(key)) {
+        return false;
+    }
+        
+    }
+    return true;
+}
 
   unCkeckAll() {
     [
@@ -173,6 +256,14 @@ class Filter extends React.Component {
         this.filterOptions([]);
       }
     }
+
+    if (nextProps.resetCurrentSelection) {
+        this.onFacetChange(true);
+        this.setState({
+          facetArr: [],
+        })
+      this.props.onResetCurrentlFilter();
+    }
   }
 
   resolvePreSelectedFilters() {
@@ -192,7 +283,7 @@ class Filter extends React.Component {
     }
     this.setState({
       facetArr: filteredArr,
-      active: this.props.indexPro === 0 && this.props.isFromRWD ? !this.state.active : false
+      active: this.props.currentFacetPro === this.props.dataPro.facetName && this.props.isFromRWD ? !this.state.active : false
     });
     const extFacetArr = filteredArr.map(
       item =>
@@ -201,26 +292,6 @@ class Filter extends React.Component {
     this.filterOptions(extFacetArr);
   }
 
-  onApplyBtnClick() {
-    this.state.facetArr.map(item => {
-      item.value = item.value.replace(/\+/g, '%2B');
-    });
-
-
-  
-
-    if (isMobile()) {
-      this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
-    }
-    else {
-      this.props.onFilterUpdate(
-        this.state.facetArr,
-        this.props.dataPro.facetName,
-      );
-    }
-
-
-  }
 
   filterOptions(alreadyAddedFiltersArr) {
     var isRWDFacetSelecte = false;
@@ -254,12 +325,12 @@ class Filter extends React.Component {
             name="scales"
             disabled={option.count === 0 ? true : false}
           />
-        ); 
+        );
 
       }
 
       let checkItem;
-    
+
 
       let colorStyle = {
         display: 'block',
@@ -343,7 +414,7 @@ class Filter extends React.Component {
           className="dropdown_filter"
         >
           <div className="dropdown_filter__filter">
-            <div className="dropdown_filter__toggle dropdown_filter__list-item" onClick={this.props.isFromRWD ? this.state.active ? null : () => this.toggleDropdown(true) : () => this.toggleDropdown(true)}>
+            <div className="dropdown_filter__toggle dropdown_filter__list-item" onClick={this.props.isFromRWD ? this.state.active ? () => this.onFacetChange(false) : () => this.onFacetChange(true) : () => this.toggleDropdown(true)}>
               {this.props.dataPro.facetName}
               {this.props.isFromRWD ? this.state.isRWDFilterSelected ? <div className='selectedFacet'>•</div> : null : null}
               {this.props.isFromRWD ? null : this.state.active ? upArrow : downArrow}
@@ -359,11 +430,7 @@ class Filter extends React.Component {
             </div>
           </ul>}
 
-          {isMobile() && <div className='filter-data-list'><ul
-            className={`dropdown_filter__list ${
-              this.state.active ? 'dropdown_filter__list--active' : ''
-              }`}
-          >
+          {isMobile() && <div className='filter-data-list'><ul className={`dropdown_filter__list ${/* this.props.currentFacetPro === null &&  */this.props.indexPro === 0 ? 'dropdown_filter__list--active' : this.state.active ? 'dropdown_filter__list--active' : ''}`}>
             {this.state.facetItem}
             {isMobile() && <><div className='clearfix'></div>
 
@@ -387,6 +454,7 @@ const mapDispatchToProps = dispatch => {
     return {
       onRWDFilterUpdate: (RWDupdatedArr, RWDfacetName, isApply) => dispatch(actionCreators.RWDFilter(RWDupdatedArr, RWDfacetName, isApply)),
       onRWDFilterCancel: () => dispatch(actionCreators.cancelRWDFilters()),
+      onResetCurrentlFilter: () => dispatch(actionCreators.resetCurentFilterSelection()),
     }
   }
   else {
@@ -403,6 +471,7 @@ const mapStateToProps = state => {
   return {
     updatedFilter: stateObj.updateFilter,
     RWDupdatedFilter: stateObj.rwdUpdatedFilter,
+    resetCurrentSelection: stateObj.resetCurrentSelection,
   };
 };
 

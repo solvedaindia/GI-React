@@ -60,6 +60,7 @@ function getSwatchAttributes(bundleData) {
   if (bundleData.attributes && bundleData.attributes.length > 0) {
     bundleData.attributes.forEach(attribute => {
       if (
+        attribute.usage === 'Descriptive' &&
         attribute.identifier === swatchIdentifier &&
         attribute.values &&
         attribute.values.length > 0
@@ -78,6 +79,7 @@ function getSwatchAttributes(bundleData) {
         bundleData.components[0].attributes.forEach(attribute => {
           if (
             attribute.usage === 'Defining' &&
+            attribute.identifier === swatchIdentifier &&
             attribute.values &&
             attribute.values.length > 0
           ) {
@@ -118,6 +120,7 @@ function swatchAttributesForComparePage(bundleData) {
   if (bundleData.attributes && bundleData.attributes.length > 0) {
     bundleData.attributes.forEach(attribute => {
       if (
+        attribute.usage === 'Defining' &&
         attribute.identifier === swatchIdentifier &&
         attribute.values &&
         attribute.values.length > 0
@@ -139,6 +142,7 @@ function swatchAttributesForComparePage(bundleData) {
         bundleData.components[0].attributes.forEach(attribute => {
           if (
             attribute.usage === 'Defining' &&
+            attribute.identifier === swatchIdentifier &&
             attribute.values &&
             attribute.values.length > 0
           ) {

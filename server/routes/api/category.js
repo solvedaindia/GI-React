@@ -64,4 +64,20 @@ router.get('/details/:categoryID', async (req, res, next) => {
   }
 });
 
+/* Get Category Details by Identifier */
+router.get('/details/byidentifier/:catIdentifier', async (req, res, next) => {
+  try {
+    const result = await categoryUtil.getCategoryDetailsByIdentifier(
+      req.headers,
+      req.params.catIdentifier,
+    );
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
