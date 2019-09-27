@@ -9,7 +9,7 @@ class DescriptionBanner extends React.Component {
       splitData: null,
       fullData: this.props.descriptionDataPro.description,
       title: this.props.descriptionDataPro.title,
-      finalData: null,
+      finalData: '',
       isReadMore: false,
       readMoreTitle: 'Read More',
     };
@@ -59,27 +59,30 @@ class DescriptionBanner extends React.Component {
   }
 
   render() {
+    const { finalData } = this.state
     return (
-      <div className="descriptionBanner">
-        <Grid>
-          <Row>
-            <Col md={12}>
-              <h1 className="heading">{this.state.title}</h1>
-              <ul className="description_area">
-                <div
-                  dangerouslySetInnerHTML={{ __html: this.state.finalData }}
-                />
-              </ul>
-              <button
-                onClick={this.readMoreClicked.bind(this)}
-                className="readMore"
-              >
-                {this.state.readMoreTitle}
-              </button>
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+      !!finalData && (
+        <div className="descriptionBanner">
+          <Grid>
+            <Row>
+              <Col md={12}>
+                <h1 className="heading">{this.state.title}</h1>
+                <ul className="description_area">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: this.state.finalData }}
+                  />
+                </ul>
+                <button
+                  onClick={this.readMoreClicked.bind(this)}
+                  className="readMore"
+                >
+                  {this.state.readMoreTitle}
+                </button>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      )
     );
   }
 }
