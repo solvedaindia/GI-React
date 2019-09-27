@@ -11,6 +11,7 @@ import {
 } from '../../../public/constants/constants';
 import {REMOVE, VIEW_PRODUCT} from '../../constants/app/compareConstants'
 import {createPdpURL} from '../../utils/utilityManager';
+import appCookie from '../../utils/cookie';
 
 class TopContainer extends React.Component {
     constructor(props) {
@@ -18,13 +19,14 @@ class TopContainer extends React.Component {
     }
      
     removePrd = () => {
-      if(this.props.count == 2) {
-        if (this.props.isRouteUpdated === true) {
-          window.history.go(-2);
-        } else {
-          window.history.go(-1);
-        }
+      let compData = JSON.parse(appCookie.get('compareProduct'));
+      compData = compData.filter(el => el.skuId !== this.props.product.uniqueID);
+      appCookie.set('compareProduct', JSON.stringify(compData), 365 * 24 * 60 * 60 * 1000);
+       
+      if(this.props.count == 2) { 
+        this.props.history.goBack();
       }
+
       this.props.remove(this.props.product.uniqueID);
     }
 

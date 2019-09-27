@@ -19,10 +19,10 @@ class CompPrd extends React.Component {
       payment: true
     }
   }
-  renderProducts = () => {
+  renderProducts = () => { 
     var prds = [];
     this.props.data.map((element, index) => {
-      prds.push(<TopContainer key={index} product={element} isRouteUpdated={this.props.isRouteUpdated} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
+      prds.push(<TopContainer key={index} product={element} isRouteUpdated={this.props.isRouteUpdated} history={this.props.history} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
     });
     return prds;
   }
@@ -124,7 +124,7 @@ class CompPrd extends React.Component {
 
   renderDelivery = () => {
     var dels = [];
-    this.props.data.map(elem => {
+    this.props.data.map(elem => { 
       dels.push(<DelContainer skuData={elem} />)
     })
     return dels;

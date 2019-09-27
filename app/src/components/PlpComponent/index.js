@@ -22,6 +22,7 @@ import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
 import Sort from './Sorting/sort';
 import LoadingIndicator from '../../utils/loadingIndicator';
+import appCookie from '../../utils/cookie';
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -41,24 +42,36 @@ class PlpComponent extends React.Component {
   }
 
   handleAddProduct = product => {
-    const compPrd = this.props.compData.find(prd => prd.skuId == product.skuId);
-    const compCat = this.props.compData.find(prd => prd.catId == this.props.catId);
-    const masterProduct = this.props.compData.find(prd => prd.masterCategoryID == product.masterCategoryID);
+    let compdata = [];
+    if (this.props.compData.length > 0) { 
+      compdata = this.props.compData;
+    } else if(appCookie.get('compareProduct')) { 
+      compdata = JSON.parse(appCookie.get('compareProduct'));
+    }
+    
+    const compPrd = compdata.find(prd => prd.skuId == product.skuId);
+    const compCat = compdata.find(prd => prd.catId == this.props.catId);
+    const masterProduct = compdata.find(prd => prd.masterCategoryID == product.masterCategoryID);
     if (compPrd) {
       alert(
         'Product already added in Compare tray. Please add another product',
       );
-    } else if (this.props.compData.length == 3) {
+    } else if (compdata.length == 3) {
       alert(
         'You can add upto 3 products. Please remove a product to add another',
       );
-    } else if (this.props.compData.length > 0 && !compCat) {
+    } else if (compdata.length > 0 && !compCat) {
       alert('Please select same category products');
     } 
-    else if (this.props.compData.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
+    else if (compdata.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
       alert('Selected product is from different category');
     } 
     else {
+      if (this.props.compData.length === 0) {
+        compdata.map(data => {
+          this.props.addProduct(data);
+        })
+      }
       product.catId = this.props.catId;
       this.props.addProduct(product);
     }
