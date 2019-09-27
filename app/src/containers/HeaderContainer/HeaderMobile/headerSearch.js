@@ -90,13 +90,13 @@ export class HeaderSearch extends React.Component {
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-        createCategoryPlpURL(item.categoryIdentifier);
+        const routePath = createCategoryPlpURL(item.categoryIdentifier);
         var searchStr = item.categoryName;
         searchStr += ` in ${item.parentRoom}`;
         if (index < 4) {
           return (
             <li className="list" key={index}>
-              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={'/'} >
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={routePath} >
                 <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
               </Link>
             </li>
