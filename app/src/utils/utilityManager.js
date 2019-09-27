@@ -314,6 +314,21 @@ export function createPdpURL(prodName, skuId){
     return '/pdp/furniture-' + prodName + '/' + skuId;
 }
 
+export function createSEOPdpURL(prodName, shortDesc, skuId){
+	if(prodName != undefined && prodName != '')
+	{
+		prodName =prodName.toLowerCase();
+		shortDescURL = '';
+		if(shortDesc != undefined && shortDesc != '')
+		{
+			shortDescURL =(shortDesc.split(' ').join('-')).split(',').join('-');
+			shortDescURL = shortDescURL.toLowerCase();
+			shortDescURL = '-' + shortDescURL;
+		}
+		return '/pdp/furniture-' + prodName.split(' ').join('-') +shortDescURL +  '/' + skuId;
+	}
+    return '/pdp/furniture-' + prodName + '/' + skuId;
+}
 
 export function createCategoryPlpURL(categoryIdentifier)
 {
