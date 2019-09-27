@@ -14,6 +14,7 @@ module.exports = Object.freeze({
   categoryProductPriceData: `${prodWcsResourceUrl}/{{storeId}}/catalogDetails/getCategoryData?categoryIds={{categoryUrl}}`,
   categoryViewByParentId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byParentCategory/{{categoryId}}`,
   categoryViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/categoryview/byId/{{categoryId}}`,
+  categoryViewByIdentifier: `${prodSearchResourceUrl}/{{storeId}}/categoryview/{{categoryIdentifier}}`,
   productViewByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?searchSource=E&searchType=101`,
   allSKUByCategoryId: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&searchSource=E&responseFormat=json&profileName=IBM_findProductsByCategory`,
   productViewByProductId: `${prodSearchResourceUrl}/{{storeId}}/productview/byId/{{productId}}?profileName=IBM_findProductByIds_Details`,
@@ -78,4 +79,5 @@ module.exports = Object.freeze({
   unlockOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/unlockOrder/{{orderId}}`,
   categoryBreadcrumb: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?responseFormat=json&profileName=IBM_BreadCrumbByCategoryUniqueId`,
   categorySuggestions: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/categorySuggestions`,
+  facetListByCategory: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&searchSource=E&responseFormat=json&profileName=IBM_ComposeFacetListByCategoryId`,
 });

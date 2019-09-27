@@ -38,12 +38,13 @@ module.exports.getProductDetails = function getProductDetailsData(
   const reqHeaders = req.headers;
   const skuID = req.params.skuId;
 
-  activityHandler.addRecentlyViewedProduct(reqHeaders, skuID);
-  productUtil.productByProductID(skuID, reqHeaders, (err, result) => {
+  productDataByPartNumber(skuID, reqHeaders, (err, result) => {
     if (err) {
       callback(err);
     } else {
-      logger.debug('Got all the origin resposes From PDP API');
+      logger.debug(
+        'Got all the origin resposes From Product-Data-By-Part-Number API',
+      );
       if (result.catalogEntryView && result.catalogEntryView.length > 0) {
         if (result.catalogEntryView[0].catalogEntryTypeCode === 'ProductBean') {
           callback(null, {});
@@ -104,6 +105,38 @@ module.exports.getProductDetails = function getProductDetailsData(
     }
   });
 };
+
+/**
+ * Function to return product data by partNumber
+ * @param {*} skuId
+ * @param {*} reqHeaders
+ * @param {*} callback
+ */
+function productDataByPartNumber(skuId, reqHeaders, callback) {
+  const productData = {
+    catalogEntryView: [],
+  };
+  productUtil.productDetailByPartNumber(skuId, reqHeaders, (err, result) => {
+    if (err) {
+      callback(err);
+    } else if (Object.keys(result).length !== 0) {
+      productData.catalogEntryView.push(result);
+      activityHandler.addRecentlyViewedProduct(reqHeaders, result.uniqueID);
+      callback(null, productData);
+    } else {
+      // eslint-disable-next-line no-shadow
+      activityHandler.addRecentlyViewedProduct(reqHeaders, skuId);
+      // eslint-disable-next-line no-shadow
+      productUtil.productByProductID(skuId, reqHeaders, (err, result) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, result);
+        }
+      });
+    }
+  });
+}
 
 /**
  * Function for pincode service ability

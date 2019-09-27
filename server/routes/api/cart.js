@@ -146,6 +146,24 @@ router.post('/update', (req, res, next) => {
 });
 
 /**
+ * Get Applied Promotions from Cart
+ * @param access_token,storeId
+ * @return 200,OK Fetched Applied Promotions
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/appliedpromotion', async (req, res, next) => {
+  try {
+    const result = await promotionUtil.getCartAppliedPromotions(req.headers);
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
  * Apply Promocode to Cart
  * @param access_token,storeId
  * @return 200,OK Applying the Promotion Successfully

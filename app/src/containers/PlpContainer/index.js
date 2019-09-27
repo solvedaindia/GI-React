@@ -487,7 +487,7 @@ export class PlpContainer extends React.Component {
     } else { //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
-   
+
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 1000;
     const windowHeight = scrollYindex;
@@ -679,10 +679,15 @@ export class PlpContainer extends React.Component {
 
 
 
-        {this.state.isMobile && plpData.length !== 0 ? <div className='sortfilter'>
+        {this.state.isMobile && this.state.productCount !== null && this.state.productCount !== 0 ? <div className='sortfilter'>
           <RWDSort sortingIndexPro={this.state.plpSorting} />
-          <RWDFilterMain filterDataPro={filterData} />
-
+          <RWDFilterMain
+            filterDataPro={filterData}
+            isSKUPro={this.state.displaySkus}
+            categoryIdPro={categoryId}
+            isSearchPathPro={this.props.location.pathname}
+            searchKeywordPro={keywoard}
+          />
         </div> : null}
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END'} />
 

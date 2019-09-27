@@ -5,6 +5,7 @@ const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
 const headerUtil = require('../utils/headerutil');
+const categroyUtil = require('../utils/categoryutil');
 const categoryFilter = require('../filters/categoryfilter');
 const plpFilter = require('../filters/productlistfilter');
 
@@ -84,13 +85,24 @@ async function getSubCategoriesData(req, callback) {
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const categoryId = req.params.categoryID;
-  const originUrl = constants.categoryViewByParentId
-    .replace('{{storeId}}', req.headers.storeId)
-    .replace('{{categoryId}}', categoryId);
-
-  const reqHeaders = headerUtil.getWCSHeaders(req.headers);
   try {
+    const categoryIdentifier = req.params.categoryID;
+    let categoryId = categoryIdentifier;
+    const categoryDetails = await categroyUtil.getCategoryDetailsByIdentifier(
+      req.headers,
+      categoryIdentifier,
+    );
+
+    if (categoryDetails.uniqueID) {
+      categoryId = categoryDetails.uniqueID;
+    }
+
+    const originUrl = constants.categoryViewByParentId
+      .replace('{{storeId}}', req.headers.storeId)
+      .replace('{{categoryId}}', categoryId);
+
+    const reqHeaders = headerUtil.getWCSHeaders(req.headers);
+
     const result = await origin2.getResponse(
       'GET',
       originUrl,

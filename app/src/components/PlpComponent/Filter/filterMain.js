@@ -7,15 +7,14 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
-
+import { getReleventReduxState, resolveTheFilter, isMobile } from '../../../utils/utilityManager';
 import crossIcon from '../../../../public/images/closeplpFilter.svg';
-
 import Filter from './filter';
-
-
-
-
+import apiManager from '../../../utils/apiManager';
+import {
+  plpFilterAPI,
+  searchFilterAPI
+} from '../../../../public/constants/constants';
 
 class FilterMain extends React.Component {
   constructor(props) {
@@ -27,29 +26,106 @@ class FilterMain extends React.Component {
       selectedFilters: null,
       filterBtnTitle: null,
       appliedFilters: [],
+      filterData: this.props.filterDataPro,
       isFilterExpend: false,
-
       isMobile: window.innerWidth <= 760,
+      nextProps: null,
+      thisProps: this.props.rwdUpdatedFilter,
+      currentFacetSelection: null, /* this.props.filterDataPro.length !== 0 ? this.props.filterDataPro[0].facetName : null, */
+      showLoader: false,
     };
-
     this.clearTheSelectedFilter = this.clearTheSelectedFilter.bind(this)
     this.moreFilterBtnClick = this.moreFilterBtnClick.bind(this)
   }
 
+  updateOnFacetChange(callback) {
+    if (this.state.nextProps !== this.state.thisProps && this.state.nextProps !== null) {
+
+      let filterURLMaking = plpFilterAPI + this.props.categoryIdPro;
+      let searchText = null;
+      if (this.props.isSearchPathPro.includes('/search')) {
+        const keyword = this.props.searchKeywordPro;
+        searchText = encodeURIComponent(keyword).replace(/%2F/g, ' ');
+        filterURLMaking = searchFilterAPI + searchText;
+      }
+      let plpURL = `${filterURLMaking}?` + `${this.props.rwdUpdatedFilter}`;
+    
+      this.setState({
+        showLoader: true
+      })
+      apiManager
+        .get(plpURL, {
+          headers: {
+            sku_display: String(this.props.isSKUPro),
+          },
+        })
+        .then(response => {
+          this.setState({
+            showLoader: false
+          })
+          if (response.data.data.facetData && response.data.data.facetData.length !== 0) {
+            const updateItem = response.data.data.facetData.map((item, index) => {
+              return (
+                <Filter
+                  currentFacetPro={this.state.currentFacetSelection}
+                  updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
+                  onFacetChangePro={this.updateOnFacetChange.bind(this)}
+                  rwdFilterCallbackPro={this.props.rwdFilterCallback}
+                  isFromRWD={this.props.isFromRWD}
+                  key={index}
+                  dataPro={item}
+                  indexPro={index}
+                />
+              )
+            })
+            this.setState({
+              filterData: response.data.data.facetData,
+              filterItem: updateItem,
+            });
+            this.state.thisProps = this.props.rwdUpdatedFilter;
+            callback(null, 'success');
+          }
+        })
+        .catch(error => {
+          this.setState({
+            showLoader: false
+          })
+          callback('err');
+        });
+    }
+  }
+
+  getCurrentFacetSelection(currentFacet) {
+
+    this.state.currentFacetSelection = currentFacet;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.nextProps = nextProps.rwdUpdatedFilter;
+  }
+
   componentDidMount() {
-    if (this.props.filterDataPro) {
-      const allItems = this.props.filterDataPro.map((item, index) => {
+    if (this.state.filterData) {
+      const allItems = this.state.filterData.map((item, index) => {
         return (
-          <Filter rwdFilterCallbackPro={this.props.rwdFilterCallback} isFromRWD={this.props.isFromRWD} key={index} dataPro={item} indexPro={index} />
+          <Filter
+            currentFacetPro={this.state.currentFacetSelection}
+            updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
+            onFacetChangePro={this.updateOnFacetChange.bind(this)}
+            rwdFilterCallbackPro={this.props.rwdFilterCallback}
+            isFromRWD={this.props.isFromRWD}
+            key={index}
+            dataPro={item}
+            indexPro={index} />
         )
       })
 
       var splitItems = [];
       var leftOverFilterCount;
-      if (this.props.filterDataPro.length > 4) {
+      if (this.state.filterData.length > 4) {
         splitItems = allItems.slice(0, 4);
         leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
-      
+
       }
       else {
         splitItems = allItems;
@@ -95,7 +171,7 @@ class FilterMain extends React.Component {
     const item = appliedFilltersArr.map((data, i) => {
       return (
         <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>
-		<img className='crossImg' src={crossIcon}  alt="Close"/></span></button>
+          <img className='crossImg' src={crossIcon} alt="Close" /></span></button>
       )
     })
     this.setState({
@@ -105,7 +181,7 @@ class FilterMain extends React.Component {
   }
 
   clearTheSelectedFilter(index) {
-    
+
     var selectionFacetValue = this.state.appliedFilters[index].value;
     var selectedFacetName;
     var selectedFacetValuesArr = [];
@@ -141,14 +217,22 @@ class FilterMain extends React.Component {
     }
   }
 
+  showLoader() {
+    const idid = <div className="lazyloading-Indicator-RWDFilter">
+      <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+    </div>
+    return idid;
+  }
+
   render() {
     var moreFilterBtn = null;
-    if (this.props.filterDataPro.length > 4) {
+    if (this.state.filterData.length > 4) {
       moreFilterBtn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{this.state.filterBtnTitle}</button>
     }
 
     return (
       <>
+        {this.state.showLoader && isMobile() ? this.showLoader() : null}
         {this.props.isFromRWD ? null : <h4 className='heading'>Filter</h4>}
 
         {this.state.filterItem}
@@ -175,7 +259,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
   return {
-    updatedFilter: stateObj.updateFilter
+    updatedFilter: stateObj.updateFilter,
+    rwdUpdatedFilter: resolveTheFilter(stateObj.rwdUpdatedFilter),
+    
   }
 };
 

@@ -89,6 +89,42 @@ function getCategoryDetails(headers, categoryID, callback) {
 }
 
 /**
+ *  Get Category Details by ID
+ */
+module.exports.getCategoryDetailsByIdentifier = getCategoryDetailsByIdentifier;
+function getCategoryDetailsByIdentifier(headers, catIdentifier) {
+  return new Promise((resolve, reject) => {
+    if (!catIdentifier) {
+      logger.debug('Get Category Details by Identifier :: invalid params');
+      reject(errorUtils.errorlist.invalid_params);
+      return;
+    }
+    const originUrl = constants.categoryViewByIdentifier
+      .replace('{{storeId}}', headers.storeId)
+      .replace('{{categoryIdentifier}}', catIdentifier);
+
+    const reqHeader = headerUtil.getWCSHeaders(headers);
+    origin2
+      .getResponse(originMethod, originUrl, reqHeader, null)
+      .then(result => {
+        let categoryDetails = {};
+        if (
+          result.body.catalogGroupView &&
+          result.body.catalogGroupView.length > 0
+        ) {
+          categoryDetails = categoryFilter.categoryDetails(
+            result.body.catalogGroupView[0],
+          );
+        }
+        resolve(categoryDetails);
+      })
+      .catch(err => {
+        reject(errorUtils.handleWCSError(err));
+      });
+  });
+}
+
+/**
  * Get CategoryDetails By IDS
  * @param storeId,access_token,categoryID Array
  * @return Category List with Product Count

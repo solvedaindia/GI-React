@@ -146,6 +146,10 @@ export const espotAPI = `${secureHttp}://${host}:${port2}/api/v1/espots/`;
 export const socialLoginAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/sociallogin`;
 /* PLP API */
 export const plpAPI = `${secureHttp}://${host}:${port2}/api/v1/productlist/bycategory/`;
+/* PLP Filter only API */
+export const plpFilterAPI = `${secureHttp}://${host}:${port2}/api/v1/facetlist/bycategory/`;
+/* Search Filter only API */
+export const searchFilterAPI = `${secureHttp}://${host}:${port2}/api/v1/facetlist/bysearchterm/`;
 
 /* PDP API */
 export const pdpApi = `${secureHttp}://${host}:${port2}/api/v1/pdp/productData`;
