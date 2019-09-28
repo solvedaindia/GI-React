@@ -38,7 +38,6 @@ class CLPReadMore extends React.Component {
     
   componentWillReceiveProps(nextProps) 
   {
-	console.log(nextProps.id);
       this.getReadMoreData(nextProps.id);
   }
 

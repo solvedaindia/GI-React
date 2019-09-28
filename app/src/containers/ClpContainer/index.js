@@ -26,27 +26,39 @@ export class CLPContainer extends React.Component {
     this.state = {
       clpData: {},
 	  categoryDetails:null,
-      isLoading: false,
+      isLoading: true,
       error: null,
     };
   }
   
-    
    componentDidMount() 
    {
+	this.getCategoryData(this.props.match.params.id);
+   }    
+   
+   getCategoryData(id) 
+   {
     apiManager
-      .get(`${catDetailsAPI}${this.props.match.params.id.toUpperCase()}`)
+      .get(`${catDetailsAPI}${id.toUpperCase()}`)
       .then(response => {
         if (response.data.data) {
-          this.setState({ categoryDetails: response.data.data });
+          this.setState({ categoryDetails: response.data.data,isLoading:false });
         }
       })
       .catch(error => {
 		  console.log(error);
+		  this.setState({ categoryDetails: null, isLoading:false });
       });
   }
 
+  componentWillReceiveProps(nextProps) {
+	 this.getCategoryData(nextProps.match.params.id);
+  }
   render() {
+	  if(this.state.isLoading)
+	  {
+		  return <></>
+	  }
     return (
       <>
         <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
@@ -65,7 +77,8 @@ export class CLPContainer extends React.Component {
           <div className="slider">
             <CLPFullBanner {...this.props.match.params} />
           </div>
-          <Breadcrumb {...this.props.match.params} />
+		  
+          <Breadcrumb catBreadCrumb={this.state.categoryDetails.categoryName}/>
           <FeaturedCategory {...this.props.match.params} />
           <LivingTheme {...this.props.match.params} />
           <BestSeller {...this.props.match.params} />
