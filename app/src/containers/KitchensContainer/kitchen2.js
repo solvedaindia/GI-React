@@ -37,13 +37,27 @@ componentDidMount(){
 
 sShutt()
 {
-	var target=document.getElementById("steelShutter");console.log('customv',target.style.display) 
-	if(target.style.display=='none') {target.style.display='block';} else {target.style.display='none'}
+	var target=document.getElementById("steelShutter");
+	if(target.style.display=='none') 
+	{
+		target.style.display='block';
+	} 
+	else 
+	{
+		target.style.display='none';
+	}
 } 
 mdfShutt()
 {
-		var target=document.getElementById("mdfShutter");console.log('customv',target.style.display) 
-		if(target.style.display=='none') {target.style.display='block';} else {target.style.display='none'}
+	var target=document.getElementById("mdfShutter"); 
+	if(target.style.display=='none') 
+	{
+		target.style.display='block';
+	}
+	else 
+	{
+		target.style.display='none';
+	}
 }
 
 render(){

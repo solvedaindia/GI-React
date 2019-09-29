@@ -330,15 +330,13 @@
   }
 }
 
-@media (min-width:1024px) {
-	.ul-trackbar {
-		.list.items5{
+@media (min-width:992px) 
+{
+	.trackorder-wrap ul.track-bar .list.items5{
 		width:19%;
-		}
-		.list.items4{
-			width:24%;
-		}
-
+	}
+	.trackorder-wrap ul.track-bar .list.items4{
+		width:24%;
 	}
 }
 /* Order checkout page */
