@@ -705,7 +705,7 @@ export class PlpContainer extends React.Component {
           <RWDFilterMain
             filterDataPro={filterData}
             isSKUPro={this.state.displaySkus}
-            categoryIdPro={categoryId}
+            categoryIdPro={this.state.categoryDetail.uniqueID}
             isSearchPathPro={this.props.location.pathname}
             searchKeywordPro={keywoard}
           />
