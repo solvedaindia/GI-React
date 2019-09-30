@@ -6,10 +6,15 @@ import {
   imagePrefix,
 } from '../../../public/constants/constants';
 import close from '../../../public/images/close.svg';
+import appCookie from '../../utils/cookie';
 
 function CompItem(props) {
   function handleRemove() {
+    let compData = JSON.parse(appCookie.get('compareProduct'));
+    compData = compData.filter(el => el.skuId !== props.product.skuId);
+    appCookie.set('compareProduct', JSON.stringify(compData), 365 * 24 * 60 * 60 * 1000);
     props.remove(props.product.skuId);
+    props.filterCookie();
   }
   return (
     <li className="list">

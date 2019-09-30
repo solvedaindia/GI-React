@@ -35,6 +35,31 @@ componentDidMount(){
   
 }
 
+sShutt()
+{
+	var target=document.getElementById("steelShutter");
+	if(target.style.display=='none') 
+	{
+		target.style.display='block';
+	} 
+	else 
+	{
+		target.style.display='none';
+	}
+} 
+mdfShutt()
+{
+	var target=document.getElementById("mdfShutter"); 
+	if(target.style.display=='none') 
+	{
+		target.style.display='block';
+	}
+	else 
+	{
+		target.style.display='none';
+	}
+}
+
 render(){
 return (
   <>

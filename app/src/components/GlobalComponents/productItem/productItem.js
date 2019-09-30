@@ -49,7 +49,7 @@ class ProductItem extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    const product = {
+    const product = { 
       title: this.state.data.productName,
       thumbnail: this.state.data.thumbnail,
       skuId: this.state.data.uniqueID,

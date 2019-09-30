@@ -20,10 +20,10 @@ class ReadMore extends React.Component {
     apiManager
       	.get(`${espotAPI}GI_Homepage_About_Godrej`)
 		.then(response => {
-			const {data} = response || {};
+			const {data} = response || '';
 			this.setState({
 				readableData: data && data.data,
-			});
+      });
 		})
 		.catch(error => {
 			this.setState({
@@ -36,6 +36,7 @@ class ReadMore extends React.Component {
   componentDidMount() {
     this.getReadMoreData();
   }
+  
 
   render() {
     const { readableData } = this.state;

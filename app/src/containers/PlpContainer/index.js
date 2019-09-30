@@ -625,8 +625,6 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-		
-		{console.log(this.state.categoryDetail)}
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
         <Helmet>
           <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />

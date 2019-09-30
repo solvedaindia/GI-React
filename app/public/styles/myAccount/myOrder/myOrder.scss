@@ -225,13 +225,6 @@
             .status{
               font-size: 14px;
             }
-			.items5{
-				width:19%;
-			  }
-			
-			  .items4{
-				width:24%;
-			  }
             .deliveryDate{
               font-size: 12px;
             }
@@ -336,6 +329,16 @@
     padding: 0 20px 0 10px;
   }
 }
+
+@media (min-width:992px) 
+{
+	.trackorder-wrap ul.track-bar .list.items5{
+		width:19%;
+	}
+	.trackorder-wrap ul.track-bar .list.items4{
+		width:24%;
+	}
+}
 /* Order checkout page */
 
 .trackorder-wrap {
@@ -403,12 +406,6 @@
         top: -41px;
       }
     }
-	.list.items5{
-		width:19%;
-	}
-	.list.items4{
-		width:24%;
-	}
     .list 
 	{
       display: block;

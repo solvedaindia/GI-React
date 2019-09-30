@@ -89,6 +89,8 @@ export default class App extends React.Component {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
       showNewsLetter: false,
+	  prevPath: '',
+	  currPath: '',
       loading: true
     };
     this.resize = this.resize.bind(this);
@@ -103,7 +105,6 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
-
   }
 
   componentWillUpdate() {
@@ -123,21 +124,20 @@ export default class App extends React.Component {
     else if(pathurl.includes("filter")){
        $('html, body').stop().animate();
     }
-	else {
-	   $('html, body').animate({ scrollTop: 0 }, 'fast');
-  }
 	  /*Ipad and Mobile stop scrollTop
 	-----------------------------------*/
 	  if((isMobile() || isTab()))
 	  { 
-		if(!pathurl.includes("sort") && !pathurl.includes("filter"))
+		if(!pathurl.includes("sort") && !pathurl.includes("filter") && !pathurl.includes("/pdp"))
 		{
-			$('html, body').stop().animate();
+		   $('html, body').stop().animate();
 		}
 	  }  
+     else {
+		   $('html, body').animate({ scrollTop: 0 }, 'fast');
+	 }
   }
-
-
+ 
   initialLoginHandling() {
     const token = getCookie(accessTokenCookie);
     if (token != '') {

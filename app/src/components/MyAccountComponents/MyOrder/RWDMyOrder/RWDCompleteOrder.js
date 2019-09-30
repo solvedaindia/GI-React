@@ -1,6 +1,8 @@
 import React from 'react';
 import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDSingleProduct from './RWDSingleProduct';
+import { Link } from 'react-router-dom';
+
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -91,7 +93,13 @@ class RWDCompleteOrder extends React.Component {
           <ul className="invoiceList">
             {invoiceData.map((data, key) => {
               return (
-                <li onClick={evt => this.onInvoiceClick(data)} className="list">INVOICE {key + 1}</li>
+					<li
+						onClick={evt => this.onInvoiceClick(this.props.invoiceData[key])} className="list"
+					>
+						<Link className='link' to={{ pathname: `/invoice/${data}` }}>
+							INVOICE {key + 1}
+						</Link>
+					</li>
               )
             })}
 

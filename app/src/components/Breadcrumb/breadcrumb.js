@@ -24,7 +24,16 @@ class Breadcrumb extends React.Component {
 
   render() {
 
-    // ---- PLP Breadcrumb ----
+	if(this.props.catBreadCrumb)
+	{
+	  return (
+        <div className='breadCrumb'>
+          <span className='links'> <Link to='/'>Home ></Link></span>
+          <span className='links'>{this.props.catBreadCrumb}</span>
+        </div>
+      )
+	}
+  // ---- PLP Breadcrumb ----
     if (this.props.plpBreadcrumbPro) {
       return (
         <div className='breadCrumb'>

@@ -18,7 +18,7 @@ import { Route, NavLink, Link } from 'react-router-dom';
 
 import DownArrow from '../../../public/images/down-arrow.svg';
 import UpArrow from '../../../public/images/up-arrow.svg';
-
+import appCookie from '../../utils/cookie';
 
 export class CompContainer extends React.Component {
   constructor(props) {
@@ -28,11 +28,19 @@ export class CompContainer extends React.Component {
     this.handleGoToCompare = this.handleGoToCompare.bind(this);
     this.state = {
       showCompare: true,
-      modalClass: 'open'
+      modalClass: 'open',
+      isLoading: true
     };
+    
   }
 
-  buildData() {
+  filterCookieData() {
+    this.setState({
+      isLoading: true
+    })
+  }
+
+  buildData(compData) {
     const addDiv = (
       <li className="list">
         <div className='addproduct-box'>
@@ -42,10 +50,10 @@ export class CompContainer extends React.Component {
       </li>
     );
     const data = [];
-    if (this.props.compData.length > 0) {
-      this.props.compData.forEach((element, index) => {
+    if (compData.length > 0) {
+      compData.forEach((element, index) => {
         data.push(
-          <CompItem key={index} product={element} remove={this.props.removeProduct} />
+          <CompItem key={index} product={element} remove={this.props.removeProduct} filterCookie={this.filterCookieData.bind(this)} />
         );
       });
     }
@@ -60,10 +68,11 @@ export class CompContainer extends React.Component {
     return data;
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.compData.length > this.props.compData.length) {
+  componentWillReceiveProps(newProps) { 
+    if ((newProps.compData.length > this.props.compData.length) || (appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct')).length > 0 ))  {
       this.setState({
-        modalClass: 'open'
+        modalClass: 'open',
+        isLoading: false
       })
     }
   }
@@ -87,45 +96,61 @@ export class CompContainer extends React.Component {
     //   showCompare: false,
     //   modalClass: 'open',
     // })
+    let handleCompData = [];
+    if (this.props.compData.length > 0) {
+      handleCompData = this.props.compData;
+    } else {
+      handleCompData = JSON.parse(appCookie.get('compareProduct'));
+    }
 
-    if (this.props.compData.length < 2) {
+    if (handleCompData.length < 2) {
       e.preventDefault();
       alert('Please add at least two products to compare');
     }
   }
   clearAll() {
+    appCookie.set('compareProduct', '', 365 * 24 * 60 * 60 * 1000);
     this.props.removeAll();
   }
 
   render() {
-    // alert(this.state.modalClass)
     var searchParam = '';
     var compIdData =[];
-    if (this.props.compData.length !== 0) {
-      this.props.compData.forEach(element => {
+    let compData = [];
+    if (this.props.compData.length > 0 || this.state.isLoading === false) {
+      appCookie.set('compareProduct', JSON.stringify(this.props.compData), 365 * 24 * 60 * 60 * 1000);
+      compData =  JSON.parse(appCookie.get('compareProduct'));
+    } else if (appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct').length > 0)) {
+      compData =  JSON.parse(appCookie.get('compareProduct'));
+    }
+    if (compData.length !== 0) {
+      compData.forEach(element => {
         compIdData.push(element.skuId);
       });
       compIdData.map((skuId, index) => {
         searchParam += `${skuId}${compIdData.length === index + 1 ? '' : '/'}`
       })
     }
+
+
+    
     return (
       <>
-        {this.props.compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :
+        {compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :
           <div className='compare'><button onClick={this.showHideCompare} className="btnCompare"> <img className='arrow' src={UpArrow} alt='upArrow' /></button><div className='clearfix'></div> <div className='comparelebal'>Compare</div></div> : ''}
-        {this.props.compData.length > 0 ? <div className={`animationDIV ${this.state.modalClass}`} id='change'>
+        {compData.length > 0 ? <div className={`animationDIV ${this.state.modalClass}`} id='change'>
           {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
           <div className='compareProductwrap'>
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
                   <ul className="compareProducts">
-                    {this.buildData()}
-                    {this.props.compData.length > 0 ? <li className="list">
+                    {this.buildData(compData)}
+                    {compData.length > 0 ? <li className="list">
                       {/* <Link className="btn-compare" to="/compare" params={{ ids: searchParam }} onClick={(e) => this.handleGoToCompare(e)}> */}
-                      <Link className="btn-compare" to={{pathname: '/compare', search: `ids=${searchParam}`}} onClick={(e) => this.handleGoToCompare(e)} >
+                      <Link className="btn-compare" to={{pathname: '/compare'}} onClick={(e) => this.handleGoToCompare(e)} >
                         {/* <Link to="/compare" className="btn-compare" onClick={(e) => this.handleGoToCompare(e)}> */}
-                        Compare {this.props.compData.length}
+                        Compare {compData.length}
                         /3
                     </Link>
                       <button className="btn-clearall" onClick={this.clearAll}>

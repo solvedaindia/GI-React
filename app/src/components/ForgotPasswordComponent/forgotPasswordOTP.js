@@ -134,7 +134,8 @@ class ForgotPasswordOTP extends React.Component {
       });
   }
 
-  onOTPSubmit() {
+  onOTPSubmit(e) {
+    e.preventDefault();
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
@@ -249,7 +250,7 @@ class ForgotPasswordOTP extends React.Component {
       <div className={animeClass}>
         {headingItem}
         <Form className={this.state.errorClass}
-        onSubmit = {this.proceedBtnPressed.bind(this)}
+        onSubmit = {this.props.isFromMyProfilePro ? this.onOTPSubmit.bind(this) : this.proceedBtnPressed.bind(this)}
         >
           <FormGroup>
             {titleOTP}

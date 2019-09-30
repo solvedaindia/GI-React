@@ -181,7 +181,13 @@ class Invoice extends React.Component {
 	{
 		if(this.state.isLoading)
 		{
-			return <div></div>;
+			return(<div className="invoiceTicket">
+					<div id="content">
+						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
+							Loading Invoice Data...
+						</div>
+					</div>
+				</div>);
 		}
 		const UserLoggedIn = appCookie.get('isLoggedIn');
 		//this.getInvoiceDetails();
