@@ -695,7 +695,7 @@ export class Step2Component extends React.Component {
 
   handleloginContinue = () => {
     var selected_address = this.state.addressList[this.state.selected_add];
-    if (this.setState.same_bill == false) {
+    if (this.state.same_bill == false) {
       this.saveBillAdd()
         .then((addressId) => {
           var selected_address = this.state.addressList[this.state.selected_add];
@@ -831,7 +831,7 @@ export class Step2Component extends React.Component {
       })
       return;
     }
-    this.handleloginContinue()
+      this.handleloginContinue()
   }
 
   onSavebuttonClick(event) {
