@@ -43,7 +43,7 @@ export class HeaderContainer extends React.Component {
     }
     const dataVal = <Helmet>
           <script data-react-helmet="true" type="application/ld+json">
-            {`
+            {`[{
               "@context": "http://schema.org",
               "@type": "WebSite",
               "url": "${webUrl}",
@@ -52,6 +52,7 @@ export class HeaderContainer extends React.Component {
               "target": "/search/?keyword={${searchStr}}",
                 "query-input": "required name=${searchStr}"
               }
+			  }]
             `}
           </script>
         </Helmet>
