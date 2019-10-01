@@ -7,7 +7,7 @@ import {
 } from '../../../public/constants/constants';
 import {
   AVAILABLE_CODES,
-  COUPAN_CODE_NOT_VALID,
+  PROMO_CODE_NOT_VALID,
   VIEW_MORE,
   APPLY,
 } from '../../constants/app/cartConstants';
@@ -88,7 +88,7 @@ class ViewAllPromo extends React.Component {
             <Button className="close" onClick={this.handleClose} />
             <h4 className="heading">{AVAILABLE_CODES}</h4>
             {!!error && (
-              <div className="promoError">{COUPAN_CODE_NOT_VALID}</div>
+              <div className="promoError">{PROMO_CODE_NOT_VALID}</div>
             )}
             <ul className="promoList viewAll">
               {!!promo &&

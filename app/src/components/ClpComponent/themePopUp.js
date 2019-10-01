@@ -4,7 +4,7 @@ import {imagePrefix} from '../../../public/constants/constants';
 import '../../../public/styles/clpContainer/themeData.scss';
 import {VIEW_DETAILS } from '../../constants/app/clpConstants';
 import {isMobile } from '../../utils/utilityManager';
-import {createPdpURL} from '../../utils/utilityManager';
+import {createPdpURL, createSEOPdpURL} from '../../utils/utilityManager';
 
 class ThemeData extends React.Component {
 	constructor(props) {
@@ -75,7 +75,7 @@ class ThemeData extends React.Component {
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
         var productname = String(itemDetail.productName).toLowerCase()
-        var routePath = createPdpURL(itemDetail.productName, itemDetail.partNumber)
+        var routePath = createSEOPdpURL(itemDetail.productName, itemDetail.shortDescription, itemDetail.partNumber)
 		var widthContainer = $('.content-childTheme').width();
 		var heightContainer = $('.content-childTheme').height();
 		var clickY = Number(x) * heightContainer /100;

@@ -129,14 +129,14 @@ class SearchBar extends React.Component {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
         var categoryRoutePath = createCategoryPlpURL(item.categoryIdentifier);
-		
+        
         var searchStr = item.categoryName;
         searchStr += ` in ${item.parentRoom}`;
+        var filterStr = searchStr.replace(new RegExp(searchItem, 'gi'), str => { return str.bold()});
         if (index < 4) {
           return (
             <li className="list" key={index}>
-              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={categoryRoutePath} >
-                <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={categoryRoutePath} dangerouslySetInnerHTML={{ __html: filterStr}}>
               </Link>
             </li>
           );

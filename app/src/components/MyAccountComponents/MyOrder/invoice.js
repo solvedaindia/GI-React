@@ -20,16 +20,13 @@ class Invoice extends React.Component {
 	{
 		this.state.isLoading = true;
         this.getInvoiceDetails();
-		
-		console.log(orderListAPI);
-		
+			
 		let orderAPI =
         `${orderListAPI}?` + `pagenumber=1&` + `pagesize=200&`;
 		
 		apiManager.get(orderAPI)
         .then(response => 
 		{
-		  console.log(response);
           this.setState({
             orderListData: response.data.data.orderList,
 			isLoading: false
@@ -43,12 +40,12 @@ class Invoice extends React.Component {
           })
         });
 		
+		$('html, body').animate({ scrollTop: 0 }, 'fast');
     }
     getInvoiceDetails() {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
-			console.log(response.data.data);
 			this.setState({
 				invoiceData: response.data.data
 			},
@@ -70,7 +67,7 @@ class Invoice extends React.Component {
 		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'90%'}}>
+            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
@@ -197,11 +194,9 @@ class Invoice extends React.Component {
 			console.log('invoiceData ', invoiceData);
 			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
-			console.log(this.state.orderListData);
 			(this.state.orderListData != null && this.state.orderListData.length !== 0)? 
 				this.state.orderListData.map((orderInfo, key) => 
 				{
-					console.log('orderInfo.orderNo ', orderInfo.orderID);
 					if(orderInfo.orderID === invoiceData.orderNo)
 					{
 						isMatchForUser = true;

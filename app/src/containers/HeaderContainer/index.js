@@ -7,6 +7,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { withLastLocation } from 'react-router-last-location';
 import HeaderL1 from '../../components/HeaderComponent/headerL1/headerL1';
 import HeaderL2 from '../../components/HeaderComponent/headerL2/headerL2';
 import Logo from '../../components/SVGs/logo';
@@ -15,6 +16,8 @@ import {isMobile} from '../../utils/utilityManager'
 import '../../../public/styles/headerContainer/headerContainer.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import { webUrl } from '../../../public/constants/constants';
+import { scrollPage } from '../../utils/utilityManager';
+
 
 
 export class HeaderContainer extends React.Component {
@@ -24,11 +27,16 @@ export class HeaderContainer extends React.Component {
     this.state = {
       headerData: {},
       isLoading: false,
-      error: null,
+      error: null
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    scrollPage(this.props.location.pathname, nextProps.location.pathname);
+  }
+
   render() {
+    
     let searchStr = '';
     if (document.getElementById('searchInput')) {
        searchStr = document.getElementById('searchInput').value;
@@ -55,7 +63,6 @@ export class HeaderContainer extends React.Component {
         </>
       );
     }
-    
     return (
       <>
       {dataVal}
@@ -65,7 +72,7 @@ export class HeaderContainer extends React.Component {
           {window.location.pathname === '/' ? (<a href="/"><Logo /></a>):(<Link to="/"><Logo /></Link>)}
         </div>
         <div className="navigation">
-          <HeaderL1 />
+          <HeaderL1/>
           <HeaderL2 />
         </div>
       </header>
@@ -73,5 +80,4 @@ export class HeaderContainer extends React.Component {
     );
   }
 }
-
-export default HeaderContainer;
+export default withLastLocation(HeaderContainer);

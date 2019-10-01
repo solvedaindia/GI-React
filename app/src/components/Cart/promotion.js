@@ -6,7 +6,7 @@ import {
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import ViewAllPromo from './viewAllPromo';
-import { COUPAN_CODE_NOT_VALID, ERR_PROMOTION_CODE_DUPLICATED } from '../../constants/app/cartConstants';
+import { PROMO_CODE_NOT_VALID, ERR_PROMOTION_CODE_DUPLICATED } from '../../constants/app/cartConstants';
 
 class GetCartPromo extends React.Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class GetCartPromo extends React.Component {
     const { promo, error } = this.state;
     return (
       <div className="promo">
-        {!!error && <div className="promoError">{COUPAN_CODE_NOT_VALID}</div>}
+        {!!error && <div className="promoError">{PROMO_CODE_NOT_VALID}</div>}
         <ul className="promoList">
           {!!promo &&
             promo.slice(0, 3).map((sellerItemData, index) => {

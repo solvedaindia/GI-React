@@ -9,6 +9,7 @@ import {
   isMobile,
   formatPrice,
   createPdpURL,
+  createSEOPdpURL
 } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
@@ -98,7 +99,7 @@ class CartDetail extends React.Component {
           return (
             <li className={`prodList${outOfStock ? ' outOfStockList' : ''}`} key={`${index}-pro`}>
               {outOfStock && <div className='outOfStock' />}
-              <Link to={createPdpURL(itemData.productName, itemData.partNumber)}>
+              <Link to={createSEOPdpURL(itemData.productName, itemData.shortDescription, itemData.partNumber)}>
 				  <figure className='prodImg'>
                   <img className='img' src={`${imagePrefix}${itemData.thumbnail}`} alt={index} />
                   {outOfStock && <div className='outOfStockLogo'><OutOfStockIcon /></div>}

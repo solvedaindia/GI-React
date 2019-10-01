@@ -192,8 +192,6 @@ class Filter extends React.Component {
     });
 
     if (isMobile()) {
-      console.log('iiiii --- ',this.props.RWDupdatedFilter,this.props.updatedFilter)
-      
       this.props.onRWDFilterUpdate(this.state.facetArr, this.props.dataPro.facetName, true);
       if (!this.compareMaps(this.props.RWDupdatedFilter, this.props.updatedFilter)) {
         this.onCancelBtnClick();
