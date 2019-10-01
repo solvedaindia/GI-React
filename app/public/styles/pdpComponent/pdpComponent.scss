@@ -1819,7 +1819,12 @@
             }
     }
     .galleryArea{
-        padding:15px 0 0 0;        
+        padding:15px 0 0 0;    
+        .GallerytextBox{
+          .ExperienceProduct {
+              width:100%;
+          }
+        }    
         .img-gallery-box{
             padding: 0px;
         } 
