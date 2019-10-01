@@ -44,12 +44,9 @@ class RWDFilterMain extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount RWD Filter')
   }
 
   componentWillReceiveProps() {
-    console.log('componentWillReceiveProps RWD Filter', this.state, this.props)
-
   }
 
   moreFilterBtnClick() {
@@ -69,7 +66,6 @@ class RWDFilterMain extends React.Component {
   }
 
   render() {
-    console.log('makrkrkr --- ',this.props.searchKeywordPro);
     return (
       <>
         <button onClick={evt => this.showFilterOptions()} className="filterBy">

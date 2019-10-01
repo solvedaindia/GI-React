@@ -2,7 +2,7 @@ import React from 'react';
 import apiManager from '../../utils/apiManager';
 import { cartRemovePromoAPI } from '../../../public/constants/constants';
 import {COUPAN_APPLIED } from '../../constants/app/cartConstants';
-import {COUPAN_CODE_NOT_VALID } from '../../constants/app/cartConstants';
+import {PROMO_CODE_NOT_VALID } from '../../constants/app/cartConstants';
 
 import CrossIcon from '../SVGs/crossIcon';
 class AppliedPromoCode extends React.Component {
@@ -41,7 +41,7 @@ class AppliedPromoCode extends React.Component {
             </div>
 			
 			{!!error && (
-				<div className="promoError">{COUPAN_CODE_NOT_VALID }</div>
+				<div className="promoError">{PROMO_CODE_NOT_VALID }</div>
 			)}
       </div>
     );
