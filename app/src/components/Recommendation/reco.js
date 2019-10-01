@@ -4,7 +4,7 @@ import {
     recommendationAPI,
 
 } from '../../../public/constants/constants';
-import {createPdpURL, formatPrice } from '../../utils/utilityManager';
+import {createPdpURL, formatPrice, createSEOPdpURL } from '../../utils/utilityManager';
 import { Link } from 'react-router-dom';
 
 import '../../../public/styles/reco/reco.scss';
@@ -45,6 +45,9 @@ class Recommendation extends React.Component {
         const getProdName = !!recoData && recoData.recommendationArray.map((prodName) => {
             return prodName.productName;
         });
+        const getProdDescription = !!recoData && recoData.recommendationArray.map((prodName) => {
+            return prodName.shortDescription;
+        });
         const getSkuID = !!recoData && recoData.recommendationArray.map((id) => {
             return id.partNumber;
         });
@@ -53,9 +56,9 @@ class Recommendation extends React.Component {
         const productname2 = String(getProdName[1]).toLowerCase();
         const productname3 = String(getProdName[2]).toLowerCase();
         
-        const routePath1 = createPdpURL(productname1, getSkuID[1]);
-        const routePath2 = createPdpURL(productname2, getSkuID[2]);
-        const routePath3 = createPdpURL(productname3, getSkuID[3]);
+        const routePath1 = createSEOPdpURL(productname1,getProdDescription[1],getSkuID[1]);
+        const routePath2 = createSEOPdpURL(productname2,getProdDescription[2],getSkuID[2]);
+        const routePath3 = createSEOPdpURL(productname3,getProdDescription[3],getSkuID[3]);
         
         return (
             !!recoData &&

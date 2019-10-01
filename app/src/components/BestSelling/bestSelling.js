@@ -7,7 +7,7 @@ import {
   espotAPI,
   imagePrefix,
 } from '../../../public/constants/constants';
-import { is, formatPrice,createPdpURL } from '../../utils/utilityManager';
+import { is, formatPrice,createPdpURL, createSEOPdpURL } from '../../utils/utilityManager';
 import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
@@ -89,7 +89,7 @@ class BestSeller extends React.Component {
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
               var productname = String(sellerItemData.productName).toLowerCase();
-              var routePath = createPdpURL(sellerItemData.productName, sellerItemData.partNumber);
+              var routePath = createSEOPdpURL(sellerItemData.productName, sellerItemData.shortDescription, sellerItemData.partNumber);
 
               return (
                 <figure key={index} className="bsSlides">

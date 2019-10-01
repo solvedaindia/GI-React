@@ -21,7 +21,7 @@ import WishlistAndShare from './wishlistAndShare';
 import appCookie from '../../utils/cookie';
 import apiManager from '../../utils/apiManager';
 import { pinCodeAPI, pinCodeAPIBundle, breadcrumbAPI } from '../../../public/constants/constants';
-import { isMobile,createPdpURL } from '../../utils/utilityManager';
+import { isMobile,createPdpURL, createSEOPdpURL } from '../../utils/utilityManager';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {PRODUCT_ID} from '../../constants/app/pdpConstants';
 import {Helmet} from "react-helmet";
@@ -256,7 +256,7 @@ class PdpComponent extends React.Component {
 
 		if (this.props.matchParams.skuId !== resolvedSkuData.partNumber) 
 		{
-			this.props.historyData.push(createPdpURL(resolvedSkuData.productName, resolvedSkuData.partNumber));
+			this.props.historyData.push(createSEOPdpURL(resolvedSkuData.productName, resolvedSkuData.shortDescription, resolvedSkuData.partNumber));
 		}
 	}
 

@@ -46,7 +46,9 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
-              breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
+              if(data.categoryIdentifier) {
+                breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
+              }
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
               breadRoute = createCategoryPlpURL(data.categoryIdentifier);

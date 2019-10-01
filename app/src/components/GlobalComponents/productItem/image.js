@@ -5,7 +5,7 @@ import ImageLoader from '../../../utils/imageLoader';
 import {
   imagePrefix,
 } from '../../../../public/constants/constants';
-import {createPdpURL} from '../../../utils/utilityManager';
+import {createPdpURL, createSEOPdpURL} from '../../../utils/utilityManager';
 
 class Image extends React.Component {
   render() {
@@ -28,7 +28,7 @@ class Image extends React.Component {
       );
     }
 
-    var routePath = createPdpURL(this.props.productName, this.props.partNumber);
+    var routePath = createSEOPdpURL(this.props.productName,this.props.shortDescription, this.props.partNumber);
     return (
       <LazyLoad className="imgBox" debounce={false}>
         <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.breadcrumbDataPro} }}>

@@ -318,12 +318,12 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
 	if(prodName != undefined && prodName != '')
 	{
 		prodName =prodName.toLowerCase();
-		shortDescURL = '';
-		if(shortDesc != undefined && shortDesc != '')
-		{
+		var shortDescURL = '';
+		if(shortDesc != undefined && shortDesc != '') {
 			shortDescURL =(shortDesc.split(' ').join('-')).split(',').join('-');
 			shortDescURL = shortDescURL.toLowerCase();
-			shortDescURL = '-' + shortDescURL;
+            shortDescURL = '-' + shortDescURL;
+            shortDescURL = shortDescURL.replace('--', "-")
 		}
 		return '/pdp/furniture-' + prodName.split(' ').join('-') +shortDescURL +  '/' + skuId;
 	}

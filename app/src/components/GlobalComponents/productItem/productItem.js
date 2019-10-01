@@ -30,6 +30,7 @@ import {
   getCorrespondingGiftlistId,
   getOnlyWishlistUniqueIds,
   createPdpURL,
+  createSEOPdpURL,
   isMobile,
 } from '../../../utils/utilityManager';
 import { ADD_TO_COMPARE } from '../../../constants/app/footerConstants';
@@ -116,8 +117,7 @@ class ProductItem extends React.Component {
   };
 
   render() {
-	  var routePath = createPdpURL(this.state.data.productName, this.state.data.partNumber);
-
+    var routePath = createSEOPdpURL(this.state.data.productName, this.state.data.shortDescription, this.state.data.partNumber);
     var swatchFinalData;
     if (this.state.colorSwatchSplit.length !== 0) {
       swatchFinalData = this.state.colorSwatchSplit;
