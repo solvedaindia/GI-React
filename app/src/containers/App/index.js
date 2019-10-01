@@ -9,6 +9,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
@@ -342,7 +343,9 @@ export default class App extends React.Component {
         
         {/* <HeaderContainer /> */}
 		<div id="mainContainer">
+    <LastLocationProvider>
         <Switch>
+        
           <Route exact path="/" component={HomePageContainer} />
 		  <Route path="/rooms-kitchen_s" component={Kitchens} />
 		  <Route path="/rooms-kitchen" component={Kitchens} />
@@ -385,8 +388,10 @@ export default class App extends React.Component {
 
           
         </Switch>
+        </LastLocationProvider>
 		</div>
         {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') || window.location.pathname.includes('/order/confirm/') ? '' : <FooterContainer /> }
+        
       </div>
     );
   }

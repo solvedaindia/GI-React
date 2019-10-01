@@ -382,7 +382,9 @@ export function createPlpItemData(plpData) {
     return plpItem;
   }
 
-
+  export function scrollPage(prevUrl, CurrUrl) {
+      return true;
+}
 
 function escapeRegExp(string){
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
