@@ -226,7 +226,7 @@ export const breadcrumbAPI = `${secureHttp}://${host}:${port2}/api/v1/categories
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
 
 /* Espot Names */
-export const GI_PDP_Our_Promises = 'GI_PDP_Sample_Espot1';
+export const GI_PDP_Our_Promises = 'GI_Homepage_Our_Promises';
 export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
 
 /* Compare API */
