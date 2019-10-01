@@ -177,6 +177,7 @@ export class PlpContainer extends React.Component {
           plpSubCatData: null,
           plpData: [],
           filterData: [],
+          plpFilter: '', 
           pageNumber: 1,
           plpDescriptionData: null,
           categoryDetail: true,
@@ -187,6 +188,7 @@ export class PlpContainer extends React.Component {
           spellCheckCount: 0,
           emptySearchItem: null,
         });
+        categoryId = '';
         this.fetchPLPProductsData();
       } else {
       }
@@ -294,6 +296,7 @@ export class PlpContainer extends React.Component {
         const params = new URLSearchParams(this.state.searchKeyword);
         const keyword = params.get('keyword');
         searchText = encodeURIComponent(keyword).replace(/%2F/g, ' ');
+        searchText = formateSearchKeyword(searchText, false)
         urlMaking = searchPageAPI + searchText;
       }
 

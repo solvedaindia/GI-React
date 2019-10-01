@@ -413,7 +413,8 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
 			searchKeyword = searchKeyword.replace(/:::/g, '&');
 			searchKeyword = searchKeyword.replace(/_:/g, '%');
 			searchKeyword = searchKeyword.replace(/ __/g, ' [');
-			searchKeyword = searchKeyword.replace(/ :_/g, ' ]');
+            searchKeyword = searchKeyword.replace(/ :_/g, ' ]');
+            searchKeyword = searchKeyword.replace(/%3A%3A%3A/g, '&');
             return searchKeyword;
         }
     }

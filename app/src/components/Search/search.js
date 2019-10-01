@@ -86,9 +86,9 @@ class SearchBar extends React.Component {
   onSearchResultClick(e) {
     const text = formateSearchKeyword(e.target.value.trim(), true);
     if (text !== '') {
-
-      this.props.plpReduxStateReset();
       this.props.history.push({ pathname: '/search', search: `keyword=${text}` });
+      this.props.plpReduxStateReset();
+      
       this.setState({
         searchData: [],
       });
