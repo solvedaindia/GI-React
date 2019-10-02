@@ -14,19 +14,22 @@ export class ExStore extends React.Component {
             storeData: null,
             long: null,
             lat: null,
-            isLoading: false,
+            isLoading: true,
             error: null
         };
     }
     
     /* get lat and long */
-    getLatAndLong(pinCode) { 
+    getLatAndLong(pinCode) 
+	{ 
         Geocode.setApiKey(mapKey);
         Geocode.fromAddress(pinCode).then( response => {
+			console.log(pinCode, response);
             const { lat, lng } = response.results[0].geometry.location;
             this.setState({
                 lat: lat,
-                long: lng
+                long: lng,
+				isLoading: false
             });
         })
         .catch(error => {
@@ -41,7 +44,12 @@ export class ExStore extends React.Component {
         this.getLatAndLong(appCookie.get('pincode'));
 	}
 
-	render() {
+	render() 
+	{
+		if(this.state.isLoading)
+		{
+			return <></>;
+		}
         const { lat, long } = this.state;
 		return (
             <StoreDetails longitude={long || '72.925430'} latitude={lat || '19.102543'} />

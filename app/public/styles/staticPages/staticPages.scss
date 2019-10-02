@@ -9,6 +9,10 @@
 			font-family:CeraGIRegular,sans-serif;
 			color:#000;
 		}
+		
+		.topParagraph{
+			text-align:center;
+		}
 		.slick-next:before, 
 		.slick-prev:before {
 			font-size: 32px;
@@ -139,6 +143,33 @@
 		padding-top:30px;
 	}
 
+	.tab-content > .active {
+    display: block;
+    opacity: 1;
+	}
+
+	.staticpage .nav {
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		float: left;
+		width: 20%;
+	}
+
+	.staticpage .nav-link {
+		width: 100%;
+		display: block;
+		padding: 10px;
+	}
+	.staticpage .nav-link .active {
+		color:blue;
+	}
+	
+	.staticpage #v-pills-tabContent {
+		 float:left;
+		 width:78%;
+	}
+
 @media (max-width: 1024px) 
 {
   .staticpage .support-faq-menu {
@@ -147,4 +178,32 @@
   .staticpage .support-faq {
 	width:95% !important;
   }
+  .staticpage .nav {
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		float: left;
+		width: 100%;
+	}
+	
+	.staticpage #v-pills-tabContent {
+		 float:left;
+		 width:100%;
+	}
+	
+	.staticpage .nav .col-sm-2{
+          width:100% ;
+    }
+	.staticpage .kitchen-faq {
+		width:100% !important;
+		padding: 20px 0px 0px 0px !important;
+	}
+	
+	.staticpage .panel-group {
+     padding: 5px 0 0 0 !important;
+	}
+	.staticpage .container {
+		position: relative;
+		width: 95%;
+	}
 }

@@ -97,11 +97,18 @@ class GuestTrackOrder extends React.Component {
         </div>
 
         <div className='back-btn'>
-          <Link to='/' className='go-back'>{GO_BACK}</Link>
+			
+          <Link to='#' onClick={this.goBack} className='go-back'>{GO_BACK}</Link>
         </div>
       </div>
     );
   }
+  
+	goBack = () => {
+	window.history.go(-1);
+	}
 }
+
+
 
 export default GuestTrackOrder;

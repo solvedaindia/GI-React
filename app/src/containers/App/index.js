@@ -108,15 +108,6 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
-	
-	if(window.location.hash)
-	{
-	  var element = document.getElementById(window.location.hash.substr(0));
-	  if (element) 
-	  {
-		element.scrollIntoView();
-	  }
-	}
   }
 
   componentWillUpdate() {
@@ -137,30 +128,16 @@ export default class App extends React.Component {
 		  $('html, body').animate({ scrollTop: 0 }, 'smooth');
 	  }
 	}
-    else if(pathurl.includes("sort") && !(isMobile() || isTab())){
+    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
        $('html, body').stop().animate();
     }
-    else if(pathurl.includes("filter")  && !(isMobile() || isTab())){
-       $('html, body').stop().animate();
+    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
+        $('html, body').animate({ scrollTop: 0 }, 'smooth');
     }
-	else {
-	  /*Ipad and Mobile stop scrollTop
-	-----------------------------------*/
-	  if((isMobile() || isTab()))
-	  { 
-		if(!pathurl.includes("sort") && !pathurl.includes("filter") && !pathurl.includes("/pdp"))
-		{
-		   $('html, body').stop().animate();
-		}
-		else
-		{
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
-		}
-	  }  
-     else {
-		   $('html, body').animate({ scrollTop: 0 }, 'fast');
-	 }
-   }
+	else 
+	{
+	   $('html, body').animate({ scrollTop: 0 }, 'fast');
+	}
   }
   
  
@@ -219,7 +196,8 @@ export default class App extends React.Component {
     }
   }
 
-  handleLoad() {
+  handleLoad() 
+  {
 	  if(windows.location.hash)
 	  {
 		const element = document.getElementById(windows.location.hash.substr(1));

@@ -7,8 +7,8 @@ export default {
     },
     {
       icon: 'emailIcon.svg',
-      href: 'mail:hello@urbanladder.com',
-      name: 'hello@urbanladder.com',
+      href: 'mail:hello@abc.com',
+      name: 'hello@abc.com',
     },
   ],
   right: [

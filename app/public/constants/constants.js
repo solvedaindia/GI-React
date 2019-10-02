@@ -12,8 +12,8 @@ export const wishlistDataCookie = 'wishlistData';
 export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
-export const productTitleCharLimit = 35;
-export const productDescriptionCharLimit = 25;
+export const productTitleCharLimit = 25;
+export const productDescriptionCharLimit = 35;
 export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
