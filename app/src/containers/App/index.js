@@ -9,6 +9,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
 import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
@@ -95,16 +96,27 @@ export default class App extends React.Component {
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.resize);
+	window.addEventListener('load', this.handleLoad);
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     this.cookiePolicyPopup();
-    window.addEventListener('resize', this.resize);
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
+	
+	if(window.location.hash)
+	{
+	  var element = document.getElementById(window.location.hash.substr(0));
+	  if (element) 
+	  {
+		element.scrollIntoView();
+	  }
+	}
   }
 
   componentWillUpdate() {
@@ -116,14 +128,22 @@ export default class App extends React.Component {
 
 	if(window.location.hash)
 	{
-		 $('html, body').stop().animate();
+	  var element = document.getElementById(window.location.hash.substr(1));
+	  if (element) 
+	  {
+		element.scrollIntoView();
+	  }
+	  else{
+		  $('html, body').animate({ scrollTop: 0 }, 'smooth');
+	  }
 	}
-    else if(pathurl.includes("sort")){
+    else if(pathurl.includes("sort") && !(isMobile() || isTab())){
        $('html, body').stop().animate();
     }
-    else if(pathurl.includes("filter")){
+    else if(pathurl.includes("filter")  && !(isMobile() || isTab())){
        $('html, body').stop().animate();
     }
+	else {
 	  /*Ipad and Mobile stop scrollTop
 	-----------------------------------*/
 	  if((isMobile() || isTab()))
@@ -132,11 +152,17 @@ export default class App extends React.Component {
 		{
 		   $('html, body').stop().animate();
 		}
+		else
+		{
+			$('html, body').animate({ scrollTop: 0 }, 'fast');
+		}
 	  }  
      else {
 		   $('html, body').animate({ scrollTop: 0 }, 'fast');
 	 }
+   }
   }
+  
  
   initialLoginHandling() {
     const token = getCookie(accessTokenCookie);
@@ -193,6 +219,15 @@ export default class App extends React.Component {
     }
   }
 
+  handleLoad() {
+	  if(windows.location.hash)
+	  {
+		const element = document.getElementById(windows.location.hash.substr(1));
+		 if (element) 
+			 element.scrollIntoView();
+	  }
+  }
+  
   resize() {
     this.setState({ isMobile: window.innerWidth <= 760 });
   }
@@ -308,7 +343,9 @@ export default class App extends React.Component {
         
         {/* <HeaderContainer /> */}
 		<div id="mainContainer">
+    <LastLocationProvider>
         <Switch>
+        
           <Route exact path="/" component={HomePageContainer} />
 		  <Route path="/rooms-kitchen_s" component={Kitchens} />
 		  <Route path="/rooms-kitchen" component={Kitchens} />
@@ -351,8 +388,10 @@ export default class App extends React.Component {
 
           
         </Switch>
+        </LastLocationProvider>
 		</div>
         {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') || window.location.pathname.includes('/order/confirm/') ? '' : <FooterContainer /> }
+        
       </div>
     );
   }

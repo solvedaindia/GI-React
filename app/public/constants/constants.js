@@ -255,7 +255,6 @@ export const footerLogoUrl = `${imagePrefix}/images/godrejInterio/logo-white.svg
 
 /* ------- constant functions ------- */
 export function getTheAccessToken(tokenPro) {
-    console.log('constantToke -----', tokenPro);
     if (validateEmptyObject(tokenPro)) {
         return (accessToken = tokenPro);
     }

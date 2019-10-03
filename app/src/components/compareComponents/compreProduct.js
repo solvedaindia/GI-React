@@ -87,8 +87,6 @@ class CompPrd extends React.Component {
   }
 
   renderSpecs = () => {
-
-    console.log('iiiii ----- ',this.props.data);
     var specs = [];
     if (this.props.data === undefined || this.props.data === null || this.props.data === '' || this.props.data.length === 0) {
       return <></>
