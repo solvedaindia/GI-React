@@ -292,6 +292,14 @@ class Filter extends React.Component {
 
 
   filterOptions(alreadyAddedFiltersArr) {
+    if (isMobile()) {
+      this.setState({
+        facetItem: null,
+        isRWDFilterSelected: null,
+      });
+    }
+
+
     var isRWDFacetSelecte = false;
     const item = this.props.dataPro.facetValues.map((option, i) => {
       let checkboxItem;
