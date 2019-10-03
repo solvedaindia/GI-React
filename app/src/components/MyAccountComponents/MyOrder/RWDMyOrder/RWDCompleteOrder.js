@@ -2,7 +2,7 @@ import React from 'react';
 import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDSingleProduct from './RWDSingleProduct';
 import { Link } from 'react-router-dom';
-
+import appCookie from '../../../../utils/cookie';
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -88,7 +88,7 @@ class RWDCompleteOrder extends React.Component {
             </div>
           </div>
         </div>
-
+        { appCookie.get('isLoggedIn') === 'true' &&
         <div className='order-invoice-details'>
           <ul className="invoiceList">
             {invoiceData.map((data, key) => {
@@ -105,7 +105,7 @@ class RWDCompleteOrder extends React.Component {
 
           </ul>
         </div>
-
+        }
       </>
     );
   }
