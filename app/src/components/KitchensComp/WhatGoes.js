@@ -62,10 +62,12 @@ class WhatGoes extends React.Component {
     return (
       <div className="goesOnKitchen">
             <h1 className="title">{this.state.title}</h1>
+            
             <Slider {...settings}>
             {!!whatGoesSlider &&
-              whatGoesSlider.map((sliderData, index) => (
+              whatGoesSlider.map((sliderData, index) => (			  
               <a href={sliderData.onClickUrl} key={index}>
+				<p className="sliderDesc" >{sliderData.imgDesc}</p>
                 <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
               </a>
               ))}

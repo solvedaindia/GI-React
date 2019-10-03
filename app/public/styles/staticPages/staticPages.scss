@@ -142,6 +142,10 @@
 	.GI_KITCHEN_LAYOUTS {
 		padding-top:30px;
 	}
+	
+	.GI_MEDIA_PRESS{
+		padding-bottom:30px;
+	}
 
 	.tab-content > .active {
     display: block;
@@ -169,9 +173,29 @@
 		 float:left;
 		 width:78%;
 	}
+	
+	.staticpage .sliderDesc{
+		text-align:center;
+		font-size: 15px;
+		font-weight: 500px;
+		color: black;
+		font-weight: normal;
+	}
+	
+	.staticpage .title{
+		padding-bottom:10px;
+		margin-bottom:10px;
+	}
+	
 
 @media (max-width: 1024px) 
 {
+
+	.aboutUs {
+     padding-right: 0px!important;
+     margin-right: 0%!important;
+	}
+
   .staticpage .support-faq-menu {
 	display:none;
   }
@@ -205,5 +229,32 @@
 	.staticpage .container {
 		position: relative;
 		width: 95%;
+	}
+	
+	.easySteps .step-wizard-step {
+		position: relative;
+		height: 165px !important;
+	}
+
+	.goesOnKitchen .slick-prev {
+		left: -50px!important;
+	}
+
+	.goesOnKitchen .slick-next {
+		right: -50px!important;
+	}
+	
+
+	.GI_KITCHEN_FORMBACKGROUND_IMG {
+		display:none!important;
+	}
+
+	.staticpage .faq-h4 {
+		font-size: 14px!important;
+	}
+	
+	.ProcessNumber {
+		padding-right: 14px !important;
+		font-size: 19px !important;
 	}
 }
