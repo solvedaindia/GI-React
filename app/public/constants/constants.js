@@ -12,8 +12,8 @@ export const wishlistDataCookie = 'wishlistData';
 export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
-export const productTitleCharLimit = 35;
-export const productDescriptionCharLimit = 25;
+export const productTitleCharLimit = 25;
+export const productDescriptionCharLimit = 35;
 export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
@@ -226,7 +226,7 @@ export const breadcrumbAPI = `${secureHttp}://${host}:${port2}/api/v1/categories
 export const shareWishlistAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/wishlist/externalpage/`;
 
 /* Espot Names */
-export const GI_PDP_Our_Promises = 'GI_PDP_Sample_Espot1';
+export const GI_PDP_Our_Promises = 'GI_Homepage_Our_Promises';
 export const GI_PDP_Promocode_TandC = 'GI_PDP_Promocode_TandC';
 
 /* Compare API */

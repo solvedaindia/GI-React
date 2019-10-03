@@ -632,7 +632,7 @@ export class PlpContainer extends React.Component {
         <Helmet>
           <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
-            {`"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}`}
+            {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
 		  
 		   <title>{this.state.categoryDetail.pageTitle}</title>            
