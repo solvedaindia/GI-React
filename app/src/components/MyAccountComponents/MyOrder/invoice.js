@@ -64,7 +64,6 @@ class Invoice extends React.Component {
 		return (document.getElementById("invoiceDiv").style.width = '90%')
 		}
 	  else {
-		  console.log('op',isMobile)
 		return	(document.getElementById("invoiceDiv").style.width = '200%')
 	} 
 	}
