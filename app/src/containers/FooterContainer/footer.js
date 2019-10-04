@@ -5,10 +5,13 @@ import Footer from '../../components/Footer/footer';
 import '../../../public/styles/footerContainer/footerContainer.scss';
 import FooterMobile from './FooterRWD/index';
 import ContentEspot from '../../components/Primitives/staticContent';
+import appCookie from '../../utils/cookie';
+
 class FooterContainer extends React.Component {
   constructor() {
     super();
     this.callFooterApi = this.callFooterApi.bind(this);
+    this.renderChatBot = this.renderChatBot.bind(this);
     this.state = {
       data: {},
       loading: true,
@@ -39,7 +42,26 @@ class FooterContainer extends React.Component {
       });
   }
 
+  renderChatBot() {
+    let userName = 'Godrej Interio';
+    let userId = 'divyac@godrej.com';
+    if (appCookie.get('name')) {
+      userName = appCookie.get('name');
+    }
+    if (appCookie.get('loginID')) {
+      userId = appCookie.get('loginID');
+    }
+    window.intercomSettings = {
+      app_id: "rf3dsabc",
+      name: userName, // Full name
+      email: userId, // Email address
+      created_at: `in ISO 8601: ${Date.now()}`
+    };
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/rf3dsabc';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  }
+
   render() {
+    this.renderChatBot();
     if (this.state.isMobile) {
       return (
         <>
@@ -59,7 +81,7 @@ class FooterContainer extends React.Component {
           )}
         </>
       );
-    }
+    } 
 
     return (
       <>
