@@ -15,7 +15,11 @@
 }
 .slidedown {            
     max-height: 85px ;                    
-}    
+}  
+ 
+.our-promiseSection {
+    padding-bottom: 30px;
+} 
 
 /*-----slideUpPrice*/
  .slideUpPrice {
@@ -1517,7 +1521,7 @@
 @include mix-lg{
         .galleryArea{
             .pdpDetails {
-                width:40%;
+                width:38%;
             }
         }
         .product_details{

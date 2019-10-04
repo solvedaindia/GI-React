@@ -4,7 +4,7 @@ import {imagePrefix} from '../../../public/constants/constants';
 import '../../../public/styles/clpContainer/themeData.scss';
 import {VIEW_DETAILS } from '../../constants/app/clpConstants';
 import {isMobile } from '../../utils/utilityManager';
-import {createPdpURL, createSEOPdpURL} from '../../utils/utilityManager';
+import {createPdpURL, formatPrice, createSEOPdpURL} from '../../utils/utilityManager';
 
 class ThemeData extends React.Component {
 	constructor(props) {
@@ -128,7 +128,7 @@ class ThemeData extends React.Component {
                 </figure>
                 <div className='prodDetails'>
                     <h2 className='prodNAme'>{itemDetail.productName}</h2>
-                    <p className='price'>₹{itemDetail.offerPrice}</p>
+                    <p className='price'>₹{formatPrice(itemDetail.offerPrice)}</p>
                     <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>
             </div>

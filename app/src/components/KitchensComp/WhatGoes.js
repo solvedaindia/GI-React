@@ -67,8 +67,9 @@ class WhatGoes extends React.Component {
             {!!whatGoesSlider &&
               whatGoesSlider.map((sliderData, index) => (			  
               <a href={sliderData.onClickUrl} key={index}>
-				<p className="sliderDesc" >{sliderData.imgDesc}</p>
                 <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+				<h2 className="sliderHeading" >{sliderData.imgHeading}</h2>
+				<p className="sliderDesc" >{sliderData.imgDesc}</p>
               </a>
               ))}
             </Slider>

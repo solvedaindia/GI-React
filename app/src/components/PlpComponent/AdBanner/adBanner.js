@@ -31,7 +31,9 @@ class AdBanner extends React.Component {
     if (this.props.indexPro) {
       let bannerItem = null;
       if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
-        bannerItem = <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+        bannerItem = <a href={this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl}>
+        <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+      </a>
         this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
         this.setState({
           adBannerItem: bannerItem
