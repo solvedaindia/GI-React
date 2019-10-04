@@ -37,7 +37,7 @@ render() {
       </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
       <div id='mediaPress'>
-      <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />
+      <ContentEspot espotName={ 'GI_MEDIA_PRESS' } />	
       </div>
       <ContentEspot espotName={ 'GI_ABOUT_US_10' } />
     </div>

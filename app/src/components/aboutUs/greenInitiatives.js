@@ -59,7 +59,7 @@ export default class GreenInitiatives extends Component {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -67,7 +67,7 @@ export default class GreenInitiatives extends Component {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -75,7 +75,7 @@ export default class GreenInitiatives extends Component {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots: true,
+          dots: false,
         },
       },
     ],

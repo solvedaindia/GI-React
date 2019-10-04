@@ -56,9 +56,9 @@ class Recommendation extends React.Component {
         const productname2 = String(getProdName[1]).toLowerCase();
         const productname3 = String(getProdName[2]).toLowerCase();
         
-        const routePath1 = createSEOPdpURL(productname1,getProdDescription[1],getSkuID[1]);
-        const routePath2 = createSEOPdpURL(productname2,getProdDescription[2],getSkuID[2]);
-        const routePath3 = createSEOPdpURL(productname3,getProdDescription[3],getSkuID[3]);
+        const routePath1 = createSEOPdpURL(productname1,getProdDescription[0],getSkuID[0]);
+        const routePath2 = createSEOPdpURL(productname2,getProdDescription[1],getSkuID[1]);
+        const routePath3 = createSEOPdpURL(productname3,getProdDescription[2],getSkuID[2]);
         
         return (
             !!recoData &&

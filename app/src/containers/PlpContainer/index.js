@@ -170,14 +170,18 @@ export class PlpContainer extends React.Component {
     }
 
     if (nextProps.location.pathname.includes('/search')) {
-      if (nextProps.location.search !== this.props.location.search) {
+      const paramsNext = new URLSearchParams(nextProps.location.search);
+      const keywordNext = paramsNext.get('keyword');
+      const paramsThis = new URLSearchParams(this.props.location.search);
+      const keywordThis = paramsThis.get('keyword');
+      if (keywordNext !== keywordThis) {
         //If New search entered
         this.setState({
           marketingTextBannerData: null,
           plpSubCatData: null,
           plpData: [],
           filterData: [],
-          plpFilter: '', 
+          plpFilter: '',
           pageNumber: 1,
           plpDescriptionData: null,
           categoryDetail: true,
@@ -239,13 +243,11 @@ export class PlpContainer extends React.Component {
     });
   }
 
-  fetchAdBannerData() 
-  {
-	  var adBannerEspotName = `GI_PLP_AD_BANNER`;
-	  if(categoryId != undefined)
-	  {
-		adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
-	  }
+  fetchAdBannerData() {
+    var adBannerEspotName = `GI_PLP_AD_BANNER`;
+    if (categoryId != undefined) {
+      adBannerEspotName = `GI_PLP_AD_BANNER_${categoryId.toUpperCase()}`;
+    }
     if (this.state.isFromSearch.includes('/search')) {
       adBannerEspotName = 'GI_SEARCH_RESULTS_AD_BANNER';
     }
@@ -286,9 +288,8 @@ export class PlpContainer extends React.Component {
       .catch(error => { });
   }
 
-  fetchPLPProductsData(isFromScroll) 
-  {
-	  
+  fetchPLPProductsData(isFromScroll) {
+
     this.setState({ isLoading: true }, () => {
       let urlMaking = plpAPI + categoryId;
       let searchText = null;
@@ -379,15 +380,14 @@ export class PlpContainer extends React.Component {
             browserFilters: [],
           });
         })
-        .catch(error => 
-		{
-			console.log(error);
+        .catch(error => {
+          console.log(error);
           this.setState({
             error: error.response.data.error.error_message,
             isLoading: false,
           });
         });
-		
+
     });
   }
 
@@ -495,7 +495,7 @@ export class PlpContainer extends React.Component {
     var scrollYindex;
     if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
       scrollYindex = window.innerHeight + document.body.scrollTop;
-    } else if (window.navigator.userAgent.indexOf("Edge") > -1){
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1) {
       scrollYindex = window.innerHeight + window.pageYOffset;
     } else { //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
@@ -511,7 +511,7 @@ export class PlpContainer extends React.Component {
       this.fetchPLPProductsData(true);
     }
   };
-  
+
   render() {
     const {
       error,
@@ -628,16 +628,16 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')}/>
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
         <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
+          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
-		  
-		   <title>{this.state.categoryDetail.pageTitle}</title>            
-		   <meta name="description" content={this.state.categoryDetail.metaDescription} />
-		   <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
+
+          <title>{this.state.categoryDetail.pageTitle}</title>
+          <meta name="description" content={this.state.categoryDetail.metaDescription} />
+          <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
         </Helmet>
         {marketingBanner}
         {breadcrumbItem}
@@ -701,17 +701,17 @@ export class PlpContainer extends React.Component {
 
 
         {this.state.isMobile && this.state.productCount !== null && this.state.productCount.length !== 0 ?
-		<div className='sortfilter'>
-          <RWDSort sortingIndexPro={this.state.plpSorting} />
-          <RWDFilterMain
-            filterDataPro={filterData}
-            isSKUPro={this.state.displaySkus}
-            categoryIdPro={this.state.categoryDetail.uniqueID}
-            isSearchPathPro={this.props.location.pathname}
-            searchKeywordPro={keywoard}
-          />
-        </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' +(this.props.match.params.id?'_'+ this.props.match.params.id.toUpperCase().replace(' ', ''):'')} />
+          <div className='sortfilter'>
+            <RWDSort sortingIndexPro={this.state.plpSorting} />
+            <RWDFilterMain
+              filterDataPro={filterData}
+              isSKUPro={this.state.displaySkus}
+              categoryIdPro={this.state.categoryDetail.uniqueID}
+              isSearchPathPro={this.props.location.pathname}
+              searchKeywordPro={keywoard}
+            />
+          </div> : null}
+        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
 
       </>
     );

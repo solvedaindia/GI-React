@@ -32,7 +32,10 @@ export class HeaderContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    scrollPage(this.props.location.pathname, nextProps.location.pathname);
+	  if(this.props.location.pathname != nextProps.location.pathname)
+	  {
+		scrollPage(this.props.location.pathname, nextProps.location.pathname);
+	  }
   }
 
   render() {
