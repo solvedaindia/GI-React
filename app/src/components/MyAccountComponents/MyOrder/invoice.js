@@ -3,6 +3,8 @@ import jsPDF from 'jspdf';
 import { withRouter } from 'react-router-dom';
 import { orderListAPI, invoicAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
+import { isMobile } from '../../../utils/utilityManager';
+
 import '../../../../public/styles/myAccount/invoice.scss';
 import appCookie from '../../../utils/cookie';
 import html2canvas from 'html2canvas'
@@ -57,17 +59,22 @@ class Invoice extends React.Component {
 			});
 		});
 	}
-	_exportPdf = () => {
-
-   
+	returnWidth = () => {
+		if(isMobile){
+		return (document.getElementById("invoiceDiv").style.width = '90%')
+		}
+	  else {
+		  console.log('op',isMobile)
+		return	(document.getElementById("invoiceDiv").style.width = '200%')
+	} 
 	}
 
     invoiceDatailedData() 
 	{
-		
+		let returnwid = this.returnWidth()
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'1170px'}}>
+            <div id='invoiceDiv' className="container invoiceContainer" style={{width: returnwid}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
