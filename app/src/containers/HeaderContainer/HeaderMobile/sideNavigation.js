@@ -73,6 +73,8 @@ export class HeaderMobile extends React.Component {
         headers: { profile: 'summary' },
       })
       .then(response => {
+        document.cookie = `name=${response.data.data.name};path=/;expires=''`;
+        document.cookie = `loginID=${response.data.data.logonID};path=/;expires=''`;
         if (response.data.data.pincode && response.data.data.pincode !== '') {
           appCookie.set('pincode', response.data.data.pincode, 365 * 24 * 60 * 60 * 1000);
         }
@@ -80,6 +82,7 @@ export class HeaderMobile extends React.Component {
           userName: `${this.state.userName} ${(response.data.data.name !== undefined && response.data.data.name !== '') ? response.data.data.name.split(' ')[0] : ''}`,
           logonId: response.data.data.logonID,
         });
+
         this.showLoginStatus();
         this.props.updateUserProfile(response.data.data.name);
       })
@@ -266,7 +269,6 @@ export class HeaderMobile extends React.Component {
 
   render() {
     const { category = [], showNav } = this.state;
-
     let loginLogoutItem;
     let myAccountItem = null;
     if (getCookie('isLoggedIn') === 'true') {
