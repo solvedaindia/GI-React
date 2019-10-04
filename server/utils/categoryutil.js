@@ -140,52 +140,35 @@ module.exports.categoryListByIDs = function getCategoryListByCategoryIDs(
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-
-  const categoryListTask = [
-    getCategoryListByIDs.bind(null, headers, categoryIDs),
-  ];
-  async.parallel(categoryListTask, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, transformJson(result));
-    }
-  });
-};
-
-/* Get Category Details by IDS */
-function getCategoryListByIDs(headers, categoryIDs, callback) {
-  if (categoryIDs && categoryIDs.length > 0) {
-    const categoryArray = [];
-    async.map(
-      categoryIDs,
-      (categoryId, cb) => {
-        getCategoryDetails(headers, categoryId, (error, categoryData) => {
-          if (!error) {
-            cb(null, categoryData);
-          } else {
-            cb(error);
-          }
-        });
-      },
-      (errors, results) => {
-        if (errors) {
-          callback(errors);
-          return;
+  const categoryArray = [];
+  async.map(
+    categoryIDs,
+    (categoryId, cb) => {
+      getCategoryDetails(headers, categoryId, (error, categoryData) => {
+        if (!error) {
+          cb(null, categoryData);
+        } else {
+          cb(error);
         }
-        results.forEach(result => {
-          categoryArray.push(result);
-        });
-        callback(null, categoryArray);
-      },
-    );
-  }
-}
+      });
+    },
+    (errors, results) => {
+      if (errors) {
+        callback(errors);
+        return;
+      }
+      results.forEach(result => {
+        categoryArray.push(result);
+      });
+      callback(null, transformJson(categoryArray));
+    },
+  );
+};
 
 /* Merging Category Details and Product Count Data */
 function transformJson(result) {
   const categoryList = [];
-  const categoryListArray = result[0];
+  const categoryListArray = result;
   categoryListArray.forEach(category => {
     const categoryDetail = category;
     if (categoryDetail.uniqueID) {

@@ -119,7 +119,13 @@ const filterDataFunction = (filterKeyword, data) =>
             : pathString[1];
           const lowerKeyword = filterKeyword.toLowerCase();
           const lowerStartString = starting.toLowerCase();
-          if (pathString.length > 2 || lowerKeyword === lowerStartString) {
+          if (
+            pathString.length >= 2 ||
+            (lowerKeyword === lowerStartString &&
+              (parentRoom !== undefined ||
+                parentRoom !== null ||
+                parentRoom !== ''))
+          ) {
             filterDataArrayObject.categoryId = item.value;
             filterDataArrayObject.categoryName = item.name;
             filterDataArrayObject.categoryIdentifier = item.identifier_ntk;

@@ -119,14 +119,13 @@ function productDataByPartNumber(skuId, reqHeaders, callback) {
   productUtil.productDetailByPartNumber(skuId, reqHeaders, (err, result) => {
     if (err) {
       callback(err);
-    } else if (Object.keys(result).length !== 0) {
+      return;
+    }
+    activityHandler.addRecentlyViewedProduct(reqHeaders, skuId);
+    if (Object.keys(result).length !== 0) {
       productData.catalogEntryView.push(result);
-      activityHandler.addRecentlyViewedProduct(reqHeaders, result.uniqueID);
       callback(null, productData);
     } else {
-      // eslint-disable-next-line no-shadow
-      activityHandler.addRecentlyViewedProduct(reqHeaders, skuId);
-      // eslint-disable-next-line no-shadow
       productUtil.productByProductID(skuId, reqHeaders, (err, result) => {
         if (err) {
           callback(err);

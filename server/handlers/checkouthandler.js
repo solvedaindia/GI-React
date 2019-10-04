@@ -19,7 +19,7 @@ module.exports.storeGSTINValue = function storeGSTINValueInDB(req, callback) {
     orderId: req.body.order_id,
     orderAttributes: [
       {
-        attrName: 'gstin',
+        attrName: 'GSTIN',
         attrValue: req.body.gst_number,
       },
     ],
@@ -62,7 +62,7 @@ module.exports.userstatus = function getUserStatus(req, callback) {
   const reqHeader = headerutil.getWCSHeaders(req.headers);
   const originUrl = constants.userStatus
     .replace('{{storeId}}', req.headers.storeId)
-    .replace('{{logonId}}', req.params.logonId);
+    .replace('{{logonId}}', String(req.params.logonId).toLowerCase());
 
   origin.getResponse(
     'GET',

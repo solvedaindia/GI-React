@@ -1,3 +1,5 @@
+const htmlMinifier = require('html-minifier');
+
 /**
  * Filter Espot Data.
  * @return Content Names and their Marketing Text as JSON Object
@@ -48,9 +50,18 @@ module.exports.espotContent = function espotContentFilter(espotBody) {
           .marketingContentDescription[0].marketingText,
       );
     } catch (err) {
-      resJson =
-        espotBody.MarketingSpotData[0].baseMarketingSpotActivityData[0]
-          .marketingContentDescription[0].marketingText;
+      resJson = {
+        type: 'content',
+        content: htmlMinifier.minify(
+          espotBody.MarketingSpotData[0].baseMarketingSpotActivityData[0]
+            .marketingContentDescription[0].marketingText,
+          {
+            collapseWhitespace: true,
+            minifyCSS: true,
+            quoteCharacter: "'",
+          },
+        ),
+      };
     }
     return resJson;
   }

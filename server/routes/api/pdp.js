@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const pdpHandler = require('../../handlers/pdphandler');
+const activityHandler = require('../../handlers/activityhandler');
 const apiCache = require('../../utils/apicache');
 
 router.get('/productDetails/:skuId', (req, res, next) => {
   apiCache.getCachedResponse('pdp', req, cacheRes => {
     if (cacheRes) {
+      activityHandler.addRecentlyViewedProduct(req.headers, req.params.skuId);
       res.status(200).send(cacheRes);
     } else {
       pdpHandler.getProductDetails(req, (err, result) => {

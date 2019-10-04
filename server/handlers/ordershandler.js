@@ -20,7 +20,7 @@ const orderFilter = require('../filters/orderfilter');
 module.exports.getOrdersList = getOrdersList;
 function getOrdersList(headers, query, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
-  let pageSize = 1;
+  let pageSize = 20;
   let pageNumber = 1;
   if (query.pagesize) {
     pageSize = query.pagesize;
@@ -322,13 +322,9 @@ function getOOBOrderDetails(headers, wcsOrderDetails, callback) {
     orderDetails.paymentMethod =
       orderData.paymentInstruction[0].payMethodId || '';
   }
-  if (orderData.paymentInstruction && orderData.paymentInstruction.length > 0) {
-    orderDetails.address = profileFilter.userAddress(
-      orderData.paymentInstruction[0],
-    );
-  }
 
   if (orderData.orderItem && orderData.orderItem.length > 0) {
+    orderDetails.address = profileFilter.userAddress(orderData.orderItem[0]);
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     getOrderProductList(headers, orderData.orderItem, (error, productList) => {
       if (error) {
@@ -576,12 +572,13 @@ function getInvoiceDetails(headers, params, callback) {
           const order = invoiceJson.Order;
 
           invoiceData.billTo = orderFilter.getInvoiceAddress(
-            order.PersonInfoBillTo,
+            order.PaymentMethods.PaymentMethod[0].PersonInfoBillTo,
           );
+
           invoiceData.billTo.gstinNo = invoiceJson.Extn.ExtnCustomerGSTINID;
 
           invoiceData.shipTo = orderFilter.getInvoiceAddress(
-            order.PersonInfoShipTo,
+            invoiceJson.Shipment.ToAddress,
           );
           invoiceData.shipTo.gstinNo = invoiceJson.Extn.ExtnCustomerGSTINID;
 

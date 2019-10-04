@@ -25,36 +25,42 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-  const originUrl = `${constants.recentlyViewedEvent.replace(
-    '{{storeId}}',
-    headers.storeId,
-  )}`;
+  let uniqueId = productID;
+  productUtil.productDetailByPartNumber(productID, headers, (err, res) => {
+    if (res && res.uniqueID) {
+      uniqueId = res.uniqueID;
+    }
+    const originUrl = `${constants.recentlyViewedEvent.replace(
+      '{{storeId}}',
+      headers.storeId,
+    )}`;
 
-  const reqBody = {
-    productId: productID,
-    personalizationID: headers.personalizationID,
-  };
+    const reqBody = {
+      productId: uniqueId,
+      personalizationID: headers.personalizationID,
+    };
 
-  const reqHeader = {
-    'content-type': 'application/json',
-  };
+    const reqHeader = {
+      'content-type': 'application/json',
+    };
 
-  origin.getResponse(
-    'POST',
-    originUrl,
-    reqHeader,
-    null,
-    reqBody,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        logger.debug('Added to recently viewed');
-      } else {
-        logger.debug('Error while Calling Add to Recently Viewed');
-      }
-    },
-  );
+    origin.getResponse(
+      'POST',
+      originUrl,
+      reqHeader,
+      null,
+      reqBody,
+      null,
+      null,
+      response => {
+        if (response.status === 200) {
+          logger.debug('Added to recently viewed');
+        } else {
+          logger.debug('Error while Calling Add to Recently Viewed');
+        }
+      },
+    );
+  });
 };
 
 /**
