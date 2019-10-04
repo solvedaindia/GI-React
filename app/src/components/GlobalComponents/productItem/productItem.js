@@ -134,6 +134,7 @@ class ProductItem extends React.Component {
             uniqueId={this.state.data.uniqueID}
             partNumber={this.state.data.partNumber}
             productName={this.state.data.productName}
+            shortDescription={this.state.data.shortDescription}
             breadcrumbDataPro={this.props.plpBreadcrumbPro}
           />
           <InStock isInStock={this.state.data.inStock} />

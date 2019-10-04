@@ -321,6 +321,8 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
 		var shortDescURL = '';
 		if(shortDesc != undefined && shortDesc != '') {
 			shortDescURL =(shortDesc.split(' ').join('-')).split(',').join('-');
+			shortDescURL =(shortDescURL.split('/').join('-')).split('?').join('-');
+			shortDescURL =(shortDescURL.split('\\').join('-')).split('&').join('-');
 			shortDescURL = shortDescURL.toLowerCase();
             shortDescURL = '-' + shortDescURL;
             shortDescURL = shortDescURL.replace('--', "-")
@@ -338,6 +340,19 @@ export function createCategoryPlpURL(categoryIdentifier)
 		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
 		catIdentifier = catIdentifier.replace(/ /g, "");
         categoryRoutePath = `/furniture/${catIdentifier}`;
+
+	}
+    return categoryRoutePath;
+}
+
+export function createTopCategoryPlpURL(categoryIdentifier)
+{
+	 var categoryRoutePath = `/`;
+	if(categoryIdentifier != undefined && categoryIdentifier != '')
+	{
+		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
+		catIdentifier = catIdentifier.replace(/ /g, "");
+        categoryRoutePath = `/rooms-${catIdentifier}`;
 
 	}
     return categoryRoutePath;
