@@ -177,7 +177,38 @@ async function getBreadcrumb(req, callback) {
       resJson.breadCrumbData = plpFilter.getBreadCrumbData(
         categoryBreadcrumbData.body.breadCrumbTrailEntryViewExtended,
       );
-      callback(null, resJson);
+      if (resJson.breadCrumbData && resJson.breadCrumbData.length > 0) {
+        const categoryIds = [];
+        resJson.breadCrumbData.forEach(breadcrumb => {
+          categoryIds.push(breadcrumb.value);
+        });
+        categroyUtil.categoryListByIDs(
+          categoryIds,
+          req.headers,
+          (err, catResponse) => {
+            if (catResponse && catResponse.length > 0) {
+              catResponse.forEach(category => {
+                for (
+                  let index = 0;
+                  index < resJson.breadCrumbData.length;
+                  index += 1
+                ) {
+                  if (
+                    resJson.breadCrumbData[index].value === category.uniqueID
+                  ) {
+                    resJson.breadCrumbData[index].categoryIdentifier =
+                      category.categoryIdentifier;
+                    break;
+                  }
+                }
+              });
+            }
+            callback(null, resJson);
+          },
+        );
+      } else {
+        callback(null, resJson);
+      }
     } else {
       callback(null, resJson);
     }

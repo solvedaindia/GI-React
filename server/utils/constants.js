@@ -79,5 +79,4 @@ module.exports = Object.freeze({
   unlockOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/unlockOrder/{{orderId}}`,
   categoryBreadcrumb: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?responseFormat=json&profileName=IBM_BreadCrumbByCategoryUniqueId`,
   categorySuggestions: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/categorySuggestions`,
-  facetListByCategory: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?{{queryUrl}}&searchSource=E&responseFormat=json&profileName=IBM_ComposeFacetListByCategoryId`,
 });

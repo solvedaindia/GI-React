@@ -11,7 +11,7 @@ global.isRedis = false;
 if (process.env.REDIS === '1') {
   const redisClient = redis.createClient(cacheConfig.redisConfig());
   redisClient.on('error', err => {
-    logger.error('Redis client error');
+    logger.error('Redis client error', err);
     global.isRedis = false;
   });
   redisClient.on('ready', () => {

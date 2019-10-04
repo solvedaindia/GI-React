@@ -95,10 +95,10 @@ async function userLogin(params, headers, callback) {
     return;
   }
 
-  const reqHeaders = headerutil.getWCSHeaders(headers)
+  const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const loginBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     logonPassword: params.password,
   };
 
