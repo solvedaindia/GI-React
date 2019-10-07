@@ -143,6 +143,7 @@ class ChangePassword extends React.Component {
           inputTextCurrent: '',
         });
         alert(response.data.data.message);
+        this.enableDisableSaveBtn();
       })
       .catch(error => {
         const errorData = error.response.data;
@@ -175,6 +176,7 @@ class ChangePassword extends React.Component {
           inputTextCurrent: '',
         });
         alert(response.data.data.message);
+        this.enableDisableSaveBtn();
       })
       .catch(error => {
     
