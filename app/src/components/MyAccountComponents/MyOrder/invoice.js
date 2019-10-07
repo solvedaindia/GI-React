@@ -212,8 +212,8 @@ class Invoice extends React.Component {
 			):isMatchForUser = false;
 		   return(
 				<div className="invoiceTicket">
-					<div id="content">
-					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
+					<div className={isMobile() ? 'invoiceContent' : null} id="content">
+					{UserLoggedIn == 'true'? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
