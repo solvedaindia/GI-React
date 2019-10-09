@@ -52,7 +52,7 @@ class AddressItem extends React.Component {
       state: this.props.addressData.state,
       default: String(true),
     };
-   
+
 
     apiManager
       .post(updateAddressAPI + this.props.addressData.nickName, data)
@@ -62,9 +62,9 @@ class AddressItem extends React.Component {
       .catch(error => {
         console.log('Error: ', error);
       });
-	  
-	 appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);
-	 appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+
+    appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);
+    appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
   }
 
   render() {
@@ -86,31 +86,31 @@ class AddressItem extends React.Component {
             <label className="defaultAddress">{DEF_ADD}</label>
           ) : null}
 
-            {isMobile() && 
+          {isMobile() &&
             <>
-            {this.props.addressData.isDefault ? null : (
-              <div
-                className="setAsdefaultbtn"
-                onClick={this.setAsDefafultBtnClicked.bind(this)}
-              >
-                {SET_DEFAULT}
-              </div>
-            )}
-            <ul className="myacAddressList">
-              <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
-                <img src={require('../../../../public/images/edit.svg')}  alt='Edit' />
-              </li>
-              <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-                <img src={require('../../../../public/images/delete.svg')}  alt='Delete'/>
-              </li>
-            </ul>
+              {this.props.addressData.isDefault ? null : (
+                <div
+                  className="setAsdefaultbtn"
+                  onClick={this.setAsDefafultBtnClicked.bind(this)}
+                >
+                  {SET_DEFAULT}
+                </div>
+              )}
+              <ul className="myacAddressList">
+                <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
+                  <img src={require('../../../../public/images/edit.svg')}  alt='Edit' />
+                </li>
+                <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
+                  <img src={require('../../../../public/images/delete.svg')}  alt='Delete'/>
+                </li>
+              </ul>
             </>
-            }
+          }
           <label className="addressText">
             {this.props.addressData.address},
             {this.props.addressData.city}
             <div>{this.props.addressData.state},{` ${this.props.addressData.pincode}`}</div>
-            
+
           </label>
 
           {!isMobile() && <ul className="modifyAddress">
@@ -129,7 +129,7 @@ class AddressItem extends React.Component {
               </li>
             )}
           </ul>}
-          
+
         </div>
       </>
     );

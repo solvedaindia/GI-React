@@ -13,6 +13,7 @@ import {
 import { cityStateAPI, addAddressAPI, updateAddressAPI } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import { ADD_NEW_ADD, REQUIRED_FIELD, VALID_NAME, DEFAULT_ADDRESS, VALID_MOBILE_NO, ENTER_EMAIL_ID, VALID_CITY, VALID_STATE, VALID_PIN, VALID_ADD } from '../../../constants/app/myAccountConstants';
+import appCookie from '../../../utils/cookie';
 
 class AddAddressForm extends React.Component {
   constructor(props) {
@@ -198,6 +199,10 @@ class AddAddressForm extends React.Component {
         this.setState({
           isSaveBtnDisabled: false
         })
+        if (this.state.isSetAsDefault) {
+          appCookie.set('pincode', this.state.inputText_pincode, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+        }
       })
       .catch(error => {
         this.setState({
