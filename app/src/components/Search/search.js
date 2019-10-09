@@ -131,7 +131,9 @@ class SearchBar extends React.Component {
         var categoryRoutePath = createCategoryPlpURL(item.categoryIdentifier);
         
         var searchStr = item.categoryName;
-        searchStr += ` in ${item.parentRoom}`;
+        if(searchStr !== item.parentRoom){
+          searchStr += ` in ${item.parentRoom}`;
+        } 
         var filterStr = searchStr.replace(new RegExp(searchItem, 'gi'), str => { return str.bold()});
         if (index < 4) {
           return (

@@ -382,8 +382,37 @@ export function createPlpItemData(plpData) {
     return plpItem;
   }
 
-  export function scrollPage(prevUrl, CurrUrl) {
-      return true;
+export function scrollPage(prevUrl, currUrl) 
+{
+	console.log(prevUrl);
+	console.log(currUrl);
+	let pathurl=window.location.href;
+	if(window.location.hash)
+	{
+	  var element = document.getElementById(window.location.hash.substr(1));
+	  if (element) 
+	  {
+		element.scrollIntoView();
+	  }
+	  else{
+		  $('html, body').animate({ scrollTop: 0 }, 'smooth');
+	  }
+	}
+    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
+       $('html, body').stop().animate();
+    }
+    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
+        $('html, body').animate({ scrollTop: 0 }, 'smooth');
+    }
+	else 
+	{
+	   if(prevUrl != currUrl)
+	   {
+		   $('html, body').animate({ scrollTop: 0 }, 'fast');
+	   }
+	}
+	
+   return true;
 }
 
 function escapeRegExp(string){
@@ -403,7 +432,7 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
     
     if (searchKeyword !== null && searchKeyword !== undefined && searchKeyword !== '') {
         if (isKeywordEntered) {
-			searchKeyword = searchKeyword.replace(/&/g, ' ::: ');
+			searchKeyword = searchKeyword.replace(/&/g, ':::');
 			searchKeyword = searchKeyword.replace(/%/g, ' _:');
 			searchKeyword = replaceAll(searchKeyword, '[', ' __');
 			searchKeyword = replaceAll(searchKeyword, ']', ' :_');

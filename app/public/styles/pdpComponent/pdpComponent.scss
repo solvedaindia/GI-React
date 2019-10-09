@@ -15,7 +15,11 @@
 }
 .slidedown {            
     max-height: 85px ;                    
-}    
+}  
+ 
+.our-promiseSection {
+    padding-bottom: 30px;
+} 
 
 /*-----slideUpPrice*/
  .slideUpPrice {
@@ -538,7 +542,7 @@
             color:$grey;
             font-size:12px;
             padding:11px 0 0 0;
-            width: 55%;
+            width: 90%;
             .bold{
                 color:$ceruleanblue;
                 font-family: $font-bold;
@@ -1517,7 +1521,7 @@
 @include mix-lg{
         .galleryArea{
             .pdpDetails {
-                width:40%;
+                width:38%;
             }
         }
         .product_details{
