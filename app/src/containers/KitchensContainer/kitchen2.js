@@ -18,7 +18,7 @@ import {
   imagePrefix,
 } from '../../../public/constants/constants';
 import ConsultationForm from '../../components/Primitives/ConsultForm';
-
+import KitchenTabbingSlider from '../../components/KitchensComp/kitchenTabSlider';
 
 export default class ChefKitchenContainer extends React.Component {
 constructor(props){
@@ -70,9 +70,10 @@ return (
 	</Helmet>
       <ChefKitchenBanner />
       <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
+	  <KitchenTabbingSlider/>
       <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
       <div className="formContainer">
-        <div className="container">
+        {/* <div className="container">
           <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
           <div id='consultForm' className="formDetails">
@@ -80,7 +81,7 @@ return (
 				<p className="desc">{KITCHEN_CONSULT} </p>
 				<ConsultationForm />
 			</div>
-        </div>
+        </div> */}
       </div>
       <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
       <ExKitchens />
