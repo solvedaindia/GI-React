@@ -67,7 +67,7 @@ class Invoice extends React.Component {
 		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="container invoiceContainer" style={{width:'1170px'}}>
+            <div id='invoiceDiv' className="container invoiceContainer " style={{width:'1170px'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
@@ -170,10 +170,23 @@ class Invoice extends React.Component {
 						</div>
                     </div>
 
-                }
+				}
+				<button onClick={this.printDocument}>Download and Print</button>
             </div>
         )
-    }
+	}
+	printDocument() {
+		const input = document.getElementById('invoiceDiv');
+		html2canvas(input)
+		  .then((canvas) => {
+			const imgData = canvas.toDataURL('image/png');
+			const pdf = new jsPDF();
+			pdf.addImage(imgData, 'JPEG', 0, 0);
+			// pdf.output('dataurlnewwindow');
+			pdf.save("invoice.pdf");
+		  })
+		;
+	  }
     render() 
 	{
 		if(this.state.isLoading)
@@ -211,7 +224,7 @@ class Invoice extends React.Component {
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-
+						
 				</div>
 			);
 		}
@@ -224,6 +237,7 @@ class Invoice extends React.Component {
 							Invoice data is not available
 						</div>
 					</div>
+				
 				</div>
 				);
 		}
