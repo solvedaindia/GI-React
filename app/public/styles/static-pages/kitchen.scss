@@ -100,7 +100,8 @@
             border-bottom: none;
         }
         .panel-default > .panel-heading {
-            background-color: transparent;
+            background-color: transparent !important;
+			border:none !important;
         }
         .panel-heading {
             h4 {
@@ -119,10 +120,15 @@
     margin: 120px auto;
 }
 
-.goesOnKitchen{
-    width: 70%;
-    margin: 60px auto;
+.goesOnKitchen {
+    width: 100%;
+    padding-top: 60px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-right: 0px;
+    background-color: #f7f8f8;
 }
+
 .ourPromis {
     width: 100%;
 }
@@ -145,9 +151,10 @@
         padding: $base*2 $base*7 $base*2 $base*7;
 		margin-top: $base*-75;
 		margin-left: 5%;
-		width:70%;
-		position:absolute;
-		margin-bottom:$base*5;
+		width: 80%;
+		position: absolute;
+		margin-left: 10%;
+
         .desc {
             text-align: center;
             margin: $base*1.5 0 $base*7.5;
@@ -246,7 +253,8 @@
 			.GI_KITCHEN_FORMBACKGROUND_IMG {display:none;}
 			background: #fff;
 			padding: $base;
-			margin: $base;
+			margin:0px;
+			margin-top: $base;
 			width:100%;
 			position:relative;
 		}

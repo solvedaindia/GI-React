@@ -31,6 +31,7 @@ async function getProductsByCategory(req, callback) {
     facetData: [],
     productList: [],
     categoryDetails: {},
+    breadCrumbData: [],
   };
 
   try {
@@ -73,10 +74,10 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   const queryUrl = getQueryUrl(req);
 
   const searchResponse = {
+    searchTerm: req.params.searchterm,
     productCount: 0,
     facetData: [],
     productList: [],
-    spellCheck: [],
   };
 
   let productListUrl = constants.searchByTerm
@@ -86,7 +87,13 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   productListUrl += `&searchType=${plpconfig.searchPageSearchType}`;
 
   const plpTask = [
-    getAllSKUProductList.bind(null, reqHeader, productListUrl, searchResponse),
+    getAllSKUProductList.bind(
+      null,
+      reqHeader,
+      productListUrl,
+      searchResponse,
+      req,
+    ),
     getSkuPromotionData,
   ];
 
@@ -127,15 +134,17 @@ function getPLPFacetList(req, callback) {
     });
     queryUrl += `${facetUrl}`;
   }
+
+  let facetListUrl = constants.allSKUByCategoryId
+    .replace('{{storeId}}', header.storeId)
+    .replace('{{categoryId}}', categoryID)
+    .replace('{{queryUrl}}', queryUrl);
   let searchType = plpconfig.allSKUSearchType;
   if (header.sku_display === 'false') {
     searchType = plpconfig.productSearchType;
   }
-  let facetListUrl = constants.facetListByCategory
-    .replace('{{storeId}}', header.storeId)
-    .replace('{{categoryId}}', categoryID)
-    .replace('{{queryUrl}}', queryUrl);
   facetListUrl += `&searchType=${searchType}`;
+
   const reqHeader = headerUtil.getWCSHeaders(header);
   origin.getResponse(
     'GET',
@@ -234,12 +243,18 @@ function plpProductList(headers, categoryID, queryUrl, plpResponse, callback) {
   }
   productListUrl += `&searchType=${searchType}`;
   let plpTask = [
-    getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
+    getAllSKUProductList.bind(null, headers, productListUrl, plpResponse, null),
     getSkuPromotionData,
   ];
   if (headers.sku_display === 'false') {
     plpTask = [
-      getAllSKUProductList.bind(null, headers, productListUrl, plpResponse),
+      getAllSKUProductList.bind(
+        null,
+        headers,
+        productListUrl,
+        plpResponse,
+        null,
+      ),
       getSKUList,
     ];
   }
@@ -288,6 +303,7 @@ function getAllSKUProductList(
   headers,
   productListUrl,
   productListRes,
+  req,
   callback,
 ) {
   const reqHeader = headerUtil.getWCSHeaders(headers);
@@ -302,19 +318,87 @@ function getAllSKUProductList(
     response => {
       if (response.status === 200) {
         const productListJson = productListRes;
-        if (response.body.metaData.spellcheck) {
-          productListJson.spellCheck = response.body.metaData.spellcheck;
+
+        if (
+          response.body.catalogEntryView.length === 0 &&
+          response.body.metaData.spellcheck &&
+          response.body.metaData.spellcheck.length > 0
+        ) {
+          const spellCheckArray = response.body.metaData.spellcheck;
+          productListJson.spellCheck = spellCheckArray;
+          // eslint-disable-next-line prefer-destructuring
+          productListJson.searchTerm = spellCheckArray[0];
+          const spellCheckUrl = productListUrl.replace(
+            req.params.searchterm,
+            spellCheckArray[0],
+          );
+          origin.getResponse(
+            'GET',
+            spellCheckUrl,
+            reqHeader,
+            null,
+            null,
+            null,
+            null,
+            spellCheckResponse => {
+              if (spellCheckResponse.status === 200) {
+                if (spellCheckResponse.body.catalogEntryView.length === 0) {
+                  delete productListJson.spellCheck;
+                }
+                productListJson.productCount =
+                  spellCheckResponse.body.recordSetTotal;
+                productListJson.facetData = plpfilter.facetData(
+                  spellCheckResponse.body.facetView,
+                  headers.catalogId,
+                );
+                productListJson.productList =
+                  spellCheckResponse.body.catalogEntryView || [];
+                callback(null, headers, productListJson);
+              } else {
+                callback(errorUtils.handleWCSError(spellCheckResponse));
+              }
+            },
+          );
+        } else {
+          productListJson.productCount = response.body.recordSetTotal;
+          productListJson.facetData = plpfilter.facetData(
+            response.body.facetView,
+            headers.catalogId,
+          );
+          productListJson.productList = response.body.catalogEntryView || [];
+          productListJson.breadCrumbData = plpfilter.getBreadCrumbData(
+            response.body.breadCrumbTrailEntryViewExtended,
+          );
+          const categoryIds = [];
+          productListJson.breadCrumbData.forEach(breadcrumb => {
+            categoryIds.push(breadcrumb.value);
+          });
+          categoryUtil.categoryListByIDs(
+            categoryIds,
+            headers,
+            (err, catResponse) => {
+              if (catResponse && catResponse.length > 0) {
+                catResponse.forEach(category => {
+                  for (
+                    let index = 0;
+                    index < productListJson.breadCrumbData.length;
+                    index += 1
+                  ) {
+                    if (
+                      productListJson.breadCrumbData[index].value ===
+                      category.uniqueID
+                    ) {
+                      productListJson.breadCrumbData[index].categoryIdentifier =
+                        category.categoryIdentifier;
+                      break;
+                    }
+                  }
+                });
+              }
+              callback(null, headers, productListJson);
+            },
+          );
         }
-        productListJson.breadCrumbData = plpfilter.getBreadCrumbData(
-          response.body.breadCrumbTrailEntryViewExtended,
-        );
-        productListJson.productCount = response.body.recordSetTotal;
-        productListJson.facetData = plpfilter.facetData(
-          response.body.facetView,
-          headers.catalogId,
-        );
-        productListJson.productList = response.body.catalogEntryView || [];
-        callback(null, headers, productListJson);
       } else {
         callback(errorUtils.handleWCSError(response));
       }

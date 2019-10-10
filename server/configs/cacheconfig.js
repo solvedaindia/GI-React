@@ -19,6 +19,6 @@ module.exports.apiCacheConfig = {
 
 module.exports.redisConfig = getRedisConfig;
 function getRedisConfig() {
-  const redisClientUrl = 'redis://@127.0.0.1:6379/1';
+  const redisClientUrl = `redis://@${process.env.HOST_IP}:6379/1`;
   return redisClientUrl;
 }

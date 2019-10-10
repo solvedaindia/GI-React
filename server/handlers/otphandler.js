@@ -26,7 +26,7 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
   const reqHeader = headerutils.getWCSHeaders(headers);
 
   const reqBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
   };
 
   if (params.resend && params.resend === 'true') {
@@ -52,16 +52,19 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
         callback(null, res);
       } else {
         logger.debug('Error while calling Generate Otp API');
-        if (response.body.errors && response.body.errors.length > 0) {
-          if (response.body.errors[0].errorKey === 'ERROR_USER_EXISTS') {
-            if (regexMobileNo.test(params.user_id)) {
-              callback(errorutils.errorlist.user_exists_mobile);
-            } else {
-              callback(errorutils.errorlist.user_exists_email);
-            }
+        if (
+          response.body &&
+          response.body.errors &&
+          response.body.errors.length > 0 &&
+          response.body.errors[0].errorKey === 'ERROR_USER_EXISTS'
+        ) {
+          if (regexMobileNo.test(params.user_id)) {
+            callback(errorutils.errorlist.user_exists_mobile);
           } else {
-            callback(errorutils.handleWCSError(response));
+            callback(errorutils.errorlist.user_exists_email);
           }
+        } else {
+          callback(errorutils.handleWCSError(response));
         }
       }
     },
@@ -88,7 +91,7 @@ module.exports.validateOtp = function validateOtp(params, headers, callback) {
   const reqHeader = headerutils.getWCSHeaders(headers);
 
   const reqBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     OTP: params.otp,
   };
   if (params.forgot_password && params.forgot_password === 'true') {

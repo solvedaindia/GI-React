@@ -329,18 +329,20 @@ export class PlpContainer extends React.Component {
                 showBestSeller: false,
                 newSearchTrigger: false,
               });
-            } else if (response.data.data.spellCheck.length !== 0 && response.data.data.productList.length === 0 && !isFromScroll) {
-              this.setState({
-                emptySearchItem: this.onSearchNoResut(decodeURI(searchText), response.data.data.spellCheck),
-                showBestSeller: false,
-                newSearchTrigger: false,
-              })
-            }
+            } 
             else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
               this.setState({
                 showBestSeller: true,
                 emptySearchItem: null,
                 newSearchTrigger: false
+              })
+            }
+
+            if (response.data.data.spellCheck && response.data.data.spellCheck.length !== 0 /* && response.data.data.productList.length !== 0 */ && !isFromScroll) {
+              this.setState({
+                emptySearchItem: this.onSearchNoResut(decodeURI(searchText), response.data.data.spellCheck),
+                showBestSeller: false,
+                newSearchTrigger: false,
               })
             }
           }
@@ -428,29 +430,44 @@ export class PlpContainer extends React.Component {
   onSearchNoResut(searchText, spellCheckArr) {
     if (spellCheckArr) {
       if (spellCheckArr && spellCheckArr.length !== 0) {
-        if (this.state.spellCheckCount === spellCheckEndCount) {
+        /* if (this.state.spellCheckCount === spellCheckEndCount) { */
           const params = new URLSearchParams(this.props.location.search);
           var keywoard = formateSearchKeyword(params.get('keyword'), false);
+          this.setState({
+            searchKeyword: `keyword=${spellCheckArr[0]}`,
+          });
           return (
-            <div>
-              <div className="noResultfound">
-                <div className="label-noresult">
-                  No results for “{keywoard}”
-                </div>
-              </div>
-              <div className="Search-bestseller container">
-                <BestSeller />
-              </div>
+            // <div>
+            //   <div className="noResultfound">
+            //     <div className="label-noresult">
+            //       No results for “{keywoard}”
+            //     </div>
+            //   </div>
+            //   <div className="Search-bestseller container">
+            //     {/* <BestSeller /> */}
+            //   </div>
+            // </div>
+
+            <div className="noResultfound">
+          <div className="label-noresult">
+            No results for “{keywoard}”
+          </div>
+          <div className="product-serchGuide">
+            <div className="label-text">Did you mean: </div>
+            <div className="serchlist-button">
+              {spellCheckArr.map(item => (
+                <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
+              ))}
             </div>
+          </div>
+        </div>
           );
-        }
+        /* }
         else {
           this.state.spellCheckCount += 1;
-        }
-        this.setState({
-          searchKeyword: `keyword=${spellCheckArr[0]}`,
-        });
-        this.fetchPLPProductsData();
+        } */
+       
+        //this.fetchPLPProductsData();
       } else {
         // Show Best Seller component
       }

@@ -42,7 +42,7 @@ class RWDMyOrder extends React.Component {
 
   componentDidMount() {
     addEventListener('scroll', this.onscroll);
-    if(this.props.isGuestTrackOrderPro) {
+    if (this.props.isGuestTrackOrderPro) {
       this.setState({
         orderListData: this.props.guestOrderDataPro,
         hasMore: false,
@@ -134,10 +134,19 @@ class RWDMyOrder extends React.Component {
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
+
+    var scrollYindex;
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+      scrollYindex = window.innerHeight + document.body.scrollTop;
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1) { //Edge browser
+      scrollYindex = window.innerHeight + window.pageYOffset;
+    } else { //All other browsers
+      scrollYindex = window.innerHeight + document.documentElement.scrollTop;
+    }
+
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
-    const windowHeight =
-      window.innerHeight + document.documentElement.scrollTop;
+    const windowHeight = scrollYindex
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
@@ -196,16 +205,15 @@ class RWDMyOrder extends React.Component {
   }
 
   loadingbar() {
-    return (
-      <div className="lazyloading-Indicator">
-        <img
-          id="me"
-          className="loadingImg"
-          src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-          alt='Loading Orders'
-        />
-      </div>
-    )
+    const loaderItem = <div className="lazyloading-Indicator">
+      <img
+        id="me"
+        className="loadingImg"
+        src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
+        alt='Loading Orders'
+      />
+    </div>
+    return loaderItem;
   }
 
   render() {
@@ -218,7 +226,7 @@ class RWDMyOrder extends React.Component {
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
             orderDetailCallbackPro={this.orderDetailCallback}
-            orderCompleteDataPro={this.state.currentCompleteData}/>
+            orderCompleteDataPro={this.state.currentCompleteData} />
         </div>
       );
     }
@@ -237,7 +245,7 @@ class RWDMyOrder extends React.Component {
           <RWDCompleteOrder
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
-            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)}/>
+            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)} />
         </div>
       );
     }
@@ -259,7 +267,7 @@ class RWDMyOrder extends React.Component {
 
           }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
           }
-
+        
         </div>
       );
     }

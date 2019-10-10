@@ -10,3 +10,10 @@
     text-align: center;
     margin: $base*2;
 }
+
+.invoiceContent{
+    width: 600px;
+    overflow: scroll;
+    white-space: nowrap;
+    height: auto !important;
+}

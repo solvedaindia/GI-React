@@ -32,7 +32,7 @@ async function userRegistration(params, headers, callback) {
 
   const reqBody = {
     firstName: params.name,
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     logonPassword: params.password,
     logonPasswordVerify: params.password,
     x_otp: params.otp || '',
@@ -188,7 +188,7 @@ module.exports.updateUserDetails = function updateUserDetails(
     reqBody.userField1 = params.field1;
   }
   if (params.logonid) {
-    reqBody.logonId = params.logonid;
+    reqBody.logonId = String(params.logonid).toLowerCase();
   }
 
   if (params.validateotp === 'false') {
@@ -204,7 +204,7 @@ module.exports.updateUserDetails = function updateUserDetails(
     };
 
     if (regexMobileNo.test(params.logonid)) {
-      validateOtpBody.user_id = params.logonid;
+      validateOtpBody.user_id = String(params.logonid).toLowerCase();
     } else if (regexMobileNo.test(params.field1)) {
       validateOtpBody.user_id = params.field1;
     } else {
@@ -266,7 +266,7 @@ module.exports.validateUserDetails = function validateUserDetails(
     reqBody.userField1 = params.field1;
   }
   if (params.logonid) {
-    reqBody.logonId = params.logonid;
+    reqBody.logonId = String(params.logonid).toLowerCase();
   }
 
   const originUrl = constants.validateProfile.replace(
@@ -288,7 +288,7 @@ module.exports.validateUserDetails = function validateUserDetails(
         };
         let otpGenration = false;
         if (regexMobileNo.test(params.logonid)) {
-          otpBody.user_id = params.logonid;
+          otpBody.user_id = String(params.logonid).toLowerCase();
           otpGenration = true;
         } else if (regexMobileNo.test(params.field1)) {
           otpBody.user_id = params.field1;
@@ -630,7 +630,7 @@ module.exports.forgotPassword = function forgotPassword(
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const forgotPasswordBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     resetPassword: 'true',
     challengeAnswer: '-',
     state: 'passwdconfirm',
