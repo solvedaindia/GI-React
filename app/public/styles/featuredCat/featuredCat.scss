@@ -61,6 +61,19 @@
         }
     }
 }
+
+@media  (max-width: 767px){
+    .home{
+    .featuredCat {
+    .slick-slider{
+        .slick-dots{
+            bottom: -10px !important;
+        }
+    }
+}
+}
+
+}
     /* 
     #Global Screen Chhange for Screen max 768
     */
@@ -75,6 +88,12 @@
                 color: transparent;
 				
             }
+            .slick-slider{
+                .slick-dots{
+                    bottom: -10px;
+                }
+            }
+            
 			
         }
 
@@ -89,3 +108,4 @@
 		}
 
     }
+   
