@@ -73,7 +73,7 @@ return (
 	  <KitchenTabbingSlider/>
       <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
       <div className="formContainer">
-        {/* <div className="container">
+        <div className="container">
           <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
           <div id='consultForm' className="formDetails">
@@ -81,7 +81,7 @@ return (
 				<p className="desc">{KITCHEN_CONSULT} </p>
 				<ConsultationForm />
 			</div>
-        </div> */}
+        </div>
       </div>
       <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
       <ExKitchens />
