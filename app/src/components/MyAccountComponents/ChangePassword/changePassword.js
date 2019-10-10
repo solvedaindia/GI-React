@@ -22,6 +22,7 @@ class ChangePassword extends React.Component {
     errorCurrent: false,
     errorNew: false,
     newPasswordPasteTxt: null,
+    currentPasswordPasteTxt: null,
     isSaveBtnActive: false,
   };
 
@@ -143,6 +144,7 @@ class ChangePassword extends React.Component {
           inputTextCurrent: '',
         });
         alert(response.data.data.message);
+        this.enableDisableSaveBtn();
       })
       .catch(error => {
         const errorData = error.response.data;
@@ -175,6 +177,7 @@ class ChangePassword extends React.Component {
           inputTextCurrent: '',
         });
         alert(response.data.data.message);
+        this.enableDisableSaveBtn();
       })
       .catch(error => {
     
@@ -190,10 +193,12 @@ class ChangePassword extends React.Component {
         newPasswordPasteTxt: null,
       });
     } else {
-      this.state.inputTextCurrent = value.target.value;
+      //this.state.inputTextCurrent = value.target.value;
+      this.state.inputTextCurrent = this.state.currentPasswordPasteTxt !== null ? this.state.inputTextCurrent : value.target.value;
       this.setState({
         errorCurrent: false,
         errorNew: false,
+        currentPasswordPasteTxt: null,
       });
     }
 
@@ -227,11 +232,19 @@ class ChangePassword extends React.Component {
 
   onPasteText(value) {
 
+   
     if (value.target.id === 'new') {
       this.setState({
         errorCurrent: false,
         errorNew: false,
         newPasswordPasteTxt: value.clipboardData.getData('text'),
+      });
+    }
+    else  if (value.target.id === 'current') {
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        currentPasswordPasteTxt: value.clipboardData.getData('text'),
       });
     }
   }
@@ -267,6 +280,7 @@ class ChangePassword extends React.Component {
               placeholder="Enter Current Password"
               value={this.state.inputTextCurrent}
               handleChange={this.handleInputChange.bind(this)}
+              onPaste={this.onPasteText.bind(this)}
             />
             {this.state.inputTextCurrent !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword" >
               {<img src={require('../../SVGs/eye.svg')}  alt='Show Password'/>}
