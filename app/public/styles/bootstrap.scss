@@ -5751,6 +5751,10 @@ html {
   .panel-group .panel {
     margin-bottom: 0;
     border-radius: 4px;
+    box-shadow: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
   }
   .panel-group .panel + .panel {
     margin-top: 5px;
@@ -5773,11 +5777,11 @@ html {
   }
   .panel-default > .panel-heading {
     color: #333333;
-    background-color: #f5f5f5;
-    border-color: #ddd;
+    border: none;
   }
   .panel-default > .panel-heading + .panel-collapse > .panel-body {
     border-top-color: #ddd;
+	border: none;
   }
   .panel-default > .panel-heading .badge {
     color: #f5f5f5;

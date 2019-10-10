@@ -49,7 +49,6 @@ export class KitchenContainer extends React.Component {
           {/*
           <BeforeAfter /> */}
           <div className="formContainer">
-			<div className="container">
 			  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 		
 			  <div id='consultForm' className="formDetails">
@@ -57,7 +56,6 @@ export class KitchenContainer extends React.Component {
 				<p className="desc">{KITCHEN_CONSULT} </p>
 				<ConsultationForm />
 			  </div>
-			</div>
 		  </div>
           <ContentEspot espotName={ 'GI_Homepage_Our_Promises' } />
           <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
