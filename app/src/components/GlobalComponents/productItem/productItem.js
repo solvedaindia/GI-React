@@ -135,6 +135,7 @@ class ProductItem extends React.Component {
             partNumber={this.state.data.partNumber}
             productName={this.state.data.productName}
             breadcrumbDataPro={this.props.plpBreadcrumbPro}
+            isSearchPathPro={this.props.isSearchPathPro}
           />
           <InStock isInStock={this.state.data.inStock} />
           <RibbonTag data={this.state.data.ribbonText} />
@@ -155,7 +156,7 @@ class ProductItem extends React.Component {
               emi={this.state.data.emiData} />
           </div>
         </div>
-        <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.plpBreadcrumbPro } }}>
+        <Link className="link" to={{ pathname: routePath, state: !this.props.isSearchPathPro.includes('/search') ? { breadcrumbData: this.props.plpBreadcrumbPro } : undefined}}>
           <div className="hoverBox">
             {this.props.isfromWishlistPro ?
               <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
