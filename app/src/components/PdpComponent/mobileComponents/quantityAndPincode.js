@@ -132,12 +132,12 @@ class addToCartComponent extends React.Component {
   }
 
   render() {
-  let storeText = 'Store';
+  let storeText = 'store';
   let btnName = 'Update';
   let pincodeFocusId = 'pincodeVal';
 	if (this.props.pinCodeData.experienceStore) {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
-			storeText = 'Stores';
+			storeText = 'stores';
 		}
   }
 

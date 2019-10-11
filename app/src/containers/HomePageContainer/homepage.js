@@ -21,7 +21,7 @@ export class HomapegeLayout extends React.Component {
 		ipData: null,
 		cookiePolicy: appCookie.get('isCookiePolicy')
 		};
-		this.hideCookiePopup = this.hideCookiePopup.bind(this);
+		// this.hideCookiePopup = this.hideCookiePopup.bind(this);
 	}
 	
 	getPageLayout() {
@@ -47,12 +47,12 @@ export class HomapegeLayout extends React.Component {
 		this.getPageLayout();
 	}
 
-	hideCookiePopup() {
+/* 	hideCookiePopup() {
 		appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
 		this.setState({
 			cookiePolicy: false
 		})
-	}
+	} */
 
 	render() {
 		const { homepageLayout } = this.state;
@@ -77,7 +77,7 @@ export class HomapegeLayout extends React.Component {
 					<LoadingIndicator />
 				)
 				}
-				{ this.state.cookiePolicy === 'true' &&
+				{/* { this.state.cookiePolicy === 'true' &&
 					<div className="cookiesPolicySticky">
 						<div className="cookiesText">We use our own third party cookies to improve your experience and our services, and to
 						analyse the use of our website. if you continue browsing, we take that to mean that you
@@ -85,7 +85,7 @@ export class HomapegeLayout extends React.Component {
 						</div>
 						<button className='accept_cookies' onClick={this.hideCookiePopup}>Accept</button>
 					<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
-				}
+				} */}
 			</div>
 			<ContentEspot espotName = { 'GI_PIXEL_BODY_END' } />
 			</>

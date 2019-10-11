@@ -448,7 +448,8 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
     if (searchKeyword !== null && searchKeyword !== undefined && searchKeyword !== '') {
         if (isKeywordEntered) {
 			searchKeyword = searchKeyword.replace(/&/g, ':::');
-			searchKeyword = searchKeyword.replace(/%/g, ' _:');
+            searchKeyword = searchKeyword.replace(/%/g, '_:');
+            searchKeyword = searchKeyword.replace(/\+/g, '%2B');
 			searchKeyword = replaceAll(searchKeyword, '[', ' __');
 			searchKeyword = replaceAll(searchKeyword, ']', ' :_');
             return searchKeyword;
@@ -456,8 +457,9 @@ export function formateSearchKeyword(searchKeyword, isKeywordEntered) {
         else {
 			searchKeyword = searchKeyword.replace(/:::/g, '&');
 			searchKeyword = searchKeyword.replace(/_:/g, '%');
-			searchKeyword = searchKeyword.replace(/ __/g, ' [');
-            searchKeyword = searchKeyword.replace(/ :_/g, ' ]');
+			searchKeyword = searchKeyword.replace(/ __/g, '[');
+            searchKeyword = searchKeyword.replace(/ :_/g, ']');
+            searchKeyword = searchKeyword.replace(/%2B/g, '+');
             searchKeyword = searchKeyword.replace(/%3A%3A%3A/g, '&');
             return searchKeyword;
         }

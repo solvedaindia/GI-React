@@ -72,6 +72,7 @@ import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
 import Maintenance from '../HomePageContainer/Maintenance';
 import Shipping from '../shippingContainer/index';
+import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
 
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
@@ -277,11 +278,11 @@ export default class App extends React.Component {
     function showPosition(position) { }
     }
 
-  checkCookiePolicyPopup() {
+  /* checkCookiePolicyPopup() {
     if (appCookie.get('isCookiePolicy') === 'true' && window.location.pathname !== '/') {
       appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
     } 
-  }
+  } */
 
   checkSearchInput() {
     if (window.location.pathname !== '/search' && document.getElementById("searchInput")) {
@@ -299,7 +300,7 @@ export default class App extends React.Component {
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
-    this.checkCookiePolicyPopup();
+    // this.checkCookiePolicyPopup();
     this.checkSearchInput();
     
     let newsletterItem;
@@ -312,6 +313,7 @@ export default class App extends React.Component {
     const { isMobile } = this.state;
     return (
       <div>
+         {appCookie.get('isCookiePolicy') === 'true' ? <CookiePopup /> : null}
         {newsletterItem}
         {window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />
