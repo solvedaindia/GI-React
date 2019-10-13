@@ -65,27 +65,27 @@ return (
   <>
     <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
     <div className="staticpage chefKitchen">
-    <Helmet>
-		<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
-	</Helmet>
-      <ChefKitchenBanner />
-      <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
-	  <KitchenConfiguration/>
-      <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
-      <div className="formContainer">
-          <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+		<Helmet>
+			<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
+		</Helmet>
+		  <ChefKitchenBanner />
+		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
+		  <KitchenConfiguration/>
+		  <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
+		  <div className="formContainer">
+			  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 
-          {/* <div id='consultForm' className="formDetails">
-				<h2 className="title">{BOOK_CONSULTATION}</h2>
-				<p className="desc">{KITCHEN_CONSULT} </p>
-				<ConsultationForm />
-    	  </div>
-      </div>
-      <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
-      <ExKitchens />
-      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } />
-      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
-      <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
+			  <div id='consultForm' className="formDetails">
+					<h2 className="title">{BOOK_CONSULTATION}</h2>
+					<p className="desc">{KITCHEN_CONSULT} </p>
+					<ConsultationForm />
+			  </div>
+		  </div>
+		  <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
+		  <ExKitchens />
+		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } />
+		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
+		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
     </div>
     <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_END' } />
   </>
