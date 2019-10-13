@@ -34,12 +34,26 @@ return (
   <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_BENEFITS' } />
 
   <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR_WILLOW' } />
-  <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_4' } />
-  <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_5' } />
+  <div className="formContainer">
+	  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
+
+	  <div id='consultForm' className="formDetails">
+			<h2 className="title">{BOOK_CONSULTATION}</h2>
+			<p className="desc">{KITCHEN_CONSULT} </p>
+			<ConsultationForm />
+	  </div>
+  </div>
+  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_FAQ' } />
+  <ExKitchens />
+  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_INTERIOR } />
+  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
+  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
 
 </div>
 <ContentEspot espotName={ 'GI_PIXEL_WILLOW_KITCHEN_BODY_END' } />
 </>
+
+
 )
 }
 }
