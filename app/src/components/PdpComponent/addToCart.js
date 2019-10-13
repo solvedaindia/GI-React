@@ -112,7 +112,7 @@ class addToCartComponent extends React.Component {
     setTimeout(() => {	
       let header = document.getElementById("header");
       if(header) {
-        header.classList.remove("sticky");
+        // header.classList.remove("sticky");
       }
     }, 2000);
     const pincode = appCookie.get('pincode');
@@ -281,12 +281,12 @@ class addToCartComponent extends React.Component {
   }
 
   render() { 
-  let storeText = 'Store';
+  let storeText = 'store';
   let btnName = 'Update';
   let pincodeFocusId = 'pincodeVal';
 	if (this.props.pinCodeData.experienceStore) {
 		if (this.props.pinCodeData.experienceStore.length > 2) {
-			storeText = 'Stores';
+			storeText = 'stores';
 		}
   }
 

@@ -79,9 +79,9 @@ export class StoreDetails extends React.Component {
                                     <span className='place'> {storeData.storeName}</span>
                                     <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} {KM_AWAY}</span>
                                 </Link>
+                                <span className='details'>{!isMobile() ?<p>You can find more stores around you.</p>: ' near you'}</span>
                             </p>
                         }
-                        <p className='details'>{!isMobile() ? 'You can find more stores around you.' : 'near you.'}</p>
                         <Link
                             className='storeLink'
                             to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}

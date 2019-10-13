@@ -115,10 +115,17 @@
 }
 @media(min-width:1024px){
     .exStore {
+        // width: 100%;
         .content {
             left: 35%;
             width: 64%;
         }
+
+    }
+}
+@media(max-width:1024px){
+    .exStore {
+        width: 100%;  
 
     }
 }

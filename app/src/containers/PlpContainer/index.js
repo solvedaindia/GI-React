@@ -296,7 +296,7 @@ export class PlpContainer extends React.Component {
       if (this.state.isFromSearch.includes('/search')) {
         const params = new URLSearchParams(this.state.searchKeyword);
         const keyword = params.get('keyword');
-        searchText = encodeURIComponent(keyword).replace(/%2F/g, ' ');
+        searchText = encodeURIComponent(keyword);
         searchText = formateSearchKeyword(searchText, false)
         urlMaking = searchPageAPI + searchText;
       }

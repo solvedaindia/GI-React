@@ -176,7 +176,7 @@ class SimilarCombosProducts extends React.Component {
                   <a
                     role="button"
                     id="combosHead"
-                    className="tabs"
+                    className={similarData.length>0 ? "tabs" : "tabs active"}
                     onClick={this.productsType.bind(this, 'combos', 'similar')}
                   >
                   { this.props.similarCombosProducts.combos ? (
@@ -207,7 +207,7 @@ class SimilarCombosProducts extends React.Component {
                   sm={12}
                   xs={12}
                   id="combos"
-                  className="dataNotActive"
+                  className={similarData.length>0?"dataNotActive":"dataActive" }
                 >
                   <Slider {...settings}>
                     {this.getSimilarCombosProducts(

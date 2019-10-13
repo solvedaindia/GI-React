@@ -78,13 +78,13 @@ class Recommendation extends React.Component {
                                         <p className='name'>{recoData.recommendationArray[0].productName}</p>
                                         <p className='price'>
                                             <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[0].offerPrice)}</span>
-                                            <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[0].actualPrice)}</span></span>
+                                            {recoData.recommendationArray[0].offerPrice !== recoData.recommendationArray[0].actualPrice ? <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[0].actualPrice)}</span></span>:null}
                                         </p>
                                         <p className='emiInfo'>
-                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${recoData.recommendationArray[0].emiData}` : ''}
+                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${formatPrice(recoData.recommendationArray[0].emiData)}` : ''}
                                         </p>
                                         <p className='offerAmount'>
-                                            {recoData.recommendationArray[0].discount !== '' ? `${recoData.recommendationArray[0].discount}%` : '' } {recoData.recommendationArray[0].promotionData !== `${'&'} ${recoData.recommendationArray[0].promotionData}` }
+                                            {recoData.recommendationArray[1].discount !== '' ? `${recoData.recommendationArray[0].discount}%` : '' } {recoData.recommendationArray[0].promotionData !== `${'&'} ${recoData.recommendationArray[0].promotionData}` }
                                         </p>
                                     </div>
                                 </div>
@@ -98,10 +98,10 @@ class Recommendation extends React.Component {
                                         <p className='name'>{recoData.recommendationArray[1].productName}</p>
                                         <p className='price'>
                                             <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[1].offerPrice)}</span>
-                                            <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[1].actualPrice)}</span></span>
+                                            {recoData.recommendationArray[1].offerPrice !== recoData.recommendationArray[1].actualPrice ? <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[1].actualPrice)}</span></span>:null}
                                         </p>
                                         <p className='emiInfo'>
-                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${recoData.recommendationArray[1].emiData}` : ''}
+                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${formatPrice(recoData.recommendationArray[1].emiData)}` : ''}
                                         </p>
                                         <p className='offerAmount'>
                                             {recoData.recommendationArray[1].discount !== '' ? `${recoData.recommendationArray[1].discount}${'% Off'} ${recoData.recommendationArray[1].promotionData}` : ''}
@@ -120,10 +120,10 @@ class Recommendation extends React.Component {
                                     <p className='name'>{recoData.recommendationArray[2].productName}</p>
                                     <p className='price'>
                                         <span className='offerPrice'>₹{formatPrice(recoData.recommendationArray[2].offerPrice)}</span>
-                                        <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[2].actualPrice)}</span></span>
+                                        {recoData.recommendationArray[2].offerPrice !== recoData.recommendationArray[2].actualPrice ? <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[2].actualPrice)}</span></span>:null}
                                     </p>
                                     <p className='emiInfo'>
-                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${recoData.recommendationArray[2].emiData}` : ''}
+                                            {recoData.recommendationArray[2].emiData !== '' ? `${'EMI Starting from ₹'}${formatPrice(recoData.recommendationArray[2].emiData)}` : ''}
                                         </p>
                                     <p className='offerAmount'>
                                         {recoData.recommendationArray[2].discount !== '' ? `${recoData.recommendationArray[2].discount}${'% Off'} ${recoData.recommendationArray[2].promotionData}` : ''}

@@ -104,8 +104,9 @@ class GuestTrackOrder extends React.Component {
     );
   }
   
-	goBack = () => {
-	window.history.go(-1);
+	goBack = (event) => {
+  window.history.go(-1);
+  event.preventDefault();
 	}
 }
 
