@@ -31,7 +31,7 @@ class Image extends React.Component {
     var routePath = createSEOPdpURL(this.props.productName,this.props.shortDescription, this.props.partNumber);
     return (
       <LazyLoad className="imgBox" debounce={false}>
-        <Link className="link" to={{ pathname: routePath, state: { breadcrumbData: this.props.breadcrumbDataPro} }}>
+        <Link className="link" to={{ pathname: routePath, state: !this.props.isSearchPathPro.includes('/search') ? { breadcrumbData: this.props.breadcrumbDataPro } : undefined}}>
           {imageItem}
         </Link>
       </LazyLoad>
