@@ -4,41 +4,104 @@ import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
 import '../../../public/styles/static-pages/chefKitchen.scss';
+import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 
-import {espotAPI,imagePrefix,} from '../../../public/constants/constants';
 
-class KitchenHall extends React.Component {
+class KitchenConfiguration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     
-      
+     espotName: 'GI_CHEF_KITCHEN_CONFIGURATION',
+     title: "",
+     configurationTabing: [],
+     currentIndex: -1,
+     currentTabData: null,
     };
   }
 
  
 
+  configurationData() {
+    apiManager
+    .get(espotAPI + this.state.espotName)
+      .then(response => {
+        const {data} = response || {}
+        // for(let i = 0; i<data.data.tablist.length; i++){
+        //   data.data.tablist[i]["index"]= i;
+        // }
+        
+        this.setState({
+          title: data && data.data.title,
+         
+          configurationTabing: data && data.data.tablist,
+          currentIndex: 0
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false,
+        });
+      });
+  }
+
   componentDidMount() {
+    this.configurationData();
+  }
+
+
+  onHandleClick = (index) =>{
+      // alert(index)
+    
+     this.setState({currentIndex: index})
+    console.log('hja',this.state.currentIndex);
   }
 
   render() {
-   
+  
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+	  autoplay: true,
+      autoplaySpeed: 2000,
+      slidesToShow: 1,
+      slidesToScroll:2,
+    };
+   const{ configurationTabing, currentIndex } =this.state;
+  //  if (currentIndex != -1)
+  //  console.log('sahir', configurationTabing[currentIndex].bannerList)
     return (
      <div className='container'>
-         <h1>configuration</h1>
+         <h1>{this.state.title}</h1>
           <div className='configurationTab'>
-            <a className="link">L Shaped Kitchens</a>
-            <a className="link">U Shaped Kitchen</a>
-            <a className="link">Parallel Kitchen</a>
-            <a className="link">Single Wall Kitchen</a>
+            {!!configurationTabing &&
+            configurationTabing.map((tabData, index) => (
+              <a onClick={this.onHandleClick.bind(this, index)}   key={index} className='link' >
+              {tabData.title}
+               </a>
+
+            ))}
+             
       </div>
-      {/* <div className='clearfix'></div> */}
+<div className='clearfix'></div>
+<Slider {...settings}>
+          {currentIndex !== -1 && !!configurationTabing && configurationTabing[currentIndex].bannerList &&
+            configurationTabing[currentIndex].bannerList.map((sliderData, index) => (
+              <a href={sliderData.onClickUrl} key={index} className='slides'>
+                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+               </a>
+
+            ))}
+        </Slider>
+
+      
       </div>
     );
   }
 }
 
-export default KitchenHall;
+export default KitchenConfiguration;
 
 
 
