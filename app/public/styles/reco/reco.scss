@@ -3,7 +3,7 @@
     margin: 0;
     overflow: hidden;
     .reco {
-        margin: $base*15 auto;
+        margin: $base*12.5 auto $base*3 auto;
         @include container-width;
         .recoImg {
             width: 100%;
@@ -31,7 +31,7 @@
             }
             .leftTwo {
                 width: 100%;
-                padding: 0;
+                padding: 17px 0;
             }
             .recoDesc,
             .leftOne {
