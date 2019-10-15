@@ -7,11 +7,11 @@ import '../../../public/styles/static-pages/chefkitchen.scss';
 import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 
 
-class WillowKitchenConfiguration extends React.Component {
+class WardrobeAccessoriesConfiguration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     espotName: 'GI_WILLOW_KITCHEN_CONFIGURATION',
+     espotName: 'GI_WARDROBE_ACCESSORIES_CONFIG',
      title: "",
      configurationTabing: [],
      currentIndex: -1,
@@ -101,7 +101,7 @@ class WillowKitchenConfiguration extends React.Component {
   }
 }
 
-export default WillowKitchenConfiguration;
+export default WardrobeAccessoriesConfiguration;
 
 
 

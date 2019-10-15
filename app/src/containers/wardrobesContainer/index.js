@@ -18,6 +18,9 @@ import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
 import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 
+import WardrobeConfiguration from '../../components/wardrobesComponent/wardrobeConfigTabSlider';
+import WardrobeAccessoriesConfiguration from '../../components/wardrobesComponent/wardrobeAccessoriesTabSlider';
+
 
 export class WardrobeContainer extends React.Component {
   constructor(props) {
@@ -31,17 +34,16 @@ export class WardrobeContainer extends React.Component {
   render() {
     return (
       <>
-               <ContentEspot espotName = { 'GI_PIXEL_WARDROBES_BODY_START' } />
-
+        <ContentEspot espotName = { 'GI_PIXEL_WARDROBES_BODY_START' } />
         <section className="staticpage wardrobesContainer">
         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_WARDROBES_META'}/>
-				</Helmet>
-            <WardrobeBanner />
+			<Pixels espotName= {'GI_PIXEL_WARDROBES_META'}/>
+		</Helmet>
 			<Breadcrumb {...this.props.match.params} staticName = {'Wardrobe Collections'}/>
+            <WardrobeBanner />
 			<ContentEspot espotName = { 'GI_Wardrobes_Benefit_Modular' } />
-   
-            <WHallOfFame />
+            <WardrobeConfiguration />
+			<WardrobeAccessoriesConfiguration />
 			<div className="formContainer">
 			<ContentEspot espotName = { 'GI_WARDROBES_FORMBACKGROUND_IMG' } />
 				 <div id='consultForm' className="formDetails">
@@ -52,7 +54,6 @@ export class WardrobeContainer extends React.Component {
             </div>
             <ContentEspot espotName = { 'GI_WARDROBES_FAQ' } />
             <KitchenStore />
-			<AboutWardrobe />
 			<ContentEspot espotName={ 'GI_WARDROBES_9' } />
 			<ContentEspot espotName={ 'GI_WARDROBES_10' } />
 			<ContentEspot espotName={ 'GI_WARDROBES_11' } />
