@@ -50,11 +50,11 @@ export class MyAccountContainer extends React.Component {
       return;
     }
 
-    if (nextProp.location.state !== this.props.location.state) {
+    // if (nextProp.location.state !== this.props.location.state) {
       this.setState({
         redirectedFrom: nextProp.location.state.from,
       })
-    }
+    // }
   }
 
   myProfileCallback(userName, passwordTag) {
