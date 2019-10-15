@@ -31,7 +31,6 @@ class ForgotPasswordOTP extends React.Component {
   proceedBtnPressed(e) {
     e.preventDefault(); 
     if (!this.state.showOTPTxtField) { 
-      alert('backck')
       //Code commented as per JIRA-GI-1572
       // const nextComp = `${FORGET_PASS_OTP}`;
       // this.props.handlerPro(nextComp, null, this.state.inputText, false, false);
