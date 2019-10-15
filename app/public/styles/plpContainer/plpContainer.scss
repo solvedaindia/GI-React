@@ -990,6 +990,7 @@ section.tablecarousel {
   .descriptionBanner {
     background: $greybg;
     padding: 60px 0;
+    margin-top:$base*11.12;
 
     .heading {
       font-family: $font-bold;
@@ -1143,7 +1144,7 @@ section.tablecarousel {
   /** Descripton */
   .descriptionBanner {
     background: $greybg;
-    padding: 60px 0;
+    padding: 30px 0;
 
     .heading {
       font-family: $font-bold;
