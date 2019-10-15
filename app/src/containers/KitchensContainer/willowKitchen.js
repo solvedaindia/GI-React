@@ -9,6 +9,7 @@ import ExKitchens from '../../components/KitchensComp/expKitchens';
 import {BOOK_CONSULTATION,KITCHEN_CONSULT} from '../../constants/app/primitivesConstants';
 import '../../../public/styles/static-pages/consultForm.scss';
 import ConsultationForm from '../../components/Primitives/ConsultForm';
+import WillowKitchenConfiguration from '../../components/KitchensComp/willowKitchenTabSlider';
 
 export default class WillowKitchens extends React.Component {
 constructor(props){
@@ -35,6 +36,7 @@ render(){
 			</Helmet>
 			<WillowKitchenBanner />
 			  <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_BENEFITS' } />
+			  <WillowKitchenConfiguration/>
 			  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR_WILLOW' } />
 			  <div className="formContainer">
 				  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
