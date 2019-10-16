@@ -71,7 +71,7 @@ class Invoice extends React.Component {
 		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className={isMobile() ? 'container invoiceContainer' :'container mobileInvoiceContainer'} style={isMobile() ? {width: '905px'} :{width: '90%'}}>
+            <div id='invoiceDivHtml' className={isMobile() ? 'container invoiceContainer' :'container mobileInvoiceContainer'} style={isMobile() ? {width: '905px'} :{width: '90%'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={isMobile()? {border:'1', width: '900px', margin: 'auto'}:{border:'1', width: '824px', margin: 'auto',} }>
@@ -168,8 +168,6 @@ class Invoice extends React.Component {
 							})}
 							
 							<div className="itemsection invoicefooter" style={{border:'0', width: '100%', margin: '20px 0 0 0', float: 'left'}}>
-                                <div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button>
-</div>
 
 								<div className="value heading" style={{width: '20%', margin: 'auto', float: 'left', align:'right'}}>Total (Rs) </div>
 								<div style={{width: '20%', float: 'left', align:'right'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
@@ -179,16 +177,18 @@ class Invoice extends React.Component {
 
 				}
             </div>
+			
         )
 	}
 	printDocument() {
-		const input = document.getElementById('invoiceDiv');
+		const input = document.getElementById('invoiceDivHtml');
 		html2canvas(input)
 		  .then((canvas) => {
 			const imgData = canvas.toDataURL('image/png');
-			const pdf = new jsPDF();
-			pdf.addImage(imgData, 'JPEG', 0, 0);
-			// pdf.output('dataurlnewwindow');
+			const pdf = new jsPDF('p', 'px', 'a4');
+            var width = pdf.internal.pageSize.getWidth();
+            var height = pdf.internal.pageSize.getHeight();
+			pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
 			pdf.save("invoice.pdf");
 		  })
 		;
@@ -226,11 +226,12 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true'  && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true'&&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-						
+						<div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button></div>
+
 				</div>
 			);
 		}
