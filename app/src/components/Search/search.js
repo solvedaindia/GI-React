@@ -82,6 +82,7 @@ class SearchBar extends React.Component {
       }
     });
   }
+ 
 
   onSearchResultClick(e) {
     const text = formateSearchKeyword(e.target.value.trim(), true);
@@ -161,7 +162,7 @@ class SearchBar extends React.Component {
     return (
       <div className='searchBar'>
         <SearchLogo />
-        <input className='searchInput' id='searchInput' onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' />
+        <input className='searchInput' id='searchInput' onPaste={this.showButton}  onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' />
         <a className='clearField' id='clearField' role='button' onClick={this.clearFields}>X</a>
         {searchData.length > 0 &&
           <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
