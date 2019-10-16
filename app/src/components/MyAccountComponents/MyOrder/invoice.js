@@ -230,7 +230,8 @@ class Invoice extends React.Component {
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-						<div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button></div>
+						{UserLoggedIn == 'true'&&  invoiceData  && isMatchForUser ? <div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button></div> : ''}
+						
 
 				</div>
 			);
