@@ -180,7 +180,7 @@ class Invoice extends React.Component {
 			
         )
 	}
-	printDocument() {
+	downloadDocument() {
 		const input = document.getElementById('invoiceDivHtml');
 		html2canvas(input)
 		  .then((canvas) => {
@@ -193,6 +193,16 @@ class Invoice extends React.Component {
 		  })
 		;
 	  }
+	   printDocument() {
+        var divContents = document.getElementById("invoiceDivHtml").innerHTML; 
+            var a = window.open('', '', 'height=500, width=500'); 
+            a.document.write('<html>'); 
+            a.document.write(''); 
+            a.document.write(divContents); 
+            a.document.write('</body></html>'); 
+            a.document.close(); 
+            a.print();
+    }
     render() 
 	{
 		if(this.state.isLoading)
@@ -226,12 +236,12 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true'&&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-						{UserLoggedIn == 'true'&&  invoiceData  && isMatchForUser ? <div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button></div> : ''}
-						
+						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.downloadDocument}>Download </button></div> : ''}
+						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Print</button></div> : ''}
 
 				</div>
 			);
