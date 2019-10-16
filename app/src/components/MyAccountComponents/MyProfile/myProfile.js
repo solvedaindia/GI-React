@@ -234,12 +234,14 @@ class MyProfile extends React.Component {
     return true;
   }
 
-  enteredOTPCallback(otpText) {
+  enteredOTPCallback(otpText,callback) {
     this.state.enteredOTP = otpText
-    this.updateUserDetail();
+    this.updateUserDetail((err, res) => {
+      callback(err, res);
+    });
   }
 
-  updateUserDetail() {
+  updateUserDetail(callback) {
     var updateDataload = this.state.dataLoad;
     if (this.state.enteredOTP !== null) {
       updateDataload.otp = this.state.enteredOTP;
@@ -254,6 +256,7 @@ class MyProfile extends React.Component {
     })
     apiManager.post(userDetailUpdateAPI, this.state.dataLoad)
       .then(response => {
+        callback(null, 'success')
         setTimeout(() => {
           this.setState({
             noteItem: null,
@@ -274,19 +277,20 @@ class MyProfile extends React.Component {
         this.props.updateUserProfile(this.state.inputText_name);
       })
       .catch(error => {
-        setTimeout(() => {
-          this.setState({
-            noteItem: null,
-            noteItemMsg: null,
-          });
-        }, 2000);
+        callback(error, null)
+        // setTimeout(() => {
+        //   this.setState({
+        //     noteItem: null,
+        //     noteItemMsg: null,
+        //   });
+        // }, 2000);
         this.setState({
           saveDisable: false,
-          noteItemMsg: (
-            <div className="noteMsg">
-              <span className="failMsg">{error.response.data.error.error_message}</span>
-            </div>
-          ),
+          // noteItemMsg: (
+          //   <div className="noteMsg">
+          //     <span className="failMsg">{error.response.data.error.error_message}</span>
+          //   </div>
+          // ),
         });
         //alert(error.response.data.error.error_message)
       });
@@ -357,6 +361,7 @@ class MyProfile extends React.Component {
     }
     this.setState({
       isSaveBtnDisable: isBtnValidate,
+      saveDisable: isBtnValidate,
     })
 
   }
