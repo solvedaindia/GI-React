@@ -183,7 +183,9 @@ class HeaderMobile extends React.Component {
       this.props.updateTheRWDHeader('MyOrder Return');
       return;
     }
-
+    if(window.location.pathname !== "/myAccount" && window.location.pathname !== "/wishlist"){
+      return;
+    }
     if (!this.props.match.isExact) {
       this.props.history.goBack();
     }

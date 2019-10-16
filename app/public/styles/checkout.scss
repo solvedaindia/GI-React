@@ -792,11 +792,12 @@
             }
             .pay_radio {
               padding: 0 0 26px 0;
-			  margin-top:15px;
+			        margin-top:15px;
               .form-label {
                 margin: 0 0 0 15px;
                 font-size: 16px;
                 font-family: $font-regular;
+                cursor: pointer;
               }
             }
             .dropdown-toggle {

@@ -354,7 +354,7 @@ export class Step3Component extends React.Component {
                       <input className='inputRadio input' id='debit' type='radio' name="debit" checked={this.state.debitCheck} onChange={this.handleOptionChange.bind(this)} />
                       <label className='labelchecked' htmlFor='debit'></label>
                     </div>
-                    <label className='form-label' htmlFor='credit'>{DEBIT_CARD}</label>
+                    <label className='form-label' htmlFor='debit'>{DEBIT_CARD}</label>
                   </div>
 
                   <div className="pay_radio">
