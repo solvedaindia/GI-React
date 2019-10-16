@@ -44,6 +44,10 @@ class BestSeller extends React.Component {
     this.getBestSellerData();
   }
 
+  handleTitle = (title) => {
+    <title>{title}</title>
+  }
+
   render() {
     const {
       bestSellerData: { productList = [], title = '' },
@@ -88,14 +92,15 @@ class BestSeller extends React.Component {
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
+              
               var productname = String(sellerItemData.productName).toLowerCase();
               var routePath = createSEOPdpURL(sellerItemData.productName, sellerItemData.shortDescription, sellerItemData.partNumber);
 
               return (
                 <figure key={index} className="bsSlides">
-               
+                  
                   <Link to={routePath}>
-                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.productName} />
+                    <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.productName} onClick={this.handleTitle(`${sellerItemData.pageTitle}`)}/>
                   </Link>
            
                   <figcaption className="bsDetails">

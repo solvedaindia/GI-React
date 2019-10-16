@@ -68,6 +68,10 @@ export class CompContainer extends React.Component {
     return data;
   }
 
+  componentDidMount() {
+
+  }
+
   componentWillReceiveProps(newProps) { 
     if ((newProps.compData.length > this.props.compData.length) || (appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct')).length > 0 ))  {
       this.setState({
@@ -133,7 +137,7 @@ export class CompContainer extends React.Component {
     }
 
 
-    
+
     return (
       <>
         {compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :

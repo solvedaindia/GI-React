@@ -54,7 +54,7 @@ class PdpComponent extends React.Component {
 	}
 
 	/* get sku resolved data */
-	getResolveSkuData(resolvedSkuId = null) {
+	getResolveSkuData(resolvedSkuId = null, title = null) {
 		let skuId;
 		if (resolvedSkuId) {
 			skuId = resolvedSkuId;
@@ -79,6 +79,9 @@ class PdpComponent extends React.Component {
 					this.getActualResolvedData(this.props.data.bundleData, skuLevelData, this.props.data.type);
 				}
 			});
+		}
+		if(title) {
+			this.props.handleTitle(title)
 		}
 	}
 
@@ -176,7 +179,7 @@ class PdpComponent extends React.Component {
 			});
 			productSkuData = swatches;
 		}
-		this.getResolveSkuData(swatches[0].uniqueID);
+		this.getResolveSkuData(swatches[0].uniqueID, swatches[0].pageTitle);
 	}
 
 	/* handle selected swatches */

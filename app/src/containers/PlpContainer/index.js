@@ -23,6 +23,7 @@ import {
   formateSearchKeyword,
 } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
+import appCookie from '../../utils/cookie';
 
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 import FilterMain from '../../components/PlpComponent/Filter/filterMain';
@@ -93,6 +94,10 @@ export class PlpContainer extends React.Component {
   }
 
   componentWillUnmount() {
+    if (this.props.history.location.pathname !== '/compare') {
+      appCookie.set('compareProduct', '', 365 * 24 * 60 * 60 * 1000);
+      this.props.removeAll();
+    }
     removeEventListener('scroll', this.onscroll);
   }
 
@@ -329,7 +334,7 @@ export class PlpContainer extends React.Component {
                 showBestSeller: false,
                 newSearchTrigger: false,
               });
-            } 
+            }
             else if (response.data.data.productList.length === 0 && this.state.plpData.length === 0) { // && condition to not show the empty search view on scroll last
               this.setState({
                 showBestSeller: true,
@@ -431,42 +436,42 @@ export class PlpContainer extends React.Component {
     if (spellCheckArr) {
       if (spellCheckArr && spellCheckArr.length !== 0) {
         /* if (this.state.spellCheckCount === spellCheckEndCount) { */
-          const params = new URLSearchParams(this.props.location.search);
-          var keywoard = formateSearchKeyword(params.get('keyword'), false);
-          this.setState({
-            searchKeyword: `keyword=${spellCheckArr[0]}`,
-          });
-          return (
-            // <div>
-            //   <div className="noResultfound">
-            //     <div className="label-noresult">
-            //       No results for “{keywoard}”
-            //     </div>
-            //   </div>
-            //   <div className="Search-bestseller container">
-            //     {/* <BestSeller /> */}
-            //   </div>
-            // </div>
+        const params = new URLSearchParams(this.props.location.search);
+        var keywoard = formateSearchKeyword(params.get('keyword'), false);
+        this.setState({
+          searchKeyword: `keyword=${spellCheckArr[0]}`,
+        });
+        return (
+          // <div>
+          //   <div className="noResultfound">
+          //     <div className="label-noresult">
+          //       No results for “{keywoard}”
+          //     </div>
+          //   </div>
+          //   <div className="Search-bestseller container">
+          //     {/* <BestSeller /> */}
+          //   </div>
+          // </div>
 
-            <div className="noResultfound">
-          <div className="label-noresult">
-            No results for “{keywoard}”
+          <div className="noResultfound">
+            <div className="label-noresult">
+              No results for “{keywoard}”
           </div>
-          <div className="product-serchGuide">
-            <div className="label-text">Did you mean: </div>
-            <div className="serchlist-button">
-              {spellCheckArr.map(item => (
-                <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
-              ))}
+            <div className="product-serchGuide">
+              <div className="label-text">Did you mean: </div>
+              <div className="serchlist-button">
+                {spellCheckArr.map(item => (
+                  <button className='searchitem-button' onClick={() => this.onSpellCheckClick(item)}>{item}</button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-          );
+        );
         /* }
         else {
           this.state.spellCheckCount += 1;
         } */
-       
+
         //this.fetchPLPProductsData();
       } else {
         // Show Best Seller component
@@ -717,7 +722,7 @@ export class PlpContainer extends React.Component {
 
 
 
-        {this.state.isMobile && this.state.productCount !== null && this.state.productCount.length !== 0 ?
+        {this.state.isMobile && this.state.productCount !== null && this.state.productCount !== 0 ?
           <div className='sortfilter'>
             <RWDSort sortingIndexPro={this.state.plpSorting} />
             <RWDFilterMain
@@ -756,6 +761,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreators.filter(updatedArr, facetName)),
   onBrowserFilterUpdate: browserFilter =>
     dispatch(actionCreators.browserFilter(browserFilter)),
+  removeAll: () => dispatch(actionCreators.RemoveAll()),
 });
 
 const withConnect = connect(

@@ -30,7 +30,8 @@ class PdpContainer extends React.Component {
 		const skuId = this.props.match.params.skuId;
 		apiManager.get(pdpApi2 + skuId).then(response => {
 			this.setState({
-				pdp: response.data,
+        pdp: response.data,
+        title: !!response.data.data.skuData && response.data.data.skuData ? response.data.data.skuData[0].pageTitle : '',
 				pdpLoading: false,
       });
 			if (appCookie.get('isPDPAddToCart') === null) {
@@ -72,15 +73,19 @@ class PdpContainer extends React.Component {
       });
   }
 
+  handleTitle = (title) =>  {
+    this.setState({title})
+  }
+
   render() {
-	const { pdp } = this.state;
-    return (
+  const { pdp, title} = this.state;
+  return (
 		<>
 		{!!pdp && 
 			<PDPMeta
 				keywords={!!pdp.data.keywords && pdp.data.keywords} 
 				description={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].metaDescription : ''}
-				title={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].pageTitle : ''}
+				title={title}
 				alt={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].imageAltText : ''}
 			/>
 		}
@@ -93,7 +98,8 @@ class PdpContainer extends React.Component {
 						matchParams={this.props.match.params}
 						espot={this.state.pdpEspot}
 						espotPromo={this.state.pdpEspotTandC}
-						historyData={this.props.history}
+            historyData={this.props.history}
+            handleTitle = {this.handleTitle}
 					/>
 					) : (
             <div className="container">

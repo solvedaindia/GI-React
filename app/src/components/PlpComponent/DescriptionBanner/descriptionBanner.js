@@ -37,7 +37,9 @@ class DescriptionBanner extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.initBanner(nextProps);
+    if (nextProps.descriptionDataPro !== this.props.descriptionDataPro) {
+      this.initBanner(nextProps);
+    }
   }
 
   

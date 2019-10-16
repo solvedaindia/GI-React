@@ -375,7 +375,8 @@ export default class App extends React.Component {
         </Switch>
         </LastLocationProvider>
 		</div>
-        {window.location.pathname === '/cart' || window.location.pathname === '/checkout' || window.location.pathname === '/myAccount'|| window.location.pathname.includes('/check/payment/') || window.location.pathname.includes('/order/confirm/') ? '' : <FooterContainer /> }
+		<FooterContainer /> 
+        
         
       </div>
     );
