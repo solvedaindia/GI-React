@@ -8,6 +8,7 @@ import { isMobile } from '../../../utils/utilityManager';
 import '../../../../public/styles/myAccount/invoice.scss';
 import appCookie from '../../../utils/cookie';
 import html2canvas from 'html2canvas'
+import { MOBILE } from '../../../constants/app/primitivesConstants';
 class Invoice extends React.Component {
     constructor(props){
         super(props);
@@ -59,24 +60,21 @@ class Invoice extends React.Component {
 			});
 		});
 	}
-	returnWidth = () => {
-		if(isMobile){
-		return (document.getElementById("invoiceDiv").style.width = '90%')
-		}
-	  else {
-		return	(document.getElementById("invoiceDiv").style.width = '200%')
-	} 
-	}
+	
+
+	
+
+	
 
     invoiceDatailedData() 
 	{
-		let returnwid = this.returnWidth()
+		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDiv' className="container invoiceContainer" style={{width: returnwid}}>
+            <div id='invoiceDiv' className={isMobile() ? 'container invoiceContainer' :'container mobileInvoiceContainer'} style={isMobile() ? {width: '905px'} :{width: '90%'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
-                    !!invoiceData && <div className="invoiceData" style={{border:'1', width: '85%', margin: 'auto',}}>
+                    !!invoiceData && <div className="invoiceData" style={isMobile()? {border:'1', width: '900px', margin: 'auto'}:{border:'1', width: '824px', margin: 'auto',} }>
 						<div className="invoiceContainer topsection" style={{border:'0', width: '100%', margin: 'auto',height: '100px'}}>
                         <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
@@ -88,7 +86,7 @@ class Invoice extends React.Component {
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.orderNo}</div>
 						</div>
 						<div className="invoiceContainer addresssection" style={{border:'0', width: '100%', margin: 'auto',height:'120px',float: 'left'}}>
-							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
+							<div className="invoiceContainer addresssection" id='companyAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">From</div>
 								<div className="value">  
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.name}</div>
@@ -97,7 +95,7 @@ class Invoice extends React.Component {
                                     <div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.gstinNo}</div>
 							</div>
-							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
+							<div className="invoiceContainer addresssection" id='consigonorAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Company Name</div>
 								<div className="value">  
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.name}</div>
@@ -110,7 +108,7 @@ class Invoice extends React.Component {
                                     
 							</div>
 						</div>
-						<div className="invoiceContainer addresssection customer" style={{border:'0', width: '100%', margin: '50px 0 0 0',height:'160px',float: 'left'}}>
+						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '80px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Billing Name</div>
 								<div className="value">  
@@ -138,7 +136,7 @@ class Invoice extends React.Component {
 							</div>
 						</div>
 						
-                        <div className="invoiceContainer itemsection" style={{border:'0', width: '100%', margin: '50px 0 0 0', float: 'left'}}>
+                        <div className="invoiceContainer itemsection" style={isMobile() ?{border:'0', width: '100%', margin: '80px 0 0 0', float: 'left'} :{border:'0', width: '100%', margin: '50px 0 0 0', float: 'left'}}>
 							<div className="itemsection invoiceheading" style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                 
 									<div className="value heading" style={{width: '13%', margin: 'auto', float: 'left'}}>Item Id</div>
@@ -154,11 +152,11 @@ class Invoice extends React.Component {
                                 return (
                                     
                                     <div className="itemList" index={`${index}-item`}  style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
-                                        <div  style={{width: '13%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
-                                        <div style={{width: '13%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
+                                        <div  style={isMobile() ?{ margin: 'auto', float: 'left'}: {width: '15%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
+                                        <div style={{width: '15%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
                                         <div style={{width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
+                                        <div style={{width: '6%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.cgstAmount}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.sgstAmount}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.itemTotalAmount}</div>
@@ -168,8 +166,11 @@ class Invoice extends React.Component {
                                     </div>
                                 )
 							})}
+							
 							<div className="itemsection invoicefooter" style={{border:'0', width: '100%', margin: '20px 0 0 0', float: 'left'}}>
-                                <div style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;</div>
+                                <div className='downloadBtn' style={{width: '60%', margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Download and Print</button>
+</div>
+
 								<div className="value heading" style={{width: '20%', margin: 'auto', float: 'left', align:'right'}}>Total (Rs) </div>
 								<div style={{width: '20%', float: 'left', align:'right'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
                             </div>
@@ -177,7 +178,6 @@ class Invoice extends React.Component {
                     </div>
 
 				}
-				<button onClick={this.printDocument}>Download and Print</button>
             </div>
         )
 	}
@@ -226,7 +226,7 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true' && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true'  && invoiceData  && isMatchForUser? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
