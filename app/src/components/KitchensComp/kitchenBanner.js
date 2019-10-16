@@ -48,6 +48,9 @@ class WardrobeBanner extends React.Component {
   componentDidMount() {
     this.getKitchensBannerData();
   }
+  handleOnClick (e) {
+    window.scrollTo(0, 0);
+  }
 
   render() {
     const { kitchenSlider } = this.state;
@@ -66,7 +69,7 @@ class WardrobeBanner extends React.Component {
           {!!kitchenSlider &&
             kitchenSlider.map((sliderData, index) => (
               <a key={index} >
-				<a href={`${sliderData.onClickUrl}`} >
+				<a onClick={e => this.handleOnClick(e)} onMouseDown={e => this.handleOnClick(e)} href={`${sliderData.onClickUrl}`} >
 					<img src={`${imagePrefix}${sliderData.imageSrc}`} alt={sliderData.alt} />
 				</a>
               </a>
