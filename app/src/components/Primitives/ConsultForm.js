@@ -261,6 +261,8 @@ onDropdownSelected = (e) => {
 
 
 
+
+
     render() {
       const{name, email,mobileNumber,message, dropDownValue,index} = this.state
       let errorMessageName = null;
@@ -312,7 +314,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">{WHAT_YOU_LIKE}</label>
-                      <select  name="dropDownValue" onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
+                      <select  name="dropDownValue" onChange={this.onDropdownSelected} onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
                         <option value='Select an option' selected='true'>{SELECT_OPTION}</option>
                          {this.createSelectItems()}
                       </select>
