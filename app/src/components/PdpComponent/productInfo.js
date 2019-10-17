@@ -17,7 +17,22 @@ class productInfo extends React.Component {
       imageArrowAlt: 'DownArrow'
     }
   }
-
+  
+  BoldedText(text, shouldBeBold) {
+    const textArray = text.split(shouldBeBold);
+    return (
+      <span>
+        {textArray.map((item, index) => (
+          <>
+            {item}
+            {index !== textArray.length - 1 && (
+              <span className='couponCode'>{shouldBeBold}</span>
+            )}
+          </>
+        ))}
+      </span>
+  ); }
+  
   toggleOffers() {
     let activeClass;
     let imgSrc;
@@ -104,7 +119,7 @@ class productInfo extends React.Component {
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>
                 <h4 className="heading">{promotion.name}</h4>
-                {promotion.description} <TermsAndCondition espotPromo={this.props.espotPromo} />
+                {this.BoldedText(promotion.description,promotion.promocode)} <TermsAndCondition espotPromo={this.props.espotPromo} />
               </li>
             ))}
           </ul>

@@ -180,6 +180,12 @@
   }
   .compare-product-list {
     margin-bottom: 20px;
+    .compareSwatchflex {      
+      display:flex;
+      -webkit-display:flex;
+      -moz-display:flex;
+      -ms-display:flex;
+    }
     .comp-list-item {
       padding: 0px;
       border-width: 1px 1px 1px 1px;
