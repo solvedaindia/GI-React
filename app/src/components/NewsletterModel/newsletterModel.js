@@ -135,7 +135,7 @@ class NewsletterModel extends React.Component {
               </div>
             </Col>
 
-            <Col xs={12} md={7} className='newsletter-form-box'>
+            <Col xs={12} md={7} className='newsletter-form-box no-padding'>
               <div className="form_newsletter">
                 {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_HEADING' } /> : ''}
                 <Form className='news-letter-form'>

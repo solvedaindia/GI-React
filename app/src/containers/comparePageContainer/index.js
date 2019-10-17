@@ -36,6 +36,9 @@ export class ComparePageContainer extends React.Component {
     if (this.props.updatedCompData.length === 0 && appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct')).length > 0) {
       updatedCompData = JSON.parse(appCookie.get('compareProduct'));
     }
+    if(!updatedCompData || updatedCompData.length <2){
+      this.props.history.push('/');
+    }
     updatedCompData.forEach(element => {
       this.state.compWidgetData.push(element.skuId);
     });

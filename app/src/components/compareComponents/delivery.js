@@ -35,7 +35,7 @@ class DelContainer extends React.Component {
       }
     }).then((resp) => {
       this.setState({
-        deliveryData: resp.data.data.deliveryDate,
+        deliveryData: resp.data.data.deliveryDate || 'NA',
         isLoading: false,
       })
     }).catch((err) => {
@@ -59,7 +59,7 @@ class DelContainer extends React.Component {
     return (
       <Col xs={12} sm={4} md={4}>
         <div className='DeliveryLoaderwrap'>
-          <div className='DeliveryText'>Delivery between</div>
+          <div className='DeliveryText'>Delivery between:</div>
           <div className='loaderdiv'>{this.state.isLoading ? this.dotLoader() : <strong>{this.state.deliveryData}</strong>}</div>
         
         </div> 
