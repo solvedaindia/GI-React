@@ -657,7 +657,7 @@ export class PlpContainer extends React.Component {
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
 
-          <title>{this.state.categoryDetail.pageTitle}</title>
+          <title>{this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle}</title>
           <meta name="description" content={this.state.categoryDetail.metaDescription} />
           <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
         </Helmet>
