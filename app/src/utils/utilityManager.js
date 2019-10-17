@@ -320,14 +320,22 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
 		prodName =prodName.toLowerCase();
 		var shortDescURL = '';
 		if(shortDesc != undefined && shortDesc != '') {
+			shortDescURL =shortDesc.replace(' & ', '-');
+			shortDescURL =shortDesc.replace(', ', '-');
+			shortDescURL =(shortDesc.split(' , ').join('-')).split(' & ').join('-');
+			shortDescURL =(shortDesc.split(', ').join('-')).split(' &').join('-');
 			shortDescURL =(shortDesc.split(' ').join('-')).split(',').join('-');
 			shortDescURL =(shortDescURL.split('/').join('-')).split('?').join('-');
 			shortDescURL =(shortDescURL.split('\\').join('-')).split('&').join('-');
 			shortDescURL = shortDescURL.toLowerCase();
             shortDescURL = '-' + shortDescURL;
-            shortDescURL = shortDescURL.replace('--', "-")
+            shortDescURL = shortDescURL.replace('---', '-');
+            shortDescURL = shortDescURL.replace('--', '-');
 		}
-		return '/pdp/furniture-' + prodName.split(' ').join('-') +shortDescURL +  '/' + skuId;
+		var prodURL= prodName.split(' ').join('-');
+		prodURL= prodURL.replace('---', '-');
+		prodURL= prodURL.replace('--', '-');
+		return '/pdp/furniture-' + prodURL +shortDescURL +  '/' + skuId;
 	}
     return '/pdp/furniture-' + prodName + '/' + skuId;
 }

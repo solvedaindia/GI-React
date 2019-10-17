@@ -34,6 +34,12 @@ function socialLoginAPIHandler(socialData, callback) {
           response.data.data.access_token
         };path=/;expires=''`,
       );
+	  
+	   appCookie.set(
+        `userID=${
+          response.data.data.userID
+        };path=/;expires=''`,
+      );
       window.location.reload();
       callback('Success');
     })

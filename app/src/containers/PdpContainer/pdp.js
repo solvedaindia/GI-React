@@ -81,6 +81,7 @@ class PdpContainer extends React.Component {
   const { pdp, title} = this.state;
   return (
 		<>
+		
 		{!!pdp && 
 			<PDPMeta
 				keywords={!!pdp.data.keywords && pdp.data.keywords} 

@@ -58,6 +58,7 @@ export class HeaderContainer extends React.Component {
 			  }]
             `}
           </script>
+		  
         </Helmet>
     if (isMobile()) {
       return (

@@ -27,8 +27,11 @@ export function registerGuestUser(callback) {
     .post(guestLoginAPI, '')
     .then(response => {
       const guestData = response.data.data;
+      const guestUserID = guestData.userID;
       const guestToken = guestData.access_token;
       document.cookie = `${accessTokenCookie}=${guestToken};path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */
+      document.cookie = `userID=${guestUserID};path=/;expires=''`;
+	  
       const json_str = JSON.stringify([]);
       document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
       callback(guestToken);

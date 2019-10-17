@@ -137,6 +137,11 @@ class WelcomeBack extends React.Component {
           response.data.data.access_token
           };path=/;expires=''`,
         );
+		 appCookie.set(
+          `userID=${
+          response.data.data.userID
+          };path=/;expires=''`,
+        );
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',

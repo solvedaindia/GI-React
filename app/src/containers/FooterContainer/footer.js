@@ -44,11 +44,11 @@ class FooterContainer extends React.Component {
 
   renderChatBot() {
     let userName = 'Guest User';
-    let userId = 'divyac@godrej.com';
+    let userId = appCookie.get('userID');
     if (appCookie.get('name')) {
       userName = appCookie.get('name');
     }
-    if (appCookie.get('loginID')) {
+    if (userId == null || userId == '') {
       userId = appCookie.get('loginID');
     }
     window.intercomSettings = {

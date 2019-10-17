@@ -195,6 +195,9 @@ export class CheckoutComponent extends React.Component {
         document.cookie = `${accessTokenCookie}=${
           response.data.data.access_token
           };path=/;expires=''`;
+		 document.cookie = `userID=${
+          response.data.data.userID
+          };path=/;expires=''`;
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
