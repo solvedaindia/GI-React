@@ -388,11 +388,21 @@ export class PlpContainer extends React.Component {
           });
         })
         .catch(error => {
-          console.log(error);
-          this.setState({
-            error: error.response.data.error.error_message,
-            isLoading: false,
-          });
+          if (this.state.isFromSearch.includes('/search')) {
+            this.setState({
+              showBestSeller: true,
+                emptySearchItem: null,
+                newSearchTrigger: false,
+              isLoading: false,
+              hasMore: false,
+            });
+          } else {
+            this.setState({
+              error: error.response.data.error.error_message,
+              isLoading: false,
+            });
+
+          }
         });
 
     });

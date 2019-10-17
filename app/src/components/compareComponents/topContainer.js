@@ -36,11 +36,11 @@ class TopContainer extends React.Component {
         this.props.product.swatches.forEach((swatch) => {
           if(swatch.colorCode) {
             swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a style={{background: `rgb${swatch.colorCode}`}}></a></li>)
-          } else if(swatch.facetImage) {
+          } else if(swatch.swatchImage) {
             // src={`${imagePrefix}${this.props.data}`}
-            swatches.push(<li><a><img src={`${imagePrefix}${swatch.facetImage}`} alt={swatch.name} /></a></li>)
+            swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a><img className="imgCircle" src={`${imagePrefix}${swatch.swatchImage}`} alt={swatch.name} /></a></li>)
           } else {
-            swatches.push(<li><a>{swatch.name}</a></li>)
+            swatches.push(<li onClick={this.props.handleSwatch.bind(this, swatch.skuId, this.props.index, this.props.product.parentProductId)}><a>{swatch.name}</a></li>)
           }
         });
         return swatches;
