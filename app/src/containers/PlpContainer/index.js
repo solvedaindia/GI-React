@@ -374,7 +374,7 @@ export class PlpContainer extends React.Component {
             }
           }
 
-
+          
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,

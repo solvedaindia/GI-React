@@ -2,6 +2,15 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import '../../../public/styles/breadcrumb.scss';
 import { createCategoryPlpURL } from '../../utils/utilityManager';
+//Redux Imports
+import { connect } from 'react-redux';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../../containers/PlpContainer/reducer';
+import saga from '../../containers/PlpContainer/saga';
+import { compose } from 'redux';
+import * as actionCreators from '../../containers/PlpContainer/actions';
+
 
 class Breadcrumb extends React.Component {
   constructor(props) {
@@ -20,6 +29,10 @@ class Breadcrumb extends React.Component {
 
   componentDidMount() {
     this.getBreadcrumbData();
+  }
+
+  onLinkNavigation = () => {
+    this.props.plpReduxStateReset();
   }
 
   render() {
@@ -99,7 +112,7 @@ class Breadcrumb extends React.Component {
 
             return (
               <>
-                <span className='links'><Link to={breadRoute}>{`${breadLabel} >`}</Link></span>
+                <span className='links'><Link onClick={this.onLinkNavigation} to={breadRoute}>{`${breadLabel} >`}</Link></span>
                 {pdpBreadcrumb.length === index + 1 ? <span className='links'>{`${this.props.productNamePro}`}</span> : null}
               </>
             )
@@ -124,4 +137,32 @@ class Breadcrumb extends React.Component {
   }
 }
 
-export default withRouter(Breadcrumb);
+// export default withRouter(Breadcrumb);
+/* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
+const mapDispatchToProps = dispatch => {
+  return {
+    plpReduxStateReset: () => dispatch(actionCreators.resetPLPReduxState()),
+  }
+};
+
+const mapStateToProps = state => {
+  // const stateObj = getReleventReduxState(state, 'plpContainer');
+  return {
+
+  }
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'plpContainer', reducer });
+const withSaga = injectSaga({ key: 'plpContainer', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+  withRouter,
+)(Breadcrumb);
