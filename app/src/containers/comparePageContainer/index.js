@@ -26,8 +26,13 @@ export class ComparePageContainer extends React.Component {
       compCount: null,
       compWidgetData: [],
       loading: true,
-      isRouteUpdated: false
+      isRouteUpdated: false,
+      swatchIndex: [],
     }
+  }
+
+  removeSwatchIndex(id,index){
+    this.state.swatchIndex.splice(index,1);
   }
 
   componentDidMount() {
@@ -41,6 +46,7 @@ export class ComparePageContainer extends React.Component {
     }
     updatedCompData.forEach(element => {
       this.state.compWidgetData.push(element.skuId);
+      this.state.swatchIndex.push(element.skuId);
     });
     this.callCompareApi();
   }
@@ -133,7 +139,7 @@ export class ComparePageContainer extends React.Component {
     }
     reverse_data.forEach(data => {
       var sku1 = data.sKUs.find(sKU => {
-        return sKU.uniqueID == this.state.compWidgetData[0];
+        return sKU.uniqueID == this.state.swatchIndex[0];
       });
       if (sku1) {
         sku1.parentProductId = data.uniqueId;
@@ -148,7 +154,7 @@ export class ComparePageContainer extends React.Component {
       }
       if (this.state.compWidgetData.length > 1) {
         var sku2 = data.sKUs.find(sku => {
-          return sku.uniqueID == this.state.compWidgetData[1];
+          return sku.uniqueID == this.state.swatchIndex[1];
         })
         if (sku2) {
           sku2.parentProductId = data.uniqueId;
@@ -164,7 +170,7 @@ export class ComparePageContainer extends React.Component {
       }
       if (this.state.compWidgetData.length > 2) {
         var sku3 = data.sKUs.find(sku => {
-          return sku.uniqueID == this.state.compWidgetData[2]
+          return sku.uniqueID == this.state.swatchIndex[2];
         })
         if (sku3) {
           sku3.parentProductId = data.uniqueId;
@@ -222,6 +228,7 @@ export class ComparePageContainer extends React.Component {
 
     //if (!this.state.compWidgetData.includes(id)) {
       this.state.compWidgetData[index] = id;
+      this.state.swatchIndex[index] = id;
       //this.renderPrd()
       this.updateSingleCompProduct(index);
       //this.updateRoute();
@@ -271,7 +278,7 @@ export class ComparePageContainer extends React.Component {
           </Col>
         </Row>
         {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.compCount}/3</h1></Row> : null}
-          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} history={this.props.history} swatchHandle={this.swatchHandle} /> : ''}</>}
+          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} history={this.props.history}  removeSwatchIndex = {(id,index)=>this.removeSwatchIndex(id,index)} swatchHandle={this.swatchHandle} /> : ''}</>}
 
       </div>
     )
