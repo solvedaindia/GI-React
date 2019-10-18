@@ -199,9 +199,9 @@ export default class App extends React.Component {
 
   handleLoad() 
   {
-	  if(windows.location.hash)
+	  if(window.location.hash)
 	  {
-		const element = document.getElementById(windows.location.hash.substr(1));
+		const element = document.getElementById(window.location.hash.substr(1));
 		 if (element) 
 			 element.scrollIntoView();
 	  }

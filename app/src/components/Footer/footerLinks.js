@@ -16,7 +16,7 @@ const Footerlinks = props => {
             {
 				item.children.map((litem, i) => (
 				  <li className="list" key={i}>
-					  {litem.action.indexOf('#') == -1?
+					  {(litem.action.indexOf('#') == -1 && litem.action.indexOf('http') == -1)?
 						   <Link
 							className="link"
 							to={{ pathname: litem.action, state: { pincode: getCookie('pincode') } }}
