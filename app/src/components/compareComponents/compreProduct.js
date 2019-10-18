@@ -131,7 +131,7 @@ class CompPrd extends React.Component {
   render() {
     return (
       <div className="compare-product-list">
-        <Row>{this.renderProducts()}</Row>
+        <Row className='compareSwatchflex'>{this.renderProducts()}</Row>
 
         <Row><h2 className="title-text">{DELIVERY}</h2></Row>
         <Row className="prod-delivery-slot">
