@@ -19,6 +19,7 @@ class TopContainer extends React.Component {
     }
      
     removePrd = () => {
+      this.props.removeSwatchIndex(this.props.product.uniqueID, this.props.keyPro);
       let compData = JSON.parse(appCookie.get('compareProduct'));
       compData = compData.filter(el => el.skuId !== this.props.product.uniqueID);
       appCookie.set('compareProduct', JSON.stringify(compData), 365 * 24 * 60 * 60 * 1000);

@@ -22,10 +22,15 @@ class CompPrd extends React.Component {
   renderProducts = () => { 
     var prds = [];
     this.props.data.map((element, index) => {
-      prds.push(<TopContainer key={index} product={element} isRouteUpdated={this.props.isRouteUpdated} history={this.props.history} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} index={index} />)
+      prds.push(<TopContainer keyPro={index} product={element} isRouteUpdated={this.props.isRouteUpdated} history={this.props.history} remove={this.props.remove} count={this.props.data.length} handleSwatch={this.handleSwatch} removeSwatchIndex={this.removeSwatchIndex} index={index} />)
     });
     return prds;
   }
+  
+  removeSwatchIndex = (id, index) => {
+    this.props.removeSwatchIndex(id, index);
+  }
+
 
   handleSwatch = (id, index, name) => {
     this.props.swatchHandle(id, index, name);
