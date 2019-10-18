@@ -24,7 +24,8 @@ class GenerateOtp extends React.Component {
     }
 
     /* Handle Submit */
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
         if (!validateEmptyObject(this.state.inputText)) {
             this.setState({
                 error: true,
@@ -108,7 +109,7 @@ class GenerateOtp extends React.Component {
                 ):(
                 <>
                     <h3 className="heading">{ENTER_OTP}</h3>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit.bind(this)}>
                         <FormGroup className='otp-verification'>
                             <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
                             <p className='text otp-text'>{VERIFICATION_CODE}</p>

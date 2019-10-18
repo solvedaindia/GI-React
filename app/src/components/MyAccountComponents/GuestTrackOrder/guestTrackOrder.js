@@ -32,6 +32,7 @@ class GuestTrackOrder extends React.Component {
   }
 
   submitBtnClicked() {
+
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
@@ -53,6 +54,13 @@ class GuestTrackOrder extends React.Component {
         });
       });
  
+  }
+
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.submitBtnClicked();
+    }
   }
 
   render() {
@@ -84,6 +92,7 @@ class GuestTrackOrder extends React.Component {
             className="form-control"
             placeholder="Enter order number"
             onChange={this.handleInputChange.bind(this)}
+            onKeyPress={this.onKeyPress}
           />
           {errorItem}
         </div>

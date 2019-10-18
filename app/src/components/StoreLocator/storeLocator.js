@@ -438,6 +438,12 @@ class StoreLocator extends React.Component {
             filteredSingleStore: filterRecord
         })
     }
+    onKeyPress=(event)=>
+    {
+        if(event.key === 'Enter'){
+        this.handleStoreSearch();
+        }
+    }
 
     render() {
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
@@ -474,7 +480,7 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input id="city" type='text' name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }} />
+                        <input id="city" type='text' onKeyPress={this.onKeyPress} name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }}  />
                         <button type="button" id="locateStoreBtn" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores' : 'Find'}</button>
                     </div>
 

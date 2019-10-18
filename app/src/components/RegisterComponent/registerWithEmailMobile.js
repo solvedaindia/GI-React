@@ -135,7 +135,9 @@ class RegisterWithEmailMobile extends React.Component {
 
   /* Handle Submit */
   handleSubmit = e => {
+    if(e!=null)
     e.preventDefault();
+   
     const isValidate = this.handleValidation(this.state, true);
 
     if (isValidate === false) {
@@ -201,6 +203,12 @@ class RegisterWithEmailMobile extends React.Component {
   renderLoginComponent() {
     this.props.loginComponentData();
   }
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.handleSubmit();
+    }
+  }
 
   render() {
     let errorMessageName = null;
@@ -240,7 +248,7 @@ class RegisterWithEmailMobile extends React.Component {
             <div className="form_register">
             {!isMobile () &&<h3 className="heading">{headerText}</h3>}
               <div>
-                <Form>
+                <Form >
                   <FormGroup>
                     <div className="form-div clearfix">
                       <Label>{FULL_NAME}</Label>
@@ -250,6 +258,7 @@ class RegisterWithEmailMobile extends React.Component {
                         className="form-control"
                         placeholder="Please Enter Full Name"
                         onChange={this.handleChange}
+                        onKeyPress={this.onKeyPress}
                         value={this.state.name}
                       />
                       {errorMessageName}
@@ -265,6 +274,7 @@ class RegisterWithEmailMobile extends React.Component {
                             name="userId"
                             className="form-control"
                             placeholder="Please Enter Email Address"
+                            onKeyPress={this.onKeyPress}
                             onChange={this.handleChange}
                           />
                           {errorMessageUserId}
@@ -281,6 +291,7 @@ class RegisterWithEmailMobile extends React.Component {
                             placeholder="Please Enter Mobile Number"
                             onChange={this.handleChange}
                             value={this.state.userId}
+                            onKeyPress={this.onKeyPress}
                             maxlength="10"
                           />
                           {errorMessageUserId}
@@ -300,6 +311,7 @@ class RegisterWithEmailMobile extends React.Component {
                           className="form-control"
                           placeholder="Please Enter Your Password"
                           onChange={this.handleChange}
+                          onKeyPress={this.onKeyPress}
                           value={this.state.password}
                         />
                         <span

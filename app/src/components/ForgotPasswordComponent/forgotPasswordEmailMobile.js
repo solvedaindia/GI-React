@@ -164,7 +164,6 @@ class ForgotPasswordEmailMobile extends React.Component {
               <input
                 onKeyPress={this.onpress}
                 onChange={this.handleInputChange.bind(this)}
-                type="email"
                 name="email"
                 id="exampleEmail"
                 className="form-control"

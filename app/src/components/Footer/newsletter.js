@@ -14,7 +14,9 @@ class newsletter extends React.Component {
     };
   }
 
-  submitNewsLetter() {
+    submitNewsLetter(e) {
+    if(e!=null)
+      e.preventDefault();
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         successFailItem: this.successFailMessageItem('Fail', 'This field is required')
@@ -74,6 +76,13 @@ class newsletter extends React.Component {
     });
   }
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.submitNewsLetter();
+    }
+  }
+
   render() {
     const newsletterHtml = (
       <Col md={12} sm={12} className="newsletter_section">
@@ -87,12 +96,16 @@ class newsletter extends React.Component {
             </li>);
           })}
           <li>
-            <Form inline>
+            <Form
+              inline
+              onSubmit={this.submitNewsLetter}
+              >
               <FormControl
                 onChange={this.handleInputChange.bind(this)}
-                type="email"
+                type="text"
                 placeholder="Your email"
                 className="email_input"
+                onKeyPress={this.onKeyPress}
                 value={this.state.inputText}
               />
               <Button

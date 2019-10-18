@@ -563,7 +563,7 @@ export class PlpContainer extends React.Component {
         <SubCategories subCategoryData={this.state.plpSubCatData} />
       );
     }
-
+    console.log("aaaaaaaaaa","Plp container");
     let plpProducts;
     if (plpData.length != 0) {
       itemData = createPlpItemData(plpData);
