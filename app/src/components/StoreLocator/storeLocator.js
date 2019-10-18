@@ -494,7 +494,7 @@ class StoreLocator extends React.Component {
                                         Mattresses
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this, 'Kitchens', 'kitchen')}>
+                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this, 'Kitchen Gallery', 'kitchen')}>
                                     <figure className='typeList'><img src={Img3} className='storeImg grey' alt='Store Information' />
                                         {/* <img src={Imgblack1} className='storeImg black' alt='Store Information' alt='Store Information'/> */}
                                     </figure>
