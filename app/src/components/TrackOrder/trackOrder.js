@@ -92,7 +92,7 @@ class TrackOrder extends React.Component {
                                                     <div className='prodDetails'>
                                                         {orderDetails.orderItems.length > 1 && <p className='count'>({ITEM + ' ' + (itemIndex+1)}/{orderDetails.orderItems.length})</p>}
                                                         {subOrderDetails.shipmentData.length > 1 && <p className='count'> ({SHIPMENT  + ' ' + (index+1)}/{subOrderDetails.shipmentData.length})</p>}
-                                                        <p className='orderID'> {ORDER_ID + orderDetails.orderID}</p>
+                                                        <p className='orderID'> {ORDER_ID + ' ' + orderDetails.orderID}</p>
                                                         <p className='prodName'>{subOrderDetails.productName}</p>
                                                         <p className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
                                                             <span className='qtyVal val'>{shipmentDetails.quantity}</span>

@@ -2083,6 +2083,11 @@
                 .addCart{
                     width: 45%;
                     float: left;
+                    .errorMessage{
+                        top: -24px;
+                        right:15px;
+                        position: absolute;
+                    }
                     .addcartbtn, .notifybtn{
                         width:100%;
                     }
