@@ -54,7 +54,6 @@ class WardrobeAccessoriesConfiguration extends React.Component {
       // alert(index)
     
      this.setState({currentIndex: index})
-    console.log('hja',this.state.currentIndex);
   }
 
   render() {
@@ -69,8 +68,6 @@ class WardrobeAccessoriesConfiguration extends React.Component {
       slidesToScroll:2,
     };
    const{ configurationTabing, currentIndex } =this.state;
-  //  if (currentIndex != -1)
-  //  console.log('sahir', configurationTabing[currentIndex].bannerList)
     return (
      <div className='container'>
          <h1>{this.state.title}</h1>

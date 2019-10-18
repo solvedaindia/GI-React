@@ -56,7 +56,6 @@ class DescriptionBanner extends React.Component {
         finalData: this.props.descriptionDataPro.description,
         readMoreTitle: 'Read Less',
       });
-      {console.log('data',this.state.finalData)}
     }
   }
 

@@ -4,7 +4,6 @@ import  '../../../public/styles/staticpages/staticPages.scss';
 ;
 import ContentEspot from '../../components/Primitives/staticContent';
 import ChefKitchenBanner from '../../components/KitchensComp/chefKitchenBanner';
-import FaqEspot from '../../components/Primitives/faq.js';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
 import '../../../public/styles/static-pages/consultForm.scss';
 import {Helmet} from "react-helmet";
@@ -68,7 +67,8 @@ return (
 		  <ChefKitchenBanner />
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
 		  <KitchenConfiguration/>
-		  <ContentEspot espotName={ 'GI_STEEL_YOUR_KITCHEN_YOUR_WAY' } />
+		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_SHUTTERS' } />
+		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_ACCESSORIES' } />
 		  <div className="formContainer">
 			  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 

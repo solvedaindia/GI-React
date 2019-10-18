@@ -69,8 +69,7 @@ class KitchenConfiguration extends React.Component {
       slidesToScroll:2,
     };
    const{ configurationTabing, currentIndex } =this.state;
-  //  if (currentIndex != -1)
-  //  console.log('sahir', configurationTabing[currentIndex].bannerList)
+
     return (
      <div className='container'>
          <h1>{this.state.title}</h1>

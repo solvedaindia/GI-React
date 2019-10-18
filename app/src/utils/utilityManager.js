@@ -407,8 +407,7 @@ export function createPlpItemData(plpData) {
 
 export function scrollPage(prevUrl, currUrl) 
 {
-	console.log(prevUrl);
-	console.log(currUrl);
+
 	let pathurl=window.location.href;
 	if(window.location.hash)
 	{

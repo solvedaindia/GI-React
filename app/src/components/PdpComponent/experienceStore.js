@@ -20,7 +20,6 @@ const experienceStore = props => {
 					<>
 						{' '} <Link to={{ pathname: '/storelocator', state: { storeId: storeArray } }} className="bold" role="button">
 							{LOCATE_MORE +' ' +props.storeText}
-							 {console.log(LOCATE_MORE+'<<<<store>>>>',props.storeText)}
                 		</Link>
 					</>
 				}

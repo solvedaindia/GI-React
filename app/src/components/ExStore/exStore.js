@@ -24,7 +24,6 @@ export class ExStore extends React.Component {
 	{ 
         Geocode.setApiKey(mapKey);
         Geocode.fromAddress(pinCode).then( response => {
-			console.log(pinCode, response);
             const { lat, lng } = response.results[0].geometry.location;
             this.setState({
                 lat: lat,
