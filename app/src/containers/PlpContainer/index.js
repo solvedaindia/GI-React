@@ -107,6 +107,9 @@ export class PlpContainer extends React.Component {
     if (idStr != undefined && idStr !== categoryId) {
       categoryId = idStr;
     }
+    else {
+      categoryId = '';
+    }
 
     const params = new URLSearchParams(this.props.location.search);
     const filterAtt = params.get('filter');
