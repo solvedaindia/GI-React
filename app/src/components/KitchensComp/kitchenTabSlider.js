@@ -3,19 +3,21 @@ import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
-import '../../../public/styles/static-pages/chefKitchen.scss';
+import '../../../public/styles/static-pages/chefkitchen.scss';
 import {espotAPI,imagePrefix} from '../../../public/constants/constants';
 
 
 class KitchenConfiguration extends React.Component {
   constructor(props) {
     super(props);
+    this.activeClass = 'active';
     this.state = {
      espotName: 'GI_CHEF_KITCHEN_CONFIGURATION',
      title: "",
      configurationTabing: [],
      currentIndex: -1,
      currentTabData: null,
+    //  tabIndex: 0
     };
   }
 
@@ -70,18 +72,27 @@ class KitchenConfiguration extends React.Component {
     };
    const{ configurationTabing, currentIndex } =this.state;
 
+
+  const tabs =configurationTabing.map((tabData,index)=>{
+      return(
+      
+        <li >
+     <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+        {tabData.title}
+          
+         </a>
+        </li>
+       
+     )
+  })
     return (
      <div className='container'>
          <h1>{this.state.title}</h1>
           <div className='configurationTab'>
-            {!!configurationTabing &&
-            configurationTabing.map((tabData, index) => (
-              <a onClick={this.onHandleClick.bind(this, index)}   key={index} className='link' >
-              {tabData.title}
-               </a>
-
-            ))}
-             
+            <ul className='configuration-tab'>
+            {tabs}
+            </ul>
+            
       </div>
 <div className='clearfix'></div>
 <Slider {...settings}>
