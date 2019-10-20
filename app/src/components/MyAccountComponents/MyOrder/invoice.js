@@ -71,7 +71,7 @@ class Invoice extends React.Component {
 		
 		let  invoiceData  = this.state.invoiceData;
         return (
-            <div id='invoiceDivHtml' className={isMobile() ? 'container invoiceContainer' :'container mobileInvoiceContainer'} style={isMobile() ? {width: '905px'} :{width: '90%'}}>
+            <div id='invoiceDivHtml' className={isMobile() ? 'container invoiceContainer' :'container mobileInvoiceContainer'} style={isMobile() ? {width: '1010px'} :{width: '90%'}}>
                 <h3 className="value heading" style={{textAlign: 'center'}}>TAX INVOICE</h3>
                 {
                     !!invoiceData && <div className="invoiceData" style={isMobile()? {border:'1', width: '900px', margin: 'auto'}:{border:'1', width: '824px', margin: 'auto',} }>
@@ -145,7 +145,7 @@ class Invoice extends React.Component {
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Item Price</div>
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Quantity</div>
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>CGST</div>
-                                    <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>SGST </div>
+                                    <div className="value heading" style={isMobile() ? {width: '7%', margin: 'auto', float: 'left'}:{width: '10%', margin: 'auto', float: 'left'}}>SGST </div>
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Item Total Amount</div> 
                             </div>
 							{!!invoiceData && invoiceData.lineItemDetails && invoiceData.lineItemDetails.lineItemList.map((itemList, index) => {
@@ -153,13 +153,13 @@ class Invoice extends React.Component {
                                     
                                     <div className="itemList" index={`${index}-item`}  style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                         <div  style={isMobile() ?{ margin: 'auto', float: 'left'}: {width: '15%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
-                                        <div style={{width: '15%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
-                                        <div style={{width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
+                                        <div style={isMobile() ? {width: '13%', margin: 'auto', float: 'left'}:{width: '15%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
+                                        <div style={ {width: '16%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
-                                        <div style={{width: '6%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.cgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.sgstAmount}</div>
-                                        <div style={{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.itemTotalAmount}</div>
+                                        <div style={isMobile() ? {width: '10%', margin: 'auto', float: 'left'}:{width: '6%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
+                                        <div style={isMobile()? {width: '10%', margin: 'auto', float: 'left', align:'right'} :{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.cgstAmount}</div>
+                                        <div style={isMobile() ?{width: '10%', margin: 'auto', float: 'left', align:'right'} :{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.sgstAmount}</div>
+                                        <div style={isMobile() ? {width: '12%', margin: 'auto', float: 'left', align:'right'}:{width: '10%', margin: 'auto', float: 'left', align:'right'}}>{itemList.itemTotalAmount}</div>
                                         
 
                                       
@@ -236,7 +236,7 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true'  &&  invoiceData  && isMatchForUser  ? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
