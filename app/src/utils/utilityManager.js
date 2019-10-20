@@ -333,8 +333,8 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
             shortDescURL = shortDescURL.replace('--', '-');
 		}
 		var prodURL= prodName.split(' ').join('-');
-		prodURL= prodURL.replace('---', '-');
-		prodURL= prodURL.replace('--', '-');
+		prodURL= prodURL.replace(/---/g, '-');
+		prodURL= prodURL.replace(/--/g, '-');
 		return '/pdp/furniture-' + prodURL +shortDescURL +  '/' + skuId;
 	}
     return '/pdp/furniture-' + prodName + '/' + skuId;
