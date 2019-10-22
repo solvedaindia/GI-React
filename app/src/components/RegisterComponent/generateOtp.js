@@ -4,6 +4,7 @@ import { Button, Form, FormGroup } from 'react-bootstrap';
 import { validateEmptyObject, validateOTPDigit } from '../../utils/validationManager';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
+import { isMobile } from '../../utils/utilityManager';
 import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER} from '../../constants/app/primitivesConstants';
 
 const LeftArrow = (
@@ -85,13 +86,38 @@ class GenerateOtp extends React.Component {
         const userId = this.props.userdata.user_id;
         let errorItem = null;
         let isErrorExist = false;
+        let content = null;
         if (this.state.errorMessage && this.state.errorMessage.includes("maximum")) {
             isErrorExist = this.state.errorMessage.includes("maximum");
         }
         
-        if (this.state.error) {
-            errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>
+        if (this.state.error) 
+        {
+            if(isMobile())
+            {
+                errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>
+            }
+            else{
+                errorItem = <div className='col-md-7'><p className='error-msg-otp-web'>{this.state.errorMessage}</p></div>
+            }
+               
         }
+        if(isMobile())
+        {
+            content = (<>{errorItem}<Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button></>)
+        }
+        else{
+            if(errorItem==null)
+                errorItem = (<div className="col-md-7"><p className='error-msg-otp-web'> </p></div>)
+            
+            content = (<div className="row">
+                        {errorItem}
+                        <div className="col-md-5">
+                            <Button onClick={this.resendOTP.bind(this)} className='resend-otp-web'>{RESEND_OTP}</Button>
+                        </div>
+                       </div>)   
+        }
+
         return (
             <div  className='otp_screen'>
             <div className='form_register'>
@@ -116,8 +142,9 @@ class GenerateOtp extends React.Component {
                             <div className='form-div clearfix'>
                                 <label for="otp" className="form-label">{XXXX_SENT}{userId.substr(userId.length - 4)}</label>
                                 <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
-                                {errorItem}
-                                <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button>
+                                {/* {errorItem}
+                                <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button> */}
+                                {content}
                             </div>
                         </FormGroup>
                         <FormGroup className='text-center'>
