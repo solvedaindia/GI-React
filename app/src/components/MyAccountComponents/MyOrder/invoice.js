@@ -140,7 +140,7 @@ class Invoice extends React.Component {
 							<div className="itemsection invoiceheading" style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                 
 									<div className="value heading" style={isMobile() ? {width: '14%', margin: 'auto', float: 'left'}:{width: '16%', margin: 'auto', float: 'left'}}>Item Id</div>
-									<div className="value heading"  style={isMobile()? {width: '13%', margin: 'auto', float: 'left'}: {width: '14%', margin: 'auto', float: 'left'}}> Description</div>
+									<div className="value heading"  style={isMobile()? {width: '17%', margin: 'auto', float: 'left'}: {width: '14%', margin: 'auto', float: 'left'}}> Description</div>
 									<div className="value heading" style={isMobile()? {width: '14%', margin: 'auto', float: 'left'}:{width: '12%', margin: 'auto', float: 'left'}}>HSN Code</div>
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Item Price</div>
                                     <div className="value heading" style={{width: '10%', margin: 'auto', float: 'left'}}>Quantity</div>
@@ -153,7 +153,7 @@ class Invoice extends React.Component {
                                     
                                     <div className="itemList" index={`${index}-item`}  style={{border:'0', width: '100%', margin: 'auto', float: 'left'}}>
                                         <div  style={isMobile() ?{width:'14%', margin: 'auto', float: 'left'}: {width: '15%', margin: 'auto', float: 'left'}}>{itemList.itemCode}</div>
-                                        <div style={isMobile() ? {width: '13%', margin: 'auto', float: 'left'}:{width: '15%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
+                                        <div style={isMobile() ? {width: '17%', margin: 'auto', float: 'left'}:{width: '15%', margin: 'auto', float: 'left'}}>&#160;{itemList.itemDesc}</div>
                                         <div style={isMobile()? {width: '14%', margin: 'auto', float: 'left'}: {width: '13%', margin: 'auto', float: 'left'}}>{itemList.hsnCode}</div>
                                         <div style={{width: '10%', margin: 'auto', float: 'left'}}>{itemList.itemPrice}</div>
                                         <div style={isMobile() ? {width: '10%', margin: 'auto', float: 'left'}:{width: '9%', margin: 'auto', float: 'left'}}>{itemList.quantity}</div>
@@ -236,12 +236,12 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true'  &&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-						{UserLoggedIn == 'true'  &&  invoiceData  && isMatchForUser ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.downloadDocument}>Download </button></div> : ''}
-						{UserLoggedIn == 'true'  &&  invoiceData  && isMatchForUser  ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Print</button></div> : ''}
+						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ?  <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.downloadDocument}>Download </button></div> : ''}
+						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser  ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Print</button></div> : ''}
 
 				</div>
 			);
