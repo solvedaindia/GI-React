@@ -1,11 +1,15 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
+import { imagePrefix } from '../../../public/constants/constants';
 
 class PDPMeta extends React.Component {
     constructor() {
       super();
     }
     render () {
+        
+        const fullImagePath = `${imagePrefix}${this.props.image}`;
+        console.log('PDP meta --- ',fullImagePath);
         return (
             <Helmet>
 			
@@ -19,7 +23,7 @@ class PDPMeta extends React.Component {
                 <meta property="og:type" content="Website" />
                 <meta property="og:title" content={this.props.title} />
                 <meta property="og:description"content={this.props.description} />
-                <meta property="og:image" content="" />
+                <meta property="og:image" content={fullImagePath} />
                 
                 <title>{this.props.title}</title>
                 <meta property="description" content={this.props.description} />

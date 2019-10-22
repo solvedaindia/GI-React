@@ -87,7 +87,8 @@ class PdpContainer extends React.Component {
 				keywords={!!pdp.data.keywords && pdp.data.keywords} 
 				description={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].metaDescription : ''}
 				title={title}
-				alt={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].imageAltText : ''}
+        alt={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].imageAltText : ''}
+        image={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].thumbnail : ''}
 			/>
 		}
         <div>
