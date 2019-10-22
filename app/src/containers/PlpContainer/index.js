@@ -102,13 +102,11 @@ export class PlpContainer extends React.Component {
   }
 
   componentDidMount() {
+    categoryId = '';
     const path = String(this.props.location.pathname);
     const idStr = path.split('/')[2];
     if (idStr != undefined && idStr !== categoryId) {
       categoryId = idStr;
-    }
-    else {
-      categoryId = '';
     }
 
     const params = new URLSearchParams(this.props.location.search);

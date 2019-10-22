@@ -48,7 +48,7 @@ class SearchBar extends React.Component {
         apiManager
           .get(autoSuggestAPI + searchText)
           .then(response => {
-            document.addEventListener('click', this.handleOutsideClick, false);
+            document.addEventListener(navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0 ?'touchstart' : 'click', this.handleOutsideClick, false);
             searchStr =
               this.setState({
                 searchData: response.data.data.suggestionView[0].entry,
@@ -58,12 +58,16 @@ class SearchBar extends React.Component {
           .catch(error => {
           });
       } else {
-        document.removeEventListener('click', this.handleOutsideClick, false);
+        document.removeEventListener(navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0 ?'touchstart' : 'click', this.handleOutsideClick, false);
       }
     }
   };
 
   handleOutsideClick(e) {
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+      document.getElementById("searchInput").blur();
+    }
+    
     if (this.state.searchData.length > 0) {
       if (this.node.contains(e.target)) {
         return;
