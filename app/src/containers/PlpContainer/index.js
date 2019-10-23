@@ -389,11 +389,21 @@ export class PlpContainer extends React.Component {
           });
         })
         .catch(error => {
-          console.log(error);
-          this.setState({
-            error: error.response.data.error.error_message,
-            isLoading: false,
-          });
+          if (this.state.isFromSearch.includes('/search')) {
+            this.setState({
+              showBestSeller: true,
+                emptySearchItem: null,
+                newSearchTrigger: false,
+              isLoading: false,
+              hasMore: false,
+            });
+          } else {
+            this.setState({
+              error: error.response.data.error.error_message,
+              isLoading: false,
+            });
+
+          }
         });
 
     });
@@ -564,7 +574,7 @@ export class PlpContainer extends React.Component {
         <SubCategories subCategoryData={this.state.plpSubCatData} />
       );
     }
-
+    console.log("aaaaaaaaaa","Plp container");
     let plpProducts;
     if (plpData.length != 0) {
       itemData = createPlpItemData(plpData);
@@ -658,7 +668,7 @@ export class PlpContainer extends React.Component {
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
 
-          <title>{this.state.categoryDetail.pageTitle}</title>
+          <title>{this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle}</title>
           <meta name="description" content={this.state.categoryDetail.metaDescription} />
           <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
         </Helmet>

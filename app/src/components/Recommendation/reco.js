@@ -67,7 +67,7 @@ class Recommendation extends React.Component {
                     <div className='leftSide col-md-7'>
                         <div className='recoDesc col-md-7'>
                             <RecoIcon  width='71' height='70' className='icon'/>
-                            <h1 className='title'>{recoData.title}</h1>
+                            <h3 className='title'>{recoData.title}</h3>
                             <p className='data'>{recoData.description}</p>
                         </div>
                         <figure className='leftOne col-md-5' onMouseOver={this.handleData}>

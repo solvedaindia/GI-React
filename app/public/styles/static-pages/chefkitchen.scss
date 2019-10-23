@@ -12,6 +12,7 @@
       font-style: normal;
       color: $greyish;
     }
+   
     .anchorColor{
       color: #77787a;
     }
@@ -422,18 +423,46 @@
       }
 }
 
-.configurationTab{
-  text-align: center;
-  width: 56%;
-  margin: 0 auto;
-  padding: 0 0 40px 0;
-  .link{
+.configurationTab
+{
+    padding: 0 0 40.5px 218px;
+	.configuration-tab{
     color: #77787a;
     display: block;
     float: left;
     padding:0 20px 0 0;
-    font-size: 16px
-  }
+    font-size: 16px;
+    li{
+        float: left;
+        position: relative;
+        margin: 0px 13px;
+        padding: 0px;
+        a{
+            padding: 4px 5px;
+            font-size:16px;
+            color: $battleshipGrey;
+            display: inline-block;
+            font-family: $font-regular;
+            text-decoration: none;
+            letter-spacing: -0.26px;
+            cursor: pointer;
+        }
+        
+    }
+    .active{
+        a{ color:$greyDark;  font-family: $font-bold;}
+        &:after{
+            content: " ";
+            width: 100%;
+            height: 3px;
+            background:$cerulean;
+            position: absolute;
+            left: 0px;
+            bottom: -3px;
+            z-index: 1;
+        }
+       }
+}
 }
  
 

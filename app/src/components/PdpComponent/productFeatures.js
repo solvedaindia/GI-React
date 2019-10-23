@@ -98,7 +98,7 @@ class productFeatures extends React.Component {
                               role="button"
                               onClick={this.showFeatureImage.bind(this, i)}
                             >
-                              <h3 className="heading">{featureData.title}</h3>
+                              <h2 className="heading">{featureData.title}</h2>
                               {featureData.description}
                             </a>
                           </li>

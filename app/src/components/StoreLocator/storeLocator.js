@@ -438,6 +438,12 @@ class StoreLocator extends React.Component {
             filteredSingleStore: filterRecord
         })
     }
+    onKeyPress=(event)=>
+    {
+        if(event.key === 'Enter'){
+        this.handleStoreSearch();
+        }
+    }
 
     render() {
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
@@ -474,7 +480,7 @@ class StoreLocator extends React.Component {
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
-                        <input id="city" type='text' name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }} />
+                        <input id="city" type='text' onKeyPress={this.onKeyPress} name='locateStoreInput' className='pc-field' ref={(ref) => { this.inputRef = ref }}  />
                         <button type="button" id="locateStoreBtn" className='pc-btn' onClick={this.handleStoreSearch.bind(this)}>{!isMobile() ? 'Locate Stores' : 'Find'}</button>
                     </div>
 
@@ -494,7 +500,7 @@ class StoreLocator extends React.Component {
                                         Mattresses
                                     </figcaption>
                                 </li>
-                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this, 'Kitchens', 'kitchen')}>
+                                <li className='storeTypeItem' id='kitchen' onClick={this.handleStoreType.bind(this, 'Kitchen Gallery', 'kitchen')}>
                                     <figure className='typeList'><img src={Img3} className='storeImg grey' alt='Store Information' />
                                         {/* <img src={Imgblack1} className='storeImg black' alt='Store Information' alt='Store Information'/> */}
                                     </figure>

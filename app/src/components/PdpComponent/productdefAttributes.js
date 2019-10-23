@@ -85,11 +85,12 @@ class productDefAttribute extends React.Component {
 		this.props.defAttributes.map((data, i) => {
 			data.values.map(getVal => {
 				if(resolvedSku.indexOf(getVal.name) !== -1) {
-					if (getVal.colorCode) {
-						swatchesFormatArr.push(getVal.name);
-					} else {
-						swatchesFormatArr.push('');
-					}
+					swatchesFormatArr.push(getVal.name);
+					// if (getVal.colorCode) {
+					// 	swatchesFormatArr.push(getVal.name);
+					// } else {
+					// 	swatchesFormatArr.push('');
+					// }
 				}
 				
 			})

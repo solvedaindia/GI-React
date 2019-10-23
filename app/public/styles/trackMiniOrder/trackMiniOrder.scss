@@ -58,7 +58,8 @@
             .orderID {
                 color: $battleshipGrey;
                 font-size: $base*1.75;
-                margin: $base*3 0 0;
+                margin: $base*3 0 10px;                
+                line-height: 14px;
             }
             .prodName {
                 font-size: $base*2;

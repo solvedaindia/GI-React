@@ -37,7 +37,8 @@ render(){
 			<WillowKitchenBanner />
 			  <ContentEspot espotName = { 'GI_MODULAR_WILLOW_KITCHEN_BENEFITS' } />
 			  <WillowKitchenConfiguration/>
-			  <ContentEspot espotName = { 'GI_MODULAR_KITCHEN_INTERIOR_WILLOW' } />
+			  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_SHUTTERS' } />
+			  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_ACCESSORIES' } />
 			  <div className="formContainer">
 				  <ContentEspot espotName={ 'GI_KITCHEN_FORMBACKGROUND_IMG' } />
 				  <div id='consultForm' className="formDetails">
@@ -49,7 +50,7 @@ render(){
 			  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_FAQ' } />
 			  <ExKitchens />
 
-			  <ContentEspot espotName={ 'GI_WILLOW_KITCHEN_INTERIOR' } />
+			  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_WILLOW' } />
 
 			  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
 			  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />

@@ -27,6 +27,7 @@ import appCookie from '../../utils/cookie';
 class PlpComponent extends React.Component {
   constructor(props) {
     super(props);
+    console.log("aaaaaaaaaa",'constructor');
     this.state = {
       plpItem: null,
       adBannerIndex: 12,
@@ -34,10 +35,13 @@ class PlpComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("aaaaaaaaaa",'componentWillReceiveProps');
+    console.log("aaaaaaaaaa p",nextProps);
     this.parsePLPData(nextProps, true);
   }
 
   componentDidMount() {
+    console.log("aaaaaaaaaa",'componentDidMount');
     this.parsePLPData(this.props, false);
   }
 

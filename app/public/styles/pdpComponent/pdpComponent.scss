@@ -445,6 +445,14 @@
                 font-family: $font-bold;
                 padding: 0 0 5px 0;
             }
+            .couponCode{
+                color:$cerulean;
+                font-family: $font-bold;
+            }
+            .emiDetails{
+                color:$cerulean;
+                font-family: $font-medium;
+            }
             .link{
                 color:$cerulean;
                 font-family: $font-bold;
@@ -2075,6 +2083,11 @@
                 .addCart{
                     width: 45%;
                     float: left;
+                    .errorMessage{
+                        top: -24px;
+                        right:15px;
+                        position: absolute;
+                    }
                     .addcartbtn, .notifybtn{
                         width:100%;
                     }

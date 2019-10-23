@@ -253,6 +253,13 @@ class ChangePassword extends React.Component {
     this.props.resetRWDHeaderFlag(true);
   }
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.saveBtnPressed();
+    }
+  }
+
   render() {
     let errorItemCurrent = null;
     if (this.state.errorCurrent) {
@@ -275,6 +282,7 @@ class ChangePassword extends React.Component {
               className="form-control newinputmargin"
               inputType={this.state.inputType}
               title="Current Password"
+              onKeyPress={this.onKeyPress}
               name="text"
               id="current"
               placeholder="Enter Current Password"
@@ -305,6 +313,7 @@ class ChangePassword extends React.Component {
               title="New Password"
               name="email"
               id="new"
+              onKeyPress={this.onKeyPress}
               placeholder="Enter New Password"
               value={this.state.inputTextNew}
               handleChange={this.handleInputChange.bind(this)}
