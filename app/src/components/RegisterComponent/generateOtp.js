@@ -98,7 +98,7 @@ class GenerateOtp extends React.Component {
                 errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>
             }
             else{
-                errorItem = <div className='col-md-7'><p className='error-msg-otp-web'>{this.state.errorMessage}</p></div>
+                errorItem = <div className='col-md-8'><p className='error-msg-otp-web'>{this.state.errorMessage}</p></div>
             }
                
         }
@@ -108,11 +108,11 @@ class GenerateOtp extends React.Component {
         }
         else{
             if(errorItem==null)
-                errorItem = (<div className="col-md-7"><p className='error-msg-otp-web'> </p></div>)
+                errorItem = (<div className="col-md-8"><p className='error-msg-otp-web'> </p></div>)
             
             content = (<div className="row">
                         {errorItem}
-                        <div className="col-md-5">
+                        <div className="col-md-4">
                             <Button onClick={this.resendOTP.bind(this)} className='resend-otp-web'>{RESEND_OTP}</Button>
                         </div>
                        </div>)   
