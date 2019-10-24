@@ -111,7 +111,8 @@ export default class App extends React.Component {
     this.getIPData();
   }
 
-  componentWillUpdate() {
+  componentWillUpdate() 
+  {
     let header = document.getElementById("header");
     let pathurl=window.location.href;
     if(header) {
@@ -271,21 +272,18 @@ export default class App extends React.Component {
 	   }
   	}
   
-  getCurrentLocation() {
+  getCurrentLocation() 
+  {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     }
     function showPosition(position) { }
-    }
+  }
 
-  /* checkCookiePolicyPopup() {
-    if (appCookie.get('isCookiePolicy') === 'true' && window.location.pathname !== '/') {
-      appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
-    } 
-  } */
-
-  checkSearchInput() {
-    if (window.location.pathname !== '/search' && document.getElementById("searchInput")) {
+  checkSearchInput() 
+  {
+    if(window.location.pathname !== '/search' && document.getElementById("searchInput")) 
+	{
       document.getElementById("searchInput").value='';     
       const crossbtn = document.getElementById('clearField');
       if (crossbtn) {
@@ -293,14 +291,12 @@ export default class App extends React.Component {
       }
     }
   }
-  
-  
 
-  render() {
+  render() 
+  {
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
-    // this.checkCookiePolicyPopup();
     this.checkSearchInput();
     
     let newsletterItem;
@@ -315,11 +311,13 @@ export default class App extends React.Component {
       <div>
          {appCookie.get('isCookiePolicy') === 'true' ? <CookiePopup /> : null}
         {newsletterItem}
-        {window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
-          <LightHeader />
-        ) : (
-          <HeaderContainer />
-        ) }
+        {
+			window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
+				  <LightHeader />
+				) : (
+				  <HeaderContainer />
+				) 
+		}
         {/* {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
           <LightHeader />
         ) : (
@@ -327,8 +325,8 @@ export default class App extends React.Component {
         )} */}
         
         {/* <HeaderContainer /> */}
-		<div id="mainContainer">
-    <LastLocationProvider>
+	  <div id="mainContainer">
+		<LastLocationProvider>
         <Switch>
         
           <Route exact path="/" component={HomePageContainer} />
@@ -358,8 +356,6 @@ export default class App extends React.Component {
           <Route path="/chef-kitchen" component={SteelChefKitchen} />
           <Route path="/willow-kitchen" component={WillowKitchen} />
           <Route path="/shipping" component={Shipping} />
-
-      
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy-policy" component={privacyPolicy} />
