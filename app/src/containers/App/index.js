@@ -335,7 +335,7 @@ export default class App extends React.Component {
 		  <Route path="/rooms-wardrobes" component={WardrobesContainer} />
 		  <Route path="/rooms-wardrobes_S" component={WardrobesContainer} />
           <Route path="/rooms-:id" component={ClpContainer} />
-          <Route path="/furniture/:id" component={PlpContainer} />
+          <Route path="/furniture-:id" component={PlpContainer} />
           <Route path="/pdp/:productId/:skuId" component={PdpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />

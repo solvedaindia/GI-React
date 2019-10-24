@@ -41,10 +41,12 @@ export class HeaderContainer extends React.Component {
   render() {
     
     let searchStr = '';
+	let dataVal = '';
     if (document.getElementById('searchInput')) {
        searchStr = document.getElementById('searchInput').value;
-    }
-    const dataVal = <Helmet>
+	}
+	if (searchStr != '') {
+	    dataVal = <Helmet>
           <script data-react-helmet="true" type="application/ld+json">
             {`[{
               "@context": "http://schema.org",
@@ -59,7 +61,21 @@ export class HeaderContainer extends React.Component {
             `}
           </script>
 		  
-        </Helmet>
+       </Helmet>
+    }
+	else{
+		dataVal = <Helmet>
+		 <script data-react-helmet="true" type="application/ld+json">
+            {`[{
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "url": "${webUrl}"
+			  }]
+            `}
+		   </script>
+       </Helmet>
+	}
+   
     if (isMobile()) {
       return (
         <>

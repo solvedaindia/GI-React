@@ -66,7 +66,9 @@ return (
 		</Helmet>
 		  <ChefKitchenBanner />
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
-		  <KitchenConfiguration/>
+		  <div className="steel-chef-configuration">
+			<KitchenConfiguration/>
+		  </div>
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_SHUTTERS' } />
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_ACCESSORIES' } />
 		  <div className="formContainer">
