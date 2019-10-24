@@ -159,7 +159,7 @@ export class PlpContainer extends React.Component {
       this.fetchPLPProductsData();
     }
     if (nextProps.updatedFilter !== this.props.updatedFilter) {
-      let params2 = new URLSearchParams(this.props.location.search);
+      let params2 = new URLSearchParams(nextProps.location.search);
       if (nextProps.updatedFilter === '') {
         params2.delete('filter');
       } else {
