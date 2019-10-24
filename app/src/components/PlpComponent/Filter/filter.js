@@ -99,6 +99,7 @@ class Filter extends React.Component {
   }
 
   onCheckBoxClick(index) {
+    //alert(index)
     const selectedFacet = this.props.dataPro.facetValues[index];
 
     let filteredArr = [...this.state.facetArr];
@@ -139,6 +140,12 @@ class Filter extends React.Component {
         });
       }
     }
+  }
+
+  onLabelClick(ref)
+  {
+    alert("aaa");
+    console.log(ref);
   }
 
   onFacetChange(isToggle) {
@@ -304,6 +311,7 @@ class Filter extends React.Component {
     const item = this.props.dataPro.facetValues.map((option, i) => {
       let checkboxItem;
       let customSelectionBoxId;
+      let reference = React.createRef();
       if (alreadyAddedFiltersArr.includes(option.value)) {
         customSelectionBoxId = `selected_${this.props.dataPro.facetName}${i}`;
         checkboxItem = (
@@ -314,6 +322,7 @@ class Filter extends React.Component {
             onChange={evt => this.onCheckBoxClick(i)}
             defaultChecked
             type="checkbox"
+            ref={reference}
             id={customSelectionBoxId}
             name="scales"
           />
@@ -329,6 +338,7 @@ class Filter extends React.Component {
             type="checkbox"
             id={customSelectionBoxId}
             name="scales"
+            ref={reference}
             disabled={option.count === 0 ? true : false}
           />
         );
@@ -395,7 +405,7 @@ class Filter extends React.Component {
               </div>
             )
               : (
-                <div className={option.count === 0 ? 'label_text label_text_disable' : 'label_text'}>
+                <div className={option.count === 0 ? 'label_text label_text_disable' : 'label_text'} onClick={()=>{if(option.count !== 0 ){reference.current.checked=!reference.current.checked; this.onCheckBoxClick(i)}}}>
                   {option.label} <span className='filterCount'> {option.count}</span>
                 </div>
               )}
