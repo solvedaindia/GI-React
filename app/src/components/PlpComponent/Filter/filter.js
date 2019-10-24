@@ -400,7 +400,7 @@ class Filter extends React.Component {
             </div>
 
             {!isMobile() ? (
-              <div className={option.count === 0 ? 'label_text label_text_disable' : 'label_text'} onClick={()=>{if(option.count !== 0 ){reference.current.checked=!reference.current.checked; this.onCheckBoxClick(i)}}}>
+              <div className={option.count === 0 ? 'label_text label_text_disable' : 'label_text'}>
                 {`${option.label} (${option.count})`}
               </div>
             )
