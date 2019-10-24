@@ -38,8 +38,8 @@ export class ComparePageContainer extends React.Component {
   componentDidMount() {
     this.state.compWidgetData = [];
     let updatedCompData = this.props.updatedCompData;
-    if (this.props.updatedCompData.length === 0 && appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct')).length > 0) {
-      updatedCompData = JSON.parse(appCookie.get('compareProduct'));
+    if (this.props.updatedCompData.length === 0 && appCookie.get('compareProductTemp') && JSON.parse(appCookie.get('compareProductTemp')).length > 0) {
+      updatedCompData = JSON.parse(appCookie.get('compareProductTemp'));
     }
     if(!updatedCompData || updatedCompData.length <2){
       this.props.history.push('/');
@@ -48,6 +48,7 @@ export class ComparePageContainer extends React.Component {
       this.state.compWidgetData.push(element.skuId);
       this.state.swatchIndex.push(element.skuId);
     });
+    
     this.callCompareApi();
   }
 
@@ -66,8 +67,8 @@ export class ComparePageContainer extends React.Component {
     var ids = this.state.compWidgetData;
     var token = appCookie.get('accessToken');
     let cookieIdArray = new Array();
-    if (ids.length === 0 && appCookie.get('compareProduct') && JSON.parse(appCookie.get('compareProduct'))) {
-      JSON.parse(appCookie.get('compareProduct')).map(dataId => {
+    if (ids.length === 0 && appCookie.get('compareProductTemp') && JSON.parse(appCookie.get('compareProductTemp'))) {
+      JSON.parse(appCookie.get('compareProductTemp')).map(dataId => {
         cookieIdArray.push(dataId.skuId);
       });
       ids = cookieIdArray;
@@ -124,6 +125,7 @@ export class ComparePageContainer extends React.Component {
     let finalMap = params.toString();
     this.props.history.push({ search: finalMap });
   }
+  
 
   goBack = () => {
     this.props.history.goBack();
