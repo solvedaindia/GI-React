@@ -185,13 +185,23 @@ class Invoice extends React.Component {
 		html2canvas(input)
 		  .then((canvas) => {
 			const imgData = canvas.toDataURL('image/png');
-			const pdf = new jsPDF('p', 'px', 'a4');
-            var width = pdf.internal.pageSize.getWidth();
-            var height = pdf.internal.pageSize.getHeight();
-			pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
-			pdf.save("invoice.pdf");
-		  })
-		;
+			const pdf = new Promise((resolve,reject)=>{
+				const pdfRes = new jsPDF('p', 'px', 'a4');
+				if(pdfRes){
+					resolve(pdfRes);
+				}else{
+					reject(pdfRes)
+				}
+			}) 
+			pdf.then(result=>{
+				var width = result.internal.pageSize.getWidth();
+				var height = result.internal.pageSize.getHeight();
+				result.addImage(imgData, 'JPEG', 0, 0, width, height);
+				result.save("invoice.pdf");
+			}).catch(err=>{
+				console.log(":::",err);
+			})
+          });
 	  }
 	   printDocument() {
         var divContents = document.getElementById("invoiceDivHtml").innerHTML; 
