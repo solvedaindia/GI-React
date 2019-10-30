@@ -16,6 +16,7 @@ import {
   EMAIL_MOBILE_NUM,
   AN_OTP,
 } from '../../constants/app/footerConstants';
+import ProgressButton from '../Button/progressButton'
 
 class ForgotPasswordEmailMobile extends React.Component {
   constructor() {
@@ -28,6 +29,7 @@ class ForgotPasswordEmailMobile extends React.Component {
       inputText: null,
       isValidate: false,
       preFilledUserId: null,
+      isProcessing:false
     };
     this.onRegisterRedirectClick = this.onRegisterRedirectClick.bind(this);
   }
@@ -50,6 +52,7 @@ class ForgotPasswordEmailMobile extends React.Component {
 
     const input = String(this.state.inputText);
     const firstChar = Number(input.charAt(0));
+
     if (!input.includes('@') && Number.isInteger(firstChar)) {
       if (!regexMobileNo.test(this.state.inputText)) {
         this.setState({
@@ -67,7 +70,10 @@ class ForgotPasswordEmailMobile extends React.Component {
       });
       return;
     }
-
+    if(this.state.isProcessing)
+    {
+      return
+    }
     this.setState({
       isValidate: true,
     });
@@ -76,13 +82,16 @@ class ForgotPasswordEmailMobile extends React.Component {
       user_id: this.state.inputText,
       forgot_password: 'true',
     };
+    this.setState({isProcessing:true})
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
         const nextComp = 'ForgotPasswordOTP';
+        this.setState({isProcessing:false})
         this.props.handlerPro(nextComp, this.state.inputText, null);
       })
       .catch(error => {
+        this.setState({isProcessing:false})
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
         const errorKey = errorData.error.error_key;
@@ -178,13 +187,22 @@ class ForgotPasswordEmailMobile extends React.Component {
             <p className="text text-emailotp">{AN_OTP} </p>
           </FormGroup>
         </Form>
-          <Button
+          {/* <Button
             type="submit"
             onClick={this.proceedBtnPressed.bind(this)}
             className="btn-block btn-bg"
           >
-            {PROCEED}
-          </Button>
+            {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+                          <li>{PROCEED}</li>
+                          <li> <div className="loadingdots-on-button">
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            </div>
+                          </li>
+                      </ul>:PROCEED }
+          </Button> */}
+          <ProgressButton isProcessing = {this.state.isProcessing} title={PROCEED} onClickEvent={this.proceedBtnPressed.bind(this)} styleClassName = "btn-block btn-bg"/>
       </div>
     );
   }
