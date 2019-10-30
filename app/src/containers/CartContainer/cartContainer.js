@@ -13,6 +13,9 @@ import {
 } from '../../utils/utilityManager';
 import reducer from './reducer';
 import saga from './saga';
+import appCookie from '../../utils/cookie';
+import {getCookie} from '../../utils/utilityManager';
+import apiManager from '../../utils/apiManager';
 import { getCartDetails } from './action';
 import { imagePrefix } from '../../../public/constants/constants';
 import EmptyCart from '../../components/Cart/emptyCart';
@@ -32,6 +35,7 @@ import EMIVal from '../../components/Cart/emiPrice';
 import ContentEspot from '../../components/Primitives/staticContent';
 import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
+import { cartDeleteItemAPI, addToWishlist } from '../../../public/constants/constants';
 
 import {
   YOUR_CART,
@@ -57,11 +61,16 @@ class CartDetail extends React.Component {
     super(props);
     this.state = {
       showReply: false,
+      abc: false,
     }
+    this.addToWishlistApi = this.addToWishlistApi.bind(this);
   }
 
   componentDidMount() {
     this.props.getCartDetails();
+    if(getCookie('isLoggedIn') === 'true' && getCookie('wishListUniqueId') !== undefined && getCookie('wishListUniqueId') !== null && getCookie('wishListUniqueId') !== ''){
+			this.addToWishlistApi();
+		}
   }
 
   handleOnClick(e) {
@@ -69,10 +78,54 @@ class CartDetail extends React.Component {
     this.setState({ showReply: !this.state.showReply })
   }
 
+  addToWishlistApi(){
+    const wishlistId = appCookie.get('wishListUniqueId')
+		const data = {
+			sku_id: wishlistId,
+		};
+		apiManager
+			.post(addToWishlist, data)
+			.then(response => {
+        appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+				appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+        }).catch(error => {
+				
+		});
+  }
+
+  // handleDeleteItem() {
+  //     const orderId = appCookie.get('orderItemId');
+  //   	const data = {
+  //   	orderItemId: orderId,
+  //   	};
+  //   	apiManager
+  //   	.post(cartDeleteItemAPI, data)    	
+  //     .then(response => {
+  //       appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+  //       appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+  //       this.setState({abc: true});
+  //     })
+  //   	.catch(error => {
+    		
+  //   	});
+  //   }
+
   render() {
     const { cartData } = this.props;
     if (!cartData) return null;
     let disableCheckout = false;
+
+
+    let isSaveForLater = appCookie.get('saveForLaterClicked');
+    let wishListId = appCookie.get('wishListUniqueId');
+    if (isSaveForLater === 'false' && wishListId !== '') {
+      // this.addToWishlistApi();
+      return (
+        <>
+        </>
+      );
+    }
+
     return (
       !!cartData.cartItems && !!cartData.cartItems.length
         ?
@@ -238,13 +291,31 @@ class CartDetail extends React.Component {
   }
 }
 
+
+
+const mapStateToProps = state => {
+  const stateObj = getReleventReduxState(state, 'cart');
+  return {
+    cartData: stateObj,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getCartDetails: () => dispatch(getCartDetails()),
+});
+
+// const withConnect = connect(
+//   (state) => ({
+//     cartData: getReleventReduxState(state, 'cart')
+//   }),
+//   {
+//     getCartDetails,
+//   }
+// );
+
 const withConnect = connect(
-  (state) => ({
-    cartData: getReleventReduxState(state, 'cart')
-  }),
-  {
-    getCartDetails,
-  }
+  mapStateToProps,
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'cart', reducer });
