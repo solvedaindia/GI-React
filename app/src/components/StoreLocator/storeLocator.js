@@ -384,7 +384,7 @@ class StoreLocator extends React.Component {
                             >
                                 {this.state.Infokey === index && this.state.isOpen &&
                                     <InfoWindow onCloseClick={() => this.handleToggleClose}>
-                                        <div>
+                                        <div style={{margin: "10px"}}>
                                             <h4>{item.storeName}</h4>
                                             {this.props.history.location.state.pincode &&
                                                 <p>{data} Km</p>
