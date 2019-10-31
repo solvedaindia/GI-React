@@ -103,8 +103,10 @@ export class PlpContainer extends React.Component {
 
   componentDidMount() {
     categoryId = '';
+	console.log('plpSubCatData 1' , this.props.location.pathname);
+	console.log('plpSubCatData 2' , this.props.location.pathname.replace('/furniture-', ''));
     const path = String(this.props.location.pathname);
-    const idStr = path.split('/')[2];
+    const idStr = this.props.location.pathname.replace('/furniture-', '');
     if (idStr != undefined && idStr !== categoryId) {
       categoryId = idStr;
     }
@@ -204,7 +206,8 @@ export class PlpContainer extends React.Component {
       }
     } else if (nextProps.location.pathname !== this.props.location.pathname) {
       const nextPath = String(nextProps.location.pathname);
-      const nextIdStr = nextPath.split('/')[2];
+	  console.log(nextPath);
+      const nextIdStr = nextPath.replace('/furniture-', '')
 
       if (nextIdStr != undefined && nextIdStr !== categoryId) {
         categoryId = nextIdStr
@@ -574,7 +577,7 @@ export class PlpContainer extends React.Component {
         <SubCategories subCategoryData={this.state.plpSubCatData} />
       );
     }
-    console.log("aaaaaaaaaa","Plp container");
+    console.log('plpSubCatData' , plpSubCatData);
     let plpProducts;
     if (plpData.length != 0) {
       itemData = createPlpItemData(plpData);

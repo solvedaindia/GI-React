@@ -3,6 +3,29 @@
 @import '../base.scss';
 @import '../variable';
 
+.error-msg-otp-web {
+    color:$reddishpink;
+    font-size: 12px;
+    line-height: 13px;
+    bottom: 0;
+    margin: 0px -20px 0px 0px;
+    text-align: left;
+    bottom: -5px;
+
+}
+.resend-otp-web
+{
+    bottom: 3px;
+    float: right;
+    right:0px;
+    background: transparent;
+    border: none;
+    margin: 0px 0px 0px -12px;
+    color:$ceruleanblue;
+    font-family: $font-bold;
+    font-size: 12px;
+}
+
 .modal-wrapperjoinus{
     .modal-dialog{ 
         max-width: 450px;

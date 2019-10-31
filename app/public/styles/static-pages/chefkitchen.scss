@@ -5,12 +5,22 @@
 .chefKitchen {
     width: 100%;
     background-color: #ffffff;
-    .Paragraph-Copy-13 {
+    .Paragraph-Copy-13, .steel-chef-configuration {
  
       font-family: $font-regular;
       font-size: 14px;
       font-style: normal;
       color: $greyish;
+	  .slick-slider {
+			padding-left: 5%;
+			padding-right: 5%;
+			.slick-prev {
+				left: -10px;
+			}
+			.slick-next {
+				right: -10px;
+			}
+		}
     }
    
     .anchorColor{
@@ -26,6 +36,9 @@
       font-size: 14px;
       font-family: $font-medium;
       color: #036cc5;
+}
+.steel-chef-configuration .container {
+	background-color: #f7f8f8;
 }
 .notSelected{
   letter-spacing: -0.26px;
@@ -156,7 +169,7 @@
     }
     .container {
       position: relative;
-	  width:85%;
+	  width:90%;
     }
     .Benefitedsteel{
       padding: 64px 0 0 0;
@@ -356,14 +369,7 @@
         height:17px;
         font-size:14px;
         text-align: center;
-      }
-     
-     
-        .col-sm-2{
-          width:20% ;
-        }
-      
-      
+      }   
        
         
       .form-controler{
@@ -425,7 +431,7 @@
 
 .configurationTab
 {
-    padding: 0 0 40.5px 218px;
+	margin: 20px 25%;
 	.configuration-tab{
     color: #77787a;
     display: block;
