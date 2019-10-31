@@ -108,7 +108,7 @@ class Invoice extends React.Component {
                                     
 							</div>
 						</div>
-						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '80px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
+						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Billing Name</div>
 								<div className="value">  
