@@ -58,10 +58,10 @@
             .orderID {
                 color: $battleshipGrey;
                 font-size: $base*1.75;
-                margin: $base*3 0 0;
+                margin: $base*3.1 0 0;
             }
             .prodName {
-                padding:10px 0 10px 0;
+                padding:4px 0 26px 0;
                 font-size: $base*2;
                 font-family: $font-medium;
                 line-height: 16px;
@@ -73,6 +73,7 @@
                 font-family: $font-medium;
             }
             .val {
+                padding: 8px 0 0 0;
                 display: block;
             }
             .qtyVal,
@@ -92,7 +93,7 @@
         .link {
             width: 19.5%;
             display: inline-block;
-            margin:45px 0 ;
+            margin:21px 0 ;
             vertical-align: bottom;
             padding: $base;
             background-color: $ashGrey;
