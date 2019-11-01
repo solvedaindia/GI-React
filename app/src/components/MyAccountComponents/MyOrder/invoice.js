@@ -108,7 +108,7 @@ class Invoice extends React.Component {
                                     
 							</div>
 						</div>
-						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '80px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
+						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Billing Name</div>
 								<div className="value">  
@@ -185,13 +185,23 @@ class Invoice extends React.Component {
 		html2canvas(input)
 		  .then((canvas) => {
 			const imgData = canvas.toDataURL('image/png');
-			const pdf = new jsPDF('p', 'px', 'a4');
-            var width = pdf.internal.pageSize.getWidth();
-            var height = pdf.internal.pageSize.getHeight();
-			pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
-			pdf.save("invoice.pdf");
-		  })
-		;
+			const pdf = new Promise((resolve,reject)=>{
+				const pdfRes = new jsPDF('p', 'px', 'a4');
+				if(pdfRes){
+					resolve(pdfRes);
+				}else{
+					reject(pdfRes)
+				}
+			}) 
+			pdf.then(result=>{
+				var width = result.internal.pageSize.getWidth();
+				var height = result.internal.pageSize.getHeight();
+				result.addImage(imgData, 'JPEG', 0, 0, width, height);
+				result.save("invoice.pdf");
+			}).catch(err=>{
+				console.log(":::",err);
+			})
+          });
 	  }
 	   printDocument() {
         var divContents = document.getElementById("invoiceDivHtml").innerHTML; 

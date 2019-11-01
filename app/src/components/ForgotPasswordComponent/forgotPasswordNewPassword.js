@@ -6,6 +6,7 @@ import {
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
+import Input from '../../components/Primitives/input';
 import { regexPw, validateEmptyObject } from '../../utils/validationManager';
 import {ENTER_VALID_PASS, PASSWORD_SHOULD_NOT, SIX_CHARACTER_PASS, NEW_PASS } from '../../constants/app/footerConstants';
 
@@ -21,6 +22,9 @@ class ForgotPasswordNewPassword extends React.Component {
       isShowPass: false,
       inputType: 'password',
       validationImage: '',
+      
+      inputText: '',
+      newPasswordPasteTxt: null,
     };
   }
 
@@ -74,11 +78,22 @@ class ForgotPasswordNewPassword extends React.Component {
       });
   }
 
-  handleInputChange(text) {
-    this.setState({
-      error: false,
-      inputText: text.target.value,
-    });
+  // handleInputChange(text) {
+  //   // this.state.inputText = this.state.newPasswordPasteTxt !== null ? this.state.inputText : value.target.value;
+
+  //   // this.setState({
+  //   //   error: false,
+  //   //   inputText: text.target.value,
+  //   // });
+  // }
+
+  handleInputChange(value) {
+      this.state.inputText = this.state.newPasswordPasteTxt !== null ? this.state.inputText : value.target.value;
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        newPasswordPasteTxt: null,
+      });
   }
 
   showHidePass() {
@@ -93,6 +108,15 @@ class ForgotPasswordNewPassword extends React.Component {
         inputType: 'text',
       });
     }
+  }
+  
+  onPasteText(value) {
+
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        newPasswordPasteTxt: value.clipboardData.getData('text'),
+      });
   }
 
   render() {
@@ -112,14 +136,17 @@ class ForgotPasswordNewPassword extends React.Component {
           <FormGroup className="enternew-password">
             <p className="text">{NEW_PASS}</p>
             <div className="form-div clearfix">
-              <input
-                onChange={this.handleInputChange.bind(this)}
+              <Input
+            
                 type={this.state.inputType}
                 name="text"
                 id="exampleEmail"
                 className="form-control newinputmargin"
                 placeholder="Enter New Password"
                 maxLength={25}
+                value={this.state.inputText}
+                handleChange={this.handleInputChange.bind(this)}
+                onPaste={this.onPasteText.bind(this)}
               />
               {errorItem}
               

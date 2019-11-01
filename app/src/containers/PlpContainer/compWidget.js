@@ -29,9 +29,14 @@ export class CompContainer extends React.Component {
     this.state = {
       showCompare: true,
       modalClass: 'open',
-      isLoading: true
+      isLoading: true,
     };
-    
+    console.log("ali cons",props);
+  }
+
+  shouldComponentUpdate(nextProps, nextState)
+  {
+    return true;
   }
 
   filterCookieData() {
@@ -69,7 +74,7 @@ export class CompContainer extends React.Component {
   }
 
   componentDidMount() {
-
+  
   }
 
   componentWillReceiveProps(newProps) { 
@@ -110,6 +115,10 @@ export class CompContainer extends React.Component {
     if (handleCompData.length < 2) {
       e.preventDefault();
       alert('Please add at least two products to compare');
+    }
+    else{
+      appCookie.set('compareProductTemp', appCookie.get('compareProduct'), 365 * 24 * 60 * 60 * 1000);
+      appCookie.set('compareProduct', '', 365 * 24 * 60 * 60 * 1000);
     }
   }
   clearAll() {

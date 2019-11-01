@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 /* Import Components */
 import Input from '../Primitives/input';
 import Button from '../Button/button';
+//import { Button } from 'react-bootstrap';
+import ProgressButton from '../Button/progressButton'
 import {
   regexEmail,
   regexMobileNo,
@@ -21,7 +23,8 @@ class WelcomeForm extends Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
-      isActive: 'hideData'
+      isActive: 'hideData',
+      isProcessing:false
     };
     this.showHidePass=this.showHidePass.bind(this);
     this.callbackFunc=this.callbackFunc.bind(this);
@@ -90,6 +93,8 @@ class WelcomeForm extends Component {
       return false;
     }
 
+    this.setState({isProcessing:true})
+
     const data = {
       user_id: this.state.userId,
       password: this.state.password,
@@ -100,6 +105,7 @@ class WelcomeForm extends Component {
   callbackFunc(res) {
     this.setState({
       errorMessagePassword: res,
+      isProcessing:false
     });
     isValidate = false;
   }
@@ -180,7 +186,8 @@ class WelcomeForm extends Component {
         </div>
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
-        <Button type="primary" title="Log In" />
+        {/* <Button type="primary" title="Log In"></Button> */}
+         <ProgressButton isProcessing = {this.state.isProcessing} title="Log In" onClickEvent={this.handleFormSubmit} styleClassName = "formBtn"/> 
         {/* Submit */}
       </form>
     );

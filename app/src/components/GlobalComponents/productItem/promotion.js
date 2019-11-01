@@ -16,14 +16,14 @@ class Promotions extends React.Component {
       const boldStr = <span className="bold">{this.props.discount + PERCENT_OFF}</span>
       discountAccessoriesItem = (
         // <span className="free-accessories">{parseInt(this.props.discount) < 2 ? null : boldStr} {this.props.promoData !== '' || this.props.discount !== '' ? '&' : ''} {this.props.promoData !== '' ? this.props.promoData : null}</span>
-        <span className="free-accessories">{parseInt(this.props.discount) < 2 ? null : boldStr} {this.props.promoData !== '' && this.props.discount !== '' ? '&' : ''}</span>
+        <span>{parseInt(this.props.discount) < 2 ? null : boldStr} {this.props.promoData !== '' && this.props.discount !== '' && parseInt(this.props.discount) > 2 ? '& ' : ''}</span>
       );
     }
 
     let promoItem = null;
     if (this.props.promoData !== '') {
       promoItem = (
-        <span className="free-accessories">{this.props.promoData}</span>
+        <span>{this.props.promoData}</span>
       );
     }
     

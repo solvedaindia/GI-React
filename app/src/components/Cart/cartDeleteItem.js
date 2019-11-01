@@ -9,6 +9,7 @@ import {SAVE_FOR_LATER } from '../../constants/app/cartConstants';
 import {REMOVE } from '../../constants/app/cartConstants';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import {getCookie} from '../../utils/utilityManager';
+import appCookie from '../../utils/cookie';
 
 
 class DeleteCartItem extends React.Component {
@@ -18,12 +19,19 @@ class DeleteCartItem extends React.Component {
 			show: false,
 			wishlistPopup: null,
 			isWelcomeBack: false,
-			isCartModal: false
+			isCartModal: false,
 		}
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleMoveToWishList = this.handleMoveToWishList.bind(this);
+		this.addToWishlistApi = this.addToWishlistApi.bind(this);
+	}
+
+	componentDidMount(){
+		if(getCookie('isLoggedIn') === 'true' && getCookie('wishListUniqueId') !== undefined && getCookie('wishListUniqueId') !== null && getCookie('wishListUniqueId') !== ''){
+			this.addToWishlistApi();
+		}
 	}
 
 	handleChange() {
@@ -33,10 +41,11 @@ class DeleteCartItem extends React.Component {
 		const data = {
 		orderItemId: this.props.orderItemId,
 		};
+		console.log('order ID -----', this.props.orderItemId)
 		apiManager
 		.post(cartDeleteItemAPI, data)
 		.then(response => {
-			this.props.getCartDetails();
+				// this.props.getCartDetails();
 			this.handleClose();
 		})
 		.catch(error => {
@@ -48,27 +57,19 @@ class DeleteCartItem extends React.Component {
 	}
 	handleMoveToWishList() {
 		if(getCookie('isLoggedIn') === 'true') {
+			appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+			appCookie.set('orderItemId', this.props.orderItemId , 365 * 24 * 60 * 60 * 1000);
 			this.setState({isWelcomeBack: false, isCartModal: true});
 		} else if(getCookie('isLoggedIn') !== 'true'){
+			appCookie.set('saveForLaterClicked', true , 365 * 24 * 60 * 60 * 1000);
+			console.log('order ID -----', this.props.orderItemId)
+			appCookie.set('orderItemId', this.props.orderItemId , 365 * 24 * 60 * 60 * 1000);
 			this.handleClose();
 			this.setState({isWelcomeBack: true, isCartModal: false})
 		}
-
-	const data = {
-		sku_id: this.props.uniqueID,
-	};
-	apiManager
-		.post(addToWishlist, data)
-		.then(response => {
-			this.handleDeleteItem();
-			this.handleClose();
-			})
-			.catch(error => {
-			this.setState({
-				error,
-				isLoading: false,
-			});
-		});
+		appCookie.set('wishListUniqueId', this.props.uniqueID , 365 * 24 * 60 * 60 * 1000);
+		this.handleDeleteItem();
+		this.addToWishlistApi();
 	}
   	/* Handle Modal Close */
 	handleClose() {
@@ -79,8 +80,29 @@ class DeleteCartItem extends React.Component {
 		this.setState({ show: true, isCartModal: false });
 	}
 
-	UNSAFE_componentWillReceiveProps() {
-		this.setState({isWelcomeBack: false, isCartModal: false});
+	addToWishlistApi(){
+		if(getCookie('isLoggedIn') !== 'true') {
+			return;
+		}
+		const data = {
+			sku_id: this.props.uniqueID,
+		};
+		apiManager
+			.post(addToWishlist, data)
+			.then(response => {
+				// this.handleDeleteItem();
+				// this.handleClose();
+				appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+				appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+				// this.props.getCartDetails();
+				window.location.reload();
+				})
+				.catch(error => {
+				this.setState({
+					error,
+					isLoading: false,
+				});
+		});
 	}
 
 	resetLoginValues() {

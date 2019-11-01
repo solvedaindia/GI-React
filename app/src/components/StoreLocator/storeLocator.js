@@ -19,6 +19,7 @@ import { isMobile } from '../../utils/utilityManager';
 import { Helmet } from 'react-helmet'
 import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
+import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
 
 
 import { DIRECTIONS } from '../../constants/app/primitivesConstants';
@@ -158,11 +159,32 @@ class StoreLocator extends React.Component {
 
 
     /* handle toggle */
-    handleToggleOpen = (index) => {
-        this.setState({
-            isOpen: true,
-            Infokey: index
-        });
+    handleToggleOpen = (index,siwRef) => {
+        
+        siwRef.current.openWindow();
+        if(this.lastOpenWindow!=null )
+        {
+            this.lastOpenWindow.current.onCloseWindow();
+        }
+        if(this.lastIndex==index)
+        {
+            this.lastOpenWindow=null;
+            this.lastIndex=-1;
+        }
+        else{
+            this.lastOpenWindow=siwRef;
+            this.lastIndex=index;
+        }
+        
+        // this.setState({
+        //     isOpen: true,
+        //     Infokey: index
+        // });
+    }
+    onInfoWindowClose()
+    {
+        //console.log("lasec",lastOpenWindow)
+        this.lastOpenWindow=null;
     }
 
     /* remove active class from filter */
@@ -369,6 +391,7 @@ class StoreLocator extends React.Component {
                 {storeData.map((item, index) => {
                     const data = this.getDistance(this.state.defaultLat, this.state.defaultLng, item.latitude, item.longitude);
                     let iconType = orangeIcon;
+                    const siwRef=React.createRef();
                     if (item.storeName === 'Godrej Interio Store') {
                         iconType = blueIcon;
                     }
@@ -376,13 +399,22 @@ class StoreLocator extends React.Component {
                         
                         <div key={index}>
                             <Marker
-                                onClick={() => this.handleToggleOpen(index)}
+                                onClick={() => this.handleToggleOpen(index,siwRef)}
                                 position={{ lat: parseFloat(item.latitude), lng: parseFloat(item.longitude) }}
                                 icon={{
                                     url: iconType,
                                 }}
                             >
-                                {this.state.Infokey === index && this.state.isOpen &&
+
+                                <StoreInfoWindow handleToggleClose ={this.handleToggleClose}
+                                        ref = {siwRef}
+                                        isOpen = {this.state.isOpen}
+                                        storeName = {item.storeName}
+                                        pincode = {this.props.history.location.state.pincode}
+                                        data = {data}
+                                        onWindowClose={()=>this.onInfoWindowClose()}
+                                        storeHours={item.storeHours} />
+                                {/* {this.state.Infokey === index && {this.state.isOpen} &&
                                     <InfoWindow onCloseClick={() => this.handleToggleClose}>
                                         <div style={{margin: "10px"}}>
                                             <h4>{item.storeName}</h4>
@@ -404,7 +436,7 @@ class StoreLocator extends React.Component {
 											
                                         </div>
                                     </InfoWindow>
-                                }
+                                } */}
                             </Marker>
                         </div>
                     )

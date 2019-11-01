@@ -27,11 +27,14 @@ class PdpContainer extends React.Component {
   }
 
 	callPdpApi() {
-		const skuId = this.props.match.params.skuId;
+    let splitedPathName = window.location.pathname.split("/");
+    const partNumber = splitedPathName[splitedPathName.length - 1];
+    const skuId = this.props.match.params.skuId;
+    
 		apiManager.get(pdpApi2 + skuId).then(response => {
 			this.setState({
         pdp: response.data,
-        title: !!response.data.data.skuData && response.data.data.skuData ? response.data.data.skuData[0].pageTitle : '',
+        title: !!response.data.data.skuData && response.data.data.skuData ? response.data.data.skuData.filter(ele => ele.partNumber === partNumber)[0].pageTitle : '',
 				pdpLoading: false,
       });
 			if (appCookie.get('isPDPAddToCart') === null) {

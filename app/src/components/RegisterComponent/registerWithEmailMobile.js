@@ -5,6 +5,8 @@ import {
   generateOTPAPI,
 } from '../../../public/constants/constants';
 import '../../../public/styles/registerComponent/registerComponent.scss';
+import '../../../public/styles/compWidget.scss';
+import ProgressButton from '../Button/progressButton'
 import {
   regexEmail,
   regexMobileNo,
@@ -37,7 +39,8 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
-      isActive: 'hideData'
+      isActive: 'hideData',
+      isProcessing:false
 	};
 	this.callbackFunc = this.callbackFunc.bind(this);
   }
@@ -140,10 +143,10 @@ class RegisterWithEmailMobile extends React.Component {
    
     const isValidate = this.handleValidation(this.state, true);
 
-    if (isValidate === false) {
+    if (isValidate === false || this.state.isProcessing===true) {
       return false;
     }
-
+    this.setState({isProcessing:true});
     const data = {
       name: this.state.name,
       user_id: this.state.userId,
@@ -189,12 +192,14 @@ class RegisterWithEmailMobile extends React.Component {
   callbackFunc(errorMsg) {
   if (errorMsg === 'userid and password cannot be same') {
 	this.setState({
-		errorMessagePassword: errorMsg
+    errorMessagePassword: errorMsg,
+    isProcessing:false
 	});
 
   } else {
 	this.setState({
-		errorMessageUserId: errorMsg
+    errorMessageUserId: errorMsg,
+    isProcessing:false
 	});
   }
   }
@@ -331,12 +336,28 @@ class RegisterWithEmailMobile extends React.Component {
                     </div>
                   </FormGroup>
                   <FormGroup>
-                    <Button
+                    
+                    {/* <Button
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
-                    >
-                      {REGISTER}
-                    </Button>
+                      >
+                      {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+                          <li>{REGISTER}</li>
+                          <li> <div className="loadingdots-on-button">
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            </div>
+                          </li>
+                      </ul>:REGISTER }
+                      
+                    </Button> */}
+                          
+                    <ProgressButton isProcessing = {this.state.isProcessing} title={REGISTER} onClickEvent={this.handleSubmit} styleClassName = "btn-block btn-bg"/>
+                   
+                          
+                    
+                    
                     <p className="have-account">
                    {ALREADY_HAVE_PASSWORD + ' '}
                       <a
