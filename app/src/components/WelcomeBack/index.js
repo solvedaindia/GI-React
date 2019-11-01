@@ -6,6 +6,7 @@ import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 import WelcomeBackForm from '../WelcomeBackForm';
+import { isMobile } from '../../utils/utilityManager';
 import {
   facebookAppId,
   googleClientId,
@@ -41,6 +42,9 @@ class WelcomeBack extends React.Component {
       userType: 'Hello Guest!',
       isFacebookClicked: false,
     };
+    this.windowModelRef=React.createRef();
+    this.modalRef=React.createRef();
+    this.isOutSide=false;
   }
 
   handleClose() {
@@ -165,22 +169,111 @@ class WelcomeBack extends React.Component {
     this.props.callbackPro(false);
     this.setState({ show: false, message: null });
   }
+  
+  trackMouseMovement=(event)=>{
+    console.log(event);
+  }
+
+  trackMouseUp=(event)=>{
+  
+    let winWidth=window.innerWidth/2;
+    let comWidth=this.modalRef.current.offsetWidth/2;
+
+    let winHieght=window.innerHeight/2;
+    let comHeight=this.modalRef.current.offsetHeight/2;
+
+    if( (event.clientX<winWidth-comWidth && this.isOutSide) ||
+          (event.clientX>winWidth+comWidth && this.isOutSide) ||
+          (event.clientY<winHieght-comHeight && this.isOutSide) ||
+          (event.clientY>winHieght+comHeight && this.isOutSide) )
+    {
+       this.props.resetCallbackPro();
+       this.setState({ show: false});
+    }
+    // if(event.clientX>winWidth+comWidth && this.isOutSide)
+    // {
+    //   this.props.resetCallbackPro();
+    //   this.setState({ show: false });
+    // }
+
+    // if(event.clientY<winHieght-comHeight && this.isOutSide)
+    // {
+    //    this.props.resetCallbackPro();
+    //    this.setState({ show: false});
+    // }
+    // if(event.clientY>winHieght+comHeight && this.isOutSide)
+    // {
+    //   this.props.resetCallbackPro();
+    //   this.setState({ show: false });
+    // }
+
+
+  }
+
+  trackMouseDown=(event)=>{
+    console.log("down ",event.clientX +" "+event.clientY );
+    this.isOutSide=false;
+    let winWidth=window.innerWidth/2;
+    let comWidth=this.modalRef.current.offsetWidth/2;
+
+    let winHieght=window.innerHeight/2;
+    let comHeight=this.modalRef.current.offsetHeight/2;
+
+    console.log("clickeArea p1",window.innerHeight/2);
+    console.log("clickeArea p2",this.modalRef.current.offsetHeight/2);
+    console.log("clickeArea p3",event.clientY );
+    
+    if((event.clientX<winWidth-comWidth) ||
+        (event.clientX>winWidth+comWidth) ||
+        (event.clientY<winHieght-comHeight) ||
+        (event.clientY>winHieght+comHeight) )
+    {
+      this.isOutSide=true;
+    }
+    // if(event.clientX>winWidth+comWidth)
+    // {
+    //   this.isOutSide=true;
+    // }
+
+
+    // if(event.clientY<winHieght-comHeight)
+    // {
+    //   this.isOutSide=true;
+    // }
+    // if(event.clientY>winHieght+comHeight)
+    // {
+    //   this.isOutSide=true;
+    // }
+    if(isMobile())
+    {
+      this.isOutSide=false;
+    }
+
+    console.log("clickeArea",this.isOutSide);
+
+  }
+
 
   render() {
     let message = null;
     if (this.state.message) {
       message = <p>{this.state.message}</p>;
     }
+    //onMouseMove={this.trackMouseMovement}
     return (
-      <div>
+      <div id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
 
         <Modal
+          ref={this.windowModelRef}
           className="welcomeBack"
           size="lg"
           animation={false}
           show={this.state.show}
           onHide={this.handleClose}
-        >
+          backdrop = {false}
+          
+          >
+          <div ref= {this.modalRef}>
           {message}
           <Modal.Header closeButton>
             <div className="smallLogo">
@@ -188,7 +281,7 @@ class WelcomeBack extends React.Component {
             </div>
             <Modal.Title>Welcome Back</Modal.Title>
           </Modal.Header>
-          <div className="socialLogin">
+          <div className="socialLogin"  >
             <GoogleLogin
               clientId={googleClientId}
               render={renderProps => (
@@ -247,6 +340,7 @@ class WelcomeBack extends React.Component {
               Register
             </Button>
           </p>
+          </div>
         </Modal>
       </div>
     );
