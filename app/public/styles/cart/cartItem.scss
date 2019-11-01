@@ -613,7 +613,16 @@
                     position: relative;*/
                     .qty-dropdown{
                         width: 70px;
-						z-index: 3;
+                        z-index: 3;
+
+                        .Dropdown-control{
+                            border: 0px;
+                            padding-right: 45px;
+                            &:hover{
+                                cursor: pointer;
+                            }
+                        }
+                        
                     }
                 }
                 .prodTitle {
