@@ -17,7 +17,7 @@ import NotifyMe from './notifyMe';
 import appCookie from '../../utils/cookie';
 import ExperienceStore from './experienceStore';
 import { isMobile } from '../../utils/utilityManager';
-import {PRODUCT_ADDED, ADD_TO_CART,NOT_AVAILABLE} from '../../constants/app/pdpConstants';
+import {PRODUCT_ADDED, ADD_TO_CART,NOT_AVAILABLE, NOT_DELIVER} from '../../constants/app/pdpConstants';
 
 import Mapflag from '../../components/SVGs/mapflag.svg';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
@@ -57,7 +57,7 @@ class addToCartComponent extends React.Component {
       return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
     if (props.pincodeServiceable === false) {
-      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
+      errorMsg = NOT_DELIVER;
       if (props.error) {
         errorMsg = props.error;
       }

@@ -47,9 +47,8 @@ export const ON_THIS_PRODUCT = 'on this product';
 export const A_MONTH = 'a month';
 export const TC_APPLY = 'T&C Apply';
 export const SHARE = 'SHARE';
-
 export const WISHLIST = 'WISHLIST';
-
+export const NOT_DELIVER = 'Sorry we currently do not deliver in this area. Please enter another pincode'
  
  
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDSingleProduct from './RWDSingleProduct';
 import { Link } from 'react-router-dom';
 import appCookie from '../../../../utils/cookie';
@@ -10,9 +9,6 @@ class RWDCompleteOrder extends React.Component {
     this.state = {
 
     };
-  }
-
-  onInvoiceClick(invoiceNo) {
   }
 
   render() {
@@ -94,7 +90,7 @@ class RWDCompleteOrder extends React.Component {
             {invoiceData.map((data, key) => {
               return (
 					<li
-						onClick={evt => this.onInvoiceClick(this.props.invoiceData[key])} className="list"
+						className="list"
 					>
 						<Link className='link' to={{ pathname: `/invoice/${data}` }}>
 							INVOICE {key + 1}
