@@ -6,6 +6,7 @@ import apiManager from '../../utils/apiManager';
 import WhiteLogo from '../SVGs/whiteLogo';
 import appCookie from '../../utils/cookie';
 import WelcomeBackForm from '../WelcomeBackForm';
+import { isMobile } from '../../utils/utilityManager';
 import {
   facebookAppId,
   googleClientId,
@@ -174,26 +175,39 @@ class WelcomeBack extends React.Component {
   }
 
   trackMouseUp=(event)=>{
-    console.log("UP ",event.clientX +" "+event.clientY );
-    console.log("window",this.modalRef );
-    console.log("window",window.innerWidth);
-    console.log("modal",this.modalRef.current.offsetWidth);
-
+  
     let winWidth=window.innerWidth/2;
     let comWidth=this.modalRef.current.offsetWidth/2;
-    if(event.clientX<winWidth-comWidth && this.isOutSide)
+
+    let winHieght=window.innerHeight/2;
+    let comHeight=this.modalRef.current.offsetHeight/2;
+
+    if( (event.clientX<winWidth-comWidth && this.isOutSide) ||
+          (event.clientX>winWidth+comWidth && this.isOutSide) ||
+          (event.clientY<winHieght-comHeight && this.isOutSide) ||
+          (event.clientY>winHieght+comHeight && this.isOutSide) )
     {
-       // this.setState({show:false})
-      // alert("aaaaa")
        this.props.resetCallbackPro();
        this.setState({ show: false});
     }
-    if(event.clientX>winWidth+comWidth && this.isOutSide)
-    {
-      //alert("bbbbb")
-      this.props.resetCallbackPro();
-      this.setState({ show: false });
-    }
+    // if(event.clientX>winWidth+comWidth && this.isOutSide)
+    // {
+    //   this.props.resetCallbackPro();
+    //   this.setState({ show: false });
+    // }
+
+    // if(event.clientY<winHieght-comHeight && this.isOutSide)
+    // {
+    //    this.props.resetCallbackPro();
+    //    this.setState({ show: false});
+    // }
+    // if(event.clientY>winHieght+comHeight && this.isOutSide)
+    // {
+    //   this.props.resetCallbackPro();
+    //   this.setState({ show: false });
+    // }
+
+
   }
 
   trackMouseDown=(event)=>{
@@ -201,17 +215,40 @@ class WelcomeBack extends React.Component {
     this.isOutSide=false;
     let winWidth=window.innerWidth/2;
     let comWidth=this.modalRef.current.offsetWidth/2;
+
+    let winHieght=window.innerHeight/2;
+    let comHeight=this.modalRef.current.offsetHeight/2;
+
     console.log("clickeArea p1",window.innerHeight/2);
     console.log("clickeArea p2",this.modalRef.current.offsetHeight/2);
     console.log("clickeArea p3",event.clientY );
-    if(event.clientX<winWidth-comWidth)
+    
+    if((event.clientX<winWidth-comWidth) ||
+        (event.clientX>winWidth+comWidth) ||
+        (event.clientY<winHieght-comHeight) ||
+        (event.clientY>winHieght+comHeight) )
     {
       this.isOutSide=true;
     }
-    if(event.clientX>winWidth+comWidth)
+    // if(event.clientX>winWidth+comWidth)
+    // {
+    //   this.isOutSide=true;
+    // }
+
+
+    // if(event.clientY<winHieght-comHeight)
+    // {
+    //   this.isOutSide=true;
+    // }
+    // if(event.clientY>winHieght+comHeight)
+    // {
+    //   this.isOutSide=true;
+    // }
+    if(isMobile())
     {
-      this.isOutSide=true;
+      this.isOutSide=false;
     }
+
     console.log("clickeArea",this.isOutSide);
 
   }
