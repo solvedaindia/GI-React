@@ -164,11 +164,11 @@ class Filter extends React.Component {
             if (key === this.props.dataPro.facetName) {
               value.map((option, i) => {
                 filteredArr.push(option);
-                
+
               });
             }
           }
-        
+
           const extFacetArr = filteredArr.map(
             item =>
               item.value.replace(/\%2B/g, '+'),
@@ -210,31 +210,31 @@ class Filter extends React.Component {
         this.props.dataPro.facetName,
       );
     }
- 
+
   }
 
   compareMaps(map1, map2) {
     var testVal;
     if (map1.size !== map2.size) {
-        return false;
+      return false;
     }
     for (var [key, val] of map1) {
-        testVal = map2.get(key);
-        // in cases of an undefined value, make sure the key
-        // actually exists on the object so there are no false positives
-        if (testVal !== val) {
-            return false;
-        }
-        if (testVal === undefined ) {
-          return false;
+      testVal = map2.get(key);
+      // in cases of an undefined value, make sure the key
+      // actually exists on the object so there are no false positives
+      if (testVal !== val) {
+        return false;
+      }
+      if (testVal === undefined ) {
+        return false;
       }
       if (!map2.has(key)) {
         return false;
-    }
-        
+      }
+
     }
     return true;
-}
+  }
 
   unCkeckAll() {
     [
@@ -256,19 +256,22 @@ class Filter extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (isMobile()) {
+      this.unCkeckAll();
+      if (nextProps.resetCurrentSelection) {
+        this.onFacetChange(true);
+        this.setState({
+          facetArr: [],
+          facetItem: [],
+        })
+        this.props.onResetCurrentlFilter();
+      }
+
       if (nextProps.RWDupdatedFilter !== this.props.RWDupdatedFilter) {
-        this.unCkeckAll();
         this.filterOptions([]);
       }
     }
 
-    if (nextProps.resetCurrentSelection) {
-        this.onFacetChange(true);
-        this.setState({
-          facetArr: [],
-        })
-      this.props.onResetCurrentlFilter();
-    }
+
   }
 
   resolvePreSelectedFilters() {
