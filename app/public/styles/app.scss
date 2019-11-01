@@ -411,3 +411,33 @@ input::-webkit-outer-spin-button {
     padding-left: 5px;
 	font-size:14px;
 }
+
+.loadingdots-on-button-container
+{
+  display: inline-flex;
+  list-style: none;
+  margin: 0 0 0 0;
+}
+.loadingdots-on-button {
+  text-align: center;
+  width: 100%;
+  margin: 0 0 0 10px;
+
+  &--dot {
+    animation: dot-keyframes 1.5s infinite ease-in-out;
+    background-color: #b5b5b5;
+    border-radius: 10px;
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    margin: 0 3px;
+
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 1s;
+    }
+  }
+}

@@ -13,6 +13,7 @@ import {
 } from '../../utils/validationManager';
 import '../../../public/styles/forgotpassword/forgototp.scss';
 import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
+import ProgressButton from '../Button/progressButton'
 
 class ForgotPasswordOTP extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ class ForgotPasswordOTP extends React.Component {
       inputText: null,
       showOTPTxtField: true,
       errorClass: `${FORGET_OPT}`,
+      isProcessing:false
     };
   }
 
@@ -62,6 +64,12 @@ class ForgotPasswordOTP extends React.Component {
       });
       return;
     }
+    if(this.state.isProcessing)
+    {
+      return
+    }
+
+    this.setState({isProcessing:true})
 
     const data = {
       user_id: this.props.userIdPro,
@@ -72,9 +80,11 @@ class ForgotPasswordOTP extends React.Component {
       .post(validateOTPAPI, data)
       .then(response => {
         const nextComp = `${FORGET_PASS}`;
+        this.setState({isProcessing:false})
         this.props.handlerPro(nextComp, null, this.state.inputText);
       })
       .catch(error => {
+        this.setState({isProcessing:false})
         this.handleErrorBlock(error);
       });
   }
@@ -241,13 +251,26 @@ class ForgotPasswordOTP extends React.Component {
     }
 
     let finalBtn = (
-      <Button
-        type="submit"
-        onClick={this.proceedBtnPressed.bind(this)}
-        className="btn-block btn-bg"
-      >
-        {this.state.showOTPTxtField ? 'Proceed' : 'Back'}
-      </Button>
+      
+      // <Button
+      //   type="submit"
+      //   onClick={this.proceedBtnPressed.bind(this)}
+      //   className="btn-block btn-bg"
+      //   >
+        
+      //   {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+      //                     <li>{this.state.showOTPTxtField ? 'Proceed' : 'Back'}</li>
+      //                     <li> <div className="loadingdots-on-button">
+      //                       <div className="loadingdots-on-button--dot"></div>
+      //                       <div className="loadingdots-on-button--dot"></div>
+      //                       <div className="loadingdots-on-button--dot"></div>
+      //                       </div>
+      //                     </li>
+      //                 </ul>:this.state.showOTPTxtField ? 'Proceed' : 'Back' }
+
+        
+      // </Button>
+      <ProgressButton isProcessing = {this.state.isProcessing} title={this.state.showOTPTxtField ? 'Proceed' : 'Back'} onClickEvent={this.proceedBtnPressed.bind(this)} styleClassName = "btn-block btn-bg"/>
     );
     if (this.props.isFromMyProfilePro) {
       finalBtn = (

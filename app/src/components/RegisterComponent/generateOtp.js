@@ -6,7 +6,7 @@ import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
 import { isMobile } from '../../utils/utilityManager';
 import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER} from '../../constants/app/primitivesConstants';
-
+import ProgressButton from '../Button/progressButton'
 const LeftArrow = (
     <img className='leftArrow'
       src={require('../../../public/images/left-arrow.png')}  alt="Left"
@@ -20,6 +20,7 @@ class GenerateOtp extends React.Component {
             error: false,
             errorMessage: null,
             inputText: null,
+            isProcessing:false
         }
         this.callbackFunc = this.callbackFunc.bind(this);
     }
@@ -35,6 +36,7 @@ class GenerateOtp extends React.Component {
             return;
         }
 
+
         if (!validateOTPDigit(this.state.inputText)) {
             this.setState({
                 error: true,
@@ -42,6 +44,11 @@ class GenerateOtp extends React.Component {
             });
             return;
         }
+        if(this.state.isProcessing)
+        {
+            return;
+        }
+        this.setState({isProcessing:true});
         
         let data = this.props.userdata;
         Object.assign(data, {'otp': String(this.state.inputText)});
@@ -79,6 +86,7 @@ class GenerateOtp extends React.Component {
         this.setState({
             error: true,
             errorMessage: errorMsg,
+            isProcessing:false
         });
     }
 
@@ -148,7 +156,19 @@ class GenerateOtp extends React.Component {
                             </div>
                         </FormGroup>
                         <FormGroup className='text-center'>
-                            <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>{REGISTER}</Button>
+                            {/* <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>
+                
+                                {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+                                    <li>{REGISTER}</li>
+                                    <li> <div className="loadingdots-on-button">
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        </div>
+                                    </li>
+                                </ul>:REGISTER }
+                            </Button> */}
+                            <ProgressButton isProcessing = {this.state.isProcessing} title={REGISTER} onClickEvent={this.handleSubmit.bind(this)} styleClassName = "btn-bg btn-register btn-block"/>
                         </FormGroup>
                     </Form>
                 </>
