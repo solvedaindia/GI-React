@@ -1,7 +1,7 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import { cartApplyPromoAPI } from '../../../public/constants/constants';
-import {PROMO_CODE_IS_INVALID } from '../../constants/app/cartConstants';
+import {PROMO_CODE_IS_INVALID, GOT_PROMO_CODE } from '../../constants/app/cartConstants';
 
 class PromoField extends React.Component {
   constructor(props) {
@@ -51,6 +51,7 @@ class PromoField extends React.Component {
           className="promoInput"
           value={this.state.promoCode}
           onChange={this.handlePromoCode}
+          placeholder={GOT_PROMO_CODE}
         />
         <button className="applyBtn" onClick={this.applyPromoCode}>
           Apply

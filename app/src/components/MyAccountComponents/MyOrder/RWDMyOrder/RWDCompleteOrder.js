@@ -66,7 +66,7 @@ class RWDCompleteOrder extends React.Component {
             <div className='summary'>
             <p className="cart-total">
               <span className="info-text">Cart Total</span>
-              <span className="info-val">₹{summeryData.netAmount}</span>
+              <span className="info-val">₹{summeryData.totalAmount}</span>
             </p>
             <p className="product-ship-disc">
               <span className="info-text">Shipping</span>
@@ -76,14 +76,14 @@ class RWDCompleteOrder extends React.Component {
               <span className="info-text">Product Discount</span>
               <span className="info-val">{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</span>
             </p> 
-            <p className="order-disc">
+            {summeryData.orderDiscount === 0 ? null : <p className="order-disc">
               <span className="info-text">Order Discount</span>
               <span className="info-val">-₹{summeryData.orderDiscount}</span>
-            </p>
+            </p>}
             <div className="divider"></div>
             <p className="totalAmt">
               <span className="info-text">Total</span>
-              <span className="info-val">₹{summeryData.totalAmount}</span>
+              <span className="info-val">₹{summeryData.netAmount}</span>
             </p>
             </div>
           </div>
