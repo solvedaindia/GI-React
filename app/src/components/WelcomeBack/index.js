@@ -41,6 +41,9 @@ class WelcomeBack extends React.Component {
       userType: 'Hello Guest!',
       isFacebookClicked: false,
     };
+    this.windowModelRef=React.createRef();
+    this.modalRef=React.createRef();
+    this.isOutSide=false;
   }
 
   handleClose() {
@@ -165,22 +168,75 @@ class WelcomeBack extends React.Component {
     this.props.callbackPro(false);
     this.setState({ show: false, message: null });
   }
+  
+  trackMouseMovement=(event)=>{
+    console.log(event);
+  }
+
+  trackMouseUp=(event)=>{
+    console.log("UP ",event.clientX +" "+event.clientY );
+    console.log("window",this.modalRef );
+    console.log("window",window.innerWidth);
+    console.log("modal",this.modalRef.current.offsetWidth);
+
+    let winWidth=window.innerWidth/2;
+    let comWidth=this.modalRef.current.offsetWidth/2;
+    if(event.clientX<winWidth-comWidth && this.isOutSide)
+    {
+       // this.setState({show:false})
+      // alert("aaaaa")
+       this.props.resetCallbackPro();
+       this.setState({ show: false});
+    }
+    if(event.clientX>winWidth+comWidth && this.isOutSide)
+    {
+      //alert("bbbbb")
+      this.props.resetCallbackPro();
+      this.setState({ show: false });
+    }
+  }
+
+  trackMouseDown=(event)=>{
+    console.log("down ",event.clientX +" "+event.clientY );
+    this.isOutSide=false;
+    let winWidth=window.innerWidth/2;
+    let comWidth=this.modalRef.current.offsetWidth/2;
+    console.log("clickeArea p1",window.innerHeight/2);
+    console.log("clickeArea p2",this.modalRef.current.offsetHeight/2);
+    console.log("clickeArea p3",event.clientY );
+    if(event.clientX<winWidth-comWidth)
+    {
+      this.isOutSide=true;
+    }
+    if(event.clientX>winWidth+comWidth)
+    {
+      this.isOutSide=true;
+    }
+    console.log("clickeArea",this.isOutSide);
+
+  }
+
 
   render() {
     let message = null;
     if (this.state.message) {
       message = <p>{this.state.message}</p>;
     }
+    //onMouseMove={this.trackMouseMovement}
     return (
-      <div>
+      <div id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
 
         <Modal
+          ref={this.windowModelRef}
           className="welcomeBack"
           size="lg"
           animation={false}
           show={this.state.show}
           onHide={this.handleClose}
-        >
+          backdrop = {false}
+          
+          >
+          <div ref= {this.modalRef}>
           {message}
           <Modal.Header closeButton>
             <div className="smallLogo">
@@ -188,7 +244,7 @@ class WelcomeBack extends React.Component {
             </div>
             <Modal.Title>Welcome Back</Modal.Title>
           </Modal.Header>
-          <div className="socialLogin">
+          <div className="socialLogin"  >
             <GoogleLogin
               clientId={googleClientId}
               render={renderProps => (
@@ -247,6 +303,7 @@ class WelcomeBack extends React.Component {
               Register
             </Button>
           </p>
+          </div>
         </Modal>
       </div>
     );
