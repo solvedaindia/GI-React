@@ -94,15 +94,15 @@ class TrackOrder extends React.Component {
                                                         {subOrderDetails.shipmentData.length > 1 && <p className='count'> ({SHIPMENT  + ' ' + (index+1)}/{subOrderDetails.shipmentData.length})</p>}
                                                         <p className='orderID'> {ORDER_ID + ' ' + orderDetails.orderID}</p>
                                                         <p className='prodName'>{subOrderDetails.productName}</p>
-                                                        <p className='qty item'>{!isMobile() ?  'Quantity' :  'Quantity:'}
+                                                        <p className='qty item'>{!isMobile() ?  'QUANTITY' :  'Quantity:'}
                                                             <span className='qtyVal val'>{shipmentDetails.quantity}</span>
                                                         </p>
-                                                        <p className='status item'>{!isMobile() ? 'Status' : 'Status:'}
+                                                        <p className='status item'>{!isMobile() ? 'STATUS' : 'Status:'}
                                                             <span className='statusVal val'>{shipmentDetails.status}</span>
                                                         </p>
                                                         {!!shipmentDetails.expectedDeliveryDate && !isMobile() && 
                                                             <p className='delDate item'>
-                                                                {!isMobile() ? 'Delivery on' : 'Delivery on:' }
+                                                                {!isMobile() ? 'DELIVERY' : 'Delivery on:' }
                                                                 {!isMobile() ? <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>: '' }
                                                             </p>		
                                                         }
