@@ -62,7 +62,7 @@ beforeSlide = () => {
  
     return (
       <div className='beforeAfter'>
-		<ReactCompareImage leftImage={imagePrefix + '/staticImages/kitchens/typekitchfirst.png'} rightImage={imagePrefix + '/staticImages/kitchens/typekitchsecond.png'} />
+		<ReactCompareImage leftImage={imagePrefix} rightImage={imagePrefix} />
       </div>
      
     )

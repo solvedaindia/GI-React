@@ -4,7 +4,7 @@ import {
   consultFormApi,consultGetApi
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
-import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT, SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER} from '../../constants/app/primitivesConstants';
+import {SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER, FULLNAME_MSG, VALIDNAME_MSG, VALIDEMAIL_MSG, MOBILE_MSG, FEEDBACK_MSG, SELECT_OPTION_MSG} from '../../constants/app/primitivesConstants';
 
 import {
   regexEmail,
@@ -133,13 +133,13 @@ handleValidation=(obj, errorType)=>{
   // For name validation
   if (!validateEmptyObject(obj.name)) {
       this.setState({
-        errorMessageName: 'Please enter your full name',
+        errorMessageName: FULLNAME_MSG,
       });
       isValidate = false;
   }
   else if (!validateFullName(obj.name) || !(regexName.test(obj.name))) {
 		this.setState({
-		  errorMessageName: 'Please enter a valid Name. It should not exceed 100 characters',
+		  errorMessageName: VALIDNAME_MSG,
 		});
 		isValidate = false;
   }
@@ -147,13 +147,13 @@ handleValidation=(obj, errorType)=>{
   // For email validation
   if (!validateEmptyObject(obj.email) && !isMobileEntered) {
     this.setState({
-      errorMessageEmail: 'Please enter valid Email Id',
+      errorMessageEmail: VALIDEMAIL_MSG,
     });
     isValidate = false;
   }
   else if (isEmailEntered && !regexEmail.test(obj.email)) {
     this.setState({
-      errorMessageEmail: 'Please enter valid Email Id',
+      errorMessageEmail: VALIDEMAIL_MSG,
     });
     isValidate = false;
 
@@ -162,7 +162,7 @@ handleValidation=(obj, errorType)=>{
   // For drop option validation
   if (obj.index==0) {
     this.setState({
-      errorMessageDropOption: 'Please select an option',
+      errorMessageDropOption: SELECT_OPTION_MSG,
     });
     isValidate = false;
   }
@@ -171,13 +171,13 @@ handleValidation=(obj, errorType)=>{
   // For mobile validation
   if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
     this.setState({
-      errorMessageMobile: 'Please enter valid Mobile Number',
+      errorMessageMobile: MOBILE_MSG,
     });
     isValidate = false;
   }
   else if (isMobileEntered && !regexMobileNo.test(obj.mobileNumber)) {
     this.setState({
-      errorMessageMobile: 'Please enter valid Mobile Number',
+      errorMessageMobile: MOBILE_MSG,
     });
     isValidate = false;
   }
@@ -200,13 +200,12 @@ handleValidation=(obj, errorType)=>{
        
         }
 		apiManager.post(consultFormApi, data).then((res) => {
-      alert('Thank you for the feed back')
+      alert(FEEDBACK_MSG)
       this.clearData();
 		}).catch(error => {
 			this.setState({
        error: error
       });
-      alert('Somthing went wrong')
 		});
   }
   getConsultDropDownApi = ()=> {

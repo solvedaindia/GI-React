@@ -10,10 +10,6 @@ import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 export class AboutUs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-     
-
-    };
   }
 
 

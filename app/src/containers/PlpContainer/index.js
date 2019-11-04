@@ -6,12 +6,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
-// import makeSelectPlpContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import PlpComponent from '../../components/PlpComponent/index';
@@ -24,7 +21,6 @@ import {
 } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 import appCookie from '../../utils/cookie';
-
 import SubCategories from '../../components/GlobalComponents/productSubcategories/subCategories';
 import FilterMain from '../../components/PlpComponent/Filter/filterMain';
 import MarketingTextBanner from '../../components/PlpComponent/MarketingeTextBanner/marketingTextBanner';
@@ -32,7 +28,6 @@ import DescriptionBanner from '../../components/PlpComponent/DescriptionBanner/d
 import Sort from '../../components/PlpComponent/Sorting/sort';
 import BestSeller from '../../components/BestSelling/bestSelling';
 import { Helmet } from "react-helmet";
-
 import * as actionCreators from './actions';
 import CompContainer from './compWidget';
 import apiManager from '../../utils/apiManager';
@@ -42,7 +37,6 @@ import {
   espotAPI,
   searchPageAPI,
 } from '../../../public/constants/constants';
-import { stringify } from 'querystring';
 import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
@@ -50,7 +44,6 @@ import ContentEspot from '../../components/Primitives/staticContent';
 import { createPlpItemData } from '../../utils/utilityManager';
 
 let categoryId;
-let spellCheckEndCount = 1;
 export class PlpContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -103,8 +96,6 @@ export class PlpContainer extends React.Component {
 
   componentDidMount() {
     categoryId = '';
-	console.log('plpSubCatData 1' , this.props.location.pathname);
-	console.log('plpSubCatData 2' , this.props.location.pathname.replace('/furniture-', ''));
     const path = String(this.props.location.pathname);
     const idStr = this.props.location.pathname.replace('/furniture-', '');
     if (idStr != undefined && idStr !== categoryId) {
@@ -118,7 +109,6 @@ export class PlpContainer extends React.Component {
     let onlyFilter = [];
     for (const p of params) {
       if (p[0] === 'filter') {
-        // filterRoutingURL += `${p[0]}=${p[1]}&`
         filterRoutingURL += `${decodeURI(p[1])}&`;
         onlyFilter[p[1]];
       } else if (p[0] === 'sort') {
@@ -150,7 +140,7 @@ export class PlpContainer extends React.Component {
 
       params1.set(`sort`, `${nextProps.sortingValue}`);
       let finalMap = params1.toString();
-      this.props.history.push({ /* pathname: '/search', */ search: finalMap });
+      this.props.history.push({ search: finalMap });
       this.setState({
         plpData: [],
         pageNumber: 1,
@@ -165,8 +155,7 @@ export class PlpContainer extends React.Component {
       } else {
         params2.set(`filter`, `${encodeURI(nextProps.updatedFilter)}`);
       }
-      this.props.history.push({
-        /*pathname: '/search',*/ search: params2.toString() /*`${filterAppend}`*/,
+      this.props.history.push({ search: params2.toString(),
       });
       this.setState({
         plpData: [],
@@ -206,7 +195,6 @@ export class PlpContainer extends React.Component {
       }
     } else if (nextProps.location.pathname !== this.props.location.pathname) {
       const nextPath = String(nextProps.location.pathname);
-	  console.log(nextPath);
       const nextIdStr = nextPath.replace('/furniture-', '')
 
       if (nextIdStr != undefined && nextIdStr !== categoryId) {
@@ -222,7 +210,6 @@ export class PlpContainer extends React.Component {
   }
 
   resetStateVars() {
-    // this.props.plpReduxStateReset();
     this.setState({
       plpSubCatData: null,
       marketingTextBannerData: null,
@@ -347,7 +334,7 @@ export class PlpContainer extends React.Component {
               })
             }
 
-            if (response.data.data.spellCheck && response.data.data.spellCheck.length !== 0 /* && response.data.data.productList.length !== 0 */ && !isFromScroll) {
+            if (response.data.data.spellCheck && response.data.data.spellCheck.length !== 0 && !isFromScroll) {
               this.setState({
                 emptySearchItem: this.onSearchNoResut(decodeURI(searchText), response.data.data.spellCheck),
                 showBestSeller: false,
@@ -384,8 +371,7 @@ export class PlpContainer extends React.Component {
             productCount: response.data.data.productCount,
             filterData: response.data.data.facetData,
             breadcrumbData: response.data.data.breadCrumbData,
-            hasMore:
-              /*Number(response.data.data.productCount) !== 0 ? true : false,*/ this.state.plpData.length < Number(response.data.data.productCount), // Now only show on 0 Products and disable it for lazyload
+            hasMore: this.state.plpData.length < Number(response.data.data.productCount), // Now only show on 0 Products and disable it for lazyload
             isLoading: false,
             isCatDetails: false,
             browserFilters: [],
@@ -449,24 +435,12 @@ export class PlpContainer extends React.Component {
   onSearchNoResut(searchText, spellCheckArr) {
     if (spellCheckArr) {
       if (spellCheckArr && spellCheckArr.length !== 0) {
-        /* if (this.state.spellCheckCount === spellCheckEndCount) { */
         const params = new URLSearchParams(this.props.location.search);
         var keywoard = formateSearchKeyword(params.get('keyword'), false);
         this.setState({
           searchKeyword: `keyword=${spellCheckArr[0]}`,
         });
         return (
-          // <div>
-          //   <div className="noResultfound">
-          //     <div className="label-noresult">
-          //       No results for “{keywoard}”
-          //     </div>
-          //   </div>
-          //   <div className="Search-bestseller container">
-          //     {/* <BestSeller /> */}
-          //   </div>
-          // </div>
-
           <div className="noResultfound">
             <div className="label-noresult">
               No results for “{keywoard}”
@@ -481,12 +455,6 @@ export class PlpContainer extends React.Component {
             </div>
           </div>
         );
-        /* }
-        else {
-          this.state.spellCheckCount += 1;
-        } */
-
-        //this.fetchPLPProductsData();
       } else {
         // Show Best Seller component
       }
@@ -563,9 +531,6 @@ export class PlpContainer extends React.Component {
     let marketingBanner;
     let itemData = '';
     if (marketingTextBannerData != null) {
-      /**
-       * TODO: "GI_HERO_BANNER_10001_CONTENT" this is static key, needs to correct from Node side
-       */
       marketingBanner = (
         <MarketingTextBanner bannerDataPro={marketingTextBannerData} />
       );
@@ -577,7 +542,7 @@ export class PlpContainer extends React.Component {
         <SubCategories subCategoryData={this.state.plpSubCatData} />
       );
     }
-    console.log('plpSubCatData' , plpSubCatData);
+
     let plpProducts;
     if (plpData.length != 0) {
       itemData = createPlpItemData(plpData);

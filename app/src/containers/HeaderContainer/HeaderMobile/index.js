@@ -5,14 +5,11 @@ import { Link, withRouter } from 'react-router-dom';
 import WishListCount from '../../../components/Wishlist/wishlist';
 import CartCount from '../../../components/Cart/cart';
 import '../../../../public/styles/RWDStyle/mobileHeader.scss';
-// import '../../../../public/styles/headerContainer/headerRight.scss';
 import SideNavigation from './sideNavigation';
 import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
-import { Row, Col, Grid } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
-import ShareLogo from '../../../components/SVGs/shareIcon';
-import SocialMedia from '../../../utils/socialMedia';
 import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
 import '../../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = <img src={require('../../../../public/images/share.svg')} alt='shareImg'/>;
@@ -145,14 +142,10 @@ class HeaderMobile extends React.Component {
               <span className='navigationTitle'>{pageName}</span>
             </li>
           </ul>
-          {/* pageName === 'My Wishlist' */this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
-            {/* <ShareLogo /> */}
-            {/* {this.state.showSocialShare ? ( */}
-
+          {this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
             <SocialMediaRWD fromWislistPro
               sharingURLPro={this.props.shareWishlistURL}
               shareImage={shareImg} />
-            {/* ) : null} */}
           </button> : null}
 
         </Col>
@@ -211,9 +204,4 @@ function mapStateToProps(state) {
   };
 }
 
-
-// export default connect(
-//   mapStateToProps,
-// )(HeaderMobile);
 export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag, updateTheRWDHeader })(HeaderMobile))
-// export default withRouter(HeaderMobile);

@@ -22,18 +22,12 @@ import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
 
 
-import { DIRECTIONS } from '../../constants/app/primitivesConstants';
+import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
 
 // import Imgblack1 from '../../../public/images/store/kitchen-galleries-black.png';
 const NUMB_REG = /^\d+$/;
-const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
+const pageTitle = STORELOCATOR_TITLE;
 
-const prevArrowImg = (
-    <img src={require('../SVGs/carousel__arrowLeft.svg')} alt="Prev" />
-);
-const nextArrowImg = (
-    <img src={require('../SVGs/carousel__arrowRight.svg')} alt="Next" />
-);
 class StoreLocator extends React.Component {
     constructor(props) {
         super();

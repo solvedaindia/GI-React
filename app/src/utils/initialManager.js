@@ -10,8 +10,6 @@ import { getCookie, getCorrespondingGiftlistId } from './utilityManager';
 import appCookie from './cookie';
 import {
   guestLoginAPI,
-  storeId,
-  accessToken,
   accessTokenCookie,
   wishlistDataCookie,
   wishlistIdCookie,
@@ -29,7 +27,7 @@ export function registerGuestUser(callback) {
       const guestData = response.data.data;
       const guestUserID = guestData.userID;
       const guestToken = guestData.access_token;
-      document.cookie = `${accessTokenCookie}=${guestToken};path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */
+      document.cookie = `${accessTokenCookie}=${guestToken};path=/;expires=''`;
       document.cookie = `userID=${guestUserID};path=/;expires=''`;
 	  
       const json_str = JSON.stringify([]);
@@ -50,7 +48,6 @@ export function getUpdatedWishlist(wishlist) {
       const wishlistCount =
         response.data.data.wishlistItemArray[0].wishlistItemList.length;
       wishlist.props.updatetWishListCount(wishlistCount);
-      // wishlist.props.resetRemoveFromWishlistFlag(true)
     })
     .catch(error => {});
 }
@@ -61,7 +58,6 @@ export function getUpdatedMinicartCount(minicart) {
     .then(response => {
       const count = response.data.data.cartTotalQuantity;
       minicart.props.updatetMinicart(count);
-      // return count;
     })
     .catch(error => {
       // return null;
@@ -75,7 +71,6 @@ export function logoutTheUser() {
       if (response.data.status === 'success') {
         resetTheCookiesAndData();
       }
-      // alert('Newsletter Subscription - ' + data.status);
     })
     .catch(error => {
       console.log('Error: ', error);
@@ -84,7 +79,7 @@ export function logoutTheUser() {
 
 export function resetTheCookiesAndData() {
   // Reset all the user Cookies
-  document.cookie = `${accessTokenCookie}=;path=/;expires=''`; /* accessTokenCookie + '=' + guestToken + ',' + ';path=/home'; */
+  document.cookie = `${accessTokenCookie}=;path=/;expires=''`;
   const json_str = JSON.stringify([]);
   document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
   document.cookie = `${wishlistIdCookie}=;path=/;expires=''`;
@@ -105,10 +100,8 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
   apiManager
     .post(removeFromWishlist, data)
     .then(response => {
-      // this.setState({ wishlistCurrentImage: wishListRemovedImg });
       getUpdatedWishlist(reference);
-      // reference.props.resetRemoveFromWishlistFlag(true); //Uncomment this line to show "Remove from wihslit" message on MyWishlist page
-      // this.props.updatetWishListCount(6);
+
     })
     .catch(error => {
       console.log('Error: ', error);

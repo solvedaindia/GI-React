@@ -7,10 +7,6 @@ import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 export default class HelpSupport extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-		
-    };
   }
 
   render() {
