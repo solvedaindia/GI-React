@@ -213,7 +213,7 @@ class productImagesAndVideos extends React.Component {
           showNav={this.state.activeData}
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
-          lazyLoad={true}
+          lazyLoad={false}
           renderCustomControls={this.renderZoomButtons}
         />
       </div>
