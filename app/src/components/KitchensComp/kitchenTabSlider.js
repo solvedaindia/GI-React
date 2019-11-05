@@ -65,10 +65,10 @@ class KitchenConfiguration extends React.Component {
       dots: false,
       infinite: true,
       speed: 500,
-	  autoplay: true,
+	    autoplay: true,
       autoplaySpeed: 2000,
       slidesToShow: 1,
-      slidesToScroll:2,
+      slidesToScroll:1,
     };
    const{ configurationTabing, currentIndex } =this.state;
 
