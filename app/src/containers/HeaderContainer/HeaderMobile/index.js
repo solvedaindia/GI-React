@@ -64,9 +64,22 @@ class HeaderMobile extends React.Component {
 
   componentDidMount() {
     this.state.isOnHome = this.props.match.isExact ? true : false;
-    this.setState({
-      headerRenderItem: this.defaultRender()
-    })
+    if(window.location.pathname === "/wishlist"){
+      this.pageNavigationRender('My Wishlist');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myprofile'){
+      this.pageNavigationRender('My Profile');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myorder'){
+      this.pageNavigationRender('My Orders');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'password'){
+      this.pageNavigationRender('Change Password');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
+      this.pageNavigationRender('Manage Address');
+    }
+    else {
+      this.setState({
+        headerRenderItem: this.defaultRender()
+      })
+    }
   }
 
   wishlsitShareURLCallback(shareURL) {
