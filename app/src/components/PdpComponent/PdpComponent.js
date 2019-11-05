@@ -259,7 +259,8 @@ class PdpComponent extends React.Component {
 
 		if (this.props.matchParams.skuId !== resolvedSkuData.partNumber) 
 		{
-			this.props.historyData.push(createSEOPdpURL(resolvedSkuData.productName, resolvedSkuData.shortDescription, resolvedSkuData.partNumber));
+			//this.props.historyData.push(createSEOPdpURL(resolvedSkuData.productName, resolvedSkuData.shortDescription, resolvedSkuData.partNumber));
+			this.props.historyData.replace(createSEOPdpURL(resolvedSkuData.productName, resolvedSkuData.shortDescription, resolvedSkuData.partNumber));
 		}
 	}
 
