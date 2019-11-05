@@ -91,6 +91,7 @@ getOurProcessData()
       sub_title:data.data.processData[0].sub_title
 
     });
+    this.props.handler()
   })
   .catch(error => {
     this.setState({

@@ -36,6 +36,7 @@ export default class GreenInitiatives extends Component {
               title:data.data.title,
               slides:data.data.bannerList,
          });
+         this.props.handler()
       })
       .catch(error => {
         this.setState({
