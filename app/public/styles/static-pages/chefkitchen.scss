@@ -429,6 +429,16 @@
       }
 }
 
+.willowKitchen {
+  .namingconv {
+    font-family: $font-regular;
+    text-align: center;
+    font-size:14px;
+    color: black;
+  }
+
+}
+
 .configurationTab
 {
 	margin: 20px 25%;
@@ -441,7 +451,7 @@
     li{
         float: left;
         position: relative;
-        margin: 0px 13px;
+        margin: 0px 3px;
         padding: 0px;
         a{
             padding: 4px 5px;

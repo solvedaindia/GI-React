@@ -23,9 +23,9 @@
 	.staticpage h1
 	{
 		padding-top:20px;
-		font-size:19px;
+		font-size:30px;
 		font-weight:500;
-		text-align: left;
+		text-align: center;
 		padding-bottom:20px;
 	}
 	
@@ -185,7 +185,6 @@
 		font-weight: 500px;
 		color: black;
 		font-weight: normal;
-		padding-right: 27px;
 	}
 	
 	.staticpage .sliderHeading {
@@ -261,7 +260,7 @@
 	}
 	
 	.ProcessNumber {
-		padding-right: 14px;
+		padding-right: 62px;
 		font-size: 19px;
 	}
 	#careers{
@@ -275,11 +274,60 @@
 	}
 }
 
-@media (max-width: 580px) 
-{
+@media (max-width: 415px) {
 	.ProcessNumber {
-		padding-right: 12px;
+		padding-right: 25px;
+	}
+}
+
+@media (max-width: 375px) {
+	.ProcessNumber {
+		padding-right: 21px;
+	}
+}
+
+@media (max-width: 580px)
+{
+	// .ProcessNumber {
+	// 	padding-right: 23px;
+	// }
+	.goesOnKitchen {
+		.title {
+			font-size: 17px;
+			text-align: left;
+		}
+		.sliderDesc {
+			text-align: left;
+			padding-right: 27px;
+		}
+		.slick-slide {
+			margin-right: 8px;
+		}
 	}
 	
-	
+}
+
+
+@media (max-width: 321px) {
+	.ProcessNumber {
+		padding-right: 15px;
+	}
+}
+
+
+
+@media (max-width: 768px) {
+	.goesOnKitchen {
+		.title {
+			font-size: 19px;
+			text-align: left;
+		}
+	}
+	.sliderDesc {
+		text-align: left;
+		padding-right: 27px;
+	}
+	.slick-slide {
+		margin-right: 10px;
+	}
 }
