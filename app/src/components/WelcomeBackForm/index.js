@@ -86,7 +86,8 @@ class WelcomeForm extends Component {
 
   /* Handle Submit */
   handleFormSubmit = e => {
-    e.preventDefault();
+    if(e!=null)
+      e.preventDefault();
     const isValidate = this.handleValidation(this.state, true);
 
     if (isValidate === false) {
@@ -130,6 +131,14 @@ class WelcomeForm extends Component {
   }
 
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.handleFormSubmit();
+    }
+  }
+
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -152,6 +161,7 @@ class WelcomeForm extends Component {
           type="text"
           title="Email Address or Mobile Number"
           name="userId"
+          onKeyPress={this.onKeyPress}
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
@@ -169,6 +179,7 @@ class WelcomeForm extends Component {
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
+          onKeyPress={this.onKeyPress}
           onPaste={this.copyPaste}
         />
        <span
