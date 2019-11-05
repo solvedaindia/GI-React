@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getReleventReduxState } from '../../utils/utilityManager';
 import '../../../public/styles/compWidget.scss';
-import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
-// import makeSelectPlpContainer from './selectors';
 import reducer from './reducer';
-import saga from './saga';
 import * as actionCreators from './actions';
 import CompItem from '../../components/PlpComponent/compItem';
 
 import plus from '../../../public/images/plusIcon.svg';
-import { Route, NavLink, Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { MINCOMPARECOUNT_MSG } from '../../constants/app/primitivesConstants';
 import DownArrow from '../../../public/images/down-arrow.svg';
 import UpArrow from '../../../public/images/up-arrow.svg';
 import appCookie from '../../utils/cookie';
@@ -31,7 +26,6 @@ export class CompContainer extends React.Component {
       modalClass: 'open',
       isLoading: true,
     };
-    console.log("ali cons",props);
   }
 
   shouldComponentUpdate(nextProps, nextState)
@@ -99,12 +93,6 @@ export class CompContainer extends React.Component {
   }
 
   handleGoToCompare(e) {
-    // var element = document.getElementById("change");
-    // element.classList.toggle("open");
-    // this.setState({
-    //   showCompare: false,
-    //   modalClass: 'open',
-    // })
     let handleCompData = [];
     if (this.props.compData.length > 0) {
       handleCompData = this.props.compData;
@@ -114,7 +102,7 @@ export class CompContainer extends React.Component {
 
     if (handleCompData.length < 2) {
       e.preventDefault();
-      alert('Please add at least two products to compare');
+      alert(MINCOMPARECOUNT_MSG);
     }
     else{
       appCookie.set('compareProductTemp', appCookie.get('compareProduct'), 365 * 24 * 60 * 60 * 1000);
@@ -152,7 +140,6 @@ export class CompContainer extends React.Component {
         {compData.length > 0 ? this.state.modalClass == 'open' ? <div className='compare'><button className='btnCompare' onClick={this.showHideCompare}> <img className='arrow' src={DownArrow} alt='downArrow' /> </button> </div> :
           <div className='compare'><button onClick={this.showHideCompare} className="btnCompare"> <img className='arrow' src={UpArrow} alt='upArrow' /></button><div className='clearfix'></div> <div className='comparelebal'>Compare</div></div> : ''}
         {compData.length > 0 ? <div className={`animationDIV ${this.state.modalClass}`} id='change'>
-          {/* {this.props.compData.length >= 0 && this.state.showCompare ?  */}
           <div className='compareProductwrap'>
             <div className="container">
               <div className="row">
@@ -160,29 +147,19 @@ export class CompContainer extends React.Component {
                   <ul className="compareProducts">
                     {this.buildData(compData)}
                     {compData.length > 0 ? <li className="list">
-                      {/* <Link className="btn-compare" to="/compare" params={{ ids: searchParam }} onClick={(e) => this.handleGoToCompare(e)}> */}
                       <Link className="btn-compare" to={{pathname: '/compare'}} onClick={(e) => this.handleGoToCompare(e)} >
-                        {/* <Link to="/compare" className="btn-compare" onClick={(e) => this.handleGoToCompare(e)}> */}
                         Compare {compData.length}
                         /3
                     </Link>
                       <button className="btn-clearall" onClick={this.clearAll}>
                         Clear All
                     </button>
-                      {/* <button className='btnCompare' onClick={this.showHideCompare}>
-                      hide
-                    </button> */}
                     </li> : ""}
                   </ul>
                 </div>
               </div>
             </div>
           </div> :
-      {/* // : <button onClick={this.showHideCompare} className="btnCompare">
-      //                 show
-      //               </button> */}
-          {/* 'uyu' */}
-          {/* } */}
         </div> : ''}
       </>
     );

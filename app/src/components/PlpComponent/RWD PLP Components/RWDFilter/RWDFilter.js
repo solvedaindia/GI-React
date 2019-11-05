@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import injectSaga from '../../../../utils/injectSaga';
 import injectReducer from '../../../../utils/injectReducer';
@@ -8,21 +8,7 @@ import reducer from '../../../../containers/PlpContainer/reducer';
 import saga from '../../../../containers/PlpContainer/saga';
 import * as actionCreators from '../../../../containers/PlpContainer/actions';
 import { getReleventReduxState } from '../../../../utils/utilityManager';
-import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDFilterCore from './RWDFilterCore';
-
-const downArrow = (
-  <img
-    className="dropdownArrow"
-    src={require('../../../../../public/images/plpAssests/drop-down-arrow-down.svg')}
-  />
-);
-const upArrow = (
-  <img
-    className="dropdownArrow"
-    src={require('../../../../../public/images/plpAssests/drop-down-arrow-up.svg')}
-  />
-);
 
 class RWDFilter extends React.Component {
   constructor() {
@@ -37,15 +23,7 @@ class RWDFilter extends React.Component {
       currentFilter: [],
     }
     this.subFacetValues = this.subFacetValues.bind(this);
-
   }
-
- 
-
-  onCheckBoxClick(index) {
-  }
-
-
 
   unCkeckAll(item) {
     [...document.getElementsByClassName('checkbox' + item.facetName)].map((input) => {
@@ -54,26 +32,13 @@ class RWDFilter extends React.Component {
       }
       return null;
     })
-
-
-
   }
-
-  componentDidMount() {
-
-
-  }
-
-
 
   onApplyBtnClick() {
     this.state.facetArr.map(item => {
       item.value = item.value.replace('+', '%2B')
     })
-
-
     this.props.onFilterUpdate(this.state.facetArr, this.props.dataPro.facetName)
-  
   }
 
   onCancelBtn() {
@@ -82,22 +47,14 @@ class RWDFilter extends React.Component {
     })
   }
 
-
-
   subFacetValues(item) {
     this.unCkeckAll(item)
-
-
-
-
-
     this.setState({
       currentFilter: item
     })
   }
 
   render() {
-
     return (
       <>
         <div className="mainFilter">

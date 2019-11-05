@@ -4,12 +4,6 @@ import apiManager from '../../utils/apiManager';
 
 import '../../../public/styles/static-pages/inspiration.scss'
 import {espotAPI,imagePrefix} from '../../../public/constants/constants';
-const prevArrowImg = (
-  <img clasName="leftArrow" src={require('../SVGs/carousel__arrowLeft.svg')} alt="Left"/>
-);
-const nextArrowImg = (
-  <img src={require('../SVGs/carousel__arrowRight.svg')}  alt="Right" />
-);
 
 export default class Lookbook extends Component {
   constructor(props) {

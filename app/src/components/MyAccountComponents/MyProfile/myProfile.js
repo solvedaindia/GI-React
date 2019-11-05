@@ -1,21 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
-import { Button, Form, FormGroup, Label, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { userDetailAPI, userDetailValidateAPI, userDetailUpdateAPI } from '../../../../public/constants/constants';
-import {
-  resolveTheWishlistData,
-  getCookie,
-  getReleventReduxState,
-} from '../../../utils/utilityManager';
 import '../../../../public/styles/myAccount/changePassword.scss';
 import { regexEmail, regexMobileNo } from '../../../utils/validationManager';
 import '../../../../public/styles/myAccount/myProfile.scss';
 import Input from '../../Primitives/input';
 import {
   validateFullName,
-  validateMobileNo,
   validateEmailId,
   validateMobileNo_OPTIONAL
 } from '../../../utils/validationManager';
@@ -25,7 +18,7 @@ import '../../../../public/styles/forgotpassword/forgototp.scss';
 import '../../../../public/styles/forgotpassword/forgotpass.scss';
 import { resetRWDHeaderFlag, updateUserProfile } from '../../../actions/app/actions';
 import { isMobile } from '../../../utils/utilityManager';
-import { headerNetural } from '../../../containers/HeaderContainer/HeaderMobile/index'
+import { NAME_VALIDATION, NUMBER_VALIDATION, EMAIL_VALIDATION} from '../../../constants/app/myAccountConstants';
 
 
 class MyProfile extends React.Component {
@@ -94,7 +87,7 @@ class MyProfile extends React.Component {
       if (!validateFullName(this.state.inputText_name)) {
         this.setState({
           error_name: true,
-          errorMessage_name: 'Please enter a valid Name. It should not exceed 100 characters',
+          errorMessage_name: NAME_VALIDATION,
         });
         return;
       }
@@ -105,7 +98,7 @@ class MyProfile extends React.Component {
       if (!validateMobileNo_OPTIONAL(this.state.inputText_number)) {
         this.setState({
           error_number: true,
-          errorMessage_number: 'Please enter valid mobile number.',
+          errorMessage_number: NUMBER_VALIDATION,
         });
         return;
       }
@@ -117,7 +110,7 @@ class MyProfile extends React.Component {
     if (!validateEmailId(this.state.inputText_email)) {
       this.setState({
         error_email: true,
-        errorMessage_email: 'Please enter valid Email ID.',
+        errorMessage_email: EMAIL_VALIDATION,
       });
       return;
     }

@@ -28,12 +28,6 @@ import {
 
 // The initial state of the App
 const initialState = fromJS({
-  // loading: false,
-  //error: false,
-  // currentUser: false,
-  // userData: {
-  //   repositories: false,
-  // },
   wishlistCount: 0,
   minicartCount: 0,
   removeWishlistFlag: false,
@@ -41,8 +35,6 @@ const initialState = fromJS({
   resetRWDFlag: false,
   rwdWishlistShareURL: null,
   updatedRWDHeader: null,
-  // cart: null
-  // logonId: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -52,12 +44,10 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-    // .setIn(['userData', 'repositories'], false);
     case LOAD_REPOS_SUCCESS:
       return state
         .setIn(['userData', 'repositories'], action.repos)
         .set('loading', false)
-    // .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
     case WISH_LIST_COUNT:
@@ -70,9 +60,6 @@ function appReducer(state = initialState, action) {
       return state.set('loading', false).set('resetRWDFlag', action.flag);
     case UPDATE_PROFILE:
       return state.set('loading', false).set('userName', action.userName);
-    // .set('logonId', action.logonId);
-    // case GET_CART_FETCHED:
-    //   return state.set('cart', action.payload);
     case SHAREWISHLISTURL_RWD:
       return state.set('loading', false).set('rwdWishlistShareURL', action.url);
     case UPDATED_RWD_HEADER:

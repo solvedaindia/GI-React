@@ -52,7 +52,7 @@ export class MyAccountContainer extends React.Component {
 
     // if (nextProp.location.state !== this.props.location.state) {
       this.setState({
-        redirectedFrom: nextProp.location.state.from,
+        redirectedFrom: nextProp.location.state ? nextProp.location.state.from : null,
       })
     // }
   }
@@ -93,21 +93,24 @@ export class MyAccountContainer extends React.Component {
   }
 
   render() {
-
     var guestOrderData;
     var isGuestTrackOrder;
     if (this.state.redirectedFrom === null) {
       if (this.props.location.state != undefined) {
         this.state.redirectedFrom = this.props.location.state.from;
+      } else {
+        this.state.redirectedFrom = 'myprofile'
+
       }
     }
 
-    if (this.state.redirectedFrom) {
-      guestOrderData = this.props.location.state.orderData;
-    }
+    // if (this.state.redirectedFrom) {
+    //   guestOrderData = this.props.location.state.orderData;
+    // }
 
     if (this.props.location.state != undefined) {
       isGuestTrackOrder = this.props.location.state.isGuestTrackOrder;
+      guestOrderData = this.props.location.state.orderData;
     }
 
     const navigationBar = (

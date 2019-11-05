@@ -131,7 +131,7 @@
         padding: 0 34px 0 0;
         .heading-label {
           font-size: $base * 2.25;
-          margin: 0;
+          margin: -4px 0px 0px 28px;
           padding: 30px 0;
           font-weight: bold;
           line-height: 27px;
@@ -822,7 +822,7 @@
               min-height: 130px;
               background: rgba(247, 248, 248, 0.5);
               border: 1px solid $lightblueGrey;
-              margin: 0 8px 12px 0;
+              margin: 0 7px 12px 0;
             }
           }
           .colpaddingRight {

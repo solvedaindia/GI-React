@@ -14,6 +14,7 @@ import {
 } from './constants';
 import appCookie from '../../utils/cookie';
 import WelcomeBack from '../WelcomeBack/index';
+import { MAXOTP_ATTAMPTS_MSG } from '../../constants/app/primitivesConstants';
 
 class RegisterModalData extends React.Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class RegisterModalData extends React.Component {
           window.location.reload();
         } else {
           if (type === resendOtp && response.data.data.otpCount > 3) {
-            callbackFunc('OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)');
+            callbackFunc(MAXOTP_ATTAMPTS_MSG);
             return;
           } 
           if (type !== resendOtp) {

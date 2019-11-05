@@ -1,21 +1,11 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import Accordion from './Accordion';
-// import '../../../../public/styles/footerContainer/accordian.scss'
 
-// const FooterLinkAccordian = props => {
 class FooterLinkAccordian extends React.Component {
   constructor() {
     super();
-    this.state = {
-      // isActiveClass=false;
-
-    };
   }
-
-accCallback() {
-
-}
 
   render() {
     return (
