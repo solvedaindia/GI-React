@@ -145,11 +145,13 @@ export class Step2Component extends React.Component {
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
+      console.log('Billing>>>>',this.props.billingAddressID,'Shippin>>>',this.props.shippingAddressID);
       let selectedAddID = appCookie.get('adrID');
       this.callPinApi()
         .then(this.callAddressAPI)
         .then((data) => {
           var selectedIndex = null;
+          var billingAddress = null;
           if (data.addressList.length === 0) {
             this.newAddActive();
           }
@@ -168,9 +170,11 @@ export class Step2Component extends React.Component {
             addressList: data.addressList,
             inputText_pincode: data.pinData.pin,
             inputText_city: data.pinData.city,
-            inputText_state: data.pinData.state
+            inputText_state: data.pinData.state,
           })
-          
+          if(this.props.billingAddressID && this.props.shippingAddressID){
+            this.updateBillingAddress(this.props.shippingAddressID,this.props.billingAddressID);
+          }
         })
 
     } else {
@@ -191,6 +195,35 @@ export class Step2Component extends React.Component {
       this.setState({
         phone: this.props.logonBy
       })
+    }
+  }
+
+  updateBillingAddress = (shippingAddressID,billingAddressID) => {
+    // console.log(shippingAddressID+'>>>'+billingAddressID);
+    var billingAddress = null;
+    if(this.state.addressList && shippingAddressID && billingAddressID && (shippingAddressID !== billingAddressID)){
+      this.state.addressList.map((data, index) => {
+        if (billingAddressID === data.addressID) {
+          billingAddress = data;
+        }
+      })
+      this.setState({
+        bill_add_id: billingAddress.addressID,
+        same_bill: false,
+        binputText_name: billingAddress ? billingAddress.name : '',
+        binputText_number: billingAddress ? billingAddress.phoneNumber : '',
+        binputText_email:billingAddress ? billingAddress.emailId : '',
+        binputText_pincode: billingAddress ? billingAddress.pincode : '',
+        binputText_address: billingAddress ? billingAddress.address : '',
+        binputText_city: billingAddress ? billingAddress.city : '',
+        binputText_state: billingAddress ? billingAddress.state : '',
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.shippingAddressID && nextProps.billingAddressID){
+      this.updateBillingAddress(nextProps.shippingAddressID,nextProps.billingAddressID);
     }
   }
 
@@ -1057,7 +1090,8 @@ export class Step2Component extends React.Component {
   }
 
   handleProceed = () => {
-    this.props.proceed();
+    alert(this.state.bill_add_id);
+    this.props.proceed(this.state.ship_add_id,this.state.bill_add_id);
   }
 
   render() {
@@ -1205,7 +1239,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-12">
                       <div className='bill-address customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
+                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" checked={this.state.same_bill} onChange={this.handleSameBill} />
                           <label className="lblCheck" htmlFor="checkbox"></label>
                         </div>
                         <label className='label-billing defaultlbl' htmlFor="billing">Billing address is the same as delivery address</label>
@@ -1219,13 +1253,13 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Full Name" id="bname" name="bname" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Full Name" id="bname" name="bname" value={this.state.binputText_name} handleChange={this.handleInput} />
                           {this.state.berror_name ? <div className='error-msg'>{this.state.berrorMessage_name}</div> : null}
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Mobile Number" id="bphone" name="bphone" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Mobile Number" id="bphone" name="bphone" value={this.state.binputText_number} handleChange={this.handleInput} />
                           {this.state.berror_number ? (
                             <div className="error-msg">
                               {this.state.berrorMessage_number}
@@ -1243,7 +1277,7 @@ export class Step2Component extends React.Component {
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Email Address" id="bemail" name="bemail" handleChange={this.handleInput} />
+                          <Input inputType="text" title="Email Address" id="bemail" name="bemail" value={this.state.binputText_email} handleChange={this.handleInput} />
                           {this.state.berror_email ? <div className="error-msg">{this.state.berrorMessage_email}</div> : null}
                         </div>
                       </div>
@@ -1251,7 +1285,7 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={70} />
+                          <Input inputType="text" title="Address" id="baddress" name="baddress" value={this.state.binputText_address} handleChange={this.handleInput} maxLength={70} />
                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
                       </div>

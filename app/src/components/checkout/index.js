@@ -73,6 +73,8 @@ export class CheckoutComponent extends React.Component {
       redirect: false,
       shipMode: null,
       isCheckSumAPIFail: false,
+      billAddressID : null,
+      shipAddressID : null,
     }
   }
 
@@ -260,7 +262,9 @@ export class CheckoutComponent extends React.Component {
         return;
       }
       this.setState({
-        orderSummaryData: response.data.data.orderSummary
+        orderSummaryData: response.data.data.orderSummary,
+        billAddressID: response.data.data.orderSummary.billingAddressID,
+        shipAddressID: response.data.data.orderSummary.addressID,
       })
     }).catch(error => {
     })
@@ -353,8 +357,9 @@ export class CheckoutComponent extends React.Component {
         logonBy={this.state.logon_by}
         handleAddress={this.handleAddress}
         netAmount={this.state.orderSummaryData.netAmount}
-        shipModePro={this.state.shipMode} />
-
+        shipModePro={this.state.shipMode}
+        billingAddressID = {this.state.billAddressID} 
+        shippingAddressID = {this.state.shipAddressID}/>
     } else {
       return <Step1Component
         proceed={this.handleProceed}
@@ -379,7 +384,15 @@ export class CheckoutComponent extends React.Component {
     })
   }
 
-  handleProceed = () => {
+  tryAgain = () => {
+    alert('Hello');
+    this.setState({
+      step: 3
+    })
+  }
+
+  handleProceed = (shipping,billing) => {
+    console.log(shipping,'>>>Address<<<',billing);
     if (this.state.step == 1) {
       this.setState({
         step: 2,
@@ -387,7 +400,9 @@ export class CheckoutComponent extends React.Component {
       })
     } else if (this.state.step == 2) {
       this.setState({
-        step: 3
+        step: 3,
+        shipAddressID: shipping,
+      billAddressID: billing,
       })
     }
   }
@@ -421,7 +436,7 @@ export class CheckoutComponent extends React.Component {
             <div className='col-md-8'>
               <h3 className='heading'>{CHECKOUT}</h3>
             </div>
-            {this.state.failPop ? <FailPop cancelFail={this.cancelFail} /> : ''}
+            {this.state.failPop ? <FailPop tryAgain= {this.tryAgain} cancelFail={this.cancelFail} /> : ''}
             <div className='col-md-4'>
               <div className='summaryHeading'>
               </div>

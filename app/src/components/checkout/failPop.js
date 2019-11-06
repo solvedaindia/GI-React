@@ -22,6 +22,7 @@ export default class FailPop extends React.Component {
     this.setState({
       modal: false,
     })
+    this.props.tryAgain()
   }
   
   render() {
