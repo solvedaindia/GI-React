@@ -12,7 +12,21 @@ export default class HelpSupport extends React.Component {
 		
     };
   }
+  componentDidMount()
+  {
+     this.hash = this.props.location.hash;
+  }
 
+  onSuccessLoadWithScroll()
+  {
+    if(this.hash && this.hash.length>1)
+    {
+      const element=document.getElementById(this.hash.substring(1,this.hash.length));
+      window.scrollTo(0, element.offsetTop)
+    }
+    
+    
+  }
   render() {
     return (
       <div className='staticpage serviceSupport'>
@@ -20,7 +34,7 @@ export default class HelpSupport extends React.Component {
         <ContentEspot espotName={ 'GI_SUPPORT_FAQ_MENU' } />
         <ContentEspot espotName={ 'GI_SUPPORT_FAQ' } />
         <a id='customerCare'>
-			<ContentEspot espotName={ 'GI_CONTACT_US_CUSTOMER_CARE' } />
+			<ContentEspot espotName={ 'GI_CONTACT_US_CUSTOMER_CARE' } handler={(hash)=>this.onSuccessLoadWithScroll(hash)}/>
         </a>
         <ContentEspot espotName={ 'GI_SUPPORT_3' } />
          <ContentEspot espotName={ 'GI_SUPPORT_4' } />
