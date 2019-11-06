@@ -53,6 +53,7 @@ async function userRegistration(params, headers, callback) {
     const accessToken = tokenGenerator.encodeToken(response.body);
     const signupResponseBody = {
       access_token: accessToken,
+      userID: response.body.userId,
       userDetails: {
         name: reqBody.firstName,
         pincode: reqBody.zipCode,

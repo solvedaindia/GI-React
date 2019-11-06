@@ -13,41 +13,6 @@ const userHandler = require('./usershandler');
  * @return 200,OK with encrypted tokens as access_token
  * @throws contexterror,badreqerror if storeid is invalid
  */
-/* module.exports.guestLogin = guestLogin;
-async function guestLogin(headers, callback) {
-  const guestLoginUrl = `${constants.login.replace(
-    '{{storeId}}',
-    headers.storeId,
-  )}/guestidentity`;
-
-  const guestLoginHeaders = {
-    'cache-control': 'no-cache',
-    'content-type': 'application/json',
-  };
-  try {
-    const response = await origin2.getResponse(
-      'POST',
-      guestLoginUrl,
-      guestLoginHeaders,
-      null,
-    );
-    const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
-    const guestLoginResponse = {
-      access_token: encryptedAccessToken,
-    };
-    callback(null, guestLoginResponse);
-  } catch (error) {
-    callback(errorutils.handleWCSError(error));
-  }
-}
- */
-
-/**
- * Get Guest Token from WCS
- * @param storeId
- * @return 200,OK with encrypted tokens as access_token
- * @throws contexterror,badreqerror if storeid is invalid
- */
 module.exports.guestLogin = function guestLogin(headers, callback) {
   const guestLoginUrl = `${constants.login.replace(
     '{{storeId}}',
@@ -71,6 +36,7 @@ module.exports.guestLogin = function guestLogin(headers, callback) {
         const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
         const guestLoginResponse = {
           access_token: encryptedAccessToken,
+          userID: response.body.userId,
         };
         callback(null, guestLoginResponse);
       } else {
@@ -117,6 +83,7 @@ async function userLogin(params, headers, callback) {
     const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
     const loginResponseBody = {
       access_token: encryptedAccessToken,
+      userID: response.body.userId,
     };
     const userDetailHeader = headers;
     userDetailHeader.WCToken = response.body.WCToken;
@@ -188,6 +155,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
           );
           const loginResponseBody = {
             access_token: encryptedAccessToken,
+            userID: response.body.userId,
           };
           callback(null, loginResponseBody);
         } else {
