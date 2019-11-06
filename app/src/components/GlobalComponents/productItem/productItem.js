@@ -176,7 +176,7 @@ class ProductItem extends React.Component {
 
                 })}
 
-                {this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
+                {this.state.colorSwatchSplit.length !== 0 ? <button className={isMobile() ?'moreSwatchForMobile':'moreSwatch'} onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
               </ul>
             </div> : null}
           </div>

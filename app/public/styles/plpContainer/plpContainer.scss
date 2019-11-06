@@ -288,6 +288,18 @@ section.tablecarousel {
             outline: none;
           }
         }
+        .moreSwatchForMobile{
+          border: none;
+          background: transparent;
+          color:$battleshipGrey;         
+          float: right;
+          display: block;
+          padding: 3px 0 0 0;
+          font-size: $base*1.4;
+          &:focus{
+            outline: none;
+          }
+        }
         
       
 
@@ -1234,15 +1246,16 @@ section.tablecarousel {
         }
       } 
       .hoverBox{
-        padding:5px 20px;
+        padding:5px 10px;
         .btn-compare{
           display:none;
         }
         ul.colortheme{
           .list{
+            
             .swatches-circle{
-              width: 13px;
-              height: 13px;
+              width: 12px;
+              height: 12px;
             }
           } 
         } 
