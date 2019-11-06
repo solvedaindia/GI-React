@@ -47,6 +47,7 @@
             }
         }
         .prodDetails {
+            white-space: nowrap;
             width: 41.5%;
             margin: $base*2.75 0;
             display: inline-block;
@@ -93,7 +94,7 @@
         .link {
             width: 19.5%;
             display: inline-block;
-            margin:45px 0 ;
+            margin:28px 38px ;
             vertical-align: bottom;
             padding: $base;
             background-color: $ashGrey;
