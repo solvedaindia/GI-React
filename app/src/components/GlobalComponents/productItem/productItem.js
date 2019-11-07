@@ -161,7 +161,7 @@ class ProductItem extends React.Component {
         <Link className="link" to={{ pathname: routePath, state: this.props.isSearchPathPro.includes('/furniture') ? { breadcrumbData: this.props.plpBreadcrumbPro } : undefined}}>
           <div className="hoverBox">
             {this.props.isfromWishlistPro ?
-              <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
+              <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}><b>{this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</b></button> :
               compareButton}
 
             {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
