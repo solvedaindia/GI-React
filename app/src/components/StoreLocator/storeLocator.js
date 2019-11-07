@@ -408,29 +408,6 @@ class StoreLocator extends React.Component {
                                         data = {data}
                                         onWindowClose={()=>this.onInfoWindowClose()}
                                         storeHours={item.storeHours} />
-                                {/* {this.state.Infokey === index && {this.state.isOpen} &&
-                                    <InfoWindow onCloseClick={() => this.handleToggleClose}>
-                                        <div style={{margin: "10px"}}>
-                                            <h4>{item.storeName}</h4>
-                                            {this.props.history.location.state.pincode &&
-                                                <p>{data} Km</p>
-                                            }
-											
-											
-                                            { 
-											
-											item.storeHours && item.storeHours.split('|')[0] && <p>{item.storeHours.split('|')[0]}</p>
-																						
-											}
-											{ 
-											
-											item.storeHours && item.storeHours.split('|')[1] && <p>{item.storeHours.split('|')[1]}</p>
-																						
-											}
-											
-                                        </div>
-                                    </InfoWindow>
-                                } */}
                             </Marker>
                         </div>
                     )
