@@ -125,7 +125,8 @@ class ProductItem extends React.Component {
     else {
       swatchFinalData = this.state.colorSwatchFull;
     }
-
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const compareButton = /ipad/.test( userAgent ) ? null : <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>;
     return (
       <li className="productlist">
         <div className="prdListData">
@@ -161,7 +162,7 @@ class ProductItem extends React.Component {
           <div className="hoverBox">
             {this.props.isfromWishlistPro ?
               <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}> {this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</button> :
-              <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>}
+              compareButton}
 
             {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
               <ul className="colortheme clearfix">
