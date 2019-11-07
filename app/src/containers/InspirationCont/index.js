@@ -4,7 +4,7 @@ import  '../../../public/styles/static-pages/inspiration.scss';
 import LookbookThemeCarousel from '../../components/Primitives/lookBookTheme';
 import InspirationBanner from '../../components/InspirationComp/inspirationBanner';
 import GodrejSolutionEspot from '../../components/InspirationComp/godrejSolution';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import  '../../../public/styles/staticPages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import SummerData from '../../components/InspirationComp/InspEspot';
