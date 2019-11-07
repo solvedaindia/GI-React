@@ -30,7 +30,6 @@ class HeaderMobile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.location.pathname !== "/myAccount" && nextProps.location.pathname !== "/wishlist") {
       this.state.isOnHome = nextProps.match.isExact ? true : false;
       this.setState({
@@ -58,6 +57,17 @@ class HeaderMobile extends React.Component {
     if (nextProps.shareWishlistURL !== this.props.shareWishlistURL) {
       this.state.wishlistURL = nextProps.shareWishlistURL
       this.pageNavigationRender('My Wishlist');
+    }
+    if(window.location.pathname === "/wishlist"){
+      this.pageNavigationRender('My Wishlist');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myprofile'){
+      this.pageNavigationRender('My Profile');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myorder'){
+      this.pageNavigationRender('My Orders');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'password'){
+      this.pageNavigationRender('Change Password');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
+      this.pageNavigationRender('Manage Address');
     }
 
   }
@@ -152,7 +162,7 @@ class HeaderMobile extends React.Component {
           </div>
           <ul className="mob-mini-profile-nav">
             <li key={pageName}>
-              <span className='navigationTitle'>{pageName}</span>
+              <span className='navigationTitle'><b>{pageName}</b></span>
             </li>
           </ul>
           {this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
