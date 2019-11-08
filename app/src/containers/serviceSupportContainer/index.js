@@ -2,7 +2,7 @@ import React from 'react';
 import  '../../../public/styles/static-pages/aboutUs.scss'
 import  '../../../public/styles/static-pages/HelpSupport.scss'
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 export default class HelpSupport extends React.Component {
   constructor(props) {

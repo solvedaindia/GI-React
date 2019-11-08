@@ -3,7 +3,7 @@ import '../../../public/styles/static-pages/inspirationDetails.scss'
 import Lookbook from '../../components/LookbookComponent/lookbbook'
 import Recommended from '../../components/InspirationComp/recommended';
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import  '../../../public/styles/static-pages/aboutUs.scss';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import  '../../../public/styles/staticPages/staticPages.scss';
 import GreenInitiatives from '../../components/aboutUs/greenInitiatives';
 import OurProcess from '../../components/aboutUs/ourProcess';
 import ContentEspot from '../../components/Primitives/staticContent';
