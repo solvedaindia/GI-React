@@ -12,7 +12,7 @@ import {
   validateOTPDigit,
 } from '../../utils/validationManager';
 import '../../../public/styles/forgotpassword/forgototp.scss';
-import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL,BACK, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
+import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
 import ProgressButton from '../Button/progressButton'
 
 class ForgotPasswordOTP extends React.Component {
@@ -202,7 +202,7 @@ class ForgotPasswordOTP extends React.Component {
     } else {
       headingItem = null;
     }
-    if (this.props.isFromMyProfilePro && !this.state.error) {
+    if (this.props.isFromMyProfilePro) {
       headingItem = <h3 className="heading">{PLEASE_ENTER_OPT}</h3>;
     }
 
@@ -215,12 +215,12 @@ class ForgotPasswordOTP extends React.Component {
 
     let inputTxtField = null;
     let titleOTP = null;
-    if (this.state.showOTPTxtField ) {
+    if (this.state.showOTPTxtField) {
       titleOTP = <p className="text">
         {SENT_TO_XXX + userId.substr(userId.length - 4)})
       </p>;
     }
-    if (this.props.isFromMyProfilePro && !this.state.error) {
+    if (this.props.isFromMyProfilePro) {
       titleOTP = (
         <p className="myProfile-Subtitle">
           {ENTER_VERIFICATION_CODE}
@@ -272,7 +272,7 @@ class ForgotPasswordOTP extends React.Component {
       // </Button>
       <ProgressButton isProcessing = {this.state.isProcessing} title={this.state.showOTPTxtField ? 'Proceed' : 'Back'} onClickEvent={this.proceedBtnPressed.bind(this)} styleClassName = "btn-block btn-bg"/>
     );
-    if (this.props.isFromMyProfilePro && !this.state.error ) {
+    if (this.props.isFromMyProfilePro) {
       finalBtn = (
         <div className="myProfile-btn">
           <button className="btn-borderwhite" onClick={this.props.cancelOTPPro}>
@@ -284,15 +284,6 @@ class ForgotPasswordOTP extends React.Component {
           >
             {SUBMIT}
           </button>
-        </div>
-      );
-    } else {
-      finalBtn = (
-        <div className="myProfile-btn">
-          <button className="btn-bg  btn-block" onClick={this.props.cancelOTPPro}>
-           Back
-          </button>
-         
         </div>
       );
     }
