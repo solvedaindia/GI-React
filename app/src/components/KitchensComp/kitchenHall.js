@@ -54,6 +54,7 @@ class KitchenHall extends React.Component {
       autoplaySpeed: 2000,
       slidesToShow: 3,
       slidesToScroll:2,
+      adaptiveHeight: true,
     };
     return (
       hallSlider && 

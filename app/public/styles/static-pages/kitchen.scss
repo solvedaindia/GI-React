@@ -80,6 +80,19 @@
         font-size: 30px;
         color: transparent;
     }
+    .slick-slider {
+        &:hover {
+          text-decoration: none !important;
+          outline: none !important;
+        }
+    }
+
+    .slick-slide {
+        &:focus, &:hover a {
+            text-decoration: none !important;
+            outline: none !important;
+        }
+    }
 }
 
 .faqContainer {
