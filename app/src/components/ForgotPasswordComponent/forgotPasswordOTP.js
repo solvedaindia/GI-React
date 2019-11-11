@@ -12,7 +12,7 @@ import {
   validateOTPDigit,
 } from '../../utils/validationManager';
 import '../../../public/styles/forgotpassword/forgototp.scss';
-import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
+import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL,BACK, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
 import ProgressButton from '../Button/progressButton'
 
 class ForgotPasswordOTP extends React.Component {
@@ -26,7 +26,8 @@ class ForgotPasswordOTP extends React.Component {
       inputText: null,
       showOTPTxtField: true,
       errorClass: `${FORGET_OPT}`,
-      isProcessing:false
+      isProcessing:false,
+      exceededFlag: false
     };
   }
 
@@ -128,6 +129,7 @@ class ForgotPasswordOTP extends React.Component {
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
+        console.log('Response s',response)
         const otpCount = response.data.data.otpCount;
         if (otpCount === 3) {
           const nextComp = `${FORGOT_PASSWORD_OTP}`;
@@ -138,15 +140,18 @@ class ForgotPasswordOTP extends React.Component {
             errorMessage: `${EXCEEDED_MAX}`,
             errorClass: `${FORGET_OTP_MOBILE}`,
           });
+         console.log('our state',this.state)
         }
       })
       .catch(error => {
         const errorData = error.response.data;
+        console.log('Response E',errorData)
         const errorMessage = errorData.error.error_message;
         this.setState({
           // error: true,
           // errorMessage,
           showOTPTxtField: false,
+          exceededFlag: true,
           error: true,
           errorMessage: errorMessage,
           errorClass: `${FORGET_OTP_MOBILE}`,
@@ -202,7 +207,7 @@ class ForgotPasswordOTP extends React.Component {
     } else {
       headingItem = null;
     }
-    if (this.props.isFromMyProfilePro) {
+    if (this.props.isFromMyProfilePro && !this.state.exceededFlag) {
       headingItem = <h3 className="heading">{PLEASE_ENTER_OPT}</h3>;
     }
 
@@ -215,12 +220,12 @@ class ForgotPasswordOTP extends React.Component {
 
     let inputTxtField = null;
     let titleOTP = null;
-    if (this.state.showOTPTxtField) {
+    if (this.state.showOTPTxtField ) {
       titleOTP = <p className="text">
         {SENT_TO_XXX + userId.substr(userId.length - 4)})
       </p>;
     }
-    if (this.props.isFromMyProfilePro) {
+    if (this.props.isFromMyProfilePro && !this.state.exceededFlag ) {
       titleOTP = (
         <p className="myProfile-Subtitle">
           {ENTER_VERIFICATION_CODE}
@@ -272,7 +277,8 @@ class ForgotPasswordOTP extends React.Component {
       // </Button>
       <ProgressButton isProcessing = {this.state.isProcessing} title={this.state.showOTPTxtField ? 'Proceed' : 'Back'} onClickEvent={this.proceedBtnPressed.bind(this)} styleClassName = "btn-block btn-bg"/>
     );
-    if (this.props.isFromMyProfilePro) {
+
+    if (this.props.isFromMyProfilePro && !this.state.exceededFlag) {
       finalBtn = (
         <div className="myProfile-btn">
           <button className="btn-borderwhite" onClick={this.props.cancelOTPPro}>
@@ -284,6 +290,15 @@ class ForgotPasswordOTP extends React.Component {
           >
             {SUBMIT}
           </button>
+        </div>
+      );
+    } else if (this.props.isFromMyProfilePro && this.state.exceededFlag  ) {
+      finalBtn = (
+        <div className="myProfile-btn">
+          <button className="btn-bg  btn-block" onClick={this.props.cancelOTPPro}>
+           Back
+          </button>
+         
         </div>
       );
     }
