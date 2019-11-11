@@ -50,6 +50,7 @@
     background-color: white;
     position: absolute;
     bottom: 0px;
+   // z-index: 10000;
 
     .sortTxt {
       color: #4a90e2;
@@ -92,8 +93,10 @@
   width: 100%;
   background-color: $colorwhite;
   position: fixed;
+  //overflow: scroll;
   bottom: 45px;
-  z-index: 100;
+ // z-index: 10000111;
+ z-index: 100;
 
 .filter-data{
   height: calc(100% - 103px);

@@ -38,6 +38,8 @@ class RWDFilterMain extends React.Component {
   }
 
   showFilterOptions() {
+    document.body.style.overflow =this.state.isShowFilterOptions?"": "hidden";
+    document.body.style.position =this.state.isShowFilterOptions?"": "fixed";
     this.setState({
       isShowFilterOptions: !this.state.isShowFilterOptions,
     });
@@ -52,10 +54,18 @@ class RWDFilterMain extends React.Component {
   moreFilterBtnClick() {
 
   }
+  componentWillUnmount()
+  {
+      document.body.style.overflow ="";
+      document.body.style.position = "";
+  }
 
 
 
   filterCallback() {
+      document.body.style.overflow =this.state.isShowFilterOptions?"": "hidden";
+      document.body.style.position =this.state.isShowFilterOptions?"": "fixed";
+
     this.setState({
       isShowFilterOptions: !this.state.isShowFilterOptions
     })
