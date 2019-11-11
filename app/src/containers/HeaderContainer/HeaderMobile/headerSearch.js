@@ -78,10 +78,19 @@ export class HeaderSearch extends React.Component {
 
 
   onkeydownclick(text) {
+  
+    console.log(event);
     if (event.key === 'Enter') {
+     
       if (text !== '') {
         this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
         this.onLinkNavigation(this.state.inputText);
+      }
+      else{
+        //this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
+        //this.onLinkNavigation(this.state.inputText);
+       // Keyboard.dismiss();
+        event.preventDefault();
       }
     }
   }
