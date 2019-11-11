@@ -53,6 +53,7 @@ export default class GreenInitiatives extends Component {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1024,
