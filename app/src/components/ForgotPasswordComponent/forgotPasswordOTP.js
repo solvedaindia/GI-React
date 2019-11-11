@@ -129,7 +129,6 @@ class ForgotPasswordOTP extends React.Component {
     apiManager
       .post(generateOTPAPI, data)
       .then(response => {
-        console.log('Response s',response)
         const otpCount = response.data.data.otpCount;
         if (otpCount === 3) {
           const nextComp = `${FORGOT_PASSWORD_OTP}`;
@@ -140,12 +139,10 @@ class ForgotPasswordOTP extends React.Component {
             errorMessage: `${EXCEEDED_MAX}`,
             errorClass: `${FORGET_OTP_MOBILE}`,
           });
-         console.log('our state',this.state)
         }
       })
       .catch(error => {
         const errorData = error.response.data;
-        console.log('Response E',errorData)
         const errorMessage = errorData.error.error_message;
         this.setState({
           // error: true,
@@ -179,7 +176,6 @@ class ForgotPasswordOTP extends React.Component {
 
 
     this.props.enteredOTPCallbackPro(this.state.inputText, (err, res) => {
-      console.log(err, res);
       if (err) {
         this.handleErrorBlock(err);
       }
