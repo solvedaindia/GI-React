@@ -135,11 +135,12 @@ class Register extends React.Component {
                       <span className="signin-text">{FACEBOOK_SIGN_IN}</span>
                     </button>
                   )}
-                  autoLoad
+                  // autoLoad
                   fields="name,email,picture"
                   cssClass="btn-white"
                   onClick={this.facebookOnClick.bind(this)}
                   callback={this.responseFacebook}
+                  disableMobileRedirect={true}
                 />
               </div>
               <p className="text_box">
