@@ -133,7 +133,9 @@ class SearchBar extends React.Component {
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-		
+        if(searchItem.includes('\\')){
+          return 
+        }
         var categoryRoutePath = createCategoryPlpURL(item.categoryIdentifier);
         if(item.categoryName === item.parentRoom)
 		{
