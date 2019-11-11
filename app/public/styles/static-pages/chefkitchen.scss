@@ -167,9 +167,14 @@
     .typesOfSteelContainer{
       padding: 110px 0 0 0;
     }
+    .steelBenefitContainerDiv {
+      display: flex;
+      justify-content: center;
+    }
+    
     .container {
       position: relative;
-	  width:90%;
+      width:90%;      
     }
     .Benefitedsteel{
       padding: 64px 0 0 0;
@@ -436,12 +441,17 @@
     font-size:14px;
     color: black;
   }
-
+  .willowBenefitContainerDiv {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .configurationTab
 {
-	margin: 20px 25%;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
 	.configuration-tab{
     color: #77787a;
     display: block;
@@ -479,6 +489,19 @@
         }
        }
 }
+}
+
+@media screen and (max-width: 767px) {
+  .chefKitchen {
+    .steelBenefitContainerDiv {
+      display: block;
+    }
+  }
+  .willowKitchen{
+    .willowBenefitContainerDiv {
+      display: block;
+    }
+  }
 }
  
 
