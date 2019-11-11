@@ -11,7 +11,7 @@ import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import {createCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../../utils/utilityManager';
+import {createCategoryPlpURL,createTopCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex, formateSearchKeyword } from '../../../utils/utilityManager';
 
 export class HeaderSearch extends React.Component {
   constructor(props) {
@@ -90,14 +90,27 @@ export class HeaderSearch extends React.Component {
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-        const routePath = createCategoryPlpURL(item.categoryIdentifier);
+        if(searchItem.includes == '\\'){
+          return;
+        }
+        var routePath = createCategoryPlpURL(item.categoryIdentifier);
+        // this condition added from search.js
+        if(item.categoryName === item.parentRoom)
+        {
+          routePath = createTopCategoryPlpURL(item.categoryIdentifier);
+        }
+
         var searchStr = item.categoryName;
         searchStr += ` in ${item.parentRoom}`;
+        // this line added from search.js
+        var filterStr = searchStr.replace(new RegExp(searchItem, 'gi'), str => { return str.bold()});
         if (index < 4) {
           return (
             <li className="list" key={index}>
-              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={routePath} >
+              {/* <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={routePath} >
                 <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length)}
+              </Link> */}
+              <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={routePath} dangerouslySetInnerHTML={{ __html: filterStr}}>
               </Link>
             </li>
           );
@@ -172,6 +185,9 @@ export class HeaderSearch extends React.Component {
                     if (index < 6) {
                       return (
                         <li className="list" key={index}>
+                          {/* <Link className="link" to={{ pathname: '/search', search: `keyword=${item.term}`, }} onClick={() => this.onLinkNavigation(item.term)} >
+                            <strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length).replace(' ', '')}
+                          </Link> */}
                           <Link className="link" to={{ pathname: '/search', search: `keyword=${item.term}`, }} onClick={() => this.onLinkNavigation(item.term)} >
                             <strong>{item.term.substr(0, searchItem.length)}</strong>{item.term.substr(searchItem.length).replace(' ', '')}
                           </Link>
