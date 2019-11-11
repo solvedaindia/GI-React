@@ -68,6 +68,7 @@ class CartDetail extends React.Component {
 
   componentDidMount() {
     this.props.getCartDetails();
+    console.log(getCookie('isLoggedIn'), getCookie('wishListUniqueId'))
     if(getCookie('isLoggedIn') === 'true' && getCookie('wishListUniqueId') !== undefined && getCookie('wishListUniqueId') !== null && getCookie('wishListUniqueId') !== ''){
 			this.addToWishlistApi();
 		}
