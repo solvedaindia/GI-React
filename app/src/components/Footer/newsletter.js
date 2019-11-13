@@ -90,7 +90,7 @@ class newsletter extends React.Component {
           <h6 className="heading news_heading">{this.props.name.text}</h6>
         )}
         <ul className="newsletterList">
-          {this.props.name.children.map((newsletterDesc, index) => {
+          {this.props.name.children && this.props.name.children.map((newsletterDesc, index) => {
             return(<li className="list" key={index}>
               <h6 className="newsletter-heading">{newsletterDesc.text}</h6>
             </li>);
