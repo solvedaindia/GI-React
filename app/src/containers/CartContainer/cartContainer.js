@@ -87,29 +87,30 @@ class CartDetail extends React.Component {
 		apiManager
 			.post(addToWishlist, data)
 			.then(response => {
-        appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-				appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+        this.handleDeleteItem();
+        // appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+				// appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
         }).catch(error => {
 				
 		});
   }
 
-  // handleDeleteItem() {
-  //     const orderId = appCookie.get('orderItemId');
-  //   	const data = {
-  //   	orderItemId: orderId,
-  //   	};
-  //   	apiManager
-  //   	.post(cartDeleteItemAPI, data)    	
-  //     .then(response => {
-  //       appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-  //       appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
-  //       this.setState({abc: true});
-  //     })
-  //   	.catch(error => {
+  handleDeleteItem() {
+      const orderId = appCookie.get('orderItemId');
+    	const data = {
+    	orderItemId: orderId,
+    	};
+    	apiManager
+    	.post(cartDeleteItemAPI, data)    	
+      .then(response => {
+        appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+        this.setState({abc: true});
+      })
+    	.catch(error => {
     		
-  //   	});
-  //   }
+    	});
+    }
 
   render() {
     const { cartData } = this.props;
