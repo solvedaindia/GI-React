@@ -24,6 +24,7 @@ export class HomePageContainer extends React.Component {
       category: {},
       isLoading: false,
       error: null,
+      
     };
   }
 
