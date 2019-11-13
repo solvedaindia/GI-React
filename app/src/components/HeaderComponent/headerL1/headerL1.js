@@ -50,7 +50,7 @@ class HeaderL1 extends React.Component {
   const { isLoading, layer1Data, getDefaultPincode } = this.state;
     return (
       <ul className="layer1">
-        {!isLoading ? (
+        {(!isLoading && layer1Data && layer1Data.length>0) ? (
           layer1Data.map((linkData, index) => (
             <li className="listItems" key={index}>
               {linkData.text === 'TRACK ORDER' ? (

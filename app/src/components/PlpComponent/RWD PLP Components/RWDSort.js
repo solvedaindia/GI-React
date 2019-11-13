@@ -46,9 +46,21 @@ class RWDSort extends React.Component {
   }
 
   showSortOptions() {
+    
+   //console.log("values",this.state.isShowSortOptions)
+    document.body.style.overflow =this.state.isShowSortOptions?"": "hidden";
+    document.body.style.position =this.state.isShowSortOptions?"": "fixed";
+    //document.body.style.position = "fixed";
+  
+    //$('body').css('overflow', 'hidden');
     this.setState({
       isShowSortOptions: !this.state.isShowSortOptions,
     });
+  }
+  componentWillUnmount()
+  {
+    document.body.style.overflow ="";
+    document.body.style.position = "";
   }
 
   handleClick(i) {

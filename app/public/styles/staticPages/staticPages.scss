@@ -318,7 +318,7 @@
 	
 	.easySteps .step-wizard-step {
 		position: relative;
-		height: 205px !important;
+		// height: 205px !important;
 	}
 
 	.goesOnKitchen .slick-prev {
@@ -370,7 +370,7 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 220px !important;
+			// height: 220px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
@@ -380,14 +380,14 @@
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 20px !important;
+			// min-height: 20px !important;
 		}
 	}
 }
 
 @media (max-width: 375px) {
 	.ProcessNumber {
-		padding-right: 20px;
+		padding-right: 18px;
 	}
 	.sliderHeading {
 		text-align: left;
@@ -406,7 +406,7 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 220px !important;
+			// height: 220px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
@@ -416,7 +416,7 @@
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 20px !important;
+			// min-height: 20px !important;
 		}
 	}
 }
@@ -475,7 +475,7 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 205px !important;
+			// height: 205px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
@@ -485,7 +485,7 @@
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 15px !important;
+			// min-height: 15px !important;
 		}
 	}
 }
@@ -516,11 +516,12 @@
 			font-size: 19px;
 			text-align: left;
 		}
+		.slick-slide {
+			margin-right: 10px;
+		}
 	}
 	
-	.slick-slide {
-		margin-right: 10px;
-	}
+	
 
     .serviceSupport {
 		.faq-heading {
@@ -536,84 +537,84 @@
 	  }
 }
 
-@media screen and (min-width: 767px) and (min-width: 1024px) and (orientation: landscape) {
-	.easySteps {
-		.step-wizard-step {
-			position: relative !important;
-			height: 350px !important;
-		}
-		.steps-separator {
-			text-align: center !important;
-			width: 70% !important;
-    		clear: both !important;
-			position: relative !important;
-			margin-top: 20px !important;
-			margin-right: 30px !important;
-			text-align: center !important;
-			min-height: 39px !important;
-		}
-		.stepCircle {
-			top: -20px !important;
-			left: 0px !important;
-			width: 48px !important;
-			height: 48px !important;
-			position: absolute !important;
-			background: #036cc5 !important;
-			color: #fff !important;
-			text-align: center !important;
-			padding: 10px 0 !important;
-			font-size: 20px !important;
-			border-radius: 24px !important;
-			display: inline-block !important;
-			line-height: 25px !important;
-		}
+// @media screen and (min-width: 767px) and (min-width: 1024px) and (orientation: landscape) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
 		
-		.imgBox {
-			text-align: center !important;
-			// width: 75% !important;
-			justify-content: center;
-			display: flex;
-		}
-	}
-}
+// 		.imgBox {
+// 			text-align: center !important;
+// 			// width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }
 
-@media screen and (min-width: 767px) and (max-width: 1024px) and (orientation: portrait) {
-	.easySteps {
-		.step-wizard-step {
-			position: relative !important;
-			height: 350px !important;
-		}
-		.steps-separator {
-			text-align: center !important;
-			width: 70% !important;
-    		clear: both !important;
-			position: relative !important;
-			margin-top: 20px !important;
-			margin-right: 30px !important;
-			text-align: center !important;
-			min-height: 39px !important;
-		}
-		.stepCircle {
-			top: -20px !important;
-			left: 0px !important;
-			width: 48px !important;
-			height: 48px !important;
-			position: absolute !important;
-			background: #036cc5 !important;
-			color: #fff !important;
-			text-align: center !important;
-			padding: 10px 0 !important;
-			font-size: 20px !important;
-			border-radius: 24px !important;
-			display: inline-block !important;
-			line-height: 25px !important;
-		}
+// @media screen and (min-width: 767px) and (max-width: 1024px) and (orientation: portrait) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
 		
-		.imgBox {
-			text-align: center !important;
-			width: 75% !important;
-			justify-content: center;
-			display: flex;
-		}
-	}
-}
+// 		.imgBox {
+// 			text-align: center !important;
+// 			width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }
