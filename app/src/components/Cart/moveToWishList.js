@@ -9,6 +9,7 @@ import apiManager from '../../utils/apiManager';
 import { getCookie } from '../../utils/utilityManager';
 import MoveToWishListLogo from '../SVGs/moveToWishlistIcon';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
+import appCookie from '../../utils/cookie';
 
 class MoveToWishList extends React.Component {
   constructor(props) {
@@ -39,6 +40,9 @@ class MoveToWishList extends React.Component {
   
   handleMoveToWishList(e) {
     if (getCookie('isLoggedIn') !== 'true') {
+      appCookie.set('saveForLaterClicked', true, 365 * 24 * 60 * 60 * 1000);
+      appCookie.set('orderItemId', this.props.orderItemId, 365 * 24 * 60 * 60 * 1000);
+      appCookie.set('wishListUniqueId', this.props.uniqueID, 365 * 24 * 60 * 60 * 1000);
       return this.setState({
         loginScreen : true
       })
