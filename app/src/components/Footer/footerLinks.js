@@ -14,7 +14,7 @@ const Footerlinks = props => {
           <h5 className="heading">{item.text}</h5>
           <ul>
             {
-				item.children.map((litem, i) => (
+				item.children && item.children.map((litem, i) => (
 				  <li className="list" key={i}>
 					  {(litem.action.indexOf('#') == -1 && litem.action.indexOf('http') == -1)?
 						   <Link

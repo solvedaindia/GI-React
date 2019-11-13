@@ -119,7 +119,7 @@ class StoreLinks extends React.Component {
                                 </>
                             )})
                         }
-
+                        { this.props.name.children && this.props.name.children.length > 0 &&
                          <li className='list moreButton'>
                             <a className='link'>
                                 { !isMobile() ? (
@@ -129,7 +129,7 @@ class StoreLinks extends React.Component {
                                 )}
                                 </a>
                         </li>
-                        
+                        }
                     </ul>
                 </div>
             </Col>
