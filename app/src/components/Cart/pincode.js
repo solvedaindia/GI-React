@@ -74,9 +74,19 @@ class Pincode extends React.Component {
 		apiManager
 			.get(pinCodeServiceAPI + this.state.pincodeVal)
 			.then(response => {
-				this.setState({
-					error: null
-				})
+				const pincodeData = response.data.data;
+				if (!pincodeData.serviceable) {
+					this.setState({
+						error: 'Pincode is Non-Serviceable',
+						isLoading: false
+					});
+					this.disableCheckoutBtn();
+				}
+				else {
+					this.setState({
+						error: null
+					})
+				}
 				this.enableCheckoutBtn();
 				this.props.getCartDetails();
 			})

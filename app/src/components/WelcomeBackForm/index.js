@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-/* Import Components */
 import Input from '../Primitives/input';
-import Button from '../Button/button';
-//import { Button } from 'react-bootstrap';
 import ProgressButton from '../Button/progressButton'
 import {
   regexEmail,
@@ -10,7 +7,7 @@ import {
   validateEmptyObject,
   regexPw
 } from '../../utils/validationManager';
-import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
+import { VALID_EMAILNUMBER_MSG, VALID_PASSWORD_MSG, VALID_INCORRECTP_PASS_MSG } from '../../constants/app/primitivesConstants';
 
 class WelcomeForm extends Component {
   constructor(props) {
@@ -52,31 +49,31 @@ class WelcomeForm extends Component {
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
+        errorMessageUserId: VALID_EMAILNUMBER_MSG,
       });
       isValidate = false;
     } else if (!input.includes('@') && Number.isInteger(firstChar)) {
       if ((!regexMobileNo.test(obj.userId)) || ((obj.userId.length) < 10) || ((obj.userId.length) > 10)) {
         this.setState({
-          errorMessageUserId: 'Please enter valid Email id/Mobile Number',
+          errorMessageUserId: VALID_EMAILNUMBER_MSG,
         });
         isValidate = false;
       }
     } else if (!regexEmail.test(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email id/Mobile Number',
+        errorMessageUserId: VALID_EMAILNUMBER_MSG,
       });
       isValidate = false;
     }
 
     if (!validateEmptyObject(obj.password)) {
       this.setState({
-        errorMessagePassword: 'Enter a valid password ',
+        errorMessagePassword: VALID_PASSWORD_MSG,
       });
       isValidate = false;
     } else if ((!regexPw.test(obj.password) && obj.password.length < 25) || (obj.password.length > 25)) {
       this.setState({
-        errorMessagePassword: 'Password entered is incorrect ',
+        errorMessagePassword: VALID_INCORRECTP_PASS_MSG,
       });
       isValidate = false;
     }
@@ -86,7 +83,8 @@ class WelcomeForm extends Component {
 
   /* Handle Submit */
   handleFormSubmit = e => {
-    e.preventDefault();
+    if(e!=null)
+      e.preventDefault();
     const isValidate = this.handleValidation(this.state, true);
 
     if (isValidate === false) {
@@ -130,6 +128,14 @@ class WelcomeForm extends Component {
   }
 
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.handleFormSubmit();
+    }
+  }
+
+
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
   // handleHide = (e) => {
@@ -152,6 +158,7 @@ class WelcomeForm extends Component {
           type="text"
           title="Email Address or Mobile Number"
           name="userId"
+          onKeyPress={this.onKeyPress}
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
@@ -169,6 +176,7 @@ class WelcomeForm extends Component {
           placeholder=""
           onChange={this.handleChange}
           hideAnimation
+          onKeyPress={this.onKeyPress}
           onPaste={this.copyPaste}
         />
        <span

@@ -55,8 +55,26 @@ export const MY_ORDER = 'My Orders';
 export const MANAGE_ADDRESSES = 'Manage Addresses';
 export const WELCOME_INTERIO = 'Welcome to Interio!';
 export const LOGIN_REGISTER = 'Login/Register';
+export const FULLNAME_MSG = 'Please enter your full name';
+export const VALIDNAME_MSG = 'Please enter a valid Name. It should not exceed 100 characters';
+export const VALIDEMAIL_MSG = 'Please enter valid Email Id';
+export const SELECT_OPTION_MSG = 'Please select an option';
+export const MOBILE_MSG = 'Please enter valid Mobile Number';
+export const FEEDBACK_MSG = 'Thank you for the feedback';
+export const ENTEROTP_MSG = 'Please enter OTP';
+export const INCORRECTOTP_MSG = 'OTP entered is incorrect';
+export const MAXOTP_ATTAMPTS_MSG = 'OTP cannot be regenerated. You have exceeded the maximum number of resending attempts (3)';
+export const STORELOCATOR_TITLE = 'Experience our products first hand at your nearest Godrej Interio store';
+export const MINCOMPARECOUNT_MSG = 'Please add at least two products to compare';
 
-
+//Validation MSG
+export const FIELDREQ_MSG = 'This field is required';
+export const NAME_VALIDATION_MSG = 'Please enter a valid Name. It should not exceed 100 characters';
+export const PASSWORD_MIN_VALIDATION_MSG = 'Invalid Password. Password should have min 6 characters and atleast 1 number';
+export const PASSWORD_MAX_VALIDATION_MSG = 'Invalid Password. Password should have max 25 characters and atleast 1 number';
+export const VALID_EMAILNUMBER_MSG = 'Please enter valid Email id/Mobile Number';
+export const VALID_PASSWORD_MSG = 'Enter a valid password';
+export const VALID_INCORRECTP_PASS_MSG = 'Password entered is incorrect ';
 
 
 

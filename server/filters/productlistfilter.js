@@ -11,69 +11,71 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
   const facetData = [];
   if (facetViewData && facetViewData.length > 0) {
     facetViewData.forEach(facet => {
-      const eachFacetValue = {
-        facetName: facet.name,
-        facetValues: [],
-      };
-      if (facet.name === 'ParentCatalogGroup') {
-        eachFacetValue.facetName = 'Category';
-      }
-      if (facet.name === 'OfferPrice_INR') {
-        eachFacetValue.facetName = 'Price';
-      }
-      if (facet.name === 'percentOff') {
-        eachFacetValue.facetName = 'Offer';
-      }
-
-      if (facet.entry && facet.entry.length > 0) {
-        for (let i = 0; i < facet.entry.length; i += 1) {
-          const facetValue = facet.entry[i];
-          const facetEntry = {
-            label: facetValue.label,
-            count: Number(facetValue.count),
-          };
-          if (facet.name === 'OfferPrice_INR' && facetValue.label) {
-            const priceRange = facetValue.label
-              .replace('*', 0)
-              .match(numberPattern);
-            if (priceRange[1] === '0') {
-              facetEntry.label = `Above ₹${formatPrice(priceRange[0])}`;
-            } else {
-              facetEntry.label = `₹${formatPrice(
-                priceRange[0],
-              )} to ₹${formatPrice(priceRange[1])}`;
-            }
-          }
-          if (
-            facet.value === 'parentCatgroup_id_search' &&
-            !facetValue.extendedData.parentIds
-          ) {
-            // eslint-disable-next-line no-continue
-            continue;
-          }
-          if (facet.value === 'parentCatgroup_id_search') {
-            facetEntry.value = `${facet.value}:${catalogID}_${
-              facetValue.value
-            }`;
-          } else {
-            facetEntry.value = facetValue.value;
-          }
-          if (facetValue.image) {
-            const facetImageArray = facetValue.image.split('/');
-            const facetImageArrayLength = facetImageArray.length;
-            if (rbgRegex.test(facetImageArray[facetImageArrayLength - 1])) {
-              facetEntry.colorCode =
-                facetImageArray[facetImageArray.length - 1];
-            } else {
-              facetEntry.facetImage = imageFilter.getImagePath(
-                facetValue.image,
-              );
-            }
-          }
-          eachFacetValue.facetValues.push(facetEntry);
+      if (facet.name !== 'ParentCatalogGroup') {
+        const eachFacetValue = {
+          facetName: facet.name,
+          facetValues: [],
+        };
+        if (facet.name === 'ParentCatalogGroup') {
+          eachFacetValue.facetName = 'Category';
         }
+        if (facet.name.includes('OfferPrice_INR')) {
+          eachFacetValue.facetName = 'Price';
+        }
+        if (facet.name === 'percentOff') {
+          eachFacetValue.facetName = 'Offer';
+        }
+
+        if (facet.entry && facet.entry.length > 0) {
+          for (let i = 0; i < facet.entry.length; i += 1) {
+            const facetValue = facet.entry[i];
+            const facetEntry = {
+              label: facetValue.label,
+              count: Number(facetValue.count),
+            };
+            if (facet.name.includes('OfferPrice_INR') && facetValue.label) {
+              const priceRange = facetValue.label
+                .replace('*', 0)
+                .match(numberPattern);
+              if (priceRange[1] === '0') {
+                facetEntry.label = `Above ₹${formatPrice(priceRange[0])}`;
+              } else {
+                facetEntry.label = `₹${formatPrice(
+                  priceRange[0],
+                )} to ₹${formatPrice(priceRange[1])}`;
+              }
+            }
+            if (
+              facet.value === 'parentCatgroup_id_search' &&
+              !facetValue.extendedData.parentIds
+            ) {
+              // eslint-disable-next-line no-continue
+              continue;
+            }
+            if (facet.value === 'parentCatgroup_id_search') {
+              facetEntry.value = `${facet.value}:${catalogID}_${
+                facetValue.value
+              }`;
+            } else {
+              facetEntry.value = facetValue.value;
+            }
+            if (facetValue.image) {
+              const facetImageArray = facetValue.image.split('/');
+              const facetImageArrayLength = facetImageArray.length;
+              if (rbgRegex.test(facetImageArray[facetImageArrayLength - 1])) {
+                facetEntry.colorCode =
+                  facetImageArray[facetImageArray.length - 1];
+              } else {
+                facetEntry.facetImage = imageFilter.getImagePath(
+                  facetValue.image,
+                );
+              }
+            }
+            eachFacetValue.facetValues.push(facetEntry);
+          }
+        }
+        facetData.push(eachFacetValue);
       }
-      facetData.push(eachFacetValue);
     });
   }
   return facetData;

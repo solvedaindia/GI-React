@@ -1,23 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import '../../../public/styles/checkout.scss';
-import injectSaga from '../../utils/injectSaga';
-import injectReducer from '../../utils/injectReducer';
 import axios from 'axios';
-
-import Link from 'react-router-dom/Link';
 import { Step1Component } from './step1';
 import { Step2Component } from './step2';
 import { Step3Component } from './step3';
 import { OrderSummaryComponent } from './orderSummary'
-import loadable from 'loadable-components';
 import appCookie from '../../utils/cookie';
 import queryString from 'query-string';
-import apiManager from '../../utils/apiManager';
-import failPop from './failPop'
 import { Redirect } from 'react-router-dom';
 import { isMobile } from '../../utils/utilityManager';
 import MWebLogo from '../../components/SVGs/mWebLogo';
@@ -31,7 +20,6 @@ import {
   accessToken,
   accessTokenCookie,
   userLoginAPI,
-  addressListAPI,
   userDataAPI,
   UserVerifyAPI,
   OrderSummaryAPI,
@@ -41,11 +29,6 @@ import {
   port2,
   shipModeAPI,
 } from '../../../public/constants/constants';
-import {
-  getReleventReduxState
-} from '../../utils/utilityManager';
-import { blue } from 'ansi-colors';
-import { timeout } from 'q';
 import FailPop from './failPop';
 
 export class CheckoutComponent extends React.Component {
@@ -103,7 +86,6 @@ export class CheckoutComponent extends React.Component {
   callprofileAPI = () => {
     return new Promise((resolve, reject) => {
       let token = appCookie.get('accessToken')
-      let url = addressListAPI;
       axios.get(userDataAPI, {
         headers: { store_id: storeId, access_token: token }
       }).then(response => {
@@ -127,21 +109,6 @@ export class CheckoutComponent extends React.Component {
       .catch(error => {
       });
   }
-
-
-  // callAddressAPI = () => {
-  //   return new Promise((resolve, reject) => {
-  //     let token = appCookie.get('accessToken')
-  //     let url = addressListAPI;
-  //     axios.get(addressListAPI, {
-  //       headers: { store_id: storeId, access_token: token }
-  //     }).then(response => {
-  //       resolve(response.data.data);
-  //     }).catch(error => {
-  //       reject(error);
-  //     })
-  //   })
-  // }
 
   handleHasPass = () => {
     if (this.state.has_pass == false) {

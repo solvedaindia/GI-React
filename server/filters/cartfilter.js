@@ -116,6 +116,9 @@ function getOrderSummary(cartData) {
   } else {
     orderSummary.addressID = '';
   }
-
+  if (cartData.paymentInstruction && cartData.paymentInstruction.length > 0) {
+    orderSummary.billingAddressID =
+      cartData.paymentInstruction[0].billing_address_id || '';
+  }
   return orderSummary;
 }

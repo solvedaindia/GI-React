@@ -20,14 +20,12 @@ import {
 
 import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
-import Sort from './Sorting/sort';
-import LoadingIndicator from '../../utils/loadingIndicator';
 import appCookie from '../../utils/cookie';
+import {PRODUCT_RESTRICTION, SAME_CAT, DIFF_CAT, ALREADY_ADDED  } from '../../constants/app/plpConstants';
 
 class PlpComponent extends React.Component {
   constructor(props) {
     super(props);
-    console.log("aaaaaaaaaa",'constructor');
     this.state = {
       plpItem: null,
       adBannerIndex: 12,
@@ -35,13 +33,10 @@ class PlpComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("aaaaaaaaaa",'componentWillReceiveProps');
-    console.log("aaaaaaaaaa p",nextProps);
     this.parsePLPData(nextProps, true);
   }
 
   componentDidMount() {
-    console.log("aaaaaaaaaa",'componentDidMount');
     this.parsePLPData(this.props, false);
   }
 
@@ -57,18 +52,13 @@ class PlpComponent extends React.Component {
     const compCat = compdata.find(prd => prd.catId == this.props.catId);
     const masterProduct = compdata.find(prd => prd.masterCategoryID == product.masterCategoryID);
     if (compPrd) {
-      alert(
-        'Product already added in Compare tray. Please add another product',
-      );
+      alert(ALREADY_ADDED);
     } else if (compdata.length == 3) {
-      alert(
-        'You can add upto 3 products. Please remove a product to add another',
-      );
+      alert(PRODUCT_RESTRICTION);
     } else if (compdata.length > 0 && !compCat) {
-      alert('Please select same category products');
-    } 
-    else if (compdata.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
-      alert('Selected product is from different category');
+      alert(SAME_CAT);
+    } else if (compdata.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
+      alert(DIFF_CAT);
     } 
     else {
       if (this.props.compData.length === 0) {

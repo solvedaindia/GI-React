@@ -1,17 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Menu, Icon } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import {INDIAS_HIGHEST, INSTALL} from '../../constants/app/storeDetailsConstants'
-
-import data from './data';
 
 const Wrapper = styled.div``;
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 class AppDownloadBanner extends React.Component {
   render() {
-    const { left, right } = data;
     return (
       <Wrapper className="app-download-banner fixed-toolbar fixed-toolbar--top">
         <div className="app-download-banner__star-rating" data-reactid="5">

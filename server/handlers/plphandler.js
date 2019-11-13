@@ -73,16 +73,61 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   const reqHeader = req.headers;
   const queryUrl = getQueryUrl(req);
 
+  let searchTerm = req.params.searchterm;
+  const splitTermsArray = searchTerm.split(" ");
+
+  let indexes = "";
+  let reg = new RegExp('^[0-9]+$');
+
+  for(let i = 0; i< splitTermsArray.length-1; i++){
+    if(splitTermsArray[i].match(reg) && !splitTermsArray[i+1].match(reg)){
+      if(indexes === ""){
+        indexes = indexes + i;
+      }else{
+        indexes = indexes + "," + i;
+      }
+    }
+  }
+
+  searchTerm = "";
+  let i = 0;
+  for(i=0; i< splitTermsArray.length-1;){
+    if(indexes.includes(i.toString())){
+      if(searchTerm === "") {
+        searchTerm = searchTerm.concat("\"", splitTermsArray[i], " ", splitTermsArray[i+1], "\"");
+        i = i + 2;
+      } else {
+        searchTerm = searchTerm.concat(" ", "\"", splitTermsArray[i], " ", splitTermsArray[i+1], "\"");
+        i = i + 2;
+      }
+    } else {
+      if(searchTerm === ""){
+        searchTerm = searchTerm.concat(splitTermsArray[i]);
+        i++;
+      } else {
+        searchTerm = searchTerm.concat(" ", splitTermsArray[i]);      
+        i++;
+      }
+    }
+  }
+
+  if(i == splitTermsArray.length - 1) {
+    if(searchTerm === "")
+      searchTerm = searchTerm.concat(splitTermsArray[i]);
+    else
+      searchTerm = searchTerm.concat(" ", splitTermsArray[i]);   
+  }
+
+
   const searchResponse = {
-    searchTerm: req.params.searchterm,
+    searchTerm: searchTerm,
     productCount: 0,
     facetData: [],
     productList: [],
   };
-
   let productListUrl = constants.searchByTerm
     .replace('{{storeId}}', reqHeader.storeId)
-    .replace('{{searchTerm}}', req.params.searchterm)
+    .replace('{{searchTerm}}', searchTerm)
     .replace('{{queryUrl}}', queryUrl);
   productListUrl += `&searchType=${plpconfig.searchPageSearchType}`;
 
@@ -201,7 +246,7 @@ function getSearchFacetList(req, callback) {
   }
   let facetListUrl = constants.searchByTerm
     .replace('{{storeId}}', header.storeId)
-    .replace('{{searchTerm}}', req.params.searchterm)
+    .replace('{{searchTerm}}', encodeURIComponent(req.params.searchterm))
     .replace('{{queryUrl}}', queryUrl);
   facetListUrl += `&searchType=${plpconfig.searchPageSearchType}`;
   const reqHeader = headerUtil.getWCSHeaders(header);

@@ -50,6 +50,7 @@
     background-color: white;
     position: absolute;
     bottom: 0px;
+   // z-index: 10000;
 
     .sortTxt {
       color: #4a90e2;
@@ -92,8 +93,10 @@
   width: 100%;
   background-color: $colorwhite;
   position: fixed;
+  //overflow: scroll;
   bottom: 45px;
-  z-index: 100;
+ // z-index: 10000111;
+ z-index: 100;
 
 .filter-data{
   height: calc(100% - 103px);
@@ -437,10 +440,16 @@
               -----------------------------*/
               .inputCheck[type="checkbox"] + .lblCheck {
                 background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
-                display: inline;
+                display: block;
                 min-height: 16px;
                 padding-left: 16px;
                 background-size: contain;
+
+                border: 1px solid #cfcfcf;
+                border-radius: 100%;
+                background: none;
+                width: 19px;
+                min-height: 19px;
               }
   
               .inputCheck[type="checkbox"]:checked + .lblCheck {
@@ -456,7 +465,7 @@
               text-align: left;
             }
             .label_text_disable {
-              padding: 0 0px 15px 0;
+              padding: 0 0px 0px 0;
               color: #c9c9c9;
               font-size: $base * 1.5;
               text-align: left;

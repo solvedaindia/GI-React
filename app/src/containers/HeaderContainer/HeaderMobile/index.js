@@ -5,14 +5,11 @@ import { Link, withRouter } from 'react-router-dom';
 import WishListCount from '../../../components/Wishlist/wishlist';
 import CartCount from '../../../components/Cart/cart';
 import '../../../../public/styles/RWDStyle/mobileHeader.scss';
-// import '../../../../public/styles/headerContainer/headerRight.scss';
 import SideNavigation from './sideNavigation';
 import HeaderSearch from './headerSearch';
 import '../../../../public/styles/RWDStyle/sideNavigation.scss';
-import { Row, Col, Grid } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
-import ShareLogo from '../../../components/SVGs/shareIcon';
-import SocialMedia from '../../../utils/socialMedia';
 import SocialMediaRWD from '../../../utils/mobileUtils/socialMedia';
 import '../../../../public/styles/pdpComponent/pdpComponent.scss';
 const shareImg = <img src={require('../../../../public/images/share.svg')} alt='shareImg'/>;
@@ -33,7 +30,6 @@ class HeaderMobile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.location.pathname !== "/myAccount" && nextProps.location.pathname !== "/wishlist") {
       this.state.isOnHome = nextProps.match.isExact ? true : false;
       this.setState({
@@ -62,14 +58,38 @@ class HeaderMobile extends React.Component {
       this.state.wishlistURL = nextProps.shareWishlistURL
       this.pageNavigationRender('My Wishlist');
     }
+    if(window.location.pathname === "/wishlist"){
+      this.pageNavigationRender('My Wishlist');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myprofile'){
+      this.pageNavigationRender('My Profile');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myorder'){
+      this.pageNavigationRender('My Orders');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'password'){
+      this.pageNavigationRender('Change Password');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
+      this.pageNavigationRender('Manage Address');
+    }
 
   }
 
   componentDidMount() {
     this.state.isOnHome = this.props.match.isExact ? true : false;
-    this.setState({
-      headerRenderItem: this.defaultRender()
-    })
+    if(window.location.pathname === "/wishlist"){
+      this.pageNavigationRender('My Wishlist');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myprofile'){
+      this.pageNavigationRender('My Profile');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'myorder'){
+      this.pageNavigationRender('My Orders');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'password'){
+      this.pageNavigationRender('Change Password');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
+      this.pageNavigationRender('Manage Address');
+    }
+    else {
+      this.setState({
+        headerRenderItem: this.defaultRender()
+      })
+    }
   }
 
   wishlsitShareURLCallback(shareURL) {
@@ -142,17 +162,13 @@ class HeaderMobile extends React.Component {
           </div>
           <ul className="mob-mini-profile-nav">
             <li key={pageName}>
-              <span className='navigationTitle'>{pageName}</span>
+              <span className='navigationTitle'><b>{pageName}</b></span>
             </li>
           </ul>
-          {/* pageName === 'My Wishlist' */this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
-            {/* <ShareLogo /> */}
-            {/* {this.state.showSocialShare ? ( */}
-
+          {this.state.wishlistURL !== null ? <button className='shareBtn' onClick={this.onShareClick.bind(this)}>
             <SocialMediaRWD fromWislistPro
               sharingURLPro={this.props.shareWishlistURL}
               shareImage={shareImg} />
-            {/* ) : null} */}
           </button> : null}
 
         </Col>
@@ -211,9 +227,4 @@ function mapStateToProps(state) {
   };
 }
 
-
-// export default connect(
-//   mapStateToProps,
-// )(HeaderMobile);
 export default withRouter(connect(mapStateToProps, { resetRWDHeaderFlag, updateTheRWDHeader })(HeaderMobile))
-// export default withRouter(HeaderMobile);

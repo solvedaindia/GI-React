@@ -25,7 +25,7 @@ import appCookie from '../../utils/cookie';
 import {isMobile} from '../../utils/utilityManager';
 import ContentEspot from '../../components/Primitives/staticContent';
 import WhiteLogo from '../SVGs/whiteLogo';
-import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER} from '../../constants/app/primitivesConstants';
+import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER, FIELDREQ_MSG, NAME_VALIDATION_MSG, VALIDEMAIL_MSG, MOBILE_MSG, PASSWORD_MIN_VALIDATION_MSG, PASSWORD_MAX_VALIDATION_MSG} from '../../constants/app/primitivesConstants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -78,19 +78,19 @@ class RegisterWithEmailMobile extends React.Component {
     
     if (!validateEmptyObject(obj.name)) {
       this.setState({
-        errorMessageName: 'This field is required',
+        errorMessageName: FIELDREQ_MSG,
       });
       isValidate = false;
 	} else if (!validateFullName(obj.name) || !(regexName.test(obj.name))) {
 		this.setState({
-		  errorMessageName: 'Please enter a valid Name. It should not exceed 100 characters',
+		  errorMessageName: NAME_VALIDATION_MSG,
 		});
 		isValidate = false;
 	}
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'The field is required',
+        errorMessageUserId: FIELDREQ_MSG,
       });
       isValidate = false;
     } else if (
@@ -98,7 +98,7 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.registrationType !== registerWithMobileNum
     ) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id',
+        errorMessageUserId: VALIDEMAIL_MSG,
       });
       isValidate = false;
     } else if (
@@ -106,26 +106,26 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.registrationType === registerWithMobileNum
     ) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Mobile number',
+        errorMessageUserId: MOBILE_MSG,
       });
       isValidate = false;
     }
     
     if (!validateEmptyObject(obj.password)) {
       this.setState({
-        errorMessagePassword: 'The field is required',
+        errorMessagePassword: FIELDREQ_MSG,
       });
       isValidate = false;
     } else if (!regexPw.test(obj.password) && obj.password.length < 25) {
       this.setState({
         errorMessagePassword:
-          'Invalid Password. Password should have min 6 characters and atleast 1 number',
+          PASSWORD_MIN_VALIDATION_MSG,
       });
       isValidate = false;
     } else if ((!regexPw.test(obj.password) && obj.password.length > 24) || obj.password.length > 25) {
 		this.setState({
 		  errorMessagePassword:
-			'Invalid Password. Password should have max 25 characters and atleast 1 number',
+			PASSWORD_MAX_VALIDATION_MSG,
 		});
 		isValidate = false;
 	  }

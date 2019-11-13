@@ -7,11 +7,10 @@
  */
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import { LastLocationProvider } from 'react-router-last-location';
 import apiManager from '../../utils/apiManager';
-import { registerGuestUser, getCurrentTime } from '../../utils/initialManager';
+import { registerGuestUser } from '../../utils/initialManager';
 import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import {createBrowserHistory} from 'history';
@@ -60,7 +59,6 @@ import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import SearchContainer from '../Search Container/searchContainer';
 import OrderConformtion from '../orderConfirmation/index'
 import CartDetail from '../CartContainer/cartContainer';
 import StoreLocator from '../../components/StoreLocator/storeLocator';
@@ -218,7 +216,6 @@ export default class App extends React.Component {
 		if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
 		{
 		  navigator.geolocation.getCurrentPosition(
-			function(){console.log("success")},
 			function(){appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);}
 		  );
        

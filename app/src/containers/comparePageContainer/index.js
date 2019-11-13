@@ -3,14 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Row, Col, Grid } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import apiManger from '../../utils/apiManager';
-import injectSaga from '../../utils/injectSaga';
-import injectReducer from '../../utils/injectReducer';
-import axios from 'axios';
-import { compareAPI, storeId, accessToken, pinCodeAPI, findinventoryAPI } from '../../../public/constants/constants';
+import { compareAPI, storeId } from '../../../public/constants/constants';
 import * as actionCreators from '../PlpContainer/actions';
-import Link from 'react-router-dom/Link';
 import {
   getReleventReduxState
 } from '../../utils/utilityManager';
@@ -73,25 +69,6 @@ export class ComparePageContainer extends React.Component {
       });
       ids = cookieIdArray;
     }
-    
-    // this.state.compWidgetData.forEach(element => {
-    //   ids.push(element.skuId);
-    // });
-
-    // let params = new URLSearchParams(this.props.location.search);
-    // const compIdStr = params.get('ids');
-    // if (compIdStr != null) { //Load page from Route search params
-    //   const compIdArr = compIdStr.split('/');
-    //   if (compIdArr.length !== 0) {
-    //     ids = compIdArr
-    //     this.state.compWidgetData = compIdArr;
-    //   }
-    // }
-    // else {
-    //   //this.updateRoute();
-    // }
-
-
 
     apiManger.get(`${compareAPI}?ids=${ids}`, {
       headers: {
@@ -105,7 +82,6 @@ export class ComparePageContainer extends React.Component {
       });
       this.renderPrd();
     }).catch(error => {
-      console.log('Error: ' + error);
       this.setState({
         loading: false
       })
@@ -227,25 +203,9 @@ export class ComparePageContainer extends React.Component {
   }
 
   swatchHandle = (id, index, name) => {
-
-    //if (!this.state.compWidgetData.includes(id)) {
       this.state.compWidgetData[index] = id;
       this.state.swatchIndex[index] = id;
-      //this.renderPrd()
       this.updateSingleCompProduct(index);
-      //this.updateRoute();
-   // }
-
-    // var obj = {
-    //   id: id,
-    //   index: index,
-    //   name: name
-    // };
-
-    // if (index == 0) {
-
-    // }
-    // this.props.updateSKU(obj);
   }
 
   loadingbar() {
@@ -303,9 +263,6 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 );
-
-//   const withReducer = injectReducer({ key: 'plpContainer', reducer });
-//   const withSaga = injectSaga({ key: 'plpContainer', saga });
 
 export default compose(
   withConnect,

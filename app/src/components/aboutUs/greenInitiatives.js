@@ -36,6 +36,7 @@ export default class GreenInitiatives extends Component {
               title:data.data.title,
               slides:data.data.bannerList,
          });
+         this.props.handler()
       })
       .catch(error => {
         this.setState({
@@ -52,6 +53,7 @@ export default class GreenInitiatives extends Component {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1024,

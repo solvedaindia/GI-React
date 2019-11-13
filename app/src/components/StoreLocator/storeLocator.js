@@ -22,18 +22,12 @@ import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
 
 
-import { DIRECTIONS } from '../../constants/app/primitivesConstants';
+import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
 
 // import Imgblack1 from '../../../public/images/store/kitchen-galleries-black.png';
 const NUMB_REG = /^\d+$/;
-const pageTitle = 'Experience our products first hand at your nearest Godrej Interio store';
+const pageTitle = STORELOCATOR_TITLE;
 
-const prevArrowImg = (
-    <img src={require('../SVGs/carousel__arrowLeft.svg')} alt="Prev" />
-);
-const nextArrowImg = (
-    <img src={require('../SVGs/carousel__arrowRight.svg')} alt="Next" />
-);
 class StoreLocator extends React.Component {
     constructor(props) {
         super();
@@ -414,29 +408,6 @@ class StoreLocator extends React.Component {
                                         data = {data}
                                         onWindowClose={()=>this.onInfoWindowClose()}
                                         storeHours={item.storeHours} />
-                                {/* {this.state.Infokey === index && {this.state.isOpen} &&
-                                    <InfoWindow onCloseClick={() => this.handleToggleClose}>
-                                        <div style={{margin: "10px"}}>
-                                            <h4>{item.storeName}</h4>
-                                            {this.props.history.location.state.pincode &&
-                                                <p>{data} Km</p>
-                                            }
-											
-											
-                                            { 
-											
-											item.storeHours && item.storeHours.split('|')[0] && <p>{item.storeHours.split('|')[0]}</p>
-																						
-											}
-											{ 
-											
-											item.storeHours && item.storeHours.split('|')[1] && <p>{item.storeHours.split('|')[1]}</p>
-																						
-											}
-											
-                                        </div>
-                                    </InfoWindow>
-                                } */}
                             </Marker>
                         </div>
                     )

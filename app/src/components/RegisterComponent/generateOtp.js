@@ -5,7 +5,7 @@ import { validateEmptyObject, validateOTPDigit } from '../../utils/validationMan
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
 import { isMobile } from '../../utils/utilityManager';
-import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER} from '../../constants/app/primitivesConstants';
+import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER, INCORRECTOTP_MSG, ENTEROTP_MSG} from '../../constants/app/primitivesConstants';
 import ProgressButton from '../Button/progressButton'
 const LeftArrow = (
     <img className='leftArrow'
@@ -31,7 +31,7 @@ class GenerateOtp extends React.Component {
         if (!validateEmptyObject(this.state.inputText)) {
             this.setState({
                 error: true,
-                errorMessage: 'Please enter OTP',
+                errorMessage: ENTEROTP_MSG,
             });
             return;
         }
@@ -40,7 +40,7 @@ class GenerateOtp extends React.Component {
         if (!validateOTPDigit(this.state.inputText)) {
             this.setState({
                 error: true,
-                errorMessage: 'OTP entered is incorrect',
+                errorMessage: INCORRECTOTP_MSG,
             });
             return;
         }

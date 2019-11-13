@@ -1,5 +1,4 @@
 import React from 'react';
-import { imagePrefix } from '../../../../../public/constants/constants';
 import RWDSingleProduct from './RWDSingleProduct';
 import { Link } from 'react-router-dom';
 import appCookie from '../../../../utils/cookie';
@@ -10,9 +9,6 @@ class RWDCompleteOrder extends React.Component {
     this.state = {
 
     };
-  }
-
-  onInvoiceClick(invoiceNo) {
   }
 
   render() {
@@ -66,7 +62,7 @@ class RWDCompleteOrder extends React.Component {
             <div className='summary'>
             <p className="cart-total">
               <span className="info-text">Cart Total</span>
-              <span className="info-val">₹{summeryData.netAmount}</span>
+              <span className="info-val">₹{summeryData.totalAmount}</span>
             </p>
             <p className="product-ship-disc">
               <span className="info-text">Shipping</span>
@@ -76,14 +72,14 @@ class RWDCompleteOrder extends React.Component {
               <span className="info-text">Product Discount</span>
               <span className="info-val">{summeryData.productDiscount === 0 ? null : '-'} ₹{summeryData.productDiscount}</span>
             </p> 
-            <p className="order-disc">
+            {summeryData.orderDiscount === 0 ? null : <p className="order-disc">
               <span className="info-text">Order Discount</span>
               <span className="info-val">-₹{summeryData.orderDiscount}</span>
-            </p>
+            </p>}
             <div className="divider"></div>
             <p className="totalAmt">
               <span className="info-text">Total</span>
-              <span className="info-val">₹{summeryData.totalAmount}</span>
+              <span className="info-val">₹{summeryData.netAmount}</span>
             </p>
             </div>
           </div>
@@ -94,7 +90,7 @@ class RWDCompleteOrder extends React.Component {
             {invoiceData.map((data, key) => {
               return (
 					<li
-						onClick={evt => this.onInvoiceClick(this.props.invoiceData[key])} className="list"
+						className="list"
 					>
 						<Link className='link' to={{ pathname: `/invoice/${data}` }}>
 							INVOICE {key + 1}

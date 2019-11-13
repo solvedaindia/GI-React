@@ -20,11 +20,11 @@ module.exports.getAutoSuggestResult = (req, callback) => {
     getCategorySuggestion.bind(null, req, req.params.byterm),
   ];
   async.parallel(autoSuggestTask, (err, result) => {
-    resultObj.suggestionView = result[0].suggestionView;
-    resultObj.categorySuggestionView = result[1].categorySuggestionView;
     if (err) {
       callback(err);
     } else {
+      resultObj.suggestionView = result[0].suggestionView;
+      resultObj.categorySuggestionView = result[1].categorySuggestionView;
       callback(null, resultObj);
     }
   });

@@ -16,7 +16,7 @@ import KitchenBanner from '../../components/KitchensComp/kitchenBanner';
 import ConsultationForm from '../../components/Primitives/ConsultForm'
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ContentEspot from '../../components/Primitives/staticContent';
-import  '../../../public/styles/staticpages/staticPages.scss';
+import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import {BOOK_CONSULTATION,KITCHEN_CONSULT,WARDROBE_CONSULT} from '../../constants/app/primitivesConstants';
 

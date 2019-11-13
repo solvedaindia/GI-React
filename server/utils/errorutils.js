@@ -164,7 +164,6 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_FINDER_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_ORDER_WRONG_STATUS' ||
         errBody.errors[0].errorKey === '_ERR_INVALID_INPUT' ||
-        errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
         errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
@@ -183,6 +182,14 @@ module.exports.handleWCSError = function handleWCSError(response) {
           status_code: 400,
           error_key: errBody.errors[0].errorKey,
           error_message: errBody.errors[0].errorMessage,
+        };
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT') {
+        return {
+          status_code: 400,
+          error_key: 'ERROR_RESEND_OTP_COUNT',
+          error_message:
+            'You have exceeded the maximum number of attempts (3) for OTP',
         };
       }
       if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED') {
@@ -314,7 +321,10 @@ module.exports.handleWCSError = function handleWCSError(response) {
       ) {
         return errorlist.user_does_not_exists;
       }
-      if (errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND') {
+      if (
+        errBody.errors[0].errorKey === 'ERROR_INVALID_ORDER_ID' ||
+        errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND'
+      ) {
         return errorlist.order_not_found;
       }
       return (

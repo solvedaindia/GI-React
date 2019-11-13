@@ -24,6 +24,10 @@ class ContentEspot extends React.Component {
             staticContent: data && data.data,
             isLoading: false,
         });
+        this.props.handler()
+        
+        // alert( this.props.handler())
+       
       })
       .catch(error => {
         this.setState({
@@ -35,6 +39,7 @@ class ContentEspot extends React.Component {
 
   componentDidMount() {
     this.getEspotData();
+    // console.log('this.props.handler()',this.props.handler())
   }
 
   render() {
