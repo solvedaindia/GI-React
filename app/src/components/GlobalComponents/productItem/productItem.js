@@ -13,6 +13,7 @@ import {
   addToCart,
   removeFromWishlist,
   wishlistIdCookie,
+  imagePrefix,
 } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import {
@@ -169,9 +170,30 @@ class ProductItem extends React.Component {
 
                 {swatchFinalData.map(item => {
                   var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+                  var checkedType = false;
+									var radioButtonHtml;
+									var name = '';
+									var imgUrl = '';
+									colorStyle = {
+										display: "block",
+									}
+									var circle = 'display:block';
+									var isRadio = false;
+                  var boxClass = '';
+                  if (item.colorCode) {
+										circle = 'circle';
+										colorStyle = {
+											backgroundColor: `rgb${item.colorCode}`,
+                    };
+                  }
+                  else if (item.facetImage) {
+										circle = 'circleImg';
+										imgUrl = item.facetImage;
+										name = <img className="imgCircle" src={`${imagePrefix}${imgUrl}`} />;
+									}
                   return (
                     <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-                      <span className='swatches-circle' style={colorStyle}></span>
+                <span className={name==''?'swatches-circle':'swatches-circle-img'} style={colorStyle}>{name}</span>
                     </li>
                   )
 

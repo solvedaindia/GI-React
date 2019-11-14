@@ -267,6 +267,10 @@ section.tablecarousel {
               padding: 5px;
               border-radius: 100%;
             }
+            .swatches-circle-img {
+              display: block;
+              border-radius: 100%;
+            }
           }
 
           .active {
@@ -1096,6 +1100,16 @@ section.tablecarousel {
               width: 24px;
               height: 24px;
             }
+            .swatches-circle-img {
+              width: 24px;
+              height: 24px;
+              .imgCircle{
+                display: block;
+                width:24px;
+                height: 24px;            
+                border-radius: 100%;
+              }
+            }
           } 
         }
       }
@@ -1256,6 +1270,18 @@ section.tablecarousel {
             .swatches-circle{
               width: 12px;
               height: 12px;
+              
+            }
+            .swatches-circle-img{
+              width: 12px;
+              height: 12px;
+              .imgCircle{
+                display: block;
+                width:12px;
+                height: 12px;            
+                border-radius: 100%;
+                //vertical-align: baseline;
+              }
             }
           } 
         } 
