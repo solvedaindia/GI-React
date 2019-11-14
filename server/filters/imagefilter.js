@@ -5,10 +5,10 @@
 module.exports.getImagePath = function getImagePath(imagePath) {
   let newImagePath = '';
   if (imagePath) {
-    newImagePath = imagePath.substring(
-      imagePath.indexOf('/images'),
+    newImagePath = `/${imagePath.substring(
+      imagePath.indexOf('B2C'),
       imagePath.length,
-    );
+    )}`;
   }
   return newImagePath;
 };

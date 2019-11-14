@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../../public/styles/static-pages/chefkitchen.scss';
-import '../../../public/styles/staticpages/staticPages.scss';
+import '../../../public/styles/staticPages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import WillowKitchenBanner from '../../components/KitchensComp/willowKitchenbanner';
 import { Helmet } from "react-helmet";

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Row, Grid, Col } from 'react-bootstrap';
 import { string } from 'prop-types';
 
@@ -14,9 +14,24 @@ class DescriptionBanner extends React.Component {
       readMoreTitle: 'Read More',
     };
   }
+  
+  scrollToRef = (ref) => window.scrollTo(0, ref.offsetTop)   
+  // useMountEffect = (fun) => useEffect(fun, [])
 
   initBanner(getData) {
-    const charLimit = getData.descriptionDataPro.webCharLimit;
+    let charLimit;
+    if( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      charLimit = getData.descriptionDataPro.mobileCharLimit
+    } else {
+      charLimit = getData.descriptionDataPro.webCharLimit;
+    }
 	var trimStr;
 	if(getData.descriptionDataPro.description != null)
 	{
@@ -50,7 +65,11 @@ class DescriptionBanner extends React.Component {
         finalData: this.state.splitData,
         readMoreTitle: 'Read More',
       });
+      this.scrollToRef(this.refs.description)
     } else {
+      // debugger;
+      // const a = document.getElementsByClassName('descriptionBanner');
+      
       this.setState({
         isReadMore: true,
         finalData: this.props.descriptionDataPro.description,
@@ -58,12 +77,12 @@ class DescriptionBanner extends React.Component {
       });
     }
   }
-
+  
   render() {
     const { finalData } = this.state
     return (
       !!finalData && (
-        <div className="descriptionBanner">
+        <div ref="description" className="descriptionBanner">
           <Grid>
             <Row>
               <Col md={12}>

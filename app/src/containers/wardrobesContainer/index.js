@@ -6,7 +6,7 @@
 
 import React from 'react';
 import '../../../public/styles/static-pages/kitchen.scss';
-import '../../../public/styles/staticpages/staticPages.scss';
+import '../../../public/styles/staticPages/staticPages.scss';
 import KitchenStore from '../../components/KitchensComp/kitchenStore';
 import ConsultationForm from '../../components/Primitives/ConsultForm';
 import ContentEspot from '../../components/Primitives/staticContent';

@@ -71,33 +71,40 @@ class WillowKitchenConfiguration extends React.Component {
    const{ configurationTabing, currentIndex } =this.state;
   //  if (currentIndex != -1)
   //  console.log('sahir', configurationTabing[currentIndex].bannerList)
-    return (
-     <div className='container'>
-         <h1>{this.state.title}</h1>
-          <div className='configurationTab'>
-            {!!configurationTabing &&
-            configurationTabing.map((tabData, index) => (
-              <a onClick={this.onHandleClick.bind(this, index)}   key={index} className='link' >
-              {tabData.title}
-               </a>
+  const tabs =configurationTabing.map((tabData, index) =>{
+    return(
 
-            ))}
-             
-      </div>
+      <li >
+        <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+        {tabData.title}
+          
+          </a>
+      </li>
+    )
+  })
+  return (
+    <div className='container'>
+        <h1>{this.state.title}</h1>
+         <div className='configurationTab'>
+           <ul className='configuration-tab'>
+           {tabs}
+           </ul>
+           
+     </div>
 <div className='clearfix'></div>
 <Slider {...settings}>
-          {currentIndex !== -1 && !!configurationTabing && configurationTabing[currentIndex].bannerList &&
-            configurationTabing[currentIndex].bannerList.map((sliderData, index) => (
-              <a href={sliderData.onClickUrl} key={index} className='slides'>
-                <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
-               </a>
+         {currentIndex !== -1 && !!configurationTabing && configurationTabing[currentIndex].bannerList &&
+           configurationTabing[currentIndex].bannerList.map((sliderData, index) => (
+             <a href={sliderData.onClickUrl} key={index} className='slides'>
+               <img className='img' src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
+              </a>
 
-            ))}
-        </Slider>
+           ))}
+       </Slider>
 
-      
-      </div>
-    );
+     
+     </div>
+   );
   }
 }
 

@@ -117,7 +117,7 @@ function getFormattedDate(inputDate) {
     const month = monthNames[newDate.getMonth()];
     const year = newDate.getFullYear();
     const day = dayNames[newDate.getDay()];
-    formattedDate = `${day},${date} ${month} ${year}`;
+    formattedDate = `${day}, ${date} ${month} ${year}`;
   }
   return formattedDate;
 }

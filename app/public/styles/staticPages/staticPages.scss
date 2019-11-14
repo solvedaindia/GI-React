@@ -1,3 +1,5 @@
+@import '../base';
+	
 	.staticpage 
 	{
 		h1, h2, h3, h4 {
@@ -25,7 +27,7 @@
 		padding-top:20px;
 		font-size:30px;
 		font-weight:500;
-		text-align:center;
+		text-align: center;
 		padding-bottom:20px;
 	}
 	
@@ -120,11 +122,17 @@
 		font-weight: 600;
 		line-height: 30px;
 		border:none;
+		&:focus{
+			outline: 0;
+			box-shadow: none !important;
+          }
 	}
 
 	.staticpage .active
 	{
 		color: black;
+		outline: 0;
+		box-shadow: none !important;
 	}
 	
 	.arrowNumber{
@@ -190,10 +198,83 @@
 		padding-bottom:10px;
 		margin-bottom:10px;
 	}
+
+	#ourProcess {
+		margin-bottom: 20px;
+	}
+
+	#careers {
+		margin-top: 45px;
+	}
 	
+	#greenInitiatives {
+		margin-bottom: 20px;
+    	margin-top: 20px;
+		.container {
+			.slick-slider {
+				background: #f2f5f7;
+    			padding-bottom: 20px;
+    			padding-top: 20px;
+			}
+		}
+	}
+
+	.chefKitchen {
+		.shutterNavHeading {
+			padding: 10px;
+			color: #000000;
+			font-weight: 800;
+			font-size: 14px;
+			margin-top: 30px;
+			margin-bottom: 5px;
+		}
+	}
+	.willowKitchen {
+		.shutterNavHeading {
+			padding: 10px;
+			color: #000000;
+			font-weight: 800;
+			font-size: 14px;
+			margin-top: 30px;
+			margin-bottom: 5px;
+		}
+	}
 
 @media (max-width: 1024px) 
-{
+{	
+	.sliderHeading {
+		text-align: left;
+	}
+
+	.sliderDesc {
+		text-align: left;
+	}
+
+	#ourProcess {
+		margin-bottom: 0px;
+	}
+
+	#careers {
+		margin-top: 0px;
+	}
+	
+	#greenInitiatives {
+		margin-bottom: 0px;
+    	margin-top: 0px;
+		.container {
+			.slick-slider {
+				background: #f2f5f7;
+    			padding-bottom: 0px;
+    			padding-top: 0px;
+			}
+		}
+	}
+
+	.staticpage {
+		.sliderDesc {
+			text-align: center;
+		}
+	}
 
 	.aboutUs {
      padding-right: 0px!important;
@@ -237,7 +318,7 @@
 	
 	.easySteps .step-wizard-step {
 		position: relative;
-		height: 165px !important;
+		// height: 205px !important;
 	}
 
 	.goesOnKitchen .slick-prev {
@@ -254,7 +335,7 @@
 	}
 	
 	.ProcessNumber {
-		padding-right: 14px;
+		padding-right: 61px;
 		font-size: 19px;
 	}
 	#careers{
@@ -268,11 +349,272 @@
 	}
 }
 
-@media (max-width: 580px) 
-{
+@media (max-width: 415px) {
 	.ProcessNumber {
-		padding-right: 12px;
+		padding-right: 24px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100% !important;
+	}
+	.staticpage .nav {
+		width: 100% !important;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 220px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 20px !important;
+		}
+	}
+}
+
+@media (max-width: 375px) {
+	.ProcessNumber {
+		padding-right: 18px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 220px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 20px !important;
+		}
+	}
+}
+
+@media (max-width: 580px)
+{
+	// .ProcessNumber {
+	// 	padding-right: 23px;
+	// }
+	.goesOnKitchen {
+		.title {
+			font-size: 17px;
+			text-align: left;
+		}
+		.sliderDesc {
+			text-align: left;
+			padding-right: 27px;
+		}
+		.slick-slide {
+			margin-right: 8px;
+		} 
+		.sliderHeading {
+			text-align: left;
+		}		
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+}
+
+
+@media (max-width: 321px) {
+	.ProcessNumber {
+		padding-right: 14px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 205px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 15px !important;
+		}
+	}
+}
+
+@media (max-width: 769px) and (orientation: portrait)  {
+	.staticpage{
+		.sliderDesc {
+			text-align: left;
+			padding-right: 27px;
+		}
+	}
+	.staticpage {
+		.sliderHeading {
+			text-align: left;
+		}
+	}	
+	.staticpage #v-pills-tabContent {
+		width: 78%;
+	}
+	.staticpage .nav {
+		width: 20%;
+	}	
+}
+
+@media (max-width: 769px)  {
+	.goesOnKitchen {
+		.title {
+			font-size: 19px;
+			text-align: left;
+		}
+		.slick-slide {
+			margin-right: 10px;
+		}
 	}
 	
 	
+
+    .serviceSupport {
+		.faq-heading {
+		  padding-bottom: 0px;
+		  padding-top: 0px;
+		  margin-top: 0px;
+		  margin-bottom: 0px;
+		  text-align: left;
+		  font-size: 16.9px;
+		  line-height: 13.5px;
+		  font-weight: 600;
+		}
+	  }
 }
+
+// @media screen and (min-width: 767px) and (min-width: 1024px) and (orientation: landscape) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
+		
+// 		.imgBox {
+// 			text-align: center !important;
+// 			// width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }
+
+// @media screen and (min-width: 767px) and (max-width: 1024px) and (orientation: portrait) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
+		
+// 		.imgBox {
+// 			text-align: center !important;
+// 			width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }

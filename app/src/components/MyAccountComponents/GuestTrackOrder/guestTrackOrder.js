@@ -61,8 +61,11 @@ class GuestTrackOrder extends React.Component {
   {
     if(event.key === 'Enter'){
       this.submitBtnClicked();
+    } else if (event.key === '/' || event.key === '\\'){
+     event.preventDefault()
     }
   }
+
 
   render() {
     if (this.state.redirect) {

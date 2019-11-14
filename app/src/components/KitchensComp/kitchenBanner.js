@@ -62,6 +62,7 @@ class WardrobeBanner extends React.Component {
       autoplaySpeed: 2000,
       slidesToShow: 1,
       slidesToScroll: 1,
+      adaptiveHeight: true
     };
     return (
       <div className="fsBanner">

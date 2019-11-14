@@ -56,6 +56,10 @@ export class MyAccountContainer extends React.Component {
       })
     // }
   }
+ 
+  scrollTop(){
+    window.scrollTo(0,0);
+  }
 
   myProfileCallback(userName, passwordTag) {
     this.setState({
@@ -69,24 +73,28 @@ export class MyAccountContainer extends React.Component {
   }
 
   onMyProfileClick() {
+   this.scrollTop();
     this.setState({
       redirectedFrom: 'myprofile'
     })
   }
 
   onPasswordClick() {
+    this.scrollTop();
     this.setState({
       redirectedFrom: 'password'
     })
   }
 
   onMyOrderClick() {
+    this.scrollTop();
     this.setState({
       redirectedFrom: 'myorder'
     })
   }
 
   onAddressClick() {
+    this.scrollTop();
     this.setState({
       redirectedFrom: 'address'
     })

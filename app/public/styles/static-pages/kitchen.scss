@@ -24,7 +24,7 @@
         text-decoration: none;
     }
     .slick-initialized .slick-slide {
-        padding: 0 15px;
+        padding: 0 15px; 
     }
     .slick-next {
         right: 10px;
@@ -44,6 +44,7 @@
         color: transparent;
     }
 }
+
 .whatGoesArrow{
     .slick-initialized .slick-slide {
       padding: 0 15px;
@@ -78,6 +79,19 @@
     .slick-prev::before {
         font-size: 30px;
         color: transparent;
+    }
+    .slick-slider {
+        &:hover {
+          text-decoration: none !important;
+          outline: none !important;
+        }
+    }
+
+    .slick-slide {
+        &:focus, &:hover a {
+            text-decoration: none !important;
+            outline: none !important;
+        }
     }
 }
 

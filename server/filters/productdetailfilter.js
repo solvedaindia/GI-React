@@ -449,7 +449,7 @@ function swatchAttributesForCompare(productData) {
           if (match !== null) {
             attributeJson.colorCode = attributeValue.image1 || '';
           } else {
-            attributeJson.colorCode =
+            attributeJson.swatchImage =
               imagefilter.getImagePath(attributeValue.image1path) || '';
           }
         });
