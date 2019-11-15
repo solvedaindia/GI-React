@@ -77,6 +77,8 @@ export class MyAccountContainer extends React.Component {
     this.setState({
       redirectedFrom: 'myprofile'
     })
+ 
+    
   }
 
   onPasswordClick() {
@@ -173,7 +175,7 @@ export class MyAccountContainer extends React.Component {
               <div className="tab-content">
                 <div className={`tab-pane ${this.state.redirectedFrom === 'myprofile' ? 'active' : ''}`}/*  id="profile-v" */ >
                   {' '}
-                  <MyProfile myProfileCallbackPro={this.myProfileCallback} />
+                  <MyProfile myProfileCallbackPro={this.myProfileCallback}  restrictRefresh={this.state.redirectedFrom}/>
                 </div>
                 <div className={`tab-pane ${this.state.redirectedFrom === 'password' ? 'active' : ''}`}/*  id="changePassword-v" */ >
                   <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />

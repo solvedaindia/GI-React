@@ -76,6 +76,13 @@ class MyProfile extends React.Component {
         inputText_name: this.state.userResponse.name,
         inputText_email: this.state.userResponse.emailID,
         inputText_number: this.state.userResponse.mobileNo,
+        error_name: false,
+        error_number: false,
+        error_email: false,
+  
+        errorMessage_name: '',
+        errorMessage_number: '',
+        errorMessage_email: '',
       });
     }
   }
