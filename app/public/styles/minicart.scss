@@ -9,14 +9,15 @@
   width: 100%;
 }
 .mini-cartscroll {
-  max-height: 570px;
+  // max-height: 465px;
+  max-height: 435px;
   overflow: auto;
 }
 .mini-cart {
   .cartCount {
     position: absolute;
     top: -6px;
-    right: 0;
+    right: -6px;
     background: $reddishPink;
     width: 16px;
     height: 16px;
@@ -36,18 +37,15 @@
       border: none;
     }
     
-    z-index: 9;
+    z-index: 999999999;
     &__list {
       transition: max-height 0.2s ease-out;
       max-height: 0;
       overflow: hidden;
       margin: 0;
       padding: 0;
-      position: absolute;
-      width: 440px;
       background: $greybg;
       right: 0;
-      top: 49px;
 
       &--active {
         max-height: 1000px;
@@ -60,13 +58,16 @@
     &__list-item {
       border-bottom: 1px solid $lightblueGrey;
       .minicartList {
-        padding: 20px 16px;
+        // padding: 20px 16px;
+        padding: 12px 16px;
+		width: 100%;
         .imgBox {
           float: left;
           display: block;
           width: 35%;
           .imgfullwidth {
             width: 100%;
+            max-height:120px;
           }
         }
 
@@ -75,27 +76,38 @@
           display: block;
           width: 65%;
           padding: 0 0 0 12px;
+          .link{
+            &:hover,&:focus{
+              text-decoration: none;
+            }
+          }
 
           .heading {
             color: $black;
-            font-family: $font-bold;
+            font-family: $font-medium;
             font-size: 16px;
-            margin: 0;
+            line-height: 16px;
+            margin: 0 0 5px 0;
           }
           .description {
-            margin: 0;
+            margin: 0 0 6px 0;
             font-size: 10px;
+            line-height: 10px;
             color: $greyLight;
+            font-family: $font-regular;
           }
           .price {
             margin: 0;
+            line-height: initial;
             .discount-price {
               font-size: 20px;
+              line-height: 20px;
               color: $cerulean;
               font-family: $font-bold;
             }
             .priceno-discount {
               font-size: 16px;
+              line-height: 16px;
               color: $greylightColor;
               font-family: $font-light;
               text-decoration: line-through;
@@ -118,6 +130,8 @@
             color: $battleshipGrey;
             font-size: 10px;
             margin: 0;
+			text-transform:uppercase;
+            font-family: $font-medium;
             .quantity {
               padding: 0 16px 0 0;
               display: block;
@@ -125,7 +139,9 @@
               float: left;
               .textval {
                 color: $black;
-                font-size: 18px;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
               }
             }
             .shipping-charge {
@@ -133,7 +149,9 @@
               display: block;
               .textval {
                 color: $black;
-                font-size: 18px;
+                font-size: 14px;
+                line-height: 14px;
+                font-family: $font-regular;
               }
             }
           }
@@ -159,4 +177,149 @@
       background: transparent;
     }
   }
+}
+
+// ----- Empty Minicart ------
+.emptyCart {
+  text-align: center;
+  padding: 30px 40px;
+  cursor: auto;
+  .heading{
+    margin:0;   
+    color:$black;
+    font-size: 22px;
+  }
+  .subheading{
+    margin:0;   
+    color: $battleshipGrey;
+    font-size: 14px;
+    padding:8px 0 0 0;
+  }
+
+  .emptyCartIcon {
+    width: 25%; 
+  }
+}
+
+/*---- ScrollBar -----------------------*/
+@at-root#mini-cartscroll::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+border-radius: 10px;
+background-color: #f7f8f8;
+width:20px;
+}
+
+#mini-cartscroll::-webkit-scrollbar
+{
+width: 3px;
+background-color: #dfe0de;
+}
+
+#mini-cartscroll::-webkit-scrollbar-thumb
+{   
+width:5px;
+border-radius: 10px;
+box-shadow : inset 0 0 6px rgba(0,0,0,.3);
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #ccc;
+}
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .mini-cart {
+      .dropdown {
+        &__list {
+          position: absolute;
+          width: 440px;
+          top: 48px;
+        }
+        .link{
+         display: block;
+        }
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){
+  .mini-cart {
+    .dropdown {
+      &__list {
+        position: fixed;
+        width: 100%;
+        max-width: 450px;;
+        top: 55px;
+      } 
+      .link{
+        display: block;
+       }     
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
 }

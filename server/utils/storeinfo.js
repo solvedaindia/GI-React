@@ -4,10 +4,14 @@ const originMethod = 'GET';
 const logger = require('./logger.js');
 const errorUtils = require('./errorutils');
 
-module.exports.getStoreDetails = function getStoreDetails(headers, callback) {
+/* To Get the Store Details Based on Store Identifier */
+module.exports.getStoreDetails = function getStoreDetails(
+  storeIdentifier,
+  callback,
+) {
   const originUrl = constants.storeDetails.replace(
     '{{storeIdentifier}}',
-    headers.store_id,
+    storeIdentifier,
   );
   origin.getResponse(
     originMethod,
@@ -33,7 +37,6 @@ module.exports.getStoreDetails = function getStoreDetails(headers, callback) {
         }
         logger.debug('Error While Fetching Store Details');
         callback(errorUtils.errorlist.store_invalid);
-        //    global[headers.storeIdentifier] = storeDetails;
       } else {
         logger.debug('Error While Fetching Store Details');
         callback(errorUtils.handleWCSError(response));

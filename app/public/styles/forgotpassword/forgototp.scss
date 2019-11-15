@@ -1,81 +1,158 @@
 @import "../app.scss";
-@import '../base.scss';
-.modalmin-height{
+@import "../base.scss";
+.modalmin-height {
   min-height: 120px;
 }
-.modal-forgot{
-   .modal-dialog{ 
-      .close{          
-          &:before, &:after {
-              background: $black;
-          }
-        }
+.modal-forgot {
+  .modal-dialog {
+    .close {
+      &:before,
+      &:after {
+        background: $black;
+      }
+    }
   }
 }
 .modal-dialog {
   .modal-wrapper {
     .form-center {
-      .forgototp-mobile{
-      .form-group {      
-        .form-control{
-          margin: 0 0 40px 0;
-        }
-        .btn-bg{margin:30px 0 0 0}
-        .otp-text {
-          text-align: center;
-          color: #424b5a;
-          padding: 0 0 15px 0;
-        }
-        .btn-back{    
-          position: absolute;
-          top: 28px;
-          left: 20px;
-          background: transparent;
-          border: none;
-          color: #979797;
-      }
-        .resend-otp {
-          background: transparent;
-          float: right;
-          border: none;
-          margin: 0 0 0px 0;
-          color:$ceruleanblue;
-          position: static;
-          right: 0;
-          bottom: 10px;
-          font-family: $font-bold;
-          font-size:12px;
-        }
-        .otperrorwidth{width: 80%}
-        .enterotp-msg{
-          .error-msg{
-            width:70%;
-            float: left;
-            }
-         }  
-       } 
-
-     } 
-
-     .forgot-attempts{
-      min-height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 0 30px 0;
-       .form-group{
-        .enterotp-msg{
-          .error-msg{
-            width:80%;
-            margin:0 auto;
-            float:none;
-            text-align: center;
+      .forgototp-mobile {
+        .form-group {
+          .form-control {
+            margin: 0 0 40px 0;
           }
-         }
-       }     
-       
-      
-     }
+          .btn-bg {
+            margin: 30px 0 0 0;
+          }
+          .otp-text {
+            text-align: center;
+            color: #424b5a;
+            padding: 0 0 15px 0;
+          }
+          .btn-back {
+            position: absolute;
+            top: 28px;
+            left: 20px;
+            background: transparent;
+            border: none;
+            color: #979797;
+          }
+          .resend-otp {
+            background: transparent;
+            float: right;
+            border: none;
+            margin: 0 0 0px 0;
+            color: $ceruleanblue;
+            position: static;
+            right: 0;
+            bottom: 10px;
+            font-family: $font-bold;
+            font-size: 12px;
+          }
+          .otperrorwidth {
+            width: 80%;
+          }
+          .enterotp-msg {
+            .error-msg {
+              width: 70%;
+              float: left;
+            }
+          }
+        }
+      }
+
+      .forgot-attempts {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 30px 0;
+        .form-group {
+          .enterotp-msg {
+            .error-msg {
+              width: 80%;
+              margin: 0 auto;
+              float: none;
+              text-align: center;
+            }
+          }
+        }
+      }
     }
-   }
+  }
 }
+
+.myProfile-btn {
+  padding:18px 0 0 0;
+  .btn-submit,
+  .btn-borderwhite {
+    width:47%;
+    display:inline-block;
+  }
+    
+  .btn-submit {
+    margin: 0 0 16px 0;
+    background: $black;
+    color: $colorwhite;
+    margin:0 0 0 20px;
+    float: right;
+  }
+  .btn-borderwhite {
+    
+    font-size: 14px;
+    font-family: $font-bold;
+
+    
+  }
+}
+
+.myProfile-Subtitle {
+  font-size: $base*1.75;
+  font-weight: normal;
+  color: $battleshipGrey;
+  line-height: 1.14;
+  text-align: center;
+}
+
+.myProfile-otplabel {
+  font-size: $base*1.75;
+  font-weight: normal;
+  color: $battleshipGrey;
+
+}
+
+
+  /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+    .modal-forgot{
+      .modal-dialog {
+        .modal-wrapper {
+          .form-center {
+            .forgototp-mobile {
+              .form-group{
+                margin-top: 12px;
+                .text{
+                  position: absolute;
+                  top: -10px;
+                  left: 11px;
+                  background:$colorwhite;
+                  font-size: 10px;
+                  padding: 0px 6px;
+                  z-index: 1;
+                }
+                .enterotp-msg{
+                  .resend-otp {
+                    position: absolute;
+                    top: 0px;
+                    margin: 5px 10px 0px 0px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -9,26 +10,30 @@ const contextService = require('request-context');
 const uniqid = require('uniqid');
 const https = require('https');
 const fs = require('fs');
+require('./utils/apicache');
 const tokenValidation = require('./utils/tokenvalidation');
-const errorUtils = require('./utils/errorutils');
 const logger = require('./utils/logger.js');
 const storeInfo = require('./utils/storeinfo');
 
-// const csrf = require('csurf');
-// const session = require('express-session');
-// const errorHandler = require('errorhandler');
+const port = process.env.SERVER_PORT || '8002';
+global.storeDetails = {};
+
+// Cron JOB
+require('./utils/cronjobs').startStoreInfoCron();
+
+process.on('uncaughtException', err => {
+  logger.debug(err);
+  process.exit(1);
+});
 
 const app = express();
-
-app.use(
-  cors({
-    origin: '*',
-  }),
-);
-
-// app.use(require('morgan')('dev'));
-// app.disable('x-powered-by');
-// app.use(csrf());
+if(process.env.WCSENDPOINT === 'LOCAL' || process.env.WCSENDPOINT === 'DEV' || process.env.WCSENDPOINT === 'SIT' || process.env.WCSENDPOINT === 'UAT'){
+  app.use(
+    cors({
+      origin: '*',
+    }),
+  );
+}
 
 // parse application/x-www-form-urlencoded
 app.use(
@@ -46,15 +51,10 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(helmet());
-/* app.use(helmet.noSniff());
-app.use(helmet.ieNoOpen());
-app.use(helmet.xssFilter());
-app.use(helmet.hidePoweredBy()); */
 
 app.use(responseTime());
 const stats = new StatsD();
 stats.socket.on('error', error => {
-  // console.log('error', error);
   logger.info(error.stack);
 });
 
@@ -82,9 +82,6 @@ app.use(
   }),
 );
 
-// db instance connection
-// require('./utils/db');
-
 app.use(contextService.middleware('apirequest'));
 
 app.use((req, res, next) => {
@@ -98,47 +95,32 @@ app.use((req, res, next) => {
 });
 
 /* To get StoreId and CatalogID on basis of Store identifier */
-/* app.use((req, res, next) => {
-  const storeIdentifier = req.headers.store_id;
+app.use((req, res, next) => {
+  const storeIdentifier = req.headers.store_id || 'GodrejInterioESite';
   if (storeIdentifier) {
-    if (global[storeIdentifier] && global[storeIdentifier].storeID) {
-      req.headers.storeId = global[storeIdentifier].storeID;
-      req.headers.catalogId = global[storeIdentifier].catalogID;
+    if (
+      global.storeDetails[storeIdentifier] &&
+      global.storeDetails[storeIdentifier].storeID &&
+      global.storeDetails[storeIdentifier].catalogID
+    ) {
+      req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+      req.headers.catalogId = global.storeDetails[storeIdentifier].catalogID;
       next();
     } else {
-      storeInfo.getStoreDetails(req.headers, (error, result) => {
+      storeInfo.getStoreDetails(storeIdentifier, (error, result) => {
         if (error) {
           next(error);
         } else {
-          global[storeIdentifier] = result;
-          req.headers.storeId = global[storeIdentifier].storeID;
-          req.headers.catalogId = global[storeIdentifier].catalogID;
+          global.storeDetails[storeIdentifier] = result;
+          req.headers.storeId = global.storeDetails[storeIdentifier].storeID;
+          req.headers.catalogId =
+            global.storeDetails[storeIdentifier].catalogID;
           next();
         }
       });
     }
   } else {
-    const errorMessage = {
-      status: 'failure',
-      error: errorUtils.errorlist.storeid_missing,
-    };
-    logger.error(JSON.stringify(errorMessage));
-    res.status(400).send(errorMessage);
-  }
-}); */
-
-app.use((req, res, next) => {
-  if (req.headers.store_id) {
-    req.headers.storeId = req.headers.store_id;
-    req.headers.catalogId = req.headers.catalog_id || 10051;
     next();
-  } else {
-    const errorMessage = {
-      status: 'failure',
-      error: errorUtils.errorlist.storeid_missing,
-    };
-    logger.error(JSON.stringify(errorMessage));
-    res.status(400).send(errorMessage);
   }
 });
 
@@ -157,35 +139,14 @@ app.use((req, res) => {
   const errorMessage = {
     status: 'failure',
     error: {
-      message: `Requested resource not found:${req.originalUrl}`,
+      status_code: 404,
+      error_key: 'Resource_Not_Found',
+      error_message: `Requested resource not found:${req.originalUrl}`,
     },
   };
   logger.error('HTTP ERROR 404: ', JSON.stringify(errorMessage));
   res.status(404).send(errorMessage);
 });
-
-// Generic error handler
-/* app.use((err, req, res, next) => {
-  logger.error(
-    JSON.stringify({
-      url: req.originalUrl,
-      stackTrace: JSON.stringify(err.stack),
-      status_code: err.status || err.status_code,
-      error_message: err.message || err.error_message,
-      error_key: err.error_code || err.error_key,
-      req_headers: req.headers,
-    }),
-  );
-  res.status(err.status || err.status_code).send({
-    status: 'failure',
-    error: {
-      status_code: err.status || err.status_code,
-      error_key: err.error_code || err.error_key,
-      error_message: err.message || err.error_message,
-    },
-    // error_response: err.error_code
-  });
-}); */
 
 // Generic error handler
 app.use((err, req, res, next) => {
@@ -214,9 +175,7 @@ const options = {
   cert: fs.readFileSync('server.cert'),
 };
 
-// app.listen(8001, () => console.log('Server started on http://localhost:8001'));
-
-https
-  .createServer(options, app)
-  // eslint-disable-next-line no-console
-  .listen(8002, () => console.log('Server started on https://localhost:8002'));
+const server = https.createServer(options, app);
+server.listen(port, () =>
+  logger.info(`Server started on https://localhost:${port}`),
+);

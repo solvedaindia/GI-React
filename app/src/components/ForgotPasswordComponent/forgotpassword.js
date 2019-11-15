@@ -13,13 +13,13 @@ import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
 
 const LeftArrow = (
   <img
-    className="leftArrow"
-    src={require('../../../public/images/left-arrow.png')}
+    className="leftArrow" id="leftArrowId"
+    src={require('../../../public/images/left-arrow.png')} alt='Left' 
   />
 );
 
 const prevArrowImg = (
-  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')} />
+  <img src={require('../../../src/components/SVGs/carousel__arrowLeft.svg')}  alt='Left' />
 );
 class Forgotpassowrd extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class Forgotpassowrd extends React.Component {
   }
 
   //* Callback Handler *//
-  handler(itemStr, userId, otpStr, isBack, hideBackArrow) {
+  handler(itemStr, userId, otpStr, isBack, hideBackArrow) { 
     if (userId != null) {
       this.setState({
         userId,
@@ -89,6 +89,9 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
+      this.props.callbackForgotPro();
+    } else if (itemStr == 'RegisterRedirect') {
+      this.props.callbackForgotPro(true);
     }
 
     this.setState({
@@ -99,7 +102,9 @@ class Forgotpassowrd extends React.Component {
 
   toggle() {
     if (this.state.modal) {
-      this.props.resetCallbackPro();
+      if (this.props.resetCallbackPro) {
+        this.props.resetCallbackPro();
+      }
     }
 
     this.setState(prevState => ({
@@ -116,7 +121,6 @@ class Forgotpassowrd extends React.Component {
   backButtonPressed() {
     let itemStr = this.state.currentItemName;
     let item;
-    console.log('ComponentNameBAck---', this.state.currentItemName);
     if (itemStr === 'ForgotPasswordOTP') {
       item = (
         <ForgotPasswordEmailMobile
@@ -145,15 +149,12 @@ class Forgotpassowrd extends React.Component {
       this.setState({
         modal: false,
       });
-      //this.toggle();
     }
 
     this.setState({
       currentItem: item,
       currentItemName: itemStr,
     });
-
-    console.log('Back');
   }
 
   componentDidMount() {
@@ -172,10 +173,9 @@ class Forgotpassowrd extends React.Component {
     } else {
       item = this.state.currentItem;
     }
-
+    
     return (
       <>
-        {/* <p onClick={this.toggle}>Forgot Password?</p> */}
         <Modal
           show={this.state.modal}
           onHide={this.toggle}
@@ -190,7 +190,7 @@ class Forgotpassowrd extends React.Component {
               >
                 {this.state.hideBackArrow ? null : LeftArrow}
               </Button>
-              <div className="form-center">{item}</div>
+              <div className="form-center forrgot-pass-box">{item}</div>
             </div>
           </Modal.Body>
         </Modal>

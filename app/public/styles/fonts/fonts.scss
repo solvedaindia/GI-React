@@ -20,7 +20,19 @@
         url('../fonts/CeraGodrejInterio-Regular.woff') format('woff'),
         url('../fonts/CeraGodrejInterio-Regular.ttf') format('truetype'),
         url('../fonts/CeraGodrejInterio-Regular.svg#CeraGodrejInterio-Regular') format('svg');
-    font-weight: normal;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CeraGIMedium';
+    src: url('../fonts/CeraGodrejInterio-Medium.eot');
+    src: url('../fonts/CeraGodrejInterio-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CeraGodrejInterio-Medium.woff2') format('woff2'),
+        url('../fonts/CeraGodrejInterio-Medium.woff') format('woff'),
+        url('../fonts/CeraGodrejInterio-Medium.ttf') format('truetype'),
+        url('../fonts/CeraGodrejInterio-Medium.svg#CeraGodrejInterio-Light') format('svg');
+    font-weight: 500;
     font-style: normal;
 }
 

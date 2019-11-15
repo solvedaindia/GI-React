@@ -5,6 +5,9 @@ const errorUtils = require('./errorutils');
 const logger = require('./logger.js');
 const headerutil = require('./headerutil');
 
+/**
+ * Return emi details on the basis of selling price
+ */
 module.exports.emiDataBySellingPrice = function getEmiDataBySellingPrice(
   sellingPrice,
   headers,
@@ -34,12 +37,15 @@ module.exports.emiDataBySellingPrice = function getEmiDataBySellingPrice(
       if (response.status === 200) {
         callback(null, response.body);
       } else {
-        callback(response);
+        callback(errorUtils.handleWCSError(response));
       }
     },
   );
 };
 
+/**
+ * Return minimum EMI amount on the basis of selling price
+ */
 module.exports.getMinimumEmiValue = function getMinimumEmiValueByPrice(
   sellingPrice,
   headers,
@@ -50,7 +56,6 @@ module.exports.getMinimumEmiValue = function getMinimumEmiValueByPrice(
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-
   const originUrl = constants.minimumEmiValue
     .replace('{{storeId}}', headers.storeId)
     .replace('{{sellingprice}}', sellingPrice);

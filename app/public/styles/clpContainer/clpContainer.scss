@@ -1,4 +1,7 @@
+@import '../variable.scss';
+
 .clpBase{
+    
     .slick-prev {
         right: 60px;
     }
@@ -8,9 +11,258 @@
     .slick-dots {
         bottom: 12px;
     }
+	
+	.featuredCat {
+		margin: 16px auto 0;
+	}
+	
+	.bestSeller {
+		margin-top: 60px;
+		.title {
+		    margin-bottom: 40px;
+		}
+	}
     // Theme
     .clpTheme {
-        width: 83.33%;
-        margin: 120px auto;
+		.title {
+			font-family: $font-bold;
+			color: $ashGrey;
+			text-align: left;
+			margin: $base 1%;
+        }
+        .desc {
+            margin: $base 1%;
+            font-family: $font-medium;
+        }
+        .content-childTheme {
+            width: 48%;
+            margin: 1%; 
+            display: inline-block;
+            position: relative;
+            .content-icons {
+                position: absolute;
+                cursor: pointer;
+                z-index: 2;
+            }
+            .details {
+                position: absolute;
+                padding: $base;
+                border: 1px solid $borderLight;
+                background-color: $colorwhite; 
+                z-index: 2;
+                .tnImg {
+                    width: 41.72%;
+                    display: inline-block;
+                    background-color: $borderLight; 
+                    .img {
+                        width: 100%;
+                    }
+                }
+                .prodDetails{
+                    width: 58%;
+                    display: inline-block; 
+                    vertical-align: top;
+                    .prodNAme {
+                        font-size: $base*1.5;
+                        color: $black;
+                        margin: 0;
+                        padding: 0 $base;
+                        font-family: $font-medium;
+                    }
+                    .price {
+                        padding: 0 $base;
+                        font-family: $font-medium;
+                        color: $ceruleanblue;
+                        font-size: $base*1.75; 
+                    }
+                    .link {
+                        font-size: $base*1.5;
+                        color: $black;
+                        padding: $base;
+                        font-family: $font-medium;
+                        text-decoration: underline; 
+                    } 
+                }
+            }
+        }
+        .img {
+            width: 100%;
+        }
+
+    }
+    .descriptionBanner{
+       margin-top:111px;
     }
 }
+
+
+  
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+/* 
+#Global Screen Chhange for Screen max 768
+*/
+ @include mix-lg {
+        .clpBase{
+            .clpTheme {
+                width: 83.33%;
+                margin: 40px auto;
+                .content-childTheme {
+                    .details{
+                        min-width: $base*35; 
+                        max-width: $base*37;
+                        .tnImg{
+                            text-align: center;
+                            min-height: $base*10;
+                            .img{
+                                max-width: 90px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Change for Screen max 992
+  */
+ @include mix-md {
+    .clpBase{
+        // Theme
+        .clpTheme {
+            width:100%;
+            padding: 30px 0px;
+			.title {
+				font-size: $base*2.5;
+			}
+            .content-childTheme {
+				margin: 0;
+                .details {
+                    min-width: $base*25; 
+                    max-width:$base*25;
+                    .tnImg{
+                        width:42%;
+                        min-height: 50px;
+                    }
+                    .prodDetails{
+                        width:58%;
+                        .link{
+                            font-size: 10px;
+                            margin: 0px;
+                            padding: 0px 8px;
+                        }
+                    }
+                }
+            }
+			.slick-dots {
+				bottom: -$base*3;
+			}
+			.slick-next::before
+			.slick-prev::before {
+				color: transparent;
+            }
+            .clp-short-desc{
+                padding: 0px 15px;
+            }
+            .slick-slider{
+                .slick-prev{
+                    left:0px;
+                }
+                .slick-next:before, [dir=rtl] .slick-prev:before, .slick-prev:before {
+                    background: transparent;
+                }
+                .slick-list{
+                    overflow:visible;
+                }
+            }
+        }
+        .slider{
+            .fsBanner{
+                margin-top: 0px;
+            }
+        }
+        .subCat{
+            margin: 10px auto 24px auto;
+            .slick-slider{
+                .slick-dots{
+                    bottom: -18px;
+                }
+             }
+        }
+        .bestSeller{
+            margin:8px 8px 30px 8px;
+            .slick-slider{
+                .slick-dots{
+                    bottom:-18px;
+                }
+            }
+        }
+    }
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    .clpBase {
+        .descriptionBanner {
+            margin-top: 40px;
+        }
+    }
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @include mix-xs {
+    .clpBase {
+        .descriptionBanner {
+            margin-top: 40px;
+        }
+    }
+    //CSS
+
+  }

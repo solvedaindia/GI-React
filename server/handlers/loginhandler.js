@@ -1,10 +1,10 @@
 const constants = require('../utils/constants');
 const logger = require('../utils/logger.js');
 const origin = require('../utils/origin.js');
+const origin2 = require('../utils/origin2.js');
 const tokenGenerator = require('../utils/tokenvalidation.js');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-// const pincodeutil = require('../utils/pincodeutil');
 const userHandler = require('./usershandler');
 
 /**
@@ -36,6 +36,7 @@ module.exports.guestLogin = function guestLogin(headers, callback) {
         const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
         const guestLoginResponse = {
           access_token: encryptedAccessToken,
+          userID: response.body.userId,
         };
         callback(null, guestLoginResponse);
       } else {
@@ -51,7 +52,8 @@ module.exports.guestLogin = function guestLogin(headers, callback) {
  * @return 200,OK with encrypted tokens as access_token
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-module.exports.userLogin = function userLogin(params, headers, callback) {
+module.exports.userLogin = userLogin;
+async function userLogin(params, headers, callback) {
   logger.debug('Call to get login api');
   if (!params.user_id || !params.password) {
     logger.debug('Registered User Login:::Invalid Params');
@@ -62,7 +64,7 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
 
   const loginBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     logonPassword: params.password,
   };
 
@@ -71,38 +73,34 @@ module.exports.userLogin = function userLogin(params, headers, callback) {
     headers.storeId,
   )}/loginidentity`;
 
-  origin.getResponse(
-    'POST',
-    originLoginURL,
-    reqHeaders,
-    null,
-    loginBody,
-    null,
-    '',
-    response => {
-      if (response.status === 201) {
-        const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
-        const loginResponseBody = {
-          access_token: encryptedAccessToken,
-        };
-        const userDetailHeader = headers;
-        userDetailHeader.profile = 'summary';
-        userDetailHeader.WCToken = response.body.WCToken;
-        userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
-        userHandler.getUserDetails(userDetailHeader, (err, result) => {
-          if (err) {
-            loginResponseBody.userDetails = {};
-          } else {
-            loginResponseBody.userDetails = result;
-          }
-          callback(null, loginResponseBody);
-        });
-      } else {
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
-};
+  try {
+    const response = await origin2.getResponse(
+      'POST',
+      originLoginURL,
+      reqHeaders,
+      loginBody,
+    );
+    const encryptedAccessToken = tokenGenerator.encodeToken(response.body);
+    const loginResponseBody = {
+      access_token: encryptedAccessToken,
+      userID: response.body.userId,
+    };
+    const userDetailHeader = headers;
+    userDetailHeader.WCToken = response.body.WCToken;
+    userDetailHeader.WCTrustedToken = response.body.WCTrustedToken;
+    try {
+      const userDetails = await userHandler.getUserDetails(userDetailHeader);
+      loginResponseBody.userDetails = {};
+      loginResponseBody.userDetails.name = userDetails.name;
+      loginResponseBody.userDetails.pincode = userDetails.pincode;
+      callback(null, loginResponseBody);
+    } catch (err) {
+      callback(null, loginResponseBody);
+    }
+  } catch (error) {
+    callback(errorutils.handleWCSError(error));
+  }
+}
 
 /**
  * Social Login
@@ -125,10 +123,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
     return;
   }
 
-  const loginHeaders = {
-    'cache-control': 'no-cache',
-    'content-type': 'application/json',
-  };
+  const loginHeaders = headerutil.getWCSHeaders(headers);
 
   const socialLoginBody = {
     lastName: params.last_name,
@@ -142,7 +137,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
 
   const originLoginURL = constants.sociallogin.replace(
     '{{storeId}}',
-    headers.store_id,
+    headers.storeId,
   );
   origin.getResponse(
     'POST',
@@ -160,6 +155,7 @@ module.exports.socialLogin = function sociallogin(params, headers, callback) {
           );
           const loginResponseBody = {
             access_token: encryptedAccessToken,
+            userID: response.body.userId,
           };
           callback(null, loginResponseBody);
         } else {

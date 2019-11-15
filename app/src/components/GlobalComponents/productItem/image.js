@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
 import ImageLoader from '../../../utils/imageLoader';
+import {
+  imagePrefix,
+} from '../../../../public/constants/constants';
+import {createPdpURL, createSEOPdpURL} from '../../../utils/utilityManager';
 
 class Image extends React.Component {
   render() {
@@ -11,23 +15,26 @@ class Image extends React.Component {
         <ImageLoader
           className="imgfullwidth"
           src={require('../../../../public/images/plpAssests/placeholder-image.png')}
-          alt="sofa"
+          alt="product"
         />
       );
     } else {
       imageItem = (
         <ImageLoader
           className="imgfullwidth"
-          src={`https://192.168.0.36:8443${this.props.data}`}
-          alt="sofa"
+          src={`${imagePrefix}${this.props.data}`}
+          alt={this.props.productName}
         />
       );
     }
 
+    var routePath = createSEOPdpURL(this.props.productName,this.props.shortDescription, this.props.partNumber);
     return (
-      <Link className="link" to="/pdp/22452">
-        <LazyLoad debounce={false}>{imageItem}</LazyLoad>
-      </Link>
+      <LazyLoad className="imgBox" debounce={false}>
+        <Link className="link" to={{ pathname: routePath, state: !this.props.isSearchPathPro.includes('/search') ? { breadcrumbData: this.props.breadcrumbDataPro } : undefined}}>
+          {imageItem}
+        </Link>
+      </LazyLoad>
     );
   }
 }

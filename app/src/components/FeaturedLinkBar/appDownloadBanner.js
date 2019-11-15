@@ -1,16 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Menu, Icon } from 'react-bootstrap';
-
-import data from './data';
+import { Button } from 'react-bootstrap';
+import {INDIAS_HIGHEST, INSTALL} from '../../constants/app/storeDetailsConstants'
 
 const Wrapper = styled.div``;
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 class AppDownloadBanner extends React.Component {
   render() {
-    const { left, right } = data;
     return (
       <Wrapper className="app-download-banner fixed-toolbar fixed-toolbar--top">
         <div className="app-download-banner__star-rating" data-reactid="5">
@@ -26,14 +22,14 @@ class AppDownloadBanner extends React.Component {
           </svg>
         </div>
         <p className="app-download-banner__msg" data-reactid="8">
-          India's highest rated furniture app
+         { INDIAS_HIGHEST}
         </p>
         <Button type="button" data-reactid="9">
           <a
             href="http://ad.apsalar.com/api/v1/ad?re=0&amp;st=411809221131&amp;h=c201adfdc1cbca6ebf26985d0ed27c123df4341c"
             data-reactid="10"
           >
-            Install
+            {INSTALL}
           </a>
         </Button>
       </Wrapper>

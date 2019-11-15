@@ -13,9 +13,13 @@ import {
   resolveTheWishlistData,
   getCookie,
   getReleventReduxState,
+  isMobile,
 } from '../../utils/utilityManager';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import MyWishlist from '../MyWishlist/myWishlist';
+import {
+  updatetWishListCount,
+} from '../../actions/app/actions';
 
 class wishListCount extends React.Component {
   state = {
@@ -31,6 +35,7 @@ class wishListCount extends React.Component {
       .then(response => {
         resolveTheWishlistData(response.data.data);
         const count = response.data.data.wishlistTotalItems;
+        this.props.updatetWishListCount(count);
         this.setState({
           wishListCount: response.data.data.wishlistTotalItems,
           isLoading: false,
@@ -45,35 +50,40 @@ class wishListCount extends React.Component {
       this.setState({ isWelcomeBack: true });
     }
 
-    // const token = appCookie.get('isLoggedIn');
-    // console.log('Testest', token);
-    // appCookie.get('isLoggedIn')
-    //   ? alert('Take user to wishlist page')
-    //   : this.setState({isWelcomeBack: true})
+  
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(
-      'Wishlist -- componentWillReceiveProps -- ',
-      nextProps.wishlistUpdatedCount,
-    );
     this.setState({
       wishListCount: nextProps.wishlistUpdatedCount,
+      isWelcomeBack: false
     });
   }
 
   componentDidMount() {
+    this.setState({ isWelcomeBack: false });
     this.getWishListCount();
+    
+  }
+
+  onLinkNavigation(pageText) {
+    if (isMobile()) {
+      this.props.pageNavigationRenderPro(pageText);
+    }
   }
 
   render() {
+    const token = appCookie.get('isLoggedIn');
     const { isLoading, wishListCount } = this.state;
     let wishlistItem = null;
     let wishlistLogo = <WishlistLogo />;
-    if (wishListCount != 0 && wishListCount != undefined) {
-      wishlistItem = <span className="wishListCount">{wishListCount}</span>;
+    if (token === 'true') {
+      if (wishListCount != 0 && wishListCount != undefined) {
+        wishlistItem = <span className="wishListCount">{wishListCount}</span>;
+      }
       wishlistLogo = (
-        <Link to="/wishlist">
+        <Link to="/wishlist" onClick={() => this.onLinkNavigation('My Wishlist')}>
+          {!isLoading ? wishlistItem : null}
           <WishlistLogo />
         </Link>
       );
@@ -81,15 +91,10 @@ class wishListCount extends React.Component {
 
     return (
       <>
-        <li className="icons" onClick={this.handleWLCount.bind(this)}>
-          {!isLoading ? (
-            wishlistItem
-          ) : (
-            <p className="error">No Category Found</p>
-          )}
+        <li className="icons" onClick={this.handleWLCount.bind(this)}>          
           {wishlistLogo}
         </li>
-        {this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro /> : null}
+        {this.state.isWelcomeBack ? isMobile() ? <UserAccInfo fromWishlistPro /> : this.props.userInfoCallbackPro() : null}
       </>
     );
   }
@@ -98,12 +103,12 @@ class wishListCount extends React.Component {
 function mapStateToProps(state) {
   const stateObj = getReleventReduxState(state, 'global');
   const wishlistCount = getReleventReduxState(stateObj, 'wishlistCount');
-  console.log('Its Globale', wishlistCount);
   return {
     wishlistUpdatedCount: wishlistCount,
   };
 }
 
-export default connect(mapStateToProps)(wishListCount);
-
-// export default wishListCount;
+export default connect(
+  mapStateToProps,
+  { updatetWishListCount },
+)(wishListCount);

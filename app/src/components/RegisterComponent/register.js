@@ -8,7 +8,6 @@ import {
   googleClientId,
 } from '../../../public/constants/constants';
 import { registerWithEmail, registerWithMobileNum } from './constants';
-import { LogoUrl } from './constants';
 import {
   onFacebookResponse,
   onGoogleResponse,
@@ -16,6 +15,8 @@ import {
 
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
+import WhiteLogo from '../SVGs/whiteLogo';
+import {FACEBOOK_SIGN_IN,EMAIL, MOBILE,LOGIN,OR,GOOGLE_SIGN_IN, ALREADY_MEMBER,JOIN_US} from '../../constants/app/primitivesConstants';
 
 class Register extends React.Component {
   constructor(props) {
@@ -57,7 +58,6 @@ class Register extends React.Component {
     });
 
     onGoogleResponse(this.state, itemData => {
-      console.log('GoogleCallback', itemData);
     });
   };
 
@@ -75,13 +75,12 @@ class Register extends React.Component {
         firstName,
         lastName,
         authorizationProvider: 'facebook',
-        userId: response.userID,
+        userId: response.email,
         socialToken: response.accessToken,
         emialId: response.email,
       });
 
       onFacebookResponse(this.state, itemData => {
-        console.log('FacebookCallback', itemData);
       });
     }
   };
@@ -99,9 +98,9 @@ class Register extends React.Component {
       <Row>
         <Col xs={12} md={12}>
           <div className="form_register">
-            <div className="joinUs">
-              <img className="logo_width" src={LogoUrl} alt="logo" />
-              <h3 className="joinus-heading">Join us Now</h3>
+            <div className="joinUs">              
+              <WhiteLogo width="171" height="33" />
+              <h3 className="joinus-heading">{JOIN_US}</h3>
             </div>
             <div className="inner-joinusform">
               <div className="btn-wrapper">
@@ -114,9 +113,9 @@ class Register extends React.Component {
                       disabled={renderProps.disabled}
                     >
                       <span className="icon-img">
-                        <img className="icon" src={Google} />
+                        <img className="icon" src={Google} alt="Google"/>
                       </span>
-                      <span className="signin-text">Sign in with Google</span>
+                      <span className="signin-text">{GOOGLE_SIGN_IN}</span>
                     </button>
                   )}
                   onSuccess={this.responseGoogle}
@@ -131,20 +130,21 @@ class Register extends React.Component {
                       isdisabled={renderProps.disabled}
                     >
                       <span className="icon-img">
-                        <img className="icon" src={Facebook} />
+                        <img className="icon" src={Facebook} alt="Facebook" />
                       </span>
-                      <span className="signin-text">Sign in with Facebook</span>
+                      <span className="signin-text">{FACEBOOK_SIGN_IN}</span>
                     </button>
                   )}
-                  autoLoad
+                  // autoLoad
                   fields="name,email,picture"
                   cssClass="btn-white"
                   onClick={this.facebookOnClick.bind(this)}
                   callback={this.responseFacebook}
+                  disableMobileRedirect={true}
                 />
               </div>
               <p className="text_box">
-                <span className="or">or</span>
+                <span className="or">{OR}</span>
               </p>
               <FormGroup>
                 <Button
@@ -152,11 +152,11 @@ class Register extends React.Component {
                   ref="email"
                   onClick={this.handleRegisterWithEmail.bind(this)}
                 >
-                  Email
+                  {EMAIL}
                 </Button>
               </FormGroup>
               <p className="text_box">
-                <span className="or">or</span>
+                <span className="or">{OR}</span>
               </p>
               <FormGroup>
                 <Button
@@ -164,17 +164,17 @@ class Register extends React.Component {
                   ref="mobile"
                   onClick={this.handleRegisterWithMobile.bind(this)}
                 >
-                  Mobile
+                  {MOBILE}
                 </Button>
               </FormGroup>
               <p className="already-member">
-                Already a member?{' '}
+                {ALREADY_MEMBER + ' '}
                 <a
                   className="login"
                   role="button"
                   onClick={this.renderLoginComponent.bind(this)}
                 >
-                  Login
+                  {LOGIN}
                 </a>
               </p>
             </div>

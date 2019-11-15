@@ -1,4 +1,7 @@
 import React from 'react';
+import { Route, NavLink, Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 import ItemImage from './image';
 import RibbonTag from './ribbonTag';
 import Price from './price';
@@ -6,102 +9,207 @@ import Promotions from './promotion';
 import InStock from './inStock';
 import Wishlist from './wishlist';
 import Title from './title';
-import { addToCart } from '../../../../public/constants/constants';
+import {
+  addToCart,
+  removeFromWishlist,
+  wishlistIdCookie,
+  imagePrefix,
+} from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
-import { updatetMinicart } from '../../../actions/app/actions';
-import { connect } from 'react-redux';
-import { getUpdatedMinicartCount } from '../../../utils/initialManager';
+import {
+  updatetMinicart,
+  updatetWishListCount,
+  resetRemoveFromWishlistFlag,
+} from '../../../actions/app/actions';
+import {
+  getUpdatedMinicartCount,
+  getUpdatedWishlist,
+  removeFromWishlistGlobalAPI,
+} from '../../../utils/initialManager';
+import {
+  getCookie,
+  getCorrespondingGiftlistId,
+  getOnlyWishlistUniqueIds,
+  createPdpURL,
+  createSEOPdpURL,
+  isMobile,
+} from '../../../utils/utilityManager';
+import { ADD_TO_COMPARE } from '../../../constants/app/footerConstants';
+
 
 class ProductItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+    this.onSwatchChange = this.onSwatchChange.bind(this)
+    this.state = {
+      data: this.props.dataPro,
+      colorSwatchSplit: this.props.swatchList.length > 4 ? this.props.swatchList.slice(0, 4) : [],
+      colorSwatchFull: this.props.swatchList,
+    };
   }
 
-  handleClick = () => {
-    const compPrd = this.props.compData.find(
-      prd => prd.id == this.props.data.uniqueID,
-    );
-    if (compPrd) {
-      alert(
-        'Product alreday added in compare. Please select different prodcut',
-      );
-    } else {
-      const product = {
-        title: this.props.data.productName,
-        thumbnail: this.props.data.thumbnail,
-        id: this.props.data.uniqueID,
-        actualPrice: this.props.data.actualPrice,
-        offerPrice: this.props.data.offerPrice,
-      };
-      this.props.addProduct(product);
-    }
-  };
+  handleClick(e) {
+    e.preventDefault();
+    const product = { 
+      title: this.state.data.productName,
+      thumbnail: this.state.data.thumbnail,
+      skuId: this.state.data.uniqueID,
+      id: this.state.data.parentUniqueID,
+      actualPrice: this.state.data.actualPrice,
+      offerPrice: this.state.data.offerPrice,
+      masterCategoryID: this.state.data.masterCategoryID,
+    };
+    this.props.addProduct(product);
+  }
 
-  moveToCartClicked = () => {
-    const data = {
-      "orderItem": [
-        {
-          "sku_id": this.props.data.uniqueID,
-          "quantity": "1"
-        }
-      ]
-    }
-    console.log('Move To Cart Clicked  ----  ',data);
+  moveToCartClicked = e => {
+    e.preventDefault();
     
-    apiManager.post(addToCart, data)
+    const productType = this.state.data.type;
+
+    var data;
+    if (productType === 'BundleBean') {
+      let orderItem = Array();
+      this.state.data.bundleComponents.map(bundleData => {
+        orderItem.push({ sku_id: bundleData.uniqueID, quantity: bundleData.quantity.toString() })
+      });
+      data = {
+        orderItem
+      };
+
+    }
+    else {
+      data = {
+        orderItem: [
+          {
+            sku_id: this.state.data.uniqueID,
+            quantity: '1',
+          },
+        ],
+      };
+    }
+
+    apiManager
+      .post(addToCart, data)
       .then(response => {
-        console.log('Add to cart Data ---- ', response.data);
-        getUpdatedMinicartCount(this)
-        //this.props.updatetMinicart();
+        getUpdatedMinicartCount(this);
+        // this.props.updatetMinicart();
+        removeFromWishlistGlobalAPI(this.state.data.uniqueID, this);
+        this.props.moveToCartPopUpPro();
       })
       .catch(error => {
-        console.log('AddToCart Error---', error);
       });
+  };
+
+  onSwatchChange(e, selectedSwatch) {
+    e.preventDefault();
+    const selectedItem = this.props.skuList.find((item) => item.swatchColor === selectedSwatch)
+    this.setState({
+      data: selectedItem,
+    })
   }
 
+  showAllSwatchColors = e => {
+    e.preventDefault();
+    this.setState({
+      colorSwatchSplit: [],
+    })
+  };
+
   render() {
-    console.log('isFromWishlist  ----  ', this.props)
+    var routePath = createSEOPdpURL(this.state.data.productName, this.state.data.shortDescription, this.state.data.partNumber);
+    var swatchFinalData;
+    if (this.state.colorSwatchSplit.length !== 0) {
+      swatchFinalData = this.state.colorSwatchSplit;
+    }
+    else {
+      swatchFinalData = this.state.colorSwatchFull;
+    }
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const compareButton = /ipad/.test( userAgent ) ? null : <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>;
     return (
       <li className="productlist">
         <div className="prdListData">
-          {/* <Wishlist
-            uniqueId={this.props.data.uniqueID}
-            isInWishlistPro={this.props.isInWishlist}
-          /> */}
-          <div className="imgBox">
-            <ItemImage
-              data={this.props.data.thumbnail}
-              uniqueId={this.props.data.uniqueID}
-            />
-            <InStock isInStock={this.props.data.inStock} />
-          </div>
-          <RibbonTag data={this.props.data.ribbonText} />
+          <ItemImage
+            data={this.props.coloumnLayout === 3 ? this.state.data.thumbnail : this.state.data.thumbnail2}
+            uniqueId={this.state.data.uniqueID}
+            partNumber={this.state.data.partNumber}
+            productName={this.state.data.productName}
+            shortDescription={this.state.data.shortDescription}
+            breadcrumbDataPro={this.props.plpBreadcrumbPro}
+            isSearchPathPro={this.props.isSearchPathPro}
+          />
+          <InStock isInStock={this.state.data.inStock} />
+          <RibbonTag data={this.state.data.ribbonText} />
           <div className="product-text">
             <Title
-              titlePro={this.props.data.productName}
-              descriptionPro={this.props.data.shortDescription}
+              titlePro={this.state.data.productName}
+              descriptionPro={this.state.data.shortDescription}
             />
-            {/* <p className="heading-description text">(Description)</p> */}
             <p className="price text">
               <Price
-                actualPrice={this.props.data.actualPrice}
-                offerPrice={this.props.data.offerPrice}
+                actualPrice={this.state.data.actualPrice}
+                offerPrice={this.state.data.offerPrice}
               />
             </p>
-            <Promotions data={this.props.data.promotionData} />
+            <Promotions
+              promoData={this.state.data.promotionData}
+              discount={this.state.data.discount}
+              emi={this.state.data.emiData} />
           </div>
         </div>
-        <div className="hoverBox">
-          <Wishlist
-            uniqueId={this.props.data.uniqueID}
-            isInWishlistPro={this.props.isInWishlist}
-            history={this.props.history}
-          />
-          <button className="btn-compare" onClick={this.handleClick}>
-            Add to compare
-          </button>
-        </div>
+        <Link className="link" to={{ pathname: routePath, state: this.props.isSearchPathPro.includes('/furniture') ? { breadcrumbData: this.props.plpBreadcrumbPro } : undefined}}>
+          <div className="hoverBox">
+            {this.props.isfromWishlistPro ?
+              <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}><b>{this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</b></button> :
+              compareButton}
+
+            {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
+              <ul className="colortheme clearfix">
+
+                {swatchFinalData.map(item => {
+                  var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+                  var checkedType = false;
+									var radioButtonHtml;
+									var name = '';
+									var imgUrl = '';
+									colorStyle = {
+										display: "block",
+									}
+									var circle = 'display:block';
+									var isRadio = false;
+                  var boxClass = '';
+                  if (item.colorCode) {
+										circle = 'circle';
+										colorStyle = {
+											backgroundColor: `rgb${item.colorCode}`,
+                    };
+                  }
+                  else if (item.facetImage) {
+										circle = 'circleImg';
+										imgUrl = item.facetImage;
+										name = <img className="imgCircle" src={`${imagePrefix}${imgUrl}`} />;
+									}
+                  return (
+                    <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+                <span className={name==''?'swatches-circle':'swatches-circle-img'} style={colorStyle}>{name}</span>
+                    </li>
+                  )
+
+                })}
+
+                {this.state.colorSwatchSplit.length !== 0 ? <button className={isMobile() ?'moreSwatchForMobile':'moreSwatch'} onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
+              </ul>
+            </div> : null}
+          </div>
+        </Link>
+        <Wishlist
+          uniqueId={this.state.data.uniqueID}
+          isInWishlistPro={this.props.isInWishlist}
+          isFromWishlistPro={this.props.isfromWishlistPro}
+          history={this.props.history}
+        />
       </li>
     );
   }
@@ -109,12 +217,10 @@ class ProductItem extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // default: state.default
   };
 }
 
 export default connect(
   mapStateToProps,
-  { updatetMinicart },
+  { updatetMinicart, updatetWishListCount, resetRemoveFromWishlistFlag },
 )(ProductItem);
-// export default ProductItem;

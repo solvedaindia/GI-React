@@ -1,0 +1,28 @@
+@import '../variable';
+.invoiceContainer {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #ddd;
+    padding: 16px;
+    
+}
+.invoiceData{
+    margin: 0 0 3px 0;
+}
+.mobileInvoiceContainer {
+    width: 100%;
+    margin: auto;
+    border: 1px solid #ddd;
+    padding: 16px;
+    
+}
+.downloadBtn {
+    text-align: center;
+    margin: $base*2;
+}
+
+.invoiceContent{
+    width: 100%;
+    overflow: scroll;
+    height: auto !important;
+}

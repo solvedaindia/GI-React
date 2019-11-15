@@ -21,24 +21,6 @@ router.post('/recentlyviewed/:productID', (req, res, next) => {
   );
 });
 
-/* Get Recently Viewed Products */
-router.get('/recentlyviewed', (req, res, next) => {
-  activityHandler.getRecommendedProducts(
-    req.headers,
-    espotNames.recentlyViewed,
-    (err, result) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      res.status(200).send({
-        status: 'success',
-        data: result,
-      });
-    },
-  );
-});
-
 /* Get Recommended Products */
 router.get('/recommendedproduct/:activityName', (req, res, next) => {
   activityHandler.getRecommendedProducts(

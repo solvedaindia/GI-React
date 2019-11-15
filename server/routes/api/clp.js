@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const clpHandler = require('../../handlers/clphandler');
 
-router.post('/', (req, res, next) => {
-  clpHandler.getClpData(req, (err, result) => {
+/* Get CLP Themes Data */
+router.get('/themes/:espotName', (req, res, next) => {
+  clpHandler.getInspirationThemes(req.headers, req.params, (err, result) => {
     if (err) {
       next(err);
       return;

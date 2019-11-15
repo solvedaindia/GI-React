@@ -1,13 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const cartHandler = require('../../handlers/carthandler');
+const promotionUtil = require('../../utils/promotionutil');
 
 /**
  * fetch cart details
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
-router.get('/checkout', (req, res, next) => {
+router.get('/page', (req, res, next) => {
   cartHandler.fetchCart(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * fetch cart order summary
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+router.get('/ordersummary', (req, res, next) => {
+  cartHandler.cartOrderSummary(req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -116,6 +134,157 @@ router.post('/remove', (req, res, next) => {
  */
 router.post('/update', (req, res, next) => {
   cartHandler.updateitem(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Applied Promotions from Cart
+ * @param access_token,storeId
+ * @return 200,OK Fetched Applied Promotions
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/appliedpromotion', async (req, res, next) => {
+  try {
+    const result = await promotionUtil.getCartAppliedPromotions(req.headers);
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * Apply Promocode to Cart
+ * @param access_token,storeId
+ * @return 200,OK Applying the Promotion Successfully
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/applypromotion', (req, res, next) => {
+  promotionUtil.applyCartPromotion(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Remove Promocode from Cart
+ * @param access_token,storeId
+ * @return 200,OK Removed the Promotion Successfully
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/removepromotion/:promoCode', (req, res, next) => {
+  promotionUtil.removeCartPromotion(req.headers, req.params, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Public Promotions
+ * @param access_token,storeId
+ * @return 200, return promocode data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/promocode', (req, res, next) => {
+  cartHandler.getPromoCodes(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Add Address t0 Cart
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/addaddress', (req, res, next) => {
+  cartHandler.addAddress(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Get Shipping Modes
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/shipmodes', (req, res, next) => {
+  cartHandler.getShipModes(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Checkout Cart
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/checkout', (req, res, next) => {
+  cartHandler.checkout(req.headers, req.body, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/**
+ * Reserve Inventory API
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.post('/precheckout', (req, res, next) => {
+  cartHandler.precheckout(req, (err, result) => {
     if (err) {
       next(err);
       return;

@@ -4,6 +4,8 @@ const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
 const headerutils = require('../utils/headerutil');
 
+const otpValidateSuccess = 'OTP Validation Successfull';
+const regexMobileNo = /^\d{10}$/; // Mobile Number
 /**
  * Generate OTP for Registartion,forgot password
  * @param storeId,access_token
@@ -24,7 +26,7 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
   const reqHeader = headerutils.getWCSHeaders(headers);
 
   const reqBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
   };
 
   if (params.resend && params.resend === 'true') {
@@ -44,10 +46,26 @@ module.exports.generateOtp = function generateOtp(params, headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        const res = {
+          otpCount: response.body.otpCount,
+        };
+        callback(null, res);
       } else {
         logger.debug('Error while calling Generate Otp API');
-        callback(errorutils.handleWCSError(response));
+        if (
+          response.body &&
+          response.body.errors &&
+          response.body.errors.length > 0 &&
+          response.body.errors[0].errorKey === 'ERROR_USER_EXISTS'
+        ) {
+          if (regexMobileNo.test(params.user_id)) {
+            callback(errorutils.errorlist.user_exists_mobile);
+          } else {
+            callback(errorutils.errorlist.user_exists_email);
+          }
+        } else {
+          callback(errorutils.handleWCSError(response));
+        }
       }
     },
   );
@@ -73,7 +91,7 @@ module.exports.validateOtp = function validateOtp(params, headers, callback) {
   const reqHeader = headerutils.getWCSHeaders(headers);
 
   const reqBody = {
-    logonId: params.user_id,
+    logonId: String(params.user_id).toLowerCase(),
     OTP: params.otp,
   };
   if (params.forgot_password && params.forgot_password === 'true') {
@@ -91,7 +109,7 @@ module.exports.validateOtp = function validateOtp(params, headers, callback) {
     response => {
       if (response.status === 200) {
         const resJson = {
-          message: 'OTP Validation Successfull',
+          message: otpValidateSuccess,
         };
         callback(null, resJson);
       } else {

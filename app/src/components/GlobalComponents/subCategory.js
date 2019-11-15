@@ -1,13 +1,16 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
+import {createCategoryPlpURL, formatPrice } from  '../../utils/utilityManager';
 import {
   featuredCatAPI,
-  storeId,
+  imagePrefix,
   accessToken,
   catID,
 } from '../../../public/constants/constants';
-import '../../../public/styles/subCat/subCat.scss';
+import '../../../public/styles/featuredCat/featuredCat.scss';
+import {PRODUCTS, STARTING_FROM, SPOTLIGHT} from '../../constants/app/footerConstants';
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -23,11 +26,12 @@ export class SubCategory extends React.Component {
     apiManager
       .get(featuredCatAPI)
       .then(response => {
+        const { data } = response || {};
         this.setState({
-          subCatData: response.data.data,
+          subCatData: data && data.data,
           isLoading: false,
         });
-        console.log('Featured Category Data', response.data.data);
+        
       })
       .catch(error => {
         this.setState({
@@ -45,41 +49,68 @@ export class SubCategory extends React.Component {
     const { subCatData } = this.state;
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      centerMode: true,
+      centerMode: false,
+      centerPadding: '40px',
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+          },
+        },
+      ],
     };
     return (
-      <div className="subCat">
-        <h1 className="title">Featured Category</h1>
+      <div className="featuredCat">
+        <h2 className="title">{SPOTLIGHT}</h2>
         <Slider {...settings}>
           {!!subCatData &&
-            subCatData.map((subCatListData, index) => (
-              <figure className="subCatSlider">
-                <a href={subCatListData.onClickUrl} key={index}>
-                  <img
-                    className="subCatImg"
-                    src="https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png"
-                    alt={subCatListData.categoryName}
-                  />
-                  {/* <img src='https://192.168.0.36:8443/wcsstore/SolvedaCommerceCatalogAssetStore//images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0028_a_red.jpg' /> */}
-                </a>
-                <figcaption className="catDetails">
-                  <span className="catItem">{subCatListData.categoryName}</span>
-                  <span className="itemCount">
-                    {subCatListData.productCount} Products
+            subCatData.map((subCatListData, index) => {
+			   var routePath = createCategoryPlpURL(subCatListData.categoryIdentifier);
+              return (
+                <figure className="subCatSlider" key={`${index}-img`}>
+                    <Link to={routePath}>
+                    <img className="subCatImg"  alt={subCatListData.categoryName}  src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
+                    />
+                    </Link>
+                  <figcaption className="catDetails">
+                    <h2 className="catItem">{subCatListData.categoryName}</h2>
+                    <span className="itemCount">
+                      {subCatListData.productCount + ' ' + PRODUCTS} 
                   </span>
-                  <p className="starting">
-                    Starting From
+                    <p className="starting">
+                      {STARTING_FROM}
                     <span className="startPrice">
-                      {subCatListData.startPrice}
-                    </span>
-                  </p>
-                </figcaption>
-              </figure>
-            ))}
+                      ₹{formatPrice(subCatListData.startPrice)}
+                      </span>
+                    </p>
+                  </figcaption>
+                </figure>
+              )
+            })}
         </Slider>
       </div>
     );

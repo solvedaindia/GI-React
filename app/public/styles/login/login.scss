@@ -13,11 +13,11 @@
             text-align: center;
             font-family: $font-bold;
             color: $colorwhite;
-            font-size: $base*4.75;
         }
     }
     .smallLogo{
         text-align: center;
+        padding: 23px 0 0 0;
     }
     .modal-dialog {
         width: 35%;
@@ -31,7 +31,6 @@
                 position: absolute;
                 content: '';
                 background: $battleshipGrey;
-                left: 175px;
                 top: 13px;      
             }
             &::before{
@@ -40,7 +39,6 @@
                 position: absolute;
                 content: '';
                 background: $battleshipGrey;
-                right: 175px;
                 top: 13px; 
             }
         }
@@ -49,12 +47,20 @@
             opacity: 1;
         }
     }
+    .loginForm{
+        .relative{
+            position: relative;
+            .error-msg{
+              position: absolute;
+              bottom: -30px;
+            }
+        }
+    }
     .loginForm {
         width: 100%;
         margin: auto;
         padding: $base*2 $base*4;
         .form-label {
-            font-size: $base*1.75;
             color: $battleshipGrey;
             font-family: $font-light;
             font-weight: inherit;
@@ -81,11 +87,27 @@
             padding: $base;
             border: transparent;
             border-radius: $base*0.25;
-            margin-top: 16px;
+            margin-top: 20px;
         }
         .error-msg {
             color: $errorMsg;
-            font-size: $base*1.25;
+            font-size: $base*1.5;
+        }
+
+        .password-field{
+            position: relative;
+            .valiationPosition-NewPassword {
+                position: absolute;
+                right: 15px;
+                width: 25px;
+                z-index: 999999;
+            }
+        }
+        .hideData {
+            display: none;
+        }
+        .showData {
+            display: block;
         }
     }
     .forgotPassword {
@@ -95,35 +117,34 @@
         font-family: $font-regular;
         cursor: pointer;
         position: absolute;
-        bottom: 104px;
+		bottom:96px;
         right: 32px;
         font-weight: 600;
     }
     .registerNow {
         border: none;
         background-color: transparent;
-        font-size: $base*1.5;
+        font-size: $base*1.75;
         color: $cerulean;
         text-align: right;
         font-family: $font-regular;
-        cursor: pointer;
+        cursor: pointer;   
+        text-decoration: underline;    
+        font-weight: 600; 
     }
     .registerHere,
     .socialLogin {
         width: 100%;
         text-align: center;
-        padding: $base*2 $base*4;
         margin: 0;
     }
     .socialLogin {
         .btn-white {
             width: 49%;
             margin: 0.5%;
-            padding: $base;
             border: 1px solid $black;
             background: none;
             .icon{
-                width: $base*3;
                 margin: 0 $base;
             }
         }
@@ -133,3 +154,236 @@
     }
     
 }
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen Device = Laptops, Desktops
+    */
+    @include mix-lg{
+        .welcomeBack {
+            .modal-title {
+                font-size: $base*4.75;
+                line-height: 38px;
+                margin: 17px 0 13px 0;
+            }
+            
+            .modal-dialog {
+               .modal-content{
+                    .divider {
+                        &::after{
+                            margin-left: -70px;     
+                        }
+                        &::before{
+                            margin-left:40px;
+                        }
+                    }
+
+                    .socialLogin{
+                        padding: $base*2 $base*4;
+                        .btn-white{
+                            padding-top: $base;
+							padding-bottom: $base;
+							padding-left: 5px;
+							padding-right: 5px;
+                            font-size: $base*1.5;
+                            .icon{
+                                width: $base*3;
+                            }
+                        }
+                    }
+                    .registerHere{
+                        padding: $base*2 $base*4;
+                        font-size:$base*1.75;
+                        .labelText{
+                            font-family: $font-regular;
+                        }
+                    }
+
+                    .loginForm{
+                        .form-label{
+                            font-size: $base*1.75;
+                        }
+                        .password-field{
+                            .valiationPosition-NewPassword{
+                                top: 28px;
+                            }
+                        } 
+                    } 
+                }
+            }
+        }
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @include mix-md-ipad {  
+    .welcomeBack, .modal-wrapperjoinus {
+        &.in{
+            .modal-dialog{
+                width: 500px;
+                max-width: initial;
+            }
+        }
+    }    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @include mix-md{
+    .welcomeBack {
+        .modal-dialog{
+            .modal-content{
+                min-height: 650px;
+                .forgotPassword{
+                    bottom:200px;
+                }
+                
+                .divider {
+                    &::after{
+                        margin-left: -70px;     
+                    }
+                    &::before{
+                        margin-left:40px;
+                    }
+                }
+                .modal-header{
+                    padding: 50px 0px 30px 0px;
+                    .close{
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                    }
+                }
+                .modal-title {
+                    font-size: $base*3;
+                    padding: 15px 0 0 0;
+                    line-height: 24px;
+                }
+                .smallLogo{
+                    padding: 0px 0 0 0;
+                    svg{
+                        max-width: 100px;
+                    }
+                }
+                .socialLogin{
+                    padding:$base*3 $base*2.5 $base*2 $base*2.5;
+                    .btn-white{
+                        padding: $base 4px $base 4px;
+                        font-size: $base*1.25;
+                        .icon{
+                            width: $base*1.75;
+                        }
+                        &.btn-fb{
+                            .icon-img{
+                                .icon{
+                                    margin-left:0px;
+                                }
+                            }
+                        }
+                    }
+                } 
+                .registerHere{                   
+                    .labelText{
+                        font-family: $font-regular;
+                    }
+                }
+                .loginForm{
+                    padding:$base*2 $base*2.5;
+                    .form-group{
+                        position: relative;
+                        padding-bottom: 20px;
+                        .form-label{
+                            position:absolute;
+                            top:0px;
+                            padding: 0px 5px;
+                            margin-left: 10px;
+                            margin-top: -8px;
+                            background: $colorwhite;
+                            font-size: 12px;
+                        }
+                        .form-control{
+                            height: 44px;
+                            font-size: 12px;
+                        }
+                        input[type='password']{
+                            letter-spacing:6px;
+                        }
+                    }
+                    .password-field{
+                        .valiationPosition-NewPassword{
+                            top: 10px;
+                        }
+                    }
+                    .relative{
+                        position: relative;
+                        .error-msg{
+                            position: absolute;
+                            top: 0px;
+                            margin-top: 44px;
+                        }
+                    } 
+                }
+            }
+        }
+        &.in{
+            .modal-dialog{
+                max-width: 500px;
+                margin: auto;
+            }
+        }
+    }
+    
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

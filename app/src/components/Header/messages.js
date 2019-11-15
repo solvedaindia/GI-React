@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'urban.ladder.components.Header';
+export const scope = 'components.Header';
 
 export default defineMessages({
   home: {

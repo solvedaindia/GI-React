@@ -1,6 +1,3 @@
-'use strict';
-var schedule = require('node-schedule');
- 
 //        schedule time configuration
 //        *    *    *    *    *    *
 //        ┬    ┬    ┬    ┬    ┬    ┬
@@ -12,12 +9,11 @@ var schedule = require('node-schedule');
 //        │    └──────────────────── minute (0 - 59)
 //        └───────────────────────── second (0 - 59, OPTIONAL)
 
-let cronSchedule = {
-    'categories':'*/45 * * * *',
-    'heartbeat':'*/1 * * * *',
-    'apilever':'*/1 * * * *'
+const cronSchedule = {
+  storeInfo: '0 1 * * *', // At 6:30 AM
+  clearCache: '0 1 * * *', // At 6:30 AM
 };
 
-module.exports.getRule = function(cronName){
-    return cronSchedule[cronName];
-}
+module.exports.getRule = function getRule(cronName) {
+  return cronSchedule[cronName];
+};

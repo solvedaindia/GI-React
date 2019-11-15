@@ -1,0 +1,462 @@
+@import '../variable';
+
+
+.storeLocator {
+    // @include container-width;
+    margin: 0 auto;
+    text-align: center;
+    .pc-field {
+        padding: 8px;
+        font-family: $font-medium;
+        font-size: 16px;
+
+    }
+    .pc-btn {
+        background-color: $ashGrey;
+        color: $colorwhite;
+        padding: $base*1.125;
+        border: 1px solid $ashGrey;
+        line-height: 36px;
+    }
+    .storeTypes {
+        .typeList{
+        justify-content: center;
+            .storetext {
+                font-family: $font-regular;
+                color:$darkAshGrey;
+            }
+        .active{
+            border:1px solid $black !important;
+			
+			.storetext {
+                font-family: $font-medium;
+                color:$black;
+			}
+        }
+		
+        .storeTypeItem{
+            display: block;
+            border: 1px solid $darkAshGrey;
+            margin: 1%;
+            float: left;
+            .typeList {
+				width: 13%;
+                margin: auto;
+            }
+            .storeImg {
+                width: 100%;
+            }
+            // .black{
+            //     visibility: hidden;
+            //     display: none;
+            // }
+        }
+
+        // .storeTypeItem.active{
+        //     .black{
+        //         visibility: hidden;
+        //         display: block;
+        //     }
+        //     .grey{
+        //         visibility: visible;
+        //         display: none;
+        //     }
+        // }
+    }
+
+    }
+}
+.storeDetails {
+    .headingtitle{
+        font-size:$base*3.75;
+        color:$black;
+        padding:0 0 24px 0;
+        font-family: $font-medium;
+    }
+    .storeList {     
+        margin: 0 19px 0 0;
+        background: #f7f8f8;
+        .detailCard{
+            .storeListItem.ribbon{
+              .Storewrapper{
+                  padding-top:23px;
+              }
+            }
+        .storeListItem{
+            position: relative;
+            background-color: $colorwhite; 
+            width: 100%;
+            .modular_wardrobe{
+                position: absolute;
+                top:8px;
+                background:$black;
+                color:$colorwhite;
+                left: 0;
+                padding: 5px 10px;
+                font-size: 12px;
+                .icons{
+                    margin:0 5px 0 0;
+                }
+                .icons,.ribbonText {
+                 display: inline-block;
+                }
+            }
+            .Storewrapper{
+                margin: 0px 0 7px 0;
+                .storeName,.distance{display: inline-block}
+                .storeName{
+                  width:80%;
+                  margin:0;
+                  font-family: $font-medium;
+                  color:$black;
+                  .link{
+                    font-family: $font-medium;
+                    color:$black;
+                    text-decoration: none;
+                    cursor: pointer;
+                  }
+                }
+                .distance{
+                  color:$greenLight;
+                  font-size:14px;
+                  font-family: $font-medium;
+                  width:20%;
+                }
+            }
+            .phoneDetails{
+                padding: 0 0 20px 0;
+                .phoneicon{
+                    width: 14px;
+                    margin:0 17px 0 0;
+                }
+                .phoneicon,.PhoneNo{
+                   display: inline-block;
+                }
+                .PhoneNo{
+                    font-size: 14px;
+                    color:$black;
+                    font-family: $font-regular;
+                }
+            }
+            .direction_dealerwrp{
+                display: flex;
+                .getDirection{
+                    color:$cerulean;
+                    font-size: $base*2;
+                    width: 50%;
+                    line-height: 16px;
+                    text-decoration: underline;
+                    font-family: $font-medium;
+                }
+                .getDirection,.dealer{display: inline-block;}
+                .dealer{                   
+                    font-size: $base*1.5;
+                    width: 55%;
+                    color:$black;
+                    .dealertext{text-align: right}
+                    .mapicon{
+                        width: 14px;
+                        margin: 0 5px 0 0;
+                    }
+                }
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+    }
+    }
+    .mapContainer {
+        height: 500px;
+    }
+    .storeList,
+    .mapContainer {
+        display: block;
+        float: left;
+    }
+}
+
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen Device = Laptops, Desktops
+    */
+    @include mix-lg{
+        .storeLocator{
+            width: 80%;
+            .title {
+                margin: $base*8 0 $base*6.25 0;
+            }
+            .pc-field{
+                width: 36%;
+                height: 54px;
+            }
+            .pc-btn{
+                width: 22%;
+                height: 54px;
+            }
+            .storeTypes{
+                padding: 64px 0 0 0;
+                .headingtitle{
+                    margin:0 0 16px 0;
+                    font-size: 30px;
+                    line-height: 30px;
+                    font-family: $font-medium;
+                    opacity: .45;
+                }
+                .anotherCity{
+                    font-size:20px;
+                    line-height: 20px;
+                    font-family: $font-regular;
+                    color:$black;
+                    margin:0 0 197px 0;
+                }
+                .typeList{
+                    display: flex;
+                    .storeTypeItem{
+                        width: 18%;
+                        min-height: 130px;
+                        .typeList{
+                            width: 51%;
+                        }
+                    }
+                } 
+            } 
+        }
+        
+        .storeDetails {
+            width: 91.63%;
+            margin-left: 8.37%; 
+            .storeList {
+                width: 35%;  
+                padding: 10px;
+                .detailCard{
+                    height: 490px;
+                    padding: 0 12px 0 0;
+                    overflow: auto;
+                    .storeListItem{
+                        margin:0 0 15px 0;
+                        border: 1px solid #ccc;
+                        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
+                        padding: 25px 24px;
+                    }
+                }
+            }
+            .mapContainer{
+                width: 62%;
+            }
+        }
+    }
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+  
+  
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+    .storeLocator{
+        width: 90%;
+        .title {
+            margin: $base*3 0 $base*2.25 0;
+        }
+        .pc-field{
+            width: 70%;
+            height: 44px;
+        }
+        .pc-btn{
+            width: 30%;
+            line-height: 27px;
+            height: 44px;
+        }
+        .storeTypes{
+            padding: 20px 0 20px 0;
+            clear: both;
+            .typeList{
+                .storeTypeItem{ 
+                    width: 48%;
+                    display: flex;
+                    min-height: 48px;
+                    .storetext{
+                        display:flex;
+                        align-items:center;
+                        font-size: 11px;
+                        text-align: left;
+                        padding: 0px 10px 0px 8px;
+                    }
+                    .typeList{
+                        width: 30%;
+                    }
+                }
+            } 
+            .headingtitle{
+                font-size: $base*1.5;
+                color: $black;
+                font-family: $font-medium;
+                margin-top: 5px;
+            }
+            .headingTitleDesc{
+                font-size: $base*1.5;
+                color: $black;
+                font-family: $font-regular;
+            }
+            
+        } 
+    } 
+    
+    .storeDetails {
+        width: 100%;
+        .storeList {
+            padding: 25px 0px 25px 20px; 
+            width: 100%;  
+            .headingtitle{
+                font-size: $base*1.5;
+                margin-top: 10px;
+                text-align: center;
+                padding: 0px;
+                margin: 0px 0px 20px 0px;
+            }
+            .detailCard{
+                padding: 0;
+                .storeListItem{
+                    padding: 22px 24px 15px 20px;
+                    min-height: 190px;
+                    .Storewrapper{
+                        .storeName{
+                            font-size: $base*1.75;
+                            font-family: $font-bold;
+                            color: $black;
+                        }
+                        .distance{
+                            position: absolute;
+                            margin-top: 7px;
+                        }
+                    } 
+                    .store-detal-desc{
+                        font-size: $base*1.5;
+                        color: $black;
+                        line-height: $base*2;
+                        padding-top:5px;
+                    }
+                    .phoneDetails{
+                        .PhoneNo{
+                            font-size: $base*1.5;
+                        }
+                    }
+                    .direction_dealerwrp{
+                        .getDirection{
+                            font-size: $base*1.5;
+                            color:$ceruleanlblue;
+                        }
+                        .dealer{
+                            .dealertext{
+                                position: relative;
+                                padding-left: $base*3;
+                                float: right;
+                                min-height: $base*2.5;
+                                line-height: $base*2;
+                                font-size: 11px; 
+                            }
+                            .mapicon{
+                                position: absolute;
+                                left: 3px;
+                                top: 1px;
+                                width: 10px;
+                            }
+                        } 
+                    }
+                    .modular_wardrobe{
+                        .icons{
+                            width: 8px;
+                        }
+                        .ribbonText{
+                            font-size: 9px;
+                            font-family: $font-medium;
+                        }
+                    }
+                    &.ribbon{
+                        .Storewrapper{
+                            padding-top:12px;
+                        }
+                    }
+                     
+                }
+                .slick-slider{
+                    .slick-list{
+                        padding: 0px !important;
+                    }
+                    .slick-dots{
+                        display: none;
+                    }
+                    .store-list-item-box{
+                        margin-right: 10px;
+                    }
+                    .slick-next:before, .slick-prev:before{
+                        content: none;
+                    }
+                }
+            } 
+        }
+        .mapContainer{
+            width: 100%;
+        }
+    }
+  }
+  
+  
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

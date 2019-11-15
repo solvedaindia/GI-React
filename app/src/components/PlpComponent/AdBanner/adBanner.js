@@ -11,7 +11,6 @@ import { getReleventReduxState } from '../../../utils/utilityManager';
 
 import { Link, Route } from 'react-router-dom';
 
-const bannerImg = <img className='adBannerWidth' src={require('../../../../public/images/plpAssests/mask@3x.png')} />
 class AdBanner extends React.Component {
   constructor(props) {
     super(props);
@@ -29,11 +28,12 @@ class AdBanner extends React.Component {
   }
 
   initializeAdBanner() {
-    //console.log('In The Ad Banner',this.props);
     if (this.props.indexPro) {
       let bannerItem = null;
       if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
-        bannerItem = <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+        bannerItem = <a href={this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl}>
+          <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
+        </a>
         this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
         this.setState({
           adBannerItem: bannerItem

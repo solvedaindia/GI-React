@@ -4,7 +4,8 @@ const errorlist = {
   invalid_params: {
     status_code: 400,
     error_key: 'invalid_params',
-    error_message: 'Some params might be missing or invalid.',
+    error_message:
+      'One or more entries made are incorrect or require field(s) have been left empty',
   },
   token_invalid: {
     status_code: 401,
@@ -47,6 +48,18 @@ const errorlist = {
     error_key: 'wcs_invalid_response',
     error_message: 'Invalid Response From WCS.',
   },
+  user_exists_mobile: {
+    status_code: 400,
+    error_key: 'user_exists',
+    error_message:
+      'Mobile Number is already registered with us. Please use forgot password link to reset your password',
+  },
+  user_exists_email: {
+    status_code: 400,
+    error_key: 'user_exists',
+    error_message:
+      'Email entered is already registered with us .Please use forgot password link to reset password ',
+  },
   user_exists: {
     status_code: 400,
     error_key: 'user_exists',
@@ -62,7 +75,7 @@ const errorlist = {
   otp_incorrect: {
     status_code: 400,
     error_key: 'otp_incorrect',
-    error_message: 'OTP entered is Incorrect.',
+    error_message: 'OTP entered is incorrect',
   },
   otp_incorrect_limit_exceed: {
     status_code: 400,
@@ -78,6 +91,62 @@ const errorlist = {
     status_code: 400,
     error_key: 'userid_invalid_format',
     error_message: 'Please enter valid Email Id/Mobile number.',
+  },
+  invalid_promocode: {
+    status_code: 400,
+    error_key: 'invalid_promocode',
+    error_message: 'Promo Code is Invalid',
+  },
+  user_does_not_exists: {
+    status_code: 400,
+    error_key: 'user_does_not_exist',
+    error_message:
+      'This account does not exist. Enter a valid mobile number or email address to proceed or create a new GI account',
+  },
+  mobile_exists: {
+    status_code: 400,
+    error_key: 'mobile_exists',
+    error_message: 'This Mobile Number already exists',
+  },
+  email_exists: {
+    status_code: 400,
+    error_key: 'email_exists',
+    error_message: 'This Email Address already exists',
+  },
+  invalid_credentials: {
+    status_code: 400,
+    error_key: 'invalid_credentials',
+    error_message: 'LogonId or Password is incorrect',
+  },
+  invalid_address: {
+    status_code: 400,
+    error_key: 'invalid_address',
+    error_message:
+      'The address you selected is not valid for the contracts in your current order.',
+  },
+  account_locked: {
+    status_code: 400,
+    error_key: 'account_locked',
+    error_message:
+      'Your Account is temporarily locked. Please try again after 15 minutes.',
+  },
+  email_mobile_exists: {
+    status_code: 400,
+    error_key: 'email_mobile_exists',
+    error_message: [
+      'This Email Address already exists',
+      'This Mobile Number already exists',
+    ],
+  },
+  order_not_found: {
+    status_code: 400,
+    error_key: 'order_not_found',
+    error_message: 'An order with reference to this orderId does not exist',
+  },
+  ERROR_IN_EMAIL_SEND: {
+    status_code: 400,
+    error_key: 'ERROR_IN_EMAIL_SEND',
+    error_message: 'Error in sending mail to recipient.',
   },
 };
 module.exports.errorlist = errorlist;
@@ -95,11 +164,19 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_FINDER_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_ORDER_WRONG_STATUS' ||
         errBody.errors[0].errorKey === '_ERR_INVALID_INPUT' ||
-        errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT' ||
         errBody.errors[0].errorKey === 'ERROR_OTP_TIMEOUT' ||
-        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST' ||
         errBody.errors[0].errorKey === '_ERR_NUMBER_FORMAT_EXCEPTION' ||
-        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS'
+        errBody.errors[0].errorKey === '_ERR_DELETE_REGISTER_ADDRESS' ||
+        errBody.errors[0].errorKey === '_ERR_GENERIC' ||
+        errBody.errors[0].errorKey === '_ERR_FORMAT_ORDERIDS_NOT_CORRECT' ||
+        errBody.errors[0].errorKey === '_ERR_USER_AUTHORITY' ||
+        errBody.errors[0].errorKey === 'ERROR_RECORD_ALREADY_EXISTS' ||
+        errBody.errors[0].errorKey === '_ERR_COULD_NOT_AUTHENTICATE' ||
+        errBody.errors[0].errorKey === '_ERR_INVALID_PI_TOTAL_AMOUNT' ||
+        errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION' ||
+        errBody.errors[0].errorKey === '_ERR_ORDER_UNLOCKED' ||
+        errBody.errors[0].errorKey === 'ERROR_EMAIL_INVALID' ||
+        errBody.errors[0].errorKey === '_ERR_UBF_USER_AUTHORITY'
       ) {
         return {
           status_code: 400,
@@ -107,11 +184,36 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_message: errBody.errors[0].errorMessage,
         };
       }
+      if (errBody.errors[0].errorKey === 'ERROR_RESEND_OTP_COUNT') {
+        return {
+          status_code: 400,
+          error_key: 'ERROR_RESEND_OTP_COUNT',
+          error_message:
+            'You have exceeded the maximum number of attempts (3) for OTP',
+        };
+      }
+      if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_DUPLICATED') {
+        return {
+          status_code: 400,
+          error_key: 'ERR_PROMOTION_CODE_DUPLICATED',
+          error_message: 'You have entered a duplicate promotion code.',
+        };
+      }
       if (errBody.errors[0].errorKey === '_ERR_LOGIN_NOT_ALLOWED_NOW') {
         return {
           status_code: 400,
           error_key: 'login_not_allowed',
           error_message: errBody.errors[0].errorMessage,
+        };
+      }
+      if (
+        errBody.errors[0].errorKey === '_ERR_THRESHOLD_SHOPPING_CART_QUANTITY'
+      ) {
+        return {
+          status_code: 400,
+          error_key: '_ERR_THRESHOLD_SHOPPING_CART_QUANTITY',
+          error_message:
+            'A maximum of 99 units of a product can be purchased in 1 order',
         };
       }
       if (
@@ -126,8 +228,26 @@ module.exports.handleWCSError = function handleWCSError(response) {
       if (errBody.errors[0].errorKey === 'ERROR_INCORRECT_OTP') {
         return errorlist.otp_incorrect;
       }
+      if (errBody.errors[0].errorKey === '_ERR_INVALID_ADDR') {
+        return errorlist.invalid_address;
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_IN_EMAIL_SEND') {
+        return errorlist.ERROR_IN_EMAIL_SEND;
+      }
+      if (errBody.errors[0].errorKey === 'ERROR_UPDATING_MOBILE') {
+        return errorlist.mobile_exists;
+      }
+      if (errBody.errors[0].errorKey === 'ERR_PROMOTION_CODE_INVALID') {
+        return errorlist.invalid_promocode;
+      }
       if (errBody.errors[0].errorKey === '_ERR_MISSING_CMD_PARAMETER') {
         return errorlist.invalid_params;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_AUTHENTICATION_ERROR') {
+        return errorlist.invalid_credentials;
+      }
+      if (errBody.errors[0].errorKey === '_ERR_PERSON_ACCOUNT_DISABLED') {
+        return errorlist.account_locked;
       }
       if (
         errBody.errors[0].errorKey ===
@@ -150,11 +270,15 @@ module.exports.handleWCSError = function handleWCSError(response) {
       }
       if (
         errBody.errors[0].errorKey === '_ERR_LOGONID_ALREDY_EXIST' ||
+        errBody.errors[0].errorKey === 'ERROR_LOGONID_ALREADY_EXIST' ||
         errBody.errors[0].errorKey === 'ERROR_USER_EXISTS'
       ) {
         return errorlist.user_exists;
       }
-      if (errBody.errors[0].errorKey === 'CWXBB1012E') {
+      if (
+        errBody.errors[0].errorKey === 'CWXBB1012E' ||
+        errBody.errors[0].errorKey === 'CWXBB1011E'
+      ) {
         return errorlist.token_expired;
       }
       if (errBody.errors[0].errorKey === 'TOKEN_VALIDATION_FAIL') {
@@ -190,6 +314,18 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'invalid_pincode',
           error_message: 'Not a valid pincode',
         };
+      }
+      if (
+        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXISTS' ||
+        errBody.errors[0].errorKey === 'ERROR_USER_DOES_NOT_EXIST'
+      ) {
+        return errorlist.user_does_not_exists;
+      }
+      if (
+        errBody.errors[0].errorKey === 'ERROR_INVALID_ORDER_ID' ||
+        errBody.errors[0].errorKey === '_ERR_ORDER_NOT_FOUND'
+      ) {
+        return errorlist.order_not_found;
       }
       return (
         wcsErrorList.error_400[errBody.errors[0].errorKey] ||
@@ -231,17 +367,6 @@ module.exports.handleWCSError = function handleWCSError(response) {
 
 const wcsErrorList = {
   error_400: {
-    _ERR_AUTHENTICATION_ERROR: {
-      status_code: 400,
-      error_key: 'invalid_credentials',
-      error_message: 'LogonId or Password is incorrect',
-    },
-    _ERR_PERSON_ACCOUNT_DISABLED: {
-      status_code: 400,
-      error_key: 'account_locked',
-      error_message:
-        'Your Account is temporarily locked. Please try again after 15 minutes.',
-    },
     _ERR_GIFTLIST_ITEM_NOT_FOUND: {
       status_code: 400,
       error_key: '_ERR_GIFTLIST_ITEM_NOT_FOUND',
@@ -265,8 +390,7 @@ const wcsErrorList = {
     ERROR_USER_DOES_NOT_EXIST_ON_FORGOT_PASSWORD: {
       status_code: 400,
       error_key: 'invalid_user_id',
-      error_message:
-        'You are not registered with Godrej Interio, please click here to register',
+      error_message: 'You are not registered with Godrej Interio.',
     },
   },
   error_401: {

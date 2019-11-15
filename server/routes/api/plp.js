@@ -1,19 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const plphandler = require('../../handlers/plphandler');
-const testjson = require('../../configs/testjson');
+const apiCache = require('../../utils/apicache');
 
 /* To Get Product List By Category ID for PLP */
 router.get('/bycategory/:categoryId', (req, res, next) => {
-  plphandler.getProductsByCategory(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
+  apiCache.getCachedResponse('plp', req, cacheRes => {
+    if (cacheRes) {
+      res.status(200).send(cacheRes);
+    } else {
+      plphandler.getProductsByCategory(req, (err, result) => {
+        if (err) {
+          next(err);
+          return;
+        }
+        const resJSON = {
+          status: 'success',
+          data: result,
+        };
+        apiCache.cacheResponse('plp', req, resJSON);
+        res.status(200).send(resJSON);
+      });
     }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
   });
 });
 
@@ -32,10 +40,29 @@ router.get('/bysearchterm/:searchterm', (req, res, next) => {
 });
 
 /* To Get Static Product List Data */
-router.get('/productlist', (req, res, next) => {
-  res.status(200).send({
-    status: 'success',
-    data: testjson.plp,
+router.get('/byIds', (req, res, next) => {
+  plphandler.productListByIds(req.headers, req.query, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.get('/bypartnumbers', (req, res, next) => {
+  plphandler.productListByPartNumbers(req.headers, req.query, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
   });
 });
 

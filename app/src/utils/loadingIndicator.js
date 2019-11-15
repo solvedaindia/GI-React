@@ -3,8 +3,9 @@ import '../../public/styles/loadingIndicator/loadingIndicator.scss';
 
 const loadingImg = (
   <img
-    className="loadingIndicatorStyle-outter "
+    className="loadingIndicatorStyle-outter"
     src={require('../../src/components/SVGs/loading-spinning-bubbles.svg')}
+    alt='loader'
   />
 );
 class LoadingIndicator extends React.PureComponent {

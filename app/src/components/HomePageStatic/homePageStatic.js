@@ -19,11 +19,11 @@ class HomePageStatic extends React.Component {
     apiManager
       .get(homePageApi)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          homePageData: response.data.data.GI_Homepage_Static_Content,
+          homePageData: data && data.data.GI_Homepage_Static_Content,
           isLoading: false,
         });
-        console.log('@@@@@@@@@@@@@@', response.data);
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
@@ -39,7 +39,7 @@ class HomePageStatic extends React.Component {
         {!isLoading ? (
           <div dangerouslySetInnerHTML={{ __html: homePageData.content }} />
         ) : (
-          <div>Something Went Wrong</div>
+          <div>...</div>
         )}
       </div>
     );

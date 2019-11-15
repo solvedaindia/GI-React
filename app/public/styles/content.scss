@@ -1,5 +1,75 @@
 @import 'variable.scss';
+  
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+@include mix-lg{
+	.espotContent {
+		margin-bottom: 0; 
+		.exploreGuest{
+			width: 100%;
+			display: flex;
+			.greeting {
+				width: 27.5%;
+				background-color: $ceruleanblue;
+				color: $colorwhite;
+				text-align: center;
+				display: inline-flex;
+				justify-content: center;
+				flex-direction: column;
+				text-align: center;
+				.greetingHead {
+				font-size: $base*2.5;
+				font-weight: 100;
+				font-family: $font-regular;
+				}
+				.msg {
+				font-size: $base*3.125;
+				font-family: $font-bold;
+				}
+				.msg,
+				.greetingHead {
+					margin-left: $base*15.5;
+					text-align: left;	
+				}
+			}
+			.exploreSection {
+				display: inline-block;
+				width: 65%;
+				.explore-room {
+					.explore {
+						width: 100%;
+						padding: $base*4 0;
+					}
+				}
+			}
+		}
+	}
 
-.espotContent {
-    margin-top: $base*15; 
+}
+
+  /* 
+    #Global Screen Chhange for Screen max 767
+  */
+  @include mix-md{
+    .espotContent {
+        .mwebGreeting {
+			background-color: $ceruleanblue;
+			color: $colorwhite;
+			font-size: $base*1.75; 
+			font-family: $font-bold;
+			margin: 0;
+			padding: $base*2;
+		}
+		.exploreGuest{
+			.exploreSection {
+				.explore-room {
+					.explore {
+						width: 100%;
+						padding: $base*4 0;
+					}
+				}
+			}
+		}
+    }
 }

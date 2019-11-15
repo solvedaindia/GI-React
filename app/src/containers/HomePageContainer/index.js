@@ -9,13 +9,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import makeSelectHomePageContainer from '../../selectors/homePageContainer/selectors';
 import reducer from '../../reducers/homePageContainer/reducer';
 import saga from '../../saga/homePageContainer/saga';
-import myImage from '../../../public/images/banner.jpg'
 import HomePageStatic from '../../components/HomePageStatic/homePageStatic';
 
 export class HomePageContainer extends React.Component {
@@ -26,6 +24,7 @@ export class HomePageContainer extends React.Component {
       category: {},
       isLoading: false,
       error: null,
+      
     };
   }
 
@@ -33,9 +32,6 @@ export class HomePageContainer extends React.Component {
   render() {
     return (
       <HomePageStatic />
-    //   <div className="slider">       
-    //     <img src={myImage}/>
-    //  </div>
     );
   }
 }

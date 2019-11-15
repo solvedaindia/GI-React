@@ -1,19 +1,27 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
+import { formatPrice } from '../../../utils/utilityManager';
+
 
 class Price extends React.Component {
   render() {
-    const offerPrice = parseFloat(this.props.offerPrice);
-    const actualPrice = parseFloat(this.props.actualPrice);
+    let offerPrice = parseFloat(this.props.offerPrice);
+    let actualPrice = parseFloat(this.props.actualPrice);
     let crossPriceItem;
 
     if (offerPrice < actualPrice) {
-      crossPriceItem = <span className="priceno-discount">₹{actualPrice}</span>;
+      crossPriceItem = <span className="priceno-discount">₹{formatPrice(actualPrice)}</span>;
+    }
+    if (!isNaN(offerPrice)) {
+      offerPrice = `₹${formatPrice(offerPrice)}`
+    }
+    else {
+      offerPrice = null
     }
 
     return (
       <>
-        <span className="discount-price">₹{offerPrice}</span> {crossPriceItem}
+        <span className="discount-price">{offerPrice}</span> {crossPriceItem}
       </>
     );
   }

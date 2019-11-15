@@ -2,7 +2,6 @@ const async = require('async');
 const espotsHandler = require('./espotshandler');
 const logger = require('../utils/logger.js');
 const espots = require('../configs/espotnames');
-const filter = require('../filters/filter');
 const espotFilter = require('../filters/espotfilter');
 const headerEspot = espots.header;
 
@@ -27,12 +26,6 @@ module.exports.getHeaderData = function headerData(headers, callback) {
       const resJson = {
         Header_Static_Links: espotFilter.espotContent(results[0]) || '',
       };
-      /*      results.forEach(element => {
-        const espotParserResult = filter.filterData('espotcontent', element); // Espot Data Filteration
-        if (espotParserResult != null) {
-          Object.assign(resJson, espotParserResult);
-        }
-      }); */
       callback(null, resJson);
     },
   );

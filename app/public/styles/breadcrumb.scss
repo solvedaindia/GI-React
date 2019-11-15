@@ -1,0 +1,36 @@
+@import './variable';
+
+.breadCrumb {
+	padding-right: 15px;
+    padding-left: 15px;
+	padding-top:16px;
+    margin-right: auto;
+    margin-left: auto;
+    .links {
+        display: inline-block;
+        color: $black;
+        font-size: 10px;
+        text-transform: capitalize;
+		line-height:21px; 
+		padding-left: 4px;
+		a:hover{
+          text-decoration: none;
+		}
+    }
+}
+
+@media (min-width: 768px) {
+		.breadCrumb {
+		  width: 750px;
+		}
+	  }
+	  @media (min-width: 992px) {
+		.breadCrumb {
+		  width: 970px;
+		}
+	  }
+	  @media (min-width: 1200px) {
+		.breadCrumb {
+		  width: 1170px;
+		}
+	  }

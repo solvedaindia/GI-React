@@ -5,9 +5,10 @@
     display: inline-block;
     position: relative;
     border-bottom: 1px solid $battleshipGrey;
+    margin: 0 16px 0 0;
    .search-icon{margin:0}
     .searchInput {
-        width: 100%;
+        width: 90%;
         border: transparent;
         background: transparent;
         padding: 0px 0 0 25px;
@@ -25,6 +26,19 @@
         text-align: center;
         pointer-events: none;
     }
+    .clearField {
+        position: absolute;
+        top: 2px;
+        right: 7px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        font-size: 18px;
+        text-decoration: none;
+        color:$black;    
+        display: none;
+       
+    }
 
     #autoSuggestDiv{
         position: absolute;
@@ -40,6 +54,11 @@
 
             .list{
                 padding:0px;
+                &:first-child{
+                    .link{
+                        cursor: default;
+                    }
+                }
                 .link{
                     display: block;
                     padding: 7px 20px;
@@ -73,4 +92,10 @@
 }
 svg:not(:root) {
     margin: 0 8px;
+}
+::-webkit-search-decoration,
+::-webkit-search-cancel-button,
+::-webkit-search-results-button,
+::-webkit-search-results-decoration { 
+  display: none; 
 }

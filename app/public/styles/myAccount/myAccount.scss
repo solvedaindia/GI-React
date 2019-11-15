@@ -1,0 +1,148 @@
+@import '../app.scss';
+@import './myAccountBase.scss';
+.MyAccount{
+  .username{
+    padding:0 0 32px 32px;
+    color:$colorwhite;   
+    font-size: $base*2.5;
+    margin:0;
+  }
+}
+.myaccount-leftnav{
+  .nav-tabs{
+    background:$colorblue;
+    padding:40px 0 40px 0px;
+    .list{
+      float: none; 
+      .link{
+        color:$colorwhite; 
+        border:0px;
+        padding:13px 13px 13px 32px;
+        font-family: $font-regular;
+        &:hover{
+          background:transparent;
+          color:$colorwhite;
+          border-radius: 0px;  
+          border: 0px;              
+          color:$colorwhite;
+          margin:0;
+          border:none;
+          outline: 0;   
+          cursor:pointer;      
+        }        
+        &:focus{
+              background:rgba(238,248,254,0.2) ;
+              color:$colorwhite;
+              border-radius: 0px;  
+              border: 0px;              
+              color:$colorwhite;
+              margin:0;
+              border:none;
+              outline: 0;              
+        }        
+      }
+      .link.active{        
+          background:$ceruleanblueLight;
+          cursor: default;            
+      }
+      }
+      .list.active{
+        background:$ceruleanblueLight;
+        .link{
+          background: $ceruleanblueLight; 
+          color:$colorwhite;
+          border-radius: 0px;  
+          border: 0px;   
+         }  
+      }
+    }
+}
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  //CSS
+}
+
+/* 
+  #Global Screen Chhange for Screen max 768
+  */
+  
+  @include mix-lg{
+  .MyAccount{
+      padding: 40px 0 40px 0;
+  }
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+
+/* 
+#Global Mobile screen - 767 max
+*/
+@include  mix-md {
+  .MyAccount{
+      padding: 10px 0 10px 0;
+    .myaccount-leftnav{
+      display: none;
+    }
+
+    .container{
+      .changePasswordContainer{
+        .form-div{
+          .valiationPosition-NewPassword{
+            top:20px;
+          }
+          .valiationPosition-NewPassword2{
+            top:24px;
+          }
+          .error-msg{
+            position: relative;
+            margin-top:-11px;
+            font-size: 10px;
+          }
+        }
+        
+      }
+    }
+    .myOnGoingOoders{
+      width: 100%;
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+}

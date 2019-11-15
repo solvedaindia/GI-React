@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-/* Import Components */
-import Input from '../Input/input';
-import Button from '../Button/button';
+import Input from '../Primitives/input';
+import ProgressButton from '../Button/progressButton'
 import {
   regexEmail,
   regexMobileNo,
   validateEmptyObject,
+  regexPw
 } from '../../utils/validationManager';
-import Forgotpassowrd from '../ForgotPasswordComponent/forgotpassword';
+import { VALID_EMAILNUMBER_MSG, VALID_PASSWORD_MSG, VALID_INCORRECTP_PASS_MSG } from '../../constants/app/primitivesConstants';
 
 class WelcomeForm extends Component {
   constructor(props) {
@@ -18,12 +18,23 @@ class WelcomeForm extends Component {
       shown: true,
       errorMessageUserId: null,
       errorMessagePassword: null,
+      isShowPass: false,
+      inputType: 'password',
+      isActive: 'hideData',
+      isProcessing:false
     };
+    this.showHidePass=this.showHidePass.bind(this);
+    this.callbackFunc=this.callbackFunc.bind(this);
   }
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass });
   };
 
   /* Handle Validation */
@@ -31,7 +42,6 @@ class WelcomeForm extends Component {
     let isValidate = errorType;
     const input = String(obj.userId);
     const firstChar = Number(input.charAt(0));
-
     this.setState({
       errorMessageUserId: null,
       errorMessagePassword: null,
@@ -39,26 +49,31 @@ class WelcomeForm extends Component {
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: VALID_EMAILNUMBER_MSG,
       });
       isValidate = false;
     } else if (!input.includes('@') && Number.isInteger(firstChar)) {
-      if (!regexMobileNo.test(obj.userId)) {
+      if ((!regexMobileNo.test(obj.userId)) || ((obj.userId.length) < 10) || ((obj.userId.length) > 10)) {
         this.setState({
-          errorMessage: 'Please enter valid Email Id/Mobile number',
+          errorMessageUserId: VALID_EMAILNUMBER_MSG,
         });
         isValidate = false;
       }
     } else if (!regexEmail.test(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id/Mobile number',
+        errorMessageUserId: VALID_EMAILNUMBER_MSG,
       });
       isValidate = false;
     }
 
     if (!validateEmptyObject(obj.password)) {
       this.setState({
-        errorMessagePassword: 'Enter a valid password ',
+        errorMessagePassword: VALID_PASSWORD_MSG,
+      });
+      isValidate = false;
+    } else if ((!regexPw.test(obj.password) && obj.password.length < 25) || (obj.password.length > 25)) {
+      this.setState({
+        errorMessagePassword: VALID_INCORRECTP_PASS_MSG,
       });
       isValidate = false;
     }
@@ -68,19 +83,58 @@ class WelcomeForm extends Component {
 
   /* Handle Submit */
   handleFormSubmit = e => {
-    e.preventDefault();
+    if(e!=null)
+      e.preventDefault();
     const isValidate = this.handleValidation(this.state, true);
 
     if (isValidate === false) {
       return false;
     }
 
+    this.setState({isProcessing:true})
+
     const data = {
       user_id: this.state.userId,
       password: this.state.password,
     };
-    this.props.handleUserData(data);
+    this.props.handleUserData(data, this.callbackFunc);
   };
+
+  callbackFunc(res) {
+    this.setState({
+      errorMessagePassword: res,
+      isProcessing:false
+    });
+    isValidate = false;
+  }
+
+  /* Show Hide Password */
+  showHidePass() {
+    if (this.state.isShowPass) {
+      this.setState({
+        isShowPass: false,
+        inputType: 'password',
+      });
+    } else {
+      this.setState({
+        isShowPass: true,
+        inputType: 'text',
+      });
+    }
+  }
+
+  copyPaste = e => {
+    e.preventDefault();
+  }
+
+
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.handleFormSubmit();
+    }
+  }
+
 
   /* Error Messgae */
   errorMessage = message => <p className="error-msg">{message}</p>;
@@ -100,26 +154,48 @@ class WelcomeForm extends Component {
     }
     return (
       <form className="loginForm" onSubmit={this.handleFormSubmit}>
-        <Input
+        <div className='relative'><Input
           type="text"
-          title="ENTER EMAIL/MOBILE NUMBER"
+          title="Email Address or Mobile Number"
           name="userId"
+          onKeyPress={this.onKeyPress}
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
         />
         {errorMessageUserId}
         {/* Name or email of the user */}
+        </div>
+        
+        <div className='password-field relative'>
         <Input
-          type="password"
+          type={this.state.inputType}
           name="password"
-          title="PASSWORD"
+          id="password"
+          title="Password"
           placeholder=""
           onChange={this.handleChange}
+          hideAnimation
+          onKeyPress={this.onKeyPress}
+          onPaste={this.copyPaste}
         />
-        {errorMessagePassword}
+       <span
+            onClick={this.showHidePass}
+            className={`valiationPosition-NewPassword ${this.state.isActive}`}
+          >
+            {
+              <img
+                src={require('../../../src/components/SVGs/eye.svg')}
+				 alt="Show Password"
+              />
+            }
+          </span>
+          {errorMessagePassword}
+        </div>
         {/* Password of the user */}
         {/* <Forgotpassowrd/> */}
-        <Button type="primary" title="Login" />
+        {/* <Button type="primary" title="Log In"></Button> */}
+         <ProgressButton isProcessing = {this.state.isProcessing} title="Log In" onClickEvent={this.handleFormSubmit} styleClassName = "formBtn"/> 
         {/* Submit */}
       </form>
     );

@@ -10,7 +10,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import '../../../public/styles/featuredLinkBar/featuredLinkBar.css';
-import data from './data';
 
 
 /* eslint-disable react/prefer-stateless-function */

@@ -2,8 +2,22 @@ const express = require('express');
 const router = express.Router();
 const usersHandler = require('../../handlers/usershandler');
 
-router.get('/', (req, res, next) => {
-  usersHandler.getUserDetails(req.headers, (err, result) => {
+/* Get User Details */
+router.get('/', async (req, res, next) => {
+  try {
+    const result = await usersHandler.getUserDetails(req.headers);
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/* Vaidate User Details */
+router.post('/validate', (req, res, next) => {
+  usersHandler.validateUserDetails(req.body, req.headers, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -15,6 +29,21 @@ router.get('/', (req, res, next) => {
   });
 });
 
+/* Update User Details */
+router.post('/update', (req, res, next) => {
+  usersHandler.updateUserDetails(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/* Change Password */
 router.put('/changepassword', (req, res, next) => {
   usersHandler.changeUserPassword(req.body, req.headers, (err, result) => {
     if (err) {
@@ -28,7 +57,8 @@ router.put('/changepassword', (req, res, next) => {
   });
 });
 
-router.get('/addresses', (req, res, next) => {
+/* Get Address List */
+router.get('/address/list', (req, res, next) => {
   usersHandler.getUserAddress(req.headers, (err, result) => {
     if (err) {
       next(err);
@@ -41,8 +71,9 @@ router.get('/addresses', (req, res, next) => {
   });
 });
 
-router.get('/notifications', (req, res, next) => {
-  usersHandler.getNotifications(req.headers, (err, result) => {
+/* Delete Address List */
+router.post('/address/delete/:nickname', (req, res, next) => {
+  usersHandler.deleteAddress(req, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -54,8 +85,9 @@ router.get('/notifications', (req, res, next) => {
   });
 });
 
-router.get('/giftcard', (req, res, next) => {
-  usersHandler.getGiftCards(req.headers, (err, result) => {
+/* Add Address */
+router.post('/address/add', (req, res, next) => {
+  usersHandler.createAddress(req.headers, req.body, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -67,8 +99,9 @@ router.get('/giftcard', (req, res, next) => {
   });
 });
 
-router.get('/godrejcredit', (req, res, next) => {
-  usersHandler.getGodrejCredit(req.headers, (err, result) => {
+/* Update Address */
+router.post('/address/update/:nickname', (req, res, next) => {
+  usersHandler.updateAddress(req, (err, result) => {
     if (err) {
       next(err);
       return;
@@ -80,6 +113,7 @@ router.get('/godrejcredit', (req, res, next) => {
   });
 });
 
+/** Reset Password in case of you forget your old password */
 router.post('/forgotpassword', (req, res) => {
   usersHandler.forgotPassword(req.body, req.headers, (err, result) => {
     if (err) {
@@ -87,6 +121,20 @@ router.post('/forgotpassword', (req, res) => {
         status: 'failure',
         error: err,
       });
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/* Set Password For Social Logged in User */
+router.post('/sociallogin/setpassword', (req, res, next) => {
+  usersHandler.setSocialPassword(req.body, req.headers, (err, result) => {
+    if (err) {
+      next(err);
       return;
     }
     res.status(200).send({

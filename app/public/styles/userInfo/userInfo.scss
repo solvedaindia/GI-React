@@ -1,39 +1,77 @@
 @import '../variable.scss';
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .user{
+    .userLogin{
+       padding-bottom:12px;
+       .userList{
+           .listItemUnSelected{
+               padding:12px 10px 8px 10px;
+           }
+       }
+    }
     .welcomeDropDown {
         visibility: hidden;
         opacity: 0;
-        position: absolute;
-        // padding: 8px;
-        top: 49px;
-        max-width: 176px;
-        width: 176px;
+        position: absolute;       
+        top:64.3px;
+        max-width: 200px;
+        width: 218px;
         right: 0;
+        border-top: 1px solid #ddd; 
         background-color: $colorwhite;
-        transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+        -webkit-transition: opacity 200ms, visibility 200ms;
+        transition: opacity 200ms, visibility 200ms;
+        -webkit-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        -moz-box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
+        box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.29);
         z-index: 3;
-        -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-        -webkit-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        -o-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
-        -moz-transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
         .dropDown {
-            font-size: $base*1.5;
-            color: $battleshipGrey;
+            font-size: $base*1.75;
+            line-height: $base*2.5;
+            color: $black;
             font-family: $font-regular;
+            display: block;
+            padding-left: $base*4; 
             &:hover {
-                color: $reddishPink;
                 text-decoration: none;
             }
         }
-
+       
         .listItem {
-            padding: $base*1.25;
+            &:first-child{
+                &:hover{
+                    cursor:default;                    
+                }
+            }
+            padding: $base*1;
             &:hover {
                 background-color: #87ceeb6b; 
                 .dropDown {
-                    color: #000;
+                    color: $ceruleanblue;
+                }
+            }
+        }
+        
+        .listItemUnSelected {
+            padding: $base*1.25;
+            background: $iceBlue;             
+            .dropDown{
+                color:$cerulean;
+                font-family: $font-medium;
+                font-size: $base*1.5;
+                line-height: $base*1.75;
+            }
+            &:hover {
+                cursor: default;
+                .dropDown {
+                    color:$cerulean;
                 }
             }
         }

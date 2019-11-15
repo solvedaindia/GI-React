@@ -3,6 +3,29 @@
 @import '../base.scss';
 @import '../variable';
 
+.error-msg-otp-web {
+    color:$reddishpink;
+    font-size: 12px;
+    line-height: 13px;
+    bottom: 0;
+    margin: 0px -20px 0px 0px;
+    text-align: left;
+    bottom: -5px;
+
+}
+.resend-otp-web
+{
+    bottom: 3px;
+    float: right;
+    right:0px;
+    background: transparent;
+    border: none;
+    margin: 0px 0px 0px -12px;
+    color:$ceruleanblue;
+    font-family: $font-bold;
+    font-size: 12px;
+}
+
 .modal-wrapperjoinus{
     .modal-dialog{ 
         max-width: 450px;
@@ -66,6 +89,21 @@
                      padding:0;
                     max-width: 80%;                
                 }
+                .otp-verification{
+                    .otp-text{
+                        font-size: 14px;
+                        font-family: $font-regular;
+                        text-align: center;
+                        line-height: 16px;                        
+                    }
+                    .form-label{
+                        font-size:14px;
+                        line-height: 14px;
+                        font-family: $font-medium;
+                        color:$battleshipGrey;   
+                        font-weight: 400;                     
+                    }
+                }
             }
         }
 
@@ -84,13 +122,11 @@
                     background-size: cover;
                     width: 100%;
                     text-align: center;
-                    padding:30px 0;
                     .logo_width{width:150px}
                     .joinus-heading{
                         font-family: CeraGIBold, sans-serif;
                         margin: 25px 0 0px 0;
                         padding: 0;
-                        font-size: 32px;
                         color:$colorwhite;
                         text-transform: capitalize;
                     }
@@ -99,7 +135,7 @@
                  .form_register {
                     max-width: 100%;
                     padding:0;
-                    .inner-joinusform{padding:40px 50px;
+                    .inner-joinusform{
                     .btn-wrapper{
                         font-family: $font-bold;
                         .btn-white{  
@@ -107,17 +143,9 @@
                             border:1px solid $black;
                             border-radius: 0; 
                             color:$black;   
-                                           
                             .icon-img{
                                 display: inline-block;
                                 margin:0 6px 0 0;
-                                .icon{
-                                    width:24px;
-                                }
-                               
-                            }
-                            .signin-text{
-                                font-size: 12px;
                             }
                         }
                         .btn-fb{
@@ -128,11 +156,16 @@
                     }
                     .already-member{
                         text-align: center;
-                        margin: 12px 0 0;
+                        margin: 14px 0 0;
                         color:$black;
+                        font-family: $font-regular;
+                        font-size: $base*1.75;
+                        line-height: $base*1.75;
                         .login{
                             color:$ceruleanblue;
-                            font-family: $font-bold;
+                            font-family: $font-regular;
+                            text-decoration: underline;
+                            font-weight: 600;
                         }
                     }
                 }
@@ -144,7 +177,7 @@
             padding: 0;            
             .otp_screen{max-width: 80%;margin:0 auto;    color: #979797;
                .form_register{
-                   .heading{font-size: 18px; text-align: center;}
+                   .heading{font-size: 20px; text-align: center;}
                }
             
             }
@@ -154,7 +187,8 @@
                      margin:15px 0 0 0; 
                      background: $black; 
                      border-radius: 0;
-                     text-transform: capitalize;       
+                     text-transform: capitalize;    
+                     font-family: $font-medium;   
                     }
                 .sign_text{
                     text-align: center;
@@ -180,7 +214,6 @@
             .heading{
                 text-align: left;
                 font-family:$font-bold;
-                text-transform: capitalize;
                 padding: 0 0 30px 0;
                 margin: 0;
                 color: $black;
@@ -189,7 +222,7 @@
             
                 .label {
                     color:$battleshipGrey;
-                    text-transform: uppercase;
+                    text-transform: capitalize;
                     background: transparent;
                     margin: 0;
                     display: block;
@@ -201,25 +234,21 @@
                 .form-control {
                     box-shadow: none;
                     height: 40px;
-                    margin: 0 0 28px 0;
+                    margin: 0 0 10px 0;
                     border:1px solid $lightgrey;
                 }
                 .error-msg {
-                    position: absolute;
                     color:$reddishpink;
-                    font-weight: normal;
                     font-size: 12px;
                     line-height: 13px;
-                    min-height: 25px;
                     bottom: 0;
                     width: 100%;
-                    margin:0 0 0 0;
                 }
                 .form-div {
                     position: relative;
                     .resend-otp {
                         position: absolute;
-                        bottom:5px;
+                        bottom:10px;
                         right:0;
                         background: transparent;
                         border:none;
@@ -267,7 +296,6 @@
                 background: #fff;
                 color: #827b7b;
                 border: 1px solid #ccc;
-                padding: 10px 8px;
                 border-radius: 4px;
                 margin:0
             }
@@ -289,3 +317,320 @@
 }
 
 }
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+  */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+    /* 
+    #Global Screen Chhange for Screen Laptops, Desktops
+    */
+    @include mix-lg{
+        .modal_register{
+            .modal-dialog{
+                .modal-wrapperjoinus{
+                    .modal-wrapper{
+                        .joinUs{
+                            padding:30px 0;
+                            .joinus-heading{
+                                font-size: $base*4.75;
+                            }
+                        }
+                        .form_register{
+                            .inner-joinusform{
+                                padding:40px 50px;
+
+                                .btn-wrapper{
+                                    .btn-white{
+                                        padding: 10px 6px;
+                                        .icon-img{
+                                            .icon{
+                                                width:$base*3;
+                                            }
+                                        }
+                                        .signin-text{
+                                            font-size: 12px;
+                                        }
+                                        
+                                    }
+                                } 
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+
+            &.modal-wrapperotp{
+                .modal-dialog{
+                    .modal-wrapper{
+                        .form_register{
+                            .form-group{
+                                .form-div{
+                                    padding-bottom: 15px;
+                                    .resend-otp{
+                                        bottom: 3px;
+                                    }
+                                    .error-msg{
+                                        text-align: left;
+                                        position: absolute;
+                                        bottom: -5px;
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                }  
+            }
+        } 
+    }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+
+  /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+    .modal_register{
+            .modal-dialog{
+                .modal-content{
+                    .registerEmailMobile{
+                        .modal-wrapper{
+                            .reg-join-Us{
+                                background-image: url('../../images/rectangle.png');
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-size: cover;
+								width:100%;
+                                padding: 50px 0px 30px 0px;
+                                text-align: center;
+                                .joinus-heading{
+                                    font-family: $font-bold;
+                                    margin: 15px 0 0px 0;
+                                    padding: 0;
+                                    color:$colorwhite;
+                                    text-transform: capitalize;
+                                    font-size:$base*3;
+                                }
+                            }
+                            .close {
+                                &:before{
+                                    background:$colorwhite;
+                                }
+                                &:after{
+                                    background:$colorwhite;
+                                }
+                            }
+                            .form_register{
+                                min-height: 490px;
+                                .form-group{
+                                    .label{
+                                        position: absolute;
+                                        font-size: 11px;
+                                        font-weight: normal;
+                                        z-index: 1;
+                                        background: $colorwhite;
+                                        padding: 0px 10px;
+                                        margin: -5px 0px 0px 10px;
+                                        text-transform: capitalize;
+                                        font-family: $font-regular;
+                                        color: $blackLight;
+                                    }
+                                    .form-control{
+                                        &::-webkit-input-placeholder{
+                                            color:$black;
+                                            font-family: $font-regular;
+                                            font-weight: normal;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    
+                                    .have-account, .sign_text, .link{
+                                        font-family: $font-regular;
+                                        color: $blackLight;
+                                        font-size: 11px;
+                                        font-weight: normal;
+                                        .login{
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                    .btn-bg{
+                                        line-height: 26px;
+                                    }
+                                    .form-div{
+                                        .error-msg{
+                                            position: relative;
+                                            margin-top: -25px;
+                                            margin-bottom: 15px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            .modal-wrapperjoinus{
+                .modal-wrapper{
+                    .joinUs{
+                        padding:50px 0px 30px 0px;
+                        .joinus-heading{
+                            font-size: $base*3;
+                            margin: 15px 0 0px 0;
+                        }
+                        svg{
+                            width:100px;
+                        }
+                    }
+                    .form_register{
+                        .inner-joinusform{
+                            min-height: 500px;
+                            padding:40px 20px;
+                            .btn-wrapper{
+                                .btn-white{
+                                    padding: 8px 4px 8px 4px;
+                                    font-size: 10px;
+                                    .icon-img{
+                                        .icon{
+                                            width:14px;
+                                        }
+                                    }
+                                    .signin-text{
+                                        font-size: 10px;
+                                    } 
+                                }
+                            } 
+                        } 
+                    } 
+                } 
+            }
+            
+        } 
+        &.modal-wrapperotp {
+            top:initial;
+            bottom: 0px;
+            .modal-dialog{
+                .modal-content{
+                    .modal-wrapperotp{
+                        .modal-wrapper{
+                            padding: 25px 0px 0px 0px;
+                            .otp_screen{
+                                max-width:100%;
+                                .form_register{
+                                    max-width: 100%;
+                                    .heading{
+                                        font-size: 14px;
+                                        text-align: left;
+                                        padding: 7px 0px 18px 50px;
+                                    }
+                                    .otp-verification{
+                                        padding: 15px 20px 0px 20px;
+                                        border-top:1px solid  $lightblueGrey;
+                                        .otp-text{
+                                            font-size: 10px;
+                                            line-height: normal;
+                                            font-weight: normal;
+                                            font-family: $font-regular;
+                                            color:$black;
+                                            padding: 0 0 10px 0;
+                                            text-align: left;
+                                        }
+                                        .form-control{
+                                            border: 1px solid $black;
+                                            border-radius: 0px;
+                                        }
+                                        .resend-otp{
+                                            bottom: initial;
+                                            top:0px;
+                                            margin:11px 10px 0px 0px;
+                                        }
+                                        .form-label{
+                                            position:absolute;
+                                            top: -7px;
+                                            left: 15px;
+                                            background: $colorwhite;
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.in{
+                padding-left: 0px !important;
+            }
+        }
+        &.modal-wrapperjoinus  {
+            .modal-dialog{
+                max-width: 500px;
+                width:100%;
+            }
+           &.in{
+               padding-left: 0px !important;
+           }
+        }
+
+        &.registerEmailMobile  {
+           &.in{
+               padding-left: 0px !important;
+           }
+        }
+    } 
+
+  }
+
+
+  /* 
+    #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+  */
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  
+  /* 
+    #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+  */
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    
+    
+  }

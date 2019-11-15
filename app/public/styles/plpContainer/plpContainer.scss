@@ -3,6 +3,8 @@
 @import "../app.scss";
 @import "../base.scss";
 @import "../variable.scss";
+@import './rwdPLPContainer.scss';
+
 $imgfullwid: 100%;
 
 .list-style {
@@ -15,9 +17,20 @@ $imgfullwid: 100%;
 }
 
 section.tablecarousel {
-  padding: 40px 0 40px 0;
+  padding: 0px 0 0px 0;
   .slick-slider {
     margin: 0 -15px;
+    .slick-list{
+      .slick-track{
+        margin-bottom: 0px;
+        &:empty {
+          display: none;
+       }
+      }
+    }
+    .slick-dots{
+        bottom:5px;
+    }
   }
   .headingText {
     .heading {
@@ -26,9 +39,57 @@ section.tablecarousel {
   }
 }
 
+/*----Search
+------------------*/
+.noResultfound {
+  text-align: center;
+  padding: 60px 0 0 0;
+  .label-noresult {
+    color: $greyBorder;
+    font-size: $base * 3.75;
+    padding: 0 0 16px 0;
+    line-height: 30px;
+    margin: 0;
+  }
+  .product-serchGuide {
+    .label-text,
+    .serchlist-button {
+      display: inline;
+      font-size: $base * 2.5;
+      line-height: 20px;
+    }
+    .label-text {
+      color: $black;
+    }
+    .searchitem-button {
+      color: $cerulean;
+      background: transparent;
+      border: none;
+      margin: 0 5px 0 0;
+    }
+  }
+}
+
+.Search-bestseller {
+  .bestSeller {
+    width: auto;
+    margin: 80px auto;
+    .title {
+      text-align: left;
+      color: $cerulean;
+      font-size: $base * 3.75;
+      margin: 0 0 44px 0;
+      font-family: $font-bold;
+    }
+  }
+}
 /*------Featured Categories
 -------------------------------------*/
-
+.tablecarousel {
+	.slick-prev, .slick-next{
+		z-index:3;
+	}
+}
 .featureCarouselbox {
   .slick-prev {
     left: -20px;
@@ -60,16 +121,17 @@ section.tablecarousel {
       float: left;
       .bold {
         font-family: $font-bold;
-        font-size: 16px;
+        font-size: $base * 2;
+        min-height: 16px;
       }
       .start_price {
-        font-size: 11px;
+        font-size: $base * 1.375;
         font-style: italic;
       }
     }
     .rightbox {
       float: right;
-      font-size: 11px;
+      font-size: $base * 1.375;
     }
   }
 }
@@ -86,8 +148,6 @@ section.tablecarousel {
 
 .plpCategories {
   .plp-products {
-    padding: 64px 0 60px 0;
-    width: 1140px;
     margin: 0 auto;
   }
   .grid3 {
@@ -126,59 +186,145 @@ section.tablecarousel {
   }
   .headingTitle {
     font-family: $font-bold;
-    font-size: 50px;
     color: $ceruleanblue;
     margin: 0;
   }
+  .searchresult {
+    .headingTitleFlat {
+      font-family: $font-regular;
+      color: $black;
+      margin: 0;
+    }
+    .headingTitleSearch {
+      font-family: $font-bold;
+      font-size: $base * 3.75;
+      color: $ceruleanblue;
+      margin: 0;
+    }
+  }
+
   .headingSubTitle {
-    color: $colorLightGrey;
-    margin: 0 0 15px 0;
-    font-size: 13px;
+    color: $greyBorder;
   }
   .container {
     padding: 0 30px;
   }
   .plp-products {
     .productlist {
-      padding: 20px;
       position: relative;
       border: 1px solid $borderLight;
-      .hoverBox{
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background: rgba(3, 108, 197, 0.38);
-        top: 0;
-        left: 0;
-        opacity:0;
-        -webkit-transition: all .4s ease-in-out;
-        -o-transition: all .4s ease-in-out;
-        transition: all .4s ease-in-out;
-        padding: 20px;
-      
-
-        .btn-compare{
-          background: $colorwhite;
-          color:$ashGrey;
-          padding:12px 45px;
+      .hoverBox {
+        .inner-overlay{
           text-align: center;
-          font-size: 14px;
-          border:none;
+        }
+        .btn-compare {
+          background: $colorwhite;
+          color: $ashGrey;
+          padding: 12px 45px;
+          text-align: center;
+          font-size: $base * 1.75;
+          border: none;
           font-family: $font-bold;
           width: 200px;
           height: 44px;
           left: 50%;
-          top: 50%;
-          margin-top: -22px;
+          bottom: 124px;
+          margin-top: 30px;
           margin-left: -100px;
           position: absolute;
         }
+        .colorthemeNomore{
+          text-align: center;
+          width: 180px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -75px;
+          margin-left: -90px;
+          position: absolute;         
+        }
+       .colortheme-Wrapper{
+        text-align: center;
+        width: 218px;
+        height: 44px;
+        left: 50%;
+        top: 50%;
+        margin-top: -75px;
+        margin-left: -109px;
+        position: absolute;       
       }
-      &:hover .hoverBox{
-       opacity: 1;
+        ul.colortheme {         
+          display: inline-block;          
+          .list{           
+            border-radius: 50%;
+            display: inline-table;
+            border: 2px solid #fff;
+            cursor: pointer;
+            margin: 0 10px 8px 0;
+            text-align: center;
+            .swatches-circle {
+              display: block;
+              padding: 5px;
+              border-radius: 100%;
+            }
+            .swatches-circle-img {
+              display: block;
+              border-radius: 100%;
+            }
+          }
+
+          .active {
+            border: 2px solid $black;
+            padding: 2px;
+          }
+          
+        }
+        .moreSwatch{
+          border: none;
+          background: transparent;
+          color:$colorwhite;         
+          width: 28%;
+          float: right;
+          display: block;
+          padding: 3px 0 0 0;
+          font-size: $base*1.75;
+          &:focus{
+            outline: none;
+          }
+        }
+        .moreSwatchForMobile{
+          border: none;
+          background: transparent;
+          color:$battleshipGrey;         
+          float: right;
+          display: block;
+          padding: 3px 0 0 0;
+          font-size: $base*1.4;
+          &:focus{
+            outline: none;
+          }
+        }
+        
+      
+
+        .yellow {
+          background: #f5a623;
+        }
+        .red-dirt {
+          background: #8b572a;
+        }
+        .grey {
+          background: #9b9b9b;
+        }
+        .blue {
+          background: #4a90e2;
+        }
       }
-      &:hover .wishlistBtn{
-        opacity:1;
+      &:hover .hoverBox {
+        opacity: 1;
+      }
+      &:hover .wishlistBtn {
+        opacity: 1;
       }
 
       .featured-box {
@@ -188,7 +334,7 @@ section.tablecarousel {
         background: $black;
         color: $colorwhite;
         padding: 2px 10px;
-        font-size: 12px;
+        font-size: $base * 1.5;
         .ribbon_star {
           float: left;
           display: block;
@@ -209,7 +355,6 @@ section.tablecarousel {
         background: transparent;
         border: none;
         z-index: 1;
-        opacity: 0;
         &:focus {
           outline: none;
         }
@@ -225,8 +370,8 @@ section.tablecarousel {
           display: block;
 
           .imgfullwidth {
-            max-width: 100%;
-            max-height: 168px;
+            width: 100%;
+            // max-height: 168px;
             display: block;
           }
         }
@@ -234,7 +379,7 @@ section.tablecarousel {
           background-color: rgba(255, 255, 255, 0.8);
           border: 0.09rem solid $reddishpink;
           position: absolute;
-          font-size: 14px;
+          font-size: $base * 1.75;
           color: $black;
           padding: 8px 20px;
           transform: translate(-50%, -50%);
@@ -249,12 +394,10 @@ section.tablecarousel {
           position: relative;
           font-family: $font-bold;
           padding-top: 15px;
-          font-size: 14px;
           text-transform: capitalize;
           &:after {
             position: absolute;
             width: 20px;
-            height: 1px;
             background: $reddishpink;
             content: "";
             bottom: 0;
@@ -268,38 +411,41 @@ section.tablecarousel {
             display: block;
           }
           .name {
-            font-family: $font-bold;
+            font-family: $font-medium;
+            font-size: $base*2.25;
+            line-height: $base*2.25;;
+            margin: 0;
           }
           .description {
-            font-family: $font-light;
-            font-size: 11px;
+            font-family: $font-regular;
+            padding: 0px 0px 8px 0px;
+            margin: 8px 0px 0px 0px;
           }
         }
 
         .text {
           color: $black;
           padding: 5px 0 0 0;
-          line-height: 24px;
           margin: 0;
         }
         .price {
           font-weight: bold;
           .discount-price {
-            font-size: 18px;
             font-family: $font-bold;
             color: $cerulean;
           }
           .priceno-discount {
             text-decoration: line-through;
             text-decoration-color: $reddishpink;
-            font-family: $font-light;
+            font-family: $font-regular;
             padding-left: 15px;
-            font-size: 18px;
+            font-size: $base * 2.25;
+            color:$greylightColor;
           }
         }
         .emi-text {
           color: $reddishpink;
-          font-size: 12px;
+          font-size: $base * 1.5;
           line-height: 16px;
           .free-accessories {
             display: block;
@@ -313,42 +459,10 @@ section.tablecarousel {
   }
 }
 
-/** Descripton */
-.descriptionBanner {
-  background: $greybg;
-  padding: 60px 0;
-
-  .heading {
-    font-family: $font-bold;
-    font-size: 34px;
-    color: $black;
-    margin: 0 0 20px 0;
-  }
-
-  .readMore {
-    background: transparent;
-    border: none;
-    text-decoration: underline;
-    color: $black;
-    font-size: 16px;
-    font-family: $font-regular;
-    text-align: left;
-    margin: 24px 0;
-    display: inline-block;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-    &:active {
-      outline: none;
-    }
-  }
-}
-
 .description_area .list {
   color: #767676;
   margin: 0 0 10px 0;
-  font-size: 14px;
+  font-size: $base * 1.75;
 }
 
 .adBannerWidth {
@@ -362,13 +476,14 @@ section.tablecarousel {
 
   position: relative;
   .filter {
-    width: 84%;
+    width: 80%;
     float: left;
     .heading {
       font-family: $font-bold;
-      font-size: 14px;
+      font-size: $base * 1.75;
       padding: 0 0 15px 0px;
       margin: 0;
+      text-transform: uppercase;
     }
     .moreFilterBtn {
       float: left;
@@ -377,7 +492,7 @@ section.tablecarousel {
       padding: 16px;
       color: $greyish;
       text-decoration: underline;
-      font-size: 14px;
+      font-size: $base * 1.75;
       font-family: $font-light;
       &:focus {
         outline: 0;
@@ -388,7 +503,7 @@ section.tablecarousel {
       position: static;
       display: block;
       float: left;
-      min-width: 200px;
+      min-width: 17%;
 
       &__filter {
         background: $colorwhite;
@@ -396,6 +511,7 @@ section.tablecarousel {
         border-radius: 1px;
         z-index: 1;
         background: $colorwhite;
+        margin-left: -1px;
 
         &:last-child {
           border-right: 1px solid $lightgrey;
@@ -420,7 +536,7 @@ section.tablecarousel {
         transition: max-height 0.2s ease-out;
         max-height: 0;
         overflow: hidden;
-        margin: 0;
+        margin: -1px 0px 0px 0px;
         padding: 0;
         position: absolute;
         z-index: 2;
@@ -428,8 +544,8 @@ section.tablecarousel {
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.14);
         // opacity: 0;
         visibility: hidden;
-        max-width: 84%;
-        left:0;
+        max-width: 88%;
+        left: 0;
         .filterbtnWrapper {
           text-align: center;
         }
@@ -440,7 +556,9 @@ section.tablecarousel {
           visibility: visible;
         }
         .list {
-          display: inline-block;
+          // display: inline-block;
+          display: block;
+          float: left;
 
           .input_box {
             margin: 0 15px 0 0;
@@ -455,7 +573,29 @@ section.tablecarousel {
               position: relative;
               .circle {
                 border-radius: 50%;
-                width: 100%;
+                height: 22px;
+                width: 22px;
+                padding: 2px;
+              }
+              .circlebox {
+                height: 28px;
+                width: 28px;
+                background: $colorwhite;
+                border: 2px solid $colorwhite;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 100%;
+                padding: 2px;
+                margin-top:-5px;
+
+                .circleRGB {
+                  border-radius: 50%;
+                  height: 20px;
+                  width: 20px;
+                  padding: 2px;
+                  display: block;
+                }
               }
             }
 
@@ -469,13 +609,18 @@ section.tablecarousel {
                 border: 2px solid $black;
                 padding: 2px;
               }
+
+              .circlebox {
+                border: 2px solid $black;
+                padding: 2px;
+              }
             }
 
             /* Input Checkbox Squere
             -----------------------------*/
             .inputCheck[type="checkbox"] + .lblCheck {
               background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;
-              display: inline;
+              display: block;
               min-height: 16px;
               padding-left: 16px;
               background-size: contain;
@@ -488,8 +633,18 @@ section.tablecarousel {
             }
           }
           .label_text {
-            padding: 0 30px 26px 0;
+            padding: 0px 30px 23px 0;
             color: $battleshipGrey;
+            font-size: $base * 1.5;
+            min-width: 200px;
+            display: flex !important;
+            align-items: center;
+          }
+          .label_text_disable {
+            //padding: 0 30px 26px 0;
+            color: #c9c9c9;
+            font-size: $base * 1.5;
+            min-width: 200px;
           }
           .input_box,
           .label_text {
@@ -508,6 +663,8 @@ section.tablecarousel {
         padding: 15px;
         position: relative;
         display: flex;
+        font-size: $base*1.75;
+        font-family: $font-medium;
 
         &--active {
           background: #f4f4f4;
@@ -535,7 +692,7 @@ section.tablecarousel {
       }
 
       .filterbtnWrapper {
-        padding: 30px 0 0 0;
+        padding: 22px 0 0 0;
         .btn {
           padding: 12px 60px;
           border-radius: 0;
@@ -558,13 +715,14 @@ section.tablecarousel {
   -----------------------------------------***/
 
   .sort {
-    width: 15%;
+    width: 17%;
     float: right;
     .heading {
       font-family: $font-bold;
-      font-size: 14px;
+      font-size: $base * 1.75;
       padding: 0 0 15px 15px;
       margin: 0;
+      text-transform: uppercase;
     }
 
     .dropdown {
@@ -573,6 +731,7 @@ section.tablecarousel {
       z-index: 2;
       right: 0;
       width: 100%;
+      margin-top:-1px;
 
       .dropdowntoggle {
         border: 1px solid $lightGrey;
@@ -639,7 +798,9 @@ section.tablecarousel {
         padding: 15px;
         background: $colorwhite;
         color: $battleshipGrey;
-        font-weight: 600;
+        font-weight: normal;
+        font-size: $base*1.75;
+        font-family: $font-medium;
 
         &active {
           color: $ceruleanblue;
@@ -690,14 +851,18 @@ section.tablecarousel {
 
 //Filter Selection
 .filterSelection_btn {
-  padding: 9px 26px;
+  padding: 11px 0px;
   height: 34px;
   border-radius: 2px;
   background-color: #eef8fe;
   position: relative;
-  margin: 0 16px 12px 0;
+  margin: 0 13px 12px 0;
   border: none;
-  min-width: 100px;
+  min-width: 125px;
+  font-size:$base* 1.5;
+  line-height:$base* 1.5;
+  font-family: $font-medium;
+  color:$greyish;
   cursor: default;
   &:focus {
     border: none;
@@ -707,22 +872,33 @@ section.tablecarousel {
 
 .filterSelection_oval {
   width: 18px;
-  height: 18px;
-  border: solid 1px var(--light-blue-grey);
-  background-color: #ffffff;
+  height: 18px; 
+  background-color:$colorwhite;
   position: absolute;
-  top: -8px;
+  top: -5px;
   right: -5px;
   border-radius: 50%;
-  border: 1px solid #d1d1d2;
-  font-size: 12px;
+  border: 1px solid $lightblueGrey;
+  font-size: $base * 1.5;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .crossImg{
+    width:10px;
+    height:10px;
+  }
 }
 
 //Lazy loading Indicator
 .lazyloading-Indicator {
   text-align: center;
   padding: 0 0 60px 0;
+  min-height: 50vh;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .loadingImg {
     animation: leaves 1s ease-in-out infinite alternate;
@@ -743,39 +919,40 @@ section.tablecarousel {
 
 .noProductFound {
   text-align: center;
-  font-size: 16px;
+  font-size: $base * 2;
   padding: 0 0 15px 0;
-  color: #737272;
+  color: $greycolor;
 }
 
 //-------- Wishlist -------
-.addedToWishlist { 
+.addedToWishlist {
   backdrop-filter: blur(10px);
-  background:$black;
+  background: $black;
   animation: wishlistPopupAnimation 0.5s ease-in-out 0s forwards;
   padding: 16px 17px 16px 20px;
   margin: 24px 0 0 0;
   width: 80%;
   position: absolute;
   right: 20px;
+  top: 20px;
 
-  .wishlist-text, 
-  .view-btn{
-    font-size: 12px;
+  .wishlist-text,
+  .view-btn {
+    font-size: $base * 1.5;
     color: $colorwhite;
   }
-  .wishlist-text {    
-    float:left;
+  .wishlist-text {
+    float: left;
     display: block;
   }
 
-  .view-btn {       
-    float:right;
+  .view-btn {
+    float: right;
     background: transparent;
-    border:none; 
-    &:focus{
+    border: none;
+    &:focus {
       outline: none;
-    }  
+    }
   }
 }
 
@@ -791,4 +968,365 @@ section.tablecarousel {
     -webkit-transform: none;
     transform: none;
   }
+}
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@include mix-xl{
+  .plpCategories{
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      width: 1140px;
+    }
+  } 
+}
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@include mix-md-lg {
+  .plpCategories{
+    .grid3 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .plp-products {
+      width: 1140px;
+    }
+  } 
+}
+
+/* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
+  /** Descripton */
+  .descriptionBanner {
+    background: $greybg;
+    padding: 60px 0;
+    margin-top:$base*11.12;
+
+    .heading {
+      font-family: $font-bold;
+      font-size: $base * 4.25;
+      color: $black;
+      margin: 0 0 20px 0;
+    }
+
+    .readMore {
+      background: transparent;
+      border: none;
+      text-decoration: underline;
+      color: $black;
+      font-size: $base * 2;
+      font-family: $font-regular;
+      text-align: left;
+      margin: 24px 0;
+      display: inline-block;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      &:active {
+        outline: none;
+      }
+    }
+  }
+
+
+  .plpCategories {
+    .plp-products {
+      padding: 20px 0 60px 0;
+      .productlist{
+        padding: 0 0 16px 0;
+        .product-text{
+          .heading{
+            font-size: $base * 1.5;
+            .description{
+              font-size: 11px;
+            }
+            &:after {
+              height: 1px;
+            }
+          }
+          .price{
+            .discount-price{
+              font-size: $base * 3;
+              line-height: $base * 3;
+            }
+          }
+          .text {
+            line-height: 24px;
+          }
+        }
+        &:hover .hoverBox {
+          opacity: 1;
+        }
+        &:hover .wishlistBtn {
+          opacity: 1;
+        }
+      } 
+     
+      .wishlistBtn{
+        opacity: 0;
+      }
+      .hoverBox{
+        padding: 20px;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(3, 108, 197, 0.38);
+        top: 0;
+        left: 0;
+        opacity: 0;
+        -webkit-transition: all 0.4s ease-in-out;
+        -o-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out; 
+        ul.colortheme {
+          text-align: center;
+          width: 218px;
+          height: 44px;
+          left: 50%;
+          top: 50%;
+          margin-top: -75px;
+          margin-left: -109px;
+          position: absolute;
+          .list{
+            .swatches-circle{
+              width: 24px;
+              height: 24px;
+            }
+            .swatches-circle-img {
+              width: 24px;
+              height: 24px;
+              .imgCircle{
+                display: block;
+                width:24px;
+                height: 24px;            
+                border-radius: 100%;
+              }
+            }
+          } 
+        }
+      }
+    }
+    .headingTitle{
+      font-size: $base * 7;
+      line-height: $base * 7;
+      margin:40px 0 0 0;
+    }
+    .headingSubTitle{
+      padding: 0 0 32px 0;
+      font-size: $base * 2.25;
+    }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 73px 0 16px 0;
+        font-size: $base * 3.75;
+      }
+    }
+  }
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads
+*/
+@include mix-md-ipad{
+  .filterWrapper{
+    .filter{
+      width:79%;
+      .dropdown_filter{
+        min-width: 160px;
+        margin-top:-1px;
+        &__list {
+          .list{
+            min-width: 240px;
+          }
+        }
+      }
+    }
+    .sort{
+      width: 21%;
+      .dropdown{
+        margin-top:-1px;
+      }
+    } 
+  } 
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+  /** Descripton */
+  .descriptionBanner {
+    background: $greybg;
+    padding: 30px 0;
+
+    .heading {
+      font-family: $font-bold;
+      font-size: $base * 2.25;
+      color: $black;
+      margin: 0 0 20px 0;
+    }
+    .description_area {
+      p {
+        color: $greyLight;
+        font-size: 11px;
+        font-family: $font-regular;
+        line-height: 18px;
+      }
+    }
+    .readMore {
+      background: transparent;
+      border: none;
+      text-decoration: underline;
+      color: $black;
+      font-size: $base * 1.5;
+      font-family: $font-medium;
+      text-align: left;
+      margin: 24px 0 0px 0px;
+      display: inline-block;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      &:active {
+        outline: none;
+      }
+    }
+  }
+
+  .plpCategories {
+    .plp-products {
+      padding: 0px 0 60px 0;
+      .productlist{
+        padding: 0 0 8px 0;
+        .product-text{
+          .heading{
+            font-size: $base * 1.75;
+            .description{
+              font-size: 10px;
+              color: $greyBorder;
+            }
+            .name{
+              font-size: $base * 1.75;
+            }
+            &:after {
+              height: 2px;
+            }
+          }
+          .price{
+            .discount-price, .priceno-discount{
+              font-size: 13px;
+            }
+          }
+          .text {
+            line-height: 18px;
+          }
+          .emi-text{
+            border-top:1px solid $borderLight;
+            width: 85%;
+            margin: auto;
+            margin-top: 5px;
+            .free-accessories{
+              font-size: 10px;
+              line-height: 14px;
+            }
+            &:empty{
+              display: none;
+            }
+          }
+        }
+        .addedToWishlist{
+          width: 100%;
+          position: fixed;
+          bottom: 58px;
+          top: initial;
+          left: 0;
+          right: 0;
+          z-index: 9;
+        }
+      } 
+      .hoverBox{
+        padding:5px 10px;
+        .btn-compare{
+          display:none;
+        }
+        ul.colortheme{
+          .list{
+            
+            .swatches-circle{
+              width: 12px;
+              height: 12px;
+              
+            }
+            .swatches-circle-img{
+              width: 12px;
+              height: 12px;
+              .imgCircle{
+                display: block;
+                width:12px;
+                height: 12px;            
+                border-radius: 100%;
+                //vertical-align: baseline;
+              }
+            }
+          } 
+        } 
+      }
+    }
+    .headingTitle{
+      font-size: $base * 3;
+      margin-top: 10px;
+    }
+    .headingSubTitle{
+      padding: 0px;
+      font-size: $base * 1.5;
+    }
+    .searchresult {
+      .headingTitleFlat{
+        padding: 20px 0 16px 0;
+        font-size: $base * 2.75;
+      }
+    }
+  }
+  section.tablecarousel{
+    .slick-slider{
+      .slick-dots{
+        bottom: -13px;
+      }
+    }
+  } 
+ 
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  //CSS
+  
+  .sort {
+    width: 50%;
+  }
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
 }

@@ -7,9 +7,7 @@ import {
 } from '../../public/constants/constants';
 import appCookie from './cookie';
 
-
 export function onFacebookResponse(socialData, callback) {
-  console.log('Facebook---', socialData);
   socialLoginAPIHandler(socialData, callback);
 }
 
@@ -31,13 +29,21 @@ function socialLoginAPIHandler(socialData, callback) {
     .post(socialLoginAPI, data)
     .then(response => {
       appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-      appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
+      appCookie.set(
+        `${accessTokenCookie}=${
+          response.data.data.access_token
+        };path=/;expires=''`,
+      );
+	  
+	   appCookie.set(
+        `userID=${
+          response.data.data.userID
+        };path=/;expires=''`,
+      );
       window.location.reload();
       callback('Success');
-      console.log('socialData---', response.data.data.access_token);
     })
     .catch(error => {
       callback('Error');
-      console.log('socialerrr0r---', error);
     });
 }

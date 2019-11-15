@@ -1,0 +1,112 @@
+@import '../variable';
+@import '../base';
+.featuredCat {
+    width: 83.33%;
+    margin: $base*15 auto 0;
+    .subCatImg {
+        width: 100%;
+    }
+    .slick-next,
+    .slick-prev {
+        top: unset;
+        bottom: -18%;
+        &::before {
+            font-size: 32px;
+            line-height: unset;
+            opacity: unset;
+            color: unset;
+        }
+    }
+    .slick-slide div {
+        margin: $base;
+        position: relative;
+        .subCatImg {
+            background-color: $greybg;
+            padding: $base*2;
+        }
+    }
+    .slick-prev {
+        left: unset;
+        right: 25px;
+    }
+    .slick-track {
+        margin: auto;
+    }
+    .catDetails {
+        padding: $base*1.5 0;
+        position: relative;
+        .catItem {
+            font-size: $base*2;
+            font-family: $font-bold;
+            color: $black; 
+            margin:0;
+            width:70%;
+        }
+        .itemCount{
+            font-size: 11px;
+            color: $black;
+            float: right;
+            position: absolute;
+            right: 0;
+            top: $base*2.75;
+            font-family: $font-regular;
+        }
+        .starting {
+            color: $battleshipGrey;
+            font-style: italic;
+            font-size: 11px;
+            .startPrice {
+                margin-left: $base*0.5; 
+                font-family: $font-medium;
+            }
+        }
+    }
+}
+
+@media  (max-width: 767px){
+    .home{
+    .featuredCat {
+    .slick-slider{
+        .slick-dots{
+            bottom: -10px !important;
+        }
+    }
+}
+}
+
+}
+    /* 
+    #Global Screen Chhange for Screen max 768
+    */
+    @media screen and (min-width: 768px){
+        .featuredCat 
+		{
+            width: 83.33%;
+            margin: $base*15 auto 0;
+            .slick-next:before, 
+            .slick-prev:before {
+                font-size: 30px;
+                color: transparent;
+				
+            }
+            .slick-slider{
+                .slick-dots{
+                    bottom: -10px;
+                }
+            }
+            
+			
+        }
+
+    }
+
+	@media screen and (max-width: 768px){
+		.featuredCat 
+		{
+			.slick-prev, .slick-next {
+				display: none !important;
+			}
+		}
+
+    }
+   

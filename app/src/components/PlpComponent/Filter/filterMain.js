@@ -1,33 +1,20 @@
 import React from 'react';
-//Redux
 import { connect } from 'react-redux';
+import { Link, Route, withRouter } from 'react-router-dom';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../../../containers/PlpContainer/reducer';
 import saga from '../../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
-
+import { getReleventReduxState, resolveTheFilter, isMobile } from '../../../utils/utilityManager';
+import crossIcon from '../../../../public/images/closeplpFilter.svg';
 import Filter from './filter';
-
-{/* <button style="
-    float: left;
-    background: transparent;
-    border: 0;
-    padding: 16px;
-    color: #687ed8;
-">More</button>
-
-float: left;
-background: transparent;
-border: 0;
-padding: 16px;
-color: #687ed8;
-} */}
-
-// - Fewer filters
-// + 3 filters
+import apiManager from '../../../utils/apiManager';
+import {
+  plpFilterAPI,
+  searchFilterAPI
+} from '../../../../public/constants/constants';
 
 class FilterMain extends React.Component {
   constructor(props) {
@@ -39,48 +26,125 @@ class FilterMain extends React.Component {
       selectedFilters: null,
       filterBtnTitle: null,
       appliedFilters: [],
+      filterData: this.props.filterDataPro,
       isFilterExpend: false,
+      isMobile: window.innerWidth <= 760,
+      nextProps: null,
+      thisProps: this.props.rwdUpdatedFilter,
+      currentFacetSelection: null, /* this.props.filterDataPro.length !== 0 ? this.props.filterDataPro[0].facetName : null, */
+      showLoader: false,
     };
-
     this.clearTheSelectedFilter = this.clearTheSelectedFilter.bind(this)
     this.moreFilterBtnClick = this.moreFilterBtnClick.bind(this)
   }
 
+  updateOnFacetChange(callback) {
+    if (this.state.nextProps !== this.state.thisProps && this.state.nextProps !== null) {
+
+      let filterURLMaking = plpFilterAPI + this.props.categoryIdPro;
+      let searchText = null;
+      if (this.props.isSearchPathPro.includes('/search')) {
+        const keyword = this.props.searchKeywordPro;
+        searchText = encodeURIComponent(keyword).replace(/%2F/g, ' ');
+        filterURLMaking = searchFilterAPI + searchText;
+      }
+      let plpURL = `${filterURLMaking}?` + `${this.props.rwdUpdatedFilter}`;
+    
+      this.setState({
+        showLoader: true
+      })
+      apiManager
+        .get(plpURL, {
+          headers: {
+            sku_display: String(this.props.isSKUPro),
+          },
+        })
+        .then(response => {
+          this.setState({
+            showLoader: false
+          })
+          if (response.data.data.facetData && response.data.data.facetData.length !== 0) {
+            const updateItem = response.data.data.facetData.map((item, index) => {
+              return (
+                <Filter
+                  currentFacetPro={this.state.currentFacetSelection}
+                  updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
+                  onFacetChangePro={this.updateOnFacetChange.bind(this)}
+                  rwdFilterCallbackPro={this.props.rwdFilterCallback}
+                  isFromRWD={this.props.isFromRWD}
+                  key={index}
+                  dataPro={item}
+                  indexPro={index}
+                />
+              )
+            })
+            this.setState({
+              filterData: response.data.data.facetData,
+              filterItem: updateItem,
+            });
+            this.state.thisProps = this.props.rwdUpdatedFilter;
+            callback(null, 'success');
+          }
+        })
+        .catch(error => {
+          this.setState({
+            showLoader: false
+          })
+          callback('err');
+        });
+    }
+  }
+
+  getCurrentFacetSelection(currentFacet) {
+
+    this.state.currentFacetSelection = currentFacet;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.nextProps = nextProps.rwdUpdatedFilter;
+  }
+
   componentDidMount() {
-    if (this.props.filterDataPro) {
-      const allItems = this.props.filterDataPro.map((item, index) => {
+    if (this.state.filterData) {
+      const allItems = this.state.filterData.map((item, index) => {
         return (
-          <Filter key={index} dataPro={item} />
+          <Filter
+            currentFacetPro={this.state.currentFacetSelection}
+            updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
+            onFacetChangePro={this.updateOnFacetChange.bind(this)}
+            rwdFilterCallbackPro={this.props.rwdFilterCallback}
+            isFromRWD={this.props.isFromRWD}
+            key={index}
+            dataPro={item}
+            indexPro={index} />
         )
       })
 
       var splitItems = [];
       var leftOverFilterCount;
-      if (this.props.filterDataPro.length > 4) {
+      if (this.state.filterData.length > 4) {
         splitItems = allItems.slice(0, 4);
         leftOverFilterCount = `+ ${allItems.length - splitItems.length} Filters`
-        //const btn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{leftOverFilterCount}</button>
-        //splitItems.push(btn)
+
       }
       else {
         splitItems = allItems;
       }
 
-      this.setState({ 
+      this.setState({
         allFilters: allItems,
         splitFilters: splitItems,
-        filterItem: splitItems,
+        filterItem: this.props.isFromRWD ? allItems : splitItems,
         filterBtnTitle: leftOverFilterCount
-       });
+      });
     }
     this.fetchAllAppliedFilters();
   }
 
   moreFilterBtnClick() {
-    console.log('isFilter--',this.state.isFilterExpend);
     var ssss = this.state.filterBtnTitle
     var data;
-    if ( this.state.isFilterExpend) {
+    if (this.state.isFilterExpend) {
       ssss = `+ ${this.state.allFilters.length - this.state.splitFilters.length} Filters`   //'+ ' + this.state.allFilters.length - this.state.splitFilters.length + ' Filters';
       data = this.state.splitFilters
     }
@@ -88,27 +152,26 @@ class FilterMain extends React.Component {
       ssss = '- Fewer filters';
       data = this.state.allFilters
     }
-    
-    this.setState({ 
+
+    this.setState({
       filterItem: data,
       filterBtnTitle: ssss,
       isFilterExpend: !this.state.isFilterExpend,
-     });
+    });
   }
 
   fetchAllAppliedFilters() {
     var appliedFilltersArr = [];
-    var item
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
-        console.log('Applied Filters -- ', key + ' ---- Value', option);
         appliedFilltersArr.push(option);
       })
     }
 
     const item = appliedFilltersArr.map((data, i) => {
       return (
-        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>X</span></button>
+        <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>
+          <img className='crossImg' src={crossIcon} alt="Close" /></span></button>
       )
     })
     this.setState({
@@ -118,10 +181,8 @@ class FilterMain extends React.Component {
   }
 
   clearTheSelectedFilter(index) {
-    console.log('All Data --', this.props.updatedFilter);
-    var selectionFacetValue = this.state.appliedFilters[index].value;
-    //console.log(this.state.appliedFilters[index]);
 
+    var selectionFacetValue = this.state.appliedFilters[index].value;
     var selectedFacetName;
     var selectedFacetValuesArr = [];
     for (const [key, value] of this.props.updatedFilter) {
@@ -136,15 +197,12 @@ class FilterMain extends React.Component {
         selectedFacetName = key;
         items.filter(function (value, i, arr) {
           if (value != selectionFacetValue) {
-            console.log('returnn -- ', facetItems[i]);
             selectedFacetValuesArr.push(facetItems[i]);
-            //return facetItems[i];
           }
         });
       }
     }
 
-    console.log('Deleted Facet -- ', selectedFacetName, selectedFacetValuesArr);
     this.props.onFilterUpdate(selectedFacetValuesArr, selectedFacetName)
 
   }
@@ -153,28 +211,38 @@ class FilterMain extends React.Component {
     for (const [key, value] of this.props.updatedFilter) {
       value.map((option, i) => {
         if (this.state.appliedFilters[index].label === option.label) {
-          console.log('returnmmm', key);
           return key;
         }
       })
     }
   }
 
+  showLoader() {
+    const idid = <div className="lazyloading-Indicator-RWDFilter">
+      <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+    </div>
+    return idid;
+  }
+
   render() {
     var moreFilterBtn = null;
-    if (this.props.filterDataPro.length > 4) {
+    if (this.state.filterData.length > 4) {
       moreFilterBtn = <button onClick={() => this.moreFilterBtnClick()} className='moreFilterBtn'>{this.state.filterBtnTitle}</button>
     }
-  
+
     return (
       <>
-        <h4 className='heading'>Filter</h4>
+        {this.state.showLoader && isMobile() ? this.showLoader() : null}
+        {this.props.isFromRWD ? null : <h4 className='heading'>Filter</h4>}
+
         {this.state.filterItem}
-        {moreFilterBtn}
+        {this.props.isFromRWD ? null : moreFilterBtn}
         <div className='clearfix'></div>
-        <div className='filter-keywords'>
-          {this.state.selectedFilters}
-        </div>
+        {this.props.isFromRWD ? null :
+          <div className='filter-keywords'>
+            {this.state.selectedFilters}
+          </div>}
+
       </>
     );
   }
@@ -191,7 +259,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   const stateObj = getReleventReduxState(state, 'plpContainer');
   return {
-    updatedFilter: stateObj.updateFilter
+    updatedFilter: stateObj.updateFilter,
+    rwdUpdatedFilter: resolveTheFilter(stateObj.rwdUpdatedFilter),
+    
   }
 };
 

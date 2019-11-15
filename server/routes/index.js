@@ -13,6 +13,8 @@ router.use('/secure/cart', require('./api/cart'));
 router.use('/secure/wishlist', require('./api/wishlist'));
 router.use('/secure/orders', require('./api/orders'));
 router.use('/secure/token', require('./api/guesttoken'));
+router.use('/secure/checkout', require('./api/checkout'));
+router.use('/secure/payment', require('./api/payment'));
 
 /* Non-Secure Routes */
 router.use('/categories', require('./api/category'));
@@ -24,11 +26,15 @@ router.use('/espots', require('./api/espots'));
 router.use('/activity', require('./api/activity'));
 router.use('/otp', require('./api/otp'));
 router.use('/clp', require('./api/clp'));
+router.use('/facetlist', require('./api/facet'));
 router.use('/productlist', require('./api/plp'));
 router.use('/newsletter', require('./api/newsletter'));
 router.use('/pdp', require('./api/pdp'));
 router.use('/storelocator', require('./api/storelocator'));
 router.use('/emi', require('./api/emi'));
 router.use('/pincode', require('./api/pincode'));
+router.use('/compare', require('./api/compare'));
+router.use('/static', require('./api/staticpage'));
+router.use('/cache', require('./api/cache'));
 
 module.exports = router;

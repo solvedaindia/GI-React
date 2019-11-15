@@ -1,0 +1,169 @@
+@import './variable';
+
+.guestTrackOrder {
+  .orderIdField {
+    border-radius: 2px;
+    border: solid 1px $lightGrey;
+    margin: 80px 0 0px 0;
+  }
+
+  .submitBtn {
+    background-color: $ashGrey;
+    color:$colorwhite;
+  }
+
+  .error-msg{
+    width:80%;
+    margin:0 auto;
+    float:none;
+    text-align: center;
+    color: $reddishPink;
+  }
+  .back-btn{
+    text-align: center;
+    padding: 44px 0px 20px 0px;
+    .go-back{
+      font-size: $base*1.75;
+      color:$cerulean;
+      font-family: $font-medium;
+    }
+  }
+}
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+/* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
+    .guestTrackOrder {
+      width: 35%;
+      margin: 0 auto;
+      padding: 104px 0;
+      .helloGuestMsg {
+        font-size: 30px;
+        text-align: center;
+        color: $black;
+        margin: 0 0 $base*10 0;
+        font-family: $font-medium;
+      }
+     
+      .track-order-btn{
+        margin: $base*6 0px 0px 0px;
+        text-align: center;
+        .submitBtn {
+          padding: $base*1.5 $base*6 ;
+          font-size: $base*1.75;
+          border: 0px;
+        }
+      }
+      
+      .form-group{
+        .form-control{
+          padding: $base*3.5 $base*3;
+          font-size: $base*2;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+  .guestTrackOrder {
+    width: 100%;
+    padding: $base*11 $base*2;
+       
+    .track-order-btn{
+      margin: $base*2 0px 0px 0px;
+      .submitBtn {
+        padding: 8px 48px;
+        font-size: 14px;
+        border: 0px;
+        width: 100%;
+      }
+    }
+
+    .form-label{
+      position: absolute;
+      top: 0px;
+      padding: 0px 5px;
+      margin-left: 10px;
+      margin-top: -7px;
+      background: $colorwhite;
+      font-size: 10px;
+      font-family: $font-regular;
+    }
+
+    .form-group{
+      position: relative;
+      .form-control{
+        padding: 6px $base*1.5;
+        font-size: $base*1.5;
+        height: $base*5;
+      }
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}

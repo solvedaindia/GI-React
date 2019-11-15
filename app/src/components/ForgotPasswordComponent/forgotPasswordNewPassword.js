@@ -6,7 +6,9 @@ import {
   storeId,
   accessToken,
 } from '../../../public/constants/constants';
+import Input from '../../components/Primitives/input';
 import { regexPw, validateEmptyObject } from '../../utils/validationManager';
+import {ENTER_VALID_PASS, PASSWORD_SHOULD_NOT, SIX_CHARACTER_PASS, NEW_PASS } from '../../constants/app/footerConstants';
 
 class ForgotPasswordNewPassword extends React.Component {
   constructor() {
@@ -20,14 +22,18 @@ class ForgotPasswordNewPassword extends React.Component {
       isShowPass: false,
       inputType: 'password',
       validationImage: '',
+      
+      inputText: '',
+      newPasswordPasteTxt: null,
     };
   }
 
-  doneBtnPressed() {
+  doneBtnPressed(e) {
+    e.preventDefault();
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Please enter New Password',
+        errorMessage: `${ENTER_VALID_PASS}`,
       });
       return;
     }
@@ -35,10 +41,10 @@ class ForgotPasswordNewPassword extends React.Component {
     if (!regexPw.test(this.state.inputText)) {
       let errorMsg;
       if (this.state.inputText.length > 25) {
-        errorMsg = 'Invalid Password. Password should not be more than 25 char';
+        errorMsg = `${PASSWORD_SHOULD_NOT}`;
       } else {
         errorMsg =
-          'Invalid Password. Password should have min 6 characters and atleast 1 number';
+          `${SIX_CHARACTER_PASS}`;
       }
 
       this.setState({
@@ -59,7 +65,6 @@ class ForgotPasswordNewPassword extends React.Component {
       .post(forgotPasswordAPI, data)
       .then(response => {
         const passData = response.data.data;
-        alert('Password changed successfully!');
         const nextComp = 'NewPasswordSuccess';
         this.props.handlerPro(nextComp, null, null);
       })
@@ -73,11 +78,22 @@ class ForgotPasswordNewPassword extends React.Component {
       });
   }
 
-  handleInputChange(text) {
-    this.setState({
-      error: false,
-      inputText: text.target.value,
-    });
+  // handleInputChange(text) {
+  //   // this.state.inputText = this.state.newPasswordPasteTxt !== null ? this.state.inputText : value.target.value;
+
+  //   // this.setState({
+  //   //   error: false,
+  //   //   inputText: text.target.value,
+  //   // });
+  // }
+
+  handleInputChange(value) {
+      this.state.inputText = this.state.newPasswordPasteTxt !== null ? this.state.inputText : value.target.value;
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        newPasswordPasteTxt: null,
+      });
   }
 
   showHidePass() {
@@ -93,6 +109,15 @@ class ForgotPasswordNewPassword extends React.Component {
       });
     }
   }
+  
+  onPasteText(value) {
+
+      this.setState({
+        errorCurrent: false,
+        errorNew: false,
+        newPasswordPasteTxt: value.clipboardData.getData('text'),
+      });
+  }
 
   render() {
     let errorItem;
@@ -103,35 +128,41 @@ class ForgotPasswordNewPassword extends React.Component {
     }
 
     return (
-      <div className="rightAnim">
+      <div className="searchAnimate">
         <h3 className="heading">Set New Password</h3>
-        <Form className="modalmin-height">
+        <Form className="modalmin-height"
+         onSubmit = {this.doneBtnPressed.bind(this)}
+        >
           <FormGroup className="enternew-password">
-            <p className="text">ENTER NEW PASSWORD</p>
+            <p className="text">{NEW_PASS}</p>
             <div className="form-div clearfix">
-              <input
-                onChange={this.handleInputChange.bind(this)}
+              <Input
+            
                 type={this.state.inputType}
                 name="text"
                 id="exampleEmail"
                 className="form-control newinputmargin"
                 placeholder="Enter New Password"
+                maxLength={25}
+                value={this.state.inputText}
+                handleChange={this.handleInputChange.bind(this)}
+                onPaste={this.onPasteText.bind(this)}
               />
               {errorItem}
-              <span
-                onClick={this.showHidePass.bind(this)}
-                className="valiationPosition-NewPassword"
-              >
-                {<img src={require('../../../src/components/SVGs/eye.svg')} />}
-              </span>
+              
+              {this.state.inputText !== '' ? <span onClick={this.showHidePass.bind(this)} className="valiationPosition-NewPassword">
+                {<img src={require('../../../src/components/SVGs/eye.svg')}  alt="Show Password" />}
+              </span> : null}
             </div>
           </FormGroup>
+          
         </Form>
         <Button
+          type="submit"
           onClick={this.doneBtnPressed.bind(this)}
           className="btn-block btn-bg"
         >
-          DONE
+          Save
         </Button>
       </div>
     );

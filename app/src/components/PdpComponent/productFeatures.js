@@ -1,14 +1,24 @@
 import React from 'react';
-import { Col,Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import { imagePrefix } from '../../../public/constants/constants';
+import {PRODUCT_FEATURES} from '../../constants/app/pdpConstants';
+
+
 
 class productFeatures extends React.Component {
   constructor() {
     super();
     this.dataClass = '';
     this.state = {
-      hide: '',
+      selectedTabId: 0,
     };
   }
+
+  isActive = id => this.state.selectedTabId === id;
+
+  setActiveTab = selectedTabId => {
+    this.setState({ selectedTabId });
+  };
 
   /* show feature images */
   showFeatureImage(divId) {
@@ -22,64 +32,86 @@ class productFeatures extends React.Component {
   }
 
   render() {
-    return (      
-      <Col md={12} sm={12} xs={12}>
-      <div className='PdpFeatures'>
-      <div className='featureVertical-tab'>
-      <Row>
-        <Col md={12} sm={12} xs={12}>
-          <div className='headingBox'>
-           <h3 className="heading">Features</h3>
-          </div>
-          
-        </Col>
-      </Row>
-      <div className='row'>       
-        <Col md={6} sm={12} xs={12}> 
-         <div className='featureImgbox'>        
-            
-          {this.props.productFeature.map((imagePath, index) => {
-            this.dataClass = '';
-            if (index > 0) {
-              this.dataClass = 'dataNotActive';
-            }
+    let defaultImgPath;
+    if (this.props.productFeatureData.productFeatures.length > 0) {
+      defaultImgPath = imagePrefix+this.props.productFeatureData.productFeatures[0].imagePath;
+    }
+        
+    return (
+      <>
+        {this.props.productFeatureData.productFeatures && this.props.productFeatureData.productFeatures.length > 0 && (
+          <Col md={12} sm={12} xs={12}>
+            <div className="PdpFeatures">
+              <div className="featureVertical-tab">
+                <Row>
+                  <Col md={12} sm={12} xs={12}>
+                    <div className="headingBox">
+                      <h2 className="heading">{PRODUCT_FEATURES}</h2>
+                    </div>
+                  </Col>
+                </Row>
+                <div className="row">
+                  <Col md={6} sm={12} xs={12}>
+                    <div className="featureImgbox">			 
+                      {this.props.productFeatureData.productFeatures.map(
+                        (featureImagePath, index) => {
+                           let fullImagePath = ``;
+                           if(featureImagePath.imagePath === "") {
+                              fullImagePath = defaultImgPath;
+                           }else{
+                           fullImagePath = `${imagePrefix}${featureImagePath.imagePath}`;
+                           }
+                          this.dataClass = '';
+                          if (index > 0) {
+                            this.dataClass = 'dataNotActive';
+                          }
 
-            let imgPath = '';
-            if (index % 2 === 0) {
-              imgPath =
-                'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-2.png';
-            } else {
-              imgPath =
-                'https://192.168.0.36:8443/wcsstore/GodrejInterioSAS/images/godrejInterio/product-3.png';
-            }
-            return (
-              <div
-                id={`featureImage_${index}`}
-                key={index}
-                className={`featureImages ${this.dataClass}`}
-              >
-                <img src={imgPath} />
+                          return (
+                            <div
+                              id={`featureImage_${index}`}
+                              key={index}
+                              className={`featureImages ${this.dataClass}`}
+                            >
+                              <img
+                                src={fullImagePath}
+                                className="imgfullwidth"
+                              />
+                            </div>
+                          );
+                        })
+					}
+                    </div>
+                  </Col>
+                  <Col md={6} sm={12} xs={12}>
+                    <ul className="verticalTab">
+                      {this.props.productFeatureData.productFeatures.map(
+                        (featureData, i) => (
+                          <li
+                            className={
+                              this.isActive(i) ? 'list active' : 'list'
+                            }
+                            key={i}
+                            onClick={() => this.setActiveTab(i)}
+                          >
+                            <a
+                              className="link"
+                              role="button"
+                              onClick={this.showFeatureImage.bind(this, i)}
+                            >
+                              <h2 className="heading">{featureData.title}</h2>
+                              {featureData.description}
+                            </a>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  </Col>
+                </div>
               </div>
-            );
-          })}
-          </div>     
-        </Col>
-        <Col md={6} sm={12} xs={12}>
-         <ul className='verticalTab'>
-          {this.props.productFeature.map((featureData, i) => (
-            <li className='list' key={i}>
-              <a className='link' role="button" onClick={this.showFeatureImage.bind(this, i)}>
-                <h3 className="heading">{featureData.name}</h3>
-                {featureData.description}
-              </a>
-            </li>
-          ))}
-          </ul>
-        </Col>
-      </div>
-      </div>
-      </div>
-    </Col>    
+            </div>
+          </Col>
+        )}
+      </>
     );
   }
 }

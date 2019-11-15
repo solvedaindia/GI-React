@@ -1,12 +1,13 @@
-const async = require('async');
 const origin = require('../utils/origin');
+const origin2 = require('../utils/origin2.js');
 const constants = require('../utils/constants');
 const originMethod = 'GET';
 const logger = require('../utils/logger.js');
 const errorUtils = require('../utils/errorutils');
-const filter = require('../filters/filter');
 const headerUtil = require('../utils/headerutil');
-const productUtil = require('../utils/productutil');
+const categroyUtil = require('../utils/categoryutil');
+const categoryFilter = require('../filters/categoryfilter');
+const plpFilter = require('../filters/productlistfilter');
 
 const topCategories = '@top';
 const categoryNavigation = '@top?depthAndLimit=25,0';
@@ -47,9 +48,11 @@ module.exports.getCategories = function getCategories(
  */
 function getCategoriesData(urlParam, headers, callback) {
   const reqHeaders = headerUtil.getWCSHeaders(headers);
+
   const originUrl = constants.categoryview
     .replace('{{storeId}}', headers.storeId)
     .replace('{{urlParam}}', urlParam);
+
   origin.getResponse(
     originMethod,
     originUrl,
@@ -61,7 +64,7 @@ function getCategoriesData(urlParam, headers, callback) {
     response => {
       if (response.status === 200) {
         const resJson = {
-          categoryArray: filter.filterData('categorynavigation', response.body), // Category Navigation Filter
+          categoryArray: categoryFilter.navigation(response.body), // Category Navigation Filter
         };
         callback(null, resJson);
         return;
@@ -75,83 +78,141 @@ function getCategoriesData(urlParam, headers, callback) {
  * This function will return sub categories data
  * @param categoryID
  */
-module.exports.getSubCategories = function getSubCategoriesData(req, callback) {
+module.exports.getSubCategories = getSubCategoriesData;
+async function getSubCategoriesData(req, callback) {
   if (!req.params.categoryID) {
     logger.debug('Get Sub Categories Data :: invalid params');
     callback(errorUtils.errorlist.invalid_params);
     return;
   }
-  const categoryId = req.params.categoryID;
-  const reqHeaders = req.headers;
-  categoryViewByParentCategoryId(reqHeaders, categoryId, (err, result) => {
-    if (err) {
-      callback(err);
+  try {
+    const categoryIdentifier = req.params.categoryID;
+    let categoryId = categoryIdentifier;
+    const categoryDetails = await categroyUtil.getCategoryDetailsByIdentifier(
+      req.headers,
+      categoryIdentifier,
+    );
+
+    if (categoryDetails.uniqueID) {
+      categoryId = categoryDetails.uniqueID;
+    }
+
+    const originUrl = constants.categoryViewByParentId
+      .replace('{{storeId}}', req.headers.storeId)
+      .replace('{{categoryId}}', categoryId);
+
+    const reqHeaders = headerUtil.getWCSHeaders(req.headers);
+
+    const result = await origin2.getResponse(
+      'GET',
+      originUrl,
+      reqHeaders,
+      null,
+    );
+    logger.debug('Got all the origin resposes');
+    const subCategoryArray = [];
+    const catlogGrupView = result.body.catalogGroupView;
+    if (catlogGrupView && catlogGrupView.length > 0) {
+      catlogGrupView.forEach(category => {
+        const subCatData = categoryFilter.categoryDetails(category);
+        subCategoryArray.push(subCatData);
+      });
+      callback(null, subCategoryArray);
     } else {
-      logger.debug('Got all the origin resposes');
-      const subCategoryArray = [];
-      const catlogGrupView = result.catalogGroupView;
-      if (catlogGrupView && catlogGrupView.length > 0) {
-        async.map(
-          catlogGrupView,
-          (subCategory, cb) => {
-            const subCatData = filter.filterData('categorydetail', subCategory); // Category Detail Filter
-            productUtil.productsByCategoryID(
-              subCatData.uniqueID,
-              reqHeaders,
-              (error, productViewResult) => {
-                if (!error) {
-                  subCatData.productCount =
-                    productViewResult.catalogEntryView.length || 0; // Product Count
-                  cb(null, subCatData);
-                } else {
-                  cb(error);
+      callback(null, subCategoryArray);
+    }
+  } catch (error) {
+    callback(errorUtils.handleWCSError(error));
+  }
+}
+
+/**
+ * This function will return Bread Crumb Data for Category
+ * @param categoryID
+ */
+module.exports.getBreadcrumb = getBreadcrumb;
+async function getBreadcrumb(req, callback) {
+  if (!req.query.categoryid && !req.query.itemid) {
+    logger.debug('Get Category Breadcrumb Data :: invalid params');
+    callback(errorUtils.errorlist.invalid_params);
+    return;
+  }
+  let categoryId = req.query.categoryid || null;
+  const reqHeaders = headerUtil.getWCSHeaders(req.headers);
+  const resJson = {
+    breadCrumbData: [],
+  };
+  try {
+    if (req.query.itemid && !categoryId) {
+      const productUrl = constants.pdp
+        .replace('{{storeId}}', req.headers.storeId)
+        .replace('{{productId}}', req.query.itemid);
+      const productDetail = await origin2.getResponse(
+        'GET',
+        productUrl,
+        reqHeaders,
+        null,
+      );
+      if (
+        productDetail.body.catalogEntryView &&
+        productDetail.body.catalogEntryView.length > 0
+      ) {
+        const parentCategory = productDetail.body.catalogEntryView[0].parentCatalogGroupID
+          .pop()
+          .split('_')[1];
+        categoryId = parentCategory;
+      }
+    }
+    if (categoryId) {
+      const categoryBreadCrumbUrl = constants.categoryBreadcrumb
+        .replace('{{storeId}}', req.headers.storeId)
+        .replace('{{categoryId}}', categoryId);
+
+      const categoryBreadcrumbData = await origin2.getResponse(
+        'GET',
+        categoryBreadCrumbUrl,
+        reqHeaders,
+        null,
+      );
+      resJson.breadCrumbData = plpFilter.getBreadCrumbData(
+        categoryBreadcrumbData.body.breadCrumbTrailEntryViewExtended,
+      );
+      if (resJson.breadCrumbData && resJson.breadCrumbData.length > 0) {
+        const categoryIds = [];
+        resJson.breadCrumbData.forEach(breadcrumb => {
+          categoryIds.push(breadcrumb.value);
+        });
+        categroyUtil.categoryListByIDs(
+          categoryIds,
+          req.headers,
+          (err, catResponse) => {
+            if (catResponse && catResponse.length > 0) {
+              catResponse.forEach(category => {
+                for (
+                  let index = 0;
+                  index < resJson.breadCrumbData.length;
+                  index += 1
+                ) {
+                  if (
+                    resJson.breadCrumbData[index].value === category.uniqueID
+                  ) {
+                    resJson.breadCrumbData[index].categoryIdentifier =
+                      category.categoryIdentifier;
+                    break;
+                  }
                 }
-              },
-            );
-          },
-          (errors, results) => {
-            if (errors) {
-              callback(errors);
-              return;
+              });
             }
-            results.forEach(element => {
-              subCategoryArray.push(element);
-            });
-            callback(null, subCategoryArray);
+            callback(null, resJson);
           },
         );
       } else {
-        callback(null, subCategoryArray);
+        callback(null, resJson);
       }
+    } else {
+      callback(null, resJson);
     }
-  });
-};
-
-/**
- *  Get sub categories by category id
- */
-function categoryViewByParentCategoryId(header, categoryID, callback) {
-  const originUrl = constants.categoryViewByParentId
-    .replace('{{storeId}}', header.storeId)
-    .replace('{{categoryId}}', categoryID);
-
-  const reqHeader = headerUtil.getWCSHeaders(header);
-
-  origin.getResponse(
-    originMethod,
-    originUrl,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.debug('Error While Calling Category View by Parent Category ID');
-        callback(errorUtils.handleWCSError(response));
-      }
-    },
-  );
+  } catch (error) {
+    callback(errorUtils.handleWCSError(error));
+  }
 }

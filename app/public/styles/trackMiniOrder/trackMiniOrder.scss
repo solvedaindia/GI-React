@@ -1,0 +1,197 @@
+@import '../variable';
+
+.trackMiniOrder {
+    width: 100%;
+    .userDetails,
+    .orderSummary {
+        min-height: $base*28;
+    }
+    .userDetails {
+        width: 25%;
+        text-align: center;
+        vertical-align: top;
+        background-color: $ceruleanblue;
+        color: $greyWhite;
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        .userName {
+            font-family: $font-light;
+            font-size: $base*2.5;
+        }
+        .track {
+            font-family: $font-bold;
+            font-size: $base*3;
+        }
+    }
+    .orderSummary {
+        background-color: $greybg;
+    }
+    .orderDetails {
+        width: 75%;
+        display: inline-block;
+        .prodDetails,
+        .prodImg {
+            vertical-align: top;
+        }
+        .prodImg {
+            width: 20%;
+            height: 180px;
+            margin: $base*2.75 4.5%;
+            background-color: $colorwhite; 
+            display: inline-block;
+            max-width: 180px;
+            .img {
+                width: 100%;
+            }
+        }
+        .prodDetails {
+            white-space: nowrap;
+            width: 41.5%;
+            margin: $base*2.75 0;
+            display: inline-block;
+            .count {
+                font-size: $base*1.5;
+                margin: 0;
+                font-family: $font-medium;
+            }
+            .orderID {
+                color: $battleshipGrey;
+                font-size: $base*1.75;
+                margin: $base*3.1 0 0;
+            }
+            .prodName {
+                padding:4px 0 26px 0;
+                font-size: $base*2;
+                font-family: $font-medium;
+                line-height: 16px;
+            }
+            .item {
+                display: inline-block;
+                margin: 0 $base*2.5 0 0;
+                font-size: $base*1.5;
+                font-family: $font-medium;
+            }
+            .val {
+                padding: 8px 0 0 0;
+                display: block;
+            }
+            .qtyVal,
+            .delVal {
+                color: $battleshipGrey;
+                font-size: $base*2;
+                font-family: $font-regular;
+                line-height: 16px;
+            }
+            .statusVal {
+                color: $greenLight;
+                font-family: $font-regular;
+                line-height: 16px;
+                font-size: $base*2;
+            }
+        }
+        .link {
+            width: 19.5%;
+            display: inline-block;
+            margin:28px 38px ;
+            vertical-align: bottom;
+            padding: $base;
+            background-color: $ashGrey;
+            color: $colorwhite;
+            border-radius: unset;
+        }
+    }
+    .slick-prev {
+        left: $base;
+    }
+    .slick-next{
+        right: $base;
+    }
+    .slick-slider{
+        .slick-dots {
+            display: none;
+            visibility: hidden;
+        }
+
+    }
+    .slick-next:before,
+    .slick-prev:before {
+        color: transparent;
+        font-size: $base*3.75;
+    }
+}
+
+@media (min-width:320px) and (max-width:767px) {
+    .trackMiniOrder {
+        width: 100%;
+        .userDetails,
+        .orderSummary {
+            min-height: auto;
+        }
+        .userDetails {
+            width: 100%;
+            display: block;
+            padding: 10%;  
+            text-align: left;
+            min-height: $base*16.5;
+            .userName {
+                font-family: $font-bold;
+            }
+        }
+        .orderDetails {
+            width: 80%;
+            margin: auto 10%;
+            position: relative;
+            top: -$base*6.7;
+            .prodImg {
+                margin: $base*2;
+                width: 22.5%;
+                height: $base*9;
+            }
+            .prodDetails {
+                margin: $base 0;
+                width: 65%;
+                .orderID {
+                    margin: 0;
+                    font-size: $base;
+                }
+                .prodName {
+                    font-size: $base*1.75;
+                    margin-bottom: $base; 
+                }
+                .val {
+                    display: inline;
+                    margin-left: $base; 
+                    font-family: $font-medium;
+                }
+                .item {
+         
+                    margin: $base*1.25 0;
+                    display: block;
+                    line-height: 12px;
+                }
+            }
+            .link {
+                width: 100%;
+                margin: $base*2 0 0;
+            }
+        }
+        .slick-prev {
+            left: -$base*4;
+            &::before {
+                content: '<';
+                background: url("http://203.110.85.50/imagestore/images/godrejInterio/back.png") no-repeat;
+                color: transparent;
+            }
+        }
+        .slick-next{
+            right: -$base*4;
+            &::before {
+                content: '>';
+                background: url("http://203.110.85.50/imagestore/images/godrejInterio/next.png") no-repeat;
+                color: transparent;
+            }
+        }
+    }
+}

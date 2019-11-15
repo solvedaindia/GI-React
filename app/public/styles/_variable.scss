@@ -2,10 +2,11 @@ $base: 8px;
 $colorblack:#424b5a;
 $black:#000;
 $colorwhite:#fff;
+$greyWhite: #f9f9f9;
 $colorgrey:#a1aeb7;
 $colorblue:#005084;
 $colorLightGrey: #999;
-$errorMsg: red;
+$errorMsg: #ef3e4a;
 $reddishPink:#ee4060;
 $cerulean: #036cc5;
 $lightGrey: #dfe0de;
@@ -21,8 +22,19 @@ $greyLight:#767676;
 $greenDark:#017b6b;
 $greenLight:#00b5a4;
 $paleGrey:#eef8fe;
-
+$greyDark:#222222;
+$darkAshGrey: #979797;
 $greylightColor:#505d68;
+$ceruleanblueLight:#3c79a1;
+$greyborder:#e4eaee;
+$greycolor:#737272;
+$headerLight: #313233;
+$greyishbrown:#4f4f4f;
+$blackLight:#777878;
+$colorbluedull:#026dc6;
+$ceruleanlblue:#006ac8;
+$disable: #bfbfbf;
+$iceColor: #f2f5f7;
 
 /*--Border Variable
 -------------------------------**/
@@ -30,8 +42,131 @@ $borderLight:#eeeded;
 $battleshipGrey: #77787a;
 $lightblueGrey:#d1d1d2;
 $greyBorder:#888a8d;
+$greyLightborder:#979797;
+$ceruleanblueborder:#63b0e1;
+
+/*--Image Border Variable
+-------------------------------**/
+$img-border:#efeeed;
+
 /*---Font variables
 --------------------------------**/
 $font-regular:CeraGIRegular,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;
+$font-medium:CeraGIMedium,sans-serif; 
+
+
+/*---Screen width var details---
+--------------------------------**/
+$screen-lg-desk-width: 1281px;
+$screen-md-desk-width: 1280px;
+
+$screen-sm-md-desk-width: 1025px;
+$screen-sm-desk-width: 1024px;
+
+$screen-lg-tablet-width: 993px;
+$screen-xs-sm-md-tablet-width: 992px;
+
+$screen-md-tablet-width: 768px;
+$screen-sm-tablet-width: 767px;
+
+$screen-md-mobile-width: 481px;
+$screen-sm-mobile-width: 480px;
+$screen-xs-mobile-width: 320px;
+
+
+
+// Mixins 
+
+@mixin container-width {
+    width: 83.33%;
+}
+
+@mixin line-through {
+    .actualPriceLine {
+        color: $errorMsg;
+        text-decoration: line-through;
+        .actualPrice {
+            color: $greylightColor;
+            font-family: $font-regular;
+        }
+    }
+}
+
+
+
+/* 
+#Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles, Extra small devices
+*/
+@mixin mix-xs {
+    @media (min-width: #{$screen-xs-mobile-width}) and (max-width: #{$screen-sm-mobile-width}){
+        @content;
+    }
+ }
+
+// Small devices
+@mixin mix-xsm {
+    @media  (min-width: #{$screen-md-mobile-width}) and (max-width: #{$screen-sm-tablet-width}) {
+        @content;
+    }
+ }
+
+// tablet devices - 767 only
+@mixin mix-sm-mobile {
+    @media screen and (max-width: #{$screen-sm-tablet-width}){
+        @content;
+    }
+ }
+
+// tablet devices - 768 only
+  @mixin mix-md-tablet {
+    @media screen and (max-width: #{$screen-md-tablet-width}){
+        @content;
+    }
+ }
+ 
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads
+*/
+@mixin mix-md-ipad {
+    @media (min-width: #{$screen-md-tablet-width}) and (max-width: #{$screen-sm-desk-width}) {
+        @content;
+    }
+ }
+ 
+
+ // Medium devices
+ @mixin mix-md {
+    @media screen and (max-width: #{$screen-xs-sm-md-tablet-width}){
+        @content;
+    }
+ }
+
+
+ // Large devices
+ @mixin mix-lg {
+    @media (min-width: #{$screen-lg-tablet-width}) {
+        @content;
+    }
+ }
+
+
+ /* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops, Medium - Large devices, Mac
+*/
+ @mixin mix-md-lg {
+    @media (min-width: #{$screen-sm-md-desk-width}) and (max-width: #{$screen-md-desk-width}) { 
+        @content;
+    }
+ }
+ 
+ 
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+ @mixin mix-xl {
+    @media (min-width: #{$screen-lg-desk-width}) {
+        @content;
+    }
+ }

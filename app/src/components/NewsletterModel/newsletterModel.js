@@ -27,6 +27,10 @@ import { getCookie } from '../../utils/utilityManager';
 import { regexEmail, validateEmptyObject } from '../../utils/validationManager';
 
 import NewsletterThumbnailImg from '../../../public/images/newsletter_thumbnail.png';
+import newsLetterMobPopupImg from '../../../public/images/news-letter_01.png';
+import { isMobile } from '../../utils/utilityManager';
+import ContentEspot from '../../components/Primitives/staticContent';
+import { MAILING_LIST_YET, RECIEVE_UPDATES,JOINED_MAILING_LIST,SUBMIT, EMAIL_ADD} from '../../constants/app/myWishListConstants';
 
 class NewsletterModel extends React.Component {
   constructor(props) {
@@ -44,7 +48,7 @@ class NewsletterModel extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps(nextProps) { }
 
   componentDidMount() {
     const now = new Date();
@@ -64,7 +68,7 @@ class NewsletterModel extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Pleaes enter New Password',
+        errorMessage: 'This field is required',
       });
       return;
     }
@@ -96,10 +100,9 @@ class NewsletterModel extends React.Component {
         )};path=/;expires=${now.toGMTString()}`;
         this.setState({ inputText: '' });
         this.toggle();
-        alert(`Newsletter Subscription - ${data.status}`);
+        alert(`Thanks for Subscribing`);
       })
       .catch(error => {
-        console.log('newsError---', error);
       });
   }
 
@@ -128,37 +131,34 @@ class NewsletterModel extends React.Component {
           <Row className="no-margin">
             <Col xs={12} md={5} className="no-padding">
               <div className="Thumbnailbox">
-                <img className="imgfullwidth" src={NewsletterThumbnailImg} />
+                {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_WEB' } />: <ContentEspot espotName = { 'GI_NEWSLETTER_MOBILE' } />}
               </div>
             </Col>
 
-            <Col xs={12} md={7}>
+            <Col xs={12} md={7} className='newsletter-form-box no-padding'>
               <div className="form_newsletter">
-                <h3 className="heading">
-                  Have you joined our mailing list yet?
-                </h3>
-                <Form>
-                  <p className="signup-text">
-                    Sign up to be the first to recieve updates and ongoing
-                    offers!
-                  </p>
+                {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_HEADING' } /> : ''}
+                <Form className='news-letter-form'>
+                  {!isMobile() ? <ContentEspot espotName = { 'GI_NEWSLETTER_DETAIL' } /> : ''}
+                  {isMobile() ? <h3 className="heading">{JOINED_MAILING_LIST}</h3> : ''}
                   <FormGroup className="email">
+                    {isMobile() ? <label className='form-label'>{EMAIL_ADD}</label> : ''}
                     <input
                       onChange={this.handleInputChange.bind(this)}
                       type={this.state.inputType}
                       name="text"
                       id="exampleEmail"
                       className="form-control newinputmargin"
-                      placeholder="Your Email"
+                      placeholder={!isMobile() ? 'Email Address' : ''}
                     />
                     {errorItem}
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className='news-letter-btn'>
                     <Button
                       onClick={this.doneBtnPressed.bind(this)}
                       className="btn-block btn-bg"
                     >
-                      Submit
+                      {SUBMIT}
                     </Button>
                   </FormGroup>
                 </Form>

@@ -7,6 +7,9 @@ const categoryUtil = require('../utils/categoryutil');
 const espotNames = require('../configs/espotnames');
 const espotHandler = require('./espotshandler');
 
+const bestSellingTitle = 'Best Selling Products';
+const recentlyViewedTitle = 'Recently Viewed';
+
 /**
  * Add Product to Recently Viewed
  * @param storeId,access_token
@@ -22,35 +25,42 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-  const originUrl = `${constants.recentlyViewedEvent.replace(
-    '{{storeId}}',
-    headers.storeId,
-  )}`;
+  let uniqueId = productID;
+  productUtil.productDetailByPartNumber(productID, headers, (err, res) => {
+    if (res && res.uniqueID) {
+      uniqueId = res.uniqueID;
+    }
+    const originUrl = `${constants.recentlyViewedEvent.replace(
+      '{{storeId}}',
+      headers.storeId,
+    )}`;
 
-  const reqBody = {
-    productId: productID,
-    personalizationID: headers.personalizationID,
-  };
-  const reqHeader = {
-    'content-type': 'application/json',
-  };
-  origin.getResponse(
-    'POST',
-    originUrl,
-    reqHeader,
-    null,
-    reqBody,
-    null,
-    null,
-    response => {
-      if (response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.debug('Error while Calling Add to Recently Viewed');
-        callback(errorutils.handleWCSError(response));
-      }
-    },
-  );
+    const reqBody = {
+      productId: uniqueId,
+      personalizationID: headers.personalizationID,
+    };
+
+    const reqHeader = {
+      'content-type': 'application/json',
+    };
+
+    origin.getResponse(
+      'POST',
+      originUrl,
+      reqHeader,
+      null,
+      reqBody,
+      null,
+      null,
+      response => {
+        if (response.status === 200) {
+          logger.debug('Added to recently viewed');
+        } else {
+          logger.debug('Error while Calling Add to Recently Viewed');
+        }
+      },
+    );
+  });
 };
 
 /**
@@ -62,9 +72,15 @@ exports.addRecentlyViewedProduct = function addRecentlyViewedProduct(
 exports.getRecommendedProducts = getRecommendedProducts;
 function getRecommendedProducts(headers, activityName, callback) {
   if (!activityName) {
+    logger.debug('Get Recommended Products - Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
+
+  if (headers.category_id) {
+    activityName = `${activityName}/category/${headers.category_id}`;
+  }
+
   espotHandler.getEspotsData(headers, activityName, (err, result) => {
     if (err) {
       callback(err);
@@ -125,14 +141,14 @@ exports.getBestSellerProducts = function getBestSeller(req, callback) {
               callback(err2);
               return;
             }
-            resJSON.title = 'Best Selling Products';
+            resJSON.title = bestSellingTitle;
             resJSON.productCount = result2.productCount;
             resJSON.productList = result2.productList;
             callback(null, resJSON);
           },
         );
       } else {
-        resJSON.title = 'Recently Viewed Products';
+        resJSON.title = recentlyViewedTitle;
         resJSON.productCount = result1.productCount;
         resJSON.productList = result1.productList;
         callback(null, resJSON);
@@ -153,6 +169,7 @@ exports.getRecommendedCategories = function getRecommendedCategories(
   callback,
 ) {
   if (!activityName) {
+    logger.debug('Get Recommended Categories - Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }

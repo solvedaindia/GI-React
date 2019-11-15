@@ -2,8 +2,21 @@ const express = require('express');
 const router = express.Router();
 const categoriesHandler = require('../../handlers/categoryhandler');
 const categoryUtil = require('../../utils/categoryutil');
-const testJson = require('../../configs/testjson');
 
+router.get('/breadcrumb', async (req, res, next) => {
+  categoriesHandler.getBreadcrumb(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+/* Get Category List for Navigation */
 router.get('/:keyword', (req, res, next) => {
   categoriesHandler.getCategories(
     req.params.keyword,
@@ -21,11 +34,8 @@ router.get('/:keyword', (req, res, next) => {
   );
 });
 
+/* Get Subcategory List */
 router.get('/subcategories/:categoryID', (req, res, next) => {
-  /* res.status(200).send({
-    status: 'success',
-    data: testJson.subcategories,
-  }); */
   categoriesHandler.getSubCategories(req, (err, result) => {
     if (err) {
       next(err);
@@ -38,21 +48,36 @@ router.get('/subcategories/:categoryID', (req, res, next) => {
   });
 });
 
-router.get('/details/:categoryID', (req, res, next) => {
-  categoryUtil.getCategoryDetails(
-    req.headers,
-    req.params.categoryID,
-    (err, result) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      res.status(200).send({
-        status: 'success',
-        data: result,
-      });
-    },
-  );
+/* Get Category Details */
+router.get('/details/:categoryID', async (req, res, next) => {
+  try {
+    const result = await categoryUtil.getCategoryDetails2(
+      req.headers,
+      req.params.categoryID,
+    );
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/* Get Category Details by Identifier */
+router.get('/details/byidentifier/:catIdentifier', async (req, res, next) => {
+  try {
+    const result = await categoryUtil.getCategoryDetailsByIdentifier(
+      req.headers,
+      req.params.catIdentifier,
+    );
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

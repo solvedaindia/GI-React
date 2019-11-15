@@ -2,9 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import apiManager from '../../utils/apiManager';
-import {
-  accessTokenCookie
-} from '../../../public/constants/constants';
+import { accessTokenCookie } from '../../../public/constants/constants';
 import Register from './register';
 import RegisterWithEmailMobile from './registerWithEmailMobile';
 import GenerateOtp from './generateOtp';
@@ -16,6 +14,7 @@ import {
 } from './constants';
 import appCookie from '../../utils/cookie';
 import WelcomeBack from '../WelcomeBack/index';
+import { MAXOTP_ATTAMPTS_MSG } from '../../constants/app/primitivesConstants';
 
 class RegisterModalData extends React.Component {
   constructor(props) {
@@ -26,18 +25,27 @@ class RegisterModalData extends React.Component {
     this.state = {
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     };
   }
 
   /* Handle Modal Close */
-  handleClose() {
+  handleClose(isClose = false) {
+    if (this.state.data === null) {
+      this.closePopup();
+    } else if (this.state.data.props.registrationType === 'generateOtp' && isClose !== true) {
+      this.handleComponent('registerWithMobileNum', this.state.data.props.userdata);
+    } else {
+      this.closePopup();
+    }
+  }
+
+  /*close pop up */
+  closePopup() {
     this.props.resetCallbackPro();
     this.setState({
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     });
   }
@@ -48,15 +56,13 @@ class RegisterModalData extends React.Component {
   }
 
   handleLoginComponent() {
-    console.log('back to login');
     this.props.callbackRegisterPro();
     this.setState({
       show: false,
       data: null,
-      message: null,
       modalClass: 'modal-wrapperjoinus',
     });
-    // this.handleClose();
+    //this.handleClose(true);
     return <WelcomeBack />;
   }
 
@@ -105,24 +111,30 @@ class RegisterModalData extends React.Component {
   }
 
   /* Handle Components API Data */
-  handleComponetData(api, data, token, type) {
-    this.setState({ message: null });
-
+  handleComponetData(api, data, type, callbackFunc) {
     apiManager
       .post(api, data)
       .then(response => {
         if (type === registerWithEmail || type === otpConfirmed) {
-          this.setState({
-            message: 'Registerted successfully!',
-          });
 
           appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-          appCookie.set(`${accessTokenCookie}=${response.data.data.access_token};path=/;expires=''`);
-
-          this.handleClose();
+          appCookie.set(
+            `${accessTokenCookie}=${
+              response.data.data.access_token
+            };path=/;expires=''`,
+          );
+		  appCookie.set(
+            `userID=${
+              response.data.data.userID
+            };path=/;expires=''`,
+          );
+          this.handleClose(true);
           window.location.reload();
         } else {
-          alert(`OTP - ${response.data.data.otpVal}`);
+          if (type === resendOtp && response.data.data.otpCount > 3) {
+            callbackFunc(MAXOTP_ATTAMPTS_MSG);
+            return;
+          } 
           if (type !== resendOtp) {
             this.handleComponent(generateOtp, data);
           }
@@ -131,10 +143,9 @@ class RegisterModalData extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
-        this.setState({
-          message: `Error - ${errorMessage}`,
-        });
+        callbackFunc(errorMessage);
       });
+      
   }
 
   componentDidMount() {
@@ -154,11 +165,6 @@ class RegisterModalData extends React.Component {
       data = this.state.data;
     }
 
-    let message = null;
-    if (this.state.message) {
-      message = <p className="errormsg">{this.state.message}</p>;
-    }
-
     return (
       <>
         {/* <Button className="registerNow" onClick={this.handleShow}>
@@ -172,7 +178,6 @@ class RegisterModalData extends React.Component {
           <Modal.Body className={this.state.modalClass}>
             <div className="modal-wrapper">
               <Button className="close" onClick={this.handleClose} />
-              {message}
               {data}
             </div>
           </Modal.Body>

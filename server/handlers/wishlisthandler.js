@@ -4,9 +4,9 @@ const origin = require('../utils/origin.js');
 const constants = require('../utils/constants');
 const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
-const filter = require('../filters/filter');
 const productUtil = require('../utils/productutil');
 const wishlistFilter = require('../filters/wishlistfilter');
+
 const wishlistName = 'My Wishlist';
 
 /**
@@ -25,7 +25,7 @@ module.exports.wishlistItemCount = function getWishlistItemCount(
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemcount', result));
+      callback(null, wishlistFilter.itemcount(result));
     }
   });
 };
@@ -43,7 +43,7 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
       callback(err);
     } else {
       logger.debug('Got all the origin resposes');
-      callback(null, filter.filterData('wishlist_itemlist', result));
+      callback(null, wishlistFilter.itemlist(result));
     }
   });
 };
@@ -55,61 +55,42 @@ module.exports.wishlistItemList = function wishlistItemList(headers, callback) {
  */
 module.exports.fetchWishlist = function fetchWishlist(headers, callback) {
   logger.debug('Entering method mylisthandler: fetchWishlist');
-
-  getWishlistData(headers, (err, res) => {
+  const fetchWishlistData = [
+    getWishlistData.bind(null, headers),
+    getWishlistProductList,
+  ];
+  async.waterfall(fetchWishlistData, (err, results) => {
     if (err) {
       callback(err);
-      return;
-    }
-    const wishlistJson = {
-      wishlistID: '',
-      wishlistName: '',
-      wishlistItemCount: 0,
-      wishlistData: [],
-    };
-    const productIDs = [];
-    if (res.GiftList && res.GiftList.length > 0) {
-      wishlistJson.wishlistID = res.GiftList[0].uniqueID;
-      wishlistJson.wishlistName = res.GiftList[0].descriptionName;
-      if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
-        wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
-        res.GiftList[0].item.forEach(listItem => {
-          productIDs.push(listItem.productId);
-        });
-
-        productUtil.productByProductIDs(
-          productIDs,
-          headers,
-          (error, result) => {
-            if (error) {
-              callback(error);
-              return;
-            }
-            const productListArray = result.productList;
-            productListArray.forEach(productDetail => {
-              for (
-                let index = 0;
-                index < res.GiftList[0].item.length;
-                index += 1
-              ) {
-                if (
-                  productDetail.uniqueID ===
-                  res.GiftList[0].item[index].productId
-                ) {
-                  // eslint-disable-next-line no-param-reassign
-                  productDetail.giftListItemID =
-                    res.GiftList[0].item[index].giftListItemID;
-                  break;
-                }
-              }
-            });
-            wishlistJson.wishlistData = productListArray;
-            callback(null, wishlistJson);
-          },
-        );
-      }
     } else {
-      callback(null, wishlistJson);
+      logger.debug('Got all the origin resposes');
+      callback(null, results);
+    }
+  });
+};
+
+/**
+ * fetch External Wishlist details.
+ * @return External Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getExternalWishlist = function getExternalWishlist(
+  headers,
+  params,
+  query,
+  callback,
+) {
+  logger.debug('Entering method mylisthandler: Fetch External Wishlist');
+  const fetchWishlistData = [
+    getExternalWishlistData.bind(null, headers, params, query),
+    getWishlistProductList,
+  ];
+  async.waterfall(fetchWishlistData, (err, results) => {
+    if (err) {
+      callback(err);
+    } else {
+      logger.debug('Got all the origin resposes');
+      callback(null, results);
     }
   });
 };
@@ -144,50 +125,6 @@ function fetchlistNames(headers, callback) {
     }
   });
 }
-
-/**
- * Create Wishlist.
- * @return response from WCS
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-/* module.exports.createlist = function createWishlist(headers, body, callback) {
-  logger.debug('Entering method mylisthandler: Create Wishlist');
-  const error = [];
-  if (!body.wishlistname) {
-    error.push(errorutils.errorlist.wishlist.listname_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
-    return;
-  }
-  const createWishListURL = constants.createWishlist.replace(
-    '{{storeId}}',
-    headers.storeId,
-  );
-  const reqHeader = headerutil.getWCSHeaders(headers);
-
-  const reqBody = {
-    descriptionName: body.wishlistname,
-  };
-  origin.getResponse(
-    'POST',
-    createWishListURL,
-    reqHeader,
-    null,
-    reqBody,
-    null,
-    null,
-    response => {
-      if (response.status === 201 || response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.debug('Error while calling CreateWishlist api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
-      }
-    },
-  );
-}; */
 
 /**
  * Create Wishlist and Add Item.
@@ -274,92 +211,6 @@ function addItem(headers, body, callback) {
 }
 
 /**
- * Rename Wishlist.
- * @return response from WCS
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-/* module.exports.rename = function rename(headers, body, callback) {
-  logger.debug('Entering method mylisthandler: Rename Wishlist');
-  const error = [];
-  if (!body.wishlistid) {
-    error.push(errorutils.errorlist.wishlist.listid_missing);
-  }
-  if (!body.wishlistname) {
-    error.push(errorutils.errorlist.wishlist.listname_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
-    return;
-  }
-
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  const addItems = `${constants.editWishlist
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{wishlistid}}', body.wishlistid)}`;
-  const reqBody = {
-    descriptionName: body.wishlistname,
-  };
-  origin.getResponse(
-    'PUT',
-    addItems,
-    reqHeader,
-    null,
-    reqBody,
-    null,
-    null,
-    response => {
-      if (response.status === 201 || response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.error('Error while calling RenameWishlist api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
-      }
-    },
-  );
-}; */
-
-/**
- * Delete Wishlist.
- * @return response from WCS
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-/* module.exports.deletelist = function deletelist(headers, body, callback) {
-  logger.debug('Entering method mylisthandler: Delete Wishlist');
-  const error = [];
-  if (!body.wishlistid) {
-    error.push(errorutils.errorlist.wishlist.listid_missing);
-  }
-  if (error.length > 0) {
-    callback(error);
-    return;
-  }
-
-  const reqHeader = headerutil.getWCSHeaders(headers);
-  const deleteList = `${constants.editWishlist
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{wishlistid}}', body.wishlistid)}`;
-  origin.getResponse(
-    'DELETE',
-    deleteList,
-    reqHeader,
-    null,
-    null,
-    null,
-    null,
-    response => {
-      if (response.status === 201 || response.status === 200) {
-        callback(null, response.body);
-      } else {
-        logger.error('Error while calling DeleteWishlist api', response.status);
-        error.push(errorutils.handleWCSError(response));
-        callback(error);
-      }
-    },
-  );
-}; */
-
-/**
  * Delete item from Wishlist.
  * @return response from WCS
  * @throws contexterror,badreqerror if storeid or access_token is invalid
@@ -395,6 +246,12 @@ module.exports.deleteitem = function deleteitem(headers, body, callback) {
   );
 };
 
+/**
+ * Get Wishlist Data.
+ * @param access_token
+ * @return Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 function getWishlistData(headers, callback) {
   const fetchWishListOriginURL = constants.mylistFetch.replace(
     '{{storeId}}',
@@ -411,12 +268,12 @@ function getWishlistData(headers, callback) {
     null,
     response => {
       if (response.status === 200) {
-        callback(null, response.body);
+        callback(null, response.body, headers);
       } else if (response.status === 404) {
         const wishAllList = {
           wishlistTotalItems: 0,
         };
-        callback(null, wishAllList);
+        callback(null, wishAllList, headers);
       } else {
         logger.error('Error while calling wishList api.', response.status);
         callback(errorutils.handleWCSError(response));
@@ -425,6 +282,120 @@ function getWishlistData(headers, callback) {
   );
 }
 
+/**
+ * Get External Wishlist Data.
+ * @params externalId,accesskey
+ * @return Wishlist Data
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+function getExternalWishlistData(headers, params, query, callback) {
+  if (!params.externalId || !query.accesskey) {
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const ExternalWishListURL = `${constants.externalWishlist
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{externalID}}', params.externalId)
+    .replace('{{guestAccessKey}}', query.accesskey)}`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'GET',
+    ExternalWishListURL,
+    reqHeader,
+    null,
+    null,
+    null,
+    null,
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body, headers);
+      } else if (response.status === 404) {
+        const wishAllList = {
+          wishlistTotalItems: 0,
+        };
+        callback(null, wishAllList, headers);
+      } else {
+        logger.error('Error while calling wishList api.', response.status);
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+/**
+ * Get Details for Wishlist Item.
+ * @params OOB Wishlist Data
+ * @return Merged Wishlist Data with Item Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+function getWishlistProductList(res, headers, callback) {
+  const wishlistJson = {
+    wishlistID: '',
+    wishlistName: '',
+    wishlistItemCount: 0,
+    externalIdentifier: '',
+    guestAccessKey: '',
+    wishlistData: [],
+  };
+  const productIDs = [];
+  if (res.GiftList && res.GiftList.length > 0) {
+    wishlistJson.wishlistID = res.GiftList[0].uniqueID;
+    wishlistJson.wishlistName = res.GiftList[0].descriptionName;
+    wishlistJson.guestAccessKey = res.GiftList[0].guestAccessKey;
+    wishlistJson.externalIdentifier = res.GiftList[0].externalIdentifier || '';
+    if (res.GiftList[0].item && res.GiftList[0].item.length > 0) {
+      wishlistJson.wishlistItemCount = res.GiftList[0].item.length;
+      res.GiftList[0].item.forEach(listItem => {
+        productIDs.push(listItem.productId);
+      });
+
+      productUtil.productByProductIDs(productIDs, headers, (error, result) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+        const productListArray = result.productList;
+        productListArray.forEach(productDetail => {
+          delete productDetail.masterCategoryID;
+          delete productDetail.installationRequired;
+
+          for (let index = 0; index < res.GiftList[0].item.length; index += 1) {
+            if (
+              productDetail.uniqueID === res.GiftList[0].item[index].productId
+            ) {
+              // eslint-disable-next-line no-param-reassign
+              productDetail.giftListItemID =
+                res.GiftList[0].item[index].giftListItemID;
+              // eslint-disable-next-line no-param-reassign
+              productDetail.createdTime = new Date(
+                res.GiftList[0].item[index].itemCreatedTime,
+              ).getTime();
+              break;
+            }
+          }
+        });
+        productListArray.sort(
+          (a, b) => parseInt(b.createdTime, 10) - parseInt(a.createdTime, 10),
+        );
+        wishlistJson.wishlistData = productListArray;
+        callback(null, wishlistJson);
+      });
+    } else {
+      callback(null, wishlistJson);
+    }
+  } else {
+    callback(null, wishlistJson);
+  }
+}
+
+/**
+ * Add Item into Wishlist.
+ * @params wishlistId,itemId
+ * @return 200 ,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
 module.exports.addItemInWishlist = function addItemInWishlist(
   headers,
   body,
@@ -448,7 +419,6 @@ module.exports.addItemInWishlist = function addItemInWishlist(
         productId: body.sku_id,
       };
       if (wishlistCount === 0) {
-        //reqBody.wishlistName = `wishlist_${headers.userId}`;
         reqBody.wishlistName = wishlistName;
         createAndAdd(headers, reqBody, callback);
       } else {

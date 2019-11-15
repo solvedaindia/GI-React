@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-// Redux Imports
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import injectSaga from '../../utils/injectSaga';
@@ -16,12 +15,13 @@ import * as actionCreators from '../../containers/PlpContainer/actions';
 import {
   getReleventReduxState,
   getOnlyWishlistUniqueIds,
+  isMobile,
 } from '../../utils/utilityManager';
 
 import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
-import Sort from './Sorting/sort';
-import LoadingIndicator from '../../utils/loadingIndicator';
+import appCookie from '../../utils/cookie';
+import {PRODUCT_RESTRICTION, SAME_CAT, DIFF_CAT, ALREADY_ADDED  } from '../../constants/app/plpConstants';
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -41,7 +41,34 @@ class PlpComponent extends React.Component {
   }
 
   handleAddProduct = product => {
-    this.props.addProduct(product);
+    let compdata = [];
+    if (this.props.compData.length > 0) { 
+      compdata = this.props.compData;
+    } else if(appCookie.get('compareProduct')) { 
+      compdata = JSON.parse(appCookie.get('compareProduct'));
+    }
+    
+    const compPrd = compdata.find(prd => prd.skuId == product.skuId);
+    const compCat = compdata.find(prd => prd.catId == this.props.catId);
+    const masterProduct = compdata.find(prd => prd.masterCategoryID == product.masterCategoryID);
+    if (compPrd) {
+      alert(ALREADY_ADDED);
+    } else if (compdata.length == 3) {
+      alert(PRODUCT_RESTRICTION);
+    } else if (compdata.length > 0 && !compCat) {
+      alert(SAME_CAT);
+    } else if (compdata.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
+      alert(DIFF_CAT);
+    } 
+    else {
+      if (this.props.compData.length === 0) {
+        compdata.map(data => {
+          this.props.addProduct(data);
+        })
+      }
+      product.catId = this.props.catId;
+      this.props.addProduct(product);
+    }
   };
 
   parsePLPData(data) {
@@ -50,85 +77,66 @@ class PlpComponent extends React.Component {
       const plpData = data.plpDataPro;
       const item = plpData.map((item, index) => (
         <>
-          <ProductItem
-            key={index}
-            data={item}
-            isInWishlist={wishlistArr.includes(item.uniqueID)}
-            addProduct={this.handleAddProduct}
-            compData={this.props.compData}
-            isfromWishlistPro={this.props.isFromWishlistPro}
-            history={this.props.history}
-          />
+          {!this.props.showSkuPro ? 
+            <ProductItem // Swatch level
+              key={index}
+              dataPro={item.skuList[0]}
+              isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
+              addProduct={this.handleAddProduct}
+              compData={this.props.compData}
+              isfromWishlistPro={this.props.isFromWishlistPro}
+              history={this.props.history}
+              isSearchPathPro={this.props.isSearchPathPro}
+              isColorSwatchPro
+              skuList={item.skuList}
+              swatchList={item.swatchesData}
+              isShareWishlistPro={this.props.isShareWishlistPro}
+              coloumnLayout={this.props.coloumnLayout}
+              moveToCartPopUpPro={this.props.moveToCartPopUpPro}
+              plpBreadcrumbPro={this.props.plpBreadcrumbPro}
+            /> :
+            <ProductItem // Sku level
+              key={index}
+              dataPro={item}
+              isInWishlist={wishlistArr.includes(item.uniqueID)}
+              addProduct={this.handleAddProduct}
+              compData={this.props.compData}
+              isfromWishlistPro={this.props.isFromWishlistPro}
+              history={this.props.history}
+              isSearchPathPro={this.props.isSearchPathPro}
+              swatchList={[]}
+              isShareWishlistPro={this.props.isShareWishlistPro}
+              coloumnLayout={this.props.coloumnLayout}
+              moveToCartPopUpPro={this.props.moveToCartPopUpPro}
+              plpBreadcrumbPro={this.props.plpBreadcrumbPro}
+            />
+          }
           <AdBanner indexPro={index + 1} />
-          {/* {index === this.props.bannerPosIndex ? <AdBanner indexPro={index} dataPro={isAdBanner ? data.adBannerDataPro[0] : null} /> : null } */}
         </>
       ));
-      // this.initialize(plpData);
       this.setState({ plpItem: item });
     }
   }
 
-  /*
-  initialize(plpData) {
-    var coloumnLayout;
-    if (this.props.coloumnLayout === 3) {
-      coloumnLayout = 'plp-products grid3';
-    }
-    else {
-      coloumnLayout = 'plp-products grid2';
-    }
 
-
-    var reduxValue = this.props.bannerPosIndex
-    var ddd = [];
-    var actualItem = [];
-    plpData.forEach(function (item, index) {
-      console.log('end===',ddd);
-      //console.log('mmmm===',actualItem);
-      if (index+1 === reduxValue) {
-        ddd.push(<ProductItem key={index} data={item} />);
-       
-        actualItem.push(
-          <>
-            <ul className={coloumnLayout}>{ddd}</ul>
-            <AdBanner key={'banner'+index} indexPro={index+1} />
-          </>
-        )
-        
-        ddd = [];
-        
-      }
-      else {
-        ddd.push(<ProductItem key={index} data={item} />);
-      }
-
-
-    })
-    actualItem.push(
-      <>
-        <ul className={coloumnLayout}>{ddd}</ul>
-        
-      </>
-    )
-
-    this.setState({ plpItem: actualItem });
-
-  }
-*/
 
   render() {
     let coloumnLayout;
-    if (this.props.coloumnLayout === 3) {
+    if (this.props.coloumnLayout === 3 || this.props.isFromWishlistPro === true) {
       coloumnLayout = 'plp-products grid3';
-    } else {
+      if (isMobile()) {
+        coloumnLayout = 'plp-products grid2';
+      }
+    } 
+    else {
       coloumnLayout = 'plp-products grid2';
+      if (isMobile()) {
+        coloumnLayout = 'plp-products grid1';
+      }
     }
-
     return (
-      // <div className="row no-padding">
       <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      // </div>
-      //
+      
     );
   }
 }
@@ -136,7 +144,6 @@ class PlpComponent extends React.Component {
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => ({
   addProduct: product => dispatch(actionCreators.AddProduct(product)),
-  // onAdBannerIndexUpdate: (currentIndex) => dispatch(actionCreators.adBannerAction(currentIndex)),
 });
 
 const mapStateToProps = state => {
@@ -146,6 +153,7 @@ const mapStateToProps = state => {
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
     coloumnLayout: stateObj.columnLayout,
     compData: stateObj.compWidgetData,
+    compCategories: stateObj.compCategories,
   };
 };
 

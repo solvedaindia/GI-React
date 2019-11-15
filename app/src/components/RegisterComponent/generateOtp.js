@@ -1,13 +1,15 @@
 import React from 'react';
-import { generateOTPAPI, accessToken, registartionAPI  } from '../../../public/constants/constants';
+import { generateOTPAPI, registartionAPI  } from '../../../public/constants/constants';
 import { Button, Form, FormGroup } from 'react-bootstrap';
 import { validateEmptyObject, validateOTPDigit } from '../../utils/validationManager';
 import '../../../public/styles/registerComponent/registerComponent.scss';
 import { resendOtp, otpConfirmed } from './constants';
-
+import { isMobile } from '../../utils/utilityManager';
+import {ENTER_OTP ,RESEND_OTP, VERIFICATION_CODE, XXXX_SENT,REGISTER, INCORRECTOTP_MSG, ENTEROTP_MSG} from '../../constants/app/primitivesConstants';
+import ProgressButton from '../Button/progressButton'
 const LeftArrow = (
     <img className='leftArrow'
-      src={require('../../../public/images/left-arrow.png')}
+      src={require('../../../public/images/left-arrow.png')}  alt="Left"
     />
   );
 
@@ -18,30 +20,39 @@ class GenerateOtp extends React.Component {
             error: false,
             errorMessage: null,
             inputText: null,
+            isProcessing:false
         }
+        this.callbackFunc = this.callbackFunc.bind(this);
     }
 
     /* Handle Submit */
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
         if (!validateEmptyObject(this.state.inputText)) {
             this.setState({
                 error: true,
-                errorMessage: 'Please enter OTP',
+                errorMessage: ENTEROTP_MSG,
             });
             return;
         }
+
 
         if (!validateOTPDigit(this.state.inputText)) {
             this.setState({
                 error: true,
-                errorMessage: 'Pleaes enter 4 digit OTP',
+                errorMessage: INCORRECTOTP_MSG,
             });
             return;
         }
+        if(this.state.isProcessing)
+        {
+            return;
+        }
+        this.setState({isProcessing:true});
         
         let data = this.props.userdata;
         Object.assign(data, {'otp': String(this.state.inputText)});
-        this.props.handleApi(registartionAPI, data, accessToken, otpConfirmed);       
+        this.props.handleApi(registartionAPI, data, otpConfirmed, this.callbackFunc);       
     }
 
     handleInputChange(text) {
@@ -54,9 +65,9 @@ class GenerateOtp extends React.Component {
     resendOTP() {
         let data = {
             'user_id': this.props.userdata.user_id,
-            'resend': true
+            'resend': 'true'
         }
-        this.props.handleApi(generateOTPAPI, data, accessToken, resendOtp);
+        this.props.handleApi(generateOTPAPI, data, resendOtp, this.callbackFunc);
     }
 
     /*Back on registration component */
@@ -64,30 +75,104 @@ class GenerateOtp extends React.Component {
         this.props.componentData('registerWithMobileNum', this.props.userdata);
     }
 
-    render() {
-        let errorItem = null;
+    backToGenerateOtp() {
+        this.setState({
+            errorMessage: null
+        })
+        this.props.componentData('generateOtp', this.props.userdata);
+    }
 
-        if (this.state.error) {
-            errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>
+    callbackFunc(errorMsg) {
+        this.setState({
+            error: true,
+            errorMessage: errorMsg,
+            isProcessing:false
+        });
+    }
+
+    render() { 
+        const userId = this.props.userdata.user_id;
+        let errorItem = null;
+        let isErrorExist = false;
+        let content = null;
+        if (this.state.errorMessage && this.state.errorMessage.includes("maximum")) {
+            isErrorExist = this.state.errorMessage.includes("maximum");
         }
+        
+        if (this.state.error) 
+        {
+            if(isMobile())
+            {
+                errorItem = <p className='error-msg otperrorwidth'>{this.state.errorMessage}</p>
+            }
+            else{
+                errorItem = <div className='col-md-8'><p className='error-msg-otp-web'>{this.state.errorMessage}</p></div>
+            }
+               
+        }
+        if(isMobile())
+        {
+            content = (<>{errorItem}<Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button></>)
+        }
+        else{
+            if(errorItem==null)
+                errorItem = (<div className="col-md-8"><p className='error-msg-otp-web'> </p></div>)
+            
+            content = (<div className="row">
+                        {errorItem}
+                        <div className="col-md-4">
+                            <Button onClick={this.resendOTP.bind(this)} className='resend-otp-web'>{RESEND_OTP}</Button>
+                        </div>
+                       </div>)   
+        }
+
         return (
             <div  className='otp_screen'>
             <div className='form_register'>
-                <h3 className="heading">Enter One Time Password</h3>
-                <Form>
-                    <FormGroup>
-                        <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
-                        <p className='text otp-text text-center'>Enter the verification code that has been OTP sent to your mobile number</p>
-                        <div className='form-div clearfix'>
-                            <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
-                            {errorItem}
-                            <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>Resend OTP</Button>
-                        </div>
-                    </FormGroup>
-                    <FormGroup className='text-center'>
-                        <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>Register</Button>
-                    </FormGroup>
-                </Form>
+           
+                { isErrorExist === true ? (
+                    <>
+                        <h3 className="heading"></h3>
+                        <Form>
+                            <div className='form-div clearfix'>{errorItem}</div>
+                            <FormGroup className='text-center'>
+                                <Button onClick={this.backToGenerateOtp.bind(this)} className='btn-bg btn-register btn-block'>Back</Button>
+                            </FormGroup>
+                        </Form>
+                    </>
+                ):(
+                <>
+                    <h3 className="heading">{ENTER_OTP}</h3>
+                    <Form onSubmit={this.handleSubmit.bind(this)}>
+                        <FormGroup className='otp-verification'>
+                            <Button onClick={this.backToRegistrationForm.bind(this)} className='btn-back'>{LeftArrow}</Button>
+                            <p className='text otp-text'>{VERIFICATION_CODE}</p>
+                            <div className='form-div clearfix'>
+                                <label for="otp" className="form-label">{XXXX_SENT}{userId.substr(userId.length - 4)}</label>
+                                <input onChange={this.handleInputChange.bind(this)} type="number" name="text" className='form-control margin-none' placeholder="Enter OTP" />
+                                {/* {errorItem}
+                                <Button onClick={this.resendOTP.bind(this)} className='resend-otp'>{RESEND_OTP}</Button> */}
+                                {content}
+                            </div>
+                        </FormGroup>
+                        <FormGroup className='text-center'>
+                            {/* <Button onClick={this.handleSubmit.bind(this)} className='btn-bg btn-register btn-block'>
+                
+                                {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+                                    <li>{REGISTER}</li>
+                                    <li> <div className="loadingdots-on-button">
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        <div className="loadingdots-on-button--dot"></div>
+                                        </div>
+                                    </li>
+                                </ul>:REGISTER }
+                            </Button> */}
+                            <ProgressButton isProcessing = {this.state.isProcessing} title={REGISTER} onClickEvent={this.handleSubmit.bind(this)} styleClassName = "btn-bg btn-register btn-block"/>
+                        </FormGroup>
+                    </Form>
+                </>
+                )}
             </div>
             </div>
         )

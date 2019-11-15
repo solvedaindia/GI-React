@@ -1,0 +1,332 @@
+@import '../variable';
+@import '../base';
+
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .termsContainer {
+      .contactPersons{
+        padding: 34px 0 0 0; 
+        color: #000000;
+        font-family: $font-regular;
+        font-size: 18px;
+        text-align: left;
+        .headingAddress{
+          margin:0;
+          color:#000000;
+          font-family: $font-medium;
+        }
+        .AddressArea{
+          .zoneList{
+            display: block;
+            float: left;
+            width: 32%;
+            background: #f7f7f7;
+            margin: 0 5px 5px 0;
+            padding: 20px;
+            min-height: 163px;
+            font-size: 14px;
+  
+          .mailtoLink{
+            color:#005084;
+          }
+          }
+          
+        }
+        .contactDetails{
+          font-family: $font-regular;
+          margin:15px 0 0 0;
+          font-size: 14px;
+          text-align: justify;
+        }
+  
+      }
+      .Redparagraph{      
+        font-family: CeraGIRegular, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.43;
+        color: #888a8d;
+        text-align: justify;
+        padding: 0 0 32px 0;
+        margin: 0;
+      }
+      .Rednote{
+        line-height: 16px;
+        padding: 0 0 16px 0;
+        color: #000000;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: left;
+  
+      }
+      .topheading{
+        padding: 60px 0 0 0;
+        font-family: $font-medium;
+        font-size: 30px;
+        font-weight: 500;
+        font-style: normal;
+        line-height: normal;
+        color: #000000;
+       text-align: left;
+      }
+      .Topparagraph{
+        font-family: $font-medium;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.43;
+      }
+      .MainHeading {
+      font-family: $font-medium;
+      font-size: 30px;
+      font-weight: bold;
+      font-style: normal;
+      line-height: normal;
+      color: #000000;
+      font-family: $font-regular;
+      font-size: 18px;
+      text-align: left;
+     }
+    .mailtoLink{
+      color:#005084;
+    }
+    .headingAddress{
+      margin:0;
+      color:#000000;
+      font-family: $font-medium;
+    }
+    .contactDetails{
+      font-family: $font-regular;
+      margin:15px 0 0 0;
+      font-size: 14px;
+      text-align: justify;
+    }
+    .zoneList{
+      display: block;
+      float: left;
+      width: 32%;
+      background: #f7f7f7;
+      margin: 0 5px 5px 0;
+      padding: 20px;
+      min-height: 163px;
+      font-size: 14px;
+
+    
+    }
+   
+    
+   
+    .Redparagraph{      
+      font-family: CeraGIRegular, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1.43;
+      color: #888a8d;
+      text-align: justify;
+      padding: 0 0 32px 0;
+      margin: 0;
+    }
+    .Rednote{
+      line-height: 16px;
+    padding: 0 0 16px 0;
+color: #000000;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: left;
+
+        text-align: center;
+        padding: 61px 0 0 0;
+  
+      }
+      .SubHeading {
+        padding: 36px 0 0 0;
+  
+        height: 31px;
+        font-family: $font-regular;
+        font-size: 21px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: black;
+        text-align: center;
+  
+      }
+      .paragraph {      
+        font-family: $font-regular;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.43;
+        color: #888a8d;
+        text-align: left;
+        padding:0 0 32px 0;
+        margin:0;
+        text-align: justify;
+  
+      }
+      .heading{
+        padding: 0px 0 36px 0; 
+        font-family: $font-medium;
+        font-size: 30px;
+        line-height: 30px;
+        text-align: left;
+        color:#000000;
+        margin:0;
+  
+      }
+      .subHeading{
+        font-family: $font-medium;
+        font-size: 16px;
+        line-height: 16px;
+        padding:0 0 16px 0;
+        color:#222222;
+        margin:0;
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){     
+  .termsContainer {
+    padding:30px 5px 30px 5px;
+    .contactPersons{
+      padding: 34px 0 0 0; 
+      color:$black;
+      font-family: $font-regular;
+      font-size: 18px;
+      text-align: left;
+      
+      .AddressArea{
+        .zoneList{
+          background: #f7f7f7;
+          margin: 0 5px 5px 0;
+          padding: 20px;
+          font-size: 12px;
+          font-family: $font-regular;
+        .mailtoLink{
+          color:#005084;
+        }
+        }
+        
+      }
+      
+      h4{
+        font-family: $font-regular;
+        font-size: 14px;
+        margin: 0px 0px 5px 0px;
+      }
+    }
+    
+    .topheading{
+      padding: 60px 0 0 0;
+      font-family: $font-medium;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      line-height: normal;
+      color:$black;
+     text-align: left;
+    }
+    
+    .MainHeading {
+    font-family: $font-medium;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: normal;
+      color:$black;
+      text-align: center;
+      padding: 61px 0 0 0;
+
+    }
+    
+    .paragraph, .Redparagraph, .contactDetails {      
+      font-family: $font-regular;
+      font-size: 12px;
+      line-height: 16px;
+      color: #888a8d;
+      text-align: left;
+      padding: 0 0 20px 0;
+
+    }
+    .heading{
+      font-size: 18px;
+      color:$black;
+      margin:0px 0px 20px 0px;
+      font-family: $font-bold;
+    }
+     .Rednote, .headingAddress{
+      padding: 0px 0 5px 0;
+      font-family: $font-bold;
+      line-height: 28px;
+      color:$black;
+      margin:0px;
+      font-size: 16px;
+    }
+
+    .subHeading{
+      font-family: $font-medium;
+      font-size: 16px;
+      line-height: 16px;
+      padding:0 0 10px 0;
+      color:$black;
+      margin:0;
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}
+
+.termsContainer {
+  h4{
+    color: #000 !important;
+  }
+}

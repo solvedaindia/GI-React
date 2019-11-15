@@ -1,0 +1,450 @@
+@import "../variable.scss";
+.form-BgContainer {
+  .form-div{
+    position: relative; 
+    .error-msg{
+      bottom: 0;
+      color:$errorMsg;
+      margin:0;
+      font-size:  $base*1.5;
+	  margin-bottom:10px;
+    }
+    .form-group{ 
+      position: relative;
+      .form-label{
+        color:$battleshipGrey;
+        position: absolute;
+        top:0;
+      }
+      .form-control:focus{
+        border:1px solid $black !important;
+        box-shadow: 0 !important;
+      }
+      .form-control{
+        border-radius: 0;
+        border:1px solid $lightGrey;
+        box-shadow: none;
+        margin:5px 0 10px 0;
+        color:rgba(0, 0, 0, 0.87);
+        font-weight: bold;
+        padding: 17px 21px;
+        border-radius: 2px;
+
+        &:focus ~ {          
+          .form-label{
+           color:$cerulean !important;
+        }
+      }
+ 
+      }
+    }
+  }
+  
+    .actionBtnWrapper {     
+      .btn {
+        border-radius: 0;
+      }
+      &__cancelBtn {
+        border: solid 1px $black;
+        background-color: $colorwhite;
+      }   
+    }
+    .btn-apply{
+      background:rgba(7,7,7,0.5);
+      color:$colorwhite;
+      font-size:  $base*1.75;
+      border-radius: 0;
+      &:hover{
+        background:rgba(7,7,7,0.4);
+        color:$colorwhite;
+      }
+    }
+
+    .btn-applyActive{
+      background:rgba(7,7,7,1);
+      color:$colorwhite;
+      font-size:  $base*1.75;
+      padding: 12px 84px;
+      border-radius: 0;
+      margin:16px 0 16px 0;
+      &:hover{
+        // background:rgba(7,7,7,0.4);
+        color:$colorwhite;
+      }
+    }
+
+    .noteMsg{
+      font-size:  $base*1.5;
+      line-height: 1.5;
+      .bold{
+        font-weight: 500;
+      }
+      .successMsg{
+        color: green;
+      }
+      .failMsg{
+        color: red;
+      }
+    }
+  }  
+
+/* Modal Delete 
+----------------------*/
+.delete-modal.succes{
+  .modal-dialog{
+    background: transparent;    
+  }
+}
+  .delete-modal{
+    background: rgba(255, 255, 255, 0.65);
+    
+    .cancelBtn {    
+      position: absolute;   
+      top: 20px;
+      right: 20px;   
+      background: transparent;
+      border: none;    
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      overflow: hidden;
+      &:focus{
+        border:none;
+        outline: none;
+      }
+      &::before{
+        transform: rotate(45deg);
+      }
+      &::after{
+        transform: rotate(-45deg);
+      }
+      &::before,
+      &::after{
+        content: '';
+        position: absolute;
+        height: 0.09rem;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        margin-top: -1px;
+        background:$black;
+      }
+    }
+    .modal-dialog{    
+      width: 47%;
+      // max-width: 592px;
+      max-width: 47%;
+    
+      .modal-content{
+        box-shadow: none;
+        .modalwrapper{   
+          .OopsIcon{
+            margin:0 0 30px 0;
+            .oopsImg{
+              width:50px;
+              height: 50px;
+            }
+          } 
+          .payment-notcomplete{
+            margin:0 0 36px 0;
+            font-family: $font-regular;
+            font-size: $base*2.5;
+            line-height: $base*2.5;
+          }
+          .heading{
+            margin: 0 0 16px 0;
+            color:$black;
+            font-family: $font-bold;
+          }
+          .text{
+            color:$battleshipGrey;
+            font-family: $font-regular;
+            line-height: 20px;
+            margin: 0 0 28px 0;
+          }
+        .actionBtnWrapper{
+          padding: 0px 0 0px 0;
+          .btn-save{
+            float: right;
+          }      
+          .btn {
+            padding: 12px 60px;
+            border-radius: 0; 
+            width: 46%;
+          }
+        }   
+      }
+    }
+  }
+ 
+  }
+  
+
+  /* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+  //CSS
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  //CSS
+}
+
+/* 
+#Global Screen Chhange for Screen Laptops, Desktops
+*/
+@include mix-lg{
+  .form-BgContainer {
+    width: 70%;
+    background-color:$greybg;
+    float: left;    
+    padding:25px 25px 32px 25px;
+    .form-div{
+      .form-group{
+        padding: 17px 0 0 0;
+        .form-label{
+          font-size: $base*1.75;
+        }
+        .form-control{
+          font-size:  $base*2;
+          height: 54px;
+        }
+      }
+    }
+    .btn-apply{
+      padding: 12px 84px;
+      margin:16px 0 16px 0;
+    }
+  } 
+  .delete-modal{
+    .modal-dialog{
+      .modal-content{
+        .modalwrapper{
+          padding: 55px 70px 55px 70px;
+          text-align: center;
+          .heading-succes{
+            font-family: $font-bold;
+            font-size:$base*4;
+            line-height: $base*4;
+            color:$black;
+            margin:15px 0 0 0;
+          }
+          .orderConfirmed{
+            font-family: $font-regular;
+            font-size:$base*2.5;
+            line-height: $base*2.5;
+            margin:16px 0 0 0;
+            color:$black;
+          }
+          .actionBtnWrapper{
+            .btn{
+              padding: 12px 60px;
+            }
+          }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.5;
+            }
+            .text{
+              font-size: 14px;
+            }
+          } 
+        }
+      }
+    }
+  }
+  .mobileView{
+    display: none;
+  }
+}
+
+@media(min-width:1024px){
+  .delete-modal .modal-dialog .modal-content .modalwrapper .actionBtnWrapper .btn{
+    padding:12px 45px;
+  }
+}
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+ /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+  .form-BgContainer {
+    width: 100%;
+    float: left;    
+    padding:0px 10px 32px 10px;
+    .form-div{
+      .form-group{
+        padding: 5px 0 0 0;
+        .form-label{
+          margin: 0px 0px 0px 15px;
+          padding: 0px 7px;
+          background: $colorwhite;
+          font-size: 12px;
+          font-family: $font-regular;
+          font-weight: normal;
+        }
+        .form-control{
+          font-size: 12px;
+          font-weight: normal;
+          height: 44px;
+          &:-ms-input-placeholder {
+            color: #000;
+            font-family: $font-regular;
+          }
+          &::-webkit-input-placeholder {
+            color: #000;
+            font-family: $font-regular;
+          }
+        }
+      }
+    }
+    .btn-cancel{
+      border: 1px solid $black;
+      padding: 8px 0px;
+      background: $colorwhite;
+      border-radius: 0px;
+      min-width: 49%;
+      margin-right: 2%;
+      max-width: 250px;
+    } 
+    .btn-apply{
+      padding: 8px 0px;
+      min-width: 49%;
+      max-width: 250px;
+    }
+    .btn-applyActive{
+      min-width: 49%;
+      max-width: 250px;
+      padding: 8px 0px;
+    }
+    .noteMsg {
+      margin-top:10px;
+    }
+  }
+  .delete-modal{
+    .modal-dialog{
+      width:100%;
+      max-width: 100%;
+      .modal-content{
+        .modalwrapper{
+          padding: 20px 20px 0px 20px;
+          .actionBtnWrapper{
+            margin-left: -20px;
+            margin-right: -20px;
+          }
+        .heading{
+          text-align: center;
+          font-family: $font-regular;
+          font-size: 14px;
+        }
+        .deleteQuestion{
+          align-content: center;
+          margin: 0px;
+          padding: 20px 60px;
+          }          
+          .actionBtnWrapper{
+            .btn{
+              padding: 12px 0px;
+              width: 50%;
+            }
+            .btn-cancel{
+              border-left: 0px;
+              border-top: 1px solid $greyWhite;
+            }
+            .btn-save{
+              margin: 0px;
+            }
+          }
+          &.change-pinocde{
+            .heading{
+              font-size: $base*2.25;
+            }
+            .text{
+              font-size: 12px;
+            }
+
+          } 
+           .OopsIcon{
+            text-align: center;
+          }
+
+          &.paymentFaild{
+            .heading{
+              font-size: $base*4;
+            }
+            .payment-notcomplete{
+              text-align: center;
+            }
+            .actionBtnWrapper {
+              .btn-cancel{
+                border-width: 1px 0px 1px 0px;
+                border-style: solid;
+                border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+              }
+            }
+          }
+
+        }
+        .mobileView{
+          .btn{
+            width:50%;
+            border-radius: 0;
+            padding: 15px 0;
+          }
+          .btn-save {
+            margin:0;
+          }
+        }
+        .actionBtnWrapper {
+          &.mobileView{
+            .btn-cancel{
+              border-width: 1px 0px 1px 0px;
+              border-style: solid;
+              border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+            }
+          }
+        }
+      }
+    }
+    &.in{
+      bottom: 0px;
+      top:initial;
+    }
+  }
+  .webView{
+    display: none;
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+}

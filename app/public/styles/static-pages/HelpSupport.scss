@@ -1,0 +1,791 @@
+@import '../variable';
+@import '../base';
+
+
+.service-support {
+  .heading {   
+    color: $black;
+    text-align: center;   
+  }
+  .subHeading {
+    text-align: center;
+  }
+  .searchBars {
+    padding: 62px 0 0 0;  
+    display: inline-block;
+    position: relative;
+    border-bottom: 1px solid $battleshipGrey;
+    margin: 0 auto;
+    width: 30%;
+    display: block;
+   .search-icon{margin:0}
+    .searchInput {
+        width: 100%;
+        border: transparent;
+        background: transparent;
+        padding: 0px 0 0 25px;
+        min-height: 35px;
+        &:focus {
+            outline: none;
+        }
+    }
+    .searchLogo {
+        position: absolute;
+        top: 6px;
+        left: 0px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        pointer-events: none;
+    }
+    .clearField {
+        position: absolute;
+        top: 2px;
+        right: 7px;
+        z-index: 2;
+        display: block;        
+        text-align: center;
+        font-size: 18px;
+        text-decoration: none;
+        color:$black;    
+        display: none;
+       
+    }
+  
+    #autoSuggestDiv{
+        position: absolute;
+        top: 53px;
+        width: 100%;
+        background:$colorwhite;
+        z-index: 9;
+        left: 0;
+        box-shadow: 0 24px 24px -10px rgba(66, 75, 90, 0.47);
+  
+        .auto-search{
+            padding: 16px 0 16px 0;
+  
+            .list{
+                padding:0px;
+                &:first-child{
+                    .link{
+                        cursor: default;
+                    }
+                }
+                .link{
+                    display: block;
+                    padding: 7px 20px;
+                    text-decoration: none;
+                    color:$black;
+                    font-family: $font-regular;
+                    font-size: 12px;
+  
+                    &:hover{
+                        background:$paleGrey;
+                    }
+                }
+                &:first-child{
+                    .link{
+                        display: block;
+                        padding: 7px 20px;
+                        text-decoration: none;
+                        color:$black;
+                        font-family: $font-bold;
+     
+                        &:hover{
+                            background:transparent;
+                        }
+                    }
+                }
+  
+            }
+        }
+        
+    }
+  }
+  
+  .uldiver{
+   
+    background-color: #eef8fe
+  }
+  
+  
+ 
+  .panel-body{
+    color: #000000;
+    padding: 0;
+  }
+  .hrvertical { 
+    border-left: 6px solid green;
+    height: 500px;
+    }
+   
+  .chattext{
+      font-weight: bold;
+      text-align: center;
+      height: 21px;
+      font-size: 14px;
+  }
+  .chatIcon{
+    height: 30px;
+  }
+   
+  
+  
+
+  .faq-wrapper{
+    .faq-heading {
+      font-family: $font-bold;
+      color: $black;
+      font-size: 14px;
+      line-height: 14px; 
+    }
+  }
+
+  .faq-my-Order{
+    .heading {
+      padding: 0px 0 8px 0;
+      margin:0;       
+      color: $base;
+     }
+     .panel-group{
+       .panel{
+         border-width: 1px 0px 0px 0px;
+         border-color: $greyborder;
+         border-style: solid;
+         margin:0;
+         .panel-heading{
+           padding: 0;
+           background: transparent;          
+           border-radius: 0;
+           .panel-title{
+            color:$black;
+            font-family: $font-medium;
+            .accordion-toggle{
+              color:$black;
+              &:focus,&:hover{
+                text-decoration: none;
+              }
+            }
+           }
+         }
+         
+         .panel-collapse.show{
+          .panel-body{
+            border-top:none;
+            padding: 12px 0 0 0;
+            font-size:12px;
+            font-family: $font-regular;
+            color:$greyBorder;
+          }
+         }
+         .panel-body{
+          padding: 12px 0 0 0;
+          border-top:none;
+          font-size:12px;
+          font-family: $font-regular;
+          color:$greyBorder;
+         }
+       }
+     }
+  }
+
+  .customer-care{
+    .heading {           
+      color: $black; 
+    }
+    
+    .title-text{
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 22px;
+      color: $black;
+      margin: 0 0 42px 0;
+  
+    }
+    .sub-heading{
+      font-family: $font-medium;   
+      font-size: 16px; 
+      line-height: 16px;   
+      color: $black;   
+    }
+      
+    .emailto, .mob-text{
+      font-size: 14px;
+      line-height: 18px;      
+      color: $battleshipGrey;
+      font-family: $font-regular;
+      margin:8px 0 0 0;
+      
+      }
+  }
+
+  
+}
+
+.static-contact-us{
+  padding-bottom: 5%;
+  .separator{
+    border-right:1px solid #dadada;
+  }
+}
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+   
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .service-support{
+      padding:64px 0 144px 0;
+      .innerContent{
+        padding:63px 0 0 0;
+      }
+      .heading{
+        padding: 0;
+        margin:0;
+        font-family: $font-medium;
+        font-size: 30px;  
+        line-height: 30px; 
+      }
+      .subHeading{
+        padding: 24px 0 0 0;
+        margin:0;
+        font-family: $font-regular;
+        font-size: 18px;
+        color: $greyish;
+      }
+
+      .faq-wrapper{
+        .faq-heading {    
+          margin:0;
+          padding:0 0 8px 0;
+        }
+        .faqList{
+          .active{
+            background: $paleGrey;
+          }
+          .faqItem{
+            font-size: 14px;
+            font-family: $font-regular;
+            padding:12px;
+    
+          }
+        }
+      }
+
+      .faq-my-Order{
+        .heading{
+          font-family: $font-medium;
+          font-size: 20px;      
+          line-height: 20px; 
+          text-align: left;  
+        }
+        .panel-group{
+          margin: 26px 0 0 0;
+          .panel{
+            padding: 25px 0;
+            .panel-heading{
+              .panel-title{
+                font-size: 16px;
+
+                .accordion-toggle{
+                  font-family: $font-medium;
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .customer-care{
+        border-top:1px solid $greyborder;
+        margin:60px 0 0 0;
+        padding:42px 0 0 0;
+        .heading {  
+          font-family: $font-medium;            
+          font-size: 30px;      
+          line-height: 30px; 
+          margin:0 0 37px 0;
+          text-align: center; 
+        }
+        .title-text, .sub-heading, .emailto, .mob-text{
+          text-align: center;
+        }
+        .sub-heading{
+          margin:15px 0 0 0; 
+        }
+       .contact-box, .email-box{
+        .img-icon{
+          text-align: center;
+          display: block;
+          .icon{
+              height: 25px;
+            }
+          }  
+       }
+       &.separator{
+        border-right:1px solid $greyborder;
+      } 
+      }
+      .live-chat{
+        background: $paleGrey;
+        padding: 16px;
+        border: none;
+        position: fixed;
+        right: 10px;
+        bottom: 30px;
+        border-radius: 29px;
+        .text{
+          font-family: $font-medium;
+          font-size: 14px;
+          color:$black;
+          padding:0 10px 0 0;
+        }
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .service-support{
+    padding:0px 0 35px 0;
+    .innerContent{
+      padding:20px 0 0 0;
+    }
+    .heading{
+      font-family: $font-bold;
+      font-size:32px;  
+      line-height: $base*3.5; 
+      margin:18px 0px 7px 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    .subHeading{
+      font-family: $font-regular;
+      font-size:16px;
+      color: $greyBorder;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+
+    .faq-wrapper{
+      padding:10px  0px;
+      .faq-heading {    
+        margin:0;
+        padding:0 0 15px 16px;
+      }
+      .faqList{
+        .faqItem{
+          font-size: 12px;
+          font-family: $font-medium;
+          padding:$base*1.75 $base*2;
+          border-top:1px solid $lightblueGrey; 
+          
+        }
+      }
+    }
+
+    .faq-my-Order{
+      padding:0px;
+      .heading{
+        font-family: $font-bold;
+        font-size: $base*3;      
+        line-height: $base*3.75; 
+        text-align: center; 
+      }
+      .panel-group{
+        margin: 10px 0 0 0;
+        .panel{
+          padding: 20px 15px;
+          .panel-heading{
+            .panel-title{
+              .accordion-toggle{
+                font-family: $font-medium;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .customer-care{
+      margin:30px 0 20px 0;
+      .heading {         
+        font-family: $font-bold;     
+        font-size: $base*1.75;       
+        padding:0 0 5px 0;
+        margin: 0 0 22px 0;
+        text-align: left;
+        border-bottom: 1px solid $greyborder; 
+      }
+      .sub-heading{
+        margin:0; 
+      }
+      .title-text{
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+      .contact-box, .email-box{
+        width: 100%;
+        float: left;
+        padding:0px 0px 15px 30px;
+        
+        .img-icon{
+          float: left;
+          .icon{
+              height: 25px;
+            }
+          } 
+          .email-box-desc{
+            float: left;
+            padding-left: 20px;
+          } 
+       }
+       
+    }
+    .separator{
+      border-bottom: 1px solid $greyborder;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+    }
+    .live-chat{
+      background: $black;
+      padding:6px 12px;
+      position: fixed;
+      right: 10px;
+      bottom: 30px;
+      border: 0px;
+      .text{
+        font-family: $font-regular;
+        font-size: 12px;
+        color:$colorwhite;
+        padding:0 10px 0 0;
+      }
+    }
+  }
+
+  .support-faq {
+    margin-left: 0px !important;
+    h2 {
+      padding-top: 20px;
+      font-size: 15px;
+      padding-bottom: 10px;
+    }
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    h4 {
+      padding-top: 5px;
+    }
+
+    h5 {
+      padding-top: 0px;
+    }
+
+    .panel-heading {
+      padding-left: 0px;
+      padding-right: 0px; 
+    }
+  }
+  
+  .staticpage{
+    .container {
+        text-align: left;
+    }
+    .email-box {
+      display: inline-flex;
+      width: 100%;
+    }
+    .contact-box {
+      display: inline-flex;
+      width: 100%;
+    }
+    .static-contact-us {
+      h1 {
+        text-align: left;
+        font-size: 16.9px !important;
+        padding-bottom: 0px;
+        font-weight: 600;
+      }
+      .title-text {
+        font-size: 16.9px !important;
+      }
+
+      .sub-heading {
+        font-size: 16.9px !important;
+        color: #77787a !important;
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      .img-icon-div {
+        width: 20%;
+        margin-right: 20px;
+      }
+      .email-box-desc {
+        width: 80%;
+      }
+      .separator {
+        border-right: 0px;
+        border-bottom: 1px solid #dadada;
+        padding-bottom: 20px;
+      }
+      .separator-right{
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){     
+  .service-support{
+    padding:0px 0 35px 0;
+    .innerContent{
+      padding:20px 0 0 0;
+    }
+    .heading{
+      font-family: $font-bold;
+      font-size:28px;  
+      line-height: $base*3.5; 
+      margin:18px 0px 5px 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    .subHeading{
+      font-family: $font-regular;
+      font-size:13px;
+      color: $greyBorder;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+
+    .faq-wrapper{
+      padding:10px  0px;
+      .faq-heading {    
+        margin:0;
+        padding:0 0 15px 16px;
+      }
+      .faqList{
+        .faqItem{
+          font-size: 12px;
+          font-family: $font-medium;
+          padding:$base*1.75 $base*2;
+          border-top:1px solid $lightblueGrey; 
+          
+        }
+      }
+    }
+
+    .faq-my-Order{
+      padding:0px;
+      .heading{
+        font-family: $font-bold;
+        font-size: $base*3;      
+        line-height: $base*3.75; 
+        text-align: center; 
+      }
+      .panel-group{
+        margin: 10px 0 0 0;
+        .panel{
+          padding: 20px 15px;
+          .panel-heading{
+            .panel-title{
+              .accordion-toggle{
+                font-family: $font-medium;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .customer-care{
+      margin:30px 0 20px 0;
+      .heading {         
+        font-family: $font-bold;     
+        font-size: $base*1.75;       
+        padding:0 0 5px 0;
+        margin: 0 0 22px 0;
+        text-align: left;
+        border-bottom: 1px solid $greyborder; 
+      }
+      .sub-heading{
+        margin:0; 
+      }
+      .title-text{
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+      .contact-box, .email-box{
+        width: 100%;
+        float: left;
+        padding:0px 0px 15px 30px;
+        
+        .img-icon{
+          float: left;
+          .icon{
+              height: 25px;
+            }
+          } 
+          .email-box-desc{
+            float: left;
+            padding-left: 20px;
+          } 
+       }
+       
+    }
+    .separator{
+      border-bottom: 1px solid $greyborder;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+    }
+    .live-chat{
+      background: $black;
+      padding:6px 12px;
+      position: fixed;
+      right: 10px;
+      bottom: 30px;
+      border: 0px;
+      .text{
+        font-family: $font-regular;
+        font-size: 12px;
+        color:$colorwhite;
+        padding:0 10px 0 0;
+      }
+    }
+  }
+
+  .support-faq {
+    margin-left: 0px !important;
+    h2 {
+      padding-top: 20px;
+      font-size: 15px;
+      padding-bottom: 10px;
+    }
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    h4 {
+      padding-top: 5px;
+    }
+
+    h5 {
+      padding-top: 0px;
+    }
+
+    .panel-heading {
+      padding-left: 0px;
+      padding-right: 0px; 
+    }
+  }
+  
+  .staticpage{
+    .container {
+        text-align: left;
+    }
+    .email-box {
+      display: inline-flex;
+    }
+    .contact-box {
+      display: inline-flex;
+    }
+    .static-contact-us {
+      h1 {
+        text-align: left;
+        font-size: 16.9px !important;
+        padding-bottom: 0px;
+        font-weight: 600;
+      }
+      .title-text {
+        font-size: 16.9px !important;
+      }
+
+      .sub-heading {
+        font-size: 16.9px !important;
+        color: #77787a !important;
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      .img-icon-div {
+        width: 30%;
+        margin-right: 20px;
+      }
+      .email-box-desc {
+        width: 70%;
+      }
+      .separator {
+        border-right: 0px;
+        border-bottom: 1px solid #dadada;
+        padding-bottom: 20px;
+      }
+      .separator-right{
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}

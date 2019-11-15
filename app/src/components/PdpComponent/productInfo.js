@@ -1,104 +1,165 @@
 import React from 'react';
-import { Col, Button } from 'react-bootstrap';
 import EmiInfo from './emiInfo';
-import ProductDefAttriutes from './productdefAttributes';
+import TermsAndCondition from './termsAndCondition';
+import Price from './price';
+import { isMobile, formatPrice } from '../../utils/utilityManager';
+import {DEL_CHARGES,VIEW_OFFERS,STARTING_FROM,EMI,A_MONTH} from '../../constants/app/pdpConstants';
+
+import Uparrow from '../../components/SVGs/upArrow.svg';
+import DownArrow from '../../components/SVGs/downArrow.svg';
 
 class productInfo extends React.Component {
   constructor() {
     super();
-  }
-
-  toggleOffers() {
-    let x = document.getElementById('offers');
-    if (x.style.display === 'none') {
-      x.style.display = 'block';
-    } else {
-      x.style.display = 'none';
+    this.state = {
+      isActive: 'dataNotActive',
+      imageArrowSrc: DownArrow,
+      imageArrowAlt: 'DownArrow'
     }
+  }
+  
+  BoldedText(text, shouldBeBold) {
+    const textArray = text.split(shouldBeBold);
+    return (
+      <span>
+        {textArray.map((item, index) => (
+          <>
+            {item}
+            {index !== textArray.length - 1 && (
+              <span className='couponCode'>{shouldBeBold}</span>
+            )}
+          </>
+        ))}
+      </span>
+  ); }
+  
+  toggleOffers() {
+    let activeClass;
+    let imgSrc;
+    let imgAlt;
+    if (this.state.isActive === 'dataNotActive') {
+    activeClass = 'dataActive';
+    imgSrc = Uparrow;
+    imgAlt = 'Uparrow';
+    } else {
+      activeClass = 'dataNotActive';
+      imgSrc = DownArrow;
+      imgAlt = 'DownArrow';
+	}
+    this.setState({
+      isActive: activeClass,
+      imageArrowSrc: imgSrc,
+      imageArrowAlt: imgAlt
+    })
   }
 
   render() {
-    let emidata = this.props.productData.emiData;
-
-    if (emidata === '') {
-      emidata = 599;
-    }
-
-    return(
+	let showOffer = false;
+	if (this.props.productData.promotions.length > 0 || parseInt(this.props.productData.discount) > 1) {
+		showOffer = true;
+	}
+	
+    return (
       <>
-        <div className="product">
-                  <span className='text'>Product ID:</span> 
-                  <span className='text'>{this.props.productData.partNumber}</span>
-        </div>
-        <div className="slimline">
-                  <h4 className='heading'>
-                    {this.props.productData.productName}
-                  </h4>
-                  {this.props.productData.shortDescription}<br/>
-                  <div className='soldbyDealers'>sold by RMZ furniture Dealers</div>
-        </div>
-        <ProductDefAttriutes defAttributes={this.props.defAttributes} />
-        <div className="price">
-                  <span className='actualprice text'>&#8377;{this.props.productData.actualPrice}</span>
-                  <span className='offerprice text'>&#8377;{this.props.productData.offerPrice}</span>
-          
-        </div>
-        <div className="shippingCharge">
-          Shipping Charges:{' '}
+        { !isMobile() && <Price priceData={this.props.productData} /> }
+        { !isMobile() && <div className="shippingCharge">
+         {DEL_CHARGES}{' '}
           <span className="bold">
-            {' '}
-            &#8377;450 {/* this.props.productData.shipingCharges */}
-                  </span>
-        </div>
-        <div className="accessories-offer">
-                  <div className='offerbg text'> % </div>
-                  <div className='discount-off text'>{this.props.productData.discount} </div>
-                  <a className='text viewOffer' role="button" onClick={this.toggleOffers.bind(this)}>View Offer</a>
-          </div>
+            {this.props.pinCodeData.shippingCharge > 0 ? (
+            <>
+              &#8377;
+              {formatPrice(this.props.pinCodeData.shippingCharge)}
+            </>
+            ) : (
+              <>Free</>
+            )}
+          </span>
+        </div> }
         
-        
-        <div id="offers">
-                  <ul className='cashoffer-wrapper'>
+        <>
+    { showOffer && <>
+    {isMobile() && <div className='clear'></div>}
+    <div className={!isMobile() ? 'accessories-offer' : 'accessories-offer mob-offer-accessories'}>
+		 <div className="offerbg text"> % </div>
+          {!isMobile() ?  
+          (<div className="discount-off text">
+            { parseInt(this.props.productData.discount) > 1 &&
+              <>Get {parseInt(this.props.productData.discount)} % OFF </>
+            }
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
+            }
+          </div>)
+          :
+          (<div className="discount-off text mob-discouont-off">
+            { parseInt(this.props.productData.discount) > 1 &&
+              <><span className='discount-text-off'>Get {parseInt(this.props.productData.discount)}% OFF </span></>
+            }
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
+            }
+          </div>)
+          }
+
+          { this.props.productData.promotions.length > 0 &&
+          <a
+            className="text viewOffer"
+            role="button"
+            onClick={this.toggleOffers.bind(this)}
+          >
+           <span className="view-offer-text">{VIEW_OFFERS}</span>
+           <img className="upArrow" src={this.state.imageArrowSrc} alt={this.state.imageArrowAlt}/>
+          </a>
+          }
+        </div></>
+		}
+        { this.props.productData.promotions.length > 0 &&
+        <div id="offers" className={this.state.isActive}>
+          <ul className="cashoffer-wrapper">
             {this.props.productData.promotions.map((promotion, i) => (
-                                <li className='list' key={i}>                                 
-                                    <h4 className='heading'>{promotion.name} </h4>
-                                    {promotion.description} <a className='link' href={promotion.name}>{promotion.name}</a>                                  
-                                </li>
-                            ))
-                    }
+              <li className="list" key={i}>
+                <h4 className="heading">{promotion.name}</h4>
+                {this.BoldedText(promotion.description,promotion.promocode)} <TermsAndCondition espotPromo={this.props.espotPromo} />
+              </li>
+            ))}
           </ul>
         </div>
-
-        <div className="starting-emitext">
-                  <div className='offerbg text'> <span className='emitext'>EMI</span></div>
-                  <div className='text'>Starting from </div>
-                  <div className='text bold'>रु {emidata} </div>                   
-                  <div className='text'>per month</div>
-                  <div className='text emiinfo'><EmiInfo /></div>
+        }
+        </>
+        {this.props.productData.emiData &&
+          this.props.productData.offerPrice >= 1500 && (
+            !isMobile() ?  
+          <div className="starting-emitext">
+              <div className="offerbg text">
+                {' '}
+                <span className="emitext">{EMI}</span>
+              </div>
+              <div className="text">{STARTING_FROM} </div>
+              <div className="text bold">
+              &#8377;{formatPrice(this.props.productData.emiData)}{' '}
+              </div>
+              <div className="text">{A_MONTH}</div>
+              <div className="text emiinfo">
+                <EmiInfo price={this.props.productData.offerPrice} />
+              </div>
           </div>
-    
-       
-          <div className='pincode'>
-            <div className='PincodeTextdata clearfix'>
-              <input className='pincodeVal' type='text' readOnly value='56632' />
-              <a className='pincodeEdit' role='button'>Edit</a>
-            </div>              
-            <div className='soldbyDealers'>Delivery between 6th Jan to 10 Jan</div>
+          :
+          <div className="starting-emitext pdp-emitext-mob">
+              <div className="offerbg text">
+                {' '}
+                <span className="emitext">{EMI}</span>
+              </div>
+              <div className='emi-text-desc'>
+              <div className="text starting-from">{STARTING_FROM} </div>
+              <div className="text bold">
+              &#8377;{formatPrice(this.props.productData.emiData)}{' '}
+              </div>
+              <div className="text">{A_MONTH}</div></div>
+              <div className="text emiinfo">
+                <EmiInfo price={this.props.productData.offerPrice} />
+              </div>
           </div>
-          <div className='clearfix'></div>
-          
-        
-        <div className="ExperienceProduct">
-          Experience this product at{' '}
-          <a className='bold' role="button">Vikroli Store (1.5 K.M away)</a>
-        </div>
-
-        <div className="addCart">
-          <Button className="btn">-</Button>
-                  <input className='btn' type='text' readOnly value='1' />
-          <Button className="btn">+</Button>
-                  <Button className="btn addcartbtn">Add to Cart</Button>
-        </div>
+        )}
       </>
     );
   }

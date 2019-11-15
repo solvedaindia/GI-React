@@ -5,10 +5,10 @@ import SubCatItem from './subCatItem';
 import '../../../../public/styles/plpContainer/plpContainer.scss';
 
 const prevArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowLeft.svg')} />
+  <img src={require('../../SVGs/carousel__arrowLeft.svg')} alt='prevImg'/>
 );
 const nextArrowImg = (
-  <img src={require('../../SVGs/carousel__arrowRight.svg')} />
+  <img src={require('../../SVGs/carousel__arrowRight.svg')} alt='nxtImg'/>
 );
 class SubCategories extends React.Component {
   constructor(props) {
@@ -19,15 +19,45 @@ class SubCategories extends React.Component {
 
     this.settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
       arrows: true,
       prevArrow: prevArrowImg,
       nextArrow: nextArrowImg,
-      // prevArrow,
-      // nextArrow,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            prevArrow: false,
+            nextArrow: false,
+          },
+        },
+      ],
     };
   }
 
@@ -40,7 +70,7 @@ class SubCategories extends React.Component {
   }
 
   fetchSubCategoryData(subCatData) {
-    const data = subCatData
+    const data = subCatData;
     if (data) {
       const itemsArr = data.map((item, index) => (
         <SubCatItem key={index} itemData={item} />
@@ -52,15 +82,12 @@ class SubCategories extends React.Component {
   }
 
   render() {
-    
     return (
       <section className="tablecarousel">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
               <div className="headingText">
-                {/* <h3 className="heading">Table</h3> */}
-                {/* <p className="total-products">(38 Product)</p> */}
               </div>
             </div>
           </div>
@@ -71,5 +98,4 @@ class SubCategories extends React.Component {
   }
 }
 
-// export default SubCategories;
 export default withRouter(SubCategories);

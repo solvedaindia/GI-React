@@ -1,0 +1,713 @@
+@import '../variable';
+@import '../base';
+
+
+  
+.Kitchen-1{
+  width: 100%;
+  background-color: #ffffff;
+  .faqContainer {
+    background-color:white;
+   padding: 110px 0 0 0;
+   .Frequently-Asked-Que {
+     padding: 0 0 80px 0;
+     font-family: $font-medium;
+     font-size: 30px;
+     font-weight: 500;
+     font-style: normal;
+     font-stretch: normal;
+     line-height: normal;
+     letter-spacing: normal;
+     text-align: center;
+     color: #000000;
+   }
+   }
+  .AlwaysRememberParent{
+    padding: 80px 0 0 0;
+  }
+  .kitchenBannerImg {
+    width: 100%;
+    background-image: (274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+  .bannerkitchenss {
+    width: 100%;
+    background-image: (274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+  .exp-our-kitchen{
+
+    // padding: 185px 0 0;
+    .bigSofa {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .ourStores {
+      padding: 26px 43px 28px 43px;
+      width: 45%;
+      position: absolute;
+      background-color: white;
+      color: #000;
+      float: left;
+      left: 38px;
+      
+      text-align: center;
+      top: 57%;
+      transform: translateY(-50%);
+    }
+    .mainImg{
+      padding: 120px 0 0 0;
+      position: relative;
+     
+      .h3Css{
+        margin:0 0 10px 0;
+        font-size: 18px;
+        line-height: 18px;
+        font-family: CeraGodrejInterio-Regular;
+      }
+      .h2Css{
+      font-family:CeraGodrejInterio-Medium;
+      font-size: 30px;
+      line-height: 30px;
+      color:#000000;
+      margin:0;
+  }
+  
+ 
+    .storeButton{
+      margin:31px 0 0 0; 
+      color: #ffffff;
+      background-color: #000;  
+      padding:13px 45px; 
+      border:none;
+    }
+    .paragraphcss{
+      line-height: 20px;
+  
+      margin: 9px 0 0 0;
+      font-family: CeraGodrejInterio-Medium; 
+      font-size: 16px;
+      color:#000000;
+    }
+   
+  }
+  }
+  .ourprom{
+    padding: 100px 0 0 0;
+  }
+  .WardrowsBefits{
+    width:56%;
+    margin:0 auto;
+  }
+
+
+  .Rectangle {
+    width: 100%;
+    height: auto;
+    background-image: linear-gradient(276deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+  .containerKitchen {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .butt {
+    color:black;
+    width: 150px;
+    height: 30px;
+    background-color: #070707;
+  }
+  .header {
+    height: 60px;
+    font-family: CeraGodrejInterio;
+    font-size: 56px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+    color: #0f0c0c;
+  }
+  
+  .header .text-style-1 {
+    font-weight: normal;
+    color: #f9f9f9;
+  }
+  
+ 
+  .Steel-Chef {      
+    font-family: CeraGodrejInterio;
+    font-size: 20px;
+    font-weight: 500;    
+    line-height: 20px;   
+    color: #000000;
+  }
+  
+  .bannerkitchen {
+    width: 100%;
+    height: 410px;
+    background-image: linear-gradient(274deg, rgba(0, 0, 0, 0), rgba(15, 14, 14, 0.76));
+  }
+
+ 
+  
+
+  .Delivery-Installation2 {
+    width: 135px;
+    height: 144px;
+    object-fit: contain;
+    
+    
+  }
+  .Delivery-Installation3 {
+    width: 135px;
+    height: 135px;
+    object-fit: contain;
+    
+    
+  }
+  .Delivery-Installation4 {
+    width: 158px;
+    height: 104px;
+    object-fit: contain;
+    
+    
+  }
+  /*--css for stepper--*/
+  .body {
+    margin-top:40px;
+}
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+      // width: 885px;
+      height: 1px;
+      border: solid 2px var(--light-blue-grey);
+    
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    // z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+/*--stepper css over--*/
+
+.Ovals{
+  width: 48px;
+  height: 48px;
+  background-color: #026dc6;
+}
+
+.This-project-require {
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a
+}
+
+
+.What-goes-into-a-Godr {
+  padding:  0  0 40px 0;
+font-family: $font-medium;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+/*---slideshow--*/
+react-slideshow-container {
+   display: flex;
+     align-items: center;
+}
+.react-slideshow-fade-wrapper {
+     width: 100%;
+     overflow: hidden;
+}
+.react-slideshow-wrapper.slide {
+     width: 100%;
+     overflow: hidden;
+}
+.react-slideshow-zoom-wrapper {
+     width: 100%;
+     overflow: hidden
+}
+.goesOnKitchen {
+  margin: 0 auto;
+  width: 90%;  
+}
+.Name-Copy {
+  font-family: $font-bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+
+
+
+
+
+.Group-60 {
+  object-fit: contain;
+}
+.button_rect {
+  width: 124px;
+  height: 35px;
+  border-radius: 23.5px;
+  border: solid 1px var(--battleship-grey);
+  background-color: #ffffff;
+}
+.rectbut1 {
+  color: white;
+  width: 124px;
+  height: 35px;
+  border-radius: 23.5px;
+  background-color:#036cc5
+}
+.kitchenhallsize {
+  width: 95%;
+  height: auto;
+  // margin: 0 10px 0 0 ;
+
+}
+
+.Kitchen-Hall-Of-Fame {
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.crousdiv {
+  // width: 458px;
+  // height: 46px;
+  background-color: $iceBlue;
+  text-align: center;
+}
+.ParagraphStepper {
+  // width: 515px;
+  height: 108px;
+  font-family: CeraGodrejInterio;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+
+
+.Paragraph-Copy-13 {
+ 
+  font-family: $font-regular;
+  font-size: 14px;
+  // font-weight: 500;
+  font-style: normal;
+  color: $greyish;
+}
+.kitchensBannerLayout{
+  position: relative;
+  overflow: hidden;
+  .kitchensBannertext{
+    position: absolute;
+    bottom: 27%;
+    left: 6%;
+    .heading{
+      font-size: 56px;
+      color:#ffffff;
+      margin:0 0 10px 0;
+      line-height: 56px;
+    }
+    .subText{
+      font-size: 18px;
+      color:#ffffff;
+      font-family: $font-regular;
+      margin:0 0 28px 0;
+    }
+    .btn-book{
+      padding:13px 56px;
+      font-size: 14px;
+      color:#070707;
+      font-family: $font-medium;
+    }
+  }
+  .slick-prev{
+    left:1%;
+  }
+  .slick-next{
+    right:1%;
+  }
+}
+
+.CrousParagraph {
+  height: 103px;
+  font-family: CeraGodrejInterio;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.crousHead {
+  // width: 437px;
+  height: 36px;
+  font-family: CeraGodrejInterio;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.Naming {
+  height: 24px;
+  font-family: CeraGodrejInterio;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: black;
+  text-align: center;
+  
+}
+.Fullhalf {
+  // width: 1440px;
+  height: 600px;
+  background-color: rgba(20,20,20, .5);
+  opacity: 0.5;
+}
+.Group-24 {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+.promises {
+  height: 421px;
+  background-color: rgb(33, 33, 204);
+  margin-top: 50px
+}
+
+
+
+.aboutgodrej {
+  margin-top: 50px;
+  // width: 1440px;
+  height: 471px;
+  background-color: rgb(126, 126, 175)
+}
+.About-Godrej-Interio {
+  height: 41px;
+  font-family: CeraGodrejInterio;
+  font-size: 34px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+
+  .container {
+    position: relative;
+  }
+  .typesofkitch{
+    padding: 64px 0 0 0;
+    .steelchefmodal{
+      text-align: left;
+      .types-kitchens {
+        width:100%;
+        height: auto;
+        object-fit: contain;
+        
+      }
+      .heading{
+        color:#000;
+        font-size: 20px;
+        padding:16px 0 16px 0;
+        margin:0;
+        font-family: $font-medium;
+      }
+      .subText{
+        color:#4a4a4a;
+        font-size: 16px;
+        font-family: $font-regular;
+        line-height: 16px;
+        margin:0 0 24px 0;
+      }
+      .buttonExp{
+        color:#ffffff;
+        border:none;
+        padding: 13px;
+        background: #000;
+      }
+    }
+    .Types-of-Modular-Kit {
+      padding: 0 0 40px 0;
+      font-family: $font-medium;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+   
+  }
+  .beforeAfterSlides{
+    padding: 100px 0 0 0;
+  }
+  .modularKitches{  
+    background: #f7f8f8;   
+    padding:56px 0;
+    margin:80px 0 0 0;
+
+    .heading2{
+      font-size: 34px;
+      line-height: 34px;
+      color:#000000;
+      text-align: left;
+      margin:0 0 23px 0;
+      font-family: $font-medium;
+    }
+    .subText2{
+      font-size: 14px;
+      color:#767676;
+      font-family: $font-regular;
+      text-align: left;
+    }
+    .Read-More2{
+      float:left;
+      border:none;
+      background: transparent;
+      color:#000;
+      font-size: 16px;
+      text-decoration: underline;
+      font-family: $font-medium;
+      margin:14px 0 0 0;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+ .kitchenHallLayout{
+   padding: 110px 0 0 0;
+   .Paragraphhall{
+     color:$greyish;
+     font-family: $font-regular;
+     font-size: 16px;
+     line-height: 16px;
+     text-align: center;
+   }
+  }
+  .kitchenFaciliies{
+    padding: 0 0 0 0;
+  }
+  .easySteps {
+    padding: 102px 0 0 0;
+    .Delivery-Installation {
+      width: 162px;
+      height: 108px;
+      object-fit: contain;
+      
+      }
+      .stepwizard {
+        display: table;
+        width: 100%;
+        position: relative;
+    }
+    .-easy-steps-to-your {
+      padding: 0 0 40px 0;
+      font-family: $font-medium;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .body {
+      margin-top:40px;
+  }
+  .stepwizard-step p {
+      margin-top: 10px;
+  }
+  .stepwizard-row {
+      display: table-row;
+        width: 885px;
+        height: 1px;
+        border: solid 2px var(--light-blue-grey);
+      
+  }
+  // .stepwizard {
+  //     display: table;
+  //     width: 50%;
+  //     position: relative;
+  // }
+  .stepwizard-step button[disabled] {
+      opacity: 1 !important;
+      filter: alpha(opacity=100) !important;
+  }
+  .stepwizard-row:before {
+      top: 14px;
+      bottom: 0;
+      position: absolute;
+      content: " ";
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      // z-order: 0;
+  }
+  .stepwizard-step {
+      display: table-cell;
+      text-align: center;
+      position: relative;
+  }
+  .btn-circle {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 12px;
+      line-height: 1.428571429;
+      border-radius: 15px;
+  }
+   
+      .imgBox{
+        text-align: center;
+      }
+      .stepwizard{
+        width:100%;
+       
+       
+           
+      }
+      .stepCircle{
+        background: $cerulean;
+        color:$colorwhite;  
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        display: inline-block;
+    
+  }
+    
+  }
+  .whatgoesSlider{
+    padding: 122px 0 0 0;
+ }
+  .Ourpromise{
+    padding: 104px 0 0 0;
+  }
+
+
+
+  .kichenLayoutbanner{
+    width:100%;
+    background-color: #00b5a4;
+    .btn-bookBlog{
+      font-size: 14px;
+      color:white;
+      font-family: CeraGIMedium,sans-serif;
+      background-color:#000000;
+      }
+     
+      .textBox{
+        width:40%;
+        padding:60px 0;
+        text-align: center;
+        float: left;
+      }
+      .Image-gallery {
+        font-family: $font-regular;
+        font-size: 42px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.17;
+        letter-spacing: normal;
+        color: #ffffff;
+        
+      }
+   
+    
+    .imgBox{
+      float: left;
+      width:60%;
+      
+    }
+  
+
+  .kichenBlog{
+    width:100%;
+  }
+  }
+  
+
+}
+
+  
+ 

@@ -1,0 +1,311 @@
+@import '../variable';
+
+.hallOfFame {
+    
+    .title {
+        margin: 0; 
+        font-family: $font-medium;
+    }
+    .desc {
+        width: 40%;
+        margin: $base*2 auto $base*5 auto;
+    }
+    .desc,
+    .title {
+        text-align: center;
+    }
+    .slides {
+        text-decoration: none;
+    }
+    .info {
+        background-color: $iceColor;
+        padding: $base*1.5;
+        color: $greyish;
+        text-decoration: none;
+    }
+    .slick-initialized .slick-slide {
+        padding: 0 15px; 
+    }
+    .slick-next {
+        right: 10px;
+    }
+    .slick-prev {
+        right: 72px;
+        left: unset;
+    }
+    .slick-prev,
+    .slick-next {
+        top: unset;
+        bottom: -20%;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
+}
+
+.whatGoesArrow{
+    .slick-initialized .slick-slide {
+      padding: 0 15px;
+  }
+  .slick-next {
+      right: 70px;
+  }
+  .slick-prev {
+      right: 119px;
+      left: unset;
+  }
+  .slick-prev,
+  .slick-next {
+      top: unset;
+      bottom: -20%;
+  }
+  .slick-next::before,
+  .slick-prev::before {
+      font-size: 30px;
+      color: transparent;
+  }
+  }
+
+.goesOnKitchen {
+    .slick-prev {
+        left: -60px;
+    }
+    .slick-next {
+        right: -60px;;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
+    .slick-slider {
+        &:hover {
+          text-decoration: none !important;
+          outline: none !important;
+        }
+    }
+
+    .slick-slide {
+        &:focus, &:hover a {
+            text-decoration: none !important;
+            outline: none !important;
+        }
+    }
+}
+
+.faqContainer {
+    margin: $base*7.5 auto;
+    .panel-group {
+        width: 80%;
+        margin: auto;
+        .panel {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: none;
+            border-bottom: none;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+        }
+        .panel + .panel {
+            border: none;
+            border-bottom: none;
+        }
+        .panel-default > .panel-heading {
+            background-color: transparent !important;
+			border:none !important;
+        }
+        .panel-heading {
+            h4 {
+                a {
+                    color: $black;
+                    font-size: $base*2.5;
+                    text-decoration: none;
+                    font-family: $font-medium; 
+                }
+            }
+        }
+    }
+}   
+
+.beforeAfter {
+    margin: 120px auto;
+}
+
+.goesOnKitchen {
+    width: 100%;
+    padding-top: 30px;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-right: 0px;
+}
+
+.ourPromis {
+    width: 100%;
+}
+
+.formContainer {
+    position: relative;
+    width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+    margin: 0px auto;
+    .containerSetForm{
+        position: relative;
+        width:100%
+    }
+    .bgImg {
+        width: 100%;
+    }
+    .formDetails {
+        background: #fff;
+        padding: $base*2 $base*7 $base*2 $base*7;
+		margin-top: $base*-75;
+		margin-left: 5%;
+		width: 80%;
+		position: absolute;
+		margin-left: 10%;
+
+        .desc {
+            text-align: center;
+            margin: $base*1.5 0 $base*7.5;
+        }
+        .form-labeled {
+            color: $battleshipGrey;
+            font-family: $font-medium;
+            font-size: $base*1.75;
+        }
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: unset;
+            -webkit-box-shadow: unset;
+            box-shadow: unset;
+            -webkit-transition: unset;
+            -o-transition: unset;
+            -webkit-transition: unset;
+            transition: unset;
+            transition: unset;
+            height: $base*6.75;
+        }
+        .btn-submit {
+            border-radius: unset;
+            float: right;
+            padding: $base;
+            width: $base*25;
+            background-color: $black;
+            color: $colorwhite;  
+        }
+    }
+}
+.whatGoesContainer{
+    padding: 60px 0 0 0;
+    .Materials-and-Finish {
+      padding: 30px 0 0 0;
+      font-family: $font-regular;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      color: #77787a
+    }
+    .whatGoesPara {
+      font-family:  $font-regular;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      color:#4a4a4a
+    }
+    .goesOnKitchen {
+      height: 563px;
+      object-fit: contain;
+    }
+    .AccessoriesText {
+      font-family: $font-medium;
+      font-size: 20px;
+      font-weight: bold;
+      font-style: normal;
+      line-height: normal;
+      color: #036cc5;
+      margin: 80px 0 0 0;
+    }
+    .What-goes-into-a-Mod {
+      height: 36px;
+      font-family: CeraGodrejInterio;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000000;
+    }
+    .whatgoessubhead {
+      text-align: center;
+      font-family:  $font-regular;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      color:#4a4a4a
+    }
+  }
+@media screen and (min-width: 768px){
+    .kitchenEspots {
+        margin: 60px auto;
+    }
+}
+
+@media screen and (max-width: 1024px){     
+    .kitchenEspots {
+        margin: 35px auto;
+    }
+	.formContainer{
+		.formDetails {
+			background: #fff;
+			padding: 10px;
+			margin: 0px;
+			margin: -111px auto 0px auto;
+			width: 90%;
+			position: relative;
+	
+		}
+	}
+	
+	.easySteps .step-wizard-step {
+		position: relative;
+		height: 115px;
+	}
+	
+	.hallOfFame .desc {
+		width: 80%;
+		margin: 16px auto 40px auto;
+	}
+	
+	.hallOfFame {
+		.slick-prev,
+		.slick-next {
+			top: unset;
+			bottom: -55%;
+		}
+	}
+	
+	.easySteps .progressBar {
+		margin: 0;
+		padding-bottom: 25px;
+	}
+	
+	.steelBefits {
+		width: 45% !important;
+		margin: 2px!important;
+		float: left;
+		/* height: 400px; */
+	}
+		
+	.WardrowsBefits {
+		width: 45%!important;
+		margin: 2px!important;
+		float: left;
+	}
+}

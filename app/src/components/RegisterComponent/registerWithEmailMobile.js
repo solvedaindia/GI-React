@@ -3,14 +3,17 @@ import { Button, Form, FormGroup, Row, Col, Label } from 'react-bootstrap';
 import {
   registartionAPI,
   generateOTPAPI,
-  accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/registerComponent/registerComponent.scss';
+import '../../../public/styles/compWidget.scss';
+import ProgressButton from '../Button/progressButton'
 import {
   regexEmail,
   regexMobileNo,
   validateEmptyObject,
   regexPw,
+  validateFullName,
+  regexName
 } from '../../utils/validationManager';
 import {
   registerWithEmail,
@@ -18,7 +21,11 @@ import {
   registerWithEmailText,
   registerWithMobileNumText,
 } from './constants';
-import RegisterThumbnailImg from '../../../public/images/register_thumbnail.png';
+import appCookie from '../../utils/cookie';
+import {isMobile} from '../../utils/utilityManager';
+import ContentEspot from '../../components/Primitives/staticContent';
+import WhiteLogo from '../SVGs/whiteLogo';
+import {JOIN_US,FULL_NAME, LOGIN, EMAIL_ADD, YOU_AGREE,T_C, MOBILE_NUMBER,ALREADY_HAVE_PASSWORD, REGISTER, FIELDREQ_MSG, NAME_VALIDATION_MSG, VALIDEMAIL_MSG, MOBILE_MSG, PASSWORD_MIN_VALIDATION_MSG, PASSWORD_MAX_VALIDATION_MSG} from '../../constants/app/primitivesConstants';
 
 class RegisterWithEmailMobile extends React.Component {
   constructor(props) {
@@ -32,7 +39,10 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessagePassword: null,
       isShowPass: false,
       inputType: 'password',
-    };
+      isActive: 'hideData',
+      isProcessing:false
+	};
+	this.callbackFunc = this.callbackFunc.bind(this);
   }
 
   componentDidMount() {
@@ -40,14 +50,20 @@ class RegisterWithEmailMobile extends React.Component {
       this.setState({
         name: this.props.userdata.name,
         userId: this.props.userdata.user_id,
-        password: this.props.userdata.password,
+		password: ''
       });
     }
   }
 
   /* Handle Change */
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const passVal = document.getElementById('password').value;
+    let activeClass = 'hideData';
+    if (passVal.length > 0) {
+      activeClass = 'showData';
+    }
+
+    this.setState({ [e.target.name]: e.target.value, isActive: activeClass});
   };
 
   /* Handle Validation */
@@ -59,17 +75,22 @@ class RegisterWithEmailMobile extends React.Component {
       errorMessageUserId: null,
       errorMessagePassword: null,
     });
-
+    
     if (!validateEmptyObject(obj.name)) {
       this.setState({
-        errorMessageName: 'This field is required',
+        errorMessageName: FIELDREQ_MSG,
       });
       isValidate = false;
-    }
+	} else if (!validateFullName(obj.name) || !(regexName.test(obj.name))) {
+		this.setState({
+		  errorMessageName: NAME_VALIDATION_MSG,
+		});
+		isValidate = false;
+	}
 
     if (!validateEmptyObject(obj.userId)) {
       this.setState({
-        errorMessageUserId: 'The field is required',
+        errorMessageUserId: FIELDREQ_MSG,
       });
       isValidate = false;
     } else if (
@@ -77,7 +98,7 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.registrationType !== registerWithMobileNum
     ) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Email Id',
+        errorMessageUserId: VALIDEMAIL_MSG,
       });
       isValidate = false;
     } else if (
@@ -85,54 +106,67 @@ class RegisterWithEmailMobile extends React.Component {
       this.props.registrationType === registerWithMobileNum
     ) {
       this.setState({
-        errorMessageUserId: 'Please enter valid Mobile number',
+        errorMessageUserId: MOBILE_MSG,
       });
       isValidate = false;
     }
-
+    
     if (!validateEmptyObject(obj.password)) {
       this.setState({
-        errorMessagePassword: 'The field is required',
+        errorMessagePassword: FIELDREQ_MSG,
       });
       isValidate = false;
-    } else if (!regexPw.test(obj.password)) {
+    } else if (!regexPw.test(obj.password) && obj.password.length < 25) {
       this.setState({
         errorMessagePassword:
-          'Invalid Password. Password should have min 6 characters and atleast 1 number',
+          PASSWORD_MIN_VALIDATION_MSG,
       });
       isValidate = false;
-    }
+    } else if ((!regexPw.test(obj.password) && obj.password.length > 24) || obj.password.length > 25) {
+		this.setState({
+		  errorMessagePassword:
+			PASSWORD_MAX_VALIDATION_MSG,
+		});
+		isValidate = false;
+	  }
     return isValidate;
+  }
+
+  copyPaste = e => {
+    e.preventDefault();
   }
 
   /* Handle Submit */
   handleSubmit = e => {
+    if(e!=null)
     e.preventDefault();
+   
     const isValidate = this.handleValidation(this.state, true);
 
-    if (isValidate === false) {
+    if (isValidate === false || this.state.isProcessing===true) {
       return false;
     }
-
+    this.setState({isProcessing:true});
     const data = {
       name: this.state.name,
       user_id: this.state.userId,
       password: this.state.password,
+      pincode: appCookie.get('pincode'),
     };
 
     if (this.props.registrationType === registerWithEmail) {
       this.props.handleApi(
         registartionAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		    this.props.registrationType,
+		    this.callbackFunc
       );
     } else {
       this.props.handleApi(
         generateOTPAPI,
         data,
-        accessToken,
-        this.props.registrationType,
+		    this.props.registrationType,
+		    this.callbackFunc
       );
     }
   };
@@ -155,8 +189,30 @@ class RegisterWithEmailMobile extends React.Component {
     }
   }
 
+  callbackFunc(errorMsg) {
+  if (errorMsg === 'userid and password cannot be same') {
+	this.setState({
+    errorMessagePassword: errorMsg,
+    isProcessing:false
+	});
+
+  } else {
+	this.setState({
+    errorMessageUserId: errorMsg,
+    isProcessing:false
+	});
+  }
+  }
+
+
   renderLoginComponent() {
     this.props.loginComponentData();
+  }
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.handleSubmit();
+    }
   }
 
   render() {
@@ -185,25 +241,29 @@ class RegisterWithEmailMobile extends React.Component {
       <div>
         <Row>
           <Col xs={12} md={5} className="no-padding">
-            <div className="Thumbnailbox">
-              <img className="imgfullwidth" src={RegisterThumbnailImg} />
-            </div>
+            {!isMobile () ? (<div className="Thumbnailbox">
+				{<ContentEspot espotName = { 'GI_REGISTER' } />}
+            </div>):(<div className="reg-join-Us">
+              <WhiteLogo width="100" height="33" />
+              <h3 className="joinus-heading">{JOIN_US}</h3>
+            </div>)}
           </Col>
 
           <Col xs={12} md={7}>
             <div className="form_register">
-              <h3 className="heading">{headerText}</h3>
+            {!isMobile () &&<h3 className="heading">{headerText}</h3>}
               <div>
-                <Form>
+                <Form >
                   <FormGroup>
                     <div className="form-div clearfix">
-                      <Label>FULL NAME</Label>
+                      <Label>{FULL_NAME}</Label>
                       <input
                         type="text"
                         name="name"
                         className="form-control"
                         placeholder="Please Enter Full Name"
                         onChange={this.handleChange}
+                        onKeyPress={this.onKeyPress}
                         value={this.state.name}
                       />
                       {errorMessageName}
@@ -212,13 +272,14 @@ class RegisterWithEmailMobile extends React.Component {
                   <FormGroup>
                     {this.props.registrationType === registerWithEmail ? (
                       <div>
-                        <Label className="label">EMAIL ADDRESS</Label>
+                        <Label className="label">{EMAIL_ADD}</Label>
                         <div className="form-div clearfix">
                           <input
                             type="email"
                             name="userId"
                             className="form-control"
                             placeholder="Please Enter Email Address"
+                            onKeyPress={this.onKeyPress}
                             onChange={this.handleChange}
                           />
                           {errorMessageUserId}
@@ -226,7 +287,7 @@ class RegisterWithEmailMobile extends React.Component {
                       </div>
                     ) : (
                       <div>
-                        <Label className="label">Mobile Number</Label>
+                        <Label className="label">{MOBILE_NUMBER}</Label>
                         <div className="form-div clearfix">
                           <input
                             type="mobile"
@@ -235,6 +296,8 @@ class RegisterWithEmailMobile extends React.Component {
                             placeholder="Please Enter Mobile Number"
                             onChange={this.handleChange}
                             value={this.state.userId}
+                            onKeyPress={this.onKeyPress}
+                            maxlength="10"
                           />
                           {errorMessageUserId}
                         </div>
@@ -247,18 +310,22 @@ class RegisterWithEmailMobile extends React.Component {
                       <div className="form-div clearfix">
                         <input
                           type={this.state.inputType}
+                          onPaste={this.copyPaste}
                           name="password"
+                          id="password"
                           className="form-control"
                           placeholder="Please Enter Your Password"
                           onChange={this.handleChange}
+                          onKeyPress={this.onKeyPress}
                           value={this.state.password}
                         />
                         <span
                           onClick={this.showHidePass.bind(this)}
-                          className="valiationPosition-NewPassword"
+                          className={`valiationPosition-NewPassword ${this.state.isActive}`}
                         >
                           {
                             <img
+                              alt='show'
                               src={require('../../../src/components/SVGs/eye.svg')}
                             />
                           }
@@ -269,29 +336,44 @@ class RegisterWithEmailMobile extends React.Component {
                     </div>
                   </FormGroup>
                   <FormGroup>
-                    <Button
+                    
+                    {/* <Button
                       onClick={this.handleSubmit}
                       className="btn-block btn-bg"
-                    >
-                      SIGN UP
-                    </Button>
+                      >
+                      {this.state.isProcessing?<ul className="loadingdots-on-button-container">
+                          <li>{REGISTER}</li>
+                          <li> <div className="loadingdots-on-button">
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            <div className="loadingdots-on-button--dot"></div>
+                            </div>
+                          </li>
+                      </ul>:REGISTER }
+                      
+                    </Button> */}
+                          
+                    <ProgressButton isProcessing = {this.state.isProcessing} title={REGISTER} onClickEvent={this.handleSubmit} styleClassName = "btn-block btn-bg"/>
+                   
+                          
+                    
+                    
                     <p className="have-account">
-                      Have an account?{' '}
+                   {ALREADY_HAVE_PASSWORD + ' '}
                       <a
                         className="login"
                         role="button"
                         onClick={this.renderLoginComponent.bind(this)}
                       >
-                        Login
+                        {LOGIN}
                       </a>
                     </p>
                     <p className="sign_text">
-                      By signing up you agree to our{' '}
+                    {YOU_AGREE + ' '}
                       <a className="link" href="">
-                        T&C
+                       {T_C}
                       </a>{' '}
                     </p>
-                    {/* </p> */}
                   </FormGroup>
                 </Form>
               </div>

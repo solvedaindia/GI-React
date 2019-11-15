@@ -1,15 +1,31 @@
 @import '../variable';
-
+.rightSide > li.user.icons{
+    display: inline-flex;
+    padding: 20px 0;
+}
 .rightSide {
     margin-bottom: 0;
     .icons {
+        &:first-child{
+            margin:0;
+        }
+        &:last-child{
+            margin-right:0;
+            margin-left:0;
+            vertical-align: sub;
+            margin-top: 4px;
+        }
         display: inline-block;
         cursor: pointer;
         position: relative;
+        margin: 0 23px 0 22px;
+        svg{
+            margin: 0;
+        }
         .wishListCount {
             position: absolute;
             top: -6px;
-            right: 0;
+            right: -6px;
             background:$reddishPink;
             width: 16px;
             height: 16px;
@@ -23,6 +39,16 @@
             align-items: center;
             justify-content: center;
             font-family: $font-bold;
+        }
+        .welcomeDropDown{
+            .userList{               
+                .listItem{
+                    // height: $base*5.5;
+                    &.listItemUnSelected {
+                        // height: $base*4.25;
+                    }
+                }
+            }
         }
     }
 }

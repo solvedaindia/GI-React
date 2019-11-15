@@ -1,5 +1,7 @@
-const filter = require('./filter');
-
+const imageFilter = require('./imagefilter');
+const rbgRegex = /(\(\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
+const priceRegex = /\B(?=(\d{3})+(?!\d))/g;
+const numberPattern = /\d+/g;
 /**
  * Filter Product List Data.
  * @return Product List with Facet Data
@@ -9,41 +11,74 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
   const facetData = [];
   if (facetViewData && facetViewData.length > 0) {
     facetViewData.forEach(facet => {
-      const eachFacetValue = {
-        facetName: facet.name,
-        facetValues: [],
-      };
-      if (facet.entry && facet.entry.length > 0) {
-        facet.entry.forEach(facetValue => {
-          const facetEntry = {
-            label: facetValue.label,
-            value: facetValue.value,
-            count: Number(facetValue.count),
-            facetImage: facetValue.image || '',
-          };
-          if (facet.value === 'parentCatgroup_id_search') {
-            facetEntry.value = `${facet.value}:${catalogID}_${
-              facetValue.value
-            }`;
-          } else {
-            facetEntry.value = facetValue.value;
-          }
+      if (facet.name !== 'ParentCatalogGroup') {
+        const eachFacetValue = {
+          facetName: facet.name,
+          facetValues: [],
+        };
+        if (facet.name === 'ParentCatalogGroup') {
+          eachFacetValue.facetName = 'Category';
+        }
+        if (facet.name.includes('OfferPrice_INR')) {
+          eachFacetValue.facetName = 'Price';
+        }
+        if (facet.name === 'percentOff') {
+          eachFacetValue.facetName = 'Offer';
+        }
 
-          eachFacetValue.facetValues.push(facetEntry);
-        });
+        if (facet.entry && facet.entry.length > 0) {
+          for (let i = 0; i < facet.entry.length; i += 1) {
+            const facetValue = facet.entry[i];
+            const facetEntry = {
+              label: facetValue.label,
+              count: Number(facetValue.count),
+            };
+            if (facet.name.includes('OfferPrice_INR') && facetValue.label) {
+              const priceRange = facetValue.label
+                .replace('*', 0)
+                .match(numberPattern);
+              if (priceRange[1] === '0') {
+                facetEntry.label = `Above ₹${formatPrice(priceRange[0])}`;
+              } else {
+                facetEntry.label = `₹${formatPrice(
+                  priceRange[0],
+                )} to ₹${formatPrice(priceRange[1])}`;
+              }
+            }
+            if (
+              facet.value === 'parentCatgroup_id_search' &&
+              !facetValue.extendedData.parentIds
+            ) {
+              // eslint-disable-next-line no-continue
+              continue;
+            }
+            if (facet.value === 'parentCatgroup_id_search') {
+              facetEntry.value = `${facet.value}:${catalogID}_${
+                facetValue.value
+              }`;
+            } else {
+              facetEntry.value = facetValue.value;
+            }
+            if (facetValue.image) {
+              const facetImageArray = facetValue.image.split('/');
+              const facetImageArrayLength = facetImageArray.length;
+              if (rbgRegex.test(facetImageArray[facetImageArrayLength - 1])) {
+                facetEntry.colorCode =
+                  facetImageArray[facetImageArray.length - 1];
+              } else {
+                facetEntry.facetImage = imageFilter.getImagePath(
+                  facetValue.image,
+                );
+              }
+            }
+            eachFacetValue.facetValues.push(facetEntry);
+          }
+        }
+        facetData.push(eachFacetValue);
       }
-      facetData.push(eachFacetValue);
     });
   }
   return facetData;
-};
-
-/**
- * Filter Product List Data.
- * @return Product List
- */
-module.exports.productList = function getProductList(catalogEntryView) {
-  return catalogEntryView;
 };
 
 /**
@@ -60,132 +95,26 @@ module.exports.productIDs = function getProductIDs(catalogEntryView) {
   return productID;
 };
 
-/**
- * Filter Product List Data.
- * @return Product List with Swatches Data Included
- */
-module.exports.productListWithSwatch = function productListWithSwatches(
-  catalogEntryView,
-) {
-  const productArray = []; // Product List
-  if (catalogEntryView && catalogEntryView.length > 0) {
-    catalogEntryView.forEach(catalogItem => {
-      /* Each Product Detail */
-      const productDetailJson = {
-        hasSwatches: true,
-        swatchData: [],
-      };
-      const swatchArray = [];
-      /* if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
-        catalogItem.sKUs.forEach(skuData => {
-          const skuJSON = filter.filterData('productdetail_summary', skuData);
-          swatchArray.push(skuJSON); // Push Item Bean Data in Swatch Array
-        });
-        productDetailJson.swatchData = swatchArray;
-      } */
-
-      if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
-        const skuArray = catalogItem.sKUs;
-        const dafaultSKU = getDefaultSKUData(skuArray);
-        const index = skuArray.indexOf(dafaultSKU);
-        if (index >= 0) {
-          skuArray.splice(index, 1); // Remove Default SKU from Sku Array
-        }
-
-        const defaultSKUDetail = filter.filterData(
-          'productdetail_summary',
-          dafaultSKU,
-        );
-        const fixedAttribute = defaultSKUDetail.fixedAttributes;
-        swatchArray.push(defaultSKUDetail);
-
-        const resolvedSKUArray = resolveSKU(skuArray, fixedAttribute); // Resolved SKUs
-
-        if (resolvedSKUArray && resolvedSKUArray.length > 0) {
-          resolvedSKUArray.forEach(skuData => {
-            swatchArray.push(skuData);
-          });
-        }
-        productDetailJson.swatchData = swatchArray;
+module.exports.getBreadCrumbData = function getBreadCrumbData(breadcrumb) {
+  let breadcrumbData = {};
+  const breadcrumbDataArray = [];
+  if (breadcrumb && breadcrumb.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    breadcrumbData = breadcrumb[0];
+    for (let index = 0; index < breadcrumb.length; index += 1) {
+      if (breadcrumb[index]['0'].label.toLowerCase() === 'rooms') {
+        breadcrumbData = breadcrumb[index];
+        break;
       }
-      productArray.push(productDetailJson);
-    });
+    }
   }
-  return productArray;
-};
-
-/**
- * Filter Product List Data.
- * @return Product List without Swatches Data
- */
-module.exports.productListWithoutSwatch = function productListWithoutSwatches(
-  catalogEntryView,
-) {
-  const productArray = []; // Product List
-  if (catalogEntryView && catalogEntryView.length > 0) {
-    catalogEntryView.forEach(catalogItem => {
-      if (catalogItem.sKUs && catalogItem.sKUs.length > 0) {
-        catalogItem.sKUs.forEach(skuData => {
-          const itemBean = filter.filterData('productdetail_summary', skuData);
-          delete itemBean.primaryColor;
-          delete itemBean.fixedAttributes;
-          // itemBean.hasSwatches = false;
-          productArray.push(itemBean); // Push Item Bean Data in Product Array
-        });
-      }
-    });
-  }
-  return productArray;
-};
-
-function getDefaultSKUData(skuArray) {
-  let defaultSKU = skuArray[0];
-  /*  for (let i = 0; i < skuArray.length; i += 1) {
-          let temp = false;
-          for (let j = 0; j < skuArray[i].attributes.length; j += 1) {
-            if (
-              skuArray[i].attributes[j].identifier === 'defaultSKU' &&
-              skuArray[i].attributes[j].values[0].value === 'true'
-            ) {
-              dafaultSKU =  skuArray[i];
-              
-              temp = true;
-              break;
-            }
-          }
-          if (temp === true) {
-            break;
-          }
-        } */
-  skuArray.forEach(skuData => {
-    skuData.attributes.forEach(attributeData => {
-      if (
-        attributeData.identifier === 'defaultSKU' &&
-        attributeData.values[0].value === 'true'
-      ) {
-        defaultSKU = skuData;
-      }
-    });
+  const keys = Object.keys(breadcrumbData);
+  keys.forEach(key => {
+    breadcrumbDataArray.push(breadcrumbData[key]);
   });
-  return defaultSKU;
-}
+  return breadcrumbDataArray;
+};
 
-function resolveSKU(skuData, attribute) {
-  const resolvedSKUArray = [];
-  if (skuData && skuData.length > 0) {
-    skuData.forEach(eachSKU => {
-      const skuDetail = filter.filterData('productdetail_summary', eachSKU);
-      const keys = Object.keys(attribute);
-      let temp = true;
-      keys.forEach(key => {
-        if (attribute[key] !== skuDetail.fixedAttributes[key]) {
-          temp = false;
-        }
-      });
-      if (temp === true) {
-        resolvedSKUArray.push(skuDetail);
-      }
-    });
-  }
-  return resolvedSKUArray;
+function formatPrice(priceValue) {
+  return priceValue.toString().replace(priceRegex, ',');
 }

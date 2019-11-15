@@ -1,0 +1,650 @@
+@import '../base';
+	
+	.staticpage 
+	{
+		h1, h2, h3, h4 {
+			font-family:CeraGIMedium,sans-serif;
+			color:#000;
+		}
+		
+		p, span, a {
+			font-family:CeraGIRegular,sans-serif;			
+		}
+		
+		.topParagraph{
+			text-align:center;
+		}
+		.slick-next:before, 
+		.slick-prev:before {
+			font-size: 32px;
+			line-height: unset;
+			opacity: unset;
+			color: unset;
+		}
+	}
+
+	.privacy-Policy {
+		.privacy-heading {
+			color: #222222
+		}
+	}
+	.staticpage h1
+	{
+		padding-top:20px;
+		font-size:30px;
+		font-weight:500;
+		text-align: center;
+		padding-bottom:20px;
+	}
+	
+	.paddingBottom{
+		padding-bottom:15px;
+	}
+	
+	.staticpage h2
+	{
+		padding-top:40px; 
+		font-size:30px;
+		font-weight:500;
+		margin:0;
+		color:#000;
+		padding-bottom:20px;
+	}
+	
+	.staticpage h3
+	{
+		padding-top:10px;
+		font-size:28px;
+		font-weight:normal;
+		margin:0;
+		padding-bottom:10px;
+	}
+	
+	.staticpage h4
+	{
+		padding-top:10px;
+		font-size:19px;
+		font-weight:normal;
+		color:#777;
+		margin:0;
+		padding-bottom:10px;
+	}
+	
+	.staticpage h5
+	{
+		padding-top:10px;
+		font-size:20px;
+		font-weight:normal;
+		color:black;
+		margin:0;
+		padding-bottom:10px;
+	}
+	
+	.staticpage p {
+		font-size:14px;
+		line-height: 1.43;	
+	}
+	
+	.staticpage .whitep {
+		color: #fff;
+	}
+	
+	.staticpage .text
+	{
+		color:#77787a;
+		font-size:14px;
+		line-height:14px;
+		margin: 0px;
+	}
+
+
+	.staticpage img {
+		width:100%;
+	}
+	
+	.staticpage ol {
+		padding-left:30px;
+	}
+
+	.staticpage .WhiteButton {
+		margin: 25px 0 0 0;
+		color: #000;
+		background-color: #fff;
+		padding: 13px 45px;
+		border: none;
+		font-size: 14px;
+		font-family: CeraGIMedium, sans-serif;
+		margin-bottom: 20px;
+	}
+		
+	.ProcessNumber
+	{
+		padding-right: 35px;
+		background-color: #fff;
+		text-align: center;
+		font-size: 30px;
+		color: #d1d1d2;
+		margin-top: -5px;
+		font-weight: 600;
+		line-height: 30px;
+		border:none;
+		&:focus{
+			outline: 0;
+			box-shadow: none !important;
+          }
+	}
+
+	.staticpage .active
+	{
+		color: black;
+		outline: 0;
+		box-shadow: none !important;
+	}
+	
+	.arrowNumber{
+	margin-top: 15px;
+    background-color: white;
+    border: 0;
+	}
+	
+	.GI_CONTACT_US_CUSTOMER_CARE  img {
+		width:25px!important;
+		height:25px!important;
+	}
+
+	.GI_KITCHEN_LAYOUTS {
+		padding-top:30px;
+	}
+	
+	.GI_MEDIA_PRESS{
+		padding-bottom:30px;
+	}
+
+	.tab-content > .active {
+    display: block;
+    opacity: 1;
+	}
+
+	.staticpage .nav {
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		float: left;
+		width: 20%;
+	}
+
+	.staticpage .nav-link {
+		width: 100%;
+		display: block;
+		padding: 10px;
+	}
+	.staticpage .nav-link .active {
+		color:blue;
+	}
+	
+	.staticpage #v-pills-tabContent {
+		 float:left;
+		 width:78%;
+	}
+	
+	.staticpage .sliderDesc{
+		text-align:center;
+		font-size: 15px;
+		font-weight: 500px;
+		color: black;
+		font-weight: normal;
+	}
+	
+	.staticpage .sliderHeading {
+		font-size: 20px;
+		text-align: center;
+	}
+	
+	.staticpage .title{
+		padding-bottom:10px;
+		margin-bottom:10px;
+	}
+
+	#ourProcess {
+		margin-bottom: 20px;
+	}
+
+	#careers {
+		margin-top: 45px;
+	}
+	
+	#greenInitiatives {
+		margin-bottom: 20px;
+    	margin-top: 20px;
+		.container {
+			.slick-slider {
+				background: #f2f5f7;
+    			padding-bottom: 20px;
+    			padding-top: 20px;
+			}
+		}
+	}
+
+	.chefKitchen {
+		.shutterNavHeading {
+			padding: 10px;
+			color: #000000;
+			font-weight: 800;
+			font-size: 14px;
+			margin-top: 30px;
+			margin-bottom: 5px;
+		}
+		.descriptionBanner {
+			padding: 56px 0;
+			margin: 80px 0 0 0;
+			.heading {
+				font-size: 34px;
+				line-height: 34px;
+				color: #000;
+				text-align: left;
+				margin: 0 0 23px 0;
+				font-family: CeraGIMedium, sans-serif;
+			}
+		}
+	}
+	.willowKitchen {
+		.shutterNavHeading {
+			padding: 10px;
+			color: #000000;
+			font-weight: 800;
+			font-size: 14px;
+			margin-top: 30px;
+			margin-bottom: 5px;
+		}
+		.descriptionBanner {
+			padding: 56px 0;
+			margin: 80px 0 0 0;
+			.heading {
+				font-size: 34px;
+				line-height: 34px;
+				color: #000;
+				text-align: left;
+				margin: 0 0 23px 0;
+				font-family: CeraGIMedium, sans-serif;
+			}
+		}
+	}
+
+@media (max-width: 1024px) 
+{	
+	.sliderHeading {
+		text-align: left;
+	}
+
+	.sliderDesc {
+		text-align: left;
+	}
+
+	#ourProcess {
+		margin-bottom: 0px;
+	}
+
+	#careers {
+		margin-top: 0px;
+	}
+	
+	#greenInitiatives {
+		margin-bottom: 0px;
+    	margin-top: 0px;
+		.container {
+			.slick-slider {
+				background: #f2f5f7;
+    			padding-bottom: 0px;
+    			padding-top: 0px;
+			}
+		}
+	}
+
+	.staticpage {
+		.sliderDesc {
+			text-align: center;
+		}
+	}
+
+	.aboutUs {
+     padding-right: 0px!important;
+     margin-right: 0%!important;
+	}
+
+  .staticpage .support-faq-menu {
+	display:none;
+  }
+  .staticpage .support-faq {
+	width:95% !important;
+  }
+  .staticpage .nav {
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		float: left;
+		width: 100%;
+	}
+	
+	.staticpage #v-pills-tabContent {
+		 float:left;
+		 width:100%;
+	}
+	
+	.staticpage .nav .col-sm-2{
+          width:100% ;
+    }
+	.staticpage .kitchen-faq {
+		width:100% !important;
+		padding: 20px 0px 0px 0px !important;
+	}
+	
+	.staticpage .panel-group {
+     padding: 5px 0 0 0 !important;
+	}
+	.staticpage .container {
+		position: relative;
+		width: 95%;
+	}
+	
+	.easySteps .step-wizard-step {
+		position: relative;
+		// height: 205px !important;
+	}
+
+	.goesOnKitchen .slick-prev {
+		left: -50px!important;
+	}
+
+	.goesOnKitchen .slick-next {
+		right: -50px!important;
+	}
+
+	.staticpage .faq-h4 {
+		font-size: 14px!important;
+		font-weight:600px;
+	}
+	
+	.ProcessNumber {
+		padding-right: 61px;
+		font-size: 19px;
+	}
+	#careers{
+		padding-top: 30px;
+	}
+	
+	.typesofkitchen a {
+	    color: black;
+		size: 14px;
+		font-weight: 600;
+	}
+}
+
+@media (max-width: 415px) {
+	.ProcessNumber {
+		padding-right: 24px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100% !important;
+	}
+	.staticpage .nav {
+		width: 100% !important;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 220px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 20px !important;
+		}
+	}
+}
+
+@media (max-width: 375px) {
+	.ProcessNumber {
+		padding-right: 18px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 220px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 20px !important;
+		}
+	}
+}
+
+@media (max-width: 580px)
+{
+	// .ProcessNumber {
+	// 	padding-right: 23px;
+	// }
+	.goesOnKitchen {
+		.title {
+			font-size: 17px;
+			text-align: left;
+		}
+		.sliderDesc {
+			text-align: left;
+			padding-right: 27px;
+		}
+		.slick-slide {
+			margin-right: 8px;
+		} 
+		.sliderHeading {
+			text-align: left;
+		}		
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+}
+
+
+@media (max-width: 321px) {
+	.ProcessNumber {
+		padding-right: 14px;
+	}
+	.sliderHeading {
+		text-align: left;
+	}
+	.sliderDesc {
+		text-align: left;
+	}
+	.staticpage #v-pills-tabContent {
+		width: 100%;
+	}
+	.staticpage .nav {
+		width: 100%;
+	}
+	.formContainer .formDetails .btn-submit {
+		width: 100% !important;
+	}
+	.easySteps {
+		.step-wizard-step {
+			// height: 205px !important;
+		}
+		.steps-separator {
+			text-align: center !important;
+		}
+		.stepCircle {
+			top: -20px !important;
+			left: 0px !important;
+		}
+		.steps-separator {
+			// min-height: 15px !important;
+		}
+	}
+}
+
+@media (max-width: 769px) and (orientation: portrait)  {
+	.staticpage{
+		.sliderDesc {
+			text-align: left;
+			padding-right: 27px;
+		}
+	}
+	.staticpage {
+		.sliderHeading {
+			text-align: left;
+		}
+	}	
+	.staticpage #v-pills-tabContent {
+		width: 78%;
+	}
+	.staticpage .nav {
+		width: 20%;
+	}	
+}
+
+@media (max-width: 769px)  {
+	.goesOnKitchen {
+		.title {
+			font-size: 19px;
+			text-align: left;
+		}
+		.slick-slide {
+			margin-right: 10px;
+		}
+	}
+	
+	
+
+    .serviceSupport {
+		.faq-heading {
+		  padding-bottom: 0px;
+		  padding-top: 0px;
+		  margin-top: 0px;
+		  margin-bottom: 0px;
+		  text-align: left;
+		  font-size: 16.9px;
+		  line-height: 13.5px;
+		  font-weight: 600;
+		}
+	  }
+}
+
+// @media screen and (min-width: 767px) and (min-width: 1024px) and (orientation: landscape) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
+		
+// 		.imgBox {
+// 			text-align: center !important;
+// 			// width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }
+
+// @media screen and (min-width: 767px) and (max-width: 1024px) and (orientation: portrait) {
+// 	.easySteps {
+// 		.step-wizard-step {
+// 			position: relative !important;
+// 			height: 350px !important;
+// 		}
+// 		.steps-separator {
+// 			text-align: center !important;
+// 			width: 70% !important;
+//     		clear: both !important;
+// 			position: relative !important;
+// 			margin-top: 20px !important;
+// 			margin-right: 30px !important;
+// 			text-align: center !important;
+// 			min-height: 39px !important;
+// 		}
+// 		.stepCircle {
+// 			top: -20px !important;
+// 			left: 0px !important;
+// 			width: 48px !important;
+// 			height: 48px !important;
+// 			position: absolute !important;
+// 			background: #036cc5 !important;
+// 			color: #fff !important;
+// 			text-align: center !important;
+// 			padding: 10px 0 !important;
+// 			font-size: 20px !important;
+// 			border-radius: 24px !important;
+// 			display: inline-block !important;
+// 			line-height: 25px !important;
+// 		}
+		
+// 		.imgBox {
+// 			text-align: center !important;
+// 			width: 75% !important;
+// 			justify-content: center;
+// 			display: flex;
+// 		}
+// 	}
+// }

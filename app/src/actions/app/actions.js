@@ -2,7 +2,7 @@
  * App Actions
  *
  * Actions change things in your application
- * Since this urban.ladder uses a uni-directional data flow, specifically redux,
+ * Since this GI uses a uni-directional data flow, specifically redux,
  * we have these actions which are the only way your application interacts with
  * your application state. This guarantees that your state is up to date and nobody
  * messes it up weirdly somewhere.
@@ -15,8 +15,18 @@
  *    }
  */
 
- import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, WISH_LIST_COUNT, UPDATE_MINICART } from '../../constants/app/constants';
-
+import {
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+  WISH_LIST_COUNT,
+  UPDATE_MINICART,
+  RESET_REMOVEWISHLISTFLAG,
+  UPDATE_PROFILE,
+  RESET_RWDHEADER,
+  SHAREWISHLISTURL_RWD,
+  UPDATED_RWD_HEADER,
+} from '../../constants/app/constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -67,9 +77,43 @@ export function updatetWishListCount(count) {
 }
 
 export function updatetMinicart(count) {
-  console.log('Its updated MiniCart')
   return {
     type: UPDATE_MINICART,
     count,
+  };
+}
+
+export function resetRemoveFromWishlistFlag(flag) {
+  return {
+    type: RESET_REMOVEWISHLISTFLAG,
+    flag,
+  };
+}
+
+export function updateUserProfile(userName) {
+  return {
+    type: UPDATE_PROFILE,
+    userName,
+  };
+}
+
+export function resetRWDHeaderFlag(flag) {
+  return {
+    type: RESET_RWDHEADER,
+    flag,
+  };
+}
+
+export function rwdShareWishlistURL(url) {
+  return {
+    type: SHAREWISHLISTURL_RWD,
+    url,
+  };
+}
+
+export function updateTheRWDHeader(data) {
+  return {
+    type: UPDATED_RWD_HEADER,
+    data,
   };
 }

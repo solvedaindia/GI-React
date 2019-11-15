@@ -1,0 +1,359 @@
+@import '../variable';
+@import '../base';
+.inspiration {
+    width: 100%;
+    height: auto;
+    background-color: $colorwhite;
+    .inspirationSlider{
+      .slick-prev {
+        left: -30px;
+    }
+    .slick-next {
+        right: -30px;;
+    }
+    .slick-next::before,
+    .slick-prev::before {
+        font-size: 30px;
+        color: transparent;
+    }
+      .slick-slide{
+        .sliderImageSize{
+          width: 126px;
+          border-radius: 100%;
+          height: 126px;   
+        }        
+      }
+      .slick-slider{
+        .slick-list{
+         width: 89%;
+         margin: 0 auto;
+       }
+     }
+      .slick-list{        
+        .slick-track{
+          .slick-slide{
+            margin: 0 1.4% 0 1.4%;
+          }
+        }
+      
+    }
+    }
+   
+    .lookcrouse{
+	  padding: 60px 0 0 0;
+	  width: 84.3%;
+	  margin: auto;
+      .crusealHead{
+        font-family: $font-medium;
+        font-size: 20px;
+        text-align: center;
+    }
+    .themeSlider {
+      .themeSlides {
+        margin: 0 $base*3;
+      }
+    }
+	  .slick-prev {
+		  left: 0;
+	  }
+	  .slick-next {
+		  right: 0;
+	  }
+    }
+    .summersparkcontainer{
+      padding:121px 0 0 0;
+      .Paragraph {
+        height: 72px;
+        font-family: $font-medium;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: $black;
+      }
+      .RectImg {
+        width: 100%;
+        .Summer-Spark {
+          height: 28px;
+          font-family: $font-medium;
+          font-size: 20px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.4;
+          letter-spacing: normal;
+          color: $black;
+        }
+      }
+    }
+    .inpspirationBanner{
+      position: relative;
+      overflow: hidden;
+      .inspBannertext{
+        position:absolute;
+        top:30%;
+        left:6%;
+        .heading{
+          font-size: 56px;
+          color:#ffffff;
+          margin:0 0 10px 0;
+          line-height: 56px;
+        }
+        .subText{
+          font-size: 18px;
+          color:#ffffff;
+          font-family: $font-medium;
+          margin:0 0 28px 0;
+        }
+        .btn-book{
+          padding:13px 56px;
+          font-size: 14px;
+          color:#070707;
+          font-family: $font-medium;
+        }
+      }
+      .slick-prev{
+        left:1%;
+      }
+      .slick-next{
+        right:1%;
+      }
+    }
+
+    .title {
+      height: 36px;
+      font-family: $font-medium;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $black;
+      margin-bottom: $base*4;
+    }
+    .Oval-Copy-6 {
+      width: 100%;
+      border-radius: 50%;
+    }
+    .Contemporary {
+      width: 137px;
+      height: 24px;
+      font-family: $font-regular;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $black;
+    }
+    .bigSofa {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .text-block {
+      position: absolute;
+      top: 51%;
+      left: 43%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, .4);
+      color: white;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .container {
+      position: relative;
+    }
+    
+    .UUs-with-tagline-1 {
+      // width: 140px;
+      height: 62px;
+      object-fit: contain;
+    }
+    .image-gallery-Copy-3 {
+      height: 36px;
+      font-family: $font-regular;
+      font-size: 30px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color:$black;
+    }
+    .A-one-stop-shop-inte {
+      height: 40px;
+      font-family: $font-regular;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.25;
+      letter-spacing: normal;
+      text-align: center;
+      color: $black;
+    }
+    .seeMore {
+      width: 150px;
+      height: 30px;
+      background-color: #070707;
+    }
+    .headerText {
+      // width: 699px;
+      height: 128px;
+      font-family: $font-regular;
+      font-size: 56px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.14;
+      letter-spacing: normal;
+      color:blue;
+      position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    
+    .header-text-style-1 {
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .headerView {
+      width: 200px;
+      height: 46px;
+      background-color: #ffffff;
+    }
+  
+  }
+
+
+
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1281px) {
+   
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+  /* 
+  #Global Screen Chhange for Screen max 768
+  */
+  @media screen and (min-width: 768px){
+    .inspiration {
+      .uuscontainer{
+        padding: 0 0 120px 0;
+      }
+    }
+  }
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+}
+
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+
+/* 
+  #Global Screen Chhange for Screen max 767
+*/
+@media screen and (max-width: 767px){      
+  .inspiration {
+    .inpspirationBanner{
+      .fsBanner{
+        margin-top:0px;
+      }
+    }
+    .summersparkcontainer{
+      .container{
+        .Summer-Spark{
+          font-family: $font-medium;
+          font-size: 16px;
+          color: $black;
+          margin: 20px 0px 8px 0px;
+        }
+        .Paragraph{
+          height: initial;
+          font-family: $font-regular;
+          font-size: 12px;
+          color: $black;
+          padding-bottom: 15px;
+        }
+      }
+    }
+    .lookcrouse {
+      padding: 0;
+      .browse-theme{
+        padding: 0px 10px;
+      }
+      .themeSlider {
+        .themeSlides {
+          margin: 0 $base;
+        }
+      }
+    }
+    .title {
+      margin: $base*5 0 $base*2;
+      font-size: $base*2;
+      height: initial; 
+    }
+    .summersparkcontainer{
+      padding: $base*7.25 0 0 0;
+    }
+    .uuscontainer{
+      padding: 0 0 40px 0;
+    }
+  }
+}
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+  
+}
+
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  
+  
+}

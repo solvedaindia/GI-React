@@ -22,11 +22,11 @@ class Category extends React.Component {
     apiManager
       .get(navigationApi)
       .then(response => {
+        const {data} = response || {};
         this.setState({
-          category: response.data.data.categoryArray,
+          category: data && data.data.categoryArray,
           isLoading: false,
         });
-        console.log('Category Navigation Data', response.data.data);
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
@@ -35,30 +35,30 @@ class Category extends React.Component {
     this.getHeaderLayer2();
   }
 
-    render() {
-        const { category = [] } = this.state;
-        return (
-            <div className='category'>
-                <ul className='categoryList'>
-                    {!!category && category.map((categoryData, index) => {
-                            return (
-                                <li className='listItems' key={`category-${index}`}>
-									<a className='action' href={categoryData.onClickUrl}>
-										{categoryData.categoryName}
-									</a>
-                                    {!!categoryData.subCategoryArray && <SubCategoriesData
-                                        subCategoryArray={categoryData.subCategoryArray}
-                                    />}
-								</li>
-                            );
-                        })
-                    }
-                </ul>
-                <SearchBar />
-                <HeaderRight />
-            </div>
-        );
-    }
-}  
+  render() {
+    const { category = [] } = this.state;
+    return (
+      <div className="category">
+        <ul className="categoryList">
+          {!!category &&
+            category.map((categoryData, index) => (
+              <li className='listItems' key={`category-${index}`}>
+                <a className='action' href={categoryData.onClickUrl}>
+                  {categoryData.categoryName}
+                </a>
+                {!!categoryData.subCategoryArray && <SubCategoriesData
+                  subCategoryArray={categoryData.subCategoryArray}
+                  categoryNamePro={categoryData.categoryIdentifier}
+                />}
+              </li>
+            )
+            )}
+        </ul>
+        <SearchBar />
+        <HeaderRight />
+      </div>
+    );
+  }
+}
 
 export default Category;
