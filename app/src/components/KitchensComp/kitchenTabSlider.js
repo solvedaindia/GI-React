@@ -73,7 +73,7 @@ class KitchenConfiguration extends React.Component {
    const{ configurationTabing, currentIndex } =this.state;
 
 
-  const tabs =configurationTabing.map((tabData,index)=>{
+  const tabs =!!configurationTabing && configurationTabing.map((tabData,index)=>{
       return(
       
         <li >

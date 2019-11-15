@@ -67,11 +67,12 @@ class WillowKitchenConfiguration extends React.Component {
       autoplaySpeed: 2000,
       slidesToShow: 1,
       slidesToScroll:2,
+      adaptiveHeight: true,
     };
    const{ configurationTabing, currentIndex } =this.state;
   //  if (currentIndex != -1)
   //  console.log('sahir', configurationTabing[currentIndex].bannerList)
-  const tabs =configurationTabing.map((tabData, index) =>{
+  const tabs = !!configurationTabing && configurationTabing.map((tabData, index) =>{
     return(
 
       <li >
