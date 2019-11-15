@@ -27,7 +27,7 @@ process.on('uncaughtException', err => {
 });
 
 const app = express();
-if(process.env.WCSENDPOINT === 'LOCAL' || process.env.WCSENDPOINT === 'SIT' || process.env.WCSENDPOINT === 'UAT'){
+if(process.env.WCSENDPOINT === 'LOCAL' || process.env.WCSENDPOINT === 'DEV' || process.env.WCSENDPOINT === 'SIT' || process.env.WCSENDPOINT === 'UAT'){
   app.use(
     cors({
       origin: '*',
