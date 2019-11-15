@@ -6,6 +6,7 @@ import WillowKitchenBanner from '../../components/KitchensComp/willowKitchenbann
 import { Helmet } from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
+import AboutWillowKitchen from '../../components/KitchensComp/aboutWillowKitchen';
 import { BOOK_CONSULTATION, KITCHEN_CONSULT } from '../../constants/app/primitivesConstants';
 import '../../../public/styles/static-pages/consultForm.scss';
 import ConsultationForm from '../../components/Primitives/ConsultForm';
@@ -26,7 +27,9 @@ export default class WillowKitchens extends React.Component {
 					</Helmet>
 					<WillowKitchenBanner />
 					<ContentEspot espotName={'GI_MODULAR_WILLOW_KITCHEN_BENEFITS'} />
-					<WillowKitchenConfiguration />
+					<div className="willow-configuration">
+						<WillowKitchenConfiguration/>
+					</div>
 					<ContentEspot espotName={'GI_WILLOW_KITCHEN_SHUTTERS'} />
 					<ContentEspot espotName={'GI_WILLOW_KITCHEN_ACCESSORIES'} />
 					<div className="formContainer">
@@ -39,8 +42,8 @@ export default class WillowKitchens extends React.Component {
 					</div>
 					<ContentEspot espotName={'GI_WILLOW_KITCHEN_FAQ'} />
 					<ExKitchens />
-
-					<ContentEspot espotName={'GI_MODULAR_KITCHEN_INTERIOR_WILLOW'} />
+					<AboutWillowKitchen />
+					{/* <ContentEspot espotName={'GI_MODULAR_KITCHEN_INTERIOR_WILLOW'} /> */}
 
 					<ContentEspot espotName={'GI_MODULAR_KITCHEN_10'} />
 					<ContentEspot espotName={'GI_MODULAR_KITCHEN_11'} />
