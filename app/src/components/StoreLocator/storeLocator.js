@@ -195,6 +195,10 @@ class StoreLocator extends React.Component {
         this.removeActiveClassFromFilter();
         document.getElementById(id).classList.add("active");
 
+        
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
+
         for (let i = 0; i < this.state.allstoreData.data.length; i++) {
             if (this.state.allstoreData.data[i].type.indexOf(storeType) !== -1) {
                 filterArr.push(this.state.allstoreData.data[i]);
@@ -350,6 +354,10 @@ class StoreLocator extends React.Component {
             } else {
                 this.getStoreDataFromPincode(lat, lng);
             }
+            
+            this.lastOpenWindow=null;
+            this.lastIndex=-1;
+
         }, error => {
             let getStringVal = '';
             if (this.props.history.location.state.storeName) {
@@ -437,6 +445,8 @@ class StoreLocator extends React.Component {
     }
 
     handleCliked(filterRecord) {
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
         this.setState({
             filteredSingleStore: filterRecord
         })
