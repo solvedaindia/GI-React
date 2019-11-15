@@ -1,35 +1,33 @@
 pipeline {
   environment {
-    registry = "sudhakardvps/godrej_nodejs"
-    registryCredential = 'dockerhub'
+    registry = "sitgintsolr2.godrej.com:5000/react-nodejs"
+    registryCredential = 'registry'
     dockerImage = ''
   }
   agent any
   stages {
-    stage('Cloning Git') {
+    stage('Cloning svn') {
       steps {
-        git 'https://github.com/solvedaindia/GI-React.git'
+	   checkout scm
       }
     }
     stage('Building image') {
       steps{
-        script {
-          dockerImage = docker.build registry + ":0.0.1"
+		  echo 'Starting to build docker image'
+		  
+        script {		
+          dockerImage = docker.build registry + ":${nodereact_buildtag}"
+		  echo "Build number is :::: ${nodereact_buildtag}"
         }
       }
     }
   stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
+          withDockerRegistry(credentialsId: 'registry', url: 'http://sitgintsolr2.godrej.com:5000/react-nodejs') {
             dockerImage.push()
           }
         }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:0.0.1"
       }
     }
   }

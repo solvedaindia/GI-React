@@ -1,10 +1,7 @@
-FROM node:10.15.3-slim
-RUN mkdir -p /app/server
-WORKDIR /app/server
-COPY package*.json ./
-#USER node
+FROM node:10.15.3
+RUN mkdir -p /app
+WORKDIR /app
+COPY package.json /app
 RUN npm install
-# Bundle app source
-COPY . /app/server
-EXPOSE 5000
-CMD npm start
+COPY . /app
+CMD [ "npm", "run", "start"]
