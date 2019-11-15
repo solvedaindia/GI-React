@@ -102,7 +102,7 @@ function plpContainerReducer(state = initialState, action) {
             state = initialState;
             return {
                 sortingValue: 0,
-                adBannerPos: 12,
+                adBannerPos: isMobile() ? 8 : 12,
                 staticAdBannerPos: 0,
                 columnLayout: 3,
                 adBannerCurrentIndex: 0,

@@ -6,6 +6,7 @@
 
 import { DEFAULT_ACTION } from './constants';
 import * as actionTypes from './constants';
+import {isMobile} from '../../utils/utilityManager';
 
 export function defaultAction() {
     return {
@@ -73,8 +74,14 @@ export const updateInitialValues = coloumn => {
     let bannerPos;
     if (coloumn === 3) {
         bannerPos = 12;
+        if(isMobile()){
+            bannerPos = 8;
+        }
     } else {
         bannerPos = 8;
+        if(isMobile()){
+            bannerPos = 4;
+        }
     }
 
     return {

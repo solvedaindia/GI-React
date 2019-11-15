@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet'
 import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
+import '../../../public/styles/plpContainer/plpContainer.scss';
 
 
 import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
@@ -217,6 +218,12 @@ class StoreLocator extends React.Component {
     /* handle store search */
     handleStoreSearch() {
         this.removeActiveClassFromFilter();
+        this.setState({
+            storeData:null,
+            isLoading: true,
+            showFilter: false,
+            searchStoreType: null,
+        })
         if (this.inputRef) {
             const val = this.inputRef.value;
             if (!val) return;
@@ -447,7 +454,12 @@ class StoreLocator extends React.Component {
         this.handleStoreSearch();
         }
     }
-
+    showLoader() {
+        const idid = <div className="lazyloading-Indicator">
+          <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+        </div>
+        return idid;
+      }
     render() {
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
@@ -520,7 +532,8 @@ class StoreLocator extends React.Component {
                             </ul>
                         </div>
                     }
-                    {!storeData &&
+                    {!storeData && this.state.isLoading && this.showLoader()}
+                    {!storeData && !this.state.isLoading &&
                         <div className='storeTypes'>
                             <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                             <>
