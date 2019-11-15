@@ -22,6 +22,11 @@
   .back-btn{
     text-align: center;
     padding: 44px 0px 20px 0px;
+    .go-back{
+      font-size: $base*1.75;
+      color:$cerulean;
+      font-family: $font-medium;
+    }
   }
 }
 

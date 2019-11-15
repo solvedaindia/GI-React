@@ -187,6 +187,7 @@
   //CSS
 }
 
+
 /* 
   #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
 */
@@ -262,6 +263,11 @@
   }
 }
 
+@media(min-width:1024px){
+  .delete-modal .modal-dialog .modal-content .modalwrapper .actionBtnWrapper .btn{
+    padding:12px 45px;
+  }
+}
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
 */

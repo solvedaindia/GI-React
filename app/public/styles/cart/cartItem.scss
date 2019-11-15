@@ -645,6 +645,21 @@
     }
 }
 
+@media(min-width:1024px){
+    .cartDetails{
+        .orderSummary{
+            .summary{
+               .emiInfo{
+                   .emiMsg{
+                    width:62%;
+                    line-height: 21px;
+                   }
+               }
+            }
+
+        }
+    } 
+}
   /* 
     #Global Screen Chhange for Screen max 992
   */
