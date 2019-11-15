@@ -30,9 +30,7 @@ export class CheckoutContainer extends React.Component {
         <>
          <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_START' } />
          <div>
-         <Helmet>
 					<Pixels espotName= {'GI_PIXEL_CHECKOUT_META'}/>
-				</Helmet>
           <CheckoutComponent />
         </div>
         <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_END' } />

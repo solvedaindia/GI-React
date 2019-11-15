@@ -630,16 +630,14 @@ export class PlpContainer extends React.Component {
     return (
       <>
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
-        <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
+          <Pixels
+          description={this.state.categoryDetail.metaDescription}
+          title={this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle} 
+          
+          />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
-
-          <title>{this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle}</title>
-          <meta name="description" content={this.state.categoryDetail.metaDescription} />
-          <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
-        </Helmet>
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}

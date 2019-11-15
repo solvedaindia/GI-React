@@ -66,12 +66,12 @@ export class CLPContainer extends React.Component {
          <section className="clpBase">
 		{this.state.categoryDetails ? 
 		(<>
-			<Helmet>
-			 <Pixels espotName= {'GI_PIXEL_CLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}/>
-			 <title>{this.state.categoryDetails.pageTitle}</title>            
-			 <meta name="description" content={this.state.categoryDetails.metaDescription} />
-			 <meta name="keywords" content={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription} />
-			</Helmet>
+       <Pixels 
+       espotName= {'GI_PIXEL_CLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}
+       title={this.state.categoryDetails.pageTitle}
+       description={this.state.categoryDetails.metaDescription}
+       kewords={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription}
+       />
 		 </>
 		):null}
 		   

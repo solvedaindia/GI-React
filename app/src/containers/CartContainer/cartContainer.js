@@ -134,9 +134,7 @@ class CartDetail extends React.Component {
         <>
      <ContentEspot espotName = { 'GI_PIXEL_CART_BODY_START' } />
   <section className='cartDetails'>
-    <Helmet>
       <Pixels espotName= {'GI_PIXEL_CART_META'}/>
-    </Helmet>
     <div className='cartItem'>
       <div className='cartHeadDetails'>
         {!isMobile() ? <h2 className='title'>{YOUR_CART}<span className='cartCount'>{cartData.cartTotalItems} {ITEMS}</span>

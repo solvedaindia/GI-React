@@ -21,9 +21,9 @@ export default class WillowKitchens extends React.Component {
 			<>
 				<ContentEspot espotName={'GI_PIXEL_WILLOW_KITCHEN_BODY_START'} />
 				<div className="staticpage willowKitchen">
-					<Helmet>
+					
 						<Pixels espotName={'GI_PIXEL_WILLOW_KITCHEN_META'} />
-					</Helmet>
+					
 					<WillowKitchenBanner />
 					<ContentEspot espotName={'GI_MODULAR_WILLOW_KITCHEN_BENEFITS'} />
 					<WillowKitchenConfiguration />
