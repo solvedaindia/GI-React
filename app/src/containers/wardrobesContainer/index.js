@@ -36,9 +36,9 @@ export class WardrobeContainer extends React.Component {
       <>
         <ContentEspot espotName = { 'GI_PIXEL_WARDROBES_BODY_START' } />
         <section className="staticpage wardrobesContainer">
-        <Helmet>
+        
 			<Pixels espotName= {'GI_PIXEL_WARDROBES_META'}/>
-		</Helmet>
+		
 			<Breadcrumb {...this.props.match.params} staticName = {'Wardrobe Collections'}/>
             <WardrobeBanner />
 			<ContentEspot espotName = { 'GI_Wardrobes_Benefit_Modular' } />

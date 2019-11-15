@@ -496,12 +496,7 @@ class StoreLocator extends React.Component {
             <>
         <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_START' } />
          <Fragment>
-         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
-				</Helmet>
-                <Helmet>
-                    <title>{pageTitle}</title>
-                </Helmet>
+					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'} title={pageTitle}/>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>

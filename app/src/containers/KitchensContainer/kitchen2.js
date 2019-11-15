@@ -62,9 +62,9 @@ return (
   <>
     <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
     <div className="staticpage chefKitchen">
-		<Helmet>
-			<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
-		</Helmet>
+		
+			<Pixels espotName= {'GI_PIXEL_CHEF_KITCHEN_META'}/>
+		
 		  <ChefKitchenBanner />
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
 		  <div className="steel-chef-configuration">
