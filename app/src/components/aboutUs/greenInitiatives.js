@@ -50,26 +50,30 @@ export default class GreenInitiatives extends Component {
     dots: false,
     infinite: true,
     speed: 500,
+    autoplay: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
     adaptiveHeight: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
           dots: false,
+          arrows: false,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           dots: false,
+          arrows: false,
         },
       },
       {
@@ -78,6 +82,7 @@ export default class GreenInitiatives extends Component {
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: false,
+          arrows: false,
         },
       },
     ],
@@ -89,7 +94,7 @@ export default class GreenInitiatives extends Component {
 			  {this.state.slides.map(function(slide) {
 				return (
 				  <div key={slide}>               
-					  <div className='col-md-2'>
+					  <div className='col-md-2 greenInitiativeImageDiv'>
 						<a href={slide.onClickUrl} >
 						  <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
 						</a>
