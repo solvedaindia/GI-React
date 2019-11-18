@@ -27,7 +27,7 @@ class GuestTrackOrder extends React.Component {
   handleInputChange(text) {
     this.setState({
       error: false,
-      inputText: text.target.value,
+      inputText: text.target.value.replace(/[^0-9]/g, ''),
     });
   }
 
@@ -61,9 +61,7 @@ class GuestTrackOrder extends React.Component {
   {
     if(event.key === 'Enter'){
       this.submitBtnClicked();
-    } else if (event.key === '/' || event.key === '\\'){
-     event.preventDefault()
-    }
+    } 
   }
 
 
