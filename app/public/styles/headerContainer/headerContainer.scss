@@ -126,3 +126,15 @@ header {
         width: 100%;
     }
 }
+
+@include mix-md-ipad {
+    .listItems {
+        &:hover{
+            .catNav {
+               animation: none;
+            }
+        }
+
+    }
+    
+}
