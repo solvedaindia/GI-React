@@ -6,6 +6,7 @@ import PdpComponent from '../../components/PdpComponent/PdpComponent';
 import appCookie from '../../utils/cookie';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import PDPMeta from './pdpMeta';
+import Pixels from '../../components/Primitives/pixels';
 
 class PdpContainer extends React.Component {
   constructor() {
@@ -82,11 +83,12 @@ class PdpContainer extends React.Component {
 
   render() {
   const { pdp, title} = this.state;
+  console.log('pdp title --- ',title);
   return (
 		<>
 		
-		{!!pdp && 
-			<PDPMeta
+    {!!pdp && 
+			<Pixels
 				keywords={!!pdp.data.keywords && pdp.data.keywords} 
 				description={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].metaDescription : ''}
 				title={title}

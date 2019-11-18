@@ -493,7 +493,7 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
               return;
             }
             results.forEach(element => {
-              if (element !== null && element.promoCode !== 'null') {
+              if (element !== null && element.promoCode && element.promoCode !== 'null') {
                 promoData.push({
                   promocode: element.promoCode,
                   description: element.description,

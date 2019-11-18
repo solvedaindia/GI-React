@@ -5,6 +5,7 @@ import  '../../../public/styles/staticPages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import ChefKitchenBanner from '../../components/KitchensComp/chefKitchenBanner';
 import ExKitchens from '../../components/KitchensComp/expKitchens';
+import AboutSteelChefKitchen from '../../components/KitchensComp/aboutSteelChefKitchen';
 import '../../../public/styles/static-pages/consultForm.scss';
 import {Helmet} from "react-helmet";
 import Pixels from '../../components/Primitives/pixels';
@@ -61,9 +62,9 @@ return (
   <>
     <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
     <div className="staticpage chefKitchen">
-		<Helmet>
-			<Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
-		</Helmet>
+		
+			<Pixels espotName= {'GI_PIXEL_CHEF_KITCHEN_META'}/>
+		
 		  <ChefKitchenBanner />
 		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_BENEFITS' } />
 		  <div className="steel-chef-configuration">
@@ -82,7 +83,8 @@ return (
 		  </div>
 		  <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
 		  <ExKitchens />
-		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } />
+		  <AboutSteelChefKitchen />
+		  {/* <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } /> */}
 		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
 		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
     </div>

@@ -17,6 +17,7 @@ class SubCategoriesArray extends React.Component {
     super(props);
     this.state = {
       subCatImg: null,
+      menuHidden:true
     };
     this.compLeft = {};
     this.setRef = this.setRef.bind(this);
@@ -29,6 +30,10 @@ class SubCategoriesArray extends React.Component {
 
   onLinkNavigation = () => {
     this.props.plpReduxStateReset();
+    this.setState({menuHidden:false});
+    setTimeout(function() { 
+      this.setState({menuHidden:true}) 
+    }.bind(this), 500)
   }
 
   render() {
@@ -36,7 +41,7 @@ class SubCategoriesArray extends React.Component {
     const catClass =
       this.props.subCategoryArray.length > 6 ? 'catLongList' : 'catList';
     return (
-      <div className='catNav' ref={this.setRef} >
+      <div className={this.state.menuHidden?'catNav':'catNavToggle'} ref={this.setRef} >
         {!!subCatImg && <div className='subCatImage' style={this.compLeft}>
           <img src={`${imagePrefix}${subCatImg}`} className='subCatImg' alt='Sub Cat Img' />
         </div>}

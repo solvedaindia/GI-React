@@ -267,6 +267,10 @@ section.tablecarousel {
               padding: 5px;
               border-radius: 100%;
             }
+            .swatches-circle-img {
+              display: block;
+              border-radius: 100%;
+            }
           }
 
           .active {
@@ -284,6 +288,18 @@ section.tablecarousel {
           display: block;
           padding: 3px 0 0 0;
           font-size: $base*1.75;
+          &:focus{
+            outline: none;
+          }
+        }
+        .moreSwatchForMobile{
+          border: none;
+          background: transparent;
+          color:$battleshipGrey;         
+          float: right;
+          display: block;
+          padding: 3px 0 0 0;
+          font-size: $base*1.4;
           &:focus{
             outline: none;
           }
@@ -1084,6 +1100,16 @@ section.tablecarousel {
               width: 24px;
               height: 24px;
             }
+            .swatches-circle-img {
+              width: 24px;
+              height: 24px;
+              .imgCircle{
+                display: block;
+                width:24px;
+                height: 24px;            
+                border-radius: 100%;
+              }
+            }
           } 
         }
       }
@@ -1234,15 +1260,28 @@ section.tablecarousel {
         }
       } 
       .hoverBox{
-        padding:5px 20px;
+        padding:5px 10px;
         .btn-compare{
           display:none;
         }
         ul.colortheme{
           .list{
+            
             .swatches-circle{
-              width: 13px;
-              height: 13px;
+              width: 12px;
+              height: 12px;
+              
+            }
+            .swatches-circle-img{
+              width: 12px;
+              height: 12px;
+              .imgCircle{
+                display: block;
+                width:12px;
+                height: 12px;            
+                border-radius: 100%;
+                //vertical-align: baseline;
+              }
             }
           } 
         } 

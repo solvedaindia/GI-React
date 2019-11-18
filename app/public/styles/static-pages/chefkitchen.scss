@@ -40,6 +40,7 @@
 .steel-chef-configuration .container {
 	background-color: #f7f8f8;
 }
+
 .notSelected{
   letter-spacing: -0.26px;
   padding: 20px 0 0 0;
@@ -445,6 +446,20 @@
     display: flex;
     justify-content: center;
   }
+  .willow-configuration .container {
+    background-color: #f7f8f8;
+    .slick-slider {
+      padding-left: 5%;
+      padding-right: 5%;
+      .slick-prev {
+        left: -10px;
+      }
+      .slick-next {
+        right: -10px;
+      }
+    }
+  }
+  
 }
 
 .configurationTab
@@ -498,12 +513,23 @@
     }
   }
   .willowKitchen{
+
+    .willow-configuration{
+      .container {
+        .slick-slider{
+          .slick-prev,.slick-next {
+            display: none !important;
+          }
+
+        }
+      
+    }  
     .willowBenefitContainerDiv {
       display: block;
     }
   }
 }
  
-
+}
   
   

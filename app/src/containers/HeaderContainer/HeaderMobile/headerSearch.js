@@ -87,9 +87,6 @@ export class HeaderSearch extends React.Component {
         this.onLinkNavigation(this.state.inputText);
       }
       else{
-        //this.props.history.push({ pathname: '/search', search: `keyword=${formateSearchKeyword(text, true)}` });
-        //this.onLinkNavigation(this.state.inputText);
-       // Keyboard.dismiss();
         event.preventDefault();
       }
     }
@@ -99,8 +96,8 @@ export class HeaderSearch extends React.Component {
     if (this.state.categorySearchData.length !== 0) {
       var catSuggestionItem = this.state.categorySearchData.map((item, index) => {
         const searchItem = document.getElementById("searchInput").value;
-        if(searchItem.includes == '\\'){
-          return;
+        if(searchItem.includes('\\')){
+          return 
         }
         var routePath = createCategoryPlpURL(item.categoryIdentifier);
         // this condition added from search.js

@@ -111,6 +111,7 @@ export class CompContainer extends React.Component {
   }
   clearAll() {
     appCookie.set('compareProduct', '', 365 * 24 * 60 * 60 * 1000);
+    appCookie.set('compareProductTemp', '', 365 * 24 * 60 * 60 * 1000);
     this.props.removeAll();
   }
 

@@ -4,6 +4,7 @@ import  '../../../public/styles/static-pages/privacyPolicy.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import Pixels from '../../components/Primitives/pixels';
 
 export class PrivacyPolicy extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export class PrivacyPolicy extends React.Component {
   render() {
     return (
       <div className='staticpages privacy-Policy'>
+      <Pixels espotName={'GI_PIXEL_POLICY_META'} />
 		  <Breadcrumb {...this.props.match.params} staticName = {'Privacy Policy'}/>
           <ContentEspot espotName={ 'GI_Privacy_Policy_Information' } />
           <ContentEspot espotName={ 'GI_Privacy_Policy_ThirdParty_Information' } />

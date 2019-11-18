@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet'
 import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
+import '../../../public/styles/plpContainer/plpContainer.scss';
 
 
 import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
@@ -195,6 +196,10 @@ class StoreLocator extends React.Component {
         this.removeActiveClassFromFilter();
         document.getElementById(id).classList.add("active");
 
+        
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
+
         for (let i = 0; i < this.state.allstoreData.data.length; i++) {
             if (this.state.allstoreData.data[i].type.indexOf(storeType) !== -1) {
                 filterArr.push(this.state.allstoreData.data[i]);
@@ -217,6 +222,12 @@ class StoreLocator extends React.Component {
     /* handle store search */
     handleStoreSearch() {
         this.removeActiveClassFromFilter();
+        this.setState({
+            storeData:null,
+            isLoading: true,
+            showFilter: false,
+            searchStoreType: null,
+        })
         if (this.inputRef) {
             const val = this.inputRef.value;
             if (!val) return;
@@ -350,6 +361,10 @@ class StoreLocator extends React.Component {
             } else {
                 this.getStoreDataFromPincode(lat, lng);
             }
+            
+            this.lastOpenWindow=null;
+            this.lastIndex=-1;
+
         }, error => {
             let getStringVal = '';
             if (this.props.history.location.state.storeName) {
@@ -437,6 +452,8 @@ class StoreLocator extends React.Component {
     }
 
     handleCliked(filterRecord) {
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
         this.setState({
             filteredSingleStore: filterRecord
         })
@@ -447,7 +464,12 @@ class StoreLocator extends React.Component {
         this.handleStoreSearch();
         }
     }
-
+    showLoader() {
+        const idid = <div className="lazyloading-Indicator">
+          <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+        </div>
+        return idid;
+      }
     render() {
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
@@ -474,12 +496,7 @@ class StoreLocator extends React.Component {
             <>
         <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_START' } />
          <Fragment>
-         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
-				</Helmet>
-                <Helmet>
-                    <title>{pageTitle}</title>
-                </Helmet>
+					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'} title={pageTitle}/>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
@@ -520,7 +537,8 @@ class StoreLocator extends React.Component {
                             </ul>
                         </div>
                     }
-                    {!storeData &&
+                    {!storeData && this.state.isLoading && this.showLoader()}
+                    {!storeData && !this.state.isLoading &&
                         <div className='storeTypes'>
                             <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                             <>
