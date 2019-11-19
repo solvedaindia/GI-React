@@ -291,6 +291,7 @@ export default class App extends React.Component {
 
   render() 
   {
+    //alert("first launch")
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
