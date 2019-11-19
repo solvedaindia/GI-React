@@ -67,7 +67,6 @@ export class CLPContainer extends React.Component {
 		{this.state.categoryDetails ? 
 		(<>
        <Pixels 
-       espotName= {'GI_PIXEL_CLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}
        title={this.state.categoryDetails.pageTitle}
        description={this.state.categoryDetails.metaDescription}
        kewords={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription}
