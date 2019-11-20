@@ -261,9 +261,9 @@ class WelcomeBack extends React.Component {
     }
     //onMouseMove={this.trackMouseMovement}
     return (
-      <div id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
+      <div  id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
 
-        <Modal
+        <Modal style={{background:'rgba(0, 0, 0, 0.5)', zIndex:'2147483648'}}
           ref={this.windowModelRef}
           className="welcomeBack"
           size="lg"

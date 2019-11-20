@@ -68,6 +68,9 @@ h4{font-weight: bold}
     font-family:$font-bold;
     text-align: center;
 }
+figure{
+  outline: 0px solid transparent;
+}
     /***-------Comman Modal css---------***/
     .modal.in{
         flex-direction: column;
