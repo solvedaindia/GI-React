@@ -28,7 +28,7 @@ class SubCategoriesArray extends React.Component {
   }
 
 
-  onLinkNavigation = () => {
+  onLinkNavigation = () => { 
     this.props.plpReduxStateReset();
     this.setState({menuHidden:false});
     setTimeout(function() { 

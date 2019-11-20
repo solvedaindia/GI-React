@@ -25,7 +25,7 @@
     }
     .mob-mini-profile-nav {
       margin-bottom: 0px;
-      margin-top: 10px;
+      margin-top: 13px;     
     }
 
     .shareBtn {
@@ -102,7 +102,7 @@
     }
     .searchBarHeader {
       #autoSuggestDiv {
-        top: 99px;
+        top: 90px;
       }
     }
   }
@@ -290,6 +290,7 @@
     z-index: 915;
   }
 }
+
 @media  (max-width: 600px) {
   .sideNavigation {
     .usernameTxt {
