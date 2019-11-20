@@ -63,6 +63,7 @@ class KitchenHall extends React.Component {
             slidesToScroll: 3,
             infinite: false,
             dots: true,
+            arrows: false
           },
         },
         {
@@ -71,6 +72,7 @@ class KitchenHall extends React.Component {
             slidesToShow: 2,
             slidesToScroll: 2,
             dots: true,
+            arrows: false
           },
         },
         {
@@ -79,6 +81,7 @@ class KitchenHall extends React.Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
+            arrows: false
           },
         },
       ],
@@ -86,8 +89,10 @@ class KitchenHall extends React.Component {
     return (
       hallSlider && 
       <div className="hallOfFame">
-        <h2 className="title">{title}</h2>
-        <p className="desc">{description}</p>
+        <div class="hallOfFameHeadingDiv">
+          <h2 className="title">{title}</h2>
+          <p className="desc">{description}</p>
+        </div>
         <Slider {...settings}>
           {!!hallSlider &&
             hallSlider.map((sliderData, index) => (

@@ -27,7 +27,7 @@ class CookiePolicyWidget extends React.Component {
               We use our own third party cookies to improve your experience and
               our services, and to analyse the use of our website. if you
               continue browsing, we take that to mean that you accept their use.
-              <a href="/cookie-policy">Know More</a>
+              {/* <a href="/cookie-policy">Know More</a> */}
             </div>
             <button className="accept_cookies" onClick={this.hideCookiePopup.bind(this)}>
               Accept
