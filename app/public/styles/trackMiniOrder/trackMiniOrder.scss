@@ -55,6 +55,7 @@
                 font-size: $base*1.5;
                 margin: 0;
                 font-family: $font-medium;
+                color: #000000;
             }
             .orderID {
                 color: $battleshipGrey;
@@ -66,12 +67,14 @@
                 font-size: $base*2;
                 font-family: $font-medium;
                 line-height: 16px;
+                color: #000000;
             }
             .item {
                 display: inline-block;
                 margin: 0 $base*2.5 0 0;
                 font-size: $base*1.5;
                 font-family: $font-medium;
+                color: #000000;
             }
             .val {
                 padding: 8px 0 0 0;
@@ -159,6 +162,7 @@
                 .prodName {
                     font-size: $base*1.75;
                     margin-bottom: $base; 
+                    color: #000000;
                 }
                 .val {
                     display: inline;

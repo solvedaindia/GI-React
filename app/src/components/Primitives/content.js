@@ -14,6 +14,7 @@ import {HELLO_START,HELLO_GUEST, EXPLORE_ROOMS} from '../../constants/app/primit
 class EspotContent extends React.Component {
   constructor(props) {
     super(props);
+  
     this.state = {
       espotName: this.props.espotName,
       pageLayoutEspot: null,
@@ -77,6 +78,7 @@ class EspotContent extends React.Component {
   render() {
     const { pageLayoutEspot, index } = this.state;
     if(!pageLayoutEspot) return null;
+    console.log("pageLayoutEspot",pageLayoutEspot.content)
     return (
 		!!pageLayoutEspot && (
 
@@ -94,12 +96,15 @@ class EspotContent extends React.Component {
 							<p className='greetingHead'>{HELLO_GUEST}</p>
 							<p  className='msg'>{EXPLORE_ROOMS}</p>
 						</div>}
-						<div  className='exploreSection' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content.split('href').join('url') }} />
+						<div  className='exploreSection' dangerouslySetInnerHTML={{ __html:this.props.espotName === 'GI_Homepage_Godrej_Solution'? pageLayoutEspot.content  :pageLayoutEspot.content.split('href').join('url') }} />
 					</div>
 					:
 					<>
 					<h1 className="title">{pageLayoutEspot.title}</h1>
-					<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content.split('href').join('url')}} />
+          <div onClick={(e)=>this.onItemClick(e)}>
+          <div dangerouslySetInnerHTML={{ __html: this.props.espotName === 'GI_Homepage_Godrej_Solution'? pageLayoutEspot.content  :pageLayoutEspot.content.split('href').join('url')}} />
+          </div>
+				
 					</>
         		}
 			</div>

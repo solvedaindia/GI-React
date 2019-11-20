@@ -918,6 +918,45 @@
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
 
+  @include mix-md-ipad {
+    .checkout {
+      .checkout_wrapper{
+       .listRow{
+        .rightBox{
+          .saveAddress{
+            .list{
+              .inputBox{
+                width: 24px;
+              }
+              .addressText {
+                width: 84%;
+            }
+            }
+          }
+        }
+        .bill-address {
+          .label-billing{
+            width: 96%;
+          }
+        }
+       }
+      }
+
+    }   
+
+    .customradio {
+        .pay_radio{
+        .inputBox {        
+            .input[type="radio"]:checked + .labelchecked {
+              top:6px;
+            }      
+        }
+      }
+    }
+     
+  
+  }
+
 @media (min-width: 768px) and (max-width: 1024px) {
   //CSS
 }

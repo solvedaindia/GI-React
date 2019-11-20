@@ -103,8 +103,11 @@ class UserAccInfo extends React.Component {
             logonId: response.data.data.logonID,
           });
 
-          document.cookie = `name=${response.data.data.name};path=/;expires=''`;
-          document.cookie = `loginID=${response.data.data.logonID};path=/;expires=''`;
+         // document.cookie = `name=${response.data.data.name};path=/;expires=''`;
+          //document.cookie = `loginID=${response.data.data.logonID};path=/;expires=''`;
+
+          appCookie.set('name', response.data.data.name, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('loginID', response.data.data.logonID, 365 * 24 * 60 * 60 * 1000);
           
           this.showLoginStatus();
           this.props.updateUserProfile(response.data.data.name);

@@ -257,6 +257,15 @@
     }
 }
 
+@media screen and (max-width: 768px){ 
+  .kitchenContainer{
+    .easySteps{
+        .step-wizard-step{
+            min-height: 409px;           
+        }
+    } 
+  }
+}
 @media screen and (max-width: 1024px){     
     .kitchenEspots {
         margin: 35px auto;
@@ -275,7 +284,7 @@
 	
 	.easySteps .step-wizard-step {
 		position: relative;
-		height: 115px;
+		min-height: 115px;
 	}
 	
 	.hallOfFame .desc {
