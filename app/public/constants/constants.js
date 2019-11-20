@@ -16,6 +16,7 @@ export const productTitleCharLimit = 25;
 export const productTitleCharLimitPDP = 50;
 export const productDescriptionCharLimit = 35;
 export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
+const env = process.env.envKeys.WCSENDPOINT;
 /* Header API */
 export const headerApi1 = `${secureHttp}://${host}:${port2}/api/v1/header`;
 export const headerApi2 = `${secureHttp}://${host}:${port1}/api/v1/header`;
@@ -77,9 +78,9 @@ export const storeId = 'GodrejInterioESite';
 /* Access Token */
 export let accessToken = getTheAccessToken();
 /* Facebook AppId */
-export const facebookAppId = '248827646023949';
+export const facebookAppId = getFacebookId();
 /* Google ClientId */
-export const googleClientId = '540799499871-esslds0s75as1le9pufkmpmljb96vedo.apps.googleusercontent.com';
+export const googleClientId = getGoogleClientId();
 /* Access Token API */
 export const accessTokenAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/login/guest`;
 /* Registration API */
@@ -260,4 +261,35 @@ export function getTheAccessToken(tokenPro) {
         return (accessToken = tokenPro);
     }
     return (accessToken = getCookie(accessTokenCookie));
+}
+
+export function getFacebookId() {
+    switch (env) {
+        case 'PPLV':
+        case 'PPSTG':
+        case 'PRDLV':
+        case 'PRDSTG':
+            return '601010610643107'
+        case 'UAT':
+        case 'SIT':
+        case 'LOCAL':
+            return '248827646023949'
+        default:
+            return '248827646023949'
+    }
+}
+
+export function getGoogleClientId() {
+    switch (env) {
+        case 'PPLV':
+        case 'PPSTG':
+        case 'PRDLV':
+        case 'PRDSTG':
+        case 'UAT':
+        case 'SIT':
+        case 'LOCAL':
+            return '540799499871-esslds0s75as1le9pufkmpmljb96vedo.apps.googleusercontent.com'
+        default:
+            return '540799499871-esslds0s75as1le9pufkmpmljb96vedo.apps.googleusercontent.com'
+    }
 }
