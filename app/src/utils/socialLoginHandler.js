@@ -29,17 +29,19 @@ function socialLoginAPIHandler(socialData, callback) {
     .post(socialLoginAPI, data)
     .then(response => {
       appCookie.set('isLoggedIn', true, 365 * 24 * 60 * 60 * 1000);
-      appCookie.set(
-        `${accessTokenCookie}=${
-          response.data.data.access_token
-        };path=/;expires=''`,
-      );
+    //   appCookie.set(
+    //     `${accessTokenCookie}=${
+    //       response.data.data.access_token
+    //     };path=/;expires=''`,
+    //   );
 	  
-	   appCookie.set(
-        `userID=${
-          response.data.data.userID
-        };path=/;expires=''`,
-      );
+	  //  appCookie.set(
+    //     `userID=${
+    //       response.data.data.userID
+    //     };path=/;expires=''`,
+    //   );
+    appCookie.set(accessTokenCookie, response.data.data.access_token, 365 * 24 * 60 * 60 * 1000);
+    appCookie.set('userID', response.data.data.userID, 365 * 24 * 60 * 60 * 1000);
       window.location.reload();
       callback('Success');
     })
