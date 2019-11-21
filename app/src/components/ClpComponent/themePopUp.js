@@ -84,8 +84,8 @@ class ThemeData extends React.Component {
 		var leftX=clickX+15
 		var topY=0
 		var topY = clickY+30
-		var width = 200
-		var height = 110
+		var width = 190
+		var height = 100
 		if(isMobile())
 		{
 			if((Number(widthContainer)-clickX) < 200)
