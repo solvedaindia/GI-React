@@ -70,6 +70,8 @@ export class CLPContainer extends React.Component {
        title={this.state.categoryDetails.pageTitle}
        description={this.state.categoryDetails.metaDescription}
        kewords={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription}
+       alt={this.state.categoryDetails.imageAltText}
+      image={this.state.categoryDetails.fullImage}
        />
 		 </>
 		):null}

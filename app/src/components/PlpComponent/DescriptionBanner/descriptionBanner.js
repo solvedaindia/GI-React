@@ -86,7 +86,8 @@ class DescriptionBanner extends React.Component {
           <Grid>
             <Row>
               <Col md={12}>
-                <h1 className="heading">{this.state.title}</h1>
+                {this.props.isFromCLP ? <h1 className="heading">{this.state.title}</h1> : <h3 className="heading">{this.state.title}</h3>}
+                
                 <ul className="description_area">
                   <div
                     dangerouslySetInnerHTML={{ __html: this.state.finalData }}

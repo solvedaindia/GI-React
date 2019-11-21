@@ -633,7 +633,8 @@ export class PlpContainer extends React.Component {
           <Pixels
           description={this.state.categoryDetail.metaDescription}
           title={this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle} 
-          
+          alt={this.state.categoryDetail.imageAltText}
+          image={this.state.categoryDetail.fullImage}
           />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
