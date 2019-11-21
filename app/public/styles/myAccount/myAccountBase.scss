@@ -339,6 +339,9 @@
       margin-top:10px;
     }
   }
+  .delete-modal.paymentFail{
+    overflow: visible !important;
+  }
   .delete-modal{
     .modal-dialog{
       width:100%;
@@ -347,8 +350,9 @@
         .modalwrapper{
           padding: 20px 20px 0px 20px;
           .actionBtnWrapper{
-            margin-left: -20px;
-            margin-right: -20px;
+           // margin-left: -20px;
+            //margin-right: -20px;
+            padding: 0 0 26px;
           }
         .heading{
           text-align: center;
@@ -363,7 +367,7 @@
           .actionBtnWrapper{
             .btn{
               padding: 12px 0px;
-              width: 50%;
+              width: 48%;
             }
             .btn-cancel{
               border-left: 0px;
@@ -384,6 +388,11 @@
           } 
            .OopsIcon{
             text-align: center;
+            margin-top:-66px;
+            .oopsImg{
+              width:90px;
+              height: 90px;
+            }
           }
 
           &.paymentFaild{
@@ -395,9 +404,10 @@
             }
             .actionBtnWrapper {
               .btn-cancel{
-                border-width: 1px 0px 1px 0px;
+                border: 1px solid $black;
+               // border-width: 1px 0px 1px 0px;
                 border-style: solid;
-                border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
+               // border-color: $borderLight $colorwhite $colorwhite $colorwhite ;
               }
             }
           }
@@ -427,6 +437,37 @@
     &.in{
       bottom: 0px;
       top:initial;
+    }
+  }
+.succes{
+  overflow: visible !important;
+}
+  .delete-modal.succes{
+    .modal-dialog{     
+      background: #fff;   
+      text-align: center; 
+      padding-bottom: 84px;
+
+      .succesModal{
+        .successIcon{
+          margin-top:-66px;
+          img{
+            width:90px;
+            height: 90px;
+          }
+        }
+        .heading-succes{
+          font-size: 24px;
+          color:$black;
+          font-family: $font-bold;
+        }
+        .orderConfirmed{
+          font-size: 14px;
+          font-family: $font-regular;
+          color:$black;
+          
+        }
+      }
     }
   }
   .webView{

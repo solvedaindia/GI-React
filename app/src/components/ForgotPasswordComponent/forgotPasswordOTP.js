@@ -14,6 +14,7 @@ import {
 import '../../../public/styles/forgotpassword/forgototp.scss';
 import { PLEASE_ENTER_OPT, SUBMIT, RESEND_OTP, CANCEL,BACK, FORGET_OPT, ENTER_VERIFICATION_CODE, FORGET_PASS_OTP, SENT_TO_XXX, OTP_INCORRECT, EXCEEDED_MAX, FORGOT_PASSWORD, FORGOT_PASSWORD_OTP, INCORRECT_OTP, FORGET_PASS, FORGET_OTP_MOBILE, FOUR_DIGIT_OTP } from '../../constants/app/footerConstants';
 import ProgressButton from '../Button/progressButton'
+import { isMobile } from '../../utils/utilityManager';
 
 class ForgotPasswordOTP extends React.Component {
   constructor() {
@@ -29,6 +30,7 @@ class ForgotPasswordOTP extends React.Component {
       isProcessing:false,
       exceededFlag: false
     };
+ 
   }
 
   proceedBtnPressed(e) {
@@ -45,6 +47,7 @@ class ForgotPasswordOTP extends React.Component {
       // })
 
       const nextComp = 'ForgotPasswordOTP';
+      this.props.hideCloseBtn(true);
       this.props.handlerPro(nextComp, null, this.state.inputText, true);
       return;
     }
@@ -133,6 +136,7 @@ class ForgotPasswordOTP extends React.Component {
         if (otpCount === 3) {
           const nextComp = `${FORGOT_PASSWORD_OTP}`;
           this.props.handlerPro(nextComp, null, null, false, true);
+          this.props.hideCloseBtn();
           this.setState({
             showOTPTxtField: false,
             error: true,
@@ -144,6 +148,7 @@ class ForgotPasswordOTP extends React.Component {
       .catch(error => {
         const errorData = error.response.data;
         const errorMessage = errorData.error.error_message;
+        this.props.hideCloseBtn();
         this.setState({
           // error: true,
           // errorMessage,
@@ -203,10 +208,15 @@ class ForgotPasswordOTP extends React.Component {
     } else {
       headingItem = null;
     }
+  
+    if(this.state.errorMessage!=null  && this.state.showOTPTxtField==false )
+    {
+      headingItem = null;
+    }
+
     if (this.props.isFromMyProfilePro && !this.state.exceededFlag) {
       headingItem = <h3 className="heading">{PLEASE_ENTER_OPT}</h3>;
     }
-
     let animeClass;
     if (this.props.isBack) {
       animeClass = 'leftAnim';

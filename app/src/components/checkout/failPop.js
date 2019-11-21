@@ -10,7 +10,7 @@ export default class FailPop extends React.Component {
     super(props);
     this.state = {
       modal: true,
-      modalClass: 'delete-modal',
+      modalClass: 'delete-modal paymentFail',
     };
   }
   handleCancel = () => {

@@ -122,7 +122,7 @@ class ForgotPasswordNewPassword extends React.Component {
   render() {
     let errorItem;
     if (this.state.error) {
-      errorItem = <p className="error-msg">{this.state.errorMessage}</p>;
+      errorItem = <p className="error-msg error-msg-new-password">{this.state.errorMessage}</p>;
     } else {
       errorItem = null;
     }

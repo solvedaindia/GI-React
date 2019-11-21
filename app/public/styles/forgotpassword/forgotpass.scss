@@ -37,6 +37,9 @@
                 background: transparent;
               }
             }
+            .error-msg-new-password {
+              margin: -12px 0px 0px 0;
+            }
 
             .form-control {
               margin: 0 0 5px 0;
@@ -259,8 +262,23 @@
                   margin-bottom: 0px;
                   text-transform: capitalize;
                 }
+
+                
               }
+              
+              
             }
+            .forrgot-pass-box.attempt-exceed{
+                .modalmin-height{
+                  padding:0;
+                  border:none;
+                  margin-top: -46px;
+                  padding: 20px 0;
+                }
+
+              }
+            
+            
           }
         }
       }
