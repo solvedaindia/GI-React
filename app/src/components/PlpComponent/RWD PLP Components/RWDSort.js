@@ -49,7 +49,7 @@ class RWDSort extends React.Component {
     
    //console.log("values",this.state.isShowSortOptions)
     document.body.style.overflow =this.state.isShowSortOptions?"": "hidden";
-    document.body.style.position =this.state.isShowSortOptions?"": "fixed";
+    // document.body.style.position =this.state.isShowSortOptions?"": "fixed";
     //document.body.style.position = "fixed";
   
     //$('body').css('overflow', 'hidden');
@@ -65,6 +65,7 @@ class RWDSort extends React.Component {
 
   handleClick(i) {
     if (i !== this.state.selected) {
+      window.scrollTo(0,0);
       this.setState({
         selected: i,
         title: this.state.options[i],

@@ -108,7 +108,11 @@ export default class App extends React.Component {
     this.getCurrentLocation();
     this.getIPData();
   }
-
+  componentWillMount(){
+    if(this.state.isMobile){
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+  }
   componentWillUpdate() 
   {
     let header = document.getElementById("header");
@@ -135,8 +139,9 @@ export default class App extends React.Component {
         $('html, body').animate({ scrollTop: 0 }, 'smooth');
     }
 	else 
-	{
-	   $('html, body').animate({ scrollTop: 0 }, 'fast');
+	{ if(!this.state.isMobile){
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+  }
 	}
   }
   
