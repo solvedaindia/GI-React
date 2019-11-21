@@ -29,7 +29,7 @@ const wishlistAddedImg = (
 const wishListRemovedImg = (
   <img
     src={require('../../../../public/images/plpAssests/wishlist_blank.svg')}
-	 alt="Removed"
+	 alt="Add to Wishlist"
   />
 );
 class Wishlist extends React.Component {

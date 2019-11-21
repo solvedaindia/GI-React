@@ -93,7 +93,7 @@ class productImagesAndVideos extends React.Component {
 			});  
 		} else {
 			const fullImagePath = `${imagePrefix}${imagePath}`;
-			this.images.push({ original: fullImagePath, originalAlt:this.props.skuData.productName, thumbnailAlt:this.props.skuData.productName, thumbnail: thumbnailPath });
+			this.images.push({ original: fullImagePath, originalAlt:this.props.skuData.imageAltText, thumbnailAlt:this.props.skuData.imageAltText, thumbnail: thumbnailPath });
 		}
 	  });
   };

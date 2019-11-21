@@ -63,6 +63,7 @@ class Pixels extends React.Component {
             )
           })
         }></meta>
+        <link rel="canonical" href={window.location.href} />
         <meta name="twitter:card" content={pixelData.twitter_card ? pixelData.twitter_card : "summary_large_image"} />
         <meta name="twitter:site" content={pixelData.twitter_site ? pixelData.twitter_site : "@godrejinterio"} />
         <meta name="twitter:title" content={pixelData.title ? pixelData.title : this.props.title} />
@@ -70,7 +71,7 @@ class Pixels extends React.Component {
         <meta name="twitter:image" content={pixelData.twitter_image ? pixelData.twitter_image : fullImagePath} />
         <meta name="twitter:image:alt" content={pixelData.twitter_image_alt ? pixelData.twitter_image_alt : this.props.alt} />
         <meta property="og:url" content={window.location.href} />
-        <meta property="og:type" content={pixelData.og_type ? pixelData.og_type : this.props.pageName} />
+        <meta property="og:type" content={'website'} />
         <meta property="og:title" content={pixelData.title ? pixelData.title : this.props.title} />
         <meta property="og:description" content={pixelData.description ? pixelData.description : this.props.description} />
         <meta property="og:image" content={pixelData.og_image ? pixelData.og_image : fullImagePath} />
