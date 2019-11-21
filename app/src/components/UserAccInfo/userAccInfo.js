@@ -171,7 +171,7 @@ class UserAccInfo extends React.Component {
   }
 
   onLogoutClick() {
-    appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
+    //appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
     logoutTheUser();
   }
 
