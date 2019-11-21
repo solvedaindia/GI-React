@@ -218,8 +218,6 @@
       
       }
   }
-
-  
 }
 
 .static-contact-us{
@@ -228,6 +226,51 @@
     border-right:1px solid #dadada;
   }
 }
+
+.staticpage{
+  &.serviceSupport{
+    .support-faq{
+      .panel-group{
+        .panel{
+          .panel-heading{
+            h5{display: none}
+            .faq-h4{
+              float:none;
+              width: 100%;
+              position: relative;
+              .accordion-toggle{
+                text-decoration: none;
+                &::after{
+                  content: '+';
+                  right: -11px;
+                  font-size: 25px;
+                  margin-top: -8px;
+                  position:absolute;
+                } 
+              }
+    
+              .accordion-toggle[aria-expanded="false"]::after{
+                content: '+';
+                right: -11px;
+                font-size: 25px;
+                margin-top: -8px;
+                position:absolute;
+              }
+              
+              .accordion-toggle[aria-expanded="true"]::after{
+                content: '–';
+                right: -11px;
+                font-size: 25px;
+                margin-top: -8px;
+                position:absolute;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 
 
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
