@@ -33,7 +33,7 @@ function getInvoiceAddress(address) {
   }
   addressJSON.companyName = address.Company || '';
   addressJSON.city = address.City || '';
-  addressJSON.state = address.State || '';
+  addressJSON.state = stateCode.getStateName[address.State] || address.State || '';
   addressJSON.stateCode = address.StateCode || '';
   addressJSON.country = address.Country || '';
   addressJSON.zipCode = address.ZipCode || '';
