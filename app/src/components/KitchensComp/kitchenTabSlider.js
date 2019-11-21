@@ -5,6 +5,7 @@ import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
 import '../../../public/styles/static-pages/chefkitchen.scss';
 import {espotAPI,imagePrefix} from '../../../public/constants/constants';
+import {isMobile} from '../../utils/utilityManager';
 
 
 class KitchenConfiguration extends React.Component {
@@ -60,39 +61,95 @@ class KitchenConfiguration extends React.Component {
   }
 
   render() {
-  
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-	    autoplay: true,
-      autoplaySpeed: 2000,
-      slidesToShow: 1,
-      slidesToScroll:1,
-    };
+        const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        slidesToShow: 1,
+        slidesToScroll:1,
+      };
+
+      const kitchenTabSlide = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        centerMode: false,
+        centerPadding: '30px',
+        variableWidth: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: false,
+              centerMode: false,
+              infinite: true,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow:1,
+              slidesToScroll: 1,
+              dots: false,
+              centerMode: false,
+              infinite: true,
+              variableWidth: true,
+              arrows: false
+            }
+          }
+        ]
+      };
+
    const{ configurationTabing, currentIndex } =this.state;
 
 
   const tabs =!!configurationTabing && configurationTabing.map((tabData,index)=>{
       return(
-      
+        <>
+        {!isMobile() ? 
         <li >
-     <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+        <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
         {tabData.title}
           
          </a>
         </li>
-       
+        
+        :<a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+        {tabData.title}
+          
+         </a>
+        }
+       </>
      )
   })
     return (
      <div className='container'>
          <h1>{this.state.title}</h1>
           <div className='configurationTab'>
+          {!isMobile() ? 
             <ul className='configuration-tab'>
-            {tabs}
+                {tabs}
             </ul>
-            
+            :
+            <div className='configureTabs'><Slider {...kitchenTabSlide}>{tabs}</Slider></div>
+          }
       </div>
 <div className='clearfix'></div>
 <Slider {...settings}>
