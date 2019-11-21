@@ -109,7 +109,7 @@ export default class App extends React.Component {
     this.getIPData();
   }
   componentWillMount(){
-    if(this.state.isMobile){
+    if(isMobile() || isTab()){
       $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
   }
@@ -139,7 +139,7 @@ export default class App extends React.Component {
         $('html, body').animate({ scrollTop: 0 }, 'smooth');
     }
 	else 
-	{ if(!this.state.isMobile){
+	{ if(!isMobile() || !isTab()){
     $('html, body').animate({ scrollTop: 0 }, 'fast');
   }
 	}
