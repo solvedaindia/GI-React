@@ -26,7 +26,7 @@ class StoreInfoWindow extends React.Component {
         if (this.state.isOpen) {
             return (
                 <InfoWindow onCloseClick={() => this.onCloseWindow()}>
-                    <div style={{ margin: "10px", width: "260px" }}>
+                    <div style={{ margin: "10px", width: "270px" }}>
                         <h4>{this.props.storeName}</h4>
                         {this.props.pincode &&
                             <p>{this.props.data} Km</p>
