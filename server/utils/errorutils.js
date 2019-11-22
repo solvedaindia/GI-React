@@ -176,7 +176,8 @@ module.exports.handleWCSError = function handleWCSError(response) {
         errBody.errors[0].errorKey === '_ERR_COMMAND_EXCEPTION' ||
         errBody.errors[0].errorKey === '_ERR_ORDER_UNLOCKED' ||
         errBody.errors[0].errorKey === 'ERROR_EMAIL_INVALID' ||
-        errBody.errors[0].errorKey === '_ERR_UBF_USER_AUTHORITY'
+        errBody.errors[0].errorKey === '_ERR_UBF_USER_AUTHORITY' ||
+        errBody.errors[0].errorKey === 'ERR_PROMOTION_NOT_AVAILABLE_AT_THIS_TIME'
       ) {
         return {
           status_code: 400,

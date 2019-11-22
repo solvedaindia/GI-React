@@ -72,6 +72,9 @@ import Maintenance from '../HomePageContainer/Maintenance';
 import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
 
+const userAgent = window.navigator.userAgent.toLowerCase();
+const isIPad = /ipad/.test(userAgent);
+
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
 // alert(history,'history');
@@ -109,7 +112,7 @@ export default class App extends React.Component {
     this.getIPData();
   }
   componentWillMount(){
-    if(isMobile() || isTab()){
+    if(isMobile() || isTab() || isIPad){
       $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
   }
@@ -139,7 +142,7 @@ export default class App extends React.Component {
         $('html, body').animate({ scrollTop: 0 }, 'smooth');
     }
 	else 
-	{ if(!isMobile() || !isTab()){
+	{ if(!isMobile() && !isTab() && !isIPad){
     $('html, body').animate({ scrollTop: 0 }, 'fast');
   }
 	}
