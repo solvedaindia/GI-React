@@ -154,7 +154,7 @@ class MyProfile extends React.Component {
       this.state.dataLoad = {
         name: this.state.inputText_name,
       }
-      this.updateUserDetail();
+      this.updateUserDetail(()=>{});
       return;
     }
     if (this.state.userResponse.name !== this.state.inputText_name) {
@@ -198,7 +198,7 @@ class MyProfile extends React.Component {
             })
           }
           else {
-            this.updateUserDetail();
+            this.updateUserDetail(()=>{});
           }
 
         })
