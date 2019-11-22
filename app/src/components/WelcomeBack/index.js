@@ -136,16 +136,21 @@ class WelcomeBack extends React.Component {
           appCookie.set('pincode', response.data.data.userDetails.pincode, 365 * 24 * 60 * 60 * 1000);
           appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         }
-        appCookie.set(
-          `${accessTokenCookie}=${
-          response.data.data.access_token
-          };path=/;expires=''`,
-        );
-		 appCookie.set(
-          `userID=${
-          response.data.data.userID
-          };path=/;expires=''`,
-        );
+        // appCookie.set(
+        //   `${accessTokenCookie}=${
+        //   response.data.data.access_token
+        //   };path=/;expires=''`,
+        // );
+		    // appCookie.set(
+        //   `userID=${
+        //   response.data.data.userID
+        //   };path=/;expires=''`,
+        // );
+        
+        appCookie.set(accessTokenCookie,  response.data.data.access_token, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('userID', response.data.data.userID, 365 * 24 * 60 * 60 * 1000);
+
+
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -261,9 +266,9 @@ class WelcomeBack extends React.Component {
     }
     //onMouseMove={this.trackMouseMovement}
     return (
-      <div id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
+      <div  id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
 
-        <Modal
+        <Modal style={{background:'rgba(0, 0, 0, 0.5)', zIndex:'2147483648'}}
           ref={this.windowModelRef}
           className="welcomeBack"
           size="lg"

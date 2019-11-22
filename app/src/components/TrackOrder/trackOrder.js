@@ -102,7 +102,7 @@ class TrackOrder extends React.Component {
                                                         </p>
                                                         {!!shipmentDetails.expectedDeliveryDate && !isMobile() && 
                                                             <p className='delDate item'>
-                                                                {!isMobile() ? 'DELIVERY' : 'Delivery on:' }
+                                                                {!isMobile() ? 'DELIVERY ON' : 'Delivery on:' }
                                                                 {!isMobile() ? <span className='delVal val'>{shipmentDetails.expectedDeliveryDate}</span>: '' }
                                                             </p>		
                                                         }

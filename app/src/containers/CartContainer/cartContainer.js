@@ -167,13 +167,14 @@ class CartDetail extends React.Component {
                         orderItemId={itemData.orderItemId}
                         getCartDetails={this.props.getCartDetails}
                       />}
-                <MoveToWishList
+               {!itemData.freeGift && 
+               <MoveToWishList
                   uniqueID={itemData.uniqueID}
                   orderItemId={itemData.orderItemId}
                   getCartDetails={this.props.getCartDetails}
-                />
-                {!itemData.freeGift &&
-                      <DeleteCartItem
+                />}
+                {!itemData.freeGift && 
+                      <DeleteCartItem 
                         orderItemId={itemData.orderItemId}
                         uniqueID={itemData.uniqueID}
                         productName = {itemData.productName}
@@ -181,10 +182,12 @@ class CartDetail extends React.Component {
                       />}
                 <p className='delBy'>{DELIVERY_BY}</p>
                 <span className='date'>{itemData.deliveryDate}</span>
-                {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
-                {!isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? `${FREE}` : itemData.shippingCharges}</span>}
+                { !itemData.freeGift ?
+                !isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span> : <span className='price'>{FREE}</span>}
+                {!itemData.freeGift ? 
+                !isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? `${FREE}` : itemData.shippingCharges}</span> : ""}
               </div>
-              {!!isMobile() && <div className='quantityPrice'>
+              {!!isMobile() && !itemData.freeGift && <div className='quantityPrice'>
                 {!itemData.freeGift &&
 						<CartUpdate
 						  quantity={itemData.quantity}

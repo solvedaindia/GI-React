@@ -22,7 +22,7 @@
 			color: unset;
 		}
 	}
-
+	
 	.privacy-Policy {
 		.privacy-heading {
 			color: #222222
@@ -540,7 +540,12 @@
 	}
 	.staticpage .nav {
 		width: 20%;
-	}	
+	}
+	#greenInitiatives{
+		.greenInitiativeImageDiv {
+			margin-top: 10px;
+		}
+	}		
 }
 
 @media (max-width: 769px)  {
