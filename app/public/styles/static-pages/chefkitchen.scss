@@ -441,10 +441,6 @@
     font-size:14px;
     color: black;
   }
-  .willowBenefitContainerDiv {
-    display: flex;
-    justify-content: center;
-  }
   .willow-configuration .container {
     background-color: #f7f8f8;
     .slick-slider {
@@ -458,7 +454,6 @@
       }
     }
   }
-  
 }
 
 .configurationTab
@@ -490,7 +485,7 @@
         
     }
     .active{
-        a{ color:$greyDark;  font-family: $font-bold;}
+        a{ color:$greyDark;}
         &:after{
             content: " ";
             width: 100%;
@@ -507,7 +502,7 @@
 
 
 .staticpage{
-  &.chefKitchen{
+  &.chefKitchen, &.willowKitchen{
     .kitchen-faq{
       .panel-group{
         .panel{
@@ -519,6 +514,7 @@
               position: relative;
               .accordion-toggle{
                 text-decoration: none;
+                color: #000;
                 &::after{
                   content: '+';
                   right: -11px;
@@ -559,7 +555,15 @@
     .namingconv {
       font-size:14px;
     }
-  }     
+  }
+  .staticpage{
+    &.willowKitchen{
+      .willowBenefitContainerDiv{
+        display: flex;
+        justify-content: center;
+      }
+    }
+  } 
 }
 
  /* 
@@ -567,7 +571,7 @@
   */
   @include mix-md{
     .staticpage{
-        &.chefKitchen{
+        &.chefKitchen, &.willowKitchen{
           .heading,h1{
             font-size: 16px;
             font-weight: bold;
@@ -588,6 +592,7 @@
                 font-size: 14px;
                 padding: 10px 0;
                 font-family: $font-bold;
+                position: relative;
                 .accordionTab{
                   &::after{
                     content: '+';
@@ -628,16 +633,19 @@
                   .accordion-toggle{
                     text-decoration: none;
                     &::after{
-                      margin-top: -21px;
+                      margin-top: 0px;
+                      top:0px;
                     } 
                   }
     
                   .accordion-toggle[aria-expanded="false"]::after{
-                    margin-top: -21px;
+                    margin-top: 0px;
+                    top:0px;
                   }
                   
                   .accordion-toggle[aria-expanded="true"]::after{
-                    margin-top: -21px;
+                    margin-top: 0px;
+                    top:0px;
                   }
                 }
               }
@@ -645,10 +653,9 @@
           }
         }
       }
-      .steel-chef-configuration{
+      .steel-chef-configuration, .willow-configuration{
         .container{
           h1{
-            font-size: 16px;
             font-size: 16px;
             margin-top: 0px;
             margin-bottom: 0px;
@@ -691,30 +698,29 @@
       }
     }
   }
+
 @media screen and (max-width: 767px) {
   .chefKitchen {
     .steelBenefitContainerDiv {
       display: block;
     }
   }
-  .willowKitchen{
+    .willowKitchen{
+      .willow-configuration{
+        .container {
+          .slick-slider{
+            .slick-prev,.slick-next {
+              display: none !important;
+            }
 
-    .willow-configuration{
-      .container {
-        .slick-slider{
-          .slick-prev,.slick-next {
-            display: none !important;
           }
-
-        }
-      
-    }  
-    .willowBenefitContainerDiv {
-      display: block;
+        
+      }  
+      .willowBenefitContainerDiv {
+        display: block;
+      }
     }
   }
-}
- 
 }
   
   
