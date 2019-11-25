@@ -108,7 +108,7 @@ export default class App extends React.Component {
     this.newsletterPopupHandling();
     this.cookiePolicyPopup();
     this.resize();
-   // this.getCurrentLocation();
+    this.getCurrentLocation();
     this.getIPData();
   }
   componentWillMount(){
@@ -284,10 +284,14 @@ export default class App extends React.Component {
   
   getCurrentLocation() 
   {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition.bind(this));
+    if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
+		{
+       appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
     }
-    function showPosition(position) { }
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(showPosition.bind(this));
+    // }
+    // function showPosition(position) { }
   }
 
   checkSearchInput() 
