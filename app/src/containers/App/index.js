@@ -341,11 +341,11 @@ export default class App extends React.Component {
         <Switch>
         
           <Route exact path="/" component={HomePageContainer} />
-		  <Route path="/rooms-kitchen_s" component={Kitchens} />
-		  <Route path="/rooms-kitchen" component={Kitchens} />
-		  <Route path="/rooms-wardrobes" component={WardrobesContainer} />
-		  <Route path="/rooms-wardrobes_S" component={WardrobesContainer} />
-          <Route path="/rooms-:id" component={ClpContainer} />
+		  <Route path="/online-furniture-kitchen_s" component={Kitchens} />
+		  <Route path="/online-furniture-kitchen" component={Kitchens} />
+		  <Route path="/online-furniture-wardrobes" component={WardrobesContainer} />
+		  <Route path="/online-furniture-wardrobes_S" component={WardrobesContainer} />
+          <Route path="/online-furniture-:id" component={ClpContainer} />
 		  <Route path="/furniture-online-:productId/:skuId" component={PdpContainer} />
           <Route path="/furniture-:id" component={PlpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
@@ -363,12 +363,10 @@ export default class App extends React.Component {
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
-          <Route path="/kitchens" component={Kitchens} />
-          <Route path="/chef-kitchen" component={SteelChefKitchen} />
-          <Route path="/willow-kitchen" component={WillowKitchen} />
+          <Route path="/online-furniture-chef-kitchen" component={SteelChefKitchen} />
+          <Route path="/online-furniture-willow-kitchen" component={WillowKitchen} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/lookbook" component={InspirationDetails} />
-          <Route path="/wardrobes" component={WardrobesContainer} />
           <Route path="/privacy-policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
