@@ -54,7 +54,6 @@ class WillowKitchenConfiguration extends React.Component {
       // alert(index)
     
      this.setState({currentIndex: index})
-    console.log('hja',this.state.currentIndex);
   }
 
   render() {
