@@ -9,7 +9,8 @@ const LightHeader = () => (
     <figure className="logo">
       <a href="/">
       {!isMobile() ? <WhiteLogo width="171" height="33" /> : 
-          <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicatorWhite.svg')} alt="logo" /> }
+          // <img className='logoImg' src={require('../../../../public/images/plpAssests/lazyloadingIndicatorWhite.svg')} alt="logo" />
+          null }
       </a>
     </figure>
   </div>
