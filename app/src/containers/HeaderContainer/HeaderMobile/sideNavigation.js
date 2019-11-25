@@ -140,7 +140,7 @@ export class HeaderMobile extends React.Component {
                     subCatData.categoryName
                   ).toLowerCase();
                   if (catName.toLowerCase().indexOf('rooms') > -1) {
-                    routePath = `/rooms-${
+                    routePath = `/online-furniture-${
                       subCatData.categoryIdentifier.split(' ').join('').toLowerCase()
                       }`;
                   } else {
