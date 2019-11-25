@@ -87,7 +87,7 @@ class EspotContent extends React.Component {
 					(getCookie('isLoggedIn') !== 'true') && <><h2 className='mwebGreeting'>
 					{HELLO_START}
 					</h2>
-          <h1 className="title">{pageLayoutEspot.title}</h1></>
+          <h2 className="title">{pageLayoutEspot.title}</h2></>
 				}
 				{(this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') ? 
@@ -100,7 +100,7 @@ class EspotContent extends React.Component {
 					</div>
 					:
 					<>
-					<h1 className="title">{pageLayoutEspot.title}</h1>
+					<h2 className="title">{pageLayoutEspot.title}</h2>
           <div onClick={(e)=>this.onItemClick(e)}>
           <div dangerouslySetInnerHTML={{ __html: this.props.espotName === 'GI_Homepage_Godrej_Solution'? pageLayoutEspot.content  :pageLayoutEspot.content.split('href').join('url')}} />
           </div>

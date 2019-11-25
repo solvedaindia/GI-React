@@ -68,7 +68,7 @@ export class StoreDetails extends React.Component {
                     }
                     <div className='content'>
                         {!isMobile() && <h2 className='subTitle'>{OUR_STORES}</h2>}
-                        <h1 className='title'>{EXPERIENCE_OUR_STORES}</h1>
+                        <p className='title'>{EXPERIENCE_OUR_STORES}</p>
                         {
 							!!storeData && !!storeData.latitude && storeData.latitude &&
                             <p className='details'>{EXP_OUR_PRODUCTS}
