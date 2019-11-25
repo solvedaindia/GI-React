@@ -57,7 +57,6 @@ class KitchenConfiguration extends React.Component {
       // alert(index)
     
      this.setState({currentIndex: index})
-    console.log('hja',this.state.currentIndex);
   }
 
   render() {
@@ -69,17 +68,6 @@ class KitchenConfiguration extends React.Component {
         autoplaySpeed: 2000,
         slidesToShow: 1,
         slidesToScroll:1,
-      };
-
-      const kitchenTabSlide = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        centerMode: false,
-        centerPadding: '30px',
-        variableWidth: true,
         responsive: [
           {
             breakpoint: 1024,
@@ -110,6 +98,52 @@ class KitchenConfiguration extends React.Component {
               dots: false,
               centerMode: false,
               infinite: true,
+              variableWidth: true,
+              arrows: false
+            }
+          }
+        ]
+      };
+
+      const kitchenTabSlide = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        centerMode: false,
+        centerPadding: '30px',
+        variableWidth: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              infinite: false,
+              dots: true,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: false,
+              centerMode: false,
+              infinite: false,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow:1,
+              slidesToScroll: 1,
+              dots: false,
+              centerMode: false,
+              infinite: false,
               variableWidth: true,
               arrows: false
             }
