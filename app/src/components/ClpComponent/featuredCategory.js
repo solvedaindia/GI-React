@@ -94,7 +94,7 @@ export class SubCategory extends React.Component {
               return (
                 <figure className="subCatSlider">
                     <Link to={routePath}>
-                    <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
+                    <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} alt={subCatListData.imageAltText ? subCatListData.imageAltText : ''}
                     />
                     </Link>              
                   <figcaption className="catDetails">
