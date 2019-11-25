@@ -61,6 +61,7 @@ class MyProfile extends React.Component {
   }
 
   toggle() {
+    this.state.enteredOTP =null;
     this.setState(prevState => ({
       modal: !prevState.modal,
     }));
