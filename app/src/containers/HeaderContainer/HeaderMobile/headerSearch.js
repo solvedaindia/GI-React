@@ -79,7 +79,6 @@ export class HeaderSearch extends React.Component {
 
   onkeydownclick(text) {
   
-    console.log(event);
     if (event.key === 'Enter') {
      
       if (text !== '') {

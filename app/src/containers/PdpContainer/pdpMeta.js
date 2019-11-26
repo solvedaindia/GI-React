@@ -9,7 +9,6 @@ class PDPMeta extends React.Component {
     render () {
         
         const fullImagePath = `${imagePrefix}${this.props.image}`;
-        console.log('PDP meta --- ',this.props.title);
         return (
             <Helmet>
 			

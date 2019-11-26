@@ -176,7 +176,6 @@ class WelcomeBack extends React.Component {
   }
   
   trackMouseMovement=(event)=>{
-    console.log(event);
   }
 
   trackMouseUp=(event)=>{
@@ -216,7 +215,6 @@ class WelcomeBack extends React.Component {
   }
 
   trackMouseDown=(event)=>{
-    console.log("down ",event.clientX +" "+event.clientY );
     this.isOutSide=false;
     let winWidth=window.innerWidth/2;
     let comWidth=this.modalRef.current.offsetWidth/2;
@@ -224,9 +222,6 @@ class WelcomeBack extends React.Component {
     let winHieght=window.innerHeight/2;
     let comHeight=this.modalRef.current.offsetHeight/2;
 
-    console.log("clickeArea p1",window.innerHeight/2);
-    console.log("clickeArea p2",this.modalRef.current.offsetHeight/2);
-    console.log("clickeArea p3",event.clientY );
     
     if((event.clientX<winWidth-comWidth) ||
         (event.clientX>winWidth+comWidth) ||
@@ -253,8 +248,6 @@ class WelcomeBack extends React.Component {
     {
       this.isOutSide=false;
     }
-
-    console.log("clickeArea",this.isOutSide);
 
   }
 

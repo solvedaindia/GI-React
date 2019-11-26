@@ -209,7 +209,6 @@ class Invoice extends React.Component {
 				result.addImage(imgData, 'JPEG', 0, 0, width, height);
 				result.save("invoice.pdf");
 			}).catch(err=>{
-				console.log(":::",err);
 			})
           });
 	  }
@@ -240,8 +239,6 @@ class Invoice extends React.Component {
 		if(this.state.invoiceData != null)
 		{
 			var invoiceData = this.state.invoiceData;
-			console.log('invoiceData ', invoiceData);
-			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
 			(this.state.orderListData != null && this.state.orderListData.length !== 0)? 
 				this.state.orderListData.map((orderInfo, key) => 

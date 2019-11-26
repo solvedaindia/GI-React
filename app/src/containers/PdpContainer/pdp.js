@@ -57,7 +57,6 @@ class PdpContainer extends React.Component {
         });
       })
       .catch(error => {
-        console.log('Error: ', error);
       });
   }
 
@@ -73,7 +72,6 @@ class PdpContainer extends React.Component {
         });
       })
       .catch(error => {
-        console.log('Error: ', error);
       });
   }
 
@@ -83,7 +81,6 @@ class PdpContainer extends React.Component {
 
   render() {
   const { pdp, title} = this.state;
-  console.log('pdp title --- ',title);
   return (
 		<>
 		

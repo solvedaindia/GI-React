@@ -35,7 +35,6 @@ export function registerGuestUser(callback) {
       callback(guestToken);
     })
     .catch(error => {
-      console.log('Error: ', error);
       callback('');
     });
 }
@@ -73,7 +72,6 @@ export function logoutTheUser() {
       }
     })
     .catch(error => {
-      console.log('Error: ', error);
     });
 }
 
@@ -105,6 +103,5 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
 
     })
     .catch(error => {
-      console.log('Error: ', error);
     });
 }

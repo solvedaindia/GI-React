@@ -33,7 +33,6 @@ export class CLPContainer extends React.Component {
   
    componentDidMount() 
    {
-	   console.log(this.props.match.params.id);
 		this.getCategoryData(this.props.match.params.id);
    }    
    
@@ -47,7 +46,6 @@ export class CLPContainer extends React.Component {
         }
       })
       .catch(error => {
-		  console.log(error);
 		  this.setState({ categoryDetails: null, isLoading:false });
       });
   }

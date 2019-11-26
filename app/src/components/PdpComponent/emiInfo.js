@@ -46,7 +46,6 @@ class EmiInfo extends React.Component {
 			  	loading: false,
 			});
 		}).catch(error => {
-			console.log('Error: ', error);
 		});
 	}
 	
