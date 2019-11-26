@@ -30,7 +30,6 @@ class DeleteCartItem extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log(getCookie('wishListUniqueId'), getCookie('isLoggedIn'))
 		if (getCookie('isLoggedIn') === 'true' && getCookie('wishListUniqueId') !== undefined && getCookie('wishListUniqueId') !== null && getCookie('wishListUniqueId') !== '') {
 			this.handleDeleteItem();
 			this.addToWishlistApi();
@@ -45,7 +44,6 @@ class DeleteCartItem extends React.Component {
 		const data = {
 			orderItemId: this.props.orderItemId,
 		};
-		console.log('order ID -----', this.props.orderItemId)
 		apiManager
 			.post(cartDeleteItemAPI, data)
 			.then(response => {
@@ -79,7 +77,6 @@ class DeleteCartItem extends React.Component {
 		}
 		else if (getCookie('isLoggedIn') !== 'true') {
 			appCookie.set('saveForLaterClicked', true, 365 * 24 * 60 * 60 * 1000);
-			console.log('order ID -----', this.props.orderItemId)
 			appCookie.set('orderItemId', this.props.orderItemId, 365 * 24 * 60 * 60 * 1000);
 			this.handleClose();
 			this.setState({ isWelcomeBack: true, isCartModal: false })

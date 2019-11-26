@@ -30,7 +30,6 @@ class FormContainer extends Component {
           name: value,
         },
       }),
-      () => console.log(this.state.newUser),
     );
   }
 
@@ -44,7 +43,6 @@ class FormContainer extends Component {
           [name]: value,
         },
       }),
-      () => console.log(this.state.newUser),
     );
   }
 

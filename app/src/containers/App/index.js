@@ -230,7 +230,6 @@ export default class App extends React.Component {
 		  );
   
 			navigator.geolocation.watchPosition(function(position) {
-          console.log("position",position);
 					var request = new XMLHttpRequest();
 					request.open('GET', ipDataApi);
 					request.setRequestHeader('Accept', 'application/json');

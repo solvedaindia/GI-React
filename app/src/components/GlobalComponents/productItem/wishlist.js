@@ -74,7 +74,6 @@ class Wishlist extends React.Component {
         });
       })
       .catch(error => {
-        console.log('Error: ', error);
       });
   }
 
@@ -95,7 +94,6 @@ class Wishlist extends React.Component {
         
       })
       .catch(error => {
-        console.log('Error: ', error);
       });
   }
 

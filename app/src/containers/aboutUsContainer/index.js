@@ -16,15 +16,13 @@ export class AboutUs extends React.Component {
   componentDidMount()
   {
      this.hash = this.props.location.hash;
-    console.log('this.hash',this.hash)
   }
 
   onSuccessLoadWithScroll()
   {
-    console.log("this.props.location id",this.hash.length)
+
     if(this.hash && this.hash.length>1)
     {
-      console.log("this.props.location id",this.hash.substring(1,this.hash.length));
       const element=document.getElementById(this.hash.substring(1,this.hash.length));
       window.scrollTo(0, element.offsetTop)
     }

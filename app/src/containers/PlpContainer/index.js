@@ -388,7 +388,7 @@ export class PlpContainer extends React.Component {
             });
           } else {
             this.setState({
-              error: error.response.data.error.error_message,
+              error: error.response ? error.response.data.error.error_message : '',
               isLoading: false,
             });
 

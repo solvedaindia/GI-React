@@ -92,7 +92,7 @@ export class SubCategory extends React.Component {
             subCatData.map((subCatListData, index) => {
 			  var routePath = createCategoryPlpURL(subCatListData.categoryIdentifier);
               return (
-                <figure className="subCatSlider">
+                <figure className="subCatSlider" key={index}>
                     <Link to={routePath}>
                     <img className="subCatImg" src={`${imagePrefix}${subCatListData.thumbnail}`} alt={subCatListData.imageAltText ? subCatListData.imageAltText : ''}
                     />

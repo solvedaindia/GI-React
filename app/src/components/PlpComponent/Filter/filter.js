@@ -144,8 +144,7 @@ class Filter extends React.Component {
 
   onLabelClick(ref)
   {
-    alert("aaa");
-    console.log(ref);
+    // alert("aaa");
   }
 
   onFacetChange(isToggle) {

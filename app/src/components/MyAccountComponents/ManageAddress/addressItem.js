@@ -60,7 +60,6 @@ class AddressItem extends React.Component {
         this.props.onUpdateActivity();
       })
       .catch(error => {
-        console.log('Error: ', error);
       });
 
     appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);

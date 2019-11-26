@@ -119,7 +119,6 @@ class WillowKitchenConfiguration extends React.Component {
 
    const{ configurationTabing, currentIndex } =this.state;
   //  if (currentIndex != -1)
-  //  console.log('sahir', configurationTabing[currentIndex].bannerList)
   const tabs = !!configurationTabing && configurationTabing.map((tabData, index) =>{
     return(
       <>

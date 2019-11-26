@@ -31,11 +31,6 @@ class EspotContent extends React.Component {
     // if(e.target.nodeName=="IMG" || e.target.nodeName=="H2")
     if(e.target.parentElement.nodeName=="A" || e.target.parentElement.nodeName=="a" )
     {
-      //console.log("target",e.target.nodeName);
-      
-      //console.log("target P",e.target.parentElement.nodeName);
-     // alert(e.target.parentElement.attributes.getNamedItem('url').value)
-     //console.log("target l",this.props.history);
      const path = e.target.parentElement.attributes.getNamedItem('url').value;
      if(path)
      {
@@ -57,7 +52,6 @@ class EspotContent extends React.Component {
       .get(espotAPI + this.state.espotName)
       .then(response => {
         const {data} = response || {};
-        //console.log("Ali Ahmad,",data.data.content.split('<a').join('<a onClick="'+this.onItemClick.bind()+'"').split('href').join('url'));
         this.setState({
           pageLayoutEspot: data && data.data,
           isLoading: false,
@@ -78,7 +72,6 @@ class EspotContent extends React.Component {
   render() {
     const { pageLayoutEspot, index } = this.state;
     if(!pageLayoutEspot) return null;
-    console.log("pageLayoutEspot",pageLayoutEspot.content)
     return (
 		!!pageLayoutEspot && (
 

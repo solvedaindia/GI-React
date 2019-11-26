@@ -106,18 +106,18 @@ class StoreLinks extends React.Component {
                     <ul className={`store_area`}>
                         { this.props.name.children && this.props.name.children.length > 0 &&
                             this.props.name.children.map((links, i) => {
-                            return (
-                                <>
-                                { i+1 <= this.state.defaultCount && 
-                                <li className='list' key={i}>
-                                    <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
-                                        {links.text}
-                                    </Link>
-                                   
-                                </li>
+                                if(i+1 <= this.state.defaultCount){
+                                    return (                
+                                        <li className='list' key={i}>
+                                            <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
+                                                {links.text}
+                                            </Link>
+                                           
+                                        </li>
+                                    )
+
                                 }
-                                </>
-                            )})
+                            })
                         }
                         { this.props.name.children && this.props.name.children.length > 0 &&
                          <li className='list moreButton'>

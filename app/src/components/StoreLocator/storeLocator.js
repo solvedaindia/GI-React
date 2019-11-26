@@ -178,7 +178,6 @@ class StoreLocator extends React.Component {
     }
     onInfoWindowClose()
     {
-        //console.log("lasec",lastOpenWindow)
         this.lastOpenWindow=null;
     }
 

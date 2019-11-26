@@ -39,7 +39,6 @@ class ContentEspot extends React.Component {
 
   componentDidMount() {
     this.getEspotData();
-    // console.log('this.props.handler()',this.props.handler())
   }
 
   render() {
