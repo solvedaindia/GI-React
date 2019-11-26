@@ -135,7 +135,7 @@ class DeleteCartItem extends React.Component {
 
 				{this.state.isWelcomeBack ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> :
 
-					<Modal className='modal deletItem' isCartModal={this.setState.isCartModal} show={this.state.show} onHide={this.handleClose}>
+					<Modal className='modal deletItem' iscartmodal={this.setState.isCartModal} show={this.state.show} onHide={this.handleClose}>
 						<Modal.Body>
 							<Button className="close" onClick={this.handleClose}></Button>
 							<Row>
