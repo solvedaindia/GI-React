@@ -370,7 +370,7 @@ class RegisterWithEmailMobile extends React.Component {
                     </p>
                     <p className="sign_text">
                     {YOU_AGREE + ' '}
-                      <a className="link" href="">
+                      <a className="link" href="termsconditions">
                        {T_C}
                       </a>{' '}
                     </p>

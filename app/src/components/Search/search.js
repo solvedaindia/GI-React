@@ -25,6 +25,7 @@ class SearchBar extends React.Component {
     this.state = {
       searchData: [],
       categorySearchData: [],
+      searchValue: null,
     };
     this.handleClick = this.handleChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -41,6 +42,7 @@ class SearchBar extends React.Component {
     }
     this.setState({
       searchData: [],
+      searchValue: null
     });
 
     if (searchText.length > 1) {
@@ -168,7 +170,9 @@ class SearchBar extends React.Component {
     return (
       <div className='searchBar'>
         <SearchLogo />
-        <input className='searchInput' id='searchInput' onPaste={this.showButton}  onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' />
+        <input className='searchInput' id='searchInput' onPaste={this.showButton}  onKeyPress={this.showButton} onChange={this.handleChange} onClick={this.handleChange} type='text' autoComplete='off' placeholder='What are you looking for?' 
+        value={this.state.searchValue !== null? this.state.searchValue : undefined} />
+
         <a className='clearField' id='clearField' role='button' onClick={this.clearFields}>X</a>
         {searchData.length > 0 &&
           <div id='autoSuggestDiv' ref={node => { this.node = node; }}>
@@ -180,9 +184,9 @@ class SearchBar extends React.Component {
                 var searchStr = item.term;
                 if (index < 6) {
                   return (
-                    <li className="list" key={index}>
+                    <li onClick={() => this.state.searchValue = searchStr} className="list" key={index}>
                       <Link name={searchStr} className="link" onClick={this.onLinkNavigation} to={{ pathname: '/search', search: `keyword=${searchStr}`, }} >
-                        <strong>{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length).replace(' ', '')}
+                        <strong >{searchStr.substr(0, searchItem.length)}</strong>{searchStr.substr(searchItem.length).replace(' ', '')}
                       </Link>
                     </li>
                   );

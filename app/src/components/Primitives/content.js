@@ -78,7 +78,6 @@ class EspotContent extends React.Component {
   render() {
     const { pageLayoutEspot, index } = this.state;
     if(!pageLayoutEspot) return null;
-    console.log("pageLayoutEspot",pageLayoutEspot.content)
     return (
 		!!pageLayoutEspot && (
 
