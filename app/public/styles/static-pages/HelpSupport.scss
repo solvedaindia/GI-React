@@ -231,15 +231,19 @@
   &.serviceSupport{
     .support-faq{
       .panel-group{
+        margin-bottom: 40px;
         .panel{
           .panel-heading{
+            padding-left: 0px;
             h5{display: none}
             .faq-h4{
               float:none;
               width: 100%;
               position: relative;
+              font-size: 16px;
               .accordion-toggle{
                 text-decoration: none;
+                color: #000000;
                 &::after{
                   content: '+';
                   right: -11px;
@@ -265,6 +269,31 @@
                 position:absolute;
               }
             }
+          }
+          .panel-body{
+            padding-left:0px;
+            color:#888a8d;
+          }
+        }
+      }
+    }
+
+    .support-faq-menu{
+      .faq-heading{
+        font-size:14px;
+        font-family:$font-bold ;
+        text-align: left;
+      }
+      li{
+       
+        a{
+          font-size: 14px;
+          color:$black ;
+          display: block;
+          padding: 10px 12px;
+          &:hover{
+            background: $paleGrey;
+            text-decoration: none;
           }
         }
       }
