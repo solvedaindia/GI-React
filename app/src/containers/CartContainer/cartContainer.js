@@ -268,10 +268,10 @@ class CartDetail extends React.Component {
             <span className='val'>-₹{formatPrice(cartData.orderSummary.shippingCharges)}</span>
           </p>
         }
-        <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
+        <div className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
           <EMIVal getCartDetails={this.props.getCartDetails} price={cartData.orderSummary.netAmount} />
           <EmiInfo price={cartData.orderSummary.netAmount}/>
-        </p>
+        </div>
         {!isMobile() ? <p className='totalAmt'>
           <span className='totalPrice'> {TOTAL}</span>
           <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>
