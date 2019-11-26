@@ -224,6 +224,7 @@ export default class App extends React.Component {
    
 		if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
 		{
+      appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
 		  navigator.geolocation.getCurrentPosition(
 			function(){appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);}
 		  );
@@ -284,10 +285,10 @@ export default class App extends React.Component {
   
   getCurrentLocation() 
   {
-    if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
-		{
-       appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-    }
+    // if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
+		// {
+    //    appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+    // }
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(showPosition.bind(this));
     // }
