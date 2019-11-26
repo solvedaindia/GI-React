@@ -73,7 +73,7 @@ exports.getEndPoint = function getEndPoint() {
       break;
     case 'PRDLV':
       endpointConfigURL.hostname = 'tsapp.godrejprodlive.godrej.com';
-      endpointConfigURL.searchHostname = 'searchrepeater.godrejprodlive.godrej.com';
+      endpointConfigURL.searchHostname = 'search.godrejprodlive.godrej.com';
       break;
 
   }

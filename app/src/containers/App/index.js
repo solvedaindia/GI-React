@@ -343,14 +343,15 @@ export default class App extends React.Component {
 	  <div id="mainContainer">
 		<LastLocationProvider>
         <Switch>
-        
           <Route exact path="/" component={HomePageContainer} />
-		  <Route path="/online-furniture-kitchen_s" component={Kitchens} />
-		  <Route path="/online-furniture-kitchen" component={Kitchens} />
-		  <Route path="/online-furniture-wardrobes" component={WardrobesContainer} />
-		  <Route path="/online-furniture-wardrobes_S" component={WardrobesContainer} />
+		      <Route path="/online-furniture-kitchen_s" component={Kitchens} />
+		      <Route path="/online-furniture-kitchen" component={Kitchens} />
+		      <Route path="/online-furniture-wardrobes" component={WardrobesContainer} />
+		      <Route path="/online-furniture-wardrobes_S" component={WardrobesContainer} />
+          <Route path="/online-furniture-chef-kitchen" component={SteelChefKitchen} />
+          <Route path="/online-furniture-willow-kitchen" component={WillowKitchen} />
           <Route path="/online-furniture-:id" component={ClpContainer} />
-		  <Route path="/furniture-online-:productId/:skuId" component={PdpContainer} />
+		      <Route path="/furniture-online-:productId/:skuId" component={PdpContainer} />
           <Route path="/furniture-:id" component={PlpContainer} />
           <Route path="/forgotpassword" component={ForgotpassContainer} />
           <Route path="/register" component={RegisterNow} />
@@ -367,8 +368,6 @@ export default class App extends React.Component {
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
-          <Route path="/online-furniture-chef-kitchen" component={SteelChefKitchen} />
-          <Route path="/online-furniture-willow-kitchen" component={WillowKitchen} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/lookbook" component={InspirationDetails} />
           <Route path="/privacy-policy" component={privacyPolicy} />
@@ -376,11 +375,8 @@ export default class App extends React.Component {
           <Route path="/support" component={HelpSupport} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
-
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
-
-          
         </Switch>
         </LastLocationProvider>
 		</div>
