@@ -131,17 +131,15 @@ class CartCount extends React.Component {
   renderOptions() {
     if (this.state.minicartData) {
       return this.state.minicartData.map((option, i) => (
-        <>
-          <div
-            onClick={evt => this.handleClick(i)}
-            key={i}
-            className={`dropdown__list-item${
-              i === this.state.selected ? '' : ''
-              }`}
-          >
-            <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
-          </div>
-        </>
+        <div
+        onClick={evt => this.handleClick(i)}
+        key={i}
+        className={`dropdown__list-item${
+          i === this.state.selected ? '' : ''
+          }`}
+      >
+        <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
+      </div>
       ));
     }
   }

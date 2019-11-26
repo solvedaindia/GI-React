@@ -71,7 +71,7 @@ export class StoreDetails extends React.Component {
                         <p className='title'>{EXPERIENCE_OUR_STORES}</p>
                         {
 							!!storeData && !!storeData.latitude && storeData.latitude &&
-                            <p className='details'>{EXP_OUR_PRODUCTS}
+                            <div className='details'>{EXP_OUR_PRODUCTS}
                                 <Link
                                     className='storeLink'
                                     to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
@@ -80,7 +80,7 @@ export class StoreDetails extends React.Component {
                                     <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} {KM_AWAY}</span>
                                 </Link>
                                 <span className='details'>{!isMobile() ?<p>You can find more stores around you.</p>: ' near you'}</span>
-                            </p>
+                            </div>
                         }
                         <Link
                             className='storeLink'
