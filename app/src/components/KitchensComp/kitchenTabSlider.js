@@ -98,7 +98,6 @@ class KitchenConfiguration extends React.Component {
               dots: false,
               centerMode: false,
               infinite: true,
-              variableWidth: true,
               arrows: false
             }
           }
@@ -144,7 +143,7 @@ class KitchenConfiguration extends React.Component {
               dots: false,
               centerMode: false,
               infinite: false,
-              variableWidth: true,
+              // variableWidth: true,
               arrows: false
             }
           }
