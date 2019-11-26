@@ -46,6 +46,7 @@ class AboutWillowKitchen extends React.Component {
               <DescriptionBanner
                 descriptionDataPro={this.state.readableData}
                 ref={divElement => (this.divElement = divElement)}
+                isH1Tag={true}
               />
             </div>
           )

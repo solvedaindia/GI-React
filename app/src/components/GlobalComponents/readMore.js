@@ -46,7 +46,7 @@ class ReadMore extends React.Component {
           <DescriptionBanner
             descriptionDataPro={this.state.readableData}
             ref={divElement => (this.divElement = divElement)}
-            isFromCLP={true}
+            isH1Tag={true}
           />
         </div>
       )
