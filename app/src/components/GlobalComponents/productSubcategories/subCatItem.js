@@ -6,7 +6,7 @@ import {STARTING_RS, PRODUCTS} from '../../../constants/app/footerConstants';
 const subCatItem = ({ itemData }) => (
     <>
         <div className="featureCarouselbox clearfix">
-            <SubCatImage imageData={itemData.thumbnail} uniqueIdPro={itemData.categoryIdentifier} categoryNamePro={itemData.categoryName} />
+            <SubCatImage imageData={itemData.thumbnail} uniqueIdPro={itemData.categoryIdentifier} categoryNamePro={itemData.categoryName} altImage={itemData.imageAltText} />
             <div className="itemtext">
                 <div className="leftbox">
                     <div className="bold">{itemData.categoryName}</div>

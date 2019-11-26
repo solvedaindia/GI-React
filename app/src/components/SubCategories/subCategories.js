@@ -51,9 +51,9 @@ class SubCategoriesArray extends React.Component {
 			      var subcatName = String(subCategoryData.categoryName).toLowerCase();
 			
             if (this.props.categoryNamePro.toLowerCase().indexOf('rooms') > -1 ) {
-              routePath = `/rooms-${subCategoryData.categoryIdentifier.toLowerCase()}`;
+              routePath = `/online-furniture-${subCategoryData.categoryIdentifier.toLowerCase()}`;
             }
-            else if (this.props.categoryNamePro.indexOf('Inspiration') > -1 ) {
+            else if (this.props.categoryNamePro.indexOf('inspiration') > -1 ) {
               routePath = '/inspiration';
             }
             else {
