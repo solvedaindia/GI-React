@@ -86,9 +86,12 @@ class BestSeller extends React.Component {
         },
       ],
     };
+    if(productList.length<=0){
+      return null;
+    }
     return (
       <div className="bestSeller">
-        {productList.length>0? <h3 className="title">{title}</h3>:null}
+        <h3 className="title">{title}</h3>
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {
