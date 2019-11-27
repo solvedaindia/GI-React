@@ -138,7 +138,7 @@ class WillowKitchenConfiguration extends React.Component {
   })
   return (
     <div className='container'>
-        <h1>{this.state.title}</h1>
+        <h2 className='heading-text text-center'>{this.state.title}</h2>
          <div className='configurationTab'>
          {!isMobile() ? 
             <ul className='configuration-tab'>
