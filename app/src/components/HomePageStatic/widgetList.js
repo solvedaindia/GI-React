@@ -20,8 +20,6 @@ export default function WidgetList({ componentType, ...rest }) {
       } else return null;
     case 'best_selling':
       return <BestSeller {...rest} />;
-    case 'recently_viewed':
-      return <Recently {...rest} />;
     case 'product_category':
       return <SubCategory {...rest} />;
     case 'content':

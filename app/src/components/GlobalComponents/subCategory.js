@@ -85,7 +85,7 @@ export class SubCategory extends React.Component {
     };
     return (
       <div className="featuredCat">
-        <h2 className="title">{SPOTLIGHT}</h2>
+        {(subCatData && subCatData.length>0) ? <h2 className="title">{SPOTLIGHT}</h2> : null}
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {

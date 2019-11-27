@@ -28,7 +28,7 @@ class BestSeller extends React.Component {
         const { data } = response || {};
         const bsData = data && data.data;
         this.setState({
-          bestSellerData: (is(bsData, 'Object') && bsData) || {},
+          bestSellerData: (is(bsData, 'Object') && bsData) || [],
           isLoading: false,
         });
       })
@@ -88,7 +88,7 @@ class BestSeller extends React.Component {
     };
     return (
       <div className="bestSeller">
-        <h3 className="title">{title}</h3>
+        {productList.length>0? <h3 className="title">{title}</h3>:null}
         <Slider {...settings}>
           {is(productList, 'Array') &&
             productList.map((sellerItemData, index) => {

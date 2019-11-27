@@ -77,7 +77,6 @@ const isIPad = /ipad/.test(userAgent);
 
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
-// alert(history,'history');
 
 // history.listen(({pathname}) => {
 //   shouldScrollLogin && window.scrollTo(0,0)
@@ -308,7 +307,6 @@ export default class App extends React.Component {
 
   render() 
   {
-    //alert("first launch")
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
