@@ -123,7 +123,7 @@ class ThemeData extends React.Component {
                     <img
                         className='img'
                         src={`${imagePrefix}${itemDetail.thumbnail}`}
-                        alt='img'
+                        alt={itemDetail.imageAltText}
                     />
                 </figure>
                 <div className='prodDetails'>
