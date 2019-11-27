@@ -168,7 +168,7 @@ class ProductItem extends React.Component {
             {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
               <ul className="colortheme clearfix">
 
-                {swatchFinalData.map(item => {
+                {swatchFinalData.map((item,index) => {
                   var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
                   var checkedType = false;
 									var radioButtonHtml;
@@ -192,7 +192,7 @@ class ProductItem extends React.Component {
 										name = <img className="imgCircle" src={`${imagePrefix}${imgUrl}`} />;
 									}
                   return (
-                    <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+                    <li key={index} onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
                 <span className={name==''?'swatches-circle':'swatches-circle-img'} style={colorStyle}>{name}</span>
                     </li>
                   )

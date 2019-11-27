@@ -53,7 +53,6 @@ class WillowKitchenConfiguration extends React.Component {
 
 
   onHandleClick = (index) =>{
-      // alert(index)
     
      this.setState({currentIndex: index})
   }

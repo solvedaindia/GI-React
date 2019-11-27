@@ -36,7 +36,7 @@ class GuestTrackOrder extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Please enter OrderID',
+        errorMessage: 'Please enter valid Order Number',
       });
       return;
     }

@@ -293,7 +293,6 @@ class MyProfile extends React.Component {
           //   </div>
           // ),
         });
-        //alert(error.response.data.error.error_message)
       });
   }
 

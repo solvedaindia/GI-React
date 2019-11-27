@@ -56,7 +56,6 @@ class CartCount extends React.Component {
    */
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.state.active) {
-      //alert('You clicked outside of me!');
       this.toggleDropdown();
     }
   }

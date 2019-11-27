@@ -92,14 +92,13 @@ class Filter extends React.Component {
 
 
   handleOutsideClick(e) {
-    if (this.node.contains(e.target)) {
+    if (this.node && this.node.contains(e.target)) {
       return;
     }
     this.toggleDropdown();
   }
 
   onCheckBoxClick(index) {
-    //alert(index)
     const selectedFacet = this.props.dataPro.facetValues[index];
 
     let filteredArr = [...this.state.facetArr];

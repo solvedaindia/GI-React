@@ -568,7 +568,7 @@ class StoreLocator extends React.Component {
 												iconType = blueIcon;
 											}
                                         return (
-                                            <>
+                                           
                                                 <div key={index}>
                                                     <div className={`storeListItem ${ribbonClass}`}>
                                                         {physicalData.ribbonText &&
@@ -600,7 +600,7 @@ class StoreLocator extends React.Component {
                                                             </div>
                                                         </div>
                                                     </div></div>
-                                            </>
+                                          
                                         );
                                     }
                                     )
@@ -618,7 +618,7 @@ class StoreLocator extends React.Component {
 												iconType = blueIcon;
 											}
                                             return (
-                                                <>
+                                               
                                                     <div key={index} className='store-list-item-box'>
                                                         <div className={`storeListItem ${ribbonClass}`}>
                                                             {physicalData.ribbonText &&
@@ -650,7 +650,7 @@ class StoreLocator extends React.Component {
                                                                 </div>
                                                             </div>
                                                         </div></div>
-                                                </>
+                                               
                                             );
                                         }
                                         )}

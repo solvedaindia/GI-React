@@ -62,7 +62,7 @@ class LivingTheme extends React.Component {
 				<p className='desc'>{themeData.description}</p>
 			</div>
 			{!isMobile() ?
-				themeData.recoImgArray.map((themeItem, index) => {
+				themeData.recoImgArray && themeData.recoImgArray.map((themeItem, index) => {
 					return(
 						<div className='content-childTheme' key={index}>
 							<figure>
@@ -74,7 +74,7 @@ class LivingTheme extends React.Component {
 				})
 				:
 				<Slider {...settings}>
-					{themeData.recoImgArray.map((themeItem, index) => {
+					{themeData.recoImgArray && themeData.recoImgArray.map((themeItem, index) => {
 						return(
 							<div className='content-childTheme'>
 								<figure>
