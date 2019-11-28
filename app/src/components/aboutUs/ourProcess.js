@@ -128,7 +128,8 @@ render() {
           </div>
           <div className='row'>
             <div className='col-md-6'>
-              <img className='processBigImg' src={imagePrefix + this.state.img_url} alt='image' />
+              <img className='processBigImg' src={imagePrefix + this.state.img_url} 
+              alt={this.state.data[this.state.selected_index] ? this.state.data[this.state.selected_index].image_url.alt : null} />
               <div>
                 
                 {viewers}

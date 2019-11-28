@@ -96,7 +96,7 @@ export default class GreenInitiatives extends Component {
 				  <div key={slide}>               
 					  <div className='col-md-2 greenInitiativeImageDiv'>
 						<a href={slide.onClickUrl} >
-						  <img className="greenImage" src={imagePrefix + slide.imageSrc} alt="Green"/>
+						  <img className="greenImage" src={imagePrefix + slide.imageSrc} alt={slide.alt ? slide.alt : ''}/>
 						</a>
 					  </div>
 					  <div className='col-md-8'>
