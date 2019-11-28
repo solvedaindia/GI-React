@@ -5,7 +5,7 @@ import { trimTheSentence } from '../../../utils/utilityManager';
 class Title extends React.Component {
   render() {
     return (
-      <div className="head text">
+      <div className="heading text">
         <h2 className="name">{this.props.titlePro.length > productTitleCharLimit ? trimTheSentence(this.props.titlePro, productTitleCharLimit) : this.props.titlePro } </h2>
         {this.props.descriptionPro ? (
           <p className="description">
