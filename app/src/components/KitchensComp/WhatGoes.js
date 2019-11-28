@@ -77,7 +77,7 @@ class WhatGoes extends React.Component {
     };
     return (
       <div className="goesOnKitchen">
-            <h1 className="title">{this.state.title}</h1>
+            <h2 className="title">{this.state.title}</h2>
             
             <Slider {...settings}>
             {!!whatGoesSlider &&
