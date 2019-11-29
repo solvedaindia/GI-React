@@ -111,7 +111,9 @@ class PlpComponent extends React.Component {
               plpBreadcrumbPro={this.props.plpBreadcrumbPro}
             />
           }
-          <AdBanner indexPro={index + 1} />
+          <AdBanner indexPro={index + 1} columnCount ={this.props.coloumnLayout} 
+                    fromWishList={this.props.isFromWishlistPro}
+                    isMobile={isMobile()}/>
         </>
       ));
       this.setState({ plpItem: item });
