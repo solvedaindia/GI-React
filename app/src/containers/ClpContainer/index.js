@@ -78,7 +78,7 @@ export class CLPContainer extends React.Component {
             <CLPFullBanner {...this.props.match.params} />
           </div>
 		  
-          <Breadcrumb catBreadCrumb={this.state.categoryDetails.categoryName}/>
+          <Breadcrumb catBreadCrumb={this.state.categoryDetails && this.state.categoryDetails.categoryName}/>
           <FeaturedCategory {...this.props.match.params} />
           <LivingTheme {...this.props.match.params} />
           <BestSeller {...this.props.match.params} />

@@ -277,9 +277,14 @@ class addToCartComponent extends React.Component {
     } else if (props.inventoryStatus === 'unavailable') {
       return <NotifyMe partNumber={this.props.skuData.partNumber} sticky={this.props.sticky} />
     } 
-    return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+    return(
+    <> 
+    <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+    <div className='clearfix'></div>
+    </>
+    )
   }
-
+  
   render() { 
   let storeText = 'store';
   let btnName = 'Update';
