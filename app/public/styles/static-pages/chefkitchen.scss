@@ -572,9 +572,10 @@
   @include mix-md{
     .staticpage{
         &.chefKitchen, &.willowKitchen{
-          .heading,h1{
+          .heading,h1, .heading-text{
             font-size: 16px;
             font-weight: bold;
+
           }
         .namingconv {
           font-size:12px;
