@@ -552,9 +552,9 @@ class StoreLocator extends React.Component {
                 <div className="clearfix"></div>
                 {storeData &&
                     <div className="storeDetails clearfix">
-                        {!isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>) : ''}
+                        {!isMobile() ? (<h2 className='headingtitle'>One-stop destination for all your furniture needs</h2>) : ''}
                         <div className='storeList'>
-                            {isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>) : ''}
+                            {isMobile() ? (<h2 className='headingtitle'>One-stop destination for all your furniture needs</h2>) : ''}
                             {<div className='detailCard' id='detailCardSection'>
                                 {!isMobile() ? (
                                     !!storeData && storeData.data.map((physicalData, index) => {
