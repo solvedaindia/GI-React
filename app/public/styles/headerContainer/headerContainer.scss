@@ -25,8 +25,9 @@ header {
         opacity: 0;
     }
     .catNav {
-        visibility: hidden;
-        opacity: 0;
+        visibility: visible;
+        opacity: 1;                
+        animation: fade 1.6s;
         position: absolute;
         top: 72px;       
         z-index: 5;
@@ -82,14 +83,14 @@ header {
             }
         }
     }
-    &:hover{
-        .catNav {
-            visibility: visible;
-            opacity: 1;                
-            animation: fade 1.6s;
-            // padding: $base*4;
-        }
-    }
+    // &:hover{
+    //     .catNav {
+    //         visibility: visible;
+    //         opacity: 1;                
+    //         animation: fade 1.6s;
+    //         // padding: $base*4;
+    //     }
+    // }
     .catList, 
     .catLongList{
         left: -20px;
@@ -116,6 +117,12 @@ header {
     &:hover {
         text-decoration: none;
     }
+}
+.action-menu{
+
+    padding: 28px 0px;
+    
+
 }
 .subCatImage {
     z-index: 4;

@@ -307,9 +307,9 @@ class PdpComponent extends React.Component {
 // 	var box1=168;
 //   }
   //if (document.getElementById("priceId") && document.getElementById("box3")) {
-  var box2 = document.getElementById("priceId").offsetTop;
-  var box3 = document.getElementById("box3").offsetTop;
-  var headeroffset=document.getElementById("Pdpstickybar").getBoundingClientRect().top;
+  var box2 = document.getElementById("priceId") ? document.getElementById("priceId").offsetTop : null;
+  var box3 = document.getElementById("box3") ? document.getElementById("box3").offsetTop : null;
+  var headeroffset= document.getElementById("Pdpstickybar") ? document.getElementById("Pdpstickybar").getBoundingClientRect().top : null;
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
   var scrollbox1;
 
@@ -318,28 +318,40 @@ class PdpComponent extends React.Component {
   var scrollbox3=box3-scrollTop;
   
   if(scrollbox1 <= headeroffset){
-    document.getElementById("Pdpstickybar").classList.add('slidedown');			
-    setTimeout(() => {			
-    document.getElementById("topdiv1").classList.add('slideUpPrice');
-    document.getElementById("topdiv1").style.cssText = "opacity: 1;";			
+	  if(document.getElementById("Pdpstickybar")){
+		document.getElementById("Pdpstickybar").classList.add('slidedown');	
+	  }
+    setTimeout(() => {		
+		if(document.getElementById("topdiv1")){
+			document.getElementById("topdiv1").classList.add('slideUpPrice');
+			document.getElementById("topdiv1").style.cssText = "opacity: 1;";
+		}
   }, 100);
   }
   
   if(scrollbox1 > headeroffset){			
-    setTimeout(() => {	
-    document.getElementById("Pdpstickybar").classList.remove('slidedown');
-    document.getElementById("topdiv1").classList.remove('slideUpPrice');	
-    document.getElementById("topdiv1").style.cssText = "opacity: 0;"
-    document.getElementById("box1").style.cssText = "opacity: 1;";	
+    setTimeout(() => {
+	if(document.getElementById("Pdpstickybar")){
+	  document.getElementById("Pdpstickybar").classList.remove('slidedown');
+	}
+	if(document.getElementById("topdiv1")){
+		document.getElementById("topdiv1").classList.remove('slideUpPrice');	
+		document.getElementById("topdiv1").style.cssText = "opacity: 0;"
+	}
+	if(document.getElementById("box1")){
+		document.getElementById("box1").style.cssText = "opacity: 1;";	
+	}		
   }, 10);
   }
 
   /*------BOX2
   -------------------*/
   if(scrollbox2 <= headeroffset){	
-    setTimeout(() => {	
-    document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
-    document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+    setTimeout(() => {
+		if(document.getElementById("topdiv2")){
+			document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
+			document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+		}	
   }, 0);
   }
   
@@ -351,8 +363,10 @@ class PdpComponent extends React.Component {
   /*------BOX3
   -------------------*/
   if(scrollbox3<= headeroffset){	
-    document.getElementById("topdiv3").classList.add('slideUpCart');
-    document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+	  if( document.getElementById("topdiv3")){
+		  document.getElementById("topdiv3").classList.add('slideUpCart');
+		  document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+	  }
   }
   
   if(scrollbox3> headeroffset){		
@@ -362,14 +376,17 @@ class PdpComponent extends React.Component {
 
   // header 
   var header = document.getElementById("header");
-  var sticky = header.offsetTop;		
-  if (window.pageYOffset > sticky) 
-  {
-    header.classList.add("sticky");
-  } 			
-  else {
-    header.classList.remove("sticky");
+  if(header){
+	  var sticky = header.offsetTop;		
+	  if (window.pageYOffset > sticky) 
+	  {
+		header.classList.add("sticky");
+	  } 			
+	  else {
+		header.classList.remove("sticky");
+	  }
   }
+  
   //}
 }
 // handleScroll function End
@@ -420,9 +437,9 @@ class PdpComponent extends React.Component {
 						 <span className='text'>{this.state.skuData.partNumber}</span>
 						</div>
 
-						{/* <h1 className='heading'>
+						<h1 className='heading'>
 							{this.state.skuData.productName}
-						</h1> */}
+						</h1>
 						<div className='lockerText'>{this.state.skuData.shortDescription}</div>
 					</div>
 					<div className='cartofferprice-wrap'>

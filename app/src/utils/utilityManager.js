@@ -360,7 +360,7 @@ export function createTopCategoryPlpURL(categoryIdentifier)
 	{
 		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
 		catIdentifier = catIdentifier.replace(/ /g, "");
-        categoryRoutePath = `/rooms-${catIdentifier}`;
+        categoryRoutePath = `/online-furniture-${catIdentifier}`;
 
 	}
     return categoryRoutePath;

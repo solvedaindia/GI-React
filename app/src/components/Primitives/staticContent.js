@@ -25,9 +25,6 @@ class ContentEspot extends React.Component {
             isLoading: false,
         });
         this.props.handler()
-        
-        // alert( this.props.handler())
-       
       })
       .catch(error => {
         this.setState({

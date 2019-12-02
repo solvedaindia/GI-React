@@ -83,6 +83,9 @@ export class SubCategory extends React.Component {
         },
       ],
     };
+    if(!subCatData || subCatData.length<=0){
+      return null;
+    }
     return (
       <div className="featuredCat">
         <h2 className="title">{SPOTLIGHT}</h2>

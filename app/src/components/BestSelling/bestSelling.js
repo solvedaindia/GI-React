@@ -28,7 +28,7 @@ class BestSeller extends React.Component {
         const { data } = response || {};
         const bsData = data && data.data;
         this.setState({
-          bestSellerData: (is(bsData, 'Object') && bsData) || {},
+          bestSellerData: (is(bsData, 'Object') && bsData) || [],
           isLoading: false,
         });
       })
@@ -86,6 +86,9 @@ class BestSeller extends React.Component {
         },
       ],
     };
+    if(productList.length<=0){
+      return null;
+    }
     return (
       <div className="bestSeller">
         <h3 className="title">{title}</h3>

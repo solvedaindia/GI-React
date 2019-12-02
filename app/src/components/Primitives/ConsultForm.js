@@ -234,12 +234,12 @@ handleValidation=(obj, errorType)=>{
 items = this.state.dropDownArr.map((item, index) => {
   if(currentIndex==0){
     return(
-      <option value={item}>{item}</option>
+      <option key={index} value={item}>{item}</option>
     )
   }
   else{
     return(
-      <option value={item} selected='false'>{item}</option>
+      <option key={index} value={item} selected='false'>{item}</option>
     )
   }
   
@@ -326,7 +326,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="number">{MOBILE_NUMBER}</label>
-                      <input className="form-control"  onChange={this.handleChange}  pattern="[0-9]*" value={mobileNumber} id="mobileNumber" type="mobile" name="mobileNumber" maxlength="10" required/>
+                      <input className="form-control"  onChange={this.handleChange}  pattern="[0-9]*" value={mobileNumber} id="mobileNumber" type="mobile" name="mobileNumber" maxLength="10" required/>
                       {errorMessageMobile}
                     </div>
                   </div>

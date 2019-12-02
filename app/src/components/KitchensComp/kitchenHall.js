@@ -89,7 +89,7 @@ class KitchenHall extends React.Component {
     return (
       hallSlider && 
       <div className="hallOfFame">
-        <div class="hallOfFameHeadingDiv">
+        <div className="hallOfFameHeadingDiv">
           <h2 className="title">{title}</h2>
           <p className="desc">{description}</p>
         </div>

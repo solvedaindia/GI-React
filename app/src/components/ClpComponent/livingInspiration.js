@@ -62,11 +62,11 @@ class LivingTheme extends React.Component {
 				<p className='desc'>{themeData.description}</p>
 			</div>
 			{!isMobile() ?
-				themeData.recoImgArray.map((themeItem, index) => {
+				themeData.recoImgArray && themeData.recoImgArray.map((themeItem, index) => {
 					return(
 						<div className='content-childTheme' key={index}>
 							<figure>
-								<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
+								<img src={`${imagePrefix}${themeItem.fullImage}`} alt={themeItem.altText} className='img'/>
 								<ThemeListData themeItem = { themeItem } key={`${index}-livingTheme`}/>
 							</figure>
 						</div>
@@ -74,11 +74,11 @@ class LivingTheme extends React.Component {
 				})
 				:
 				<Slider {...settings}>
-					{themeData.recoImgArray.map((themeItem, index) => {
+					{themeData.recoImgArray && themeData.recoImgArray.map((themeItem, index) => {
 						return(
 							<div className='content-childTheme'>
 								<figure>
-									<img src={`${imagePrefix}${themeItem.fullImage}`} alt='img' className='img'/>
+									<img src={`${imagePrefix}${themeItem.fullImage}`} alt={themeItem.altText} className='img'/>
 								</figure>
 								<ThemeListData themeItem = { themeItem } key={`${index}-livingTheme`}/>
 							</div>
