@@ -1,6 +1,6 @@
 import { getCookie } from '../../src/utils/utilityManager';
 import { validateEmptyObject } from '../../src/utils/validationManager';
-export const secureHttp = 'https';
+export const secureHttp = 'http';
 export const port1 = '';
 export const port2 = process.env.envKeys.WEBSERVER_NODE_PORT || process.env.envKeys.SERVER_PORT;
 export const imgHost = process.env.envKeys.IMAGE_ENDPOINT || window.location.hostname;

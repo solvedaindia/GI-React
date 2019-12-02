@@ -170,12 +170,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-const options = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert'),
-};
+// const options = {
+//   key: fs.readFileSync('server.key'),
+//   cert: fs.readFileSync('server.cert'),
+// };
 
-const server = https.createServer(options, app);
-server.listen(port, () =>
-  logger.info(`Server started on https://localhost:${port}`),
+// const server = https.createServer(options, app);
+app.listen(port, () =>
+  logger.info(`Server started on http://localhost:${port}`),
 );
