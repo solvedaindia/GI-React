@@ -19,7 +19,7 @@ import { webUrl } from '../../../public/constants/constants';
 import { scrollPage } from '../../utils/utilityManager';
 
 
-
+const logoImg = <img style={{width: '60px'}} src={require('../../../public/images/NN1.png')}/>
 export class HeaderContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -90,7 +90,7 @@ export class HeaderContainer extends React.Component {
       <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } />
       <header className="appheader" id='header'>
         <div className="logo">
-          {window.location.pathname === '/' ? (<a href="/"><Logo /></a>):(<Link to="/"><Logo /></Link>)}
+          {window.location.pathname === '/' ? (<a href="/">{logoImg}</a>):(<Link to="/">{logoImg}</Link>)}
         </div>
         <div className="navigation">
           <HeaderL1/>

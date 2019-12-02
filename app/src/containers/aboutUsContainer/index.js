@@ -7,6 +7,7 @@ import OurProcess from '../../components/aboutUs/ourProcess';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import Pixels from '../../components/Primitives/pixels';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 export class AboutUs extends React.Component {
   constructor(props) {
@@ -34,26 +35,26 @@ export class AboutUs extends React.Component {
 render() {
     return (
     <div className='staticpage about-us'>
-      <Pixels espotName={'GI_PIXEL_ABOUT_META'} />
+      <Pixels espotName={AboutUsES.aboutMeta} />
       <Breadcrumb {...this.props.match.params} staticName = {'About Us'}/>
-      <ContentEspot espotName={ 'GI_ABOUT_US_TOP' } />
-      <ContentEspot espotName={ 'GI_ABOUT_US_2' }   />
+      <ContentEspot espotName={ AboutUsES.top } />
+      <ContentEspot espotName={ AboutUsES.aboutUs2 }   />
       <div id='ourProcess'>
       <OurProcess   />
       </div>
-      <ContentEspot espotName={ 'GI_ABOUT_US_4' }   />
+      <ContentEspot espotName={ AboutUsES.aboutUs4 }   />
       <div id='greenInitiatives'>
       <GreenInitiatives />
       </div>
-      <ContentEspot espotName={ 'GI_ABOUT_US_6' }   />
+      <ContentEspot espotName={ AboutUsES.aboutUs6 }   />
       <div id='careers' >
-      <ContentEspot espotName={ 'GI_CAREERS' }  />
+      <ContentEspot espotName={ AboutUsES.careers }  />
       </div>
-      <ContentEspot espotName={ 'GI_ABOUT_US_8' } />
+      <ContentEspot espotName={ AboutUsES.aboutUs8 } />
       <div id='mediaPress'>
-      <ContentEspot espotName={ 'GI_MEDIA_PRESS' }  handler={(hash)=>this.onSuccessLoadWithScroll(hash)} />	
+      <ContentEspot espotName={ AboutUsES.mediaPress }  handler={(hash)=>this.onSuccessLoadWithScroll(hash)} />	
       </div>
-      <ContentEspot espotName={ 'GI_ABOUT_US_10' }   />
+      <ContentEspot espotName={ AboutUsES.aboutUs10 }   />
     </div>
     );
     }

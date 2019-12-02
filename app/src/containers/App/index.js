@@ -46,9 +46,7 @@ import '../../../public/styles/app.scss';
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';
-import Inspiration from '../InspirationCont/index';
 
-import InspirationDetails from '../InspirationDetailsContainer/index';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../termsAndConditions/index';

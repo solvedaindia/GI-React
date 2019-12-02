@@ -17,6 +17,7 @@ import Pixels from '../../components/Primitives/pixels';
 import apiManager from '../../utils/apiManager';
 import {catDetailsAPI,
 } from '../../../public/constants/constants';
+import { CLPES } from '../../utils/EspotConstant';
 
 // import Solution from '../../components/ClpComponent/solution';
 
@@ -60,7 +61,7 @@ export class CLPContainer extends React.Component {
 	  }
     return (
       <>
-        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_START' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
+        <ContentEspot espotName={ CLPES.bodyStart + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
          <section className="clpBase">
 		{this.state.categoryDetails ? 
 		(<>
@@ -82,10 +83,10 @@ export class CLPContainer extends React.Component {
           <FeaturedCategory {...this.props.match.params} />
           <LivingTheme {...this.props.match.params} />
           <BestSeller {...this.props.match.params} />
-          <ContentEspot espotName={ 'GI_Homepage_Godrej_Solution' } />
+          <ContentEspot espotName={ CLPES.soloution } />
           <CLPReadMore {...this.props.match.params} />
         </section>
-        <ContentEspot espotName={ 'GI_PIXEL_CLP_BODY_END' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
+        <ContentEspot espotName={ CLPES.bodyEnd + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '') } />
 
       </>
     );

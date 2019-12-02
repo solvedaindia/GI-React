@@ -317,6 +317,7 @@ export function createPdpURL(prodName, skuId){
 export function createSEOPdpURL(prodName, shortDesc, skuId){
 	if(prodName != undefined && prodName != '')
 	{
+        
 		prodName =prodName.toLowerCase();
 		var shortDescURL = '';
 		if(shortDesc != undefined && shortDesc != '') {
@@ -329,12 +330,13 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
 			shortDescURL =(shortDescURL.split('\\').join('-')).split('&').join('-');
 			shortDescURL = shortDescURL.toLowerCase();
             shortDescURL = '-' + shortDescURL;
-            shortDescURL = shortDescURL.replace('---', '-');
-            shortDescURL = shortDescURL.replace('--', '-');
+            shortDescURL = shortDescURL.replace(/---/g, '-');
+            shortDescURL = shortDescURL.replace(/--/g, '-');
+            
 		}
 		var prodURL= prodName.split(' ').join('-');
 		prodURL= prodURL.replace(/---/g, '-');
-		prodURL= prodURL.replace(/--/g, '-');
+        prodURL= prodURL.replace(/--/g, '-');
 		return '/furniture-online-' + prodURL +shortDescURL +  '/' + skuId;
 	}
     return '/furniture-online-' + prodName + '/' + skuId;

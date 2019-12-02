@@ -11,6 +11,8 @@ import CrossIcon from '../../components/SVGs/crossIcons.svg';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Pixels from '../../components/Primitives/pixels';
+import {HomepageES} from '../../utils/EspotConstant';
+
 export class HomapegeLayout extends React.Component {
 	constructor(props) {
 		super(props);
@@ -58,9 +60,9 @@ export class HomapegeLayout extends React.Component {
 		const { homepageLayout } = this.state;
 		return (
 			<>
-				<ContentEspot espotName={'GI_PIXEL_BODY_START'} />
+				<ContentEspot espotName={HomepageES.bodyStart} />
 				<div className='home'>
-					<Pixels espotName={'GI_PIXEL_HOME_META'} />
+					<Pixels espotName={HomepageES.homeMeta} />
 					{
 						!!homepageLayout ? (
 							homepageLayout.map((widget, i) => (
@@ -84,7 +86,7 @@ export class HomapegeLayout extends React.Component {
 					<a onClick={this.hideCookiePopup}><button className='cancelButton'><img src={CrossIcon} alt='crossImg'/></button></a></div>
 				} */}
 				</div>
-				<ContentEspot espotName = { 'GI_PIXEL_BODY_END' } />
+				<ContentEspot espotName = {HomepageES.bodyEnd} />
 			</>
 		);
 	}

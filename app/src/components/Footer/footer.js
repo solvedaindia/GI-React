@@ -6,13 +6,15 @@ import Stores from './stores';
 import Categories from './categories';
 import { footerLogoUrl } from '../../../public/constants/constants';
 
+const logoImg = <img style={{width: '60px'}} src={require('../../../public/images/NN1.png')}/>
 const FooterComponent = props => (
   <Grid>
     <Row>
       <Col md={7} sm={12} xs={12} className="rightPadding">
         <Row>
           <div className="logo_white">
-            <a href='/'><img className="logo_width" src={footerLogoUrl} alt="Godrej Interio" /></a>
+            {logoImg}
+            {/* <a href='/'><img className="logo_width" src={footerLogoUrl} alt="Godrej Interio" /></a> */}
           </div>
           <Footerlinks name={props.links} />
         </Row>
