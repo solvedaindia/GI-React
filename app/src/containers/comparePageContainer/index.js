@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import apiManger from '../../utils/apiManager';
 import { compareAPI, storeId } from '../../../public/constants/constants';
+import { COMPARE_SWATCH_SWITCH_ERROR_MSG } from '../../constants/app/primitivesConstants';
 import * as actionCreators from '../PlpContainer/actions';
 import {
   getReleventReduxState
@@ -208,7 +209,7 @@ export class ComparePageContainer extends React.Component {
       return;
     else if(indexOf>=0)
     {
-      alert("Unable to switch the selected color as the item is already in compare list");
+      alert(COMPARE_SWATCH_SWITCH_ERROR_MSG);
       return;
     }
     else{

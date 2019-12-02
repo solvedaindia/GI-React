@@ -75,7 +75,7 @@ export const PASSWORD_MAX_VALIDATION_MSG = 'Invalid Password. Password should ha
 export const VALID_EMAILNUMBER_MSG = 'Please enter valid Email id/Mobile Number';
 export const VALID_PASSWORD_MSG = 'Enter a valid password';
 export const VALID_INCORRECTP_PASS_MSG = 'Password entered is incorrect ';
-
+export const COMPARE_SWATCH_SWITCH_ERROR_MSG ='This color of the product is already added in compare list. Please choose other color.';
 
 
 
