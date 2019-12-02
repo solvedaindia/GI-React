@@ -203,9 +203,20 @@ export class ComparePageContainer extends React.Component {
   }
 
   swatchHandle = (id, index, name) => {
-      this.state.compWidgetData[index] = id;
-      this.state.swatchIndex[index] = id;
-      this.updateSingleCompProduct(index);
+    const indexOf = this.state.compWidgetData.findIndex(value=>id===value);
+    if(indexOf==index)
+      return;
+    else if(indexOf>=0)
+    {
+      alert("Unable to switch the selected color as the item is already in compare list");
+      return;
+    }
+    else{
+       this.state.compWidgetData[index] = id;
+       this.state.swatchIndex[index] = id;
+       this.updateSingleCompProduct(index);
+    }
+     
   }
 
   loadingbar() {
@@ -240,7 +251,14 @@ export class ComparePageContainer extends React.Component {
           </Col>
         </Row>
         {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.compCount}/3</h1></Row> : null}
-          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} history={this.props.history}  removeSwatchIndex = {(id,index)=>this.removeSwatchIndex(id,index)} swatchHandle={this.swatchHandle} /> : ''}</>}
+          {this.state.prds ? <CompPrd 
+                              compWidgetData={this.state.compWidgetData}
+                              data={this.state.prds} 
+                              isRouteUpdated={this.state.isRouteUpdated} 
+                              remove={this.removeCompareId.bind(this)} 
+                              history={this.props.history}  
+                              removeSwatchIndex = {(id,index)=>this.removeSwatchIndex(id,index)} 
+                              swatchHandle={this.swatchHandle} /> : ''}</>}
 
       </div>
     )
