@@ -25,43 +25,44 @@ class InfoAlert extends React.Component {
   }
 
   render() {
-    return (
-      <Modal show={this.state.modal} className={this.state.modalClass}>
-        <Modal.Body>
-          <div className="modalwrapper change-pinocde">
-            <Button className="cancelBtn" onClick={this.handleCancel} />
-            <h3 className="heading">
-              {ARE_YOU_SURE}
-            </h3>
-            <p className='text'>{CHANGING_YOUR_PIN_CODE}</p>
-            {!isMobile() && <div className="actionBtnWrapper">
-              <Button className="btn-cancel btn" onClick={this.handleCancel}>
-                {CANCEL}
-              </Button>
-              <Button
-                className="btn-save btn"
-                onClick={this.handleProceed}
-              >
-                {SUBMIT}
-              </Button>
-            </div>}
-          </div>
+    return null;
+    // return (
+    //   <Modal show={this.state.modal} className={this.state.modalClass}>
+    //     <Modal.Body>
+    //       <div className="modalwrapper change-pinocde">
+    //         <Button className="cancelBtn" onClick={this.handleCancel} />
+    //         <h3 className="heading">
+    //           {ARE_YOU_SURE}
+    //         </h3>
+    //         <p className='text'>{CHANGING_YOUR_PIN_CODE}</p>
+    //         {!isMobile() && <div className="actionBtnWrapper">
+    //           <Button className="btn-cancel btn" onClick={this.handleCancel}>
+    //             {CANCEL}
+    //           </Button>
+    //           <Button
+    //             className="btn-save btn"
+    //             onClick={this.handleProceed}
+    //           >
+    //             {SUBMIT}
+    //           </Button>
+    //         </div>}
+    //       </div>
 
-          {isMobile() && <div className="actionBtnWrapper mobileView">
-            <Button className="btn-cancel btn" onClick={this.handleCancel}>
-              {CANCEL}
-            </Button>
-            <Button
-              className="btn-save btn"
-              onClick={this.handleProceed}
-            >
-              {PROCEED}
-            </Button>
-          </div>}
-        </Modal.Body>
-      </Modal>
-    );
+    //       {isMobile() && <div className="actionBtnWrapper mobileView">
+    //         <Button className="btn-cancel btn" onClick={this.handleCancel}>
+    //           {CANCEL}
+    //         </Button>
+    //         <Button
+    //           className="btn-save btn"
+    //           onClick={this.handleProceed}
+    //         >
+    //           {PROCEED}
+    //         </Button>
+    //       </div>}
+    //     </Modal.Body>
+    //   </Modal>
+    // );
   }
 }
 
-export default Category;
+export default InfoAlert;
