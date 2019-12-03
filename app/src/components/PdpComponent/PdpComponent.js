@@ -299,95 +299,100 @@ class PdpComponent extends React.Component {
 
  // handleScroll function start
  handleScroll() {	
-  var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
-  var box1=168;
-//   if(window.screen.width > 993 && window.screen.width < 1279){
-// 	//var box1=955;
-//   }else{
-// 	var box1=168;
-//   }
-  //if (document.getElementById("priceId") && document.getElementById("box3")) {
-  var box2 = document.getElementById("priceId") ? document.getElementById("priceId").offsetTop : null;
-  var box3 = document.getElementById("box3") ? document.getElementById("box3").offsetTop : null;
-  var headeroffset= document.getElementById("Pdpstickybar") ? document.getElementById("Pdpstickybar").getBoundingClientRect().top : null;
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
-  var scrollbox1;
-
-  var scrollbox1=box1-scrollTop;
-  var scrollbox2=box2-scrollTop;
-  var scrollbox3=box3-scrollTop;
-  
-  if(scrollbox1 <= headeroffset){
-	  if(document.getElementById("Pdpstickybar")){
-		document.getElementById("Pdpstickybar").classList.add('slidedown');	
-	  }
-    setTimeout(() => {		
-		if(document.getElementById("topdiv1")){
-			document.getElementById("topdiv1").classList.add('slideUpPrice');
-			document.getElementById("topdiv1").style.cssText = "opacity: 1;";
+	 try{
+		var Pdpstickyheader = document.getElementById('Pdpstickybar'); 
+		var box1=168;
+	  //   if(window.screen.width > 993 && window.screen.width < 1279){
+	  // 	//var box1=955;
+	  //   }else{
+	  // 	var box1=168;
+	  //   }
+		//if (document.getElementById("priceId") && document.getElementById("box3")) {
+		var box2 = document.getElementById("priceId").offsetTop;
+		var box3 = document.getElementById("box3").offsetTop;
+		var headeroffset= document.getElementById("Pdpstickybar") ? document.getElementById("Pdpstickybar").getBoundingClientRect().top : null;
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+		var scrollbox1;
+	  
+		var scrollbox1=box1-scrollTop;
+		var scrollbox2=box2-scrollTop;
+		var scrollbox3=box3-scrollTop;
+		
+		if(scrollbox1 <= headeroffset){
+			if(document.getElementById("Pdpstickybar")){
+			  document.getElementById("Pdpstickybar").classList.add('slidedown');	
+			}
+		  setTimeout(() => {		
+			  if(document.getElementById("topdiv1")){
+				  document.getElementById("topdiv1").classList.add('slideUpPrice');
+				  document.getElementById("topdiv1").style.cssText = "opacity: 1;";
+			  }
+		}, 100);
 		}
-  }, 100);
-  }
-  
-  if(scrollbox1 > headeroffset){			
-    setTimeout(() => {
-	if(document.getElementById("Pdpstickybar")){
-	  document.getElementById("Pdpstickybar").classList.remove('slidedown');
-	}
-	if(document.getElementById("topdiv1")){
-		document.getElementById("topdiv1").classList.remove('slideUpPrice');	
-		document.getElementById("topdiv1").style.cssText = "opacity: 0;"
-	}
-	if(document.getElementById("box1")){
-		document.getElementById("box1").style.cssText = "opacity: 1;";	
-	}		
-  }, 10);
-  }
+		
+		if(scrollbox1 > headeroffset){			
+		  setTimeout(() => {
+		  if(document.getElementById("Pdpstickybar")){
+			document.getElementById("Pdpstickybar").classList.remove('slidedown');
+		  }
+		  if(document.getElementById("topdiv1")){
+			  document.getElementById("topdiv1").classList.remove('slideUpPrice');	
+			  document.getElementById("topdiv1").style.cssText = "opacity: 0;"
+		  }
+		  if(document.getElementById("box1")){
+			  document.getElementById("box1").style.cssText = "opacity: 1;";	
+		  }		
+		}, 10);
+		}
+	  
+		/*------BOX2
+		-------------------*/
+		if(scrollbox2 <= headeroffset){	
+		  setTimeout(() => {
+			  if(document.getElementById("topdiv2")){
+				  document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
+				  document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+			  }	
+		}, 0);
+		}
+		
+		if(scrollbox2 > headeroffset){		
+		  document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
+		  document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
+		}
+	  
+		/*------BOX3
+		-------------------*/
+		if(scrollbox3<= headeroffset){	
+			if( document.getElementById("topdiv3")){
+				document.getElementById("topdiv3").classList.add('slideUpCart');
+				document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
+			}
+		}
+		
+		if(scrollbox3> headeroffset){		
+		  document.getElementById("topdiv3").classList.remove('slideUpCart');
+		  document.getElementById("topdiv3").style.cssText = "opacity: 0;"					
+		}
+	  
+		// header 
+		var header = document.getElementById("header");
+		if(header){
+			var sticky = header.offsetTop;		
+			if (window.pageYOffset > sticky) 
+			{
+			  header.classList.add("sticky");
+			} 			
+			else {
+			  header.classList.remove("sticky");
+			}
+		}
+		
+		//}
 
-  /*------BOX2
-  -------------------*/
-  if(scrollbox2 <= headeroffset){	
-    setTimeout(() => {
-		if(document.getElementById("topdiv2")){
-			document.getElementById("topdiv2").classList.add('slideUpPriceoffer');
-			document.getElementById("topdiv2").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
-		}	
-  }, 0);
-  }
+	 } catch(err){
+	 }
   
-  if(scrollbox2 > headeroffset){		
-    document.getElementById("topdiv2").classList.remove('slideUpPriceoffer');
-    document.getElementById("topdiv2").style.cssText = "opacity: 0;"					
-  }
-
-  /*------BOX3
-  -------------------*/
-  if(scrollbox3<= headeroffset){	
-	  if( document.getElementById("topdiv3")){
-		  document.getElementById("topdiv3").classList.add('slideUpCart');
-		  document.getElementById("topdiv3").style.cssText = "opacity: 1; transition:opacity 1s ease-in-out";
-	  }
-  }
-  
-  if(scrollbox3> headeroffset){		
-    document.getElementById("topdiv3").classList.remove('slideUpCart');
-    document.getElementById("topdiv3").style.cssText = "opacity: 0;"					
-  }
-
-  // header 
-  var header = document.getElementById("header");
-  if(header){
-	  var sticky = header.offsetTop;		
-	  if (window.pageYOffset > sticky) 
-	  {
-		header.classList.add("sticky");
-	  } 			
-	  else {
-		header.classList.remove("sticky");
-	  }
-  }
-  
-  //}
 }
 // handleScroll function End
   render() { 
