@@ -20,23 +20,25 @@ import {
 import UserAccInfo from '../../UserAccInfo/userAccInfo';
 import appCookie from '../../../utils/cookie';
 
-const wishlistAddedImg = (
-  <img
-    src={require('../../../../public/images/plpAssests/wishlist_added.svg')}
-	 alt="Added"
-  />
-);
-const wishListRemovedImg = (
-  <img
-    src={require('../../../../public/images/plpAssests/wishlist_blank.svg')}
-	 alt="Add to Wishlist"
-  />
-);
 class Wishlist extends React.Component {
   constructor(props) {
     super(props);
+    this.wishlistAddedImg = (
+      <img
+        src={require('../../../../public/images/plpAssests/wishlist_added.svg')}
+       alt="Added"
+       onClick={this.onWishlistClick.bind(this)}
+      />
+    );
+    this.wishListRemovedImg = (
+      <img
+        src={require('../../../../public/images/plpAssests/wishlist_blank.svg')}
+       alt="Add to Wishlist"
+       onClick={this.onWishlistClick.bind(this)}
+      />
+    );
     this.state = {
-      wishlistCurrentImage: wishListRemovedImg,
+      wishlistCurrentImage: this.wishListRemovedImg,
       wishlistPopup: null,
       isWelcomeBack: false,
     };
@@ -69,7 +71,7 @@ class Wishlist extends React.Component {
         
       getUpdatedWishlist(this);
         this.setState({
-          wishlistCurrentImage: wishlistAddedImg,
+          wishlistCurrentImage: this.wishlistAddedImg,
           wishlistPopup: this.wishlistPopupItem(),
         });
       })
@@ -85,7 +87,7 @@ class Wishlist extends React.Component {
     apiManager
       .post(removeFromWishlist, data)
       .then(response => {
-        this.setState({ wishlistCurrentImage: wishListRemovedImg });
+        this.setState({ wishlistCurrentImage: this.wishListRemovedImg });
         getUpdatedWishlist(this);
         
         if (this.props.isFromWishlistPro === true) {
@@ -101,16 +103,16 @@ class Wishlist extends React.Component {
     this.setState({
       isWelcomeBack: false,
       wishlistCurrentImage: nextProps.isInWishlistPro
-        ? wishlistAddedImg
-        : wishListRemovedImg,
+        ? this.wishlistAddedImg
+        : this.wishListRemovedImg,
     });
   }
 
   componentDidMount() {
     this.setState({
       wishlistCurrentImage: this.props.isInWishlistPro
-        ? wishlistAddedImg
-        : wishListRemovedImg,
+        ? this.wishlistAddedImg
+        : this.wishListRemovedImg,
     });
     
     if (appCookie.get('wishListUniqueId') !== "" && appCookie.get('isLoggedIn') === 'true') {
@@ -166,7 +168,6 @@ class Wishlist extends React.Component {
         }
         
         <button
-          onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
           id={wishListId}
         >
