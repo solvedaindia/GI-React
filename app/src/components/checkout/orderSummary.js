@@ -74,15 +74,19 @@ export class OrderSummaryComponent extends React.Component {
                 <div className='righttext-box'>&#8377;{formatPrice(this.props.orderData.totalAmount)}</div>
               </div>
 
+              {!!this.props.orderData.productDiscount &&
               <div className='listRow clearfix'>
                 <div className='lefttext-box'>{PRODUCT_DISCOUNT}</div>
                 <div className='righttext-box'>- &#8377;{formatPrice(this.props.orderData.productDiscount)}</div>
               </div>
-
-              <div className='listRow clearfix'>
+              } 
+              
+              {!!this.props.orderData.orderDiscount &&
+                <div className='listRow clearfix'>
                 <div className='lefttext-box'>{ORDER_DISCOUNT}</div>
                 <div className='righttext-box'>- &#8377;{formatPrice(this.props.orderData.orderDiscount)}</div>
               </div>
+              }
 
               <div className='listRow clearfix'>
                 <div className='lefttext-box'>{SHIPPING}</div>

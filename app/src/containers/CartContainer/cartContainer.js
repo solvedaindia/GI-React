@@ -15,6 +15,7 @@ import reducer from './reducer';
 import saga from './saga';
 import appCookie from '../../utils/cookie';
 import {getCookie} from '../../utils/utilityManager';
+import LoadingIndicator from '../../utils/loadingIndicator';
 import apiManager from '../../utils/apiManager';
 import { getCartDetails } from './action';
 import { imagePrefix } from '../../../public/constants/constants';
@@ -113,7 +114,7 @@ class CartDetail extends React.Component {
 
   render() {
     const { cartData } = this.props;
-    if (!cartData) return null;
+    if (!cartData) return <LoadingIndicator/>;
     let disableCheckout = false;
 
 
