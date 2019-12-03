@@ -15,6 +15,8 @@ import {
   storeId,
   OrderDetailAPI,
 } from '../../../public/constants/constants';
+import ContentEspot from '../../components/Primitives/staticContent';
+
 class OrderConformation extends React.Component {
   constructor(props) {
     super(props);
@@ -162,6 +164,7 @@ class OrderConformation extends React.Component {
     }
     return (
       <div className="orderconfirm">
+        <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_START'} />
         <div className="container">
           <div className="row">
             <div className="col-md-9">
@@ -287,6 +290,7 @@ class OrderConformation extends React.Component {
         </div>
         {this.state.showPop ? <SuccessPop /> : ''}
         {/* <SuccessPop /> */}
+        <ContentEspot espotName = { 'GI_PIXEL_ORDERCONFIRMATION_BODY_END' } />
       </div>
     );
   }
