@@ -29,7 +29,10 @@ class ThemeListData extends React.Component {
     }
 
     componentWillReceiveProps(nextprops){
-        this.closePopUp.bind(this);
+        this.setState({
+            itemDetail: null,
+            index: null
+        })
     }
     
     render(){
