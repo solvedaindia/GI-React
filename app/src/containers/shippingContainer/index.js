@@ -3,7 +3,7 @@ import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
 import '../../../public/styles/content.scss';
 import Pixels from '../../components/Primitives/pixels';
-
+import { ShippingES} from '../../utils/EspotConstant';
 class Shipping extends React.Component {
   constructor(props) {
     super(props);
@@ -12,11 +12,11 @@ class Shipping extends React.Component {
   render() {
     return (
         <div className='staticpage shippingPage'>
-          <Pixels espotName={'GI_PIXEL_HELP_META'} />
+          <Pixels espotName={ShippingES.helpMeta} />
         <Breadcrumb {...this.props.match.params} staticName = {'Shipping Information'}/>
-        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_1' } />
-        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_2' } />
-        <ContentEspot espotName={ 'GI_SHIPPING_PAGE_3' } />
+        <ContentEspot espotName={ ShippingES.shipping1 } />
+        <ContentEspot espotName={ ShippingES.shipping2 } />
+        <ContentEspot espotName={ ShippingES.shipping3 } />
       </div>
     );
   }

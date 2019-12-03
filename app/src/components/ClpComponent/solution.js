@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	espotAPI
 } from '../../../public/constants/constants';
+import { CLPES } from '../../utils/EspotConstant';
 
 class Solution extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class Solution extends React.Component {
 
   getSolutionData() {
   	apiManager
-  		.get(`${espotAPI}GI_Homepage_Godrej_Solution`)
+  		.get(`${espotAPI}${CLPES.soloution}`)
   		.then(response => {
   			this.setState({
                 solutionData: response.data.data,

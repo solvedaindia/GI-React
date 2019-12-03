@@ -42,6 +42,7 @@ import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDF
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
 import { createPlpItemData } from '../../utils/utilityManager';
+import { PLPES } from '../../utils/EspotConstant';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -629,7 +630,7 @@ export class PlpContainer extends React.Component {
 
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
+        <ContentEspot espotName={PLPES.bodyStart + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
           <Pixels
           description={this.state.categoryDetail.metaDescription}
           title={this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle} 
@@ -711,7 +712,7 @@ export class PlpContainer extends React.Component {
               searchKeywordPro={keywoard}
             />
           </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
+        <ContentEspot espotName={PLPES.bodyEnd + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
 
       </>
     );

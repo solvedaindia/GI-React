@@ -5,6 +5,7 @@ import {
 } from '../../../public/constants/constants';
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
+import { CLPES } from '../../utils/EspotConstant';
 
 class CLPReadMore extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class CLPReadMore extends React.Component {
   	getReadMoreData(id) 
 	{
     apiManager
-      	.get(`${espotAPI}GI_CLP_ROOMS_DESCRIPTION_${id.toUpperCase().replace(' ', '')}`)
+      	.get(`${espotAPI}${CLPES.roomDescription}${id.toUpperCase().replace(' ', '')}`)
 		.then(response => {
 			var {data} = response || {};
 			this.setState({

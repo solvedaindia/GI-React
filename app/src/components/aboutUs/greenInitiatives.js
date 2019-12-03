@@ -4,6 +4,7 @@ import  '../../../public/styles/static-pages/aboutUs.scss'
 import {
  imagePrefix,espotAPI} from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 export default class GreenInitiatives extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class GreenInitiatives extends Component {
     
 
     this.state = {
-      espotName:'GI_GREEN_INITIATIVES',
+      espotName: AboutUsES.greenInitiatives,
      title:'',
      slides: []
     };

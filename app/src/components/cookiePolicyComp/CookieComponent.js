@@ -6,12 +6,13 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
+import { CookiePolicES } from '../../utils/EspotConstant';
 
 class Cookies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_Cookie_Policy_Static_Data",
+      espotName: CookiePolicES.staticData,
       pageLayoutEspot: null,
       isLoading: true,
       error: null,

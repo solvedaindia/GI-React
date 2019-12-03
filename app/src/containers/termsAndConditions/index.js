@@ -1,10 +1,11 @@
 
 import React from 'react';
-import  '../../../public/styles/static-pages/termsconditions.scss';
-import  '../../../public/styles/staticPages/staticPages.scss';
+import '../../../public/styles/static-pages/termsconditions.scss';
+import '../../../public/styles/staticPages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import Pixels from '../../components/Primitives/pixels';
+import { TermsConditionES } from '../../utils/EspotConstant';
 
 export class TermsConditions extends React.Component {
   constructor(props) {
@@ -12,18 +13,18 @@ export class TermsConditions extends React.Component {
   }
 
   render() {
-    return (    
+    return (
       <div className='staticpage termsContainer'>
-        <Pixels espotName={'GI_PIXEL_POLICY_META'} />
-		  <Breadcrumb {...this.props.match.params} staticName = {'Terms & Conditions'}/>
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_WARRANTIESANDLILIABILITES' } />
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_USERACCOUNT' } />
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_4' } />
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_5' } />
-          <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_6' } />
+        <Pixels espotName={TermsConditionES.policyMeta} />
+        <Breadcrumb {...this.props.match.params} staticName={'Terms & Conditions'} />
+        <ContentEspot espotName={TermsConditionES.tcDisclaimer} />
+        <ContentEspot espotName={TermsConditionES.tcWarranties} />
+        <ContentEspot espotName={TermsConditionES.tcUserAccount} />
+        <ContentEspot espotName={TermsConditionES.tc4} />
+        <ContentEspot espotName={TermsConditionES.tc5} />
+        <ContentEspot espotName={TermsConditionES.tc6} />
 
-        </div>
+      </div>
     )
   }
 }

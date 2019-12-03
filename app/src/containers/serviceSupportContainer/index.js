@@ -5,7 +5,7 @@ import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import Pixels from '../../components/Primitives/pixels';
-
+import { ServicySupportES } from '../../utils/EspotConstant';
 export default class HelpSupport extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ export default class HelpSupport extends React.Component {
     
     return (
       <div className='staticpage serviceSupport'>
-        <Pixels espotName={'GI_PIXEL_CONTACT_META'} />
+        <Pixels espotName={ServicySupportES.contactMeta} />
 		<Breadcrumb {...this.props.match.params} staticName = {'Service & Support'}/>
     <div className='service-support'>
         <div className='container'>
@@ -23,13 +23,13 @@ export default class HelpSupport extends React.Component {
           <h3 className="subHeading">How can we help you?</h3>  
         </div>
       </div>
-        <ContentEspot espotName={ 'GI_SUPPORT_FAQ_MENU' } />
-        <ContentEspot espotName={ 'GI_SUPPORT_FAQ' } />
+        <ContentEspot espotName={ ServicySupportES.supportFAQMenu } />
+        <ContentEspot espotName={ ServicySupportES.supportFAQ } />
         <a id='customerCare'>
-			<ContentEspot espotName={ 'GI_CONTACT_US_CUSTOMER_CARE' } />
+			<ContentEspot espotName={ ServicySupportES.contactCare } />
         </a>
-        <ContentEspot espotName={ 'GI_SUPPORT_3' } />
-         <ContentEspot espotName={ 'GI_SUPPORT_4' } />
+        <ContentEspot espotName={ ServicySupportES.supprot3 } />
+         <ContentEspot espotName={ ServicySupportES.support4 } />
       </div>
     );
   }

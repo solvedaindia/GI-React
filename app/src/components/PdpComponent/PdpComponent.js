@@ -375,17 +375,17 @@ class PdpComponent extends React.Component {
   }
 
   // header 
-  var header = document.getElementById("header");
-  if(header){
-	  var sticky = header.offsetTop;		
-	  if (window.pageYOffset > sticky) 
-	  {
-		header.classList.add("sticky");
-	  } 			
-	  else {
-		header.classList.remove("sticky");
-	  }
-  }
+  // var header = document.getElementById("header");
+  // if(header){
+	//   var sticky = header.offsetTop;		
+	//   if (window.pageYOffset > sticky) 
+	//   {
+	// 	header.classList.add("sticky");
+	//   } 			
+	//   else {
+	// 	header.classList.remove("sticky");
+	//   }
+  // }
   
   //}
 }

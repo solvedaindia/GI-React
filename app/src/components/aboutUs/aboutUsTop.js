@@ -6,12 +6,13 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 class AboutTopMost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_ABOUT_US_TOP",
+      espotName: AboutUsES.top,
       pageLayoutEspot: null,
       isLoading: true,
       error: null,

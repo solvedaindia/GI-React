@@ -2,12 +2,13 @@ import React from 'react';
 import  '../../../public/styles/static-pages/aboutUs.scss';
 import apiManager from '../../utils/apiManager';
 import {espotAPI, imagePrefix} from '../../../public/constants/constants';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 export class OurProcess extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: 'GI_OUR_PROCESS',
+      espotName: AboutUsES.ourProcess,
       data:[],
       img_url: '',
       content: '',

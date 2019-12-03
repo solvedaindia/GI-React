@@ -6,12 +6,13 @@ import {
   accessToken,
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 class Careers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_CAREERS",
+      espotName: AboutUsES.careers,
       pageLayoutEspot: null,
       isLoading: true,
       error: null,

@@ -1,10 +1,12 @@
 import React from 'react';
 import apiManager from '../../utils/apiManager';
 import {
-  espotAPI
+  espotAPI, homePageApi
 } from '../../../public/constants/constants';
 import DescriptionBanner from '../PlpComponent/DescriptionBanner/descriptionBanner';
 import '../../../public/styles/readMore.scss';
+import { HomepageES } from '../../utils/EspotConstant';
+
 class ReadMore extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class ReadMore extends React.Component {
 
   	getReadMoreData() {
     apiManager
-      	.get(`${espotAPI}GI_Homepage_About_Godrej`)
+      	.get(`${espotAPI}${HomepageES.about}`)
 		.then(response => {
 			const {data} = response || '';
 			this.setState({

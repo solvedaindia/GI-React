@@ -4,12 +4,13 @@ import {imagePrefix,
   espotAPI
 } from '../../../public/constants/constants';
 import '../../../public/styles/content.scss';
+import { AboutUsES } from '../../utils/EspotConstant';
 
 class MediaPress extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      espotName: "GI_MEDIA_PRESS",
+      espotName: AboutUsES.mediaPress,
       pageLayoutEspot: null,
       isLoading: true,
       error: null,

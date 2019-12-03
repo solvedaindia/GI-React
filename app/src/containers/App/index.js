@@ -102,6 +102,7 @@ export default class App extends React.Component {
     this.cookiePolicyPopup();
     this.resize();
     this.getIPData();
+    window.addEventListener('scroll', this.handleScroll);
   }
   componentWillMount() {
     if (isMobile() || isTab() || isIPad) {
@@ -137,6 +138,19 @@ export default class App extends React.Component {
     }
   }
 
+  handleScroll() {
+    var header = document.getElementById("header");
+    if(header){
+      var sticky = header.offsetTop;		
+      if (window.pageYOffset > sticky) 
+      {
+      header.classList.add("sticky");
+      } 			
+      else {
+      header.classList.remove("sticky");
+      }
+    }
+  }
 
   initialLoginHandling() {
     const token = getCookie(accessTokenCookie);
