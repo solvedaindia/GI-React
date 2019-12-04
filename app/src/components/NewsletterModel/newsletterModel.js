@@ -15,6 +15,7 @@ import {
   Label,
 } from 'react-bootstrap';
 import apiManager from '../../utils/apiManager';
+import {showAlert} from '../../utils/alert/index'
 import '../../../public/styles/newsletterModel/newsletterModel.scss';
 import {
   newsletterAPI,
@@ -100,7 +101,7 @@ class NewsletterModel extends React.Component {
         )};path=/;expires=${now.toGMTString()}`;
         this.setState({ inputText: '' });
         this.toggle();
-        alert(`Thanks for Subscribing`);
+        showAlert("News Letter",'Thanks for Subscribing',null,"OK",null,null);
       })
       .catch(error => {
       });

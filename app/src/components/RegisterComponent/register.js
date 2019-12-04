@@ -13,6 +13,8 @@ import {
   onGoogleResponse,
 } from '../../utils/socialLoginHandler';
 
+import {showAlert} from '../../utils/alert/index'
+
 import Google from '../../../public/images/google.png';
 import Facebook from '../../../public/images/facebook.png';
 import WhiteLogo from '../SVGs/whiteLogo';
@@ -44,7 +46,7 @@ class Register extends React.Component {
   responseGoogle = response => {
     const profileData = response.profileObj;
     if (!profileData.email) {
-      alert('SocialLogin - Email Id missing');
+      showAlert('Alert!','SocialLogin - Email Id missing',null,"OK",null,null);
       return;
     }
 
@@ -63,7 +65,7 @@ class Register extends React.Component {
 
   responseFacebook = response => {
     if (!response.email) {
-      alert('SocialLogin - Email Id missing');
+      showAlert('Alert!','SocialLogin - Email Id missing',null,"OK",null,null);
       return;
     }
 

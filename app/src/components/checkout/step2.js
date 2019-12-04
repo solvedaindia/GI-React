@@ -8,6 +8,7 @@ import {
 import '../../../public/styles/checkout.scss';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
+import {showAlert}  from '../../utils/alert/index'
 import axios from 'axios';
 import Link from 'react-router-dom/Link';
 import appCookie from '../../utils/cookie';
@@ -660,8 +661,8 @@ export class Step2Component extends React.Component {
 
             const inventoryFlag = resp.data.data.reserved;
             if (inventoryFlag === '0') {
-              alert(`${ONE_OR_MORE_ITEM}`)
-              window.location.assign('/cart')
+              showAlert('Alert',`${ONE_OR_MORE_ITEM}`,null,"OK",null,()=>{window.location.assign('/cart')})
+              
             }
             else {
               this.saveGST(resp.data.data.orderId)

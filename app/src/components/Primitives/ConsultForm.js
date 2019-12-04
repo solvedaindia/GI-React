@@ -14,6 +14,8 @@ import {
   regexName
 } from '../../utils/validationManager';
 
+import {showAlert} from '../../utils/alert/index'; 
+
 
 
 
@@ -95,8 +97,7 @@ clearData=()=>{
  
 successMassage = () => {
   if(error !== null){
-    alert('Thank you for the feed back')
-
+    showAlert("Book a consultation","Thank you for the feed back",null,"OK",null,null);
   }
   
 }
@@ -200,7 +201,7 @@ handleValidation=(obj, errorType)=>{
        
         }
 		apiManager.post(consultFormApi, data).then((res) => {
-      alert(FEEDBACK_MSG)
+      showAlert("Book a consultation",FEEDBACK_MSG,null,"OK",null,null);
       this.clearData();
 		}).catch(error => {
 			this.setState({

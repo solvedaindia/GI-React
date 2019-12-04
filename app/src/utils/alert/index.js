@@ -36,6 +36,7 @@ export default class ReactConfirmAlert extends Component {
     }
   
     handleClickButton = button => {
+      console.log("Alere",button);
       if (button.onClick) button.onClick()
       this.close()
     }
@@ -46,7 +47,7 @@ export default class ReactConfirmAlert extends Component {
   
       if (closeOnClickOutside && isClickOutside) {
         onClickOutside()
-        this.close()
+        //this.close()
       }
     }
   
@@ -62,7 +63,7 @@ export default class ReactConfirmAlert extends Component {
   
       if (closeOnEscape && isKeyCodeEscape) {
         onKeypressEscape(event)
-        this.close()
+        //this.close()
       }
     }
   
@@ -105,6 +106,7 @@ export default class ReactConfirmAlert extends Component {
                 {childrenElement()}
                 <div className='react-confirm-alert-button-group'>
                   {buttons.map((button, i) => (
+                    
                     <button key={i} onClick={() => this.handleClickButton(button)}>
                       {button.label}
                     </button>
@@ -176,5 +178,37 @@ export default class ReactConfirmAlert extends Component {
   export function confirmAlert (properties) {
     addBodyClass()
     createSVGBlurReconfirm()
+    createElementReconfirm(properties)
+  }
+
+  export function showAlert (title,message,cancelBtn,okBtn,cancelEvent,okEvent) {
+    addBodyClass()
+    createSVGBlurReconfirm()
+    let btns= [
+      {
+        label: cancelBtn,
+        onClick:cancelEvent
+      },
+      {
+        label: okBtn,
+        onClick: okEvent
+      }
+    ];
+    if(cancelBtn==null)
+    {
+      btns= [
+        {
+          label: okBtn,
+          onClick: okEvent
+        }
+      ];
+    }
+
+    const properties={
+      title: title,                        
+      message: message,             
+      //childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
+      buttons: btns,
+    }
     createElementReconfirm(properties)
   }

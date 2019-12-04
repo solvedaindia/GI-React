@@ -8,6 +8,7 @@ import '../../../../public/styles/myAccount/changePassword.scss';
 import { regexPw, validateEmptyObject } from '../../../utils/validationManager';
 import Input from '../../Primitives/input';
 import { isMobile } from '../../../utils/utilityManager';
+import {showAlert} from '../../../utils/alert/index'
 import { resetRWDHeaderFlag } from '../../../actions/app/actions';
 
 class ChangePassword extends React.Component {
@@ -143,7 +144,7 @@ class ChangePassword extends React.Component {
           inputTextNew: '',
           inputTextCurrent: '',
         });
-        alert(response.data.data.message);
+        showAlert('Message',response.data.data.message,null,"OK",null,null);
         this.enableDisableSaveBtn();
       })
       .catch(error => {
@@ -158,7 +159,7 @@ class ChangePassword extends React.Component {
           });
         }
         else
-          alert(errorMessage);
+          showAlert('Alert!',errorMessage,null,"OK",null,null);
        
       });
   }
@@ -176,7 +177,7 @@ class ChangePassword extends React.Component {
           inputTextNew: '',
           inputTextCurrent: '',
         });
-        alert(response.data.data.message);
+        showAlert('Message',response.data.data.message,null,"OK",null,null);
         this.enableDisableSaveBtn();
       })
       .catch(error => {

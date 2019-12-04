@@ -14,7 +14,7 @@ import { MINCOMPARECOUNT_MSG } from '../../constants/app/primitivesConstants';
 import DownArrow from '../../../public/images/down-arrow.svg';
 import UpArrow from '../../../public/images/up-arrow.svg';
 import appCookie from '../../utils/cookie';
-
+import {showAlert} from '../../utils/alert/index';
 export class CompContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +102,7 @@ export class CompContainer extends React.Component {
 
     if (handleCompData.length < 2) {
       e.preventDefault();
-      alert(MINCOMPARECOUNT_MSG);
+      showAlert("Alert!",MINCOMPARECOUNT_MSG,null,"OK",null,null);
     }
     else{
       appCookie.set('compareProductTemp', appCookie.get('compareProduct'), 365 * 24 * 60 * 60 * 1000);

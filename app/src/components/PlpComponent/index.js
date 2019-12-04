@@ -22,6 +22,7 @@ import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
 import appCookie from '../../utils/cookie';
 import {PRODUCT_RESTRICTION, SAME_CAT, DIFF_CAT, ALREADY_ADDED  } from '../../constants/app/plpConstants';
+import { showAlert } from '../../utils/alert/index';
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -52,13 +53,17 @@ class PlpComponent extends React.Component {
     const compCat = compdata.find(prd => prd.catId == this.props.catId);
     const masterProduct = compdata.find(prd => prd.masterCategoryID == product.masterCategoryID);
     if (compPrd) {
-      alert(ALREADY_ADDED);
+      //dialog(ALREADY_ADDED);
+      showAlert("Alert!",ALREADY_ADDED,null,"OK",null,null);
     } else if (compdata.length == 3) {
-      alert(PRODUCT_RESTRICTION);
+      //dialog(PRODUCT_RESTRICTION);
+      showAlert("Alert!",PRODUCT_RESTRICTION,null,"OK",null,null);
     } else if (compdata.length > 0 && !compCat) {
-      alert(SAME_CAT);
+     // dialog(SAME_CAT);
+     showAlert("Alert!",SAME_CAT,null,"OK",null,null);
     } else if (compdata.length > 0 && !masterProduct && this.props.isSearchPathPro.includes('/search')) {
-      alert(DIFF_CAT);
+      //dialog(DIFF_CAT);
+      showAlert("Alert!",DIFF_CAT,null,"OK",null,null);
     } 
     else {
       if (this.props.compData.length === 0) {

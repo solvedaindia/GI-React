@@ -1,3 +1,5 @@
+@import '../../../public/styles/base.scss';
+@import '../../../public/styles/variable.scss';
 body.react-confirm-alert-body-element {
     overflow: hidden;
   }
@@ -25,19 +27,19 @@ body.react-confirm-alert-body-element {
     -ms-align-items: center;
     align-items: center;
     opacity: 0;
-    -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
-    -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
-    -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
-    animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+    -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
+    -moz-animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
+    -o-animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
+    animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
   }
   
   .react-confirm-alert-body {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 400px;
-    padding: 30px;
+    
+    width: 360px;
+    padding: 20px;
     text-align: left;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 4px;
     box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
     color: #666;
   }
@@ -49,12 +51,15 @@ body.react-confirm-alert-body-element {
   }
   
   .react-confirm-alert-body > h1 {
+    font-family: $font-medium;
     margin-top: 0;
+    font-size: 16px;
   }
   
   .react-confirm-alert-body > h3 {
     margin: 0;
     font-size: 16px;
+    font-family: $font-regular;
   }
   
   .react-confirm-alert-button-group {
@@ -63,7 +68,7 @@ body.react-confirm-alert-body-element {
     display: -ms-flex;
     display: -o-flex;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin-top: 20px;
   }
   
@@ -74,9 +79,11 @@ body.react-confirm-alert-body-element {
     display: inline-block;
     padding: 6px 18px;
     color: #eee;
-    margin-right: 10px;
-    border-radius: 5px;
+    margin-right: 0px;
+    margin-left: 10px;
+    border-radius: 2px;
     font-size: 12px;
+    font-family: $font-regular;
     cursor: pointer;
   }
   

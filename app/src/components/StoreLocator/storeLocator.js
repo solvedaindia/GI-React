@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import apiManager from '../../utils/apiManager';
+import apiManager,{expireAccessTokenHandling} from '../../utils/apiManager';
 import { GoogleMap, Marker, withScriptjs, withGoogleMap, InfoWindow } from "react-google-maps";
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -21,9 +21,8 @@ import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
 import '../../../public/styles/plpContainer/plpContainer.scss';
-
-import { confirmAlert } from '../../utils/alert/index'; // Import
-import '../../utils/alert/react-confirm-alert.scss' // Import css
+ //import { confirmAlert } from '../../utils/alert/index'; // Import
+// import '../../utils/alert/react-confirm-alert.scss' // Import css
 
 
 import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
@@ -223,19 +222,6 @@ class StoreLocator extends React.Component {
 
     /* handle store search */
     handleStoreSearch() {
-        // if(true)
-        // {
-        //     confirmAlert({
-        //         title: 'Confirm to submit',                        // Title dialog
-        //         message: 'Are you sure to do this.',               // Message dialog
-        //         childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
-        //         confirmLabel: 'Confirm',                           // Text button confirm
-        //         cancelLabel: 'Cancel',                             // Text button cancel
-        //         onConfirm: () => alert('Action after Confirm'),    // Action after Confirm
-        //         onCancel: () => alert('Action after Cancel'),      // Action after Cancel
-        //       })
-        //     return
-        // }
         this.removeActiveClassFromFilter();
         this.setState({
             storeData:null,

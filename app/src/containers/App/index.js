@@ -43,6 +43,7 @@ import NewsletterModel from '../../components/NewsletterModel/newsletterModel';
 import CompareContainer from '../comparePageContainer/index';
 import CheckoutContainer from '../checkoutContainer/index';
 import '../../../public/styles/app.scss';
+import '../../utils/alert/react-confirm-alert.scss'
 import MyWishlist from '../../components/MyWishlist/myWishlist';
 import client from '../../utils/apiManager';
 import AboutUsContainer from '../aboutUsContainer/index';

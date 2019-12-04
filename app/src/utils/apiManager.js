@@ -6,6 +6,8 @@ import {
 } from '../../public/constants/constants';
 import { getCookie } from './utilityManager';
 import { resetTheCookiesAndData } from './initialManager';
+import { confirmAlert,showAlert } from '../utils/alert/index';
+//import '../utils/alert/react-confirm-alert.scss'
 const isTokenExpire = false;
 
 const getClient = (baseUrl = null) => {
@@ -102,7 +104,18 @@ export default {
 };
 export function expireAccessTokenHandling() {
   if (getCookie(accessTokenCookie) != '') {
-    alert('Please relogin, your session has expired.');
-    resetTheCookiesAndData();
+    //alert('Please relogin, your session has expired.');
+    //resetTheCookiesAndData();
+    // confirmAlert({
+    //           title: 'Godrej Interio',
+    //           message: 'Please relogin, your session has expired.', 
+    //           buttons: [
+    //               {
+    //                 label: 'Ok',
+    //                 onClick: () => {}
+    //               }
+    //             ],
+    //         })
+    showAlert("Alert!",'Please relogin, your session has expired.',null,"OK",null,()=>{resetTheCookiesAndData();})
   }
 }

@@ -15,6 +15,7 @@ import {
   onFacebookResponse,
   onGoogleResponse,
 } from '../../utils/socialLoginHandler';
+import {showAlert} from '../../utils/alert/index';
 
 import {
   accessTokenCookie,
@@ -63,7 +64,7 @@ class WelcomeBack extends React.Component {
   responseGoogle = response => {
     const profileData = response.profileObj;
     if (!profileData.email) {
-      alert('SocialLogin - Email Id missing');
+      showAlert('Alert!','SocialLogin - Email Id missing',null,"OK",null,null);
       return;
     }
 
@@ -82,7 +83,7 @@ class WelcomeBack extends React.Component {
 
   responseFacebook = response => {
     if (!response.email) {
-      alert('SocialLogin - Email Id missing');
+      showAlert('Alert!','SocialLogin - Email Id missing',null,"OK",null,null);
       return;
     }
 
