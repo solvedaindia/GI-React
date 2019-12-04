@@ -577,7 +577,7 @@ class StoreLocator extends React.Component {
                                                                 <div className='ribbonText'>{physicalData.ribbonText}</div>
                                                             </div>
                                                         }
-                                                        <div className="Storewrapper">
+                                                        <div className="Storewrapper clearfix">
                                                             <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                             {this.props.history.location.state.pincode &&
                                                                 <>
@@ -585,6 +585,7 @@ class StoreLocator extends React.Component {
                                                                 </>
                                                             }
                                                         </div>
+                                                        <div className='clearfix'></div>
                                                        <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                         <div className="phoneDetails">
                                                             <img className="phoneicon" src={phoneIcon} alt="phone" />
@@ -627,7 +628,7 @@ class StoreLocator extends React.Component {
                                                                     <div className='ribbonText'>{physicalData.ribbonText}</div>
                                                                 </div>
                                                             }
-                                                            <div className="Storewrapper">
+                                                            <div className="Storewrapper clearfix">
                                                                 <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                                 {this.props.history.location.state.pincode &&
                                                                     <>
@@ -635,6 +636,7 @@ class StoreLocator extends React.Component {
                                                                     </>
                                                                 }
                                                             </div>
+                                                            <div className='clearfix'></div>
                                                             <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                             <div className="phoneDetails">
                                                                 <img className="phoneicon" src={phoneIcon} alt="phone" />
