@@ -119,7 +119,8 @@ class NotifyMe extends React.Component {
 						</Row>       
 						<Row>
 							<Col xs={12} md={12}>
-								<Form>
+								<Form onSubmit = {this.handleSubmit.bind(this)}
+								>
 									<FormGroup>
 										<div className="form-div notify-emeil clearfix">
 											<Label>{EMAIL_ADD}</Label>

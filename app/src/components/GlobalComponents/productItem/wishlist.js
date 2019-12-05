@@ -27,14 +27,14 @@ class Wishlist extends React.Component {
       <img
         src={require('../../../../public/images/plpAssests/wishlist_added.svg')}
        alt="Added"
-       onClick={this.onWishlistClick.bind(this)}
+       // onClick={this.onWishlistClick.bind(this)}
       />
     );
     this.wishListRemovedImg = (
       <img
         src={require('../../../../public/images/plpAssests/wishlist_blank.svg')}
        alt="Add to Wishlist"
-       onClick={this.onWishlistClick.bind(this)}
+       // onClick={this.onWishlistClick.bind(this)}
       />
     );
     this.state = {
@@ -45,6 +45,9 @@ class Wishlist extends React.Component {
   }
 
   onWishlistClick(e) {
+    if(e.target.nodeName==='SPAN' || e.target.nodeName==='DIV'){
+      return;
+    }
     const wishlistArr = getOnlyWishlistUniqueIds();
     if (getCookie('isLoggedIn') === 'true') {
       if (e.target && e.target.name === 'viewWishListButton') {
@@ -168,6 +171,7 @@ class Wishlist extends React.Component {
         }
         
         <button
+          onClick={this.onWishlistClick.bind(this)}
           className="wishlistBtn"
           id={wishListId}
         >
