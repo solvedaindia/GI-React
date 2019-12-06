@@ -1306,21 +1306,26 @@
     font-family: $font-medium;
     color:$greyDark;
     padding:9px 0;
-    font-size: 14px;
 }
 .tabHeading{
     border-bottom: 2px solid $lightgrey;
     border-collapse:separate;
     border-spacing:0 5px;
     td{
-        padding:0 !important;
         margin:0 0 5px 0 !important;
-        
     }
     
     .tableHeading{
         width:88%;
         margin:0 auto;
+    }
+}
+
+.bankNameList{
+    .tableHeading{
+        .bankTab {
+            padding:0px 10px;
+        }
     }
 }
 .spacing{
@@ -1331,8 +1336,7 @@
         border-bottom: 2px solid $cerulean;
         font-weight: bold;
     }
-.banklistdata > td{
-    
+.banklistdata > td{   
         padding:0 !important;
     
 }
@@ -1729,6 +1733,16 @@
                 }
             }
         }
+
+        .emiPlans{
+            tr>td,th{font-size: 14px;}
+            .tabHeading{
+                td{
+                max-width:555px;
+                    overflow-y: auto;
+                }
+            }
+        }
     }
 
   /* 
@@ -1765,7 +1779,6 @@
             }
         } 
     } 
-    
   }
   
 
@@ -2399,6 +2412,15 @@
         &.in{
             top: initial;
             bottom: 0px;
+        }
+    }
+    .emiPlans{
+        tr>td,th{font-size: 12px;}
+        .tabHeading{
+            td{
+            max-width:280px;
+                overflow-y: auto;
+            }
         }
     }
   }

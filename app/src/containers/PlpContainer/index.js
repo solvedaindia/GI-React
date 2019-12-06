@@ -41,7 +41,7 @@ import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
-import { createPlpItemData } from '../../utils/utilityManager';
+import { createPlpItemData,isMobile } from '../../utils/utilityManager';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -497,20 +497,26 @@ export class PlpContainer extends React.Component {
     } = this;
 
     var scrollYindex;
-    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
-      scrollYindex = window.innerHeight + document.body.scrollTop;
-    } else if (window.navigator.userAgent.indexOf("Edge") > -1) {
+    var ua = navigator.userAgent.toLowerCase();
+    if(window.navigator.userAgent.indexOf("Edge") > -1){
       scrollYindex = window.innerHeight + window.pageYOffset;
-    } else { //All other browsers
+    }
+     else if (ua.indexOf('safari') != -1) { 
+      if (ua.indexOf('chrome') > -1) {
+        scrollYindex = window.innerHeight + document.documentElement.scrollTop;
+      } else {
+        scrollYindex = window.innerHeight + document.body.scrollTop + document.documentElement.scrollTop; 
+      }
+    }  else { //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
 
     if (error || isLoading || !hasMore) return;
-    const adjustedHeight = 1000;
+    const adjustedHeight = 800;
     const windowHeight = scrollYindex;
+   
     const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight;
-
-    if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
+    if (windowHeight >= windowOffsetHeight && windowHeight - 400 <= windowOffsetHeight) {
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }

@@ -49,6 +49,17 @@ export class ComparePageContainer extends React.Component {
     this.callCompareApi();
   }
 
+
+  componentWillUnmount() {
+    let updatedCompData = this.props.updatedCompData;
+    if (this.props.updatedCompData.length === 0 && appCookie.get('compareProductTemp') && JSON.parse(appCookie.get('compareProductTemp')).length > 0) {
+      updatedCompData = JSON.parse(appCookie.get('compareProductTemp'));
+      updatedCompData.map(data => {
+        this.props.addProduct(data);
+      })
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.updatedCompData !== this.props.updatedCompData) {
       this.state.compWidgetData = [];
@@ -128,6 +139,7 @@ export class ComparePageContainer extends React.Component {
         if (!skuIdsArr.includes(sku1.uniqueID)) {
           skuIdsArr.push(sku1.uniqueID);
           prds.push(sku1)
+          return;
         }
 
       }
@@ -143,6 +155,7 @@ export class ComparePageContainer extends React.Component {
           if (!skuIdsArr.includes(sku2.uniqueID)) {
             skuIdsArr.push(sku2.uniqueID);
             prds.push(sku2)
+            return;
           }
 
         }
@@ -159,6 +172,7 @@ export class ComparePageContainer extends React.Component {
           if (!skuIdsArr.includes(sku3.uniqueID)) {
             skuIdsArr.push(sku3.uniqueID);
             prds.push(sku3);
+            return;
           }
 
         }
@@ -175,13 +189,13 @@ export class ComparePageContainer extends React.Component {
   updateSingleCompProduct(index) {
 
     var prds = this.state.prds;
-
+    var cookieData = JSON.parse(appCookie.get('compareProductTemp'));
     var skuIdsArr = [];
     var reverse_data = this.state.data;
     if (!reverse_data) {
       return
     }
-    reverse_data.forEach(data => {
+    reverse_data.forEach( (data,index) => {
       var sku1 = data.sKUs.find(sKU => {
         return sKU.uniqueID == this.state.compWidgetData[index];
       });
@@ -193,10 +207,21 @@ export class ComparePageContainer extends React.Component {
         if (!skuIdsArr.includes(sku1.uniqueID)) {
           skuIdsArr.push(sku1.uniqueID);
           prds[index] = sku1;
+        
+          if(cookieData!=null && index<cookieData.length)
+          {
+            
+            cookieData[index].actualPrice=sku1.actualPrice;
+            cookieData[index].offerPrice=sku1.offerPrice;
+            cookieData[index].skuId=sku1.uniqueID;
+            cookieData[index].thumbnail=sku1.thumbnail;
+          }
+
         }
       }
     })
-
+    
+    appCookie.set('compareProductTemp', JSON.stringify(cookieData), 365 *24 *60 *60 *1000);
     this.setState({
       prds: prds,
       compCount: prds.length,
@@ -235,6 +260,8 @@ export class ComparePageContainer extends React.Component {
 
   removeCompareId(data) {
     this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);   
+
+    this.state.data = this.state.data.filter(element=>element.uniqueId!==data)
     this.renderPrd();
     this.props.removeProduct(data);
   }
@@ -275,7 +302,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   removeProduct: id => dispatch(actionCreators.RemoveProduct(id)),
-  updateSKU: obj => dispatch(actionCreators.updateSKU(obj))
+  updateSKU: obj => dispatch(actionCreators.updateSKU(obj)),
+  addProduct: product => dispatch(actionCreators.AddProduct(product))
 });
 
 const withConnect = connect(
