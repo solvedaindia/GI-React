@@ -71,11 +71,12 @@ class EspotContent extends React.Component {
 
   render() {
     const { pageLayoutEspot, index } = this.state;
+   
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-
-			<div className="espotContent" id={index}>
+     
+			<div className={getCookie('isLoggedIn') !== 'true'?"espotContent":"espotContent loggedExplore"} id={index}>
 				{isMobile() && (this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') && <><h2 className='mwebGreeting'>
 					{HELLO_START}
@@ -101,6 +102,7 @@ class EspotContent extends React.Component {
 					</>
         		}
 			</div>
+
 		)
     );
   }
