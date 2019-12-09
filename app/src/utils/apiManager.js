@@ -6,6 +6,7 @@ import {
 } from '../../public/constants/constants';
 import { getCookie } from './utilityManager';
 import { resetTheCookiesAndData } from './initialManager';
+import { useHistory } from "react-router-dom";
 const isTokenExpire = false;
 
 const getClient = (baseUrl = null) => {
@@ -33,6 +34,21 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     error => {
+      // console.log("API ERROR",error.message);
+      // console.log("API ERROR s",error.status);
+       
+      // console.log("API ERROR Response",error.response);
+      // console.log("API ERROR Status",error.response.status);
+      // console.log("API ERROR Data",error.response.data);
+      if(error.message==='Network Error')
+      {
+          
+         //let history = useHistory();
+         //history.push("/interner-error");
+         //window.location
+        // alert('There is no internet connection')
+         window.location.href= "/interner-error";
+      }
       if (error.response.status >= 500) {
         Raven.captureException(error);
       } else if (error.response.data.error.error_key === 'token_expired') {
