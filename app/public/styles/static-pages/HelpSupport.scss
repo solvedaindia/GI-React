@@ -616,18 +616,10 @@
         padding-top: 0px;
         padding-bottom: 0px;
       }
-      .img-icon-div {
-        width: 20%;
-        margin-right: 20px;
-      }
       .email-box-desc {
         width: 80%;
       }
-      .separator {
-        border-right: 0px;
-        border-bottom: 1px solid #dadada;
-        padding-bottom: 20px;
-      }
+
       .separator-right{
         padding-top: 20px;
       }
@@ -810,17 +802,18 @@
     .static-contact-us {
       h1 {
         text-align: left;
-        font-size: 16.9px !important;
+        font-size: 12px;
         padding-bottom: 0px;
         font-weight: 600;
       }
       .title-text {
-        font-size: 16.9px !important;
+        font-size: 12px;
+        font-family: $font-bold;
       }
 
       .sub-heading {
-        font-size: 16.9px !important;
-        color: #77787a !important;
+        font-size: 12px;
+        color: #77787a ;
         padding-top: 0px;
         padding-bottom: 0px;
       }
