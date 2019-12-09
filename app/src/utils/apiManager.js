@@ -35,6 +35,13 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     error => {
+      if(error.message==='Network Error')
+      {
+         
+         //alert('There is no internet connection')
+         showAlert("Alert!",'There is no internet connection',null,"OK",null,null)
+         
+      }
       if (error.response.status >= 500) {
         Raven.captureException(error);
       } else if (error.response.data.error.error_key === 'token_expired') {

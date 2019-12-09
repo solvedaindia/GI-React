@@ -16,7 +16,8 @@ body.react-confirm-alert-body-element {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 99;
+   // z-index: 99999999;
+   z-index: 2147483648;
     background: rgba(255, 255, 255, 0.9);
     display: -webkit-flex;
     display: -moz-flex;
@@ -31,6 +32,7 @@ body.react-confirm-alert-body-element {
     -moz-animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
     -o-animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
     animation: react-confirm-alert-fadeIn 0.5s 0.1s forwards;
+    //border:5px solid red;
   }
   
   .react-confirm-alert-body {
