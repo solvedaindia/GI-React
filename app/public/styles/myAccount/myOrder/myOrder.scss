@@ -73,7 +73,12 @@
     border: solid 1px $greyborder;
     padding: 0 26px 30px;
     margin: 0 0 16px 0;
+    
+    .orderProduct.removeBorder{
+      border-bottom: none !important;
+    }
     .orderProduct {
+      
       border-bottom: solid 1px $greyborder;
       padding: 31px 0 29px 0;
       .orderbtn {
