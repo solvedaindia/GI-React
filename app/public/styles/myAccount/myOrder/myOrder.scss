@@ -403,7 +403,7 @@
     }
     .list.active{
       color:$greenLight;
-      font-family: $font-bold;
+      font-family: $font-medium;
       &:before {
         background: $greenLight;
         z-index: 99999;        
