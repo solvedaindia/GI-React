@@ -76,7 +76,6 @@ const isIPad = /ipad/.test(userAgent);
 //   shouldScrollLogin && window.scrollTo(0,0)
 // });
 
-
 export default class App extends React.Component {
 
   constructor(props) {
@@ -103,6 +102,17 @@ export default class App extends React.Component {
     this.resize();
     this.getIPData();
     window.addEventListener('scroll', this.handleScroll);
+
+    //Register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../../../sw.js', {scope: '/'},)
+        .then(function (register) {
+          console.log('SW registered', register);
+        })
+        .catch(function (err) {
+          console.log("Service Worker Failed to Register >>> ", err);
+        })
+    }
   }
   componentWillMount() {
     if (isMobile() || isTab() || isIPad) {
@@ -140,14 +150,13 @@ export default class App extends React.Component {
 
   handleScroll() {
     var header = document.getElementById("header");
-    if(header){
-      var sticky = header.offsetTop;		
-      if (window.pageYOffset > sticky) 
-      {
-      header.classList.add("sticky");
-      } 			
+    if (header) {
+      var sticky = header.offsetTop;
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      }
       else {
-      header.classList.remove("sticky");
+        header.classList.remove("sticky");
       }
     }
   }

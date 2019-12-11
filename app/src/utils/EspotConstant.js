@@ -81,3 +81,7 @@ export const TermsConditionES = {
   tc5: 'GI_TERMS_AND_CONDITIONS_5',
   tc6: 'GI_TERMS_AND_CONDITIONS_6',
 }
+
+//Need to do in Caps
+//Remove store locator [age]
+//for logo and CSS make one entry point

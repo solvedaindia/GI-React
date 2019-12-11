@@ -6,6 +6,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
@@ -40,6 +42,21 @@ module.exports = require('./webpack.base.babel')({
       exclude: /a\.js|node_modules/, // exclude node_modules
       failOnError: false, // show a warning when there is a circular dependency
     }),
+    new WebpackPwaManifest({
+      name: 'My Progressive Web App',
+      short_name: 'MyPWA',
+      description: 'My awesome Progressive Web App!',
+      background_color: '#000000',
+      start_url: '/',
+      crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      icons: [
+        {
+          src: path.resolve('app/public/images/logo.png'),
+          sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+        }
+      ]
+    }),
+    new OfflinePlugin(),
   ],
 
   // Emit a source map for easier debugging

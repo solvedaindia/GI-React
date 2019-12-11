@@ -2,11 +2,12 @@
 
 const express = require('express');
 const logger = require('./logger');
-
+const fs = require('fs');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
+const https = require('https');
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
     ? require('ngrok')
@@ -55,3 +56,13 @@ app.listen(port, host, async err => {
     logger.appStarted(port, prettyHost);
   }
 });
+
+// const options = {
+//   key: fs.readFileSync('server.key'),
+//   cert: fs.readFileSync('server.cert'),
+// };
+
+// const server = https.createServer(options, app);
+// server.listen("3000", () =>
+//   console.info(`Server started on http://localhost:${"3000"}`),
+// );
