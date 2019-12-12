@@ -576,6 +576,7 @@ section.tablecarousel {
                 height: 22px;
                 width: 22px;
                 padding: 2px;
+                cursor: pointer;
               }
               .circlebox {
                 height: 28px;
@@ -588,6 +589,7 @@ section.tablecarousel {
                 border-radius: 100%;
                 padding: 2px;
                 margin-top:-5px;
+                cursor: pointer;
 
                 .circleRGB {
                   border-radius: 50%;
@@ -624,6 +626,7 @@ section.tablecarousel {
               min-height: 16px;
               padding-left: 16px;
               background-size: contain;
+              cursor: pointer;
             }
 
             .inputCheck[type="checkbox"]:checked + .lblCheck {
