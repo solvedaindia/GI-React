@@ -609,6 +609,21 @@
         &.registerEmailMobile  {
            &.in{
                padding-left: 0px !important;
+               max-width: 500px;
+               margin: 0 auto;
+               .modal-dialog{
+                   .modal-content{
+                      .registerEmailMobile {
+                          .modal-wrapper{
+                              .form_register{
+                                  .form-group{
+                                      margin-bottom: 20px;
+                                  }
+                              }
+                          }
+                      } 
+                   }
+               }
            }
         }
     } 
