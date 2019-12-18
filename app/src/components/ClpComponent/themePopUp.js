@@ -70,7 +70,6 @@ class ThemeData extends React.Component {
         }
       }
 
-
     render(){
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
@@ -127,7 +126,7 @@ class ThemeData extends React.Component {
                     />
                 </figure>
                 <div className='prodDetails'>
-                    <h2 className='prodNAme'>{itemDetail.productName}</h2>
+                    <h2 className='prodNAme' data-toggle="tooltip" title={itemDetail.productName}>{itemDetail.productName} </h2>
                     <p className='price'>₹{formatPrice(itemDetail.offerPrice)}</p>
                     <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>
