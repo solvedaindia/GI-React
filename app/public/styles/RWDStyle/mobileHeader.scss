@@ -115,7 +115,8 @@
       border: 0px;
     }
     .searchIcon {
-      display: inline;
+      display: inline-block;
+      float:left;
     }
     .icons {
       float: left;
