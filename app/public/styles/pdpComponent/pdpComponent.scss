@@ -1753,7 +1753,9 @@
             }
             .tabHeading{
                 td{
-                max-width:555px;                    
+                    cursor: pointer;
+                max-width:555px;
+                    overflow-y: auto;
                 }
             }
         }

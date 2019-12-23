@@ -308,6 +308,7 @@
           min-height: 16px;
           padding-left: 11px;
           background-size: contain;
+          cursor: pointer;
         }
         .inputCheck[type="checkbox"]:checked + .lblCheck {
           background: url("../images/plpAssests/checked.jpg") left top no-repeat;
@@ -348,6 +349,7 @@
         .password-field {
           .valiationPosition-NewPassword {
             top: 36px;
+            cursor: pointer;
           }
         }
         .form-div {
@@ -693,6 +695,7 @@
       height: 14px;
       position: absolute;
       left: 0;
+      cursor: pointer;
     }
     .input[type="radio"]:checked + .labelchecked {
       border-radius: 100%;
