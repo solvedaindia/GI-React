@@ -89,7 +89,7 @@ class SimilarCombosProducts extends React.Component {
       slidesToScroll: 1,
       prevArrow: prevArrowImg,
       nextArrow: nextArrowImg,
-	  centerMode: false,
+	    centerMode: false,
       responsive: [
         {
           breakpoint: 1024,

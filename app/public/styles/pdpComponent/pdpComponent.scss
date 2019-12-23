@@ -3,6 +3,7 @@
 
 /* our-promises
 -----------------------------------*/
+/*---- ScrollBar -----------------------*/
 .slideup, .slidedown {
     max-height: 0;            
     overflow-y: hidden;
@@ -955,6 +956,16 @@
 }
 
 .similarProduct-Wrapper{
+    .slick-next{
+        &:before{          
+            opacity: unset;
+            color: unset;
+       }
+    }
+    #similar{
+        .slick-prev,.slick-next{ z-index: 1;}      
+        
+    }
 .similarProducts{    
     display: flex;
     flex-wrap: wrap;
@@ -1736,10 +1747,13 @@
 
         .emiPlans{
             tr>td,th{font-size: 14px;}
+            .theadscroll{
+                min-height: .01%;
+                overflow-x: auto;
+            }
             .tabHeading{
                 td{
-                max-width:555px;
-                    overflow-y: auto;
+                max-width:555px;                    
                 }
             }
         }
