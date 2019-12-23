@@ -351,7 +351,7 @@ module.exports.handleWCSError = function handleWCSError(response) {
       return {
         status_code: 404,
         error_key: 'Resource_Not_Found',
-        error_message: errBody || '',
+        error_message: 'Resource Not Found',
       };
     }
     if (statusCode === 403) {
