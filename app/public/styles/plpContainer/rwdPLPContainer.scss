@@ -389,13 +389,14 @@
   
               /* Input Checkbox Radio
               -----------------------------*/
-              .lblradio {
+              .lblradio {               
                 position: relative;
                 .circle {
                   border-radius: 50%;
                   height: 22px;
                   width: 22px;
                   padding: 2px;
+                  
                 }
                 .circlebox {
                   height: 28px;
@@ -415,6 +416,10 @@
                     width: 20px;
                     padding: 2px;
                     display: block;
+                  }
+                  .circle{                    
+                    width: 24px;
+                    height: 24px
                   }
                 }
               }

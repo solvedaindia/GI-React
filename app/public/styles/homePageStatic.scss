@@ -82,7 +82,7 @@
 .featureCategories .rightbox{float: right;}
 .featureCategories .featureCarouselbox  .itemtext .text{color:#000;}
 
-
+.espotContent.loggedExplore{margin-top:120px;}
 
 
 /* 
@@ -154,6 +154,7 @@
     #Global Screen Chhange for Screen max 992
   */
   @include mix-md{
+    .espotContent.loggedExplore{margin-top:0px;}
     .espotContent{
     .explore-room{
         .explore{

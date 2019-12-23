@@ -373,7 +373,9 @@ class Filter extends React.Component {
         colorRGBClass = 'circle';
         imgUrl = `${imagePrefix}${option.facetImage}`;
         customCheckItem = (
-          <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
+          <div className="circlebox">
+            <img className={colorRGBClass} style={colorStyle} src={imgUrl} />
+          </div>
         );
         checkItem = (
           <label className="lblradio" htmlFor={customSelectionBoxId}>
