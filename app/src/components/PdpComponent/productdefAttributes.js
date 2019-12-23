@@ -33,7 +33,7 @@ class productDefAttribute extends React.Component {
 		if (this.state.selectedOption === '') {
 			radioChecked = isChecked;
 		} else {
-			if(resolvedSku.indexOf(radioValue) === -1) {
+			if(resolvedSku.indexOf(radioValue+radioName) === -1) {
 				radioChecked = false;
 			} else {
 				radioChecked = true;
@@ -75,7 +75,7 @@ class productDefAttribute extends React.Component {
 		}
 
 		resolvedSku.map(attributeValue => {
-			resolvedSwatchesName.push(attributeValue.values[0].name);
+			resolvedSwatchesName.push(attributeValue.values[0].name+attributeValue.name);
 		});
 		return resolvedSwatchesName;
 	}
@@ -84,7 +84,7 @@ class productDefAttribute extends React.Component {
 		let swatchesFormatArr = Array();
 		this.props.defAttributes.map((data, i) => {
 			data.values.map(getVal => {
-				if(resolvedSku.indexOf(getVal.name) !== -1) {
+				if(resolvedSku.indexOf(getVal.name+data.name) !== -1) {
 					swatchesFormatArr.push(getVal.name);
 					// if (getVal.colorCode) {
 					// 	swatchesFormatArr.push(getVal.name);
@@ -122,7 +122,7 @@ class productDefAttribute extends React.Component {
 									let isRadio = false;
 									let boxClass = '';
 
-									if (resolvedSku.indexOf(value.name) !== -1) {
+									if (resolvedSku.indexOf(value.name+data.name) !== -1) {
 										checkedType = true;
 									}
 
