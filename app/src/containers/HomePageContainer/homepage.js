@@ -11,7 +11,6 @@ import CrossIcon from '../../components/SVGs/crossIcons.svg';
 import LoadingIndicator from '../../utils/loadingIndicator';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Pixels from '../../components/Primitives/pixels';
-import InfoAlert from '../../utils/infoAlert';
 export class HomapegeLayout extends React.Component {
 	constructor(props) {
 		super(props);
@@ -59,7 +58,6 @@ export class HomapegeLayout extends React.Component {
 		const { homepageLayout } = this.state;
 		return (
 			<>
-			<InfoAlert/>
 				<ContentEspot espotName={'GI_PIXEL_BODY_START'} />
 				<div className='home'>
 					<Pixels espotName={'GI_PIXEL_HOME_META'} />
