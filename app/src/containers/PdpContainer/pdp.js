@@ -16,8 +16,13 @@ class PdpContainer extends React.Component {
       pdpLoading: true,
       pdpError: false,
       espotLoading: true,
-	  espotError: false,
-	  espotTandCLoading: true,
+	    espotError: false,
+      espotTandCLoading: true,
+      keywords: [],
+      description: '',
+      title: '',
+      alt: '',
+      image: '',
     };
   }
 
@@ -27,7 +32,35 @@ class PdpContainer extends React.Component {
 	  this.callPdpPromoTandC();
   }
 
-	callPdpApi() {
+  parseSeoTagData(pdp,partNumber){
+    if(pdp.data.type === 'bundle'){
+      this.setState({
+        keywords: pdp.data.bundleData[0].keywords && pdp.data.bundleData[0].keywords,
+        description: pdp.data.bundleData[0]? pdp.data.bundleData[0].metaDescription : '',
+        title: pdp.data.bundleData[0]? pdp.data.bundleData[0].pageTitle : '',
+        alt: pdp.data.bundleData[0] ? pdp.data.bundleData[0].imageAltText : '',
+        image:pdp.data.bundleData[0] ? pdp.data.bundleData[0].thumbnail : '',
+      });
+    } else if(pdp.data.type === 'kit'){
+      this.setState({
+        keywords: pdp.data.kitData[0].keywords && pdp.data.kitData[0].keywords,
+        description: pdp.data.kitData[0]? pdp.data.kitData[0].metaDescription : '',
+        title: pdp.data.kitData[0]? pdp.data.kitData[0].pageTitle : '',
+        alt: pdp.data.kitData[0] ? pdp.data.kitData[0].imageAltText : '',
+        image:pdp.data.kitData[0] ? pdp.data.kitData[0].thumbnail : '',
+      });
+    }else {
+      this.setState({
+        keywords: pdp.data.keywords && pdp.data.keywords,
+        description: pdp.data.skuData? pdp.data.skuData[0].metaDescription : '',
+        alt: pdp.data.skuData ? pdp.data.skuData[0].imageAltText : '',
+        title: (pdp.data.skuData && pdp.data.skuData.length>0) ? pdp.data.skuData.filter(ele => ele.partNumber === partNumber)[0].pageTitle : '',
+        image:pdp.data.skuData ? pdp.data.skuData[0].thumbnail : '',
+      });
+    }
+  }
+  
+  callPdpApi() {
     let splitedPathName = window.location.pathname.split("/");
     const partNumber = splitedPathName[splitedPathName.length - 1];
     const skuId = this.props.match.params.skuId;
@@ -35,9 +68,9 @@ class PdpContainer extends React.Component {
 		apiManager.get(pdpApi2 + skuId).then(response => {
 			this.setState({
         pdp: response.data,
-        title: !!response.data.data.skuData && response.data.data.skuData ? response.data.data.skuData.filter(ele => ele.partNumber === partNumber)[0].pageTitle : '',
 				pdpLoading: false,
       });
+      this.parseSeoTagData(response.data,partNumber);
 			if (appCookie.get('isPDPAddToCart') === null) {
 				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);
 			}
@@ -80,17 +113,17 @@ class PdpContainer extends React.Component {
   }
 
   render() {
-  const { pdp, title} = this.state;
+  const { pdp} = this.state;
   return (
 		<>
 		
     {!!pdp && 
 			<Pixels
-				keywords={!!pdp.data.keywords && pdp.data.keywords} 
-				description={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].metaDescription : ''}
-				title={title}
-        alt={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].imageAltText : ''}
-        image={!!pdp.data.skuData && pdp.data.skuData ? pdp.data.skuData[0].thumbnail : ''}
+				keywords={this.state.keywords}
+				description={this.state.description}
+				title={this.state.title}
+        alt={this.state.alt}
+        image={this.state.image}
 			/>
 		}
         <div>
