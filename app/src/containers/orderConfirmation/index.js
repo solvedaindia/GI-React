@@ -24,6 +24,7 @@ class OrderConformation extends React.Component {
       showPop: false,
       orderData: '',
       showPage: false,
+      showGtagScript: false,
     };
   }
 
@@ -52,6 +53,7 @@ class OrderConformation extends React.Component {
         this.setState({
           showPage: true,
           orderData: res.data.data,
+          showGtagScript: true,
         });
       })
       .catch(err => {
@@ -145,10 +147,10 @@ class OrderConformation extends React.Component {
         {linkData.text}
       </Link>
     ) : (
-      <Link className="action" to="/guestTrackOrder">
-        {linkData.text}
-      </Link>
-    );
+        <Link className="action" to="/guestTrackOrder">
+          {linkData.text}
+        </Link>
+      );
   }
 
   showLoader() {
@@ -164,6 +166,20 @@ class OrderConformation extends React.Component {
     }
     return (
       <div className="orderconfirm">
+        {this.state.showGtagScript ? <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            gtag('config', 'UA-2934706-17');
+            gtag('event', 'conversion', {
+              'send_to': 'AW-880478252/AnvmCJ3FwrYBEKyQ7KMD',
+              'value': ${this.state.orderData.orderSummary.netAmount},
+              'currency': 'INR',
+              'transaction_id': '${this.state.orderData.orderID}'
+          `,
+          }}
+        /> : null}
+        
+
         <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_START'} />
         <div className="container">
           <div className="row">
@@ -235,8 +251,8 @@ class OrderConformation extends React.Component {
                   )}
                 </div>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </div>
 
             {getCookie('isLoggedIn') === 'true' ? (
@@ -249,12 +265,12 @@ class OrderConformation extends React.Component {
                 </Link>
               </div>
             ) : (
-              <div className="trackOrderBtnBox">
-                <Link className="action" to="/guestTrackOrder">
-                  <button className="btn-bg btntrackorder">Track Order</button>
-                </Link>
-              </div>
-            )}
+                <div className="trackOrderBtnBox">
+                  <Link className="action" to="/guestTrackOrder">
+                    <button className="btn-bg btntrackorder">Track Order</button>
+                  </Link>
+                </div>
+              )}
 
             {!isMobile() && <div className="seprator" />}
             <div className="orderItemSummary">
@@ -290,7 +306,7 @@ class OrderConformation extends React.Component {
         </div>
         {this.state.showPop ? <SuccessPop /> : ''}
         {/* <SuccessPop /> */}
-        <ContentEspot espotName = { 'GI_PIXEL_ORDERCONFIRMATION_BODY_END' } />
+        <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_END'} />
       </div>
     );
   }
