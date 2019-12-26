@@ -2,13 +2,14 @@
 
 .category{
     height: 69px;
-    padding-left: 32px;
+    padding-left: 25px;
     display: flex;
     align-items: center;
+    padding-bottom: 31px;
 }
 .categoryList {
     margin: 0;
-    width: 50%;
+    width: 68%;
     display: inline-block;
     &:first-child{
         .catList{
@@ -16,8 +17,9 @@
         }
     }
     .listItems {
-        padding: 28px 40px 28px 0;
+        padding: 28px 40px 28px 20px;
         font-size: $base*1.5;
+        margin-right: -32px;
         .action{
             font-size: $base*1.5;
             color: $battleshipGrey;

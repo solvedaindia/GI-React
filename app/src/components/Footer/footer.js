@@ -25,7 +25,7 @@ const FooterComponent = props => (
         </Row>
       </Col>
     </Row>
-    <Row>
+    {/* <Row>
       <Col md={7} sm={12} xs={12} className="rightPadding">
         <Row>
           <Stores name={props.stores} />
@@ -36,7 +36,7 @@ const FooterComponent = props => (
           <Categories name={props.categories} />
         </Row>
       </Col>
-    </Row>
+    </Row> */}
   </Grid>
 );
 

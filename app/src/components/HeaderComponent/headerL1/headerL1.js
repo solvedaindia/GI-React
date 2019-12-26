@@ -9,7 +9,7 @@ import {
 
 class HeaderL1 extends React.Component {
   state = {
-    layer1Data: [],
+    //layer1Data: [],
     isLoading: true,
     errors: null,
     getDefaultPincode: ''
@@ -21,7 +21,7 @@ class HeaderL1 extends React.Component {
 		.then(response => {
 			const {data} = response || {};
 			this.setState({
-			layer1Data: data && data.data.Header_Static_Links,
+			//layer1Data: data && data.data.Header_Static_Links,
 			isLoading: false,
 			});
 		})
@@ -49,50 +49,8 @@ class HeaderL1 extends React.Component {
   render() {
   const { isLoading, layer1Data, getDefaultPincode } = this.state;
     return (
-      <ul className="layer1">
-        {(!isLoading && layer1Data && layer1Data.length>0) ? (
-          layer1Data.map((linkData, index) => (
-            <li className="listItems" key={index}>
-              {linkData.text === 'TRACK ORDER' ? (
-                getCookie('isLoggedIn') === 'true' ? (
-                  <Link
-                    className="action"
-                    to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
-                  >
-                    {linkData.text}
-                  </Link>
-                ) : (
-                  <Link className="action" to="/guestTrackOrder">
-                    {linkData.text}
-                  </Link>
-                )
-              ) : (
-                <>
-                  {
-                    linkData.text === 'LOCATE STORES' ? (
-                        <Link
-                          className="action"
-                          to={{ pathname: '/storelocator', state: { pincode: getDefaultPincode } }}
-                        >
-                          {linkData.text}
-                        </Link>
-                      ) : (
-                       
-                        <Link className="action"  to='/support'>
-                        
-                          {linkData.text}
-                        
-                        </Link>
-                      )
-                    }
-                </>
-              )}
-            </li>
-          ))
-        ) : (
-          <div>...</div>
-        )}
-      </ul>
+      <>
+      </>
     );
   }
 }

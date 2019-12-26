@@ -27,8 +27,8 @@ export class FooterMobile extends React.Component {
           isFromMobile
         />
         <FooterLinkAccordian name={this.props.links} />
-        <Categories name={this.props.categories} />
-        <Stores name={this.props.stores} />
+        {/* <Categories name={this.props.categories} />
+        <Stores name={this.props.stores} /> */}
         <ul className="social-Link clearfix">
           <Socialicon name={this.props.socialicons} />
         </ul>

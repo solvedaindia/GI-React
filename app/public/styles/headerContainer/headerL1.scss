@@ -3,20 +3,20 @@
     margin: 0;
     border-bottom: 1px solid #ddd;
     height: 30px;
-    .listItems {
-        padding-right: 20px;
-        font-size: 10px;
+    // .listItems {
+    //     padding-right: 20px;
+    //     font-size: 10px;
 
-        .action {
-            color: #77787a;
-            &:hover{
-                text-decoration: underline;
-                color: #ee4060;
-            }
-            &:visited,&:focus{
-                text-decoration: none;
-                outline: none;
-            }
-        }
-    }
+    //     .action {
+    //         color: #77787a;
+    //         &:hover{
+    //             text-decoration: underline;
+    //             color: #ee4060;
+    //         }
+    //         &:visited,&:focus{
+    //             text-decoration: none;
+    //             outline: none;
+    //         }
+    //     }
+    // }
 }

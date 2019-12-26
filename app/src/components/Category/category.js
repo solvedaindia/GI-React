@@ -143,6 +143,7 @@ class Category extends React.Component {
             )
             )}
         </ul>
+        
         <SearchBar />
         <HeaderRight />
       </div>
