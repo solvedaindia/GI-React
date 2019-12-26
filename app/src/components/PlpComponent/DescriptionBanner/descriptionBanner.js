@@ -55,6 +55,14 @@ class DescriptionBanner extends React.Component {
     if (nextProps.descriptionDataPro !== this.props.descriptionDataPro) {
       this.initBanner(nextProps);
     }
+    if (this.state.isReadMore) {
+      this.setState({
+        isReadMore: false,
+        finalData: this.state.splitData,
+        readMoreTitle: 'Read More',
+      });
+      this.scrollToRef(this.refs.description)
+    } 
   }
 
   
