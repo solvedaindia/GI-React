@@ -112,9 +112,11 @@
       .changePasswordContainer{
         .form-div{
           .valiationPosition-NewPassword{
+            cursor: pointer;
             top:20px;
           }
           .valiationPosition-NewPassword2{
+            cursor: pointer;
             top:24px;
           }
           .error-msg{
