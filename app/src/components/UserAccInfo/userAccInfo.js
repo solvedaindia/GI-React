@@ -99,7 +99,7 @@ class UserAccInfo extends React.Component {
           }
 
           this.setState({
-            userName: `Welcome ${username.split(' ')[0]}`,
+            userName: `Hello ${username.split(' ')[0]}`,
             logonId: response.data.data.logonID,
           });
 
