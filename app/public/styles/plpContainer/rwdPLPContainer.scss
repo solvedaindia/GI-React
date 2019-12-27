@@ -508,6 +508,18 @@
               min-width: 160px;
             }
           }
+          .emptylist
+          {
+            display: flex;
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid white;
+            padding: 9px 0px;
+            min-height: 54px;
+            align-items: center;
+            position: relative;
+            background: white;
+          }
         }
   
         &__list-item {

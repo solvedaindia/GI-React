@@ -417,6 +417,12 @@ class Filter extends React.Component {
         </li>
       );
     });
+    if(isMobile)
+    {
+      const lastItem=(<li className="emptylist"></li>)
+      item.push(lastItem)
+    }
+    console.log("FilterItems",item);
     this.setState({
       facetItem: item,
       isRWDFilterSelected: isRWDFacetSelecte,
@@ -449,7 +455,8 @@ class Filter extends React.Component {
             </div>
           </ul>}
 
-          {isMobile() && <div className='filter-data-list'><ul className={`dropdown_filter__list ${/* this.props.currentFacetPro === null &&  */this.props.indexPro === 0 ? 'dropdown_filter__list--active' : this.state.active ? 'dropdown_filter__list--active' : ''}`}>
+          {isMobile() && <div className='filter-data-list'><ul className={`dropdown_filter__list ${ this.props.currentFacetPro === null &&  this.props.indexPro === 0 ? 'dropdown_filter__list--active' : this.state.active ? 'dropdown_filter__list--active' : ''}`}>
+            
             {this.state.facetItem}
             {isMobile() && <><div className='clearfix'></div>
 
