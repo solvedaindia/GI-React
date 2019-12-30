@@ -147,9 +147,13 @@
     border: 0;
 	}
 	
-	.GI_CONTACT_US_CUSTOMER_CARE  img {
-		width:25px!important;
-		height:25px!important;
+	.GI_CONTACT_US_CUSTOMER_CARE{
+		border-top: 1px solid #979797;
+		margin-top: 20px;
+		 img {
+			width:25px!important;
+			height:25px!important;
+		}
 	}
 
 	.GI_KITCHEN_LAYOUTS {
