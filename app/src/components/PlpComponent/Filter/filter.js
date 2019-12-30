@@ -351,6 +351,7 @@ class Filter extends React.Component {
 
       let colorStyle = {
         display: 'block',
+      // display:'inline-block',
       };
       let imgUrl = null;
       let colorRGBClass;
