@@ -63,6 +63,7 @@ class Pixels extends React.Component {
             )
           })
         }></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
         <link rel="canonical" href={window.location.href} />
         <meta name="twitter:card" content={pixelData.twitter_card ? pixelData.twitter_card : "summary_large_image"} />
         <meta name="twitter:site" content={pixelData.twitter_site ? pixelData.twitter_site : "@godrejinterio"} />
