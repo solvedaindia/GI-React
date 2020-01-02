@@ -234,6 +234,14 @@ class addToCartComponent extends React.Component {
     }
   };
 
+  onKeyPress=(event,props, isUpdate)=>
+  {
+    if(event.key === 'Enter'){
+     this.updatePincode(props, isUpdate);
+  
+    }
+  }
+
   updatePincode(props, isUpdate) {
     if (isUpdate === 'Edit') {
       this.setState({
@@ -311,6 +319,7 @@ class addToCartComponent extends React.Component {
                   name="pincodeVal"
                   id="pincodeVal"
                   type="text"
+                  onKeyPress={(evt)=>this.onKeyPress(evt,this.props, btnName)}
                   onChange={this.handleChange}
                   value={this.state.pincodeVal}
                 />

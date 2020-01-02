@@ -13,6 +13,7 @@ export const wishlistIdCookie = 'wishlistId';
 export const isLoggedIn = false;
 export const catID = '13503';
 export const productTitleCharLimit = 25;
+export const productBestSellerTitleCharLimit = 23;
 export const productTitleCharLimitPDP = 50;
 export const productDescriptionCharLimit = 35;
 export const roomsEspotName = 'GI_Homepage_Explore_Rooms';
