@@ -5,6 +5,7 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
+import appCookie from '../../utils/cookie';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
 import { createCategoryPlpURL, getReleventReduxState, fetchReleventSortingValue, fetchReleventSortingValueByIndex } from '../../utils/utilityManager';
@@ -15,6 +16,7 @@ import { Link, withRouter } from 'react-router-dom';
 class Categories extends React.Component {
 
   onLinkNavigation = () => {
+    appCookie.set('compareProductTemp', '', 365 *24 *60 *60 *1000);
     this.props.plpReduxStateReset();
   }
 
