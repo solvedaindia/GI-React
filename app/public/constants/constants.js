@@ -211,6 +211,13 @@ export const notifyMeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/notifyme
 export const addressListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/users/address/list`;
 /* Consultation form post API*/
 export const consultFormApi = `${secureHttp}://${host}:${port2}/api/v1/static/bookconsultation`;
+
+/* Call Centre #1 post API*/
+export const callCentre1Api = `${secureHttp}://penguinoncloud.com/godrej_uat/pengu_restapi`;
+
+/* Call Centre #2 post API*/
+export const callCentre2Api = `http://www.gnbwebserver.godrej.com/IBMScriptAPI/api/LoadIBMData/SubmitContactDetails`;
+
 /* Consultation form dropdown get API*/
 export const consultGetApi = `${secureHttp}://${host}:${port2}/api/v1/static/getconsultation`;
 /* User data API */

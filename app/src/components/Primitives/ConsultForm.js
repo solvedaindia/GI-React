@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../../public/styles/static-pages/consultForm.scss';
 import {
-  consultFormApi,consultGetApi
+  consultFormApi,consultGetApi,callCentre1Api,callCentre2Api
 } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
-import {SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER, FULLNAME_MSG, VALIDNAME_MSG, VALIDEMAIL_MSG, MOBILE_MSG, FEEDBACK_MSG, SELECT_OPTION_MSG} from '../../constants/app/primitivesConstants';
+import {SEND,WHAT_YOU_LIKE,FULL_NAME,SELECT_OPTION, EMAIL,MESSEGE,MOBILE_NUMBER, FULLNAME_MSG, VALIDNAME_MSG, VALIDEMAIL_MSG, MOBILE_MSG, FEEDBACK_MSG, SELECT_OPTION_MSG,ENTER_MSG} from '../../constants/app/primitivesConstants';
 
 import {
   regexEmail,
@@ -67,6 +67,12 @@ handleChange  = e => {
     }
     this.setState({
       errorMessageMobile : ""
+     })
+  }
+  else if(e.target.name =="message")
+  {
+    this.setState({
+      errorMessageDescription : ""
      })
   }
   this.setState({
@@ -182,7 +188,14 @@ handleValidation=(obj, errorType)=>{
     isValidate = false;
   }
 
-  // For mobile validation
+  // For message validation
+  if(obj.message=='')
+  {
+    this.setState({
+      errorMessageDescription: ENTER_MSG,
+    });
+    isValidate = false;
+  }
 
   return isValidate;
 }
@@ -190,7 +203,10 @@ handleValidation=(obj, errorType)=>{
  
   callConsultApi = () => {
     
-		
+      const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
+    
+      console.log("contact_id",contact_id)
+      
       const data = {
         name:this.state.name,
         mobileNumber:this.state.mobileNumber,
@@ -199,6 +215,30 @@ handleValidation=(obj, errorType)=>{
         message:this.state.message,
        
         }
+      const data1 = {
+        campaign: "IBM : some static value",
+        contact_id: contact_id,
+        contact_name :this.state.name,
+        contact_phone :this.state.mobileNumber,
+        contact_city : "Mumbai",
+        contact_email :this.state.email,
+        contact_topic :this.state.dropDownValue,
+        contact_message :this.state.message,
+        contact_source :"INTGodrejInterio : some static value"
+      }
+      const data2 = {
+        CONTACT_ID:contact_id,
+        CONTACT_NAME:this.state.name,
+        CONTACT_PHONE:this.state.mobileNumber,
+        CONTACT_EMAIL:this.state.email,
+        CONTACT_TOPIC:this.state.dropDownValue,
+        CONTACT_MESSAGE:this.state.message,
+        CONTACT_CITY:"Mumbai",
+        CONTACT_SOURCE : "INTGodrejInterio :some static value"
+        
+      }
+          
+
 		apiManager.post(consultFormApi, data).then((res) => {
       alert(FEEDBACK_MSG)
       this.clearData();
@@ -206,7 +246,53 @@ handleValidation=(obj, errorType)=>{
 			this.setState({
        error: error
       });
-		});
+    });
+
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "multipart/form-data;");
+
+      var formdata = new FormData();
+
+      formdata.append("campaign", "IBM: Some value");
+      formdata.append("contact_id", contact_id);
+      formdata.append("contact_name", this.state.name);
+      formdata.append("contact_phone", this.state.mobileNumber);
+      formdata.append("contact_city", "Mumbai");
+      formdata.append("contact_email", this.state.email);
+      formdata.append("contact_topic", this.state.dropDownValue);
+      formdata.append("contact_message", this.state.message);
+      formdata.append("contact_source", "INTGodrejInterio : some static value");
+
+
+      formdata.append("CONTACT_ID", contact_id);
+      formdata.append("CONTACT_NAME", this.state.name);
+      formdata.append("CONTACT_PHONE", this.state.mobileNumber);
+      formdata.append("CONTACT_CITY", "Mumbai");
+      formdata.append("CONTACT_EMAIL", this.state.email);
+      formdata.append("CONTACT_TOPIC", this.state.dropDownValue);
+      formdata.append("CONTACT_MESSAGE", this.state.message);
+      formdata.append("CONTACT_SOURCE", "INTGodrejInterio : some static value");
+
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch(callCentre1Api, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+
+      fetch(callCentre2Api, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
   }
   getConsultDropDownApi = ()=> {
     apiManager
