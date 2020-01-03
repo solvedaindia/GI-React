@@ -82,7 +82,8 @@ class AddAddressForm extends React.Component {
   }
 
   onSavebuttonClick(event) {
-    event.preventDefault();
+    if(event)
+      event.preventDefault();
 
     var isProceed = true;
     if (!validateFullName(this.state.inputText_name)) {
@@ -314,6 +315,15 @@ class AddAddressForm extends React.Component {
     window.scrollTo(0, document.body.scrollHeight - 700);
   }
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      if(!this.state.isSaveBtnDisabled)
+      {
+        this.onSavebuttonClick();
+      }
+    }
+  }
   render() {
     return (
       <div className="form-BgContainer addAddressContainer">
@@ -325,7 +335,7 @@ class AddAddressForm extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
+              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
               {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
             </div>
           </div>
@@ -333,6 +343,7 @@ class AddAddressForm extends React.Component {
           <div className="col-md-6">
             <div className="form-div clearfix div-error">
               <Input
+               onKeyPress={this.onKeyPress}
                 inputType={'number'}
                 title={'Phone Number'}
                 name={'number'}
@@ -351,21 +362,21 @@ class AddAddressForm extends React.Component {
 
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} />
+              <Input  onKeyPress={this.onKeyPress} inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} />
               {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
             </div>
           </div>
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Pincode" name="pincode" id="pincode" maxLength="6"  placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
+              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Pincode" name="pincode" id="pincode" maxLength="6"  placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
               {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div> : null}
             </div>
           </div>
 
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={70} />
+              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={70} />
               {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
             </div>
           </div>
