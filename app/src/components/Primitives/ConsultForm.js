@@ -203,42 +203,18 @@ handleValidation=(obj, errorType)=>{
  
   callConsultApi = () => {
     
-      const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
+      //const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
     
-      console.log("contact_id",contact_id)
-      
+      //console.log("contact_id",contact_id)
+      const message = this.state.message.split('&').join('and')
+      console.log("contact_id",message)
       const data = {
         name:this.state.name,
         mobileNumber:this.state.mobileNumber,
         email:this.state.email,
         dropDownValue:this.state.dropDownValue,
-        message:this.state.message,
-       
-        }
-      const data1 = {
-        campaign: "IBM : some static value",
-        contact_id: contact_id,
-        contact_name :this.state.name,
-        contact_phone :this.state.mobileNumber,
-        contact_city : "Mumbai",
-        contact_email :this.state.email,
-        contact_topic :this.state.dropDownValue,
-        contact_message :this.state.message,
-        contact_source :"INTGodrejInterio : some static value"
+        message:message,
       }
-      const data2 = {
-        CONTACT_ID:contact_id,
-        CONTACT_NAME:this.state.name,
-        CONTACT_PHONE:this.state.mobileNumber,
-        CONTACT_EMAIL:this.state.email,
-        CONTACT_TOPIC:this.state.dropDownValue,
-        CONTACT_MESSAGE:this.state.message,
-        CONTACT_CITY:"Mumbai",
-        CONTACT_SOURCE : "INTGodrejInterio :some static value"
-        
-      }
-          
-
 		apiManager.post(consultFormApi, data).then((res) => {
       alert(FEEDBACK_MSG)
       this.clearData();
@@ -249,7 +225,7 @@ handleValidation=(obj, errorType)=>{
     });
 
 
-      var myHeaders = new Headers();
+     /* var myHeaders = new Headers();
       myHeaders.append("Content-Type", "multipart/form-data;");
 
       var formdata = new FormData();
@@ -291,7 +267,7 @@ handleValidation=(obj, errorType)=>{
       fetch(callCentre2Api, requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error));*/
 
   }
   getConsultDropDownApi = ()=> {
