@@ -134,7 +134,7 @@ class productDefAttribute extends React.Component {
 									} else if (value.facetImage) {
 										circle = 'circleImg';
 										imgUrl = value.facetImage;
-										name = <img className="imgCircle" src={`${imagePrefix}${imgUrl}`} />;
+										name = <img className="imgCircle" alt={value.name} src={`${imagePrefix}${imgUrl}`} />;
 									} else {
 										name = value.name;
 										isRadio = true;

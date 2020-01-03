@@ -585,6 +585,7 @@ export class PlpContainer extends React.Component {
         <DescriptionBanner
           descriptionDataPro={this.state.plpDescriptionData}
           ref={divElement => (this.divElement = divElement)}
+          isPlp={true}
         />
       );
     }
