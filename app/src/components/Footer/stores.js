@@ -9,6 +9,8 @@ class StoreLinks extends React.Component {
         this.state = {
           defaultCount: 41
         };
+        this.onCityClick = this.onCityClick.bind(this)
+
     }
 
     componentDidMount() {      
@@ -96,6 +98,10 @@ class StoreLinks extends React.Component {
         })
     }
 
+    onCityClick() {
+        window.scrollTo(0,0);
+    }
+
     render() {
         return(
             <Col md={12} sm={12}>
@@ -109,7 +115,7 @@ class StoreLinks extends React.Component {
                                 if(i+1 <= this.state.defaultCount){
                                     return (                
                                         <li className='list' key={i}>
-                                            <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
+                                            <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }} onClick={this.onCityClick}>
                                                 {links.text}
                                             </Link>
                                            

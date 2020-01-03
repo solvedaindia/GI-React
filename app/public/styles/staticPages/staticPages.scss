@@ -272,7 +272,26 @@
 			}
 		}
 	}
+@media (max-width: 1023px) {
+	.ProcessNumber {
+		padding-right: 61px;
+		font-size: 19px;
+	}
+}
 
+@media (min-width: 1024px) {
+	.ProcessNumber {
+		padding-right: 35px;
+		font-size: 19px;
+	}
+}
+
+@media (min-width: 1366px) {
+	.ProcessNumber {
+		padding-right: 46px;
+		font-size: 19px;
+	}
+}
 @media (max-width: 1024px) 
 {	
 	.sliderHeading {
@@ -364,10 +383,10 @@
 		font-weight:600px;
 	}
 	
-	.ProcessNumber {
-		padding-right: 61px;
-		font-size: 19px;
-	}
+	// .ProcessNumber {
+	// 	padding-right: 61px;
+	// 	font-size: 19px;
+	// }
 	#careers{
 		padding-top: 30px;
 	}
@@ -553,6 +572,12 @@
 		}
 		.slick-slide {
 			margin-right: 10px;
+		}
+	}
+
+	.termsContainer {
+		.main-heading {
+			padding-top: 0px;
 		}
 	}
 	
