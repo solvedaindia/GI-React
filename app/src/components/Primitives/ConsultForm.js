@@ -40,6 +40,7 @@ class ConsultForm extends React.Component {
  
 
 handleChange  = e => {
+
   const {name, value} = e.target; //gets info from Form
   if(e.target.name =="name")
   {
@@ -106,14 +107,25 @@ successMassage = () => {
   }
   
 }
-
+onKeyPress=(event)=>
+{
+  if(event.key === 'Enter'){
+    const isValidate = this.handleValidation(this.state, true);
+    if (isValidate === false) {
+      return false;
+    }
+    this.callConsultApi();
+  }
+}
 submitForm = (e) => {
+
 
     e.preventDefault()
     const isValidate = this.handleValidation(this.state, true);
     if (isValidate === false) {
       return false;
     }
+  
     this.handleChange(e);
     this.callConsultApi();
 }
@@ -315,7 +327,8 @@ onDropdownSelected = (e) => {
 
     this.setState({
       dropDownValue : e.target.value,
-      index : e.target.selectedIndex
+      index : e.target.selectedIndex,
+      errorMessageDropOption: null,
      })
   }
 }
@@ -355,7 +368,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="name">{FULL_NAME}</label>
-                      <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required  />
+                      <input  onKeyPress={this.onKeyPress} onChange={this.handleChange} onClick={this.handleChange} className="form-control" value={name} id="name" name="name" type="text" required  />
                       {errorMessageName}
                     </div>
                   </div>
@@ -364,7 +377,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="email">{EMAIL}</label>
-                      <input  onChange={this.handleChange} onClick={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
+                      <input   onKeyPress={this.onKeyPress} onChange={this.handleChange} onClick={this.handleChange} className="form-control"  id="email" value={email} name="email" type="email" required/>
                       {errorMessageEmail}
                     </div>
                   </div>
@@ -388,7 +401,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="number">{MOBILE_NUMBER}</label>
-                      <input className="form-control"  onChange={this.handleChange}  pattern="[0-9]*" value={mobileNumber} id="mobileNumber" type="mobile" name="mobileNumber" maxLength="10" required/>
+                      <input  onKeyPress={this.onKeyPress} className="form-control"  onChange={this.handleChange}  pattern="[0-9]*" value={mobileNumber} id="mobileNumber" type="mobile" name="mobileNumber" maxLength="10" required/>
                       {errorMessageMobile}
                     </div>
                   </div>
@@ -399,7 +412,7 @@ onDropdownSelected = (e) => {
                   <div className="form-div clearfix div-error">
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="massage">{MESSEGE}</label>
-                      <input className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
+                      <input  onKeyPress={this.onKeyPress} className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                       {errorMessageDescription}
                     </div>
                   </div>
