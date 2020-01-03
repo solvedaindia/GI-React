@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import apiManager from '../../utils/apiManager';
+import { productTitleCharLimit, productBestSellerTitleCharLimit } from '../../../public/constants/constants';
+import { trimTheSentence } from '../../utils/utilityManager';
 import {
   bestSellerAPI,
   espotAPI,
@@ -107,7 +109,7 @@ class BestSeller extends React.Component {
                   </Link>
            
                   <figcaption className="bsDetails">
-                    <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName}</h2></Link>
+                    <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName && sellerItemData.productName.length>productBestSellerTitleCharLimit ? trimTheSentence(sellerItemData.productName, productBestSellerTitleCharLimit):sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
 						{sellerItemData.actualPrice <= sellerItemData.offerPrice ? 
 							<span className="discPrice">

@@ -56,7 +56,11 @@ class addToCartComponent extends React.Component {
       }
 	  return <div className="pincodeNotServiceable">{errorMsg}</div>;
     }
-
+    if(props.inventoryStatus=== 'unavailable')
+    {
+      this.deliveryTime = '';
+		  return <div className="soldbyDealers">{this.deliveryTime}</div>;
+    }
 	  if (props.deliveryDateAndTime) 
 	  {
 		this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
@@ -82,6 +86,14 @@ class addToCartComponent extends React.Component {
       })
     }
   };
+
+  onKeyPress=(event,props, isUpdate)=>
+  {
+    if(event.key === 'Enter'){
+     this.updatePincode(props, isUpdate);
+  
+    }
+  }
 
   updatePincode(props, isUpdate) {
     if (isUpdate === 'Edit') {
@@ -199,6 +211,7 @@ class addToCartComponent extends React.Component {
                   name="pincodeVal"
                   id="pincodeVal"
                   type="text"
+                  onKeyPress={(evt)=>this.onKeyPress(evt,this.props, btnName)}
                   onChange={this.handleChange}
                   value={this.state.pincodeVal}
                 />

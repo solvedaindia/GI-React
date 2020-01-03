@@ -40,10 +40,17 @@ class ManageAddress extends React.Component {
   }
 
   addNewAddressBtnClicked(editData) {
-    this.setState({
-      editAddressData: editData,
-      isAddAddress: !this.state.isAddAddress,
-    });
+    if(editData.addressID && this.state.isAddAddress && (this.state.editAddressData.addressID !== editData.addressID)){
+      this.setState({
+        isAddAddress: true,
+        editAddressData: editData,
+      });
+    } else {
+      this.setState({
+        editAddressData: editData,
+        isAddAddress: !this.state.isAddAddress,
+      });
+    }
   }
 
   addNewAddressBtnClicked1(editData) {

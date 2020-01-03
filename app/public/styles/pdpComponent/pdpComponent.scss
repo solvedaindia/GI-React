@@ -1255,6 +1255,7 @@
             width:100%;            
             border-radius: 100%;
             vertical-align: baseline;
+            font-size: 8px;
         }
         
         &:hover{
@@ -1611,6 +1612,7 @@
                      .materialType{
                         font-size:$base*2.25;
                         line-height: $base*2.25;
+                        margin-top: 0px;
                       }
                     }
                 .attr-details-box {
@@ -2106,6 +2108,7 @@
                  .materialType{
                     font-size:$base*1.5;
                     line-height: $base*2;
+                    margin-top: 0px;
                   }
                 }
             .attr-details-box {
