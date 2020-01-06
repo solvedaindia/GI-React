@@ -187,7 +187,8 @@ handleValidation=(obj, errorType)=>{
 
 
   // For mobile validation
-  if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
+ // if (!validateEmptyObject(obj.mobileNumber) && !isEmailEntered) {
+  if (!validateEmptyObject(obj.mobileNumber)) {
     this.setState({
       errorMessageMobile: MOBILE_MSG,
     });
