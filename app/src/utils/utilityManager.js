@@ -329,8 +329,8 @@ export function createSEOPdpURL(prodName, shortDesc, skuId){
 			shortDescURL =(shortDescURL.split('\\').join('-')).split('&').join('-');
 			shortDescURL = shortDescURL.toLowerCase();
             shortDescURL = '-' + shortDescURL;
-            shortDescURL = shortDescURL.replace('---', '-');
-            shortDescURL = shortDescURL.replace('--', '-');
+            shortDescURL = shortDescURL.replace(/---/g, '-');
+            shortDescURL = shortDescURL.replace(/--/g, '-');
 		}
 		var prodURL= prodName.split(' ').join('-');
 		prodURL= prodURL.replace(/---/g, '-');
@@ -360,7 +360,7 @@ export function createTopCategoryPlpURL(categoryIdentifier)
 	{
 		var catIdentifier = categoryIdentifier.replace(/\s+/g, "").toLowerCase();
 		catIdentifier = catIdentifier.replace(/ /g, "");
-        categoryRoutePath = `/rooms-${catIdentifier}`;
+        categoryRoutePath = `/online-furniture-${catIdentifier}`;
 
 	}
     return categoryRoutePath;

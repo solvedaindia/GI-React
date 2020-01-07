@@ -266,8 +266,8 @@ class RegisterWithEmailMobile extends React.Component {
                         onKeyPress={this.onKeyPress}
                         value={this.state.name}
                       />
-                      {errorMessageName}
                     </div>
+                    {errorMessageName}
                   </FormGroup>
                   <FormGroup>
                     {this.props.registrationType === registerWithEmail ? (
@@ -282,8 +282,8 @@ class RegisterWithEmailMobile extends React.Component {
                             onKeyPress={this.onKeyPress}
                             onChange={this.handleChange}
                           />
-                          {errorMessageUserId}
                         </div>
+                        {errorMessageUserId}
                       </div>
                     ) : (
                       <div>
@@ -299,8 +299,8 @@ class RegisterWithEmailMobile extends React.Component {
                             onKeyPress={this.onKeyPress}
                             maxlength="10"
                           />
-                          {errorMessageUserId}
                         </div>
+                        {errorMessageUserId}
                       </div>
                     )}
                   </FormGroup>
@@ -330,9 +330,9 @@ class RegisterWithEmailMobile extends React.Component {
                             />
                           }
                         </span>
-                        {errorMessagePassword}
                         <p />
                       </div>
+                      {errorMessagePassword}
                     </div>
                   </FormGroup>
                   <FormGroup>
@@ -370,7 +370,7 @@ class RegisterWithEmailMobile extends React.Component {
                     </p>
                     <p className="sign_text">
                     {YOU_AGREE + ' '}
-                      <a className="link" href="">
+                      <a className="link" href="termsconditions">
                        {T_C}
                       </a>{' '}
                     </p>

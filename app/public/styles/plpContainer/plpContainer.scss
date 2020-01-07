@@ -267,6 +267,10 @@ section.tablecarousel {
               padding: 5px;
               border-radius: 100%;
             }
+            .swatches-circle-img {
+              display: block;
+              border-radius: 100%;
+            }
           }
 
           .active {
@@ -284,6 +288,18 @@ section.tablecarousel {
           display: block;
           padding: 3px 0 0 0;
           font-size: $base*1.75;
+          &:focus{
+            outline: none;
+          }
+        }
+        .moreSwatchForMobile{
+          border: none;
+          background: transparent;
+          color:$battleshipGrey;         
+          float: right;
+          display: block;
+          padding: 3px 0 0 0;
+          font-size: $base*1.4;
           &:focus{
             outline: none;
           }
@@ -557,9 +573,11 @@ section.tablecarousel {
               position: relative;
               .circle {
                 border-radius: 50%;
-                height: 22px;
-                width: 22px;
+                height: 23px;
+                width: 23px;
                 padding: 2px;
+                cursor: pointer;  
+                min-width: 23px;            
               }
               .circlebox {
                 height: 28px;
@@ -572,6 +590,7 @@ section.tablecarousel {
                 border-radius: 100%;
                 padding: 2px;
                 margin-top:-5px;
+                cursor: pointer;
 
                 .circleRGB {
                   border-radius: 50%;
@@ -590,7 +609,7 @@ section.tablecarousel {
             }
             .inputCheck[type="checkbox"]:checked + .lblradio {
               .circle {
-                border: 2px solid $black;
+                // border: 2px solid $black;
                 padding: 2px;
               }
 
@@ -608,6 +627,7 @@ section.tablecarousel {
               min-height: 16px;
               padding-left: 16px;
               background-size: contain;
+              cursor: pointer;
             }
 
             .inputCheck[type="checkbox"]:checked + .lblCheck {
@@ -1032,6 +1052,7 @@ section.tablecarousel {
             font-size: $base * 1.5;
             .description{
               font-size: 11px;
+              line-height: 1.1;
             }
             &:after {
               height: 1px;
@@ -1083,6 +1104,16 @@ section.tablecarousel {
             .swatches-circle{
               width: 24px;
               height: 24px;
+            }
+            .swatches-circle-img {
+              width: 24px;
+              height: 24px;
+              .imgCircle{
+                display: block;
+                width:24px;
+                height: 24px;            
+                border-radius: 100%;
+              }
             }
           } 
         }
@@ -1234,15 +1265,28 @@ section.tablecarousel {
         }
       } 
       .hoverBox{
-        padding:5px 20px;
+        padding:5px 10px;
         .btn-compare{
           display:none;
         }
         ul.colortheme{
           .list{
+            
             .swatches-circle{
-              width: 13px;
-              height: 13px;
+              width: 12px;
+              height: 12px;
+              
+            }
+            .swatches-circle-img{
+              width: 12px;
+              height: 12px;
+              .imgCircle{
+                display: block;
+                width:12px;
+                height: 12px;            
+                border-radius: 100%;
+                //vertical-align: baseline;
+              }
             }
           } 
         } 

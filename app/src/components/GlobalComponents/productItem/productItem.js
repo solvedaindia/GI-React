@@ -13,6 +13,7 @@ import {
   addToCart,
   removeFromWishlist,
   wishlistIdCookie,
+  imagePrefix,
 } from '../../../../public/constants/constants';
 import apiManager from '../../../utils/apiManager';
 import {
@@ -167,17 +168,38 @@ class ProductItem extends React.Component {
             {this.props.isColorSwatchPro && this.props.swatchList.length > 1 ? <div className="inner-overlay">
               <ul className="colortheme clearfix">
 
-                {swatchFinalData.map(item => {
+                {swatchFinalData.map((item,index) => {
                   var colorStyle = { backgroundColor: `rgb${item.colorCode}` };
+                  var checkedType = false;
+									var radioButtonHtml;
+									var name = '';
+									var imgUrl = '';
+									colorStyle = {
+										display: "block",
+									}
+									var circle = 'display:block';
+									var isRadio = false;
+                  var boxClass = '';
+                  if (item.colorCode) {
+										circle = 'circle';
+										colorStyle = {
+											backgroundColor: `rgb${item.colorCode}`,
+                    };
+                  }
+                  else if (item.facetImage) {
+										circle = 'circleImg';
+										imgUrl = item.facetImage;
+										name = <img className="imgCircle" src={`${imagePrefix}${imgUrl}`} />;
+									}
                   return (
-                    <li onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
-                      <span className='swatches-circle' style={colorStyle}></span>
+                    <li key={index} onClick={(e) => this.onSwatchChange(e, item.name)} className={`list ${this.state.data.swatchColor === item.name ? 'active' : ''}`}>
+                <span className={name==''?'swatches-circle':'swatches-circle-img'} style={colorStyle}>{name}</span>
                     </li>
                   )
 
                 })}
 
-                {this.state.colorSwatchSplit.length !== 0 ? <button className='moreSwatch' onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
+                {this.state.colorSwatchSplit.length !== 0 ? <button className={isMobile() ?'moreSwatchForMobile':'moreSwatch'} onClick={this.showAllSwatchColors.bind(this)}>+ {this.state.colorSwatchFull.length - this.state.colorSwatchSplit.length} more</button> : null}
               </ul>
             </div> : null}
           </div>

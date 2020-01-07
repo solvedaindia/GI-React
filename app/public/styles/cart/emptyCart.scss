@@ -74,6 +74,12 @@
         }
     }
 }
+
+@include mix-md-ipad {
+    .emptyCartContainer .emptyCart .shopNow .shopHeadLine{
+        font-size: 24px;
+    }
+}
 /* 
     #Global Screen Chhange for Screen max 992
   */

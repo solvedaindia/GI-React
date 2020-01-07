@@ -26,17 +26,17 @@ class RWDSingleProduct extends React.Component {
 
   filterDeliveryInstallationTags() {
     const shipmentData = this.props.orderDataPro.shipmentData[0];
-    if (shipmentData.expectedDeliveryDate !== '') {
+    if (shipmentData && shipmentData.expectedDeliveryDate !== '') {
       this.setState({
         dsNameTag: 'Delivery on: ',
         dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0] + ', ' + shipmentData.expectedDeliveryDate.split(',')[1]
       })
     }
-    else if (shipmentData.expectedInstallationDate !== '') {
+    else if (shipmentData && shipmentData.expectedInstallationDate !== '') {
       if (shipmentData.installationDate === '') {
         this.setState({
           dsNameTag: 'Installation On: ',
-          dsDateTag: shipmentData.expectedDeliveryDate.split(',')[0] + ', ' + shipmentData.expectedDeliveryDate.split(',')[1]
+          dsDateTag: shipmentData.expectedInstallationDate.split(',')[0] + ', ' + shipmentData.expectedInstallationDate.split(',')[1]
         })
       }
     }

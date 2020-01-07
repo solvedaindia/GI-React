@@ -108,7 +108,7 @@ class Invoice extends React.Component {
                                     
 							</div>
 						</div>
-						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',height:'160px',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',height:'160px',float: 'left'}}>
+						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',float: 'left'}}>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Billing Name</div>
 								<div className="value">  
@@ -128,8 +128,18 @@ class Invoice extends React.Component {
 								<div className="value">  
 									{!!invoiceData.shipTo && invoiceData.shipTo.name}</div>
 								<div className="value heading">Delivery Address</div>
+								
 								<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.address}</div>
+									<div className="value heading">city</div>
+									<div className="value">
+									{!!invoiceData.shipTo && invoiceData.shipTo.city}</div>
+									<div className="value heading">state</div>
+									<div className="value">
+									{!!invoiceData.shipTo && invoiceData.shipTo.state}</div>
+									<div className="value heading">zipcode</div>
+									<div className="value">
+									{!!invoiceData.shipTo && invoiceData.shipTo.zipCode}</div>
 								<div className="value heading">Contact No</div>
 								<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.contactNo}</div>
@@ -199,7 +209,6 @@ class Invoice extends React.Component {
 				result.addImage(imgData, 'JPEG', 0, 0, width, height);
 				result.save("invoice.pdf");
 			}).catch(err=>{
-				console.log(":::",err);
 			})
           });
 	  }
@@ -230,8 +239,6 @@ class Invoice extends React.Component {
 		if(this.state.invoiceData != null)
 		{
 			var invoiceData = this.state.invoiceData;
-			console.log('invoiceData ', invoiceData);
-			console.log('this.state.orderListData ', this.state.orderListData);
 			var isMatchForUser = false;
 			(this.state.orderListData != null && this.state.orderListData.length !== 0)? 
 				this.state.orderListData.map((orderInfo, key) => 
@@ -246,12 +253,12 @@ class Invoice extends React.Component {
 		   return(
 				<div className="invoiceTicket">
 					<div className={isMobile() ? 'invoiceContent' : null} id="content">
-					{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ? this.invoiceDatailedData() : 
+					{UserLoggedIn == 'true'  ? this.invoiceDatailedData() : 
 						<div id='invoiceDiv' className="container invoiceContainer" style={{color:'red', margin:'60px', width:'90%'}}>
 							Selected invoice is not applicable for you, please login with linked user account</div>}
 						</div>
-						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser ?  <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.downloadDocument}>Download </button></div> : ''}
-						{UserLoggedIn == 'true' &&  invoiceData  && isMatchForUser  ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Print</button></div> : ''}
+						{UserLoggedIn == 'true'  ?  <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.downloadDocument}>Download </button></div> : ''}
+						{UserLoggedIn == 'true'   ? <div className='downloadBtn' style={{ margin: 'auto', float: 'left'}}>&#160;<button  onClick={this.printDocument}>Print</button></div> : ''}
 
 				</div>
 			);

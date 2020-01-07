@@ -21,13 +21,11 @@ class CookiePolicyWidget extends React.Component {
   render() {
     return (
       <>
-        {this.state.cookiePolicy === 'true' && (
+        {this.state.cookiePolicy === 'true' && window.location.pathname.length==1 && (
           <div className="cookiesPolicySticky">
             <div className="cookiesText">
-              We use our own third party cookies to improve your experience and
-              our services, and to analyse the use of our website. if you
-              continue browsing, we take that to mean that you accept their use.
-              <a href="/cookie-policy">Know More</a>
+            We use cookies to improve your experience. If you continue browsing, you agree to our use of cookies.
+              <a href="/privacy-policy">Read More</a>
             </div>
             <button className="accept_cookies" onClick={this.hideCookiePopup.bind(this)}>
               Accept

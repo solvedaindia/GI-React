@@ -14,6 +14,7 @@ import {HELLO_START,HELLO_GUEST, EXPLORE_ROOMS} from '../../constants/app/primit
 class EspotContent extends React.Component {
   constructor(props) {
     super(props);
+  
     this.state = {
       espotName: this.props.espotName,
       pageLayoutEspot: null,
@@ -30,11 +31,6 @@ class EspotContent extends React.Component {
     // if(e.target.nodeName=="IMG" || e.target.nodeName=="H2")
     if(e.target.parentElement.nodeName=="A" || e.target.parentElement.nodeName=="a" )
     {
-      //console.log("target",e.target.nodeName);
-      
-      //console.log("target P",e.target.parentElement.nodeName);
-     // alert(e.target.parentElement.attributes.getNamedItem('url').value)
-     //console.log("target l",this.props.history);
      const path = e.target.parentElement.attributes.getNamedItem('url').value;
      if(path)
      {
@@ -56,7 +52,6 @@ class EspotContent extends React.Component {
       .get(espotAPI + this.state.espotName)
       .then(response => {
         const {data} = response || {};
-        //console.log("Ali Ahmad,",data.data.content.split('<a').join('<a onClick="'+this.onItemClick.bind()+'"').split('href').join('url'));
         this.setState({
           pageLayoutEspot: data && data.data,
           isLoading: false,
@@ -76,16 +71,17 @@ class EspotContent extends React.Component {
 
   render() {
     const { pageLayoutEspot, index } = this.state;
+   
     if(!pageLayoutEspot) return null;
     return (
 		!!pageLayoutEspot && (
-
-			<div className="espotContent" id={index}>
+     
+			<div className={getCookie('isLoggedIn') !== 'true'?"espotContent":"espotContent loggedExplore"} id={index}>
 				{isMobile() && (this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') && <><h2 className='mwebGreeting'>
 					{HELLO_START}
 					</h2>
-          <h1 className="title">{pageLayoutEspot.title}</h1></>
+          <h2 className="title">{pageLayoutEspot.title}</h2></>
 				}
 				{(this.state.espotName === roomsEspotName) && 
 					(getCookie('isLoggedIn') !== 'true') ? 
@@ -94,15 +90,19 @@ class EspotContent extends React.Component {
 							<p className='greetingHead'>{HELLO_GUEST}</p>
 							<p  className='msg'>{EXPLORE_ROOMS}</p>
 						</div>}
-						<div  className='exploreSection' dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content.split('href').join('url') }} />
+						<div  className='exploreSection' dangerouslySetInnerHTML={{ __html:this.props.espotName === 'GI_Homepage_Godrej_Solution'? pageLayoutEspot.content  :pageLayoutEspot.content.split('href').join('url') }} />
 					</div>
 					:
 					<>
-					<h1 className="title">{pageLayoutEspot.title}</h1>
-					<div dangerouslySetInnerHTML={{ __html: pageLayoutEspot.content.split('href').join('url')}} />
+					<h2 className="title">{pageLayoutEspot.title}</h2>
+          <div onClick={(e)=>this.onItemClick(e)}>
+          <div dangerouslySetInnerHTML={{ __html: this.props.espotName === 'GI_Homepage_Godrej_Solution'? pageLayoutEspot.content  :pageLayoutEspot.content.split('href').join('url')}} />
+          </div>
+				
 					</>
         		}
 			</div>
+
 		)
     );
   }

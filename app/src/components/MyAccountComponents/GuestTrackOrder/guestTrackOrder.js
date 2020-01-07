@@ -27,7 +27,7 @@ class GuestTrackOrder extends React.Component {
   handleInputChange(text) {
     this.setState({
       error: false,
-      inputText: text.target.value,
+      inputText: text.target.value.replace(/[^0-9]/g, ''),
     });
   }
 
@@ -36,7 +36,7 @@ class GuestTrackOrder extends React.Component {
     if (!validateEmptyObject(this.state.inputText)) {
       this.setState({
         error: true,
-        errorMessage: 'Please enter OrderID',
+        errorMessage: 'Please enter valid Order Number',
       });
       return;
     }
@@ -61,8 +61,9 @@ class GuestTrackOrder extends React.Component {
   {
     if(event.key === 'Enter'){
       this.submitBtnClicked();
-    }
+    } 
   }
+
 
   render() {
     if (this.state.redirect) {

@@ -136,16 +136,21 @@ class WelcomeBack extends React.Component {
           appCookie.set('pincode', response.data.data.userDetails.pincode, 365 * 24 * 60 * 60 * 1000);
           appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
         }
-        appCookie.set(
-          `${accessTokenCookie}=${
-          response.data.data.access_token
-          };path=/;expires=''`,
-        );
-		 appCookie.set(
-          `userID=${
-          response.data.data.userID
-          };path=/;expires=''`,
-        );
+        // appCookie.set(
+        //   `${accessTokenCookie}=${
+        //   response.data.data.access_token
+        //   };path=/;expires=''`,
+        // );
+		    // appCookie.set(
+        //   `userID=${
+        //   response.data.data.userID
+        //   };path=/;expires=''`,
+        // );
+        
+        appCookie.set(accessTokenCookie,  response.data.data.access_token, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('userID', response.data.data.userID, 365 * 24 * 60 * 60 * 1000);
+
+
         this.setState({
           loginStatus: 'Logout',
           userType: 'Hello User!',
@@ -171,7 +176,6 @@ class WelcomeBack extends React.Component {
   }
   
   trackMouseMovement=(event)=>{
-    console.log(event);
   }
 
   trackMouseUp=(event)=>{
@@ -211,7 +215,6 @@ class WelcomeBack extends React.Component {
   }
 
   trackMouseDown=(event)=>{
-    console.log("down ",event.clientX +" "+event.clientY );
     this.isOutSide=false;
     let winWidth=window.innerWidth/2;
     let comWidth=this.modalRef.current.offsetWidth/2;
@@ -219,9 +222,6 @@ class WelcomeBack extends React.Component {
     let winHieght=window.innerHeight/2;
     let comHeight=this.modalRef.current.offsetHeight/2;
 
-    console.log("clickeArea p1",window.innerHeight/2);
-    console.log("clickeArea p2",this.modalRef.current.offsetHeight/2);
-    console.log("clickeArea p3",event.clientY );
     
     if((event.clientX<winWidth-comWidth) ||
         (event.clientX>winWidth+comWidth) ||
@@ -249,8 +249,6 @@ class WelcomeBack extends React.Component {
       this.isOutSide=false;
     }
 
-    console.log("clickeArea",this.isOutSide);
-
   }
 
 
@@ -261,9 +259,9 @@ class WelcomeBack extends React.Component {
     }
     //onMouseMove={this.trackMouseMovement}
     return (
-      <div id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
+      <div  id ='abc'  onMouseUp={this.trackMouseUp} onMouseDown={this.trackMouseDown} >
 
-        <Modal
+        <Modal style={{background:'rgba(0, 0, 0, 0.5)', zIndex:'2147483648'}}
           ref={this.windowModelRef}
           className="welcomeBack"
           size="lg"

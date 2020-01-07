@@ -121,9 +121,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React urban.ladder',
+      name: 'React godrej.interio',
       short_name: 'React BP',
-      description: 'My React urban.ladder-based project!',
+      description: 'My React godrej.interio-based project!',
       background_color: '#fafafa',
       theme_color: '#b1624d',
       inject: true,

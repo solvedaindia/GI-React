@@ -22,6 +22,12 @@
 			color: unset;
 		}
 	}
+	
+	.privacy-Policy {
+		.privacy-heading {
+			color: #222222
+		}
+	}
 	.staticpage h1
 	{
 		padding-top:20px;
@@ -141,9 +147,13 @@
     border: 0;
 	}
 	
-	.GI_CONTACT_US_CUSTOMER_CARE  img {
-		width:25px!important;
-		height:25px!important;
+	.GI_CONTACT_US_CUSTOMER_CARE{
+		border-top: 1px solid #979797;
+		margin-top: 20px;
+		 img {
+			width:25px!important;
+			height:25px!important;
+		}
 	}
 
 	.GI_KITCHEN_LAYOUTS {
@@ -179,6 +189,9 @@
 	.staticpage #v-pills-tabContent {
 		 float:left;
 		 width:78%;
+	}
+	.container .thumb-color-img{
+		min-height: 140px;
 	}
 	
 	.staticpage .sliderDesc{
@@ -228,6 +241,18 @@
 			margin-top: 30px;
 			margin-bottom: 5px;
 		}
+		.descriptionBanner {
+			padding: 56px 0;
+			margin: 80px 0 0 0;
+			.heading {
+				font-size: 34px;
+				line-height: 34px;
+				color: #000;
+				text-align: left;
+				margin: 0 0 23px 0;
+				font-family: CeraGIMedium, sans-serif;
+			}
+		}
 	}
 	.willowKitchen {
 		.shutterNavHeading {
@@ -238,8 +263,39 @@
 			margin-top: 30px;
 			margin-bottom: 5px;
 		}
+		.descriptionBanner {
+			padding: 56px 0;
+			margin: 80px 0 0 0;
+			.heading {
+				font-size: 34px;
+				line-height: 34px;
+				color: #000;
+				text-align: left;
+				margin: 0 0 23px 0;
+				font-family: CeraGIMedium, sans-serif;
+			}
+		}
 	}
+@media (max-width: 1023px) {
+	.ProcessNumber {
+		padding-right: 61px;
+		font-size: 19px;
+	}
+}
 
+@media (min-width: 1024px) {
+	.ProcessNumber {
+		padding-right: 35px;
+		font-size: 19px;
+	}
+}
+
+@media (min-width: 1366px) {
+	.ProcessNumber {
+		padding-right: 46px;
+		font-size: 19px;
+	}
+}
 @media (max-width: 1024px) 
 {	
 	.sliderHeading {
@@ -284,20 +340,17 @@
   .staticpage .support-faq-menu {
 	display:none;
   }
-  .staticpage .support-faq {
-	width:95% !important;
-  }
   .staticpage .nav {
 		padding-left: 0;
 		margin-bottom: 0;
 		list-style: none;
 		float: left;
-		width: 100%;
+		width: 20%;
 	}
 	
 	.staticpage #v-pills-tabContent {
 		 float:left;
-		 width:100%;
+		 width:80%;
 	}
 	
 	.staticpage .nav .col-sm-2{
@@ -318,7 +371,7 @@
 	
 	.easySteps .step-wizard-step {
 		position: relative;
-		height: 205px !important;
+		// height: 205px !important;
 	}
 
 	.goesOnKitchen .slick-prev {
@@ -334,10 +387,10 @@
 		font-weight:600px;
 	}
 	
-	.ProcessNumber {
-		padding-right: 61px;
-		font-size: 19px;
-	}
+	// .ProcessNumber {
+	// 	padding-right: 61px;
+	// 	font-size: 19px;
+	// }
 	#careers{
 		padding-top: 30px;
 	}
@@ -370,24 +423,24 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 220px !important;
+			// height: 220px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
 		}
 		.stepCircle {
-			top: -20px !important;
+			// top: -20px !important;
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 20px !important;
+			// min-height: 20px !important;
 		}
 	}
 }
 
 @media (max-width: 375px) {
 	.ProcessNumber {
-		padding-right: 20px;
+		padding-right: 18px;
 	}
 	.sliderHeading {
 		text-align: left;
@@ -406,17 +459,17 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 220px !important;
+			// height: 220px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
 		}
 		.stepCircle {
-			top: -20px !important;
+			// top: -20px !important;
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 20px !important;
+			// min-height: 20px !important;
 		}
 	}
 }
@@ -475,17 +528,17 @@
 	}
 	.easySteps {
 		.step-wizard-step {
-			height: 205px !important;
+			// height: 205px !important;
 		}
 		.steps-separator {
 			text-align: center !important;
 		}
 		.stepCircle {
-			top: -20px !important;
+			// top: -20px !important;
 			left: 0px !important;
 		}
 		.steps-separator {
-			min-height: 15px !important;
+			// min-height: 15px !important;
 		}
 	}
 }
@@ -507,7 +560,12 @@
 	}
 	.staticpage .nav {
 		width: 20%;
-	}	
+	}
+	#greenInitiatives{
+		.greenInitiativeImageDiv {
+			margin-top: 10px;
+		}
+	}		
 }
 
 @media (max-width: 769px)  {
@@ -516,11 +574,18 @@
 			font-size: 19px;
 			text-align: left;
 		}
+		.slick-slide {
+			margin-right: 10px;
+		}
+	}
+
+	.termsContainer {
+		.main-heading {
+			padding-top: 0px;
+		}
 	}
 	
-	.slick-slide {
-		margin-right: 10px;
-	}
+	
 
     .serviceSupport {
 		.faq-heading {
@@ -534,86 +599,4 @@
 		  font-weight: 600;
 		}
 	  }
-}
-
-@media screen and (min-width: 767px) and (min-width: 1024px) and (orientation: landscape) {
-	.easySteps {
-		.step-wizard-step {
-			position: relative !important;
-			height: 350px !important;
-		}
-		.steps-separator {
-			text-align: center !important;
-			width: 70% !important;
-    		clear: both !important;
-			position: relative !important;
-			margin-top: 20px !important;
-			margin-right: 30px !important;
-			text-align: center !important;
-			min-height: 39px !important;
-		}
-		.stepCircle {
-			top: -20px !important;
-			left: 0px !important;
-			width: 48px !important;
-			height: 48px !important;
-			position: absolute !important;
-			background: #036cc5 !important;
-			color: #fff !important;
-			text-align: center !important;
-			padding: 10px 0 !important;
-			font-size: 20px !important;
-			border-radius: 24px !important;
-			display: inline-block !important;
-			line-height: 25px !important;
-		}
-		
-		.imgBox {
-			text-align: center !important;
-			// width: 75% !important;
-			justify-content: center;
-			display: flex;
-		}
-	}
-}
-
-@media screen and (min-width: 767px) and (max-width: 1024px) and (orientation: portrait) {
-	.easySteps {
-		.step-wizard-step {
-			position: relative !important;
-			height: 350px !important;
-		}
-		.steps-separator {
-			text-align: center !important;
-			width: 70% !important;
-    		clear: both !important;
-			position: relative !important;
-			margin-top: 20px !important;
-			margin-right: 30px !important;
-			text-align: center !important;
-			min-height: 39px !important;
-		}
-		.stepCircle {
-			top: -20px !important;
-			left: 0px !important;
-			width: 48px !important;
-			height: 48px !important;
-			position: absolute !important;
-			background: #036cc5 !important;
-			color: #fff !important;
-			text-align: center !important;
-			padding: 10px 0 !important;
-			font-size: 20px !important;
-			border-radius: 24px !important;
-			display: inline-block !important;
-			line-height: 25px !important;
-		}
-		
-		.imgBox {
-			text-align: center !important;
-			width: 75% !important;
-			justify-content: center;
-			display: flex;
-		}
-	}
 }

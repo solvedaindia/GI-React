@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet'
 import Pixels from '../../components/Primitives/pixels';
 import ContentEspot from '../../components/Primitives/staticContent';
 import StoreInfoWindow from '../StoreLocator/StoreInfoWindow'
+import '../../../public/styles/plpContainer/plpContainer.scss';
 
 
 import { DIRECTIONS, STORELOCATOR_TITLE } from '../../constants/app/primitivesConstants';
@@ -89,6 +90,7 @@ class StoreLocator extends React.Component {
 
     componentDidMount() 
 	{
+       // alert(appCookie.get("storeName"))
         let pincodeVal =  appCookie.get('pincode');
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName) {
@@ -97,6 +99,24 @@ class StoreLocator extends React.Component {
             } else {
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
+            }
+        }
+        else{
+            pincodeVal =appCookie.get('storeName');
+            if(pincodeVal!==null && pincodeVal!=='')
+            {
+                //this.getLatAndLong(appCookie.get('pincode'));
+                appCookie.set('storeName', '', 365 * 24 * 60 * 60 * 1000)
+                //this.props.history.location.state=({storeName:pincodeVal})
+                this.props.history.replace({ pathname: '/storelocator', state: {storeName:pincodeVal}});
+                return
+            }
+            else{
+               // this.getLatAndLong(appCookie.get('pincode'));
+                //pincodeVal = appCookie.get('pincode');
+                //this.props.history.location.state=({pincode:pincodeVal})
+                this.props.history.replace({ pathname: '/storelocator', state: {pincode:pincodeVal}});
+                return
             }
         }
 
@@ -108,11 +128,13 @@ class StoreLocator extends React.Component {
         fetch(ipDataApi).then(res => {
             return res.json()
         }).then(res => {
+            console.log("pincode","data fetched")
             this.setState({
                 currentLat: res.latitude,
                 currentLong: res.longitude,
             })
         }).catch(error => {
+            console.log("pincode","data error")
             this.setState({
                 currentLat: this.state.defaultLat,
                 currentLong: this.state.defaultLng,
@@ -177,7 +199,6 @@ class StoreLocator extends React.Component {
     }
     onInfoWindowClose()
     {
-        //console.log("lasec",lastOpenWindow)
         this.lastOpenWindow=null;
     }
 
@@ -194,6 +215,10 @@ class StoreLocator extends React.Component {
         let obj;
         this.removeActiveClassFromFilter();
         document.getElementById(id).classList.add("active");
+
+        
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
 
         for (let i = 0; i < this.state.allstoreData.data.length; i++) {
             if (this.state.allstoreData.data[i].type.indexOf(storeType) !== -1) {
@@ -217,6 +242,12 @@ class StoreLocator extends React.Component {
     /* handle store search */
     handleStoreSearch() {
         this.removeActiveClassFromFilter();
+        this.setState({
+            storeData:null,
+            isLoading: true,
+            showFilter: false,
+            searchStoreType: null,
+        })
         if (this.inputRef) {
             const val = this.inputRef.value;
             if (!val) return;
@@ -350,6 +381,10 @@ class StoreLocator extends React.Component {
             } else {
                 this.getStoreDataFromPincode(lat, lng);
             }
+            
+            this.lastOpenWindow=null;
+            this.lastIndex=-1;
+
         }, error => {
             let getStringVal = '';
             if (this.props.history.location.state.storeName) {
@@ -437,6 +472,8 @@ class StoreLocator extends React.Component {
     }
 
     handleCliked(filterRecord) {
+        this.lastOpenWindow=null;
+        this.lastIndex=-1;
         this.setState({
             filteredSingleStore: filterRecord
         })
@@ -447,7 +484,12 @@ class StoreLocator extends React.Component {
         this.handleStoreSearch();
         }
     }
-
+    showLoader() {
+        const idid = <div className="lazyloading-Indicator">
+          <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
+        </div>
+        return idid;
+      }
     render() {
         const { storeData, searchStoreType, filteredSingleStore } = this.state;
         let WrappedMap;
@@ -474,12 +516,7 @@ class StoreLocator extends React.Component {
             <>
         <ContentEspot espotName = { 'GI_PIXEL_STORE_LOCATOR_BODY_START' } />
          <Fragment>
-         <Helmet>
-					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'}/>
-				</Helmet>
-                <Helmet>
-                    <title>{pageTitle}</title>
-                </Helmet>
+					<Pixels espotName= {'GI_PIXEL_STORE_LOCATOR_META'} title={pageTitle}/>
                 <div className='storeLocator'>
                     <h1 className='title'>Find your closest store</h1>
                     <div className='field'>
@@ -520,7 +557,8 @@ class StoreLocator extends React.Component {
                             </ul>
                         </div>
                     }
-                    {!storeData &&
+                    {!storeData && this.state.isLoading && this.showLoader()}
+                    {!storeData && !this.state.isLoading &&
                         <div className='storeTypes'>
                             <h2 className='headingtitle'>There are currently no stores in this area.</h2>
                             <>
@@ -535,9 +573,9 @@ class StoreLocator extends React.Component {
                 <div className="clearfix"></div>
                 {storeData &&
                     <div className="storeDetails clearfix">
-                        {!isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>) : ''}
+                        {!isMobile() ? (<h2 className='headingtitle'>One-stop destination for all your furniture needs</h2>) : ''}
                         <div className='storeList'>
-                            {isMobile() ? (<h1 className='headingtitle'>One-stop destination for all your furniture needs</h1>) : ''}
+                            {isMobile() ? (<h2 className='headingtitle'>One-stop destination for all your furniture needs</h2>) : ''}
                             {<div className='detailCard' id='detailCardSection'>
                                 {!isMobile() ? (
                                     !!storeData && storeData.data.map((physicalData, index) => {
@@ -551,7 +589,7 @@ class StoreLocator extends React.Component {
 												iconType = blueIcon;
 											}
                                         return (
-                                            <>
+                                           
                                                 <div key={index}>
                                                     <div className={`storeListItem ${ribbonClass}`}>
                                                         {physicalData.ribbonText &&
@@ -560,7 +598,7 @@ class StoreLocator extends React.Component {
                                                                 <div className='ribbonText'>{physicalData.ribbonText}</div>
                                                             </div>
                                                         }
-                                                        <div className="Storewrapper">
+                                                        <div className="Storewrapper clearfix">
                                                             <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                             {this.props.history.location.state.pincode &&
                                                                 <>
@@ -568,6 +606,7 @@ class StoreLocator extends React.Component {
                                                                 </>
                                                             }
                                                         </div>
+                                                        <div className='clearfix'></div>
                                                        <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                         <div className="phoneDetails">
                                                             <img className="phoneicon" src={phoneIcon} alt="phone" />
@@ -583,7 +622,7 @@ class StoreLocator extends React.Component {
                                                             </div>
                                                         </div>
                                                     </div></div>
-                                            </>
+                                          
                                         );
                                     }
                                     )
@@ -601,7 +640,7 @@ class StoreLocator extends React.Component {
 												iconType = blueIcon;
 											}
                                             return (
-                                                <>
+                                               
                                                     <div key={index} className='store-list-item-box'>
                                                         <div className={`storeListItem ${ribbonClass}`}>
                                                             {physicalData.ribbonText &&
@@ -610,7 +649,7 @@ class StoreLocator extends React.Component {
                                                                     <div className='ribbonText'>{physicalData.ribbonText}</div>
                                                                 </div>
                                                             }
-                                                            <div className="Storewrapper">
+                                                            <div className="Storewrapper clearfix">
                                                                 <h2 className="storeName"><a className="link" onClick={() => this.handleCliked(physicalData)}>{physicalData.storeName}</a></h2>
                                                                 {this.props.history.location.state.pincode &&
                                                                     <>
@@ -618,6 +657,7 @@ class StoreLocator extends React.Component {
                                                                     </>
                                                                 }
                                                             </div>
+                                                            <div className='clearfix'></div>
                                                             <p className='store-detal-desc'>{physicalData.address1+', '}{physicalData.address2!='undefined'?physicalData.address2+', ':''}{physicalData.address3!=undefined?physicalData.address3+', ':''} {physicalData.city} - {physicalData.pinCode}</p>
                                                             <div className="phoneDetails">
                                                                 <img className="phoneicon" src={phoneIcon} alt="phone" />
@@ -633,7 +673,7 @@ class StoreLocator extends React.Component {
                                                                 </div>
                                                             </div>
                                                         </div></div>
-                                                </>
+                                               
                                             );
                                         }
                                         )}

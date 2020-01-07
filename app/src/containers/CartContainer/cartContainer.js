@@ -15,6 +15,7 @@ import reducer from './reducer';
 import saga from './saga';
 import appCookie from '../../utils/cookie';
 import {getCookie} from '../../utils/utilityManager';
+import LoadingIndicator from '../../utils/loadingIndicator';
 import apiManager from '../../utils/apiManager';
 import { getCartDetails } from './action';
 import { imagePrefix } from '../../../public/constants/constants';
@@ -86,33 +87,34 @@ class CartDetail extends React.Component {
 		apiManager
 			.post(addToWishlist, data)
 			.then(response => {
-        appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-				appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+        this.handleDeleteItem();
+        // appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+				// appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
         }).catch(error => {
 				
 		});
   }
 
-  // handleDeleteItem() {
-  //     const orderId = appCookie.get('orderItemId');
-  //   	const data = {
-  //   	orderItemId: orderId,
-  //   	};
-  //   	apiManager
-  //   	.post(cartDeleteItemAPI, data)    	
-  //     .then(response => {
-  //       appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
-  //       appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
-  //       this.setState({abc: true});
-  //     })
-  //   	.catch(error => {
+  handleDeleteItem() {
+      const orderId = appCookie.get('orderItemId');
+    	const data = {
+    	orderItemId: orderId,
+    	};
+    	apiManager
+    	.post(cartDeleteItemAPI, data)    	
+      .then(response => {
+        appCookie.set('wishListUniqueId', '' , 365 * 24 * 60 * 60 * 1000);
+        appCookie.set('saveForLaterClicked', false , 365 * 24 * 60 * 60 * 1000);
+        this.setState({abc: true});
+      })
+    	.catch(error => {
     		
-  //   	});
-  //   }
+    	});
+    }
 
   render() {
     const { cartData } = this.props;
-    if (!cartData) return null;
+    if (!cartData) return <LoadingIndicator/>;
     let disableCheckout = false;
 
 
@@ -132,9 +134,7 @@ class CartDetail extends React.Component {
         <>
      <ContentEspot espotName = { 'GI_PIXEL_CART_BODY_START' } />
   <section className='cartDetails'>
-    <Helmet>
       <Pixels espotName= {'GI_PIXEL_CART_META'}/>
-    </Helmet>
     <div className='cartItem'>
       <div className='cartHeadDetails'>
         {!isMobile() ? <h2 className='title'>{YOUR_CART}<span className='cartCount'>{cartData.cartTotalItems} {ITEMS}</span>
@@ -167,13 +167,14 @@ class CartDetail extends React.Component {
                         orderItemId={itemData.orderItemId}
                         getCartDetails={this.props.getCartDetails}
                       />}
-                <MoveToWishList
+               {!itemData.freeGift && 
+               <MoveToWishList
                   uniqueID={itemData.uniqueID}
                   orderItemId={itemData.orderItemId}
                   getCartDetails={this.props.getCartDetails}
-                />
-                {!itemData.freeGift &&
-                      <DeleteCartItem
+                />}
+                {!itemData.freeGift && 
+                      <DeleteCartItem 
                         orderItemId={itemData.orderItemId}
                         uniqueID={itemData.uniqueID}
                         productName = {itemData.productName}
@@ -181,10 +182,12 @@ class CartDetail extends React.Component {
                       />}
                 <p className='delBy'>{DELIVERY_BY}</p>
                 <span className='date'>{itemData.deliveryDate}</span>
-                {!isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span>}
-                {!isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? `${FREE}` : itemData.shippingCharges}</span>}
+                { !itemData.freeGift ?
+                !isMobile() && <span className='price'>₹{formatPrice(itemData.offerPrice)}</span> : <span className='price'>{FREE}</span>}
+                {!itemData.freeGift ? 
+                !isMobile() && <span className='shipping'>{SHIPPING_CHARGES} {itemData.shippingCharges === 0 ? `${FREE}` : itemData.shippingCharges}</span> : ""}
               </div>
-              {!!isMobile() && <div className='quantityPrice'>
+              {!!isMobile() && !itemData.freeGift && <div className='quantityPrice'>
                 {!itemData.freeGift &&
 						<CartUpdate
 						  quantity={itemData.quantity}
@@ -265,10 +268,10 @@ class CartDetail extends React.Component {
             <span className='val'>-₹{formatPrice(cartData.orderSummary.shippingCharges)}</span>
           </p>
         }
-        <p className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
+        <div className={!isMobile() ? 'emiInfo' : 'emiInfo mob-emi-info'}>
           <EMIVal getCartDetails={this.props.getCartDetails} price={cartData.orderSummary.netAmount} />
           <EmiInfo price={cartData.orderSummary.netAmount}/>
-        </p>
+        </div>
         {!isMobile() ? <p className='totalAmt'>
           <span className='totalPrice'> {TOTAL}</span>
           <span className='val'>₹{formatPrice(cartData.orderSummary.netAmount)}</span>

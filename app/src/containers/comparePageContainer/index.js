@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import apiManger from '../../utils/apiManager';
 import { compareAPI, storeId } from '../../../public/constants/constants';
+import { COMPARE_SWATCH_SWITCH_ERROR_MSG } from '../../constants/app/primitivesConstants';
 import * as actionCreators from '../PlpContainer/actions';
 import {
   getReleventReduxState
@@ -46,6 +47,17 @@ export class ComparePageContainer extends React.Component {
     });
     
     this.callCompareApi();
+  }
+
+
+  componentWillUnmount() {
+    let updatedCompData = this.props.updatedCompData;
+    if (this.props.updatedCompData.length === 0 && appCookie.get('compareProductTemp') && JSON.parse(appCookie.get('compareProductTemp')).length > 0) {
+      updatedCompData = JSON.parse(appCookie.get('compareProductTemp'));
+      updatedCompData.map(data => {
+        this.props.addProduct(data);
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -127,6 +139,7 @@ export class ComparePageContainer extends React.Component {
         if (!skuIdsArr.includes(sku1.uniqueID)) {
           skuIdsArr.push(sku1.uniqueID);
           prds.push(sku1)
+          return;
         }
 
       }
@@ -142,6 +155,7 @@ export class ComparePageContainer extends React.Component {
           if (!skuIdsArr.includes(sku2.uniqueID)) {
             skuIdsArr.push(sku2.uniqueID);
             prds.push(sku2)
+            return;
           }
 
         }
@@ -158,6 +172,7 @@ export class ComparePageContainer extends React.Component {
           if (!skuIdsArr.includes(sku3.uniqueID)) {
             skuIdsArr.push(sku3.uniqueID);
             prds.push(sku3);
+            return;
           }
 
         }
@@ -174,13 +189,13 @@ export class ComparePageContainer extends React.Component {
   updateSingleCompProduct(index) {
 
     var prds = this.state.prds;
-
+    var cookieData = JSON.parse(appCookie.get('compareProductTemp'));
     var skuIdsArr = [];
     var reverse_data = this.state.data;
     if (!reverse_data) {
       return
     }
-    reverse_data.forEach(data => {
+    reverse_data.forEach( (data,index) => {
       var sku1 = data.sKUs.find(sKU => {
         return sKU.uniqueID == this.state.compWidgetData[index];
       });
@@ -192,10 +207,21 @@ export class ComparePageContainer extends React.Component {
         if (!skuIdsArr.includes(sku1.uniqueID)) {
           skuIdsArr.push(sku1.uniqueID);
           prds[index] = sku1;
+        
+          if(cookieData!=null && index<cookieData.length)
+          {
+            
+            cookieData[index].actualPrice=sku1.actualPrice;
+            cookieData[index].offerPrice=sku1.offerPrice;
+            cookieData[index].skuId=sku1.uniqueID;
+            cookieData[index].thumbnail=sku1.thumbnail;
+          }
+
         }
       }
     })
-
+    
+    appCookie.set('compareProductTemp', JSON.stringify(cookieData), 365 *24 *60 *60 *1000);
     this.setState({
       prds: prds,
       compCount: prds.length,
@@ -203,9 +229,20 @@ export class ComparePageContainer extends React.Component {
   }
 
   swatchHandle = (id, index, name) => {
-      this.state.compWidgetData[index] = id;
-      this.state.swatchIndex[index] = id;
-      this.updateSingleCompProduct(index);
+    const indexOf = this.state.compWidgetData.findIndex(value=>id===value);
+    if(indexOf==index)
+      return;
+    else if(indexOf>=0)
+    {
+      alert(COMPARE_SWATCH_SWITCH_ERROR_MSG);
+      return;
+    }
+    else{
+       this.state.compWidgetData[index] = id;
+       this.state.swatchIndex[index] = id;
+       this.updateSingleCompProduct(index);
+    }
+     
   }
 
   loadingbar() {
@@ -223,6 +260,8 @@ export class ComparePageContainer extends React.Component {
 
   removeCompareId(data) {
     this.state.compWidgetData = this.state.compWidgetData.filter(el => el !== data);   
+
+    this.state.data = this.state.data.filter(element=>element.uniqueId!==data)
     this.renderPrd();
     this.props.removeProduct(data);
   }
@@ -240,7 +279,14 @@ export class ComparePageContainer extends React.Component {
           </Col>
         </Row>
         {this.state.loading ? this.loadingbar() : <>{this.state.data ? <Row><h1 className="heading">Compare Products {this.state.compCount}/3</h1></Row> : null}
-          {this.state.prds ? <CompPrd data={this.state.prds} isRouteUpdated={this.state.isRouteUpdated} remove={this.removeCompareId.bind(this)} history={this.props.history}  removeSwatchIndex = {(id,index)=>this.removeSwatchIndex(id,index)} swatchHandle={this.swatchHandle} /> : ''}</>}
+          {this.state.prds ? <CompPrd 
+                              compWidgetData={this.state.compWidgetData}
+                              data={this.state.prds} 
+                              isRouteUpdated={this.state.isRouteUpdated} 
+                              remove={this.removeCompareId.bind(this)} 
+                              history={this.props.history}  
+                              removeSwatchIndex = {(id,index)=>this.removeSwatchIndex(id,index)} 
+                              swatchHandle={this.swatchHandle} /> : ''}</>}
 
       </div>
     )
@@ -256,7 +302,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   removeProduct: id => dispatch(actionCreators.RemoveProduct(id)),
-  updateSKU: obj => dispatch(actionCreators.updateSKU(obj))
+  updateSKU: obj => dispatch(actionCreators.updateSKU(obj)),
+  addProduct: product => dispatch(actionCreators.AddProduct(product))
 });
 
 const withConnect = connect(

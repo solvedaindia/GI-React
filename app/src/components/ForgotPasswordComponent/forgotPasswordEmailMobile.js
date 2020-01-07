@@ -184,7 +184,8 @@ class ForgotPasswordEmailMobile extends React.Component {
             </div>
           </FormGroup>
           <FormGroup>
-            <p className="text text-emailotp">{AN_OTP} </p>
+            {this.state.error ? null : <p className="text text-emailotp">{AN_OTP} </p>  }
+            
           </FormGroup>
         </Form>
           {/* <Button

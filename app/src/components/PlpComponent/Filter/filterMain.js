@@ -70,6 +70,7 @@ class FilterMain extends React.Component {
                   currentFacetPro={this.state.currentFacetSelection}
                   updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
                   onFacetChangePro={this.updateOnFacetChange.bind(this)}
+                  fetchCurrentFacetSelection={this.fetchCurrentFacetSelection.bind(this)}
                   rwdFilterCallbackPro={this.props.rwdFilterCallback}
                   isFromRWD={this.props.isFromRWD}
                   key={index}
@@ -99,6 +100,11 @@ class FilterMain extends React.Component {
 
     this.state.currentFacetSelection = currentFacet;
   }
+  fetchCurrentFacetSelection()
+  {
+      return this.state.currentFacetSelection;
+  }
+
 
   componentWillReceiveProps(nextProps) {
     this.state.nextProps = nextProps.rwdUpdatedFilter;
@@ -107,10 +113,13 @@ class FilterMain extends React.Component {
   componentDidMount() {
     if (this.state.filterData) {
       const allItems = this.state.filterData.map((item, index) => {
+        //if(index==0)
+          //this.state.currentFacetSelection = item.facetName;
         return (
           <Filter
             currentFacetPro={this.state.currentFacetSelection}
             updateCurrentFacetSelection={this.getCurrentFacetSelection.bind(this)}
+            fetchCurrentFacetSelection={this.fetchCurrentFacetSelection.bind(this)}
             onFacetChangePro={this.updateOnFacetChange.bind(this)}
             rwdFilterCallbackPro={this.props.rwdFilterCallback}
             isFromRWD={this.props.isFromRWD}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import appCookie from '../../utils/cookie';
 import { isMobile, getWindowWidth } from '../../utils/utilityManager';
 
 class StoreLinks extends React.Component {
@@ -9,6 +10,8 @@ class StoreLinks extends React.Component {
         this.state = {
           defaultCount: 41
         };
+        this.onCityClick = this.onCityClick.bind(this)
+
     }
 
     componentDidMount() {      
@@ -96,6 +99,10 @@ class StoreLinks extends React.Component {
         })
     }
 
+    onCityClick() {
+        window.scrollTo(0,0);
+    }
+
     render() {
         return(
             <Col md={12} sm={12}>
@@ -106,20 +113,20 @@ class StoreLinks extends React.Component {
                     <ul className={`store_area`}>
                         { this.props.name.children && this.props.name.children.length > 0 &&
                             this.props.name.children.map((links, i) => {
-                            return (
-                                <>
-                                { i+1 <= this.state.defaultCount && 
-                                <li className='list' key={i}>
-                                    <Link className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
-                                        {links.text}
-                                    </Link>
-                                   
-                                </li>
-                                }
-                                </>
-                            )})
-                        }
+                                if(i+1 <= this.state.defaultCount){
+                                    return (                
+                                        <li className='list' key={i}>
+                                            <Link onContextMenu= {()=>appCookie.set('storeName', links.text, 1 * 24 * 60 * 60 * 1000)} onClick={()=>appCookie.set('storeName', links.text, 1 * 24 * 60 * 60 * 1000)} className='link' to={{ pathname: '/storelocator', state: { storeName: links.text } }}>
+                                                {links.text}
+                                            </Link>
+                                           
+                                        </li>
+                                    )
 
+                                }
+                            })
+                        }
+                        { this.props.name.children && this.props.name.children.length > 0 &&
                          <li className='list moreButton'>
                             <a className='link'>
                                 { !isMobile() ? (
@@ -129,7 +136,7 @@ class StoreLinks extends React.Component {
                                 )}
                                 </a>
                         </li>
-                        
+                        }
                     </ul>
                 </div>
             </Col>

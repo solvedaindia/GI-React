@@ -50,6 +50,7 @@
     background-color: white;
     position: absolute;
     bottom: 0px;
+   // z-index: 10000;
 
     .sortTxt {
       color: #4a90e2;
@@ -92,8 +93,10 @@
   width: 100%;
   background-color: $colorwhite;
   position: fixed;
+  //overflow: scroll;
   bottom: 45px;
-  z-index: 100;
+ // z-index: 10000111;
+ z-index: 100;
 
 .filter-data{
   height: calc(100% - 103px);
@@ -239,7 +242,8 @@
           border-radius: 50%;
           height: 22px;
           width: 22px;
-          padding: 2px;
+          padding: 2px;    
+          opacity: 0;     
         }
         .circlebox {
           height: 28px;
@@ -386,13 +390,16 @@
   
               /* Input Checkbox Radio
               -----------------------------*/
-              .lblradio {
+              .lblradio {               
                 position: relative;
                 .circle {
                   border-radius: 50%;
                   height: 22px;
                   width: 22px;
                   padding: 2px;
+                  min-width: 22px;
+                  // border:1px solid red;
+                  
                 }
                 .circlebox {
                   height: 28px;
@@ -413,6 +420,10 @@
                     padding: 2px;
                     display: block;
                   }
+                  // .circle{                    
+                  //   width: 24px;
+                  //   height: 24px
+                  // }
                 }
               }
   
@@ -423,8 +434,8 @@
               }
               .inputCheck[type="checkbox"]:checked + .lblradio {
                 .circle {
-                  border: 2px solid $black;
-                  padding: 2px;
+                  // border: 2px solid $black;
+                  padding: 1px;
                 }
   
                 .circlebox {
@@ -462,7 +473,7 @@
               text-align: left;
             }
             .label_text_disable {
-              padding: 0 0px 15px 0;
+              padding: 0 0px 0px 0;
               color: #c9c9c9;
               font-size: $base * 1.5;
               text-align: left;
@@ -499,6 +510,18 @@
               display: flex;
               min-width: 160px;
             }
+          }
+          .emptylist
+          {
+            display: flex;
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid white;
+            padding: 9px 0px;
+            min-height: 54px;
+            align-items: center;
+            position: relative;
+            background: white;
           }
         }
   

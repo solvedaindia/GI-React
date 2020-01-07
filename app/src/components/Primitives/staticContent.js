@@ -25,9 +25,6 @@ class ContentEspot extends React.Component {
             isLoading: false,
         });
         this.props.handler()
-        
-        // alert( this.props.handler())
-       
       })
       .catch(error => {
         this.setState({
@@ -39,8 +36,17 @@ class ContentEspot extends React.Component {
 
   componentDidMount() {
     this.getEspotData();
-    // console.log('this.props.handler()',this.props.handler())
   }
+  componentDidUpdate(){
+    if(window.location.hash)
+    {
+     var element = document.getElementById(window.location.hash.substr(1));
+      if (element) 
+       {
+        element.scrollIntoView();
+       }
+     }
+    }
 
   render() {
     const { staticContent } = this.state;

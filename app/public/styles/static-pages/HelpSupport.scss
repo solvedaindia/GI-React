@@ -218,8 +218,6 @@
       
       }
   }
-
-  
 }
 
 .static-contact-us{
@@ -228,6 +226,82 @@
     border-right:1px solid #dadada;
   }
 }
+
+.staticpage{
+  &.serviceSupport{
+    .support-faq{
+      .panel-group{
+        margin-bottom: 40px;
+        .panel{
+          .panel-heading{
+            padding-left: 0px;
+            padding-top:0px;
+            h5{display: none}
+            .faq-h4{
+              float:none;
+              width: 100%;
+              position: relative;
+              font-size: 16px;
+              .accordion-toggle{
+                text-decoration: none;
+                color: #000000;
+                &::after{
+                  content: '+';
+                  right: -11px;
+                  font-size: 25px;
+                  margin-top: -8px;
+                  position:absolute;
+                } 
+              }
+    
+              .accordion-toggle[aria-expanded="false"]::after{
+                content: '+';
+                right: -11px;
+                font-size: 25px;
+                margin-top: -8px;
+                position:absolute;
+              }
+              
+              .accordion-toggle[aria-expanded="true"]::after{
+                content: '–';
+                right: -11px;
+                font-size: 25px;
+                margin-top: -8px;
+                position:absolute;
+              }
+            }
+          }
+          .panel-body{
+            padding-left:0px;
+            padding-top: 0px;
+            color:#888a8d;
+          }
+        }
+      }
+    }
+
+    .support-faq-menu{
+      .faq-heading{
+        font-size:14px;
+        font-family:$font-bold ;
+        text-align: left;
+      }
+      li{
+       
+        a{
+          font-size: 14px;
+          color:$black ;
+          display: block;
+          padding: 10px 12px;
+          &:hover{
+            background: $paleGrey;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+} 
 
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
@@ -253,7 +327,7 @@
   */
   @media screen and (min-width: 768px){
     .service-support{
-      padding:64px 0 144px 0;
+      padding:64px 0 80px 0;
       .innerContent{
         padding:63px 0 0 0;
       }
@@ -542,21 +616,10 @@
         padding-top: 0px;
         padding-bottom: 0px;
       }
-      .img-icon-div {
-        width: 20%;
-        margin-right: 20px;
-      }
       .email-box-desc {
         width: 80%;
       }
-      .separator {
-        border-right: 0px;
-        border-bottom: 1px solid #dadada;
-        padding-bottom: 20px;
-      }
-      .separator-right{
-        padding-top: 20px;
-      }
+
     }
   }
 }
@@ -696,7 +759,7 @@
   }
 
   .support-faq {
-    margin-left: 0px !important;
+    padding: 0px !important;
     h2 {
       padding-top: 20px;
       font-size: 15px;
@@ -736,26 +799,28 @@
     .static-contact-us {
       h1 {
         text-align: left;
-        font-size: 16.9px !important;
+        font-size: 12px;
         padding-bottom: 0px;
         font-weight: 600;
       }
       .title-text {
-        font-size: 16.9px !important;
+        font-size: 12px;
+        font-family: $font-bold;
       }
 
       .sub-heading {
-        font-size: 16.9px !important;
-        color: #77787a !important;
+        font-size: 12px;
+        color: #77787a ;
         padding-top: 0px;
         padding-bottom: 0px;
       }
       .img-icon-div {
-        width: 30%;
         margin-right: 20px;
+        float: left;
       }
       .email-box-desc {
         width: 70%;
+        float: left;
       }
       .separator {
         border-right: 0px;
@@ -764,6 +829,20 @@
       }
       .separator-right{
         padding-top: 20px;
+      }
+    }
+  }
+
+  .staticpage{
+    &.serviceSupport{
+      .support-faq{
+        .panel-group{
+          .panel{
+            .panel-heading{
+              padding-right: 20px;
+            }
+          }
+        }
       }
     }
   }

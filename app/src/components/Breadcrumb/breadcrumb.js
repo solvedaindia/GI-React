@@ -60,7 +60,7 @@ class Breadcrumb extends React.Component {
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
               if(data.categoryIdentifier) {
-                breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
+                breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
               }
             }
             else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
@@ -71,7 +71,7 @@ class Breadcrumb extends React.Component {
             }
 
             return (
-              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute}>{`${breadLabel} >`}</Link>}</span>
+              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute} onClick={this.onLinkNavigation}>{`${breadLabel} >`}</Link>}</span>
             )
 
           })}
@@ -101,7 +101,7 @@ class Breadcrumb extends React.Component {
               breadRoute = '/';
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1 && data.categoryIdentifier) {
-              breadRoute = `/rooms-${data.categoryIdentifier.toLowerCase()}`;
+              breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
             }
             else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {
               breadRoute = createCategoryPlpURL(data.categoryIdentifier);
@@ -123,7 +123,7 @@ class Breadcrumb extends React.Component {
     }
 
     return (
-      this.props.match.path === '/rooms-:id' ?
+      this.props.match.path === '/online-furniture-:id' ?
         (<div className='breadCrumb'>
           <span className='links'> <Link to='/'>Home ></Link></span>
           <span className='links'> {this.props.match.params.id.replace(/-/g, " ")}</span>

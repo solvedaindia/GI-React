@@ -105,7 +105,7 @@ class WelcomeForm extends Component {
       errorMessagePassword: res,
       isProcessing:false
     });
-    isValidate = false;
+    const isValidate = false;
   }
 
   /* Show Hide Password */

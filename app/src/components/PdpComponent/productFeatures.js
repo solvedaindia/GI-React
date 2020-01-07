@@ -36,7 +36,7 @@ class productFeatures extends React.Component {
     if (this.props.productFeatureData.productFeatures.length > 0) {
       defaultImgPath = imagePrefix+this.props.productFeatureData.productFeatures[0].imagePath;
     }
-        
+    
     return (
       <>
         {this.props.productFeatureData.productFeatures && this.props.productFeatureData.productFeatures.length > 0 && (
@@ -75,6 +75,7 @@ class productFeatures extends React.Component {
                               <img
                                 src={fullImagePath}
                                 className="imgfullwidth"
+                                alt={featureImagePath.title ? featureImagePath.title : ''}
                               />
                             </div>
                           );

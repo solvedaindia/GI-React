@@ -41,7 +41,7 @@ import RWDSort from '../../components/PlpComponent/RWD PLP Components/RWDSort';
 import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDFilter/RWDFilterMain';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
-import { createPlpItemData } from '../../utils/utilityManager';
+import { createPlpItemData,isMobile } from '../../utils/utilityManager';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -388,7 +388,7 @@ export class PlpContainer extends React.Component {
             });
           } else {
             this.setState({
-              error: error.response.data.error.error_message,
+              error: error.response ? error.response.data.error.error_message : '',
               isLoading: false,
             });
 
@@ -497,20 +497,26 @@ export class PlpContainer extends React.Component {
     } = this;
 
     var scrollYindex;
-    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
-      scrollYindex = window.innerHeight + document.body.scrollTop;
-    } else if (window.navigator.userAgent.indexOf("Edge") > -1) {
+    var ua = navigator.userAgent.toLowerCase();
+    if(window.navigator.userAgent.indexOf("Edge") > -1){
       scrollYindex = window.innerHeight + window.pageYOffset;
-    } else { //All other browsers
+    }
+     else if (ua.indexOf('safari') != -1) { 
+      if (ua.indexOf('chrome') > -1) {
+        scrollYindex = window.innerHeight + document.documentElement.scrollTop;
+      } else {
+        scrollYindex = window.innerHeight + document.body.scrollTop + document.documentElement.scrollTop; 
+      }
+    }  else { //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
 
     if (error || isLoading || !hasMore) return;
-    const adjustedHeight = 1000;
+    const adjustedHeight = 800;
     const windowHeight = scrollYindex;
+   
     const windowOffsetHeight = document.documentElement.offsetHeight - adjustedHeight;
-
-    if (windowHeight >= windowOffsetHeight && windowHeight - 300 <= windowOffsetHeight) {
+    if (windowHeight >= windowOffsetHeight && windowHeight - 400 <= windowOffsetHeight) {
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       this.fetchPLPProductsData(true);
     }
@@ -579,6 +585,7 @@ export class PlpContainer extends React.Component {
         <DescriptionBanner
           descriptionDataPro={this.state.plpDescriptionData}
           ref={divElement => (this.divElement = divElement)}
+          isPlp={true}
         />
       );
     }
@@ -630,16 +637,15 @@ export class PlpContainer extends React.Component {
     return (
       <>
         <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
-        <Helmet>
-          <Pixels espotName={'GI_PIXEL_PLP_META' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
+          <Pixels
+          description={this.state.categoryDetail.metaDescription}
+          title={this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle} 
+          alt={this.state.categoryDetail.imageAltText}
+          image={this.state.categoryDetail.fullImage}
+          />
           <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
             {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
           </script>
-
-          <title>{this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle}</title>
-          <meta name="description" content={this.state.categoryDetail.metaDescription} />
-          <meta name="keywords" content={this.state.categoryDetail.categoryName + ' ' + this.state.categoryDetail.shortDescription} />
-        </Helmet>
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}

@@ -32,7 +32,6 @@ class SearchContainer extends React.Component {
       .then(response => {
       })
       .catch(error => {
-        console.log('Error: ' + error.message);
       });
   }
 

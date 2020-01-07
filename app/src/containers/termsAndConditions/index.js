@@ -4,6 +4,7 @@ import  '../../../public/styles/static-pages/termsconditions.scss';
 import  '../../../public/styles/staticPages/staticPages.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import Pixels from '../../components/Primitives/pixels';
 
 export class TermsConditions extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export class TermsConditions extends React.Component {
   render() {
     return (    
       <div className='staticpage termsContainer'>
+        <Pixels espotName={'GI_PIXEL_POLICY_META'} />
 		  <Breadcrumb {...this.props.match.params} staticName = {'Terms & Conditions'}/>
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_DISCLAIMER' } />
           <ContentEspot espotName={ 'GI_TERMS_AND_CONDITIONS_WARRANTIESANDLILIABILITES' } />

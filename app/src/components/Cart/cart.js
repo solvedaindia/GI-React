@@ -36,10 +36,12 @@ class CartCount extends React.Component {
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    document.addEventListener('touchstart', this.handleClickOutside);
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
+    document.addEventListener('touchstart', this.handleClickOutside);
   }
 
    /**
@@ -54,7 +56,6 @@ class CartCount extends React.Component {
    */
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.state.active) {
-      //alert('You clicked outside of me!');
       this.toggleDropdown();
     }
   }
@@ -129,17 +130,15 @@ class CartCount extends React.Component {
   renderOptions() {
     if (this.state.minicartData) {
       return this.state.minicartData.map((option, i) => (
-        <>
-          <div
-            onClick={evt => this.handleClick(i)}
-            key={i}
-            className={`dropdown__list-item${
-              i === this.state.selected ? '' : ''
-              }`}
-          >
-            <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
-          </div>
-        </>
+        <div
+        onClick={evt => this.handleClick(i)}
+        key={i}
+        className={`dropdown__list-item${
+          i === this.state.selected ? '' : ''
+          }`}
+      >
+        <MinicartItem dataPro={option} closeDropdownPro={this.toggleDropdown} />
+      </div>
       ));
     }
   }

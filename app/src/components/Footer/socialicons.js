@@ -8,7 +8,7 @@ const socialIcon = (props) => {
     if (props.name && props.name.length > 0) {
     socialHtml = props.name.map((item, index) => {
     return (
-        <li className='list' key={index}><a className='link' href={item.action} ><img src={imagePrefix+item.src} alt={item.alt}/></a></li>
+        <li className='list' key={index}><a className='link' href={item.action} target="_blank"><img src={imagePrefix+item.src} alt={item.alt}/></a></li>
     );
     })
     }

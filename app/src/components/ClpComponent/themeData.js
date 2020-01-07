@@ -21,7 +21,7 @@ class ThemeData extends React.Component {
             >
                 <img
                     src={`${imagePrefix}${!selectedIndex ? itemDetail.iconOpen : '/images/godrejInterio/close.png'}`}
-                    alt= 'open-icon'
+                    alt= {itemDetail.alt}
                     onClick={!selectedIndex ? this.props.handlePopUp : this.props.closePopUp}
                 />
             </span>

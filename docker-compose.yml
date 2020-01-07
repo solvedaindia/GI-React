@@ -1,0 +1,14 @@
+version: '3'
+services:
+  server:
+    image: react-nodejs:build23072019
+    environment:
+      HOST_IP: ${HOST_IP}
+      WEBSERVER_IP: ${WEBSERVER_IP}
+      SERVER_PORT: ${SERVER_PORT}
+      IMAGE_ENDPOINT: ${IMAGE_ENDPOINT}
+      WCSENDPOINT: ${WCSENDPOINT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    command: npm start

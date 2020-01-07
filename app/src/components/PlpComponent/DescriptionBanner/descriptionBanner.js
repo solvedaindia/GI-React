@@ -55,6 +55,14 @@ class DescriptionBanner extends React.Component {
     if (nextProps.descriptionDataPro !== this.props.descriptionDataPro) {
       this.initBanner(nextProps);
     }
+    if (this.state.isReadMore) {
+      this.setState({
+        isReadMore: false,
+        finalData: this.state.splitData,
+        readMoreTitle: 'Read More',
+      });
+      this.scrollToRef(this.refs.description)
+    } 
   }
 
   
@@ -86,7 +94,8 @@ class DescriptionBanner extends React.Component {
           <Grid>
             <Row>
               <Col md={12}>
-                <h1 className="heading">{this.state.title}</h1>
+                {this.props.isH1Tag ? <h1 className="heading">{this.state.title}</h1> : this.props.isPlp ?  <div className="heading">{this.state.title}</div>  : <h3 className="heading">{this.state.title}</h3>}
+                
                 <ul className="description_area">
                   <div
                     dangerouslySetInnerHTML={{ __html: this.state.finalData }}

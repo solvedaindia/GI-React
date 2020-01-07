@@ -46,7 +46,6 @@ class EmiInfo extends React.Component {
 			  	loading: false,
 			});
 		}).catch(error => {
-			console.log('Error: ', error);
 		});
 	}
 	
@@ -143,13 +142,14 @@ class EmiInfo extends React.Component {
 								{!this.state.loading && (
 										<table width="100%" className="emiPlans table table-striped">
 											<tr className="tabHeading">
-												<td colSpan="4">
+												<td colSpan="4" className='bankNameList'>
+													<div class="theadscroll">
 													<table className="tableHeading table" width="100%">
 														<tr>
-														{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}										
-														
+														{this.renderTabData(this.state.bankDetails.data.bankEMIDetails)}		
 														</tr>
 													</table>
+													</div>
 												</td>
 											   
 											</tr>

@@ -5,6 +5,8 @@ import '../../../public/styles/slider.scss';
 import  '../../../public/styles/static-pages/kitchen.scss'
 import '../../../public/styles/static-pages/chefkitchen.scss';
 import {espotAPI,imagePrefix} from '../../../public/constants/constants';
+import {isMobile} from '../../utils/utilityManager';
+
 
 
 class WillowKitchenConfiguration extends React.Component {
@@ -51,10 +53,8 @@ class WillowKitchenConfiguration extends React.Component {
 
 
   onHandleClick = (index) =>{
-      // alert(index)
     
      this.setState({currentIndex: index})
-    console.log('hja',this.state.currentIndex);
   }
 
   render() {
@@ -63,32 +63,122 @@ class WillowKitchenConfiguration extends React.Component {
       dots: false,
       infinite: true,
       speed: 500,
-	  autoplay: true,
+      autoplay: true,
       autoplaySpeed: 2000,
       slidesToShow: 1,
-      slidesToScroll:2,
+      slidesToScroll:1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: false,
+            centerMode: false,
+            infinite: true,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow:1,
+            slidesToScroll: 1,
+            dots: false,
+            centerMode: false,
+            infinite: true,
+            arrows: false
+          }
+        }
+      ]
     };
+
+    const kitchenTabSlide = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      centerMode: false,
+      centerPadding: '30px',
+      variableWidth: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: false,
+            dots: true,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: false,
+            centerMode: false,
+            infinite: false,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow:1,
+            slidesToScroll: 1,
+            dots: false,
+            centerMode: false,
+            infinite: false,
+            //variableWidth: true,
+            arrows: false
+          }
+        }
+      ]
+    };
+
    const{ configurationTabing, currentIndex } =this.state;
   //  if (currentIndex != -1)
-  //  console.log('sahir', configurationTabing[currentIndex].bannerList)
-  const tabs =configurationTabing.map((tabData, index) =>{
+  const tabs = !!configurationTabing && configurationTabing.map((tabData, index) =>{
     return(
+      <>
+        {!isMobile() ? 
+          <li >
+            <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+            {tabData.title}
+              
+              </a>
+          </li>
 
-      <li >
-        <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
+       : <a style ={index==this.state.currentIndex? {color:'#000000'} :{} } onClick={this.onHandleClick.bind(this, index)}   key={index} className={index==this.state.currentIndex?'active':''} >
         {tabData.title}
-          
-          </a>
-      </li>
+        </a>}
+         </>
     )
   })
   return (
     <div className='container'>
-        <h1>{this.state.title}</h1>
+        <h2 className='heading-text text-center'>{this.state.title}</h2>
          <div className='configurationTab'>
-           <ul className='configuration-tab'>
-           {tabs}
-           </ul>
+         {!isMobile() ? 
+            <ul className='configuration-tab'>
+                {tabs}
+            </ul>
+            :
+            <div className='configureTabs'><Slider {...kitchenTabSlide}>{tabs}</Slider></div>
+          }
            
      </div>
 <div className='clearfix'></div>

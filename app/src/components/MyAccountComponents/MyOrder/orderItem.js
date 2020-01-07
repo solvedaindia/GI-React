@@ -74,6 +74,8 @@ class OrderItem extends React.Component {
           {orderData.orderItems.map((data, key) => {
             return (
               <OrderProduct
+                totalItems={orderData.orderItems.length}
+                itemIndex={key}
                 proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
                 prodctDataPro={data}
                 allDataPro={this.props.orderItemData}

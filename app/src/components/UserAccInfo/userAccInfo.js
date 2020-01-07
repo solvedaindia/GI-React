@@ -12,7 +12,7 @@ import { getCookie, getReleventReduxState, isMobile } from '../../utils/utilityM
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
-import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER } from '../../constants/app/primitivesConstants';
+import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER, HELLO_GUEST } from '../../constants/app/primitivesConstants';
 
 class UserAccInfo extends React.Component {
   constructor(props) {
@@ -99,12 +99,15 @@ class UserAccInfo extends React.Component {
           }
 
           this.setState({
-            userName: `Welcome ${username.split(' ')[0]}`,
+            userName: `Hello ${username.split(' ')[0]}`,
             logonId: response.data.data.logonID,
           });
 
-          document.cookie = `name=${response.data.data.name};path=/;expires=''`;
-          document.cookie = `loginID=${response.data.data.logonID};path=/;expires=''`;
+         // document.cookie = `name=${response.data.data.name};path=/;expires=''`;
+          //document.cookie = `loginID=${response.data.data.logonID};path=/;expires=''`;
+
+          appCookie.set('name', response.data.data.name, 365 * 24 * 60 * 60 * 1000);
+          appCookie.set('loginID', response.data.data.logonID, 365 * 24 * 60 * 60 * 1000);
           
           this.showLoginStatus();
           this.props.updateUserProfile(response.data.data.name);
@@ -150,7 +153,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">{WELCOME_INTERIO}</a>
+            <a className="dropDown">{HELLO_GUEST}</a>
           </li>
         ,
         loginStatus:
@@ -168,7 +171,7 @@ class UserAccInfo extends React.Component {
   }
 
   onLogoutClick() {
-    appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
+    //appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
     logoutTheUser();
   }
 

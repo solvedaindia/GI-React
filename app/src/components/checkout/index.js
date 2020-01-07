@@ -12,9 +12,6 @@ import { isMobile } from '../../utils/utilityManager';
 import MWebLogo from '../../components/SVGs/mWebLogo';
 import {CHECKOUT } from '../../constants/app/checkoutConstants';
 
-CHECKOUT
-
-
 import {
   storeId,
   accessToken,
@@ -360,6 +357,11 @@ export class CheckoutComponent extends React.Component {
   }
 
   handleBack = () => {
+    if(this.state.step == 1){
+      this.setState({
+        redirect: true
+      })
+    }
     if (this.state.loggedIn && this.state.step == 2) {
       this.setState({
         redirect: true

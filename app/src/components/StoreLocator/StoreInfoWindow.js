@@ -21,12 +21,21 @@ class StoreInfoWindow extends React.Component {
         this.props.onWindowClose()
     }
 
+    get_tex_size(txt, font) {
+        this.element = document.createElement('canvas');
+        this.context = this.element.getContext("2d");
+        this.context.font = font;
+        var tsize = {'width':this.context.measureText(txt).width, 'height':parseInt(this.context.font)};
+        return tsize;
+    }
+
 
     render() {
+        const markerWindowWidth = this.get_tex_size(this.props.storeHours.split('|')[0], "13px CeraGIRegular");
         if (this.state.isOpen) {
             return (
                 <InfoWindow onCloseClick={() => this.onCloseWindow()}>
-                    <div style={{ margin: "10px", width: "260px" }}>
+                    <div style={{ margin: "10px", width: markerWindowWidth }}>
                         <h4>{this.props.storeName}</h4>
                         {this.props.pincode &&
                             <p>{this.props.data} Km</p>

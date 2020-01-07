@@ -65,7 +65,7 @@ exports.getEndPoint = function getEndPoint() {
       break;
     case 'PPLV':
       endpointConfigURL.hostname = 'tsapp.godrejpreprodlive.godrej.com';
-      endpointConfigURL.searchHostname = 'searchrepeater.godrejpreprodlive.godrej.com';
+      endpointConfigURL.searchHostname = 'search.godrejpreprodlive.godrej.com';
       break;
     case 'PRDSTG':
       endpointConfigURL.hostname = 'tsapp.godrejprodauth.godrej.com';
@@ -73,7 +73,7 @@ exports.getEndPoint = function getEndPoint() {
       break;
     case 'PRDLV':
       endpointConfigURL.hostname = 'tsapp.godrejprodlive.godrej.com';
-      endpointConfigURL.searchHostname = 'searchrepeater.godrejprodlive.godrej.com';
+      endpointConfigURL.searchHostname = 'search.godrejprodlive.godrej.com';
       break;
 
   }

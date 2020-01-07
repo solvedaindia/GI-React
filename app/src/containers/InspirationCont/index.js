@@ -27,9 +27,7 @@ export class Inspiration extends React.Component {
       <>
        <ContentEspot espotName={ 'GI_PIXEL_INSPIRATION_BODY_START' } />
       <div className="staticpage inspiration">
-      <Helmet>
 					<Pixels espotName= {'GI_PIXEL_INSPIRATION_META'}/>
-				</Helmet>
 	    <InspirationBanner />
 		<Breadcrumb {...this.props.match.params} staticName = {'Inspiration'}/>
         <LookbookThemeCarousel />

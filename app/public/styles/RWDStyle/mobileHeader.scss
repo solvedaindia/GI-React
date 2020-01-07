@@ -86,7 +86,7 @@
     z-index: 1;
     .searchBackBtn {
       border-top: 1px solid $lightblueGrey;
-      padding: 7px 15px 0px 15px;
+      padding: 7px 15px 8px 15px;
       .menuBtn {
         display: none;
       }
@@ -115,7 +115,8 @@
       border: 0px;
     }
     .searchIcon {
-      display: inline;
+      display: inline-block;
+      float:left;
     }
     .icons {
       float: left;
@@ -259,7 +260,7 @@
             padding: 7px 20px;
             text-decoration: none;
             color: $black;
-            font-family: $font-bold;
+            font-family: $font-regular;
             font-size: 12px;
 
             &:hover {
@@ -272,7 +273,7 @@
               padding: 7px 20px;
               text-decoration: none;
               color: $black;
-              font-family: $font-light;
+              font-family: $font-regular;
 
               &:hover {
                 background: transparent;

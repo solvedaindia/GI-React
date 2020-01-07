@@ -33,7 +33,6 @@ export class CLPContainer extends React.Component {
   
    componentDidMount() 
    {
-	   console.log(this.props.match.params.id);
 		this.getCategoryData(this.props.match.params.id);
    }    
    
@@ -47,7 +46,6 @@ export class CLPContainer extends React.Component {
         }
       })
       .catch(error => {
-		  console.log(error);
 		  this.setState({ categoryDetails: null, isLoading:false });
       });
   }
@@ -66,12 +64,13 @@ export class CLPContainer extends React.Component {
          <section className="clpBase">
 		{this.state.categoryDetails ? 
 		(<>
-			<Helmet>
-			 <Pixels espotName= {'GI_PIXEL_CLP_META' + '_'+ this.props.match.params.id.toUpperCase().replace(' ', '')}/>
-			 <title>{this.state.categoryDetails.pageTitle}</title>            
-			 <meta name="description" content={this.state.categoryDetails.metaDescription} />
-			 <meta name="keywords" content={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription} />
-			</Helmet>
+       <Pixels 
+       title={this.state.categoryDetails.pageTitle}
+       description={this.state.categoryDetails.metaDescription}
+       kewords={this.state.categoryDetails.categoryName + ' ' + this.state.categoryDetails.shortDescription}
+       alt={this.state.categoryDetails.imageAltText}
+      image={this.state.categoryDetails.fullImage}
+       />
 		 </>
 		):null}
 		   
@@ -79,7 +78,7 @@ export class CLPContainer extends React.Component {
             <CLPFullBanner {...this.props.match.params} />
           </div>
 		  
-          <Breadcrumb catBreadCrumb={this.state.categoryDetails.categoryName}/>
+          <Breadcrumb catBreadCrumb={this.state.categoryDetails && this.state.categoryDetails.categoryName}/>
           <FeaturedCategory {...this.props.match.params} />
           <LivingTheme {...this.props.match.params} />
           <BestSeller {...this.props.match.params} />

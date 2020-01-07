@@ -4,6 +4,8 @@ import  '../../../public/styles/static-pages/HelpSupport.scss'
 import ContentEspot from '../../components/Primitives/staticContent';
 import  '../../../public/styles/staticPages/staticPages.scss';
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
+import Pixels from '../../components/Primitives/pixels';
+
 export default class HelpSupport extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ export default class HelpSupport extends React.Component {
     
     return (
       <div className='staticpage serviceSupport'>
-        
+        <Pixels espotName={'GI_PIXEL_CONTACT_META'} />
 		<Breadcrumb {...this.props.match.params} staticName = {'Service & Support'}/>
     <div className='service-support'>
         <div className='container'>

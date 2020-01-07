@@ -50,7 +50,7 @@
 .oursolutions .store-textbox .heading{font-weight: bold;font-size: 18px;}
 .oursolutions .store-textbox .text{margin:5px 0 0 0}
 .oursolutions .store-textbox .text .bold{color:#036cc5;font-weight: bold;}
-.oursolutions .ourstoreImgbox img{width: 100%;}
+.oursolutions .ourstoreImgbox img{width: 100%;cursor: pointer;}
 
 /* recommendation
 ------------------------------------*/
@@ -82,7 +82,7 @@
 .featureCategories .rightbox{float: right;}
 .featureCategories .featureCarouselbox  .itemtext .text{color:#000;}
 
-
+.espotContent.loggedExplore{margin-top:120px;}
 
 
 /* 
@@ -154,6 +154,7 @@
     #Global Screen Chhange for Screen max 992
   */
   @include mix-md{
+    .espotContent.loggedExplore{margin-top:0px;}
     .espotContent{
     .explore-room{
         .explore{

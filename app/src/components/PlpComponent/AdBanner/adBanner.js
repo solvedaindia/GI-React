@@ -28,12 +28,40 @@ class AdBanner extends React.Component {
   }
 
   initializeAdBanner() {
+
     if (this.props.indexPro) {
+      
       let bannerItem = null;
       if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
-        bannerItem = <a href={this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl}>
-          <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} />
-        </a>
+
+        // <li style ={{height:'0px',position:'relative',marginTop:'-17px'}}></li>
+        let count=0 ;
+        let emptyItem =null
+        if (this.props.columnCount === 3 || this.props.fromWishList === true) {
+          count = 3;
+          emptyItem=<><li></li><li></li></>
+          if (this.props.isMobile) {
+            count = 2;
+            emptyItem = <li ></li>
+          }
+        } 
+        else {
+          count = 2;
+          emptyItem =<li></li>
+          if (this.props.isMobile) {
+            count = 1;
+            emptyItem = null;
+          }
+        }
+        console.log("this.props.coloumnLayout",this.props.columnCount,count)
+        
+        //'https://uatinterio.godrej.com/imagestore/B2C/EspotImages/Images/Banners/Products_wardrobes_bottom_banner.png'
+        bannerItem = <>{emptyItem}<a href={this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl}>
+          <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} 
+          alt={this.props.bannerData[this.props.bannerCurrentIndex].alt !== undefined ? this.props.bannerData[this.props.bannerCurrentIndex].alt : 'SsS'}/>
+          
+        </a></>
+        
         this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
         this.setState({
           adBannerItem: bannerItem

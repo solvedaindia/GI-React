@@ -70,7 +70,6 @@ class ThemeData extends React.Component {
         }
       }
 
-
     render(){
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
@@ -84,8 +83,8 @@ class ThemeData extends React.Component {
 		var leftX=clickX+15
 		var topY=0
 		var topY = clickY+30
-		var width = 200
-		var height = 110
+		var width = 190
+		var height = 100
 		if(isMobile())
 		{
 			if((Number(widthContainer)-clickX) < 200)
@@ -123,11 +122,11 @@ class ThemeData extends React.Component {
                     <img
                         className='img'
                         src={`${imagePrefix}${itemDetail.thumbnail}`}
-                        alt='img'
+                        alt={itemDetail.imageAltText}
                     />
                 </figure>
                 <div className='prodDetails'>
-                    <h2 className='prodNAme'>{itemDetail.productName}</h2>
+                    <h2 className='prodNAme' data-toggle="tooltip" title={itemDetail.productName}>{itemDetail.productName} </h2>
                     <p className='price'>₹{formatPrice(itemDetail.offerPrice)}</p>
                     <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>

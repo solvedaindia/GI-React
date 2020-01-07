@@ -192,6 +192,7 @@ class MyWishlist extends React.Component {
           </div>: '' }
 
           <section className="plpCategories">
+            <div className="clearfix"></div>
             <PlpComponent
               plpDataPro={this.state.wishlistData}
               isSearchPathPro={this.props.location.pathname}

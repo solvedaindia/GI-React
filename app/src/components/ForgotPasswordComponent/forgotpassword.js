@@ -10,6 +10,7 @@ import '../../../public/styles/forgotpassword/forgotpass.scss';
 import ForgotPasswordEmailMobile from './forgotPasswordEmailMobile';
 import ForgotPasswordOTP from './forgotPasswordOTP';
 import ForgotPasswordNewPassword from './forgotPasswordNewPassword';
+import { isMobile } from '../../utils/utilityManager';
 
 const LeftArrow = (
   <img
@@ -37,6 +38,32 @@ class Forgotpassowrd extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.handler = this.handler.bind(this);
+    this.hideCloseBtn = this.hideCloseBtn.bind(this)
+  }
+
+
+  hideCloseBtn(flag)
+  {
+    if(isMobile() )
+    {
+      if(flag)
+      {
+        var node =document.getElementById('closeBtn');
+        node.style.display = "block";
+
+        var container= document.getElementById('fpContainer')
+        container.className = "form-center forrgot-pass-box"
+      }
+      else{
+        var node =document.getElementById('closeBtn');
+        node.style.display = "none";
+  
+        var container= document.getElementById('fpContainer')
+        container.className = container.className+ " attempt-exceed"
+      }
+      
+    }
+    
   }
 
   //* Callback Handler *//
@@ -73,6 +100,7 @@ class Forgotpassowrd extends React.Component {
           handlerPro={this.handler.bind(this)}
           userIdPro={this.state.userId}
           isHeadingPro
+          hideCloseBtn = {this.hideCloseBtn.bind()}
           isBack={false}
         />
       );
@@ -183,14 +211,14 @@ class Forgotpassowrd extends React.Component {
         >
           <Modal.Body>
             <div className="modal-wrapper sliderContainer">
-              <Button className="close" onClick={this.toggle} />
+              <Button id="closeBtn" className="close" onClick={this.toggle} />
               <Button
                 onClick={this.backButtonPressed.bind(this)}
                 className="btn-back"
               >
                 {this.state.hideBackArrow ? null : LeftArrow}
               </Button>
-              <div className="form-center forrgot-pass-box">{item}</div>
+              <div id="fpContainer" className="form-center forrgot-pass-box">{item}</div>
             </div>
           </Modal.Body>
         </Modal>

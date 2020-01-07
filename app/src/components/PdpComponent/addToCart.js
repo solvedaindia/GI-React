@@ -68,6 +68,8 @@ class addToCartComponent extends React.Component {
         this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
       }
     }
+    if(props.inventoryStatus === 'unavailable')
+      this.deliveryTime=''
     return <div className="soldbyDealers">{this.deliveryTime}</div>;
   }
 
@@ -234,6 +236,14 @@ class addToCartComponent extends React.Component {
     }
   };
 
+  onKeyPress=(event,props, isUpdate)=>
+  {
+    if(event.key === 'Enter'){
+     this.updatePincode(props, isUpdate);
+  
+    }
+  }
+
   updatePincode(props, isUpdate) {
     if (isUpdate === 'Edit') {
       this.setState({
@@ -277,9 +287,14 @@ class addToCartComponent extends React.Component {
     } else if (props.inventoryStatus === 'unavailable') {
       return <NotifyMe partNumber={this.props.skuData.partNumber} sticky={this.props.sticky} />
     } 
-    return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+    return(
+    <> 
+    <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
+    <div className='clearfix'></div>
+    </>
+    )
   }
-
+  
   render() { 
   let storeText = 'store';
   let btnName = 'Update';
@@ -306,6 +321,7 @@ class addToCartComponent extends React.Component {
                   name="pincodeVal"
                   id="pincodeVal"
                   type="text"
+                  onKeyPress={(evt)=>this.onKeyPress(evt,this.props, btnName)}
                   onChange={this.handleChange}
                   value={this.state.pincodeVal}
                 />

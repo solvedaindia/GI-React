@@ -60,6 +60,15 @@ class Pincode extends React.Component {
 		})
 	}
 
+	onKeyPress=(event)=>
+	{
+	  if(event.key === 'Enter' && this.state.edit){
+		this.updatePincode(this.props);
+		//alert("aaa")
+	  }
+	}
+	
+
 	handleChange = e => {
 		var val = e.target.value;
 
@@ -122,6 +131,7 @@ class Pincode extends React.Component {
 						type="text"
 						onChange={this.handleChange}
 						value={this.state.pincodeVal}
+						onKeyPress={this.onKeyPress}
 						{...attrs}
 					/>
 					{this.state.edit ?

@@ -27,12 +27,13 @@ process.on('uncaughtException', err => {
 });
 
 const app = express();
-
-app.use(
-  cors({
-    origin: '*',
-  }),
-);
+if(process.env.WCSENDPOINT === 'LOCAL' || process.env.WCSENDPOINT === 'DEV' || process.env.WCSENDPOINT === 'SIT' || process.env.WCSENDPOINT === 'UAT'){
+  app.use(
+    cors({
+      origin: '*',
+    }),
+  );
+}
 
 // parse application/x-www-form-urlencoded
 app.use(

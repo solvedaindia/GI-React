@@ -18,9 +18,9 @@ class InspirationDetails extends React.Component {
             <>
        <ContentEspot espotName={ 'GI_PIXEL_LOOKBOOK_BODY_START' } />
  <div className="staticpage inspirationDetails">
-            <Helmet>
+            
 					<Pixels espotName= {'GI_PIXEL_LOOKBOOK_META'}/>
-				</Helmet>
+				
             <Breadcrumb {...this.props.match.params} staticName = {'Inspiration Lookbook'}/>    
              < Lookbook/>
                 <Recommended/> 

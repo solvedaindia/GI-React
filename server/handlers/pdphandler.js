@@ -935,7 +935,7 @@ function transformBundleProdAvailability(product) {
       ? 'unavailable'
       : 'available';
     pincodeData.shippingCharge = shipCharge !== '0' ? shipCharge : '';
-    if (datesList.length > 0) {
+    if (datesList.length > 0 && pincodeData.inventoryStatus === 'available') {
       pincodeData.deliveryDateAndTime = orderfilter.getFormattedDate(
         new Date(Math.max.apply(null, datesList)),
       );

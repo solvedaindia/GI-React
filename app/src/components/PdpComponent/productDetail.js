@@ -101,6 +101,7 @@ class productDetail extends React.Component {
                   <img
                     className="imgfullwidth"
                     src={`${imagePrefix}${this.props.productDetail.productDetails.imagePath}`}
+                    alt={this.props.productDetail.productName ? this.props.productDetail.productName : ''}
                   />
                 </div>
               </Col>

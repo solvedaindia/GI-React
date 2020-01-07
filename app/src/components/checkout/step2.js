@@ -170,7 +170,7 @@ export class Step2Component extends React.Component {
             inputText_city: data.pinData.city,
             inputText_state: data.pinData.state
           })
-          
+
         })
 
     } else {
@@ -304,7 +304,9 @@ export class Step2Component extends React.Component {
           return this.setState({
             inputText_pincode: data.pin,
             inputText_city: data.city,
-            inputText_state: data.state
+            inputText_state: data.state,
+            error_city: '',
+            error_state: '',
           })
         })
       }
@@ -324,7 +326,7 @@ export class Step2Component extends React.Component {
           return this.setState({
             binputText_pincode: data.pin,
             binputText_city: data.city,
-            binputText_state: data.state
+            binputText_state: data.state,
           })
         })
       }
@@ -474,7 +476,7 @@ export class Step2Component extends React.Component {
   }
 
   callAddress = () => {
-    
+
     this.addAddress()
       .then(this.callAddressAPI)
       .then((data) => {
@@ -528,7 +530,7 @@ export class Step2Component extends React.Component {
           access_token: token
         }
       }).then(response => {
-        
+
         if (this.state.same_bill == false && !this.props.isLoggedIn) {
           this.saveBillAdd()
             .then((billAddId) => {
@@ -720,7 +722,7 @@ export class Step2Component extends React.Component {
 
   }
 
-  onLoginSave(event) {
+  async onLoginSave(event) {
     event.preventDefault();
     if (isMobile() && this.state.new_add) {
       this.setState({
@@ -784,15 +786,6 @@ export class Step2Component extends React.Component {
         validateBillingAddress = false
         //return;
       }
-      if (!validatePindcode(this.state.binputText_pincode)) {
-        document.getElementById('bpin').focus();
-        this.setState({
-          berror_pincode: true,
-          berrorMessage_pincode: !this.state.binputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
-        });
-        validateBillingAddress = false
-        //return;
-      }
       if (!validateMobileNo(this.state.binputText_number)) {
         document.getElementById('bphone').focus();
         this.setState({
@@ -811,6 +804,22 @@ export class Step2Component extends React.Component {
         validateBillingAddress = false
         //return;
       }
+      if (!validatePindcode(this.state.binputText_pincode)) {
+        document.getElementById('bpin').focus();
+        this.setState({
+          berror_pincode: true,
+          berrorMessage_pincode: !this.state.binputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      else {
+        try {
+          await this.callPinApi(this.state.binputText_pincode, 'bpin');
+        } catch (err) {
+        }
+      }
+      
     }
 
     if (!validateBillingAddress) {
@@ -831,10 +840,10 @@ export class Step2Component extends React.Component {
       })
       return;
     }
-      this.handleloginContinue()
+    this.handleloginContinue()
   }
 
-  onSavebuttonClick(event) {
+  async onSavebuttonClick(event) {
     event.preventDefault();
     var validateBillingAddress = true;
     this.setState({
@@ -866,6 +875,7 @@ export class Step2Component extends React.Component {
       focus_inputText_name: false,
 
     });
+    
 
     this.state.inputText_address = document.getElementById("address").value;
 
@@ -892,15 +902,6 @@ export class Step2Component extends React.Component {
       this.setState({
         error_address: true,
         errorMessaget_address: !this.state.inputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
-      });
-      validateBillingAddress = false
-      //return;
-    }
-    if (!validatePindcode(this.state.inputText_pincode)) {
-      document.getElementById('pin').focus();
-      this.setState({
-        error_pincode: true,
-        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
       });
       validateBillingAddress = false
       //return;
@@ -932,6 +933,22 @@ export class Step2Component extends React.Component {
       validateBillingAddress = false
       // return;
     }
+    if (!validatePindcode(this.state.inputText_pincode)) {
+      document.getElementById('pin').focus();
+      this.setState({
+        error_pincode: true,
+        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
+      });
+      validateBillingAddress = false
+      //return;
+    }
+    else {
+      try {
+        await this.callPinApi(this.state.inputText_pincode, 'pin');
+      } catch (err) {
+      }
+    }
+    
 
     if (!validateBillingAddress) {
       return;
@@ -1168,13 +1185,13 @@ export class Step2Component extends React.Component {
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="City/District" id="city" name="city" value={this.state.inputText_city} />
-                        {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null}
+                        {/* {this.state.error_city ? <div className='error-msg'>{this.state.errorMessage_city}</div> : null} */}
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
                         <Input inputType="text" title="State" id="state" name="state" value={this.state.inputText_state} />
-                        {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null}
+                        {/* {this.state.error_state ? <div className='error-msg'>{this.state.errorMessage_state}</div> : null} */}
                       </div>
                     </div>
                     {this.props.isLoggedIn && isMobile() ? <div className="col-md-12">
@@ -1260,13 +1277,13 @@ export class Step2Component extends React.Component {
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="City/District" name="bcity" id="bcity" value={this.state.binputText_city} />
-                          {this.state.berror_city ? <div className='error-msg'>{this.state.berrorMessage_city}</div> : null}
+                          {/* {this.state.berror_city ? <div className='error-msg'>{this.state.berrorMessage_city}</div> : null} */}
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-div clearfix div-error">
                           <Input inputType="text" title="State" name="bstate" value={this.state.binputText_state} id="bstate" />
-                          {this.state.berror_state ? <div className='error-msg'>{this.state.berrorMessage_state}</div> : null}
+                          {/* {this.state.berror_state ? <div className='error-msg'>{this.state.berrorMessage_state}</div> : null} */}
                         </div>
                       </div>
 

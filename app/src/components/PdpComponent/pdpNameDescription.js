@@ -11,8 +11,8 @@ const pdpNameDescription = (props) => {
                 <h1 id="box1" className='heading' style={{opacity: '1'}}>
                     {props.productData.productName.length > productTitleCharLimitPDP ? trimTheSentence(props.productData.productName, productTitleCharLimitPDP) : props.productData.productName } 
                 </h1>
-                <h1 className="materialType"> 	
-{props.productData.shortDescription.length > productDescriptionCharLimit ? trimTheSentence(props.productData.shortDescription, productDescriptionCharLimit) : props.productData.shortDescription}</h1>
+                <h2 className="materialType"> 	
+{props.productData.shortDescription.length > productDescriptionCharLimit ? trimTheSentence(props.productData.shortDescription, productDescriptionCharLimit) : props.productData.shortDescription}</h2>
             </Col>
             </Row>
         </>    

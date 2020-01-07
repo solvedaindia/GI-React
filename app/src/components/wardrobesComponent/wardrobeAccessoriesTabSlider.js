@@ -51,7 +51,6 @@ class WardrobeAccessoriesConfiguration extends React.Component {
 
 
   onHandleClick = (index) =>{
-      // alert(index)
     
      this.setState({currentIndex: index})
   }

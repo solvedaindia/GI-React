@@ -35,7 +35,6 @@ export function registerGuestUser(callback) {
       callback(guestToken);
     })
     .catch(error => {
-      console.log('Error: ', error);
       callback('');
     });
 }
@@ -73,7 +72,6 @@ export function logoutTheUser() {
       }
     })
     .catch(error => {
-      console.log('Error: ', error);
     });
 }
 
@@ -87,7 +85,8 @@ export function resetTheCookiesAndData() {
   document.cookie = `loginID=;path=/;expires=''`;
   appCookie.set('isLoggedIn', false, 365 * 24 * 60 * 60 * 1000);
   appCookie.set(`adrID=;path=/;expires=''`);
-  appCookie.set('pincode', '', 365 * 24 * 60 * 60 * 1000);
+  //appCookie.set('pincodeUpdated', false, 365 * 24 * 60 * 60 * 1000);
+ // appCookie.set('pincode', '', 365 * 24 * 60 * 60 * 1000);
   //window.location.reload(); // In case you don't reload the page, make this use as guest user.
   document.location.href="/";
 }
@@ -104,6 +103,5 @@ export function removeFromWishlistGlobalAPI(uniqueId, reference) {
 
     })
     .catch(error => {
-      console.log('Error: ', error);
     });
 }
