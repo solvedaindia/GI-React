@@ -4,7 +4,7 @@ import { Player, BigPlayButton } from 'video-react';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss';
 import '../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss';
 import { imagePrefix } from '../../../public/constants/constants';
-
+import { isMobile } from '../../utils/utilityManager';
 import Zoomin from '../../components/SVGs/zoomIn.svg';
 import Zoomout from '../../components/SVGs/zoomOut.svg';
 
@@ -15,6 +15,10 @@ class productImagesAndVideos extends React.Component {
     this.state = {
       activeData: false,
       gallery: null,
+      infinite: true,
+      autoPlay : false,
+      isRTL: true,
+      isZoomScreen:false,
     };
     this.isZoomScreen = false;
   }
@@ -26,37 +30,37 @@ class productImagesAndVideos extends React.Component {
     contentElement[0].classList.add('active');
   }
 
-  componentWillReceiveProps(nextProps) {
-    const fullscreenButton = document.getElementsByClassName(
-      'image-gallery-fullscreen-button',
-    );
-    this.hideThumnailsOnFullScreen(
-      fullscreenButton[0].classList.contains('active'),
-    );
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const fullscreenButton = document.getElementsByClassName(
+  //     'image-gallery-fullscreen-button',
+  //   );
+  //   this.hideThumnailsOnFullScreen(
+  //     fullscreenButton[0].classList.contains('active'),
+  //   );
+  // }
 
   async hideThumnailsOnFullScreen(isFullScreen) {
     const thumbnailsContainer = document.getElementsByClassName(
       'image-gallery-thumbnails-container',
     );
 
-    if (this.state.activeData === false && isFullScreen === true) {
+    if (/*this.state.activeData === false &&*/ isFullScreen === true) {
       this.isZoomScreen = true;
 
       thumbnailsContainer[0].classList.remove('active');
       thumbnailsContainer[0].classList.add('dataNotActive');
-      this.setState({
-        activeData: true,
-      });
+      // this.setState({
+      //   activeData: true,
+      // });
       
     } else {
       this.isZoomScreen = false;
       thumbnailsContainer[0].classList.remove('dataNotActive');
       thumbnailsContainer[0].classList.add('active');
       
-      this.setState({
-        activeData: false,
-      });
+      // this.setState({
+      //   activeData: false,
+      // });
     }
   }
 
@@ -75,7 +79,8 @@ class productImagesAndVideos extends React.Component {
 	imageArray.map((data, index) => {
 		let thumbnailPath = '';
 		if (screenType && imagesAndVideos.zoomImages[index]) {
-		  imagePath = imagesAndVideos.zoomImages[index].imagePath;
+      //imagePath = imagesAndVideos.zoomImages[index].imagePath;
+      imagePath = '/B2C/EspotImages/Images/Kitchen/Kitchen_Hero_Banner1.png'//imagesAndVideos.zoomImages[index].imagePath;
 		} else if(imagesAndVideos.mainImages[index]) {
 		  imagePath = imagesAndVideos.mainImages[index].imagePath;
 		}
@@ -156,20 +161,34 @@ class productImagesAndVideos extends React.Component {
       const btnSubmitTags = document.getElementsByClassName(
         'image-gallery-fullscreen-button',
       );
+        if(this.state.isZoomScreen===false)
+        {
+          this.setState({isZoomScreen:true});
+          const elements = document.getElementsByClassName("image-gallery-image");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].children[0].style.position="absolute"
+          elements[i].children[0].style.margin="auto"
+          elements[i].children[0].style.left="-100%"
+          elements[i].children[0].style.right="-100%"
+          elements[i].children[0].style.top="-100%"
+          elements[i].children[0].style.bottom="-100%"
+        }
+        }
+      // this.isZoomScreen = !this.isZoomScreen;
       btnSubmitTags[0].click();
     } else if (e.target.nodeName === 'VIDEO') {
       const fullscreenButton = document.getElementsByClassName(
         'image-gallery-fullscreen-button',
       );
-      if (fullscreenButton[0].classList.contains('active')) {
-        this.setState({
-          activeData: true,
-        });
-      } else {
-        this.setState({
-          activeData: false,
-        });
-      }
+      // if (fullscreenButton[0].classList.contains('active')) {
+      //   this.setState({
+      //     activeData: true,
+      //   });
+      // } else {
+      //   this.setState({
+      //     activeData: false,
+      //   });
+      // }
     }
     
   }
@@ -186,8 +205,74 @@ class productImagesAndVideos extends React.Component {
   
   };
 
+  _onSlide(currentIndex)
+  {
+      if(this.state.isZoomScreen && !isMobile())
+      {
+        const elements = document.getElementsByClassName("image-gallery-image");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].children[0].style.position="absolute"
+          elements[i].children[0].style.margin="auto"
+          elements[i].children[0].style.left="-100%"
+          elements[i].children[0].style.right="-100%"
+          elements[i].children[0].style.top="-100%"
+          elements[i].children[0].style.bottom="-100%"
+        }
+      }
+      else{
+        const elements = document.getElementsByClassName("image-gallery-image");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].children[0].style=null;
+        }
+      }
+  }
+
+  _onScreenChange(fullScreenElement) {
+    console.log('isFullScreen?', !!fullScreenElement);
+
+    this.setState({
+      activeData: !!fullScreenElement,
+      isZoomScreen:!!fullScreenElement,
+    });
+
+    const thumbnailsContainer = document.getElementsByClassName(
+      'image-gallery-thumbnails-container',
+    );
+    if (!!fullScreenElement === true) {
+      this.isZoomScreen = true;
+      thumbnailsContainer[0].classList.remove('active');
+      thumbnailsContainer[0].classList.add('dataNotActive');
+
+      if(!isMobile)
+      {
+        const elements = document.getElementsByClassName("image-gallery-image");
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].children[0].style.position="absolute"
+          elements[i].children[0].style.margin="auto"
+          elements[i].children[0].style.left="-100%"
+          elements[i].children[0].style.right="-100%"
+          elements[i].children[0].style.top="-100%"
+          elements[i].children[0].style.bottom="-100%"
+        }
+      }
+
+    } else {
+      this.isZoomScreen = false;
+      thumbnailsContainer[0].classList.remove('dataNotActive');
+      thumbnailsContainer[0].classList.add('active');
+
+      const elements = document.getElementsByClassName("image-gallery-image");
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].children[0].style=null;
+      }
+    
+
+    }
+  }
+
   render() {
-	  this.filterImagesAndVideos(this.props.skuData.attachments, this.isZoomScreen);
+    const isActive = (this.state.activeData && !isMobile());
+	  this.filterImagesAndVideos(this.props.skuData.attachments, this.state.isZoomScreen);
 	  let featuredClass = 'hide';
     if (this.props.skuData.ribbonText) {
 	    featuredClass = 'featured-box';
@@ -210,11 +295,17 @@ class productImagesAndVideos extends React.Component {
         <ImageGallery
           showFullscreenButton
           items={this.images}
-          showNav={this.state.activeData}
+          showNav={isActive}
           showPlayButton={false}
           onClick={this.handleClick.bind(this)}
           lazyLoad={false}
           renderCustomControls={this.renderZoomButtons}
+          
+          isRTL =  {this.state.isRTL}
+          infinite = {this.state.infinite}
+          onScreenChange={this._onScreenChange.bind(this)}
+          onSlide = {this._onSlide.bind(this)}
+          autoPlay ={this.state.autoPlay}
         />
       </div>
     );
