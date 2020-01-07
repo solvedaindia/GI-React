@@ -79,8 +79,8 @@ class productImagesAndVideos extends React.Component {
 	imageArray.map((data, index) => {
 		let thumbnailPath = '';
 		if (screenType && imagesAndVideos.zoomImages[index]) {
-      //imagePath = imagesAndVideos.zoomImages[index].imagePath;
-      imagePath = '/B2C/EspotImages/Images/Kitchen/Kitchen_Hero_Banner1.png'//imagesAndVideos.zoomImages[index].imagePath;
+      imagePath = imagesAndVideos.zoomImages[index].imagePath;
+      //imagePath = '/B2C/EspotImages/Images/Kitchen/Kitchen_Hero_Banner1.png'//imagesAndVideos.zoomImages[index].imagePath;
 		} else if(imagesAndVideos.mainImages[index]) {
 		  imagePath = imagesAndVideos.mainImages[index].imagePath;
 		}
