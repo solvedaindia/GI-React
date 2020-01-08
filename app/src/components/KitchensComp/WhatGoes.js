@@ -58,22 +58,21 @@ class WhatGoes extends React.Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-	  responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            dots: false,
-			  infinite: true,
-			  speed: 3000,
-			  arrows:false,
-			  autoplay: true,
-			  autoplaySpeed: 3000,
-			  slidesToShow: 1,
-        slidesToScroll:1,
-        adaptiveHeight: true
-          },
-        }
-	  ],
+      responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll:1,
+              arrows:false,
+              autoplay: false,
+              dots: false,
+              infinite: true,
+              centerMode: false,
+            }
+          }
+          
+      ],
     };
     return (
       <div className="goesOnKitchen">
@@ -82,11 +81,12 @@ class WhatGoes extends React.Component {
             <Slider {...settings}>
             {!!whatGoesSlider &&
               whatGoesSlider.map((sliderData, index) => (			  
-              <a href={sliderData.onClickUrl} key={index}>
-                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} />
-				<h2 className="sliderHeading" >{sliderData.imgHeading}</h2>
-				<p className="sliderDesc" >{sliderData.imgDesc}</p>
-              </a>
+              <div className='what-goes-slider'>
+              <a className='imgLink' href={sliderData.onClickUrl} key={index}>
+                <img  src={imagePrefix + sliderData.imageSrc} alt={sliderData.alt} /></a>
+                <h2 className="sliderHeading" >{sliderData.imgHeading}</h2>
+                <p className="sliderDesc" >{sliderData.imgDesc}</p>
+                </div>
               ))}
             </Slider>
       </div>
