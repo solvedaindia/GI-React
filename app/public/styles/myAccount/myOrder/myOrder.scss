@@ -248,7 +248,10 @@
   }
 
   .heightActive {
-    height: 235px;
+    //height: 235px;
+    height: auto;
+    //new added
+    min-height: 235px;
     overflow: hidden;
     -webkit-transition: height 0.4s;
     border-bottom: 1px solid $greyborder;
