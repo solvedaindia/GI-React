@@ -305,15 +305,15 @@ handleValidation=(obj, errorType)=>{
   createSelectItems =() => {
     let items = [];     
     let currentIndex=this.state.index;    
-items = this.state.dropDownArr.map((item, index) => {
+    items = this.state.dropDownArr.map((item, index) => {
   if(currentIndex==0){
     return(
-      <option key={index} value={item}>{item}</option>
+      <option key={item} value={index}>{item}</option>
     )
   }
   else{
     return(
-      <option key={index} value={item} selected='false'>{item}</option>
+      <option key={item} value={index} >{item}</option>
     )
   }
   
@@ -389,7 +389,7 @@ onDropdownSelected = (e) => {
                     <div className="form-group">
                       <label className="form-labeled" htmlFor="dropdown">{WHAT_YOU_LIKE}</label>
                       <select  name="dropDownValue" onChange={this.onDropdownSelected} onClick={this.onDropdownSelected.bind(this)} className="form-control" required>
-                        <option value='Select an option' selected='true'>{SELECT_OPTION}</option>
+                        <option value='Select an option' selected>{SELECT_OPTION}</option>
                          {this.createSelectItems()}
                       </select>
                       {errorMessageOption}
