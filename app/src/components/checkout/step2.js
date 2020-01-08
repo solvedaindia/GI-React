@@ -1198,7 +1198,7 @@ export class Step2Component extends React.Component {
 
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} checked={this.state.defaultAddress} />
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
@@ -1215,14 +1215,14 @@ export class Step2Component extends React.Component {
 
 
 
-
+              {console.log("this.state.same_bill",this.state.same_bill)}
               {!this.state.new_add || isMobile() ?
                 <div>
                   <div className="row">
                     <div className="col-md-12">
                       <div className='bill-address customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
+                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" checked={this.state.same_bill} onChange={this.handleSameBill} />
                           <label className="lblCheck" htmlFor="checkbox"></label>
                         </div>
                         <label className='label-billing defaultlbl' htmlFor="billing">Billing address is the same as delivery address</label>
@@ -1315,7 +1315,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-12">
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} checked={this.state.defaultAddress}/>
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
