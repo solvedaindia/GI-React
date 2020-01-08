@@ -343,11 +343,13 @@ export class PlpContainer extends React.Component {
             }
           }
 
-          if (this.state.isCatDetails) {
+          if (this.state.isCatDetails || !isFromScroll) {
             if (!this.state.isFromSearch.includes('/search')) {
               const coloumnValue = response.data.data.categoryDetails.columns;
               this.props.initialValuesUpdate(coloumnValue);
               this.setState({
+                plpData: [],
+                filterData: [],
                 categoryDetail: response.data.data.categoryDetails,
                 displaySkus: response.data.data.categoryDetails.displaySkus,
               });
