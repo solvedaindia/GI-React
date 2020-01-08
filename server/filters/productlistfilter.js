@@ -32,6 +32,7 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
             const facetEntry = {
               label: facetValue.label,
               count: Number(facetValue.count),
+              sequence: facetValue.extendedData ? facetValue.extendedData.sequence : '',
             };
             if (facet.name.includes('OfferPrice_INR') && facetValue.label) {
               const priceRange = facetValue.label
@@ -78,6 +79,13 @@ module.exports.facetData = function getFacetData(facetView, catalogID) {
       }
     });
   }
+  facetData.forEach(facet => {
+    facet.facetValues.sort(
+      (a, b) =>
+        parseInt(a.sequence, 10) -
+        parseInt(b.sequence, 10),
+    );
+  });
   return facetData;
 };
 
