@@ -74,32 +74,34 @@ export class MyAccountContainer extends React.Component {
 
   onMyProfileClick() {
    this.scrollTop();
-    this.setState({
-      redirectedFrom: 'myprofile'
-    })
- 
-    
+   this.props.history.replace({ pathname: '/myAccount', state: {from:'myprofile'}}); 
+  //  this.setState({
+  //     redirectedFrom: 'myprofile'
+  //   })   
   }
 
   onPasswordClick() {
     this.scrollTop();
-    this.setState({
-      redirectedFrom: 'password'
-    })
+    this.props.history.replace({ pathname: '/myAccount', state: {from:'password'}}); 
+    // this.setState({
+    //   redirectedFrom: 'password'
+    // })
   }
 
   onMyOrderClick() {
     this.scrollTop();
-    this.setState({
-      redirectedFrom: 'myorder'
-    })
+    // this.setState({
+    //   redirectedFrom: 'myorder'
+    // })
+    this.props.history.replace({ pathname: '/myAccount', state: {from:'myorder'}});
   }
 
   onAddressClick() {
     this.scrollTop();
-    this.setState({
-      redirectedFrom: 'address'
-    })
+    this.props.history.replace({ pathname: '/myAccount', state: {from:'address'}});
+    // this.setState({
+    //   redirectedFrom: 'address'
+    // })
   }
 
   render() {

@@ -104,7 +104,8 @@ class Pincode extends React.Component {
 					error: error.response.data.error.error_message,
 					isLoading: false
 				});
-				this.disableCheckoutBtn();
+				// this.disableCheckoutBtn();
+				this.props.getCartDetails();
 			});
 	}
 
