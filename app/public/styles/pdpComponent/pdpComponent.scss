@@ -1514,8 +1514,12 @@
 }
 
 .fullscreen .zoominout {
-	display: none !important;
+	display: none;
 }
+.image-gallery-content:not(.fullscreen) .zoominout {
+	display: none;
+}
+
 
 .loadingIndicator{
     // padding: 100px 0;
