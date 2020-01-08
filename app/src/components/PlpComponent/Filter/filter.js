@@ -248,7 +248,7 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.indexPro===0)
+    if(this.props.indexPro===0 && isMobile())
       this.toggleDropdown(true);
     this.resolvePreSelectedFilters();
   }
