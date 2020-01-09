@@ -37,6 +37,16 @@ class ContentEspot extends React.Component {
   componentDidMount() {
     this.getEspotData();
   }
+  componentDidUpdate(){
+    if(window.location.hash)
+    {
+     var element = document.getElementById(window.location.hash.substr(1));
+      if (element) 
+       {
+        element.scrollIntoView();
+       }
+     }
+    }
 
   render() {
     const { staticContent } = this.state;

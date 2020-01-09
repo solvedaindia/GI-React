@@ -58,7 +58,7 @@ class LivingTheme extends React.Component {
 		!!themeData && 
 		<div className="clpTheme">
 			<div className='clp-short-desc'>
-				<h2 className='title'>{themeData.title}</h2>
+				<h3 className='title'>{themeData.title}</h3>
 				<p className='desc'>{themeData.description}</p>
 			</div>
 			{!isMobile() ?

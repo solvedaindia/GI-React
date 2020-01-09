@@ -91,7 +91,8 @@
       background-size: contain;
       padding-left: 11px;
     }
-    .lblCheck {     
+    .lblCheck {   
+      cursor: pointer;  
       color: $battleshipGrey;
       font-size: $base*1.5;      
     }

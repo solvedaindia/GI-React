@@ -60,6 +60,15 @@ class Pincode extends React.Component {
 		})
 	}
 
+	onKeyPress=(event)=>
+	{
+	  if(event.key === 'Enter' && this.state.edit){
+		this.updatePincode(this.props);
+		//alert("aaa")
+	  }
+	}
+	
+
 	handleChange = e => {
 		var val = e.target.value;
 
@@ -95,7 +104,8 @@ class Pincode extends React.Component {
 					error: error.response.data.error.error_message,
 					isLoading: false
 				});
-				this.disableCheckoutBtn();
+				// this.disableCheckoutBtn();
+				this.props.getCartDetails();
 			});
 	}
 
@@ -122,6 +132,7 @@ class Pincode extends React.Component {
 						type="text"
 						onChange={this.handleChange}
 						value={this.state.pincodeVal}
+						onKeyPress={this.onKeyPress}
 						{...attrs}
 					/>
 					{this.state.edit ?

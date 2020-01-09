@@ -134,14 +134,6 @@
     margin: 120px auto;
 }
 
-.goesOnKitchen {
-    width: 100%;
-    padding-top: 30px;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-right: 0px;
-}
-
 .ourPromis {
     width: 100%;
 }
@@ -217,10 +209,6 @@
       font-style: normal;
       color:#4a4a4a
     }
-    .goesOnKitchen {
-      height: 563px;
-      object-fit: contain;
-    }
     .AccessoriesText {
       font-family: $font-medium;
       font-size: 20px;
@@ -251,7 +239,19 @@
       color:#4a4a4a
     }
   }
+
+
 @media screen and (min-width: 768px){
+    .kitchenContainer{
+        .goesOnKitchen {
+            width: 100%;
+            padding:30px 10% 0 10%;
+            margin-right: 0px;
+            object-fit: contain;
+        }
+    }
+    
+    
     .kitchenEspots {
         margin: 60px auto;
     }
@@ -259,6 +259,35 @@
 
 @media screen and (max-width: 768px){ 
   .kitchenContainer{
+      .goesOnKitchen {
+          background: #f7f8f8;
+          padding: 0px 20px 20px 20px;
+          .title{
+              padding: 28px 0px 20px 0px;
+              font-family:$font-medium;
+              font-size: $base * 2;
+              margin: 0;
+          }
+          .slick-slider{
+              .slick-list{
+                  .slick-track{
+                    .slick-slide{
+                        .what-goes-slider{
+                            .sliderHeading{
+                                padding: 20px 0px 12px 0px;
+                                font-size: $base * 1.5;
+                                font-family:$font-medium;
+                            }
+                            .sliderDesc{
+                                font-size: $base * 1.5;
+                                padding: 0px;
+                            }
+                        }
+                    }
+                  }
+              }
+          }
+      }
     .easySteps{
         .step-wizard-step{
             min-height: 409px;           
@@ -296,7 +325,7 @@
 		.slick-prev,
 		.slick-next {
 			top: unset;
-			bottom: -55%;
+			bottom: -23%;
 		}
 	}
 	

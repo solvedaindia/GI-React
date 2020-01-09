@@ -59,6 +59,7 @@ export const FULLNAME_MSG = 'Please enter your full name';
 export const VALIDNAME_MSG = 'Please enter a valid Name. It should not exceed 100 characters';
 export const VALIDEMAIL_MSG = 'Please enter valid Email Id';
 export const SELECT_OPTION_MSG = 'Please select an option';
+export const ENTER_MSG = 'Please enter message';
 export const MOBILE_MSG = 'Please enter valid Mobile Number';
 export const FEEDBACK_MSG = 'Thank you for the feedback';
 export const ENTEROTP_MSG = 'Please enter OTP';

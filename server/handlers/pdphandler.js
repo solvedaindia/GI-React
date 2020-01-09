@@ -16,7 +16,7 @@ const origin = require('../utils/origin.js');
 const activityHandler = require('../handlers/activityhandler');
 const orderfilter = require('../filters/orderfilter');
 
-const notifyMessage = 'We’ll notify you when this product is back in stock';
+const notifyMessage = 'Thank you for your interest in our product. We will send you a mail as soon as the product is available';
 
 /**
  * Function for PDP Data
@@ -238,7 +238,8 @@ module.exports.setProductNotification = function productStockNotification(
         callback(null, { message: notifyMessage });
       } else {
         logger.debug('Error While calling Notify ME API');
-        callback(errorUtils.handleWCSError(response));
+        callback(null, { message: notifyMessage });
+        // callback(errorUtils.handleWCSError(response));
       }
     },
   );
@@ -935,7 +936,7 @@ function transformBundleProdAvailability(product) {
       ? 'unavailable'
       : 'available';
     pincodeData.shippingCharge = shipCharge !== '0' ? shipCharge : '';
-    if (datesList.length > 0) {
+    if (datesList.length > 0 && pincodeData.inventoryStatus === 'available') {
       pincodeData.deliveryDateAndTime = orderfilter.getFormattedDate(
         new Date(Math.max.apply(null, datesList)),
       );

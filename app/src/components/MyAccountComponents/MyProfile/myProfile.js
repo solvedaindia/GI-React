@@ -90,7 +90,8 @@ class MyProfile extends React.Component {
 
 
   onSavebuttonClick(event) {
-    event.preventDefault();
+    if(event)
+      event.preventDefault();
     if (this.state.userResponse.name !== '') {
       if (!validateFullName(this.state.inputText_name)) {
         this.setState({
@@ -408,6 +409,16 @@ class MyProfile extends React.Component {
     this.props.resetRWDHeaderFlag(true);
   }
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      if(!this.state.isSaveBtnDisable)
+      {
+        this.onSavebuttonClick();
+      }
+    }
+  }
+
   render() {
     return (
       <>
@@ -423,6 +434,7 @@ class MyProfile extends React.Component {
               placeholder={'Enter your name'}
               value={this.state.inputText_name}
               handleChange={this.handleInput}
+              onKeyPress={this.onKeyPress}
             />
             {this.state.error_name ? (
               <div className="error-msg">{this.state.errorMessage_name}</div>
@@ -438,6 +450,7 @@ class MyProfile extends React.Component {
               value={this.state.inputText_number}
               handleChange={this.handleInput}
               focusIn={this.focusIn.bind(this)}
+              onKeyPress={this.onKeyPress}
             />
             {this.state.error_number ? (
               <div className="error-msg">{this.state.errorMessage_number}</div>
@@ -453,6 +466,7 @@ class MyProfile extends React.Component {
               value={this.state.inputText_email}
               handleChange={this.handleInput}
               focusIn={this.focusIn.bind(this)}
+              onKeyPress={this.onKeyPress}
             />
             {this.state.error_email ? (
               <div className="error-msg">{this.state.errorMessage_email}</div>

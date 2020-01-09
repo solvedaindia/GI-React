@@ -327,7 +327,7 @@
   */
   @media screen and (min-width: 768px){
     .service-support{
-      padding:64px 0 144px 0;
+      padding:64px 0 80px 0;
       .innerContent{
         padding:63px 0 0 0;
       }
@@ -600,37 +600,23 @@
       width: 100%;
     }
     .static-contact-us {
-      h1 {
-        text-align: left;
-        font-size: 16.9px !important;
-        padding-bottom: 0px;
-        font-weight: 600;
-      }
       .title-text {
         font-size: 16.9px !important;
-      }
-
-      .sub-heading {
-        font-size: 16.9px !important;
-        color: #77787a !important;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding-bottom: 14px !important;
       }
       .img-icon-div {
-        width: 20%;
         margin-right: 20px;
+        float: left;
+      }
+      .sub-heading {
+        font-size: 16px !important;
+        padding-top: 0px;
+        padding-bottom: 0px;
       }
       .email-box-desc {
         width: 80%;
       }
-      .separator {
-        border-right: 0px;
-        border-bottom: 1px solid #dadada;
-        padding-bottom: 20px;
-      }
-      .separator-right{
-        padding-top: 20px;
-      }
+
     }
   }
 }
@@ -808,19 +794,13 @@
       display: inline-flex;
     }
     .static-contact-us {
-      h1 {
-        text-align: left;
-        font-size: 16.9px !important;
-        padding-bottom: 0px;
-        font-weight: 600;
-      }
       .title-text {
-        font-size: 16.9px !important;
+        font-size: 12px;
+        font-family: $font-bold;
       }
 
       .sub-heading {
-        font-size: 16.9px !important;
-        color: #77787a !important;
+        font-size: 12px;
         padding-top: 0px;
         padding-bottom: 0px;
       }
@@ -877,4 +857,13 @@
   
   
   
+}
+
+@media (min-width:1024px ) and (max-width: 1365px) {
+  .serviceSupport {
+    .container {
+      margin-right: 26px;
+      margin-left: 26px;
+    }
+  }
 }

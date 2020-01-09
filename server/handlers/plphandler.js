@@ -71,6 +71,7 @@ module.exports.getProductsBySearchTerm = function getProductsBySearch(
   }
 
   const reqHeader = req.headers;
+  reqHeader.pageNumber = Number(req.query.pagenumber) || plpconfig.pageNumber;
   const queryUrl = getQueryUrl(req);
 
   let searchTerm = req.params.searchterm;
@@ -367,7 +368,8 @@ function getAllSKUProductList(
         if (
           response.body.catalogEntryView.length === 0 &&
           response.body.metaData.spellcheck &&
-          response.body.metaData.spellcheck.length > 0
+          response.body.metaData.spellcheck.length > 0 && 
+          headers.pageNumber === 1
         ) {
           const spellCheckArray = response.body.metaData.spellcheck;
           productListJson.spellCheck = spellCheckArray;

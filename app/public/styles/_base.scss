@@ -77,9 +77,9 @@ h4,h5,h6 {
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
   @media (min-width: 768px) and (max-width: 1024px) {
-    
-    //CSS
-    
+    .lock-screen{
+      overflow: hidden;
+    }  
   }
   
 

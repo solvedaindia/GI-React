@@ -42,6 +42,13 @@ class PromoField extends React.Component {
       });
   }
 
+  onKeyPress=(event)=>
+  {
+    if(event.key === 'Enter'){
+      this.applyPromoCode();
+    }
+  }
+
   render() {
     const { error } = this.state;
     return (
@@ -51,6 +58,7 @@ class PromoField extends React.Component {
           className="promoInput"
           value={this.state.promoCode}
           onChange={this.handlePromoCode}
+          onKeyPress={this.onKeyPress}
           placeholder={GOT_PROMO_CODE}
         />
         <button className="applyBtn" onClick={this.applyPromoCode}>

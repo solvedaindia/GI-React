@@ -71,7 +71,7 @@ class Breadcrumb extends React.Component {
             }
 
             return (
-              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute}>{`${breadLabel} >`}</Link>}</span>
+              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute} onClick={this.onLinkNavigation}>{`${breadLabel} >`}</Link>}</span>
             )
 
           })}

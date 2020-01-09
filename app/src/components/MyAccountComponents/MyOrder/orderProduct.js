@@ -50,7 +50,7 @@ class ProductOrder extends React.Component {
     return (
       <>
         <div className="clearfix" />
-        <div className="orderProduct clearfix">
+        <div className={this.props.totalItems-1 === this.props.itemIndex? "orderProduct clearfix removeBorder" : "orderProduct clearfix"}>
           <div className="orderimgbox clearfix">
             <div className="imgBox">
               <img  alt={productData.productName} src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />

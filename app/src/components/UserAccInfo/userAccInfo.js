@@ -12,7 +12,7 @@ import { getCookie, getReleventReduxState, isMobile } from '../../utils/utilityM
 import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
-import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER } from '../../constants/app/primitivesConstants';
+import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER, HELLO_GUEST } from '../../constants/app/primitivesConstants';
 
 class UserAccInfo extends React.Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class UserAccInfo extends React.Component {
           }
 
           this.setState({
-            userName: `Welcome ${username.split(' ')[0]}`,
+            userName: `Hello ${username.split(' ')[0]}`,
             logonId: response.data.data.logonID,
           });
 
@@ -153,7 +153,7 @@ class UserAccInfo extends React.Component {
       this.setState({
         userType:
           <li className="listItemUnSelected">
-            <a className="dropDown">{WELCOME_INTERIO}</a>
+            <a className="dropDown">{HELLO_GUEST}</a>
           </li>
         ,
         loginStatus:

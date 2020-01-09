@@ -39,6 +39,7 @@
             border: 1px solid $darkAshGrey;
             margin: 1%;
             float: left;
+            cursor: pointer;
             .typeList {
 				width: 13%;
                 margin: auto;
@@ -77,6 +78,13 @@
         margin: 0 19px 0 0;
         background: #f7f8f8;
         .detailCard{
+            .storeListItem{
+                .Storewrapper{
+                    .distance{
+                        font-size: 14px;
+                    }
+                }
+            }
             .storeListItem.ribbon{
               .Storewrapper{
                   padding-top:23px;
@@ -103,7 +111,10 @@
             }
             .Storewrapper{
                 margin: 0px 0 7px 0;
-                .storeName,.distance{display: inline-block}
+                .storeName,.distance{                  
+                    display: block;
+                    float: left;
+                }
                 .storeName{
                   width:80%;
                   margin:0;
@@ -121,6 +132,7 @@
                   font-size:14px;
                   font-family: $font-medium;
                   width:20%;
+                  text-align: right;
                 }
             }
             .phoneDetails{
@@ -259,6 +271,7 @@
                         border: 1px solid #ccc;
                         box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.11);
                         padding: 25px 24px;
+                        
                     }
                 }
             }
@@ -272,8 +285,19 @@
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
   @media (min-width: 768px) and (max-width: 1024px) {
-    
-    //CSS
+    .storeDetails{
+      .storeList{
+        .detailCard{
+         .storeListItem {
+            .Storewrapper{
+                .distance{
+                    font-size: 12px;
+                }
+            }
+         }
+        }
+      }
+    } 
     
   }
   
@@ -356,18 +380,30 @@
             }
             .detailCard{
                 padding: 0;
+                .slick-slider{
+                    .slick-slide{
+                        padding-right:10px;
+                    }
+                }
+               
                 .storeListItem{
                     padding: 22px 24px 15px 20px;
-                    min-height: 190px;
+                    min-height: 209px;
+                    padding-right: 10px;
+                    border: 1px solid #ccc;
+                    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.11);
                     .Storewrapper{
                         .storeName{
                             font-size: $base*1.75;
                             font-family: $font-bold;
                             color: $black;
+                            width:75%
                         }
                         .distance{
-                            position: absolute;
+                            // position: absolute;
                             margin-top: 7px;
+                            font-size: 13px;
+                            width:25%;
                         }
                     } 
                     .store-detal-desc{

@@ -73,7 +73,12 @@
     border: solid 1px $greyborder;
     padding: 0 26px 30px;
     margin: 0 0 16px 0;
+    
+    .orderProduct.removeBorder{
+      border-bottom: none !important;
+    }
     .orderProduct {
+      
       border-bottom: solid 1px $greyborder;
       padding: 31px 0 29px 0;
       .orderbtn {
@@ -243,7 +248,10 @@
   }
 
   .heightActive {
-    height: 235px;
+    //height: 235px;
+    height: auto;
+    //new added
+    min-height: 235px;
     overflow: hidden;
     -webkit-transition: height 0.4s;
     border-bottom: 1px solid $greyborder;
@@ -398,7 +406,7 @@
     }
     .list.active{
       color:$greenLight;
-      font-family: $font-bold;
+      font-family: $font-medium;
       &:before {
         background: $greenLight;
         z-index: 99999;        

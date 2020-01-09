@@ -242,7 +242,8 @@
           border-radius: 50%;
           height: 22px;
           width: 22px;
-          padding: 2px;
+          padding: 2px;    
+          opacity: 0;     
         }
         .circlebox {
           height: 28px;
@@ -389,13 +390,16 @@
   
               /* Input Checkbox Radio
               -----------------------------*/
-              .lblradio {
+              .lblradio {               
                 position: relative;
                 .circle {
                   border-radius: 50%;
                   height: 22px;
                   width: 22px;
                   padding: 2px;
+                  min-width: 22px;
+                  // border:1px solid red;
+                  
                 }
                 .circlebox {
                   height: 28px;
@@ -416,6 +420,10 @@
                     padding: 2px;
                     display: block;
                   }
+                  // .circle{                    
+                  //   width: 24px;
+                  //   height: 24px
+                  // }
                 }
               }
   
@@ -426,8 +434,8 @@
               }
               .inputCheck[type="checkbox"]:checked + .lblradio {
                 .circle {
-                  border: 2px solid $black;
-                  padding: 2px;
+                  // border: 2px solid $black;
+                  padding: 1px;
                 }
   
                 .circlebox {
@@ -502,6 +510,18 @@
               display: flex;
               min-width: 160px;
             }
+          }
+          .emptylist
+          {
+            display: flex;
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid white;
+            padding: 9px 0px;
+            min-height: 54px;
+            align-items: center;
+            position: relative;
+            background: white;
           }
         }
   
