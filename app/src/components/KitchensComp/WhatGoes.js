@@ -59,20 +59,20 @@ class WhatGoes extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll:1,
-              arrows:false,
-              autoplay: false,
-              dots: false,
-              infinite: true,
-              centerMode: false,
-            }
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll:1,
+            arrows:false,
+            autoplay: false,
+            dots: false,
+            infinite: true,
+            centerMode: false,
           }
-          
-      ],
+        }
+        
+    ],
     };
     return (
       <div className="goesOnKitchen">
