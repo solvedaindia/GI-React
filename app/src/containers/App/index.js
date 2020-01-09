@@ -375,7 +375,7 @@ export default class App extends React.Component {
           <Route path="/support" component={HelpSupport} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
-          <Route path="/interner-error" component={InternetError} />
+          <Route path="/internet-error" component={InternetError} />
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
         </Switch>
