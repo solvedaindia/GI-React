@@ -163,7 +163,7 @@ handleValidation=(obj, errorType)=>{
   }
   
   // For email validation
-  if (!validateEmptyObject(obj.email) && !isMobileEntered) {
+  if (!validateEmptyObject(obj.email) /*&& !isMobileEntered*/) {
     this.setState({
       errorMessageEmail: VALIDEMAIL_MSG,
     });
