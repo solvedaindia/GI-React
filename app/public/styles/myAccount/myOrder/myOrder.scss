@@ -167,7 +167,6 @@
             .quantity,
             .delivery{
               display: inline-block;
-              width:47%;
             }
             .quantity {
               margin:0 6px 0 0;
@@ -248,9 +247,7 @@
   }
 
   .heightActive {
-    //height: 235px;
     height: auto;
-    //new added
     min-height: 235px;
     overflow: hidden;
     -webkit-transition: height 0.4s;
@@ -294,7 +291,7 @@
         .list{
           display: inline-block;
           color:$battleshipGrey;
-          padding:0 25px 10px 0;
+          padding:0 5px 10px 0;
           width:33.3%;
           font-size:$base*1.5;
           text-decoration: underline;
@@ -337,9 +334,28 @@
     padding: 0 20px 0 10px;
   }
 }
+/* 
+  #Screen 1281px to higher resolution desktops, Device = Desktops
+*/
+@media (min-width: 1025px) {
+  .myOrder{
+    .itemBox {
+      .orderProduct{
+        .orderimgbox{
+          .product-text{
+            .quantity-shipping{
+              .delivery, .quantity{
+                width:45%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }     
+}
 
-@media (min-width:992px) 
-{
+@media (min-width:992px) {
 	.trackorder-wrap ul.track-bar .list.items5{
 		width:19%;
 	}
@@ -347,6 +363,30 @@
 		width:24%;
 	}
 }
+
+  /* 
+    #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+  */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .myOrder{
+    .itemBox {
+      .orderProduct{
+        .orderimgbox{
+          .product-text{
+            .quantity-shipping{
+              .delivery{
+                width: 100%;
+                margin-top: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
+    
+  }
+
 /* Order checkout page */
 
 .trackorder-wrap {
