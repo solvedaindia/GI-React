@@ -364,6 +364,7 @@ export default class App extends React.Component {
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           <Route path="/termsconditions" component={TermsConditions} />
+          <Route path="/furniture" component={CookiePolicy} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/shipping" component={Shipping} />
