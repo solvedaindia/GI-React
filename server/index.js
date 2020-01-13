@@ -7,13 +7,16 @@ const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
+const prerenderToken = '2TDAZcXaVTBG76dw3DY2';
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
     ? require('ngrok')
     : false;
 const { resolve } = require('path');
 const app = express();
-app.use(require('prerender-node'));
+if(process.env.WCSENDPOINT==='PRDLV'){
+  app.use(require('prerender-node').set('protocol', 'https').set('host', 'www.godrejinterio.com').set('prerenderToken', prerenderToken))
+}
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
