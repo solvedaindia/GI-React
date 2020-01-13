@@ -17,7 +17,8 @@ export class CookiePolicy extends React.Component {
   render() {
     return (
       <div className='staticpage cookiepolicy'>
-	  <Breadcrumb {...this.props.match.params} staticName = {'Cookie Policy'}/>
+	  {/* <Breadcrumb {...this.props.match.params} staticName = {'Cookie Policy'}/> */}
+    <Breadcrumb {...this.props.match.params} staticName = {'Furniture'}/>
       <ContentEspot espotName={ 'GI_Cookie_Policy_Static_Data' } />
       <ContentEspot espotName={ 'GI_Cookie_Policy_2' } />
       <ContentEspot espotName={ 'GI_Cookie_Policy_3' } />
