@@ -49,6 +49,7 @@ class Invoice extends React.Component {
 		apiManager
 		.get(invoicAPI + this.props.match.params.invoiceId)
 		.then(response => {
+			console.log("responseInvoice",JSON.stringify( response.data.data))
 			this.setState({
 				invoiceData: response.data.data
 			},
@@ -76,17 +77,25 @@ class Invoice extends React.Component {
                 {
                     !!invoiceData && <div className="invoiceData" style={isMobile()? {border:'1', width: '900px', margin: 'auto'}:{border:'1', width: '824px', margin: 'auto',} }>
 						<div className="invoiceContainer topsection" style={{border:'0', width: '100%', margin: 'auto',height: '100px'}}>
-                        <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
-						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
+                        
+						<div className="value heading"  style={{width: '24%', float: 'left'}} >Invoice No</div>
+						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.salesInvoiceNo}</div>
+						<div class="value" style="width: 4%;float: left;">&nbsp;</div>
+						{/* <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
+						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div> */}
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Invoice Date</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.invoiceDate}</div>
-                        <div className="value heading" style={{width: '24%', float: 'left'}}>&nbsp;</div>
-						<div className="value" style={{width: '24%', float: 'left'}}>&nbsp;</div>
+                        {/* <div className="value heading" style={{width: '24%', float: 'left'}}>&nbsp;</div> */}
+						<div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
+						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
+
+						{/* <div className="value" style={{width: '24%', float: 'left'}}>&nbsp;</div> */}
+						<div class="value" style="width: 4%;float: left;">&nbsp;</div>
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Order Number</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.orderNo}</div>
 						</div>
 						<div className="invoiceContainer addresssection" style={{border:'0', width: '100%', margin: 'auto',height:'120px',float: 'left'}}>
-							<div className="invoiceContainer addresssection" id='companyAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
+							<div className="invoiceContainer addresssection" id='companyAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '48%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">From</div>
 								<div className="value">  
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.name}</div>
@@ -95,7 +104,8 @@ class Invoice extends React.Component {
                                     <div className="value">
 									{!!invoiceData.companyAddress && invoiceData.companyAddress.gstinNo}</div>
 							</div>
-							<div className="invoiceContainer addresssection" id='consigonorAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
+							<div style={isMobile() ? {border:'0', width: '0', margin: 'auto', float: 'left'}:{border:'0', width: '4%', margin: 'auto', float: 'left'}}>&nbsp;</div>
+							<div className="invoiceContainer addresssection" id='consigonorAddId' style={isMobile() ? {border:'0', width: '100%', margin: 'auto', float: 'left'}:{border:'0', width: '48%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Company Name</div>
 								<div className="value">  
 									{!!invoiceData.consignorAddress && invoiceData.consignorAddress.name}</div>
@@ -108,7 +118,7 @@ class Invoice extends React.Component {
                                     
 							</div>
 						</div>
-						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',float: 'left'} :{border:'0', width: '100%', margin: '123px 0 0 0',float: 'left'}}>
+						<div className="invoiceContainer addresssection customer" style={isMobile()? {border:'0', width: '100%', margin: '126px 0 0 0',float: 'left'} :{border:'0', width: '100%', margin: '100px 0 0 0',float: 'left'}}>
 							<div className="invoiceContainer addresssection" style={{border:'0', width: '50%', margin: 'auto', float: 'left'}}>
 								<div className="value heading">Billing Name</div>
 								<div className="value">  
@@ -116,9 +126,23 @@ class Invoice extends React.Component {
 								<div className="value heading">Billing Address</div>
 								<div className="value">
 									{!!invoiceData.billTo && invoiceData.billTo.address}</div>
+								
+
+								<div className="value heading">City</div>
+									<div className="value">
+										{!!invoiceData.billTo && invoiceData.billTo.city}</div>
+								
+								<div className="value heading">State</div>
+									<div className="value">
+										{!!invoiceData.billTo && invoiceData.billTo.state}</div>
+
+								<div className="value heading">Zipcode</div>
+									<div className="value">
+										{!!invoiceData.billTo && invoiceData.billTo.zipCode}</div>
 								<div className="value heading">Contact No</div>
 								<div className="value">
 									{!!invoiceData.billTo && invoiceData.billTo.contactNo}</div>
+
 								<div className="value heading">GST No (if applicable)</div>
 								<div className="value">
 									{!!invoiceData.billTo && invoiceData.billTo.gstinNo}</div>
@@ -131,13 +155,13 @@ class Invoice extends React.Component {
 								
 								<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.address}</div>
-									<div className="value heading">city</div>
+									<div className="value heading">City</div>
 									<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.city}</div>
-									<div className="value heading">state</div>
+									<div className="value heading">State</div>
 									<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.state}</div>
-									<div className="value heading">zipcode</div>
+									<div className="value heading">Zipcode</div>
 									<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.zipCode}</div>
 								<div className="value heading">Contact No</div>
@@ -177,10 +201,11 @@ class Invoice extends React.Component {
                                 )
 							})}
 							
-							<div className="itemsection invoicefooter" style={{border:'0', width: '100%', margin: '20px 0 0 0', float: 'left'}}>
+							<div className="itemsection invoicefooter" style={{border:'0', width: '100%', margin: '20px 0 40px 0', float: 'left'}}>
 
-								<div className="value heading" style={{width: '20%', margin: 'auto', float: 'left', align:'right'}}>Total (Rs) </div>
-								<div style={{width: '20%', float: 'left', align:'right'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
+								<div className="value heading" style={isMobile() ?{width:'14%', margin: 'auto', float: 'left'}: {width: '15%', margin: 'auto', float: 'left'}}>Total (Rs) </div>
+								<div className="value heading" style={isMobile() ?{width:'68%', margin: 'auto', float: 'left'}: {width: '67%', margin: 'auto', float: 'left'}}>&nbsp;</div>
+								<div style={isMobile() ?{width:'12%', margin: 'auto', float: 'left'}:{width:'10%', margin: 'auto', float: 'left'}}>{!!invoiceData.lineItemDetails && invoiceData.lineItemDetails.totalAmount}</div>
                             </div>
 						</div>
                     </div>
