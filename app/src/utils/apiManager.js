@@ -37,7 +37,8 @@ const getClient = (baseUrl = null) => {
     error => {
       if(error.message==='Network Error')
       {
-         history.push('/internet-error')
+        if(window.location.pathname!=='/internet-error')
+          history.push('/internet-error')
       }
       if (error.response.status >= 500) {
         Raven.captureException(error);

@@ -110,6 +110,10 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
+    if(window.location.pathname==='/internet-error')
+    {
+      history.goBack();
+    }
     
   }
   componentWillMount(){
