@@ -24,8 +24,6 @@ class DelContainer extends React.Component {
     }
   }
   componentDidMount() {
-
-    console.log("saaaaaaa",this.props.skuData);
     if(this.props.skuData.type==="ItemBean")
     {
       this.callDeliveryDateAPI(this.props.skuData.partNumber);
@@ -33,7 +31,6 @@ class DelContainer extends React.Component {
     else if(this.props.skuData.type==="BundleBean" || this.props.skuData.type==="KitBean")
     {
       apiManager.get(pdpApi2 + this.props.skuData.partNumber).then(response => {
-        console.log("alaaaaa",response.data)
         let skuId =this.props.skuData.partNumber; 
         if(response.data.data.type==='kit')
         {
@@ -107,16 +104,15 @@ class DelContainer extends React.Component {
       const dataParams = this.getPincodeApiParams(resolvedSkuData, type);
 
       apiManager.get(callPincodeApi + pincodeVal, dataParams).then(response => {
-        console.log("deliveryData",response.data.data)
         this.setState({
           isLoading: false,
-          deliveryData: 'Found',
+          deliveryData: response.data.data.deliveryDateAndTime || 'NA',
         });
       }).catch(error => {
   
         this.setState({
           isLoading: false,
-          deliveryData:'Error'
+          deliveryData:'NA'
         });
       });
 
