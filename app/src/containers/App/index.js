@@ -72,9 +72,12 @@ import InternetError from '../HomePageContainer/InternetError';
 import Maintenance from '../HomePageContainer/Maintenance';
 import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
+import ReactSnackBar from "../HomePageContainer/snackbar/index";
+import MWebLogo from '../../components/SVGs/mWebLogo';
 
 const userAgent = window.navigator.userAgent.toLowerCase();
 const isIPad = /ipad/.test(userAgent);
+
 
 // import  {createBrowserHistory} from 'history';
 // export const history =createBrowserHistory();
@@ -92,9 +95,11 @@ export default class App extends React.Component {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
       showNewsLetter: false,
-	  prevPath: '',
-	  currPath: '',
-      loading: true
+	    prevPath: '',
+	    currPath: '',
+      loading: true,
+      internetErrorMessage:"",
+      showSnackBar:false
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
@@ -103,7 +108,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resize);
-	window.addEventListener('load', this.handleLoad);
+    window.addEventListener('load', this.handleLoad);
+    window.addEventListener('online', this.onOnline.bind(this));
+	  window.addEventListener('offline', this.onOffline.bind(this));
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     this.cookiePolicyPopup();
@@ -116,6 +123,37 @@ export default class App extends React.Component {
     }
     
   }
+
+  onOnline()
+  {
+    
+      this.setState({
+        internetErrorMessage:"Internet connected",
+        showSnackBar:true});
+        
+
+        setTimeout(() => {
+          this.setState({
+            internetErrorMessage:"",
+            showSnackBar:false});
+        }, 3000);
+        
+  }
+  onOffline()
+  {
+  
+    this.setState({
+      internetErrorMessage:"Internet disconnected",
+      showSnackBar:true});
+
+      setTimeout(() => {
+        this.setState({
+          internetErrorMessage:"",
+          showSnackBar:false});
+      }, 3000);
+      
+  }
+
   componentWillMount(){
     if(isMobile() || isTab() || isIPad){
       $('html, body').animate({ scrollTop: 0 }, 'fast');
@@ -387,7 +425,9 @@ export default class App extends React.Component {
         </LastLocationProvider>
 		</div>
 		<FooterContainer /> 
-        
+    <ReactSnackBar Icon={<span><MWebLogo width="24" height="24" /></span>} Show={this.state.showSnackBar}>
+          {this.state.internetErrorMessage}
+    </ReactSnackBar>
         
       </div>
     );

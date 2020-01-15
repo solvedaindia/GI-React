@@ -1,4 +1,5 @@
 import React from 'react'
+import history from '../../utils/history'	
 import ContentEspot from '../../components/Primitives/staticContent';
 
 class InternetError extends React.Component
@@ -9,11 +10,24 @@ class InternetError extends React.Component
       <ContentEspot espotName = { 'GI_ERROR_404_IMG' } />
       );
   }
-  
-  componentDidMount() {
-  
+
+  onlineIndicator() {
+    // Show a different icon based on offline/online
+    if(window.location.pathname==='/internet-error')
+    {
+      history.goBack();
+    }
   }
 
+  
+  componentDidMount() {
+   // window.addEventListener('online', this.onlineIndicator.bind(this));
+   // window.addEventListener('offline', () => console.log('came offline'));
+  }
+  componentWillUnmount()
+  {
+    window.removeEventListener('online', this.onlineIndicator.bind(this));
+  }
   render() {
     return (<div className="pageNotfound">
     <div className="innerContainer">
