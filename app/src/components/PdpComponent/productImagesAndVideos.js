@@ -207,10 +207,14 @@ class productImagesAndVideos extends React.Component {
 
   renderZoomButtons = props => { 
     if (true) {
-      return  <div className="zoominout" id="zoomdiv">
+      return  <>
+      <div className="cancelWrapper">
+        <button onClick={this.handleClick.bind(this)} className="closeBtn" id='ali_ahmad'><img className="imgCross" src={Zoomin} alt="Zoomin"/></button>
+      </div>
+      <div className="zoominout" id="zoomdiv">
       <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
       <button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
-      </div>;
+      </div></>;
     } else {
       return;
     }
@@ -265,7 +269,7 @@ class productImagesAndVideos extends React.Component {
       thumbnailsContainer[0].classList.remove('active');
       thumbnailsContainer[0].classList.add('dataNotActive');
 
-      if(!isMobile)
+      if(!isMobile())
       {
         const elements = document.getElementsByClassName("image-gallery-image");
         for (let i = 0; i < elements.length; i++) {

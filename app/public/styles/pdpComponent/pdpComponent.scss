@@ -1512,11 +1512,33 @@
         }
     }
 }
+.cancelWrapper{
+    width: 30px;
+    position: fixed;
+    right: 14px;
+    z-index: 9;
+    top: 14px;
+    display: none;
+    .closeBtn{
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        border: none;
+        
+        .imgCross{
+            width: 22px;
+            transform: rotate(45deg);
+        }
+    }
+}
 
 .fullscreen .zoominout {
 	display: none;
 }
 .image-gallery-content:not(.fullscreen) .zoominout {
+	display: none;
+}
+.image-gallery-content:not(.fullscreen) .cancelWrapper {
 	display: none;
 }
 
@@ -1540,8 +1562,7 @@
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
 @media (min-width: 1281px) {
-   
-    //CSS
+   .cancelWrapper{display: none;}
     
   }
   
@@ -1960,6 +1981,7 @@
                         .image-gallery-thumbnails-wrapper{
                             .image-gallery-thumbnails{
                                 margin: -90px auto 20px auto;
+                                // margin: -80px auto 20px auto;
                                 .image-gallery-thumbnails-container{
                                     .image-gallery-thumbnail{
                                         border-radius:0;
@@ -2472,7 +2494,11 @@
     }
   }
 
-
+  @media screen and (max-width: 768px){
+    .cancelWrapper{
+        display:block;
+    }
+  }
   /* 
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
   */
@@ -2480,10 +2506,9 @@
     .galleryArea{
         .pdpDetails {padding: 15px 15px 0 15px;}      
     }
-    //CSS
     
   }
-  
+
   
   /* 
     #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
