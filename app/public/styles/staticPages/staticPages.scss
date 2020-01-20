@@ -587,8 +587,8 @@
 					.imgLink{
 						img{
 							margin-left: 0px;
-							-webkit-transition: margin-left 0.7s;
-    						transition: margin-left 0.7s;
+							-webkit-transition: margin-left 0.7s ease-in-out .5s;
+    						transition: margin-left 0.7s ease-in-out .5s;
 						}
 					}
 				}
