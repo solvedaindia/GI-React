@@ -15,8 +15,10 @@ class ThemeData extends React.Component {
             thumbItemWidth:0,
             currentLeftCoords:0,
             currentBotCoords:0, 
+            show: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.toggleBox = this.toggleBox.bind(this);
     }
 
 
@@ -70,6 +72,13 @@ class ThemeData extends React.Component {
         }
       }
 
+    toggleBox() {
+        const { show } = this.state;
+        this.setState({
+            show: !show,
+        });
+    }
+
     render(){
         const { itemDetail } = this.props;
         const [{ x, y }] = itemDetail.coords;
@@ -87,6 +96,14 @@ class ThemeData extends React.Component {
 		var height = 100
 		if(isMobile())
 		{
+            var style = {};
+            const { show } = this.state;
+            if (show){
+                style.display = 'block';
+            }else{
+                style.display = 'none';
+            }
+
 			if((Number(widthContainer)-clickX) < 200)
 			{
 				leftX = (Number(widthContainer)  - 200);
@@ -111,13 +128,16 @@ class ThemeData extends React.Component {
 				topY = clickY - 130;
 			}
 		}
-		
+        
+
+        const hRef=React.createRef();
         return(
             
             <div className='details'
-                onClick={this.props.closePopUp}
+                //onClick={this.props.closePopUp}
                 style={{top:`${topY}px`, left:`${leftX}px`, width:`${width}px`, height:`${height}px` }}
             >
+                {isMobile()? <div className="tooltiptext" style={style}>{itemDetail.productName}</div> : ''}
                 <figure className='tnImg'>
                     <img
                         className='img'
@@ -126,7 +146,9 @@ class ThemeData extends React.Component {
                     />
                 </figure>
                 <div className='prodDetails'>
-                    <h2 className='prodNAme' data-toggle="tooltip" title={itemDetail.productName}>{itemDetail.productName} </h2>
+                    <h2 ref={hRef} className='prodNAme' id="tooltip" title={itemDetail.productName} onClick={this.toggleBox} >{itemDetail.productName}
+                    
+                     </h2>
                     <p className='price'>₹{formatPrice(itemDetail.offerPrice)}</p>
                     <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>
