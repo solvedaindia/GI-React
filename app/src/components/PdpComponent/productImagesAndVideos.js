@@ -166,12 +166,12 @@ class productImagesAndVideos extends React.Component {
           this.setState({isZoomScreen:true});
           const elements = document.getElementsByClassName("image-gallery-image");
           for (let i = 0; i < elements.length && !isMobile(); i++) {
-            elements[i].children[0].style.position="absolute"
-            elements[i].children[0].style.margin="auto"
-            elements[i].children[0].style.left="-100%"
-            elements[i].children[0].style.right="-100%"
-            elements[i].children[0].style.top="-100%"
-            elements[i].children[0].style.bottom="-100%"
+            // elements[i].children[0].style.position="absolute"
+            // elements[i].children[0].style.margin="auto"
+            // elements[i].children[0].style.left="-100%"
+            // elements[i].children[0].style.right="-100%"
+            // elements[i].children[0].style.top="-100%"
+            // elements[i].children[0].style.bottom="-100%"
 
             // elements[i].children[0].style.position= "fixed";
             // elements[i].children[0].style.top= 0;
@@ -228,12 +228,13 @@ class productImagesAndVideos extends React.Component {
         const elements = document.getElementsByClassName("image-gallery-image");
         for (let i = 0; i < elements.length; i++) {
           
-          elements[i].children[0].style.position="absolute"
-          elements[i].children[0].style.margin="auto"
-          elements[i].children[0].style.left="-100%"
-          elements[i].children[0].style.right="-100%"
-          elements[i].children[0].style.top="-100%"
-          elements[i].children[0].style.bottom="-100%"
+          // elements[i].children[0].style.position="absolute"
+          // elements[i].children[0].style.margin="auto"
+          // elements[i].children[0].style.left="-100%"
+          // elements[i].children[0].style.right="-100%"
+          // elements[i].children[0].style.top="-100%"
+          // elements[i].children[0].style.bottom="-100%"
+
           // elements[i].children[0].style.position= "fixed";
           // elements[i].children[0].style.top= 0;
           // elements[i].children[0].style.bottom= 0;
@@ -273,12 +274,13 @@ class productImagesAndVideos extends React.Component {
       {
         const elements = document.getElementsByClassName("image-gallery-image");
         for (let i = 0; i < elements.length; i++) {
-         elements[i].children[0].style.position="absolute"
-          elements[i].children[0].style.margin="auto"
-          elements[i].children[0].style.left="-100%"
-          elements[i].children[0].style.right="-100%"
-          elements[i].children[0].style.top="-100%"
-          elements[i].children[0].style.bottom="-100%"
+          // elements[i].children[0].style.position="absolute"
+          // elements[i].children[0].style.margin="auto"
+          // elements[i].children[0].style.left="-100%"
+          // elements[i].children[0].style.right="-100%"
+          // elements[i].children[0].style.top="-100%"
+          // elements[i].children[0].style.bottom="-100%"
+
           // elements[i].children[0].style.position= "fixed";
           // elements[i].children[0].style.top= 0;
           // elements[i].children[0].style.bottom= 0;
@@ -290,7 +292,6 @@ class productImagesAndVideos extends React.Component {
           // elements[i].children[0].style.overflow= "auto";
         }
       }
-
     } else {
       this.isZoomScreen = false;
       thumbnailsContainer[0].classList.remove('dataNotActive');
