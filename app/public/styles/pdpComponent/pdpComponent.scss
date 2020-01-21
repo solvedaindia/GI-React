@@ -1829,8 +1829,99 @@
   /* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
   */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    
+  @media (min-width: 993px) and (max-width: 1024px) {
+    .galleryArea{
+        .GalleryBox{
+            position: relative;
+            z-index: 99;
+            .gallaryWrapper{
+                .image-gallery{
+                    .image-gallery-content{
+                        .image-gallery-thumbnails-wrapper{
+                            .image-gallery-thumbnails{
+                                position: relative;
+                                .image-gallery-thumbnails-container{
+                                    .image-gallery-thumbnail{
+                                        width: 5px;
+                                        height: 5px;
+                                        border-radius: 100%;
+                                        background: $lightGrey;
+                                        border: 0px;
+                                        &.active{
+                                            background: $colorwhite;
+                                        }
+                                        .image-gallery-thumbnail-inner{
+                                            display: none;
+                                        }
+                                    }
+                                    &.dataNotActive{
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+
+                    &.fullscreen{
+                        background: $colorwhite;             
+                        .image-gallery-slide-wrapper{
+                            .cancelWrapper{
+                                display:block;
+                            }
+                            .image-gallery-left-nav{
+                                right: 0px;
+                                left: initial;
+                            }
+                            .image-gallery-right-nav{
+                                left: 0px;
+                                right: initial;
+                            }
+                            .image-gallery-swipe{
+                                .image-gallery-slides{
+                                    background: $colorwhite;
+                                    .image-gallery-slide{
+                                        background: $colorwhite;
+                                        .image-gallery-image{
+                                            align-items: center;
+                                            justify-items: center;
+                                            display: grid;
+                                            background-color:$colorwhite;
+                                            img{
+                                                min-width: initial;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .image-gallery-thumbnails-wrapper{
+                            position: fixed;
+                            bottom: 40px;
+                            width: 100%;
+                            z-index: 991;
+                            .image-gallery-thumbnails{
+                                .image-gallery-thumbnails-container{
+                                    .image-gallery-thumbnail{
+                                        border-radius:0;
+                                        width: 75px;
+                                        height: auto;
+                                        .image-gallery-thumbnail-inner{
+                                            display: block;
+                                        }
+
+                                        &.active{
+                                            background: none;
+                                            border: 1px solid $colorblack;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            } 
+        }
+    } 
   }
   
 
@@ -1923,13 +2014,15 @@
             padding: 0px;
         } 
         .GalleryBox{
+            position: relative;
+            z-index: 99;
             .gallaryWrapper{
                 .image-gallery{
                     .image-gallery-content{
                         .image-gallery-thumbnails-wrapper{
                             .image-gallery-thumbnails{
                                 position: relative;
-                                margin: -20px auto 20px auto;
+                                //margin: -20px auto 20px auto;
                                 .image-gallery-thumbnails-container{
                                     .image-gallery-thumbnail{
                                         width: 5px;
@@ -1954,6 +2047,9 @@
                     &.fullscreen{
                         background: $colorwhite;
                         .image-gallery-slide-wrapper{
+                            .cancelWrapper{
+                                display:block;
+                            }
                             .image-gallery-left-nav{
                                 right: 0px;
                                 left: initial;
@@ -1979,9 +2075,12 @@
                             }
                         }
                         .image-gallery-thumbnails-wrapper{
+                            position: fixed;
+                            bottom: 10px;
+                            width: 100%;
+                            z-index: 91;
                             .image-gallery-thumbnails{
-                                margin: -90px auto 20px auto;
-                                // margin: -80px auto 20px auto;
+                                //margin: -90px auto 20px auto;
                                 .image-gallery-thumbnails-container{
                                     .image-gallery-thumbnail{
                                         border-radius:0;
@@ -2494,11 +2593,6 @@
     }
   }
 
-  @media screen and (max-width: 768px){
-    .cancelWrapper{
-        display:block;
-    }
-  }
   /* 
     #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
   */
