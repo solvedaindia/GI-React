@@ -37,8 +37,7 @@
       border: none;
     }
     
-    // z-index: 999999999;
-    z-index: 88;
+    //z-index: 88;
     &__list {
       transition: max-height 0.2s ease-out;
       max-height: 0;
@@ -257,6 +256,7 @@ background-color: #ccc;
           position: absolute;
           width: 440px;
           top: 48px;
+          z-index: 991;
         }
         .link{
          display: block;

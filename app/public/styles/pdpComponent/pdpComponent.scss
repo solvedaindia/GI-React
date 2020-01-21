@@ -1832,8 +1832,6 @@
   @media (min-width: 993px) and (max-width: 1024px) {
     .galleryArea{
         .GalleryBox{
-            position: relative;
-            z-index: 99;
             .gallaryWrapper{
                 .image-gallery{
                     .image-gallery-content{
@@ -2014,8 +2012,6 @@
             padding: 0px;
         } 
         .GalleryBox{
-            position: relative;
-            z-index: 99;
             .gallaryWrapper{
                 .image-gallery{
                     .image-gallery-content{
