@@ -1837,7 +1837,12 @@
                     .image-gallery-content{
                     &.fullscreen{
                         background: $colorwhite;             
-                        .image-gallery-slide-wrapper{                            
+                        .image-gallery-slide-wrapper{ 
+                            .cancelWrapper{
+                                display:block;
+                                top: 35px;
+                                right: 30px;
+                            }                           
                             .image-gallery-swipe{
                                 .image-gallery-slides{
                                     background: $colorwhite;
