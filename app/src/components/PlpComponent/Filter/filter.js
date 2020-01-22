@@ -248,7 +248,8 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-
+    if(this.props.indexPro===0 && isMobile())
+      this.toggleDropdown(true);
     this.resolvePreSelectedFilters();
   }
 
@@ -289,7 +290,7 @@ class Filter extends React.Component {
     }
     this.setState({
       facetArr: filteredArr,
-      active: this.props.currentFacetPro === this.props.dataPro.facetName && this.props.isFromRWD ? !this.state.active : false
+      active: this.props.fetchCurrentFacetSelection() === this.props.dataPro.facetName && this.props.isFromRWD ? !this.state.active : false
     });
     const extFacetArr = filteredArr.map(
       item =>
@@ -351,6 +352,7 @@ class Filter extends React.Component {
 
       let colorStyle = {
         display: 'block',
+      // display:'inline-block',
       };
       let imgUrl = null;
       let colorRGBClass;
@@ -417,6 +419,11 @@ class Filter extends React.Component {
         </li>
       );
     });
+    if(isMobile)
+    {
+      const lastItem=(<li className="emptylist"></li>)
+      item.push(lastItem)
+    }
     this.setState({
       facetItem: item,
       isRWDFilterSelected: isRWDFacetSelecte,
@@ -449,12 +456,12 @@ class Filter extends React.Component {
             </div>
           </ul>}
 
-          {isMobile() && <div className='filter-data-list'><ul className={`dropdown_filter__list ${/* this.props.currentFacetPro === null &&  */this.props.indexPro === 0 ? 'dropdown_filter__list--active' : this.state.active ? 'dropdown_filter__list--active' : ''}`}>
+          {isMobile() && <div className='filter-data-list'><ul className={`dropdown_filter__list ${ this.props.fetchCurrentFacetSelection() === null &&  this.props.indexPro === 0 ? 'dropdown_filter__list--active' : this.state.active ? 'dropdown_filter__list--active' : ''}`}>
             {this.state.facetItem}
             {isMobile() && <><div className='clearfix'></div>
 
               <div className="filterbtnWrapper">
-                <button onClick={() => this.onCancelBtnClick()} className="dropdown_filter__cancelBtn btn" >Cancel</button>
+                <button onClick={() => this.onCancelBtnClick()} className="dropdown_filter__cancelBtn btn" style={{zIndex:9999999999}}>Cancel</button>
                 <button onClick={() => this.onApplyBtnClick()} className="dropdown_filter__applyBtn btn">Apply</button>
               </div></>}
           </ul></div>}

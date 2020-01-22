@@ -90,6 +90,8 @@ class StoreLocator extends React.Component {
 
     componentDidMount() 
 	{
+        window.scrollTo(0,0);
+       // alert(appCookie.get("storeName"))
         let pincodeVal =  appCookie.get('pincode');
         if (this.props.history.location.state) {
             if (this.props.history.location.state.storeName) {
@@ -98,6 +100,24 @@ class StoreLocator extends React.Component {
             } else {
                 this.getLatAndLong(appCookie.get('pincode'));
                 pincodeVal = appCookie.get('pincode');
+            }
+        }
+        else{
+            pincodeVal =appCookie.get('storeName');
+            if(pincodeVal!==null && pincodeVal!=='')
+            {
+                //this.getLatAndLong(appCookie.get('pincode'));
+                appCookie.set('storeName', '', 365 * 24 * 60 * 60 * 1000)
+                //this.props.history.location.state=({storeName:pincodeVal})
+                this.props.history.replace({ pathname: '/storelocator', state: {storeName:pincodeVal}});
+                return
+            }
+            else{
+               // this.getLatAndLong(appCookie.get('pincode'));
+                //pincodeVal = appCookie.get('pincode');
+                //this.props.history.location.state=({pincode:pincodeVal})
+                this.props.history.replace({ pathname: '/storelocator', state: {pincode:pincodeVal}});
+                return
             }
         }
 
@@ -109,11 +129,13 @@ class StoreLocator extends React.Component {
         fetch(ipDataApi).then(res => {
             return res.json()
         }).then(res => {
+            console.log("pincode","data fetched")
             this.setState({
                 currentLat: res.latitude,
                 currentLong: res.longitude,
             })
         }).catch(error => {
+            console.log("pincode","data error")
             this.setState({
                 currentLat: this.state.defaultLat,
                 currentLong: this.state.defaultLng,
@@ -122,6 +144,7 @@ class StoreLocator extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        window.scrollTo(0,0);
         let pincodeVal;
         if (this.props.history.location.state) {
             let storeNameInput = document.getElementById("city").value;

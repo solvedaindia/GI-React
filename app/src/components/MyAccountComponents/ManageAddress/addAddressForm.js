@@ -50,6 +50,37 @@ class AddAddressForm extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      inputText_name: nextProps.editAddressDataPro.name,
+      inputText_number: nextProps.editAddressDataPro.phoneNumber,
+      inputText_email: nextProps.editAddressDataPro.emailId,
+      inputText_pincode: nextProps.editAddressDataPro.pincode,
+      inputText_address: nextProps.editAddressDataPro.address,
+      inputText_city: nextProps.editAddressDataPro.city,
+      inputText_state: nextProps.editAddressDataPro.state,
+      isSetAsDefault: nextProps.editAddressDataPro.isDefault,
+
+      error_name: false,
+      error_number: false,
+      error_email: false,
+      error_pincode: false,
+      error_address: false,
+      error_city: false,
+      error_state: false,
+
+      errorMessage_name: '',
+      errorMessage_number: '',
+      errorMessage_email: '',
+      errorMessage_pincode: '',
+      errorMessaget_address: '',
+      errorMessage_city: '',
+      errorMessage_state: '',
+
+      isSaveBtnDisabled: false
+    });
+  }
+
   onSavebuttonClick(event) {
     if(event)
       event.preventDefault();
@@ -367,7 +398,7 @@ class AddAddressForm extends React.Component {
         <div className='col-md-6'>
           <div className='defaultOption'>
             <div className='input_box'>
-              <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" defaultChecked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+              <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" checked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
               <label className="lblCheck" htmlFor="checkbox"></label>
             </div>
             <label className='defaultlbl'>{DEFAULT_ADDRESS}</label>

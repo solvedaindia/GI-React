@@ -41,8 +41,7 @@
 }
 .registerEmailMobile{
     .modal-dialog{ 
-        max-width: 800px; 
-        width: 62%;       
+        max-width: 800px;       
         
         .close{
             top:20px;
@@ -323,20 +322,24 @@
 /* 
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
-@media (min-width: 1281px) {
-  
-    //CSS
-    
+@media (min-width: 1025px) {
+    .registerEmailMobile{
+        .modal-dialog{  
+            width: 62%;       
+          }
+    }
   }
   
 
   /* 
-    #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+    #Screen B/w 769px to 1024px, Device
   */
-  @media (min-width: 1025px) and (max-width: 1280px) {
-    
-    //CSS
-    
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .registerEmailMobile{
+        .modal-dialog{  
+            width: 75%;       
+          }
+    }
   }
   
     /* 

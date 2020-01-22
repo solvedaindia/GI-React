@@ -68,6 +68,7 @@ import Invoice from '../../components/MyAccountComponents/MyOrder/invoice';
 import paymentWait from '../../components/checkout/paymentWait';
 import Geocode from "react-geocode";
 import NotFound from '../HomePageContainer/notfound';
+import InternetError from '../HomePageContainer/InternetError';
 import Maintenance from '../HomePageContainer/Maintenance';
 import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
@@ -109,6 +110,7 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
+    
   }
   componentWillMount(){
     if(isMobile() || isTab() || isIPad){
@@ -364,6 +366,7 @@ export default class App extends React.Component {
           <Route path="/storelocator" component={StoreLocator} />
           <Route path="/direction/:originLat/:originLng/:destinationLat/:destinationLng" component={Directions} />
           <Route path="/termsconditions" component={TermsConditions} />
+          <Route path="/furniture" component={CookiePolicy} />
           <Route path="/cookie-policy" component={CookiePolicy} />
           <Route path="/inspiration" component={Inspiration} />
           <Route path="/shipping" component={Shipping} />
@@ -373,6 +376,7 @@ export default class App extends React.Component {
           <Route path="/support" component={HelpSupport} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
+          <Route path="/internet-error" component={InternetError} />
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
         </Switch>

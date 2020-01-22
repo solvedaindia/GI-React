@@ -68,6 +68,8 @@ class addToCartComponent extends React.Component {
         this.deliveryTime = 'Delivery by '+props.deliveryDateAndTime;
       }
     }
+    if(props.inventoryStatus === 'unavailable')
+      this.deliveryTime=''
     return <div className="soldbyDealers">{this.deliveryTime}</div>;
   }
 

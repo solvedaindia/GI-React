@@ -271,8 +271,8 @@ export class Step2Component extends React.Component {
         resolve(data);
       }).catch(error => {
         const errorData = error.response.data;
-        const errorMessage = errorData.error.error_message;
-
+        // const errorMessage = errorData.error.error_message;
+        const errorMessage = VALID_PINCODE;
         if (errorField === 'pin') {
           this.setState({
             inputText_city: '',
@@ -280,6 +280,7 @@ export class Step2Component extends React.Component {
             error_pincode: true,
             errorMessage_pincode: errorMessage,
           })
+          reject('Error');
         }
         else {
           this.setState({
@@ -288,6 +289,7 @@ export class Step2Component extends React.Component {
             berror_pincode: true,
             berrorMessage_pincode: errorMessage,
           })
+          reject('Error');
         }
 
 
@@ -749,6 +751,13 @@ export class Step2Component extends React.Component {
         error_gst: false
       });
 
+      let bPincodeValid = true;
+
+      try {
+        await this.callPinApi(this.state.binputText_pincode, 'bpin');
+      } catch (err) {
+        bPincodeValid = false;
+      }
 
       if (!validateState(this.state.binputText_state)) {
         document.getElementById('bstate').focus();
@@ -786,6 +795,15 @@ export class Step2Component extends React.Component {
         validateBillingAddress = false
         //return;
       }
+      if (!validatePindcode(this.state.binputText_pincode) || !bPincodeValid) {
+        document.getElementById('bpin').focus();
+        this.setState({
+          berror_pincode: true,
+          berrorMessage_pincode: !this.state.binputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
+        });
+        validateBillingAddress = false
+        //return;
+      }
       if (!validateMobileNo(this.state.binputText_number)) {
         document.getElementById('bphone').focus();
         this.setState({
@@ -804,21 +822,13 @@ export class Step2Component extends React.Component {
         validateBillingAddress = false
         //return;
       }
-      if (!validatePindcode(this.state.binputText_pincode)) {
-        document.getElementById('bpin').focus();
-        this.setState({
-          berror_pincode: true,
-          berrorMessage_pincode: !this.state.binputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
-        });
-        validateBillingAddress = false
-        //return;
-      }
-      else {
-        try {
-          await this.callPinApi(this.state.binputText_pincode, 'bpin');
-        } catch (err) {
-        }
-      }
+     
+      // else {
+      //   try {
+      //     await this.callPinApi(this.state.binputText_pincode, 'bpin');
+      //   } catch (err) {
+      //   }
+      // }
       
     }
 
@@ -875,10 +885,14 @@ export class Step2Component extends React.Component {
       focus_inputText_name: false,
 
     });
-    
+    let pincodeValid = true;
 
     this.state.inputText_address = document.getElementById("address").value;
-
+    try {
+      await this.callPinApi(this.state.inputText_pincode, 'pin');
+    } catch (err) {
+      pincodeValid = false;
+    }
     if (!validateState(this.state.inputText_state)) {
       document.getElementById('state').focus();
       this.setState({
@@ -915,6 +929,16 @@ export class Step2Component extends React.Component {
       validateBillingAddress = false
       //return;
     }
+    
+    if (!validatePindcode(this.state.inputText_pincode) || !pincodeValid) {
+      document.getElementById('pin').focus();
+      this.setState({
+        error_pincode: true,
+        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
+      });
+      validateBillingAddress = false
+      //return;
+    }
     if (!validateMobileNo(this.state.phone)) {
       document.getElementById('phone').focus();
       this.setState({
@@ -933,21 +957,12 @@ export class Step2Component extends React.Component {
       validateBillingAddress = false
       // return;
     }
-    if (!validatePindcode(this.state.inputText_pincode)) {
-      document.getElementById('pin').focus();
-      this.setState({
-        error_pincode: true,
-        errorMessage_pincode: !this.state.inputText_pincode ? `${REQUIRED_FIELD}` : `${VALID_PINCODE}`,
-      });
-      validateBillingAddress = false
-      //return;
-    }
-    else {
-      try {
-        await this.callPinApi(this.state.inputText_pincode, 'pin');
-      } catch (err) {
-      }
-    }
+    // else {
+    //   try {
+    //     await this.callPinApi(this.state.inputText_pincode, 'pin');
+    //   } catch (err) {
+    //   }
+    // }
     
 
     if (!validateBillingAddress) {
@@ -1198,7 +1213,7 @@ export class Step2Component extends React.Component {
 
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} checked={this.state.defaultAddress} />
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 
@@ -1215,14 +1230,14 @@ export class Step2Component extends React.Component {
 
 
 
-
+              {console.log("this.state.same_bill",this.state.same_bill)}
               {!this.state.new_add || isMobile() ?
                 <div>
                   <div className="row">
                     <div className="col-md-12">
                       <div className='bill-address customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" defaultChecked={this.state.same_bill} onChange={this.handleSameBill} />
+                          <input className='checkbox inputCheck' id="checkbox" type="checkbox" name="billing" checked={this.state.same_bill} onChange={this.handleSameBill} />
                           <label className="lblCheck" htmlFor="checkbox"></label>
                         </div>
                         <label className='label-billing defaultlbl' htmlFor="billing">Billing address is the same as delivery address</label>
@@ -1315,7 +1330,7 @@ export class Step2Component extends React.Component {
                     <div className="col-md-12">
                       <div className='havePassword customCheckbox clearfix'>
                         <div className='input_box'>
-                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} />
+                          <input className='checkbox inputCheck' id="checkboxBill" type="checkbox" name="billing" onChange={this.handleDefaultAddress} checked={this.state.defaultAddress}/>
                           <label className="lblCheck" htmlFor="checkboxBill"></label>
                         </div>
 

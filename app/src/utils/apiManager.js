@@ -4,8 +4,10 @@ import {
   accessToken,
   accessTokenCookie,
 } from '../../public/constants/constants';
+import history from '../utils/history'	
 import { getCookie } from './utilityManager';
 import { resetTheCookiesAndData } from './initialManager';
+import { useHistory } from "react-router-dom";
 const isTokenExpire = false;
 
 const getClient = (baseUrl = null) => {
@@ -33,6 +35,10 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     error => {
+      if(error.message==='Network Error')
+      {
+         history.push('/internet-error')
+      }
       if (error.response.status >= 500) {
         Raven.captureException(error);
       } else if (error.response.data.error.error_key === 'token_expired') {

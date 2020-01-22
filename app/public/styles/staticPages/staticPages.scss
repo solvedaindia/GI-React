@@ -147,9 +147,13 @@
     border: 0;
 	}
 	
-	.GI_CONTACT_US_CUSTOMER_CARE  img {
-		width:25px!important;
-		height:25px!important;
+	.GI_CONTACT_US_CUSTOMER_CARE{
+		border-top: 1px solid #979797;
+		margin-top: 20px;
+		 img {
+			width:25px!important;
+			height:25px!important;
+		}
 	}
 
 	.GI_KITCHEN_LAYOUTS {
@@ -272,7 +276,26 @@
 			}
 		}
 	}
+@media (max-width: 1023px) {
+	.ProcessNumber {
+		padding-right: 61px;
+		font-size: 19px;
+	}
+}
 
+@media (min-width: 1024px) {
+	.ProcessNumber {
+		padding-right: 33px;
+		font-size: 19px;
+	}
+}
+
+@media (min-width: 1366px) {
+	.ProcessNumber {
+		padding-right: 44px;
+		font-size: 19px;
+	}
+}
 @media (max-width: 1024px) 
 {	
 	.sliderHeading {
@@ -322,12 +345,12 @@
 		margin-bottom: 0;
 		list-style: none;
 		float: left;
-		width: 100%;
+		width: 20%;
 	}
 	
 	.staticpage #v-pills-tabContent {
 		 float:left;
-		 width:100%;
+		 width:80%;
 	}
 	
 	.staticpage .nav .col-sm-2{
@@ -364,10 +387,10 @@
 		font-weight:600px;
 	}
 	
-	.ProcessNumber {
-		padding-right: 61px;
-		font-size: 19px;
-	}
+	// .ProcessNumber {
+	// 	padding-right: 61px;
+	// 	font-size: 19px;
+	// }
 	#careers{
 		padding-top: 30px;
 	}
@@ -465,9 +488,6 @@
 			text-align: left;
 			padding-right: 27px;
 		}
-		.slick-slide {
-			margin-right: 8px;
-		} 
 		.sliderHeading {
 			text-align: left;
 		}		
@@ -552,7 +572,33 @@
 			text-align: left;
 		}
 		.slick-slide {
-			margin-right: 10px;
+			.what-goes-slider{
+				margin-right: 10px;
+				.imgLink{
+					img{
+						width: 80%;
+						margin-left: -19%;
+					}
+				}
+			}
+
+			&.slick-current{
+				.what-goes-slider{
+					.imgLink{
+						img{
+							margin-left: 0px;
+							-webkit-transition: margin-left 0.7s;
+    						transition: margin-left 0.7s;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.termsContainer {
+		.main-heading {
+			padding-top: 0px;
 		}
 	}
 	

@@ -2,6 +2,7 @@ import React from 'react';
 //Redux Imports
 import { connect } from 'react-redux';
 import injectSaga from '../../utils/injectSaga';
+import appCookie from '../../utils/cookie';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
@@ -35,6 +36,7 @@ class SubCategoriesArray extends React.Component {
 
 
   onLinkNavigation = () => {
+    appCookie.set('compareProductTemp', '', 365 *24 *60 *60 *1000);
     this.props.plpReduxStateReset();
     this.props.onCloseMenu();
     // this.setState({menuHidden:false});
