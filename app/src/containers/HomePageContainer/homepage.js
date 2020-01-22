@@ -46,6 +46,10 @@ export class HomapegeLayout extends React.Component {
 	componentDidMount() {
 		this.getPageLayout();
 	}
+	componentWillUnmount()
+	{
+		appCookie.set('isCookiePolicy', 'false', 365 * 24 * 60 * 60 * 1000);
+	}
 
 	/* 	hideCookiePopup() {
 			appCookie.set('isCookiePolicy', false, 365 * 24 * 60 * 60 * 1000);
