@@ -1835,46 +1835,9 @@
             .gallaryWrapper{
                 .image-gallery{
                     .image-gallery-content{
-                        .image-gallery-thumbnails-wrapper{
-                            .image-gallery-thumbnails{
-                                display: none;
-                                position: relative;
-                                .image-gallery-thumbnails-container{
-                                    .image-gallery-thumbnail{
-                                        width: 5px;
-                                        height: 5px;
-                                        border-radius: 100%;
-                                        background: $lightGrey;
-                                        border: 0px;
-                                        &.active{
-                                            background: $colorwhite;
-                                        }
-                                        .image-gallery-thumbnail-inner{
-                                            display: none;
-                                        }
-                                    }
-                                    &.dataNotActive{
-                                        display: block;
-                                    }
-                                }
-                            }
-                        }
-
                     &.fullscreen{
                         background: $colorwhite;             
-                        .image-gallery-slide-wrapper{
-                            .cancelWrapper{
-                                display:block;
-                                top:45px;
-                            }
-                            .image-gallery-left-nav{
-                                right: 0px;
-                                left: initial;
-                            }
-                            .image-gallery-right-nav{
-                                left: 0px;
-                                right: initial;
-                            }
+                        .image-gallery-slide-wrapper{                            
                             .image-gallery-swipe{
                                 .image-gallery-slides{
                                     background: $colorwhite;
@@ -2020,7 +1983,7 @@
                         .image-gallery-thumbnails-wrapper{
                             .image-gallery-thumbnails{
                                 position: relative;
-                                //margin: -20px auto 20px auto;
+                                margin: -20px auto 20px auto;
                                 .image-gallery-thumbnails-container{
                                     .image-gallery-thumbnail{
                                         width: 5px;
