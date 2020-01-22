@@ -67,6 +67,7 @@ export class Step2Component extends React.Component {
       phone: '',
       email: '',
       same_bill: true,
+      last_same_bill:true,
       step: 1,
       selected_add: 0,
       showGift: false,
@@ -231,6 +232,8 @@ export class Step2Component extends React.Component {
     this.setState({
       saved_add: null,
       new_add: 'active_add',
+      last_same_bill :this.state.same_bill,
+      same_bill :true
     })
   }
 
@@ -250,7 +253,8 @@ export class Step2Component extends React.Component {
     if (this.state.addressList) {
       this.setState({
         saved_add: 'active_add',
-        new_add: null
+        new_add: null,
+        same_bill:this.state.last_same_bill
       })
     }
   }
