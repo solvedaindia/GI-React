@@ -258,6 +258,9 @@
                 min-height: 100vh;
                 max-height: 100vh;               
                 overflow: hidden;
+                align-items: center;
+                justify-items: center;
+                display: grid;
                 img{
                     transition: all .5s;
                     -moz-transition: all .5s;
@@ -1840,7 +1843,7 @@
                         .image-gallery-slide-wrapper{ 
                             .cancelWrapper{
                                 display:block;
-                                top: 35px;
+                                top: 40px;
                                 right: 30px;
                             }                           
                             .image-gallery-swipe{
