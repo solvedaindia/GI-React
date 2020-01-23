@@ -20,6 +20,10 @@ class FooterLinkAccordian extends React.Component {
                     {item.text}
                     <span className="plusIcon">
                       <img src={require('../../../../public/images/plusIconWhite.svg')} alt='addMore'/>
+                     
+                    </span>
+                    <span className="minusIcon">
+                      <img src={require('../../../../public/images/minusImgIcon.svg')} alt='collapse show'/>
                     </span>
                   </h5>
                   <div id={"collapseOne"+index} className="panel-collapse collapse">
