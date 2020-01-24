@@ -96,7 +96,7 @@ class AddressItem extends React.Component {
                 </div>
               )}
               <ul className="myacAddressList">
-                <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
+                <li className="listitem" for="fullName" onClick={this.editBtnClicked.bind(this)}>
                   <img src={require('../../../../public/images/edit.svg')}  alt='Edit' />
                 </li>
                 <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
@@ -116,7 +116,7 @@ class AddressItem extends React.Component {
             <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
               {DELETE}
             </li>
-            <li className="listitem" onClick={this.editBtnClicked.bind(this)}>
+            <li className="listitem"  for="fullName" onClick={this.editBtnClicked.bind(this)}>
               {EDIT}
             </li>
             {this.props.addressData.isDefault ? null : (

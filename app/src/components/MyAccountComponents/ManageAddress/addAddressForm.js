@@ -27,6 +27,7 @@ class AddAddressForm extends React.Component {
       inputText_city: this.props.editAddressDataPro.city,
       inputText_state: this.props.editAddressDataPro.state,
       isSetAsDefault: this.props.editAddressDataPro.isDefault,
+      nickname:this.props.editAddressDataPro.nickname,
 
       error_name: false,
       error_number: false,
@@ -46,11 +47,52 @@ class AddAddressForm extends React.Component {
 
       isSaveBtnDisabled: false
     };
-
+    this.reference = React.createRef();
     this.handleInput = this.handleInput.bind(this);
+    this.changeAddressFrom=this.changeAddress.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
+
+
+  changeAddress(editAddressDataPro){
+    this.setState({
+      inputText_name: editAddressDataPro.name,
+      inputText_number: editAddressDataPro.phoneNumber,
+      inputText_email: editAddressDataPro.emailId,
+      inputText_pincode: editAddressDataPro.pincode,
+      inputText_address: editAddressDataPro.address,
+      inputText_city: editAddressDataPro.city,
+      inputText_state: editAddressDataPro.state,
+      isSetAsDefault: editAddressDataPro.isDefault,
+      nickname: editAddressDataPro.nickname,
+
+      error_name: false,
+      error_number: false,
+      error_email: false,
+      error_pincode: false,
+      error_address: false,
+      error_city: false,
+      error_state: false,
+
+      errorMessage_name: '',
+      errorMessage_number: '',
+      errorMessage_email: '',
+      errorMessage_pincode: '',
+      errorMessaget_address: '',
+      errorMessage_city: '',
+      errorMessage_state: '',
+
+      isSaveBtnDisabled: false
+    });
+     window.scrollTo(0, document.body.scrollHeight - 700);
+      if(this.reference.current)
+      {
+        this.reference.current.focus();
+        //this.reference.current.getInputDOMNode().focus(); 
+      }
+  }
+
+  componentWillReceiveProps1(nextProps){
     this.setState({
       inputText_name: nextProps.editAddressDataPro.name,
       inputText_number: nextProps.editAddressDataPro.phoneNumber,
@@ -79,6 +121,11 @@ class AddAddressForm extends React.Component {
 
       isSaveBtnDisabled: false
     });
+     window.scrollTo(0, document.body.scrollHeight - 700);
+      if(this.reference.current)
+      {
+        this.reference.current.getInputDOMNode().focus(); 
+      }
   }
 
   onSavebuttonClick(event) {
@@ -197,9 +244,10 @@ class AddAddressForm extends React.Component {
 
   addAddress() {
     let APIURL = addAddressAPI;
-    if (this.props.editAddressDataPro.nickName !== undefined) {
-      APIURL = updateAddressAPI + this.props.editAddressDataPro.nickName;
+    if (this.state.nickName !== undefined) {
+      APIURL = updateAddressAPI + this.state.nickName;
     }
+    
     this.setState({
       isSaveBtnDisabled: true
     })
@@ -211,7 +259,7 @@ class AddAddressForm extends React.Component {
       address: this.state.inputText_address,
       city: this.state.inputText_city,
       state: this.state.inputText_state,
-      default: String(this.state.isSetAsDefault),
+      default: String(document.getElementById("checkbox").checked),
     };
 
     apiManager
@@ -286,7 +334,7 @@ class AddAddressForm extends React.Component {
   }
 
   closeAddNewAddress() {
-    if (this.props.editAddressDataPro.nickName !== undefined) {
+    if (this.state.nickName !== undefined) {
       this.props.onCancel({
         name: '',
         phoneNumber: '',
@@ -314,6 +362,7 @@ class AddAddressForm extends React.Component {
   componentDidMount() {
     window.scrollTo(0, document.body.scrollHeight - 700);
   }
+  
 
   onKeyPress=(event)=>
   {
@@ -335,7 +384,7 @@ class AddAddressForm extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
+              <Input  ref1={this.reference}  onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
               {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
             </div>
           </div>

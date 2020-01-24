@@ -33,6 +33,7 @@ class ManageAddress extends React.Component {
         default: String(false),
       },
     };
+    this.reference=React.createRef();
   }
 
   componentDidMount() {
@@ -45,6 +46,8 @@ class ManageAddress extends React.Component {
         isAddAddress: true,
         editAddressData: editData,
       });
+    
+      this.reference.current.changeAddressFrom(editData)
     } else {
       this.setState({
         editAddressData: editData,
@@ -93,9 +96,11 @@ class ManageAddress extends React.Component {
         <div className="clearfix" />
         {this.state.isAddAddress ? (
           <AddAddressForm
+            ref={this.reference}
             onCancel={this.addNewAddressBtnClicked.bind(this)}
             onUpdateActivity={this.getAddressListAPI.bind(this)}
             editAddressDataPro={this.state.editAddressData}
+
           />
         ) : (
           <button

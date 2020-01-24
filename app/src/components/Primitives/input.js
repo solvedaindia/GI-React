@@ -20,7 +20,9 @@ const Input = props => (
       readOnly={props.readOnly}
       autoFocus={props.isAutoFocus}
       maxLength={props.maxLength}
+      ref={props.ref1}
       {...props}
+
     />
     {props.hideAnimation ? null : <label htmlFor={props.name} className="form-label">
       {props.title}
