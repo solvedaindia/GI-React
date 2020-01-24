@@ -80,7 +80,7 @@ class Invoice extends React.Component {
                         
 						<div className="value heading"  style={{width: '24%', float: 'left'}} >Invoice No</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.salesInvoiceNo}</div>
-						<div class="value" style="width: 4%;float: left;">&nbsp;</div>
+						<div className="value" style={{width: '4%',float: 'left'}}>&nbsp;</div>
 						{/* <div className="value heading"  style={{width: '24%', float: 'left'}} >CIN No</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div> */}
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Invoice Date</div>
@@ -90,7 +90,7 @@ class Invoice extends React.Component {
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.cinNO}</div>
 
 						{/* <div className="value" style={{width: '24%', float: 'left'}}>&nbsp;</div> */}
-						<div class="value" style="width: 4%;float: left;">&nbsp;</div>
+						<div className="value" style={{width: '4%',float: 'left'}}>&nbsp;</div>
                         <div className="value heading" style={{width: '24%', float: 'left'}}>Order Number</div>
 						<div className="value" style={{width: '24%', float: 'left'}}>{invoiceData.orderNo}</div>
 						</div>
