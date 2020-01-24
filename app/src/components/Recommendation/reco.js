@@ -71,7 +71,7 @@ class Recommendation extends React.Component {
                             <p className='data'>{recoData.description}</p>
                         </div>
                         <figure className='leftOne col-md-5' onMouseOver={this.handleData}>
-                            <Link className="link" to={routePath1}>
+                            <Link  className="link" to={routePath1} onClick={()=>window.scrollTo(0,0)}>
                                 <img src={recoData.recommendationArray[0].imagePath} className='recoImg' alt={recoData.recommendationArray[0].productName}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
@@ -91,7 +91,7 @@ class Recommendation extends React.Component {
                             </Link>
                         </figure>
                         <figure className='leftTwo col-md-12'>
-                            <Link className="link" to={routePath2}>
+                            <Link className="link" to={routePath2} onClick={()=>window.scrollTo(0,0)}>
                                 <img src={recoData.recommendationArray[1].imagePath} className='recoImg' alt={recoData.recommendationArray[1].productName}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
@@ -113,7 +113,7 @@ class Recommendation extends React.Component {
                     </div>
                     <div className='rightSide col-md-5'>
                         <figure className='rightThree col-md-12'>
-                            <Link className="link" to={routePath3}>
+                            <Link className="link" to={routePath3} onClick={()=>window.scrollTo(0,0)}>
                                 <img src={recoData.recommendationArray[2].imagePath}  className='recoImg' alt={recoData.recommendationArray[2].productName}/>
                                 <div className='prodDetails'>
                                 <div className='details'>

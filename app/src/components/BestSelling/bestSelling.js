@@ -104,12 +104,12 @@ class BestSeller extends React.Component {
               return (
                 <figure key={index} className="bsSlides">
                   
-                  <Link to={routePath}>
+                  <Link to={routePath} onClick={()=>window.scrollTo(0,0)}>
                     <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.productName} onClick={this.handleTitle(`${sellerItemData.pageTitle}`)}/>
                   </Link>
            
                   <figcaption className="bsDetails">
-                    <Link to={routePath}><h2 className="prodtitle">{sellerItemData.productName && sellerItemData.productName.length>productBestSellerTitleCharLimit ? trimTheSentence(sellerItemData.productName, productBestSellerTitleCharLimit):sellerItemData.productName}</h2></Link>
+                    <Link to={routePath} onClick={()=>window.scrollTo(0,0)}><h2 className="prodtitle">{sellerItemData.productName && sellerItemData.productName.length>productBestSellerTitleCharLimit ? trimTheSentence(sellerItemData.productName, productBestSellerTitleCharLimit):sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
 						{sellerItemData.actualPrice <= sellerItemData.offerPrice ? 
 							<span className="discPrice">
