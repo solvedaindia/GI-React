@@ -81,7 +81,7 @@ return (
 					<ConsultationForm />
 			  </div>
 		  </div>
-		  <ContentEspot espotName={ 'GI_KITCHEN_FAQ' } />
+		  <ContentEspot espotName={ 'GI_STEEL_KITCHEN_FAQ' } />
 		  <ExKitchens />
 		  <AboutSteelChefKitchen />
 		  {/* <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_INTERIOR_CHEF' } /> */}

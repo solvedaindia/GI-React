@@ -8,6 +8,36 @@
     -webkit-box-orient: vertical;
     padding-top: 15px;
 }
+#tooltip {
+    position: relative;
+  }
+  
+  .details .tooltiptext {
+    color: #fff;
+    position: absolute;
+    top: -12px;
+    background: #000;
+    display: block;    
+    line-height: 15px;
+    font-size: 10px;
+    padding: 2px 5px;
+  }
+  
+  #tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  #tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
 
 
  
