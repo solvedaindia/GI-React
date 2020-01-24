@@ -21,17 +21,22 @@ import {
 import { resolveTheWishlistData } from './utilityManager';
 
 export function registerGuestUser(callback) {
+  console.log("registerGuestUser","registerGuestUser")
   apiManager
     .post(guestLoginAPI, '')
     .then(response => {
+      
       const guestData = response.data.data;
       const guestUserID = guestData.userID;
       const guestToken = guestData.access_token;
-      document.cookie = `${accessTokenCookie}=${guestToken};path=/;expires=''`;
-      document.cookie = `userID=${guestUserID};path=/;expires=''`;
+     // document.cookie = `${accessTokenCookie}=${guestToken};path=/;expires=''`;
+    //  document.cookie = `userID=${guestUserID};path=/;expires=''`;
+    appCookie.set(accessTokenCookie, guestToken, 365 * 24 * 60 * 60 * 1000);
+    appCookie.set('userID', guestUserID, 365 * 24 * 60 * 60 * 1000);
 	  
       const json_str = JSON.stringify([]);
-      document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
+      //document.cookie = `${wishlistDataCookie}=${json_str};path=/;expires=''`;
+      appCookie.set(wishlistDataCookie, json_str, 365 * 24 * 60 * 60 * 1000);
       callback(guestToken);
     })
     .catch(error => {
