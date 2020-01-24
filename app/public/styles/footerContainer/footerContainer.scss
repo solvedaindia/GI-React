@@ -138,7 +138,7 @@
     }
   }
 
-  .plusIcon {
+  .plusIcon, .minusIcon {
     float: right;
     width: 24px;
     height: 24px;
@@ -146,11 +146,27 @@
     fill: #dcd9d9;
   }
 
-  .accor {
-    // margin: 10px;
-    // border: 1px solid #ddd;
-    // transition: 0.4s;
+  .footerlink_wrpper{
+    .accordion-toggle {
+      .plusIcon{
+        display: none;
+      }
+      .minusIcon{
+        display: block;
+        margin-right: 3px;
+        width: 20px;
+      }
+      &.collapsed{
+        .plusIcon{
+          display: block;
+        }
+        .minusIcon{
+          display: none;
+        }
+      }
+    }
   }
+  
   .head {
     background: transparent;
     padding: 10px 20px;

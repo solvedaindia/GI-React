@@ -163,6 +163,15 @@ class productImagesAndVideos extends React.Component {
       );
         if(this.state.isZoomScreen===false)
         {
+          const divElement = document.getElementsByClassName("image-gallery ");
+            if(divElement[0].requestFullscreen){
+              } else if (divElement[0].msRequestFullscreen) {
+              } else if (divElement[0].mozRequestFullScreen) {
+              } else if (divElement[0].webkitRequestFullscreen) {
+              } else {
+                divElement[0].style.zIndex=2147483001;
+            }
+
           this.setState({isZoomScreen:true});
           const elements = document.getElementsByClassName("image-gallery-image");
           for (let i = 0; i < elements.length && !isMobile(); i++) {
@@ -269,6 +278,8 @@ class productImagesAndVideos extends React.Component {
       this.isZoomScreen = true;
       thumbnailsContainer[0].classList.remove('active');
       thumbnailsContainer[0].classList.add('dataNotActive');
+      document.body.style.overflow ="hidden";
+      document.body.style.position ="fixed";
 
       if(!isMobile())
       {
@@ -302,7 +313,8 @@ class productImagesAndVideos extends React.Component {
         elements[i].children[0].style=null;
       }
     
-
+      document.body.style.overflow ="";
+      document.body.style.position ="";
     }
   }
 
@@ -342,6 +354,7 @@ class productImagesAndVideos extends React.Component {
           onScreenChange={this._onScreenChange.bind(this)}
           onSlide = {this._onSlide.bind(this)}
           autoPlay ={this.state.autoPlay}
+          useBrowserFullscreen={true}
         />
       </div>
     );
