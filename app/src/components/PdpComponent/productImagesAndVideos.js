@@ -17,7 +17,7 @@ class productImagesAndVideos extends React.Component {
       gallery: null,
       infinite: true,
       autoPlay : false,
-      isRTL: true,
+      isRTL: false,
       isZoomScreen:false,
     };
     this.isZoomScreen = false;
@@ -73,7 +73,7 @@ class productImagesAndVideos extends React.Component {
     	imageArray = imagesAndVideos.thumbnailImages;
     } else {
       	imageArray = imagesAndVideos.mainImages;
-	}
+	  }
 	
 	
 	imageArray.map((data, index) => {
@@ -165,14 +165,26 @@ class productImagesAndVideos extends React.Component {
         {
           this.setState({isZoomScreen:true});
           const elements = document.getElementsByClassName("image-gallery-image");
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].children[0].style.position="absolute"
-          elements[i].children[0].style.margin="auto"
-          elements[i].children[0].style.left="-100%"
-          elements[i].children[0].style.right="-100%"
-          elements[i].children[0].style.top="-100%"
-          elements[i].children[0].style.bottom="-100%"
-        }
+          for (let i = 0; i < elements.length && !isMobile(); i++) {
+            // elements[i].children[0].style.position="absolute"
+            // elements[i].children[0].style.margin="auto"
+            // elements[i].children[0].style.left="-100%"
+            // elements[i].children[0].style.right="-100%"
+            // elements[i].children[0].style.top="-100%"
+            // elements[i].children[0].style.bottom="-100%"
+
+            // elements[i].children[0].style.position= "fixed";
+            // elements[i].children[0].style.top= 0;
+            // elements[i].children[0].style.bottom= 0;
+            // elements[i].children[0].style.left= 0;
+            // elements[i].children[0].style.right= 0;
+            // elements[i].children[0].style.maxWidth= "100%";
+            // elements[i].children[0].style.maxHeight= "100%";
+            // elements[i].children[0].style.margin= "auto";
+            // elements[i].children[0].style.overflow= "auto";
+
+
+          }
         }
       // this.isZoomScreen = !this.isZoomScreen;
       btnSubmitTags[0].click();
@@ -195,10 +207,14 @@ class productImagesAndVideos extends React.Component {
 
   renderZoomButtons = props => { 
     if (true) {
-      return  <div className="zoominout" id="zoomdiv">
+      return  <>
+      <div className="cancelWrapper">
+        <button onClick={this.handleClick.bind(this)} className="closeBtn" id='ali_ahmad'><img className="imgCross" src={Zoomin} alt="Zoomin"/></button>
+      </div>
+      <div className="zoominout" id="zoomdiv">
       <button className="zoom zoomin" onClick={this.zoomin}><img src={Zoomin} alt="Zoomin"/></button>
       <button className="zoom" onClick={this.zoomout}><img src={Zoomout} alt="Zoomout"/></button>
-      </div>;
+      </div></>;
     } else {
       return;
     }
@@ -211,12 +227,23 @@ class productImagesAndVideos extends React.Component {
       {
         const elements = document.getElementsByClassName("image-gallery-image");
         for (let i = 0; i < elements.length; i++) {
-          elements[i].children[0].style.position="absolute"
-          elements[i].children[0].style.margin="auto"
-          elements[i].children[0].style.left="-100%"
-          elements[i].children[0].style.right="-100%"
-          elements[i].children[0].style.top="-100%"
-          elements[i].children[0].style.bottom="-100%"
+          
+          // elements[i].children[0].style.position="absolute"
+          // elements[i].children[0].style.margin="auto"
+          // elements[i].children[0].style.left="-100%"
+          // elements[i].children[0].style.right="-100%"
+          // elements[i].children[0].style.top="-100%"
+          // elements[i].children[0].style.bottom="-100%"
+
+          // elements[i].children[0].style.position= "fixed";
+          // elements[i].children[0].style.top= 0;
+          // elements[i].children[0].style.bottom= 0;
+          // elements[i].children[0].style.left= 0;
+          // elements[i].children[0].style.right= 0;
+          // elements[i].children[0].style.max_width= "100%";
+          // elements[i].children[0].style.max_height= "100%";
+          // elements[i].children[0].style.margin= "auto";
+          // elements[i].children[0].style.overflow= "auto";
         }
       }
       else{
@@ -243,19 +270,28 @@ class productImagesAndVideos extends React.Component {
       thumbnailsContainer[0].classList.remove('active');
       thumbnailsContainer[0].classList.add('dataNotActive');
 
-      if(!isMobile)
+      if(!isMobile())
       {
         const elements = document.getElementsByClassName("image-gallery-image");
         for (let i = 0; i < elements.length; i++) {
-          elements[i].children[0].style.position="absolute"
-          elements[i].children[0].style.margin="auto"
-          elements[i].children[0].style.left="-100%"
-          elements[i].children[0].style.right="-100%"
-          elements[i].children[0].style.top="-100%"
-          elements[i].children[0].style.bottom="-100%"
+          // elements[i].children[0].style.position="absolute"
+          // elements[i].children[0].style.margin="auto"
+          // elements[i].children[0].style.left="-100%"
+          // elements[i].children[0].style.right="-100%"
+          // elements[i].children[0].style.top="-100%"
+          // elements[i].children[0].style.bottom="-100%"
+
+          // elements[i].children[0].style.position= "fixed";
+          // elements[i].children[0].style.top= 0;
+          // elements[i].children[0].style.bottom= 0;
+          // elements[i].children[0].style.left= 0;
+          // elements[i].children[0].style.right= 0;
+          // elements[i].children[0].style.maxWidth= "100%";
+          // elements[i].children[0].style.maxHeight= "100%";
+          // elements[i].children[0].style.margin= "auto";
+          // elements[i].children[0].style.overflow= "auto";
         }
       }
-
     } else {
       this.isZoomScreen = false;
       thumbnailsContainer[0].classList.remove('dataNotActive');
