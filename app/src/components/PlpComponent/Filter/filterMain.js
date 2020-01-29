@@ -185,7 +185,10 @@ class FilterMain extends React.Component {
             if(isThere===true)
                 appliedFilltersArr.push(option);
               
-            
+            else 
+            {
+              this.clearTheSelectedFilterValue(option.value)
+            }
 
         
       })
@@ -210,6 +213,33 @@ class FilterMain extends React.Component {
   clearTheSelectedFilter(index) {
 
     var selectionFacetValue = this.state.appliedFilters[index].value;
+    var selectedFacetName;
+    var selectedFacetValuesArr = [];
+    for (const [key, value] of this.props.updatedFilter) {
+      var items = [];
+      var facetItems = []
+      value.map((option, i) => {
+        items.push(option.value);
+        facetItems.push(option);
+      })
+
+      if (items.includes(selectionFacetValue)) {
+        selectedFacetName = key;
+        items.filter(function (value, i, arr) {
+          if (value != selectionFacetValue) {
+            selectedFacetValuesArr.push(facetItems[i]);
+          }
+        });
+      }
+    }
+
+    this.props.onFilterUpdate(selectedFacetValuesArr, selectedFacetName)
+
+  }
+
+  clearTheSelectedFilterValue(selectionFacetValue) {
+
+    
     var selectedFacetName;
     var selectedFacetValuesArr = [];
     for (const [key, value] of this.props.updatedFilter) {
