@@ -972,6 +972,25 @@
       }
     }
   }
+
+  .dropdown-menu::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px $colorwhite;
+    -webkit-box-shadow: inset 0 0 6px $colorwhite;
+    border-radius: 2px;
+    background-color: #cac9c9;
+  }
+  
+  .dropdown-menu::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .dropdown-menu::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    height: 50px;
+    box-shadow: inset 0 0 6pxrgba (0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 0 0 6pxrgba (0, 0, 0, 0.5);
+    background-color: #d1d1d2;
+  }
 }
 
 /* 
