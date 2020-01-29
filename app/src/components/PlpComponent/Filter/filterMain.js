@@ -172,12 +172,30 @@ class FilterMain extends React.Component {
   fetchAllAppliedFilters() {
     var appliedFilltersArr = [];
     for (const [key, value] of this.props.updatedFilter) {
-      value.map((option, i) => {
-        appliedFilltersArr.push(option);
+      value.map((option, i) => 
+      {
+
+            let isThere=false;
+            for(const item of this.props.filterDataPro)
+            {
+              const isFound = item.facetValues.filter((e)=>e.label===option.label);
+              if(isFound.length > 0)
+                isThere =true;
+            }
+            if(isThere===true)
+                appliedFilltersArr.push(option);
+              
+            
+
+        
       })
     }
 
-    const item = appliedFilltersArr.map((data, i) => {
+    const item = appliedFilltersArr.map((data, i) => 
+    {
+
+
+
       return (
         <button className='filterSelection_btn'>{data.label}<span className='filterSelection_oval' onClick={evt => this.clearTheSelectedFilter(i)}>
           <img className='crossImg' src={crossIcon} alt="Close" /></span></button>

@@ -18,6 +18,7 @@ import {
   resolveTheFilter,
   resolveBrowserFilters,
   formateSearchKeyword,
+  updateFilterMap,
 } from '../../utils/utilityManager';
 import '../../../public/styles/plpContainer/plpContainer.scss';
 import appCookie from '../../utils/cookie';
@@ -161,8 +162,10 @@ export class PlpContainer extends React.Component {
         plpData: [],
         filterData: [],
         pageNumber: 1,
-        plpFilter: nextProps.updatedFilter,
+        //plpFilter: nextProps.updatedFilter,
+        plpFilter :this.resolveTheFilter(nextProps.updatedFilterArray),
       });
+      //this.resolveTheFilter(nextProps.updatedFilterArray);
       this.fetchPLPProductsData();
     }
 
@@ -208,6 +211,60 @@ export class PlpContainer extends React.Component {
     }
 
   }
+
+  resolveTheFilter(updatedFilter) {
+    let filterURL = '';
+    for (const [key, value] of updatedFilter) {
+
+
+        filterURL += 'facet=';
+        value.map((option, i) => 
+        {
+            let isThere=false;
+            for(const item of this.state.filterData)
+            {
+              const isFound = item.facetValues.filter((e)=>e.label===option.label);
+              if(isFound.length > 0)
+                isThere =true;
+            }
+            if(isThere===true)
+              filterURL += option.value;
+              
+            if (value.length !== i + 1) {
+                filterURL += '+';
+            }
+        });
+        filterURL += '&';
+    }
+    return filterURL;
+}
+
+
+remoiveSelection(selectionFacetValue)
+{
+  var selectedFacetName;
+    var selectedFacetValuesArr = [];
+  for (const [key, value] of this.props.updatedFilterArray) {
+    var items = [];
+    var facetItems = []
+    value.map((option, i) => {
+      items.push(option.value);
+      facetItems.push(option);
+    })
+
+    if (items.includes(selectionFacetValue)) {
+      selectedFacetName = key;
+      items.filter(function (value, i, arr) {
+        if (value != selectionFacetValue) {
+          selectedFacetValuesArr.push(facetItems[i]);
+        }
+      });
+    }
+  }
+
+  this.props.onFilterUpdate(selectedFacetValuesArr, selectedFacetName)
+}
+
 
   resetStateVars() {
     this.setState({
@@ -573,6 +630,7 @@ export class PlpContainer extends React.Component {
 
     let filterItem;
     if (filterData.length != 0 && !this.state.isMobile) {
+
       filterItem = <FilterMain filterDataPro={filterData} />;
     }
 
@@ -733,6 +791,7 @@ const mapStateToProps = state => {
   return {
     ctr: stateObj.counter,
     updatedFilter: resolveTheFilter(stateObj.updateFilter),
+    updatedFilterArray:stateObj.updateFilter,
     sortingValue: stateObj.sortingValue,
     reduxTrigger: true,
   };
