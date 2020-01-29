@@ -185,7 +185,7 @@ export default class App extends React.Component {
         $('html, body').animate({ scrollTop: 0 }, 'smooth');
     }
     else if((pathurl.includes("furniture-online"))){
-      window.scrollTo(0,0);
+      window.scrollTo(0,0); 
   }
 	else 
 	{ if(!isMobile() && !isTab() && !isIPad){
