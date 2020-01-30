@@ -1568,14 +1568,53 @@
    .cancelWrapper{display: none;}
     
   }
-  
+
+  @media (min-width: 1081px){
+    .emiPlans{
+        .theadscroll{
+            min-height: .01%;
+            overflow-x: auto;
+        }
+    }
+}
 
   /* 
     #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
   */
-  @media (min-width: 1025px) and (max-width: 1280px) {
+  @media (max-width: 1080px){
     
-    //CSS
+    .emiPlans{
+        .tabHeading{
+            td{
+            max-width:280px;
+                overflow-y: auto;
+
+                &::-webkit-scrollbar {
+                    -webkit-appearance: none;
+                }
+                
+                &::-webkit-scrollbar:vertical {
+                    width: 12px;
+                }
+                
+                &::-webkit-scrollbar:horizontal {
+                    height: 12px;
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgb(179, 179, 179);
+                    border-radius: 10px;
+                    border: 4px solid #ffffff;
+                }
+                
+                &::-webkit-scrollbar-track {
+                    border-radius: 5px;  
+                    background-color: #ffffff; 
+                }
+
+            }
+        }
+    }
     
   }
   
@@ -1777,10 +1816,6 @@
 
         .emiPlans{
             tr>td,th{font-size: 14px;}
-            .theadscroll{
-                min-height: .01%;
-                overflow-x: auto;
-            }
             .tabHeading{
                 td{
                     cursor: pointer;
