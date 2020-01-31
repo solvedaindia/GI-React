@@ -107,6 +107,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    if(window.location.pathname==='/internet-error')
+    {
+      history.goBack();
+    }
     window.addEventListener('resize', this.resize);
     window.addEventListener('load', this.handleLoad);
     window.addEventListener('online', this.onOnline.bind(this));
@@ -117,10 +121,7 @@ export default class App extends React.Component {
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
-    if(window.location.pathname==='/internet-error')
-    {
-      history.goBack();
-    }
+    
     
   }
 
@@ -152,6 +153,12 @@ export default class App extends React.Component {
           showSnackBar:false});
       }, 3000);
       
+  }
+
+  componentWillUnmount()
+  {
+    window.removeEventListener('online', this.onOnline.bind(this),false);
+	  window.removeEventListener('offline', this.onOffline.bind(this),false);
   }
 
   componentWillMount(){
@@ -269,7 +276,9 @@ export default class App extends React.Component {
 		{
       appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
 		  navigator.geolocation.getCurrentPosition(
-			function(){appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);}
+      function()
+      {
+        appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);}
 		  );
   
 			navigator.geolocation.watchPosition(function(position) {
