@@ -1166,8 +1166,19 @@ section.tablecarousel {
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
 */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  //CSS
+@media (max-width: 1024px) {
+  .plpCategories {
+    .plp-products{
+      .productlist {
+          .hoverBox {
+            opacity: 1;
+            .btn-compare{
+              bottom: 43%;
+            }
+        } 
+      }
+    }
+  }
 }
 
  /* 
@@ -1267,7 +1278,7 @@ section.tablecarousel {
       .hoverBox{
         padding:5px 10px;
         .btn-compare{
-          display:none;
+          /*display:none;*/
         }
         ul.colortheme{
           .list{
