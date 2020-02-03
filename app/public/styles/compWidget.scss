@@ -408,6 +408,9 @@
   */
 @media screen and (max-width: 768px) {
   #mainContainer{
+    .compare{
+      display: none;
+    }
     .animationDIV{
       &.open{
         bottom: 32px;
