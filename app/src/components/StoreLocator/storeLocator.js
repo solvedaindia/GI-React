@@ -615,7 +615,7 @@ class StoreLocator extends React.Component {
                                                             <div className="PhoneNo">{physicalData.telephone}</div>
                                                         </div>
                                                         <div className="direction_dealerwrp">
-                                                            <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.currentLat},${this.state.currentLong}'/'${physicalData.latitude},${physicalData.longitude}'` }} className="getDirection" target='_blank'>
+                                                            <Link to={{ pathname: `https://www.google.com/maps/dir/'${this.state.defaultLat},${this.state.defaultLng}'/'${physicalData.latitude},${physicalData.longitude}'` }} className="getDirection" target='_blank'>
                                                                 {DIRECTIONS}
                                                             </Link>
 
