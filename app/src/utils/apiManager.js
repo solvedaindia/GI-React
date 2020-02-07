@@ -35,7 +35,7 @@ const getClient = (baseUrl = null) => {
   client.interceptors.response.use(
     response => response,
     error => {
-      if(error.message==='Network Error')
+      if(error.message==='Network Error' && window.navigator.onLine===false)
       {
         if(window.location.pathname!=='/internet-error')
           history.push('/internet-error')
