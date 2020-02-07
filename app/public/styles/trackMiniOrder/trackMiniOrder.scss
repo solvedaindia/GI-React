@@ -63,7 +63,6 @@
                 margin: $base*3.1 0 0;
             }
             .prodName {
-                padding:4px 0 26px 0;
                 font-size: $base*2;
                 font-family: $font-medium;
                 line-height: 16px;
@@ -71,9 +70,6 @@
             }
             .item {
                 display: inline-block;
-                margin: 0 $base*2.5 0 0;
-                font-size: $base*1.5;
-                font-family: $font-medium;
                 color: #000000;
             }
             .val {
@@ -125,6 +121,66 @@
     }
 }
 
+/* 
+#Global Screen Chhange for large Device
+*/
+@include mix-lg{
+    .trackMiniOrder{
+        .orderDetails{
+            .prodDetails {
+                .prodName{
+                    padding:4px 0 26px 0;
+                }
+                .item {
+                    margin: 0 $base*2.5 0 0;
+                    font-size: $base*1.5;
+                    font-family: $font-medium;
+                }
+            }
+        } 
+    } 
+}
+
+  /* 
+    #Global Screen Chhange for Screen max 992
+  */
+  @include mix-md{
+    .trackMiniOrder{
+        .orderDetails{
+            .prodDetails {
+                .prodName{
+                    padding:4px 0 2px 0;
+                }
+                .qty {
+                   .qtyVal {
+                    font-size:$base*1.25;
+                   } 
+                }
+                .status {
+                    .statusVal{
+                        font-size:$base*1.25;
+                    }  
+                }
+                .delDate {
+                   &.item{
+                    display: inline-block;
+                   }
+
+                   &.delDeliveryDate{
+                    font-family: $font-medium;
+                    padding-left: 2px;
+                   }
+                }
+                .item {
+                    margin: 0 $base*2.5 0 0;
+                    font-size: $base*1.25;
+                    font-family: $font-regular;
+                }
+            }
+        } 
+    } 
+  }
+
 @media (min-width:320px) and (max-width:767px) {
     .trackMiniOrder {
         width: 100%;
@@ -170,8 +226,7 @@
                     font-family: $font-medium;
                 }
                 .item {
-         
-                    margin: $base*1.25 0;
+                    margin: 2px 0;
                     display: block;
                     line-height: 12px;
                 }
@@ -198,4 +253,19 @@
             }
         }
     }
+}
+
+@media (max-width:340px){
+    .trackMiniOrder{
+        .orderDetails{
+            .prodDetails {
+                .delDate {
+                    &.item{
+                        display: block;
+                        padding: 0px;
+                    }
+                }
+            }
+        } 
+    } 
 }

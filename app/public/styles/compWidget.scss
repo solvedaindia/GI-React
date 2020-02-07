@@ -406,9 +406,26 @@
 /* 
     #Global Screen Chhange for Screen max 767
   */
-@media screen and (max-width: 767px) {
-  .compare,
-  .animationDIV.open {
-    display: none;
+@media screen and (max-width: 768px) {
+  #mainContainer{
+    .compare{
+      display: none;
+    }
+    .animationDIV{
+      &.open{
+        bottom: 32px;
+        .compareProductwrap{
+          .container{
+            .compareProducts{
+              .list{
+              width: 49%;
+              margin: 0 1% 6px 0; 
+              min-height: 94px;
+            }
+          }
+        }
+        }
+      }
+    }
   }
 }
