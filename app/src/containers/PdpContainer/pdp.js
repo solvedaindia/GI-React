@@ -70,6 +70,67 @@ class PdpContainer extends React.Component {
         pdp: response.data,
 				pdpLoading: false,
       });
+      
+      let recentData = [] ;
+    
+      if (appCookie.get('recentProduct') && JSON.parse(appCookie.get('recentProduct').length > 0))
+      {
+        recentData  = JSON.parse(appCookie.get('recentProduct'));
+        const masterProduct = recentData.find(prd => prd.uniqueID == response.data.data.skuData[0].uniqueID);
+        if(masterProduct)
+        {
+          //no add already in the list
+        }
+        else
+        {
+          const data ={
+            uniqueID:response.data.data.skuData[0].uniqueID,
+            productName :response.data.data.skuData[0].productName,
+            partNumber :response.data.data.skuData[0].partNumber,
+            type :response.data.data.skuData[0].type,
+            actualPrice :response.data.data.skuData[0].actualPrice,
+            offerPrice :response.data.data.skuData[0].offerPrice,
+            thumbnail :response.data.data.skuData[0].thumbnail,
+            emiData :response.data.data.skuData[0].emiData,
+            shortDescription :response.data.data.skuData[0].shortDescription,
+            discount :response.data.data.skuData[0].discount,
+            pageTitle :response.data.data.skuData[0].pageTitle,
+            pageTitle :response.data.data.skuData[0].pageTitle,
+  
+          }
+          if(recentData.length>3)
+          {
+            recentData = recentData.filter((prod,index) => index !== 0)
+          }
+          recentData.push(data)
+        }
+        appCookie.set('recentProduct', JSON.stringify(recentData), 365 * 24 * 60 * 60 * 1000);
+      }
+      else{
+        recentData[0] = {
+          uniqueID:response.data.data.skuData[0].uniqueID,
+          productName :response.data.data.skuData[0].productName,
+          partNumber :response.data.data.skuData[0].partNumber,
+          type :response.data.data.skuData[0].type,
+          actualPrice :response.data.data.skuData[0].actualPrice,
+          offerPrice :response.data.data.skuData[0].offerPrice,
+          thumbnail :response.data.data.skuData[0].thumbnail,
+          emiData :response.data.data.skuData[0].emiData,
+          shortDescription :response.data.data.skuData[0].shortDescription,
+          discount :response.data.data.skuData[0].discount,
+          pageTitle :response.data.data.skuData[0].pageTitle,
+          pageTitle :response.data.data.skuData[0].pageTitle,
+
+        }
+        
+
+        console.log(recentData[0]);
+        appCookie.set('recentProduct', JSON.stringify(recentData), 365 * 24 * 60 * 60 * 1000);
+       
+      }
+
+
+
       this.parseSeoTagData(response.data,partNumber);
 			if (appCookie.get('isPDPAddToCart') === null) {
 				appCookie.set('isPDPAddToCart', '' , 365 * 24 * 60 * 60 * 1000);

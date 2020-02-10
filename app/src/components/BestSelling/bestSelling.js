@@ -14,11 +14,13 @@ import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
 import Promotions from '../../components/GlobalComponents/productItem/promotion';
+import appCookie from '../../utils/cookie';
 
 class BestSeller extends React.Component {
   state = {
     bestSellerData: {},
     title: null,
+    productList:null,
     isLoading: true,
     errors: null,
   };
@@ -29,9 +31,14 @@ class BestSeller extends React.Component {
       .then(response => {
         const { data } = response || {};
         const bsData = data && data.data;
+        const title = data && data.data.title;
+        const productList = data && data.data.productList;
+      
         this.setState({
           bestSellerData: (is(bsData, 'Object') && bsData) || [],
           isLoading: false,
+          title:title,
+          productList:productList
         });
       })
       .catch(error => {
@@ -42,8 +49,21 @@ class BestSeller extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.getBestSellerData();
+  componentDidMount() 
+  {
+    if (appCookie.get('recentProduct') && JSON.parse(appCookie.get('recentProduct').length > 0))
+    {
+      this.setState({
+        isLoading: false,
+        title:"Recently Viewed",
+        productList:JSON.parse(appCookie.get('recentProduct'))
+      });
+    }
+    else{
+      this.getBestSellerData();
+    }
+
+    
   }
 
   handleTitle = (title) => {
@@ -51,9 +71,12 @@ class BestSeller extends React.Component {
   }
 
   render() {
-    const {
-      bestSellerData: { productList = [], title = '' },
-    } = this.state;
+    // const {
+    //   bestSellerData: { productList = [], title = '' },
+    // } = this.state;
+    let productList =this.state.productList;
+    console.log("productList111",productList);
+    let title =this.state.title;
     const settings = {
       dots: false,
       infinite: false,
@@ -88,7 +111,7 @@ class BestSeller extends React.Component {
         },
       ],
     };
-    if(productList.length<=0){
+    if(productList!=null && productList.length<=0){
       return null;
     }
     return (
