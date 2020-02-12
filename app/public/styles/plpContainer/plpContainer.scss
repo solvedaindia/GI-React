@@ -1163,26 +1163,7 @@ section.tablecarousel {
   } 
 }
 
-/* 
-  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
-*/
-@media (max-width: 1024px) {
-  .plpCategories {
-    .plp-products{
-      .productlist {
-          .hoverBox {
-            opacity: 1;
-            .btn-compare{
-              bottom: 43%;
-              padding: 12px 15px;
-              margin-left: -85px;
-              width: 170px;
-            }
-        } 
-      }
-    }
-  }
-}
+
 
  /* 
     #Global Screen Chhange for Screen max 992
@@ -1331,21 +1312,30 @@ section.tablecarousel {
  
 }
 
-
-
-/* 
-  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
-*/
-@media (min-width: 481px) and (max-width: 767px) {
-  //CSS
-  
-  .sort {
-    width: 50%;
+//  devices - 768 min
+@include mix-md-ipad {
+  .plpCategories {
+    .plp-products{
+      .productlist {
+          .hoverBox {
+            opacity: 1;
+            background: none;
+            .btn-compare{
+              bottom: 43%;
+              padding: 12px 15px;
+              margin-left: -85px;
+              width: 170px;
+              border:1px solid #ddd;
+            }
+        } 
+      }
+    }
   }
 }
 
-/* 
-  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
-*/
-@media (min-width: 320px) and (max-width: 480px) {
+//  devices - 767 max only
+@include mix-sm-mobile {
+  .animationDIV, .btn-compare{
+    display: none;
+  }
 }

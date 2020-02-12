@@ -366,7 +366,6 @@
         background: $greybg;
       }
       .attr-details {
-        width: 47%;
         padding: 8px 5px;
       }
       .attr-desc {
@@ -400,6 +399,17 @@
     outline: none;
     font-size: $base*2;
     color:$black;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .compare-product {
+    .compare-product-list {
+      .specifec-detail {
+        .attr-details{
+          width:47%;
+        }
+      }
+    }
   }
 }
 

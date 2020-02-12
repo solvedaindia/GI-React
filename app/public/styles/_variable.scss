@@ -119,13 +119,21 @@ $screen-xs-mobile-width: 320px;
     }
  }
 
-// tablet devices - 768 only
+// tablet devices - 768  max only
   @mixin mix-md-tablet {
     @media screen and (max-width: #{$screen-md-tablet-width}){
         @content;
     }
  }
  
+
+ // tablet devices - 768 min only
+ @mixin mix-md-tablet-min {
+    @media screen and (min-width: #{$screen-md-tablet-width}){
+        @content;
+    }
+ }
+
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads
 */

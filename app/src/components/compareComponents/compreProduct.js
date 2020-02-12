@@ -52,15 +52,15 @@ class CompPrd extends React.Component {
     var Depth = [];
     this.props.data.map((elem, index) => {
       width.push(
-        <Col className={index == 0 ? "col-md-6 attr-dims" : index == 1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+        <Col className={index == 0 ? "col-sm-6 col-md-6 attr-dims" : index == 1 ? 'col-sm-4 col-md-4 attr-desc' : "col-sm-2 col-md-2 attr-desc"}>
           {index == 0 ? <div><span className="col-md-5">{WIDTH}</span> <span className="col-md-7">{elem.width}</span></div> : <p>{elem.width}</p>}
         </Col>)
       heights.push(
-        <Col className={index == 0 ? "col-md-6 attr-dims" : index == 1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+        <Col className={index == 0 ? "col-sm-6 col-md-6 attr-dims" : index == 1 ? 'col-sm-4 col-md-4 attr-desc' : "col-sm-2 col-md-2 attr-desc"}>
           {index == 0 ? <div><span className="col-md-5">{HEIGHT}</span> <span className="col-md-7">{elem.height}</span></div> : <p>{elem.height}</p>}
         </Col>)
       Depth.push(
-        <Col className={index == 0 ? "col-md-6 attr-dims" : index == 1 ? 'col-md-4 attr-desc' : "col-md-2 attr-desc"}>
+        <Col className={index == 0 ? "col-sm-6 col-md-6 attr-dims" : index == 1 ? 'col-sm-4 col-md-4 attr-desc' : "col-sm-2 col-md-2 attr-desc"}>
           {index == 0 ? <div><span className="col-md-5">{DEPTH}</span> <span className="col-md-7">{elem.depth}</span></div> : <p>{elem.depth}</p>}
         </Col>)
     })
@@ -119,7 +119,7 @@ class CompPrd extends React.Component {
       specs.push(
         <Row className='specifec-detail'>
           <Col xs={12} sm={4} md={6} className='attr-details'>
-            <span className="col-md-5">{att.name}</span> <span className="col-md-7">{att.value}</span>
+            <span className="col-sm-5 col-md-5">{att.name}</span> <span className="col-sm-7 col-md-7">{att.value}</span>
           </Col>
 
           <Col xs={12} sm={4} md={4} className='attr-desc'>

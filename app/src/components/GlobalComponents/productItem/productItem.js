@@ -127,7 +127,7 @@ class ProductItem extends React.Component {
       swatchFinalData = this.state.colorSwatchFull;
     }
     const userAgent = window.navigator.userAgent.toLowerCase();
-    const compareButton = /ipad/.test( userAgent ) ? null : <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>;
+    const compareButton = /ipad/.test( userAgent ) ? <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button> : <button className="btn-compare" onClick={this.handleClick.bind(this)}>{ADD_TO_COMPARE}</button>;
     return (
       <li className="productlist">
         <div className="prdListData">
