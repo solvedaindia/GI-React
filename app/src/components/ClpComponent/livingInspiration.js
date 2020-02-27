@@ -67,7 +67,7 @@ class LivingTheme extends React.Component {
 						<div className='content-childTheme' key={index}>
 							<figure>
 								<img src={`${imagePrefix}${themeItem.fullImage}`} alt={themeItem.altText} className='img'/>
-								<ThemeListData themeItem = { themeItem } key={`${index}-livingTheme`}/>
+								<ThemeListData themeItem={themeItem} clpName={this.props.id} key={`${index}-livingTheme`}/>
 							</figure>
 						</div>
 					)

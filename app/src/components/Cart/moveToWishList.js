@@ -10,6 +10,7 @@ import { getCookie } from '../../utils/utilityManager';
 import MoveToWishListLogo from '../SVGs/moveToWishlistIcon';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import appCookie from '../../utils/cookie';
+import { triggerRemoveFromCartGTEvent } from '../../utils/gtm';
 
 class MoveToWishList extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class MoveToWishList extends React.Component {
       .post(cartDeleteItemAPI, data)
       .then(() => {
         this.props.getCartDetails();
+        triggerRemoveFromCartGTEvent(this.props.itemData, this.props.itemData.quantity);
       })
       .catch(error => {
         this.setState({

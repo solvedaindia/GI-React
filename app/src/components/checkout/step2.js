@@ -58,6 +58,7 @@ import {
   EROFS
 } from 'constants';
 import { replace } from 'connected-react-router';
+import { triggerShipBillAddrGTEvent } from '../../utils/gtm';
 
 export class Step2Component extends React.Component {
   constructor(props) {
@@ -145,6 +146,7 @@ export class Step2Component extends React.Component {
   }
 
   componentDidMount() {
+    triggerShipBillAddrGTEvent();
     if (this.props.isLoggedIn) {
       let selectedAddID = appCookie.get('adrID');
       this.callPinApi()
@@ -194,7 +196,9 @@ export class Step2Component extends React.Component {
       })
     }
   }
-
+  componentDidUpdate() {
+    triggerShipBillAddrGTEvent();
+  }
   callAddressAPI = (pinData) => {
     return new Promise((resolve, reject) => {
       if (this.props.isLoggedIn) {

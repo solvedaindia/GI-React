@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 import '../../../public/styles/reco/reco.scss';
 import RecoIcon from '../SVGs/recoLogo';
+import { triggerProductClickGTEvent } from '../../utils/gtm';
 class Recommendation extends React.Component {
   state = {
     recoData: null,
@@ -36,6 +37,14 @@ class Recommendation extends React.Component {
 
     componentDidMount() {
         this.getRecommendation();
+    }
+
+    productClickHandler = (skuData, source, index) => {
+        triggerProductClickGTEvent(
+            skuData,
+            source,
+            index + 1,
+        );
     }
 
     render() {
@@ -71,7 +80,7 @@ class Recommendation extends React.Component {
                             <p className='data'>{recoData.description}</p>
                         </div>
                         <figure className='leftOne col-md-5' onMouseOver={this.handleData}>
-                            <Link  className="link" to={routePath1} onClick={()=>window.scrollTo(0,0)}>
+                           <Link className="link" to={routePath1} onClick={this.productClickHandler.bind(this, recoData.recommendationArray[0], recoData.title, 0)}>
                                 <img src={recoData.recommendationArray[0].imagePath} className='recoImg' alt={recoData.recommendationArray[0].productName}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
@@ -81,17 +90,17 @@ class Recommendation extends React.Component {
                                             {recoData.recommendationArray[0].offerPrice !== recoData.recommendationArray[0].actualPrice ? <span className='actualPriceLine'><span className='actualPrice'>₹{formatPrice(recoData.recommendationArray[0].actualPrice)}</span></span>:null}
                                         </p>
                                         <p className='emiInfo'>
-                                            {recoData.recommendationArray[1].emiData !== '' ? `${'EMI Starting from ₹'}${formatPrice(recoData.recommendationArray[0].emiData)}` : ''}
+                                        {recoData.recommendationArray[0].emiData !== '' ? `${'EMI Starting from ₹'}${formatPrice(recoData.recommendationArray[0].emiData)}` : ''}
                                         </p>
                                         <p className='offerAmount'>
-                                            {recoData.recommendationArray[1].discount !== '' ? `${recoData.recommendationArray[0].discount}%` : '' } {recoData.recommendationArray[0].promotionData !== `${'&'} ${recoData.recommendationArray[0].promotionData}` }
+                                        {recoData.recommendationArray[0].discount !== '' ? `${recoData.recommendationArray[0].discount}%` : '' } {recoData.recommendationArray[0].promotionData !== `${'&'} ${recoData.recommendationArray[0].promotionData}` }
                                         </p>
                                     </div>
                                 </div>
                             </Link>
                         </figure>
                         <figure className='leftTwo col-md-12'>
-                            <Link className="link" to={routePath2} onClick={()=>window.scrollTo(0,0)}>
+                        <Link className="link" to={routePath2} onClick={this.productClickHandler.bind(this, recoData.recommendationArray[1], recoData.title, 1)}>
                                 <img src={recoData.recommendationArray[1].imagePath} className='recoImg' alt={recoData.recommendationArray[1].productName}/>
                                 <div className='prodDetails'>
                                     <div className='details'>
@@ -113,7 +122,7 @@ class Recommendation extends React.Component {
                     </div>
                     <div className='rightSide col-md-5'>
                         <figure className='rightThree col-md-12'>
-                            <Link className="link" to={routePath3} onClick={()=>window.scrollTo(0,0)}>
+                        <Link className="link" to={routePath3} onClick={this.productClickHandler.bind(this, recoData.recommendationArray[2], recoData.title, 2)}>
                                 <img src={recoData.recommendationArray[2].imagePath}  className='recoImg' alt={recoData.recommendationArray[2].productName}/>
                                 <div className='prodDetails'>
                                 <div className='details'>

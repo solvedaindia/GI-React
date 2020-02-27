@@ -10,7 +10,7 @@ import { REMOVE } from '../../constants/app/cartConstants';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import { getCookie } from '../../utils/utilityManager';
 import appCookie from '../../utils/cookie';
-
+import { triggerRemoveFromCartGTEvent } from '../../utils/gtm';
 
 class DeleteCartItem extends React.Component {
 	constructor(props) {
@@ -50,14 +50,15 @@ class DeleteCartItem extends React.Component {
 				this.props.getCartDetails();
 				this.handleClose();
 				appCookie.set('wishListUniqueId', '', 365 * 24 * 60 * 60 * 1000);
-				callback(null, response);
+				triggerRemoveFromCartGTEvent(this.props.itemData, this.props.itemData.quantity);
+				callback && callback(null, response);
 			})
 			.catch(error => {
 				this.setState({
 					error,
 					isLoading: false,
 				});
-				callback(error);
+				callback && callback(error);
 			});
 	}
 

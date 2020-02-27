@@ -1,0 +1,10 @@
+export const currencyINR = 'INR';
+export const purchaseGTagEvent = 'purchase';
+export const productDetailsGTagEvent = 'detail';
+export const checkoutGTagEvent = 'checkout';
+export const addToCartGTagEvent = 'add';
+export const removeFromCartGTagEvent = 'remove';
+export const productClickGTagEvent = 'click';
+export const impressionsGTagEvent = 'impressions';
+export const brandParamGTag = 'Godrej Interio';
+export const affiliationParamGTag = 'Online Store';

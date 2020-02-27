@@ -5,6 +5,7 @@ import '../../../public/styles/clpContainer/themeData.scss';
 import {VIEW_DETAILS } from '../../constants/app/clpConstants';
 import {isMobile } from '../../utils/utilityManager';
 import {createPdpURL, formatPrice, createSEOPdpURL} from '../../utils/utilityManager';
+import { triggerProductClickGTEvent } from '../../utils/gtm';
 
 class ThemeData extends React.Component {
 	constructor(props) {
@@ -71,6 +72,14 @@ class ThemeData extends React.Component {
             this.setState({ width: window.innerWidth, height: window.innerHeight });
         }
       }
+      detailsClickHandler = (itemDetail) => {
+        console.log(itemDetail);
+        triggerProductClickGTEvent(
+            itemDetail,
+            this.props.clpName,
+            this.props.index + 1,
+        );
+    }
 
     toggleBox() {
         const { show } = this.state;
@@ -150,7 +159,7 @@ class ThemeData extends React.Component {
                     
                      </h2>
                     <p className='price'>₹{formatPrice(itemDetail.offerPrice)}</p>
-                    <Link to={routePath}><p className='link'>{VIEW_DETAILS}</p></Link>
+                    <Link to={routePath} onClick={this.detailsClickHandler.bind(this, itemDetail)}><p className='link'>{VIEW_DETAILS}</p></Link>
                 </div>
             </div>
         )	

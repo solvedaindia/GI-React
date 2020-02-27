@@ -34,8 +34,9 @@ import {
   import {CHOOSE_A_PAYMENT_METHOD } from '../../constants/app/checkoutConstants';
   import {PROCEED } from '../../constants/app/checkoutConstants';
   import {TOTAL_AMOUNT } from '../../constants/app/checkoutConstants';
-
+  import { triggerGuestLoginIdGTEvent } from '../../utils/gtm';
   
+
   
 
 export class Step1Component extends React.Component {
@@ -57,7 +58,14 @@ export class Step1Component extends React.Component {
         }
     }
 
-    
+    componentDidMount() {
+      triggerGuestLoginIdGTEvent();
+    }
+
+    componentDidUpdate() {
+      triggerGuestLoginIdGTEvent();
+    } 
+       
     handleChange = e => {
       const mobileOrEmail = document.getElementById('userId').value;
       let isEnableVal = true;

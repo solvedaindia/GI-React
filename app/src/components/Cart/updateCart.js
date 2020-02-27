@@ -5,6 +5,7 @@ import apiManager from '../../utils/apiManager';
 import { isMobile } from '../../utils/utilityManager';
 import {QUANTITY } from '../../constants/app/cartConstants';
 import {MOBILE_QUANTITY } from '../../constants/app/cartConstants';
+import { triggerAddToCartGTEvent, triggerRemoveFromCartGTEvent } from '../../utils/gtm';
 
 
 class CartUpdate extends React.Component {
@@ -32,6 +33,11 @@ class CartUpdate extends React.Component {
   }
   
   handleCartUpdate(qty) {
+    if(parseInt(qty) > parseInt(this.props.quantity)) {
+      triggerAddToCartGTEvent(this.props.itemData, parseInt(qty) - parseInt(this.props.quantity));
+    } else if (parseInt(qty) < parseInt(this.props.quantity)) {
+      triggerRemoveFromCartGTEvent(this.props.itemData, parseInt(this.props.quantity) - parseInt(qty));
+    }
     const data = {
       orderItem: [
         {

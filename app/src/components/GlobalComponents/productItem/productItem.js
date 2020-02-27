@@ -35,6 +35,7 @@ import {
   isMobile,
 } from '../../../utils/utilityManager';
 import { ADD_TO_COMPARE } from '../../../constants/app/footerConstants';
+import { triggerProductClickGTEvent } from '../../../utils/gtm';
 
 
 class ProductItem extends React.Component {
@@ -117,6 +118,14 @@ class ProductItem extends React.Component {
     })
   };
 
+  productClickHandler = (skuData, index) => {
+    triggerProductClickGTEvent(
+      skuData,
+      this.props.isSearchPathPro.replace('/', ''),
+      index + 1,
+    );
+  }
+
   render() {
     var routePath = createSEOPdpURL(this.state.data.productName, this.state.data.shortDescription, this.state.data.partNumber);
     var swatchFinalData;
@@ -159,7 +168,8 @@ class ProductItem extends React.Component {
               emi={this.state.data.emiData} />
           </div>
         </div>
-        <Link className="link" to={{ pathname: routePath, state: this.props.isSearchPathPro.includes('/furniture') ? { breadcrumbData: this.props.plpBreadcrumbPro } : undefined}}>
+        <Link className="link" to={{ pathname: routePath, state: this.props.isSearchPathPro.includes('/furniture') ? { breadcrumbData: this.props.plpBreadcrumbPro } : undefined}}
+          onClick={this.productClickHandler.bind(this, this.state.data, this.props.index)}>
           <div className="hoverBox">
             {this.props.isfromWishlistPro ?
               <button className={this.props.isShareWishlistPro ? 'btn-compare' : isMobile() ? 'mov-to-cart' : 'btn-compare'} onClick={this.moveToCartClicked.bind(this)}><b>{this.props.isShareWishlistPro ? 'Add To Cart' : 'Move To Cart'}</b></button> :

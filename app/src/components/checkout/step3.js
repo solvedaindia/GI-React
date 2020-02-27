@@ -19,6 +19,7 @@ import {
   getReleventReduxState
 } from '../../utils/utilityManager';
 import {PAY_BY,MOBILE_EMAIL, CHANGE, SHIP_TO, CHOOSE_A_PAYMENT_METHOD, CREDIT_CARD, DEBIT_CARD, NET_BANKING,EMI, WALLETS} from '../../constants/app/checkoutConstants';
+import { triggerPaymentOptionGTEvent } from '../../utils/gtm';
 
 export class Step3Component extends React.Component {
   constructor(props) {
@@ -45,6 +46,11 @@ export class Step3Component extends React.Component {
 
   componentDidMount() {
     this.callBankDataAPI();
+    triggerPaymentOptionGTEvent();
+  }
+
+  componentDidUpdate() {
+    triggerPaymentOptionGTEvent();
   }
 
   callBankDataAPI = () => {

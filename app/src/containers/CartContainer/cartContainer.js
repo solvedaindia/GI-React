@@ -56,6 +56,7 @@ import {
   PROCEED,
   ITEMS,
 } from '../../constants/app/cartConstants';
+import { triggerReviewCartGTEvent } from '../../utils/gtm';
 
 class CartDetail extends React.Component {
   constructor(props) {
@@ -71,7 +72,11 @@ class CartDetail extends React.Component {
     this.props.getCartDetails();
     if(getCookie('isLoggedIn') === 'true' && getCookie('wishListUniqueId') !== undefined && getCookie('wishListUniqueId') !== null && getCookie('wishListUniqueId') !== ''){
 			this.addToWishlistApi();
-		}
+    }
+    triggerReviewCartGTEvent(this.props.cartData);
+  }
+  componentDidUpdate() {
+    triggerReviewCartGTEvent(this.props.cartData);
   }
 
   handleOnClick(e) {
@@ -166,12 +171,14 @@ class CartDetail extends React.Component {
                         quantity={itemData.quantity}
                         orderItemId={itemData.orderItemId}
                         getCartDetails={this.props.getCartDetails}
+                        itemData = {itemData}
                       />}
                {!itemData.freeGift && 
                <MoveToWishList
                   uniqueID={itemData.uniqueID}
                   orderItemId={itemData.orderItemId}
                   getCartDetails={this.props.getCartDetails}
+                  itemData = {itemData}
                 />}
                 {!itemData.freeGift && 
                       <DeleteCartItem 
@@ -179,6 +186,7 @@ class CartDetail extends React.Component {
                         uniqueID={itemData.uniqueID}
                         productName = {itemData.productName}
                         getCartDetails={this.props.getCartDetails}
+                        itemData = {itemData}
                       />}
                 <p className='delBy'>{DELIVERY_BY}</p>
                 <span className='date'>{itemData.deliveryDate}</span>
@@ -192,7 +200,8 @@ class CartDetail extends React.Component {
 						<CartUpdate
 						  quantity={itemData.quantity}
 						  orderItemId={itemData.orderItemId}
-						  getCartDetails={this.props.getCartDetails}
+              getCartDetails={this.props.getCartDetails}
+              itemData = {itemData}
 						/>}
                 <p className='price'>₹{formatPrice(itemData.offerPrice)}</p>
               </div>}

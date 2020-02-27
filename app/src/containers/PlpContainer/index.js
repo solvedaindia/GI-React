@@ -43,6 +43,7 @@ import RWDFilterMain from '../../components/PlpComponent/RWD PLP Components/RWDF
 import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
 import { createPlpItemData,isMobile } from '../../utils/utilityManager';
+import { triggerImpressionsGTEvent, unmountImpressionsGTEvent } from '../../utils/gtm';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -93,6 +94,7 @@ export class PlpContainer extends React.Component {
       this.props.removeAll();
     }
     removeEventListener('scroll', this.onscroll);
+    unmountImpressionsGTEvent();
   }
 
   componentDidMount() {
@@ -424,7 +426,14 @@ remoiveSelection(selectionFacetValue)
             }
           }
 
-          
+          if (response.data.data.productList && response.data.data.productList.length > 0) {
+            triggerImpressionsGTEvent(
+              response.data.data.productList,
+              this.props.location.pathname.replace('/', ''),
+              this.state.pageNumber,
+              this.state.pageSize,
+            );
+          }
           this.setState({
             plpData: isFromScroll ? [...this.state.plpData, ...response.data.data.productList] : response.data.data.productList,
             productCount: response.data.data.productCount,

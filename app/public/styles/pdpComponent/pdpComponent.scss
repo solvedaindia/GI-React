@@ -390,6 +390,16 @@
             line-height: 28px;
             margin:0 10px 0 0;
         }
+        .tax-disclaimer {
+            margin: 0px;
+            font-size: 10px;
+            padding-left: 4px;
+            line-height: 10px;
+        }
+    }
+    .tax-disclaimer {
+        margin: 0px;
+        font-size: 10px;
     }
     .shippingCharge{
         .bold{
@@ -1417,7 +1427,7 @@
         float: right;  
              
         .price{
-            padding: 0 16px 0 0;
+            padding: 0 4px 0 0;
             .discount-price{
                font-size: 28px;
                padding: 0 10px 0 0;
@@ -1485,6 +1495,15 @@
                border-radius: 0;
                font-size: $base*1.75;
            }
+        }
+        .tax-disclaimer {
+            display: flex;
+            float: left;
+            align-items: center;
+            margin: 0px;
+            line-height: 12px;
+            font-size: 10px;
+            padding: 10px 8px 10px 0;
         }
     }
 }

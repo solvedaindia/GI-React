@@ -28,6 +28,7 @@ import {Helmet} from "react-helmet";
 
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 import { array } from 'prop-types';
+import { triggerProductDetailGTEvent, unmountProductDetailGTEvent } from '../../utils/gtm';
 
 class PdpComponent extends React.Component {
 	constructor() {
@@ -50,7 +51,16 @@ class PdpComponent extends React.Component {
 			appCookie.set('tempPincode', '', 365 * 24 * 60 * 60 * 1000);
 		}
 		this.getResolveSkuData();
-    	window.addEventListener('scroll', this.handleScroll);
+		window.addEventListener('scroll', this.handleScroll);
+		triggerProductDetailGTEvent(this.state.skuData);
+	}
+
+	componentDidUpdate() {
+		triggerProductDetailGTEvent(this.state.skuData);
+	}
+
+	componentWillUnmount() {
+		unmountProductDetailGTEvent();
 	}
 
 	/* get sku resolved data */

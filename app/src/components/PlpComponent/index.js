@@ -80,6 +80,7 @@ class PlpComponent extends React.Component {
           {!this.props.showSkuPro ? 
             <ProductItem // Swatch level
               key={index}
+              index={index}
               dataPro={item.skuList[0]}
               isInWishlist={wishlistArr.includes(item.skuList[0].uniqueID)}
               addProduct={this.handleAddProduct}
@@ -97,6 +98,7 @@ class PlpComponent extends React.Component {
             /> :
             <ProductItem // Sku level
               key={index}
+              index={index}
               dataPro={item}
               isInWishlist={wishlistArr.includes(item.uniqueID)}
               addProduct={this.handleAddProduct}

@@ -14,7 +14,7 @@ import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
 import Promotions from '../../components/GlobalComponents/productItem/promotion';
-import appCookie from '../../utils/cookie';
+import { triggerProductClickGTEvent } from '../../utils/gtm';
 
 class BestSeller extends React.Component {
   state = {
@@ -68,6 +68,14 @@ class BestSeller extends React.Component {
 
   handleTitle = (title) => {
     <title>{title}</title>
+  }
+
+  productClickHandler = (skuData, index) => {
+    triggerProductClickGTEvent(
+      skuData,
+      this.state.bestSellerData.title,
+      index + 1,
+    );
   }
 
   render() {
@@ -127,12 +135,12 @@ class BestSeller extends React.Component {
               return (
                 <figure key={index} className="bsSlides">
                   
-                  <Link to={routePath} onClick={()=>window.scrollTo(0,0)}>
+                  <Link to={routePath} onClick={this.productClickHandler.bind(this, sellerItemData, index)}>
                     <img className="subCatImg" src={`${imagePrefix}${sellerItemData.thumbnail}`} alt={sellerItemData.productName} onClick={this.handleTitle(`${sellerItemData.pageTitle}`)}/>
                   </Link>
            
                   <figcaption className="bsDetails">
-                    <Link to={routePath} onClick={()=>window.scrollTo(0,0)}><h2 className="prodtitle">{sellerItemData.productName && sellerItemData.productName.length>productBestSellerTitleCharLimit ? trimTheSentence(sellerItemData.productName, productBestSellerTitleCharLimit):sellerItemData.productName}</h2></Link>
+                  <Link to={routePath} onClick={this.productClickHandler.bind(this, sellerItemData, index)}><h2 className="prodtitle">{sellerItemData.productName && sellerItemData.productName.length>productBestSellerTitleCharLimit ? trimTheSentence(sellerItemData.productName, productBestSellerTitleCharLimit):sellerItemData.productName}</h2></Link>
                     <h2 className="peiceDeatils">
 						{sellerItemData.actualPrice <= sellerItemData.offerPrice ? 
 							<span className="discPrice">

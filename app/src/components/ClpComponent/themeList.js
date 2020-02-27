@@ -52,6 +52,8 @@ class ThemeListData extends React.Component {
             })}
             { this.state.itemDetail && 
                 <ThemePopUp
+                index={this.state.index}
+                clpName={this.props.clpName}
                     itemDetail = {this.state.itemDetail}
                     closePopUp = {this.closePopUp.bind(this)}
                 />

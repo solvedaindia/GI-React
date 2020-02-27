@@ -20,6 +20,7 @@ import { isMobile } from '../../utils/utilityManager';
 import {PRODUCT_ADDED, ADD_TO_CART,NOT_AVAILABLE, NOT_DELIVER} from '../../constants/app/pdpConstants';
 
 import Mapflag from '../../components/SVGs/mapflag.svg';
+import { triggerAddToCartGTEvent } from '../../utils/gtm';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
 
 class addToCartComponent extends React.Component {
@@ -122,7 +123,7 @@ class addToCartComponent extends React.Component {
     if (document.getElementById('quantity')) {
       quantity = document.getElementById('quantity').value;
     }
-
+    triggerAddToCartGTEvent(this.props.skuData, quantity);
     const data = this.getInventoryApiParams(this.props.skuData, quantity);
 
     apiManager

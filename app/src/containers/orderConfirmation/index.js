@@ -16,6 +16,7 @@ import {
   OrderDetailAPI,
 } from '../../../public/constants/constants';
 import ContentEspot from '../../components/Primitives/staticContent';
+import { triggerOrderConfirmationGTEvent } from '../../utils/gtm';
 
 class OrderConformation extends React.Component {
   constructor(props) {
@@ -31,8 +32,11 @@ class OrderConformation extends React.Component {
   componentDidMount() {
     const orderId = this.props.match.params.orderId;
     this.callOrderAPI(orderId);
+    triggerOrderConfirmationGTEvent(this.state.orderData);
   }
-
+  componentDidUpdate() {
+    triggerOrderConfirmationGTEvent(this.state.orderData);
+  }
   callOrderAPI(id) {
     this.setState({
       showPop: true,
