@@ -14,6 +14,7 @@ import '../../../public/styles/bestSeller/bestSeller.scss';
 import '../../../public/styles/slickCustom.scss';
 import { resendOtp } from '../RegisterComponent/constants';
 import Promotions from '../../components/GlobalComponents/productItem/promotion';
+import appCookie from '../../utils/cookie';
 import { triggerProductClickGTEvent } from '../../utils/gtm';
 
 class BestSeller extends React.Component {
