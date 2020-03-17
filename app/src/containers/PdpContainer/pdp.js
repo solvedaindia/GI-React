@@ -64,6 +64,7 @@ class PdpContainer extends React.Component {
     let splitedPathName = window.location.pathname.split("/");
     const partNumber = splitedPathName[splitedPathName.length - 1];
     const skuId = this.props.match.params.skuId;
+
     
 		apiManager.get(pdpApi2 + skuId).then(response => {
 			this.setState({
@@ -72,30 +73,49 @@ class PdpContainer extends React.Component {
       });
       
       let recentData = [] ;
+      let dataArray= response.data.data.skuData;
+      if( response.data.data.type==='kit')
+      {
+        dataArray= response.data.data.kitData;
+      }
+      else if( response.data.data.type==='bundle')
+      {
+        dataArray= response.data.data.bundleData;
+      }
+      
     
       if (appCookie.get('recentProduct') && JSON.parse(appCookie.get('recentProduct').length > 0))
       {
         recentData  = JSON.parse(appCookie.get('recentProduct'));
-        const masterProduct = recentData.find(prd => prd.uniqueID == response.data.data.skuData[0].uniqueID);
+       // console.log("skudataaaa",response.data)
+        const masterProduct = recentData.find(prd => prd.partNumber == skuId);
         if(masterProduct)
         {
           //no add already in the list
         }
         else
         {
+          let index=0;
+          for(let i=0;dataArray && i<dataArray.length;i++)
+          {
+              if(dataArray[i].partNumber===skuId)
+              {
+                index=i;
+              }
+          }
+        
           const data ={
-            uniqueID:response.data.data.skuData[0].uniqueID,
-            productName :response.data.data.skuData[0].productName,
-            partNumber :response.data.data.skuData[0].partNumber,
-            type :response.data.data.skuData[0].type,
-            actualPrice :response.data.data.skuData[0].actualPrice,
-            offerPrice :response.data.data.skuData[0].offerPrice,
-            thumbnail :response.data.data.skuData[0].thumbnail,
-            emiData :response.data.data.skuData[0].emiData,
-            shortDescription :response.data.data.skuData[0].shortDescription,
-            discount :response.data.data.skuData[0].discount,
-            pageTitle :response.data.data.skuData[0].pageTitle,
-            pageTitle :response.data.data.skuData[0].pageTitle,
+            uniqueID:dataArray[index].uniqueID,
+            productName :dataArray[index].productName,
+            partNumber :dataArray[index].partNumber,
+            type :dataArray[index].type,
+            actualPrice :dataArray[index].actualPrice,
+            offerPrice :dataArray[index].offerPrice,
+            thumbnail :dataArray[index].thumbnail,
+            emiData :dataArray[index].emiData,
+            shortDescription :dataArray[index].shortDescription,
+            discount :dataArray[index].discount,
+            pageTitle :dataArray[index].pageTitle,
   
           }
           if(recentData.length>3)
@@ -107,24 +127,30 @@ class PdpContainer extends React.Component {
         appCookie.set('recentProduct', JSON.stringify(recentData), 365 * 24 * 60 * 60 * 1000);
       }
       else{
+        let index=0;
+          for(let i=0;dataArray && i<dataArray.length;i++)
+          {
+              if(dataArray[i].partNumber===skuId)
+              {
+                index=i;
+              }
+          }
         recentData[0] = {
-          uniqueID:response.data.data.skuData[0].uniqueID,
-          productName :response.data.data.skuData[0].productName,
-          partNumber :response.data.data.skuData[0].partNumber,
-          type :response.data.data.skuData[0].type,
-          actualPrice :response.data.data.skuData[0].actualPrice,
-          offerPrice :response.data.data.skuData[0].offerPrice,
-          thumbnail :response.data.data.skuData[0].thumbnail,
-          emiData :response.data.data.skuData[0].emiData,
-          shortDescription :response.data.data.skuData[0].shortDescription,
-          discount :response.data.data.skuData[0].discount,
-          pageTitle :response.data.data.skuData[0].pageTitle,
-          pageTitle :response.data.data.skuData[0].pageTitle,
-
+          uniqueID:dataArray[index].uniqueID,
+            productName :dataArray[index].productName,
+            partNumber :dataArray[index].partNumber,
+            type :dataArray[index].type,
+            actualPrice :dataArray[index].actualPrice,
+            offerPrice :dataArray[index].offerPrice,
+            thumbnail :dataArray[index].thumbnail,
+            emiData :dataArray[index].emiData,
+            shortDescription :dataArray[index].shortDescription,
+            discount :dataArray[index].discount,
+            pageTitle :dataArray[index].pageTitle,
         }
         
 
-        console.log(recentData[0]);
+       // console.log(recentData[0]);
         appCookie.set('recentProduct', JSON.stringify(recentData), 365 * 24 * 60 * 60 * 1000);
        
       }
