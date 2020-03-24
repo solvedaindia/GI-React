@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import { Redirect } from 'react-router-dom';
 import { isMobile } from '../../utils/utilityManager';
 import MWebLogo from '../../components/SVGs/mWebLogo';
-import {CHECKOUT } from '../../constants/app/checkoutConstants';
+import {CHECKOUT, WALLETS_MAPPING } from '../../constants/app/checkoutConstants';
 
 import {
   storeId,
@@ -268,7 +268,11 @@ export class CheckoutComponent extends React.Component {
     }).then((response) => {
       var res = response.data.data.response;
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
-      if (this.state.paymentMode == "NET_BANKING" || this.state.paymentMode == "PAYTM" || this.state.paymentMode == "WALLET" || this.state.paymentMode == "MOBIKWIK" || this.state.paymentMode == "PHONEPE") {
+      if (
+        this.state.paymentMode == 'NET_BANKING' ||
+        this.state.paymentMode == "WALLET" ||
+        Object.values(WALLETS_MAPPING).includes(this.state.paymentMode)
+      ) {
         url = `${res.transactionUrl}&msg=${res.msg}`;
     
       }

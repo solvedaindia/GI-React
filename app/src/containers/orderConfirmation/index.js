@@ -168,22 +168,16 @@ class OrderConformation extends React.Component {
     if (!this.state.showPage) {
       return this.showLoader();
     }
+    if (this.state.showGtagScript && gtag) {
+      gtag('event', 'conversion', {
+        send_to: 'AW-880478252/AnvmCJ3FwrYBEKyQ7KMD',
+        value: this.state.orderData.orderSummary.netAmount,
+        currency: 'INR',
+        transaction_id: this.state.orderData.orderID,
+      });
+    }
     return (
       <div className="orderconfirm">
-        {this.state.showGtagScript ? <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            gtag('config', 'UA-2934706-17');
-            gtag('event', 'conversion', {
-              'send_to': 'AW-880478252/AnvmCJ3FwrYBEKyQ7KMD',
-              'value': ${this.state.orderData.orderSummary.netAmount},
-              'currency': 'INR',
-              'transaction_id': '${this.state.orderData.orderID}'
-          `,
-          }}
-        /> : null}
-        
-
         <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_START'} />
         <div className="container">
           <div className="row">

@@ -7,6 +7,8 @@ import Stores from '../../../components/Footer/stores';
 import Socialicon from '../../../components/Footer/socialicons';
 import FooterLinkAccordian from './footerLinkAccordian';
 import '../../../../public/styles/footerContainer/accordian.scss';
+import Copyright from '../../../components/Footer/copyright';
+
 export class FooterMobile extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ export class FooterMobile extends React.Component {
         <ul className="social-Link clearfix">
           <Socialicon name={this.props.socialicons} />
         </ul>
+        <Copyright />
       </footer>
     );
   }

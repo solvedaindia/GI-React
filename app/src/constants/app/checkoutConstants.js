@@ -43,40 +43,33 @@ export const ADD_A_DELIVERY_ADD = 'Add your delivery address';
 export const PAYMENT_OPTION = 'Payment Options';
 export const CHOOSE_A_PAYMENT_METHOD = 'Choose a payment method';
 export const ONE_OR_MORE_ITEM = 'One or more item in you cart is Out Of Stock.';
-export const SAVE_YOUR_ADDRESS  = 'Please save you address first';
-export const REQUIRED_FIELD  =  'This is a required field';
-export const ENTER_VALID_STATE  =  'Please enter valid State.';
-export const VALID_CITY_DISTRICT  =  'Please enter valid City/District.';
-export const VALID_ADDRESS  =  'Please enter valid Address.';
-export const VALID_PINCODE  =  'Please enter valid Pincode.';
-export const VALID_EMAIL  =  'Please enter valid Email ID.';
-export const PAY_BY  =  'Pay by';
-export const CHANGE  =  'Change';
-export const SHIP_TO  =  'Ship to';
-export const CREDIT_CARD  =  'Credit Card';
-export const DEBIT_CARD  =  'Debit Card';
-export const EMI  =  'EMI';
-export const WALLETS  =  'Wallets';
-export const NET_BANKING  =  'Net Banking';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
+export const SAVE_YOUR_ADDRESS = 'Please save you address first';
+export const REQUIRED_FIELD = 'This is a required field';
+export const ENTER_VALID_STATE = 'Please enter valid State.';
+export const VALID_CITY_DISTRICT = 'Please enter valid City/District.';
+export const VALID_ADDRESS = 'Please enter valid Address.';
+export const VALID_PINCODE = 'Please enter valid Pincode.';
+export const VALID_EMAIL = 'Please enter valid Email ID.';
+export const PAY_BY = 'Pay by';
+export const CHANGE = 'Change';
+export const SHIP_TO = 'Ship to';
+export const CREDIT_CARD = 'Credit Card';
+export const DEBIT_CARD = 'Debit Card';
+export const EMI = 'EMI';
+export const WALLETS = 'Wallets';
+export const NET_BANKING = 'Net Banking';
+export const WALLETS_MAPPING = {
+  Mobikwik: 'MOBIKWIK',
+  PayTM: 'PAYTM',
+  PhonePe: 'PHONEPE',
+  'Oxigen Wallet': 'OXIGEN_WALLET',
+  'Pay World Money': 'PAY_WORLD_MONEY',
+  'ICC Cash Card': 'ICC_CASH_CARD',
+  EbixCash: 'EBIXCASH',
+  'Money On Mobile': 'MONEY_ON_MOBILE',
+  'OLA Money': 'OLA_MONEY',
+  'The Mobile Wallet': 'THE_MOBILE_WALLET',
+  'Yes Bank Wallet': 'YES_BANK_WALLET',
+  'DCB Cippy': 'DCB_CIPPY',
+  'Amazon Pay': 'AMAZON_PAY',
+};

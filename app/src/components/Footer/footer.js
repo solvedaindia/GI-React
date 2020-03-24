@@ -5,6 +5,7 @@ import Newsletter from './newsletter';
 import Stores from './stores';
 import Categories from './categories';
 import { footerLogoUrl } from '../../../public/constants/constants';
+import Copyright from './copyright';
 
 const FooterComponent = props => (
   <Grid>
@@ -34,6 +35,9 @@ const FooterComponent = props => (
           <Categories name={props.categories} />
         </Row>
       </Col>
+    </Row>
+    <Row>
+      <Copyright />
     </Row>
   </Grid>
 );

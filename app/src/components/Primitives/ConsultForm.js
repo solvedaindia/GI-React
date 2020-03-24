@@ -11,8 +11,13 @@ import {
   regexMobileNo,
   validateEmptyObject,
   validateFullName,
-  regexName
+  regexName,
 } from '../../utils/validationManager';
+import { triggerFormSubmissionGTEvent } from '../../utils/gtm';
+import {
+  BOOK_A_CONSULTATION_FORM_TYPE,
+  KITCHEN_FORM_POSITION,
+} from '../../constants/app/gtmConstants';
 
 
 
@@ -219,15 +224,19 @@ handleValidation=(obj, errorType)=>{
       //const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
     
       //console.log("contact_id",contact_id)
-      const message = this.state.message.split('&').join('and')
-      console.log("contact_id",message)
-      const data = {
-        name:this.state.name,
-        mobileNumber:this.state.mobileNumber,
-        email:this.state.email,
-        dropDownValue:this.state.dropDownValue,
-        message:message,
-      }
+    triggerFormSubmissionGTEvent(
+      BOOK_A_CONSULTATION_FORM_TYPE,
+      KITCHEN_FORM_POSITION,
+    );
+    const message = this.state.message.split('&').join('and');
+    // console.log("contact_id",message);
+    const data = {
+      name:this.state.name,
+      mobileNumber:this.state.mobileNumber,
+      email:this.state.email,
+      dropDownValue:this.state.dropDownValue,
+      message:message,
+    }
 		apiManager.post(consultFormApi, data).then((res) => {
       alert(FEEDBACK_MSG)
       this.clearData();

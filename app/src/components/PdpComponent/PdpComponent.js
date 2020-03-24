@@ -406,7 +406,7 @@ class PdpComponent extends React.Component {
 }
 // handleScroll function End
   render() { 
-    const { isLoading } = this.state;
+  const { isLoading } = this.state;
 	let isSticky = true;
 	let stateAttr = {};
 	let imgUrl = '';
@@ -560,7 +560,8 @@ class PdpComponent extends React.Component {
                           <div className='product-price-detail'>
                             <MobileDiscountAndPrice 
                             skuData={this.state.skuData}
-                          /></div>
+                          />
+													</div>
                           <AddToCart
                           skuData={this.state.skuData}
                           isMobile={true}
@@ -582,19 +583,11 @@ class PdpComponent extends React.Component {
           <Row>
           {!isMobile() ? (
 			  <>
-			  { this.props.data.type === 'product' ? (
-				  <ProductFeatures productFeatureData={this.props.data} />
-			  ) : (
-				  <>{ !isLoading && this.props.data.type !== 'product' && <ProductFeatures productFeatureData={this.state.skuData}/>}</>
-			  )}
+				{ !isLoading && <ProductFeatures productFeatureData={this.state.skuData}/> }
 		  	</>
             ) : (
 				<>
-				{this.props.data.type === 'product' ? (
-					<MobileProductFeatures productFeatureData={this.props.data}/> 
-				) : (
-					<>{ !isLoading && this.props.data.type !== 'product' && <MobileProductFeatures productFeatureData={this.state.skuData}/>}</>
-				)}
+				{ !isLoading && <MobileProductFeatures productFeatureData={this.state.skuData}/> }
 				</>
             )
           }

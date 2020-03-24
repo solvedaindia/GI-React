@@ -20,6 +20,7 @@ import {
 } from '../../utils/utilityManager';
 import {PAY_BY,MOBILE_EMAIL, CHANGE, SHIP_TO, CHOOSE_A_PAYMENT_METHOD, CREDIT_CARD, DEBIT_CARD, NET_BANKING,EMI, WALLETS} from '../../constants/app/checkoutConstants';
 import { triggerPaymentOptionGTEvent } from '../../utils/gtm';
+import { WALLETS_MAPPING } from '../../constants/app/checkoutConstants';
 
 export class Step3Component extends React.Component {
   constructor(props) {
@@ -258,16 +259,7 @@ export class Step3Component extends React.Component {
 
   checkWallet(index) {
     var wallet = this.state.wallets[index];
-    var paymentId;
-    if (wallet.bankName.includes('PhonePe')) {
-      paymentId = 'PHONEPE';
-    }
-    else if (wallet.bankName.includes('Mobikwik')) {
-      paymentId = 'MOBIKWIK';
-    }
-    else if (wallet.bankName.includes('PayTM')) {
-      paymentId = 'PAYTM';
-    }
+    var paymentId = WALLETS_MAPPING[wallet.bankName];
     var data = {
       BankID: wallet.bankID,
       paymentMode: paymentId,

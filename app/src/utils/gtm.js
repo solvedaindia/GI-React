@@ -9,6 +9,7 @@ import {
   affiliationParamGTag,
   productClickGTagEvent,
   impressionsGTagEvent,
+  formSubmissionGTagEvent,
 } from '../constants/app/gtmConstants';
 
 export function triggerOrderConfirmationGTEvent(orderData) {
@@ -302,4 +303,14 @@ export function unmountImpressionsGTEvent() {
   if (window.impressionsGTag) {
     delete window.impressionsGTag;
   }
+}
+
+export function triggerFormSubmissionGTEvent(formType, formPosition) {
+  const formSubmsnGTag = {
+    event: formSubmissionGTagEvent,
+    formType,
+    formPosition,
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(formSubmsnGTag);
 }

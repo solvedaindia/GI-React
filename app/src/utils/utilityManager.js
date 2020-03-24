@@ -5,6 +5,7 @@ import {
 } from '../../public/constants/constants';
 import LightHeader from '../components/HeaderComponent/headerL1/lightHeader';
 import HeaderContainer from '../containers/HeaderContainer';
+import { WALLETS_MAPPING } from '../constants/app/checkoutConstants';
 // import { utimes } from 'fs';
 
 /**
@@ -499,14 +500,8 @@ export function mapPaymentMethodMode(paymentMode) {
     else if (paymentMode === 'CC_EMI') {
         return 'EMI';
     }
-    else if (paymentMode === 'MOBIKWIK') {
-        return 'Mobikwik';
-    }
-    else if (paymentMode === 'PHONEPE') {
-        return 'PhonePe';
-    }
-    else if (paymentMode === 'PAYTM') {
-        return 'PayTM';
+    else if(Object.values(WALLETS_MAPPING).includes(paymentMode)) {
+        return Object.keys(WALLETS_MAPPING).find(key => WALLETS_MAPPING[key] === paymentMode);
     }
     else {
         return '';

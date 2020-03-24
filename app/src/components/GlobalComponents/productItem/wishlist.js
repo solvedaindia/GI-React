@@ -19,6 +19,8 @@ import {
 } from '../../../../public/constants/constants';
 import UserAccInfo from '../../UserAccInfo/userAccInfo';
 import appCookie from '../../../utils/cookie';
+import { isMobile } from '../../../utils/utilityManager';
+import { WISHLIST } from '../../../constants/app/pdpConstants';
 
 class Wishlist extends React.Component {
   constructor(props) {
@@ -175,6 +177,7 @@ class Wishlist extends React.Component {
           className="wishlistBtn"
           id={wishListId}
         >
+          {this.props.isPDP && !isMobile() ? <>{WISHLIST}</>:''}{' '} 
           {this.state.wishlistCurrentImage}
           { this.props.isPDP &&
             this.state.wishlistPopup

@@ -5,7 +5,7 @@ import MobileSocialMedia from '../../utils/mobileUtils/socialMedia';
 import Wishlist from '../GlobalComponents/productItem/wishlist';
 import { getOnlyWishlistUniqueIds } from '../../utils/utilityManager';
 import { isMobile } from '../../utils/utilityManager';
-import {WISHLIST, SHARE} from '../../constants/app/pdpConstants';
+import { SHARE } from '../../constants/app/pdpConstants';
 
 const shareImg = <img src={require('../../../public/images/share.svg')} alt="Share Wishlist"/>;
 
@@ -26,7 +26,6 @@ const wishListAndShare = props => {
                 
             </div>
             <div className="wishListDiv">
-                {!isMobile() ? <>{WISHLIST}</>:''}{' '}
                 <Wishlist
                     uniqueId={props.skuData.uniqueID}
                     isInWishlistPro={wishlistArr.includes(

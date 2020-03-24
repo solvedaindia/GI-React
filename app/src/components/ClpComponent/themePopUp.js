@@ -73,7 +73,6 @@ class ThemeData extends React.Component {
         }
       }
       detailsClickHandler = (itemDetail) => {
-        console.log(itemDetail);
         triggerProductClickGTEvent(
             itemDetail,
             this.props.clpName,
