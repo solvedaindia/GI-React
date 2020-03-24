@@ -14,7 +14,9 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
-app.use(require('prerender-node').set('protocol', 'https').set('host', 'www.godrejinterio.com').set('prerenderToken', prerenderToken));
+if(process.env.WCSENDPOINT==='PRDLV'){
+  app.use(require('prerender-node').set('protocol', 'https').set('host', 'www.godrejinterio.com').set('prerenderToken', prerenderToken))
+}
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);

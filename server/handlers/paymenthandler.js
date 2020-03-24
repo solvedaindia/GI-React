@@ -11,6 +11,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
   headers,
   callback,
 ) {
+  logger.info('Entering Initiate BD Payment');
   if (
     !params.orderId ||
     (!params.email && !params.mobile) ||
@@ -20,7 +21,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     !params.paymentMode ||
     !params.billing_address_id
   ) {
-    logger.debug('Initiate BD Payment:::Invalid Params');
+    logger.error('Initiate BD Payment:::Invalid Order Related Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -31,7 +32,9 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     params.paymentMode === 'PHONEPE'
   ) {
     if (!params.BankID) {
-      logger.debug('Initiate Payment:::Invalid Params');
+      logger.error(
+        'Initiate BD Payment:::Invalid Bank ID for the respective payment mode',
+      );
       callback(errorutils.errorlist.invalid_params);
       return;
     }
@@ -53,7 +56,7 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     paymentMode: params.paymentMode,
     billing_address_id: params.billing_address_id,
   };
-
+  logger.info('Calling Initiate BD Payment WCS API');
   origin.getResponse(
     'POST',
     initiateBDPaymentURL,
@@ -64,8 +67,10 @@ module.exports.initiateBDPayment = function initiateBDPayment(
     '',
     response => {
       if (response.status === 200) {
+        logger.info('Call to Initiate BD Payment API successful');
         callback(null, response.body);
       } else {
+        logger.error('Call to Initiate BD Payment API failed');
         callback(errorutils.handleWCSError(response));
       }
     },
@@ -78,8 +83,9 @@ module.exports.verifyChecksum = function verifyChecksum(
   reqBody,
   callback,
 ) {
+  logger.info('Entering Verify Checksum');
   if (!reqBody.msg) {
-    logger.debug('Verify Payment:::Invalid Params');
+    logger.error('Verify Payment:::Invalid Params');
     callback(errorutils.errorlist.invalid_params);
     return;
   }
@@ -92,6 +98,7 @@ module.exports.verifyChecksum = function verifyChecksum(
     customInfo: reqBody.msg,
   };
 
+  logger.info('Calling Update PI & Verify CheckSum WCS API');
   origin.getResponse(
     'POST',
     verifyBDPaymentURL,
@@ -102,9 +109,14 @@ module.exports.verifyChecksum = function verifyChecksum(
     '',
     response => {
       if (response.status === 200) {
+        logger.info('Call to Update PI & Verify CheckSum API successful');
         const resBody = {
           paymentStatus: '',
         };
+        logger.info(
+          'Payment status received from WCS is ',
+          response.body.response.paymentStatus,
+        );
         if (response.body.response.paymentStatus === 'success') {
           resBody.paymentStatus = response.body.response.paymentStatus;
           resBody.orderID = response.body.orderId;
@@ -114,6 +126,7 @@ module.exports.verifyChecksum = function verifyChecksum(
           callback(null, resBody);
         }
       } else {
+        logger.error('Call to Update PI & Verify CheckSum API failed');
         callback(errorutils.handleWCSError(response));
       }
     },

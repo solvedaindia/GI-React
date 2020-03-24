@@ -414,9 +414,6 @@ function mergePDPData(header, prodData, skuData, promoData, callback) {
       attributes.defining,
     );
     productDataSummary.skuData = getSkuData(skuData, promoData);
-    productDataSummary.productFeatures = pdpfilter.getProductFeatures(
-      attributes,
-    );
     productDataSummary.purchaseGuide = pdpfilter.getPurchaseGuide(productData);
     productDataSummary.keywords = pdpfilter.getKeywords(productData.keyword);
   }
@@ -473,6 +470,7 @@ function getSkuData(bodyData, promotions) {
           });
         });
       }
+      skuDataJson.productFeatures = pdpfilter.getProductFeatures(attributes);
       skuDataJson.promotions = associatedPromo;
       skuDataJson.productDetails = pdpfilter.getProductDetails(attributes);
       skuDataJson.similarProducts = mercAssociations.similarProducts;
