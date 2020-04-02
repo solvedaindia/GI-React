@@ -18,16 +18,17 @@ import appCookie from '../../../utils/cookie';
 class AddAddressForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log("this.props.editAddressDataPro",this.props.editAddressDataPro);
     this.state = {
-      inputText_name: this.props.editAddressDataPro.name,
-      inputText_number: this.props.editAddressDataPro.phoneNumber,
-      inputText_email: this.props.editAddressDataPro.emailId,
-      inputText_pincode: this.props.editAddressDataPro.pincode,
-      inputText_address: this.props.editAddressDataPro.address,
-      inputText_city: this.props.editAddressDataPro.city,
-      inputText_state: this.props.editAddressDataPro.state,
-      isSetAsDefault: this.props.editAddressDataPro.isDefault,
-      nickname:this.props.editAddressDataPro.nickname,
+      inputText_name: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.name,
+      inputText_number: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.phoneNumber,
+      inputText_email: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.emailId,
+      inputText_pincode: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.pincode,
+      inputText_address: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address,
+      inputText_city: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.city,
+      inputText_state: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.state,
+      isSetAsDefault: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.isDefault,
+      nickname:this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.nickname,
 
       error_name: false,
       error_number: false,

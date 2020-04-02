@@ -9,12 +9,12 @@ class Dropdown extends React.Component {
     };
   }
 
-  onSelection = (value) => {
+  onSelection = (value,index) => {
     this.setState({
       dropdownValue: value
     })
     this.state.dropdownValue = value;
-    this.props.onSelection(value);
+    this.props.onSelection(value,index);
   }
 
   render() {
@@ -24,9 +24,9 @@ class Dropdown extends React.Component {
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span class="caret"></span></button>
           <ul class="dropdown-menu">
-            {this.props.data.map(data => {
+            {this.props.data.map((data,i) => {
               return (
-                <li onClick={() => this.onSelection(data)}><a>{data}</a></li>
+                <li onClick={() => this.onSelection(data,i)}><a>{data}</a></li>
               )
             })}
           </ul>

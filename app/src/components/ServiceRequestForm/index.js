@@ -1,10 +1,15 @@
 import React from 'react';
 import Dropdown from './dropdown';
+import UploadImage from './uploadImage';
+import EnterInvoiceView from './enterInvoiceView';
 import Checkboxes from './checkboxes';
 import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
 import { getAddressListAPI } from '../../../public/constants/constants';
 import AddressList from './addressLists';
+import { ADD_NEW_ADD} from '../../constants/app/myAccountConstants';
+import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
+
 
 class ServiceRequestForm extends React.Component {
 
@@ -16,6 +21,8 @@ class ServiceRequestForm extends React.Component {
       serviceRequestReasons: ['Upholstery wear and tear', 'Broken locks or handles', 'Loose doors or hinges', 'Shelf or drawer issues', '	Missing screws and accessories', 'Surface chipping and cracks', 'Other'],
       addressListItem: null,
       addressData: null,
+      isAddAddress:false,
+      showEnterInvoice:false,
     };
   }
 
@@ -39,8 +46,18 @@ class ServiceRequestForm extends React.Component {
     console.log('on Dropdown --- ', value)
   }
 
-  getInvoiceValue(value) {
-    console.log('on Invoice --- ', value)
+  getInvoiceValue(value,index) {
+    if(this.state.invoiceSelectionData.length-1==index)
+    {
+      this.setState({
+        showEnterInvoice: true,
+      });
+    }
+    else{
+      this.setState({
+        showEnterInvoice: false,
+      });
+    }
   }
 
   getServiceRequestReason(value) {
@@ -49,6 +66,11 @@ class ServiceRequestForm extends React.Component {
 
   getSelectedAddress(value) {
     console.log('on Selected Address --- ', value)
+  }
+  addNewAddressBtnClicked() {
+    this.setState({
+      isAddAddress: !this.state.isAddAddress,
+    });
   }
 
   render() {
@@ -62,10 +84,36 @@ class ServiceRequestForm extends React.Component {
         {this.renderProductDetails()}
         {this.renderProductCategory()}
         {this.renderInvoice()}
+        {this.renderEnterInvoice()}
         {this.renderServiceRequestReason()}
         {this.renderUploadImage()}
         {this.renderAddress()}
+        {this.renderAddAddress()}
 
+      </div>
+    );
+  }
+
+  renderAddAddress() {
+    return (
+      <div className="manageAddressContainer">
+        <ul className="itemList">{this.state.addressListItem}</ul>
+        <div className="clearfix" />
+        {this.state.isAddAddress ? (
+          <AddAddressForm
+            onCancel={this.addNewAddressBtnClicked.bind(this)}
+            onUpdateActivity={this.getAddressListAPI.bind(this)}
+            editAddressDataPro={this.state.editAddressData}
+
+          />
+        ) : (
+          <button
+            className="addNewAddress"
+            onClick={this.addNewAddressBtnClicked.bind(this)}
+          >
+            <span className='icon'>+</span> {ADD_NEW_ADD}
+          </button>
+        )}
       </div>
     );
   }
@@ -83,6 +131,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div>
         <h4>Add Image</h4>
+        <UploadImage/>
       </div>
     )
   }
@@ -102,6 +151,21 @@ class ServiceRequestForm extends React.Component {
         <h4>Invoice Selection</h4>
         <Dropdown title='Select Invoice' data={this.state.invoiceSelectionData} onSelection={this.getInvoiceValue.bind(this)} />
       </div>
+    )
+  }
+
+  renderEnterInvoice()
+  {
+    return(
+      <>
+      {
+        this.state.showEnterInvoice &&
+        (
+          <EnterInvoiceView/>
+        )       
+
+      }
+      </>
     )
   }
 
