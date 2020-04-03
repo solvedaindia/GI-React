@@ -14,6 +14,8 @@ const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
 
+const espotNames = require('../configs/espotnames');
+
 /**
  * Get Order List
  * @param storeId,access_token
@@ -695,8 +697,8 @@ function getServiceRequestDetails(req, callback) {
   };
 
   let serviceRequestPageDetails = [
-    espotHandler.getEspotsData.bind(null,reqHeader,'GI_ServiceRequest_ProductCategory'),
-    espotHandler.getEspotsData.bind(null,reqHeader,'GI_ServiceRequest_ReasonList'),
+    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.categoryList),
+    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.reasonList),
     userHandler.getUserAddress.bind(null,reqHeader),
   ];
   if(req.query.partnumber){
