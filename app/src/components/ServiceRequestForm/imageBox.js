@@ -45,9 +45,9 @@ class ImageBox extends React.Component {
     if(this.state.imageSelected)
     {
         return(
-          <div style={{width: '124px',height: '124px',}}>
-                <img id="imageContent" style={{width: '124px',height: '124px',}} src={this.state.file} alt="your image" />
-                <button type="button" onClick={this.onImageRemoved.bind(this)} style={{float:'right',position:'absolute'}}>X</button>
+          <div className='uploded-img'>
+                <img id="imageContent" className='uploded-img-data' src={this.state.file} alt="your image" />
+                <button type="button" className='close' onClick={this.onImageRemoved.bind(this)}>X</button>
           </div>
 			
         )
@@ -55,22 +55,9 @@ class ImageBox extends React.Component {
     else
     {
       return (
-        <div style={{width:'124px',height:'124px'}}>
-          <div style={{backgroundColor:'#cff6ff',border:'2px solid #0daed4'}}>
-            <input style={{
-              position: 'absolute',
-              margin: '0',
-              padding: '0',
-              width: '124px',
-              height: '124px',
-              outline: 'none',
-              opacity: '0',
-              cursor: 'pointer'
-            }}  id='product_image' type='file' title="Add Image" onChange={this.onImageSlected.bind(this)} accept="image/*" />
-            <div style={{textAlign:'center'}}>
-              <h3>+<br/>Add Image</h3>
-            </div>
-          </div>
+        <div className='upload-img-btn'>
+            <input className='upload-img-input' id='product_image' type='file' title="Add Image" onChange={this.onImageSlected.bind(this)} accept="image/*" />
+              <p className='text'><span>+</span>Add Image</p>
         </div>
       );
     }

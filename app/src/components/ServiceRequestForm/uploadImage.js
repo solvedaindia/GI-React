@@ -31,7 +31,7 @@ class UploadImage extends React.Component {
   
   render() {
     return (
-      <div className="form-BgContainer addAddressContainer">
+      <div className="col-xs-12 col-sm-12 col-md-12 add-img-upload">
         
         {
           this.state.files.map((data,i)=>{

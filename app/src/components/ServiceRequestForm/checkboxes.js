@@ -47,10 +47,10 @@ class Checkboxes extends React.Component {
 
   renderTextField() {
     return (
-      <div>
+      <div className='service-request-box'>
         <h5>{this.props.title}</h5>
         <textarea onChange={() => this.onTextareaInput()} style={{ 'border-color': '#dfe0de', padding: '5px', outline: 'none', resize: 'none' }} name="the-textarea" id="textareaSR" maxlength={this.state.characterLimit} placeholder="Please Specify" autofocus rows='4' cols='50'></textarea>
-        <label>{this.state.characterCount} Character{this.state.characterCount <= 1 ? '' : 's'} remaining</label>
+        <label className='label-text'> {this.state.characterCount} Character{this.state.characterCount <= 1 ? '' : 's'} remaining</label>
       </div>
     )
   }
@@ -58,15 +58,15 @@ class Checkboxes extends React.Component {
   render() {
     let outputCheckboxes = this.props.data.map(function (string, i) {
       return (
-        <div>
+        <div className='service-request-box'>
           <input type="checkbox" id={'string_' + i} value={string} onChange={this.changeEvent.bind(this)} />
-          <label htmlFor={'string_' + i}> {string}</label>
+          <label className='label-text' htmlFor={'string_' + i}> {string}</label>
         </div>
       )
     }, this);
 
     return (
-      <div>
+      <div className='service-request-text'>
         {outputCheckboxes}
         {this.state.showTextview ? this.renderTextField() : null}
       </div>

@@ -22,7 +22,7 @@ class Dropdown extends React.Component {
     return (
       <div>
         <div className="dropdown">
-          <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span className="caret"></span></button>
+          <button className="btn dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span className="caret"></span></button>
           <ul className="dropdown-menu">
             {this.props.data.map((data,i) => {
               return (

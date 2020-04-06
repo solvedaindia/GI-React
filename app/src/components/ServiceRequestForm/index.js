@@ -9,6 +9,7 @@ import { getAddressListAPI,getDetailtForSerReq } from '../../../public/constants
 import AddressList from './addressLists';
 import { ADD_NEW_ADD} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
+import '../../../public/styles/myAccount/service-request.scss';
 
 
 class ServiceRequestForm extends React.Component {
@@ -105,8 +106,7 @@ class ServiceRequestForm extends React.Component {
 
   render() {
     return (
-      <div className="trackMyOrder">
-
+      <div className="trackMyOrder service-request">
         <div className="bottomDivider">
           <button className="backBtn" onClick={this.props.renderSelectionPro} >{`< Back`}</button>
         </div>
@@ -132,7 +132,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className="manageAddressContainer">
         <ul className="itemList">{this.state.addressListItem}</ul>
-        <div className="clearfix" />
+        <div className="add-service-address clearfix" />
         {this.state.isAddAddress ? (
           <AddAddressForm
             onCancel={this.addNewAddressBtnClicked.bind(this)}
@@ -154,8 +154,8 @@ class ServiceRequestForm extends React.Component {
 
   renderAddress() {
     return (
-      <div>
-        <h4>Address</h4>
+      <div class='get-selected-address'>
+        <h4 className='heading'>Address</h4>
         <AddressList data={this.state.addressData} onSelection={this.getSelectedAddress.bind(this)}/>
       </div>
     )
@@ -163,8 +163,8 @@ class ServiceRequestForm extends React.Component {
 
   renderUploadImage() {
     return (
-      <div>
-        <h4>Add Image</h4>
+      <div className='add-img'>
+        <h4 className='heading'>Add Image</h4>
         <UploadImage/>
       </div>
     )
@@ -172,8 +172,8 @@ class ServiceRequestForm extends React.Component {
 
   renderProductCategory() {
     return (
-      <div>
-        <h4>Product Category</h4>
+      <div className='product-category'>
+        <h4 className='heading'>Product Category</h4>
         <Dropdown title='Please select a product category' data={this.state.categorySelectionData} onSelection={this.getCategorySelectionValue.bind(this)} />
       </div>
     )
@@ -181,8 +181,8 @@ class ServiceRequestForm extends React.Component {
 
   renderInvoice() {
     return (
-      <div>
-        <h4>Invoice Selection</h4>
+      <div className='invice-selection'>
+        <h4 className='heading'>Invoice Selection</h4>
         <Dropdown title='Select Invoice' data={this.state.invoiceSelectionData} 
               onSelection={this.getInvoiceValue.bind(this)} />
         {
@@ -199,8 +199,8 @@ class ServiceRequestForm extends React.Component {
 
   renderServiceRequestReason() {
     return (
-      <div>
-        <h4>Reason For Service Request</h4>
+      <div className='service-request-reasons'>
+        <h4 className='heading'>Reason For Service Request</h4>
         <Checkboxes data={this.state.serviceRequestReasons} title='Reason for Service Request' onSelection={this.getServiceRequestReason.bind(this)} />
       </div>
     )
@@ -223,7 +223,7 @@ class ServiceRequestForm extends React.Component {
                 </p>
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
-                    <span className="heading">Quantity</span>
+                    <span className="heading">Quantity: </span>
                     <span className="textval">2</span>
                   </div>
                 </div>
