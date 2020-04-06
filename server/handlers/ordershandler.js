@@ -364,6 +364,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderItems: [],
     orderSummary: {},
     wcsOrderStatus: wcsOrderDetails.orderStatus,
+    refundDetails : [],
   };
   const wcsOrderID = orderData.orderId;
   getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
@@ -373,6 +374,12 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     }
     const omsData = omsOrderResponse;
     // orderDetails.orderID = omsData.orderID;
+    const refundData = [{
+      transactionID : 'xxxxxxxxx',
+      Amount : '24000',
+      Mode : 'Bank Account',
+    }];
+    orderDetails.refundDetails = refundData;
     orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     orderDetails.orderDate = omsData.orderDate;
