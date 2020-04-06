@@ -56,7 +56,7 @@ class EnterInvoiceView extends React.Component {
   render() {
    
     return (
-      <div className="form-BgContainer addAddressContainer">
+      <div className="form-BgContainer addAddressContainer upload-invoiceno">
           <div className="row">
             <div className="col-md-6">
               <div className='form-div clearfix div-error'>
@@ -70,7 +70,8 @@ class EnterInvoiceView extends React.Component {
                   value = {this.state.invoiceNumber }
                   onChange={this.handleInput} 
                   maxLength={12}
-                  isAutoFocus={true} />
+                  isAutoFocus={true} 
+                  className='invoiceNumber'/>
                 {this.state.error ? <div className='error-msg'>{this.state.errorMessage}</div> : null}
               </div>
             </div>
