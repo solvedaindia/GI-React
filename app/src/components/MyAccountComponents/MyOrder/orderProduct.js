@@ -82,6 +82,10 @@ class ProductOrder extends React.Component {
               Track My Order
             </button> : null}
 
+            <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+              Service Request
+            </button> 
+
           </div>
           <div className='clearfix'></div>
           {productData.shipmentData && productData.shipmentData.length === 1 ?
