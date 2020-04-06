@@ -18,8 +18,13 @@
           margin-right: $base * 3;
           .close{
             position: absolute;
-            right: 0px;
-            top: 0px;
+            right: 5px;
+            top: 5px;
+            background: $colorwhite;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            font-size: 12px;
           }
         }
         .add-img-upload{
