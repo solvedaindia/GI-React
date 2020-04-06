@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../Primitives/input';
+import {regexInvoice} from '../../utils/validationManager';
 
 class EnterInvoiceView extends React.Component {
 
@@ -18,18 +19,24 @@ class EnterInvoiceView extends React.Component {
     
   }
   handleInput=(event)=>{
+    this.props.onInvoiceChange(event.target.value)
+    const flag =regexInvoice.test(event.target.value)
+    console.log("flagaa",flag)
     if(event.target.value.length==12)
     {
       this.setState({
         invoiceNumber: event.target.value,
-        isUploadBtnDisabled:false,
+        isUploadBtnDisabled:flag,
+        error:flag?"":"Invalid invoice number",
+        error:(flag?false:true),
       });
-      this.validateInvoice();
     }
     else{
       this.setState({
         invoiceNumber: event.target.value,
         isUploadBtnDisabled:true,
+        error:flag?"":"Invalid invoice number",
+        error:(flag?false:true),
       });
     } 
   

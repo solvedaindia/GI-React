@@ -5,7 +5,7 @@ import EnterInvoiceView from './enterInvoiceView';
 import Checkboxes from './checkboxes';
 import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
-import { getAddressListAPI } from '../../../public/constants/constants';
+import { getAddressListAPI,getDetailtForSerReq } from '../../../public/constants/constants';
 import AddressList from './addressLists';
 import { ADD_NEW_ADD} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
@@ -23,12 +23,30 @@ class ServiceRequestForm extends React.Component {
       addressData: null,
       isAddAddress:false,
       showEnterInvoice:false,
+      showInvoiceDisclaimer:true,
       isSaveBtnDisabled:true,
+    
     };
   }
 
   componentDidMount() {
     this.getAddressListAPI();
+   // this.getDetailAPI()
+  }
+  getDetailAPI=()=>{
+
+    apiManager
+      .get(getDetailtForSerReq+'56101505SD00084')
+      .then(response => {
+        this.setState({
+          addressData: response.data.data.addressList,
+          categorySelectionData:response.data.data.productCategory,
+          serviceRequestReasons:response.data.data.serviceReasonList,
+        })
+      })
+      .catch(error => {
+      });
+
   }
 
   getAddressListAPI() {
@@ -48,15 +66,18 @@ class ServiceRequestForm extends React.Component {
   }
 
   getInvoiceValue(value,index) {
+    const flag=index==0 || this.state.invoiceSelectionData.length-1==index; 
     if(this.state.invoiceSelectionData.length-1==index)
     {
       this.setState({
         showEnterInvoice: true,
+        showInvoiceDisclaimer:flag,
       });
     }
     else{
       this.setState({
         showEnterInvoice: false,
+        showInvoiceDisclaimer:flag,
       });
     }
   }
@@ -68,9 +89,17 @@ class ServiceRequestForm extends React.Component {
   getSelectedAddress(value) {
     console.log('on Selected Address --- ', value)
   }
+
   addNewAddressBtnClicked() {
     this.setState({
       isAddAddress: !this.state.isAddAddress,
+    });
+  }
+
+  onEnterInvoiceTextChanged(value)
+  {
+    this.setState({
+      showInvoiceDisclaimer: value.length==0,
     });
   }
 
@@ -85,7 +114,6 @@ class ServiceRequestForm extends React.Component {
         {this.renderProductDetails()}
         {this.renderProductCategory()}
         {this.renderInvoice()}
-        {this.renderEnterInvoice()}
         {this.renderServiceRequestReason()}
         {this.renderUploadImage()}
         {this.renderAddress()}
@@ -155,23 +183,17 @@ class ServiceRequestForm extends React.Component {
     return (
       <div>
         <h4>Invoice Selection</h4>
-        <Dropdown title='Select Invoice' data={this.state.invoiceSelectionData} onSelection={this.getInvoiceValue.bind(this)} />
-      </div>
-    )
-  }
-
-  renderEnterInvoice()
-  {
-    return(
-      <>
-      {
+        <Dropdown title='Select Invoice' data={this.state.invoiceSelectionData} 
+              onSelection={this.getInvoiceValue.bind(this)} />
+        {
         this.state.showEnterInvoice &&
         (
-          <EnterInvoiceView/>
+          <EnterInvoiceView  onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}/>
         )       
 
-      }
-      </>
+        }
+        {this.state.showInvoiceDisclaimer  ? <div className='error-msg'>Please note that the service may be chargeable, in case of missing invoice details</div> : null}
+      </div>
     )
   }
 
