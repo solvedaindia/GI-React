@@ -60,7 +60,7 @@ class CancelComponents extends React.Component {
                 backdrop = {false}
                 >
                     <Modal.Header  >
-                        <h1>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM:CANCEL_ORDER }</h1><br/>
+                        <h1>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h1><br/>
                         <img src={favicon}/>
 
                     </Modal.Header>
@@ -70,7 +70,7 @@ class CancelComponents extends React.Component {
                         <RefundMode value= "" text = "" close={this.handleClose}/>
                     </Modal.Body>
                 </Modal>:
-                 <></>}
+                 null}
             </>
         )
     }

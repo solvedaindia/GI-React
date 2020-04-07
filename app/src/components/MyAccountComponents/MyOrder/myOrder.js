@@ -5,6 +5,8 @@ import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
 import OrderItem from './orderItem';
 import TrackOrder from './TrackMyOrder/trackOrder';
 import ServiceRequestForm from '../../ServiceRequestForm/index';
+import CancelComponents from '../../cancelComponents/index';
+
 
 class MyOrder extends React.Component {
   constructor(props) {
@@ -194,7 +196,7 @@ class MyOrder extends React.Component {
           }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
         }
 
-
+      <CancelComponents/>
       </div>
     );
   }
