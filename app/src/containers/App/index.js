@@ -74,6 +74,8 @@ import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
 import ReactSnackBar from "../HomePageContainer/snackbar/index";
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import ServiceRequestFormGuest from '../../components/ServiceRequestFormGuest/index';
+import ServiceRequestForm from '../../components/ServiceRequestForm';
 
 const userAgent = window.navigator.userAgent.toLowerCase();
 const isIPad = /ipad/.test(userAgent);
@@ -428,6 +430,7 @@ export default class App extends React.Component {
           <Route path="/privacy-policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
+          <Route path="/serviceRequest" component={ServiceRequestFormGuest} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           <Route path="/internet-error" component={InternetError} />

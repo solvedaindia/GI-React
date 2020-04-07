@@ -18,17 +18,17 @@ import appCookie from '../../../utils/cookie';
 class AddAddressForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log("this.props.editAddressDataPro",this.props.editAddressDataPro);
+    console.log("this.props.editAddressDataPro", this.props.editAddressDataPro);
     this.state = {
-      inputText_name: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.name,
-      inputText_number: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.phoneNumber,
-      inputText_email: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.emailId,
-      inputText_pincode: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.pincode,
-      inputText_address: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address,
-      inputText_city: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.city,
-      inputText_state: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.state,
-      isSetAsDefault: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.isDefault,
-      nickname:this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.nickname,
+      inputText_name: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.name,
+      inputText_number: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.phoneNumber,
+      inputText_email: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.emailId,
+      inputText_pincode: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.pincode,
+      inputText_address: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.address,
+      inputText_city: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.city,
+      inputText_state: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.state,
+      isSetAsDefault: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.isDefault,
+      nickname: this.props.editAddressDataPro == undefined ? "" : this.props.editAddressDataPro.nickname,
 
       error_name: false,
       error_number: false,
@@ -50,12 +50,12 @@ class AddAddressForm extends React.Component {
     };
     this.reference = React.createRef();
     this.handleInput = this.handleInput.bind(this);
-    this.changeAddressFrom=this.changeAddress.bind(this);
+    this.changeAddressFrom = this.changeAddress.bind(this);
   }
 
 
 
-  changeAddress(editAddressDataPro){
+  changeAddress(editAddressDataPro) {
     this.setState({
       inputText_name: editAddressDataPro.name,
       inputText_number: editAddressDataPro.phoneNumber,
@@ -85,15 +85,14 @@ class AddAddressForm extends React.Component {
 
       isSaveBtnDisabled: false
     });
-     window.scrollTo(0, document.body.scrollHeight - 700);
-      if(this.reference.current)
-      {
-        this.reference.current.focus();
-        //this.reference.current.getInputDOMNode().focus(); 
-      }
+    window.scrollTo(0, document.body.scrollHeight - 700);
+    if (this.reference.current) {
+      this.reference.current.focus();
+      //this.reference.current.getInputDOMNode().focus(); 
+    }
   }
 
-  componentWillReceiveProps1(nextProps){
+  componentWillReceiveProps1(nextProps) {
     this.setState({
       inputText_name: nextProps.editAddressDataPro.name,
       inputText_number: nextProps.editAddressDataPro.phoneNumber,
@@ -122,15 +121,14 @@ class AddAddressForm extends React.Component {
 
       isSaveBtnDisabled: false
     });
-     window.scrollTo(0, document.body.scrollHeight - 700);
-      if(this.reference.current)
-      {
-        this.reference.current.getInputDOMNode().focus(); 
-      }
+    window.scrollTo(0, document.body.scrollHeight - 700);
+    if (this.reference.current) {
+      this.reference.current.getInputDOMNode().focus();
+    }
   }
 
   onSavebuttonClick(event) {
-    if(event)
+    if (event)
       event.preventDefault();
 
     var isProceed = true;
@@ -248,7 +246,7 @@ class AddAddressForm extends React.Component {
     if (this.state.nickName !== undefined) {
       APIURL = updateAddressAPI + this.state.nickName;
     }
-    
+
     this.setState({
       isSaveBtnDisabled: true
     })
@@ -363,13 +361,11 @@ class AddAddressForm extends React.Component {
   componentDidMount() {
     window.scrollTo(0, document.body.scrollHeight - 700);
   }
-  
 
-  onKeyPress=(event)=>
-  {
-    if(event.key === 'Enter'){
-      if(!this.state.isSaveBtnDisabled)
-      {
+
+  onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      if (!this.state.isSaveBtnDisabled) {
         this.onSavebuttonClick();
       }
     }
@@ -378,14 +374,15 @@ class AddAddressForm extends React.Component {
     return (
       <div className="form-BgContainer addAddressContainer">
         <h4 className="heading">{ADD_NEW_ADD}</h4>
-        <button
+        {this.props.isFromServiceRequest ? null : <button
           className="cancelBtn"
           onClick={this.closeAddNewAddress.bind(this)}
-        />
+        />}
+
         <div className="row">
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input  ref1={this.reference}  onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
+              <Input ref1={this.reference} onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
               {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
             </div>
           </div>
@@ -393,7 +390,7 @@ class AddAddressForm extends React.Component {
           <div className="col-md-6">
             <div className="form-div clearfix div-error">
               <Input
-               onKeyPress={this.onKeyPress}
+                onKeyPress={this.onKeyPress}
                 inputType={'number'}
                 title={'Phone Number'}
                 name={'number'}
@@ -412,21 +409,21 @@ class AddAddressForm extends React.Component {
 
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input  onKeyPress={this.onKeyPress} inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} />
+              <Input onKeyPress={this.onKeyPress} inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} />
               {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
             </div>
           </div>
 
           <div className='col-md-6'>
             <div className='form-div clearfix div-error'>
-              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Pincode" name="pincode" id="pincode" maxLength="6"  placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
+              <Input onKeyPress={this.onKeyPress} inputType="text" title="Pincode" name="pincode" id="pincode" maxLength="6" placeholder="Enter Pincode" value={this.state.inputText_pincode} handleChange={this.handleInput} focusOut={this.pincodeFocusOut.bind(this)} />
               {this.state.error_pincode ? <div className='error-msg'>{this.state.errorMessage_pincode}</div> : null}
             </div>
           </div>
 
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input  onKeyPress={this.onKeyPress} inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={70} />
+              <Input onKeyPress={this.onKeyPress} inputType="text" title="Address" name="address" id="address" placeholder="Enter Address" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={70} />
               {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
             </div>
           </div>
@@ -445,23 +442,28 @@ class AddAddressForm extends React.Component {
             </div>
           </div>
         </div>
-        <div className='col-md-6'>
-          <div className='defaultOption'>
-            <div className='input_box'>
-              <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" checked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
-              <label className="lblCheck" htmlFor="checkbox"></label>
+        {this.props.isFromServiceRequest ? null :
+          <div className='col-md-6'>
+            <div className='defaultOption'>
+              <div className='input_box'>
+                <input className='defaultCheckbox inputCheck' type='checkbox' title="State" name="name" id="checkbox" checked={this.state.isSetAsDefault} onChange={this.onSetAsDefaultChange.bind(this)} />
+                <label className="lblCheck" htmlFor="checkbox"></label>
+              </div>
+              <label className='defaultlbl'>{DEFAULT_ADDRESS}</label>
             </div>
-            <label className='defaultlbl'>{DEFAULT_ADDRESS}</label>
           </div>
-        </div>
+        }
+
         <div className='clearfix'></div>
 
-        <div className='col-md-12 add-new-btn'>
-          <div className='actionBtnWrapper'>
-            <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
-            <button onClick={this.onSavebuttonClick.bind(this)} disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Save</button>
-          </div>
-        </div>
+        {this.props.isFromServiceRequest ? null :
+          <div className='col-md-12 add-new-btn'>
+            <div className='actionBtnWrapper'>
+              <button onClick={this.closeAddNewAddress.bind(this)} className='btn-cancel btn'>Cancel</button>
+              <button onClick={this.onSavebuttonClick.bind(this)} disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Save</button>
+            </div>
+          </div>}
+
       </div>
 
     );
