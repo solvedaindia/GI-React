@@ -19,6 +19,8 @@ export const regexName1 = /^[0-9 ]+$/;
 
 export const regexGST = /^[a-zA-Z0-9]+$/;
 
+export const regexInvoice = /^[A-Za-z0-9/]*$/;
+
 /** ******* Functions ******* */
 /* Validate empty object */
 export const validateEmptyObject = input => {

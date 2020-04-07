@@ -1,0 +1,151 @@
+@import "../variable.scss";
+.MyAccount{
+ .myOnGoingOoders{
+   .trackMyOrder {
+    &.service-request{
+      .bottomDivider{
+        margin-bottom: $base *2;
+      }
+
+      .add-img{
+        float: left;
+        width: 100%;
+        .uploded-img, .uploded-img-data{
+          width: 166px;
+          height: 166px;
+          position: relative;
+          float: left;
+          margin-right: $base * 3;
+          .close{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+          }
+        }
+        .add-img-upload{
+          padding: 0px;
+          .upload-img-btn{
+            width: 166px;
+            height: 166px;
+            text-align: center;
+            background: $paleGrey;
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .upload-img-input{
+              position: absolute;
+               margin: 0px; 
+              padding: 0px; 
+              width: 166px; 
+              height: 166px; 
+              outline: none; 
+              opacity: 0; 
+              cursor: pointer;
+            }
+            .text{
+              font-size: $base * 1.75;
+              color: $cerulean;
+              span{
+                display: block;
+                font-size: $base * 3.5;
+              }
+            }
+          }
+        }
+      }
+
+      .itemBox{
+        .orderProduct{
+          .orderimgbox{
+            .product-text{
+              .quantity-shipping{
+                .quantity{
+                  .heading{
+                    font-size: 10px;
+                    color:$battleshipGrey;
+                    text-transform: uppercase;
+                  }
+                  .textval{
+                    font-size: $base *1.5;
+                  }
+                }
+              } 
+            } 
+          } 
+        } 
+      }
+
+      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+        .heading{
+          font-size: $base *2;
+          font-family: $font-bold;
+          padding-top:$base * 2.5;
+          clear: both;
+        }
+      }
+
+      .actionBtnWrapper{
+        padding-top: $base * 2.5;
+        .btn{
+          border-radius: 0px;
+        }
+      }
+    }
+   }
+ }
+}
+
+
+/* 
+  #Global Screen Chhange for large Screens =  Laptops, Desktops
+  */
+  @include mix-lg{
+    //Css Need TO be added
+  }
+
+
+/* 
+  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  //CSS
+}
+
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+}
+
+/* 
+  #Screen B/w 768px to 1024px, Device = Tablets, Ipads (landscape)
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  //CSS
+}
+
+
+/* 
+#Global Mobile screen - 767 max
+*/
+@include mix-md {
+  //Css Need TO be added
+}
+
+
+
+/* 
+  #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
+*/
+@include mix-xs {
+  //CSS
+}
+
+/* 
+  #Screen B/w 320px to 479px, Device = Most of the Smartphones Mobiles (Portrait)
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+}
