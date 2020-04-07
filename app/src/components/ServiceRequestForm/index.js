@@ -18,15 +18,21 @@ class ServiceRequestForm extends React.Component {
     super(props);
     this.state = {
       categorySelectionData: ['Home Furniture', 'Office Furniture', 'Mattress', 'Décor'],
+      selectedCategory:"",
       invoiceSelectionData: ['Invoice 1', 'Invoice 2', 'Invoice 3', 'Invoice 4', 'Invoice 5', 'Add an invoice number'],
+      selectedInvoice:"",
       serviceRequestReasons: ['Upholstery wear and tear', 'Broken locks or handles', 'Loose doors or hinges', 'Shelf or drawer issues', '	Missing screws and accessories', 'Surface chipping and cracks', 'Other'],
+      selectedReason:[],
       addressListItem: null,
+      selectedAddress:null,
       addressData: null,
       isAddAddress:false,
       showEnterInvoice:false,
+      invoiceFile:null,
       showInvoiceDisclaimer:true,
       isSaveBtnDisabled:true,
-    
+      selectedImages:[],
+      otherReason:"",
     };
   }
 
@@ -54,8 +60,15 @@ class ServiceRequestForm extends React.Component {
     apiManager
       .get(getAddressListAPI)
       .then(response => {
+        let address=null;
+        if(response.data.data.addressList && response.data.data.addressList.length>0)
+        {
+          address=response.data.data.addressList[0];
+          console.log("Slected address",address)
+        }
         this.setState({
-          addressData: response.data.data.addressList
+          addressData: response.data.data.addressList,
+          selectedAddress:address
         })
       })
       .catch(error => {
@@ -63,7 +76,11 @@ class ServiceRequestForm extends React.Component {
   }
 
   getCategorySelectionValue(value) {
-    console.log('on Dropdown --- ', value)
+    this.setState(
+      {
+        selectedCategory:value,
+      }
+    )
   }
 
   getInvoiceValue(value,index) {
@@ -73,22 +90,29 @@ class ServiceRequestForm extends React.Component {
       this.setState({
         showEnterInvoice: true,
         showInvoiceDisclaimer:flag,
+        selectedInvoice:"",
       });
     }
     else{
       this.setState({
         showEnterInvoice: false,
         showInvoiceDisclaimer:flag,
+        selectedInvoice:value,
       });
     }
   }
 
   getServiceRequestReason(value) {
-    console.log('on Service Request --- ', value)
+    this.setState({
+      selectedReason:value
+    })
   }
 
   getSelectedAddress(value) {
     console.log('on Selected Address --- ', value)
+    this.setState({
+      selectedAddress:value,
+    })
   }
 
   addNewAddressBtnClicked() {
@@ -103,8 +127,34 @@ class ServiceRequestForm extends React.Component {
       showInvoiceDisclaimer: value.length==0,
     });
   }
+  onInvoiceFileSelection(value)
+  {
+    this.setState({
+      invoiceFile: value,
+    });
+  }
+  onOtherReasonEnter(value)
+  {
+    this.setState({
+      otherReason: value,
+    });
+  }
 
-  render() {
+  onImageAddRemove(value)
+  {
+    this.setState({
+      selectedImages: value,
+    });
+  }
+
+
+  render() 
+  {
+    let isSaveBtnDisabled=true;
+    if(this.state.selectedCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+    {
+      isSaveBtnDisabled=false;
+    }
     return (
       <div className="trackMyOrder service-request">
         <div className="bottomDivider">
@@ -121,7 +171,7 @@ class ServiceRequestForm extends React.Component {
 
         <div className='actionBtnWrapper'>
             <button  className='btn-cancel btn'>Cancel</button>
-            <button  disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Submit</button>
+            <button  disabled={isSaveBtnDisabled} className='btn-save btn'>Submit</button>
           </div>
 
       </div>
@@ -165,7 +215,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className='add-img'>
         <h4 className='heading'>Add Image</h4>
-        <UploadImage/>
+        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)}/>
       </div>
     )
   }
@@ -188,7 +238,7 @@ class ServiceRequestForm extends React.Component {
         {
         this.state.showEnterInvoice &&
         (
-          <EnterInvoiceView  onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}/>
+          <EnterInvoiceView  onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)} onInvoiceFile={this.onInvoiceFileSelection.bind(this)}/>
         )       
 
         }
@@ -201,7 +251,8 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className='service-request-reasons'>
         <h4 className='heading'>Reason For Service Request</h4>
-        <Checkboxes data={this.state.serviceRequestReasons} title='Reason for Service Request' onSelection={this.getServiceRequestReason.bind(this)} />
+        <Checkboxes data={this.state.serviceRequestReasons} title='Reason for Service Request' onSelection={this.getServiceRequestReason.bind(this)}
+          onOtherText={this.onOtherReasonEnter.bind(this)} />
       </div>
     )
   }

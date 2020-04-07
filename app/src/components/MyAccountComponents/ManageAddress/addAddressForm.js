@@ -28,7 +28,7 @@ class AddAddressForm extends React.Component {
       inputText_city: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.city,
       inputText_state: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.state,
       isSetAsDefault: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.isDefault,
-      nickname:this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.nickname,
+      nickname:this.props.editAddressDataPro==undefined?undefined:this.props.editAddressDataPro.nickName,
 
       error_name: false,
       error_number: false,
@@ -65,7 +65,7 @@ class AddAddressForm extends React.Component {
       inputText_city: editAddressDataPro.city,
       inputText_state: editAddressDataPro.state,
       isSetAsDefault: editAddressDataPro.isDefault,
-      nickname: editAddressDataPro.nickname,
+      nickname: editAddressDataPro.nickName,
 
       error_name: false,
       error_number: false,
@@ -245,8 +245,8 @@ class AddAddressForm extends React.Component {
 
   addAddress() {
     let APIURL = addAddressAPI;
-    if (this.state.nickName !== undefined) {
-      APIURL = updateAddressAPI + this.state.nickName;
+    if (this.state.nickname !== undefined) {
+      APIURL = updateAddressAPI + this.state.nickname;
     }
     
     this.setState({
