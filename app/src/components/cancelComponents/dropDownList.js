@@ -1,69 +1,91 @@
-import React from 'react';
-import {MESSAGE_CANCEL,DROPDOWN_OPTIONS,MESSAGE_TEXTBOX} from '../../constants/app/cancelConstants';
-
+import React from "react";
+import {
+  MESSAGE_CANCEL,
+  DROPDOWN_OPTIONS_COMMON,
+  DROPDOWN_OPTIONS_ITEM,
+  MESSAGE_TEXTBOX
+} from "../../constants/app/cancelConstants";
+import { Dropdown } from "react-bootstrap";
+debugger;
 class DropDownList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cancelOrderDrop: false,
       cancelLineDrop: false,
-      value: "", 
+      value: "Please choose reason",
       text: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
     this.handleState = this.handleState.bind(this);
-
   }
 
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
 
-    handleChange(event) {
-    this.setState({value: event.target.value});
-    }
+  handleChangeText(event) {
+    this.setState({ text: event.target.value });
+  }
+  handleState() {
+    //  this.props.handleParentState(this.state.value,this.state.text);
+    console.log(this.state.value, this.state.text);
+  }
 
-    handleChangeText(event) {
-        this.setState({text: event.target.value});
-    }
-    handleState(){
-      this.props.handleParentState(this.state.value,this.state.text);
-      // console.log(this.state.value,this.state.text);
-    }
-    
   render() {
-          const text =(
-            <textarea placeholder= {MESSAGE_TEXTBOX} value={this.state.text} onChange={this.handleChangeText} maxLength ='100' />
-         );
-            
-            const option1 =(
-                <option value={DROPDOWN_OPTIONS[0]}>{DROPDOWN_OPTIONS[0]}
-                </option>
-
-            );
-
-            const option2 =(
-                <option  value={DROPDOWN_OPTIONS[1]}>{DROPDOWN_OPTIONS[1]}
-                </option>
-                );
+    const { cancelOrderType } = this.props;
+    let options = [...DROPDOWN_OPTIONS_COMMON];
+    if (cancelOrderType === "item") {
+      options = DROPDOWN_OPTIONS_ITEM.concat(options);
+    }
+    const text = (
+      <textarea
+        placeholder={MESSAGE_TEXTBOX}
+        value={this.state.text}
+        onChange={this.handleChangeText}
+        rows="1"
+        cols="29"
+        maxLength="100"
+      />
+    );
 
     return (
-       
-      <>    
-             <br/>
-             {MESSAGE_CANCEL}
-             <br/>
-            <select   onChange={this.handleChange,this.handleState} onSelect ={}>
-                {this.props.cancelOrderType ==='item' && option1}
-                {this.props.cancelOrderType ==='item' && option2}
-                <option disabled selected value="">Please choose reason</option>
-                <option value={DROPDOWN_OPTIONS[2]}>{DROPDOWN_OPTIONS[2]}</option>
-                <option value={DROPDOWN_OPTIONS[3]}>{DROPDOWN_OPTIONS[3]}</option>
-                <option value={DROPDOWN_OPTIONS[4]}>{DROPDOWN_OPTIONS[4]}</option>
-                <option value={DROPDOWN_OPTIONS[5]}>{DROPDOWN_OPTIONS[5]}</option>
-                
-            </select>
-            <br/>    
-            {this.state.value==="Other" && text}
-            
+      <>
+        <br />
+        {MESSAGE_CANCEL}
+        <br />
+        <div className="dropdown">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+            >
+              {this.state.value}
+              <span className="caret" />
+            </button>
+            <ul className="dropdown-menu">
+              {options.map(myOptions => {
+                return (
+                  <li value={myOptions} onClick={this.handleChange}>
+                    <option>{myOptions}</option>
+                  </li>
+                );
+              })}
+            </ul>
+           
+          {/* <select  className="mdb-select md-form" onChange={this.handleChange} >
+                        <option disabled selected value="">Please choose reason</option>
+                      { options.map((myOptions)=> {
+                          return (
+                            <option  value={myOptions}>{myOptions}</option>
+                          )}
+                        )}
+                      
+                    </select> */}
+        </div>
+        <br />
+        {this.state.value === "Other" && text}
       </>
     );
   }
