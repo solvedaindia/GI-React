@@ -60,7 +60,7 @@ class CancelComponents extends React.Component {
                 backdrop = {false}
                 >
                     <Modal.Header  >
-                        <h4>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h4>
+                        <h3>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h3>
                         <div className='logo-img'><img src={favicon}/></div>
                     </Modal.Header>
                     <Modal.Body>

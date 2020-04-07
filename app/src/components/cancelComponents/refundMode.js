@@ -27,7 +27,7 @@ class RefundMode extends React.Component {
         return (
             <>
                 <div className='paymet-type'>
-                    <p>{MESSAGE_REFUND}</p>
+                    <p className='msgText'>{MESSAGE_REFUND}</p>
                     <input type="radio" value="Online Payment Method" checked={true} id='online-payment'/>
                     <label className='label-text' htmlFor='online-payment'>{PAYMENT_MODE}</label>
                  </div>
