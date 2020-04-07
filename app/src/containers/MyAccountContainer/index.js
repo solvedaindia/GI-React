@@ -9,6 +9,7 @@ import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
+import ServiceRequestForm from '../../components/ServiceRequestForm/index';
 import {
   getReleventReduxState,
   resolveTheFilter,
