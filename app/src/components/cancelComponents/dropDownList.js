@@ -52,22 +52,16 @@ class DropDownList extends React.Component {
 
     return (
       <>
-        <br />
-        {MESSAGE_CANCEL}
-        <br />
+        <p>{MESSAGE_CANCEL}</p>
         <div className="dropdown">
-            <button
-              className="btn dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-            >
+            <button className="btn dropdown-toggle" type="button" data-toggle="dropdown">
               {this.state.value}
               <span className="caret" />
             </button>
             <ul className="dropdown-menu">
               {options.map(myOptions => {
                 return (
-                  <li value={myOptions} onClick={this.handleChange}>
+                  <li className='select-item' value={myOptions} onClick={this.handleChange}>
                     <option>{myOptions}</option>
                   </li>
                 );

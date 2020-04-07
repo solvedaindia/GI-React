@@ -48,7 +48,7 @@ class CancelComponents extends React.Component {
         return(
             <>
                 {this.state.showPopUp === 'true' ?
-                <Modal align="center" style={{background:'rgba(0, 0, 0, 0.5)', zIndex:'2147483648'}}
+                <Modal className='cancel-order-model'
                 // ref={this.windowModelRef}
                 // className="cancelOrder"
                 size="lg"
@@ -60,14 +60,14 @@ class CancelComponents extends React.Component {
                 backdrop = {false}
                 >
                     <Modal.Header  >
-                        <h1>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h1><br/>
-                        <img src={favicon}/>
-
+                        <h4>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h4>
+                        <div className='logo-img'><img src={favicon}/></div>
                     </Modal.Header>
                     <Modal.Body>
-
-                        <DropDownList handleParentState = {this.handleParentStateFromChildState} cancelOrderType={this.props.cancelOrderType}/>
-                        <RefundMode value= "" text = "" close={this.handleClose}/>
+                        <div className='cancel-order-box'>
+                            <DropDownList handleParentState = {this.handleParentStateFromChildState} cancelOrderType={this.props.cancelOrderType}/>
+                            <RefundMode value= "" text = "" close={this.handleClose}/>
+                        </div>
                     </Modal.Body>
                 </Modal>:
                  null}

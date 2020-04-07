@@ -26,20 +26,16 @@ class RefundMode extends React.Component {
     render() {
         return (
             <>
-                <br/>
-                {MESSAGE_REFUND}
-                 <br/>
-                <label>
-                 <input type="radio" value="Online Payment Method" checked={true} />
-                    {PAYMENT_MODE}
-                </label>
-                <br/>
-                <Button className="btn-cancel btn" onClick={this.handleCancel}>
-                {CANCEL}
-                </Button>
-                <Button className="btn-save btn" onClick={this.handleSubmit}>
-                {SUBMIT}
-                </Button>
+                <div className='paymet-type'>
+                    <p>{MESSAGE_REFUND}</p>
+                    <input type="radio" value="Online Payment Method" checked={true} id='online-payment'/>
+                    <label className='label-text' htmlFor='online-payment'>{PAYMENT_MODE}</label>
+                 </div>
+
+                <div className='btn-wrapper'>
+                    <Button className="btn-cancel btn" onClick={this.handleCancel}>{CANCEL}</Button>
+                    <Button className="btn-save btn" onClick={this.handleSubmit}>{SUBMIT}</Button>
+                </div>
             </>
         )
     }
