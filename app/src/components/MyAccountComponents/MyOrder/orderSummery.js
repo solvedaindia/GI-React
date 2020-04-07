@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
-import { mapPaymentMethodMode } from '../../../utils/utilityManager';
+import { mapPaymentMethodMode,formatPrice } from '../../../utils/utilityManager';
 import appCookie from '../../../utils/cookie';
 
 class OrderSummery extends React.Component {
@@ -94,7 +94,7 @@ class OrderSummery extends React.Component {
                 return (
                   <tr>
                   <td>{refundElement.transactionID}</td>
-                  <td>{refundElement.Amount}</td>
+                  <td>₹{formatPrice(refundElement.Amount)}</td>
                   <td>{refundElement.Mode}</td>
                   </tr>
                 )

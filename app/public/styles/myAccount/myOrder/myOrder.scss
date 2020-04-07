@@ -245,10 +245,14 @@
       padding: 26px 0 0 0;
     }
     .refundsummarydata {
-      border-top: 1px solid #e4eaee;
+      // border-top: 1px solid #e4eaee;
       .refundSummaryTitle {
-        font-family: $font-bold;
+        // font-family: $font-bold;
         padding: 5px;
+        color: #505d68;
+        font-size: 14px;
+        font-family: CeraGIBold, sans-serif;
+        line-height: 14px;
       }
       .refundTable {
         width: 100%;

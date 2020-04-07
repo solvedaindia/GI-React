@@ -375,9 +375,14 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     const omsData = omsOrderResponse;
     // orderDetails.orderID = omsData.orderID;
     const refundData = [{
-      transactionID : 'xxxxxxxxx',
+      transactionID : 'Xxxxxxxx',
       Amount : '24000',
       Mode : 'Bank Account',
+    },
+    {
+      transactionID : 'Xxxxxxxx',
+      Amount : '18000',
+      Mode : 'Godrej Credit',
     }];
     orderDetails.refundDetails = refundData;
     orderDetails.orderID = wcsOrderID;
