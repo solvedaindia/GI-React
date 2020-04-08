@@ -7,6 +7,7 @@ import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/a
 import EnterInvoiceView from '../ServiceRequestForm/enterInvoiceView';
 import Checkboxes from '../ServiceRequestForm/checkboxes';
 import UploadImage from '../ServiceRequestForm/uploadImage';
+import '../../../public/styles/myAccount/service-request.scss';
 
 class ServiceRequestFormGuest extends React.Component {
 
@@ -39,6 +40,13 @@ class ServiceRequestFormGuest extends React.Component {
 
   getServiceRequestReason(value) {
     console.log('on Service Request --- ', value)
+  }
+
+  onImageAddRemove(value)
+  {
+    // this.setState({
+    //   selectedImages: value,
+    // });
   }
 
   render() {
@@ -117,10 +125,11 @@ class ServiceRequestFormGuest extends React.Component {
 
   renderUploadImage() {
     return (
-      <div>
-        <h4>Add Image</h4>
-        <UploadImage />
+      <div className='add-img'>
+        <h4 className='heading'>Add Image</h4>
+        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)}/>
       </div>
+     
     )
   }
 

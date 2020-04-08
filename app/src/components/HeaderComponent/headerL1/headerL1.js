@@ -92,13 +92,6 @@ class HeaderL1 extends React.Component {
         ) : (
           <div>...</div>
         )}
-        <li className="listItems">
-                  <Link
-                    className="action"
-                    to='/serviceRequest'>
-                  Service Request
-                  </Link>
-            </li>
       </ul>
     );
   }
