@@ -83,4 +83,30 @@ router.get('/servicerequestpage', (req, res, next) => {
   });
 });
 
+router.post('/cancel', (req, res, next) => {
+  ordersHandler.cancelOrder(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
+router.post('/return', (req, res, next) => {
+  ordersHandler.returnOrder(req, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;

@@ -688,10 +688,33 @@ function getInvoiceDetails(headers, params, callback) {
   );
 }
 
+function OMSOrderDetails(headers,orderID,callback){
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const orderDetails = `${constants.orderDetailOMS
+    .replace('{{storeId}}', headers.storeId)
+    .replace('{{orderId}}', orderID)}`;
+
+  origin.getResponse(
+    'GET',
+    orderDetails,
+    reqHeaders,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if(response.status === 200){
+        callback(response.body);
+      } else {
+        callback(errorutils.handleWCSError(response.body));
+      }
+    })
+}
+
 /**
- * Get Invoice Details
- * @param headers,invoiceNo
- * @return 200,Order Details
+ * Get Service Request Form Details
+ * @param headers
+ * @return 200,Service Request Form Details
  * @throws contexterror,badreqerror if storeid or access_token is invalid
  */
 module.exports.getServiceRequestDetails = getServiceRequestDetails;
@@ -731,3 +754,96 @@ function getServiceRequestDetails(req, callback) {
     }
   });
 }
+
+/**
+ * Cancel Order/Order Item
+ * @param headers
+ * @return 200,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.cancelOrder = cancelOrder;
+function cancelOrder(req, callback) {
+  if(!req.body.orderid){
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const orderID = req.body.orderid;
+  const orderCancelBody = {
+    orderCancellation:'Y',
+    orderId: orderID,
+    refundMethod: req.body.refundmethod,
+    cancelReasonOrd : req.body.cancelreason,
+  };
+
+  if(req.body.orderitemid){
+    orderCancelBody.orderCancellation = 'N';
+    orderCancelBody.orderItemId = req.body.orderitemid;
+    orderCancelBody.partNumber = req.body.partnumber;
+    orderCancelBody.cancelReasonOrd = '';
+    orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
+  }
+  const reqHeaders = headerutil.getWCSHeaders(req.headers);
+  const cancelOrder = constants.orderCancel.replace('{{storeId}}', req.headers.storeId);
+  origin.getResponse( 
+  'POST',
+  cancelOrder,
+  reqHeaders,
+  null,
+  orderCancelBody,
+  null,
+  '',
+ response=>{
+  if(response.status === 200){
+    callback(null,response.body);
+  } else {
+    callback(errorutils.handleWCSError(response))
+  }
+  })
+}
+
+/**
+ * Return Order
+ * @param headers
+ * @return 200,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.returnOrder = returnOrder;
+function returnOrder(req, callback) {
+  if(!req.body.orderid){
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+  const orderID = req.body.orderid;
+  const orderCancelBody = {
+    orderCancellation:'Y',
+    orderId: orderID,
+    refundMethod: req.body.refundmethod,
+    cancelReasonOrd : req.body.cancelreason,
+  };
+
+  if(req.body.orderitemid){
+    orderCancelBody.orderCancellation = 'N';
+    orderCancelBody.orderItemId = req.body.orderitemid;
+    orderCancelBody.partNumber = req.body.partnumber;
+    orderCancelBody.cancelReasonOrd = '';
+    orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
+  }
+  const reqHeaders = headerutil.getWCSHeaders(req.headers);
+  const cancelOrder = constants.orderCancel.replace('{{storeId}}', req.headers.storeId);
+  origin.getResponse( 
+  'POST',
+  cancelOrder,
+  reqHeaders,
+  null,
+  orderCancelBody,
+  null,
+  '',
+ response=>{
+  if(response.status === 200){
+    callback(null,response.body);
+  } else {
+    callback(errorutils.handleWCSError(response))
+  }
+  })
+}
+
