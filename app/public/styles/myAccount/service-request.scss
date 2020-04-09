@@ -16,8 +16,8 @@
         float: left;
         width: 100%;
         .uploded-img, .uploded-img-data{
-          width: 166px;
-          height: 166px;
+          width: 140px;
+          height: 140px;
           position: relative;
           float: left;
           margin-right: $base * 3;
@@ -40,8 +40,8 @@
           background-color: rgba(238, 237, 237, 0.09);
           padding: 10px;
           .upload-img-btn{
-            width: 166px;
-            height: 166px;
+            width: 140px;
+            height: 140px;
             text-align: center;
             background: $paleGrey;
             float: left;
@@ -52,8 +52,8 @@
               position: absolute;
                margin: 0px; 
               padding: 0px; 
-              width: 166px; 
-              height: 166px; 
+              width: 140px; 
+              height: 140px; 
               outline: none; 
               opacity: 0; 
               cursor: pointer;
@@ -323,7 +323,33 @@
   #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
 */
 @include mix-xs {
-  //CSS
+  .service-request {
+    .product-category{
+      .dropdown {
+        .dropdown-toggle{
+          width: 100%;
+        }
+      }
+    }
+    .service-request-desc{
+      .text-area{
+        width: 100%;
+      }
+    }
+    .invice-selection {
+      .guest-type{
+        margin-top: 0px;
+        .form-BgContainer{
+          .btn-save{
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .form-BgContainer{
+      padding: 0px;
+    }
+  }
 }
 
 /* 
