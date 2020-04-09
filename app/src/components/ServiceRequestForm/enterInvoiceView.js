@@ -19,38 +19,47 @@ class EnterInvoiceView extends React.Component {
     
   }
   handleInput=(event)=>{
-    this.props.onInvoiceChange(event.target.value)
+    
     const flag =regexInvoice.test(event.target.value)
-    console.log("flagaa",flag)
+   
     if(event.target.value.length==12)
     {
       this.setState({
         invoiceNumber: event.target.value,
-        isUploadBtnDisabled:flag,
-        error:flag?"":"Invalid invoice number",
-        error:(flag?false:true),
+        isUploadBtnDisabled:!flag,
+        errorMessage:flag?"":"Invalid invoice number",
+        error:!flag,
       });
     }
     else{
       this.setState({
         invoiceNumber: event.target.value,
         isUploadBtnDisabled:true,
-        error:flag?"":"Invalid invoice number",
-        error:(flag?false:true),
+        errorMessage:flag?"":"Invalid invoice number",
+        error:!flag
       });
     } 
+    this.props.onInvoiceChange(event.target.value)
   
   }
-  validateInvoice=()=>
+  onFileSelected=(event)=>
   {
-
+    const fsize = event.target.files[0].size;
+    const file = Math.round((fsize / 1024)); 
+    if(file>10240)
+    {
+        alert("File size is too Big, please select a image less than 10mb")
+        event.target.value=null
+        return;
+    }
+    //upload file task
+    this.props.onInvoiceFile(event.target.files[0])
   }
 
   onUploadInvoice=()=>{
    
    const uploadInvoice = document.getElementById("uploadInvoice");
     uploadInvoice.click();
-    console.log("aaaaaaa-----",uploadInvoice);
   }
 
   render() {
@@ -77,7 +86,7 @@ class EnterInvoiceView extends React.Component {
             </div>
             <div className="col-md-6">
             <button onClick={this.onUploadInvoice.bind(this)} disabled={this.state.isUploadBtnDisabled} className='btn-save btn'>Upload Invoice</button>
-            <input type="file" id="uploadInvoice" accept="image/*,application/pdf" style={{display:'none'}} ></input>
+            <input type="file" id="uploadInvoice" onChange={this.onFileSelected.bind(this)} accept="image/*,application/pdf" style={{display:'none'}} ></input>
             </div>
           </div>        
       </div>

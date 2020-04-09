@@ -5,11 +5,16 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const productUtil = require('../utils/productutil');
+const userHandler = require('../handlers/usershandler');
+const espotHandler =  require('../handlers/espotshandler');
 
 const profileFilter = require('../filters/profilefilter');
+const espotFilter =  require('../filters/espotfilter');
 const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
+
+const espotNames = require('../configs/espotnames');
 
 /**
  * Get Order List
@@ -669,4 +674,48 @@ function getInvoiceDetails(headers, params, callback) {
       }
     },
   );
+}
+
+/**
+ * Get Invoice Details
+ * @param headers,invoiceNo
+ * @return 200,Order Details
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getServiceRequestDetails = getServiceRequestDetails;
+function getServiceRequestDetails(req, callback) {
+  // if (!params.partNumber) {
+  //   callback(errorutils.errorlist.invalid_params);
+  //   return;
+  // }
+  const reqHeader = req.headers;
+  const resJSON = {
+    productDetail : {},
+    addressList : [],
+    productCategory : [],
+    serviceReasonList : [],
+  };
+
+  let serviceRequestPageDetails = [
+    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.categoryList),
+    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.reasonList),
+    userHandler.getUserAddress.bind(null,reqHeader),
+  ];
+  if(req.query.partnumber){
+    serviceRequestPageDetails.push( 
+    productUtil.productDetailByPartNumber.bind(null, req.query.partnumber,reqHeader),
+    );
+  }
+
+  async.parallel(serviceRequestPageDetails, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      resJSON.productCategory = espotFilter.espotContent(result[0]);
+      resJSON.serviceReasonList = espotFilter.espotContent(result[1]);
+      resJSON.addressList = result[2] && result[2].addressList;
+      resJSON.productDetail = result[3] && productDetailFilter.productDetailSummary(result[3]);
+      callback(null, resJSON);
+    }
+  });
 }

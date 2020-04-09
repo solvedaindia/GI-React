@@ -40,14 +40,16 @@ class DropDownList extends React.Component {
       options = DROPDOWN_OPTIONS_ITEM.concat(options);
     }
     const text = (
+      <div className='textarea-box'>
       <textarea
         placeholder={MESSAGE_TEXTBOX}
         value={this.state.text}
         onChange={this.handleChangeText}
-        rows="1"
+        rows="2"
         cols="29"
         maxLength="100"
       />
+      </div>
     );
 
     return (

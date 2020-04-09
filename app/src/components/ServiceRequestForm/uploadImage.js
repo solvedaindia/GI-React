@@ -12,12 +12,12 @@ class UploadImage extends React.Component {
   onAddImage(file)
   {
     const files=this.state.files;
-     alert(files.length)
+    // alert(files.length)
     files.push(file);
     this.setState({
       files:files
     });
-  //  alert(files.length)
+    this.props.onImageAddRemove(files)
   }
 
   onRemoveImage(index)
@@ -27,6 +27,7 @@ class UploadImage extends React.Component {
     this.setState({
       files:files
     });
+    this.props.onImageAddRemove(files)
   }
   
   render() {

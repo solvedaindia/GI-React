@@ -25,10 +25,15 @@
             height: 20px;
             border-radius: 100%;
             font-size: 12px;
+            opacity:1;
           }
         }
         .add-img-upload{
           padding: 0px;
+          border-radius: 2px;
+          border: dashed 1px $lightblueGrey;
+          background-color: rgba(238, 237, 237, 0.09);
+          padding: 10px;
           .upload-img-btn{
             width: 166px;
             height: 166px;
@@ -90,7 +95,44 @@
         }
       }
 
+      .product-category{
+        .dropdown{
+          .dropdown-toggle{
+            background: $colorwhite;
+            border: 1px solid $battleshipGrey;
+            border-radius: 0px;
+            min-width: 160px;
+            text-align: left;
+            .caret{
+              float: right;
+              margin-top: 8px;
+              margin-left: 10px;
+            }
+            .dropdown-menu{
+              width: 100%;
+            }
+          }
+        }
+      }
+
       .invice-selection{
+        .dropdown{
+          .dropdown-toggle{
+            background: $colorwhite;
+            border: 1px solid $battleshipGrey;
+            border-radius: 0px;
+            min-width: 160px;
+            text-align: left;
+            .caret{
+              float: right;
+              margin-top: 8px;
+              margin-left: 10px;
+            }
+            .dropdown-menu{
+              width: 100%;
+            }
+          }
+        }
         .upload-invoiceno{
           .form-div{
             .invoiceNumber{
@@ -101,6 +143,7 @@
           }
           .btn-save{
             border-radius: 0px;
+            background-color: $black;
           }
         }
       }
@@ -111,6 +154,7 @@
             padding-left: 10px;
             .label-text{
               padding-left: 8px;
+              font-family: $font-light;
             }
           }
         }
@@ -125,6 +169,7 @@
             border: 1px solid $lightblueGrey;
             min-height: 100px;
             float: left;
+            background-color: rgba(247, 248, 248, 0.5);
             .inputBox{
               display: grid;
               float: left;

@@ -4,6 +4,14 @@ class Checkboxes extends React.Component {
 
   constructor(props) {
     super(props);
+    const options=[];
+    // props.data.map((data)=>{
+    //     const val = {
+    //       text:data,
+    //       checked:true,
+    //     }
+    //     options.push(val)
+    // })
     this.state = {
       optionsChecked: [],
       showTextview: false,
@@ -42,7 +50,8 @@ class Checkboxes extends React.Component {
     this.setState({
       characterCount: 100 - document.getElementById('textareaSR').value.length,
     })
-    this.props.onSelection([document.getElementById('textareaSR').value]);
+    //this.props.onSelection([document.getElementById('textareaSR').value]);
+    this.props.onOtherText(document.getElementById('textareaSR').value);
   }
 
   renderTextField() {
