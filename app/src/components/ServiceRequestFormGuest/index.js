@@ -51,22 +51,26 @@ class ServiceRequestFormGuest extends React.Component {
 
   render() {
     return (
-      <>
-        <h4>Service Request</h4>
-        {this.renderRequestServiceMsg()}
-        {this.renderProdcutCategory()}
-        {this.renderTextField()}
-        <h6>Please note that the service may be chargeable, in case of non-Godrej product</h6>
-        <AddAddressForm isFromServiceRequest={true} />
-        <EnterInvoiceView />
-        {this.renderServiceRequestReason()}
-        {this.renderUploadImage()}
-        <div className='actionBtnWrapper'>
-          <button className='btn-cancel btn'>Cancel</button>
-          <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Submit</button>
+      <div className='container'>
+        <div className='guest-service service-request'>
+          <h1 class="heading">Service Request</h1>
+          {this.renderRequestServiceMsg()}
+          {this.renderProdcutCategory()}
+          {this.renderTextField()}
+          <div className='guest-address-form'>
+            <h6 className='heading'>Please note that the service may be chargeable, in case of non-Godrej product</h6>
+            <AddAddressForm isFromServiceRequest={true} />
+          </div>
+          <div className='invice-selection guest-type'><EnterInvoiceView /></div>
+          {this.renderServiceRequestReason()}
+          {this.renderUploadImage()}
+          <div className='actionBtnWrapper'>
+            <button className='btn-cancel btn'>Cancel</button>
+            <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Submit</button>
+          </div>
+          {this.state.showLogin ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
+          </div>
         </div>
-        {this.state.showLogin ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
-      </>
     );
   }
 
@@ -74,22 +78,26 @@ class ServiceRequestFormGuest extends React.Component {
     if (getCookie('isLoggedIn') === 'true') {
       return (
         <>
-          Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
+          <div className='request-service-msg'> 
+          <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
           <Link className='' to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
             {' View your past orders'}
-          </Link>
-          <div>If you have made a store purchase, please fill the form shown blow to place a service request.</div>
+          </Link></p>
+            <p>If you have made a store purchase, please fill the form shown blow to place a service request.</p>
+          </div>
         </>
       )
     }
     else {
       return (
         <>
-          Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
-          <button className='' onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
+         <div className='request-service-msg'> 
+          <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
+          <br/><button className='btn guest-login-btn' onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
             {' Click here to log in and view your past orders'}
-          </button>
-          <div>If you have made a guest purchase online or at the store, please enter the form below to place a service request.</div>
+          </button></p>
+            <p>If you have made a guest purchase online or at the store, please enter the form below to place a service request.</p>
+          </div>
         </>
       )
     }
@@ -97,7 +105,7 @@ class ServiceRequestFormGuest extends React.Component {
 
   renderProdcutCategory() {
     return (
-      <div>
+      <div className='product-category'>
         <h4>Product Category</h4>
         <Dropdown title='Please Select Product Category' data={this.state.productCategory} onSelection={this.getProductCategorySelection.bind(this)} />
       </div>
@@ -106,17 +114,17 @@ class ServiceRequestFormGuest extends React.Component {
 
   renderTextField() {
     return (
-      <div>
+      <div className='service-request-desc'>
         <h5>{this.props.title}</h5>
-        <textarea onChange={() => this.onTextareaInput()} style={{ 'border-color': '#dfe0de', padding: '5px', outline: 'none', resize: 'none' }} name="the-textarea" id="textareaDesc" maxlength={this.state.characterLimit} placeholder="Please Specify" autofocus rows='4' cols='50'></textarea>
-        <label>{this.state.characterCount} Character{this.state.characterCount <= 1 ? '' : 's'} remaining</label>
+        <textarea className='text-area' onChange={() => this.onTextareaInput()} name="the-textarea" id="textareaDesc" maxlength={this.state.characterLimit} placeholder="Please Specify" autofocus rows='4' cols='50'></textarea>
+        <label className='label-text'>{this.state.characterCount} Character{this.state.characterCount <= 1 ? '' : 's'} remaining</label>
       </div>
     )
   }
 
   renderServiceRequestReason() {
     return (
-      <div>
+      <div className='service-request-reasons'>
         <h4>Reason For Service Request</h4>
         <Checkboxes data={this.state.serviceRequestReasons} title='Reason for Service Request' onSelection={this.getServiceRequestReason.bind(this)} />
       </div>

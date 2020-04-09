@@ -1,8 +1,13 @@
 @import "../variable.scss";
-.MyAccount{
- .myOnGoingOoders{
-   .trackMyOrder {
-    &.service-request{
+.service-request{
+      .heading{
+        font-family: $font-bold;
+        font-size:32px;  
+        line-height: $base*3.5; 
+        margin:18px 0px 7px 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
       .bottomDivider{
         margin-bottom: $base *2;
       }
@@ -86,15 +91,6 @@
         } 
       }
 
-      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
-        .heading{
-          font-size: $base *2;
-          font-family: $font-bold;
-          padding-top:$base * 2.5;
-          clear: both;
-        }
-      }
-
       .product-category{
         .dropdown{
           .dropdown-toggle{
@@ -144,7 +140,14 @@
           .btn-save{
             border-radius: 0px;
             background-color: $black;
+            color: $colorwhite;
           }
+        }
+        &.guest-type{
+          margin: 20px 0px;
+          clear: both;
+          float: left;
+          width: 100%;
         }
       }
 
@@ -239,15 +242,41 @@
 
       .actionBtnWrapper{
         padding-top: $base * 2.5;
+        padding-bottom: $base * 2.5;
         clear: both;
         .btn{
           border-radius: 0px;
         }
       }
+      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+        .heading{
+          font-size: $base *2;
+          font-family: $font-bold;
+          padding-top:$base * 2.5;
+          clear: both;
+          margin-top: 0px;
+        }
+      }
+
+      .request-service-msg{
+        .guest-login-btn{
+          background: $black;
+          min-width: 200px;
+          padding: 8px 10px;
+          color: $colorwhite;
+          border-radius: 0px;
+        }
+      }
+      .guest-address-form{
+        .heading{
+          font-size: $base*1.75;
+        }
+        float: left;
+        width: 100%;
+        margin: 10px 0px;
+      }
     }
-   }
- }
-}
+
 
 
 /* 
