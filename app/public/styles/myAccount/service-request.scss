@@ -152,6 +152,42 @@
         .service-request-text{
           .service-request-box{
             padding-left: 10px;
+              .inputCheck[type="checkbox"] {
+                display: none;
+            }
+              /* Input Checkbox Squere
+              -----------------------------*/
+              .inputCheck[type="checkbox"] + .label-text {
+                background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;     
+                display: inline;
+                min-height: 16px;
+                padding-left: 23px;
+                background-size: contain;
+              }
+          
+              .inputCheck[type="checkbox"]:checked + .label-text {
+                background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+                background-size: contain;
+                padding-left: 23px;
+              }
+              .label-text {   
+                cursor: pointer;  
+                font-size: $base*1.5;      
+              }
+              .input_box,
+              .defaultlbl{
+                float: left;
+              }
+          
+              .defaultlbl{
+                /*font-weight: normal;
+                padding: 0 0 0 14px;
+                margin: 0;
+                font-size: $base*1.5;*/
+              }
+            
+
+
             .label-text{
               padding-left: 8px;
               font-family: $font-light;
@@ -160,6 +196,23 @@
         }
       }
 
+      .service-request-desc{
+        .heading-desc{
+          font-size: $base*1.75;
+          color: $colorblack;
+          margin: 10px 0px 0px 0px;
+        }
+        .text-area{
+          border: 1px solid $battleshipGrey;
+          padding: 5px 10px;
+          background: $colorwhite;
+        }
+        .label-text{
+          display: block;
+          color: lightGrey;
+          font-family: $font-light;
+        }
+      }
       .get-selected-address{
         .saveAddress{
           .list{
