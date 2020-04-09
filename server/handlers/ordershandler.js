@@ -777,7 +777,6 @@ function cancelOrder(req, callback) {
 
   if(req.body.orderitemid){
     orderCancelBody.orderCancellation = 'N';
-    orderCancelBody.orderItemId = req.body.orderitemid;
     orderCancelBody.partNumber = req.body.partnumber;
     orderCancelBody.cancelReasonOrd = '';
     orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
@@ -809,33 +808,64 @@ function cancelOrder(req, callback) {
  */
 module.exports.returnOrder = returnOrder;
 function returnOrder(req, callback) {
-  if(!req.body.orderid){
+  if(!req.body.orderId 
+    || !req.body.shipmentNo 
+    || !req.body.partNumber 
+    || !req.body.price 
+    || !req.body.quantity
+    || !req.body.returnReason
+    || !req.body.refundMethod){
     callback(errorutils.errorlist.invalid_params);
     return;
   }
-  const orderID = req.body.orderid;
-  const orderCancelBody = {
-    orderCancellation:'Y',
-    orderId: orderID,
-    refundMethod: req.body.refundmethod,
-    cancelReasonOrd : req.body.cancelreason,
+
+  if(req.body.refundMethod === 'COD'){
+      if(!req.body.bankDetails
+        || !req.body.bankDetails.name
+        || !req.body.bankDetails.accountNO
+        || !req.body.bankDetails.confirmAccountNO
+        || !req.body.bankDetails.IFSCCode
+        || (req.body.bankDetails.accountNO !== req.body.bankDetails.confirmAccountNO)
+        ){
+          callback(errorutils.errorlist.invalid_params);
+          return;
+      }
+  }
+
+  const orderReturnBody = {
+    orderId : req.body.orderId,
+    shipmentNo : req.body.shipmentNo,
+    partNumber : req.body.partNumber,
+    unitPrice : req.body.price,
+    quantity : req.body.quantity,
+    returnReason : req.body.returnReason,
+    refundMethod: req.body.refundMethod,
   };
 
-  if(req.body.orderitemid){
-    orderCancelBody.orderCancellation = 'N';
-    orderCancelBody.orderItemId = req.body.orderitemid;
-    orderCancelBody.partNumber = req.body.partnumber;
-    orderCancelBody.cancelReasonOrd = '';
-    orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
+  if(req.body.refundMethod === 'COD'){
+    orderReturnBody.name = req.body.bankDetails.name;
+    orderReturnBody.BAccntNo = req.body.bankDetails.accountNO;
+    orderReturnBody.BCnfAccntNo = req.body.bankDetails.confirmAccountNO;
+    orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
   }
+  
+  if(req.body.images && req.body.images.length>0){
+    req.body.images.forEach((image,index) => {
+      orderReturnBody[`img${index+1}`] = image;
+    });
+  }
+
+  console.log(JSON.stringify(orderReturnBody));
+  callback(null,orderReturnBody);
+  return;
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const cancelOrder = constants.orderCancel.replace('{{storeId}}', req.headers.storeId);
+  const returnOrder = constants.returnOrder.replace('{{storeId}}', req.headers.storeId);
   origin.getResponse( 
   'POST',
-  cancelOrder,
+  returnOrder,
   reqHeaders,
   null,
-  orderCancelBody,
+  orderReturnBody,
   null,
   '',
  response=>{

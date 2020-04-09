@@ -80,4 +80,5 @@ module.exports = Object.freeze({
   categoryBreadcrumb: `${prodSearchResourceUrl}/{{storeId}}/productview/byCategory/{{categoryId}}?responseFormat=json&profileName=IBM_BreadCrumbByCategoryUniqueId`,
   categorySuggestions: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/categorySuggestions`,
   orderCancel : `${prodWcsResourceUrl}/{{storeId}}/GIOrder/cancel`,
+  returnOrder : `${prodWcsResourceUrl}/{{storeId}}/GIOrder/return/submit`,
 });
