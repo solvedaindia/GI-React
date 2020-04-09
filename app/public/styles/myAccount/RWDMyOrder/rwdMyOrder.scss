@@ -375,6 +375,16 @@
       }
     }
 
+    .res-refund-summary {
+      padding: 15px 15px 0px 15px;
+      color: #77787a;
+      .res-refund-title {
+        font-size: 14px;
+        margin: 5px auto 16px auto;
+        font-family: CeraGIBold, sans-serif;
+        color: #000;
+      }
+    }
 
     .order-invoice-details{
       padding: 20px 15px;

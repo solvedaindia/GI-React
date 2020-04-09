@@ -240,9 +240,11 @@ class RWDMyOrder extends React.Component {
       );
     }
     else if (this.state.currentComponent === 'ViewOrder') {
+      // console.log(this.state.currentComponentData);
       return (
         <div className="myOrder View-Order">
           <RWDCompleteOrder
+            refundDetailsPRO = {this.state.currentComponentData.refundDetails}
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
             viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)} />

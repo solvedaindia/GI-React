@@ -2,6 +2,7 @@ import React from 'react';
 import RWDSingleProduct from './RWDSingleProduct';
 import { Link } from 'react-router-dom';
 import appCookie from '../../../../utils/cookie';
+import { formatPrice } from '../../../../utils/utilityManager';
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class RWDCompleteOrder extends React.Component {
 
   render() {
     const orderData = this.props.orderDataPro;
+    const refundData = this.props.refundDetailsPRO;
     const addressData = orderData.address;
     const summeryData = orderData.orderSummary
     const invoiceData = orderData.invoices;
@@ -83,6 +85,29 @@ class RWDCompleteOrder extends React.Component {
             </p>
             </div>
           </div>
+        </div>
+        
+        <div className="res-refund-summary">
+        {refundData && refundData.length > 0 ?
+        <>
+        <div className ='res-refund-title'>Refund Summary</div> 
+            {
+              refundData.map(refundElement => {
+                return (
+                  <>
+                  <div className="res-refund-detail">
+                  Transaction ID: {refundElement.transactionID}
+                  <br />
+                  {refundElement.Mode}
+                  ₹{formatPrice(refundElement.Amount)}
+                  </div>
+                  </>
+                )
+              })
+            }
+          
+        </>: null
+        }
         </div>
         { appCookie.get('isLoggedIn') === 'true' &&
         <div className='order-invoice-details'>
