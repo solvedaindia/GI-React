@@ -16,21 +16,21 @@ class CancelComponents extends React.Component {
             text: ''
         };
 
-        this.handleDocClick = this.handleDocClick.bind(this);
+        this.showModal = this.showModal.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleParentStateFromChildState = this.handleParentStateFromChildState.bind(this);
 
     }
 
-    componentDidMount() {
-        document.body.addEventListener('dblclick', this.handleDocClick);
-    }
+    // componentDidMount() {
+    //     document.body.addEventListener('dblclick', this.handleDocClick);
+    // }
 
-    componentWillUnmount() {
-        document.body.removeEventListener('dbclick', this.handleDocClick);
-    }
+    // componentWillUnmount() {
+    //     document.body.removeEventListener('dbclick', this.handleDocClick);
+    // }
 
-    handleDocClick(){
+    showModal(){
         this.setState({showPopUp:'true'});
         console.log("clicked on doc bdy");
     }

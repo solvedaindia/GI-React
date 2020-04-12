@@ -29,6 +29,7 @@ class MyOrder extends React.Component {
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
+    this.modalRef=React.createRef();
   }
 
   componentDidMount() {
@@ -160,6 +161,12 @@ class MyOrder extends React.Component {
   componentWillReceiveProps() {
   }
 
+  showCancelModal(orderData,orderItem)
+  {
+    console.log(orderItem,orderData)
+    this.modalRef.current.showModal();
+  }
+
   loadingbar() {
     return (
       <div className="lazyloading-Indicator">
@@ -173,13 +180,15 @@ class MyOrder extends React.Component {
     )
   }
 
+
+
   render() {
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          // <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
+           //<TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
           <ServiceRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)}/>
         ) :
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
@@ -189,6 +198,7 @@ class MyOrder extends React.Component {
                 <OrderItem
                   renderSelectionPro={this.renderSelection.bind(this)}
                   isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+                  showCancelModal={this.showCancelModal.bind(this)}
                   orderItemData={data}
                 />
               </>
@@ -196,7 +206,7 @@ class MyOrder extends React.Component {
           }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
         }
 
-      <CancelComponents/>
+      <CancelComponents ref={this.modalRef}/>
       </div>
     );
   }
