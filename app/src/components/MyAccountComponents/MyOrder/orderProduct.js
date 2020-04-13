@@ -91,7 +91,7 @@ class ProductOrder extends React.Component {
               Service Request
             </button> 
         
-            <button className="btn-borderwhite" style={{marginTop:'5px'}} onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
+            <button className="btn-borderwhite cancel-item" onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
               Cancel Item
             </button> 
 

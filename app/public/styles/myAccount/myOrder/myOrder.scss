@@ -91,7 +91,16 @@
           width: 100%;
           font-size: 14px;
           font-family: $font-medium;
-          font-weight: 600;
+          &.cancel-item{
+            margin-top: 5px;
+            &.disabled{
+              cursor: not-allowed;
+              pointer-events: none;
+              background-color: $grey;
+              color: $greyish;
+              border: 1px solid $colorwhite;
+            }
+          }
           &:hover {
             background: $black;
             color: $colorwhite;
