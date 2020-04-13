@@ -83,7 +83,7 @@ class OrderItem extends React.Component {
               />
             )
           })}
-          <button className="btn-bg" style={{width:'100%',backgroundColor:'#005084'}} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
+          <button className="btn-bg cancel-order" onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
               Cancel Order
           </button> 
         </div>
