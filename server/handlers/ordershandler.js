@@ -704,7 +704,7 @@ function OMSOrderDetails(headers,orderID,callback){
     '',
     response => {
       if(response.status === 200){
-        callback(response.body);
+        callback(null,response.body);
       } else {
         callback(errorutils.handleWCSError(response.body));
       }
@@ -729,6 +729,7 @@ function getServiceRequestDetails(req, callback) {
     addressList : [],
     productCategory : [],
     serviceReasonList : [],
+    invoiceList : [],
   };
 
   let serviceRequestPageDetails = [
@@ -736,20 +737,23 @@ function getServiceRequestDetails(req, callback) {
     espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.reasonList),
     userHandler.getUserAddress.bind(null,reqHeader),
   ];
-  if(req.query.partnumber){
+  if(req.query.partnumber && req.query.orderid){
     serviceRequestPageDetails.push( 
     productUtil.productDetailByPartNumber.bind(null, req.query.partnumber,reqHeader),
+    OMSOrderDetails.bind(null, reqHeader,req.query.orderid),
     );
   }
 
   async.parallel(serviceRequestPageDetails, (err, result) => {
     if (err) {
       callback(err);
+      return;
     } else {
       resJSON.productCategory = espotFilter.espotContent(result[0]);
       resJSON.serviceReasonList = espotFilter.espotContent(result[1]);
       resJSON.addressList = result[2] && result[2].addressList;
       resJSON.productDetail = result[3] && productDetailFilter.productDetailSummary(result[3]);
+      resJSON.invoiceList = result[4] && result[4].result.order.invoices;
       callback(null, resJSON);
     }
   });
@@ -854,10 +858,6 @@ function returnOrder(req, callback) {
       orderReturnBody[`img${index+1}`] = image;
     });
   }
-
-  console.log(JSON.stringify(orderReturnBody));
-  callback(null,orderReturnBody);
-  return;
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
   const returnOrder = constants.returnOrder.replace('{{storeId}}', req.headers.storeId);
   origin.getResponse( 
