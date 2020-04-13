@@ -6,7 +6,7 @@ export const CANCEL_ORDER = 'Cancel Order';
 export const CANCEL_ITEM = 'Cancel Item';
 export const MESSAGE_REFUND ="How do you want to process the refund?";
 export const PAYMENT_MODE ="Online Payment Method";
-
+export const CACELATION_WINDOW_CLOSE="Cancellation window is closed";
 export const DROPDOWN_OPTIONS_ITEM = [
     'Placed order by mistake',
     'Found better product',

@@ -100,6 +100,9 @@ class RWDOrderItem extends React.Component {
           <button className='viewOrder' onClick={this.onViewOrderClick.bind(this, orderData)}>View Order</button>
           
         </div>
+         <button className="btn-bg" style={{width:'100%',backgroundColor:'#005084'}} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
+              Cancel Order
+          </button> 
         <div className='order-separator'></div>
       </>
     );

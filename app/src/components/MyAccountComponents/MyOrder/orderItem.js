@@ -78,10 +78,14 @@ class OrderItem extends React.Component {
                 itemIndex={key}
                 proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
                 prodctDataPro={data}
+                showCancelModal={(orderItem)=>{this.props.showCancelModal(orderData,orderItem)}}
                 allDataPro={this.props.orderItemData}
               />
             )
           })}
+          <button className="btn-bg" style={{width:'100%',backgroundColor:'#005084'}} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
+              Cancel Order
+          </button> 
         </div>
       </>
     );
