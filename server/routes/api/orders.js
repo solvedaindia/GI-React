@@ -70,7 +70,7 @@ router.get('/current', (req, res, next) => {
   });
 });
 
-router.get('/servicerequestpage', (req, res, next) => {
+router.get('/servicerequestform', (req, res, next) => {
   ordersHandler.getServiceRequestDetails(req, (err, result) => {
     if (err) {
       next(err);
