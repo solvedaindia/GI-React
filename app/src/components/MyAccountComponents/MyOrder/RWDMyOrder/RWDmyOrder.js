@@ -77,7 +77,7 @@ class RWDMyOrder extends React.Component {
   {
     //console.log(this.modalRef)
     console.log(orderItem,orderData)
-    this.modalRef.current.showModal();
+    this.modalRef.current.showModal(orderItem,orderData);
   }
 
   myOrderCallback(compName, data, completeData) {

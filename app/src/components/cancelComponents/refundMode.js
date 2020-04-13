@@ -16,11 +16,13 @@ class RefundMode extends React.Component {
    }
 
    handleCancel(){
-    this.props.close();
+        this.props.close();
+    
    }
 
-   handleSubmit(){
-
+   handleSubmit()
+   {
+        this.props.close();
    }
    
     render() {
@@ -30,12 +32,9 @@ class RefundMode extends React.Component {
                     <p className='msgText'>{MESSAGE_REFUND}</p>
                     <input type="radio" value="Online Payment Method" checked={true} id='online-payment'/>
                     <label className='label-text' htmlFor='online-payment'>{PAYMENT_MODE}</label>
-                 </div>
 
-                <div className='btn-wrapper'>
-                    <Button className="btn-cancel btn" onClick={this.handleCancel}>{CANCEL}</Button>
-                    <Button className="btn-save btn" onClick={this.handleSubmit}>{SUBMIT}</Button>
-                </div>
+                    
+                 </div>
             </>
         )
     }

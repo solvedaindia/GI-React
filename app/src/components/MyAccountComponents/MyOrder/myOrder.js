@@ -163,8 +163,8 @@ class MyOrder extends React.Component {
 
   showCancelModal(orderData,orderItem)
   {
-    console.log(orderItem,orderData)
-    this.modalRef.current.showModal();
+    
+    this.modalRef.current.showModal(orderItem,orderData);
   }
 
   loadingbar() {

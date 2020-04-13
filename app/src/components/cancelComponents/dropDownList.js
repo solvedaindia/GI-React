@@ -2,6 +2,7 @@ import React from "react";
 import {
   MESSAGE_CANCEL,
   DROPDOWN_OPTIONS_COMMON,
+  DROPDOWN_OPTIONS_COMMON_ITEM,
   DROPDOWN_OPTIONS_ITEM,
   MESSAGE_TEXTBOX
 } from "../../constants/app/cancelConstants";
@@ -21,23 +22,26 @@ class DropDownList extends React.Component {
     this.handleState = this.handleState.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange(event) 
+  {
+    this.setState({ value: event.target.value, text:"" });
+    this.props.handleParentState(event.target.value,this.state.text);
   }
 
   handleChangeText(event) {
     this.setState({ text: event.target.value });
+    this.props.handleParentState(this.state.value,event.target.value);
   }
   handleState() {
-    //  this.props.handleParentState(this.state.value,this.state.text);
     console.log(this.state.value, this.state.text);
   }
 
   render() {
     const { cancelOrderType } = this.props;
     let options = [...DROPDOWN_OPTIONS_COMMON];
+
     if (cancelOrderType === "item") {
-      options = DROPDOWN_OPTIONS_ITEM.concat(options);
+      options = [...DROPDOWN_OPTIONS_COMMON_ITEM];
     }
     const text = (
       <div className='textarea-box'>
@@ -47,6 +51,7 @@ class DropDownList extends React.Component {
         onChange={this.handleChangeText}
         rows="2"
         cols="29"
+        value={this.state.text}
         maxLength="100"
       />
       </div>

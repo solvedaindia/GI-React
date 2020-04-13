@@ -3,7 +3,10 @@ const favicon = require('../../../public/images/favicon.png');
 import { Modal, Button } from 'react-bootstrap';
 // import {CANCEL } from '../../constants/app/checkoutConstants';
 // import { isMobile } from '../../utils/utilityManager';
+import { cancelOrderAPI } from '../../../public/constants/constants';
+import apiManager from '../../utils/apiManager';
 import {CANCEL_ORDER,CANCEL_ITEM } from '../../constants/app/cancelConstants';
+import {CANCEL,SUBMIT } from '../../constants/app/checkoutConstants';
 import DropDownList from './dropDownList';
 import RefundMode from './refundMode';
 
@@ -13,11 +16,15 @@ class CancelComponents extends React.Component {
         this.state={
             showPopUp:'false',
             value: '',
-            text: ''
+            text: '',
+            error:false,
+            orderItem:undefined,
+            orderData:undefined
         };
 
         this.showModal = this.showModal.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleParentStateFromChildState = this.handleParentStateFromChildState.bind(this);
 
     }
@@ -30,18 +37,73 @@ class CancelComponents extends React.Component {
     //     document.body.removeEventListener('dbclick', this.handleDocClick);
     // }
 
-    showModal(){
-        this.setState({showPopUp:'true'});
-        console.log("clicked on doc bdy");
+    showModal(orderItem,orderData)
+    {
+        console.log("AAAAAAA",orderData)
+       // console.log("AAAAAAAITEM",orderItem)
+        this.setState({
+            showPopUp:'true',
+            orderData:orderData,
+            orderItem:orderItem
+        });
     }
 
     handleClose(){
         this.setState({showPopUp:'false'});
-
     }
 
+    handleSubmit(){
+       // this.setState({showPopUp:'false'});
+       if(this.state.value==='')
+       {
+           this.setState({
+               error:true,
+           })
+       }
+       else{
+        //this.setState({showPopUp:'false'});
+       this.cancelOrder()
+       }
+    }
+
+    cancelOrder() {
+        let data = {
+            orderid:this.state.orderData.orderID,
+            refundmethod:this.state.orderData.paymentMethod===''?"COD":this.state.orderData.paymentMethod,
+            cancelreason:this.state.value==='Other'?this.state.text:this.state.value
+        };
+        if(this.state.orderItem!==undefined)
+        {
+            data = {
+                orderid:this.state.orderData.orderID,
+                refundmethod:this.state.orderData.paymentMethod===''?"COD":this.state.orderData.paymentMethod,
+                cancelreason:this.state.value==='Other'?this.state.text:this.state.value,
+                partnumber:this.state.orderItem.partNumber,
+            };
+        }
+        apiManager
+          .post(cancelOrderAPI, data)
+          .then(response => {
+            console.log("API RESPONSE",response)
+            this.setState({
+                showPopUp:'false',
+            });
+            alert("Order cancelled successfully");
+          })
+          .catch(error => {
+        
+          });
+      }
+
     handleParentStateFromChildState(values,texts){
-        this.setState =({value:values,text: texts});
+       // alert(values)
+        //this.setState =({value:values,text: texts});
+        console.log(values,texts)
+        this.setState({
+            value:values,
+            text:texts,
+            error:false,
+        })
     }
 
     render() {
@@ -60,13 +122,20 @@ class CancelComponents extends React.Component {
                 backdrop = {false}
                 >
                     <Modal.Header  >
-                        <h3>{this.props.cancelOrderType === 'item' ? CANCEL_ITEM :CANCEL_ORDER }</h3>
+                        <h3>{this.state.orderItem != undefined ? CANCEL_ITEM :CANCEL_ORDER }</h3>
                         <div className='logo-img'><img src={favicon}/></div>
                     </Modal.Header>
                     <Modal.Body>
                         <div className='cancel-order-box'>
-                            <DropDownList handleParentState = {this.handleParentStateFromChildState} cancelOrderType={this.props.cancelOrderType}/>
-                            <RefundMode value= "" text = "" close={this.handleClose}/>
+                            <DropDownList 
+                                handleParentState = {this.handleParentStateFromChildState} 
+                                cancelOrderType={this.state.orderItem != undefined?'item':'order'}/>
+                            {this.state.error && <p style={{color:'#ee4060'}}>This field is required</p>}
+                            <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/>
+                            <div className='btn-wrapper'>
+                                <Button className="btn-cancel btn" onClick={this.handleClose}>{CANCEL}</Button>
+                                <Button className="btn-save btn" onClick={this.handleSubmit}>{SUBMIT}</Button>
+                            </div>
                         </div>
                     </Modal.Body>
                 </Modal>:
