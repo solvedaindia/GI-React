@@ -775,10 +775,10 @@ function cancelOrder(req, callback) {
     cancelReasonOrd : req.body.cancelreason,
   };
 
-  if(req.body.orderitemid){
+  if(req.body.partnumber){
     orderCancelBody.orderCancellation = 'N';
     orderCancelBody.partNumber = req.body.partnumber;
-    orderCancelBody.cancelReasonOrd = '';
+    delete orderCancelBody.cancelReasonOrd;
     orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
   }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
