@@ -21,9 +21,9 @@ class Dropdown extends React.Component {
     console.log('ddkk')
     return (
       <div>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span class="caret"></span></button>
-          <ul class="dropdown-menu">
+        <div className="dropdown">
+          <button className="btn dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span className="caret"></span></button>
+          <ul className="dropdown-menu">
             {this.props.data.map((data,i) => {
               return (
                 <li onClick={() => this.onSelection(data,i)}><a>{data}</a></li>

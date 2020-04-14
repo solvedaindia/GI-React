@@ -254,6 +254,7 @@ export const CheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payme
 export const minEMIAPI = `${secureHttp}://${host}:${port2}/api/v1/emi/minimumemivalue`;
 export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/savegstin`;
 export const shipModeAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/shipmodes`;
+export const getDetailtForSerReq = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/servicerequestform?partnumber=`;
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';

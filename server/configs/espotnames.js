@@ -13,10 +13,6 @@ const espots = {
   recentlyViewed: 'RecViewed_CatEntries',
   bestSeller: 'GI_HOMEPAGE_BESTSELLERS',
   featuredCategories: 'GI_HOMEPAGE_FEATURED_CATEGORIES',
-  serviceRequest: {
-    categoryList : 'GI_ServiceRequest_ProductCategory',
-    reasonList : 'GI_ServiceRequest_ReasonList',
-  }
 };
 
 module.exports = espots;
