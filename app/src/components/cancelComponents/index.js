@@ -110,7 +110,7 @@ class CancelComponents extends React.Component {
         return(
             <>
                 {this.state.showPopUp === 'true' ?
-                <Modal className='cancel-order-model'
+                <Modal className='cancel-order-model' style={{background:'rgba(0, 0, 0, 0.5)', zIndex:'2147483648'}}
                 // ref={this.windowModelRef}
                 // className="cancelOrder"
                 size="lg"
