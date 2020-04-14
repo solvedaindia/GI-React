@@ -13,6 +13,16 @@ class ImageBox extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProp)
+  {
+        this.setState({
+          imageSelected:nextProp.haveImage,
+          file1:require('../../../public/images/plpAssests/placeholder-image.png'),
+          file:this.props.haveImage?URL.createObjectURL(this.props.file):null,
+        })
+      
+  }
+
   onImageSlected=(event)=>
   {
     const fsize = event.target.files[0].size;
@@ -26,12 +36,6 @@ class ImageBox extends React.Component {
     }
     this.props.onAddImage(event.target.files[0])
     event.target.value=null
-    // this.setState(
-    //   {
-    //     imageSelected:true,
-    //     file: URL.createObjectURL(event.target.files[0])
-    //   }
-    // )
   }
   onImageRemoved()
   {
@@ -42,11 +46,12 @@ class ImageBox extends React.Component {
 
   
   render() {
+    console.log("statefile",this.props)
     if(this.state.imageSelected)
     {
         return(
           <div className='uploded-img'>
-                <img id="imageContent" className='uploded-img-data' src={this.state.file} alt="your image" />
+                <img id="imageContent" className='uploded-img-data' src={URL.createObjectURL(this.props.file)} alt="your image" />
                 <button type="button" className='close' onClick={this.onImageRemoved.bind(this)}>X</button>
           </div>
 			

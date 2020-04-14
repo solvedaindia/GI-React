@@ -36,6 +36,7 @@ export const CANCEL = 'Cancel';
 export const NAME_VALIDATION = 'Please enter a valid Name. It should not exceed 100 characters'
 export const NUMBER_VALIDATION = 'Please enter valid mobile number.'
 export const EMAIL_VALIDATION = 'Please enter valid Email ID.'
+export const SERVICE_REQUEST = 'Request Service'
 
 
 
