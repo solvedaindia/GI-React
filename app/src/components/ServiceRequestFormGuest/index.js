@@ -125,7 +125,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderProdcutCategory() {
     return (
       <div className='product-category'>
-        <h4>Product Category</h4>
+        <h4>Product Details</h4>
         <Dropdown title='Please Select Product Category' data={this.state.productCategory} onSelection={this.getProductCategorySelection.bind(this)} />
       </div>
     )
