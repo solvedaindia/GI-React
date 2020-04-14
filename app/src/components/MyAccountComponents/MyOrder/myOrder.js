@@ -4,7 +4,7 @@ import { orderListAPI } from '../../../../public/constants/constants';
 import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
 import OrderItem from './orderItem';
 import TrackOrder from './TrackMyOrder/trackOrder';
-import ServiceRequestForm from '../../ServiceRequestForm/index';
+import ReturnRequestForm from '../../ReturnRequestForm/index'; 
 
 class MyOrder extends React.Component {
   constructor(props) {
@@ -178,7 +178,7 @@ class MyOrder extends React.Component {
       <div className="myOrder">
         {this.state.isTrackOrder ? (
           // <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
-          <ServiceRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)}/>
+          <ReturnRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
         ) :
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
             return (

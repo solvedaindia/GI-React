@@ -83,7 +83,7 @@ class ProductOrder extends React.Component {
             </button> : null}
 
             <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
-              Service Request
+              Return
             </button> 
 
           </div>
