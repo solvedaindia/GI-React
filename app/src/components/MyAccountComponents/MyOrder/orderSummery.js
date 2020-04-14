@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import apiManager from '../../../utils/apiManager';
 import { changePasswordAPI } from '../../../../public/constants/constants';
-import { mapPaymentMethodMode } from '../../../utils/utilityManager';
+import { mapPaymentMethodMode,formatPrice } from '../../../utils/utilityManager';
 import appCookie from '../../../utils/cookie';
 
 class OrderSummery extends React.Component {
@@ -17,8 +17,10 @@ class OrderSummery extends React.Component {
   render() {
     const summeryData = this.props.summeryDataro;
   const addressData = this.props.addressDataPro;
+  const refundData = this.props.refundDataPro;
 
     return (
+      <>
       <div className="summerydata">
         <div className="orderList">
 			<h4 className="heading">Delivery Address</h4>
@@ -76,6 +78,33 @@ class OrderSummery extends React.Component {
 
         </div>
       </div>
+      <div className="clearfix"></div>
+      <div className="refundsummarydata">
+        {refundData && refundData.length > 0 ?
+        <>
+        <div className ='refundSummaryTitle'>Refund Summary</div> 
+        <table className ='refundTable'>
+            <tr className ='refundDataHeading'>
+              <th>Transaction ID</th>
+              <th>Amount</th>
+              <th>Mode</th>
+            </tr>
+            {
+              refundData.map(refundElement => {
+                return (
+                  <tr>
+                  <td>{refundElement.transactionID}</td>
+                  <td>₹{formatPrice(refundElement.Amount)}</td>
+                  <td>{refundElement.Mode}</td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </>: null
+        }
+      </div>
+      </>
     );
   }
 }
