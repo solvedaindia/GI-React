@@ -17,11 +17,11 @@ class ServiceRequestForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorySelectionData: ['Home Furniture', 'Office Furniture', 'Mattress', 'Décor'],
+      categorySelectionData: [],
       selectedCategory:"",
-      invoiceSelectionData: ['Invoice 1', 'Invoice 2', 'Invoice 3', 'Invoice 4', 'Invoice 5', 'Add an invoice number'],
+      invoiceSelectionData: [],
       selectedInvoice:"",
-      serviceRequestReasons: ['Upholstery wear and tear', 'Broken locks or handles', 'Loose doors or hinges', 'Shelf or drawer issues', '	Missing screws and accessories', 'Surface chipping and cracks', 'Other'],
+      serviceRequestReasons: [],
       selectedReason:[],
       addressListItem: null,
       selectedAddress:null,
@@ -47,12 +47,13 @@ class ServiceRequestForm extends React.Component {
     apiManager
       .get(getDetailtForSerReq+this.props.orderItemData.partNumber+'&orderid='+this.props.orderData.orderID)
       .then(response => {
-        console.log(dataPro,response.data)
-        // this.setState({
-        //   addressData: response.data.data.addressList,
-        //   categorySelectionData:response.data.data.productCategory,
-        //   serviceRequestReasons:response.data.data.serviceReasonList,
-        // })
+       // console.log(dataPro,response.data)
+        this.setState({
+          addressData: response.data.data.addressList,
+          categorySelectionData:response.data.data.productCategory,
+          serviceRequestReasons:response.data.data.serviceReasonList,
+          invoiceSelectionData:response.data.data.invoiceList
+        })
       })
       .catch(error => {
       });
