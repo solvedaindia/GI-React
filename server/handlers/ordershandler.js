@@ -5,16 +5,11 @@ const headerutil = require('../utils/headerutil.js');
 const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const productUtil = require('../utils/productutil');
-const userHandler = require('../handlers/usershandler');
-const espotHandler =  require('../handlers/espotshandler');
 
 const profileFilter = require('../filters/profilefilter');
-const espotFilter =  require('../filters/espotfilter');
 const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
-
-const espotNames = require('../configs/espotnames');
 
 /**
  * Get Order List
@@ -364,7 +359,6 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderItems: [],
     orderSummary: {},
     wcsOrderStatus: wcsOrderDetails.orderStatus,
-    refundDetails : [],
   };
   const wcsOrderID = orderData.orderId;
   getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
@@ -374,17 +368,6 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     }
     const omsData = omsOrderResponse;
     // orderDetails.orderID = omsData.orderID;
-    const refundData = [{
-      transactionID : 'Xxxxxxxx',
-      Amount : '24000',
-      Mode : 'Bank Account',
-    },
-    {
-      transactionID : 'Xxxxxxxx',
-      Amount : '18000',
-      Mode : 'Godrej Credit',
-    }];
-    orderDetails.refundDetails = refundData;
     orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     orderDetails.orderDate = omsData.orderDate;
@@ -687,193 +670,3 @@ function getInvoiceDetails(headers, params, callback) {
     },
   );
 }
-
-function OMSOrderDetails(headers,orderID,callback){
-  const reqHeaders = headerutil.getWCSHeaders(headers);
-  const orderDetails = `${constants.orderDetailOMS
-    .replace('{{storeId}}', headers.storeId)
-    .replace('{{orderId}}', orderID)}`;
-
-  origin.getResponse(
-    'GET',
-    orderDetails,
-    reqHeaders,
-    null,
-    null,
-    null,
-    '',
-    response => {
-      if(response.status === 200){
-        callback(null,response.body);
-      } else {
-        callback(errorutils.handleWCSError(response.body));
-      }
-    })
-}
-
-/**
- * Get Service Request Form Details
- * @param headers
- * @return 200,Service Request Form Details
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-module.exports.getServiceRequestDetails = getServiceRequestDetails;
-function getServiceRequestDetails(req, callback) {
-  // if (!params.partNumber) {
-  //   callback(errorutils.errorlist.invalid_params);
-  //   return;
-  // }
-  const reqHeader = req.headers;
-  const resJSON = {
-    productDetail : {},
-    addressList : [],
-    productCategory : [],
-    serviceReasonList : [],
-    invoiceList : [],
-  };
-
-  let serviceRequestPageDetails = [
-    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.categoryList),
-    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.reasonList),
-    userHandler.getUserAddress.bind(null,reqHeader),
-  ];
-  if(req.query.partnumber && req.query.orderid){
-    serviceRequestPageDetails.push( 
-    productUtil.productDetailByPartNumber.bind(null, req.query.partnumber,reqHeader),
-    OMSOrderDetails.bind(null, reqHeader,req.query.orderid),
-    );
-  }
-
-  async.parallel(serviceRequestPageDetails, (err, result) => {
-    if (err) {
-      callback(err);
-      return;
-    } else {
-      resJSON.productCategory = espotFilter.espotContent(result[0]);
-      resJSON.serviceReasonList = espotFilter.espotContent(result[1]);
-      resJSON.addressList = result[2] && result[2].addressList;
-      resJSON.productDetail = result[3] && productDetailFilter.productDetailSummary(result[3]);
-      resJSON.invoiceList = result[4] && result[4].result.order.invoices;
-      callback(null, resJSON);
-    }
-  });
-}
-
-/**
- * Cancel Order/Order Item
- * @param headers
- * @return 200,Success
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-module.exports.cancelOrder = cancelOrder;
-function cancelOrder(req, callback) {
-  if(!req.body.orderid){
-    callback(errorutils.errorlist.invalid_params);
-    return;
-  }
-  const orderID = req.body.orderid;
-  const orderCancelBody = {
-    orderCancellation:'Y',
-    orderId: orderID,
-    refundMethod: req.body.refundmethod,
-    cancelReasonOrd : req.body.cancelreason,
-  };
-
-  if(req.body.partnumber){
-    orderCancelBody.orderCancellation = 'N';
-    orderCancelBody.partNumber = req.body.partnumber;
-    delete orderCancelBody.cancelReasonOrd;
-    orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
-  }
-  const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const cancelOrder = constants.orderCancel.replace('{{storeId}}', req.headers.storeId);
-  origin.getResponse( 
-  'POST',
-  cancelOrder,
-  reqHeaders,
-  null,
-  orderCancelBody,
-  null,
-  '',
- response=>{
-  if(response.status === 200){
-    callback(null,response.body);
-  } else {
-    callback(errorutils.handleWCSError(response))
-  }
-  })
-}
-
-/**
- * Return Order
- * @param headers
- * @return 200,Success
- * @throws contexterror,badreqerror if storeid or access_token is invalid
- */
-module.exports.returnOrder = returnOrder;
-function returnOrder(req, callback) {
-  if(!req.body.orderId 
-    || !req.body.shipmentNo 
-    || !req.body.partNumber 
-    || !req.body.price 
-    || !req.body.quantity
-    || !req.body.returnReason
-    || !req.body.refundMethod){
-    callback(errorutils.errorlist.invalid_params);
-    return;
-  }
-
-  if(req.body.refundMethod === 'COD'){
-      if(!req.body.bankDetails
-        || !req.body.bankDetails.name
-        || !req.body.bankDetails.accountNO
-        || !req.body.bankDetails.confirmAccountNO
-        || !req.body.bankDetails.IFSCCode
-        || (req.body.bankDetails.accountNO !== req.body.bankDetails.confirmAccountNO)
-        ){
-          callback(errorutils.errorlist.invalid_params);
-          return;
-      }
-  }
-
-  const orderReturnBody = {
-    orderId : req.body.orderId,
-    shipmentNo : req.body.shipmentNo,
-    partNumber : req.body.partNumber,
-    unitPrice : req.body.price,
-    quantity : req.body.quantity,
-    returnReason : req.body.returnReason,
-    refundMethod: req.body.refundMethod,
-  };
-
-  if(req.body.refundMethod === 'COD'){
-    orderReturnBody.name = req.body.bankDetails.name;
-    orderReturnBody.BAccntNo = req.body.bankDetails.accountNO;
-    orderReturnBody.BCnfAccntNo = req.body.bankDetails.confirmAccountNO;
-    orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
-  }
-  
-  if(req.body.images && req.body.images.length>0){
-    req.body.images.forEach((image,index) => {
-      orderReturnBody[`img${index+1}`] = image;
-    });
-  }
-  const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const returnOrder = constants.returnOrder.replace('{{storeId}}', req.headers.storeId);
-  origin.getResponse( 
-  'POST',
-  returnOrder,
-  reqHeaders,
-  null,
-  orderReturnBody,
-  null,
-  '',
- response=>{
-  if(response.status === 200){
-    callback(null,response.body);
-  } else {
-    callback(errorutils.handleWCSError(response))
-  }
-  })
-}
-

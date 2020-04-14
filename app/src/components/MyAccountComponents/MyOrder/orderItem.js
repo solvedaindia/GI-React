@@ -73,7 +73,6 @@ class OrderItem extends React.Component {
               addressDataPro={orderData.address}
               paymentMethodPro={orderData.paymentMethod}
               invoiceDataPro={orderData.invoices}
-              refundDataPro = {orderData.refundDetails}
                />
           </div>
           {orderData.orderItems.map((data, key) => {
