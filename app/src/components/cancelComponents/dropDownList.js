@@ -38,11 +38,11 @@ class DropDownList extends React.Component {
 
   render() {
     const { cancelOrderType } = this.props;
-    let options = [...DROPDOWN_OPTIONS_COMMON];
+    let options = [...this.props.reasons];
 
-    if (cancelOrderType === "item") {
-      options = [...DROPDOWN_OPTIONS_COMMON_ITEM];
-    }
+    // if (cancelOrderType === "item") {
+    //   options = [...DROPDOWN_OPTIONS_COMMON_ITEM];
+    // }
     const text = (
       <div className='textarea-box'>
       <textarea

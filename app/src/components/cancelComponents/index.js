@@ -3,7 +3,7 @@ const favicon = require('../../../public/images/favicon.png');
 import { Modal, Button } from 'react-bootstrap';
 // import {CANCEL } from '../../constants/app/checkoutConstants';
 // import { isMobile } from '../../utils/utilityManager';
-import { cancelOrderAPI } from '../../../public/constants/constants';
+import { cancelOrderAPI,espotReasonOrderItemCancel,espotReasonOrderCancel } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
 import {CANCEL_ORDER,CANCEL_ITEM,MESSAGE_REFUND ,ERROR_MESSAGE_REASON,MESSAGE_REFUND_METHOD} from '../../constants/app/cancelConstants';
 import {CANCEL,SUBMIT } from '../../constants/app/checkoutConstants';
@@ -17,6 +17,7 @@ class CancelComponents extends React.Component {
             showPopUp:'false',
             value: '',
             text: '',
+            reasons:[],
             error:false,
             orderItem:undefined,
             orderData:undefined
@@ -44,7 +45,32 @@ class CancelComponents extends React.Component {
         this.setState({
             showPopUp:'true',
             orderData:orderData,
-            orderItem:orderItem
+            orderItem:orderItem,
+            value: '',
+            text: '',
+            reasons:[],
+            error:false,
+        });
+        if(orderItem===undefined)
+        {
+            this.fetchReasonArray(false)
+        }
+        else{
+            this.fetchReasonArray(true);
+        }
+    }
+
+    fetchReasonArray(forItem)
+    {
+        apiManager
+        .get(forItem?espotReasonOrderItemCancel:espotReasonOrderCancel)
+        .then(response => {
+          this.setState({
+              reasons:response.data.data,
+          })
+        })
+        .catch(error => {
+      
         });
     }
 
@@ -84,7 +110,6 @@ class CancelComponents extends React.Component {
         apiManager
           .post(cancelOrderAPI, data)
           .then(response => {
-            console.log("API RESPONSE",response)
             this.setState({
                 showPopUp:'false',
             });
@@ -129,6 +154,7 @@ class CancelComponents extends React.Component {
                         <div className='cancel-order-box'>
                             <DropDownList 
                                 handleParentState = {this.handleParentStateFromChildState} 
+                                reasons={this.state.reasons}
                                 cancelOrderType={this.state.orderItem != undefined?'item':'order'}/>
                             {this.state.error && <p className='error-text'>{ERROR_MESSAGE_REASON}</p>}
                             {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
