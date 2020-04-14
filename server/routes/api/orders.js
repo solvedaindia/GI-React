@@ -70,17 +70,4 @@ router.get('/current', (req, res, next) => {
   });
 });
 
-router.get('/servicerequestpage', (req, res, next) => {
-  ordersHandler.getServiceRequestDetails(req, (err, result) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).send({
-      status: 'success',
-      data: result,
-    });
-  });
-});
-
 module.exports = router;
