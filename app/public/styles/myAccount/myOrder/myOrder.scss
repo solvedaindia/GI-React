@@ -244,6 +244,33 @@
     .summerydata{
       padding: 26px 0 0 0;
     }
+    .refundsummarydata {
+      // border-top: 1px solid #e4eaee;
+      .refundSummaryTitle {
+        // font-family: $font-bold;
+        padding: 5px;
+        color: #505d68;
+        font-size: 14px;
+        font-family: CeraGIBold, sans-serif;
+        line-height: 14px;
+      }
+      .refundTable {
+        width: 100%;
+          .refundDataHeading {
+            background-color: #036cc5;
+            padding: 5px;
+            th {
+              color: $colorwhite;
+              padding: 5px;
+            }
+          }
+              td {
+                padding: 5px;
+  
+              }
+        }
+
+    }
   }
 
   .heightActive {
