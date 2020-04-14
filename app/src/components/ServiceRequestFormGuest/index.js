@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCookie } from '../../utils/utilityManager';
+import apiManager from '../../utils/apiManager';
+import { getDetailtForSerReq } from '../../../public/constants/constants';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import Dropdown from '../ServiceRequestForm/dropdown';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
@@ -15,11 +17,29 @@ class ServiceRequestFormGuest extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      productCategory: ['Home Furniture', 'Office Furniture', 'Mattress', 'Décor'],
-      serviceRequestReasons: ['Upholstery wear and tear', 'Broken locks or handles', 'Loose doors or hinges', 'Shelf or drawer issues', '	Missing screws and accessories', 'Surface chipping and cracks', 'Other'],
+      productCategory: [],
+      serviceRequestReasons: [],
       characterCount: 50,
       characterLimit: 50
     };
+  }
+
+  componentDidMount() {
+    this.getDetailAPI()
+  }
+
+  getDetailAPI() {
+    apiManager
+      .get(getDetailtForSerReq)
+      .then(response => {
+        this.setState({
+          productCategory:response.data.data.productCategory,
+          serviceRequestReasons:response.data.data.serviceReasonList,
+        })
+      })
+      .catch(error => {
+      });
+
   }
 
   resetLoginValues() {
@@ -42,8 +62,7 @@ class ServiceRequestFormGuest extends React.Component {
     console.log('on Service Request --- ', value)
   }
 
-  onImageAddRemove(value)
-  {
+  onImageAddRemove(value) {
     // this.setState({
     //   selectedImages: value,
     // });
@@ -69,8 +88,8 @@ class ServiceRequestFormGuest extends React.Component {
             <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Submit</button>
           </div>
           {this.state.showLogin ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
-          </div>
         </div>
+      </div>
     );
   }
 
@@ -78,11 +97,11 @@ class ServiceRequestFormGuest extends React.Component {
     if (getCookie('isLoggedIn') === 'true') {
       return (
         <>
-          <div className='request-service-msg'> 
-          <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
+          <div className='request-service-msg'>
+            <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
           <Link className='' to={{ pathname: '/myAccount', state: { from: 'myorder' } }}>
-            {' View your past orders'}
-          </Link></p>
+                {' View your past orders'}
+              </Link></p>
             <p>If you have made a store purchase, please fill the form shown blow to place a service request.</p>
           </div>
         </>
@@ -91,11 +110,11 @@ class ServiceRequestFormGuest extends React.Component {
     else {
       return (
         <>
-         <div className='request-service-msg'> 
-          <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
-          <br/><button className='btn guest-login-btn' onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
-            {' Click here to log in and view your past orders'}
-          </button></p>
+          <div className='request-service-msg'>
+            <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced.
+          <br /><button className='btn guest-login-btn' onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
+                {' Click here to log in and view your past orders'}
+              </button></p>
             <p>If you have made a guest purchase online or at the store, please enter the form below to place a service request.</p>
           </div>
         </>
@@ -135,9 +154,9 @@ class ServiceRequestFormGuest extends React.Component {
     return (
       <div className='add-img'>
         <h4 className='heading'>Add Image</h4>
-        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)}/>
+        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)} />
       </div>
-     
+
     )
   }
 
