@@ -130,7 +130,7 @@ class CancelComponents extends React.Component {
                             <DropDownList 
                                 handleParentState = {this.handleParentStateFromChildState} 
                                 cancelOrderType={this.state.orderItem != undefined?'item':'order'}/>
-                            {this.state.error && <p style={{color:'#ee4060'}}>{ERROR_MESSAGE_REASON}</p>}
+                            {this.state.error && <p className='error-text'>{ERROR_MESSAGE_REASON}</p>}
                             {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
                             <div className='paymet-type'>
                             <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>

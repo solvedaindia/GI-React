@@ -61,7 +61,7 @@ class RWDSingleProduct extends React.Component {
               <span>{this.state.dsDateTag}</span>
             </div>
             {/*Cance message condtion replaced by true */}
-             {true && <div>  
+             {true && <div className='cancelation-text-info'>  
                   <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
               </div>}
           </div>

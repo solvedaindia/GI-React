@@ -85,7 +85,7 @@ class DropDownList extends React.Component {
                       
                     </select> */}
         </div>
-        <br />
+        
         {this.state.value === "Other" && text}
       </>
     );
