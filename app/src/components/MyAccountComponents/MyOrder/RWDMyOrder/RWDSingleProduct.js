@@ -2,6 +2,7 @@ import React from 'react';
 import apiManager from '../../../../utils/apiManager';
 import { changePasswordAPI, imagePrefix } from '../../../../../public/constants/constants';
 import OrderStatusBar from '../orderStatusBar';
+import { CACELATION_WINDOW_CLOSE } from '../../../../../../app/src/constants/app/cancelConstants';
 
 class RWDSingleProduct extends React.Component {
   constructor(props) {
@@ -59,6 +60,10 @@ class RWDSingleProduct extends React.Component {
               <span>{this.state.dsNameTag}</span>
               <span>{this.state.dsDateTag}</span>
             </div>
+            {/*Cance message condtion replaced by true */}
+             {true && <div>  
+                  <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+              </div>}
           </div>
         </div>
         <div className='clearfix'></div>
@@ -71,7 +76,12 @@ class RWDSingleProduct extends React.Component {
             : !this.props.isFromViewOrder && this.props.hideViewDetail ? null 
             : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button> 
             : null}
+
+            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showCancelModal(productData,this.props.currentCompleteData)} >
+              Cancel Item
+            </button> 
         </div>  
+      
       </>
     );
   }

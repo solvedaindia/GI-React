@@ -1,8 +1,13 @@
 @import "../variable.scss";
-.MyAccount{
- .myOnGoingOoders{
-   .trackMyOrder {
-    &.service-request{
+.service-request{
+      .heading{
+        font-family: $font-bold;
+        font-size:32px;  
+        line-height: $base*3.5; 
+        margin:18px 0px 7px 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
       .bottomDivider{
         margin-bottom: $base *2;
       }
@@ -11,8 +16,8 @@
         float: left;
         width: 100%;
         .uploded-img, .uploded-img-data{
-          width: 166px;
-          height: 166px;
+          width: 140px;
+          height: 140px;
           position: relative;
           float: left;
           margin-right: $base * 3;
@@ -25,13 +30,18 @@
             height: 20px;
             border-radius: 100%;
             font-size: 12px;
+            opacity:1;
           }
         }
         .add-img-upload{
           padding: 0px;
+          border-radius: 2px;
+          border: dashed 1px $lightblueGrey;
+          background-color: rgba(238, 237, 237, 0.09);
+          padding: 10px;
           .upload-img-btn{
-            width: 166px;
-            height: 166px;
+            width: 140px;
+            height: 140px;
             text-align: center;
             background: $paleGrey;
             float: left;
@@ -42,8 +52,8 @@
               position: absolute;
                margin: 0px; 
               padding: 0px; 
-              width: 166px; 
-              height: 166px; 
+              width: 140px; 
+              height: 140px; 
               outline: none; 
               opacity: 0; 
               cursor: pointer;
@@ -81,16 +91,44 @@
         } 
       }
 
-      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
-        .heading{
-          font-size: $base *2;
-          font-family: $font-bold;
-          padding-top:$base * 2.5;
-          clear: both;
+      .product-category{
+        .dropdown{
+          .dropdown-toggle{
+            background: $colorwhite;
+            border: 1px solid $battleshipGrey;
+            border-radius: 0px;
+            min-width: 160px;
+            text-align: left;
+            .caret{
+              float: right;
+              margin-top: 8px;
+              margin-left: 10px;
+            }
+            .dropdown-menu{
+              width: 100%;
+            }
+          }
         }
       }
 
       .invice-selection{
+        .dropdown{
+          .dropdown-toggle{
+            background: $colorwhite;
+            border: 1px solid $battleshipGrey;
+            border-radius: 0px;
+            min-width: 160px;
+            text-align: left;
+            .caret{
+              float: right;
+              margin-top: 8px;
+              margin-left: 10px;
+            }
+            .dropdown-menu{
+              width: 100%;
+            }
+          }
+        }
         .upload-invoiceno{
           .form-div{
             .invoiceNumber{
@@ -101,7 +139,15 @@
           }
           .btn-save{
             border-radius: 0px;
+            background-color: $black;
+            color: $colorwhite;
           }
+        }
+        &.guest-type{
+          margin: 20px 0px;
+          clear: both;
+          float: left;
+          width: 100%;
         }
       }
 
@@ -109,13 +155,67 @@
         .service-request-text{
           .service-request-box{
             padding-left: 10px;
+              .inputCheck[type="checkbox"] {
+                display: none;
+            }
+              /* Input Checkbox Squere
+              -----------------------------*/
+              .inputCheck[type="checkbox"] + .label-text {
+                background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;     
+                display: inline;
+                min-height: 16px;
+                padding-left: 23px;
+                background-size: contain;
+              }
+          
+              .inputCheck[type="checkbox"]:checked + .label-text {
+                background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
+                background-size: contain;
+                padding-left: 23px;
+              }
+              .label-text {   
+                cursor: pointer;  
+                font-size: $base*1.5;      
+              }
+              .input_box,
+              .defaultlbl{
+                float: left;
+              }
+          
+              .defaultlbl{
+                /*font-weight: normal;
+                padding: 0 0 0 14px;
+                margin: 0;
+                font-size: $base*1.5;*/
+              }
+            
+
+
             .label-text{
               padding-left: 8px;
+              font-family: $font-light;
             }
           }
         }
       }
 
+      .service-request-desc{
+        .heading-desc{
+          font-size: $base*1.75;
+          color: $colorblack;
+          margin: 10px 0px 0px 0px;
+        }
+        .text-area{
+          border: 1px solid $battleshipGrey;
+          padding: 5px 10px;
+          background: $colorwhite;
+        }
+        .label-text{
+          display: block;
+          color: lightGrey;
+          font-family: $font-light;
+        }
+      }
       .get-selected-address{
         .saveAddress{
           .list{
@@ -125,8 +225,10 @@
             border: 1px solid $lightblueGrey;
             min-height: 100px;
             float: left;
+            background-color: rgba(247, 248, 248, 0.5);
             .inputBox{
               display: grid;
+              float: left;
             }
             .addressText{
               padding-left: 20px;
@@ -140,15 +242,41 @@
 
       .actionBtnWrapper{
         padding-top: $base * 2.5;
+        padding-bottom: $base * 2.5;
         clear: both;
         .btn{
           border-radius: 0px;
         }
       }
+      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+        .heading{
+          font-size: $base *2;
+          font-family: $font-bold;
+          padding-top:$base * 2.5;
+          clear: both;
+          margin-top: 0px;
+        }
+      }
+
+      .request-service-msg{
+        .guest-login-btn{
+          background: $black;
+          min-width: 200px;
+          padding: 8px 10px;
+          color: $colorwhite;
+          border-radius: 0px;
+        }
+      }
+      .guest-address-form{
+        .heading{
+          font-size: $base*1.75;
+        }
+        float: left;
+        width: 100%;
+        margin: 10px 0px;
+      }
     }
-   }
- }
-}
+
 
 
 /* 
@@ -195,7 +323,46 @@
   #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
 */
 @include mix-xs {
-  //CSS
+  .service-request {
+    .product-category{
+      .dropdown {
+        .dropdown-toggle{
+          width: 100%;
+        }
+      }
+    }
+    .service-request-desc{
+      .text-area{
+        width: 100%;
+      }
+    }
+    .invice-selection {
+      .guest-type{
+        margin-top: 0px;
+        .form-BgContainer{
+          .btn-save{
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .form-BgContainer{
+      padding: 0px;
+    }
+
+    .actionBtnWrapper{
+      .btn-cancel, .btn-save{
+        padding: 8px 50px;
+      }
+    }
+    
+      .add-img{
+        .uploded-img, .uploded-img-data{
+          margin-right: 14px;
+          margin-bottom: 14px;
+        }
+      }
+  }
 }
 
 /* 
