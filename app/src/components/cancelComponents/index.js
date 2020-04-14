@@ -133,7 +133,7 @@ class CancelComponents extends React.Component {
                             {this.state.error && <p style={{color:'#ee4060'}}>{ERROR_MESSAGE_REASON}</p>}
                             {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
                             <div className='paymet-type'>
-                            <p className='msgText'>{MESSAGE_REFUND_METHOD+this.state.orderData.paymentMethod}</p>
+                            <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>
                             </div>
                             <div className='btn-wrapper'>
                                 <Button className="btn-cancel btn" onClick={this.handleClose}>{CANCEL}</Button>
