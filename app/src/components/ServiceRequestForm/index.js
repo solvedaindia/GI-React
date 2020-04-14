@@ -5,7 +5,7 @@ import EnterInvoiceView from './enterInvoiceView';
 import Checkboxes from './checkboxes';
 import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
-import { getAddressListAPI,getDetailtForSerReq } from '../../../public/constants/constants';
+import { getAddressListAPI,getDetailtForSerReq,imagePrefix } from '../../../public/constants/constants';
 import AddressList from './addressLists';
 import { ADD_NEW_ADD} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
@@ -38,18 +38,21 @@ class ServiceRequestForm extends React.Component {
 
   componentDidMount() {
     this.getAddressListAPI();
-   // this.getDetailAPI()
+   this.getDetailAPI()
+   // console.log("dataPro",this.props.orderData);
+    console.log("dataPro1",this.props.orderItemData);
   }
   getDetailAPI=()=>{
 
     apiManager
-      .get(getDetailtForSerReq+'56101505SD00084')
+      .get(getDetailtForSerReq+this.props.orderItemData.partNumber+'&orderid='+this.props.orderData.orderID)
       .then(response => {
-        this.setState({
-          addressData: response.data.data.addressList,
-          categorySelectionData:response.data.data.productCategory,
-          serviceRequestReasons:response.data.data.serviceReasonList,
-        })
+        console.log(dataPro,response.data)
+        // this.setState({
+        //   addressData: response.data.data.addressList,
+        //   categorySelectionData:response.data.data.productCategory,
+        //   serviceRequestReasons:response.data.data.serviceReasonList,
+        // })
       })
       .catch(error => {
       });
@@ -158,7 +161,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className="trackMyOrder service-request">
         <div className="bottomDivider">
-          <button className="backBtn" onClick={this.props.renderSelectionPro} >{`< Back`}</button>
+          <button className="backBtn" onClick={this.props.renderServiceRequestPro} >{`< Back`}</button>
         </div>
 
         {this.renderProductDetails()}
@@ -258,24 +261,26 @@ class ServiceRequestForm extends React.Component {
   }
 
   renderProductDetails() {
+    const productData = this.props.orderItemData;
     return (
       <>
         <div className="itemBox">
           <div className="orderProduct clearfix">
             <div className="orderimgbox clearfix">
               <div className="imgBox">
-                <img src={require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
+                <img alt={productData.productName}
+                      src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../public/images/plpAssests/placeholder-image.png')} className="imgfullwidth" />
               </div>
               <div className="product-text">
-                <p className="heading">Product Name</p>
-                <p className="description">(Description)</p>
+                <p className="heading">{productData.productName}</p>
+                <p className="description">{productData.shortDescription}</p>
                 <p className="price">
-                  <span className="discount-price">₹ 202922</span>
+                  <span className="discount-price">₹{productData.offerPrice}</span>
                 </p>
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
                     <span className="heading">Quantity: </span>
-                    <span className="textval">2</span>
+                    <span className="textval">{productData.quantity}</span>
                   </div>
                 </div>
               </div>

@@ -26,6 +26,10 @@ class OrderItem extends React.Component {
   proceedToTrackOrder(trackOrderData) {
     this.props.renderSelectionPro(trackOrderData);
   }
+  proceedToServiceRequest(orderItemData,orderData)
+  {
+    this.props.renderServiceRequestPro(orderItemData,orderData)
+  }
 
   render() {
     const orderData = this.props.orderItemData;
@@ -77,6 +81,7 @@ class OrderItem extends React.Component {
                 totalItems={orderData.orderItems.length}
                 itemIndex={key}
                 proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
+                proceedToServiceRequest={this.proceedToServiceRequest.bind(this)}
                 prodctDataPro={data}
                 allDataPro={this.props.orderItemData}
               />

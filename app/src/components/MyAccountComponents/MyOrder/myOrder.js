@@ -12,12 +12,14 @@ class MyOrder extends React.Component {
     this.state = {
       isTrackOrder: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
+      isServiceRequest:false,
       orderListData: [],
       isLoading: true,
       updatedTrackOrderData: null,
       isOnGoingOrderShown: false,
       isPastOrdeShown: false,
-
+      serviceOrderData:undefined,
+      serviceOrderItemData:undefined,
       //Lazy Load Vars
       error: false,
       hasMore: true,
@@ -79,6 +81,14 @@ class MyOrder extends React.Component {
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
       updatedTrackOrderData: trackOrderData
+    });
+  }
+  renderServiceRequest(orderItemData,orderData)
+  {
+    this.setState({
+      isServiceRequest: !this.state.isServiceRequest,
+      serviceOrderData: orderData,
+      serviceOrderItemData:orderItemData,
     });
   }
 
@@ -177,15 +187,19 @@ class MyOrder extends React.Component {
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          // <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
-          <ServiceRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)}/>
-        ) :
+          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
+        ) :this.state.isServiceRequest?(
+          <ServiceRequestForm orderData={this.state.serviceOrderData} 
+                              orderItemData={this.state.serviceOrderItemData} 
+                              renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
+        ):
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
             return (
               <>
                 {this.displayOnGoingPastOrder(data)}
                 <OrderItem
                   renderSelectionPro={this.renderSelection.bind(this)}
+                  renderServiceRequestPro={this.renderServiceRequest.bind(this)}
                   isGuestTrackOrderPro={this.state.isGuestTrackOrder}
                   orderItemData={data}
                 />
