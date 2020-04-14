@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 // import { isMobile } from '../../utils/utilityManager';
 import { cancelOrderAPI } from '../../../public/constants/constants';
 import apiManager from '../../utils/apiManager';
-import {CANCEL_ORDER,CANCEL_ITEM } from '../../constants/app/cancelConstants';
+import {CANCEL_ORDER,CANCEL_ITEM,MESSAGE_REFUND ,ERROR_MESSAGE_REASON,MESSAGE_REFUND_METHOD} from '../../constants/app/cancelConstants';
 import {CANCEL,SUBMIT } from '../../constants/app/checkoutConstants';
 import DropDownList from './dropDownList';
 import RefundMode from './refundMode';
@@ -130,8 +130,11 @@ class CancelComponents extends React.Component {
                             <DropDownList 
                                 handleParentState = {this.handleParentStateFromChildState} 
                                 cancelOrderType={this.state.orderItem != undefined?'item':'order'}/>
-                            {this.state.error && <p style={{color:'#ee4060'}}>This field is required</p>}
-                            <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/>
+                            {this.state.error && <p style={{color:'#ee4060'}}>{ERROR_MESSAGE_REASON}</p>}
+                            {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
+                            <div className='paymet-type'>
+                            <p className='msgText'>{MESSAGE_REFUND_METHOD+this.state.orderData.paymentMethod}</p>
+                            </div>
                             <div className='btn-wrapper'>
                                 <Button className="btn-cancel btn" onClick={this.handleClose}>{CANCEL}</Button>
                                 <Button className="btn-save btn" onClick={this.handleSubmit}>{SUBMIT}</Button>
