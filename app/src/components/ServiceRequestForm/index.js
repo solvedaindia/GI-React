@@ -7,7 +7,7 @@ import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
 import { getAddressListAPI,getDetailtForSerReq,imagePrefix } from '../../../public/constants/constants';
 import AddressList from './addressLists';
-import { ADD_NEW_ADD} from '../../constants/app/myAccountConstants';
+import { ADD_NEW_ADD,SERVICE_REQUEST} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
 import '../../../public/styles/myAccount/service-request.scss';
 
@@ -164,7 +164,7 @@ class ServiceRequestForm extends React.Component {
         <div className="bottomDivider">
           <button className="backBtn" onClick={this.props.renderServiceRequestPro} >{`< Back`}</button>
         </div>
-
+        <div className="ongoingOrder">{SERVICE_REQUEST}</div>
         {this.renderProductDetails()}
         {this.renderProductCategory()}
         {this.renderInvoice()}
@@ -265,6 +265,7 @@ class ServiceRequestForm extends React.Component {
     const productData = this.props.orderItemData;
     return (
       <>
+       
         <div className="itemBox">
           <div className="orderProduct clearfix">
             <div className="orderimgbox clearfix">
