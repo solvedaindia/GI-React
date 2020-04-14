@@ -206,6 +206,13 @@ module.exports.handleWCSError = function handleWCSError(response) {
           error_key: 'login_not_allowed',
           error_message: errBody.errors[0].errorMessage,
         };
+      } 
+      if (errBody.errors[0].errorKey === '_ERR_PASSWORD_EXPIRED') {
+        return {
+          status_code: 400,
+          error_key: 'password_expired',
+          error_message: errBody.errors[0].errorMessage,
+        };
       }
       if (
         errBody.errors[0].errorKey === '_ERR_THRESHOLD_SHOPPING_CART_QUANTITY'
