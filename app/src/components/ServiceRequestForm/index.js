@@ -38,7 +38,7 @@ class ServiceRequestForm extends React.Component {
 
   componentDidMount() {
     this.getAddressListAPI();
-   this.getDetailAPI()
+    this.getDetailAPI()
    // console.log("dataPro",this.props.orderData);
     console.log("dataPro1",this.props.orderItemData);
   }
@@ -246,7 +246,7 @@ class ServiceRequestForm extends React.Component {
         )       
 
         }
-        {this.state.showInvoiceDisclaimer  ? <div className='error-msg'>Please note that the service may be chargeable, in case of missing invoice details</div> : null}
+        {this.state.showInvoiceDisclaimer  ? <div className='notification-title'>Please note that the service may be chargeable, in case of missing invoice details</div> : null}
       </div>
     )
   }

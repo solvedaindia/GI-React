@@ -21,7 +21,7 @@ class AddressList extends React.Component {
       var list = [];
       this.props.data.forEach((add, index) => {
         list.push(
-          <li className='list' onClick={this.handleAddressChange.bind(this, index)}>
+          <li className={add.isDefault ? 'list defaultAddress':'list'} onClick={this.handleAddressChange.bind(this, index)}>
             <div className='inputBox'>
               <input className="input" type="radio" name="optradio" value={index} checked={this.state.selected_add == index} />
               <label className='labelchecked'></label>

@@ -255,6 +255,16 @@
       }
     }
      }
+     &.service-request{
+       .ongoingOrder{
+         margin: 0px;
+       }
+      .itemBox{
+        .orderProduct{
+          padding: $base*3 0px;
+        }
+      }
+     }
   }
   .orderSummery {
     // background-color: blueviolet;

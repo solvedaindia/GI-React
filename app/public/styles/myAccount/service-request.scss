@@ -44,6 +44,11 @@
         font-size: $base*2;
       }
     }
+    .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+      .heading{
+        font-size: $base *1.75;
+      }
+    }
   }
 }
 .service-request{
@@ -84,7 +89,7 @@
           border: dashed 1px $lightblueGrey;
           background-color: rgba(238, 237, 237, 0.09);
           padding: 10px;
-          max-width: 670px;
+          max-width: 520px;
           .upload-img-btn{
             width: 140px;
             height: 140px;
@@ -163,6 +168,12 @@
       }
 
       .invice-selection{
+        .notification-title{
+          color: $cerulean;
+          font-size: $base*1.75;
+          clear: both;
+          padding-top: 10px;
+        }
         .dropdown{
           float: left;
           .dropdown-toggle{
@@ -290,19 +301,27 @@
       .get-selected-address{
         .saveAddress{
           .list{
-            width: 24%;
+            width: 30.333%;
             margin-right:1%;
-            padding: 10px;
+            padding: $base*2 $base*1.5;
             border: 1px solid $lightblueGrey;
             min-height: 100px;
             float: left;
             background-color: rgba(247, 248, 248, 0.5);
+            &.defaultAddress{
+              background-color: rgba(99, 176, 225, 0.07);
+              border:1px solid $ceruleanblueborder;
+            }
             .inputBox{
               display: grid;
               float: left;
             }
             .addressText{
               padding-left: 20px;
+              font-size: $base*1.5;
+              font-family: $font-regular;
+              color: $black;
+              line-height: $base*2;
             }
             &:hover{
               border: 1px solid $cerulean;
@@ -321,7 +340,7 @@
       }
       .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
         .heading{
-          font-size: $base *1.75;
+          font-size: $base *2;
           font-family: $font-medium;
           padding-top:$base * 3;
           clear: both;
