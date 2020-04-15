@@ -22,12 +22,13 @@ class UploadImage extends React.Component {
 
   onRemoveImage(index)
   {
-    const files=this.state.files;
-    files.splice(index,1);
+    console.log("state",this.state.files)
+    const f=this.state.files.filter((data,i)=>{return i!=index});
+    console.log("array",f);    
     this.setState({
-      files:files
+      files:f
     });
-    this.props.onImageAddRemove(files)
+    this.props.onImageAddRemove(f)
   }
   
   render() {
