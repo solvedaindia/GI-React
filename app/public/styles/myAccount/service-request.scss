@@ -1,12 +1,57 @@
 @import "../variable.scss";
-.service-request{
+.guest-service{
+  &.service-request{
+    .guest-border-box{
+      border: dashed 1px $lightblueGrey;
+      background-color: rgba(238, 237, 237, 0.09);
+      padding: $base*3 $base*3 $base*2 $base*3;
+      margin-bottom: $base*3;
+      .form-div{
+        .form-group{
+          .form-control{
+            font-family: $font-light;
+          }
+        }
+      }
+
+      .guest-address-form{
+        .addAddressContainer{
+          border: 0px;
+          padding: 0px;
+        }
+      }
+      .add-img{
+        .add-img-upload{
+          border: 0px;
+          background: none;
+        }
+      }
+      .guest-type{
+        .upload-invoiceno{
+          border: 0px;
+          padding: 0px;
+        }
+      }
+    }
+    .notification-title{
+      color: $cerulean;
+      font-size: $base*1.75;
+      clear: both;
+      padding-top: 10px;
+    }
+    .product-category{
       .heading{
-        font-family: $font-bold;
-        font-size:32px;  
+        font-size: $base*2;
+      }
+    }
+  }
+}
+.service-request{
+      > .heading{
+        font-family: $font-medium;
+        font-size:$base*3.75;  
         line-height: $base*3.5; 
-        margin:18px 0px 7px 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        text-align: center;
       }
       .bottomDivider{
         margin-bottom: $base *2;
@@ -39,6 +84,7 @@
           border: dashed 1px $lightblueGrey;
           background-color: rgba(238, 237, 237, 0.09);
           padding: 10px;
+          max-width: 670px;
           .upload-img-btn{
             width: 140px;
             height: 140px;
@@ -93,40 +139,50 @@
 
       .product-category{
         .dropdown{
+          float: left;
           .dropdown-toggle{
             background: $colorwhite;
-            border: 1px solid $battleshipGrey;
+            border: 1px solid $greyish;
             border-radius: 0px;
             min-width: 160px;
             text-align: left;
+            color: $greyish;
+            font-size: $base*1.75;
+            font-family: $font-medium;
+            padding: 13px 10px;
             .caret{
               float: right;
               margin-top: 8px;
               margin-left: 10px;
             }
-            .dropdown-menu{
-              width: 100%;
-            }
+          }
+          .dropdown-menu{
+            width: 100%;
           }
         }
       }
 
       .invice-selection{
         .dropdown{
+          float: left;
           .dropdown-toggle{
             background: $colorwhite;
             border: 1px solid $battleshipGrey;
             border-radius: 0px;
             min-width: 160px;
             text-align: left;
+            color: $greyish;
+            font-size: $base*1.75;
+            font-family: $font-medium;
+            padding: 13px 10px;
             .caret{
               float: right;
               margin-top: 8px;
               margin-left: 10px;
             }
-            .dropdown-menu{
-              width: 100%;
-            }
+          }
+          .dropdown-menu{
+            width: 100%;
           }
         }
         .upload-invoiceno{
@@ -134,17 +190,24 @@
             .invoiceNumber{
               width: 100%;
               border: 1px solid $lightblueGrey;
-              padding:6px 10px;
+              padding:16px 21px;
+              height: 52px;
+              font-size: $base*2;
             }
           }
-          .btn-save{
-            border-radius: 0px;
-            background-color: $black;
-            color: $colorwhite;
+          .upload-invoice{
+            padding: 0px;
+            .btn-save{
+              border-radius: 0px;
+              background-color: $black;
+              color: $colorwhite;
+              padding: 14px 15px;
+              min-width: 180px;
+            }
           }
         }
         &.guest-type{
-          margin: 20px 0px;
+          margin: 20px 0px 0px 0px;
           clear: both;
           float: left;
           width: 100%;
@@ -155,6 +218,7 @@
         .service-request-text{
           .service-request-box{
             padding-left: 10px;
+            padding-top: 10px;
               .inputCheck[type="checkbox"] {
                 display: none;
             }
@@ -175,26 +239,16 @@
               }
               .label-text {   
                 cursor: pointer;  
-                font-size: $base*1.5;      
+                font-size: 13px;   
+                color: $black; 
+                font-family: $font-regular;  
+                padding-left: 8px;
+                font-weight: normal;
               }
               .input_box,
               .defaultlbl{
                 float: left;
               }
-          
-              .defaultlbl{
-                /*font-weight: normal;
-                padding: 0 0 0 14px;
-                margin: 0;
-                font-size: $base*1.5;*/
-              }
-            
-
-
-            .label-text{
-              padding-left: 8px;
-              font-family: $font-light;
-            }
           }
         }
       }
@@ -212,8 +266,25 @@
         }
         .label-text{
           display: block;
-          color: lightGrey;
+          color:$battleshipGrey;
           font-family: $font-light;
+          font-size: $base*1.5;
+        }
+        &.guest-type{
+          display: inline-block;
+          margin-left: 10px;
+          .heading{
+            &:empty{
+              display: none;
+            }
+          }
+          .text-area{
+            height: 47px;
+            resize: none;
+            overflow: hidden;
+            padding: 13px 10px;
+            color: $greyish;
+          }
         }
       }
       .get-selected-address{
@@ -250,21 +321,25 @@
       }
       .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
         .heading{
-          font-size: $base *2;
-          font-family: $font-bold;
-          padding-top:$base * 2.5;
+          font-size: $base *1.75;
+          font-family: $font-medium;
+          padding-top:$base * 3;
           clear: both;
           margin-top: 0px;
         }
       }
 
       .request-service-msg{
-        .guest-login-btn{
-          background: $black;
-          min-width: 200px;
-          padding: 8px 10px;
-          color: $colorwhite;
-          border-radius: 0px;
+        .text{
+          color: $battleshipGrey;
+          font-size: $base*1.75;
+        }
+        .guest-login-link{
+          color: $cerulean;
+          text-decoration: underline;
+          &:hover{
+            text-decoration: none;
+          }
         }
       }
       .guest-address-form{
@@ -283,7 +358,11 @@
   #Global Screen Chhange for large Screens =  Laptops, Desktops
   */
   @include mix-lg{
-    //Css Need TO be added
+    .service-request{
+     > .heading{
+        margin:$base*8 0 $base*10 0;
+      }
+    }
   }
 
 
@@ -314,7 +393,12 @@
 #Global Mobile screen - 767 max
 */
 @include mix-md {
-  //Css Need TO be added
+  .service-request{
+    > .heading{
+      margin:$base*3 0 $base*3 0;
+    }
+  }
+
 }
 
 
@@ -352,7 +436,7 @@
 
     .actionBtnWrapper{
       .btn-cancel, .btn-save{
-        padding: 8px 50px;
+        padding: 8px 40px;
       }
     }
     
@@ -362,6 +446,21 @@
           margin-bottom: 14px;
         }
       }
+  }
+
+  .guest-service{
+    &.service-request{
+      .product-category{
+        .dropdown{
+          width: 100%;
+        }
+      }
+      .service-request-desc{
+        &.guest-type{
+          margin: 10px 0px 0px 0px;
+        }
+      }
+    } 
   }
 }
 
