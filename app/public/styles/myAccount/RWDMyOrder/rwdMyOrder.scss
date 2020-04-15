@@ -377,12 +377,31 @@
 
     .res-refund-summary {
       padding: 15px 15px 0px 15px;
-      color: #77787a;
+      color: $battleshipGrey;
+      float: left;
+      width: 100%;
       .res-refund-title {
         font-size: 14px;
         margin: 5px auto 16px auto;
-        font-family: CeraGIBold, sans-serif;
-        color: #000;
+        font-family: $font-bold;
+        color:$black;
+      }
+      .refund-row-wrapper{
+        float: left;
+        width: 100%;
+        padding-bottom: 10px;
+        color:$battleshipGrey;
+        font-size: $base*2;
+        .refund-row{
+          margin: 0px;
+          .info-label{
+            font-family:$font-regular;
+          }
+          .info-val{
+            float:right;
+            font-family:$font-regular;
+          }
+        }
       }
     }
 

@@ -239,34 +239,32 @@
      }
   }
   .orderSummery {
-    // background-color: blueviolet;
-    // min-height: 50px;
     .summerydata{
       padding: 26px 0 0 0;
     }
     .refundsummarydata {
-      // border-top: 1px solid #e4eaee;
       .refundSummaryTitle {
-        // font-family: $font-bold;
-        padding: 5px;
-        color: #505d68;
-        font-size: 14px;
-        font-family: CeraGIBold, sans-serif;
-        line-height: 14px;
+        padding: 5px 0px 0px 0px;
+        color: $greylightColor;
+        font-size: $base*1.75;
+        font-family: $font-bold;
+        line-height: $base*1.75;
       }
       .refundTable {
         width: 100%;
           .refundDataHeading {
-            background-color: #036cc5;
+            background-color: $cerulean;
             padding: 5px;
             th {
               color: $colorwhite;
-              padding: 5px;
+              padding: 6px;
+              font-family: $font-bold;
             }
           }
               td {
-                padding: 5px;
-  
+                padding: 6px;
+                font-family:$font-regular;
+                color: $greyBorder;
               }
         }
 

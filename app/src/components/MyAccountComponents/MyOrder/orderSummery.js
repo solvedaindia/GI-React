@@ -82,7 +82,7 @@ class OrderSummery extends React.Component {
       <div className="refundsummarydata">
         {refundData && refundData.length > 0 ?
         <>
-        <div className ='refundSummaryTitle'>Refund Summary</div> 
+        <h4 className ='refundSummaryTitle'>Refund Summary</h4> 
         <table className ='refundTable'>
             <tr className ='refundDataHeading'>
               <th>Transaction ID</th>

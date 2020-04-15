@@ -90,16 +90,23 @@ class RWDCompleteOrder extends React.Component {
         <div className="res-refund-summary">
         {refundData && refundData.length > 0 ?
         <>
-        <div className ='res-refund-title'>Refund Summary</div> 
+        <h2 className ='res-refund-title'>Refund Summary</h2> 
             {
               refundData.map(refundElement => {
                 return (
                   <>
                   <div className="res-refund-detail">
-                  Transaction ID: {refundElement.transactionID}
-                  <br />
-                  {refundElement.Mode}
-                  ₹{formatPrice(refundElement.Amount)}
+                  <div className='refund-row-wrapper'>
+                    <p className='refund-row'>
+                    <span className='info-label'>Transaction ID:</span> 
+                    <span className='info-val'>{refundElement.transactionID}</span>
+                    </p>
+                  
+                    <p className='refund-row'>
+                      <span className='info-label'>{refundElement.Mode}</span>
+                      <span className='info-val'>₹{formatPrice(refundElement.Amount)}</span>
+                    </p>
+                    </div>
                   </div>
                   </>
                 )
