@@ -301,9 +301,6 @@
       .get-selected-address{
         .saveAddress{
           .list{
-            width: 30.333%;
-            margin-right:1%;
-            padding: $base*2 $base*1.5;
             border: 1px solid $lightblueGrey;
             min-height: 100px;
             float: left;
@@ -331,8 +328,6 @@
       }
 
       .actionBtnWrapper{
-        padding-top: $base * 2.5;
-        padding-bottom: $base * 2.5;
         clear: both;
         .btn{
           border-radius: 0px;
@@ -381,7 +376,20 @@
      > .heading{
         margin:$base*8 0 $base*10 0;
       }
-    }
+      .get-selected-address{
+        .saveAddress{
+          .list{
+            width: 30.333%;
+            margin-right:1%;
+            padding: $base*2 $base*1.5;
+          }
+        }
+      }
+      .actionBtnWrapper{
+        padding-top: $base * 2.5;
+        padding-bottom: $base * 2.5;
+      }
+    } 
   }
 
 
@@ -413,11 +421,52 @@
 */
 @include mix-md {
   .service-request{
+    margin: 0px $base*2;
     > .heading{
       margin:$base*3 0 $base*3 0;
     }
-  }
+    .ongoingOrder{
+      font-size: $base*2;
+      font-family: $font-medium;
+      padding-top: $base*2;
+      clear: both;
+      margin:0px 0px 20px 0px;
+    }
+    .bottomDivider{
+      display: none;
+    }
+    .itemBox{
+      .orderProduct{
+        .orderimgbox{
+          width: 100%;
+        }
+      }
+    }
 
+    .product-category, .invice-selection{
+      .dropdown{
+        width: 100%;
+        max-width: 400px;
+      }
+      .dropdown-toggle{
+        width: 100%;
+      }
+    }
+
+    .get-selected-address{
+      .saveAddress{
+        .list{
+          width: 100%;
+          padding: $base*2 $base*1.5;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .actionBtnWrapper{
+      padding-top: $base * 1.75;
+      padding-bottom: $base*6;
+    }
+  }
 }
 
 
@@ -461,8 +510,8 @@
     
       .add-img{
         .uploded-img, .uploded-img-data{
-          margin-right: 14px;
-          margin-bottom: 14px;
+          margin-right: 13px;
+          margin-bottom: 13px;
         }
       }
   }
