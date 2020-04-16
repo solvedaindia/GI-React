@@ -439,6 +439,21 @@
       .orderProduct{
         .orderimgbox{
           width: 100%;
+          .product-text{
+            .heading{
+              font-size: $base*1.5;
+            }
+            .price{
+              .discount-price{
+                font-size: $base*1.5;
+              }
+            }
+            .quantity-shipping{
+              .quantity{
+                width: 100%;
+              }
+            }
+          }
         }
       }
     }
