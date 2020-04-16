@@ -788,6 +788,7 @@ function paymentMethods(headers, callback) {
         logger.debug('Got all the origin resposes');
         const resJSON = {
           paymentMethods : [],
+          CODAmount : '50000',
         };
         if(response.body.usablePaymentInformation && response.body.usablePaymentInformation.length>0){
           resJSON.paymentMethods = response.body.usablePaymentInformation;
