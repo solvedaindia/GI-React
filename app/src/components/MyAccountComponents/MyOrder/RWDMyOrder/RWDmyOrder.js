@@ -11,12 +11,14 @@ import RWDMultiTrack from './RWDMultiTrack';
 import RWDCompleteOrder from './RWDCompleteOrder';
 import { updateTheRWDHeader } from '../../../../actions/app/actions';
 import CancelComponents from '../../../cancelComponents/index';
+import ServiceRequestForm from '../../../ServiceRequestForm/index';
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isTrackOrder: false,
+      isServiceRequest:false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
       isLoading: true,
@@ -40,6 +42,7 @@ class RWDMyOrder extends React.Component {
     this.myOrderCallback = this.myOrderCallback.bind(this);
     this.orderDetailCallback = this.orderDetailCallback.bind(this);
     this.showCancelModal=this.showCancelModal.bind(this);
+    this.showServiceRequestForm=this.showServiceRequestForm.bind(this);
     this.modalRef=React.createRef();
   }
 
@@ -62,7 +65,13 @@ class RWDMyOrder extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
+    if(this.state.isServiceRequest)
+    {
+      this.setState({
+        isServiceRequest:false,
+      })
+    }
+    else if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
       if (nextProps.updatedHeaderReturnVal === 'MyOrder Return') {
         this.setState({
           currentComponent: '',
@@ -78,6 +87,19 @@ class RWDMyOrder extends React.Component {
     //console.log(this.modalRef)
     console.log(orderItem,orderData)
     this.modalRef.current.showModal(orderItem,orderData);
+  }
+  showServiceRequestForm(orderData,orderItem)
+  {
+    //console.log(orderItem,orderData)
+    this.setState({
+      isServiceRequest:true
+    })
+  }
+  renderServiceRequestBack()
+  {
+    this.setState({
+      isServiceRequest:false
+    })
   }
 
   myOrderCallback(compName, data, completeData) {
@@ -229,17 +251,26 @@ class RWDMyOrder extends React.Component {
   render() {
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
-    if (this.state.currentComponent === 'SingleProduct') {
+    if(this.state.isServiceRequest)
+    {
+      return(
+        <ServiceRequestForm orderData={this.state.currentCompleteData} 
+          orderItemData={this.state.currentComponentData} 
+          renderServiceRequestPro={this.renderServiceRequestBack.bind(this)}/>
+      )
+    }
+    else if (this.state.currentComponent === 'SingleProduct') {
       return (
         <div className="myOrder single-item-order">
           <RWDSingleProduct
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
-            
             orderDetailCallbackPro={this.orderDetailCallback}
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
+            showServiceRequestForm={this.showServiceRequestForm}
             orderCompleteDataPro={this.state.currentCompleteData} />
+            
             <CancelComponents ref={this.modalRef}/>
         </div>
       );
