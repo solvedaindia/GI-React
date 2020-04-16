@@ -493,7 +493,11 @@ module.exports.getPromoCodes = function getPromoCodesData(req, callback) {
               return;
             }
             results.forEach(element => {
-              if (element !== null && element.promoCode && element.promoCode !== 'null') {
+              if (
+                element !== null &&
+                element.promoCode &&
+                element.promoCode !== 'null'
+              ) {
                 promoData.push({
                   promocode: element.promoCode,
                   description: element.description,
@@ -769,7 +773,7 @@ module.exports.paymentMethods = paymentMethods;
 function paymentMethods(headers, callback) {
   logger.debug('Payment Method API');
 
-  const paymentMethods = `${constants.paymentMethods.replace(
+  const paymentMethodURL = `${constants.paymentMethods.replace(
     '{{storeId}}',
     headers.storeId,
   )}`;
@@ -777,7 +781,7 @@ function paymentMethods(headers, callback) {
   const reqHeader = headerutil.getWCSHeaders(headers);
   origin.getResponse(
     'GET',
-    paymentMethods,
+    paymentMethodURL,
     reqHeader,
     null,
     null,
@@ -787,13 +791,16 @@ function paymentMethods(headers, callback) {
       if (response.status === 201 || response.status === 200) {
         logger.debug('Got all the origin resposes');
         const resJSON = {
-          paymentMethods : [],
-          CODAmount : '50000',
+          paymentMethods: [],
+          CODAmount: '50000',
         };
-        if(response.body.usablePaymentInformation && response.body.usablePaymentInformation.length>0){
+        if (
+          response.body.usablePaymentInformation &&
+          response.body.usablePaymentInformation.length > 0
+        ) {
           resJSON.paymentMethods = response.body.usablePaymentInformation;
         }
-        callback(null,resJSON);
+        callback(null, resJSON);
       } else {
         callback(errorutils.handleWCSError(response));
       }
