@@ -758,3 +758,44 @@ function checkout(headers, params, callback) {
     },
   );
 }
+
+/**
+ * Payment Methods
+ * @param access_token,storeId,addressID
+ * @return 200,OK Fetching Payment Methods
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+module.exports.paymentMethods = paymentMethods;
+function paymentMethods(headers, callback) {
+  logger.debug('Payment Method API');
+
+  const paymentMethods = `${constants.paymentMethods.replace(
+    '{{storeId}}',
+    headers.storeId,
+  )}`;
+
+  const reqHeader = headerutil.getWCSHeaders(headers);
+  origin.getResponse(
+    'GET',
+    paymentMethods,
+    reqHeader,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 201 || response.status === 200) {
+        logger.debug('Got all the origin resposes');
+        const resJSON = {
+          paymentMethods : [],
+        };
+        if(response.body.usablePaymentInformation && response.body.usablePaymentInformation.length>0){
+          resJSON.paymentMethods = response.body.usablePaymentInformation;
+        }
+        callback(null,resJSON);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}

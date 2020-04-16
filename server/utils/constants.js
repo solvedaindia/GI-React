@@ -81,5 +81,6 @@ module.exports = Object.freeze({
   categorySuggestions: `${prodSearchResourceUrl}/{{storeId}}/sitecontent/categorySuggestions`,
   orderCancel: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/cancel`,
   returnOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/return/submit`,
-  createServiceRequest: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/service/submit`
+  createServiceRequest: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/service/submit`,
+  paymentMethods :  `${prodWcsResourceUrl}/{{storeId}}/cart/@self/usable_payment_info`,
 });

@@ -296,4 +296,23 @@ router.post('/precheckout', (req, res, next) => {
   });
 });
 
+/**
+ * Fetch Payment Methods
+ * @param access_token,storeId
+ * @return 200, return Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid or null
+ */
+router.get('/paymentmethods', (req, res, next) => {
+  cartHandler.paymentMethods(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;
