@@ -719,10 +719,6 @@ function OMSOrderDetails(headers,orderID,callback){
  */
 module.exports.getServiceRequestDetails = getServiceRequestDetails;
 function getServiceRequestDetails(req, callback) {
-  // if (!params.partNumber) {
-  //   callback(errorutils.errorlist.invalid_params);
-  //   return;
-  // }
   const reqHeader = req.headers;
   const resJSON = {
     productDetail : {},
@@ -817,6 +813,8 @@ function returnOrder(req, callback) {
     || !req.body.partNumber 
     || !req.body.price 
     || !req.body.quantity
+    || !req.body.images 
+    || !req.body.images.length>0 
     || !req.body.returnReason
     || !req.body.refundMethod){
     callback(errorutils.errorlist.invalid_params);
@@ -877,3 +875,58 @@ function returnOrder(req, callback) {
   })
 }
 
+/**
+ * Create Service Request
+ * @param headers
+ * @return 200,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.createServiceRequest = createServiceRequest;
+function createServiceRequest(req, callback) {
+  if(!req.body.prodCategory 
+    || !req.body.prodDesc 
+    || !req.body.images 
+    || !req.body.images.length>0 
+    || !req.body.addressId
+    || !req.body.serviceRequestReason
+   ){
+    callback(errorutils.errorlist.invalid_params);
+    return;
+  }
+
+  const serviceRequestBody = {
+    prodCategory : req.body.prodCategory,
+    prodDesc : req.body.prodDesc,
+    addressId : req.body.addressId,
+    productId : req.body.partNumber || '',
+    invoiceNo : req.body.invoiceNo || '',
+    invoiceURL : req.body.invoiceURL || '',
+    serviceRequestReason : req.body.serviceRequestReason,
+    messageServiceRequestReason : req.body.otherReason,
+  };
+
+  
+  if(req.body.images && req.body.images.length>0){
+    req.body.images.forEach((image,index) => {
+      serviceRequestBody[`imgURL${index+1}`] = image;
+    });
+  }
+  const reqHeaders = headerutil.getWCSHeaders(req.headers);
+  const createServiceRequest = constants.createServiceRequest.replace('{{storeId}}', req.headers.storeId);
+
+  origin.getResponse( 
+  'POST',
+  createServiceRequest,
+  reqHeaders,
+  null,
+  serviceRequestBody,
+  null,
+  '',
+ response=>{
+  if(response.status === 200){
+    callback(null,response.body);
+  } else {
+    callback(errorutils.handleWCSError(response))
+  }
+  })
+}
