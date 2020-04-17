@@ -868,7 +868,7 @@ function returnOrder(req, callback) {
   };
 
   if (req.body.refundMethod === 'COD') {
-    orderReturnBody.name = req.body.bankDetails.name;
+    orderReturnBody.Name = req.body.bankDetails.name;
     orderReturnBody.BAccntNo = req.body.bankDetails.accountNO;
     orderReturnBody.BCnfAccntNo = req.body.bankDetails.confirmAccountNO;
     orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
