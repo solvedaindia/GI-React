@@ -202,6 +202,8 @@ export const storeAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/by
 export const storeCityAPI = `${secureHttp}://${host}:${port2}/api/v1/storelocator/bylocation`;
 /* Store BY ID*/
 export const storeById = `${secureHttp}://${host}:${port2}/api/v1/storelocator/byId`;
+/* Payment Methods and COD thrashold value*/
+export const paymentMethods = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/paymentmethods`;
 /* Google Map Key */
 //export const mapKey = 'AIzaSyCqIhTMIITk2PXT2iuvgFNzuUGB7vQG4-M';
 export const mapKey = 'AIzaSyDpiDvLqsOlIRiu-4dScwKsmB0HJQwiTBw';
