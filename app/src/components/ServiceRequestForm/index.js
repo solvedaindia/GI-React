@@ -5,7 +5,7 @@ import EnterInvoiceView from './enterInvoiceView';
 import Checkboxes from './checkboxes';
 import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
-import { getAddressListAPI,getDetailtForSerReq,imagePrefix } from '../../../public/constants/constants';
+import { getAddressListAPI,getDetailtForSerReq,imagePrefix,saveServiceRequest } from '../../../public/constants/constants';
 import AddressList from './addressLists';
 import { ADD_NEW_ADD,SERVICE_REQUEST} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
@@ -21,6 +21,7 @@ class ServiceRequestForm extends React.Component {
       selectedCategory:"",
       invoiceSelectionData: [],
       selectedInvoice:"",
+      inputInvoice:"",
       serviceRequestReasons: [],
       selectedReason:[],
       addressListItem: null,
@@ -48,6 +49,8 @@ class ServiceRequestForm extends React.Component {
       .get(getDetailtForSerReq+this.props.orderItemData.partNumber+'&orderid='+this.props.orderData.orderID)
       .then(response => {
        // console.log(dataPro,response.data)
+        const invoice=response.data.data.invoiceList;
+        invoice.push("Other")
         this.setState({
           addressData: response.data.data.addressList,
           categorySelectionData:response.data.data.productCategory,
@@ -88,8 +91,9 @@ class ServiceRequestForm extends React.Component {
   }
 
   getInvoiceValue(value,index) {
-    const flag=index==0 || this.state.invoiceSelectionData.length-1==index; 
-    if(this.state.invoiceSelectionData.length-1==index)
+    //const flag=index==0 || this.state.invoiceSelectionData.length-1==index; 
+    const flag=false || value==="Other" || value==="other";
+    if(value==="Other" || value==="other")
     {
       this.setState({
         showEnterInvoice: true,
@@ -100,6 +104,7 @@ class ServiceRequestForm extends React.Component {
     else{
       this.setState({
         showEnterInvoice: false,
+        inputInvoice:"",
         showInvoiceDisclaimer:flag,
         selectedInvoice:value,
       });
@@ -129,6 +134,7 @@ class ServiceRequestForm extends React.Component {
   {
     this.setState({
       showInvoiceDisclaimer: value.length==0,
+      inputInvoice:value,
     });
   }
   onInvoiceFileSelection(value)
@@ -149,6 +155,45 @@ class ServiceRequestForm extends React.Component {
     this.setState({
       selectedImages: value,
     });
+  }
+
+  onSubmitForm()
+  { 
+      let invoice=this.state.selectedInvoice;
+      if(this.state.selectedInvoice=="Other" && this.state.inputInvoice.length==12)
+      {
+        invoice=this.state.inputInvoice;
+      }
+      let reason="";
+      this.state.selectedReason.map((data)=>{
+        if(reason=="")
+          reason=data
+        else
+          reason=reason+","+data
+      })
+      const param={
+        prodCategory:this.state.selectedCategory,
+        prodDesc:this.props.orderItemData.productName,
+        partNumber:this.props.orderItemData.partNumber,
+        addressId:this.state.selectedAddress.addressID,
+        invoiceNo:invoice,
+        invoiceURL:"",
+        serviceRequestReason:reason,
+        otherReason:this.state.otherReason,
+        images:["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
+      }
+
+      apiManager
+      .post(saveServiceRequest,param)
+      .then(response => {
+        console.log("PostResponse",response);
+        alert("Service request submitted successfully")
+        this.props.renderServiceRequestPro();
+      })
+      .catch(error => {
+        console.log("PostResponseError",error);
+      });
+      
   }
 
 
@@ -174,8 +219,8 @@ class ServiceRequestForm extends React.Component {
         {this.renderAddAddress()}
 
         <div className='actionBtnWrapper'>
-            <button  className='btn-cancel btn'>Cancel</button>
-            <button  disabled={isSaveBtnDisabled} className='btn-save btn'>Submit</button>
+            <button  className='btn-cancel btn' onClick={this.props.renderServiceRequestPro} >Cancel</button>
+            <button  disabled={isSaveBtnDisabled} className='btn-save btn' onClick={this.onSubmitForm.bind(this)}>Submit</button>
           </div>
 
       </div>
