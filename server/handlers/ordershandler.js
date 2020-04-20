@@ -874,11 +874,11 @@ function returnOrder(req, callback) {
     orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
   }
 
-  if (req.body.images && req.body.images.length > 0) {
-    req.body.images.forEach((image, index) => {
-      orderReturnBody[`img${index + 1}`] = image;
-    });
-  }
+  // if (req.body.images && req.body.images.length > 0) {
+  //   req.body.images.forEach((image, index) => {
+  //     orderReturnBody[`img${index + 1}`] = image;
+  //   });
+  // }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
   const returnOrderURL = constants.returnOrder.replace(
     '{{storeId}}',
