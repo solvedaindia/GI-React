@@ -915,7 +915,7 @@ function createServiceRequest(req, callback) {
     !req.body.prodDesc ||
     !req.body.images ||
     !req.body.images.length > 0 ||
-    !req.body.addressData ||
+    (!req.body.addressData && !req.body.addressId) ||
     !req.body.serviceRequestReason
   ) {
     callback(errorutils.errorlist.invalid_params);
@@ -932,26 +932,25 @@ function createServiceRequest(req, callback) {
     messageServiceRequestReason: req.body.otherReason,
   };
 
-  if (req.body.images && req.body.images.length > 0) {
-    req.body.images.forEach((image, index) => {
-      serviceRequestBody[`imgURL${index + 1}`] = image;
-    });
-  }
-  
-  const taskList = [
-    createRequest.bind(null,req.headers,serviceRequestBody),
-  ]
-  if(req.body.isLoggedIn === 'true' && req.body.isNewAddress === 'true'){
-    taskList.push(userHandler.createAddress.bind(null,req.headers,req.body.addressData));
-  }
-
-  async.parallel(taskList, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null,'Created Service Request');
-    }
+  req.body.images.forEach((image, index) => {
+    serviceRequestBody[`imgURL${index + 1}`] = image;
   });
+
+  if(req.body.addressId && req.body.addressId !==null){
+    serviceRequestBody.addressId = req.body.addressId;
+    createRequest(req.headers,serviceRequestBody,callback);
+  } else {
+    userHandler.createAddress(req.headers,req.body.addressData,(error,addressResponse)=>{
+      if(error){
+        logger.debug('Error in Creating Address');
+        callback(error);
+        return;
+      }
+      logger.debug('Created Address');
+      serviceRequestBody.addressId = addressResponse.addressID;
+      createRequest(req.headers,serviceRequestBody,callback);
+    })
+  }
 }
 
 function createRequest(headers,serviceRequestBody,callback){
@@ -972,8 +971,10 @@ function createRequest(headers,serviceRequestBody,callback){
     '',
     response => {
       if (response.status === 200) {
+        logger.debug('Service Request Created Successfully');
         callback(null, response.body);
       } else {
+        logger.debug('Error in Creating Service Request');
         callback(errorutils.handleWCSError(response));
       }
     },
