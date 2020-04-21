@@ -915,7 +915,7 @@ function createServiceRequest(req, callback) {
     !req.body.prodDesc ||
     !req.body.images ||
     !req.body.images.length > 0 ||
-    !req.body.addressId ||
+    !req.body.addressData ||
     !req.body.serviceRequestReason
   ) {
     callback(errorutils.errorlist.invalid_params);
@@ -925,7 +925,6 @@ function createServiceRequest(req, callback) {
   const serviceRequestBody = {
     prodCategory: req.body.prodCategory,
     prodDesc: req.body.prodDesc,
-    addressId: req.body.addressId,
     productId: req.body.partNumber || '',
     invoiceNo: req.body.invoiceNo || '',
     invoiceURL: req.body.invoiceURL || '',
@@ -938,10 +937,29 @@ function createServiceRequest(req, callback) {
       serviceRequestBody[`imgURL${index + 1}`] = image;
     });
   }
-  const reqHeaders = headerutil.getWCSHeaders(req.headers);
+  
+  const taskList = [
+    createRequest.bind(null,req.headers,serviceRequestBody),
+  ]
+  if(req.body.isLoggedIn === 'true' && req.body.isNewAddress === 'true'){
+    taskList.push(userHandler.createAddress.bind(null,req.headers,req.body.addressData));
+  }
+
+  async.parallel(taskList, (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null,'Created Service Request');
+    }
+  });
+}
+
+function createRequest(headers,serviceRequestBody,callback){
+
+  const reqHeaders = headerutil.getWCSHeaders(headers);
   const createServiceRequestURL = constants.createServiceRequest.replace(
     '{{storeId}}',
-    req.headers.storeId,
+    headers.storeId,
   );
 
   origin.getResponse(
