@@ -82,16 +82,10 @@ class ReturnRequestForm extends React.Component {
   }
   renderTextField() {
     return (
-      <div className="service-request-box">
+      <div className="service-request-desc">
         <h5>{this.props.title}</h5>
         <textarea
           onChange={() => this.onTextareaInput()}
-          style={{
-            "border-color": "#dfe0de",
-            padding: "5px",
-            outline: "none",
-            resize: "none"
-          }}
           name="the-textarea"
           id="textareaRR"
           maxlength={this.state.characterLimit}
@@ -99,6 +93,7 @@ class ReturnRequestForm extends React.Component {
           autofocus
           rows="4"
           cols="50"
+          className='text-area'
         />
         <label className="label-text">
           {" "}
@@ -115,26 +110,26 @@ class ReturnRequestForm extends React.Component {
 
   renderRefund() {
     return (
-      <div>
+      <div className='refund-mode-wrapper'>
         <h4 className="heading">Refund Mode</h4>
-        <br />
-        <label>
-          <input
+        <div className='radioBtn'>
+        <input className='inputBox' id='paymentMode'
             type="radio"
             value={this.state.fullPaymentMode}
             checked={true}
           />
+        <label htmlFor='paymentMode' className='label-text'>
           {this.state.fullPaymentMode === "COD"
             ? this.state.fullPaymentMode
             : "Full Online Payment"}
         </label>
-        <br />
-        <h4 className="RefundMessage">
+        </div>
+        <div className="notification-title">
           Your refund will be processed to
           {this.state.fullPaymentMode === "COD"
             ? " Bank Account"
             : ` ${this.state.fullPaymentMode}`}
-        </h4>
+        </div>
         {this.state.fullPaymentMode === "COD" ? (
           <BankDetails handleInputValidation={this.onValidationChange} />
         ) : null}
@@ -151,12 +146,14 @@ class ReturnRequestForm extends React.Component {
 
     return (
       <div>
-        <div className="trackMyOrder service-request">
+        <div className="trackMyOrder service-request return-request">
+        <div class="bottomDivider">
           <button
             className="backBtn"
             onClick={this.props.renderSelectionPro}
           >{`< Back`}</button>
-          <h4>Return Products</h4>
+          </div>
+          <div class="ongoingOrder">Return Products</div>
 
           {this.renderProductDetails()}
           {this.renderReturnRequestReason()}
@@ -194,7 +191,7 @@ class ReturnRequestForm extends React.Component {
 
   renderReturnRequestReason() {
     return (
-      <div className="v">
+      <div className="product-category">
         <h4 className="heading">Reason For Return Request</h4>
         <Dropdown
           data={this.state.returnRequestReasons}

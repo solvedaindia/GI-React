@@ -111,52 +111,64 @@ class BankDetails extends React.Component {
     return (
       <>
         <h4 className="heading">Bank Account Details</h4>
-
-        <div className="bankDetails">
-          <label>
+        <div className="bank-detail-form">
+          <div className='row'>
+          <div className='col-sm-12 col-md-12 form-wrapper'>
+          <label htmlFor='ac-user-name' className='label-text'>
             Name*
-            <input
+          </label>
+          <input
+            id='ac-user-name'
               type="text"
               name="name"
               maxLength="100"
               onKeyPress={this.isAlpha}
               onChange={this.handleBankDetail}
+              className='form-control'
             />
-            <br />
-            {Name === "" && NAME_VALIDATION}
-          </label>
-          <br />
-          <label>
+            <span className='label-info-text'>{Name === "" && NAME_VALIDATION}</span>
+            </div>
+
+            <div className='col-sm-12 col-md-12 form-wrapper'>
+          <label htmlFor='ac-number' className='label-text'>
             Account Number*
+            </label>
             <input
+              id='ac-number'
               type="text"
               name="accountNo"
               maxLength="20"
               onKeyPress={this.isDigit}
               onChange={this.handleBankDetail}
+              className='form-control'
             />
-            <br />
-            {AccountNumber === "" && ACCOUNT_NUMBER_VALIDATION}
-          </label>
-          <br />
-          <label>
+            
+            <span className='label-info-text'>{AccountNumber === "" && ACCOUNT_NUMBER_VALIDATION}</span>
+            </div>
+          
+            <div className='col-sm-12 col-md-12 form-wrapper'>
+          <label htmlFor='conf-ac-number' className='label-text'>
             Confirm Account Number*
-            <input
+          </label>
+          <input
+            id='conf-ac-number'
               type="text"
               id="AccNoConfirm"
               name="accountNoConfirm"
               maxLength="20"
               onKeyPress={this.isDigit}
               onChange={this.handleBankDetail}
+              className='form-control'
             />
-            <br />
-            {AccountNumber != AcoountNumberConfirm &&
-              ACCOUNT_NUMBER_CONFIRM_VALIDATION}
-          </label>
-          <br />
-          <label>
+              <span className='label-info-text'>{AccountNumber != AcoountNumberConfirm &&
+              ACCOUNT_NUMBER_CONFIRM_VALIDATION}</span>
+          </div>
+          
+          <div className='col-sm-12 col-md-12 form-wrapper'>
+          <label htmlFor='ifsc' className='label-text'>
             IFSC Code*
-            <input
+          </label>
+          <input
               id="ifsc"
               type="text"
               name="ifscCode"
@@ -164,10 +176,11 @@ class BankDetails extends React.Component {
               onKeyPress={this.isDigitOrAlpha}
               onChange={this.handleBankDetail}
               placeholder=""
+              className='form-control'
             />
-            <br />
-            {ifscCodeValid === false && IFSC_VALIDATION}
-          </label>
+             <span className='label-info-text'>{ifscCodeValid === false && IFSC_VALIDATION}</span>
+          </div>
+          </div>
         </div>
       </>
     );
