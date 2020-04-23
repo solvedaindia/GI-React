@@ -105,6 +105,7 @@ function getShipmentDetails(shipment) {
     installationDate: getFormattedDate(shipment.installationDate),
     invoiceNo: shipment.extnInvoiceNo,
     statusLine: shipment.statusLine,
+    shipNode : shipment.shipNode,
   };
   return shipmentDetails;
 }

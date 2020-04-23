@@ -365,6 +365,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderSummary: {},
     wcsOrderStatus: wcsOrderDetails.orderStatus,
     refundDetails: [],
+    transactions: [],
   };
   const wcsOrderID = orderData.orderId;
   getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
@@ -374,19 +375,10 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     }
     const omsData = omsOrderResponse;
     // orderDetails.orderID = omsData.orderID;
-    const refundData = [
-      {
-        transactionID: 'Xxxxxxxx',
-        Amount: '24000',
-        Mode: 'Bank Account',
-      },
-      {
-        transactionID: 'Xxxxxxxx',
-        Amount: '18000',
-        Mode: 'Godrej Credit',
-      },
-    ];
-    orderDetails.refundDetails = refundData;
+    if(omsData.cancelRefundSummary){
+      orderDetails.cancelRefundSummary = omsData.cancelRefundSummary;
+    }
+    orderDetails.transactions = omsData.transactions;
     orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     orderDetails.orderDate = omsData.orderDate;
@@ -429,6 +421,7 @@ function getOMSOrderDetails(headers, orderID, callback) {
         invoices: [],
         address: '',
         orderItems: [],
+        transactions : [],
       };
       if (response.status === 200) {
         if (response.body.result.order) {
@@ -448,6 +441,22 @@ function getOMSOrderDetails(headers, orderID, callback) {
               omsOrderDetail.deliveryAddress,
             );
           }
+          if (omsOrderDetail.transactions && omsOrderDetail.transactions.length>0) {
+            resJson.transactions = omsOrderDetail.transactions;
+          }
+          if(omsOrderDetail.cancelRefundSummary && omsOrderDetail.cancelRefundSummary.length>0){
+            resJson.cancelRefundSummary = [];
+            omsOrderDetail.cancelRefundSummary.forEach(cancelRefund => {
+              resJson.cancelRefundSummary.push({
+                transactionID : cancelRefund.transactionID,
+                refundAmount : cancelRefund.refundAmount,
+                paymentMode : cancelRefund.paymentMode,
+              })
+            });
+          }
+          omsOrderDetail.cancelRefundSummary = omsOrderDetail.cancelRefundSummary;
+
+
           if (
             omsOrderDetail.orderLines &&
             omsOrderDetail.orderLines.length > 0
@@ -484,6 +493,8 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
+                        productDetail.subLineNo = orderItem.subLineNo;
+                        productDetail.primeLineNo = orderItem.primeLineNo;
                         productDetail.shipmentData = [];
                         if (
                           orderItem.shipments &&
