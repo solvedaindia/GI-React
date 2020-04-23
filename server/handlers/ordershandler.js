@@ -364,7 +364,6 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderItems: [],
     orderSummary: {},
     wcsOrderStatus: wcsOrderDetails.orderStatus,
-    refundDetails: [],
     transactions: [],
   };
   const wcsOrderID = orderData.orderId;
@@ -493,8 +492,17 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
+
+                        productDetail.status = orderItem.status;
                         productDetail.subLineNo = orderItem.subLineNo;
                         productDetail.primeLineNo = orderItem.primeLineNo;
+
+                        /* Cancel Order Flags */
+                        productDetail.cancelOrderLineFlag = orderItem.cancelOrderLineFlag;
+                        productDetail.cancelButtonDisable = orderItem.cancelButtonDisable;
+                        productDetail.cancellationMssg = orderItem.cancellationMssg;
+                        productDetail.cancelButtonText = orderItem.cancelButtonText;
+
                         productDetail.shipmentData = [];
                         if (
                           orderItem.shipments &&
@@ -848,7 +856,13 @@ function returnOrder(req, callback) {
     !req.body.images ||
     !req.body.images.length > 0 ||
     !req.body.returnReason ||
-    !req.body.refundMethod
+    !req.body.refundMethod || 
+   
+    !req.body.invoiceNo ||
+    !req.body.shipNode ||
+    !req.body.primeLineNo ||
+    !req.body.subLineNo ||
+    !req.body.creditCardNo
   ) {
     callback(errorutils.errorlist.invalid_params);
     return;
@@ -876,6 +890,13 @@ function returnOrder(req, callback) {
     quantity: req.body.quantity,
     returnReason: req.body.returnReason,
     refundMethod: req.body.refundMethod,
+    InvoiceNo : req.body.invoiceNo,
+    ShipNode : req.body.shipNode,
+    PrimeLineNo : req.body.primeLineNo,
+    SubLineNo : req.body.subLineNo,
+    CreditCardNo: req.body.creditCardNo,
+    TransactionId:req.body.transactionId,   
+    TransactionDate :req.body.transactionDate, 
   };
 
   if (req.body.refundMethod === 'COD') {
