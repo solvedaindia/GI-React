@@ -493,7 +493,7 @@ function getOMSOrderDetails(headers, orderID, callback) {
                           orderItem.unitPrice,
                         );
 
-                        productDetail.status = orderItem.status;
+                        productDetail.orderItemStatus = orderItem.status;
                         productDetail.subLineNo = orderItem.subLineNo;
                         productDetail.primeLineNo = orderItem.primeLineNo;
 
