@@ -14,7 +14,7 @@ class RWDCompleteOrder extends React.Component {
 
   render() {
     const orderData = this.props.orderDataPro;
-    const refundData = this.props.refundDetailsPRO;
+    const cancelRefundSummary = this.props.cancelRefundSummaryPro;
     const addressData = orderData.address;
     const summeryData = orderData.orderSummary
     const invoiceData = orderData.invoices;
@@ -88,11 +88,11 @@ class RWDCompleteOrder extends React.Component {
         </div>
         
         <div className="res-refund-summary">
-        {refundData && refundData.length > 0 ?
+        {cancelRefundSummary && cancelRefundSummary.length > 0 ?
         <>
         <h2 className ='res-refund-title'>Refund Summary</h2> 
             {
-              refundData.map(refundElement => {
+              cancelRefundSummary.map(refundElement => {
                 return (
                   <>
                   <div className="res-refund-detail">
@@ -103,8 +103,8 @@ class RWDCompleteOrder extends React.Component {
                     </p>
                   
                     <p className='refund-row'>
-                      <span className='info-label'>{refundElement.Mode}</span>
-                      <span className='info-val'>₹{formatPrice(refundElement.Amount)}</span>
+                      <span className='info-label'>{refundElement.paymentMode}</span>
+                      <span className='info-val'>₹{formatPrice(refundElement.refundAmount)}</span>
                     </p>
                     </div>
                   </div>

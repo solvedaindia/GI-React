@@ -244,7 +244,7 @@ class RWDMyOrder extends React.Component {
       return (
         <div className="myOrder View-Order">
           <RWDCompleteOrder
-            refundDetailsPRO = {this.state.currentComponentData.refundDetails}
+            cancelRefundSummaryPro = {this.state.currentComponentData.cancelRefundSummary}
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
             viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)} />
