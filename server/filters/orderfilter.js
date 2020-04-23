@@ -82,6 +82,7 @@ function getShipmentDetails(shipment) {
   const shipmentDetails = {
     status: shipment.status,
     quantity: shipment.shipQty,
+    shipmentNo : shipment.shipmentNo,
     shipmentKey: shipment.shipmentKey,
     createdDate: getFormattedDate(shipment.createdDate),
     expectedShipmentDate: getFormattedDate(shipment.expectedShipmentDate),
@@ -104,6 +105,7 @@ function getShipmentDetails(shipment) {
     installationDate: getFormattedDate(shipment.installationDate),
     invoiceNo: shipment.extnInvoiceNo,
     statusLine: shipment.statusLine,
+    shipNode : shipment.shipNode,
   };
   return shipmentDetails;
 }
