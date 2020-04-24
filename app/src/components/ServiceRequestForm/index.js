@@ -38,7 +38,7 @@ class ServiceRequestForm extends React.Component {
   }
 
   componentDidMount() {
-    this.getAddressListAPI();
+  //  this.getAddressListAPI();
     this.getDetailAPI()
    // console.log("dataPro",this.props.orderData);
     console.log("dataPro1",this.props.orderItemData);
@@ -51,22 +51,6 @@ class ServiceRequestForm extends React.Component {
        // console.log(dataPro,response.data)
         const invoice=response.data.data.invoiceList;
         invoice.push("Other")
-        this.setState({
-          addressData: response.data.data.addressList,
-          categorySelectionData:response.data.data.productCategory,
-          serviceRequestReasons:response.data.data.serviceReasonList,
-          invoiceSelectionData:response.data.data.invoiceList
-        })
-      })
-      .catch(error => {
-      });
-
-  }
-
-  getAddressListAPI() {
-    apiManager
-      .get(getAddressListAPI)
-      .then(response => {
         let address=null;
         if(response.data.data.addressList && response.data.data.addressList.length>0)
         {
@@ -75,11 +59,41 @@ class ServiceRequestForm extends React.Component {
         }
         this.setState({
           addressData: response.data.data.addressList,
-          selectedAddress:address
+          categorySelectionData:response.data.data.productCategory,
+          serviceRequestReasons:response.data.data.serviceReasonList,
+          invoiceSelectionData:response.data.data.invoiceList,
+          selectedAddress:address,
         })
       })
       .catch(error => {
       });
+
+  }
+
+  getAddressListAPI(value) {
+    const addresses=this.state.addressData;
+    addresses.splice(0, 0, value);
+    this.setState({
+             addressData: addresses,
+             selectedAddress:value
+    })
+    
+    // apiManager
+    //   .get(getAddressListAPI)
+    //   .then(response => {
+    //     let address=null;
+    //     if(response.data.data.addressList && response.data.data.addressList.length>0)
+    //     {
+    //       address=response.data.data.addressList[0];
+    //       console.log("Slected address",address)
+    //     }
+    //     this.setState({
+    //       addressData: response.data.data.addressList,
+    //       selectedAddress:address
+    //     })
+    //   })
+    //   .catch(error => {
+    //   });
   }
 
   getCategorySelectionValue(value) {
@@ -125,6 +139,7 @@ class ServiceRequestForm extends React.Component {
   }
 
   addNewAddressBtnClicked() {
+    console.log("addressData",this.state.addressData);
     this.setState({
       isAddAddress: !this.state.isAddAddress,
     });
@@ -171,11 +186,20 @@ class ServiceRequestForm extends React.Component {
         else
           reason=reason+","+data
       })
+
+      let address=null;
+      if(this.state.selectedAddress.addressID==="")
+      {
+        address=this.state.selectedAddress;
+      } 
+
+
       const param={
         prodCategory:this.state.selectedCategory,
         prodDesc:this.props.orderItemData.productName,
         partNumber:this.props.orderItemData.partNumber,
         addressId:this.state.selectedAddress.addressID,
+        addressData:address,
         invoiceNo:invoice,
         invoiceURL:"",
         serviceRequestReason:reason,
@@ -237,7 +261,7 @@ class ServiceRequestForm extends React.Component {
             onCancel={this.addNewAddressBtnClicked.bind(this)}
             onUpdateActivity={this.getAddressListAPI.bind(this)}
             editAddressDataPro={this.state.editAddressData}
-
+            fromRequestFor={true}
           />
         ) : (
           <button
