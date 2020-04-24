@@ -74,6 +74,8 @@ export const logoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/logout`
 export const newsletterAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/subscribe`;
 /* Newsletter Subscription Status API */
 export const newsletterStatusAPI = `${secureHttp}://${host}:${port2}/api/v1/newsletter/status`;
+/* Return Order Shipment API */
+export const returnOrderShipment = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/return`;
 /* store Id */
 export const storeId = 'GodrejInterioESite';
 /* Access Token */

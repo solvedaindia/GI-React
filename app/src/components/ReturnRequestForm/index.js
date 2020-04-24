@@ -2,11 +2,15 @@ import React from "react";
 import Dropdown from "../ServiceRequestForm/dropdown";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import BankDetails from "./bankDetail";
+import { isMobile } from '../../utils/utilityManager';
 //import Checkboxes from "../ServiceRequestForm/checkboxes";
 import apiManager from "../../utils/apiManager";
 import {
   // getAddressListAPI,
+  storeId,
+  accessToken,
   getDetailtForSerReq,
+  returnOrderShipment,
   BankListAPI
 } from "../../../public/constants/constants";
 import "../../../public/styles/myAccount/service-request.scss";
@@ -31,29 +35,109 @@ class ReturnRequestForm extends React.Component {
       showTextview: false,
       characterCount: 100,
       characterLimit: 100,
-      fullPaymentMode: props.paymentMode
+      fullPaymentMode: props.paymentMode,
+      bankInfo: {}
     };
     this.onOtherReasonEnter = this.onOtherReasonEnter.bind(this);
     this.onTextareaInput = this.onTextareaInput.bind(this);
     this.onValidationChange = this.onValidationChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.returnOrderShipmentAPI = this.returnOrderShipmentAPI.bind(this);
   }
 
   componentDidMount() {
-    // this.getAddressListAPI();
-    // this.getDetailAPI()
+  this.returnOrderShipmentAPI();
+
   }
   // to be modified ...
-  getDetailAPI = () => {
+  // getDetailAPI = () => {
+  //   apiManager
+  //     .get(getDetailtForSerReq + "56101505SD00084")
+  //     .then(response => {
+  //       this.setState({
+  //         returnRequestReasons: response.data.data.serviceReasonList
+  //       });
+  //     })
+  //     .catch(error => {});
+  // };
+
+  // addToWishlistAPI() { 
+  //   const data = {
+  //     sku_id: this.props.uniqueId,
+  //   };
+  //   apiManager
+  //     .post(addToWishlist, data)
+  //     .then(response => {
+        
+  //     getUpdatedWishlist(this);
+  //       this.setState({
+  //         wishlistCurrentImage: this.wishlistAddedImg,
+  //         wishlistPopup: this.wishlistPopupItem(),
+  //       });
+  //     })
+  //     .catch(error => {
+  //     });
+  // }
+  
+  // {
+  //     "orderId":"",
+  //     "orderItemId":"",
+  //     "shipmentNo":"",
+  //     "quantity":"",
+  //     "partNumber":"",
+  //     "price":"",
+  //     "refundMethod":"",
+  //     "returnReason":"",
+  //     "bankDetails":{ //In Case of COD
+  //       "name":"",
+  //       "accountNO":"",
+  //       "confirmAccountNO":"",
+  //       "IFSCCode":""
+  //     
+  //   },
+  //     "images":[
+  //       "imageURL1",
+  //       "imageURL2"
+  //   ]
+  //   }
+    
+  returnOrderShipmentAPI() { 
+    debugger;
+    const data = {
+      
+          "orderId":"123",
+          "orderItemId":"3556",
+          "shipmentNo":"5777",
+          "quantity":"3",
+          "partNumber":"676564",
+          "price":"3546",
+          "refundMethod":"COD",
+          "returnReason":"1",
+          "bankDetails":{ //In Case of COD
+            "name":"niikhi",
+            "accountNO":"1827387843",
+            "confirmAccountNO":"1827387843",
+            "IFSCCode":"AADF0249484"
+          
+        },
+          "images":[
+            "imageURL1",
+            "imageURL2"
+        ]
+        
+        
+    };
     apiManager
-      .get(getDetailtForSerReq + "56101505SD00084")
+      .post(returnOrderShipment, data)
       .then(response => {
-        this.setState({
-          returnRequestReasons: response.data.data.serviceReasonList
-        });
+        
+      console.log(response);
+      
       })
-      .catch(error => {});
-  };
+      .catch(error => {
+      });
+  }
+
 
   getReturnRequestReason(value) {
     this.setState({
@@ -137,7 +221,13 @@ class ReturnRequestForm extends React.Component {
     );
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    console.log(this.props.dataPro);
+    console.log(this.props.renderSelectionPro);
+
+    
+    this.addToWishlistAPI();
+  }
 
   render() {
     const { isBankDetailsValid, selectedImages, selectedReason } = this.state;
@@ -163,7 +253,8 @@ class ReturnRequestForm extends React.Component {
           <div className="actionBtnWrapper">
             <button
               className="btn-cancel btn"
-              onClick={this.props.renderSelectionPro}
+              onClick={isMobile() ?this.props.onCancel 
+                :this.props.renderSelectionPro}
             >
               Cancel
             </button>

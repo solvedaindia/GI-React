@@ -10,11 +10,14 @@ import RWDSingleProduct from './RWDSingleProduct';
 import RWDMultiTrack from './RWDMultiTrack';
 import RWDCompleteOrder from './RWDCompleteOrder';
 import { updateTheRWDHeader } from '../../../../actions/app/actions';
+import ReturnRequestForm from '../../../ReturnRequestForm/index'; 
+
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isReturnRequest:false,
       isTrackOrder: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
@@ -38,6 +41,8 @@ class RWDMyOrder extends React.Component {
     this.onscroll = this.onscroll.bind(this);
     this.myOrderCallback = this.myOrderCallback.bind(this);
     this.orderDetailCallback = this.orderDetailCallback.bind(this);
+    this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
+    this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
   }
 
   componentDidMount() {
@@ -216,9 +221,29 @@ class RWDMyOrder extends React.Component {
     return loaderItem;
   }
 
+  showReturnRequestForm()
+  {
+    this.setState({
+      isReturnRequest:true
+    })
+  }
+  renderReturnRequestBack()
+  {
+    this.setState({
+      isReturnRequest:false
+    })
+  }
+
+
   render() {
+    debugger;
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
+    if(this.state.isReturnRequest)
+    {return (
+      <ReturnRequestForm onCancel = {this.renderReturnRequestBack} dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
+    )
+    }
     if (this.state.currentComponent === 'SingleProduct') {
       return (
         <div className="myOrder single-item-order">
@@ -226,7 +251,8 @@ class RWDMyOrder extends React.Component {
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
             orderDetailCallbackPro={this.orderDetailCallback}
-            orderCompleteDataPro={this.state.currentCompleteData} />
+            orderCompleteDataPro={this.state.currentCompleteData}
+            onReturn = {this.showReturnRequestForm} />
         </div>
       );
     }

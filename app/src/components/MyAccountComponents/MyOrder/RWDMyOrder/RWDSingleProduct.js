@@ -71,6 +71,14 @@ class RWDSingleProduct extends React.Component {
             : !this.props.isFromViewOrder && this.props.hideViewDetail ? null 
             : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button> 
             : null}
+            
+            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.onReturn(productData,this.props.currentCompleteData)} >
+              Return Item
+            </button> 
+
+            {/* <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showServiceRequestForm(productData,this.props.currentCompleteData)} >
+              Service Request
+            </button>  */}
         </div>  
       </>
     );
