@@ -45,6 +45,35 @@ class RWDSingleProduct extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
+    let btnCancelDisable=false;
+    let showCancelMessage=false;
+    let showCancelButton=false;
+    let cancelText="Cancel Item"
+    if(productData.orderItemStatus && productData.orderItemStatus==='Cancelled')
+    {
+      btnCancelDisable=true;
+      showCancelMessage=false;
+      showCancelButton=true;
+      cancelText="Cancelled"
+    }
+    else if(productData.cancelOrderLineFlag!=="Y")
+    {
+      showCancelMessage=false;
+      showCancelButton=false;
+    }
+    else if(productData.cancelOrderLineFlag==="Y" && productData.cancelButtonDisable!=="Y")
+    {
+      //enable cancel button
+      showCancelButton=true;
+      cancelText="Cancel Item"
+      showCancelMessage=false;
+    }
+    else{
+      btnCancelDisable=true;
+      showCancelMessage=true;
+      showCancelButton=true;
+      cancelText="Cancel Item"
+    }
     return (
       <>
         <div className="itemBoxTrack clearfix">
@@ -61,7 +90,7 @@ class RWDSingleProduct extends React.Component {
               <span>{this.state.dsDateTag}</span>
             </div>
             {/*Cance message condtion replaced by true */}
-             {true && <div className='cancelation-text-info'>  
+             {showCancelMessage && <div className='cancelation-text-info'>  
                   <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
               </div>}
           </div>
@@ -77,9 +106,8 @@ class RWDSingleProduct extends React.Component {
             : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button> 
             : null}
 
-            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showCancelModal(productData,this.props.currentCompleteData)} >
-              Cancel Item
-            </button> 
+            {showCancelButton && <button className={btnCancelDisable?"btn-borderwhite disabled":"btn-borderwhite"} style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showCancelModal(productData,this.props.currentCompleteData)} >
+              {cancelText}</button> }
         </div>  
       
       </>

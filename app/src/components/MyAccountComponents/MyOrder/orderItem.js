@@ -33,7 +33,11 @@ class OrderItem extends React.Component {
 
   render() {
     const orderData = this.props.orderItemData;
-
+    let isOrderCancelled=false;
+    if(orderData.orderItemStatus && orderData.orderItemStatus==='Cancelled')
+    {
+      isOrderCancelled=true;
+    }
     return (
       <>
         <div className="tabBar clearfix">
@@ -90,7 +94,7 @@ class OrderItem extends React.Component {
             )
           })}
           <button className="btn-bg cancel-order" onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
-              Cancel Order
+              {isOrderCancelled?orderData.orderItemStatus:"Cancel Order"}
           </button> 
         </div>
       </>

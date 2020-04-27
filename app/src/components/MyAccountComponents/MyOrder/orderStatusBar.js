@@ -72,7 +72,16 @@ class OrderStatusBar extends React.Component {
     else if (item === 'Installed' || item === 'Installation') {
       statusDate = this.props.shipmentDataPro.installationDate
     }
-    return statusDate.split(',')[1];
+     //return statusDate.split(',')[1];
+     console.log("statusDate",statusDate);
+     if(statusDate && statusDate.includes(','))
+     {
+       return statusDate.split(',')[1];
+     }
+     else{
+       return statusDate;
+     }
+    
   }
 
   render() {
