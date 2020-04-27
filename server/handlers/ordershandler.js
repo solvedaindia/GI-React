@@ -864,8 +864,7 @@ function returnOrder(req, callback) {
     !req.body.invoiceNo ||
     !req.body.shipNode ||
     !req.body.primeLineNo ||
-    !req.body.subLineNo ||
-    !req.body.creditCardNo
+    !req.body.subLineNo
   ) {
     callback(errorutils.errorlist.invalid_params);
     return;
@@ -897,7 +896,6 @@ function returnOrder(req, callback) {
     ShipNode : req.body.shipNode,
     PrimeLineNo : req.body.primeLineNo,
     SubLineNo : req.body.subLineNo,
-    CreditCardNo: req.body.creditCardNo,
     TransactionId:req.body.transactionId,   
     TransactionDate :req.body.transactionDate, 
   };
