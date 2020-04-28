@@ -385,6 +385,9 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderDetails.address = omsData.address;
     orderDetails.orderStatus = omsData.orderStatus;
     orderDetails.invoices = omsData.invoices;
+    orderDetails.orderCancelFlag = omsData.orderCancelFlag;
+    orderDetails.orderCancelButtonDisable = omsData.orderCancelButtonDisable;
+
     if (omsData.orderItems && omsData.orderItems.length > 0) {
       orderDetails.orderTotalItems = omsData.orderItems.length;
       orderDetails.orderItems = omsData.orderItems;
@@ -432,6 +435,9 @@ function getOMSOrderDetails(headers, orderID, callback) {
           );
           resJson.orderStatus = omsOrderDetail.orderStatus;
           resJson.paymentMethod = omsOrderDetail.paymentMethod || '';
+          resJson.orderCancelFlag = omsOrderDetail.orderCancelFlag || '';
+          resJson.orderCancelButtonDisable = resJson.orderCancelButtonDisable || '';
+
           if (omsOrderDetail.invoices && omsOrderDetail.invoices.length > 0) {
             resJson.invoices = omsOrderDetail.invoices;
           }
@@ -505,6 +511,16 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.cancelButtonDisable = orderItem.cancelButtonDisable;
                         productDetail.cancellationMssg = orderItem.cancellationMssg;
                         productDetail.cancelButtonText = orderItem.cancelButtonText;
+                        productDetail.cancelRefundAmount = orderItem.cancelRefundAmount;
+
+                        /* Service Request */
+                        productDetail.isServiceable = orderItem.isServiceable;
+                        productDetail.serviceRequestOrderLineFlag = orderItem.serviceRequestOrderLineFlag;
+
+                        /* Return Order */
+                        productDetail.returnOrderLineFlag = orderItem.returnOrderLineFlag;
+                        productDetail.showReturnButton = orderItem.showReturnButton;
+                        productDetail.returnMssg = orderItem.returnMssg;
 
                         productDetail.shipmentData = [];
                         if (
