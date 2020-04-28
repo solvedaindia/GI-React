@@ -106,6 +106,12 @@ function getShipmentDetails(shipment) {
     invoiceNo: shipment.extnInvoiceNo,
     statusLine: shipment.statusLine,
     shipNode : shipment.shipNode,
+    returnShipmentLineFlag: shipment.returnShipmentLineFlag,
+    returnRefundSummary : shipment.returnRefundSummary,
+    returnMessage: shipment.returnMessage,
+    returnButtonDisplay: shipment.returnButtonDisplay,
+    isReturnShipment : shipment.isReturnShipment,
+    returnButtonText : shipment.returnButtonText,
   };
   return shipmentDetails;
 }
