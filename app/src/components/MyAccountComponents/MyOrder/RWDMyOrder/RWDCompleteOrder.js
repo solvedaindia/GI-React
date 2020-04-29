@@ -2,6 +2,7 @@ import React from 'react';
 import RWDSingleProduct from './RWDSingleProduct';
 import { Link } from 'react-router-dom';
 import appCookie from '../../../../utils/cookie';
+import { formatPrice } from '../../../../utils/utilityManager';
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class RWDCompleteOrder extends React.Component {
 
   render() {
     const orderData = this.props.orderDataPro;
+    const cancelRefundSummary = this.props.cancelRefundSummaryPro;
     const addressData = orderData.address;
     const summeryData = orderData.orderSummary
     const invoiceData = orderData.invoices;
@@ -83,6 +85,36 @@ class RWDCompleteOrder extends React.Component {
             </p>
             </div>
           </div>
+        </div>
+        
+        <div className="res-refund-summary">
+        {cancelRefundSummary && cancelRefundSummary.length > 0 ?
+        <>
+        <h2 className ='res-refund-title'>Refund Summary</h2> 
+            {
+              cancelRefundSummary.map(refundElement => {
+                return (
+                  <>
+                  <div className="res-refund-detail">
+                  <div className='refund-row-wrapper'>
+                    <p className='refund-row'>
+                    <span className='info-label'>Transaction ID:</span> 
+                    <span className='info-val'>{refundElement.transactionID}</span>
+                    </p>
+                  
+                    <p className='refund-row'>
+                      <span className='info-label'>{refundElement.paymentMode}</span>
+                      <span className='info-val'>₹{formatPrice(refundElement.refundAmount)}</span>
+                    </p>
+                    </div>
+                  </div>
+                  </>
+                )
+              })
+            }
+          
+        </>: null
+        }
         </div>
         { appCookie.get('isLoggedIn') === 'true' &&
         <div className='order-invoice-details'>

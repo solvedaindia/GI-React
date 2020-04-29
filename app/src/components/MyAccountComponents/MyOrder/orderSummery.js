@@ -17,7 +17,7 @@ class OrderSummery extends React.Component {
   render() {
     const summeryData = this.props.summeryDataro;
   const addressData = this.props.addressDataPro;
-  const refundData = this.props.refundDataPro;
+  const cancelRefundSummary = this.props.cancelRefundSummary;
 
     return (
       <>
@@ -80,9 +80,9 @@ class OrderSummery extends React.Component {
       </div>
       <div className="clearfix"></div>
       <div className="refundsummarydata">
-        {refundData && refundData.length > 0 ?
+        {cancelRefundSummary && cancelRefundSummary.length > 0 ?
         <>
-        <div className ='refundSummaryTitle'>Refund Summary</div> 
+        <h4 className ='refundSummaryTitle'>Refund Summary</h4> 
         <table className ='refundTable'>
             <tr className ='refundDataHeading'>
               <th>Transaction ID</th>
@@ -90,12 +90,12 @@ class OrderSummery extends React.Component {
               <th>Mode</th>
             </tr>
             {
-              refundData.map(refundElement => {
+              cancelRefundSummary.map(refundElement => {
                 return (
                   <tr>
                   <td>{refundElement.transactionID}</td>
-                  <td>₹{formatPrice(refundElement.Amount)}</td>
-                  <td>{refundElement.Mode}</td>
+                  <td>₹{formatPrice(refundElement.refundAmount)}</td>
+                  <td>{refundElement.paymentMode}</td>
                   </tr>
                 )
               })
