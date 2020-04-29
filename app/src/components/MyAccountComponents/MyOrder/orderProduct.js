@@ -48,6 +48,9 @@ class ProductOrder extends React.Component {
   render() {
 
     const productData = this.props.prodctDataPro;
+    const showServiceRequestButton=productData.serviceRequestOrderLineFlag=='Y'
+    const isServiceable=productData.isServiceable=='Y'
+
     return (
       <>
         <div className="clearfix" />
@@ -84,12 +87,12 @@ class ProductOrder extends React.Component {
           <div className="orderbtn">
             {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
             {productData.shipmentData && productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
-              Track My Order
+              {showServiceRequestButton?"View Item History":"Track My Order"}
             </button> : null}
 
-            <button className="btn-borderwhite" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
+            {showServiceRequestButton && <button className="btn-borderwhite" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
               Service Request
-            </button> 
+              </button> }
         
             <button className="btn-borderwhite cancel-item" onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
               Cancel Item
