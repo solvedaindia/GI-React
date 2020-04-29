@@ -1,6 +1,7 @@
 import React from 'react';
 import OrderStatusBar from './orderStatusBar';
 import { imagePrefix } from '../../../../public/constants/constants';
+import { CACELATION_WINDOW_CLOSE } from '../../../../../app/src/constants/app/cancelConstants';
 
 class ProductOrder extends React.Component {
   constructor(props) {
@@ -73,6 +74,10 @@ class ProductOrder extends React.Component {
                   </div>
                 }
               </div>
+              {/*Cance message condtion replaced by true */}
+              {true && <div className='cancelation-text-info'>  
+                  <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+              </div>}
             </div>
           </div>
 
@@ -81,6 +86,14 @@ class ProductOrder extends React.Component {
             {productData.shipmentData && productData.shipmentData.length > 1 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
               Track My Order
             </button> : null}
+
+            <button className="btn-borderwhite" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
+              Service Request
+            </button> 
+        
+            <button className="btn-borderwhite cancel-item" onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
+              Cancel Item
+            </button> 
 
           </div>
           <div className='clearfix'></div>

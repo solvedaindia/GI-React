@@ -10,6 +10,7 @@ import RWDSingleProduct from './RWDSingleProduct';
 import RWDMultiTrack from './RWDMultiTrack';
 import RWDCompleteOrder from './RWDCompleteOrder';
 import { updateTheRWDHeader } from '../../../../actions/app/actions';
+import CancelComponents from '../../../cancelComponents/index';
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
@@ -38,6 +39,8 @@ class RWDMyOrder extends React.Component {
     this.onscroll = this.onscroll.bind(this);
     this.myOrderCallback = this.myOrderCallback.bind(this);
     this.orderDetailCallback = this.orderDetailCallback.bind(this);
+    this.showCancelModal=this.showCancelModal.bind(this);
+    this.modalRef=React.createRef();
   }
 
   componentDidMount() {
@@ -68,6 +71,13 @@ class RWDMyOrder extends React.Component {
         this.props.updateTheRWDHeader('');
       }
     }
+  }
+
+  showCancelModal(orderData,orderItem)
+  {
+    //console.log(this.modalRef)
+    console.log(orderItem,orderData)
+    this.modalRef.current.showModal(orderItem,orderData);
   }
 
   myOrderCallback(compName, data, completeData) {
@@ -225,8 +235,12 @@ class RWDMyOrder extends React.Component {
           <RWDSingleProduct
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
+            
             orderDetailCallbackPro={this.orderDetailCallback}
+            showCancelModal={this.showCancelModal}
+            currentCompleteData={this.state.currentCompleteData}
             orderCompleteDataPro={this.state.currentCompleteData} />
+            <CancelComponents ref={this.modalRef}/>
         </div>
       );
     }
@@ -235,6 +249,8 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder multi-item-order">
           <RWDMultiTrack
             orderDataPro={this.state.currentComponentData}
+            showCancelModal={this.showCancelModal}
+            currentCompleteData={this.state.currentCompleteData}
             myOrderCallbackPro={this.myOrderCallback} />
         </div>
       );
@@ -261,13 +277,14 @@ class RWDMyOrder extends React.Component {
                   isGuestTrackOrderPro={this.state.isGuestTrackOrder}
                   orderItemData={data}
                   myOrderCallbackPro={this.myOrderCallback}
+                  showCancelModal={this.showCancelModal}
                 />
               </>
             )
 
           }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
           }
-        
+        <CancelComponents ref={this.modalRef}/>
         </div>
       );
     }

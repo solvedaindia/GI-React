@@ -91,7 +91,16 @@
           width: 100%;
           font-size: 14px;
           font-family: $font-medium;
-          font-weight: 600;
+          &.disabled{
+            cursor: not-allowed;
+            pointer-events: none;
+            background-color: $grey;
+            color: $greyish;
+            border: 1px solid $colorwhite;
+          }
+          &.cancel-item{
+            margin-top: 5px;
+          }
           &:hover {
             background: $black;
             color: $colorwhite;
@@ -198,8 +207,17 @@
               }
             }
           }
+          .cancelation-text-info{
+            color: $errorMsg;
+            padding-top: 10px;
+          }
         }
-      }
+      }  
+    }
+    .cancel-order{
+      background: $cerulean;
+      color: $colorwhite;
+      width: 100%;
     }
   }
 // Back Order css
@@ -359,6 +377,86 @@
   }
   .paymentmethod {
     padding: 0 20px 0 10px;
+  }
+}
+
+.cancel-order-model {
+  &.in{
+    z-index: 99999;
+    .modal-dialog{
+      .modal-content{
+        .modal-header{
+          text-align: center;
+          border: 0px;
+        }
+        .modal-body{
+          .cancel-order-box{
+            padding: 10px 10% 20px 10%;
+            .error-text{
+              color: $errorMsg;
+            }
+            .dropdown{
+              .dropdown-toggle{
+                text-align: left;
+                border-radius: 0px;
+                background: $colorwhite;
+                border: 1px solid $greyBorder;
+                width: 100%;
+                .caret{
+                  float: right;
+                  margin-top: 8px;
+                }
+              }
+              .dropdown-menu{
+                width: 100%;
+                .select-item{
+                  padding: 4px 10px;
+                  cursor: pointer;
+                }
+              }
+            }
+            .textarea-box{
+              margin-top: 10px;
+              textarea{
+                width: 100%;
+                padding: 2px 5px;
+              }
+            }
+            .paymet-type{
+              .msgText{
+                margin-bottom: 0px;
+                margin-top: $base * 2.5;
+              }
+              .label-text{
+                padding-left: 5px;
+                font-family: $font-light;
+              }
+            }
+            .btn-wrapper{
+              padding-top: $base*5;
+              padding-bottom: $base*2;
+              text-align: center;
+              .btn-cancel{
+                padding: $base $base*2.5;
+                margin-right: 10px;
+                background: $colorwhite;
+                border: 1px solid $greyLight;
+                border-radius: 0px;
+                min-width: 100px;
+              }
+              .btn-save{
+                padding: $base $base*2.5;
+                margin-right: 10px;
+                background: $black;
+                border-radius: 0px;
+                color: $colorwhite;
+                min-width: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 /* 

@@ -254,6 +254,14 @@ export const CheckoutAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/payme
 export const minEMIAPI = `${secureHttp}://${host}:${port2}/api/v1/emi/minimumemivalue`;
 export const SaveGSTAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/checkout/savegstin`;
 export const shipModeAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/shipmodes`;
+
+/*Order Related API */
+export const getDetailtForSerReq = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/servicerequestpage?partnumber=`;
+export const cancelOrderAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/cancel`;
+export const espotReasonOrderItemCancel = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_REASON_FOR_ORDER_ITEM_CANCEL`;
+export const espotReasonOrderCancel = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_REASON_FOR_ORDER_CANCEL`;
+
+
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
 export const catalog = 'GodrejInterioSAS';
 export const imageStore = 'imagestore';

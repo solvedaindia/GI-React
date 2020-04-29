@@ -11,9 +11,10 @@ import { Switch, Route } from 'react-router-dom';
 import { LastLocationProvider } from 'react-router-last-location';
 import apiManager from '../../utils/apiManager';
 import { registerGuestUser } from '../../utils/initialManager';
-import { getCookie,isMobile,isTab } from '../../utils/utilityManager';
+import { getCookie, isMobile, isTab } from '../../utils/utilityManager';
 import LoadingIndicator from '../../utils/loadingIndicator';
-import {createBrowserHistory} from 'history';
+import { createBrowserHistory } from 'history';
+import CancelComponents from '../../components/cancelComponents/index';
 
 import {
   accessTokenCookie,
@@ -25,7 +26,7 @@ import {
 } from '../../../public/constants/constants';
 
 import {
- validatePindcode
+  validatePindcode
 } from '../../utils/validationManager';
 
 import appCookie from '../../utils/cookie';
@@ -74,6 +75,8 @@ import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
 import ReactSnackBar from "../HomePageContainer/snackbar/index";
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import ServiceRequestFormGuest from '../../components/ServiceRequestFormGuest/index';
+import ServiceRequestForm from '../../components/ServiceRequestForm';
 
 const userAgent = window.navigator.userAgent.toLowerCase();
 const isIPad = /ipad/.test(userAgent);
@@ -95,11 +98,11 @@ export default class App extends React.Component {
       isMobile: window.innerWidth <= 760,
       accessToken: '',
       showNewsLetter: false,
-	    prevPath: '',
-	    currPath: '',
+      prevPath: '',
+      currPath: '',
       loading: true,
-      internetErrorMessage:"",
-      showSnackBar:false
+      internetErrorMessage: "",
+      showSnackBar: false
     };
     this.resize = this.resize.bind(this);
     this.guestLoginCallback = this.guestLoginCallback.bind(this);
@@ -107,101 +110,98 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    if(window.location.pathname==='/internet-error')
-    {
+    if (window.location.pathname === '/internet-error') {
       history.goBack();
     }
     window.addEventListener('resize', this.resize);
     window.addEventListener('load', this.handleLoad);
     window.addEventListener('online', this.onOnline.bind(this));
-	  window.addEventListener('offline', this.onOffline.bind(this));
+    window.addEventListener('offline', this.onOffline.bind(this));
     this.initialLoginHandling();
     this.newsletterPopupHandling();
     this.cookiePolicyPopup();
     this.resize();
     this.getCurrentLocation();
     this.getIPData();
-    
-    
+
+
   }
 
-  onOnline()
-  {
-    
-      this.setState({
-        internetErrorMessage:"Internet connected",
-        showSnackBar:true});
-        
+  onOnline() {
 
-        setTimeout(() => {
-          this.setState({
-            internetErrorMessage:"",
-            showSnackBar:false});
-        }, 3000);
-        
-  }
-  onOffline()
-  {
-  
     this.setState({
-      internetErrorMessage:"Internet disconnected",
-      showSnackBar:true});
+      internetErrorMessage: "Internet connected",
+      showSnackBar: true
+    });
 
-      setTimeout(() => {
-        this.setState({
-          internetErrorMessage:"",
-          showSnackBar:false});
-      }, 3000);
-      
+
+    setTimeout(() => {
+      this.setState({
+        internetErrorMessage: "",
+        showSnackBar: false
+      });
+    }, 3000);
+
+  }
+  onOffline() {
+
+    this.setState({
+      internetErrorMessage: "Internet disconnected",
+      showSnackBar: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        internetErrorMessage: "",
+        showSnackBar: false
+      });
+    }, 3000);
+
   }
 
-  componentWillUnmount()
-  {
-    window.removeEventListener('online', this.onOnline.bind(this),false);
-	  window.removeEventListener('offline', this.onOffline.bind(this),false);
+  componentWillUnmount() {
+    window.removeEventListener('online', this.onOnline.bind(this), false);
+    window.removeEventListener('offline', this.onOffline.bind(this), false);
   }
 
-  componentWillMount(){
-    if(isMobile() || isTab() || isIPad){
+  componentWillMount() {
+    if (isMobile() || isTab() || isIPad) {
       $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
   }
-  componentWillUpdate() 
-  {
+  componentWillUpdate() {
     let header = document.getElementById("header");
-    let pathurl=window.location.href;
-    if(header) {
+    let pathurl = window.location.href;
+    if (header) {
       header.classList.remove("sticky");
-    } 
+    }
 
-	if(window.location.hash)
-	{
-	  var element = document.getElementById(window.location.hash.substr(1));
-	  if (element) 
-	  {
-		element.scrollIntoView();
-	  }
-	  else{
-		  $('html, body').animate({ scrollTop: 0 }, 'smooth');
-	  }
-	}
-    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
-       $('html, body').stop().animate();
-    }
-    else if((pathurl.includes("sort") ||  pathurl.includes("filter")) && !(isMobile() || isTab())){
+    if (window.location.hash) {
+      var element = document.getElementById(window.location.hash.substr(1));
+      if (element) {
+        element.scrollIntoView();
+      }
+      else {
         $('html, body').animate({ scrollTop: 0 }, 'smooth');
+      }
     }
-    else if((pathurl.includes("furniture-online"))){
-      window.scrollTo(0,0); 
+    else if ((pathurl.includes("sort") || pathurl.includes("filter")) && !(isMobile() || isTab())) {
+      $('html, body').stop().animate();
+    }
+    else if ((pathurl.includes("sort") || pathurl.includes("filter")) && !(isMobile() || isTab())) {
+      $('html, body').animate({ scrollTop: 0 }, 'smooth');
+    }
+    else if ((pathurl.includes("furniture-online"))) {
+      window.scrollTo(0, 0);
+    }
+    else {
+      if (!isMobile() && !isTab() && !isIPad) {
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+      }
+    }
   }
-	else 
-	{ if(!isMobile() && !isTab() && !isIPad){
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
-  }
-	}
-  }
-  
- 
+
+
   initialLoginHandling() {
     const token = getCookie(accessTokenCookie);
     if (token != '') {
@@ -245,7 +245,7 @@ export default class App extends React.Component {
           this.setState({ showNewsLetter: true });
         }
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   guestLoginCallback(token) {
@@ -257,90 +257,80 @@ export default class App extends React.Component {
     }
   }
 
-  handleLoad() 
-  {
-	  if(window.location.hash)
-	  {
-		const element = document.getElementById(window.location.hash.substr(1));
-		 if (element) 
-			 element.scrollIntoView();
-	  }
+  handleLoad() {
+    if (window.location.hash) {
+      const element = document.getElementById(window.location.hash.substr(1));
+      if (element)
+        element.scrollIntoView();
+    }
   }
-  
+
   resize() {
     this.setState({ isMobile: window.innerWidth <= 760 });
   }
 
   // IP Data Call.
-	getIPData() 
-	{
-   
-		if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
-		{
+  getIPData() {
+
+    if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') {
       appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-		  navigator.geolocation.getCurrentPosition(
-      function()
-      {
-        appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);}
-		  );
-  
-			navigator.geolocation.watchPosition(function(position) {
-					var request = new XMLHttpRequest();
-					request.open('GET', ipDataApi);
-					request.setRequestHeader('Accept', 'application/json');
-					request.send();
-					request.onreadystatechange = 
-					function () 
-					{
-						if (this.status == 200) 
-						{
-							var ipData = JSON.parse(this.responseText);
-							if(ipData && ipData.postal)
-							{
-								var ipDataPostCode = ipData.postal;
-								appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
-							}
-							else
-							{
-								appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-							}
-						}
-						else 
-						{
-  						    Geocode.setApiKey(mapKey);
-						    Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
-								response => {
-								  const address = response.results[0].formatted_address;
-								  const data = address.replace(', India', '');
-								  const postalCode = data.substr(data.length -6);
-								  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
-									appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
-									this.setState({
-									  loading: false
-									})
+      navigator.geolocation.getCurrentPosition(
+        function () {
+          appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+        }
+      );
+
+      navigator.geolocation.watchPosition(function (position) {
+        var request = new XMLHttpRequest();
+        request.open('GET', ipDataApi);
+        request.setRequestHeader('Accept', 'application/json');
+        request.send();
+        request.onreadystatechange =
+          function () {
+            if (this.status == 200) {
+              var ipData = JSON.parse(this.responseText);
+              if (ipData && ipData.postal) {
+                var ipDataPostCode = ipData.postal;
+                appCookie.set('pincode', ipDataPostCode, 365 * 24 * 60 * 60 * 1000);
+              }
+              else {
+                appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+              }
+            }
+            else {
+              Geocode.setApiKey(mapKey);
+              Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
+                response => {
+                  const address = response.results[0].formatted_address;
+                  const data = address.replace(', India', '');
+                  const postalCode = data.substr(data.length - 6);
+                  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
+                    appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+                    this.setState({
+                      loading: false
+                    })
                   }
-                  else{
+                  else {
                     appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-                  }          
-								},
-								error => {
-									appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-								}
-							)
-						}
-					};				
-			  },
-			  function(error) {
-				if (error.code == error.PERMISSION_DENIED)
-				appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-		  });
-	   }
-  	}
-  
-  getCurrentLocation() 
-  {
+                  }
+                },
+                error => {
+                  appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+                }
+              )
+            }
+          };
+      },
+        function (error) {
+          if (error.code == error.PERMISSION_DENIED)
+            appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+        });
+    }
+  }
+
+  getCurrentLocation() {
     // if (appCookie.get('pincode') === null || appCookie.get('pincode') === '') 
-		// {
+    // {
     //    appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
     // }
     // if (navigator.geolocation) {
@@ -349,25 +339,22 @@ export default class App extends React.Component {
     // function showPosition(position) { }
   }
 
-  checkSearchInput() 
-  {
-    if(window.location.pathname !== '/search' && document.getElementById("searchInput")) 
-	{
-      document.getElementById("searchInput").value='';     
+  checkSearchInput() {
+    if (window.location.pathname !== '/search' && document.getElementById("searchInput")) {
+      document.getElementById("searchInput").value = '';
       const crossbtn = document.getElementById('clearField');
       if (crossbtn) {
-        crossbtn.style.display='none';
+        crossbtn.style.display = 'none';
       }
     }
   }
 
-  render() 
-  {
+  render() {
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }
     this.checkSearchInput();
-    
+
     let newsletterItem;
     if (this.state.showNewsLetter) {
       newsletterItem = <NewsletterModel />;
@@ -378,21 +365,21 @@ export default class App extends React.Component {
     const { isMobile } = this.state;
     return (
       <div>
-         {appCookie.get('isCookiePolicy') === 'true' ? <CookiePopup /> : null}
+        {appCookie.get('isCookiePolicy') === 'true' ? <CookiePopup /> : null}
         {newsletterItem}
         {
-			window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
-				  <LightHeader />
-				) : (
-				  <HeaderContainer />
-				) 
-		}
+          window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout' ? (
+            <LightHeader />
+          ) : (
+              <HeaderContainer />
+            )
+        }
         {/* {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
-          <LightHeader />
-        ) : (
-          <HeaderContainer />
-        )} */}
-        
+              <LightHeader />
+            ) : (
+              <HeaderContainer />
+            )} */}
+
         {/* <HeaderContainer /> */}
 	  <div id="mainContainer">
 		<LastLocationProvider>
@@ -428,6 +415,7 @@ export default class App extends React.Component {
           <Route path="/privacy-policy" component={privacyPolicy} />
           <Route path="/about-us" component={AboutUsContainer} />
           <Route path="/support" component={HelpSupport} />
+          <Route path="/serviceRequest" component={ServiceRequestFormGuest} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           <Route path="/internet-error" component={InternetError} />
@@ -439,8 +427,8 @@ export default class App extends React.Component {
 		<FooterContainer /> 
     <ReactSnackBar Icon={<span><MWebLogo width="24" height="24" /></span>} Show={this.state.showSnackBar}>
           {this.state.internetErrorMessage}
-    </ReactSnackBar>
-        
+        </ReactSnackBar>
+
       </div>
     );
   }
