@@ -80,6 +80,9 @@ class RWDSingleProduct extends React.Component {
             <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showCancelModal(productData,this.props.currentCompleteData)} >
               Cancel Item
             </button> 
+            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.onReturn(productData,this.props.currentCompleteData)} >
+              Return Item
+            </button> 
             <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showServiceRequestForm(productData,this.props.currentCompleteData)} >
               Service Request
             </button> 

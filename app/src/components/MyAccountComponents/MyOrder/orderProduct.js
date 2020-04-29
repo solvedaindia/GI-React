@@ -90,6 +90,10 @@ class ProductOrder extends React.Component {
             <button className="btn-borderwhite" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
               Service Request
             </button> 
+
+            <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+              Return
+            </button> 
         
             <button className="btn-borderwhite cancel-item" onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
               Cancel Item

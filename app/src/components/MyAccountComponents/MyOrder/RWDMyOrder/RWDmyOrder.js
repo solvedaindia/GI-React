@@ -12,11 +12,14 @@ import RWDCompleteOrder from './RWDCompleteOrder';
 import { updateTheRWDHeader } from '../../../../actions/app/actions';
 import CancelComponents from '../../../cancelComponents/index';
 import ServiceRequestForm from '../../../ServiceRequestForm/index';
+import ReturnRequestForm from '../../../ReturnRequestForm/index'; 
+
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isReturnRequest:false,
       isTrackOrder: false,
       isServiceRequest:false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
@@ -44,6 +47,8 @@ class RWDMyOrder extends React.Component {
     this.showCancelModal=this.showCancelModal.bind(this);
     this.showServiceRequestForm=this.showServiceRequestForm.bind(this);
     this.modalRef=React.createRef();
+    this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
+    this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
   }
 
   componentDidMount() {
@@ -248,7 +253,22 @@ class RWDMyOrder extends React.Component {
     return loaderItem;
   }
 
+  showReturnRequestForm()
+  {
+    this.setState({
+      isReturnRequest:true
+    })
+  }
+  renderReturnRequestBack()
+  {
+    this.setState({
+      isReturnRequest:false
+    })
+  }
+
+
   render() {
+    debugger;
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     if(this.state.isServiceRequest)
@@ -258,6 +278,11 @@ class RWDMyOrder extends React.Component {
           orderItemData={this.state.currentComponentData} 
           renderServiceRequestPro={this.renderServiceRequestBack.bind(this)}/>
       )
+    }
+    if(this.state.isReturnRequest)
+    {return (
+      <ReturnRequestForm onCancel = {this.renderReturnRequestBack} dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
+    )
     }
     else if (this.state.currentComponent === 'SingleProduct') {
       return (
@@ -269,7 +294,9 @@ class RWDMyOrder extends React.Component {
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
             showServiceRequestForm={this.showServiceRequestForm}
-            orderCompleteDataPro={this.state.currentCompleteData} />
+            orderCompleteDataPro={this.state.currentCompleteData} 
+            orderCompleteDataPro={this.state.currentCompleteData}
+            onReturn = {this.showReturnRequestForm} />
             
             <CancelComponents ref={this.modalRef}/>
         </div>

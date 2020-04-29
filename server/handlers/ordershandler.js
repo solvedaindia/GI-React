@@ -492,8 +492,11 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
+                        productDetail.returnUnitPrice = parseFloat(
+                          orderItem.returnUnitPrice,
+                        );
 
-                        productDetail.status = orderItem.status;
+                        productDetail.orderItemStatus = orderItem.status;
                         productDetail.subLineNo = orderItem.subLineNo;
                         productDetail.primeLineNo = orderItem.primeLineNo;
 

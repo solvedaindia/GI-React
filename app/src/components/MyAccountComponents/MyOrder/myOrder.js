@@ -7,6 +7,7 @@ import TrackOrder from './TrackMyOrder/trackOrder';
 import ServiceRequestForm from '../../ServiceRequestForm/index';
 import CancelComponents from '../../cancelComponents/index';
 
+import ReturnRequestForm from '../../ReturnRequestForm/index'; 
 
 class MyOrder extends React.Component {
   constructor(props) {
@@ -200,10 +201,15 @@ class MyOrder extends React.Component {
         {this.state.isTrackOrder ? (
           <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
         ) :this.state.isServiceRequest?(
+          <>
           <ServiceRequestForm orderData={this.state.serviceOrderData} 
                               orderItemData={this.state.serviceOrderItemData} 
                               renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
+                                      // <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
+          <ReturnRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
+          </>
         ):
+  
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
             return (
               <>

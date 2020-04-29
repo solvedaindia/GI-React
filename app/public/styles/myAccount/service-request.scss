@@ -33,7 +33,7 @@
         }
       }
     }
-    .notification-title{
+    .notification-title{ 
       color: $cerulean;
       font-size: $base*1.75;
       clear: both;
@@ -44,7 +44,7 @@
         font-size: $base*2;
       }
     }
-    .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+    .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer, .refund-mode-wrapper{
       .heading{
         font-size: $base *1.75;
       }
@@ -60,6 +60,11 @@
       }
       .bottomDivider{
         margin-bottom: $base *2;
+      }
+      .notification-title{
+        color: $cerulean;
+        font-size: $base*1.75;
+        clear: both;
       }
 
       .add-img{
@@ -333,7 +338,7 @@
           border-radius: 0px;
         }
       }
-      .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
+      .refund-mode-wrapper, .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
         .heading{
           font-size: $base *2;
           font-family: $font-medium;
@@ -363,6 +368,73 @@
         float: left;
         width: 100%;
         margin: 10px 0px;
+      }
+
+      
+      
+      &.return-request{
+        .product-category{
+          .service-request-desc{
+            clear: both;
+            padding-top: 8px;
+          }
+        }
+  
+        .refund-mode-wrapper{
+          .customradio, .radioBtn {
+            .label-text{
+              padding-left: 5px;
+            }
+            .input[type="radio"] {
+              display: none;
+            }
+            .inputBox {
+              position: relative;
+              &:before {
+                content: " ";
+                display: inline-block;
+                position: relative;
+                top: 4px;
+                margin: 0 0px 0 0;
+                width: 14px;
+                height: 14px;
+                border-radius: 100%;
+                border: 0px solid $black;
+                background-color: transparent;
+              }
+              .labelchecked {
+                width: 14px;
+                height: 14px;
+                position: absolute;
+                left: 0;
+                cursor: pointer;
+              }
+              .input[type="radio"]:checked + .labelchecked {
+                border-radius: 100%;
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                top: 7px;
+                left: 3px;
+                display: block;
+                background-color: $black;
+              }
+            }
+          }
+        }
+
+        .bank-detail-form{
+          .form-wrapper{
+            padding-bottom: 10px;
+            max-width: 540px;
+            .label-text{
+              display: block;
+            }
+            .label-info-text{
+              font-size: 10px;
+            }
+          }
+        }
       }
     }
 

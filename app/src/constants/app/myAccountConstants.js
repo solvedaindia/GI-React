@@ -33,11 +33,13 @@ export const SET_DEFAULT = 'Set As Default';
 export const DEF_ADD = 'Default Address';
 export const SURE_DELETE_YOUR_ADD = 'Are you sure you want delete this address?';
 export const CANCEL = 'Cancel';
-export const NAME_VALIDATION = 'Please enter a valid Name. It should not exceed 100 characters'
-export const NUMBER_VALIDATION = 'Please enter valid mobile number.'
-export const EMAIL_VALIDATION = 'Please enter valid Email ID.'
-export const SERVICE_REQUEST = 'Request Service'
-
+export const NAME_VALIDATION = 'Please enter a valid Name. It should not exceed 100 characters';
+export const NUMBER_VALIDATION = 'Please enter valid mobile number.';
+export const EMAIL_VALIDATION = 'Please enter valid Email ID.';
+export const SERVICE_REQUEST = 'Request Service';
+export const ACCOUNT_NUMBER_VALIDATION = 'Please enter a valid Account number.';
+export const ACCOUNT_NUMBER_CONFIRM_VALIDATION = 'Please check password does not match!';
+export const IFSC_VALIDATION = 'Please enter a valid IFSC code.';
 
 
 
