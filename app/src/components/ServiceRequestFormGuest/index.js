@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCookie } from '../../utils/utilityManager';
 import apiManager from '../../utils/apiManager';
-import { getDetailtForSerReq } from '../../../public/constants/constants';
+import { getDetailtForSerReq, saveServiceRequest } from '../../../public/constants/constants';
 import UserAccInfo from '../UserAccInfo/userAccInfo';
 import Dropdown from '../ServiceRequestForm/dropdown';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
@@ -18,9 +18,11 @@ class ServiceRequestFormGuest extends React.Component {
     this.state = {
       showLogin: false,
       productCategory: [],
+      descriptionText: '',
       serviceRequestReasons: [],
       characterCount: 50,
-      characterLimit: 50
+      characterLimit: 50,
+      selectedInvoice:"",
     };
   }
 
@@ -50,6 +52,7 @@ class ServiceRequestFormGuest extends React.Component {
 
   onTextareaInput() {
     this.setState({
+      descriptionText: document.getElementById('textareaDesc').value,
       characterCount: this.state.characterLimit - document.getElementById('textareaDesc').value.length,
     })
   }
@@ -68,6 +71,50 @@ class ServiceRequestFormGuest extends React.Component {
     // });
   }
 
+  onAddressChange(value) {
+    console.log('kdkdkd -- ',value.target.id, value.target.value);
+  }
+
+  onSubmitForm()
+  { 
+    console.log("dddddd")
+      let invoice=this.state.selectedInvoice;
+      if(this.state.selectedInvoice=="Other" && this.state.inputInvoice.length==12)
+      {
+        invoice=this.state.inputInvoice;
+      }
+      let reason="";
+      this.state.serviceRequestReasons.map((data)=>{
+        if(reason=="")
+          reason=data
+        else
+          reason=reason+","+data
+      })
+      const param={
+        prodCategory:this.state.productCategory,
+        prodDesc:this.state.descriptionText,
+        partNumber:'',
+        addressId:'',
+        invoiceNo:invoice,
+        invoiceURL:"",
+        serviceRequestReason:reason,
+        otherReason:this.state.otherReason,
+        images:["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
+      }
+
+      apiManager
+      .post(saveServiceRequest,param)
+      .then(response => {
+        console.log("PostResponse",response);
+        alert("Service request submitted successfully")
+        this.props.renderServiceRequestPro();
+      })
+      .catch(error => {
+        console.log("PostResponseError",error);
+      });
+      
+  }
+
   render() {
     return (
       <div className='container'>
@@ -79,14 +126,14 @@ class ServiceRequestFormGuest extends React.Component {
           <p className='notification-title'>*Please note that the service may be chargeable, in case of non-Godrej product</p>
           <div className='guest-border-box'>
             <div className='guest-address-form'>            
-              <AddAddressForm isFromServiceRequest={true} />
+              <AddAddressForm isFromServiceRequest={true} onAddressChange={this.onAddressChange.bind(this)}/>
             </div>
             <div className='invice-selection guest-type'><EnterInvoiceView /></div>
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className='actionBtnWrapper'>
               <button className='btn-cancel btn'>Cancel</button>
-              <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn'>Submit</button>
+              <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn' onClick={this.onSubmitForm.bind(this)}>Submit</button>
             </div>
             {this.state.showLogin ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
           </div>
