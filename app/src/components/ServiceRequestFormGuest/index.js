@@ -71,6 +71,10 @@ class ServiceRequestFormGuest extends React.Component {
     // });
   }
 
+  onAddressChange(value) {
+    console.log('kdkdkd -- ',value.target.id, value.target.value);
+  }
+
   onSubmitForm()
   { 
     console.log("dddddd")
@@ -122,7 +126,7 @@ class ServiceRequestFormGuest extends React.Component {
           <p className='notification-title'>*Please note that the service may be chargeable, in case of non-Godrej product</p>
           <div className='guest-border-box'>
             <div className='guest-address-form'>            
-              <AddAddressForm isFromServiceRequest={true} />
+              <AddAddressForm isFromServiceRequest={true} onAddressChange={this.onAddressChange.bind(this)}/>
             </div>
             <div className='invice-selection guest-type'><EnterInvoiceView /></div>
             {this.renderServiceRequestReason()}
