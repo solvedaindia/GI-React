@@ -80,11 +80,11 @@ class EnterInvoiceView extends React.Component {
                   onChange={this.handleInput} 
                   maxLength={12}
                   isAutoFocus={true} 
-                  className='invoiceNumber'/>
+                  className='form-control invoiceNumber'/>
                 {this.state.error ? <div className='error-msg'>{this.state.errorMessage}</div> : null}
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 upload-invoice">
             <button onClick={this.onUploadInvoice.bind(this)} disabled={this.state.isUploadBtnDisabled} className='btn-save btn'>Upload Invoice</button>
             <input type="file" id="uploadInvoice" onChange={this.onFileSelected.bind(this)} accept="image/*,application/pdf" style={{display:'none'}} ></input>
             </div>

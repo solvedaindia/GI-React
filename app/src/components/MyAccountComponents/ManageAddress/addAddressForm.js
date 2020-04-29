@@ -242,6 +242,27 @@ class AddAddressForm extends React.Component {
   }
 
   addAddress() {
+
+
+    if(this.props.fromRequestFor)
+    {
+      this.props.onUpdateActivity({
+        addressID:"",
+        nickName:"",
+        name: this.state.inputText_name,
+        phone_number:this.state.inputText_number,
+        phoneNumber: this.state.inputText_number,
+        email_id: this.state.inputText_email,
+        pincode: this.state.inputText_pincode,
+        address: this.state.inputText_address,
+        city: this.state.inputText_city,
+        state: this.state.inputText_state,
+        default: String(document.getElementById("checkbox").checked),
+      });
+      this.props.onCancel()
+      return;
+    }
+
     let APIURL = addAddressAPI;
     if (this.state.nickname !== undefined) {
       APIURL = updateAddressAPI + this.state.nickname;
