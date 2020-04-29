@@ -33,7 +33,9 @@ class OrderItem extends React.Component {
 
   render() {
     const orderData = this.props.orderItemData;
-    let isOrderCancelled=false;
+    const showCancelButton=orderData.orderCancelFlag==='Y';
+    const disableCancelButton=orderData.orderCancelButtonDisable==='Y';
+  //  console.log("orderCancelButtonDisable",showCancelButton,disableCancelButton);
     if(orderData.orderItemStatus && orderData.orderItemStatus==='Cancelled')
     {
       isOrderCancelled=true;
@@ -93,9 +95,10 @@ class OrderItem extends React.Component {
               />
             )
           })}
-          <button className="btn-bg cancel-order" onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
+          {showCancelButton &&
+          <button className={disableCancelButton?"btn-bg cancel-order disabled":"btn-bg cancel-order"} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
               {isOrderCancelled?orderData.orderItemStatus:"Cancel Order"}
-          </button> 
+          </button> }
         </div>
       </>
     );
