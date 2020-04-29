@@ -79,14 +79,14 @@ class ProductOrder extends React.Component {
           <div className="orderbtn">
             {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
             {productData.shipmentData ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
-              Track My Order
+              Track Item
             </button> : null}
 
           </div>
-          <div className='clearfix'></div>
+          {/* <div className='clearfix'></div> //GIP-111
           {productData.shipmentData && productData.shipmentData.length === 1 ?
             <OrderStatusBar shipmentDataPro={productData.shipmentData[0]} customClassPro='trackorder-wrap' />
-            : null}
+            : null} */}
         </div>
       </>
     );
