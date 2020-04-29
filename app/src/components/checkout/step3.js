@@ -193,7 +193,15 @@ export class Step3Component extends React.Component {
     this.setState({
       checkedPaymentID: event.target.id,
     })
-    this.props.enalblePay({ paymentMode: paymentMethod.paymentMethodName, paymentId: paymentMethod.paymentMethodName});
+
+    if (event.target.id === 'NET_BANKING' || event.target.id === 'WALLETS') {
+      this.props.disablePay();
+    }
+    else {
+      this.props.enalblePay({ paymentMode: paymentMethod.paymentMethodName, paymentId: paymentMethod.paymentMethodName});
+    }
+
+    
     return;
     this.setState({
       CODCheck: false,
