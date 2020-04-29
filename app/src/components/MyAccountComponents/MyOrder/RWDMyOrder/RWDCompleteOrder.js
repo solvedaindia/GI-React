@@ -40,7 +40,7 @@ class RWDCompleteOrder extends React.Component {
         {orderData.orderItems.map(data => (
           <RWDSingleProduct
             orderDataPro={data}
-            isFromViewOrder={data.shipmentData.length > 1 ? true : false }
+            isFromViewOrder={true}
             hideViewDetail={true}
             viewOrderTrackCallbackPro={this.props.viewOrderTrackCallbackPro}
             // myOrderCallbackPro={this.props.myOrderCallbackPro}
