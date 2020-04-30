@@ -51,6 +51,7 @@ class RWDMyOrder extends React.Component {
     this.modalRef=React.createRef();
     this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
     this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
+    this.renderReturnRequest = this.renderReturnRequest.bind(this);
   }
 
   componentDidMount() {

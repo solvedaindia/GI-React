@@ -37,6 +37,7 @@ class MyOrder extends React.Component {
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
     this.renderReturnRequest = this.renderReturnRequest.bind(this);
+    this.modalRef = React.createRef();
   }
 
   componentDidMount() {

@@ -102,7 +102,7 @@ class RWDSingleProduct extends React.Component {
         <div className='orderBtn'>
           {!this.props.isMultiTrackPro ? productData.shipmentData.length > 0 && this.props.hideViewDetail ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>{showServiceRequestButton ? "View Item History" : "Track Order"}</button>
             : !this.props.isFromViewOrder && this.props.hideViewDetail ? null
-              : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button>
+              : null
             : null}
 
           {showCancelButton && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.currentCompleteData)} >

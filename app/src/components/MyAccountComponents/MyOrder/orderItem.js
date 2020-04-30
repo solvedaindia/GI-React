@@ -42,6 +42,7 @@ class OrderItem extends React.Component {
     const showCancelButton=orderData.orderCancelFlag==='Y';
     const disableCancelButton=orderData.orderCancelButtonDisable==='Y';
   //  console.log("orderCancelButtonDisable",showCancelButton,disableCancelButton);
+    let isOrderCancelled=false;
     if(orderData.orderItemStatus && orderData.orderItemStatus==='Cancelled')
     {
       isOrderCancelled=true;
