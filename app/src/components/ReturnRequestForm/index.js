@@ -120,12 +120,12 @@ class ReturnRequestForm extends React.Component {
 
     const data = {
         "orderId": orderID,
-        "shipmentNo": shipmentData[0].shipmentNo,
+        "shipmentNo": shipmentData && shipmentData[0].shipmentNo,
         "partNumber": partNumber,
         "price": returnUnitPrice,
         "quantity": selectedQuantity,
         "returnReason": returnReason,
-        "refundMethod": transactions[0].paymentMode,
+        "refundMethod": transactions && transactions[0].paymentMode,
         "bankDetails":{ 
           "name": bankInfo.Name,
           "accountNO": bankInfo.AccountNumber,
@@ -136,13 +136,13 @@ class ReturnRequestForm extends React.Component {
             imageEndpoint1,
             imageEndpoint2
        ],
-        "invoiceNo": shipmentData[0].invoiceNo,
-        "shipNode": shipmentData[0].shipNode,
+        "invoiceNo": shipmentData && shipmentData[0].invoiceNo,
+        "shipNode": shipmentData && shipmentData[0].shipNode,
         "primeLineNo": primeLineNo,
         "subLineNo": subLineNo,
       //   "creditCardNo": transactions[0].creditCardNo,
-        "transactionId": transactions[0].transactionID,
-        "transactionDate": transactions[0].transactionDate
+        "transactionId": transactions && transactions[0].transactionID,
+        "transactionDate": transactions && transactions[0].transactionDate
       };
       console.log(data);
       console.log(this.props.orderList);
