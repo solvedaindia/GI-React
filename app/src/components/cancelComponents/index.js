@@ -40,8 +40,8 @@ class CancelComponents extends React.Component {
 
     showModal(orderItem,orderData)
     {
-        console.log("AAAAAAA",orderData)
-       // console.log("AAAAAAAITEM",orderItem)
+      //  console.log("AAAAAAA",orderData)
+       //  console.log("AAAAAAAITEM",orderItem)
         this.setState({
             showPopUp:'true',
             orderData:orderData,

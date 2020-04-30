@@ -42,6 +42,9 @@ class RWDCompleteOrder extends React.Component {
             orderDataPro={data}
             isFromViewOrder={true}
             hideViewDetail={true}
+            orderCompleteDataPro={orderData}
+            showCancelModal={this.props.showCancelModal}
+            showServiceRequestForm={this.props.showServiceRequestForm}
             viewOrderTrackCallbackPro={this.props.viewOrderTrackCallbackPro}
             // myOrderCallbackPro={this.props.myOrderCallbackPro}
           />

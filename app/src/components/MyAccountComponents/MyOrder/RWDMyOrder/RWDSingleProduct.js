@@ -73,6 +73,7 @@ class RWDSingleProduct extends React.Component {
       showCancelButton = true;
       cancelText = "Cancel Item"
     }
+
     return (
       <>
         <div className="itemBoxTrack clearfix">
@@ -105,14 +106,14 @@ class RWDSingleProduct extends React.Component {
               : null
             : null}
 
-          {showCancelButton && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.currentCompleteData)} >
+          {(this.props.isFromViewOrder && showCancelButton) && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.orderCompleteDataPro)} >
             {cancelText}</button>}
 
           <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.onReturn(productData, this.props.orderCompleteDataPro)} >
             Return Item
             </button>
 
-          {showServiceRequestButton && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.currentCompleteData)} >
+          {(this.props.isFromViewOrder && showServiceRequestButton) && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.orderCompleteDataPro)} >
             Service Request
             </button>}
         </div>

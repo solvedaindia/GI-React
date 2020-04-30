@@ -40,7 +40,7 @@ class ServiceRequestForm extends React.Component {
   componentDidMount() {
   //  this.getAddressListAPI();
     this.getDetailAPI()
-   // console.log("dataPro",this.props.orderData);
+    console.log("dataPro2",this.props.orderData);
     console.log("dataPro1",this.props.orderItemData);
   }
   getDetailAPI=()=>{

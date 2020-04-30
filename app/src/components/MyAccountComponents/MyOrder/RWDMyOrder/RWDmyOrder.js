@@ -90,17 +90,19 @@ class RWDMyOrder extends React.Component {
     }
   }
 
-  showCancelModal(orderData,orderItem)
+  showCancelModal(orderItem,orderData)
   {
     //console.log(this.modalRef)
     console.log(orderItem,orderData)
     this.modalRef.current.showModal(orderItem,orderData);
   }
-  showServiceRequestForm(orderData,orderItem)
+  showServiceRequestForm(orderItem,orderData)
   {
-    //console.log(orderItem,orderData)
-    this.setState({
-      isServiceRequest:true
+     console.log(orderItem,orderData)
+     this.setState({
+        currentComponentData:orderItem,
+        currentCompleteData:orderData,
+       isServiceRequest:true
     })
   }
   renderServiceRequestBack()
@@ -317,7 +319,6 @@ class RWDMyOrder extends React.Component {
             currentCompleteData={this.state.currentCompleteData}
             showServiceRequestForm={this.showServiceRequestForm}
             orderCompleteDataPro={this.state.currentCompleteData} 
-            orderCompleteDataPro={this.state.currentCompleteData}
             onReturn = {this.showReturnRequestForm} />
             
             <CancelComponents ref={this.modalRef}/>
@@ -344,8 +345,11 @@ class RWDMyOrder extends React.Component {
           <RWDCompleteOrder
             cancelRefundSummaryPro = {this.state.currentComponentData.cancelRefundSummary}
             orderDataPro={this.state.currentComponentData}
+            showCancelModal={this.showCancelModal}
             myOrderCallbackPro={this.myOrderCallback}
+            showServiceRequestForm={this.showServiceRequestForm}
             viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)} />
+            <CancelComponents ref={this.modalRef}/>
         </div>
       );
     }
