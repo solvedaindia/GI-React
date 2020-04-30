@@ -48,6 +48,35 @@ class ProductOrder extends React.Component {
   render() {
 
     const productData = this.props.prodctDataPro;
+    let btnCancelDisable=false;
+    let showCancelMessage=false;
+    let showCancelButton=false;
+    let cancelText="Cancel Item"
+    if(productData.orderItemStatus && productData.orderItemStatus==='Cancelled')
+    {
+      btnCancelDisable=true;
+      showCancelMessage=false;
+      showCancelButton=true;
+      cancelText="Cancelled"
+    }
+    else if(productData.cancelOrderLineFlag!=="Y")
+    {
+      showCancelMessage=false;
+      showCancelButton=false;
+    }
+    else if(productData.cancelOrderLineFlag==="Y" && productData.cancelButtonDisable!=="Y")
+    {
+      //enable cancel button
+      showCancelButton=true;
+      cancelText="Cancel Item"
+      showCancelMessage=false;
+    }
+    else{
+      btnCancelDisable=true;
+      showCancelMessage=true;
+      showCancelButton=true;
+      cancelText="Cancel Item"
+    }
     return (
       <>
         <div className="clearfix" />
@@ -75,7 +104,7 @@ class ProductOrder extends React.Component {
                 }
               </div>
               {/*Cance message condtion replaced by true */}
-              {true && <div className='cancelation-text-info'>  
+              {showCancelMessage && <div className='cancelation-text-info'>  
                   <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
               </div>}
             </div>
@@ -95,9 +124,11 @@ class ProductOrder extends React.Component {
               Return Item 
             </button> 
         
-            <button className="btn-borderwhite cancel-item" onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
-              Cancel Item
-            </button> 
+            {showCancelButton && <button 
+                  className={btnCancelDisable?"btn-borderwhite cancel-item disabled":"btn-borderwhite cancel-item"} 
+                  onClick={evt => this.props.showCancelModal(this.props.prodctDataPro)} >
+              {cancelText}
+            </button> }
 
           </div>
           {/* <div className='clearfix'></div> //GIP-111

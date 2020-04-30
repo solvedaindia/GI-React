@@ -65,6 +65,9 @@ class RWDOrderItem extends React.Component {
 
   render() {
     const orderData = this.props.orderItemData;
+    const showCancelButton=orderData.orderCancelFlag==='Y';
+    const disableCancelButton=orderData.orderCancelButtonDisable==='Y';
+  //  console.log("orderCancelButtonDisable",showCancelButton,disableCancelButton);
     return (
       <>
         <div className="tabBar clearfix">
@@ -101,9 +104,11 @@ class RWDOrderItem extends React.Component {
           <button className='viewOrder' onClick={this.onViewOrderClick.bind(this, orderData)}>View Order</button>
           
         </div>
-         <button className="btn-bg" style={{width:'100%',backgroundColor:'#005084'}} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
+        { showCancelButton &&
+         <button className={disableCancelButton?"btn-bg disabled":"btn-bg"} style={{width:'100%',backgroundColor:'#005084'}} onClick={(evt)=>{this.props.showCancelModal(orderData,undefined)}} >
               Cancel Order
           </button> 
+        }
         <div className='order-separator'></div>
       </>
     );

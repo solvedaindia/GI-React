@@ -45,11 +45,37 @@ class RWDSingleProduct extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
+    let btnCancelDisable = false;
+    let showCancelMessage = false;
+    let showCancelButton = false;
+    let cancelText = "Cancel Item"
+    if (productData.orderItemStatus && productData.orderItemStatus === 'Cancelled') {
+      btnCancelDisable = true;
+      showCancelMessage = false;
+      showCancelButton = true;
+      cancelText = "Cancelled"
+    }
+    else if (productData.cancelOrderLineFlag !== "Y") {
+      showCancelMessage = false;
+      showCancelButton = false;
+    }
+    else if (productData.cancelOrderLineFlag === "Y" && productData.cancelButtonDisable !== "Y") {
+      //enable cancel button
+      showCancelButton = true;
+      cancelText = "Cancel Item"
+      showCancelMessage = false;
+    }
+    else {
+      btnCancelDisable = true;
+      showCancelMessage = true;
+      showCancelButton = true;
+      cancelText = "Cancel Item"
+    }
     return (
       <>
         <div className="itemBoxTrack clearfix">
           <div className='itemImg'>
-            <img className='imgBox' src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} alt='thumbnail'/>
+            <img className='imgBox' src={productData.thumbnail !== '' ? `${imagePrefix}${productData.thumbnail}` : require('../../../../../public/images/plpAssests/placeholder-image.png')} alt='thumbnail' />
           </div>
           <div className='itemInfo'>
             <div className='productName'>{productData.productName}</div>
@@ -61,32 +87,31 @@ class RWDSingleProduct extends React.Component {
               <span>{this.state.dsDateTag}</span>
             </div>
             {/*Cance message condtion replaced by true */}
-             {true && <div className='cancelation-text-info'>  
-                  <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
-              </div>}
+            {showCancelMessage && <div className='cancelation-text-info'>
+              <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+            </div>}
           </div>
         </div>
         <div className='clearfix'></div>
         <div className='orderStatus'>
-          {this.props.isFromViewOrder ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' /> }
+          {this.props.isFromViewOrder ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' />}
         </div>
-        <div className='clearfix'/>
+        <div className='clearfix' />
         <div className='orderBtn'>
-          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 0 && this.props.hideViewDetail ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button> 
-           :null
+          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 0 && this.props.hideViewDetail ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button>
+            : null
             : null}
 
-            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showCancelModal(productData,this.props.currentCompleteData)} >
-              Cancel Item
-            </button> 
-            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.onReturn(productData,this.props.orderCompleteDataPro)} >
-              Return Item
-            </button> 
-            <button className="btn-borderwhite" style={{marginTop:'5px',width:'100%'}} onClick={evt => this.props.showServiceRequestForm(productData,this.props.currentCompleteData)} >
-              Service Request
-            </button> 
-        </div>  
-      
+          {showCancelButton && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.currentCompleteData)} >
+            {cancelText}</button>}
+          <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.onReturn(productData, this.props.orderCompleteDataPro)} >
+            Return Item
+            </button>
+          <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.currentCompleteData)} >
+            Service Request
+            </button>
+        </div>
+
       </>
     );
   }

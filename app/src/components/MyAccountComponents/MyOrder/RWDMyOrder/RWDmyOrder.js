@@ -332,6 +332,7 @@ class RWDMyOrder extends React.Component {
             currentCompleteData={this.state.currentCompleteData}
             myOrderCallbackPro={this.myOrderCallback} 
             onReturn = {this.showReturnRequestForm}/>
+            <CancelComponents ref={this.modalRef}/>
         </div>
       );
     }
