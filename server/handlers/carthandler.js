@@ -769,7 +769,45 @@ function checkout(headers, params, callback) {
  * @return 200,OK Fetching Payment Methods
  * @throws contexterror,badreqerror if storeid or access_token is invalid or null
  */
-module.exports.paymentMethods = paymentMethods;
+module.exports.paymentMethods = getPaymentMethods;
+function getPaymentMethods(headers, callback){
+    const getPaymentMethodTasks = [
+      paymentMethods.bind(null,headers),
+      checkoutHandler.bankList.bind(null,headers),
+    ]
+
+    async.parallel(getPaymentMethodTasks, (err, result) => {
+     if(err){
+        callback(err);
+        return;
+     }
+     const resultantPayMethod = {
+      paymentMethods : [],
+      CODAmount: '50000',
+     }
+     if(result[0] && result[0].length>0){
+      result[0].forEach(payMethod => {
+          if(result[1].bankList
+            .filter(bankID=>(bankID.Type === 'Wallet') && (bankID.bankName.toLowerCase() === payMethod.paymentMethodName.toLowerCase())).length===0){
+              resultantPayMethod.paymentMethods.push(payMethod);
+          }
+      });
+      resultantPayMethod.paymentMethods.forEach(payMethod => {
+          payMethod.childPaymentMethods = [];
+          if(payMethod.paymentMethodName === 'NET_BANKING'){
+            payMethod.childPaymentMethods = (result[1].bankList
+              .filter(bank=>bank.Type==='Bank'));
+          }
+          if(payMethod.paymentMethodName === 'WALLETS'){
+            payMethod.childPaymentMethods = (result[1].bankList
+              .filter(bank=>bank.Type==='Wallet'));
+          }
+      });
+     }
+     callback(null,resultantPayMethod);
+    });
+}
+
 function paymentMethods(headers, callback) {
   logger.debug('Payment Method API');
 
@@ -790,17 +828,7 @@ function paymentMethods(headers, callback) {
     response => {
       if (response.status === 201 || response.status === 200) {
         logger.debug('Got all the origin resposes');
-        const resJSON = {
-          paymentMethods: [],
-          CODAmount: '50000',
-        };
-        if (
-          response.body.usablePaymentInformation &&
-          response.body.usablePaymentInformation.length > 0
-        ) {
-          resJSON.paymentMethods = response.body.usablePaymentInformation;
-        }
-        callback(null, resJSON);
+        callback(null, response.body.usablePaymentInformation);
       } else {
         callback(errorutils.handleWCSError(response));
       }
