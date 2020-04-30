@@ -18,6 +18,8 @@ class RWDMyOrder extends React.Component {
     super(props);
     this.state = {
       isReturnRequest:false,
+      returnOrderData: [],
+      returnOrderItemData: {},
       isTrackOrder: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
@@ -137,6 +139,15 @@ class RWDMyOrder extends React.Component {
     });
   }
 
+  renderReturnRequest(orderItemData,orderData)
+  {
+    // debugger;
+    this.setState({
+      returnOrderData: orderData,
+      returnOrderItemData:orderItemData
+    });
+  }
+
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
 
@@ -221,12 +232,14 @@ class RWDMyOrder extends React.Component {
     return loaderItem;
   }
 
-  showReturnRequestForm()
+  showReturnRequestForm(productData,CompleteOrderData)
   {
     this.setState({
       isReturnRequest:true
     })
+    this.renderReturnRequest(productData,CompleteOrderData)
   }
+
   renderReturnRequestBack()
   {
     this.setState({
@@ -236,12 +249,20 @@ class RWDMyOrder extends React.Component {
 
 
   render() {
-    debugger;
+    // debugger;
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     if(this.state.isReturnRequest)
     {return (
-      <ReturnRequestForm onCancel = {this.renderReturnRequestBack} dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
+      <ReturnRequestForm 
+      onCancel = {this.renderReturnRequestBack} 
+       orderList={this.state.orderListData}  
+      // dataPro={this.state.updatedTrackOrderData}  
+        trackOrderDataPro={this.state.updatedTrackOrderData} 
+        renderReturnRequestPro={this.renderReturnRequest}
+        orderData={this.state.currentCompleteData} 
+        orderItemData={this.state.returnOrderItemData}
+        paymentMode="COD"/>
     )
     }
     if (this.state.currentComponent === 'SingleProduct') {
@@ -261,7 +282,8 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder multi-item-order">
           <RWDMultiTrack
             orderDataPro={this.state.currentComponentData}
-            myOrderCallbackPro={this.myOrderCallback} />
+            myOrderCallbackPro={this.myOrderCallback}
+            onReturn = {this.showReturnRequestForm} />
         </div>
       );
     }
@@ -287,6 +309,8 @@ class RWDMyOrder extends React.Component {
                   isGuestTrackOrderPro={this.state.isGuestTrackOrder}
                   orderItemData={data}
                   myOrderCallbackPro={this.myOrderCallback}
+                  renderReturnRequestPro={this.renderReturnRequest}
+
                 />
               </>
             )

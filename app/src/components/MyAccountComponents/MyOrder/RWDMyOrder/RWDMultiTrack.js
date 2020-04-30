@@ -19,7 +19,8 @@ class RWDMultiTrack extends React.Component {
               orderDataPro={productData}
               shipmentDataPro={item}
               isMultiTrackPro={true} 
-              myOrderCallbackPro={this.props.myOrderCallbackPro}/>
+              myOrderCallbackPro={this.props.myOrderCallbackPro}
+              onReturn = {this.props.onReturn}/>
           )
         })}
       </>

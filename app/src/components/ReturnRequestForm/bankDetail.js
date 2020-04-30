@@ -21,8 +21,9 @@ class BankDetails extends React.Component {
     this.isAlpha = this.isAlpha.bind(this);
     this.isDigitOrAlpha = this.isDigitOrAlpha.bind(this);
     this.isIfscCodeStandard = this.isIfscCodeStandard.bind(this);
+    this.bankDetailsToParent = this.bankDetailsToParent.bind(this);
   }
-  debugger;
+  // debugger;
   isDigitOrAlpha(e) {
     if (
       !(
@@ -32,19 +33,16 @@ class BankDetails extends React.Component {
       )
     ) {
       e.preventDefault();
-      //   console.log(isSaveBtnDisabled);
     }
   }
   isDigit(e) {
     if (!(e.which > 47 && e.which < 58)) {
       e.preventDefault();
-      //   console.log(isSaveBtnDisabled);
     }
   }
   isAlpha(e) {
     if (!((e.which > 64 && e.which < 91) || (e.which > 96 && e.which < 123))) {
       e.preventDefault();
-      //   console.log(isSaveBtnDisabled);
     }
   }
 
@@ -55,13 +53,17 @@ class BankDetails extends React.Component {
     let reg = /^[A-Z|a-z]{4}0[0-9]{6}$/;
 
     if (ifscCode.match(reg)) {
-      this.setState({ ifscCodeValid: true });
+      this.setState({ ifscCodeValid: true },this.bankDetailsToParent);
       return true;
     } else {
       this.setState({ ifscCodeValid: false });
       // document.getElementById("ifsc").focus();
       return false;
     }
+  }
+
+  bankDetailsToParent() {
+    this.props.onSubmit(this.state);
   }
 
   isInputDataValid() {
@@ -78,8 +80,17 @@ class BankDetails extends React.Component {
   }
 
   validate() {
+    const {
+      Name,
+      AccountNumber,
+      AcoountNumberConfirm,
+      ifscCode,
+      ifscCodeValid
+    } = this.state;
     this.isIfscCodeStandard();
     this.props.handleInputValidation(this.isInputDataValid());
+    if(Name !== '' && AccountNumber !== '' && AcoountNumberConfirm !== '' && ifscCode !== '' && ifscCodeValid === true)
+    this.props.onSubmit(this.state);
   }
 
   handleBankDetail(e) {

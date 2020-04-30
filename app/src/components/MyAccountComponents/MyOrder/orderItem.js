@@ -14,6 +14,7 @@ class OrderItem extends React.Component {
       isExpend: false,
       expendCollapseText: showImg,
     };
+    this.proceedToReturnRequest = this.proceedToReturnRequest.bind(this);
   }
 
   collapseExpendClicked() {
@@ -26,6 +27,10 @@ class OrderItem extends React.Component {
   proceedToTrackOrder(trackOrderData) {
     this.props.renderSelectionPro(trackOrderData);
   }
+  proceedToReturnRequest(orderItemData,orderData) {
+    this.props.renderReturnRequestPro(orderItemData,orderData)
+
+   }
 
   render() {
     const orderData = this.props.orderItemData;
@@ -80,6 +85,7 @@ class OrderItem extends React.Component {
                 proceedToTrackOrderPro={this.proceedToTrackOrder.bind(this)}
                 prodctDataPro={data}
                 allDataPro={this.props.orderItemData}
+                proceedToReturnRequest = {this.proceedToReturnRequest}
               />
             )
           })}
