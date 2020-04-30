@@ -205,7 +205,6 @@ class MyOrder extends React.Component {
           <ServiceRequestForm orderData={this.state.serviceOrderData} 
                               orderItemData={this.state.serviceOrderItemData} 
                               renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
-                                      // <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
           <ReturnRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
           </>
         ):
