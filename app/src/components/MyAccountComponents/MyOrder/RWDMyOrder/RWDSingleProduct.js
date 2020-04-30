@@ -45,6 +45,8 @@ class RWDSingleProduct extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
+    const showServiceRequestButton = productData.serviceRequestOrderLineFlag == 'Y'
+    const isServiceable = productData.isServiceable == 'Y'
     let btnCancelDisable = false;
     let showCancelMessage = false;
     let showCancelButton = false;
@@ -98,18 +100,21 @@ class RWDSingleProduct extends React.Component {
         </div>
         <div className='clearfix' />
         <div className='orderBtn'>
-          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 0 && this.props.hideViewDetail ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>Track Order</button>
-            : null
+          {!this.props.isMultiTrackPro ? productData.shipmentData.length > 0 && this.props.hideViewDetail ? <button className='btn-blackbg btn-block track-order-btn' onClick={this.trackOrderFromViewOrder.bind(this, productData)}>{showServiceRequestButton ? "View Item History" : "Track Order"}</button>
+            : !this.props.isFromViewOrder && this.props.hideViewDetail ? null
+              : <button className='btn-blackbg btn-block view-order-btn' onClick={this.showOrderDetail.bind(this)}>View Order Details</button>
             : null}
 
           {showCancelButton && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.currentCompleteData)} >
             {cancelText}</button>}
+
           <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.onReturn(productData, this.props.orderCompleteDataPro)} >
             Return Item
             </button>
-          <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.currentCompleteData)} >
+
+          {showServiceRequestButton && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.currentCompleteData)} >
             Service Request
-            </button>
+            </button>}
         </div>
 
       </>
