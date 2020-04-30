@@ -2,7 +2,7 @@ import React from "react";
 import Dropdown from "../ServiceRequestForm/dropdown";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import BankDetails from "./bankDetail";
-import { isMobile } from '../../utils/utilityManager';
+import { isMobile } from "../../utils/utilityManager";
 //import Checkboxes from "../ServiceRequestForm/checkboxes";
 import apiManager from "../../utils/apiManager";
 import {
@@ -14,6 +14,7 @@ import {
   BankListAPI
 } from "../../../public/constants/constants";
 import "../../../public/styles/myAccount/service-request.scss";
+import {imagePrefix} from "../../../public/constants/constants";
 
 class ReturnRequestForm extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class ReturnRequestForm extends React.Component {
         "Image shown does not match actual product",
         "Other"
       ],
+      selectedQuantity: "",
       selectedReason: "",
       isBankDetailsValid: props.paymentMode !== "COD",
       selectedImages: [],
@@ -43,11 +45,12 @@ class ReturnRequestForm extends React.Component {
     this.onValidationChange = this.onValidationChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.returnOrderShipmentAPI = this.returnOrderShipmentAPI.bind(this);
+    this.getReturnRequestQuantity = this.getReturnRequestQuantity.bind(this);
+    this.getBankDetails = this.getBankDetails.bind(this);
   }
 
   componentDidMount() {
-  this.returnOrderShipmentAPI();
-
+    this.returnOrderShipmentAPI();
   }
   // to be modified ...
   // getDetailAPI = () => {
@@ -61,14 +64,14 @@ class ReturnRequestForm extends React.Component {
   //     .catch(error => {});
   // };
 
-  // addToWishlistAPI() { 
+  // addToWishlistAPI() {
   //   const data = {
   //     sku_id: this.props.uniqueId,
   //   };
   //   apiManager
   //     .post(addToWishlist, data)
   //     .then(response => {
-        
+
   //     getUpdatedWishlist(this);
   //       this.setState({
   //         wishlistCurrentImage: this.wishlistAddedImg,
@@ -78,70 +81,95 @@ class ReturnRequestForm extends React.Component {
   //     .catch(error => {
   //     });
   // }
-  
-  // {
-  //     "orderId":"",
-  //     "orderItemId":"",
-  //     "shipmentNo":"",
-  //     "quantity":"",
-  //     "partNumber":"",
-  //     "price":"",
-  //     "refundMethod":"",
-  //     "returnReason":"",
-  //     "bankDetails":{ //In Case of COD
-  //       "name":"",
-  //       "accountNO":"",
-  //       "confirmAccountNO":"",
-  //       "IFSCCode":""
-  //     
-  //   },
-  //     "images":[
-  //       "imageURL1",
-  //       "imageURL2"
-  //   ]
-  //   }
+
+ 
+  returnOrderShipmentAPI() {
+    // debugger;
+    let returnReason;
+    let imageEndpoint1 = `${imagePrefix}${thumbnail}`;
+    let imageEndpoint2 = `${imagePrefix}${thumbnail2}`;
     
-  returnOrderShipmentAPI() { 
-    debugger;
+    const {
+      selectedQuantity,
+      selectedReason, 
+      selectedImages, 
+      otherReason,
+      fullPaymentMode,
+      bankInfo   
+    } = this.state;
+    if (selectedReason === 'Other' )
+    returnReason = otherReason;
+
+    returnReason = selectedReason;
+     
+    const {
+      partNumber,
+      shipmentData,
+      returnUnitPrice,
+      subLineNo,
+      primeLineNo,
+      thumbnail,
+      thumbnail2
+    } = this.props.orderItemData;
+
+    const {
+      transactions,
+      orderID,
+    } = this.props.orderData;
+  
+
     const data = {
-      
-          "orderId":"123",
-          "orderItemId":"3556",
-          "shipmentNo":"5777",
-          "quantity":"3",
-          "partNumber":"676564",
-          "price":"3546",
-          "refundMethod":"COD",
-          "returnReason":"1",
-          "bankDetails":{ //In Case of COD
-            "name":"niikhi",
-            "accountNO":"1827387843",
-            "confirmAccountNO":"1827387843",
-            "IFSCCode":"AADF0249484"
-          
-        },
-          "images":[
-            "imageURL1",
-            "imageURL2"
-        ]
-        
-        
-    };
-    apiManager
+        "orderId": orderID,
+        "shipmentNo": shipmentData[0].shipmentNo,
+        "partNumber": partNumber,
+        "price": returnUnitPrice,
+        "quantity": selectedQuantity,
+        "returnReason": returnReason,
+        "refundMethod": transactions[0].paymentMode,
+        "bankDetails":{ 
+          "name": bankInfo.Name,
+          "accountNO": bankInfo.AccountNumber,
+          "confirmAccountNO": bankInfo.AcoountNumberConfirm,
+          "IFSCCode": bankInfo.ifscCode
+         },
+        "images":[
+            imageEndpoint1,
+            imageEndpoint2
+       ],
+        "invoiceNo": shipmentData[0].invoiceNo,
+        "shipNode": shipmentData[0].shipNode,
+        "primeLineNo": primeLineNo,
+        "subLineNo": subLineNo,
+      //   "creditCardNo": transactions[0].creditCardNo,
+        "transactionId": transactions[0].transactionID,
+        "transactionDate": transactions[0].transactionDate
+      };
+      console.log(data);
+      console.log(this.props.orderList);
+      apiManager
       .post(returnOrderShipment, data)
       .then(response => {
-        
-      console.log(response);
-      
+        console.log(response);
       })
-      .catch(error => {
-      });
+      .catch(error => {});
   }
-
 
   getReturnRequestReason(value) {
     this.setState({
       selectedReason: value
+    });
+  }
+
+  getReturnRequestQuantity(value) {
+    this.setState({
+      selectedQuantity: value
+    });
+  }
+
+  getBankDetails(value) {
+    // debugger;
+    this.setState({
+      bankInfo: value
     });
   }
 
@@ -177,7 +205,7 @@ class ReturnRequestForm extends React.Component {
           autofocus
           rows="4"
           cols="50"
-          className='text-area'
+          className="text-area"
         />
         <label className="label-text">
           {" "}
@@ -194,19 +222,21 @@ class ReturnRequestForm extends React.Component {
 
   renderRefund() {
     return (
-      <div className='refund-mode-wrapper'>
+      <div className="refund-mode-wrapper">
         <h4 className="heading">Refund Mode</h4>
-        <div className='radioBtn'>
-        <input className='inputBox' id='paymentMode'
+        <div className="radioBtn">
+          <input
+            className="inputBox"
+            id="paymentMode"
             type="radio"
             value={this.state.fullPaymentMode}
             checked={true}
           />
-        <label htmlFor='paymentMode' className='label-text'>
-          {this.state.fullPaymentMode === "COD"
-            ? this.state.fullPaymentMode
-            : "Full Online Payment"}
-        </label>
+          <label htmlFor="paymentMode" className="label-text">
+            {this.state.fullPaymentMode === "COD"
+              ? this.state.fullPaymentMode
+              : "Full Online Payment"}
+          </label>
         </div>
         <div className="notification-title">
           Your refund will be processed to
@@ -215,21 +245,23 @@ class ReturnRequestForm extends React.Component {
             : ` ${this.state.fullPaymentMode}`}
         </div>
         {this.state.fullPaymentMode === "COD" ? (
-          <BankDetails handleInputValidation={this.onValidationChange} />
+          <BankDetails onSubmit={this.getBankDetails} handleInputValidation={this.onValidationChange} />
         ) : null}
       </div>
     );
   }
 
   handleSubmit() {
-    console.log(this.props.dataPro);
     console.log(this.props.renderSelectionPro);
-
-    
-    this.addToWishlistAPI();
+    console.log(this.state);
+    this.returnOrderShipmentAPI();
   }
 
   render() {
+    console.log(this.props.orderData);
+    console.log(this.props.orderItemData);
+    
+    console.log(this.props.orderList);
     const { isBankDetailsValid, selectedImages, selectedReason } = this.state;
     const isSaveDisabled =
       !isBankDetailsValid || !selectedImages.length || !selectedReason.length;
@@ -237,11 +269,11 @@ class ReturnRequestForm extends React.Component {
     return (
       <div>
         <div className="trackMyOrder service-request return-request">
-        <div class="bottomDivider">
-          <button
-            className="backBtn"
-            onClick={this.props.renderSelectionPro}
-          >{`< Back`}</button>
+          <div class="bottomDivider">
+            <button
+              className="backBtn"
+              onClick={this.props.renderReturnRequestPro}
+            >{`< Back`}</button>
           </div>
           <div class="ongoingOrder">Return Products</div>
 
@@ -253,8 +285,9 @@ class ReturnRequestForm extends React.Component {
           <div className="actionBtnWrapper">
             <button
               className="btn-cancel btn"
-              onClick={isMobile() ?this.props.onCancel 
-                :this.props.renderSelectionPro}
+              onClick={
+                isMobile() ? this.props.onCancel : this.props.renderReturnRequestPro
+              }
             >
               Cancel
             </button>
@@ -296,6 +329,16 @@ class ReturnRequestForm extends React.Component {
   }
 
   renderProductDetails() {
+    // debugger;
+    let data = this.props.orderItemData;
+    let imageEndpoint = `${imagePrefix}${data.thumbnail}`;
+    let cancelQuantity = [];
+    if (data.quantity>0) {
+      let i;
+      for(i=1; i<= data.quantity; i++)
+      cancelQuantity.push(i);
+    }
+
     return (
       <>
         <div className="itemBox">
@@ -303,20 +346,34 @@ class ReturnRequestForm extends React.Component {
             <div className="orderimgbox clearfix">
               <div className="imgBox">
                 <img
-                  src={require("../../../public/images/plpAssests/placeholder-image.png")}
+                  src={imageEndpoint}
                   className="imgfullwidth"
                 />
               </div>
               <div className="product-text">
-                <p className="heading">Product Name</p>
-                <p className="description">(Description)</p>
+                <p className="heading">{data.productName}</p>
+                <p className="description">
+                  ({data.shortDescription})
+                </p>
                 <p className="price">
-                  <span className="discount-price">₹ 202922</span>
+                  <span className="discount-price">
+                    ₹ {data.returnUnitPrice}
+                  </span>
                 </p>
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
                     <span className="heading">Quantity: </span>
-                    <span className="textval">2</span>
+                    {data.quantity == 0 ?
+                    <>
+                    <span className="textval">
+                      {data.quantity}
+                    </span>
+                    </> :
+                    <Dropdown
+                      data={cancelQuantity}
+                      title="1"
+                      onSelection={this.getReturnRequestQuantity}
+                    />}
                   </div>
                 </div>
               </div>

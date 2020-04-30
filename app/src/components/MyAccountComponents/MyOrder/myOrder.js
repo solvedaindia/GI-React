@@ -23,6 +23,10 @@ class MyOrder extends React.Component {
       isPastOrdeShown: false,
       serviceOrderData:undefined,
       serviceOrderItemData:undefined,
+       //returnrequest Flags and data 
+       isReturnRequest: false,
+       returnOrderData: [],
+       returnOrderItemData: {},
       //Lazy Load Vars
       error: false,
       hasMore: true,
@@ -32,7 +36,7 @@ class MyOrder extends React.Component {
     };
     this.renderSelection = this.renderSelection.bind(this)
     this.onscroll = this.onscroll.bind(this);
-    this.modalRef=React.createRef();
+    this.renderReturnRequest = this.renderReturnRequest.bind(this);
   }
 
   componentDidMount() {
@@ -93,6 +97,18 @@ class MyOrder extends React.Component {
       isServiceRequest: !this.state.isServiceRequest,
       serviceOrderData: orderData,
       serviceOrderItemData:orderItemData,
+    });
+  }
+
+  
+
+  renderReturnRequest(orderItemData,orderData)
+  {
+    // debugger;
+    this.setState({
+      isReturnRequest: !this.state.isReturnRequest,
+      returnOrderData: orderData,
+      returnOrderItemData:orderItemData,
     });
   }
 
@@ -194,6 +210,7 @@ class MyOrder extends React.Component {
 
 
   render() {
+    // debugger;
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     return (
@@ -201,13 +218,24 @@ class MyOrder extends React.Component {
         {this.state.isTrackOrder ? (
           <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
         ) :this.state.isServiceRequest?(
-          <>
+        
           <ServiceRequestForm orderData={this.state.serviceOrderData} 
                               orderItemData={this.state.serviceOrderItemData} 
                               renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
-          <ReturnRequestForm dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
-          </>
+         
         ):
+         this.state.isReturnRequest ? (
+          <ReturnRequestForm  
+                orderList={this.state.orderListData}  
+                // dataPro={this.state.updatedTrackOrderData}  
+                renderSelectionPro={this.renderSelection.bind(this)}
+                trackOrderDataPro={this.state.updatedTrackOrderData} 
+                renderReturnRequestPro={this.renderReturnRequest}
+                orderData={this.state.returnOrderData} 
+                orderItemData={this.state.returnOrderItemData}
+                paymentMode="COD"/>
+
+         ): 
   
           this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
             return (
@@ -219,6 +247,7 @@ class MyOrder extends React.Component {
                   isGuestTrackOrderPro={this.state.isGuestTrackOrder}
                   showCancelModal={this.showCancelModal.bind(this)}
                   orderItemData={data}
+                  renderReturnRequestPro={this.renderReturnRequest}
                 />
               </>
             )

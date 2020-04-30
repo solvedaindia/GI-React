@@ -14,6 +14,7 @@ class OrderItem extends React.Component {
       isExpend: false,
       expendCollapseText: showImg,
     };
+    this.proceedToReturnRequest = this.proceedToReturnRequest.bind(this);
   }
 
   collapseExpendClicked() {
@@ -30,6 +31,11 @@ class OrderItem extends React.Component {
   {
     this.props.renderServiceRequestPro(orderItemData,orderData)
   }
+
+  proceedToReturnRequest(orderItemData,orderData) {
+    this.props.renderReturnRequestPro(orderItemData,orderData)
+
+   }
 
   render() {
     const orderData = this.props.orderItemData;
@@ -86,6 +92,7 @@ class OrderItem extends React.Component {
                 prodctDataPro={data}
                 showCancelModal={(orderItem)=>{this.props.showCancelModal(orderData,orderItem)}}
                 allDataPro={this.props.orderItemData}
+                proceedToReturnRequest = {this.proceedToReturnRequest}
               />
             )
           })}

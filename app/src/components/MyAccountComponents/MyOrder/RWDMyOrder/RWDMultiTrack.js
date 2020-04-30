@@ -21,7 +21,8 @@ class RWDMultiTrack extends React.Component {
               isMultiTrackPro={true} 
               showCancelModal={this.porps.showCancelModal}
               currentCompleteData={this.state.currentCompleteData}
-              myOrderCallbackPro={this.props.myOrderCallbackPro}/>
+              myOrderCallbackPro={this.props.myOrderCallbackPro}
+              onReturn = {this.props.onReturn}/>
           )
         })}
       </>

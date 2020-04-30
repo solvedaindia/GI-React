@@ -29,6 +29,7 @@ class RWDOrderItem extends React.Component {
     else {
       this.props.myOrderCallbackPro('SingleProduct', data, completeData)
     }
+    this.props.renderReturnRequestPro(data,completeData)
   }
 
   getStatusDate(shipmentData, status) {

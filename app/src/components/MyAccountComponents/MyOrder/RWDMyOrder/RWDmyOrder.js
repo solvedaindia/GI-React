@@ -20,6 +20,8 @@ class RWDMyOrder extends React.Component {
     super(props);
     this.state = {
       isReturnRequest:false,
+      returnOrderData: [],
+      returnOrderItemData: {},
       isTrackOrder: false,
       isServiceRequest:false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
@@ -169,6 +171,15 @@ class RWDMyOrder extends React.Component {
     });
   }
 
+  renderReturnRequest(orderItemData,orderData)
+  {
+    // debugger;
+    this.setState({
+      returnOrderData: orderData,
+      returnOrderItemData:orderItemData
+    });
+  }
+
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
 
@@ -253,12 +264,14 @@ class RWDMyOrder extends React.Component {
     return loaderItem;
   }
 
-  showReturnRequestForm()
+  showReturnRequestForm(productData,CompleteOrderData)
   {
     this.setState({
       isReturnRequest:true
     })
+    this.renderReturnRequest(productData,CompleteOrderData)
   }
+
   renderReturnRequestBack()
   {
     this.setState({
@@ -268,7 +281,7 @@ class RWDMyOrder extends React.Component {
 
 
   render() {
-    debugger;
+    // debugger;
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     if(this.state.isServiceRequest)
@@ -281,7 +294,15 @@ class RWDMyOrder extends React.Component {
     }
     if(this.state.isReturnRequest)
     {return (
-      <ReturnRequestForm onCancel = {this.renderReturnRequestBack} dataPro={this.state.updatedTrackOrderData} renderSelectionPro={this.renderSelection.bind(this)} paymentMode="COD"/>
+      <ReturnRequestForm 
+      onCancel = {this.renderReturnRequestBack} 
+       orderList={this.state.orderListData}  
+      // dataPro={this.state.updatedTrackOrderData}  
+        trackOrderDataPro={this.state.updatedTrackOrderData} 
+        renderReturnRequestPro={this.renderReturnRequest}
+        orderData={this.state.currentCompleteData} 
+        orderItemData={this.state.returnOrderItemData}
+        paymentMode="COD"/>
     )
     }
     else if (this.state.currentComponent === 'SingleProduct') {
@@ -309,7 +330,8 @@ class RWDMyOrder extends React.Component {
             orderDataPro={this.state.currentComponentData}
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
-            myOrderCallbackPro={this.myOrderCallback} />
+            myOrderCallbackPro={this.myOrderCallback} 
+            onReturn = {this.showReturnRequestForm}/>
         </div>
       );
     }
@@ -338,6 +360,7 @@ class RWDMyOrder extends React.Component {
                   orderItemData={data}
                   myOrderCallbackPro={this.myOrderCallback}
                   showCancelModal={this.showCancelModal}
+                  renderReturnRequestPro={this.renderReturnRequest}
                 />
               </>
             )
