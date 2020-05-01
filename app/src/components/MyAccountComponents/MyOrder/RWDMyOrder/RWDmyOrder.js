@@ -77,6 +77,7 @@ class RWDMyOrder extends React.Component {
     {
       this.setState({
         isServiceRequest:false,
+        currentComponentData:this.state.currentCompleteData,
       })
     }
     else if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
@@ -108,7 +109,8 @@ class RWDMyOrder extends React.Component {
   renderServiceRequestBack()
   {
     this.setState({
-      isServiceRequest:false
+      isServiceRequest:false,
+      currentComponentData:this.state.currentCompleteData,
     })
   }
 

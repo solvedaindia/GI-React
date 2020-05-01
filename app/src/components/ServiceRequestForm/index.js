@@ -42,6 +42,7 @@ class ServiceRequestForm extends React.Component {
     this.getDetailAPI()
     console.log("dataPro2",this.props.orderData);
     console.log("dataPro1",this.props.orderItemData);
+    window.scrollTo(0,0)
   }
   getDetailAPI=()=>{
 
