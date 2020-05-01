@@ -6,10 +6,10 @@ const errorutils = require('../utils/errorutils.js');
 const origin = require('../utils/origin.js');
 const productUtil = require('../utils/productutil');
 const userHandler = require('../handlers/usershandler');
-const espotHandler =  require('../handlers/espotshandler');
+const espotHandler = require('../handlers/espotshandler');
 
 const profileFilter = require('../filters/profilefilter');
-const espotFilter =  require('../filters/espotfilter');
+const espotFilter = require('../filters/espotfilter');
 const productDetailFilter = require('../filters/productdetailfilter');
 const cartFilter = require('../filters/cartfilter');
 const orderFilter = require('../filters/orderfilter');
@@ -364,7 +364,7 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderItems: [],
     orderSummary: {},
     wcsOrderStatus: wcsOrderDetails.orderStatus,
-    refundDetails : [],
+    transactions: [],
   };
   const wcsOrderID = orderData.orderId;
   getOMSOrderDetails(headers, wcsOrderID, (error, omsOrderResponse) => {
@@ -374,17 +374,10 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     }
     const omsData = omsOrderResponse;
     // orderDetails.orderID = omsData.orderID;
-    const refundData = [{
-      transactionID : 'Xxxxxxxx',
-      Amount : '24000',
-      Mode : 'Bank Account',
-    },
-    {
-      transactionID : 'Xxxxxxxx',
-      Amount : '18000',
-      Mode : 'Godrej Credit',
-    }];
-    orderDetails.refundDetails = refundData;
+    if(omsData.cancelRefundSummary){
+      orderDetails.cancelRefundSummary = omsData.cancelRefundSummary;
+    }
+    orderDetails.transactions = omsData.transactions;
     orderDetails.orderID = wcsOrderID;
     orderDetails.orderSummary = cartFilter.getOrderSummary(orderData);
     orderDetails.orderDate = omsData.orderDate;
@@ -392,6 +385,9 @@ function getCompleteOrderDetails(headers, wcsOrderDetails, callback) {
     orderDetails.address = omsData.address;
     orderDetails.orderStatus = omsData.orderStatus;
     orderDetails.invoices = omsData.invoices;
+    orderDetails.orderCancelFlag = omsData.orderCancelFlag;
+    orderDetails.orderCancelButtonDisable = omsData.orderCancelButtonDisable;
+
     if (omsData.orderItems && omsData.orderItems.length > 0) {
       orderDetails.orderTotalItems = omsData.orderItems.length;
       orderDetails.orderItems = omsData.orderItems;
@@ -427,6 +423,7 @@ function getOMSOrderDetails(headers, orderID, callback) {
         invoices: [],
         address: '',
         orderItems: [],
+        transactions : [],
       };
       if (response.status === 200) {
         if (response.body.result.order) {
@@ -438,6 +435,9 @@ function getOMSOrderDetails(headers, orderID, callback) {
           );
           resJson.orderStatus = omsOrderDetail.orderStatus;
           resJson.paymentMethod = omsOrderDetail.paymentMethod || '';
+          resJson.orderCancelFlag = omsOrderDetail.orderCancelFlag || '';
+          resJson.orderCancelButtonDisable = resJson.orderCancelButtonDisable || '';
+
           if (omsOrderDetail.invoices && omsOrderDetail.invoices.length > 0) {
             resJson.invoices = omsOrderDetail.invoices;
           }
@@ -446,6 +446,22 @@ function getOMSOrderDetails(headers, orderID, callback) {
               omsOrderDetail.deliveryAddress,
             );
           }
+          if (omsOrderDetail.transactions && omsOrderDetail.transactions.length>0) {
+            resJson.transactions = omsOrderDetail.transactions;
+          }
+          if(omsOrderDetail.cancelRefundSummary && omsOrderDetail.cancelRefundSummary.length>0){
+            resJson.cancelRefundSummary = [];
+            omsOrderDetail.cancelRefundSummary.forEach(cancelRefund => {
+              resJson.cancelRefundSummary.push({
+                transactionID : cancelRefund.transactionID,
+                refundAmount : cancelRefund.refundAmount,
+                paymentMode : cancelRefund.paymentMode,
+              })
+            });
+          }
+          omsOrderDetail.cancelRefundSummary = omsOrderDetail.cancelRefundSummary;
+
+
           if (
             omsOrderDetail.orderLines &&
             omsOrderDetail.orderLines.length > 0
@@ -482,6 +498,30 @@ function getOMSOrderDetails(headers, orderID, callback) {
                         productDetail.offerPrice = parseFloat(
                           orderItem.unitPrice,
                         );
+                        productDetail.returnUnitPrice = parseFloat(
+                          orderItem.returnUnitPrice,
+                        );
+
+                        productDetail.orderItemStatus = orderItem.status;
+                        productDetail.subLineNo = orderItem.subLineNo;
+                        productDetail.primeLineNo = orderItem.primeLineNo;
+
+                        /* Cancel Order Flags */
+                        productDetail.cancelOrderLineFlag = orderItem.cancelOrderLineFlag;
+                        productDetail.cancelButtonDisable = orderItem.cancelButtonDisable;
+                        productDetail.cancellationMssg = orderItem.cancellationMssg;
+                        productDetail.cancelButtonText = orderItem.cancelButtonText;
+                        productDetail.cancelRefundAmount = orderItem.cancelRefundAmount;
+
+                        /* Service Request */
+                        productDetail.isServiceable = orderItem.isServiceable;
+                        productDetail.serviceRequestOrderLineFlag = orderItem.serviceRequestOrderLineFlag;
+
+                        /* Return Order */
+                        productDetail.returnOrderLineFlag = orderItem.returnOrderLineFlag;
+                        productDetail.showReturnButton = orderItem.showReturnButton;
+                        productDetail.returnMssg = orderItem.returnMssg;
+
                         productDetail.shipmentData = [];
                         if (
                           orderItem.shipments &&
@@ -509,6 +549,7 @@ function getOMSOrderDetails(headers, orderID, callback) {
             callback(null, resJson);
           }
         } else if (response.body.result.error) {
+          // eslint-disable-next-line no-unused-vars
           const errorBody = {
             status_code: 400,
             error_key: 'order_failed',
@@ -688,7 +729,7 @@ function getInvoiceDetails(headers, params, callback) {
   );
 }
 
-function OMSOrderDetails(headers,orderID,callback){
+function OMSOrderDetails(headers, orderID, callback) {
   const reqHeaders = headerutil.getWCSHeaders(headers);
   const orderDetails = `${constants.orderDetailOMS
     .replace('{{storeId}}', headers.storeId)
@@ -703,12 +744,13 @@ function OMSOrderDetails(headers,orderID,callback){
     null,
     '',
     response => {
-      if(response.status === 200){
-        callback(null,response.body);
+      if (response.status === 200) {
+        callback(null, response.body);
       } else {
         callback(errorutils.handleWCSError(response.body));
       }
-    })
+    },
+  );
 }
 
 /**
@@ -721,34 +763,46 @@ module.exports.getServiceRequestDetails = getServiceRequestDetails;
 function getServiceRequestDetails(req, callback) {
   const reqHeader = req.headers;
   const resJSON = {
-    productDetail : {},
-    addressList : [],
-    productCategory : [],
-    serviceReasonList : [],
-    invoiceList : [],
+    productDetail: {},
+    addressList: [],
+    productCategory: [],
+    serviceReasonList: [],
+    invoiceList: [],
   };
 
-  let serviceRequestPageDetails = [
-    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.categoryList),
-    espotHandler.getEspotsData.bind(null,reqHeader,espotNames.serviceRequest.reasonList),
-    userHandler.getUserAddress.bind(null,reqHeader),
+  const serviceRequestPageDetails = [
+    espotHandler.getEspotsData.bind(
+      null,
+      reqHeader,
+      espotNames.serviceRequest.categoryList,
+    ),
+    espotHandler.getEspotsData.bind(
+      null,
+      reqHeader,
+      espotNames.serviceRequest.reasonList,
+    ),
+    userHandler.getUserAddress.bind(null, reqHeader),
   ];
-  if(req.query.partnumber && req.query.orderid){
-    serviceRequestPageDetails.push( 
-    productUtil.productDetailByPartNumber.bind(null, req.query.partnumber,reqHeader),
-    OMSOrderDetails.bind(null, reqHeader,req.query.orderid),
+  if (req.query.partnumber && req.query.orderid) {
+    serviceRequestPageDetails.push(
+      productUtil.productDetailByPartNumber.bind(
+        null,
+        req.query.partnumber,
+        reqHeader,
+      ),
+      OMSOrderDetails.bind(null, reqHeader, req.query.orderid),
     );
   }
 
   async.parallel(serviceRequestPageDetails, (err, result) => {
     if (err) {
       callback(err);
-      return;
     } else {
       resJSON.productCategory = espotFilter.espotContent(result[0]);
       resJSON.serviceReasonList = espotFilter.espotContent(result[1]);
       resJSON.addressList = result[2] && result[2].addressList;
-      resJSON.productDetail = result[3] && productDetailFilter.productDetailSummary(result[3]);
+      resJSON.productDetail =
+        result[3] && productDetailFilter.productDetailSummary(result[3]);
       resJSON.invoiceList = result[4] && result[4].result.order.invoices;
       callback(null, resJSON);
     }
@@ -763,41 +817,45 @@ function getServiceRequestDetails(req, callback) {
  */
 module.exports.cancelOrder = cancelOrder;
 function cancelOrder(req, callback) {
-  if(!req.body.orderid){
+  if (!req.body.orderid) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
   const orderID = req.body.orderid;
   const orderCancelBody = {
-    orderCancellation:'Y',
+    orderCancellation: 'Y',
     orderId: orderID,
     refundMethod: req.body.refundmethod,
-    cancelReasonOrd : req.body.cancelreason,
+    cancelReasonOrd: req.body.cancelreason,
   };
 
-  if(req.body.partnumber){
+  if (req.body.partnumber) {
     orderCancelBody.orderCancellation = 'N';
     orderCancelBody.partNumber = req.body.partnumber;
     delete orderCancelBody.cancelReasonOrd;
     orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
   }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const cancelOrder = constants.orderCancel.replace('{{storeId}}', req.headers.storeId);
-  origin.getResponse( 
-  'POST',
-  cancelOrder,
-  reqHeaders,
-  null,
-  orderCancelBody,
-  null,
-  '',
- response=>{
-  if(response.status === 200){
-    callback(null,response.body);
-  } else {
-    callback(errorutils.handleWCSError(response))
-  }
-  })
+  const cancelOrderURL = constants.orderCancel.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+  origin.getResponse(
+    'POST',
+    cancelOrderURL,
+    reqHeaders,
+    null,
+    orderCancelBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
 }
 
 /**
@@ -808,71 +866,89 @@ function cancelOrder(req, callback) {
  */
 module.exports.returnOrder = returnOrder;
 function returnOrder(req, callback) {
-  if(!req.body.orderId 
-    || !req.body.shipmentNo 
-    || !req.body.partNumber 
-    || !req.body.price 
-    || !req.body.quantity
-    || !req.body.images 
-    || !req.body.images.length>0 
-    || !req.body.returnReason
-    || !req.body.refundMethod){
+  if (
+    !req.body.orderId ||
+    !req.body.shipmentNo ||
+    !req.body.partNumber ||
+    !req.body.price ||
+    !req.body.quantity ||
+    !req.body.images ||
+    !req.body.images.length > 0 ||
+    !req.body.returnReason ||
+    !req.body.refundMethod || 
+   
+    !req.body.invoiceNo ||
+    !req.body.shipNode ||
+    !req.body.primeLineNo ||
+    !req.body.subLineNo
+  ) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
 
-  if(req.body.refundMethod === 'COD'){
-      if(!req.body.bankDetails
-        || !req.body.bankDetails.name
-        || !req.body.bankDetails.accountNO
-        || !req.body.bankDetails.confirmAccountNO
-        || !req.body.bankDetails.IFSCCode
-        || (req.body.bankDetails.accountNO !== req.body.bankDetails.confirmAccountNO)
-        ){
-          callback(errorutils.errorlist.invalid_params);
-          return;
-      }
+  if (req.body.refundMethod === 'COD') {
+    if (
+      !req.body.bankDetails ||
+      !req.body.bankDetails.name ||
+      !req.body.bankDetails.accountNO ||
+      !req.body.bankDetails.confirmAccountNO ||
+      !req.body.bankDetails.IFSCCode ||
+      req.body.bankDetails.accountNO !== req.body.bankDetails.confirmAccountNO
+    ) {
+      callback(errorutils.errorlist.invalid_params);
+      return;
+    }
   }
 
   const orderReturnBody = {
-    orderId : req.body.orderId,
-    shipmentNo : req.body.shipmentNo,
-    partNumber : req.body.partNumber,
-    unitPrice : req.body.price,
-    quantity : req.body.quantity,
-    returnReason : req.body.returnReason,
+    orderId: req.body.orderId,
+    shipmentNo: req.body.shipmentNo,
+    partNumber: req.body.partNumber,
+    unitPrice: req.body.price,
+    quantity: req.body.quantity,
+    returnReason: req.body.returnReason,
     refundMethod: req.body.refundMethod,
+    InvoiceNo : req.body.invoiceNo,
+    ShipNode : req.body.shipNode,
+    PrimeLineNo : req.body.primeLineNo,
+    SubLineNo : req.body.subLineNo,
+    TransactionId:req.body.transactionId,   
+    TransactionDate :req.body.transactionDate, 
   };
 
-  if(req.body.refundMethod === 'COD'){
-    orderReturnBody.name = req.body.bankDetails.name;
+  if (req.body.refundMethod === 'COD') {
+    orderReturnBody.Name = req.body.bankDetails.name;
     orderReturnBody.BAccntNo = req.body.bankDetails.accountNO;
     orderReturnBody.BCnfAccntNo = req.body.bankDetails.confirmAccountNO;
     orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
   }
-  
-  if(req.body.images && req.body.images.length>0){
-    req.body.images.forEach((image,index) => {
-      orderReturnBody[`img${index+1}`] = image;
-    });
-  }
+
+  // if (req.body.images && req.body.images.length > 0) {
+  //   req.body.images.forEach((image, index) => {
+  //     orderReturnBody[`img${index + 1}`] = image;
+  //   });
+  // }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const returnOrder = constants.returnOrder.replace('{{storeId}}', req.headers.storeId);
-  origin.getResponse( 
-  'POST',
-  returnOrder,
-  reqHeaders,
-  null,
-  orderReturnBody,
-  null,
-  '',
- response=>{
-  if(response.status === 200){
-    callback(null,response.body);
-  } else {
-    callback(errorutils.handleWCSError(response))
-  }
-  })
+  const returnOrderURL = constants.returnOrder.replace(
+    '{{storeId}}',
+    req.headers.storeId,
+  );
+  origin.getResponse(
+    'POST',
+    returnOrderURL,
+    reqHeaders,
+    null,
+    orderReturnBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        callback(null, response.body);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
 }
 
 /**
@@ -883,50 +959,73 @@ function returnOrder(req, callback) {
  */
 module.exports.createServiceRequest = createServiceRequest;
 function createServiceRequest(req, callback) {
-  if(!req.body.prodCategory 
-    || !req.body.prodDesc 
-    || !req.body.images 
-    || !req.body.images.length>0 
-    || !req.body.addressId
-    || !req.body.serviceRequestReason
-   ){
+  if (
+    !req.body.prodCategory ||
+    !req.body.prodDesc ||
+    !req.body.images ||
+    !req.body.images.length > 0 ||
+    (!req.body.addressData && !req.body.addressId) ||
+    !req.body.serviceRequestReason
+  ) {
     callback(errorutils.errorlist.invalid_params);
     return;
   }
 
   const serviceRequestBody = {
-    prodCategory : req.body.prodCategory,
-    prodDesc : req.body.prodDesc,
-    addressId : req.body.addressId,
-    productId : req.body.partNumber || '',
-    invoiceNo : req.body.invoiceNo || '',
-    invoiceURL : req.body.invoiceURL || '',
-    serviceRequestReason : req.body.serviceRequestReason,
-    messageServiceRequestReason : req.body.otherReason,
+    prodCategory: req.body.prodCategory,
+    prodDesc: req.body.prodDesc,
+    productId: req.body.partNumber || '',
+    invoiceNo: req.body.invoiceNo || '',
+    invoiceURL: req.body.invoiceURL || '',
+    serviceRequestReason: req.body.serviceRequestReason,
+    messageServiceRequestReason: req.body.otherReason,
   };
 
-  
-  if(req.body.images && req.body.images.length>0){
-    req.body.images.forEach((image,index) => {
-      serviceRequestBody[`imgURL${index+1}`] = image;
-    });
-  }
-  const reqHeaders = headerutil.getWCSHeaders(req.headers);
-  const createServiceRequest = constants.createServiceRequest.replace('{{storeId}}', req.headers.storeId);
+  req.body.images.forEach((image, index) => {
+    serviceRequestBody[`imgURL${index + 1}`] = image;
+  });
 
-  origin.getResponse( 
-  'POST',
-  createServiceRequest,
-  reqHeaders,
-  null,
-  serviceRequestBody,
-  null,
-  '',
- response=>{
-  if(response.status === 200){
-    callback(null,response.body);
+  if(req.body.addressId && req.body.addressId !==null){
+    serviceRequestBody.addressId = req.body.addressId;
+    createRequest(req.headers,serviceRequestBody,callback);
   } else {
-    callback(errorutils.handleWCSError(response))
+    userHandler.createAddress(req.headers,req.body.addressData,(error,addressResponse)=>{
+      if(error){
+        logger.debug('Error in Creating Address');
+        callback(error);
+        return;
+      }
+      logger.debug('Created Address');
+      serviceRequestBody.addressId = addressResponse.addressID;
+      createRequest(req.headers,serviceRequestBody,callback);
+    })
   }
-  })
+}
+
+function createRequest(headers,serviceRequestBody,callback){
+
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const createServiceRequestURL = constants.createServiceRequest.replace(
+    '{{storeId}}',
+    headers.storeId,
+  );
+
+  origin.getResponse(
+    'POST',
+    createServiceRequestURL,
+    reqHeaders,
+    null,
+    serviceRequestBody,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        logger.debug('Service Request Created Successfully');
+        callback(null, response.body);
+      } else {
+        logger.debug('Error in Creating Service Request');
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
 }
