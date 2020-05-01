@@ -26,6 +26,7 @@ import MyProfile from '../../components/MyAccountComponents/MyProfile/myProfile'
 import ManageAddress from '../../components/MyAccountComponents/ManageAddress/manageAddress';
 import MyOrder from '../../components/MyAccountComponents/MyOrder/myOrder';
 import RWDMyOrder from '../../components/MyAccountComponents/MyOrder/RWDMyOrder/RWDmyOrder';
+import MyServiceRequest from '../../components/MyAccountComponents/MyServiceRequest/index';
 
 export class MyAccountContainer extends React.Component {
   constructor(props) {
@@ -89,6 +90,14 @@ export class MyAccountContainer extends React.Component {
     // })
   }
 
+  onMyServiceRequestClick() {
+    this.scrollTop();
+    this.props.history.replace({ pathname: '/myAccount', state: {from:'serviceRequest'}}); 
+   //  this.setState({
+   //     redirectedFrom: 'myprofile'
+   //   })   
+   }
+
   onMyOrderClick() {
     this.scrollTop();
     // this.setState({
@@ -144,6 +153,11 @@ export class MyAccountContainer extends React.Component {
             </a>
           </li>
           <li className="list">
+            <a onClick={this.onMyServiceRequestClick.bind(this)} className={`link ${this.state.redirectedFrom === 'serviceRequest' ? 'active show' : ''}`}/*  href="#profile-v" */ /* data-toggle="tab" */>
+              My Service Request
+            </a>
+          </li>
+          <li className="list">
             <a onClick={this.onMyOrderClick.bind(this)} className={`link ${this.state.redirectedFrom === 'myorder' ? 'active show' : ''}`} /* href="#myOrder-v" */ /* data-toggle="tab" */>
               My Orders
             </a>
@@ -182,6 +196,9 @@ export class MyAccountContainer extends React.Component {
                 </div>
                 <div className={`tab-pane ${this.state.redirectedFrom === 'password' ? 'active' : ''}`}/*  id="changePassword-v" */ >
                   <ChangePassword changePasswordTagPro={this.state.changePasswordTag} />
+                </div>
+                <div className={`tab-pane ${this.state.redirectedFrom === 'serviceRequest' ? 'active' : ''}`}/*  id="serviceRequest-v" */ >
+                  <MyServiceRequest />
                 </div>
                 <div className={`tab-pane ${this.state.redirectedFrom === 'myorder' ? 'active' : ''}`}/*  id="myOrder-v" */ >
                   {isMobile() ? <div className='row ongoing-order'><RWDMyOrder isGuestTrackOrderPro={isGuestTrackOrder} guestOrderDataPro={guestOrderData} /></div> :
