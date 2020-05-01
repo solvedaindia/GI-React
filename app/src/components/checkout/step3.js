@@ -51,7 +51,6 @@ export class Step3Component extends React.Component {
   }
 
   componentDidMount() {
-    this.callBankDataAPI();
     triggerPaymentOptionGTEvent();
     this.fetchPaymentMethods();
   }
@@ -60,40 +59,28 @@ export class Step3Component extends React.Component {
     triggerPaymentOptionGTEvent();
   }
 
-  callBankDataAPI = () => {
-    let token = appCookie.get('accessToken');
-    axios.get(BankListAPI, {
-      headers: {
-        store_id: storeId,
-        access_token: token
-      }
-    }).then((response) => {
-      var bankdata = response.data.data.bankList;
+  fetchPaymentMethods() {
+    apiManager.get(paymentMethods)
+    .then(response => {
       var banks = [];
       var wallets = [];
-      bankdata.forEach((elem) => {
-        if (elem.Type == "Bank") {
-          banks.push(elem)
+      response.data.data.paymentMethods && response.data.data.paymentMethods.forEach(data => {
+        if (data.paymentMethodName === 'NET_BANKING') {
+          data.childPaymentMethods.forEach(childData => {
+            banks.push(childData)
+          })
         }
-        if (elem.Type == "Wallet") {
-          wallets.push(elem);
+        else if (data.paymentMethodName === 'WALLETS') {
+          data.childPaymentMethods.forEach(childData => {
+            wallets.push(childData);
+          })
         }
       })
 
       this.setState({
         banks: banks,
-        wallets: wallets
-      })
-    }).catch((err) => {
-    })
-  }
-
-
-  fetchPaymentMethods() {
-    apiManager.get(paymentMethods)
-    .then(response => {
-      this.setState({
-        paymentMethods : response.data.data.paymentMethods,
+        wallets: wallets,
+        paymentMethods : response.data.data.paymentMethods && response.data.data.paymentMethods,
         CODAmount: response.data.data.CODAmount
       })
     })
@@ -199,82 +186,6 @@ export class Step3Component extends React.Component {
     }
     else {
       this.props.enalblePay({ paymentMode: paymentMethod.paymentMethodName, paymentId: paymentMethod.paymentMethodName});
-    }
-
-    
-    return;
-    this.setState({
-      CODCheck: false,
-      EMICheck: false,
-      creditCheck: false,
-      debitCheck: false,
-      UPICheck: false,
-      walletCheck: false,
-      netBankCheck: false
-    })
-  
-    if (event.target.name == "credit") {
-      this.props.enalblePay({ paymentMode: 'CREDIT_CARD', paymentId: 'CREDIT_CARD' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'CREDIT_CARD',
-        creditCheck: true
-      })
-    }
-    if (event.target.name == "debit") {
-      this.props.enalblePay({ paymentMode: 'DEBIT_CARD', paymentId: 'DEBIT_CARD' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'DEBIT_CARD',
-        debitCheck: true
-      })
-    }
-    if (event.target.name == "netBank") {
-      this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'NET_BANKING',
-        netBankCheck: true
-      })
-    }
-    if (event.target.name == 'COD') {
-      this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'COD',
-        CODCheck: true
-      })
-    }
-    if (event.target.name == 'UPI') {
-      this.props.enalblePay({ paymentMode: 'UPI', paymentId: 'UPI' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'UPI',
-        UPICheck: true
-      })
-    }
-    if (event.target.name == 'EMI') {
-      this.props.enalblePay({ paymentMode: 'CC_EMI', paymentId: 'CC_EMI' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'CC_EMI',
-        EMICheck: true
-      })
-    }
-    if (event.target.name == 'wallet') {
-      this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'WALLET',
-        walletCheck: true
-      })
     }
   }
 
