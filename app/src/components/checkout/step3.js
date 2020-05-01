@@ -13,8 +13,10 @@ import {
   storeId,
   accessToken,
   accessTokenCookie,
-  BankListAPI
+  BankListAPI,
+  paymentMethods
 } from '../../../public/constants/constants';
+import apiManager from '../../utils/apiManager';
 import {
   getReleventReduxState
 } from '../../utils/utilityManager';
@@ -42,44 +44,49 @@ export class Step3Component extends React.Component {
       netBankCheck: false,
       selectedBank: 'Select a Bank',
       selectedWallet: 'Select a Wallet',
+      paymentMethods: [],
+      checkedPaymentID: '',
+      CODAmount: null,
     }
   }
 
   componentDidMount() {
-    this.callBankDataAPI();
     triggerPaymentOptionGTEvent();
+    this.fetchPaymentMethods();
   }
 
   componentDidUpdate() {
     triggerPaymentOptionGTEvent();
   }
 
-  callBankDataAPI = () => {
-    let token = appCookie.get('accessToken');
-    axios.get(BankListAPI, {
-      headers: {
-        store_id: storeId,
-        access_token: token
-      }
-    }).then((response) => {
-      var bankdata = response.data.data.bankList;
+  fetchPaymentMethods() {
+    apiManager.get(paymentMethods)
+    .then(response => {
       var banks = [];
       var wallets = [];
-      bankdata.forEach((elem) => {
-        if (elem.Type == "Bank") {
-          banks.push(elem)
+      response.data.data.paymentMethods && response.data.data.paymentMethods.forEach(data => {
+        if (data.paymentMethodName === 'NET_BANKING') {
+          data.childPaymentMethods.forEach(childData => {
+            banks.push(childData)
+          })
         }
-        if (elem.Type == "Wallet") {
-          wallets.push(elem);
+        else if (data.paymentMethodName === 'WALLETS') {
+          data.childPaymentMethods.forEach(childData => {
+            wallets.push(childData);
+          })
         }
       })
 
       this.setState({
         banks: banks,
-        wallets: wallets
+        wallets: wallets,
+        paymentMethods : response.data.data.paymentMethods && response.data.data.paymentMethods,
+        CODAmount: response.data.data.CODAmount
       })
-    }).catch((err) => {
     })
+    .catch(error => {
+     
+    });
   }
 
   handleHasPass = () => {
@@ -144,7 +151,7 @@ export class Step3Component extends React.Component {
   }
 
   renderBanks = () => {
-    if (this.state.netBankCheck) {
+    if (this.state.checkedPaymentID === 'NET_BANKING') {
       var menuItems = [];
       this.state.banks.forEach((item, index) => {
         menuItems.push(<MenuItem key={index} onClick={this.checkBanks.bind(this, index)} eventKey={index + 1}>{item.bankName}</MenuItem>
@@ -169,84 +176,21 @@ export class Step3Component extends React.Component {
     }
   }
 
-  handleOptionChange(event) {
+  handleOptionChange(event,paymentMethod) {
     this.setState({
-      CODCheck: false,
-      EMICheck: false,
-      creditCheck: false,
-      debitCheck: false,
-      UPICheck: false,
-      walletCheck: false,
-      netBankCheck: false
+      checkedPaymentID: event.target.id,
     })
-  
-    if (event.target.name == "credit") {
-      this.props.enalblePay({ paymentMode: 'CREDIT_CARD', paymentId: 'CREDIT_CARD' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'CREDIT_CARD',
-        creditCheck: true
-      })
-    }
-    if (event.target.name == "debit") {
-      this.props.enalblePay({ paymentMode: 'DEBIT_CARD', paymentId: 'DEBIT_CARD' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'DEBIT_CARD',
-        debitCheck: true
-      })
-    }
-    if (event.target.name == "netBank") {
+
+    if (event.target.id === 'NET_BANKING' || event.target.id === 'WALLETS') {
       this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'NET_BANKING',
-        netBankCheck: true
-      })
     }
-    if (event.target.name == 'COD') {
-      this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'COD',
-        CODCheck: true
-      })
-    }
-    if (event.target.name == 'UPI') {
-      this.props.enalblePay({ paymentMode: 'UPI', paymentId: 'UPI' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'UPI',
-        UPICheck: true
-      })
-    }
-    if (event.target.name == 'EMI') {
-      this.props.enalblePay({ paymentMode: 'CC_EMI', paymentId: 'CC_EMI' });
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'CC_EMI',
-        EMICheck: true
-      })
-    }
-    if (event.target.name == 'wallet') {
-      this.props.disablePay();
-      return this.setState({
-        showBanks: false,
-        showWallets: false,
-        paymentModeId: 'WALLET',
-        walletCheck: true
-      })
+    else {
+      this.props.enalblePay({ paymentMode: paymentMethod.paymentMethodName, paymentId: paymentMethod.paymentMethodName});
     }
   }
 
   renderWallets = () => {
-    if (this.state.walletCheck) {
+    if (this.state.checkedPaymentID === 'WALLETS') {
       var menuItems = [];
       this.state.wallets.forEach((item, index) => {
         menuItems.push(<MenuItem eventKey={index + 1} key={index} onClick={this.checkWallet.bind(this, index)}>{item.bankName}</MenuItem>)
@@ -337,7 +281,31 @@ export class Step3Component extends React.Component {
               <div className="paybytext">
                
 
-                <div className='paymentMethod customradio'>
+             
+
+              <div className='paymentMethod customradio'>
+                  <h4 className='heading'>{CHOOSE_A_PAYMENT_METHOD}</h4>
+                  {this.state.paymentMethods.length > 0 && this.state.paymentMethods.map(item => {
+                    if (item.paymentMethodName === 'COD' && this.props.netAmount > this.state.CODAmount) {
+                      return null
+                    }
+                    return (
+                      <>
+                        <div className="pay_radio">
+                          <div className="inputBox">
+                            <input className='inputRadio input' id={item.paymentMethodName} checked={this.state.checkedPaymentID === item.paymentMethodName} type='radio' name={item.paymentMethodName} onChange={(event)=>this.handleOptionChange(event,item)} />
+                            <label className='labelchecked' htmlFor={item.paymentMethodName}></label>
+                          </div>
+                          <label className='form-label' htmlFor={item.paymentMethodName}>{item.description}</label>
+                        </div>
+                        {item.paymentMethodName === "NET_BANKING" ? this.renderBanks() : null }
+                        {item.paymentMethodName === "WALLETS" ? this.renderWallets() : null }
+                      </>
+                    )
+                  })}
+                </div>
+
+                {/* <div className='paymentMethod customradio'>
                   <h4 className='heading'>{CHOOSE_A_PAYMENT_METHOD}</h4>
                   <div className="pay_radio">
                     <div className="inputBox">
@@ -384,7 +352,7 @@ export class Step3Component extends React.Component {
                   </div>
                   {this.renderWallets()}
 
-                </div>
+                </div> */}
 
               </div>
             </div>

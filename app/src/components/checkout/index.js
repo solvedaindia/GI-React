@@ -267,6 +267,12 @@ export class CheckoutComponent extends React.Component {
       headers: { store_id: storeId, access_token: token }
     }).then((response) => {
       var res = response.data.data.response;
+      if (this.state.paymentMode === 'COD') {
+        window.location.assign(`${window.location.origin}/order/confirm/${response.data.data.orderId}`)
+        ///order/confirm/:orderId
+        return;
+      }
+
       var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
       if (
         this.state.paymentMode == 'NET_BANKING' ||
@@ -321,7 +327,7 @@ export class CheckoutComponent extends React.Component {
         logonBy={this.state.logon_by}
         handleAddress={this.handleAddress}
         netAmount={this.state.orderSummaryData.netAmount}
-        shipModePro={this.state.shipMode} />
+        shipModePro='10101' />
 
     } else {
       return <Step1Component
