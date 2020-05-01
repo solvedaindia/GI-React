@@ -327,7 +327,7 @@ export class CheckoutComponent extends React.Component {
         logonBy={this.state.logon_by}
         handleAddress={this.handleAddress}
         netAmount={this.state.orderSummaryData.netAmount}
-        shipModePro='10101' />
+        shipModePro={this.state.shipMode} />
 
     } else {
       return <Step1Component
