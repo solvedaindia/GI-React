@@ -11,6 +11,7 @@ import {
   accessToken,
   getDetailtForSerReq,
   returnOrderShipment,
+  espotReasonOrderReturn,
   BankListAPI
 } from "../../../public/constants/constants";
 import "../../../public/styles/myAccount/service-request.scss";
@@ -20,15 +21,7 @@ class ReturnRequestForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      returnRequestReasons: [
-        "Defective item recieved",
-        "Wrong product recieved",
-        "Incorrect size",
-        "Different color",
-        "Quality issues",
-        "Image shown does not match actual product",
-        "Other"
-      ],
+      returnRequestReasons: [],
       selectedQuantity: "1",
       selectedReason: "",
       isBankDetailsValid: props.paymentMode !== "COD",
@@ -51,7 +44,23 @@ class ReturnRequestForm extends React.Component {
 
   componentDidMount() {
     //this.returnOrderShipmentAPI();
+    this.fetchReasonArray();
   }
+
+  fetchReasonArray()
+    {
+        apiManager
+        .get(espotReasonOrderReturn)
+        .then(response => {
+          this.setState({
+            returnRequestReasons:response.data.data,
+          })
+        })
+        .catch(error => {
+      
+        });
+    }
+
   // to be modified ...
   // getDetailAPI = () => {
   //   apiManager

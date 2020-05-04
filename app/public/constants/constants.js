@@ -261,6 +261,7 @@ export const saveServiceRequest = `${secureHttp}://${host}:${port2}/api/v1/secur
 export const cancelOrderAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/cancel`;
 export const espotReasonOrderItemCancel = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_REASON_FOR_ORDER_ITEM_CANCEL`;
 export const espotReasonOrderCancel = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_REASON_FOR_ORDER_CANCEL`;
+export const espotReasonOrderReturn = `${secureHttp}://${host}:${port2}/api/v1/espots/GI_ReturnRequest_ReasonList`;
 
 
 //export const catalog = 'SolvedaCommerceCatalogAssetStore';
