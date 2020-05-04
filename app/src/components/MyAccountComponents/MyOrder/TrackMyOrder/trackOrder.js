@@ -11,6 +11,12 @@ class TrackOrder extends React.Component {
     this.state = {};
   }
 
+  onReturnRequest(shipmentData)
+  {
+      console.log("shipmentDataPro",shipmentData)
+      this.props.renderReturnRequest(shipmentData)
+  }
+
   render() {
    return (
 
@@ -20,7 +26,7 @@ class TrackOrder extends React.Component {
         </div>
         {this.props.trackOrderDataPro.shipmentData.map((item, index) => {
           return (
-            <TrackOrderProduct prodctDataPro={this.props.trackOrderDataPro} shipmentDataPro={item} />
+            <TrackOrderProduct prodctDataPro={this.props.trackOrderDataPro} shipmentDataPro={item} onReturnRequest={this.onReturnRequest.bind(this)} />
           )
         })}
 

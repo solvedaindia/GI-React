@@ -29,7 +29,7 @@ class ReturnRequestForm extends React.Component {
         "Image shown does not match actual product",
         "Other"
       ],
-      selectedQuantity: "",
+      selectedQuantity: "1",
       selectedReason: "",
       isBankDetailsValid: props.paymentMode !== "COD",
       selectedImages: [],
@@ -50,7 +50,7 @@ class ReturnRequestForm extends React.Component {
   }
 
   componentDidMount() {
-    this.returnOrderShipmentAPI();
+    //this.returnOrderShipmentAPI();
   }
   // to be modified ...
   // getDetailAPI = () => {
@@ -84,7 +84,6 @@ class ReturnRequestForm extends React.Component {
 
  
   returnOrderShipmentAPI() {
-    // debugger;
     let returnReason;
     let imageEndpoint1 = `${imagePrefix}${thumbnail}`;
     let imageEndpoint2 = `${imagePrefix}${thumbnail2}`;
@@ -120,7 +119,7 @@ class ReturnRequestForm extends React.Component {
 
     const data = {
         "orderId": orderID,
-        "shipmentNo": shipmentData && shipmentData[0].shipmentNo,
+        "shipmentNo": this.props.orderShipmentData && this.props.orderShipmentData.shipmentNo,
         "partNumber": partNumber,
         "price": returnUnitPrice,
         "quantity": selectedQuantity,
@@ -135,17 +134,16 @@ class ReturnRequestForm extends React.Component {
         "images":[
             imageEndpoint1,
             imageEndpoint2
-       ],
-        "invoiceNo": shipmentData && shipmentData[0].invoiceNo,
-        "shipNode": shipmentData && shipmentData[0].shipNode,
+        ],
+        "invoiceNo": this.props.orderShipmentData && this.props.orderShipmentData.invoiceNo,
+        "shipNode": this.props.orderShipmentData && this.props.orderShipmentData.shipNode,
         "primeLineNo": primeLineNo,
         "subLineNo": subLineNo,
       //   "creditCardNo": transactions[0].creditCardNo,
         "transactionId": transactions && transactions[0].transactionID,
         "transactionDate": transactions && transactions[0].transactionDate
       };
-      console.log(data);
-      console.log(this.props.orderList);
+      console.log("returnOrderShipment",data);
       apiManager
       .post(returnOrderShipment, data)
       .then(response => {
@@ -168,6 +166,7 @@ class ReturnRequestForm extends React.Component {
 
   getBankDetails(value) {
     // debugger;
+    alert("aaaa");
     this.setState({
       bankInfo: value
     });
@@ -331,11 +330,12 @@ class ReturnRequestForm extends React.Component {
   renderProductDetails() {
     // debugger;
     let data = this.props.orderItemData;
+    let shipmentData = this.props.orderShipmentData;
     let imageEndpoint = `${imagePrefix}${data.thumbnail}`;
     let cancelQuantity = [];
     if (data.quantity>0) {
       let i;
-      for(i=1; i<= data.quantity; i++)
+      for(i=1; i<= shipmentData.quantity; i++)
       cancelQuantity.push(i);
     }
 

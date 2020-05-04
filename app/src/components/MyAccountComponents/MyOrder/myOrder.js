@@ -25,8 +25,9 @@ class MyOrder extends React.Component {
       serviceOrderItemData:undefined,
        //returnrequest Flags and data 
        isReturnRequest: false,
-       returnOrderData: [],
-       returnOrderItemData: {},
+       returnOrderData: undefined,
+       returnOrderItemData: undefined,
+       returnOrderShipmentData:undefined,
       //Lazy Load Vars
       error: false,
       hasMore: true,
@@ -86,10 +87,12 @@ class MyOrder extends React.Component {
     });
   }
 
-  renderSelection(trackOrderData) {
+  renderSelection(trackOrderData,orderData) {
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
-      updatedTrackOrderData: trackOrderData
+      updatedTrackOrderData: trackOrderData,
+      returnOrderData: orderData,
+      returnOrderItemData:trackOrderData,
     });
   }
   renderServiceRequest(orderItemData,orderData)
@@ -101,17 +104,24 @@ class MyOrder extends React.Component {
     });
   }
 
-  
-
-  renderReturnRequest(orderItemData,orderData)
+  renderReturnRequest(shipmentData)
   {
-    // debugger;
     this.setState({
+      isTrackOrder:!this.state.isTrackOrder,
       isReturnRequest: !this.state.isReturnRequest,
-      returnOrderData: orderData,
-      returnOrderItemData:orderItemData,
+      returnOrderShipmentData:shipmentData,
     });
   }
+
+  // renderReturnRequest(orderItemData,orderData)
+  // {
+  //   // debugger;
+  //   this.setState({
+  //     isReturnRequest: !this.state.isReturnRequest,
+  //     returnOrderData: orderData,
+  //     returnOrderItemData:orderItemData,
+  //   });
+  // }
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
@@ -217,7 +227,7 @@ class MyOrder extends React.Component {
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} />
+          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} renderReturnRequest={this.renderReturnRequest.bind(this)} />
         ) :this.state.isServiceRequest?(
         
           <ServiceRequestForm orderData={this.state.serviceOrderData} 
@@ -234,6 +244,7 @@ class MyOrder extends React.Component {
                 renderReturnRequestPro={this.renderReturnRequest}
                 orderData={this.state.returnOrderData} 
                 orderItemData={this.state.returnOrderItemData}
+                orderShipmentData={this.state.returnOrderShipmentData}
                 paymentMode="COD"/>
 
          ): 
