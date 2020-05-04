@@ -47,6 +47,7 @@ class RWDSingleProduct extends React.Component {
     const productData = this.props.orderDataPro;
     const showServiceRequestButton = productData.serviceRequestOrderLineFlag == 'Y'
     const isServiceable = productData.isServiceable == 'Y'
+    const showReturnButton=productData.showReturnButton=='Y'
     let btnCancelDisable = false;
     let showCancelMessage = false;
     let showCancelButton = false;
@@ -109,9 +110,12 @@ class RWDSingleProduct extends React.Component {
           {(this.props.isFromViewOrder && showCancelButton) && <button className={btnCancelDisable ? "btn-borderwhite disabled" : "btn-borderwhite"} style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showCancelModal(productData, this.props.orderCompleteDataPro)} >
             {cancelText}</button>}
 
-          <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.onReturn(productData, this.props.orderCompleteDataPro)} >
+          {(this.props.isFromViewOrder && showReturnButton) && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={this.trackOrderFromViewOrder.bind(this, productData)} >
             Return Item
-            </button>
+            </button>}
+          {(this.props.isMultiTrackPro && this.props.shipmentDataPro.returnButtonDisplay=='Y') && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.onReturn(this.props.shipmentDataPro)} >
+            Return Item
+            </button>}
 
           {(this.props.isFromViewOrder && showServiceRequestButton) && <button className="btn-borderwhite" style={{ marginTop: '5px', width: '100%' }} onClick={evt => this.props.showServiceRequestForm(productData, this.props.orderCompleteDataPro)} >
             Service Request

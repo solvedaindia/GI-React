@@ -6,13 +6,22 @@ class RWDMultiTrack extends React.Component {
   constructor(props) {
     super(props);
   }
+  componentWillMount()
+  {
+      console.log("MultiOR",this.props.currentCompleteData);
+      console.log("MultiORI",this.props.orderDataPro);
+  }
+  onReturn(shipmentData)
+  {
+    this.props.onReturn(this.props.orderDataPro,this.props.currentCompleteData,shipmentData)    
+  }
+  
+
 
   showCancelModal(orderData,orderItem)
   {
     this.porps.showCancelModal(orderData,orderItem)
   }
-
-
 
 
   render() {
@@ -28,7 +37,7 @@ class RWDMultiTrack extends React.Component {
               showCancelModal={this.showCancelModal.bind(this)}
               currentCompleteData={this.props.currentCompleteData}
               myOrderCallbackPro={this.props.myOrderCallbackPro}
-              onReturn = {this.props.onReturn}/>
+              onReturn = {this.onReturn.bind(this)}/>
           )
         })}
       </>
