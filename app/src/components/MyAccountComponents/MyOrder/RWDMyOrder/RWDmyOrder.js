@@ -74,6 +74,7 @@ class RWDMyOrder extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+   
     if(this.state.isServiceRequest)
     {
       this.setState({
@@ -271,6 +272,7 @@ class RWDMyOrder extends React.Component {
 
   showReturnRequestForm(productData,CompleteOrderData,shipmentData)
   {
+    this.props.updateTheRWDHeader('show return')
     this.setState({
       isReturnRequest:true,
       returnOrderData: CompleteOrderData,
@@ -282,7 +284,7 @@ class RWDMyOrder extends React.Component {
   showReturnRequestFormForSingle(shipmentData)
   {
     console.log("MultiORSH",shipmentData);
-   
+    this.props.updateTheRWDHeader('show return')
     this.setState({
       isReturnRequest:true,
       returnOrderData: this.state.currentCompleteData,

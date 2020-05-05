@@ -190,6 +190,7 @@ class HeaderMobile extends React.Component {
 
 
   headerCallback = () => {
+ 
     this.setState({
       headerRenderItem: this.defaultRender(),
       showSocialShare: false,
@@ -198,6 +199,10 @@ class HeaderMobile extends React.Component {
       this.pageNavigationRender('My Order');
       this.props.updateTheRWDHeader('MyOrder Return');
       return;
+    }
+    if( this.props.updatedHeaderVal === 'show return')
+    {
+      this.props.updateTheRWDHeader('Track Order');
     }
     if(window.location.pathname !== "/myAccount" && window.location.pathname !== "/wishlist"){
       return;
