@@ -24,7 +24,7 @@ class ServiceRequestFormGuest extends React.Component {
       characterLimit: 50,
       selectedInvoice: "",
       selectedProductCategory: null,
-      selectedReason: null,
+      selectedReason: [],
       otherReason: null,
       guestAddress: null,
       isSaveBtnDisabled: true,
@@ -121,7 +121,7 @@ class ServiceRequestFormGuest extends React.Component {
       .then(response => {
         console.log("PostResponse", response);
         alert("Your service request has been submitted successfully. Our customer care agents will get intouch with you shortly.")
-        this.props.renderServiceRequestPro();
+        document.location.href="/";
       })
       .catch(error => {
         console.log("PostResponseError", error);
