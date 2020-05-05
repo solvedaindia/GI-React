@@ -19,7 +19,7 @@ class RWDOrderItem extends React.Component {
 
   onViewOrderClick(data) {
     window.scrollTo(0,0);
-    this.props.myOrderCallbackPro('ViewOrder', data)
+    this.props.myOrderCallbackPro('ViewOrder',data, data)
   }
 
   onProductClick(data, completeData) {

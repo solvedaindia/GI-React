@@ -20,8 +20,9 @@ class RWDMyOrder extends React.Component {
     super(props);
     this.state = {
       isReturnRequest:false,
-      returnOrderData: [],
-      returnOrderItemData: {},
+      returnOrderData: undefined,
+      returnOrderItemData: undefined,
+      returnOrderShipmentData:undefined,
       isTrackOrder: false,
       isServiceRequest:false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
@@ -51,7 +52,7 @@ class RWDMyOrder extends React.Component {
     this.modalRef=React.createRef();
     this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
     this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
-    this.renderReturnRequest = this.renderReturnRequest.bind(this);
+  
   }
 
   componentDidMount() {
@@ -73,11 +74,18 @@ class RWDMyOrder extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+   
     if(this.state.isServiceRequest)
     {
       this.setState({
         isServiceRequest:false,
         currentComponentData:this.state.currentCompleteData,
+      })
+    }
+    else if(this.state.isReturnRequest)
+    {
+      this.setState({
+        isReturnRequest:false
       })
     }
     else if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
@@ -130,10 +138,11 @@ class RWDMyOrder extends React.Component {
   }
 
   orderDetailCallback(data) {
+    alert("view more")
     this.props.updateTheRWDHeader('My Order Redirect');
     this.setState({
       currentComponent: 'ViewOrder',
-      currentComponentData: data
+      currentComponentData: data,
     })
   }
 
@@ -176,14 +185,6 @@ class RWDMyOrder extends React.Component {
     });
   }
 
-  renderReturnRequest(orderItemData,orderData)
-  {
-    // debugger;
-    this.setState({
-      returnOrderData: orderData,
-      returnOrderItemData:orderItemData
-    });
-  }
 
   onscroll = () => {
     const { state: { error, isLoading, hasMore }, } = this;
@@ -269,12 +270,28 @@ class RWDMyOrder extends React.Component {
     return loaderItem;
   }
 
-  showReturnRequestForm(productData,CompleteOrderData)
+  showReturnRequestForm(productData,CompleteOrderData,shipmentData)
   {
+    this.props.updateTheRWDHeader('show return')
     this.setState({
-      isReturnRequest:true
+      isReturnRequest:true,
+      returnOrderData: CompleteOrderData,
+      returnOrderItemData:productData,
+      returnOrderShipmentData:shipmentData,
     })
-    this.renderReturnRequest(productData,CompleteOrderData)
+    
+  }
+  showReturnRequestFormForSingle(shipmentData)
+  {
+    console.log("MultiORSH",shipmentData);
+    this.props.updateTheRWDHeader('show return')
+    this.setState({
+      isReturnRequest:true,
+      returnOrderData: this.state.currentCompleteData,
+      returnOrderItemData:this.state.currentComponentData,
+      returnOrderShipmentData:shipmentData,
+    })
+    
   }
 
   renderReturnRequestBack()
@@ -300,13 +317,14 @@ class RWDMyOrder extends React.Component {
     if(this.state.isReturnRequest)
     {return (
       <ReturnRequestForm 
-      onCancel = {this.renderReturnRequestBack} 
+        onCancel = {this.renderReturnRequestBack} 
        orderList={this.state.orderListData}  
       // dataPro={this.state.updatedTrackOrderData}  
         trackOrderDataPro={this.state.updatedTrackOrderData} 
         renderReturnRequestPro={this.renderReturnRequest}
         orderData={this.state.currentCompleteData} 
         orderItemData={this.state.returnOrderItemData}
+        orderShipmentData={this.state.returnOrderShipmentData}
         paymentMode="COD"/>
     )
     }
@@ -321,8 +339,9 @@ class RWDMyOrder extends React.Component {
             currentCompleteData={this.state.currentCompleteData}
             showServiceRequestForm={this.showServiceRequestForm}
             orderCompleteDataPro={this.state.currentCompleteData} 
-            onReturn = {this.showReturnRequestForm} />
-            
+            shipmentDataPro={this.state.currentComponentData.shipmentData?this.state.currentComponentData.shipmentData[0]:undefined}
+            isMultiTrackPro={true} 
+            onReturn = {this.showReturnRequestFormForSingle.bind(this)} />
             <CancelComponents ref={this.modalRef}/>
         </div>
       );

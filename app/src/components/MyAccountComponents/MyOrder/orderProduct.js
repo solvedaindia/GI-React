@@ -50,6 +50,7 @@ class ProductOrder extends React.Component {
     const productData = this.props.prodctDataPro;
     const showServiceRequestButton=productData.serviceRequestOrderLineFlag=='Y'
     const isServiceable=productData.isServiceable=='Y'
+    const showReturnButton=productData.showReturnButton=='Y'
     let btnCancelDisable=false;
     let showCancelMessage=false;
     let showCancelButton=false;
@@ -114,7 +115,7 @@ class ProductOrder extends React.Component {
 
           <div className="orderbtn">
             {/* <button className="btn-borderwhite btn-cancel">Cancel Order</button> // Not in Phase1 as Per BRD */}
-            {productData.shipmentData && productData.shipmentData.length > 0 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro)} >
+            {productData.shipmentData && productData.shipmentData.length > 0 ? <button className="btn-borderwhite" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro,this.props.allDataPro)} >
               {showServiceRequestButton?"View Item History" : "Track Item"}
             </button> : null}
 
@@ -122,9 +123,9 @@ class ProductOrder extends React.Component {
               Service Request
               </button> }
 
-            <button className="btn-borderwhite" onClick={evt => this.props.proceedToReturnRequest(this.props.prodctDataPro, this.props.allDataPro)}  >
+            {showReturnButton && <button className="btn-borderwhite cancel-item" onClick={evt => this.props.proceedToTrackOrderPro(this.props.prodctDataPro, this.props.allDataPro)}  >
               Return Item 
-            </button> 
+            </button>}
         
             {showCancelButton && <button 
                   className={btnCancelDisable?"btn-borderwhite cancel-item disabled":"btn-borderwhite cancel-item"} 

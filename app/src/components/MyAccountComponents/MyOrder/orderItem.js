@@ -24,8 +24,8 @@ class OrderItem extends React.Component {
     });
   }
 
-  proceedToTrackOrder(trackOrderData) {
-    this.props.renderSelectionPro(trackOrderData);
+  proceedToTrackOrder(trackOrderData,orderData) {
+    this.props.renderSelectionPro(trackOrderData,orderData);
   }
   proceedToServiceRequest(orderItemData,orderData)
   {
