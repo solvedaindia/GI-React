@@ -194,7 +194,22 @@ class AddAddressForm extends React.Component {
       return;
     }
 
-    this.addAddress();
+    if (this.props.isFromServiceRequest) {
+      this.props.onAddressChange({
+        name: this.state.inputText_name, 
+        phone_number: this.state.inputText_number,
+        email_id: this.state.inputText_email,
+        pincode: this.state.inputText_pincode,
+        address: this.state.inputText_address,
+        city: this.state.inputText_city,
+        state: this.state.inputText_state,
+        default: 'false',
+      })
+    }
+    else {
+      this.addAddress();
+    }
+    
   }
 
   handleInput(value) {
