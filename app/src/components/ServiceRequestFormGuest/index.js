@@ -22,7 +22,13 @@ class ServiceRequestFormGuest extends React.Component {
       serviceRequestReasons: [],
       characterCount: 50,
       characterLimit: 50,
-      selectedInvoice:"",
+      selectedInvoice: "",
+      selectedProductCategory: null,
+      selectedReason: [],
+      otherReason: null,
+      guestAddress: null,
+      isSaveBtnDisabled: true,
+      selectedImages:[],
     };
   }
 
@@ -35,8 +41,8 @@ class ServiceRequestFormGuest extends React.Component {
       .get(getDetailtForSerReq)
       .then(response => {
         this.setState({
-          productCategory:response.data.data.productCategory,
-          serviceRequestReasons:response.data.data.serviceReasonList,
+          productCategory: response.data.data.productCategory,
+          serviceRequestReasons: response.data.data.serviceReasonList,
         })
       })
       .catch(error => {
@@ -59,63 +65,78 @@ class ServiceRequestFormGuest extends React.Component {
 
   getProductCategorySelection(value) {
     console.log('on Dropdown --- ', value)
+    this.state.selectedProductCategory = value;
   }
 
   getServiceRequestReason(value) {
     console.log('on Service Request --- ', value)
+    this.setState({
+      selectedReason: value
+    })
+  }
+
+  onOtherReasonEnter(value) {
+    this.setState({
+      otherReason: value,
+    });
   }
 
   onImageAddRemove(value) {
-    // this.setState({
-    //   selectedImages: value,
-    // });
+    this.setState({
+      selectedImages: value,
+    });;
   }
 
-  onAddressChange(value) {
-    console.log('kdkdkd -- ',value.target.id, value.target.value);
+  onAddressChange(addressData) {
+    console.log('kdkdkd -- ', addressData);
+    this.state.guestAddress = addressData
   }
 
-  onSubmitForm()
-  { 
-    console.log("dddddd")
-      let invoice=this.state.selectedInvoice;
-      if(this.state.selectedInvoice=="Other" && this.state.inputInvoice.length==12)
-      {
-        invoice=this.state.inputInvoice;
-      }
-      let reason="";
-      this.state.serviceRequestReasons.map((data)=>{
-        if(reason=="")
-          reason=data
-        else
-          reason=reason+","+data
-      })
-      const param={
-        prodCategory:this.state.productCategory,
-        prodDesc:this.state.descriptionText,
-        partNumber:'',
-        addressId:'',
-        invoiceNo:invoice,
-        invoiceURL:"",
-        serviceRequestReason:reason,
-        otherReason:this.state.otherReason,
-        images:["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
-      }
+  onSubmitForm() {
 
-      apiManager
-      .post(saveServiceRequest,param)
+    this.refs.child.onSavebuttonClick();
+
+    let reason = "";
+    this.state.selectedReason.map((data) => {
+      if (reason == "")
+        reason = data
+      else
+        reason = reason + "," + data
+    })
+
+    const param = {
+      prodCategory: this.state.selectedProductCategory,
+      prodDesc: this.state.descriptionText,
+      partNumber: '',
+      invoiceNo: '',
+      invoiceURL: '',
+      serviceRequestReason: reason,
+      otherReason: this.state.otherReason,
+      images: ["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
+      addressId: this.state.guestAddress,
+    }
+
+    apiManager
+      .post(saveServiceRequest, param)
       .then(response => {
-        console.log("PostResponse",response);
-        alert("Service request submitted successfully")
-        this.props.renderServiceRequestPro();
+        console.log("PostResponse", response);
+        alert("Your service request has been submitted successfully. Our customer care agents will get intouch with you shortly.")
+        document.location.href="/";
       })
       .catch(error => {
-        console.log("PostResponseError",error);
+        console.log("PostResponseError", error);
       });
-      
+
   }
 
   render() {
+    
+    let isSaveBtnDisabled=true;
+    if(this.state.selectedProductCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+    {
+      isSaveBtnDisabled=false;
+    }
+
     return (
       <div className='container'>
         <div className='guest-service service-request'>
@@ -125,15 +146,15 @@ class ServiceRequestFormGuest extends React.Component {
           {this.renderTextField()}
           <p className='notification-title'>*Please note that the service may be chargeable, in case of non-Godrej product</p>
           <div className='guest-border-box'>
-            <div className='guest-address-form'>            
-              <AddAddressForm isFromServiceRequest={true} onAddressChange={this.onAddressChange.bind(this)}/>
+            <div className='guest-address-form'>
+              <AddAddressForm isFromServiceRequest={true} onAddressChange={this.onAddressChange.bind(this)} ref="child" />
             </div>
             <div className='invice-selection guest-type'><EnterInvoiceView /></div>
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className='actionBtnWrapper'>
               <button className='btn-cancel btn'>Cancel</button>
-              <button disabled={this.state.isSaveBtnDisabled} className='btn-save btn' onClick={this.onSubmitForm.bind(this)}>Submit</button>
+              <button disabled={isSaveBtnDisabled} className='btn-save btn' onClick={this.onSubmitForm.bind(this)}>Submit</button>
             </div>
             {this.state.showLogin ? <UserAccInfo fromWishlistPro resetCallbackPro={this.resetLoginValues.bind(this)} /> : null}
           </div>
@@ -161,8 +182,8 @@ class ServiceRequestFormGuest extends React.Component {
         <>
           <div className='request-service-msg'>
             <p className='text'>Go to ‘My Account’ > Orders and click on the ‘Request Service’ button against the product you wish to get serviced. <a className='guest-login-link' onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
-                {' Click here to log in and view your past orders'}
-              </a></p>
+              {' Click here to log in and view your past orders'}
+            </a></p>
             <p className='text'>If you have made a guest purchase online or at the store, please enter the form below to place a service request.</p>
           </div>
         </>
@@ -193,7 +214,11 @@ class ServiceRequestFormGuest extends React.Component {
     return (
       <div className='service-request-reasons'>
         <h4 className='heading'>Reason For Service Request</h4>
-        <Checkboxes data={this.state.serviceRequestReasons} title='Reason for Service Request' onSelection={this.getServiceRequestReason.bind(this)} />
+        <Checkboxes
+          data={this.state.serviceRequestReasons}
+          title='Reason for Service Request'
+          onSelection={this.getServiceRequestReason.bind(this)}
+          onOtherText={this.onOtherReasonEnter.bind(this)} />
       </div>
     )
   }
