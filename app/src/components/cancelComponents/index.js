@@ -19,6 +19,8 @@ class CancelComponents extends React.Component {
             text: '',
             reasons:[],
             error:false,
+            apiError:false,
+            apiErrorMessage:"",
             orderItem:undefined,
             orderData:undefined
         };
@@ -116,7 +118,11 @@ class CancelComponents extends React.Component {
             alert("Order cancelled successfully");
           })
           .catch(error => {
-        
+            this.setState({
+                apiError:true,
+                apiErrorMessage:error.message
+            });
+            s    
           });
       }
 
@@ -128,6 +134,8 @@ class CancelComponents extends React.Component {
             value:values,
             text:texts,
             error:false,
+            apiError:false,
+            apiErrorMessage:""
         })
     }
 
@@ -157,10 +165,12 @@ class CancelComponents extends React.Component {
                                 reasons={this.state.reasons}
                                 cancelOrderType={this.state.orderItem != undefined?'item':'order'}/>
                             {this.state.error && <p className='error-text'>{ERROR_MESSAGE_REASON}</p>}
+                            {this.state.apiError && <p className='error-text'>{this.state.apiErrorMessage}</p>}
                             {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
+                            {this.state.orderData.paymentMethod!=="COD" &&
                             <div className='paymet-type'>
-                            <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>
-                            </div>
+                                <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>
+                            </div>}
                             <div className='btn-wrapper'>
                                 <Button className="btn-cancel btn" onClick={this.handleClose}>{CANCEL}</Button>
                                 <Button className="btn-save btn" onClick={this.handleSubmit}>{SUBMIT}</Button>
