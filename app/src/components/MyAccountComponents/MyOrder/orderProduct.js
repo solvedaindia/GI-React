@@ -54,6 +54,8 @@ class ProductOrder extends React.Component {
     let btnCancelDisable=false;
     let showCancelMessage=false;
     let showCancelButton=false;
+    const showReturnMessage = productData.returnMssg;
+    // const showReturnMessage = "item not eligible for return";
     let cancelText="Cancel Item"
     if(productData.orderItemStatus && productData.orderItemStatus==='Cancelled')
     {
@@ -109,6 +111,11 @@ class ProductOrder extends React.Component {
               {/*Cance message condtion replaced by true */}
               {showCancelMessage && <div className='cancelation-text-info'>  
                   <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+              </div>}
+              
+              {/*return message condtion replaced by true */}
+              {showReturnMessage && <div className='cancelation-text-info'>  
+                  <span className="textval">{showReturnMessage}</span>
               </div>}
             </div>
           </div>

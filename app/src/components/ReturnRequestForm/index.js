@@ -24,7 +24,7 @@ class ReturnRequestForm extends React.Component {
       returnRequestReasons: [],
       selectedQuantity: "1",
       selectedReason: "",
-      isBankDetailsValid: (props.orderData.paymentMethod !== "COD" || props.orderData.paymentMethod==""),
+      isBankDetailsValid: ( props.orderData.paymentMethod !=='' ),
       selectedImages: [],
       otherReason: "",
       showTextview: false,
@@ -277,7 +277,7 @@ class ReturnRequestForm extends React.Component {
     console.log(this.props.orderList);
     const { isBankDetailsValid, selectedImages, selectedReason } = this.state;
     const isSaveDisabled =
-      !isBankDetailsValid || !selectedImages.length || !selectedReason.length;
+    !isBankDetailsValid || !selectedImages.length || !selectedReason.length   ;
 
     return (
       <div>

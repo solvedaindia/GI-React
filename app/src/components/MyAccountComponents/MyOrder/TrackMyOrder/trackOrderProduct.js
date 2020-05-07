@@ -51,7 +51,10 @@ class TrackOrderProduct extends React.Component {
 
   render() {
     const productData = this.props.prodctDataPro;
+    
     const returnButtonDisplay=this.props.shipmentDataPro.returnButtonDisplay=='Y';
+    const returnMessage = this.props.shipmentDataPro.returnMessage;
+    // const returnMessage = "return window valid through";
     return (
       <>
         <div className="clearfix" />
@@ -79,7 +82,12 @@ class TrackOrderProduct extends React.Component {
                 {this.state.dsDateTag !== null ? <span className="textval">{this.state.dsDateTag}</span> : null}
                 </div>
 
+
               </div>
+                {/*return message condtion replaced by true */}
+              {returnMessage && <div className='cancelation-text-info'>  
+                  <span className="textval">{returnMessage}</span>
+              </div>}
             </div>
           </div>
           <div className="orderbtn">

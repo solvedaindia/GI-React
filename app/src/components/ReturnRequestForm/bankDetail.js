@@ -63,16 +63,30 @@ class BankDetails extends React.Component {
   }
 
   bankDetailsToParent() {
-    this.props.onSubmit(this.state);
+        const {
+          Name,
+          AccountNumber,
+          AcoountNumberConfirm,
+          ifscCode,
+          ifscCodeValid
+        } = this.state;
+          if(Name !== '' && AccountNumber !== '' && AccountNumber === AcoountNumberConfirm  && ifscCode !== '' && ifscCodeValid === true) {
+            this.props.onSubmit(this.state);
+            this.props.handleInputValidation(true);
+          }
+
+           else this.props.handleInputValidation(false);
+    
   }
 
   isInputDataValid() {
-    const { Name, AccountNumber, AcoountNumberConfirm, ifscCode } = this.state;
+    const { Name, AccountNumber, AcoountNumberConfirm, ifscCode,ifscCodeValid } = this.state;
     if (
       Name !== "" &&
       AccountNumber !== "" &&
       AccountNumber === AcoountNumberConfirm &&
-      ifscCode !== ""
+      ifscCode !== ""&&
+      ifscCodeValid == true
     )
       return true;
 
@@ -80,17 +94,7 @@ class BankDetails extends React.Component {
   }
 
   validate() {
-    const {
-      Name,
-      AccountNumber,
-      AcoountNumberConfirm,
-      ifscCode,
-      ifscCodeValid
-    } = this.state;
     this.isIfscCodeStandard();
-    this.props.handleInputValidation(this.isInputDataValid());
-    if(Name !== '' && AccountNumber !== '' && AcoountNumberConfirm !== '' && ifscCode !== '' && ifscCodeValid === true)
-    this.props.onSubmit(this.state);
   }
 
   handleBankDetail(e) {
