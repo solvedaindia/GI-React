@@ -24,13 +24,13 @@ class ReturnRequestForm extends React.Component {
       returnRequestReasons: [],
       selectedQuantity: "1",
       selectedReason: "",
-      isBankDetailsValid: props.paymentMode !== "COD",
+      isBankDetailsValid: (props.orderData.paymentMethod !== "COD" || props.orderData.paymentMethod==""),
       selectedImages: [],
       otherReason: "",
       showTextview: false,
       characterCount: 100,
       characterLimit: 100,
-      fullPaymentMode: props.paymentMode,
+      fullPaymentMode: props.orderData.paymentMethod==""?"COD":props.orderData.paymentMethod,
       bankInfo: {}
     };
     this.onOtherReasonEnter = this.onOtherReasonEnter.bind(this);
@@ -45,6 +45,9 @@ class ReturnRequestForm extends React.Component {
   componentDidMount() {
     //this.returnOrderShipmentAPI();
     this.fetchReasonArray();
+    console.log("return_datas",this.props.orderShipmentData)
+    console.log("return_dataoi",this.props.orderItemData)
+    console.log("return_dataod",this.props.orderData)
   }
 
   fetchReasonArray()
@@ -157,6 +160,8 @@ class ReturnRequestForm extends React.Component {
       .post(returnOrderShipment, data)
       .then(response => {
         console.log(response);
+        alert("Return request submitted successfully!");
+        isMobile() ? this.props.onCancel() : this.props.renderReturnRequestPro()
       })
       .catch(error => {});
   }
@@ -175,7 +180,7 @@ class ReturnRequestForm extends React.Component {
 
   getBankDetails(value) {
     // debugger;
-    alert("aaaa");
+    console.log("bankinfo",value);
     this.setState({
       bankInfo: value
     });
