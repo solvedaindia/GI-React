@@ -767,7 +767,7 @@ function getServiceRequestDetails(req, callback) {
     addressList: [],
     productCategory: [],
     serviceReasonList: [],
-    invoiceList: [],
+    // invoiceList: [],
   };
 
   const serviceRequestPageDetails = [
@@ -790,7 +790,7 @@ function getServiceRequestDetails(req, callback) {
         req.query.partnumber,
         reqHeader,
       ),
-      OMSOrderDetails.bind(null, reqHeader, req.query.orderid),
+      // OMSOrderDetails.bind(null, reqHeader, req.query.orderid),
     );
   }
 
@@ -803,7 +803,7 @@ function getServiceRequestDetails(req, callback) {
       resJSON.addressList = result[2] && result[2].addressList;
       resJSON.productDetail =
         result[3] && productDetailFilter.productDetailSummary(result[3]);
-      resJSON.invoiceList = result[4] && result[4].result.order.invoices;
+      // resJSON.invoiceList = result[4] && result[4].result.order.invoices;
       callback(null, resJSON);
     }
   });
