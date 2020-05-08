@@ -56,7 +56,7 @@ class BankDetails extends React.Component {
       this.setState({ ifscCodeValid: true },this.bankDetailsToParent);
       return true;
     } else {
-      this.setState({ ifscCodeValid: false });
+      this.setState({ ifscCodeValid: false },this.bankDetailsToParent);
       // document.getElementById("ifsc").focus();
       return false;
     }
@@ -75,7 +75,13 @@ class BankDetails extends React.Component {
             this.props.handleInputValidation(true);
           }
 
-           else this.props.handleInputValidation(false);
+           else {
+
+            console.log("not valid ");
+            this.props.onSubmit({});
+            this.props.handleInputValidation(false);
+             
+          }
     
   }
 

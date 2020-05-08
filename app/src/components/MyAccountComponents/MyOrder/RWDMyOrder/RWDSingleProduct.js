@@ -44,13 +44,19 @@ class RWDSingleProduct extends React.Component {
   }
 
   render() {
+    console.log(shipmentDataPro);
     const productData = this.props.orderDataPro;
+    const shipmentDataPro = this.props.shipmentDataPro;
     const showServiceRequestButton = productData.serviceRequestOrderLineFlag == 'Y'
     const isServiceable = productData.isServiceable == 'Y'
     const showReturnButton=productData.showReturnButton=='Y'
     let btnCancelDisable = false;
     let showCancelMessage = false;
+    let showReturnMessage = false;
+    let showReturnMessageS = false;
     let showCancelButton = false;
+    let returnText = null;
+    let returnTextS = null;
     let cancelText = "Cancel Item"
     if (productData.orderItemStatus && productData.orderItemStatus === 'Cancelled') {
       btnCancelDisable = true;
@@ -67,6 +73,14 @@ class RWDSingleProduct extends React.Component {
       showCancelButton = true;
       cancelText = "Cancel Item"
       showCancelMessage = false;
+    }
+    else if(productData.returnMssg !== null) {
+      showReturnMessage = true;
+      returnText = productData.returnMssg;
+    }
+    else if(shipmentDataPro && shipmentDataPro.returnMessage !== null) {
+      showReturnMessageS = true;
+      returnTextS = shipmentDataPro.returnMessage;
     }
     else {
       btnCancelDisable = true;
@@ -93,6 +107,14 @@ class RWDSingleProduct extends React.Component {
             {/*Cance message condtion replaced by true */}
             {showCancelMessage && <div className='cancelation-text-info'>
               <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+            </div>}
+            {/*Return message condtion replaced by true for orderline */}
+            {(this.props.isFromViewOrder && returnText) && <div className='cancelation-text-info'>
+              <span className="textval">{returnText}</span>
+            </div>}
+            {/*Return message condtion replaced by true for shipmentline */}
+            {(this.props.isMultiTrackPro && returnTextS) && <div className='cancelation-text-info'>
+              <span className="textval">{returnTextS}</span>
             </div>}
           </div>
         </div>
