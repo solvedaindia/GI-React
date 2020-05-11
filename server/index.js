@@ -2,6 +2,54 @@
 
 const express = require('express');
 const logger = require('./logger');
+var multer  = require('multer')
+var fs = require('fs');
+
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const { id } = req.body
+    const dir = `./upload/${id}`
+    fs.exists(dir, exist => {
+      if (!exist) {
+        return fs.mkdir(dir, error => cb(error, dir))
+      }
+      return cb(null, dir)
+      })
+   // cb(null, './public/upload');
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    var filetype = '';
+    var filePrefix='file-'
+    if(file.mimetype === 'image/gif') {
+      filetype = 'gif';
+      filePrefix='image-';
+    }
+    if(file.mimetype === 'image/png') {
+      filetype = 'png';
+      filePrefix='image-';
+    }
+    if(file.mimetype === 'image/jpeg') {
+      filetype = 'jpg';
+      filePrefix='image-';
+    }
+    if(file.mimetype === 'image/jpeg') {
+      filetype = 'jpg';
+      filePrefix='image-';
+    }
+    if(file.mimetype==='application/pdf')
+    {
+      filetype="pdf"
+      filePrefix='doc-';
+    }
+    cb(null, filePrefix + Date.now() + '.' + filetype);
+  }
+});
+var upload = multer({storage: storage});
+
+
+
 
 const argv = require('./argv');
 const port = require('./port');
@@ -38,7 +86,18 @@ app.get('*.js', (req, res, next) => {
   res.set('Content-Encoding', 'gzip');
   next();
 });
-
+app.post('/imageupload',upload.single('file'), (req, res, next) => {
+  // req.url = req.url + '.gz'; // eslint-disable-line
+   //res.set('Content-Encoding', 'gzip');
+   //next();
+   console.log(req.file);
+   if(!req.file || req.body.id ===undefined) {
+    res.status(500);
+    return res.json({ message:'param missing'  });
+  }
+   //res.send(req.body);
+   res.json({ fileUrl: './upload/' + req.file.filename });
+ });
 // Start your app.
 app.listen(port, host, async err => {
   if (err) {
