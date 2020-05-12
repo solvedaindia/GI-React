@@ -4,12 +4,11 @@ const express = require('express');
 const logger = require('./logger');
 var multer  = require('multer')
 var fs = require('fs');
-
+var path = require('path')
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const { id } = req.body
-    const dir = `./upload/${id}`
+    const dir = `./upload/${getTodayDate()}`
     fs.exists(dir, exist => {
       if (!exist) {
         return fs.mkdir(dir, error => cb(error, dir))
@@ -19,36 +18,36 @@ var storage = multer.diskStorage({
    // cb(null, './public/upload');
   },
   filename: (req, file, cb) => {
-    console.log(file);
-    var filetype = '';
-    var filePrefix='file-'
-    if(file.mimetype === 'image/gif') {
-      filetype = 'gif';
-      filePrefix='image-';
-    }
-    if(file.mimetype === 'image/png') {
-      filetype = 'png';
-      filePrefix='image-';
-    }
-    if(file.mimetype === 'image/jpeg') {
-      filetype = 'jpg';
-      filePrefix='image-';
-    }
-    if(file.mimetype === 'image/jpeg') {
-      filetype = 'jpg';
-      filePrefix='image-';
-    }
-    if(file.mimetype==='application/pdf')
-    {
-      filetype="pdf"
-      filePrefix='doc-';
-    }
-    cb(null, filePrefix + Date.now() + '.' + filetype);
+    console.log("originalname",getTodayDate());
+    var filename=path.basename(file.originalname,path.extname(file.originalname));
+    var extn =path.extname(file.originalname);
+    var userid=req.body.userid;
+    var type=req.body.type;
+
+    var uFile=type+'-'+userid+'-'+filename+'-'+Date.now()+extn;
+    console.log("newFileName",uFile);
+    cb(null, uFile);
   }
 });
-var upload = multer({storage: storage});
+var upload = multer({storage: storage});  
 
 
+function getTodayDate(flag)
+{
+  var today = new Date(); 
+  var dd = today.getDate(); 
+  var mm = today.getMonth() + 1; 
+
+  var yyyy = today.getFullYear(); 
+  if (dd < 10) { 
+      dd = '0' + dd; 
+  } 
+  if (mm < 10) { 
+      mm = '0' + mm; 
+  } 
+  var today = yyyy + '' + mm + '' + dd;
+  return today 
+}
 
 
 const argv = require('./argv');
@@ -62,6 +61,7 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
+
 if(process.env.WCSENDPOINT==='PRDLV'){
   app.use(require('prerender-node').set('protocol', 'https').set('host', 'www.godrejinterio.com').set('prerenderToken', prerenderToken))
 }
@@ -87,17 +87,40 @@ app.get('*.js', (req, res, next) => {
   next();
 });
 app.post('/imageupload',upload.single('file'), (req, res, next) => {
-  // req.url = req.url + '.gz'; // eslint-disable-line
-   //res.set('Content-Encoding', 'gzip');
-   //next();
-   console.log(req.file);
-   if(!req.file || req.body.id ===undefined) {
+
+    console.log("request",req.file);
+    if(!req.file || req.body.userid ===undefined || req.body.type ===undefined) {
+      res.status(500);
+      return res.json({ message:'param missing'  });
+    }
+    res.json({ status:true,fileUrl: req.file.destination+'/'+req.file.filename });
+});
+
+app.post('/imagedelete',upload.single('file'),(req, res, next)=>{
+
+  console.log("req",req.body);
+  if(req.body=== undefined || req.body.nameFile=== undefined )
+  {
     res.status(500);
-    return res.json({ message:'param missing'  });
+    return res.json({ message:'param missing'});
   }
-   //res.send(req.body);
-   res.json({ fileUrl: './upload/' + req.file.filename });
- });
+  var extn=path.extname(req.body.nameFile);
+  if(extn===undefined || extn==='')
+  {
+    res.status(500);
+    return res.json({ message:'invalid param'});
+  }
+  try {
+    fs.unlinkSync(req.body.nameFile)
+    res.json({ status:true,message:"file deleted"  });
+  } catch(err) {
+    console.log("error",err);
+    res.status(500);
+    res.json({ message:"file not deleted",error:JSON.stringify(err)  });
+  }
+  
+});
+
 // Start your app.
 app.listen(port, host, async err => {
   if (err) {
