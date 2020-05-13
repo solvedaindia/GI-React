@@ -16,10 +16,12 @@ class ServiceRequestForm extends React.Component {
 
   constructor(props) {
     super(props);
+    const invoice=props.orderData.invoices?props.orderData.invoices:[];
+        invoice.push("Other")
     this.state = {
       categorySelectionData: [],
       selectedCategory:"",
-      invoiceSelectionData: [],
+      invoiceSelectionData: invoice,
       selectedInvoice:"",
       inputInvoice:"",
       serviceRequestReasons: [],
@@ -62,7 +64,7 @@ class ServiceRequestForm extends React.Component {
           addressData: response.data.data.addressList,
           categorySelectionData:response.data.data.productCategory,
           serviceRequestReasons:response.data.data.serviceReasonList,
-          invoiceSelectionData:response.data.data.invoiceList,
+      //    invoiceSelectionData:response.data.data.invoiceList,
           selectedAddress:address,
         })
       })
