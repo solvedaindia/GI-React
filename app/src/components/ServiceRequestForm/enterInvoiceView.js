@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../Primitives/input';
 import {regexInvoice} from '../../utils/validationManager';
+import { getCookie } from '../../utils/utilityManager';
 
 class EnterInvoiceView extends React.Component {
 
@@ -10,11 +11,19 @@ class EnterInvoiceView extends React.Component {
       error: false,
       errorMessage:"",
       invoiceNumber:"",
+      upload:'',
       isUploadBtnDisabled:true,
     };
     this.handleInput=this.handleInput.bind(this)
+    this.onSubmit=this.onSubmit.bind(this)
   }
 
+  onSubmit()
+  {
+    this.setState({
+      upload:'',
+    });
+  }
   onSelection = (value,index) => {
     
   }
@@ -53,13 +62,89 @@ class EnterInvoiceView extends React.Component {
         return;
     }
     //upload file task
-    this.props.onInvoiceFile(event.target.files[0])
+   // this.props.onInvoiceFile(event.target.files[0])
+   this.onRemoveImage()
+   this.uploadImageToSerer(event.target.files[0])
+  }
+
+  uploadImageToSerer(file)
+  {
+    var myHeaders = new Headers();
+    myHeaders.append("public_key", "somekey");
+    var formdata = new FormData();
+    formdata.append("userid", getCookie("userID"));
+    formdata.append("typeid", this.props.type);
+    formdata.append("file", file, file.name);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+    fetch("/imageupload", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        const res=JSON.parse(result)
+        const imageUrl=res.fileUrl;
+        this.setState({
+          upload:imageUrl,
+        })
+        this.props.onInvoiceFile(imageUrl)
+      })
+      .catch(error => {
+        console.log("fileupload_Error", error)
+        updateArray("error",index)
+      });
   }
 
   onUploadInvoice=()=>{
    
-   const uploadInvoice = document.getElementById("uploadInvoice");
+    const uploadInvoice = document.getElementById("uploadInvoice");
     uploadInvoice.click();
+  }
+  onRemoveImage()
+  {
+    console.log("this.state.upload",this.state.upload)
+    if(this.state.upload==='')
+    {
+        return;
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("public_key", "some_key");
+
+    var formdata = new FormData();
+    formdata.append("nameFile", this.state.upload);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+  fetch("/imagedelete", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result)
+      if(flag===undefined)
+      {
+        this.updateArrayAfterRemove(index)
+      }
+      
+    })
+    .catch(error => console.log('error', error));
+
+  
+  }
+
+  componentWillUnmount()
+  {
+    // console.log("this.props.submitted",this.props.submitted);
+    // if(this.props.submitted===true)
+    // {
+    //   return;
+    // }
+    // this.onRemoveImage();
   }
 
   render() {

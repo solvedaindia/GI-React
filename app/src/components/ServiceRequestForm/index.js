@@ -31,12 +31,15 @@ class ServiceRequestForm extends React.Component {
       addressData: null,
       isAddAddress:false,
       showEnterInvoice:false,
-      invoiceFile:null,
+      invoiceFile:"",
       showInvoiceDisclaimer:true,
       isSaveBtnDisabled:true,
       selectedImages:[],
       otherReason:"",
+      submitted:false,
     };
+    //this.invoiceView=React.createRef();
+    //this.imagesView=React.createRef();
   }
 
   componentDidMount() {
@@ -52,8 +55,7 @@ class ServiceRequestForm extends React.Component {
       .get(getDetailtForSerReq+this.props.orderItemData.partNumber+'&orderid='+this.props.orderData.orderID)
       .then(response => {
        // console.log(dataPro,response.data)
-        const invoice=response.data.data.invoiceList;
-        invoice.push("Other")
+        
         let address=null;
         if(response.data.data.addressList && response.data.data.addressList.length>0)
         {
@@ -115,13 +117,14 @@ class ServiceRequestForm extends React.Component {
       this.setState({
         showEnterInvoice: true,
         showInvoiceDisclaimer:flag,
-        selectedInvoice:"",
+        selectedInvoice:"Other",
       });
     }
     else{
       this.setState({
         showEnterInvoice: false,
         inputInvoice:"",
+        invoiceFile:"",
         showInvoiceDisclaimer:flag,
         selectedInvoice:value,
       });
@@ -170,6 +173,7 @@ class ServiceRequestForm extends React.Component {
 
   onImageAddRemove(value)
   {
+    console.log("SELECTEDIMAGE",value)
     this.setState({
       selectedImages: value,
     });
@@ -177,6 +181,7 @@ class ServiceRequestForm extends React.Component {
 
   onSubmitForm()
   { 
+      console.log("this.state.selectedInvoice",this.state.selectedInvoice,invoice=this.state.inputInvoice)
       let invoice=this.state.selectedInvoice;
       if(this.state.selectedInvoice=="Other" && this.state.inputInvoice.length==12)
       {
@@ -204,10 +209,10 @@ class ServiceRequestForm extends React.Component {
         addressId:this.state.selectedAddress.addressID,
         addressData:address,
         invoiceNo:invoice,
-        invoiceURL:"",
+        invoiceURL:this.state.invoiceFile,
         serviceRequestReason:reason,
         otherReason:this.state.otherReason,
-        images:["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
+        images:this.state.selectedImages,
       }
 
       apiManager
@@ -219,10 +224,20 @@ class ServiceRequestForm extends React.Component {
       })
       .catch(error => {
         console.log("PostResponseError",error);
+      //  alert("Error Service request submitted successfully")
+       // this.props.renderServiceRequestPro();
       });
       
   }
 
+  onCancelPress()
+  {
+      this.setState({
+        submitted:true,
+      })
+      alert("aaaaaaa");
+     this.props.renderServiceRequestPro();
+  }
 
   render() 
   {
@@ -234,7 +249,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className="trackMyOrder service-request">
         <div className="bottomDivider">
-          <button className="backBtn" onClick={this.props.renderServiceRequestPro} >{`< Back`}</button>
+          <button className="backBtn" onClick={this.onCancelPress.bind(this)} >{`< Back`}</button>
         </div>
         <div className="ongoingOrder">{SERVICE_REQUEST}</div>
         {this.renderProductDetails()}
@@ -246,7 +261,7 @@ class ServiceRequestForm extends React.Component {
         {this.renderAddAddress()}
 
         <div className='actionBtnWrapper'>
-            <button  className='btn-cancel btn' onClick={this.props.renderServiceRequestPro} >Cancel</button>
+            <button  className='btn-cancel btn' onClick={this.onCancelPress.bind(this)} >Cancel</button>
             <button  disabled={isSaveBtnDisabled} className='btn-save btn' onClick={this.onSubmitForm.bind(this)}>Submit</button>
           </div>
 
@@ -291,7 +306,7 @@ class ServiceRequestForm extends React.Component {
     return (
       <div className='add-img'>
         <h4 className='heading'>Add Image</h4>
-        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)}/>
+        <UploadImage submitted={this.state.submitted} type={"ser"} onImageAddRemove={this.onImageAddRemove.bind(this)}/>
       </div>
     )
   }
@@ -314,7 +329,7 @@ class ServiceRequestForm extends React.Component {
         {
         this.state.showEnterInvoice &&
         (
-          <EnterInvoiceView  onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)} onInvoiceFile={this.onInvoiceFileSelection.bind(this)}/>
+          <EnterInvoiceView submitted={this.state.submitted} type={"ser"} onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)} onInvoiceFile={this.onInvoiceFileSelection.bind(this)}/>
         )       
 
         }

@@ -8,7 +8,7 @@ var path = require('path')
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = `./upload/${getTodayDate()}`
+      const dir = `./upload/${getTodayDate()}`
     fs.exists(dir, exist => {
       if (!exist) {
         return fs.mkdir(dir, error => cb(error, dir))
@@ -18,13 +18,14 @@ var storage = multer.diskStorage({
    // cb(null, './public/upload');
   },
   filename: (req, file, cb) => {
-    console.log("originalname",getTodayDate());
+    //console.log("originalname",getTodayDate());
+    console.log("requestFile",req.body);
     var filename=path.basename(file.originalname,path.extname(file.originalname));
     var extn =path.extname(file.originalname);
     var userid=req.body.userid;
-    var type=req.body.type;
+    var typeid=req.body.typeid;
 
-    var uFile=type+'-'+userid+'-'+filename+'-'+Date.now()+extn;
+    var uFile=typeid+'-'+userid+'-'+filename+'-'+Date.now()+extn;
     console.log("newFileName",uFile);
     cb(null, uFile);
   }
@@ -88,8 +89,8 @@ app.get('*.js', (req, res, next) => {
 });
 app.post('/imageupload',upload.single('file'), (req, res, next) => {
 
-    console.log("request",req.file);
-    if(!req.file || req.body.userid ===undefined || req.body.type ===undefined) {
+    console.log("request",req.body);
+    if(!req.file || req.body.userid ===undefined || req.body.typeid ===undefined) {
       res.status(500);
       return res.json({ message:'param missing'  });
     }
