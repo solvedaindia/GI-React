@@ -316,7 +316,7 @@ class ReturnRequestForm extends React.Component {
     return (
       <div className="add-img">
         <h4 className="heading">Add Image</h4>
-        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)} />
+        <UploadImage type={"ser"}  onImageAddRemove={this.onImageAddRemove.bind(this)} />
       </div>
     );
   }

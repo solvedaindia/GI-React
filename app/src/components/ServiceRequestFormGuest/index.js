@@ -29,6 +29,8 @@ class ServiceRequestFormGuest extends React.Component {
       guestAddress: null,
       isSaveBtnDisabled: true,
       selectedImages:[],
+      invoiceFile:"",
+      showInvoiceDisclaimer:true,
     };
   }
 
@@ -48,6 +50,20 @@ class ServiceRequestFormGuest extends React.Component {
       .catch(error => {
       });
 
+  }
+
+  onEnterInvoiceTextChanged(value)
+  {
+    this.setState({
+      showInvoiceDisclaimer: value.length==0,
+      selectedInvoice:value,
+    });
+  }
+  onInvoiceFileSelection(value)
+  {
+    this.setState({
+      invoiceFile: value,
+    });
   }
 
   resetLoginValues() {
@@ -108,11 +124,11 @@ class ServiceRequestFormGuest extends React.Component {
       prodCategory: this.state.selectedProductCategory,
       prodDesc: this.state.descriptionText,
       partNumber: '',
-      invoiceNo: '',
-      invoiceURL: '',
+      invoiceNo: this.state.selectedInvoice,
+      invoiceURL: this.state.invoiceFile,
       serviceRequestReason: reason,
       otherReason: this.state.otherReason,
-      images: ["https://www.godrejinterio.com/imagestore/B2C/60124513SD00046/60124513SD00046_01_500x500.png"],
+      images: this.state.selectedImages,
       addressId: this.state.guestAddress,
     }
 
@@ -149,7 +165,9 @@ class ServiceRequestFormGuest extends React.Component {
             <div className='guest-address-form'>
               <AddAddressForm isFromServiceRequest={true} onAddressChange={this.onAddressChange.bind(this)} ref="child" />
             </div>
-            <div className='invice-selection guest-type'><EnterInvoiceView /></div>
+            <div className='invice-selection guest-type'>
+              <EnterInvoiceView type={"ser"} onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)} onInvoiceFile={this.onInvoiceFileSelection.bind(this)}/>
+            s</div>
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className='actionBtnWrapper'>
@@ -227,7 +245,7 @@ class ServiceRequestFormGuest extends React.Component {
     return (
       <div className='add-img'>
         <h4 className='heading'>Add Image</h4>
-        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)} />
+        <UploadImage type={"ser"} onImageAddRemove={this.onImageAddRemove.bind(this)} />
       </div>
 
     )
