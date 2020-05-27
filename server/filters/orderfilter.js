@@ -154,3 +154,27 @@ const dayNames = [
   'Friday',
   'Saturday',
 ];
+
+module.exports.getServiceRequestMeta = getServiceRequestMeta;
+function getServiceRequestMeta(serviceMeta) {
+  const serviceMetaData = {
+    technicianAssignedDate : getFormattedDate(serviceMeta.technicianAssignedDate),
+    serviceRequestTrackButtonText: serviceMeta.serviceRequestTrackButtonText,
+    serviceBookedDate : getFormattedDate(serviceMeta.serviceBookedDate),
+    serviceRequestId : serviceMeta.serviceRequestId,
+    serviceRequestItemId : serviceMeta.serviceRequestItemId,
+    orderId: serviceMeta.orderId,
+    technicianName: serviceMeta.technicianName,
+    displayTechnicianAssignedText: serviceMeta.displayTechnicianAssignedText,
+    displayTechnicianDetails: serviceMeta.displayTechnicianDetails,
+    serviceRequestCreatedDate : getFormattedDate(serviceMeta.serviceRequestCreatedDate),
+    serviceRequestStatus: serviceMeta.serviceRequestStatus,
+    servicedDate: getFormattedDate(serviceMeta.servicedDate),
+    serviceRequestTrackButtonEnable: serviceMeta.serviceRequestTrackButtonEnable,
+    serviceRequestDisplaySequence: serviceMeta.serviceRequestDisplaySequence,
+    serviceInProgressDate: getFormattedDate(serviceMeta.serviceInProgressDate),
+    serviceOrderId: serviceMeta.serviceOrderId,
+    statusCode: serviceMeta.statusCode,
+  }
+  return serviceMetaData;
+}

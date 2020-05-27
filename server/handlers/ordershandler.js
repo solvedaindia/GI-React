@@ -923,11 +923,11 @@ function returnOrder(req, callback) {
     orderReturnBody.BIFSCCode = req.body.bankDetails.IFSCCode;
   }
 
-  // if (req.body.images && req.body.images.length > 0) {
-  //   req.body.images.forEach((image, index) => {
-  //     orderReturnBody[`img${index + 1}`] = image;
-  //   });
-  // }
+  if (req.body.images && req.body.images.length > 0) {
+    req.body.images.forEach((image, index) => {
+      orderReturnBody[`img${index + 1}`] = image;
+    });
+  }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
   const returnOrderURL = constants.returnOrder.replace(
     '{{storeId}}',
@@ -1028,4 +1028,95 @@ function createRequest(headers,serviceRequestBody,callback){
       }
     },
   );
+}
+
+/**
+ * Fetch Service List Data
+ * @param headers
+ * @return 200,Success
+ * @throws contexterror,badreqerror if storeid or access_token is invalid
+ */
+module.exports.getServiceList = getServiceList;
+function getServiceList(headers, callback) {
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const serviceListURL = constants.serviceList.replace(
+    '{{storeId}}',
+    headers.storeId,
+  );
+  origin.getResponse(
+    'GET',
+    serviceListURL,
+    reqHeaders,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        const resJSON = {
+          serviceListData : [],
+        };
+        if(response.body.serviceRequestList && response.body.serviceRequestList.length>0){
+          async.map(
+            response.body.serviceRequestList,
+            (serviceDetails, cb) => {
+              const serviceDetailTask = [
+                getServiceRequestDetail.bind(null, headers, serviceDetails.serviceRequestId),
+                productUtil.productDetailByPartNumber.bind(null, serviceDetails.productId, headers),
+              ];
+              async.parallel(serviceDetailTask, (err, result) => {
+                if (err) {
+                  cb(err);
+                } else {
+                  let productDetails = Object.keys(result[1]).length ? productDetailFilter.productDetailSummary(result[1]) : {};
+                  serviceDetails.thumbnail = productDetails.thumbnail || '';
+                  serviceDetails.shortDescription = productDetails.shortDescription || '';
+                  serviceDetails.serviceRequestMetaData = result[0];
+                  cb(null, serviceDetails);
+                }
+              });
+            },
+            (errors, results) => {
+              if (errors) {
+                callback(errors);
+                return;
+              }
+              resJSON.serviceListData = results;
+              callback(null, resJSON);
+            },
+          );
+        } else {
+          callback(null, resJSON);
+        }
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    },
+  );
+}
+
+function getServiceRequestDetail(headers,serviceID,callback){
+  const reqHeaders = headerutil.getWCSHeaders(headers);
+  const serviceDetails = constants.serviceDetails
+  .replace('{{storeId}}',headers.storeId)
+  .replace('{{serviceID}}',serviceID);
+  origin.getResponse(
+    'GET',
+    serviceDetails,
+    reqHeaders,
+    null,
+    null,
+    null,
+    '',
+    response => {
+      if (response.status === 200) {
+        let resJson = {};
+        if(response.body.result && response.body.result.serviceRequest){
+          resJson =  orderFilter.getServiceRequestMeta(response.body.result.serviceRequest);
+        }
+        callback(null,resJson);
+      } else {
+        callback(errorutils.handleWCSError(response));
+      }
+    });
 }

@@ -83,4 +83,6 @@ module.exports = Object.freeze({
   returnOrder: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/return/submit`,
   createServiceRequest: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/service/submit`,
   paymentMethods :  `${prodWcsResourceUrl}/{{storeId}}/cart/@self/usable_payment_info`,
+  serviceList: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/service/details`,
+  serviceDetails: `${prodWcsResourceUrl}/{{storeId}}/GIOrder/findServiceById/{{serviceID}}`,
 });

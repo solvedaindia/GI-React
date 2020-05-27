@@ -122,4 +122,17 @@ router.post('/servicerequest', (req, res, next) => {
   });
 });
 
+router.get('/servicelist', (req, res, next) => {
+  ordersHandler.getServiceList(req.headers, (err, result) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).send({
+      status: 'success',
+      data: result,
+    });
+  });
+});
+
 module.exports = router;
