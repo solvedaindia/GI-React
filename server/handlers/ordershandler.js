@@ -834,6 +834,7 @@ function cancelOrder(req, callback) {
     orderCancelBody.partNumber = req.body.partnumber;
     delete orderCancelBody.cancelReasonOrd;
     orderCancelBody.cancelReasonOrdI = req.body.cancelreason;
+    orderCancelBody.orderItemId = req.body.primeLineNo;
   }
   const reqHeaders = headerutil.getWCSHeaders(req.headers);
   const cancelOrderURL = constants.orderCancel.replace(
