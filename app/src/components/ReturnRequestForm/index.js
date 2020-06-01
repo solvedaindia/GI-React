@@ -140,10 +140,7 @@ class ReturnRequestForm extends React.Component {
           "confirmAccountNO": bankInfo.AcoountNumberConfirm,
           "IFSCCode": bankInfo.ifscCode
          },
-        "images":[
-            imageEndpoint1,
-            imageEndpoint2
-        ],
+        "images":selectedImages,
         "invoiceNo": this.props.orderShipmentData && this.props.orderShipmentData.invoiceNo,
         "shipNode": this.props.orderShipmentData && this.props.orderShipmentData.shipNode,
         "primeLineNo": primeLineNo,
