@@ -1072,6 +1072,9 @@ function getServiceList(headers, callback) {
                   let productDetails = Object.keys(result[1]).length ? productDetailFilter.productDetailSummary(result[1]) : {};
                   serviceDetails.thumbnail = productDetails.thumbnail || '';
                   serviceDetails.shortDescription = productDetails.shortDescription || '';
+                  delete serviceDetails.serviceRequestId;
+                  delete serviceDetails.productCategory;
+                  delete serviceDetails.addressId;
                   serviceDetails.serviceRequestMetaData = result[0];
                   cb(null, serviceDetails);
                 }

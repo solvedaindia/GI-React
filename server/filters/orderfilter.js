@@ -162,7 +162,7 @@ function getServiceRequestMeta(serviceMeta) {
     serviceRequestTrackButtonText: serviceMeta.serviceRequestTrackButtonText,
     serviceBookedDate : getFormattedDate(serviceMeta.serviceBookedDate),
     serviceRequestId : serviceMeta.serviceRequestId,
-    serviceRequestItemId : serviceMeta.serviceRequestItemId,
+    // serviceRequestItemId : serviceMeta.serviceRequestItemId,
     orderId: serviceMeta.orderId,
     technicianName: serviceMeta.technicianName,
     displayTechnicianAssignedText: serviceMeta.displayTechnicianAssignedText,
@@ -174,7 +174,7 @@ function getServiceRequestMeta(serviceMeta) {
     serviceRequestDisplaySequence: serviceMeta.serviceRequestDisplaySequence,
     serviceInProgressDate: getFormattedDate(serviceMeta.serviceInProgressDate),
     serviceOrderId: serviceMeta.serviceOrderId,
-    statusCode: serviceMeta.statusCode,
+    // statusCode: serviceMeta.statusCode,
   }
   return serviceMetaData;
 }
