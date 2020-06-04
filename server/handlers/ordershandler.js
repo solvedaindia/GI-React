@@ -783,7 +783,7 @@ function getServiceRequestDetails(req, callback) {
     ),
     userHandler.getUserAddress.bind(null, reqHeader),
   ];
-  if (req.query.partnumber && req.query.orderid) {
+  if (req.query.partnumber) {
     serviceRequestPageDetails.push(
       productUtil.productDetailByPartNumber.bind(
         null,
@@ -1063,15 +1063,21 @@ function getServiceList(headers, callback) {
             (serviceDetails, cb) => {
               const serviceDetailTask = [
                 getServiceRequestDetail.bind(null, headers, serviceDetails.serviceRequestId),
-                productUtil.productDetailByPartNumber.bind(null, serviceDetails.productId, headers),
               ];
+              if(serviceDetails.productId){
+                serviceDetailTask.push(productUtil.productDetailByPartNumber.bind(null, serviceDetails.productId, headers));
+              }
               async.parallel(serviceDetailTask, (err, result) => {
                 if (err) {
                   cb(err);
                 } else {
-                  let productDetails = Object.keys(result[1]).length ? productDetailFilter.productDetailSummary(result[1]) : {};
-                  serviceDetails.thumbnail = productDetails.thumbnail || '';
-                  serviceDetails.shortDescription = productDetails.shortDescription || '';
+                  serviceDetails.thumbnail = '';
+                  serviceDetails.shortDescription = '';
+                  if(result[1]) {
+                    let productDetails = Object.keys(result[1]).length ? productDetailFilter.productDetailSummary(result[1]) : {};
+                    serviceDetails.thumbnail = productDetails.thumbnail || '';
+                    serviceDetails.shortDescription = productDetails.shortDescription || '';
+                  }
                   delete serviceDetails.serviceRequestId;
                   delete serviceDetails.productCategory;
                   delete serviceDetails.addressId;
