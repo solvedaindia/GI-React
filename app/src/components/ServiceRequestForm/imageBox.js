@@ -1,5 +1,6 @@
 import React from 'react';
 import { Right } from 'react-bootstrap/lib/Media';
+import CircularProgressBar from './CircularProgressBar'
 
 class ImageBox extends React.Component {
 
@@ -8,7 +9,6 @@ class ImageBox extends React.Component {
     this.state = {
       dropdownValue: this.props.title,
       imageSelected:this.props.haveImage,
-      file1:require('../../../public/images/plpAssests/placeholder-image.png'),
       file:this.props.haveImage?URL.createObjectURL(this.props.file):null,
     };
   }
@@ -17,7 +17,6 @@ class ImageBox extends React.Component {
   {
         this.setState({
           imageSelected:nextProp.haveImage,
-          file1:require('../../../public/images/plpAssests/placeholder-image.png'),
           file:this.props.haveImage?URL.createObjectURL(this.props.file):null,
         })
       
@@ -30,7 +29,7 @@ class ImageBox extends React.Component {
     console.log("File",event.target.files[0]);
     if(file>10240)
     {
-        alert("Image is too Big, please select a image less than 10mb")
+        alert("Image is too big, please select a image less than 10mb")
         event.target.value=null
         return;
     }
@@ -46,13 +45,21 @@ class ImageBox extends React.Component {
 
   
   render() {
-    console.log("statefile",this.props)
+   
     if(this.state.imageSelected)
     {
+      console.log("statefile",this.props.url)
         return(
           <div className='uploded-img'>
                 <img id="imageContent" className='uploded-img-data' src={URL.createObjectURL(this.props.file)} alt="your image" />
-                <button type="button" className='close' onClick={this.onImageRemoved.bind(this)}>X</button>
+                {this.props.url!=='' && <button type="button" className='close' onClick={this.onImageRemoved.bind(this)}>X</button>}
+                {this.props.url==='' && <div className="circle-container">
+                  <CircularProgressBar
+                      strokeWidth="5"
+                      sqSize="70"
+                      percentage={this.props.percentage}/>
+                </div>}
+                
           </div>
 			
         )

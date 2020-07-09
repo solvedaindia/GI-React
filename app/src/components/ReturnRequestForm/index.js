@@ -143,10 +143,7 @@ class ReturnRequestForm extends React.Component {
           "confirmAccountNO": bankInfo.AcoountNumberConfirm,
           "IFSCCode": bankInfo.ifscCode
          },
-        "images":[
-            imageEndpoint1,
-            imageEndpoint2
-        ],
+        "images":selectedImages,
         "invoiceNo": this.props.orderShipmentData && this.props.orderShipmentData.invoiceNo,
         "shipNode": this.props.orderShipmentData && this.props.orderShipmentData.shipNode,
         "primeLineNo": primeLineNo,
@@ -321,7 +318,7 @@ class ReturnRequestForm extends React.Component {
     return (
       <div className="add-img">
         <h4 className="heading">Add Image</h4>
-        <UploadImage onImageAddRemove={this.onImageAddRemove.bind(this)} />
+        <UploadImage type={"ser"}  onImageAddRemove={this.onImageAddRemove.bind(this)} />
       </div>
     );
   }

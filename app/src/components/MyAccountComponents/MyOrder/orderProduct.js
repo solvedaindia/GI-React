@@ -126,7 +126,7 @@ class ProductOrder extends React.Component {
               {showServiceRequestButton?"View Item History" : "Track Item"}
             </button> : null}
 
-            {showServiceRequestButton && <button className="btn-borderwhite" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
+            {showServiceRequestButton && <button className="btn-borderwhite cancel-item" onClick={evt => this.props.proceedToServiceRequest(this.props.prodctDataPro,this.props.allDataPro)} >
               Service Request
               </button> }
 
