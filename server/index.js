@@ -2,6 +2,9 @@
 
 const express = require('express');
 const logger = require('./logger');
+const jwt = require('jwt-simple');
+const crypto = require('crypto-js');
+
 var multer  = require('multer')
 var fs = require('fs');
 var path = require('path')
@@ -50,6 +53,22 @@ function getTodayDate(flag)
   return today 
 }
 
+function decodeToken(inputToken) {
+  const encodingKey= 'rVlJvxsARa0bDTwFeSrnoQCO7SPN0lFt';
+  const decryptedtoken = decryptToken(inputToken);
+  const decoded = jwt.decode(decryptedtoken, encodingKey);
+  return decoded;
+}
+function decryptToken(encryptedToken) {
+  const encryptionKey= 'yqzSYsrLLYkJBya0P513QGqQq82CiojT';
+  const decryptedToken = crypto.AES.decrypt(
+    encryptedToken,
+    encryptionKey,
+  ).toString(crypto.enc.Utf8);
+  return decryptedToken;
+}
+
+
 
 const argv = require('./argv');
 const port = require('./port');
@@ -90,9 +109,18 @@ app.get('*.js', (req, res, next) => {
 app.post('/imageupload',upload.single('file'), (req, res, next) => {
 
     console.log("request",req.body);
+   // console.log("request",req.headers.access_token);
+    const headerToken = req.headers.access_token;
+    const decodedToken = decodeToken(headerToken);
+    console.log("request",decodedToken.userId);
     if(!req.file || req.body.userid ===undefined || req.body.typeid ===undefined) {
       res.status(500);
       return res.json({ message:'param missing'  });
+    }
+    if(!(decodedToken && decodedToken.userId && decodedToken.userId===req.body.userid))
+    {
+      res.status(401);
+      return res.json({ message:'Access Token is Invalid'  });
     }
     res.json({ status:true,fileUrl: req.file.destination+'/'+req.file.filename });
 });

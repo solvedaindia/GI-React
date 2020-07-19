@@ -14,7 +14,7 @@ class Checkboxes extends React.Component {
     // })
     this.state = {
       optionsChecked: [],
-      showTextview: false,
+      showTextview: true,
       characterCount: 100,
       characterLimit: 100
     };
@@ -57,7 +57,7 @@ class Checkboxes extends React.Component {
   renderTextField() {
     return (
       <div className='service-request-desc'>
-        <p className='heading-desc'>{this.props.title}</p>
+        {/* <p className='heading-desc'>{this.props.title}</p> */}
         <textarea className='text-area' onChange={() => this.onTextareaInput()} name="the-textarea" id="textareaSR" maxlength={this.state.characterLimit} placeholder="Please Specify" autofocus rows='4' cols='80'></textarea>
         <label className='label-text'> {this.state.characterCount} Character{this.state.characterCount <= 1 ? '' : 's'} remaining</label>
       </div>
@@ -76,7 +76,7 @@ class Checkboxes extends React.Component {
 
     return (
       <div className='service-request-text'>
-        {outputCheckboxes}
+        {/* {outputCheckboxes} */}
         {this.state.showTextview ? this.renderTextField() : null}
       </div>
     )

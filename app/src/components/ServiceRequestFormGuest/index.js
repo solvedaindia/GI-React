@@ -167,7 +167,7 @@ class ServiceRequestFormGuest extends React.Component {
             </div>
             <div className='invice-selection guest-type'>
               <EnterInvoiceView type={"ser"} onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)} onInvoiceFile={this.onInvoiceFileSelection.bind(this)}/>
-            s</div>
+            </div>
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className='actionBtnWrapper'>

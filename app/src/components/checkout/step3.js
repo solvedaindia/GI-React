@@ -286,9 +286,13 @@ export class Step3Component extends React.Component {
               <div className='paymentMethod customradio'>
                   <h4 className='heading'>{CHOOSE_A_PAYMENT_METHOD}</h4>
                   {this.state.paymentMethods.length > 0 && this.state.paymentMethods.map(item => {
+                    //This line is use enable/disable cod payment method
                     if (item.paymentMethodName === 'COD' && this.props.netAmount > this.state.CODAmount) {
                       return null
                     }
+                    // if (item.paymentMethodName === 'COD') {
+                    //   return null
+                    // }
                     return (
                       <>
                         <div className="pay_radio">

@@ -2,6 +2,11 @@ import React from 'react';
 import Input from '../Primitives/input';
 import {regexInvoice} from '../../utils/validationManager';
 import { getCookie } from '../../utils/utilityManager';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+} from '../../../public/constants/constants';
 
 class EnterInvoiceView extends React.Component {
 
@@ -70,7 +75,7 @@ class EnterInvoiceView extends React.Component {
   uploadImageToSerer(file)
   {
     var myHeaders = new Headers();
-    myHeaders.append("public_key", "somekey");
+    myHeaders.append("access_token", getCookie(accessTokenCookie));
     var formdata = new FormData();
     formdata.append("userid", getCookie("userID"));
     formdata.append("typeid", this.props.type);

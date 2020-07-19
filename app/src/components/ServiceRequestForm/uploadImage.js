@@ -1,6 +1,11 @@
 import React from 'react';
 import ImageBox from './imageBox'
 import { getCookie } from '../../utils/utilityManager';
+import {
+  storeId,
+  accessToken,
+  accessTokenCookie,
+} from '../../../public/constants/constants';
 import axios from 'axios';
 class UploadImage extends React.Component {
 
@@ -72,7 +77,7 @@ class UploadImage extends React.Component {
           percentage:per,
         })
       },
-      headers:{public_key: "somekey"}
+      headers:{access_token: getCookie(accessTokenCookie) }
     }
     axios.post("/imageupload",formdata,config).then((response)=>{
       console.log("imageupload",response);

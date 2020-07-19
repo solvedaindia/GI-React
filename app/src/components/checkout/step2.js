@@ -89,6 +89,7 @@ export class Step2Component extends React.Component {
       error_email: false,
       error_pincode: false,
       error_address: false,
+      error_address1: false,
       error_city: false,
       error_state: false,
       error_gst: false,
@@ -98,6 +99,8 @@ export class Step2Component extends React.Component {
       errorMessage_email: '',
       errorMessage_pincode: '',
       errorMessaget_address: '',
+      errorMessaget_address1: '',
+
       errorMessage_city: '',
       errorMessage_state: '',
       errorMessage_gst: '',
@@ -106,6 +109,8 @@ export class Step2Component extends React.Component {
       inputText_email: '',
       inputText_pincode: '',
       inputText_address: '',
+      inputText_address1: '',
+      inputText_address2: '',
       inputText_city: '',
       inputText_state: '',
       inputText_gst: '',
@@ -115,6 +120,7 @@ export class Step2Component extends React.Component {
       berror_email: false,
       berror_pincode: false,
       berror_address: false,
+      berror_address1: false,
       berror_city: false,
       berror_state: false,
 
@@ -123,6 +129,7 @@ export class Step2Component extends React.Component {
       berrorMessage_email: '',
       berrorMessage_pincode: '',
       berrorMessaget_address: '',
+      berrorMessaget_address1: '',
       berrorMessage_city: '',
       berrorMessage_state: '',
       binputText_name: '',
@@ -130,6 +137,8 @@ export class Step2Component extends React.Component {
       binputText_email: '',
       binputText_pincode: '',
       binputText_address: '',
+      binputText_address1: '',
+      binputText_address2: '',
       binputText_city: '',
       binputText_state: '',
 
@@ -418,6 +427,14 @@ export class Step2Component extends React.Component {
       case 'address':
         return this.setState({
           inputText_address: value.target.value,
+        });
+      case 'address1':
+        return this.setState({
+          inputText_address1: value.target.value,
+        });
+      case 'address2':
+        return this.setState({
+          inputText_address2: value.target.value,
         });
       case 'pin':
         if (value.target.value.length <= 6) {
@@ -1195,15 +1212,37 @@ export class Step2Component extends React.Component {
 
                   <div className="row">
                     <div className="col-md-12">
-                      <div className="form-div addressTextarea clearfix div-error">
+                      <div className="form-div clearfix div-error">
+                        <Input placeholder="Flat/ House no/ Floor/Building name" inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={30}/>
+                        {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+                      </div>
+                      {/* <div className="form-div addressTextarea clearfix div-error">
                         <div className='form-group'>
                           <textarea className='textarea form-control' inputType="text" title="Address" id="address" name="address" handleChange={this.handleInput} maxLength={70} />
                           <label htmlFor='address' className="form-label">Address</label>
                           {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
                         </div>
+                      </div> */}
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-div clearfix div-error">
+                        <Input placeholder="Street name/number/locality" inputType="text" id="address1" name="address1" handleChange={this.handleInput} maxLength={40}/>
+                        {this.state.error_address1 ? <div className='error-msg'>{this.state.errorMessaget_address1}</div> : null}
                       </div>
                     </div>
                   </div>
+
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-div clearfix div-error">
+                        <Input placeholder="Landmark " inputType="text" id="address2" name="address2" handleChange={this.handleInput} maxLength={40}/>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-div clearfix div-error">
