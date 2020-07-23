@@ -166,6 +166,7 @@ class ServiceRequestForm extends React.Component {
   }
   onOtherReasonEnter(value)
   {
+    
     this.setState({
       otherReason: value,
     });
@@ -187,13 +188,13 @@ class ServiceRequestForm extends React.Component {
       {
         invoice=this.state.inputInvoice;
       }
-      let reason="";
-      this.state.selectedReason.map((data)=>{
-        if(reason=="")
-          reason=data
-        else
-          reason=reason+","+data
-      })
+      // let reason="";
+      // this.state.selectedReason.map((data)=>{
+      //   if(reason=="")
+      //     reason=data
+      //   else
+      //     reason=reason+","+data
+      // })
 
       let address=null;
       if(this.state.selectedAddress.addressID==="")
@@ -210,8 +211,8 @@ class ServiceRequestForm extends React.Component {
         addressData:address,
         invoiceNo:invoice,
         invoiceURL:this.state.invoiceFile,
-        serviceRequestReason:reason,
-        otherReason:this.state.otherReason,
+        serviceRequestReason:this.state.otherReason,
+        //otherReason:this.state.otherReason,
         images:this.state.selectedImages,
       }
 
@@ -242,7 +243,8 @@ class ServiceRequestForm extends React.Component {
   render() 
   {
     let isSaveBtnDisabled=true;
-    if(this.state.selectedCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+   // if(this.state.selectedCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+   if(this.state.selectedCategory!="" && this.state.otherReason!=""  && this.state.selectedImages.length>0)
     {
       isSaveBtnDisabled=false;
     }

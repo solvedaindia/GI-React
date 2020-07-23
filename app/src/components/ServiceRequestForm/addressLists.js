@@ -26,7 +26,7 @@ class AddressList extends React.Component {
               <input className="input" type="radio" name="optradio" value={index} checked={this.state.selected_add == index} />
               <label className='labelchecked'></label>
             </div>
-            <div className='addressText'>{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
+            <div className='addressText'>{`${add.address1} ${add.address2}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
           </li>
         )
       });
