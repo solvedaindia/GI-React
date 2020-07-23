@@ -24,20 +24,20 @@ class AddAddressForm extends React.Component {
       inputText_number: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.phoneNumber,
       inputText_email: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.emailId,
       inputText_pincode: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.pincode,
-      inputText_address: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address,
+      inputText_address1: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address1,
+      inputText_address2: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address2,
+      inputText_address3: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.address3,
       inputText_city: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.city,
       inputText_state: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.state,
       isSetAsDefault: this.props.editAddressDataPro==undefined?"":this.props.editAddressDataPro.isDefault,
       nickname:this.props.editAddressDataPro==undefined?undefined:this.props.editAddressDataPro.nickName,
-      inputText_address1: "",
-      inputText_address2: "",
 
       error_name: false,
       error_number: false,
       error_email: false,
       error_pincode: false,
-      error_address: false,
       error_address1: false,
+      error_address2: false,
       error_city: false,
       error_state: false,
 
@@ -45,8 +45,8 @@ class AddAddressForm extends React.Component {
       errorMessage_number: '',
       errorMessage_email: '',
       errorMessage_pincode: '',
-      errorMessaget_address: '',
       errorMessaget_address1: '',
+      errorMessaget_address2: '',
       errorMessage_city: '',
       errorMessage_state: '',
 
@@ -60,25 +60,27 @@ class AddAddressForm extends React.Component {
 
 
   changeAddress(editAddressDataPro) {
+    
     this.setState({
       inputText_name: editAddressDataPro.name,
       inputText_number: editAddressDataPro.phoneNumber,
       inputText_email: editAddressDataPro.emailId,
       inputText_pincode: editAddressDataPro.pincode,
-      inputText_address: editAddressDataPro.address,
+      inputText_address1: editAddressDataPro.address1,
+      inputText_address2: editAddressDataPro.address2,
+      inputText_address3: editAddressDataPro.address3,
       inputText_city: editAddressDataPro.city,
       inputText_state: editAddressDataPro.state,
       isSetAsDefault: editAddressDataPro.isDefault,
       nickname: editAddressDataPro.nickName,
-      inputText_address:"",
-      inputText_address:"",
+     
 
       error_name: false,
       error_number: false,
       error_email: false,
       error_pincode: false,
-      error_address: false,
       error_address1: false,
+      error_address2: false,
       error_city: false,
       error_state: false,
 
@@ -86,8 +88,8 @@ class AddAddressForm extends React.Component {
       errorMessage_number: '',
       errorMessage_email: '',
       errorMessage_pincode: '',
-      errorMessaget_address: '',
       errorMessaget_address1: '',
+      errorMessaget_address2: '',
       errorMessage_city: '',
       errorMessage_state: '',
 
@@ -177,18 +179,18 @@ class AddAddressForm extends React.Component {
       });
 
     }
-    if (!validateAddress(this.state.inputText_address)) {
-      isProceed = false;
-      this.setState({
-        error_address: true,
-        errorMessaget_address: !this.state.inputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADD}`,
-      });
-    }
     if (!validateAddress(this.state.inputText_address1)) {
       isProceed = false;
       this.setState({
         error_address1: true,
-        errorMessaget_address1:  `${REQUIRED_FIELD}` ,
+        errorMessaget_address1: !this.state.inputText_address1 ? `${REQUIRED_FIELD}` : `${VALID_ADD}`,
+      });
+    }
+    if (!validateAddress(this.state.inputText_address2)) {
+      isProceed = false;
+      this.setState({
+        error_address2: true,
+        errorMessaget_address2:  `${REQUIRED_FIELD}` ,
       });
     }
     if (!validateCityDistrict(this.state.inputText_city)) {
@@ -218,7 +220,9 @@ class AddAddressForm extends React.Component {
         phone_number: this.state.inputText_number,
         email_id: this.state.inputText_email,
         pincode: this.state.inputText_pincode,
-        address: this.state.inputText_address,
+        address1: this.state.inputText_address1,
+        address2: this.state.inputText_address2,
+        address3: this.state.inputText_address3,
         city: this.state.inputText_city,
         state: this.state.inputText_state,
         default: 'false',
@@ -236,8 +240,8 @@ class AddAddressForm extends React.Component {
       error_number: false,
       error_email: false,
       error_pincode: false,
-      error_address: false,
-      error_address1:false,
+      error_address1: false,
+      error_address2:false,
       error_city: false,
       error_state: false,
     });
@@ -258,17 +262,17 @@ class AddAddressForm extends React.Component {
         return this.setState({
           inputText_pincode: value.target.value,
         });
-      case 'address':
-        return this.setState({
-          inputText_address: value.target.value,
-        });
       case 'address1':
         return this.setState({
           inputText_address1: value.target.value,
         });
-       case 'address2':
+      case 'address2':
         return this.setState({
           inputText_address2: value.target.value,
+        });
+       case 'address3':
+        return this.setState({
+          inputText_address3: value.target.value,
         });
       case 'cityDistrict':
         return this.setState({
@@ -296,7 +300,9 @@ class AddAddressForm extends React.Component {
         phoneNumber: this.state.inputText_number,
         email_id: this.state.inputText_email,
         pincode: this.state.inputText_pincode,
-        address: this.state.inputText_address,
+        address1: this.state.inputText_address1,
+        address2: this.state.inputText_address2,
+        address3: this.state.inputText_address3,
         city: this.state.inputText_city,
         state: this.state.inputText_state,
         default: String(document.getElementById("checkbox").checked),
@@ -318,7 +324,9 @@ class AddAddressForm extends React.Component {
       phone_number: this.state.inputText_number,
       email_id: this.state.inputText_email,
       pincode: this.state.inputText_pincode,
-      address: this.state.inputText_address,
+      address1: this.state.inputText_address1,
+      address2: this.state.inputText_address2,
+      address3: this.state.inputText_address3,
       city: this.state.inputText_city,
       state: this.state.inputText_state,
       default: String(document.getElementById("checkbox").checked),
@@ -333,7 +341,9 @@ class AddAddressForm extends React.Component {
           phoneNumber: '',
           emailId: '',
           pincode: '',
-          address: '',
+          address1: '',
+          address2: '',
+          address3: '',
           city: '',
           state: '',
           isDefault: String(false),
@@ -402,7 +412,9 @@ class AddAddressForm extends React.Component {
         phoneNumber: '',
         emailId: '',
         pincode: '',
-        address: '',
+        address1: '',
+        address2: '',
+        address3: '',
         city: '',
         state: '',
         isDefault: false,
@@ -413,7 +425,9 @@ class AddAddressForm extends React.Component {
         phoneNumber: this.state.inputText_number,
         emailId: this.state.inputText_email,
         pincode: this.state.inputText_pincode,
-        address: this.state.inputText_address,
+        address1: this.state.inputText_address1,
+        address2: this.state.inputText_address2,
+        address3: this.state.inputText_address3,
         city: this.state.inputText_city,
         state: this.state.inputText_state,
         isDefault: false //String(this.state.isSetAsDefault), //commented for GI-951
@@ -445,7 +459,7 @@ class AddAddressForm extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input ref1={this.reference} onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} />
+              <Input ref1={this.reference} onKeyPress={this.onKeyPress} inputType="text" title="Full Name" name="name" id="fullName" placeholder="Enter your name" value={this.state.inputText_name} handleChange={this.handleInput} isAutoFocus={true} maxLength={80}/>
               {this.state.error_name ? <div className='error-msg'>{this.state.errorMessage_name}</div> : null}
             </div>
           </div>
@@ -461,6 +475,7 @@ class AddAddressForm extends React.Component {
                 placeholder={'Enter Number'}
                 value={this.state.inputText_number}
                 handleChange={this.handleInput}
+                maxLength={10}
               />
               {this.state.error_number ? (
                 <div className="error-msg">
@@ -472,7 +487,7 @@ class AddAddressForm extends React.Component {
 
           <div className="col-md-6">
             <div className='form-div clearfix div-error'>
-              <Input onKeyPress={this.onKeyPress} inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} />
+              <Input onKeyPress={this.onKeyPress} inputType="email" title="Email ID (Optional)" name="email" id="emailId" placeholder="Enter EmailId" value={this.state.inputText_email} handleChange={this.handleInput} maxLength={30} />
               {this.state.error_email ? <div className="error-msg">{this.state.errorMessage_email}</div> : null}
             </div>
           </div>
@@ -486,19 +501,19 @@ class AddAddressForm extends React.Component {
 
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input onKeyPress={this.onKeyPress} inputType="text" title="Address" name="address" id="address" placeholder="Flat/ House no/ Floor/Building name" value={this.state.inputText_address} handleChange={this.handleInput} maxLength={30} />
-              {this.state.error_address ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+              <Input onKeyPress={this.onKeyPress} inputType="text" title="Address" name="address1" id="address1" placeholder="Flat/ House no/ Floor/Building name" value={this.state.inputText_address1} handleChange={this.handleInput} maxLength={30} />
+              {this.state.error_address1 ? <div className='error-msg'>{this.state.errorMessaget_address1}</div> : null}
             </div>
           </div>
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input onKeyPress={this.onKeyPress} inputType="text"  name="address1" id="address1" placeholder="Street name/number/locality" value={this.state.inputText_address1} handleChange={this.handleInput} maxLength={40} />
-              {this.state.error_address1 ? <div className='error-msg'>{this.state.errorMessaget_address}</div> : null}
+              <Input onKeyPress={this.onKeyPress} inputType="text"  name="address2" id="address2" placeholder="Street name/number/locality" value={this.state.inputText_address2} handleChange={this.handleInput} maxLength={40} />
+              {this.state.error_address2 ? <div className='error-msg'>{this.state.errorMessaget_address2}</div> : null}
             </div>
           </div>
           <div className='col-md-12'>
             <div className='form-div clearfix div-error'>
-              <Input onKeyPress={this.onKeyPress} inputType="text"  name="address2" id="address2" placeholder="Landmark" value={this.state.inputText_address2} handleChange={this.handleInput} maxLength={40} />
+              <Input onKeyPress={this.onKeyPress} inputType="text"  name="address3" id="address3" placeholder="Landmark" value={this.state.inputText_address3} handleChange={this.handleInput} maxLength={40} />
             </div>
           </div>
 

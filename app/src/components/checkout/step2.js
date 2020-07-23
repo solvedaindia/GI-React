@@ -408,6 +408,7 @@ export class Step2Component extends React.Component {
       error_email: false,
       error_pincode: false,
       error_address: false,
+      error_address1:false,
       error_city: false,
       error_state: false,
       error_gst: false,
@@ -416,6 +417,7 @@ export class Step2Component extends React.Component {
       berror_email: false,
       berror_pincode: false,
       berror_address: false,
+      berror_address1: false,
       berror_city: false,
       berror_state: false,
     });
@@ -479,6 +481,14 @@ export class Step2Component extends React.Component {
         return this.setState({
           binputText_address: value.target.value,
         });
+      case 'baddress1':
+        return this.setState({
+          binputText_address1: value.target.value,
+        });
+      case 'baddress2':
+        return this.setState({
+          binputText_address2: value.target.value,
+        });
       case 'bpin':
         if (value.target.value.length <= 6) {
           return this.setState({
@@ -517,7 +527,9 @@ export class Step2Component extends React.Component {
           this.addAddressToCart()
             .then((orderId) => {
               var selected_add = {
-                address: this.state.inputText_address,
+                address1: this.state.inputText_address,
+                address2: this.state.inputText_address1,
+                address3: this.state.inputText_address2,
                 city: this.state.inputText_city,
                 state: this.state.inputText_state,
                 pincode: this.state.inputText_pincode,
@@ -544,7 +556,9 @@ export class Step2Component extends React.Component {
         pincode: this.state.inputText_pincode,
         city: this.state.inputText_city,
         state: this.state.inputText_state,
-        address: this.state.inputText_address,
+        address1: this.state.inputText_address,
+        address2: this.state.inputText_address1,
+        address3 : this.state.inputText_address2,
         default: String(this.state.defaultAddress),
         phone_number: this.state.phone,
         email_id: this.state.email,
@@ -597,7 +611,9 @@ export class Step2Component extends React.Component {
         pincode: this.state.binputText_pincode,
         city: this.state.binputText_city,
         state: this.state.binputText_state,
-        address: this.state.binputText_address,
+        address1: this.state.binputText_address,
+        address2: this.state.binputText_address1,
+        address3: this.state.binputText_address2,
         default: true,
         phone_number: this.state.binputText_number,
         email_id: this.state.binputText_email
@@ -771,6 +787,7 @@ export class Step2Component extends React.Component {
         berror_email: false,
         berror_pincode: false,
         berror_address: false,
+        berror_address1: false,
         berror_city: false,
         berror_state: false,
         error_gst: false
@@ -807,6 +824,15 @@ export class Step2Component extends React.Component {
         this.setState({
           berror_address: true,
           berrorMessaget_address: !this.state.binputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
+        });
+        validateBillingAddress = false
+        //return;
+      }
+      if (!validateAddress(this.state.binputText_address1)) {
+        document.getElementById('baddress1').focus();
+        this.setState({
+          berror_address1: true,
+          berrorMessaget_address1: !this.state.binputText_address1 ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
         });
         validateBillingAddress = false
         //return;
@@ -945,6 +971,15 @@ export class Step2Component extends React.Component {
       validateBillingAddress = false
       //return;
     }
+    if (!validateAddress(this.state.inputText_address1)) {
+      document.getElementById('address1').focus();
+      this.setState({
+        error_address1: true,
+        errorMessaget_address1: !this.state.inputText_address1 ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
+      });
+      validateBillingAddress = false
+      //return;
+    }
     if (!validateEmailId(this.state.email)) {
       document.getElementById('email').focus();
       this.setState({
@@ -1036,6 +1071,14 @@ export class Step2Component extends React.Component {
         });
         return;
       }
+      if (!validateAddress(this.state.binputText_address1)) {
+        document.getElementById('baddress1').focus();
+        this.setState({
+          berror_address1: true,
+          berrorMessaget_address1: 'Please enter valid Address',
+        });
+        return;
+      }
       if (!validateCityDistrict(this.state.binputText_city)) {
         document.getElementById('bcity').focus();
         this.setState({
@@ -1092,7 +1135,7 @@ export class Step2Component extends React.Component {
               <label className='labelchecked'></label>
             </div>
 
-            <div className='addressText'>{`${add.address}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
+            <div className='addressText'>{`${add.address1} ${add.address2} ${add.address3}, ${add.city}, ${add.state}, ${add.pincode}`}</div>
           </li>
         )
       });
@@ -1330,11 +1373,29 @@ export class Step2Component extends React.Component {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-div clearfix div-error">
-                          <Input inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={70} />
+                          <Input placeholder="Flat/ House no/ Floor/Building name" inputType="text" title="Address" id="baddress" name="baddress" handleChange={this.handleInput} maxLength={30} />
                           {this.state.berror_address ? <div className='error-msg'>{this.state.berrorMessaget_address}</div> : null}
                         </div>
                       </div>
                     </div>
+
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-div clearfix div-error">
+                          <Input placeholder="Street name/number/locality" inputType="text" id="baddress1" name="baddress1" handleChange={this.handleInput} maxLength={40}/>
+                          {this.state.berror_address1 ? <div className='error-msg'>{this.state.berrorMessaget_address1}</div> : null}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-div clearfix div-error">
+                        <Input placeholder="Landmark " inputType="text" id="baddress2" name="baddress2" handleChange={this.handleInput} maxLength={40}/>
+                      </div>
+                    </div>
+                  </div>
+
                     <div className="row">
                       <div className="col-md-6 colpaddingRight">
                         <div className="form-div clearfix div-error">

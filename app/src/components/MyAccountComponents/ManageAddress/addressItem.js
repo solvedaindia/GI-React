@@ -47,7 +47,9 @@ class AddressItem extends React.Component {
       phone_number: this.props.addressData.phoneNumber,
       email_id: this.props.addressData,
       pincode: this.props.addressData.pincode,
-      address: this.props.addressData.address,
+      address1: this.props.addressData.address1,
+      address2: this.props.addressData.address2,
+      address3: this.props.addressData.address3,
       city: this.props.addressData.city,
       state: this.props.addressData.state,
       default: String(true),
@@ -71,6 +73,7 @@ class AddressItem extends React.Component {
     if (this.props.addressData.isDefault) {
       stylingClass = 'defaultAddress';
     }
+    console.log("addressData",this.props.addressData)
 
     return (
       <>
@@ -106,9 +109,10 @@ class AddressItem extends React.Component {
             </>
           }
           <label className="addressText">
-            {this.props.addressData.address},
-            {this.props.addressData.city}
-            <div>{this.props.addressData.state},{` ${this.props.addressData.pincode}`}</div>
+            <div>{this.props.addressData.address1}</div>
+            <div>{this.props.addressData.address2}</div>
+            <div>{this.props.addressData.address3}</div>
+            <div> {this.props.addressData.city}, {this.props.addressData.state}, {` ${this.props.addressData.pincode}`}</div>
 
           </label>
 

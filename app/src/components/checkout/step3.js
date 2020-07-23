@@ -260,7 +260,7 @@ export class Step3Component extends React.Component {
             </div> : ''}
 
             <div className="email-box">
-              <h4 className='heading-label'>{this.props.address.address}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
+              <h4 className='heading-label'>{this.props.address.address1} {this.props.address.address2}, {this.props.address.city}, {this.props.address.state}, {this.props.address.pincode}</h4>
             </div>
 
             {!isMobile() && <div className="action-button">

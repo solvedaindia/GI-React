@@ -25,7 +25,7 @@ class ServiceRequestFormGuest extends React.Component {
       selectedInvoice: "",
       selectedProductCategory: null,
       selectedReason: [],
-      otherReason: null,
+      otherReason: "",
       guestAddress: null,
       isSaveBtnDisabled: true,
       selectedImages:[],
@@ -112,24 +112,25 @@ class ServiceRequestFormGuest extends React.Component {
 
     this.refs.child.onSavebuttonClick();
 
-    let reason = "";
-    this.state.selectedReason.map((data) => {
-      if (reason == "")
-        reason = data
-      else
-        reason = reason + "," + data
-    })
+    // let reason = "";
+    // this.state.selectedReason.map((data) => {
+    //   if (reason == "")
+    //     reason = data
+    //   else
+    //     reason = reason + "," + data
+    // })
 
     const param = {
       prodCategory: this.state.selectedProductCategory,
       prodDesc: this.state.descriptionText,
       partNumber: '',
+      addressId:'',
       invoiceNo: this.state.selectedInvoice,
       invoiceURL: this.state.invoiceFile,
-      serviceRequestReason: reason,
-      otherReason: this.state.otherReason,
+      serviceRequestReason:  this.state.otherReason,
+     // otherReason: this.state.otherReason,
       images: this.state.selectedImages,
-      addressId: this.state.guestAddress,
+      addressData: this.state.guestAddress,
     }
 
     apiManager
@@ -148,7 +149,8 @@ class ServiceRequestFormGuest extends React.Component {
   render() {
     
     let isSaveBtnDisabled=true;
-    if(this.state.selectedProductCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+    //if(this.state.selectedProductCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
+    if(this.state.selectedProductCategory!="" && this.state.otherReason!=""  && this.state.selectedImages.length>0)
     {
       isSaveBtnDisabled=false;
     }
