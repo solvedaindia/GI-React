@@ -8,6 +8,7 @@ import ServiceRequestForm from '../../ServiceRequestForm/index';
 import CancelComponents from '../../cancelComponents/index';
 
 import ReturnRequestForm from '../../ReturnRequestForm/index'; 
+import RSODetail from '../RSO/index'; 
 
 class MyOrder extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class MyOrder extends React.Component {
        returnOrderItemData: undefined,
        returnOrderShipmentData:undefined,
       //Lazy Load Vars
+      isRSODetail:false,
       error: false,
       hasMore: true,
       isLoading: false,
@@ -95,6 +97,15 @@ class MyOrder extends React.Component {
       returnOrderItemData:trackOrderData,
     });
   }
+
+  renderRSODetail()
+  {
+    this.setState({
+      isTrackOrder:!this.state.isTrackOrder,
+      isRSODetail: !this.state.isRSODetail,
+    });
+  }
+
   renderServiceRequest(orderItemData,orderData)
   {
     this.setState({
@@ -114,6 +125,8 @@ class MyOrder extends React.Component {
       returnOrderShipmentData:shipmentData,
     });
   }
+
+  
 
   // renderReturnRequest(orderItemData,orderData)
   // {
@@ -229,13 +242,19 @@ class MyOrder extends React.Component {
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} trackOrderDataPro={this.state.updatedTrackOrderData} renderReturnRequest={this.renderReturnRequest.bind(this)} />
+          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} 
+                      trackOrderDataPro={this.state.updatedTrackOrderData} 
+                      onRSODetail={()=>{this.renderRSODetail()}} 
+                      renderReturnRequest={this.renderReturnRequest.bind(this)} />
         ) :this.state.isServiceRequest?(
         
           <ServiceRequestForm orderData={this.state.serviceOrderData} 
                               orderItemData={this.state.serviceOrderItemData} 
                               renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
          
+        ):this.state.isRSODetail?(
+          <RSODetail backPress={()=>{this.renderRSODetail()}} orderData={this.state.returnOrderData}  />
+          
         ):
          this.state.isReturnRequest ? (
           <ReturnRequestForm  

@@ -47,7 +47,7 @@ class OrderItem extends React.Component {
     {
       isOrderCancelled=true;
     }
-    return (
+    return ( 
       <>
         <div className="tabBar clearfix">
           <ul className="heading clearfix">

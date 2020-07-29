@@ -40,6 +40,7 @@ class RWDCompleteOrder extends React.Component {
         {orderData.orderItems.map(data => (
           <RWDSingleProduct
             orderDataPro={data}
+            onRSODetail={()=>this.props.onRSODetail()}
             isFromViewOrder={true}
             hideViewDetail={true}
             orderCompleteDataPro={orderData}

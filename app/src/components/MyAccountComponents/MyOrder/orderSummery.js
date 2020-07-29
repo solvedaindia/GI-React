@@ -25,7 +25,9 @@ class OrderSummery extends React.Component {
         <div className="orderList">
 			<h4 className="heading">Delivery Address</h4>
 			{addressData ? <><p className="subheading">{addressData.name !== undefined ? addressData.name : null}</p>
-			<p className="address">{`${addressData && addressData.address !== undefined ? addressData.address : null}, ${addressData.city !== undefined ? addressData.city : null}, ${addressData.state !== undefined ? addressData.state: null}, ${addressData.pincode !== undefined ? addressData.pincode : null}`}</p></>: null }
+      <p className="address">
+        {`${addressData && addressData.address1 !== undefined ? addressData.address1 : null} ${addressData && addressData.address2 !== undefined ? addressData.address2 : null} ${addressData && addressData.address3 !== undefined ? addressData.address3 : null}
+        , ${addressData.city !== undefined ? addressData.city : null}, ${addressData.state !== undefined ? addressData.state: null}, ${addressData.pincode !== undefined ? addressData.pincode : null}`}</p></>: null }
 			{ appCookie.get('isLoggedIn') === 'true' &&
       <ul className="invoiceList">
 				{this.props.invoiceDataPro.map((data, key) => {

@@ -13,6 +13,7 @@ import { updateTheRWDHeader } from '../../../../actions/app/actions';
 import CancelComponents from '../../../cancelComponents/index';
 import ServiceRequestForm from '../../../ServiceRequestForm/index';
 import ReturnRequestForm from '../../../ReturnRequestForm/index'; 
+import RSODetail from '../../RSO/index'; 
 
 
 class RWDMyOrder extends React.Component {
@@ -25,6 +26,7 @@ class RWDMyOrder extends React.Component {
       returnOrderShipmentData:undefined,
       isTrackOrder: false,
       isServiceRequest:false,
+      isRSODetail:false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
       isLoading: true,
@@ -52,6 +54,7 @@ class RWDMyOrder extends React.Component {
     this.modalRef=React.createRef();
     this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
     this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
+    this.onRSODetail = this.onRSODetail.bind(this);
   
   }
 
@@ -134,6 +137,12 @@ class RWDMyOrder extends React.Component {
       currentComponent: compName,
       currentComponentData: data,
       currentCompleteData: completeData,
+    })
+  }
+  onRSODetail()
+  {
+    this.setState({
+      isRSODetail:!this.state.isRSODetail,
     })
   }
 
@@ -304,6 +313,7 @@ class RWDMyOrder extends React.Component {
 
   render() {
     // debugger;
+    console.log("this.state.currentComponent",this.state.currentComponent);
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
     if(this.state.isServiceRequest)
@@ -314,7 +324,7 @@ class RWDMyOrder extends React.Component {
           renderServiceRequestPro={this.renderServiceRequestBack.bind(this)}/>
       )
     }
-    if(this.state.isReturnRequest)
+    else if(this.state.isReturnRequest)
     {return (
       <ReturnRequestForm 
         onCancel = {this.renderReturnRequestBack} 
@@ -328,12 +338,20 @@ class RWDMyOrder extends React.Component {
         paymentMode="COD"/>
     )
     }
+    else if(this.state.isRSODetail)
+    {
+      return(
+      <RSODetail backPress={()=>{this.onRSODetail}} orderData={this.state.currentCompleteData}  />
+      )
+    }
+
     else if (this.state.currentComponent === 'SingleProduct') {
       return (
         <div className="myOrder single-item-order">
           <RWDSingleProduct
             orderDataPro={this.state.currentComponentData}
             myOrderCallbackPro={this.myOrderCallback}
+            onRSODetail={this.onRSODetail}
             orderDetailCallbackPro={this.orderDetailCallback}
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
@@ -351,6 +369,7 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder multi-item-order">
           <RWDMultiTrack
             orderDataPro={this.state.currentComponentData}
+            onRSODetail={this.onRSODetail}
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
             myOrderCallbackPro={this.myOrderCallback} 
@@ -365,6 +384,7 @@ class RWDMyOrder extends React.Component {
         <div className="myOrder View-Order">
           <RWDCompleteOrder
             cancelRefundSummaryPro = {this.state.currentComponentData.cancelRefundSummary}
+            onRSODetail={this.onRSODetail}
             orderDataPro={this.state.currentComponentData}
             showCancelModal={this.showCancelModal}
             myOrderCallbackPro={this.myOrderCallback}
