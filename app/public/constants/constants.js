@@ -184,6 +184,8 @@ export const updateAddressAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/
 export const bankEmiApi = `${secureHttp}://${host}:${port2}/api/v1/emi/emidetails/`;
 /* User Detail API */
 export const userDetailAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/userinfo`;
+/* Service Request Page List API */
+export const serviceRequestListAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/orders/servicelist`;
 /* Pincode API */
 export const pinCodeAPI = `${secureHttp}://${host}:${port2}/api/v1/pdp/productavailability/`;
 /* Pincode API For Bundle */
