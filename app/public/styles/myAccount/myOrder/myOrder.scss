@@ -524,7 +524,7 @@
 
 .trackorder-wrap {
   margin: 30px auto;
-  width: 50%;
+  width: 41%;
   position: relative;
   float: right;
   top: -66px;
@@ -537,7 +537,7 @@
     margin: 0px 0 0 40px;
     padding: 0;
     position: absolute;
-    width: 98%;
+    // width: 98%;
     &:before{
       background-color:$colorwhite;    
       height: 2px;
@@ -596,6 +596,7 @@
       position: relative;
       font-size: 10px;
       float: left;
+      min-width: 100px;
 	  .deliveryDate{
         color:$battleshipGrey;
       }

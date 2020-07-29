@@ -86,10 +86,12 @@ class ServiceRequestPage extends React.Component {
   renderBackNavigation() {
     return (
       <>
+      <div className="trackMyOrder">
         <div className="bottomDivider">
           <button className="backBtn" onClick={this.renderSelection.bind(this)} >{`< Back`}</button>
         </div>
         <h4>Track Service Request</h4>
+      </div>
       </>
     )
   }
@@ -125,7 +127,7 @@ class ServiceRequestPage extends React.Component {
               <p className="description">{data.shortDescription}</p>
             </div>
           </div>
-          {data.serviceRequestMetaData.serviceRequestTrackButtonEnable !== 'N' ?
+          {data.serviceRequestMetaData.serviceRequestTrackButtonEnable == 'N' ?
             <div className="orderbtn">
               <button className="btn-borderwhite" onClick={evt => this.renderSelection()} >
                 Track My Service
