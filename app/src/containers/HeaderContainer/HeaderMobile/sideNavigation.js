@@ -241,6 +241,12 @@ export class HeaderMobile extends React.Component {
               </li>
             </Link>
             <Link
+              to={{ pathname: '/myAccount', state: { from: 'serviceRequest' } }}
+              onClick={() => this.onLinkNavigation('My Service Request')}
+            >
+              <li className="navTxt">My Service Request</li>
+            </Link>
+            <Link
               to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
               onClick={() => this.onLinkNavigation('My Orders')}
             >
