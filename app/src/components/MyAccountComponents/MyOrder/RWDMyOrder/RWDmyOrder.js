@@ -77,7 +77,7 @@ class RWDMyOrder extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-   
+    
     if(this.state.isServiceRequest)
     {
       this.setState({
@@ -89,6 +89,13 @@ class RWDMyOrder extends React.Component {
     {
       this.setState({
         isReturnRequest:false
+      })
+    }
+    else if(this.state.isRSODetail)
+    {
+      this.setState({
+        isRSODetail:false,
+        currentComponent:null,
       })
     }
     else if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
@@ -147,7 +154,7 @@ class RWDMyOrder extends React.Component {
   }
 
   orderDetailCallback(data) {
-    alert("view more")
+   
     this.props.updateTheRWDHeader('My Order Redirect');
     this.setState({
       currentComponent: 'ViewOrder',
@@ -395,6 +402,7 @@ class RWDMyOrder extends React.Component {
       );
     }
     else {
+  
       return (
         <div className="myOrder">
           {this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {

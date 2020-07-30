@@ -44,8 +44,8 @@ class ManageAddress extends React.Component {
   }
 
   addNewAddressBtnClicked(editData) {
-    
-    if(editData.addressID && this.state.isAddAddress && (this.state.editAddressData.addressID !== editData.addressID)){
+    debugger;    
+    if(editData && editData.addressID && this.state.isAddAddress && (this.state.editAddressData.addressID !== editData.addressID)){
       this.setState({
         isAddAddress: true,
         editAddressData: editData,
@@ -54,7 +54,7 @@ class ManageAddress extends React.Component {
       this.reference.current.changeAddressFrom(editData)
     } else {
       this.setState({
-        editAddressData: emptyAddress,
+        editAddressData: editData,
         isAddAddress: !this.state.isAddAddress,
       });
     }
@@ -109,7 +109,7 @@ class ManageAddress extends React.Component {
         ) : (
           <button
             className="addNewAddress"
-            onClick={this.addNewAddressBtnClicked.bind(this)}
+            onClick={()=>this.addNewAddressBtnClicked()}
           >
             <span className='icon'>+</span> {ADD_NEW_ADD}
           </button>
