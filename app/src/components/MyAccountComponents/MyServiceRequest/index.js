@@ -60,6 +60,7 @@ class ServiceRequestPage extends React.Component {
 
   render() {
     return (
+      <div className="ongoing-orderservice">
       <div className="myOrder">
         {this.state.serviceListData.length !== 0 && this.state.showTrackDetails ?
           this.renderBackNavigation()
@@ -79,6 +80,7 @@ class ServiceRequestPage extends React.Component {
           )
         }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
         }
+      </div>
       </div>
     );
   }
@@ -127,7 +129,7 @@ class ServiceRequestPage extends React.Component {
               <p className="description">{data.shortDescription}</p>
             </div>
           </div>
-          {data.serviceRequestMetaData.serviceRequestTrackButtonEnable == 'N' ?
+          {data.serviceRequestMetaData.serviceRequestTrackButtonEnable !== 'N' ?
             <div className="orderbtn">
               <button className="btn-borderwhite" onClick={evt => this.renderSelection()} >
                 Track My Service
