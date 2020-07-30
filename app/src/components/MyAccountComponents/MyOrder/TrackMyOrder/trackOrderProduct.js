@@ -50,6 +50,7 @@ class TrackOrderProduct extends React.Component {
   }
 
   render() {
+    console.log("shipmentDataPro",this.props.shipmentDataPro)
     const productData = this.props.prodctDataPro;
     
     const returnButtonDisplay=this.props.shipmentDataPro.returnButtonDisplay=='Y';
@@ -96,7 +97,7 @@ class TrackOrderProduct extends React.Component {
               </button> }
           </div>
           <div className="clearfix"></div>
-          <OrderStatusBar shipmentDataPro={this.props.shipmentDataPro} customClassPro='trackorder-wrap' />
+          <OrderStatusBar shipmentDataPro={this.props.shipmentDataPro} onRSODetail={()=>{this.props.onRSODetail()}} customClassPro='trackorder-wrap' />
         </div>
          </div>
       </>

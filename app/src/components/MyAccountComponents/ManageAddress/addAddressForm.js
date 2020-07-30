@@ -17,6 +17,7 @@ import appCookie from '../../../utils/cookie';
 
 class AddAddressForm extends React.Component {
   constructor(props) {
+    
     super(props);
     console.log("this.props.editAddressDataPro", this.props.editAddressDataPro);
     this.state = {
@@ -144,7 +145,7 @@ class AddAddressForm extends React.Component {
   onSavebuttonClick(event) {
     if (event)
       event.preventDefault();
-
+    
     var isProceed = true;
     if (!validateFullName(this.state.inputText_name)) {
       isProceed = false;
@@ -406,6 +407,7 @@ class AddAddressForm extends React.Component {
   }
 
   closeAddNewAddress() {
+
     if (this.state.nickName !== undefined) {
       this.props.onCancel({
         name: '',

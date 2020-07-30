@@ -32,6 +32,7 @@ class RWDMultiTrack extends React.Component {
           return (
             <RWDSingleProduct
               orderDataPro={productData}
+              onRSODetail={()=>this.props.onRSODetail()}
               shipmentDataPro={item}
               isMultiTrackPro={true} 
               showCancelModal={this.showCancelModal.bind(this)}

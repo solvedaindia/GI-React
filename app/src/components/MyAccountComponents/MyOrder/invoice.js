@@ -125,8 +125,11 @@ class Invoice extends React.Component {
 									{!!invoiceData.billTo && invoiceData.billTo.name}</div>
 								<div className="value heading">Billing Address</div>
 								<div className="value">
-									{!!invoiceData.billTo && invoiceData.billTo.address}</div>
-								
+									{!!invoiceData.billTo && invoiceData.billTo.address1}</div>
+								<div className="value">
+									{!!invoiceData.billTo && invoiceData.billTo.address2}</div>
+								<div className="value">
+									{!!invoiceData.billTo && invoiceData.billTo.address3}</div>
 
 								<div className="value heading">City</div>
 									<div className="value">
@@ -154,7 +157,11 @@ class Invoice extends React.Component {
 								<div className="value heading">Delivery Address</div>
 								
 								<div className="value">
-									{!!invoiceData.shipTo && invoiceData.shipTo.address}</div>
+									{!!invoiceData.shipTo && invoiceData.shipTo.address1}</div>
+								<div className="value">
+									{!!invoiceData.shipTo && invoiceData.shipTo.address2}</div>
+								<div className="value">
+									{!!invoiceData.shipTo && invoiceData.shipTo.address3}</div>
 									<div className="value heading">City</div>
 									<div className="value">
 									{!!invoiceData.shipTo && invoiceData.shipTo.city}</div>

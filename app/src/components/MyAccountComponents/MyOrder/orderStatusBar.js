@@ -72,6 +72,20 @@ class OrderStatusBar extends React.Component {
     else if (item === 'Installed' || item === 'Installation') {
       statusDate = this.props.shipmentDataPro.installationDate
     }
+    //----------for rso condition start
+    else if (item === 'Return Initiated') {
+      statusDate = this.props.shipmentDataPro.returnedOn
+    }
+    else if (item === 'Item Picked Up') {
+        statusDate = this.props.shipmentDataPro.itemPickedDate
+    }
+    else if (item === 'Refund Initiated') {
+        statusDate = this.props.shipmentDataPro.refundInitiatedDate
+    }
+    else if (item === 'Refund Processed') {
+        statusDate = this.props.shipmentDataPro.refundProcessedDate
+    }
+     //----------for rso condition end
     return statusDate ? statusDate.split(',')[1] : null;
   }
 
@@ -82,6 +96,10 @@ class OrderStatusBar extends React.Component {
         <li class={this.getStatusBarCustomClassname(item, index)}>
 		<div className="status">{item}</div>
 		<div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+    {(item==='Delivered'|| item==='Undelivered') 
+      && this.props.shipmentDataPro.returnShipmentOrders 
+      && this.props.shipmentDataPro.returnShipmentOrders.length>0
+      && <div onClick={()=>{this.props.onRSODetail()}}>CHECK RETURN DETAILS</div>}
 		</li>
       )
     })

@@ -40,8 +40,8 @@ class CancelComponents extends React.Component {
 
     showModal(orderItem,orderData)
     {
-      //  console.log("AAAAAAA",orderData)
-       //  console.log("AAAAAAAITEM",orderItem)
+        console.log("AAAAAAA",orderData)
+        console.log("AAAAAAAITEM",orderItem)
         this.setState({
             showPopUp:'true',
             orderData:orderData,
@@ -105,6 +105,7 @@ class CancelComponents extends React.Component {
                 refundmethod:this.state.orderData.paymentMethod===''?"COD":this.state.orderData.paymentMethod,
                 cancelreason:this.state.value==='Other'?this.state.text:this.state.value,
                 partnumber:this.state.orderItem.partNumber,
+                primeLineNo:this.state.orderItem.primeLineNo
             };
         }
         apiManager
@@ -159,7 +160,7 @@ class CancelComponents extends React.Component {
                             {this.state.error && <p className='error-text'>{ERROR_MESSAGE_REASON}</p>}
                             {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
                             <div className='paymet-type'>
-                            <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>
+                            {this.state.orderData.paymentMethod!=='' && this.state.orderData.paymentMethod!=='COD' &&  <p className='msgText'><strong>{MESSAGE_REFUND_METHOD}</strong>{this.state.orderData.paymentMethod}</p>}
                             </div>
                             <div className='btn-wrapper'>
                                 <Button className="btn-cancel btn" onClick={this.handleClose}>{CANCEL}</Button>

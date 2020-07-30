@@ -15,6 +15,18 @@ import AddressItem from './addressItem';
 import AddAddressForm from './addAddressForm';
 import { ADD_NEW_ADD} from '../../../constants/app/myAccountConstants';
 
+const emptyAddress={
+  name: '',
+  phone_number: '',
+  email_id: '',
+  pincode: '',
+  address1: '',
+  address2: '',
+  address3: '',
+  city: '',
+  state: '',
+  default: String(false),
+}
 class ManageAddress extends React.Component {
   constructor(props) {
     super(props);
@@ -22,16 +34,7 @@ class ManageAddress extends React.Component {
       isAddAddress: false,
       addressListData: [],
       addressListItem: null,
-      editAddressData: {
-        name: '',
-        phone_number: '',
-        email_id: '',
-        pincode: '',
-        address: '',
-        city: '',
-        state: '',
-        default: String(false),
-      },
+      editAddressData: emptyAddress,
     };
     this.reference=React.createRef();
   }
@@ -41,7 +44,8 @@ class ManageAddress extends React.Component {
   }
 
   addNewAddressBtnClicked(editData) {
-    if(editData.addressID && this.state.isAddAddress && (this.state.editAddressData.addressID !== editData.addressID)){
+    debugger;    
+    if(editData && editData.addressID && this.state.isAddAddress && (this.state.editAddressData.addressID !== editData.addressID)){
       this.setState({
         isAddAddress: true,
         editAddressData: editData,
@@ -105,7 +109,7 @@ class ManageAddress extends React.Component {
         ) : (
           <button
             className="addNewAddress"
-            onClick={this.addNewAddressBtnClicked1.bind(this)}
+            onClick={()=>this.addNewAddressBtnClicked()}
           >
             <span className='icon'>+</span> {ADD_NEW_ADD}
           </button>

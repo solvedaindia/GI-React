@@ -120,7 +120,7 @@ class RWDSingleProduct extends React.Component {
         </div>
         <div className='clearfix'></div>
         <div className='orderStatus'>
-          {this.props.isFromViewOrder ? null : <OrderStatusBar shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' />}
+          {this.props.isFromViewOrder ? null : <OrderStatusBar onRSODetail={()=>this.props.onRSODetail()} shipmentDataPro={this.props.isMultiTrackPro ? this.props.shipmentDataPro : productData.shipmentData[0]} customClassPro='trackorder-wrap' />}
         </div>
         <div className='clearfix' />
         <div className='orderBtn'>

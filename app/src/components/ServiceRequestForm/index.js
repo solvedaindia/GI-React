@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import Dropdown from './dropdown';
 import UploadImage from './uploadImage';
 import EnterInvoiceView from './enterInvoiceView';
@@ -7,6 +9,7 @@ import AddressLists from './addressLists';
 import apiManager from '../../utils/apiManager';
 import { getAddressListAPI,getDetailtForSerReq,imagePrefix,saveServiceRequest } from '../../../public/constants/constants';
 import AddressList from './addressLists';
+import history from '../../utils/history'	
 import { ADD_NEW_ADD,SERVICE_REQUEST} from '../../constants/app/myAccountConstants';
 import AddAddressForm from '../../components/MyAccountComponents/ManageAddress/addAddressForm';
 import '../../../public/styles/myAccount/service-request.scss';
@@ -222,6 +225,7 @@ class ServiceRequestForm extends React.Component {
         console.log("PostResponse",response);
         alert("Service request submitted successfully")
         this.props.renderServiceRequestPro();
+        history.replace({ pathname: '/myAccount', state: {from:'serviceRequest'}}); 
       })
       .catch(error => {
         console.log("PostResponseError",error);
@@ -236,7 +240,7 @@ class ServiceRequestForm extends React.Component {
       this.setState({
         submitted:true,
       })
-      alert("aaaaaaa");
+     // alert("aaaaaaa");
      this.props.renderServiceRequestPro();
   }
 
@@ -383,4 +387,4 @@ class ServiceRequestForm extends React.Component {
   }
 
 }
-export default ServiceRequestForm;
+export default connect(withRouter)(ServiceRequestForm);
