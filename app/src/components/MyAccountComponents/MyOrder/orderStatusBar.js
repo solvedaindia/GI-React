@@ -99,7 +99,7 @@ class OrderStatusBar extends React.Component {
     {(item==='Delivered'|| item==='Undelivered') 
       && this.props.shipmentDataPro.returnShipmentOrders 
       && this.props.shipmentDataPro.returnShipmentOrders.length>0
-      && <div onClick={()=>{this.props.onRSODetail()}}>CHECK RETURN DETAILS</div>}
+      && <div className="returnDetails" onClick={()=>{this.props.onRSODetail()}}>CHECK RETURN DETAILS</div>}
 		</li>
       )
     })

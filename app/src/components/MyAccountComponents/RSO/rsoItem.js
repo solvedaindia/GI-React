@@ -1,7 +1,7 @@
 import React from 'react';
 import { imagePrefix } from '../../../../public/constants/constants';
 import  OrderStatusBar  from '../../MyAccountComponents/MyOrder/orderStatusBar';
-import { formatPrice } from '../../../utils/utilityManager';
+import { formatPrice, isMobile } from '../../../utils/utilityManager';
 const showImg = <img className='iconImg' src={require('../../SVGs/plusIcon.svg')}  alt='Increase'/>
 const hideImg = <img className='iconImg' src={require('../../SVGs/minusIcon.svg')}  alt='Decrease'/>
 
@@ -63,7 +63,30 @@ class RSOItem extends React.Component {
                     <div className={`orderSummery  clearfix ${this.state.isExpend ? `heightActive` : `heightInActive`}`}>
                         <div className="refundsummarydata">
                             <h4 className ='refundSummaryTitle'>Refund Summary</h4> 
-                            <table className ='refundTable'>
+                            {isMobile() ? (<table className ='refundTable'>
+                                {
+                                    data.returnRefundSummary && Array.isArray(data.returnRefundSummary) &&
+                                    data.returnRefundSummary.map(refundElement=>{
+                                        return (
+                                            <>
+                                            <tr>
+                                                <td>Transaction ID </td>
+                                                <td>{refundElement.transactionID}</td> 
+                                            </tr>
+                                            <tr>
+                                               <td>Amount</td>
+                                               <td>₹{formatPrice(refundElement.refundAmount)}</td>
+                                            </tr>
+                                            <tr>
+                                               <td>Mode</td>
+                                               <td>{refundElement.paymentMode}</td>
+                                            </tr>
+                                            </>
+                                          )
+                                    })
+                                }
+                            </table>)
+                            :(<table className ='refundTable'>
                                 <tr className ='refundDataHeading'>
                                     <th>Transaction ID</th>
                                     <th>Amount</th>
@@ -81,7 +104,7 @@ class RSOItem extends React.Component {
                                           )
                                     })
                                 }
-                            </table>
+                            </table>)}
                         </div>
                     </div>
                     {

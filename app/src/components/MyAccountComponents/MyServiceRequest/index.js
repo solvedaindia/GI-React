@@ -60,6 +60,7 @@ class ServiceRequestPage extends React.Component {
 
   render() {
     return (
+      <div className="ongoing-orderservice">
       <div className="myOrder">
         {this.state.serviceListData.length !== 0 && this.state.showTrackDetails ?
           this.renderBackNavigation()
@@ -80,16 +81,19 @@ class ServiceRequestPage extends React.Component {
         }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
         }
       </div>
+      </div>
     );
   }
 
   renderBackNavigation() {
     return (
       <>
+      <div className="trackMyOrder">
         <div className="bottomDivider">
           <button className="backBtn" onClick={this.renderSelection.bind(this)} >{`< Back`}</button>
         </div>
         <h4>Track Service Request</h4>
+      </div>
       </>
     )
   }

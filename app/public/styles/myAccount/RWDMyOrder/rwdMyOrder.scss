@@ -421,10 +421,15 @@
 
 
     &.multi-item-order{
-      .orderStatus{
+      .orderBtn{
         float: left;
-        width: 100%;
+        width:100%;
+        padding: 20px 15px;
         border-bottom: 12px solid $greybg;
+        margin-bottom: 15px;
+      }
+      .orderStatus{
+        width: 100%;
       }
       .itemBoxTrack{
         .itemInfo{

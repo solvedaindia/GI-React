@@ -154,7 +154,7 @@
             background: $colorwhite;
             border: 1px solid $greyish;
             border-radius: 0px;
-            min-width: 160px;
+            min-width: 340px;
             text-align: left;
             color: $greyish;
             font-size: $base*1.75;
@@ -168,6 +168,11 @@
           }
           .dropdown-menu{
             width: 100%;
+            li{
+              a{
+                white-space: normal;
+              }
+            }
           }
         }
       }
@@ -279,6 +284,7 @@
           border: 1px solid $battleshipGrey;
           padding: 5px 10px;
           background: $colorwhite;
+          resize: none;
         }
         .label-text{
           display: block;
@@ -492,8 +498,95 @@
 #Global Mobile screen - 767 max
 */
 @include mix-md {
+  .myOnGoingOoders{
+    padding:0;
+  }
+  .ongoing-orderservice{
+    .myOrder {
+      .tabBar{
+        padding: 13px 15px;
+        background-color: $paleGrey;
+        position: relative;      
+      
+        .heading {
+          .list {
+            .heading-top{
+              font-size: 10px;
+              line-height: 12px;
+              padding: 0 0 0px 0;
+              color: $ashGrey;
+            }
+            .heading-sub{
+              color: $ashGrey;
+              font-size: 11px;
+              line-height: 15px;
+              font-family: $font-regular;
+            }
+          }
+        }
+      }
+
+      .itemBox {
+        .orderProduct {
+          .orderbtn{           
+             width: 50%; 
+             margin-top: 10px;    
+             float:right;
+             .btn-borderwhite{
+               background-color: $black;
+               color:$colorwhite;
+             }
+          }
+          .orderimgbox{
+            width:100%;
+          }
+        }
+      }
+    }
+  }
   .service-request{
     margin: 0px $base*2;
+    .bottomDivider{
+      display: none;
+    }
+    .tabBar{      
+      .heading{
+         .list{
+           .heading-sub{
+             float:right;
+           }
+         }
+      } 
+      .btn-collapse{
+        background:$black;
+        padding: 8px 15px;
+        color:$colorwhite;
+        border: none;
+        margin-bottom: 15px;
+        float: right;
+        .iconImg{          
+            width: 15px;
+            margin: 0 0 0 14px;
+        }
+      }
+    }
+   
+    .itemBox{
+      .refundTable{
+        width:100%;
+        tr{
+          border-bottom: 1px solid #ccc;
+        }
+        td,th{
+          padding:5px;
+        }
+      }
+      .orderSummery{
+        .refundsummarydata{
+          margin:0 0 15px 0;
+        }
+      }
+    }
     > .heading{
       margin:$base*3 0 $base*3 0;
     }
@@ -503,9 +596,6 @@
       padding-top: $base*2;
       clear: both;
       margin:0px 0px 20px 0px;
-    }
-    .bottomDivider{
-      display: none;
     }
     .itemBox{
       .orderProduct{
@@ -529,7 +619,13 @@
         }
       }
     }
-
+    .product-category{
+      .dropdown{
+        .dropdown-toggle{
+          min-width: 320px;
+        }
+      }
+    }
     .product-category, .invice-selection{
       .dropdown{
         width: 100%;
@@ -552,6 +648,9 @@
     .actionBtnWrapper{
       padding-top: $base * 1.75;
       padding-bottom: $base*6;
+    }
+    .heightInActive{
+      display: none;
     }
   }
 }
