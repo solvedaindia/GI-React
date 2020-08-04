@@ -224,9 +224,9 @@ class OrderConformation extends React.Component {
                   <div className="col-xs-6 col-sm-6 col-md-3">
                     <div className="heading">Address</div>
                     <div className="subText">
-                      {thi1s.state.orderData.address.address1}{' '}
-                      {thi1s.state.orderData.address.address2}{' '}
-                      {thi1s.state.orderData.address.address3},{' '}
+                      {this.state.orderData.address.address1}{' '}
+                      {this.state.orderData.address.address2}{' '}
+                      {this.state.orderData.address.address3},{' '}
                       {this.state.orderData.address.city},{' '}
                       {this.state.orderData.address.state},{' '}
                       {this.state.orderData.address.pincode}
