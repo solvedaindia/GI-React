@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 
 class Dropdown extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -9,26 +8,35 @@ class Dropdown extends React.Component {
     };
   }
 
-  onSelection = (value,index) => {
+  onSelection = (value, index) => {
     this.setState({
       dropdownValue: value
-    })
+    });
     this.state.dropdownValue = value;
-    this.props.onSelection(value,index);
-  }
+    this.props.onSelection(value, index);
+  };
 
   render() {
-    console.log('ddkk')
     return (
       <div>
         <div className="dropdown">
-          <button className="btn dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownValue}<span className="caret"></span></button>
+          <button
+            className="btn dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            {this.state.dropdownValue}
+            <span className="caret" />
+          </button>
           <ul className="dropdown-menu">
-            {this.props.data.map((data,i) => {
-              return (
-                <li onClick={() => this.onSelection(data,i)}><a>{data}</a></li>
-              )
-            })}
+            {Array.isArray(this.props.data) &&
+              this.props.data.map((data, i) => {
+                return (
+                  <li onClick={() => this.onSelection(data, i)}>
+                    <a>{data}</a>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>

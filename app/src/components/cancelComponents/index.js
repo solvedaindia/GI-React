@@ -50,8 +50,6 @@ class CancelComponents extends React.Component {
   // }
 
   showModal(orderItem, orderData) {
-    console.log("AAAAAAA", orderData);
-    console.log("AAAAAAAITEM", orderItem);
     this.setState({
       showPopUp: "true",
       orderData: orderData,
@@ -134,7 +132,6 @@ class CancelComponents extends React.Component {
   handleParentStateFromChildState(values, texts) {
     // alert(values)
     //this.setState =({value:values,text: texts});
-    console.log(values, texts);
     this.setState({
       value: values,
       text: texts,

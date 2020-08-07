@@ -15,7 +15,7 @@ import {
   BankListAPI
 } from "../../../public/constants/constants";
 import "../../../public/styles/myAccount/service-request.scss";
-import {imagePrefix} from "../../../public/constants/constants";
+import { imagePrefix } from "../../../public/constants/constants";
 
 class ReturnRequestForm extends React.Component {
   constructor(props) {
@@ -24,13 +24,16 @@ class ReturnRequestForm extends React.Component {
       returnRequestReasons: [],
       selectedQuantity: "1",
       selectedReason: "",
-      isBankDetailsValid: ( props.orderData.paymentMethod !=='' ),
+      isBankDetailsValid: props.orderData.paymentMethod !== "",
       selectedImages: [],
       otherReason: "",
       showTextview: false,
       characterCount: 100,
       characterLimit: 100,
-      fullPaymentMode: props.orderData.paymentMethod==""?"COD":props.orderData.paymentMethod,
+      fullPaymentMode:
+        props.orderData.paymentMethod == ""
+          ? "COD"
+          : props.orderData.paymentMethod,
       bankInfo: {}
     };
     this.onOtherReasonEnter = this.onOtherReasonEnter.bind(this);
@@ -45,24 +48,18 @@ class ReturnRequestForm extends React.Component {
   componentDidMount() {
     //this.returnOrderShipmentAPI();
     this.fetchReasonArray();
-    console.log("return_datas",this.props.orderShipmentData)
-    console.log("return_dataoi",this.props.orderItemData)
-    console.log("return_dataod",this.props.orderData)
   }
 
-  fetchReasonArray()
-    {
-        apiManager
-        .get(espotReasonOrderReturn)
-        .then(response => {
-          this.setState({
-            returnRequestReasons:response.data.data,
-          })
-        })
-        .catch(error => {
-      
+  fetchReasonArray() {
+    apiManager
+      .get(espotReasonOrderReturn)
+      .then(response => {
+        this.setState({
+          returnRequestReasons: response.data.data
         });
-    }
+      })
+      .catch(error => {});
+  }
 
   // to be modified ...
   // getDetailAPI = () => {
@@ -94,25 +91,23 @@ class ReturnRequestForm extends React.Component {
   //     });
   // }
 
- 
   returnOrderShipmentAPI() {
     let returnReason;
     let imageEndpoint1 = `${imagePrefix}${thumbnail}`;
     let imageEndpoint2 = `${imagePrefix}${thumbnail2}`;
-    
+
     const {
       selectedQuantity,
-      selectedReason, 
-      selectedImages, 
+      selectedReason,
+      selectedImages,
       otherReason,
       fullPaymentMode,
-      bankInfo   
+      bankInfo
     } = this.state;
-    if (selectedReason === 'Other' )
-    returnReason = otherReason;
+    if (selectedReason === "Other") returnReason = otherReason;
 
     returnReason = selectedReason;
-     
+
     const {
       partNumber,
       shipmentData,
@@ -123,42 +118,42 @@ class ReturnRequestForm extends React.Component {
       thumbnail2
     } = this.props.orderItemData;
 
-    const {
-      transactions,
-      orderID,
-    } = this.props.orderData;
-  
+    const { transactions, orderID } = this.props.orderData;
 
     const data = {
-        "orderId": orderID,
-        "shipmentNo": this.props.orderShipmentData && this.props.orderShipmentData.shipmentNo,
-        "partNumber": partNumber,
-        "price": returnUnitPrice,
-        "quantity": selectedQuantity,
-        "returnReason": returnReason,
-        "refundMethod": transactions && transactions[0].paymentMode,
-        "bankDetails":{ 
-          "name": bankInfo.Name,
-          "accountNO": bankInfo.AccountNumber,
-          "confirmAccountNO": bankInfo.AcoountNumberConfirm,
-          "IFSCCode": bankInfo.ifscCode
-         },
-        "images":selectedImages,
-        "invoiceNo": this.props.orderShipmentData && this.props.orderShipmentData.invoiceNo,
-        "shipNode": this.props.orderShipmentData && this.props.orderShipmentData.shipNode,
-        "primeLineNo": primeLineNo,
-        "subLineNo": subLineNo,
+      orderId: orderID,
+      shipmentNo:
+        this.props.orderShipmentData && this.props.orderShipmentData.shipmentNo,
+      partNumber: partNumber,
+      price: returnUnitPrice,
+      quantity: selectedQuantity,
+      returnReason: returnReason,
+      refundMethod: transactions && transactions[0].paymentMode,
+      bankDetails: {
+        name: bankInfo.Name,
+        accountNO: bankInfo.AccountNumber,
+        confirmAccountNO: bankInfo.AcoountNumberConfirm,
+        IFSCCode: bankInfo.ifscCode
+      },
+      images: selectedImages,
+      invoiceNo:
+        this.props.orderShipmentData && this.props.orderShipmentData.invoiceNo,
+      shipNode:
+        this.props.orderShipmentData && this.props.orderShipmentData.shipNode,
+      primeLineNo: primeLineNo,
+      subLineNo: subLineNo,
       //   "creditCardNo": transactions[0].creditCardNo,
-        "transactionId": transactions && transactions[0].transactionID,
-        "transactionDate": transactions && transactions[0].transactionDate
-      };
-      console.log("returnOrderShipment",data);
-      apiManager
+      transactionId: transactions && transactions[0].transactionID,
+      transactionDate: transactions && transactions[0].transactionDate
+    };
+
+    apiManager
       .post(returnOrderShipment, data)
       .then(response => {
-        console.log(response);
         alert("Return request submitted successfully!");
-        isMobile() ? this.props.onCancel() : this.props.renderReturnRequestPro()
+        isMobile()
+          ? this.props.onCancel()
+          : this.props.renderReturnRequestPro();
       })
       .catch(error => {});
   }
@@ -176,8 +171,6 @@ class ReturnRequestForm extends React.Component {
   }
 
   getBankDetails(value) {
-    // debugger;
-    console.log("bankinfo",value);
     this.setState({
       bankInfo: value
     });
@@ -255,26 +248,23 @@ class ReturnRequestForm extends React.Component {
             : ` ${this.state.fullPaymentMode}`}
         </div>
         {this.state.fullPaymentMode === "COD" ? (
-          <BankDetails onSubmit={this.getBankDetails} handleInputValidation={this.onValidationChange} />
+          <BankDetails
+            onSubmit={this.getBankDetails}
+            handleInputValidation={this.onValidationChange}
+          />
         ) : null}
       </div>
     );
   }
 
   handleSubmit() {
-    console.log(this.props.renderSelectionPro);
-    console.log(this.state);
     this.returnOrderShipmentAPI();
   }
 
   render() {
-    console.log(this.props.orderData);
-    console.log(this.props.orderItemData);
-    
-    console.log(this.props.orderList);
     const { isBankDetailsValid, selectedImages, selectedReason } = this.state;
     const isSaveDisabled =
-    !isBankDetailsValid || !selectedImages.length || !selectedReason.length   ;
+      !isBankDetailsValid || !selectedImages.length || !selectedReason.length;
 
     return (
       <div>
@@ -296,7 +286,9 @@ class ReturnRequestForm extends React.Component {
             <button
               className="btn-cancel btn"
               onClick={
-                isMobile() ? this.props.onCancel : this.props.renderReturnRequestPro
+                isMobile()
+                  ? this.props.onCancel
+                  : this.props.renderReturnRequestPro
               }
             >
               Cancel
@@ -318,7 +310,10 @@ class ReturnRequestForm extends React.Component {
     return (
       <div className="add-img">
         <h4 className="heading">Add Image</h4>
-        <UploadImage type={"ser"}  onImageAddRemove={this.onImageAddRemove.bind(this)} />
+        <UploadImage
+          type={"ser"}
+          onImageAddRemove={this.onImageAddRemove.bind(this)}
+        />
       </div>
     );
   }
@@ -344,10 +339,9 @@ class ReturnRequestForm extends React.Component {
     let shipmentData = this.props.orderShipmentData;
     let imageEndpoint = `${imagePrefix}${data.thumbnail}`;
     let cancelQuantity = [];
-    if (data.quantity>0) {
+    if (data.quantity > 0) {
       let i;
-      for(i=1; i<= shipmentData.quantity; i++)
-      cancelQuantity.push(i);
+      for (i = 1; i <= shipmentData.quantity; i++) cancelQuantity.push(i);
     }
 
     return (
@@ -356,16 +350,11 @@ class ReturnRequestForm extends React.Component {
           <div className="orderProduct clearfix">
             <div className="orderimgbox clearfix">
               <div className="imgBox">
-                <img
-                  src={imageEndpoint}
-                  className="imgfullwidth"
-                />
+                <img src={imageEndpoint} className="imgfullwidth" />
               </div>
               <div className="product-text">
                 <p className="heading">{data.productName}</p>
-                <p className="description">
-                  ({data.shortDescription})
-                </p>
+                <p className="description">({data.shortDescription})</p>
                 <p className="price">
                   <span className="discount-price">
                     ₹ {data.returnUnitPrice}
@@ -374,17 +363,17 @@ class ReturnRequestForm extends React.Component {
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
                     <span className="heading">Quantity: </span>
-                    {data.quantity == 0 ?
-                    <>
-                    <span className="textval">
-                      {data.quantity}
-                    </span>
-                    </> :
-                    <Dropdown
-                      data={cancelQuantity}
-                      title="1"
-                      onSelection={this.getReturnRequestQuantity}
-                    />}
+                    {data.quantity == 0 ? (
+                      <>
+                        <span className="textval">{data.quantity}</span>
+                      </>
+                    ) : (
+                      <Dropdown
+                        data={cancelQuantity}
+                        title="1"
+                        onSelection={this.getReturnRequestQuantity}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

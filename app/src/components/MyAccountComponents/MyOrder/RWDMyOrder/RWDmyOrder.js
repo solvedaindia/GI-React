@@ -1,32 +1,31 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getReleventReduxState } from '../../../../utils/utilityManager';
-import apiManager from '../../../../utils/apiManager';
-import { orderListAPI } from '../../../../../public/constants/constants';
-import '../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss';
-import RWDOrderItem from './RWDOrderItem';
-import TrackOrder from '../TrackMyOrder/trackOrder';
-import RWDSingleProduct from './RWDSingleProduct';
-import RWDMultiTrack from './RWDMultiTrack';
-import RWDCompleteOrder from './RWDCompleteOrder';
-import { updateTheRWDHeader } from '../../../../actions/app/actions';
-import CancelComponents from '../../../cancelComponents/index';
-import ServiceRequestForm from '../../../ServiceRequestForm/index';
-import ReturnRequestForm from '../../../ReturnRequestForm/index'; 
-import RSODetail from '../../RSO/index'; 
-
+import React from "react";
+import { connect } from "react-redux";
+import { getReleventReduxState } from "../../../../utils/utilityManager";
+import apiManager from "../../../../utils/apiManager";
+import { orderListAPI } from "../../../../../public/constants/constants";
+import "../../../../../public/styles/myAccount/RWDMyOrder/rwdMyOrder.scss";
+import RWDOrderItem from "./RWDOrderItem";
+import TrackOrder from "../TrackMyOrder/trackOrder";
+import RWDSingleProduct from "./RWDSingleProduct";
+import RWDMultiTrack from "./RWDMultiTrack";
+import RWDCompleteOrder from "./RWDCompleteOrder";
+import { updateTheRWDHeader } from "../../../../actions/app/actions";
+import CancelComponents from "../../../cancelComponents/index";
+import ServiceRequestForm from "../../../ServiceRequestForm/index";
+import ReturnRequestForm from "../../../ReturnRequestForm/index";
+import RSODetail from "../../RSO/index";
 
 class RWDMyOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReturnRequest:false,
+      isReturnRequest: false,
       returnOrderData: undefined,
       returnOrderItemData: undefined,
-      returnOrderShipmentData:undefined,
+      returnOrderShipmentData: undefined,
       isTrackOrder: false,
-      isServiceRequest:false,
-      isRSODetail:false,
+      isServiceRequest: false,
+      isRSODetail: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
       isLoading: true,
@@ -43,133 +42,116 @@ class RWDMyOrder extends React.Component {
 
       currentComponent: null,
       currentComponentData: null,
-      currentCompleteData: null,
+      currentCompleteData: null
     };
-    this.renderSelection = this.renderSelection.bind(this)
+    this.renderSelection = this.renderSelection.bind(this);
     this.onscroll = this.onscroll.bind(this);
     this.myOrderCallback = this.myOrderCallback.bind(this);
     this.orderDetailCallback = this.orderDetailCallback.bind(this);
-    this.showCancelModal=this.showCancelModal.bind(this);
-    this.showServiceRequestForm=this.showServiceRequestForm.bind(this);
-    this.modalRef=React.createRef();
+    this.showCancelModal = this.showCancelModal.bind(this);
+    this.showServiceRequestForm = this.showServiceRequestForm.bind(this);
+    this.modalRef = React.createRef();
     this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
     this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
     this.onRSODetail = this.onRSODetail.bind(this);
-  
   }
 
   componentDidMount() {
-    addEventListener('scroll', this.onscroll);
+    addEventListener("scroll", this.onscroll);
     if (this.props.isGuestTrackOrderPro) {
       this.setState({
         orderListData: this.props.guestOrderDataPro,
         hasMore: false,
-        isLoading: false,
+        isLoading: false
       });
-    }
-    else {
+    } else {
       this.getOrderList();
     }
   }
 
   componentWillUnmount() {
-    removeEventListener('scroll', this.onscroll);
+    removeEventListener("scroll", this.onscroll);
   }
 
   componentWillReceiveProps(nextProps) {
-    
-    if(this.state.isServiceRequest)
-    {
+    if (this.state.isServiceRequest) {
       this.setState({
-        isServiceRequest:false,
-        currentComponentData:this.state.currentCompleteData,
-      })
-    }
-    else if(this.state.isReturnRequest)
-    {
+        isServiceRequest: false,
+        currentComponentData: this.state.currentCompleteData
+      });
+    } else if (this.state.isReturnRequest) {
       this.setState({
-        isReturnRequest:false
-      })
-    }
-    else if(this.state.isRSODetail)
-    {
+        isReturnRequest: false
+      });
+    } else if (this.state.isRSODetail) {
       this.setState({
-        isRSODetail:false,
-        currentComponent:null,
-      })
-    }
-    else if (nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal) {
-      if (nextProps.updatedHeaderReturnVal === 'MyOrder Return') {
+        isRSODetail: false,
+        currentComponent: null
+      });
+    } else if (
+      nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal
+    ) {
+      if (nextProps.updatedHeaderReturnVal === "MyOrder Return") {
         this.setState({
-          currentComponent: '',
-          currentComponentData: null,
-        })
-        this.props.updateTheRWDHeader('');
+          currentComponent: "",
+          currentComponentData: null
+        });
+        this.props.updateTheRWDHeader("");
       }
     }
   }
 
-  showCancelModal(orderItem,orderData)
-  {
-    //console.log(this.modalRef)
-    console.log(orderItem,orderData)
-    this.modalRef.current.showModal(orderItem,orderData);
+  showCancelModal(orderItem, orderData) {
+    this.modalRef.current.showModal(orderItem, orderData);
   }
-  showServiceRequestForm(orderItem,orderData)
-  {
-     console.log(orderItem,orderData)
-     this.setState({
-        currentComponentData:orderItem,
-        currentCompleteData:orderData,
-       isServiceRequest:true
-    })
-  }
-  renderServiceRequestBack()
-  {
+  showServiceRequestForm(orderItem, orderData) {
     this.setState({
-      isServiceRequest:false,
-      currentComponentData:this.state.currentCompleteData,
-    })
+      currentComponentData: orderItem,
+      currentCompleteData: orderData,
+      isServiceRequest: true
+    });
+  }
+  renderServiceRequestBack() {
+    this.setState({
+      isServiceRequest: false,
+      currentComponentData: this.state.currentCompleteData
+    });
   }
 
   myOrderCallback(compName, data, completeData) {
-    if (compName === 'ViewOrder') {
-      this.props.updateTheRWDHeader('My Order Redirect');
-    }
-    else {
-      this.props.updateTheRWDHeader('Track Order');
+    if (compName === "ViewOrder") {
+      this.props.updateTheRWDHeader("My Order Redirect");
+    } else {
+      this.props.updateTheRWDHeader("Track Order");
     }
 
     this.setState({
       currentComponent: compName,
       currentComponentData: data,
-      currentCompleteData: completeData,
-    })
+      currentCompleteData: completeData
+    });
   }
-  onRSODetail()
-  {
+  onRSODetail() {
     this.setState({
-      isRSODetail:!this.state.isRSODetail,
-    })
+      isRSODetail: !this.state.isRSODetail
+    });
   }
 
   orderDetailCallback(data) {
-   
-    this.props.updateTheRWDHeader('My Order Redirect');
+    this.props.updateTheRWDHeader("My Order Redirect");
     this.setState({
-      currentComponent: 'ViewOrder',
-      currentComponentData: data,
-    })
+      currentComponent: "ViewOrder",
+      currentComponentData: data
+    });
   }
 
   viewOrderTrackbtnCallback(data) {
-    this.props.updateTheRWDHeader('Track Order');
+    this.props.updateTheRWDHeader("Track Order");
     this.setState({
-      currentComponent: 'MultiProduct',
+      currentComponent: "MultiProduct",
       currentComponentData: data
-    })
+    });
   }
-
 
   getOrderList(isFromScroll) {
     this.setState({ isLoading: true }, () => {
@@ -177,19 +159,22 @@ class RWDMyOrder extends React.Component {
         `${orderListAPI}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&`;
-      apiManager.get(orderAPI)
+      apiManager
+        .get(orderAPI)
         .then(response => {
           this.setState({
-            orderListData: isFromScroll ? [...this.state.orderListData, ...response.data.data.orderList] : response.data.data.orderList,
+            orderListData: isFromScroll
+              ? [...this.state.orderListData, ...response.data.data.orderList]
+              : response.data.data.orderList,
             hasMore: response.data.data.orderList.length !== 0, // Now only show on 0 Products and disable it for lazyload
-            isLoading: false,
+            isLoading: false
           });
         })
         .catch(error => {
           this.setState({
             isLoading: false,
-            error: error.message,
-          })
+            error: error.message
+          });
         });
     });
   }
@@ -201,22 +186,29 @@ class RWDMyOrder extends React.Component {
     });
   }
 
-
   onscroll = () => {
-    const { state: { error, isLoading, hasMore }, } = this;
+    const {
+      state: { error, isLoading, hasMore }
+    } = this;
 
     var scrollYindex;
-    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+    if (
+      navigator.userAgent.search("Safari") >= 0 &&
+      navigator.userAgent.search("Chrome") < 0
+    ) {
+      //Safari browser
       scrollYindex = window.innerHeight + document.body.scrollTop;
-    } else if (window.navigator.userAgent.indexOf("Edge") > -1) { //Edge browser
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1) {
+      //Edge browser
       scrollYindex = window.innerHeight + window.pageYOffset;
-    } else { //All other browsers
+    } else {
+      //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
 
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
-    const windowHeight = scrollYindex
+    const windowHeight = scrollYindex;
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
@@ -244,115 +236,106 @@ class RWDMyOrder extends React.Component {
         if (item.installationRequired) {
           isInstallationRequired = true;
         }
-      })
+      });
 
       if (isInstallationRequired) {
-        if (data.orderStatus === 'Installed') {
-          tagOutput = 'Past Orders';
+        if (data.orderStatus === "Installed") {
+          tagOutput = "Past Orders";
           this.state.isPastOrdeShown = true;
-        }
-        else {
-          tagOutput = 'Ongoing Orders'
+        } else {
+          tagOutput = "Ongoing Orders";
           this.state.isOnGoingOrderShown = true;
         }
-      }
-      else {
-        if (data.orderStatus === 'Delivered') {
-          tagOutput = 'Past Orders';
+      } else {
+        if (data.orderStatus === "Delivered") {
+          tagOutput = "Past Orders";
           this.state.isPastOrdeShown = true;
-        }
-        else {
-          tagOutput = 'Ongoing Orders'
+        } else {
+          tagOutput = "Ongoing Orders";
           this.state.isOnGoingOrderShown = true;
         }
       }
 
-      return <h2 className='heading-text'>{tagOutput}</h2>
-    }
-    else {
+      return <h2 className="heading-text">{tagOutput}</h2>;
+    } else {
       return null;
     }
   }
 
   loadingbar() {
-    const loaderItem = <div className="lazyloading-Indicator">
-      <img
-        id="me"
-        className="loadingImg"
-        src={require('../../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-        alt='Loading Orders'
-      />
-    </div>
+    const loaderItem = (
+      <div className="lazyloading-Indicator">
+        <img
+          id="me"
+          className="loadingImg"
+          src={require("../../../../../public/images/plpAssests/lazyloadingIndicator.svg")}
+          alt="Loading Orders"
+        />
+      </div>
+    );
     return loaderItem;
   }
 
-  showReturnRequestForm(productData,CompleteOrderData,shipmentData)
-  {
-    this.props.updateTheRWDHeader('show return')
+  showReturnRequestForm(productData, CompleteOrderData, shipmentData) {
+    this.props.updateTheRWDHeader("show return");
     this.setState({
-      isReturnRequest:true,
+      isReturnRequest: true,
       returnOrderData: CompleteOrderData,
-      returnOrderItemData:productData,
-      returnOrderShipmentData:shipmentData,
-    })
-    
+      returnOrderItemData: productData,
+      returnOrderShipmentData: shipmentData
+    });
   }
-  showReturnRequestFormForSingle(shipmentData)
-  {
-    console.log("MultiORSH",shipmentData);
-    this.props.updateTheRWDHeader('show return')
+  showReturnRequestFormForSingle(shipmentData) {
+    this.props.updateTheRWDHeader("show return");
     this.setState({
-      isReturnRequest:true,
+      isReturnRequest: true,
       returnOrderData: this.state.currentCompleteData,
-      returnOrderItemData:this.state.currentComponentData,
-      returnOrderShipmentData:shipmentData,
-    })
-    
+      returnOrderItemData: this.state.currentComponentData,
+      returnOrderShipmentData: shipmentData
+    });
   }
 
-  renderReturnRequestBack()
-  {
+  renderReturnRequestBack() {
     this.setState({
-      isReturnRequest:false
-    })
+      isReturnRequest: false
+    });
   }
-
 
   render() {
-    // debugger;
-    console.log("this.state.currentComponent",this.state.currentComponent);
     this.state.isOnGoingOrderShown = false;
     this.state.isPastOrdeShown = false;
-    if(this.state.isServiceRequest)
-    {
-      return(
-        <ServiceRequestForm orderData={this.state.currentCompleteData} 
-          orderItemData={this.state.currentComponentData} 
-          renderServiceRequestPro={this.renderServiceRequestBack.bind(this)}/>
-      )
-    }
-    else if(this.state.isReturnRequest)
-    {return (
-      <ReturnRequestForm 
-        onCancel = {this.renderReturnRequestBack} 
-       orderList={this.state.orderListData}  
-      // dataPro={this.state.updatedTrackOrderData}  
-        trackOrderDataPro={this.state.updatedTrackOrderData} 
-        renderReturnRequestPro={this.renderReturnRequest}
-        orderData={this.state.currentCompleteData} 
-        orderItemData={this.state.returnOrderItemData}
-        orderShipmentData={this.state.returnOrderShipmentData}
-        paymentMode="COD"/>
-    )
-    }
-    else if(this.state.isRSODetail)
-    {
-      return(
-      <RSODetail backPress={()=>{this.onRSODetail}} orderData={this.state.currentCompleteData}  />
-      )
-    }
-
-    else if (this.state.currentComponent === 'SingleProduct') {
+    if (this.state.isServiceRequest) {
+      return (
+        <ServiceRequestForm
+          orderData={this.state.currentCompleteData}
+          orderItemData={this.state.currentComponentData}
+          renderServiceRequestPro={this.renderServiceRequestBack.bind(this)}
+        />
+      );
+    } else if (this.state.isReturnRequest) {
+      return (
+        <ReturnRequestForm
+          onCancel={this.renderReturnRequestBack}
+          orderList={this.state.orderListData}
+          // dataPro={this.state.updatedTrackOrderData}
+          trackOrderDataPro={this.state.updatedTrackOrderData}
+          renderReturnRequestPro={this.renderReturnRequest}
+          orderData={this.state.currentCompleteData}
+          orderItemData={this.state.returnOrderItemData}
+          orderShipmentData={this.state.returnOrderShipmentData}
+          paymentMode="COD"
+        />
+      );
+    } else if (this.state.isRSODetail) {
+      return (
+        <RSODetail
+          backPress={() => {
+            this.onRSODetail;
+          }}
+          orderData={this.state.currentCompleteData}
+        />
+      );
+    } else if (this.state.currentComponent === "SingleProduct") {
       return (
         <div className="myOrder single-item-order">
           <RWDSingleProduct
@@ -363,15 +346,19 @@ class RWDMyOrder extends React.Component {
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
             showServiceRequestForm={this.showServiceRequestForm}
-            orderCompleteDataPro={this.state.currentCompleteData} 
-            shipmentDataPro={this.state.currentComponentData.shipmentData?this.state.currentComponentData.shipmentData[0]:undefined}
-            isMultiTrackPro={true} 
-            onReturn = {this.showReturnRequestFormForSingle.bind(this)} />
-            <CancelComponents ref={this.modalRef}/>
+            orderCompleteDataPro={this.state.currentCompleteData}
+            shipmentDataPro={
+              this.state.currentComponentData.shipmentData
+                ? this.state.currentComponentData.shipmentData[0]
+                : undefined
+            }
+            isMultiTrackPro={true}
+            onReturn={this.showReturnRequestFormForSingle.bind(this)}
+          />
+          <CancelComponents ref={this.modalRef} />
         </div>
       );
-    }
-    else if (this.state.currentComponent === 'MultiProduct') {
+    } else if (this.state.currentComponent === "MultiProduct") {
       return (
         <div className="myOrder multi-item-order">
           <RWDMultiTrack
@@ -379,66 +366,76 @@ class RWDMyOrder extends React.Component {
             onRSODetail={this.onRSODetail}
             showCancelModal={this.showCancelModal}
             currentCompleteData={this.state.currentCompleteData}
-            myOrderCallbackPro={this.myOrderCallback} 
-            onReturn = {this.showReturnRequestForm}/>
-            <CancelComponents ref={this.modalRef}/>
+            myOrderCallbackPro={this.myOrderCallback}
+            onReturn={this.showReturnRequestForm}
+          />
+          <CancelComponents ref={this.modalRef} />
         </div>
       );
-    }
-    else if (this.state.currentComponent === 'ViewOrder') {
-      // console.log(this.state.currentComponentData);
+    } else if (this.state.currentComponent === "ViewOrder") {
       return (
         <div className="myOrder View-Order">
           <RWDCompleteOrder
-            cancelRefundSummaryPro = {this.state.currentComponentData.cancelRefundSummary}
+            cancelRefundSummaryPro={
+              this.state.currentComponentData.cancelRefundSummary
+            }
             onRSODetail={this.onRSODetail}
             orderDataPro={this.state.currentComponentData}
             showCancelModal={this.showCancelModal}
             myOrderCallbackPro={this.myOrderCallback}
             showServiceRequestForm={this.showServiceRequestForm}
-            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(this)} />
-            <CancelComponents ref={this.modalRef}/>
+            viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(
+              this
+            )}
+          />
+          <CancelComponents ref={this.modalRef} />
         </div>
       );
-    }
-    else {
-  
+    } else {
       return (
         <div className="myOrder">
-          {this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
-            return (
-              <>
-                {this.displayOnGoingPastOrder(data)}
-                <RWDOrderItem
-                  renderSelectionPro={this.renderSelection.bind(this)}
-                  isGuestTrackOrderPro={this.state.isGuestTrackOrder}
-                  orderItemData={data}
-                  myOrderCallbackPro={this.myOrderCallback}
-                  showCancelModal={this.showCancelModal}
-                  renderReturnRequestPro={this.renderReturnRequest}
-                />
-              </>
-            )
-
-          }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
-          }
-        <CancelComponents ref={this.modalRef}/>
+          {this.state.orderListData.length !== 0 ? (
+            this.state.orderListData.map((data, key) => {
+              return (
+                <>
+                  {this.displayOnGoingPastOrder(data)}
+                  <RWDOrderItem
+                    renderSelectionPro={this.renderSelection.bind(this)}
+                    isGuestTrackOrderPro={this.state.isGuestTrackOrder}
+                    orderItemData={data}
+                    myOrderCallbackPro={this.myOrderCallback}
+                    showCancelModal={this.showCancelModal}
+                    renderReturnRequestPro={this.renderReturnRequest}
+                  />
+                </>
+              );
+            })
+          ) : this.state.isLoading ? (
+            this.loadingbar()
+          ) : (
+            <div className="noOrder">No Orders to Show</div>
+          )}
+          <CancelComponents ref={this.modalRef} />
         </div>
       );
     }
-
-
   }
 }
 
 function mapStateToProps(state) {
-  const stateObj = getReleventReduxState(state, 'global');
-  const updatedHeaderReturn = getReleventReduxState(stateObj, 'updatedRWDHeader');
+  const stateObj = getReleventReduxState(state, "global");
+  const updatedHeaderReturn = getReleventReduxState(
+    stateObj,
+    "updatedRWDHeader"
+  );
 
   return {
     updatedHeaderReturnVal: updatedHeaderReturn
   };
 }
 
-export default connect(mapStateToProps, { updateTheRWDHeader })(RWDMyOrder);
+export default connect(
+  mapStateToProps,
+  { updateTheRWDHeader }
+)(RWDMyOrder);
 // export default RWDMyOrder;

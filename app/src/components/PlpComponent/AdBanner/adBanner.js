@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 //Redux Imports
-import { connect } from 'react-redux';
-import injectSaga from '../../../utils/injectSaga';
-import injectReducer from '../../../utils/injectReducer';
-import reducer from '../../../containers/PlpContainer/reducer';
-import saga from '../../../containers/PlpContainer/saga';
-import { compose } from 'redux';
-import * as actionCreators from '../../../containers/PlpContainer/actions';
-import { getReleventReduxState } from '../../../utils/utilityManager';
+import { connect } from "react-redux";
+import injectSaga from "../../../utils/injectSaga";
+import injectReducer from "../../../utils/injectReducer";
+import reducer from "../../../containers/PlpContainer/reducer";
+import saga from "../../../containers/PlpContainer/saga";
+import { compose } from "redux";
+import * as actionCreators from "../../../containers/PlpContainer/actions";
+import { getReleventReduxState } from "../../../utils/utilityManager";
 
-import { Link, Route } from 'react-router-dom';
+import { Link, Route } from "react-router-dom";
 
 class AdBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adBannerItem: null,
+      adBannerItem: null
     };
   }
 
@@ -28,41 +28,65 @@ class AdBanner extends React.Component {
   }
 
   initializeAdBanner() {
-
     if (this.props.indexPro) {
-      
       let bannerItem = null;
-      if (this.props.indexPro === this.props.bannerPosIndex && (this.props.bannerData.length > this.props.bannerCurrentIndex)) {
-
+      if (
+        this.props.indexPro === this.props.bannerPosIndex &&
+        this.props.bannerData.length > this.props.bannerCurrentIndex
+      ) {
         // <li style ={{height:'0px',position:'relative',marginTop:'-17px'}}></li>
-        let count=0 ;
-        let emptyItem =null
+        let count = 0;
+        let emptyItem = null;
         if (this.props.columnCount === 3 || this.props.fromWishList === true) {
           count = 3;
-          emptyItem=<><li></li><li></li></>
+          emptyItem = (
+            <>
+              <li />
+              <li />
+            </>
+          );
           if (this.props.isMobile) {
             count = 2;
-            emptyItem = <li ></li>
+            emptyItem = <li />;
           }
-        } 
-        else {
+        } else {
           count = 2;
-          emptyItem =<li></li>
+          emptyItem = <li />;
           if (this.props.isMobile) {
             count = 1;
             emptyItem = null;
           }
         }
-        console.log("this.props.coloumnLayout",this.props.columnCount,count)
-        
+
         //'https://uatinterio.godrej.com/imagestore/B2C/EspotImages/Images/Banners/Products_wardrobes_bottom_banner.png'
-        bannerItem = <>{emptyItem}<a href={this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl}>
-          <img className='adBannerWidth' src={this.props.bannerData[this.props.bannerCurrentIndex].imageSrc} 
-          alt={this.props.bannerData[this.props.bannerCurrentIndex].alt !== undefined ? this.props.bannerData[this.props.bannerCurrentIndex].alt : 'SsS'}/>
-          
-        </a></>
-        
-        this.props.onAdBannerIndexUpdate(this.props.indexPro, this.props.bannerCurrentIndex);
+        bannerItem = (
+          <>
+            {emptyItem}
+            <a
+              href={
+                this.props.bannerData[this.props.bannerCurrentIndex].onClickUrl
+              }
+            >
+              <img
+                className="adBannerWidth"
+                src={
+                  this.props.bannerData[this.props.bannerCurrentIndex].imageSrc
+                }
+                alt={
+                  this.props.bannerData[this.props.bannerCurrentIndex].alt !==
+                  undefined
+                    ? this.props.bannerData[this.props.bannerCurrentIndex].alt
+                    : "SsS"
+                }
+              />
+            </a>
+          </>
+        );
+
+        this.props.onAdBannerIndexUpdate(
+          this.props.indexPro,
+          this.props.bannerCurrentIndex
+        );
         this.setState({
           adBannerItem: bannerItem
         });
@@ -71,42 +95,37 @@ class AdBanner extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        {this.state.adBannerItem}
-      </>
-    );
+    return <>{this.state.adBannerItem}</>;
   }
 }
 
 /* ----------------------------------------   REDUX HANDLERS   -------------------------------------  */
 const mapDispatchToProps = dispatch => {
   return {
-    onAdBannerIndexUpdate: (currentIndex, currentShowIndex) => dispatch(actionCreators.adBannerAction(currentIndex, currentShowIndex)),
-  }
+    onAdBannerIndexUpdate: (currentIndex, currentShowIndex) =>
+      dispatch(actionCreators.adBannerAction(currentIndex, currentShowIndex))
+  };
 };
 
 const mapStateToProps = state => {
-  const stateObj = getReleventReduxState(state, 'plpContainer');
+  const stateObj = getReleventReduxState(state, "plpContainer");
   return {
     bannerPosIndex: stateObj.adBannerPos,
     bannerCurrentIndex: stateObj.adBannerCurrentIndex,
-    bannerData: stateObj.adBannerData,
-  }
+    bannerData: stateObj.adBannerData
+  };
 };
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 );
 
-const withReducer = injectReducer({ key: 'plpContainer', reducer });
-const withSaga = injectSaga({ key: 'plpContainer', saga });
+const withReducer = injectReducer({ key: "plpContainer", reducer });
+const withSaga = injectSaga({ key: "plpContainer", saga });
 
 export default compose(
   withReducer,
   withSaga,
-  withConnect,
+  withConnect
 )(AdBanner);
-
-

@@ -53,45 +53,51 @@ class BankDetails extends React.Component {
     let reg = /^[A-Z|a-z]{4}0[0-9]{6}$/;
 
     if (ifscCode.match(reg)) {
-      this.setState({ ifscCodeValid: true },this.bankDetailsToParent);
+      this.setState({ ifscCodeValid: true }, this.bankDetailsToParent);
       return true;
     } else {
-      this.setState({ ifscCodeValid: false },this.bankDetailsToParent);
+      this.setState({ ifscCodeValid: false }, this.bankDetailsToParent);
       // document.getElementById("ifsc").focus();
       return false;
     }
   }
 
   bankDetailsToParent() {
-        const {
-          Name,
-          AccountNumber,
-          AcoountNumberConfirm,
-          ifscCode,
-          ifscCodeValid
-        } = this.state;
-          if(Name !== '' && AccountNumber !== '' && AccountNumber === AcoountNumberConfirm  && ifscCode !== '' && ifscCodeValid === true) {
-            this.props.onSubmit(this.state);
-            this.props.handleInputValidation(true);
-          }
-
-           else {
-
-            console.log("not valid ");
-            this.props.onSubmit({});
-            this.props.handleInputValidation(false);
-             
-          }
-    
-  }
-
-  isInputDataValid() {
-    const { Name, AccountNumber, AcoountNumberConfirm, ifscCode,ifscCodeValid } = this.state;
+    const {
+      Name,
+      AccountNumber,
+      AcoountNumberConfirm,
+      ifscCode,
+      ifscCodeValid
+    } = this.state;
     if (
       Name !== "" &&
       AccountNumber !== "" &&
       AccountNumber === AcoountNumberConfirm &&
-      ifscCode !== ""&&
+      ifscCode !== "" &&
+      ifscCodeValid === true
+    ) {
+      this.props.onSubmit(this.state);
+      this.props.handleInputValidation(true);
+    } else {
+      this.props.onSubmit({});
+      this.props.handleInputValidation(false);
+    }
+  }
+
+  isInputDataValid() {
+    const {
+      Name,
+      AccountNumber,
+      AcoountNumberConfirm,
+      ifscCode,
+      ifscCodeValid
+    } = this.state;
+    if (
+      Name !== "" &&
+      AccountNumber !== "" &&
+      AccountNumber === AcoountNumberConfirm &&
+      ifscCode !== "" &&
       ifscCodeValid == true
     )
       return true;
@@ -133,74 +139,82 @@ class BankDetails extends React.Component {
       <>
         <h4 className="heading">Bank Account Details</h4>
         <div className="bank-detail-form">
-          <div className='row'>
-          <div className='col-sm-12 col-md-12 form-wrapper'>
-          <label htmlFor='ac-user-name' className='label-text'>
-            Name*
-          </label>
-          <input
-            id='ac-user-name'
-              type="text"
-              name="name"
-              maxLength="100"
-              onKeyPress={this.isAlpha}
-              onChange={this.handleBankDetail}
-              className='form-control'
-            />
-            <span className='label-info-text'>{Name === "" && NAME_VALIDATION}</span>
+          <div className="row">
+            <div className="col-sm-12 col-md-12 form-wrapper">
+              <label htmlFor="ac-user-name" className="label-text">
+                Name*
+              </label>
+              <input
+                id="ac-user-name"
+                type="text"
+                name="name"
+                maxLength="100"
+                onKeyPress={this.isAlpha}
+                onChange={this.handleBankDetail}
+                className="form-control"
+              />
+              <span className="label-info-text">
+                {Name === "" && NAME_VALIDATION}
+              </span>
             </div>
 
-            <div className='col-sm-12 col-md-12 form-wrapper'>
-          <label htmlFor='ac-number' className='label-text'>
-            Account Number*
-            </label>
-            <input
-              id='ac-number'
-              type="text"
-              name="accountNo"
-              maxLength="20"
-              onKeyPress={this.isDigit}
-              onChange={this.handleBankDetail}
-              className='form-control'
-            />
-            
-            <span className='label-info-text'>{AccountNumber === "" && ACCOUNT_NUMBER_VALIDATION}</span>
+            <div className="col-sm-12 col-md-12 form-wrapper">
+              <label htmlFor="ac-number" className="label-text">
+                Account Number*
+              </label>
+              <input
+                id="ac-number"
+                type="text"
+                name="accountNo"
+                maxLength="20"
+                onKeyPress={this.isDigit}
+                onChange={this.handleBankDetail}
+                className="form-control"
+              />
+
+              <span className="label-info-text">
+                {AccountNumber === "" && ACCOUNT_NUMBER_VALIDATION}
+              </span>
             </div>
-          
-            <div className='col-sm-12 col-md-12 form-wrapper'>
-          <label htmlFor='conf-ac-number' className='label-text'>
-            Confirm Account Number*
-          </label>
-          <input
-            id='conf-ac-number'
-              type="text"
-              id="AccNoConfirm"
-              name="accountNoConfirm"
-              maxLength="20"
-              onKeyPress={this.isDigit}
-              onChange={this.handleBankDetail}
-              className='form-control'
-            />
-              <span className='label-info-text'>{AccountNumber != AcoountNumberConfirm &&
-              ACCOUNT_NUMBER_CONFIRM_VALIDATION}</span>
-          </div>
-          
-          <div className='col-sm-12 col-md-12 form-wrapper'>
-          <label htmlFor='ifsc' className='label-text'>
-            IFSC Code*
-          </label>
-          <input
-              id="ifsc"
-              type="text"
-              name="ifscCode"
-              maxLength="11"
-              onKeyPress={this.isDigitOrAlpha}
-              onChange={this.handleBankDetail}
-              placeholder=""
-              className='form-control'
-            />
-             <span className='label-info-text'>{ifscCodeValid === false && IFSC_VALIDATION}</span>
-          </div>
+
+            <div className="col-sm-12 col-md-12 form-wrapper">
+              <label htmlFor="conf-ac-number" className="label-text">
+                Confirm Account Number*
+              </label>
+              <input
+                id="conf-ac-number"
+                type="text"
+                id="AccNoConfirm"
+                name="accountNoConfirm"
+                maxLength="20"
+                onKeyPress={this.isDigit}
+                onChange={this.handleBankDetail}
+                className="form-control"
+              />
+              <span className="label-info-text">
+                {AccountNumber != AcoountNumberConfirm &&
+                  ACCOUNT_NUMBER_CONFIRM_VALIDATION}
+              </span>
+            </div>
+
+            <div className="col-sm-12 col-md-12 form-wrapper">
+              <label htmlFor="ifsc" className="label-text">
+                IFSC Code*
+              </label>
+              <input
+                id="ifsc"
+                type="text"
+                name="ifscCode"
+                maxLength="11"
+                onKeyPress={this.isDigitOrAlpha}
+                onChange={this.handleBankDetail}
+                placeholder=""
+                className="form-control"
+              />
+              <span className="label-info-text">
+                {ifscCodeValid === false && IFSC_VALIDATION}
+              </span>
+            </div>
           </div>
         </div>
       </>

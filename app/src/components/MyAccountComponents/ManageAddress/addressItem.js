@@ -1,17 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   deleteAddressAPI,
-  updateAddressAPI,
-} from '../../../../public/constants/constants';
-import apiManager from '../../../utils/apiManager';
-import DeletePopup from './deletePopup';
-import {isMobile} from '../../../utils/utilityManager';
-import {DELETE, SET_DEFAULT, EDIT, DEF_ADD} from '../../../constants/app/myAccountConstants';
-import appCookie from '../../../utils/cookie';
+  updateAddressAPI
+} from "../../../../public/constants/constants";
+import apiManager from "../../../utils/apiManager";
+import DeletePopup from "./deletePopup";
+import { isMobile } from "../../../utils/utilityManager";
+import {
+  DELETE,
+  SET_DEFAULT,
+  EDIT,
+  DEF_ADD
+} from "../../../constants/app/myAccountConstants";
+import appCookie from "../../../utils/cookie";
 
 class AddressItem extends React.Component {
   state = {
-    isDeletePressed: false,
+    isDeletePressed: false
   };
 
   editBtnClicked() {
@@ -20,13 +25,13 @@ class AddressItem extends React.Component {
 
   deleteBtnClicked() {
     this.setState({
-      isDeletePressed: true,
+      isDeletePressed: true
     });
   }
 
   resetDeleteFlag() {
     this.setState({
-      isDeletePressed: false,
+      isDeletePressed: false
     });
   }
 
@@ -37,8 +42,7 @@ class AddressItem extends React.Component {
       .then(response => {
         this.props.onUpdateActivity();
       })
-      .catch(error => {
-      });
+      .catch(error => {});
   }
 
   setAsDefafultBtnClicked() {
@@ -52,28 +56,29 @@ class AddressItem extends React.Component {
       address3: this.props.addressData.address3,
       city: this.props.addressData.city,
       state: this.props.addressData.state,
-      default: String(true),
+      default: String(true)
     };
-
 
     apiManager
       .post(updateAddressAPI + this.props.addressData.nickName, data)
       .then(response => {
         this.props.onUpdateActivity();
       })
-      .catch(error => {
-      });
+      .catch(error => {});
 
-    appCookie.set('pincode', this.props.addressData.pincode, 365 * 24 * 60 * 60 * 1000);
-    appCookie.set('pincodeUpdated', true, 365 * 24 * 60 * 60 * 1000);
+    appCookie.set(
+      "pincode",
+      this.props.addressData.pincode,
+      365 * 24 * 60 * 60 * 1000
+    );
+    appCookie.set("pincodeUpdated", true, 365 * 24 * 60 * 60 * 1000);
   }
 
   render() {
-    let stylingClass = '';
+    let stylingClass = "";
     if (this.props.addressData.isDefault) {
-      stylingClass = 'defaultAddress';
+      stylingClass = "defaultAddress";
     }
-    console.log("addressData",this.props.addressData)
 
     return (
       <>
@@ -88,7 +93,7 @@ class AddressItem extends React.Component {
             <label className="defaultAddress">{DEF_ADD}</label>
           ) : null}
 
-          {isMobile() &&
+          {isMobile() && (
             <>
               {this.props.addressData.isDefault ? null : (
                 <div
@@ -99,40 +104,64 @@ class AddressItem extends React.Component {
                 </div>
               )}
               <ul className="myacAddressList">
-                <li className="listitem" for="fullName" onClick={this.editBtnClicked.bind(this)}>
-                  <img src={require('../../../../public/images/edit.svg')}  alt='Edit' />
+                <li
+                  className="listitem"
+                  for="fullName"
+                  onClick={this.editBtnClicked.bind(this)}
+                >
+                  <img
+                    src={require("../../../../public/images/edit.svg")}
+                    alt="Edit"
+                  />
                 </li>
-                <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-                  <img src={require('../../../../public/images/delete.svg')}  alt='Delete'/>
+                <li
+                  className="listitem"
+                  onClick={this.deleteBtnClicked.bind(this)}
+                >
+                  <img
+                    src={require("../../../../public/images/delete.svg")}
+                    alt="Delete"
+                  />
                 </li>
               </ul>
             </>
-          }
+          )}
           <label className="addressText">
             <div>{this.props.addressData.address1}</div>
             <div>{this.props.addressData.address2}</div>
             <div>{this.props.addressData.address3}</div>
-            <div> {this.props.addressData.city}, {this.props.addressData.state}, {` ${this.props.addressData.pincode}`}</div>
-
+            <div>
+              {" "}
+              {this.props.addressData.city}, {this.props.addressData.state},{" "}
+              {` ${this.props.addressData.pincode}`}
+            </div>
           </label>
 
-          {!isMobile() && <ul className="modifyAddress">
-            <li className="listitem" onClick={this.deleteBtnClicked.bind(this)}>
-              {DELETE}
-            </li>
-            <li className="listitem"  for="fullName" onClick={this.editBtnClicked.bind(this)}>
-              {EDIT}
-            </li>
-            {this.props.addressData.isDefault ? null : (
+          {!isMobile() && (
+            <ul className="modifyAddress">
               <li
                 className="listitem"
-                onClick={this.setAsDefafultBtnClicked.bind(this)}
+                onClick={this.deleteBtnClicked.bind(this)}
               >
-                {SET_DEFAULT}
+                {DELETE}
               </li>
-            )}
-          </ul>}
-
+              <li
+                className="listitem"
+                for="fullName"
+                onClick={this.editBtnClicked.bind(this)}
+              >
+                {EDIT}
+              </li>
+              {this.props.addressData.isDefault ? null : (
+                <li
+                  className="listitem"
+                  onClick={this.setAsDefafultBtnClicked.bind(this)}
+                >
+                  {SET_DEFAULT}
+                </li>
+              )}
+            </ul>
+          )}
         </div>
       </>
     );
