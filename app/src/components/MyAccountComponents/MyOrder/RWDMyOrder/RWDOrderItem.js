@@ -143,13 +143,17 @@ class RWDOrderItem extends React.Component {
         </div>
         {showCancelButton && (
           <button
-            className={disableCancelButton ? "btn-bg disabled" : "btn-bg"}
-            style={{ width: "100%", backgroundColor: "#005084" }}
+            className={
+              disableCancelButton
+                ? "btn-bg cancel-order disabled"
+                : "btn-bg cancel-order"
+            }
             onClick={evt => {
-              this.props.showCancelModal(orderData, undefined);
+              this.props.showCancelModal(undefined, orderData);
             }}
           >
             {orderData.orderCancelButtonText}
+            Ali
           </button>
         )}
         <div className="order-separator" />

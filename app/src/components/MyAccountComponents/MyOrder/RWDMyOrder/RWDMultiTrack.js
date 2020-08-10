@@ -15,7 +15,7 @@ class RWDMultiTrack extends React.Component {
   }
 
   showCancelModal(orderData, orderItem) {
-    this.porps.showCancelModal(orderData, orderItem);
+    this.porps.showCancelModal(orderItem, orderData);
   }
 
   render() {
