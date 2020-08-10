@@ -51,6 +51,11 @@ class OrderItem extends React.Component {
     const orderData = this.props.orderItemData;
     const showCancelButton = orderData.orderCancelFlag === "Y";
     const disableCancelButton = orderData.orderCancelButtonDisable === "Y";
+    console.log(
+      "orderData.orderCancelButtonDisable",
+      orderData.orderCancelButtonDisable,
+      orderData.orderID
+    );
 
     let isOrderCancelled = false;
     if (
@@ -137,7 +142,9 @@ class OrderItem extends React.Component {
                 this.props.showCancelModal(orderData, undefined);
               }}
             >
-              {isOrderCancelled ? orderData.orderItemStatus : "Cancel Order"}
+              {
+                orderData.orderCancelButtonText /*isOrderCancelled ? orderData.orderItemStatus : "Cancel Order"*/
+              }
             </button>
           )}
         </div>

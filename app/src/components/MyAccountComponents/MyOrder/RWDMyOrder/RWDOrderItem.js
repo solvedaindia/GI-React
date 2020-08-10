@@ -149,7 +149,7 @@ class RWDOrderItem extends React.Component {
               this.props.showCancelModal(orderData, undefined);
             }}
           >
-            Cancel Order
+            {orderData.orderCancelButtonText}
           </button>
         )}
         <div className="order-separator" />

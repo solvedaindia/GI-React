@@ -1,24 +1,22 @@
 @import "../../variable";
 
 .myOrder {
-  .ongoingOrder{
-    color:$greyDark;
-    font-size:$base*2;
+  .ongoingOrder {
+    color: $greyDark;
+    font-size: $base * 2;
     line-height: 16px;
     margin: 0 0 17px 0;
     font-family: $font-medium;
-
   }
 
-  .noOrder{
+  .noOrder {
     text-align: center;
     font-size: 20px;
     color: darkgray;
     margin: 22px;
   }
-  
+
   .tabBar {
-    
     padding: 14px 20px;
     background-color: #036cc5;
     position: relative;
@@ -62,9 +60,9 @@
       &:focus {
         outline: none;
       }
-      .iconImg{
-        width:14px;
-        margin:0 0 0 5px;
+      .iconImg {
+        width: 14px;
+        margin: 0 0 0 5px;
       }
     }
   }
@@ -73,12 +71,11 @@
     border: solid 1px $greyborder;
     padding: 0 26px 30px;
     margin: 0 0 16px 0;
-    
-    .orderProduct.removeBorder{
+
+    .orderProduct.removeBorder {
       border-bottom: none !important;
     }
     .orderProduct {
-      
       border-bottom: solid 1px $greyborder;
       padding: 31px 0 29px 0;
       .orderbtn {
@@ -91,14 +88,14 @@
           width: 100%;
           font-size: 14px;
           font-family: $font-medium;
-          &.disabled{
+          &.disabled {
             cursor: not-allowed;
             pointer-events: none;
             background-color: $grey;
             color: $greyish;
             border: 1px solid $colorwhite;
           }
-          &.cancel-item{
+          &.cancel-item {
             margin-top: 5px;
           }
           &:hover {
@@ -139,7 +136,7 @@
           .heading {
             color: $black;
             font-family: $font-medium;
-            font-size: 16px;            
+            font-size: 16px;
             line-height: 16px;
             margin: 0 0 7px 0;
           }
@@ -157,7 +154,6 @@
               line-height: 20px;
               color: $cerulean;
               font-family: $font-bold;
-              
             }
             .priceno-discount {
               font-size: 16px;
@@ -174,19 +170,20 @@
             font-size: 10px;
             margin: 0;
             .quantity,
-            .delivery{
+            .delivery {
               display: inline-block;
             }
             .quantity {
-              margin:0 6px 0 0;
-              .heading{
-                color:$battleshipGrey;
+              margin: 0 6px 0 0;
+              .heading {
+                color: $battleshipGrey;
                 font-size: 10px;
                 line-height: 10px;
                 font-family: $font-medium;
                 text-transform: uppercase;
               }
-              .heading,.textval{
+              .heading,
+              .textval {
                 display: block;
               }
               .textval {
@@ -194,10 +191,9 @@
                 font-size: 14px;
                 line-height: 14px;
                 font-family: $font-regular;
-                
               }
             }
-           
+
             .shipping-charge {
               float: left;
               display: block;
@@ -207,92 +203,98 @@
               }
             }
           }
-          .cancelation-text-info{
+          .cancelation-text-info {
             color: $errorMsg;
             padding-top: 10px;
           }
         }
-      }  
+      }
     }
-    .cancel-order{
+    .cancel-order {
       background: $cerulean;
       color: $colorwhite;
       width: 100%;
+      &.disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        background-color: $grey;
+        color: $greyish;
+        border: 1px solid $colorwhite;
+      }
     }
-  } 
-// Back Order css
-  .trackMyOrder{
-    .backBtn{
-      color:$battleshipGrey;
-      font-size:12px;
+  }
+  // Back Order css
+  .trackMyOrder {
+    .backBtn {
+      color: $battleshipGrey;
+      font-size: 12px;
       font-family: $font-medium;
     }
-     .itemBox{
-       .orderimgbox{
-         margin: 0 0 0px 0;       
-        }
-        .orderProduct {
-          padding: 31px 0 40px 0;
-      .trackorder-wrap{
-        width:100%;
-        position: static;
-        margin: 36px 0 0 auto;
-        .track-bar{
-          position: relative;
-          width:98%;
-          .list{
-            .status{
-              font-size: 14px;
-            }
-            .deliveryDate{
-              font-size: 12px;
+    .itemBox {
+      .orderimgbox {
+        margin: 0 0 0px 0;
+      }
+      .orderProduct {
+        padding: 31px 0 40px 0;
+        .trackorder-wrap {
+          width: 100%;
+          position: static;
+          margin: 36px 0 0 auto;
+          .track-bar {
+            position: relative;
+            width: 98%;
+            .list {
+              .status {
+                font-size: 14px;
+              }
+              .deliveryDate {
+                font-size: 12px;
+              }
             }
           }
         }
       }
     }
-     }
-     &.service-request{
-       .ongoingOrder{
-         margin: 0px;
-       }
-      .itemBox{
-        .orderProduct{
-          padding: $base*3 0px;
+    &.service-request {
+      .ongoingOrder {
+        margin: 0px;
+      }
+      .itemBox {
+        .orderProduct {
+          padding: $base * 3 0px;
         }
       }
-     }
+    }
   }
   .orderSummery {
-    .summerydata{
+    .summerydata {
       padding: 26px 0 0 0;
     }
     .refundsummarydata {
       .refundSummaryTitle {
         padding: 5px 0px 0px 0px;
         color: $greylightColor;
-        font-size: $base*1.75;
+        font-size: $base * 1.75;
         font-family: $font-bold;
-        line-height: $base*1.75;
+        line-height: $base * 1.75;
       }
       .refundTable {
         width: 100%;
-          .refundDataHeading {
-            background-color: $cerulean;
-            padding: 5px;
-            th {
-              color: $colorwhite;
-              padding: 6px;
-              font-family: $font-bold;
-            }
+        .refundDataHeading {
+          background-color: $cerulean;
+          padding: 5px;
+          th {
+            color: $colorwhite;
+            padding: 6px;
+            font-family: $font-bold;
           }
-              td {
-                padding: 6px;
-                font-family:$font-regular;
-                color: $greyBorder;
-              }
         }
-
+        td {
+          padding: 6px;
+          font-family: $font-regular;
+          color: $greyBorder;
+        }
+      }
     }
   }
 
@@ -315,68 +317,69 @@
       width: 33.3%;
       display: block;
       float: left;
-      .heading{
-        color:$greylightColor;
-        font-size:$base*1.75;
+      .heading {
+        color: $greylightColor;
+        font-size: $base * 1.75;
         font-family: $font-bold;
         line-height: 14px;
-        margin:0 0 18px 0;
+        margin: 0 0 18px 0;
       }
-      .subheading{
+      .subheading {
         font-size: 14px;
-        color:$greyBorder;
+        color: $greyBorder;
         font-family: $font-regular;
-        margin:0;
+        margin: 0;
         line-height: 14px;
       }
-      .address{
+      .address {
         font-family: $font-regular;
         font-size: 14px;
-        color:$greyBorder;
+        color: $greyBorder;
         line-height: 14px;
-        margin:11px 0 0 0;
+        margin: 11px 0 0 0;
       }
-      .invoiceList{
+      .invoiceList {
         padding: 59px 0 0 0;
-        .list{
+        .list {
           display: inline-block;
-          color:$battleshipGrey;
-          padding:0 5px 10px 0;
-          width:33.3%;
-          font-size:$base*1.5;
+          color: $battleshipGrey;
+          padding: 0 5px 10px 0;
+          width: 33.3%;
+          font-size: $base * 1.5;
           text-decoration: underline;
           cursor: pointer;
         }
       }
-      .orderSummary{
-        .summaryDetails{
-         padding: 0 0 14px 0;
-        .leftText,.rightText{
-          font-size:14px; 
-          color:$greyBorder;
-          font-family: $font-regular;
-          line-height: 14px;
+      .orderSummary {
+        .summaryDetails {
+          padding: 0 0 14px 0;
+          .leftText,
+          .rightText {
+            font-size: 14px;
+            color: $greyBorder;
+            font-family: $font-regular;
+            line-height: 14px;
+          }
+          .leftText {
+            float: left;
+          }
+          .rightText {
+            float: right;
+          }
         }
-        .leftText{
-          float: left;
+        .divider {
+          height: 1px;
+          background: $greyborder;
+          margin: 3px 0 14px 0;
+          width: 100%;
         }
-        .rightText{
-           float:right;
+        .summaryDetails.subTotaltext {
+          .leftText,
+          .rightText {
+            font-weight: bold;
+            color: $black;
+          }
         }
-      }
-      .divider{
-        height:1px;
-        background: $greyborder;
-        margin: 3px 0 14px 0;
-        width: 100%;       
-      }
-      .summaryDetails.subTotaltext{
-        
-        .leftText,.rightText{
-          font-weight: bold; 
-          color:$black;
-        }
-      }
       }
     }
   }
@@ -386,71 +389,71 @@
 }
 
 .cancel-order-model {
-  &.in{
+  &.in {
     z-index: 99999;
-    .modal-dialog{
-      .modal-content{
-        .modal-header{
+    .modal-dialog {
+      .modal-content {
+        .modal-header {
           text-align: center;
           border: 0px;
         }
-        .modal-body{
-          .cancel-order-box{
+        .modal-body {
+          .cancel-order-box {
             padding: 10px 10% 20px 10%;
-            .error-text{
+            .error-text {
               color: $errorMsg;
             }
-            .dropdown{
-              .dropdown-toggle{
+            .dropdown {
+              .dropdown-toggle {
                 text-align: left;
                 border-radius: 0px;
                 background: $colorwhite;
                 border: 1px solid $greyBorder;
                 width: 100%;
-                .caret{
+                .caret {
                   float: right;
                   margin-top: 8px;
                 }
               }
-              .dropdown-menu{
+              .dropdown-menu {
                 width: 100%;
-                .select-item{
+                .select-item {
                   padding: 4px 10px;
                   cursor: pointer;
                 }
               }
             }
-            .textarea-box{
+            .textarea-box {
               margin-top: 10px;
-              textarea{
+              textarea {
                 width: 100%;
                 padding: 2px 5px;
               }
             }
-            .paymet-type{
-              .msgText{
+            .paymet-type {
+              .msgText {
                 margin-bottom: 0px;
                 margin-top: $base * 2.5;
               }
-              .label-text{
+              .label-text {
                 padding-left: 5px;
                 font-family: $font-light;
               }
             }
-            .btn-wrapper{
-              padding-top: $base*5;
-              padding-bottom: $base*2;
+            .btn-wrapper {
+              padding-top: $base * 5;
+              padding-bottom: $base * 2;
               text-align: center;
-              .btn-cancel{
-                padding: $base $base*2.5;
+              .btn-cancel {
+                padding: $base $base * 2.5;
                 margin-right: 10px;
                 background: $colorwhite;
                 border: 1px solid $greyLight;
                 border-radius: 0px;
                 min-width: 100px;
               }
-              .btn-save{
-                padding: $base $base*2.5;
+              .btn-save {
+                padding: $base $base * 2.5;
                 margin-right: 10px;
                 background: $black;
                 border-radius: 0px;
@@ -468,43 +471,44 @@
   #Screen 1281px to higher resolution desktops, Device = Desktops
 */
 @media (min-width: 1025px) {
-  .myOrder{
+  .myOrder {
     .itemBox {
-      .orderProduct{
-        .orderimgbox{
-          .product-text{
-            .quantity-shipping{
-              .delivery, .quantity{
-                width:45%;
+      .orderProduct {
+        .orderimgbox {
+          .product-text {
+            .quantity-shipping {
+              .delivery,
+              .quantity {
+                width: 45%;
               }
             }
           }
         }
       }
     }
-  }     
+  }
 }
 
-@media (min-width:992px) {
-	.trackorder-wrap ul.track-bar .list.items5{
-		width:19%;
-	}
-	.trackorder-wrap ul.track-bar .list.items4{
-		width:24%;
-	}
+@media (min-width: 992px) {
+  .trackorder-wrap ul.track-bar .list.items5 {
+    width: 19%;
+  }
+  .trackorder-wrap ul.track-bar .list.items4 {
+    width: 24%;
+  }
 }
 
-  /* 
+/* 
     #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
   */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .myOrder{
+@media (min-width: 768px) and (max-width: 1024px) {
+  .myOrder {
     .itemBox {
-      .orderProduct{
-        .orderimgbox{
-          .product-text{
-            .quantity-shipping{
-              .delivery{
+      .orderProduct {
+        .orderimgbox {
+          .product-text {
+            .quantity-shipping {
+              .delivery {
                 width: 100%;
                 margin-top: 15px;
               }
@@ -513,9 +517,8 @@
         }
       }
     }
-  }  
-    
   }
+}
 
 /* Order checkout page */
 
@@ -526,22 +529,22 @@
   float: right;
   top: -143px;
 
-  ul.track-bar { 
+  ul.track-bar {
     background-size: 35px 35px;
-    background-color: #EcEcEc;
+    background-color: #ececec;
     border-radius: 15px;
     height: 2px;
     margin: 0px 0 0 40px;
     padding: 0;
     position: absolute;
     // width: 98%;
-    &:before{
-      background-color:$colorwhite;    
+    &:before {
+      background-color: $colorwhite;
       height: 2px;
       left: 0;
       position: absolute;
       width: 10%;
-      content: '';
+      content: "";
     }
     .list.visited:after {
       background-size: 35px 35px;
@@ -556,7 +559,7 @@
     }
     .list.last:after {
       background-size: 35px 35px;
-      background-color:$colorwhite;
+      background-color: $colorwhite;
       content: "";
       height: 2px;
       left: 50%;
@@ -565,7 +568,7 @@
       width: 100%;
       z-index: 99;
     }
-    .list.visited{
+    .list.visited {
       background: none;
       color: $black;
       z-index: 99999;
@@ -574,18 +577,17 @@
         z-index: 99999;
       }
     }
-    .list.active{
-      color:$greenLight;
+    .list.active {
+      color: $greenLight;
       font-family: $font-medium;
       &:before {
         background: $greenLight;
-        z-index: 99999;        
+        z-index: 99999;
         padding: 10px;
         top: -40px;
       }
     }
-    .list 
-	{
+    .list {
       display: block;
       margin: 30px 0 0;
       padding: 0;
@@ -594,11 +596,11 @@
       font-size: 10px;
       float: left;
       min-width: 90px;
-	  .deliveryDate{
-        color:$battleshipGrey;
+      .deliveryDate {
+        color: $battleshipGrey;
       }
-      .returnDetails{
-        color:$cerulean;
+      .returnDetails {
+        color: $cerulean;
         cursor: pointer;
       }
       &:nth-child(1):before {
@@ -627,13 +629,10 @@
         width: 15px;
         position: absolute;
         text-align: center;
-        top: 4px;        
+        top: 4px;
         z-index: 999;
         top: -37px;
       }
-	  
     }
   }
 }
- 
-
