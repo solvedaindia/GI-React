@@ -153,7 +153,6 @@ class RWDOrderItem extends React.Component {
             }}
           >
             {orderData.orderCancelButtonText}
-            Ali
           </button>
         )}
         <div className="order-separator" />
