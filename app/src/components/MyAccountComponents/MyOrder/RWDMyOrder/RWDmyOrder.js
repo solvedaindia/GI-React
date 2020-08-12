@@ -54,6 +54,7 @@ class RWDMyOrder extends React.Component {
     this.showReturnRequestForm = this.showReturnRequestForm.bind(this);
     this.renderReturnRequestBack = this.renderReturnRequestBack.bind(this);
     this.onRSODetail = this.onRSODetail.bind(this);
+    this.refreshOrderData = this.refreshOrderData.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +68,13 @@ class RWDMyOrder extends React.Component {
     } else {
       this.getOrderList();
     }
+  }
+  refreshOrderData() {
+    this.setState({
+      orderListData: [],
+      pageNumber: 1
+    });
+    this.getOrderList();
   }
 
   componentWillUnmount() {
@@ -355,7 +363,10 @@ class RWDMyOrder extends React.Component {
             isMultiTrackPro={true}
             onReturn={this.showReturnRequestFormForSingle.bind(this)}
           />
-          <CancelComponents ref={this.modalRef} />
+          <CancelComponents
+            ref={this.modalRef}
+            refreshOrderData={this.refreshOrderData}
+          />
         </div>
       );
     } else if (this.state.currentComponent === "MultiProduct") {
@@ -369,7 +380,10 @@ class RWDMyOrder extends React.Component {
             myOrderCallbackPro={this.myOrderCallback}
             onReturn={this.showReturnRequestForm}
           />
-          <CancelComponents ref={this.modalRef} />
+          <CancelComponents
+            ref={this.modalRef}
+            refreshOrderData={this.refreshOrderData}
+          />
         </div>
       );
     } else if (this.state.currentComponent === "ViewOrder") {
@@ -388,7 +402,10 @@ class RWDMyOrder extends React.Component {
               this
             )}
           />
-          <CancelComponents ref={this.modalRef} />
+          <CancelComponents
+            ref={this.modalRef}
+            refreshOrderData={this.refreshOrderData}
+          />
         </div>
       );
     } else {
@@ -415,7 +432,10 @@ class RWDMyOrder extends React.Component {
           ) : (
             <div className="noOrder">No Orders to Show</div>
           )}
-          <CancelComponents ref={this.modalRef} />
+          <CancelComponents
+            ref={this.modalRef}
+            refreshOrderData={this.refreshOrderData}
+          />
         </div>
       );
     }

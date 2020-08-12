@@ -1,14 +1,14 @@
-import React from 'react';
-import apiManager from '../../../utils/apiManager';
-import { orderListAPI } from '../../../../public/constants/constants';
-import '../../../../public/styles/myAccount/myOrder/myOrder.scss';
-import OrderItem from './orderItem';
-import TrackOrder from './TrackMyOrder/trackOrder';
-import ServiceRequestForm from '../../ServiceRequestForm/index';
-import CancelComponents from '../../cancelComponents/index';
+import React from "react";
+import apiManager from "../../../utils/apiManager";
+import { orderListAPI } from "../../../../public/constants/constants";
+import "../../../../public/styles/myAccount/myOrder/myOrder.scss";
+import OrderItem from "./orderItem";
+import TrackOrder from "./TrackMyOrder/trackOrder";
+import ServiceRequestForm from "../../ServiceRequestForm/index";
+import CancelComponents from "../../cancelComponents/index";
 
-import ReturnRequestForm from '../../ReturnRequestForm/index'; 
-import RSODetail from '../RSO/index'; 
+import ReturnRequestForm from "../../ReturnRequestForm/index";
+import RSODetail from "../RSO/index";
 
 class MyOrder extends React.Component {
   constructor(props) {
@@ -16,117 +16,116 @@ class MyOrder extends React.Component {
     this.state = {
       isTrackOrder: false,
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
-      isServiceRequest:false,
+      isServiceRequest: false,
       orderListData: [],
       isLoading: true,
       updatedTrackOrderData: null,
       isOnGoingOrderShown: false,
       isPastOrdeShown: false,
-      serviceOrderData:undefined,
-      serviceOrderItemData:undefined,
-       //returnrequest Flags and data 
-       isReturnRequest: false,
-       returnOrderData: undefined,
-       returnOrderItemData: undefined,
-       returnOrderShipmentData:undefined,
+      serviceOrderData: undefined,
+      serviceOrderItemData: undefined,
+      //returnrequest Flags and data
+      isReturnRequest: false,
+      returnOrderData: undefined,
+      returnOrderItemData: undefined,
+      returnOrderShipmentData: undefined,
       //Lazy Load Vars
-      isRSODetail:false,
+      isRSODetail: false,
       error: false,
       hasMore: true,
       isLoading: false,
       pageNumber: 1,
-      pageSize: 20,
+      pageSize: 20
     };
-    this.renderSelection = this.renderSelection.bind(this)
+    this.renderSelection = this.renderSelection.bind(this);
     this.onscroll = this.onscroll.bind(this);
     this.renderReturnRequest = this.renderReturnRequest.bind(this);
+    this.refreshOrderData = this.refreshOrderData.bind(this);
     this.modalRef = React.createRef();
   }
 
   componentDidMount() {
-    addEventListener('scroll', this.onscroll);
-    if(this.props.isGuestTrackOrderPro) {
+    addEventListener("scroll", this.onscroll);
+    if (this.props.isGuestTrackOrderPro) {
       this.setState({
         orderListData: this.props.guestOrderDataPro,
         hasMore: false,
-        isLoading: false,
+        isLoading: false
       });
-    }
-    else {
+    } else {
       this.getOrderList();
     }
-    
+  }
+  refreshOrderData() {
+    this.setState({
+      orderListData: [],
+      pageNumber: 1
+    });
+    this.getOrderList();
   }
 
   componentWillUnmount() {
-    removeEventListener('scroll', this.onscroll);
+    removeEventListener("scroll", this.onscroll);
   }
 
   getOrderList(isFromScroll) {
     this.setState({ isLoading: true }, () => {
-
-
       let orderAPI =
         `${orderListAPI}?` +
         `pagenumber=${this.state.pageNumber}&` +
         `pagesize=${this.state.pageSize}&`;
-      
-      apiManager.get(orderAPI)
+
+      apiManager
+        .get(orderAPI)
         .then(response => {
           this.setState({
-            orderListData: isFromScroll ? [...this.state.orderListData, ...response.data.data.orderList] : response.data.data.orderList,
+            orderListData: isFromScroll
+              ? [...this.state.orderListData, ...response.data.data.orderList]
+              : response.data.data.orderList,
             hasMore: response.data.data.orderList.length !== 0, // Now only show on 0 Products and disable it for lazyload
-            isLoading: false,
+            isLoading: false
           });
-
         })
         .catch(error => {
           this.setState({
             isLoading: false,
-            error: error.message,
-          })
+            error: error.message
+          });
         });
     });
   }
 
-  renderSelection(trackOrderData,orderData) {
+  renderSelection(trackOrderData, orderData) {
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
       updatedTrackOrderData: trackOrderData,
       returnOrderData: orderData,
-      returnOrderItemData:trackOrderData,
+      returnOrderItemData: trackOrderData
     });
   }
 
-  renderRSODetail()
-  {
+  renderRSODetail() {
     this.setState({
-      isTrackOrder:!this.state.isTrackOrder,
-      isRSODetail: !this.state.isRSODetail,
+      isTrackOrder: !this.state.isTrackOrder,
+      isRSODetail: !this.state.isRSODetail
     });
   }
 
-  renderServiceRequest(orderItemData,orderData)
-  {
+  renderServiceRequest(orderItemData, orderData) {
     this.setState({
       isServiceRequest: !this.state.isServiceRequest,
       serviceOrderData: orderData,
-      serviceOrderItemData:orderItemData,
+      serviceOrderItemData: orderItemData
     });
   }
 
-  
-
-  renderReturnRequest(shipmentData)
-  {
+  renderReturnRequest(shipmentData) {
     this.setState({
-      isTrackOrder:!this.state.isTrackOrder,
+      isTrackOrder: !this.state.isTrackOrder,
       isReturnRequest: !this.state.isReturnRequest,
-      returnOrderShipmentData:shipmentData,
+      returnOrderShipmentData: shipmentData
     });
   }
-
-  
 
   // renderReturnRequest(orderItemData,orderData)
   // {
@@ -139,20 +138,28 @@ class MyOrder extends React.Component {
   // }
 
   onscroll = () => {
-    const { state: { error, isLoading, hasMore }, } = this;
+    const {
+      state: { error, isLoading, hasMore }
+    } = this;
 
     var scrollYindex;
-    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) { //Safari browser
+    if (
+      navigator.userAgent.search("Safari") >= 0 &&
+      navigator.userAgent.search("Chrome") < 0
+    ) {
+      //Safari browser
       scrollYindex = window.innerHeight + document.body.scrollTop;
-    } else if (window.navigator.userAgent.indexOf("Edge") > -1){ //Edge browser
+    } else if (window.navigator.userAgent.indexOf("Edge") > -1) {
+      //Edge browser
       scrollYindex = window.innerHeight + window.pageYOffset;
-    } else { //All other browsers
+    } else {
+      //All other browsers
       scrollYindex = window.innerHeight + document.documentElement.scrollTop;
     }
 
     if (error || isLoading || !hasMore) return;
     const adjustedHeight = 600;
-    const windowHeight = scrollYindex
+    const windowHeight = scrollYindex;
     const windowOffsetHeight =
       document.documentElement.offsetHeight - adjustedHeight;
 
@@ -177,63 +184,53 @@ class MyOrder extends React.Component {
       var tagOutput;
       var isInstallationRequired = true;
       data.orderItems.map(item => {
-        
-        if (item.installationRequired === 'N') {
+        if (item.installationRequired === "N") {
           isInstallationRequired = true;
         }
-      })
+      });
 
       if (isInstallationRequired) {
-        if (data.orderStatus === 'Installed') {
-          tagOutput = 'Past Orders';
+        if (data.orderStatus === "Installed") {
+          tagOutput = "Past Orders";
           this.state.isPastOrdeShown = true;
-        }
-        else {
-          tagOutput = 'Ongoing Orders'
+        } else {
+          tagOutput = "Ongoing Orders";
           this.state.isOnGoingOrderShown = true;
         }
-      }
-      else {
-        if (data.orderStatus === 'Delivered') {
-          tagOutput = 'Past Orders';
+      } else {
+        if (data.orderStatus === "Delivered") {
+          tagOutput = "Past Orders";
           this.state.isPastOrdeShown = true;
-        }
-        else {
-          tagOutput = 'Ongoing Orders'
+        } else {
+          tagOutput = "Ongoing Orders";
           this.state.isOnGoingOrderShown = true;
         }
       }
 
-      return <div className="ongoingOrder">{tagOutput}</div>
-    }
-    else {
+      return <div className="ongoingOrder">{tagOutput}</div>;
+    } else {
       return null;
     }
   }
 
-  componentWillReceiveProps() {
-  }
+  componentWillReceiveProps() {}
 
-  showCancelModal(orderData,orderItem)
-  {
-    
-    this.modalRef.current.showModal(orderItem,orderData);
+  showCancelModal(orderData, orderItem) {
+    this.modalRef.current.showModal(orderItem, orderData);
   }
 
   loadingbar() {
     return (
       <div className="lazyloading-Indicator">
-          <img
-            id="me"
-            className="loadingImg"
-            src={require('../../../../public/images/plpAssests/lazyloadingIndicator.svg')}
-			 alt='Loading Orders'
-          />
-        </div>
-    )
+        <img
+          id="me"
+          className="loadingImg"
+          src={require("../../../../public/images/plpAssests/lazyloadingIndicator.svg")}
+          alt="Loading Orders"
+        />
+      </div>
+    );
   }
-
-
 
   render() {
     // debugger;
@@ -242,35 +239,41 @@ class MyOrder extends React.Component {
     return (
       <div className="myOrder">
         {this.state.isTrackOrder ? (
-          <TrackOrder renderSelectionPro={this.renderSelection.bind(this)} 
-                      trackOrderDataPro={this.state.updatedTrackOrderData} 
-                      onRSODetail={()=>{this.renderRSODetail()}} 
-                      renderReturnRequest={this.renderReturnRequest.bind(this)} />
-        ) :this.state.isServiceRequest?(
-        
-          <ServiceRequestForm orderData={this.state.serviceOrderData} 
-                              orderItemData={this.state.serviceOrderItemData} 
-                              renderServiceRequestPro={this.renderServiceRequest.bind(this)}/>
-         
-        ):this.state.isRSODetail?(
-          <RSODetail backPress={()=>{this.renderRSODetail()}} orderData={this.state.returnOrderData}  />
-          
-        ):
-         this.state.isReturnRequest ? (
-          <ReturnRequestForm  
-                orderList={this.state.orderListData}  
-                // dataPro={this.state.updatedTrackOrderData}  
-                renderSelectionPro={this.renderSelection.bind(this)}
-                trackOrderDataPro={this.state.updatedTrackOrderData} 
-                renderReturnRequestPro={this.renderReturnRequest}
-                orderData={this.state.returnOrderData} 
-                orderItemData={this.state.returnOrderItemData}
-                orderShipmentData={this.state.returnOrderShipmentData}
-                paymentMode="COD"/>
-
-         ): 
-  
-          this.state.orderListData.length !== 0 ? this.state.orderListData.map((data, key) => {
+          <TrackOrder
+            renderSelectionPro={this.renderSelection.bind(this)}
+            trackOrderDataPro={this.state.updatedTrackOrderData}
+            onRSODetail={() => {
+              this.renderRSODetail();
+            }}
+            renderReturnRequest={this.renderReturnRequest.bind(this)}
+          />
+        ) : this.state.isServiceRequest ? (
+          <ServiceRequestForm
+            orderData={this.state.serviceOrderData}
+            orderItemData={this.state.serviceOrderItemData}
+            renderServiceRequestPro={this.renderServiceRequest.bind(this)}
+          />
+        ) : this.state.isRSODetail ? (
+          <RSODetail
+            backPress={() => {
+              this.renderRSODetail();
+            }}
+            orderData={this.state.returnOrderData}
+          />
+        ) : this.state.isReturnRequest ? (
+          <ReturnRequestForm
+            orderList={this.state.orderListData}
+            // dataPro={this.state.updatedTrackOrderData}
+            renderSelectionPro={this.renderSelection.bind(this)}
+            trackOrderDataPro={this.state.updatedTrackOrderData}
+            renderReturnRequestPro={this.renderReturnRequest}
+            orderData={this.state.returnOrderData}
+            orderItemData={this.state.returnOrderItemData}
+            orderShipmentData={this.state.returnOrderShipmentData}
+            paymentMode="COD"
+          />
+        ) : this.state.orderListData.length !== 0 ? (
+          this.state.orderListData.map((data, key) => {
             return (
               <>
                 {this.displayOnGoingPastOrder(data)}
@@ -283,11 +286,18 @@ class MyOrder extends React.Component {
                   renderReturnRequestPro={this.renderReturnRequest}
                 />
               </>
-            )
-          }) : this.state.isLoading ? this.loadingbar() : <div className='noOrder'>No Orders to Show</div>
-        }
+            );
+          })
+        ) : this.state.isLoading ? (
+          this.loadingbar()
+        ) : (
+          <div className="noOrder">No Orders to Show</div>
+        )}
 
-      <CancelComponents ref={this.modalRef}/>
+        <CancelComponents
+          ref={this.modalRef}
+          refreshOrderData={this.refreshOrderData}
+        />
       </div>
     );
   }

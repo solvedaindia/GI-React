@@ -125,6 +125,7 @@ class CancelComponents extends React.Component {
           showPopUp: "false"
         });
         alert("Order cancelled successfully");
+        this.props.refreshOrderData();
       })
       .catch(error => {});
   }
