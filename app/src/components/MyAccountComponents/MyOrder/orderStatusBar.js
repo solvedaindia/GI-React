@@ -1,13 +1,13 @@
-import React from 'react';
-import apiManager from '../../../utils/apiManager';
-import { changePasswordAPI } from '../../../../public/constants/constants';
+import React from "react";
+import apiManager from "../../../utils/apiManager";
+import { changePasswordAPI } from "../../../../public/constants/constants";
 
 class OrderStatusBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       shippingStatusArr: [],
-      isInCurrenStatus: false,
+      isInCurrenStatus: false
     };
   }
 
@@ -17,39 +17,35 @@ class OrderStatusBar extends React.Component {
 
   filterShippingData() {
     if (this.props.shipmentDataPro) {
-      var statusArr = this.props.shipmentDataPro.statusLine.split(',');
+      var statusArr = this.props.shipmentDataPro.statusLine.split(",");
       this.setState({
-        shippingStatusArr: statusArr,
-      })
+        shippingStatusArr: statusArr
+      });
     }
   }
 
   getStatusBarCustomClassname(item, index) {
-	  
-    var customClassName = 'list items5';
-	if(this.state.shippingStatusArr.length < 5)
-	{
-		customClassName = 'list items4';
-	}
-	
+    var customClassName = "list items5";
+    if (this.state.shippingStatusArr.length < 5) {
+      customClassName = "list items4";
+    }
+
     if (index === 0) {
-      customClassName += ' first';
+      customClassName += " first";
     }
 
     if (index + 1 === this.state.shippingStatusArr.length) {
-      customClassName += ' last'
+      customClassName += " last";
     }
 
     if (item === this.props.shipmentDataPro.status) {
       this.state.isInCurrenStatus = true;
-      customClassName += ' active'
-    }
-    else {
+      customClassName += " active";
+    } else {
       if (this.state.isInCurrenStatus) {
-        customClassName += ''
-      }
-      else {
-        customClassName += ' visited'
+        customClassName += "";
+      } else {
+        customClassName += " visited";
       }
     }
     return customClassName;
@@ -57,57 +53,64 @@ class OrderStatusBar extends React.Component {
 
   getStatusBarDate(item) {
     var statusDate;
-    if (item === 'Created') {
-      statusDate = this.props.shipmentDataPro.createdDate
-    }
-    else if (item === 'Packed') {
-      statusDate = this.props.shipmentDataPro.packedDate
-    }
-    else if (item === 'Shipped' || item === 'Shipping') {
-      statusDate = this.props.shipmentDataPro.shippedDate
-    }
-    else if (item === 'Delivered' || item === 'Delivery') {
-      statusDate = this.props.shipmentDataPro.deliveryDate
-    }
-    else if (item === 'Installed' || item === 'Installation') {
-      statusDate = this.props.shipmentDataPro.installationDate
+    if (item === "Created") {
+      statusDate = this.props.shipmentDataPro.createdDate;
+    } else if (item === "Packed") {
+      statusDate = this.props.shipmentDataPro.packedDate;
+    } else if (item === "Shipped" || item === "Shipping") {
+      statusDate = this.props.shipmentDataPro.shippedDate;
+    } else if (item === "Delivered" || item === "Delivery") {
+      statusDate = this.props.shipmentDataPro.deliveryDate;
+    } else if (item === "Installed" || item === "Installation") {
+      statusDate = this.props.shipmentDataPro.installationDate;
     }
     //----------for rso condition start
-    else if (item === 'Return Initiated') {
-      statusDate = this.props.shipmentDataPro.returnedOn
+    else if (item === "Return Initiated") {
+      statusDate = this.props.shipmentDataPro.returnedOn;
+    } else if (item === "Item Picked Up") {
+      statusDate = this.props.shipmentDataPro.itemPickedDate;
+    } else if (item === "Refund Initiated") {
+      statusDate = this.props.shipmentDataPro.refundInitiatedDate;
+    } else if (item === "Refund Processed") {
+      statusDate = this.props.shipmentDataPro.refundProcessedDate;
     }
-    else if (item === 'Item Picked Up') {
-        statusDate = this.props.shipmentDataPro.itemPickedDate
+    //----------for Service Request condition start
+    else if (item === "Request Created") {
+      statusDate = this.props.shipmentDataPro.serviceRequestCreatedDate;
+    } else if (item === "Service Booked") {
+      statusDate = this.props.shipmentDataPro.serviceBookedDate;
+    } else if (item === "Serviced") {
+      statusDate = this.props.shipmentDataPro.servicedDate;
     }
-    else if (item === 'Refund Initiated') {
-        statusDate = this.props.shipmentDataPro.refundInitiatedDate
-    }
-    else if (item === 'Refund Processed') {
-        statusDate = this.props.shipmentDataPro.refundProcessedDate
-    }
-     //----------for rso condition end
-    return statusDate ? statusDate.split(',')[1] : null;
+    return statusDate ? statusDate.split(",")[1] : null;
   }
 
   render() {
-    var statusBarItem = this.state.shippingStatusArr.map((item, index) => 
-	{
+    var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
       return (
         <li class={this.getStatusBarCustomClassname(item, index)}>
-		<div className="status">{item}</div>
-		<div className="deliveryDate">{this.getStatusBarDate(item)}</div>
-    {(item==='Delivered'|| item==='Undelivered') 
-      && this.props.shipmentDataPro.returnShipmentOrders 
-      && this.props.shipmentDataPro.returnShipmentOrders.length>0
-      && <div className="returnDetails" onClick={()=>{this.props.onRSODetail()}}>CHECK RETURN DETAILS</div>}
-		</li>
-      )
-    })
+          <div className="status">{item}</div>
+          <div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+          {(item === "Delivered" || item === "Undelivered") &&
+            this.props.shipmentDataPro.returnShipmentOrders &&
+            this.props.shipmentDataPro.returnShipmentOrders.length > 0 && (
+              <div
+                className="returnDetails"
+                onClick={() => {
+                  this.props.onRSODetail();
+                }}
+              >
+                CHECK RETURN DETAILS
+              </div>
+            )}
+        </li>
+      );
+    });
 
     return (
       <div class={this.props.customClassPro}>
         <ul class="track-bar">
-		  {this.state.isInCurrenStatus = false}
+          {(this.state.isInCurrenStatus = false)}
           {statusBarItem}
 
           {/* <li class="list visited first"><div className="status">Ordered</div><div className="deliveryDate">21 June 2018</div></li>
