@@ -15,22 +15,23 @@ class TrackServiceRequest extends React.Component {
   render() {
     return (
       <div className="trackMyOrder">
+       <div className="itemBox">   
+        <div className="orderProduct clearfix removeBorder">   
         {this.renderProduct()}
         <OrderStatusBar
           shipmentDataPro={this.state.trackStatusData}
-          customClassPro="trackorder-wrap"
+          customClassPro="trackorder-wrap trackorder-wrap-3"
         />
+        </div>
+       </div>       
       </div>
     );
   }
 
   renderProduct() {
     return (
-      <div className="itemBox">
+      <>
         <div className="clearfix" />
-        <div
-          className="orderProduct clearfix removeBorder" /* className={this.props.totalItems - 1 === this.props.itemIndex ? "orderProduct clearfix removeBorder" : "orderProduct clearfix"} */
-        >
           <div className="orderimgbox clearfix">
             <div className="imgBox">
               <img
@@ -47,8 +48,7 @@ class TrackServiceRequest extends React.Component {
               </p>
             </div>
           </div>
-        </div>
-      </div>
+      </>
     );
   }
 }

@@ -91,6 +91,11 @@ class OrderStatusBar extends React.Component {
         <li class={this.getStatusBarCustomClassname(item, index)}>
           <div className="status">{item}</div>
           <div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+          <div className="contactDetails">
+            <p className="heading">Contact Details</p>
+            <p className="mobiletext">Mobile Number</p>
+            <p className="mobiletext">037-802-2242</p>
+          </div>
           {(item === "Delivered" || item === "Undelivered") &&
             this.props.shipmentDataPro.returnShipmentOrders &&
             this.props.shipmentDataPro.returnShipmentOrders.length > 0 && (

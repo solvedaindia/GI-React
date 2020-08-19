@@ -250,6 +250,27 @@
               .deliveryDate {
                 font-size: 12px;
               }
+              .contactDetails{
+                background: #fff;
+                box-shadow: 0px 0px 2px #ccc;
+                color: #000;
+                margin: 5px;
+                padding: 11px;
+                max-width: 92%;
+                p{
+                  margin:0;
+                  font-size: 16px;
+                  line-height: 19px;
+                }
+                .heading{
+                  color:#000;  
+                  font-weight: bold;
+                  margin-bottom: 5px;                
+                }
+                .mobiletext{
+                  color: #77787a;
+                }
+              }
             }
           }
         }
@@ -490,12 +511,27 @@
 }
 
 @media (min-width: 992px) {
+  .trackorder-wrap.trackorder-wrap-3{
+    ul.track-bar {
+      &:before{width: 15%;}
+      .list {
+        &:before {
+          left:45%;
+        }
+      }
+    }
+  }
   .trackorder-wrap ul.track-bar .list.items5 {
     width: 19%;
   }
   .trackorder-wrap ul.track-bar .list.items4 {
     width: 24%;
   }
+  .trackorder-wrap-3 ul.track-bar .list.items4 {
+    width: 33%;
+  }
+  
+  
 }
 
 /* 
@@ -521,7 +557,6 @@
 }
 
 /* Order checkout page */
-
 .trackorder-wrap {
   margin: 30px auto;
   width: 50%;
