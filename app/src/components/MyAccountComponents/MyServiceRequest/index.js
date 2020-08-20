@@ -166,7 +166,7 @@ class ServiceRequestPage extends React.Component {
                   this.renderSelection(data.serviceRequestMetaData.orderId)
                 }
               >
-                Track My Service
+                {data.serviceRequestMetaData.serviceRequestTrackButtonText}
               </button>
             </div>
           ) : (

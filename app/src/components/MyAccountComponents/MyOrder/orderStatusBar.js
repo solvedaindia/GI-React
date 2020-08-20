@@ -85,17 +85,31 @@ class OrderStatusBar extends React.Component {
     return statusDate ? statusDate.split(",")[1] : null;
   }
 
+  renderTechnicianDetailsForServiceRequest() {
+    return (
+      <div className="contactDetails">
+        <p className="heading">Contact Details</p>
+        <p className="mobiletext">
+          {this.props.shipmentDataPro.technicianName}
+        </p>
+        <p className="mobiletext">
+          {this.props.shipmentDataPro.technicianAssignedDate}
+        </p>
+      </div>
+    );
+  }
+
   render() {
     var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
+      console.log("ksksks -- ", this);
       return (
         <li class={this.getStatusBarCustomClassname(item, index)}>
           <div className="status">{item}</div>
           <div className="deliveryDate">{this.getStatusBarDate(item)}</div>
-          <div className="contactDetails">
-            <p className="heading">Contact Details</p>
-            <p className="mobiletext">Mobile Number</p>
-            <p className="mobiletext">037-802-2242</p>
-          </div>
+          {item === "Service Booked" &&
+          this.props.shipmentDataPro.displayTechnicianDetails === "Y"
+            ? this.renderTechnicianDetailsForServiceRequest()
+            : null}
           {(item === "Delivered" || item === "Undelivered") &&
             this.props.shipmentDataPro.returnShipmentOrders &&
             this.props.shipmentDataPro.returnShipmentOrders.length > 0 && (
