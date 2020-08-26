@@ -9,6 +9,7 @@ class RSODetail extends React.Component {
   }
   render() {
     const data = this.props.orderData.returnOrder;
+    console.log("returnShipmentOrders2", this.props.returnShipmentOrders);
     return (
       <div className="trackMyOrder service-request">
         <div className="bottomDivider">
@@ -20,7 +21,10 @@ class RSODetail extends React.Component {
         {data &&
           Array.isArray(data) &&
           data.map(item => {
-            return <RSOItem data={item} />;
+            console.log("returnShipmentOrders3", item);
+            if (this.props.returnShipmentOrders.includes(item.returnId)) {
+              return <RSOItem data={item} />;
+            }
           })}
       </div>
     );
