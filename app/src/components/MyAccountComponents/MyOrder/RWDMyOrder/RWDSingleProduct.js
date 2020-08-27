@@ -152,7 +152,7 @@ class RWDSingleProduct extends React.Component {
         <div className="orderStatus">
           {this.props.isFromViewOrder ? null : (
             <OrderStatusBar
-              onRSODetail={() => this.props.onRSODetail()}
+              onRSODetail={data => this.props.onRSODetail(data)}
               shipmentDataPro={
                 this.props.isMultiTrackPro
                   ? this.props.shipmentDataPro

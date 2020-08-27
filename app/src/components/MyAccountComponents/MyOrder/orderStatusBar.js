@@ -116,7 +116,9 @@ class OrderStatusBar extends React.Component {
               <div
                 className="returnDetails"
                 onClick={() => {
-                  this.props.onRSODetail();
+                  this.props.onRSODetail(
+                    this.props.shipmentDataPro.returnShipmentOrders
+                  );
                 }}
               >
                 CHECK RETURN DETAILS
