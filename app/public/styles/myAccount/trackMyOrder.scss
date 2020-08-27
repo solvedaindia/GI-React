@@ -13,8 +13,16 @@
   }
 }
 
+.itemBox {
+  .orderProduct{
+    border-bottom: solid 1px $greyborder;
+  }
+  .orderProduct.removeBorder{
+    border-bottom: none !important;
+  } 
+}
 .orderProduct {
-  border-bottom: solid 1px $greyborder;
+  // border-bottom: solid 1px $greyborder;
   padding: 0px 0 29px 0;
   .orderbtn {
     width: 25%;

@@ -113,9 +113,9 @@ class RSOItem extends React.Component {
                             return this.renderProducts(prd,data.items.lenght,index)
                         })
                     }
-                </div>
-                <div>
-                <OrderStatusBar shipmentDataPro={data} customClassPro='trackorder-wrap'  />
+                    <div class="orderProduct removeBorder clearfix">
+                     <OrderStatusBar shipmentDataPro={data} customClassPro='trackorder-wrap'  />
+                     </div>
                 </div>
                 
 
