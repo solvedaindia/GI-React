@@ -262,33 +262,45 @@ export class CheckoutComponent extends React.Component {
       payCategoryId = 'CREDIT';
     }
 
-    let token = appCookie.get('accessToken');
-    axios.post(CreateCheckSumAPI, body, {
-      headers: { store_id: storeId, access_token: token }
-    }).then((response) => {
-      var res = response.data.data.response;
-      if (this.state.paymentMode === 'COD') {
-        window.location.assign(`${window.location.origin}/order/confirm/${response.data.data.orderId}`)
-        ///order/confirm/:orderId
-        return;
-      }
-
-      var url = `${res.transactionUrl}?msg=${res.msg}&txtPayCategory=${payCategoryId}`;
-      if (
-        this.state.paymentMode == 'NET_BANKING' ||
-        this.state.paymentMode == "WALLET" ||
-        Object.values(WALLETS_MAPPING).includes(this.state.paymentMode)
-      ) {
-        url = `${res.transactionUrl}&msg=${res.msg}`;
-    
-      }
-      window.location.assign(url)
-
-    }).catch((err) => {
-      this.setState({
-        isCheckSumAPIFail: true
+    let token = appCookie.get("accessToken");
+    axios
+      .post(CreateCheckSumAPI, body, {
+        headers: { store_id: storeId, access_token: token }
       })
-    })
+      .then(response => {
+        var res = response.data.data.response;
+        if (this.state.paymentMode === "COD") {
+          window.location.assign(
+            `${window.location.origin}/check/payment/${
+              response.data.data.orderId
+            }`
+          );
+          ///order/confirm/:orderId
+          return;
+        }
+
+        var url = `${res.transactionUrl}?msg=${
+          res.msg
+        }&txtPayCategory=${payCategoryId}`;
+        if (
+          this.state.paymentMode == "NET_BANKING" ||
+          this.state.paymentMode == "WALLET" ||
+          Object.values(WALLETS_MAPPING).includes(this.state.paymentMode)
+        ) {
+          url = `${res.transactionUrl}&msg=${res.msg}`;
+        }
+        window.location.assign(url);
+      })
+      .catch(err => {
+        if (this.state.paymentMode === "COD") {
+          window.location.assign(
+            `${window.location.origin}/checkout?status=fail`
+          );
+        }
+        this.setState({
+          isCheckSumAPIFail: true
+        });
+      });
   }
 
   enalblePay = (data) => {
