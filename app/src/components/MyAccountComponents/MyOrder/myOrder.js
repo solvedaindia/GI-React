@@ -29,6 +29,7 @@ class MyOrder extends React.Component {
       returnOrderData: undefined,
       returnOrderItemData: undefined,
       returnOrderShipmentData: undefined,
+      returnShipmentOrders: [],
       //Lazy Load Vars
       isRSODetail: false,
       error: false,
@@ -104,10 +105,11 @@ class MyOrder extends React.Component {
     });
   }
 
-  renderRSODetail() {
+  renderRSODetail(rso) {
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
-      isRSODetail: !this.state.isRSODetail
+      isRSODetail: !this.state.isRSODetail,
+      returnShipmentOrders: rso ? rso : []
     });
   }
 
@@ -242,8 +244,9 @@ class MyOrder extends React.Component {
           <TrackOrder
             renderSelectionPro={this.renderSelection.bind(this)}
             trackOrderDataPro={this.state.updatedTrackOrderData}
-            onRSODetail={() => {
-              this.renderRSODetail();
+            onRSODetail={returnShipmentOrders => {
+              // console.log("returnShipmentOrders1", returnShipmentOrders);
+              this.renderRSODetail(returnShipmentOrders);
             }}
             renderReturnRequest={this.renderReturnRequest.bind(this)}
           />
@@ -258,6 +261,7 @@ class MyOrder extends React.Component {
             backPress={() => {
               this.renderRSODetail();
             }}
+            returnShipmentOrders={this.state.returnShipmentOrders}
             orderData={this.state.returnOrderData}
           />
         ) : this.state.isReturnRequest ? (

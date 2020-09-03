@@ -26,6 +26,7 @@ class RWDMyOrder extends React.Component {
       isTrackOrder: false,
       isServiceRequest: false,
       isRSODetail: false,
+      returnShipmentOrders: [],
       isGuestTrackOrder: this.props.isGuestTrackOrderPro,
       orderListData: [],
       isLoading: true,
@@ -139,9 +140,11 @@ class RWDMyOrder extends React.Component {
       currentCompleteData: completeData
     });
   }
-  onRSODetail() {
+  onRSODetail(data) {
+    console.log(data);
     this.setState({
-      isRSODetail: !this.state.isRSODetail
+      isRSODetail: !this.state.isRSODetail,
+      returnShipmentOrders: data ? data : []
     });
   }
 
@@ -340,6 +343,7 @@ class RWDMyOrder extends React.Component {
           backPress={() => {
             this.onRSODetail;
           }}
+          returnShipmentOrders={this.state.returnShipmentOrders}
           orderData={this.state.currentCompleteData}
         />
       );

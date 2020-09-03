@@ -16,6 +16,7 @@ class TrackOrder extends React.Component {
   }
 
   render() {
+    console.log("trackOrderDataPro", this.props.trackOrderDataPro);
     return (
       <div className="trackMyOrder">
         <div className="bottomDivider">
@@ -30,7 +31,7 @@ class TrackOrder extends React.Component {
               prodctDataPro={this.props.trackOrderDataPro}
               shipmentDataPro={item}
               onRSODetail={() => {
-                this.props.onRSODetail();
+                this.props.onRSODetail(item.returnShipmentOrders);
               }}
               onReturnRequest={this.onReturnRequest.bind(this)}
             />
