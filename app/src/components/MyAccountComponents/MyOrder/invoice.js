@@ -177,7 +177,23 @@ class Invoice extends React.Component {
                 </div>
                 <div className="value">
                   {!!invoiceData.companyAddress &&
-                    invoiceData.companyAddress.address}
+                    invoiceData.companyAddress.address1}
+                </div>
+                <div className="value">
+                  {!!invoiceData.companyAddress &&
+                    invoiceData.companyAddress.address2}
+                </div>
+                <div className="value">
+                  {!!invoiceData.companyAddress &&
+                    invoiceData.companyAddress.address3}
+                </div>
+                <div className="value">
+                  {!!invoiceData.companyAddress &&
+                    invoiceData.companyAddress.city +
+                      ", " +
+                      invoiceData.companyAddress.state +
+                      ", " +
+                      invoiceData.companyAddress.zipCode}
                 </div>
                 <div className="value">
                   {!!invoiceData.companyAddress &&
@@ -225,7 +241,23 @@ class Invoice extends React.Component {
 
                 <div className="value">
                   {!!invoiceData.consignorAddress &&
-                    invoiceData.consignorAddress.address}
+                    invoiceData.consignorAddress.address1}
+                </div>
+                <div className="value">
+                  {!!invoiceData.consignorAddress &&
+                    invoiceData.consignorAddress.address2}
+                </div>
+                <div className="value">
+                  {!!invoiceData.consignorAddress &&
+                    invoiceData.consignorAddress.address3}
+                </div>
+                <div className="value">
+                  {!!invoiceData.consignorAddress &&
+                    invoiceData.consignorAddress.city +
+                      ", " +
+                      invoiceData.consignorAddress.state +
+                      ", " +
+                      invoiceData.consignorAddress.zipCode}
                 </div>
                 <div className="value">
                   {!!invoiceData.consignorAddress &&

@@ -25,7 +25,10 @@ import "../../../public/styles/myAccount/service-request.scss";
 class ServiceRequestForm extends React.Component {
   constructor(props) {
     super(props);
-    const invoice = props.orderData.invoices ? props.orderData.invoices : [];
+    // const invoice = props.orderData.invoices ? props.orderData.invoices : [];
+    const invoice = Array.isArray(this.props.orderItemData.invoiceList)
+      ? this.props.orderItemData.invoiceList
+      : [];
     invoice.push("Other");
     this.state = {
       categorySelectionData: [],
@@ -54,6 +57,7 @@ class ServiceRequestForm extends React.Component {
   componentDidMount() {
     //  this.getAddressListAPI();
     this.getDetailAPI();
+    console.log("orderItemDataaaaa", this.props.orderItemData.invoiceList);
     window.scrollTo(0, 0);
   }
   getDetailAPI = () => {
