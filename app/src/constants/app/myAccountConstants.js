@@ -10,7 +10,7 @@
  */
 
 export const PASSWORD = 'Password';
-export const REQUIRED_FIELD = 'The field is a required';
+export const REQUIRED_FIELD = 'This is a required field';
 export const ENTER_PASSWORD = 'Please enter the Password';
 export const INVALID_PASSWORD = 'Invalid Password. Password should not be more than 25 characters';
 export const PASSWORD_SHOUBLE_BE = "Password should be within 6-20 characters only. Special characters are not permitted";
