@@ -26,8 +26,8 @@ class ServiceRequestForm extends React.Component {
   constructor(props) {
     super(props);
     // const invoice = props.orderData.invoices ? props.orderData.invoices : [];
-    const invoice = Array.isArray(this.props.orderItemData.invoiceList)
-      ? this.props.orderItemData.invoiceList
+    const invoice = Array.isArray(props.orderItemData.invoiceList)
+      ? props.orderItemData.invoiceList
       : [];
     invoice.push("Other");
     this.state = {
@@ -203,7 +203,9 @@ class ServiceRequestForm extends React.Component {
 
     const param = {
       prodCategory: this.state.selectedCategory,
-      prodDesc: this.props.orderItemData.productName,
+      prodDesc: this.props.orderItemData.productName
+        ? this.props.orderItemData.productName
+        : this.props.orderItemData.partNumber,
       partNumber: this.props.orderItemData.partNumber,
       addressId: this.state.selectedAddress.addressID,
       addressData: address,
@@ -217,15 +219,17 @@ class ServiceRequestForm extends React.Component {
     apiManager
       .post(saveServiceRequest, param)
       .then(response => {
-        alert("Service request submitted successfully");
-        this.props.renderServiceRequestPro();
-        history.replace({
-          pathname: "/myAccount",
-          state: { from: "serviceRequest" }
-        });
+        if (response.data.data && response.data.data.serviceRequestId) {
+          alert("Your service request has been submitted successfully.");
+          this.props.renderServiceRequestPro();
+          history.replace({
+            pathname: "/myAccount",
+            state: { from: "serviceRequest" }
+          });
+        }
       })
       .catch(error => {
-        //  alert("Error Service request submitted successfully")
+        alert(error.response.data.error.error_message);
         // this.props.renderServiceRequestPro();
       });
   }

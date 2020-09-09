@@ -132,10 +132,12 @@ class ServiceRequestFormGuest extends React.Component {
     apiManager
       .post(saveServiceRequest, param)
       .then(response => {
-        alert(
-          "Your service request has been submitted successfully. Our customer care agents will get intouch with you shortly."
-        );
-        document.location.href = "/";
+        if (response.data.data && response.data.data.serviceRequestId) {
+          alert(
+            "Your service request has been submitted successfully. Our customer care agents will get intouch with you shortly."
+          );
+          document.location.href = "/";
+        }
       })
       .catch(error => {});
   }

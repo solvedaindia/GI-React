@@ -20,7 +20,16 @@ class ServiceRequestPage extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchServiceRequestData();
+    // this.fetchServiceRequestData();
+  }
+  componentWillReceiveProps(nextProps) {
+    //serviceRequest
+    if (
+      nextProps.redirectedFrom !== this.props.redirectedFrom &&
+      nextProps.redirectedFrom === "serviceRequest"
+    ) {
+      this.fetchServiceRequestData();
+    }
   }
 
   fetchServiceRequestData() {
