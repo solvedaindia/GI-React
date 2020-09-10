@@ -13,6 +13,7 @@ import EnterInvoiceView from "../ServiceRequestForm/enterInvoiceView";
 import Checkboxes from "../ServiceRequestForm/checkboxes";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import "../../../public/styles/myAccount/service-request.scss";
+import { validateFullName } from "../../utils/validationManager";
 
 class ServiceRequestFormGuest extends React.Component {
   constructor(props) {
@@ -70,13 +71,14 @@ class ServiceRequestFormGuest extends React.Component {
     });
   }
 
-  onTextareaInput() {
-    this.setState({
-      descriptionText: document.getElementById("textareaDesc").value,
-      characterCount:
-        this.state.characterLimit -
-        document.getElementById("textareaDesc").value.length
-    });
+  onTextareaInput(evt) {
+    const val = evt.target.value;
+    if (validateFullName(val)) {
+      this.setState({
+        descriptionText: val,
+        characterCount: this.state.characterLimit - val.length
+      });
+    }
   }
 
   getProductCategorySelection(value) {
@@ -276,11 +278,13 @@ class ServiceRequestFormGuest extends React.Component {
         <h5 className="heading">{this.props.title}</h5>
         <textarea
           className="text-area"
-          onChange={() => this.onTextareaInput()}
+          onChange={evt => this.onTextareaInput(evt)}
           name="the-textarea"
           id="textareaDesc"
           maxlength={this.state.characterLimit}
-          placeholder="Please Specify"
+          //placeholder="Please Specify"
+          value={this.state.descriptionText}
+          placeholder="Please enter product description"
           autofocus
           rows="4"
           cols="50"
