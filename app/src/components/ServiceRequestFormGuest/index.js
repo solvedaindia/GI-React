@@ -178,6 +178,12 @@ class ServiceRequestFormGuest extends React.Component {
                 onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}
                 onInvoiceFile={this.onInvoiceFileSelection.bind(this)}
               />
+              {this.state.showInvoiceDisclaimer ? (
+                <div className="notification-title">
+                  *Please note that the service may be chargeable, in case of
+                  missing invoice details
+                </div>
+              ) : null}
             </div>
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
