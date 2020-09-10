@@ -283,6 +283,13 @@
           padding: 20px 15px;
           border-bottom: 12px solid $greybg;
           margin-bottom: 15px;
+          .btn-borderwhite.disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+            background-color: $grey;
+            color: $greyish;
+            border: 1px solid $colorwhite;
+        }
           .btn-blackbg {
             background: $black;
             padding: 12px 0;
@@ -301,7 +308,7 @@
             font-family: $font-medium;
           }
           .track-order-btn {
-            width: 50%;
+            // width: 50%;
             float: right;
           }
         }
