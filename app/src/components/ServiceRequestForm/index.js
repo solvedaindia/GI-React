@@ -29,7 +29,10 @@ class ServiceRequestForm extends React.Component {
     const invoice = Array.isArray(props.orderItemData.invoiceList)
       ? props.orderItemData.invoiceList
       : [];
-    invoice.push("Other");
+    if (!invoice.includes("Other")) {
+      invoice.push("Other");
+    }
+
     this.state = {
       categorySelectionData: [],
       selectedCategory: "",
@@ -351,6 +354,10 @@ class ServiceRequestForm extends React.Component {
   }
 
   renderInvoice() {
+    console.log(
+      "this.state.invoiceSelectionData",
+      this.state.invoiceSelectionData
+    );
     return (
       <div className="invice-selection">
         <h4 className="heading">Invoice Selection</h4>
