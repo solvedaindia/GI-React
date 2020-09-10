@@ -35,14 +35,14 @@ class EnterInvoiceView extends React.Component {
       this.setState({
         invoiceNumber: event.target.value,
         isUploadBtnDisabled: !flag,
-        errorMessage: flag ? "" : "Invalid invoice number",
+        errorMessage: flag ? "" : "Invoice number is invalid",
         error: !flag
       });
     } else {
       this.setState({
         invoiceNumber: event.target.value,
         isUploadBtnDisabled: true,
-        errorMessage: flag ? "" : "Invalid invoice number",
+        errorMessage: flag ? "" : "Invoice number is invalid",
         error: !flag
       });
     }
