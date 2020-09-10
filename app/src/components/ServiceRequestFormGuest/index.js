@@ -73,7 +73,7 @@ class ServiceRequestFormGuest extends React.Component {
 
   onTextareaInput(evt) {
     const val = evt.target.value;
-    if (validateFullName(val)) {
+    if (val === "" || validateFullName(val)) {
       this.setState({
         descriptionText: val,
         characterCount: this.state.characterLimit - val.length
