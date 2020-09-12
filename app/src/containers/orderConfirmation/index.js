@@ -1,31 +1,31 @@
-import React from 'react';
-import axios from 'axios';
-import { Link, withRouter } from 'react-router-dom';
-import SuccessPop from './successPop';
-import appCookie from '../../utils/cookie';
-import '../../../public/styles/plpContainer/plpContainer.scss';
+import React from "react";
+import axios from "axios";
+import { Link, withRouter } from "react-router-dom";
+import SuccessPop from "./successPop";
+import appCookie from "../../utils/cookie";
+import "../../../public/styles/plpContainer/plpContainer.scss";
 import {
   getCookie,
   formatPrice,
   mapPaymentMethodMode,
-  isMobile,
-} from '../../utils/utilityManager';
+  isMobile
+} from "../../utils/utilityManager";
 import {
   imagePrefix,
   storeId,
-  OrderDetailAPI,
-} from '../../../public/constants/constants';
-import ContentEspot from '../../components/Primitives/staticContent';
-import { triggerOrderConfirmationGTEvent } from '../../utils/gtm';
+  OrderDetailAPI
+} from "../../../public/constants/constants";
+import ContentEspot from "../../components/Primitives/staticContent";
+import { triggerOrderConfirmationGTEvent } from "../../utils/gtm";
 
 class OrderConformation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showPop: false,
-      orderData: '',
+      orderData: "",
       showPage: false,
-      showGtagScript: false,
+      showGtagScript: false
     };
   }
 
@@ -39,29 +39,29 @@ class OrderConformation extends React.Component {
   }
   callOrderAPI(id) {
     this.setState({
-      showPop: true,
+      showPop: true
     });
 
-    const token = appCookie.get('accessToken');
+    const token = appCookie.get("accessToken");
     const url = `${OrderDetailAPI}/${id}`;
     axios
       .get(url, {
-        headers: { store_id: storeId, access_token: token, profile: 'summary' },
+        headers: { store_id: storeId, access_token: token, profile: "summary" }
       })
       .then(res => {
         setTimeout(() => {
           this.setState({
-            showPop: false,
+            showPop: false
           });
         }, 4000);
         this.setState({
           showPage: true,
           orderData: res.data.data,
-          showGtagScript: true,
+          showGtagScript: true
         });
       })
       .catch(err => {
-        this.props.history.push('/');
+        this.props.history.push("/");
       });
   }
 
@@ -76,8 +76,8 @@ class OrderConformation extends React.Component {
                 <div
                   className={
                     !isMobile()
-                      ? 'col-xs-4 col-sm-3 col-md-4'
-                      : 'col-xs-4 col-sm-3 col-md-4 orderItemsImg'
+                      ? "col-xs-4 col-sm-3 col-md-4"
+                      : "col-xs-4 col-sm-3 col-md-4 orderItemsImg"
                   }
                 >
                   <div className="itemImg">
@@ -92,8 +92,8 @@ class OrderConformation extends React.Component {
                 <div
                   className={
                     !isMobile()
-                      ? 'col-xs-8 col-sm-9 col-md-8 borderLeft'
-                      : 'col-xs-8 col-sm-9 col-md-8'
+                      ? "col-xs-8 col-sm-9 col-md-8 borderLeft"
+                      : "col-xs-8 col-sm-9 col-md-8"
                   }
                 >
                   <div className="itemText">
@@ -102,7 +102,7 @@ class OrderConformation extends React.Component {
                     <div className="row">
                       <div className="col-xs-6 col-sm-6 col-md-4 qty-details">
                         <div className="headingSubtext">
-                          Quantity {isMobile() && ': '}
+                          Quantity {isMobile() && ": "}
                         </div>
                         <div className="quantityDelivery">{item.quantity}</div>
                       </div>
@@ -131,7 +131,7 @@ class OrderConformation extends React.Component {
                 </div>
               </div>
             </div>
-          </div>,
+          </div>
         );
       });
       return items;
@@ -139,28 +139,35 @@ class OrderConformation extends React.Component {
   };
 
   onContinueShoppingBtn() {
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
 
   onTrackOrderBtn() {
-    getCookie('isLoggedIn') === 'true' ? (
+    getCookie("isLoggedIn") === "true" ? (
       <Link
         className="action"
-        to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
+        to={{ pathname: "/myAccount", state: { from: "myorder" } }}
       >
         {linkData.text}
       </Link>
     ) : (
-        <Link className="action" to="/guestTrackOrder">
-          {linkData.text}
-        </Link>
-      );
+      <Link className="action" to="/guestTrackOrder">
+        {linkData.text}
+      </Link>
+    );
   }
 
   showLoader() {
-    const idid = <div className="lazyloading-Indicator">
-      <img id="me" className="loadingImg" alt='Lazy Loader' src={require('../../../public/images/plpAssests/lazyloadingIndicator.svg')} />
-    </div>
+    const idid = (
+      <div className="lazyloading-Indicator">
+        <img
+          id="me"
+          className="loadingImg"
+          alt="Lazy Loader"
+          src={require("../../../public/images/plpAssests/lazyloadingIndicator.svg")}
+        />
+      </div>
+    );
     return idid;
   }
 
@@ -169,16 +176,16 @@ class OrderConformation extends React.Component {
       return this.showLoader();
     }
     if (this.state.showGtagScript && gtag) {
-      gtag('event', 'conversion', {
-        send_to: 'AW-880478252/AnvmCJ3FwrYBEKyQ7KMD',
+      gtag("event", "conversion", {
+        send_to: "AW-880478252/AnvmCJ3FwrYBEKyQ7KMD",
         value: this.state.orderData.orderSummary.netAmount,
-        currency: 'INR',
-        transaction_id: this.state.orderData.orderID,
+        currency: "INR",
+        transaction_id: this.state.orderData.orderID
       });
     }
     return (
       <div className="orderconfirm">
-        <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_START'} />
+        <ContentEspot espotName={"GI_PIXEL_ORDERCONFIRMATION_BODY_START"} />
         <div className="container">
           <div className="row">
             <div className="col-md-9">
@@ -224,11 +231,18 @@ class OrderConformation extends React.Component {
                   <div className="col-xs-6 col-sm-6 col-md-3">
                     <div className="heading">Address</div>
                     <div className="subText">
-                      {this.state.orderData.address.address1}{' '}
-                      {this.state.orderData.address.address2}{' '}
-                      {this.state.orderData.address.address3},{' '}
-                      {this.state.orderData.address.city},{' '}
-                      {this.state.orderData.address.state},{' '}
+                      {this.state.orderData.address.address1}
+                      <br />
+                      {this.state.orderData.address.address2}
+                      <br />
+                      {this.state.orderData.address.address3 && (
+                        <>
+                          {this.state.orderData.address.address3}
+                          <br />
+                        </>
+                      )}
+                      {this.state.orderData.address.city},{" "}
+                      {this.state.orderData.address.state},{" "}
                       {this.state.orderData.address.pincode}
                     </div>
                   </div>
@@ -244,39 +258,39 @@ class OrderConformation extends React.Component {
                       <div className="totalAmount">
                         ₹
                         {formatPrice(
-                          this.state.orderData.orderSummary.netAmount,
+                          this.state.orderData.orderSummary.netAmount
                         )}
                       </div>
                     </div>
                   )}
                 </div>
               ) : (
-                  ''
-                )}
+                ""
+              )}
             </div>
 
-            {getCookie('isLoggedIn') === 'true' ? (
+            {getCookie("isLoggedIn") === "true" ? (
               <div className="trackOrderBtnBox">
                 <Link
                   className="action"
-                  to={{ pathname: '/myAccount', state: { from: 'myorder' } }}
+                  to={{ pathname: "/myAccount", state: { from: "myorder" } }}
                 >
                   <button className="btn-bg btntrackorder">Track Order</button>
                 </Link>
               </div>
             ) : (
-                <div className="trackOrderBtnBox">
-                  <Link className="action" to="/guestTrackOrder">
-                    <button className="btn-bg btntrackorder">Track Order</button>
-                  </Link>
-                </div>
-              )}
+              <div className="trackOrderBtnBox">
+                <Link className="action" to="/guestTrackOrder">
+                  <button className="btn-bg btntrackorder">Track Order</button>
+                </Link>
+              </div>
+            )}
 
             {!isMobile() && <div className="seprator" />}
             <div className="orderItemSummary">
               <h4 className="heading-details">Items in Order</h4>
               <div className="row">
-                {this.state.orderData ? this.renderItems() : ''}
+                {this.state.orderData ? this.renderItems() : ""}
               </div>
             </div>
 
@@ -304,9 +318,9 @@ class OrderConformation extends React.Component {
             )}
           </div>
         </div>
-        {this.state.showPop ? <SuccessPop /> : ''}
+        {this.state.showPop ? <SuccessPop /> : ""}
         {/* <SuccessPop /> */}
-        <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_END'} />
+        <ContentEspot espotName={"GI_PIXEL_ORDERCONFIRMATION_BODY_END"} />
       </div>
     );
   }

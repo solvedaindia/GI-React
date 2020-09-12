@@ -53,7 +53,7 @@ class DropDownList extends React.Component {
           rows="2"
           cols="29"
           value={this.state.text}
-          maxLength="100"
+          maxLength="250"
         />
       </div>
     );
