@@ -54,6 +54,9 @@ class RWDSingleProduct extends React.Component {
   render() {
     const productData = this.props.orderDataPro;
     const shipmentDataPro = this.props.shipmentDataPro;
+    console.log("RWDSingleProduct P", productData);
+    console.log("RWDSingleProduct props", this.props.isFromViewOrder);
+    console.log("RWDSingleProduct S", shipmentDataPro);
     const showServiceRequestButton =
       productData.serviceRequestOrderLineFlag == "Y";
     const isServiceable = productData.isServiceable == "Y";
@@ -85,12 +88,6 @@ class RWDSingleProduct extends React.Component {
       showCancelButton = true;
       cancelText = "Cancel Item";
       showCancelMessage = false;
-    } else if (productData.returnMssg !== null) {
-      showReturnMessage = true;
-      returnText = productData.returnMssg;
-    } else if (shipmentDataPro && shipmentDataPro.returnMessage !== null) {
-      showReturnMessageS = true;
-      returnTextS = shipmentDataPro.returnMessage;
     } else {
       btnCancelDisable = true;
       showCancelMessage = true;
@@ -98,6 +95,13 @@ class RWDSingleProduct extends React.Component {
       cancelText = "Cancel Item";
     }
 
+    if (productData.returnMssg !== null) {
+      showReturnMessage = true;
+      returnText = productData.returnMssg;
+    } else if (shipmentDataPro && shipmentDataPro.returnMssg !== null) {
+      showReturnMessageS = true;
+      returnTextS = shipmentDataPro.returnMessage;
+    }
     return (
       <>
         <div className="itemBoxTrack clearfix">
