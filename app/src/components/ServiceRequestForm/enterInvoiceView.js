@@ -55,6 +55,10 @@ class EnterInvoiceView extends React.Component {
       alert("File size is too Big, please select a image less than 10mb");
       event.target.value = null;
       return;
+    } else if (event.target.files[0].type === "image/gif") {
+      alert("File format not supported!");
+      event.target.value = null;
+      return;
     }
     //upload file task
     // this.props.onInvoiceFile(event.target.files[0])
@@ -165,7 +169,7 @@ class EnterInvoiceView extends React.Component {
               type="file"
               id="uploadInvoice"
               onChange={this.onFileSelected.bind(this)}
-              accept="image/*,application/pdf"
+              accept="image/jpg, image/png, image/jpeg, application/pdf"
               style={{ display: "none" }}
             />
           </div>

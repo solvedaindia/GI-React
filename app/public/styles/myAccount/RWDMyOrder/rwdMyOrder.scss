@@ -229,6 +229,9 @@
         .itemInfo {
           display: block;
           float: left;
+          .cancelation-text-info {
+            color: $errorMsg;
+          }
         }
         .itemImg {
           margin: 0px 10px 0px 0px;
@@ -289,7 +292,7 @@
             background-color: $grey;
             color: $greyish;
             border: 1px solid $colorwhite;
-        }
+          }
           .btn-blackbg {
             background: $black;
             padding: 12px 0;
