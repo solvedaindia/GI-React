@@ -88,12 +88,13 @@ class OrderStatusBar extends React.Component {
   renderTechnicianDetailsForServiceRequest() {
     return (
       <div className="contactDetails">
-        <p className="heading">Contact Details</p>
-        <p className="mobiletext">
+        {/* <p className="heading">Contact Details</p> */}
+        {/* <p className="mobiletext">
           {this.props.shipmentDataPro.technicianName}
-        </p>
+        </p> */}
         <p className="mobiletext">
-          {this.props.shipmentDataPro.technicianAssignedDate}
+          Technician Assigned
+          {/* {this.props.shipmentDataPro.technicianAssignedDate} */}
         </p>
       </div>
     );
