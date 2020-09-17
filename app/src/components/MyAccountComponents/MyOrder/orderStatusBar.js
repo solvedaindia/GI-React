@@ -1,6 +1,7 @@
 import React from "react";
 import apiManager from "../../../utils/apiManager";
 import { changePasswordAPI } from "../../../../public/constants/constants";
+import { formatPrice } from "../../../utils/utilityManager";
 
 class OrderStatusBar extends React.Component {
   constructor(props) {
@@ -100,6 +101,21 @@ class OrderStatusBar extends React.Component {
     );
   }
 
+  renderRefundDetails() {
+    return (
+      <div className="refundDetails">
+        <p className="mobiletext">
+          {`Amount: ₹${this.props.prodctDataPro &&
+            this.props.prodctDataPro.cancelRefundAmount !== null &&
+            formatPrice(this.props.prodctDataPro.cancelRefundAmount)}`}
+        </p>
+        <span className="spanTxt">
+          Please check order details for more information
+        </span>
+      </div>
+    );
+  }
+
   render() {
     var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
       console.log("ksksks -- ", this);
@@ -107,6 +123,7 @@ class OrderStatusBar extends React.Component {
         <li class={this.getStatusBarCustomClassname(item, index)}>
           <div className="status">{item}</div>
           <div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+          {item === "Refund Details" ? this.renderRefundDetails() : null}
           {item === "Service Booked" &&
           this.props.shipmentDataPro.displayTechnicianDetails === "Y"
             ? this.renderTechnicianDetailsForServiceRequest()
