@@ -309,7 +309,7 @@ class ReturnRequestForm extends React.Component {
   renderUploadImage() {
     return (
       <div className="add-img">
-        <h4 className="heading">Add Image</h4>
+        <h4 className="heading">Add Image<span>*</span></h4>
         <UploadImage
           type={"ser"}
           onImageAddRemove={this.onImageAddRemove.bind(this)}
@@ -321,7 +321,7 @@ class ReturnRequestForm extends React.Component {
   renderReturnRequestReason() {
     return (
       <div className="product-category">
-        <h4 className="heading">Reason For Return Request</h4>
+        <h4 className="heading">Reason For Return Request<span>*</span></h4>
         <Dropdown
           data={this.state.returnRequestReasons}
           title="Reason for Return Request"
@@ -362,7 +362,7 @@ class ReturnRequestForm extends React.Component {
                 </p>
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
-                    <span className="heading">Quantity: </span>
+                    <span className="heading">Quantity<span>*</span>: </span>
                     {data.quantity == 0 ? (
                       <>
                         <span className="textval">{data.quantity}</span>

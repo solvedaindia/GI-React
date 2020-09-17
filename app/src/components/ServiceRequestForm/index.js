@@ -318,7 +318,7 @@ class ServiceRequestForm extends React.Component {
   renderAddress() {
     return (
       <div class="get-selected-address">
-        <h4 className="heading">Address</h4>
+        <h4 className="heading">Address<span>*</span></h4>
         <AddressList
           data={this.state.addressData}
           onSelection={this.getSelectedAddress.bind(this)}
@@ -330,7 +330,7 @@ class ServiceRequestForm extends React.Component {
   renderUploadImage() {
     return (
       <div className="add-img">
-        <h4 className="heading">Add Image</h4>
+        <h4 className="heading">Add Image<span>*</span></h4>
         <UploadImage
           submitted={this.state.submitted}
           type={"ser"}
@@ -343,7 +343,7 @@ class ServiceRequestForm extends React.Component {
   renderProductCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Category</h4>
+        <h4 className="heading">Product Category<span>*</span></h4>
         <Dropdown
           title="Please select a product category"
           data={this.state.categorySelectionData}
@@ -387,7 +387,7 @@ class ServiceRequestForm extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request</h4>
+        <h4 className="heading">Reason For Service Request<span>*</span></h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"

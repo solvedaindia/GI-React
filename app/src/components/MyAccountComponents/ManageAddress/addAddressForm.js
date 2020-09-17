@@ -500,7 +500,7 @@ class AddAddressForm extends React.Component {
   render() {
     return (
       <div className="form-BgContainer addAddressContainer">
-        <h4 className="heading">{ADD_NEW_ADD}</h4>
+        <h4 className="heading">{ADD_NEW_ADD}{this.props.isFromServiceRequest && <span>*</span>}</h4>
         {this.props.isFromServiceRequest ? null : (
           <button
             className="cancelBtn"

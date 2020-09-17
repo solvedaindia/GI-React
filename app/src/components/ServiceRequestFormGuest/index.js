@@ -262,7 +262,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderProdcutCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Details</h4>
+        <h4 className="heading">Product Details<span>*</span></h4>
         <Dropdown
           title="Please Select Product Category"
           data={this.state.productCategory}
@@ -300,7 +300,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request</h4>
+        <h4 className="heading">Reason For Service Request<span>*</span></h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"
@@ -314,7 +314,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderUploadImage() {
     return (
       <div className="add-img">
-        <h4 className="heading">Add Image</h4>
+        <h4 className="heading">Add Image<span>*</span></h4>
         <UploadImage
           type={"ser"}
           onImageAddRemove={this.onImageAddRemove.bind(this)}
