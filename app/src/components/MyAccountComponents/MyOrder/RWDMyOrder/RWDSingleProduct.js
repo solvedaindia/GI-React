@@ -98,7 +98,7 @@ class RWDSingleProduct extends React.Component {
     if (productData.returnMssg !== null) {
       showReturnMessage = true;
       returnText = productData.returnMssg;
-    } else if (shipmentDataPro && shipmentDataPro.returnMssg !== null) {
+    } else if (shipmentDataPro && shipmentDataPro.returnMessage !== null) {
       showReturnMessageS = true;
       returnTextS = shipmentDataPro.returnMessage;
     }
