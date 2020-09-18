@@ -51,10 +51,16 @@ class RWDCompleteOrder extends React.Component {
 
         <div className="order-delivery-add">
           <h2 className="title">Delivery Address</h2>
-          <p className="order-text-desc">{addressData.name}</p>
-          <p className="order-text-desc">{`${addressData.address}, ${
-            addressData.city
-          }, ${addressData.state}, ${addressData.pincode}`}</p>
+          <p className="order-text-desc">
+            { addressData && addressData.address1 !== undefined && <>{addressData.address1}<br/></>}
+            { addressData && addressData.address2 !== undefined && <>{addressData.address2}<br/></>}
+            { addressData && addressData.address3 !== undefined && <>{addressData.address3}<br/></>}
+
+            { addressData && addressData.city !== undefined && <>{addressData.city}, </>}
+            { addressData && addressData.state !== undefined && <>{addressData.state}, </>}
+            { addressData && addressData.pincode !== undefined && <>{addressData.pincode}</>}
+          </p>
+         
         </div>
 
         <div className="order-payent-method">
