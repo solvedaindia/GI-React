@@ -20,7 +20,7 @@ class ServiceRequestPage extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchServiceRequestData();
+    this.fetchServiceRequestData();
   }
   componentWillReceiveProps(nextProps) {
     //serviceRequest
