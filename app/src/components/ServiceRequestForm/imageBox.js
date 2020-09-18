@@ -22,9 +22,12 @@ class ImageBox extends React.Component {
   onImageSlected = event => {
     const fsize = event.target.files[0].size;
     const file = Math.round(fsize / 1024);
-
+    console.log("selected file: ", event.target.files[0]);
     if (file > 10240) {
       alert("Image is too big, please select a image less than 10mb");
+      event.target.value = null;
+      return;
+    } else if (event.target.files[0].type === "image/gif") {
       event.target.value = null;
       return;
     }
@@ -75,7 +78,7 @@ class ImageBox extends React.Component {
             type="file"
             title="Add Image"
             onChange={this.onImageSlected.bind(this)}
-            accept="image/*"
+            accept="image/jpg, image/png, image/jpeg"
           />
           <p className="text">
             <span>+</span>

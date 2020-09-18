@@ -14,8 +14,8 @@ class Checkboxes extends React.Component {
     this.state = {
       optionsChecked: [],
       showTextview: true,
-      characterCount: 250,
-      characterLimit: 250
+      characterCount: 50,
+      characterLimit: 50
     };
   }
 
@@ -46,7 +46,7 @@ class Checkboxes extends React.Component {
 
   onTextareaInput() {
     this.setState({
-      characterCount: 250 - document.getElementById("textareaSR").value.length
+      characterCount: 50 - document.getElementById("textareaSR").value.length
     });
     //this.props.onSelection([document.getElementById('textareaSR').value]);
     this.props.onOtherText(document.getElementById("textareaSR").value);

@@ -1,6 +1,7 @@
 import React from "react";
 import apiManager from "../../../utils/apiManager";
 import { changePasswordAPI } from "../../../../public/constants/constants";
+import { formatPrice } from "../../../utils/utilityManager";
 
 class OrderStatusBar extends React.Component {
   constructor(props) {
@@ -88,13 +89,29 @@ class OrderStatusBar extends React.Component {
   renderTechnicianDetailsForServiceRequest() {
     return (
       <div className="contactDetails">
-        <p className="heading">Contact Details</p>
-        <p className="mobiletext">
+        {/* <p className="heading">Contact Details</p> */}
+        {/* <p className="mobiletext">
           {this.props.shipmentDataPro.technicianName}
-        </p>
+        </p> */}
         <p className="mobiletext">
-          {this.props.shipmentDataPro.technicianAssignedDate}
+          Technician Assigned
+          {/* {this.props.shipmentDataPro.technicianAssignedDate} */}
         </p>
+      </div>
+    );
+  }
+
+  renderRefundDetails() {
+    return (
+      <div className="refundDetails">
+        <p className="mobiletext">
+          {`Amount: ₹${this.props.prodctDataPro &&
+            this.props.prodctDataPro.cancelRefundAmount !== null &&
+            formatPrice(this.props.prodctDataPro.cancelRefundAmount)}`}
+        </p>
+        <span className="spanTxt">
+          Please check order details for more information
+        </span>
       </div>
     );
   }
@@ -106,6 +123,7 @@ class OrderStatusBar extends React.Component {
         <li class={this.getStatusBarCustomClassname(item, index)}>
           <div className="status">{item}</div>
           <div className="deliveryDate">{this.getStatusBarDate(item)}</div>
+          {item === "Refund Details" ? this.renderRefundDetails() : null}
           {item === "Service Booked" &&
           this.props.shipmentDataPro.displayTechnicianDetails === "Y"
             ? this.renderTechnicianDetailsForServiceRequest()

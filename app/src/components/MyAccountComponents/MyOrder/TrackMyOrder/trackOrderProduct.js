@@ -119,6 +119,7 @@ class TrackOrderProduct extends React.Component {
             </div>
             <div className="clearfix" />
             <OrderStatusBar
+              prodctDataPro={productData}
               shipmentDataPro={this.props.shipmentDataPro}
               onRSODetail={() => {
                 this.props.onRSODetail();
