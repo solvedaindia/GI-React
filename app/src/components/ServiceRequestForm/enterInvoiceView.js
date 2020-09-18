@@ -16,6 +16,7 @@ class EnterInvoiceView extends React.Component {
       errorMessage: "",
       invoiceNumber: "",
       upload: "",
+      fileName: "",
       isUploadBtnDisabled: true
     };
     this.handleInput = this.handleInput.bind(this);
@@ -73,6 +74,9 @@ class EnterInvoiceView extends React.Component {
     formdata.append("userid", getCookie("userID"));
     formdata.append("typeid", this.props.type);
     formdata.append("file", file, file.name);
+    this.setState({
+      fileName: file.name
+    });
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -95,8 +99,15 @@ class EnterInvoiceView extends React.Component {
   }
 
   onUploadInvoice = () => {
-    const uploadInvoice = document.getElementById("uploadInvoice");
-    uploadInvoice.click();
+    if (this.state.fileName === "") {
+      const uploadInvoice = document.getElementById("uploadInvoice");
+      uploadInvoice.click();
+    } else {
+      this.setState({
+        fileName: ""
+      });
+      document.getElementById("uploadInvoice").value = "";
+    }
   };
   onRemoveImage() {
     if (this.state.upload === "") {
@@ -155,6 +166,14 @@ class EnterInvoiceView extends React.Component {
               {this.state.error ? (
                 <div className="error-msg">{this.state.errorMessage}</div>
               ) : null}
+              {this.props.invoiceFileError ? (
+                <div className="error-msg">
+                  {"Please upload a scanned copy of your invoice"}
+                </div>
+              ) : null}
+              <p id="invoiceFile" className="invoiceNotes my-1">
+                {this.state.fileName}
+              </p>
             </div>
           </div>
           <div className="col-md-6 upload-invoice">
@@ -163,7 +182,7 @@ class EnterInvoiceView extends React.Component {
               disabled={this.state.isUploadBtnDisabled}
               className="btn-save btn"
             >
-              Upload Invoice
+              {this.state.fileName === "" ? " Upload Invoice" : "Remove"}
             </button>
             <input
               type="file"

@@ -21,6 +21,7 @@ import {
 } from "../../constants/app/myAccountConstants";
 import AddAddressForm from "../../components/MyAccountComponents/ManageAddress/addAddressForm";
 import "../../../public/styles/myAccount/service-request.scss";
+import ProgressButton from "../Button/progressButton";
 
 class ServiceRequestForm extends React.Component {
   constructor(props) {
@@ -51,7 +52,9 @@ class ServiceRequestForm extends React.Component {
       isSaveBtnDisabled: true,
       selectedImages: [],
       otherReason: "",
-      submitted: false
+      submitted: false,
+      invoiceFileError: false,
+      isProcessing: false
     };
     //this.invoiceView=React.createRef();
     //this.imagesView=React.createRef();
@@ -163,12 +166,14 @@ class ServiceRequestForm extends React.Component {
   onEnterInvoiceTextChanged(value) {
     this.setState({
       showInvoiceDisclaimer: value.length == 0,
-      inputInvoice: value
+      inputInvoice: value,
+      invoiceFileError: false
     });
   }
   onInvoiceFileSelection(value) {
     this.setState({
-      invoiceFile: value
+      invoiceFile: value,
+      invoiceFileError: false
     });
   }
   onOtherReasonEnter(value) {
@@ -184,6 +189,27 @@ class ServiceRequestForm extends React.Component {
   }
 
   onSubmitForm() {
+    if (
+      this.state.showEnterInvoice &&
+      this.state.inputInvoice !== "" &&
+      this.state.invoiceFile === ""
+    ) {
+      this.setState({
+        invoiceFileError: true
+      });
+      var element = document.getElementById("invoice");
+      if (element) {
+        element.scrollIntoView();
+      }
+      return;
+    }
+    if (this.state.isProcessing) {
+      return;
+    }
+    this.setState({
+      isProcessing: true
+    });
+
     let invoice = this.state.selectedInvoice;
     if (
       this.state.selectedInvoice == "Other" &&
@@ -279,13 +305,13 @@ class ServiceRequestForm extends React.Component {
           >
             Cancel
           </button>
-          <button
+          <ProgressButton
             disabled={isSaveBtnDisabled}
-            className="btn-save btn"
-            onClick={this.onSubmitForm.bind(this)}
-          >
-            Submit
-          </button>
+            styleClassName="btn-save btn"
+            title={"Submit"}
+            onClickEvent={this.onSubmitForm.bind(this)}
+            isProcessing={this.state.isProcessing}
+          />
         </div>
       </div>
     );
@@ -318,7 +344,10 @@ class ServiceRequestForm extends React.Component {
   renderAddress() {
     return (
       <div class="get-selected-address">
-        <h4 className="heading">Address<span>*</span></h4>
+        <h4 className="heading">
+          Address
+          <span>*</span>
+        </h4>
         <AddressList
           data={this.state.addressData}
           onSelection={this.getSelectedAddress.bind(this)}
@@ -330,7 +359,10 @@ class ServiceRequestForm extends React.Component {
   renderUploadImage() {
     return (
       <div className="add-img">
-        <h4 className="heading">Add Image<span>*</span></h4>
+        <h4 className="heading">
+          Add Image
+          <span>*</span>
+        </h4>
         <UploadImage
           submitted={this.state.submitted}
           type={"ser"}
@@ -343,7 +375,10 @@ class ServiceRequestForm extends React.Component {
   renderProductCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Category<span>*</span></h4>
+        <h4 className="heading">
+          Product Category
+          <span>*</span>
+        </h4>
         <Dropdown
           title="Please select a product category"
           data={this.state.categorySelectionData}
@@ -368,7 +403,7 @@ class ServiceRequestForm extends React.Component {
         />
         {this.state.showEnterInvoice && (
           <EnterInvoiceView
-            submitted={this.state.submitted}
+            invoiceFileError={this.state.invoiceFileError}
             type={"ser"}
             onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}
             onInvoiceFile={this.onInvoiceFileSelection.bind(this)}
@@ -387,7 +422,10 @@ class ServiceRequestForm extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request<span>*</span></h4>
+        <h4 className="heading">
+          Reason For Service Request
+          <span>*</span>
+        </h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"

@@ -14,6 +14,8 @@ import Checkboxes from "../ServiceRequestForm/checkboxes";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import "../../../public/styles/myAccount/service-request.scss";
 import { validateFullName } from "../../utils/validationManager";
+import { element } from "prop-types";
+import ProgressButton from "../Button/progressButton";
 
 class ServiceRequestFormGuest extends React.Component {
   constructor(props) {
@@ -33,7 +35,9 @@ class ServiceRequestFormGuest extends React.Component {
       isSaveBtnDisabled: true,
       selectedImages: [],
       invoiceFile: "",
-      showInvoiceDisclaimer: true
+      invoiceFileError: false,
+      showInvoiceDisclaimer: true,
+      isProcessing: false
     };
   }
 
@@ -56,12 +60,14 @@ class ServiceRequestFormGuest extends React.Component {
   onEnterInvoiceTextChanged(value) {
     this.setState({
       showInvoiceDisclaimer: value.length == 0,
-      selectedInvoice: value
+      selectedInvoice: value,
+      invoiceFileError: false
     });
   }
   onInvoiceFileSelection(value) {
     this.setState({
-      invoiceFile: value
+      invoiceFile: value,
+      invoiceFileError: false
     });
   }
 
@@ -109,6 +115,22 @@ class ServiceRequestFormGuest extends React.Component {
 
   onSubmitForm() {
     this.refs.child.onSavebuttonClick();
+    if (this.state.selectedInvoice != "" && this.state.invoiceFile === "") {
+      this.setState({
+        invoiceFileError: true
+      });
+      var element = document.getElementById("invoice");
+      if (element) {
+        element.scrollIntoView();
+      }
+      return;
+    }
+    if (this.state.isProcessing) {
+      return;
+    }
+    this.setState({
+      isProcessing: true
+    });
 
     // let reason = "";
     // this.state.selectedReason.map((data) => {
@@ -177,6 +199,7 @@ class ServiceRequestFormGuest extends React.Component {
             <div className="invice-selection guest-type">
               <EnterInvoiceView
                 type={"ser"}
+                invoiceFileError={this.state.invoiceFileError}
                 onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}
                 onInvoiceFile={this.onInvoiceFileSelection.bind(this)}
               />
@@ -191,13 +214,13 @@ class ServiceRequestFormGuest extends React.Component {
             {this.renderUploadImage()}
             <div className="actionBtnWrapper">
               <button className="btn-cancel btn">Cancel</button>
-              <button
+              <ProgressButton
                 disabled={isSaveBtnDisabled}
-                className="btn-save btn"
-                onClick={this.onSubmitForm.bind(this)}
-              >
-                Submit
-              </button>
+                styleClassName="btn-save btn"
+                title={"Submit"}
+                onClickEvent={this.onSubmitForm.bind(this)}
+                isProcessing={this.state.isProcessing}
+              />
             </div>
             {this.state.showLogin ? (
               <UserAccInfo
@@ -262,7 +285,10 @@ class ServiceRequestFormGuest extends React.Component {
   renderProdcutCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Details<span>*</span></h4>
+        <h4 className="heading">
+          Product Details
+          <span>*</span>
+        </h4>
         <Dropdown
           title="Please Select Product Category"
           data={this.state.productCategory}
@@ -300,7 +326,10 @@ class ServiceRequestFormGuest extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request<span>*</span></h4>
+        <h4 className="heading">
+          Reason For Service Request
+          <span>*</span>
+        </h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"
@@ -314,7 +343,10 @@ class ServiceRequestFormGuest extends React.Component {
   renderUploadImage() {
     return (
       <div className="add-img">
-        <h4 className="heading">Add Image<span>*</span></h4>
+        <h4 className="heading">
+          Add Image
+          <span>*</span>
+        </h4>
         <UploadImage
           type={"ser"}
           onImageAddRemove={this.onImageAddRemove.bind(this)}
