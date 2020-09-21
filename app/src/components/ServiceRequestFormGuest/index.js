@@ -15,6 +15,7 @@ import UploadImage from "../ServiceRequestForm/uploadImage";
 import "../../../public/styles/myAccount/service-request.scss";
 import { validateFullName } from "../../utils/validationManager";
 import ProgressButton from "../Button/progressButton";
+import history from "../../utils/history";
 
 class ServiceRequestFormGuest extends React.Component {
   constructor(props) {
@@ -136,35 +137,45 @@ class ServiceRequestFormGuest extends React.Component {
   }
 
   validateForm() {
-    debugger;
     let flag = true;
     if (this.state.selectedProductCategory === "") {
       this.setState({
         errorProductCategory: "This field is required"
       });
+      const element = document.getElementById("product-category");
+      if (element) element.scrollIntoView();
       flag = false;
     }
     if (this.state.descriptionText === "") {
       this.setState({
         errorProdcuctDesp: "This field is required"
       });
+      const element = document.getElementById("product-category");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.guestAddress === undefined) {
+      const element = document.getElementById("guest-address-form");
+      if (element && flag) element.scrollIntoView();
       flag = false;
     }
     if (this.state.otherReason === "") {
       this.setState({
         errorReason: "This field is required"
       });
+      const element = document.getElementById("service-request-reasons");
+      if (element && flag) element.scrollIntoView();
       flag = false;
     }
     if (this.state.selectedImages.length === 0) {
       this.setState({
         errorImageMessage: "Uploading at least one product image is mandatory"
       });
+      const element = document.getElementById("add-image");
+      if (element && flag) element.scrollIntoView();
       flag = false;
     }
-    if (this.state.guestAddress === undefined) {
-      flag = false;
-    }
+
     return flag;
   }
 
@@ -249,7 +260,7 @@ class ServiceRequestFormGuest extends React.Component {
             non-Godrej product
           </p>
           <div className="guest-border-box">
-            <div className="guest-address-form">
+            <div className="guest-address-form" id="guest-address-form">
               <AddAddressForm
                 isFromServiceRequest={true}
                 onAddressChange={this.onAddressChange.bind(this)}
@@ -273,7 +284,14 @@ class ServiceRequestFormGuest extends React.Component {
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className="actionBtnWrapper">
-              <button className="btn-cancel btn">Cancel</button>
+              <button
+                className="btn-cancel btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                Cancel
+              </button>
               <ProgressButton
                 styleClassName="btn-save btn"
                 title={"Submit"}
@@ -299,7 +317,7 @@ class ServiceRequestFormGuest extends React.Component {
         <>
           <div className="request-service-msg">
             <p className="text">
-              Go to ‘My Account’ > Orders and click on the ‘Request Service’
+              Go to ‘My Account’ {">"} Orders and click on the ‘Request Service’
               button against the product you wish to get serviced. &nbsp;
               <Link
                 className="guest-login-link"
@@ -320,7 +338,7 @@ class ServiceRequestFormGuest extends React.Component {
         <>
           <div className="request-service-msg">
             <p className="text">
-              Go to ‘My Account’ > Orders and click on the ‘Request Service’
+              Go to ‘My Account’ {">"} Orders and click on the ‘Request Service’
               button against the product you wish to get serviced.{" "}
               <a
                 className="guest-login-link"
@@ -344,7 +362,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderProdcutCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">
+        <h4 className="heading" id="product-category">
           Product Details
           <span>*</span>
         </h4>
@@ -389,7 +407,7 @@ class ServiceRequestFormGuest extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">
+        <h4 className="heading" id="service-request-reasons">
           Reason For Service Request
           <span>*</span>
         </h4>
@@ -408,7 +426,7 @@ class ServiceRequestFormGuest extends React.Component {
     return (
       <>
         <div className="add-img">
-          <h4 className="heading">
+          <h4 className="heading" id="add-image">
             Add Image
             <span>*</span>
           </h4>

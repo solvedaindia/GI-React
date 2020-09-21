@@ -69,6 +69,11 @@
     line-height: $base * 3.5;
     text-align: center;
   }
+  .error-msg {
+    color: $reddishpink;
+    font-weight: normal;
+    font-size: 12px;
+  }
   .bottomDivider {
     margin-bottom: $base * 2;
   }
