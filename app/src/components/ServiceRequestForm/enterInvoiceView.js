@@ -53,11 +53,19 @@ class EnterInvoiceView extends React.Component {
     const fsize = event.target.files[0].size;
     const file = Math.round(fsize / 1024);
     if (file > 10240) {
-      alert("File size is too Big, please select a image less than 10mb");
+      // alert("File size is too Big, please select a image less than 10mb");
+      this.setState({
+        error: true,
+        errorMessage: "File is too large (max 10 MB)"
+      });
       event.target.value = null;
       return;
     } else if (event.target.files[0].type === "image/gif") {
-      alert("File format not supported!");
+      //alert("File format not supported!");
+      this.setState({
+        error: true,
+        errorMessage: "File type is not supported"
+      });
       event.target.value = null;
       return;
     }

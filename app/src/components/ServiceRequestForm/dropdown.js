@@ -18,27 +18,28 @@ class Dropdown extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="dropdown">
-          <button
-            className="btn dropdown-toggle"
-            type="button"
-            data-toggle="dropdown"
-          >
-            {this.state.dropdownValue}
-            <span className="caret" />
-          </button>
-          <ul className="dropdown-menu">
-            {Array.isArray(this.props.data) &&
-              this.props.data.map((data, i) => {
-                return (
-                  <li onClick={() => this.onSelection(data, i)}>
-                    <a>{data}</a>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
+      <div className="dropdown">
+        <button
+          className="btn dropdown-toggle"
+          type="button"
+          data-toggle="dropdown"
+        >
+          {this.state.dropdownValue}
+          <span className="caret" />
+        </button>
+        <ul className="dropdown-menu">
+          {Array.isArray(this.props.data) &&
+            this.props.data.map((data, i) => {
+              return (
+                <li onClick={() => this.onSelection(data, i)}>
+                  <a>{data}</a>
+                </li>
+              );
+            })}
+        </ul>
+        {this.props.error && (
+          <div className="error-msg">{this.props.error}</div>
+        )}
       </div>
     );
   }

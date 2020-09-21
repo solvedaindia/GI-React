@@ -1,475 +1,491 @@
 @import "../variable.scss";
-.guest-service{
-  &.service-request{
-    .guest-border-box{
+.guest-service {
+  &.service-request {
+    .guest-border-box {
       border: dashed 1px $lightblueGrey;
       background-color: rgba(238, 237, 237, 0.09);
-      padding: $base*3 $base*3 $base*2 $base*3;
-      margin-bottom: $base*3;
-      .form-div{
-        .form-group{
-          .form-control{
+      padding: $base * 3 $base * 3 $base * 2 $base * 3;
+      margin-bottom: $base * 3;
+      .form-div {
+        .form-group {
+          .form-control {
             font-family: $font-light;
           }
         }
       }
 
-      .guest-address-form{
-        .addAddressContainer{
+      .guest-address-form {
+        .addAddressContainer {
           border: 0px;
           padding: 0px;
         }
       }
-      .add-img{
-        .add-img-upload{
+      .add-img {
+        .add-img-upload {
           border: 0px;
           background: none;
         }
       }
-      .guest-type{
-        .upload-invoiceno{
+      .guest-type {
+        .upload-invoiceno {
           border: 0px;
           padding: 0px;
         }
       }
     }
-    .notification-title{ 
+    .notification-title {
       color: $cerulean;
-      font-size: $base*1.75;
+      font-size: $base * 1.75;
       clear: both;
       padding-top: 10px;
     }
-    .product-category{
-      .heading{
-        font-size: $base*2;
+    .product-category {
+      .heading {
+        font-size: $base * 2;
       }
     }
-    .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer, .refund-mode-wrapper{
-      .heading{
-        font-size: $base *1.75;
+    .invice-selection,
+    .service-request-reasons,
+    .add-img,
+    .get-selected-address,
+    .manageAddressContainer,
+    .refund-mode-wrapper {
+      .heading {
+        font-size: $base * 1.75;
+      }
+    }
+  }
+
+  .error-msg {
+    color: $reddishpink;
+    font-weight: normal;
+    font-size: 12px;
+  }
+}
+.service-request {
+  > .heading {
+    font-family: $font-medium;
+    font-size: $base * 3.75;
+    line-height: $base * 3.5;
+    text-align: center;
+  }
+  .bottomDivider {
+    margin-bottom: $base * 2;
+  }
+  .notification-title {
+    color: $cerulean;
+    font-size: $base * 1.75;
+    clear: both;
+  }
+
+  .add-img {
+    float: left;
+    width: 100%;
+    .uploded-img,
+    .uploded-img-data {
+      width: 140px;
+      height: 140px;
+      position: relative;
+      float: left;
+      margin-right: $base * 3;
+      .close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background: $colorwhite;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        font-size: 12px;
+        opacity: 1;
+      }
+    }
+    .add-img-upload {
+      padding: 0px;
+      border-radius: 2px;
+      border: dashed 1px $lightblueGrey;
+      background-color: rgba(238, 237, 237, 0.09);
+      padding: 10px;
+      max-width: 520px;
+      .upload-img-btn {
+        width: 140px;
+        height: 140px;
+        text-align: center;
+        background: $paleGrey;
+        float: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .upload-img-input {
+          position: absolute;
+          margin: 0px;
+          padding: 0px;
+          width: 140px;
+          height: 140px;
+          outline: none;
+          opacity: 0;
+          cursor: pointer;
+        }
+        .text {
+          font-size: $base * 1.75;
+          color: $cerulean;
+          span {
+            display: block;
+            font-size: $base * 3.5;
+          }
+        }
+      }
+    }
+  }
+
+  .itemBox {
+    .orderProduct {
+      .orderimgbox {
+        .product-text {
+          .quantity-shipping {
+            .quantity {
+              .heading {
+                font-size: 10px;
+                color: $battleshipGrey;
+                text-transform: uppercase;
+              }
+              .textval {
+                font-size: $base * 1.5;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .product-category {
+    .dropdown {
+      float: left;
+      .dropdown-toggle {
+        background: $colorwhite;
+        border: 1px solid $greyish;
+        border-radius: 0px;
+        min-width: 340px;
+        text-align: left;
+        color: $greyish;
+        font-size: $base * 1.75;
+        font-family: $font-medium;
+        padding: 13px 10px;
+        .caret {
+          float: right;
+          margin-top: 8px;
+          margin-left: 10px;
+        }
+      }
+      .dropdown-menu {
+        width: 100%;
+        li {
+          a {
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+
+  .invice-selection {
+    .notification-title {
+      color: $cerulean;
+      font-size: $base * 1.75;
+      clear: both;
+      padding-top: 10px;
+    }
+    .dropdown {
+      float: left;
+      .dropdown-toggle {
+        background: $colorwhite;
+        border: 1px solid $battleshipGrey;
+        border-radius: 0px;
+        min-width: 160px;
+        text-align: left;
+        color: $greyish;
+        font-size: $base * 1.75;
+        font-family: $font-medium;
+        padding: 13px 10px;
+        .caret {
+          float: right;
+          margin-top: 8px;
+          margin-left: 10px;
+        }
+      }
+      .dropdown-menu {
+        width: 100%;
+      }
+    }
+    .upload-invoiceno {
+      .form-div {
+        .invoiceNumber {
+          width: 100%;
+          border: 1px solid $lightblueGrey;
+          padding: 16px 21px;
+          height: 52px;
+          font-size: $base * 2;
+        }
+      }
+      .upload-invoice {
+        padding: 0px;
+        .btn-save {
+          border-radius: 0px;
+          background-color: $black;
+          color: $colorwhite;
+          padding: 14px 15px;
+          min-width: 180px;
+        }
+      }
+    }
+    &.guest-type {
+      margin: 20px 0px 0px 0px;
+      clear: both;
+      float: left;
+      width: 100%;
+    }
+  }
+
+  .service-request-reasons {
+    .service-request-text {
+      .service-request-box {
+        padding-left: 10px;
+        padding-top: 10px;
+        .inputCheck[type="checkbox"] {
+          display: none;
+        }
+        /* Input Checkbox Squere
+              -----------------------------*/
+        .inputCheck[type="checkbox"] + .label-text {
+          background: url("../../images/plpAssests/unchecked.jpg") left top
+            no-repeat;
+          display: inline;
+          min-height: 16px;
+          padding-left: 23px;
+          background-size: contain;
+        }
+
+        .inputCheck[type="checkbox"]:checked + .label-text {
+          background: url("../../images/plpAssests/checked.jpg") left top
+            no-repeat;
+          background-size: contain;
+          padding-left: 23px;
+        }
+        .label-text {
+          cursor: pointer;
+          font-size: 13px;
+          color: $black;
+          font-family: $font-regular;
+          padding-left: 8px;
+          font-weight: normal;
+        }
+        .input_box,
+        .defaultlbl {
+          float: left;
+        }
+      }
+    }
+  }
+
+  .service-request-desc {
+    .heading-desc {
+      font-size: $base * 1.75;
+      color: $colorblack;
+      margin: 10px 0px 0px 0px;
+    }
+    .text-area {
+      border: 1px solid $battleshipGrey;
+      padding: 5px 10px;
+      background: $colorwhite;
+      resize: none;
+    }
+    .label-text {
+      display: block;
+      color: $battleshipGrey;
+      font-family: $font-light;
+      font-size: $base * 1.5;
+    }
+    &.guest-type {
+      display: inline-block;
+      margin-left: 10px;
+      .heading {
+        &:empty {
+          display: none;
+        }
+      }
+      .text-area {
+        height: 47px;
+        resize: none;
+        overflow: hidden;
+        padding: 13px 10px;
+        color: $greyish;
+      }
+    }
+  }
+  .get-selected-address {
+    .saveAddress {
+      .list {
+        border: 1px solid $lightblueGrey;
+        min-height: 100px;
+        float: left;
+        background-color: rgba(247, 248, 248, 0.5);
+        &.defaultAddress {
+          background-color: rgba(99, 176, 225, 0.07);
+          border: 1px solid $ceruleanblueborder;
+        }
+        .inputBox {
+          display: grid;
+          float: left;
+        }
+        .addressText {
+          padding-left: 20px;
+          font-size: $base * 1.5;
+          font-family: $font-regular;
+          color: $black;
+          line-height: $base * 2;
+        }
+        &:hover {
+          border: 1px solid $cerulean;
+        }
+      }
+    }
+  }
+
+  .actionBtnWrapper {
+    clear: both;
+    .btn {
+      border-radius: 0px;
+    }
+  }
+  .refund-mode-wrapper,
+  .product-category,
+  .invice-selection,
+  .service-request-reasons,
+  .add-img,
+  .get-selected-address,
+  .manageAddressContainer {
+    .heading {
+      font-size: $base * 2;
+      font-family: $font-medium;
+      padding-top: $base * 3;
+      clear: both;
+      margin-top: 0px;
+    }
+  }
+
+  .request-service-msg {
+    .text {
+      color: $battleshipGrey;
+      font-size: $base * 1.75;
+    }
+    .guest-login-link {
+      color: $cerulean;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .guest-address-form {
+    .heading {
+      font-size: $base * 1.75;
+    }
+    float: left;
+    width: 100%;
+    margin: 10px 0px;
+  }
+
+  &.return-request {
+    .product-category {
+      .service-request-desc {
+        clear: both;
+        padding-top: 8px;
+      }
+    }
+
+    .refund-mode-wrapper {
+      .customradio,
+      .radioBtn {
+        .label-text {
+          padding-left: 5px;
+        }
+        .input[type="radio"] {
+          display: none;
+        }
+        .inputBox {
+          position: relative;
+          &:before {
+            content: " ";
+            display: inline-block;
+            position: relative;
+            top: 4px;
+            margin: 0 0px 0 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            border: 0px solid $black;
+            background-color: transparent;
+          }
+          .labelchecked {
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            left: 0;
+            cursor: pointer;
+          }
+          .input[type="radio"]:checked + .labelchecked {
+            border-radius: 100%;
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: 7px;
+            left: 3px;
+            display: block;
+            background-color: $black;
+          }
+        }
+      }
+    }
+
+    .bank-detail-form {
+      .form-wrapper {
+        padding-bottom: 10px;
+        max-width: 540px;
+        .label-text {
+          display: block;
+        }
+        .label-info-text {
+          font-size: 10px;
+        }
       }
     }
   }
 }
-.service-request{
-      > .heading{
-        font-family: $font-medium;
-        font-size:$base*3.75;  
-        line-height: $base*3.5; 
-        text-align: center;
-      }
-      .bottomDivider{
-        margin-bottom: $base *2;
-      }
-      .notification-title{
-        color: $cerulean;
-        font-size: $base*1.75;
-        clear: both;
-      }
-
-      .add-img{
-        float: left;
-        width: 100%;
-        .uploded-img, .uploded-img-data{
-          width: 140px;
-          height: 140px;
-          position: relative;
-          float: left;
-          margin-right: $base * 3;
-          .close{
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: $colorwhite;
-            width: 20px;
-            height: 20px;
-            border-radius: 100%;
-            font-size: 12px;
-            opacity:1;
-          }
-        }
-        .add-img-upload{
-          padding: 0px;
-          border-radius: 2px;
-          border: dashed 1px $lightblueGrey;
-          background-color: rgba(238, 237, 237, 0.09);
-          padding: 10px;
-          max-width: 520px;
-          .upload-img-btn{
-            width: 140px;
-            height: 140px;
-            text-align: center;
-            background: $paleGrey;
-            float: left;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .upload-img-input{
-              position: absolute;
-               margin: 0px; 
-              padding: 0px; 
-              width: 140px; 
-              height: 140px; 
-              outline: none; 
-              opacity: 0; 
-              cursor: pointer;
-            }
-            .text{
-              font-size: $base * 1.75;
-              color: $cerulean;
-              span{
-                display: block;
-                font-size: $base * 3.5;
-              }
-            }
-          }
-        }
-      }
-
-      .itemBox{
-        .orderProduct{
-          .orderimgbox{
-            .product-text{
-              .quantity-shipping{
-                .quantity{
-                  .heading{
-                    font-size: 10px;
-                    color:$battleshipGrey;
-                    text-transform: uppercase;
-                  }
-                  .textval{
-                    font-size: $base *1.5;
-                  }
-                }
-              } 
-            } 
-          } 
-        } 
-      }
-
-      .product-category{
-        .dropdown{
-          float: left;
-          .dropdown-toggle{
-            background: $colorwhite;
-            border: 1px solid $greyish;
-            border-radius: 0px;
-            min-width: 340px;
-            text-align: left;
-            color: $greyish;
-            font-size: $base*1.75;
-            font-family: $font-medium;
-            padding: 13px 10px;
-            .caret{
-              float: right;
-              margin-top: 8px;
-              margin-left: 10px;
-            }
-          }
-          .dropdown-menu{
-            width: 100%;
-            li{
-              a{
-                white-space: normal;
-              }
-            }
-          }
-        }
-      }
-
-      .invice-selection{
-        .notification-title{
-          color: $cerulean;
-          font-size: $base*1.75;
-          clear: both;
-          padding-top: 10px;
-        }
-        .dropdown{
-          float: left;
-          .dropdown-toggle{
-            background: $colorwhite;
-            border: 1px solid $battleshipGrey;
-            border-radius: 0px;
-            min-width: 160px;
-            text-align: left;
-            color: $greyish;
-            font-size: $base*1.75;
-            font-family: $font-medium;
-            padding: 13px 10px;
-            .caret{
-              float: right;
-              margin-top: 8px;
-              margin-left: 10px;
-            }
-          }
-          .dropdown-menu{
-            width: 100%;
-          }
-        }
-        .upload-invoiceno{
-          .form-div{
-            .invoiceNumber{
-              width: 100%;
-              border: 1px solid $lightblueGrey;
-              padding:16px 21px;
-              height: 52px;
-              font-size: $base*2;
-            }
-          }
-          .upload-invoice{
-            padding: 0px;
-            .btn-save{
-              border-radius: 0px;
-              background-color: $black;
-              color: $colorwhite;
-              padding: 14px 15px;
-              min-width: 180px;
-            }
-          }
-        }
-        &.guest-type{
-          margin: 20px 0px 0px 0px;
-          clear: both;
-          float: left;
-          width: 100%;
-        }
-      }
-
-      .service-request-reasons{
-        .service-request-text{
-          .service-request-box{
-            padding-left: 10px;
-            padding-top: 10px;
-              .inputCheck[type="checkbox"] {
-                display: none;
-            }
-              /* Input Checkbox Squere
-              -----------------------------*/
-              .inputCheck[type="checkbox"] + .label-text {
-                background: url("../../images/plpAssests/unchecked.jpg") left top no-repeat;     
-                display: inline;
-                min-height: 16px;
-                padding-left: 23px;
-                background-size: contain;
-              }
-          
-              .inputCheck[type="checkbox"]:checked + .label-text {
-                background: url("../../images/plpAssests/checked.jpg") left top no-repeat;
-                background-size: contain;
-                padding-left: 23px;
-              }
-              .label-text {   
-                cursor: pointer;  
-                font-size: 13px;   
-                color: $black; 
-                font-family: $font-regular;  
-                padding-left: 8px;
-                font-weight: normal;
-              }
-              .input_box,
-              .defaultlbl{
-                float: left;
-              }
-          }
-        }
-      }
-
-      .service-request-desc{
-        .heading-desc{
-          font-size: $base*1.75;
-          color: $colorblack;
-          margin: 10px 0px 0px 0px;
-        }
-        .text-area{
-          border: 1px solid $battleshipGrey;
-          padding: 5px 10px;
-          background: $colorwhite;
-          resize: none;
-        }
-        .label-text{
-          display: block;
-          color:$battleshipGrey;
-          font-family: $font-light;
-          font-size: $base*1.5;
-        }
-        &.guest-type{
-          display: inline-block;
-          margin-left: 10px;
-          .heading{
-            &:empty{
-              display: none;
-            }
-          }
-          .text-area{
-            height: 47px;
-            resize: none;
-            overflow: hidden;
-            padding: 13px 10px;
-            color: $greyish;
-          }
-        }
-      }
-      .get-selected-address{
-        .saveAddress{
-          .list{
-            border: 1px solid $lightblueGrey;
-            min-height: 100px;
-            float: left;
-            background-color: rgba(247, 248, 248, 0.5);
-            &.defaultAddress{
-              background-color: rgba(99, 176, 225, 0.07);
-              border:1px solid $ceruleanblueborder;
-            }
-            .inputBox{
-              display: grid;
-              float: left;
-            }
-            .addressText{
-              padding-left: 20px;
-              font-size: $base*1.5;
-              font-family: $font-regular;
-              color: $black;
-              line-height: $base*2;
-            }
-            &:hover{
-              border: 1px solid $cerulean;
-            }
-          }
-        }
-      }
-
-      .actionBtnWrapper{
-        clear: both;
-        .btn{
-          border-radius: 0px;
-        }
-      }
-      .refund-mode-wrapper, .product-category, .invice-selection, .service-request-reasons, .add-img, .get-selected-address, .manageAddressContainer{
-        .heading{
-          font-size: $base *2;
-          font-family: $font-medium;
-          padding-top:$base * 3;
-          clear: both;
-          margin-top: 0px;
-        }
-      }
-
-      .request-service-msg{
-        .text{
-          color: $battleshipGrey;
-          font-size: $base*1.75;
-        }
-        .guest-login-link{
-          color: $cerulean;
-          text-decoration: underline;
-          &:hover{
-            text-decoration: none;
-          }
-        }
-      }
-      .guest-address-form{
-        .heading{
-          font-size: $base*1.75;
-        }
-        float: left;
-        width: 100%;
-        margin: 10px 0px;
-      }
-
-      
-      
-      &.return-request{
-        .product-category{
-          .service-request-desc{
-            clear: both;
-            padding-top: 8px;
-          }
-        }
-  
-        .refund-mode-wrapper{
-          .customradio, .radioBtn {
-            .label-text{
-              padding-left: 5px;
-            }
-            .input[type="radio"] {
-              display: none;
-            }
-            .inputBox {
-              position: relative;
-              &:before {
-                content: " ";
-                display: inline-block;
-                position: relative;
-                top: 4px;
-                margin: 0 0px 0 0;
-                width: 14px;
-                height: 14px;
-                border-radius: 100%;
-                border: 0px solid $black;
-                background-color: transparent;
-              }
-              .labelchecked {
-                width: 14px;
-                height: 14px;
-                position: absolute;
-                left: 0;
-                cursor: pointer;
-              }
-              .input[type="radio"]:checked + .labelchecked {
-                border-radius: 100%;
-                width: 8px;
-                height: 8px;
-                position: absolute;
-                top: 7px;
-                left: 3px;
-                display: block;
-                background-color: $black;
-              }
-            }
-          }
-        }
-
-        .bank-detail-form{
-          .form-wrapper{
-            padding-bottom: 10px;
-            max-width: 540px;
-            .label-text{
-              display: block;
-            }
-            .label-info-text{
-              font-size: 10px;
-            }
-          }
-        }
-      }
-    }
-
-
 
 /* 
   #Global Screen Chhange for large Screens =  Laptops, Desktops
   */
-  @include mix-lg{
-    .service-request{
-     > .heading{
-        margin:$base*8 0 $base*10 0;
-      }
-      .get-selected-address{
-        .saveAddress{
-          .list{
-            width: 30.333%;
-            margin-right:1%;
-            padding: $base*2 $base*1.5;
-          }
+@include mix-lg {
+  .service-request {
+    > .heading {
+      margin: $base * 8 0 $base * 10 0;
+    }
+    .get-selected-address {
+      .saveAddress {
+        .list {
+          width: 30.333%;
+          margin-right: 1%;
+          padding: $base * 2 $base * 1.5;
         }
       }
-      .actionBtnWrapper{
-        padding-top: $base * 2.5;
-        padding-bottom: $base * 2.5;
-      }
-    } 
+    }
+    .actionBtnWrapper {
+      padding-top: $base * 2.5;
+      padding-bottom: $base * 2.5;
+    }
   }
-
+}
 
 /* 
   #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
@@ -477,7 +493,6 @@
 @media (min-width: 1025px) and (max-width: 1280px) {
   //CSS
 }
-
 
 /* 
   #Screen B/w 768px to 1024px, Device = Tablets, Ipads (portrait)
@@ -493,30 +508,29 @@
   //CSS
 }
 
-
 /* 
 #Global Mobile screen - 767 max
 */
 @include mix-md {
-  .myOnGoingOoders{
-    padding:0;
+  .myOnGoingOoders {
+    padding: 0;
   }
-  .ongoing-orderservice{
+  .ongoing-orderservice {
     .myOrder {
-      .tabBar{
+      .tabBar {
         padding: 13px 15px;
         background-color: $paleGrey;
-        position: relative;      
-      
+        position: relative;
+
         .heading {
           .list {
-            .heading-top{
+            .heading-top {
               font-size: 10px;
               line-height: 12px;
               padding: 0 0 0px 0;
               color: $ashGrey;
             }
-            .heading-sub{
+            .heading-sub {
               color: $ashGrey;
               font-size: 11px;
               line-height: 15px;
@@ -528,91 +542,92 @@
 
       .itemBox {
         .orderProduct {
-          .orderbtn{           
-             width: 50%; 
-             margin-top: 10px;    
-             float:right;
-             .btn-borderwhite{
-               background-color: $black;
-               color:$colorwhite;
-             }
+          .orderbtn {
+            width: 50%;
+            margin-top: 10px;
+            float: right;
+            .btn-borderwhite {
+              background-color: $black;
+              color: $colorwhite;
+            }
           }
-          .orderimgbox{
-            width:100%;
+          .orderimgbox {
+            width: 100%;
           }
         }
       }
     }
   }
-  .service-request{
-    margin: 0px $base*2;
-    .bottomDivider{
+  .service-request {
+    margin: 0px $base * 2;
+    .bottomDivider {
       display: none;
     }
-    .tabBar{      
-      .heading{
-         .list{
-           .heading-sub{
-             float:right;
-           }
-         }
-      } 
-      .btn-collapse{
-        background:$black;
+    .tabBar {
+      .heading {
+        .list {
+          .heading-sub {
+            float: right;
+          }
+        }
+      }
+      .btn-collapse {
+        background: $black;
         padding: 8px 15px;
-        color:$colorwhite;
+        color: $colorwhite;
         border: none;
         margin-bottom: 15px;
         float: right;
-        .iconImg{          
-            width: 15px;
-            margin: 0 0 0 14px;
+        .iconImg {
+          width: 15px;
+          margin: 0 0 0 14px;
         }
       }
     }
-   
-    .itemBox{
-      .refundTable{
-        width:100%;
-        tr{
+
+    .itemBox {
+      .refundTable {
+        width: 100%;
+        tr {
           border-bottom: 1px solid #ccc;
         }
-        td,th{
-          padding:5px;
+        td,
+        th {
+          padding: 5px;
         }
       }
-      .orderSummery{
-        .refundsummarydata{
-          margin:0 0 15px 0;
+      .orderSummery {
+        .refundsummarydata {
+          margin: 0 0 15px 0;
         }
       }
     }
-    > .heading{
-      margin:$base*3 0 $base*3 0;
+    > .heading {
+      margin: $base * 3 0 $base * 3 0;
     }
-    .ongoingOrder{
-      font-size: $base*2;
+    .ongoingOrder {
+      font-size: $base * 2;
       font-family: $font-medium;
-      padding-top: $base*2;
+      padding-top: $base * 2;
       clear: both;
-      margin:0px 0px 20px 0px;
+      margin: 0px 0px 20px 0px;
     }
-    .itemBox{
-      .orderProduct{
-        .orderimgbox{
+    .itemBox {
+      .orderProduct {
+        .orderimgbox {
           width: 100%;
-          margin-top:24px; 
-          .product-text{
-            .heading{
-              font-size: $base*1.5;
+          margin-top: 24px;
+          .product-text {
+            .heading {
+              font-size: $base * 1.5;
             }
-            .price{
-              .discount-price{
-                font-size: $base*1.5;
+            .price {
+              .discount-price {
+                font-size: $base * 1.5;
               }
             }
-            .quantity-shipping{
-              .quantity{
+            .quantity-shipping {
+              .quantity {
                 width: 100%;
               }
             }
@@ -620,102 +635,103 @@
         }
       }
     }
-    .product-category{
-      .dropdown{
-        .dropdown-toggle{
+    .product-category {
+      .dropdown {
+        .dropdown-toggle {
           min-width: 320px;
         }
       }
     }
-    .product-category, .invice-selection{
-      .dropdown{
+    .product-category,
+    .invice-selection {
+      .dropdown {
         width: 100%;
         max-width: 400px;
       }
-      .dropdown-toggle{
+      .dropdown-toggle {
         width: 100%;
       }
     }
 
-    .get-selected-address{
-      .saveAddress{
-        .list{
+    .get-selected-address {
+      .saveAddress {
+        .list {
           width: 100%;
-          padding: $base*2 $base*1.5;
+          padding: $base * 2 $base * 1.5;
           margin-bottom: 10px;
         }
       }
     }
-    .actionBtnWrapper{
+    .actionBtnWrapper {
       padding-top: $base * 1.75;
-      padding-bottom: $base*6;
+      padding-bottom: $base * 6;
     }
-    .heightInActive{
+    .heightInActive {
       display: none;
     }
   }
 }
-
-
 
 /* 
   #Screen B/w 481px to 767px, Device = Low Resolution Tablets, Mobiles (Landscape)
 */
 @include mix-xs {
   .service-request {
-    .product-category{
+    .product-category {
       .dropdown {
-        .dropdown-toggle{
+        .dropdown-toggle {
           width: 100%;
         }
       }
     }
-    .service-request-desc{
-      .text-area{
+    .service-request-desc {
+      .text-area {
         width: 100%;
       }
     }
     .invice-selection {
-      .guest-type{
+      .guest-type {
         margin-top: 0px;
-        .form-BgContainer{
-          .btn-save{
+        .form-BgContainer {
+          .btn-save {
             margin-top: 10px;
           }
         }
       }
     }
-    .form-BgContainer{
+    .form-BgContainer {
       padding: 0px;
     }
 
-    .actionBtnWrapper{
-      .btn-cancel, .btn-save{
+    .actionBtnWrapper {
+      .btn-cancel,
+      .btn-save {
         padding: 8px 40px;
       }
     }
-    
-      .add-img{
-        .uploded-img, .uploded-img-data{
-          margin-right: 13px;
-          margin-bottom: 13px;
-        }
+
+    .add-img {
+      .uploded-img,
+      .uploded-img-data {
+        margin-right: 13px;
+        margin-bottom: 13px;
       }
+    }
   }
 
-  .guest-service{
-    &.service-request{
-      .product-category{
-        .dropdown{
+  .guest-service {
+    &.service-request {
+      .product-category {
+        .dropdown {
           width: 100%;
         }
       }
-      .service-request-desc{
-        &.guest-type{
+      .service-request-desc {
+        &.guest-type {
           margin: 10px 0px 0px 0px;
         }
       }
-    } 
+    }
   }
 }
 
@@ -725,23 +741,21 @@
 @media (min-width: 320px) and (max-width: 480px) {
 }
 
-.circle-container{
+.circle-container {
   position: absolute;
-  background:rgba(247, 248, 248, 0.5);
+  background: rgba(247, 248, 248, 0.5);
   width: 100%;
   height: 100%;
   padding-top: 35px;
   padding-left: 35px;
-  .svg-circle{
-     margin: 0 0px!important;
+  .svg-circle {
+    margin: 0 0px !important;
   }
- 
- 
 }
 
 .circle-background,
 .circle-progress {
-  fill: none; 
+  fill: none;
 }
 
 .circle-background {
@@ -749,7 +763,7 @@
 }
 
 .circle-progress {
-  stroke:$colorblue;
+  stroke: $colorblue;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

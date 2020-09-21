@@ -67,6 +67,9 @@ class Checkboxes extends React.Component {
           rows="4"
           cols="80"
         />
+        {this.props.error && (
+          <div className="error-msg">{this.props.error}</div>
+        )}
         <label className="label-text">
           {" "}
           {this.state.characterCount} Character
