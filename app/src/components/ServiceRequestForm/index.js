@@ -210,6 +210,18 @@ class ServiceRequestForm extends React.Component {
       if (element) element.scrollIntoView();
       flag = false;
     }
+    if (
+      this.state.showEnterInvoice &&
+      this.state.inputInvoice !== "" &&
+      this.state.invoiceFile === ""
+    ) {
+      this.setState({
+        invoiceFileError: true
+      });
+      const element = document.getElementById("invoice");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
     if (this.state.otherReason === "") {
       this.setState({
         errorReason: "This field is required"
@@ -233,20 +245,7 @@ class ServiceRequestForm extends React.Component {
     if (!this.validateForm()) {
       return;
     }
-    if (
-      this.state.showEnterInvoice &&
-      this.state.inputInvoice !== "" &&
-      this.state.invoiceFile === ""
-    ) {
-      this.setState({
-        invoiceFileError: true
-      });
-      var element = document.getElementById("invoice");
-      if (element) {
-        element.scrollIntoView();
-      }
-      return;
-    }
+
     if (this.state.isProcessing) {
       return;
     }
