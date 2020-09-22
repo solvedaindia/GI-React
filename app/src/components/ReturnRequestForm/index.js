@@ -34,7 +34,10 @@ class ReturnRequestForm extends React.Component {
         props.orderData.paymentMethod == ""
           ? "COD"
           : props.orderData.paymentMethod,
-      bankInfo: {}
+      bankInfo: {},
+      isProcessing: false,
+      errorReason: undefined,
+      errorImageMessage: undefined
     };
     this.onOtherReasonEnter = this.onOtherReasonEnter.bind(this);
     this.onTextareaInput = this.onTextareaInput.bind(this);
@@ -60,36 +63,6 @@ class ReturnRequestForm extends React.Component {
       })
       .catch(error => {});
   }
-
-  // to be modified ...
-  // getDetailAPI = () => {
-  //   apiManager
-  //     .get(getDetailtForSerReq + "56101505SD00084")
-  //     .then(response => {
-  //       this.setState({
-  //         returnRequestReasons: response.data.data.serviceReasonList
-  //       });
-  //     })
-  //     .catch(error => {});
-  // };
-
-  // addToWishlistAPI() {
-  //   const data = {
-  //     sku_id: this.props.uniqueId,
-  //   };
-  //   apiManager
-  //     .post(addToWishlist, data)
-  //     .then(response => {
-
-  //     getUpdatedWishlist(this);
-  //       this.setState({
-  //         wishlistCurrentImage: this.wishlistAddedImg,
-  //         wishlistPopup: this.wishlistPopupItem(),
-  //       });
-  //     })
-  //     .catch(error => {
-  //     });
-  // }
 
   returnOrderShipmentAPI() {
     let returnReason;
@@ -160,7 +133,8 @@ class ReturnRequestForm extends React.Component {
 
   getReturnRequestReason(value) {
     this.setState({
-      selectedReason: value
+      selectedReason: value,
+      errorReason: undefined
     });
   }
 
@@ -184,7 +158,13 @@ class ReturnRequestForm extends React.Component {
 
   onImageAddRemove(value) {
     this.setState({
-      selectedImages: value
+      selectedImages: value,
+      errorImageMessage: undefined
+    });
+  }
+  onImageError(value) {
+    this.setState({
+      errorImageMessage: value
     });
   }
 
@@ -241,7 +221,7 @@ class ReturnRequestForm extends React.Component {
               : "Full Online Payment"}
           </label>
         </div>
-        <div className="notification-title">
+        <div className="notification-title" id="notification-title">
           Your refund will be processed to
           {this.state.fullPaymentMode === "COD"
             ? " Bank Account"
@@ -258,7 +238,35 @@ class ReturnRequestForm extends React.Component {
   }
 
   handleSubmit() {
-    this.returnOrderShipmentAPI();
+    let flag = true;
+    if (this.state.selectedReason === "") {
+      this.setState({
+        errorReason: "This field is required"
+      });
+      const element = document.getElementById("product-category");
+      if (element) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.selectedImages.length === 0) {
+      this.setState({
+        errorImageMessage: "Uploading at least one product image is mandatory"
+      });
+      const element = document.getElementById("add-image");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (
+      this.state.fullPaymentMode === "COD" &&
+      !this.state.isBankDetailsValid
+    ) {
+      const element = document.getElementById("notification-title");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+
+    if (flag) {
+      this.returnOrderShipmentAPI();
+    }
   }
 
   render() {
@@ -293,11 +301,7 @@ class ReturnRequestForm extends React.Component {
             >
               Cancel
             </button>
-            <button
-              disabled={isSaveDisabled}
-              onClick={this.handleSubmit}
-              className="btn-save btn"
-            >
+            <button onClick={this.handleSubmit} className="btn-save btn">
               Submit
             </button>
           </div>
@@ -308,23 +312,38 @@ class ReturnRequestForm extends React.Component {
 
   renderUploadImage() {
     return (
-      <div className="add-img">
-        <h4 className="heading">Add Image<span>*</span></h4>
-        <UploadImage
-          type={"ser"}
-          onImageAddRemove={this.onImageAddRemove.bind(this)}
-        />
-      </div>
+      <>
+        <div className="add-img">
+          <h4 className="heading" id="add-image">
+            Add Image
+            <span>*</span>
+          </h4>
+          <UploadImage
+            type={"ser"}
+            onImageError={this.onImageError.bind(this)}
+            onImageAddRemove={this.onImageAddRemove.bind(this)}
+          />
+        </div>
+        {this.state.errorImageMessage && (
+          <div className="add-img error-msg">
+            {this.state.errorImageMessage}
+          </div>
+        )}
+      </>
     );
   }
 
   renderReturnRequestReason() {
     return (
       <div className="product-category">
-        <h4 className="heading">Reason For Return Request<span>*</span></h4>
+        <h4 className="heading" id="product-category">
+          Reason For Return Request
+          <span>*</span>
+        </h4>
         <Dropdown
           data={this.state.returnRequestReasons}
           title="Reason for Return Request"
+          error={this.state.errorReason}
           onSelection={this.getReturnRequestReason.bind(this)}
           onOtherText={this.onOtherReasonEnter.bind(this)}
         />
@@ -362,7 +381,10 @@ class ReturnRequestForm extends React.Component {
                 </p>
                 <div className="quantity-shipping clearfix">
                   <div className="quantity">
-                    <span className="heading">Quantity<span>*</span>: </span>
+                    <span className="heading">
+                      Quantity
+                      <span>*</span>:{" "}
+                    </span>
                     {data.quantity == 0 ? (
                       <>
                         <span className="textval">{data.quantity}</span>

@@ -16,6 +16,7 @@ class EnterInvoiceView extends React.Component {
       errorMessage: "",
       invoiceNumber: "",
       upload: "",
+      fileName: "",
       isUploadBtnDisabled: true
     };
     this.handleInput = this.handleInput.bind(this);
@@ -52,11 +53,19 @@ class EnterInvoiceView extends React.Component {
     const fsize = event.target.files[0].size;
     const file = Math.round(fsize / 1024);
     if (file > 10240) {
-      alert("File size is too Big, please select a image less than 10mb");
+      // alert("File size is too Big, please select a image less than 10mb");
+      this.setState({
+        error: true,
+        errorMessage: "File is too large (max 10 MB)"
+      });
       event.target.value = null;
       return;
     } else if (event.target.files[0].type === "image/gif") {
-      alert("File format not supported!");
+      //alert("File format not supported!");
+      this.setState({
+        error: true,
+        errorMessage: "File type is not supported"
+      });
       event.target.value = null;
       return;
     }
@@ -73,6 +82,9 @@ class EnterInvoiceView extends React.Component {
     formdata.append("userid", getCookie("userID"));
     formdata.append("typeid", this.props.type);
     formdata.append("file", file, file.name);
+    this.setState({
+      fileName: file.name
+    });
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -95,8 +107,15 @@ class EnterInvoiceView extends React.Component {
   }
 
   onUploadInvoice = () => {
-    const uploadInvoice = document.getElementById("uploadInvoice");
-    uploadInvoice.click();
+    if (this.state.fileName === "") {
+      const uploadInvoice = document.getElementById("uploadInvoice");
+      uploadInvoice.click();
+    } else {
+      this.setState({
+        fileName: ""
+      });
+      document.getElementById("uploadInvoice").value = "";
+    }
   };
   onRemoveImage() {
     if (this.state.upload === "") {
@@ -155,6 +174,14 @@ class EnterInvoiceView extends React.Component {
               {this.state.error ? (
                 <div className="error-msg">{this.state.errorMessage}</div>
               ) : null}
+              {this.props.invoiceFileError ? (
+                <div className="error-msg">
+                  {"Please upload a scanned copy of your invoice"}
+                </div>
+              ) : null}
+              <p id="invoiceFile" className="invoiceNotes my-1">
+                {this.state.fileName}
+              </p>
             </div>
           </div>
           <div className="col-md-6 upload-invoice">
@@ -163,7 +190,7 @@ class EnterInvoiceView extends React.Component {
               disabled={this.state.isUploadBtnDisabled}
               className="btn-save btn"
             >
-              Upload Invoice
+              {this.state.fileName === "" ? " Upload Invoice" : "Remove"}
             </button>
             <input
               type="file"

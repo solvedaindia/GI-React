@@ -164,7 +164,11 @@ class UploadImage extends React.Component {
           );
         })}
         {this.state.files.length < 5 && (
-          <ImageBox haveImage={false} onAddImage={this.onAddImage.bind(this)} />
+          <ImageBox
+            haveImage={false}
+            onAddImage={this.onAddImage.bind(this)}
+            onImageError={this.props.onImageError}
+          />
         )}
       </div>
     );

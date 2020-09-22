@@ -21,6 +21,7 @@ import {
 } from "../../constants/app/myAccountConstants";
 import AddAddressForm from "../../components/MyAccountComponents/ManageAddress/addAddressForm";
 import "../../../public/styles/myAccount/service-request.scss";
+import ProgressButton from "../Button/progressButton";
 
 class ServiceRequestForm extends React.Component {
   constructor(props) {
@@ -51,7 +52,13 @@ class ServiceRequestForm extends React.Component {
       isSaveBtnDisabled: true,
       selectedImages: [],
       otherReason: "",
-      submitted: false
+      submitted: false,
+      invoiceFileError: false,
+      isProcessing: false,
+
+      errorImageMessage: undefined,
+      errorProductCategory: undefined,
+      errorReason: undefined
     };
     //this.invoiceView=React.createRef();
     //this.imagesView=React.createRef();
@@ -118,7 +125,8 @@ class ServiceRequestForm extends React.Component {
 
   getCategorySelectionValue(value) {
     this.setState({
-      selectedCategory: value
+      selectedCategory: value,
+      errorProductCategory: undefined
     });
   }
 
@@ -163,27 +171,88 @@ class ServiceRequestForm extends React.Component {
   onEnterInvoiceTextChanged(value) {
     this.setState({
       showInvoiceDisclaimer: value.length == 0,
-      inputInvoice: value
+      inputInvoice: value,
+      invoiceFileError: false
     });
   }
   onInvoiceFileSelection(value) {
     this.setState({
-      invoiceFile: value
+      invoiceFile: value,
+      invoiceFileError: false
     });
   }
   onOtherReasonEnter(value) {
     this.setState({
-      otherReason: value
+      otherReason: value,
+      errorReason: undefined
     });
   }
 
   onImageAddRemove(value) {
     this.setState({
-      selectedImages: value
+      selectedImages: value,
+      errorImageMessage: undefined
+    });
+  }
+  onImageError(value) {
+    this.setState({
+      errorImageMessage: value
     });
   }
 
+  validateForm() {
+    let flag = true;
+    if (this.state.selectedCategory === "") {
+      this.setState({
+        errorProductCategory: "This field is required"
+      });
+      const element = document.getElementById("product-category");
+      if (element) element.scrollIntoView();
+      flag = false;
+    }
+    if (
+      this.state.showEnterInvoice &&
+      this.state.inputInvoice !== "" &&
+      this.state.invoiceFile === ""
+    ) {
+      this.setState({
+        invoiceFileError: true
+      });
+      const element = document.getElementById("invoice");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.otherReason === "") {
+      this.setState({
+        errorReason: "This field is required"
+      });
+      const element = document.getElementById("service-request-reasons");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.selectedImages.length === 0) {
+      this.setState({
+        errorImageMessage: "Uploading at least one product image is mandatory"
+      });
+      const element = document.getElementById("add-img");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    return flag;
+  }
+
   onSubmitForm() {
+    if (!this.validateForm()) {
+      return;
+    }
+
+    if (this.state.isProcessing) {
+      return;
+    }
+    this.setState({
+      isProcessing: true
+    });
+
     let invoice = this.state.selectedInvoice;
     if (
       this.state.selectedInvoice == "Other" &&
@@ -248,13 +317,13 @@ class ServiceRequestForm extends React.Component {
   render() {
     let isSaveBtnDisabled = true;
     // if(this.state.selectedCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
-    if (
-      this.state.selectedCategory != "" &&
-      this.state.otherReason != "" &&
-      this.state.selectedImages.length > 0
-    ) {
-      isSaveBtnDisabled = false;
-    }
+    // if (
+    //   this.state.selectedCategory != "" &&
+    //   this.state.otherReason != "" &&
+    //   this.state.selectedImages.length > 0
+    // ) {
+    //   isSaveBtnDisabled = false;
+    // }
     return (
       <div className="trackMyOrder service-request">
         <div className="bottomDivider">
@@ -279,13 +348,12 @@ class ServiceRequestForm extends React.Component {
           >
             Cancel
           </button>
-          <button
-            disabled={isSaveBtnDisabled}
-            className="btn-save btn"
-            onClick={this.onSubmitForm.bind(this)}
-          >
-            Submit
-          </button>
+          <ProgressButton
+            styleClassName="btn-save btn"
+            title={"Submit"}
+            onClickEvent={this.onSubmitForm.bind(this)}
+            isProcessing={this.state.isProcessing}
+          />
         </div>
       </div>
     );
@@ -318,7 +386,10 @@ class ServiceRequestForm extends React.Component {
   renderAddress() {
     return (
       <div class="get-selected-address">
-        <h4 className="heading">Address<span>*</span></h4>
+        <h4 className="heading">
+          Address
+          <span>*</span>
+        </h4>
         <AddressList
           data={this.state.addressData}
           onSelection={this.getSelectedAddress.bind(this)}
@@ -329,23 +400,36 @@ class ServiceRequestForm extends React.Component {
 
   renderUploadImage() {
     return (
-      <div className="add-img">
-        <h4 className="heading">Add Image<span>*</span></h4>
-        <UploadImage
-          submitted={this.state.submitted}
-          type={"ser"}
-          onImageAddRemove={this.onImageAddRemove.bind(this)}
-        />
-      </div>
+      <>
+        <div className="add-img">
+          <h4 className="heading" id="add-img">
+            Add Image
+            <span>*</span>
+          </h4>
+          <UploadImage
+            submitted={this.state.submitted}
+            type={"ser"}
+            onImageError={this.onImageError.bind(this)}
+            onImageAddRemove={this.onImageAddRemove.bind(this)}
+          />
+        </div>
+        {this.state.errorImageMessage && (
+          <div className="error-msg">{this.state.errorImageMessage}</div>
+        )}
+      </>
     );
   }
 
   renderProductCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Category<span>*</span></h4>
+        <h4 className="heading" id="product-category">
+          Product Category
+          <span>*</span>
+        </h4>
         <Dropdown
           title="Please select a product category"
+          error={this.state.errorProductCategory}
           data={this.state.categorySelectionData}
           onSelection={this.getCategorySelectionValue.bind(this)}
         />
@@ -368,7 +452,7 @@ class ServiceRequestForm extends React.Component {
         />
         {this.state.showEnterInvoice && (
           <EnterInvoiceView
-            submitted={this.state.submitted}
+            invoiceFileError={this.state.invoiceFileError}
             type={"ser"}
             onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}
             onInvoiceFile={this.onInvoiceFileSelection.bind(this)}
@@ -387,10 +471,14 @@ class ServiceRequestForm extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request<span>*</span></h4>
+        <h4 className="heading" id="service-request-reasons">
+          Reason For Service Request
+          <span>*</span>
+        </h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"
+          error={this.state.errorReason}
           onSelection={this.getServiceRequestReason.bind(this)}
           onOtherText={this.onOtherReasonEnter.bind(this)}
         />

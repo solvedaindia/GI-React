@@ -14,6 +14,8 @@ import Checkboxes from "../ServiceRequestForm/checkboxes";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import "../../../public/styles/myAccount/service-request.scss";
 import { validateFullName } from "../../utils/validationManager";
+import ProgressButton from "../Button/progressButton";
+import history from "../../utils/history";
 
 class ServiceRequestFormGuest extends React.Component {
   constructor(props) {
@@ -26,14 +28,22 @@ class ServiceRequestFormGuest extends React.Component {
       characterCount: 50,
       characterLimit: 50,
       selectedInvoice: "",
-      selectedProductCategory: null,
+      selectedProductCategory: "",
       selectedReason: [],
       otherReason: "",
-      guestAddress: null,
+      guestAddress: undefined,
       isSaveBtnDisabled: true,
       selectedImages: [],
       invoiceFile: "",
-      showInvoiceDisclaimer: true
+      invoiceFileError: false,
+      showInvoiceDisclaimer: true,
+
+      isProcessing: false,
+      errorImageMessage: undefined,
+      errorProductCategory: undefined,
+      errorProdcuctDesp: undefined,
+      errorReason: undefined
+      //This field is required
     };
   }
 
@@ -56,12 +66,14 @@ class ServiceRequestFormGuest extends React.Component {
   onEnterInvoiceTextChanged(value) {
     this.setState({
       showInvoiceDisclaimer: value.length == 0,
-      selectedInvoice: value
+      selectedInvoice: value,
+      invoiceFileError: false
     });
   }
   onInvoiceFileSelection(value) {
     this.setState({
-      invoiceFile: value
+      invoiceFile: value,
+      invoiceFileError: false
     });
   }
 
@@ -76,13 +88,20 @@ class ServiceRequestFormGuest extends React.Component {
     if (val === "" || validateFullName(val)) {
       this.setState({
         descriptionText: val,
-        characterCount: this.state.characterLimit - val.length
+        characterCount: this.state.characterLimit - val.length,
+        errorProdcuctDesp: undefined,
+        guestAddress: undefined
       });
     }
   }
 
   getProductCategorySelection(value) {
-    this.state.selectedProductCategory = value;
+    // this.state.selectedProductCategory = value;
+    this.setState({
+      selectedProductCategory: value,
+      errorProductCategory: undefined,
+      guestAddress: undefined
+    });
   }
 
   getServiceRequestReason(value) {
@@ -93,22 +112,95 @@ class ServiceRequestFormGuest extends React.Component {
 
   onOtherReasonEnter(value) {
     this.setState({
-      otherReason: value
+      otherReason: value,
+      errorReason: undefined,
+      guestAddress: undefined
     });
   }
 
   onImageAddRemove(value) {
     this.setState({
-      selectedImages: value
+      selectedImages: value,
+      errorImageMessage: undefined,
+      guestAddress: undefined
+    });
+  }
+  onImageError(value) {
+    this.setState({
+      errorImageMessage: value
     });
   }
 
   onAddressChange(addressData) {
     this.state.guestAddress = addressData;
+    console.log("onAddressChange", addressData);
+  }
+
+  validateForm() {
+    let flag = true;
+    if (this.state.selectedProductCategory === "") {
+      this.setState({
+        errorProductCategory: "This field is required"
+      });
+      const element = document.getElementById("product-category");
+      if (element) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.descriptionText === "") {
+      this.setState({
+        errorProdcuctDesp: "This field is required"
+      });
+      const element = document.getElementById("product-category");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.guestAddress === undefined) {
+      const element = document.getElementById("guest-address-form");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.selectedInvoice != "" && this.state.invoiceFile === "") {
+      this.setState({
+        invoiceFileError: true
+      });
+      const element = document.getElementById("invoice");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.otherReason === "") {
+      this.setState({
+        errorReason: "This field is required"
+      });
+      const element = document.getElementById("service-request-reasons");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+    if (this.state.selectedImages.length === 0) {
+      this.setState({
+        errorImageMessage: "Uploading at least one product image is mandatory"
+      });
+      const element = document.getElementById("add-image");
+      if (element && flag) element.scrollIntoView();
+      flag = false;
+    }
+
+    return flag;
   }
 
   onSubmitForm() {
+    this.state.guestAddress = undefined;
     this.refs.child.onSavebuttonClick();
+
+    if (this.state.isProcessing) {
+      return;
+    }
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.setState({
+      isProcessing: true
+    });
 
     // let reason = "";
     // this.state.selectedReason.map((data) => {
@@ -146,14 +238,13 @@ class ServiceRequestFormGuest extends React.Component {
 
   render() {
     let isSaveBtnDisabled = true;
-    //if(this.state.selectedProductCategory!="" && this.state.selectedReason.length>0  && this.state.selectedImages.length>0)
-    if (
-      this.state.selectedProductCategory != "" &&
-      this.state.otherReason != "" &&
-      this.state.selectedImages.length > 0
-    ) {
-      isSaveBtnDisabled = false;
-    }
+    // if (
+    //   this.state.selectedProductCategory != "" &&
+    //   this.state.otherReason != "" &&
+    //   this.state.selectedImages.length > 0
+    // ) {
+    //   isSaveBtnDisabled = false;
+    // }
 
     return (
       <div className="container">
@@ -167,7 +258,7 @@ class ServiceRequestFormGuest extends React.Component {
             non-Godrej product
           </p>
           <div className="guest-border-box">
-            <div className="guest-address-form">
+            <div className="guest-address-form" id="guest-address-form">
               <AddAddressForm
                 isFromServiceRequest={true}
                 onAddressChange={this.onAddressChange.bind(this)}
@@ -177,6 +268,7 @@ class ServiceRequestFormGuest extends React.Component {
             <div className="invice-selection guest-type">
               <EnterInvoiceView
                 type={"ser"}
+                invoiceFileError={this.state.invoiceFileError}
                 onInvoiceChange={this.onEnterInvoiceTextChanged.bind(this)}
                 onInvoiceFile={this.onInvoiceFileSelection.bind(this)}
               />
@@ -190,14 +282,20 @@ class ServiceRequestFormGuest extends React.Component {
             {this.renderServiceRequestReason()}
             {this.renderUploadImage()}
             <div className="actionBtnWrapper">
-              <button className="btn-cancel btn">Cancel</button>
               <button
-                disabled={isSaveBtnDisabled}
-                className="btn-save btn"
-                onClick={this.onSubmitForm.bind(this)}
+                className="btn-cancel btn"
+                onClick={() => {
+                  history.goBack();
+                }}
               >
-                Submit
+                Cancel
               </button>
+              <ProgressButton
+                styleClassName="btn-save btn"
+                title={"Submit"}
+                onClickEvent={this.onSubmitForm.bind(this)}
+                isProcessing={this.state.isProcessing}
+              />
             </div>
             {this.state.showLogin ? (
               <UserAccInfo
@@ -217,7 +315,7 @@ class ServiceRequestFormGuest extends React.Component {
         <>
           <div className="request-service-msg">
             <p className="text">
-              Go to ‘My Account’ > Orders and click on the ‘Request Service’
+              Go to ‘My Account’ {">"} Orders and click on the ‘Request Service’
               button against the product you wish to get serviced. &nbsp;
               <Link
                 className="guest-login-link"
@@ -238,7 +336,7 @@ class ServiceRequestFormGuest extends React.Component {
         <>
           <div className="request-service-msg">
             <p className="text">
-              Go to ‘My Account’ > Orders and click on the ‘Request Service’
+              Go to ‘My Account’ {">"} Orders and click on the ‘Request Service’
               button against the product you wish to get serviced.{" "}
               <a
                 className="guest-login-link"
@@ -262,10 +360,14 @@ class ServiceRequestFormGuest extends React.Component {
   renderProdcutCategory() {
     return (
       <div className="product-category">
-        <h4 className="heading">Product Details<span>*</span></h4>
+        <h4 className="heading" id="product-category">
+          Product Details
+          <span>*</span>
+        </h4>
         <Dropdown
           title="Please Select Product Category"
           data={this.state.productCategory}
+          error={this.state.errorProductCategory}
           onSelection={this.getProductCategorySelection.bind(this)}
         />
       </div>
@@ -289,10 +391,13 @@ class ServiceRequestFormGuest extends React.Component {
           rows="4"
           cols="50"
         />
-        <label className="label-text">
+        {/* <label className="label-text">
           {this.state.characterCount} Character
           {this.state.characterCount <= 1 ? "" : "s"} remaining
-        </label>
+        </label> */}
+        {this.state.errorProdcuctDesp && (
+          <div className="error-msg">{this.state.errorProdcuctDesp}</div>
+        )}
       </div>
     );
   }
@@ -300,10 +405,14 @@ class ServiceRequestFormGuest extends React.Component {
   renderServiceRequestReason() {
     return (
       <div className="service-request-reasons">
-        <h4 className="heading">Reason For Service Request<span>*</span></h4>
+        <h4 className="heading" id="service-request-reasons">
+          Reason For Service Request
+          <span>*</span>
+        </h4>
         <Checkboxes
           data={this.state.serviceRequestReasons}
           title="Reason for Service Request"
+          error={this.state.errorReason}
           onSelection={this.getServiceRequestReason.bind(this)}
           onOtherText={this.onOtherReasonEnter.bind(this)}
         />
@@ -313,13 +422,22 @@ class ServiceRequestFormGuest extends React.Component {
 
   renderUploadImage() {
     return (
-      <div className="add-img">
-        <h4 className="heading">Add Image<span>*</span></h4>
-        <UploadImage
-          type={"ser"}
-          onImageAddRemove={this.onImageAddRemove.bind(this)}
-        />
-      </div>
+      <>
+        <div className="add-img">
+          <h4 className="heading" id="add-image">
+            Add Image
+            <span>*</span>
+          </h4>
+          <UploadImage
+            type={"ser"}
+            onImageError={this.onImageError.bind(this)}
+            onImageAddRemove={this.onImageAddRemove.bind(this)}
+          />
+        </div>
+        {this.state.errorImageMessage && (
+          <div className="error-msg">{this.state.errorImageMessage}</div>
+        )}
+      </>
     );
   }
 }
