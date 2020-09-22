@@ -83,7 +83,11 @@ class OrderConformation extends React.Component {
                   <div className="itemImg">
                     <img
                       className="imgFullwidth"
-                      src={`${imagePrefix}${item.thumbnail}`}
+                      src={
+                        item.thumbnail
+                          ? `${imagePrefix}${item.thumbnail}`
+                          : require("../../../public/images/plpAssests/placeholder-image.png")
+                      }
                       alt="itemImg"
                     />
                   </div>
