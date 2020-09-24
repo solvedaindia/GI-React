@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../Primitives/input";
 import { regexInvoice } from "../../utils/validationManager";
-import { getCookie } from "../../utils/utilityManager";
+import { getCookie,isMobile } from "../../utils/utilityManager";
 import {
   storeId,
   accessToken,
@@ -171,14 +171,6 @@ class EnterInvoiceView extends React.Component {
                 isAutoFocus={true}
                 className="form-control invoiceNumber"
               />
-              {this.state.error ? (
-                <div className="error-msg">{this.state.errorMessage}</div>
-              ) : null}
-              {this.props.invoiceFileError ? (
-                <div className="error-msg">
-                  {"Please upload a scanned copy of your invoice"}
-                </div>
-              ) : null}
               <p id="invoiceFile" className="invoiceNotes my-1">
                 {this.state.fileName}
               </p>
@@ -199,8 +191,35 @@ class EnterInvoiceView extends React.Component {
               accept="image/jpg, image/png, image/jpeg, application/pdf"
               style={{ display: "none" }}
             />
+
+              
           </div>
-        </div>
+          {isMobile() &&
+          <div className="col-md-6">
+            {this.state.error ? (
+                <div className="error-msg">{this.state.errorMessage}</div>
+              ) : null}
+              {this.props.invoiceFileError ? (
+                <div className="error-msg">
+                  {"Please upload a scanned copy of your invoice"}
+                </div>
+              ) : null}
+              </div>
+            }
+          </div>
+        
+        {!isMobile() &&
+        <div>
+          {this.state.error ? (
+                <div className="error-msg">{this.state.errorMessage}</div>
+              ) : null}
+              {this.props.invoiceFileError ? (
+                <div className="error-msg">
+                  {"Please upload a scanned copy of your invoice"}
+                </div>
+              ) : null}
+              </div>
+         }
       </div>
     );
   }

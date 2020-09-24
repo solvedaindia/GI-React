@@ -177,6 +177,8 @@
         font-size: $base * 1.75;
         font-family: $font-medium;
         padding: 13px 10px;
+        height: 47px;
+        margin-bottom: 4px;
         .caret {
           float: right;
           margin-top: 8px;
@@ -245,7 +247,8 @@
       }
     }
     &.guest-type {
-      margin: 20px 0px 0px 0px;
+      // margin: 20px 0px 0px 0px;
+      margin: 13px 0px 0px 0px;
       clear: both;
       float: left;
       width: 100%;
@@ -482,6 +485,7 @@
           width: 30.333%;
           margin-right: 1%;
           padding: $base * 2 $base * 1.5;
+          margin-bottom:12px;
         }
       }
     }
@@ -643,7 +647,7 @@
     .product-category {
       .dropdown {
         .dropdown-toggle {
-          min-width: 320px;
+          min-width: 298px;
         }
       }
     }
@@ -703,6 +707,13 @@
           }
         }
       }
+      .upload-invoiceno{
+        .upload-invoice{
+          .btn-save{
+            width:95%;
+          }
+        }
+      }
     }
     .form-BgContainer {
       padding: 0px;
@@ -711,7 +722,7 @@
     .actionBtnWrapper {
       .btn-cancel,
       .btn-save {
-        padding: 8px 40px;
+        padding: 8px 31px;
       }
     }
 

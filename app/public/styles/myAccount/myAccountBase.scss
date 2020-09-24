@@ -287,6 +287,17 @@
     #Global Screen Chhange for Screen max 992
   */
   @include mix-md{
+    .service-request {
+      .invice-selection{
+        .upload-invoiceno{
+          .upload-invoice {
+            padding-left:15px;
+            margin-bottom: 10px;
+           }
+        }
+      } 
+    } 
+    
   .form-BgContainer {
     width: 100%;
     float: left;    
