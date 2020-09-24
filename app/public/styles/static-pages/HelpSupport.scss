@@ -757,6 +757,7 @@
 
   .support-faq {
     padding: 0px !important;
+    width:90% !important;
     h2 {
       padding-top: 20px;
       font-size: 15px;
@@ -784,14 +785,36 @@
   }
   
   .staticpage{
+    #customerCare{
+      text-decoration: none;
+      &:focus{
+        text-decoration: none;
+      }
+    }
     .container {
         text-align: left;
+        margin-bottom: 30px;
     }
     .email-box {
       display: inline-flex;
+      width: 100%;
+      .img-icon{
+        margin-right:10px;
+      }
     }
     .contact-box {
       display: inline-flex;
+      width: 100%;
+      .img-icon{
+        margin-right:10px;
+      }
+    }
+    .request-service{
+      display: inline-flex;
+      width: 100%;
+      .img-icon{
+        margin-right:10px;
+      }
     }
     .static-contact-us {
       .title-text {

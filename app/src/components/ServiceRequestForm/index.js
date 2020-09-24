@@ -204,7 +204,7 @@ class ServiceRequestForm extends React.Component {
     let flag = true;
     if (this.state.selectedCategory === "") {
       this.setState({
-        errorProductCategory: "This field is required"
+        errorProductCategory: "This is a required field"
       });
       const element = document.getElementById("product-category");
       if (element) element.scrollIntoView();
@@ -224,7 +224,7 @@ class ServiceRequestForm extends React.Component {
     }
     if (this.state.otherReason === "") {
       this.setState({
-        errorReason: "This field is required"
+        errorReason: "This is a required field"
       });
       const element = document.getElementById("service-request-reasons");
       if (element && flag) element.scrollIntoView();

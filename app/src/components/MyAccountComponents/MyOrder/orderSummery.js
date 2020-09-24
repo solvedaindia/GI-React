@@ -32,26 +32,14 @@ class OrderSummery extends React.Component {
                   {addressData.name !== undefined ? addressData.name : null}
                 </p>
                 <p className="address">
-                  {`${
-                    addressData && addressData.address1 !== undefined
-                      ? addressData.address1
-                      : null
-                  } ${
-                    addressData && addressData.address2 !== undefined
-                      ? addressData.address2
-                      : null
-                  } ${
-                    addressData && addressData.address3 !== undefined
-                      ? addressData.address3
-                      : null
-                  }
-        , ${addressData.city !== undefined ? addressData.city : null}, ${
-                    addressData.state !== undefined ? addressData.state : null
-                  }, ${
-                    addressData.pincode !== undefined
-                      ? addressData.pincode
-                      : null
-                  }`}
+                { addressData && addressData.address1 !== undefined && <>{addressData.address1}<br/></>}
+                { addressData && addressData.address2 !== undefined && <>{addressData.address2}<br/></>}
+                { addressData && addressData.address3 !== undefined && <>{addressData.address3}<br/></>}
+
+                { addressData && addressData.city !== undefined && <>{addressData.city}, </>}
+                { addressData && addressData.state !== undefined && <>{addressData.state}, </>}
+                { addressData && addressData.pincode !== undefined && <>{addressData.pincode}</>}
+                
                 </p>
               </>
             ) : null}

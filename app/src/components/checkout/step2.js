@@ -1183,9 +1183,23 @@ export class Step2Component extends React.Component {
               <label className="labelchecked" />
             </div>
 
-            <div className="addressText">{`${add.address1} ${add.address2} ${
+            {/* <div className="addressText">{`${add.address1} ${add.address2} ${
               add.address3
-            }, ${add.city}, ${add.state}, ${add.pincode}`}</div>
+            }, ${add.city}, ${add.state}, ${add.pincode}`}</div> */}
+
+            <div className="addressText">
+              {add.address1}
+              <br />
+              {add.address2}
+              <br />
+              {add.address3 && (
+                <>
+                  {add.address3}
+                  <br />
+                </>
+              )}
+              {`${add.city}, ${add.state}, ${add.pincode}`}
+            </div>
           </li>
         );
       });
