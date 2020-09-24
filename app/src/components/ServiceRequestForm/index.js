@@ -352,7 +352,7 @@ class ServiceRequestForm extends React.Component {
             styleClassName="btn-save btn"
             title={"Submit"}
             onClickEvent={this.onSubmitForm.bind(this)}
-            isProcessing={this.state.isProcessing}
+            isProcessing={false}
           />
         </div>
       </div>
