@@ -361,7 +361,7 @@ class ServiceRequestForm extends React.Component {
 
   renderAddAddress() {
     return (
-      <div className="manageAddressContainer">
+      <div className="manageAddressContainer service-requestcontainer">
         <ul className="itemList">{this.state.addressListItem}</ul>
         <div className="add-service-address clearfix" />
         {this.state.isAddAddress ? (

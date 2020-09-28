@@ -153,6 +153,11 @@
     #Global Screen Chhange for Screen max 992
   */
   @include mix-md{
+  .manageAddressContainer.service-requestcontainer{
+    .addNewAddress{
+      position: static;
+    }
+  }
   .manageAddressContainer{
     .itemList {
       .list{
