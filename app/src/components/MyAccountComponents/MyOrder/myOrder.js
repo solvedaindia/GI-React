@@ -249,6 +249,7 @@ class MyOrder extends React.Component {
               this.renderRSODetail(returnShipmentOrders);
             }}
             renderReturnRequest={this.renderReturnRequest.bind(this)}
+            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
           />
         ) : this.state.isServiceRequest ? (
           <ServiceRequestForm

@@ -128,6 +128,7 @@ class OrderItem extends React.Component {
                 }}
                 allDataPro={this.props.orderItemData}
                 proceedToReturnRequest={this.proceedToReturnRequest}
+                isGuestTrackOrderPro={this.props.isGuestTrackOrderPro}
               />
             );
           })}

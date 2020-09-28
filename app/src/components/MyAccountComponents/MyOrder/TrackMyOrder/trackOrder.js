@@ -34,6 +34,7 @@ class TrackOrder extends React.Component {
                 this.props.onRSODetail(item.returnShipmentOrders);
               }}
               onReturnRequest={this.onReturnRequest.bind(this)}
+              isGuestTrackOrderPro={this.props.isGuestTrackOrderPro}
             />
           );
         })}

@@ -366,6 +366,7 @@ class RWDMyOrder extends React.Component {
             }
             isMultiTrackPro={true}
             onReturn={this.showReturnRequestFormForSingle.bind(this)}
+            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
           />
           <CancelComponents
             ref={this.modalRef}
@@ -383,6 +384,7 @@ class RWDMyOrder extends React.Component {
             currentCompleteData={this.state.currentCompleteData}
             myOrderCallbackPro={this.myOrderCallback}
             onReturn={this.showReturnRequestForm}
+            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
           />
           <CancelComponents
             ref={this.modalRef}
@@ -405,6 +407,7 @@ class RWDMyOrder extends React.Component {
             viewOrderTrackCallbackPro={this.viewOrderTrackbtnCallback.bind(
               this
             )}
+            isGuestTrackOrderPro={this.state.isGuestTrackOrder}
           />
           <CancelComponents
             ref={this.modalRef}

@@ -46,7 +46,9 @@ class ProductOrder extends React.Component {
     const showServiceRequestButton =
       productData.serviceRequestOrderLineFlag == "Y";
     const isServiceable = productData.isServiceable == "Y";
-    const showReturnButton = productData.showReturnButton == "Y";
+    const showReturnButton = this.props.isGuestTrackOrderPro
+      ? false
+      : productData.showReturnButton == "Y";
     let btnCancelDisable = false;
     let showCancelMessage = false;
     let showCancelButton = false;

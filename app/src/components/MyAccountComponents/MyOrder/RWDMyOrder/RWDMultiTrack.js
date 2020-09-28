@@ -33,6 +33,7 @@ class RWDMultiTrack extends React.Component {
               currentCompleteData={this.props.currentCompleteData}
               myOrderCallbackPro={this.props.myOrderCallbackPro}
               onReturn={this.onReturn.bind(this)}
+              isGuestTrackOrderPro={this.props.isGuestTrackOrderPro}
             />
           );
         })}

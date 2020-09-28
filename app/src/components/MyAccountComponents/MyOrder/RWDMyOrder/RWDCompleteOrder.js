@@ -45,6 +45,7 @@ class RWDCompleteOrder extends React.Component {
             showCancelModal={this.props.showCancelModal}
             showServiceRequestForm={this.props.showServiceRequestForm}
             viewOrderTrackCallbackPro={this.props.viewOrderTrackCallbackPro}
+            isGuestTrackOrderPro={this.props.isGuestTrackOrderPro}
             // myOrderCallbackPro={this.props.myOrderCallbackPro}
           />
         ))}
@@ -52,15 +53,35 @@ class RWDCompleteOrder extends React.Component {
         <div className="order-delivery-add">
           <h2 className="title">Delivery Address</h2>
           <p className="order-text-desc">
-            { addressData && addressData.address1 !== undefined && <>{addressData.address1}<br/></>}
-            { addressData && addressData.address2 !== undefined && <>{addressData.address2}<br/></>}
-            { addressData && addressData.address3 !== undefined && <>{addressData.address3}<br/></>}
+            {addressData &&
+              addressData.address1 !== undefined && (
+                <>
+                  {addressData.address1}
+                  <br />
+                </>
+              )}
+            {addressData &&
+              addressData.address2 !== undefined && (
+                <>
+                  {addressData.address2}
+                  <br />
+                </>
+              )}
+            {addressData &&
+              addressData.address3 !== undefined && (
+                <>
+                  {addressData.address3}
+                  <br />
+                </>
+              )}
 
-            { addressData && addressData.city !== undefined && <>{addressData.city}, </>}
-            { addressData && addressData.state !== undefined && <>{addressData.state}, </>}
-            { addressData && addressData.pincode !== undefined && <>{addressData.pincode}</>}
+            {addressData &&
+              addressData.city !== undefined && <>{addressData.city}, </>}
+            {addressData &&
+              addressData.state !== undefined && <>{addressData.state}, </>}
+            {addressData &&
+              addressData.pincode !== undefined && <>{addressData.pincode}</>}
           </p>
-         
         </div>
 
         <div className="order-payent-method">

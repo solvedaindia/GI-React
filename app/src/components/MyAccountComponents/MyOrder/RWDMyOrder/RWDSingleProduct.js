@@ -54,13 +54,12 @@ class RWDSingleProduct extends React.Component {
   render() {
     const productData = this.props.orderDataPro;
     const shipmentDataPro = this.props.shipmentDataPro;
-    console.log("RWDSingleProduct P", productData);
-    console.log("RWDSingleProduct props", this.props.isFromViewOrder);
-    console.log("RWDSingleProduct S", shipmentDataPro);
     const showServiceRequestButton =
       productData.serviceRequestOrderLineFlag == "Y";
     const isServiceable = productData.isServiceable == "Y";
-    const showReturnButton = productData.showReturnButton == "Y";
+    const showReturnButton = this.props.isGuestTrackOrderPro
+      ? false
+      : productData.showReturnButton == "Y";
     let btnCancelDisable = false;
     let showCancelMessage = false;
     let showReturnMessage = false;
@@ -211,7 +210,8 @@ class RWDSingleProduct extends React.Component {
                 Return Item
               </button>
             )}
-          {this.props.isMultiTrackPro &&
+          {!this.props.isGuestTrackOrderPro &&
+            this.props.isMultiTrackPro &&
             this.props.shipmentDataPro.returnButtonDisplay == "Y" && (
               <button
                 className="btn-borderwhite"
