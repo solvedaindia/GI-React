@@ -686,6 +686,19 @@
 */
 @include mix-xs {
   .service-request {
+  .invice-selection.guest-type{
+    margin: 0px 0px 0px 0px;
+    .upload-invoiceno{
+      .form-div{
+        .invoiceNumber{
+          margin-top: 0;
+        }
+      }
+      
+    }
+  }
+}
+  .service-request {
     .product-category {
       .dropdown {
         .dropdown-toggle {
@@ -706,6 +719,7 @@
             margin-top: 10px;
           }
         }
+  
       }
       .upload-invoiceno{
         .upload-invoice{
