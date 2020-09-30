@@ -1,16 +1,20 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
-import apiManager from '../../utils/apiManager';
-import {createCategoryPlpURL, formatPrice } from  '../../utils/utilityManager';
+import React from "react";
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import apiManager from "../../utils/apiManager";
+import { createCategoryPlpURL, formatPrice } from "../../utils/utilityManager";
 import {
   featuredCatAPI,
   imagePrefix,
   accessToken,
-  catID,
-} from '../../../public/constants/constants';
-import '../../../public/styles/featuredCat/featuredCat.scss';
-import {PRODUCTS, STARTING_FROM, SPOTLIGHT} from '../../constants/app/footerConstants';
+  catID
+} from "../../../public/constants/constants";
+import "../../../public/styles/featuredCat/featuredCat.scss";
+import {
+  PRODUCTS,
+  STARTING_FROM,
+  SPOTLIGHT
+} from "../../constants/app/footerConstants";
 
 export class SubCategory extends React.Component {
   constructor(props) {
@@ -18,7 +22,7 @@ export class SubCategory extends React.Component {
     this.state = {
       subCatData: null,
       isLoading: false,
-      error: null,
+      error: null
     };
   }
 
@@ -29,14 +33,13 @@ export class SubCategory extends React.Component {
         const { data } = response || {};
         this.setState({
           subCatData: data && data.data,
-          isLoading: false,
+          isLoading: false
         });
-        
       })
       .catch(error => {
         this.setState({
           error,
-          isLoading: false,
+          isLoading: false
         });
       });
   }
@@ -54,7 +57,7 @@ export class SubCategory extends React.Component {
       slidesToShow: 4,
       slidesToScroll: 1,
       centerMode: false,
-      centerPadding: '40px',
+      centerPadding: "40px",
       responsive: [
         {
           breakpoint: 1024,
@@ -62,28 +65,28 @@ export class SubCategory extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true,
-          },
+            dots: true
+          }
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            dots: true,
-          },
+            dots: true
+          }
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
-            dots: true,
-          },
-        },
-      ],
+            dots: true
+          }
+        }
+      ]
     };
-    if(!subCatData || subCatData.length<=0){
+    if (!subCatData || subCatData.length <= 0) {
       return null;
     }
     return (
@@ -92,27 +95,36 @@ export class SubCategory extends React.Component {
         <Slider {...settings}>
           {!!subCatData &&
             subCatData.map((subCatListData, index) => {
-			   var routePath = createCategoryPlpURL(subCatListData.categoryIdentifier);
+              var routePath = createCategoryPlpURL(
+                subCatListData.categoryIdentifier
+              );
               return (
                 <figure className="subCatSlider" key={`${index}-img`}>
-                    <Link to={routePath}>
-                    <img className="subCatImg"  alt={subCatListData.categoryName}  src={`${imagePrefix}${subCatListData.thumbnail}`} // src={subCatListData.thumbnail} alt={subCatListData.categoryName}
+                  <Link to={routePath}>
+                    <img
+                      className="subCatImg"
+                      alt={subCatListData.categoryName}
+                      src={
+                        subCatListData.thumbnail
+                          ? `${imagePrefix}${subCatListData.thumbnail}`
+                          : require("../../../public/images/plpAssests/placeholder-image -small.png")
+                      }
                     />
-                    </Link>
+                  </Link>
                   <figcaption className="catDetails">
                     <h2 className="catItem">{subCatListData.categoryName}</h2>
                     <span className="itemCount">
-                      {subCatListData.productCount + ' ' + PRODUCTS} 
-                  </span>
+                      {subCatListData.productCount + " " + PRODUCTS}
+                    </span>
                     <p className="starting">
                       {STARTING_FROM}
-                    <span className="startPrice">
-                      ₹{formatPrice(subCatListData.startPrice)}
+                      <span className="startPrice">
+                        ₹{formatPrice(subCatListData.startPrice)}
                       </span>
                     </p>
                   </figcaption>
                 </figure>
-              )
+              );
             })}
         </Slider>
       </div>
