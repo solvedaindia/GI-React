@@ -155,7 +155,11 @@ class BestSeller extends React.Component {
                   >
                     <img
                       className="subCatImg"
-                      src={`${imagePrefix}${sellerItemData.thumbnail}`}
+                      src={
+                        sellerItemData.thumbnail
+                          ? `${imagePrefix}${sellerItemData.thumbnail}`
+                          : require("../../../public/images/plpAssests/placeholder-image.png")
+                      }
                       alt={sellerItemData.productName}
                       onClick={this.handleTitle(`${sellerItemData.pageTitle}`)}
                     />
