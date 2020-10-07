@@ -120,6 +120,7 @@ class CancelComponents extends React.Component {
         primeLineNo: this.state.orderItem.primeLineNo
       };
     }
+
     apiManager
       .post(cancelOrderAPI, data)
       .then(response => {
@@ -137,7 +138,7 @@ class CancelComponents extends React.Component {
       })
       .catch(error => {
         try {
-          //console.log('error', error.response.data.error.error_message);
+          console.log("errorAPI", error.response.data.error.error_message);
           this.setState({
             errorResponse: error.response.data.error.error_message
           });
