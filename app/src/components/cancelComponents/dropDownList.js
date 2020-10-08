@@ -22,9 +22,13 @@ class DropDownList extends React.Component {
     this.handleState = this.handleState.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value, text: "" });
-    this.props.handleParentState(event.target.value, this.state.text);
+  handleChange(selectedValue) {
+    //this.setState({ value: event.target.value, text: "" });
+    //  this.props.handleParentState(event.target.value, this.state.text);
+
+    this.setState({ value: selectedValue, text: "" }, () => {
+      this.props.handleParentState(selectedValue, this.state.text);
+    });
   }
 
   handleChangeText(event) {
@@ -76,9 +80,11 @@ class DropDownList extends React.Component {
                 <li
                   className="select-item"
                   value={myOptions}
-                  onClick={this.handleChange}
+                  onClick={() => {
+                    this.handleChange(myOptions);
+                  }}
                 >
-                  <option>{myOptions}</option>
+                  <>{myOptions}</>
                 </li>
               );
             })}

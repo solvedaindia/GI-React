@@ -29,6 +29,7 @@ class CancelComponents extends React.Component {
       text: "",
       reasons: [],
       error: false,
+      errorResponse: undefined,
       orderItem: undefined,
       orderData: undefined
     };
@@ -57,7 +58,8 @@ class CancelComponents extends React.Component {
       value: "",
       text: "",
       reasons: [],
-      error: false
+      error: false,
+      errorResponse: undefined
     });
     if (orderItem === undefined) {
       this.fetchReasonArray(false);
@@ -118,16 +120,30 @@ class CancelComponents extends React.Component {
         primeLineNo: this.state.orderItem.primeLineNo
       };
     }
+
     apiManager
       .post(cancelOrderAPI, data)
       .then(response => {
-        this.setState({
-          showPopUp: "false"
-        });
-        // alert("Order cancelled successfully");
-        this.props.refreshOrderData();
+        if (response.data.data && response.data.data.Status === "Failed") {
+          this.setState({
+            errorResponse: response.data.data.result.error.errorDescription
+          });
+        } else {
+          this.setState({
+            showPopUp: "false"
+          });
+          // alert("Order cancelled successfully");
+          this.props.refreshOrderData();
+        }
       })
-      .catch(error => {});
+      .catch(error => {
+        try {
+          console.log("errorAPI", error.response.data.error.error_message);
+          this.setState({
+            errorResponse: error.response.data.error.error_message
+          });
+        } catch (exp) {}
+      });
   }
 
   handleParentStateFromChildState(values, texts) {
@@ -136,7 +152,8 @@ class CancelComponents extends React.Component {
     this.setState({
       value: values,
       text: texts,
-      error: false
+      error: false,
+      errorResponse: undefined
     });
   }
 
@@ -187,6 +204,9 @@ class CancelComponents extends React.Component {
                       </p>
                     )}
                 </div>
+                {this.state.errorResponse && (
+                  <p className="error-text">{this.state.errorResponse}</p>
+                )}
                 <div className="btn-wrapper">
                   <Button className="btn-cancel btn" onClick={this.handleClose}>
                     {CANCEL}
