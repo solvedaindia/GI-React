@@ -54,13 +54,14 @@ import WillowKitchen from '../KitchensContainer/willowKitchen';
 
 import InspirationDetails from '../InspirationDetailsContainer/index';
 import WardrobesContainer from '../wardrobesContainer';
+import ModularWardrobeDetails from '../wardrobesContainer/details';
 import privacyPolicy from '../privacyPolicy/index';
 import HelpSupport from '../serviceSupportContainer/index';
 import TermsConditions from '../termsAndConditions/index';
 import CookiePolicy from '../CookiePolicy/index';
 import MyAccount from '../MyAccountContainer/index';
 import GuestTrackOrder from '../../components/MyAccountComponents/GuestTrackOrder/guestTrackOrder';
-import OrderConformtion from '../orderConfirmation/index'
+import OrderConformtion from '../orderConfirmation/index';
 import CartDetail from '../CartContainer/cartContainer';
 import StoreLocator from '../../components/StoreLocator/storeLocator';
 import Directions from '../../components/StoreLocator/index';
@@ -75,6 +76,7 @@ import Shipping from '../shippingContainer/index';
 import CookiePopup from '../../components/GlobalComponents/cookiepolicywidget';
 import ReactSnackBar from "../HomePageContainer/snackbar/index";
 import MWebLogo from '../../components/SVGs/mWebLogo';
+import Covid19Awareness from '../../components/Covid19Awareness';
 import ServiceRequestFormGuest from '../../components/ServiceRequestFormGuest/index';
 import ServiceRequestForm from '../../components/ServiceRequestForm';
 
@@ -298,26 +300,27 @@ export default class App extends React.Component {
               }
             }
             else {
-              Geocode.setApiKey(mapKey);
-              Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
-                response => {
-                  const address = response.results[0].formatted_address;
-                  const data = address.replace(', India', '');
-                  const postalCode = data.substr(data.length - 6);
-                  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
-                    appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
-                    this.setState({
-                      loading: false
-                    })
-                  }
-                  else {
-                    appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-                  }
-                },
-                error => {
-                  appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
-                }
-              )
+              appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+  						//   Geocode.setApiKey(mapKey);
+						  //   Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
+							//   response => {
+							// 	  const address = response.results[0].formatted_address;
+							// 	  const data = address.replace(', India', '');
+							// 	  const postalCode = data.substr(data.length -6);
+							// 	  if (validatePindcode(postalCode) === true && appCookie.get('pincodeUpdated') !== 'true') {
+							// 		appCookie.set('pincode', postalCode, 365 * 24 * 60 * 60 * 1000);
+							// 		this.setState({
+							// 		  loading: false
+							// 		})
+              //     }
+              //     else{
+              //       appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+              //     }          
+							// 	},
+							// 	error => {
+							// 		appCookie.set('pincode', '400079', 365 * 24 * 60 * 60 * 1000);
+							// 	}
+							// )
             }
           };
       },
@@ -385,12 +388,12 @@ export default class App extends React.Component {
 		<LastLocationProvider>
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
-		      <Route path="/online-furniture-kitchen_s" component={Kitchens} />
 		      <Route path="/online-furniture-kitchen" component={Kitchens} />
-		      <Route path="/online-furniture-wardrobes" component={WardrobesContainer} />
-		      <Route path="/online-furniture-wardrobes_S" component={WardrobesContainer} />
           <Route path="/online-furniture-chef-kitchen" component={SteelChefKitchen} />
           <Route path="/online-furniture-willow-kitchen" component={WillowKitchen} />
+          <Route path="/online-furniture-modular-wardrobes" component={WardrobesContainer} />
+          <Route path="/online-furniture-modular-wardrobes-kreation-steel" render={() => <ModularWardrobeDetails identifier="kreation" />} />
+          <Route path="/online-furniture-modular-wardrobes-kalista-wooden" render={() => <ModularWardrobeDetails identifier="kalista" />} />
           <Route path="/online-furniture-:id" component={ClpContainer} />
 		      <Route path="/furniture-online-:productId/:skuId" component={PdpContainer} />
           <Route path="/furniture-:id" component={PlpContainer} />
@@ -418,6 +421,7 @@ export default class App extends React.Component {
           <Route path="/serviceRequest" component={ServiceRequestFormGuest} />
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
+          <Route path="/covid19_health_safety_measures" component={Covid19Awareness} />
           <Route path="/internet-error" component={InternetError} />
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />

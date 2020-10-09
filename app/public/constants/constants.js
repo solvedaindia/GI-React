@@ -50,6 +50,8 @@ export const cartApplyPromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure
 export const cartRemovePromoAPI = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/removepromotion/`;
 /* Pincode Service API */
 export const pinCodeServiceAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/serviceable/`;
+/* Pincode Coordinates API */
+export const pinCodeCoordinatesAPI = `${secureHttp}://${host}:${port2}/api/v1/pincode/getLatLng/`;
 /* Cart Count API */
 export const cartCountApi = `${secureHttp}://${host}:${port2}/api/v1/secure/cart/quantity`;
 /* Invoice API */
@@ -315,3 +317,5 @@ export function getGoogleClientId() {
             return '540799499871-esslds0s75as1le9pufkmpmljb96vedo.apps.googleusercontent.com'
     }
 }
+
+export const customerQueryAPI = `${secureHttp}://${host}:${port2}/api/v1/static/postCustomerQuery`;

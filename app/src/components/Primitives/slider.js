@@ -16,7 +16,7 @@ class FullBanner extends React.Component {
     this.state = {
       heroSlider: null,
       isLoading: false,
-      error: null,     
+      error: null,
     };
     this.isScrolling=false;
   }
@@ -25,8 +25,7 @@ class FullBanner extends React.Component {
     apiManager
       .get(heroSliderAPI)
       .then(response => {
-        const {data} = response || {}
-      
+        const { data } = response || {};
         this.setState({
           heroSlider: data && data.data.bannerList,
           isLoading: false,
@@ -44,26 +43,24 @@ class FullBanner extends React.Component {
     this.getSliderData();
   }
 
-  
-
-  handleOnClick (e) {
+  handleOnClick(e) {
     window.scrollTo(0, 0);
   }
-  handleOnBannerClick(path)
-  {
+
+  handleOnBannerClick(path, onNewPage) {
+    const target = onNewPage && onNewPage === 'true' ? '_blank' : '_self';
     window.scrollTo(0, 0);
-     if(!this.isScrolling && path)
-     {
-        if(path.search("http")!=-1)
-        {
-            window.open(path,'_self')
-        }
-        else{
-          this.props.history.push({ pathname: path})
-        }
-        
-     }
-        
+    if (!this.isScrolling && path) {
+      if (
+        path.search('http') !== -1 ||
+        path.search('#') !== -1 ||
+        target === '_blank'
+      ) {
+        window.open(path, target);
+      } else {
+        this.props.history.push({ pathname: path });
+      }
+    }
   }
 
   render() {
@@ -80,11 +77,21 @@ class FullBanner extends React.Component {
     };
     return (
       <div className="fsBanner">
-        <Slider {...settings} onSwipe={()=>setTimeout(()=>this.isScrolling=false,500) } swipeEvent = {()=>this.isScrolling=true}>
+        <Slider
+          {...settings}
+          afterChange={() => {this.isScrolling=false}}
+          swipeEvent={() => {
+            this.isScrolling = true;
+            setTimeout(() => {this.isScrolling = false}, 1000);
+          }}
+        >
           {!!heroSlider &&
             heroSlider.map((sliderData, index) => (
-              
-              <a /*href={sliderData.onClickUrl}*/ onClick={e => this.handleOnBannerClick(sliderData.onClickUrl)} onMouseDown={e => this.handleOnClick(e)} key={index}>
+              <a
+                onClick={e => this.handleOnBannerClick(sliderData.onClickUrl, sliderData.onNewPage)}
+                onMouseDown={e => this.handleOnClick(e)}
+                key={index}
+              >
                 <img src={sliderData.imageSrc} alt={sliderData.alt} />
               </a>
             ))}

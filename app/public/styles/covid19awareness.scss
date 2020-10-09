@@ -1,0 +1,82 @@
+$divider-color-gradient:#1fa799, #02b3a1, #01b1a4, #03aca5, #02aba8, #03a7a8, #02a4a9, #02a3ab, #039fac, #049dad, #039aaf, #0397b1, #0394b3, #0291b3, #0490b4, #038cb6, #038ab7, #0387b8, #0584b9, #0480bc, #037fbb, #037dbe, #0479bf, #0276bf, #0473c2, #0271c3, #056dc6, #0a6dc2, #116bc1, #186abc, #1d68b9, #2668b6, #2c67b5, #3465b1, #3a64ae, #3e63aa, #4860a6, #4d60a5, #555ea1, #5c5da0, #645b9c, #6a5a98, #6e5a97, #795793, #7f5692, #86558c, #8b548b, #925388, #9a5284, #9f5181, #a74e7c, #ae4e7c, #b64d78, #bb4a76, #c44a73, #ca486e, #cf476b, #da466a, #de4466, #e44362, #eb4261, #ee445e, #ed4a5b, #ef4f59, #ee5557, #ee5b54, #ed6150, #ee6650, #ed6a4c, #ef714b, #ef744a, #ef7c45, #ee8043, #ef8642, #ef8b40, #ef903c, #ef963a, #ef9b38, #efa236, #eea733, #eeac31, #eeb22e, #efb72c, #efba36, #efbe3e, #f2c14a, #f0c552, #f1c75b, #f3cc67, #f2ce6e, #f5d17b, #f5d483, #f5da8d, #f7da96, #f8e0a2, #f7e2ab, #f9e5b3, #f8e9c0, #faecc7, #fbf0d2, #fbf3dc, #fcf5e3, #fdfaf1, #ffffff;
+
+.ca-header-banner img {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 768px) {
+  .covid19awareness {
+    * {
+      margin: 0px;
+    }
+    .ca-tab-body {
+      padding-bottom: 60px;
+    }
+    .ca-tab-final {
+      padding-bottom: 120px;
+    }
+    .ca-title {
+      font-size: 40px;
+      padding: 50px 30px 20px 30px;
+      font-family: Gotham-Medium,sans-serif;
+    }
+    .ca-coloured-divider {
+      border: 2px solid;
+      border-image-slice: 1;
+      border-image-source: linear-gradient(to right, $divider-color-gradient);
+    }
+    .ca-sub-img {
+      height: 150px;
+      width: 150px;
+      margin: 20px 0px 0px 0px;
+    }
+    .ca-sub-content {
+      font-size: 16px;
+      margin: 0px auto;
+      margin-top: 35px;
+      line-height: 18px;
+      width: 80%;
+      font-family: Gotham-Rounded-Bold,sans-serif;
+      text-align: justify;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .covid19awareness {
+    * {
+      margin: 0px;
+    }
+    .ca-tab-body {
+      padding-bottom: 40px;
+    }
+    .ca-tab-final {
+      padding-bottom: 90px;
+    }
+    .ca-title {
+      font-size: 30px;
+      padding: 20px 25px 15px 25px;
+      font-family: Gotham-Medium,sans-serif;
+    }
+    .ca-coloured-divider {
+      border: 2px solid;
+      border-image-slice: 1;
+      border-image-source: linear-gradient(to right, $divider-color-gradient);
+    }
+    .ca-sub-img {
+      height: 150px;
+      width: 150px;
+      margin: 20px 0px 0px 0px;
+    }
+    .ca-sub-content {
+      font-size: 16px;
+      margin: 0px auto;
+      margin-top: 30px;
+      line-height: 18px;
+      width: 90%;
+      font-family: Gotham-Rounded-Bold,sans-serif;
+      text-align: justify;
+    }
+  }
+}

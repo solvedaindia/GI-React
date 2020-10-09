@@ -318,6 +318,7 @@
         .input_box,
         .defaultlbl {
           float: left;
+          cursor: pointer;
         }
       }
       .rightBox {
@@ -393,7 +394,7 @@
           }
         }
         .bill-address {
-          border-bottom: 1px solid $lightGrey;
+          // border-bottom: 1px solid $lightGrey;
           .checkbox,
           .label-billing {
             float: left;

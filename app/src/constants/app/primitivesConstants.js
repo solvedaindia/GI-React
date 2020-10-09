@@ -9,14 +9,24 @@
  * 
  */
 
-export const BOOK_CONSULTATION = 'Book a consultation';
-export const KITCHEN_CONSULT = 'Take the first step towards making your dream kitchen a reality by meeting our in-house design expert to discuss your design. Simply fill in the form below to book your appointment';
-export const WARDROBE_CONSULT = 'Take the first step towards making your dream kitchen a reality by meeting our in-house design expert to discuss your design. Simply fill in the form below to book your appointment';
+export const BOOK_CONSULTATION = 'Book a Consultation';
+export const KITCHEN_CONSULT =
+  'Take the first step towards making your dream kitchen a reality by meeting our in-house design expert to discuss your design. Simply fill in the form below to book your appointment';
+export const WARDROBE_CONSULT =
+  'A modular wardrobe that suits your needs and space requirements is now only a click away. <br />Simply share your details and we will reach out to you soon.';
 export const FULL_NAME = 'Full Name';
 export const EMAIL = 'Email';
-export const MESSEGE = 'Message';
+export const MESSEGE = {
+  default: 'Message',
+  kitchen: 'Message',
+  wardrobes: 'Requirement',
+};
 export const MOBILE_NUMBER = 'Mobile Number';
-export const WHAT_YOU_LIKE = 'What Would you Like to Do';
+export const WHAT_YOU_LIKE = {
+  default: 'What Would you Like to Do',
+  kitchen: 'What Would you Like to Do',
+  wardrobes: 'Choose Product',
+};
 export const SELECT_OPTION = 'Select Option';
 export const SEND = 'Send';
 export const HELLO_START = 'Hello Start Exploring';
@@ -68,24 +78,14 @@ export const MAXOTP_ATTAMPTS_MSG = 'OTP cannot be regenerated. You have exceeded
 export const STORELOCATOR_TITLE = 'Experience our products first hand at your nearest Godrej Interio store';
 export const MINCOMPARECOUNT_MSG = 'Please add at least two products to compare';
 
-//Validation MSG
+// Validation MSG
 export const FIELDREQ_MSG = 'This field is required';
 export const NAME_VALIDATION_MSG = 'Please enter a valid Name. It should not exceed 100 characters';
 export const PASSWORD_MIN_VALIDATION_MSG = 'Invalid Password. Password should have min 6 characters and atleast 1 number';
 export const PASSWORD_MAX_VALIDATION_MSG = 'Invalid Password. Password should have max 25 characters and atleast 1 number';
 export const VALID_EMAILNUMBER_MSG = 'Please enter valid Email id/Mobile Number';
 export const VALID_PASSWORD_MSG = 'Enter a valid password';
-export const VALID_INCORRECTP_PASS_MSG = 'Password entered is incorrect ';
+export const VALID_INCORRECTP_PASS_MSG = 'LogonId or Password is incorrect';
 export const COMPARE_SWATCH_SWITCH_ERROR_MSG ='This color of the product is already added in compare list. Please choose other color.';
-
-
-
-
-
-
-
-
- 
-
-
-
+export const INVALID_MOBILE_NUMBER = 'Please enter valid Mobile Number';
+export const INVALID_EMAIL_ADDRESS = 'Please enter valid Email Address';

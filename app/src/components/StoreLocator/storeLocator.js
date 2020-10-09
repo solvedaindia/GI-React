@@ -384,47 +384,57 @@ class StoreLocator extends React.Component {
       });
   }
 
-  /* get lat and long */
-  getLatAndLong(getdata) {
-    Geocode.setApiKey(mapKey);
-    Geocode.fromAddress(getdata).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-
-        if (this.props.history.location.state.storeName) {
-          this.getSToreDataByCity(lat, lng, getdata);
-        } else if (this.props.history.location.state.storeId) {
-          this.getSToreDataById(
-            lat,
-            lng,
-            this.props.history.location.state.storeId
-          );
-        } else {
-          this.getStoreDataFromPincode(lat, lng);
-        }
-
-        this.lastOpenWindow = null;
-        this.lastIndex = -1;
-      },
-      error => {
-        let getStringVal = "";
-        if (this.props.history.location.state.storeName) {
-          getStringVal = "city";
-        } else if (this.props.history.location.state.storeId) {
-          getStringVal = "store";
-        } else if (this.props.history.location.state.pincode) {
-          getStringVal = "pincode";
-        }
-        this.setState({
-          storeData: null,
-          isLoading: false,
-          searchStoreType: getStringVal,
-          isError: true,
-          filteredSingleStore: null
+    /* get lat and long */
+    getLatAndLong(getdata) {
+        getCoordinates(getdata, coordinates => {
+            const pincodeLatLng = coordinates;
+            if (pincodeLatLng && pincodeLatLng.lat && pincodeLatLng.lng) {
+                const { lat, lng } = pincodeLatLng;
+                if (this.props.history.location.state.storeName) {
+                    this.getSToreDataByCity(lat, lng, getdata);
+                } else if (this.props.history.location.state.storeId) {
+                    this.getSToreDataById(lat, lng, this.props.history.location.state.storeId);
+                } else {
+                    this.getStoreDataFromPincode(lat, lng);
+                }
+                this.lastOpenWindow=null;
+                this.lastIndex=-1;
+            } else {
+                Geocode.setApiKey(mapKey);
+                Geocode.fromAddress(getdata).then(response => {
+                    const { lat, lng } = response.results[0].geometry.location;
+                    setCoordinates(getdata, lat, lng);
+                    if (this.props.history.location.state.storeName) {
+                        this.getSToreDataByCity(lat, lng, getdata);
+                    } else if (this.props.history.location.state.storeId) {
+                        this.getSToreDataById(lat, lng, this.props.history.location.state.storeId);
+                    } else {
+                        this.getStoreDataFromPincode(lat, lng);
+                    }
+                    this.lastOpenWindow=null;
+                    this.lastIndex=-1;
+                }, error => {
+                    let getStringVal = '';
+                    if (this.props.history.location.state.storeName) {
+                        getStringVal = 'city';
+                    } else if (this.props.history.location.state.storeId) {
+                        getStringVal = 'store';
+                    } else if (this.props.history.location.state.pincode) {
+                        getStringVal = 'pincode'
+                    }
+                    this.setState({
+                        storeData: null,
+                        isLoading: false,
+                        searchStoreType: getStringVal,
+                        isError: true,
+                        filteredSingleStore: null
+                    });
+    
+                }
+                );
+            }
         });
-      }
-    );
-  }
+    }
 
   /* create Map */
   createMap(storeData) {

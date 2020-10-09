@@ -10,7 +10,7 @@ import reducer from '../../containers/PlpContainer/reducer';
 import saga from '../../containers/PlpContainer/saga';
 import { compose } from 'redux';
 import * as actionCreators from '../../containers/PlpContainer/actions';
-
+import GSchemas from '../GSchemas';
 
 class Breadcrumb extends React.Component {
   constructor(props) {
@@ -36,103 +36,204 @@ class Breadcrumb extends React.Component {
   }
 
   render() {
-
-	if(this.props.catBreadCrumb)
-	{
-	  return (
-        <div className='breadCrumb'>
-          <span className='links'> <Link to='/'>Home ></Link></span>
-          <span className='links'>{this.props.catBreadCrumb}</span>
-        </div>
-      )
-	}
-  // ---- PLP Breadcrumb ----
-    if (this.props.plpBreadcrumbPro) {
+    if (this.props.catBreadCrumb) {
       return (
-        <div className='breadCrumb'>
-          {this.props.plpBreadcrumbPro.map((data, index) => {
-            var breadLabel = data.label;
-            var breadRoute = '/';
-
-            if (index === 0) {
-              breadLabel = 'Home';
-              breadRoute = '/';
-            }
-            else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1) {
-              if(data.categoryIdentifier) {
-                breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
-              }
-            }
-            else if (this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
-            }
-            else {
-              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
-            }
-
-            return (
-              <span className='links'>{this.props.plpBreadcrumbPro.length === index + 1 ? `${breadLabel}` : <Link to={breadRoute} onClick={this.onLinkNavigation}>{`${breadLabel} >`}</Link>}</span>
-            )
-
-          })}
-        </div>
-      )
+        <>
+          <GSchemas
+            schemas={[
+              {
+                type: 'breadcrumb',
+                breadcrumbItems: [
+                  { name: 'Home', url: '/' },
+                  {
+                    name: this.props.catBreadCrumb,
+                    url: window.location.pathname,
+                  },
+                ],
+              },
+            ]}
+          />
+          <div className='breadCrumb'>
+            <span className='links'> <Link to='/'>Home ></Link></span>
+            <span className='links'>{this.props.catBreadCrumb}</span>
+          </div>
+        </>
+      );
     }
-    else if (this.props.isFromSearchPro) {
+    // ---- PLP Breadcrumb ----
+    if (this.props.plpBreadcrumbPro) {
+      const plpBreadCrumb = [];
+      this.props.plpBreadcrumbPro.forEach((data, index) => {
+        let breadLabel = data.label;
+        let breadRoute = '/';
+
+        if (index === 0) {
+          breadLabel = 'Home';
+          breadRoute = '/';
+        } else if (
+          this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'rooms' &&
+          index === 1
+        ) {
+          if (data.categoryIdentifier) {
+            breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
+          }
+        } else if (
+          this.props.plpBreadcrumbPro[0].label.toLowerCase() === 'products' &&
+          index === 1
+        ) {
+          breadRoute = createCategoryPlpURL(data.categoryIdentifier);
+        } else {
+          breadRoute = createCategoryPlpURL(data.categoryIdentifier);
+        }
+
+        plpBreadCrumb.push({
+          name: breadLabel,
+          url: breadRoute,
+        });
+      });
       return (
-        <div className='breadCrumb'>
-          <span className='links'> <Link to='/'>Home ></Link></span>
-          <span className='links'>Search Result</span>
-        </div>
-      )
+        <>
+          <GSchemas
+            schemas={[{ type: 'breadcrumb', breadcrumbItems: plpBreadCrumb }]}
+          />
+          <div className='breadCrumb'>
+            {plpBreadCrumb.map((data, index) => (
+              <span className="links">
+                {plpBreadCrumb.length === index + 1 ? (
+                  `${data.name}`
+                ) : (
+                  <Link to={data.url} onClick={this.onLinkNavigation}>{`${
+                    data.name
+                  } >`}</Link>
+                )}
+              </span>
+            ))}
+          </div>
+        </>
+      );
+    } else if (this.props.isFromSearchPro) {
+      return (
+        <>
+          <GSchemas
+            schemas={[
+              {
+                type: 'breadcrumb',
+                breadcrumbItems: [
+                  { name: 'Home', url: '/' },
+                  {
+                    name: 'Search Result',
+                    url: window.location.pathname,
+                  },
+                ],
+              },
+            ]}
+          />
+          <div className='breadCrumb'>
+            <span className='links'> <Link to='/'>Home ></Link></span>
+            <span className='links'>Search Result</span>
+          </div>
+        </>
+      );
     }
 
     // ---- PDP Breadcrumb ----
     if (this.props.pdpBreadcrumbPro) {
-      var pdpBreadcrumb = this.props.pdpBreadcrumbPro;
+      const pdpBreadCrumb = [];
+      this.props.pdpBreadcrumbPro.forEach((data, index) => {
+        let breadLabel = data.label;
+        let breadRoute = '/';
+
+        if (index === 0) {
+          breadLabel = 'Home';
+          breadRoute = '/';
+        } else if (this.props.pdpBreadcrumbPro[0].label.toLowerCase() === 'rooms' && index === 1 && data.categoryIdentifier) {
+          breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
+        } else if (this.props.pdpBreadcrumbPro[0].label.toLowerCase() === 'products' && index === 1) {
+          breadRoute = createCategoryPlpURL(data.categoryIdentifier);
+        } else {
+          breadRoute = createCategoryPlpURL(data.categoryIdentifier);
+        }
+
+        pdpBreadCrumb.push({
+          name: breadLabel,
+          url: breadRoute,
+        });
+      });
+      pdpBreadCrumb.push({
+        name: this.props.productNamePro,
+        url: window.location.pathname,
+      });
       return (
-        <div className='breadCrumb'>
-          {pdpBreadcrumb.map((data, index) => {
-            var breadLabel = data.label;
-            var breadRoute = '/';
-
-            if (index === 0) {
-              breadLabel = 'Home';
-              breadRoute = '/';
-            }
-            else if (pdpBreadcrumb[0].label.toLowerCase() === 'rooms' && index === 1 && data.categoryIdentifier) {
-              breadRoute = `/online-furniture-${data.categoryIdentifier.toLowerCase()}`;
-            }
-            else if (pdpBreadcrumb[0].label.toLowerCase() === 'products' && index === 1) {
-              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
-            }
-            else {
-              breadRoute = createCategoryPlpURL(data.categoryIdentifier);
-            }
-
-            return (
-              <>
-                <span className='links'><Link onClick={this.onLinkNavigation} to={breadRoute}>{`${breadLabel} >`}</Link></span>
-                {pdpBreadcrumb.length === index + 1 ? <span className='links'>{`${this.props.productNamePro}`}</span> : null}
-              </>
-            )
-
-          })}
-        </div>
+        <>
+          <GSchemas
+            schemas={[{ type: 'breadcrumb', breadcrumbItems: pdpBreadCrumb }]}
+          />
+          <div className='breadCrumb'>
+            {pdpBreadCrumb.map((data, index) => (
+              <span className="links">
+                {pdpBreadCrumb.length === index + 1 ? (
+                  `${data.name}`
+                ) : (
+                  <Link onClick={this.onLinkNavigation} to={data.url}>{`${data.name} >`}</Link>
+                )}
+              </span>
+            ))}
+          </div>
+        </>
       )
     }
 
-    return (
-      this.props.match.path === '/online-furniture-:id' ?
-        (<div className='breadCrumb'>
-          <span className='links'> <Link to='/'>Home ></Link></span>
-          <span className='links'> {this.props.match.params.id.replace(/-/g, " ")}</span>
-        </div>)
-        :
+    return this.props.match.path === '/online-furniture-:id' ? (
+      <>
+        <GSchemas
+          schemas={[
+            {
+              type: 'breadcrumb',
+              breadcrumbItems: [
+                { name: 'Home', url: '/' },
+                {
+                  name: this.props.match.params.id.replace(/-/g, ' '),
+                  url: window.location.pathname,
+                },
+              ],
+            },
+          ]}
+        />
+        <div className="breadCrumb">
+          <span className="links">
+            {' '}
+            <Link to="/">Home ></Link>
+          </span>
+          <span className="links">
+            {' '}
+            {this.props.match.params.id.replace(/-/g, ' ')}
+          </span>
+        </div>
+      </>
+    ) : (
+      <>
+        <GSchemas
+          schemas={[
+            {
+              type: 'breadcrumb',
+              breadcrumbItems: [
+                { name: 'Home', url: '/' },
+                {
+                  name: this.props.staticName,
+                  url: window.location.pathname,
+                },
+              ],
+            },
+          ]}
+        />
         <div className='breadCrumb'>
-          <span className='links'> <Link to='/'>Home ></Link></span>
+          <span className="links">
+            {' '}
+            <Link to="/">Home ></Link>
+          </span>
           <span className='links'> {this.props.staticName}</span>
         </div>
+      </>
     );
   }
 }

@@ -48,14 +48,7 @@ export const A_MONTH = 'a month';
 export const TC_APPLY = 'T&C Apply';
 export const SHARE = 'SHARE';
 export const WISHLIST = 'WISHLIST';
-export const NOT_DELIVER = 'Sorry we currently do not deliver in this area. Please enter another pincode';
-export const TAX_DISCLAIMER = 'Incl. of all taxes';
- 
- 
-
-
-
-
-
-
-
+export const NOT_DELIVER_PRE =
+  'We are sorry, we are unable to deliver here. Please try another pincode or ';
+export const NOT_DELIVER_POST = 'click here to request a callback.';
+export const TAX_DISCLAIMER = 'MRP inclusive of all taxes';

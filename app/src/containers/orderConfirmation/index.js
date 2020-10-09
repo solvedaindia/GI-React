@@ -25,7 +25,8 @@ class OrderConformation extends React.Component {
       showPop: false,
       orderData: "",
       showPage: false,
-      showGtagScript: false
+      showGtagScript: false,
+      fbPixelTriggered: false,
     };
   }
 
@@ -187,9 +188,23 @@ class OrderConformation extends React.Component {
         transaction_id: this.state.orderData.orderID
       });
     }
+    try {
+      if (!this.state.fbPixelTriggered && this.state.orderData && fbq) {
+        fbq('track', 'Purchase', {
+          currency: 'INR',
+          quantity: this.state.orderData.orderItems
+            .map(item => item.quantity)
+            .reduce((a, b) => a + b),
+          value: this.state.orderData.orderSummary.netAmount,
+        });
+        this.setState({ fbPixelTriggered: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
     return (
       <div className="orderconfirm">
-        <ContentEspot espotName={"GI_PIXEL_ORDERCONFIRMATION_BODY_START"} />
+        {/* <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_START'} /> */}
         <div className="container">
           <div className="row">
             <div className="col-md-9">
@@ -324,7 +339,7 @@ class OrderConformation extends React.Component {
         </div>
         {this.state.showPop ? <SuccessPop /> : ""}
         {/* <SuccessPop /> */}
-        <ContentEspot espotName={"GI_PIXEL_ORDERCONFIRMATION_BODY_END"} />
+        {/* <ContentEspot espotName={'GI_PIXEL_ORDERCONFIRMATION_BODY_END'} /> */}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-.fsBanner {
+.fsBanner, .ourstoreImgbox {
     .slick-prev {
         left: 0;
     }
@@ -43,5 +43,25 @@
     .slick-prev,
     .slick-next {
         z-index:3;
+    }
+}
+
+.typesofkitchen {
+    .slick-dot li {
+        margin: 20px 0px;
+    }
+    .slick-dots li button:before {
+        font-size: 12px;
+        line-height: 30px;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        opacity: .4;
+    }
+    .slick-dots li.slick-active button:before {
+        opacity: 1;
     }
 }

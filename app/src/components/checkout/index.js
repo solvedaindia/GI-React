@@ -36,6 +36,8 @@ export class CheckoutComponent extends React.Component {
       has_pass: false,
       same_bill: true,
       step: 1,
+      phone: '',
+      email: '',
       logon_by: '',
       loggedIn: false,
       loginStatus: 'Login/Register',
@@ -68,11 +70,13 @@ export class CheckoutComponent extends React.Component {
     this.fetchShipModeAPI();
     if (coke == 'true') {
       this.callprofileAPI()
-        .then((data) => {
+        .then(data => {
           this.setState({
             step: 2,
             loggedIn: true,
-            logon_by: data.logonID
+            logon_by: data.logonID,
+            email: data.emailID,
+            phone: data.mobileNo,
           })
         }).catch(error => {
           throw new Error(error);
@@ -339,7 +343,9 @@ export class CheckoutComponent extends React.Component {
         logonBy={this.state.logon_by}
         handleAddress={this.handleAddress}
         netAmount={this.state.orderSummaryData.netAmount}
-        shipModePro={this.state.shipMode} />
+        shipModePro={this.state.shipMode}
+        email={this.state.email}
+        phone={this.state.phone} />
 
     } else {
       return <Step1Component

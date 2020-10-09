@@ -29,19 +29,20 @@ import {Helmet} from "react-helmet";
 import '../../../public/styles/pdpComponent/pdpComponent.scss';
 import { array } from 'prop-types';
 import { triggerProductDetailGTEvent, unmountProductDetailGTEvent } from '../../utils/gtm';
+import GSchemas from '../GSchemas';
 
 class PdpComponent extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			skuData: {},
-			isLoading: true,
-			selectedSku: {},
-			dataVal: '',
-			pincodeData: '',
-			breadcrumbData: null,
-		};
-	}
+  constructor() {
+    super();
+    this.state = {
+      skuData: {},
+      isLoading: true,
+      selectedSku: {},
+      dataVal: '',
+      pincodeData: '',
+      breadcrumbData: null,
+    };
+  }
 
 	componentDidMount() {
 		if (this.props.historyData.location.state != undefined) {
@@ -435,13 +436,14 @@ class PdpComponent extends React.Component {
 	const attrTypeData = this.getAttributeTypeData(this.props.data);
     return (
       <>
+			{!isLoading && <GSchemas schemas={[{ type: 'product', product: this.state.skuData }]} />}
 			{!isLoading && 
 			<>
-			<Helmet>
+			{/* <Helmet>
 				<script type="application/ld+json" nonce="17609530198069878121" id="jsonLD">
 						{`[{"@context":"http://schema.org/","@type":"Product","name":"${this.state.skuData.productName}","image":"${imgUrl}","brand":{"@type":"Thing","name":"Godrej Interio"}}]`}
 				</script>
-			</Helmet>
+			</Helmet> */}
 			{breadcrumbItem}
 				{ isSticky === true &&			
 			<div className='Pdpstickybar sticky slideup clearfix' id='Pdpstickybar'>			  
@@ -462,7 +464,7 @@ class PdpComponent extends React.Component {
 					   <div className='divpriceOffer' id="topdiv2">
 							<Price priceData={this.state.skuData} sticky={true}/>
 							<div className="accessories-offer">		
-								<span>{this.state.skuData.discount > 1 && <><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/></>}{ this.state.skuData.promotions.length > 0 && this.state.skuData.promotions[0].name && <>{parseInt(this.state.skuData.discount) > 1 && '& '}{this.state.skuData.promotions[0].name}</>}</span>
+								<span>{this.state.skuData.discount > 1 && <><span className='bold'>{this.state.skuData.discount}% OFF</span> <br/></>}{ this.state.skuData.promotions.length > 0 && this.state.skuData.promotions[0].shortDesc && <>{parseInt(this.state.skuData.discount) > 1 && '& '}{this.state.skuData.promotions[0].shortDesc}</>}</span>
 							</div>
 						</div>
 						<div className='addtoCart' id="topdiv3">
@@ -551,7 +553,7 @@ class PdpComponent extends React.Component {
                     sticky={false}
                     pinCodeData={this.state.pincodeData}
                     handleAddtocart={this.handleAddtocart.bind(this)}
-                    history={this.props.historyData}
+										history={this.props.historyData}
                   />
 									</>
 									}

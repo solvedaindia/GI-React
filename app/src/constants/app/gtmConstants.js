@@ -11,4 +11,8 @@ export const affiliationParamGTag = 'Online Store';
 export const formSubmissionGTagEvent = 'formSubmission';
 
 export const BOOK_A_CONSULTATION_FORM_TYPE = 'Book A Consultation';
-export const KITCHEN_FORM_POSITION = 'Kitchen';
+export const FORM_POSITION = {
+  wardrobes: 'Modular Wardrobes',
+  kitchen: 'Kitchen',
+  default: 'Kitchen',
+};

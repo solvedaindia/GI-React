@@ -47,7 +47,7 @@ export const SAVE_YOUR_ADDRESS = 'Please save you address first';
 export const REQUIRED_FIELD = 'This is a required field';
 export const ENTER_VALID_STATE = 'Please enter valid State.';
 export const VALID_CITY_DISTRICT = 'Please enter valid City/District.';
-export const VALID_ADDRESS = 'Please enter valid Address.';
+export const VALID_ADDRESS = 'Please enter valid Address of maximum 70 characters.';
 export const VALID_PINCODE = 'Please enter valid Pincode.';
 export const VALID_EMAIL = 'Please enter valid Email ID.';
 export const PAY_BY = 'Pay by';
@@ -60,7 +60,7 @@ export const WALLETS = 'Wallets';
 export const NET_BANKING = 'Net Banking';
 export const WALLETS_MAPPING = {
   Mobikwik: 'MOBIKWIK',
-  PayTM: 'PAYTM',
+  Paytm: 'PAYTM',
   PhonePe: 'PHONEPE',
   'Oxigen Wallet': 'OXIGEN_WALLET',
   'Pay World Money': 'PAY_WORLD_MONEY',

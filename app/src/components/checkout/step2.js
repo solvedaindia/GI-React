@@ -189,15 +189,16 @@ export class Step2Component extends React.Component {
         });
       });
     }
-    if (this.props.logonBy && this.props.logonBy.includes("@")) {
-      this.setState({
-        email: this.props.logonBy
-      });
-    } else {
-      this.setState({
-        phone: this.props.logonBy
-      });
-    }
+    this.setState({
+      email: this.props.email
+        ? this.props.email
+        : this.props.logonBy && this.props.logonBy.includes('@')
+          ? this.props.logonBy
+          : '',
+      phone: this.props.logonBy && !this.props.logonBy.includes('@')
+        ? this.props.logonBy
+        : '',
+    });
   }
   componentDidUpdate() {
     triggerShipBillAddrGTEvent();
@@ -459,7 +460,7 @@ export class Step2Component extends React.Component {
       case "gst":
         if (value.target.value.length <= 15) {
           return this.setState({
-            inputText_gst: value.target.value
+            inputText_gst: value.target.value.toUpperCase(),
           });
         } else {
           return false;
@@ -1106,7 +1107,7 @@ export class Step2Component extends React.Component {
         document.getElementById("baddress").focus();
         this.setState({
           berror_address: true,
-          berrorMessaget_address: "Please enter valid Address"
+          berrorMessaget_address: !this.state.binputText_address ? `${REQUIRED_FIELD}` : `${VALID_ADDRESS}`,
         });
         return;
       }
@@ -1505,7 +1506,7 @@ export class Step2Component extends React.Component {
 
                           <label
                             className="form-label defaultlbl"
-                            htmlFor="billing"
+                            htmlFor="checkboxBill"
                           >
                             Make this my default address
                           </label>
@@ -1557,7 +1558,7 @@ export class Step2Component extends React.Component {
                         </div>
                         <label
                           className="label-billing defaultlbl"
-                          htmlFor="billing"
+                          htmlFor="checkbox"
                         >
                           Billing address is the same as delivery address
                         </label>
@@ -1730,7 +1731,7 @@ export class Step2Component extends React.Component {
                     ""
                   )}
 
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-md-12 bussinessNote">
                       <h5 className="buying">Buying it for your business?</h5>
                       <div className="noteGstin">
@@ -1758,7 +1759,7 @@ export class Step2Component extends React.Component {
                         ) : null}
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="row">
                     <div className="col-md-12 form-group">
                       {!isMobile() ? (
@@ -1798,7 +1799,7 @@ export class Step2Component extends React.Component {
 
                         <label
                           className="form-label defaultlbl"
-                          htmlFor="billing"
+                          htmlFor="checkboxBill"
                         >
                           Make this my default address
                         </label>

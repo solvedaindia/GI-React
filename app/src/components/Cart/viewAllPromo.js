@@ -103,7 +103,11 @@ class ViewAllPromo extends React.Component {
                   return (
                     <li className="promoListItem" key={index}>
                       <p className="promoCode">{sellerItemData.promocode}</p>
-                      <p className="promoDesc">{sellerItemData.description}</p>
+                      <p className="promoDesc">
+                        {sellerItemData.shortDesc !== ''
+                          ? sellerItemData.shortDesc
+                          : sellerItemData.description}
+                      </p>
                       <button
                         disabled={this.state.isApplyDisable}
                         className="applyPromo"

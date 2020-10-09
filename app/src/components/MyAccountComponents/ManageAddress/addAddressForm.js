@@ -697,7 +697,7 @@ class AddAddressForm extends React.Component {
                 />
                 <label className="lblCheck" htmlFor="checkbox" />
               </div>
-              <label className="defaultlbl">{DEFAULT_ADDRESS}</label>
+              <label className="defaultlbl" htmlFor='checkbox'>{DEFAULT_ADDRESS}</label>
             </div>
           </div>
         )}

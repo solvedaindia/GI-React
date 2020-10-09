@@ -273,8 +273,8 @@ export class Step1Component extends React.Component {
                         
                         <div className='havePassword customCheckbox clearfix'>
                           <div className='input_box'>
-                            <input className='checkBox inputCheck' id="checkbox" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
-                            <label className="lblCheck" htmlFor="checkbox"></label>
+                            <input className='checkBox inputCheck' id="has_pass" type="checkbox" name="has_pass" onChange={this.handleHasPass} />
+                            <label className="lblCheck" htmlFor="has_pass"></label>
                           </div>
                           <label className='form-label defaultlbl' htmlFor="has_pass">{I_HAVE_PASSWORD}</label>
                         </div>

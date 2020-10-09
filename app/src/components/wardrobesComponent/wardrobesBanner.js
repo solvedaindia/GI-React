@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import apiManager from '../../utils/apiManager';
 import '../../../public/styles/slider.scss';
-import  '../../../public/styles/static-pages/warobes.scss';
+import '../../../public/styles/static-pages/wardrobes.scss';
 
 import {imagePrefix,espotAPI} from '../../../public/constants/constants';
 

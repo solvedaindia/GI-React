@@ -86,8 +86,8 @@ class productInfo extends React.Component {
             { parseInt(this.props.productData.discount) > 1 &&
               <>Get {parseInt(this.props.productData.discount)} % OFF </>
             }
-            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
-            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].shortDesc &&
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].shortDesc}{' '}</span></>
             }
           </div>)
           :
@@ -95,8 +95,8 @@ class productInfo extends React.Component {
             { parseInt(this.props.productData.discount) > 1 &&
               <><span className='discount-text-off'>Get {parseInt(this.props.productData.discount)}% OFF </span></>
             }
-            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].name &&
-            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].name}{' '}</span></>
+            { this.props.productData.promotions.length > 0 && this.props.productData.promotions[0].shortDesc &&
+            <><span className="free-accessories">{parseInt(this.props.productData.discount) > 1 && '& '}{this.props.productData.promotions[0].shortDesc}{' '}</span></>
             }
           </div>)
           }
@@ -118,7 +118,7 @@ class productInfo extends React.Component {
           <ul className="cashoffer-wrapper">
             {this.props.productData.promotions.map((promotion, i) => (
               <li className="list" key={i}>
-                <h4 className="heading">{promotion.name}</h4>
+                <h4 className="heading">{promotion.promocode}</h4>
                 {this.BoldedText(promotion.description,promotion.promocode)} <TermsAndCondition espotPromo={this.props.espotPromo} />
               </li>
             ))}

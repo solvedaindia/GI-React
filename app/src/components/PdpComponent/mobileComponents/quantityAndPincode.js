@@ -11,10 +11,19 @@ import appCookie from '../../../utils/cookie';
 import ExperienceStore from '../experienceStore';
 import { isMobile } from '../../../utils/utilityManager';
 import ProductInfo from '../productInfo';
+import CustomerQueryModal from '../../CustQuery';
 
 import Mapflag from '../../../components/SVGs/mapflag.svg';
+import {
+  ADD_TO_CART,
+  QUANTITY,
+  NOT_AVAILABLE,
+  ESTIMATED_DELIVERY,
+  FREE,
+  NOT_DELIVER_PRE,
+  NOT_DELIVER_POST,
+} from '../../../constants/app/pdpConstants';
 const PINCODE_REGEX = /^[1-9][0-9]{0,5}$/;
-import {ADD_TO_CART,QUANTITY,NOT_AVAILABLE,ESTIMATED_DELIVERY,FREE} from '../../../constants/app/pdpConstants';
 
 class addToCartComponent extends React.Component {
   constructor(props) {
@@ -25,10 +34,12 @@ class addToCartComponent extends React.Component {
       pincodeVal: appCookie.get('pincode'),
       isEdit: true,
       qtyVal: 1,
-      isPincodeValid: true
+      isPincodeValid: true,
+      showCustQueryModal: false,
     };
     this.quantityErrorMessage = false;
     this.deliveryTime = '';
+    this.toggleCustQueryModal = this.toggleCustQueryModal.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -37,24 +48,34 @@ class addToCartComponent extends React.Component {
     this.setState({
       qtyVal: 1,
       isPincodeValid: true
-    })
+    });
   }
 
   /* render delivery message */
-  renderdeliveryMessage(props) 
-  {
-      let errorMsg = '';
-      if (this.state.isPincodeValid === false) {
-        errorMsg = 'Please enter valid pincode';
-        return <div className="pincodeNotServiceable">{errorMsg}</div>;
-      }
+  renderdeliveryMessage(props) {
+    let errorMsg = '';
+    if (this.state.isPincodeValid === false) {
+      errorMsg = 'Please enter valid pincode';
+      return <div className="pincodeNotServiceable">{errorMsg}</div>;
+    }
 
     if (props.pincodeServiceable === false) {
-      errorMsg = 'Sorry we currently do not deliver in this area. Please enter another pincode';
+      errorMsg = NOT_DELIVER_PRE + NOT_DELIVER_POST;
       if (props.error) {
-        errorMsg = props.error;	
+        errorMsg = props.error;
       }
-	  return <div className="pincodeNotServiceable">{errorMsg}</div>;
+      return (
+        <div className="pincodeNotServiceable">
+          {NOT_DELIVER_PRE}
+          <button
+            type="button"
+            className="cust-query-modal-toggler"
+            onClick={this.toggleCustQueryModal}
+          >
+            {NOT_DELIVER_POST}
+          </button>
+        </div>
+      );
     }
     if(props.inventoryStatus=== 'unavailable')
     {
@@ -143,23 +164,28 @@ class addToCartComponent extends React.Component {
     return <Button className="btn addcartbtn" id={btnId} onClick={this.findInventory} disabled={false}>Add to Cart</Button>
   }
 
-  render() {
-  let storeText = 'store';
-  let btnName = 'Update';
-  let pincodeFocusId = 'pincodeVal';
-	if (this.props.pinCodeData.experienceStore) {
-		if (this.props.pinCodeData.experienceStore.length > 2) {
-			storeText = 'stores';
-		}
+  toggleCustQueryModal() {
+    this.setState(prevState => ({
+      showCustQueryModal: !prevState.showCustQueryModal,
+    }));
   }
 
-  if (this.state.isEdit === true) {
-    btnName = 'Edit';
-    pincodeFocusId = '';
-  }
-	  return (
+  render() {
+    let storeText = 'store';
+    let btnName = 'Update';
+    let pincodeFocusId = 'pincodeVal';
+    if (this.props.pinCodeData.experienceStore) {
+      if (this.props.pinCodeData.experienceStore.length > 2) {
+        storeText = 'stores';
+      }
+    }
+    if (this.state.isEdit === true) {
+      btnName = 'Edit';
+      pincodeFocusId = '';
+    }
+    const { showCustQueryModal } = this.state;
+    return (
       <>
-        
         {this.state.addToCartPopup}
         
         {isMobile() ?  
@@ -245,6 +271,15 @@ class addToCartComponent extends React.Component {
 			}
 			</>
         )}
+        {
+          <CustomerQueryModal
+            show={showCustQueryModal}
+            partNumber={this.props.skuData.partNumber}
+            productName={this.props.skuData.productName}
+            pincode={this.state.pincodeVal}
+            toggleHandler={this.toggleCustQueryModal}
+          />
+        }
       </>
     );
   }

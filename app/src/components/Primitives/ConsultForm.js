@@ -34,7 +34,7 @@ import {
 import { triggerFormSubmissionGTEvent } from "../../utils/gtm";
 import {
   BOOK_A_CONSULTATION_FORM_TYPE,
-  KITCHEN_FORM_POSITION
+  FORM_POSITION,
 } from "../../constants/app/gtmConstants";
 
 class ConsultForm extends React.Component {
@@ -47,7 +47,7 @@ class ConsultForm extends React.Component {
       dropDownValue: "",
       message: "",
       dropDownArr: [],
-      index: 0,
+      index: null,
       errorMessageName: null,
       errorMessageEmail: null,
       errorMessageDropOption: null,
@@ -98,7 +98,7 @@ class ConsultForm extends React.Component {
       mobileNumber: "",
       dropDownValue: "Select an option",
       message: "",
-      index: 0,
+      index: null,
       errorMessageName: null,
       errorMessageEmail: null,
       errorMessageDropOption: null,
@@ -177,7 +177,7 @@ class ConsultForm extends React.Component {
     }
 
     // For drop option validation
-    if (obj.index == 0) {
+  if (obj.index === null) {
       this.setState({
         errorMessageDropOption: SELECT_OPTION_MSG
       });
@@ -210,20 +210,40 @@ class ConsultForm extends React.Component {
   };
 
   callConsultApi = () => {
-    //const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
+    // const contact_id = Date.now().toString()+ Math.floor(Math.random()*1000).toString();
 
     triggerFormSubmissionGTEvent(
       BOOK_A_CONSULTATION_FORM_TYPE,
-      KITCHEN_FORM_POSITION
+      FORM_POSITION[this.props.sourcePage || 'default'],
     );
     const message = this.state.message.split("&").join("and");
-
+    const urlSearchParams = new URLSearchParams(
+      window.location.search.substring(1),
+    );
     const data = {
       name: this.state.name,
       mobileNumber: this.state.mobileNumber,
       email: this.state.email,
       dropDownValue: this.state.dropDownValue,
-      message: message
+      message,
+      utmPlacement: urlSearchParams.get('utm_placement')
+        ? urlSearchParams.get('utm_placement')
+        : '',
+      utmMedia: urlSearchParams.get('utm_medium')
+        ? urlSearchParams.get('utm_medium')
+        : '',
+      utmKeyword: urlSearchParams.get('utm_keyword')
+        ? urlSearchParams.get('utm_keyword')
+        : '',
+      utmAddgroup: urlSearchParams.get('utm_adgroup')
+        ? urlSearchParams.get('utm_adgroup')
+        : '',
+      utmCampaign: urlSearchParams.get('utm_campaign')
+        ? urlSearchParams.get('utm_campaign')
+        : '',
+      utmSource: urlSearchParams.get('utm_source')
+        ? urlSearchParams.get('utm_source')
+        : '',
     };
     apiManager
       .post(consultFormApi, data)
@@ -282,12 +302,18 @@ class ConsultForm extends React.Component {
         .catch(error => {}});*/
   };
   getConsultDropDownApi = () => {
+    const sourcePage = this.props.sourcePage || 'default';
+    const consultGetApiUrl = `${consultGetApi}?sourcePage=${sourcePage}`;
     apiManager
-      .get(consultGetApi)
+      .get(consultGetApiUrl)
       .then(response => {
         const { data } = response || {};
         this.setState({
-          dropDownArr: data.data.consultationData
+          dropDownArr: data.data.consultationData,
+          dropDownValue:
+            this.state.index !== null
+              ? data.data.consultationData[this.state.index]
+              : '',
         });
       })
       .catch(error => {
@@ -305,19 +331,11 @@ class ConsultForm extends React.Component {
     let items = [];
     let currentIndex = this.state.index;
     items = this.state.dropDownArr.map((item, index) => {
-      if (currentIndex == 0) {
-        return (
-          <option key={item} value={index}>
-            {item}
-          </option>
-        );
-      } else {
-        return (
-          <option key={item} value={index}>
-            {item}
-          </option>
-        );
-      }
+      return (
+        <option key={item} value={index} selected={currentIndex === index}>
+          {item}
+        </option>
+      );
     });
 
     return items;
@@ -329,9 +347,9 @@ class ConsultForm extends React.Component {
       this.state.dropDownValue !== e.target.value
     ) {
       this.setState({
-        dropDownValue: e.target.value,
-        index: e.target.selectedIndex,
-        errorMessageDropOption: null
+        dropDownValue: this.state.dropDownArr[e.target.value],
+        index: e.target.value,
+        errorMessageDropOption: null,
       });
     }
   };
@@ -424,9 +442,7 @@ class ConsultForm extends React.Component {
           <div className="col-md-6 ">
             <div className="form-div clearfix div-error">
               <div className="form-group">
-                <label className="form-labeled" htmlFor="dropdown">
-                  {WHAT_YOU_LIKE}
-                </label>
+                <label className="form-labeled" htmlFor="dropdown">{WHAT_YOU_LIKE[this.props.sourcePage] || WHAT_YOU_LIKE['default']}</label>
                 <select
                   name="dropDownValue"
                   onChange={this.onDropdownSelected}
@@ -434,7 +450,7 @@ class ConsultForm extends React.Component {
                   className="form-control"
                   required
                 >
-                  <option value="Select an option" selected>
+                        <option value="Select an option" selected={!this.state.index}>
                     {SELECT_OPTION}
                   </option>
                   {this.createSelectItems()}
@@ -471,20 +487,8 @@ class ConsultForm extends React.Component {
           <div className="col-md-12">
             <div className="form-div clearfix div-error">
               <div className="form-group">
-                <label className="form-labeled" htmlFor="massage">
-                  {MESSEGE}
-                </label>
-                <input
-                  onKeyPress={this.onKeyPress}
-                  className="form-control"
-                  onChange={this.handleChange}
-                  onClick={this.handleChange}
-                  value={message}
-                  id="message"
-                  name="message"
-                  type="text"
-                  required
-                />
+                <label className="form-labeled" htmlFor="massage">{MESSEGE[this.props.sourcePage] || MESSEGE['default']}</label>
+                      <input  onKeyPress={this.onKeyPress} className="form-control"  onChange={this.handleChange} onClick={this.handleChange} value={message}  id="message" name="message" type="text" required/>
                 {errorMessageDescription}
               </div>
             </div>

@@ -128,10 +128,10 @@ export function validatePindcode(data) {
 /** -----------------------------------------------------------------------
  * Validate Address
  * @param {*} data
- * Should be 200 character limit
+ * Should be 70 character limit
  */
 export function validateAddress(data) {
-  if (data.length <= 200 && validateEmptyObject(data)) {
+  if (data.length <= 70 && validateEmptyObject(data)) {
     return true;
   }
   return false;

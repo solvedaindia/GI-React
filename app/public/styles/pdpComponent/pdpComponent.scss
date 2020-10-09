@@ -555,9 +555,15 @@
 
             .pincodeNotServiceable {
                 font-size: 10px;
-                padding: 5px 0px 5px 19px;
+                padding: 5px 0px 5px 10px;
                 background: $greybg;
-                color:$reddishPink;                
+                color:$reddishPink;
+                .cust-query-modal-toggler {
+                    border: none;
+                    background-color: transparent;
+                    text-decoration: underline;
+                    color: blue;
+                }             
             }
         }
 

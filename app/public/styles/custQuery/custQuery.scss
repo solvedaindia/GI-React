@@ -1,0 +1,175 @@
+@import '../variable';
+@import '../app.scss';
+
+.modal-cust-query {
+  .modal-dialog {
+    .modal-content {
+      .modal-body {
+        .close{
+          top:20px;
+          &:before, &:after {
+            background: $black;
+            top: 8px;
+          }
+        }
+        .cust-query-inner {
+          margin: 0 auto;
+          width: 90%;
+          .info-label {
+            font-size: 12px;
+            color: $battleshipGrey;
+            background: transparent;
+            font-family: $font-medium;
+            font-weight: normal;
+            padding: 10px 15px;
+          }
+          .info {
+            font-size: 12px;
+            background: transparent;
+            font-family: $font-medium;
+            font-weight: normal;
+            font-size: 14px;
+            color: $black;
+            padding: 10px 5px;
+          }
+          .heading{
+            margin: 0 0 25px 0;
+            color: $black;
+            font-family: $font-bold;
+            font-size: 18px;
+            text-align: center;
+          }
+          .form-group {
+            position: relative;
+            padding: 0px;
+            margin-bottom: 10px;
+            .form-control{
+              border-radius: 2px;
+              box-shadow: none;
+              height: 50px;
+            }
+            .label{
+              color: $battleshipGrey;
+              text-transform: capitalize;
+              background: transparent;
+              margin: 0;
+              display: block;
+              text-align: left;
+              padding: 0 0 2px 0;
+              font-family: $font-medium;
+              font-size: 12px;
+              font-weight: normal;
+            }
+            .error-msg {
+              color: #ee4060;
+              font-size: 12px;
+              min-height: 13px;
+              line-height: 13px;
+              bottom: 0;
+              width: 100%;
+              margin: 0px;
+            }
+            .submit-btn {
+              height: 50px;
+              margin: 0;
+            }
+            .submit-btn:disabled {
+              background: #424b5a;
+              cursor: not-allowed;
+            }
+            .message {
+              margin: 0;
+              .success {
+                color: green;
+              }
+              .failed {
+                color: #ee4060;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive View
+@media (max-width: 767px) {
+  .modal-cust-query {
+    top: initial !important;
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          padding: 25px 0;
+          .cust-query-inner {
+            .form-group {
+              .message {
+                min-height: 13px;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .modal-cust-query-success {
+    top: initial !important;
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          padding: 20px;
+          text-align: center;
+          .message {
+            min-height: 15px;
+            font-size: 14px;
+            margin: 15px 0;
+          }
+          .success-btn {
+            margin: 15px 0 8px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Web View
+@media (min-width: 768px) {
+  .modal-cust-query {
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          padding: 25px;
+          .cust-query-inner {
+            .form-group {
+              .message {
+                min-height: 15px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .modal-cust-query-success {
+    .modal-dialog {
+      width: 25%;
+      .modal-content {
+        .modal-body {
+          padding: 25px;
+          text-align: center;
+          .message {
+            min-height: 15px;
+            font-size: 14px;
+            margin: 15px 0;
+          }
+          .success-btn {
+            margin: 15px 0 8px 0;
+          }
+        }
+      }
+    }
+  }
+}
