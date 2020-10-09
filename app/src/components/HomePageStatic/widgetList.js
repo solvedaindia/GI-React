@@ -9,6 +9,7 @@ import Recommendation from '../Recommendation/reco';
 import TrackOrder from '../TrackOrder/trackOrder';
 import { getCookie } from '../../utils/utilityManager';
 import ExStore from '../ExStore/exStore';
+import GodrejSolution from '../Primitives/godrej-solution';
 
 export default function WidgetList({ componentType, ...rest }) {
   switch (componentType) {
@@ -16,7 +17,7 @@ export default function WidgetList({ componentType, ...rest }) {
       return <Slider {...rest} />;
     case 'mini_track_order':
       if (getCookie('isLoggedIn') === 'true') {
-        return <TrackOrder {...rest} /> ;
+        return <TrackOrder {...rest} />;
       } else return null;
     case 'best_selling':
       return <BestSeller {...rest} />;
@@ -30,6 +31,8 @@ export default function WidgetList({ componentType, ...rest }) {
       return <Recommendation {...rest} />;
     case 'read_more':
       return <ReadMore />;
+    case 'godrej_solution':
+      return <GodrejSolution {...rest} />;
     default:
       return null;
   }

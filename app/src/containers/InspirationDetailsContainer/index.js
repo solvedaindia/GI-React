@@ -16,7 +16,7 @@ class InspirationDetails extends React.Component {
     render(){
         return(
             <>
-       <ContentEspot espotName={ 'GI_PIXEL_LOOKBOOK_BODY_START' } />
+       {/* <ContentEspot espotName={ 'GI_PIXEL_LOOKBOOK_BODY_START' } /> */}
  <div className="staticpage inspirationDetails">
             
 					<Pixels espotName= {'GI_PIXEL_LOOKBOOK_META'}/>
@@ -27,7 +27,7 @@ class InspirationDetails extends React.Component {
                 <ContentEspot espotName={ 'GI_LOOKBOOK_3' } />
                <ContentEspot espotName={ 'GI_LOOKBOOK_4' } />
                </div>
-         <ContentEspot espotName={ 'GI_PIXEL_LOOKBOOK_BODY_END' } />
+         {/* <ContentEspot espotName={ 'GI_PIXEL_LOOKBOOK_BODY_END' } /> */}
 </>
         )
     }

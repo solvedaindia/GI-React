@@ -12,11 +12,10 @@ import HeaderL1 from '../../components/HeaderComponent/headerL1/headerL1';
 import HeaderL2 from '../../components/HeaderComponent/headerL2/headerL2';
 import Logo from '../../components/SVGs/logo';
 import HeaderMobile from './HeaderMobile/index';
-import {isMobile} from '../../utils/utilityManager'
+import { isMobile, scrollPage } from '../../utils/utilityManager';
 import '../../../public/styles/headerContainer/headerContainer.scss';
 import ContentEspot from '../../components/Primitives/staticContent';
 import { webUrl } from '../../../public/constants/constants';
-import { scrollPage } from '../../utils/utilityManager';
 
 
 
@@ -39,14 +38,15 @@ export class HeaderContainer extends React.Component {
   }
 
   render() {
-    
+    /*
     let searchStr = '';
-	let dataVal = '';
+    let dataVal = '';
     if (document.getElementById('searchInput')) {
-       searchStr = document.getElementById('searchInput').value;
-	}
-	if (searchStr != '') {
-	    dataVal = <Helmet>
+      searchStr = document.getElementById('searchInput').value;
+    }
+    if (searchStr !== '') {
+      dataVal = (
+        <Helmet>
           <script data-react-helmet="true" type="application/ld+json">
             {`[{
               "@context": "http://schema.org",
@@ -60,34 +60,35 @@ export class HeaderContainer extends React.Component {
 			  }]
             `}
           </script>
-		  
-       </Helmet>
-    }
-	else{
-		dataVal = <Helmet>
-		 <script data-react-helmet="true" type="application/ld+json">
+        </Helmet>
+      );
+    } else {
+      dataVal = (
+        <Helmet>
+          <script data-react-helmet="true" type="application/ld+json">
             {`[{
               "@context": "http://schema.org",
               "@type": "WebSite",
               "url": "${webUrl}"
 			  }]
             `}
-		   </script>
-       </Helmet>
-	}
-   
+          </script>
+        </Helmet>
+      );
+    }
+    */
     if (isMobile()) {
       return (
         <>
-        {dataVal}
-        <HeaderMobile />
+          {/* {dataVal} */}
+          <HeaderMobile />
         </>
       );
     }
     return (
       <>
-      {dataVal}
-      <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } />
+        {/* {dataVal} */}
+      {/* <ContentEspot espotName = { 'GI_PIXEL_HEADER_TOP' } /> */}
       <header className="appheader" id='header'>
         <div className="logo">
           {window.location.pathname === '/' ? (<a href="/"><Logo /></a>):(<Link to="/"><Logo /></Link>)}

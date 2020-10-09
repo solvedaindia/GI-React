@@ -13,6 +13,7 @@ import RegisterModalData from '../RegisterComponent/registerModalData';
 import { userDetailAPI } from '../../../public/constants/constants';
 import { logoutTheUser } from '../../utils/initialManager';
 import { MY_ORDER, MANAGE_ADDRESSES, WELCOME_INTERIO, LOGIN_REGISTER, HELLO_GUEST } from '../../constants/app/primitivesConstants';
+import { regexEmail, regexMobileNo } from '../../utils/validationManager';
 
 class UserAccInfo extends React.Component {
   constructor(props) {
@@ -108,7 +109,17 @@ class UserAccInfo extends React.Component {
 
           appCookie.set('name', response.data.data.name, 365 * 24 * 60 * 60 * 1000);
           appCookie.set('loginID', response.data.data.logonID, 365 * 24 * 60 * 60 * 1000);
-          
+
+          const updatedIntercomSettings = {};
+          const loginId = appCookie.get('loginID');
+          if (regexEmail.test(loginId)) {
+            updatedIntercomSettings.email = loginId;
+          } else if (regexMobileNo.test(loginId)) {
+            updatedIntercomSettings.email = loginId;
+            updatedIntercomSettings.phone = loginId;
+          }
+          window.Intercom('update', updatedIntercomSettings);
+
           this.showLoginStatus();
           this.props.updateUserProfile(response.data.data.name);
         }

@@ -22,6 +22,7 @@ import ProductItem from '../GlobalComponents/productItem/productItem';
 import AdBanner from './AdBanner/adBanner';
 import appCookie from '../../utils/cookie';
 import {PRODUCT_RESTRICTION, SAME_CAT, DIFF_CAT, ALREADY_ADDED  } from '../../constants/app/plpConstants';
+import GSchemas from '../GSchemas';
 
 class PlpComponent extends React.Component {
   constructor(props) {
@@ -138,9 +139,29 @@ class PlpComponent extends React.Component {
         coloumnLayout = 'plp-products grid1';
       }
     }
+    const gSchemasList = [];
+    if (this.props.plpDataPro && this.props.plpDataPro.length !== 0) {
+      gSchemasList.push({
+        type: 'listing',
+        itemsList: this.props.plpDataPro.map(item => ({
+          partNumber: !this.props.showSkuPro
+            ? item.skuList[0].partNumber
+            : item.partNumber,
+          productName: !this.props.showSkuPro
+            ? item.skuList[0].productName
+            : item.productName,
+          shortDescription: !this.props.showSkuPro
+            ? item.skuList[0].shortDescription
+            : item.shortDescription,
+        })),
+      });
+    }
     return (
-      <ul className={coloumnLayout}>{this.state.plpItem}</ul>
-      
+      <>
+        {gSchemasList &&
+          gSchemasList.length !== 0 && <GSchemas schemas={gSchemasList} />}
+        <ul className={coloumnLayout}>{this.state.plpItem}</ul>
+      </>
     );
   }
 }

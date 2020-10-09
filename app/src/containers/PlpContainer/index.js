@@ -44,6 +44,7 @@ import Breadcrumb from '../../components/Breadcrumb/breadcrumb';
 import ContentEspot from '../../components/Primitives/staticContent';
 import { createPlpItemData,isMobile } from '../../utils/utilityManager';
 import { triggerImpressionsGTEvent, unmountImpressionsGTEvent } from '../../utils/gtm';
+import GSchemas from '../../components/GSchemas';
 
 let categoryId;
 export class PlpContainer extends React.Component {
@@ -703,18 +704,28 @@ remoiveSelection(selectionFacetValue)
       );
     }
 
+    const gSchemasList = [];
+    if (this.state.isFromSearch.includes('/search')) {
+      gSchemasList.push({
+        type: 'search',
+        searchTerm: keywoard,
+      });
+    }
+    
     return (
       <>
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
-          <Pixels
+        {gSchemasList &&
+          gSchemasList.length !== 0 && <GSchemas schemas={gSchemasList} />}
+        {/* <ContentEspot espotName={'GI_PIXEL_PLP_BODY_START' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} /> */}
+        <Pixels
           description={this.state.categoryDetail.metaDescription}
           title={this.state.isFromSearch.includes('/search') ? 'Experience our products first hand at your nearest Godrej Interio store' : this.state.categoryDetail.pageTitle} 
           alt={this.state.categoryDetail.imageAltText}
           image={this.state.categoryDetail.fullImage}
-          />
-          <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
-            {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
-          </script>
+        />
+        {/* <script type="application/ld+json" nonce="383143991673915569" id="jsonLD">
+          {`[{"@context":"http://schema.org","@type":"ItemList","itemListElement":${JSON.stringify(itemData)}}]`}
+        </script> */}
         {marketingBanner}
         {breadcrumbItem}
         {subCategories}
@@ -787,7 +798,7 @@ remoiveSelection(selectionFacetValue)
               searchKeywordPro={keywoard}
             />
           </div> : null}
-        <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} />
+        {/* <ContentEspot espotName={'GI_PIXEL_PLP_BODY_END' + (this.props.match.params.id ? '_' + this.props.match.params.id.toUpperCase().replace(' ', '') : '')} /> */}
 
       </>
     );

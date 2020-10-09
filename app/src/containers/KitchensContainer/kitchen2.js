@@ -60,7 +60,7 @@ mdfShutt()
 render(){
 return (
   <>
-    <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } />
+    {/* <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_START' } /> */}
     <div className="staticpage chefKitchen">
 		
 			<Pixels espotName= {'GI_PIXEL_CHEF_KITCHEN_META'}/>
@@ -88,7 +88,7 @@ return (
 		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_10' } />
 		  <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_11' } />
     </div>
-    <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_END' } />
+    {/* <ContentEspot espotName={ 'GI_PIXEL_CHEF_KITCHEN_BODY_END' } /> */}
   </>
 )
 }

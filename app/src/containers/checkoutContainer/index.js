@@ -28,12 +28,12 @@ export class CheckoutContainer extends React.Component {
     render() {
       return (
         <>
-         <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_START' } />
+         {/* <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_START' } /> */}
          <div>
 					<Pixels espotName= {'GI_PIXEL_CHECKOUT_META'}/>
           <CheckoutComponent />
         </div>
-        <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_END' } />
+        {/* <ContentEspot espotName = { 'GI_PIXEL_CHECKOUT_BODY_END' } /> */}
         </>
       )
     }

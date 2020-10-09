@@ -36,7 +36,7 @@ import {
 } from '../../../utils/utilityManager';
 import { ADD_TO_COMPARE } from '../../../constants/app/footerConstants';
 import { triggerProductClickGTEvent } from '../../../utils/gtm';
-
+import { TAX_DISCLAIMER } from '../../../constants/app/pdpConstants';
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -162,6 +162,7 @@ class ProductItem extends React.Component {
                 offerPrice={this.state.data.offerPrice}
               />
             </p>
+            <span className="tax-disclaimer">{TAX_DISCLAIMER}</span>
             <Promotions
               promoData={this.state.data.promotionData}
               discount={this.state.data.discount}

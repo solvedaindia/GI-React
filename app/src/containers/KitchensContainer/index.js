@@ -33,7 +33,7 @@ export class KitchenContainer extends React.Component {
     return (
       <>
         <Breadcrumb {...this.props.match.params} staticName={ 'Kitchen Collections' } />
-        <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } />
+        {/* <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_START' } /> */}
         <section className="staticpage kitchenContainer">
 		   
 			 <Pixels espotName= {'GI_PIXEL_KITCHEN_META'}/>
@@ -64,7 +64,7 @@ export class KitchenContainer extends React.Component {
           <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_12' } />
           <ContentEspot espotName={ 'GI_MODULAR_KITCHEN_13' } />
         </section>
-        <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_END' } />
+        {/* <ContentEspot espotName={ 'GI_PIXEL_KITCHEN_BODY_END' } /> */}
       </>
     );
   }

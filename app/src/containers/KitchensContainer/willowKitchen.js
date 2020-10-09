@@ -20,7 +20,7 @@ export default class WillowKitchens extends React.Component {
 	render() {
 		return (
 			<>
-				<ContentEspot espotName={'GI_PIXEL_WILLOW_KITCHEN_BODY_START'} />
+				{/* <ContentEspot espotName={'GI_PIXEL_WILLOW_KITCHEN_BODY_START'} /> */}
 				<div className="staticpage willowKitchen">
 					
 						<Pixels espotName={'GI_PIXEL_WILLOW_KITCHEN_META'} />
@@ -48,7 +48,7 @@ export default class WillowKitchens extends React.Component {
 					<ContentEspot espotName={'GI_MODULAR_KITCHEN_10'} />
 					<ContentEspot espotName={'GI_MODULAR_KITCHEN_11'} />
 				</div>
-				<ContentEspot espotName={'GI_PIXEL_WILLOW_KITCHEN_BODY_END'} />
+				{/* <ContentEspot espotName={'GI_PIXEL_WILLOW_KITCHEN_BODY_END'} /> */}
 			</>
 
 

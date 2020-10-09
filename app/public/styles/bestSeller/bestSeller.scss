@@ -53,6 +53,9 @@
         .peiceDeatils {
             margin: 0;
         }
+        .tax-disclaimer {
+          font-size: 10px;
+        }
         .discPrice {
             color: $cerulean;
             font-family: $font-bold;
@@ -166,6 +169,9 @@
               font-family: $font-regular;
               padding: 0px 8px;
             }
+         }
+         .tax-disclaimer {
+          font-size: 10px;
          }
           .prodtitle{
             font-size: $base*1.5;

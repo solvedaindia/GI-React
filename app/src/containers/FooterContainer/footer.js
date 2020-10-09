@@ -4,11 +4,8 @@ import { footerApi } from '../../../public/constants/constants';
 import Footer from '../../components/Footer/footer';
 import '../../../public/styles/footerContainer/footerContainer.scss';
 import FooterMobile from './FooterRWD/index';
-import ContentEspot from '../../components/Primitives/staticContent';
 import appCookie from '../../utils/cookie';
-import {
-  regexEmail
-} from '../../utils/validationManager';
+import { regexEmail, regexMobileNo } from '../../utils/validationManager';
 
 class FooterContainer extends React.Component {
   constructor() {
@@ -46,43 +43,20 @@ class FooterContainer extends React.Component {
   }
 
   renderChatBot() {
-    let userName = 'Guest User';
-    let userId = appCookie.get('userID');
-    if (appCookie.get('name')) {
-      userName = appCookie.get('name');
+    const appId = process.env.envKeys.INTERCOM_KEY || 'rf3dsabc';
+    const intercomSettings = {
+      app_id: appId,
+    };
+    const loginId = appCookie.get('loginID');
+    if (appCookie.get('isLoggedIn') === 'true') {
+      if (regexEmail.test(loginId)) {
+        intercomSettings.email = loginId;
+      } else if (regexMobileNo.test(loginId)) {
+        intercomSettings.email = loginId;
+        intercomSettings.phone = loginId;
+      }
     }
-    if (userId == null || userId == '') {
-      userId = appCookie.get('loginID');
-    }
-
-    var appId = "rf3dsabc"; //Prod
-    const env = process.env.envKeys.WCSENDPOINT;
-    if (env === "UAT" || env === "SIT" || env === "LOCAL") {
-      appId = "g35v177u";
-    }
-
-    if(appCookie.get('isLoggedIn') === 'true' && regexEmail.test(appCookie.get('loginID'))){
-      window.Intercom('boot',{
-        app_id: appId,
-        //name: userName, // Full name
-        email: appCookie.get('loginID'), // Email address
-        //created_at: `in ISO 8601: ${Date.now()}`,
-      });
-      //(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/rf3dsabc';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-    } else {
-      window.Intercom('boot', {
-        app_id: appId,
-        //name: userName,
-        //created_at: `in ISO 8601: ${Date.now()}`
-     });
-      //(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/rf3dsabc';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-    }
-    // window.intercomSettings = {
-    //   app_id: "rf3dsabc",
-    //   name: userName, // Full name
-    //   // email: userId, // Email address
-    //   created_at: `in ISO 8601: ${Date.now()}`
-    // };
+    window.Intercom('boot', intercomSettings);
   }
 
   render() 
@@ -130,7 +104,7 @@ class FooterContainer extends React.Component {
               )}
           </footer>
         )}
-        <ContentEspot espotName = { 'GI_PIXEL_FOOTER_END' } />
+        {/* <ContentEspot espotName = { 'GI_PIXEL_FOOTER_END' } /> */}
       </>
     );
   }

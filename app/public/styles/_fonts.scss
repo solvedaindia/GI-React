@@ -48,3 +48,13 @@ $font-regular:CeraGIRegular,sans-serif;
 $font-medium:CeraGIMedium,sans-serif;
 $font-light:CeraGILight,sans-serif;
 $font-bold:CeraGIBold,sans-serif;
+
+@font-face {
+    font-family: 'Gotham-Bold';
+    src: url('./fonts/Gotham/Gotham-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Gotham-Rounded-Bold';
+    src: url('./fonts/Gotham/Gotham-Rounded-Bold.otf');
+}

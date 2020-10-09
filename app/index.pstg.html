@@ -46,12 +46,21 @@
     fbq('init', '466365674294144');
     fbq('track', 'PageView');
   </script>
+  
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/g35v177u';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  </script>
+
+
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=466365674294144&ev=PageView&noscript=1" /></noscript>
   <!-- End Facebook Pixel Code -->
 
   <!-- The first thing in any HTML file should be the charset -->
   <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent" />
 
   <!-- Make the page mobile compatible -->
   <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=yes" />
@@ -60,14 +69,15 @@
 
   <link rel="icon" href="/imagestore/images/godrejInterio/favicon.png" type="image/gif" sizes="16x16">
   <!-- <link rel="icon" href="/favicon.ico" /> -->
+  <!-- This is index.html file for lower environments including Prod Stag -->
 </head>
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WW66KG9"
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WW66KG91111"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->  
-
+  <!-- End Google Tag Manager (noscript) -->
+  
   <!-- Display a message if JS has been disabled on the browser. -->
   <noscript>If you're seeing this message, that means
     <strong>JavaScript has been disabled on your browser</strong>, please
@@ -80,7 +90,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-  <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/rf3dsabc'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script>
+  <!-- <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/g35v177u'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script> -->
 
   <!-- React-Slick -->
   <link rel="stylesheet" type="text/css" charset="UTF-8"
