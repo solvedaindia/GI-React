@@ -83,6 +83,12 @@ class OrderStatusBar extends React.Component {
     } else if (item === "Serviced") {
       statusDate = this.props.shipmentDataPro.servicedDate;
     }
+    //----------for Cancelation
+    else if (item === 'Ordered') {
+      statusDate = this.props.shipmentDataPro.createdDate;
+    } else if (item === 'Cancelled') {
+      statusDate = this.props.shipmentDataPro.statusDate;
+    }
     return statusDate ? statusDate.split(",")[1] : null;
   }
 
