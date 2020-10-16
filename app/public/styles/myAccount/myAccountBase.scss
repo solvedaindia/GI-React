@@ -305,6 +305,7 @@
     .form-div{
       .form-group{
         padding: 5px 0 0 0;
+        margin-bottom: 25px;
         .form-label{
           margin: 0px 0px 0px 15px;
           padding: 0px 7px;
@@ -326,6 +327,10 @@
             font-family: $font-regular;
           }
         }
+      }
+      .error-msg {
+        position: absolute;
+        bottom: -5px;
       }
     }
     .btn-cancel{
