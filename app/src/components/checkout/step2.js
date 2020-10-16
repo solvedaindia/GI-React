@@ -1731,7 +1731,7 @@ export class Step2Component extends React.Component {
                     ""
                   )}
 
-                  {/* <div className="row">
+                  <div className="row">
                     <div className="col-md-12 bussinessNote">
                       <h5 className="buying">Buying it for your business?</h5>
                       <div className="noteGstin">
@@ -1759,7 +1759,7 @@ export class Step2Component extends React.Component {
                         ) : null}
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                   <div className="row">
                     <div className="col-md-12 form-group">
                       {!isMobile() ? (
