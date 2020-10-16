@@ -123,8 +123,12 @@ class OrderStatusBar extends React.Component {
   }
 
   render() {
+    var refundTimeline = '';
     var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
       console.log("ksksks -- ", this);
+      if (item === "Refund Details") {
+        refundTimeline = " trackorder-wrap-3";
+      }
       return (
         <li class={this.getStatusBarCustomClassname(item, index)}>
           <div className="status">{item}</div>
@@ -153,7 +157,7 @@ class OrderStatusBar extends React.Component {
     });
 
     return (
-      <div class={this.props.customClassPro}>
+      <div class={this.props.customClassPro + refundTimeline}>
         <ul class="track-bar">
           {(this.state.isInCurrenStatus = false)}
           {statusBarItem}
