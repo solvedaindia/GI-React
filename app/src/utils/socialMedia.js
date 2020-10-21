@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   FacebookIcon,
   EmailShareButton,
@@ -7,21 +7,21 @@ import {
   WhatsappShareButton,
   WhatsappIcon,
   TwitterShareButton,
-  TwitterIcon,
-} from 'react-share';
-import { getCookie } from './utilityManager';
+  TwitterIcon
+} from "react-share";
+import { getCookie } from "./utilityManager";
 
 class SocialMedia extends React.Component {
   render() {
     let shareUrl = window.location.href;
-    let title = 'Welcome to Godrej';
+    let title = "Welcome to Godrej";
     if (this.props.productName) {
-      title = `Found this amazing [${
+      title = `Found this amazing ${
         this.props.productName
-      }] on Godrej Interio! Check it Out.`;
+      } on Godrej Interio! Check it Out.`;
     } else if (this.props.fromWislistPro) {
       title = `Checkout the designs ${getCookie(
-        'name',
+        "name"
       )} loves on Godrej Interio!`;
       shareUrl = this.props.sharingURLPro;
     }
