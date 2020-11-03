@@ -132,7 +132,7 @@ class OrderItem extends React.Component {
               />
             );
           })}
-          {showCancelButton && (
+          {showCancelButton && !this.props.isGuestTrackOrderPro && (
             <button
               className={
                 disableCancelButton
