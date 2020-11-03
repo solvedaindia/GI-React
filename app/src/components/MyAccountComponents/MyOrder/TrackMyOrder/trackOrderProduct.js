@@ -99,7 +99,7 @@ class TrackOrderProduct extends React.Component {
                   </div>
                 </div>
                 {/*return message condtion replaced by true */}
-                {returnMessage && (
+                {returnMessage && !this.props.isGuestTrackOrderPro && (
                   <div className="cancelation-text-info">
                     <span className="textval">{returnMessage}</span>
                   </div>

@@ -203,7 +203,7 @@ export class Step3Component extends React.Component {
 
   checkWallet(index) {
     var wallet = this.state.wallets[index];
-    var paymentId = WALLETS_MAPPING[wallet.bankName];
+    var paymentId =  wallet.paymentMethodName  //WALLETS_MAPPING[wallet.bankName];
     var data = {
       BankID: wallet.bankID,
       paymentMode: paymentId,

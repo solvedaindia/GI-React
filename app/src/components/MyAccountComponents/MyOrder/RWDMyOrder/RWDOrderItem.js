@@ -141,7 +141,7 @@ class RWDOrderItem extends React.Component {
             View Order
           </button>
         </div>
-        {showCancelButton && (
+        {showCancelButton && !this.props.isGuestTrackOrderPro && (
           <button
             className={
               disableCancelButton
