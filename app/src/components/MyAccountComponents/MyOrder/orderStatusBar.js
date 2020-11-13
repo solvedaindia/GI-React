@@ -63,7 +63,7 @@ class OrderStatusBar extends React.Component {
     } else if (item === "Delivered" || item === "Delivery") {
       statusDate = this.props.shipmentDataPro.deliveryDate;
     } else if (item === "Installed" || item === "Installation") {
-      statusDate = this.props.shipmentDataPro.installationDate;
+      statusDate = this.props.shipmentDataPro.installationCompleteDate;
     }
     //----------for rso condition start
     else if (item === "Return Initiated") {
