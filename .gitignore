@@ -5,6 +5,7 @@
 /node_modules
 /log
 upload/*
+/build
 # testing
 
 # production
