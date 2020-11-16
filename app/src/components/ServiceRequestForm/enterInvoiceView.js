@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../Primitives/input";
 import { regexInvoice } from "../../utils/validationManager";
-import { getCookie,isMobile } from "../../utils/utilityManager";
+import { getCookie, isMobile } from "../../utils/utilityManager";
 import {
   storeId,
   accessToken,
@@ -60,7 +60,14 @@ class EnterInvoiceView extends React.Component {
       });
       event.target.value = null;
       return;
-    } else if (event.target.files[0].type === "image/gif") {
+    } else if (
+      !(
+        event.target.files[0].type === "image/png" ||
+        event.target.files[0].type === "image/jpeg" ||
+        event.target.files[0].type === "image/jpg" ||
+        event.target.files[0].type === "application/pdf"
+      )
+    ) {
       //alert("File format not supported!");
       this.setState({
         error: true,
@@ -188,38 +195,36 @@ class EnterInvoiceView extends React.Component {
               type="file"
               id="uploadInvoice"
               onChange={this.onFileSelected.bind(this)}
-              accept="image/jpg, image/png, image/jpeg, application/pdf"
+              accept="image/png, image/jpeg, application/pdf"
               style={{ display: "none" }}
             />
+          </div>
+          {isMobile() && (
+            <div className="col-md-6">
+              {this.state.error ? (
+                <div className="error-msg">{this.state.errorMessage}</div>
+              ) : null}
+              {this.props.invoiceFileError ? (
+                <div className="error-msg">
+                  {"Please upload a scanned copy of your invoice"}
+                </div>
+              ) : null}
+            </div>
+          )}
+        </div>
 
-              
-          </div>
-          {isMobile() &&
-          <div className="col-md-6">
+        {!isMobile() && (
+          <div>
             {this.state.error ? (
-                <div className="error-msg">{this.state.errorMessage}</div>
-              ) : null}
-              {this.props.invoiceFileError ? (
-                <div className="error-msg">
-                  {"Please upload a scanned copy of your invoice"}
-                </div>
-              ) : null}
+              <div className="error-msg">{this.state.errorMessage}</div>
+            ) : null}
+            {this.props.invoiceFileError ? (
+              <div className="error-msg">
+                {"Please upload a scanned copy of your invoice"}
               </div>
-            }
+            ) : null}
           </div>
-        
-        {!isMobile() &&
-        <div>
-          {this.state.error ? (
-                <div className="error-msg">{this.state.errorMessage}</div>
-              ) : null}
-              {this.props.invoiceFileError ? (
-                <div className="error-msg">
-                  {"Please upload a scanned copy of your invoice"}
-                </div>
-              ) : null}
-              </div>
-         }
+        )}
       </div>
     );
   }
