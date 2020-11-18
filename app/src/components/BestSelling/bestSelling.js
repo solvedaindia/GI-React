@@ -1,31 +1,76 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
-import apiManager from '../../utils/apiManager';
-import { productTitleCharLimit, productBestSellerTitleCharLimit } from '../../../public/constants/constants';
-import { trimTheSentence } from '../../utils/utilityManager';
+import React from "react";
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import apiManager from "../../utils/apiManager";
+import {
+  productTitleCharLimit,
+  productBestSellerTitleCharLimit,
+  compareAPI
+} from "../../../public/constants/constants";
+import { trimTheSentence } from "../../utils/utilityManager";
 import {
   bestSellerAPI,
   espotAPI,
-  imagePrefix,
-} from '../../../public/constants/constants';
-import { is, formatPrice,createPdpURL, createSEOPdpURL } from '../../utils/utilityManager';
-import '../../../public/styles/bestSeller/bestSeller.scss';
-import '../../../public/styles/slickCustom.scss';
-import { resendOtp } from '../RegisterComponent/constants';
-import Promotions from '../../components/GlobalComponents/productItem/promotion';
-import appCookie from '../../utils/cookie';
-import { triggerProductClickGTEvent } from '../../utils/gtm';
-import { TAX_DISCLAIMER } from '../../constants/app/pdpConstants';
+  imagePrefix
+} from "../../../public/constants/constants";
+import {
+  is,
+  formatPrice,
+  createPdpURL,
+  createSEOPdpURL
+} from "../../utils/utilityManager";
+import "../../../public/styles/bestSeller/bestSeller.scss";
+import "../../../public/styles/slickCustom.scss";
+import { resendOtp } from "../RegisterComponent/constants";
+import Promotions from "../../components/GlobalComponents/productItem/promotion";
+import appCookie from "../../utils/cookie";
+import { triggerProductClickGTEvent } from "../../utils/gtm";
+import { TAX_DISCLAIMER } from "../../constants/app/pdpConstants";
 
 class BestSeller extends React.Component {
   state = {
     bestSellerData: {},
     title: null,
-    productList:null,
+    productList: null,
     isLoading: true,
-    errors: null,
+    errors: null
   };
+
+  getRecentData(data) {
+    let cookieIdArray = new Array();
+    data.map(dataId => {
+      cookieIdArray.push(dataId.uniqueID);
+    });
+    apiManager
+      .get(`${compareAPI}?ids=${cookieIdArray.toString()}`)
+      .then(response => {
+        const { data } = response || {};
+        const productList = data && data.data;
+        let prdArray = new Array();
+        if (Array.isArray(productList)) {
+          productList.map(product => {
+            product.sKUs.map(sku => {
+              if (sku.uniqueID === product.uniqueId) {
+                prdArray.push(sku);
+              }
+            });
+          });
+        }
+        if (prdArray.length > 0) {
+          this.setState({
+            isLoading: false,
+            title: "Recently Viewed",
+            productList: prdArray
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          isLoading: false
+        });
+      });
+  }
 
   getBestSellerData() {
     apiManager
@@ -35,18 +80,18 @@ class BestSeller extends React.Component {
         const bsData = data && data.data;
         const title = data && data.data.title;
         const productList = data && data.data.productList;
-      
+
         this.setState({
-          bestSellerData: (is(bsData, 'Object') && bsData) || [],
+          bestSellerData: (is(bsData, "Object") && bsData) || [],
           isLoading: false,
-          title:title,
-          productList:productList
+          title: title,
+          productList: productList
         });
       })
       .catch(error => {
         this.setState({
           error,
-          isLoading: false,
+          isLoading: false
         });
       });
   }
@@ -56,11 +101,12 @@ class BestSeller extends React.Component {
       appCookie.get("recentProduct") &&
       JSON.parse(appCookie.get("recentProduct").length > 0)
     ) {
-      this.setState({
-        isLoading: false,
-        title: "Recently Viewed",
-        productList: JSON.parse(appCookie.get("recentProduct"))
-      });
+      this.getRecentData(JSON.parse(appCookie.get("recentProduct")));
+      // this.setState({
+      //   isLoading: false,
+      //   title: "Recently Viewed",
+      //   productList: JSON.parse(appCookie.get("recentProduct"))
+      // });
     } else {
       this.getBestSellerData();
     }
