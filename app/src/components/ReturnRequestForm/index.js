@@ -2,7 +2,7 @@ import React from "react";
 import Dropdown from "../ServiceRequestForm/dropdown";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import BankDetails from "./bankDetail";
-import { isMobile } from "../../utils/utilityManager";
+import { isMobile, mapPaymentMethodMode } from "../../utils/utilityManager";
 //import Checkboxes from "../ServiceRequestForm/checkboxes";
 import apiManager from "../../utils/apiManager";
 import {
@@ -77,9 +77,11 @@ class ReturnRequestForm extends React.Component {
       fullPaymentMode,
       bankInfo
     } = this.state;
-    if (selectedReason === "Other") returnReason = otherReason;
-
-    returnReason = selectedReason;
+    if (selectedReason === "Other") {
+      returnReason = otherReason;
+    } else {
+      returnReason = selectedReason;
+    }
 
     const {
       partNumber,
@@ -119,16 +121,17 @@ class ReturnRequestForm extends React.Component {
       transactionId: transactions && transactions[0].transactionID,
       transactionDate: transactions && transactions[0].transactionDate
     };
+    console.log("asdfsdfasdfasdfasdf", data);
 
-    apiManager
-      .post(returnOrderShipment, data)
-      .then(response => {
-        alert("Return request submitted successfully!");
-        isMobile()
-          ? this.props.onCancel()
-          : this.props.renderReturnRequestPro();
-      })
-      .catch(error => {});
+    // apiManager
+    //   .post(returnOrderShipment, data)
+    //   .then(response => {
+    //     alert("Return request submitted successfully!");
+    //     isMobile()
+    //       ? this.props.onCancel()
+    //       : this.props.renderReturnRequestPro();
+    //   })
+    //   .catch(error => {});
   }
 
   getReturnRequestReason(value) {
@@ -225,7 +228,7 @@ class ReturnRequestForm extends React.Component {
           Your refund will be processed to
           {this.state.fullPaymentMode === "COD"
             ? " Bank Account"
-            : ` ${this.state.fullPaymentMode}`}
+            : ` ${mapPaymentMethodMode(this.state.fullPaymentMode)}`}
         </div>
         {this.state.fullPaymentMode === "COD" ? (
           <BankDetails

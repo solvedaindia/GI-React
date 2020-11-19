@@ -30,6 +30,10 @@ class EnterInvoiceView extends React.Component {
   }
   onSelection = (value, index) => {};
   handleInput = event => {
+    this.setState({
+      error: false,
+      errorMessage: ""
+    });
     const flag = regexInvoice.test(event.target.value);
 
     if (event.target.value.length == 12) {
@@ -104,7 +108,9 @@ class EnterInvoiceView extends React.Component {
         const res = JSON.parse(result);
         const imageUrl = res.fileUrl;
         this.setState({
-          upload: imageUrl
+          upload: imageUrl,
+          error: false,
+          errorMessage: ""
         });
         this.props.onInvoiceFile(imageUrl);
       })
