@@ -35,6 +35,12 @@ class TrackOrderProduct extends React.Component {
 
   filterDeliveryInstallationTags() {
     const shipmentData = this.props.shipmentDataPro;
+    if (
+      this.props.prodctDataPro.orderItemStatus &&
+      this.props.prodctDataPro.orderItemStatus === "Cancelled"
+    ) {
+      return;
+    }
     if (shipmentData.expectedDeliveryDate !== "") {
       this.setState({
         dsNameTag: "Delivery on: ",
@@ -99,11 +105,12 @@ class TrackOrderProduct extends React.Component {
                   </div>
                 </div>
                 {/*return message condtion replaced by true */}
-                {returnMessage && !this.props.isGuestTrackOrderPro && (
-                  <div className="cancelation-text-info">
-                    <span className="textval">{returnMessage}</span>
-                  </div>
-                )}
+                {returnMessage &&
+                  !this.props.isGuestTrackOrderPro && (
+                    <div className="cancelation-text-info">
+                      <span className="textval">{returnMessage}</span>
+                    </div>
+                  )}
               </div>
             </div>
             <div className="orderbtn">

@@ -29,6 +29,12 @@ class RWDSingleProduct extends React.Component {
   }
 
   filterDeliveryInstallationTags() {
+    if (
+      this.props.orderDataPro.orderItemStatus &&
+      this.props.orderDataPro.orderItemStatus === "Cancelled"
+    ) {
+      return;
+    }
     const shipmentData = this.props.orderDataPro.shipmentData[0];
     if (shipmentData && shipmentData.expectedDeliveryDate !== "") {
       this.setState({
@@ -130,20 +136,23 @@ class RWDSingleProduct extends React.Component {
               <span>{this.state.dsDateTag}</span>
             </div>
             {/*Cance message condtion replaced by true */}
-            {showCancelMessage && !this.props.isGuestTrackOrderPro && (
-              <div className="cancelation-text-info">
-                <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
-              </div>
-            )}
+            {showCancelMessage &&
+              !this.props.isGuestTrackOrderPro && (
+                <div className="cancelation-text-info">
+                  <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+                </div>
+              )}
             {/*Return message condtion replaced by true for orderline */}
-            {this.props.isFromViewOrder && !this.props.isGuestTrackOrderPro &&
+            {this.props.isFromViewOrder &&
+              !this.props.isGuestTrackOrderPro &&
               returnText && (
                 <div className="cancelation-text-info">
                   <span className="textval">{returnText}</span>
                 </div>
               )}
             {/*Return message condtion replaced by true for shipmentline */}
-            {this.props.isMultiTrackPro && !this.props.isGuestTrackOrderPro &&
+            {this.props.isMultiTrackPro &&
+              !this.props.isGuestTrackOrderPro &&
               returnTextS && (
                 <div className="cancelation-text-info">
                   <span className="textval">{returnTextS}</span>
@@ -181,7 +190,8 @@ class RWDSingleProduct extends React.Component {
           ) : null}
 
           {this.props.isFromViewOrder &&
-            showCancelButton && !this.props.isGuestTrackOrderPro && (
+            showCancelButton &&
+            !this.props.isGuestTrackOrderPro && (
               <button
                 className={
                   btnCancelDisable
@@ -223,7 +233,7 @@ class RWDSingleProduct extends React.Component {
             )}
 
           {!this.props.isGuestTrackOrderPro &&
-          this.props.isFromViewOrder &&
+            this.props.isFromViewOrder &&
             showServiceRequestButton && (
               <button
                 className="btn-borderwhite"

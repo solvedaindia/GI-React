@@ -43,7 +43,9 @@ class ProductOrder extends React.Component {
 
   render() {
     const productData = this.props.prodctDataPro;
-    const showServiceRequestButton = this.props.isGuestTrackOrderPro ? false : productData.serviceRequestOrderLineFlag == "Y";
+    const showServiceRequestButton = this.props.isGuestTrackOrderPro
+      ? false
+      : productData.serviceRequestOrderLineFlag == "Y";
     const isServiceable = productData.isServiceable == "Y";
     const showReturnButton = this.props.isGuestTrackOrderPro
       ? false
@@ -114,8 +116,10 @@ class ProductOrder extends React.Component {
                   <span className="heading">Quantity</span>
                   <span className="textval">{productData.quantity}</span>
                 </div>
-                {productData.shipmentData &&
-                productData.shipmentData.length > 1 ? null : (
+                {(productData.shipmentData &&
+                  productData.shipmentData.length > 1) ||
+                (productData.orderItemStatus &&
+                  productData.orderItemStatus === "Cancelled") ? null : (
                   <div className="delivery quantity">
                     <span className="heading">{this.state.dsNameTag}</span>
                     <span className="textval">{this.state.dsDateTag}</span>
@@ -123,18 +127,20 @@ class ProductOrder extends React.Component {
                 )}
               </div>
               {/*Cance message condtion replaced by true */}
-              {showCancelMessage && !this.props.isGuestTrackOrderPro && (
-                <div className="cancelation-text-info">
-                  <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
-                </div>
-              )}
+              {showCancelMessage &&
+                !this.props.isGuestTrackOrderPro && (
+                  <div className="cancelation-text-info">
+                    <span className="textval">{CACELATION_WINDOW_CLOSE}</span>
+                  </div>
+                )}
 
               {/*return message condtion replaced by true */}
-              {showReturnMessage && !this.props.isGuestTrackOrderPro && (
-                <div className="cancelation-text-info">
-                  <span className="textval">{showReturnMessage}</span>
-                </div>
-              )}
+              {showReturnMessage &&
+                !this.props.isGuestTrackOrderPro && (
+                  <div className="cancelation-text-info">
+                    <span className="textval">{showReturnMessage}</span>
+                  </div>
+                )}
             </div>
           </div>
 
@@ -182,20 +188,21 @@ class ProductOrder extends React.Component {
               </button>
             )}
 
-            {showCancelButton && !this.props.isGuestTrackOrderPro && (
-              <button
-                className={
-                  btnCancelDisable
-                    ? "btn-borderwhite cancel-item disabled"
-                    : "btn-borderwhite cancel-item"
-                }
-                onClick={evt =>
-                  this.props.showCancelModal(this.props.prodctDataPro)
-                }
-              >
-                {cancelText}
-              </button>
-            )}
+            {showCancelButton &&
+              !this.props.isGuestTrackOrderPro && (
+                <button
+                  className={
+                    btnCancelDisable
+                      ? "btn-borderwhite cancel-item disabled"
+                      : "btn-borderwhite cancel-item"
+                  }
+                  onClick={evt =>
+                    this.props.showCancelModal(this.props.prodctDataPro)
+                  }
+                >
+                  {cancelText}
+                </button>
+              )}
           </div>
           {/* <div className='clearfix'></div> //GIP-111
           {productData.shipmentData && productData.shipmentData.length === 1 ?
