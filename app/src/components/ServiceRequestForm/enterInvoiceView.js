@@ -181,6 +181,7 @@ class EnterInvoiceView extends React.Component {
                 value={this.state.invoiceNumber}
                 onChange={this.handleInput}
                 maxLength={12}
+                disabled={this.state.fileName === "" ? false : true}
                 isAutoFocus={true}
                 className="form-control invoiceNumber"
               />
