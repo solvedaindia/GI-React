@@ -123,15 +123,15 @@ class ReturnRequestForm extends React.Component {
     };
     console.log("asdfsdfasdfasdfasdf", data);
 
-    // apiManager
-    //   .post(returnOrderShipment, data)
-    //   .then(response => {
-    //     alert("Return request submitted successfully!");
-    //     isMobile()
-    //       ? this.props.onCancel()
-    //       : this.props.renderReturnRequestPro();
-    //   })
-    //   .catch(error => {});
+    apiManager
+      .post(returnOrderShipment, data)
+      .then(response => {
+        alert("Return request submitted successfully!");
+        isMobile()
+          ? this.props.onCancel()
+          : this.props.renderReturnRequestPro();
+      })
+      .catch(error => {});
   }
 
   getReturnRequestReason(value) {
