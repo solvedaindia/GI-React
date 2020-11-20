@@ -110,6 +110,9 @@ class RWDSingleProduct extends React.Component {
     return (
       <>
         <div className="itemBoxTrack clearfix">
+          {this.props.itemNum && (
+            <div className="shipment-text">Shipment - {this.props.itemNum}</div>
+          )}
           <div className="itemImg">
             <img
               className="imgBox"

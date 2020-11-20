@@ -225,6 +225,10 @@
       .itemBoxTrack {
         padding: 20px 15px 20px 15px;
         margin: 0 0 0px 0;
+        .shipment-text {
+          font-size: $base * 1.75;
+          font-family: $font-bold;
+        }
         .itemImg,
         .itemInfo {
           display: block;

@@ -16,7 +16,7 @@ class TrackOrder extends React.Component {
   }
 
   render() {
-    console.log("trackOrderDataPro", this.props.trackOrderDataPro);
+    let shipmetNumber = 1;
     return (
       <div className="trackMyOrder">
         <div className="bottomDivider">
@@ -26,8 +26,14 @@ class TrackOrder extends React.Component {
           >{`< Back`}</button>
         </div>
         {this.props.trackOrderDataPro.shipmentData.map((item, index) => {
+          console.log("item.status ", item.status);
           return (
             <TrackOrderProduct
+              itemNum={
+                item.status !== "Created" && item.status !== "Packed"
+                  ? shipmetNumber++
+                  : ""
+              }
               prodctDataPro={this.props.trackOrderDataPro}
               shipmentDataPro={item}
               onRSODetail={() => {
