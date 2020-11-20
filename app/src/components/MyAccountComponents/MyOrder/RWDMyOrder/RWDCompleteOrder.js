@@ -2,7 +2,7 @@ import React from "react";
 import RWDSingleProduct from "./RWDSingleProduct";
 import { Link } from "react-router-dom";
 import appCookie from "../../../../utils/cookie";
-import { formatPrice } from "../../../../utils/utilityManager";
+import { formatPrice, mapPaymentMethodMode } from "../../../../utils/utilityManager";
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class RWDCompleteOrder extends React.Component {
 
         <div className="order-payent-method">
           <h2 className="title">Payment Method</h2>
-          <p className="order-text-desc">{orderData.paymentMethod}</p>
+          <p className="order-text-desc">{mapPaymentMethodMode(orderData.paymentMethod)}</p>
         </div>
 
         <div className="order-list-summary">
@@ -148,7 +148,7 @@ class RWDCompleteOrder extends React.Component {
 
                         <p className="refund-row">
                           <span className="info-label">
-                            {refundElement.paymentMode}
+                            {mapPaymentMethodMode(refundElement.paymentMode)}
                           </span>
                           <span className="info-val">
                             ₹{formatPrice(refundElement.refundAmount)}

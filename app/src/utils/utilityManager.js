@@ -492,7 +492,7 @@ export function mapPaymentMethodMode(paymentMode) {
         return 'Debit Card';
     }
     else if (paymentMode === 'NET_BANKING') {
-        return 'Netbanking';
+        return 'Net Banking';
     }
     else if (paymentMode === 'UPI') {
         return 'UPI';

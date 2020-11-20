@@ -131,7 +131,7 @@ class OrderSummery extends React.Component {
                     <tr>
                       <td>{refundElement.transactionID}</td>
                       <td>₹{formatPrice(refundElement.refundAmount)}</td>
-                      <td>{refundElement.paymentMode}</td>
+                      <td>{mapPaymentMethodMode(refundElement.paymentMode)}</td>
                     </tr>
                   );
                 })}
