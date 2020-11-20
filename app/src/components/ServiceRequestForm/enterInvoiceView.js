@@ -121,6 +121,10 @@ class EnterInvoiceView extends React.Component {
 
   onUploadInvoice = () => {
     if (this.state.fileName === "") {
+      this.setState({
+        error: false,
+        errorMessage: ""
+      });
       const uploadInvoice = document.getElementById("uploadInvoice");
       uploadInvoice.click();
     } else {
