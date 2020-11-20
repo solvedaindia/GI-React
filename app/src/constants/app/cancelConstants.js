@@ -10,6 +10,7 @@ export const ERROR_MESSAGE_REASON = "Please choose your reason";
 export const PAYMENT_MODE = "Online Payment Method";
 export const CACELATION_WINDOW_CLOSE = "Cancellation window is closed";
 export const CACELATION_RESAON_ERROR = "";
+export const ENTER_VALID_REASON = 'Please enter a valid reason'
 
 export const DROPDOWN_OPTIONS_ITEM = [
   "Placed order by mistake",

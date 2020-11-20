@@ -14,7 +14,8 @@ import {
   CANCEL_ITEM,
   MESSAGE_REFUND,
   ERROR_MESSAGE_REASON,
-  MESSAGE_REFUND_METHOD
+  MESSAGE_REFUND_METHOD,
+  ENTER_VALID_REASON
 } from "../../constants/app/cancelConstants";
 import { CANCEL, SUBMIT } from "../../constants/app/checkoutConstants";
 import DropDownList from "./dropDownList";
@@ -28,7 +29,7 @@ class CancelComponents extends React.Component {
       value: "",
       text: "",
       reasons: [],
-      error: false,
+      error: undefined,
       errorResponse: undefined,
       orderItem: undefined,
       orderData: undefined
@@ -89,7 +90,7 @@ class CancelComponents extends React.Component {
     // this.setState({showPopUp:'false'});
     if (this.state.value === "") {
       this.setState({
-        error: true
+        error: ERROR_MESSAGE_REASON
       });
     } else {
       //this.setState({showPopUp:'false'});
@@ -98,6 +99,12 @@ class CancelComponents extends React.Component {
   }
 
   cancelOrder() {
+    if (this.state.value === "Other" && this.state.text === '') {
+      this.setState({
+        error: ENTER_VALID_REASON
+      });
+      return;
+    }
     let data = {
       orderid: this.state.orderData.orderID,
       refundmethod:
@@ -192,7 +199,7 @@ class CancelComponents extends React.Component {
                   }
                 />
                 {this.state.error && (
-                  <p className="error-text">{ERROR_MESSAGE_REASON}</p>
+                  <p className="error-text">{this.state.error}</p>
                 )}
                 {/* <RefundMode value= "" text = "" close={this.handleClose} submit={this.handleSubmit}/> */}
                 <div className="paymet-type">
