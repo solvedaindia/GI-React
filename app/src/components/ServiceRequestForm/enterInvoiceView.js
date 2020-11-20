@@ -121,6 +121,10 @@ class EnterInvoiceView extends React.Component {
 
   onUploadInvoice = () => {
     if (this.state.fileName === "") {
+      this.setState({
+        error: false,
+        errorMessage: ""
+      });
       const uploadInvoice = document.getElementById("uploadInvoice");
       uploadInvoice.click();
     } else {
@@ -181,6 +185,7 @@ class EnterInvoiceView extends React.Component {
                 value={this.state.invoiceNumber}
                 onChange={this.handleInput}
                 maxLength={12}
+                disabled={this.state.fileName === "" ? false : true}
                 isAutoFocus={true}
                 className="form-control invoiceNumber"
               />

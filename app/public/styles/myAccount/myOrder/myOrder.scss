@@ -71,7 +71,13 @@
     border: solid 1px $greyborder;
     padding: 0 26px 30px;
     margin: 0 0 16px 0;
-
+    .shipment-heading {
+      color: $black;
+      font-family: $font-bold;
+      font-size: 16px;
+      line-height: 16px;
+      margin: 13px 0 -16px 0;
+    }
     .orderProduct.removeBorder {
       border-bottom: none !important;
     }
@@ -107,6 +113,7 @@
       .orderimgbox {
         width: 50%;
         float: left;
+
         .imgBox {
           min-height: 120px;
           display: flex;

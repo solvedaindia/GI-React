@@ -20,11 +20,17 @@ class RWDMultiTrack extends React.Component {
 
   render() {
     const productData = this.props.orderDataPro;
+    let shipmetNumber = 1;
     return (
       <>
         {productData.shipmentData.map((item, index) => {
           return (
             <RWDSingleProduct
+              itemNum={
+                item.status !== "Created" && item.status !== "Packed"
+                  ? shipmetNumber++
+                  : ""
+              }
               orderDataPro={productData}
               onRSODetail={data => this.props.onRSODetail(data)}
               shipmentDataPro={item}
