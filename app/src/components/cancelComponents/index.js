@@ -145,7 +145,6 @@ class CancelComponents extends React.Component {
       })
       .catch(error => {
         try {
-          console.log("errorAPI", error.response.data.error.error_message);
           this.setState({
             errorResponse: error.response.data.error.error_message
           });

@@ -245,7 +245,6 @@ class MyOrder extends React.Component {
             renderSelectionPro={this.renderSelection.bind(this)}
             trackOrderDataPro={this.state.updatedTrackOrderData}
             onRSODetail={returnShipmentOrders => {
-              // console.log("returnShipmentOrders1", returnShipmentOrders);
               this.renderRSODetail(returnShipmentOrders);
             }}
             renderReturnRequest={this.renderReturnRequest.bind(this)}

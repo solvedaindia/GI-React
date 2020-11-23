@@ -125,7 +125,6 @@ class OrderStatusBar extends React.Component {
   render() {
     var refundTimeline = '';
     var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
-      console.log("ksksks -- ", this);
       if (item === "Refund Details") {
         refundTimeline = " trackorder-wrap-3";
       }

@@ -133,7 +133,6 @@ class ServiceRequestFormGuest extends React.Component {
 
   onAddressChange(addressData) {
     this.state.guestAddress = addressData;
-    console.log("onAddressChange", addressData);
   }
 
   validateForm() {

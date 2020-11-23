@@ -200,7 +200,6 @@ class OrderConformation extends React.Component {
         this.setState({ fbPixelTriggered: true });
       }
     } catch (error) {
-      console.log(error);
     }
     return (
       <div className="orderconfirm">

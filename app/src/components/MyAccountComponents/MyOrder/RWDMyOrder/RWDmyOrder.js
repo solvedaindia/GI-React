@@ -141,7 +141,6 @@ class RWDMyOrder extends React.Component {
     });
   }
   onRSODetail(data) {
-    console.log(data);
     this.setState({
       isRSODetail: !this.state.isRSODetail,
       returnShipmentOrders: data ? data : []

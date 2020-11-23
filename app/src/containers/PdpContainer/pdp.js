@@ -154,7 +154,6 @@ class PdpContainer extends React.Component {
             pageTitle: dataArray[index].pageTitle
           };
 
-          // console.log(recentData[0]);
           appCookie.set(
             "recentProduct",
             JSON.stringify(recentData),

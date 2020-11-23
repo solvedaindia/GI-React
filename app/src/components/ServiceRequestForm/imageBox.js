@@ -22,7 +22,6 @@ class ImageBox extends React.Component {
   onImageSlected = event => {
     const fsize = event.target.files[0].size;
     const file = Math.round(fsize / 1024);
-    console.log("selected file: ", event.target.files[0]);
     if (file > 10240) {
       //alert("Image is too big, please select a image less than 10mb");
       this.props.onImageError("File is too large (max 10 MB)");
