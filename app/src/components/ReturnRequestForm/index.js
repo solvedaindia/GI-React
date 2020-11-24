@@ -362,7 +362,7 @@ class ReturnRequestForm extends React.Component {
     let cancelQuantity = [];
     if (data.quantity > 0) {
       let i;
-      for (i = 1; i <= shipmentData.quantity; i++) cancelQuantity.push(i);
+      for (i = 1; i <= shipmentData.remainingQty; i++) cancelQuantity.push(i);
     }
 
     return (
