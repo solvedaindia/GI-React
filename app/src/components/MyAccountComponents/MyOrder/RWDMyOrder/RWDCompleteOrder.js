@@ -2,7 +2,10 @@ import React from "react";
 import RWDSingleProduct from "./RWDSingleProduct";
 import { Link } from "react-router-dom";
 import appCookie from "../../../../utils/cookie";
-import { formatPrice, mapPaymentMethodMode } from "../../../../utils/utilityManager";
+import {
+  formatPrice,
+  mapPaymentMethodMode
+} from "../../../../utils/utilityManager";
 
 class RWDCompleteOrder extends React.Component {
   constructor(props) {
@@ -16,6 +19,7 @@ class RWDCompleteOrder extends React.Component {
     const addressData = orderData.address;
     const summeryData = orderData.orderSummary;
     const invoiceData = orderData.invoices;
+    //console.log("summeryData.productDiscount", summeryData);
     return (
       <>
         <div className="tabBar clearfix">
@@ -86,7 +90,9 @@ class RWDCompleteOrder extends React.Component {
 
         <div className="order-payent-method">
           <h2 className="title">Payment Method</h2>
-          <p className="order-text-desc">{mapPaymentMethodMode(orderData.paymentMethod)}</p>
+          <p className="order-text-desc">
+            {mapPaymentMethodMode(orderData.paymentMethod)}
+          </p>
         </div>
 
         <div className="order-list-summary">
@@ -105,13 +111,15 @@ class RWDCompleteOrder extends React.Component {
                     : summeryData.shippingCharges}
                 </span>
               </p>
-              <p className="product-disc">
-                <span className="info-text">Product Discount</span>
-                <span className="info-val">
-                  {summeryData.productDiscount === 0 ? null : "-"} ₹
-                  {summeryData.productDiscount}
-                </span>
-              </p>
+              {summeryData.productDiscount !== 0 ? (
+                <p className="product-disc">
+                  <span className="info-text">Product Discount</span>
+                  <span className="info-val">
+                    {summeryData.productDiscount === 0 ? null : "-"} ₹
+                    {summeryData.productDiscount}
+                  </span>
+                </p>
+              ) : null}
               {summeryData.orderDiscount === 0 ? null : (
                 <p className="order-disc">
                   <span className="info-text">Order Discount</span>

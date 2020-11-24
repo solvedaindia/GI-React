@@ -63,13 +63,16 @@ class RSOItem extends React.Component {
               </span>
             </li>
           </ul>
-          <button
-            className="btn-collapse"
-            onClick={this.collapseExpendClicked.bind(this)}
-          >
-            Return Details
-            {this.state.expendCollapseText}
-          </button>
+          {Array.isArray(data.returnRefundSummary) &&
+            data.returnRefundSummary.lenght > 0 && (
+              <button
+                className="btn-collapse"
+                onClick={this.collapseExpendClicked.bind(this)}
+              >
+                Return Details
+                {this.state.expendCollapseText}
+              </button>
+            )}
         </div>
         <div className="itemBox">
           <div
@@ -77,56 +80,67 @@ class RSOItem extends React.Component {
               this.state.isExpend ? `heightActive` : `heightInActive`
             }`}
           >
-            <div className="refundsummarydata">
-              <h4 className="refundSummaryTitle">Refund Summary</h4>
-              {isMobile() ? (
-                <table className="refundTable">
-                  {data.returnRefundSummary &&
-                    Array.isArray(data.returnRefundSummary) &&
-                    data.returnRefundSummary.map(refundElement => {
-                      return (
-                        <>
-                          <tr>
-                            <td>Transaction ID </td>
-                            <td>{refundElement.transactionID}</td>
-                          </tr>
-                          <tr>
-                            <td>Amount</td>
-                            <td>₹{formatPrice(refundElement.refundAmount)}</td>
-                          </tr>
-                          <tr>
-                            <td>Mode</td>
-                            <td>
-                              {mapPaymentMethodMode(refundElement.paymentMode)}
-                            </td>
-                          </tr>
-                        </>
-                      );
-                    })}
-                </table>
-              ) : (
-                <table className="refundTable">
-                  <tr className="refundDataHeading">
-                    <th>Transaction ID</th>
-                    <th>Amount</th>
-                    <th>Mode</th>
-                  </tr>
-                  {data.returnRefundSummary &&
-                    Array.isArray(data.returnRefundSummary) &&
-                    data.returnRefundSummary.map(refundElement => {
-                      return (
-                        <tr>
-                          <td>{refundElement.transactionID}</td>
-                          <td>₹{formatPrice(refundElement.refundAmount)}</td>
-                          <td>
-                            {mapPaymentMethodMode(refundElement.paymentMode)}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                </table>
+            {Array.isArray(data.returnRefundSummary) &&
+              data.returnRefundSummary.lenght > 0 && (
+                <div className="refundsummarydata">
+                  <h4 className="refundSummaryTitle">Refund Summary</h4>
+                  {isMobile() ? (
+                    <table className="refundTable">
+                      {data.returnRefundSummary &&
+                        Array.isArray(data.returnRefundSummary) &&
+                        data.returnRefundSummary.map(refundElement => {
+                          return (
+                            <>
+                              <tr>
+                                <td>Transaction ID </td>
+                                <td>{refundElement.transactionID}</td>
+                              </tr>
+                              <tr>
+                                <td>Amount</td>
+                                <td>
+                                  ₹{formatPrice(refundElement.refundAmount)}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Mode</td>
+                                <td>
+                                  {mapPaymentMethodMode(
+                                    refundElement.paymentMode
+                                  )}
+                                </td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </table>
+                  ) : (
+                    <table className="refundTable">
+                      <tr className="refundDataHeading">
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Mode</th>
+                      </tr>
+                      {data.returnRefundSummary &&
+                        Array.isArray(data.returnRefundSummary) &&
+                        data.returnRefundSummary.map(refundElement => {
+                          return (
+                            <tr>
+                              <td>{refundElement.transactionID}</td>
+                              <td>
+                                ₹{formatPrice(refundElement.refundAmount)}
+                              </td>
+                              <td>
+                                {mapPaymentMethodMode(
+                                  refundElement.paymentMode
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </table>
+                  )}
+                </div>
               )}
-            </div>
           </div>
           {data.items &&
             Array.isArray(data.items) &&
