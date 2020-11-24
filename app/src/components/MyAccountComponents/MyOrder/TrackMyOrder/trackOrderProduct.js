@@ -63,7 +63,6 @@ class TrackOrderProduct extends React.Component {
     const returnMessage = this.props.shipmentDataPro.returnMessage;
     // const returnMessage = "return window valid through";
     let shipmentStatus = this.props.shipmentDataPro.status;
-    console.log("sdfgsdfgsdfgsdfg", shipmentStatus);
     return (
       <>
         <div className="clearfix" />

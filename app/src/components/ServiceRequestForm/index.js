@@ -67,7 +67,6 @@ class ServiceRequestForm extends React.Component {
   componentDidMount() {
     //  this.getAddressListAPI();
     this.getDetailAPI();
-    console.log("orderItemDataaaaa", this.props.orderItemData.invoiceList);
     window.scrollTo(0, 0);
   }
   getDetailAPI = () => {
@@ -438,10 +437,6 @@ class ServiceRequestForm extends React.Component {
   }
 
   renderInvoice() {
-    console.log(
-      "this.state.invoiceSelectionData",
-      this.state.invoiceSelectionData
-    );
     return (
       <div className="invice-selection">
         <h4 className="heading">Invoice Selection</h4>

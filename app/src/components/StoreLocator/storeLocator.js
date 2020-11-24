@@ -129,13 +129,11 @@ class StoreLocator extends React.Component {
         fetch(ipDataApi).then(res => {
             return res.json()
         }).then(res => {
-            console.log("pincode","data fetched")
             this.setState({
                 currentLat: res.latitude,
                 currentLong: res.longitude,
             })
         }).catch(error => {
-            console.log("pincode","data error")
             this.setState({
                 currentLat: this.state.defaultLat,
                 currentLong: this.state.defaultLng,

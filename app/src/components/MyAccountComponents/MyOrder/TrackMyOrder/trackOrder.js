@@ -26,7 +26,6 @@ class TrackOrder extends React.Component {
           >{`< Back`}</button>
         </div>
         {this.props.trackOrderDataPro.shipmentData.map((item, index) => {
-          console.log("item.status ", item.status);
           return (
             <TrackOrderProduct
               itemNum={

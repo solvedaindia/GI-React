@@ -121,7 +121,6 @@ class ReturnRequestForm extends React.Component {
       transactionId: transactions && transactions[0].transactionID,
       transactionDate: transactions && transactions[0].transactionDate
     };
-    console.log("asdfsdfasdfasdfasdf", data);
 
     apiManager
       .post(returnOrderShipment, data)
