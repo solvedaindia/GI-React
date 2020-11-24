@@ -23,12 +23,13 @@ class AddressList extends React.Component {
 
   renderAddressList = () => {
     if (this.props.data !== null) {
+      var flag = true;
       var list = [];
       this.props.data.forEach((add, index) => {
         list.push(
           <li
             style={{display: (index>2 ? this.state.more ?'block':'none':'block')}}
-            className={add.isDefault ? "list defaultAddress" : "list"}
+            className={(add.isDefault && flag) || add.default === 'true' ? "list defaultAddress" : "list"}
             onClick={this.handleAddressChange.bind(this, index)}
           >
             <div className="inputBox">
@@ -56,6 +57,9 @@ class AddressList extends React.Component {
             </div>
           </li>
         );
+        if (add.default === 'true') {
+          flag = false;
+        }
       });
       return <ul className="saveAddress customradio clearfix">{list}</ul>;
     }
