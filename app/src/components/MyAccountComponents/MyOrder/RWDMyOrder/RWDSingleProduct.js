@@ -186,7 +186,7 @@ class RWDSingleProduct extends React.Component {
                 className="btn-blackbg btn-block track-order-btn"
                 onClick={this.trackOrderFromViewOrder.bind(this, productData)}
               >
-                {showServiceRequestButton ? "View Item History" : "Track Order"}
+                {showServiceRequestButton ? "View Item History" : "Track Item"}
               </button>
             ) : !this.props.isFromViewOrder &&
             this.props.hideViewDetail ? null : null
