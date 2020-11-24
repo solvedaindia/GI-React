@@ -84,6 +84,8 @@ class HeaderMobile extends React.Component {
       this.pageNavigationRender('Change Password');
     } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
       this.pageNavigationRender('Manage Address');
+    } else if(this.props.history.location.state && this.props.history.location.state.from === 'serviceRequest'){
+      this.pageNavigationRender('My Service Request');
     }
     else {
       this.setState({
@@ -203,6 +205,12 @@ class HeaderMobile extends React.Component {
     if( this.props.updatedHeaderVal === 'show return')
     {
       this.props.updateTheRWDHeader('Track Order');
+    }
+    if( this.props.updatedHeaderVal === 'ServiceRequestMain')
+    {
+      this.pageNavigationRender('My Service Request');
+      this.props.updateTheRWDHeader('ServiceRequestBack');
+      return;
     }
     if(window.location.pathname !== "/myAccount" && window.location.pathname !== "/wishlist"){
       return;

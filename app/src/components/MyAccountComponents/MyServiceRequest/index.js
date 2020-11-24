@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getReleventReduxState, isMobile } from "../../../utils/utilityManager";
+import { updateTheRWDHeader } from "../../../actions/app/actions";
 import TrackServiceRequest from "./trackServiceRequest";
 import "../../../../public/styles/myAccount/myOrder/myOrder.scss";
 import apiManager from "../../../utils/apiManager";
@@ -23,6 +26,14 @@ class ServiceRequestPage extends React.Component {
     this.fetchServiceRequestData();
   }
   componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.updatedHeaderReturnVal !== this.props.updatedHeaderReturnVal
+    ) {
+      window.scrollTo(0, 0);
+      this.setState({
+        showTrackDetails: !this.state.showTrackDetails
+      });
+    }
     //serviceRequest
     if (
       nextProps.redirectedFrom !== this.props.redirectedFrom &&
@@ -52,6 +63,7 @@ class ServiceRequestPage extends React.Component {
   }
 
   renderSelection(orderId) {
+    this.props.updateTheRWDHeader("ServiceRequestMain");
     window.scrollTo(0, 0);
     this.setState({
       trackServiceReuestOrderId: orderId,
@@ -113,19 +125,23 @@ class ServiceRequestPage extends React.Component {
   }
 
   renderBackNavigation() {
-    return (
-      <>
-        <div className="trackMyOrder">
-          <div className="bottomDivider">
-            <button
-              className="backBtn"
-              onClick={evt => this.renderSelection(null)}
-            >{`< Back`}</button>
+    if (!isMobile()) {
+      return (
+        <>
+          <div className="trackMyOrder">
+            <div className="bottomDivider">
+              <button
+                className="backBtn"
+                onClick={evt => this.renderSelection(null)}
+              >{`< Back`}</button>
+            </div>
+            <h4>Track Service Request</h4>
           </div>
-          <h4>Track Service Request</h4>
-        </div>
-      </>
-    );
+        </>
+      );
+    } else {
+      return null;
+    }
   }
 
   renderHeader(data) {
@@ -193,4 +209,20 @@ class ServiceRequestPage extends React.Component {
   }
 }
 
-export default ServiceRequestPage;
+function mapStateToProps(state) {
+  const stateObj = getReleventReduxState(state, "global");
+  const updatedHeaderReturn = getReleventReduxState(
+    stateObj,
+    "updatedRWDHeader"
+  );
+
+  return {
+    updatedHeaderReturnVal: updatedHeaderReturn
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { updateTheRWDHeader }
+)(ServiceRequestPage);
+// export default ServiceRequestPage;
