@@ -243,6 +243,7 @@
       }
       .orderProduct {
         padding: 31px 0 40px 0;
+        border-bottom: none;
         .trackorder-wrap {
           width: 100%;
           position: static;
@@ -438,6 +439,7 @@
 .cancel-order-model {
   &.in {
     z-index: 99999;
+    display: flex !important;
     .modal-dialog {
       .modal-content {
         .modal-header {
