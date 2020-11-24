@@ -4,7 +4,8 @@ class AddressList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected_add: 0
+      selected_add: 0,
+      more: false,
     };
   }
 
@@ -14,14 +15,21 @@ class AddressList extends React.Component {
     });
     this.props.onSelection(this.props.data[index]);
   }
+  toggleViewMore() {
+    this.setState({
+      more: !this.state.more,
+    });
+  }
 
   renderAddressList = () => {
     if (this.props.data !== null) {
+      var flag = true;
       var list = [];
       this.props.data.forEach((add, index) => {
         list.push(
           <li
-            className={add.isDefault ? "list defaultAddress" : "list"}
+            style={{display: (index>2 ? this.state.more ?'block':'none':'block')}}
+            className={(add.isDefault && flag) || add.default === 'true' ? "list defaultAddress" : "list"}
             onClick={this.handleAddressChange.bind(this, index)}
           >
             <div className="inputBox">
@@ -49,13 +57,26 @@ class AddressList extends React.Component {
             </div>
           </li>
         );
+        if (add.default === 'true') {
+          flag = false;
+        }
       });
       return <ul className="saveAddress customradio clearfix">{list}</ul>;
     }
   };
 
   render() {
-    return <>{this.renderAddressList()}</>;
+    return (
+      <>
+        {this.renderAddressList()}
+        {Array.isArray(this.props.data) && this.props.data.length >= 4 &&
+         <a href="javascript:void(0)" className="text-uppercase viewMoreAddress" onClick={this.toggleViewMore.bind(this)}>
+         {this.state.more ? 'View Less' : 'View More'}
+       </a>
+        }
+       
+      </>
+    );
   }
 }
 export default AddressList;
