@@ -4,7 +4,8 @@ class AddressList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected_add: 0
+      selected_add: 0,
+      more: false,
     };
   }
 
@@ -14,6 +15,11 @@ class AddressList extends React.Component {
     });
     this.props.onSelection(this.props.data[index]);
   }
+  toggleViewMore() {
+    this.setState({
+      more: !this.state.more,
+    });
+  }
 
   renderAddressList = () => {
     if (this.props.data !== null) {
@@ -21,6 +27,7 @@ class AddressList extends React.Component {
       this.props.data.forEach((add, index) => {
         list.push(
           <li
+            style={{display: (index>2 ? this.state.more ?'block':'none':'block')}}
             className={add.isDefault ? "list defaultAddress" : "list"}
             onClick={this.handleAddressChange.bind(this, index)}
           >
@@ -55,7 +62,17 @@ class AddressList extends React.Component {
   };
 
   render() {
-    return <>{this.renderAddressList()}</>;
+    return (
+      <>
+        {this.renderAddressList()}
+        {Array.isArray(this.props.data) && this.props.data.length >= 4 &&
+         <a href="javascript:void(0)" className="text-uppercase viewMoreAddress" onClick={this.toggleViewMore.bind(this)}>
+         {this.state.more ? 'View Less' : 'View More'}
+       </a>
+        }
+       
+      </>
+    );
   }
 }
 export default AddressList;
