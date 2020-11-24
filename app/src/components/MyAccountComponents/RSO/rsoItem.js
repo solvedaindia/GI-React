@@ -186,7 +186,7 @@ class RSOItem extends React.Component {
               <p className="description">({productData.shortDescription})</p>
               <p className="price">
                 <span className="discount-price">
-                  ₹{productData.offerPrice}
+                  ₹{formatPrice(productData.offerPrice)}
                 </span>
               </p>
               <div className="quantity-shipping clearfix">

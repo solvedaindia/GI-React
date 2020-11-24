@@ -2,7 +2,11 @@ import React from "react";
 import Dropdown from "../ServiceRequestForm/dropdown";
 import UploadImage from "../ServiceRequestForm/uploadImage";
 import BankDetails from "./bankDetail";
-import { isMobile, mapPaymentMethodMode } from "../../utils/utilityManager";
+import {
+  isMobile,
+  mapPaymentMethodMode,
+  formatPrice
+} from "../../utils/utilityManager";
 //import Checkboxes from "../ServiceRequestForm/checkboxes";
 import apiManager from "../../utils/apiManager";
 import {
@@ -378,7 +382,7 @@ class ReturnRequestForm extends React.Component {
                 <p className="description">({data.shortDescription})</p>
                 <p className="price">
                   <span className="discount-price">
-                    ₹ {data.returnUnitPrice}
+                    ₹ {formatPrice(data.returnUnitPrice)}
                   </span>
                 </p>
                 <div className="quantity-shipping clearfix">

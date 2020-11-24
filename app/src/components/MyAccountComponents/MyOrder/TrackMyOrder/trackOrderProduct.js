@@ -5,6 +5,7 @@ import "../../../../../public/styles/myAccount/trackMyOrder.scss";
 import OrderItem from "../orderItem";
 import OrderStatusBar from "../orderStatusBar";
 import { imagePrefix } from "../../../../../public/constants/constants";
+import { formatPrice } from "../../../../utils/utilityManager";
 
 class TrackOrderProduct extends React.Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class TrackOrderProduct extends React.Component {
                 <p className="description">({productData.shortDescription})</p>
                 <p className="price">
                   <span className="discount-price">
-                    ₹{productData.offerPrice}
+                    ₹{formatPrice(productData.offerPrice)}
                   </span>
                 </p>
                 <div className="quantity-shipping clearfix">

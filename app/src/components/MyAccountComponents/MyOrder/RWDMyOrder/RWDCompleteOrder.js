@@ -101,14 +101,16 @@ class RWDCompleteOrder extends React.Component {
             <div className="summary">
               <p className="cart-total">
                 <span className="info-text">Cart Total</span>
-                <span className="info-val">₹{summeryData.totalAmount}</span>
+                <span className="info-val">
+                  ₹{formatPrice(summeryData.totalAmount)}
+                </span>
               </p>
               <p className="product-ship-disc">
                 <span className="info-text">Shipping</span>
                 <span className="info-val">
                   {summeryData.shippingCharges === 0
                     ? `Free`
-                    : summeryData.shippingCharges}
+                    : formatPrice(summeryData.shippingCharges)}
                 </span>
               </p>
               {summeryData.productDiscount !== 0 ? (
@@ -116,7 +118,7 @@ class RWDCompleteOrder extends React.Component {
                   <span className="info-text">Product Discount</span>
                   <span className="info-val">
                     {summeryData.productDiscount === 0 ? null : "-"} ₹
-                    {summeryData.productDiscount}
+                    {formatPrice(summeryData.productDiscount)}
                   </span>
                 </p>
               ) : null}
@@ -125,14 +127,16 @@ class RWDCompleteOrder extends React.Component {
                   <span className="info-text">Order Discount</span>
                   <span className="info-val">
                     -₹
-                    {summeryData.orderDiscount}
+                    {formatPrice(summeryData.orderDiscount)}
                   </span>
                 </p>
               )}
               <div className="divider" />
               <p className="totalAmt">
                 <span className="info-text">Total</span>
-                <span className="info-val">₹{summeryData.netAmount}</span>
+                <span className="info-val">
+                  ₹{formatPrice(summeryData.netAmount)}
+                </span>
               </p>
             </div>
           </div>
