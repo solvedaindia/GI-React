@@ -69,6 +69,9 @@ class HeaderMobile extends React.Component {
     } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
       this.pageNavigationRender('Manage Address');
     }
+    else if(this.props.history.location.state && this.props.history.location.state.from === 'serviceRequest'){
+      this.pageNavigationRender('My Service Request');
+    }
 
   }
 
@@ -85,6 +88,9 @@ class HeaderMobile extends React.Component {
     } else if(this.props.history.location.state && this.props.history.location.state.from === 'address'){
       this.pageNavigationRender('Manage Address');
     } else if(this.props.history.location.state && this.props.history.location.state.from === 'serviceRequest'){
+      this.pageNavigationRender('My Service Request');
+    }
+    else if(this.props.history.location.state && this.props.history.location.state.from === 'serviceRequest'){
       this.pageNavigationRender('My Service Request');
     }
     else {
