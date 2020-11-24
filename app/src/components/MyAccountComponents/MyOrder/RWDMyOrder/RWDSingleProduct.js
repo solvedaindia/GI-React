@@ -6,6 +6,7 @@ import {
 } from "../../../../../public/constants/constants";
 import OrderStatusBar from "../orderStatusBar";
 import { CACELATION_WINDOW_CLOSE } from "../../../../../../app/src/constants/app/cancelConstants";
+import { formatPrice } from "../../../../utils/utilityManager";
 
 class RWDSingleProduct extends React.Component {
   constructor(props) {
@@ -133,7 +134,7 @@ class RWDSingleProduct extends React.Component {
                 ? this.props.shipmentDataPro.quantity
                 : productData.quantity}
             </div>
-            <div className="price">₹{productData.offerPrice}</div>
+            <div className="price">₹{formatPrice(productData.offerPrice)}</div>
             <div className="deliveryTag">
               <span>{this.state.dsNameTag}</span>
               <span>{this.state.dsDateTag}</span>
@@ -186,7 +187,7 @@ class RWDSingleProduct extends React.Component {
                 className="btn-blackbg btn-block track-order-btn"
                 onClick={this.trackOrderFromViewOrder.bind(this, productData)}
               >
-                {showServiceRequestButton ? "View Item History" : "Track Order"}
+                {showServiceRequestButton ? "View Item History" : "Track Item"}
               </button>
             ) : !this.props.isFromViewOrder &&
             this.props.hideViewDetail ? null : null

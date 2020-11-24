@@ -6,7 +6,7 @@ import {
 } from "../../../../../public/constants/constants";
 import OrderProduct from "../orderProduct";
 import OrderSummery from "../orderSummery";
-import { isMobile } from "../../../../utils/utilityManager";
+import { isMobile, formatPrice } from "../../../../utils/utilityManager";
 import RWDSingleProduct from "./RWDSingleProduct";
 
 const showImg = (
@@ -132,7 +132,7 @@ class RWDOrderItem extends React.Component {
 
         <div className="totalItem">
           <label className="totalTag">
-            Total: ₹{orderData.orderSummary.netAmount}
+            Total: ₹{formatPrice(orderData.orderSummary.netAmount)}
           </label>
           <button
             className="viewOrder"
@@ -141,20 +141,21 @@ class RWDOrderItem extends React.Component {
             View Order
           </button>
         </div>
-        {showCancelButton && !this.props.isGuestTrackOrderPro && (
-          <button
-            className={
-              disableCancelButton
-                ? "btn-bg cancel-order disabled"
-                : "btn-bg cancel-order"
-            }
-            onClick={evt => {
-              this.props.showCancelModal(undefined, orderData);
-            }}
-          >
-            {orderData.orderCancelButtonText}
-          </button>
-        )}
+        {showCancelButton &&
+          !this.props.isGuestTrackOrderPro && (
+            <button
+              className={
+                disableCancelButton
+                  ? "btn-bg cancel-order disabled"
+                  : "btn-bg cancel-order"
+              }
+              onClick={evt => {
+                this.props.showCancelModal(undefined, orderData);
+              }}
+            >
+              {orderData.orderCancelButtonText}
+            </button>
+          )}
         <div className="order-separator" />
       </>
     );

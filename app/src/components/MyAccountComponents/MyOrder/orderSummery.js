@@ -32,14 +32,38 @@ class OrderSummery extends React.Component {
                   {addressData.name !== undefined ? addressData.name : null}
                 </p>
                 <p className="address">
-                { addressData && addressData.address1 !== undefined && <>{addressData.address1}<br/></>}
-                { addressData && addressData.address2 !== undefined && <>{addressData.address2}<br/></>}
-                { addressData && addressData.address3 !== undefined && <>{addressData.address3}<br/></>}
+                  {addressData &&
+                    addressData.address1 !== undefined && (
+                      <>
+                        {addressData.address1}
+                        <br />
+                      </>
+                    )}
+                  {addressData &&
+                    addressData.address2 !== undefined && (
+                      <>
+                        {addressData.address2}
+                        <br />
+                      </>
+                    )}
+                  {addressData &&
+                    addressData.address3 !== undefined && (
+                      <>
+                        {addressData.address3}
+                        <br />
+                      </>
+                    )}
 
-                { addressData && addressData.city !== undefined && <>{addressData.city}, </>}
-                { addressData && addressData.state !== undefined && <>{addressData.state}, </>}
-                { addressData && addressData.pincode !== undefined && <>{addressData.pincode}</>}
-                
+                  {addressData &&
+                    addressData.city !== undefined && <>{addressData.city}, </>}
+                  {addressData &&
+                    addressData.state !== undefined && (
+                      <>{addressData.state}, </>
+                    )}
+                  {addressData &&
+                    addressData.pincode !== undefined && (
+                      <>{addressData.pincode}</>
+                    )}
                 </p>
               </>
             ) : null}
@@ -77,14 +101,16 @@ class OrderSummery extends React.Component {
               <h4 className="heading">Order Summary</h4>
               <div className="summaryDetails clearfix">
                 <div className="leftText">Cart Total</div>
-                <div className="rightText">₹{summeryData.totalAmount}</div>
+                <div className="rightText">
+                  ₹{formatPrice(summeryData.totalAmount)}
+                </div>
               </div>
               <div className="summaryDetails clearfix">
                 <div className="leftText">Shipping</div>
                 <div className="rightText">
                   {summeryData.shippingCharges === 0
                     ? `Free`
-                    : summeryData.shippingCharges}
+                    : formatPrice(summeryData.shippingCharges)}
                 </div>
               </div>
               {summeryData.productDiscount === 0 ? null : (
@@ -92,7 +118,7 @@ class OrderSummery extends React.Component {
                   <div className="leftText">Product Discount</div>
                   <div className="rightText">
                     -₹
-                    {summeryData.productDiscount}
+                    {formatPrice(summeryData.productDiscount)}
                   </div>
                 </div>
               )}
@@ -102,7 +128,7 @@ class OrderSummery extends React.Component {
                   <div className="leftText">Order Discount</div>
                   <div className="rightText">
                     -₹
-                    {summeryData.orderDiscount}
+                    {formatPrice(summeryData.orderDiscount)}
                   </div>
                 </div>
               )}
@@ -110,7 +136,9 @@ class OrderSummery extends React.Component {
               <div className="divider" />
               <div className="summaryDetails subTotaltext clearfix">
                 <div className="leftText">Total</div>
-                <div className="rightText">₹{summeryData.netAmount}</div>
+                <div className="rightText">
+                  ₹{formatPrice(summeryData.netAmount)}
+                </div>
               </div>
             </div>
           </div>

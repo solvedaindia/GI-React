@@ -3,7 +3,7 @@ import apiManager from "../../../utils/apiManager";
 import { changePasswordAPI } from "../../../../public/constants/constants";
 import OrderProduct from "./orderProduct";
 import OrderSummery from "./orderSummery";
-import { isMobile } from "../../../utils/utilityManager";
+import { isMobile, formatPrice } from "../../../utils/utilityManager";
 
 const showImg = (
   <img
@@ -78,7 +78,7 @@ class OrderItem extends React.Component {
             <li className="list">
               <span className="heading-top">Total</span>{" "}
               <span className="heading-sub">
-                ₹{orderData.orderSummary.netAmount}
+                ₹{formatPrice(orderData.orderSummary.netAmount)}
               </span>
             </li>
           </ul>
@@ -127,22 +127,23 @@ class OrderItem extends React.Component {
               />
             );
           })}
-          {showCancelButton && !this.props.isGuestTrackOrderPro && (
-            <button
-              className={
-                disableCancelButton
-                  ? "btn-bg cancel-order disabled"
-                  : "btn-bg cancel-order"
-              }
-              onClick={evt => {
-                this.props.showCancelModal(orderData, undefined);
-              }}
-            >
-              {
-                orderData.orderCancelButtonText /*isOrderCancelled ? orderData.orderItemStatus : "Cancel Order"*/
-              }
-            </button>
-          )}
+          {showCancelButton &&
+            !this.props.isGuestTrackOrderPro && (
+              <button
+                className={
+                  disableCancelButton
+                    ? "btn-bg cancel-order disabled"
+                    : "btn-bg cancel-order"
+                }
+                onClick={evt => {
+                  this.props.showCancelModal(orderData, undefined);
+                }}
+              >
+                {
+                  orderData.orderCancelButtonText /*isOrderCancelled ? orderData.orderItemStatus : "Cancel Order"*/
+                }
+              </button>
+            )}
         </div>
       </>
     );

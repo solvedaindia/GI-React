@@ -2,6 +2,7 @@ import React from "react";
 import OrderStatusBar from "./orderStatusBar";
 import { imagePrefix } from "../../../../public/constants/constants";
 import { CACELATION_WINDOW_CLOSE } from "../../../../../app/src/constants/app/cancelConstants";
+import { formatPrice } from "../../../utils/utilityManager";
 
 class ProductOrder extends React.Component {
   constructor(props) {
@@ -108,7 +109,7 @@ class ProductOrder extends React.Component {
               <p className="description">({productData.shortDescription})</p>
               <p className="price">
                 <span className="discount-price">
-                  ₹{productData.offerPrice}
+                  ₹{formatPrice(productData.offerPrice)}
                 </span>
               </p>
               <div className="quantity-shipping clearfix">
