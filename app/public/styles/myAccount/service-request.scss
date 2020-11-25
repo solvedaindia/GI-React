@@ -187,11 +187,42 @@
       }
       .dropdown-menu {
         width: 100%;
+        margin-top: 0;
+        padding: 0;
+        cursor: pointer;
         li {
           a {
             white-space: normal;
           }
         }
+      }
+    }
+  }
+  .itemBox {
+    
+    .dropdown {
+      .dropdown-toggle {
+        background: #fff;
+        border: 1px solid $lightgrey;
+        border-radius: 0px;
+        min-width: 67px;
+        text-align: left;
+        color: $greyish;
+        font-size: 14px;
+        font-family: $font-medium;
+        padding: 8px 10px 8px 15px;
+        height: 38px;
+        &:focus {
+          outline: none;
+        }
+        .caret {
+          float: right;
+          margin-top: 8px;
+          margin-left: 10px;
+        }
+      }
+      .dropdown-menu {
+        width: 100%;
       }
     }
   }
@@ -335,7 +366,9 @@
     .saveAddress {
       .list {
         border: 1px solid $lightblueGrey;
-        min-height: 100px;
+        max-height: 130px;
+        height: 115px;
+        overflow-y: auto;
         float: left;
         background-color: rgba(247, 248, 248, 0.5);
         &.defaultAddress {
