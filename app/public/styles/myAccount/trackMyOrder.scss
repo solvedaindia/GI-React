@@ -16,6 +16,9 @@
 .itemBox {
   .orderProduct{
     border-bottom: solid 1px $greyborder;
+    &:last-child {
+      border-bottom: none;
+    }
   }
   .orderProduct.removeBorder{
     border-bottom: none !important;

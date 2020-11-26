@@ -84,6 +84,9 @@
     .orderProduct {
       border-bottom: solid 1px $greyborder;
       padding: 31px 0 29px 0;
+      &:last-child {
+        border-bottom: none;
+      }
       .orderbtn {
         width: 19%;
         float: right;
@@ -310,6 +313,7 @@
       .itemBox {
         .orderProduct {
           padding: $base * 3 0px;
+          border-bottom: none;
         }
       }
     }
