@@ -347,7 +347,7 @@
     }
     &.guest-type {
       display: inline-block;
-      margin-left: 10px;
+      margin-left: 0px;
       .heading {
         &:empty {
           display: none;
@@ -525,6 +525,9 @@
     .actionBtnWrapper {
       padding-top: $base * 2.5;
       padding-bottom: $base * 2.5;
+    }
+    .service-request-desc.guest-type{
+      margin-left:10px;
     }
   }
 }
