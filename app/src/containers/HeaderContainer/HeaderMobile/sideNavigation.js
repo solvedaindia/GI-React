@@ -302,69 +302,86 @@ export class HeaderMobile extends React.Component {
     let navItem;
     if (this.state.navigationItem === null) {
       navItem = (
-        <div className="leftAnim">
-          <div className="topMenu">
-            <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo' : 'usernameTxt'}>{getCookie('isLoggedIn') === 'true' ?this.state.userName :'Hello!'}</label>
-            {loginLogoutItem}
-          </div>
-          <ul>
-            {!!category &&
-              category.map((categoryData, index) => (
-                <li
-                  onClick={() =>
-                    this.onCategoryClick(
-                      categoryData.subCategoryArray,
-                      categoryData.categoryName,
-                    )
-                  }
-                  className="navTxt"
-                >
-                  {categoryData.categoryName.toLowerCase() === 'rooms' || categoryData.categoryName.toLowerCase() === 'products' ? ("Shop by "+categoryData.categoryName):(categoryData.categoryName)}
-                  {categoryData.subCategoryArray.length > 0 ? (
-                    <span className="arrow">
-                      <img
-                        src={require('../../../../public/images/nav_next.svg')}
-                        alt='nxtImg'
-                      />
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            {myAccountItem}
-            {this.state.layer1Data && this.state.layer1Data.map((linkData, index) => {
-              return (
-                <>
-                  {
-                    linkData.text === 'TRACK ORDER' ?
-                      getCookie('isLoggedIn') === 'true' ? (
-                        <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }} onClick={() => this.onLinkNavigation('My Orders')}>
-                          < li className="navTxt" >{linkData.text.toLowerCase()}</li>
-                        </Link>
-                      ) : (
-                          <Link onClick={this.onOverlayClick.bind(this)} to="/guestTrackOrder">
+        <>
+          <div className="leftAnim">
+            <div className="topMenu">
+              <label className={getCookie('isLoggedIn') === 'true' ? 'usernameTxt userInfo' : 'usernameTxt'}>{getCookie('isLoggedIn') === 'true' ?this.state.userName :'Hello!'}</label>
+              {loginLogoutItem}
+            </div>
+            <ul>
+              {!!category &&
+                category.map((categoryData, index) => (
+                  <li
+                    onClick={() =>
+                      this.onCategoryClick(
+                        categoryData.subCategoryArray,
+                        categoryData.categoryName,
+                      )
+                    }
+                    className="navTxt"
+                  >
+                    {categoryData.categoryName.toLowerCase() === 'rooms' || categoryData.categoryName.toLowerCase() === 'products' ? ("Shop by "+categoryData.categoryName):(categoryData.categoryName)}
+                    {categoryData.subCategoryArray.length > 0 ? (
+                      <span className="arrow">
+                        <img
+                          src={require('../../../../public/images/nav_next.svg')}
+                          alt='nxtImg'
+                        />
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              {myAccountItem}
+              {this.state.layer1Data && this.state.layer1Data.map((linkData, index) => {
+                return (
+                  <>
+                    {
+                      linkData.text === 'TRACK ORDER' ?
+                        getCookie('isLoggedIn') === 'true' ? (
+                          <Link to={{ pathname: '/myAccount', state: { from: 'myorder' } }} onClick={() => this.onLinkNavigation('My Orders')}>
                             < li className="navTxt" >{linkData.text.toLowerCase()}</li>
                           </Link>
-                        )
-                      :
-                      linkData.text === 'LOCATE STORES' ? (
-                        <Link
-                          onClick={this.onOverlayClick.bind(this)}
-                          to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
-                        >
-                          < li className="navTxt" >{linkData.text.toLowerCase()}</li>
-
-                        </Link>
-                      )
+                        ) : (
+                            <Link onClick={this.onOverlayClick.bind(this)} to="/guestTrackOrder">
+                              < li className="navTxt" >{linkData.text.toLowerCase()}</li>
+                            </Link>
+                          )
                         :
-                        <Link to='/support' onClick={this.onOverlayClick.bind(this)}>
-                          < li className="navTxt" href={linkData.action}>{linkData.text.toLowerCase()}</li>
-                        </Link>
-                  }
-                </>
-              )
-            })}
-          </ul>
-        </div>
+                        linkData.text === 'LOCATE STORES' ? (
+                          <Link
+                            onClick={this.onOverlayClick.bind(this)}
+                            to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
+                          >
+                            < li className="navTxt" >{linkData.text.toLowerCase()}</li>
+
+                          </Link>
+                        )
+                          :
+                          <Link to='/support' onClick={this.onOverlayClick.bind(this)}>
+                            < li className="navTxt" href={linkData.action}>{linkData.text.toLowerCase()}</li>
+                          </Link>
+                    }
+                  </>
+                )
+              })}
+            </ul>
+          </div>
+          <div className="personal-view d-block d-xl-none">
+            <a
+              onClick={() => window.location.assign('/business/')}
+              className="stretched-link"
+              href="javascript:void(0);"
+              title="godrej-interio"
+            >
+              <img
+                src={require('../../../../public/images/data-arrow.svg')}
+                className="img-fluid"
+                alt="godrej-interio"
+              />
+              SWITCH TO BUSINESS
+            </a>
+          </div>
+        </>
       );
     } else {
       navItem = this.state.navigationItem;

@@ -1,24 +1,18 @@
 @import "../variable.scss";
 .logo{
-    width: 15%;
-    margin-left: 5%;
+    // width: 15%;
+    // margin-left: 5%;
+    padding: 14px 1.5% 14px 2%;
+    width: 17%;
     display: inline-block;
     .img {
-        width : 100%;
-        padding: 15px;
+      width : 100%;
+      padding: 15px;
     }
-}
-
-/* 
-  #Screen B/w 1025px to 1280px, Device = Laptops, Desktops
-*/
-@include mix-md-ipad {
-    .logo{
-        a{
-            display: inline-block;
-            svg{
-                max-width: 130px;;
-            }
-        }
+    a{
+      display: inline-block;
+      svg{
+          width: 100%;
+      }
     }
 }

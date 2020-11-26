@@ -53,7 +53,7 @@
     //   height:76px;
     overflow: hidden;
     padding: 10px 0;
-    background: #f7f8f8;
+    background: $colorwhite;
     }
   
   @keyframes slideup2 {
@@ -102,7 +102,7 @@
     top: 0;
     width: 100%;
     animation: none;
-    background: #f7f8f8;
+    background: $colorwhite;
     z-index: 9;
 }
 .sticky {
@@ -1392,14 +1392,14 @@
 .Pdpstickybar{    
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.19);
     padding:0;
-    background: $greybg;
+    background: $colorwhite;
     overflow: hidden;
     -webkit-transition: all .5s ease;
     -moz-transition: position 10s;
     -ms-transition: position 10s;
     -o-transition: position 10s;
     transition: all .5s ease;
-    
+    top: -28px;
     .pdpstickyItem{
     .product{
         width:40%;        

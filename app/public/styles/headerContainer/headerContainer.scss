@@ -9,11 +9,14 @@
     }
 }
 header {
-    height: 100px;
-    border-bottom: 1px solid #ddd;
+  height: 72px;
+  border-bottom: 1px solid #ddd;
+  svg:not(:root) {
+    margin: 0;
+  }
 }
 .navigation {
-    width: 80%;
+    width: 83%;
     display: inline-block;
     border-left: 1px solid #ddd; 
 }
@@ -29,7 +32,7 @@ header {
         opacity: 1;                
         animation: fade 1.6s;
         position: absolute;
-        top: 72px;       
+        top: 45px;       
         z-index: 5;
         list-style: none;        
         background-color:$colorwhite;
@@ -120,7 +123,7 @@ header {
 }
 .action-menu{
 
-    padding: 28px 0px;
+    padding: 14px 0px;
     
 
 }
@@ -141,7 +144,5 @@ header {
                animation: none;
             }
         }
-
     }
-    
 }

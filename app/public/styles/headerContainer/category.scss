@@ -1,14 +1,14 @@
 @import '../variable.scss';
 
 .category{
-    height: 69px;
+    height: 45px;
     padding-left: 32px;
     display: flex;
     align-items: center;
 }
 .categoryList {
     margin: 0;
-    width: 50%;
+    width: 59%;
     display: inline-block;
     &:first-child{
         .catList{
@@ -16,7 +16,7 @@
         }
     }
     .listItems {
-        padding: 28px 40px 28px 0;
+        padding: 14px 65px 14px 0;
         font-size: $base*1.5;
         .action{
             font-size: $base*1.5;
@@ -37,4 +37,16 @@
     &:hover {
         color: $reddishPink;
     }
+}
+
+@include mix-md-ipad {
+  .categoryList {
+    width: 56%;
+  }
+}
+
+@include mix-md-lg {
+  .categoryList {
+    width: 56%;
+  }
 }

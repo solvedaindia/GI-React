@@ -51,7 +51,7 @@
     pointer-events: none;
   }
   input:checked + .handler {
-    display: none;
+    // display: none;
   }
   input:checked + .handler + .overlay {
     opacity: 0.3;
@@ -169,5 +169,35 @@
     }
   }
 
- 
+  .personal-view {
+    position: absolute;
+    z-index: 1001;
+    min-height: 50px;
+    max-height: 50px;
+    background-color: $lightAshGrey;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0px;
+    top: auto;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .personal-view a {
+    font-size: $smallTextFont;
+    color: $colorbluedull;
+    font-family: $font-bold;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .personal-view a img {
+    max-height: 20px;
+    margin-right: 6px;
+  }
 }

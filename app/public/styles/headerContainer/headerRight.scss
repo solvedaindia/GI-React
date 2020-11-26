@@ -5,6 +5,7 @@
 }
 .rightSide {
     margin-bottom: 0;
+    width: 11%;
     .icons {
         &:first-child{
             margin:0;
@@ -18,9 +19,11 @@
         display: inline-block;
         cursor: pointer;
         position: relative;
-        margin: 0 23px 0 22px;
+        margin: 0 16px 0 16px;
         svg{
-            margin: 0;
+          margin: 0;
+          width: 20px;
+          height: 20px;
         }
         .wishListCount {
             position: absolute;
@@ -51,4 +54,16 @@
             }
         }
     }
+}
+
+@include mix-md-ipad {
+  .rightSide {
+    width: 12%;
+  }
+}
+
+@include mix-md-lg {
+  .rightSide {
+    width: 12%;
+  }
 }

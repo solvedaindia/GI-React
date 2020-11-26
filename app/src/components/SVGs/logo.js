@@ -5,9 +5,9 @@ import '../../../public/styles/headerContainer/logo.scss';
 const Logo = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="171"
-    height="33"
-    viewBox="0 0 171 33"
+    width="178"
+    height="38"
+    viewBox="0 0 178 38"
   >
     <g fill="none" fillRule="evenodd">
       <path

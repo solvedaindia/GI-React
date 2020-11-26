@@ -1,22 +1,74 @@
-.layer1 {
-	padding: 4px 32px;
-    margin: 0;
-    border-bottom: 1px solid #ddd;
-    height: 30px;
-    .listItems {
-        padding-right: 20px;
-        font-size: 10px;
+@import '../variable';
 
-        .action {
-            color: #77787a;
-            &:hover{
-                text-decoration: underline;
-                color: #ee4060;
-            }
-            &:visited,&:focus{
-                text-decoration: none;
-                outline: none;
-            }
+#header {
+  .nav-tabs {
+    background: $lightAshGrey;
+    border: none;
+    .nav-item {
+      padding: 0;
+      &:hover a {
+        font-family: $font-regular;
+      }
+      a {
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        color: $black;
+        font-size: $smallTextFont;
+        border: none;
+        border-radius: 0;
+        padding: 5px 30px 6px 30px;
+        margin: 0;
+        &.personal {
+          font-family: $font-bold;
+          color: $black;
+          position: relative;
+          background-color: $colorwhite;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $black;
+          }
+          &:hover {
+            font-family: $font-bold;
+            background-color: $colorwhite;
+          }
         }
+        &:hover {
+          background-color: rgba(0, 0, 0, 0);
+        }
+      }
     }
+  }
+
+  .header-link {
+    position: absolute;
+    z-index: 1001;
+    top: $base;
+    right: $base*3;
+    display: flex;
+    a {
+      text-transform: uppercase;
+      color: $black;
+      font-size: $smallerTextFont;
+      padding-left: 0;
+      padding-right: 24px;
+      &:last-child {
+        padding-right: 0;
+      }
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        color: $reddishPink;
+        transition: all 0.3s ease;
+      }
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
 }
