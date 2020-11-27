@@ -559,7 +559,7 @@ class AddAddressForm extends React.Component {
                 title="Email ID (Optional)"
                 name="email"
                 id="emailId"
-                placeholder="Enter EmailId"
+                placeholder="Enter Email ID"
                 value={this.state.inputText_email}
                 handleChange={this.handleInput}
                 maxLength={30}
@@ -600,7 +600,7 @@ class AddAddressForm extends React.Component {
                 title="Address"
                 name="address1"
                 id="address1"
-                placeholder="Flat/ House no/ Floor/Building name"
+                placeholder="Flat / House no / Floor / Building name"
                 value={this.state.inputText_address1}
                 handleChange={this.handleInput}
                 maxLength={30}
@@ -619,7 +619,7 @@ class AddAddressForm extends React.Component {
                 inputType="text"
                 name="address2"
                 id="address2"
-                placeholder="Street name/number/locality"
+                placeholder="Street name / Number / locality"
                 value={this.state.inputText_address2}
                 handleChange={this.handleInput}
                 maxLength={40}
@@ -653,7 +653,7 @@ class AddAddressForm extends React.Component {
                 title="City/District"
                 name="city"
                 id="cityDistrict"
-                placeholder="Enter City/District"
+                placeholder="Enter City / District"
                 value={this.state.inputText_city}
                 handleChange={this.handleInput}
                 readOnly
