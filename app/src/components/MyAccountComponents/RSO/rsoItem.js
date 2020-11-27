@@ -64,7 +64,7 @@ class RSOItem extends React.Component {
             </li>
           </ul>
           {Array.isArray(data.returnRefundSummary) &&
-            data.returnRefundSummary.lenght > 0 && (
+            data.returnRefundSummary.length > 0 && (
               <button
                 className="btn-collapse"
                 onClick={this.collapseExpendClicked.bind(this)}
@@ -81,7 +81,7 @@ class RSOItem extends React.Component {
             }`}
           >
             {Array.isArray(data.returnRefundSummary) &&
-              data.returnRefundSummary.lenght > 0 && (
+              data.returnRefundSummary.length > 0 && (
                 <div className="refundsummarydata">
                   <h4 className="refundSummaryTitle">Refund Summary</h4>
                   {isMobile() ? (
@@ -145,7 +145,7 @@ class RSOItem extends React.Component {
           {data.items &&
             Array.isArray(data.items) &&
             data.items.map((prd, index) => {
-              return this.renderProducts(prd, data.items.lenght, index);
+              return this.renderProducts(prd, data.items.length, index);
             })}
           <div class="orderProduct removeBorder clearfix">
             <OrderStatusBar

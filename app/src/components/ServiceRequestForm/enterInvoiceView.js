@@ -170,6 +170,14 @@ class EnterInvoiceView extends React.Component {
   }
 
   render() {
+    const invoiceFileError = this.props.invoiceFileError;
+    const flag = invoiceFileError === true && this.state.error === false;
+    console.log(
+      "this.props.invoiceFileError",
+      this.props.invoiceFileError,
+      this.state.error,
+      flag
+    );
     return (
       <div className="form-BgContainer addAddressContainer upload-invoiceno">
         <div className="row">
@@ -215,9 +223,11 @@ class EnterInvoiceView extends React.Component {
               {this.state.error ? (
                 <div className="error-msg">{this.state.errorMessage}</div>
               ) : null}
-              {this.props.invoiceFileError ? (
+              {flag ? (
                 <div className="error-msg">
-                  {"Please upload a scanned copy of your invoice"}
+                  {this.state.invoiceNumber.length === 12
+                    ? "Please upload a scanned copy of your invoice"
+                    : "Invoice number is invalid"}
                 </div>
               ) : null}
             </div>
@@ -229,9 +239,11 @@ class EnterInvoiceView extends React.Component {
             {this.state.error ? (
               <div className="error-msg">{this.state.errorMessage}</div>
             ) : null}
-            {this.props.invoiceFileError ? (
+            {flag ? (
               <div className="error-msg">
-                {"Please upload a scanned copy of your invoice"}
+                {this.state.invoiceNumber.length === 12
+                  ? "Please upload a scanned copy of your invoice"
+                  : "Invoice number is invalid"}
               </div>
             ) : null}
           </div>
