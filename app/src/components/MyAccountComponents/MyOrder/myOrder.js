@@ -36,7 +36,8 @@ class MyOrder extends React.Component {
       hasMore: true,
       isLoading: false,
       pageNumber: 1,
-      pageSize: 20
+      pageSize: 20,
+      lastScroll: 0
     };
     this.renderSelection = this.renderSelection.bind(this);
     this.onscroll = this.onscroll.bind(this);
@@ -97,11 +98,17 @@ class MyOrder extends React.Component {
   }
 
   renderSelection(trackOrderData, orderData) {
+    if (orderData === undefined) {
+      setTimeout(() => {
+        window.scrollTo(0, this.state.lastScroll);
+      }, 100);
+    }
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
       updatedTrackOrderData: trackOrderData,
       returnOrderData: orderData,
-      returnOrderItemData: trackOrderData
+      returnOrderItemData: trackOrderData,
+      lastScroll: orderData ? window.pageYOffset : this.state.lastScroll
     });
   }
 
@@ -114,10 +121,16 @@ class MyOrder extends React.Component {
   }
 
   renderServiceRequest(orderItemData, orderData) {
+    if (orderData === undefined) {
+      setTimeout(() => {
+        window.scrollTo(0, this.state.lastScroll);
+      }, 100);
+    }
     this.setState({
       isServiceRequest: !this.state.isServiceRequest,
       serviceOrderData: orderData,
-      serviceOrderItemData: orderItemData
+      serviceOrderItemData: orderItemData,
+      lastScroll: orderData ? window.pageYOffset : this.state.lastScroll
     });
   }
 
