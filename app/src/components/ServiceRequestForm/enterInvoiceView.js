@@ -131,6 +131,7 @@ class EnterInvoiceView extends React.Component {
       this.setState({
         fileName: ""
       });
+      this.props.onInvoiceFile("");
       document.getElementById("uploadInvoice").value = "";
     }
   };
