@@ -680,17 +680,17 @@ export class Step2Component extends React.Component {
           var miniCartData = response.data.data.miniCartData;
           var data = [];
           miniCartData.forEach(item => {
-            if (item.freeGift != true) {
+            // if (item.freeGift != true) {
               var obj = {
                 orderItemId: `${item.orderItemId}`,
                 shipModeId: this.props.shipModePro,
                 addressId: `${this.state.ship_add_id}`
               };
               data.push(obj);
-            }
+            // }
           });
           var body = {
-            orderItem: data,
+            //orderItem: data,
             shipModeId: this.props.shipModePro,
             addressId: `${this.state.bill_add_id}`
           };
