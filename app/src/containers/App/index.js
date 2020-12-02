@@ -422,6 +422,7 @@ export default class App extends React.Component {
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           <Route path="/covid19_health_safety_measures" component={Covid19Awareness} />
+          <Route path="/business" render={this.redirectToB2B} />
           <Route path="/internet-error" component={InternetError} />
           <Route path="*" component={NotFound} />
           <Route path="/502" component={Maintenance} />
@@ -435,6 +436,15 @@ export default class App extends React.Component {
 
       </div>
     );
+  }
+
+  redirectToB2B() {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+       registration.unregister()
+     } })
+    //sessionStorage.clear();
+    // window.location.assign('/business/');
   }
 }
 
