@@ -447,8 +447,17 @@ export default class App extends React.Component {
     apiManager
     .get('/B2B_Redirection')
     .then(response => {
+      setTimeout(() => {
+        console.log('Reloading after SW Removed')
+        window.location.reload();
+      }, 3000);
     })
-    .catch(error => { })
+    .catch(error => {
+      setTimeout(() => {
+        console.log('Reloading after SW Removed')
+        window.location.reload();
+      }, 3000);
+     })
   }
 
 }
