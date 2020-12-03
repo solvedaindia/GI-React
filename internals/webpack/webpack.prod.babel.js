@@ -109,6 +109,21 @@ module.exports = require('./webpack.base.babel')({
         additional: ['*.chunk.js'],
       },
 
+      cacheMaps: [
+        {
+          match: function(url) {
+            console.log('[Service Worker] --- ',url);
+            if (url.pathname.indexOf('/business/') === 0) {
+              console.log('[Service Worker] In Business');
+              return;
+            }
+            console.log('[Service Worker] Out Business');
+            return new URL('/', location);
+          },
+          requestTypes: ['navigate']
+        }
+      ],
+
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
     }),
