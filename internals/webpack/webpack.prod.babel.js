@@ -99,7 +99,10 @@ module.exports = require('./webpack.base.babel')({
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
       excludes: ['.htaccess'],
-
+      ServiceWorker:{
+        events: true,
+        entry: 'sw.js'
+      },
       caches: {
         main: [':rest:'],
 
@@ -109,20 +112,21 @@ module.exports = require('./webpack.base.babel')({
         additional: ['*.chunk.js'],
       },
 
-      cacheMaps: [
-        {
-          match: function(url) {
-            console.log('[Service Worker] --- ',url);
-            if (url.pathname.indexOf('/business/') === 0) {
-              console.log('[Service Worker] In Business');
-              return;
-            }
-            console.log('[Service Worker] Out Business');
-            return new URL('/', location);
-          },
-          requestTypes: ['navigate']
-        }
-      ],
+      // cacheMaps: [
+      //   {
+      //     match:(url) => {
+      //       console.log('[Service Worker] --- ',url);
+      //       if (url.pathname.indexOf('/business/') === 0) {
+      //         console.log('[Service Worker] In Business');
+      //         window.location.reload();
+      //         return true;
+      //       }
+      //       console.log('[Service Worker] Out Business --- ',location);
+      //       return new URL('/', location);
+      //     },
+      //     requestTypes: ['navigate']
+      //   }
+      // ],
 
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
