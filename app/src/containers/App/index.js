@@ -444,22 +444,14 @@ export default class App extends React.Component {
         registration.unregister();
       }
     });
-    console.log('SW 1');
+
     apiManager
     .get('/B2B_Redirection')
     .then(response => {
-      console.log('SW 2');
       window.location.reload();
-      // setTimeout(() => {
-      //   console.log('Reloading after SW Removed')
-      //   window.location.reload();
-      // }, 3000);
     })
     .catch(error => {
-      // setTimeout(() => {
-      //   console.log('Reloading after SW Removed')
-      //   window.location.reload();
-      // }, 3000);
+      window.location.reload();
      })
   }
 
