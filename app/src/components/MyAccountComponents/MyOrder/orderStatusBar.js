@@ -30,6 +30,9 @@ class OrderStatusBar extends React.Component {
     if (this.state.shippingStatusArr.length < 5) {
       customClassName = "list items4";
     }
+    if (this.state.shippingStatusArr.length  === 2) {
+      customClassName = "list items6";
+    }
 
     if (index === 0) {
       customClassName += " first";
@@ -122,11 +125,20 @@ class OrderStatusBar extends React.Component {
     );
   }
 
+  // className={
+  //   this.state.wishlistData.length === 0
+  //     ? 'container wishlist product-listing pt-4 pt-lg-0 mb-0 product-details'
+  //     : 'wishlist product-listing pt-4 pt-lg-0 mb-0 product-details'
+  // }
   render() {
     var refundTimeline = '';
+    var cancelled = '';
     var statusBarItem = this.state.shippingStatusArr.map((item, index) => {
       if (item === "Refund Details") {
         refundTimeline = " trackorder-wrap-3";
+      }
+      if (this.state.shippingStatusArr.length  === 2) {
+        cancelled = " trackorder-wrap-2";
       }
       return (
         <li class={this.getStatusBarCustomClassname(item, index)}>
@@ -156,7 +168,7 @@ class OrderStatusBar extends React.Component {
     });
 
     return (
-      <div class={this.props.customClassPro + refundTimeline}>
+      <div className={this.state.shippingStatusArr.length  === 2 ? this.props.customClassPro + refundTimeline + ' trackorder-wrap-2' : this.props.customClassPro + refundTimeline }>
         <ul class="track-bar">
           {(this.state.isInCurrenStatus = false)}
           {statusBarItem}

@@ -139,7 +139,7 @@ class TrackOrderProduct extends React.Component {
               onRSODetail={() => {
                 this.props.onRSODetail();
               }}
-              customClassPro="trackorder-wrap"
+              customClassPro="trackorder-wrap "
             />
           </div>
         </div>
