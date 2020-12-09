@@ -353,6 +353,12 @@ export default class App extends React.Component {
   }
 
   render() {
+    const currentRoute = window.location.href.toString();
+    if (currentRoute.includes(".pdf") && currentRoute.includes("imagestore")) {
+      this.redirectToB2B();
+      return <></>;
+    }
+
     if (this.state.accessToken === '') {
       return <LoadingIndicator />;
     }

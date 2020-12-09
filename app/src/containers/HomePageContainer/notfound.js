@@ -10,25 +10,25 @@ export class NotFound extends React.Component {
   }
 
   render() {
-    const currentRoute = window.location.href.toString();
-    if (currentRoute.includes(".pdf")) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
+    // const currentRoute = window.location.href.toString();
+    // if (currentRoute.includes(".pdf")) {
+    //   navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    //     for (let registration of registrations) {
+    //       registration.unregister();
+    //     }
+    //   });
 
-      apiManager
-        .get("/B2B_Redirection")
-        .then(response => {
-          window.location.reload();
-        })
-        .catch(error => {
-          window.location.reload();
-        });
+    //   apiManager
+    //     .get("/B2B_Redirection")
+    //     .then(response => {
+    //       window.location.reload();
+    //     })
+    //     .catch(error => {
+    //       window.location.reload();
+    //     });
 
-      return <></>;
-    }
+    //   return <></>;
+    // }
 
     return (
       <div className="pageNotfound">
