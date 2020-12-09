@@ -72,3 +72,35 @@
     }
   }
 }
+
+@media (min-width: 1458px) {
+  #header {
+    .header-link {
+      right: 1%;
+    }
+  }
+}
+
+@media (min-width: 1464px) {
+  #header {
+    .header-link {
+      right: 2%;
+    }
+  }
+}
+
+@media (min-width: 1480px) {
+  #header {
+    .header-link {
+      right: 3%;
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  #header {
+    .header-link {
+      right: 4%;
+    }
+  }
+}
