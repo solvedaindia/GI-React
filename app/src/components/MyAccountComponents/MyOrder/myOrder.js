@@ -100,7 +100,8 @@ class MyOrder extends React.Component {
   renderSelection(trackOrderData, orderData) {
     if (orderData === undefined) {
       setTimeout(() => {
-        window.scrollTo(0, this.state.lastScroll);
+        //window.scrollTo(0, this.state.lastScroll);
+        $('html, body').animate({ scrollTop: this.state.lastScroll }, 'smooth');
       }, 100);
     }
     this.setState({
@@ -123,7 +124,8 @@ class MyOrder extends React.Component {
   renderServiceRequest(orderItemData, orderData) {
     if (orderData === undefined) {
       setTimeout(() => {
-        window.scrollTo(0, this.state.lastScroll);
+        //window.scrollTo(0, this.state.lastScroll);
+        $('html, body').animate({ scrollTop: this.state.lastScroll }, 'smooth');
       }, 100);
     }
     this.setState({
