@@ -99,7 +99,16 @@ class ServiceRequestForm extends React.Component {
 
   getAddressListAPI(value) {
     const addresses = this.state.addressData;
+    if (value.default === "true") {
+      addresses.map(address => {
+        if (address.default === "true") {
+          address.default = null;
+        }
+      });
+    }
+
     addresses.splice(0, 0, value);
+
     this.setState({
       addressData: addresses,
       selectedAddress: value
