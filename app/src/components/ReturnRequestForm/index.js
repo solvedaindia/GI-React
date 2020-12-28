@@ -325,7 +325,7 @@ class ReturnRequestForm extends React.Component {
             <span>*</span>
           </h4>
           <UploadImage
-            type={"ser"}
+            type={"ret"}
             onImageError={this.onImageError.bind(this)}
             onImageAddRemove={this.onImageAddRemove.bind(this)}
           />
