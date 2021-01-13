@@ -1,12 +1,15 @@
 import React from "react";
+import Slider from "react-slick";
 import ImageGallery from "react-image-gallery";
 import { Player, BigPlayButton } from "video-react";
 import "../../../public/styles/pdpComponent/imagesAndVideoGallery/image-gallery.scss";
 import "../../../public/styles/pdpComponent/imagesAndVideoGallery/video-react.scss";
 import { imagePrefix } from "../../../public/constants/constants";
 import { isMobile } from "../../utils/utilityManager";
-import Zoomin from "../../components/SVGs/zoomIn.svg";
-import Zoomout from "../../components/SVGs/zoomOut.svg";
+import Zoomin from "../../components/SVGs/magnifying-glass-zoom-in-plus.svg";
+import Zoomout from "../../components/SVGs/magnifying-glass-zoom-out.svg";
+import closeIcon from "../../components/SVGs/outlined_close.svg";
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 class productImagesAndVideos extends React.Component {
   constructor() {
@@ -20,7 +23,17 @@ class productImagesAndVideos extends React.Component {
       isRTL: false,
       isZoomScreen: false
     };
+    
+    //this.mainImgSlider = React.createRef();
     this.isZoomScreen = false;
+    this.onZoomIn = this.onZoomIn.bind(this);
+    this.onZoomOut = this.onZoomOut.bind(this);
+    this.refArray = [];
+    
+    let test = 10;
+    console.log('test = ',test);
+    this.closeFullscreen = this.closeFullscreen.bind(this);
+    this.openFullscreen = this.openFullscreen.bind(this)
   }
 
   componentDidMount() {
@@ -29,15 +42,6 @@ class productImagesAndVideos extends React.Component {
     );
     contentElement[0].classList.add("active");
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const fullscreenButton = document.getElementsByClassName(
-  //     'image-gallery-fullscreen-button',
-  //   );
-  //   this.hideThumnailsOnFullScreen(
-  //     fullscreenButton[0].classList.contains('active'),
-  //   );
-  // }
 
   async hideThumnailsOnFullScreen(isFullScreen) {
     const thumbnailsContainer = document.getElementsByClassName(
@@ -134,6 +138,50 @@ class productImagesAndVideos extends React.Component {
         const currWidth = slides[i].children[0].children[0].clientWidth;
         slides[i].children[0].children[0].style.width = `${currWidth + 100}px`;
       }
+    }
+  }
+
+  /* View in fullscreen */
+  openFullscreen() {
+    var elem = document.getElementById("product-full-screen");
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE11 */
+      elem.msRequestFullscreen();
+    }
+    this.mainImgSlider.slickGoTo(document.getElementById('img-index-count').innerHTML-1)
+  }
+
+  /* Close fullscreen */
+  closeFullscreen() {
+    var elem = document.getElementById("product-full-screen");
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      /* IE11 */
+      document.msExitFullscreen();
+    }
+    document.getElementById('img-index-count').innerHTML =1
+  }
+
+  onZoomIn(event) {
+    let mainImgIndex = document.getElementById('img-index-count').innerHTML - 1
+      if (this.refArray[mainImgIndex].current) {
+        this.refArray[mainImgIndex].current.context.dispatch.zoomIn(event);
+      }
+     
+  }
+  onZoomOut(event) {
+    let mainImgIndex = document.getElementById('img-index-count').innerHTML - 1
+    if (this.refArray[mainImgIndex].current) {
+      this.refArray[mainImgIndex].current.context.dispatch.zoomOut(event);
     }
   }
 
@@ -327,6 +375,7 @@ class productImagesAndVideos extends React.Component {
   }
 
   render() {
+    this.refArray = [];
     const isActive = this.state.activeData && !isMobile();
     this.filterImagesAndVideos(
       this.props.skuData.attachments,
@@ -336,6 +385,41 @@ class productImagesAndVideos extends React.Component {
     if (this.props.skuData.ribbonText) {
       featuredClass = "featured-box";
     }
+    
+    const settings = {
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: false,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true
+          }
+        }
+      ]
+    };
 
     return (
       <div className="gallaryWrapper">
@@ -363,11 +447,10 @@ class productImagesAndVideos extends React.Component {
         </div>
 
         <ImageGallery
-          showFullscreenButton
           items={this.images}
           showNav={isActive}
           showPlayButton={false}
-          onClick={this.handleClick.bind(this)}
+          onClick={this.openFullscreen}
           lazyLoad={false}
           renderCustomControls={this.renderZoomButtons}
           isRTL={this.state.isRTL}
@@ -376,7 +459,61 @@ class productImagesAndVideos extends React.Component {
           onSlide={this._onSlide.bind(this)}
           autoPlay={this.state.autoPlay}
           useBrowserFullscreen={true}
+          onSlide={(current) => {document.getElementById('img-index-count').innerHTML = current+1}}
+          ref={slider => {this.imageGalleryRef = slider}}
         />
+        <div
+          className="product-full-screen"
+          id="product-full-screen"> 
+          <div className='action-items'>
+                  <button onClick={this.closeFullscreen} className="btn btn-sm btn-close">
+                  <img src={closeIcon} alt="close" />
+                  </button>
+                  <div className="index-counter">
+                    <span id="img-index-count">1</span> / {this.props.skuData.attachments.zoomImages.length}
+                  </div>
+
+                  <div class="zoom-action-item">
+                    <button onClick={this.onZoomIn} className="btn btn-sm btn-zoomin">
+                      <img src={Zoomin} alt="Zoomin" /></button>
+                    <button onClick={this.onZoomOut} className="btn btn-sm btn-zoomout">
+                      <img src={Zoomout} alt="Zoomout" /></button>
+                  </div>
+                  </div>
+                  <Slider ref={slider => {this.mainImgSlider = slider}} {...settings} afterChange={(current) => {console.log('test index',current);
+                  document.getElementById('img-index-count').innerHTML = current+1}}>
+                    {this.props.skuData.attachments.zoomImages.map((data, i) => {
+                      let videoUrl = data.imagePath;
+                      let imageSrc = imagePrefix + data.imagePath;
+                      if (this.state.fullScareen === true) {
+                        imageSrc = imagePrefix + this.props.skuData.attachments.zoomImages[i].imagePath;
+                      }
+                      if (data.shortdesc === 'VIDEO') {
+                        let tubeUrl = data.imagePath;
+                        if (tubeUrl.includes('watch?v=')) {
+                          videoUrl = tubeUrl.replace('watch?v=', 'embed/');
+                        }
+                      }
+                      const zoomImgrefs = React.createRef();
+                      this.refArray.push(zoomImgrefs);
+                      console.log('zoomImage src = ', imageSrc);
+                      return (<div className="product-zoom-items">
+                        <a href="">
+                          <TransformWrapper defaultScale={1}>
+                            <TransformComponent ref={zoomImgrefs}>
+                              <img
+                                className="img-fluid"
+                                src={imageSrc}
+                                alt=""
+                              />
+                            </TransformComponent>
+                          </TransformWrapper>
+                        </a>
+                      </div>)
+                      
+                    })}
+                  </Slider>
+        </div>
       </div>
     );
   }

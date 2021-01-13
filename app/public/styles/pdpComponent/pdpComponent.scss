@@ -179,7 +179,6 @@
    }
 .gallaryWrapper{
       position: relative;
-      //.image-gallery-image img{width: 100% !important}
       .image-gallery{
           .image-gallery-content:not(.fullscreen){
               .image-gallery-slides{
@@ -272,6 +271,86 @@
                 }
             }
          }
+     }
+
+     .product-full-screen{
+         background: $colorwhite;
+         position: fixed;
+         .action-items{
+            background-color: #fcfcfceb;
+             min-height: 40px;
+             position: absolute;
+             width: 100%;
+             top: 0px;
+             z-index: 9;
+         .btn{
+             background: none;
+             border: 0px;
+             width: 30px;
+             height: 30px;
+             position: absolute;
+             top:5px;
+             padding: 0;
+             z-index: 9;
+             outline: 0;
+             img{
+                 width: 22px;
+             }
+         }
+         .btn-close{
+             right: 10px;
+         }
+         .btn-zoomin{
+             right: 48px;
+         }
+         .btn-zoomout{
+            right: 82px;
+        }
+         .index-counter{
+             position: absolute;
+             left: 10px;
+             top:8px;
+             color: $black;
+         }
+        }
+        .react-transform-component{
+            margin: auto;
+            max-height: 100vh;
+            height: 100vh;
+            overflow: visible;
+            .react-transform-element{
+                max-height: 100vh;
+                height: 100vh;
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    -moz-object-fit: cover;
+                    -o-object-fit: cover;
+                }
+            }
+        }
+
+        .slick-slider{
+            .slick-next{
+                right: 10px;
+            }
+            .slick-prev{
+                left: 10px;
+            }
+            .slick-prev:before, .slick-next:before{
+                font-size: $base*6;
+                color: $colorblack;
+                background: none;
+            }
+            .slick-dots{
+                position: absolute;
+                bottom: 60px;
+                button:before{
+                    font-size: $base*1.75;
+                }
+            }
+        }
      }
   }
 
