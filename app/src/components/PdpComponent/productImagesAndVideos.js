@@ -498,7 +498,7 @@ class productImagesAndVideos extends React.Component {
                       this.refArray.push(zoomImgrefs);
                       console.log('zoomImage src = ', imageSrc);
                       return (<div className="product-zoom-items">
-                        <a href="">
+                       
                           <TransformWrapper defaultScale={1}>
                             <TransformComponent ref={zoomImgrefs}>
                               <img
@@ -508,7 +508,7 @@ class productImagesAndVideos extends React.Component {
                               />
                             </TransformComponent>
                           </TransformWrapper>
-                        </a>
+                        
                       </div>)
                       
                     })}

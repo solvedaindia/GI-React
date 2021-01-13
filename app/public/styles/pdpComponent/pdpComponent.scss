@@ -349,6 +349,11 @@
                 button:before{
                     font-size: $base*1.75;
                 }
+                > li{
+                    @include mix-md{
+                        width: $base*1.25;
+                    }
+                }
             }
         }
      }
