@@ -692,7 +692,7 @@ export class Step2Component extends React.Component {
           var body = {
             //orderItem: data,
             shipModeId: this.props.shipModePro,
-            addressId: `${this.state.bill_add_id}`
+            addressId: `${this.state.ship_add_id}`
           };
           axios
             .post(AddAddressToCardAPI, body, {
