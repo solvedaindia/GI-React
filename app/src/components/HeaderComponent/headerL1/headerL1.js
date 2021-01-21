@@ -51,7 +51,7 @@ class HeaderL1 extends React.Component {
         <ul className="nav nav-tabs d-none d-lg-flex" role="tablist">
           <li className="nav-item">
             <Link className="nav-link personal" to="/" title="Personal">
-              PERSONAL
+              HOME
             </Link>
           </li>
           <li className="nav-item">
