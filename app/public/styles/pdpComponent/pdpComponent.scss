@@ -276,6 +276,10 @@
      .product-full-screen{
          background: $colorwhite;
          position: fixed;
+         visibility: hidden;
+         &.active-fs{
+             visibility: visible;
+         }
          .action-items{
             background-color: #fcfcfceb;
              min-height: 40px;

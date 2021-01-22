@@ -21,7 +21,8 @@ class productImagesAndVideos extends React.Component {
       infinite: true,
       autoPlay: false,
       isRTL: false,
-      isZoomScreen: false
+      isZoomScreen: false,
+      fullScreen:'',
     };
     
     //this.mainImgSlider = React.createRef();
@@ -153,7 +154,10 @@ class productImagesAndVideos extends React.Component {
       /* IE11 */
       elem.msRequestFullscreen();
     }
-    this.mainImgSlider.slickGoTo(document.getElementById('img-index-count').innerHTML-1)
+    this.mainImgSlider.slickGoTo(document.getElementById('img-index-count').innerHTML-1);
+    this.setState({
+      fullScreen:'active-fs',
+    })
   }
 
   /* Close fullscreen */
@@ -168,7 +172,10 @@ class productImagesAndVideos extends React.Component {
       /* IE11 */
       document.msExitFullscreen();
     }
-    document.getElementById('img-index-count').innerHTML =1
+    document.getElementById('img-index-count').innerHTML =1;
+    this.setState({
+      fullScreen:'',
+    })
   }
 
   onZoomIn(event) {
@@ -463,7 +470,7 @@ class productImagesAndVideos extends React.Component {
           ref={slider => {this.imageGalleryRef = slider}}
         />
         <div
-          className="product-full-screen"
+          className={"product-full-screen "+this.state.fullScreen}
           id="product-full-screen"> 
           <div className='action-items'>
                   <button onClick={this.closeFullscreen} className="btn btn-sm btn-close">
@@ -499,7 +506,7 @@ class productImagesAndVideos extends React.Component {
                       console.log('zoomImage src = ', imageSrc);
                       return (<div className="product-zoom-items">
                        
-                          <TransformWrapper defaultScale={1}>
+                          <TransformWrapper>
                             <TransformComponent ref={zoomImgrefs}>
                               <img
                                 className="img-fluid"
