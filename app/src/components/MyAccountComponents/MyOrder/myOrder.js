@@ -101,8 +101,8 @@ class MyOrder extends React.Component {
     if (orderData === undefined) {
       setTimeout(() => {
         //window.scrollTo(0, this.state.lastScroll);
-        $('html, body').animate({ scrollTop: this.state.lastScroll }, 'smooth');
-      }, 100);
+        $('html, body').animate({ scrollTop: this.state.lastScroll }, 0);
+      }, 10);
     }
     this.setState({
       isTrackOrder: !this.state.isTrackOrder,
@@ -125,8 +125,8 @@ class MyOrder extends React.Component {
     if (orderData === undefined) {
       setTimeout(() => {
         //window.scrollTo(0, this.state.lastScroll);
-        $('html, body').animate({ scrollTop: this.state.lastScroll }, 'smooth');
-      }, 100);
+        $('html, body').animate({ scrollTop: this.state.lastScroll }, 0);
+      }, 10);
     }
     this.setState({
       isServiceRequest: !this.state.isServiceRequest,
