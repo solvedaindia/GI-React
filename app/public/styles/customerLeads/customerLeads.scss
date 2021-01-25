@@ -1,0 +1,175 @@
+@import '../variable';
+
+.consultation-page {
+  position: relative;
+  .container-fluid {
+    .row {
+      div[class*="col-"] {
+        padding: 0;
+      }
+    }
+  }
+  .consultation-form-bg {
+    width: 100%;
+  }
+  .form-container {
+    .heading {
+      margin: 0 auto;
+      padding: 0.5em;
+      color: $black;
+      font-family: $font-bold;
+      font-size: 28px;
+    }
+    .form-group {
+      padding: 0 1em;
+      margin: 0;
+      margin-top: 0.4em;
+      .form-control {
+        border-radius: 2px;
+        box-shadow: none;
+        height: 3em;
+      }
+      .label {
+        color: $battleshipGrey;
+        text-transform: capitalize;
+        background: transparent;
+        margin: 0;
+        display: block;
+        text-align: left;
+        padding: 0 0 2px 0;
+        font-family: $font-medium;
+        font-size: 12px;
+        font-weight: normal;
+      }
+      .error-msg {
+        color: #ee4060;
+        font-size: 12px;
+        min-height: 13px;
+        line-height: 13px;
+        bottom: 0;
+        width: 100%;
+        margin: 0px;
+      }
+      .message {
+        margin: 0;
+        .success {
+          color: green;
+        }
+        .failed {
+          color: #ee4060;
+        }
+      }
+      .leads-rqrmnts__control {
+        border-radius: 2px;
+      }
+      .leads-rqrmnts__menu {
+        margin: 0 auto;
+        .leads-rqrmnts__option {
+          background-color: transparent;
+          color: #000;
+          padding: 0.5em;
+          border-bottom: 1px solid $lightgrey;
+          &:last-child {
+            border-bottom: none;
+          }
+          input[type="checkbox"] {
+            // margin: 0.5em;
+            // cursor: pointer;
+            display: none;
+          }
+          input[type="checkbox"] + span {
+            background: url("../../images/plpAssests/unchecked.jpg") left center no-repeat;
+            padding-left: 11px;
+            margin: 0 10px 0 5px;
+            background-size: contain;
+            cursor: pointer;
+          }
+          input[type="checkbox"]:checked + span {
+            background: url("../../images/plpAssests/checked.jpg") left center no-repeat;
+            background-size: contain;
+            padding-left: 11px;
+          }
+          label {
+            margin: 0;
+            line-height: 13px;
+            font-size: 13px;
+            font-family: $font-regular;
+            font-weight: normal;
+            transform: translateY(-1px);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .disclaimer {
+      margin: 0.3em 0 0.6em 0;
+      padding: 0 1.5em;
+    }
+  }
+}
+
+// Web View
+@media (min-width: 993px) {
+  .consultation-page {
+    .overlay {
+      position: absolute;
+      top: 0;
+      margin: 0;
+      .outer-container {
+        padding: 2% 1%;
+        .form-container {
+          float: right;
+          width: 34%;
+          background-color: $colorwhite;
+          margin-right: 3%;
+          padding: 1.2em;
+          border-radius: $base*1;
+        }
+      }
+    }
+  }
+}
+
+// IPad
+@media (max-width: 992px) {
+  .consultation-page {
+    .fsBanner {
+      margin-top: 0px;
+    }
+    .overlay {
+      position: relative;
+      margin-bottom: 2em;
+      .outer-container {
+        margin: 0 auto;
+        padding: 2em 0;
+        width: 80%;
+        .form-container {
+          .heading {
+            padding-top: 0.8em;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive View
+@media (max-width: 767px) {
+  .consultation-page {
+    .fsBanner {
+      margin-top: 0px;
+    }
+    .overlay {
+      position: relative;
+      .outer-container {
+        padding: 1em;
+        width: 100%;
+        .form-container {
+          .heading {
+            padding-top: 0.8em;
+          }
+        }
+      }
+    }
+  }
+}

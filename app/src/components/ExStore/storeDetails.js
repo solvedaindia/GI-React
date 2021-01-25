@@ -79,14 +79,23 @@ export class StoreDetails extends React.Component {
                                     <span className='place'> {storeData.storeName}</span>
                                     <span className='dist'> ({this.getDistance(storeData.latitude, storeData.longitude, this.props.latitude, this.props.longitude)} {KM_AWAY}</span>
                                 </Link>
-                                <span className='details'>{!isMobile() ?<p>You can find more stores around you.</p>: ' near you'}</span>
+                                {/* <span className='details'>{!isMobile() ?<p>You can find more stores around you.</p>: ' near you'}</span> */}
+                                <span className='details'>
+                                    <p>
+                                        <Link to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}>Click here </Link> to explore more stores near you.
+                                    </p>
+                                </span>
                             </div>
                         }
-                        <Link
+                        {/* <Link
                             className='storeLink'
                             to={{ pathname: '/storelocator', state: { pincode: getCookie('pincode') } }}
                         >
                             <button className='btn-flat'>{!isMobile() ?'Find More Stores' : 'Explore More Stores' }</button>
+                        </Link>
+                        <span className='storeLinkSpacer'>OR</span> */}
+                        <Link className='storeLink' to="/request-callback">
+                            <button className='btn-flat'>Request A Callback</button>
                         </Link>
                     </div>
                 </div>

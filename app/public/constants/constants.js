@@ -319,3 +319,4 @@ export function getGoogleClientId() {
 }
 
 export const customerQueryAPI = `${secureHttp}://${host}:${port2}/api/v1/static/postCustomerQuery`;
+export const customerLeadsAPI = `${secureHttp}://${host}:${port2}/api/v1/static/postCustomerLeads`;
