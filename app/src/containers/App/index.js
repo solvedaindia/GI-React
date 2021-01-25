@@ -79,6 +79,8 @@ import MWebLogo from '../../components/SVGs/mWebLogo';
 import Covid19Awareness from '../../components/Covid19Awareness';
 import ServiceRequestFormGuest from '../../components/ServiceRequestFormGuest/index';
 import ServiceRequestForm from '../../components/ServiceRequestForm';
+import HeaderType2 from '../../components/HeaderComponent/HeaderType2';
+import CustomerLeads from '../../components/CustomerLeads';
 
 const userAgent = window.navigator.userAgent.toLowerCase();
 const isIPad = /ipad/.test(userAgent);
@@ -352,6 +354,22 @@ export default class App extends React.Component {
     }
   }
 
+  mountPageHeader = () => {
+    if (window.location.pathname.includes('/check/payment/')) {
+      return '';
+    }
+    if (
+      window.location.pathname === '/cart' ||
+      window.location.pathname === '/checkout'
+    ) {
+      return <LightHeader />;
+    }
+    if (window.location.pathname === '/request-callback') {
+      return <HeaderType2 />;
+    }
+    return <HeaderContainer />;
+  };
+
   render() {
     const currentRoute = window.location.href.toString();
     if (currentRoute.includes("imagestore")) {
@@ -376,20 +394,7 @@ export default class App extends React.Component {
       <div>
         {appCookie.get('isCookiePolicy') === 'true' ? <CookiePopup /> : null}
         {newsletterItem}
-        {
-          window.location.pathname.includes('/check/payment/') ? '' : window.location.pathname === '/cart' || window.location.pathname === '/checkout' ? (
-            <LightHeader />
-          ) : (
-              <HeaderContainer />
-            )
-        }
-        {/* {window.location.pathname === '/cart' || window.location.pathname === '/checkout'  ? (
-              <LightHeader />
-            ) : (
-              <HeaderContainer />
-            )} */}
-
-        {/* <HeaderContainer /> */}
+        {this.mountPageHeader()}
 	  <div id="mainContainer">
 		<LastLocationProvider>
         <Switch>
@@ -428,6 +433,7 @@ export default class App extends React.Component {
           <Route path="/invoice/:invoiceId" component={Invoice} />
           <Route path="/check/payment/:orderId" component={paymentWait} />
           <Route path="/covid19_health_safety_measures" component={Covid19Awareness} />
+          <Route path="/request-callback" component={CustomerLeads} />
           <Route path="/business" render={this.redirectToB2B} />
           <Route path="/internet-error" component={InternetError} />
           <Route path="*" component={NotFound} />

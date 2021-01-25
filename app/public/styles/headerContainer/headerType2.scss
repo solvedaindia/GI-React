@@ -1,0 +1,23 @@
+@import '../variable';
+
+.headerType2 {
+  background-color: $colorblue;
+  padding: $base*1.5;
+  padding-top: $base*1.75;
+  z-index: 4;
+  .logo {
+    margin-left: 7%;
+    padding: 0 1.5% 0 2%;
+  }
+  .logoRight {
+    float: right;
+    margin-right: 7%;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .headerType2 {
+      .logo {
+          margin-left: 0; 
+      }
+  }
+}
