@@ -158,7 +158,7 @@ class Invoice extends React.Component {
                   isMobile()
                     ? {
                         border: "0",
-                        width: "100%",
+                        width: "50%",
                         margin: "auto",
                         float: "left"
                       }
@@ -200,7 +200,7 @@ class Invoice extends React.Component {
                     invoiceData.companyAddress.gstinNo}
                 </div>
               </div>
-              <div
+              {/* <div
                 style={
                   isMobile()
                     ? { border: "0", width: "0", margin: "auto", float: "left" }
@@ -213,7 +213,7 @@ class Invoice extends React.Component {
                 }
               >
                 &nbsp;
-              </div>
+              </div> */}
               <div
                 className="invoiceContainer addresssection"
                 id="consigonorAddId"
@@ -221,7 +221,7 @@ class Invoice extends React.Component {
                   isMobile()
                     ? {
                         border: "0",
-                        width: "100%",
+                        width: "50%",
                         margin: "auto",
                         float: "left"
                       }
