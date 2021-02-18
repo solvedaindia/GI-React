@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap';
 
 const Copyright = () => (
   <Col sm={12} className="copyright">
-    &copy; Godrej Interio Copyright 2020
+    &copy; Godrej Interio Copyright 2021
   </Col>
 );
 

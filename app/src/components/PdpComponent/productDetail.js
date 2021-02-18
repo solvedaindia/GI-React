@@ -63,7 +63,9 @@ class productDetail extends React.Component {
         let displayContent = '';
         if (Array.isArray(data.values)) {
           displayContent = data.values.map((tabContent, id) => (
-            <Col md={6} sm={12} xs={12} key={id}>
+            <Col md={data.displayStyle && data.displayStyle === 1 ? 12 : 6}
+              sm={12} xs={12} key={id}
+            >
               <div className="headingText">{tabContent.name}</div>
               {<p className="subText">{tabContent.value}</p>}
             </Col>

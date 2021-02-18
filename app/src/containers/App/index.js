@@ -81,6 +81,7 @@ import ServiceRequestFormGuest from '../../components/ServiceRequestFormGuest/in
 import ServiceRequestForm from '../../components/ServiceRequestForm';
 import HeaderType2 from '../../components/HeaderComponent/HeaderType2';
 import CustomerLeads from '../../components/CustomerLeads';
+import OrganizationSchema from '../../components/GSchemas/organization';
 
 const userAgent = window.navigator.userAgent.toLowerCase();
 const isIPad = /ipad/.test(userAgent);
@@ -370,6 +371,14 @@ export default class App extends React.Component {
     return <HeaderContainer />;
   };
 
+  renderAllPagesCommonSnippets = () => {
+    return (
+      <>
+        <OrganizationSchema />
+      </>
+    );
+  };
+
   render() {
     const currentRoute = window.location.href.toString();
     if (currentRoute.includes("imagestore")) {
@@ -396,6 +405,7 @@ export default class App extends React.Component {
         {newsletterItem}
         {this.mountPageHeader()}
 	  <div id="mainContainer">
+    {this.renderAllPagesCommonSnippets()}
 		<LastLocationProvider>
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
